@@ -9,6 +9,6 @@ module.exports = {
     $DEBUG : fnEnv('DEV_DEBUG'),
     $TP:{
         // 百度地图
-        $BAIDU : fnEnv('TP_BAIDU')
+        BAIDU : fnEnv('TP_BAIDU')
     }
 };
