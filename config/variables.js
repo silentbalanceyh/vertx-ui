@@ -1,6 +1,6 @@
 const fnEnv = (key) => process.env[key];
 module.exports = {
-    $LANG : process.env.UI_LANGUAGE, // VIE - 系统使用的语言
+    $LANG : fnEnv('APP_LANGUAGE'), // VIE - 系统使用的语言
     $ENDPOINT : process.env.UI_ENDPOINT, // VIE - 远程地址Api
     $APP : process.env.UI_APP, // 应用程序名称
     $LOGIN : process.env.URI_LOGIN, // 系统入口（一般是登陆）
