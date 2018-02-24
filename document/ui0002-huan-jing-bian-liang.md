@@ -5,10 +5,10 @@
 | 环境变量 | 脚本中引用方法 | 环境变量说明 |
 | :--- | :--- | :--- |
 | PORT | 无 | 当前App运行的端口号 |
-| APP\_LANGUAGE | Ux.Env.LANG | 当前App运行的语言标识符，该语言标识符会对应到cab包中的目录，如默认语言为：cn，则所有资源文件目录位于：src/cab/cn/目录下 |
-| APP\_ENDPOINT | Ux.Env.ENDPOINT | 当前App需要连接的远程后端EndPoint地址，前后端分离架构下专用 |
-| APP\_NAME | Ux.Env.APP | 当前App的名称，该名称为系统唯一标识符 |
-| APP\_ROUTE | Ux.Env. |  |
+| APP\_LANGUAGE | Ux.Env.$LANG | 当前App运行的语言标识符，该语言标识符会对应到cab包中的目录，如默认语言为：cn，则所有资源文件目录位于：src/cab/cn/目录下 |
+| APP\_ENDPOINT | Ux.Env.$ENDPOINT | 当前App需要连接的远程后端EndPoint地址，前后端分离架构下专用 |
+| APP\_NAME | Ux.Env.$APP | 当前App的名称，该名称为系统唯一标识符 |
+| APP\_ROUTE | Ux.Env.$PATH | 当前App的动态路由根路径，不同的应用该值应该设置为不同，所有的React Router的路径都是放在该变量下运行。 |
 
 
 
