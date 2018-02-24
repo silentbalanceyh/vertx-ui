@@ -6,6 +6,8 @@
 | :--- | :--- | :--- |
 | PORT | 无 | 当前App运行的端口号 |
 | APP\_LANGUAGE | Ux.Env.LANG | 当前App运行的语言标识符，该语言标识符会对应到cab包中的目录，如默认语言为：cn，则所有资源文件目录位于：src/cab/cn/目录下 |
+| APP\_API | Ux.Env.API | 当前App需要连接的远程后端EndPoint地址，前后端分离架构下专用 |
+|  |  |  |
 
 
 
