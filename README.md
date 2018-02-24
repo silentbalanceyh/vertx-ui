@@ -2,7 +2,18 @@
 
 ## 1. 介绍
 
-Zero UI为Vert.x Zero Up Framework的前端脚手架，主要用于和Vert.x Zero Up微服务框架后端进行配合开发，该前端脚手架主要内容如下：
+Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，主要用于和Vert.x Zero Up微服务框架后端进行配合开发，该前端脚手架主要内容如下：
+
+* 使用React, Redux, Rxjs, React-Router和Ant-Design/Ant-Design-Pro为核心库基础
+* 使用TypeScript开发视图层以下的模型，React采用ES2017+的注解语法实现无配置的界面开发
+* 提供企业系统中常用组件，以及Utility X的包完成通用功能的提取，简化开发人员流程
+* 采用Storybook模式通过教程方式告诉开发人员如何使用Zero UI中提供的组件。
+
+该项目中使用了两个项目作为参考Demo，一个项目为通用企业项目，另外一个项目则是Zero Up Framework的后端监控框架，统一采用Zero UI来完成。
+
+### 2. 文档
+
+* [官方文档](/document/README.md)
 
 
 
