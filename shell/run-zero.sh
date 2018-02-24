@@ -4,7 +4,7 @@ export APP_LANGUAGE=cn                       # 当前应用使用的语言，如
 export APP_ENDPOINT=http://localhost:7000    # 当前应用需要访问的远程EndPoint
 export APP_NAME=vie.app.htl                  # 该应用名称
 export APP_ROUTE=zui                         # 该应用的动态路由根路径地址
-export KEY_SESSION=@@RTV/                    # Session Key前缀
+export KEY_SESSION=@@ZUI/                    # Session Key前缀
 # 该应用对应Redux Event前缀
 export KEY_EVENT=@@VIE-UI
 
