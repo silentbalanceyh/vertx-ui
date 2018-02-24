@@ -9,6 +9,6 @@ module.exports = {
     $DEBUG : fnEnv('DEV_DEBUG'),
     $TP:{
         // 第三方
-        $BAIDU_KEY : fnEnv('MAP_BAIDU')
+        $BAIDU_KEY : fnEnv('TP_BAIDU')
     }
 };
