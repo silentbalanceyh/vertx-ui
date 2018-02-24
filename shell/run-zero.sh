@@ -7,8 +7,7 @@ export APP_ROUTE=zui                         # 该应用的动态路由根路径
 export KEY_SESSION=@@ZUI/                    # Session Key前缀
 export KEY_EVENT=@@ZUI-ACT                   # Redux 中的Event对应的Key前缀
 export DEV_DEBUG=true                        # 是否开启Debug模式
-# Baidu地图
-export MAP_KEY=RVZSpq0MuZsxBIrUPdq4Za6McR21rQrn
+export MAP_BAIDU=RVZSpq0MuZsxBIrUPdq4Za6McR21rQrn
 
 echo "[ZERO-UI] Environment has been initialized successfully !"
 # 启动App
