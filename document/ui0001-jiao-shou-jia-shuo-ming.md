@@ -25,6 +25,7 @@
 |  | ux |  | 【Zero】Utility X包，纯函数主入口 |
 | stories |  |  | Storybook专用包 |
 | typings |  |  | TypeScript专用 |
+| **run-zero.sh/run-zero.bat** |  |  | 启动脚本 |
 
 
 
