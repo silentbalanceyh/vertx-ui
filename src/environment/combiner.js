@@ -3,8 +3,8 @@ import { createReducer } from "redux-act";
 import { routerReducer } from "react-router-redux";
 import { combineEpics } from "redux-observable";
 
-import datum from "../environment/datum";
-import out from "../environment/reducers";
+import datum from "./datum";
+import out from "./reducers";
 
 const { handlers = {} } = datum;
 

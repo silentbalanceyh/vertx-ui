@@ -4,11 +4,11 @@ import { Provider } from "react-redux";
 import { LocaleProvider } from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import { BrowserRouter } from "react-router-dom";
-import workers from "./entry/workers";
+import workers from "./environment/workers";
 // 统一引入AntDesign样式
 import 'ant-design-pro/dist/ant-design-pro.css';
 
-import createStore from "./entry/store";
+import createStore from "./environment/store";
 import routes from "./environment/routes";
 
 const store = createStore();

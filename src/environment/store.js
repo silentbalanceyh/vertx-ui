@@ -2,7 +2,7 @@ import { createStore, applyMiddleware, compose } from "redux";
 import { createEpicMiddleware } from "redux-observable";
 import { createLogger } from "redux-logger";
 
-import datum from "./datum";
+import datum from "./combiner";
 // Development Tools
 const DEVTOOL = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__;
 

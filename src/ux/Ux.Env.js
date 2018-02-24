@@ -1,7 +1,6 @@
 import { createAction } from 'redux-act';
-import { Taper } from "environment";
+import { Taper, zero } from "environment";
 import { DataLabor } from "entity";
-import { zero } from 'anno';
 // 环境变量初始化
 const rxDebug = (ux = {}) => {
     console.info(ux);
