@@ -4,10 +4,27 @@
 
 ## 1. 目录结构
 
+> 只有标记为【开发】的目录会被开发人员自我管理，其他目录基本不用改变，标记为【Zero】部分为Zero提供的常用组件以及相关开发包。
+
 | 主目录 | 子目录 | 特殊文件 | 说明 |
 | :--- | :--- | :--- | :--- |
 | config |  | variables.js | 环境变量连接文件，用于连接不同环境变量用于docker容器化和k8s集群专用。 |
 | config |  | modules.js | 模块相对路径处理专用导入脚本，解决不同模块之间的import相对路径导入问题。 |
+| public |  |  | 静态资源文件包 |
+| scripts |  |  | 原生启动脚本 |
+| shell |  |  | Zero专用启动脚本：环境变量初始化，代码链接，脚本执行，容器配置检查，启动 |
+| specification |  |  | 组件API文档 |
+| src | app |  | 【开发】App专用目录 |
+|  | cab |  | 【开发】多国语言包 |
+|  | components |  | 【开发】Page页面组件 |
+|  | container |  | 【开发】Layout模板组件 |
+|  | econnomy |  | 【Zero】可重用组件 |
+|  | entity |  | 【Zero】TypeScript数据对象 |
+|  | environment |  | 核心环境文件 |
+|  | style |  | 风格文件 |
+|  | ux |  | 【Zero】Utility X包，纯函数主入口 |
+| stories |  |  | Storybook专用包 |
+| typings |  |  | TypeScript专用 |
 
 
 
