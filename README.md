@@ -9,11 +9,12 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * 提供企业系统中常用组件，以及Utility X的包完成通用功能的提取，简化开发人员流程
 * 采用Storybook模式通过教程方式告诉开发人员如何使用Zero UI中提供的组件。
 
-该项目中使用了两个项目作为参考Demo，一个项目为通用企业项目，另外一个项目则是Zero Up Framework的后端监控框架，统一采用Zero UI来完成。
+该项目中使用了两个项目作为参考Demo，一个项目为通用企业项目，另外一个项目则是Zero Up Framework的后端监控框架，统一采用Zero UI来完成，官方网址：
 
-### 2. 文档
+* Vert.x Zero Up Framework: http://www.vertxup.cn
+* Zero UI Framework: http://www.vertxui.cn
 
-* [官方文档](/document/README.md)
+### 
 
 
 
