@@ -2,7 +2,8 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import Component from "../components/index";
 import Container from "../container/index";
-import { DataLabor } from "../entity";
+import { DataLabor } from "entity";
+import Ux from 'ux';
 // 全局时间locale格式化，临时方案
 import 'moment/locale/zh-cn';
 import moment from 'moment';
@@ -18,8 +19,7 @@ const connect = (Uri, Layout, Page) => {
     };
     return <Route exact path={ route(Uri) } render={ render }/>;
 };
-console.info(Component);
-console.info(Container);
+Ux.debugRouter(Ux, Container, Component);
 export default (
     <Switch>
 
