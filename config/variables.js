@@ -7,6 +7,8 @@ module.exports = {
     $K_SESSION : fnEnv('KEY_SESSION'),
     $K_EVENT :fnEnv('KEY_EVENT'),
     $DEBUG : fnEnv('DEV_DEBUG'),
-    // 第三方
-    $MAP_KEY : fnEnv('MAP_BAIDU')
+    $TP:{
+        // 第三方
+        $BAIDU_KEY : fnEnv('MAP_BAIDU')
+    }
 };
