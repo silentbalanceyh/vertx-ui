@@ -8,7 +8,7 @@ module.exports = {
     $K_EVENT :fnEnv('KEY_EVENT'),
     $DEBUG : fnEnv('DEV_DEBUG'),
     $TP:{
-        // 第三方
-        $BAIDU_KEY : fnEnv('TP_BAIDU')
+        // 百度地图
+        $BAIDU : fnEnv('TP_BAIDU')
     }
 };
