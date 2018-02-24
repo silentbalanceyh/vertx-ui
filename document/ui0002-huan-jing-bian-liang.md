@@ -2,6 +2,8 @@
 
 基础环境变量部分介绍整个Zero App中常用的环境变量，通过设置环境变量来实现不同应用同一个云环境的部署，Zero中提供的常用环境变量如下：
 
+## 1. 基础环境变量
+
 | 环境变量 | 脚本中引用方法 | 环境变量说明 |
 | :--- | :--- | :--- |
 | PORT | 无 | 当前App运行的端口号 |
@@ -12,6 +14,10 @@
 | KEY\_SESSION | Ux.Env.$K\_SESSION | 当前App在使用SessionStorage时对应的Key前缀，默认使用@@ZUI/，使用前缀可在同一个浏览器中登陆不同的App应用且不会有数据冲突 |
 | KEY\_EVENT | Ux.Env.$K\_EVENT | 当前App使用的Redux状态时候的事件前缀，用于区分不同Redux行为专用，默认值为@@ZUI-ACT |
 | DEV\_DEBUG | Ux.Env.$DEBUG | 是否开启Debug模式，Debug模式中才可看见对应的日志信息 |
+
+## 2. 第三方使用的环境变量
+
+
 
 
 
