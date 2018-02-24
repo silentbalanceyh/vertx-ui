@@ -19,7 +19,7 @@
 
 | 环境变量 | 脚本中引用方法 | 环境变量说明 |
 | :--- | :--- | :--- |
-| TP\_BAIDU | Ux.Env.$TP.$BAIDU | 百度地图专用Key |
+| TP\_BAIDU | Ux.Env.TP.BAIDU | 百度地图专用Key |
 
 
 
