@@ -5,11 +5,8 @@ export APP_ENDPOINT=http://localhost:7000    # 当前应用需要访问的远程
 export APP_NAME=vie.app.htl                  # 该应用名称
 export APP_ROUTE=zui                         # 该应用的动态路由根路径地址
 export KEY_SESSION=@@ZUI/                    # Session Key前缀
-# 该应用对应Redux Event前缀
-export KEY_EVENT=@@VIE-UI
-
-# Debug模式
-export DEV_DEBUG=true
+export KEY_EVENT=@@ZUI-ACT                   # Redux 中的Event对应的Key前缀
+export DEV_DEBUG=true                        # 是否开启Debug模式
 # Baidu地图
 export MAP_KEY=RVZSpq0MuZsxBIrUPdq4Za6McR21rQrn
 
