@@ -11,7 +11,7 @@
 | APP\_ROUTE | Ux.Env.$PATH | 当前App的动态路由根路径，不同的应用该值应该设置为不同，所有的React Router的路径都是放在该变量下运行 |
 | KEY\_SESSION | Ux.Env.$K\_SESSION | 当前App在使用SessionStorage时对应的Key前缀，默认使用@@ZUI/，使用前缀可在同一个浏览器中登陆不同的App应用且不会有数据冲突 |
 | KEY\_EVENT | Ux.Env.$K\_EVENT | 当前App使用的Redux状态时候的事件前缀，用于区分不同Redux行为专用，默认值为@@ZUI-ACT |
-|  |  |  |
+| DEV\_DEBUG | Ux.Env.$DEBUG | 是否开启Debug模式，Debug模式中才可看见对应的日志信息 |
 
 
 
