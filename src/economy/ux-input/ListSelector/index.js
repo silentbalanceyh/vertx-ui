@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from 'ux';
 import { Button, Icon, Input, Table } from "antd";
-import { DynamicDialog } from "control";
+import { DynamicDialog } from "web";
 import Op from './Op'
 
 const uiSelection = (reference) => ({

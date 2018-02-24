@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import Ux from "ux";
 import { Form } from "antd";
-import { LoadingLayout } from "control";
+import { LoadingLayout } from "web";
 import HocI18n from "../entity/hoc/HocI18n";
 
 const fnFullName = (target, options = {}) => {

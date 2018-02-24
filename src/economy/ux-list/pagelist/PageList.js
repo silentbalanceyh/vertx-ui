@@ -2,7 +2,7 @@ import React from 'react'
 import Ux from 'ux';
 import './Cab.less'
 import { Table, Button, Alert } from 'antd'
-import { DynamicDialog } from "control";
+import { DynamicDialog } from "web";
 import Op from './Op.List';
 
 class Component extends React.PureComponent {

@@ -5,7 +5,7 @@ const randomjs = require("random-js");
 const separator = "/";
 // 读取当前目录的根目录，收集路径信息
 const dir = fs.readdirSync("./src");
-const keys = ["components", "container", "control", "conjunction"];
+const keys = ["components", "container", "economy"];
 const $keys = Immutable.fromJS(keys);
 const targets = [];
 for (let idx = 0; idx < dir.length; idx++) {

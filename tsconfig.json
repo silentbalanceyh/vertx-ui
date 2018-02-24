@@ -18,38 +18,17 @@
       "entity": [
         "src/entity"
       ],
-      "hooker": [
-        "src/hooker"
-      ],
       "lang": [
         "src/cab"
       ],
-      "conjunction": [
-        "src/conjunction"
-      ],
-      "coaction": [
-        "src/conaction"
-      ],
-      "combination": [
-        "src/combination"
-      ],
-      "control": [
-        "src/control"
-      ],
-      "vie-joy": [
-        "src/vie-joy"
-      ],
-      "anima": [
-        "src/anima"
+      "web": [
+        "src/economy"
       ],
       "ux": [
         "src/ux"
       ],
-      "anno": [
-        "src/anno"
-      ],
-      "hotel": [
-        "src/hotel"
+      "app": [
+        "src/app"
       ]
     }
   },
@@ -59,7 +38,6 @@
   ],
   "include": [
     "src/entity/**/*.ts",
-    "src/c*/**/*.ts",
-    "src/anima/**/*.ts"
+    "src/c*/**/*.ts"
   ]
 }
