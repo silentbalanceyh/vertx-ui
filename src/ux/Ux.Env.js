@@ -40,9 +40,7 @@ export default {
         EVENT : process.env.$K_EVENT,
         KEY_USER : `${process.env.$K_SESSION}SESSION/USER`,
         KEY_APP : `${process.env.$K_SESSION}SESSION/APP/${process.env.$APP.toUpperCase()}`,
-        ENTRY_LOGIN : `/${process.env.$PATH}${process.env.$LOGIN}`,
-        ENTRY_ADMIN : `/${process.env.$PATH}${process.env.$MAIN}`,
-        MAP_KEY : process.env.$MAP_KEY,
+        TP : process.env.$TP,
         DEBUG : Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG),
         HTTP_METHOD : {
             GET : "get",
