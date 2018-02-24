@@ -1,0 +1,9 @@
+{
+    "name": "Vie UI Client",
+    "description": "Vie UI前端文档工具",
+    "version": "0.9.1",
+    "options": {
+        "paths": "./src",
+        "outdir": "./specification/api"
+    }
+}

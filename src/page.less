@@ -1,0 +1,104 @@
+@import "~antd/lib/style/themes/default.less";
+
+@page-prefix: page;
+.@{page-prefix}-header {
+  margin-top: 5px;
+  background: @component-background;
+  padding: 16px 32px 0 32px;
+  border-bottom: @border-width-base @border-style-base @border-color-split;
+  .breadcrumb {
+    margin-bottom: 16px;
+  }
+}
+
+.@{page-prefix}-card {
+  margin: 24px 24px 0;
+  background: @component-background;
+}
+
+.@{page-prefix}-left-card {
+  margin: 24px 12px 0 24px;
+  background: @component-background;
+}
+
+.@{page-prefix}-right-card {
+  margin: 24px 24px 0 12px;
+  background: @component-background;
+}
+
+.@{page-prefix}-tabcard {
+  margin: 24px 24px 0;
+  background: @component-background;
+  .ant-tabs-tab {
+    margin-left: 16px;
+    margin-right: 16px;
+    padding-top: 16px;
+  }
+  :global {
+    .ant-card-head {
+      padding: 0 16px;
+      height: 55px;
+    }
+  }
+}
+
+.@{page-prefix}-table {
+  scrollbar-shadow-color: @color-flag-major;
+}
+
+.@{page-prefix}-pagelist {
+  margin-top: 15px;
+  :global {
+    .ant-table-pagination {
+      margin-top: 24px;
+    }
+  }
+  .@{page-prefix}-alert {
+    margin-bottom: 16px;
+  }
+  .@{page-prefix}-op {
+    margin-bottom: 16px;
+    button {
+      margin-right: 8px;
+    }
+  }
+}
+
+.@{page-prefix}-flag {
+  text-align: center;
+  font-size: 86px;
+  font-weight: 600;
+  font-family: "SimHei";
+  color: transparent;
+  background-color: @color-flag-major;
+  text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px, rgba(255, 255, 255, 0.2) 1px 3px 3px;
+  -webkit-background-clip: text;
+  border-radius: 25px;
+  border-left: solid 1px @color-flag-bg;
+  border-top: solid 1px @color-flag-bg;
+  box-shadow: 5px 5px 3px @color-flag-bg;
+}
+
+.@{page-prefix}-form {
+  .@{page-prefix}-title {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    color: black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    background: -moz-linear-gradient(left, @color-title 0%, white 100%);
+    background: -webkit-linear-gradient(left, @color-title 0%, white 100%);
+    background: -o-linear-gradient(left, @color-title 0%, white 100%);
+    background: -ms-linear-gradient(left, @color-title 0%, white 100%);
+    background: linear-gradient(to right, @color-title 0%, white 100%);
+  }
+  .ant-col-6, .ant-col-8, .ant-col-12, .ant-col-24 {
+    height: 42px !important;
+  }
+  button {
+    margin-right: 10px;
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "presets": ["env"],
+    "plugins": [
+        "transform-class-properties",
+        "transform-decorators-legacy",
+        "transform-decorators",
+        "transform-async-to-generator",
+        "transform-react-jsx",
+        "transform-do-expressions",
+        "syntax-do-expressions",
+        "transform-object-rest-spread",
+        "transform-function-bind",
+        "transform-object-assign",
+        "transform-runtime"
+    ],
+    "env": {
+        "development": {
+            "presets": ["react-hmre"]
+        }
+    }
+}

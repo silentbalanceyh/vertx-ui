@@ -1,0 +1,29 @@
+{
+    "_button": {
+        "login": "登陆",
+        "reset": "重置",
+        "save": "保存",
+        "loading": "提交...",
+        "search": "搜索"
+    },
+    "_dialog": {
+        "error": "错误",
+        "confirm": "提示",
+        "success": "成功"
+    },
+    "_logicals": {
+        "yesno": {
+            "yes": "是",
+            "no": "否"
+        },
+        "status": {
+            "enabled": "启用",
+            "disabled": "禁用"
+        },
+        "gender": {
+            "male": "男",
+            "female": "女"
+        }
+    },
+    "_loading": "加载中……"
+}

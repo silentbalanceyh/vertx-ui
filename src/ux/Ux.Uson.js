@@ -1,0 +1,58 @@
+import U from "underscore";
+import Type from './Ux.Type';
+import Immutable from "immutable";
+
+class Uson {
+    static create(data = []) {
+        if (U.isObject(data)) {
+            return new Uson(data);
+        } else {
+            console.error("[Kid] The input data must be Object.");
+        }
+    }
+
+    constructor(data = []) {
+        this.data = data;
+    }
+
+    add(field, any) {
+        if (field) {
+            let $params = Immutable.fromJS(this.data);
+            const path = field.split(".");
+            $params = $params.setIn(path, any);
+            this.data = $params.toJS();
+        }
+        return this;
+    }
+
+    keep(keys = []){
+        const target = {};
+        const reference = this.data;
+        keys.forEach(key => {
+            const value = reference[key];
+            if(undefined !== value){
+                target[key] = value;
+            }
+        });
+        this.data = target;
+        return this;
+    }
+
+    convert(mapping = {}){
+        const target = {};
+        const reference = this.data;
+        Type.itObject(mapping, (from, to) => {
+            if(reference.hasOwnProperty(from)){
+                target[to] = reference[from];
+            }
+        });
+        this.data = target;
+        return this;
+    }
+
+    to() {
+        return this.data;
+    }
+}
+
+export default Uson;

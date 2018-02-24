@@ -1,29 +1,65 @@
 {
   "compilerOptions": {
-    "outDir": "build/dist",
-    "module": "esnext",
-    "target": "es5",
-    "lib": ["es6", "dom"],
-    "sourceMap": true,
+    "outDir": "build",
+    "experimentalDecorators": true,
+    "noImplicitAny": false,
+    "module": "commonjs",
+    "target": "es2016",
+    "sourceMap": false,
+    "alwaysStrict": false,
     "allowJs": true,
-    "jsx": "react",
-    "moduleResolution": "node",
-    "rootDir": "src",
-    "forceConsistentCasingInFileNames": true,
-    "noImplicitReturns": true,
-    "noImplicitThis": true,
-    "noImplicitAny": true,
-    "strictNullChecks": true,
-    "suppressImplicitAnyIndexErrors": true,
-    "noUnusedLocals": true
+    "noImplicitUseStrict": true,
+    "allowSyntheticDefaultImports": true,
+    "baseUrl": ".",
+    "paths": {
+      "environment": [
+        "src/environment"
+      ],
+      "entity": [
+        "src/entity"
+      ],
+      "hooker": [
+        "src/hooker"
+      ],
+      "lang": [
+        "src/cab"
+      ],
+      "conjunction": [
+        "src/conjunction"
+      ],
+      "coaction": [
+        "src/conaction"
+      ],
+      "combination": [
+        "src/combination"
+      ],
+      "control": [
+        "src/control"
+      ],
+      "vie-joy": [
+        "src/vie-joy"
+      ],
+      "anima": [
+        "src/anima"
+      ],
+      "ux": [
+        "src/ux"
+      ],
+      "anno": [
+        "src/anno"
+      ],
+      "hotel": [
+        "src/hotel"
+      ]
+    }
   },
   "exclude": [
     "node_modules",
-    "build",
-    "scripts",
-    "acceptance-tests",
-    "webpack",
-    "jest",
-    "src/setupTests.ts"
+    "src/**/*.js"
+  ],
+  "include": [
+    "src/entity/**/*.ts",
+    "src/c*/**/*.ts",
+    "src/anima/**/*.ts"
   ]
 }

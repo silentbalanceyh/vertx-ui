@@ -1,0 +1,5 @@
+{
+  "name": "ux",
+  "private": true,
+  "main": "./Ux.js"
+}

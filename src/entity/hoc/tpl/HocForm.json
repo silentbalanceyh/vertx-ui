@@ -1,0 +1,35 @@
+{
+  "_form":{
+    "_rules":{
+      "username": [
+        {
+          "required": true,
+          "message": "请输入用户名！"
+        },
+        {
+          "min": 6,
+          "max": 16,
+          "message": "用户名长度必须在6 ~ 16字符之间"
+        }
+      ],
+      "password": [
+        {
+          "required": true,
+          "message": "请输入登陆密码！"
+        },
+        {
+          "min": 8,
+          "message": "密码长度必须大于8个字符！"
+        }
+      ]
+    },
+    "_placeholders":{
+      "username":"用户名",
+      "password":"密码"
+    },
+    "_fields":[
+      "username",
+      "password"
+    ]
+  }
+}
