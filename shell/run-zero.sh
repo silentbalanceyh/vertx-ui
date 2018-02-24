@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-# -- Edo UI
-# 当前用户使用的端口号
-export PORT=3001
-# 该应用使用的语言
-export UI_LANGUAGE=cn
-# 该应用、访问的远程Endpoint
-export UI_ENDPOINT=http://localhost:7000
-# 该应用名称
-export UI_APP=vie.app.htl
+export PORT=3001                             # 当前用户使用的端口号
+export APP_LANGUAGE=cn                       # 当前应用使用的语言，如果有多语言则需要在不同语言中启动不同应用进行切换，不建议单库多语言部署
+export APP_ENDPOINT=http://localhost:7000    # 当前应用需要访问的远程EndPoint
+export APP_NAME=vie.app.htl                  # 该应用名称
 
 # URI地址 -> Login登陆入口
 export URI_LOGIN=/login

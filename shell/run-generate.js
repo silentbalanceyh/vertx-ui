@@ -103,3 +103,5 @@ const content = line.join("\n");
 fs.writeFile("src/environment/datum.js", content, () => {
     console.log("[SUC] Successfully to write data to src/environment/datum.js");
 });
+// Container和Component组件index.js的生成
+
