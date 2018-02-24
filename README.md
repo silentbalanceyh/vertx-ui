@@ -16,7 +16,11 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 ## 2. 文档列表
 
-* [官方文档](/document/README.md)
+### 环境说明
+
+* [UI0001 - 脚手架说明](/document/ui0001-jiao-shou-jia-shuo-ming.md)
+
+
 
 ### 
 
