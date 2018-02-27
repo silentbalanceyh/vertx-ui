@@ -9,5 +9,6 @@ set KEY_SESSION=@@RTV/
 set KEY_EVENT=@@VIE-UI
 set DEV_DEBUG=true
 set MAP_KEY=RVZSpq0MuZsxBIrUPdq4Za6McR21rQrn
+set UX_SHARED=app
 echo "[ZERO-UI] Environment has been initialized successfully !"
 node scripts/start.js
