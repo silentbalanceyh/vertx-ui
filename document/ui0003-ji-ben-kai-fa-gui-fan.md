@@ -25,8 +25,8 @@ import _hotel_admin from './hotel/admin/UI';
 import _login_index from './login/index/UI';
 
 export default {
-	_hotel_admin,
-	_login_index,
+    _hotel_admin,
+    _login_index,
 }
 ```
 
@@ -66,6 +66,52 @@ src/components/index.js
 ```shell
 src/route.json
 ```
+
+该文件内容如下：
+
+```json
+{
+    "defined":"_hotel_admin",
+    "special":{
+        "_login_index":[
+            "_login_index"
+        ]
+    }
+}
+```
+
+相关属性说明：
+
+* `defined`：默认使用模板，没有出现于`special`部分的所有页面将统一使用该模板；
+* `special`：指定模板，指定规则为：模板名 = 页面名称组；
+
+此处的名称遵循下边的路由基本生成规则。
+
+### 1.4. 路由生成规则
+
+路由名称和模板名称的基本规则很简单，以下划线代替原始目录中的`/`目录分隔符，如：
+
+**示例**：
+
+若有一个模板位于`container`的路径下：
+
+```shell
+src/container/user/admin/UI.js        
+# 该模板的名称为_user_admin
+```
+
+**示例**：
+
+若有一个页面位于`components`的路径下：
+
+```shell
+src/components/user/password/UI.js
+# 该页面的名称为_user_password
+# 页面的最终路径地址为：
+
+```
+
+
 
 
 
