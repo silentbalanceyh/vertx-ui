@@ -21,6 +21,29 @@
 这里提供一个完整的开发文件，以后会逐一说明：
 
 ```shell
+# 模板资源文件
+src/cab/cn/container/main/hotel-admin/UI.json
+src/cab/cn/container/main/hotel-admin/UI.Account.json
+# 模板文件
+src/container/main/hotel-admin/Act.Epic.js
+src/container/main/hotel-admin/Act.Types.js
+src/container/main/hotel-admin/Cab.json
+src/container/main/hotel-admin/Op.Effect.ts
+src/container/main/hotel-admin/Op.Jump.ts
+src/container/main/hotel-admin/Op.ts
+src/container/main/hotel-admin/UI.Account.js
+src/container/main/hotel-admin/UI.Header.js
+src/container/main/hotel-admin/UI.js
+src/container/main/hotel-admin/UI.Notify.js
+src/container/main/hotel-admin/UI.Sider.js
+# ---------------- 模板可重用 -------------------------
+
+# 页面资源文件
+src/cab/cn/components/call/order/UI.json
+src/cab/cn/components/call/order/UI.Form.Item.json
+src/cab/cn/components/call/order/UI.Form.json
+src/cab/cn/components/call/order/UI.List.json
+# 页面组件专用文件
 
 ```
 
