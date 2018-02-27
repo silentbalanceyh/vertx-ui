@@ -111,5 +111,15 @@ src/components/user/password/UI.js
 # APP_ROUTE为当前应用使用的路由环境变量
 ```
 
+## 2. 资源文件
 
+资源文件为Zero UI中处理国际化版本专用，资源入口文件位于目录：
+
+```shell
+src/cab/index.js
+src/cab/cn/*            # 中文资源目录
+src/cab/en/*            # 英文资源目录
+```
+
+资源目录中的文件会通过zero引用到环境中，使用哪个目录的文件取决于环境变量：\`\`
 
