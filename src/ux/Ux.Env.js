@@ -1,6 +1,9 @@
 import { createAction } from 'redux-act';
 import { Taper, zero } from "environment";
 import { DataLabor } from "entity";
+import { Set } from 'immutable'
+import routeData from '../layout'
+import Random from './Ux.Random'
 // 环境变量初始化
 const debugJs = (ux = {}) => {
     if(Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
@@ -22,6 +25,52 @@ const debugRouter = (ux, container, component) => {
         console.groupEnd();
     }
 };
+const route = (container = {}, components = {}) => {
+    // 先处理定义路由
+    const routes = [];
+    let $keys = Set(Object.keys(components));
+    if(routeData.special){
+        const route = {};
+        for(const key in routeData.special){
+            // Container
+            let layout = undefined;
+                if(container[key]){
+                    layout = container[key];
+                }
+                // Components
+                if(layout){
+                    const componentKeys = routeData.special[key];
+                    componentKeys.forEach(componentKey => {
+                        if(components[componentKey]){
+                            route.container = layout;
+                            route.component = components[componentKey];
+                            route.uri = componentKey.replace(/_/g,'/');
+                            route.key = Random.randomString(16);
+                            routes.push(route);
+                            $keys = $keys.remove(componentKey);
+                        }
+                    });
+                }
+        }
+    }
+    // 处理默认模板
+    if(routeData.defined){
+        if(container[routeData.defined]){
+            const keyList = $keys.toJS();
+            const route = {};
+            keyList.forEach(componentKey => {
+                if(components[componentKey]){
+                    route.container = container[routeData.defined];
+                    route.component = components[componentKey];
+                    route.uri = componentKey.replace(/_/g,'/');
+                    route.key = Random.randomString(16);
+                    routes.push(route);
+                }
+            })
+        }
+    }
+    return routes;
+};
 export default {
     dataOut : (data) => Taper.fnFlush(DataLabor.createIn(data)),
     dataIn : (state) => DataLabor.createOut(state),
@@ -33,6 +82,7 @@ export default {
     debugRouter,
     createAction : (path) => createAction(`${process.env.$K_EVENT}${path}`),
     zero,
+    route,
     Env:{
         LANG : process.env.$LANG,
         ENDPOINT : process.env.$ENDPOINT,

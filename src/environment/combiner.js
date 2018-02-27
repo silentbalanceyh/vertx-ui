@@ -25,7 +25,6 @@ for (const key in datum.epics) {
         epics.push(datum.epics[key]);
     }
 }
-console.info(epics);
 export default {
     epics: combineEpics.apply(this, epics),
     reducers: combineReducers({
