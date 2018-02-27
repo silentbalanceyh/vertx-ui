@@ -8,6 +8,7 @@ export APP_ROUTE=zui                                # 该应用的动态路由�
 export KEY_SESSION=@@ZUI/                           # Session Key前缀
 export KEY_EVENT=@@ZUI-ACT                          # Redux 中的Event对应的Key前缀
 export DEV_DEBUG=true                               # 是否开启Debug模式
+export UX_SHARED=app
 # 第三方环境变量
 export TP_BAIDU=RVZSpq0MuZsxBIrUPdq4Za6McR21rQrn
 # 最终输出信息
