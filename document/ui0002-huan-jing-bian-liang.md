@@ -30,3 +30,5 @@
 
 如果你开的是Debug模式则可以看到浏览器中的输出：
 
+![](/document/image/UI0002.png)
+
