@@ -19,6 +19,7 @@
 |  | Ux.Env.HTTP11 | HTTP1.1的头文件常量 |
 |  | Ux.Env.HTTP\_METHOD | Http方法常量 |
 |  | Ux.Env.MIMES | 常用MIME映射文件 |
+| UX\_SHARED | 无 | 全局Epic和Types共享目录名称，默认值为app，所以共享内容位于src/app/action的目录下 |
 
 ## 2. 第三方使用的环境变量
 
