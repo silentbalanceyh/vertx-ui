@@ -6,4 +6,6 @@
     * [UI0001 - 脚手架说明](document/ui0001-jiao-shou-jia-shuo-ming.md)
     * [UI0002 - 环境变量](document/ui0002-huan-jing-bian-liang.md)
     * [UI0003 - 基本开发规范](document/ui0003-ji-ben-kai-fa-gui-fan.md)
+  * [2 - 开发文档](document/2-kai-fa-wen-dang.md)
+    * [UI0004 - 开发我的第一个模板](document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
 

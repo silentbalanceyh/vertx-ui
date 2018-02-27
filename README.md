@@ -24,6 +24,9 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [UI0002 - 环境变量](/document/ui0002-huan-jing-bian-liang.md)
 * [UI0003 - 基本开发规范](/document/ui0003-ji-ben-kai-fa-gui-fan.md)
 
+### 开发文档
+
+* [UI0004 - 开发我的第一个模板](/document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
 
 
 
