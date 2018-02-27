@@ -1,5 +1,4 @@
 const fs = require("fs");
-const os = require("os");
 const Immutable = require("immutable");
 const randomjs = require("random-js");
 const separator = "/";
