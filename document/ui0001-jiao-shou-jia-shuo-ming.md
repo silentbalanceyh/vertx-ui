@@ -21,7 +21,7 @@
 |  | econnomy |  | 【Zero】可重用组件 |
 |  | entity |  | 【Zero】TypeScript数据对象 |
 |  | environment |  | 核心环境文件 |
-|  | style |  | 风格文件 |
+|  | style |  | css相关风格文件 |
 |  | ux |  | 【Zero】Utility X包，纯函数主入口 |
 | stories |  |  | Storybook专用包 |
 | typings |  |  | TypeScript专用 |
