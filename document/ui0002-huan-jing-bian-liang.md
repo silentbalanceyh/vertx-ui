@@ -16,6 +16,9 @@
 |  | Ux.Env.KEY\_USER | 当前应用保存的用户专用Session |
 | KEY\_EVENT | Ux.Env.EVENT | 当前App使用的Redux状态时候的事件前缀，用于区分不同Redux行为专用，默认值为@@ZUI-ACT |
 | DEV\_DEBUG | Ux.Env.DEBUG | 是否开启Debug模式，Debug模式中才可看见对应的日志信息 |
+|  | Ux.Env.HTTP11 | HTTP1.1的头文件常量 |
+|  | Ux.Env.HTTP\_METHOD | Http方法常量 |
+|  | Ux.Env.MIMES | 常用MIME映射文件 |
 
 ## 2. 第三方使用的环境变量
 
