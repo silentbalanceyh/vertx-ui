@@ -12,16 +12,18 @@ moment.locale('zh-cn');
 
 const route = uri => `/${process.env.$PATH}${uri}`;
 
-const connect = (Uri, Layout, Page) => {
+const connect = (Uri, Layout, Page, key) => {
     const render = props => {
         const router = DataLabor.getRouter(props);
         return <Layout $router={ router } component={ Page }/>;
     };
-    return <Route exact path={ route(Uri) } render={ render }/>;
+    return <Route key={key} exact path={ route(Uri) } render={ render }/>;
 };
 Ux.debugRouter(Ux, Container, Component);
+const routes = Ux.route(Container, Component);
 export default (
     <Switch>
-
+        {routes.map(route => connect(route.uri,
+            route.container, route.component, route.key))}
     </Switch>
 );
