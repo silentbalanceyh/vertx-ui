@@ -2,7 +2,7 @@ import { createAction } from 'redux-act';
 import { Taper, zero } from "environment";
 import { DataLabor } from "entity";
 import { Set } from 'immutable'
-import routeData from '../layout'
+import routeData from '../route'
 import Random from './Ux.Random'
 // 环境变量初始化
 const debugJs = (ux = {}) => {
