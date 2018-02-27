@@ -133,9 +133,20 @@ src/components/user/password/Act.Epic.js        # Epic专用文件
 src/components/user/password/Act.Types.js       # Types专用文件
 ```
 
+资源链接文件为系统自动生成，会将您写好的Epic和Types打包生成到环境中，该文件路径为：
+
+```shell
+src/environment/datum.js
+```
+
+除开每个组件专用的文件以外，您还可以写一些全局共享的Epic和Types，该文件位于：
+
+```shell
+{UX_SHARED}/action/Epic.js
+{UX_SHARED}/action/Types.js
+```
+
 ### 4. Summary
 
 上述文件除开资源文件以外，其他所有的文件在添加和删除后都需要重启框架，否则不会生效。
-
-
 
