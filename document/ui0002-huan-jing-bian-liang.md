@@ -33,3 +33,14 @@
 
 ![](/document/image/UI0002.png)
 
+### 4. 设置位置
+
+环境变量的设置位于脚本
+
+```shell
+shell/run-zero.sh
+shell/run-zero.bat
+```
+
+
+
