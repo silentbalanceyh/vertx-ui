@@ -107,11 +107,9 @@ src/container/user/admin/UI.js
 ```shell
 src/components/user/password/UI.js
 # 该页面的名称为_user_password
-# 页面的最终路径地址为：
-
+# 页面的最终路径地址为：/{APP_ROUTE}/user/password
+# APP_ROUTE为当前应用使用的路由环境变量
 ```
-
-
 
 
 
