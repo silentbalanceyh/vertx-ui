@@ -147,6 +147,8 @@ src/environment/datum.js
 # US_SHARED为环境变量
 ```
 
+> Epic和Action文件本身不可重名，重名会导致Redux不生效。
+
 ### 4. Summary
 
 上述文件除开资源文件以外，其他所有的文件在添加和删除后都需要重启框架，否则不会生效。
