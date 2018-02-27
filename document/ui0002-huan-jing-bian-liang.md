@@ -38,8 +38,8 @@
 环境变量的设置位于脚本
 
 ```shell
-shell/run-zero.sh
-shell/run-zero.bat
+shell/run-zero.sh     # 非Windows环境
+shell/run-zero.bat    # Windows环境
 ```
 
 
