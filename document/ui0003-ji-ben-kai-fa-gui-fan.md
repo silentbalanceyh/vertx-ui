@@ -144,6 +144,7 @@ src/environment/datum.js
 ```shell
 {UX_SHARED}/action/Epic.js
 {UX_SHARED}/action/Types.js
+# US_SHARED为环境变量
 ```
 
 ### 4. Summary
