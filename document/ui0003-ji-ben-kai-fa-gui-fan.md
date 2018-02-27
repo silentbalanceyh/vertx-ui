@@ -121,5 +121,21 @@ src/cab/cn/*            # 中文资源目录
 src/cab/en/*            # 英文资源目录
 ```
 
-资源目录中的文件会通过zero引用到环境中，使用哪个目录的文件取决于环境变量：\`\`
+资源目录中的文件会通过zero引用到环境中，使用哪个目录的文件取决于环境变量：`APP_LANGUAGE`
+
+### 3. Epic和Action文件
+
+Epic和Action文件主要为`Redux/Redux.Observable`专用的Action处理文件，这两个文件位于每个组件/模板的目录中，且文件名固定，如：
+
+```shell
+src/components/user/password/UI.js
+src/components/user/password/Act.Epic.js        # Epic专用文件
+src/components/user/password/Act.Types.js       # Types专用文件
+```
+
+### 4. Summary
+
+上述文件除开资源文件以外，其他所有的文件在添加和删除后都需要重启框架，否则不会生效。
+
+
 
