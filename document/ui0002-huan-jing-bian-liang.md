@@ -42,5 +42,5 @@ shell/run-zero.sh     # 非Windows环境
 shell/run-zero.bat    # Windows环境
 ```
 
-![](/document/image/UI0002.png)
+
 
