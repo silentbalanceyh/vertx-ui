@@ -35,13 +35,11 @@
 > ncu
 # 输出结果如下：
 ⸨░░░░░░░░░░░░░░░░░░⸩ ⠴ :
- eslint-plugin-jsx-a11y   ^5.1.1  →  ^6.0.3 
- react-dev-utils          ^3.1.1  →  ^5.0.0 
- react-error-overlay     ^1.0.10  →  ^4.0.0 
- less                     ^2.7.3  →  ^3.0.1 
+ webpack             3.11.0  →  4.1.1 
+ webpack-dev-server   3.0.0  →  3.1.1 
 
 Run ncu with -u to upgrade package.json
 ```
 
-以上四个包的版本为限制版本，不可更新到最新版，更新到最新版会出错。
+以上依赖包的版本为限制版本，不可更新到最新版，更新到最新版会出错。
 
