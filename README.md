@@ -16,6 +16,10 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * Vert.x Zero Up Framework: [http://www.vertxup.cn](http://www.vertxup.cn)
 * Zero UI Framework: [http://www.vertxui.cn](http://www.vertxui.cn)
 
+依赖库固定版本（升级后有兼容性问题）
+
+
+
 ## 2. 文档列表
 
 ### 环境说明
