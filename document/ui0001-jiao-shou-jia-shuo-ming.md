@@ -35,11 +35,13 @@
 > ncu
 # 输出结果如下：
 ⸨░░░░░░░░░░░░░░░░░░⸩ ⠴ :
- webpack             3.11.0  →  4.1.1 
- webpack-dev-server   3.0.0  →  3.1.1 
+ rxjs                       ^5.5.10  →  ^6.0.0 
+ webpack                     3.11.0  →   4.6.0 
+ webpack-dev-server           3.0.0  →   3.1.3 
+ awesome-typescript-loader   ^4.0.1  →  ^5.0.0 
 
 Run ncu with -u to upgrade package.json
 ```
 
-以上依赖包的版本为限制版本，不可更新到最新版，更新到最新版会出错。
+以上依赖包的版本为限制版本，不可更新到最新版，更新到最新版会出错，后期脚手架可以考虑升级版本，目前够用即可。
 
