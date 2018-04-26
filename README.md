@@ -18,7 +18,12 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 依赖库固定版本（升级后有兼容性问题）
 
-
+| 库名称 | 当前版本 | 最新版 |
+| :--- | :--- | :--- |
+| rxjs | 5.5.10 | 6.0.0 |
+| webpack | 3.11.0 | 4.6.0 |
+| webpack-dev-server | 3.0.0 | 3.1.3 |
+| awesome-typescript-loader | 4.0.1 | 5.0.0 |
 
 ## 2. 文档列表
 
