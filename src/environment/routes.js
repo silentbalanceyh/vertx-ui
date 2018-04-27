@@ -19,7 +19,7 @@ const connect = (Uri, Layout, Page, key) => {
     };
     return <Route key={key} exact path={route(Uri)} render={render}/>;
 };
-Ux.rxRouter(Ux, Container, Component);
+Ux.dgRouter(Ux, Container, Component);
 const routes = Ux.route(Container, Component);
 export default (
     <Switch>
