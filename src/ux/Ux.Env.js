@@ -1,8 +1,58 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
 import {DataLabor} from "entity";
+import {Set} from 'immutable'
+import routeData from '../route'
+import Random from './Ux.Random'
 import Debug from './Ux.Debug';
 
+const route = (container = {}, components = {}) => {
+    // 先处理定义路由
+    const routes = [];
+    let $keys = Set(Object.keys(components));
+    if (routeData.special) {
+        const route = {};
+        const fnItem = (layout) => componentKey => {
+            if (components[componentKey]) {
+                route.container = layout;
+                route.component = components[componentKey];
+                route.uri = componentKey.replace(/_/g, '/');
+                route.key = Random.randomString(16);
+                routes.push(route);
+                $keys = $keys.remove(componentKey);
+            }
+        };
+        for (const key in routeData.special) {
+            // Container
+            let layout = undefined;
+            if (container[key]) {
+                layout = container[key];
+            }
+            // Components
+            if (layout) {
+                const componentKeys = routeData.special[key];
+                componentKeys.forEach(fnItem(layout));
+            }
+        }
+    }
+    // 处理默认模板
+    if (routeData.defined) {
+        if (container[routeData.defined]) {
+            const keyList = $keys.toJS();
+            const route = {};
+            keyList.forEach(componentKey => {
+                if (components[componentKey]) {
+                    route.container = container[routeData.defined];
+                    route.component = components[componentKey];
+                    route.uri = componentKey.replace(/_/g, '/');
+                    route.key = Random.randomString(16);
+                    routes.push(route);
+                }
+            })
+        }
+    }
+    return routes;
+};
 export default {
     LANG: process.env.$LANG,
     ENDPOINT: process.env.$ENDPOINT,
@@ -17,11 +67,13 @@ export default {
     MOCK: Boolean("development" === process.env.NODE_ENV && process.env.$MOCK),
     dataOut: (data) => Taper.fnFlush(DataLabor.createIn(data)),
     dataIn: (state) => DataLabor.createOut(state),
-    rxDebug: Debug.rxDebug,
+    rxRouter: Debug.rxRouter,
     rxFileJson: Debug.rxFileJson,
     rxForm: Debug.rxForm,
     rxMonitor: Debug.rxMonitor,
+    rxScript: Debug.rxScript,
     createAction: (path) => createAction(`${process.env.$K_EVENT}${path}`),
+    route,
     zero,
     HTTP_METHOD: {
         GET: "get",

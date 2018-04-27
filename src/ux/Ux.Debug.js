@@ -73,15 +73,6 @@ const ensurePositive = (value) => {
     }
 };
 // 环境变量初始化
-const rxDebug = (ux = {}) => {
-    console.info(ux);
-    console.groupCollapsed("[Ux] Assist report as following:");
-    const numCond = 0;
-    const strCond = "";
-    console.info("[If] if(0) = ", (numCond) ? "Yes" : "No");
-    console.info("[If] if(\"\") = ", (strCond) ? "Yes" : "No");
-    console.groupEnd();
-};
 const rxFileJson = (data, ext = "json") => {
     let finalData = data;
     if (!Blob.prototype.isPrototypeOf(data)) {
@@ -99,6 +90,27 @@ const rxForm = (reference, data = {}, updated = false) => {
         console.groupEnd();
     }
 };
+// 环境变量初始化
+const rxScript = (ux = {}) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+        console.info(ux);
+        console.groupCollapsed("[Ux] Assist report as following:");
+        const numCond = 0;
+        const strCond = "";
+        console.info("[If] if(0) = ", (numCond) ? "Yes" : "No");
+        console.info("[If] if(\"\") = ", (strCond) ? "Yes" : "No");
+        console.groupEnd();
+    }
+};
+const rxRouter = (ux, container, component) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+        console.info(ux);
+        console.groupCollapsed("[Ux] UI report as following:");
+        console.info("[Ux] Container = ", container);
+        console.info("[Ux] Component = ", component);
+        console.groupEnd();
+    }
+};
 export default {
     ensureArgs,
     ensureNotNull,
@@ -112,9 +124,10 @@ export default {
     ensureLength,
     ensureNumber,
     ensurePositive,
-    rxDebug,
     rxFileJson,
+    rxScript,
     rxForm,
+    rxRouter,
     rxMonitor: (data) => {
         console.info(data);
         return data;
