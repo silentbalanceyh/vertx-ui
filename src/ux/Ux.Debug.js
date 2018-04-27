@@ -2,74 +2,106 @@ import U from 'underscore'
 import saveAs from "file-saver";
 import v4 from "uuid";
 
-const ensureArgs = (object, key = "") => {
-    if (!object || !object.hasOwnProperty(key)) {
-        console.error(`[Kid] Argument invalid, object must have key ${key}`, object);
+/**
+ * 【内部调用】检查传入对象object是否包含了field字段值
+ * * 1.传入的object不可以是undefined。
+ * * 2.传入的field不可以是undefined。
+ * * 3.object必须包含field，才不会有错误信息输出。
+ * @function ensureArgs
+ * @param object 被检查的JavaScript对象
+ * @param {String} field 被检查的字段名称
+ * @return undefined
+ * @example
+ *
+ *      import Debug from './Ux.Debug';
+ *      // 省略中间代码
+ *      const reference = ...;
+ *      Debug.ensureArgs(reference, "foo");
+ */
+const ensureArgs = (object, field) => {
+    if (!object || !field || !object.hasOwnProperty(field)) {
+        console.error(`[ZUI] Argument invalid, object must have key ${field}`, object);
     }
 };
-
+/**
+ * 【内部调用】检查传入的input是否合法
+ * * 不为null
+ * * 不为undefined
+ * * 不为JavaScript的if检查条件中的false
+ * @function ensureNotNull
+ * @param input
+ * @return undefined
+ */
 const ensureNotNull = (input) => {
     if (!input) {
-        console.error("[Kid] The input parameter must not be null.");
+        console.error("[ZUI] The input parameter must not be null.");
     }
 };
-
+/**
+ * 【内部调用】检查传入的React中用的Component组件是否合法
+ * * 不为null
+ * * 不为undefined
+ * * 不为JavaScript的if检查条件中的false
+ * @function ensureRuntime
+ * @param reference
+ * @return undefined
+ */
 const ensureRuntime = (reference) => {
     if (!reference) {
-        console.error("[Kid] Your runtime does not support current object", reference);
+        console.error("[ZUI] Your runtime does not support current object", reference);
     }
 };
 
 const ensureAttr = (funName, key = "") => {
     if (!key) {
-        console.error(`[Kid] This '${funName}' function require the second 'effectKey' parameter`);
+        console.error(`[ZUI] This '${funName}' function require the second 'effectKey' parameter`);
     }
 };
 
 const ensureToken = (token) => {
     if (!token) {
-        console.error("[Kid] Token could not be picked, the request is invalid.", token);
+        console.error("[ZUI] Token could not be picked, the request is invalid.", token);
     }
 };
 
 const ensureKey = (funName, key = "") => {
     if (!key) {
-        console.error(`[Kid] Function '${funName}' require input parameter key valid.`);
+        console.error(`[ZUI] Function '${funName}' require input parameter key valid.`);
     }
 };
 
 const ensureApp = (app) => {
     if (!app) {
-        console.error("[Kid] The application has not been initialized.");
+        console.error("[ZUI] The application has not been initialized.");
     }
 };
 
 const ensureRender = (render, option) => {
     if (!U.isFunction(render)) {
-        console.error("[Kid] Render is not a function.", option);
+        console.error("[ZUI] Render is not a function.", option);
     }
 };
 const ensureType = (value, fun, flag) => {
     if (!fun(value)) {
-        console.error(`[Kid] Expected type '${flag}' is invalid.`, value);
+        console.error(`[ZUI] Expected type '${flag}' is invalid.`, value);
     }
 };
 const ensureLength = (array = [], upLimit = 0) => {
     if (U.isArray(array)) {
         if (upLimit < array.length) {
-            console.error(`[Kid] Expected length is '${upLimit}', but current length is '${array.length}'.`);
+            console.error(`[ZUI] Expected length is '${upLimit}', but current length is '${array.length}'.`);
         }
     }
 };
 const ensureNumber = (value) => {
     if ("number" !== typeof value) {
-        console.error("[Kid] Expected number input value here.", typeof value);
+        console.error("[ZUI] Expected number input value here.", typeof value);
     }
 };
 const ensurePositive = (value) => {
     ensureNumber(value);
     if (0 > value) {
-        console.error("[Kid] Expected positive number of input value.", value);
+        console.error("[ZUI] Expected positive number of input value.", value);
     }
 };
 // 环境变量初始化
@@ -111,6 +143,11 @@ const rxRouter = (ux, container, component) => {
         console.groupEnd();
     }
 };
+/**
+ * 1. `ensure`工具类：Zero UI内部专用断言工具类
+ * 2. `dg`工具类：开发人员调试常用工具类
+ * @class Debug
+ */
 export default {
     ensureArgs,
     ensureNotNull,
@@ -124,6 +161,7 @@ export default {
     ensureLength,
     ensureNumber,
     ensurePositive,
+
     rxFileJson,
     rxScript,
     rxForm,

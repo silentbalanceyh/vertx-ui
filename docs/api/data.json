@@ -5,6 +5,29 @@
         "version": "0.1.0"
     },
     "files": {
+        "src/ux/Ux.Ajax.js": {
+            "name": "src/ux/Ux.Ajax.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Debug.js": {
+            "name": "src/ux/Ux.Debug.js",
+            "modules": {},
+            "classes": {
+                "Debug": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Dialog.js": {
+            "name": "src/ux/Ux.Dialog.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ux/Ux.Encrypt.js": {
             "name": "src/ux/Ux.Encrypt.js",
             "modules": {},
@@ -49,17 +72,141 @@
         }
     },
     "modules": {},
-    "classes": {},
+    "classes": {
+        "Debug": {
+            "name": "Debug",
+            "shortname": "Debug",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "file": "src/ux/Ux.Debug.js",
+            "line": 146,
+            "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
+        }
+    },
     "elements": {},
     "classitems": [
         {
+            "file": "src/ux/Ux.Ajax.js",
+            "line": 108,
+            "description": "统一处理Epic，引入Mock环节",
+            "params": [
+                {
+                    "name": "type",
+                    "description": ""
+                },
+                {
+                    "name": "promise",
+                    "description": ""
+                },
+                {
+                    "name": "processor",
+                    "description": ""
+                },
+                {
+                    "name": "mockData",
+                    "description": ""
+                },
+                {
+                    "name": "mockProcessor",
+                    "description": ""
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 5,
+            "description": "【内部调用】检查传入对象object是否包含了field字段值\n* 1.传入的object不可以是undefined。\n* 2.传入的field不可以是undefined。\n* 3.object必须包含field，才不会有错误信息输出。",
+            "itemtype": "method",
+            "name": "ensureArgs",
+            "params": [
+                {
+                    "name": "object",
+                    "description": "被检查的JavaScript对象"
+                },
+                {
+                    "name": "field",
+                    "description": "被检查的字段名称",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "undefined"
+            },
+            "example": [
+                "\n\n     import Debug from './Ux.Debug';\n     // 省略中间代码\n     const reference = ...;\n     Debug.ensureArgs(reference, \"foo\");"
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 26,
+            "description": "【内部调用】检查传入的input是否合法\n* 不为null\n* 不为undefined\n* 不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureNotNull",
+            "params": [
+                {
+                    "name": "input",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "undefined"
+            },
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 40,
+            "description": "【内部调用】检查传入的React中用的Component组件是否合法\n* 不为null\n* 不为undefined\n* 不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureRuntime",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "undefined"
+            },
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 35,
+            "description": "添加参数信息",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": ""
+                },
+                {
+                    "name": "key",
+                    "description": ""
+                },
+                {
+                    "name": "fnSuccess",
+                    "description": ""
+                },
+                {
+                    "name": "params",
+                    "description": ""
+                }
+            ],
+            "class": ""
+        },
+        {
             "file": "src/ux/Ux.Encrypt.js",
-            "line": 41,
+            "line": 42,
             "class": ""
         },
         {
             "file": "src/ux/Ux.Hoc.js",
-            "line": 61,
+            "line": 68,
             "description": "fnShow:对话框弹出窗口\nfnHide:对话框关闭窗口\nfnOut:Redux专用写函数\n$dialog:对应Hoc中的_window，对话框参数\n$metadata:对应Hoc中的_pagelist, 页面专用元数据\n$query:当前页面的查询条件信息",
             "params": [
                 {
@@ -134,7 +281,7 @@
         },
         {
             "file": "src/ux/Ux.Value.js",
-            "line": 33,
+            "line": 42,
             "description": "根据from和to计算中间的duration差值\nyears - y\nmonthds -M\nweeks -w\ndays - d\nhours - h\nminutes - m\nseconds - s\nmilliseconds - ms",
             "params": [
                 {
@@ -155,16 +302,36 @@
     ],
     "warnings": [
         {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:5"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:26"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:40"
+        },
+        {
             "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Hoc.js:61"
+            "line": " src/ux/Ux.Hoc.js:68"
+        },
+        {
+            "message": "Missing item type\n统一处理Epic，引入Mock环节",
+            "line": " src/ux/Ux.Ajax.js:108"
+        },
+        {
+            "message": "Missing item type\n添加参数信息",
+            "line": " src/ux/Ux.Dialog.js:35"
         },
         {
             "message": "Missing item type",
-            "line": " src/ux/Ux.Encrypt.js:41"
+            "line": " src/ux/Ux.Encrypt.js:42"
         },
         {
             "message": "Missing item type\nfnShow:对话框弹出窗口\nfnHide:对话框关闭窗口\nfnOut:Redux专用写函数\n$dialog:对应Hoc中的_window，对话框参数\n$metadata:对应Hoc中的_pagelist, 页面专用元数据\n$query:当前页面的查询条件信息",
-            "line": " src/ux/Ux.Hoc.js:61"
+            "line": " src/ux/Ux.Hoc.js:68"
         },
         {
             "message": "Missing item type",
@@ -212,7 +379,7 @@
         },
         {
             "message": "Missing item type\n根据from和to计算中间的duration差值\nyears - y\nmonthds -M\nweeks -w\ndays - d\nhours - h\nminutes - m\nseconds - s\nmilliseconds - ms",
-            "line": " src/ux/Ux.Value.js:33"
+            "line": " src/ux/Ux.Value.js:42"
         }
     ]
 }

@@ -4,6 +4,10 @@
     "version": "0.1.0",
     "options": {
         "paths": "./src",
-        "outdir": "./docs/api"
+        "outdir": "./docs/api",
+        "themedir": "node_modules/yuidoc-mdeditor-theme",
+        "helpers": [
+            "node_modules/yuidoc-mdeditor-theme/helpers/helpers.js"
+        ]
     }
 }
