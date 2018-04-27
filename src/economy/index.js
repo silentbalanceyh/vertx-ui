@@ -7,5 +7,3 @@ export { default as EditableRowOp } from './ux-cell/EditableRowOp';
 export { default as PageList } from './ux-list/pagelist/PageList';
 export { default as EditList } from './ux-list/editlist/EditList';
 export { default as ListSelector } from './ux-input/ListSelector';
-// 地图应用
-export { default as BMap } from './ux-map/baidu/BMap';
