@@ -1,26 +1,38 @@
-# See https://help.github.com/ignore-files/ for more about ignoring files.
-
-# dependencies
+# dependencies：npm依赖项
 /node_modules
 
-# testing
+# testing：测试覆盖率目录
 /coverage
 
-# production
+# production生产环境
 build
-.idea
+dist
 /package-lock.json
 
+# WebStorm配置文件
+.idea
+
+# LESS生成的CSS风格文件过滤
+Cab.css
 src/*/*/*.css
 src/*/*.css
 src/*.css
+
+# 基本生成文件Ignore
 src/environment/datum.js
+
+# TypeScript编译后JS文件
 /src/c*/*/Act.Event.js
 /src/c*/*/Act.Event.js.map
 /src/entity/**/*.js
 /src/entity/**/*.js.map
-/specification/api
+
+# API文档工具
+/docs/api
+
+# TypeScript工具typings专用工具文件
 typings
+
 # misc
 .DS_Store
 .env.local
@@ -28,10 +40,10 @@ typings
 .env.test.local
 .env.production.local
 
+# 日志文件
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+# 语言Mapping文件
 *.map
-dist
-Cab.css
