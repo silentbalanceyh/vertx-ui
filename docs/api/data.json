@@ -1,6 +1,7 @@
 {
     "project": {
         "name": "Zero UI Doc",
+        "url": "https://github.com/silentbalanceyh/vertx-ui.git",
         "description": "Zero UI前端文档工具",
         "version": "0.1.0"
     },
@@ -14,7 +15,9 @@
         },
         "src/ux/Ux.Debug.js": {
             "name": "src/ux/Ux.Debug.js",
-            "modules": {},
+            "modules": {
+                "Ux": 1
+            },
             "classes": {
                 "Debug": 1
             },
@@ -71,7 +74,22 @@
             "namespaces": {}
         }
     },
-    "modules": {},
+    "modules": {
+        "Ux": {
+            "name": "Ux",
+            "submodules": {},
+            "elements": {},
+            "classes": {
+                "Debug": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/ux/Ux.Debug.js",
+            "line": 194,
+            "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
+        }
+    },
     "classes": {
         "Debug": {
             "name": "Debug",
@@ -81,8 +99,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
             "file": "src/ux/Ux.Debug.js",
-            "line": 146,
+            "line": 194,
             "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
         }
     },
@@ -119,9 +139,11 @@
         {
             "file": "src/ux/Ux.Debug.js",
             "line": 5,
-            "description": "【内部调用】检查传入对象object是否包含了field字段值\n* 1.传入的object不可以是undefined。\n* 2.传入的field不可以是undefined。\n* 3.object必须包含field，才不会有错误信息输出。",
+            "description": "检查传入对象object是否包含了field字段值\n* 1.传入的object不可以是undefined。\n* 2.传入的field不可以是undefined。\n* 3.object必须包含field，才不会有错误信息输出。",
             "itemtype": "method",
             "name": "ensureArgs",
+            "access": "private",
+            "tagname": "",
             "params": [
                 {
                     "name": "object",
@@ -133,9 +155,6 @@
                     "type": "String"
                 }
             ],
-            "return": {
-                "description": "undefined"
-            },
             "example": [
                 "\n\n     import Debug from './Ux.Debug';\n     // 省略中间代码\n     const reference = ...;\n     Debug.ensureArgs(reference, \"foo\");"
             ],
@@ -144,35 +163,166 @@
         {
             "file": "src/ux/Ux.Debug.js",
             "line": 26,
-            "description": "【内部调用】检查传入的input是否合法\n* 不为null\n* 不为undefined\n* 不为JavaScript的if检查条件中的false",
+            "description": "检查传入的input是否合法\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
             "itemtype": "method",
             "name": "ensureNotNull",
+            "access": "private",
+            "tagname": "",
             "params": [
                 {
                     "name": "input",
                     "description": ""
                 }
             ],
-            "return": {
-                "description": "undefined"
-            },
             "class": "Debug"
         },
         {
             "file": "src/ux/Ux.Debug.js",
-            "line": 40,
-            "description": "【内部调用】检查传入的React中用的Component组件是否合法\n* 不为null\n* 不为undefined\n* 不为JavaScript的if检查条件中的false",
+            "line": 38,
+            "description": "检查传入的React中用的Component组件是否合法\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
             "itemtype": "method",
             "name": "ensureRuntime",
+            "access": "private",
+            "tagname": "",
             "params": [
                 {
                     "name": "reference",
-                    "description": ""
+                    "description": "React中Component组件引用",
+                    "type": "ReactComponent"
                 }
             ],
-            "return": {
-                "description": "undefined"
-            },
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 50,
+            "description": "检查函数中的第二特殊参数`effectKey`是否合法\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureAttr",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "funName",
+                    "description": "待检查的函数名",
+                    "type": "Function"
+                },
+                {
+                    "name": "key",
+                    "description": "待检查的第二参的值",
+                    "type": "String"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 63,
+            "description": "检查发送安全请求时的token是否合法\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureToken",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "token",
+                    "description": "请求中收到的token的值",
+                    "type": "String"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 75,
+            "description": "检查函数调用过程中的参数key是否合法（一般用于高阶检查）\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureKey",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "funName",
+                    "description": "待检查的函数名",
+                    "type": "Function"
+                },
+                {
+                    "name": "key",
+                    "description": "待检查的键值key",
+                    "type": "String"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 88,
+            "description": "Application应用专用配置检查，判断当前应用配置是否初始化\n* 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false",
+            "itemtype": "method",
+            "name": "ensureApp",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "app",
+                    "description": "应用程序配置",
+                    "type": "Object"
+                }
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 100,
+            "description": "React Component中的render相关专用检查（是否合法）",
+            "itemtype": "method",
+            "name": "ensureRender",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "render",
+                    "description": "函数应用",
+                    "type": "Function"
+                },
+                {
+                    "name": "option",
+                    "description": "render过程中的配置",
+                    "type": "Object"
+                }
+            ],
+            "example": [
+                "\n\n     const jsxField = (reference, item = {}, render) => {\n         Dg.ensureRender(render, item);\n         // ...\n     }"
+            ],
+            "class": "Debug"
+        },
+        {
+            "file": "src/ux/Ux.Debug.js",
+            "line": 118,
+            "description": "调用传入函数检查数据类型，如果类型不对则抛出异常",
+            "itemtype": "method",
+            "name": "ensureType",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                },
+                {
+                    "name": "fun",
+                    "description": "",
+                    "type": "Function"
+                },
+                {
+                    "name": "flag",
+                    "description": "期望类型",
+                    "type": "String"
+                }
+            ],
+            "example": [
+                "\n\n     const elementUnique = (data = [], field = \"\", value) => {\n         Dg.ensureType(data, U.isArray, \"Array\");\n         //\n     }"
+            ],
             "class": "Debug"
         },
         {
@@ -197,12 +347,14 @@
                     "description": ""
                 }
             ],
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Encrypt.js",
             "line": 42,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Hoc.js",
@@ -221,63 +373,75 @@
             "return": {
                 "description": "}"
             },
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Normalize.js",
             "line": 8,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Normalize.js",
             "line": 15,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Normalize.js",
             "line": 26,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Normalize.js",
             "line": 36,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Segment.js",
             "line": 7,
             "description": "验证规则属性\nmessage：校验文件\ntype: 可选（内建类型）\nrequired：是否必填\nlen:字段长度\nmin:最小长度\nmax:最大长度\nenum: 枚举类型\npattern:正则表达式校验\ntransform:校验前转换字段值\nvalidator: 自定义校验",
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 29,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 41,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 50,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 84,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 90,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Sign.js",
             "line": 97,
-            "class": ""
+            "class": "",
+            "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Value.js",
@@ -297,7 +461,8 @@
                     "description": ""
                 }
             ],
-            "class": ""
+            "class": "",
+            "module": "Ux"
         }
     ],
     "warnings": [
@@ -311,7 +476,31 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:40"
+            "line": " src/ux/Ux.Debug.js:38"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:50"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:63"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:75"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:88"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:100"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " src/ux/Ux.Debug.js:118"
         },
         {
             "message": "replacing incorrect tag: returns with return",

@@ -1,5 +1,6 @@
 {
     "name": "Zero UI Doc",
+    "url": "https://github.com/silentbalanceyh/vertx-ui.git",
     "description": "Zero UI前端文档工具",
     "version": "0.1.0",
     "options": {

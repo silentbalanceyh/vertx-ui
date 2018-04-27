@@ -3,8 +3,16 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "Debug"
     ],
-    "modules": [],
-    "allModules": [],
+    "modules": [
+        "Ux"
+    ],
+    "allModules": [
+        {
+            "displayName": "Ux",
+            "name": "Ux",
+            "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
+        }
+    ],
     "elements": []
 } };
 });
