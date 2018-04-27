@@ -29,7 +29,7 @@
 
 ## 2. 包更新
 
-目前的版本可使用ncu更新`package.json`的依赖包，
+目前的版本可使用ncu更新`package.json`的依赖包，在根目录运行该脚本：
 
 ```shell
 > ncu
