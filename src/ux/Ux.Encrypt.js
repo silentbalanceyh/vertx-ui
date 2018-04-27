@@ -1,4 +1,5 @@
 import CryptoJS from 'crypto-js';
+
 const _toInt64Bytes = (x) => {
     const bytes = [];
     for (let i = 7; i >= 0; i--) {
@@ -6,7 +7,7 @@ const _toInt64Bytes = (x) => {
         x = x >> 8;
     }
     return bytes;
-}
+};
 
 const _toHexStr = (bytes) => {
     let hex = [];
@@ -15,7 +16,7 @@ const _toHexStr = (bytes) => {
         hex.push((bytes[i] & 0xF).toString(16));
     }
     return hex.join("");
-}
+};
 // MD5加密
 const encryptMD5 = (value) => {
     if (value) {
@@ -27,10 +28,10 @@ const encryptMD5 = (value) => {
 // Base64
 const encryptBase64 = (value) => {
     return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(value));
-}
+};
 const decryptBase64 = (value) => {
     return CryptoJS.enc.Base64.parse(value).toString(CryptoJS.enc.Utf8);
-}
+};
 const encryptHmac512 = (value, secret) => {
     const raw = CryptoJS.HmacSHA512(value, secret);
     const wordArr = raw.words;

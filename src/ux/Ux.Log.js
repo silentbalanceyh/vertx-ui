@@ -125,6 +125,21 @@ const error = (error) => {
     console.groupEnd();
 };
 
+const mock = (request, response, url) => {
+    if (Env.DEBUG && Env.MOCK) {
+        let message = `%c ------> [Error] [Mock] Mock data for api ${url ? url : ""}`;
+        console.groupCollapsed(message, "color:red;font-weight:900");
+        if (request) {
+            console.log("%c [Kid] Mock request -> ", 'color:#99CC33', request);
+        } else {
+            console.log("%c [Kid] Mock request -> ( Promise Mode Directly )", 'color:#99CC33');
+        }
+        console.log("%c [Kid] Mock response -> ", 'color:#0099FF', response);
+        console.groupEnd();
+    }
+    return response;
+};
+
 const debug = (object) => {
     if (Env.DEBUG) {
         console.info(object);
@@ -143,5 +158,6 @@ export default {
     response,
     error,
     debug,
-    filters
+    filters,
+    mock
 }

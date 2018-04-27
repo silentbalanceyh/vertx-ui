@@ -1,37 +1,39 @@
-import Dg from './Ux.Debug';
-import Value from './Ux.Value';
+import Dg from "./Ux.Debug";
+import Value from "./Ux.Value";
 
 const fromHoc = (reference = {}, key = "") => {
-    Dg.ensureKey('fromHoc', key);
+    Dg.ensureKey("fromHoc", key);
     const {$hoc} = reference.state;
     return $hoc ? $hoc._(key) : null;
 };
 const fromRouter = (reference = {}, key = "") => {
-    Dg.ensureKey('fromRouter', key);
+    Dg.ensureKey("fromRouter", key);
     const {$router} = reference.props;
     return $router ? $router._(key) : null;
 };
 const onDatum = (reference, key) => {
-    key = key.replace(/\./g, '_');
-    const targetKey = reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
+    key = key.replace(/\./g, "_");
+    const targetKey =
+        reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
     if (targetKey && targetKey.is()) {
         return targetKey.to();
     }
     return [];
 };
 const formClear = (reference, data) => {
-    const {$clear} = reference.props;
+    const {$clear, form} = reference.props;
+    // 记录切换：从更新表单 -> 添加表单切换
     if ($clear && $clear.is()) {
         const keys = $clear.to();
-        keys.forEach(key => {
-            Value.valueAppend(data, key, undefined);
-        })
+        keys.forEach(key => Value.valueAppend(data, key, undefined));
     }
+    // 记录切换：从更新某条记录 -> 更新另外一条记录
+    const fields = Object.keys(form.getFieldsValue());
+    fields.forEach(key => Value.valueAppend(data, key, undefined));
     return data;
 };
 const formRead = (reference, data = {}) => {
     const {$record} = reference.props;
-    console.info($record);
     if ($record && $record.is()) {
         const record = $record.to();
         for (const key in record) {
@@ -55,7 +57,7 @@ const formReset = (reference, keys = []) => {
 const formHit = (reference, key, value) => {
     const {form} = reference.props;
     if (form) {
-        if (value) {
+        if (undefined !== value) {
             const values = {};
             values[key] = value;
             form.setFieldsValue(values);
@@ -96,5 +98,5 @@ export default {
     onDatum,
     // 从Hoc, Router中提取数据
     fromHoc,
-    fromRouter,
-}
+    fromRouter
+};

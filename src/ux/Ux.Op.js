@@ -39,7 +39,7 @@ const onShow = (execFun, effectKey) => (reference) => (event) => {
     state[effectKey] = true;
     reference.setState(state);
     if (execFun) {
-        execFun(event);
+        execFun(event, reference);
     }
 };
 
@@ -49,7 +49,7 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
     state[effectKey] = false;
     reference.setState(state);
     if (execFun) {
-        execFun(event);
+        execFun(event, reference);
     }
 };
 
@@ -61,8 +61,8 @@ const onSearch = (reference) => (event) => {
         values = form.getFieldsValue();
     }
     State.writeTree(reference, {
-        "query.filters" : values,
-        "datum.data" : undefined
+        "query.filters": values,
+        "datum.data": undefined
     });
 };
 
@@ -73,8 +73,8 @@ const onResetFilter = (reference) => (event) => {
         form.resetFields();
     }
     State.writeTree(reference, {
-        "query.filters" : {},
-        "datum.data" : undefined
+        "query.filters": {},
+        "datum.data": undefined
     });
 };
 const cycleUpdatePageList = (reference = {}, key = 'list', prevProps = {}) => {
@@ -90,15 +90,17 @@ const cycleUpdatePageList = (reference = {}, key = 'list', prevProps = {}) => {
     }
 };
 const cycleDestoryForm = (props = {}, prevProps = {}) => {
-    // Destory
+    // 销毁函数
     const $destory = props.$destory;
     const $prevDestory = prevProps.$destory;
     if ($destory !== $prevDestory && $destory) {
         const {form} = props;
         if (form) {
+            // 因为是销毁，不做Reset，而是直接青空所有表单值
             form.resetFields();
         }
     }
+    // 路由切换时重设表单函数
     const $router = props.$router;
     const $prevRouter = prevProps.$router;
     if ($router && $prevRouter) {
@@ -117,9 +119,9 @@ const cycleUpdateForm = (props = {}, prevProps = {}) => {
         const $key = props.$key;
         const $prevKey = prevProps.$key;
         if ($key !== $prevKey && $key) {
-            fnInit({id : $key});
+            fnInit({id: $key});
         }
-        // Destory
+        // 执行Destory的动作
         cycleDestoryForm(props, prevProps);
     } else {
         console.warn("[ Cycle ] System does not detect 'fnInit' function.", fnInit);
@@ -178,7 +180,9 @@ const connectTopbar = (topbar = {}, key) => {
         });
         topbar.buttons[key] = buttons;
     } else {
-        console.warn("[ Cycle ] Connect topbar.buttons is invalid.");
+        if (!topbar.buttons) {
+            console.warn("[ Cycle ] Connect topbar.buttons is invalid.");
+        }
     }
 };
 export default {

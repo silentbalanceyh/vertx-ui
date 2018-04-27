@@ -4,7 +4,14 @@ import Op from './Ux.Op'
 
 const toProp = (props = {}, ...keys) => {
     const inherits = {};
-    keys.forEach(key => {
+    // Fix Issue
+    let targetFor = [];
+    if (1 === keys.length && Array.prototype.isPrototypeOf(keys[0])) {
+        targetFor = keys[0];
+    } else {
+        targetFor = keys;
+    }
+    targetFor.forEach(key => {
         const targetKey = `$${key}`;
         if (props.hasOwnProperty(targetKey)) {
             inherits[targetKey] = props[targetKey]

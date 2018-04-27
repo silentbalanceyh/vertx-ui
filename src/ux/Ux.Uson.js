@@ -1,18 +1,19 @@
 import U from "underscore";
 import Type from './Ux.Type';
 import Immutable from "immutable";
+import moment from 'moment';
 
 class Uson {
+    constructor(data = []) {
+        this.data = data;
+    }
+
     static create(data = []) {
         if (U.isObject(data)) {
             return new Uson(data);
         } else {
             console.error("[Kid] The input data must be Object.");
         }
-    }
-
-    constructor(data = []) {
-        this.data = data;
     }
 
     add(field, any) {
@@ -25,12 +26,12 @@ class Uson {
         return this;
     }
 
-    keep(keys = []){
+    keep(keys = []) {
         const target = {};
         const reference = this.data;
         keys.forEach(key => {
             const value = reference[key];
-            if(undefined !== value){
+            if (undefined !== value) {
                 target[key] = value;
             }
         });
@@ -38,15 +39,26 @@ class Uson {
         return this;
     }
 
-    convert(mapping = {}){
+    convert(mapping = {}) {
         const target = {};
         const reference = this.data;
         Type.itObject(mapping, (from, to) => {
-            if(reference.hasOwnProperty(from)){
+            if (reference.hasOwnProperty(from)) {
                 target[to] = reference[from];
             }
         });
         this.data = target;
+        return this;
+    }
+
+    date(config = {}) {
+        const values = this.data;
+        Type.itObject(config, (field, pattern = {}) => {
+            if (values.hasOwnProperty(field)) {
+                values[field] = moment(values[field], pattern);
+            }
+        });
+        this.data = values;
         return this;
     }
 

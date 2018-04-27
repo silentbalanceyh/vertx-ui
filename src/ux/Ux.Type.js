@@ -11,7 +11,17 @@ const elementUnique = (data = [], field = "", value) => {
 };
 const elementFirst = (data = [], field = "") => {
     Dg.ensureType(data, U.isArray, "Array");
-    return 0 < data.length ? data[0][field] : undefined;
+    if (0 < data.length) {
+        if (field) {
+            // 如果有field则返回对应字段的值
+            return data[0] ? data[0][field] : undefined;
+        } else {
+            // 否则返回第一个Array中的元素
+            return data[0];
+        }
+    } else {
+        return undefined;
+    }
 };
 const elementFind = (data = [], filters) => {
     Dg.ensureType(data, U.isArray, "Array");
@@ -19,6 +29,7 @@ const elementFind = (data = [], filters) => {
     if (filters) {
         for (const field in filters) {
             if (filters.hasOwnProperty(field)) {
+                // 这里用双等号匹配，用于检查字符串和数值的比较
                 reference = reference.filter(
                     item => item[field] === filters[field]
                 );
@@ -27,7 +38,8 @@ const elementFind = (data = [], filters) => {
     }
     return reference;
 };
-const itElement = (data = [], field = "", itemFun = () => {}) => {
+const itElement = (data = [], field = "", itemFun = () => {
+}) => {
     Dg.ensureType(data, U.isArray, "Array");
     Dg.ensureType(itemFun, U.isFunction, "Function");
     data.forEach(item => {
@@ -36,7 +48,8 @@ const itElement = (data = [], field = "", itemFun = () => {}) => {
         }
     });
 };
-const itObject = (data = {}, executor = () => {}) => {
+const itObject = (data = {}, executor = () => {
+}) => {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
@@ -69,7 +82,8 @@ const elementVertical = (data = [], field = "") => {
     });
     return result;
 };
-const itFull = (data = [], items = {}, fieldFun = () => {}) => {
+const itFull = (data = [], items = {}, fieldFun = () => {
+}) => {
     Dg.ensureType(data, U.isArray, "Array");
     Dg.ensureType(fieldFun, U.isFunction, "Function");
     data.forEach(item => {
@@ -88,16 +102,18 @@ const itFull = (data = [], items = {}, fieldFun = () => {}) => {
         }
     });
 };
-const elementAdd = (array = [], element = {}) => {
-    if ("object" === typeof element) {
-        const filter = array.filter(item => element.key === item.key);
-        if (0 === filter.length) {
-            array.push(element);
-        }
-    } else if ("string" === typeof element || "number" === typeof element) {
-        const $elements = Immutable.fromJS(array);
-        if (!$elements.contains(element)) {
-            array.push(element);
+const elementAdd = (array = [], element) => {
+    if (element) {
+        if ("object" === typeof element) {
+            const filter = array.filter(item => element.key === item.key);
+            if (0 === filter.length) {
+                array.push(element);
+            }
+        } else if ("string" === typeof element || "number" === typeof element) {
+            const $elements = Immutable.fromJS(array);
+            if (!$elements.contains(element)) {
+                array.push(element);
+            }
         }
     }
 };
