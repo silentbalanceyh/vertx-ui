@@ -30,6 +30,15 @@ const mathMultiplication = (seed, ...ops) => {
     });
     return result;
 };
+const mathDivision = (dividend, divisor) => {
+    dividend = parseFloat(dividend);
+    divisor = parseFloat(divisor);
+    if (!isNaN(dividend) && !isNaN(divisor) && 0 !== divisor) {
+        return dividend / divisor;
+    } else {
+        console.info("[Math] dividend / divisor = ", dividend, divisor)
+    }
+};
 /**
  * 根据from和to计算中间的duration差值
  * years - y
@@ -71,13 +80,24 @@ const valueStartTime = (to, duration, mode = 'day') => {
         console.error("[V] Either 'to' or 'duration' must not be undefined.")
     }
 };
+const valueFilter = (data = {}, keys = []) => {
+    const result = {};
+    keys.forEach(key => {
+        if (data.hasOwnProperty(key)) {
+            result[key] = data[key];
+        }
+    });
+    return result;
+};
 export default {
     valueAppend,
     valueDuration,
     valueEndTime,
     valueStartTime,
+    valueFilter,
     // 数学运算
     mathMultiplication,
+    mathDivision,
     // 转换处理
     convertTime
 }

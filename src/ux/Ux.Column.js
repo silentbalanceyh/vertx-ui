@@ -8,6 +8,11 @@ const uiLogical = (reference, config) => text => {
         <span>{ text ? config.$mapping["true"] : config.$mapping["false"] }</span>
     );
 };
+const uiPercent = (reference, config) => text => {
+    return (
+        <span>{ Ux.fmtPercent(text) }</span>
+    )
+};
 const uiDate = (reference, config) => text => {
     return <span>{ Ux.formatDate(text, config.$format) }</span>;
 };
@@ -68,7 +73,8 @@ const RENDERS = {
     CURRENCY : uiCurrency,
     EXPRESSION : uiExpression,
     LINK : uiLink,
-    DATUM : uiDatum
+    DATUM : uiDatum,
+    PERCENT : uiPercent
 };
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns.forEach(column => {

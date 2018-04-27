@@ -37,6 +37,8 @@ const _uiRow = (row) => {
     }
 };
 const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
+    // Fix Issue
+    if (!values) values = {};
     const form = Norm.extractForm(reference);
     const ops = Norm.extractOp(reference);
     const hidden = Norm.extractHidden(reference);

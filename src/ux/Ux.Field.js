@@ -28,11 +28,11 @@ const asyncTrue = (config = {}, params = {}, callback = {}) => {
 };
 
 const asyncData = (config = {}, params = {}, callback = () => {
-}) => {
+}, mock = {}) => {
     const ajaxFn = ajaxFun[config.method ? config.method.toLowerCase() : 'get'];
     const uri = config.uri;
     if (uri && ajaxFn) {
-        const promise = ajaxFn(uri, params);
+        const promise = ajaxFn(uri, params, mock);
         promise.then(data => {
             if (callback) {
                 callback(data);

@@ -1,4 +1,6 @@
 import U from 'underscore'
+import saveAs from "file-saver";
+import v4 from "uuid";
 
 const ensureArgs = (object, key = "") => {
     if (!object || !object.hasOwnProperty(key)) {
@@ -70,6 +72,33 @@ const ensurePositive = (value) => {
         console.error("[Kid] Expected positive number of input value.", value);
     }
 };
+// 环境变量初始化
+const rxDebug = (ux = {}) => {
+    console.info(ux);
+    console.groupCollapsed("[Ux] Assist report as following:");
+    const numCond = 0;
+    const strCond = "";
+    console.info("[If] if(0) = ", (numCond) ? "Yes" : "No");
+    console.info("[If] if(\"\") = ", (strCond) ? "Yes" : "No");
+    console.groupEnd();
+};
+const rxFileJson = (data, ext = "json") => {
+    let finalData = data;
+    if (!Blob.prototype.isPrototypeOf(data)) {
+        finalData = new Blob([JSON.stringify(data, null, 2)], {
+            type: "application/json"
+        });
+    }
+    saveAs(finalData, v4() + "." + ext);
+};
+const rxForm = (reference, data = {}, updated = false) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+        console.groupCollapsed("[Form] Form metadata when initialized. updated = ", updated);
+        console.info("Init Value = ", data);
+        console.info("Init Function = ", reference.props.fnInit);
+        console.groupEnd();
+    }
+};
 export default {
     ensureArgs,
     ensureNotNull,
@@ -82,5 +111,12 @@ export default {
     ensureType,
     ensureLength,
     ensureNumber,
-    ensurePositive
+    ensurePositive,
+    rxDebug,
+    rxFileJson,
+    rxForm,
+    rxMonitor: (data) => {
+        console.info(data);
+        return data;
+    },
 }

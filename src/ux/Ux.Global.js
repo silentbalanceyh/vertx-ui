@@ -3,11 +3,15 @@ import Env from './Ux.Env';
 
 const isLogged = () => {
     const key = Env.KEY_USER;
-    return Store.Session.get(key);
+    let userData = Store.Session.get(key);
+    if (!userData) userData = {};
+    return userData;
 };
 const isInit = () => {
     const key = Env.KEY_APP;
-    return Store.Storage.get(key);
+    let appData = Store.Storage.get(key);
+    if (!appData) appData = {};
+    return appData;
 };
 
 const toLogout = () => {

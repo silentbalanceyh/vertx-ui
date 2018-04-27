@@ -1,5 +1,6 @@
-import { Modal } from 'antd';
-import Prop from './Ux.Prop'
+import {Modal} from 'antd';
+import Prop from './Ux.Prop';
+import Expr from './Ux.Expr';
 import U from 'underscore'
 
 const _captureKey = (reference, key) => {
@@ -14,8 +15,8 @@ const _captureKey = (reference, key) => {
 
 const _buildConfig = (reference, message, fnSuccess, key) => {
     const config = {
-        title : _captureKey(reference, key),
-        content : message
+        title: _captureKey(reference, key),
+        content: message
     };
     if (U.isFunction(fnSuccess)) {
         config.onOk = fnSuccess;
@@ -28,13 +29,23 @@ const showError = (reference, message, fnSuccess) => Modal.error(_buildConfig(re
 const showSuccess = (reference, message, fnSuccess) => Modal.success(_buildConfig(reference, message, fnSuccess, "success"));
 
 const _dialogFun = {
-    success : showSuccess,
-    error : showError
+    success: showSuccess,
+    error: showError
 };
-const showDialog = (reference, key, fnSuccess) => {
+/**
+ * 添加参数信息
+ * @param reference
+ * @param key
+ * @param fnSuccess
+ * @param params
+ */
+const showDialog = (reference, key, fnSuccess, params) => {
     const modal = Prop.fromHoc(reference, "modal");
     const fun = _dialogFun[modal.type];
-    const message = modal.message[key];
+    let message = modal.message[key];
+    if (params) {
+        message = Expr.formatExpr(message, params);
+    }
     fun(reference, message, fnSuccess);
 };
 const fadeIn = (reference = {}) => {
