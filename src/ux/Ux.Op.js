@@ -6,6 +6,13 @@ import Immutable from 'immutable';
 import Params from './Ux.Param';
 import U from 'underscore'
 
+/**
+ * 【高阶函数：三阶】提交专用三阶生成函数
+ * @method onSubmit
+ * @param execFun 二阶执行函数
+ * @param effectKey 效果key
+ * @return {function(*=): Function}
+ */
 const onSubmit = (execFun, effectKey) => (reference) => (event) => {
     Dg.ensureAttr("onSubmit", effectKey);
     event.preventDefault();
@@ -32,7 +39,13 @@ const onSubmit = (execFun, effectKey) => (reference) => (event) => {
         }
     })
 };
-
+/**
+ * 【高阶函数：三阶】用于显示对话框
+ * @method onShow
+ * @param execFun 二阶执行函数
+ * @param effectKey 效果key
+ * @return {function(*=): Function}
+ */
 const onShow = (execFun, effectKey) => (reference) => (event) => {
     Dg.ensureAttr("onShow", effectKey);
     const state = {};
@@ -42,7 +55,13 @@ const onShow = (execFun, effectKey) => (reference) => (event) => {
         execFun(event, reference);
     }
 };
-
+/**
+ * 【高阶函数：三阶】用于隐藏对话框
+ * @method onHide
+ * @param execFun 二阶执行函数
+ * @param effectKey 效果key
+ * @return {function(*=): Function}
+ */
 const onHide = (execFun, effectKey) => (reference) => (event) => {
     Dg.ensureAttr("onHide", effectKey);
     const state = {};
@@ -52,7 +71,12 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
         execFun(event, reference);
     }
 };
-
+/**
+ * 【高阶函数：二阶】搜索专用函数
+ * @method onSearch
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {Function}
+ */
 const onSearch = (reference) => (event) => {
     event.preventDefault();
     const {form} = reference.props;
@@ -65,7 +89,12 @@ const onSearch = (reference) => (event) => {
         "datum.data": undefined
     });
 };
-
+/**
+ * 【高阶函数：二阶】重置搜索条件函数，用于高级搜索专用
+ * @method onResetFilter
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {Function}
+ */
 const onResetFilter = (reference) => (event) => {
     event.preventDefault();
     const {form} = reference.props;
@@ -77,6 +106,14 @@ const onResetFilter = (reference) => (event) => {
         "datum.data": undefined
     });
 };
+/**
+ *
+ * componentDidUpdate中的List专用生命周期函数
+ * @method cycleUpdatePageList
+ * @param {ReactComponent} reference React对应组件引用
+ * @param key 数据对应的props中的键值，默认使用`$list`；
+ * @param prevProps 之前的属性信息
+ */
 const cycleUpdatePageList = (reference = {}, key = 'list', prevProps = {}) => {
     const data = reference.props[`$${key}`];
     if (!data) {
@@ -89,6 +126,12 @@ const cycleUpdatePageList = (reference = {}, key = 'list', prevProps = {}) => {
         }
     }
 };
+/**
+ * componentDidUnmount生命的Form专用函数
+ * @method cycleDestoryForm
+ * @param props 当前属性
+ * @param prevProps 之前属性
+ */
 const cycleDestoryForm = (props = {}, prevProps = {}) => {
     // 销毁函数
     const $destory = props.$destory;
@@ -113,6 +156,12 @@ const cycleDestoryForm = (props = {}, prevProps = {}) => {
         }
     }
 };
+/**
+ * componentDidUpdate的Form组件生命周期专用函数
+ * @method cycleUpdateForm
+ * @param props 当前属性
+ * @param prevProps 之前属性
+ */
 const cycleUpdateForm = (props = {}, prevProps = {}) => {
     const {fnInit} = props;
     if (fnInit) {
@@ -127,6 +176,12 @@ const cycleUpdateForm = (props = {}, prevProps = {}) => {
         console.warn("[ Cycle ] System does not detect 'fnInit' function.", fnInit);
     }
 };
+/**
+ * 【高阶函数：二阶】高级搜索专用函数调用，用于分页列表中的分页、过滤、排序同时处理的函数，和Table组件的onChange配合使用
+ * @method onAdvanced
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {Function}
+ */
 const onAdvanced = (reference = {}) => (pagination, filters, sorter) => {
     const {$query, fnData, fnOut} = reference.props;
     if (fnData && fnOut) {
@@ -147,6 +202,11 @@ const onAdvanced = (reference = {}) => (pagination, filters, sorter) => {
         fnData(query);
     }
 };
+/**
+ * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器
+ * @method connectButton
+ * @param dialog 传入的dialog窗口配置
+ */
 const connectButton = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
@@ -164,6 +224,12 @@ const connectButton = (dialog = {}) => {
         }
     }
 };
+/**
+ * 顶部工具栏专用连接函数，连接Html元素并设置不同button函数
+ * @method connectTopbar
+ * @param topbar 顶部工具栏的工具配置
+ * @param key 待连接的配置键值
+ */
 const connectTopbar = (topbar = {}, key) => {
     if (key && topbar.buttons && Array.prototype.isPrototypeOf(topbar.buttons[key])) {
         const buttons = Immutable.fromJS(topbar.buttons[key]).toJS();
@@ -185,6 +251,10 @@ const connectTopbar = (topbar = {}, key) => {
         }
     }
 };
+/**
+ * @class Op
+ * @description 操作专用类
+ */
 export default {
     onSubmit,
     onShow,

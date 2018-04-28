@@ -129,6 +129,60 @@
                                     <li>
                                         <a href="../classes/Global.html">Global</a>
                                     </li>
+                                    <li>
+                                        <a href="../classes/Hoc.html">Hoc</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Html.html">Html</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Icon.html">Icon</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Jsx.html">Jsx</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Log.html">Log</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Normalize.html">Normalize</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Op.html">Op</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Option.html">Option</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Param.html">Param</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Prop.html">Prop</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Random.html">Random</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Redux.html">Redux</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Sorter.html">Sorter</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/State.html">State</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Store.html">Store</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Type.html">Type</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Validator.html">Validator</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Value.html">Value</a>
+                                    </li>
                             </ol>
                         </div>
                     </div>
@@ -151,14 +205,14 @@ import Html from &#x27;./Ux.Html&#x27;;
 
 const limitNumber = (length) =&gt; value =&gt; {
     if (value) {
-        /** 整数限制函数 */
+        // 整数限制
         value = value.toString();
         if (1 === value.length) {
             value = value.replace(/[^1-9]/g, &quot;&quot;);
         } else {
             value = value.replace(/\D/g, &quot;&quot;);
         }
-        /** 长度限制 */
+        // 长度限制
         if (0 &lt; length) {
             if (length &lt; value.length) {
                 value = value.substring(0, length);
@@ -169,7 +223,7 @@ const limitNumber = (length) =&gt; value =&gt; {
 };
 const limitDecimal = (length, scale = 2) =&gt; value =&gt; {
     if (value) {
-        /** 2.正数输入限制 **/
+        // 2.正数输入限制
         value = value.toString();
         value = value.replace(/[^\d.]/g, &quot;&quot;); //清除“数字”和“.”以外的字符
         value = value.replace(/\.{2,}/g, &quot;.&quot;); //只保留第一个. 清除多余的
@@ -179,7 +233,7 @@ const limitDecimal = (length, scale = 2) =&gt; value =&gt; {
             .replace(&quot;$#$&quot;, &quot;.&quot;);
         const scaleReg = new RegExp(&#x60;(\\-)*(\\d+)\\.(\\d{${scale}}).&#x60;);
         value = value.replace(scaleReg, &#x60;$1$2.$3&#x60;); //只能输入两个小数
-        /** 3.长度输入限制 **/
+        // 3.长度输入限制
         if (length &lt; value.length) {
             value = value.substring(0, length);
         }
@@ -188,11 +242,11 @@ const limitDecimal = (length, scale = 2) =&gt; value =&gt; {
     return value;
 };
 const normalizer = {
-    decimal:limitDecimal,
-    number:limitNumber
+    decimal: limitDecimal,
+    number: limitNumber
 };
 const mountNormalizer = (reference, item = {}) =&gt; {
-    if(item.optionConfig &amp;&amp; item.optionConfig.normalize){
+    if (item.optionConfig &amp;&amp; item.optionConfig.normalize) {
         const expr = item.optionConfig.normalize;
         if (expr) {
             const segments = expr.toString().split(&quot;,&quot;);
@@ -217,29 +271,40 @@ const mountNormalizer = (reference, item = {}) =&gt; {
     }
 };
 const mountErrorFocus = (reference, item) =&gt; {
-    if(item.field){
-        if(!item.optionJsx) item.optionJsx = {};
+    if (item.field) {
+        if (!item.optionJsx) item.optionJsx = {};
         // onFocus
         item.optionJsx.onFocus = Html.htmlErrorFocus(item);
         // onBlur
         item.optionJsx.onBlur = Html.htmlErrorBlur(item);
     }
 };
+/**
+ * 处理当前Form中的input控件专用信息
+ * @method extractForm
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {*}
+ */
 const extractForm = (reference = {}) =&gt; {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
     const form = $hoc._(&quot;form&quot;);
     Dg.ensureNotNull(form);
-    if(form){
+    if (form) {
         form.ui = Type.itMatrix(form.ui, (item) =&gt; Validator.mountValidator(reference, item));
         form.ui = Type.itMatrix(form.ui, (item) =&gt; mountNormalizer(reference, item));
         form.ui = Type.itMatrix(form.ui, (item) =&gt; mountErrorFocus(reference, item));
         return form.ui;
-    }else{
+    } else {
         return [];
     }
 };
-
+/**
+ * 处理当前Form中的button或操作按钮配置信息
+ * @method extractOp
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {any}
+ */
 const extractOp = (reference = {}) =&gt; {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
@@ -247,7 +312,12 @@ const extractOp = (reference = {}) =&gt; {
     Dg.ensureNotNull(form);
     return form ? form.op : [];
 };
-
+/**
+ * 处理type = hidden类型的配置信息
+ * @method extractHidden
+ * @param {ReactComponent} reference React对应组件引用
+ * @return {{}}
+ */
 const extractHidden = (reference = {}) =&gt; {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
@@ -262,6 +332,10 @@ const extractHidden = (reference = {}) =&gt; {
     }
     return hidden;
 };
+/**
+ * @class Normalize
+ * @description 专用Form配置处理类，它的方法大部分都是内部使用
+ */
 export default {
     // 读取Form配置专用方法
     extractForm,

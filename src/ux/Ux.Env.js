@@ -76,27 +76,15 @@ export default {
     MAP_KEY: process.env.$MAP_KEY,
     DEBUG: Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG),
     MOCK: Boolean("development" === process.env.NODE_ENV && process.env.$MOCK),
-    /**
-     * 专用常量文件，描述HTTP方法
-     * @method HTTP_METHOD
-     */
     HTTP_METHOD: {
         GET: "get",
         POST: "post",
         PUT: "put",
         DELETE: "delete"
     },
-    /**
-     * 专用常量文件，描述MIME媒体类型
-     * @method MIMES
-     */
     MIMES: {
         JSON: "application/json"
     },
-    /**
-     * 专用常量文件，描述HTTP协议头类型
-     * @method HTTP11
-     */
     HTTP11: {
         "ACCEPT": "Accept",
         "ACCEPT_CHARSET": "Accept-Charset",

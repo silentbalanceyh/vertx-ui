@@ -20,8 +20,8 @@ const parseCriteria = (reference, path = "") => {
 
 };
 const parser = {
-    p : parseProp,
-    q : parseCriteria
+    p: parseProp,
+    q: parseCriteria
 };
 const parseExpression = (reference, expr = "") => {
     let returnValue;
@@ -52,6 +52,12 @@ const parseExpression = (reference, expr = "") => {
     console.groupEnd();
     return returnValue;
 };
+/**
+ * 针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理
+ * @method parseAjax
+ * @param {ReactComponent} reference React对应组件引用
+ * @param parameters 传入的参数值信息
+ */
 const parseAjax = (reference, parameters = {}) => {
     const result = {};
     for (const field in parameters) {
@@ -83,12 +89,19 @@ const initCond = (reference = {}) => {
     const {$metadata = {}} = reference.props;
     return $metadata.cond ? $metadata.cond : {};
 };
+/**
+ * 针对Query的专用参数解析器
+ * @method parseQuery
+ * @param {ReactComponent} reference React对应组件引用
+ * @param $query 查询参数相关信息
+ * @return {*}
+ */
 const parseQuery = (reference = {}, $query) => {
     Logger.filters(reference, {
-        input : $query,
-        query : reference.props.$query,
-        filters : reference.props.$filters,
-        cond : reference.props.$metadata ? reference.props.$metadata.cond : {}
+        input: $query,
+        query: reference.props.$query,
+        filters: reference.props.$filters,
+        cond: reference.props.$metadata ? reference.props.$metadata.cond : {}
     });
     const queryData = initQuery(reference, $query);
     // 条件解析
@@ -120,6 +133,10 @@ const parseQuery = (reference = {}, $query) => {
     queryData.criteria = criteria;
     return queryData;
 };
+/**
+ * @class Param
+ * @description 复杂参数解析器
+ */
 export default {
     parseAjax,
     parseQuery

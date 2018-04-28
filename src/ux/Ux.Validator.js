@@ -36,8 +36,8 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
             // 远程调用
             Field.asyncTrue(rule.config, parameters, {
                 // 存在即返回message
-                success : () => callback(rule.message),
-                failure : () => callback()
+                success: () => callback(rule.message),
+                failure: () => callback()
             });
         } else {
             callback();
@@ -88,7 +88,12 @@ const VERFIERS = {
     required,
     after
 };
-
+/**
+ * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
+ * @method mountValidator
+ * @param {ReactComponent} reference React对应组件引用
+ * @param item
+ */
 const mountValidator = (refereuce = {}, item = {}) => {
     if (item.optionConfig) {
         const rules = item.optionConfig.rules;
@@ -116,6 +121,10 @@ const mountValidator = (refereuce = {}, item = {}) => {
         }
     }
 };
+/**
+ * @class Validator
+ * @description Ant Design验证规则横切注入专用
+ */
 export default {
     mountValidator
 }

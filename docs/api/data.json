@@ -128,21 +128,108 @@
         "src/ux/Ux.Hoc.js": {
             "name": "src/ux/Ux.Hoc.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Hoc": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Html.js": {
+            "name": "src/ux/Ux.Html.js",
+            "modules": {},
+            "classes": {
+                "Html": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Icon.js": {
+            "name": "src/ux/Ux.Icon.js",
+            "modules": {},
+            "classes": {
+                "Icon": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Jsx.js": {
+            "name": "src/ux/Ux.Jsx.js",
+            "modules": {},
+            "classes": {
+                "Jsx": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Log.js": {
+            "name": "src/ux/Ux.Log.js",
+            "modules": {},
+            "classes": {
+                "Log": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/ux/Ux.Normalize.js": {
             "name": "src/ux/Ux.Normalize.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Normalize": 1
+            },
             "fors": {},
             "namespaces": {}
         },
-        "src/ux/Ux.Segment.js": {
-            "name": "src/ux/Ux.Segment.js",
+        "src/ux/Ux.Op.js": {
+            "name": "src/ux/Ux.Op.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Op": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Option.js": {
+            "name": "src/ux/Ux.Option.js",
+            "modules": {},
+            "classes": {
+                "Option": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Param.js": {
+            "name": "src/ux/Ux.Param.js",
+            "modules": {},
+            "classes": {
+                "Param": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Prop.js": {
+            "name": "src/ux/Ux.Prop.js",
+            "modules": {},
+            "classes": {
+                "Prop": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Random.js": {
+            "name": "src/ux/Ux.Random.js",
+            "modules": {},
+            "classes": {
+                "Random": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Redux.js": {
+            "name": "src/ux/Ux.Redux.js",
+            "modules": {},
+            "classes": {
+                "Redux": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -153,10 +240,57 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ux/Ux.Sorter.js": {
+            "name": "src/ux/Ux.Sorter.js",
+            "modules": {},
+            "classes": {
+                "Sorter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.State.js": {
+            "name": "src/ux/Ux.State.js",
+            "modules": {},
+            "classes": {
+                "State": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Store.js": {
+            "name": "src/ux/Ux.Store.js",
+            "modules": {},
+            "classes": {
+                "Store": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Type.js": {
+            "name": "src/ux/Ux.Type.js",
+            "modules": {},
+            "classes": {
+                "Type": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Validator.js": {
+            "name": "src/ux/Ux.Validator.js",
+            "modules": {},
+            "classes": {
+                "Validator": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ux/Ux.Value.js": {
             "name": "src/ux/Ux.Value.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Value": 1
+            },
             "fors": {},
             "namespaces": {}
         }
@@ -179,13 +313,31 @@
                 "Expr": 1,
                 "Field": 1,
                 "Format": 1,
-                "Global": 1
+                "Global": 1,
+                "Hoc": 1,
+                "Html": 1,
+                "Icon": 1,
+                "Jsx": 1,
+                "Log": 1,
+                "Normalize": 1,
+                "Op": 1,
+                "Option": 1,
+                "Param": 1,
+                "Prop": 1,
+                "Random": 1,
+                "Redux": 1,
+                "Sorter": 1,
+                "State": 1,
+                "Store": 1,
+                "Type": 1,
+                "Validator": 1,
+                "Value": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/ux/Ux.Global.js",
-            "line": 27,
+            "file": "src/ux/Ux.Value.js",
+            "line": 142,
             "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
         }
     },
@@ -365,8 +517,260 @@
             "module": "Ux",
             "namespace": "",
             "file": "src/ux/Ux.Global.js",
-            "line": 27,
+            "line": 47,
             "description": "全局专用业务函数"
+        },
+        "Hoc": {
+            "name": "Hoc",
+            "shortname": "Hoc",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 139,
+            "description": "专用Hoc解释器"
+        },
+        "Html": {
+            "name": "Html",
+            "shortname": "Html",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Html.js",
+            "line": 63,
+            "description": "原生Html元素连接类"
+        },
+        "Icon": {
+            "name": "Icon",
+            "shortname": "Icon",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Icon.js",
+            "line": 20,
+            "description": "图标处理"
+        },
+        "Jsx": {
+            "name": "Jsx",
+            "shortname": "Jsx",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Jsx.js",
+            "line": 149,
+            "description": "字段专用输出函数"
+        },
+        "Log": {
+            "name": "Log",
+            "shortname": "Log",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Log.js",
+            "line": 224,
+            "description": "日志专用类，支持不同组件的彩色日志"
+        },
+        "Normalize": {
+            "name": "Normalize",
+            "shortname": "Normalize",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Normalize.js",
+            "line": 135,
+            "description": "专用Form配置处理类，它的方法大部分都是内部使用"
+        },
+        "Op": {
+            "name": "Op",
+            "shortname": "Op",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Op.js",
+            "line": 254,
+            "description": "操作专用类"
+        },
+        "Option": {
+            "name": "Option",
+            "shortname": "Option",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Option.js",
+            "line": 21,
+            "description": "配置项专用静态处理类"
+        },
+        "Param": {
+            "name": "Param",
+            "shortname": "Param",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Param.js",
+            "line": 136,
+            "description": "复杂参数解析器"
+        },
+        "Prop": {
+            "name": "Prop",
+            "shortname": "Prop",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Prop.js",
+            "line": 151,
+            "description": "属性专用处理器"
+        },
+        "Random": {
+            "name": "Random",
+            "shortname": "Random",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Random.js",
+            "line": 16,
+            "description": "专用随机类"
+        },
+        "Redux": {
+            "name": "Redux",
+            "shortname": "Redux",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Redux.js",
+            "line": 28,
+            "description": "专用State状态树中的读取器"
+        },
+        "Sorter": {
+            "name": "Sorter",
+            "shortname": "Sorter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Sorter.js",
+            "line": 18,
+            "description": "Table组件排序专用函数，对应列中的sorter"
+        },
+        "State": {
+            "name": "State",
+            "shortname": "State",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.State.js",
+            "line": 17,
+            "description": "回写状态树专用方法"
+        },
+        "Store": {
+            "name": "Store",
+            "shortname": "Store",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Store.js",
+            "line": 63,
+            "description": "访问Session/Local的Storage专用"
+        },
+        "Type": {
+            "name": "Type",
+            "shortname": "Type",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Type.js",
+            "line": 200,
+            "description": "复杂数据结构计算"
+        },
+        "Validator": {
+            "name": "Validator",
+            "shortname": "Validator",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Validator.js",
+            "line": 124,
+            "description": "Ant Design验证规则横切注入专用"
+        },
+        "Value": {
+            "name": "Value",
+            "shortname": "Value",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Value.js",
+            "line": 142,
+            "description": "数值计算器"
         }
     },
     "elements": {},
@@ -1648,34 +2052,7 @@
         },
         {
             "file": "src/ux/Ux.Env.js",
-            "line": 79,
-            "description": "专用常量文件，描述HTTP方法",
-            "itemtype": "method",
-            "name": "HTTP_METHOD",
-            "class": "Env",
-            "module": "Ux"
-        },
-        {
-            "file": "src/ux/Ux.Env.js",
-            "line": 89,
-            "description": "专用常量文件，描述MIME媒体类型",
-            "itemtype": "method",
-            "name": "MIMES",
-            "class": "Env",
-            "module": "Ux"
-        },
-        {
-            "file": "src/ux/Ux.Env.js",
-            "line": 96,
-            "description": "专用常量文件，描述HTTP协议头类型",
-            "itemtype": "method",
-            "name": "HTTP11",
-            "class": "Env",
-            "module": "Ux"
-        },
-        {
-            "file": "src/ux/Ux.Env.js",
-            "line": 146,
+            "line": 134,
             "description": "Redux专用状态树的写入方法",
             "itemtype": "method",
             "name": "dataOut",
@@ -1690,7 +2067,7 @@
         },
         {
             "file": "src/ux/Ux.Env.js",
-            "line": 152,
+            "line": 140,
             "description": "Redux专用状态树的读取方法",
             "itemtype": "method",
             "name": "dataIn",
@@ -1705,7 +2082,7 @@
         },
         {
             "file": "src/ux/Ux.Env.js",
-            "line": 163,
+            "line": 151,
             "description": "Redux中的Action专用创建函数",
             "itemtype": "method",
             "name": "createAction",
@@ -1720,7 +2097,7 @@
         },
         {
             "file": "src/ux/Ux.Env.js",
-            "line": 170,
+            "line": 158,
             "description": "专用zero的注解",
             "itemtype": "method",
             "name": "zero",
@@ -1919,170 +2296,2086 @@
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Hoc.js",
-            "line": 68,
-            "description": "fnShow:对话框弹出窗口\nfnHide:对话框关闭窗口\nfnOut:Redux专用写函数\n$dialog:对应Hoc中的_window，对话框参数\n$metadata:对应Hoc中的_pagelist, 页面专用元数据\n$query:当前页面的查询条件信息",
+            "file": "src/ux/Ux.Global.js",
+            "line": 4,
+            "description": "检查环境变量中的Session值判断用户是否登录",
+            "itemtype": "method",
+            "name": "isLogged",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Global",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Global.js",
+            "line": 15,
+            "description": "当前应用是否初始化完成，初始化完成后将应用配置放到应用Key中",
+            "itemtype": "method",
+            "name": "isInit",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Global",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Global.js",
+            "line": 26,
+            "description": "当前用户的注销行为",
+            "itemtype": "method",
+            "name": "toLogout",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Global",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Global.js",
+            "line": 35,
+            "description": "配合React Router执行登录控制，如果未登录则直接转发到登录界面\n* reference引用中必须包含$router用于路由转发",
+            "itemtype": "method",
+            "name": "isAuthorized",
             "params": [
                 {
                     "name": "reference",
-                    "description": ""
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "class": "Global",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 5,
+            "description": "通用属性读取相关信息",
+            "itemtype": "method",
+            "name": "toProp",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "传入的React属性"
+                },
+                {
+                    "name": "keys",
+                    "description": "需提取的所有keys属性名集"
+                }
+            ],
+            "class": "Hoc",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 28,
+            "description": "读取Tabular和Assist专用属性：`$t_`和`$a_`开头的属性值。",
+            "itemtype": "method",
+            "name": "toDatum",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "传入的React属性"
+                },
+                {
+                    "name": "keys",
+                    "description": "需提取的所有keys属性名集"
+                }
+            ],
+            "class": "Hoc",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 55,
+            "description": "读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。",
+            "itemtype": "method",
+            "name": "toEffect",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "传入的React状态"
+                }
+            ],
+            "class": "Hoc",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 69,
+            "description": "读取组件的全称，和Cab.json中的namespace进行配合读取当前组件的全名",
+            "itemtype": "method",
+            "name": "toFullName",
+            "params": [
+                {
+                    "name": "Component",
+                    "description": "被封装的组件"
+                },
+                {
+                    "name": "Cab",
+                    "description": "链接资源文件",
+                    "type": "JSON"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前组件的名称（用于日志调试）",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Hoc",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 85,
+            "description": "从Uri中读取Query Parameter查询参数",
+            "itemtype": "method",
+            "name": "toQueryParameter",
+            "params": [
+                {
+                    "name": "name",
+                    "description": "待读取的参数名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Hoc",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Hoc.js",
+            "line": 97,
+            "description": "PageList组件专用继承方法\n* fnShow:对话框弹出窗口\n* fnHide:对话框关闭窗口\n* fnOut:Redux专用写函数\n* $dialog:对应Hoc中的_window，对话框参数\n* $metadata:对应Hoc中的_pagelist, 页面专用元数据\n* $query:当前页面的查询条件信息",
+            "itemtype": "method",
+            "name": "toPageList",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
                 },
                 {
                     "name": "FormComponent",
-                    "description": ""
+                    "description": "是否包含传入组件",
+                    "type": "JSX"
                 }
             ],
             "return": {
                 "description": "}"
             },
-            "class": "",
+            "class": "Hoc",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Normalize.js",
-            "line": 8,
-            "class": "",
+            "file": "src/ux/Ux.Html.js",
+            "line": 3,
+            "description": "读取Html原生组件的只读状态（必须在Mount之后）",
+            "itemtype": "method",
+            "name": "htmlReadOnly",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Html组件的ID"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Html",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Normalize.js",
+            "file": "src/ux/Ux.Html.js",
             "line": 15,
-            "class": "",
+            "description": "读取Html原生组件的禁用状态（必须在Mount之后）",
+            "itemtype": "method",
+            "name": "htmlDisabled",
+            "params": [
+                {
+                    "name": "id",
+                    "description": "Html组件的ID"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Html",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Normalize.js",
-            "line": 26,
-            "class": "",
+            "file": "src/ux/Ux.Html.js",
+            "line": 45,
+            "description": "聚焦输入组件时的错误验证（必须在Mount之后）",
+            "itemtype": "method",
+            "name": "htmlErrorFocus",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "Html",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Normalize.js",
-            "line": 36,
-            "class": "",
+            "file": "src/ux/Ux.Html.js",
+            "line": 54,
+            "description": "焦点移除时候的错误验证（必须在Mount之后）",
+            "itemtype": "method",
+            "name": "htmlErrorBlur",
+            "params": [
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "Html",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Segment.js",
-            "line": 7,
+            "file": "src/ux/Ux.Icon.js",
+            "line": 4,
+            "description": "针对图标进行处理，类型包含icon和image两种\n* 如果type以`img:`开头，则使用`<img/>`标签\n* 其他情况则使用Ant Design中的`<Icon/>`处理",
+            "itemtype": "method",
+            "name": "uiIcon",
+            "params": [
+                {
+                    "name": "type",
+                    "description": "传入的字符串值",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Icon",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Jsx.js",
+            "line": 9,
             "description": "验证规则属性\nmessage：校验文件\ntype: 可选（内建类型）\nrequired：是否必填\nlen:字段长度\nmin:最小长度\nmax:最大长度\nenum: 枚举类型\npattern:正则表达式校验\ntransform:校验前转换字段值\nvalidator: 自定义校验",
-            "class": "",
+            "itemtype": "method",
+            "name": "_uiDisplay",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "row",
+                    "description": "显示行数据"
+                }
+            ],
+            "class": "Jsx",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
-            "line": 29,
-            "class": "",
+            "file": "src/ux/Ux.Jsx.js",
+            "line": 44,
+            "description": "Jsx单字段的Render处理",
+            "itemtype": "method",
+            "name": "jsxField",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "item",
+                    "description": "Form中的Item配置信息"
+                },
+                {
+                    "name": "render",
+                    "description": "专用render函数"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Jsx",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
-            "line": 41,
-            "class": "",
+            "file": "src/ux/Ux.Jsx.js",
+            "line": 68,
+            "description": "Jsx单行字段的Render处理",
+            "itemtype": "method",
+            "name": "jsxFieldRow",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "item",
+                    "description": ""
+                },
+                {
+                    "name": "render",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Jsx",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
-            "line": 50,
-            "class": "",
+            "file": "src/ux/Ux.Jsx.js",
+            "line": 88,
+            "description": "针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染",
+            "itemtype": "method",
+            "name": "uiFieldForm",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "renders",
+                    "description": "每个字段不同的render方法"
+                },
+                {
+                    "name": "column",
+                    "description": "当前Form的列数量"
+                },
+                {
+                    "name": "values",
+                    "description": "Form的初始化值"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Jsx",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
-            "line": 84,
-            "class": "",
+            "file": "src/ux/Ux.Log.js",
+            "line": 17,
+            "description": "【开发模式】可重用控件组件日志打印",
+            "itemtype": "method",
+            "name": "control",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
-            "line": 90,
-            "class": "",
+            "file": "src/ux/Ux.Log.js",
+            "line": 30,
+            "description": "【开发模式】页面组件日志打印",
+            "itemtype": "method",
+            "name": "page",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
             "module": "Ux"
         },
         {
-            "file": "src/ux/Ux.Sign.js",
+            "file": "src/ux/Ux.Log.js",
+            "line": 43,
+            "description": "【开发模式】纯函数组件日志打印",
+            "itemtype": "method",
+            "name": "stateless",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 59,
+            "description": "【开发模式】Layout组件日志打印",
+            "itemtype": "method",
+            "name": "container",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 72,
+            "description": "【开发模式】Page中的其他自定义组件日志打印",
+            "itemtype": "method",
+            "name": "component",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 85,
+            "description": "【开发模式】Form专用组件日志打印",
+            "itemtype": "method",
+            "name": "form",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "Name",
+                    "description": "当前控件名称"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 98,
+            "description": "【开发模式】过滤参数专用",
+            "itemtype": "method",
+            "name": "filters",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "input",
+                    "description": "输入的Query参数"
+                },
+                {
+                    "name": "query",
+                    "description": "Prop属性中的Query参数"
+                },
+                {
+                    "name": "filters",
+                    "description": "最终搜索用的Query参数"
+                },
+                {
+                    "name": "cond",
+                    "description": "搜索条件"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 120,
+            "description": "【开发模式】签名专用函数",
+            "itemtype": "method",
+            "name": "sign",
+            "params": [
+                {
+                    "name": "uri",
+                    "description": "请求的Uri地址"
+                },
+                {
+                    "name": "method",
+                    "description": "请求的Http方法"
+                },
+                {
+                    "name": "parameters",
+                    "description": "请求的参数信息"
+                },
+                {
+                    "name": "seed",
+                    "description": "签名种子值"
+                },
+                {
+                    "name": "sig",
+                    "description": "签名最终结果"
+                },
+                {
+                    "name": "secret",
+                    "description": "签名的secret"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 143,
+            "description": "【开发模式】打印请求数据",
+            "itemtype": "method",
+            "name": "request",
+            "params": [
+                {
+                    "name": "uri",
+                    "description": "请求的Uri地址"
+                },
+                {
+                    "name": "method",
+                    "description": "请求的Http方法"
+                },
+                {
+                    "name": "parameters",
+                    "description": "请求的参数信息"
+                },
+                {
+                    "name": "token",
+                    "description": "当前请求的token"
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 161,
+            "description": "【开发模式】打印响应信息",
+            "itemtype": "method",
+            "name": "response",
+            "params": [
+                {
+                    "name": "err",
+                    "description": "Ajax的错误对象"
+                },
+                {
+                    "name": "res",
+                    "description": "Ajax的正确响应"
+                },
+                {
+                    "name": "method",
+                    "description": "Http方法"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 180,
+            "description": "直接打印错误信息（红色文字打印）",
+            "itemtype": "method",
+            "name": "error",
+            "params": [
+                {
+                    "name": "error",
+                    "description": ""
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 192,
+            "description": "【开发模式，并且开启Mock】打印Mock数据",
+            "itemtype": "method",
+            "name": "mock",
+            "params": [
+                {
+                    "name": "request",
+                    "description": "请求数据",
+                    "type": "Request"
+                },
+                {
+                    "name": "response",
+                    "description": "响应数据",
+                    "type": "Response"
+                },
+                {
+                    "name": "url",
+                    "description": "请求的url",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Log.js",
+            "line": 214,
+            "description": "【开发模式】直接打印数据",
+            "itemtype": "method",
+            "name": "debug",
+            "params": [
+                {
+                    "name": "object",
+                    "description": ""
+                }
+            ],
+            "class": "Log",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Normalize.js",
+            "line": 82,
+            "description": "处理当前Form中的input控件专用信息",
+            "itemtype": "method",
+            "name": "extractForm",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Normalize",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Normalize.js",
+            "line": 102,
+            "description": "处理当前Form中的button或操作按钮配置信息",
+            "itemtype": "method",
+            "name": "extractOp",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Any"
+            },
+            "class": "Normalize",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Normalize.js",
+            "line": 115,
+            "description": "处理type = hidden类型的配置信息",
+            "itemtype": "method",
+            "name": "extractHidden",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "}"
+            },
+            "class": "Normalize",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 9,
+            "description": "【高阶函数：三阶】提交专用三阶生成函数",
+            "itemtype": "method",
+            "name": "onSubmit",
+            "params": [
+                {
+                    "name": "execFun",
+                    "description": "二阶执行函数"
+                },
+                {
+                    "name": "effectKey",
+                    "description": "效果key"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 42,
+            "description": "【高阶函数：三阶】用于显示对话框",
+            "itemtype": "method",
+            "name": "onShow",
+            "params": [
+                {
+                    "name": "execFun",
+                    "description": "二阶执行函数"
+                },
+                {
+                    "name": "effectKey",
+                    "description": "效果key"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 58,
+            "description": "【高阶函数：三阶】用于隐藏对话框",
+            "itemtype": "method",
+            "name": "onHide",
+            "params": [
+                {
+                    "name": "execFun",
+                    "description": "二阶执行函数"
+                },
+                {
+                    "name": "effectKey",
+                    "description": "效果key"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 74,
+            "description": "【高阶函数：二阶】搜索专用函数",
+            "itemtype": "method",
+            "name": "onSearch",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 92,
+            "description": "【高阶函数：二阶】重置搜索条件函数，用于高级搜索专用",
+            "itemtype": "method",
+            "name": "onResetFilter",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 109,
+            "description": "componentDidUpdate中的List专用生命周期函数",
+            "itemtype": "method",
+            "name": "cycleUpdatePageList",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "数据对应的props中的键值，默认使用`$list`；"
+                },
+                {
+                    "name": "prevProps",
+                    "description": "之前的属性信息"
+                }
+            ],
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 129,
+            "description": "componentDidUnmount生命的Form专用函数",
+            "itemtype": "method",
+            "name": "cycleDestoryForm",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "当前属性"
+                },
+                {
+                    "name": "prevProps",
+                    "description": "之前属性"
+                }
+            ],
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 159,
+            "description": "componentDidUpdate的Form组件生命周期专用函数",
+            "itemtype": "method",
+            "name": "cycleUpdateForm",
+            "params": [
+                {
+                    "name": "props",
+                    "description": "当前属性"
+                },
+                {
+                    "name": "prevProps",
+                    "description": "之前属性"
+                }
+            ],
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 179,
+            "description": "【高阶函数：二阶】高级搜索专用函数调用，用于分页列表中的分页、过滤、排序同时处理的函数，和Table组件的onChange配合使用",
+            "itemtype": "method",
+            "name": "onAdvanced",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function"
+            },
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 205,
+            "description": "窗口onOk连接在函数，连接Html元素并设置onOk的触发器",
+            "itemtype": "method",
+            "name": "connectButton",
+            "params": [
+                {
+                    "name": "dialog",
+                    "description": "传入的dialog窗口配置"
+                }
+            ],
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Op.js",
+            "line": 227,
+            "description": "顶部工具栏专用连接函数，连接Html元素并设置不同button函数",
+            "itemtype": "method",
+            "name": "connectTopbar",
+            "params": [
+                {
+                    "name": "topbar",
+                    "description": "顶部工具栏的工具配置"
+                },
+                {
+                    "name": "key",
+                    "description": "待连接的配置键值"
+                }
+            ],
+            "class": "Op",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Option.js",
+            "line": 1,
+            "description": "处理Form中的Item的options选项构造配置信息",
+            "itemtype": "method",
+            "name": "optionFormItem",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "配置数据"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Option",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Param.js",
+            "line": 55,
+            "description": "针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理",
+            "itemtype": "method",
+            "name": "parseAjax",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "parameters",
+                    "description": "传入的参数值信息"
+                }
+            ],
+            "class": "Param",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Param.js",
+            "line": 92,
+            "description": "针对Query的专用参数解析器",
+            "itemtype": "method",
+            "name": "parseQuery",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "$query",
+                    "description": "查询参数相关信息"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Param",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 4,
+            "description": "资源文件数据读取方法",
+            "itemtype": "method",
+            "name": "fromHoc",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "读取对应属性名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Null"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 16,
+            "description": "从路由参数中读取数据专用",
+            "itemtype": "method",
+            "name": "fromRouter",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "读取对应属性名",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Null"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 28,
+            "description": "从reference的props中读取`key`对应的值，一般用于读取Tabular/Assist",
+            "itemtype": "method",
+            "name": "onDatum",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 44,
+            "description": "Ant Design中的Form清空专用方法",
+            "itemtype": "method",
+            "name": "formClear",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "data",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 63,
+            "description": "Ant Design中的Form读取，将`$record`记录中的数据读取到`data`中；",
+            "itemtype": "method",
+            "name": "formRead",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "data",
+                    "description": "被修改的数据引用"
+                }
+            ],
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 81,
+            "description": "Ant Design中的Form的表单重置函数",
+            "itemtype": "method",
+            "name": "formReset",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "keys",
+                    "description": "指定重置的字段值"
+                }
+            ],
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
             "line": 97,
-            "class": "",
+            "description": "Ant Design中的Form操作的二义性函数\n* `value`有值时直接设置`key`的表单值；\n* `value`为undefined时则直接读取Form中的`key`对应的值",
+            "itemtype": "method",
+            "name": "formHit",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "字段名"
+                },
+                {
+                    "name": "value",
+                    "description": "字段值"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Any"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 121,
+            "description": "Ant Design中的Form表单执行值设置",
+            "itemtype": "method",
+            "name": "formHits",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "values",
+                    "description": "设置Form表单中的字段值"
+                }
+            ],
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Prop.js",
+            "line": 135,
+            "description": "从React Router中读取路由参数",
+            "itemtype": "method",
+            "name": "onRouting",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "需要读取的参数键名"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Prop",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Random.js",
+            "line": 5,
+            "description": "生成固定长度的随机字符串",
+            "itemtype": "method",
+            "name": "randomString",
+            "params": [
+                {
+                    "name": "length",
+                    "description": "生成字符串的长度",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Random",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Random.js",
+            "line": 21,
+            "description": "随机生成UUID",
+            "itemtype": "method",
+            "name": "randomUUID",
+            "class": "Random",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Redux.js",
+            "line": 1,
+            "description": "读取Tabular专用数据，读取所有数据，一般用于Rxjs",
+            "itemtype": "method",
+            "name": "rxDatum",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "从响应数据中读取"
+                }
+            ],
+            "class": "Redux",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Redux.js",
+            "line": 16,
+            "description": "读取Assist专用数据，指定某个key，一般用于Rxjs",
+            "itemtype": "method",
+            "name": "rxAssist",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "从数据中转换"
+                },
+                {
+                    "name": "key",
+                    "description": ""
+                }
+            ],
+            "class": "Redux",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Sign.js",
+            "line": 75,
+            "description": "读取Token信息",
+            "itemtype": "method",
+            "name": "token",
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Sorter",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Sign.js",
+            "line": 87,
+            "description": "数字签名函数",
+            "itemtype": "method",
+            "name": "signature",
+            "params": [
+                {
+                    "name": "uri",
+                    "description": "Ajax访问专用Uri",
+                    "type": "String"
+                },
+                {
+                    "name": "method",
+                    "description": "Http方法"
+                },
+                {
+                    "name": "params",
+                    "description": "Http参数"
+                }
+            ],
+            "class": "Sorter",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Sorter.js",
+            "line": 23,
+            "description": "顺序排序",
+            "itemtype": "method",
+            "name": "sorterAsc",
+            "params": [
+                {
+                    "name": "left",
+                    "description": "左值"
+                },
+                {
+                    "name": "right",
+                    "description": "右值"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number|*"
+            },
+            "class": "Sorter",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Sorter.js",
+            "line": 31,
+            "description": "逆序排序",
+            "itemtype": "method",
+            "name": "sorterDesc",
+            "params": [
+                {
+                    "name": "left",
+                    "description": "左值"
+                },
+                {
+                    "name": "right",
+                    "description": "右值"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number|*"
+            },
+            "class": "Sorter",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.State.js",
+            "line": 3,
+            "description": "将数据会写状态树，props中需要包含`fnOut`函数",
+            "itemtype": "method",
+            "name": "writeTree",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "state",
+                    "description": "写入的状态数据"
+                }
+            ],
+            "class": "State",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 38,
+            "description": "存储应用程序配置",
+            "itemtype": "method",
+            "name": "storeApp",
+            "params": [
+                {
+                    "name": "data",
+                    "description": ""
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 51,
+            "description": "存储用户数据",
+            "itemtype": "method",
+            "name": "storeUser",
+            "params": [
+                {
+                    "name": "data",
+                    "description": ""
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 69,
+            "description": "SessionStorage存储数据",
+            "itemtype": "method",
+            "name": "Session.put",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "存储键名",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "存储的键值"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 76,
+            "description": "SessionStorage读取数据",
+            "itemtype": "method",
+            "name": "Session.get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "读取键名",
+                    "type": "String"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 82,
+            "description": "SessionStorage移除数据",
+            "itemtype": "method",
+            "name": "Session.remove",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "移除键名",
+                    "type": "String"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 88,
+            "description": "SessionStorage清除",
+            "itemtype": "method",
+            "name": "Session.clear",
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 95,
+            "description": "LocalStorage存储数据",
+            "itemtype": "method",
+            "name": "Storage.put",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "存储键名",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": "存储的键值"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 102,
+            "description": "LocalStorage读取数据",
+            "itemtype": "method",
+            "name": "Storage.get",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "读取键名",
+                    "type": "String"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 108,
+            "description": "LocalStorage移除数据",
+            "itemtype": "method",
+            "name": "Storage.remove",
+            "params": [
+                {
+                    "name": "key",
+                    "description": "移除键名",
+                    "type": "String"
+                }
+            ],
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Store.js",
+            "line": 114,
+            "description": "LocalStorage清除",
+            "itemtype": "method",
+            "name": "Storage.clear",
+            "class": "Store",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 6,
+            "description": "在数组中查找唯一元素",
+            "itemtype": "method",
+            "name": "elementUnique",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "查找的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "field",
+                    "description": "字段",
+                    "type": "String"
+                },
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 19,
+            "description": "返回数组的第一个元素中的field字段值\n* field有值则返回对应的Object的字段值\n* field没有值则直接返回该元素",
+            "itemtype": "method",
+            "name": "elementFirst",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "查找的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "field",
+                    "description": "",
+                    "type": "String"
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 41,
+            "description": "按`filters`过滤查询Array对应的值",
+            "itemtype": "method",
+            "name": "elementFind",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "查找的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "filters",
+                    "description": "查找条件"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 63,
+            "description": "遍历数组中的某个字段，并处理该字段对应的`field`的值",
+            "itemtype": "method",
+            "name": "itElement",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "被遍历的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "field",
+                    "description": "需要替换的字段",
+                    "type": "String"
+                },
+                {
+                    "name": "itemFun",
+                    "description": "替换函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 80,
+            "description": "遍历对象直接处理key = value",
+            "itemtype": "method",
+            "name": "itObject",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "被遍历的对象"
+                },
+                {
+                    "name": "executor",
+                    "description": "处理函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 97,
+            "description": "二维数组遍历专用",
+            "itemtype": "method",
+            "name": "itMatrix",
+            "params": [
+                {
+                    "name": "matrix",
+                    "description": "被遍历的二维数组（矩阵）"
+                },
+                {
+                    "name": "eachFun",
+                    "description": "",
+                    "type": "Function"
+                }
+            ],
+            "return": {
+                "description": "返回原始的Matrix",
+                "type": "Matrix"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 114,
+            "description": "Array数组中的属性映射处理",
+            "itemtype": "method",
+            "name": "elementVertical",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "",
+                    "type": "Array"
+                },
+                {
+                    "name": "field",
+                    "description": "需要映射的字段名"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 134,
+            "description": "遍历专用函数，二维遍历",
+            "itemtype": "method",
+            "name": "itFull",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "被遍历的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "items",
+                    "description": "被遍历的对象",
+                    "type": "Object"
+                },
+                {
+                    "name": "fieldFun",
+                    "description": "操作函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 161,
+            "description": "不重复元素追加\n* 如果是对象则检查key属性是否重复\n* 如果不是对象则直接追加",
+            "itemtype": "method",
+            "name": "elementAdd",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "被追加的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "element",
+                    "description": "元素信息"
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 184,
+            "description": "左右值处理，如果存在则移除，如果不存在直接添加",
+            "itemtype": "method",
+            "name": "elementSwitch",
+            "params": [
+                {
+                    "name": "array",
+                    "description": "传入的数组",
+                    "type": "Array"
+                },
+                {
+                    "name": "element",
+                    "description": "处理的元素信息"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 207,
+            "description": "增强Unique，查找Tabuler/Assist专用",
+            "itemtype": "method",
+            "name": "elementUniqueDatum",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "被命中的key"
+                },
+                {
+                    "name": "field",
+                    "description": ""
+                },
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 220,
+            "description": "增强Find，查找Tabular/Assist专用",
+            "itemtype": "method",
+            "name": "elementFindDatum",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "被命中的key"
+                },
+                {
+                    "name": "filters",
+                    "description": "查询条件"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Type.js",
+            "line": 230,
+            "description": "增强First，查找Tabular/Assist专用",
+            "itemtype": "method",
+            "name": "elementFirstDatum",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "被命中的key"
+                },
+                {
+                    "name": "field",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Type",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Validator.js",
+            "line": 91,
+            "description": "挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点",
+            "itemtype": "method",
+            "name": "mountValidator",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "item",
+                    "description": ""
+                }
+            ],
+            "class": "Validator",
             "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Value.js",
-            "line": 42,
-            "description": "根据from和to计算中间的duration差值\nyears - y\nmonthds -M\nweeks -w\ndays - d\nhours - h\nminutes - m\nseconds - s\nmilliseconds - ms",
+            "line": 4,
+            "description": "不重复追加值到`item`对象中（包含则不设置）",
+            "itemtype": "method",
+            "name": "valueAppend",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "被设置的对象引用"
+                },
+                {
+                    "name": "field",
+                    "description": "设置的字段名"
+                },
+                {
+                    "name": "value",
+                    "description": "设置的字段值"
+                }
+            ],
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 16,
+            "description": "直接转换数据成Moment对象，时间处理",
+            "itemtype": "method",
+            "name": "convertTime",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "输入数据"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 35,
+            "description": "连续乘法专用乘法计算",
+            "itemtype": "method",
+            "name": "mathMultiplication",
+            "params": [
+                {
+                    "name": "seed",
+                    "description": "第一操作数"
+                },
+                {
+                    "name": "ops",
+                    "description": "其他操作数"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 53,
+            "description": "专用除法运算",
+            "itemtype": "method",
+            "name": "mathDivision",
+            "params": [
+                {
+                    "name": "dividend",
+                    "description": "被除数"
+                },
+                {
+                    "name": "divisor",
+                    "description": "除数"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Number"
+            },
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 69,
+            "description": "根据from和to计算中间的duration差值\n* years - y\n* monthds -M\n* weeks -w\n* days - d\n* hours - h\n* minutes - m\n* seconds - s\n* milliseconds - ms",
+            "itemtype": "method",
+            "name": "valueDuration",
             "params": [
                 {
                     "name": "from",
-                    "description": ""
+                    "description": "开始时间"
                 },
                 {
                     "name": "to",
-                    "description": ""
+                    "description": "结束时间"
                 },
                 {
                     "name": "mode",
-                    "description": ""
+                    "description": "计算模式"
                 }
             ],
-            "class": "",
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 93,
+            "description": "根据开始时间计算结束时间",
+            "itemtype": "method",
+            "name": "valueEndTime",
+            "params": [
+                {
+                    "name": "from",
+                    "description": "开始时间"
+                },
+                {
+                    "name": "duration",
+                    "description": "时差"
+                },
+                {
+                    "name": "mode",
+                    "description": "计算模式"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "moment.Moment"
+            },
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 110,
+            "description": "根据结束时间计算开始时间",
+            "itemtype": "method",
+            "name": "valueStartTime",
+            "params": [
+                {
+                    "name": "to",
+                    "description": "结束时间"
+                },
+                {
+                    "name": "duration",
+                    "description": "时差"
+                },
+                {
+                    "name": "mode",
+                    "description": "计算模式"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "moment.Moment"
+            },
+            "class": "Value",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Value.js",
+            "line": 127,
+            "description": "针对JavaScript中的对象进行过滤",
+            "itemtype": "method",
+            "name": "valueFilter",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "被过滤的数据对象"
+                },
+                {
+                    "name": "keys",
+                    "description": "保留的字段名集合"
+                }
+            ],
+            "class": "Value",
             "module": "Ux"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Hoc.js:68"
-        },
-        {
-            "message": "Missing item type\nfnShow:对话框弹出窗口\nfnHide:对话框关闭窗口\nfnOut:Redux专用写函数\n$dialog:对应Hoc中的_window，对话框参数\n$metadata:对应Hoc中的_pagelist, 页面专用元数据\n$query:当前页面的查询条件信息",
-            "line": " src/ux/Ux.Hoc.js:68"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Normalize.js:8"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Normalize.js:15"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Normalize.js:26"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Normalize.js:36"
-        },
-        {
-            "message": "Missing item type\n验证规则属性\nmessage：校验文件\ntype: 可选（内建类型）\nrequired：是否必填\nlen:字段长度\nmin:最小长度\nmax:最大长度\nenum: 枚举类型\npattern:正则表达式校验\ntransform:校验前转换字段值\nvalidator: 自定义校验",
-            "line": " src/ux/Ux.Segment.js:7"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:29"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:41"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:50"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:84"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:90"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Sign.js:97"
-        },
-        {
-            "message": "Missing item type\n根据from和to计算中间的duration差值\nyears - y\nmonthds -M\nweeks -w\ndays - d\nhours - h\nminutes - m\nseconds - s\nmilliseconds - ms",
-            "line": " src/ux/Ux.Value.js:42"
-        }
-    ]
+    "warnings": []
 }

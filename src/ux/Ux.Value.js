@@ -1,11 +1,24 @@
 import moment from 'moment';
 import Dg from './Ux.Debug';
 
+/**
+ * 不重复追加值到`item`对象中（包含则不设置）
+ * @method valueAppend
+ * @param item 被设置的对象引用
+ * @param field 设置的字段名
+ * @param value 设置的字段值
+ */
 const valueAppend = (item = {}, field = "", value) => {
     if (!item.hasOwnProperty(field)) {
         item[field] = value;
     }
 };
+/**
+ * 直接转换数据成Moment对象，时间处理
+ * @method convertTime
+ * @param value 输入数据
+ * @return {*}
+ */
 const convertTime = (value) => {
     if (value) {
         if (!moment.isMoment(value)) {
@@ -19,6 +32,13 @@ const convertTime = (value) => {
         console.error("[V] The 'value' is undefined, could not be converted.");
     }
 };
+/**
+ * 连续乘法专用乘法计算
+ * @method mathMultiplication
+ * @param seed 第一操作数
+ * @param ops 其他操作数
+ * @return {*}
+ */
 const mathMultiplication = (seed, ...ops) => {
     seed = parseFloat(seed);
     let result = isNaN(seed) ? 0.00 : seed;
@@ -30,6 +50,13 @@ const mathMultiplication = (seed, ...ops) => {
     });
     return result;
 };
+/**
+ * 专用除法运算
+ * @method mathDivision
+ * @param dividend 被除数
+ * @param divisor 除数
+ * @return {number}
+ */
 const mathDivision = (dividend, divisor) => {
     dividend = parseFloat(dividend);
     divisor = parseFloat(divisor);
@@ -41,17 +68,18 @@ const mathDivision = (dividend, divisor) => {
 };
 /**
  * 根据from和to计算中间的duration差值
- * years - y
- * monthds -M
- * weeks -w
- * days - d
- * hours - h
- * minutes - m
- * seconds - s
- * milliseconds - ms
- * @param from
- * @param to
- * @param mode
+ * * years - y
+ * * monthds -M
+ * * weeks -w
+ * * days - d
+ * * hours - h
+ * * minutes - m
+ * * seconds - s
+ * * milliseconds - ms
+ * @method valueDuration
+ * @param from 开始时间
+ * @param to 结束时间
+ * @param mode 计算模式
  */
 const valueDuration = (from, to, mode = 'day') => {
     if (from && to) {
@@ -62,6 +90,14 @@ const valueDuration = (from, to, mode = 'day') => {
         console.error("[V] Either 'from' or 'to' must not be undefined.");
     }
 };
+/**
+ * 根据开始时间计算结束时间
+ * @method valueEndTime
+ * @param from 开始时间
+ * @param duration 时差
+ * @param mode 计算模式
+ * @return {moment.Moment}
+ */
 const valueEndTime = (from, duration, mode = 'day') => {
     if (from && duration) {
         from = convertTime(from);
@@ -71,6 +107,14 @@ const valueEndTime = (from, duration, mode = 'day') => {
         console.error("[V] Either 'from' or 'duration' must not be undefined.")
     }
 };
+/**
+ * 根据结束时间计算开始时间
+ * @method valueStartTime
+ * @param to 结束时间
+ * @param duration 时差
+ * @param mode 计算模式
+ * @return {moment.Moment}
+ */
 const valueStartTime = (to, duration, mode = 'day') => {
     if (to && duration) {
         to = convertTime(to);
@@ -80,6 +124,12 @@ const valueStartTime = (to, duration, mode = 'day') => {
         console.error("[V] Either 'to' or 'duration' must not be undefined.")
     }
 };
+/**
+ * 针对JavaScript中的对象进行过滤
+ * @method valueFilter
+ * @param data 被过滤的数据对象
+ * @param keys 保留的字段名集合
+ */
 const valueFilter = (data = {}, keys = []) => {
     const result = {};
     keys.forEach(key => {
@@ -89,6 +139,10 @@ const valueFilter = (data = {}, keys = []) => {
     });
     return result;
 };
+/**
+ * @class Value
+ * @description 数值计算器
+ */
 export default {
     valueAppend,
     valueDuration,

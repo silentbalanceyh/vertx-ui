@@ -35,7 +35,11 @@ const clear = (reference) => () => {
     Dg.ensureRuntime(reference);
     reference.clear();
 };
-
+/**
+ * 存储应用程序配置
+ * @method storeApp
+ * @param data
+ */
 const storeApp = (data) => {
     if (data) {
         const key = Env.KEY_APP;
@@ -44,26 +48,74 @@ const storeApp = (data) => {
     // Fluent for Rxjs
     return data;
 };
-
+/**
+ * 存储用户数据
+ * @method storeUser
+ * @param data
+ */
 const storeUser = (data) => {
     if (data) {
         const key = Env.KEY_USER;
         put(window.sessionStorage)(key, data);
     }
+    return data;
 };
-
+/**
+ * @class Store
+ * @description 访问Session/Local的Storage专用
+ */
 export default {
-    Session : {
-        put : put(window.sessionStorage),
-        get : get(window.sessionStorage),
-        remove : remove(window.sessionStorage),
-        clear : clear(window.sessionStorage)
+    Session: {
+        /**
+         * SessionStorage存储数据
+         * @method Session.put
+         * @param {String} key 存储键名
+         * @param value 存储的键值
+         */
+        put: put(window.sessionStorage),
+        /**
+         * SessionStorage读取数据
+         * @method Session.get
+         * @param {String} key 读取键名
+         */
+        get: get(window.sessionStorage),
+        /**
+         * SessionStorage移除数据
+         * @method Session.remove
+         * @param {String} key 移除键名
+         */
+        remove: remove(window.sessionStorage),
+        /**
+         * SessionStorage清除
+         * @method Session.clear
+         */
+        clear: clear(window.sessionStorage)
     },
-    Storage : {
-        put : put(window.localStorage),
-        get : get(window.localStorage),
-        remove : remove(window.localStorage),
-        clear : clear(window.localStorage)
+    Storage: {
+        /**
+         * LocalStorage存储数据
+         * @method Storage.put
+         * @param {String} key 存储键名
+         * @param value 存储的键值
+         */
+        put: put(window.localStorage),
+        /**
+         * LocalStorage读取数据
+         * @method Storage.get
+         * @param {String} key 读取键名
+         */
+        get: get(window.localStorage),
+        /**
+         * LocalStorage移除数据
+         * @method Storage.remove
+         * @param {String} key 移除键名
+         */
+        remove: remove(window.localStorage),
+        /**
+         * LocalStorage清除
+         * @method Storage.clear
+         */
+        clear: clear(window.localStorage)
     },
     storeApp,
     storeUser

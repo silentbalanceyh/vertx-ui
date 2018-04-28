@@ -129,6 +129,60 @@
                                     <li>
                                         <a href="../classes/Global.html">Global</a>
                                     </li>
+                                    <li>
+                                        <a href="../classes/Hoc.html">Hoc</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Html.html">Html</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Icon.html">Icon</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Jsx.html">Jsx</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Log.html">Log</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Normalize.html">Normalize</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Op.html">Op</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Option.html">Option</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Param.html">Param</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Prop.html">Prop</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Random.html">Random</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Redux.html">Redux</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Sorter.html">Sorter</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/State.html">State</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Store.html">Store</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Type.html">Type</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Validator.html">Validator</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Value.html">Value</a>
+                                    </li>
                             </ol>
                         </div>
                     </div>
@@ -148,6 +202,12 @@ import Dg from &#x27;./Ux.Debug&#x27;
 import Prop from &#x27;./Ux.Prop&#x27;
 import Op from &#x27;./Ux.Op&#x27;
 
+/**
+ * 通用属性读取相关信息
+ * @method toProp
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toProp = (props = {}, ...keys) =&gt; {
     const inherits = {};
     // Fix Issue
@@ -165,6 +225,12 @@ const toProp = (props = {}, ...keys) =&gt; {
     });
     return inherits;
 };
+/**
+ * 读取Tabular和Assist专用属性：&#x60;$t_&#x60;和&#x60;$a_&#x60;开头的属性值。
+ * @method toDatum
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toDatum = (props = {}, keys = []) =&gt; {
     const inherits = {};
     if (0 === keys.length) {
@@ -186,7 +252,11 @@ const toDatum = (props = {}, keys = []) =&gt; {
     }
     return inherits;
 };
-
+/**
+ * 读取专用的带有&#x60;$_&#x60;前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是&#x60;$_&#x60;的格式。
+ * @method toEffect
+ * @param state 传入的React状态
+ */
 const toEffect = (state = {}) =&gt; {
     const inherits = {};
     for (const key in state) {
@@ -196,7 +266,14 @@ const toEffect = (state = {}) =&gt; {
     }
     return inherits
 };
-
+/**
+ * 读取组件的全称，和Cab.json中的namespace进行配合读取当前组件的全名
+ * @method toFullName
+ * @param Component 被封装的组件
+ * @param {JSON} Cab 链接资源文件
+ * @param {String} Name 当前组件的名称（用于日志调试）
+ * @return {String}
+ */
 const toFullName = (Component, Cab = {}, Name) =&gt; {
     // 参数严格检查
     Dg.ensureArgs(Cab, &quot;ns&quot;);
@@ -205,6 +282,12 @@ const toFullName = (Component, Cab = {}, Name) =&gt; {
     if (Component) Component.displayName = fullname;
     return fullname;
 };
+/**
+ * 从Uri中读取Query Parameter查询参数
+ * @method toQueryParameter
+ * @param {String} name 待读取的参数名
+ * @return {*}
+ */
 const toQueryParameter = (name = &quot;&quot;) =&gt; {
     const reg = new RegExp(&quot;(^|&amp;)&quot; + name + &quot;=([^&amp;]*)(&amp;|$)&quot;);
     const r = window.location.search.substr(1).match(reg);
@@ -212,15 +295,17 @@ const toQueryParameter = (name = &quot;&quot;) =&gt; {
     return null;
 };
 /**
- * fnShow:对话框弹出窗口
- * fnHide:对话框关闭窗口
- * fnOut:Redux专用写函数
- * $dialog:对应Hoc中的_window，对话框参数
- * $metadata:对应Hoc中的_pagelist, 页面专用元数据
- * $query:当前页面的查询条件信息
- * @param reference
- * @param FormComponent
- * @returns {{}}
+ * PageList组件专用继承方法
+ * * fnShow:对话框弹出窗口
+ * * fnHide:对话框关闭窗口
+ * * fnOut:Redux专用写函数
+ * * $dialog:对应Hoc中的_window，对话框参数
+ * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
+ * * $query:当前页面的查询条件信息
+ * @method toPageList
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {JSX} FormComponent 是否包含传入组件
+ * @return {{}}
  */
 const toPageList = (reference = {}, FormComponent) =&gt; {
     const inherit = {};
@@ -251,6 +336,10 @@ const toPageList = (reference = {}, FormComponent) =&gt; {
     inherit.$filters = reference.props.$filters;
     return inherit;
 };
+/**
+ * @class Hoc
+ * @description 专用Hoc解释器
+ */
 export default {
     // PageList
     toPageList,

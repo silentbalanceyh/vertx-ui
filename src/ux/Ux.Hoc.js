@@ -2,6 +2,12 @@ import Dg from './Ux.Debug'
 import Prop from './Ux.Prop'
 import Op from './Ux.Op'
 
+/**
+ * 通用属性读取相关信息
+ * @method toProp
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toProp = (props = {}, ...keys) => {
     const inherits = {};
     // Fix Issue
@@ -19,6 +25,12 @@ const toProp = (props = {}, ...keys) => {
     });
     return inherits;
 };
+/**
+ * 读取Tabular和Assist专用属性：`$t_`和`$a_`开头的属性值。
+ * @method toDatum
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toDatum = (props = {}, keys = []) => {
     const inherits = {};
     if (0 === keys.length) {
@@ -40,7 +52,11 @@ const toDatum = (props = {}, keys = []) => {
     }
     return inherits;
 };
-
+/**
+ * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
+ * @method toEffect
+ * @param state 传入的React状态
+ */
 const toEffect = (state = {}) => {
     const inherits = {};
     for (const key in state) {
@@ -50,7 +66,14 @@ const toEffect = (state = {}) => {
     }
     return inherits
 };
-
+/**
+ * 读取组件的全称，和Cab.json中的namespace进行配合读取当前组件的全名
+ * @method toFullName
+ * @param Component 被封装的组件
+ * @param {JSON} Cab 链接资源文件
+ * @param {String} Name 当前组件的名称（用于日志调试）
+ * @return {String}
+ */
 const toFullName = (Component, Cab = {}, Name) => {
     // 参数严格检查
     Dg.ensureArgs(Cab, "ns");
@@ -59,6 +82,12 @@ const toFullName = (Component, Cab = {}, Name) => {
     if (Component) Component.displayName = fullname;
     return fullname;
 };
+/**
+ * 从Uri中读取Query Parameter查询参数
+ * @method toQueryParameter
+ * @param {String} name 待读取的参数名
+ * @return {*}
+ */
 const toQueryParameter = (name = "") => {
     const reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)");
     const r = window.location.search.substr(1).match(reg);
@@ -66,15 +95,17 @@ const toQueryParameter = (name = "") => {
     return null;
 };
 /**
- * fnShow:对话框弹出窗口
- * fnHide:对话框关闭窗口
- * fnOut:Redux专用写函数
- * $dialog:对应Hoc中的_window，对话框参数
- * $metadata:对应Hoc中的_pagelist, 页面专用元数据
- * $query:当前页面的查询条件信息
- * @param reference
- * @param FormComponent
- * @returns {{}}
+ * PageList组件专用继承方法
+ * * fnShow:对话框弹出窗口
+ * * fnHide:对话框关闭窗口
+ * * fnOut:Redux专用写函数
+ * * $dialog:对应Hoc中的_window，对话框参数
+ * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
+ * * $query:当前页面的查询条件信息
+ * @method toPageList
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {JSX} FormComponent 是否包含传入组件
+ * @return {{}}
  */
 const toPageList = (reference = {}, FormComponent) => {
     const inherit = {};
@@ -105,6 +136,10 @@ const toPageList = (reference = {}, FormComponent) => {
     inherit.$filters = reference.props.$filters;
     return inherit;
 };
+/**
+ * @class Hoc
+ * @description 专用Hoc解释器
+ */
 export default {
     // PageList
     toPageList,

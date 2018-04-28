@@ -13,7 +13,25 @@ YUI.add("yuidoc-meta", function(Y) {
         "Expr",
         "Field",
         "Format",
-        "Global"
+        "Global",
+        "Hoc",
+        "Html",
+        "Icon",
+        "Jsx",
+        "Log",
+        "Normalize",
+        "Op",
+        "Option",
+        "Param",
+        "Prop",
+        "Random",
+        "Redux",
+        "Sorter",
+        "State",
+        "Store",
+        "Type",
+        "Validator",
+        "Value"
     ],
     "modules": [
         "Ux"
