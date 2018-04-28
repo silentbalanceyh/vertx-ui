@@ -15,7 +15,25 @@ const sortString = (left = "", right = "", asc = true) => {
     }
     return order;
 };
+/**
+ * @class Sorter
+ * @description Table组件排序专用函数，对应列中的sorter
+ */
 export default {
-    sorterAsc : (left, right) => sortString(left, right),
-    sorterDesc : (left, right) => sortString(left, right, false)
+    /**
+     * 顺序排序
+     * @method sorterAsc
+     * @param left 左值
+     * @param right 右值
+     * @return {number|*}
+     */
+    sorterAsc: (left, right) => sortString(left, right),
+    /**
+     * 逆序排序
+     * @method sorterDesc
+     * @param left 左值
+     * @param right 右值
+     * @return {number|*}
+     */
+    sorterDesc: (left, right) => sortString(left, right, false)
 }

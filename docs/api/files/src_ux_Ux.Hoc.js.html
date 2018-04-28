@@ -3,89 +3,221 @@
 <head>
     <meta charset="utf-8">
     <title>src/ux/Ux.Hoc.js - Zero UI Doc</title>
+    <meta name="description" content="Zero UI前端文档工具">
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
-    <link rel="icon" href="../assets/favicon.ico">
-    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" href="../assets/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="../assets/css/theme.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,500,600,700" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" type="image/png" href="../assets/img/favicon.png">
+    
 </head>
-<body class="yui3-skin-sam">
-
-<div id="doc">
-    <div id="hd" class="yui3-g header">
-        <div class="yui3-u-3-4">
-                <h1><img src="../assets/css/logo.png" title="Zero UI Doc" width="117" height="52"></h1>
+<body>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a href="../" class="navbar-brand">
+            <img src="../assets/img/mdeditor-logo.png" alt="">
+            <span>API Docs</span>
+          </a>
         </div>
-        <div class="yui3-u-1-4 version">
-            <em>API Docs for: 0.1.0</em>
-        </div>
-    </div>
-    <div id="bd" class="yui3-g">
 
-        <div class="yui3-u-1-4">
-            <div id="docs-sidebar" class="sidebar apidocs">
-                <div id="api-list">
-                    <h2 class="off-left">APIs</h2>
-                    <div id="api-tabview" class="tabview">
-                        <ul class="tabs">
-                            <li><a href="#api-classes">Classes</a></li>
-                            <li><a href="#api-modules">Modules</a></li>
-                        </ul>
-                
-                        <div id="api-tabview-filter">
-                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
-                        </div>
-                
-                        <div id="api-tabview-panel">
-                            <ul id="api-classes" class="apis classes">
-                            </ul>
-                
-                
-                            <ul id="api-modules" class="apis modules">
-                            </ul>
+        <div class="collapse navbar-collapse" id="nav">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/silentbalanceyh/vertx-ui.git" class="fa fa-github github"></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <div id="main-wrapper" class="row">
+        <div id="content-wrapper">
+            <ol class="panel-group" id="sidebar" role="tablist" aria-multiselectable="true">
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-search-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-search" aria-expanded="true" aria-controls="collapseOne">
+                        Search
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-search" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-search-heading">
+                        <div class="panel-body">
+                            <div id="api-tabview-filter">
+                                <input type="search" id="api-filter" placeholder="Search...">
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-        <div class="yui3-u-3-4">
-                <div id="api-options">
-                    Show:
-                    <label for="api-show-inherited">
-                        <input type="checkbox" id="api-show-inherited" checked>
-                        Inherited
-                    </label>
+                </li>
+                    <li class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="sidebar-version-heading">
+                            <h4 class="panel-title">
+                                <a role="button" href="https://github.com/silentbalanceyh/vertx-ui.git/commits/0" target="_blank">
+                                  Tag: 0.1.0
+                                </a>
+                            </h4>
+                        </div>
+                    </li>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-modules-heading">
+                        <h4 class="panel-title">
+                    <a role="button" data-toggle="collapse" href="#sidebar-modules" aria-expanded="true" aria-controls="collapseOne">
+                      Modules
+                    </a>
+                  </h4>
+                    </div>
+                    <div id="sidebar-modules" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-modules-heading">
+                        <div class="panel-body">
+                                <ol>
+                                        <li>
+                                            <a href="../modules/Ux.html">Ux</a>
+                                        </li>
+                                </ol>
+                        </div>
+                    </div>
+                </li>
             
-                    <label for="api-show-protected">
-                        <input type="checkbox" id="api-show-protected">
-                        Protected
-                    </label>
-            
-                    <label for="api-show-private">
-                        <input type="checkbox" id="api-show-private">
-                        Private
-                    </label>
-                    <label for="api-show-deprecated">
-                        <input type="checkbox" id="api-show-deprecated">
-                        Deprecated
-                    </label>
-            
-                </div>
-            
-            <div class="apidocs">
-                <div id="docs-main">
-                    <div class="content">
-<h1 class="file-heading">File: src/ux/Ux.Hoc.js</h1>
+                <li class="panel panel-default">
+                    <div class="panel-heading" role="tab" id="sidebar-classes-heading">
+                        <h4 class="panel-title">
+                      <a role="button" data-toggle="collapse" href="#sidebar-classes" aria-expanded="true" aria-controls="collapseOne">
+                        Classes
+                      </a>
+                    </h4>
+                    </div>
+                    <div id="sidebar-classes" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="sidebar-classes-heading">
+                        <div class="panel-body">
+                            <ol>
+                                    <li>
+                                        <a href="../classes/Action.html">Action</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Ajax.html">Ajax</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Attribute.html">Attribute</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Column.html">Column</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Debug.html">Debug</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Depend.html">Depend</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Dialog.html">Dialog</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Encrypt.html">Encrypt</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Env.html">Env</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Expr.html">Expr</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Field.html">Field</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Format.html">Format</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Global.html">Global</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Hoc.html">Hoc</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Html.html">Html</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Icon.html">Icon</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Jsx.html">Jsx</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Log.html">Log</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Normalize.html">Normalize</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Op.html">Op</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Option.html">Option</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Param.html">Param</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Prop.html">Prop</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Random.html">Random</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Redux.html">Redux</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Sorter.html">Sorter</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/State.html">State</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Store.html">Store</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Type.html">Type</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Validator.html">Validator</a>
+                                    </li>
+                                    <li>
+                                        <a href="../classes/Value.html">Value</a>
+                                    </li>
+                            </ol>
+                        </div>
+                    </div>
+                </li>
+            </ol>
+            <div class="content-container">
+                <div class="apidocs">
+                    <div id="docs-main">
+                        <div class="content">
+<div class="page-header">
+    <h1><i class="fa fa-file-code-o" aria-hidden="true"></i>  File</h1>
+</div>
 
 <div class="file">
-    <pre class="code prettyprint linenums">
+    <pre class="prettyprint linenums">
 import Dg from &#x27;./Ux.Debug&#x27;
 import Prop from &#x27;./Ux.Prop&#x27;
 import Op from &#x27;./Ux.Op&#x27;
 
+/**
+ * 通用属性读取相关信息
+ * @method toProp
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toProp = (props = {}, ...keys) =&gt; {
     const inherits = {};
-    keys.forEach(key =&gt; {
+    // Fix Issue
+    let targetFor = [];
+    if (1 === keys.length &amp;&amp; Array.prototype.isPrototypeOf(keys[0])) {
+        targetFor = keys[0];
+    } else {
+        targetFor = keys;
+    }
+    targetFor.forEach(key =&gt; {
         const targetKey = &#x60;$${key}&#x60;;
         if (props.hasOwnProperty(targetKey)) {
             inherits[targetKey] = props[targetKey]
@@ -93,6 +225,12 @@ const toProp = (props = {}, ...keys) =&gt; {
     });
     return inherits;
 };
+/**
+ * 读取Tabular和Assist专用属性：&#x60;$t_&#x60;和&#x60;$a_&#x60;开头的属性值。
+ * @method toDatum
+ * @param props 传入的React属性
+ * @param keys 需提取的所有keys属性名集
+ */
 const toDatum = (props = {}, keys = []) =&gt; {
     const inherits = {};
     if (0 === keys.length) {
@@ -114,7 +252,11 @@ const toDatum = (props = {}, keys = []) =&gt; {
     }
     return inherits;
 };
-
+/**
+ * 读取专用的带有&#x60;$_&#x60;前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是&#x60;$_&#x60;的格式。
+ * @method toEffect
+ * @param state 传入的React状态
+ */
 const toEffect = (state = {}) =&gt; {
     const inherits = {};
     for (const key in state) {
@@ -124,7 +266,14 @@ const toEffect = (state = {}) =&gt; {
     }
     return inherits
 };
-
+/**
+ * 读取组件的全称，和Cab.json中的namespace进行配合读取当前组件的全名
+ * @method toFullName
+ * @param Component 被封装的组件
+ * @param {JSON} Cab 链接资源文件
+ * @param {String} Name 当前组件的名称（用于日志调试）
+ * @return {String}
+ */
 const toFullName = (Component, Cab = {}, Name) =&gt; {
     // 参数严格检查
     Dg.ensureArgs(Cab, &quot;ns&quot;);
@@ -133,6 +282,12 @@ const toFullName = (Component, Cab = {}, Name) =&gt; {
     if (Component) Component.displayName = fullname;
     return fullname;
 };
+/**
+ * 从Uri中读取Query Parameter查询参数
+ * @method toQueryParameter
+ * @param {String} name 待读取的参数名
+ * @return {*}
+ */
 const toQueryParameter = (name = &quot;&quot;) =&gt; {
     const reg = new RegExp(&quot;(^|&amp;)&quot; + name + &quot;=([^&amp;]*)(&amp;|$)&quot;);
     const r = window.location.search.substr(1).match(reg);
@@ -140,15 +295,17 @@ const toQueryParameter = (name = &quot;&quot;) =&gt; {
     return null;
 };
 /**
- * fnShow:对话框弹出窗口
- * fnHide:对话框关闭窗口
- * fnOut:Redux专用写函数
- * $dialog:对应Hoc中的_window，对话框参数
- * $metadata:对应Hoc中的_pagelist, 页面专用元数据
- * $query:当前页面的查询条件信息
- * @param reference
- * @param FormComponent
- * @returns {{}}
+ * PageList组件专用继承方法
+ * * fnShow:对话框弹出窗口
+ * * fnHide:对话框关闭窗口
+ * * fnOut:Redux专用写函数
+ * * $dialog:对应Hoc中的_window，对话框参数
+ * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
+ * * $query:当前页面的查询条件信息
+ * @method toPageList
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {JSX} FormComponent 是否包含传入组件
+ * @return {{}}
  */
 const toPageList = (reference = {}, FormComponent) =&gt; {
     const inherit = {};
@@ -179,6 +336,10 @@ const toPageList = (reference = {}, FormComponent) =&gt; {
     inherit.$filters = reference.props.$filters;
     return inherit;
 };
+/**
+ * @class Hoc
+ * @description 专用Hoc解释器
+ */
 export default {
     // PageList
     toPageList,
@@ -195,19 +356,18 @@ export default {
 
     </pre>
 </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-<script src="../assets/vendor/prettify/prettify-min.js"></script>
-<script>prettyPrint();</script>
-<script src="../assets/js/yui-prettify.js"></script>
-<script src="../assets/../api.js"></script>
-<script src="../assets/js/api-filter.js"></script>
-<script src="../assets/js/api-list.js"></script>
-<script src="../assets/js/api-search.js"></script>
-<script src="../assets/js/apidocs.js"></script>
+    <script src="../assets/vendor/prettify/prettify-min.js"></script>
+    <script>prettyPrint();</script>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/jquery-ui/jquery-ui.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+    <script src="../assets/vendor/github-slugger/slugger.js"></script>
+    <script src="../assets/js/yuidoc-bootstrap.js"></script>
 </body>
 </html>
