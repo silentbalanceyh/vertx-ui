@@ -1,6 +1,9 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "Action",
+        "Ajax",
+        "Attribute",
         "Debug"
     ],
     "modules": [
