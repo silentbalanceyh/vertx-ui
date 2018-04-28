@@ -5,9 +5,12 @@ import DataRouter from "./flow/DataRouter";
 import Navigator from "./flow/Navigator";
 import StateIn from "./state/StateIn";
 import StateOut from "./state/StateOut";
-import { connect } from "react-redux";
+import {connect} from "react-redux";
 import Taper from "../environment/actions";
 
+/**
+ * @class DataLabor
+ */
 class DataLabor {
 
     static getObject(input: Object): DataObject {

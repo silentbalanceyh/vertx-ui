@@ -5,14 +5,14 @@ import Log from './Ux.Log';
 import Dg from './Ux.Debug';
 
 const SCHEMA = {
-    OAuth : () => {
+    OAuth: () => {
         const user = Global.isLogged();
         if (user) {
             const value = Encrypt.encryptBase64(`${user.uniqueId}:${user.token}`);
             return `Bearer ${value}`
         }
     },
-    Basic : () => {
+    Basic: () => {
         const user = Global.isLogged();
         if (user) {
             return "Basic " + user.token
@@ -26,7 +26,7 @@ const _parameters = (params = {}) => {
     if (0 < keys.length) {
         keys.forEach(key => {
             if ("pager" === key) {
-                /** 1.Pager参数专用签名 **/
+                // 1.Pager参数专用签名
                 let pager = params[key];
                 if ("string" === typeof params[key]) {
                     pager = JSON.parse(params[key]);
@@ -38,7 +38,7 @@ const _parameters = (params = {}) => {
                     param += key + ":";
                 }
             } else {
-                /** 这两个参数不参加签名 **/
+                // 这两个参数不参加签名
                 if ("criterias" !== key && "sig" !== key) {
                     if (params[key]) {
                         if ("object" === typeof params[key]) {
@@ -47,7 +47,7 @@ const _parameters = (params = {}) => {
                             param += key + params[key] + ":";
                         }
                     } else {
-                        /** 特殊Boolean值的签名 **/
+                        // 特殊Boolean值的签名
                         if (false === params[key]) {
                             param += key + "false:";
                         } else if (undefined !== params[key]) {
@@ -72,6 +72,11 @@ const _secret = () => {
     }
     return secret;
 };
+/**
+ * 读取Token信息
+ * @method token
+ * @return {*}
+ */
 const token = () => {
     const app = Global.isInit();
     Dg.ensureApp(app);
@@ -79,22 +84,28 @@ const token = () => {
     const fnExecute = SCHEMA[auth];
     return fnExecute();
 };
-// 计算sig
+/**
+ * 数字签名函数
+ * @method signature
+ * @param {String} uri Ajax访问专用Uri
+ * @param method Http方法
+ * @param params Http参数
+ */
 const signature = (uri, method = "GET", params = {}) => {
-    /** 构造签名的method和参数 */
+    // 构造签名的method和参数
     let seed = method.toUpperCase();
     seed += ":";
     seed += _parameters(params);
     seed += uri;
     seed += "$";
-    /** 构造secret */
+    // 构造secret
     const secret = _secret();
     // Seed中是否追加用户登录ID
     const user = Global.isLogged();
     if (user && "object" === typeof user) {
         seed += user.key;
     }
-    /** 签名 **/
+    // 签名
     const sig = Encrypt.encryptHmac512(seed, secret);
     Log.sign(uri, method, params, {sig, secret, seed});
     params['sig'] = sig;

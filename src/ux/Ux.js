@@ -16,7 +16,6 @@ import ANT from "./Ux.Ant";
 import OPTION from "./Ux.Option";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
-import SEGMENT from "./Ux.Segment";
 import FORMAT from "./Ux.Format";
 import COLUMN from "./Ux.Column";
 import REDUX from "./Ux.Redux";
@@ -46,7 +45,7 @@ export default {
     // Ajax函数
     ...AJAX,
     // Log函数
-    Logger : LOGGER,
+    Logger: LOGGER,
     // 加密解密
     ...ENCRYPT,
     // 随机
@@ -75,7 +74,6 @@ export default {
     ...NORM,
     // 类型处理
     ...TYPES,
-    ...SEGMENT,
     // Redux专用
     ...REDUX,
     ...ACTION,

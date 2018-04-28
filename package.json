@@ -7,7 +7,7 @@
         "@antv/g2": "^3.0.8",
         "@types/random-js": "^1.0.30",
         "@types/react": "^16.3.13",
-        "@types/react-redux": "^5.0.18",
+        "@types/react-redux": "^5.0.19",
         "ajv": "^6.4.0",
         "ant-design-pro": "^1.3.0",
         "antd": "^3.4.3",
@@ -72,7 +72,8 @@
         "sw-precache-webpack-plugin": "0.11.5",
         "underscore": "^1.9.0",
         "url-loader": "1.0.1",
-        "uuid": "^3.2.1"
+        "uuid": "^3.2.1",
+        "yuidoc-mdeditor-theme": "^1.4.1"
     },
     "scripts": {
         "prestart": "sh shell/run-generate.sh",
@@ -87,7 +88,7 @@
         "pretest": "sh shell/run-generate.sh",
         "pretestwin": "call shell/run-generate.bat",
         "test": "node scripts/test.js --env=jsdom",
-        "storybook": "start-storybook -p 6006",
+        "storybook": "start-storybook -p $SB_PORT",
         "build-storybook": "build-storybook"
     },
     "devDependencies": {
@@ -145,10 +146,10 @@
         "webpack-dev-server": "3.0.0",
         "webpack-manifest-plugin": "2.0.1",
         "whatwg-fetch": "2.0.4",
-        "@storybook/react": "^3.4.2",
-        "@storybook/addon-actions": "^3.4.2",
-        "@storybook/addon-links": "^3.4.2",
-        "@storybook/addons": "^3.4.2"
+        "@storybook/react": "^3.4.3",
+        "@storybook/addon-actions": "^3.4.3",
+        "@storybook/addon-links": "^3.4.3",
+        "@storybook/addons": "^3.4.3"
     },
     "jest": {
         "collectCoverageFrom": [
