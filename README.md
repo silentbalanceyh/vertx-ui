@@ -30,7 +30,13 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * `UI`文档为开发文档，提供给开发人员使用来开发项目专用；
 * `UT`文档为研发文档，提供给研发人员开发Zero UI专用；
 
-## 2. 文档列表
+## 2. 整体架构
+
+整个Zero框架的结构图如下：
+
+![](/document/image/arch.png)
+
+## 3. 文档列表
 
 ### 环境说明
 
@@ -46,9 +52,12 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 ### Ux工具包
 
+参考UT0001，运行脚本`run-doc.sh`，则可以从浏览器查看文档：[http://localhost:5000/](http://localhost:5000/)
+
 ### 脚手架解析
 
 * [UT0001 - yuidoc工具生成API文档](/document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
+* [UT0002 - storybook可重用组件文档](/document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)
 
 
 

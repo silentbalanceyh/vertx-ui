@@ -88,7 +88,7 @@
         "pretest": "sh shell/run-generate.sh",
         "pretestwin": "call shell/run-generate.bat",
         "test": "node scripts/test.js --env=jsdom",
-        "storybook": "start-storybook -p 6006",
+        "storybook": "start-storybook -p $SB_PORT",
         "build-storybook": "build-storybook"
     },
     "devDependencies": {
