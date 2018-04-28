@@ -43,7 +43,7 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 * [UI0004 - 开发我的第一个模板](/document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
 * [UI0005 - 开发我的第一个页面](/document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
-* [UI0006 - 核心注解zero的使用](/document/2-kai-fa-wen-dang/ui0006-he-xin-zhu-jie-zero-de-shi-yong.md)
+* [UI0007 - 核心注解zero的使用](/document/2-kai-fa-wen-dang/ui0006-he-xin-zhu-jie-zero-de-shi-yong.md)
 
 ### Ux工具包
 

@@ -10,7 +10,7 @@
   * [2 - 开发文档](document/2-kai-fa-wen-dang.md)
     * [UI0004 - 开发我的第一个模板](document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
     * [UI0005 - 开发我的第一个页面](document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
-    * [UI0006 - 核心注解zero的使用](document/2-kai-fa-wen-dang/ui0006-he-xin-zhu-jie-zero-de-shi-yong.md)
+    * [UI0007 - 核心注解zero的使用](document/2-kai-fa-wen-dang/ui0006-he-xin-zhu-jie-zero-de-shi-yong.md)
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
   * [4 - Ux工具包](document/4-uxgong-ju-bao.md)
