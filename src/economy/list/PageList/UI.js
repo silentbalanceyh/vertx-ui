@@ -1,15 +1,15 @@
 import React from 'react'
 import Ux from 'ux';
 import './Cab.less'
-import { Table, Button, Alert } from 'antd'
-import { DynamicDialog } from "web";
-import Op from './Op.List';
+import {Alert, Button, Table} from 'antd'
+import {DynamicDialog} from "web";
+import Op from './UI.Op';
 
 class Component extends React.PureComponent {
     state = {
-        selectedRowKeys : [],
-        dialogKey : undefined,
-        selectedKey : undefined
+        selectedRowKeys: [],
+        dialogKey: undefined,
+        selectedKey: undefined
     };
 
     componentDidMount() {
@@ -32,41 +32,41 @@ class Component extends React.PureComponent {
         const op = $metadata.op;
         const {selectedRowKeys = []} = this.state;
         const message = Ux.formatExpr($metadata.report.expr, {
-            selected : selectedRowKeys.length,
-            sum : 0
+            selected: selectedRowKeys.length,
+            sum: 0
         });
         // 数据data
         const data = $list.list;
-        const {$component : Component} = this.props;
+        const {$component: Component} = this.props;
         const dialog = this.state.dialogKey ? $dialog[this.state.dialogKey] : {};
         return (
             <div className="page-pagelist">
                 <div className="page-op">
                     <Button type="primary" icon="plus"
-                            onClick={ Op.fnAdd(this, op.add.dialogKey) }>{ op.add.text }</Button>
-                    { 0 < selectedRowKeys.length ? (
-                        <Button type="default">{ op.batch }</Button>
-                    ) : false }
+                            onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button>
+                    {0 < selectedRowKeys.length ? (
+                        <Button type="default">{op.batch}</Button>
+                    ) : false}
                 </div>
-                { ($metadata.batch) ? (
+                {($metadata.batch) ? (
                     <div className="page-alert">
-                        <Alert message={ (
+                        <Alert message={(
                             <div>
-                                { message }&nbsp;&nbsp;
-                                <a onClick={ Op.fnClear(this) }>{ op.clear }</a>
+                                {message}&nbsp;&nbsp;
+                                <a onClick={Op.fnClear(this)}>{op.clear}</a>
                             </div>
-                        ) } type="info" showIcon/>
+                        )} type="info" showIcon/>
                     </div>
-                ) : false }
+                ) : false}
                 <Table
-                    onChange={ Ux.onAdvanced(this) }
-                    rowSelection={ selection }
-                    loading={ !data }
-                    pagination={ pagination }
-                    dataSource={ data } { ...$table }/>
-                <DynamicDialog $dialog={ dialog } $visible={ dialog.visible }>
-                    <Component { ...this.props } $destory={ !dialog.visible }
-                               $key={ this.state.selectedKey } { ...Ux.toDatum(this.props) }/>
+                    onChange={Ux.onAdvanced(this)}
+                    rowSelection={selection}
+                    loading={!data}
+                    pagination={pagination}
+                    dataSource={data} {...$table}/>
+                <DynamicDialog $dialog={dialog} $visible={dialog.visible}>
+                    <Component {...this.props} $destory={!dialog.visible}
+                               $key={this.state.selectedKey} {...Ux.toDatum(this.props)}/>
                 </DynamicDialog>
             </div>
         )

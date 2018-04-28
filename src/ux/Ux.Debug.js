@@ -21,7 +21,7 @@ import v4 from "uuid";
  */
 const ensureArgs = (object, field) => {
     if (!object || !field || !object.hasOwnProperty(field)) {
-        console.error(`[ZUI] Argument invalid, object must have key ${field}`, object);
+        console.error(`[Zero] Argument invalid, object must have key ${field}`, object);
     }
 };
 /**
@@ -33,7 +33,7 @@ const ensureArgs = (object, field) => {
  */
 const ensureNotNull = (input) => {
     if (!input) {
-        console.error("[ZUI] The input parameter must not be null.");
+        console.error("[Zero] The input parameter must not be null.");
     }
 };
 /**
@@ -45,7 +45,7 @@ const ensureNotNull = (input) => {
  */
 const ensureRuntime = (reference) => {
     if (!reference) {
-        console.error("[ZUI] Your runtime does not support current object", reference);
+        console.error("[Zero] Your runtime does not support current object", reference);
     }
 };
 /**
@@ -58,7 +58,7 @@ const ensureRuntime = (reference) => {
  */
 const ensureAttr = (funName, key = "") => {
     if (!key) {
-        console.error(`[ZUI] This '${funName}' function require the second 'effectKey' parameter`);
+        console.error(`[Zero] This '${funName}' function require the second 'effectKey' parameter`);
     }
 };
 /**
@@ -70,7 +70,7 @@ const ensureAttr = (funName, key = "") => {
  */
 const ensureToken = (token) => {
     if (!token) {
-        console.error("[ZUI] Token could not be picked, the request is invalid.", token);
+        console.error("[Zero] Token could not be picked, the request is invalid.", token);
     }
 };
 /**
@@ -83,7 +83,7 @@ const ensureToken = (token) => {
  */
 const ensureKey = (funName, key = "") => {
     if (!key) {
-        console.error(`[ZUI] Function '${funName}' require input parameter key valid.`);
+        console.error(`[Zero] Function '${funName}' require input parameter key valid.`);
     }
 };
 /**
@@ -95,7 +95,7 @@ const ensureKey = (funName, key = "") => {
  */
 const ensureApp = (app) => {
     if (!app) {
-        console.error("[ZUI] The application has not been initialized.");
+        console.error("[Zero] The application has not been initialized.");
     }
 };
 /**
@@ -114,7 +114,7 @@ const ensureApp = (app) => {
  */
 const ensureRender = (render, option) => {
     if (!U.isFunction(render)) {
-        console.error("[ZUI] Render is not a function.", option);
+        console.error("[Zero] Render is not a function.", option);
     }
 };
 /**
@@ -134,7 +134,7 @@ const ensureRender = (render, option) => {
  */
 const ensureType = (value, fun, flag) => {
     if (!fun(value)) {
-        console.error(`[ZUI] Expected type '${flag}' is invalid.`, value);
+        console.error(`[Zero] Expected type '${flag}' is invalid.`, value);
     }
 };
 /**
@@ -148,7 +148,7 @@ const ensureLength = (array = [], upLimit = 0) => {
     ensureNumber(upLimit);
     if (U.isArray(array)) {
         if (upLimit < array.length) {
-            console.error(`[ZUI] Expected length is '${upLimit}', but current length is '${array.length}'.`);
+            console.error(`[Zero] Expected length is '${upLimit}', but current length is '${array.length}'.`);
         }
     }
 };
@@ -160,7 +160,7 @@ const ensureLength = (array = [], upLimit = 0) => {
  */
 const ensureNumber = (value) => {
     if ("number" !== typeof value) {
-        console.error("[ZUI] Expected number input value here.", typeof value);
+        console.error("[Zero] Expected number input value here.", typeof value);
     }
 };
 /**
@@ -172,7 +172,7 @@ const ensureNumber = (value) => {
 const ensurePositive = (value) => {
     ensureNumber(value);
     if (0 > value) {
-        console.error("[ZUI] Expected positive number of input value.", value);
+        console.error("[Zero] Expected positive number of input value.", value);
     }
 };
 /**
