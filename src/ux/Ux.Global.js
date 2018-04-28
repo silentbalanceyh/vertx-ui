@@ -24,7 +24,10 @@ const isAuthorized = (reference) => {
         $router.to(Env.ENTRY_LOGIN);
     }
 };
-
+/**
+ * @class Global
+ * @description 全局专用业务函数
+ */
 export default {
     // 是否登录
     isLogged,

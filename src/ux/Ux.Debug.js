@@ -7,7 +7,7 @@ import v4 from "uuid";
  * * 1.传入的object不可以是undefined。
  * * 2.传入的field不可以是undefined。
  * * 3.object必须包含field，才不会有错误信息输出。
- * @function ensureArgs
+ * @method ensureArgs
  * @private
  * @param object 被检查的JavaScript对象
  * @param {String} field 被检查的字段名称
@@ -27,7 +27,7 @@ const ensureArgs = (object, field) => {
 /**
  * 检查传入的input是否合法
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureNotNull
+ * @method ensureNotNull
  * @private
  * @param input
  */
@@ -39,7 +39,7 @@ const ensureNotNull = (input) => {
 /**
  * 检查传入的React中用的Component组件是否合法
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureRuntime
+ * @method ensureRuntime
  * @private
  * @param {ReactComponent} reference React中Component组件引用
  */
@@ -51,7 +51,7 @@ const ensureRuntime = (reference) => {
 /**
  * 检查函数中的第二特殊参数`effectKey`是否合法
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureAttr
+ * @method ensureAttr
  * @private
  * @param {Function} funName 待检查的函数名
  * @param {String} key 待检查的第二参的值
@@ -64,7 +64,7 @@ const ensureAttr = (funName, key = "") => {
 /**
  * 检查发送安全请求时的token是否合法
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureToken
+ * @method ensureToken
  * @private
  * @param {String} token 请求中收到的token的值
  */
@@ -76,7 +76,7 @@ const ensureToken = (token) => {
 /**
  * 检查函数调用过程中的参数key是否合法（一般用于高阶检查）
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureKey
+ * @method ensureKey
  * @private
  * @param {Function} funName 待检查的函数名
  * @param {String} key 待检查的键值key
@@ -89,7 +89,7 @@ const ensureKey = (funName, key = "") => {
 /**
  * Application应用专用配置检查，判断当前应用配置是否初始化
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
- * @function ensureApp
+ * @method ensureApp
  * @private
  * @param {Object} app 应用程序配置
  */
@@ -100,7 +100,7 @@ const ensureApp = (app) => {
 };
 /**
  * React Component中的render相关专用检查（是否合法）
- * @function ensureRender
+ * @method ensureRender
  * @private
  * @param {Function} render 函数应用
  * @param {Object} option render过程中的配置
@@ -119,7 +119,7 @@ const ensureRender = (render, option) => {
 };
 /**
  * 调用传入函数检查数据类型，如果类型不对则抛出异常
- * @function ensureType
+ * @method ensureType
  * @private
  * @param value
  * @param {Function} fun
@@ -139,7 +139,7 @@ const ensureType = (value, fun, flag) => {
 };
 /**
  * 检查数组的长度是否大于上限长度
- * @function ensureLength
+ * @method ensureLength
  * @private
  * @param {Array} array 被检查的数组
  * @param {Number} upLimit 数组上限长度值
@@ -154,7 +154,7 @@ const ensureLength = (array = [], upLimit = 0) => {
 };
 /**
  * 检查当前传入值是否是一个合法的Number
- * @function ensureNumber
+ * @method ensureNumber
  * @private
  * @param value 传入的数值
  */
@@ -165,7 +165,7 @@ const ensureNumber = (value) => {
 };
 /**
  * 检查当前传入的值是否是一个正数的Number
- * @function ensurePositive
+ * @method ensurePositive
  * @private
  * @param value
  */
@@ -177,7 +177,7 @@ const ensurePositive = (value) => {
 };
 /**
  * 将传入的值`data`下载成一个文件保存，文件名系统生成，该文件名被转换过，所以调用时使用Ux调用
- * @function dgFileJson
+ * @method dgFileJson
  * @param {Object|Array} data 传入的数据
  * @param ext 保存的文件格式后缀名，默认为.json
  * @example
@@ -202,7 +202,7 @@ const dgFileJson = (data, ext = "json") => {
  * 【Development Only】
  * 在调试模式才启用的Form专用打印信息，打印Form初始化过程中的表单数据
  * 支持两种模式：updated = true为更新Form时的数据，updated = false则是添加时的数据
- * @function dgForm
+ * @method dgForm
  * @param {ReactComponent} reference 包含了form变量的React的组件Component引用
  * @param data 当前Form中的表单数据
  * @param updated 判断当前调试使用的是更新/添加模式
@@ -218,7 +218,7 @@ const dgForm = (reference, data = {}, updated = false) => {
 /**
  * 【Development Only】
  * Ux包的报表专用调试方法，整个应用中只有一处调用该方法
- * @function dgScript
+ * @method dgScript
  * @param ux Ux引用
  */
 const dgScript = (ux = {}) => {
@@ -235,7 +235,7 @@ const dgScript = (ux = {}) => {
 /**
  * 【Development Only】
  * 自动生成路由中的路由报表，可查看所有的路由信息
- * @function dgRouter
+ * @method dgRouter
  * @param ux Ux引用
  * @param container Layout模板配置信息
  * @param component Page组件配置信息
@@ -252,9 +252,9 @@ const dgRouter = (ux, container, component) => {
 /**
  * 【Development Only】
  * Rxjs专用调试打印方法，执行过后返回data
- * @function dgMonitor
+ * @method dgMonitor
  * @param data 传入需要打印的数据信息
- * @returns 返回传入的数据
+ * @return 返回传入的数据
  */
 const dgMonitor = (data) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {

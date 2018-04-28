@@ -8,12 +8,12 @@ import Dg from "./Ux.Debug";
 
 /**
  * Ajax远程访问过程中的Uri处理器
- * @function ajaxUri
+ * @method ajaxUri
  * @private
  * @param {String} uri 传入的原始路径，如：/api/app/:name
  * @param {String} method 传入的HTTP方法，默认为get
  * @param {Object} params 当前请求的参数数据
- * @returns {String}
+ * @return {String}
  */
 const ajaxUri = (uri, method = "get", params = {}) => {
     let api = Expr.formatExpr(uri, params);
@@ -29,10 +29,10 @@ const ajaxUri = (uri, method = "get", params = {}) => {
 };
 /**
  * Ajax远程访问过程中的Header处理器
- * @function ajaxHeader
+ * @method ajaxHeader
  * @private
  * @param {Boolean} secure 是否为安全模式？安全模式会添加Authorization头。
- * @returns {Headers}
+ * @return {Headers}
  */
 const ajaxHeader = (secure = false) => {
     const headers = new Headers();
@@ -49,10 +49,10 @@ const ajaxHeader = (secure = false) => {
 /**
  * Ajax中的特殊参数处理器，如果包含了$body字段值，则将该值当做可处理的参数处理，
  * 该方法参数主要用于处理带路径参数的POST/PUT方法同时使用的场景
- * @function ajaxParams
+ * @method ajaxParams
  * @private
  * @param {Object} params
- * @returns {String}
+ * @return {String}
  * @example
  *
  *      // PUT和POST的处理
@@ -74,11 +74,11 @@ const ajaxParams = (params = {}) => {
 };
 /**
  * Ajax中的响应处理器，Promise调用返回过后的响应专用处理器
- * @function ajaxResponse
+ * @method ajaxResponse
  * @private
  * @param {Request} request 请求对象
  * @param {Object} mockData 【Mock环境可用】专用Mock响应处理
- * @returns {Promise<Response>}
+ * @return {Promise<Response>}
  */
 const ajaxResponse = (request, mockData = {}) =>
     // Mock开启时，返回Mock中data节点的数据
@@ -98,7 +98,7 @@ const ajaxResponse = (request, mockData = {}) =>
             .catch(error => Promise.reject(error));
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法
- * @function ajaxRead
+ * @method ajaxRead
  * @private
  * @param method HTTP方法
  * @param secure 是否安全模式
@@ -115,7 +115,7 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
- * @function ajaxFull
+ * @method ajaxFull
  * @private
  * @param method HTTP方法
  * @param secure 是否安全模式
@@ -134,7 +134,7 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
 };
 /**
  * Ajax日志函数，打印请求过程中的日志信息
- * @function _logAjax
+ * @method _logAjax
  * @private
  * @param api 当前Ajax请求的Uri路径
  * @param method 当前Ajax使用的HTTP方法
@@ -150,7 +150,7 @@ const _logAjax = (api, method, params, mockData) => {
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程写数据方法
- * @function ajaxWrite
+ * @method ajaxWrite
  * @private
  * @param method HTTP方法
  * @param secure 是否安全模式
@@ -169,7 +169,7 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
 };
 /**
  * 统一处理Epic，引入Mock的RxJs处理远程访问
- * @function rxEpic
+ * @method rxEpic
  * @param type redux-act创建出来的Redux Action
  * @param promise 构造的Promise
  * @param processor 响应数据处理器，可用于处理response中的数据
@@ -222,7 +222,7 @@ export default {
     rxEpic,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
-     * @function ajaxFetch
+     * @method ajaxFetch
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据
@@ -231,7 +231,7 @@ export default {
         ajaxRead(Env.HTTP_METHOD.GET)(uri, params, mockData),
     /**
      * secure = false，非安全模式的写方法，HttpMethod = POST，底层调ajaxWrite
-     * @function ajaxPush
+     * @method ajaxPush
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据
@@ -240,7 +240,7 @@ export default {
         ajaxWrite(Env.HTTP_METHOD.POST)(uri, params, mockData),
     /**
      * secure = true，安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
-     * @function ajaxGet
+     * @method ajaxGet
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据
@@ -249,7 +249,7 @@ export default {
         ajaxRead(Env.HTTP_METHOD.GET, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = POST，底层调ajaxFull
-     * @function ajaxPost
+     * @method ajaxPost
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据
@@ -258,7 +258,7 @@ export default {
         ajaxFull(Env.HTTP_METHOD.POST, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = PUT，底层调ajaxFull
-     * @function ajaxPut
+     * @method ajaxPut
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据
@@ -267,7 +267,7 @@ export default {
         ajaxFull(Env.HTTP_METHOD.PUT, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = DELETE，底层调ajaxFull
-     * @function ajaxDelete
+     * @method ajaxDelete
      * @param uri 该Ajax调用的Uri路径
      * @param params 请求参数
      * @param mockData 【Mock环境可用】模拟数据

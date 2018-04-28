@@ -6,6 +6,13 @@ import routeData from '../route'
 import Random from './Ux.Random'
 import Debug from './Ux.Debug';
 
+/**
+ * 自动生成路由专用函数
+ * @method route
+ * @param container 生成路由的Layout组件
+ * @param components 生成路由的Page组件
+ * @return {Array}
+ */
 const route = (container = {}, components = {}) => {
     // 先处理定义路由
     const routes = [];
@@ -53,6 +60,10 @@ const route = (container = {}, components = {}) => {
     }
     return routes;
 };
+/**
+ * @class Env
+ * @description 环境变量专用类信息
+ */
 export default {
     LANG: process.env.$LANG,
     ENDPOINT: process.env.$ENDPOINT,
@@ -65,25 +76,27 @@ export default {
     MAP_KEY: process.env.$MAP_KEY,
     DEBUG: Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG),
     MOCK: Boolean("development" === process.env.NODE_ENV && process.env.$MOCK),
-    dataOut: (data) => Taper.fnFlush(DataLabor.createIn(data)),
-    dataIn: (state) => DataLabor.createOut(state),
-    dgRouter: Debug.dgRouter,
-    dgFileJson: Debug.dgFileJson,
-    dgForm: Debug.dgForm,
-    dgMonitor: Debug.dgMonitor,
-    dgScript: Debug.dgScript,
-    createAction: (path) => createAction(`${process.env.$K_EVENT}${path}`),
-    route,
-    zero,
+    /**
+     * 专用常量文件，描述HTTP方法
+     * @method HTTP_METHOD
+     */
     HTTP_METHOD: {
         GET: "get",
         POST: "post",
         PUT: "put",
         DELETE: "delete"
     },
+    /**
+     * 专用常量文件，描述MIME媒体类型
+     * @method MIMES
+     */
     MIMES: {
         JSON: "application/json"
     },
+    /**
+     * 专用常量文件，描述HTTP协议头类型
+     * @method HTTP11
+     */
     HTTP11: {
         "ACCEPT": "Accept",
         "ACCEPT_CHARSET": "Accept-Charset",
@@ -129,5 +142,34 @@ export default {
         "VARY": "Vary",
         "WARNING": "Warning",
         "WWW_AUTHENTICATE": "WWW-Authenticate"
-    }
+    },
+    /**
+     * Redux专用状态树的写入方法
+     * @method dataOut
+     * @param data 被写入的数据
+     */
+    dataOut: (data) => Taper.fnFlush(DataLabor.createIn(data)),
+    /**
+     * Redux专用状态树的读取方法
+     * @method dataIn
+     * @param state Redux读取到的状态
+     */
+    dataIn: (state) => DataLabor.createOut(state),
+    dgRouter: Debug.dgRouter,
+    dgFileJson: Debug.dgFileJson,
+    dgForm: Debug.dgForm,
+    dgMonitor: Debug.dgMonitor,
+    dgScript: Debug.dgScript,
+    /**
+     * Redux中的Action专用创建函数
+     * @method createAction
+     * @param path 创建的Action对应的路径
+     * */
+    createAction: (path) => createAction(`${process.env.$K_EVENT}${path}`),
+    route,
+    /**
+     * 专用zero的注解
+     * @method zero
+     */
+    zero
 }

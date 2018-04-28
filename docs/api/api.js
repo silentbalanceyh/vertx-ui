@@ -4,7 +4,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "Action",
         "Ajax",
         "Attribute",
-        "Debug"
+        "Column",
+        "Debug",
+        "Depend",
+        "Dialog",
+        "Encrypt",
+        "Env",
+        "Expr",
+        "Field",
+        "Format",
+        "Global"
     ],
     "modules": [
         "Ux"

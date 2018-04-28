@@ -33,6 +33,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ux/Ux.Column.js": {
+            "name": "src/ux/Ux.Column.js",
+            "modules": {},
+            "classes": {
+                "Column": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ux/Ux.Debug.js": {
             "name": "src/ux/Ux.Debug.js",
             "modules": {
@@ -44,17 +53,75 @@
             "fors": {},
             "namespaces": {}
         },
+        "src/ux/Ux.Depend.js": {
+            "name": "src/ux/Ux.Depend.js",
+            "modules": {},
+            "classes": {
+                "Depend": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "src/ux/Ux.Dialog.js": {
             "name": "src/ux/Ux.Dialog.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Dialog": 1
+            },
             "fors": {},
             "namespaces": {}
         },
         "src/ux/Ux.Encrypt.js": {
             "name": "src/ux/Ux.Encrypt.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "Encrypt": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Env.js": {
+            "name": "src/ux/Ux.Env.js",
+            "modules": {},
+            "classes": {
+                "Env": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Expr.js": {
+            "name": "src/ux/Ux.Expr.js",
+            "modules": {},
+            "classes": {
+                "Expr": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Field.js": {
+            "name": "src/ux/Ux.Field.js",
+            "modules": {},
+            "classes": {
+                "Field": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Format.js": {
+            "name": "src/ux/Ux.Format.js",
+            "modules": {},
+            "classes": {
+                "Format": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ux/Ux.Global.js": {
+            "name": "src/ux/Ux.Global.js",
+            "modules": {},
+            "classes": {
+                "Global": 1
+            },
             "fors": {},
             "namespaces": {}
         },
@@ -103,13 +170,22 @@
                 "Action": 1,
                 "Ajax": 1,
                 "Attribute": 1,
-                "Debug": 1
+                "Column": 1,
+                "Debug": 1,
+                "Depend": 1,
+                "Dialog": 1,
+                "Encrypt": 1,
+                "Env": 1,
+                "Expr": 1,
+                "Field": 1,
+                "Format": 1,
+                "Global": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "src/ux/Ux.Debug.js",
-            "line": 265,
+            "file": "src/ux/Ux.Global.js",
+            "line": 27,
             "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
         }
     },
@@ -153,6 +229,19 @@
             "line": 22,
             "description": "Jsx中的组件属性专用绑定"
         },
+        "Column": {
+            "name": "Column",
+            "shortname": "Column",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "file": "src/ux/Ux.Column.js",
+            "line": 290,
+            "description": "Ant Design中的Table专用系列方法，暂时只有PageList在调用这三个函数，\n注意这里的columns必须是`Array`类型用于注入到Table组件"
+        },
         "Debug": {
             "name": "Debug",
             "shortname": "Debug",
@@ -166,6 +255,118 @@
             "file": "src/ux/Ux.Debug.js",
             "line": 265,
             "description": "1. `ensure`工具类：Zero UI内部专用断言工具类\n2. `dg`工具类：开发人员调试常用工具类"
+        },
+        "Depend": {
+            "name": "Depend",
+            "shortname": "Depend",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Depend.js",
+            "line": 38,
+            "description": "用于处理关联字段专用的雷，一般处理带依赖的字段数据"
+        },
+        "Dialog": {
+            "name": "Dialog",
+            "shortname": "Dialog",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 95,
+            "description": "窗口专用雷用于处理弹出窗口的开与关的信息"
+        },
+        "Encrypt": {
+            "name": "Encrypt",
+            "shortname": "Encrypt",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Encrypt.js",
+            "line": 70,
+            "description": "加密、编码、解码函数"
+        },
+        "Env": {
+            "name": "Env",
+            "shortname": "Env",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Env.js",
+            "line": 63,
+            "description": "环境变量专用类信息"
+        },
+        "Expr": {
+            "name": "Expr",
+            "shortname": "Expr",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Expr.js",
+            "line": 85,
+            "description": "字符串格式化专用函数"
+        },
+        "Field": {
+            "name": "Field",
+            "shortname": "Field",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Field.js",
+            "line": 59,
+            "description": "字段异步验证专用类"
+        },
+        "Format": {
+            "name": "Format",
+            "shortname": "Format",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Format.js",
+            "line": 23,
+            "description": "格式化专用函数"
+        },
+        "Global": {
+            "name": "Global",
+            "shortname": "Global",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Ux",
+            "namespace": "",
+            "file": "src/ux/Ux.Global.js",
+            "line": 27,
+            "description": "全局专用业务函数"
         }
     },
     "elements": {},
@@ -571,6 +772,286 @@
             "class": "Attribute"
         },
         {
+            "file": "src/ux/Ux.Column.js",
+            "line": 6,
+            "description": "【高阶函数：二阶】列render方法处理器，用于处理双值\n* 配置键：LOGICAL\n* true/false对应不同的双值，以及不同值呈现值\n* 附加配置项中包含$mapping用于描述双值配置",
+            "itemtype": "method",
+            "name": "renderLogical",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"房包早\",\n         \"dataIndex\": \"brekker\",\n         \"$render\": \"LOGICAL\",\n         \"$mapping\": {\n             \"true\": \"是\",\n             \"false\": \"否\"\n         }\n     }"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 34,
+            "description": "【高阶函数：二阶】列render方法处理器，用于处理带百分号（%）的字符串格式化\n* 配置值：PERCENT",
+            "itemtype": "method",
+            "name": "renderPercent",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 48,
+            "description": "【高阶函数：二阶】列render方法处理器，用于处理时间格式化\n* 配置值：DATE\n* 附加配置中包含$format用于描述moment的格式Pattern",
+            "itemtype": "method",
+            "name": "renderDate",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"抵达日期\",\n         \"dataIndex\": \"arriveTime\",\n         \"$render\": \"DATE\",\n         \"$format\": \"YYYY年MM月DD日 HH:mm:ss\"\n     }"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 70,
+            "description": "【高阶函数：二阶】列render方法处理器，用于处理货币格式化\n* 配置值：CURRENCY\n* 附加配置中包含$flag用于描述货币符号，默认为￥",
+            "itemtype": "method",
+            "name": "renderCurrency",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"单价\",\n         \"dataIndex\": \"unitPrice\",\n         \"$render\": \"CURRENCY\"\n     },"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 92,
+            "description": "【高阶函数：二阶】列render方法处理函数，用于处理表达式格式化\n* 配置项：EXPRESSION\n* 附加配置$expr用于描述表达式，表达式中的占位符使用`:value`的格式",
+            "itemtype": "method",
+            "name": "renderExpression",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"入住天数\",\n         \"dataIndex\": \"insideDays\",\n         \"$render\": \"EXPRESSION\",\n         \"$expr\": \":value天\"\n     }"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 114,
+            "description": "【高阶函数：二阶】列render方法处理函数，用于处理Datum类型：Tabular/Assist专用格式化\n* 配置项：DATUM\n* 附加配置项：$datum用于描述关联的信息，source = key, value和display对应值和呈现字段",
+            "itemtype": "method",
+            "name": "renderDatum",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"会计科目\",\n         \"dataIndex\": \"accountId\",\n         \"$render\": \"DATUM\",\n         \"$datum\": {\n             \"source\": \"account.item\",\n             \"value\": \"category\",\n             \"display\": \"name\"\n         }\n     }"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 143,
+            "description": "【高阶函数：二阶】列render方法处理函数，用于处理Link类型：带操作的链接类型\n* 配置值：LINK\n* 附加配置想对复杂，用于处理操作链接，数组$config用于描述当前操作按钮\n     * 如果是divider的字符串则直接渲染分隔符（无操作）；\n     * 如果包含了dialogKey则表示当前按钮触发过后会显示dialog窗口；\n     * 如果包含了confirm，则会启用提示操作；\n     * 如果包含onClick则使用onClick生成确认函数，关联到Dialog中的Yes；如果包含confirm，则confirm就是窗口函数，onConfirm充当不带confirm时的onClick二阶函数；",
+            "itemtype": "method",
+            "name": "renderLink",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "config",
+                    "description": "单列配置数据",
+                    "type": "Object"
+                },
+                {
+                    "name": "ops",
+                    "description": "可传入的二阶函数，用于生成新的Click函数"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Function(*=): *"
+            },
+            "example": [
+                "\n\n     ...\n     {\n         \"title\": \"操作\",\n         \"dataIndex\": \"key\",\n         \"fixed\": \"left\",\n         \"$render\": \"LINK\",\n         \"$config\": [\n             {\n                 \"key\": \"btnEdit\",\n                 \"text\": \"编辑\",\n                 \"dialogKey\": \"dgEdit\",\n                 \"onClick\": \"fnEdit\"\n             },\n             \"divider\",\n             {\n                 \"key\": \"btnDelete\",\n                 \"text\": \"删除\",\n                 \"dataPath\": \"list.items\",\n                 \"confirm\": {\n                     \"title\": \"确认删除当前入住人？\",\n                     \"okText\": \"是\",\n                     \"cancelText\": \"否\",\n                     \"onConfirm\": \"fnRemove\"\n                 }\n             }\n         ]\n     }"
+            ],
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 234,
+            "description": "Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性",
+            "itemtype": "method",
+            "name": "uiTableColumn",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "columns",
+                    "description": "当前Table组件的columns配置",
+                    "type": "Array"
+                },
+                {
+                    "name": "ops",
+                    "description": "当前列是否可操作列：如列中包含了编辑、删除按钮"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 253,
+            "description": "Ant Design中的Table组件的Table组件专用属性`pagination`处理",
+            "itemtype": "method",
+            "name": "uiTablePager",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "pager",
+                    "description": "分页对象，包含了`size`和`page`两个属性",
+                    "type": "Object"
+                },
+                {
+                    "name": "count",
+                    "description": "当前分页组件的数据中的记录数",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Column"
+        },
+        {
+            "file": "src/ux/Ux.Column.js",
+            "line": 271,
+            "description": "【高阶函数：二阶】Ant Design中的Table组件专用属性`rowSelection`生成函数",
+            "itemtype": "method",
+            "name": "uiTableSelection",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Object"
+            },
+            "class": "Column"
+        },
+        {
             "file": "src/ux/Ux.Debug.js",
             "line": 5,
             "description": "检查传入对象object是否包含了field字段值\n* 1.传入的object不可以是undefined。\n* 2.传入的field不可以是undefined。\n* 3.object必须包含field，才不会有错误信息输出。",
@@ -912,34 +1393,529 @@
             "class": "Debug"
         },
         {
-            "file": "src/ux/Ux.Dialog.js",
-            "line": 35,
-            "description": "添加参数信息",
+            "file": "src/ux/Ux.Depend.js",
+            "line": 3,
+            "description": "处理关联字段的只读数据信息，该reference必须是Ant Design中的Form相关值",
+            "itemtype": "method",
+            "name": "dependReadOnlyDatum",
             "params": [
                 {
                     "name": "reference",
-                    "description": ""
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
                 },
                 {
-                    "name": "key",
-                    "description": ""
+                    "name": "sourceKey",
+                    "description": "该sourceKey对应：Tabular/Assist专用的key值信息"
+                },
+                {
+                    "name": "filterFun",
+                    "description": "针对数据源处理的filter过滤函数信息，该过滤函数可将sourceKey结果Array处理掉"
+                },
+                {
+                    "name": "formField",
+                    "description": "依赖的Form中的字段值"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Boolean"
+            },
+            "example": [
+                "\n\n     ...\n     surety: (reference, jsx = {}) => {\n         jsx.readOnly = Ux.dependReadOnlyDatum(\n             reference,\n             \"surety.type\",\n             item => {\n                 return \"None\" === item.code;\n             },\n             \"suretyType\"\n         );\n         // 是否删除placeholder\n         if (jsx.readOnly) {\n             delete jsx.placeholder;\n         }\n         return (<Input {...jsx} />)\n     },"
+            ],
+            "class": "Depend",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 26,
+            "description": "错误信息显示窗口",
+            "itemtype": "method",
+            "name": "showError",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "message",
+                    "description": "直接呈现的消息"
                 },
                 {
                     "name": "fnSuccess",
-                    "description": ""
+                    "description": "窗口按钮的回调函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "Dialog",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 34,
+            "description": "成功信息显示专用窗口",
+            "itemtype": "method",
+            "name": "showSuccess",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "message",
+                    "description": "直接呈现的消息"
+                },
+                {
+                    "name": "fnSuccess",
+                    "description": "窗口按钮的回调函数",
+                    "type": "Function"
+                }
+            ],
+            "class": "Dialog",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 47,
+            "description": "显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；\n* key用于从`modal`配置中提取窗口信息",
+            "itemtype": "method",
+            "name": "showDialog",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                },
+                {
+                    "name": "key",
+                    "description": "提取配置的key值",
+                    "type": "String"
+                },
+                {
+                    "name": "fnSuccess",
+                    "description": "窗口按钮的回调函数",
+                    "type": "Function"
                 },
                 {
                     "name": "params",
-                    "description": ""
+                    "description": "传入参数，用于处理message专用",
+                    "type": "Object"
                 }
             ],
-            "class": "",
+            "example": [
+                "\n\n     ...\n     \"_modal\": {\n         \"type\": \"success\",\n         \"message\": {\n             \"add\": \"您的账单项目添加成功！\",\n             \"edit\": \"您的账单项目保存成功！\"\n         }\n     }"
+            ],
+            "class": "Dialog",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 75,
+            "description": "显示窗口专用函数，直接和React的组件联合使用\n* `fnShow`函数必须存在于reference.props",
+            "itemtype": "method",
+            "name": "fadeIn",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "class": "Dialog",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Dialog.js",
+            "line": 85,
+            "description": "隐藏窗口专用函数，直接和React的组件联合使用\n* `fnHide`函数必须存在于reference.props",
+            "itemtype": "method",
+            "name": "fadeOut",
+            "params": [
+                {
+                    "name": "reference",
+                    "description": "React对应组件引用",
+                    "type": "ReactComponent"
+                }
+            ],
+            "class": "Dialog",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Encrypt.js",
+            "line": 20,
+            "description": "MD5加密函数，针对value进行MD5加密（全大小）",
+            "itemtype": "method",
+            "name": "encryptMD5",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "被加密字符串"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Encrypt",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Encrypt.js",
+            "line": 33,
+            "description": "Base64编码函数，针对value进行Base64编码",
+            "itemtype": "method",
+            "name": "encryptBase64",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "被编码字符串"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Encrypt",
             "module": "Ux"
         },
         {
             "file": "src/ux/Ux.Encrypt.js",
             "line": 42,
-            "class": "",
+            "description": "Base64解码函数，针对value进行Base64解码",
+            "itemtype": "method",
+            "name": "decryptBase64",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "被解码字符串"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Encrypt",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Encrypt.js",
+            "line": 51,
+            "description": "数字签名专用Hmac512算法加密，针对value和secret一起进行Hmac512数字签名加密",
+            "itemtype": "method",
+            "name": "encryptHmac512",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "被签名字符串"
+                },
+                {
+                    "name": "secret",
+                    "description": "随机密钥"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Encrypt",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 9,
+            "description": "自动生成路由专用函数",
+            "itemtype": "method",
+            "name": "route",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "生成路由的Layout组件"
+                },
+                {
+                    "name": "components",
+                    "description": "生成路由的Page组件"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "Array"
+            },
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 79,
+            "description": "专用常量文件，描述HTTP方法",
+            "itemtype": "method",
+            "name": "HTTP_METHOD",
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 89,
+            "description": "专用常量文件，描述MIME媒体类型",
+            "itemtype": "method",
+            "name": "MIMES",
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 96,
+            "description": "专用常量文件，描述HTTP协议头类型",
+            "itemtype": "method",
+            "name": "HTTP11",
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 146,
+            "description": "Redux专用状态树的写入方法",
+            "itemtype": "method",
+            "name": "dataOut",
+            "params": [
+                {
+                    "name": "data",
+                    "description": "被写入的数据"
+                }
+            ],
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 152,
+            "description": "Redux专用状态树的读取方法",
+            "itemtype": "method",
+            "name": "dataIn",
+            "params": [
+                {
+                    "name": "state",
+                    "description": "Redux读取到的状态"
+                }
+            ],
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 163,
+            "description": "Redux中的Action专用创建函数",
+            "itemtype": "method",
+            "name": "createAction",
+            "params": [
+                {
+                    "name": "path",
+                    "description": "创建的Action对应的路径"
+                }
+            ],
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Env.js",
+            "line": 170,
+            "description": "专用zero的注解",
+            "itemtype": "method",
+            "name": "zero",
+            "class": "Env",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Expr.js",
+            "line": 32,
+            "description": "格式化字符串，将:x，:y使用params进行参数替换\n比如：/api/test/:name和{name:\"lang\"}两个合并成 => /api/test/lang",
+            "itemtype": "method",
+            "name": "formatExpr",
+            "params": [
+                {
+                    "name": "input",
+                    "description": "原始字符串",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "传入参数",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Expr",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Expr.js",
+            "line": 52,
+            "description": "将参数追加到Query String中生成完整的uri链接。",
+            "itemtype": "method",
+            "name": "formatQuery",
+            "params": [
+                {
+                    "name": "uri",
+                    "description": "被格式化编码的Uri",
+                    "type": "String"
+                },
+                {
+                    "name": "params",
+                    "description": "将要追加的Query参数值",
+                    "type": "Object"
+                },
+                {
+                    "name": "encode",
+                    "description": "是否针对参数进行uri encode编码，默认是需编码的",
+                    "type": "Boolean"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Expr",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Expr.js",
+            "line": 96,
+            "description": "将传入时间进行格式化专用函数",
+            "itemtype": "method",
+            "name": "formatDate",
+            "params": [
+                {
+                    "name": "value",
+                    "description": "时间数值"
+                },
+                {
+                    "name": "pattern",
+                    "description": "输出的时间格式",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Expr",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Expr.js",
+            "line": 104,
+            "description": "将当前时间格式化专用函数",
+            "itemtype": "method",
+            "name": "formatNow",
+            "params": [
+                {
+                    "name": "pattern",
+                    "description": "输出的时间格式",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "String"
+            },
+            "class": "Expr",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Field.js",
+            "line": 8,
+            "description": "二义性验证专用异步验证函数，返回值为true或false",
+            "itemtype": "method",
+            "name": "asyncTrue",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "异步验证配置信息"
+                },
+                {
+                    "name": "params",
+                    "description": "传入参数信息"
+                },
+                {
+                    "name": "callback",
+                    "description": "异步验证完成后的回调对象，success为true回调，failure为false回调"
+                },
+                {
+                    "name": "mock",
+                    "description": "【Mock模式可用】"
+                }
+            ],
+            "class": "Field",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Field.js",
+            "line": 36,
+            "description": "异步验证专用函数，返回值为Object",
+            "itemtype": "method",
+            "name": "asyncData",
+            "params": [
+                {
+                    "name": "config",
+                    "description": "异步验证配置信息"
+                },
+                {
+                    "name": "params",
+                    "description": "传入参数信息"
+                },
+                {
+                    "name": "callback",
+                    "description": "异步验证完成后的回调函数"
+                },
+                {
+                    "name": "mock",
+                    "description": "【Mock模式可用】"
+                }
+            ],
+            "class": "Field",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Format.js",
+            "line": 3,
+            "description": "将传入值格式化成货币格式，该方法不带货币符号",
+            "itemtype": "method",
+            "name": "fmtCurrency",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Format",
+            "module": "Ux"
+        },
+        {
+            "file": "src/ux/Ux.Format.js",
+            "line": 13,
+            "description": "将传入值格式化成带百分比的字符串",
+            "itemtype": "method",
+            "name": "fmtPercent",
+            "params": [
+                {
+                    "name": "value",
+                    "description": ""
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "*"
+            },
+            "class": "Format",
             "module": "Ux"
         },
         {
@@ -1053,172 +2029,8 @@
     ],
     "warnings": [
         {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Action.js:5"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:9"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Ajax.js:9"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:30"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Ajax.js:30"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:49"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Ajax.js:49"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:75"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Ajax.js:75"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:99"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:116"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:135"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:151"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:170"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:223"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:232"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:241"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:250"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:259"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Ajax.js:268"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Attribute.js:3"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:5"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:27"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:39"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:51"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:64"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:76"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:89"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:101"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:120"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:140"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:155"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:166"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:178"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:201"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:218"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:235"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " src/ux/Ux.Debug.js:252"
-        },
-        {
-            "message": "replacing incorrect tag: returns with return",
-            "line": " src/ux/Ux.Debug.js:252"
-        },
-        {
             "message": "replacing incorrect tag: returns with return",
             "line": " src/ux/Ux.Hoc.js:68"
-        },
-        {
-            "message": "Missing item type\n添加参数信息",
-            "line": " src/ux/Ux.Dialog.js:35"
-        },
-        {
-            "message": "Missing item type",
-            "line": " src/ux/Ux.Encrypt.js:42"
         },
         {
             "message": "Missing item type\nfnShow:对话框弹出窗口\nfnHide:对话框关闭窗口\nfnOut:Redux专用写函数\n$dialog:对应Hoc中的_window，对话框参数\n$metadata:对应Hoc中的_pagelist, 页面专用元数据\n$query:当前页面的查询条件信息",

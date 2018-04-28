@@ -3,7 +3,7 @@ import moment from "moment";
 /**
  * 设置Ant Design中组件的属性：
  * * DatePicker组件设置`disabledDate`属性；
- * @function propFromNow
+ * @method propFromNow
  * @param current 当前组件的输入值
  * @example
  *
