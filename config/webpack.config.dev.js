@@ -7,6 +7,7 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 // 自定义模块
@@ -188,7 +189,7 @@ module.exports = {
                 loader: require.resolve("babel-loader"),
                 options: {
                     plugins: [
-                        ["import", { libraryName: "antd", style: true }],
+                        ["import", {libraryName: "antd", style: true}],
                         "transform-class-properties",
                         "transform-decorators-legacy",
                         "transform-decorators",
@@ -204,7 +205,7 @@ module.exports = {
                     // This is a feature of `babel-loader` for webpack (not Babel itself).
                     // It enables caching results in ./node_modules/.cache/babel-loader/
                     // directory for faster rebuilds.
-                    presets: [["env", { modules: false }]],
+                    presets: [["env", {modules: false}]],
                     cacheDirectory: true
                 }
             },
@@ -271,7 +272,7 @@ module.exports = {
                     {
                         loader: require.resolve("less-loader"),
                         options: {
-                            javascriptEnabled:true,
+                            javascriptEnabled: true,
                             modifyVars: {
                                 "@primary-color": "#00B2FB"
                             }
