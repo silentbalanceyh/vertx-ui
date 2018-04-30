@@ -14,7 +14,7 @@ import v4 from "uuid";
  * @example
  *
  *      // 导入Debug子类
- *      import Dg from './Ux.Debug';
+ *      import Dg from './Ux.DEV_DEBUG';
  *      // 省略中间代码
  *      const reference = ...;
  *      Dg.ensureArgs(reference, "foo");
@@ -208,7 +208,7 @@ const dgFileJson = (data, ext = "json") => {
  * @param updated 判断当前调试使用的是更新/添加模式
  */
 const dgForm = (reference, data = {}, updated = false) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.groupCollapsed("[Form] Form metadata when initialized. updated = ", updated);
         console.info("Init Value = ", data);
         console.info("Init Function = ", reference.props.fnInit);
@@ -222,7 +222,7 @@ const dgForm = (reference, data = {}, updated = false) => {
  * @param ux Ux引用
  */
 const dgScript = (ux = {}) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.info(ux);
         console.groupCollapsed("[Ux] Assist report as following:");
         const numCond = 0;
@@ -241,9 +241,9 @@ const dgScript = (ux = {}) => {
  * @param component Page组件配置信息
  */
 const dgRouter = (ux, container, component) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
-        console.info(ux);
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.groupCollapsed("[Ux] UI report as following:");
+        console.info("[Ux] Ux Tool = ", ux);
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
         console.groupEnd();
@@ -257,7 +257,7 @@ const dgRouter = (ux, container, component) => {
  * @return 返回传入的数据
  */
 const dgMonitor = (data) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.info(data);
     }
     return data;

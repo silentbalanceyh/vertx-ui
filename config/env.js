@@ -1,7 +1,6 @@
 const fs = require("fs");
 const path = require("path");
 const paths = require("./paths");
-const envs = require("./variables");
 // 保证paths.js文件在env.js之后被载入，并且可读取.env的环境变量
 delete require.cache[require.resolve("./paths")];
 
@@ -54,6 +53,22 @@ process.env.NODE_PATH = (process.env.NODE_PATH || "")
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
+    // 运行时才操作的环境变量
+    function getEnv() {
+        const zEnvs = {};
+        for (const eKey in process.env) {
+            if (process.env.hasOwnProperty(eKey)) {
+                if (eKey.startsWith("Z_")) {
+                    const key = `${eKey.substring(2)}`;
+                    zEnvs[key] = process.env[eKey];
+                }
+            }
+        }
+        return zEnvs;
+    }
+
+    const envs = getEnv();
+    // Z_专用环境变量处理a
     const raw = Object.keys(process.env)
         .filter(key => REACT_APP.test(key))
         .reduce(

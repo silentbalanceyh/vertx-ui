@@ -1,7 +1,7 @@
-import Env from './Ux.Env';
+import Cv from './Ux.Constant';
 
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         const flag = type ? type : 'React Component';
         let message = `%c [Zero] [${(!stateless)
             ? flag
@@ -107,7 +107,7 @@ const form = (reference = {}, Name) => {
 const filters = (reference = {}, {
     input = {}, query = {}, filters = {}, cond
 }) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         let message = `%c [Zero] [Filter] Filters Data Process`;
         console.groupCollapsed(message, "color:red;font-weight:900");
         console.log(`%c [Zero] Input Query -> `, 'color:#009900;font-weight:900', input);
@@ -130,7 +130,7 @@ const filters = (reference = {}, {
 const sign = (uri, method, parameters, {
     seed, sig, secret
 }) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         let message = `%c [Zero] [Sign] Sign with method ${method}. ( uri = ${uri})`;
         console.groupCollapsed(message, "color:#CCCC33;font-weight:900");
         console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
@@ -149,7 +149,7 @@ const sign = (uri, method, parameters, {
  * @param token 当前请求的token
  */
 const request = (uri, method, parameters, token = '') => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         let message = `%c [Zero] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
         console.groupCollapsed(message, "color:#0066CC;font-weight:900");
         console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
@@ -167,7 +167,7 @@ const request = (uri, method, parameters, token = '') => {
  * @return {*}
  */
 const response = (err, res, method) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         let message = `%c [Zero] [Ajax] Ajax response got with method. ${method}`;
         console.groupCollapsed(message, "color:#006699;font-weight:900");
         console.log(`%c [Zero] Resource -> `, 'color:#9999CC;font-weight:900', res);
@@ -198,7 +198,7 @@ const error = (error) => {
  * @return {*}
  */
 const mock = (request, response, url) => {
-    if (Env.DEBUG && Env.MOCK) {
+    if (Cv.DEBUG && Cv.MOCK) {
         let message = `%c ------> [Error] [Mock] Mock data for api ${url ? url : ""}`;
         console.groupCollapsed(message, "color:red;font-weight:900");
         if (request) {
@@ -217,7 +217,7 @@ const mock = (request, response, url) => {
  * @param object
  */
 const debug = (object) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         console.info(object);
     }
 };

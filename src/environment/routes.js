@@ -9,9 +9,7 @@ import 'moment/locale/zh-cn';
 import moment from 'moment';
 
 moment.locale('zh-cn');
-
-const route = uri => `/${process.env.$PATH}${uri}`;
-
+const route = uri => `/${process.env.ROUTE}${uri}`;
 const connect = (Uri, Layout, Page, key) => {
     const render = props => {
         const router = DataLabor.getRouter(props);

@@ -1,7 +1,7 @@
 import Rx from "rxjs";
 import U from "underscore";
 import Log from "./Ux.Log";
-import Env from "./Ux.Env";
+import Cv from "./Ux.Constant";
 import Expr from "./Ux.Expr";
 import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
@@ -23,8 +23,8 @@ const ajaxUri = (uri, method = "get", params = {}) => {
     const query = Expr.formatQuery(uri, params);
     // 最终请求路径
     api = "get" === method || "delete" === method
-        ? `${Env.ENDPOINT}${api}${query}`
-        : `${Env.ENDPOINT}${api}`;
+        ? `${Cv.ENDPOINT}${api}${query}`
+        : `${Cv.ENDPOINT}${api}`;
     return api;
 };
 /**
@@ -36,13 +36,13 @@ const ajaxUri = (uri, method = "get", params = {}) => {
  */
 const ajaxHeader = (secure = false) => {
     const headers = new Headers();
-    headers.append(Env.HTTP11.ACCEPT, Env.MIMES.JSON);
-    headers.append(Env.HTTP11.CONTENT_TYPE, Env.MIMES.JSON);
+    headers.append(Cv.HTTP11.ACCEPT, Cv.MIMES.JSON);
+    headers.append(Cv.HTTP11.CONTENT_TYPE, Cv.MIMES.JSON);
     // 处理Authorization
     if (secure) {
         const token = Sign.token();
         Dg.ensureToken(token);
-        headers.append(Env.HTTP11.AUTHORIZATION, token);
+        headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
     return headers;
 };
@@ -156,7 +156,7 @@ const _logAjax = (api, method, params, mockData) => {
  * @param secure 是否安全模式
  */
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
-    const api = `${Env.ENDPOINT}${uri}`;
+    const api = `${Cv.ENDPOINT}${uri}`;
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {
@@ -192,13 +192,13 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
         // 触发Mock条件
         // 1. 打开Mock环境
         // 2. 提供Mock数据
-        if (Env.MOCK && mockData.mock) {
+        if (Cv.MOCK && mockData.mock) {
             let processed = mockData.data;
             return Rx.Observable.from(type)
                 .map(action => action.payload)
                 .map(data => Log.mock(data, mockProcessor ? mockProcessor(data, processed) : processed))
                 .map(processor)
-                .map(data => Env.dataOut(data));
+                .map(data => Cv.dataOut(data));
         } else {
             // 非Mock模式
             return Rx.Observable.from(type)
@@ -207,7 +207,7 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
                         .map(processor)
-                        .map(data => Env.dataOut(data))
+                        .map(data => Cv.dataOut(data))
                 );
         }
     } else {
@@ -228,7 +228,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxFetch: (uri, params = {}, mockData) =>
-        ajaxRead(Env.HTTP_METHOD.GET)(uri, params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET)(uri, params, mockData),
     /**
      * secure = false，非安全模式的写方法，HttpMethod = POST，底层调ajaxWrite
      * @method ajaxPush
@@ -237,7 +237,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPush: (uri, params = {}, mockData) =>
-        ajaxWrite(Env.HTTP_METHOD.POST)(uri, params, mockData),
+        ajaxWrite(Cv.HTTP_METHOD.POST)(uri, params, mockData),
     /**
      * secure = true，安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxGet
@@ -246,7 +246,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxGet: (uri, params = {}, mockData) =>
-        ajaxRead(Env.HTTP_METHOD.GET, true)(uri, params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = POST，底层调ajaxFull
      * @method ajaxPost
@@ -255,7 +255,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPost: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.POST, true)(uri, params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.POST, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = PUT，底层调ajaxFull
      * @method ajaxPut
@@ -264,7 +264,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPut: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.PUT, true)(uri, params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.PUT, true)(uri, params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = DELETE，底层调ajaxFull
      * @method ajaxDelete
@@ -273,5 +273,5 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxDelete: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.DELETE, true)(uri, params, mockData)
+        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(uri, params, mockData)
 };
