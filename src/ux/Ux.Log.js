@@ -17,7 +17,7 @@ const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
 /**
  * 【开发模式】可重用控件组件日志打印
  * @method control
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const control = (reference = {}, Name) => {
@@ -30,12 +30,12 @@ const control = (reference = {}, Name) => {
 /**
  * 【开发模式】页面组件日志打印
  * @method page
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const page = (reference = {}, Name) => {
     _colorful(reference, Name, {
-        group: '#CC0033',
+        group: '#0088FF',
         props: '#660099',
         state: '#666666'
     }, 'Rx-Page');
@@ -43,7 +43,7 @@ const page = (reference = {}, Name) => {
 /**
  * 【开发模式】纯函数组件日志打印
  * @method stateless
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const stateless = (props = {}, Name) => {
@@ -59,7 +59,7 @@ const stateless = (props = {}, Name) => {
 /**
  * 【开发模式】Layout组件日志打印
  * @method container
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const container = (reference = {}, Name) => {
@@ -72,7 +72,7 @@ const container = (reference = {}, Name) => {
 /**
  * 【开发模式】Page中的其他自定义组件日志打印
  * @method component
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const component = (reference = {}, Name) => {
@@ -85,7 +85,7 @@ const component = (reference = {}, Name) => {
 /**
  * 【开发模式】Form专用组件日志打印
  * @method form
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param Name 当前控件名称
  */
 const form = (reference = {}, Name) => {
@@ -98,7 +98,7 @@ const form = (reference = {}, Name) => {
 /**
  * 【开发模式】过滤参数专用
  * @method filters
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param input 输入的Query参数
  * @param query Prop属性中的Query参数
  * @param filters 最终搜索用的Query参数
@@ -218,7 +218,10 @@ const mock = (request, response, url) => {
  */
 const debug = (object) => {
     if (Cv.DEBUG) {
-        console.info(object);
+        let message = `%c [Zero] [Rx-Direct] Debug Object`;
+        console.groupCollapsed(message, "color:#660099;font-weight:900");
+        console.log("[Zero] Object Data: ", object);
+        console.groupEnd();
     }
 };
 /**

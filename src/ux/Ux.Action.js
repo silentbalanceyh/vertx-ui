@@ -7,7 +7,7 @@ import U from 'underscore';
  * 1. form变量为Ant Design的Form创建的引用；
  * 2. $key变量标识Form的提交模式：$key = undefined则是添加模式；
  * @method runSubmit
- * @param {ReactComponent} reference React专用组件引用
+ * @param {React.PureComponent} reference React专用组件引用
  * @param {Function} fnSuccess 提交成功过后的回调函数
  * @param {Function} fnFailure 如果验证出现错误后的回调函数
  * @example

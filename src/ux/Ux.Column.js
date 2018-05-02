@@ -10,7 +10,7 @@ import Immutable from "immutable";
  * * 附加配置项中包含$mapping用于描述双值配置
  * @method renderLogical
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*): *}
  * @example
@@ -36,7 +36,7 @@ const renderLogical = (reference, config) => text => {
  * * 配置值：PERCENT
  * @method renderPercent
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*=): *}
  */
@@ -51,7 +51,7 @@ const renderPercent = (reference, config) => text => {
  * * 附加配置中包含$format用于描述moment的格式Pattern
  * @method renderDate
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*=): *}
  * @example
@@ -73,7 +73,7 @@ const renderDate = (reference, config) => text => {
  * * 附加配置中包含$flag用于描述货币符号，默认为￥
  * @method renderCurrency
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*=): *}
  * @example
@@ -95,7 +95,7 @@ const renderCurrency = (reference, config = {}) => text => {
  * * 附加配置$expr用于描述表达式，表达式中的占位符使用`:value`的格式
  * @method renderExpression
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*=): *}
  * @example
@@ -117,7 +117,7 @@ const renderExpression = (reference, config) => text => {
  * * 附加配置项：$datum用于描述关联的信息，source = key, value和display对应值和呈现字段
  * @method renderDatum
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @return {function(*=): *}
  * @example
@@ -150,7 +150,7 @@ const renderDatum = (reference, config) => text => {
  *      * 如果包含onClick则使用onClick生成确认函数，关联到Dialog中的Yes；如果包含confirm，则confirm就是窗口函数，onConfirm充当不带confirm时的onClick二阶函数；
  * @method renderLink
  * @private
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} config 单列配置数据
  * @param ops 可传入的二阶函数，用于生成新的Click函数
  * @return {function(*=): *}
@@ -234,7 +234,7 @@ const RENDERS = {
 /**
  * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
  * @method uiTableColumn
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Array} columns 当前Table组件的columns配置
  * @param ops 当前列是否可操作列：如列中包含了编辑、删除按钮
  * @return {Array}
@@ -253,7 +253,7 @@ const uiTableColumn = (reference, columns = [], ops = {}) => {
 /**
  * Ant Design中的Table组件的Table组件专用属性`pagination`处理
  * @method uiTablePager
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {Object} pager 分页对象，包含了`size`和`page`两个属性
  * @param {Number} count 当前分页组件的数据中的记录数
  * @return {Object}
@@ -271,7 +271,7 @@ const uiTablePager = (reference, pager = {}, count = 0) => {
 /**
  * 【高阶函数：二阶】Ant Design中的Table组件专用属性`rowSelection`生成函数
  * @method uiTableSelection
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Object}
  */
 const uiTableSelection = reference => {

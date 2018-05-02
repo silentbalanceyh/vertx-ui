@@ -61,6 +61,26 @@ const elementFind = (data = [], filters) => {
     return reference;
 };
 /**
+ * 按`filters`中的条件模糊匹配Array对应的值
+ * @method elementMatch
+ * @param {Array} data 查找的数组
+ * @param filters 查找条件
+ * @return {Array}
+ */
+const elementMatch = (data = [], filters = {}) => {
+    Dg.ensureType(data, U.isArray, "Array");
+    const itemMatch = (data = [], key, value) => data.filter(item => {
+
+        return (value && item[key] && 0 <= item[key].indexOf(value));
+    });
+    for (const key in filters) {
+        if (filters.hasOwnProperty(key) && filters[key]) {
+            data = itemMatch(data, key, filters[key]);
+        }
+    }
+    return data;
+};
+/**
  * 遍历数组中的某个字段，并处理该字段对应的`field`的值
  * @method itElement
  * @param {Array} data 被遍历的数组
@@ -207,7 +227,7 @@ export default {
     /**
      * 增强Unique，查找Tabuler/Assist专用
      * @method elementUniqueDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @param value
@@ -217,10 +237,11 @@ export default {
     // 查找数据中第一个元素
     elementFirst,
     elementFind,
+    elementMatch,
     /**
      * 增强Find，查找Tabular/Assist专用
      * @method elementFindDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param filters 查询条件
      * @return {Array}
@@ -230,7 +251,7 @@ export default {
     /**
      * 增强First，查找Tabular/Assist专用
      * @method elementFirstDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @return {*}

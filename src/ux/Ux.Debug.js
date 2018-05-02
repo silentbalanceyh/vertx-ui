@@ -1,4 +1,4 @@
-import U from 'underscore'
+import U from "underscore";
 import saveAs from "file-saver";
 import v4 from "uuid";
 
@@ -21,7 +21,10 @@ import v4 from "uuid";
  */
 const ensureArgs = (object, field) => {
     if (!object || !field || !object.hasOwnProperty(field)) {
-        console.error(`[Zero] Argument invalid, object must have key ${field}`, object);
+        console.error(
+            `[Zero] Argument invalid, object must have key ${field}`,
+            object
+        );
     }
 };
 /**
@@ -31,7 +34,7 @@ const ensureArgs = (object, field) => {
  * @private
  * @param input
  */
-const ensureNotNull = (input) => {
+const ensureNotNull = input => {
     if (!input) {
         console.error("[Zero] The input parameter must not be null.");
     }
@@ -41,11 +44,14 @@ const ensureNotNull = (input) => {
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
  * @method ensureRuntime
  * @private
- * @param {ReactComponent} reference React中Component组件引用
+ * @param {React.PureComponent} reference React中Component组件引用
  */
-const ensureRuntime = (reference) => {
+const ensureRuntime = reference => {
     if (!reference) {
-        console.error("[Zero] Your runtime does not support current object", reference);
+        console.error(
+            "[Zero] Your runtime does not support current object",
+            reference
+        );
     }
 };
 /**
@@ -58,7 +64,9 @@ const ensureRuntime = (reference) => {
  */
 const ensureAttr = (funName, key = "") => {
     if (!key) {
-        console.error(`[Zero] This '${funName}' function require the second 'effectKey' parameter`);
+        console.error(
+            `[Zero] This '${funName}' function require the second 'effectKey' parameter`
+        );
     }
 };
 /**
@@ -68,9 +76,12 @@ const ensureAttr = (funName, key = "") => {
  * @private
  * @param {String} token 请求中收到的token的值
  */
-const ensureToken = (token) => {
+const ensureToken = token => {
     if (!token) {
-        console.error("[Zero] Token could not be picked, the request is invalid.", token);
+        console.error(
+            "[Zero] Token could not be picked, the request is invalid.",
+            token
+        );
     }
 };
 /**
@@ -83,7 +94,9 @@ const ensureToken = (token) => {
  */
 const ensureKey = (funName, key = "") => {
     if (!key) {
-        console.error(`[Zero] Function '${funName}' require input parameter key valid.`);
+        console.error(
+            `[Zero] Function '${funName}' require input parameter key valid.`
+        );
     }
 };
 /**
@@ -93,7 +106,7 @@ const ensureKey = (funName, key = "") => {
  * @private
  * @param {Object} app 应用程序配置
  */
-const ensureApp = (app) => {
+const ensureApp = app => {
     if (!app) {
         console.error("[Zero] The application has not been initialized.");
     }
@@ -148,7 +161,11 @@ const ensureLength = (array = [], upLimit = 0) => {
     ensureNumber(upLimit);
     if (U.isArray(array)) {
         if (upLimit < array.length) {
-            console.error(`[Zero] Expected length is '${upLimit}', but current length is '${array.length}'.`);
+            console.error(
+                `[Zero] Expected length is '${upLimit}', but current length is '${
+                    array.length
+                    }'.`
+            );
         }
     }
 };
@@ -158,7 +175,7 @@ const ensureLength = (array = [], upLimit = 0) => {
  * @private
  * @param value 传入的数值
  */
-const ensureNumber = (value) => {
+const ensureNumber = value => {
     if ("number" !== typeof value) {
         console.error("[Zero] Expected number input value here.", typeof value);
     }
@@ -169,7 +186,7 @@ const ensureNumber = (value) => {
  * @private
  * @param value
  */
-const ensurePositive = (value) => {
+const ensurePositive = value => {
     ensureNumber(value);
     if (0 > value) {
         console.error("[Zero] Expected positive number of input value.", value);
@@ -191,6 +208,7 @@ const ensurePositive = (value) => {
  */
 const dgFileJson = (data, ext = "json") => {
     let finalData = data;
+    console.log(JSON.stringify(data, null, 2));
     if (!Blob.prototype.isPrototypeOf(data)) {
         finalData = new Blob([JSON.stringify(data, null, 2)], {
             type: "application/json"
@@ -203,7 +221,7 @@ const dgFileJson = (data, ext = "json") => {
  * 在调试模式才启用的Form专用打印信息，打印Form初始化过程中的表单数据
  * 支持两种模式：updated = true为更新Form时的数据，updated = false则是添加时的数据
  * @method dgForm
- * @param {ReactComponent} reference 包含了form变量的React的组件Component引用
+ * @param {React.PureComponent} reference 包含了form变量的React的组件Component引用
  * @param data 当前Form中的表单数据
  * @param updated 判断当前调试使用的是更新/添加模式
  */
@@ -223,12 +241,11 @@ const dgForm = (reference, data = {}, updated = false) => {
  */
 const dgScript = (ux = {}) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.info(ux);
         console.groupCollapsed("[Ux] Assist report as following:");
         const numCond = 0;
         const strCond = "";
-        console.info("[If] if(0) = ", (numCond) ? "Yes" : "No");
-        console.info("[If] if(\"\") = ", (strCond) ? "Yes" : "No");
+        console.info("[If] if(0) = ", numCond ? "Yes" : "No");
+        console.info('[If] if("") = ', strCond ? "Yes" : "No");
         console.groupEnd();
     }
 };
@@ -287,5 +304,5 @@ export default {
     dgScript,
     dgForm,
     dgRouter,
-    dgMonitor,
-}
+    dgMonitor
+};

@@ -91,7 +91,7 @@ const VERFIERS = {
 /**
  * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
  * @method mountValidator
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param item
  */
 const mountValidator = (refereuce = {}, item = {}) => {

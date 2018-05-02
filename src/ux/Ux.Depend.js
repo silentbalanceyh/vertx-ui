@@ -3,7 +3,7 @@ import Prop from './Ux.Prop'
 /**
  * 处理关联字段的只读数据信息，该reference必须是Ant Design中的Form相关值
  * @method dependReadOnlyDatum
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param sourceKey 该sourceKey对应：Tabular/Assist专用的key值信息
  * @param filterFun 针对数据源处理的filter过滤函数信息，该过滤函数可将sourceKey结果Array处理掉
  * @param formField 依赖的Form中的字段值

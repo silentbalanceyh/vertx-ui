@@ -103,7 +103,7 @@ const toQueryParameter = (name = "") => {
  * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
  * * $query:当前页面的查询条件信息
  * @method toPageList
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {JSX} FormComponent 是否包含传入组件
  * @return {{}}
  */
