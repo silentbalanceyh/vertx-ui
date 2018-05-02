@@ -1,5 +1,5 @@
 import Store from './Ux.Store';
-import Env from './Ux.Env';
+import Cv from './Ux.Constant';
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -7,7 +7,7 @@ import Env from './Ux.Env';
  * @return {*}
  */
 const isLogged = () => {
-    const key = Env.KEY_USER;
+    const key = Cv.KEY_USER;
     let userData = Store.Session.get(key);
     if (!userData) userData = {};
     return userData;
@@ -18,7 +18,7 @@ const isLogged = () => {
  * @return {*}
  */
 const isInit = () => {
-    const key = Env.KEY_APP;
+    const key = Cv.KEY_APP;
     let appData = Store.Storage.get(key);
     if (!appData) appData = {};
     return appData;
@@ -29,7 +29,7 @@ const isInit = () => {
  * @return {*}
  */
 const toLogout = () => {
-    const key = Env.KEY_USER;
+    const key = Cv.KEY_USER;
     return Store.Session.remove(key);
 };
 /**
@@ -41,7 +41,7 @@ const toLogout = () => {
 const isAuthorized = (reference) => {
     const {$router} = reference.props;
     if (!isLogged()) {
-        $router.to(Env.ENTRY_LOGIN);
+        $router.to(Cv.ENTRY_LOGIN);
     }
 };
 /**

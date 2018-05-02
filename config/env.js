@@ -1,19 +1,16 @@
 const fs = require("fs");
 const path = require("path");
 const paths = require("./paths");
-const envs = require("./variables");
-// Make sure that including paths.js after env.js will read .env variables.
+// 保证paths.js文件在env.js之后被载入，并且可读取.env的环境变量
 delete require.cache[require.resolve("./paths")];
 
 const NODE_ENV = process.env.NODE_ENV;
 if (!NODE_ENV) {
     throw new Error(
-        "The NODE_ENV environment variable is required but was not specified."
+        "[Zero] The NODE_ENV environment variable is required but was not specified."
     );
 }
-
-// https://github.com/bkeepers/dotenv#what-other-env-files-can-i-use
-var dotenvFiles = [
+const dotenvFiles = [
     `${paths.dotenv}.${NODE_ENV}.local`,
     `${paths.dotenv}.${NODE_ENV}`,
     // Don't include `.env.local` for `test` environment
@@ -30,7 +27,7 @@ var dotenvFiles = [
 dotenvFiles.forEach(dotenvFile => {
     if (fs.existsSync(dotenvFile)) {
         require("dotenv").config({
-            path : dotenvFile
+            path: dotenvFile
         });
     }
 });
@@ -56,6 +53,22 @@ process.env.NODE_PATH = (process.env.NODE_PATH || "")
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
+    // 运行时才操作的环境变量
+    function getEnv() {
+        const zEnvs = {};
+        for (const eKey in process.env) {
+            if (process.env.hasOwnProperty(eKey)) {
+                if (eKey.startsWith("Z_")) {
+                    const key = `${eKey.substring(2)}`;
+                    zEnvs[key] = process.env[eKey];
+                }
+            }
+        }
+        return zEnvs;
+    }
+
+    const envs = getEnv();
+    // Z_专用环境变量处理a
     const raw = Object.keys(process.env)
         .filter(key => REACT_APP.test(key))
         .reduce(
@@ -66,20 +79,20 @@ function getClientEnvironment(publicUrl) {
             {
                 // Useful for determining whether we’re running in production mode.
                 // Most importantly, it switches React into the correct mode.
-                NODE_ENV : process.env.NODE_ENV || "development",
-                BABEL_ENV : process.env.NODE_ENV || "development",
+                NODE_ENV: process.env.NODE_ENV || "development",
+                BABEL_ENV: process.env.NODE_ENV || "development",
                 // Useful for resolving the correct path to static assets in `public`.
                 // For example, <img src={process.env.PUBLIC_URL + '/img/logo.png'} />.
                 // This should only be used as an escape hatch. Normally you would put
                 // images into the `src` and `import` them in code to get their paths.
-                PUBLIC_URL : publicUrl,
+                PUBLIC_URL: publicUrl,
                 // VIE UI 使用的环境变量
                 ...envs
             }
         );
     // Stringify all values so we can feed into Webpack DefinePlugin
     const stringified = {
-        "process.env" : Object.keys(raw).reduce((env, key) => {
+        "process.env": Object.keys(raw).reduce((env, key) => {
             env[key] = JSON.stringify(raw[key]);
             return env;
         }, {})

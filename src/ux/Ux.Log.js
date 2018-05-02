@@ -1,15 +1,15 @@
-import Env from './Ux.Env';
+import Cv from './Ux.Constant';
 
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         const flag = type ? type : 'React Component';
-        let message = `%c [Kid] [${(!stateless)
+        let message = `%c [Zero] [${(!stateless)
             ? flag
             : "Stateless Function Component"}] Control monitor: name = ${Name}`;
         console.groupCollapsed(message, `color:${color.group};font-weight:900`);
-        console.log(`%c [Kid] Props -> `, `color:${color.props};font-weight:900`, reference.props);
+        console.log(`%c [Zero] Props -> `, `color:${color.props};font-weight:900`, reference.props);
         if (!stateless) {
-            console.log(`%c [Kid] State -> `, `color:${color.state};font-weight:900`, reference.state);
+            console.log(`%c [Zero] State -> `, `color:${color.state};font-weight:900`, reference.state);
         }
         console.groupEnd()
     }
@@ -107,13 +107,13 @@ const form = (reference = {}, Name) => {
 const filters = (reference = {}, {
     input = {}, query = {}, filters = {}, cond
 }) => {
-    if (Env.DEBUG) {
-        let message = `%c [Kid] [Filter] Filters Data Process`;
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] [Filter] Filters Data Process`;
         console.groupCollapsed(message, "color:red;font-weight:900");
-        console.log(`%c [Kid] Input Query -> `, 'color:#009900;font-weight:900', input);
-        console.log(`%c [Kid] Prop Query -> `, 'color:#660099;font-weight:900', query);
-        console.log(`%c [Kid] Search Filter -> `, 'color:#0099FF;font-weight:900', filters);
-        console.log(`%c [Kid] Cond -> `, 'color:blue;font-weight:900', cond);
+        console.log(`%c [Zero] Input Query -> `, 'color:#009900;font-weight:900', input);
+        console.log(`%c [Zero] Prop Query -> `, 'color:#660099;font-weight:900', query);
+        console.log(`%c [Zero] Search Filter -> `, 'color:#0099FF;font-weight:900', filters);
+        console.log(`%c [Zero] Cond -> `, 'color:blue;font-weight:900', cond);
         console.groupEnd();
     }
 };
@@ -130,13 +130,13 @@ const filters = (reference = {}, {
 const sign = (uri, method, parameters, {
     seed, sig, secret
 }) => {
-    if (Env.DEBUG) {
-        let message = `%c [Kid] [Sign] Sign with method ${method}. ( uri = ${uri})`;
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] [Sign] Sign with method ${method}. ( uri = ${uri})`;
         console.groupCollapsed(message, "color:#CCCC33;font-weight:900");
-        console.log(`%c [Kid] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
-        console.log(`%c [Kid] Seed -> `, 'color:#669966;font-weight:900', seed);
-        console.log(`%c [Kid] Secret -> `, 'color:blue;font-weight:900', secret);
-        console.log(`%c [Kid] Sig -> `, 'color:red;font-weight:900', sig);
+        console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
+        console.log(`%c [Zero] Seed -> `, 'color:#669966;font-weight:900', seed);
+        console.log(`%c [Zero] Secret -> `, 'color:blue;font-weight:900', secret);
+        console.log(`%c [Zero] Sig -> `, 'color:red;font-weight:900', sig);
         console.groupEnd();
     }
 };
@@ -149,12 +149,12 @@ const sign = (uri, method, parameters, {
  * @param token 当前请求的token
  */
 const request = (uri, method, parameters, token = '') => {
-    if (Env.DEBUG) {
-        let message = `%c [Kid] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
         console.groupCollapsed(message, "color:#0066CC;font-weight:900");
-        console.log(`%c [Kid] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
-        console.log(`%c [Kid] Uri -> `, 'color:#669966;font-weight:900', uri);
-        console.log(`%c [Kid] Token -> `, 'color:#339966;font-weight:900', token);
+        console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
+        console.log(`%c [Zero] Uri -> `, 'color:#669966;font-weight:900', uri);
+        console.log(`%c [Zero] Token -> `, 'color:#339966;font-weight:900', token);
         console.groupEnd();
     }
 };
@@ -167,11 +167,11 @@ const request = (uri, method, parameters, token = '') => {
  * @return {*}
  */
 const response = (err, res, method) => {
-    if (Env.DEBUG) {
-        let message = `%c [Kid] [Ajax] Ajax response got with method. ${method}`;
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] [Ajax] Ajax response got with method. ${method}`;
         console.groupCollapsed(message, "color:#006699;font-weight:900");
-        console.log(`%c [Kid] Resource -> `, 'color:#9999CC;font-weight:900', res);
-        console.log(`%c [Kid] Error -> `, 'color:#669966;font-weight:900', err);
+        console.log(`%c [Zero] Resource -> `, 'color:#9999CC;font-weight:900', res);
+        console.log(`%c [Zero] Error -> `, 'color:#669966;font-weight:900', err);
         console.groupEnd();
     }
     // For fetch api 专用
@@ -183,10 +183,10 @@ const response = (err, res, method) => {
  * @param error
  */
 const error = (error) => {
-    let message = `%c [Kid] [Error] Error occurs got. status = ${error.status}, code = ${error.code}, brief = ${error.statusText}`;
+    let message = `%c [Zero] [Error] Error occurs got. status = ${error.status}, code = ${error.code}, brief = ${error.statusText}`;
     console.groupCollapsed(message, "color:red;font-weight:900");
-    console.log(`%c [Kid] Error message -> `, 'color:#ff0073;font-weight:900', error.message);
-    console.log(`%c [Kid] Read message -> `, 'color:#ee0033;font-weight:900', error.info);
+    console.log(`%c [Zero] Error message -> `, 'color:#ff0073;font-weight:900', error.message);
+    console.log(`%c [Zero] Read message -> `, 'color:#ee0033;font-weight:900', error.info);
     console.groupEnd();
 };
 /**
@@ -198,15 +198,15 @@ const error = (error) => {
  * @return {*}
  */
 const mock = (request, response, url) => {
-    if (Env.DEBUG && Env.MOCK) {
+    if (Cv.DEBUG && Cv.MOCK) {
         let message = `%c ------> [Error] [Mock] Mock data for api ${url ? url : ""}`;
         console.groupCollapsed(message, "color:red;font-weight:900");
         if (request) {
-            console.log("%c [Kid] Mock request -> ", 'color:#99CC33', request);
+            console.log("%c [Zero] Mock request -> ", 'color:#99CC33', request);
         } else {
-            console.log("%c [Kid] Mock request -> ( Promise Mode Directly )", 'color:#99CC33');
+            console.log("%c [Zero] Mock request -> ( Promise Mode Directly )", 'color:#99CC33');
         }
-        console.log("%c [Kid] Mock response -> ", 'color:#0099FF', response);
+        console.log("%c [Zero] Mock response -> ", 'color:#0099FF', response);
         console.groupEnd();
     }
     return response;
@@ -217,7 +217,7 @@ const mock = (request, response, url) => {
  * @param object
  */
 const debug = (object) => {
-    if (Env.DEBUG) {
+    if (Cv.DEBUG) {
         console.info(object);
     }
 };

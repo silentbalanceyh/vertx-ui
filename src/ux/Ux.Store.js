@@ -1,5 +1,5 @@
 import Dg from "./Ux.Debug";
-import Env from './Ux.Env';
+import Cv from './Ux.Constant';
 
 const put = (reference) => (key, value) => {
     Dg.ensureRuntime(reference);
@@ -42,7 +42,7 @@ const clear = (reference) => () => {
  */
 const storeApp = (data) => {
     if (data) {
-        const key = Env.KEY_APP;
+        const key = Cv.KEY_APP;
         put(window.localStorage)(key, data);
     }
     // Fluent for Rxjs
@@ -55,7 +55,7 @@ const storeApp = (data) => {
  */
 const storeUser = (data) => {
     if (data) {
-        const key = Env.KEY_USER;
+        const key = Cv.KEY_USER;
         put(window.sessionStorage)(key, data);
     }
     return data;
