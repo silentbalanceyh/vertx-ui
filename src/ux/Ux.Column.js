@@ -232,6 +232,21 @@ const RENDERS = {
     PERCENT: renderPercent
 };
 /**
+ * Ant Design的Table组件专用的专用属性`columns`列处理器，处理每一列的`render`属性
+ * @method uiColumnRender
+ * @param reference
+ * @param columns
+ * @param key
+ * @param fnRender
+ */
+const uiColumnRender = (reference, columns = [], key, fnRender = () => false) => {
+    columns.forEach(column => {
+        if (column.dataIndex && key === column.dataIndex) {
+            column.render = fnRender;
+        }
+    })
+};
+/**
  * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
  * @method uiTableColumn
  * @param {React.PureComponent} reference React对应组件引用
@@ -293,6 +308,7 @@ const uiTableSelection = reference => {
  * 注意这里的columns必须是`Array`类型用于注入到Table组件
  */
 export default {
+    uiColumnRender,
     uiTableColumn,
     uiTablePager,
     uiTableSelection

@@ -215,12 +215,14 @@ const connectButton = (dialog = {}) => {
             const ele = document.getElementById(key.onOk);
             if (ele) {
                 ele.click();
+            } else {
+                console.warn("[Zero-Connect] Element '" + key.onOk + "' does not exist.");
             }
         }
     } else {
         // 防重复注入
         if (!U.isFunction(dialog.onOk)) {
-            console.warn("[ Cycle ] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
+            console.warn("[Zero-Connect] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
         }
     }
 };

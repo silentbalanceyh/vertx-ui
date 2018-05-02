@@ -45,11 +45,66 @@ const _dialogFun = {
     error: showError
 };
 
-const messageSuccess = (displayMsg, fnSuccess) => message.success(displayMsg, 3, fnSuccess);
-const messageError = (displayMsg, fnSuccess) => message.error(displayMsg, 3, fnSuccess);
+const messageSuccess = (displayMsg, fnSuccess) => {
+    message.destroy();
+    message.success(displayMsg, 3, fnSuccess);
+};
+const messageError = (displayMsg, fnSuccess) => {
+    message.destroy();
+    message.error(displayMsg, 3, fnSuccess);
+};
 const _messageFun = {
     success: messageSuccess,
     error: messageError
+};
+// 特殊函数解析配置
+const _configModal = (reference = {}, key, params, dialog = true) => {
+    const modal = Prop.fromHoc(reference, "modal");
+    // 分析配置信息
+    if (modal) {
+        if (modal.hasOwnProperty('type') && modal.hasOwnProperty('message')) {
+            /*
+            *  {
+            *      "type":"success",
+            *      "message":{
+            *          "key1":"message1",
+            *          "key2":"message2"
+            *      }
+            *  }
+            *  只有一种配置，优先解析
+            */
+            const fun = dialog ? _dialogFun[modal.type] : _messageFun[modal.type];
+            let message = modal.message[key];
+            if (params) {
+                message = Expr.formatExpr(message, params);
+            }
+            return {fun, message};
+        } else if (modal.hasOwnProperty('success') && modal.hasOwnProperty('error')) {
+            /**
+             * {
+             *      "success":{
+             *          "key1":"message1",
+             *          "key2":"message2"
+             *      },
+             *      "error":{
+             *          "key1":"message1",
+             *          "key2":"message2"
+             *      }
+             * }
+             */
+            const success = modal.success;
+            const error = modal.error;
+            const type = success[key] && !error[key] ? "success" : "error";
+            const fun = dialog ? _dialogFun[type] : _messageFun[type];
+            let message = "success" === type ? success[key] : error[key];
+            if (params) {
+                message = Expr.formatExpr(message, params);
+            }
+            return {fun, message};
+        }
+    } else {
+        console.error("[Zero] Core config key '_modal' missing in Hoc.");
+    }
 };
 /**
  * 显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；
@@ -71,13 +126,8 @@ const _messageFun = {
  *      }
  */
 const showDialog = (reference, key, fnSuccess, params) => {
-    const modal = Prop.fromHoc(reference, "modal");
-    const fun = _dialogFun[modal.type];
-    let message = modal.message[key];
-    if (params) {
-        message = Expr.formatExpr(message, params);
-    }
-    fun(reference, message, fnSuccess);
+    const config = _configModal(reference, key, params);
+    config.fun(reference, config.message, fnSuccess);
 };
 /**
  * 显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；
@@ -99,13 +149,8 @@ const showDialog = (reference, key, fnSuccess, params) => {
  *      }
  */
 const showMessage = (reference, key, fnSuccess, params) => {
-    const modal = Prop.fromHoc(reference, "modal");
-    const fun = _messageFun[modal.type];
-    let message = modal.message[key];
-    if (params) {
-        message = Expr.formatExpr(message, params);
-    }
-    fun(message, fnSuccess);
+    const config = _configModal(reference, key, params, false);
+    config.fun(config.message, fnSuccess);
 };
 /**
  * 显示窗口专用函数，直接和React的组件联合使用
