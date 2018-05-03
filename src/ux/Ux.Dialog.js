@@ -80,7 +80,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
             }
             return {fun, message};
         } else if (modal.hasOwnProperty('success') && modal.hasOwnProperty('error')) {
-            /**
+            /*
              * {
              *      "success":{
              *          "key1":"message1",
