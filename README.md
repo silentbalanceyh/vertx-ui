@@ -42,11 +42,15 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 * [UI0001 - 脚手架说明](/document/ui0001-jiao-shou-jia-shuo-ming.md)
 * [UI0002 - 环境变量](/document/ui0002-huan-jing-bian-liang.md)
-* [UI0003 - 基本开发规范](/document/ui0003-ji-ben-kai-fa-gui-fan.md)
-* [UI0006 - 模板/组件开发规范](/document/ui0006-mo-677f-zu-jian-kai-fa-gui-fan.md)
+* [UI0003 - 路由/资源文件说明](/document/ui0003-ji-ben-kai-fa-gui-fan.md)
+* [UI0007 - 编码规范——文件命名](/document/ui0007-jiao-shou-jia-tui-jian-bian-ma-gui-fan.md)
+* [UI0008 - 编码规范——代码约定](/document/ui0008-bian-ma-gui-fan-2014-2014-dai-ma-yue-ding.md)
+* [UI0006 - 模板/组件规范示例](/document/ui0006-mo-677f-zu-jian-kai-fa-gui-fan.md)
 
 ### 开发文档
 
+* [UI0009 - StateIn中的r系列API](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)
+* [UI0010 - zero注解](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
 * [UI0004 - 开发我的第一个模板](/document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
 * [UI0005 - 开发我的第一个页面](/document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
 
