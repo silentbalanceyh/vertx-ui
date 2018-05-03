@@ -1,1 +1,1 @@
-npm run start
+npm run startwin-zero
