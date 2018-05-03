@@ -243,7 +243,7 @@ const tree = (array = [], config = {}) => DataLabor.getTree(array, config).to();
  * @param {Array} array 原始数组
  * @param filters 过滤条件
  * @param {Object} config 构造时的树的配置信息
- * @returns {DataTree|*}
+ * @return {DataTree|*}
  */
 const treeWithFilters = (array = [], filters = {}, config = {}) =>
     tree(elementMatch(array, filters), config);

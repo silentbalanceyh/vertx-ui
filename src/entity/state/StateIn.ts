@@ -1,4 +1,6 @@
 import * as Immutable from "immutable";
+import DataAssist from "../data/DataAssist";
+import DataTabular from "../data/DataTabular";
 import DataObject from "../data/DataObject";
 import DataArray from "../data/DataArray";
 import Navigator from "../flow/Navigator";
@@ -6,6 +8,8 @@ import DataLabor from "../DataLabor";
 
 const _isTyped = (reference: any) => {
     return (
+        reference instanceof DataAssist ||
+        reference instanceof DataTabular ||
         reference instanceof DataObject ||
         reference instanceof DataArray ||
         reference instanceof Navigator
