@@ -2,6 +2,7 @@ import U from "underscore";
 import Immutable from "immutable";
 import Dg from "./Ux.Debug";
 import Prop from "./Ux.Prop";
+import {DataLabor} from "entity";
 
 /**
  * 在数组中查找唯一元素
@@ -59,6 +60,26 @@ const elementFind = (data = [], filters) => {
         }
     }
     return reference;
+};
+/**
+ * 按`filters`中的条件模糊匹配Array对应的值
+ * @method elementMatch
+ * @param {Array} data 查找的数组
+ * @param filters 查找条件
+ * @return {Array}
+ */
+const elementMatch = (data = [], filters = {}) => {
+    Dg.ensureType(data, U.isArray, "Array");
+    const itemMatch = (data = [], key, value) => data.filter(item => {
+
+        return (value && item[key] && 0 <= item[key].indexOf(value));
+    });
+    for (const key in filters) {
+        if (filters.hasOwnProperty(key) && filters[key]) {
+            data = itemMatch(data, key, filters[key]);
+        }
+    }
+    return data;
 };
 /**
  * 遍历数组中的某个字段，并处理该字段对应的`field`的值
@@ -198,6 +219,35 @@ const elementSwitch = (array = [], element = "") => {
     return $elements.toJS();
 };
 /**
+ * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
+ *
+ *      ...
+ *      {
+ *          "id":"用于构造树的记录主键，默认值为id",
+ *          "pid":"用于构造树的父节点字段，默认值为pid",
+ *          "value":"用于构造树的记录值，默认值为value",
+ *          "label":"默认用于构造树的呈现字段，默认值为label",
+ *          "expr":"如果该值支持表达式结构，则使用exprLabel代替label",
+ *          "sort":"当前Tree中节点的排序字段，没有默认值"
+ *      }
+ * 数组中必须包含`level`字段：树的深度字段，必须包含该值，使用该值进行树的运算。
+ * @method tree
+ * @param {Array} array 原始数组
+ * @param {Object} config 构造时的树的配置信息
+ * @return {DataTree | *}
+ */
+const tree = (array = [], config = {}) => DataLabor.getTree(array, config).to();
+/**
+ * 带过滤条件的Tree专用，内置调用tree方法
+ * @method treeWithFilters
+ * @param {Array} array 原始数组
+ * @param filters 过滤条件
+ * @param {Object} config 构造时的树的配置信息
+ * @returns {DataTree|*}
+ */
+const treeWithFilters = (array = [], filters = {}, config = {}) =>
+    tree(elementMatch(array, filters), config);
+/**
  * @class Type
  * @description 复杂数据结构计算
  */
@@ -207,7 +257,7 @@ export default {
     /**
      * 增强Unique，查找Tabuler/Assist专用
      * @method elementUniqueDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @param value
@@ -217,10 +267,11 @@ export default {
     // 查找数据中第一个元素
     elementFirst,
     elementFind,
+    elementMatch,
     /**
      * 增强Find，查找Tabular/Assist专用
      * @method elementFindDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param filters 查询条件
      * @return {Array}
@@ -230,7 +281,7 @@ export default {
     /**
      * 增强First，查找Tabular/Assist专用
      * @method elementFirstDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @return {*}
@@ -249,5 +300,8 @@ export default {
     itFull,
     // 遍历对象
     itObject,
-    itMatrix
+    itMatrix,
+    // 树的构造方法
+    tree,
+    treeWithFilters
 };

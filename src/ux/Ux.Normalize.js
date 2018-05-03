@@ -82,7 +82,7 @@ const mountErrorFocus = (reference, item) => {
 /**
  * 处理当前Form中的input控件专用信息
  * @method extractForm
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {*}
  */
 const extractForm = (reference = {}) => {
@@ -102,7 +102,7 @@ const extractForm = (reference = {}) => {
 /**
  * 处理当前Form中的button或操作按钮配置信息
  * @method extractOp
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {any}
  */
 const extractOp = (reference = {}) => {
@@ -115,7 +115,7 @@ const extractOp = (reference = {}) => {
 /**
  * 处理type = hidden类型的配置信息
  * @method extractHidden
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {{}}
  */
 const extractHidden = (reference = {}) => {

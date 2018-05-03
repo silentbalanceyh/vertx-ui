@@ -3,6 +3,7 @@ import U from "underscore";
 import Log from "./Ux.Log";
 import Cv from "./Ux.Constant";
 import Expr from "./Ux.Expr";
+import Env from './Ux.Env';
 import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
 
@@ -198,7 +199,7 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
                 .map(action => action.payload)
                 .map(data => Log.mock(data, mockProcessor ? mockProcessor(data, processed) : processed))
                 .map(processor)
-                .map(data => Cv.dataOut(data));
+                .map(data => Env.dataOut(data));
         } else {
             // 非Mock模式
             return Rx.Observable.from(type)
@@ -207,7 +208,7 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
                         .map(processor)
-                        .map(data => Cv.dataOut(data))
+                        .map(data => Env.dataOut(data))
                 );
         }
     } else {

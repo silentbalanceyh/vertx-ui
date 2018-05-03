@@ -1,6 +1,7 @@
 import DataObject from "./data/DataObject";
 import DataContainer from "./data/DataContainer";
 import DataArray from "./data/DataArray";
+import DataTree from './data/DataTree';
 import DataRouter from "./flow/DataRouter";
 import Navigator from "./flow/Navigator";
 import StateIn from "./state/StateIn";
@@ -19,6 +20,10 @@ class DataLabor {
 
     static getArray(input: Array<Object>): DataArray {
         return new DataArray(input);
+    }
+
+    static getTree(input: Array<Object>, meta: any = {}): DataTree {
+        return new DataTree(input, meta);
     }
 
     static get(input: any): DataContainer {

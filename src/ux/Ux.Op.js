@@ -74,7 +74,7 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
 /**
  * 【高阶函数：二阶】搜索专用函数
  * @method onSearch
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onSearch = (reference) => (event) => {
@@ -92,7 +92,7 @@ const onSearch = (reference) => (event) => {
 /**
  * 【高阶函数：二阶】重置搜索条件函数，用于高级搜索专用
  * @method onResetFilter
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onResetFilter = (reference) => (event) => {
@@ -110,7 +110,7 @@ const onResetFilter = (reference) => (event) => {
  *
  * componentDidUpdate中的List专用生命周期函数
  * @method cycleUpdatePageList
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param key 数据对应的props中的键值，默认使用`$list`；
  * @param prevProps 之前的属性信息
  */
@@ -179,7 +179,7 @@ const cycleUpdateForm = (props = {}, prevProps = {}) => {
 /**
  * 【高阶函数：二阶】高级搜索专用函数调用，用于分页列表中的分页、过滤、排序同时处理的函数，和Table组件的onChange配合使用
  * @method onAdvanced
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onAdvanced = (reference = {}) => (pagination, filters, sorter) => {
@@ -215,12 +215,14 @@ const connectButton = (dialog = {}) => {
             const ele = document.getElementById(key.onOk);
             if (ele) {
                 ele.click();
+            } else {
+                console.warn("[Zero-Connect] Element '" + key.onOk + "' does not exist.");
             }
         }
     } else {
         // 防重复注入
         if (!U.isFunction(dialog.onOk)) {
-            console.warn("[ Cycle ] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
+            console.warn("[Zero-Connect] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
         }
     }
 };

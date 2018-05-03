@@ -36,7 +36,7 @@ const toLogout = () => {
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面
  * * reference引用中必须包含$router用于路由转发
  * @method isAuthorized
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  */
 const isAuthorized = (reference) => {
     const {$router} = reference.props;

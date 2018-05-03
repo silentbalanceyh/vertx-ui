@@ -55,7 +55,7 @@ const parseExpression = (reference, expr = "") => {
 /**
  * 针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理
  * @method parseAjax
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param parameters 传入的参数值信息
  */
 const parseAjax = (reference, parameters = {}) => {
@@ -92,7 +92,7 @@ const initCond = (reference = {}) => {
 /**
  * 针对Query的专用参数解析器
  * @method parseQuery
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param $query 查询参数相关信息
  * @return {*}
  */

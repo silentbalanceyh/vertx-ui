@@ -28,7 +28,7 @@ const SubMenu = Menu.SubMenu;
 
 const _buildUri = (item = {}, $router = {}) => {
     if ("$MAIN$" === item.uri) {
-        return Ux.ENTRY_ADMIN;
+        return Ux.Env.ENTRY_ADMIN;
     } else if ("$SELF$" === item.uri) {
         return $router ? $router.path() : "";
     } else {

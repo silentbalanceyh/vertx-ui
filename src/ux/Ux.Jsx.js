@@ -44,7 +44,7 @@ const _uiRow = (row) => {
 /**
  * Jsx单字段的Render处理
  * @method jsxField
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param item Form中的Item配置信息
  * @param render 专用render函数
  * @return {*}
@@ -68,7 +68,7 @@ const jsxField = (reference, item = {}, render) => {
 /**
  * Jsx单行字段的Render处理
  * @method jsxFieldRow
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param item
  * @param render
  * @return {*}
@@ -88,7 +88,7 @@ const jsxFieldRow = (reference, item = {}, render) => {
 /**
  * 针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染
  * @method uiFieldForm
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param renders 每个字段不同的render方法
  * @param column 当前Form的列数量
  * @param values Form的初始化值
