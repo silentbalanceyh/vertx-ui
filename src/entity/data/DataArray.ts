@@ -92,9 +92,9 @@ class DataArray implements DataContainer {
             this.setValue([]);
         }
         // 设置信息
-        const hitted = this.searchObject(idField, element[idField]);
+        const hitted = this.searchElement(idField, element[idField]);
         if (hitted) {
-            this.updateObject(element);
+            this.updateElement(element);
         } else {
             this.push(element);
         }
@@ -172,7 +172,7 @@ class DataArray implements DataContainer {
 
     // -------------- 内部自动排序函数 -------------
 
-    updateObject(element: any) {
+    updateElement(element: any) {
         if (!element.key) {
             console.error("[TS-VI] Could not setObject for null key element.");
         }
@@ -192,7 +192,7 @@ class DataArray implements DataContainer {
      * @param field
      * @param value
      */
-    searchObject(field: string, value: any) {
+    searchElement(field: string, value: any) {
         if (!field) {
             console.error("[TS-VI] Could not support invalid field searching.");
             return;
