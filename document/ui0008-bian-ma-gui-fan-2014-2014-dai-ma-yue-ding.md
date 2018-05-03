@@ -21,12 +21,91 @@ Zero UI定义了一套框架本身的命名约定，该约定提供给开发人�
 ## 2. Redux命名
 
 * **R-004**：Redux命名规范
+
   * **R-004-1**：所有的Action统一使用`Ux.createAction`的API创建（使用该API创建的Action会使用`Z_EVENT`环境变量）；
+  * ```js
+    import Ux from 'ux'
+
+    export default {
+        fnOrderFromRoom: Ux.createAction("/RX/ORDER/FROM/ROOM")
+    }
+    ```
   * **R-004-2**：所有的Action名称都以`/`作为值前缀，并且全部大写，类似`Ux.createAction("/RX/BILL/FROM/ROOM");`；
   * **R-004-3**：Epic中调用远程API的Mock目录在当前的`mock`子目录中，且Mock数据的键和当前Epic的函数名相同；
+
 * **R-005**：Redux中的State状态树相关规范
+
   * 由于Zero中写状态树使用了统一的数据结构，所以开发人员基本上不会碰到状态树的写相关API；
   * **R-005-1**：读取状态树的过程统一使用`Ux.dataIn`的API，并借用`TypeScript`中定义的`r`系列的API【[Reference](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)】；
 
+* **R-006**：统一的Action类名设置
 
+  * **R-006-1**：Zero UI中的全局Type名称使用`Taper`名称，导入方式：
+  * ```js
+    import {Taper} from 'environment';
+    ```
+  * **R-006-2**：第三方应用（环境变量中配置的`Z_SHARED`设置的目录则使用`Tps`名称：
+  * ```js
+    import {Tps} from 'app';
+    ```
+  * **R-006-3**：当前组件的`Act.Types.js`中的文件则使用`Types`命名：
+  * ```js
+    import Types from './Act.Types';
+    ```
+
+## 3. 组件相关
+
+* **R-007**：React组件相关命名规范
+  * **R-007-1**：所有组件类名统一使用`Component`，并且从`React.PureComponent`中继承；
+  * ```js
+    @zero({
+        "内容":"zero注解专用配置"
+    })
+    class Component extends React.PureComponent{
+        // ....
+    }
+    export default Component
+    ```
+  * **R-007-2**：组件状态state只能从zero注解中注入，除非不使用zero注解；
+  * ```js
+    @zero({
+        state: {
+            $_show: false,
+            $_dialogKey: undefined
+        },
+    })
+    class Component extends React.PureComponent{
+    }
+    export default Component
+    ```
+* **R-008**：React属性相关命名规范
+
+  * **R-008-1**：读取资源文件中的数据统一使用`Ux.fromHoc(this,"xxx")`，此处xxx表示绑定资源文件的键值；
+  * **R-008-2**：在Jsx中传递属性到子组件中，统一调用下边两个方法；
+    * `Ux.toDatum(this.props)`方法直接调用，将`Tabular`和`Assist`属性直接全部传递给子组件；
+    * `Ux.toProp(this.props,"xxx","yyy")`方法调用，将指定属性传递下去，这里传递`$xxx、$yyy`两个属性；
+  * ```jsx
+    <div>
+        {/** 专用PageList管理 **/}
+        <PageList fnOut={this.props.fnOut}
+                  {...Ux.toProp(this.props, "hotel", "data", "app")}
+                  {...Ux.toDatum(this.props)}/>
+    </div>
+    ```
+
+* **R-009**：React中的穿透属性
+
+  * **R-009-1**：子组件调用父组件时，统一使用`reference`作为属性名引用父组件（不加$符号），该规则同样适用于高阶函数中；
+
+  * **R-009-2**：父组件调用子组件引用，统一使用`rp`前缀在属性中引用子组件（子组件可能不唯一）；
+
+## 4. 导入导出
+
+* **R-010**：关于导入和导出的详细规范
+  * **R-010-1**：所有的外联的组件（不在当前想对目录中的都不可使用想对路径导入）；
+  * **R-010-2**：当前目录中的所有组件形成一个封闭组件，除了从包中导入以外，只能从想对路径`./`中导入；
+
+## 5. 总结
+
+该规范作为前端工程师使用Zero UI的统一规范，主要是辅助前端工程师完成React组件和组件之间的相关开发，你可以不遵循，那么就只有自己按照原生的React-Redux的写法来处理所有的细节。
 

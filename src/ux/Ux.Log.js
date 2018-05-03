@@ -35,7 +35,7 @@ const control = (reference = {}, Name) => {
  */
 const page = (reference = {}, Name) => {
     _colorful(reference, Name, {
-        group: '#0088FF',
+        group: '#99CC33',
         props: '#660099',
         state: '#666666'
     }, 'Rx-Page');
