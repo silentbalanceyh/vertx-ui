@@ -14,6 +14,7 @@
     * [UI0005 - 开发我的第一个页面](document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
     * [UI0009 - StateIn中的r系列API](document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)
     * [UI0010 - zero注解](document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
+    * [UI0011 - TypeScript数据模型](document/2-kai-fa-wen-dang/ui0011-typescriptshu-ju-mo-xing.md)
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
     * [UT0002 - storybook可重用组件文档](document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)
