@@ -1,6 +1,7 @@
 import Dg from './Ux.Debug'
 import Prop from './Ux.Prop'
 import Op from './Ux.Op'
+import Cv from './Ux.Env'
 
 /**
  * 通用属性读取相关信息
@@ -137,6 +138,23 @@ const toPageList = (reference = {}, FormComponent) => {
     return inherit;
 };
 /**
+ * 转换Less的风格文件，主要用于生成属性className和style中的backgroundImage
+ * 全局前缀使用Cv.Env.CSS_PREFIX进行区分
+ * @method toStyle
+ * @param name 当前Class的名称
+ * @param bg 背景图后缀
+ */
+const toStyle = (name, bg) => {
+    const styles = {};
+    styles.className = `${Cv.Env.CSS_PREFIX}-${name}`;
+    if (bg) {
+        styles.style = {
+            backgroundImage: `url(${bg})`
+        }
+    }
+    return styles;
+};
+/**
  * @class Hoc
  * @description 专用Hoc解释器
  */
@@ -146,6 +164,7 @@ export default {
     toFullName,
     // 继承专用属性
     toProp,
+    toStyle,
     toDatum,
     toEffect,
     toQueryParameter,
