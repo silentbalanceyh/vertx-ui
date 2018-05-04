@@ -4,7 +4,18 @@
 
 ## 1. 路由配置
 
-目前的版本路由配置文件很简单
+目前的版本路由配置文件很简单，配置文件位于`src/route.json`中，内容如下：
+
+```json
+{
+    "defined":"_hotel_admin",
+    "special":{
+        "_login_index":[
+            "_login_index"
+        ]
+    }
+}
+```
 
 
 
