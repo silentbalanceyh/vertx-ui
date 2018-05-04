@@ -19,9 +19,9 @@ const route = (container = {}, components = {}) => {
     const routes = [];
     let $keys = Set(Object.keys(components));
     if (routeData.special) {
-        const route = {};
         const fnItem = (layout) => componentKey => {
             if (components[componentKey]) {
+                const route = {};
                 route.container = layout;
                 route.component = components[componentKey];
                 route.uri = componentKey.replace(/_/g, '/');
@@ -47,9 +47,9 @@ const route = (container = {}, components = {}) => {
     if (routeData.defined) {
         if (container[routeData.defined]) {
             const keyList = $keys.toJS();
-            const route = {};
             keyList.forEach(componentKey => {
                 if (components[componentKey]) {
+                    const route = {};
                     route.container = container[routeData.defined];
                     route.component = components[componentKey];
                     route.uri = componentKey.replace(/_/g, '/');
