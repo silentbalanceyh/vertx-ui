@@ -20,9 +20,9 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 | 库名称 | 当前版本 | 最新版 |
 | :--- | :--- | :--- |
-| rxjs | 5.5.10 | 6.0.0 |
+| rxjs | 5.5.10 | 6.1.0 |
 | webpack | 3.11.0 | 4.6.0 |
-| webpack-dev-server | 3.0.0 | 3.1.3 |
+| webpack-dev-server | 3.0.0 | 3.1.4 |
 | awesome-typescript-loader | 4.0.1 | 5.0.0 |
 
 文档基本前缀说明。
@@ -59,6 +59,7 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [UI0012 - 路由测试](/document/ui0012-lu-you-ce-shi.md)
 * [UI0004 - 开发第一个模板](/document/ui0004-kai-fa-di-yi-ge-mo-ban.md)
 * [UI0005 - 开发第一个页面](/document/ui0005-kai-fa-di-yi-ge-ye-mian.md)
+* [UI0014 - 开发提交按钮事件](/document/ui0014-kai-fa-ti-jiao-an-niu-shi-jian.md)
 
 ### Ux工具包
 
