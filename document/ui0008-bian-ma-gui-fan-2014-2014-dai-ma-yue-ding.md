@@ -139,6 +139,13 @@ Zero UI定义了一套框架本身的命名约定，该约定提供给开发人�
   * **R-011-2**：为了防止CSS污染，全部使用`@app`变量进行封闭设置；
   * **R-011-3**：所有颜色相关的风格文件放在固定的全局Less中，如果需要添加则修改全局色彩文件；
   * **R-011-4**：调用过程直接使用`Ux.toStyle`的API进行调用；
+  * ```jsx
+    <div {...Ux.toStyle("login-container",require("./image/bg.jpg"))}>
+        <section {...Ux.toStyle("login-content")}>
+            <Component {...this.props}/>
+        </section>
+    </div>
+    ```
 
 ## 6. 总结
 
