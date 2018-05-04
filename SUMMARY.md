@@ -10,13 +10,15 @@
     * [UI0007 - 编码规范——文件命名](document/ui0007-jiao-shou-jia-tui-jian-bian-ma-gui-fan.md)
     * [UI0008 - 编码规范——代码约定](document/ui0008-bian-ma-gui-fan-2014-2014-dai-ma-yue-ding.md)
   * [2 - 开发文档](document/2-kai-fa-wen-dang.md)
-    * [UI0004 - 开发我的第一个模板](document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
-    * [UI0005 - 开发我的第一个页面](document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
     * [UI0009 - StateIn中的r系列API](document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)
     * [UI0010 - zero注解](document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
     * [UI0011 - TypeScript数据模型](document/2-kai-fa-wen-dang/ui0011-typescriptshu-ju-mo-xing.md)
+    * [UI0013 - 页面代码结构说明](document/2-kai-fa-wen-dang/ui0013-ye-mian-dai-ma-jie-gou-shuo-ming.md)
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
     * [UT0002 - storybook可重用组件文档](document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)
-  * [4 - Ux工具包](document/4-uxgong-ju-bao.md)
+  * 4 - 步步为营
+    * [UI0004 - 开发第一个模板](document/ui0004-kai-fa-di-yi-ge-mo-ban.md)
+    * [UI0005 - 开发第一个页面](document/ui0005-kai-fa-di-yi-ge-ye-mian.md)
+    * [UI0012 - 路由测试](document/ui0012-lu-you-ce-shi.md)
 

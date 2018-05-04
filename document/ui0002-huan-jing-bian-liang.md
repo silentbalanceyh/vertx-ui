@@ -20,6 +20,7 @@
 |  | Ux.Env.HTTP11 | HTTP1.1的头文件常量 |
 |  | Ux.Env.HTTP\_METHOD | Http方法常量 |
 |  | Ux.Env.MIMES | 常用MIME映射文件 |
+| Z\_CSS\_PREFIX | Ux.Env.CSS\_PREFIX | 当前站点的风格文件专用前缀设置，该设置需要定义Less的全局变量@app |
 | Z\_SHARED | Ux.Env.SHARED | 全局Epic和Types共享目录名称，默认值为app，所以共享内容位于src/app/action的目录下 |
 | Z\_ENTRY\_LOGIN | Ux.Env.ENTRY\_LOGIN | 当前应用的登录首页 |
 | Z\_ENTRY\_ADMIN | Ux.Env.ENTRY\_ADMIN | 当前应用的管理首页【带登录控制】，关于管理首页可以直接将该页面开发成根据不同角色的分离器，这样就可以完成应用入口根据不同授权的分离功能。 |
