@@ -107,7 +107,52 @@ Zero UI定义了一套框架本身的命名约定，该约定提供给开发人�
 
 ## 5. 关于Less
 
-* R-011：当前系统的Less
+* **R-011**：当前系统的Less文件都是用`Cab.less`资源包的导入
+
+  * **R-011-1**：所有的`Cab.less`的文件都位于当前目录中，且基本格式如下：
+  * ```css
+    @import "../../../global";
+    /** 引用全局的@app变量，不同应用的app变量不同 **/
+    .@{app} {
+        @prefix: login;
+        &-@{prefix}{
+            &-container{
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                background-repeat:no-repeat;
+                background-size:100% 100%;
+            }
+            &-content{
+                position: relative;
+                top: 25%;
+                z-index: 1001;
+                width: 500px;
+                margin: auto;
+                padding: 30px 40px 40px;
+                border-radius: 10px;
+                background-color: #fff;
+            }
+        }
+    }
+    ```
+  * **R-011-2**：为了防止CSS污染，全部使用`@app`变量进行封闭设置；
+  * **R-011-3**：所有颜色相关的风格文件放在固定的全局Less中，如果需要添加则修改全局色彩文件；
+  * **R-011-4**：调用过程直接使用`Ux.toStyle`的API进行调用；
+  * ```jsx
+    <div {...Ux.toStyle("login-container",require("./image/bg.jpg"))}>
+        <section {...Ux.toStyle("login-content")}>
+            <Component {...this.props}/>
+        </section>
+    </div>
+    ```
+
+> 有一点需要说明的是，这里的Cab.less实际上生成了下边两个className
+>
+> * ima-login-container
+> * ima-login-content
+>
+> 由于`ima`是直接在环境变量中设置的，所以调用`Ux.toStyle`的API可以直接屏蔽掉和当前应用路径以及风格相关的内容，切换风格也可以直接通过不同的环境变量在部署过程中统一切换，唯一需要注意的一点是这些class需要保证全局不重复，所以这里的`login`的前缀显得特别重要。
 
 ## 6. 总结
 
