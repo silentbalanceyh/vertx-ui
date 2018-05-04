@@ -41,7 +41,7 @@ const cssFilename = "static/css/[name].[contenthash:8].css";
 // To have this structure working with relative paths, we have to use custom options.
 const extractTextPluginOptions = shouldUseRelativeAssetPaths
     ? // Making sure that the publicPath goes back to to build folder.
-      { publicPath: Array(cssFilename.split("/").length).join("../") }
+    {publicPath: Array(cssFilename.split("/").length).join("../")}
     : {};
 
 // This is the production configuration.
@@ -175,7 +175,7 @@ module.exports = {
                 loader: require.resolve("babel-loader"),
                 options: {
                     plugins: [
-                        ["import", { libraryName: "antd", style: true }],
+                        ["import", {libraryName: "antd", style: true}],
                         "transform-class-properties",
                         "transform-decorators-legacy",
                         "transform-decorators",
@@ -271,8 +271,11 @@ module.exports = {
                     {
                         loader: require.resolve("less-loader"),
                         options: {
-                            javascriptEnabled:true,
-                            modifyVars: { "@primary-color": "#00B2FB" }
+                            javascriptEnabled: true,
+                            modifyVars: {
+                                "@primary-color": "#00B2FB",
+                                "@app": process.env.Z_CSS_PREFIX
+                            }
                         }
                     }
                 ]
