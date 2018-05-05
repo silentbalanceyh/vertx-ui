@@ -79,7 +79,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
                 message = Expr.formatExpr(message, params);
             }
             return {fun, message};
-        } else if (modal.hasOwnProperty('success') && modal.hasOwnProperty('error')) {
+        } else if (modal.hasOwnProperty('success') || modal.hasOwnProperty('error')) {
             /*
              * {
              *      "success":{
