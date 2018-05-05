@@ -1,7 +1,6 @@
 {
-    "name": "vertx-ui",
+    "name": "vertx-zero",
     "version": "0.1.0",
-    "private": true,
     "dependencies": {
         "@antv/data-set": "^0.8.7",
         "@antv/g2": "^3.0.10",
@@ -46,7 +45,7 @@
         "numeral": "^2.0.6",
         "object-assign": "4.1.1",
         "postcss-flexbugs-fixes": "3.3.1",
-        "postcss-loader": "2.1.4",
+        "postcss-loader": "2.1.5",
         "promise": "8.0.1",
         "prop-types": "^15.6.1",
         "q": "^1.5.1",
