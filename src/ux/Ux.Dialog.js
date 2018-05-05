@@ -92,8 +92,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
              *      }
              * }
              */
-            const success = modal.success;
-            const error = modal.error;
+            const {success = {}, error = {}} = modal;
             const type = success[key] && !error[key] ? "success" : "error";
             const fun = dialog ? _dialogFun[type] : _messageFun[type];
             let message = "success" === type ? success[key] : error[key];
