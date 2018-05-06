@@ -71,7 +71,7 @@ const rxSubmit = (reference = {}, $_loading = "", {
         if ($promise) {
             $promise.catch(error => {
                 loading(false);
-                failure(error, true, reference);
+                failure(error, reference);
             }).then(response => {
                 loading(false);
                 success(response, reference);
@@ -82,7 +82,7 @@ const rxSubmit = (reference = {}, $_loading = "", {
         }
     }, (error) => {
         loading(false);
-        failure(error, false, reference);
+        failure(error, reference);
     });
 };
 /**
