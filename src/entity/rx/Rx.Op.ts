@@ -58,6 +58,12 @@ class RxOp {
         return () => Ux.rxSubmit(ref, refLoading, executor);
     };
 
+    reset() {
+        const executor = this._options();
+        const ref = this.reference;
+        return () => executor.success(ref);
+    }
+
     /**
      * 直接执行
      */
