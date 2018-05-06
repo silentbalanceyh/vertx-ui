@@ -15,9 +15,19 @@ const writeTree = (reference = {}, state) => {
     }
 };
 /**
+ * Button的防重复提交专用，固定状态$_loading属性值
+ * @method writeLoading
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param {Boolean} $_loading 写入组件状态
+ */
+const writeLoading = (reference = {}, $_loading = true) => {
+    reference.setState({$_loading});
+};
+/**
  * @class State
  * @description 回写状态树专用方法
  */
 export default {
-    writeTree
+    writeTree,
+    writeLoading
 }

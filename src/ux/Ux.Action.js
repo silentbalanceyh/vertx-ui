@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Ux from "ux";
+import Value from './Ux.Value';
 import U from 'underscore';
 
 /**
@@ -36,17 +37,10 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 return;
             }
             const params = Immutable.fromJS(values).toJS();
-            params.language = Ux.LANG;
+            params.language = Ux.Env.LANGUAGE;
             params.key = $key;
             // 去掉undefined
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const value = params[key];
-                    if (undefined === value) {
-                        delete params[key];
-                    }
-                }
-            }
+            Value.valueValid(params);
             // 成功过后的回调
             if (fnSuccess && U.isFunction(fnSuccess)) {
                 fnSuccess(params);
