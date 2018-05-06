@@ -50,10 +50,44 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
         console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
 };
+
+const rxSubmit = (reference = {}, $_loading = "", {
+    success = () => {
+    },
+    promise = () => {
+    },
+    failure = () => {
+    },
+    loading = ($_loading) ? (is = false) => {
+        const state = {};
+        state[$_loading] = is;
+        reference.setState(state);
+    } : () => {
+    }
+}) => {
+    loading(true);
+    runSubmit(reference, (values) => {
+        // 生成Promise
+        const $promise = promise(values, reference);
+        if ($promise) {
+            $promise.catch(error => {
+                loading(false);
+                failure(error, reference);
+            }).then(response => {
+                loading(false);
+                success(response, reference);
+            })
+        }
+    }, (error) => {
+        loading(false);
+        failure(error, reference);
+    });
+};
 /**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
-    runSubmit
+    runSubmit,
+    rxSubmit
 }
