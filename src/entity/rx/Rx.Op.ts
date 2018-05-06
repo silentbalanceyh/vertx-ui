@@ -6,6 +6,8 @@ class RxOp {
     };
     private failure: Function = () => {
     };
+    private validate: Function = () => {
+    };
     private reference: any;
     private loading: String = undefined;
 
@@ -24,6 +26,12 @@ class RxOp {
         if (op.success) this.success = op.success;
         if (op.failure) this.failure = op.failure;
         if (op.promise) this.promise = op.promise;
+        if (op.validate) this.validate = op.validate;
+        return this;
+    }
+
+    rxValidate(validate: Function) {
+        this.validate = validate;
         return this;
     }
 
@@ -77,6 +85,7 @@ class RxOp {
         executor.success = this.success;
         executor.failure = this.failure;
         executor.promise = this.promise;
+        executor.validate = this.validate;
         return executor;
     }
 }

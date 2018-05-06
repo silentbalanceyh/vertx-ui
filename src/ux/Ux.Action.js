@@ -54,6 +54,8 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
 const rxSubmit = (reference = {}, $_loading = "", {
     success = () => {
     },
+    validate = () => {
+    },
     promise,
     failure = () => {
     },
@@ -66,6 +68,10 @@ const rxSubmit = (reference = {}, $_loading = "", {
 }) => {
     loading(true);
     runSubmit(reference, (values) => {
+        // 验证函数专用
+        if (!validate(values, reference)) {
+            return;
+        }
         // 生成Promise
         const $promise = promise(values, reference);
         if ($promise) {
@@ -80,10 +86,7 @@ const rxSubmit = (reference = {}, $_loading = "", {
             loading(false);
             success(values, reference);
         }
-    }, (error) => {
-        loading(false);
-        failure(error, reference);
-    });
+    }, () => loading(false));
 };
 /**
  * @class Action
