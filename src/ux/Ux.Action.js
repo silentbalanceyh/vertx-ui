@@ -54,8 +54,7 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
 const rxSubmit = (reference = {}, $_loading = "", {
     success = () => {
     },
-    promise = () => {
-    },
+    promise,
     failure = () => {
     },
     loading = ($_loading) ? (is = false) => {
@@ -77,6 +76,9 @@ const rxSubmit = (reference = {}, $_loading = "", {
                 loading(false);
                 success(response, reference);
             })
+        } else {
+            loading(false);
+            success(values, reference);
         }
     }, (error) => {
         loading(false);
