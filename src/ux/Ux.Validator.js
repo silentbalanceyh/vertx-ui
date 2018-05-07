@@ -19,6 +19,23 @@ const _ready = (rule = {}) => {
     return ready;
 };
 
+const _executeReady = (rule = {}, value, callback, fnCond = () => true) => {
+    if (_ready(rule)) {
+        // 处理required
+        if (value && rule.config) {
+            if (fnCond()) {
+                callback();
+            } else {
+                callback(rule.message);
+            }
+        } else {
+            callback();
+        }
+    } else {
+        callback();
+    }
+};
+
 const existing = (refereuce = {}) => (rule = {}, value, callback) => {
     if (rule.config) {
         if (value) {
@@ -49,44 +66,66 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
 
 
 const required = (reference = {}) => (rule = {}, value, callback) => {
-    // 是否检查状态
-    if (_ready(rule)) {
-        // 处理required
-        if (value) {
-            callback();
-        } else {
-            // 消息处理message
-            callback(rule.message);
-        }
-    } else {
-        callback();
-    }
+    _executeReady(rule, value, callback, () => !!value);
 };
 
 const after = (reference = {}) => (rule = {}, value, callback) => {
-    // 是否检查状态
-    if (_ready(rule)) {
-        // 处理required
-        if (value && rule.config) {
-            let to = Prop.formHit(reference, rule.config.to);
-            const from = Value.convertTime(value);
-            to = Value.convertTime(to);
-            if (from.isAfter(to)) {
-                callback();
-            } else {
-                callback(rule.message);
-            }
-        } else {
-            callback();
-        }
-    } else {
-        callback();
-    }
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        const from = Value.convertTime(value);
+        to = Value.convertTime(to);
+        return from.isAfter(to);
+    });
+};
+const before = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        const from = Value.convertTime(value);
+        to = Value.convertTime(to);
+        return to.isAfter(from);
+    });
+};
+const less = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        return value < to;
+    });
+};
+const lessOr = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        return value <= to;
+    });
+};
+const greater = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        return value > to;
+    });
+};
+const greaterOr = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        return value >= to;
+    });
 };
 const VERFIERS = {
+    // 异步验证存在检查
     existing,
+    // 必填项检查，和Ant Design不同是这里的检查包括一些空值
     required,
-    after
+    // 时间在目标字段之后
+    after,
+    // 时间在目标字段之前
+    before,
+    // < 小于目标字段
+    less,
+    // <= 小于等于目标字段
+    lessOr,
+    // > 大于目标字段
+    greater,
+    // >= 大于等于目标字段
+    greaterOr
 };
 /**
  * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
