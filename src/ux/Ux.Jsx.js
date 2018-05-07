@@ -92,7 +92,7 @@ const jsxFieldRow = (reference, item = {}, render) => {
  * @param keys
  */
 const jsxPath = (reference = {}, ...keys) => {
-    const data = Prop.fromPath(reference, keys);
+    const data = Prop.fromPath.apply(this, [reference].concat(keys));
     return data ? data : false;
 };
 /**
