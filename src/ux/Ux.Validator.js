@@ -112,7 +112,8 @@ const greaterOr = (reference = {}) => (rule = {}, value, callback) => {
 const equal = (reference = {}) => (rule = {}, value, callback) => {
     _executeReady(rule, value, callback, () => {
         let to = Prop.formHit(reference, rule.config.to);
-        return value === to;
+        return String(value) === String(to) ||
+            Number(value) === Number(to)
     });
 };
 const VERFIERS = {
