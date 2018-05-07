@@ -54,8 +54,7 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
 const rxSubmit = (reference = {}, $_loading = "", {
     success = () => {
     },
-    validate = () => {
-    },
+    validate = () => true,
     promise,
     failure = () => {
     },
