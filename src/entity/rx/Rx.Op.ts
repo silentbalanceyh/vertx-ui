@@ -72,14 +72,6 @@ class RxOp {
         return () => executor.success(ref);
     }
 
-    /**
-     * 直接执行
-     */
-    subscribe() {
-        const executor = this._options();
-        Ux.rxSubmit(this.reference, this.loading, executor);
-    }
-
     private _options() {
         const executor: any = {};
         executor.success = this.success;

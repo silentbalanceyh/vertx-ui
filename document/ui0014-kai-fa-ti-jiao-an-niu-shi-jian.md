@@ -141,6 +141,44 @@ export default {
  * 初始化一个RxOp，这里的reference为React组件引用，必须包含Ant Design中的form引用
  **/
 RxOp.get(reference:any);
+/**
+ * 【Fluent】挂载：挂载专用的validate函数
+ **/ 
+rxValidate(validate:Function);
+/**
+ * 【Fluent】挂载：挂载专用的success函数
+ **/
+rxSuccess(success:Function);
+/**
+ * 【Fluent】挂载：挂载专用的failure函数
+ **/
+rxFailure(failure:Function);
+/**
+ * 【Fluent】挂载：挂载专用的promise函数
+ **/
+rxPromise(promise:Function);
+/**
+ * 【Fluent】设置防重复提交的key，该key作为Form组件的React State进行管理
+ **/
+rxLoading(key:String);
+/**
+ * 【Fluent】挂载，用于挂载options中的四个固定key
+ * {
+ *     success:(values, reference) => {},
+ *     failure:(error, reference) => {},
+ *     promise:(values, reference) => {}, 
+ *     validate:(values, reference) => true // 该函数必须返回true和false，不提供时候默认返回true
+ * }
+ **/
+rxFull(options:Object);
+/**
+ * 绑定提交submit专用方法，生成一个函数可直接赋值给onClick
+ */
+bind();
+/**
+ * 绑定form专用的reset方法，生成一个函数可直接赋值给onClick
+ **/
+reset();
 ```
 
 
