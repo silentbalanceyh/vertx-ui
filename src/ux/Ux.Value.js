@@ -2,6 +2,21 @@ import moment from 'moment';
 import Dg from './Ux.Debug';
 
 /**
+ * 读取非undefined的值，去掉undefined值相关信息
+ * @method valueValid
+ * @param {Object} data
+ */
+const valueValid = (data = {}) => {
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const value = data[key];
+            if (undefined === value) {
+                delete data[key];
+            }
+        }
+    }
+};
+/**
  * 不重复追加值到`item`对象中（包含则不设置）
  * @method valueAppend
  * @param item 被设置的对象引用
@@ -144,6 +159,7 @@ const valueFilter = (data = {}, keys = []) => {
  * @description 数值计算器
  */
 export default {
+    valueValid,
     valueAppend,
     valueDuration,
     valueEndTime,

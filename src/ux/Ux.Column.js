@@ -238,11 +238,16 @@ const RENDERS = {
  * @param columns
  * @param key
  * @param fnRender
+ * @param {Boolean} hoc 是否生成函数
  */
-const uiColumnRender = (reference, columns = [], key, fnRender = () => false) => {
+const uiColumnRender = (reference, columns = [], key, fnRender = () => false, hoc = false) => {
     columns.forEach(column => {
         if (column.dataIndex && key === column.dataIndex) {
-            column.render = fnRender;
+            if (hoc) {
+                column.render = fnRender(column);
+            } else {
+                column.render = fnRender;
+            }
         }
     })
 };

@@ -1,10 +1,10 @@
 import React from 'react';
 import Opt from './Ux.Option'
 import Norm from './Ux.Normalize'
+import Prop from './Ux.Prop'
 import {Button, Col, Form, Row} from 'antd'
 import Dg from './Ux.Debug'
 import Immutable from 'immutable';
-
 
 /**
  * 验证规则属性
@@ -86,6 +86,16 @@ const jsxFieldRow = (reference, item = {}, render) => {
     )
 };
 /**
+ * 直接从资源文件路径读取数据信息
+ * @method jsxPath
+ * @param reference
+ * @param keys
+ */
+const jsxPath = (reference = {}, ...keys) => {
+    const data = Prop.fromPath(reference, keys);
+    return data ? data : false;
+};
+/**
  * 针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染
  * @method uiFieldForm
  * @param {React.PureComponent} reference React对应组件引用
@@ -151,6 +161,8 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
  * @description 字段专用输出函数
  */
 export default {
+    // 读取路径上
+    jsxPath,
     // Field专用
     jsxField,
     // RowField专用

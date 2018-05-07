@@ -169,6 +169,26 @@ const ensureLength = (array = [], upLimit = 0) => {
         }
     }
 };
+
+/**
+ * 检查数据的长度是否超过下限长度
+ * @method ensureMinLength
+ * @private
+ * @param array
+ * @param upLimit
+ */
+const ensureMinLength = (array = [], upLimit = 0) => {
+    ensureNumber(upLimit);
+    if (U.isArray(array)) {
+        if (upLimit > array.length) {
+            console.error(
+                `[Zero] Expected length is '${upLimit}', but current length is '${
+                    array.length
+                    }'.`
+            );
+        }
+    }
+};
 /**
  * 检查当前传入值是否是一个合法的Number
  * @method ensureNumber
@@ -297,6 +317,7 @@ export default {
     ensureRender,
     ensureType,
     ensureLength,
+    ensureMinLength,
     ensureNumber,
     ensurePositive,
     // 调试专用方法

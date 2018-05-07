@@ -242,13 +242,8 @@ export default (options = {}) => {
         // 状态注入
         // state节点
         const injectState = options.state ? options.state : {};
-
-        // Redux连接配置
-        let _target = fnConnect(target, options);
-        // Form连接配置
-        _target = fnForm(_target, options);
-
-        return class hoc extends _target {
+        // 修改target过后的继承
+        let Component = class extends target {
             // 静态资源放到State状态中
             state = {
                 // $hoc：Hoc专用资源处理流程，生成$hoc
@@ -260,15 +255,24 @@ export default (options = {}) => {
             };
 
             render() {
-
-                // 是否打印日志
-                fnLog(this, options);
                 // 计算Render，是否执行加载
                 const render = fnRender(this.props, options);
                 // 检查Form专用程序
                 ensureForm(this, options);
-                
+
                 return render ? super.render() : <LoadingContent/>;
+            }
+        };
+        // Redux连接配置：顺序不可替换
+        Component = fnConnect(Component, options);
+        // Form连接配置：顺序不可替换
+        Component = fnForm(Component, options);
+
+        return class hoc extends Component {
+            render() {
+                // 是否打印日志
+                fnLog(this, options);
+                return super.render();
             }
         };
     };

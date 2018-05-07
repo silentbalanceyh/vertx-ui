@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Ux from "ux";
+import Value from './Ux.Value';
 import U from 'underscore';
 
 /**
@@ -36,17 +37,10 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 return;
             }
             const params = Immutable.fromJS(values).toJS();
-            params.language = Ux.LANG;
+            params.language = Ux.Env.LANGUAGE;
             params.key = $key;
             // 去掉undefined
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const value = params[key];
-                    if (undefined === value) {
-                        delete params[key];
-                    }
-                }
-            }
+            Value.valueValid(params);
             // 成功过后的回调
             if (fnSuccess && U.isFunction(fnSuccess)) {
                 fnSuccess(params);
@@ -56,10 +50,49 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
         console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
 };
+
+const rxSubmit = (reference = {}, $_loading = "", {
+    success = () => {
+    },
+    validate = () => {
+    },
+    promise,
+    failure = () => {
+    },
+    loading = ($_loading) ? (is = false) => {
+        const state = {};
+        state[$_loading] = is;
+        reference.setState(state);
+    } : () => {
+    }
+}) => {
+    loading(true);
+    runSubmit(reference, (values) => {
+        // 验证函数专用
+        if (!validate(values, reference)) {
+            return;
+        }
+        // 生成Promise
+        const $promise = promise(values, reference);
+        if ($promise) {
+            $promise.catch(error => {
+                loading(false);
+                failure(error, reference);
+            }).then(response => {
+                loading(false);
+                success(response, reference);
+            })
+        } else {
+            loading(false);
+            success(values, reference);
+        }
+    }, () => loading(false));
+};
 /**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
-    runSubmit
+    runSubmit,
+    rxSubmit
 }

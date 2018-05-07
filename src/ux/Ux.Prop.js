@@ -1,6 +1,28 @@
 import Dg from "./Ux.Debug";
 import Value from "./Ux.Value";
+import Immutable from 'immutable';
 
+/**
+ * 直接从Hoc资源路径读取数据信息
+ * @method fromPath
+ * @param reference
+ * @param keys
+ */
+const fromPath = (reference = {}, ...keys) => {
+    Dg.ensureMinLength(keys, 1);
+    let data = fromHoc(reference, keys[0]);
+    if (1 < keys.length && data) {
+        const path = [];
+        keys.forEach((item, index) => {
+            if (0 < index) {
+                path.push(item);
+            }
+        });
+        const $data = Immutable.fromJS(data);
+        data = $data.getIn(path);
+    }
+    return data;
+};
 /**
  * 资源文件数据读取方法
  * @method fromHoc
@@ -168,5 +190,6 @@ export default {
     onDatum,
     // 从Hoc, Router中提取数据
     fromHoc,
-    fromRouter
+    fromRouter,
+    fromPath
 };
