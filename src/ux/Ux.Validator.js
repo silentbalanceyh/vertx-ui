@@ -109,6 +109,12 @@ const greaterOr = (reference = {}) => (rule = {}, value, callback) => {
         return value >= to;
     });
 };
+const equal = (reference = {}) => (rule = {}, value, callback) => {
+    _executeReady(rule, value, callback, () => {
+        let to = Prop.formHit(reference, rule.config.to);
+        return value === to;
+    });
+};
 const VERFIERS = {
     // 异步验证存在检查
     existing,
@@ -125,7 +131,9 @@ const VERFIERS = {
     // > 大于目标字段
     greater,
     // >= 大于等于目标字段
-    greaterOr
+    greaterOr,
+    // == 等于
+    equal,
 };
 /**
  * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
