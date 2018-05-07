@@ -5,9 +5,9 @@ import types from './actions'
 
 export default createReducer({
     [types.fnFlush]: (state, inState = {}) => {
-        if(inState.to) {
+        if (inState.to) {
             return {...inState.to(state)}
-        }else{
+        } else {
             console.warn("[StateIn] No changes: inState = ", inState);
             return state
         }
