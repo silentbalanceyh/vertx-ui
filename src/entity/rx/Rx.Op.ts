@@ -6,8 +6,7 @@ class RxOp {
     };
     private failure: Function = () => {
     };
-    private validate: Function = () => {
-    };
+    private validate: Function = () => true;
     private reference: any;
     private loading: String = undefined;
 
