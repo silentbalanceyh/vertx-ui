@@ -4,6 +4,8 @@
 
 ## 1.整体流程
 
+![](/document/image/UI0014-1.png)
+
 ## 2.书写代码
 
 按照Zero UI的规范，在目录中创建Op相关的TypeScript事件脚本
@@ -87,6 +89,8 @@ import Ux from 'ux';
 import Mock from './mock';
 
 const Login = {
+    // 【可选】在Ant Design之后的手工认证，表单提交过程可认证
+    validate: () => true;
     // 根据传入值构造promise，values为表单提交值，等价于Ant Design中form提交过后的值
     promise:(values) => {
         // 构造Promise之前对密码进行MD5加密操作
@@ -103,13 +107,13 @@ const Login = {
         // 调用DataRouter中的重定向进入到管理主页（这里的管理主页可自定义）
         $router.to(target?target:Ux.Env.ENTRY_ADMIN);
     },
+    // 【可选】Promise的异步返回结果
     failure:(error) => {
         // 错误分两部分
-        // 提交之前，返回的error为Ant Design验证失败时的Error信息；
         // 提交之后，返回的error为远程服务端的Error，由于数据结构不同，所以执行不同操作；
         console.info(error);
     },
-    // 仅为重置表单提供的专用重置函数
+    // 【额外方法，不绑定RxOp】仅为重置表单提供的专用重置函数
     reset:(reference:any) => {
         event.preventDefault();
         Ux.formReset(reference);
@@ -141,7 +145,49 @@ export default {
  * 初始化一个RxOp，这里的reference为React组件引用，必须包含Ant Design中的form引用
  **/
 RxOp.get(reference:any);
+/**
+ * 【Fluent】挂载：挂载专用的validate函数
+ **/ 
+rxValidate(validate:Function);
+/**
+ * 【Fluent】挂载：挂载专用的success函数
+ **/
+rxSuccess(success:Function);
+/**
+ * 【Fluent】挂载：挂载专用的failure函数
+ **/
+rxFailure(failure:Function);
+/**
+ * 【Fluent】挂载：挂载专用的promise函数
+ **/
+rxPromise(promise:Function);
+/**
+ * 【Fluent】设置防重复提交的key，该key作为Form组件的React State进行管理
+ **/
+rxLoading(key:String);
+/**
+ * 【Fluent】挂载，用于挂载options中的四个固定key
+ * {
+ *     success:(values, reference) => {},
+ *     failure:(error, reference) => {},
+ *     promise:(values, reference) => {}, 
+ *     validate:(values, reference) => true // 该函数必须返回true和false，不提供时候默认返回true
+ * }
+ **/
+rxFull(options:any);
+/**
+ * 绑定提交submit专用方法，生成一个函数可直接赋值给onClick
+ */
+bind();
+/**
+ * 绑定form专用的reset方法，生成一个函数可直接赋值给onClick
+ **/
+reset();
 ```
+
+## 4. 总结
+
+如果不使用RxOp绑定，则可以自己实现onClick的逻辑，纯的React写法就不在这里重复。
 
 
 
