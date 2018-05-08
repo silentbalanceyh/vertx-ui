@@ -41,7 +41,12 @@ const toLogout = () => {
 const isAuthorized = (reference) => {
     const {$router} = reference.props;
     if (0 === Object.keys(isLogged()).length) {
-        $router.to(Cv.ENTRY_LOGIN);
+        const path = $router.path();
+        if (path) {
+            $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
+        } else {
+            $router.to(Cv.ENTRY_LOGIN)
+        }
     }
 };
 /**

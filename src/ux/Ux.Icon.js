@@ -14,7 +14,7 @@ const uiIcon = (type = "") => {
         return (<img src={`/img${type.substring(4)}`} alt="icons"
                      style={{width: 24, height: 24}}/>)
     } else {
-        return <Icon type={type}/>
+        return <Icon type={type} size={"large"}/>
     }
 };
 /**
