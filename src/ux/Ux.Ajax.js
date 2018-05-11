@@ -29,6 +29,18 @@ const ajaxUri = (uri, method = "get", params = {}) => {
     return api;
 };
 /**
+ * XSRF请求专用，从cookie中读取XSRF的Token
+ * @method ajaxXSRF
+ * @private
+ * @param headers
+ */
+const ajaxXSRF = (headers = {}) => {
+    const xsrfToken = undefined;
+    if (xsrfToken) {
+        headers.append(Cv.HTTP11.XSRF_TOKEN, xsrfToken)
+    }
+};
+/**
  * Ajax远程访问过程中的Header处理器
  * @method ajaxHeader
  * @private
@@ -45,6 +57,7 @@ const ajaxHeader = (secure = false) => {
         Dg.ensureToken(token);
         headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
+    ajaxXSRF(headers);
     return headers;
 };
 /**
@@ -74,6 +87,13 @@ const ajaxParams = (params = {}) => {
     }
 };
 /**
+ *
+ * @param body
+ */
+const ajaxAdapter = (body = {}) => {
+    return body.data ? body.data : body;
+};
+/**
  * Ajax中的响应处理器，Promise调用返回过后的响应专用处理器
  * @method ajaxResponse
  * @private
@@ -87,14 +107,12 @@ const ajaxResponse = (request, mockData = {}) =>
         : fetch(request)
             .then(response => Log.response(null, response, request.method))
             .then(response => response.ok
-                ? response.json().then(body => Promise.resolve(body.data))
-                : response.json().then(data =>
-                    Promise.reject({
-                        ...data,
-                        status: response.status,
-                        statusText: response.statusText
-                    })
-                )
+                ? response.json().then(body => Promise.resolve(ajaxAdapter(body)))
+                : response.json().then(data => Promise.reject({
+                    ...data,
+                    status: response.status,
+                    statusText: response.statusText
+                }))
             )
             .catch(error => Promise.reject(error));
 /**
@@ -128,6 +146,7 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
     const request = new Request(api, {
         method,
         headers,
+        credentials: "include",
         mode: "cors",
         body: ajaxParams(params)
     });
