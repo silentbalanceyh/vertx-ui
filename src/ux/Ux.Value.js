@@ -155,10 +155,27 @@ const valueFilter = (data = {}, keys = []) => {
     return result;
 };
 /**
+ * 两个字符串的专用连接方法，用于做不重复链接，
+ * @method stringConnect
+ * @private
+ * @param left
+ * @param right
+ */
+const stringConnect = (left, right) => {
+    if (left && right && "string" === typeof left && "string" === typeof right) {
+        if (right.startsWith(left)) {
+            return right;
+        } else {
+            return left + right;
+        }
+    }
+};
+/**
  * @class Value
  * @description 数值计算器
  */
 export default {
+    stringConnect,
     valueValid,
     valueAppend,
     valueDuration,
