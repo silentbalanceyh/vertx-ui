@@ -219,6 +219,26 @@ const elementSwitch = (array = [], element = "") => {
     return $elements.toJS();
 };
 /**
+ * 查找一个颗树的某个分支构成一个新的数组
+ * @method elementBranch
+ * @param {Array} array 被查找的数
+ * @param leafKey 过滤条件
+ * @param parentField 父节点字段
+ */
+const elementBranch = (array = [], leafKey, parentField) => {
+    // 查找的最终结果
+    let branch = [];
+    // 查找子节点
+    const obj = elementUnique(array, "key", leafKey);
+    if (obj) {
+        branch.push(obj);
+        // 查找父节点
+        const pid = obj[parentField];
+        branch = branch.concat(elementBranch(array, pid, parentField));
+    }
+    return branch.reverse();
+};
+/**
  * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
  *
  *      ...
@@ -252,6 +272,8 @@ const treeWithFilters = (array = [], filters = {}, config = {}) =>
  * @description 复杂数据结构计算
  */
 export default {
+
+    elementBranch,
     // 数组中查找唯一元素
     elementUnique,
     /**
