@@ -74,6 +74,7 @@ export default {
         "USER_AGENT": "User-Agent",
         "VARY": "Vary",
         "WARNING": "Warning",
-        "WWW_AUTHENTICATE": "WWW-Authenticate"
+        "WWW_AUTHENTICATE": "WWW-Authenticate",
+        "XSRF_TOKEN": "X-XSRF-TOKEN"
     },
 }

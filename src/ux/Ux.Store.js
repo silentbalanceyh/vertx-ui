@@ -60,11 +60,36 @@ const storeUser = (data) => {
     }
     return data;
 };
+
+const getCookies = () => {
+    const cookieStr = document.cookie.split(";");
+    const cookie = {};
+    cookieStr.forEach(kv => {
+        const key = kv.toString().split("=")[0];
+        const value = kv.toString().split("=")[1];
+        if (key && value) {
+            cookie[key] = value;
+        }
+    });
+    return cookie;
+};
+
+const getCookie = (key = "") => {
+    const cookie = getCookies();
+    if (cookie.hasOwnProperty(key)) {
+        return cookie[key];
+    } else {
+        return undefined;
+    }
+};
 /**
  * @class Store
  * @description 访问Session/Local的Storage专用
  */
 export default {
+    Cookie: {
+        get: getCookie
+    },
     Session: {
         /**
          * SessionStorage存储数据
