@@ -231,7 +231,8 @@ const elementBranch = (array = [], leafKey, parentField) => {
     // 查找子节点
     const obj = elementUnique(array, "key", leafKey);
     if (obj) {
-        branch.push(obj);
+        const target = Immutable.fromJS(obj).toJS();
+        branch.push(target);
         // 查找父节点
         const pid = obj[parentField];
         branch = branch.concat(elementBranch(array, pid, parentField));
