@@ -21,7 +21,6 @@ Ux.dgRouter(Ux, Container, Component);
 const routes = Ux.route(Container, Component);
 export default (
     <Switch>
-        {routes.map(route => connect(route.uri,
-            route.container, route.component, route.key))}
+#{ROUTE}#
     </Switch>
 );

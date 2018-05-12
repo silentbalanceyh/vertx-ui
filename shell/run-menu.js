@@ -38,8 +38,8 @@ if (fs.existsSync(mockFile)) {
             }
             // 回调中处理Path
             console.info("[Zero] Start to generate entry file UI.js....");
-            console.info("[Zero] Read tpl file from shell/tpl/init/UI.js");
-            const fromContent = fs.readFileSync("shell/tpl/init/UI.js");
+            console.info("[Zero] Read tpl file from shell/tpl/init/UI.zt");
+            const fromContent = fs.readFileSync("shell/tpl/init/UI.zt");
             path.forEach(each => {
                 if (!fs.existsSync(each)) {
                     const folder = each.substring(0, each.lastIndexOf('/'));

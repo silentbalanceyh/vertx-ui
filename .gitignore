@@ -49,3 +49,4 @@ yarn-error.log*
 *.map
 # 忽略脚本
 /run-ux.sh
+/src/environment/routes.js
