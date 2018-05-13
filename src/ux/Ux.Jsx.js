@@ -114,6 +114,10 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
     const btnOpts = Opt.optionFormItem();
     btnOpts.label = ' ';
     btnOpts.colon = false;
+    const opStyle = {};
+    if (hidden.op) {
+        opStyle.display = "none"
+    }
     return (
         <Form layout="inline" className="page-form">
             {form.map((row, index) => (
@@ -145,7 +149,7 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
                 </Row>
             ))}
             {ops ? (
-                <Row style={{display: hidden.opVisible ? 'inline' : 'none'}}>
+                <Row style={opStyle}>
                     <Col span={span}>
                         <Form.Item {...btnOpts}>
                             {ops.map(op => <Button {...op}>{op.text}</Button>)}

@@ -2,6 +2,7 @@ import Dg from './Ux.Debug'
 import Validator from './Ux.Validator'
 import Type from './Ux.Type';
 import Html from './Ux.Html';
+import Immutable from 'immutable';
 
 const limitNumber = (length) => value => {
     if (value) {
@@ -103,14 +104,24 @@ const extractForm = (reference = {}) => {
  * 处理当前Form中的button或操作按钮配置信息
  * @method extractOp
  * @param {React.PureComponent} reference React对应组件引用
- * @return {any}
+ * @return {Array}
  */
 const extractOp = (reference = {}) => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
     const form = $hoc._("form");
     Dg.ensureNotNull(form);
-    return form ? form.op : [];
+    /**
+     * 绑定Op专用，主要用于onClick的绑定操作
+     */
+    const {$op = {}} = reference.state;
+    const opData = form && form.op ? Immutable.fromJS(form.op).toJS() : [];
+    opData.forEach(op => {
+        if (op.onClick && $op.hasOwnProperty(op.onClick)) {
+            op.onClick = $op[op.onClick](reference);
+        }
+    });
+    return opData;
 };
 /**
  * 处理type = hidden类型的配置信息
@@ -124,8 +135,8 @@ const extractHidden = (reference = {}) => {
     const form = $hoc._("form");
     Dg.ensureNotNull(form);
     const hidden = (form && form.hidden) ? form.hidden : {};
-    if (!hidden.hasOwnProperty('opVisible')) {
-        hidden.opVisible = true;
+    if (!hidden.hasOwnProperty("op")) {
+        hidden.op = false;
     }
     if (!hidden.hasOwnProperty('inputs')) {
         hidden.inputs = [];
