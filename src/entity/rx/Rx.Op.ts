@@ -1,9 +1,8 @@
 import Ux from 'ux';
 
 class RxOp {
-    private promise: Function = () => undefined;
-    private success: Function = () => {
-    };
+    private promise: Function = undefined;
+    private success: Function = undefined;
     private failure: Function = () => {
     };
     private validate: Function = () => true;

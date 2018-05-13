@@ -1,7 +1,6 @@
 import React from 'react'
 import {Card} from 'antd';
 import Ux from 'ux';
-import TopBar from '../../header/TopBar/UI';
 
 /**
  * 基本要求：
@@ -18,9 +17,7 @@ class Component extends React.PureComponent {
         const topbar = Ux.fromHoc(reference, "topbar");
         return (
             <Card className={"page-card"} bordered={false}
-                  title={(
-                      <TopBar $title={topbar ? topbar.title : ""}/>
-                  )}>
+                  title={topbar ? topbar.title : ""}>
                 {children}
             </Card>
         )

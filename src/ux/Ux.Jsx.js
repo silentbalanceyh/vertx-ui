@@ -159,7 +159,7 @@ const inputOp = (reference = {}, column = 4, op = {}) => {
     if (hidden.op) {
         opStyle.display = "none"
     }
-    return (ops ? (
+    return (ops && 0 < ops.length ? (
         <Row style={opStyle}>
             <Col span={span}>
                 <Form.Item {...btnOpts}>

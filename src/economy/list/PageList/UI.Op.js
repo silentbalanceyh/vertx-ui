@@ -2,7 +2,7 @@ import Ux from 'ux';
 
 const fnClear = (reference = {}) => (event) => {
     event.preventDefault();
-    reference.setState({selectedRowKeys : []})
+    reference.setState({selectedRowKeys: []})
 };
 const _fnDialog = (reference = {}, dialogKey = "") => {
     Ux.fadeIn(reference);
@@ -13,27 +13,28 @@ const fnAdd = (reference = {}, dialogKey = "") => (event) => {
     // 窗口显示
     _fnDialog(reference, dialogKey);
     // 设置处理专用的key
-    reference.setState({selectedKey : undefined});
+    reference.setState({selectedKey: undefined});
 };
 const fnEdit = (reference = {}, dialogKey = "") => (config, id) => (event) => {
     event.preventDefault();
     // 窗口显示
     _fnDialog(reference, dialogKey);
     // 设置处理专用的key
-    reference.setState({selectedKey : id});
+    reference.setState({selectedKey: id});
 };
 const fnRemove = (reference = {}) => (config, id) => (event) => {
     event.preventDefault();
     if (config.ajax) {
         // 加载数据处理
+        const {$mockRemove} = reference.props;
         Ux.asyncTrue(config.ajax, {id}, {
-            success : () => {
+            success: () => {
                 const clean = config.ajax.clean ? config.ajax.clean : [];
                 const state = {};
                 clean.forEach(item => state[item] = undefined);
                 Ux.writeTree(reference, state);
             }
-        })
+        }, $mockRemove ? $mockRemove : {})
     } else {
         console.error("[Ajax] Ajax Config missing in delete operation.");
     }

@@ -113,9 +113,8 @@ const Login = {
         // 提交之后，返回的error为远程服务端的Error，由于数据结构不同，所以执行不同操作；
         console.info(error);
     },
-    // 【额外方法，不绑定RxOp】仅为重置表单提供的专用重置函数
+    // 【可选】仅为重置表单提供的专用重置函数
     reset:(reference:any) => {
-        event.preventDefault();
         Ux.formReset(reference);
     }
 };
@@ -188,6 +187,4 @@ reset();
 ## 4. 总结
 
 如果不使用RxOp绑定，则可以自己实现onClick的逻辑，纯的React写法就不在这里重复。
-
-
 
