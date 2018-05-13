@@ -18,6 +18,14 @@ const mkdirs = (dirpath) => {
             fs.mkdirSync(folder, "0777");
         }
     }
+    // 读取targetPath中的最后一个路径，生成namespace
+    const ns = targetPath[targetPath.length - 1];
+    const nsData = {};
+    nsData['ns'] = ns.replace(/src\//g, "");
+    const targetNs = ns + "/Cab.json";
+    if (!fs.existsSync(targetNs)) {
+        fs.writeFileSync(targetNs, JSON.stringify(nsData));
+    }
 };
 if (fs.existsSync(mockFile)) {
     console.info(`[Zero] Start to initialize menus from file: ${mockFile}`);
@@ -38,12 +46,12 @@ if (fs.existsSync(mockFile)) {
             }
             // 回调中处理Path
             console.info("[Zero] Start to generate entry file UI.js....");
-            console.info("[Zero] Read tpl file from shell/tpl/init/UI.zt");
-            const fromContent = fs.readFileSync("shell/tpl/init/UI.zt");
+            console.info("[Zero] Read tpl file from shell/tpl/init/UI.js");
+            const fromContent = fs.readFileSync("shell/tpl/init/UI.js");
             path.forEach(each => {
+                const folder = each.substring(0, each.lastIndexOf('/'));
+                mkdirs(folder);
                 if (!fs.existsSync(each)) {
-                    const folder = each.substring(0, each.lastIndexOf('/'));
-                    mkdirs(folder);
                     fs.writeFileSync(each, fromContent);
                 }
             });
