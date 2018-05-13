@@ -68,7 +68,8 @@ class RxOp {
     reset() {
         const executor = this._options();
         const ref = this.reference;
-        return () => executor.success(ref);
+        return executor.success ? () => executor.success(ref) :
+            () => Ux.formReset(ref);
     }
 
     private _options() {

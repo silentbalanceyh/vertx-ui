@@ -95,20 +95,61 @@ const jsxPath = (reference = {}, ...keys) => {
     const data = Prop.fromPath.apply(this, [reference].concat(keys));
     return data ? data : false;
 };
+
 /**
- * 针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染
- * @method uiFieldForm
+ * 仅渲染交互式组件
+ * @method inputField
+ * @private
  * @param {React.PureComponent} reference React对应组件引用
  * @param renders 每个字段不同的render方法
  * @param column 当前Form的列数量
  * @param values Form的初始化值
- * @return {*}
+ * @return {boolean}
  */
-const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
+const inputField = (reference = {}, renders = {}, column = 4, values = {}) => {
     // Fix Issue
     if (!values) values = {};
     const form = Norm.extractForm(reference);
-    const ops = Norm.extractOp(reference);
+    const span = 24 / column;
+    return form.map((row, index) => (
+        <Row key={`form-row-${index}`} style={_uiDisplay(row)}>
+            {_uiRow(row).map(item => {
+                // 初始化
+                if (values.hasOwnProperty(item.field)) {
+                    if (!item.optionConfig) {
+                        item.optionConfig = {};
+                    }
+                    item.optionConfig.initialValue = values[item.field];
+                }
+                // 渲染
+                return (
+                    (item.hasOwnProperty("title")) ? (
+                        <Col className="page-title" key={item.field}>
+                            {/** 只渲染Title **/}
+                            {item.title}
+                        </Col>
+                    ) : (
+                        <Col span={item.span ? item.span : span} key={item.field}>
+                            {/** 渲染字段 **/}
+                            {jsxField(reference, item,
+                                renders[item.field] ? renders[item.field] : () => false)}
+                        </Col>
+                    )
+                )
+            })}
+        </Row>
+    ));
+};
+/**
+ * 仅渲染按钮
+ * @method inputOp
+ * @param reference
+ * @param column
+ * @param op
+ * @return {boolean}
+ */
+const inputOp = (reference = {}, column = 4, op = {}) => {
+    const ops = Norm.extractOp(reference, op);
     const hidden = Norm.extractHidden(reference);
     const span = 24 / column;
     const btnOpts = Opt.optionFormItem();
@@ -118,45 +159,33 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}) => {
     if (hidden.op) {
         opStyle.display = "none"
     }
+    return (ops ? (
+        <Row style={opStyle}>
+            <Col span={span}>
+                <Form.Item {...btnOpts}>
+                    {ops.map(op => <Button {...op}>{op.text}</Button>)}
+                </Form.Item>
+            </Col>
+        </Row>
+    ) : false)
+};
+/**
+ * 针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染
+ * @method uiFieldForm
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param renders 每个字段不同的render方法
+ * @param column 当前Form的列数量
+ * @param values Form的初始化值
+ * @param op 追加方法
+ * @return {*}
+ */
+const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}, op = {}) => {
+    // Fix Issue
+    if (!values) values = {};
     return (
         <Form layout="inline" className="page-form">
-            {form.map((row, index) => (
-                <Row key={`form-row-${index}`} style={_uiDisplay(row)}>
-                    {_uiRow(row).map(item => {
-                        // 初始化
-                        if (values.hasOwnProperty(item.field)) {
-                            if (!item.optionConfig) {
-                                item.optionConfig = {};
-                            }
-                            item.optionConfig.initialValue = values[item.field];
-                        }
-                        // 渲染
-                        return (
-                            (item.hasOwnProperty("title")) ? (
-                                <Col className="page-title" key={item.field}>
-                                    {/** 只渲染Title **/}
-                                    {item.title}
-                                </Col>
-                            ) : (
-                                <Col span={item.span ? item.span : span} key={item.field}>
-                                    {/** 渲染字段 **/}
-                                    {jsxField(reference, item,
-                                        renders[item.field] ? renders[item.field] : () => false)}
-                                </Col>
-                            )
-                        )
-                    })}
-                </Row>
-            ))}
-            {ops ? (
-                <Row style={opStyle}>
-                    <Col span={span}>
-                        <Form.Item {...btnOpts}>
-                            {ops.map(op => <Button {...op}>{op.text}</Button>)}
-                        </Form.Item>
-                    </Col>
-                </Row>
-            ) : false}
+            {inputField(reference, renders, column, values)}
+            {inputOp(reference, column, op)}
         </Form>
     )
 };
@@ -173,4 +202,6 @@ export default {
     jsxFieldRow,
     // Form专用
     uiFieldForm,
+    inputField,
+    inputOp
 }

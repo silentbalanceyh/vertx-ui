@@ -104,9 +104,10 @@ const extractForm = (reference = {}) => {
  * 处理当前Form中的button或操作按钮配置信息
  * @method extractOp
  * @param {React.PureComponent} reference React对应组件引用
+ * @param op 操作事件集
  * @return {Array}
  */
-const extractOp = (reference = {}) => {
+const extractOp = (reference = {}, op) => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
     const form = $hoc._("form");
@@ -114,11 +115,16 @@ const extractOp = (reference = {}) => {
     /**
      * 绑定Op专用，主要用于onClick的绑定操作
      */
-    const {$op = {}} = reference.state;
+    let source = op ? op : reference.state['$op'];
+    if (!source) source = {};
     const opData = form && form.op ? Immutable.fromJS(form.op).toJS() : [];
     opData.forEach(op => {
-        if (op.onClick && $op.hasOwnProperty(op.onClick)) {
-            op.onClick = $op[op.onClick](reference);
+        if (op.onClick && source.hasOwnProperty(op.onClick)) {
+            op.onClick = source[op.onClick](reference);
+            if (source.$loading) {
+                // 防重复提交专用效果
+                op.loading = source.$loading;
+            }
         }
     });
     return opData;
