@@ -1,9 +1,8 @@
 import Ux from 'ux';
 
 class RxOp {
-    private promise: Function = () => undefined;
-    private success: Function = () => {
-    };
+    private promise: Function = undefined;
+    private success: Function = undefined;
     private failure: Function = () => {
     };
     private validate: Function = () => true;
@@ -68,7 +67,8 @@ class RxOp {
     reset() {
         const executor = this._options();
         const ref = this.reference;
-        return () => executor.success(ref);
+        return executor.success ? () => executor.success(ref) :
+            () => Ux.formReset(ref);
     }
 
     private _options() {

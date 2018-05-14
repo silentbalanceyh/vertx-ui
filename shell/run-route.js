@@ -99,7 +99,7 @@ fs.writeFile("src/components/index.js", content, () => {
     const routes = generateRoute(variables, routeConfig);
     // 3.根据路由规则计算生成片段
     const lines = [];
-    routes.forEach(route => lines.push(`{connect("${route.uri}",route.container["${route.layout}"],route.component["${route.page}"])}`));
+    routes.forEach(route => lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`));
     // 4.代码块
     let codeBlock = "";
     lines.forEach(line => codeBlock += "\t\t" + line + "\n");
