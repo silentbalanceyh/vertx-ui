@@ -1,0 +1,11 @@
+{
+    "mock": true,
+    "data": {
+        "key": "9c26437e-9053-4989-afab-78d0a8822670",
+        "name": "名称P7",
+        "code": "代码P7",
+        "createTime": "2018-05-16T02:28:22",
+        "updateTime": "2018-05-16T02:28:22",
+        "active": true
+    }
+}
