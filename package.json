@@ -2,7 +2,7 @@
     "name": "vertx-zero",
     "version": "0.1.0",
     "dependencies": {
-        "@antv/data-set": "^0.8.8",
+        "@antv/data-set": "^0.8.9",
         "@antv/g2": "^3.0.11",
         "@types/random-js": "^1.0.30",
         "@types/react": "^16.3.14",
@@ -92,8 +92,8 @@
         "build-storybook": "build-storybook"
     },
     "devDependencies": {
-        "@babel/core": "^7.0.0-beta.46",
-        "@babel/preset-env": "^7.0.0-beta.46",
+        "@babel/core": "^7.0.0-beta.47",
+        "@babel/preset-env": "^7.0.0-beta.47",
         "acorn": "^5.5.3",
         "awesome-typescript-loader": "^4.0.1",
         "babel-cli": "^6.26.0",

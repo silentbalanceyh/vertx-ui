@@ -1,0 +1,11 @@
+{
+    "mock": true,
+    "data": {
+        "key": "9f42987a-a819-440d-999e-655b561d41b3",
+        "name": "名称-V",
+        "code": "代码-V",
+        "createTime": "2018-05-16T02:28:22",
+        "updateTime": "2018-05-16T02:28:22",
+        "active": true
+    }
+}
