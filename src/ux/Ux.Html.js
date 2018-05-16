@@ -24,22 +24,13 @@ const htmlDisabled = (id) => {
         return ele.disabled;
     }
 };
-const _execError = (id, show) => {
+const _execError = (target, id, show) => {
     if (id) {
-        const ele = jQuery(`#${id}`).parents();
-        ele.each((index, element) => {
-            const childEle = jQuery(element);
-            const errorCls = childEle.attr("class");
-            if (errorCls && errorCls.indexOf && 0 < errorCls.indexOf("has-error")) {
-                childEle.children().each((iindex, ielement) => {
-                    const errorChildEle = jQuery(ielement);
-                    const errorChildCls = errorChildEle.attr("class");
-                    if (errorChildCls && errorChildCls.indexOf && 0 <= errorChildCls.indexOf("ant-form-explain")) {
-                        errorChildEle.css("display", show ? "block" : "none");
-                    }
-                });
-            }
-        });
+        const ele = jQuery(target).parents(".ant-form-item-children");
+        const subling = ele.siblings(".ant-form-explain");
+        if (subling) {
+            subling.css("display", show ? "block" : "none");
+        }
     }
 };
 /**
@@ -48,18 +39,14 @@ const _execError = (id, show) => {
  * @param item
  * @return {Function}
  */
-const htmlErrorFocus = (item = {}) => () => {
-    _execError(item.field, true);
-};
+const htmlErrorFocus = (item = {}) => (event) => _execError(event.target, item.field, true);
 /**
  * 焦点移除时候的错误验证（必须在Mount之后）
  * @method htmlErrorBlur
  * @param item
  * @return {Function}
  */
-const htmlErrorBlur = (item = {}) => () => {
-    _execError(item.field, false);
-};
+const htmlErrorBlur = (item = {}) => (event) => _execError(event.target, item.field, false);
 /**
  * @class Html
  * @description 原生Html元素连接类
