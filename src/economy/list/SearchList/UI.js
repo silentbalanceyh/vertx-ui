@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from 'ux';
 import './Cab.less'
-import {Alert, Button, Table} from 'antd'
+import {Button, Input, Table} from 'antd'
 import {DynamicDialog} from "web";
 import Op from './UI.Op';
 
@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$list = {}, $table = {}, $query = {}, $metadata = {}, $dialog = {}} = this.props;
+        const {$list = {}, $table = {}, $query = {}, $metadata = {}, $dialog = {}, $op = {}} = this.props;
         // columns渲染
         Ux.uiTableColumn(this, $table.columns, Op);
         // paginator处理
@@ -30,11 +30,7 @@ class Component extends React.PureComponent {
         const selection = $metadata.batch ? Ux.uiTableSelection(this) : undefined;
         // metadata处理
         const op = $metadata.op;
-        const {selectedRowKeys = []} = this.state;
-        const message = Ux.formatExpr($metadata.report.expr, {
-            selected: selectedRowKeys.length,
-            sum: 0
-        });
+        const dynamic = op['dynamic'] ? op['dynamic'] : [];
         // 数据data
         const data = $list.list;
         const {$component: Component} = this.props;
@@ -44,20 +40,22 @@ class Component extends React.PureComponent {
                 <div className="page-op">
                     <Button type="primary" icon="plus"
                             onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button>
-                    {0 < selectedRowKeys.length ? (
-                        <Button type="default">{op.batch}</Button>
+                    {dynamic ? dynamic.map(item => {
+                        const attrs = {};
+                        attrs.key = item.key;
+                        if (item.icon) attrs.icon = item.icon;
+                        if (item.hasOwnProperty("fnKey")) {
+                            attrs.onClick = $op[item['fnKey']] ? $op[item['fnKey']] : () => {
+                            }
+                        }
+                        return (
+                            <Button {...attrs}>{item.text}</Button>
+                        );
+                    }) : false}
+                    {op.search ? (
+                        <Input.Search style={{width: 160, float: "right"}}/>
                     ) : false}
                 </div>
-                {($metadata.batch) ? (
-                    <div className="page-alert">
-                        <Alert message={(
-                            <div>
-                                {message}&nbsp;&nbsp;
-                                <a onClick={Op.fnClear(this)}>{op.clear}</a>
-                            </div>
-                        )} type="info" showIcon/>
-                    </div>
-                ) : false}
                 <Table
                     onChange={Ux.onAdvanced(this)}
                     rowSelection={selection}
