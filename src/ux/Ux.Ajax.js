@@ -146,7 +146,6 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
     const request = new Request(api, {
         method,
         headers,
-        credentials: "include",
         mode: "cors",
         body: ajaxParams(params)
     });

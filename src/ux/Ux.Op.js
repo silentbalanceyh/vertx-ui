@@ -254,6 +254,37 @@ const connectTopbar = (topbar = {}, key) => {
     }
 };
 /**
+ * 高阶函数生成，用于简易的状态设置
+ * @method hgValue
+ * @param reference
+ * @param key
+ * @returns {Function}
+ */
+const hgValue = (reference, key) => (event) => _hgSet(reference, key, event);
+const _hgSet = (reference, key, value) => {
+    if (key && undefined !== value) {
+        const state = {};
+        state[key] = value;
+        reference.setState(state);
+    }
+};
+/**
+ * 高阶函数生成，用于简易的状态设置，true
+ * @method hgTrue
+ * @param reference
+ * @param key
+ * @returns {Function}
+ */
+const hgTrue = (reference, key) => () => _hgSet(reference, key, true);
+/**
+ * 高阶函数生成，用于简易状态设置，false
+ * @method hgFalse
+ * @param reference
+ * @param key
+ * @returns {function(): void}
+ */
+const hgFalse = (reference, key) => () => _hgSet(reference, key, false);
+/**
  * @class Op
  * @description 操作专用类
  */
@@ -264,6 +295,10 @@ export default {
     onResetFilter,
     onSearch,
     onAdvanced,
+    // 高阶函数
+    hgValue,
+    hgTrue,
+    hgFalse,
     // 更新
     cycleUpdatePageList,
     cycleUpdateForm,

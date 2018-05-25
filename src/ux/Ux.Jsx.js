@@ -121,21 +121,29 @@ const inputField = (reference = {}, renders = {}, column = 4, values = {}) => {
                     }
                     item.optionConfig.initialValue = values[item.field];
                 }
-                // 渲染
-                return (
-                    (item.hasOwnProperty("title")) ? (
+                // title优先
+                if (item.hasOwnProperty("title")) {
+                    return (
                         <Col className="page-title" key={item.field}>
                             {/** 只渲染Title **/}
                             {item.title}
                         </Col>
-                    ) : (
-                        <Col span={item.span ? item.span : span} key={item.field}>
-                            {/** 渲染字段 **/}
-                            {jsxField(reference, item,
-                                renders[item.field] ? renders[item.field] : () => false)}
-                        </Col>
-                    )
-                )
+                    );
+                } else {
+                    const fnRender = renders[item.field];
+                    if (fnRender) {
+                        // 渲染
+                        return (
+                            <Col span={item.span ? item.span : span} key={item.field}>
+                                {/** 渲染字段 **/}
+                                {jsxField(reference, item,
+                                    renders[item.field] ? renders[item.field] : () => false)}
+                            </Col>
+                        )
+                    } else {
+                        return false;
+                    }
+                }
             })}
         </Row>
     ));
