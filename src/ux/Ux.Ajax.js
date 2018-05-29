@@ -211,6 +211,7 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
         // 触发Mock条件
         // 1. 打开Mock环境
         // 2. 提供Mock数据
+        console.info(Cv.MOCK);
         if (Cv.MOCK && mockData.mock) {
             let processed = mockData.data;
             return Rx.Observable.from(type)
