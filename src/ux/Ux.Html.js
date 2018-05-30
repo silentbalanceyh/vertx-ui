@@ -39,14 +39,14 @@ const _execError = (target, id, show) => {
  * @param item
  * @return {Function}
  */
-const htmlErrorFocus = (item = {}) => (event) => _execError(event.target, item.field, true);
+const htmlErrorFocus = (item = {}) => (event) => _execError(event ? event.target : {}, item.field, true);
 /**
  * 焦点移除时候的错误验证（必须在Mount之后）
  * @method htmlErrorBlur
  * @param item
  * @return {Function}
  */
-const htmlErrorBlur = (item = {}) => (event) => _execError(event.target, item.field, false);
+const htmlErrorBlur = (item = {}) => (event) => _execError(event ? event.target : {}, item.field, false);
 /**
  * @class Html
  * @description 原生Html元素连接类
