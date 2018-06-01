@@ -234,6 +234,12 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
     }
 };
 /**
+ * 构造微服务路径专用
+ * @param serviceName 服务名称
+ * @param uri 服务专用URI
+ */
+const _buildApi = (serviceName = "", uri = "") => `/${serviceName}${uri}`.replace(/\/\//g, "/");
+/**
  * @class Ajax
  * @description 远程Ajax访问专用API方法
  */
@@ -248,6 +254,8 @@ export default {
      */
     ajaxFetch: (uri, params = {}, mockData) =>
         ajaxRead(Cv.HTTP_METHOD.GET)(uri, params, mockData),
+    microFetch: (service, uri, params = {}, mockData) =>
+        this.ajaxFetch(_buildApi(service, uri), params, mockData),
     /**
      * secure = false，非安全模式的写方法，HttpMethod = POST，底层调ajaxWrite
      * @method ajaxPush
@@ -257,6 +265,8 @@ export default {
      */
     ajaxPush: (uri, params = {}, mockData) =>
         ajaxWrite(Cv.HTTP_METHOD.POST)(uri, params, mockData),
+    microPush: (service, uri, params, mockData) =>
+        this.ajaxPush(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxGet
@@ -266,6 +276,8 @@ export default {
      */
     ajaxGet: (uri, params = {}, mockData) =>
         ajaxRead(Cv.HTTP_METHOD.GET, true)(uri, params, mockData),
+    microGet: (service, uri, params, mockData) =>
+        this.ajaxGet(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = POST，底层调ajaxFull
      * @method ajaxPost
@@ -275,6 +287,8 @@ export default {
      */
     ajaxPost: (uri, params = {}, mockData) =>
         ajaxFull(Cv.HTTP_METHOD.POST, true)(uri, params, mockData),
+    microPost: (service, uri, params, mockData) =>
+        this.ajaxPost(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = PUT，底层调ajaxFull
      * @method ajaxPut
@@ -284,6 +298,8 @@ export default {
      */
     ajaxPut: (uri, params = {}, mockData) =>
         ajaxFull(Cv.HTTP_METHOD.PUT, true)(uri, params, mockData),
+    microPut: (service, uri, params, mockData) =>
+        this.ajaxPut(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = DELETE，底层调ajaxFull
      * @method ajaxDelete
@@ -292,5 +308,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxDelete: (uri, params = {}, mockData) =>
-        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(uri, params, mockData)
+        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(uri, params, mockData),
+    microDelete: (service, uri, params, mockData) =>
+        this.ajaxDelete(_buildApi(service, uri), params, mockData)
 };
