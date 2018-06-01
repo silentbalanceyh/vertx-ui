@@ -1,4 +1,6 @@
 export {default as ListSelector} from './input/ListSelector/UI';
+export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
+
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as PagerHeader} from './header/PagerHeader/UI';
 export {default as TopBar} from './header/TopBar/UI';
