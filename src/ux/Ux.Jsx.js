@@ -21,8 +21,9 @@ import Immutable from 'immutable';
  * @method _uiDisplay
  * @private
  * @param row 显示行数据
+ * @param addition 额外风格
  * **/
-const _uiDisplay = (row = {}) => {
+const _uiDisplay = (row = {}, addition = {}) => {
     const style = row.style ? row.style : {};
     if (1 === row.length) {
         const item = row[0];
@@ -32,7 +33,7 @@ const _uiDisplay = (row = {}) => {
             }
         }
     }
-    return style;
+    return Object.assign(addition, style);
 };
 const _uiRow = (row) => {
     if (Array.prototype.isPrototypeOf(row)) {
@@ -111,8 +112,12 @@ const inputField = (reference = {}, renders = {}, column = 4, values = {}) => {
     if (!values) values = {};
     const form = Norm.extractForm(reference);
     const span = 24 / column;
+    // 行配置处理
+    const formConfig = Prop.fromHoc(reference, "form");
+    const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
+    // 读取配置数据
     return form.map((row, index) => (
-        <Row key={`form-row-${index}`} style={_uiDisplay(row)}>
+        <Row key={`form-row-${index}`} style={_uiDisplay(row, rowConfig[index])}>
             {_uiRow(row).map(item => {
                 // 初始化
                 if (values.hasOwnProperty(item.field)) {

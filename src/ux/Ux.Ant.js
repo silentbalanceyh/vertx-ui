@@ -158,7 +158,8 @@ const uiItemRadio = (items = [], jsx = {}) => {
     return (
         <Radio.Group {...jsx}>
             {items.map(item => (
-                <Radio key={item.key} value={item.key}>
+                <Radio key={item.key} style={item.style ? item.style : {}}
+                       value={item.hasOwnProperty('value') ? item.value : item.key}>
                     {item.name}
                 </Radio>
             ))}

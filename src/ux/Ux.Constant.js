@@ -19,8 +19,8 @@ export default {
     KEY_EVENT: process.env.K_EVENT,
     ENTRY_LOGIN: `/${process.env.ROUTE}${process.env.ENTRY_LOGIN}`,
     ENTRY_ADMIN: `/${process.env.ROUTE}${process.env.ENTRY_ADMIN}`,
-    DEBUG: Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG),
-    MOCK: Boolean("development" === process.env.NODE_ENV && process.env.DEV_MOCK),
+    DEBUG: Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_DEBUG),
+    MOCK: Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
     HTTP_METHOD: {
         GET: "get",
         POST: "post",
