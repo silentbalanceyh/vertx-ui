@@ -80,6 +80,13 @@ const mountErrorFocus = (reference, item) => {
         item.optionJsx.onBlur = Html.htmlErrorBlur(item);
     }
 };
+
+const _normalizeUi = (reference, ui = []) => {
+    ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
+    ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
+    ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
+    return ui;
+};
 /**
  * 处理当前Form中的input控件专用信息
  * @method extractForm
@@ -91,13 +98,24 @@ const extractForm = (reference = {}) => {
     Dg.ensureNotNull($hoc);
     const form = $hoc._("form");
     Dg.ensureNotNull(form);
-    if (form) {
-        form.ui = Type.itMatrix(form.ui, (item) => Validator.mountValidator(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) => mountNormalizer(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) => mountErrorFocus(reference, item));
-        return form.ui;
+    return (form) ? _normalizeUi(reference, form.ui) : [];
+};
+/**
+ * 分组处理Form中的input控件专用
+ * @method extractGroupForm
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param groupIndex 组对应的索引值
+ */
+const extractGroupForm = (reference = {}, groupIndex) => {
+    if (undefined !== groupIndex) {
+        const {$hoc} = reference.state;
+        Dg.ensureNotNull($hoc);
+        const form = $hoc._("form");
+        Dg.ensureNotNull(form);
+        return (form && form.ui[groupIndex]) ?
+            _normalizeUi(reference, form.ui[groupIndex]) : [];
     } else {
-        return [];
+        console.error("[Ux] This method require 'groupIndex' parameter, but now it's invalid.")
     }
 };
 /**
@@ -155,6 +173,7 @@ const extractHidden = (reference = {}) => {
  */
 export default {
     // 读取Form配置专用方法
+    extractGroupForm,
     extractForm,
     extractHidden,
     extractOp

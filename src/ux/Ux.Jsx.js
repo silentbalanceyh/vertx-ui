@@ -39,7 +39,7 @@ const _uiRow = (row) => {
     if (Array.prototype.isPrototypeOf(row)) {
         return row;
     } else {
-        return row.items;
+        return row.items ? row.items : [];
     }
 };
 /**
@@ -97,20 +97,7 @@ const jsxPath = (reference = {}, ...keys) => {
     return data ? data : false;
 };
 
-/**
- * 仅渲染交互式组件
- * @method inputField
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param renders 每个字段不同的render方法
- * @param column 当前Form的列数量
- * @param values Form的初始化值
- * @return {boolean}
- */
-const inputField = (reference = {}, renders = {}, column = 4, values = {}) => {
-    // Fix Issue
-    if (!values) values = {};
-    const form = Norm.extractForm(reference);
+const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form = {}) => {
     const span = 24 / column;
     // 行配置处理
     const formConfig = Prop.fromHoc(reference, "form");
@@ -154,14 +141,47 @@ const inputField = (reference = {}, renders = {}, column = 4, values = {}) => {
     ));
 };
 /**
+ * 仅渲染交互式组件
+ * @method jsxInputField
+ * @private
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param renders 每个字段不同的render方法
+ * @param column 当前Form的列数量
+ * @param values Form的初始化值
+ * @return {boolean}
+ */
+const jsxInputField = (reference = {}, renders = {}, column = 4, values = {}) => {
+    // Fix Issue
+    if (!values) values = {};
+    const form = Norm.extractForm(reference);
+    return _jsxField(reference, renders, column, values, form);
+};
+/**
+ * 分组渲染交互式控件
+ * @method jsxInputField
+ * @private
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param renders 每个字段不同的render方法
+ * @param column 当前Form的列数量
+ * @param values Form的初始化值
+ * @param groupIndex 当前需要渲染的group的组
+ * @return {boolean}
+ */
+const jsxGroupField = (reference = {}, renders = {}, column = 4, values = {}, groupIndex) => {
+    // Fix Issue
+    if (!values) values = {};
+    const form = Norm.extractGroupForm(reference, groupIndex);
+    return _jsxField(reference, renders, column, values, form);
+};
+/**
  * 仅渲染按钮
- * @method inputOp
+ * @method jsxInputOp
  * @param reference
  * @param column
  * @param op
  * @return {boolean}
  */
-const inputOp = (reference = {}, column = 4, op = {}) => {
+const jsxInputOp = (reference = {}, column = 4, op = {}) => {
     const ops = Norm.extractOp(reference, op);
     const hidden = Norm.extractHidden(reference);
     const span = 24 / column;
@@ -197,8 +217,8 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}, op =
     if (!values) values = {};
     return (
         <Form layout="inline" className="page-form">
-            {inputField(reference, renders, column, values)}
-            {inputOp(reference, column, op)}
+            {jsxInputField(reference, renders, column, values)}
+            {jsxInputOp(reference, column, op)}
         </Form>
     )
 };
@@ -215,6 +235,8 @@ export default {
     jsxFieldRow,
     // Form专用
     uiFieldForm,
-    inputField,
-    inputOp
+    jsxGroupField,
+    // 分页Form专用，所有字段分几页处理
+    jsxInputField,
+    jsxInputOp
 }
