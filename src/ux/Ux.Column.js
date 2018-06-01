@@ -187,7 +187,7 @@ const renderDatum = (reference, config) => text => {
 const renderLink = (reference, config, ops = {}) => text => {
     return (
         <Fragment>
-            {config.$config.map((line, opIndex) => {
+            {config['$config'].map((line, opIndex) => {
                 // 编辑专用，配置信息需要拷贝，才可不同
                 const item =
                     "string" === typeof line

@@ -1,28 +1,62 @@
 import Ux from 'ux';
+import Immutable from 'immutable';
 
-const fnClear = (reference = {}) => (event) => {
-    event.preventDefault();
-    reference.setState({selectedRowKeys: []})
+const fnInit = (reference = {}) => {
+    const {$tabs = {}} = reference.props;
+    const tabs = [];
+    // 主Tab
+    if ($tabs.page) tabs.push($tabs.page);
+    reference.setState({tabs, activeKey: $tabs.page.key});
 };
-const _fnDialog = (reference = {}, dialogKey = "") => {
-    Ux.fadeIn(reference);
-    reference.setState({dialogKey})
-};
-const fnAdd = (reference = {}, dialogKey = "") => (event) => {
+const fnAdd = (reference = {}, tab) => (event) => {
     event.preventDefault();
-    // 窗口显示
-    _fnDialog(reference, dialogKey);
+    // 添加Tab页
+    const {tabs = []} = reference.state;
+    const $tabs = Immutable.fromJS(tabs).toJS();
+    const added = {};
+    let activeKey = null;
+    // 构造新的DataKey
+    if (tab) {
+        activeKey = Ux.randomString(16);
+        added.key = activeKey;
+        added.tab = tab.tab;
+        added.dataKey = undefined;
+        $tabs.push(added);
+    }
     // 设置处理专用的key
-    reference.setState({selectedKey: undefined});
+    const state = {tabs: $tabs};
+    if (activeKey) state.activeKey = activeKey;
+    reference.setState(state);
 };
-const fnEdit = (reference = {}, dialogKey = "") => (config, id) => (event) => {
+const fnEdit = (reference = {}) => (config, id) => (event) => {
     event.preventDefault();
-    // 窗口显示
-    _fnDialog(reference, dialogKey);
-    // 设置处理专用的key
-    reference.setState({selectedKey: id});
+    const tabConfig = reference.props['$tabs'];
+    if (tabConfig.edit) {
+        const {tabs = {}} = reference.state;
+        const $tabs = Immutable.fromJS(tabs).toJS();
+        // 激活页签
+        let activeKey = null;
+        const existing = $tabs.filter(item => item.dataKey === id);
+        if (0 === existing.length) {
+            // 不存在，创建新的
+            const updated = {};
+            activeKey = Ux.randomString(16);
+            updated.tab = tabConfig.edit.tab;
+            updated.key = activeKey;
+            updated.dataKey = id;
+            $tabs.push(updated);
+        } else {
+            // 已经存在，设置activeKey;
+            activeKey = existing[0].key;
+        }
+        const state = {tabs: $tabs};
+        if (activeKey) state.activeKey = activeKey;
+        reference.setState(state);
+    } else {
+        console.error("[Ux] Error for 'edit' configuration.");
+    }
 };
-const fnRemove = (reference = {}) => (config, id) => (event) => {
+const fnRemove = (reference = {}, key) => (config, id) => (event) => {
     event.preventDefault();
     if (config.ajax) {
         // 加载数据处理
@@ -34,14 +68,47 @@ const fnRemove = (reference = {}) => (config, id) => (event) => {
                 clean.forEach(item => state[item] = undefined);
                 Ux.writeTree(reference, state);
             }
-        }, $mockRemove ? $mockRemove : {})
+        }, $mockRemove ? $mockRemove : {});
+        // 当前id是否存在于tabs中，存在则需要删除
+        const {tabs = [], activeKey} = reference.state;
+        const lefts = tabs.filter(item => item.dataKey !== id);
+        let key = activeKey;
+        if (tabs.length !== lefts.length) {
+            const found = tabs.filter(item => item.dataKey === id);
+            const $tabs = Immutable.fromJS(lefts).toJS();
+            if (found[0].key === activeKey) {
+                key = $tabs[$tabs.length - 1].key;
+            }
+            const state = {tabs: $tabs};
+            if (key) state.activeKey = key;
+            reference.setState(state);
+        }
     } else {
         console.error("[Ajax] Ajax Config missing in delete operation.");
     }
 };
+const fnMove = (reference) => (activeKey) => reference.setState({activeKey});
+const fnClose = (reference) => (removedKey, action) => {
+    if ("remove" === action) {
+        const {tabs = [], activeKey = ""} = reference.state;
+        const removed = tabs.filter(item => removedKey !== item.key);
+        const $tabs = Immutable.fromJS(removed).toJS();
+        // 计算激活key
+        let key = activeKey;
+        if (activeKey === removedKey) {
+            // 激活窗口被删除
+            key = $tabs[$tabs.length - 1].key;
+        }
+        reference.setState({tabs: $tabs, activeKey: key});
+    }
+};
 export default {
+    // 编辑
+    fnClose,
+    // 移动
+    fnMove,
     // 清空
-    fnClear,
+    fnInit,
     // 添加按钮窗口
     fnAdd,
     // 编辑按钮窗口
