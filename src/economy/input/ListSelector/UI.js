@@ -61,6 +61,7 @@ class Component extends React.PureComponent {
                 <DynamicDialog $visible={this.state.$visible}
                                $dialog={dialog}>
                     <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
+                           size={"small"}
                            loading={this.state.$loading}
                            rowSelection={uiSelection(this)}
                            pagination={uiPagination(this)}
