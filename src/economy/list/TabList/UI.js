@@ -91,6 +91,7 @@ class Component extends React.PureComponent {
         return (
             <div className="page-pagelist">
                 <Tabs activeKey={activeKey} type="editable-card"
+                      hideAdd={true}
                       onChange={Op.fnMove(this)} onEdit={Op.fnClose(this)}>
                     {tabs.map((item, index) => (<TabPane {...item}>{components[index]}</TabPane>))}
                 </Tabs>
