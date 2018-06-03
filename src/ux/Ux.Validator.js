@@ -66,7 +66,16 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
 
 
 const required = (reference = {}) => (rule = {}, value, callback) => {
-    _executeReady(rule, value, callback, () => !!value);
+    if (_ready(rule)) {
+        // 处理required
+        if (value) {
+            callback();
+        } else {
+            callback(rule.message);
+        }
+    } else {
+        callback();
+    }
 };
 
 const after = (reference = {}) => (rule = {}, value, callback) => {
