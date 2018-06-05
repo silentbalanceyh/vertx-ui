@@ -18,7 +18,7 @@ import Ux from 'ux';
  */
 class Component extends React.PureComponent {
     render() {
-        const {children, reference} = this.props;
+        const {children, reference, card = 'page-card'} = this.props;
         const topbar = Ux.fromHoc(reference, "topbar");
         const attrs = {};
         attrs.title = topbar ? topbar.title : "";
@@ -33,7 +33,7 @@ class Component extends React.PureComponent {
             )
         }
         return (
-            <Card className={"page-card"} {...attrs}>
+            <Card className={card} {...attrs}>
                 {children}
             </Card>
         )

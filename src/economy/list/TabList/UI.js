@@ -9,7 +9,7 @@ const {TabPane} = Tabs;
 const buildMain = (reference) => {
     const {
         $list = {}, $table = {}, $query = {},
-        $op = {}, $metadata = {}, $tabs = {}
+        $op = {}, $metadata = {}, $tabs = {},
     } = reference.props;
     // columns渲染
     Ux.uiTableColumn(reference, $table.columns, Op);
@@ -88,10 +88,14 @@ class Component extends React.PureComponent {
             }
         });
         const activeKey = this.state.activeKey;
+        const {$extra} = this.props;
+        // 第一个界面不显示ExtraContent
+        const defaultKey = tabs[0] ? tabs[0].key : null;
         return (
             <div className="page-pagelist">
                 <Tabs activeKey={activeKey} type="editable-card" hideAdd
-                      onChange={Op.fnMove(this)} onEdit={Op.fnClose(this)}>
+                      onChange={Op.fnMove(this)} onEdit={Op.fnClose(this)}
+                      tabBarExtraContent={($extra && defaultKey !== activeKey) ? $extra : false}>
                     {tabs.map((item, index) => (<TabPane {...item}>{components[index]}</TabPane>))}
                 </Tabs>
             </div>
