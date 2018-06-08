@@ -79,6 +79,7 @@ class Component extends React.PureComponent {
                 components.push(
                     <Component key={item.key}
                                {...this.props}
+                               fnClose={Op.fnCloseDirect(this, item.key)}
                                $key={item.dataKey}
                                {...Ux.toDatum(this.props)}/>
                 )

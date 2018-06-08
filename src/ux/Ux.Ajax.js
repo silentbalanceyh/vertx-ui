@@ -101,9 +101,9 @@ const ajaxAdapter = (body = {}) => {
  * @param {Object} mockData 【Mock环境可用】专用Mock响应处理
  * @return {Promise<Response>}
  */
-const ajaxResponse = (request, mockData = {}) =>
+const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    mockData.mock ? Promise.resolve(mockData.data)
+    mockData.mock ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
         : fetch(request)
             .then(response => Log.response(null, response, request.method))
             .then(response => response.ok
@@ -130,7 +130,7 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
         method,
         headers
     });
-    return ajaxResponse(request, mockData);
+    return ajaxResponse(request, mockData, params);
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
@@ -149,7 +149,7 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
         mode: "cors",
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData);
+    return ajaxResponse(request, mockData, params);
 };
 /**
  * Ajax日志函数，打印请求过程中的日志信息
@@ -184,7 +184,7 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
         mode: "cors",
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData);
+    return ajaxResponse(request, mockData, params);
 };
 /**
  * 统一处理Epic，引入Mock的RxJs处理远程访问
@@ -193,7 +193,6 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
  * @param promise 构造的Promise
  * @param processor 响应数据处理器，可用于处理response中的数据
  * @param mockData 【Mock环境可用】模拟数据
- * @param mockProcessor 【Mock环境可用】Mock环境的特殊处理器
  * @example
  *
  *      // Act.Epic.js中的专用方法
@@ -206,7 +205,7 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
  *          Mock.fnFetchRoomType
  *      )
  */
-const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProcessor) => {
+const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
     if (type && U.isFunction(promise)) {
         // 触发Mock条件
         // 1. 打开Mock环境
@@ -215,7 +214,7 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
             let processed = mockData.data;
             return Rx.Observable.from(type)
                 .map(action => action.payload)
-                .map(data => Log.mock(data, mockProcessor ? mockProcessor(data, processed) : processed))
+                .map(data => Log.mock(data, mockData.processor ? mockData.processor(processed, data) : processed))
                 .map(processor)
                 .map(data => Env.dataOut(data));
         } else {

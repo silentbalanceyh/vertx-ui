@@ -211,19 +211,24 @@ const connectButton = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
         const key = Immutable.fromJS(dialog).toJS();
-        dialog.onOk = () => {
-            const ele = document.getElementById(key.onOk);
-            if (ele) {
-                ele.click();
-            } else {
-                console.warn("[Zero-Connect] Element '" + key.onOk + "' does not exist.");
-            }
-        }
+        dialog.onOk = () => connectId(key.onOk);
     } else {
         // 防重复注入
         if (!U.isFunction(dialog.onOk)) {
             console.warn("[Zero-Connect] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
         }
+    }
+};
+/**
+ * 链接某个ID的元素
+ * @param id
+ */
+const connectId = (id) => {
+    const ele = document.getElementById(id);
+    if (ele) {
+        ele.click();
+    } else {
+        console.warn("[Zero-Connect] Element '" + id + "' does not exist.");
     }
 };
 /**
@@ -238,12 +243,7 @@ const connectTopbar = (topbar = {}, key) => {
         buttons.forEach(button => {
             // 防重复注入
             if (!U.isFunction(button.onClick)) {
-                button.onClick = () => {
-                    const ele = document.getElementById(button.key);
-                    if (ele) {
-                        ele.click();
-                    }
-                }
+                button.onClick = () => connectId(button.key)
             }
         });
         topbar.buttons[key] = buttons;
@@ -305,5 +305,6 @@ export default {
     cycleDestoryForm,
     // 连接
     connectButton,
-    connectTopbar
+    connectTopbar,
+    connectId,
 }
