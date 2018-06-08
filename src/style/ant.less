@@ -1,60 +1,66 @@
 .kid-invert {
-  color: white !important;
+    color: white !important;
 }
 
 .vi-red {
-  color: red;
+    color: red;
 }
 
 input[readonly] {
-  background-color: rgba(200, 202, 203, 0.29);
+    background-color: rgba(200, 202, 203, 0.29);
 }
 
 .rx-readonly {
-  input[readonly] {
-    background-color: white;
-    &:hover {
-      cursor: pointer;
+    input[readonly] {
+        background-color: white;
+        &:hover {
+            cursor: pointer;
+        }
     }
-  }
-  i:hover{
-    cursor: pointer;
-  }
+    input[disabled] {
+        background-color: @color-readonly;
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+    i:hover {
+        cursor: pointer;
+    }
 }
 
 .rx-right {
-  text-align: right !important;
-  float: right !important;
+    text-align: right !important;
+    float: right !important;
 }
 
 .hk-error {
-  position: absolute;
-  background-color: @color-error;
-  color: white;
-  border-radius: 3px;
-  border: 1px solid @color-error;
-  padding: 2px 5px;
-  z-index: 100;
-  /** From Animate.css **/
-  animation-duration: 1s;
-  animation-fill-mode: both;
-  animation-name: bounceIn;
+    position: absolute;
+    background-color: @color-error;
+    color: white;
+    border-radius: 3px;
+    border: 1px solid @color-error;
+    padding: 2px 5px;
+    z-index: 100;
+    /** From Animate.css **/
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: bounceIn;
 }
 
 .ant-form-item-required::before {
-  display: none !important;
+    display: none !important;
 }
 
 .rx-list-dialog {
-  .ant-modal-body {
-    padding: 12px !important;
-  }
+    .ant-modal-body {
+        padding: 12px !important;
+    }
 }
 
 form {
-  .has-error .ant-form-explain {
-    .hk-error;
-    top: -27px;
-    display:none;
-  }
+    .has-error .ant-form-explain {
+        .hk-error;
+        top: -27px;
+        display: none;
+    }
 }

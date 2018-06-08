@@ -91,12 +91,13 @@ const _normalizeUi = (reference, ui = []) => {
  * 处理当前Form中的input控件专用信息
  * @method extractForm
  * @param {React.PureComponent} reference React对应组件引用
+ * @param key 读取的配置值
  * @return {*}
  */
-const extractForm = (reference = {}) => {
+const extractForm = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
-    const form = $hoc._("form");
+    const form = $hoc._(key);
     Dg.ensureNotNull(form);
     return (form) ? _normalizeUi(reference, form.ui) : [];
 };

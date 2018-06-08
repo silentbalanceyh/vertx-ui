@@ -26,6 +26,7 @@ const fnAdd = (reference = {}, tab) => (event) => {
     // 设置处理专用的key
     const state = {tabs: $tabs};
     if (activeKey) state.activeKey = activeKey;
+    Ux.writeTree(reference, {"datum.record": undefined});
     reference.setState(state);
 };
 const fnEdit = (reference = {}) => (config, id) => (event) => {
@@ -88,23 +89,28 @@ const fnRemove = (reference = {}, key) => (config, id) => (event) => {
     }
 };
 const fnMove = (reference) => (activeKey) => reference.setState({activeKey});
+
+const fnCloseDirect = (reference, removedKey) => (event) => {
+    const {tabs = [], activeKey = ""} = reference.state;
+    const removed = tabs.filter(item => removedKey !== item.key);
+    const $tabs = Immutable.fromJS(removed).toJS();
+    // 计算激活key
+    let key = activeKey;
+    if (activeKey === key) {
+        // 激活窗口被删除
+        key = $tabs[$tabs.length - 1].key;
+    }
+    reference.setState({tabs: $tabs, activeKey: key});
+};
 const fnClose = (reference) => (removedKey, action) => {
     if ("remove" === action) {
-        const {tabs = [], activeKey = ""} = reference.state;
-        const removed = tabs.filter(item => removedKey !== item.key);
-        const $tabs = Immutable.fromJS(removed).toJS();
-        // 计算激活key
-        let key = activeKey;
-        if (activeKey === removedKey) {
-            // 激活窗口被删除
-            key = $tabs[$tabs.length - 1].key;
-        }
-        reference.setState({tabs: $tabs, activeKey: key});
+        fnCloseDirect(reference, removedKey)();
     }
 };
 export default {
     // 编辑
     fnClose,
+    fnCloseDirect,
     // 移动
     fnMove,
     // 清空

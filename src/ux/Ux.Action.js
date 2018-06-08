@@ -82,6 +82,7 @@ const rxSubmit = (reference = {}, $_loading = "", {
                 success(response, reference);
             })
         } else {
+            console.warn("[Ux] Your promise is invalid!");
             loading(false);
             success(values, reference);
         }

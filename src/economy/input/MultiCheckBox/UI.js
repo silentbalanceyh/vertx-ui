@@ -8,7 +8,7 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            data = [], config = {}, vertical = true,
+            data = [], config = {}, vertical = true, childLine = true,
             fnChild, ...jsx
         } = this.props;
         const {key = "key", label = "label", labelExpr, items = "items"} = config;
@@ -24,9 +24,24 @@ class Component extends React.PureComponent {
             }
             option.value = item[key];
             option.key = item[key];
+            option.disabled = item.disabled;
             // 渲染子节点
-            if (fnChild && Array.prototype.isPrototypeOf(item[items])) {
-                const itemArr = Immutable.fromJS(item[items]).toJS();
+            if (fnChild) {
+                let itemArr = [];
+                if (0 <= items.indexOf('.')) {
+                    const path = items.split('.');
+                    itemArr = Immutable.fromJS(item).getIn(path);
+                    if (itemArr) {
+                        itemArr = itemArr.toJS();
+                    } else {
+                        itemArr = [];
+                    }
+                } else {
+                    // 直接取
+                    if (Array.prototype.isPrototypeOf(item[items])) {
+                        itemArr = Immutable.fromJS(item[items]).toJS();
+                    }
+                }
                 itemArr.forEach(each => each.parent = item[key]);
                 option.children = itemArr;
             } else {
@@ -43,7 +58,7 @@ class Component extends React.PureComponent {
                                 <Row className={"web-check-row"} key={item.key}>
                                     <Checkbox {...rest}>
                                         {label}
-                                    </Checkbox><br/>
+                                    </Checkbox>{childLine ? <br/> : false}
                                     {fnChild ? fnChild(item) : false}
                                 </Row>
                             ) : (

@@ -26,11 +26,16 @@ import Immutable from 'immutable';
 const _uiDisplay = (row = {}, addition = {}) => {
     const style = row.style ? row.style : {};
     if (1 === row.length) {
+        // 单按钮
         const item = row[0];
         if (item.hidden) {
             if (item.field === "$button") {
                 style.display = "none";
             }
+        }
+        // 标题单行修正间距专用
+        if (item.title) {
+            style.height = `42px`;
         }
     }
     return Object.assign(addition, style);
@@ -59,10 +64,9 @@ const jsxField = (reference, item = {}, render) => {
         <Form.Item {...Opt.optionFormItem(item.optionItem)}>
             {0 <= item.field.indexOf("$") ? (
                 render(reference, item.optionJsx)
-            ) : (
-                getFieldDecorator(item.field, item.optionConfig)(
-                    render(reference, item.optionJsx)
-                ))}
+            ) : (getFieldDecorator(item.field, item.optionConfig)(
+                render(reference, item.optionJsx)
+            ))}
         </Form.Item>
     )
 };
@@ -97,6 +101,27 @@ const jsxPath = (reference = {}, ...keys) => {
     return data ? data : false;
 };
 
+const _jsxFieldTitle = (item = {}) => (
+    <Col className="page-title" key={item.field}>
+        {/** 只渲染Title **/}
+        {item.title}
+    </Col>
+);
+const _jsxFieldCommon = (reference, renders, item = {}, span = 6) => {
+    const fnRender = renders[item.field];
+    if (fnRender) {
+        // 渲染
+        return (
+            <Col span={item.span ? item.span : span} key={item.field}>
+                {/** 渲染字段 **/}
+                {jsxField(reference, item,
+                    renders[item.field] ? renders[item.field] : () => false)}
+            </Col>
+        )
+    } else {
+        return false;
+    }
+};
 const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form = {}) => {
     const span = 24 / column;
     // 行配置处理
@@ -113,28 +138,11 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
                     }
                     item.optionConfig.initialValue = values[item.field];
                 }
-                // title优先
                 if (item.hasOwnProperty("title")) {
-                    return (
-                        <Col className="page-title" key={item.field}>
-                            {/** 只渲染Title **/}
-                            {item.title}
-                        </Col>
-                    );
+                    // 单Title
+                    return _jsxFieldTitle(item);
                 } else {
-                    const fnRender = renders[item.field];
-                    if (fnRender) {
-                        // 渲染
-                        return (
-                            <Col span={item.span ? item.span : span} key={item.field}>
-                                {/** 渲染字段 **/}
-                                {jsxField(reference, item,
-                                    renders[item.field] ? renders[item.field] : () => false)}
-                            </Col>
-                        )
-                    } else {
-                        return false;
-                    }
+                    return _jsxFieldCommon(reference, renders, item, span);
                 }
             })}
         </Row>
