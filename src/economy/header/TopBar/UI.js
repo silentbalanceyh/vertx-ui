@@ -1,6 +1,6 @@
 import './Cab.less'
 import React from 'react'
-import {Button} from 'antd'
+import { Button } from 'antd'
 import Ux from 'ux';
 
 class Component extends React.PureComponent {
@@ -10,33 +10,31 @@ class Component extends React.PureComponent {
         const groups = Ux.elementVertical(buttons, "group");
         return (
             <div>
-                {$title}
-                {(0 === groups.length) ? (
+                { $title }
+                { (0 === groups.length) ? (
                     buttons.map(button =>
-                        <Button key={button.key} className="top-button"
-                                type={button.type ? button.type : 'default'}
-                                disabled={button.disabled}
-                                onClick={button.onClick ? button.onClick : () => {
+                        <Button key={ button.key } className="top-button"
+                                type={ button.type ? button.type : 'default' }
+                                onClick={ button.onClick ? button.onClick : () => {
                                     console.warn("[TopBar] Not implemented" + button.key);
-                                }}>
-                            {button.text}
+                                } }>
+                            { button.text }
                         </Button>
                     )
                 ) : (groups.map(group => (
-                        <Button.Group key={group} className="top-group">
-                            {buttons.filter(item => group === item.group).map(button => (
-                                <Button key={button.key}
-                                        type={button.type ? button.type : 'default'}
-                                        disabled={button.disabled}
-                                        onClick={button.onClick ? button.onClick : () => {
+                        <Button.Group key={ group } className="top-group">
+                            { buttons.filter(item => group === item.group).map(button => (
+                                <Button key={ button.key }
+                                        type={ button.type ? button.type : 'default' }
+                                        onClick={ button.onClick ? button.onClick : () => {
                                             console.warn("[TopBar] Grouped Not implemented + " + button.key);
-                                        }}>
-                                    {button.text}
+                                        } }>
+                                    { button.text }
                                 </Button>
-                            ))}
+                            )) }
                         </Button.Group>
                     ))
-                )}
+                ) }
             </div>
         )
     }

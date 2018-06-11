@@ -240,6 +240,25 @@ const elementBranch = (array = [], leafKey, parentField) => {
     return branch.reverse();
 };
 /**
+ * 查找一颗树以及它下边的所有新数组
+ * @method elementChildren
+ * @param {Array} array 被查找的数
+ * @param parentKey 过滤条件
+ * @param parentField
+ */
+const elementChildren = (array = [], parentKey, parentField) => {
+    let children = [];
+    const obj = elementUnique(array, 'key', parentKey);
+    if (obj) {
+        const target = Immutable.fromJS(obj).toJS();
+        children.push(target);
+        // 查找子节点
+        const childrenArr = array.filter(item => parentKey === item[parentField]);
+        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)))
+    }
+    return children;
+};
+/**
  * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
  *
  *      ...
@@ -273,8 +292,9 @@ const treeWithFilters = (array = [], filters = {}, config = {}) =>
  * @description 复杂数据结构计算
  */
 export default {
-
+    // 查找树中相关元素
     elementBranch,
+    elementChildren,
     // 数组中查找唯一元素
     elementUnique,
     /**

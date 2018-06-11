@@ -134,6 +134,7 @@ const toPageList = (reference = {}, FormComponent) => {
     // 元数据
     inherit.$metadata = Prop.fromHoc(reference, "pagelist");
     inherit.$query = reference.state['$query'];
+    // 查询参数
     inherit.$filters = reference.props['$filters'];
     return inherit;
 };

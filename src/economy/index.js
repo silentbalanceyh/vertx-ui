@@ -17,3 +17,5 @@ export {default as PageList} from './list/PageList/UI';
 export {default as EditList} from './list/EditList/UI';
 export {default as SearchList} from './list/SearchList/UI';
 export {default as TabList} from './list/TabList/UI';
+
+export {default as TreeMenu} from './menu/TreeMenu/UI';
