@@ -42,8 +42,8 @@ class Component extends React.PureComponent {
         return (
             <div className="page-pagelist">
                 <div className="page-op">
-                    <Button type="primary" icon="plus"
-                            onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button>
+                    {op.add ? <Button type="primary" icon="plus"
+                                      onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button> : false}
                     {0 < selectedRowKeys.length ? (
                         <Button type="default">{op.batch}</Button>
                     ) : false}
