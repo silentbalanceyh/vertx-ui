@@ -2,6 +2,7 @@ import Dg from './Ux.Debug'
 import Prop from './Ux.Prop'
 import Op from './Ux.Op'
 import Cv from './Ux.Env'
+import Immutable from 'immutable'
 
 /**
  * 通用属性读取相关信息
@@ -132,7 +133,8 @@ const toPageList = (reference = {}, FormComponent) => {
         inherit.$component = false;
     }
     // 元数据
-    inherit.$metadata = Prop.fromHoc(reference, "pagelist");
+    const metadata = Prop.fromHoc(reference, "pagelist");
+    inherit.$metadata = Immutable.fromJS(metadata).toJS();
     inherit.$query = reference.state['$query'];
     // 查询参数
     inherit.$filters = reference.props['$filters'];

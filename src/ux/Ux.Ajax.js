@@ -6,6 +6,7 @@ import Expr from "./Ux.Expr";
 import Env from './Ux.Env';
 import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
+import Immutable from 'immutable'
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -123,6 +124,7 @@ const ajaxResponse = (request, mockData = {}, params) =>
  * @param secure 是否安全模式
  */
 const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData) => {
+    const $params = Immutable.fromJS(params).toJS();
     const api = ajaxUri(uri, method, params);
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
@@ -130,7 +132,7 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
         method,
         headers
     });
-    return ajaxResponse(request, mockData, params);
+    return ajaxResponse(request, mockData, $params);
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
@@ -140,6 +142,7 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
  * @param secure 是否安全模式
  */
 const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockData) => {
+    const $params = Immutable.fromJS(params).toJS();
     const api = ajaxUri(uri, method, params);
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
@@ -149,7 +152,7 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
         mode: "cors",
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData, params);
+    return ajaxResponse(request, mockData, $params);
 };
 /**
  * Ajax日志函数，打印请求过程中的日志信息
@@ -175,6 +178,7 @@ const _logAjax = (api, method, params, mockData) => {
  * @param secure 是否安全模式
  */
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
+    const $params = Immutable.fromJS(params).toJS();
     const api = `${Cv.ENDPOINT}${uri}`;
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
@@ -184,7 +188,7 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
         mode: "cors",
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData, params);
+    return ajaxResponse(request, mockData, $params);
 };
 /**
  * 统一处理Epic，引入Mock的RxJs处理远程访问
@@ -254,7 +258,7 @@ export default {
     ajaxFetch: (uri, params = {}, mockData) =>
         ajaxRead(Cv.HTTP_METHOD.GET)(uri, params, mockData),
     microFetch: (service, uri, params = {}, mockData) =>
-        this.ajaxFetch(_buildApi(service, uri), params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET)(_buildApi(service, uri), params, mockData),
     /**
      * secure = false，非安全模式的写方法，HttpMethod = POST，底层调ajaxWrite
      * @method ajaxPush
@@ -265,7 +269,7 @@ export default {
     ajaxPush: (uri, params = {}, mockData) =>
         ajaxWrite(Cv.HTTP_METHOD.POST)(uri, params, mockData),
     microPush: (service, uri, params, mockData) =>
-        this.ajaxPush(_buildApi(service, uri), params, mockData),
+        ajaxWrite(Cv.HTTP_METHOD.POST)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxGet
@@ -276,7 +280,7 @@ export default {
     ajaxGet: (uri, params = {}, mockData) =>
         ajaxRead(Cv.HTTP_METHOD.GET, true)(uri, params, mockData),
     microGet: (service, uri, params, mockData) =>
-        this.ajaxGet(_buildApi(service, uri), params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = POST，底层调ajaxFull
      * @method ajaxPost
@@ -287,7 +291,7 @@ export default {
     ajaxPost: (uri, params = {}, mockData) =>
         ajaxFull(Cv.HTTP_METHOD.POST, true)(uri, params, mockData),
     microPost: (service, uri, params, mockData) =>
-        this.ajaxPost(_buildApi(service, uri), params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.POST, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = PUT，底层调ajaxFull
      * @method ajaxPut
@@ -298,7 +302,7 @@ export default {
     ajaxPut: (uri, params = {}, mockData) =>
         ajaxFull(Cv.HTTP_METHOD.PUT, true)(uri, params, mockData),
     microPut: (service, uri, params, mockData) =>
-        this.ajaxPut(_buildApi(service, uri), params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.PUT, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = DELETE，底层调ajaxFull
      * @method ajaxDelete
@@ -309,5 +313,5 @@ export default {
     ajaxDelete: (uri, params = {}, mockData) =>
         ajaxFull(Cv.HTTP_METHOD.DELETE, true)(uri, params, mockData),
     microDelete: (service, uri, params, mockData) =>
-        this.ajaxDelete(_buildApi(service, uri), params, mockData)
+        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(_buildApi(service, uri), params, mockData),
 };

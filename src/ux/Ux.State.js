@@ -6,12 +6,13 @@ import Immutable from 'immutable';
  * @method writeTree
  * @param {React.PureComponent} reference React对应组件引用
  * @param state 写入的状态数据
+ * @param dft 默认值
  */
-const writeTree = (reference = {}, state) => {
+const writeTree = (reference = {}, state, dft = null) => {
     const {fnOut} = reference.props;
     if (fnOut) {
         const $state = state ? Immutable.fromJS(state).toJS() : state;
-        fnOut(DataLabor.createIn($state, null));
+        fnOut(DataLabor.createIn($state, dft));
     } else {
         console.warn("[STATE] 'fnOut' function is missing in current component.", reference);
     }
