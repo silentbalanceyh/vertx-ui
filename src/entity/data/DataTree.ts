@@ -19,7 +19,7 @@ const _calculateChildren = (multi: any, data: any, meta: any = {}) => {
 };
 
 const _initDataArray = (data: any = [], meta: any = {}) => {
-    data = Immutable.fromJS(data);
+    data = Immutable.fromJS(data).toJS();
     if (!meta.id) meta.id = "id";
     if (!meta.value) meta.value = meta.id;
     if (!meta.label) meta.label = "label";
