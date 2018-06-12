@@ -20,6 +20,9 @@ const fromPath = (reference = {}, ...keys) => {
         });
         const $data = Immutable.fromJS(data);
         data = $data.getIn(path);
+        if (data.toJS) {
+            data = data.toJS();
+        }
     }
     return data;
 };

@@ -1,15 +1,18 @@
 import {DataLabor} from "entity";
+import Immutable from 'immutable';
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
  * @method writeTree
  * @param {React.PureComponent} reference React对应组件引用
  * @param state 写入的状态数据
+ * @param dft 默认值
  */
-const writeTree = (reference = {}, state) => {
+const writeTree = (reference = {}, state, dft = null) => {
     const {fnOut} = reference.props;
     if (fnOut) {
-        fnOut(DataLabor.createIn(state, null));
+        const $state = state ? Immutable.fromJS(state).toJS() : state;
+        fnOut(DataLabor.createIn($state, dft));
     } else {
         console.warn("[STATE] 'fnOut' function is missing in current component.", reference);
     }

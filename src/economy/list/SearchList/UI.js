@@ -35,11 +35,12 @@ class Component extends React.PureComponent {
         const data = $list.list;
         const {$component: Component} = this.props;
         const dialog = this.state.dialogKey ? $dialog[this.state.dialogKey] : {};
+
         return (
             <div className="page-pagelist">
                 <div className="page-op">
-                    <Button type="primary" icon="plus"
-                            onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button>
+                    {op.add ? <Button type="primary" icon="plus"
+                                      onClick={Op.fnAdd(this, op.add.dialogKey)}>{op.add.text}</Button> : false}
                     {dynamic ? dynamic.map(item => {
                         const attrs = {};
                         attrs.key = item.key;

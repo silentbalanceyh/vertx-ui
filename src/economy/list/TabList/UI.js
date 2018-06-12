@@ -9,7 +9,7 @@ const {TabPane} = Tabs;
 const buildMain = (reference) => {
     const {
         $list = {}, $table = {}, $query = {},
-        $op = {}, $metadata = {}, $tabs = {},
+        $op = {}, $metadata = {}, $tabs = {}
     } = reference.props;
     // columns渲染
     Ux.uiTableColumn(reference, $table.columns, Op);
@@ -25,8 +25,8 @@ const buildMain = (reference) => {
     return (
         <div>
             <div className="page-op">
-                <Button type="primary" icon="plus"
-                        onClick={Op.fnAdd(reference, $tabs.add)}>{op.add.text}</Button>
+                {op.add ? <Button type="primary" icon="plus"
+                                  onClick={Op.fnAdd(reference, $tabs.add)}>{op.add.text}</Button> : false}
                 {dynamic ? dynamic.map(item => {
                     const attrs = {};
                     attrs.key = item.key;

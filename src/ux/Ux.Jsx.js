@@ -60,15 +60,15 @@ const jsxField = (reference, item = {}, render) => {
     item = Immutable.fromJS(item).toJS();
     const {form} = reference.props;
     const {getFieldDecorator} = form;
-    return (
+    return item.optionItem ? (
         <Form.Item {...Opt.optionFormItem(item.optionItem)}>
-            {0 <= item.field.indexOf("$") ? (
-                render(reference, item.optionJsx)
-            ) : (getFieldDecorator(item.field, item.optionConfig)(
-                render(reference, item.optionJsx)
-            ))}
+            {0 <= item.field.indexOf("$") ?
+                render(reference, item.optionJsx) :
+                getFieldDecorator(item.field, item.optionConfig)(
+                    render(reference, item.optionJsx)
+                )}
         </Form.Item>
-    )
+    ) : render(reference, item.optionJsx, item.optionConfig)
 };
 /**
  * Jsx单行字段的Render处理
@@ -89,16 +89,6 @@ const jsxFieldRow = (reference, item = {}, render) => {
                 render(reference, item.optionJsx))}
         </Form.Item>
     )
-};
-/**
- * 直接从资源文件路径读取数据信息
- * @method jsxPath
- * @param reference
- * @param keys
- */
-const jsxPath = (reference = {}, ...keys) => {
-    const data = Prop.fromPath.apply(this, [reference].concat(keys));
-    return data ? data : false;
 };
 
 const _jsxFieldTitle = (item = {}) => (
@@ -149,16 +139,15 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     ));
 };
 /**
- * 仅渲染交互式组件
- * @method jsxInputField
- * @private
+ * 仅渲染交互式组件，Grid布局
+ * @method jsxFieldGrid
  * @param {React.PureComponent} reference React对应组件引用
  * @param renders 每个字段不同的render方法
  * @param column 当前Form的列数量
  * @param values Form的初始化值
  * @return {boolean}
  */
-const jsxInputField = (reference = {}, renders = {}, column = 4, values = {}) => {
+const jsxFieldGrid = (reference = {}, renders = {}, column = 4, values = {}) => {
     // Fix Issue
     if (!values) values = {};
     const form = Norm.extractForm(reference);
@@ -166,8 +155,7 @@ const jsxInputField = (reference = {}, renders = {}, column = 4, values = {}) =>
 };
 /**
  * 分组渲染交互式控件
- * @method jsxInputField
- * @private
+ * @method jsxFieldGroup
  * @param {React.PureComponent} reference React对应组件引用
  * @param renders 每个字段不同的render方法
  * @param column 当前Form的列数量
@@ -175,7 +163,7 @@ const jsxInputField = (reference = {}, renders = {}, column = 4, values = {}) =>
  * @param groupIndex 当前需要渲染的group的组
  * @return {boolean}
  */
-const jsxGroupField = (reference = {}, renders = {}, column = 4, values = {}, groupIndex) => {
+const jsxFieldGroup = (reference = {}, renders = {}, column = 4, values = {}, groupIndex) => {
     // Fix Issue
     if (!values) values = {};
     const form = Norm.extractGroupForm(reference, groupIndex);
@@ -183,13 +171,13 @@ const jsxGroupField = (reference = {}, renders = {}, column = 4, values = {}, gr
 };
 /**
  * 仅渲染按钮
- * @method jsxInputOp
+ * @method jsxOp
  * @param reference
  * @param column
  * @param op
  * @return {boolean}
  */
-const jsxInputOp = (reference = {}, column = 4, op = {}) => {
+const jsxOp = (reference = {}, column = 4, op = {}) => {
     const ops = Norm.extractOp(reference, op);
     const hidden = Norm.extractHidden(reference);
     const span = 24 / column;
@@ -225,26 +213,91 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}, op =
     if (!values) values = {};
     return (
         <Form layout="inline" className="page-form">
-            {jsxInputField(reference, renders, column, values)}
-            {jsxInputOp(reference, column, op)}
+            {jsxFieldGrid(reference, renders, column, values)}
+            {jsxOp(reference, column, op)}
         </Form>
     )
+};
+
+/**
+ * 渲染某个子表单的Page页
+ * @method jsxFieldPage
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param renders 每个字段不同的render方法
+ * @param jsx 当前Form的列数量
+ * @param entity Form的初始化值
+ * @param key 读取配置的专用
+ * @return {boolean}
+ */
+const jsxFieldPage = (reference, renders, jsx, entity = {}, key) => {
+    // 行配置处理
+    const formCfg = Norm.extractForm(reference, key);
+    return formCfg.map((row, index) => (
+        <Row key={`form-range-row-${index}`} style={{height: 39}}>
+            {row.map(item => {
+                // 初始化
+                const $item = Immutable.fromJS(item).toJS();
+                $item.field = `children.${entity.key}.${item.field}`;
+                return (
+                    <Col span={item.span ? item.span : 8} key={$item.field}>
+                        {jsxField(reference, $item, renders[item.field])}
+                    </Col>
+                )
+            })}
+        </Row>
+    ));
 };
 /**
  * @class Jsx
  * @description 字段专用输出函数
  */
 export default {
-    // 读取路径上
-    jsxPath,
-    // Field专用
-    jsxField,
-    // RowField专用
-    jsxFieldRow,
     // Form专用
     uiFieldForm,
-    jsxGroupField,
-    // 分页Form专用，所有字段分几页处理
-    jsxInputField,
-    jsxInputOp
+    // -------------- 以上为Form内置 ---------------
+    /**
+     * 登录页这种单列布局使用
+     * 配置文件格式【一维数组】
+     * "_form":{
+     *     "ui":[
+     *         {
+     *         }
+     *     ]
+     * }
+     */
+    jsxFieldRow,
+    /**
+     * Grid布局使用
+     * 配置文件格式【二维数组】
+     * "_form":{
+     *     "ui":[
+     *         [
+     *              {
+     *              }
+     *         ]
+     *     ]
+     * }
+     */
+    jsxFieldGrid,
+    /**
+     * Tab -> Grid布局使用
+     * 配置文件格式【三维数组】
+     * "_form":{
+     *     "ui":[
+     *         [
+     *              [
+     *                  {
+     *                  }
+     *              ]
+     *         ]
+     *     ]
+     * }
+     */
+    jsxFieldGroup,
+    // 渲染子表单专用，可根据Form的key渲染子表单，field且不一样
+    jsxFieldPage,
+    // 单个字段的渲染
+    jsxField,
+    // 单个按钮的渲染
+    jsxOp
 }
