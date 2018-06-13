@@ -21,6 +21,7 @@ const _buildConfig = (reference, message, fnSuccess, key) => {
     if (U.isFunction(fnSuccess)) {
         config.onOk = fnSuccess;
     }
+    if (!config.width) config.width = 488;
     return config;
 };
 /**
@@ -39,10 +40,12 @@ const showError = (reference, message, fnSuccess) => Modal.error(_buildConfig(re
  * @param {Function} fnSuccess 窗口按钮的回调函数
  */
 const showSuccess = (reference, message, fnSuccess) => Modal.success(_buildConfig(reference, message, fnSuccess, "success"));
+const showConfirm = (reference, message, fnSuccess) => Modal.confirm(_buildConfig(reference, message, fnSuccess, "confirm"));
 
 const _dialogFun = {
     success: showSuccess,
-    error: showError
+    error: showError,
+    confirm: showConfirm
 };
 
 const messageSuccess = (displayMsg, fnSuccess) => {
@@ -188,6 +191,7 @@ export default {
     fadeOut,
     showError,
     showSuccess,
+    showConfirm,
     showDialog,
     showMessage
 }

@@ -162,3 +162,28 @@
     background: -ms-linear-gradient(left, @color-title 0%, white 100%);
     background: linear-gradient(to right, @color-title 0%, white 100%);
 }
+
+.@{page-prefix}-view {
+    padding-top: 6px;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 22px;
+}
+
+.@{page-prefix}-viewsub {
+    padding-top: 6px;
+    line-height: 22px;
+}
+
+.@{page-prefix}-view-table {
+    :global {
+        .ant-table-body {
+            th {
+                padding: 6px !important;
+            }
+            td {
+                padding: 6px !important;
+            }
+        }
+    }
+}
