@@ -1,5 +1,5 @@
 import U from "underscore";
-import Types from "./Ux.Type";
+import Types from "../Ux.Type";
 
 const _findChild = (item = {}, key, pkey, array = []) => {
     const pValue = item[key];
@@ -13,16 +13,16 @@ const _findChild = (item = {}, key, pkey, array = []) => {
 };
 
 class Uarr {
+    constructor(data = []) {
+        this.data = data;
+    }
+
     static create(data = []) {
         if (U.isArray(data)) {
             return new Uarr(data);
         } else {
             console.error("[Kid] The input data must be Array.");
         }
-    }
-
-    constructor(data = []) {
-        this.data = data;
     }
 
     mount(items = {}) {

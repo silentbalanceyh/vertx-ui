@@ -28,8 +28,8 @@ import ATTRIBUTE from "./Ux.Attribute";
 import VALUE from "./Ux.Value";
 import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
-import Uarr from "./Ux.Uarr";
-import Uson from "./Ux.Uson";
+import Uarr from "./structure/Ux.Uarr";
+import Uson from "./structure/Ux.Uson";
 
 export default {
     // 参数解析

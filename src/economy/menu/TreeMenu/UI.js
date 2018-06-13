@@ -15,7 +15,8 @@ const renderNode = (item = {}) => {
 
 class Component extends React.PureComponent {
     render() {
-        const {$config = {}, $data = [], fnSelect, jsx = {}} = this.props;
+        const {$config = {}, $data = [], jsx = {}} = this.props;
+        const {fnSelect, fnCheck} = this.props;
         const {
             label = "label", id = "key",
             pid = "parentId",
@@ -27,6 +28,10 @@ class Component extends React.PureComponent {
         const treeData = DataLabor.getTree($data, treeConfig);
         const attrs = {};
         if (fnSelect) attrs.onSelect = fnSelect;
+        if (fnCheck) {
+            attrs.onCheck = fnCheck;
+            attrs.checkable = true;
+        }
         attrs.defaultExpandAll = true;
         attrs.style = {width: "90%"};
         attrs.showIcon = true;

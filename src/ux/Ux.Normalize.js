@@ -1,7 +1,7 @@
 import Dg from './Ux.Debug'
 import Validator from './Ux.Validator'
 import Type from './Ux.Type';
-import Html from './Ux.Html'
+import Html from './Ux.Html';
 import Immutable from 'immutable';
 
 const limitNumber = (length) => value => {

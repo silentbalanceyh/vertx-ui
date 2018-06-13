@@ -1,4 +1,5 @@
 import DataContainer from "./DataContainer";
+import * as Immutable from 'immutable';
 
 class DataObject implements DataContainer {
     ready: boolean = false;
@@ -30,7 +31,7 @@ class DataObject implements DataContainer {
     raw(): Object {
         const data = this.data;
         const ready = this.ready;
-        return { data, ready };
+        return {data, ready};
     }
 
     /**
@@ -40,13 +41,22 @@ class DataObject implements DataContainer {
      */
     _(key: string): any {
         if (this.ready && key) {
-            return this.data[key];
+            let keys = [key];
+            if (0 <= key.indexOf('.')) {
+                keys = key.split('.');
+            }
+            let data = Immutable.fromJS(this.data).getIn(keys);
+            if (data && data.toJS) {
+                data = data.toJS();
+            }
+            return data;
         }
     }
+
     /**
      * 设置对象中对应键的值
-     * @param key 
-     * @param value 
+     * @param key
+     * @param value
      */
     set(key: string, value: any): any {
         if (this.ready && value) {

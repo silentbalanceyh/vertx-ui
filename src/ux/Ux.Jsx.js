@@ -1,10 +1,13 @@
 import React from 'react';
 import Opt from './Ux.Option'
+import Random from './Ux.Random'
 import Norm from './Ux.Normalize'
 import Prop from './Ux.Prop'
+import viewRender from './_internal/Ux.View'
 import {Button, Col, Form, Row} from 'antd'
 import Dg from './Ux.Debug'
 import Immutable from 'immutable';
+import U from 'underscore';
 
 /**
  * 验证规则属性
@@ -248,6 +251,155 @@ const jsxFieldPage = (reference, renders, jsx, entity = {}, key) => {
     ));
 };
 /**
+ * 渲染某一个Column的内容信息
+ * @method viewColumn
+ * @param column
+ * @param content
+ */
+const viewColumn = (column, content) => {
+    let attrs = {};
+    if (U.isObject(column)) {
+        // 可传入Object配置
+        attrs = Object.assign(attrs, column);
+    } else {
+        // 如果传入不是Object，则使用默认的span属性
+        attrs.span = column;
+    }
+    attrs.key = Random.randomString(16);
+    return (
+        <Col {...attrs}>
+            {U.isFunction(content) ? content() : content}
+        </Col>
+    )
+};
+/**
+ * 渲染某一个Row的内容
+ * @method viewRow
+ * @param columns
+ * @param flex
+ * @param content
+ */
+const viewRow = (columns = [], flex = {}, ...content) => {
+    const attrs = {
+        key: Random.randomString(16),
+        className: "page-view"
+    };
+    if (flex.isSub) {
+        attrs.className = "page-viewsub"
+    }
+    return (flex.show && 0 < columns.length) ? (
+        <Row {...attrs}>
+            {columns.map((column, index) => viewColumn(column, content[index]))}
+        </Row>
+    ) : false
+};
+/**
+ * 渲染某一个Row的Title
+ * @method viewTitle
+ * @param message
+ */
+const viewTitle = (message) => {
+    return (<Row className={"page-title"}>{message}</Row>)
+};
+
+const _prepareConfig = (config = {}, field) => {
+    // 智能格式兼容
+    if ("string" === typeof config) {
+        const splitted = config.split(',');
+        if (2 === splitted.length) {
+            const key = splitted[0];
+            const label = splitted[1];
+            const target = {};
+            target.field = field;
+            target.label = label;
+            if (key !== field) {
+                target.path = key;
+            }
+            config = target;
+        } else {
+            const target = {};
+            target.field = field;
+            target.label = splitted[0];
+            config = target;
+        }
+    } else if (true === config) {
+        const target = {};
+        target.field = field;
+        config = target;
+    }
+    config = Immutable.fromJS(config).toJS();
+    if (!config.mode) config.mode = "pure";
+    if (!config.meta) config.meta = {};
+    if (!config.field) config.field = field;
+    return config;
+};
+/**
+ * 渲染某一个单元格，主要用于处理上边的content
+ * @param reference
+ * @param $data
+ * @param field
+ * @param config
+ * @param renders
+ */
+const viewCell = (reference, $data, field = "Unknown", config = {}, renders = {}) => {
+    let render = renders[field];
+    if (!U.isFunction(render)) {
+        render = viewRender[config.mode];
+        config.extension = renders[field];
+    }
+    if (!render) {
+        console.error("[ZERO] View render does not exist.", config.mode);
+    }
+    return (U.isFunction(render)) ? render($data, config, reference) : false;
+};
+
+const viewConfig = (page = [], reference, key = "view") => {
+    const view = Prop.fromHoc(reference, key);
+    const configMap = {};
+    page.forEach(row => row.name.forEach(field => {
+        if (!view || !view[field]) {
+            console.error("[ZERO] Required 'view' config missing.", field)
+        }
+        configMap[field] = _prepareConfig(view[field], field);
+    }));
+    return configMap;
+};
+
+const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub = false) => {
+    const configMap = viewConfig(page, reference, key);
+    // 计算当前行是否呈现，动态配置扩展专用
+    page.forEach(row => {
+        if (row.flex && row.flex.row) {
+            row.name.forEach(field => {
+                const config = configMap[field];
+                const value = viewRender.extractValue($data, config);
+                row.flex.show = !!value;
+            })
+        } else {
+            row.flex = {};
+            row.flex.show = true;
+        }
+        row.flex.isSub = isSub;
+    });
+    return page.map(row => viewRow.apply(null,
+        [row.span, row.flex].concat(row.name.map(
+            field => viewCell(reference, $data, field, configMap[field], renders)
+        )))
+    )
+};
+/**
+ * 特殊方法：双高阶函数的渲染
+ * @param reference
+ */
+const jsxOpArchor = (reference) => {
+    const {$op = {}} = reference.props;
+    const keys = Object.keys($op);
+    const style = {display: "none"};
+    return keys.map(key => (
+        <Button id={key} key={key} onClick={$op[key](reference)} style={style}/>
+    ))
+};
+/**
  * @class Jsx
  * @description 字段专用输出函数
  */
@@ -255,6 +407,13 @@ export default {
     // Form专用
     uiFieldForm,
     // -------------- 以上为Form内置 ---------------
+    viewColumn,
+    viewTitle,
+    viewRow,
+    viewCell,
+    viewGrid,
+    viewConfig,
+    // -------------- 以上为View内置 ---------------
     /**
      * 登录页这种单列布局使用
      * 配置文件格式【一维数组】
@@ -299,5 +458,7 @@ export default {
     // 单个字段的渲染
     jsxField,
     // 单个按钮的渲染
-    jsxOp
+    jsxOp,
+    // 专用方法：高阶生成
+    jsxOpArchor
 }

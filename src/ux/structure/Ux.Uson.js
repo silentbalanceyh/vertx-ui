@@ -1,5 +1,5 @@
 import U from "underscore";
-import Type from './Ux.Type';
+import Type from '../Ux.Type';
 import Immutable from "immutable";
 import moment from 'moment';
 
