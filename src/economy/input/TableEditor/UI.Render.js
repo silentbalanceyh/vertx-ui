@@ -13,15 +13,15 @@ const triggerChange = (reference = {}, changedValue) => {
 
 const onAdd = (reference, index) => (event) => {
     const state = reference.state;
-    if (state.data) {
-        const item = state.data;
+    if (state.source) {
+        const item = state.source;
         if (index === item.length) {
             item.push({key: Ux.randomUUID()});
         } else {
             item.splice(index + 1, 0, {key: Ux.randomUUID()});
         }
         reference.setState({
-            data: Immutable.fromJS(item).toJS()
+            source: Immutable.fromJS(item).toJS()
         });
     } else {
         console.error("[ZERO] Add 'data' in state has not been initialized.");
@@ -30,10 +30,10 @@ const onAdd = (reference, index) => (event) => {
 
 const onRemove = (reference, index) => (event) => {
     const state = reference.state;
-    if (state.data) {
-        const item = state.data.filter((item, idx) => idx !== index);
+    if (state.source) {
+        const item = state.source.filter((item, idx) => idx !== index);
         reference.setState({
-            data: Immutable.fromJS(item).toJS()
+            source: Immutable.fromJS(item).toJS()
         });
     } else {
         console.error("[ZERO] Remove 'data' in state has not been initialized.");
