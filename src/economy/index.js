@@ -5,6 +5,7 @@ export {default as DateVersion} from './input/DateVersion/UI';
 export {default as CheckedDate} from './input/CheckedDate/UI';
 export {default as TimeRanger} from './input/TimeRanger/UI';
 export {default as ChangeEditor} from './input/ChangeEditor/UI';
+export {default as TableEditor} from './input/TableEditor/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as PagerHeader} from './header/PagerHeader/UI';
