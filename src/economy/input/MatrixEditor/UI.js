@@ -1,16 +1,23 @@
 import React from 'react'
 import './Cab.less'
 import {Input, Table} from 'antd';
-import Op from './UI.Render';
-import Ux from 'ux';
-import U from 'underscore';
+import Op from "./UI.Render";
+import U from "underscore";
 
 class Component extends React.PureComponent {
-
     constructor(props) {
         super(props);
+        const {rows = {}} = props.config;
+        const dataRow = Object.keys(rows);
+        const data = [];
+        dataRow.forEach(row => {
+            const dataItem = {};
+            dataItem.key = rows[row];
+            dataItem.field = row;
+            data.push(dataItem);
+        });
         this.state = {
-            source: props.value || [{key: Ux.randomUUID()}]
+            source: props.value || data
         }
     }
 
@@ -33,7 +40,8 @@ class Component extends React.PureComponent {
         }
         return (
             <Input.Group {...rest}>
-                <Table {...config} className={"web-table-editor"} pagination={false} dataSource={source}/>
+                <Table columns={config.columns} className={"web-table-editor"}
+                       pagination={false} dataSource={source}/>
             </Input.Group>
         )
     }

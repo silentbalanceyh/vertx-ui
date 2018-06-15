@@ -100,7 +100,8 @@ const _jsxFieldGrid = (item = {}) => {
             {/** 只渲染Title **/}
             {item.grid.map(each => (
                 <Col span={each.span} key={Random.randomString(12)}
-                     style={each.style ? each.style : {}}>{each.text}</Col>
+                     style={each.style ? each.style : {}}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{each.text}&nbsp;&nbsp;&nbsp;&nbsp;</Col>
             ))}
         </Col>
     )
