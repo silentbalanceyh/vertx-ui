@@ -13,11 +13,12 @@ import Ux from 'ux';
  */
 class Component extends React.PureComponent {
     render() {
-        const {children, reference, card = 'page-card'} = this.props;
+        const {children, reference, card = 'page-card', $extra: Extra} = this.props;
         const topbar = Ux.fromHoc(reference, "topbar");
         return (
             <Card className={card} bordered={false}
-                  title={topbar ? topbar.title : ""}>
+                  title={topbar ? topbar.title : ""}
+                  extra={(Extra) ? <Extra $current={topbar.current}/> : false}>
                 {children}
             </Card>
         )

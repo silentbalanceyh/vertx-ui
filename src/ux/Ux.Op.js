@@ -226,6 +226,7 @@ const connectButton = (dialog = {}) => {
 const connectId = (id) => {
     const ele = document.getElementById(id);
     if (ele) {
+        console.info("[Zero-Connect] Html element " + id + " connected !");
         ele.click();
     } else {
         console.warn("[Zero-Connect] Element '" + id + "' does not exist.");

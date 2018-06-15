@@ -5,6 +5,7 @@ import Ux from "ux";
 import _Icon from "./Ux.Icon";
 import Prop from "./Ux.Prop";
 import Type from "./Ux.Type";
+import Global from './Ux.Global';
 import {
     Breadcrumb,
     Button,
@@ -118,8 +119,8 @@ const uiItemCollapse = (collapses = {}, ...children) => (
         ))}
     </Collapse>
 );
-const uiItemTimeline = (items = {}) => (
-    <Timeline>
+const uiItemTimeline = (items = {}, jsx = {}) => (
+    <Timeline {...jsx}>
         {items
             ? items.map(item => {
                 let className = item.onClick ? "ux-item" : "";
@@ -209,7 +210,24 @@ const uiItemDatum = (reference, key, filters) => {
     return (filters) ? Type.elementFind(Prop.onDatum(reference, key), filters) :
         Prop.onDatum(reference, key);
 };
+/**
+ * 根据不同用户的角色值读取不同的UI
+ * @method uiLoader
+ * @param props
+ * @param roles
+ * @param roleCode
+ */
+const uiLoader = (props = {}, roles = {}, roleCode = "roleCode") => {
+    const user = Global.isLogged();
+    if (!user) return false;
+    const role = user[roleCode];
+    if (!role) return false;
+    const Component = roles[role];
+    if (!Component) return false;
+    return (<Component {...props}/>)
+};
 export default {
+    uiLoader,
     uiItemRadio,
     uiItemDatum,
     uiItemRadioDatum: (reference, jsx = {}, key, filters) =>
