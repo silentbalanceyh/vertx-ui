@@ -79,7 +79,7 @@ class DataTree implements DataContainer {
     }
 
     to() {
-        return this.tree;
+        return Immutable.fromJS(this.tree).toJS();
     }
 }
 
