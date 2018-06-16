@@ -2,7 +2,7 @@
 
 @page-prefix: page;
 .@{page-prefix}-header {
-    margin-top: 5px;
+    //margin-top: 5px;
     background: @component-background;
     padding: 12px 24px 0 24px;
     border-bottom: @border-width-base @border-style-base @border-color-split;
@@ -29,6 +29,18 @@
     }
     th {
         padding: 12px !important;
+    }
+}
+
+.form-col-modify {
+    .ant-col-1, .ant-col-2, .ant-col-3, .ant-col-4,
+    .ant-col-5, .ant-col-6, .ant-col-7, .ant-col-8,
+    .ant-col-9, .ant-col-10, .ant-col-11, .ant-col-12,
+    .ant-col-13, .ant-col-14, .ant-col-15, .ant-col-16,
+    .ant-col-7, .ant-col-18, .ant-col-19, .ant-col-20,
+    .ant-col-21, .ant-col-22, .ant-col-23, .ant-col-24 {
+        height: 40px !important;
+        margin-top: 4px !important;
     }
 }
 
@@ -101,7 +113,8 @@
         margin-bottom: 16px;
     }
     .@{page-prefix}-op {
-        margin-bottom: 8px;
+        margin-bottom: 6px;
+        min-height: 32px;
         button {
             margin-right: 8px;
         }
@@ -124,21 +137,20 @@
 }
 
 .@{page-prefix}-form {
-    .ant-col-6, .ant-col-8, .ant-col-12, .ant-col-24 {
-        height: 48px !important;
-    }
+    .form-col-modify;
     button {
         margin-right: 10px;
     }
 }
 
+.clear-border {
+    border-radius: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
 .@{page-prefix}-ufform {
-    .clear-border {
-        border-radius: 0 !important;
-        border-top: none !important;
-        border-left: none !important;
-        border-right: none !important;
-    }
     input {
         .clear-border;
     }
@@ -154,13 +166,26 @@
     font-size: 16px;
     color: black;
     padding-left: 10px;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
     margin-top: 6px;
     background: -moz-linear-gradient(left, @color-title 0%, white 100%);
     background: -webkit-linear-gradient(left, @color-title 0%, white 100%);
     background: -o-linear-gradient(left, @color-title 0%, white 100%);
     background: -ms-linear-gradient(left, @color-title 0%, white 100%);
     background: linear-gradient(to right, @color-title 0%, white 100%);
+}
+
+.@{page-prefix}-view-header {
+    padding-right: 15%;
+    height: 48px;
+    line-height: 48px;
+    font-size: 28px;
+    font-weight: 900;
+    color: black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    margin-top: 6px;
+    text-align: center;
 }
 
 .@{page-prefix}-view {

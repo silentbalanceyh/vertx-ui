@@ -4,27 +4,25 @@ import {Input, Table} from 'antd';
 import Op from "./UI.Render";
 import U from "underscore";
 
+const processValue = (props = {}) => {
+    const {rows = {}} = props.config;
+    const dataRow = Object.keys(rows);
+    const data = [];
+    dataRow.forEach(row => {
+        const dataItem = {};
+        dataItem.key = rows[row];
+        dataItem.field = row;
+        data.push(dataItem);
+    });
+    return data;
+};
+
 class Component extends React.PureComponent {
     constructor(props) {
         super(props);
-        const {rows = {}} = props.config;
-        const dataRow = Object.keys(rows);
-        const data = [];
-        dataRow.forEach(row => {
-            const dataItem = {};
-            dataItem.key = rows[row];
-            dataItem.field = row;
-            data.push(dataItem);
-        });
+        const data = processValue(props);
         this.state = {
             source: props.value || data
-        }
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if ('value' in nextProps) {
-            const value = nextProps.value;
-            this.setState(value);
         }
     }
 
