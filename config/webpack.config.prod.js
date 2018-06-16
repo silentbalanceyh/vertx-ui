@@ -19,6 +19,7 @@ const publicPath = paths.servedPath;
 // Some apps do not use client-side routing with pushState.
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === "./";
+const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -97,7 +98,7 @@ module.exports = {
             // To fix this, we prevent you from importing files out of src/ -- if you'd like to,
             // please link the files into your node_modules/ and let module-resolution kick in.
             // Make sure your source files are compiled, as they will not be processed in any way.
-            new ModuleScopePlugin(paths.appSrc)
+            new ModuleScopePlugin(paths.appSrc, [paths.appPackageJson])
         ]
     },
     module: {
@@ -319,13 +320,18 @@ module.exports = {
                 // https://github.com/facebookincubator/create-react-app/issues/2376
                 // Pending further investigation:
                 // https://github.com/mishoo/UglifyJS2/issues/2011
-                comparisons: false
+                comparisons: false,
+            },
+            mangle: {
+                safari10: true,
             },
             output: {
-                comments: false
+                comments: false,
+                // Turned on because emoji and regex is not minified properly using default
+                // https://github.com/facebookincubator/create-react-app/issues/2488
+                ascii_only: true,
             },
-            sourceMap: true,
-            mangle: true
+            sourceMap: shouldUseSourceMap,
         }),
         // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
         new ExtractTextPlugin({
@@ -375,8 +381,10 @@ module.exports = {
     // Some libraries import Node modules but don't use them in the browser.
     // Tell Webpack to provide empty mocks for them so importing them works.
     node: {
-        fs: "empty",
-        net: "empty",
-        tls: "empty"
+        dgram: 'empty',
+        fs: 'empty',
+        net: 'empty',
+        tls: 'empty',
+        child_process: 'empty',
     }
 };
