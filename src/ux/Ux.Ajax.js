@@ -233,7 +233,31 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
                 );
         }
     } else {
-        console.error("[ Ajax ] type or promise is invalid.", type, promise);
+        console.error("[ Ajax ] rxEpic: type or promise is invalid.", type, promise);
+    }
+};
+/**
+ * 【Epic升级版】统一处理Epic，新函数，简化操作，替换rxEpic专用
+ * @method rxEdict
+ * @param type 专用Action
+ * @param promise 构造的promise，这个版本Promise中的Mock直接包含在内
+ * @param responser 后期响应处理
+ * */
+const rxEdict = (type, promise, responser = data => data) => {
+    if (type && U.isFunction(promise)) {
+        return $action => {
+            const actionType = $action.ofType(type.getType());
+            return Rx.Observable.from(actionType)
+                .map(action => action.payload)
+                .map(promise)
+                .switchMap(promise =>
+                    Rx.Observable.from(promise)
+                        .map(responser)
+                        .map(data => Env.dataOut(data))
+                );
+        }
+    } else {
+        console.error("[ Ajax ] rxEdict: type or promise is invalid.", type, promise);
     }
 };
 /**
@@ -248,6 +272,7 @@ const _buildApi = (serviceName = "", uri = "") => `/${serviceName}${uri}`.replac
  */
 export default {
     rxEpic,
+    rxEdict,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch

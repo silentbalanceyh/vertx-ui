@@ -10,11 +10,13 @@ import {
     Breadcrumb,
     Button,
     Checkbox,
+    Col,
     Collapse,
     Icon,
     Menu,
     Modal,
     Radio,
+    Row,
     Select,
     Steps,
     Tabs,
@@ -192,12 +194,6 @@ const uiItemTree = (items = [], jsx = {}) => {
         .to();
     return <TreeSelect treeData={data} {...jsx} />;
 };
-const uiBtnPrimary = (fnClick = () => {
-}, text) => (
-    <Button type="primary" onClick={fnClick}>
-        {text}
-    </Button>
-);
 const uiDialogConfirm = (config = {}, execFunc) =>
     Modal.confirm({
         ...config,
@@ -226,8 +222,65 @@ const uiLoader = (props = {}, roles = {}, roleCode = "roleCode") => {
     if (!Component) return false;
     return (<Component {...props}/>)
 };
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiGrid
+ * @param grid
+ * @param jsx
+ */
+const uiGrid = (grid = [], ...jsx) => {
+    return (
+        <Row>
+            {grid.map((item, index) => (
+                <Col span={item} key={`col${index}`}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            ))}
+        </Row>
+    )
+};
+
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiIfElse
+ * @param condition 判断条件
+ * @param yesJsx condition = true时执行
+ * @param noJsx condition = false时执行
+ */
+const uiIfElse = (condition, yesJsx, noJsx) =>
+    (condition ? yesJsx : (undefined !== noJsx ? noJsx : false));
+const uiBtnPrimary = (fnClick = () => {
+}, text) => (
+    <Button type="primary" onClick={fnClick}>
+        {text}
+    </Button>
+);
+const uiBtnHidden = (fnClick = () => {
+}, id) => (
+    <Button id={id} onClick={fnClick}/>
+);
+const uiBtnHiddens = (hidden = {}) => {
+    const ids = Object.keys(hidden);
+    if (0 < ids.length) {
+        return (<div>
+            {ids.map(id => (
+                <Button id={id} onClick={U.isFunction(hidden[id]) ? hidden[id] : () => {
+                    console.error(`[Zero] Inject function is invalid. id = ${id}`)
+                }}/>
+            ))}
+        </div>)
+    } else {
+        return false;
+    }
+};
 export default {
+    uiGrid,
     uiLoader,
+    uiIfElse,
+    uiBtnHidden,
+    uiBtnHiddens,
+    uiBtnPrimary,
+
     uiItemRadio,
     uiItemDatum,
     uiItemRadioDatum: (reference, jsx = {}, key, filters) =>
@@ -251,6 +304,5 @@ export default {
     uiItemTabs,
     uiItemCollapse,
     uiItemCheckbox,
-    uiDialogConfirm,
-    uiBtnPrimary
+    uiDialogConfirm
 };

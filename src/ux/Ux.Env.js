@@ -1,6 +1,6 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
-import {DataLabor} from "entity";
+import {DataLabor, RxEtat} from "entity";
 import {Set} from 'immutable'
 import routeData from '../route'
 import Random from './Ux.Random'
@@ -65,7 +65,6 @@ const route = (container = {}, components = {}) => {
  * @class Env
  * @description 环境变量专用类信息
  */
-Dg.dgScript(Cv);
 export default {
     // 环境变量专用
     Env: Cv,
@@ -97,5 +96,7 @@ export default {
      * 专用zero的注解
      * @method zero
      */
-    zero
+    zero,
+    // 和Zero绑定专用的配置方法，Stream模式
+    rxEtat: (cab) => new RxEtat(cab)
 }

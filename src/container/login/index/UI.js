@@ -1,11 +1,13 @@
 import React from 'react'
+import styles from './Cab.less';
 
-class Component extends React.PureComponent{
+class Component extends React.PureComponent {
 
-    render(){
-        const { component: Component } = this.props;
+    render() {
+        const {component: Component} = this.props;
+        console.info(styles);
         return (
-            <div>
+            <div className={styles.login}>
                 Login
                 <Component {...this.props}/>
             </div>

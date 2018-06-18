@@ -25,6 +25,15 @@ const toProp = (props = {}, ...keys) => {
             inherits[targetKey] = props[targetKey]
         }
     });
+    // 特殊方法专用：reference和fnOut
+    // reference：表示父引用
+    // fnOut：专用写Redux状态的方法
+    if (props.reference) {
+        inherits.reference = props.reference;
+    }
+    if (props.fnOut) {
+        inherits.fnOut = props.fnOut;
+    }
     return inherits;
 };
 /**
