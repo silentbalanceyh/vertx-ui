@@ -12,6 +12,7 @@
         "allowSyntheticDefaultImports": true,
         "skipLibCheck": true,
         "baseUrl": ".",
+        "removeComments": true,
         "paths": {
             "environment": [
                 "src/environment"
@@ -34,11 +35,17 @@
         }
     },
     "exclude": [
-        "node_modules",
-        "src/**/*.js"
+        "node_modules/**/*.*",
+        "src/**/*.js",
+        "config/**/*.js"
     ],
     "include": [
         "src/entity/**/*.ts",
         "src/c*/**/*.ts"
-    ]
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "resolveGlobs": true,
+        "useCache": false
+    }
 }

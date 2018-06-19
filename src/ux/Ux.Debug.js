@@ -257,15 +257,14 @@ const dgForm = (reference, data = {}, updated = false) => {
  * 【Development Only】
  * Ux包的报表专用调试方法，整个应用中只有一处调用该方法
  * @method dgScript
- * @param ux Ux引用
+ * @param ux Ux工具包
+ * @param Cv 常量信息
  */
-const dgScript = (ux = {}) => {
+const dgScript = (ux = {}, Cv = {}) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.groupCollapsed("[Ux] Assist report as following:");
-        const numCond = 0;
-        const strCond = "";
-        console.info("[If] if(0) = ", numCond ? "Yes" : "No");
-        console.info('[If] if("") = ', strCond ? "Yes" : "No");
+        console.groupCollapsed("[Ux] Constant Value is as following:");
+        console.info("[Ux] Ux Tool = ", ux);
+        console.info("[Ux] Cv = ", Cv);
         console.groupEnd();
     }
 };
@@ -273,14 +272,12 @@ const dgScript = (ux = {}) => {
  * 【Development Only】
  * 自动生成路由中的路由报表，可查看所有的路由信息
  * @method dgRouter
- * @param ux Ux引用
  * @param container Layout模板配置信息
  * @param component Page组件配置信息
  */
-const dgRouter = (ux, container, component) => {
+const dgRouter = (container, component) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.groupCollapsed("[Ux] UI report as following:");
-        console.info("[Ux] Ux Tool = ", ux);
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
         console.groupEnd();

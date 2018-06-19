@@ -17,6 +17,59 @@ const elementUnique = (data = [], field = "", value) => {
     Dg.ensureLength(reference, 1);
     return 0 === reference.length ? undefined : reference[0];
 };
+
+/**
+ * 数组拉平专用算法，以子节点field中的key为主
+ * @method elementFlat
+ * @param {Array} array 被追加的数组
+ * @param field 需要拉平的字段值
+ */
+const elementFlat = (array = [], field = "") => {
+    const result = [];
+    array.forEach(item => {
+        // 读取字段中的值
+        if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
+            const children = item[field];
+            children.forEach(child => {
+                let target = Immutable.fromJS(item);
+                target = target.mergeDeep(child);
+                target = target.remove(field);
+                result.push(target.toJS());
+            })
+        }
+    });
+    return result;
+};
+
+/**
+ * 数组连接Tabular/Assist专用算法
+ * @param array 原始数组信息
+ * @param target 被连接的数组信息
+ * @param field 需要执行的key = element[field]的条件查找唯一元素
+ * @param mapping 执行最终的mapping动作：from -> to
+ */
+const elementConnect = (array = [], target = [], field, mapping = {}) => {
+    if (mapping && 0 < Object.keys(mapping).length
+        && field && 0 < target.length) {
+        let $array = [];
+        array.forEach((item = {}) => {
+            const entity = elementUnique(target, "key", item[field]);
+            if (entity) {
+                let $item = Immutable.fromJS(item);
+                for (const fromKey in mapping) {
+                    if (mapping.hasOwnProperty(fromKey)) {
+                        const toKey = mapping[fromKey];
+                        $item = $item.set(toKey, entity[fromKey]);
+                    }
+                }
+                $array.push($item.toJS());
+            }
+        });
+        return $array;
+    } else {
+        return array;
+    }
+};
 /**
  * 返回数组的第一个元素中的field字段值
  * * field有值则返回对应的Object的字段值
@@ -259,6 +312,19 @@ const elementChildren = (array = [], parentKey, parentField) => {
     return children;
 };
 /**
+ * 针对数组中的某个字段求和
+ * @method elementSum
+ * @param {Array} data
+ * @param field 需要映射的字段名
+ * @return {Number}
+ */
+const elementSum = (data = [], field = "") => {
+    const result = data
+        .map(item => item[field])
+        .filter(item => !!item);
+    return (0 < result.length) ? result.reduce((left, right) => left + right) : 0;
+};
+/**
  * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
  *
  *      ...
@@ -337,6 +403,12 @@ export default {
     elementVertical,
     // 添加和删除重合
     elementSwitch,
+    // 拉平专用
+    elementFlat,
+    // 连接Tabular/Assist
+    elementConnect,
+    // 求和计算
+    elementSum,
     // 遍历数组并抽取对象数组中的field字段执行处理
     itElement,
     // 遍历数组以及对应对象信息

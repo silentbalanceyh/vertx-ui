@@ -1,3 +1,4 @@
+import _login_index from './login/index/UI';
 import _system_dept from './system/dept/UI';
 import _system_enterprise from './system/enterprise/UI';
 import _system_history from './system/history/UI';
@@ -9,6 +10,7 @@ import _todo_index from './todo/index/UI';
 import _user_role from './user/role/UI';
 
 export default {
+	_login_index,
 	_system_dept,
 	_system_enterprise,
 	_system_history,

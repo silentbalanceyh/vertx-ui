@@ -59,10 +59,12 @@ const fromRouter = (reference = {}, key = "") => {
  */
 const onDatum = (reference, key) => {
     key = key.replace(/\./g, "_");
-    const targetKey =
-        reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
-    if (targetKey && targetKey.is()) {
-        return targetKey.to();
+    if (reference.props) {
+        const targetKey =
+            reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
+        if (targetKey && targetKey.is()) {
+            return targetKey.to();
+        }
     }
     return [];
 };

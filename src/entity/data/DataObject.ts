@@ -15,7 +15,7 @@ class DataObject implements DataContainer {
             if (!this.data.hasOwnProperty("key")) {
                 this.data.key = this.data.uniqueId;
             }
-            return this.data;
+            return Immutable.fromJS(this.data).toJS();
         } else {
             console.warn(
                 `[TS-VI] DataObject -> The data is not the latest, 'ready' flat is ${this

@@ -1,6 +1,7 @@
 import DataContainer from './DataContainer';
 import Ux from 'ux';
 import {isArray} from "rxjs/util/isArray";
+import * as Immutable from 'immutable';
 
 class DataArray implements DataContainer {
     ready: boolean = false;
@@ -25,7 +26,8 @@ class DataArray implements DataContainer {
             );
         }
         if (this.data) {
-            const result = JSON.parse(this.data);
+            let result = JSON.parse(this.data);
+            result = Immutable.fromJS(result).toJS();
             result.forEach((item: any) => {
                 // React专用
                 if ("string" !== typeof item &&

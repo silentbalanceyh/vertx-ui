@@ -5,15 +5,18 @@ import Ux from "ux";
 import _Icon from "./Ux.Icon";
 import Prop from "./Ux.Prop";
 import Type from "./Ux.Type";
+import Global from './Ux.Global';
 import {
     Breadcrumb,
     Button,
     Checkbox,
+    Col,
     Collapse,
     Icon,
     Menu,
     Modal,
     Radio,
+    Row,
     Select,
     Steps,
     Tabs,
@@ -118,8 +121,8 @@ const uiItemCollapse = (collapses = {}, ...children) => (
         ))}
     </Collapse>
 );
-const uiItemTimeline = (items = {}) => (
-    <Timeline>
+const uiItemTimeline = (items = {}, jsx = {}) => (
+    <Timeline {...jsx}>
         {items
             ? items.map(item => {
                 let className = item.onClick ? "ux-item" : "";
@@ -191,12 +194,6 @@ const uiItemTree = (items = [], jsx = {}) => {
         .to();
     return <TreeSelect treeData={data} {...jsx} />;
 };
-const uiBtnPrimary = (fnClick = () => {
-}, text) => (
-    <Button type="primary" onClick={fnClick}>
-        {text}
-    </Button>
-);
 const uiDialogConfirm = (config = {}, execFunc) =>
     Modal.confirm({
         ...config,
@@ -209,7 +206,80 @@ const uiItemDatum = (reference, key, filters) => {
     return (filters) ? Type.elementFind(Prop.onDatum(reference, key), filters) :
         Prop.onDatum(reference, key);
 };
+/**
+ * 根据不同用户的角色值读取不同的UI
+ * @method uiLoader
+ * @param props
+ * @param roles
+ * @param roleCode
+ */
+const uiLoader = (props = {}, roles = {}, roleCode = "roleCode") => {
+    const user = Global.isLogged();
+    if (!user) return false;
+    const role = user[roleCode];
+    if (!role) return false;
+    const Component = roles[role];
+    if (!Component) return false;
+    return (<Component {...props}/>)
+};
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiGrid
+ * @param grid
+ * @param jsx
+ */
+const uiGrid = (grid = [], ...jsx) => {
+    return (
+        <Row>
+            {grid.map((item, index) => (
+                <Col span={item} key={Ux.randomString(12)}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            ))}
+        </Row>
+    )
+};
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiIfElse
+ * @param condition 判断条件
+ * @param yesJsx condition = true时执行
+ * @param noJsx condition = false时执行
+ */
+const uiIfElse = (condition, yesJsx, noJsx) =>
+    (condition ? yesJsx : (undefined !== noJsx ? noJsx : false));
+const uiBtnPrimary = (fnClick = () => {
+}, text) => (
+    <Button type="primary" onClick={fnClick}>
+        {text}
+    </Button>
+);
+const uiBtnHidden = (fnClick = () => {
+}, id) => (
+    <Button id={id} onClick={fnClick}/>
+);
+const uiBtnHiddens = (hidden = {}) => {
+    const ids = Object.keys(hidden);
+    if (0 < ids.length) {
+        return (<div>
+            {ids.map(id => (
+                <Button id={id} onClick={U.isFunction(hidden[id]) ? hidden[id] : () => {
+                    console.error(`[Zero] Inject function is invalid. id = ${id}`)
+                }}/>
+            ))}
+        </div>)
+    } else {
+        return false;
+    }
+};
 export default {
+    uiGrid,
+    uiLoader,
+    uiIfElse,
+    uiBtnHidden,
+    uiBtnHiddens,
+    uiBtnPrimary,
+
     uiItemRadio,
     uiItemDatum,
     uiItemRadioDatum: (reference, jsx = {}, key, filters) =>
@@ -233,6 +303,5 @@ export default {
     uiItemTabs,
     uiItemCollapse,
     uiItemCheckbox,
-    uiDialogConfirm,
-    uiBtnPrimary
+    uiDialogConfirm
 };

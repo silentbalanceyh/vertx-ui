@@ -28,6 +28,7 @@ import ATTRIBUTE from "./Ux.Attribute";
 import VALUE from "./Ux.Value";
 import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
+import AI from './ai/AI';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 
@@ -89,6 +90,8 @@ export default {
     ...HTML,
     // Uson/Uarr
     ...VALUE,
+    // 新组件用于AI化处理
+    ...AI,
     Uarr,
     Uson
 };

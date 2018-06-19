@@ -63,15 +63,20 @@ const jsxField = (reference, item = {}, render) => {
     item = Immutable.fromJS(item).toJS();
     const {form} = reference.props;
     const {getFieldDecorator} = form;
+    const jsxRender = (each = {}) => {
+        if (0 <= each.field.indexOf("$")) {
+            return render(reference, each.optionJsx, each.optionConfig);
+        } else {
+            return getFieldDecorator(each.field, each.optionConfig)(
+                render(reference, each.optionJsx, each.optionConfig)
+            )
+        }
+    };
     return item.optionItem ? (
         <Form.Item {...Opt.optionFormItem(item.optionItem)}>
-            {0 <= item.field.indexOf("$") ?
-                render(reference, item.optionJsx) :
-                getFieldDecorator(item.field, item.optionConfig)(
-                    render(reference, item.optionJsx)
-                )}
+            {jsxRender(item)}
         </Form.Item>
-    ) : render(reference, item.optionJsx, item.optionConfig)
+    ) : jsxRender(item)
 };
 /**
  * Jsx单行字段的Render处理
@@ -93,9 +98,22 @@ const jsxFieldRow = (reference, item = {}, render) => {
         </Form.Item>
     )
 };
-
+const _jsxFieldGrid = (item = {}) => {
+    return (
+        <Col className={item.className ? item.className : "page-title"}
+             key={item.field} span={item.span ? item.span : 24}>
+            {/** 只渲染Title **/}
+            {item.grid.map(each => (
+                <Col span={each.span} key={Random.randomString(12)}
+                     style={each.style ? each.style : {}}>
+                    &nbsp;&nbsp;&nbsp;&nbsp;{each.text}&nbsp;&nbsp;&nbsp;&nbsp;</Col>
+            ))}
+        </Col>
+    )
+};
 const _jsxFieldTitle = (item = {}) => (
-    <Col className="page-title" key={item.field}>
+    <Col className={item.className ? item.className : "page-title"}
+         key={item.field} span={item.span ? item.span : 24}>
         {/** 只渲染Title **/}
         {item.title}
     </Col>
@@ -104,8 +122,14 @@ const _jsxFieldCommon = (reference, renders, item = {}, span = 6) => {
     const fnRender = renders[item.field];
     if (fnRender) {
         // 渲染
+        const style = {};
+        if (item.optionItem && item.optionItem.style) {
+            if (item.optionItem.style.hasOwnProperty('height')) {
+                style.height = item.optionItem.style.height;
+            }
+        }
         return (
-            <Col span={item.span ? item.span : span} key={item.field}>
+            <Col span={item.span ? item.span : span} key={item.field} style={style}>
                 {/** 渲染字段 **/}
                 {jsxField(reference, item,
                     renders[item.field] ? renders[item.field] : () => false)}
@@ -124,6 +148,7 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     return form.map((row, index) => (
         <Row key={`form-row-${index}`} style={_uiDisplay(row, rowConfig[index])}>
             {_uiRow(row).map(item => {
+                item = Immutable.fromJS(item).toJS();
                 // 初始化
                 if (values.hasOwnProperty(item.field)) {
                     if (!item.optionConfig) {
@@ -131,9 +156,25 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
                     }
                     item.optionConfig.initialValue = values[item.field];
                 }
+                // 填平高度
+                const rowItem = rowConfig[index];
+                if (item.optionItem && rowItem && 0 < Object.keys(rowItem).length) {
+                    if (item.optionItem.style) {
+                        // 直接合并
+                        for (const key in rowItem) {
+                            if (rowItem.hasOwnProperty(key)) {
+                                item.optionItem.style[key] = rowItem[key];
+                            }
+                        }
+                    } else {
+                        item.optionItem.style = rowItem;
+                    }
+                }
                 if (item.hasOwnProperty("title")) {
                     // 单Title
                     return _jsxFieldTitle(item);
+                } else if (item.hasOwnProperty('grid')) {
+                    return _jsxFieldGrid(item);
                 } else {
                     return _jsxFieldCommon(reference, renders, item, span);
                 }
@@ -301,6 +342,14 @@ const viewRow = (columns = [], flex = {}, ...content) => {
 const viewTitle = (message) => {
     return (<Row className={"page-title"}>{message}</Row>)
 };
+/**
+ * 渲染某一个Row的Header
+ * @method viewHeader
+ * @param message
+ */
+const viewHeader = (message) => {
+    return (<Row className={"page-view-header"}>{message}</Row>)
+};
 
 const _prepareConfig = (config = {}, field) => {
     // 智能格式兼容
@@ -413,6 +462,7 @@ export default {
     viewCell,
     viewGrid,
     viewConfig,
+    viewHeader,
     // -------------- 以上为View内置 ---------------
     /**
      * 登录页这种单列布局使用

@@ -1,0 +1,44 @@
+@import '~antd/lib/style/themes/default.less';
+@import "../../../global";
+
+@login-prefix: login;
+.@{login-prefix} {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    &-header {
+        height: 180px !important;
+        background: transparent;
+        header {
+            padding: 10px;
+            img {
+                width: 100px;
+                height: 90px;
+            }
+            h2 {
+                color: white;
+                display: inline;
+                font-size: 24px;
+                line-height: 24px;
+            }
+        }
+        button {
+            background-color: white;
+            width: 90px;
+            text-align: center;
+            box-shadow: 3px 3px 3px @color-bg-shadow;
+            margin-right: 10px;
+        }
+    }
+
+    &-content {
+        min-height: 450px;
+        text-align: center;
+        padding-top: 30px;
+    }
+}

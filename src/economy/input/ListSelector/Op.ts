@@ -61,6 +61,10 @@ const fnSelect = (reference: any = {}) => (event: any) => {
                 .date(config.linkerDate).to();
             console.info("[COA] Select 'linker' is:", values);
             Ux.formHits(ref, values);
+            const {fnCallback} = config;
+            if (fnCallback) {
+                fnCallback($select);
+            }
         }
         reference.setState({$visible: false})
     } else {

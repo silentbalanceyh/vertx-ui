@@ -32,5 +32,5 @@ const writeLoading = (reference = {}, $_loading = true) => {
  */
 export default {
     writeTree,
-    writeLoading
+    writeLoading,
 }

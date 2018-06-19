@@ -25,6 +25,11 @@ const toProp = (props = {}, ...keys) => {
             inherits[targetKey] = props[targetKey]
         }
     });
+    // 特殊方法专用：reference和fnOut
+    // fnOut：专用写Redux状态的方法
+    if (props.fnOut) {
+        inherits.fnOut = props.fnOut;
+    }
     return inherits;
 };
 /**
