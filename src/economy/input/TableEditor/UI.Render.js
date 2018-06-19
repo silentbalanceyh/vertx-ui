@@ -36,7 +36,7 @@ const onRemove = (reference, index) => (event) => {
 const renderOp = (reference, config, jsx) => (text, record, index) => {
     return (
         <span>
-            <Button.Group>
+            <Button.Group style={{minWidth: "64px"}}>
                 <Button icon={"plus"} onClick={onAdd(reference, index)}/>
                 <Button disabled={0 === index} icon={"minus"} onClick={onRemove(reference, index)}/>
             </Button.Group>

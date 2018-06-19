@@ -17,7 +17,9 @@ class Component extends React.PureComponent {
     UNSAFE_componentWillReceiveProps(nextProps) {
         if ('value' in nextProps) {
             const value = nextProps.value;
-            this.setState(value);
+            if ("object" === typeof value) {
+                this.setState(value);
+            }
         }
     }
 
