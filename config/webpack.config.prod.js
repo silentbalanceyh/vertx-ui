@@ -250,7 +250,12 @@ module.exports = {
                 test: /\.less$/,
                 use: [
                     require.resolve("style-loader"),
-                    require.resolve("css-loader"),
+                    {
+                        loader: require.resolve("css-loader"),
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
                     {
                         loader: require.resolve("postcss-loader"),
                         options: {
@@ -274,7 +279,7 @@ module.exports = {
                         options: {
                             javascriptEnabled: true,
                             modifyVars: {
-                                "@primary-color": "#00B2FB",
+                                "@primary-color": "#4aa684",
                                 "@app": process.env.Z_CSS_PREFIX
                             }
                         }

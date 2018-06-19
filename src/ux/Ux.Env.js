@@ -1,6 +1,6 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
-import {DataLabor, RxEtat} from "entity";
+import {DataLabor, RxEtat, RxJet} from "entity";
 import {Set} from 'immutable'
 import routeData from '../route'
 import Random from './Ux.Random'
@@ -66,6 +66,8 @@ const route = (container = {}, components = {}) => {
  * @description 环境变量专用类信息
  */
 export default {
+    // 用于处理Null引用
+    Null: null,
     // 环境变量专用
     Env: Cv,
     /**
@@ -98,5 +100,7 @@ export default {
      */
     zero,
     // 和Zero绑定专用的配置方法，Stream模式
-    rxEtat: (cab) => new RxEtat(cab)
+    rxEtat: (cab) => RxEtat.from(cab),
+    // 和Zero绑定专用的操作方法，Stream模式
+    rxJet: (reference) => RxJet.from(reference),
 }

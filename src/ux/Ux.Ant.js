@@ -232,14 +232,13 @@ const uiGrid = (grid = [], ...jsx) => {
     return (
         <Row>
             {grid.map((item, index) => (
-                <Col span={item} key={`col${index}`}>
+                <Col span={item} key={Ux.randomString(12)}>
                     {jsx[index] ? jsx[index] : false}
                 </Col>
             ))}
         </Row>
     )
 };
-
 /**
  * 根据传入的grid渲染Col/Row专用方法
  * @method uiIfElse

@@ -1,0 +1,59 @@
+{
+    "_info": {
+        "title": "ZeroUI开发框架",
+        "backendLabel": "后端",
+        "backend": "http://www.vertxup.cn",
+        "frontendLabel": "前端",
+        "frontend": "http://www.vertxui.cn"
+    },
+    "_form": {
+        "ui": [
+            [
+                {
+                    "field": "username",
+                    "optionJsx": {
+                        "prefix": {
+                            "type": "user",
+                            "style": {
+                                "color": "white"
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "password",
+                    "optionJsx": {
+                        "type": "password",
+                        "prefix": {
+                            "type": "lock",
+                            "style": {
+                                "color": "white"
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "$button",
+                    "optionJsx": {
+                        "style": {
+                            "textAlign": "left"
+                        }
+                    }
+                }
+            ]
+        ],
+        "buttons": {
+            "fnLogin": {
+                "type": "primary",
+                "text": "登录"
+            },
+            "fnReset": {
+                "text": "重置"
+            }
+        }
+    }
+}

@@ -249,6 +249,9 @@ module.exports = {
                     },
                     {
                         loader: require.resolve("css-loader"),
+                        options: {
+                            importLoaders: 1
+                        }
                     },
                     {
                         loader: require.resolve("postcss-loader"),
@@ -269,12 +272,11 @@ module.exports = {
                         }
                     },
                     {
-                        loader: require.resolve("less-loader"),
+                        loader: "less-loader",
                         options: {
-                            modules: true,
                             javascriptEnabled: true,
                             modifyVars: {
-                                "@primary-color": "#00B2FB",
+                                "@primary-color": "#4aa684",
                                 "@app": process.env.Z_CSS_PREFIX
                             }
                         }

@@ -17,8 +17,15 @@ class Etat {
      * required必须使用这种方式绑定
      * @param requiredFile
      */
-    constructor(requiredFile) {
+    private constructor(requiredFile) {
         this._cab = requiredFile;
+    }
+
+    static from(requiredFile) {
+        if (!requiredFile) {
+            console.error("[ZI] Input 'requiredFile' must be valid.");
+        }
+        return new Etat(requiredFile);
     }
 
     form() {

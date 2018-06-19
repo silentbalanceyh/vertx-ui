@@ -36,22 +36,26 @@ const onRemove = (reference, index) => (event) => {
 const renderOp = (reference, config, jsx) => (text, record, index) => {
     return (
         <span>
-            <Button.Group style={{width: 80, textAlign: "center"}}>
+            <Button.Group>
                 <Button icon={"plus"} onClick={onAdd(reference, index)}/>
                 <Button disabled={0 === index} icon={"minus"} onClick={onRemove(reference, index)}/>
             </Button.Group>
         </span>
     )
 };
-const renderColumn = (reference, columns = [], jsx) => {
+const renderColumn = (reference, columns = [], jsx, render) => {
     columns.forEach((item) => {
         if ("key" === item.dataIndex) {
             item.render = renderOp(reference, item);
         } else {
-            const type = item['$type'] ? item['$type'] : "TEXT";
-            const render = RENDER[type];
-            if (render) {
-                item.render = render(reference, item, jsx)
+            if (render[item.dataIndex]) {
+                item.render = render[item.dataIndex]
+            } else {
+                const type = item['$type'] ? item['$type'] : "TEXT";
+                const render = RENDER[type];
+                if (render) {
+                    item.render = render(reference, item, jsx)
+                }
             }
         }
     })
