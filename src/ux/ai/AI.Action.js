@@ -10,6 +10,7 @@ const _aiSubmit = (reference, callback) => (event) => {
         const state = {};
         state['$ai_submitting'] = true;
         reference.setState(state);
+        console.info(form.getFieldsValue());
         form.validateFieldsAndScroll((error, values) => {
             if (error) {
                 state['$ai_submitting'] = false;

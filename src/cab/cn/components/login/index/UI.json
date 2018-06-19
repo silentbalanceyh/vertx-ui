@@ -48,10 +48,12 @@
         ],
         "buttons": {
             "fnLogin": {
+                "key": "btnLogin",
                 "type": "primary",
                 "text": "登录"
             },
             "fnReset": {
+                "key": "btnReset",
                 "text": "重置"
             }
         }

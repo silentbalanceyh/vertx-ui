@@ -30,7 +30,7 @@ const aiGrid = (config = [], ...jsx) => {
                 } else if (isExpr) {
                     const attrs = Parser.aiAttr(item, index);
                     // 重写key值
-                    attrs.key = `$$AiRow${index}`;
+                    attrs.key = `$$AiCol${index}`;
                     return (
                         <Col {...attrs}>
                             {jsx[index] ? jsx[index] : false}

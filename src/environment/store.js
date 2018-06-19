@@ -10,8 +10,8 @@ const composeEnhancers =
     "production" !== process.env.NODE_ENV && DEVTOOL ? DEVTOOL({}) : compose;
 
 // Inject middleware: Epic, Router
-const epicMiddleware = createEpicMiddleware();
-epicMiddleware.run(datum.epics);
+const epicMiddleware = createEpicMiddleware(datum.epics);
+// epicMiddleware.run(datum.epics);
 const logger = createLogger({duration: false, diff: true, collapsed: true});
 const enhancer =
     "production" !== process.env.NODE_ENV

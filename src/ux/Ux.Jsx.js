@@ -63,15 +63,20 @@ const jsxField = (reference, item = {}, render) => {
     item = Immutable.fromJS(item).toJS();
     const {form} = reference.props;
     const {getFieldDecorator} = form;
+    const jsxRender = (each = {}) => {
+        if (0 <= each.field.indexOf("$")) {
+            return render(reference, each.optionJsx, each.optionConfig);
+        } else {
+            return getFieldDecorator(each.field, each.optionConfig)(
+                render(reference, each.optionJsx, each.optionConfig)
+            )
+        }
+    };
     return item.optionItem ? (
         <Form.Item {...Opt.optionFormItem(item.optionItem)}>
-            {0 <= item.field.indexOf("$") ?
-                render(reference, item.optionJsx) :
-                getFieldDecorator(item.field, item.optionConfig)(
-                    render(reference, item.optionJsx)
-                )}
+            {jsxRender(item)}
         </Form.Item>
-    ) : render(reference, item.optionJsx, item.optionConfig)
+    ) : jsxRender(item)
 };
 /**
  * Jsx单行字段的Render处理
