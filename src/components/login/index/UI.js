@@ -8,9 +8,7 @@ const {zero, Logger} = Ux;
 const jsx = {
     username: Ux.aiInput,
     password: Ux.aiInput,
-    $button: (reference, jsx = {}) => {
-        return Ux.aiButtons(reference, jsx, Op, "fnLogin", "fnReset");
-    }
+    $button: (reference, jsx = {}) => Ux.aiButtons(reference, jsx, Op, "fnLogin", "fnReset")
 };
 
 @zero(Ux.rxEtat(require('./Cab.json'))

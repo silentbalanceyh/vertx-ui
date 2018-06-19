@@ -1,7 +1,7 @@
 class Jet {
     private _promise: Function = undefined;
     private _success: Function = undefined;
-    private _failure: Function = undefined;
+    private _reject: Function = undefined;
     private _validate: Function = undefined;
 
     private constructor() {
@@ -21,8 +21,8 @@ class Jet {
         return this;
     }
 
-    failure(failure: Function) {
-        this._failure = failure;
+    reject(reject: Function) {
+        this._reject = reject;
         return this;
     }
 
@@ -32,11 +32,16 @@ class Jet {
     }
 
     to() {
-        const promise = this._promise;
+        const promise: any = this._promise;
         const success = this._success;
-        return (reference: any) => {
+        const reject = this._reject;
+        const validate = this._validate;
+        return () => {
             if (promise) {
-
+                if (!success) {
+                    console.info("[ZI] Promise mode require 'success' callback function.");
+                }
+                return {promise, success, reject, validate}
             } else {
                 return success
             }

@@ -43,7 +43,7 @@ const renderOp = (reference, config, jsx) => (text, record, index) => {
         </span>
     )
 };
-const renderColumn = (reference, columns = [], jsx, render) => {
+const renderColumn = (reference, columns = [], jsx, render = {}) => {
     columns.forEach((item) => {
         if ("key" === item.dataIndex) {
             item.render = renderOp(reference, item);

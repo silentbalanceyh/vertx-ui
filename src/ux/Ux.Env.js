@@ -102,5 +102,5 @@ export default {
     // 和Zero绑定专用的配置方法，Stream模式
     rxEtat: (cab) => RxEtat.from(cab),
     // 和Zero绑定专用的操作方法，Stream模式
-    rxJet: (reference) => RxJet.from(reference),
+    rxJet: () => RxJet.from(),
 }
