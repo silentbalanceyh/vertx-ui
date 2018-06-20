@@ -2,10 +2,12 @@ import AiLink from './AI.Link';
 import AiLayout from './AI.Layout';
 import AiInput from './AI.Input';
 import AiButton from './AI.Action';
+import AiColumn from './AI.Column';
 
 export default {
     ...AiLink,
     ...AiLayout,
     ...AiInput,
-    ...AiButton
+    ...AiButton,
+    ...AiColumn
 }
