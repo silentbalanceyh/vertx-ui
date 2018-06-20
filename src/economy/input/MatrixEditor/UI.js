@@ -27,10 +27,10 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, ...jsx} = this.props;
+        const {config = {}, $render, ...jsx} = this.props;
         const {value, ...rest} = jsx;
         if (config.columns) {
-            Op.renderColumn(this, config.columns, jsx);
+            Op.renderColumn(this, config.columns, jsx, $render);
         }
         const {source = []} = this.state;
         if (U.isArray(source)) {

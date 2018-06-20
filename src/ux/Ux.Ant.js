@@ -199,8 +199,14 @@ const uiDialogConfirm = (config = {}, execFunc) =>
         ...config,
         onOk: execFunc
     });
-const uiItemCheckbox = (item = {}, $router) => {
-    return <Checkbox.Group options={item}/>;
+const uiItemCheckbox = (item = [], jsx) => {
+    item = item.filter(item => item.key);
+    item.forEach(each => {
+        if (!each.value) {
+            each.value = each.key;
+        }
+    });
+    return <Checkbox.Group options={item} {...jsx}/>;
 };
 const uiItemDatum = (reference, key, filters) => {
     return (filters) ? Type.elementFind(Prop.onDatum(reference, key), filters) :

@@ -31,15 +31,19 @@ const renderOp = (reference, config, jsx) => (text, record, index) => {
         </span>
     )
 };
-const renderColumn = (reference, columns = [], jsx) => {
+const renderColumn = (reference, columns = [], jsx = {}, render = {}) => {
     columns.forEach((item) => {
         if ("key" === item.dataIndex) {
             item.render = renderOp(reference, item, jsx);
         } else {
-            const type = item['$type'] ? item['$type'] : "TEXT";
-            const render = RENDER[type];
-            if (render) {
-                item.render = render(reference, item, jsx)
+            if (render[item.dataIndex]) {
+                item.render = render[item.dataIndex](reference, item, jsx)
+            } else {
+                const type = item['$type'] ? item['$type'] : "TEXT";
+                const render = RENDER[type];
+                if (render) {
+                    item.render = render(reference, item, jsx)
+                }
             }
         }
     })
