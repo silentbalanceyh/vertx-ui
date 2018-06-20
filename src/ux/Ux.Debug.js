@@ -1,5 +1,5 @@
 import U from "underscore";
-import saveAs from "file-saver";
+import {saveAs} from "file-saver";
 import v4 from "uuid";
 
 /**

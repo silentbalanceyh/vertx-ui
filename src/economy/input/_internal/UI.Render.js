@@ -48,14 +48,27 @@ const renderText = (reference, item = {}, jsx) => (text, record, index) => {
                    onChange={onEditText(reference, index, item.dataIndex)}/>)
 };
 
-const renderRadio = (reference, item = {}, jsx) => (text, record, index) => {
+const renderRadio = (reference, item = {}, jsx) => () => {
     const options = item['$config'] ? item['$config'] : [];
     return Ux.uiItemRadio(options, jsx);
 };
 
+const renderLabel = (reference, item = {}, jsx) =>
+    (text) => (<span style={jsx.style ? jsx.style : {}}>{text}</span>);
+
+const renderVector = (reference, item = {}, jsx) => (text, record = {}, index) => {
+    const config = item['$config'];
+    let label = text;
+    if (config && config.to) {
+        label = record[config.to];
+    }
+    return (<span style={jsx.style ? jsx.style : {}}>{label}</span>)
+};
 export default {
+    VECTOR: renderVector,
     TEXT: renderText,
     DATE: renderDate,
     RADIO: renderRadio,
+    LABEL: renderLabel,
     triggerChange
 };

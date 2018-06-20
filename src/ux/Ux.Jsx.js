@@ -146,7 +146,7 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     // 读取配置数据
     return form.map((row, index) => (
-        <Row key={`form-row-${index}`} style={_uiDisplay(row, rowConfig[index])}>
+        <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
             {_uiRow(row).map(item => {
                 item = Immutable.fromJS(item).toJS();
                 // 初始化
