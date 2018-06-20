@@ -2,8 +2,15 @@ import React from 'react';
 import {Button} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
-import RENDER from '../_internal/UI.Render';
 
+const getRenders = () => ({
+    VECTOR: Ux.aiUnitVector,
+    TEXT: Ux.aiUnitText,
+    DATE: Ux.aiUnitDate,
+    RADIO: Ux.aiUnitRadio,
+    LABEL: Ux.aiUnitLabel,
+    DECIMAL: Ux.aiUnitDecimal,
+});
 const onAdd = (reference, index) => (event) => {
     const state = reference.state;
     if (state.source) {
@@ -15,7 +22,7 @@ const onAdd = (reference, index) => (event) => {
         }
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        RENDER.triggerChange(reference, {source})
+        Ux.valueTriggerChange(reference, {source})
     } else {
         console.error("[ZERO] Add 'data' in state has not been initialized.");
     }
@@ -27,7 +34,7 @@ const onRemove = (reference, index) => (event) => {
         const item = state.source.filter((item, idx) => idx !== index);
         const source = Immutable.fromJS(item).toJS();
         reference.setState({source});
-        RENDER.triggerChange(reference, {source})
+        Ux.valueTriggerChange(reference, {source})
     } else {
         console.error("[ZERO] Remove 'data' in state has not been initialized.");
     }
@@ -52,6 +59,7 @@ const renderColumn = (reference, columns = [], jsx, render = {}) => {
                 item.render = render[item.dataIndex]
             } else {
                 const type = item['$type'] ? item['$type'] : "TEXT";
+                const RENDER = getRenders();
                 const render = RENDER[type];
                 if (render) {
                     item.render = render(reference, item, jsx)

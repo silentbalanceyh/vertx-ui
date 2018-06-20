@@ -43,7 +43,9 @@ const renderText = (reference, item = {}, jsx) => (text, record, index) => {
             width: config.width
         }
     }
+    Object.assign(attrs, config);
     const {value, ...meta} = jsx;
+    console.info(attrs, item);
     return (<Input {...attrs} {...meta}
                    onChange={onEditText(reference, index, item.dataIndex)}/>)
 };
@@ -67,16 +69,18 @@ const renderVector = (reference, item = {}, jsx) => (text, record = {}, index) =
 
 const renderDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = {};
+    const config = item['$config'] ? item['$config'] : {};
+    Object.assign(attrs, config);
     const {value, ...meta} = jsx;
     return (<Input {...attrs} {...meta}
                    onChange={onEditText(reference, index, item.dataIndex)}/>)
 };
 export default {
-    VECTOR: renderVector,
-    TEXT: renderText,
-    DATE: renderDate,
-    RADIO: renderRadio,
-    LABEL: renderLabel,
-    DECIMAL: renderDecimal,
+    VECTOR: Ux.aiUnitVector,
+    TEXT: Ux.aiUnitText,
+    DATE: Ux.aiUnitDate,
+    RADIO: Ux.aiUnitRadio,
+    LABEL: Ux.aiUnitLabel,
+    DECIMAL: Ux.aiUnitDecimal,
     triggerChange
 };
