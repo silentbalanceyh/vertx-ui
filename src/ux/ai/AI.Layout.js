@@ -1,6 +1,6 @@
 import React from 'react'
 import {Col, Row} from 'antd';
-import Parser from './AI.Parser';
+import RxAnt from './AI.RxAnt';
 
 /**
  * 直接渲染多行
@@ -28,7 +28,7 @@ const aiGrid = (config = [], ...jsx) => {
                         </Col>
                     )
                 } else if (isExpr) {
-                    const attrs = Parser.aiAttr(item, index);
+                    const attrs = RxAnt.toParsed(item, index);
                     // 重写key值
                     attrs.key = `$$AiCol${index}`;
                     return (

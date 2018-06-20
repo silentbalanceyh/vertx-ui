@@ -1,45 +1,19 @@
 import React from 'react';
-import {DatePicker, Icon, Input} from 'antd';
+import {Checkbox, DatePicker, Input} from 'antd';
 import {ListSelector} from "web";
-import Ant from '../Ux.Ant'
-import Prop from '../Ux.Prop'
-import U from 'underscore'
+import RxAnt from './AI.RxAnt'
+import {Modal} from "antd/lib/index";
 
 const aiInput = (reference, jsx = {}) => {
-    if ("object" === typeof jsx.prefix) {
-        const {type, ...rest} = jsx.prefix;
-        jsx.prefix = (
-            <Icon type={type} {...rest}/>
-        )
-    }
+    // 处理prefix属性
+    RxAnt.onPrefix(jsx);
     return (<Input {...jsx}/>)
 };
 const aiCheckbox = (reference, jsx = {}) => {
     const {$config = {}, ...rest} = jsx;
-    // 优先使用items选项
-    let options = [];
-    if ($config.items) {
-        options = $config.items;
-    } else if ($config.datum) {
-        const {source, key = "key", label = "label"} = $config.datum;
-        if (source && "string" === typeof source) {
-            const data = Prop.onDatum(reference, source);
-            if (U.isArray(data)) {
-                data.forEach(each => {
-                    const option = {};
-                    if (each[key]) {
-                        option['value'] = each[key];
-                        option['key'] = each[key];
-                    }
-                    if (each[label]) {
-                        option['label'] = each[label];
-                    }
-                    options.push(option);
-                })
-            }
-        }
-    }
-    return Ant.uiItemCheckbox(options, rest);
+    // 构造Checkbox专用选项
+    const options = RxAnt.toOptions(reference, $config);
+    return <Checkbox.Group {...rest} options={options}/>
 };
 const aiTextArea = (reference, jsx = {}) => {
     return (<Input.TextArea {...jsx}/>)
@@ -47,10 +21,21 @@ const aiTextArea = (reference, jsx = {}) => {
 const aiDatePicker = (reference, jsx = {}) => {
     return (<DatePicker {...jsx}/>);
 };
+
 const ai2ListSelector = (mockData = {}) => (reference, jsx = {}) => {
     return (<ListSelector reference={reference} mock={mockData} {...jsx}/>)
 };
+
+const aiConfirm = (reference, onOk, ...path) => {
+    // 构造窗口配置
+    const config = RxAnt.toDialogConfig.apply(null,
+        [reference].concat(path));
+    Modal.confirm({...config, onOk});
+};
 export default {
+    // 对话框专用
+    aiConfirm,
+    // 直接组件
     aiInput,
     aiCheckbox,
     aiTextArea,

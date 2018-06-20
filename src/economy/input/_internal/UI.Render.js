@@ -44,7 +44,7 @@ const renderText = (reference, item = {}, jsx) => (text, record, index) => {
         }
     }
     const {value, ...meta} = jsx;
-    return (<Input size={"small"} {...attrs} {...meta}
+    return (<Input {...attrs} {...meta}
                    onChange={onEditText(reference, index, item.dataIndex)}/>)
 };
 
@@ -64,11 +64,19 @@ const renderVector = (reference, item = {}, jsx) => (text, record = {}, index) =
     }
     return (<span style={jsx.style ? jsx.style : {}}>{label}</span>)
 };
+
+const renderDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = {};
+    const {value, ...meta} = jsx;
+    return (<Input {...attrs} {...meta}
+                   onChange={onEditText(reference, index, item.dataIndex)}/>)
+};
 export default {
     VECTOR: renderVector,
     TEXT: renderText,
     DATE: renderDate,
     RADIO: renderRadio,
     LABEL: renderLabel,
+    DECIMAL: renderDecimal,
     triggerChange
 };

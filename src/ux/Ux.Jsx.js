@@ -129,10 +129,6 @@ const _jsxFieldCommon = (reference, renders, item = {}, span = 6) => {
                 style.height = item.optionItem.style.height;
             }
         }
-        // 特殊属性colStyle
-        if (item.colStyle) {
-            Object.assign(style, item.colStyle)
-        }
         return (
             <Col span={item.span ? item.span : span} key={item.field} style={style}>
                 {/** 渲染字段 **/}
@@ -151,7 +147,7 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     // 读取配置数据
     return form.map((row, index) => (
-        <Row key={`form-row-${index}`} style={_uiDisplay(row, rowConfig[index])}>
+        <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
             {_uiRow(row).map(item => {
                 item = Immutable.fromJS(item).toJS();
                 // 初始化
