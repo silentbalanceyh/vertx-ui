@@ -1,5 +1,7 @@
 import moment from 'moment';
 import Dg from './Ux.Debug';
+import Immutable from "immutable";
+import U from "underscore";
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -170,6 +172,34 @@ const stringConnect = (left, right) => {
         }
     }
 };
+
+/**
+ * 变更专用处理
+ * @method valueTriggerChange
+ * @param reference
+ * @param value
+ * @param key
+ * @param field
+ * @param index
+ */
+const valueTriggerChange = (reference = {}, {
+    index, field, key = "source", value
+}) => {
+    let source = reference.state[key];
+    if (U.isArray(source)) {
+        source[index][field] = value;
+    }
+    source = Immutable.fromJS(source).toJS();
+    const state = {};
+    state[key] = source;
+    reference.setState(state);
+    // 变更
+    const onChange = reference.props.onChange;
+    if (onChange) {
+        const newValue = Object.assign({}, reference.state, state);
+        onChange(newValue[key]);
+    }
+};
 /**
  * @class Value
  * @description 数值计算器
@@ -182,6 +212,7 @@ export default {
     valueEndTime,
     valueStartTime,
     valueFilter,
+    valueTriggerChange,
     // 数学运算
     mathMultiplication,
     mathDivision,

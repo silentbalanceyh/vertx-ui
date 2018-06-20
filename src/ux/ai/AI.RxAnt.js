@@ -156,6 +156,9 @@ class RxAnt {
                 if (each[label]) {
                     option['label'] = each[label];
                 }
+                if (each.hasOwnProperty('style')) {
+                    option['style'] = each.style;
+                }
                 options.push(option);
             });
         }

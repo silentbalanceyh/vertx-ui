@@ -1,7 +1,12 @@
 import React, {Fragment} from "react";
-import {Divider, Popconfirm} from "antd";
-import Ux from "ux";
+import {DatePicker, Divider, Input, Popconfirm} from "antd";
 import Immutable from "immutable";
+import Type from '../Ux.Type';
+import Prop from '../Ux.Prop';
+import Format from '../Ux.Format';
+import Expr from '../Ux.Expr';
+import Ai from './AI.Input'
+import Value from '../Ux.Value'
 
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理双值
@@ -42,7 +47,7 @@ const aiCellLogical = (reference, config = {}) => text => {
  */
 const aiCellPercent = (reference, config) => text => {
     return (
-        <span>{Ux.fmtPercent(text)}</span>
+        <span>{Format.fmtPercent(text)}</span>
     )
 };
 /**
@@ -65,7 +70,7 @@ const aiCellPercent = (reference, config) => text => {
  *      }
  */
 const aiCellDate = (reference, config) => text => {
-    return <span>{Ux.formatDate(text, config.$format)}</span>;
+    return <span>{Expr.formatDate(text, config.$format)}</span>;
 };
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理货币格式化
@@ -87,7 +92,7 @@ const aiCellDate = (reference, config) => text => {
  */
 const aiCellCurrency = (reference, config = {}) => text => {
     const flag = config.$flag ? config.$flag : "￥";
-    return <span>{flag}{Ux.fmtCurrency(text)}</span>;
+    return <span>{flag}{Format.fmtCurrency(text)}</span>;
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理表达式格式化
@@ -109,7 +114,7 @@ const aiCellCurrency = (reference, config = {}) => text => {
  *      }
  */
 const aiCellExpression = (reference, config) => text => {
-    return <span>{Ux.formatExpr(config.$expr, {value: text})}</span>;
+    return <span>{Expr.formatExpr(config.$expr, {value: text})}</span>;
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理Datum类型：Tabular/Assist专用格式化
@@ -136,8 +141,8 @@ const aiCellExpression = (reference, config) => text => {
  */
 const aiCellDatum = (reference, config) => text => {
     const datum = config.$datum;
-    const data = Ux.onDatum(reference, datum.source);
-    const item = Ux.elementUnique(data, datum.value, text);
+    const data = Prop.onDatum(reference, datum.source);
+    const item = Type.elementUnique(data, datum.value, text);
     return <span>{item ? item[datum.display] : false}</span>;
 };
 /**
@@ -222,6 +227,75 @@ const aiCellLink = (reference, config, ops = {}) => text => {
         </Fragment>
     );
 };
+
+const _applyConfig = (item) => {
+    const attrs = {};
+    const config = item['$config'] ? item['$config'] : {};
+    Object.assign(attrs, config);
+    if (config.width && !attrs.style) {
+        attrs.style = {
+            width: config.width
+        }
+    }
+    return attrs;
+};
+
+const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = _applyConfig(item);
+    const {value, ...meta} = jsx;
+    return (
+        <Input {...attrs} {...meta}
+               onChange={(event) => Value.valueTriggerChange(reference, {
+                   index, field: item.dataIndex,
+                   value: event.target.value
+               })}/>
+    )
+};
+
+const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = _applyConfig(item);
+    const {value, ...meta} = jsx;
+    return (
+        <Input {...attrs} {...meta}
+               onChange={(event) => Value.valueTriggerChange(reference, {
+                   index, field: item.dataIndex,
+                   value: event.target.value
+               })}/>
+    )
+};
+
+const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
+    const config = item['$config'];
+    let label = text;
+    if (config && config.to) {
+        label = record[config.to];
+    }
+    return (<span style={jsx.style ? jsx.style : {}}>{label}</span>)
+};
+
+const aiUnitLabel = (reference, item = {}, jsx) =>
+    (text) => (<span style={jsx.style ? jsx.style : {}}>{text}</span>);
+
+const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
+    const {value, ...meta} = jsx;
+    return (
+        <DatePicker className={'rx-readonly'} {...meta} {...item['$config']}
+                    onChange={(value) => Value.valueTriggerChange(reference, {
+                        index, field: item.dataIndex,
+                        value
+                    })}/>
+    )
+};
+
+const aiUnitRadio = (reference, item = {}, jsx = {}) => () => {
+    const options = item['$config'] ? item['$config'] : [];
+    const {value, ...meta} = jsx;
+    return Ai.aiRadio(reference, {
+        config: {items: options},
+        ...meta,
+    });
+};
+
 export default {
     aiCellLogical,
     aiCellCurrency,
@@ -229,5 +303,11 @@ export default {
     aiCellLink,
     aiCellExpression,
     aiCellDatum,
-    aiCellPercent
+    aiCellPercent,
+    aiUnitDecimal,
+    aiUnitText,
+    aiUnitVector,
+    aiUnitLabel,
+    aiUnitDate,
+    aiUnitRadio
 }

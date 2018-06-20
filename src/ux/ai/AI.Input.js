@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, DatePicker, Input, InputNumber, Select, TreeSelect} from 'antd';
+import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TreeSelect} from 'antd';
 import {ListSelector} from "web";
 import RxAnt from './AI.RxAnt'
 import {Modal} from "antd/lib/index";
@@ -41,6 +41,22 @@ const aiSelect = (reference, jsx = {}, onChange) => {
                 </Select.Option>
             ))}
         </Select>
+    )
+};
+const aiRadio = (reference, jsx = {}, onChange) => {
+    const {config = {}, ...rest} = jsx;
+    // onChange处理
+    RxAnt.onChange(jsx, onChange);
+    const options = RxAnt.toOptions(reference, config);
+    return (
+        <Radio.Group {...rest}>
+            {options.map(item => (
+                <Radio key={item.key} style={item.style ? item.style : {}}
+                       value={item.hasOwnProperty('value') ? item.value : item.key}>
+                    {item.label}
+                </Radio>
+            ))}
+        </Radio.Group>
     )
 };
 const aiCheckbox = (reference, jsx = {}, onChange) => {
@@ -106,6 +122,7 @@ export default {
     aiInput,
     aiInputNumber,
     aiCheckbox,
+    aiRadio,
     aiTextArea,
     aiTreeSelect,
     aiDatePicker,
