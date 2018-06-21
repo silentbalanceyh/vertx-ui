@@ -26,8 +26,8 @@ class Component extends React.PureComponent {
                     {Ux.jsxFieldGrid(this, jsx, 1)}
                 </Form>,
                 [
-                    Ux.aiLink(this, "backend"),
-                    Ux.aiLink(this, "frontend")
+                    Ux.aiHLink(this, "backend"),
+                    Ux.aiHLink(this, "frontend")
                 ]
             )
         )
