@@ -42,6 +42,24 @@ class Uarr {
         return this;
     }
 
+    remove(...attr) {
+        const reference = this.data;
+        if (reference) {
+            reference.forEach(item => {
+                attr.forEach(field => {
+                    delete item[field];
+                })
+            })
+        }
+        this.data = reference;
+        return this;
+    }
+
+    each(applyFun) {
+        this.data.forEach(item => applyFun(item));
+        return this;
+    }
+
     mapping(mapping = {}) {
         const result = [];
         if (0 < Object.keys(mapping).length) {
@@ -52,10 +70,16 @@ class Uarr {
                     const to = mapping[from];
                     object[from] = item[to];
                 }
-                result.push(object);
+                result.push(Object.assign(object, item));
             });
         }
         this.data = result;
+        return this;
+    }
+
+    flat(field = "children") {
+        const reference = this.data;
+        this.data = Types.elementFlat(reference, field);
         return this;
     }
 

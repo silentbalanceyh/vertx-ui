@@ -6,6 +6,7 @@ import routeData from '../route'
 import Random from './Ux.Random'
 import Dg from './Ux.Debug';
 import Cv from './Ux.Constant';
+import AiStream from './stream/Ai.Stream'
 
 /**
  * 自动生成路由专用函数
@@ -103,4 +104,7 @@ export default {
     rxEtat: (cab) => RxEtat.from(cab),
     // 和Zero绑定专用的操作方法，Stream模式
     rxJet: () => RxJet.from(),
+    // 和Zero绑定专用的Ui方法，Stream模式
+    auiTab: (reference) => new AiStream(reference).tabs().init(),
+    auiTable: (reference) => new AiStream(reference).table().init()
 }

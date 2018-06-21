@@ -1,5 +1,5 @@
 import React from 'react'
-import {Col, Row} from 'antd';
+import {Col, Row, Table} from 'antd';
 import RxAnt from './AI.RxAnt';
 
 /**
@@ -44,7 +44,12 @@ const aiGrid = (config = [], ...jsx) => {
     )
 };
 
+const aiTable = (dataSource = [], table = {}) => {
+    return (<Table {...table} dataSource={dataSource}/>)
+};
+
 export default {
     aiRows,
-    aiGrid
+    aiGrid,
+    aiTable
 }

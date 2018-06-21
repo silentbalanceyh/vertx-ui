@@ -4,11 +4,11 @@ import Random from '../Ux.Random';
 
 /**
  * 根据key值检索读取资源配置节点，生成Label和链接地址
- * @method aiLink
+ * @method aiHLink
  * @param reference
  * @param key
  */
-const aiLink = (reference, key) => {
+const aiHLink = (reference, key) => {
     const info = Prop.fromPath(reference, "info");
     if (info) {
         const keyLabel = `${key}Label`;
@@ -25,6 +25,7 @@ const aiLink = (reference, key) => {
         console.error(" -> [ZI] This method require '_info' configuration in cab file.");
     }
 };
+
 export default {
-    aiLink
+    aiHLink
 }

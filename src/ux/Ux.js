@@ -28,10 +28,13 @@ import VALUE from "./Ux.Value";
 import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
 import AI from './ai/AI';
+import CHART from './Ux.Chart';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 
 export default {
+    // 图标专用
+    ...CHART,
     // 参数解析
     ...PARSER,
     // 字段专用处理
