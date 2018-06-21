@@ -13,7 +13,6 @@ import OP from "./Ux.Op";
 import SORTER from "./Ux.Sorter";
 import ICONS from "./Ux.Icon";
 import ANT from "./Ux.Ant";
-import OPTION from "./Ux.Option";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
 import FORMAT from "./Ux.Format";
@@ -69,8 +68,6 @@ export default {
     ...ICONS,
     // ANT
     ...ANT,
-    // Option选项
-    ...OPTION,
     // Normalize 标准化
     ...NORM,
     // 类型处理

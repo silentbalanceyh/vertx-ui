@@ -3,14 +3,6 @@ import {Button} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
 
-const getRenders = () => ({
-    VECTOR: Ux.aiUnitVector,
-    TEXT: Ux.aiUnitText,
-    DATE: Ux.aiUnitDate,
-    RADIO: Ux.aiUnitRadio,
-    LABEL: Ux.aiUnitLabel,
-    DECIMAL: Ux.aiUnitDecimal,
-});
 const onAdd = (reference, index) => (event) => {
     const state = reference.state;
     if (state.source) {
@@ -59,7 +51,7 @@ const renderColumn = (reference, columns = [], jsx, render = {}) => {
                 item.render = render[item.dataIndex]
             } else {
                 const type = item['$type'] ? item['$type'] : "TEXT";
-                const RENDER = getRenders();
+                const RENDER = Ux.aiUnitRenders;
                 const render = RENDER[type];
                 if (render) {
                     item.render = render(reference, item, jsx)

@@ -3,14 +3,6 @@ import {Button} from 'antd';
 import Immutable from "immutable";
 import Ux from 'ux';
 
-const getRenders = () => ({
-    VECTOR: Ux.aiUnitVector,
-    TEXT: Ux.aiUnitText,
-    DATE: Ux.aiUnitDate,
-    RADIO: Ux.aiUnitRadio,
-    LABEL: Ux.aiUnitLabel,
-    DECIMAL: Ux.aiUnitDecimal,
-});
 const onRemove = (reference, record, index) => (event) => {
     const state = reference.state;
     if (state.source) {
@@ -48,7 +40,7 @@ const renderColumn = (reference, columns = [], jsx = {}, render = {}) => {
                 item.render = render[item.dataIndex](reference, item, jsx)
             } else {
                 const type = item['$type'] ? item['$type'] : "TEXT";
-                const RENDER = getRenders();
+                const RENDER = Ux.aiUnitRenders;
                 const render = RENDER[type];
                 if (render) {
                     item.render = render(reference, item, jsx)

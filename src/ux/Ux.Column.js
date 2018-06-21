@@ -1,14 +1,5 @@
 import Ai from './ai/AI'
 
-const RENDERS = {
-    LOGICAL: Ai.aiCellLogical,
-    DATE: Ai.aiCellDate,
-    CURRENCY: Ai.aiCellCurrency,
-    EXPRESSION: Ai.aiCellExpression,
-    LINK: Ai.aiCellLink,
-    DATUM: Ai.aiCellDatum,
-    PERCENT: Ai.aiCellPercent
-};
 /**
  * Ant Design的Table组件专用的专用属性`columns`列处理器，处理每一列的`render`属性
  * @method uiColumnRender
@@ -40,7 +31,7 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns.forEach(column => {
         if (column.hasOwnProperty("$render")) {
-            const fnRender = RENDERS[column["$render"]];
+            const fnRender = Ai.aiCellRenders[column["$render"]];
             if (fnRender) {
                 column.render = fnRender(reference, column, ops);
             }

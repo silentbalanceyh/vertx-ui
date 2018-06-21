@@ -304,10 +304,27 @@ export default {
     aiCellExpression,
     aiCellDatum,
     aiCellPercent,
+    aiCellRenders: {
+        LOGICAL: aiCellLogical,
+        DATE: aiCellDate,
+        CURRENCY: aiCellCurrency,
+        EXPRESSION: aiCellExpression,
+        LINK: aiCellLink,
+        DATUM: aiCellDatum,
+        PERCENT: aiCellPercent
+    },
     aiUnitDecimal,
     aiUnitText,
     aiUnitVector,
     aiUnitLabel,
     aiUnitDate,
-    aiUnitRadio
+    aiUnitRadio,
+    aiUnitRenders: {
+        VECTOR: aiUnitVector,
+        TEXT: aiUnitText,
+        DATE: aiUnitDate,
+        RADIO: aiUnitRadio,
+        LABEL: aiUnitLabel,
+        DECIMAL: aiUnitDecimal,
+    }
 }
