@@ -78,7 +78,7 @@ export default {
     isLogged,
     // 是否初始化应用
     isInit,
-    // 登陆控制
+    // 登录控制
     isAuthorized,
     // 注销
     toLogout,
