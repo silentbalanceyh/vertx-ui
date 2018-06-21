@@ -185,8 +185,11 @@ const stringConnect = (left, right) => {
 const valueTriggerChange = (reference = {}, {
     index, field, key = "source", value
 }) => {
-    let source = reference.state[key];
+    let source = reference.state ? reference.state[key] : [];
     if (U.isArray(source)) {
+        if (!source[index]) {
+            source[index] = {};
+        }
         source[index][field] = value;
     }
     source = Immutable.fromJS(source).toJS();
@@ -194,6 +197,10 @@ const valueTriggerChange = (reference = {}, {
     state[key] = source;
     reference.setState(state);
     // 变更
+    valueOnChange(reference, state, key)
+};
+
+const valueOnChange = (reference = {}, state, key = "source") => {
     const onChange = reference.props.onChange;
     if (onChange) {
         const newValue = Object.assign({}, reference.state, state);
@@ -213,6 +220,7 @@ export default {
     valueStartTime,
     valueFilter,
     valueTriggerChange,
+    valueOnChange,
     // 数学运算
     mathMultiplication,
     mathDivision,

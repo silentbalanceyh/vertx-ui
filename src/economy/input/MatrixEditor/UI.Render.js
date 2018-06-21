@@ -16,7 +16,7 @@ const onRemove = (reference, record, index) => (event) => {
         state.source[index] = data;
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        Ux.valueTriggerChange(reference, {source})
+        Ux.valueOnChange(reference, {source})
     } else {
         console.error("[ZERO] Remove 'data' in state has not been initialized.");
     }
