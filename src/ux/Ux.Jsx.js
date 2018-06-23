@@ -1,5 +1,4 @@
 import React from 'react';
-import Opt from './Ux.Option'
 import Random from './Ux.Random'
 import Norm from './Ux.Normalize'
 import Prop from './Ux.Prop'
@@ -50,6 +49,20 @@ const _uiRow = (row) => {
         return row.items ? row.items : [];
     }
 };
+const _optionFormItem = (item = {}) => {
+    return (item.labelCol) ? item : {
+        ...item,
+        style: {
+            width: "90%"
+        },
+        labelCol: {
+            span: 8
+        },
+        wrapperCol: {
+            span: 16
+        }
+    }
+};
 /**
  * Jsx单字段的Render处理
  * @method jsxField
@@ -73,7 +86,7 @@ const jsxField = (reference, item = {}, render) => {
         }
     };
     return item.optionItem ? (
-        <Form.Item {...Opt.optionFormItem(item.optionItem)}>
+        <Form.Item {..._optionFormItem(item.optionItem)}>
             {jsxRender(item)}
         </Form.Item>
     ) : jsxRender(item)
@@ -101,7 +114,8 @@ const jsxFieldRow = (reference, item = {}, render) => {
 const _jsxFieldGrid = (item = {}) => {
     return (
         <Col className={item.className ? item.className : "page-title"}
-             key={item.field} span={item.span ? item.span : 24}>
+             key={item.field} span={item.span ? item.span : 24}
+             style={item.style ? item.style : {}}>
             {/** 只渲染Title **/}
             {item.grid.map(each => (
                 <Col span={each.span} key={Random.randomString(12)}
@@ -146,7 +160,7 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     // 读取配置数据
     return form.map((row, index) => (
-        <Row key={`form-row-${index}`} style={_uiDisplay(row, rowConfig[index])}>
+        <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
             {_uiRow(row).map(item => {
                 item = Immutable.fromJS(item).toJS();
                 // 初始化
@@ -225,7 +239,7 @@ const jsxOp = (reference = {}, column = 4, op = {}) => {
     const ops = Norm.extractOp(reference, op);
     const hidden = Norm.extractHidden(reference);
     const span = 24 / column;
-    const btnOpts = Opt.optionFormItem();
+    const btnOpts = _optionFormItem();
     btnOpts.label = ' ';
     btnOpts.colon = false;
     const opStyle = {};

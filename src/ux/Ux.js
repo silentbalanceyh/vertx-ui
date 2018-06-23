@@ -13,7 +13,6 @@ import OP from "./Ux.Op";
 import SORTER from "./Ux.Sorter";
 import ICONS from "./Ux.Icon";
 import ANT from "./Ux.Ant";
-import OPTION from "./Ux.Option";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
 import FORMAT from "./Ux.Format";
@@ -29,10 +28,13 @@ import VALUE from "./Ux.Value";
 import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
 import AI from './ai/AI';
+import CHART from './Ux.Chart';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 
 export default {
+    // 图标专用
+    ...CHART,
     // 参数解析
     ...PARSER,
     // 字段专用处理
@@ -69,8 +71,6 @@ export default {
     ...ICONS,
     // ANT
     ...ANT,
-    // Option选项
-    ...OPTION,
     // Normalize 标准化
     ...NORM,
     // 类型处理

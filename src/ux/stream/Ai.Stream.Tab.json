@@ -1,0 +1,26 @@
+{
+    "supported": {
+        "tabs": [
+            "activeKey",
+            "animated",
+            "defaultActiveKey",
+            "hideAdd",
+            "size",
+            "tabBarExtraContent",
+            "tabBarStyle",
+            "tabPosition",
+            "type",
+            "onChange",
+            "onEdit",
+            "onNextClick",
+            "onPrevClick",
+            "onTabClick",
+            "tabBarGutter"
+        ],
+        "tabpane": [
+            "forceRender",
+            "key",
+            "tab"
+        ]
+    }
+}

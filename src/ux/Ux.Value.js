@@ -1,5 +1,8 @@
 import moment from 'moment';
 import Dg from './Ux.Debug';
+import Immutable from "immutable";
+import U from "underscore";
+import Sorter from './Ux.Sorter'
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -144,12 +147,13 @@ const valueStartTime = (to, duration, mode = 'day') => {
  * @method valueFilter
  * @param data 被过滤的数据对象
  * @param keys 保留的字段名集合
+ * @param orderBy 排序字段
  */
-const valueFilter = (data = {}, keys = []) => {
+const valueFilter = (data = {}, keys = [], orderBy = "order") => {
     const result = {};
     keys.forEach(key => {
         if (data.hasOwnProperty(key)) {
-            result[key] = data[key];
+            result[key] = data[key].sort((left, right) => Sorter.sorterAsc(left, right, orderBy));
         }
     });
     return result;
@@ -170,6 +174,41 @@ const stringConnect = (left, right) => {
         }
     }
 };
+
+/**
+ * 变更专用处理
+ * @method valueTriggerChange
+ * @param reference
+ * @param value
+ * @param key
+ * @param field
+ * @param index
+ */
+const valueTriggerChange = (reference = {}, {
+    index, field, key = "source", value
+}) => {
+    let source = reference.state ? reference.state[key] : [];
+    if (U.isArray(source)) {
+        if (!source[index]) {
+            source[index] = {};
+        }
+        source[index][field] = value;
+    }
+    source = Immutable.fromJS(source).toJS();
+    const state = {};
+    state[key] = source;
+    reference.setState(state);
+    // 变更
+    valueOnChange(reference, state, key)
+};
+
+const valueOnChange = (reference = {}, state, key = "source") => {
+    const onChange = reference.props.onChange;
+    if (onChange) {
+        const newValue = Object.assign({}, reference.state, state);
+        onChange(newValue[key]);
+    }
+};
 /**
  * @class Value
  * @description 数值计算器
@@ -182,6 +221,8 @@ export default {
     valueEndTime,
     valueStartTime,
     valueFilter,
+    valueTriggerChange,
+    valueOnChange,
     // 数学运算
     mathMultiplication,
     mathDivision,

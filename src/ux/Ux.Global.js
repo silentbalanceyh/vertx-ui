@@ -33,6 +33,26 @@ const toLogout = () => {
     return Store.Session.remove(key);
 };
 /**
+ * 执行路由操作
+ * @method toRoute
+ * @param reference
+ * @param uri
+ * @return {*}
+ */
+const toRoute = (reference = {}, uri = "") => {
+    const {$router} = reference.props;
+    if ($router) {
+        let target;
+        if (0 <= uri.indexOf(Cv['ROUTE'])) {
+            target = uri;
+        } else {
+            target = `/${Cv['ROUTE']}${uri}`;
+        }
+        target = target.replace(/\/\//g, '/');
+        $router.to(target);
+    }
+};
+/**
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面
  * * reference引用中必须包含$router用于路由转发
  * @method isAuthorized
@@ -58,8 +78,10 @@ export default {
     isLogged,
     // 是否初始化应用
     isInit,
-    // 登陆控制
+    // 登录控制
     isAuthorized,
     // 注销
-    toLogout
+    toLogout,
+    // 链接地址
+    toRoute
 }

@@ -199,8 +199,14 @@ const uiDialogConfirm = (config = {}, execFunc) =>
         ...config,
         onOk: execFunc
     });
-const uiItemCheckbox = (item = {}, $router) => {
-    return <Checkbox.Group options={item}/>;
+const uiItemCheckbox = (item = [], jsx) => {
+    item = item.filter(item => item.key);
+    item.forEach(each => {
+        if (!each.value) {
+            each.value = each.key;
+        }
+    });
+    return <Checkbox.Group options={item} {...jsx}/>;
 };
 const uiItemDatum = (reference, key, filters) => {
     return (filters) ? Type.elementFind(Prop.onDatum(reference, key), filters) :
@@ -249,15 +255,18 @@ const uiGrid = (grid = [], ...jsx) => {
 const uiIfElse = (condition, yesJsx, noJsx) =>
     (condition ? yesJsx : (undefined !== noJsx ? noJsx : false));
 const uiBtnPrimary = (fnClick = () => {
-}, text) => (
-    <Button type="primary" onClick={fnClick}>
+}, text, type = "primary") => (
+    <Button type={type} onClick={fnClick}>
         {text}
     </Button>
 );
 const uiBtnHidden = (fnClick = () => {
-}, id) => (
-    <Button id={id} onClick={fnClick}/>
-);
+    console.info("Not Inject Event onClick.")
+}, id) => {
+    return (
+        <Button id={id} key={id} onClick={fnClick}/>
+    )
+};
 const uiBtnHiddens = (hidden = {}) => {
     const ids = Object.keys(hidden);
     if (0 < ids.length) {

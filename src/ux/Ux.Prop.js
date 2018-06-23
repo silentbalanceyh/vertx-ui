@@ -20,7 +20,7 @@ const fromPath = (reference = {}, ...keys) => {
         });
         const $data = Immutable.fromJS(data);
         data = $data.getIn(path);
-        if (data.toJS) {
+        if (data && data.toJS) {
             data = data.toJS();
         }
     }
@@ -109,6 +109,22 @@ const formRead = (reference, data = {}) => {
     return data;
 };
 /**
+ * Ant Design中的Form的表单数据读取
+ * @method formGet
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param key 指定重置的字段值
+ */
+const formGet = (reference, key) => {
+    const {form} = reference.props;
+    if (form) {
+        let data = form.getFieldsValue();
+        data = Immutable.fromJS(data).toJS();
+        return key ? data[key] : data;
+    } else {
+        console.error("[ZI] 'form' reference is invalid, please configured Ant Design.")
+    }
+};
+/**
  * Ant Design中的Form的表单重置函数
  * @method formReset
  * @param {React.PureComponent} reference React对应组件引用
@@ -186,6 +202,7 @@ export default {
     // Form数据处理
     formClear,
     formRead,
+    formGet,
     formReset,
     // Hit
     formHit,

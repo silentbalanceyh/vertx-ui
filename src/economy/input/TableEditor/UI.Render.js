@@ -2,7 +2,6 @@ import React from 'react';
 import {Button} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
-import RENDER from '../_internal/UI.Render';
 
 const onAdd = (reference, index) => (event) => {
     const state = reference.state;
@@ -15,7 +14,7 @@ const onAdd = (reference, index) => (event) => {
         }
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        RENDER.triggerChange(reference, {source})
+        Ux.valueOnChange(reference, {source})
     } else {
         console.error("[ZERO] Add 'data' in state has not been initialized.");
     }
@@ -27,7 +26,7 @@ const onRemove = (reference, index) => (event) => {
         const item = state.source.filter((item, idx) => idx !== index);
         const source = Immutable.fromJS(item).toJS();
         reference.setState({source});
-        RENDER.triggerChange(reference, {source})
+        Ux.valueOnChange(reference, {source})
     } else {
         console.error("[ZERO] Remove 'data' in state has not been initialized.");
     }
@@ -36,7 +35,7 @@ const onRemove = (reference, index) => (event) => {
 const renderOp = (reference, config, jsx) => (text, record, index) => {
     return (
         <span>
-            <Button.Group>
+            <Button.Group style={{minWidth: "64px"}}>
                 <Button icon={"plus"} onClick={onAdd(reference, index)}/>
                 <Button disabled={0 === index} icon={"minus"} onClick={onRemove(reference, index)}/>
             </Button.Group>
@@ -52,6 +51,7 @@ const renderColumn = (reference, columns = [], jsx, render = {}) => {
                 item.render = render[item.dataIndex]
             } else {
                 const type = item['$type'] ? item['$type'] : "TEXT";
+                const RENDER = Ux.aiUnitRenders;
                 const render = RENDER[type];
                 if (render) {
                     item.render = render(reference, item, jsx)

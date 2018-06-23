@@ -1,11 +1,17 @@
-import AiView from './AI.View';
+import AiLink from './AI.Link';
 import AiLayout from './AI.Layout';
 import AiInput from './AI.Input';
 import AiButton from './AI.Action';
+import AiColumn from './AI.Column';
+import AiTab from './AI.Tab';
+import AiChart from './AI.Chart';
 
 export default {
-    ...AiView,
+    ...AiLink,
     ...AiLayout,
     ...AiInput,
-    ...AiButton
+    ...AiButton,
+    ...AiColumn,
+    ...AiTab,
+    ...AiChart
 }

@@ -50,6 +50,9 @@
             "fnLogin": {
                 "key": "btnLogin",
                 "type": "primary",
+                "style": {
+                    "marginRight": "10px"
+                },
                 "text": "登录"
             },
             "fnReset": {
