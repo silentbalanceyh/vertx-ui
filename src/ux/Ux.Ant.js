@@ -255,15 +255,18 @@ const uiGrid = (grid = [], ...jsx) => {
 const uiIfElse = (condition, yesJsx, noJsx) =>
     (condition ? yesJsx : (undefined !== noJsx ? noJsx : false));
 const uiBtnPrimary = (fnClick = () => {
-}, text) => (
-    <Button type="primary" onClick={fnClick}>
+}, text, type = "primary") => (
+    <Button type={type} onClick={fnClick}>
         {text}
     </Button>
 );
 const uiBtnHidden = (fnClick = () => {
-}, id) => (
-    <Button id={id} onClick={fnClick}/>
-);
+    console.info("Not Inject Event onClick.")
+}, id) => {
+    return (
+        <Button id={id} key={id} onClick={fnClick}/>
+    )
+};
 const uiBtnHiddens = (hidden = {}) => {
     const ids = Object.keys(hidden);
     if (0 < ids.length) {

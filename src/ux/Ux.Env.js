@@ -1,6 +1,6 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
-import {DataLabor, RxEtat, RxJet} from "entity";
+import {DataLabor, RxEtat, RxFlow, RxJet} from "entity";
 import {Set} from 'immutable'
 import routeData from '../route'
 import Random from './Ux.Random'
@@ -71,6 +71,7 @@ export default {
     Null: null,
     // 环境变量专用
     Env: Cv,
+    fnOut: Taper.fnFlush,
     /**
      * Redux专用状态树的写入方法
      * @method dataOut
@@ -104,6 +105,8 @@ export default {
     rxEtat: (cab) => RxEtat.from(cab),
     // 和Zero绑定专用的操作方法，Stream模式
     rxJet: () => RxJet.from(),
+    // 和Zero绑定专用的性能压缩器
+    rxFlow: (action) => RxFlow.from(action),
     // 和Zero绑定专用的Ui方法，Stream模式
     auiTab: (reference) => new AiStream(reference).tabs().init(),
     auiTable: (reference) => new AiStream(reference).table().init()

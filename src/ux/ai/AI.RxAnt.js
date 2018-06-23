@@ -56,14 +56,14 @@ const parseDatum = (config = {}) => {
     return meta;
 };
 
-const extractDatum = (reference, config = {}) => {
+const extractDatum = (reference, config = {}, filter = () => true) => {
     let options = [];
     // 如果存在datum节点，则从Assist/Tabular数据源中读取
     const {source} = parseDatum(config);
     if (source && "string" === typeof source) {
         const data = Prop.onDatum(reference, source);
         if (U.isArray(data)) {
-            options = data;
+            options = data.filter(filter)
         } else {
             console.error(`[RxAnt] The 'source=${source}' data must be Array.`);
         }
@@ -76,6 +76,10 @@ const extractDatum = (reference, config = {}) => {
 class RxAnt {
     static toParsed(expr = "") {
         return parseExpr(expr);
+    }
+
+    static toDatum(config = {}) {
+        return parseDatum(config)
     }
 
     static onDisabledDate(jsx = {}) {
@@ -124,7 +128,7 @@ class RxAnt {
         } else if (config.datum) {
             options = extractDatum(reference, config);
         }
-        const treeData = Uarr.create(options)
+        return Uarr.create(options)
             .sort((left, right) => left.left - right.left)
             .convert("code", (code, item) => item["code"] + " - " + item["name"])
             .mapping({
@@ -135,17 +139,16 @@ class RxAnt {
             })
             .tree("id", "pid")
             .to();
-        return treeData;
     }
 
-    static toOptions(reference, config = {}) {
+    static toOptions(reference, config = {}, filter = () => true) {
         let options = [];
         if (config.items) {
             // 如果存在items的根节点，则直接items处理
             options = config.items;
         } else if (config.datum) {
             // 如果存在datum节点，则从Assist/Tabular数据源中读取
-            const data = extractDatum(reference, config);
+            const data = extractDatum(reference, config, filter);
             const {key = "key", label = "label"} = parseDatum(config);
             data.forEach(each => {
                 const option = {};

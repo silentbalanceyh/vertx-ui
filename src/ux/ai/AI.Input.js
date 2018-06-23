@@ -29,10 +29,10 @@ const aiInputNumber = (reference, jsx = {}, onChange) => {
     return (<InputNumber {...jsx}/>)
 };
 const aiSelect = (reference, jsx = {}, onChange) => {
-    const {config = {}, ...rest} = jsx;
+    const {config = {}, filter, ...rest} = jsx;
     // onChange处理
-    RxAnt.onChange(jsx, onChange);
-    const options = RxAnt.toOptions(reference, config);
+    RxAnt.onChange(rest, onChange);
+    const options = RxAnt.toOptions(reference, config, filter);
     return (
         <Select {...rest}>
             {options.map(item => (

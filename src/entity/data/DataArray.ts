@@ -2,6 +2,7 @@ import DataContainer from './DataContainer';
 import Ux from 'ux';
 import {isArray} from "rxjs/util/isArray";
 import * as Immutable from 'immutable';
+import * as U from 'underscore';
 
 class DataArray implements DataContainer {
     ready: boolean = false;
@@ -48,6 +49,18 @@ class DataArray implements DataContainer {
         const ready = this.ready;
         const length = this.length;
         return {data, ready, length};
+    }
+
+    filter(fnFilter: Function) {
+        const data = JSON.parse(this.data);
+        if (U.isFunction(fnFilter)) {
+            const result = data.filter(fnFilter);
+            this.data = JSON.stringify(result);
+        } else if ("object" === typeof fnFilter) {
+            const result = Ux.elementFind(data, fnFilter);
+            this.data = JSON.stringify(result);
+        }
+        return this;
     }
 
     /**

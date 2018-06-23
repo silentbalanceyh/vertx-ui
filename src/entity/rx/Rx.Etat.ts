@@ -1,6 +1,7 @@
 import * as U from 'underscore';
 import StateOut from '../state/StateOut';
 import Ux from 'ux';
+import {Taper} from 'environment';
 
 class Etat {
     private _form: boolean = false;
@@ -67,6 +68,9 @@ class Etat {
 
     connect(object, dispatch: boolean) {
         if (dispatch) {
+            if (object && !object.hasOwnProperty('fnOut')) {
+                object.fnOut = Taper.fnFlush
+            }
             this._dispatchTo = object;
         } else {
             this._stateTo = object;

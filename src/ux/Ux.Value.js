@@ -2,6 +2,7 @@ import moment from 'moment';
 import Dg from './Ux.Debug';
 import Immutable from "immutable";
 import U from "underscore";
+import Sorter from './Ux.Sorter'
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -146,12 +147,13 @@ const valueStartTime = (to, duration, mode = 'day') => {
  * @method valueFilter
  * @param data 被过滤的数据对象
  * @param keys 保留的字段名集合
+ * @param orderBy 排序字段
  */
-const valueFilter = (data = {}, keys = []) => {
+const valueFilter = (data = {}, keys = [], orderBy = "order") => {
     const result = {};
     keys.forEach(key => {
         if (data.hasOwnProperty(key)) {
-            result[key] = data[key];
+            result[key] = data[key].sort((left, right) => Sorter.sorterAsc(left, right, orderBy));
         }
     });
     return result;

@@ -70,6 +70,11 @@ const aiCellPercent = (reference, config) => text => {
  *      }
  */
 const aiCellDate = (reference, config) => text => {
+    if (config.$empty) {
+        if (!text) {
+            return false;
+        }
+    }
     return <span>{Expr.formatDate(text, config.$format)}</span>;
 };
 /**
@@ -296,6 +301,14 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => () => {
     });
 };
 
+const aiUnitTree = (reference, item = {}, jsx = {}) => () => {
+    const {value, onChange, ...meta} = jsx;
+    return Ai.aiTreeSelect(reference.props.reference, {
+        config: item['$config'],
+        ...meta
+    }, onChange);
+};
+
 export default {
     aiCellLogical,
     aiCellCurrency,
@@ -311,7 +324,7 @@ export default {
         EXPRESSION: aiCellExpression,
         LINK: aiCellLink,
         DATUM: aiCellDatum,
-        PERCENT: aiCellPercent
+        PERCENT: aiCellPercent,
     },
     aiUnitDecimal,
     aiUnitText,
@@ -319,6 +332,7 @@ export default {
     aiUnitLabel,
     aiUnitDate,
     aiUnitRadio,
+    aiUnitTree,
     aiUnitRenders: {
         VECTOR: aiUnitVector,
         TEXT: aiUnitText,
@@ -326,5 +340,6 @@ export default {
         RADIO: aiUnitRadio,
         LABEL: aiUnitLabel,
         DECIMAL: aiUnitDecimal,
+        TREE: aiUnitTree
     }
 }

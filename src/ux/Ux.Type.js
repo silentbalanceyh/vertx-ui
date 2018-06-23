@@ -106,9 +106,15 @@ const elementFind = (data = [], filters) => {
         for (const field in filters) {
             if (filters.hasOwnProperty(field)) {
                 // 这里用双等号匹配，用于检查字符串和数值的比较
-                reference = reference.filter(
-                    item => item[field] === filters[field]
-                );
+                reference = reference.filter(item => {
+                    const value = filters[field];
+                    if (U.isArray(value)) {
+                        const $value = Immutable.fromJS(value);
+                        return $value.contain(item[field]);
+                    } else {
+                        return item[field] === value;
+                    }
+                });
             }
         }
     }
