@@ -1,5 +1,5 @@
 import React from 'react';
-import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TreeSelect} from 'antd';
+import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from 'antd';
 import {ListSelector} from "web";
 import RxAnt from './AI.RxAnt'
 import {Modal} from "antd/lib/index";
@@ -79,6 +79,11 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     return (<DatePicker {...jsx}/>);
 };
 
+const aiTimePicker = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<TimePicker {...jsx}/>)
+};
+
 const ai2Select = (onChange) => (reference, jsx = {}) => {
     const fnChange = onChange.apply(null, [reference]);
     return aiSelect(reference, jsx, fnChange);
@@ -126,7 +131,8 @@ export default {
     aiTextArea,
     aiTreeSelect,
     aiDatePicker,
-    // 二阶函数
+    aiTimePicker,
+    // 二阶组件，带onChange事件的组件
     ai2Checkbox,
     ai2DatePicker,
     ai2InputNumber,

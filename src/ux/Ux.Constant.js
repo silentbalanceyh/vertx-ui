@@ -9,6 +9,14 @@ for (const key in $env) {
         }
     }
 }
+
+const prepareDevEnv = (...keys) => {
+    let result = "development" === process.env.NODE_ENV;
+    keys.forEach(key => {
+        result = result && process.env[key] && "true" === process.env[key];
+    });
+    return Boolean(result);
+};
 export default {
     ...$env,
     // 保存用户Session回话的环境变量
@@ -19,8 +27,9 @@ export default {
     KEY_EVENT: process.env.K_EVENT,
     ENTRY_LOGIN: `/${process.env.ROUTE}${process.env.ENTRY_LOGIN}`,
     ENTRY_ADMIN: `/${process.env.ROUTE}${process.env.ENTRY_ADMIN}`,
-    DEBUG: Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_DEBUG),
-    MOCK: Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
+    DEBUG: prepareDevEnv("DEV_DEBUG"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_DEBUG),
+    MOCK: prepareDevEnv("DEV_MOCK"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
+    DEBUG_AJAX: prepareDevEnv("DEV_MOCK", "DEV_AJAX"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
     HTTP_METHOD: {
         GET: "get",
         POST: "post",
