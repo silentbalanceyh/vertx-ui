@@ -7,14 +7,21 @@ import Ux from 'ux';
  * reference为父引用，和该组件绑定的资源文件必须包含：
  * {
  *      "_topbar":{
- *          "title":"标题文字"
+ *          "title":"标题文字",
+ *          "current":1
  *      }
  * }
+ * current需要配合外置的$extra一起使用
+ * $key用于解析配置文件
+ * $extra用于设置额外的附加工具栏
  */
 class Component extends React.PureComponent {
     render() {
-        const {children, reference, card = 'page-card', $extra: Extra} = this.props;
-        const topbar = Ux.fromHoc(reference, "topbar");
+        const {
+            children, reference, card = 'page-card',
+            $key = "topbar", $extra: Extra
+        } = this.props;
+        const topbar = Ux.fromHoc(reference, $key);
         return (
             <Card className={card} bordered={false}
                   title={topbar ? topbar.title : ""}

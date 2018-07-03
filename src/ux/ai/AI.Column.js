@@ -1,5 +1,5 @@
 import React, {Fragment} from "react";
-import {DatePicker, Divider, Input, Popconfirm} from "antd";
+import {DatePicker, Divider, Icon, Input, Popconfirm} from "antd";
 import Immutable from "immutable";
 import Type from '../Ux.Type';
 import Prop from '../Ux.Prop';
@@ -119,7 +119,8 @@ const aiCellCurrency = (reference, config = {}) => text => {
  *      }
  */
 const aiCellExpression = (reference, config) => text => {
-    return <span>{Expr.formatExpr(config.$expr, {value: text})}</span>;
+    return text ? (
+        <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理Datum类型：Tabular/Assist专用格式化
@@ -149,6 +150,18 @@ const aiCellDatum = (reference, config) => text => {
     const data = Prop.onDatum(reference, datum.source);
     const item = Type.elementUnique(data, datum.value, text);
     return <span>{item ? item[datum.display] : false}</span>;
+};
+const aiCellIcon = (reference, config) => text => {
+    const mapping = config['$mapping'] ? config['$mapping'] : {};
+    const target = mapping[text];
+    if ("object" === typeof target) {
+        return <span>
+            {target.icon ? <Icon type={target.icon} style={target.style ? target.style : {}}/> : false}
+            &nbsp;&nbsp;{target.text}
+        </span>
+    } else {
+        return <span>{target}</span>
+    }
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理Link类型：带操作的链接类型
@@ -325,6 +338,7 @@ export default {
         LINK: aiCellLink,
         DATUM: aiCellDatum,
         PERCENT: aiCellPercent,
+        ICON: aiCellIcon,
     },
     aiUnitDecimal,
     aiUnitText,

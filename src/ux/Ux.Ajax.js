@@ -100,11 +100,12 @@ const ajaxAdapter = (body = {}) => {
  * @private
  * @param {Request} request 请求对象
  * @param {Object} mockData 【Mock环境可用】专用Mock响应处理
+ * @param {Object} params
  * @return {Promise<Response>}
  */
 const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    mockData.mock ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
+    Cv.MOCK && mockData.mock ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
         : fetch(request)
             .then(response => Log.response(null, response, request.method))
             .then(response => response.ok
@@ -115,6 +116,16 @@ const ajaxResponse = (request, mockData = {}, params) =>
                     statusText: response.statusText
                 }))
             )
+            .then(response => {
+                // 是否存储响应信息
+                if (Cv['DEBUG_AJAX']) {
+                    Dg.dgFileJson({
+                        request: params,
+                        response: response
+                    });
+                }
+                return response;
+            })
             .catch(error => Promise.reject(error));
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法

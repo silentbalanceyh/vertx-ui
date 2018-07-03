@@ -6,6 +6,7 @@ export {default as CheckedDate} from './input/CheckedDate/UI';
 export {default as TimeRanger} from './input/TimeRanger/UI';
 export {default as ChangeEditor} from './input/ChangeEditor/UI';
 export {default as TableEditor} from './input/TableEditor/UI';
+export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
 

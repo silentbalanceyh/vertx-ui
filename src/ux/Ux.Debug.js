@@ -217,6 +217,7 @@ const ensurePositive = value => {
  * @method dgFileJson
  * @param {Object|Array} data 传入的数据
  * @param ext 保存的文件格式后缀名，默认为.json
+ * @param filename 需要固定的文件前缀
  * @example
  *
  *      // 设置文件中将保存的数据
@@ -226,15 +227,15 @@ const ensurePositive = value => {
  *      };
  *      Ux.dgFileJson(data);
  */
-const dgFileJson = (data, ext = "json") => {
+const dgFileJson = (data, ext = "json", filename) => {
     let finalData = data;
-    console.log(JSON.stringify(data, null, 2));
     if (!Blob.prototype.isPrototypeOf(data)) {
         finalData = new Blob([JSON.stringify(data, null, 2)], {
             type: "application/json"
         });
     }
-    saveAs(finalData, v4() + "." + ext);
+    const file = filename ? filename + "." + ext : v4() + "." + ext;
+    saveAs(finalData, file);
 };
 /**
  * 【Development Only】

@@ -1,4 +1,5 @@
 import Prop from "../Ux.Prop";
+import Column from '../Ux.Column';
 import Immutable from "immutable";
 import Sure from "./Ai.Stream.Sure";
 import Ai from "../ai/AI";
@@ -14,6 +15,7 @@ class Table {
         this.config = Prop.fromHoc(this.reference, "table");
         if (!this.config) this.config = {};
         this.config = Immutable.fromJS(this.config).toJS();
+        if (this.config.columns) Column.uiTableColumn(this.reference, this.config.columns);
         return this;
     }
 
