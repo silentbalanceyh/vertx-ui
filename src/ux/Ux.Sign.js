@@ -8,8 +8,7 @@ const SCHEMA = {
     OAuth: () => {
         const user = Global.isLogged();
         if (user) {
-            const value = Encrypt.encryptBase64(`${user.uniqueId}:${user.token}`);
-            return `Bearer ${value}`
+            return `Bearer ${user.token}`;
         }
     },
     Basic: () => {
