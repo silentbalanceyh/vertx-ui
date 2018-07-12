@@ -1,15 +1,10 @@
-import React from 'react'
-import {Card} from 'antd';
+import React from 'react';
 
 class Component extends React.PureComponent {
-    render() {
-        const {$router} = this.props;
+    render(){
         return (
-            <Card className={"page-card"} bordered={false}>
-                {$router.path()}
-            </Card>
+            <div>Path:/system/role</div>
         )
     }
 }
-
-export default Component
+export default Component;
