@@ -200,7 +200,7 @@ const _ajaxOptions = (method, headers) => {
  */
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
     const $params = Immutable.fromJS(params).toJS();
-    const api = `${Cv.ENDPOINT}${uri}`;
+    const api = `${Cv['ENDPOINT']}${uri}`;
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {

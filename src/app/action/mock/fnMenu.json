@@ -1,0 +1,28 @@
+{
+    "mock": true,
+    "data": [
+        {
+            "key": "82c787d7-9aa9-403f-8866-084283184ea6",
+            "active": true,
+            "left": 1,
+            "level": 1,
+            "text": "系统管理",
+            "icon": "setting",
+            "tscript": "EXPAND",
+            "name": "zui.editor",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982"
+        },
+        {
+            "key": "c4582b3f-b177-42b7-a26d-4085b51d6981",
+            "active": true,
+            "left": 2,
+            "level": 2,
+            "text": "表单设计器",
+            "icon": "layout",
+            "name": "zui.editor.form",
+            "uri": "/editor/form",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        }
+    ]
+}

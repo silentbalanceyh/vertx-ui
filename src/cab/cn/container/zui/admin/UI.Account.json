@@ -1,0 +1,38 @@
+{
+    "_menu": [
+        {
+            "key": "key.menu.user",
+            "icon": "user",
+            "text": "个人中心"
+        },
+        {
+            "key": "key.menu.setting",
+            "icon": "setting",
+            "text": "设置"
+        },
+        {
+            "key": "key.menu.lock",
+            "icon": "lock",
+            "text": "修改密码"
+        },
+        {
+            "key": "key.menu.divide",
+            "divide": true
+        },
+        {
+            "key": "key.menu.logout",
+            "icon": "logout",
+            "text": "退出登录",
+            "op": "logout"
+        }
+    ],
+    "_window": {
+        "key.menu.logout": {
+            "title": "警告",
+            "content": "您将注销当前账号退出该系统，确认？",
+            "okText": "注销",
+            "cancelText": "取消",
+            "maskClosable": false
+        }
+    }
+}
