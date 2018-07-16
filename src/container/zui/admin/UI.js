@@ -4,6 +4,7 @@ import React from "react";
 import Ux from 'ux';
 import Op from './Op';
 import {Layout} from 'antd'
+import {PagerHeader} from "web";
 import Types from './Act.Types';
 // -- Sider Bar
 import SiderBar from './UI.Sider'
@@ -11,6 +12,26 @@ import GlobalHeader from './UI.Header'
 
 const {zero} = Ux;
 const {Content} = Layout;
+
+const buildNavs = (reference = {}) => {
+    const {$menus, $router} = reference.props;
+    let current = $menus.to().filter(menu => menu.uri &&
+        0 < $router.path().indexOf(menu.uri));
+    current = (current[0]) ? current[0].key : undefined;
+    // 构造导航栏
+    const navigator = Ux.elementBranch($menus.to(), current, "parentId");
+    const $nav = [];
+    $nav.push(Ux.fromHoc(reference, "nav"));
+    if (navigator) {
+        navigator.forEach(item => $nav.push({
+            key: item.name,
+            text: item.text,
+            // 必须添加"/"前缀，否则会生成错误路由
+            uri: (item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined
+        }))
+    }
+    return $nav;
+};
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
@@ -53,6 +74,9 @@ class Component extends React.PureComponent {
                                   {...Ux.toEffect(this.state)}
                                   {...Ux.toProp(this.props, 'router', 'user')} />
                     <Content>
+                        <div className={"page-header"}>
+                            <PagerHeader {...Ux.toProp(this.props, 'router')} $navs={buildNavs(this)}/>
+                        </div>
                         <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>
                 </Layout>

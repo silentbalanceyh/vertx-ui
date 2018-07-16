@@ -4,6 +4,7 @@
     "dependencies": {
         "@antv/data-set": "^0.8.9",
         "@antv/g2": "^3.2.4",
+        "@antv/g6": "^2.0.5-beta",
         "@types/random-js": "^1.0.30",
         "@types/react": "^16.4.6",
         "@types/react-redux": "^6.0.4",
