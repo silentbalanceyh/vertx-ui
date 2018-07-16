@@ -3,7 +3,7 @@ import Random from './Ux.Random'
 import Norm from './Ux.Normalize'
 import Prop from './Ux.Prop'
 import viewRender from './_internal/Ux.View'
-import {Button, Col, Form, Row} from 'antd'
+import {Button, Col, Form, Input, Row} from 'antd'
 import Dg from './Ux.Debug'
 import Immutable from 'immutable';
 import U from 'underscore';
@@ -91,6 +91,14 @@ const jsxField = (reference, item = {}, render) => {
         </Form.Item>
     ) : jsxRender(item)
 };
+
+const jsxHidden = (reference, name, initialValue) => {
+    const {form} = reference.props;
+    const {getFieldDecorator} = form;
+    return getFieldDecorator(name, {
+        initialValue
+    })(<Input key={name} type={"hidden"}/>)
+};
 /**
  * Jsx单行字段的Render处理
  * @method jsxFieldRow
@@ -158,43 +166,49 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     // 行配置处理
     const formConfig = Prop.fromHoc(reference, "form");
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
+    const hiddens = Norm.extractHidden(reference);
     // 读取配置数据
-    return form.map((row, index) => (
-        <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
-            {_uiRow(row).map(item => {
-                item = Immutable.fromJS(item).toJS();
-                // 初始化
-                if (values.hasOwnProperty(item.field)) {
-                    if (!item.optionConfig) {
-                        item.optionConfig = {};
-                    }
-                    item.optionConfig.initialValue = values[item.field];
-                }
-                // 填平高度
-                const rowItem = rowConfig[index];
-                if (item.optionItem && rowItem && 0 < Object.keys(rowItem).length) {
-                    if (item.optionItem.style) {
-                        // 直接合并
-                        for (const key in rowItem) {
-                            if (rowItem.hasOwnProperty(key)) {
-                                item.optionItem.style[key] = rowItem[key];
+    return (
+        <div>
+            {hiddens.inputs.map(name => jsxHidden(reference, name, values[name]))}
+            {form.map((row, index) => (
+                <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
+                    {_uiRow(row).map(item => {
+                        item = Immutable.fromJS(item).toJS();
+                        // 初始化
+                        if (values.hasOwnProperty(item.field)) {
+                            if (!item.optionConfig) {
+                                item.optionConfig = {};
+                            }
+                            item.optionConfig.initialValue = values[item.field];
+                        }
+                        // 填平高度
+                        const rowItem = rowConfig[index];
+                        if (item.optionItem && rowItem && 0 < Object.keys(rowItem).length) {
+                            if (item.optionItem.style) {
+                                // 直接合并
+                                for (const key in rowItem) {
+                                    if (rowItem.hasOwnProperty(key)) {
+                                        item.optionItem.style[key] = rowItem[key];
+                                    }
+                                }
+                            } else {
+                                item.optionItem.style = rowItem;
                             }
                         }
-                    } else {
-                        item.optionItem.style = rowItem;
-                    }
-                }
-                if (item.hasOwnProperty("title")) {
-                    // 单Title
-                    return _jsxFieldTitle(item);
-                } else if (item.hasOwnProperty('grid')) {
-                    return _jsxFieldGrid(item);
-                } else {
-                    return _jsxFieldCommon(reference, renders, item, span);
-                }
-            })}
-        </Row>
-    ));
+                        if (item.hasOwnProperty("title")) {
+                            // 单Title
+                            return _jsxFieldTitle(item);
+                        } else if (item.hasOwnProperty('grid')) {
+                            return _jsxFieldGrid(item);
+                        } else {
+                            return _jsxFieldCommon(reference, renders, item, span);
+                        }
+                    })}
+                </Row>
+            ))}
+        </div>
+    );
 };
 /**
  * 仅渲染交互式组件，Grid布局

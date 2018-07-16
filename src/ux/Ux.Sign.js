@@ -7,13 +7,13 @@ import Dg from './Ux.Debug';
 const SCHEMA = {
     OAuth: () => {
         const user = Global.isLogged();
-        if (user) {
+        if (user && user.token) {
             return `Bearer ${user.token}`;
         }
     },
     Basic: () => {
         const user = Global.isLogged();
-        if (user) {
+        if (user && user.token) {
             return "Basic " + user.token
         }
     }
