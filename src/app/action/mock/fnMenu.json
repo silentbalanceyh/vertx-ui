@@ -13,14 +13,62 @@
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982"
         },
         {
+            "key": "f9d1c979-ed89-4c62-a56e-7bf673f4dded",
+            "active": true,
+            "left": 1,
+            "level": 2,
+            "text": "模型设计",
+            "icon": "appstore",
+            "name": "zui.editor.model",
+            "uri": "/editor/model",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        },
+        {
             "key": "c4582b3f-b177-42b7-a26d-4085b51d6981",
             "active": true,
             "left": 2,
             "level": 2,
-            "text": "表单设计器",
+            "text": "表单设计",
             "icon": "layout",
             "name": "zui.editor.form",
             "uri": "/editor/form",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        },
+        {
+            "key": "7192d61a-adbd-451d-94fb-db6dfcf0e34e",
+            "active": true,
+            "left": 3,
+            "level": 2,
+            "text": "流程设计",
+            "icon": "enter",
+            "name": "zui.editor.workflow",
+            "uri": "/editor/workflow",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        },
+        {
+            "key": "38e79721-d8ed-4df0-8199-5f4fc591002a",
+            "active": true,
+            "left": 4,
+            "level": 2,
+            "text": "接口设计",
+            "icon": "api",
+            "name": "zui.editor.api",
+            "uri": "/editor/api",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        },
+        {
+            "key": "f815bbcf-1f2a-4c8a-93fa-119119bad714",
+            "active": true,
+            "left": 5,
+            "level": 2,
+            "text": "报表设计",
+            "icon": "pie-chart",
+            "name": "zui.editor.report",
+            "uri": "/editor/report",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
         }
