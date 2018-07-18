@@ -1,11 +1,12 @@
 import React from 'react'
-import {FormDesigner} from 'web'
+import './UI.css';
+import Toolbar from './UI.Toolbar';
 
 class Component extends React.PureComponent {
     render() {
         return (
-            <div>
-                <FormDesigner/>
+            <div id="editor">
+                <Toolbar/>
             </div>
         )
     }

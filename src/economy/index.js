@@ -23,3 +23,6 @@ export {default as SearchList} from './list/SearchList/UI';
 export {default as TabList} from './list/TabList/UI';
 
 export {default as TreeMenu} from './menu/TreeMenu/UI';
+
+export {default as FlowDesigner} from './designer/FlowDesigner/UI';
+export {default as FormDesigner} from './designer/FormDesigner/UI';

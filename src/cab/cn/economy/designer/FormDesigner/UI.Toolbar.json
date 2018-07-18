@@ -1,0 +1,33 @@
+{
+    "_collapse": {
+        "defaultActiveKey": [
+            "webBasic",
+            "webData",
+            "webCustom"
+        ],
+        "items": [
+            {
+                "header": "交互式组件",
+                "key": "webBasic",
+                "children": [
+                    {
+                        "text": "InputText / 输入框",
+                        "key": "webInput"
+                    },
+                    {
+                        "text": "InputNumber / 数字输入框",
+                        "key": "webInputNumber"
+                    }
+                ]
+            },
+            {
+                "header": "数据组件",
+                "key": "webData"
+            },
+            {
+                "header": "自定义组件",
+                "key": "webCustom"
+            }
+        ]
+    }
+}

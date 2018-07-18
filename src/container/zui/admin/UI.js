@@ -73,7 +73,7 @@ class Component extends React.PureComponent {
                     <GlobalHeader fnCollapse={$op.collapse(this)}
                                   {...Ux.toEffect(this.state)}
                                   {...Ux.toProp(this.props, 'router', 'user')} />
-                    <Content>
+                    <Content className={"rx-content"}>
                         <div className={"page-header"}>
                             <PagerHeader {...Ux.toProp(this.props, 'router')} $navs={buildNavs(this)}/>
                         </div>
