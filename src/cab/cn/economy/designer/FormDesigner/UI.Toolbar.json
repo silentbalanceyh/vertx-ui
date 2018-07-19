@@ -1,9 +1,7 @@
 {
     "_collapse": {
-        "defaultActiveKey": [
-            "webBasic",
-            "webData",
-            "webCustom"
+        "activeKey": [
+            "webBasic"
         ],
         "items": [
             {
@@ -31,23 +29,33 @@
                         "icon": "check-square-o"
                     },
                     {
+                        "text": "开关",
+                        "key": "webSwitch",
+                        "icon": "switcher"
+                    },
+                    {
                         "text": "选择框",
                         "key": "webSelect",
                         "icon": "select"
                     },
                     {
-                        "text": "树形选择框",
+                        "text": "级联选择框",
+                        "key": "webCascader",
+                        "icon": "code-o"
+                    },
+                    {
+                        "text": "树形选择器",
                         "key": "webTreeSelect",
                         "icon": "share-alt"
                     },
                     {
-                        "text": "日期选择框",
-                        "key": "webDate",
+                        "text": "日期选择器",
+                        "key": "webDatePicker",
                         "icon": "calendar"
                     },
                     {
-                        "text": "时间选择框",
-                        "key": "webTime",
+                        "text": "时间选择器",
+                        "key": "webTimePicker",
                         "icon": "clock-circle-o"
                     },
                     {
@@ -61,14 +69,6 @@
                         "icon": "bars"
                     }
                 ]
-            },
-            {
-                "header": "数据组件",
-                "key": "webData"
-            },
-            {
-                "header": "自定义组件",
-                "key": "webCustom"
             }
         ]
     }

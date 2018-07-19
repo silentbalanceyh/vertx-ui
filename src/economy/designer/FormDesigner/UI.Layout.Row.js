@@ -1,6 +1,6 @@
 import React from 'react'
 import {_zero} from "../../_internal";
-import {Button, Col, Row, Select} from 'antd'
+import {Button, Col, Form, Row, Select} from 'antd'
 import Op from './Op'
 import Cell from './UI.Layout.Row.Cell'
 
@@ -27,16 +27,22 @@ class Component extends React.Component {
         }
         return (
             <Row className={"web-layout-row"}>
-                <Col span={22}>
-                    {$columns.map((column, index) => {
-                        const className = index < ($columns.length - 1) ?
-                            "web-layout-column" : "web-layout-column-none";
-                        if (!column.className) column.className = "";
-                        column.className = `${className} ${column.className}`;
-                        return <Cell item={column} key={column.key} pointer={pointer} target={target}/>
-                    })}
+                <Col span={22} style={{paddingTop: 6}}>
+                    <Form layout={"inline"}>
+                        {$columns.map((column, index) => {
+                            const className = index < ($columns.length - 1) ?
+                                "web-layout-column" : "web-layout-column-none";
+                            if (!column.className) column.className = "";
+                            column.className = `${className} ${column.className}`;
+                            return <Cell item={column} key={column.key}
+                                         columns={columns}
+                                         columnIndex={index}
+                                         reference={this.props.reference}
+                                         pointer={pointer} target={target}/>
+                        })}
+                    </Form>
                 </Col>
-                <Col span={2} style={{paddingLeft: 5}}>
+                <Col span={2} style={{paddingLeft: 5, paddingTop: 10}}>
                     <span>
                         <Button icon={"minus"} onClick={Op.rowRemove(reference, $key)}/>
                         &nbsp;&nbsp;
@@ -45,7 +51,7 @@ class Component extends React.Component {
                                 {items.map(item => <Select.Option key={item.key}>
                                     {item.text}
                                 </Select.Option>)}
-                            </Select>
+                                </Select>
                         </span>
                 </Col>
             </Row>

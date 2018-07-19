@@ -33,6 +33,7 @@
 
 .web-layout-row {
     margin: 3px;
+    vertical-align: middle;
     &-select {
         min-width: 60px;
     }
@@ -44,17 +45,33 @@
 .web-layout-column {
     border-right: dashed 1px @color-border !important;
     border-radius: 1px !important;
-    min-height: 52px !important;
+    min-height: 42px !important;
     &-none {
         border-radius: 1px !important;
-        min-height: 52px !important;
+        min-height: 42px !important;
+    }
+}
+
+.web-layout-bar {
+    padding: 2px 20px;
+    width: 100%;
+    border: 1px solid #E9E9E9;
+    height: 42px;
+    display: inline-block;
+    box-shadow: 0 8px 12px 0px rgba(0, 52, 107, 0.04);
+    i {
+        height: 36px;
+        width: 36px;
+        line-height: 32px;
+        border: 1px solid rgba(2, 2, 2, 0);
         &:hover {
-            background-color: lightblue !important;
-            opacity: 0.3;
+            cursor: pointer;
+            border: 1px solid #E9E9E9;
+            border-radius: 6px;
         }
     }
-    &:hover {
-        background-color: lightblue !important;
-        opacity: 0.3;
-    }
+}
+
+.web-layout-bar *::before {
+    font-size: 18px !important;
 }

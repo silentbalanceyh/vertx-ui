@@ -3,14 +3,16 @@ import './Cab.less'
 import {Button, Row} from 'antd';
 import Op from './Op';
 import LayoutRow from './UI.Layout.Row'
+import {_zero} from "../../_internal";
 
-class Component extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            rows: []
-        };
+@_zero({
+    "i18n.cab": require('./Cab.json'),
+    "i18n.name": "UI.Layout",
+    state: {
+        rows: []
     }
+})
+class Component extends React.Component {
 
     render() {
         const {rows = []} = this.state;
