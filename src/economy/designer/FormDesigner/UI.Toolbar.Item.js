@@ -1,20 +1,17 @@
 import React from 'react'
-import {List} from 'antd';
+import './Cab.less'
+import {Icon, List} from 'antd';
 import {DragSource} from 'react-dnd'
-
-function collect(connect, monitor) {
-    return {
-        isDragging: monitor.isDragging(),
-        connectDragSource: connect.dragSource()
-    }
-}
+import Op from './Op'
 
 class Component extends React.Component {
     render() {
-        const {text, connectDragSource} = this.props;
+        const {text, icon, connectDragSource, isDragging} = this.props;
         return connectDragSource(
-            <div>
+            <div className={isDragging ? `web-dragging-item` : `web-drag-item`}>
                 <List.Item>
+                    {icon ? <Icon type={icon}/> : false}
+                    &nbsp;&nbsp;
                     {text}
                 </List.Item>
             </div>
@@ -22,6 +19,8 @@ class Component extends React.Component {
     }
 }
 
-export default DragSource("FormDesigner", {
-    beginDrag: () => ({})
-}, collect)(Component);
+export default DragSource(
+    Op.DragTypes.FormDesigner,
+    Op.sourceSpec,
+    Op.sourceConnect
+)(Component);
