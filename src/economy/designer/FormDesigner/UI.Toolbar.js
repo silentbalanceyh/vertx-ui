@@ -20,7 +20,7 @@ class Component extends React.PureComponent {
                     return (
                         <Collapse.Panel {...rest}>
                             <List dataSource={children} renderItem={item => (
-                                <DragItem {...item} {...this.props}/>
+                                <DragItem {...item} type={item.key} {...this.props}/>
                             )}/>
                         </Collapse.Panel>
                     )

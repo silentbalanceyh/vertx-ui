@@ -42,7 +42,19 @@
 }
 
 .web-layout-column {
-    border: dashed 1px @color-border !important;
+    border-right: dashed 1px @color-border !important;
     border-radius: 1px !important;
     min-height: 52px !important;
+    &-none {
+        border-radius: 1px !important;
+        min-height: 52px !important;
+        &:hover {
+            background-color: lightblue !important;
+            opacity: 0.3;
+        }
+    }
+    &:hover {
+        background-color: lightblue !important;
+        opacity: 0.3;
+    }
 }

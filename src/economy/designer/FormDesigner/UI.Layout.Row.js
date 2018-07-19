@@ -2,6 +2,7 @@ import React from 'react'
 import {_zero} from "../../_internal";
 import {Button, Col, Row, Select} from 'antd'
 import Op from './Op'
+import Cell from './UI.Layout.Row.Cell'
 
 @_zero({
     "i18n.cab": require('./Cab.json'),
@@ -15,19 +16,25 @@ class Component extends React.Component {
     render() {
         const {$hoc, columns = 1} = this.state;
         const items = $hoc._("_info").items;
-        const {$key, reference} = this.props;
+        const {$key, reference, pointer, target = {}} = this.props;
         // 列处理
         const $columns = [];
         for (let idx = 0; idx < columns; idx++) {
             const column = {};
             column.span = 24 / columns;
-            column.key = `column${idx}`;
+            column.key = `${$key}-column${idx}`;
             $columns.push(column);
         }
         return (
             <Row className={"web-layout-row"}>
                 <Col span={22}>
-                    {$columns.map(column => (<Col className={"web-layout-column"} {...column}/>))}
+                    {$columns.map((column, index) => {
+                        const className = index < ($columns.length - 1) ?
+                            "web-layout-column" : "web-layout-column-none";
+                        if (!column.className) column.className = "";
+                        column.className = `${className} ${column.className}`;
+                        return <Cell item={column} key={column.key} pointer={pointer} target={target}/>
+                    })}
                 </Col>
                 <Col span={2} style={{paddingLeft: 5}}>
                     <span>

@@ -6,11 +6,18 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import {DragDropContext} from 'react-dnd';
 
 class Component extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = {
+            mounted: {}
+        }
+    }
+
     render() {
         return (
             Ux.aiGrid([21, 3],
-                <Layout/>,
-                <Toolbar/>
+                <Layout pointer={this} target={this.state.mounted}/>,
+                <Toolbar pointer={this}/>
             )
         )
     }

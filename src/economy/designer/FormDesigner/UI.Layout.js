@@ -1,6 +1,5 @@
 import React from 'react'
 import './Cab.less'
-import {DropTarget} from 'react-dnd'
 import {Button, Row} from 'antd';
 import Op from './Op';
 import LayoutRow from './UI.Layout.Row'
@@ -14,12 +13,14 @@ class Component extends React.Component {
     }
 
     render() {
-        const {connectDropTarget} = this.props;
         const {rows = []} = this.state;
-        return connectDropTarget(
+        const {target = {}} = this.props;
+        return (
             <div>
                 {rows.map(item => (<LayoutRow reference={this}
+                                              pointer={this.props['pointer']}
                                               key={item.key}
+                                              target={target}
                                               $key={item.key}/>))}
                 <Row>
                     <Button icon={'plus'} onClick={Op.rowAdd(this)}/>
@@ -29,8 +30,4 @@ class Component extends React.Component {
     }
 }
 
-export default DropTarget(
-    Op.DragTypes.FormDesigner,
-    Op.targetSpec,
-    Op.targetConnect
-)(Component);
+export default Component;
