@@ -3,6 +3,7 @@ import Validator from './Ux.Validator'
 import Type from './Ux.Type';
 import Html from './Ux.Html';
 import Immutable from 'immutable';
+import Ai from './ai/AI';
 
 const limitNumber = (length) => value => {
     if (value) {
@@ -85,6 +86,8 @@ const _normalizeUi = (reference, ui = []) => {
     ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
     ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
     ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
+    // Ai流程专用
+    Ai.hookerForm(ui);
     return ui;
 };
 /**

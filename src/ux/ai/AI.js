@@ -5,6 +5,8 @@ import AiButton from './AI.Action';
 import AiColumn from './AI.Column';
 import AiTab from './AI.Tab';
 import AiChart from './AI.Chart';
+import AiNormalize from './AI.Normalize';
+import LayoutTypes from './AI.Layout.Item';
 
 export default {
     ...AiLink,
@@ -13,5 +15,7 @@ export default {
     ...AiButton,
     ...AiColumn,
     ...AiTab,
-    ...AiChart
+    ...AiChart,
+    ...AiNormalize,
+    LayoutTypes
 }

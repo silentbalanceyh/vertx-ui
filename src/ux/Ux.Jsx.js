@@ -7,6 +7,7 @@ import {Button, Col, Form, Input, Row} from 'antd'
 import Dg from './Ux.Debug'
 import Immutable from 'immutable';
 import U from 'underscore';
+import Ai from './ai/AI';
 
 /**
  * 验证规则属性
@@ -140,21 +141,16 @@ const _jsxFieldTitle = (item = {}) => (
         {item.title}
     </Col>
 );
-const _jsxFieldCommon = (reference, renders, item = {}, span = 6) => {
-    const fnRender = renders[item.field];
+const _jsxFieldCommon = (reference, renders, item = {}, layout = {}) => {
+    const fnRender = Ai.hookerRender(item, renders, layout);
     if (fnRender) {
         // 渲染
-        const style = {};
-        if (item.optionItem && item.optionItem.style) {
-            if (item.optionItem.style.hasOwnProperty('height')) {
-                style.height = item.optionItem.style.height;
-            }
-        }
+        const {span} = layout;
         return (
-            <Col span={item.span ? item.span : span} key={item.field} style={style}>
+            <Col span={item.span ? item.span : span} key={item.field} style={Ai.hookerCol(item)}>
                 {/** 渲染字段 **/}
                 {jsxField(reference, item,
-                    renders[item.field] ? renders[item.field] : () => false)}
+                    fnRender ? fnRender : () => false)}
             </Col>
         )
     } else {
@@ -171,38 +167,25 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
     return (
         <div>
             {hiddens.inputs.map(name => jsxHidden(reference, name, values[name]))}
-            {form.map((row, index) => (
-                <Row key={`form-row-${index}`} className="debug-row" style={_uiDisplay(row, rowConfig[index])}>
-                    {_uiRow(row).map(item => {
+            {form.map((row, rowIndex) => (
+                <Row key={`form-row-${rowIndex}`} className="debug-row" style={_uiDisplay(row, rowConfig[rowIndex])}>
+                    {_uiRow(row).map((item, cellIndex) => {
                         item = Immutable.fromJS(item).toJS();
-                        // 初始化
-                        if (values.hasOwnProperty(item.field)) {
-                            if (!item.optionConfig) {
-                                item.optionConfig = {};
-                            }
-                            item.optionConfig.initialValue = values[item.field];
-                        }
                         // 填平高度
-                        const rowItem = rowConfig[index];
-                        if (item.optionItem && rowItem && 0 < Object.keys(rowItem).length) {
-                            if (item.optionItem.style) {
-                                // 直接合并
-                                for (const key in rowItem) {
-                                    if (rowItem.hasOwnProperty(key)) {
-                                        item.optionItem.style[key] = rowItem[key];
-                                    }
-                                }
-                            } else {
-                                item.optionItem.style = rowItem;
-                            }
-                        }
+                        const rowItem = rowConfig[rowIndex];
+                        // 初始化
+                        Ai.hookerItem(item, values, rowItem);
                         if (item.hasOwnProperty("title")) {
                             // 单Title
                             return _jsxFieldTitle(item);
                         } else if (item.hasOwnProperty('grid')) {
                             return _jsxFieldGrid(item);
                         } else {
-                            return _jsxFieldCommon(reference, renders, item, span);
+                            return _jsxFieldCommon(reference, renders, item, {
+                                span,
+                                rowIndex,
+                                cellIndex
+                            });
                         }
                     })}
                 </Row>

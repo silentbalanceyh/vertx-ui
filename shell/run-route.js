@@ -52,7 +52,7 @@ const generateRoute = (Component = [], Config) => {
         const route = {};
         route.layout = tpl;
         route.page = item;
-        route.uri = item.replace(/_/g, "/");
+        route.uri = item.replace(/_/g, "/").replace(/\$/g, '-');
         routes.push(route);
     });
     return routes;
@@ -63,7 +63,7 @@ const layoutDir = collect('./src/container');
 let line = [];
 const layouts = [];
 layoutDir.forEach(layout => {
-    const key = layout.replace(/\./g, '').replace(/-/g, '').replace(/\//g, '_');
+    const key = layout.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
     line.push(`import ${key} from '${layout}/UI';`);
     layouts.push(key);
 });
@@ -81,7 +81,7 @@ const pageDir = collect('./src/components');
 line = [];
 const variables = [];
 pageDir.forEach(layout => {
-    const key = layout.replace(/\./g, '').replace(/-/g, '').replace(/\//g, '_');
+    const key = layout.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
     line.push(`import ${key} from '${layout}/UI';`);
     variables.push(key);
 });
@@ -99,7 +99,9 @@ fs.writeFile("src/components/index.js", content, () => {
     const routes = generateRoute(variables, routeConfig);
     // 3.根据路由规则计算生成片段
     const lines = [];
-    routes.forEach(route => lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`));
+    routes.forEach(route => {
+        lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`);
+    });
     // 4.代码块
     let codeBlock = "";
     lines.forEach(line => codeBlock += "\t\t" + line + "\n");

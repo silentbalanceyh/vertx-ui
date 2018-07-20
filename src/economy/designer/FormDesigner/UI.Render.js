@@ -14,7 +14,7 @@ import {
     TreeSelect
 } from 'antd';
 import Immutable from 'immutable';
-import LayoutOption from './UI.Render.Layout';
+import Ai from '../../../ux/ai/AI';
 import U from 'underscore';
 
 const Search = Input.Search;
@@ -63,7 +63,7 @@ const webSelect = (pointer, column) => _itemRender(pointer, column, (config) => 
 const _calcItem = (options = {}, column = {}) => {
     options = Immutable.fromJS(options).toJS();
     const {columns, columnIndex} = column;
-    Object.assign(options.item, LayoutOption[columns + "" + columnIndex]);
+    Object.assign(options.item, Ai.LayoutTypes[columns + "" + columnIndex]);
     return options;
 };
 const _itemRender = (reference, column, jsx) => {
