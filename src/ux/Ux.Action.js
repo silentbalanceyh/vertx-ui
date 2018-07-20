@@ -88,11 +88,23 @@ const rxSubmit = (reference = {}, $_loading = "", {
         }
     }, () => loading(false));
 };
+
+const rxInit = (props, params = {}) => {
+    if (U.isFunction(props.zxInit)) {
+        const {$router} = props;
+        const paramData = Immutable.fromJS(params).toJS();
+        if ($router) {
+            Object.assign(paramData, $router.params());
+        }
+        props.zxInit(paramData);
+    }
+};
 /**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
     runSubmit,
-    rxSubmit
+    rxSubmit,
+    rxInit
 }

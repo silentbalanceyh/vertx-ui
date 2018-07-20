@@ -25,8 +25,8 @@ const ajaxUri = (uri, method = "get", params = {}) => {
     const query = Expr.formatQuery(uri, params);
     // 最终请求路径
     api = "get" === method || "delete" === method
-        ? `${Cv.ENDPOINT}${api}${query}`
-        : `${Cv.ENDPOINT}${api}`;
+        ? `${Cv['ENDPOINT']}${api}${query}`
+        : `${Cv['ENDPOINT']}${api}`;
     return api;
 };
 /**
@@ -107,7 +107,7 @@ const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
     Cv.MOCK && mockData.mock ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
         : fetch(request)
-            .then(response => Log.response(null, response, request.method))
+            .then(response => Log.response(request, response, request.method))
             .then(response => response.ok
                 ? response.json().then(body => Promise.resolve(ajaxAdapter(body)))
                 : response.json().then(data => Promise.reject({
@@ -139,10 +139,7 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
     const api = ajaxUri(uri, method, params);
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
-    const request = new Request(api, {
-        method,
-        headers
-    });
+    const request = new Request(api, _ajaxOptions(method, headers));
     return ajaxResponse(request, mockData, $params);
 };
 /**
@@ -158,9 +155,7 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {
-        method,
-        headers,
-        mode: "cors",
+        ..._ajaxOptions(method, headers),
         body: ajaxParams(params)
     });
     return ajaxResponse(request, mockData, $params);
@@ -181,6 +176,21 @@ const _logAjax = (api, method, params, mockData) => {
         Log.request(api, method, params);
     }
 };
+
+const _ajaxOptions = (method, headers) => {
+    const options = {};
+    options.method = method;
+    options.headers = headers;
+    if (Cv.hasOwnProperty('CORS_MODE')) {
+        options.mode = Cv['CORS_MODE'];
+    } else {
+        options.mode = 'cors';
+    }
+    if (Cv.hasOwnProperty('CORS_CREDENTIALS')) {
+        options.credentials = Cv['CORS_CREDENTIALS'];
+    }
+    return options;
+};
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程写数据方法
  * @method ajaxWrite
@@ -190,13 +200,11 @@ const _logAjax = (api, method, params, mockData) => {
  */
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
     const $params = Immutable.fromJS(params).toJS();
-    const api = `${Cv.ENDPOINT}${uri}`;
+    const api = `${Cv['ENDPOINT']}${uri}`;
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {
-        method,
-        headers,
-        mode: "cors",
+        ..._ajaxOptions(method, headers),
         body: ajaxParams(params)
     });
     return ajaxResponse(request, mockData, $params);

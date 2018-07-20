@@ -84,7 +84,6 @@ class RxFlow {
                             Object.assign(result, processed);
                         }
                     });
-                    console.info(result);
                     return result;
                 })
         }

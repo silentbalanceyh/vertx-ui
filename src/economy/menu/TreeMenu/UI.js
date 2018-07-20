@@ -1,6 +1,7 @@
 import React from 'react'
 import {DataLabor} from 'entity';
 import {Icon, Tree} from 'antd';
+import Immutable from 'immutable';
 
 const TreeNode = Tree.TreeNode;
 const renderNode = (item = {}) => {
@@ -15,7 +16,7 @@ const renderNode = (item = {}) => {
 
 class Component extends React.PureComponent {
     render() {
-        const {$config = {}, $data = [], jsx = {}} = this.props;
+        const {$config = {}, $data = [], $hitted = [], jsx = {}} = this.props;
         const {fnSelect, fnCheck} = this.props;
         const {
             label = "label", id = "key",
@@ -25,6 +26,7 @@ class Component extends React.PureComponent {
         const treeConfig = {
             label, id, pid, value: id, sort, level
         };
+        const dataKey = Immutable.fromJS($data.filter(item => !!item[pid]).map(item => item[id]));
         const treeData = DataLabor.getTree($data, treeConfig);
         const attrs = {};
         if (fnSelect) attrs.onSelect = fnSelect;
@@ -35,6 +37,7 @@ class Component extends React.PureComponent {
         attrs.defaultExpandAll = true;
         attrs.style = {width: "90%"};
         attrs.showIcon = true;
+        attrs.defaultCheckedKeys = $hitted.filter(selectedKey => dataKey.contains(selectedKey));
         return (
             <Tree {...attrs} {...jsx}>
                 {treeData.to().map(item => renderNode(item))}

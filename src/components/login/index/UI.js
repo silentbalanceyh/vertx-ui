@@ -4,7 +4,7 @@ import Ux from 'ux';
 import Op from './Op';
 import {Form} from 'antd';
 
-const {zero, Logger} = Ux;
+const {zero} = Ux;
 const jsx = {
     username: Ux.aiInput,
     password: Ux.aiInput,
@@ -13,7 +13,7 @@ const jsx = {
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
-    .form().logger(Logger.form)
+    .form()
     .to()
 )
 class Component extends React.PureComponent {

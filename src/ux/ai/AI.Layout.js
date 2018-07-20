@@ -10,7 +10,9 @@ import RxAnt from './AI.RxAnt';
  */
 const aiRows = (config = [], ...jsx) => (config.map((row, index) => (
     <Row className={row ? row : ""} key={`$$AiRow${index}`}>
-        {jsx[index]}
+        <Col span={24}>
+            {jsx[index]}
+        </Col>
     </Row>
 )));
 
