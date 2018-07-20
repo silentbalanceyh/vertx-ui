@@ -28,5 +28,6 @@
             "female": "女"
         }
     },
-    "_loading": "加载中……"
+    "_loading": "加载中……",
+    "_placeholder": "必填"
 }

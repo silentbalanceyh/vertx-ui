@@ -142,7 +142,7 @@ const _jsxFieldTitle = (item = {}) => (
     </Col>
 );
 const _jsxFieldCommon = (reference, renders, item = {}, layout = {}) => {
-    const fnRender = Ai.hookerRender(item, renders, layout);
+    const fnRender = Ai.hookerRender(item, renders, layout, reference);
     if (fnRender) {
         // 渲染
         const {span} = layout;
@@ -263,9 +263,15 @@ const jsxOp = (reference = {}, column = 4, op = {}) => {
  * @param op 追加方法
  * @return {*}
  */
-const uiFieldForm = (reference = {}, renders = {}, column = 4, values = {}, op = {}) => {
+const uiFieldForm = (reference = {}, renders = {}, column = 4, values, op = {}) => {
     // Fix Issue
-    if (!values) values = {};
+    if (!values) {
+        if (reference.props['$inited']) {
+            values = reference.props['$inited'];
+        } else {
+            values = {};
+        }
+    }
     return (
         <Form layout="inline" className="page-form">
             {jsxFieldGrid(reference, renders, column, values)}

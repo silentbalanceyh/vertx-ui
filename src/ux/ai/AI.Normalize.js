@@ -2,6 +2,7 @@ import U from "underscore";
 import Random from '../Ux.Random';
 import Ai from './AI.Input';
 import LayoutType from './AI.Layout.Item';
+import Prop from '../Ux.Prop';
 
 const _aiTitle = (item) => {
     if ("string" === typeof item) {
@@ -64,10 +65,23 @@ const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
     _aiRowConfig(item, rowConfig);
 };
 
-const _aiValidator = (item = {}) => {
-    if (item.optionConfig && !item.optionConfig.hasOwnProperty("rules")) {
-        delete item.optionJsx.onFocus;
-        delete item.optionJsx.onBlur;
+const _aiValidator = (item = {}, reference) => {
+    if (item.optionConfig) {
+        if (!item.optionConfig.hasOwnProperty("rules")) {
+            delete item.optionJsx.onFocus;
+            delete item.optionJsx.onBlur;
+        } else {
+            const rules = item.optionConfig.rules.filter(item => item.required);
+            if (0 < rules.length) {
+                const placeholder = Prop.fromHoc(reference, "placeholder");
+                if (!item.optionJsx) {
+                    item.optionJsx = {};
+                }
+                if (!item.optionJsx.hasOwnProperty("placeholder")) {
+                    item.optionJsx.placeholder = placeholder;
+                }
+            }
+        }
     }
 };
 
@@ -98,9 +112,9 @@ const _aiLayout = (item, layout = {}) => {
     }
 };
 
-const hookerRender = (item, renders = {}, layout) => {
+const hookerRender = (item, renders = {}, layout, refenrece) => {
     // 如果无规则，则省略onFocus/onBlur
-    _aiValidator(item);
+    _aiValidator(item, refenrece);
     // 处理布局
     _aiLayout(item, layout);
     // 处理fnRender
