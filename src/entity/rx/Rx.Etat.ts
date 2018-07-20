@@ -8,10 +8,10 @@ class Etat {
     private _cab: undefined;
     private _cabFile: undefined;
     private _logger: undefined;
-    private _state: undefined;
+    private _state: any;
     private _loading: any;
-    private _dispatchTo: undefined;
-    private _stateTo: undefined;
+    private _dispatchTo: any = {};
+    private _stateTo: any;
     private _op: {};
 
     /**
@@ -66,12 +66,20 @@ class Etat {
         return this;
     }
 
+    init(fnInit: any) {
+        if (U.isFunction(fnInit)) {
+            // 初始化专用，特殊zero前缀
+            this._dispatchTo.zxInit = fnInit;
+        }
+        return this;
+    }
+
     connect(object, dispatch: boolean) {
         if (dispatch) {
             if (object && !object.hasOwnProperty('fnOut')) {
                 object.fnOut = Taper.fnFlush
             }
-            this._dispatchTo = object;
+            this._dispatchTo = Object.assign(this._dispatchTo, object);
         } else {
             this._stateTo = object;
         }
