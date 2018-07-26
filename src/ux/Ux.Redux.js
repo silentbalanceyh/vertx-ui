@@ -1,5 +1,3 @@
-import React from 'react';
-
 /**
  * 读取Tabular专用数据，读取所有数据，一般用于Rxjs
  * @method rxDatum
@@ -29,20 +27,7 @@ const rxAssist = (data, key, orderBy = 'order') => {
     result[hittedKey] = data.sort((left, right) => left[orderBy] - right[orderBy]);
     return result;
 };
-/**
- * @class Redux
- * @description 专用State状态树中的读取器
- */
-const rxLoadingInit = (reference, Component) => {
-    const {$inited, ...rest} = reference.props;
-    if ($inited && $inited.is()) {
-        return <Component $inited={$inited.to()} {...rest}/>
-    } else {
-        return false;
-    }
-};
 export default {
     rxDatum,
-    rxAssist,
-    rxLoadingInit
+    rxAssist
 }

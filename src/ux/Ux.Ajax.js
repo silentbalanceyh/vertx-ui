@@ -105,7 +105,8 @@ const ajaxAdapter = (body = {}) => {
  */
 const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    Cv.MOCK && mockData.mock ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
+    (mockData['forceMock'] || (Cv.MOCK && mockData.mock))
+        ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
         : fetch(request)
             .then(response => Log.response(request, response, request.method))
             .then(response => response.ok
@@ -169,8 +170,8 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
  * @param params 当前Ajax请求的参数信息
  * @param mockData 【Mock环境可用】当前Ajax请求的Mock数据
  */
-const _logAjax = (api, method, params, mockData) => {
-    if (mockData && mockData.mock) {
+const _logAjax = (api, method, params, mockData = {}) => {
+    if ((mockData && mockData.mock) || mockData['forceMock']) {
         Log.mock(params, mockData.data, method + " " + api);
     } else {
         Log.request(api, method, params);
@@ -189,6 +190,7 @@ const _ajaxOptions = (method, headers) => {
     if (Cv.hasOwnProperty('CORS_CREDENTIALS')) {
         options.credentials = Cv['CORS_CREDENTIALS'];
     }
+    console.info(options);
     return options;
 };
 /**

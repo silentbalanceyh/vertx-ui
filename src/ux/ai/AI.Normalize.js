@@ -122,11 +122,22 @@ const hookerRender = (item, renders = {}, layout, refenrece) => {
     // 如果fnRender没有
     if (!fnRender) {
         // 如果item中存在holder属性
-        if (!item.hasOwnProperty('holder')) {
-            // 设置item中的render属性
-            let renderKey = item.render;
-            if (!renderKey) renderKey = 'aiInput';
-            fnRender = Ai[renderKey];
+        if (item.field.startsWith("$")) {
+            // 特殊Op注入
+            if ("$button" === item.field) {
+                // Button专用注入
+                let renderKey = item.render;
+                if (!renderKey) renderKey = 'aiAction';
+                fnRender = Ai[renderKey];
+            }
+        } else {
+            // 如果是$button则触发特殊处理
+            if (!item.hasOwnProperty('holder')) {
+                // 设置item中的render属性
+                let renderKey = item.render;
+                if (!renderKey) renderKey = 'aiInput';
+                fnRender = Ai[renderKey];
+            }
         }
     }
     return fnRender;

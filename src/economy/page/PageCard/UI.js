@@ -1,6 +1,7 @@
 import React from 'react'
-import {Card} from 'antd';
+import {Button, Card} from 'antd';
 import Ux from 'ux';
+import Immutable from 'immutable';
 
 /**
  * 基本要求：
@@ -21,10 +22,43 @@ class Component extends React.PureComponent {
             children, reference, card = 'page-card',
             $key = "page"
         } = this.props;
-        const topbar = Ux.fromHoc(reference, $key);
+        // 左边按钮
+        let topbar = Ux.fromHoc(reference, $key);
+        topbar = Immutable.fromJS(topbar).toJS();
+        if (topbar.left) {
+            topbar.title = (<span>
+                {topbar ? topbar.title : ""}
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Button.Group>
+                    {topbar.left.map(button => {
+                        const {text, connectId, ...rest} = button;
+                        if (connectId) {
+                            rest.onClick = () => Ux.connectId(connectId);
+                        }
+                        return <Button {...rest}>{text}</Button>
+                    })}
+                </Button.Group>
+            </span>)
+        } else {
+            topbar.title = topbar ? topbar.title : "";
+        }
+        // 右边关闭按钮
+        let back = false;
+        if (topbar.back) {
+            back = (<Button icon={"cross"} shape="circle" type={"ghost"}
+                            onClick={() => {
+                                // 写状态树
+                                if (topbar.back.state) {
+                                    Ux.writeTree(reference, topbar.back.state);
+                                }
+                                // 导航处理
+                                Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
+                            }}/>)
+        }
         return (
             <Card className={card} bordered={false}
-                  title={topbar ? topbar.title : ""}>
+                  title={topbar ? topbar.title : ""}
+                  extra={back}>
                 {children}
             </Card>
         )

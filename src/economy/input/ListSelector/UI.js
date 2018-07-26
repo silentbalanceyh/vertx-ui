@@ -54,6 +54,14 @@ class Component extends React.PureComponent {
             </span>
         );
         dialog.onCancel = Op.fnDialog(this, false);
+        // 客户端分页？
+        const pageAndChange = {};
+        if ("client" !== config.pagination) {
+            pageAndChange.onChange = Op.fnChange(this);
+            pageAndChange.pagination = uiPagination(this);
+        } else {
+            pageAndChange.pagination = true;
+        }
         return (
             <span>
                 <Input className="rx-readonly" readOnly {...jsx}
@@ -64,8 +72,7 @@ class Component extends React.PureComponent {
                            size={"small"}
                            loading={this.state.$loading}
                            rowSelection={uiSelection(this)}
-                           pagination={uiPagination(this)}
-                           onChange={Op.fnChange(this)}
+                           {...pageAndChange}
                            {...config.table} dataSource={$data.list}/>
                 </DynamicDialog>
             </span>

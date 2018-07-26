@@ -1,8 +1,7 @@
 import React from 'react';
-import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from 'antd';
+import {Button, Checkbox, DatePicker, Input, InputNumber, Modal, Radio, Select, TimePicker, TreeSelect} from 'antd';
 import {ListSelector} from "web";
 import RxAnt from './AI.RxAnt'
-import {Modal} from "antd/lib/index";
 
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
@@ -79,6 +78,27 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     return (<DatePicker {...jsx}/>);
 };
 
+const aiAction = (reference, jsx = {}) => {
+    if (reference.state) {
+        const {$op = {}} = reference.state;
+        const buttons = [];
+        for (const key in $op) {
+            if (key && key.startsWith("$op") &&
+                $op.hasOwnProperty(key)) {
+                const fnHoc = $op[key];
+                const button = {};
+                button.key = key;
+                button.id = key;
+                button.onClick = fnHoc(reference);
+                button.className = "ux-hidden";
+                buttons.push(button);
+            }
+        }
+        return buttons.map(button => <Button {...button}/>)
+    } else
+        return false;
+};
+
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<TimePicker {...jsx}/>)
@@ -132,6 +152,7 @@ export default {
     aiTreeSelect,
     aiDatePicker,
     aiTimePicker,
+    aiAction,
     // 二阶组件，带onChange事件的组件
     ai2Checkbox,
     ai2DatePicker,
