@@ -64,9 +64,49 @@ Ux.writeTree(reference, {
 const { $items, $datum, $data, $related } = this.props;
 ```
 
-## 4.总结
+## 4.不同的API说明
+
+### 4.1. rinit
+
+`rinit`为初始化方法，防止`undefined`专用的特殊方法，它会初始化两个数据模型：`DataObject`和`DataArray`，该方法签名如下：
+
+```typescript
+rinit(keys: Array<String> = [], isArray: boolean = false)
+```
+
+第一个参数将初始化变量值，传入的key是什么，则在props中生成`$key`的变量，第二个参数则表示当前初始化结构是一个`DataObject`还是一个`DataArray`，最终会使用`Redux`中的StateToProp转换到props中生成变量，如：
+
+```js
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
+    .connect(state => Ux.dataIn(state)
+        .rework({
+            datum: ["inited"]
+        })
+        .rinit(["inited"])   // rinit的API初始化DataObject
+        .to()
+    )
+    .loading("inited")
+    .cab("UI")
+    .to()
+)
+```
+
+上述代码中初始化了一个`inited`的变量，第二参默认是false，则转换成`DataObject`，所以可以使用下边代码从属性中提取变量
+
+```js
+const {$inited, ...rest} = this.props;
+// 这里的$inited一定不会是undefined，这是rinit的约定
+if($inited.is()){}
+```
+
+### 4.2. 其他的API参考子文档
+
+* [UI0009-1 - revamp](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-1-revamp.md)
+* [UI0009-2 - radial](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-2-radial.md)
+* [UI0009-3 - rework](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-3-rework.md)
+* [UI0009-4 - 重名覆盖之rapt](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-4-zhong-ming-fu-gai-zhi-rapt.md)
+
+## 5.总结
 
 了解了StateIn过后，就可以很方便配置`Redux`中的节点了。
-
-
 

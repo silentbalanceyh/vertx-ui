@@ -35,7 +35,7 @@ export default {
 * 只扫描二级目录文件，如`container/login/index`下为`login`模块中的`index`页面；
 * 扫描的文件名为固定JS文件名：`UI.js`，该文件名必须遵循后边的开发规范，不可变更；
 
-> 由于是系统自动生成，所以不可能重名！
+> 由于是系统自动生成，所以不可能重名，每个根目录都只能使用UI.js的入口文件。
 
 ### 1.2. 页面文件
 
@@ -60,8 +60,9 @@ src/components/index.js
 * 路由地址自动生成，不需要开发者管理，遵循基本命名规范即可；
 * `Action、Epic`等核心组件也由系统自动生成，遵循命名规则即可；
 * 对于特殊需求使用路由编连，为一次性配置；
+* 最终会根据目录中的系统配置生成路由文件，路由数据在`src/environment/routes.js`文件中，该文件会在每次启动时自动扫描`container`和`components`中的`UI.js`文件；
 
-路由编连文件位于：
+路由和模板的编连文件位于：
 
 ```shell
 src/route.json
@@ -108,8 +109,17 @@ src/container/user/admin/UI.js
 src/components/user/password/UI.js
 # 该页面的名称为_user_password
 # 页面的最终路径地址为：/{APP_ROUTE}/user/password
-# APP_ROUTE为当前应用使用的路由环境变量
 ```
+
+需要注意的是二级目录可支持`-`符号，比如目前系统中存在的
+
+```
+src/components/todo/cert-start/UI.js
+# 该页面的名称为_todo_cert_start
+# 页面的路径地址为：/{APP_ROUTE}/todo/cert-start
+```
+
+其中APP\_ROUTE为环境变量中配置的路由根地址，详细情况参考：[UI0002 - 环境变量](/document/ui0002-huan-jing-bian-liang.md)
 
 ## 2. 资源文件
 
@@ -121,7 +131,7 @@ src/cab/cn/*            # 中文资源目录
 src/cab/en/*            # 英文资源目录
 ```
 
-资源目录中的文件会通过zero引用到环境中，使用哪个目录的文件取决于环境变量：`APP_LANGUAGE`
+资源目录中的文件会通过zero引用到环境中，使用哪个目录的文件取决于启动时的环境变量：`APP_LANGUAGE`，环境变量参考：[UI0002 - 环境变量](/document/ui0002-huan-jing-bian-liang.md)
 
 ## 3. Epic和Action文件
 
@@ -151,5 +161,5 @@ src/environment/datum.js
 
 ## 4. Summary
 
-上述文件除开资源文件以外，其他所有的文件在添加和删除后都需要重启框架，否则不会生效，环境变量可根据不同的“租户”或“用户”进行指定，不同租户除了路由根地址不一致，其他所有内容都是一致的，所以可执行docker环境中的隔离部署，为不同的用户部署完全不同的应用，但访问的是同一个后端。
+上述文件除开资源文件以外，其他所有的文件在添加和删除后都需要**重启服务器**，否则不会生效，环境变量可根据不同的“租户”或“用户”进行指定，不同租户除了路由根地址不一致，其他所有内容都是一致的，所以可执行docker环境中的隔离部署，为不同的用户部署完全不同的应用，但访问的是同一个后端。
 
