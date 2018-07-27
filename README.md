@@ -54,6 +54,8 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
   * [UI0009-3 - rework](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-3-rework.md)
   * [UI0009-4 - 重名覆盖之rapt](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-4-zhong-ming-fu-gai-zhi-rapt.md)
 * [UI0010 - zero注解](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
+  * [UI0010-1 - Object写法](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie/ui0010-1-objectxie-fa.md)
+  * [UI0010-2 - Ux新写法（推荐）](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie/ui0010-2-uxxin-xie-fa.md)
 * [UI0011 - TypeScript数据模型](/document/2-kai-fa-wen-dang/ui0011-typescriptshu-ju-mo-xing.md)
 * [UI0013 - 页面代码结构说明](/document/2-kai-fa-wen-dang/ui0013-ye-mian-dai-ma-jie-gou-shuo-ming.md)
 * [UI0016 - Form的复杂布局（Grid）](/document/2-kai-fa-wen-dang/ui0016-formde-fu-za-bu-ju-ff08-grid.md)

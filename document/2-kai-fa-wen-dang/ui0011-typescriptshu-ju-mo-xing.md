@@ -65,5 +65,7 @@ export { default as QTree } from "./query/QTree";
 
 ## 3. 总结
 
-暂时不介绍其他的API的相关用法，不过大部分API都包含了`to()`和`_`取数据和转换的方法。
+暂时不介绍其他的API的相关用法，不过大部分API都包含了`to()`和`_`取数据和转换的方法，参考下边截图打印的数据类型不是JavaScript中的Object/Array，而是自定义的数据模型类型。
+
+![](/document/image/UI0011-11.png)
 
