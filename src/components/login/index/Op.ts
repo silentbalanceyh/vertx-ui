@@ -6,7 +6,7 @@ const fnLogin = Ux.rxJet().success((values: any, reference: any) => {
         Ux.showMessage(reference, "user");
         return;
     }
-    if ("pl,okmijn123" !== values.password) {
+    if ("lang.yu" !== values.password) {
         Ux.showMessage(reference, "password");
         return;
     }

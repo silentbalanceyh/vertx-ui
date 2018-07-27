@@ -9,6 +9,7 @@
     * [UI0006 - 模板/组件规范示例](document/ui0006-mo-677f-zu-jian-kai-fa-gui-fan.md)
     * [UI0007 - 编码规范——文件命名](document/ui0007-jiao-shou-jia-tui-jian-bian-ma-gui-fan.md)
     * [UI0008 - 编码规范——代码约定](document/ui0008-bian-ma-gui-fan-2014-2014-dai-ma-yue-ding.md)
+    * [UI0000 - 项目初始化](document/ui0000-xiang-mu-chu-shi-hua.md)
   * [2 - 开发文档](document/2-kai-fa-wen-dang.md)
     * [UI0009 - StateIn中的r系列API](document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)
     * [UI0010 - zero注解](document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
