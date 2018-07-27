@@ -15,29 +15,105 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 * Vert.x Zero Up Framework: [http://www.vertxup.cn](http://www.vertxup.cn)
 * Zero UI Framework: [http://www.vertxui.cn](http://www.vertxui.cn)
-
-依赖库固定版本（升级后有兼容性问题）
-
-| 库名称 | 当前版本 | 最新版 |
-| :--- | :--- | :--- |
-| rxjs | 5.5.10 | 6.1.0 |
-| webpack | 3.11.0 | 4.6.0 |
-| webpack-dev-server | 3.0.0 | 3.1.4 |
-| awesome-typescript-loader | 4.0.1 | 5.0.0 |
+* Zero AI Tool：[http://www.vertxai.cn](http://www.vertxai.cn)
 
 文档基本前缀说明。
 
 * `UI`文档为开发文档，提供给开发人员使用来开发项目专用；
 * `UT`文档为研发文档，提供给研发人员开发Zero UI专用；
 * `UC`文档位自定义组件专用文档，用于描述目前系统中存在的自定义组件；
+* `AI`文档为自动化组件专用文档，用于一些目前自定义的解析规则相关；
 
-## 2. 整体架构
+## 2. 创建项目
+
+### 2.1.初始化
+
+初始化工程需要依赖Zero AI工具，参考链接【[Reference](http://www.vertxai.cn/doc/gong-cheng-chu-shi-hua.html)】步骤如下：
+
+```shell
+## 1.安装vertx-ai工具
+npm install -g vertx-ai
+
+## 2.创建一个空目录
+mkdir zero-demo
+
+## 3.（依赖工具）初始化工程，初始化速度取决于你和Github站点的网速
+ai zero -o zero-demo
+
+################################# 输出 #################################
+[Zero AI] Zero AI 代码生成器, GitHub : https://github.com/silentbalanceyh/vertx-ui
+[Zero AI] 当前版本: 0.2.11  确认您的Node版本 ( >= 10.x ) 支持ES6.
+[Zero AI] Zero AI 系统启动......
+[Zero AI] 命令参数：
+{
+    "out": "zero-demo"
+}
+[Zero AI] 初始化项目：Cloning into 'zero-demo'...
+
+[Zero AI] 删除文件：zero-demo/CNAME
+[Zero AI] 删除文件：zero-demo/LICENSE
+[Zero AI] 删除文件：zero-demo/_config.yml
+[Zero AI] 删除文件：zero-demo/yarn.lock
+[Zero AI] 删除文件：zero-demo/.git/HEAD
+[Zero AI] 删除文件：zero-demo/.git/config
+[Zero AI] 删除文件：zero-demo/.git/description
+[Zero AI] 删除文件：zero-demo/.git/hooks/applypatch-msg.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/commit-msg.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/post-update.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/pre-applypatch.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/pre-commit.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/pre-push.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/pre-rebase.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/pre-receive.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/prepare-commit-msg.sample
+[Zero AI] 删除文件：zero-demo/.git/hooks/update.sample
+[Zero AI] 删除文件：zero-demo/.git/index
+[Zero AI] 删除文件：zero-demo/.git/info/exclude
+[Zero AI] 删除文件：zero-demo/.git/logs/HEAD
+[Zero AI] 删除文件：zero-demo/.git/logs/refs/heads/master
+[Zero AI] 删除文件：zero-demo/.git/logs/refs/remotes/origin/HEAD
+[Zero AI] 删除文件：zero-demo/.git/objects/pack/pack-329f632bbbd2fd8acfa8acfaa37f60d8daef71d3.idx
+[Zero AI] 删除文件：zero-demo/.git/objects/pack/pack-329f632bbbd2fd8acfa8acfaa37f60d8daef71d3.pack
+[Zero AI] 删除文件：zero-demo/.git/packed-refs
+[Zero AI] 删除文件：zero-demo/.git/refs/heads/master
+[Zero AI] 删除文件：zero-demo/.git/refs/remotes/origin/HEAD
+[Zero AI] 初始化完成，项目地址：zero-demo
+```
+
+初始化完成过后，就可以用WebStorm或者VSCode打开该项目。
+
+### 2.2.运行
+
+进入到初始化的`zero-demo`目录
+
+```shell
+cd zero-demo
+```
+
+安装依赖包（等待依赖安装完成后即可运行）
+
+```shell
+npm install
+```
+
+运行项目，由于有生成功能，所以启动项目的时候需要依赖启动脚本（`run-zero`），Windows/Mac都包含了该脚本。
+
+```shell
+./run-zero.sh（非Windows）
+./run-zero.bat（Windows）
+```
+
+运行完成后会出现以下输出：
+
+
+
+## 3. 整体架构
 
 整个Zero框架的结构图如下：
 
 ![](/document/image/arch.png)
 
-## 3. 文档列表
+## 4. 文档列表
 
 ### 环境说明
 
@@ -56,11 +132,11 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [UI0013 - 页面代码结构说明](/document/2-kai-fa-wen-dang/ui0013-ye-mian-dai-ma-jie-gou-shuo-ming.md)
 * [UI0016 - Form的复杂布局（Grid）](/document/2-kai-fa-wen-dang/ui0016-formde-fu-za-bu-ju-ff08-grid.md)
 * [UI0015 - required，Form中的字段验证](/document/2-kai-fa-wen-dang/ui0015-formzhong-de-zi-duan-yan-zheng.md)
+* [UI0019 - 按钮的connect机制](/document/2-kai-fa-wen-dang/ui0019-an-niu-de-connect-ji-zhi.md)
 
 ### 自定义组件
 
-* [UC0001 - page/TitleCard](/document/2-kai-fa-wen-dang/ui0017-ye-tou-ying-yong.md)
-* [UC0002 - header/TopBar](/document/2-kai-fa-wen-dang/uc0002-headertopbar.md)
+* [UC0001 - page/PageCard](/document/2-kai-fa-wen-dang/ui0017-ye-tou-ying-yong.md)
 
 ### 步步为营
 
@@ -69,6 +145,11 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [UI0005 - 开发第一个页面](/document/ui0005-kai-fa-di-yi-ge-ye-mian.md)
 * [UI0014 - 开发提交按钮事件](/document/ui0014-kai-fa-ti-jiao-an-niu-shi-jian.md)
 * [UI0018 - 登录/注销跳转](/document/2-kai-fa-wen-dang/ui0018-deng-5f55-zhu-xiao-tiao-zhuan.md)
+
+### 属性解析器
+
+* [AI0001 - aiExpr属性解析器](/document/ai0001-aiexprshu-xing-jie-xi-qi.md)
+* [AI0002 - aiExprButton属性解析器](/document/ai0002-aiexprbuttonshu-xing-jie-xi-qi.md)
 
 ### Ux工具包
 

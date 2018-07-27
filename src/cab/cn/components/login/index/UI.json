@@ -1,10 +1,20 @@
 {
     "_info": {
         "title": "ZeroUI开发框架",
-        "backendLabel": "后端",
-        "backend": "http://www.vertxup.cn",
-        "frontendLabel": "前端",
-        "frontend": "http://www.vertxui.cn"
+        "links": [
+            {
+                "text": "后端",
+                "uri": "http://www.vertxup.cn"
+            },
+            {
+                "text": "前端",
+                "uri": "http://www.vertxui.cn"
+            },
+            {
+                "text": "工具",
+                "uri": "http://www.vertxai.cn"
+            }
+        ]
     },
     "_form": {
         "ui": [
