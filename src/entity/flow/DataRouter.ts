@@ -29,7 +29,7 @@ class DataRouter implements BindContainer {
             match: {}
         }
     ) {
-        const { history, location, match } = props;
+        const {history, location, match} = props;
         this.history = history;
         this.location = location;
         this.match = match;
@@ -45,6 +45,7 @@ class DataRouter implements BindContainer {
             );
         }
     }
+
     /**
      *
      * 判断两个路由是否相同
@@ -61,6 +62,7 @@ class DataRouter implements BindContainer {
         const thatPath = router.path();
         return thisPath === thatPath;
     }
+
     /**
      * 生成绑定按钮执行操作的函数：Button
      * @param props
@@ -71,7 +73,7 @@ class DataRouter implements BindContainer {
     bind(props: any, uri: string, params: any = {}): Function {
         const reference = this;
         // 和uri执行绑定
-        const { $app } = props;
+        const {$app} = props;
         const $navigator: Navigator = props.$navigator;
         if ($app) {
             uri = `/${$app._("path")}${uri}`;
@@ -96,6 +98,11 @@ class DataRouter implements BindContainer {
     path(): string {
         return this.location.pathname;
     }
+
+    uri(uri: string = ""): string {
+        return uri + this.location.search;
+    }
+
     params(): any {
         // 参数合并：Path变量和Params变量
         const params = _query(this.location.search);

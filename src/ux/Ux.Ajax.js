@@ -7,6 +7,7 @@ import Env from './Ux.Env';
 import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
 import Immutable from 'immutable'
+import Type from './Ux.Type';
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -281,6 +282,70 @@ const rxEdict = (type, promise, responser = data => data) => {
         console.error("[ Ajax ] rxEdict: type or promise is invalid.", type, promise);
     }
 };
+
+const _rxPromise = (container, nextPromise = []) => {
+    // 读取第一个promise
+    const middles = {};
+    let promise = nextPromise[0](container.request, container.response);
+    if (1 < nextPromise.length) {
+        for (let idx = 1; idx < nextPromise.length; idx++) {
+            promise = promise.then(data => {
+                middles[idx] = data;
+                container.next[idx] = data;
+                return nextPromise[idx](container.request, container.response, middles);
+            })
+        }
+    }
+    return promise.then(data => {
+        container.next[0] = data;
+        return Promise.resolve(data);
+    });
+};
+const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
+    if (type && U.isFunction(promise)) {
+        return $action => {
+            const actionType = $action.ofType(type.getType());
+            // 链式结构
+            const container = {};
+            container.next = Immutable.fromJS({}).toJS();
+            const rxNext = (params, key = "request") => {
+                container[key] = params;
+                return params;
+            };
+            return Rx.Observable.from(actionType)
+                .map(action => action.payload)
+                .map(params => rxNext(params))
+                .map(promise)
+                // 触发后续流程专用的nextPromise
+                .map(promise => promise
+                    .then(data => Promise.resolve(rxNext(data, "response")))
+                    .then(() => _rxPromise(container, nextPromise.map(item => item.ajax)))
+                )
+                .switchMap(promise => Rx.Observable.from(promise)
+                    .map(() => {
+                        // 合并最后的状态
+                        const state = {};
+                        const responseData = responser(container.response);
+                        if (responseData) {
+                            Object.assign(state, responseData);
+                        }
+                        const processors = nextPromise.map(item => item.processor);
+                        Type.itObject(container.next, (key, value) => {
+                            const fun = processors[key];
+                            if (U.isFunction(fun)) {
+                                const itemData = fun(value);
+                                Object.assign(state, itemData);
+                            }
+                        });
+                        return state;
+                    })
+                    .map(data => Env.dataOut(data))
+                );
+        }
+    } else {
+        console.error("[ Ajax ] rxEclat: type or promise is invalid.", type, promise, nextPromise);
+    }
+};
 /**
  * 构造微服务路径专用
  * @param serviceName 服务名称
@@ -293,7 +358,10 @@ const _buildApi = (serviceName = "", uri = "") => `/${serviceName}${uri}`.replac
  */
 export default {
     rxEpic,
+    // 单个Ajax的Promise
     rxEdict,
+    // 连接两个Ajax的Promise，后一个和前一个存在依赖关系
+    rxEclat,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch

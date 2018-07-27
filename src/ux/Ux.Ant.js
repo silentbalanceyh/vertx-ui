@@ -18,6 +18,7 @@ import {
     Radio,
     Row,
     Select,
+    Spin,
     Steps,
     Tabs,
     Timeline,
@@ -29,19 +30,9 @@ import {Link} from "react-router-dom";
 const Step = Steps.Step;
 const SubMenu = Menu.SubMenu;
 
-const _buildUri = (item = {}, $router = {}) => {
-    if ("$MAIN$" === item.uri) {
-        return Ux.Env.ENTRY_ADMIN;
-    } else if ("$SELF$" === item.uri) {
-        return $router ? $router.path() : "";
-    } else {
-        return item.uri;
-    }
-};
-
 const _buildLink = (item = {}, $router) =>
     item.uri ? (
-        <Link to={_buildUri(item, $router)} className={item.className}>
+        <Link to={Ux.aiUri(item, $router)} className={item.className}>
             {item.text}
         </Link>
     ) : (
@@ -246,6 +237,17 @@ const uiGrid = (grid = [], ...jsx) => {
     )
 };
 /**
+ * 纯的Loading信息
+ * @param text
+ */
+const uiLoading = (text = "", size = "large") => {
+    return (
+        <div style={{width: "100%", padding: "12px", textAlign: "center"}}>
+            <Spin tip={text} size={size}/>
+        </div>
+    )
+};
+/**
  * 根据传入的grid渲染Col/Row专用方法
  * @method uiIfElse
  * @param condition 判断条件
@@ -283,6 +285,7 @@ const uiBtnHiddens = (hidden = {}) => {
 };
 export default {
     uiGrid,
+    uiLoading,
     uiLoader,
     uiIfElse,
     uiBtnHidden,

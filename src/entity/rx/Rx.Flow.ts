@@ -1,11 +1,54 @@
 import Ux from 'ux';
 import * as Q from 'q';
+import * as Immutable from 'immutable';
+
+const rxMetadata = (ref, action, parameters) => {
+    // 构造最终处理
+    const ajaxes = [];
+    const processors = [];
+    // 下一个函数引用
+    for (const field in ref) {
+        if (ref.hasOwnProperty(field)) {
+            if (parameters[field]) {
+                ajaxes.push((params = {}) => {
+                    Object.assign(params, parameters[field]);
+                    return ref[field].ajax(params);
+                })
+            } else {
+                ajaxes.push(ref[field].ajax);
+            }
+            processors.push(ref[field].processor);
+        }
+    }
+    return {ajaxes, processors}
+};
+
+const rxAjaxResponse = (processors = []) => (response) => {
+    let result = {};
+    response.forEach((item, index) => {
+        if (item) {
+            const data = item;
+            const processor = processors[index];
+            const processed = processor(data);
+            Object.assign(result, processed);
+        }
+    });
+    return result;
+};
+
+const rxAjax = (ajaxes = []) => {
+    return (input: any = {}) => {
+        const {$props, ...params} = input;
+        return Q.all(ajaxes.map(ajax => ajax(params, $props)))
+    };
+};
 
 class RxFlow {
     private action: any;
     private metadata: any;
     private promiseMap: any = {};
     private parameterMap: any = {};
+    private next: any = [];
 
     private constructor(action: any) {
         this.action = action;
@@ -16,7 +59,7 @@ class RxFlow {
     }
 
     bind(metadata) {
-        this.metadata = metadata;
+        this.metadata = Immutable.fromJS(metadata).toJS();
         return this;
     }
 
@@ -33,6 +76,11 @@ class RxFlow {
                 }
             }
         });
+        return this;
+    }
+
+    then(promise) {
+        this.next.push(promise);
         return this;
     }
 
@@ -56,36 +104,17 @@ class RxFlow {
             const action = this.action;
             const parameters = this.parameterMap;
             // 构造最终处理
-            const ajaxes = [];
-            const processors = [];
-
-            for (const field in ref) {
-                if (ref.hasOwnProperty(field)) {
-                    if (parameters[field]) {
-                        ajaxes.push((params = {}) => {
-                            Object.assign(params, parameters[field]);
-                            return ref[field].ajax(params);
-                        })
-                    } else {
-                        ajaxes.push(ref[field].ajax);
-                    }
-                    processors.push(ref[field].processor);
-                }
+            const nextArray = this.next;
+            const {ajaxes = [], processors = []} = rxMetadata(ref, action, parameters);
+            const ajax = rxAjax(ajaxes);
+            const processor = rxAjaxResponse(processors);
+            if (0 === nextArray.length) {
+                // 单结果处理
+                return Ux.rxEdict(action, ajax, processor)
+            } else {
+                // 多结果处理
+                return Ux.rxEclat(action, ajax, processor, nextArray)
             }
-            return Ux.rxEdict(action,
-                (param) => Q.all(ajaxes.map(ajax => ajax(param))),
-                (response) => {
-                    let result = {};
-                    response.forEach((item, index) => {
-                        if (item) {
-                            const data = item;
-                            const processor = processors[index];
-                            const processed = processor(data);
-                            Object.assign(result, processed);
-                        }
-                    });
-                    return result;
-                })
         }
     }
 }

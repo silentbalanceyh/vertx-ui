@@ -5,6 +5,7 @@ import DataObject from "../data/DataObject";
 import DataArray from "../data/DataArray";
 import Navigator from "../flow/Navigator";
 import DataLabor from "../DataLabor";
+import * as U from 'underscore';
 
 const _isTyped = (reference: any) => {
     return (
@@ -17,9 +18,10 @@ const _isTyped = (reference: any) => {
 };
 
 class StateIn {
+    callback: Function = () => {
+    };
     private mapping: any = {};
     private keys: Array<String> = [];
-    callback: Function = () => {};
 
     constructor(mapping: any = {}, callback: Function) {
         this.mapping = mapping;
@@ -40,7 +42,17 @@ class StateIn {
                 if (_isTyped(data)) {
                     $state = $state.setIn(path, data);
                 } else {
-                    $state = $state.setIn(path, DataLabor.get(data));
+                    const type = typeof data;
+                    if (U.isArray(data) || "object" === type) {
+                        $state = $state.setIn(path, DataLabor.get(data));
+                    } else {
+                        if (data) {
+                            console.error(`[ StateIn ] The data type is invalid, support (Object/Array) only. \n ` +
+                                `(key = ${key}, value = ${data} type = ${type})`)
+                        } else {
+                            $state = $state.setIn(path, DataLabor.get(data));
+                        }
+                    }
                 }
             }
         });
