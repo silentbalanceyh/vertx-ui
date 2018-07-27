@@ -1,6 +1,7 @@
 import React from 'react'
 import Prop from '../Ux.Prop';
 import Random from '../Ux.Random';
+import Cv from '../Ux.Constant';
 
 /**
  * 根据key值检索读取资源配置节点，生成Label和链接地址
@@ -25,7 +26,16 @@ const aiHLink = (reference, key) => {
         console.error(" -> [ZI] This method require '_info' configuration in cab file.");
     }
 };
-
+const aiUri = (item = {}, $router) => {
+    if ("$MAIN$" === item.uri) {
+        return Cv.ENTRY_ADMIN;
+    } else if ("$SELF$" === item.uri) {
+        return $router ? $router.uri() : "";
+    } else {
+        return $router ? $router.uri(item.uri) : item.uri;
+    }
+};
 export default {
-    aiHLink
+    aiHLink,
+    aiUri,
 }

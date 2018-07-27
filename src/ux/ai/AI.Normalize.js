@@ -2,6 +2,7 @@ import U from "underscore";
 import Random from '../Ux.Random';
 import Ai from './AI.Input';
 import LayoutType from './AI.Layout.Item';
+import Prop from '../Ux.Prop';
 
 const _aiTitle = (item) => {
     if ("string" === typeof item) {
@@ -64,10 +65,23 @@ const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
     _aiRowConfig(item, rowConfig);
 };
 
-const _aiValidator = (item = {}) => {
-    if (item.optionConfig && !item.optionConfig.hasOwnProperty("rules")) {
-        delete item.optionJsx.onFocus;
-        delete item.optionJsx.onBlur;
+const _aiValidator = (item = {}, reference) => {
+    if (item.optionConfig) {
+        if (!item.optionConfig.hasOwnProperty("rules")) {
+            delete item.optionJsx.onFocus;
+            delete item.optionJsx.onBlur;
+        } else {
+            const rules = item.optionConfig.rules.filter(item => item.required);
+            if (0 < rules.length) {
+                const placeholder = Prop.fromHoc(reference, "placeholder");
+                if (!item.optionJsx) {
+                    item.optionJsx = {};
+                }
+                if (!item.optionJsx.hasOwnProperty("placeholder")) {
+                    item.optionJsx.placeholder = placeholder;
+                }
+            }
+        }
     }
 };
 
@@ -98,9 +112,9 @@ const _aiLayout = (item, layout = {}) => {
     }
 };
 
-const hookerRender = (item, renders = {}, layout) => {
+const hookerRender = (item, renders = {}, layout, refenrece) => {
     // 如果无规则，则省略onFocus/onBlur
-    _aiValidator(item);
+    _aiValidator(item, refenrece);
     // 处理布局
     _aiLayout(item, layout);
     // 处理fnRender
@@ -108,11 +122,22 @@ const hookerRender = (item, renders = {}, layout) => {
     // 如果fnRender没有
     if (!fnRender) {
         // 如果item中存在holder属性
-        if (!item.hasOwnProperty('holder')) {
-            // 设置item中的render属性
-            let renderKey = item.render;
-            if (!renderKey) renderKey = 'aiInput';
-            fnRender = Ai[renderKey];
+        if (item.field.startsWith("$")) {
+            // 特殊Op注入
+            if ("$button" === item.field) {
+                // Button专用注入
+                let renderKey = item.render;
+                if (!renderKey) renderKey = 'aiAction';
+                fnRender = Ai[renderKey];
+            }
+        } else {
+            // 如果是$button则触发特殊处理
+            if (!item.hasOwnProperty('holder')) {
+                // 设置item中的render属性
+                let renderKey = item.render;
+                if (!renderKey) renderKey = 'aiInput';
+                fnRender = Ai[renderKey];
+            }
         }
     }
     return fnRender;

@@ -3,6 +3,7 @@ import './Cab.less';
 import Ux from 'ux';
 import Op from './Op';
 import {Form} from 'antd';
+import Random from "../../../ux/Ux.Random";
 
 const {zero} = Ux;
 const jsx = {
@@ -18,6 +19,8 @@ const jsx = {
 )
 class Component extends React.PureComponent {
     render() {
+        const links = Ux.fromPath(this, "info", "links");
+        console.info(links);
         return Ux.aiGrid([2, "span= 20, className=login-form", 2],
             Ux.Null,
             Ux.aiRows(["title", 'form', 'notice'],
@@ -25,10 +28,12 @@ class Component extends React.PureComponent {
                 <Form layout={"horizontal"}>
                     {Ux.jsxFieldGrid(this, jsx, 1)}
                 </Form>,
-                [
-                    Ux.aiHLink(this, "backend"),
-                    Ux.aiHLink(this, "frontend")
-                ]
+                links.map(link => (
+                    <div key={Random.randomString(7)}>
+                        {link.text}：
+                        <a href={link.uri} target={"_blank"}>{link.uri}</a>
+                    </div>
+                ))
             )
         )
     }

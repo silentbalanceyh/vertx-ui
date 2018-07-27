@@ -19,6 +19,14 @@ const valueValid = (data = {}) => {
         }
     }
 };
+
+const valueInt = (literal = "", dft = 0) => {
+    let ret = parseInt(literal, 10);
+    if (isNaN(ret)) {
+        ret = dft;
+    }
+    return ret;
+};
 /**
  * 不重复追加值到`item`对象中（包含则不设置）
  * @method valueAppend
@@ -215,6 +223,7 @@ const valueOnChange = (reference = {}, state, key = "source") => {
  */
 export default {
     stringConnect,
+    valueInt,
     valueValid,
     valueAppend,
     valueDuration,

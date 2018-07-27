@@ -16,6 +16,7 @@ export {default as TopBar} from './header/TopBar/UI';
 export {default as DynamicDialog} from './dialog/DynamicDialog/UI';
 export {default as TitleCard} from './page/TitleCard/UI';
 export {default as HelpCard} from './page/HelpCard/UI';
+export {default as PageCard} from './page/PageCard/UI';
 
 export {default as PageList} from './list/PageList/UI';
 export {default as EditList} from './list/EditList/UI';

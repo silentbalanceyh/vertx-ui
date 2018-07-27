@@ -1,3 +1,5 @@
+import U from 'underscore'
+
 /**
  * 读取Tabular专用数据，读取所有数据，一般用于Rxjs
  * @method rxDatum
@@ -24,13 +26,12 @@ const rxDatum = (data, orderBy = 'order') => {
 const rxAssist = (data, key, orderBy = 'order') => {
     const result = {};
     const hittedKey = `assist.${key.replace(/\./g, '_')}`;
+    if (!U.isArray(data) && data.list) {
+        data = data.list;
+    }
     result[hittedKey] = data.sort((left, right) => left[orderBy] - right[orderBy]);
     return result;
 };
-/**
- * @class Redux
- * @description 专用State状态树中的读取器
- */
 export default {
     rxDatum,
     rxAssist

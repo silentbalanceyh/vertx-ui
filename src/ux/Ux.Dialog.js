@@ -82,7 +82,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
                 message = Expr.formatExpr(message, params);
             }
             return {fun, message};
-        } else if (modal.hasOwnProperty('success') || modal.hasOwnProperty('error')) {
+        } else if (modal.hasOwnProperty('success') || modal.hasOwnProperty('error') || modal.hasOwnProperty('confirm')) {
             /*
              * {
              *      "success":{
@@ -92,13 +92,18 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
              *      "error":{
              *          "key1":"message1",
              *          "key2":"message2"
+             *      },
+             *      "confirm":{
              *      }
              * }
              */
-            const {success = {}, error = {}} = modal;
-            const type = success[key] && !error[key] ? "success" : "error";
+            const {success = {}, error = {}, confirm = {}} = modal;
+            let type = null;
+            if (success[key]) type = "success";
+            if (error[key]) type = "error";
+            if (confirm[key]) type = "confirm";
             const fun = dialog ? _dialogFun[type] : _messageFun[type];
-            let message = "success" === type ? success[key] : error[key];
+            let message = success[key] || error[key] || confirm[key];
             if (params) {
                 message = Expr.formatExpr(message, params);
             }

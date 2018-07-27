@@ -37,8 +37,8 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 return;
             }
             const params = Immutable.fromJS(values).toJS();
-            params.language = Ux.Env.LANGUAGE;
-            params.key = $key;
+            params.language = Ux.Env['LANGUAGE'];
+            if ($key) params.key = $key;
             // 去掉undefined
             Value.valueValid(params);
             // 成功过后的回调
@@ -96,6 +96,8 @@ const rxInit = (props, params = {}) => {
         if ($router) {
             Object.assign(paramData, $router.params());
         }
+        // 特殊引用注入
+        paramData.$props = props;
         props.zxInit(paramData);
     }
 };
