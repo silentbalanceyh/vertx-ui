@@ -12,7 +12,7 @@ class Component extends React.PureComponent {
     render() {
         return (
             <PageCard reference={this}>
-                <AttrTree reference={this}/>
+                <AttrTree reference={this} $name={"PageCard"}/>
             </PageCard>
         )
     }

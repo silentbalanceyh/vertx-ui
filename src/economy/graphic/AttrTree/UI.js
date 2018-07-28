@@ -1,8 +1,63 @@
 import React from 'react'
 import G6 from '@antv/g6';
 import Immutable from 'immutable';
-import {Col, Collapse, Icon, Row} from 'antd';
+import {v4} from 'uuid';
+import {Col, Collapse, Icon, Row, Table} from 'antd';
 import {_zero} from "../../_internal";
+
+const renderColumn = (columns = [], mapping = {}) => {
+    columns.forEach(column => {
+        if ("source" === column.dataIndex) {
+            column.render = (text) => {
+                const item = mapping['source'][text];
+                const {label, ...rest} = item;
+                return (
+                    <span><Icon {...rest}/>&nbsp;&nbsp;{label}</span>
+                )
+            }
+        }
+        if ("type" === column.dataIndex) {
+            column.render = (text) => (<span style={{
+                color: "#bc0981"
+            }}>{text}</span>)
+        }
+        if ("required" === column.dataIndex) {
+            column.render = (text) => {
+                const type = text ? "check" : "close";
+                return <Icon type={type}/>;
+            }
+        }
+        if ("name" === column.dataIndex) {
+            column.render = (text) => {
+                if ("reference" === text || "children" === text) {
+                    return (
+                        <span style={{
+                            color: "#9551f6"
+                        }}>{text}</span>
+                    )
+                } else {
+                    return (
+                        <span style={{
+                            color: "#1e358c"
+                        }}>{text}</span>
+                    )
+                }
+            }
+        }
+        if ("value" === column.dataIndex) {
+            column.render = (text, record) => {
+                if ("String" === record.type) {
+                    text = `"${text}"`;
+                    return (<span style={{
+                        color: "#87d068"
+                    }}>{text}</span>)
+                } else {
+                    return text;
+                }
+            }
+        }
+    })
+};
 
 @_zero({
     "i18n.cab": require('./Cab.json'),
@@ -90,31 +145,67 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {id = "g6Tree"} = this.props;
+        const {id = "g6Tree", $name} = this.props;
+        const {reference} = this.props;
         const current = this.state.$hoc;
         const icon = current._("comment").icon;
+        const table = current._("table");
+        const data = reference.state.$hoc._("data");
+        data.forEach(item => item.key = v4());
+        renderColumn(table.columns, current._("mapping"));
         return (
-            <Row>
-                <Col span={4}>
-                    <Collapse activeKey={[icon.key]}>
-                        <Collapse.Panel header={icon.title} key={icon.key}>
-                            {icon.items.map(item => (
-                                <div key={item.color} style={{
-                                    marginBottom: 10
-                                }}>
-                                    <Icon type={"info-circle"} style={{
-                                        fontSize: 16,
-                                        color: item.color
-                                    }}/>&nbsp;&nbsp;{item.text}
-                                </div>
-                            ))}
-                        </Collapse.Panel>
-                    </Collapse>
-                </Col>
-                <Col span={20}>
-                    <div id={id}/>
-                </Col>
-            </Row>
+            <div>
+                <Row style={{
+                    backgroundColor: "#f2f4f5",
+                    padding: 10,
+                    marginBottom: 10,
+                    fontSize: 14
+                }}>
+                    <Col span={23} offset={1}>
+                        <span style={{
+                            color: "#e43a32"
+                        }}>import</span>
+                        &nbsp;&nbsp;
+                        <span style={{
+                            color: "#3a8df7"
+                        }}>{`{ ${$name} }`}</span>
+                        &nbsp;&nbsp;
+                        <span style={{
+                            color: "#e43a32"
+                        }}>from</span>
+                        &nbsp;&nbsp;
+                        <span style={{
+                            color: "#418345"
+                        }}>'web';</span>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={3}>
+                        <Collapse activeKey={[icon.key]}>
+                            <Collapse.Panel header={icon.title} key={icon.key}>
+                                {icon.items.map(item => (
+                                    <div key={item.color} style={{
+                                        marginBottom: 10
+                                    }}>
+                                        <Icon type={"info-circle"} style={{
+                                            fontSize: 16,
+                                            color: item.color
+                                        }}/>&nbsp;&nbsp;{item.text}
+                                    </div>
+                                ))}
+                            </Collapse.Panel>
+                        </Collapse>
+                    </Col>
+                    <Col span={21}>
+                        <div id={id}/>
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Table pagination={false} {...table} dataSource={data}/>
+                    </Col>
+                </Row>
+            </div>
         )
     }
 }
