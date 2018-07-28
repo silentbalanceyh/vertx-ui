@@ -46,7 +46,7 @@ const buildNavs = (reference = {}) => {
         fnOut: Ux.fnOut,
     }, true)
     .state({
-        $_collapsed: true
+        $_collapsed: false
     })
     .to()
 )

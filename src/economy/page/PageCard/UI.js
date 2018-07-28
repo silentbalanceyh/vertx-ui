@@ -2,6 +2,7 @@ import React from 'react'
 import {Button, Card} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
+import PropTypes from 'prop-types';
 
 /**
  * 基本要求：
@@ -17,6 +18,11 @@ import Immutable from 'immutable';
  * $extra用于设置额外的附加工具栏
  */
 class Component extends React.PureComponent {
+    static propTypes = {
+        $key: PropTypes.string,
+        $card: PropTypes.string
+    };
+
     render() {
         const {
             children, reference, $card = 'page-card',
@@ -24,6 +30,8 @@ class Component extends React.PureComponent {
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
+        // ZeroError：检查点
+        if (!topbar) return Ux.fxRender(reference, $key);
         topbar = Immutable.fromJS(topbar).toJS();
         if (topbar.left) {
             topbar.left = Ux.aiExprButton(topbar.left);
@@ -43,15 +51,14 @@ class Component extends React.PureComponent {
         // 右边关闭按钮
         let back = false;
         if (topbar.back) {
-            back = (<Button icon={"cross"} shape="circle" type={"ghost"}
-                            onClick={() => {
-                                // 写状态树
-                                if (topbar.back.state) {
-                                    Ux.writeTree(reference, topbar.back.state);
-                                }
-                                // 导航处理
-                                Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
-                            }}/>)
+            back = (<Button icon={"cross"} shape="circle" type={"ghost"} onClick={() => {
+                // 写状态树
+                if (topbar.back.state) {
+                    Ux.writeTree(reference, topbar.back.state);
+                }
+                // 导航处理
+                Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
+            }}/>)
         }
         return (
             <Card className={$card} bordered={false}

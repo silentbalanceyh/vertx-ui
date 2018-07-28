@@ -6,7 +6,7 @@
             "active": true,
             "left": 1,
             "level": 1,
-            "text": "系统管理",
+            "text": "设计器",
             "icon": "setting",
             "tscript": "EXPAND",
             "name": "zui.editor",
@@ -71,6 +71,29 @@
             "uri": "/editor/report",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "82c787d7-9aa9-403f-8866-084283184ea6"
+        },
+        {
+            "key": "f6f5d6d3-253c-44a3-b323-fa3524487bf8",
+            "active": true,
+            "left": 2,
+            "level": 1,
+            "text": "Web组件",
+            "icon": "appstore-o",
+            "tscript": "EXPAND",
+            "name": "zui.control",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982"
+        },
+        {
+            "key": "a859a4d0-814b-42a3-95e8-0a0546545c75",
+            "active": true,
+            "left": 1,
+            "level": 2,
+            "text": "PageCard组件",
+            "icon": "layout",
+            "uri": "/control/page-card",
+            "name": "zui.control.page-cord",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
         }
     ]
 }

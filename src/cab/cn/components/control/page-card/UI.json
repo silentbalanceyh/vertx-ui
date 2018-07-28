@@ -1,0 +1,59 @@
+{
+    "_page": {
+        "title": "PageCard组件"
+    },
+    "_configuration": {
+        "items": {
+            "name": "PageCard组件",
+            "children": [
+                {
+                    "name": "props",
+                    "children": [
+                        {
+                            "name": "reference -- 父节点引用",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "children -- 子组件",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "$key --【page】Hoc根节点专用的$key属性",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$card --【page-card】className属性，默认",
+                            "color": "#e23c39"
+                        }
+                    ]
+                },
+                {
+                    "name": "_<hoc>",
+                    "children": [
+                        {
+                            "name": "title -- PageCard中的标题",
+                            "color": "#48a55d"
+                        },
+                        {
+                            "name": "left -- 左边工具栏",
+                            "color": "#48a55d"
+                        },
+                        {
+                            "name": "right -- 右边工具栏",
+                            "color": "#48a55d"
+                        },
+                        {
+                            "name": "back -- 是否显示返回按钮，并设置清除状态",
+                            "color": "#48a55d"
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 120,
+            "vgap": 10,
+            "height": 320
+        }
+    }
+}

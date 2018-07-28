@@ -1,6 +1,7 @@
 import Dg from "./Ux.Debug";
 import Value from "./Ux.Value";
 import Immutable from 'immutable';
+import E from './Ux.Error';
 
 /**
  * 直接从Hoc资源路径读取数据信息
@@ -34,9 +35,9 @@ const fromPath = (reference = {}, ...keys) => {
  * @return {null}
  */
 const fromHoc = (reference = {}, key = "") => {
-    Dg.ensureKey("fromHoc", key);
+    E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
     const {$hoc} = reference.state;
-    return $hoc ? $hoc._(key) : null;
+    return ($hoc) ? $hoc._(key) : null;
 };
 /**
  * 从路由参数中读取数据专用

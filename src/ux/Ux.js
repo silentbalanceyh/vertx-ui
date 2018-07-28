@@ -29,10 +29,13 @@ import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
 import AI from './ai/AI';
 import CHART from './Ux.Chart';
+import TERMINAL from './Ux.Terminal';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
+import E from './Ux.Error';
 
 export default {
+    ...TERMINAL,
     // 图标专用
     ...CHART,
     // 参数解析
@@ -49,6 +52,7 @@ export default {
     ...AJAX,
     // Log函数
     Logger: LOGGER,
+    E,
     // 加密解密
     ...ENCRYPT,
     // 随机

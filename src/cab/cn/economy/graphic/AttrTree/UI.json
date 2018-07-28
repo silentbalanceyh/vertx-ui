@@ -1,0 +1,22 @@
+{
+    "_comment": {
+        "icon": {
+            "key": "plIconColor",
+            "title": "色彩说明表",
+            "items": [
+                {
+                    "color": "#93f",
+                    "text": "专用属性表"
+                },
+                {
+                    "color": "#e23c39",
+                    "text": "必须属性"
+                },
+                {
+                    "color": "#48a55d",
+                    "text": "可选属性"
+                }
+            ]
+        }
+    }
+}

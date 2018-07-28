@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
         const dataArray = Op.fnMenuData($menus.to(), $app);
         return (
             <Sider trigger={null} collapsible collapsed={$_collapsed}
-                   width={300} className="menu-sider">
+                   width={264} className="menu-sider">
                 {/** 菜单顶部Logo链接 **/}
                 <div className="menu-logo">
                     <Link to={Ux.Env.ENTRY_ADMIN}>
