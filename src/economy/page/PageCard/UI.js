@@ -19,22 +19,20 @@ import Immutable from 'immutable';
 class Component extends React.PureComponent {
     render() {
         const {
-            children, reference, card = 'page-card',
+            children, reference, $card = 'page-card',
             $key = "page"
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
         topbar = Immutable.fromJS(topbar).toJS();
         if (topbar.left) {
+            topbar.left = Ux.aiExprButton(topbar.left);
             topbar.title = (<span>
                 {topbar ? topbar.title : ""}
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Button.Group>
                     {topbar.left.map(button => {
-                        const {text, connectId, ...rest} = button;
-                        if (connectId) {
-                            rest.onClick = () => Ux.connectId(connectId);
-                        }
+                        const {text, ...rest} = button;
                         return <Button {...rest}>{text}</Button>
                     })}
                 </Button.Group>
@@ -56,7 +54,7 @@ class Component extends React.PureComponent {
                             }}/>)
         }
         return (
-            <Card className={card} bordered={false}
+            <Card className={$card} bordered={false}
                   title={topbar ? topbar.title : ""}
                   extra={back}>
                 {children}
