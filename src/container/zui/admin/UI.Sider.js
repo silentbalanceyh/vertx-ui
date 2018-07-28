@@ -27,6 +27,7 @@ class Component extends React.PureComponent {
                 {/** 左边菜单项 **/}
                 <Menu key="mSider" theme="dark" mode="inline"
                       style={{padding: '16px 0px', width: '100%'}}
+                      defaultOpenKeys={["f6f5d6d3-253c-44a3-b323-fa3524487bf8"]}
                       onClick={Op.fnRouting(this, dataUris)}>
                     {dataArray.map(item => Ux.uiItemMenuTree({
                         ...item,
