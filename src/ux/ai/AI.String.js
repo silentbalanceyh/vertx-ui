@@ -20,7 +20,7 @@ const _style = (literal = "") => {
     style.color = `${styleArr[1]}`;
     return style;
 };
-const _iterator = (array = [], callback) => {
+const _iterator = (array = [], callback, objectCallback = data => data) => {
     const items = [];
     array.forEach(each => {
         if ("string" === typeof each) {
@@ -28,7 +28,7 @@ const _iterator = (array = [], callback) => {
             const item = callback(each.split(','));
             items.push(item);
         } else {
-            items.push(each);
+            items.push(objectCallback(each));
         }
     });
     return items;
@@ -88,6 +88,14 @@ const aiExprButton = (buttons = []) => _iterator(buttons, (values = []) => {
         item.onClick = () => Op.connectId(values[2]);
     }
     item.type = values[3] ? values[3] : "default";
+    if (values[4]) item.icon = values[4];
+    return item;
+}, item => {
+    if (item.connectId) {
+        const connectId = item.connectId;
+        item.onClick = () => Op.connectId(connectId);
+        delete item.connectId;
+    }
     return item;
 });
 export default {

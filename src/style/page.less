@@ -60,6 +60,19 @@
     }
 }
 
+.@{page-prefix}-card-collapse {
+    //margin: 24px 24px 0;
+    margin: 12px 12px 0;
+    background: @component-background;
+    :global {
+        .page-ant-modify;
+
+        .ant-card-body {
+            padding: 6px 12px !important;
+        }
+    }
+}
+
 .@{page-prefix}-upcard {
     //margin: 24px 24px 0;
     margin: 12px 12px 0;
@@ -225,4 +238,12 @@
     border: solid 1px red;
     border-radius: 5px;
     min-height: 200px;
+}
+
+.demo-window {
+    border: dashed 1px #f3f3f3;
+    background-color: #f3f3f3;
+    padding: 5px;
+    border-radius: 5px;
+    min-height: 600px;
 }

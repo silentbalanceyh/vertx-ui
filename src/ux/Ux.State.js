@@ -1,5 +1,7 @@
 import {DataLabor} from "entity";
 import Immutable from 'immutable';
+import E from './Ux.Error';
+import Type from './Ux.Type';
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
@@ -8,23 +10,33 @@ import Immutable from 'immutable';
  * @param state 写入的状态数据
  * @param dft 默认值
  */
-const writeTree = (reference = {}, state, dft = null) => {
-    const {fnOut} = reference.props;
-    if (fnOut) {
-        const $state = state ? Immutable.fromJS(state).toJS() : state;
-        fnOut(DataLabor.createIn($state, dft));
-    } else {
-        console.warn("[STATE] 'fnOut' function is missing in current component.", reference);
+const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) => {
+    const $state = state ? Immutable.fromJS(state).toJS() : state;
+    const fnModify = prefix => (field, value) => {
+        if (field.startsWith(prefix)) {
+            const key = `assist.${field.replace(/\./g, '_').replace(/assist_/g, '')}`
+            $state[key] = value;
+            delete $state[field];
+        }
+    };
+    Type.itObject(state, (field, value) => {
+        fnModify("assist")(field, value);
+        fnModify("tabular")(field, value);
+    }, true);
+    fnOut(DataLabor.createIn($state, dft));
+});
+
+const writeButton = (reference, event) => {
+    return (loading = true) => {
+        const id = event.target.id;
+        if (id) {
+            const data = {};
+            data[id] = {loading};
+            const state = {};
+            state[`op.status.buttons`] = data;
+            writeTree(reference, state);
+        }
     }
-};
-/**
- * Button的防重复提交专用，固定状态$_loading属性值
- * @method writeLoading
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Boolean} $_loading 写入组件状态
- */
-const writeLoading = (reference = {}, $_loading = true) => {
-    reference.setState({$_loading});
 };
 /**
  * @class State
@@ -32,5 +44,5 @@ const writeLoading = (reference = {}, $_loading = true) => {
  */
 export default {
     writeTree,
-    writeLoading,
+    writeButton
 }

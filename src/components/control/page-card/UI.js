@@ -1,6 +1,8 @@
 import React from 'react'
 import Ux from 'ux'
-import {AttrTree, PageCard} from 'web';
+import {Fn} from 'app';
+import Demo from './UI.Demo';
+import Desc from './UI.Desc';
 
 const {zero} = Ux;
 
@@ -10,10 +12,10 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return (
-            <PageCard reference={this}>
-                <AttrTree reference={this} $name={"PageCard"}/>
-            </PageCard>
+        const {$router} = this.props;
+        return Fn.demoPage(this,
+            <Demo reference={this} $router={$router}/>,
+            <Desc/>
         )
     }
 }

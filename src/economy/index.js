@@ -29,3 +29,4 @@ export {default as FlowDesigner} from './designer/FlowDesigner/UI';
 export {default as FormDesigner} from './designer/FormDesigner/UI';
 
 export {default as AttrTree} from './graphic/AttrTree/UI';
+export {default as MarkdownViewer} from './graphic/Markdown/UI';
