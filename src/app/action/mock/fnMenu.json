@@ -88,10 +88,22 @@
             "active": true,
             "left": 1,
             "level": 2,
-            "text": "PageCard组件",
+            "text": "PageCard",
             "icon": "layout",
             "uri": "/control/page-card",
             "name": "zui.control.page-cord",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
+        },
+        {
+            "key": "d59f70e7-513b-4269-90d2-84db4b3c15c1",
+            "active": true,
+            "left": 2,
+            "level": 2,
+            "text": "Topbar",
+            "icon": "layout",
+            "uri": "/control/top-bar",
+            "name": "zui.control.top-bar",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
         }
