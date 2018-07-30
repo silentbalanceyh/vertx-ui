@@ -107,13 +107,7 @@ const isSubmitting = (props = {}) => {
     const submitting = $submitting.is() ? $submitting.to() : {};
     return submitting.loading;
 };
-/**
- * 默认：
- * 0 - key / value
- * 1 - label
- * 2 - style
- */
-const aiExprButton = (buttons = [], props = {}) => _iterator(buttons, (values = []) => {
+const aiExprOp = (values = []) => {
     const item = {};
     item.key = values[0];
     item.text = values[1];
@@ -121,8 +115,18 @@ const aiExprButton = (buttons = [], props = {}) => _iterator(buttons, (values = 
         item.onClick = () => Op.connectId(values[2]);
     }
     item.type = values[3] ? values[3] : "default";
-    item.loading = isSubmitting(props);
     if (values[4]) item.icon = values[4];
+    return item;
+};
+/**
+ * 默认：
+ * 0 - key / value
+ * 1 - label
+ * 2 - style
+ */
+const aiExprButton = (buttons = [], props = {}) => _iterator(buttons, (values = []) => {
+    const item = aiExprOp(values);
+    item.loading = isSubmitting(props);
     return item;
 }, item => {
     if (item.connectId) {
@@ -138,5 +142,6 @@ export default {
     aiExpr,
     aiExprColumn,
     aiExprOption,
-    aiExprButton
+    aiExprButton,
+    aiExprOp
 }

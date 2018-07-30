@@ -297,6 +297,12 @@ const dgMonitor = (data) => {
     }
     return data;
 };
+const dgDebug = (data) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+        console.debug("[DEBUG]", data);
+    }
+    return data;
+};
 /**
  * 1. `ensure`工具类：Zero UI内部专用断言工具类
  * 2. `dg`工具类：开发人员调试常用工具类
@@ -323,5 +329,6 @@ export default {
     dgScript,
     dgForm,
     dgRouter,
-    dgMonitor
+    dgMonitor,
+    dgDebug
 };

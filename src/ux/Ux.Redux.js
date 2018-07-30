@@ -32,7 +32,15 @@ const rxAssist = (data, key, orderBy = 'order') => {
     result[hittedKey] = data.sort((left, right) => left[orderBy] - right[orderBy]);
     return result;
 };
+const rxData = (data) => ({"datum.data": data});
+const rxGrid = (data) => ({"grid.list": data});
+const rxRecord = (data) => ({"grid.record": data});
+const rxFilter = (data) => ({"grid.query": data});
 export default {
     rxDatum,
-    rxAssist
+    rxAssist,
+    rxData,
+    rxGrid,
+    rxFilter,
+    rxRecord
 }

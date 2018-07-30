@@ -8,7 +8,8 @@ const fnError = {
     10004: (reference) => `[ ERR-10004 ] 你将使用React-Router中的DataRouter功能，$router变量不存在${reference.props['$router']}`,
     10005: (steps) => `[ ERR-10005 ] 传入的数据结构只能是Array/String两种，用于核心迭代，当前值：${steps}，类型：${typeof steps}`,
     10006: (reference) => `[ ERR-10006 ] 只有Ant-Design的Form可操作该方法，丢失了"Form"引用：props = ${reference.props.form}`,
-    10007: (Op, key) => `[ ERR-10007 ] 当前按钮没有相关函数绑定，请检查你的Op传入变量：Op=${Op}, key=${key}`
+    10007: (Op, key) => `[ ERR-10007 ] 当前按钮没有相关函数绑定，请检查你的Op传入变量：Op=${Op}, key=${key}`,
+    10008: (key, expr) => `[ ERR-10008 ] 表达式类型不对，必须是String字符串，key = ${key}, expr = ${expr}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

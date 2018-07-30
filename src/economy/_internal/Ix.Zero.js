@@ -40,7 +40,6 @@ const _ixConnect = (target, options = {}) => {
     if (options.connect) {
         const s2p = options.connect.s2p;
         const d2p = options.connect.d2p;
-        console.info(s2p);
         // 如果没有d2p，则仅使用State -> Prop
         // 否则使用State -> Prop和Dispatch -> Prop
         if (!d2p) {

@@ -30,11 +30,14 @@ import PARSER from './Ux.Param';
 import AI from './ai/AI';
 import CHART from './Ux.Chart';
 import TERMINAL from './Ux.Terminal';
+import LIST from './Ux.List';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 import E from './Ux.Error';
 
 export default {
+    ...LIST,
+    // 专用打断
     ...TERMINAL,
     // 图标专用
     ...CHART,

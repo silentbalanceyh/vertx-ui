@@ -5,6 +5,7 @@ import U from 'underscore';
 import E from '../Ux.Error';
 import Cv from '../Ux.Constant';
 import Value from '../Ux.Value';
+import Type from '../Ux.Type';
 import {Button, Icon} from 'antd';
 import Immutable from 'immutable';
 
@@ -162,11 +163,33 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
         }
     });
 });
-;
+
+const aiFormButton = (reference, onClick, id = false) => {
+    if (onClick) {
+        const {$inited = {}} = reference.props;
+        const key = (id) ? $inited.key : "";
+        const buttons = [];
+        Type.itObject(onClick, (field, fn) => {
+            const item = {};
+            const clientId = `${field}${key}`;
+            item.key = clientId;
+            item.id = clientId;
+            item.onClick = fn(reference);
+            buttons.push(item);
+        });
+        console.debug(buttons.map(button => button.id));
+        return (
+            <span>
+                {buttons.map(item => (<Button className={"ux-hidden"} {...item}/>))}
+            </span>
+        )
+    }
+};
 export default {
     ai2Event,
     // 表单2阶按钮
     ai2Submit,
+    aiFormButton,
     // 表单1阶按钮
     aiSubmit,
     aiButton,
