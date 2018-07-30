@@ -63,24 +63,31 @@ const rxEdit = (reference, id) => {
     })
 };
 
-const rxDelete = (reference, id) => {
-    const {$self} = reference.props;
-    const options = Init.readOption($self);
+const rxDeleteDetail = (reference, id) => {
+    const options = Init.readOption(reference);
     const uri = options['ajax.delete.uri'];
     const promise = Ux.ajaxDelete(uri, {id});
     promise.then(data => {
         // 删除record数据
-        let {record = {}} = $self.state;
+        let {record = {}} = reference.state;
         record = Immutable.fromJS(record).toJS();
         if (record[id]) delete record[id];
         // 计算tabs页
-        let {tabs = {}} = $self.state;
+        let {tabs = {}} = reference.state;
         tabs = Immutable.fromJS(tabs).toJS();
         tabs.items = tabs.items.filter(item => id !== item.key);
         tabs.activeKey = tabs.items[0].key;
         const view = Init.stateView("list");
-        $self.setState({tabs, ...view, record});
+        reference.setState({tabs, ...view, record});
+        Ux.writeTree(reference, {
+            "grid.list": undefined
+        });
     });
+};
+
+const rxDelete = (reference, id) => {
+    const {$self} = reference.props;
+    rxDeleteDetail($self, id)
 };
 
 const rxClose = (reference, item) => () => {
@@ -109,16 +116,19 @@ const rxFilter = (reference = {}) => (value, event) => {
     })
 };
 const rxClear = (reference = {}) => () => {
-    const {$query} = reference.props;
-    const query = $query.to();
-    const options = Init.readOption(reference);
-    const search = options['search.cond'];
-    search.forEach(term => delete query.criteria[term]);
-    reference.setState({term: ""});
-    Ux.writeTree(reference, {
-        "grid.query": query,
-        "grid.list": undefined
-    })
+    const {term} = reference.state;
+    if (term) {
+        const {$query} = reference.props;
+        const query = $query.to();
+        const options = Init.readOption(reference);
+        const search = options['search.cond'];
+        search.forEach(term => delete query.criteria[term]);
+        reference.setState({term: ""});
+        Ux.writeTree(reference, {
+            "grid.query": query,
+            "grid.list": undefined
+        })
+    }
 };
 const rxInput = (reference = {}) => (event) => {
     const term = event.target.value;
@@ -128,6 +138,7 @@ export default {
     rxAdd,
     rxEdit,
     rxDelete,
+    rxDeleteDetail,
     rxClose,
     rxFilter,
     rxClear,

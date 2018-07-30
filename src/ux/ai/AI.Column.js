@@ -185,7 +185,7 @@ const aiCellOp = (reference, config) => (text, record) => {
                 }}>{edit.text}</a>) : false}
                 {2 === counter ? (<Divider type="vertical"/>) : false}
                 {removed ? (
-                    <Popconfirm title={option['deleteConfirm']} onConfirm={(event) => {
+                    <Popconfirm title={option['delete.confirm']} onConfirm={(event) => {
                         event.preventDefault();
                         rxDelete(reference, text);
                     }}>

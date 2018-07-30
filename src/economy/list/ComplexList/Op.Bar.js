@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Drawer, Input, Row} from 'antd';
+import {Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import Act from './Op.Action';
@@ -108,12 +108,18 @@ const renderButton = (reference, reset = false) => (event) => {
 };
 
 const renderSubmit = (reference) => {
+    const options = Init.readOption(reference);
     const state = reference.state;
-    const {view} = state;
+    const {view, key} = state;
     return "list" !== view ? (
         <Button.Group>
             <Button icon={"save"} onClick={renderButton(reference)}/>
-            {"edit" === view ? (<Button icon={"delete"} type={"danger"}/>) : false}
+            {"edit" === view ? (
+                <Popconfirm title={options['confirm.delete']}
+                            onConfirm={() => Act.rxDeleteDetail(reference, key)}>
+                    <Button icon={"delete"} type={"danger"}/>
+                </Popconfirm>
+            ) : false}
             <Button icon={"reload"} onClick={renderButton(reference, true)}/>
         </Button.Group>
     ) : false
