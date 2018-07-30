@@ -3,6 +3,7 @@ import Dg from './Ux.Debug';
 import Immutable from "immutable";
 import U from "underscore";
 import Sorter from './Ux.Sorter'
+import Type from './Ux.Type';
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -38,6 +39,24 @@ const valueAppend = (item = {}, field = "", value) => {
     if (!item.hasOwnProperty(field)) {
         item[field] = value;
     }
+};
+
+const valueSearch = (config = {}, data = {}) => {
+    // 查找根节点
+    const result = {};
+    Type.itData(config, (field, p, path) => {
+        const propName = `$${p}`;
+        if (data[propName]) {
+            const dataObject = data[propName];
+            const value = dataObject._(path);
+            if (value) {
+                result[field] = value;
+            } else {
+                console.info(`[ Ux ] 检索节点：${propName}，检索路径：${path}，值：${value}`);
+            }
+        }
+    });
+    return result;
 };
 /**
  * 直接转换数据成Moment对象，时间处理
@@ -232,6 +251,7 @@ export default {
     valueFilter,
     valueTriggerChange,
     valueOnChange,
+    valueSearch,
     // 数学运算
     mathMultiplication,
     mathDivision,

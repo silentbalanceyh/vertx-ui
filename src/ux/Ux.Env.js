@@ -89,6 +89,7 @@ export default {
     dgForm: Dg.dgForm,
     dgMonitor: Dg.dgMonitor,
     dgScript: Dg.dgScript,
+    dgDebug: Dg.dgDebug,
     /**
      * Redux中的Action专用创建函数
      * @method createAction

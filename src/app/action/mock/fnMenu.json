@@ -100,10 +100,10 @@
             "active": true,
             "left": 2,
             "level": 2,
-            "text": "Topbar",
+            "text": "HelpCard",
             "icon": "layout",
-            "uri": "/control/top-bar",
-            "name": "zui.control.top-bar",
+            "uri": "/control/help-card",
+            "name": "zui.control.help-card",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
         }

@@ -2,8 +2,10 @@ import React from 'react'
 import {Card} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
+import {DataLabor} from 'entity';
 import PropTypes from 'prop-types';
 import Op from './UI.Op';
+import {_zero} from "../../_internal";
 
 /**
  * 基本要求：
@@ -18,6 +20,16 @@ import Op from './UI.Op';
  * $key用于解析配置文件
  * $extra用于设置额外的附加工具栏
  */
+@_zero({
+    connect: {
+        s2p: state => DataLabor.createOut(state)
+            .rework({
+                "status": ["submitting"]
+            })
+            .rinit(["submitting"])
+            .to()
+    }
+})
 class Component extends React.PureComponent {
     static propTypes = {
         $key: PropTypes.string,
@@ -27,7 +39,7 @@ class Component extends React.PureComponent {
     render() {
         const {
             children, reference, $card = 'page-card',
-            $key = "page"
+            $key = "page", $extra
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
@@ -35,15 +47,15 @@ class Component extends React.PureComponent {
         if (!topbar) return Ux.fxRender(reference, $key);
         topbar = Immutable.fromJS(topbar).toJS();
         // 解析按钮
-        if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left);
-        if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right);
+        if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, this.props);
+        if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, this.props);
         const title = (
             <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
                 {Op.renderButton(reference, topbar)}
                 </span>
         );
         // 右边关闭按钮
-        let back = (
+        let extraContent = $extra ? $extra : (
             <span>
                 {topbar.right ? Op.renderButton(reference, topbar, 'right') : false}
                 &nbsp;&nbsp;
@@ -53,7 +65,7 @@ class Component extends React.PureComponent {
         return (
             <Card className={$card} bordered={false}
                   title={title}
-                  extra={back}>
+                  extra={extraContent}>
                 {children}
             </Card>
         )

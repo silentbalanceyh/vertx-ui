@@ -1,5 +1,6 @@
 import DataContainer from "./DataContainer";
 import * as Immutable from 'immutable';
+import * as U from 'underscore';
 
 class DataObject implements DataContainer {
     ready: boolean = false;
@@ -41,9 +42,17 @@ class DataObject implements DataContainer {
      */
     _(key: string): any {
         if (this.ready && key) {
-            let keys = [key];
-            if (0 <= key.indexOf('.')) {
-                keys = key.split('.');
+            let keys: any = [];
+            if (U.isArray(key)) {
+                keys = key;
+            } else {
+                if ("string" === typeof key) {
+                    if (0 <= key.indexOf('.')) {
+                        keys = key.split('.');
+                    } else {
+                        keys = [key];
+                    }
+                }
             }
             let data = Immutable.fromJS(this.data).getIn(keys);
             if (data && data.toJS) {

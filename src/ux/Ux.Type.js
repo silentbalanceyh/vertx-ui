@@ -3,6 +3,7 @@ import Immutable from "immutable";
 import Dg from "./Ux.Debug";
 import Prop from "./Ux.Prop";
 import {DataLabor} from "entity";
+import Error from './Ux.Error';
 
 /**
  * 在数组中查找唯一元素
@@ -174,6 +175,22 @@ const itObject = (data = {}, executor = () => {
                 if (value) {
                     executor(key, value);
                 }
+            }
+        }
+    }
+};
+
+const itData = (config = {}, consumer = () => {
+}) => {
+    for (const key in config) {
+        if (config.hasOwnProperty(key)) {
+            const expr = config[key];
+            Error.fxTerminal("string" !== typeof expr, 10008, key, expr);
+            Error.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
+            const kv = expr.split(':');
+            const value = kv[1].split('.');
+            if (U.isFunction(consumer)) {
+                consumer(key, kv[0], value);
             }
         }
     }
@@ -426,6 +443,7 @@ export default {
     // 遍历对象
     itObject,
     itMatrix,
+    itData,
     // 树的构造方法
     tree,
     treeWithFilters

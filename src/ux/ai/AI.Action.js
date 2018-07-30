@@ -1,7 +1,13 @@
 import React from 'react';
 import Prop from '../Ux.Prop';
+import State from '../Ux.State';
 import U from 'underscore';
+import E from '../Ux.Error';
+import Cv from '../Ux.Constant';
+import Value from '../Ux.Value';
+import Type from '../Ux.Type';
 import {Button, Icon} from 'antd';
+import Immutable from 'immutable';
 
 const _aiSubmit = (reference, callback) => (event) => {
     event.preventDefault();
@@ -121,7 +127,76 @@ const aiToolbars = (reference, jsx = {}, Op, ...key) => {
         {key.map((key, index) => aiButton(reference, Op, key, disabled[index]))}
     </Button.Group>)
 };
+const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
+    if (!jsx.op) return false;
+    return (jsx.op.map(each => (
+        <Button key={each} id={each} onClick={E.fxSubmit(reference, Op, each)}/>
+    )))
+};
+const aiSubmit = (reference, Op = {}, hidden) => {
+    const submit = Prop.fromHoc(reference, "submit");
+    if (!submit || !U.isArray(submit)) return false;
+    const className = hidden ? "ux-hidden" : "";
+    return submit.map(each => (
+        <Button key={each} className={className}
+                id={each} onClick={E.fxSubmit(reference, Op, each)}/>
+    ));
+};
+const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(reference, (form) => {
+    event.preventDefault();
+    State.rdxSubmitting(reference, true);
+    const {$inited} = reference.props;
+    form.validateFieldsAndScroll((error, values) => {
+        if (error) {
+            State.rdxSubmitting(reference, false);
+            if (fnFailure && U.isFunction(fnFailure)) {
+                fnFailure(error);
+            }
+            return;
+        }
+        const params = Immutable.fromJS(values).toJS();
+        params.language = Cv['LANGUAGE'];
+        // 应用专用数据
+        const {$app} = reference.props;
+        if ($app && $app.is()) {
+            params.sigma = $app._("sigma");
+        }
+        params.active = !!values.active;
+        if ($inited) params.key = $inited.key;
+        Value.valueValid(params);
+        if (fnSuccess && U.isFunction(fnSuccess)) {
+            fnSuccess(params);
+        }
+    });
+});
+
+const aiFormButton = (reference, onClick, id = false) => {
+    if (onClick) {
+        const {$inited = {}} = reference.props;
+        const key = (id) ? $inited.key : "";
+        const buttons = [];
+        Type.itObject(onClick, (field, fn) => {
+            const item = {};
+            const clientId = `${field}${key}`;
+            item.key = clientId;
+            item.id = clientId;
+            item.onClick = fn(reference);
+            buttons.push(item);
+        });
+        return (
+            <span>
+                {buttons.map(item => (<Button className={"ux-hidden"} {...item}/>))}
+            </span>
+        )
+    }
+};
 export default {
+    ai2Event,
+    // 表单2阶按钮
+    ai2Submit,
+    aiFormButton,
+    // 表单1阶按钮
+    aiSubmit,
     aiButton,
     aiButtons,
     aiToolbars

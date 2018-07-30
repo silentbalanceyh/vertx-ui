@@ -1,5 +1,6 @@
 import {HocI18n} from "entity";
 import Logger from './Ix.Logger';
+import {connect} from "react-redux";
 
 const _ixFullName = (Component, Cab = {}, Name) => {
     // ns 属性检查
@@ -34,6 +35,21 @@ const _ixI18n = (target, options = {}) => {
     }
     return i18n;
 };
+
+const _ixConnect = (target, options = {}) => {
+    if (options.connect) {
+        const s2p = options.connect.s2p;
+        const d2p = options.connect.d2p;
+        // 如果没有d2p，则仅使用State -> Prop
+        // 否则使用State -> Prop和Dispatch -> Prop
+        if (!d2p) {
+            target = connect(s2p, {})(target);
+        } else {
+            target = connect(s2p, d2p)(target);
+        }
+    }
+    return target;
+};
 const _zero = (options = {}) => {
     return (target, property, descriptor) => {
         const injectState = options.state ? options.state : {};
@@ -53,6 +69,7 @@ const _zero = (options = {}) => {
             }
         }
 
+        _target = _ixConnect(_target, options);
         return _target;
     }
 };

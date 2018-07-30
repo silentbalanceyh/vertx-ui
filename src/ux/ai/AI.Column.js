@@ -119,7 +119,7 @@ const aiCellCurrency = (reference, config = {}) => text => {
  *      }
  */
 const aiCellExpression = (reference, config) => text => {
-    return text ? (
+    return undefined !== text ? (
         <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false
 };
 /**
@@ -146,10 +146,54 @@ const aiCellExpression = (reference, config) => text => {
  *      }
  */
 const aiCellDatum = (reference, config) => text => {
-    const datum = config.$datum;
+    const datum = config['$datum'];
     const data = Prop.onDatum(reference, datum.source);
     const item = Type.elementUnique(data, datum.value, text);
     return <span>{item ? item[datum.display] : false}</span>;
+};
+const aiCellOp = (reference, config) => (text, record) => {
+    const option = config['$option'];
+    if (option) {
+        let counter = 0;
+        // 编辑按钮
+        let edit = undefined;
+        if (option.edit) {
+            edit = {};
+            edit.key = `edit${record.key}`;
+            edit.text = option.edit;
+            counter++;
+        }
+        // 删除按钮
+        let removed = undefined;
+        if (option.delete) {
+            removed = {};
+            removed.key = `delete${record.key}`;
+            removed.text = option.delete;
+            counter++
+        }
+        const {
+            rxEdit = () => {
+            },
+            rxDelete = () => {
+            }
+        } = reference.props;
+        return (
+            <Fragment>
+                {edit ? (<a key={edit.key} onClick={(event) => {
+                    event.preventDefault();
+                    rxEdit(reference, text);
+                }}>{edit.text}</a>) : false}
+                {2 === counter ? (<Divider type="vertical"/>) : false}
+                {removed ? (
+                    <Popconfirm title={option['delete.confirm']} onConfirm={(event) => {
+                        event.preventDefault();
+                        rxDelete(reference, text);
+                    }}>
+                        <a key={removed.key}>{removed.text}</a>
+                    </Popconfirm>) : false}
+            </Fragment>
+        )
+    } else return false;
 };
 const aiCellIcon = (reference, config) => text => {
     const mapping = config['$mapping'] ? config['$mapping'] : {};
@@ -339,6 +383,7 @@ export default {
         DATUM: aiCellDatum,
         PERCENT: aiCellPercent,
         ICON: aiCellIcon,
+        OP: aiCellOp,
     },
     aiUnitDecimal,
     aiUnitText,

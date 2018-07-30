@@ -1,6 +1,12 @@
 import React from 'react'
-import {Card, Steps} from 'antd';
+import {Card} from 'antd';
+import './Cab.less';
 import Ux from 'ux';
+import PropTypes from 'prop-types';
+import Immutable from "immutable";
+import Op from "./UI.Op";
+import {_zero} from "../../_internal";
+import {DataLabor} from 'entity';
 
 /**
  * 基本要求：
@@ -16,24 +22,48 @@ import Ux from 'ux';
  *      }
  * }
  */
+@_zero({
+    connect: {
+        s2p: state => DataLabor.createOut(state)
+            .rework({
+                "status": ["submitting"]
+            })
+            .rinit(["submitting"])
+            .to()
+    }
+})
 class Component extends React.PureComponent {
+    static propTypes = {
+        $key: PropTypes.string,
+        $card: PropTypes.string
+    };
+
     render() {
-        const {children, reference, card = 'page-card'} = this.props;
-        const topbar = Ux.fromHoc(reference, "topbar");
-        const attrs = {};
-        attrs.title = topbar ? topbar.title : "";
-        attrs.bordered = false;
-        if (topbar.step && topbar.step.items) {
-            const current = topbar.step.current;
-            const size = topbar.step.size ? topbar.step.size : "small";
-            attrs.extra = (
-                <Steps current={current} size={size}>
-                    {topbar.step.items.map(item => <Steps.Step {...item}/>)}
-                </Steps>
-            )
+        const {
+            children, reference, $card = 'page-card',
+            $key = "page", $extra, $current
+        } = this.props;
+
+        // 左边按钮
+        let topbar = Ux.fromHoc(reference, $key);
+        // ZeroError：检查点
+        if (!topbar) return Ux.fxRender(reference, $key);
+        topbar = Immutable.fromJS(topbar).toJS();
+        if (topbar.left) {
+            topbar.left = Ux.aiExprButton(topbar.left, this.props);
+            // 2次提交专用
         }
+        // 标题和左边工具栏
+        const title = (
+            <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
+                {Op.renderButton(reference, topbar)}
+                </span>
+        );
+        // 右边帮助信息
+        let extraContent = $extra ? $extra : (topbar.help ? Op.renderHelp(reference, topbar, $current) : false);
         return (
-            <Card className={card} {...attrs}>
+            <Card className={$card} title={title} bordered={false}
+                  extra={extraContent}>
                 {children}
             </Card>
         )

@@ -1,0 +1,109 @@
+import Ux from 'ux';
+import Immutable from "immutable";
+import {v4} from 'uuid';
+
+const readConfig = (reference = {}) => {
+    const {$key = "grid"} = reference.props;
+    const ref = reference.props.reference;
+    const grid = Ux.fromHoc(ref, $key);
+    return Immutable.fromJS(grid).toJS();
+};
+
+const initList = (reference = {}, queryConfig = {}) => {
+    const query = Ux.irGrid(queryConfig, reference.props);
+    Ux.writeTree(reference, {
+        "grid.query": query
+    });
+};
+
+const stateView = (view, key) => {
+    view = view ? view : "list";
+    return {view, key};
+};
+
+const onTabClick = (reference) => (key) => {
+    let {tabs = {}} = reference.state;
+    tabs = Immutable.fromJS(tabs).toJS();
+    tabs.activeKey = key;
+    // 右边按钮计算
+    const item = tabs.items.filter(item => item.key === key)[0];
+    const view = stateView(item.type, key);
+    reference.setState({tabs, ...view});
+};
+
+const onEdit = (reference) => (key, action) => {
+    if ("remove" === action) {
+        let {tabs = {}} = reference.state;
+        tabs = Immutable.fromJS(tabs).toJS();
+        let view = {};
+        let item = tabs.items.filter(item => key === item.key)[0];
+        const index = item.index - 1;
+        if (2 < tabs.items.length) {
+            const activeItem = tabs.items.filter(item => item.index === index)[0];
+            tabs.activeKey = activeItem.key;
+            tabs.items = tabs.items.filter(item => key !== item.key);
+            if (0 === activeItem.index) {
+                view = stateView("list");
+            } else {
+                view = stateView("edit", activeItem.key);
+            }
+        } else {
+            tabs.activeKey = tabs.items[0].key;
+            tabs.items = [tabs.items[0]];
+            view = stateView("list")
+        }
+        reference.setState({tabs, ...view});
+    }
+};
+
+const stateTabs = (reference, options = {}, state = {}) => {
+    // 列表基本页
+    const tab = {};
+    tab.tab = options['tabs.list'];
+    tab.key = v4();
+    tab.type = "list";
+    tab.index = 0;
+    const tabs = {};
+    tabs.items = [];
+    tabs.items.push(tab);
+    // Tab专用方法
+    tabs.activeKey = tab.key;
+    tabs.type = "editable-card";
+    tabs.onTabClick = onTabClick(reference);
+    tabs.onEdit = onEdit(reference);
+    tabs.hideAdd = true;
+    state.tabs = tabs;
+};
+const initGrid = (reference = {}) => {
+    const config = readConfig(reference);
+    // 初始化查询
+    initList(reference, config.query);
+    // 初始化Tab页
+    const state = {};
+    stateTabs(reference, config.options, state);
+
+    reference.setState(state);
+};
+const readOption = (reference) => readConfig(reference).options;
+const readTable = (reference) => readConfig(reference).table;
+const readQuery = (reference) => readConfig(reference).query;
+const updateGrid = (reference = {}, prevProps = {}) => {
+    const record = reference.props['$list'];
+    if (undefined === record) {
+        // 初始化查询
+        const {rxSearch} = reference.props;
+        if (rxSearch) {
+            const {$query} = reference.props;
+            rxSearch($query.to());
+        }
+        // initList(reference, config.query);
+    }
+};
+export default {
+    initGrid,
+    updateGrid,
+    stateView,
+    readOption,
+    readTable,
+    readQuery
+}

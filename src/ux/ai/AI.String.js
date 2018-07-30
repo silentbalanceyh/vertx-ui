@@ -1,4 +1,7 @@
 import Op from '../Ux.Op';
+import U from 'underscore';
+import E from '../Ux.Error';
+import {v4} from 'uuid';
 
 /**
  * 特殊格式解析
@@ -76,11 +79,35 @@ const aiExprOption = (options = []) => _iterator(options, (values = []) => {
 });
 /**
  * 默认：
- * 0 - key / value
- * 1 - label
- * 2 - style
+ * 0 - title
+ * 1 - key
+ * @param steps
+ * @returns {Array}
  */
-const aiExprButton = (buttons = []) => _iterator(buttons, (values = []) => {
+const aiExprHelp = (steps = []) => {
+    if (!U.isArray(steps) && "string" !== typeof steps) {
+        E.fxTerminal(true, 10005, steps);
+    }
+    let arrays = U.isArray(steps) ? steps : steps.split(',');
+    return _iterator(arrays, (values = []) => {
+        const item = {};
+        item.title = values[0];
+        item.key = v4();
+        return item;
+    }, item => {
+        if (!item.hasOwnProperty('key')) {
+            item.key = v4();
+        }
+        return item;
+    })
+};
+
+const isSubmitting = (props = {}) => {
+    const {$submitting} = props;
+    const submitting = $submitting.is() ? $submitting.to() : {};
+    return submitting.loading;
+};
+const aiExprOp = (values = []) => {
     const item = {};
     item.key = values[0];
     item.text = values[1];
@@ -90,17 +117,31 @@ const aiExprButton = (buttons = []) => _iterator(buttons, (values = []) => {
     item.type = values[3] ? values[3] : "default";
     if (values[4]) item.icon = values[4];
     return item;
+};
+/**
+ * 默认：
+ * 0 - key / value
+ * 1 - label
+ * 2 - style
+ */
+const aiExprButton = (buttons = [], props = {}) => _iterator(buttons, (values = []) => {
+    const item = aiExprOp(values);
+    item.loading = isSubmitting(props);
+    return item;
 }, item => {
     if (item.connectId) {
         const connectId = item.connectId;
+        item.loading = isSubmitting(props);
         item.onClick = () => Op.connectId(connectId);
         delete item.connectId;
     }
     return item;
 });
 export default {
+    aiExprHelp,
     aiExpr,
     aiExprColumn,
     aiExprOption,
-    aiExprButton
+    aiExprButton,
+    aiExprOp
 }
