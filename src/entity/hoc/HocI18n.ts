@@ -1,6 +1,7 @@
 import {Langue} from "environment";
 import * as U from 'underscore';
 import * as Immutable from 'immutable';
+import Ux from "ux";
 import HocContainer from "./HocContainer";
 
 class HocI18n implements HocContainer {
@@ -8,15 +9,21 @@ class HocI18n implements HocContainer {
     private ready: boolean = false;
     private lg: any = {};
     private props: any = {};
+    private resourcePath: String = "";
 
     constructor(name: String, hoc: Object) {
         this.lg = Langue(name);
         this.hoc = hoc;
         this.ready = true;
+        this.resourcePath = `cab/${Ux.Env.LANGUAGE}/${name}`;
     }
 
     is(): boolean {
         return this.ready;
+    }
+
+    name() {
+        return this.resourcePath;
     }
 
     mergeVector(path, key, value) {
@@ -61,6 +68,10 @@ class HocI18n implements HocContainer {
 
     _(key: string): any {
         let targetKey = key;
+        // 防止其他key乱入
+        if ("string" !== typeof key) {
+            key = String(key);
+        }
         if (!key.startsWith("_")) {
             targetKey = `_${key}`;
         }

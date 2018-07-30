@@ -1,0 +1,83 @@
+{
+    "_comment": {
+        "icon": {
+            "key": "plIconColor",
+            "title": "色彩说明表",
+            "items": [
+                {
+                    "color": "#93f",
+                    "text": "专用属性表"
+                },
+                {
+                    "color": "#e23c39",
+                    "text": "必须属性"
+                },
+                {
+                    "color": "#33af43",
+                    "text": "可选属性"
+                }
+            ]
+        }
+    },
+    "_tabs": [
+        {
+            "tab": "基本信息",
+            "key": "tabBasic"
+        },
+        {
+            "tab": "效果",
+            "key": "tabPreview"
+        }
+    ],
+    "_table": {
+        "columns": [
+            {
+                "dataIndex": "source",
+                "title": "属性源"
+            },
+            {
+                "dataIndex": "name",
+                "title": "属性名"
+            },
+            {
+                "dataIndex": "comment",
+                "title": "说明",
+                "style": {
+                    "width": "50%"
+                }
+            },
+            {
+                "dataIndex": "required",
+                "title": "必填？"
+            },
+            {
+                "dataIndex": "type",
+                "title": "数据类型"
+            },
+            {
+                "dataIndex": "value",
+                "title": "默认值"
+            }
+        ]
+    },
+    "_mapping": {
+        "source": {
+            "P": {
+                "type": "api",
+                "label": "props属性",
+                "style": {
+                    "fontSize": "18px",
+                    "color": "#1464b4"
+                }
+            },
+            "H": {
+                "type": "fork",
+                "label": "hoc属性",
+                "style": {
+                    "fontSize": "18px",
+                    "color": "#ff8626"
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,9 @@
 import React from 'react'
-import {Button, Card} from 'antd';
+import {Card} from 'antd';
 import Ux from 'ux';
 import Immutable from 'immutable';
+import PropTypes from 'prop-types';
+import Op from './UI.Op';
 
 /**
  * 基本要求：
@@ -17,47 +19,40 @@ import Immutable from 'immutable';
  * $extra用于设置额外的附加工具栏
  */
 class Component extends React.PureComponent {
+    static propTypes = {
+        $key: PropTypes.string,
+        $card: PropTypes.string
+    };
+
     render() {
         const {
-            children, reference, card = 'page-card',
+            children, reference, $card = 'page-card',
             $key = "page"
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
+        // ZeroError：检查点
+        if (!topbar) return Ux.fxRender(reference, $key);
         topbar = Immutable.fromJS(topbar).toJS();
-        if (topbar.left) {
-            topbar.title = (<span>
-                {topbar ? topbar.title : ""}
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Button.Group>
-                    {topbar.left.map(button => {
-                        const {text, connectId, ...rest} = button;
-                        if (connectId) {
-                            rest.onClick = () => Ux.connectId(connectId);
-                        }
-                        return <Button {...rest}>{text}</Button>
-                    })}
-                </Button.Group>
-            </span>)
-        } else {
-            topbar.title = topbar ? topbar.title : "";
-        }
+        // 解析按钮
+        if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left);
+        if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right);
+        const title = (
+            <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
+                {Op.renderButton(reference, topbar)}
+                </span>
+        );
         // 右边关闭按钮
-        let back = false;
-        if (topbar.back) {
-            back = (<Button icon={"cross"} shape="circle" type={"ghost"}
-                            onClick={() => {
-                                // 写状态树
-                                if (topbar.back.state) {
-                                    Ux.writeTree(reference, topbar.back.state);
-                                }
-                                // 导航处理
-                                Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
-                            }}/>)
-        }
+        let back = (
+            <span>
+                {topbar.right ? Op.renderButton(reference, topbar, 'right') : false}
+                &nbsp;&nbsp;
+                {topbar.back ? Op.renderBack(reference, topbar) : false}
+            </span>
+        );
         return (
-            <Card className={card} bordered={false}
-                  title={topbar ? topbar.title : ""}
+            <Card className={$card} bordered={false}
+                  title={title}
                   extra={back}>
                 {children}
             </Card>

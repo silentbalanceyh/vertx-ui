@@ -164,12 +164,16 @@ const itElement = (data = [], field = "", itemFun = () => {
  * @param {Function} executor 处理函数
  */
 const itObject = (data = {}, executor = () => {
-}) => {
+}, invalid = false) => {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
-            if (value) {
+            if (invalid) {
                 executor(key, value);
+            } else {
+                if (value) {
+                    executor(key, value);
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 import Store from './Ux.Store';
 import Cv from './Ux.Constant';
+import E from './Ux.Error';
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -40,8 +41,7 @@ const toLogout = () => {
  * @return {*}
  */
 const toRoute = (reference = {}, uri = "") => {
-    const {$router} = reference.props;
-    if ($router) {
+    E.fxRouter(reference, ($router) => {
         let target;
         if (0 <= uri.indexOf(Cv['ROUTE'])) {
             target = uri;
@@ -50,7 +50,7 @@ const toRoute = (reference = {}, uri = "") => {
         }
         target = target.replace(/\/\//g, '/');
         $router.to(target);
-    }
+    });
 };
 /**
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面

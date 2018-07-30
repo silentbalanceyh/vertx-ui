@@ -20,6 +20,10 @@ class Etat {
      */
     private constructor(requiredFile) {
         this._cab = requiredFile;
+        // 默认设置fnOut
+        this._dispatchTo = {
+            fnOut: Taper.fnFlush
+        }
     }
 
     static from(requiredFile) {

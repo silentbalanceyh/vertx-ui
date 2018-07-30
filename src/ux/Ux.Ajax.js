@@ -144,6 +144,13 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
     const request = new Request(api, _ajaxOptions(method, headers));
     return ajaxResponse(request, mockData, $params);
 };
+
+const ajaxResource = (uri) => {
+    const request = new Request(uri, {
+        method: "get"
+    });
+    return fetch(request).then(data => Promise.resolve(data.text()))
+};
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
  * @method ajaxFull
@@ -362,6 +369,8 @@ export default {
     rxEdict,
     // 连接两个Ajax的Promise，后一个和前一个存在依赖关系
     rxEclat,
+    // 特殊方法读取当前想对路径
+    ajaxResource,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch

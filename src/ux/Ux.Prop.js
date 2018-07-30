@@ -1,6 +1,8 @@
 import Dg from "./Ux.Debug";
 import Value from "./Ux.Value";
 import Immutable from 'immutable';
+import E from './Ux.Error';
+import {DataLabor} from 'entity';
 
 /**
  * 直接从Hoc资源路径读取数据信息
@@ -34,9 +36,9 @@ const fromPath = (reference = {}, ...keys) => {
  * @return {null}
  */
 const fromHoc = (reference = {}, key = "") => {
-    Dg.ensureKey("fromHoc", key);
+    E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
     const {$hoc} = reference.state;
-    return $hoc ? $hoc._(key) : null;
+    return ($hoc) ? $hoc._(key) : null;
 };
 /**
  * 从路由参数中读取数据专用
@@ -50,6 +52,22 @@ const fromRouter = (reference = {}, key = "") => {
     const {$router} = reference.props;
     return $router ? $router._(key) : null;
 };
+
+const fromDatum = (reference, key) => {
+    key = key.replace(/\./g, "_");
+    if (reference.props) {
+        const targetKey =
+            reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
+        if (targetKey) {
+            if (targetKey.is()) {
+                return targetKey;
+            } else {
+                return targetKey;
+            }
+        }
+    }
+    return DataLabor.getArray(undefined);
+};
 /**
  * 从reference的props中读取`key`对应的值，一般用于读取Tabular/Assist
  * @method onDatum
@@ -58,15 +76,8 @@ const fromRouter = (reference = {}, key = "") => {
  * @return {*}
  */
 const onDatum = (reference, key) => {
-    key = key.replace(/\./g, "_");
-    if (reference.props) {
-        const targetKey =
-            reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
-        if (targetKey && targetKey.is()) {
-            return targetKey.to();
-        }
-    }
-    return [];
+    const data = fromDatum(reference, key);
+    return (data && data.is()) ? data.to() : [];
 };
 /**
  * Ant Design中的Form清空专用方法
@@ -213,5 +224,6 @@ export default {
     // 从Hoc, Router中提取数据
     fromHoc,
     fromRouter,
-    fromPath
+    fromPath,
+    fromDatum
 };

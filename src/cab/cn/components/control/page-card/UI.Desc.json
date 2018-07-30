@@ -1,0 +1,114 @@
+{
+    "_configuration": {
+        "items": {
+            "name": "PageCard组件",
+            "children": [
+                {
+                    "name": "props",
+                    "children": [
+                        {
+                            "name": "reference",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "children",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "$key",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$card",
+                            "color": "#33af43"
+                        }
+                    ]
+                },
+                {
+                    "name": "_<hoc>",
+                    "children": [
+                        {
+                            "name": "title",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "left",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "right",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "back",
+                            "color": "#33af43"
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 120,
+            "vgap": 10,
+            "height": 320
+        }
+    },
+    "_data": [
+        {
+            "source": "P",
+            "name": "reference",
+            "comment": "父组件引用",
+            "type": "React.Component",
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "children",
+            "comment": "子组件",
+            "type": "React.Component",
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$key",
+            "comment": "指定hoc属性配置的根节点",
+            "type": "String",
+            "value": "page"
+        },
+        {
+            "source": "P",
+            "name": "$card",
+            "comment": "指定<Card>组件的className",
+            "type": "String",
+            "value": "page-card"
+        },
+        {
+            "source": "H",
+            "name": "title",
+            "comment": "PageCard的标题",
+            "type": "String | ReactNode",
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "left",
+            "comment": "PageCard左边的工具栏",
+            "type": "Array [ Button ]",
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "right",
+            "comment": "PageCard右边的工具栏",
+            "type": "Array [ Button ]",
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "back",
+            "comment": "关闭过程中需要写入的状态state，如果不设则不显示",
+            "type": "Object",
+            "value": "--"
+        }
+    ]
+}
