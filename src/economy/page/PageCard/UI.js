@@ -58,7 +58,7 @@ class Component extends React.PureComponent {
         let extraContent = $extra ? $extra : (
             <span>
                 {topbar.right ? Op.renderButton(reference, topbar, 'right') : false}
-                &nbsp;&nbsp;
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 {topbar.back ? Op.renderBack(reference, topbar) : false}
             </span>
         );

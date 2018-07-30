@@ -21,6 +21,10 @@
                         {
                             "name": "$card",
                             "color": "#33af43"
+                        },
+                        {
+                            "name": "$extra",
+                            "color": "#33af43"
                         }
                     ]
                 },
@@ -81,6 +85,13 @@
             "comment": "指定<Card>组件的className",
             "type": "String",
             "value": "page-card"
+        },
+        {
+            "source": "P",
+            "name": "$card",
+            "comment": "如果指定了$extra，则right/back两个属性设置信息失效，以$extra中设置优先",
+            "type": "ReactNode",
+            "value": "--"
         },
         {
             "source": "H",

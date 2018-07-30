@@ -30,22 +30,22 @@
             {
                 "key": "$opFirst",
                 "text": "按钮1",
-                "message": "您点击了按钮1"
+                "message": "您点击了【左边】的按钮1"
             },
             {
                 "key": "$opSecond",
                 "text": "按钮2",
-                "message": "您点击了按钮2"
+                "message": "您点击了【左边】的按钮2"
             },
             {
                 "key": "$opThird",
                 "text": "按钮3",
-                "message": "您点击了按钮3"
+                "message": "您点击了【右边】的'下载'按钮"
             },
             {
                 "key": "$opForth",
                 "text": "按钮4",
-                "message": "您点击了按钮4"
+                "message": "您点击了【右边】的'打印'按钮"
             }
         ]
     }
