@@ -26,17 +26,11 @@ const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) =
     fnOut(DataLabor.createIn($state, dft));
 });
 
-const writeButton = (reference, event) => {
-    return (loading = true) => {
-        const id = event.target.id;
-        if (id) {
-            const data = {};
-            data[id] = {loading};
-            const state = {};
-            state[`op.status.buttons`] = data;
-            writeTree(reference, state);
-        }
-    }
+const rdxSubmitting = (reference, loading = true) => {
+    const state = {};
+    state[`status.submitting`] = {loading};
+    const $state = Immutable.fromJS(state).toJS();
+    writeTree(reference, $state);
 };
 /**
  * @class State
@@ -44,5 +38,5 @@ const writeButton = (reference, event) => {
  */
 export default {
     writeTree,
-    writeButton
+    rdxSubmitting
 }

@@ -1,7 +1,12 @@
 import React from 'react';
 import Prop from '../Ux.Prop';
+import State from '../Ux.State';
 import U from 'underscore';
+import E from '../Ux.Error';
+import Cv from '../Ux.Constant';
+import Value from '../Ux.Value';
 import {Button, Icon} from 'antd';
+import Immutable from 'immutable';
 
 const _aiSubmit = (reference, callback) => (event) => {
     event.preventDefault();
@@ -121,7 +126,49 @@ const aiToolbars = (reference, jsx = {}, Op, ...key) => {
         {key.map((key, index) => aiButton(reference, Op, key, disabled[index]))}
     </Button.Group>)
 };
+const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
+    if (!jsx.op) return false;
+    return (jsx.op.map(each => (
+        <Button key={each} id={each} onClick={E.fxSubmit(reference, Op, each)}/>
+    )))
+};
+const aiSubmit = (reference, Op = {}, hidden) => {
+    const submit = Prop.fromHoc(reference, "submit");
+    if (!submit || !U.isArray(submit)) return false;
+    const className = hidden ? "ux-hidden" : "";
+    return submit.map(each => (
+        <Button key={each} className={className}
+                id={each} onClick={E.fxSubmit(reference, Op, each)}/>
+    ));
+};
+const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(reference, (form) => {
+    event.preventDefault();
+    State.rdxSubmitting(reference, true);
+    const {$inited} = reference.props;
+    form.validateFieldsAndScroll((error, values) => {
+        if (error) {
+            State.rdxSubmitting(reference, false);
+            if (fnFailure && U.isFunction(fnFailure)) {
+                fnFailure(error);
+            }
+            return;
+        }
+        const params = Immutable.fromJS(values).toJS();
+        params.language = Cv['LANGUAGE'];
+        if ($inited) params.key = $inited.key;
+        Value.valueValid(params);
+        if (fnSuccess && U.isFunction(fnSuccess)) {
+            fnSuccess(values);
+        }
+    });
+});
+;
 export default {
+    ai2Event,
+    // 表单2阶按钮
+    ai2Submit,
+    // 表单1阶按钮
+    aiSubmit,
     aiButton,
     aiButtons,
     aiToolbars

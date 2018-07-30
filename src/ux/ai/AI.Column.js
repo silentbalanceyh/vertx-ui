@@ -119,7 +119,7 @@ const aiCellCurrency = (reference, config = {}) => text => {
  *      }
  */
 const aiCellExpression = (reference, config) => text => {
-    return text ? (
+    return undefined !== text ? (
         <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false
 };
 /**
