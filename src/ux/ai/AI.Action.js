@@ -156,10 +156,16 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
         }
         const params = Immutable.fromJS(values).toJS();
         params.language = Cv['LANGUAGE'];
+        // 应用专用数据
+        const {$app} = reference.props;
+        if ($app && $app.is()) {
+            params.sigma = $app._("sigma");
+        }
+        params.active = !!values.active;
         if ($inited) params.key = $inited.key;
         Value.valueValid(params);
         if (fnSuccess && U.isFunction(fnSuccess)) {
-            fnSuccess(values);
+            fnSuccess(params);
         }
     });
 });
@@ -177,7 +183,6 @@ const aiFormButton = (reference, onClick, id = false) => {
             item.onClick = fn(reference);
             buttons.push(item);
         });
-        console.debug(buttons.map(button => button.id));
         return (
             <span>
                 {buttons.map(item => (<Button className={"ux-hidden"} {...item}/>))}

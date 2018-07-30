@@ -3,152 +3,133 @@ import Ux from 'ux';
 import Init from './Op.Init';
 import Immutable from 'immutable';
 
-const addTab = (reference) => {
-    const {tabs = {}} = reference.state;
-    const type = tabs.items.filter(item => "ADD" === item.type);
+const stateAddTab = (reference) => {
+    let {tabs = {}} = reference.state;
+    tabs = Immutable.fromJS(tabs).toJS();
+    const type = tabs.items.filter(item => "add" === item.type);
     if (0 < type.length) {
         tabs.activeKey = type[0].key;
     } else {
-        const config = Init.initConfig(reference);
+        const options = Init.readOption(reference);
         const tab = {};
         tab.key = v4();
-        tab.tab = config.tabs.add;
-        tab.type = "ADD";
+        tab.tab = options['tabs.add'];
+        tab.type = "add";
         tab.index = tabs.items.length;
         tabs.items.push(tab);
         tabs.activeKey = tab.key;
     }
-    const updated = Immutable.fromJS(tabs).toJS();
-    reference.setState({tabs: updated});
+    return tabs;
 };
 
-const editTab = (reference, id, params) => {
-    const {tabs = {}} = reference.state;
+const stateEditTab = (reference, id, params) => {
+    let {tabs = {}} = reference.state;
+    tabs = Immutable.fromJS(tabs).toJS();
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {
         tabs.activeKey = found[0].key;
     } else {
-        const config = Init.initConfig(reference);
+        const options = Init.readOption(reference);
         const tab = {};
         tab.key = id;
-        tab.tab = Ux.formatExpr(config.tabs.edit, params);
-        tab.type = "EDIT";
+        tab.tab = Ux.formatExpr(options['tabs.edit'], params);
+        tab.type = "edit";
         tab.index = tabs.items.length;
         tabs.items.push(tab);
         tabs.activeKey = tab.key;
     }
-    const updated = Immutable.fromJS(tabs).toJS();
-    reference.setState({tabs: updated});
+    return tabs;
 };
 const rxAdd = (reference) => (event) => {
     event.preventDefault();
-    switchView(reference, "add");
-    addTab(reference);
-};
-
-const rxAjax = (reference, options = {}, params) => {
-    let fnAjax = null;
-    if (!options.method) options.method = "GET";
-    switch (options.method) {
-        case "GET":
-            fnAjax = Ux.ajaxGet(options.uri, params);
-            break;
-        case "DELETE":
-            fnAjax = Ux.ajaxDelete(options.uri, params);
-            break;
-        case "POST":
-            fnAjax = Ux.ajaxPost(options.uri, params);
-            break;
-        default:
-            break;
-    }
-    return fnAjax;
+    const view = Init.stateView("add");
+    const tabs = stateAddTab(reference);
+    reference.setState({tabs, ...view});
 };
 
 const rxEdit = (reference, id) => {
     const {$self} = reference.props;
-    const config = Init.initConfig($self);
-    if (config.ajax) {
-        const options = config.ajax.get;
-        const promise = rxAjax($self, options, {id});
-        if (promise) {
-            promise.then(data => {
-                let {record = {}} = $self.state;
-                record[id] = data;
-                record = Immutable.fromJS(record).toJS();
-                $self.setState({record});
-                editTab($self, id, data);
-                switchView($self, "edit", id);
-            })
-        }
-    }
+    const options = Init.readOption($self);
+    const uri = options['ajax.get.uri'];
+    const promise = Ux.ajaxGet(uri, {id});
+    promise.then(data => {
+        let {record = {}} = $self.state;
+        record[id] = data;
+        record = Immutable.fromJS(record).toJS();
+        $self.setState({record});
+        const tabs = stateEditTab($self, id, data);
+        const view = Init.stateView("edit", id);
+        $self.setState({tabs, ...view});
+    })
 };
 
 const rxDelete = (reference, id) => {
     const {$self} = reference.props;
-    switchView($self, "list", id)
+    const options = Init.readOption($self);
+    const uri = options['ajax.delete.uri'];
+    const promise = Ux.ajaxDelete(uri, {id});
+    promise.then(data => {
+        // 删除record数据
+        let {record = {}} = $self.state;
+        record = Immutable.fromJS(record).toJS();
+        if (record[id]) delete record[id];
+        // 计算tabs页
+        let {tabs = {}} = $self.state;
+        tabs = Immutable.fromJS(tabs).toJS();
+        tabs.items = tabs.items.filter(item => id !== item.key);
+        tabs.activeKey = tabs.items[0].key;
+        const view = Init.stateView("list");
+        $self.setState({tabs, ...view, record});
+    });
 };
-const switchView = (reference, view, key) => {
-    if (reference) {
-        view = view ? view : "list";
-        reference.setState({view, key})
-    }
-};
-const activeDrawer = (reference) => (event) => {
-    event.preventDefault();
-    reference.setState({drawer: true})
-};
-const closeDrawer = (reference) => (event) => {
-    event.preventDefault();
-    reference.setState({drawer: false})
-};
-const activeTab = (reference) => (key) => {
+
+const rxClose = (reference, item) => () => {
+    // 关闭时处理tab页
     let {tabs = {}} = reference.state;
-    tabs.activeKey = key;
     tabs = Immutable.fromJS(tabs).toJS();
-    // 计算右边按钮
-    const item = tabs.items.filter(item => item.key === key)[0];
-    if ("ADD" === item.type) {
-        switchView(reference, "add");
-    } else if ("EDIT" === item.type) {
-        switchView(reference, "edit", key);
-    } else {
-        switchView(reference, "list");
-    }
-    reference.setState({tabs});
+    tabs.items = tabs.items.filter(each => each.key !== item.key);
+    tabs.activeKey = tabs.items[0].key;
+    // 计算view
+    const view = Init.stateView("list");
+    reference.setState({tabs, ...view});
+    // 写状态树，重新加载List
+    Ux.writeTree(reference, {"grid.list": undefined})
 };
-const closeTab = (reference) => (key, action) => {
-    let {tabs = {}} = reference.state;
-    if ("remove" === action) {
-        let item = tabs.items.filter(item => key === item.key);
-        if (item) {
-            item = item[0];
-            const index = item.index - 1;
-            if (2 < tabs.items.length) {
-                const activeItem = tabs.items.filter(item => item.index === index)[0];
-                tabs.activeKey = activeItem.key;
-                tabs.items = tabs.items.filter(item => key !== item.key);
-                if (0 === activeItem.index) {
-                    switchView(reference, "list");
-                } else {
-                    switchView(reference, "edit", activeItem.key);
-                }
-            } else {
-                tabs.activeKey = tabs.items[0].key;
-                tabs.items = [tabs.items[0]];
-                switchView(reference, "list");
-            }
-        }
-    }
-    tabs = Immutable.fromJS(tabs).toJS();
-    reference.setState({tabs});
+const rxFilter = (reference = {}) => (value, event) => {
+    const {$query} = reference.props;
+    const options = Init.readOption(reference);
+    const search = options['search.cond'];
+    const filters = {};
+    search.forEach(term => filters[term] = value);
+    const query = $query.to();
+    Object.assign(query.criteria, filters);
+    Ux.writeTree(reference, {
+        "grid.query": query,
+        "grid.list": undefined
+    })
+};
+const rxClear = (reference = {}) => () => {
+    const {$query} = reference.props;
+    const query = $query.to();
+    const options = Init.readOption(reference);
+    const search = options['search.cond'];
+    search.forEach(term => delete query.criteria[term]);
+    reference.setState({term: ""});
+    Ux.writeTree(reference, {
+        "grid.query": query,
+        "grid.list": undefined
+    })
+};
+const rxInput = (reference = {}) => (event) => {
+    const term = event.target.value;
+    reference.setState({term})
 };
 export default {
     rxAdd,
     rxEdit,
     rxDelete,
-    activeDrawer,
-    closeDrawer,
-    activeTab,
-    closeTab
+    rxClose,
+    rxFilter,
+    rxClear,
+    rxInput
 }

@@ -9,7 +9,9 @@ const fnError = {
     10005: (steps) => `[ ERR-10005 ] 传入的数据结构只能是Array/String两种，用于核心迭代，当前值：${steps}，类型：${typeof steps}`,
     10006: (reference) => `[ ERR-10006 ] 只有Ant-Design的Form可操作该方法，丢失了"Form"引用：props = ${reference.props.form}`,
     10007: (Op, key) => `[ ERR-10007 ] 当前按钮没有相关函数绑定，请检查你的Op传入变量：Op=${Op}, key=${key}`,
-    10008: (key, expr) => `[ ERR-10008 ] 表达式类型不对，必须是String字符串，key = ${key}, expr = ${expr}`
+    10008: (key, expr) => `[ ERR-10008 ] 表达式类型不对，必须是String字符串，key = ${key}, expr = ${expr}`,
+    10009: (key, attr) => `[ ERR-10009 ] 配置节点" ${key} "中丢失了重要属性：${attr}`,
+    10010: (key, type) => `[ ERR-10010 ] 属性" ${key} "的数据类型只能是：${type}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {
@@ -22,6 +24,15 @@ const _fxContinue = (cond, callback) => {
     }
     if (cond && U.isFunction(callback)) {
         return callback();
+    }
+};
+
+const fxMessage = (code, ...args) => {
+    const fn = fnError[code];
+    if (U.isFunction(fn)) {
+        const message = fn.apply(this, args);
+        console.error(message + "!!!");
+        return message;
     }
 };
 const _fxTerminal = (cond, callback, code, ...args) => {
@@ -61,12 +72,8 @@ export default {
     fxTerminal: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            const fn = fnError[code];
-            if (U.isFunction(fn)) {
-                const message = fn.apply(this, args);
-                console.error(message + "!!!");
-                return message;
-            }
+            return fxMessage.apply(this, [code].concat(args))
         }
-    }
+    },
+    fxMessage
 }

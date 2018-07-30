@@ -3,9 +3,8 @@ import {Button, Col, Drawer, Input, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import Act from './Op.Action';
-import Immutable from 'immutable';
 
-const _renderAdd = (reference, key, value = "") => {
+const _renderOp = (reference, key, value = "") => {
     if ("add" === key) {
         const button = {};
         button.icon = "plus";
@@ -18,11 +17,16 @@ const _renderAdd = (reference, key, value = "") => {
 };
 
 const renderOp = (reference) => {
-    const config = Init.initConfig(reference);
-    const op = config.op ? config.op : {};
+    const options = Init.readOption(reference);
+    const ops = {};
+    Ux.itObject(options, (field, value) => {
+        if (field.startsWith("op")) {
+            ops[field.substring(field.indexOf('.') + 1)] = value;
+        }
+    });
     const buttons = [];
-    Ux.itObject(op, (key, value) => {
-        const addButton = _renderAdd(reference, key, value);
+    Ux.itObject(ops, (key, value) => {
+        const addButton = _renderOp(reference, key, value);
         if (addButton) buttons.push(addButton);
     });
     return (
@@ -36,18 +40,27 @@ const renderOp = (reference) => {
 };
 
 const renderSearch = (reference) => {
-    const config = Init.initConfig(reference);
-    const op = config.op;
-    return op.search ? (
+    const options = Init.readOption(reference);
+    const {term} = reference.state;
+    const enabled = options['search.enabled'];
+    const advanced = options['search.advanced'];
+    return enabled ? (
         (
             <Row>
-                <Col span={op.search['more'] ? 19 : 24}>
-                    <Input.Search placeholder={op.search['placeholder'] ? op.search['placeholder'] : ""}/>
+                <Col span={advanced ? 18 : 24}>
+                    <Input.Search placeholder={options['search.placeholder'] ?
+                        options['search.placeholder'] : ""}
+                                  onSearch={Act.rxFilter(reference)}
+                                  value={term}
+                                  onChange={Act.rxInput(reference)}/>
                 </Col>
-                {op.search['more'] ? (
-                    <Col span={4} offset={1}>
+                {advanced ? (
+                    <Col span={5} offset={1}>
                         <Button.Group>
-                            <Button icon={"ellipsis"} onClick={Act.activeDrawer(reference)}/>
+                            <Button icon={"delete"} onClick={Act.rxClear(reference)}/>
+                            <Button icon={"ellipsis"} onClick={() => {
+                                reference.setState({drawer: true})
+                            }}/>
                         </Button.Group>
                     </Col>
                 ) : false}
@@ -57,23 +70,28 @@ const renderSearch = (reference) => {
 };
 
 const renderDrawer = (reference) => {
-    const config = Init.initConfig(reference);
-    const op = config.op;
-    if (op.search && op.search['more']) {
+    const options = Init.readOption(reference);
+    const enabled = options['search.enabled'];
+    const advanced = options['search.advanced'];
+    if (enabled && advanced) {
         const {drawer = false} = reference.state;
-        const drawerConfig = Immutable.fromJS(config.drawer).toJS();
-        drawerConfig.placement = "right";
-        drawerConfig.maskClosable = false;
-        drawerConfig.visible = drawer;
-        drawerConfig.style = {
+        const config = {};
+        config.placement = "right";
+        config.maskClosable = false;
+        config.visible = drawer;
+        config.style = {
             height: 'calc(100% - 55px)',
             overflow: 'auto',
             paddingBottom: 53
         };
-        drawerConfig.onClose = Act.closeDrawer(reference);
+        config.width = options['search.advanced.width'];
+        config.title = options['search.advanced.title'];
+        config.onClose = () => {
+            reference.setState({drawer: false})
+        };
         const {$formFilter: Component} = reference.props;
         return Component ? (
-            <Drawer {...drawerConfig}>
+            <Drawer {...config}>
                 <Component {...reference.props}/>
             </Drawer>
         ) : false
@@ -82,10 +100,9 @@ const renderDrawer = (reference) => {
 
 const renderButton = (reference, reset = false) => (event) => {
     event.preventDefault();
-    const config = Init.initConfig(reference);
-    const {submit} = config.op;
+    const options = Init.readOption(reference);
     const {key, view} = reference.state;
-    const prefix = reset ? submit["reset"] : submit[view];
+    const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
     const connectId = `${prefix}${key ? key : ""}`;
     Ux.connectId(connectId);
 };
