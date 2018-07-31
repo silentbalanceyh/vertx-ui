@@ -1,0 +1,364 @@
+{
+    "_configuration": {
+        "items": {
+            "name": "ComplexList组件",
+            "children": [
+                {
+                    "name": "props",
+                    "children": [
+                        {
+                            "name": "reference",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "rxSearch",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$formFilter",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$formAdd",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$formEdit",
+                            "color": "#e23c39"
+                        }
+                    ]
+                },
+                {
+                    "name": "_<hoc>",
+                    "children": [
+                        {
+                            "name": "query",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "projection",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "pager",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "sorter",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "criteria",
+                                    "color": "#33af43"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "options",
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "search.cond",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.enabled",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.placeholder",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.advanced",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.advanced.with",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.advanced.title",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "tabs.list",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "tabs.add",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "tabs.edit",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "op.add",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "submit.add",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "submit.edit",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "submit.reset",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "ajax.get.uri",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "ajax.delete.uri",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "confirm.delete",
+                                    "color": "#33af43"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "table",
+                            "color": "#e23c39"
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 120,
+            "vgap": 10,
+            "height": 900
+        }
+    },
+    "_data": [
+        {
+            "source": "P",
+            "name": "reference",
+            "comment": "父组件引用",
+            "type": "React.Component",
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "rxSearch",
+            "comment": "（Epic函数）专用搜索函数",
+            "type": "Function",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$formFilter",
+            "comment": "高级搜索中的搜索表单",
+            "type": "React.Component",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$formAdd",
+            "comment": "添加表单",
+            "type": "React.Component",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$formEdit",
+            "comment": "编辑表单",
+            "type": "React.Component",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "query",
+            "comment": "查询引擎关联的query参数集",
+            "type": "Object",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "query",
+            "option": "projection",
+            "comment": "查询结果中的列过滤",
+            "type": "Array",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "query",
+            "option": "pager",
+            "comment": "查询过程中的分页参数，包含page,size两个属性",
+            "type": "Object | String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "query",
+            "option": "sorter",
+            "comment": "查询过程中的排序参数，支持多字段排序",
+            "type": "Array | String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "query",
+            "option": "criteria",
+            "comment": "查询过程中的查询树参数",
+            "type": "Object | String",
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "options",
+            "comment": "当前列表的所有选项",
+            "type": "Object",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.cond",
+            "comment": "快速搜索中的查询条件",
+            "type": "Array",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.enabled",
+            "comment": "是否启用搜索功能",
+            "type": "Boolean",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.placeholder",
+            "comment": "快速搜索中的水印文字",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.advanced",
+            "comment": "是否开启高级搜索",
+            "type": "Boolean",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.advanced.width",
+            "comment": "高级搜索中的抽屉表单整体宽度，使用CSS中的width语法",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.advanced.title",
+            "comment": "高级搜索中的抽屉表单标题文字",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "tabs.list",
+            "comment": "列表Tab页的标题文字，支持表达式",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "tabs.add",
+            "comment": "列表Tab页打开添加表单的标题文字，支持表达式",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "tabs.edit",
+            "comment": "列表Tab页打开编辑表单的标题文字，支持表达式",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "op.add",
+            "comment": "添加按钮中的文字，不设置则不启用添加按钮功能",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "submit.add",
+            "comment": "提交添加表单的connect按钮对应的HTML ID",
+            "type": "String",
+            "value": "$opAdd"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "submit.edit",
+            "comment": "提交编辑表单的connect按钮对应的HTML ID",
+            "type": "String",
+            "value": "$opEdit"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "submit.reset",
+            "comment": "重置按钮对应的HTML ID",
+            "type": "String",
+            "value": "$opReset"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "ajax.get.uri",
+            "comment": "读取记录的远程链接，只能用id查找，GET方法",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "ajax.delete.uri",
+            "comment": "删除记录的远程链接，只能用id删除，DELETE方法",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "confirm.delete",
+            "comment": "删除过程中的提示文字",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "H",
+            "name": "table",
+            "comment": "当前列表的表格相关配置",
+            "type": "Object",
+            "required": true,
+            "value": "--"
+        }
+    ]
+}

@@ -1,7 +1,7 @@
 {
     "_configuration": {
         "items": {
-            "name": "HelpCard组件",
+            "name": "ComplexList组件",
             "children": [
                 {
                     "name": "props",
