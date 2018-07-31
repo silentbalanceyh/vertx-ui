@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from "ux";
 import {Fn} from 'app';
-import {PageCard} from 'web';
+import {HelpCard} from 'web';
 
 const {zero} = Ux;
 
@@ -15,11 +15,13 @@ class Component extends React.PureComponent {
     }
 
     render() {
+        const demo = Ux.fromHoc(this, "demo");
         const {source = ""} = this.state ? this.state : {};
         return Fn.demoComponent(this,
-            <PageCard reference={this}>
-                PageCard
-            </PageCard>
+            <HelpCard reference={this}>
+                {Fn.demoMessage(this)}
+                {Fn.demoButtons(this, demo.buttons)}
+            </HelpCard>
             , source)
     }
 }

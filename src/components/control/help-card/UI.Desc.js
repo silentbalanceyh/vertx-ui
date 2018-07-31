@@ -11,7 +11,7 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         return (
-            <AttrTree reference={this} $name={"PageCard"}/>
+            <AttrTree reference={this} $name={"HelpCard"}/>
         )
     }
 }

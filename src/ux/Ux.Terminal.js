@@ -1,20 +1,6 @@
 import React from 'react';
-import E from './Ux.Error'
 import Prop from './Ux.Prop';
 import Verifier from './Ux.Terminal.Verify';
-
-const _ensureKey = (reference, key = "") => {
-    let message = undefined;
-    if ("string" === typeof key) {
-        const {$hoc} = reference.state;
-        const name = $hoc.name();
-        if (!key.startsWith("_")) key = `_${key}`;
-        message = E.fxTerminal(true, 10001, name, key);
-    }
-    return message;
-};
-
-const fxRender = (reference = {}, key = "") => (fxError(_ensureKey(reference, key)));
 
 const fxError = (message) => (<div className={"error-page"}>{message}</div>);
 /**
@@ -35,8 +21,23 @@ const verifyComplex = (reference = {}, key = "") => {
     }
     return message;
 };
+const verifyCard = (ref = {}) => {
+    const {$key = "page", reference} = ref.props;
+    let message = Verifier.verifyRooKey(reference, $key);
+    // TODO: 后期处理
+    return message;
+};
+const fxRender = (reference, render) => {
+    const {error} = reference.state ? reference.state : {};
+    if (error) {
+        return fxError(error);
+    } else {
+        return render()
+    }
+};
 export default {
-    fxRender,
     fxError,
-    verifyComplex
+    fxRender,
+    verifyComplex,
+    verifyCard
 }

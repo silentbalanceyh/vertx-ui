@@ -45,7 +45,13 @@
                         },
                         {
                             "name": "back",
-                            "color": "#33af43"
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "state",
+                                    "color": "#33af43"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -54,7 +60,7 @@
         "layout": {
             "hgap": 120,
             "vgap": 10,
-            "height": 320
+            "height": 400
         }
     },
     "_data": [
@@ -88,7 +94,7 @@
         },
         {
             "source": "P",
-            "name": "$card",
+            "name": "$extra",
             "comment": "如果指定了$extra，则right/back两个属性设置信息失效，以$extra中设置优先",
             "type": "ReactNode",
             "value": "--"
@@ -117,6 +123,14 @@
         {
             "source": "H",
             "name": "back",
+            "comment": "关闭节点",
+            "type": "Object",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "back",
+            "option": "state",
             "comment": "关闭过程中需要写入的状态state，如果不设则不显示",
             "type": "Object",
             "value": "--"

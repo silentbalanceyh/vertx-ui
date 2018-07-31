@@ -10,9 +10,8 @@ const renderColumn = (columns = [], mapping = {}) => {
         if ("source" === column.dataIndex) {
             column.render = (text) => {
                 const item = mapping['source'][text];
-                const {label, ...rest} = item;
                 return (
-                    <span><Icon {...rest}/>&nbsp;&nbsp;{label}</span>
+                    <span><Icon {...item}/></span>
                 )
             }
         }
@@ -27,7 +26,7 @@ const renderColumn = (columns = [], mapping = {}) => {
                 return <Icon type={type}/>;
             }
         }
-        if ("name" === column.dataIndex) {
+        if ("name" === column.dataIndex || "option" === column.dataIndex) {
             column.render = (text) => {
                 if ("reference" === text || "children" === text) {
                     return (
@@ -36,9 +35,13 @@ const renderColumn = (columns = [], mapping = {}) => {
                         }}>{text}</span>
                     )
                 } else {
-                    return (
+                    return "name" === column.dataIndex ? (
                         <span style={{
                             color: "#1e358c"
+                        }}>{text}</span>
+                    ) : (
+                        <span style={{
+                            color: "#4169E1"
                         }}>{text}</span>
                     )
                 }
@@ -149,6 +152,7 @@ class Component extends React.PureComponent {
         const {reference} = this.props;
         const current = this.state.$hoc;
         const icon = current._("comment").icon;
+        const type = current._("comment").type;
         const table = current._("table");
         const data = reference.state.$hoc._("data");
         data.forEach(item => item.key = v4());
@@ -181,13 +185,25 @@ class Component extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col span={3}>
-                        <Collapse activeKey={[icon.key]}>
+                        <Collapse activeKey={[icon.key, type.key]}>
                             <Collapse.Panel header={icon.title} key={icon.key}>
                                 {icon.items.map(item => (
                                     <div key={item.color} style={{
                                         marginBottom: 10
                                     }}>
                                         <Icon type={"info-circle"} style={{
+                                            fontSize: 16,
+                                            color: item.color
+                                        }}/>&nbsp;&nbsp;{item.text}
+                                    </div>
+                                ))}
+                            </Collapse.Panel>
+                            <Collapse.Panel header={type.title} key={type.key}>
+                                {type.items.map(item => (
+                                    <div key={item.color} style={{
+                                        marginBottom: 10
+                                    }}>
+                                        <Icon type={item.icon} style={{
                                             fontSize: 16,
                                             color: item.color
                                         }}/>&nbsp;&nbsp;{item.text}

@@ -3,7 +3,7 @@
 ```javascript
     import React from "react";
     import Ux from "ux";
-    import {PageCard} from "app";
+    import {HelpCard} from "app";
     
     const {zero} = Ux;
     
@@ -14,9 +14,9 @@
     class Component extends React.PureComponent {
         render(){
             return (
-                <PageCard reference={this}>
+                <HelpCard reference={this}>
                     {/** 子控件 **/}
-                </PageCard>
+                </HelpCard>
             )
         }
     }

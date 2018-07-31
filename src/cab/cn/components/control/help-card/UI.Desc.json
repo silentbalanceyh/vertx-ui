@@ -1,7 +1,7 @@
 {
     "_configuration": {
         "items": {
-            "name": "PageCard组件",
+            "name": "HelpCard组件",
             "children": [
                 {
                     "name": "props",
@@ -21,6 +21,10 @@
                         {
                             "name": "$card",
                             "color": "#33af43"
+                        },
+                        {
+                            "name": "$current",
+                            "color": "#33af43"
                         }
                     ]
                 },
@@ -36,12 +40,28 @@
                             "color": "#33af43"
                         },
                         {
-                            "name": "right",
-                            "color": "#33af43"
+                            "name": "help",
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "current",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "steps",
+                                    "color": "#33af43"
+                                }
+                            ]
                         },
                         {
                             "name": "back",
-                            "color": "#33af43"
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "state",
+                                    "color": "#33af43"
+                                }
+                            ]
                         }
                     ]
                 }
@@ -50,7 +70,7 @@
         "layout": {
             "hgap": 120,
             "vgap": 10,
-            "height": 320
+            "height": 400
         }
     },
     "_data": [
@@ -83,6 +103,13 @@
             "value": "page-card"
         },
         {
+            "source": "P",
+            "name": "$current",
+            "comment": "指定帮助组件的步骤索引，默认使用_hoc中的help.currrent值",
+            "type": "Number",
+            "value": "--"
+        },
+        {
             "source": "H",
             "name": "title",
             "comment": "PageCard的标题",
@@ -98,14 +125,38 @@
         },
         {
             "source": "H",
-            "name": "right",
-            "comment": "PageCard右边的工具栏",
-            "type": "Array [ Button ]",
+            "name": "help",
+            "comment": "帮助栏属性",
+            "type": "Object",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "help",
+            "option": "current",
+            "comment": "当前流程的步骤索引",
+            "type": "Number",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "help",
+            "option": "steps",
+            "comment": "当前帮助中的基础流程步骤数据",
+            "type": "String | Array",
             "value": "--"
         },
         {
             "source": "H",
             "name": "back",
+            "comment": "关闭节点",
+            "type": "Object",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "back",
+            "option": "state",
             "comment": "关闭过程中需要写入的状态state，如果不设则不显示",
             "type": "Object",
             "value": "--"
