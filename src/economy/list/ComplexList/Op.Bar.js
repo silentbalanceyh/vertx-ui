@@ -57,7 +57,7 @@ const renderSearch = (reference) => {
                 {advanced ? (
                     <Col span={5} offset={1}>
                         <Button.Group>
-                            <Button icon={"delete"} onClick={Act.rxClear(reference)}/>
+                            <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
                             <Button icon={"ellipsis"} onClick={() => {
                                 reference.setState({drawer: true})
                             }}/>

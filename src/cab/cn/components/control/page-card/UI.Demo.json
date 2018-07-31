@@ -1,6 +1,6 @@
 {
     "_page": {
-        "title": "测试PageCard组件",
+        "title": "测试标题",
         "left": [
             "btnFirst,点击1,$opFirst,primary",
             {

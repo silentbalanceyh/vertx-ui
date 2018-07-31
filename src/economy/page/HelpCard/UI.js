@@ -30,7 +30,8 @@ import {DataLabor} from 'entity';
             })
             .rinit(["submitting"])
             .to()
-    }
+    },
+    verify: (reference) => Ux.verifyCard(reference)
 })
 class Component extends React.PureComponent {
     static propTypes = {

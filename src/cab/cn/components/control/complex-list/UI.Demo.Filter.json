@@ -1,0 +1,22 @@
+{
+    "_form": {
+        "ui": [
+            [
+                {
+                    "field": "name",
+                    "optionItem": {
+                        "label": "部门名称"
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "code",
+                    "optionItem": {
+                        "label": "部门代码"
+                    }
+                }
+            ]
+        ]
+    }
+}

@@ -1,6 +1,7 @@
 import {HocI18n} from "entity";
 import Logger from './Ix.Logger';
 import {connect} from "react-redux";
+import Ux from "ux";
 
 const _ixFullName = (Component, Cab = {}, Name) => {
     // ns 属性检查
@@ -53,6 +54,7 @@ const _ixConnect = (target, options = {}) => {
 const _zero = (options = {}) => {
     return (target, property, descriptor) => {
         const injectState = options.state ? options.state : {};
+        const verify = options.verify ? options.verify : () => undefined;
 
         class _target extends target {
             // 静态资源放到State状态中
@@ -62,7 +64,18 @@ const _zero = (options = {}) => {
                 ...injectState
             };
 
+            componentDidMount() {
+                const error = verify(this);
+                this.setState({error});
+                if (!error && super.componentDidMount) {
+                    super.componentDidMount();
+                }
+            }
+
             render() {
+                const {error} = this.state;
+                if (error) return Ux.fxError(error);
+                
                 const fullName = _ixI18nName(this, options);
                 Logger.debug(this, fullName);
                 return super.render();

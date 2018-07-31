@@ -28,7 +28,8 @@ import {_zero} from "../../_internal";
             })
             .rinit(["submitting"])
             .to()
-    }
+    },
+    verify: (reference) => Ux.verifyCard(reference)
 })
 class Component extends React.PureComponent {
     static propTypes = {
@@ -44,8 +45,8 @@ class Component extends React.PureComponent {
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
         // ZeroError：检查点
-        if (!topbar) return Ux.fxRender(reference, $key);
-        topbar = Immutable.fromJS(topbar).toJS();
+        // if (!topbar) return Ux.fxRender(reference, $key);
+        topbar = Immutable.fromJS(topbar ? topbar : {}).toJS();
         // 解析按钮
         if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, this.props);
         if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, this.props);

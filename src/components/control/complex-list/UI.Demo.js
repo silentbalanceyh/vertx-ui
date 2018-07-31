@@ -1,12 +1,19 @@
 import React from 'react'
 import Ux from "ux";
 import {Fn} from 'app';
-import {HelpCard} from 'web';
+import {ComplexList, HelpCard} from 'web';
+import Types from './Act.Types';
+import Filter from './UI.Demo.Filter';
+import FormAdd from './UI.Demo.Form.Add';
+import FormEdit from './UI.Demo.Form.Update'
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo")
+    .connect({
+        rxSearch: Types.fnDeptList
+    }, true)
     .to()
 )
 class Component extends React.PureComponent {
@@ -15,12 +22,14 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const demo = Ux.fromHoc(this, "demo");
         const {source = ""} = this.state ? this.state : {};
         return Fn.demoComponent(this,
             <HelpCard reference={this}>
-                {Fn.demoMessage(this)}
-                {Fn.demoButtons(this, demo.buttons)}
+                <ComplexList {...this.props}
+                             reference={this}
+                             $formFilter={Filter}
+                             $formAdd={FormAdd}
+                             $formEdit={FormEdit}/>
             </HelpCard>
             , source)
     }

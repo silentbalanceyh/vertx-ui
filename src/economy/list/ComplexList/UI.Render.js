@@ -11,7 +11,7 @@ const renderPageAdd = (reference, item = {}) => {
     ) : false
 };
 const renderPageEdit = (reference, item = {}) => {
-    const {$formUpdate: Component} = reference.props;
+    const {$formEdit: Component} = reference.props;
     const {record} = reference.state;
     const $inited = record[item.key] ? record[item.key] : {};
     return Component ? (

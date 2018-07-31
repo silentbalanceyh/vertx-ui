@@ -17,6 +17,27 @@
                     "text": "可选属性"
                 }
             ]
+        },
+        "type": {
+            "key": "plAttr",
+            "title": "属性类型表",
+            "items": [
+                {
+                    "color": "#1464b4",
+                    "text": "prop属性",
+                    "icon": "api"
+                },
+                {
+                    "color": "#ff8626",
+                    "text": "hoc属性",
+                    "icon": "fork"
+                },
+                {
+                    "color": "#C71585",
+                    "text": "option选项",
+                    "icon": "appstore-o"
+                }
+            ]
         }
     },
     "_tabs": [
@@ -38,6 +59,10 @@
             {
                 "dataIndex": "name",
                 "title": "属性名"
+            },
+            {
+                "dataIndex": "option",
+                "title": "选项"
             },
             {
                 "dataIndex": "comment",
@@ -64,7 +89,6 @@
         "source": {
             "P": {
                 "type": "api",
-                "label": "props属性",
                 "style": {
                     "fontSize": "18px",
                     "color": "#1464b4"
@@ -72,10 +96,16 @@
             },
             "H": {
                 "type": "fork",
-                "label": "hoc属性",
                 "style": {
                     "fontSize": "18px",
                     "color": "#ff8626"
+                }
+            },
+            "O": {
+                "type": "appstore-o",
+                "style": {
+                    "fontSize": "18px",
+                    "color": "#C71585"
                 }
             }
         }

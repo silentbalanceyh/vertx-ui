@@ -106,6 +106,18 @@
             "name": "zui.control.help-card",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
+        },
+        {
+            "key": "3285cf75-4fe9-4d1c-a873-b4ee3c76e87b",
+            "active": true,
+            "left": 3,
+            "level": 2,
+            "text": "ComplexList",
+            "icon": "table",
+            "uri": "/control/complex-list",
+            "name": "zui.control.complex-list",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
         }
     ]
 }
