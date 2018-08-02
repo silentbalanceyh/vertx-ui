@@ -51,6 +51,36 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
     }
 };
 
+const runFilter = (reference = {}, postFun) => {
+    const {form} = reference.props;
+    if (form) {
+        form.validateFieldsAndScroll((error, values) => {
+            if (error) {
+                return;
+            }
+            const params = Immutable.fromJS(values).toJS();
+            Value.valueValid(params);
+            const {$query, fnClose} = reference.props;
+            if ($query.is()) {
+                let query = $query.to();
+                if (!query.criteria) query.criteria = {};
+                query.criteria["$2"] = params;
+                query.criteria[""] = true;
+                if (U.isFunction(postFun)) {
+                    query = postFun(query, reference);
+                }
+                Ux.writeTree(reference, {
+                    "grid.query": query,
+                    "grid.list": undefined
+                });
+                if (fnClose) fnClose();
+            }
+        });
+    } else {
+        console.error("[VI] Form Submitting met errors, reference is null.", form);
+    }
+};
+
 const rxSubmit = (reference = {}, $_loading = "", {
     success = () => {
     },
@@ -107,6 +137,7 @@ const rxInit = (props, params = {}) => {
  */
 export default {
     runSubmit,
+    runFilter,
     rxSubmit,
     rxInit
 }

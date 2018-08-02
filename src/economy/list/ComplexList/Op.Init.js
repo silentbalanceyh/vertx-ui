@@ -86,7 +86,10 @@ const initGrid = (reference = {}) => {
 };
 const readOption = (reference) => readConfig(reference).options;
 const readTable = (reference) => readConfig(reference).table;
-const readQuery = (reference) => readConfig(reference).query;
+const readQuery = (reference) => {
+    const queryConfig = readConfig(reference).query;
+    return Ux.irGrid(queryConfig, reference.props);
+};
 const updateGrid = (reference = {}, prevProps = {}) => {
     const record = reference.props['$list'];
     if (undefined === record) {

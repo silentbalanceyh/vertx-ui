@@ -16,32 +16,36 @@ const aiRows = (config = [], ...jsx) => (config.map((row, index) => (
     </Row>
 )));
 
+const aiColumns = (config = [], ...jsx) => {
+    return config.map((item, index) => {
+        const isNum = "number" === typeof item;
+        // 表达式处理
+        const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
+        if (isNum) {
+            return (
+                <Col span={item} key={`$$AiCol${index}`}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            )
+        } else if (isExpr) {
+            const attrs = RxAnt.toParsed(item, index);
+            // 重写key值
+            attrs.key = `$$AiCol${index}`;
+            return (
+                <Col {...attrs}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            )
+        } else {
+            return false;
+        }
+    });
+};
+
 const aiGrid = (config = [], ...jsx) => {
     return (
         <Row>
-            {config.map((item, index) => {
-                const isNum = "number" === typeof item;
-                // 表达式处理
-                const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
-                if (isNum) {
-                    return (
-                        <Col span={item} key={`$$AiCol${index}`}>
-                            {jsx[index] ? jsx[index] : false}
-                        </Col>
-                    )
-                } else if (isExpr) {
-                    const attrs = RxAnt.toParsed(item, index);
-                    // 重写key值
-                    attrs.key = `$$AiCol${index}`;
-                    return (
-                        <Col {...attrs}>
-                            {jsx[index] ? jsx[index] : false}
-                        </Col>
-                    )
-                } else {
-                    return false;
-                }
-            })}
+            {aiColumns(config, jsx)}
         </Row>
     )
 };
@@ -53,5 +57,6 @@ const aiTable = (dataSource = [], table = {}) => {
 export default {
     aiRows,
     aiGrid,
+    aiColumns,
     aiTable
 }

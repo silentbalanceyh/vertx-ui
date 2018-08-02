@@ -1,13 +1,16 @@
 import React from 'react';
 import Prop from '../Ux.Prop';
 import State from '../Ux.State';
+import Act from '../Ux.Action';
 import U from 'underscore';
 import E from '../Ux.Error';
 import Cv from '../Ux.Constant';
 import Value from '../Ux.Value';
 import Type from '../Ux.Type';
+import Layout from './AI.Layout';
 import {Button, Icon} from 'antd';
 import Immutable from 'immutable';
+import Ux from "ux";
 
 const _aiSubmit = (reference, callback) => (event) => {
     event.preventDefault();
@@ -190,11 +193,43 @@ const aiFormButton = (reference, onClick, id = false) => {
         )
     }
 };
+
+const ai2FormButton = (Op, id = false) => {
+    return {
+        $button: (reference) => aiFormButton(reference, Op, id)
+    };
+};
+const ai2FilterButton = (window = 1) => {
+    return {
+        $button: (reference) => {
+            const button = Prop.fromHoc(reference, "button");
+            return (1 / 3 === window) ? Layout.aiColumns([7, 14],
+                undefined,
+                <Button.Group>
+                    <Button type={"primary"} icon={"search"}
+                            onClick={() => Act.runFilter(reference)}>{button.search}</Button>
+                    <Button icon={"reload"} onClick={() => {
+                        const ref = reference.props.reference;
+                        const queryConfig = Ux.fromHoc(ref, "grid").query;
+                        const query = Ux.irGrid(queryConfig, ref.props);
+                        Ux.writeTree(ref, {
+                            "grid.query": query,
+                            "grid.list": undefined
+                        });
+                        Prop.formReset(reference)
+                    }}>{button.clear}</Button>
+                </Button.Group>
+            ) : false
+        }
+    }
+};
 export default {
     ai2Event,
     // 表单2阶按钮
     ai2Submit,
     aiFormButton,
+    ai2FormButton,
+    ai2FilterButton,
     // 表单1阶按钮
     aiSubmit,
     aiButton,

@@ -31,9 +31,11 @@ const _uiDisplay = (row = {}, addition = {}) => {
     if (1 === row.length) {
         // 单按钮
         const item = row[0];
-        if (item.hidden) {
-            if (item.field === "$button") {
+        if (item.field === "$button") {
+            if (item.hidden) {
                 style.display = "none";
+            } else {
+                style.width = "100%"
             }
         }
         // 标题单行修正间距专用
@@ -86,6 +88,13 @@ const jsxField = (reference, item = {}, render) => {
             )
         }
     };
+    // $button修正
+    if ("$button" === item.field) {
+        if (item.optionItem) {
+            item.optionItem.labelCol = {span: 0};
+            item.optionItem.wrapperCol = {span: 24};
+        }
+    }
     return item.optionItem ? (
         <Form.Item {..._optionFormItem(item.optionItem)}>
             {jsxRender(item)}
@@ -157,12 +166,13 @@ const _jsxFieldCommon = (reference, renders, item = {}, layout = {}) => {
         return false;
     }
 };
-const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form = {}) => {
+const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, config = {}) => {
     const span = 24 / column;
     // 行配置处理
     const formConfig = Prop.fromHoc(reference, "form");
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     const hiddens = Norm.extractHidden(reference);
+    const {form = [], ...rest} = config;
     // 读取配置数据
     return (
         <div>
@@ -184,7 +194,8 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
                             return _jsxFieldCommon(reference, renders, item, {
                                 span,
                                 rowIndex,
-                                cellIndex
+                                cellIndex,
+                                ...rest
                             });
                         }
                     })}
@@ -200,13 +211,17 @@ const _jsxField = (reference = {}, renders = {}, column = 4, values = {}, form =
  * @param renders 每个字段不同的render方法
  * @param column 当前Form的列数量
  * @param values Form的初始化值
+ * @param config Form相关配置项
  * @return {boolean}
  */
-const jsxFieldGrid = (reference = {}, renders = {}, column = 4, values = {}) => {
+const jsxFieldGrid = (reference = {}, renders = {}, column = 4, values = {}, config = {}) => {
     // Fix Issue
     if (!values) values = {};
     const form = Norm.extractForm(reference);
-    return _jsxField(reference, renders, column, values, form);
+    return _jsxField(reference, renders, column, values, {
+        form,
+        ...config
+    });
 };
 /**
  * 分组渲染交互式控件
@@ -222,7 +237,10 @@ const jsxFieldGroup = (reference = {}, renders = {}, column = 4, values = {}, gr
     // Fix Issue
     if (!values) values = {};
     const form = Norm.extractGroupForm(reference, groupIndex);
-    return _jsxField(reference, renders, column, values, form);
+    return _jsxField(reference, renders, column, values, {
+        form,
+        group: groupIndex
+    });
 };
 /**
  * 仅渲染按钮
@@ -253,17 +271,8 @@ const jsxOp = (reference = {}, column = 4, op = {}) => {
         </Row>
     ) : false)
 };
-/**
- * 针对Form进行分行渲染专用方法，可按照Grid的布局进行渲染
- * @method uiFieldForm
- * @param {React.PureComponent} reference React对应组件引用
- * @param renders 每个字段不同的render方法
- * @param column 当前Form的列数量
- * @param values Form的初始化值
- * @param op 追加方法
- * @return {*}
- */
-const uiFieldForm = (reference = {}, renders = {}, column = 4, values, op = {}) => {
+
+const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config) => {
     // Fix Issue
     if (!values) {
         if (reference.props['$inited']) {
@@ -274,8 +283,17 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, op = {}) 
     }
     return (
         <Form layout="inline" className="page-form">
-            {jsxFieldGrid(reference, renders, column, values)}
-            {jsxOp(reference, column, op)}
+            {jsxFieldGrid(reference, renders, column, values, config)}
+        </Form>
+    )
+};
+
+const uiFieldFilter = (reference = {}, renders = {}, column = 2) => {
+    return (
+        <Form layout="horizontal" className="page-filter">
+            {jsxFieldGrid(reference, renders, column, {}, {
+                window: 1 / 3
+            })}
         </Form>
     )
 };
@@ -472,6 +490,7 @@ const jsxOpArchor = (reference) => {
 export default {
     // Form专用
     uiFieldForm,
+    uiFieldFilter,
     // -------------- 以上为Form内置 ---------------
     viewColumn,
     viewTitle,

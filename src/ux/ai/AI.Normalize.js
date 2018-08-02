@@ -85,9 +85,21 @@ const _aiValidator = (item = {}, reference) => {
     }
 };
 
-const _aiOptionItem = (item, key) => {
-    if (LayoutType.hasOwnProperty(key)) {
-        const optionItem = LayoutType[key];
+const _aiOptionItem = (item, key, config) => {
+    let layoutType = null;
+    if (config.layout) {
+        layoutType = config.layout;
+    } else {
+        // 计算
+        const window = config.window ? config.window : 1;
+        if (1 === window) {
+            layoutType = LayoutType[1];
+        } else if (1 / 3 === window) {
+            layoutType = LayoutType[0.3];
+        }
+    }
+    if (layoutType && layoutType.hasOwnProperty(key)) {
+        const optionItem = layoutType[key];
         if (item.optionItem) {
             if (!item.optionItem.style) item.optionItem.style = optionItem.style;
             if (!item.optionItem.labelCol) item.optionItem.labelCol = optionItem.labelCol;
@@ -105,10 +117,10 @@ const _aiLayout = (item, layout = {}) => {
     if (6 === span || 8 === span || 12 === span || 24 === span) {
         const prefix = 24 / span;
         const key = `${prefix}${cellIndex}`;
-        _aiOptionItem(item, key);
+        _aiOptionItem(item, key, layout);
     } else if (7 === span) {
         const key = `74${cellIndex}`;
-        _aiOptionItem(item, key);
+        _aiOptionItem(item, key, layout);
     }
 };
 
