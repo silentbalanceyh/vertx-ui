@@ -116,19 +116,16 @@ const rxFilter = (reference = {}) => (value, event) => {
     })
 };
 const rxClear = (reference = {}) => () => {
-    const {term} = reference.state;
-    if (term) {
-        const {$query} = reference.props;
-        const query = $query.to();
-        const options = Init.readOption(reference);
-        const search = options['search.cond'];
-        search.forEach(term => delete query.criteria[term]);
-        reference.setState({term: ""});
-        Ux.writeTree(reference, {
-            "grid.query": query,
-            "grid.list": undefined
-        })
-    }
+    const {$query} = reference.props;
+    const query = $query.to();
+    const options = Init.readOption(reference);
+    const search = options['search.cond'];
+    search.forEach(term => delete query.criteria[term]);
+    reference.setState({term: ""});
+    Ux.writeTree(reference, {
+        "grid.query": query,
+        "grid.list": undefined
+    })
 };
 const rxInput = (reference = {}) => (event) => {
     const term = event.target.value;

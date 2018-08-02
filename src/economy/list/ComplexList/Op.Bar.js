@@ -60,14 +60,11 @@ const renderSearch = (reference) => {
                             <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
                             <Button icon={"ellipsis"} onClick={() => {
                                 // 判断是否已经在快速搜索中输入了数据
-                                const {term = ""} = reference.state;
-                                if ("" !== term) {
-                                    const query = Init.readQuery(reference);
-                                    Ux.writeTree(reference, {
-                                        "grid.query": query,
-                                        "grid.list": undefined
-                                    });
-                                }
+                                const query = Init.readQuery(reference);
+                                Ux.writeTree(reference, {
+                                    "grid.query": query,
+                                    "grid.list": undefined
+                                });
                                 reference.setState({drawer: true, term: ""})
                             }}/>
                         </Button.Group>
@@ -98,6 +95,7 @@ const renderDrawer = (reference) => {
         const fnClose = () => {
             reference.setState({drawer: false})
         };
+        config.maskClosable = true;
         config.onClose = fnClose;
         const {$formFilter: Component} = reference.props;
         return Component ? (

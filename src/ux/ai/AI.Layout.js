@@ -1,6 +1,7 @@
 import React from 'react'
 import {Col, Row, Table} from 'antd';
 import RxAnt from './AI.RxAnt';
+import Random from '../Ux.Random';
 
 /**
  * 直接渲染多行
@@ -23,14 +24,14 @@ const aiColumns = (config = [], ...jsx) => {
         const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
         if (isNum) {
             return (
-                <Col span={item} key={`$$AiCol${index}`}>
+                <Col span={item} key={Random.randomUUID()}>
                     {jsx[index] ? jsx[index] : false}
                 </Col>
             )
         } else if (isExpr) {
             const attrs = RxAnt.toParsed(item, index);
             // 重写key值
-            attrs.key = `$$AiCol${index}`;
+            attrs.key = Random.randomUUID();
             return (
                 <Col {...attrs}>
                     {jsx[index] ? jsx[index] : false}
@@ -45,7 +46,7 @@ const aiColumns = (config = [], ...jsx) => {
 const aiGrid = (config = [], ...jsx) => {
     return (
         <Row>
-            {aiColumns(config, jsx)}
+            {aiColumns.apply(this, [config].concat(jsx))}
         </Row>
     )
 };

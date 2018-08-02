@@ -13,9 +13,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {
-            $button: (reference) => Ux.aiFormButton(reference, Op)
-        }, 1)
+        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 1)
     }
 }
 
