@@ -103,15 +103,16 @@ const rxClose = (reference, item) => () => {
     Ux.writeTree(reference, {"grid.list": undefined})
 };
 const rxFilter = (reference = {}) => (value, event) => {
-    const {$query} = reference.props;
+    const $query = Init.readQuery(reference);
     const options = Init.readOption(reference);
     const search = options['search.cond'];
     const filters = {};
-    search.forEach(term => filters[term] = value);
-    const query = $query.to();
-    Object.assign(query.criteria, filters);
+    if (value) {
+        search.forEach(term => filters[term] = value);
+    }
+    Object.assign($query.criteria, filters);
     Ux.writeTree(reference, {
-        "grid.query": query,
+        "grid.query": $query,
         "grid.list": undefined
     })
 };

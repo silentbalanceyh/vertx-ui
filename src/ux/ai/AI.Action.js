@@ -1,7 +1,6 @@
 import React from 'react';
 import Prop from '../Ux.Prop';
 import State from '../Ux.State';
-import Act from '../Ux.Action';
 import U from 'underscore';
 import E from '../Ux.Error';
 import Cv from '../Ux.Constant';
@@ -207,7 +206,7 @@ const ai2FilterButton = (window = 1) => {
                 undefined,
                 <Button.Group>
                     <Button type={"primary"} icon={"search"}
-                            onClick={() => Act.runFilter(reference)}>{button.search}</Button>
+                            onClick={() => Ux.irFilter(reference)}>{button.search}</Button>
                     <Button icon={"reload"} onClick={Ux.irClear(reference)}>{button.clear}</Button>
                 </Button.Group>
             ) : false

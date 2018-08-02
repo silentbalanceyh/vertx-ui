@@ -92,14 +92,23 @@ const renderDrawer = (reference) => {
         config.onClose = fnClose;
         const {$formFilter: Component} = reference.props;
         const $inited = Ux.irKeepCond(reference);
-        const fnTerm = () => {
-            reference.setState({term: ""})
+        const fnTerm = (term = "") => {
+            reference.setState({term})
         };
+        const fnQueryDefault = () => Init.readQuery(reference);
         return Component ? (
             <Drawer {...config}>
-                <Component $inited={$inited}
-                           fnClose={fnClose}
-                           fnTerm={fnTerm} {...reference.props}/>
+                <Component
+                    // 搜索表单默认值
+                    $inited={$inited}
+                    // 默认搜索条件，恢复输入框用
+                    $cond={options['search.cond']}
+                    // 关闭抽屉
+                    fnClose={fnClose}
+                    // 读取默认Query函数，传给查询表单
+                    fnQueryDefault={fnQueryDefault}
+                    // 清空快速搜索栏的搜索框
+                    fnTerm={fnTerm} {...reference.props}/>
             </Drawer>
         ) : false
     } else return false;

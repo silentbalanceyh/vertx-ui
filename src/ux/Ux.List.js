@@ -73,6 +73,7 @@ const irGrid = (hoc = {}, props = {}) => {
 };
 
 const irKeepCond = (reference = {}) => {
+    // 让搜索表单保存查询当前搜索条件
     const {term = ""} = reference.state;
     const grid = Prop.fromHoc(reference.props.reference, "grid");
     if (grid && grid.options) {
@@ -91,6 +92,7 @@ const irClear = (reference = {}) => (event) => {
     const ref = reference.props.reference;
     const queryConfig = Ux.fromHoc(ref, "grid").query;
     const query = Ux.irGrid(queryConfig, ref.props);
+    // 清除快速搜索框中的搜索结果
     const {fnTerm} = reference.props;
     if (fnTerm) fnTerm();
     Ux.writeTree(ref, {
@@ -99,8 +101,62 @@ const irClear = (reference = {}) => (event) => {
     });
     Prop.formReset(reference);
 };
+
+const irFilter = (reference = {}, postFun) => {
+    const {form} = reference.props;
+    if (form) {
+        form.validateFieldsAndScroll((error, values) => {
+            if (error) {
+                return;
+            }
+            const params = Immutable.fromJS(values).toJS();
+            Value.valueValid(params, true);
+            const {$query, fnClose, fnQueryDefault, fnTerm} = reference.props;
+            if ($query.is()) {
+                // 读取当前的查询条件
+                let query = $query.to();
+                if (!query.criteria) query.criteria = {};
+                if (0 < Object.keys(params).length) {
+                    query.criteria["$2"] = params;
+                    query.criteria[""] = true;
+                } else {
+                    // 读取默认的Query，表单不传值
+                    if (fnQueryDefault) {
+                        query = fnQueryDefault();
+                    }
+                }
+                // 后期处理，如果传入的话可调用
+                if (U.isFunction(postFun)) {
+                    query = postFun(query, reference);
+                }
+                // 最终写查询树
+                Ux.writeTree(reference, {
+                    "grid.query": query,
+                    "grid.list": undefined
+                });
+                // 恢复查询条件
+                if (fnTerm) {
+                    const {$cond = []} = reference.props;
+                    let term = "";
+                    $cond.forEach(field => {
+                        if (params.hasOwnProperty(field)) {
+                            term = params[field];
+                            return;
+                        }
+                    });
+                    fnTerm(term);
+                }
+                // 关闭抽屉
+                if (fnClose) fnClose();
+            }
+        });
+    } else {
+        console.error("[VI] Form Submitting met errors, reference is null.", form);
+    }
+};
 export default {
     irGrid,
     irKeepCond,
-    irClear
+    irClear,
+    irFilter
 }
