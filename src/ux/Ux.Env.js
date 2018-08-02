@@ -110,5 +110,7 @@ export default {
     rxFlow: (action) => RxFlow.from(action),
     // 和Zero绑定专用的Ui方法，Stream模式
     auiTab: (reference) => new AiStream(reference).tabs().init(),
-    auiTable: (reference) => new AiStream(reference).table().init()
+    auiTable: (reference) => new AiStream(reference).table().init(),
+    // 专用CRUD的Mock
+    mockCrud: (reference) => new AiStream(reference).mock().init(),
 }

@@ -189,6 +189,17 @@ const error = (error) => {
     console.log(`%c [Zero] Read message -> `, 'color:#ee0033;font-weight:900', error.info);
     console.groupEnd();
 };
+const mocker = (mockerRef, $query) => {
+    if (Cv.DEBUG && Cv.MOCK) {
+        const mocker = mockerRef.raw();
+        let message = `%c ------> [Zero] [Mock] mocker has been ${$query ? "filtered" : "initialized"}.`;
+        console.groupCollapsed(message, "color:red;font-weight:900");
+        console.log(`%c [Zero] Mocker Keys -> `, 'color:#ff0073;font-weight:900', mocker.keys);
+        console.log(`%c [Zero] Mocker Data -> `, 'color:#009900;font-weight:900', mocker.source);
+        console.log(`%c [Zero] Mocker Filter -> `, 'color:#0099FF;font-weight:900', $query);
+        console.groupEnd();
+    }
+};
 /**
  * 【开发模式，并且开启Mock】打印Mock数据
  * @method mock
@@ -241,5 +252,6 @@ export default {
     error,
     debug,
     filters,
-    mock
+    mock,
+    mocker
 }

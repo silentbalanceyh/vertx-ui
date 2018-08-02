@@ -1,5 +1,6 @@
 import Tab from './Ai.Stream.Tab';
 import Table from './Ai.Stream.Table';
+import Mock from './Ai.Stream.Mock';
 
 class Stream {
     constructor(reference) {
@@ -15,6 +16,10 @@ class Stream {
 
     table() {
         return new Table(this.reference);
+    }
+
+    mock() {
+        return new Mock(this.reference);
     }
 }
 

@@ -208,16 +208,7 @@ const ai2FilterButton = (window = 1) => {
                 <Button.Group>
                     <Button type={"primary"} icon={"search"}
                             onClick={() => Act.runFilter(reference)}>{button.search}</Button>
-                    <Button icon={"reload"} onClick={() => {
-                        const ref = reference.props.reference;
-                        const queryConfig = Ux.fromHoc(ref, "grid").query;
-                        const query = Ux.irGrid(queryConfig, ref.props);
-                        Ux.writeTree(ref, {
-                            "grid.query": query,
-                            "grid.list": undefined
-                        });
-                        Prop.formReset(reference)
-                    }}>{button.clear}</Button>
+                    <Button icon={"reload"} onClick={Ux.irClear(reference)}>{button.clear}</Button>
                 </Button.Group>
             ) : false
         }

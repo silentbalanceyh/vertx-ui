@@ -59,13 +59,15 @@ const runFilter = (reference = {}, postFun) => {
                 return;
             }
             const params = Immutable.fromJS(values).toJS();
-            Value.valueValid(params);
+            Value.valueValid(params, true);
             const {$query, fnClose} = reference.props;
             if ($query.is()) {
                 let query = $query.to();
                 if (!query.criteria) query.criteria = {};
-                query.criteria["$2"] = params;
-                query.criteria[""] = true;
+                if (0 < Object.keys(params).length) {
+                    query.criteria["$2"] = params;
+                    query.criteria[""] = true;
+                }
                 if (U.isFunction(postFun)) {
                     query = postFun(query, reference);
                 }

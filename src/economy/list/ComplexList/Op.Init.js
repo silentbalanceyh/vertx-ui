@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Immutable from "immutable";
 import {v4} from 'uuid';
+import Mock from './Op.Mock';
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
@@ -81,7 +82,8 @@ const initGrid = (reference = {}) => {
     // 初始化Tab页
     const state = {};
     stateTabs(reference, config.options, state);
-
+    // Mock初始化
+    Mock.mockCheck(reference, config.options, state);
     reference.setState(state);
 };
 const readOption = (reference) => readConfig(reference).options;
@@ -100,6 +102,8 @@ const updateGrid = (reference = {}, prevProps = {}) => {
             rxSearch($query.to());
         }
         // initList(reference, config.query);
+    } else {
+        Mock.mockInit(reference, record);
     }
 };
 export default {

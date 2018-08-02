@@ -1,6 +1,7 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
+import Mock from './Op.Mock';
 import U from "underscore";
 
 const _initTablePager = (reference = {}) => {
@@ -67,10 +68,12 @@ const initTable = (reference = {}) => {
             $self: reference
         },
     }, table.columns);
-    // 分页处理
+    // 分页处理，客户端模式
     table.pagination = _initTablePager(reference);
     table.onChange = _initChange(reference);
-    const data = initData(reference);
+    let data = initData(reference);
+    data = Mock.mockConnect(reference, data);
+    // Mock链接处理
     return {table, data: data.list, ready: data.ready};
 };
 export default {

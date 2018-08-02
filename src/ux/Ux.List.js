@@ -1,6 +1,8 @@
 import Value from './Ux.Value';
 import Immutable from 'immutable';
 import U from 'underscore';
+import Prop from './Ux.Prop';
+import Ux from "ux";
 
 const irPager = (hoc = {}) => {
     let pager = {};
@@ -69,6 +71,36 @@ const irGrid = (hoc = {}, props = {}) => {
     query.criteria = irCriteria(hoc, props);
     return query;
 };
+
+const irKeepCond = (reference = {}) => {
+    const {term = ""} = reference.state;
+    const grid = Prop.fromHoc(reference.props.reference, "grid");
+    if (grid && grid.options) {
+        const options = grid.options;
+        if (options['search.enabled']) {
+            const cond = options['search.cond'];
+            const inited = {};
+            cond.forEach(item => inited[item] = term);
+            return inited;
+        }
+    }
+    return {};
+};
+
+const irClear = (reference = {}) => (event) => {
+    const ref = reference.props.reference;
+    const queryConfig = Ux.fromHoc(ref, "grid").query;
+    const query = Ux.irGrid(queryConfig, ref.props);
+    const {fnTerm} = reference.props;
+    if (fnTerm) fnTerm();
+    Ux.writeTree(ref, {
+        "grid.query": query,
+        "grid.list": undefined
+    });
+    Prop.formReset(reference);
+};
 export default {
-    irGrid
+    irGrid,
+    irKeepCond,
+    irClear
 }

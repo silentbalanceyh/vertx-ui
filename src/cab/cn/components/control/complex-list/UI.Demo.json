@@ -10,6 +10,8 @@
             "criteria": "sigma=hotel:sigma"
         },
         "options": {
+            "mock.enabled": true,
+            "mock.keys": "code,name,description,manager,active",
             "search.cond": [
                 "name,c",
                 "code,c"

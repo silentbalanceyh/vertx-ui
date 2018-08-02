@@ -10,12 +10,19 @@ import Type from './Ux.Type';
  * @method valueValid
  * @param {Object} data
  */
-const valueValid = (data = {}) => {
+const valueValid = (data = {}, wild = false) => {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
-            if (undefined === value) {
-                delete data[key];
+            if (wild) {
+                // 空字符串、0，以及其他值
+                if (!value) {
+                    delete data[key];
+                }
+            } else {
+                if (undefined === value) {
+                    delete data[key];
+                }
             }
         }
     }

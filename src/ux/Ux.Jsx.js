@@ -272,15 +272,19 @@ const jsxOp = (reference = {}, column = 4, op = {}) => {
     ) : false)
 };
 
+const uiInited = (reference) => {
+    let values = {};
+    if (reference.props['$inited']) {
+        values = reference.props['$inited'];
+    } else {
+        values = {};
+    }
+    return values;
+};
+
 const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config) => {
     // Fix Issue
-    if (!values) {
-        if (reference.props['$inited']) {
-            values = reference.props['$inited'];
-        } else {
-            values = {};
-        }
-    }
+    if (!values) values = uiInited(reference);
     return (
         <Form layout="inline" className="page-form">
             {jsxFieldGrid(reference, renders, column, values, config)}
@@ -289,9 +293,10 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config) =
 };
 
 const uiFieldFilter = (reference = {}, renders = {}, column = 2) => {
+    const values = uiInited(reference);
     return (
         <Form layout="horizontal" className="page-filter">
-            {jsxFieldGrid(reference, renders, column, {}, {
+            {jsxFieldGrid(reference, renders, column, values, {
                 window: 1 / 3
             })}
         </Form>

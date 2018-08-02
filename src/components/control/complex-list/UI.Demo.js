@@ -6,6 +6,7 @@ import Types from './Act.Types';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Update'
+import Mock from './a-mock'
 
 const {zero} = Ux;
 
@@ -27,6 +28,7 @@ class Component extends React.PureComponent {
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
                              reference={this}
+                             $mockData={Mock}
                              $formFilter={Filter}
                              $formAdd={FormAdd}
                              $formEdit={FormEdit}/>

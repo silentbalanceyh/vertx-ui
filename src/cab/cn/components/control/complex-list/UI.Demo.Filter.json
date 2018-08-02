@@ -19,6 +19,14 @@
             ],
             [
                 {
+                    "field": "manager,c",
+                    "optionItem": {
+                        "label": "部门经理"
+                    }
+                }
+            ],
+            [
+                {
                     "field": "$button",
                     "hidden": false
                 }
