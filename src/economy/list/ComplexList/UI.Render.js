@@ -26,10 +26,10 @@ const renderPageList = (reference, item = {}) => {
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
-                <Col span={18}>
+                <Col span={17}>
                     {Op.renderOp(reference)}
                 </Col>
-                <Col span={6}>
+                <Col span={7}>
                     {Op.renderSearch(reference)}
                 </Col>
             </Row>

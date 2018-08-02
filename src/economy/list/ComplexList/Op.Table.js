@@ -63,8 +63,11 @@ const initTable = (reference = {}) => {
     };
     Ux.uiTableColumn({
         props: {
+            // 当前引用对应的props属性
             ...props,
+            // 专用的rxEdit/rxDelete的Api调用专用数据
             ...op,
+            // 当前组件引用
             $self: reference
         },
     }, table.columns);

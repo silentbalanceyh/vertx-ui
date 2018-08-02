@@ -1,6 +1,7 @@
 import {v4} from 'uuid';
 import Ux from 'ux';
 import Init from './Op.Init';
+import Mock from './Op.Mock';
 import Immutable from 'immutable';
 
 const stateAddTab = (reference) => {
@@ -51,7 +52,9 @@ const rxEdit = (reference, id) => {
     const {$self} = reference.props;
     const options = Init.readOption($self);
     const uri = options['ajax.get.uri'];
-    const promise = Ux.ajaxGet(uri, {id});
+    // Mock专用数据
+    const mockData = Mock.mockDetail($self, id);
+    const promise = Ux.ajaxGet(uri, {id}, mockData);
     promise.then(data => {
         let {record = {}} = $self.state;
         record[id] = data;
@@ -66,7 +69,7 @@ const rxEdit = (reference, id) => {
 const rxDeleteDetail = (reference, id) => {
     const options = Init.readOption(reference);
     const uri = options['ajax.delete.uri'];
-    const promise = Ux.ajaxDelete(uri, {id});
+    const promise = Ux.ajaxDelete(uri, {id}, Mock.mockDelete(reference, id));
     promise.then(data => {
         // 删除record数据
         let {record = {}} = reference.state;

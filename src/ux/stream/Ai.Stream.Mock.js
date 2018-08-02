@@ -30,6 +30,28 @@ class Mock {
         return this;
     }
 
+    get(id = "") {
+        if (id) {
+            const list = this.data.list ? this.data.list : [];
+            const record = list.filter(item => id === item.key);
+            if (record[0]) {
+                return record[0];
+            }
+        }
+        return {};
+    }
+
+    remove(id = "") {
+        // 该方法会变更原始数据
+        if (id) {
+            const list = this.data.list ? this.data.list : [];
+            const filtered = list.filter(item => id !== item.key);
+            this.data.list = filtered;
+            this.data.count = filtered.length;
+        }
+        return true;
+    }
+
     to() {
         return this.source;
     }
