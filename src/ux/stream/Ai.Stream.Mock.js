@@ -2,6 +2,7 @@ import Prop from '../Ux.Prop';
 import Log from '../Ux.Log';
 import Ai from '../ai/AI';
 import Immutable from 'immutable';
+import {v4} from 'uuid';
 
 class Mock {
     constructor(reference) {
@@ -41,8 +42,35 @@ class Mock {
         return {};
     }
 
+    update(record = {}) {
+        // 更新原始数据
+        if (record.key) {
+            const list = this.data.list;
+            for (let idx = 0; idx < list.length; idx++) {
+                if (record.key === list[idx].key) {
+                    list[idx] = record;
+                }
+            }
+        }
+        return record;
+    }
+
+    add(record = {}) {
+        // 更新原始数据
+        const keys = this.keys;
+        keys.forEach(key => {
+            if (!record.hasOwnProperty(key)) {
+                record[key] = undefined;
+            }
+        });
+        record.key = v4();
+        this.data.list.push(record);
+        this.data.count = this.data.length;
+        return record;
+    }
+
     remove(id = "") {
-        // 该方法会变更原始数据
+        // 更新原始数据
         if (id) {
             const list = this.data.list ? this.data.list : [];
             const filtered = list.filter(item => id !== item.key);

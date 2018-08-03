@@ -6,7 +6,9 @@ const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, item)} {...reference.props}/>
+            <Component fnClose={Op.rxClose(reference, item)}
+                       fnMock={Op.mockfnRecord(reference)}
+                       {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };
@@ -16,7 +18,9 @@ const renderPageEdit = (reference, item = {}) => {
     const $inited = record[item.key] ? record[item.key] : {};
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, item)} $inited={$inited} {...reference.props}/>
+            <Component fnClose={Op.rxClose(reference, item)}
+                       fnMock={Op.mockfnRecord(reference, true)}
+                       $inited={$inited} {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };

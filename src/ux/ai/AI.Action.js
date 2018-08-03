@@ -167,7 +167,12 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
         if ($inited) params.key = $inited.key;
         Value.valueValid(params);
         if (fnSuccess && U.isFunction(fnSuccess)) {
-            fnSuccess(params);
+            const {fnMock} = reference.props;
+            if (fnMock) {
+                fnSuccess(params, fnMock(params));
+            } else {
+                fnSuccess(params);
+            }
         }
     });
 });

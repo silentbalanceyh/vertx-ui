@@ -58,10 +58,26 @@ const mockDelete = (reference, id) => {
     }
     return mockData;
 };
+const mockfnRecord = (reference = {}, isUpdate = false) => (updated = {}) => {
+    const {mock, mocker} = reference.state;
+    if (mock && mocker) {
+        const mockData = {mock: true};
+        if (isUpdate) {
+            // 编辑
+            mockData.data = mocker.update(updated);
+        } else {
+            // 添加
+            mockData.data = mocker.add(updated);
+        }
+        return mockData;
+    }
+    return {}
+};
 export default {
     mockCheck,
     mockInit,
     mockConnect,
     mockDetail,
-    mockDelete
+    mockDelete,
+    mockfnRecord
 }
