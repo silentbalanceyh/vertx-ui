@@ -138,6 +138,7 @@ class Criteria {
         source = _fnCriteria(source, $query);
         // 排序
         source = _fnSorter(source, $query);
+        // Reduce
         return source;
     }
 }
