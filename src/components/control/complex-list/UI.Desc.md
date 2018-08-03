@@ -10,6 +10,7 @@ import Types from './Act.Types';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Update'
+import Mock from './a-mock'
 
 const {zero} = Ux;
 
@@ -24,6 +25,7 @@ class Component extends React.PureComponent {
 
     render() {
         return <ComplexList {...this.props}
+                            $mockData={Mock}
                             reference={this}
                             $formFilter={Filter}
                             $formAdd={FormAdd}
@@ -51,9 +53,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {
-            $button: (reference) => Ux.aiFormButton(reference, Op)
-        }, 1)
+        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 1)
     }
 }
 
@@ -78,9 +78,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {
-            $button: (reference) => Ux.aiFormButton(reference, Op, true)
-        }, 1)
+        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op, true)}, 1)
     }
 }
 
@@ -105,14 +103,10 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {
-            $button: (reference, jsx) => {
-
-                return false;
-            }
-        }, 1)
+        return Ux.uiFieldFilter(this, {...Ux.ai2FilterButton(1 / 3)}, 1)
     }
 }
+
 export default Component
 ```
 
@@ -121,11 +115,11 @@ export default Component
 ```javascript
 import Ux from "ux";
 import Types from "./Act.Types";
-import Mock from './mock';
+import Mock from './a-mock';
 
 export default {
     fnDeptList: Ux.rxEdict(Types.fnDeptList,
-        params => Ux.ajaxPost("/api/depts/search", params, Mock.fnDeptList),
+        params => Ux.ajaxPost("/api/depts/search", params, Mock),
         Ux.rxGrid
     )
 };
@@ -146,14 +140,23 @@ export default {
 ```typescript
 import Ux from 'ux';
 
-const $opSave = (reference: any) => Ux.ai2Event(reference, (values) => {
-
+const $opSave = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
+    Ux.ajaxPut("/api/dept", values, mockData)
+        .then(data => Ux.showDialog(reference, "edit", () => {
+            console.info("更新成功：", data);
+            reference.props.fnClose();
+        }))
 });
-const $opAdd = (reference: any) => Ux.ai2Event(reference, (values) => {
-
+const $opAdd = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
+    Ux.ajaxPost("/api/dept", values, mockData)
+        .then(data => Ux.showDialog(reference, "add", () => {
+            console.info("添加成功：", data);
+            reference.props.fnClose();
+        }))
 });
 const $opReset = (reference: any) => (event: any) => {
-    
+    event.preventDefault();
+    Ux.formReset(reference);
 };
 export default {
     $opSave,

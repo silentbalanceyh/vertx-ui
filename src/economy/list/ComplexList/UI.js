@@ -15,6 +15,8 @@ import Render from './UI.Render';
             .rinit(["query"])
             .to(),
     },
+    "i18n.cab": require('./Cab.json'),
+    "i18n.name": "UI",
     state: {
         view: "list",
         key: undefined,

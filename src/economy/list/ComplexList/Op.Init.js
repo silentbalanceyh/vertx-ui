@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Immutable from "immutable";
 import {v4} from 'uuid';
+import Mock from './Op.Mock';
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
@@ -52,6 +53,9 @@ const onEdit = (reference) => (key, action) => {
             tabs.items = [tabs.items[0]];
             view = stateView("list")
         }
+        tabs.items.forEach((item, index) => {
+            item.index = index;
+        });
         reference.setState({tabs, ...view});
     }
 };
@@ -81,12 +85,16 @@ const initGrid = (reference = {}) => {
     // 初始化Tab页
     const state = {};
     stateTabs(reference, config.options, state);
-
+    // Mock初始化
+    Mock.mockCheck(reference, config.options, state);
     reference.setState(state);
 };
 const readOption = (reference) => readConfig(reference).options;
 const readTable = (reference) => readConfig(reference).table;
-const readQuery = (reference) => readConfig(reference).query;
+const readQuery = (reference) => {
+    const queryConfig = readConfig(reference).query;
+    return Ux.irGrid(queryConfig, reference.props);
+};
 const updateGrid = (reference = {}, prevProps = {}) => {
     const record = reference.props['$list'];
     if (undefined === record) {
@@ -97,6 +105,8 @@ const updateGrid = (reference = {}, prevProps = {}) => {
             rxSearch($query.to());
         }
         // initList(reference, config.query);
+    } else {
+        Mock.mockInit(reference, record);
     }
 };
 export default {

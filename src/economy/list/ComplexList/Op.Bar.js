@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
+import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import Act from './Op.Action';
@@ -45,27 +45,26 @@ const renderSearch = (reference) => {
     const enabled = options['search.enabled'];
     const advanced = options['search.advanced'];
     return enabled ? (
-        (
-            <Row>
-                <Col span={advanced ? 18 : 24}>
-                    <Input.Search placeholder={options['search.placeholder'] ?
-                        options['search.placeholder'] : ""}
-                                  onSearch={Act.rxFilter(reference)}
-                                  value={term}
-                                  onChange={Act.rxInput(reference)}/>
+        <Row>
+            <Col span={advanced ? 18 : 24}>
+                <Input.Search placeholder={options['search.placeholder'] ?
+                    options['search.placeholder'] : ""}
+                              onSearch={Act.rxFilter(reference)}
+                              value={term}
+                              onChange={Act.rxInput(reference)}/>
+            </Col>
+            {advanced ? (
+                <Col span={5} offset={1}>
+                    <Button.Group>
+                        <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
+                        <Button icon={"ellipsis"} onClick={() => {
+                            // 判断是否已经在快速搜索中输入了数据
+                            reference.setState({drawer: true})
+                        }}/>
+                    </Button.Group>
                 </Col>
-                {advanced ? (
-                    <Col span={5} offset={1}>
-                        <Button.Group>
-                            <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
-                            <Button icon={"ellipsis"} onClick={() => {
-                                reference.setState({drawer: true})
-                            }}/>
-                        </Button.Group>
-                    </Col>
-                ) : false}
-            </Row>
-        )
+            ) : false}
+        </Row>
     ) : false
 };
 
@@ -86,13 +85,30 @@ const renderDrawer = (reference) => {
         };
         config.width = options['search.advanced.width'];
         config.title = options['search.advanced.title'];
-        config.onClose = () => {
+        const fnClose = () => {
             reference.setState({drawer: false})
         };
+        config.maskClosable = true;
+        config.onClose = fnClose;
         const {$formFilter: Component} = reference.props;
+        const $inited = Ux.irKeepCond(reference);
+        const fnTerm = (term = "") => {
+            reference.setState({term})
+        };
+        const fnQueryDefault = () => Init.readQuery(reference);
         return Component ? (
             <Drawer {...config}>
-                <Component {...reference.props}/>
+                <Component
+                    // 搜索表单默认值
+                    $inited={$inited}
+                    // 默认搜索条件，恢复输入框用
+                    $cond={options['search.cond']}
+                    // 关闭抽屉
+                    fnClose={fnClose}
+                    // 读取默认Query函数，传给查询表单
+                    fnQueryDefault={fnQueryDefault}
+                    // 清空快速搜索栏的搜索框
+                    fnTerm={fnTerm} {...reference.props}/>
             </Drawer>
         ) : false
     } else return false;
@@ -124,8 +140,38 @@ const renderSubmit = (reference) => {
         </Button.Group>
     ) : false
 };
+const renderMessage = (reference) => {
+    let {$query} = reference.props;
+    if ($query && $query.is()) {
+        $query = $query.to();
+        if ($query.criteria) {
+            let condition = {};
+            if ($query.criteria[""]) {
+                // 取子条件
+                Ux.itObject($query.criteria, (item, value) => {
+                    if ("object" === typeof value) {
+                        Object.assign(condition, value);
+                    }
+                })
+            } else {
+                // 取线性条件
+                Object.assign(condition, $query.criteria);
+            }
+            const prefix = Ux.fromHoc(reference, "info").condition;
+            const options = Init.readOption(reference);
+            const config = options['search.cond.message'];
+            if (config) {
+                // 计算条件字符串
+                let message = Ux.irMessage(prefix, condition, config);
+                return message ? (<Alert message={message}/>) : false
+            }
+        }
+    }
+    return false;
+};
 export default {
     renderOp,
+    renderMessage,
     renderSearch,
     renderDrawer,
     renderSubmit

@@ -10,6 +10,14 @@
             "criteria": "sigma=hotel:sigma"
         },
         "options": {
+            "mock.enabled": true,
+            "mock.keys": "code,name,description,manager,active",
+            "search.cond.message": {
+                "code": "代码",
+                "name": "名称",
+                "manager": "经理",
+                "active": "启用"
+            },
             "search.cond": [
                 "name,c",
                 "code,c"

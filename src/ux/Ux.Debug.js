@@ -293,7 +293,7 @@ const dgRouter = (container, component) => {
  */
 const dgMonitor = (data) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.info(data);
+        console.debug("[Ux] Debug: ", data);
     }
     return data;
 };

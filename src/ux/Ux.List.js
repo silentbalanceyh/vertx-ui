@@ -1,6 +1,8 @@
 import Value from './Ux.Value';
 import Immutable from 'immutable';
 import U from 'underscore';
+import Prop from './Ux.Prop';
+import Ux from "ux";
 
 const irPager = (hoc = {}) => {
     let pager = {};
@@ -69,6 +71,112 @@ const irGrid = (hoc = {}, props = {}) => {
     query.criteria = irCriteria(hoc, props);
     return query;
 };
+
+const irKeepCond = (reference = {}) => {
+    // 让搜索表单保存查询当前搜索条件
+    const {term = ""} = reference.state;
+    const grid = Prop.fromHoc(reference.props.reference, "grid");
+    if (grid && grid.options) {
+        const options = grid.options;
+        if (options['search.enabled']) {
+            const cond = options['search.cond'];
+            const inited = {};
+            cond.forEach(item => inited[item] = term);
+            return inited;
+        }
+    }
+    return {};
+};
+
+const irClear = (reference = {}) => (event) => {
+    const ref = reference.props.reference;
+    const queryConfig = Ux.fromHoc(ref, "grid").query;
+    const query = Ux.irGrid(queryConfig, ref.props);
+    // 清除快速搜索框中的搜索结果
+    const {fnTerm} = reference.props;
+    if (fnTerm) fnTerm();
+    Ux.writeTree(ref, {
+        "grid.query": query,
+        "grid.list": undefined
+    });
+    Prop.formReset(reference);
+};
+
+const irFilter = (reference = {}, postFun) => {
+    const {form} = reference.props;
+    if (form) {
+        form.validateFieldsAndScroll((error, values) => {
+            if (error) {
+                return;
+            }
+            const params = Immutable.fromJS(values).toJS();
+            Value.valueValid(params, true);
+            const {$query, fnClose, fnQueryDefault, fnTerm} = reference.props;
+            if ($query.is()) {
+                // 读取当前的查询条件
+                let query = $query.to();
+                if (!query.criteria) query.criteria = {};
+                if (0 < Object.keys(params).length) {
+                    query.criteria["$2"] = params;
+                    query.criteria[""] = true;
+                } else {
+                    // 读取默认的Query，表单不传值
+                    if (fnQueryDefault) {
+                        query = fnQueryDefault();
+                    }
+                }
+                // 后期处理，如果传入的话可调用
+                if (U.isFunction(postFun)) {
+                    query = postFun(query, reference);
+                }
+                // 最终写查询树
+                Ux.writeTree(reference, {
+                    "grid.query": query,
+                    "grid.list": undefined
+                });
+                // 恢复查询条件
+                if (fnTerm) {
+                    const {$cond = []} = reference.props;
+                    let term = "";
+                    $cond.forEach(field => {
+                        if (params.hasOwnProperty(field)) {
+                            term = params[field];
+                            return;
+                        }
+                    });
+                    fnTerm(term);
+                }
+                // 关闭抽屉
+                if (fnClose) fnClose();
+            }
+        });
+    } else {
+        console.error("[VI] Form Submitting met errors, reference is null.", form);
+    }
+};
+const MESSAGE = {
+    "c": ":field包含\":value\""
+};
+const irMessage = (prefix = "", criteria = {}, config = {}) => {
+    if (0 < Object.keys(criteria).length) {
+        const message = [];
+        Ux.itObject(criteria, (fieldExpr, value) => {
+            const fieldName = fieldExpr.split(',')[0];
+            if (config[fieldName]) {
+                const field = config[fieldName];
+                const flag = fieldExpr.split(',')[1];
+                const expr = MESSAGE[flag];
+                const item = Ux.formatExpr(expr, {field, value});
+                message.push(item);
+            }
+        });
+        return prefix + "：" + message.join("、");
+    }
+};
 export default {
-    irGrid
+    irMessage,
+    irGrid,
+    irKeepCond,
+    irClear,
+    irFilter
 }

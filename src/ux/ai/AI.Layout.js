@@ -1,6 +1,7 @@
 import React from 'react'
 import {Col, Row, Table} from 'antd';
 import RxAnt from './AI.RxAnt';
+import Random from '../Ux.Random';
 
 /**
  * 直接渲染多行
@@ -16,32 +17,36 @@ const aiRows = (config = [], ...jsx) => (config.map((row, index) => (
     </Row>
 )));
 
+const aiColumns = (config = [], ...jsx) => {
+    return config.map((item, index) => {
+        const isNum = "number" === typeof item;
+        // 表达式处理
+        const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
+        if (isNum) {
+            return (
+                <Col span={item} key={Random.randomUUID()}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            )
+        } else if (isExpr) {
+            const attrs = RxAnt.toParsed(item, index);
+            // 重写key值
+            attrs.key = Random.randomUUID();
+            return (
+                <Col {...attrs}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            )
+        } else {
+            return false;
+        }
+    });
+};
+
 const aiGrid = (config = [], ...jsx) => {
     return (
         <Row>
-            {config.map((item, index) => {
-                const isNum = "number" === typeof item;
-                // 表达式处理
-                const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
-                if (isNum) {
-                    return (
-                        <Col span={item} key={`$$AiCol${index}`}>
-                            {jsx[index] ? jsx[index] : false}
-                        </Col>
-                    )
-                } else if (isExpr) {
-                    const attrs = RxAnt.toParsed(item, index);
-                    // 重写key值
-                    attrs.key = `$$AiCol${index}`;
-                    return (
-                        <Col {...attrs}>
-                            {jsx[index] ? jsx[index] : false}
-                        </Col>
-                    )
-                } else {
-                    return false;
-                }
-            })}
+            {aiColumns.apply(this, [config].concat(jsx))}
         </Row>
     )
 };
@@ -53,5 +58,6 @@ const aiTable = (dataSource = [], table = {}) => {
 export default {
     aiRows,
     aiGrid,
+    aiColumns,
     aiTable
 }

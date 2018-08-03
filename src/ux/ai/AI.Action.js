@@ -6,8 +6,10 @@ import E from '../Ux.Error';
 import Cv from '../Ux.Constant';
 import Value from '../Ux.Value';
 import Type from '../Ux.Type';
+import Layout from './AI.Layout';
 import {Button, Icon} from 'antd';
 import Immutable from 'immutable';
+import Ux from "ux";
 
 const _aiSubmit = (reference, callback) => (event) => {
     event.preventDefault();
@@ -165,7 +167,12 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
         if ($inited) params.key = $inited.key;
         Value.valueValid(params);
         if (fnSuccess && U.isFunction(fnSuccess)) {
-            fnSuccess(params);
+            const {fnMock} = reference.props;
+            if (fnMock) {
+                fnSuccess(params, fnMock(params));
+            } else {
+                fnSuccess(params);
+            }
         }
     });
 });
@@ -190,11 +197,34 @@ const aiFormButton = (reference, onClick, id = false) => {
         )
     }
 };
+
+const ai2FormButton = (Op, id = false) => {
+    return {
+        $button: (reference) => aiFormButton(reference, Op, id)
+    };
+};
+const ai2FilterButton = (window = 1) => {
+    return {
+        $button: (reference) => {
+            const button = Prop.fromHoc(reference, "button");
+            return (1 / 3 === window) ? Layout.aiColumns([7, 14],
+                undefined,
+                <Button.Group>
+                    <Button type={"primary"} icon={"search"}
+                            onClick={() => Ux.irFilter(reference)}>{button.search}</Button>
+                    <Button icon={"reload"} onClick={Ux.irClear(reference)}>{button.clear}</Button>
+                </Button.Group>
+            ) : false
+        }
+    }
+};
 export default {
     ai2Event,
     // 表单2阶按钮
     ai2Submit,
     aiFormButton,
+    ai2FormButton,
+    ai2FilterButton,
     // 表单1阶按钮
     aiSubmit,
     aiButton,

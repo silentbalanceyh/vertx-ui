@@ -1,6 +1,7 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
+import Mock from './Op.Mock';
 import U from "underscore";
 
 const _initTablePager = (reference = {}) => {
@@ -22,8 +23,7 @@ const _initTablePager = (reference = {}) => {
 
 const _initChange = (reference = {}) => (pagination, filter, sorter) => {
     // 分页
-    const queryConfig = Init.readQuery(reference);
-    const query = Ux.irGrid(queryConfig, reference.props);
+    const query = Init.readQuery(reference);
     query.pager.page = pagination.current;
     query.pager.size = pagination.pageSize;
     // 排序
@@ -63,15 +63,20 @@ const initTable = (reference = {}) => {
     };
     Ux.uiTableColumn({
         props: {
+            // 当前引用对应的props属性
             ...props,
+            // 专用的rxEdit/rxDelete的Api调用专用数据
             ...op,
+            // 当前组件引用
             $self: reference
         },
     }, table.columns);
-    // 分页处理
+    // 分页处理，客户端模式
     table.pagination = _initTablePager(reference);
     table.onChange = _initChange(reference);
-    const data = initData(reference);
+    let data = initData(reference);
+    data = Mock.mockConnect(reference, data);
+    // Mock链接处理
     return {table, data: data.list, ready: data.ready};
 };
 export default {

@@ -3,7 +3,7 @@
         "ui": [
             [
                 {
-                    "field": "name",
+                    "field": "name,c",
                     "optionItem": {
                         "label": "部门名称"
                     }
@@ -11,10 +11,24 @@
             ],
             [
                 {
-                    "field": "code",
+                    "field": "code,c",
                     "optionItem": {
                         "label": "部门代码"
                     }
+                }
+            ],
+            [
+                {
+                    "field": "manager,c",
+                    "optionItem": {
+                        "label": "部门经理"
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "$button",
+                    "hidden": false
                 }
             ]
         ]
