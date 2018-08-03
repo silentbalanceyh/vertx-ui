@@ -154,7 +154,27 @@ const irFilter = (reference = {}, postFun) => {
         console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
 };
+const MESSAGE = {
+    "c": ":field包含\":value\""
+};
+const irMessage = (prefix = "", criteria = {}, config = {}) => {
+    if (0 < Object.keys(criteria).length) {
+        const message = [];
+        Ux.itObject(criteria, (fieldExpr, value) => {
+            const fieldName = fieldExpr.split(',')[0];
+            if (config[fieldName]) {
+                const field = config[fieldName];
+                const flag = fieldExpr.split(',')[1];
+                const expr = MESSAGE[flag];
+                const item = Ux.formatExpr(expr, {field, value});
+                message.push(item);
+            }
+        });
+        return prefix + "：" + message.join("、");
+    }
+};
 export default {
+    irMessage,
     irGrid,
     irKeepCond,
     irClear,

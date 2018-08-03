@@ -123,6 +123,16 @@ const _fnTree = (source = [], criteria = {}, level = 1) => {
 const _fnCriteria = (source = [], $query = {}) => {
     if (0 < Object.keys($query.criteria).length) {
         source = _fnTree(source, $query.criteria, 1);
+        // 去重，过滤重复key的情况
+        const result = [];
+        const hash = {};
+        source.forEach(item => {
+            if (!hash[item.key]) {
+                hash[item.key] = true;
+                result.push(item);
+            }
+        });
+        source = result;
     }
     return source;
 };

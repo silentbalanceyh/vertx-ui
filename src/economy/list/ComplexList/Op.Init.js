@@ -53,6 +53,9 @@ const onEdit = (reference) => (key, action) => {
             tabs.items = [tabs.items[0]];
             view = stateView("list")
         }
+        tabs.items.forEach((item, index) => {
+            item.index = index;
+        });
         reference.setState({tabs, ...view});
     }
 };

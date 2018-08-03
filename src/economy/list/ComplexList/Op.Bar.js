@@ -1,5 +1,5 @@
 import React from 'react'
-import {Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
+import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import Act from './Op.Action';
@@ -140,8 +140,38 @@ const renderSubmit = (reference) => {
         </Button.Group>
     ) : false
 };
+const renderMessage = (reference) => {
+    let {$query} = reference.props;
+    if ($query && $query.is()) {
+        $query = $query.to();
+        if ($query.criteria) {
+            let condition = {};
+            if ($query.criteria[""]) {
+                // 取子条件
+                Ux.itObject($query.criteria, (item, value) => {
+                    if ("object" === typeof value) {
+                        Object.assign(condition, value);
+                    }
+                })
+            } else {
+                // 取线性条件
+                Object.assign(condition, $query.criteria);
+            }
+            const prefix = Ux.fromHoc(reference, "info").condition;
+            const options = Init.readOption(reference);
+            const config = options['search.cond.message'];
+            if (config) {
+                // 计算条件字符串
+                let message = Ux.irMessage(prefix, condition, config);
+                return message ? (<Alert message={message}/>) : false
+            }
+        }
+    }
+    return false;
+};
 export default {
     renderOp,
+    renderMessage,
     renderSearch,
     renderDrawer,
     renderSubmit

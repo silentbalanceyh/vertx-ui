@@ -15,6 +15,10 @@
                             "color": "#e23c39"
                         },
                         {
+                            "name": "$mockData",
+                            "color": "#33af43"
+                        },
+                        {
                             "name": "$formFilter",
                             "color": "#e23c39"
                         },
@@ -58,7 +62,19 @@
                             "color": "#33af43",
                             "children": [
                                 {
+                                    "name": "mock.enabled",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "mock.keys",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "search.cond",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "search.cond.message",
                                     "color": "#33af43"
                                 },
                                 {
@@ -134,7 +150,7 @@
         "layout": {
             "hgap": 120,
             "vgap": 10,
-            "height": 900
+            "height": 1100
         }
     },
     "_data": [
@@ -175,6 +191,13 @@
             "comment": "编辑表单",
             "type": "React.Component",
             "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$mockData",
+            "comment": "无后端时的Mock专用数据，用于设置模拟环境。",
+            "type": "Object",
             "value": "--"
         },
         {
@@ -227,9 +250,33 @@
         {
             "source": "O",
             "name": "options",
+            "option": "mock.enabled",
+            "comment": "是否开启Mock环境？",
+            "type": "Boolean",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "mock.keys",
+            "comment": "Mock环境中的记录字段清单？【字符串逗号隔开】。",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
             "option": "search.cond",
             "comment": "快速搜索中的查询条件",
             "type": "Array",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "search.cond.message",
+            "comment": "是否显示搜索条件，如果显示则界面出现相关消息。",
+            "type": "Object",
             "value": "--"
         },
         {

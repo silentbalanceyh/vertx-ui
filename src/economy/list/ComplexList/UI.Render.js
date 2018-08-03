@@ -1,6 +1,7 @@
 import React from 'react'
 import {Col, Row, Table, Tabs} from "antd";
 import Op from "./Op";
+import "./Cab.less";
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
@@ -30,10 +31,13 @@ const renderPageList = (reference, item = {}) => {
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
-                <Col span={17}>
+                <Col span={2}>
                     {Op.renderOp(reference)}
                 </Col>
-                <Col span={7}>
+                <Col span={14}>
+                    {Op.renderMessage(reference)}
+                </Col>
+                <Col span={7} offset={1}>
                     {Op.renderSearch(reference)}
                 </Col>
             </Row>
