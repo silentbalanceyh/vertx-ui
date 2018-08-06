@@ -120,8 +120,7 @@ const rxFilter = (reference = {}) => (value, event) => {
     })
 };
 const rxClear = (reference = {}) => () => {
-    const {$query} = reference.props;
-    const query = $query.to();
+    const query = Init.readQuery(reference);
     const options = Init.readOption(reference);
     const search = options['search.cond'];
     search.forEach(term => delete query.criteria[term]);

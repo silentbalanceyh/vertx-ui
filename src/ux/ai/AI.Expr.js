@@ -14,7 +14,10 @@ export default {
     ],
     "column": [
         "dataIndex",
-        "title"
+        "title",
+        "$render",
+        "sorter",
+        "$KV$"
     ],
     "option": [
         "key",
@@ -29,10 +32,25 @@ export default {
         "icon"
     ],
     "steps": [
-        "key",
         "title",
+        "key",
         "icon",
         "description",
         "status",
+    ],
+    "window": [
+        "title",
+        "okText",
+        "cancelText",
+        "visible",
+        "width",
+        "maskClosable"
+    ],
+    "ajax": [
+        "method",
+        "uri",
+        "params.pager.page",
+        "params.pager.size",
+        "$KV$"
     ]
 }

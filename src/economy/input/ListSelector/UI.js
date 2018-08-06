@@ -42,7 +42,7 @@ class Component extends React.PureComponent {
     render() {
         const {config = {}, ...jsx} = this.props;
         const {$data = {}, $tableKey} = this.state;
-        const dialog = config.window ? config.window : {};
+        const dialog = Ux.aiExprWindow(config.window);
         jsx.onClick = Op.fnLoading(this);
         // Footer关闭窗口
         dialog.footer = (
@@ -62,11 +62,16 @@ class Component extends React.PureComponent {
         } else {
             pageAndChange.pagination = true;
         }
+        // 配置处理
+        if (config.table.columns) {
+            config.table.columns = Ux.uiTableColumn(this, config.table.columns)
+        }
         return (
             <span>
                 <Input className="rx-readonly" readOnly {...jsx}
                        suffix={<Icon type="search" onClick={Op.fnLoading(this)}/>}/>
-                <DynamicDialog $visible={this.state.$visible}
+                <DynamicDialog className="rx-list-dialog"
+                               $visible={this.state.$visible}
                                $dialog={dialog}>
                     <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
                            size={"small"}

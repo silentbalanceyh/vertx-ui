@@ -17,9 +17,8 @@ const asyncTrue = (config = {}, params = {}, callback = {}, mock = {}) => {
     const ajaxFn = ajaxFun[config.method ? config.method.toLowerCase() : 'get'];
     const uri = config.uri;
     if (uri && ajaxFn) {
-        const promise = ajaxFn(uri, params, mock);
-        promise.then(data => {
-            if (data) {
+        ajaxFn(uri, params, mock).then(data => {
+            if (true === data) {
                 if (callback.success) {
                     callback.success();
                 }
@@ -46,8 +45,7 @@ const asyncData = (config = {}, params = {}, callback = () => {
     const ajaxFn = ajaxFun[config.method ? config.method.toLowerCase() : 'get'];
     const uri = config.uri;
     if (uri && ajaxFn) {
-        const promise = ajaxFn(uri, params, mock);
-        promise.then(data => {
+        ajaxFn(uri, params, mock).then(data => {
             if (callback) {
                 callback(data);
             }

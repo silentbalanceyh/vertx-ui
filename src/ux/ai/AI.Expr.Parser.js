@@ -2,13 +2,31 @@ const normalize = (item = {}, value) => {
     if (!item.optionConfig) item.optionConfig = {};
     item.optionConfig.normalize = value.replace(/ /g, '').replace(":", ",");
 };
-const addonAfter = (item = {}, value) => {
+const configValue = (field) => (item = {}, value) => {
+    if (!item.optionConfig) item.optionConfig = {};
+    item.optionConfig[field] = value;
+};
+const jsxValue = (field) => (item = {}, value) => {
     if (!item.optionJsx) item.optionJsx = {};
-    item.optionJsx.addonAfter = value;
+    item.optionJsx[field] = value;
+};
+const jsxBoolean = (field) => (item = {}, value) => {
+    if (!item.optionJsx) item.optionJsx = {};
+    item.optionJsx[field] = Boolean(value);
+};
+const sorter = (item = {}, value) => {
+    if (!item.params) item.params = {};
+    if (!item.params.sorter) item.params.sorter = [];
+    const sorters = value.split(';');
+    sorters.forEach(sorterItem => item.params.sorter.push(sorterItem.replace('`', ',')));
 };
 const PARSER = {
     normalize,
-    addonAfter
+    addonAfter: jsxValue("addonAfter"),
+    readOnly: jsxBoolean("readOnly"),
+    placeholder: jsxValue("placeholder"),
+    valuePropName: configValue("valuePropName"),
+    sorter
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');
@@ -22,6 +40,32 @@ const parseTo = (item = {}, literal = "") => {
     }
     return item;
 };
+const ruleRequired = (item = []) => {
+    const config = {};
+    config.required = true;
+    config.message = item[0] ? item[0] : "";
+    return config;
+};
+const ruleRequiredState = (status = true) => (item = {}) => {
+    const config = {};
+    config.validator = "required";
+    config.message = item[0] ? item[0] : "";
+    config.status = status;
+    return config;
+};
+const RULER = {
+    required: ruleRequired,
+    requiredTrue: ruleRequiredState(true),
+    requiredFalse: ruleRequiredState(false)
+};
+const parseRule = (rule = "") => {
+    const rules = rule.replace(/ /g, '').split(',');
+    const ruler = rules.shift();
+    if (RULER[ruler]) {
+        return RULER[ruler](rules);
+    }
+};
 export default {
-    parseTo
+    parseTo,
+    parseRule
 }

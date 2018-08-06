@@ -14,12 +14,59 @@ const applyKey = (item = {}) => {
     }
     return item;
 };
+const applyRules = (rules = []) => {
+    const processed = [];
+    rules.forEach(rule => {
+        if ("string" === typeof rule) {
+            const result = Parser.parseRule(rule);
+            if (result) {
+                processed.push(result);
+            }
+        } else {
+            processed.push(rule);
+        }
+    });
+    return processed;
+};
 const applyField = (item = {}) => {
     if (item.hasOwnProperty('key')) {
         delete item.key;
     }
     if (item.span) {
         item.span = Value.valueInt(item.span);
+    }
+    if (item.optionConfig && item.optionConfig.rules) {
+        item.optionConfig.rules = applyRules(item.optionConfig.rules);
+    }
+    if (0 < item.field.indexOf('`')) {
+        // Filter专用语法解析
+        item.field = item.field.replace('`', ',');
+    }
+    // 解析ajax属性，ListSelector专用
+    const ajaxConfig = item.optionJsx && item.optionJsx.config ? item.optionJsx.config : {};
+    if (ajaxConfig && ajaxConfig.hasOwnProperty("ajax")) {
+        ajaxConfig.ajax = aiExprAjax(ajaxConfig.ajax);
+    }
+    return item;
+};
+
+const aiMetaColumn = (item = {}) => {
+    if (item.metadata) {
+        const {metadata, ...rest} = item;
+        const basic = parseItem(metadata, "column");
+        const options = applyTree(rest);
+        Object.assign(basic, options);
+        applyColumn(basic);
+        item = basic;
+    }
+    return item;
+};
+const applyColumn = (item = {}) => {
+    if (item.hasOwnProperty('key')) {
+        delete item.key;
+    }
+    if (item.hasOwnProperty("sorter")) {
+        item.sorter = Boolean(item.sorter);
     }
     return item;
 };
@@ -94,20 +141,24 @@ const applyTree = (item = {}) => {
     return $item.toJS();
 };
 const parseItem = (kvs = [], key) => {
-    kvs = applyArray(kvs);
     let item = {};
-    if (ExprData[key]) {
-        const config = ExprData[key];
-        // 基本属性解析
-        item = applyItem(item, config, kvs);
-        // 补上key（无key的时候处理）
-        applyKey(item);
-        // 检查connectId：Button专用，其他的不影响
-        applyConnect(item);
-        // style计算，所有组件通用
-        applyStyle(item);
-        // 额外的键值对
-        applyKv(item, config, kvs);
+    if ("string" === typeof kvs || U.isArray(kvs)) {
+        kvs = applyArray(kvs);
+        if (ExprData[key]) {
+            const config = ExprData[key];
+            // 基本属性解析
+            item = applyItem(item, config, kvs);
+            // 补上key（无key的时候处理）
+            applyKey(item);
+            // 检查connectId：Button专用，其他的不影响
+            applyConnect(item);
+            // style计算，所有组件通用
+            applyStyle(item);
+            // 额外的键值对
+            applyKv(item, config, kvs);
+        }
+    } else {
+        item = Immutable.fromJS(kvs).toJS();
     }
     return item;
 };
@@ -126,7 +177,7 @@ const _iterator = (array = [], callback, objectCallback = data => data) => {
 };
 const aiExprTitle = (item) => {
     // title专用解析器
-    if (0 <= item.indexOf("title")) {
+    if ("string" === typeof item && 0 <= item.indexOf("title")) {
         const kv = item.split("=");
         const result = {};
         // Ant-Design Form必须
@@ -164,15 +215,47 @@ const aiMetaField = (item = {}) => {
     }
     return item;
 };
+
+const aiExprWindow = (literal = "") => {
+    const item = parseItem(literal, "window");
+    if (item.hasOwnProperty('key')) {
+        delete item['key']
+    }
+    if (item.hasOwnProperty('visible')) item.visible = Boolean(item.visible);
+    if (item.hasOwnProperty('maskClosable')) item.visible = Boolean(item.visible);
+    if (item.hasOwnProperty('width')) item.width = Value.valueInt(item.width);
+    return item;
+};
+
+const aiExprAjax = (ajax = {}) => {
+    // 默认是POST方法
+    let item = ajax;
+    const {metadata, ...rest} = ajax;
+    if (metadata) {
+        // 如果是对象，出现了metadata才会执行属性解析
+        item = parseItem(metadata, "ajax");
+        // 分页参数执行整数
+        const pager = item.params.pager;
+        if (pager) {
+            pager.page = Value.valueInt(pager.page);
+            pager.size = Value.valueInt(pager.size);
+        }
+        const lefts = applyTree(rest);
+        // 只合并criteria
+        item.params.criteria = lefts.params.criteria;
+    }
+    return item;
+};
 /**
  * 顺序：name, icon, style
  */
 const aiExpr = (literal = "") => parseItem(literal, "flag");
 /**
- * 顺序：dataIndex, title
+ * 顺序：dataIndex, title, $render, sorter
  */
 const aiExprColumn = (columns = []) =>
-    _iterator(columns, (values = []) => parseItem(values, "column"));
+    _iterator(columns, (values = []) => applyColumn(parseItem(values, "column")),
+        aiMetaColumn);
 /**
  * 顺序：key, label, style
  */
@@ -180,7 +263,7 @@ const aiExprOption = (options = []) =>
     _iterator(options, (values = []) => parseItem(values, "option"))
         .map(applyValue);
 /**
- * 顺序：key, title, icon, description, status
+ * 顺序：title, key, icon, description, status
  */
 const aiExprHelp = (steps = []) =>
     _iterator(applyArray(steps), (values = []) => parseItem(values, "steps"))
@@ -198,6 +281,10 @@ export default {
     aiExprOption,
     aiExprButton,
     aiExprField,
+    aiExprWindow,
+    aiExprAjax,
+    // 对象解析
+    aiMetaColumn,
     aiMetaField,
     // 特殊解析
     aiExprTitle,
