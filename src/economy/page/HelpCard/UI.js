@@ -42,7 +42,7 @@ class Component extends React.PureComponent {
     render() {
         const {
             children, reference, $card = 'page-card',
-            $key = "page", $extra, $current
+            $key = "page", $extra: ExtraComponent, $current
         } = this.props;
 
         // 左边按钮
@@ -61,7 +61,8 @@ class Component extends React.PureComponent {
                 </span>
         );
         // 右边帮助信息
-        let extraContent = $extra ? $extra : (topbar.help ? Op.renderHelp(reference, topbar, $current) : false);
+        let extraContent = ExtraComponent ?
+            <ExtraComponent/> : (topbar.help ? Op.renderHelp(reference, topbar, $current) : false);
         return (
             <Card className={$card} title={title} bordered={false}
                   extra={extraContent}>

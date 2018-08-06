@@ -83,11 +83,11 @@ const mountErrorFocus = (reference, item) => {
 };
 
 const _normalizeUi = (reference, ui = []) => {
+    // 最开始处理它
+    Ai.hookerForm(ui);
     ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
     ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
     ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
-    // Ai流程专用
-    Ai.hookerForm(ui);
     return ui;
 };
 /**

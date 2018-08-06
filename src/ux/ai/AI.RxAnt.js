@@ -2,6 +2,7 @@ import React from 'react'
 import {Icon} from 'antd';
 import U from "underscore";
 import Prop from "../Ux.Prop";
+import Expr from './AI.Expr.String';
 import Random from "../Ux.Random";
 import Attributes from '../Ux.Attribute';
 import Uarr from '../structure/Ux.Uarr'
@@ -140,12 +141,12 @@ class RxAnt {
             .tree("id", "pid")
             .to();
     }
-
+    
     static toOptions(reference, config = {}, filter = () => true) {
         let options = [];
         if (config.items) {
             // 如果存在items的根节点，则直接items处理
-            options = config.items;
+            options = Expr.aiExprOption(config.items);
         } else if (config.datum) {
             // 如果存在datum节点，则从Assist/Tabular数据源中读取
             const data = extractDatum(reference, config, filter);

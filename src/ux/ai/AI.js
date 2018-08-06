@@ -7,7 +7,7 @@ import AiTab from './AI.Tab';
 import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
 import LayoutTypes from './AI.Layout.Item';
-import AiString from './AI.String';
+import AiString from './AI.Expr.String';
 import AiCriteria from './AI.Criteria';
 
 export default {
