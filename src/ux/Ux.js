@@ -13,7 +13,6 @@ import OP from "./Ux.Op";
 import SORTER from "./Ux.Sorter";
 import ICONS from "./Ux.Icon";
 import ANT from "./Ux.Ant";
-import OPTION from "./Ux.Option";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
 import FORMAT from "./Ux.Format";
@@ -28,10 +27,20 @@ import ATTRIBUTE from "./Ux.Attribute";
 import VALUE from "./Ux.Value";
 import HTML from "./Ux.Html";
 import PARSER from './Ux.Param';
-import Uarr from "./Ux.Uarr";
-import Uson from "./Ux.Uson";
+import AI from './ai/AI';
+import CHART from './Ux.Chart';
+import TERMINAL from './Ux.Terminal';
+import LIST from './Ux.List';
+import Uarr from "./structure/Ux.Uarr";
+import Uson from "./structure/Ux.Uson";
+import E from './Ux.Error';
 
 export default {
+    ...LIST,
+    // 专用打断
+    ...TERMINAL,
+    // 图标专用
+    ...CHART,
     // 参数解析
     ...PARSER,
     // 字段专用处理
@@ -46,6 +55,7 @@ export default {
     ...AJAX,
     // Log函数
     Logger: LOGGER,
+    E,
     // 加密解密
     ...ENCRYPT,
     // 随机
@@ -68,8 +78,6 @@ export default {
     ...ICONS,
     // ANT
     ...ANT,
-    // Option选项
-    ...OPTION,
     // Normalize 标准化
     ...NORM,
     // 类型处理
@@ -89,6 +97,8 @@ export default {
     ...HTML,
     // Uson/Uarr
     ...VALUE,
+    // 新组件用于AI化处理
+    ...AI,
     Uarr,
     Uson
 };

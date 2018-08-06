@@ -5,16 +5,20 @@ import Ux from "ux";
 import _Icon from "./Ux.Icon";
 import Prop from "./Ux.Prop";
 import Type from "./Ux.Type";
+import Global from './Ux.Global';
 import {
     Breadcrumb,
     Button,
     Checkbox,
+    Col,
     Collapse,
     Icon,
     Menu,
     Modal,
     Radio,
+    Row,
     Select,
+    Spin,
     Steps,
     Tabs,
     Timeline,
@@ -26,19 +30,9 @@ import {Link} from "react-router-dom";
 const Step = Steps.Step;
 const SubMenu = Menu.SubMenu;
 
-const _buildUri = (item = {}, $router = {}) => {
-    if ("$MAIN$" === item.uri) {
-        return Ux.ENTRY_ADMIN;
-    } else if ("$SELF$" === item.uri) {
-        return $router ? $router.path() : "";
-    } else {
-        return item.uri;
-    }
-};
-
 const _buildLink = (item = {}, $router) =>
     item.uri ? (
-        <Link to={_buildUri(item, $router)} className={item.className}>
+        <Link to={Ux.aiUri(item, $router)} className={item.className}>
             {item.text}
         </Link>
     ) : (
@@ -118,8 +112,8 @@ const uiItemCollapse = (collapses = {}, ...children) => (
         ))}
     </Collapse>
 );
-const uiItemTimeline = (items = {}) => (
-    <Timeline>
+const uiItemTimeline = (items = {}, jsx = {}) => (
+    <Timeline {...jsx}>
         {items
             ? items.map(item => {
                 let className = item.onClick ? "ux-item" : "";
@@ -158,7 +152,8 @@ const uiItemRadio = (items = [], jsx = {}) => {
     return (
         <Radio.Group {...jsx}>
             {items.map(item => (
-                <Radio key={item.key} value={item.key}>
+                <Radio key={item.key} style={item.style ? item.style : {}}
+                       value={item.hasOwnProperty('value') ? item.value : item.key}>
                     {item.name}
                 </Radio>
             ))}
@@ -190,25 +185,113 @@ const uiItemTree = (items = [], jsx = {}) => {
         .to();
     return <TreeSelect treeData={data} {...jsx} />;
 };
-const uiBtnPrimary = (fnClick = () => {
-}, text) => (
-    <Button type="primary" onClick={fnClick}>
-        {text}
-    </Button>
-);
 const uiDialogConfirm = (config = {}, execFunc) =>
     Modal.confirm({
         ...config,
         onOk: execFunc
     });
-const uiItemCheckbox = (item = {}, $router) => {
-    return <Checkbox.Group options={item}/>;
+const uiItemCheckbox = (item = [], jsx) => {
+    item = item.filter(item => item.key);
+    item.forEach(each => {
+        if (!each.value) {
+            each.value = each.key;
+        }
+    });
+    return <Checkbox.Group options={item} {...jsx}/>;
 };
 const uiItemDatum = (reference, key, filters) => {
     return (filters) ? Type.elementFind(Prop.onDatum(reference, key), filters) :
         Prop.onDatum(reference, key);
 };
+/**
+ * 根据不同用户的角色值读取不同的UI
+ * @method uiLoader
+ * @param props
+ * @param roles
+ * @param roleCode
+ */
+const uiLoader = (props = {}, roles = {}, roleCode = "roleCode") => {
+    const user = Global.isLogged();
+    if (!user) return false;
+    const role = user[roleCode];
+    if (!role) return false;
+    const Component = roles[role];
+    if (!Component) return false;
+    return (<Component {...props}/>)
+};
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiGrid
+ * @param grid
+ * @param jsx
+ */
+const uiGrid = (grid = [], ...jsx) => {
+    return (
+        <Row>
+            {grid.map((item, index) => (
+                <Col span={item} key={Ux.randomString(12)}>
+                    {jsx[index] ? jsx[index] : false}
+                </Col>
+            ))}
+        </Row>
+    )
+};
+/**
+ * 纯的Loading信息
+ * @param text
+ */
+const uiLoading = (text = "", size = "large") => {
+    return (
+        <div style={{width: "100%", padding: "12px", textAlign: "center"}}>
+            <Spin tip={text} size={size}/>
+        </div>
+    )
+};
+/**
+ * 根据传入的grid渲染Col/Row专用方法
+ * @method uiIfElse
+ * @param condition 判断条件
+ * @param yesJsx condition = true时执行
+ * @param noJsx condition = false时执行
+ */
+const uiIfElse = (condition, yesJsx, noJsx) =>
+    (condition ? yesJsx : (undefined !== noJsx ? noJsx : false));
+const uiBtnPrimary = (fnClick = () => {
+}, text, type = "primary") => (
+    <Button type={type} onClick={fnClick}>
+        {text}
+    </Button>
+);
+const uiBtnHidden = (fnClick = () => {
+    console.info("Not Inject Event onClick.")
+}, id) => {
+    return (
+        <Button id={id} key={id} onClick={fnClick}/>
+    )
+};
+const uiBtnHiddens = (hidden = {}) => {
+    const ids = Object.keys(hidden);
+    if (0 < ids.length) {
+        return (<div>
+            {ids.map(id => (
+                <Button id={id} onClick={U.isFunction(hidden[id]) ? hidden[id] : () => {
+                    console.error(`[Zero] Inject function is invalid. id = ${id}`)
+                }}/>
+            ))}
+        </div>)
+    } else {
+        return false;
+    }
+};
 export default {
+    uiGrid,
+    uiLoading,
+    uiLoader,
+    uiIfElse,
+    uiBtnHidden,
+    uiBtnHiddens,
+    uiBtnPrimary,
+
     uiItemRadio,
     uiItemDatum,
     uiItemRadioDatum: (reference, jsx = {}, key, filters) =>
@@ -232,6 +315,5 @@ export default {
     uiItemTabs,
     uiItemCollapse,
     uiItemCheckbox,
-    uiDialogConfirm,
-    uiBtnPrimary
+    uiDialogConfirm
 };

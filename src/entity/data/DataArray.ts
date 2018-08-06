@@ -1,20 +1,22 @@
 import DataContainer from './DataContainer';
 import Ux from 'ux';
 import {isArray} from "rxjs/util/isArray";
+import * as Immutable from 'immutable';
+import * as U from 'underscore';
 
 class DataArray implements DataContainer {
     ready: boolean = false;
     private data: string = "[]";
     private length: number = this.data.length;
 
+    constructor(data: Array<Object>) {
+        this.setValue(data);
+    }
+
     setValue(data: any = []) {
         this.data = JSON.stringify(data);
         this.ready = !!data;
         this.length = data ? data.length : 0;
-    }
-
-    constructor(data: Array<Object>) {
-        this.setValue(data);
     }
 
     to(): Array<Object> {
@@ -25,7 +27,8 @@ class DataArray implements DataContainer {
             );
         }
         if (this.data) {
-            const result = JSON.parse(this.data);
+            let result = JSON.parse(this.data);
+            result = Immutable.fromJS(result).toJS();
             result.forEach((item: any) => {
                 // React专用
                 if ("string" !== typeof item &&
@@ -46,6 +49,18 @@ class DataArray implements DataContainer {
         const ready = this.ready;
         const length = this.length;
         return {data, ready, length};
+    }
+
+    filter(fnFilter: Function) {
+        const data = JSON.parse(this.data);
+        if (U.isFunction(fnFilter)) {
+            const result = data.filter(fnFilter);
+            this.data = JSON.stringify(result);
+        } else if ("object" === typeof fnFilter) {
+            const result = Ux.elementFind(data, fnFilter);
+            this.data = JSON.stringify(result);
+        }
+        return this;
     }
 
     /**
@@ -83,28 +98,28 @@ class DataArray implements DataContainer {
         this.setValue(dataArr);
     }
 
-    saveElement(element: any) {
-        if (!element.key) {
-            element.key = Ux.randomString(32);
+    saveElement(element: any, idField: any = "key") {
+        if (!element[idField]) {
+            element[idField] = Ux.randomString(32);
         }
         // 元素信息处理
         if (!this.data) {
             this.setValue([]);
         }
         // 设置信息
-        const hitted = this.searchObject('key', element.key);
+        const hitted = this.searchElement(idField, element[idField]);
         if (hitted) {
-            this.updateObject(element);
+            this.updateElement(element);
         } else {
             this.push(element);
         }
     }
 
-    getElement(key: string) {
+    getElement(key: string, idField: any = "key") {
         let result = {};
         if (this.data && key) {
             // 处理更新功能
-            const dataArray = JSON.parse(this.data).filter(item => item.key === key);
+            const dataArray = JSON.parse(this.data).filter(item => item[idField] === key);
             if (isArray(dataArray) && 1 === dataArray.length) {
                 result = dataArray[0];
             }
@@ -112,14 +127,14 @@ class DataArray implements DataContainer {
         return result;
     }
 
-    removeElement(key: string) {
+    removeElement(key: string, idField: any = "key") {
         // 元素信息处理
         if (!this.data) {
             this.setValue([]);
         }
         if (key) {
             // 处理删除功能
-            const dataArray = JSON.parse(this.data).filter(item => item.key !== key);
+            const dataArray = JSON.parse(this.data).filter(item => item[idField] !== key);
             if (isArray(dataArray)) {
                 this.setValue(dataArray);
             }
@@ -172,7 +187,7 @@ class DataArray implements DataContainer {
 
     // -------------- 内部自动排序函数 -------------
 
-    updateObject(element: any) {
+    updateElement(element: any) {
         if (!element.key) {
             console.error("[TS-VI] Could not setObject for null key element.");
         }
@@ -192,7 +207,7 @@ class DataArray implements DataContainer {
      * @param field
      * @param value
      */
-    searchObject(field: string, value: any) {
+    searchElement(field: string, value: any) {
         if (!field) {
             console.error("[TS-VI] Could not support invalid field searching.");
             return;

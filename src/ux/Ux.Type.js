@@ -2,6 +2,8 @@ import U from "underscore";
 import Immutable from "immutable";
 import Dg from "./Ux.Debug";
 import Prop from "./Ux.Prop";
+import {DataLabor} from "entity";
+import Error from './Ux.Error';
 
 /**
  * 在数组中查找唯一元素
@@ -15,6 +17,59 @@ const elementUnique = (data = [], field = "", value) => {
     let reference = data.filter(item => value === item[field]);
     Dg.ensureLength(reference, 1);
     return 0 === reference.length ? undefined : reference[0];
+};
+
+/**
+ * 数组拉平专用算法，以子节点field中的key为主
+ * @method elementFlat
+ * @param {Array} array 被追加的数组
+ * @param field 需要拉平的字段值
+ */
+const elementFlat = (array = [], field = "") => {
+    const result = [];
+    array.forEach(item => {
+        // 读取字段中的值
+        if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
+            const children = item[field];
+            children.forEach(child => {
+                let target = Immutable.fromJS(item);
+                target = target.mergeDeep(child);
+                target = target.remove(field);
+                result.push(target.toJS());
+            })
+        }
+    });
+    return result;
+};
+
+/**
+ * 数组连接Tabular/Assist专用算法
+ * @param array 原始数组信息
+ * @param target 被连接的数组信息
+ * @param field 需要执行的key = element[field]的条件查找唯一元素
+ * @param mapping 执行最终的mapping动作：from -> to
+ */
+const elementConnect = (array = [], target = [], field, mapping = {}) => {
+    if (mapping && 0 < Object.keys(mapping).length
+        && field && 0 < target.length) {
+        let $array = [];
+        array.forEach((item = {}) => {
+            const entity = elementUnique(target, "key", item[field]);
+            if (entity) {
+                let $item = Immutable.fromJS(item);
+                for (const fromKey in mapping) {
+                    if (mapping.hasOwnProperty(fromKey)) {
+                        const toKey = mapping[fromKey];
+                        $item = $item.set(toKey, entity[fromKey]);
+                    }
+                }
+                $array.push($item.toJS());
+            }
+        });
+        return $array;
+    } else {
+        return array;
+    }
 };
 /**
  * 返回数组的第一个元素中的field字段值
@@ -52,13 +107,39 @@ const elementFind = (data = [], filters) => {
         for (const field in filters) {
             if (filters.hasOwnProperty(field)) {
                 // 这里用双等号匹配，用于检查字符串和数值的比较
-                reference = reference.filter(
-                    item => item[field] === filters[field]
-                );
+                reference = reference.filter(item => {
+                    const value = filters[field];
+                    if (U.isArray(value)) {
+                        const $value = Immutable.fromJS(value);
+                        return $value.contain(item[field]);
+                    } else {
+                        return item[field] === value;
+                    }
+                });
             }
         }
     }
     return reference;
+};
+/**
+ * 按`filters`中的条件模糊匹配Array对应的值
+ * @method elementMatch
+ * @param {Array} data 查找的数组
+ * @param filters 查找条件
+ * @return {Array}
+ */
+const elementMatch = (data = [], filters = {}) => {
+    Dg.ensureType(data, U.isArray, "Array");
+    const itemMatch = (data = [], key, value) => data.filter(item => {
+
+        return (value && item[key] && 0 <= item[key].indexOf(value));
+    });
+    for (const key in filters) {
+        if (filters.hasOwnProperty(key) && filters[key]) {
+            data = itemMatch(data, key, filters[key]);
+        }
+    }
+    return data;
 };
 /**
  * 遍历数组中的某个字段，并处理该字段对应的`field`的值
@@ -84,12 +165,32 @@ const itElement = (data = [], field = "", itemFun = () => {
  * @param {Function} executor 处理函数
  */
 const itObject = (data = {}, executor = () => {
-}) => {
+}, invalid = false) => {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
-            if (value) {
+            if (invalid) {
                 executor(key, value);
+            } else {
+                if (value) {
+                    executor(key, value);
+                }
+            }
+        }
+    }
+};
+
+const itData = (config = {}, consumer = () => {
+}) => {
+    for (const key in config) {
+        if (config.hasOwnProperty(key)) {
+            const expr = config[key];
+            Error.fxTerminal("string" !== typeof expr, 10008, key, expr);
+            Error.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
+            const kv = expr.split(':');
+            const value = kv[1].split('.');
+            if (U.isFunction(consumer)) {
+                consumer(key, kv[0], value);
             }
         }
     }
@@ -198,16 +299,101 @@ const elementSwitch = (array = [], element = "") => {
     return $elements.toJS();
 };
 /**
+ * 查找一个颗树的某个分支构成一个新的数组
+ * @method elementBranch
+ * @param {Array} array 被查找的数
+ * @param leafKey 过滤条件
+ * @param parentField 父节点字段
+ */
+const elementBranch = (array = [], leafKey, parentField) => {
+    // 查找的最终结果
+    let branch = [];
+    // 查找子节点
+    const obj = elementUnique(array, "key", leafKey);
+    if (obj) {
+        const target = Immutable.fromJS(obj).toJS();
+        branch.push(target);
+        // 查找父节点
+        const pid = obj[parentField];
+        branch = branch.concat(elementBranch(array, pid, parentField));
+    }
+    return branch.reverse();
+};
+/**
+ * 查找一颗树以及它下边的所有新数组
+ * @method elementChildren
+ * @param {Array} array 被查找的数
+ * @param parentKey 过滤条件
+ * @param parentField
+ */
+const elementChildren = (array = [], parentKey, parentField) => {
+    let children = [];
+    const obj = elementUnique(array, 'key', parentKey);
+    if (obj) {
+        const target = Immutable.fromJS(obj).toJS();
+        children.push(target);
+        // 查找子节点
+        const childrenArr = array.filter(item => parentKey === item[parentField]);
+        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)))
+    }
+    return children;
+};
+/**
+ * 针对数组中的某个字段求和
+ * @method elementSum
+ * @param {Array} data
+ * @param field 需要映射的字段名
+ * @return {Number}
+ */
+const elementSum = (data = [], field = "") => {
+    const result = data
+        .map(item => item[field])
+        .filter(item => !!item);
+    return (0 < result.length) ? result.reduce((left, right) => left + right) : 0;
+};
+/**
+ * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
+ *
+ *      ...
+ *      {
+ *          "id":"用于构造树的记录主键，默认值为id",
+ *          "pid":"用于构造树的父节点字段，默认值为pid",
+ *          "value":"用于构造树的记录值，默认值为value",
+ *          "label":"默认用于构造树的呈现字段，默认值为label",
+ *          "expr":"如果该值支持表达式结构，则使用exprLabel代替label",
+ *          "sort":"当前Tree中节点的排序字段，没有默认值"
+ *      }
+ * 数组中必须包含`level`字段：树的深度字段，必须包含该值，使用该值进行树的运算。
+ * @method tree
+ * @param {Array} array 原始数组
+ * @param {Object} config 构造时的树的配置信息
+ * @return {DataTree | *}
+ */
+const tree = (array = [], config = {}) => DataLabor.getTree(array, config).to();
+/**
+ * 带过滤条件的Tree专用，内置调用tree方法
+ * @method treeWithFilters
+ * @param {Array} array 原始数组
+ * @param filters 过滤条件
+ * @param {Object} config 构造时的树的配置信息
+ * @return {DataTree|*}
+ */
+const treeWithFilters = (array = [], filters = {}, config = {}) =>
+    tree(elementMatch(array, filters), config);
+/**
  * @class Type
  * @description 复杂数据结构计算
  */
 export default {
+    // 查找树中相关元素
+    elementBranch,
+    elementChildren,
     // 数组中查找唯一元素
     elementUnique,
     /**
      * 增强Unique，查找Tabuler/Assist专用
      * @method elementUniqueDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @param value
@@ -217,10 +403,11 @@ export default {
     // 查找数据中第一个元素
     elementFirst,
     elementFind,
+    elementMatch,
     /**
      * 增强Find，查找Tabular/Assist专用
      * @method elementFindDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param filters 查询条件
      * @return {Array}
@@ -230,7 +417,7 @@ export default {
     /**
      * 增强First，查找Tabular/Assist专用
      * @method elementFirstDatum
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {React.PureComponent} reference React对应组件引用
      * @param key 被命中的key
      * @param field
      * @return {*}
@@ -243,11 +430,21 @@ export default {
     elementVertical,
     // 添加和删除重合
     elementSwitch,
+    // 拉平专用
+    elementFlat,
+    // 连接Tabular/Assist
+    elementConnect,
+    // 求和计算
+    elementSum,
     // 遍历数组并抽取对象数组中的field字段执行处理
     itElement,
     // 遍历数组以及对应对象信息
     itFull,
     // 遍历对象
     itObject,
-    itMatrix
+    itMatrix,
+    itData,
+    // 树的构造方法
+    tree,
+    treeWithFilters
 };

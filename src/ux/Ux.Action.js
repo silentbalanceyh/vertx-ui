@@ -1,5 +1,6 @@
 import Immutable from 'immutable';
 import Ux from "ux";
+import Value from './Ux.Value';
 import U from 'underscore';
 
 /**
@@ -7,7 +8,7 @@ import U from 'underscore';
  * 1. form变量为Ant Design的Form创建的引用；
  * 2. $key变量标识Form的提交模式：$key = undefined则是添加模式；
  * @method runSubmit
- * @param {ReactComponent} reference React专用组件引用
+ * @param {React.PureComponent} reference React专用组件引用
  * @param {Function} fnSuccess 提交成功过后的回调函数
  * @param {Function} fnFailure 如果验证出现错误后的回调函数
  * @example
@@ -36,17 +37,10 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 return;
             }
             const params = Immutable.fromJS(values).toJS();
-            params.language = Ux.LANG;
-            params.key = $key;
+            params.language = Ux.Env['LANGUAGE'];
+            if ($key) params.key = $key;
             // 去掉undefined
-            for (const key in params) {
-                if (params.hasOwnProperty(key)) {
-                    const value = params[key];
-                    if (undefined === value) {
-                        delete params[key];
-                    }
-                }
-            }
+            Value.valueValid(params);
             // 成功过后的回调
             if (fnSuccess && U.isFunction(fnSuccess)) {
                 fnSuccess(params);
@@ -56,10 +50,63 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
         console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
 };
+
+const rxSubmit = (reference = {}, $_loading = "", {
+    success = () => {
+    },
+    validate = () => true,
+    promise,
+    failure = () => {
+    },
+    loading = ($_loading) ? (is = false) => {
+        const state = {};
+        state[$_loading] = is;
+        reference.setState(state);
+    } : () => {
+    }
+}) => {
+    loading(true);
+    runSubmit(reference, (values) => {
+        // 验证函数专用
+        if (!validate(values, reference)) {
+            return;
+        }
+        // 生成Promise
+        const $promise = promise(values, reference);
+        if ($promise) {
+            $promise.catch(error => {
+                loading(false);
+                failure(error, reference);
+            }).then(response => {
+                loading(false);
+                success(response, reference);
+            })
+        } else {
+            console.warn("[Ux] Your promise is invalid!");
+            loading(false);
+            success(values, reference);
+        }
+    }, () => loading(false));
+};
+
+const rxInit = (props, params = {}) => {
+    if (U.isFunction(props.zxInit)) {
+        const {$router} = props;
+        const paramData = Immutable.fromJS(params).toJS();
+        if ($router) {
+            Object.assign(paramData, $router.params());
+        }
+        // 特殊引用注入
+        paramData.$props = props;
+        props.zxInit(paramData);
+    }
+};
 /**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
-    runSubmit
+    runSubmit,
+    rxSubmit,
+    rxInit
 }

@@ -1,0 +1,32 @@
+{
+    "supported": {
+        "table": [
+            "bordered",
+            "childrenColumnName",
+            "columns",
+            "components",
+            "dataSource",
+            "defaultExpandAllRows",
+            "defaultExpandedRowKeys",
+            "expandedRowKeys",
+            "expandedRowRender",
+            "expandRowByClick",
+            "indentSize",
+            "loading",
+            "locale",
+            "pagination",
+            "rowClassName",
+            "rowKey",
+            "rowSelection",
+            "scroll",
+            "showHeader",
+            "size",
+            "title",
+            "onChange",
+            "onExpand",
+            "onExpandedRowsChange",
+            "onHeaderRow",
+            "onRow"
+        ]
+    }
+}

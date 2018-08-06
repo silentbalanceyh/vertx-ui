@@ -1,6 +1,40 @@
 import moment from 'moment';
 import Dg from './Ux.Debug';
+import Immutable from "immutable";
+import U from "underscore";
+import Sorter from './Ux.Sorter'
+import Type from './Ux.Type';
 
+/**
+ * 读取非undefined的值，去掉undefined值相关信息
+ * @method valueValid
+ * @param {Object} data
+ */
+const valueValid = (data = {}, wild = false) => {
+    for (const key in data) {
+        if (data.hasOwnProperty(key)) {
+            const value = data[key];
+            if (wild) {
+                // 空字符串、0，以及其他值
+                if (!value) {
+                    delete data[key];
+                }
+            } else {
+                if (undefined === value) {
+                    delete data[key];
+                }
+            }
+        }
+    }
+};
+
+const valueInt = (literal = "", dft = 0) => {
+    let ret = parseInt(literal, 10);
+    if (isNaN(ret)) {
+        ret = dft;
+    }
+    return ret;
+};
 /**
  * 不重复追加值到`item`对象中（包含则不设置）
  * @method valueAppend
@@ -12,6 +46,24 @@ const valueAppend = (item = {}, field = "", value) => {
     if (!item.hasOwnProperty(field)) {
         item[field] = value;
     }
+};
+
+const valueSearch = (config = {}, data = {}) => {
+    // 查找根节点
+    const result = {};
+    Type.itData(config, (field, p, path) => {
+        const propName = `$${p}`;
+        if (data[propName]) {
+            const dataObject = data[propName];
+            const value = dataObject._(path);
+            if (value) {
+                result[field] = value;
+            } else {
+                console.info(`[ Ux ] 检索节点：${propName}，检索路径：${path}，值：${value}`);
+            }
+        }
+    });
+    return result;
 };
 /**
  * 直接转换数据成Moment对象，时间处理
@@ -129,26 +181,84 @@ const valueStartTime = (to, duration, mode = 'day') => {
  * @method valueFilter
  * @param data 被过滤的数据对象
  * @param keys 保留的字段名集合
+ * @param orderBy 排序字段
  */
-const valueFilter = (data = {}, keys = []) => {
+const valueFilter = (data = {}, keys = [], orderBy = "order") => {
     const result = {};
     keys.forEach(key => {
         if (data.hasOwnProperty(key)) {
-            result[key] = data[key];
+            result[key] = data[key].sort((left, right) => Sorter.sorterAsc(left, right, orderBy));
         }
     });
     return result;
+};
+/**
+ * 两个字符串的专用连接方法，用于做不重复链接，
+ * @method stringConnect
+ * @private
+ * @param left
+ * @param right
+ */
+const stringConnect = (left, right) => {
+    if (left && right && "string" === typeof left && "string" === typeof right) {
+        if (right.startsWith(left)) {
+            return right;
+        } else {
+            return left + right;
+        }
+    }
+};
+
+/**
+ * 变更专用处理
+ * @method valueTriggerChange
+ * @param reference
+ * @param value
+ * @param key
+ * @param field
+ * @param index
+ */
+const valueTriggerChange = (reference = {}, {
+    index, field, key = "source", value
+}) => {
+    let source = reference.state ? reference.state[key] : [];
+    if (U.isArray(source)) {
+        if (!source[index]) {
+            source[index] = {};
+        }
+        source[index][field] = value;
+    }
+    source = Immutable.fromJS(source).toJS();
+    const state = {};
+    state[key] = source;
+    reference.setState(state);
+    // 变更
+    valueOnChange(reference, state, key)
+};
+
+const valueOnChange = (reference = {}, state, key = "source") => {
+    const onChange = reference.props.onChange;
+    if (onChange) {
+        const newValue = Object.assign({}, reference.state, state);
+        onChange(newValue[key]);
+    }
 };
 /**
  * @class Value
  * @description 数值计算器
  */
 export default {
+    stringConnect,
+    valueInt,
+    valueValid,
     valueAppend,
     valueDuration,
     valueEndTime,
     valueStartTime,
     valueFilter,
+    valueTriggerChange,
+    valueOnChange,
+    valueSearch,
     // 数学运算
     mathMultiplication,
     mathDivision,

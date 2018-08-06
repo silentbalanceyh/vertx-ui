@@ -7,14 +7,13 @@ import Dg from './Ux.Debug';
 const SCHEMA = {
     OAuth: () => {
         const user = Global.isLogged();
-        if (user) {
-            const value = Encrypt.encryptBase64(`${user.uniqueId}:${user.token}`);
-            return `Bearer ${value}`
+        if (user && user.token) {
+            return `Bearer ${user.token}`;
         }
     },
     Basic: () => {
         const user = Global.isLogged();
-        if (user) {
+        if (user && user.token) {
             return "Basic " + user.token
         }
     }
@@ -80,7 +79,8 @@ const _secret = () => {
 const token = () => {
     const app = Global.isInit();
     Dg.ensureApp(app);
-    const auth = app.auth;
+    let auth = app.auth;
+    if (!auth) auth = 'OAuth';
     const fnExecute = SCHEMA[auth];
     return fnExecute();
 };

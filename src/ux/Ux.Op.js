@@ -74,7 +74,7 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
 /**
  * 【高阶函数：二阶】搜索专用函数
  * @method onSearch
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onSearch = (reference) => (event) => {
@@ -92,7 +92,7 @@ const onSearch = (reference) => (event) => {
 /**
  * 【高阶函数：二阶】重置搜索条件函数，用于高级搜索专用
  * @method onResetFilter
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onResetFilter = (reference) => (event) => {
@@ -110,7 +110,7 @@ const onResetFilter = (reference) => (event) => {
  *
  * componentDidUpdate中的List专用生命周期函数
  * @method cycleUpdatePageList
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param key 数据对应的props中的键值，默认使用`$list`；
  * @param prevProps 之前的属性信息
  */
@@ -179,7 +179,7 @@ const cycleUpdateForm = (props = {}, prevProps = {}) => {
 /**
  * 【高阶函数：二阶】高级搜索专用函数调用，用于分页列表中的分页、过滤、排序同时处理的函数，和Table组件的onChange配合使用
  * @method onAdvanced
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {Function}
  */
 const onAdvanced = (reference = {}) => (pagination, filters, sorter) => {
@@ -211,17 +211,24 @@ const connectButton = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
         const key = Immutable.fromJS(dialog).toJS();
-        dialog.onOk = () => {
-            const ele = document.getElementById(key.onOk);
-            if (ele) {
-                ele.click();
-            }
-        }
+        dialog.onOk = () => connectId(key.onOk);
     } else {
         // 防重复注入
         if (!U.isFunction(dialog.onOk)) {
-            console.warn("[ Cycle ] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
+            console.warn("[Zero-Connect] Connect key onOk = \"" + dialog.onOk + "\" is missing.");
         }
+    }
+};
+/**
+ * 链接某个ID的元素
+ * @param id
+ */
+const connectId = (id) => {
+    const ele = document.getElementById(id);
+    if (ele) {
+        ele.click();
+    } else {
+        console.warn("[Zero-Connect] Element '" + id + "' does not exist.");
     }
 };
 /**
@@ -236,12 +243,7 @@ const connectTopbar = (topbar = {}, key) => {
         buttons.forEach(button => {
             // 防重复注入
             if (!U.isFunction(button.onClick)) {
-                button.onClick = () => {
-                    const ele = document.getElementById(button.key);
-                    if (ele) {
-                        ele.click();
-                    }
-                }
+                button.onClick = () => connectId(button.key)
             }
         });
         topbar.buttons[key] = buttons;
@@ -251,6 +253,37 @@ const connectTopbar = (topbar = {}, key) => {
         }
     }
 };
+/**
+ * 高阶函数生成，用于简易的状态设置
+ * @method hgValue
+ * @param reference
+ * @param key
+ * @returns {Function}
+ */
+const hgValue = (reference, key) => (event) => _hgSet(reference, key, event);
+const _hgSet = (reference, key, value) => {
+    if (key && undefined !== value) {
+        const state = {};
+        state[key] = value;
+        reference.setState(state);
+    }
+};
+/**
+ * 高阶函数生成，用于简易的状态设置，true
+ * @method hgTrue
+ * @param reference
+ * @param key
+ * @returns {Function}
+ */
+const hgTrue = (reference, key) => () => _hgSet(reference, key, true);
+/**
+ * 高阶函数生成，用于简易状态设置，false
+ * @method hgFalse
+ * @param reference
+ * @param key
+ * @returns {function(): void}
+ */
+const hgFalse = (reference, key) => () => _hgSet(reference, key, false);
 /**
  * @class Op
  * @description 操作专用类
@@ -262,11 +295,16 @@ export default {
     onResetFilter,
     onSearch,
     onAdvanced,
+    // 高阶函数
+    hgValue,
+    hgTrue,
+    hgFalse,
     // 更新
     cycleUpdatePageList,
     cycleUpdateForm,
     cycleDestoryForm,
     // 连接
     connectButton,
-    connectTopbar
+    connectTopbar,
+    connectId,
 }

@@ -1,4 +1,6 @@
 import DataContainer from "./DataContainer";
+import * as Immutable from 'immutable';
+import * as U from 'underscore';
 
 class DataObject implements DataContainer {
     ready: boolean = false;
@@ -14,7 +16,7 @@ class DataObject implements DataContainer {
             if (!this.data.hasOwnProperty("key")) {
                 this.data.key = this.data.uniqueId;
             }
-            return this.data;
+            return Immutable.fromJS(this.data).toJS();
         } else {
             console.warn(
                 `[TS-VI] DataObject -> The data is not the latest, 'ready' flat is ${this
@@ -30,7 +32,7 @@ class DataObject implements DataContainer {
     raw(): Object {
         const data = this.data;
         const ready = this.ready;
-        return { data, ready };
+        return {data, ready};
     }
 
     /**
@@ -40,13 +42,30 @@ class DataObject implements DataContainer {
      */
     _(key: string): any {
         if (this.ready && key) {
-            return this.data[key];
+            let keys: any = [];
+            if (U.isArray(key)) {
+                keys = key;
+            } else {
+                if ("string" === typeof key) {
+                    if (0 <= key.indexOf('.')) {
+                        keys = key.split('.');
+                    } else {
+                        keys = [key];
+                    }
+                }
+            }
+            let data = Immutable.fromJS(this.data).getIn(keys);
+            if (data && data.toJS) {
+                data = data.toJS();
+            }
+            return data;
         }
     }
+
     /**
      * 设置对象中对应键的值
-     * @param key 
-     * @param value 
+     * @param key
+     * @param value
      */
     set(key: string, value: any): any {
         if (this.ready && value) {

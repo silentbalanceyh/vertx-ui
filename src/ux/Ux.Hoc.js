@@ -1,6 +1,8 @@
 import Dg from './Ux.Debug'
 import Prop from './Ux.Prop'
 import Op from './Ux.Op'
+import Cv from './Ux.Env'
+import Immutable from 'immutable'
 
 /**
  * 通用属性读取相关信息
@@ -23,6 +25,11 @@ const toProp = (props = {}, ...keys) => {
             inherits[targetKey] = props[targetKey]
         }
     });
+    // 特殊方法专用：reference和fnOut
+    // fnOut：专用写Redux状态的方法
+    if (props.fnOut) {
+        inherits.fnOut = props.fnOut;
+    }
     return inherits;
 };
 /**
@@ -103,7 +110,7 @@ const toQueryParameter = (name = "") => {
  * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
  * * $query:当前页面的查询条件信息
  * @method toPageList
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {JSX} FormComponent 是否包含传入组件
  * @return {{}}
  */
@@ -131,10 +138,29 @@ const toPageList = (reference = {}, FormComponent) => {
         inherit.$component = false;
     }
     // 元数据
-    inherit.$metadata = Prop.fromHoc(reference, "pagelist");
-    inherit.$query = reference.state.$query;
-    inherit.$filters = reference.props.$filters;
+    const metadata = Prop.fromHoc(reference, "pagelist");
+    inherit.$metadata = Immutable.fromJS(metadata).toJS();
+    inherit.$query = reference.state['$query'];
+    // 查询参数
+    inherit.$filters = reference.props['$filters'];
     return inherit;
+};
+/**
+ * 转换Less的风格文件，主要用于生成属性className和style中的backgroundImage
+ * 全局前缀使用Cv.Env.CSS_PREFIX进行区分
+ * @method toStyle
+ * @param name 当前Class的名称
+ * @param bg 背景图后缀
+ */
+const toStyle = (name, bg) => {
+    const styles = {};
+    styles.className = `${Cv.Env.CSS_PREFIX}-${name}`;
+    if (bg) {
+        styles.style = {
+            backgroundImage: `url(${bg})`
+        }
+    }
+    return styles;
 };
 /**
  * @class Hoc
@@ -146,6 +172,7 @@ export default {
     toFullName,
     // 继承专用属性
     toProp,
+    toStyle,
     toDatum,
     toEffect,
     toQueryParameter,

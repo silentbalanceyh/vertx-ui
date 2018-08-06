@@ -1,22 +1,49 @@
 import Dg from "./Ux.Debug";
 import Value from "./Ux.Value";
+import Immutable from 'immutable';
+import E from './Ux.Error';
+import {DataLabor} from 'entity';
 
+/**
+ * 直接从Hoc资源路径读取数据信息
+ * @method fromPath
+ * @param reference
+ * @param keys
+ */
+const fromPath = (reference = {}, ...keys) => {
+    Dg.ensureMinLength(keys, 1);
+    let data = fromHoc(reference, keys[0]);
+    if (1 < keys.length && data) {
+        const path = [];
+        keys.forEach((item, index) => {
+            if (0 < index) {
+                path.push(item);
+            }
+        });
+        const $data = Immutable.fromJS(data);
+        data = $data.getIn(path);
+        if (data && data.toJS) {
+            data = data.toJS();
+        }
+    }
+    return data;
+};
 /**
  * 资源文件数据读取方法
  * @method fromHoc
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {String} key 读取对应属性名
  * @return {null}
  */
 const fromHoc = (reference = {}, key = "") => {
-    Dg.ensureKey("fromHoc", key);
+    E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
     const {$hoc} = reference.state;
-    return $hoc ? $hoc._(key) : null;
+    return ($hoc) ? $hoc._(key) : null;
 };
 /**
  * 从路由参数中读取数据专用
  * @method fromRouter
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {String} key 读取对应属性名
  * @return {null}
  */
@@ -25,26 +52,37 @@ const fromRouter = (reference = {}, key = "") => {
     const {$router} = reference.props;
     return $router ? $router._(key) : null;
 };
+
+const fromDatum = (reference, key) => {
+    key = key.replace(/\./g, "_");
+    if (reference.props) {
+        const targetKey =
+            reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
+        if (targetKey) {
+            if (targetKey.is()) {
+                return targetKey;
+            } else {
+                return targetKey;
+            }
+        }
+    }
+    return DataLabor.getArray(undefined);
+};
 /**
  * 从reference的props中读取`key`对应的值，一般用于读取Tabular/Assist
  * @method onDatum
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param {String} key
  * @return {*}
  */
 const onDatum = (reference, key) => {
-    key = key.replace(/\./g, "_");
-    const targetKey =
-        reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
-    if (targetKey && targetKey.is()) {
-        return targetKey.to();
-    }
-    return [];
+    const data = fromDatum(reference, key);
+    return (data && data.is()) ? data.to() : [];
 };
 /**
  * Ant Design中的Form清空专用方法
  * @method formClear
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param data
  * @return {*}
  */
@@ -63,7 +101,7 @@ const formClear = (reference, data) => {
 /**
  * Ant Design中的Form读取，将`$record`记录中的数据读取到`data`中；
  * @method formRead
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param data 被修改的数据引用
  */
 const formRead = (reference, data = {}) => {
@@ -75,13 +113,32 @@ const formRead = (reference, data = {}) => {
                 data[key] = record[key];
             }
         }
+    } else {
+        const {form} = reference.props;
+        data = form.getFieldsValue();
     }
     return data;
 };
 /**
+ * Ant Design中的Form的表单数据读取
+ * @method formGet
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param key 指定重置的字段值
+ */
+const formGet = (reference, key) => {
+    const {form} = reference.props;
+    if (form) {
+        let data = form.getFieldsValue();
+        data = Immutable.fromJS(data).toJS();
+        return key ? data[key] : data;
+    } else {
+        console.error("[ZI] 'form' reference is invalid, please configured Ant Design.")
+    }
+};
+/**
  * Ant Design中的Form的表单重置函数
  * @method formReset
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param keys 指定重置的字段值
  */
 const formReset = (reference, keys = []) => {
@@ -99,7 +156,7 @@ const formReset = (reference, keys = []) => {
  * * `value`有值时直接设置`key`的表单值；
  * * `value`为undefined时则直接读取Form中的`key`对应的值
  * @method formHit
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param key 字段名
  * @param value 字段值
  * @return {any}
@@ -121,7 +178,7 @@ const formHit = (reference, key, value) => {
 /**
  * Ant Design中的Form表单执行值设置
  * @method formHits
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param values 设置Form表单中的字段值
  */
 const formHits = (reference, values = {}) => {
@@ -135,7 +192,7 @@ const formHits = (reference, values = {}) => {
 /**
  * 从React Router中读取路由参数
  * @method onRouting
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @param key 需要读取的参数键名
  * @return {*}
  */
@@ -156,6 +213,7 @@ export default {
     // Form数据处理
     formClear,
     formRead,
+    formGet,
     formReset,
     // Hit
     formHit,
@@ -165,5 +223,7 @@ export default {
     onDatum,
     // 从Hoc, Router中提取数据
     fromHoc,
-    fromRouter
+    fromRouter,
+    fromPath,
+    fromDatum
 };

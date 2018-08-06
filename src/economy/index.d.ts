@@ -1,1 +1,1 @@
-declare module "control";
+declare module "web";

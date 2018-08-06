@@ -15,41 +15,69 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 * Vert.x Zero Up Framework: [http://www.vertxup.cn](http://www.vertxup.cn)
 * Zero UI Framework: [http://www.vertxui.cn](http://www.vertxui.cn)
-
-依赖库固定版本（升级后有兼容性问题）
-
-| 库名称 | 当前版本 | 最新版 |
-| :--- | :--- | :--- |
-| rxjs | 5.5.10 | 6.0.0 |
-| webpack | 3.11.0 | 4.6.0 |
-| webpack-dev-server | 3.0.0 | 3.1.3 |
-| awesome-typescript-loader | 4.0.1 | 5.0.0 |
+* Zero AI Tool：[http://www.vertxai.cn](http://www.vertxai.cn)
 
 文档基本前缀说明。
 
 * `UI`文档为开发文档，提供给开发人员使用来开发项目专用；
 * `UT`文档为研发文档，提供给研发人员开发Zero UI专用；
+* `UC`文档位自定义组件专用文档，用于描述目前系统中存在的自定义组件；
+* `AI`文档为自动化组件专用文档，用于一些目前自定义的解析规则相关；
 
-## 2. 整体架构
+## 2. 创建项目
+
+参考文档：[UI0000 - 项目初始化](/document/ui0000-xiang-mu-chu-shi-hua.md)
+
+## 3. 整体架构
 
 整个Zero框架的结构图如下：
 
 ![](/document/image/arch.png)
 
-## 3. 文档列表
+## 4. 文档列表
 
 ### 环境说明
 
+* [UI0000 - 项目初始化](/document/ui0000-xiang-mu-chu-shi-hua.md)
 * [UI0001 - 脚手架说明](/document/ui0001-jiao-shou-jia-shuo-ming.md)
 * [UI0002 - 环境变量](/document/ui0002-huan-jing-bian-liang.md)
-* [UI0003 - 基本开发规范](/document/ui0003-ji-ben-kai-fa-gui-fan.md)
-* [UI0006 - 模板/组件开发规范](/document/ui0006-mo-677f-zu-jian-kai-fa-gui-fan.md)
+* [UI0003 - 路由/资源文件说明](/document/ui0003-ji-ben-kai-fa-gui-fan.md)
+* [UI0007 - 编码规范——文件命名](/document/ui0007-jiao-shou-jia-tui-jian-bian-ma-gui-fan.md)
+* [UI0008 - 编码规范——代码约定](/document/ui0008-bian-ma-gui-fan-2014-2014-dai-ma-yue-ding.md)
+* [UI0006 - 模板/组件规范示例](/document/ui0006-mo-677f-zu-jian-kai-fa-gui-fan.md)
 
 ### 开发文档
 
-* [UI0004 - 开发我的第一个模板](/document/2-kai-fa-wen-dang/ui0004-kai-fa-wo-de-di-yi-ge-mo-ban.md)
-* [UI0005 - 开发我的第一个页面](/document/2-kai-fa-wen-dang/ui0005-kai-fa-wo-de-di-yi-ge-ye-mian.md)
-* [UI0007 - 核心注解zero的使用](/document/2-kai-fa-wen-dang/ui0006-he-xin-zhu-jie-zero-de-shi-yong.md)
+* [UI0009 - StateIn中的r系列API](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api.md)
+  * [UI0009-1 - revamp](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-1-revamp.md)
+  * [UI0009-2 - radial](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-2-radial.md)
+  * [UI0009-3 - rework](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-3-rework.md)
+  * [UI0009-4 - 重名覆盖之rapt](/document/2-kai-fa-wen-dang/ui0009-stateinzhong-de-r-xi-lie-api/ui0009-4-zhong-ming-fu-gai-zhi-rapt.md)
+* [UI0010 - zero注解](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie.md)
+  * [UI0010-1 - Object写法](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie/ui0010-1-objectxie-fa.md)
+  * [UI0010-2 - Ux新写法（推荐）](/document/2-kai-fa-wen-dang/ui0010-zerozhu-jie/ui0010-2-uxxin-xie-fa.md)
+* [UI0011 - TypeScript数据模型](/document/2-kai-fa-wen-dang/ui0011-typescriptshu-ju-mo-xing.md)
+* [UI0013 - 页面代码结构说明](/document/2-kai-fa-wen-dang/ui0013-ye-mian-dai-ma-jie-gou-shuo-ming.md)
+* [UI0016 - Form的复杂布局（Grid）](/document/2-kai-fa-wen-dang/ui0016-formde-fu-za-bu-ju-ff08-grid.md)
+* [UI0015 - required，Form中的字段验证](/document/2-kai-fa-wen-dang/ui0015-formzhong-de-zi-duan-yan-zheng.md)
+* [UI0019 - 按钮的connect机制](/document/2-kai-fa-wen-dang/ui0019-an-niu-de-connect-ji-zhi.md)
+
+### 自定义组件
+
+* [UC0001 - page/PageCard](/document/2-kai-fa-wen-dang/ui0017-ye-tou-ying-yong.md)
+
+### 步步为营
+
+* [UI0012 - 路由测试](/document/ui0012-lu-you-ce-shi.md)
+* [UI0004 - 开发第一个模板](/document/ui0004-kai-fa-di-yi-ge-mo-ban.md)
+* [UI0005 - 开发第一个页面](/document/ui0005-kai-fa-di-yi-ge-ye-mian.md)
+* [UI0014 - 开发提交按钮事件](/document/ui0014-kai-fa-ti-jiao-an-niu-shi-jian.md)
+* [UI0018 - 登录/注销跳转](/document/2-kai-fa-wen-dang/ui0018-deng-5f55-zhu-xiao-tiao-zhuan.md)
+
+### 属性解析器
+
+* [AI0001 - aiExpr属性解析器](/document/ai0001-aiexprshu-xing-jie-xi-qi.md)
+* [AI0002 - aiExprButton属性解析器](/document/ai0002-aiexprbuttonshu-xing-jie-xi-qi.md)
 
 ### Ux工具包
 

@@ -1,7 +1,7 @@
 {
-    "defined":"_hotel_admin",
-    "special":{
-        "_login_index":[
+    "defined": "_zui_admin",
+    "special": {
+        "_login_index": [
             "_login_index"
         ]
     }

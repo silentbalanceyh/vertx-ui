@@ -1,10 +1,17 @@
 {
     "_button": {
-        "login": "登陆",
+        "login": "登录",
         "reset": "重置",
         "save": "保存",
+        "goBack": "返回",
+        "register": "注册",
         "loading": "提交...",
-        "search": "搜索"
+        "search": "搜索",
+        "next": "下一步",
+        "previous": "上一步",
+        "approve": "批准",
+        "reject": "拒绝",
+        "clear": "清除"
     },
     "_dialog": {
         "error": "错误",
@@ -25,5 +32,6 @@
             "female": "女"
         }
     },
-    "_loading": "加载中……"
+    "_loading": "加载中……",
+    "_placeholder": "必填"
 }

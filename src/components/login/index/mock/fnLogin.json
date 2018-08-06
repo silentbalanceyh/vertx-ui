@@ -1,0 +1,8 @@
+{
+    "mock": true,
+    "data": {
+        "realname": "系统管理员",
+        "username": "lang.yu",
+        "logo": "/img/zui/account/default.jpeg"
+    }
+}

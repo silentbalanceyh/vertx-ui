@@ -1,43 +1,51 @@
 {
-  "compilerOptions": {
-    "outDir": "build",
-    "experimentalDecorators": true,
-    "noImplicitAny": false,
-    "module": "commonjs",
-    "target": "es2016",
-    "sourceMap": false,
-    "alwaysStrict": false,
-    "allowJs": true,
-    "noImplicitUseStrict": true,
-    "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
-    "paths": {
-      "environment": [
-        "src/environment"
-      ],
-      "entity": [
-        "src/entity"
-      ],
-      "lang": [
-        "src/cab"
-      ],
-      "web": [
-        "src/economy"
-      ],
-      "ux": [
-        "src/ux"
-      ],
-      "app": [
-        "src/app"
-      ]
+    "compilerOptions": {
+        "outDir": "build",
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "es2016",
+        "sourceMap": false,
+        "alwaysStrict": false,
+        "allowJs": true,
+        "noImplicitUseStrict": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "removeComments": true,
+        "paths": {
+            "environment": [
+                "src/environment"
+            ],
+            "entity": [
+                "src/entity"
+            ],
+            "lang": [
+                "src/cab"
+            ],
+            "web": [
+                "src/economy"
+            ],
+            "ux": [
+                "src/ux"
+            ],
+            "app": [
+                "src/app"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules/**/*.*",
+        "src/**/*.js",
+        "config/**/*.js"
+    ],
+    "include": [
+        "src/entity/**/*.ts",
+        "src/c*/**/*.ts"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "resolveGlobs": true,
+        "useCache": false
     }
-  },
-  "exclude": [
-    "node_modules",
-    "src/**/*.js"
-  ],
-  "include": [
-    "src/entity/**/*.ts",
-    "src/c*/**/*.ts"
-  ]
 }

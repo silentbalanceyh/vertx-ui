@@ -4,9 +4,10 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
-const WatchMissingNodeModulesPlugin = require("react-dev-utils/WatchMissingNodeModulesPlugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+const {CheckerPlugin} = require('awesome-typescript-loader');
+
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 // 自定义模块
@@ -188,7 +189,7 @@ module.exports = {
                 loader: require.resolve("babel-loader"),
                 options: {
                     plugins: [
-                        ["import", { libraryName: "antd", style: true }],
+                        ["import", {libraryName: "antd", style: true}],
                         "transform-class-properties",
                         "transform-decorators-legacy",
                         "transform-decorators",
@@ -204,7 +205,7 @@ module.exports = {
                     // This is a feature of `babel-loader` for webpack (not Babel itself).
                     // It enables caching results in ./node_modules/.cache/babel-loader/
                     // directory for faster rebuilds.
-                    presets: [["env", { modules: false }]],
+                    presets: [["env", {modules: false}]],
                     cacheDirectory: true
                 }
             },
@@ -217,12 +218,7 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     require.resolve("style-loader"),
-                    {
-                        loader: require.resolve("css-loader"),
-                        options: {
-                            importLoaders: 1
-                        }
-                    },
+                    require.resolve("css-loader"),
                     {
                         loader: require.resolve("postcss-loader"),
                         options: {
@@ -248,8 +244,15 @@ module.exports = {
             {
                 test: /\.less$/,
                 use: [
-                    require.resolve("style-loader"),
-                    require.resolve("css-loader"),
+                    {
+                        loader: require.resolve("style-loader"),
+                    },
+                    {
+                        loader: require.resolve("css-loader"),
+                        options: {
+                            importLoaders: 1
+                        }
+                    },
                     {
                         loader: require.resolve("postcss-loader"),
                         options: {
@@ -269,11 +272,12 @@ module.exports = {
                         }
                     },
                     {
-                        loader: require.resolve("less-loader"),
+                        loader: "less-loader",
                         options: {
-                            javascriptEnabled:true,
+                            javascriptEnabled: true,
                             modifyVars: {
-                                "@primary-color": "#00B2FB"
+                                "@primary-color": "#4aa684",
+                                "@app": process.env.Z_CSS_PREFIX
                             }
                         }
                     }
@@ -284,16 +288,17 @@ module.exports = {
         ]
     },
     plugins: [
-        // Makes some environment variables available in index.html.
-        // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
-        // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-        // In development, this will be an empty string.
-        new InterpolateHtmlPlugin(env.raw),
+        new CheckerPlugin(),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             inject: true,
             template: paths.appHtml
         }),
+        // Makes some environment variables available in index.html.
+        // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
+        // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
+        // In development, this will be an empty string.
+        new InterpolateHtmlPlugin(env.raw),
         // Add module names to factory functions so they appear in browser profiler.
         new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
@@ -309,7 +314,7 @@ module.exports = {
         // to restart the development server for Webpack to discover it. This plugin
         // makes the discovery automatic so you don't have to restart.
         // See https://github.com/facebookincubator/create-react-app/issues/186
-        new WatchMissingNodeModulesPlugin(paths.appNodeModules),
+        // new WatchMissingNodeModulesPlugin(paths.appNodeModules),
         // Moment.js is an extremely popular library that bundles large locale files
         // by default due to how Webpack interprets its code. This is a practical
         // solution that requires the user to opt into importing specific locales.

@@ -1,1 +1,2 @@
-npm run start-zero
+#!/usr/bin/env bash
+npm run start

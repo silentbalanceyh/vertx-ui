@@ -1,10 +1,13 @@
 import Rx from "rxjs";
 import U from "underscore";
 import Log from "./Ux.Log";
-import Env from "./Ux.Env";
+import Cv from "./Ux.Constant";
 import Expr from "./Ux.Expr";
+import Env from './Ux.Env';
 import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
+import Immutable from 'immutable'
+import Type from './Ux.Type';
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -23,9 +26,21 @@ const ajaxUri = (uri, method = "get", params = {}) => {
     const query = Expr.formatQuery(uri, params);
     // 最终请求路径
     api = "get" === method || "delete" === method
-        ? `${Env.ENDPOINT}${api}${query}`
-        : `${Env.ENDPOINT}${api}`;
+        ? `${Cv['ENDPOINT']}${api}${query}`
+        : `${Cv['ENDPOINT']}${api}`;
     return api;
+};
+/**
+ * XSRF请求专用，从cookie中读取XSRF的Token
+ * @method ajaxXSRF
+ * @private
+ * @param headers
+ */
+const ajaxXSRF = (headers = {}) => {
+    const xsrfToken = undefined;
+    if (xsrfToken) {
+        headers.append(Cv.HTTP11.XSRF_TOKEN, xsrfToken)
+    }
 };
 /**
  * Ajax远程访问过程中的Header处理器
@@ -36,14 +51,15 @@ const ajaxUri = (uri, method = "get", params = {}) => {
  */
 const ajaxHeader = (secure = false) => {
     const headers = new Headers();
-    headers.append(Env.HTTP11.ACCEPT, Env.MIMES.JSON);
-    headers.append(Env.HTTP11.CONTENT_TYPE, Env.MIMES.JSON);
+    headers.append(Cv.HTTP11.ACCEPT, Cv.MIMES.JSON);
+    headers.append(Cv.HTTP11.CONTENT_TYPE, Cv.MIMES.JSON);
     // 处理Authorization
     if (secure) {
         const token = Sign.token();
         Dg.ensureToken(token);
-        headers.append(Env.HTTP11.AUTHORIZATION, token);
+        headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
+    ajaxXSRF(headers);
     return headers;
 };
 /**
@@ -73,28 +89,45 @@ const ajaxParams = (params = {}) => {
     }
 };
 /**
+ *
+ * @param body
+ */
+const ajaxAdapter = (body = {}) => {
+    return body.data ? body.data : body;
+};
+/**
  * Ajax中的响应处理器，Promise调用返回过后的响应专用处理器
  * @method ajaxResponse
  * @private
  * @param {Request} request 请求对象
  * @param {Object} mockData 【Mock环境可用】专用Mock响应处理
+ * @param {Object} params
  * @return {Promise<Response>}
  */
-const ajaxResponse = (request, mockData = {}) =>
+const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    mockData.mock ? Promise.resolve(mockData.data)
+    (mockData['forceMock'] || (Cv.MOCK && mockData.mock))
+        ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
         : fetch(request)
-            .then(response => Log.response(null, response, request.method))
+            .then(response => Log.response(request, response, request.method))
             .then(response => response.ok
-                ? response.json().then(body => Promise.resolve(body.data))
-                : response.json().then(data =>
-                    Promise.reject({
-                        ...data,
-                        status: response.status,
-                        statusText: response.statusText
-                    })
-                )
+                ? response.json().then(body => Promise.resolve(ajaxAdapter(body)))
+                : response.json().then(data => Promise.reject({
+                    ...data,
+                    status: response.status,
+                    statusText: response.statusText
+                }))
             )
+            .then(response => {
+                // 是否存储响应信息
+                if (Cv['DEBUG_AJAX']) {
+                    Dg.dgFileJson({
+                        request: params,
+                        response: response
+                    });
+                }
+                return response;
+            })
             .catch(error => Promise.reject(error));
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法
@@ -104,14 +137,19 @@ const ajaxResponse = (request, mockData = {}) =>
  * @param secure 是否安全模式
  */
 const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData) => {
+    const $params = Immutable.fromJS(params).toJS();
     const api = ajaxUri(uri, method, params);
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
-    const request = new Request(api, {
-        method,
-        headers
+    const request = new Request(api, _ajaxOptions(method, headers));
+    return ajaxResponse(request, mockData, $params);
+};
+
+const ajaxResource = (uri) => {
+    const request = new Request(uri, {
+        method: "get"
     });
-    return ajaxResponse(request, mockData);
+    return fetch(request).then(data => Promise.resolve(data.text()))
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
@@ -121,16 +159,15 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, mockData
  * @param secure 是否安全模式
  */
 const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockData) => {
+    const $params = Immutable.fromJS(params).toJS();
     const api = ajaxUri(uri, method, params);
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {
-        method,
-        headers,
-        mode: "cors",
+        ..._ajaxOptions(method, headers),
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData);
+    return ajaxResponse(request, mockData, $params);
 };
 /**
  * Ajax日志函数，打印请求过程中的日志信息
@@ -141,12 +178,27 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockDat
  * @param params 当前Ajax请求的参数信息
  * @param mockData 【Mock环境可用】当前Ajax请求的Mock数据
  */
-const _logAjax = (api, method, params, mockData) => {
-    if (mockData && mockData.mock) {
+const _logAjax = (api, method, params, mockData = {}) => {
+    if ((mockData && mockData.mock) || mockData['forceMock']) {
         Log.mock(params, mockData.data, method + " " + api);
     } else {
         Log.request(api, method, params);
     }
+};
+
+const _ajaxOptions = (method, headers) => {
+    const options = {};
+    options.method = method;
+    options.headers = headers;
+    if (Cv.hasOwnProperty('CORS_MODE')) {
+        options.mode = Cv['CORS_MODE'];
+    } else {
+        options.mode = 'cors';
+    }
+    if (Cv.hasOwnProperty('CORS_CREDENTIALS')) {
+        options.credentials = Cv['CORS_CREDENTIALS'];
+    }
+    return options;
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程写数据方法
@@ -156,16 +208,15 @@ const _logAjax = (api, method, params, mockData) => {
  * @param secure 是否安全模式
  */
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
-    const api = `${Env.ENDPOINT}${uri}`;
+    const $params = Immutable.fromJS(params).toJS();
+    const api = `${Cv['ENDPOINT']}${uri}`;
     _logAjax(api, method, params, mockData);
     const headers = ajaxHeader(secure);
     const request = new Request(api, {
-        method,
-        headers,
-        mode: "cors",
+        ..._ajaxOptions(method, headers),
         body: ajaxParams(params)
     });
-    return ajaxResponse(request, mockData);
+    return ajaxResponse(request, mockData, $params);
 };
 /**
  * 统一处理Epic，引入Mock的RxJs处理远程访问
@@ -174,7 +225,6 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
  * @param promise 构造的Promise
  * @param processor 响应数据处理器，可用于处理response中的数据
  * @param mockData 【Mock环境可用】模拟数据
- * @param mockProcessor 【Mock环境可用】Mock环境的特殊处理器
  * @example
  *
  *      // Act.Epic.js中的专用方法
@@ -187,16 +237,16 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
  *          Mock.fnFetchRoomType
  *      )
  */
-const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProcessor) => {
+const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
     if (type && U.isFunction(promise)) {
         // 触发Mock条件
         // 1. 打开Mock环境
         // 2. 提供Mock数据
-        if (Env.MOCK && mockData.mock) {
+        if (Cv.MOCK && mockData.mock) {
             let processed = mockData.data;
             return Rx.Observable.from(type)
                 .map(action => action.payload)
-                .map(data => Log.mock(data, mockProcessor ? mockProcessor(data, processed) : processed))
+                .map(data => Log.mock(data, mockData.processor ? mockData.processor(processed, data) : processed))
                 .map(processor)
                 .map(data => Env.dataOut(data));
         } else {
@@ -211,15 +261,115 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}, mockProc
                 );
         }
     } else {
-        console.error("[ Ajax ] type or promise is invalid.", type, promise);
+        console.error("[ Ajax ] rxEpic: type or promise is invalid.", type, promise);
     }
 };
+/**
+ * 【Epic升级版】统一处理Epic，新函数，简化操作，替换rxEpic专用
+ * @method rxEdict
+ * @param type 专用Action
+ * @param promise 构造的promise，这个版本Promise中的Mock直接包含在内
+ * @param responser 后期响应处理
+ * */
+const rxEdict = (type, promise, responser = data => data) => {
+    if (type && U.isFunction(promise)) {
+        return $action => {
+            const actionType = $action.ofType(type.getType());
+            return Rx.Observable.from(actionType)
+                .map(action => action.payload)
+                .map(promise)
+                .switchMap(promise =>
+                    Rx.Observable.from(promise)
+                        .map(responser)
+                        .map(data => Env.dataOut(data))
+                );
+        }
+    } else {
+        console.error("[ Ajax ] rxEdict: type or promise is invalid.", type, promise);
+    }
+};
+
+const _rxPromise = (container, nextPromise = []) => {
+    // 读取第一个promise
+    const middles = {};
+    let promise = nextPromise[0](container.request, container.response);
+    if (1 < nextPromise.length) {
+        for (let idx = 1; idx < nextPromise.length; idx++) {
+            promise = promise.then(data => {
+                middles[idx] = data;
+                container.next[idx] = data;
+                return nextPromise[idx](container.request, container.response, middles);
+            })
+        }
+    }
+    return promise.then(data => {
+        container.next[0] = data;
+        return Promise.resolve(data);
+    });
+};
+const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
+    if (type && U.isFunction(promise)) {
+        return $action => {
+            const actionType = $action.ofType(type.getType());
+            // 链式结构
+            const container = {};
+            container.next = Immutable.fromJS({}).toJS();
+            const rxNext = (params, key = "request") => {
+                container[key] = params;
+                return params;
+            };
+            return Rx.Observable.from(actionType)
+                .map(action => action.payload)
+                .map(params => rxNext(params))
+                .map(promise)
+                // 触发后续流程专用的nextPromise
+                .map(promise => promise
+                    .then(data => Promise.resolve(rxNext(data, "response")))
+                    .then(() => _rxPromise(container, nextPromise.map(item => item.ajax)))
+                )
+                .switchMap(promise => Rx.Observable.from(promise)
+                    .map(() => {
+                        // 合并最后的状态
+                        const state = {};
+                        const responseData = responser(container.response);
+                        if (responseData) {
+                            Object.assign(state, responseData);
+                        }
+                        const processors = nextPromise.map(item => item.processor);
+                        Type.itObject(container.next, (key, value) => {
+                            const fun = processors[key];
+                            if (U.isFunction(fun)) {
+                                const itemData = fun(value);
+                                Object.assign(state, itemData);
+                            }
+                        });
+                        return state;
+                    })
+                    .map(data => Env.dataOut(data))
+                );
+        }
+    } else {
+        console.error("[ Ajax ] rxEclat: type or promise is invalid.", type, promise, nextPromise);
+    }
+};
+/**
+ * 构造微服务路径专用
+ * @param serviceName 服务名称
+ * @param uri 服务专用URI
+ */
+const _buildApi = (serviceName = "", uri = "") => `/${serviceName}${uri}`.replace(/\/\//g, "/");
 /**
  * @class Ajax
  * @description 远程Ajax访问专用API方法
  */
 export default {
     rxEpic,
+    // 单个Ajax的Promise
+    rxEdict,
+    // 连接两个Ajax的Promise，后一个和前一个存在依赖关系
+    rxEclat,
+    // 特殊方法读取当前想对路径
+    ajaxResource,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch
@@ -228,7 +378,9 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxFetch: (uri, params = {}, mockData) =>
-        ajaxRead(Env.HTTP_METHOD.GET)(uri, params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET)(uri, params, mockData),
+    microFetch: (service, uri, params = {}, mockData) =>
+        ajaxRead(Cv.HTTP_METHOD.GET)(_buildApi(service, uri), params, mockData),
     /**
      * secure = false，非安全模式的写方法，HttpMethod = POST，底层调ajaxWrite
      * @method ajaxPush
@@ -237,7 +389,9 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPush: (uri, params = {}, mockData) =>
-        ajaxWrite(Env.HTTP_METHOD.POST)(uri, params, mockData),
+        ajaxWrite(Cv.HTTP_METHOD.POST)(uri, params, mockData),
+    microPush: (service, uri, params, mockData) =>
+        ajaxWrite(Cv.HTTP_METHOD.POST)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxGet
@@ -246,7 +400,9 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxGet: (uri, params = {}, mockData) =>
-        ajaxRead(Env.HTTP_METHOD.GET, true)(uri, params, mockData),
+        ajaxRead(Cv.HTTP_METHOD.GET, true)(uri, params, mockData),
+    microGet: (service, uri, params, mockData) =>
+        ajaxRead(Cv.HTTP_METHOD.GET, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = POST，底层调ajaxFull
      * @method ajaxPost
@@ -255,7 +411,9 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPost: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.POST, true)(uri, params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.POST, true)(uri, params, mockData),
+    microPost: (service, uri, params, mockData) =>
+        ajaxFull(Cv.HTTP_METHOD.POST, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = PUT，底层调ajaxFull
      * @method ajaxPut
@@ -264,7 +422,9 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxPut: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.PUT, true)(uri, params, mockData),
+        ajaxFull(Cv.HTTP_METHOD.PUT, true)(uri, params, mockData),
+    microPut: (service, uri, params, mockData) =>
+        ajaxFull(Cv.HTTP_METHOD.PUT, true)(_buildApi(service, uri), params, mockData),
     /**
      * secure = true，安全模式的写方法，HttpMethod = DELETE，底层调ajaxFull
      * @method ajaxDelete
@@ -273,5 +433,7 @@ export default {
      * @param mockData 【Mock环境可用】模拟数据
      */
     ajaxDelete: (uri, params = {}, mockData) =>
-        ajaxFull(Env.HTTP_METHOD.DELETE, true)(uri, params, mockData)
+        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(uri, params, mockData),
+    microDelete: (service, uri, params, mockData) =>
+        ajaxFull(Cv.HTTP_METHOD.DELETE, true)(_buildApi(service, uri), params, mockData),
 };

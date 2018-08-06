@@ -1,5 +1,6 @@
 import Store from './Ux.Store';
-import Env from './Ux.Env';
+import Cv from './Ux.Constant';
+import E from './Ux.Error';
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -7,7 +8,7 @@ import Env from './Ux.Env';
  * @return {*}
  */
 const isLogged = () => {
-    const key = Env.KEY_USER;
+    const key = Cv.KEY_USER;
     let userData = Store.Session.get(key);
     if (!userData) userData = {};
     return userData;
@@ -18,7 +19,7 @@ const isLogged = () => {
  * @return {*}
  */
 const isInit = () => {
-    const key = Env.KEY_APP;
+    const key = Cv.KEY_APP;
     let appData = Store.Storage.get(key);
     if (!appData) appData = {};
     return appData;
@@ -29,19 +30,43 @@ const isInit = () => {
  * @return {*}
  */
 const toLogout = () => {
-    const key = Env.KEY_USER;
+    const key = Cv.KEY_USER;
     return Store.Session.remove(key);
+};
+/**
+ * 执行路由操作
+ * @method toRoute
+ * @param reference
+ * @param uri
+ * @return {*}
+ */
+const toRoute = (reference = {}, uri = "") => {
+    E.fxRouter(reference, ($router) => {
+        let target;
+        if (0 <= uri.indexOf(Cv['ROUTE'])) {
+            target = uri;
+        } else {
+            target = `/${Cv['ROUTE']}${uri}`;
+        }
+        target = target.replace(/\/\//g, '/');
+        $router.to(target);
+    });
 };
 /**
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面
  * * reference引用中必须包含$router用于路由转发
  * @method isAuthorized
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  */
 const isAuthorized = (reference) => {
     const {$router} = reference.props;
-    if (!isLogged()) {
-        $router.to(Env.ENTRY_LOGIN);
+    if (0 === Object.keys(isLogged()).length) {
+        const path = $router.path();
+        if (path) {
+            $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
+        } else {
+            $router.to(Cv.ENTRY_LOGIN)
+        }
     }
 };
 /**
@@ -53,8 +78,10 @@ export default {
     isLogged,
     // 是否初始化应用
     isInit,
-    // 登陆控制
+    // 登录控制
     isAuthorized,
     // 注销
-    toLogout
+    toLogout,
+    // 链接地址
+    toRoute
 }

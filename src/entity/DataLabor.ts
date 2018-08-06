@@ -1,12 +1,11 @@
 import DataObject from "./data/DataObject";
 import DataContainer from "./data/DataContainer";
 import DataArray from "./data/DataArray";
+import DataTree from './data/DataTree';
 import DataRouter from "./flow/DataRouter";
 import Navigator from "./flow/Navigator";
 import StateIn from "./state/StateIn";
 import StateOut from "./state/StateOut";
-import {connect} from "react-redux";
-import Taper from "../environment/actions";
 
 /**
  * @class DataLabor
@@ -21,20 +20,16 @@ class DataLabor {
         return new DataArray(input);
     }
 
+    static getTree(input: Array<Object>, meta: any = {}): DataTree {
+        return new DataTree(input, meta);
+    }
+
     static get(input: any): DataContainer {
         if (Array.isArray(input)) {
             return DataLabor.getArray(input);
         } else if (input instanceof Object) {
             return DataLabor.getObject(input);
         }
-    }
-
-    static conn(S2P: any, Component: any, D2P: any) {
-        if (!D2P) {
-            D2P = {};
-        }
-        D2P.fnFlush = Taper.fnFlush;
-        return connect(S2P, D2P)(Component);
     }
 
     // 状态处理

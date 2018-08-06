@@ -2,6 +2,8 @@ import Dg from './Ux.Debug'
 import Validator from './Ux.Validator'
 import Type from './Ux.Type';
 import Html from './Ux.Html';
+import Immutable from 'immutable';
+import Ai from './ai/AI';
 
 const limitNumber = (length) => value => {
     if (value) {
@@ -79,43 +81,80 @@ const mountErrorFocus = (reference, item) => {
         item.optionJsx.onBlur = Html.htmlErrorBlur(item);
     }
 };
+
+const _normalizeUi = (reference, ui = []) => {
+    ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
+    ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
+    ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
+    // Ai流程专用
+    Ai.hookerForm(ui);
+    return ui;
+};
 /**
  * 处理当前Form中的input控件专用信息
  * @method extractForm
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param key 读取的配置值
  * @return {*}
  */
-const extractForm = (reference = {}) => {
+const extractForm = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
-    const form = $hoc._("form");
+    const form = $hoc._(key);
     Dg.ensureNotNull(form);
-    if (form) {
-        form.ui = Type.itMatrix(form.ui, (item) => Validator.mountValidator(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) => mountNormalizer(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) => mountErrorFocus(reference, item));
-        return form.ui;
+    return (form) ? _normalizeUi(reference, form.ui) : [];
+};
+/**
+ * 分组处理Form中的input控件专用
+ * @method extractGroupForm
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param groupIndex 组对应的索引值
+ */
+const extractGroupForm = (reference = {}, groupIndex) => {
+    if (undefined !== groupIndex) {
+        const {$hoc} = reference.state;
+        Dg.ensureNotNull($hoc);
+        const form = $hoc._("form");
+        Dg.ensureNotNull(form);
+        return (form && form.ui[groupIndex]) ?
+            _normalizeUi(reference, form.ui[groupIndex]) : [];
     } else {
-        return [];
+        console.error("[Ux] This method require 'groupIndex' parameter, but now it's invalid.")
     }
 };
 /**
  * 处理当前Form中的button或操作按钮配置信息
  * @method extractOp
- * @param {ReactComponent} reference React对应组件引用
- * @return {any}
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param op 操作事件集
+ * @return {Array}
  */
-const extractOp = (reference = {}) => {
+const extractOp = (reference = {}, op) => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
     const form = $hoc._("form");
     Dg.ensureNotNull(form);
-    return form ? form.op : [];
+    /**
+     * 绑定Op专用，主要用于onClick的绑定操作
+     */
+    let source = op ? op : reference.state['$op'];
+    if (!source) source = {};
+    const opData = form && form.op ? Immutable.fromJS(form.op).toJS() : [];
+    opData.forEach(op => {
+        if (op.onClick && source.hasOwnProperty(op.onClick)) {
+            op.onClick = source[op.onClick](reference);
+            if (source.$loading) {
+                // 防重复提交专用效果
+                op.loading = source.$loading;
+            }
+        }
+    });
+    return opData;
 };
 /**
  * 处理type = hidden类型的配置信息
  * @method extractHidden
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {{}}
  */
 const extractHidden = (reference = {}) => {
@@ -124,8 +163,8 @@ const extractHidden = (reference = {}) => {
     const form = $hoc._("form");
     Dg.ensureNotNull(form);
     const hidden = (form && form.hidden) ? form.hidden : {};
-    if (!hidden.hasOwnProperty('opVisible')) {
-        hidden.opVisible = true;
+    if (!hidden.hasOwnProperty("op")) {
+        hidden.op = false;
     }
     if (!hidden.hasOwnProperty('inputs')) {
         hidden.inputs = [];
@@ -138,6 +177,7 @@ const extractHidden = (reference = {}) => {
  */
 export default {
     // 读取Form配置专用方法
+    extractGroupForm,
     extractForm,
     extractHidden,
     extractOp

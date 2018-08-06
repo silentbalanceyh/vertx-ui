@@ -1,5 +1,5 @@
-import U from 'underscore'
-import saveAs from "file-saver";
+import U from "underscore";
+import {saveAs} from "file-saver";
 import v4 from "uuid";
 
 /**
@@ -14,14 +14,17 @@ import v4 from "uuid";
  * @example
  *
  *      // 导入Debug子类
- *      import Dg from './Ux.Debug';
+ *      import Dg from './Ux.DEV_DEBUG';
  *      // 省略中间代码
  *      const reference = ...;
  *      Dg.ensureArgs(reference, "foo");
  */
 const ensureArgs = (object, field) => {
     if (!object || !field || !object.hasOwnProperty(field)) {
-        console.error(`[ZUI] Argument invalid, object must have key ${field}`, object);
+        console.error(
+            `[Zero] Argument invalid, object must have key ${field}`,
+            object
+        );
     }
 };
 /**
@@ -31,9 +34,9 @@ const ensureArgs = (object, field) => {
  * @private
  * @param input
  */
-const ensureNotNull = (input) => {
+const ensureNotNull = input => {
     if (!input) {
-        console.error("[ZUI] The input parameter must not be null.");
+        console.error("[Zero] The input parameter must not be null.");
     }
 };
 /**
@@ -41,11 +44,14 @@ const ensureNotNull = (input) => {
  * * 合法条件：不为null、不为undefined、不为JavaScript的if检查条件中的false
  * @method ensureRuntime
  * @private
- * @param {ReactComponent} reference React中Component组件引用
+ * @param {React.PureComponent} reference React中Component组件引用
  */
-const ensureRuntime = (reference) => {
+const ensureRuntime = reference => {
     if (!reference) {
-        console.error("[ZUI] Your runtime does not support current object", reference);
+        console.error(
+            "[Zero] Your runtime does not support current object",
+            reference
+        );
     }
 };
 /**
@@ -58,7 +64,9 @@ const ensureRuntime = (reference) => {
  */
 const ensureAttr = (funName, key = "") => {
     if (!key) {
-        console.error(`[ZUI] This '${funName}' function require the second 'effectKey' parameter`);
+        console.error(
+            `[Zero] This '${funName}' function require the second 'effectKey' parameter`
+        );
     }
 };
 /**
@@ -68,9 +76,12 @@ const ensureAttr = (funName, key = "") => {
  * @private
  * @param {String} token 请求中收到的token的值
  */
-const ensureToken = (token) => {
+const ensureToken = token => {
     if (!token) {
-        console.error("[ZUI] Token could not be picked, the request is invalid.", token);
+        console.error(
+            "[Zero] Token could not be picked, the request is invalid.",
+            token
+        );
     }
 };
 /**
@@ -83,7 +94,9 @@ const ensureToken = (token) => {
  */
 const ensureKey = (funName, key = "") => {
     if (!key) {
-        console.error(`[ZUI] Function '${funName}' require input parameter key valid.`);
+        console.error(
+            `[Zero] Function '${funName}' require input parameter key valid.`
+        );
     }
 };
 /**
@@ -93,9 +106,9 @@ const ensureKey = (funName, key = "") => {
  * @private
  * @param {Object} app 应用程序配置
  */
-const ensureApp = (app) => {
+const ensureApp = app => {
     if (!app) {
-        console.error("[ZUI] The application has not been initialized.");
+        console.error("[Zero] The application has not been initialized.");
     }
 };
 /**
@@ -114,7 +127,7 @@ const ensureApp = (app) => {
  */
 const ensureRender = (render, option) => {
     if (!U.isFunction(render)) {
-        console.error("[ZUI] Render is not a function.", option);
+        console.error("[Zero] Render is not a function.", option);
     }
 };
 /**
@@ -134,7 +147,7 @@ const ensureRender = (render, option) => {
  */
 const ensureType = (value, fun, flag) => {
     if (!fun(value)) {
-        console.error(`[ZUI] Expected type '${flag}' is invalid.`, value);
+        console.error(`[Zero] Expected type '${flag}' is invalid.`, value);
     }
 };
 /**
@@ -148,7 +161,31 @@ const ensureLength = (array = [], upLimit = 0) => {
     ensureNumber(upLimit);
     if (U.isArray(array)) {
         if (upLimit < array.length) {
-            console.error(`[ZUI] Expected length is '${upLimit}', but current length is '${array.length}'.`);
+            console.error(
+                `[Zero] Expected length is '${upLimit}', but current length is '${
+                    array.length
+                    }'.`
+            );
+        }
+    }
+};
+
+/**
+ * 检查数据的长度是否超过下限长度
+ * @method ensureMinLength
+ * @private
+ * @param array
+ * @param upLimit
+ */
+const ensureMinLength = (array = [], upLimit = 0) => {
+    ensureNumber(upLimit);
+    if (U.isArray(array)) {
+        if (upLimit > array.length) {
+            console.error(
+                `[Zero] Expected length is '${upLimit}', but current length is '${
+                    array.length
+                    }'.`
+            );
         }
     }
 };
@@ -158,9 +195,9 @@ const ensureLength = (array = [], upLimit = 0) => {
  * @private
  * @param value 传入的数值
  */
-const ensureNumber = (value) => {
+const ensureNumber = value => {
     if ("number" !== typeof value) {
-        console.error("[ZUI] Expected number input value here.", typeof value);
+        console.error("[Zero] Expected number input value here.", typeof value);
     }
 };
 /**
@@ -169,10 +206,10 @@ const ensureNumber = (value) => {
  * @private
  * @param value
  */
-const ensurePositive = (value) => {
+const ensurePositive = value => {
     ensureNumber(value);
     if (0 > value) {
-        console.error("[ZUI] Expected positive number of input value.", value);
+        console.error("[Zero] Expected positive number of input value.", value);
     }
 };
 /**
@@ -180,6 +217,7 @@ const ensurePositive = (value) => {
  * @method dgFileJson
  * @param {Object|Array} data 传入的数据
  * @param ext 保存的文件格式后缀名，默认为.json
+ * @param filename 需要固定的文件前缀
  * @example
  *
  *      // 设置文件中将保存的数据
@@ -189,26 +227,27 @@ const ensurePositive = (value) => {
  *      };
  *      Ux.dgFileJson(data);
  */
-const dgFileJson = (data, ext = "json") => {
+const dgFileJson = (data, ext = "json", filename) => {
     let finalData = data;
     if (!Blob.prototype.isPrototypeOf(data)) {
         finalData = new Blob([JSON.stringify(data, null, 2)], {
             type: "application/json"
         });
     }
-    saveAs(finalData, v4() + "." + ext);
+    const file = filename ? filename + "." + ext : v4() + "." + ext;
+    saveAs(finalData, file);
 };
 /**
  * 【Development Only】
  * 在调试模式才启用的Form专用打印信息，打印Form初始化过程中的表单数据
  * 支持两种模式：updated = true为更新Form时的数据，updated = false则是添加时的数据
  * @method dgForm
- * @param {ReactComponent} reference 包含了form变量的React的组件Component引用
+ * @param {React.PureComponent} reference 包含了form变量的React的组件Component引用
  * @param data 当前Form中的表单数据
  * @param updated 判断当前调试使用的是更新/添加模式
  */
 const dgForm = (reference, data = {}, updated = false) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.groupCollapsed("[Form] Form metadata when initialized. updated = ", updated);
         console.info("Init Value = ", data);
         console.info("Init Function = ", reference.props.fnInit);
@@ -219,16 +258,14 @@ const dgForm = (reference, data = {}, updated = false) => {
  * 【Development Only】
  * Ux包的报表专用调试方法，整个应用中只有一处调用该方法
  * @method dgScript
- * @param ux Ux引用
+ * @param ux Ux工具包
+ * @param Cv 常量信息
  */
-const dgScript = (ux = {}) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
-        console.info(ux);
-        console.groupCollapsed("[Ux] Assist report as following:");
-        const numCond = 0;
-        const strCond = "";
-        console.info("[If] if(0) = ", (numCond) ? "Yes" : "No");
-        console.info("[If] if(\"\") = ", (strCond) ? "Yes" : "No");
+const dgScript = (ux = {}, Cv = {}) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+        console.groupCollapsed("[Ux] Constant Value is as following:");
+        console.info("[Ux] Ux Tool = ", ux);
+        console.info("[Ux] Cv = ", Cv);
         console.groupEnd();
     }
 };
@@ -236,13 +273,11 @@ const dgScript = (ux = {}) => {
  * 【Development Only】
  * 自动生成路由中的路由报表，可查看所有的路由信息
  * @method dgRouter
- * @param ux Ux引用
  * @param container Layout模板配置信息
  * @param component Page组件配置信息
  */
-const dgRouter = (ux, container, component) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
-        console.info(ux);
+const dgRouter = (container, component) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
         console.groupCollapsed("[Ux] UI report as following:");
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
@@ -257,8 +292,14 @@ const dgRouter = (ux, container, component) => {
  * @return 返回传入的数据
  */
 const dgMonitor = (data) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG)) {
-        console.info(data);
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+        console.debug("[Ux] Debug: ", data);
+    }
+    return data;
+};
+const dgDebug = (data) => {
+    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+        console.debug("[DEBUG]", data);
     }
     return data;
 };
@@ -280,6 +321,7 @@ export default {
     ensureRender,
     ensureType,
     ensureLength,
+    ensureMinLength,
     ensureNumber,
     ensurePositive,
     // 调试专用方法
@@ -288,4 +330,5 @@ export default {
     dgForm,
     dgRouter,
     dgMonitor,
-}
+    dgDebug
+};
