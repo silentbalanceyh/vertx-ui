@@ -9,6 +9,7 @@ export {default as TableEditor} from './input/TableEditor/UI';
 export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
+export {default as FileUpload} from './input/FileUpload/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as PagerHeader} from './header/PagerHeader/UI';

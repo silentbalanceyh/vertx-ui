@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Checkbox, DatePicker, Input, InputNumber, Modal, Radio, Select, TimePicker, TreeSelect} from 'antd';
-import {ListSelector} from "web";
+import {FileUpload, ListSelector, TimeRanger} from "web";
 import RxAnt from './AI.RxAnt'
 
 const aiInput = (reference, jsx = {}, onChange) => {
@@ -42,10 +42,18 @@ const aiSelect = (reference, jsx = {}, onChange) => {
         </Select>
     )
 };
+const aiFileUpload = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<FileUpload {...jsx}/>)
+};
+const aiTimeRanger = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<TimeRanger {...jsx}/>)
+};
 const aiRadio = (reference, jsx = {}, onChange) => {
     const {config = {}, ...rest} = jsx;
     // onChange处理
-    RxAnt.onChange(jsx, onChange);
+    RxAnt.onChange(rest, onChange);
     const options = RxAnt.toOptions(reference, config);
     return (
         <Radio.Group {...rest}>
@@ -75,7 +83,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onDisabledDate(jsx);
     // onChange处理
     RxAnt.onChange(jsx, onChange);
-    return (<DatePicker {...jsx}/>);
+    return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 
 const aiAction = (reference, jsx = {}) => {
@@ -102,6 +110,11 @@ const aiAction = (reference, jsx = {}) => {
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<TimePicker {...jsx}/>)
+};
+
+const ai2Radio = (onChange) => (reference, jsx = {}) => {
+    const fnChange = onChange.apply(null, [reference]);
+    return aiRadio(reference, jsx, fnChange);
 };
 
 const ai2Select = (onChange) => (reference, jsx = {}) => {
@@ -146,12 +159,14 @@ export default {
     aiSelect,
     aiInput,
     aiInputNumber,
+    aiFileUpload,
     aiCheckbox,
     aiRadio,
     aiTextArea,
     aiTreeSelect,
     aiDatePicker,
     aiTimePicker,
+    aiTimeRanger,
     aiAction,
     // 二阶组件，带onChange事件的组件
     ai2Checkbox,
@@ -159,5 +174,6 @@ export default {
     ai2InputNumber,
     ai2TreeSelect,
     ai2Select,
+    ai2Radio,
     ai2ListSelector
 }

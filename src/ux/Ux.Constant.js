@@ -29,6 +29,7 @@ export default {
     ENTRY_ADMIN: `/${process.env.ROUTE}${process.env.ENTRY_ADMIN}`,
     DEBUG: prepareDevEnv("DEV_DEBUG"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_DEBUG),
     MOCK: prepareDevEnv("DEV_MOCK"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
+    RENDER: prepareDevEnv("DEV_FORM"),
     DEBUG_AJAX: prepareDevEnv("DEV_MOCK", "DEV_AJAX"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
     HTTP_METHOD: {
         GET: "get",

@@ -260,8 +260,18 @@ const aiExprColumn = (columns = []) =>
  * 顺序：key, label, style
  */
 const aiExprOption = (options = []) =>
-    _iterator(options, (values = []) => parseItem(values, "option"))
-        .map(applyValue);
+    _iterator(options, (values = []) => parseItem(values, "option"), aiMetaOption).map(applyValue);
+
+const aiMetaOption = (item = {}) => {
+    if (item.metadata) {
+        let each = parseItem(item.metadata, "option");
+        if (item.items) {
+            each.items = aiExprOption(item.items);
+        }
+        item = each;
+    }
+    return item;
+};
 /**
  * 顺序：title, key, icon, description, status
  */
@@ -284,6 +294,7 @@ export default {
     aiExprWindow,
     aiExprAjax,
     // 对象解析
+    aiMetaOption,
     aiMetaColumn,
     aiMetaField,
     // 特殊解析

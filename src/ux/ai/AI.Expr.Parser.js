@@ -20,12 +20,23 @@ const sorter = (item = {}, value) => {
     const sorters = value.split(';');
     sorters.forEach(sorterItem => item.params.sorter.push(sorterItem.replace('`', ',')));
 };
+const jsxKv = (field) => (item = {}, value) => {
+    if (!item.optionJsx) item.optionJsx = {};
+    if (value && 0 < value.indexOf('`')) {
+        item.optionJsx[field] = value.split('`');
+    } else {
+        jsxValue(field)(item, value);
+    }
+};
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
     readOnly: jsxBoolean("readOnly"),
-    placeholder: jsxValue("placeholder"),
+    placeholder: jsxKv("placeholder"),
     valuePropName: configValue("valuePropName"),
+    format: jsxValue("format"),
+    listType: jsxValue("listType"),
+    text: jsxValue("text"),
     sorter
 };
 const parseTo = (item = {}, literal = "") => {

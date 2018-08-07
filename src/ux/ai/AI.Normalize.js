@@ -1,8 +1,9 @@
 import U from "underscore";
 import Ai from './AI.Input';
-import LayoutType from './AI.Layout.Item';
+import Calculator from './AI.Layout.Calculator';
 import Prop from '../Ux.Prop';
 import Expr from './AI.Expr.String';
+import Log from '../Ux.Log';
 
 const _aiNormalizeEach = (ui = [], eachFun, eachItemFun = item => item) => {
     ui.forEach((row, rowIndex) => {
@@ -56,49 +57,6 @@ const _aiValidator = (item = {}, reference) => {
         }
     }
 };
-
-const _aiOptionItem = (item, key, config) => {
-    let layoutType = null;
-    let window = 1;
-    if (config.layout) {
-        layoutType = config.layout;
-    } else {
-        // 计算
-        window = config.window ? config.window : 1;
-        layoutType = LayoutType[window];
-        if (!layoutType) {
-            layoutType = LayoutType[1];
-        }
-    }
-    if (layoutType && layoutType.hasOwnProperty(key)) {
-        const optionItem = layoutType[key];
-        // 前边解析已处理掉了optionItem的赋值
-        if (item.optionItem && 0 < Object.keys(item.optionItem).length) {
-            if (!item.optionItem.style) item.optionItem.style = optionItem.style;
-            if (!item.optionItem.labelCol) item.optionItem.labelCol = optionItem.labelCol;
-            if (!item.optionItem.wrapperCol) item.optionItem.wrapperCol = optionItem.wrapperCol;
-        } else {
-            item.optionItem = optionItem;
-        }
-    }
-};
-
-const _aiLayout = (item, layout = {}) => {
-    const {cellIndex} = layout;
-    // 1.标准布局
-    const span = item.span ? item.span : layout.span;
-    if (6 === span || 8 === span || 12 === span || 24 === span) {
-        const prefix = 24 / span;
-        const key = `${prefix}${cellIndex}`;
-        _aiOptionItem(item, key, layout);
-    } else if (7 === span) {
-        const key = `74${cellIndex}`;
-        _aiOptionItem(item, key, layout);
-    } else if (16 === span) {
-        const key = `164${cellIndex}`;
-        _aiOptionItem(item, key, layout);
-    }
-};
 // 下边是一系列hooker函数
 const hookerForm = (ui = []) => {
     // 解析title
@@ -116,35 +74,37 @@ const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
 };
 
 const hookerRender = (item, renders = {}, layout, refenrece) => {
-    // 如果无规则，则省略onFocus/onBlur
-    _aiValidator(item, refenrece);
-    // 处理布局
-    _aiLayout(item, layout);
-    // 处理fnRender
-    let fnRender = renders[item.field];
-    // 如果fnRender没有
-    if (!fnRender) {
-        // 如果item中存在holder属性
-        if (item.field.startsWith("$")) {
-            // 特殊Op注入
-            if ("$button" === item.field) {
-                // Button专用注入
-                let renderKey = item.render;
-                if (!renderKey) renderKey = 'aiAction';
-                fnRender = Ai[renderKey];
-            }
-        } else {
-            // 如果是$button则触发特殊处理
-            if (!item.hasOwnProperty('holder')) {
-                // 设置item中的render属性
-                let renderKey = item.render;
-                if (!renderKey) renderKey = 'aiInput';
-                fnRender = Ai[renderKey];
+        // 如果无规则，则省略onFocus/onBlur
+        _aiValidator(item, refenrece);
+        // 处理布局
+        Calculator.calculateLayout(item, layout);
+        // 处理fnRender
+        let fnRender = renders[item.field];
+        // 如果fnRender没有
+        Log.render(2, item, fnRender);
+        if (!fnRender) {
+            // 如果item中存在holder属性
+            if (item.field.startsWith("$")) {
+                // 特殊Op注入
+                if ("$button" === item.field) {
+                    // Button专用注入
+                    let renderKey = item.render;
+                    if (!renderKey) renderKey = 'aiAction';
+                    fnRender = Ai[renderKey];
+                }
+            } else {
+                // 如果是$button则触发特殊处理
+                if (!item.hasOwnProperty('holder')) {
+                    // 设置item中的render属性
+                    let renderKey = item.render;
+                    if (!renderKey) renderKey = 'aiInput';
+                    fnRender = Ai[renderKey];
+                }
             }
         }
+        return fnRender;
     }
-    return fnRender;
-};
+;
 
 const hookerCol = (item) => {
     const style = {};
@@ -155,7 +115,6 @@ const hookerCol = (item) => {
     }
     return style;
 };
-
 export default {
     hookerCol,
     hookerForm,
