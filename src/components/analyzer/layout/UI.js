@@ -2,6 +2,7 @@ import React from 'react'
 import Ux from 'ux';
 import FormStandard from './UI.Form.Standard'
 import FormAdjust from './UI.Form.Adjust'
+import FormAdjustWidth from './UI.Form.AdjustWidth'
 import AjdustBar from './UI.Adjust.Bar';
 import {PageCard} from 'web';
 
@@ -21,6 +22,7 @@ class Component extends React.PureComponent {
             <PageCard reference={this}>
                 <AjdustBar reference={this} $window={window}/>
                 {Ux.auiTab(this).to(
+                    <FormAdjustWidth reference={this}/>,
                     <FormAdjust reference={this}/>,
                     <FormStandard reference={this}/>
                 )}

@@ -1,7 +1,11 @@
 {
     "_tabs": {
-        "defaultActiveKey": "tabAdjust",
+        "defaultActiveKey": "tabAdjustWidth",
         "items": [
+            {
+                "tab": "9:15宽布局",
+                "key": "tabAdjustWidth"
+            },
             {
                 "tab": "9:15布局",
                 "key": "tabAdjust"
