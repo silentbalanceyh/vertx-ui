@@ -189,6 +189,16 @@ const error = (error) => {
     console.log(`%c [Zero] Read message -> `, 'color:#ee0033;font-weight:900', error.info);
     console.groupEnd();
 };
+const layout = (layoutType = {}, window, dft = true) => {
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] Layout Selector： label = ${layoutType.label}, key=${layoutType.key}`;
+        console.groupCollapsed(message, "color:#7c8577;font-weight:900");
+        console.log(`%c [Zero] Window Parameter:`, "color:#006c54", window);
+        console.log(`%c [Zero] Layout Object information:`, "color:#769149", layoutType);
+        console.log(`%c [Zero] Layout Revert to default? default = `, dft ? "color:red" : "color:#d96c3", dft);
+        console.groupEnd();
+    }
+};
 const mocker = (mockerRef, $query) => {
     if (Cv.DEBUG && Cv.MOCK) {
         const mocker = mockerRef.raw();
@@ -244,6 +254,7 @@ export default {
     container,
     component,
     page,
+    layout,
     form,
     stateless,
     sign,

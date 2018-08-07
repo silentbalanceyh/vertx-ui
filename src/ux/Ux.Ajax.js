@@ -25,9 +25,9 @@ const ajaxUri = (uri, method = "get", params = {}) => {
     // 追加Query
     const query = Expr.formatQuery(uri, params);
     // 最终请求路径
-    api = "get" === method || "delete" === method
-        ? `${Cv['ENDPOINT']}${api}${query}`
-        : `${Cv['ENDPOINT']}${api}`;
+    api = "get" === method || "delete" === method ?
+        `${Cv['ENDPOINT']}${api}${query}` :
+        `${Cv['ENDPOINT']}${api}`;
     return api;
 };
 /**
@@ -106,29 +106,29 @@ const ajaxAdapter = (body = {}) => {
  */
 const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    (mockData['forceMock'] || (Cv.MOCK && mockData.mock))
-        ? Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data)
-        : fetch(request)
-            .then(response => Log.response(request, response, request.method))
-            .then(response => response.ok
-                ? response.json().then(body => Promise.resolve(ajaxAdapter(body)))
-                : response.json().then(data => Promise.reject({
-                    ...data,
-                    status: response.status,
-                    statusText: response.statusText
-                }))
-            )
-            .then(response => {
-                // 是否存储响应信息
-                if (Cv['DEBUG_AJAX']) {
-                    Dg.dgFileJson({
-                        request: params,
-                        response: response
-                    });
-                }
-                return response;
-            })
-            .catch(error => Promise.reject(error));
+    (mockData['forceMock'] || (Cv.MOCK && mockData.mock)) ?
+    Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data) :
+    fetch(request)
+    .then(response => Log.response(request, response, request.method))
+    .then(response => response.ok ?
+        response.json().then(body => Promise.resolve(ajaxAdapter(body))) :
+        response.json().then(data => Promise.reject({
+            ...data,
+            status: response.status,
+            statusText: response.statusText
+        }))
+    )
+    .then(response => {
+        // 是否存储响应信息
+        if (Cv['DEBUG_AJAX']) {
+            Dg.dgFileJson({
+                request: params,
+                response: response
+            });
+        }
+        return response;
+    })
+    .catch(error => Promise.reject(error));
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法
  * @method ajaxRead
@@ -256,8 +256,8 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
                 .map(promise)
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
-                        .map(processor)
-                        .map(data => Env.dataOut(data))
+                    .map(processor)
+                    .map(data => Env.dataOut(data))
                 );
         }
     } else {
@@ -280,8 +280,8 @@ const rxEdict = (type, promise, responser = data => data) => {
                 .map(promise)
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
-                        .map(responser)
-                        .map(data => Env.dataOut(data))
+                    .map(responser)
+                    .map(data => Env.dataOut(data))
                 );
         }
     } else {
@@ -340,9 +340,16 @@ const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
                             const fun = processors[key];
                             if (U.isFunction(fun)) {
                                 const itemData = fun(value);
-                                Object.assign(state, itemData);
+                                Type.itObject(itemData, (mergeKey, mergeData) => {
+                                    if (state.hasOwnProperty(mergeKey)) {
+                                        state[mergeKey] = Object.assign(state[mergeKey], mergeData);
+                                    } else {
+                                        state[mergeKey] = mergeData;
+                                    }
+                                })
                             }
                         });
+                        //console.warn(Immutable.fromJS(state).toJS())
                         return state;
                     })
                     .map(data => Env.dataOut(data))

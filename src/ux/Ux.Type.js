@@ -204,7 +204,7 @@ const itData = (config = {}, consumer = () => {
  */
 const itMatrix = (matrix = [], eachFun) => {
     matrix.forEach(row => {
-        if (Array.prototype.isPrototypeOf(row)) {
+        if (U.isArray(row)) {
             row.forEach(item => eachFun(item));
         } else {
             eachFun(row);

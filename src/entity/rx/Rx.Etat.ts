@@ -56,6 +56,12 @@ class Etat {
         return this;
     }
 
+    bind(OP: any = {}) {
+        if (!this._op) this._op = {};
+        Object.assign(this._op, OP);
+        return this;
+    }
+
     state(state) {
         this._state = state;
         return this;
@@ -74,6 +80,14 @@ class Etat {
         if (U.isFunction(fnInit)) {
             // 初始化专用，特殊zero前缀
             this._dispatchTo.zxInit = fnInit;
+        }
+        return this;
+    }
+
+    search(fnSearch: any) {
+        if (U.isFunction(fnSearch)) {
+            // RxSearch专用
+            this._dispatchTo.rxSearch = fnSearch;
         }
         return this;
     }

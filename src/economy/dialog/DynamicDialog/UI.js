@@ -1,12 +1,12 @@
 import React from 'react'
-import { Modal } from 'antd';
+import {Modal} from 'antd';
 
 class Component extends React.PureComponent {
 
     render() {
-        const { $dialog = {}, $visible = false, children } = this.props;
+        const {$dialog = {}, className = "", $visible = false, children} = this.props;
         return (
-            <Modal {...$dialog} visible={$visible}>
+            <Modal {...$dialog} visible={$visible} className={className}>
                 {children}
             </Modal>
         )

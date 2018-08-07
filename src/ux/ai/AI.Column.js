@@ -7,6 +7,7 @@ import Format from '../Ux.Format';
 import Expr from '../Ux.Expr';
 import Ai from './AI.Input'
 import Value from '../Ux.Value'
+import RxAnt from './AI.RxAnt'
 
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理双值
@@ -146,7 +147,8 @@ const aiCellExpression = (reference, config) => text => {
  *      }
  */
 const aiCellDatum = (reference, config) => text => {
-    const datum = config['$datum'];
+    const $datum = config['$datum'];
+    const datum = "string" === typeof $datum ? RxAnt.toParsed($datum) : $datum;
     const data = Prop.onDatum(reference, datum.source);
     const item = Type.elementUnique(data, datum.value, text);
     return <span>{item ? item[datum.display] : false}</span>;

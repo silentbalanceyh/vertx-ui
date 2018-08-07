@@ -1,42 +1,24 @@
 import U from "underscore";
-import Random from '../Ux.Random';
 import Ai from './AI.Input';
 import LayoutType from './AI.Layout.Item';
 import Prop from '../Ux.Prop';
+import Expr from './AI.Expr.String';
 
-const _aiTitle = (item) => {
-    if ("string" === typeof item) {
-        if (0 <= item.indexOf("=")) {
-            const kv = item.split("=");
-            const result = {};
-            // Ant-Design Form必须
-            result.field = Random.randomString(16);
-            result[kv[0]] = kv[1];
-            item = result;
-        }
-    }
-    return item;
-};
-
-const _aiNormalizeItem = (ui = [], eachFun) => {
+const _aiNormalizeEach = (ui = [], eachFun, eachItemFun = item => item) => {
     ui.forEach((row, rowIndex) => {
         if (U.isArray(row)) {
-            row.forEach((cell, cellIndex) => row[cellIndex] = eachFun(cell));
+            row.forEach((cell, cellIndex) => {
+                if ("string" === typeof cell) {
+                    row[cellIndex] = eachFun(cell);
+                } else if ("object" === typeof cell) {
+                    row[cellIndex] = eachItemFun(cell);
+                }
+            });
         } else {
             ui[rowIndex] = eachFun(row);
         }
     });
     return ui;
-};
-
-const _aiItemConfig = (item = {}, values = {}) => {
-    // 初始化optionConfig
-    if (!item.optionConfig) {
-        item.optionConfig = {};
-    }
-    if (values.hasOwnProperty(item.field)) {
-        item.optionConfig.initialValue = values[item.field];
-    }
 };
 const _aiRowConfig = (item = {}, rowItem = {}) => {
     if (item.optionItem && rowItem && 0 < Object.keys(rowItem).length) {
@@ -52,24 +34,14 @@ const _aiRowConfig = (item = {}, rowItem = {}) => {
         }
     }
 };
-const hookerForm = (ui = []) => {
-    // 解析title
-    ui = _aiNormalizeItem(ui, _aiTitle);
-    return ui;
-};
-
-const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
-    // 初始化处理
-    _aiItemConfig(item, values);
-    // 初始化row
-    _aiRowConfig(item, rowConfig);
-};
 
 const _aiValidator = (item = {}, reference) => {
     if (item.optionConfig) {
         if (!item.optionConfig.hasOwnProperty("rules")) {
-            delete item.optionJsx.onFocus;
-            delete item.optionJsx.onBlur;
+            if (item.optionJsx) {
+                delete item.optionJsx.onFocus;
+                delete item.optionJsx.onBlur;
+            }
         } else {
             const rules = item.optionConfig.rules.filter(item => item.required);
             if (0 < rules.length) {
@@ -87,20 +59,21 @@ const _aiValidator = (item = {}, reference) => {
 
 const _aiOptionItem = (item, key, config) => {
     let layoutType = null;
+    let window = 1;
     if (config.layout) {
         layoutType = config.layout;
     } else {
         // 计算
-        const window = config.window ? config.window : 1;
-        if (1 === window) {
+        window = config.window ? config.window : 1;
+        layoutType = LayoutType[window];
+        if (!layoutType) {
             layoutType = LayoutType[1];
-        } else if (1 / 3 === window) {
-            layoutType = LayoutType[0.3];
         }
     }
     if (layoutType && layoutType.hasOwnProperty(key)) {
         const optionItem = layoutType[key];
-        if (item.optionItem) {
+        // 前边解析已处理掉了optionItem的赋值
+        if (item.optionItem && 0 < Object.keys(item.optionItem).length) {
             if (!item.optionItem.style) item.optionItem.style = optionItem.style;
             if (!item.optionItem.labelCol) item.optionItem.labelCol = optionItem.labelCol;
             if (!item.optionItem.wrapperCol) item.optionItem.wrapperCol = optionItem.wrapperCol;
@@ -121,7 +94,25 @@ const _aiLayout = (item, layout = {}) => {
     } else if (7 === span) {
         const key = `74${cellIndex}`;
         _aiOptionItem(item, key, layout);
+    } else if (16 === span) {
+        const key = `164${cellIndex}`;
+        _aiOptionItem(item, key, layout);
     }
+};
+// 下边是一系列hooker函数
+const hookerForm = (ui = []) => {
+    // 解析title
+    ui = _aiNormalizeEach(ui, Expr.aiExprTitle);
+    // 解析field
+    ui = _aiNormalizeEach(ui, Expr.aiExprField, Expr.aiMetaField);
+    return ui;
+};
+
+const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
+    // 初始化处理
+    Expr.aiExprInit(item, values);
+    // 初始化row
+    _aiRowConfig(item, rowConfig);
 };
 
 const hookerRender = (item, renders = {}, layout, refenrece) => {

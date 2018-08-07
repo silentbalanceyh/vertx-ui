@@ -285,9 +285,21 @@ const uiInited = (reference) => {
 const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config) => {
     // Fix Issue
     if (!values) values = uiInited(reference);
+    // Form专用className设置
+    const form = Prop.fromHoc(reference, "form");
+    const className = form.className ? form.className : "page-form";
+    // 处理布局，默认为1
+    /**
+     * window的合法值
+     * 1：标准布局
+     * 1/3：搜索栏专用值
+     * 0.4：宽Label专用值
+     */
+    const window = form.window ? form.window : 1;
+    const $config = window ? {window, ...config} : config;
     return (
-        <Form layout="inline" className="page-form">
-            {jsxFieldGrid(reference, renders, column, values, config)}
+        <Form layout="inline" className={className}>
+            {jsxFieldGrid(reference, renders, column, values, $config)}
         </Form>
     )
 };
@@ -297,7 +309,7 @@ const uiFieldFilter = (reference = {}, renders = {}, column = 2) => {
     return (
         <Form layout="horizontal" className="page-filter">
             {jsxFieldGrid(reference, renders, column, values, {
-                window: 1 / 3
+                window: -0.3
             })}
         </Form>
     )

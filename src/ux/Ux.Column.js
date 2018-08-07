@@ -10,15 +10,8 @@ import Ai from './ai/AI'
  * @param {Boolean} hoc 是否生成函数
  */
 const uiColumnRender = (reference, columns = [], key, fnRender = () => false, hoc = false) => {
-    columns.forEach(column => {
-        if (column.dataIndex && key === column.dataIndex) {
-            if (hoc) {
-                column.render = fnRender(column);
-            } else {
-                column.render = fnRender;
-            }
-        }
-    })
+    columns.filter(column => column.dataIndex && key === column.dataIndex)
+        .forEach(column => (hoc) ? column.render = fnRender(column) : column.render = fnRender)
 };
 /**
  * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
@@ -29,12 +22,11 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
  * @return {Array}
  */
 const uiTableColumn = (reference, columns = [], ops = {}) => {
-    columns.forEach(column => {
-        if (column.hasOwnProperty("$render")) {
-            const fnRender = Ai.aiCellRenders[column["$render"]];
-            if (fnRender) {
-                column.render = fnRender(reference, column, ops);
-            }
+    columns = Ai.aiExprColumn(columns);
+    columns.filter(column => column.hasOwnProperty("$render")).forEach(column => {
+        const fnRender = Ai.aiCellRenders[column["$render"]];
+        if (fnRender) {
+            column.render = fnRender(reference, column, ops);
         }
     });
     return columns;

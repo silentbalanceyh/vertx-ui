@@ -61,7 +61,7 @@ const initTable = (reference = {}) => {
         rxEdit: Act.rxEdit,
         rxDelete: Act.rxDelete,
     };
-    Ux.uiTableColumn({
+    table.columns = Ux.uiTableColumn({
         props: {
             // 当前引用对应的props属性
             ...props,
