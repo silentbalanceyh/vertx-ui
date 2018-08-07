@@ -35,6 +35,13 @@ const valueInt = (literal = "", dft = 0) => {
     }
     return ret;
 };
+const valueFloat = (liberal, dft = 0.0) => {
+    let ret = parseFloat(liberal);
+    if (isNaN(ret)) {
+        ret = dft;
+    }
+    return ret;
+};
 /**
  * 不重复追加值到`item`对象中（包含则不设置）
  * @method valueAppend
@@ -250,6 +257,7 @@ const valueOnChange = (reference = {}, state, key = "source") => {
 export default {
     stringConnect,
     valueInt,
+    valueFloat,
     valueValid,
     valueAppend,
     valueDuration,

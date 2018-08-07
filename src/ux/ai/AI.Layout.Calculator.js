@@ -1,5 +1,6 @@
 import LayoutType from "./AI.Layout.Config";
 import Log from "../Ux.Log";
+import Value from '../Ux.Value';
 
 const _FULL_OPTS = {
     style: {
@@ -12,42 +13,27 @@ const _FULL_OPTS = {
         span: 24
     }
 };
-const _aiOptionItem = (item, key, config) => {
-    let layoutType = null;
-    let window = 1;
-    let dft = false;
-    if (config.layout) {
-        layoutType = config.layout;
-    } else {
-        // 计算
-        window = config.window ? config.window : 1;
-        layoutType = LayoutType[window];
-        if (!layoutType) {
-            dft = true;
-            layoutType = LayoutType[1];
+const calcItem = (item = "", window = 1, adjustValue = 0) => {
+    const splitted = item.split(',');
+    const width = `${Value.valueInt(window * 100)}%`;
+    const labelCol = Value.valueInt(splitted[0]);
+    const wrapperCol = Value.valueInt(splitted[1]);
+    const push = Value.valueInt(splitted[2]);
+    const marginLeft = (adjustValue) ? adjustValue : 0;
+    return {
+        style: {
+            width,
+            marginLeft,
+        },
+        labelCol: {
+            span: labelCol,
+            push
+        },
+        wrapperCol: {
+            span: wrapperCol,
+            push
         }
     }
-    if (item.optionItem && item.optionItem.full) {
-        // 全行处理
-        item.optionItem = _FULL_OPTS;
-    } else if (layoutType && layoutType.hasOwnProperty(key)) {
-        const optionItem = layoutType[key];
-        // 前边解析已处理掉了optionItem的赋值
-        if (item.optionItem && 0 < Object.keys(item.optionItem).length) {
-            if (!item.optionItem.style) item.optionItem.style = optionItem.style;
-            if (!item.optionItem.labelCol) item.optionItem.labelCol = optionItem.labelCol;
-            if (!item.optionItem.wrapperCol) item.optionItem.wrapperCol = optionItem.wrapperCol;
-        } else {
-            item.optionItem = optionItem;
-        }
-    }
-    Log.render(4, {
-        label: item.optionItem.label,
-        key: key,
-        layoutType: layoutType[key]
-    }, {
-        window, dft
-    });
 };
 const calculateWindow = (config = {}) => {
     const window = config.window ? config.window : 1;
@@ -60,12 +46,16 @@ const calculateLayout = (item, layout = {}) => {
     let key = null;
     let metadata = {};
     let window = {};
-    if (item.optionItem && item.optionItem.full) {
+    if (!item.hasOwnProperty("optionItem")
+        || (item.optionItem && !item.optionItem.hasOwnProperty("label"))) {
         /**
          * 全行布局，没有label相关属性，直接占满整行信息
          **/
         item.optionItem = _FULL_OPTS;
     } else {
+        // Fix解决为空的配置
+        if (!item.optionItem) item.optionItem = {};
+
         window = calculateWindow(layout);
         const span = item.span ? item.span : layout.span;
         /**
@@ -74,8 +64,17 @@ const calculateLayout = (item, layout = {}) => {
          * cellIndex：当前组件所在的列索引
          */
         const spanKey = span < 10 ? `0${span}` : span;
-        const key = `${columns}${cellIndex}${spanKey}`;
-        console.info(key, window);
+        key = `${columns}${cellIndex}${spanKey}`;
+        const windowKey = window.window;
+        if (LayoutType.span[windowKey]) {
+            const layoutValue = LayoutType.span[windowKey];
+            const layoutItem = layoutValue[key];
+            if (layoutItem) {
+                const adjust = LayoutType.adjust[windowKey];
+                Object.assign(item.optionItem,
+                    calcItem(layoutItem, windowKey, adjust ? adjust[key] : 0));
+            }
+        }
     }
     // 打印最终模板信息
     Log.render(4, {

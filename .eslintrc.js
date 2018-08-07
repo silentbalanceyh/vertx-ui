@@ -19,7 +19,7 @@ module.exports = {
         "arrow-parens": 0, // 允许使用箭头函数
         "no-debugger": 1, //禁止使用debugger
         "no-dupe-keys": 2, //在创建对象字面量时不允许键重复 {a:1,a:1}
-        "no-multi-spaces": 1,
+        "no-multi-spaces": 0,
         "no-constant-condition": 2, //禁止在条件中使用常量表达式 if(true) if(1)
         "jsx-quotes": 1,
         "react/jsx-boolean-value": 1, // 如果属性值为 true, 可以直接省略
