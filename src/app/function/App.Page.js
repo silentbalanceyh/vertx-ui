@@ -25,6 +25,29 @@ const _removed = Immutable.fromJS([
     "_logicals",
     "_demo"
 ]);
+const demoSingle = (reference, jsx) => {
+    // 当前演示组件
+    const current = reference.state.$hoc;
+    const json = current.to();
+    const jsonView = Immutable.fromJS(json).toJS();
+    for (const field in jsonView) {
+        if (_removed.contains(field)) {
+            delete jsonView[field];
+        }
+    }
+    return (
+        <div className={"demo-window"}>
+            <Collapse className={"page-card-collapse"} defaultActiveKey={"clpComponent"}>
+                <Collapse.Panel header={"Component"} key={"clpComponent"}>
+                    {jsx}
+                </Collapse.Panel>
+                <Collapse.Panel header={"Config"}>
+                    <ReactJson src={jsonView} name={null} enableClipboard={false}/>
+                </Collapse.Panel>
+            </Collapse>
+        </div>
+    )
+};
 const demoComponent = (reference, jsx, md = "") => {
     const hoc = reference.props.reference.state.$hoc;
     const titleStr = hoc._("subjson").config;
@@ -84,6 +107,7 @@ const demoMessage = (reference) => {
     ) : false;
 };
 export default {
+    demoSingle,
     demoPage,
     demoComponent,
     demoButtons,

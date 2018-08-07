@@ -94,6 +94,10 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
     let formConfig = Prop.fromHoc(reference, key);
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     const {form = [], ...rest} = config;
+    // 计算偏移量
+    const adjustCol = Ai.aiAdjust(config.window);
+    let spans = [];
+    if (adjustCol.row) spans = adjustCol.row[column];
     // 读取配置数据
     return (
         <div>
@@ -111,6 +115,10 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
                             // 是否改变field信息
                             if (entity) {
                                 item.field = `children.${entity}.${item.field}`
+                            }
+                            // span的专用修正
+                            if (spans[cellIndex] && !item.span) {
+                                item.span = spans[cellIndex];
                             }
                             if (item.hasOwnProperty("title")) {
                                 // 单Title

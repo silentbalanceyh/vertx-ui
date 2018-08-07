@@ -1,0 +1,18 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "tabAdjust",
+        "items": [
+            {
+                "tab": "9:15布局",
+                "key": "tabAdjust"
+            },
+            {
+                "tab": "标准布局",
+                "key": "tabStandard"
+            }
+        ]
+    },
+    "_page": {
+        "title": "标准布局"
+    }
+}
