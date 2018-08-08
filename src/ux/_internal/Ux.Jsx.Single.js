@@ -97,7 +97,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
     // 计算偏移量
     const adjustCol = Ai.aiAdjust(config.window);
     let spans = [];
-    if (adjustCol.row) spans = adjustCol.row[column];
+    if (adjustCol && adjustCol.row) spans = adjustCol.row[column];
     // 读取配置数据
     return (
         <div>

@@ -209,9 +209,10 @@ const aiMetaField = (item = {}) => {
         const {metadata, ...rest} = item;
         const basic = parseItem(metadata, "field");
         const options = applyTree(rest);
-        Object.assign(basic, options);
-        applyField(basic);
-        item = basic;
+        // 属性追加（不覆盖）
+        const result = Value.assign(basic, options, 1);
+        applyField(result);
+        item = result;
     }
     return item;
 };

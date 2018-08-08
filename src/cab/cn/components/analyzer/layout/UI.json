@@ -1,7 +1,11 @@
 {
     "_tabs": {
-        "defaultActiveKey": "tabAdjustWidth",
+        "defaultActiveKey": "tabHalf",
         "items": [
+            {
+                "tab": "1/2布局（2列专用）",
+                "key": "tabHalf"
+            },
             {
                 "tab": "9:15宽布局",
                 "key": "tabAdjustWidth"

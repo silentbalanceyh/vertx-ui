@@ -1,6 +1,7 @@
 import U from "underscore";
 import {saveAs} from "file-saver";
 import v4 from "uuid";
+import Immutable from 'immutable';
 
 /**
  * 检查传入对象object是否包含了field字段值
@@ -289,17 +290,21 @@ const dgRouter = (container, component) => {
  * Rxjs专用调试打印方法，执行过后返回data
  * @method dgMonitor
  * @param data 传入需要打印的数据信息
+ * @param second 传入的第二个参数，对比打印时需要
  * @return 返回传入的数据
  */
-const dgMonitor = (data) => {
+const dgMonitor = (data, second) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.debug("[Ux] Debug: ", data);
+        const $data = data ? Immutable.fromJS(data).toJS() : data;
+        const $second = second ? Immutable.fromJS(second).toJS() : second;
+        console.debug("[Ux] Debug: ", $data, $second);
     }
     return data;
 };
 const dgDebug = (data) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.debug("[DEBUG]", data);
+        const $data = data ? Immutable.fromJS(data).toJS() : data;
+        console.debug("[DEBUG]", $data);
     }
     return data;
 };

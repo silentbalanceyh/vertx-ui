@@ -22,7 +22,7 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
     } else {
         let percent = window * 100;
         // 特殊布局
-        if (window < 0.5) {
+        if (window <= 0.5) {
             percent = 100;
         }
         width = `${Value.valueInt(percent)}%`;
@@ -81,8 +81,9 @@ const calculateLayout = (item, layout = {}) => {
             if (layoutItem) {
                 // 读取偏移量
                 const adjust = LayoutType[windowKey].adjust;
-                Object.assign(item.optionItem,
-                    calcItem(layoutItem, windowKey, adjust ? adjust[key] : 0));
+                const calcData = calcItem(layoutItem, windowKey, adjust ? adjust[key] : 0);
+                // 没有值的时候追加
+                item.optionItem = Value.assign(item.optionItem, calcData, 2);
             }
         }
     }
@@ -92,6 +93,18 @@ const calculateLayout = (item, layout = {}) => {
     }, window);
 };
 
+const calculateItem = (window = 1, key) => {
+    const layoutValue = LayoutType[window].layout;
+    const layoutItem = layoutValue[key];
+    if (layoutItem) {
+        const adjust = LayoutType[window].adjust;
+        return calcItem(layoutItem, window, adjust ? adjust[key] : 0);
+    } else {
+        return {};
+    }
+};
+
 export default {
-    calculateLayout
+    calculateLayout,
+    calculateItem
 }

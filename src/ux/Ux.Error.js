@@ -11,7 +11,8 @@ const fnError = {
     10007: (Op, key) => `[ ERR-10007 ] 当前按钮没有相关函数绑定，请检查你的Op传入变量：Op=${Op}, key=${key}`,
     10008: (key, expr) => `[ ERR-10008 ] 表达式类型不对，必须是String字符串，key = ${key}, expr = ${expr}`,
     10009: (key, attr) => `[ ERR-10009 ] 配置节点" ${key} "中丢失了重要属性：${attr}`,
-    10010: (key, type) => `[ ERR-10010 ] 属性" ${key} "的数据类型只能是：${type}`
+    10010: (key, type) => `[ ERR-10010 ] 属性" ${key} "的数据类型只能是：${type}`,
+    10011: (columns) => `[ ERR-10011 ] 您使用了2列专用布局，window = 0.5，列参数只能为2，column=${columns}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

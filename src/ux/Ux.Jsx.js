@@ -2,6 +2,8 @@ import React from 'react';
 import Norm from './Ux.Normalize'
 import Prop from './Ux.Prop'
 import Log from './Ux.Log';
+import E from './Ux.Error';
+import T from './Ux.Terminal'
 import {Form} from 'antd'
 // UI专用渲染方法
 import DFT from './_internal/Ux.Jsx.Default';
@@ -67,7 +69,17 @@ const jsxFieldPage = (reference, renders, column = 4, values = {}, config = {}) 
         const $config = window ? {window, ...config} : config;
         // 打印信息，开始
         Log.render(1, $config, key);
-        return jsxFieldGrid(reference, renders, column, values, $config);
+        // Error信息
+        if (0.5 === window && 2 !== column) {
+            // 两列专用布局验证
+            const message = E.fxMessage(10011, column);
+            console.error(message);
+            return T.fxError(message);
+        } else {
+            // 两列修正
+            if (0.5 === window) column = 2;
+            return jsxFieldGrid(reference, renders, column, values, $config);
+        }
     }
     return false;
 };

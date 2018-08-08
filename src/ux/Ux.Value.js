@@ -1,5 +1,6 @@
 import moment from 'moment';
 import Dg from './Ux.Debug';
+import Debug from './Ux.Debug';
 import Immutable from "immutable";
 import U from "underscore";
 import Sorter from './Ux.Sorter'
@@ -250,11 +251,50 @@ const valueOnChange = (reference = {}, state, key = "source") => {
         onChange(newValue[key]);
     }
 };
+
+/**
+ * mode = 0：调用原生的Object.assign：直接覆盖
+ * mode = 1：将source中的属性追加到target中，深度追加
+ * mode = 2：将source中的属性追加到target中，没有时追加
+ * @param target
+ * @param source
+ * @param mode
+ */
+const assign = (target = {}, source = {}, mode = 0) => {
+    let result = Immutable.fromJS(target).toJS();
+    if (0 === mode) {
+        result = Object.assign(target, source);
+    } else {
+        Type.itObject(source, (field, value) => {
+            // 检查target中是否包含了field
+            const targetValue = result[field];
+            if ("object" === typeof targetValue
+                && "object" === typeof value) {
+                // 当前节点为两个对象，统一方式合并，且mode也相同
+                result[field] = assign(targetValue, value, mode);
+            } else {
+                if (1 === mode) {
+                    // 直接覆盖
+                    result[field] = value;
+                } else if (2 === mode) {
+                    // 没有属性才追加
+                    if (!result.hasOwnProperty(field)) {
+                        result[field] = value;
+                    }
+                }
+            }
+        })
+    }
+    return result;
+};
 /**
  * @class Value
  * @description 数值计算器
  */
 export default {
+    // 对象处理方法
+    assign,
+    // 字符串链接
     stringConnect,
     valueInt,
     valueFloat,
@@ -267,6 +307,7 @@ export default {
     valueTriggerChange,
     valueOnChange,
     valueSearch,
+    valueTrack: Debug.dgMonitor,
     // 数学运算
     mathMultiplication,
     mathDivision,

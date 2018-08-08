@@ -6,7 +6,7 @@ import AiColumn from './AI.Column';
 import AiTab from './AI.Tab';
 import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
-import LayoutTypes from './AI.Layout.Config';
+import Calculator from './AI.Layout.Calculator';
 import AiString from './AI.Expr.String';
 import AiCriteria from './AI.Criteria';
 
@@ -21,5 +21,5 @@ export default {
     ...AiNormalize,
     ...AiString,
     ...AiCriteria,
-    LayoutTypes
+    aiLayoutItem: Calculator.calculateItem
 }

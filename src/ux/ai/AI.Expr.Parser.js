@@ -1,3 +1,5 @@
+import Value from '../Ux.Value';
+
 const normalize = (item = {}, value) => {
     if (!item.optionConfig) item.optionConfig = {};
     item.optionConfig.normalize = value.replace(/ /g, '').replace(":", ",");
@@ -28,6 +30,11 @@ const jsxKv = (field) => (item = {}, value) => {
         jsxValue(field)(item, value);
     }
 };
+const jsxLayout = (field, attr = "span") => (item = {}, value) => {
+    if (!item.optionItem) item.optionItem = {};
+    item.optionItem[field] = {};
+    item.optionItem[field][attr] = Value.valueInt(value);
+};
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
@@ -37,6 +44,8 @@ const PARSER = {
     format: jsxValue("format"),
     listType: jsxValue("listType"),
     text: jsxValue("text"),
+    labelSpan: jsxLayout("labelCol"),
+    wrapperSpan: jsxLayout("wrapperCol"),
     sorter
 };
 const parseTo = (item = {}, literal = "") => {
