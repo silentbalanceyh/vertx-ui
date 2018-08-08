@@ -91,25 +91,49 @@ const jsx = {
   * `page-form`：Ant Design官方风格，不修饰输入框；
   * `page-ufform`：输入框全部去掉左右和上边边框，只包含下划线；
   * `page-tform`：每一个Grid的单元格包含边框，类似Word中的表格模式；
-* `window`：window为当前表单的全局布局配置模式，默认为1，主控了每个单元格的宽度、高度等信息，主要用于计算布局实现对齐的功能，目前支持：
-
-  * 1：默认对齐，label和input的比例为（每一种布局左边标签对齐，右边的输入边界对齐，4列和2列中间对齐）
-    * 1列：`3:21`、2列：`6:18 / 5:18`、3列：`9:15 / 9:15 / 8:14`、4列：`12:12 / 10:13 / 10:14 / 6:14`
-  * 0.4：宽label布局，一般处理label字数多余七个字
-    * 1列：`4:20`、2列：`8:16 / 8:16`、3列：`12:12 / 9:15 / 8: 14`、4列：`16:8 / 10:14 / 6:14 / 6:14`
+* `window`：window为当前表单的全局布局配置模式，默认为1，主控了每个单元格的宽度、高度等信息，主要用于计算布局实现对齐的功能。
 
 * `rowConfig`：单独处理某一行的高度、宽度、特殊效果，作用于`<Row/>`标签中；
 
 * `hidden.inputs`：当前表单中需要使用的隐藏字段（隐藏字段不占位）；
 
 * `ui`：参考：[UI0015 - Form中的Field](/document/2-kai-fa-wen-dang/ui0015-formzhong-de-zi-duan-yan-zheng.md)（字段详细配置）该值可以包含三种：
+
   * 一维数组：单列表单，布局模式为从上往下垂直布局（登录框）
   * 二维数组：Grid标准表单，布局模式为Grid网格模式【常用】
   * 三位数组：Group分组表单，可直接在表单中实现多个页签模式（用于复杂表单布局）
 
-## 3. 总结
+## 3. 布局
+
+`vertx-ui`中的常用表单布局可参考链接地址：[http://localhost:4000/zui/analyzer/layout](http://localhost:4000/zui/analyzer/layout)
+
+### window = 0.5
+
+这是两列专用布局（columns必须是2），效果如下：
+
+![](/document/image/UI0016-1.png)
+
+### window = 1
+
+标准布局：
+
+![](/document/image/UI0016-2.png)
+
+### window = 0.15
+
+这是左边有间距标准`9:15`的布局，标签左边修正间距占用4格（16%）：
+
+![](/document/image/UI0016-3.png)
+
+### window = 0.16
+
+这是`0.15`的变种，主要是中间的标签可支持宽文字：
+
+![](/document/image/UI0016-4.png)
+
+> 具体配置可点开Config的面板查看。
+
+## 4. 总结
 
 表单本身的配置到这里告一段落，对于字段本身的具体配置参考[UI0015 - Form中的Field](/document/2-kai-fa-wen-dang/ui0015-formzhong-de-zi-duan-yan-zheng.md)。
-
-
 

@@ -18,6 +18,11 @@
 | placeholder | placeholder=必填 | optionJsx.placeholder |
 | valuePropName | valuePropName=checked | optionJsx.valuePropName |
 | sorter | sorter=name\`ASC;createTime\`DESC | optionConfig.config.ajax.metadata，组件ListSelector专用解析器，解析排序规则 |
+| format | format=YYYY年MM月DD日 | DatePicker专用属性，设置时间格式 |
+| listType | listType=picture-card | 上传组件专用属性，设置上传的模式 |
+| text | text=上传 | 上传组件专用属性，设置上传的文字 |
+| labelSpan | labelSpan=4 | optionItem.labelCol.span |
+| wrapperSpan | wrapperSpan=4 | optionItem.wrapperCol.span |
 
 
 
