@@ -34,7 +34,7 @@ const uiRow = (row = {}, addition = {}, config) => {
             style.height = `42px`;
         }
     }
-    style.paddingBottom = 5;
+    // style.paddingBottom = 5;
     // Row的高度修正
     if (config.hasOwnProperty('rowHeight')) {
         // 不能直接用height，防止垮行字段

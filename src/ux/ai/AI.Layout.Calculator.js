@@ -22,7 +22,7 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
     } else {
         let percent = window * 100;
         // 特殊布局
-        if (window <= 0.5) {
+        if (window <= 0.5 || 1 === window) {
             percent = 100;
         }
         width = `${Value.valueInt(percent)}%`;
@@ -30,7 +30,7 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
     const labelCol = Value.valueInt(splitted[0]);
     const wrapperCol = Value.valueInt(splitted[1]);
     const marginLeft = (adjustValue) ? adjustValue : 0;
-    return {
+    const calculated = {
         style: {
             width,
             marginLeft,
@@ -41,7 +41,8 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
         wrapperCol: {
             span: wrapperCol
         }
-    }
+    };
+    return calculated;
 };
 const calculateWindow = (config = {}) => {
     const window = config.window ? config.window : 1;
@@ -52,7 +53,6 @@ const calculateWindow = (config = {}) => {
 const calculateLayout = (item, layout = {}) => {
     const {cellIndex, columns} = layout;
     let key = null;
-    let metadata = {};
     let window = {};
     if (!item.hasOwnProperty("optionItem")
         || (item.optionItem && !item.optionItem.hasOwnProperty("label"))) {
@@ -89,7 +89,7 @@ const calculateLayout = (item, layout = {}) => {
     }
     // 打印最终模板信息
     Log.render(4, {
-        label: item.optionItem.label, key, layoutType: metadata[key]
+        label: item.optionItem.label, key, layoutType: layout
     }, window);
 };
 

@@ -40,8 +40,17 @@ const valueFloat = (liberal, dft = 0.0) => {
     let ret = parseFloat(liberal);
     if (isNaN(ret)) {
         ret = dft;
+    } else {
+        ret = ret.toFixed(2);
     }
     return ret;
+};
+const valueUnit = (literal = "") => {
+    // 无百分号
+    if (literal.endsWith("%")) {
+        const item = literal.replace(/%/g, '');
+        return valueFloat(item) / 100;
+    }
 };
 /**
  * 不重复追加值到`item`对象中（包含则不设置）
@@ -297,6 +306,7 @@ export default {
     // 字符串链接
     stringConnect,
     valueInt,
+    valueUnit,
     valueFloat,
     valueValid,
     valueAppend,

@@ -103,6 +103,8 @@ const renderDrawer = (reference) => {
                     $inited={$inited}
                     // 默认搜索条件，恢复输入框用
                     $cond={options['search.cond']}
+                    // 宽度信息，用于Filter布局计算专用
+                    $page={config.width}
                     // 关闭抽屉
                     fnClose={fnClose}
                     // 读取默认Query函数，传给查询表单

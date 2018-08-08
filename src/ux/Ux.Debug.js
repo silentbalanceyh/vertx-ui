@@ -303,8 +303,7 @@ const dgMonitor = (data, second) => {
 };
 const dgDebug = (data) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        const $data = data ? Immutable.fromJS(data).toJS() : data;
-        console.debug("[DEBUG]", $data);
+        console.debug("[DEBUG]", data);
     }
     return data;
 };

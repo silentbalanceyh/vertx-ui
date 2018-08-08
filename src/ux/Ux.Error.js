@@ -1,4 +1,5 @@
 import U from 'underscore'
+import Terminal from './Ux.Terminal'
 
 const fnError = {
     10000: (type, current) => `[ ERR-10000 ] 传入参数类型不匹配，期望类型${type}，当前参数类型${current}`,
@@ -12,7 +13,8 @@ const fnError = {
     10008: (key, expr) => `[ ERR-10008 ] 表达式类型不对，必须是String字符串，key = ${key}, expr = ${expr}`,
     10009: (key, attr) => `[ ERR-10009 ] 配置节点" ${key} "中丢失了重要属性：${attr}`,
     10010: (key, type) => `[ ERR-10010 ] 属性" ${key} "的数据类型只能是：${type}`,
-    10011: (columns) => `[ ERR-10011 ] 您使用了2列专用布局，window = 0.5，列参数只能为2，column=${columns}`
+    10011: (columns) => `[ ERR-10011 ] 您使用了2列专用布局，window = 0.5，列参数只能为2，column=${columns}`,
+    10012: (key) => `[ ERR-10011 ] 当前组件为一个form，它的"_${key}"属性在Hoc资源文件中缺失`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {
@@ -26,6 +28,12 @@ const _fxContinue = (cond, callback) => {
     if (cond && U.isFunction(callback)) {
         return callback();
     }
+};
+
+const fxFailure = (code, ...args) => {
+    const message = fxMessage.apply(this, [code].concat(args));
+    console.error(message);
+    return Terminal.fxError(message);
 };
 
 const fxMessage = (code, ...args) => {
@@ -76,5 +84,6 @@ export default {
             return fxMessage.apply(this, [code].concat(args))
         }
     },
-    fxMessage
+    fxMessage,
+    fxFailure
 }

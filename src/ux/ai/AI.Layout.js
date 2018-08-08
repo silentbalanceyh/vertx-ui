@@ -1,7 +1,6 @@
 import React from 'react'
 import {Col, Row, Table} from 'antd';
 import RxAnt from './AI.RxAnt';
-import Random from '../Ux.Random';
 import LayoutType from './AI.Layout.Config';
 
 /**
@@ -25,14 +24,14 @@ const aiColumns = (config = [], ...jsx) => {
         const isExpr = "string" === typeof item && 0 <= item.indexOf(",");
         if (isNum) {
             return (
-                <Col span={item} key={Random.randomUUID()}>
+                <Col span={item} key={`$$AiCol${index}$Number`}>
                     {jsx[index] ? jsx[index] : false}
                 </Col>
             )
         } else if (isExpr) {
             const attrs = RxAnt.toParsed(item, index);
             // 重写key值
-            attrs.key = Random.randomUUID();
+            attrs.key = `$$AiCol${index}$String`;
             return (
                 <Col {...attrs}>
                     {jsx[index] ? jsx[index] : false}

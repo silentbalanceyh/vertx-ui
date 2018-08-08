@@ -87,7 +87,7 @@ const applyConnect = (item = {}) => {
 const applyLoading = (item = {}, props) => {
     const {$submitting} = props;
     const submitting = $submitting.is() ? $submitting.to() : {};
-    item.laoding = submitting.loading;
+    item.loading = submitting.loading;
     return item;
 };
 const applyKv = (item = {}, config = [], kvs = []) => {

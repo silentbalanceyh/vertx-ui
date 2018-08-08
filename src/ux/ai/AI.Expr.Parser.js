@@ -46,6 +46,7 @@ const PARSER = {
     text: jsxValue("text"),
     labelSpan: jsxLayout("labelCol"),
     wrapperSpan: jsxLayout("wrapperCol"),
+    allowClear: jsxBoolean("allowClear"),
     sorter
 };
 const parseTo = (item = {}, literal = "") => {
