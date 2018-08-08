@@ -54,13 +54,14 @@ class Component extends React.PureComponent {
                     }}>
                     {config.map(item => (
                         <Radio key={item.key} value={item.value ? item.value : item.key}>
-                            {item.name}</Radio>))}
+                            {item.label}</Radio>))}
                 </Radio.Group>
                 &nbsp;&nbsp;
                 <span className={"web-checked-radio"}>
                 {related.config && related.config.label ? `${related.config.label}：` : false}
                 </span>
-                <DatePicker disabled={disabled} {...related.config} onChange={this.handleDate}/>
+                <DatePicker {...related.config} onChange={this.handleDate} disabled={disabled}
+                            className={"rx-readonly"}/>
             </Input.Group>
         )
     }

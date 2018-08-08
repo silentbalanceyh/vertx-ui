@@ -36,11 +36,12 @@
   * [5 - 自定义组件](document/5-zi-ding-yi-zu-jian.md)
     * [UC0001 - page/PageCard](document/2-kai-fa-wen-dang/ui0017-ye-tou-ying-yong.md)
     * [UC0002 - 组件教程](document/2-kai-fa-wen-dang/uc0002-headertopbar.md)
-  * 6.AI套件解析
+  * [6.AI套件解析](document/6aitao-jian-jie-xi.md)
     * [AI0001 - 默认属性表](document/ai0001-aiexprshu-xing-jie-xi-qi.md)
     * [AI0002 - aiExprButton属性解析器](document/ai0002-aiexprbuttonshu-xing-jie-xi-qi.md)
     * [AI0003 - aiExprField属性解析器](document/ai0003-aiexprfieldshu-xing-jie-xi-qi.md)
     * [AI0004 - $KV$属性解析](document/ai0004-kvshu-xing-jie-xi.md)
+    * [AI0005 - 自动Render组件配置](document/ai0005-zi-dong-render-zu-jian-pei-zhi.md)
   * 7.Ux工具包
     * [Ux.connectId](document/uxconnectid.md)
 

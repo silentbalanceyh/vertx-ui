@@ -2,6 +2,7 @@ import React from 'react'
 import {Col, Row, Table} from 'antd';
 import RxAnt from './AI.RxAnt';
 import Random from '../Ux.Random';
+import LayoutType from './AI.Layout.Config';
 
 /**
  * 直接渲染多行
@@ -55,9 +56,16 @@ const aiTable = (dataSource = [], table = {}) => {
     return (<Table {...table} dataSource={dataSource}/>)
 };
 
+const aiAdjust = (window = 1) => {
+    if (LayoutType[window]) {
+        return LayoutType[window];
+    }
+};
+
 export default {
     aiRows,
     aiGrid,
     aiColumns,
-    aiTable
+    aiTable,
+    aiAdjust
 }

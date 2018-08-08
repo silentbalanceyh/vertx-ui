@@ -79,6 +79,20 @@ const onDatum = (reference, key) => {
     const data = fromDatum(reference, key);
     return (data && data.is()) ? data.to() : [];
 };
+
+const onReference = (reference, current = 0) => {
+    let ref = reference;
+    let counter = 0;
+    while (counter < current) {
+        // 读取当前引用的props
+        const props = ref.props;
+        if (props) {
+            ref = props.reference;
+        }
+        counter++;
+    }
+    return ref;
+};
 /**
  * Ant Design中的Form清空专用方法
  * @method formClear
@@ -221,6 +235,7 @@ export default {
     // 从reference中抽取数据
     onRouting,
     onDatum,
+    onReference,
     // 从Hoc, Router中提取数据
     fromHoc,
     fromRouter,

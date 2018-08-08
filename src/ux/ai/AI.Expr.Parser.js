@@ -1,3 +1,5 @@
+import Value from '../Ux.Value';
+
 const normalize = (item = {}, value) => {
     if (!item.optionConfig) item.optionConfig = {};
     item.optionConfig.normalize = value.replace(/ /g, '').replace(":", ",");
@@ -20,12 +22,30 @@ const sorter = (item = {}, value) => {
     const sorters = value.split(';');
     sorters.forEach(sorterItem => item.params.sorter.push(sorterItem.replace('`', ',')));
 };
+const jsxKv = (field) => (item = {}, value) => {
+    if (!item.optionJsx) item.optionJsx = {};
+    if (value && 0 < value.indexOf('`')) {
+        item.optionJsx[field] = value.split('`');
+    } else {
+        jsxValue(field)(item, value);
+    }
+};
+const jsxLayout = (field, attr = "span") => (item = {}, value) => {
+    if (!item.optionItem) item.optionItem = {};
+    item.optionItem[field] = {};
+    item.optionItem[field][attr] = Value.valueInt(value);
+};
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
     readOnly: jsxBoolean("readOnly"),
-    placeholder: jsxValue("placeholder"),
+    placeholder: jsxKv("placeholder"),
     valuePropName: configValue("valuePropName"),
+    format: jsxValue("format"),
+    listType: jsxValue("listType"),
+    text: jsxValue("text"),
+    labelSpan: jsxLayout("labelCol"),
+    wrapperSpan: jsxLayout("wrapperCol"),
     sorter
 };
 const parseTo = (item = {}, literal = "") => {

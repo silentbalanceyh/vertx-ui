@@ -1,10 +1,15 @@
 import React from 'react'
+import Ux from 'ux';
 
+const {zero} = Ux;
+
+@zero(Ux.rxEtat(require('./Cab.json'))
+    .cab("UI")
+    .to()
+)
 class Component extends React.PureComponent {
     render() {
-        return (
-            <div>2018/7/16</div>
-        )
+        return (<div>Test</div>)
     }
 }
 

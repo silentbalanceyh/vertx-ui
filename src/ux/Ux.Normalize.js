@@ -113,11 +113,11 @@ const extractForm = (reference = {}, key = "form") => {
  * @param {React.PureComponent} reference React对应组件引用
  * @param groupIndex 组对应的索引值
  */
-const extractGroupForm = (reference = {}, groupIndex) => {
+const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
     if (undefined !== groupIndex) {
         const {$hoc} = reference.state;
         Dg.ensureNotNull($hoc);
-        const form = $hoc._("form");
+        const form = $hoc._(key);
         Dg.ensureNotNull(form);
         return (form && form.ui[groupIndex]) ?
             _normalizeUi(reference, form.ui[groupIndex]) : [];
@@ -132,10 +132,10 @@ const extractGroupForm = (reference = {}, groupIndex) => {
  * @param op 操作事件集
  * @return {Array}
  */
-const extractOp = (reference = {}, op) => {
+const extractOp = (reference = {}, op, key = "form") => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
-    const form = $hoc._("form");
+    const form = $hoc._(key);
     Dg.ensureNotNull(form);
     /**
      * 绑定Op专用，主要用于onClick的绑定操作
@@ -160,10 +160,10 @@ const extractOp = (reference = {}, op) => {
  * @param {React.PureComponent} reference React对应组件引用
  * @return {{}}
  */
-const extractHidden = (reference = {}) => {
+const extractHidden = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
     Dg.ensureNotNull($hoc);
-    const form = $hoc._("form");
+    const form = $hoc._(key);
     Dg.ensureNotNull(form);
     const hidden = (form && form.hidden) ? form.hidden : {};
     if (!hidden.hasOwnProperty("op")) {

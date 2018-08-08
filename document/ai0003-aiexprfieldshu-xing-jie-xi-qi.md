@@ -55,6 +55,8 @@
 | 4 | render | render = aiInput | 默认渲染方法文本框 |
 | 5+ | $KV$ |  |  |
 
+> 关于render中的值可参考：[AI0005 - 自动Render组件配置](/document/ai0005-zi-dong-render-zu-jian-pei-zhi.md)
+
 ## 4.总结
 
 上述表格中的`$KV$`参考文档：[AI0004 - $KV$属性解析](/document/ai0004-kvshu-xing-jie-xi.md)。

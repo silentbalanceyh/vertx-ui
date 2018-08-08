@@ -84,6 +84,9 @@ export default {
      * @param state Redux读取到的状态
      */
     dataIn: (state) => DataLabor.createOut(state),
+    /**
+     * 增强版的拷贝方法，支持多种模式
+     */
     dgRouter: Dg.dgRouter,
     dgFileJson: Dg.dgFileJson,
     dgForm: Dg.dgForm,
