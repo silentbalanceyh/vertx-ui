@@ -32,6 +32,7 @@ const aiSelect = (reference, jsx = {}, onChange) => {
     // onChange处理
     RxAnt.onChange(rest, onChange);
     const options = RxAnt.toOptions(reference, config, filter);
+    console.info(rest);
     return (
         <Select {...rest}>
             {options.map(item => (
