@@ -5,7 +5,6 @@ class Component extends React.PureComponent {
 
     render() {
         const {listType, text, reference, ...meta} = this.props;
-        console.info(this.props);
         return (
             <Upload {...meta} listType={listType}>
                 {"picture-card" === listType ? (

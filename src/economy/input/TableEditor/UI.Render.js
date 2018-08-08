@@ -50,7 +50,7 @@ const renderColumn = (reference, columns = [], jsx, render = {}) => {
             if (render[item.dataIndex]) {
                 item.render = render[item.dataIndex]
             } else {
-                const type = item['$type'] ? item['$type'] : "TEXT";
+                const type = item['$render'] ? item['$render'] : "TEXT";
                 const RENDER = Ux.aiUnitRenders;
                 const render = RENDER[type];
                 if (render) {
@@ -58,7 +58,8 @@ const renderColumn = (reference, columns = [], jsx, render = {}) => {
                 }
             }
         }
-    })
+    });
+    return columns;
 };
 export default {
     renderColumn
