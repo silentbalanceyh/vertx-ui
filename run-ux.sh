@@ -19,10 +19,10 @@ cp -rf src/economy/* ${TARGET_FOLDER}/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/ux/
 # Others
-echo "[ ${FOLDER} ] 拷贝完成！"
+echo "[ ${TARGET_FOLDER} ] 拷贝完成！"
 export TARGET_FOLDER=/Users/lang/Develop/Source/vie-ui/src
 # cp -rf src/environment/* ${TARGET_FOLDER}/environment/
 cp -rf src/economy/* ${TARGET_FOLDER}/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/ux/
-echo "[ ${FOLDER} ] 拷贝完成！"
+echo "[ ${TARGET_FOLDER} ] 拷贝完成！"

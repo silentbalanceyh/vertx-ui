@@ -190,6 +190,7 @@ const aiFormButton = (reference, onClick, id = false) => {
             item.onClick = fn(reference);
             buttons.push(item);
         });
+        console.info(buttons);
         return (
             <span>
                 {buttons.map(item => (<Button className={"ux-hidden"} {...item}/>))}
@@ -198,11 +199,11 @@ const aiFormButton = (reference, onClick, id = false) => {
     }
 };
 
-const ai2FormButton = (Op, id = false) => {
-    return {
-        $button: (reference) => aiFormButton(reference, Op, id)
-    };
-};
+const aiOp = (reference) => (Op) => Object.keys(Op).filter(key => U.isFunction(Op[key])).map(key => (
+    <Button className={"ux-hidden"} key={key} id={key} onClick={Op[key](reference)}/>
+));
+
+const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
 const ai2FilterButton = (window = 1) => {
     return {
         $button: (reference) => {
@@ -229,5 +230,7 @@ export default {
     aiSubmit,
     aiButton,
     aiButtons,
+    // 直接按钮处理
+    aiOp,
     aiToolbars
 }

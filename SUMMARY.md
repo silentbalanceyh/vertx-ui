@@ -25,6 +25,7 @@
     * [UI0016 - Grid表单布局](document/2-kai-fa-wen-dang/ui0016-formde-fu-za-bu-ju-ff08-grid.md)
     * [UI0018 - Table中的Column](document/2-kai-fa-wen-dang/ui0018-deng-5f55-zhu-xiao-tiao-zhuan.md)
     * [UI0019 - 按钮的connect机制](document/2-kai-fa-wen-dang/ui0019-an-niu-de-connect-ji-zhi.md)
+    * [UI0020 - 按钮提交代码](document/2-kai-fa-wen-dang/ui0020-an-niu-ti-jiao-dai-ma.md)
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
     * [UT0002 - storybook可重用组件文档](document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)

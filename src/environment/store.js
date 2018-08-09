@@ -12,7 +12,11 @@ const composeEnhancers =
 // Inject middleware: Epic, Router
 const epicMiddleware = createEpicMiddleware(datum.epics);
 // epicMiddleware.run(datum.epics);
-const logger = createLogger({duration: false, diff: true, collapsed: true});
+const logger = createLogger({
+    duration: true,
+    diff: true,
+    collapsed: true
+});
 const enhancer =
     "production" !== process.env.NODE_ENV
         ? composeEnhancers(

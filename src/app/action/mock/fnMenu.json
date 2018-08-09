@@ -141,6 +141,29 @@
             "name": "zui.analyzer.layout",
             "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
             "parentId": "4164ffa9-cef7-4529-a7d7-0c6e4a231f86"
+        },
+        {
+            "key": "e52bbf5a-a68c-4f5a-9cdc-75e31fcee5a2",
+            "active": true,
+            "left": 4,
+            "level": 1,
+            "text": "自动化工具",
+            "icon": "code",
+            "tscript": "EXPAND",
+            "name": "zui.generated",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982"
+        },
+        {
+            "key": "b757768a-eeef-463b-9650-afbc33632567",
+            "active": true,
+            "left": 1,
+            "level": 2,
+            "text": "测试生成",
+            "icon": "file",
+            "uri": "/generated/tool",
+            "name": "zui.generated.tool",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "e52bbf5a-a68c-4f5a-9cdc-75e31fcee5a2"
         }
     ]
 }
