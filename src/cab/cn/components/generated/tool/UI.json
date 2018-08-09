@@ -1,0 +1,13 @@
+{
+    "_page": {
+        "title": "测试标题",
+        "left": [
+            "btnSubmit,提交,$opSubmit,primary"
+        ]
+    },
+    "_modal": {
+        "success": {
+            "added": "您的部门已经添加成功"
+        }
+    }
+}

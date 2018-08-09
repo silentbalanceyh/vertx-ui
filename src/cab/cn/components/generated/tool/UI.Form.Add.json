@@ -1,0 +1,12 @@
+{
+    "_form": {
+        "ui": [
+            [
+                {
+                    "field": "$button",
+                    "hidden": true
+                }
+            ]
+        ]
+    }
+}
