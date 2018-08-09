@@ -162,6 +162,15 @@ const toStyle = (name, bg) => {
     }
     return styles;
 };
+const toUniform = (props, ...keys) => {
+    const item = toDatum(props);
+    const defaultProp = ["app", "user", "router"].concat(keys);
+    const common = toProp.apply(this, [props].concat(defaultProp));
+    return {
+        ...item,
+        ...common
+    }
+};
 /**
  * @class Hoc
  * @description 专用Hoc解释器
@@ -174,6 +183,7 @@ export default {
     toProp,
     toStyle,
     toDatum,
+    toUniform,
     toEffect,
     toQueryParameter,
     // 处理专用参数信息

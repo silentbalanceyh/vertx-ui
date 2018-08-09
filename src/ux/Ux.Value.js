@@ -296,6 +296,13 @@ const assign = (target = {}, source = {}, mode = 0) => {
     }
     return result;
 };
+const safeArray = (input) => {
+    if (U.isArray(input)) {
+        return input;
+    } else {
+        return [];
+    }
+};
 /**
  * @class Value
  * @description 数值计算器
@@ -322,5 +329,7 @@ export default {
     mathMultiplication,
     mathDivision,
     // 转换处理
-    convertTime
+    convertTime,
+    // 安全函数
+    safeArray,
 }
