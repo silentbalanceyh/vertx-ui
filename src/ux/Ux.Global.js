@@ -41,16 +41,18 @@ const toLogout = () => {
  * @return {*}
  */
 const toRoute = (reference = {}, uri = "") => {
-    E.fxRouter(reference, ($router) => {
-        let target;
-        if (0 <= uri.indexOf(Cv['ROUTE'])) {
-            target = uri;
-        } else {
-            target = `/${Cv['ROUTE']}${uri}`;
-        }
-        target = target.replace(/\/\//g, '/');
-        $router.to(target);
-    });
+    E.fxTerminal(!uri, 10072, uri);
+    E.fxTerminal(!reference.hasOwnProperty("props")
+        || !reference.props.hasOwnProperty("$router"), 10004, reference);
+    const {$router} = reference.props;
+    let target;
+    if (0 <= uri.indexOf(Cv['ROUTE'])) {
+        target = uri;
+    } else {
+        target = `/${Cv['ROUTE']}${uri}`;
+    }
+    target = target.replace(/\/\//g, '/');
+    $router.to(target);
 };
 /**
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面

@@ -9,6 +9,7 @@ import Expr from '../Ux.Expr'
 import Value from '../Ux.Value';
 import {Table} from 'antd';
 import Column from '../Ux.Column';
+import E from '../Ux.Error';
 
 const extractValue = ($data, config) => {
     let field = config.field;
@@ -49,9 +50,7 @@ const _renderLabel = (label, value, config) => {
     ) : _renderValue(value);
 };
 const _highFun = ($data, config, reference, convertFun = data => data) => {
-    if (!config.meta) {
-        console.error("[ZERO] Datum data met errors.", config.meta);
-    }
+    E.fxTerminal(!config.meta, 10039, config.meta);
     // 读取值
     const value = extractValue($data, config);
     const label = _extractLabel(config);
@@ -162,7 +161,7 @@ const table = ($data, config, reference) => {
                    {...attrs}/>
         );
     } else {
-        console.error("[Zero] Table require 'value' data source is Array.");
+        E.fxTerminal(true, 10040, value);
         return false;
     }
 };

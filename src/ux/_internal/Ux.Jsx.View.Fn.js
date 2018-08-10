@@ -4,6 +4,7 @@ import {Col, Row} from "antd";
 import React from "react";
 import viewRender from "./Ux.Jsx.View";
 import Prop from "../Ux.Prop";
+import E from '../Ux.Error';
 import DFT from './Ux.Jsx.Default';
 
 /**
@@ -80,9 +81,7 @@ const viewCell = (reference, $data, field = "Unknown", config = {}, renders = {}
         render = viewRender[config.mode];
         config.extension = renders[field];
     }
-    if (!render) {
-        console.error("[ZERO] View render does not exist.", config.mode);
-    }
+    E.fxTerminal(!render, 10059, render);
     return (U.isFunction(render)) ? render($data, config, reference) : false;
 };
 
@@ -90,9 +89,7 @@ const viewConfig = (page = [], reference, key = "view") => {
     const view = Prop.fromHoc(reference, key);
     const configMap = {};
     page.forEach(row => row.name.forEach(field => {
-        if (!view || !view[field]) {
-            console.error("[ZERO] Required 'view' config missing.", field)
-        }
+        E.fxTerminal(!view || !view[field], 10060, field, view);
         configMap[field] = DFT.uiView(view[field], field);
     }));
     return configMap;

@@ -1,7 +1,8 @@
 import React from 'react';
-import {Button, Checkbox, DatePicker, Input, InputNumber, Modal, Radio, Select, TimePicker, TreeSelect} from 'antd';
+import {Checkbox, DatePicker, Input, InputNumber, Modal, Radio, Select, TimePicker, TreeSelect} from 'antd';
 import {FileUpload, ListSelector, TimeRanger} from "web";
 import RxAnt from './AI.RxAnt'
+import JsxOp from '../_internal/Ux.Jsx.Op'
 
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
@@ -32,7 +33,6 @@ const aiSelect = (reference, jsx = {}, onChange) => {
     // onChange处理
     RxAnt.onChange(rest, onChange);
     const options = RxAnt.toOptions(reference, config, filter);
-    console.info(rest);
     return (
         <Select {...rest}>
             {options.map(item => (
@@ -87,26 +87,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 
-const aiAction = (reference, jsx = {}) => {
-    if (reference.state) {
-        const {$op = {}} = reference.state;
-        const buttons = [];
-        for (const key in $op) {
-            if (key && key.startsWith("$op") &&
-                $op.hasOwnProperty(key)) {
-                const fnHoc = $op[key];
-                const button = {};
-                button.key = key;
-                button.id = key;
-                button.onClick = fnHoc(reference);
-                button.className = "ux-hidden";
-                buttons.push(button);
-            }
-        }
-        return buttons.map(button => <Button {...button}/>)
-    } else
-        return false;
-};
+const aiAction = (reference, jsx = {}) => JsxOp.rtBind(reference);
 
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);

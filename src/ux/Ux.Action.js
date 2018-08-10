@@ -28,11 +28,13 @@ import U from 'underscore';
  */
 const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
     const {form, $key} = reference.props;
+    Ux.E.fxTerminal(!form, 10020, form);
     if (form) {
         form.validateFieldsAndScroll((error, values) => {
             if (error) {
                 if (fnFailure && U.isFunction(fnFailure)) {
                     fnFailure(error);
+                    Ux.rdxSubmitting(reference, false);
                 }
                 return;
             }
@@ -46,50 +48,11 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 fnSuccess(params);
             }
         });
-    } else {
-        console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
-};
-
-const rxSubmit = (reference = {}, $_loading = "", {
-    success = () => {
-    },
-    validate = () => true,
-    promise,
-    failure = () => {
-    },
-    loading = ($_loading) ? (is = false) => {
-        const state = {};
-        state[$_loading] = is;
-        reference.setState(state);
-    } : () => {
-    }
-}) => {
-    loading(true);
-    runSubmit(reference, (values) => {
-        // 验证函数专用
-        if (!validate(values, reference)) {
-            return;
-        }
-        // 生成Promise
-        const $promise = promise(values, reference);
-        if ($promise) {
-            $promise.catch(error => {
-                loading(false);
-                failure(error, reference);
-            }).then(response => {
-                loading(false);
-                success(response, reference);
-            })
-        } else {
-            console.warn("[Ux] Your promise is invalid!");
-            loading(false);
-            success(values, reference);
-        }
-    }, () => loading(false));
 };
 
 const rxInit = (props, params = {}) => {
+    Ux.E.fxTerminal(!U.isFunction(props.zxInit), 10019, props.zxInit);
     if (U.isFunction(props.zxInit)) {
         const {$router} = props;
         const paramData = Immutable.fromJS(params).toJS();
@@ -102,11 +65,18 @@ const rxInit = (props, params = {}) => {
     }
 };
 /**
+ * 数据处理专用（初始化）
+ * @param reference
+ * @param prevProps
+ */
+const rxData = (reference, prevProps) => {
+
+};
+/**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
     runSubmit,
-    rxSubmit,
     rxInit
 }

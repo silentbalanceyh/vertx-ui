@@ -5,13 +5,9 @@ import Ux from "ux";
 
 const _ixFullName = (Component, Cab = {}, Name) => {
     // ns 属性检查
-    if (!Cab || !Cab.hasOwnProperty("ns")) {
-        console.error("[ZeroI] The 'Cab' must contain 'ns' field.");
-    }
+    Ux.E.fxTerminal(!Cab || !Cab.hasOwnProperty("ns"), 10050, Cab);
     // 参数名称检查
-    if (!Name) {
-        console.error("[ZeroI] The input 'Name' must be valid.");
-    }
+    Ux.E.fxTerminal(!Name, 10051, Name);
     // 返回全称
     const fullName = Cab['ns'] + "/" + Name;
     if (Component) Component.displayName = fullName;
@@ -75,7 +71,7 @@ const _zero = (options = {}) => {
             render() {
                 const {error} = this.state;
                 if (error) return Ux.fxError(error);
-                
+
                 const fullName = _ixI18nName(this, options);
                 Logger.debug(this, fullName);
                 return super.render();

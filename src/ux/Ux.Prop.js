@@ -1,4 +1,3 @@
-import Dg from "./Ux.Debug";
 import Value from "./Ux.Value";
 import Immutable from 'immutable';
 import E from './Ux.Error';
@@ -11,7 +10,7 @@ import {DataLabor} from 'entity';
  * @param keys
  */
 const fromPath = (reference = {}, ...keys) => {
-    Dg.ensureMinLength(keys, 1);
+    E.fxTerminal(1 > keys.length, 10070, keys, 1);
     let data = fromHoc(reference, keys[0]);
     if (1 < keys.length && data) {
         const path = [];
@@ -48,7 +47,7 @@ const fromHoc = (reference = {}, key = "") => {
  * @return {null}
  */
 const fromRouter = (reference = {}, key = "") => {
-    Dg.ensureKey("fromRouter", key);
+    E.fxTerminal(!key, 10066, "fromRouter", key);
     const {$router} = reference.props;
     return $router ? $router._(key) : null;
 };
@@ -141,12 +140,11 @@ const formRead = (reference, data = {}) => {
  */
 const formGet = (reference, key) => {
     const {form} = reference.props;
+    E.fxTerminal(!form, 10020, form);
     if (form) {
         let data = form.getFieldsValue();
         data = Immutable.fromJS(data).toJS();
         return key ? data[key] : data;
-    } else {
-        console.error("[ZI] 'form' reference is invalid, please configured Ant Design.")
     }
 };
 /**
@@ -177,6 +175,7 @@ const formReset = (reference, keys = []) => {
  */
 const formHit = (reference, key, value) => {
     const {form} = reference.props;
+    E.fxTerminal(!form, 10020, form);
     if (form) {
         if (undefined !== value) {
             const values = {};
@@ -185,8 +184,6 @@ const formHit = (reference, key, value) => {
         } else {
             return form.getFieldValue(key);
         }
-    } else {
-        console.error("[Ux-Prop] form variable is missing!");
     }
 };
 /**
@@ -197,10 +194,9 @@ const formHit = (reference, key, value) => {
  */
 const formHits = (reference, values = {}) => {
     const {form} = reference.props;
+    E.fxTerminal(!form, 10020, form);
     if (form) {
         form.setFieldsValue(values);
-    } else {
-        console.error("[Ux-Prop] form variable is missing!");
     }
 };
 /**

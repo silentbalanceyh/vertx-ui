@@ -1,4 +1,5 @@
 import React from 'react'
+import Ux from 'ux';
 import "./Cab.less";
 import {DatePicker, Input, Radio} from 'antd';
 import Immutable from 'immutable';
@@ -49,9 +50,7 @@ class Component extends React.PureComponent {
         return (
             <Input.Group {...meta} compact>
                 <Radio.Group className={"web-checked-radio"} onChange={
-                    related.disabled ? this.handleDisabled : () => {
-                        console.info("Not")
-                    }}>
+                    related.disabled ? this.handleDisabled : () => Ux.E.fxTerminal(true, 10017, "onChange")}>
                     {config.map(item => (
                         <Radio key={item.key} value={item.value ? item.value : item.key}>
                             {item.label}</Radio>))}

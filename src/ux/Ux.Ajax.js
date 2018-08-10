@@ -8,6 +8,7 @@ import Sign from "./Ux.Sign";
 import Dg from "./Ux.Debug";
 import Immutable from 'immutable'
 import Type from './Ux.Type';
+import E from './Ux.Error';
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -56,7 +57,7 @@ const ajaxHeader = (secure = false) => {
     // 处理Authorization
     if (secure) {
         const token = Sign.token();
-        Dg.ensureToken(token);
+        E.fxTerminal(!token, 10065, token);
         headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
     ajaxXSRF(headers);
@@ -107,28 +108,28 @@ const ajaxAdapter = (body = {}) => {
 const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
     (mockData['forceMock'] || (Cv.MOCK && mockData.mock)) ?
-    Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data) :
-    fetch(request)
-    .then(response => Log.response(request, response, request.method))
-    .then(response => response.ok ?
-        response.json().then(body => Promise.resolve(ajaxAdapter(body))) :
-        response.json().then(data => Promise.reject({
-            ...data,
-            status: response.status,
-            statusText: response.statusText
-        }))
-    )
-    .then(response => {
-        // 是否存储响应信息
-        if (Cv['DEBUG_AJAX']) {
-            Dg.dgFileJson({
-                request: params,
-                response: response
-            });
-        }
-        return response;
-    })
-    .catch(error => Promise.reject(error));
+        Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data) :
+        fetch(request)
+            .then(response => Log.response(request, response, request.method))
+            .then(response => response.ok ?
+                response.json().then(body => Promise.resolve(ajaxAdapter(body))) :
+                response.json().then(data => Promise.reject({
+                    ...data,
+                    status: response.status,
+                    statusText: response.statusText
+                }))
+            )
+            .then(response => {
+                // 是否存储响应信息
+                if (Cv['DEBUG_AJAX']) {
+                    Dg.dgFileJson({
+                        request: params,
+                        response: response
+                    });
+                }
+                return response;
+            })
+            .catch(error => Promise.reject(error));
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法
  * @method ajaxRead
@@ -256,12 +257,12 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
                 .map(promise)
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
-                    .map(processor)
-                    .map(data => Env.dataOut(data))
+                        .map(processor)
+                        .map(data => Env.dataOut(data))
                 );
         }
     } else {
-        console.error("[ Ajax ] rxEpic: type or promise is invalid.", type, promise);
+        E.fxTerminal(true, 10025, type, promise);
     }
 };
 /**
@@ -280,12 +281,12 @@ const rxEdict = (type, promise, responser = data => data) => {
                 .map(promise)
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
-                    .map(responser)
-                    .map(data => Env.dataOut(data))
+                        .map(responser)
+                        .map(data => Env.dataOut(data))
                 );
         }
     } else {
-        console.error("[ Ajax ] rxEdict: type or promise is invalid.", type, promise);
+        E.fxTerminal(true, 10027, type, promise);
     }
 };
 
@@ -356,7 +357,7 @@ const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
                 );
         }
     } else {
-        console.error("[ Ajax ] rxEclat: type or promise is invalid.", type, promise, nextPromise);
+        E.fxTerminal(true, 10026, type, promise, nextPromise);
     }
 };
 /**

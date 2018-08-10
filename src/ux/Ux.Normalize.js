@@ -1,7 +1,7 @@
-import Dg from './Ux.Debug'
 import Validator from './Ux.Validator'
 import Type from './Ux.Type';
 import Html from './Ux.Html';
+import E from './Ux.Error';
 import Immutable from 'immutable';
 import Ai from './ai/AI';
 
@@ -102,9 +102,9 @@ const _normalizeUi = (reference, ui = []) => {
  */
 const extractForm = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
+    E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
-    Dg.ensureNotNull(form);
+    E.fxTerminal(!form, 10056, $hoc);
     return (form) ? _normalizeUi(reference, form.ui) : [];
 };
 /**
@@ -116,13 +116,13 @@ const extractForm = (reference = {}, key = "form") => {
 const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
     if (undefined !== groupIndex) {
         const {$hoc} = reference.state;
-        Dg.ensureNotNull($hoc);
+        E.fxTerminal(!$hoc, 10062, $hoc);
         const form = $hoc._(key);
-        Dg.ensureNotNull(form);
+        E.fxTerminal(!form, 10056, $hoc);
         return (form && form.ui[groupIndex]) ?
             _normalizeUi(reference, form.ui[groupIndex]) : [];
     } else {
-        console.error("[Ux] This method require 'groupIndex' parameter, but now it's invalid.")
+        E.fxTerminal(true, 10036, groupIndex);
     }
 };
 /**
@@ -134,9 +134,9 @@ const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
  */
 const extractOp = (reference = {}, op, key = "form") => {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
+    E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
-    Dg.ensureNotNull(form);
+    E.fxTerminal(!form, 10056, $hoc);
     /**
      * 绑定Op专用，主要用于onClick的绑定操作
      */
@@ -162,9 +162,9 @@ const extractOp = (reference = {}, op, key = "form") => {
  */
 const extractHidden = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
+    E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
-    Dg.ensureNotNull(form);
+    E.fxTerminal(!form, 10056, $hoc);
     const hidden = (form && form.hidden) ? form.hidden : {};
     if (!hidden.hasOwnProperty("op")) {
         hidden.op = false;

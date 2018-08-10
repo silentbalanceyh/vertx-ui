@@ -1,12 +1,11 @@
 import Tab from './Ai.Stream.Tab';
 import Table from './Ai.Stream.Table';
 import Mock from './Ai.Stream.Mock';
+import E from '../Ux.Error';
 
 class Stream {
     constructor(reference) {
-        if (!reference) {
-            console.error("[ZI] Input 'reference' must be valid.")
-        }
+        E.fxTerminal(!reference, 10049, reference);
         this.reference = reference;
     }
 

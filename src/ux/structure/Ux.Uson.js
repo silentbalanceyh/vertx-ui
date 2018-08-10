@@ -2,6 +2,7 @@ import U from "underscore";
 import Type from '../Ux.Type';
 import Immutable from "immutable";
 import moment from 'moment';
+import E from "../Ux.Error";
 
 class Uson {
     constructor(data = []) {
@@ -9,10 +10,9 @@ class Uson {
     }
 
     static create(data = []) {
+        E.fxTerminal(!U.isObject(data), 10058, data);
         if (U.isObject(data)) {
             return new Uson(data);
-        } else {
-            console.error("[Kid] The input data must be Object.");
         }
     }
 

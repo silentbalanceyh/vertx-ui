@@ -58,7 +58,11 @@ class Etat {
 
     bind(OP: any = {}) {
         if (!this._op) this._op = {};
-        Object.assign(this._op, OP);
+        const opRef = this._op;
+        Object.keys(OP)
+            .filter(key => !!key)
+            .filter(key => key.startsWith("$"))
+            .map(key => opRef[key] = OP[key]);
         return this;
     }
 

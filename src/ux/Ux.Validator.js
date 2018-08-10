@@ -4,6 +4,7 @@ import Param from './Ux.Param';
 import Prop from './Ux.Prop';
 import Field from './Ux.Field';
 import Value from './Ux.Value';
+import Error from './Ux.Error';
 
 const _ready = (rule = {}) => {
     // 是否检查readonly和disabled
@@ -37,6 +38,7 @@ const _executeReady = (rule = {}, value, callback, fnCond = () => true) => {
 };
 
 const existing = (refereuce = {}) => (rule = {}, value, callback) => {
+    Error.fxTerminal(!rule.config, 10022, rule.config);
     if (rule.config) {
         if (value) {
             // 有值才验证
@@ -59,8 +61,6 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         } else {
             callback();
         }
-    } else {
-        console.error("[V] Validator config node missing.");
     }
 };
 
@@ -163,15 +163,17 @@ const mountValidator = (refereuce = {}, item = {}) => {
                 if (rule.validator && !U.isFunction(rule.validator)) {
                     // 处理条件
                     const executeFun = VERFIERS[rule.validator];
+                    // 10023
+                    Error.fxTerminal(!U.isFunction(executeFun), 10023,
+                        rule.validator, Object.keys(VERFIERS));
                     if (U.isFunction(executeFun)) {
                         const validatorFun = executeFun(refereuce);
+                        // 10024
+                        Error.fxTerminal(!U.isFunction(validatorFun), 10024,
+                            U.isFunction(validatorFun));
                         if (U.isFunction(validatorFun)) {
                             rule.validator = validatorFun;
-                        } else {
-                            console.info("[Ux] Validator Fun Error!");
                         }
-                    } else {
-                        console.info("[Ux] Execute Fun Error!");
                     }
                 }
             })

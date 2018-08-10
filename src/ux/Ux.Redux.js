@@ -34,13 +34,11 @@ const rxAssist = (data, key, orderBy = 'order') => {
 };
 const rxData = (data) => ({"datum.data": data});
 const rxGrid = (data) => ({"grid.list": data});
-const rxRecord = (data) => ({"grid.record": data});
 const rxFilter = (data) => ({"grid.query": data});
 export default {
     rxDatum,
     rxAssist,
     rxData,
     rxGrid,
-    rxFilter,
-    rxRecord
+    rxFilter
 }

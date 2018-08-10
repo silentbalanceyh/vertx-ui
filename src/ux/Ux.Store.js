@@ -1,8 +1,8 @@
-import Dg from "./Ux.Debug";
 import Cv from './Ux.Constant';
+import E from './Ux.Error';
 
 const put = (reference) => (key, value) => {
-    Dg.ensureRuntime(reference);
+    E.fxTerminal(!reference, 10063, reference);
     if (value && key) {
         if (Object.prototype.isPrototypeOf(value)) {
             value = JSON.stringify(value);
@@ -12,27 +12,27 @@ const put = (reference) => (key, value) => {
 };
 
 const get = (reference) => (key) => {
-    Dg.ensureRuntime(reference);
+    E.fxTerminal(!reference, 10063, reference);
     if (key) {
         let value = reference.getItem(key);
         try {
             value = JSON.parse(value);
         } catch (error) {
-            console.error(error);
+            E.fxTerminal(true, 10037, error);
         }
         return value;
     }
 };
 
 const remove = (reference) => (key) => {
-    Dg.ensureRuntime(reference);
+    E.fxTerminal(!reference, 10063, reference);
     if (key) {
         reference.removeItem(key);
     }
 };
 
 const clear = (reference) => () => {
-    Dg.ensureRuntime(reference);
+    E.fxTerminal(!reference, 10063, reference);
     reference.clear();
 };
 /**

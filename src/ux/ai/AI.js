@@ -9,6 +9,7 @@ import AiNormalize from './AI.Normalize';
 import Calculator from './AI.Layout.Calculator';
 import AiString from './AI.Expr.String';
 import AiCriteria from './AI.Criteria';
+import AiPure from './AI.Pure';
 
 export default {
     ...AiLink,
@@ -21,5 +22,6 @@ export default {
     ...AiNormalize,
     ...AiString,
     ...AiCriteria,
+    ...AiPure,
     aiLayoutItem: Calculator.calculateItem
 }

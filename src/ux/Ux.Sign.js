@@ -2,7 +2,7 @@ import Global from './Ux.Global';
 import Expr from './Ux.Expr';
 import Encrypt from './Ux.Encrypt';
 import Log from './Ux.Log';
-import Dg from './Ux.Debug';
+import E from './Ux.Error';
 
 const SCHEMA = {
     OAuth: () => {
@@ -78,7 +78,7 @@ const _secret = () => {
  */
 const token = () => {
     const app = Global.isInit();
-    Dg.ensureApp(app);
+    E.fxTerminal(!app, 10067, app);
     let auth = app.auth;
     if (!auth) auth = 'OAuth';
     const fnExecute = SCHEMA[auth];

@@ -24,6 +24,7 @@ const fnEdit = (reference = {}, dialogKey = "") => (config, id) => (event) => {
 };
 const fnRemove = (reference = {}) => (config, id) => (event) => {
     event.preventDefault();
+    Ux.E.fxTerminal(!config.ajax, 10053, config);
     if (config.ajax) {
         // 加载数据处理
         const {$mockRemove} = reference.props;
@@ -35,8 +36,6 @@ const fnRemove = (reference = {}) => (config, id) => (event) => {
                 Ux.writeTree(reference, state);
             }
         }, $mockRemove ? $mockRemove : {})
-    } else {
-        console.error("[Ajax] Ajax Config missing in delete operation.");
     }
 };
 export default {

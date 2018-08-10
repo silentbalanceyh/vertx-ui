@@ -95,12 +95,9 @@ const ensureForm = (target = {}, options = {}) => {
     // target.state必须存在，不存在会导致读取的Error
     if (options.form && target.state) {
         const {$hoc} = target.state;
-        if (!$hoc) {
-            console.error("[Zero] Error to initialize config for form.", $hoc);
-        } else {
-            if (!$hoc.to().hasOwnProperty("_form")) {
-                console.error("[Zero] '_form' key missing in form component configuration.", $hoc.to());
-            }
+        Ux.E.fxTerminal(!$hoc, 10055, $hoc);
+        if ($hoc) {
+            Ux.E.fxTerminal(!$hoc.to().hasOwnProperty("_form"), 10056, $hoc.to());
         }
     }
 };

@@ -8,7 +8,7 @@ export default createReducer({
         if (inState.to) {
             return {...inState.to(state)}
         } else {
-            console.warn("[StateIn] No changes: inState = ", inState);
+            console.warn("[Env] 状态无改变: inState = ", inState);
             return state
         }
     }
