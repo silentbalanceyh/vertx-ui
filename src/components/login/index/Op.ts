@@ -1,15 +1,8 @@
 import Ux from 'ux';
 import Mock from './mock';
 
-const fnLogin = Ux.rxJet().success((values: any, reference: any) => {
-    if ("lang.yu" !== values.username) {
-        Ux.showMessage(reference, "user");
-        return;
-    }
-    if ("lang.yu" !== values.password) {
-        Ux.showMessage(reference, "password");
-        return;
-    }
+const fnLogin = (values: any, reference: any) => {
+
     Ux.ajaxPush("/auth/login", values, Mock.fnLogin).then(response => {
         response.token = Ux.randomString(32);
         Ux.storeUser(response);
@@ -25,11 +18,31 @@ const fnLogin = Ux.rxJet().success((values: any, reference: any) => {
             $router.to(Ux.Env.ENTRY_ADMIN);
         }
     })
-}).to();
-const fnReset = Ux.rxJet().success((values: any, reference: any) => {
-    Ux.formReset(reference);
-}).to();
+};
+const _validate = (reference, values: any) => {
+    if ("lang.yu" !== values.username) {
+        Ux.showMessage(reference, "user");
+        return false;
+    }
+    if ("lang.yu" !== values.password) {
+        Ux.showMessage(reference, "password");
+        return false;
+    }
+    return true;
+};
+const $opLogin = (reference: any) => (values: any) => {
+    if (_validate(reference, values)) {
+        return Ux.ajaxPush("/auth/login", values, Mock.fnLogin).then(response => {
+            response.token = Ux.randomString(32);
+            Ux.storeUser(response);
+            Ux.writeTree(reference, {
+                user: response,
+                "status.submitting": null
+            });
+            Ux.toOriginal(reference);
+        });
+    }
+};
 export default {
-    fnLogin,
-    fnReset
+    $opLogin
 }

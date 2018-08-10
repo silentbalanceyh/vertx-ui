@@ -53,6 +53,7 @@ const rtSubmit = (reference = {}, success, failure) => _rtSubmit(reference, {suc
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;
     Ux.E.fxTerminal(!form, 10020, form);
+    Ux.E.fxTerminal(!callback.success, 10017, "success");
     if (form) {
         _rtState(reference);
         form.validateFieldsAndScroll((error, values) => {
@@ -64,11 +65,21 @@ const _rtSubmit = (reference = {}, callback = {}) => {
                 // 去掉undefined
                 Value.valueValid(params);
                 // 默认的fnFail函数
-                callback.success(values).then(() => {
-                    if (!reference.isUnmount()) {
+                if (callback.success) {
+                    const executor = callback.success(values);
+                    if (Promise.prototype.isPrototypeOf(executor)) {
+                        // Promise Async
+                        executor.then(() => {
+                            if (!reference.isUnmount()) {
+                                _rtState(reference, false);
+                            }
+                        }).catch(_rtError(reference, callback.failure));
+                    } else {
                         _rtState(reference, false);
                     }
-                }).catch(_rtError(reference, callback.failure));
+                } else {
+                    _rtState(reference, false);
+                }
             }
         })
     }
@@ -91,6 +102,16 @@ const rtAnt = (reference, metadata = {}) => {
         </Button>
     );
 };
+const rtRet = (reference, metadata = {}) => {
+    const {$loading = false} = reference.state;
+    const {text, ...rest} = metadata;
+    return (
+        <Button onClick={() => Ux.formReset(reference)}
+                {...rest} loading={$loading}>
+            {text ? text : false}
+        </Button>
+    );
+};
 const _rtJsx = (reference, $op = {}, show = false) =>
     Object.keys($op).filter(key => !!key).filter(key => U.isFunction($op[key]))
         .map(key => <Button id={key} key={key}
@@ -102,6 +123,27 @@ const rtInherit = (reference, show = false) => {
 const rtBind = (reference, show = false) => {
     const {$op = {}} = reference.state;
     return _rtJsx(reference, $op, show);
+};
+const rtNorm = (reference, jsx = {}) => {
+    const buttons = jsx.buttons;
+    Ux.E.fxTerminal(!buttons.hasOwnProperty("submit"), 10074, "submit");
+    // 提交按钮
+    const item = Ux.aiExprOp(buttons.submit);
+    const reset = buttons.reset ? Ux.aiExprOp(buttons.reset) : false;
+    return (
+        <span>
+            {rtAnt(reference,
+                {
+                    type: "primary", key: item.key,
+                    text: item.text, op: item.id
+                })}
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            {reset ? rtRet(reference, {
+                type: "default", key: reset.key,
+                text: reset.text, op: reset.id
+            }) : false}
+        </span>
+    );
 };
 // rx - Reactive Action
 /**
@@ -125,6 +167,8 @@ const rtLink = (reference, metadata = {}) => {
     )
 };
 export default {
+    // 重置按钮专用
+    rtRet,
     // Ant Design标准Form按钮
     rtAnt,
     // React Router按钮
@@ -133,6 +177,9 @@ export default {
     rtInherit,
     // 自定义组件按钮，$op从state中出来，一般来源于当前组件的bind方法
     rtBind,
+    // 自定义组件按钮，$op从state中出来，一般是：提交、重置，提交为Ant Design的标准按钮
+    // 配置文件来源于optionJsx.buttons，并且hidden必须是false默认值（不隐藏的）
+    rtNorm,
     // 直接提交函数，封装了防重复提交
     rtSubmit
 }

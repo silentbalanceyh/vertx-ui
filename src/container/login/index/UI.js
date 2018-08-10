@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
             }}>
                 <Header className={"login-header"}/>
                 <Content className={"login-content"}>
-                    {Ux.uiGrid([8, 8, 8],
+                    {Ux.aiGrid([8, 8, 8],
                         undefined,
                         <Component {...this.props}/>
                     )}

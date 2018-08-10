@@ -87,7 +87,8 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 
-const aiAction = (reference, jsx = {}) => JsxOp.rtBind(reference);
+const aiAction = (reference, jsx = {}) => (jsx.buttons) ?
+    (JsxOp.rtNorm(reference, jsx)) : (JsxOp.rtBind(reference));
 
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);

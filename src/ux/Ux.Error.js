@@ -75,7 +75,8 @@ const fnError = {
     10070: (array, length) => `[ ERR-10070 ] 输入的数组长度下限为${length}, length >= limit 当前长度：${array.length}`,
     10071: (input, expected) => `[ ERR-10071 ] 参数类型检查失败，期望${expected}，当前数据：${input}`,
     10072: (uri) => `[ ERR-10072 ] (Rt) 您要重定向的页面地址不可为空，uri = ${uri}`,
-    10073: ($op) => `[ ERR-10073 ] (Rt) 您正在提取绑定的 "$op"，当前React组件中 reference.state.$op非法。${$op}`
+    10073: ($op) => `[ ERR-10073 ] (Rt) 您正在提取绑定的 "$op"，当前React组件中 reference.state.$op非法。${$op}`,
+    10074: (key) => `[ ERR-10074 ] (Rt) 您调用了"rtNorm"标准化按钮，但您的配置"optionJsx.buttons"中缺少${key}。`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

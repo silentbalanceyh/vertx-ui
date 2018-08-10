@@ -285,12 +285,14 @@ const aiExprHelp = (steps = []) =>
 const aiExprButton = (buttons = [], props = {}) =>
     _iterator(buttons, (values = []) => parseItem(values, "button"))
         .map(applyConnect).map(item => applyLoading(item, props));
+const aiExprOp = (button = "") => parseItem(button, "pure");
 export default {
     aiExprHelp,
     aiExpr,
     aiExprColumn,
     aiExprOption,
     aiExprButton,
+    aiExprOp,
     aiExprField,
     aiExprWindow,
     aiExprAjax,

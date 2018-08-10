@@ -31,6 +31,11 @@ export default {
         "type",
         "icon"
     ],
+    "pure": [
+        "key",
+        "text",
+        "id"
+    ],
     "steps": [
         "title",
         "key",
