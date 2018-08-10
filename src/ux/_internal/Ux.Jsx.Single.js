@@ -1,12 +1,13 @@
 import {Col, Form, Input, Row} from "antd";
 import React from "react";
-import Dg from "../Ux.Debug";
 import Immutable from "immutable";
 import Random from "../Ux.Random";
 import DFT from "./Ux.Jsx.Default";
 import Ai from "../ai/AI";
 import Prop from "../Ux.Prop";
 import Norm from "../Ux.Normalize";
+import E from '../Ux.Error';
+import U from 'underscore';
 
 const jsxHidden = (reference, name, initialValue) => {
     const {form} = reference.props;
@@ -36,7 +37,7 @@ const _getRender = (reference, render) => (each = {}) => {
  * @return {*}
  */
 const jsxItem = (reference, item = {}, render) => {
-    Dg.ensureRender(render, item);
+    E.fxTerminal(!U.isFunction(render), 10059, render, item);
     item = Immutable.fromJS(item).toJS();
     const jsxRender = _getRender(reference, render);
     // $button修正

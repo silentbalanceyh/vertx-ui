@@ -16,9 +16,8 @@ class Component extends React.PureComponent {
                         <Button key={button.key} className="top-button"
                                 type={button.type ? button.type : 'default'}
                                 disabled={button.disabled}
-                                onClick={button.onClick ? button.onClick : () => {
-                                    console.warn("[TopBar] Not implemented" + button.key);
-                                }}>
+                                onClick={button.onClick ? button.onClick :
+                                    () => Ux.E.fxWarning(true, 10017, "onClick")}>
                             {button.text}
                         </Button>
                     )
@@ -28,9 +27,7 @@ class Component extends React.PureComponent {
                                 <Button key={button.key}
                                         type={button.type ? button.type : 'default'}
                                         disabled={button.disabled}
-                                        onClick={button.onClick ? button.onClick : () => {
-                                            console.warn("[TopBar] Grouped Not implemented + " + button.key);
-                                        }}>
+                                        onClick={button.onClick ? button.onClick : () => Ux.E.fxWarning(true, 10017, "onClick")}>
                                     {button.text}
                                 </Button>
                             ))}

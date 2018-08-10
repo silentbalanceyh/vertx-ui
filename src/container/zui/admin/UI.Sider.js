@@ -32,7 +32,7 @@ class Component extends React.PureComponent {
                           "4164ffa9-cef7-4529-a7d7-0c6e4a231f86"
                       ]}
                       onClick={Op.fnRouting(this, dataUris)}>
-                    {dataArray.map(item => Ux.uiItemMenuTree({
+                    {dataArray.map(item => Ux.aiMenuTree({
                         ...item,
                         className: `menu-icon ${$_collapsed ? "menu-collapse" : ""}`
                     }))}

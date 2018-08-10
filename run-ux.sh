@@ -14,7 +14,7 @@
 # echo "[ ${FOLDER} ] 拷贝完成！"
 export TARGET_FOLDER=/Users/lang/Develop/Work/Source/ima-app/src
 # 北京一体化项目
-cp -rf src/environment/* ${TARGET_FOLDER}/environment/
+# cp -rf src/environment/* ${TARGET_FOLDER}/environment/
 cp -rf src/economy/* ${TARGET_FOLDER}/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/ux/

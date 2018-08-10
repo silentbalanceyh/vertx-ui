@@ -1,4 +1,5 @@
 import Ajax from './Ux.Ajax';
+import E from './Ux.Error';
 
 const ajaxFun = {
     get: Ajax.ajaxGet,
@@ -29,7 +30,7 @@ const asyncTrue = (config = {}, params = {}, callback = {}, mock = {}) => {
             }
         });
     } else {
-        console.error("[V] Async error happened.", config, params);
+        E.fxTerminal(true, 10034, config, params);
     }
 };
 /**
@@ -51,7 +52,7 @@ const asyncData = (config = {}, params = {}, callback = () => {
             }
         });
     } else {
-        console.error("[V] Async error happened.", config, params);
+        E.fxTerminal(true, 10034, config, params);
     }
 };
 /**

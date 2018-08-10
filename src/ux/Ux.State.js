@@ -33,10 +33,25 @@ const rdxSubmitting = (reference, loading = true) => {
     writeTree(reference, $state);
 };
 /**
+ * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
+ * @method toEffect
+ * @param state 传入的React状态
+ */
+const toEffect = (state = {}) => {
+    const inherits = {};
+    for (const key in state) {
+        if (key.startsWith("$_")) {
+            inherits[key] = state[key];
+        }
+    }
+    return inherits
+};
+/**
  * @class State
  * @description 回写状态树专用方法
  */
 export default {
     writeTree,
-    rdxSubmitting
+    rdxSubmitting,
+    toEffect
 }

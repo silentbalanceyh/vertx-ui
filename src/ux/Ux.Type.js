@@ -1,9 +1,8 @@
 import U from "underscore";
 import Immutable from "immutable";
-import Dg from "./Ux.Debug";
 import Prop from "./Ux.Prop";
 import {DataLabor} from "entity";
-import Error from './Ux.Error';
+import E from './Ux.Error';
 
 /**
  * 在数组中查找唯一元素
@@ -13,9 +12,9 @@ import Error from './Ux.Error';
  * @param value
  */
 const elementUnique = (data = [], field = "", value) => {
-    Dg.ensureType(data, U.isArray, "Array");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     let reference = data.filter(item => value === item[field]);
-    Dg.ensureLength(reference, 1);
+    E.fxTerminal(1 < reference.length, 10069, reference, 1);
     return 0 === reference.length ? undefined : reference[0];
 };
 
@@ -80,7 +79,7 @@ const elementConnect = (array = [], target = [], field, mapping = {}) => {
  * @param {String} field
  */
 const elementFirst = (data = [], field = "") => {
-    Dg.ensureType(data, U.isArray, "Array");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     if (0 < data.length) {
         if (field) {
             // 如果有field则返回对应字段的值
@@ -101,7 +100,7 @@ const elementFirst = (data = [], field = "") => {
  * @return {Array}
  */
 const elementFind = (data = [], filters) => {
-    Dg.ensureType(data, U.isArray, "Array");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     let reference = data;
     if (filters) {
         for (const field in filters) {
@@ -129,7 +128,7 @@ const elementFind = (data = [], filters) => {
  * @return {Array}
  */
 const elementMatch = (data = [], filters = {}) => {
-    Dg.ensureType(data, U.isArray, "Array");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     const itemMatch = (data = [], key, value) => data.filter(item => {
 
         return (value && item[key] && 0 <= item[key].indexOf(value));
@@ -150,8 +149,8 @@ const elementMatch = (data = [], filters = {}) => {
  */
 const itElement = (data = [], field = "", itemFun = () => {
 }) => {
-    Dg.ensureType(data, U.isArray, "Array");
-    Dg.ensureType(itemFun, U.isFunction, "Function");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
+    E.fxTerminal(!U.isFunction(itemFun), 10071, itemFun, "Function");
     data.forEach(item => {
         if (item && item[field]) {
             item[field] = itemFun(item[field], item);
@@ -185,8 +184,8 @@ const itData = (config = {}, consumer = () => {
     for (const key in config) {
         if (config.hasOwnProperty(key)) {
             const expr = config[key];
-            Error.fxTerminal("string" !== typeof expr, 10008, key, expr);
-            Error.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
+            E.fxTerminal("string" !== typeof expr, 10008, key, expr);
+            E.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
             const kv = expr.split(':');
             const value = kv[1].split('.');
             if (U.isFunction(consumer)) {
@@ -220,7 +219,7 @@ const itMatrix = (matrix = [], eachFun) => {
  * @return {Array}
  */
 const elementVertical = (data = [], field = "") => {
-    Dg.ensureType(data, U.isArray, "Array");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     let result = [];
     data.forEach(item => {
         if (item[field]) {
@@ -241,8 +240,8 @@ const elementVertical = (data = [], field = "") => {
  */
 const itFull = (data = [], items = {}, fieldFun = () => {
 }) => {
-    Dg.ensureType(data, U.isArray, "Array");
-    Dg.ensureType(fieldFun, U.isFunction, "Function");
+    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
+    E.fxTerminal(!U.isFunction(fieldFun), 10071, fieldFun, "Function");
     data.forEach(item => {
         // 遍历数组中的每个元素
         if (item) {

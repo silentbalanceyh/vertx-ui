@@ -104,6 +104,7 @@ const irClear = (reference = {}) => (event) => {
 
 const irFilter = (reference = {}, postFun) => {
     const {form} = reference.props;
+    Ux.E.fxTerminal(!form, 10020, form);
     if (form) {
         form.validateFieldsAndScroll((error, values) => {
             if (error) {
@@ -150,8 +151,6 @@ const irFilter = (reference = {}, postFun) => {
                 if (fnClose) fnClose();
             }
         });
-    } else {
-        console.error("[VI] Form Submitting met errors, reference is null.", form);
     }
 };
 const MESSAGE = {

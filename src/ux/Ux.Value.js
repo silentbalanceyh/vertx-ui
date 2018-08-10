@@ -1,10 +1,10 @@
 import moment from 'moment';
-import Dg from './Ux.Debug';
 import Debug from './Ux.Debug';
 import Immutable from "immutable";
 import U from "underscore";
 import Sorter from './Ux.Sorter'
 import Type from './Ux.Type';
+import E from './Ux.Error';
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -92,13 +92,11 @@ const convertTime = (value) => {
     if (value) {
         if (!moment.isMoment(value)) {
             value = moment(value);
-            if (!moment.isMoment(value)) {
-                console.error("[V] Convert 'value' to invalid 'Moment' object.");
-            }
+            E.fxTerminal(!moment.isMoment(value), 10028, value);
         }
         return value;
     } else {
-        console.error("[V] The 'value' is undefined, could not be converted.");
+        E.fxTerminal(true, 10028, value);
     }
 };
 /**
@@ -132,7 +130,7 @@ const mathDivision = (dividend, divisor) => {
     if (!isNaN(dividend) && !isNaN(divisor) && 0 !== divisor) {
         return dividend / divisor;
     } else {
-        console.info("[Math] dividend / divisor = ", dividend, divisor)
+        E.fxTerminal(true, 10029, dividend, divisor);
     }
 };
 /**
@@ -156,7 +154,7 @@ const valueDuration = (from, to, mode = 'day') => {
         to = convertTime(to);
         return moment(to).diff(from, mode);
     } else {
-        console.error("[V] Either 'from' or 'to' must not be undefined.");
+        E.fxTerminal(true, 10030, from, to, "NoNeed");
     }
 };
 /**
@@ -170,10 +168,10 @@ const valueDuration = (from, to, mode = 'day') => {
 const valueEndTime = (from, duration, mode = 'day') => {
     if (from && duration) {
         from = convertTime(from);
-        Dg.ensurePositive(duration);
+        E.fxTerminal(duration < 0, 10068, duration);
         return moment(from).add(duration, mode);
     } else {
-        console.error("[V] Either 'from' or 'duration' must not be undefined.")
+        E.fxTerminal(true, 10030, from, "NoNeed", duration);
     }
 };
 /**
@@ -187,10 +185,10 @@ const valueEndTime = (from, duration, mode = 'day') => {
 const valueStartTime = (to, duration, mode = 'day') => {
     if (to && duration) {
         to = convertTime(to);
-        Dg.ensurePositive(duration);
+        E.fxTerminal(duration < 0, 10068, duration);
         return moment(to).subtract(duration, mode);
     } else {
-        console.error("[V] Either 'to' or 'duration' must not be undefined.")
+        E.fxTerminal(true, 10030, "NoNeed", to, duration);
     }
 };
 /**

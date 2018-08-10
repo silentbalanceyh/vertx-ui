@@ -1,5 +1,6 @@
 import U from "underscore";
 import Types from "../Ux.Type";
+import E from '../Ux.Error';
 
 const _findChild = (item = {}, key, pkey, array = []) => {
     const pValue = item[key];
@@ -18,10 +19,9 @@ class Uarr {
     }
 
     static create(data = []) {
+        E.fxTerminal(!U.isArray(data), 10057, data);
         if (U.isArray(data)) {
             return new Uarr(data);
-        } else {
-            console.error("[Kid] The input data must be Array.");
         }
     }
 

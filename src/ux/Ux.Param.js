@@ -2,9 +2,11 @@ import U from 'underscore'
 import Immutable from 'immutable';
 import Logger from './Ux.Log'
 import Type from './Ux.Type'
+import E from './Ux.Error';
 
 const parseProp = (reference, path = "") => {
     const attrPath = path.split('.');
+    E.fxTerminal(2 !== attrPath.length, 10035, path);
     if (2 === attrPath.length) {
         const targetKey = attrPath[0];
         const dataObj = reference.props[`$${targetKey}`];
@@ -12,8 +14,6 @@ const parseProp = (reference, path = "") => {
             const to = attrPath[1];
             return dataObj._(to);
         }
-    } else {
-        console.error("[Param] Props support two path only");
     }
 };
 const parseCriteria = (reference, path = "") => {
@@ -39,7 +39,7 @@ const parseExpression = (reference, expr = "") => {
                         returnValue = value;
                     }
                 } else {
-                    console.warn("[Param] prefix will be ignored.", prefix);
+                    console.warn("[Parser] 前缀值prefix将会被忽略.", prefix);
                 }
             } else {
                 returnValue = expr;

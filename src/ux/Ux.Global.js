@@ -1,6 +1,7 @@
 import Store from './Ux.Store';
 import Cv from './Ux.Constant';
 import E from './Ux.Error';
+import Hoc from './Ux.Hoc'
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -41,16 +42,26 @@ const toLogout = () => {
  * @return {*}
  */
 const toRoute = (reference = {}, uri = "") => {
-    E.fxRouter(reference, ($router) => {
-        let target;
-        if (0 <= uri.indexOf(Cv['ROUTE'])) {
-            target = uri;
-        } else {
-            target = `/${Cv['ROUTE']}${uri}`;
-        }
-        target = target.replace(/\/\//g, '/');
-        $router.to(target);
-    });
+    E.fxTerminal(!uri, 10072, uri);
+    E.fxTerminal(!reference.hasOwnProperty("props")
+        || !reference.props.hasOwnProperty("$router"), 10004, reference);
+    const {$router} = reference.props;
+    let target;
+    if (0 <= uri.indexOf(Cv['ROUTE'])) {
+        target = uri;
+    } else {
+        target = `/${Cv['ROUTE']}${uri}`;
+    }
+    target = target.replace(/\/\//g, '/');
+    $router.to(target);
+};
+const toOriginal = (reference = {}) => {
+    const target = Hoc.toQueryParameter("target");
+    if (target) {
+        toRoute(reference, target);
+    } else {
+        toRoute(reference, Cv.ENTRY_ADMIN);
+    }
 };
 /**
  * 配合React Router执行登录控制，如果未登录则直接转发到登录界面
@@ -83,5 +94,7 @@ export default {
     // 注销
     toLogout,
     // 链接地址
-    toRoute
+    toRoute,
+    // 到原来地址
+    toOriginal,
 }

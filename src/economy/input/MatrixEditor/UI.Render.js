@@ -5,6 +5,7 @@ import Ux from 'ux';
 
 const onRemove = (reference, record, index) => (event) => {
     const state = reference.state;
+    Ux.E.fxTerminal(!state.source, 10052, state.source);
     if (state.source) {
         const data = state.source[index];
         const {config = {}} = reference.props;
@@ -17,8 +18,6 @@ const onRemove = (reference, record, index) => (event) => {
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
         Ux.valueOnChange(reference, {source})
-    } else {
-        console.error("[ZERO] Remove 'data' in state has not been initialized.");
     }
 };
 

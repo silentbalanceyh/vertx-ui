@@ -1,6 +1,7 @@
 import {message, Modal} from 'antd';
 import Prop from './Ux.Prop';
 import Expr from './Ux.Expr';
+import E from './Ux.Error';
 import U from 'underscore'
 
 const _captureKey = (reference, key) => {
@@ -110,7 +111,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
             return {fun, message};
         }
     } else {
-        console.error("[Zero] Core config key '_modal' missing in Hoc.");
+        E.fxTerminal(true, 10031, modal);
     }
 };
 /**
@@ -167,10 +168,9 @@ const showMessage = (reference, key, fnSuccess, params) => {
  */
 const fadeIn = (reference = {}) => {
     const {fnShow} = reference.props;
+    E.fxTerminal(!fnShow, 10032, fnShow);
     if (fnShow) {
         fnShow();
-    } else {
-        console.error("[Zero] 'fnShow' function missing in reference.props.");
     }
 };
 /**
@@ -181,10 +181,9 @@ const fadeIn = (reference = {}) => {
  */
 const fadeOut = (reference = {}) => {
     const {fnHide} = reference.props;
+    E.fxTerminal(!fnHide, 10033, fnHide);
     if (fnHide) {
         fnHide();
-    } else {
-        console.error("[Zero] 'fnHide' function missing in reference.props.");
     }
 };
 /**

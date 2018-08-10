@@ -262,9 +262,7 @@ const uiBtnPrimary = (fnClick = () => {
         {text}
     </Button>
 );
-const uiBtnHidden = (fnClick = () => {
-    console.info("Not Inject Event onClick.")
-}, id) => {
+const uiBtnHidden = (fnClick = () => Ux.E.fxTerminal(true, 10017, "onClick"), id) => {
     return (
         <Button id={id} key={id} onClick={fnClick}/>
     )
@@ -274,9 +272,8 @@ const uiBtnHiddens = (hidden = {}) => {
     if (0 < ids.length) {
         return (<div>
             {ids.map(id => (
-                <Button id={id} onClick={U.isFunction(hidden[id]) ? hidden[id] : () => {
-                    console.error(`[Zero] Inject function is invalid. id = ${id}`)
-                }}/>
+                <Button id={id} onClick={U.isFunction(hidden[id]) ? hidden[id] :
+                    () => Ux.E.fxTerminal(true, 10023, hidden[id], id)}/>
             ))}
         </div>)
     } else {

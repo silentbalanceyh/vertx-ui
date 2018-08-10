@@ -12,39 +12,39 @@ const verifyRooKey = (reference, key = "") => {
     const value = $hoc._(key);
     if (!value) {
         const name = $hoc.name();
-        return E.fxMessage(10001, name, key);
+        return E.fxMessageError(10001, name, key);
     }
 };
 
 const verifyQuery = (key, query) => {
     key = calcKey(key);
     if (!query) {
-        return E.fxMessage(10009, key, 'query');
+        return E.fxMessageError(10009, key, 'query');
     }
     if (!query.projection) {
-        return E.fxMessage(10009, `${key}.query`, 'projection')
+        return E.fxMessageError(10009, `${key}.query`, 'projection')
     }
     if (!U.isArray(query.projection)) {
-        return E.fxMessage(10010, `${key}.query.projection`, 'Array')
+        return E.fxMessageError(10010, `${key}.query.projection`, 'Array')
     }
     if (!query.pager) {
-        return E.fxMessage(10009, `${key}.query`, 'pager')
+        return E.fxMessageError(10009, `${key}.query`, 'pager')
     }
     if (!query.sorter) {
-        return E.fxMessage(10009, `${key}.query`, 'sorter')
+        return E.fxMessageError(10009, `${key}.query`, 'sorter')
     }
     if (!query.criteria) {
-        return E.fxMessage(10009, `${key}.query`, 'criteria')
+        return E.fxMessageError(10009, `${key}.query`, 'criteria')
     }
 };
 
 const verifyOptions = (key, options) => {
     key = calcKey(key);
     if (!options) {
-        return E.fxMessage(10009, key, 'options');
+        return E.fxMessageError(10009, key, 'options');
     }
     if (!options['tabs.list']) {
-        return E.fxMessage(10009, `${key}.options`, 'tabs.list')
+        return E.fxMessageError(10009, `${key}.options`, 'tabs.list')
     }
 };
 

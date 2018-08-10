@@ -93,7 +93,6 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = 
 const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config = {}) =>
     _uiForm(reference, config, column, values, (processed, $config = {}, form) => {
         // 两列修正
-        console.info(values, processed);
         const {window} = $config;
         if (0.5 === window) column = 2;
         const {$page} = reference.props;

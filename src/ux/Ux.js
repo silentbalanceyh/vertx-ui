@@ -12,7 +12,6 @@ import JSX from "./Ux.Jsx";
 import OP from "./Ux.Op";
 import SORTER from "./Ux.Sorter";
 import ICONS from "./Ux.Icon";
-import ANT from "./Ux.Ant";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
 import FORMAT from "./Ux.Format";
@@ -36,6 +35,7 @@ import Uson from "./structure/Ux.Uson";
 import E from './Ux.Error';
 
 export default {
+    // Page List专用
     ...LIST,
     // 专用打断
     ...TERMINAL,
@@ -76,8 +76,6 @@ export default {
     ...SORTER,
     // ICONS
     ...ICONS,
-    // ANT
-    ...ANT,
     // Normalize 标准化
     ...NORM,
     // 类型处理

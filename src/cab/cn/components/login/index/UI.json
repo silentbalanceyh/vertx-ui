@@ -47,29 +47,14 @@
             ],
             [
                 {
-                    "field": "$button",
-                    "optionJsx": {
-                        "style": {
-                            "textAlign": "left"
-                        }
+                    "metadata": "$button",
+                    "optionJsx.buttons": {
+                        "submit": "btnLogin,登录,$opLogin",
+                        "reset": "btnReset,重置,$opReset"
                     }
                 }
             ]
-        ],
-        "buttons": {
-            "fnLogin": {
-                "key": "btnLogin",
-                "type": "primary",
-                "style": {
-                    "marginRight": "10px"
-                },
-                "text": "登录"
-            },
-            "fnReset": {
-                "key": "btnReset",
-                "text": "重置"
-            }
-        }
+        ]
     },
     "_modal": {
         "success": {

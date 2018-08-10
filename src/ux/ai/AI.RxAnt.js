@@ -6,17 +6,16 @@ import Expr from './AI.Expr.String';
 import Random from "../Ux.Random";
 import Attributes from '../Ux.Attribute';
 import Uarr from '../structure/Ux.Uarr'
+import E from '../Ux.Error';
 
 const uniform = (item, callback) => {
-    if (!callback || !U.isFunction(callback)) {
-        console.error("[RxAnt] Input parameter 'callback' must be function.")
-    }
+    E.fxTerminal(!callback || !U.isFunction(callback), 10041, callback);
     if (U.isArray(item)) {
         item.forEach(each => callback(each))
     } else if ("object" === typeof item) {
         callback(item);
     } else {
-        console.error("[RxAnt] Input parameter 'item' must be Object/Array.")
+        E.fxTerminal(true, 10042, item);
     }
 };
 
@@ -63,13 +62,12 @@ const extractDatum = (reference, config = {}, filter = () => true) => {
     const {source} = parseDatum(config);
     if (source && "string" === typeof source) {
         const data = Prop.onDatum(reference, source);
+        E.fxTerminal(!U.isArray(data), 10043, source);
         if (U.isArray(data)) {
             options = data.filter(filter)
-        } else {
-            console.error(`[RxAnt] The 'source=${source}' data must be Array.`);
         }
     } else {
-        console.error("[RxAnt] The 'source' key of configuration is invalid.");
+        E.fxTerminal(true, 10044, source);
     }
     return options;
 };
@@ -117,8 +115,7 @@ class RxAnt {
         } else if ("string" === typeof config) {
             return {content: config};
         } else {
-            console.error("[RxAnt] Extract config 'config' type is invalid.");
-            return {content: "RxAnt Error occurs!"}
+            return {content: E.fxTerminal(true, 10045, config)};
         }
     }
 
@@ -141,7 +138,7 @@ class RxAnt {
             .tree("id", "pid")
             .to();
     }
-    
+
     static toOptions(reference, config = {}, filter = () => true) {
         let options = [];
         if (config.items) {

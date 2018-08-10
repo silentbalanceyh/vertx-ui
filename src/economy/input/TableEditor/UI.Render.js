@@ -5,6 +5,7 @@ import Immutable from 'immutable';
 
 const onAdd = (reference, index) => (event) => {
     const state = reference.state;
+    Ux.E.fxTerminal(!state.source, 10052, state.source);
     if (state.source) {
         const item = state.source;
         if (index === item.length) {
@@ -15,20 +16,17 @@ const onAdd = (reference, index) => (event) => {
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
         Ux.valueOnChange(reference, {source})
-    } else {
-        console.error("[ZERO] Add 'data' in state has not been initialized.");
     }
 };
 
 const onRemove = (reference, index) => (event) => {
     const state = reference.state;
+    Ux.E.fxTerminal(!state.source, 10052, state.source);
     if (state.source) {
         const item = state.source.filter((item, idx) => idx !== index);
         const source = Immutable.fromJS(item).toJS();
         reference.setState({source});
         Ux.valueOnChange(reference, {source})
-    } else {
-        console.error("[ZERO] Remove 'data' in state has not been initialized.");
     }
 };
 

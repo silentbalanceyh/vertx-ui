@@ -1,8 +1,5 @@
-import Dg from './Ux.Debug'
-import Prop from './Ux.Prop'
-import Op from './Ux.Op'
 import Cv from './Ux.Env'
-import Immutable from 'immutable'
+import E from './Ux.Error'
 
 /**
  * 通用属性读取相关信息
@@ -60,20 +57,6 @@ const toDatum = (props = {}, keys = []) => {
     return inherits;
 };
 /**
- * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
- * @method toEffect
- * @param state 传入的React状态
- */
-const toEffect = (state = {}) => {
-    const inherits = {};
-    for (const key in state) {
-        if (key.startsWith("$_")) {
-            inherits[key] = state[key];
-        }
-    }
-    return inherits
-};
-/**
  * 读取组件的全称，和Cab.json中的namespace进行配合读取当前组件的全名
  * @method toFullName
  * @param Component 被封装的组件
@@ -83,11 +66,11 @@ const toEffect = (state = {}) => {
  */
 const toFullName = (Component, Cab = {}, Name) => {
     // 参数严格检查
-    Dg.ensureArgs(Cab, "ns");
-    Dg.ensureNotNull(Name);
-    const fullname = Cab.ns + "/" + Name;
-    if (Component) Component.displayName = fullname;
-    return fullname;
+    E.fxTerminal(!Cab || !Cab.hasOwnProperty("ns"), 10061, Cab, "ns");
+    E.fxTerminal(!Name, 10062, Name);
+    const fullName = Cab['ns'] + "/" + Name;
+    if (Component) Component.displayName = fullName;
+    return fullName;
 };
 /**
  * 从Uri中读取Query Parameter查询参数
@@ -100,50 +83,6 @@ const toQueryParameter = (name = "") => {
     const r = window.location.search.substr(1).match(reg);
     if (r != null) return unescape(r[2]);
     return null;
-};
-/**
- * PageList组件专用继承方法
- * * fnShow:对话框弹出窗口
- * * fnHide:对话框关闭窗口
- * * fnOut:Redux专用写函数
- * * $dialog:对应Hoc中的_window，对话框参数
- * * $metadata:对应Hoc中的_pagelist, 页面专用元数据
- * * $query:当前页面的查询条件信息
- * @method toPageList
- * @param {React.PureComponent} reference React对应组件引用
- * @param {JSX} FormComponent 是否包含传入组件
- * @return {{}}
- */
-const toPageList = (reference = {}, FormComponent) => {
-    const inherit = {};
-    const {$op, $_show} = reference.state;
-    const {fnOut} = reference.props;
-    // 三个函数特殊属性
-    inherit.fnShow = $op.show(reference);
-    inherit.fnHide = $op.hide(reference);
-    inherit.fnOut = fnOut;
-    // 专用窗口处理
-    const dialog = Prop.fromHoc(reference, "window");
-    for (const key in dialog) {
-        if (dialog.hasOwnProperty(key)) {
-            dialog[key].onCancel = $op.hide(reference);
-            dialog[key].visible = $_show;
-            Op.connectButton(dialog[key]);
-        }
-    }
-    inherit.$dialog = dialog;
-    if (FormComponent) {
-        inherit.$component = FormComponent;
-    } else {
-        inherit.$component = false;
-    }
-    // 元数据
-    const metadata = Prop.fromHoc(reference, "pagelist");
-    inherit.$metadata = Immutable.fromJS(metadata).toJS();
-    inherit.$query = reference.state['$query'];
-    // 查询参数
-    inherit.$filters = reference.props['$filters'];
-    return inherit;
 };
 /**
  * 转换Less的风格文件，主要用于生成属性className和style中的backgroundImage
@@ -177,14 +116,12 @@ const toUniform = (props, ...keys) => {
  */
 export default {
     // PageList
-    toPageList,
     toFullName,
     // 继承专用属性
     toProp,
     toStyle,
     toDatum,
     toUniform,
-    toEffect,
     toQueryParameter,
     // 处理专用参数信息
 };

@@ -1,6 +1,6 @@
 import randomjs from 'random-js';
 import {v4} from 'uuid';
-import Dg from './Ux.Debug';
+import E from './Ux.Error';
 
 /**
  * 生成固定长度的随机字符串
@@ -9,7 +9,7 @@ import Dg from './Ux.Debug';
  * @return {String}
  */
 const randomString = (length) => {
-    Dg.ensureNotNull(length);
+    E.fxTerminal(!length, 10062, length);
     const engine = randomjs.engines.mt19937().autoSeed();
     return randomjs.string()(engine, length);
 };

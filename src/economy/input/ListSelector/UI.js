@@ -20,11 +20,10 @@ const uiPagination = (reference) => {
     pagination.total = $data.count;
     if (config.ajax && config.ajax.params) {
         const pager = config.ajax.params.pager;
+        Ux.E.fxTerminal(!pager, 10048, pager);
         if (pager) {
             pagination.pageSize = pager.size;
             pagination.current = pager.page;
-        } else {
-            console.error("[COA] Please provide 'pager' in parameter list.");
         }
     }
     return pagination;

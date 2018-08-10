@@ -32,6 +32,7 @@ const fnAdd = (reference = {}, tab) => (event) => {
 const fnEdit = (reference = {}) => (config, id) => (event) => {
     event.preventDefault();
     const tabConfig = reference.props['$tabs'];
+    Ux.E.fxTerminal(!tabConfig.edit, 10054, tabConfig);
     if (tabConfig.edit) {
         const {tabs = {}} = reference.state;
         const $tabs = Immutable.fromJS(tabs).toJS();
@@ -53,12 +54,11 @@ const fnEdit = (reference = {}) => (config, id) => (event) => {
         const state = {tabs: $tabs};
         if (activeKey) state.activeKey = activeKey;
         reference.setState(state);
-    } else {
-        console.error("[Ux] Error for 'edit' configuration.");
     }
 };
 const fnRemove = (reference = {}, key) => (config, id) => (event) => {
     event.preventDefault();
+    Ux.E.fxTerminal(!config.ajax, 10053, config);
     if (config.ajax) {
         // 加载数据处理
         const {$mockRemove} = reference.props;
@@ -84,8 +84,6 @@ const fnRemove = (reference = {}, key) => (config, id) => (event) => {
             if (key) state.activeKey = key;
             reference.setState(state);
         }
-    } else {
-        console.error("[Ajax] Ajax Config missing in delete operation.");
     }
 };
 const fnMove = (reference) => (activeKey) => reference.setState({activeKey});
