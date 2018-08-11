@@ -42,7 +42,8 @@ class Component extends React.PureComponent {
     render() {
         const {
             children, reference, $card = 'page-card',
-            $key = "page", $extra: ExtraComponent, $current
+            $key = "page",
+            $extra: ExtraComponent, $current
         } = this.props;
 
         // 左边按钮

@@ -99,9 +99,9 @@ const initCond = (reference = {}) => {
 const parseQuery = (reference = {}, $query) => {
     Logger.filters(reference, {
         input: $query,
-        query: reference.props.$query,
-        filters: reference.props.$filters,
-        cond: reference.props.$metadata ? reference.props.$metadata.cond : {}
+        query: reference.props['$query'],
+        filters: reference.props['$filters'],
+        cond: reference.props['$metadata'] ? reference.props['$metadata'].cond : {}
     });
     const queryData = initQuery(reference, $query);
     // 条件解析
@@ -124,7 +124,7 @@ const parseQuery = (reference = {}, $query) => {
         }
     });
     // 处理查询专用的$filters属性中的信息
-    const $filters = reference.props.$filters;
+    const $filters = reference.props['$filters'];
     Type.itObject($filters.to(), (key, value) => {
         // 包含cond则字段重组，默认是c字段
         const suffix = cond.hasOwnProperty(key) ? cond[key] : 'c';

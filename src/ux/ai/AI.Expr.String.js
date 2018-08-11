@@ -1,166 +1,51 @@
-import Op from '../Ux.Op';
-import Type from '../Ux.Type';
-import Value from '../Ux.Value';
 import U from 'underscore';
 import Immutable from 'immutable';
-import Parser from './AI.Expr.Parser';
 import ExprData from './AI.Expr';
+import ExprValue from './AI.Expr.Value'
+import Value from '../Ux.Value'
 import {v4} from 'uuid';
 
-const applyArray = (literal) => U.isArray(literal) ? literal : literal.replace(/ /g, '').split(',');
-const applyKey = (item = {}) => {
-    if (!item.hasOwnProperty('key')) {
-        item.key = v4();
-    }
-    return item;
-};
-const applyRules = (rules = []) => {
-    const processed = [];
-    rules.forEach(rule => {
-        if ("string" === typeof rule) {
-            const result = Parser.parseRule(rule);
-            if (result) {
-                processed.push(result);
-            }
-        } else {
-            processed.push(rule);
-        }
-    });
-    return processed;
-};
-const applyField = (item = {}) => {
-    if (item.hasOwnProperty('key')) {
-        delete item.key;
-    }
-    if (item.span) {
-        item.span = Value.valueInt(item.span);
-    }
-    if (item.optionConfig && item.optionConfig.rules) {
-        item.optionConfig.rules = applyRules(item.optionConfig.rules);
-    }
-    if (0 < item.field.indexOf('`')) {
-        // Filter专用语法解析
-        item.field = item.field.replace('`', ',');
-    }
-    // 解析ajax属性，ListSelector专用
-    const ajaxConfig = item.optionJsx && item.optionJsx.config ? item.optionJsx.config : {};
-    if (ajaxConfig && ajaxConfig.hasOwnProperty("ajax")) {
-        ajaxConfig.ajax = aiExprAjax(ajaxConfig.ajax);
-    }
-    return item;
-};
-
-const aiMetaColumn = (item = {}) => {
-    if (item.metadata) {
-        const {metadata, ...rest} = item;
-        const basic = parseItem(metadata, "column");
-        const options = applyTree(rest);
-        Object.assign(basic, options);
-        applyColumn(basic);
-        item = basic;
-    }
-    return item;
-};
-const applyColumn = (item = {}) => {
-    if (item.hasOwnProperty('key')) {
-        delete item.key;
-    }
-    if (item.hasOwnProperty("sorter")) {
-        item.sorter = Boolean(item.sorter);
-    }
-    return item;
-};
-const applyValue = (item = {}) => {
-    if (item.hasOwnProperty("key") && !item.hasOwnProperty("value")) {
-        item.value = item.key;
-    }
-    return item;
-};
-const applyConnect = (item = {}) => {
-    if (item.hasOwnProperty("connectId")) {
-        const connectId = item.connectId;
-        item.onClick = () => Op.connectId(connectId);
-        delete item.connectId;
-    }
-    return item;
-};
-const applyLoading = (item = {}, props) => {
-    const {$submitting} = props;
-    const submitting = $submitting.is() ? $submitting.to() : {};
-    item.loading = submitting.loading;
-    return item;
-};
-const applyKv = (item = {}, config = [], kvs = []) => {
-    if (kvs.length >= config.length) {
-        if (item.hasOwnProperty("$KV$")) {
-            for (let idx = config.length - 1; idx < kvs.length; idx++) {
-                const literal = kvs[idx];
-                Parser.parseTo(item, literal);
-            }
-            delete item.$KV$;
-        }
-    }
-    return item;
-};
-const applyStyle = (item = {}) => {
-    if (item.hasOwnProperty('style')) {
-        const literal = item.style;
-        if ("string" === typeof literal) {
-            const styleArr = literal.split(':');
-            const style = {};
-            style.fontSize = `${styleArr[0]}px`;
-            style.color = `${styleArr[1]}`;
-            item.style = style;
-        }
-    }
-    return item;
-};
-const applyItem = (item = {}, config = [], kvs = []) => {
-    let $item = Immutable.fromJS(item);
-    for (let idx = 0; idx < config.length; idx++) {
-        const name = config[idx];
-        if (kvs[idx]) {
-            if (0 < name.indexOf(".")) {
-                $item = $item.setIn(name.split('.'), kvs[idx]);
-            } else {
-                $item = $item.set(name, kvs[idx]);
-            }
-        }
-    }
-    return $item.toJS();
-};
-const applyTree = (item = {}) => {
-    let $item = Immutable.fromJS({});
-    Type.itObject(item, (field, value) => {
-        if (0 < field.indexOf(".")) {
-            $item = $item.setIn(field.split('.'), value);
-        } else {
-            $item = $item.set(field, value);
-        }
-    });
-    return $item.toJS();
-};
 const parseItem = (kvs = [], key) => {
     let item = {};
     if ("string" === typeof kvs || U.isArray(kvs)) {
-        kvs = applyArray(kvs);
+        kvs = ExprValue.applyArray(kvs);
         if (ExprData[key]) {
             const config = ExprData[key];
             // 基本属性解析
-            item = applyItem(item, config, kvs);
+            item = ExprValue.applyItem(item, config, kvs);
             // 补上key（无key的时候处理）
-            applyKey(item);
+            ExprValue.applyKey(item);
             // 检查connectId：Button专用，其他的不影响
-            applyConnect(item);
+            ExprValue.applyConnect(item);
             // style计算，所有组件通用
-            applyStyle(item);
+            ExprValue.applyStyle(item);
             // 额外的键值对
-            applyKv(item, config, kvs);
+            ExprValue.applyKv(item, config, kvs);
         }
     } else {
         item = Immutable.fromJS(kvs).toJS();
     }
     return item;
+};
+const parseAction = (jsx = {}) => {
+    ["bind"].forEach(field => {
+        if (jsx[field]) {
+            const binds = U.isArray(jsx[field]) ? jsx[field] : [];
+            const converted = [];
+            binds.forEach(item => {
+                let processed = null;
+                if ("string" === typeof item) {
+                    processed = (parseItem(item.split(','), "bind"));
+                } else {
+                    processed = (item);
+                }
+                if (!processed.id) processed.id = processed.key;
+                converted.push(processed);
+            });
+            jsx[field] = converted;
+        }
+    });
+    return jsx;
 };
 const _iterator = (array = [], callback, objectCallback = data => data) => {
     const items = [];
@@ -174,6 +59,47 @@ const _iterator = (array = [], callback, objectCallback = data => data) => {
         }
     });
     return items;
+};
+const applyField = (item = {}) => {
+    // field删除key信息，有field代替
+    if (item.hasOwnProperty('key')) {
+        delete item.key;
+    }
+    // span的数值处理
+    if (item.span) {
+        item.span = Value.valueInt(item.span);
+    }
+    // 验证规则处理
+    if (item.optionConfig && item.optionConfig.rules) {
+        item.optionConfig.rules = ExprValue.applyRules(item.optionConfig.rules);
+    }
+    // Filter专用字段语法，防止逗号冲突
+    if (0 < item.field.indexOf('`')) {
+        // Filter专用语法解析
+        item.field = item.field.replace('`', ',');
+    }
+    // 按钮专用处理
+    if (item.optionJsx) {
+        item.optionJsx = parseAction(item.optionJsx);
+    }
+    // 解析ajax属性，ListSelector专用
+    const ajaxConfig = item.optionJsx && item.optionJsx.config ? item.optionJsx.config : {};
+    if (ajaxConfig && ajaxConfig.hasOwnProperty("ajax")) {
+        ajaxConfig.ajax = aiExprAjax(ajaxConfig.ajax);
+    }
+    return item;
+};
+
+const aiMetaColumn = (item = {}) => {
+    if (item.metadata) {
+        const {metadata, ...rest} = item;
+        const basic = parseItem(metadata, "column");
+        const options = ExprValue.applyTree(rest);
+        Object.assign(basic, options);
+        ExprValue.applyColumn(basic);
+        item = basic;
+    }
+    return item;
 };
 const aiExprTitle = (item) => {
     // title专用解析器
@@ -208,7 +134,7 @@ const aiMetaField = (item = {}) => {
     if (item.metadata) {
         const {metadata, ...rest} = item;
         const basic = parseItem(metadata, "field");
-        const options = applyTree(rest);
+        const options = ExprValue.applyTree(rest);
         // 属性追加（不覆盖）
         const result = Value.assign(basic, options, 1);
         applyField(result);
@@ -241,7 +167,7 @@ const aiExprAjax = (ajax = {}) => {
             pager.page = Value.valueInt(pager.page);
             pager.size = Value.valueInt(pager.size);
         }
-        const lefts = applyTree(rest);
+        const lefts = ExprValue.applyTree(rest);
         // 只合并criteria
         item.params.criteria = lefts.params.criteria;
     }
@@ -255,20 +181,18 @@ const aiExpr = (literal = "") => parseItem(literal, "flag");
  * 顺序：dataIndex, title, $render, sorter
  */
 const aiExprColumn = (columns = []) =>
-    _iterator(columns, (values = []) => applyColumn(parseItem(values, "column")),
+    _iterator(columns, (values = []) => ExprValue.applyColumn(parseItem(values, "column")),
         aiMetaColumn);
 /**
  * 顺序：key, label, style
  */
 const aiExprOption = (options = []) =>
-    _iterator(options, (values = []) => parseItem(values, "option"), aiMetaOption).map(applyValue);
+    _iterator(options, (values = []) => parseItem(values, "option"), aiMetaOption).map(ExprValue.applyValue);
 
 const aiMetaOption = (item = {}) => {
     if (item.metadata) {
         let each = parseItem(item.metadata, "option");
-        if (item.items) {
-            each.items = aiExprOption(item.items);
-        }
+        if (item.items) each.items = aiExprOption(item.items);
         item = each;
     }
     return item;
@@ -277,16 +201,29 @@ const aiMetaOption = (item = {}) => {
  * 顺序：title, key, icon, description, status
  */
 const aiExprHelp = (steps = []) =>
-    _iterator(applyArray(steps), (values = []) => parseItem(values, "steps"))
-        .map(applyKey);
+    _iterator(ExprValue.applyArray(steps), (values = []) => parseItem(values, "steps"))
+        .map(ExprValue.applyKey);
 /**
  * 顺序：key, text, connectId, type, icon
  */
 const aiExprButton = (buttons = [], props = {}) =>
     _iterator(buttons, (values = []) => parseItem(values, "button"))
-        .map(applyConnect).map(item => applyLoading(item, props));
-const aiExprOp = (button = "") => parseItem(button, "pure");
+        .map(ExprValue.applyConnect).map(item => ExprValue.applyLoading(item, props));
+const aiExprOp = (button = "") => {
+    const splitted = button.split(',');
+    if (1 === splitted.length) {
+        const item = {};
+        item.id = button;
+        item.key = button;
+        item.text = "";
+        return item;
+    } else {
+        return parseItem(button, "bind");
+    }
+};
+const aiExprFilter = (filter = "") => parseItem(filter, "filter");
 export default {
+    aiExprFilter,
     aiExprHelp,
     aiExpr,
     aiExprColumn,

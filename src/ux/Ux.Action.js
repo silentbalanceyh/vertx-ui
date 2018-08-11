@@ -78,5 +78,6 @@ const rxData = (reference, prevProps) => {
  */
 export default {
     runSubmit,
-    rxInit
+    rxInit,
+    rxData
 }

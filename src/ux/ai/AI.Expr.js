@@ -1,4 +1,17 @@
 export default {
+    "filter": [
+        "source",
+        "field",
+        "type",
+        "cond"
+    ],
+    "bind": [
+        "key",
+        "text",
+        "id",
+        "type",
+        "$KV$"
+    ],
     "field": [
         "field",
         "optionItem.label",
@@ -31,11 +44,6 @@ export default {
         "type",
         "icon"
     ],
-    "pure": [
-        "key",
-        "text",
-        "id"
-    ],
     "steps": [
         "title",
         "key",
@@ -49,7 +57,8 @@ export default {
         "cancelText",
         "visible",
         "width",
-        "maskClosable"
+        "maskClosable",
+        "onOk"
     ],
     "ajax": [
         "method",

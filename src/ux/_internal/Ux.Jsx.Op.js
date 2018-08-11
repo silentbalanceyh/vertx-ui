@@ -5,6 +5,42 @@ import U from 'underscore';
 import Immutable from "immutable";
 import Value from "../Ux.Value";
 
+const _rtSubmit = (reference = {}, callback = {}) => {
+    const {form} = reference.props;
+    Ux.E.fxTerminal(!form, 10020, form);
+    Ux.E.fxTerminal(!callback.success, 10017, "success");
+    if (form) {
+        _rtState(reference);
+        form.validateFieldsAndScroll((error, values) => {
+            if (error) {
+                _rtState(reference, false);
+            } else {
+                const params = Immutable.fromJS(values).toJS();
+                params.language = Ux.Env['LANGUAGE'];
+                // 去掉undefined
+                Value.valueValid(params);
+                // 默认的fnFail函数
+                if (callback.success) {
+                    const executor = callback.success(values);
+                    if (Promise.prototype.isPrototypeOf(executor)) {
+                        // Promise Async
+                        executor.then(() => {
+                            if (!reference.isUnmount()) {
+                                _rtState(reference, false);
+                            }
+                        }).catch(_rtError(reference, callback.failure));
+                    } else {
+                        Ux.E.fxTerminal(true, 10078, "Non Promise");
+                        // Non Promise Mode
+                        // _rtState(reference, false);
+                    }
+                } else {
+                    _rtState(reference, false);
+                }
+            }
+        })
+    }
+};
 const _rtFun = (reference = {}, op) => {
     const {$op} = reference.state;
     // 前置验证
@@ -35,10 +71,10 @@ const _rtError = (reference = {}, failure) => (errors = {}) => {
     // 如果有自定义的failure函数，则调用failure
     if (U.isFunction(failure)) {
         failure(errors);
-        reference.setState({$loading: false});
+        _rtState(reference, false);
     } else {
         if (data.info) {
-            Ux.showError(reference, data.info, () => reference.setState({$loading: false}));
+            Ux.showError(reference, data.info, () => _rtState(reference, false));
         }
     }
 };
@@ -48,42 +84,30 @@ const _rtState = (reference, loading = true) => {
     Ux.rdxSubmitting(reference, loading);
 };
 
-const rtSubmit = (reference = {}, success, failure) => _rtSubmit(reference, {success, failure});
-
-const _rtSubmit = (reference = {}, callback = {}) => {
+const _rxClick = (reference, item = {}) => {
+    const {$op = {}} = reference.state;
+    Ux.E.fxTerminal(!U.isFunction($op[item.key]), 10077, $op, item.key);
+    // 带提交的直接函数
     const {form} = reference.props;
     Ux.E.fxTerminal(!form, 10020, form);
-    Ux.E.fxTerminal(!callback.success, 10017, "success");
-    if (form) {
-        _rtState(reference);
-        form.validateFieldsAndScroll((error, values) => {
-            if (error) {
-                _rtState(reference, false);
-            } else {
-                const params = Immutable.fromJS(values).toJS();
-                params.language = Ux.Env['LANGUAGE'];
-                // 去掉undefined
-                Value.valueValid(params);
-                // 默认的fnFail函数
-                if (callback.success) {
-                    const executor = callback.success(values);
-                    if (Promise.prototype.isPrototypeOf(executor)) {
-                        // Promise Async
-                        executor.then(() => {
-                            if (!reference.isUnmount()) {
-                                _rtState(reference, false);
-                            }
-                        }).catch(_rtError(reference, callback.failure));
-                    } else {
-                        _rtState(reference, false);
+    const fnExecutor = $op[item.key](reference);
+    return (event) => {
+        event.preventDefault();
+        if ("DIRECT" === item["submit"]) {
+            if (form) {
+                form.validateFieldsAndScroll((error, values) => {
+                    if (!error) {
+                        fnExecutor(values);
                     }
-                } else {
-                    _rtState(reference, false);
-                }
+                })
             }
-        })
-    }
+        } else {
+            // 纯函数
+            fnExecutor(event);
+        }
+    };
 };
+const rtSubmit = (reference = {}, success, failure) => _rtSubmit(reference, {success, failure});
 /**
  * Ant Form的提交专用按钮，其中会执行Ant Form的函数
  * metadata = {
@@ -115,7 +139,8 @@ const rtRet = (reference, metadata = {}) => {
 const _rtJsx = (reference, $op = {}, show = false) =>
     Object.keys($op).filter(key => !!key).filter(key => U.isFunction($op[key]))
         .map(key => <Button id={key} key={key}
-                            onClick={$op[key](reference)} className={show ? "" : "ux-hidden"}/>);
+                            onClick={$op[key](reference)}
+                            className={show ? "" : "ux-hidden"}/>);
 const rtInherit = (reference, show = false) => {
     const {$op = {}} = reference.props;
     return _rtJsx(reference, $op, show);
@@ -124,26 +149,41 @@ const rtBind = (reference, show = false) => {
     const {$op = {}} = reference.state;
     return _rtJsx(reference, $op, show);
 };
+const rtDialog = (reference, jsx = {}) => {
+    const bind = jsx.bind;
+    if (!U.isArray(bind)) return false;
+    return bind.map(item => <Button {...item} onClick={_rxClick(reference, item)} className="ux-hidden"/>)
+};
 const rtNorm = (reference, jsx = {}) => {
     const buttons = jsx.buttons;
     Ux.E.fxTerminal(!buttons.hasOwnProperty("submit"), 10074, "submit");
     // 提交按钮
     const item = Ux.aiExprOp(buttons.submit);
     const reset = buttons.reset ? Ux.aiExprOp(buttons.reset) : false;
+    if (!item.id) item.id = item.key;
+    if (!reset.id) reset.id = reset.key;
+    // 构造配置
+    const fnConfig = (type, item) => ({
+        type: type, key: item.key, text: item.text, op: item.id, id: item.id
+    });
     return (
         <span>
-            {rtAnt(reference,
-                {
-                    type: "primary", key: item.key,
-                    text: item.text, op: item.id
-                })}
+            {rtAnt(reference, fnConfig("primary", item))}
             &nbsp;&nbsp;&nbsp;&nbsp;
-            {reset ? rtRet(reference, {
-                type: "default", key: reset.key,
-                text: reset.text, op: reset.id
-            }) : false}
+            {reset ? rtRet(reference, fnConfig("default", reset)) : false}
         </span>
     );
+};
+const rtPure = (reference, jsx = {}) => {
+    const {onClick, text, type = "primary", ...rest} = jsx;
+    Ux.E.fxTerminal(!onClick, 10017, onClick);
+    let executor = U.isFunction(onClick) ?
+        onClick : () => Ux.E.fxTerminal(true, 10017, onClick);
+    return (
+        <Button {...rest} onClick={executor} type={type}>
+            {text ? text : false}
+        </Button>
+    )
 };
 // rx - Reactive Action
 /**
@@ -167,12 +207,16 @@ const rtLink = (reference, metadata = {}) => {
     )
 };
 export default {
+    // 纯按钮
+    rtPure,
     // 重置按钮专用
     rtRet,
     // Ant Design标准Form按钮
     rtAnt,
     // React Router按钮
     rtLink,
+    // 窗口上的按钮，不带loading效果的纯按钮
+    rtDialog,
     // 自定义组件按钮，$op从props中出来，一般来自于父组件，默认隐藏
     rtInherit,
     // 自定义组件按钮，$op从state中出来，一般来源于当前组件的bind方法

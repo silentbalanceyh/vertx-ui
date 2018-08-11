@@ -35,6 +35,7 @@ const jsxLayout = (field, attr = "span") => (item = {}, value) => {
     item.optionItem[field] = {};
     item.optionItem[field][attr] = Value.valueInt(value);
 };
+const itemValue = (field) => (item = {}, value) => item[field] = value;
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
@@ -47,7 +48,9 @@ const PARSER = {
     labelSpan: jsxLayout("labelCol"),
     wrapperSpan: jsxLayout("wrapperCol"),
     allowClear: jsxBoolean("allowClear"),
-    sorter
+    sorter,
+    // 自定义属性
+    _submit: itemValue("submit")
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');
