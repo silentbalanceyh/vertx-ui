@@ -113,7 +113,13 @@ const rxFilter = (reference = {}) => (value, event) => {
     if (value) {
         search.forEach(term => filters[term] = value);
     }
-    Object.assign($query.criteria, filters);
+    if (!$query.criteria) {
+        $query.criteria = {};
+    }
+    if (0 < search.length && 0 < Object.keys(filters).length) {
+        $query.criteria[""] = true;
+        $query.criteria["$2"] = filters;
+    }
     Ux.writeTree(reference, {
         "grid.query": $query,
         "grid.list": undefined

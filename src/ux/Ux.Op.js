@@ -4,6 +4,36 @@ import E from './Ux.Error';
 import U from 'underscore'
 
 /**
+ * 【高阶函数：三阶】用于显示对话框
+ * @method onShow
+ * @param execFun 二阶执行函数
+ * @param effectKey 效果key
+ * @return {function(*=): Function}
+ */
+const onShow = (execFun, effectKey) => (reference) => (event) => {
+    const state = {};
+    state[effectKey] = true;
+    reference.setState(state);
+    if (execFun) {
+        execFun(event, reference);
+    }
+};
+/**
+ * 【高阶函数：三阶】用于隐藏对话框
+ * @method onHide
+ * @param execFun 二阶执行函数
+ * @param effectKey 效果key
+ * @return {function(*=): Function}
+ */
+const onHide = (execFun, effectKey) => (reference) => (event) => {
+    const state = {};
+    state[effectKey] = false;
+    reference.setState(state);
+    if (execFun) {
+        execFun(event, reference);
+    }
+};
+/**
  *
  * componentDidUpdate中的List专用生命周期函数
  * @method cycleUpdatePageList
@@ -102,9 +132,13 @@ const connectId = (id) => {
  * @description 操作专用类
  */
 export default {
+    // 弹窗专用
+    onShow,
+    onHide,
     // 更新
     cycleUpdatePageList,
     cycleUpdateForm,
+    cycleDestoryForm,
     // 连接
     connectButton,
     connectId,

@@ -73,6 +73,17 @@ const hookerItem = (item = {}, values = {}, rowConfig = {}) => {
     _aiRowConfig(item, rowConfig);
 };
 
+const hookerButton = (item = {}) => {
+    if ("$button" === item.field) {
+        if (!item.optionJsx) item.optionJsx = {};
+        item.optionJsx.hidden = !!item.hidden;
+        // Button专用注入
+        let renderKey = item.render;
+        if (!renderKey) renderKey = 'aiAction';
+        return Ai[renderKey];
+    }
+};
+
 const hookerRender = (item, renders = {}, layout, refenrece) => {
         // 如果无规则，则省略onFocus/onBlur
         _aiValidator(item, refenrece);
@@ -85,15 +96,9 @@ const hookerRender = (item, renders = {}, layout, refenrece) => {
         if (!fnRender) {
             // 如果item中存在holder属性
             if (item.field.startsWith("$")) {
-                // 特殊Op注入
-                if ("$button" === item.field) {
-                    // Button专用注入
-                    let renderKey = item.render;
-                    if (!renderKey) renderKey = 'aiAction';
-                    fnRender = Ai[renderKey];
-                }
+                // 特殊Op注入, 如果是$button则触发特殊处理
+                fnRender = hookerButton(item);
             } else {
-                // 如果是$button则触发特殊处理
                 if (!item.hasOwnProperty('holder')) {
                     // 设置item中的render属性
                     let renderKey = item.render;

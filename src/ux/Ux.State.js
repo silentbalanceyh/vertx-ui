@@ -32,6 +32,7 @@ const rdxSubmitting = (reference, loading = true) => {
     const $state = Immutable.fromJS(state).toJS();
     writeTree(reference, $state);
 };
+const rdxReject = (message) => Promise.reject({data: {info: message}});
 /**
  * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
  * @method toEffect
@@ -53,5 +54,6 @@ const toEffect = (state = {}) => {
 export default {
     writeTree,
     rdxSubmitting,
+    rdxReject,
     toEffect
 }

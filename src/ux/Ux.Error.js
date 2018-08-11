@@ -76,7 +76,14 @@ const fnError = {
     10071: (input, expected) => `[ ERR-10071 ] 参数类型检查失败，期望${expected}，当前数据：${input}`,
     10072: (uri) => `[ ERR-10072 ] (Rt) 您要重定向的页面地址不可为空，uri = ${uri}`,
     10073: ($op) => `[ ERR-10073 ] (Rt) 您正在提取绑定的 "$op"，当前React组件中 reference.state.$op非法。${$op}`,
-    10074: (key) => `[ ERR-10074 ] (Rt) 您调用了"rtNorm"标准化按钮，但您的配置"optionJsx.buttons"中缺少${key}。`
+    10074: (key) => `[ ERR-10074 ] (Rt) 您调用了"rtNorm"标准化按钮，但您的配置"optionJsx.buttons"中缺少${key}。`,
+    10075: (bind) => `[ ERR-10075 ] (Rt) 您使用了"bind"中的source字段，该字段只能是"state"或"prop"两个值。${bind}`,
+    10076: (mode) => `[ ERR-10076 ] (AI) 您目前使用的按钮渲染模式为：${mode}。`,
+    10077: ($op, key) => `[ ERR-10077 ] (Rt) 正在从 "$op" 中提取 key=${key} 的函数，该函数不存在！`,
+    10078: (flow) => `[ ERR-10078 ] (Rt) 您正在调用内置函数"_rtSubmit"，您在使用分支：-- ${flow}`,
+    10079: (reference) => `[ ERR-10079 ] (Web) 父组件"reference"引用未传入。reference = ${reference}`,
+    10080: (validation) => `[ ERR-10080 ] (Web) 当前配置中需要"validation"，当前配置丢失：validation = ${validation}`,
+    10081: (config, linker) => `[ ERR-10081 ] (Web) 链接最终的数据成功。配置：${typeof config}，数据为：${typeof linker}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {
@@ -93,25 +100,16 @@ const _fxContinue = (cond, callback) => {
 };
 
 const fxFailure = (code, ...args) => {
-    const message = fxMessageError.apply(this, [code].concat(args));
+    const message = fxMessage.apply(this, [console.error, code].concat(args));
     console.error(message);
     return Terminal.fxError(message);
 };
 
-const fxMessageError = (code, ...args) => {
+const fxMessage = (executor, code, ...args) => {
     const fn = fnError[code];
     if (U.isFunction(fn)) {
         const message = fn.apply(this, args);
-        console.error(message + " !!!", args.filter(item => !U.isFunction(item)));
-        return message;
-    }
-};
-
-const fxMessageWarn = (code, ...args) => {
-    const fn = fnError[code];
-    if (U.isFunction(fn)) {
-        const message = fn.apply(this, args);
-        console.warn(message + " !!!", args.filter(item => !U.isFunction(item)));
+        executor.apply(this, [message].concat(args.filter(item => !U.isFunction(item))));
         return message;
     }
 };
@@ -123,16 +121,22 @@ export default {
     fxTerminal: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            return fxMessageError.apply(this, [code].concat(args))
+            return fxMessage.apply(this, [console.error, code].concat(args))
         }
     },
     fxWarning: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            return fxMessageWarn.apply(this, [code].concat(args))
+            return fxMessage.apply(this, [console.warn, code].concat(args))
         }
     },
-    fxMessageError,
+    fxInfo: (fnCond, code, ...args) => {
+        const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
+        if (checked) {
+            return fxMessage.apply(this, [console.info, code].concat(args))
+        }
+    },
+    fxMessageError: (code, ...args) => fxMessage.apply(this, [console.error, code].concat(args)),
     fxFailure,
     fxOut: (reference = {}, callback) => _fxTerminal(!!reference && reference.props, () => {
         const {fnOut} = reference.props;

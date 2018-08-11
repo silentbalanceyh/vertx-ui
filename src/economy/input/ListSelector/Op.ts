@@ -21,15 +21,13 @@ const fnChange = (reference: any = {}) => (pagination: any, filters: any, sorter
 
 const fnParams = (reference: any) => {
     const {config = {}} = reference.props;
+    Ux.E.fxTerminal(!config.ajax, 10053, config);
     if (config.ajax) {
-        const ref = reference.props.reference;
+        const ref = Ux.onReference(reference, 1);
+        Ux.E.fxTerminal(!ref, 10079, ref);
         if (ref) {
             return Ux.parseAjax(ref, config.ajax.params);
-        } else {
-            console.error("[COA] Parent 'reference' missing.");
         }
-    } else {
-        console.error("[COA] 'ajax' configuration missing.")
     }
 };
 
@@ -60,7 +58,7 @@ const fnSelect = (reference: any = {}) => (event: any) => {
                 .keep(Object.keys(config.linker))
                 .convert(config.linker)
                 .date(config.linkerDate).to();
-            console.info("[COA] Select 'linker' is:", values);
+            Ux.E.fxInfo(true, 10081, config.linker, values);
             Ux.formHits(ref, values);
             const {fnCallback} = config;
             if (fnCallback) {
@@ -69,10 +67,9 @@ const fnSelect = (reference: any = {}) => (event: any) => {
         }
         reference.setState({$visible: false})
     } else {
+        Ux.E.fxTerminal(!config.validation, 10080, config.validation);
         if (config.validation) {
             Ux.showError(ref, config.validation);
-        } else {
-            console.error("[COA] Missed 'validation' configuration for selector.")
         }
     }
 };
