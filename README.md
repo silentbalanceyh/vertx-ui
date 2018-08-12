@@ -64,6 +64,8 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [UI0018 - Table中的Column](/document/2-kai-fa-wen-dang/ui0018-deng-5f55-zhu-xiao-tiao-zhuan.md)
 * [UI0020 - 按钮提交代码](/document/2-kai-fa-wen-dang/ui0020-an-niu-ti-jiao-dai-ma.md)
 * [UI0021 - rt按钮渲染代码](/document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma.md)
+  * [UI0021-1 - rtLink（重定向专用按钮）](/document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-1-rtlink.md)
+  * [UI0021-4 - aiAction（自动渲染）](/document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-4-aiactionff08-zi-dong-xuan-ran-ff09.md)
 
 ### 自定义组件
 
