@@ -31,6 +31,11 @@
       * [UI0021-2 - rtRet（重置按钮专用）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-2-rtretff08-zhong-zhi-an-niu-zhuan-yong-ff09.md)
       * [UI0021-3 - rtPure（纯按钮处理）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-3-rtpureff08-chun-an-niu-chu-li-ff09.md)
       * [UI0021-4 - aiAction（自动渲染）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-4-aiactionff08-zi-dong-xuan-ran-ff09.md)
+      * [UI0021-5 - rtBind（全绑定按钮）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-5-rxbindff08-quan-bang-ding-an-niu-ff09.md)
+      * UI0021-6 - rtAnt（全提交专用按钮）
+      * UI0021-7 - rtDialog（遮罩窗口提交按钮）
+      * UI0021-8 - rtInherit（父组件传入绑定按钮）
+      * UI0021-9 - rtNorm（标准提交/重置）
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
     * [UT0002 - storybook可重用组件文档](document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)
