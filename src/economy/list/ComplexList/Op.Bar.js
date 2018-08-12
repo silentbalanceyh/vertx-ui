@@ -129,7 +129,10 @@ const renderSubmit = (reference) => {
     const options = Init.readOption(reference);
     const state = reference.state;
     const {view, key} = state;
-    const opDeleted = options[`op.${view}.delete`];
+    let opDeleted = true;
+    if (options.hasOwnProperty(`op.${view}.delete`)) {
+        opDeleted = options[`op.${view}.delete`];
+    }
     // 编辑按钮
     const editAttrs = {};
     editAttrs.icon = "save";
@@ -149,7 +152,7 @@ const renderSubmit = (reference) => {
     return "list" !== view ? (
         <Button.Group>
             <Button {...editAttrs}/>
-            {"edit" === view && opDeleted ? (
+            {("edit" === view && opDeleted) ? (
                 <Popconfirm title={options['confirm.delete']}
                             onConfirm={() => Act.rxDeleteDetail(reference, key)}>
                     <Button icon={"delete"} type={"danger"}/>
