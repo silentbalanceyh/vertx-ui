@@ -129,16 +129,33 @@ const renderSubmit = (reference) => {
     const options = Init.readOption(reference);
     const state = reference.state;
     const {view, key} = state;
+    const opDeleted = options[`op.${view}.delete`];
+    // 编辑按钮
+    const editAttrs = {};
+    editAttrs.icon = "save";
+    editAttrs.onClick = renderButton(reference);
+    if (options["op.connect.edit"]) {
+        editAttrs.className = "ux-hidden";
+        editAttrs.id = options["op.connect.edit"];
+    }
+    // 重置按钮
+    const resetAttrs = {};
+    resetAttrs.icon = "reload";
+    resetAttrs.onClick = renderButton(reference, true);
+    if (options["op.connect.reset"]) {
+        resetAttrs.className = "ux-hidden";
+        resetAttrs.id = options["op.connect.reset"];
+    }
     return "list" !== view ? (
         <Button.Group>
-            <Button icon={"save"} onClick={renderButton(reference)}/>
-            {"edit" === view ? (
+            <Button {...editAttrs}/>
+            {"edit" === view && opDeleted ? (
                 <Popconfirm title={options['confirm.delete']}
                             onConfirm={() => Act.rxDeleteDetail(reference, key)}>
                     <Button icon={"delete"} type={"danger"}/>
                 </Popconfirm>
             ) : false}
-            <Button icon={"reload"} onClick={renderButton(reference, true)}/>
+            <Button {...resetAttrs}/>
         </Button.Group>
     ) : false
 };

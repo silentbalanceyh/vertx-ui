@@ -37,7 +37,7 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
             params.sigma = $app._("sigma");
         }
         params.active = !!values.active;
-        if ($inited) params.key = $inited.key;
+        if ($inited && $inited.key) params.key = $inited.key;
         Value.valueValid(params);
         if (fnSuccess && U.isFunction(fnSuccess)) {
             const {fnMock} = reference.props;

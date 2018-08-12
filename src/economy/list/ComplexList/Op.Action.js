@@ -43,7 +43,7 @@ const stateEditTab = (reference, id, params) => {
 };
 const rxAdd = (reference) => (event) => {
     event.preventDefault();
-    const view = Init.stateView("add");
+    const view = Init.stateView("add", undefined, reference);
     const tabs = stateAddTab(reference);
     reference.setState({tabs, ...view});
 };
@@ -61,8 +61,13 @@ const rxEdit = (reference, id) => {
         record = Immutable.fromJS(record).toJS();
         $self.setState({record});
         const tabs = stateEditTab($self, id, data);
-        const view = Init.stateView("edit", id);
+        const view = Init.stateView("edit", id, reference);
         $self.setState({tabs, ...view});
+        // rxView函数的触发
+        const {rxEditPost} = reference.props;
+        if (rxEditPost) {
+            rxEditPost(data, id);
+        }
     })
 };
 
@@ -80,7 +85,7 @@ const rxDeleteDetail = (reference, id) => {
         tabs = Immutable.fromJS(tabs).toJS();
         tabs.items = tabs.items.filter(item => id !== item.key);
         tabs.activeKey = tabs.items[0].key;
-        const view = Init.stateView("list");
+        const view = Init.stateView("list", undefined, reference);
         reference.setState({tabs, ...view, record});
         Ux.writeTree(reference, {
             "grid.list": undefined
@@ -100,7 +105,7 @@ const rxClose = (reference, item) => () => {
     tabs.items = tabs.items.filter(each => each.key !== item.key);
     tabs.activeKey = tabs.items[0].key;
     // 计算view
-    const view = Init.stateView("list");
+    const view = Init.stateView("list", undefined, reference);
     reference.setState({tabs, ...view});
     // 写状态树，重新加载List
     Ux.writeTree(reference, {"grid.list": undefined})

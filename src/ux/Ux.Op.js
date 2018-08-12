@@ -35,8 +35,8 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
 };
 
 const onDialog = (key) => ({
-    show: onHide(null, key),
-    hide: onShow(null, key)
+    show: onShow(null, key),
+    hide: onHide(null, key)
 });
 /**
  *

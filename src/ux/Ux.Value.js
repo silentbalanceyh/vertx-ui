@@ -66,7 +66,11 @@ const valueAppend = (item = {}, field = "", value) => {
 };
 
 const SEARCHERS = {
-    "BOOL": (value) => Boolean(value)
+    // Bool值
+    "BOOL": (value) => Boolean(value),
+    // 集合值
+    "ENUM": (value) => value.split('`'),
+    "OPERATOR": (value) => "AND" === value
 };
 
 const valueSearch = (config = {}, data = {}) => {

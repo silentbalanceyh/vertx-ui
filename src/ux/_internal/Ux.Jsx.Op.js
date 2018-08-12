@@ -127,10 +127,14 @@ const rtAnt = (reference, metadata = {}) => {
     );
 };
 const rtRet = (reference, metadata = {}) => {
-    const {$loading = false} = reference.state;
+    const {$loading = false, $op = {}} = reference.state;
     const {text, ...rest} = metadata;
+    const fnReset = $op[metadata.id];
     return (
-        <Button onClick={() => Ux.formReset(reference)}
+        <Button onClick={U.isFunction(fnReset) ? (event) => {
+            Ux.formReset(reference);
+            fnReset(reference)(event);
+        } : () => Ux.formReset(reference)}
                 {...rest} loading={$loading}>
             {text ? text : false}
         </Button>
