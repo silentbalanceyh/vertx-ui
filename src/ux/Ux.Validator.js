@@ -46,7 +46,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
             // 基本条件
             const field = rule.field;
             parameters[field] = value;
-            const {$key} = refereuce.props;
+            const {key:$key} = refereuce.props.$inited;
             if ($key) {
                 // 更新Mode
                 const updateKey = `key,<>`;

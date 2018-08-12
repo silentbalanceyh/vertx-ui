@@ -33,6 +33,11 @@ const onHide = (execFun, effectKey) => (reference) => (event) => {
         execFun(event, reference);
     }
 };
+
+const onDialog = (key) => ({
+    show: onHide(null, key),
+    hide: onShow(null, key)
+});
 /**
  *
  * componentDidUpdate中的List专用生命周期函数
@@ -106,7 +111,7 @@ const cycleUpdateForm = (props = {}, prevProps = {}) => {
  * @method connectButton
  * @param dialog 传入的dialog窗口配置
  */
-const connectButton = (dialog = {}) => {
+const connectDialog = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
         const key = Immutable.fromJS(dialog).toJS();
@@ -135,11 +140,12 @@ export default {
     // 弹窗专用
     onShow,
     onHide,
+    onDialog,
     // 更新
     cycleUpdatePageList,
     cycleUpdateForm,
     cycleDestoryForm,
     // 连接
-    connectButton,
+    connectButton: connectDialog,
     connectId,
 }

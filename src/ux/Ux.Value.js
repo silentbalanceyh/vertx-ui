@@ -65,18 +65,26 @@ const valueAppend = (item = {}, field = "", value) => {
     }
 };
 
+const SEARCHERS = {
+    "BOOL": (value) => Boolean(value)
+};
+
 const valueSearch = (config = {}, data = {}) => {
     // 查找根节点
     const result = {};
     Type.itData(config, (field, p, path) => {
-        const propName = `$${p}`;
-        if (data[propName]) {
-            const dataObject = data[propName];
-            const value = dataObject._(path);
-            if (value) {
-                result[field] = value;
-            } else {
-                console.info(`[ Ux ] 检索节点：${propName}，检索路径：${path}，值：${value}`);
+        if (SEARCHERS.hasOwnProperty(p)) {
+            result[field] = SEARCHERS[p](path[0]);
+        } else {
+            const propName = `$${p}`;
+            if (data[propName]) {
+                const dataObject = data[propName];
+                const value = dataObject._(path);
+                if (value) {
+                    result[field] = value;
+                } else {
+                    console.info(`[ Ux ] 检索节点：${propName}，检索路径：${path}，值：${value}`);
+                }
             }
         }
     });

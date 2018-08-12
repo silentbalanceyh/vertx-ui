@@ -1,11 +1,22 @@
-import {Breadcrumb, Menu} from "antd";
+import {Breadcrumb, Collapse, Menu, Steps, Tabs} from "antd";
+import {ContextMenu, MenuItem} from "react-contextmenu";
 import React from "react";
 import {Link} from "react-router-dom";
 import Ux from "ux";
+import U from 'underscore';
 import _Icon from "../Ux.Icon";
 
 const SubMenu = Menu.SubMenu;
 
+const aiElement = (children, index, ...args) => {
+    if (undefined === index) {
+        return children;
+    } else {
+        return U.isFunction(children[index])
+            ? children[index].apply(this, [].concat(args))
+            : children[index];
+    }
+};
 const _buildLink = (item = {}, $router) =>
     item.uri ? (
         <Link to={Ux.aiUri(item, $router)} className={item.className}>
@@ -29,7 +40,7 @@ const aiBreadcrumb = (items = [], rest = {}, config = {}) => (
         ))}
     </Breadcrumb>
 );
-const aiTopMenu = (menus = [], rest = {}, config = {}) => (
+const aiMenuTop = (menus = [], rest = {}, config = {}) => (
     <Menu className="top-menu" onClick={config.onClick} {...rest}>
         {menus.map(item => item.divide ? (
             <Menu.Divider key={item.key}/>
@@ -52,8 +63,51 @@ const aiMenuTree = (item = {}, rest = {}, config = {}) => (
         </Menu.Item>
     )
 );
+const aiTabs = (items = [], rest = {}, ...children) => (
+    <Tabs {...rest}>
+        {items.map((item, index) => (
+            <Tabs.TabPane {...item}>
+                {aiElement(children, index)}
+            </Tabs.TabPane>
+        ))}
+    </Tabs>
+);
+const aiCollapse = (items = [], rest = {}, ...children) => (
+    <Collapse {...rest}>
+        {items.map((item, index) => (
+            <Collapse.Panel {...item}>
+                {aiElement(children, index)}
+            </Collapse.Panel>
+        ))}
+    </Collapse>
+);
+const aiMenuContext = (items = [], rest = {}) => (
+    <ContextMenu className="context-menu" {...rest}>
+        {items.map(item => (
+            <MenuItem key={item.key}
+                      onClick={item.onClick ? item.onClick : () =>
+                          Ux.E.fxTerminal(true, 10017, item.onClick)}>
+                {_Icon.uiIcon(item.icon)}&nbsp;&nbsp;{item.text}
+            </MenuItem>
+        ))}
+    </ContextMenu>
+);
+const aiSteps = (items = [], rest = {}) => (
+    <Steps {...rest}>
+        {items.map(item => <Steps.Step {...item}/>)}
+    </Steps>
+);
 export default {
+    // 菜单相关渲染
+    aiMenuTree,
+    aiMenuContext,
+    aiMenuTop,
+    // 面包屑
     aiBreadcrumb,
-    aiTopMenu,
-    aiMenuTree
+    // 折叠面板
+    aiCollapse,
+    // 页签
+    aiTabs,
+    // 纯帮助
+    aiSteps
 }

@@ -22,7 +22,9 @@ import E from './Ux.Error';
 const ajaxUri = (uri, method = "get", params = {}) => {
     let api = Expr.formatExpr(uri, params);
     // 签名
-    Sign.signature(api, method, params);
+    if (Cv.SIGN) {
+        Sign.signature(api, method, params);
+    }
     // 追加Query
     const query = Expr.formatQuery(uri, params);
     // 最终请求路径
@@ -183,7 +185,7 @@ const _logAjax = (api, method, params, mockData = {}) => {
     if ((mockData && mockData.mock) || mockData['forceMock']) {
         Log.mock(params, mockData.data, method + " " + api);
     } else {
-        Log.request(api, method, params);
+        Log.request(api, method, params, Sign.token());
     }
 };
 

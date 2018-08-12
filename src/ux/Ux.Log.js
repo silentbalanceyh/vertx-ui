@@ -151,9 +151,10 @@ const sign = (uri, method, parameters, {
 const request = (uri, method, parameters, token = '') => {
     if (Cv.DEBUG) {
         let message = `%c [Zero] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
-        console.groupCollapsed(message, "color:#0066CC;font-weight:900");
-        console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
-        console.log(`%c [Zero] Uri -> `, 'color:#669966;font-weight:900', uri);
+        const color = Cv.SIGN ? "#06C" : "#CC3";
+        console.groupCollapsed(message, `color:${color};font-weight:900`);
+        console.log(`%c [Zero] Parameters -> `, 'color:#669966;font-weight:900', parameters);
+        console.log(`%c [Zero] Uri -> `, 'color:#06C;font-weight:900', uri);
         console.log(`%c [Zero] Token -> `, 'color:#339966;font-weight:900', token);
         console.groupEnd();
     }
