@@ -63,7 +63,6 @@ const rxEdit = (reference, id) => {
         const tabs = stateEditTab($self, id, data);
         const view = Init.stateView("edit", id, reference);
         $self.setState({tabs, ...view});
-        // rxView函数的触发
         const {rxEditPost} = reference.props;
         if (rxEditPost) {
             rxEditPost(data, id);
@@ -89,7 +88,11 @@ const rxDeleteDetail = (reference, id) => {
         reference.setState({tabs, ...view, record});
         Ux.writeTree(reference, {
             "grid.list": undefined
-        });
+        });// rxView函数的触发
+        const {rxDeletePost} = reference.props;
+        if (rxDeletePost) {
+            rxDeletePost(data, id);
+        }
     });
 };
 

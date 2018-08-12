@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
         const $user = Ux.isLogged();
         const menuData = $hoc._("menu");
         return ($user ? (
-            <Dropdown overlay={Ux.aiTopMenu(menuData, {}, {onClick: Op.fnSelect(this)})}>
+            <Dropdown overlay={Ux.aiMenuTop(menuData, {}, {onClick: Op.fnSelect(this)})}>
                 {/** 用户头像和名字，登陆后状态 **/}
                 <span className="action account">
                     <Avatar size="default" className="avatar"

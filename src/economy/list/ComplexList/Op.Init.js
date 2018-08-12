@@ -35,11 +35,6 @@ const onTabClick = (reference) => (key) => {
     const item = tabs.items.filter(item => item.key === key)[0];
     const view = stateView(item.type, key, reference);
     reference.setState({tabs, ...view});
-    // rxTab触发
-    const {rxTab} = reference.props;
-    if (rxTab) {
-        rxTab(key);
-    }
 };
 
 const onEdit = (reference) => (key, action) => {
