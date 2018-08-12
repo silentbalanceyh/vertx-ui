@@ -6,7 +6,14 @@
 
 ### 1.1.配置
 
-
+```json
+[
+    {
+        "field":"$button",
+        "hidden":true
+    }
+]
+```
 
 
 
