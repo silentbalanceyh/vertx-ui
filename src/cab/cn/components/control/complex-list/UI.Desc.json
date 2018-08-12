@@ -102,7 +102,7 @@
                                     "color": "#33af43"
                                 },
                                 {
-                                    "name": "search.advanced.with",
+                                    "name": "search.advanced.width",
                                     "color": "#33af43"
                                 },
                                 {
@@ -172,7 +172,7 @@
             ]
         },
         "layout": {
-            "hgap": 120,
+            "hgap": 90,
             "vgap": 10,
             "height": 1300
         }

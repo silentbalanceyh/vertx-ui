@@ -1,6 +1,6 @@
 {
     "_page": {
-        "title": "ComplexList组件 - 标准用法"
+        "title": "二级弹窗List（不支持服务端分页）"
     },
     "_tabs": {
         "defaultActiveKey": "keyPreview",

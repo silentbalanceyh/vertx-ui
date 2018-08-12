@@ -120,6 +120,18 @@
             "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
         },
         {
+            "key": "ce99efd9-1859-455f-a0c2-77fdf3dbb70f",
+            "active": true,
+            "left": 4,
+            "level": 2,
+            "text": "DialogList",
+            "icon": "table",
+            "uri": "/control/dialog-list",
+            "name": "zui.control.dialog-dialog",
+            "appId": "8570d625-982c-4276-b6a0-9bb8c5122982",
+            "parentId": "f6f5d6d3-253c-44a3-b323-fa3524487bf8"
+        },
+        {
             "key": "4164ffa9-cef7-4529-a7d7-0c6e4a231f86",
             "active": true,
             "left": 3,

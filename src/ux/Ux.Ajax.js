@@ -267,6 +267,11 @@ const rxEpic = (type, promise, processor = data => data, mockData = {}) => {
         E.fxTerminal(true, 10025, type, promise);
     }
 };
+
+const _rxLog = (data) => {
+    Log.debug(data);
+    return data;
+};
 /**
  * 【Epic升级版】统一处理Epic，新函数，简化操作，替换rxEpic专用
  * @method rxEdict
@@ -284,6 +289,7 @@ const rxEdict = (type, promise, responser = data => data) => {
                 .switchMap(promise =>
                     Rx.Observable.from(promise)
                         .map(responser)
+                        .map(_rxLog)
                         .map(data => Env.dataOut(data))
                 );
         }

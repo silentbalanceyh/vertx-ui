@@ -5,6 +5,7 @@ import {ComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Update'
+import Op from './Op';
 
 const {zero} = Ux;
 
@@ -26,6 +27,7 @@ class Component extends React.PureComponent {
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
                              reference={this}
+                             rxEditPost={Op.$opEditPost(this)}
                              $mockData={Mock.fnDeptList}
                              $formFilter={Filter}
                              $formAdd={FormAdd}

@@ -271,11 +271,16 @@ const mock = (request, response, url) => {
  * @method debug
  * @param object
  */
-const debug = (object) => {
+const debug = (object, original) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Rx-Direct] Debug Object`;
+        let message = `%c [Zero] [Redux] Debug Object`;
         console.groupCollapsed(message, "color:#660099;font-weight:900");
-        console.log("[Zero] Object Data: ", object);
+        if ("string" === typeof object) {
+            console.log("[Zero] Redux Key: ", object);
+        } else {
+            console.log("[Zero] Object Data: ", object);
+        }
+        console.log("[Zero] Original Data: ", original);
         console.groupEnd();
     }
 };

@@ -1,0 +1,90 @@
+{
+    "_page": {
+        "title": "DialogList例子 - 点击编辑进入内页"
+    },
+    "_grid": {
+        "query": {
+            "projection": [],
+            "pager": "1,10",
+            "sorter": "updateTime=DESC",
+            "criteria": "sigma=hotel:sigma"
+        },
+        "options": {
+            "mock.enabled": true,
+            "mock.keys": "code,name,description,manager,active",
+            "search.cond.message": {
+                "code": "代码",
+                "name": "名称",
+                "manager": "经理",
+                "active": "启用"
+            },
+            "search.cond": [
+                "name,c",
+                "code,c"
+            ],
+            "search.enabled": true,
+            "search.placeholder": "名称/代码",
+            "search.advanced": true,
+            "search.advanced.width": "30%",
+            "search.advanced.title": "搜索部门",
+            "tabs.list": "部门列表",
+            "tabs.add": "添加部门",
+            "tabs.edit": "编辑部门",
+            "submit.add": "$opAdd",
+            "submit.edit": "$opSave",
+            "submit.reset": "$opReset",
+            "ajax.get.uri": "/api/dept/:id",
+            "ajax.delete.uri": "/api/dept/:id",
+            "confirm.delete": "确认删除当前部门记录？"
+        },
+        "table": {
+            "columns": [
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "fixed": "left",
+                    "$render": "OP",
+                    "$option": {
+                        "edit": "编辑",
+                        "delete": "删除",
+                        "delete.confirm": "确认删除选择的部门记录？"
+                    }
+                },
+                {
+                    "title": "部门编号",
+                    "dataIndex": "code",
+                    "sorter": true,
+                    "filter": true
+                },
+                {
+                    "title": "部门名称",
+                    "dataIndex": "name",
+                    "sorter": true
+                },
+                {
+                    "title": "是否启用",
+                    "dataIndex": "active",
+                    "$render": "LOGICAL",
+                    "$mapping": {
+                        "true": "启用",
+                        "false": "禁用"
+                    }
+                }
+            ]
+        }
+    },
+    "_demo": {
+        "buttons": [
+            {
+                "key": "$opSave",
+                "text": "按钮保存",
+                "message": "您点击了保存按钮"
+            },
+            {
+                "key": "$opReset",
+                "text": "按钮重置",
+                "message": "您点击了重置按钮"
+            }
+        ]
+    }
+}
