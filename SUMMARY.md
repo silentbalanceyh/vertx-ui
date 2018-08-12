@@ -30,6 +30,7 @@
       * [UI0021-1 - rtLink（重定向专用按钮）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-1-rtlink.md)
       * [UI0021-2 - rtRet（重置按钮专用）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-2-rtretff08-zhong-zhi-an-niu-zhuan-yong-ff09.md)
       * [UI0021-3 - rtPure（纯按钮处理）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-3-rtpureff08-chun-an-niu-chu-li-ff09.md)
+      * [UI0021-4 - aiAction（自动渲染）](document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-4-aiactionff08-zi-dong-xuan-ran-ff09.md)
   * [3 - 脚手架解析](document/3-jiao-shou-jia-jie-xi.md)
     * [UT0001 - yuidoc工具生成API文档](document/3-jiao-shou-jia-jie-xi/ut0001-yuidocgong-ju-sheng-cheng-api-wen-dang.md)
     * [UT0002 - storybook可重用组件文档](document/3-jiao-shou-jia-jie-xi/ut0002-storybookke-zhong-yong-zu-jian-wen-dang.md)
