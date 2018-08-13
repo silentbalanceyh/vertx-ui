@@ -30,11 +30,14 @@ import AI from './ai/AI';
 import CHART from './Ux.Chart';
 import TERMINAL from './Ux.Terminal';
 import LIST from './Ux.List';
+import FORM from './Ux.Form';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 import E from './Ux.Error';
 
 export default {
+    // 优化Form处理
+    ...FORM,
     // Page List专用
     ...LIST,
     // 专用打断

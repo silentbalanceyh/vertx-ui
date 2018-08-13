@@ -13,7 +13,7 @@ const _formatArray = (input = "", args = []) => {
     return input;
 };
 
-const _formatNamed = (input = "", params = {}) => {
+const _formatNamed = (input = "", params = {}, keep = false) => {
     if (
         !Array.prototype.isPrototypeOf(params) &&
         0 < Object.keys(params).length
@@ -23,7 +23,9 @@ const _formatNamed = (input = "", params = {}) => {
             if (0 <= input.indexOf(":" + key) && undefined !== value) {
                 let replaced = new RegExp(`\\:${key}`, "gm");
                 input = input.replace(replaced, value);
-                delete params[key];
+                if (!keep) {
+                    delete params[key];
+                }
             }
         }
     }
@@ -35,16 +37,17 @@ const _formatNamed = (input = "", params = {}) => {
  * @method formatExpr
  * @param {String} input 原始字符串
  * @param {Object} params 传入参数
+ * @param {Boolean} keep 是否保持原始key
  * @return {String}
  */
-const formatExpr = (input = "", params) => {
+const formatExpr = (input = "", params, keep = false) => {
     // 无参数直接返回input
     if (params) {
         // 如果是数组，则直接使用{0}，{1}这种格式进行格式化
         if (Array.prototype.isPrototypeOf(params)) {
-            input = _formatArray(input, params);
+            input = _formatArray(input, params, keep);
         } else {
-            input = _formatNamed(input, params);
+            input = _formatNamed(input, params, keep);
         }
     }
     return input;
@@ -82,11 +85,18 @@ const formatQuery = (uri = "", params = {}, encode = true) => {
     }
     return queryStr;
 };
+
+const formatFun = (field, params) => (row) => {
+    // 第三参：keep = true
+    row[field] = formatExpr(row[field], params, true);
+    return row;
+};
 /**
  * @class Expr
  * @description 字符串格式化专用函数
  */
 export default {
+    formatFun,
     // 表达式格式化，用于格式化两种表达式：
     // 1）带有{0}，{1}这种
     // 2）带有{name}，{email}这种

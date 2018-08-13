@@ -251,6 +251,22 @@ export default (options = {}) => {
                 ...injectState
             };
 
+            constructor(props) {
+                super(props);
+                // 启用Raft模式，主要针对Form
+                if (options.form && // 1.必须是Form
+                    options.raft && // 2.必须执行了Raft
+                    options.raft.enabled // 3.必须启用了Raft
+                ) {
+                    this.state["raft"] = Ux.raftForm(this,
+                        options.raft.jsx,
+                        options.raft.columns,
+                        options.raft.config,
+                        options.raft.dynamic);
+                    this.state.raft.enabled = true;
+                }
+            }
+
             render() {
                 // 计算Render，是否执行加载
                 const render = fnRender(this.props, options);
