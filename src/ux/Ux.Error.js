@@ -83,7 +83,8 @@ const fnError = {
     10078: (flow) => `[ ERR-10078 ] (Rt) 您正在调用内置函数"_rtSubmit"，您在使用分支：-- ${flow}`,
     10079: (reference) => `[ ERR-10079 ] (Web) 父组件"reference"引用未传入。reference = ${reference}`,
     10080: (validation) => `[ ERR-10080 ] (Web) 当前配置中需要"validation"，当前配置丢失：validation = ${validation}`,
-    10081: (config, linker) => `[ ERR-10081 ] (Web) 链接最终的数据成功。配置：${typeof config}，数据为：${typeof linker}`
+    10081: (config, linker) => `[ ERR-10081 ] (Web) 链接最终的数据成功。配置：${typeof config}，数据为：${typeof linker}`,
+    10082: ($items) => `[ ERR-10082 ] (Rdx) 无法读取状态树上的"list.items"数据，该数据必须是一个DataObject。${$items}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

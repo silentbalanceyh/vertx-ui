@@ -39,5 +39,6 @@ export default {
     fxError,
     fxRender,
     verifyComplex,
-    verifyCard
+    verifyCard,
+    verifyKey: Verifier.verifyRooKey
 }

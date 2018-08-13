@@ -10,6 +10,13 @@ import Op from './Op';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
+    .connect(state => Ux.dataIn(state)
+        .rework({
+            list: ["items"]
+        })
+        .rinit(["items"])
+        .to()
+    )
     .cab("UI.Demo")
     .connect({
         rxSearch: Tps.fnDeptList
