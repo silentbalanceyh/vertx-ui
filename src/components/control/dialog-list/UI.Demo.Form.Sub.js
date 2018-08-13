@@ -1,19 +1,17 @@
 import React from 'react'
 import Ux from 'ux';
-import Op from './Op';
+import Op from './Op.Sub';
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo.Form.Sub")
-    .state({
-        $op: Op
-    })
+    .bind(Op)
     .form().to()
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 1)
+        return Ux.uiFieldForm(this, {}, 1)
     }
 }
 

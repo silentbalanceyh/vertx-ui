@@ -147,5 +147,6 @@ export default {
     cycleDestoryForm,
     // 连接
     connectButton: connectDialog,
+    connectDialog,
     connectId,
 }

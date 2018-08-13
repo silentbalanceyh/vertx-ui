@@ -65,7 +65,7 @@ const aiFormButton = (reference, onClick, id = false) => {
         });
         return (
             <span>
-                {buttons.map(item => (<Button className={"ux-hidden"} {...item}/>))}
+                {buttons.map(item => (<Button {...item}/>))}
             </span>
         )
     }

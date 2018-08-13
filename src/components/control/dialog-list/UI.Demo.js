@@ -4,7 +4,7 @@ import {Fn, Mock, Tps} from 'app';
 import {ComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
-import FormEdit from './UI.Demo.Form.Update'
+import FormEdit from './UI.Demo.Form'
 import Op from './Op';
 
 const {zero} = Ux;

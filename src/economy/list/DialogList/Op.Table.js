@@ -3,12 +3,19 @@ import Act from './Op.Action';
 import Ux from 'ux'
 
 const _initColumns = (reference, columns = []) => {
-    columns = Ux.uiTableColumn(reference, columns);
-    columns.forEach(column => {
-        if ("key" === column) {
-            
+    const props = reference.props;
+    const op = {
+        rxEdit: Act.rxEdit,
+        rxDelete: Act.rxDelete
+    };
+    columns = Ux.uiTableColumn({
+        props: {
+            // 当前引用对应的props,
+            ...props,
+            ...op,
+            $self: reference
         }
-    });
+    }, columns);
     return columns;
 };
 
@@ -35,6 +42,7 @@ const initDialog = (reference) => {
         if (window) {
             window.onCancel = Act.rxClose(reference);
         }
+        Ux.connectDialog(window);
     }
     return window;
 };

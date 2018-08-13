@@ -42,7 +42,6 @@ class Component extends React.PureComponent {
         if (error) {
             return Ux.fxError(error);
         } else {
-            console.info(this.props);
             // 计算表格中的值
             const {table = {}, data = []} = Op.initTable(this);
             // 处理Columns
@@ -50,6 +49,9 @@ class Component extends React.PureComponent {
             // 窗口的隐藏显示
             const {show, editKey} = this.state;
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
+            const {$inited, ...rest} = this.props;
+            const initData = Op.calcInited(this, $inited.key);
+            console.info(initData);
             return (
                 <div>
                     {/** 渲染添加按钮 **/}
@@ -58,9 +60,9 @@ class Component extends React.PureComponent {
                     <Table {...table} dataSource={data}/>
                     <DynamicDialog $dialog={dialog} $visible={show}>
                         {editKey ? (FormEdit ? (
-                            <FormEdit {...this.props} key={"formEdit"}/>
+                            <FormEdit {...rest} key={"formEdit"} $inited={initData}/>
                         ) : false) : (FormAdd ? (
-                            <FormAdd {...this.props} key={"formAdd"}/>
+                            <FormAdd {...rest} key={"formAdd"} $inited={initData}/>
                         ) : false)}
                     </DynamicDialog>
                 </div>

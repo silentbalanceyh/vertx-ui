@@ -1,61 +1,34 @@
 {
     "_form": {
+        "window": 0.15,
         "ui": [
             [
-                {
-                    "field": "code",
-                    "optionItem": {
-                        "label": "部门编号"
-                    },
-                    "optionConfig": {
-                        "validateTrigger": "onBlur",
-                        "rules": [
-                            {
-                                "required": true,
-                                "message": "请输入部门编号"
-                            }
-                        ]
-                    }
-                }
+                "username,用户名,24"
+            ],
+            [
+                "email,电子邮箱,24"
+            ],
+            [
+                "mobile,手机号,24"
+            ],
+            [
+                "uri,主页,24"
             ],
             [
                 {
-                    "field": "name",
-                    "optionItem": {
-                        "label": "部门名称"
-                    },
-                    "optionConfig": {
-                        "validateTrigger": "onBlur",
-                        "rules": [
-                            {
-                                "required": true,
-                                "message": "请输入部门名称"
-                            }
-                        ]
-                    }
-                }
-            ],
-            [
-                {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
-                }
-            ],
-            [
-                {
-                    "field": "$button",
-                    "hidden": true
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.bind": [
+                        "$opSubAdd,,,,_submit=DIRECT",
+                        "$opSubSave,,,,_submit=DIRECT"
+                    ]
                 }
             ]
         ],
         "hidden": {
-            "inputs": []
+            "inputs": [
+                "key"
+            ]
         }
     },
     "_modal": {
@@ -63,53 +36,6 @@
         "message": {
             "add": "您的部门添加成功！",
             "edit": "您的部门保存成功！"
-        }
-    },
-    "_sublist": {
-        "options": {
-            "op.add": "添加新用户",
-            "op.add.window": "connect.add",
-            "op.edit": "更新",
-            "op.edit.window": "connect.edit"
-        },
-        "window": {
-            "connect.add": {
-                "title": "添加用户",
-                "okText": "添加",
-                "cancelText": "取消",
-                "visible": false,
-                "width": 520,
-                "maskClosable": false
-            },
-            "connect.edit": "更新用户,添加,取消,false,520,false"
-        },
-        "table": {
-            "columns": [
-                {
-                    "dataIndex": "key",
-                    "title": "操作"
-                },
-                {
-                    "dataIndex": "username",
-                    "title": "用户名"
-                },
-                {
-                    "dataIndex": "email",
-                    "title": "电子邮箱"
-                },
-                {
-                    "dataIndex": "uri",
-                    "title": "主页"
-                },
-                {
-                    "dataIndex": "mobile",
-                    "title": "手机号"
-                },
-                {
-                    "dataIndex": "ip",
-                    "title": "上次登录IP"
-                }
-            ]
         }
     }
 }
