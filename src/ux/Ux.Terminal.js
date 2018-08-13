@@ -35,10 +35,18 @@ const fxRender = (reference, render) => {
         return render()
     }
 };
+const verifySubList = (ref) => {
+    const {$key = "_sublist", reference} = ref.props;
+    let message = Verifier.verifyRooKey(reference, $key);
+    if (!message) {
+
+    }
+    return message
+};
 export default {
     fxError,
     fxRender,
     verifyComplex,
     verifyCard,
-    verifyKey: Verifier.verifyRooKey
+    verifySubList
 }

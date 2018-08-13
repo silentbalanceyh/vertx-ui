@@ -3,6 +3,9 @@ import Ux from 'ux';
 import {_zero} from '../../_internal/index';
 import {DataLabor} from 'entity';
 import {DynamicDialog} from 'web'
+import {Table} from 'antd';
+import Op from './Op';
+import Render from './UI.Render';
 
 @_zero({
     connect: {
@@ -22,12 +25,13 @@ import {DynamicDialog} from 'web'
     },
     state: {
         show: undefined,
+        editKey: undefined,
+        connectKey: "",
     }
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        const {reference, $key = "_sublist"} = this.props;
-        const verified = Ux.verifyKey(reference, $key);
+        const verified = Ux.verifySubList(this);
         if (verified) {
             this.setState({error: verified});
         }
@@ -39,10 +43,26 @@ class Component extends React.PureComponent {
             return Ux.fxError(error);
         } else {
             console.info(this.props);
-            
+            // 计算表格中的值
+            const {table = {}, data = []} = Op.initTable(this);
+            // 处理Columns
+            const dialog = Op.initDialog(this);
+            // 窗口的隐藏显示
+            const {show, editKey} = this.state;
+            const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
             return (
                 <div>
-                    <DynamicDialog/>
+                    {/** 渲染添加按钮 **/}
+                    {Render.renderHeader(this)}
+                    {/** 渲染表单 **/}
+                    <Table {...table} dataSource={data}/>
+                    <DynamicDialog $dialog={dialog} $visible={show}>
+                        {editKey ? (FormEdit ? (
+                            <FormEdit {...this.props} key={"formEdit"}/>
+                        ) : false) : (FormAdd ? (
+                            <FormAdd {...this.props} key={"formAdd"}/>
+                        ) : false)}
+                    </DynamicDialog>
                 </div>
             )
         }
