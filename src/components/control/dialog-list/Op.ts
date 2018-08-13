@@ -7,7 +7,7 @@ const $opSave = (reference: any) => Ux.ai2Event(reference, (values, mockData) =>
 const $opAdd = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
     console.info(values);
 });
-const $opEditPost = (reference: any) => (record: any, id: any) => {
+const opEditPost = (reference: any) => (record: any, id: any) => {
     // 在编辑点击过后操作，将数据写入到items
     const mockData = Mock.fnUsers;
     let dataArray = mockData.mock ? mockData.data : (
@@ -26,5 +26,5 @@ const $opEditPost = (reference: any) => (record: any, id: any) => {
 export default {
     $opSave,
     $opAdd,
-    $opEditPost
+    opEditPost
 }

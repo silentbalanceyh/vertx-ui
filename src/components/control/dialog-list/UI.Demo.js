@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
                              reference={this}
-                             rxEditPost={Op.$opEditPost(this)}
+                             rxEditPost={Op.opEditPost(this)}
                              $mockData={Mock.fnDeptList}
                              $formFilter={Filter}
                              $formAdd={FormAdd}

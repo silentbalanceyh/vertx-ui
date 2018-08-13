@@ -51,7 +51,6 @@ class Component extends React.PureComponent {
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
             const {$inited, ...rest} = this.props;
             const initData = Op.calcInited(this, $inited.key);
-            console.info(initData);
             return (
                 <div>
                     {/** 渲染添加按钮 **/}
@@ -60,9 +59,11 @@ class Component extends React.PureComponent {
                     <Table {...table} dataSource={data}/>
                     <DynamicDialog $dialog={dialog} $visible={show}>
                         {editKey ? (FormEdit ? (
-                            <FormEdit {...rest} key={"formEdit"} $inited={initData}/>
+                            <FormEdit {...rest} key={"formEdit"} $inited={initData}
+                                      fnClose={Op.rxClose(this)} fnListItem={Op.rxList(this)}/>
                         ) : false) : (FormAdd ? (
-                            <FormAdd {...rest} key={"formAdd"} $inited={initData}/>
+                            <FormAdd {...rest} key={"formAdd"} $inited={initData}
+                                     fnClose={Op.rxClose(this)} fnListItem={Op.rxList(this)}/>
                         ) : false)}
                     </DynamicDialog>
                 </div>

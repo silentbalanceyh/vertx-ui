@@ -1,4 +1,5 @@
 import Init from './Op.Init';
+import Ux from 'ux';
 
 const rxAdd = (reference, connectKey) => (event) => {
     event.preventDefault();
@@ -21,20 +22,35 @@ const rxEdit = (reference, id) => {
 };
 
 const rxDelete = (reference, id) => {
-    console.info("Delete", id);
+    const {$self} = reference.props;
+    rxList(reference, true)(id, {});
+    const {rxDelete} = $self;
+    if (rxDelete) {
+        rxDelete(id);
+    }
 };
 
 const rxClose = (reference) => (event) => {
-    event.preventDefault();
+    if (event) {
+        event.preventDefault();
+    }
     reference.setState({
         show: false,
         editKey: undefined,
         connectKey: ""
     })
 };
+const rxList = (reference, deleted = false) => (id, record) => {
+    const {$items} = reference.props;
+    const dataRecord = Ux.rapitRecord($items, id, record, deleted);
+    Ux.writeTree(reference, {
+        "list.items": dataRecord
+    })
+};
 export default {
     rxAdd,
     rxClose,
     rxEdit,
-    rxDelete
+    rxDelete,
+    rxList
 }

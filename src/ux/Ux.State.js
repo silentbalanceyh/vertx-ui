@@ -41,6 +41,7 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     // 读取原始记录
     const dataRecord = dataObject && dataObject.is()
         ? Immutable.fromJS(dataObject.to()).toJS() : {};
+    console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
     if (id) {
         // 读取原始数据
         let $extracted = dataObject.$(id);
@@ -66,6 +67,7 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
             executeRecord(record);
         }
     }
+    console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
     return dataRecord;
 };
 

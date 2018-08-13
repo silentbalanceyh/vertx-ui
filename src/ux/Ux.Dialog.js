@@ -186,13 +186,25 @@ const fadeOut = (reference = {}) => {
         fnHide();
     }
 };
+const closeWindow = (reference = {}) => {
+    const {fnClose} = reference.props;
+    E.fxTerminal(!fnClose, 10033, fnClose);
+    if (fnClose) {
+        fnClose();
+    }
+};
 /**
  * @class Dialog
  * @description 窗口专用雷用于处理弹出窗口的开与关的信息
  */
 export default {
+    // fnShow调用
     fadeIn,
+    // fnHide调用
     fadeOut,
+    // fnClose调用
+    closeWindow,
+    // fnListItem调用
     showError,
     showSuccess,
     showConfirm,

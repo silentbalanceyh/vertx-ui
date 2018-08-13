@@ -65,15 +65,16 @@ const aiFormButton = (reference, onClick, id = false) => {
         });
         return (
             <span>
-                {buttons.map(item => (<Button {...item}/>))}
+                {buttons.filter(item => item.key.startsWith("$")).map(item => (<Button {...item}/>))}
             </span>
         )
     }
 };
 
-const aiOp = (reference) => (Op) => Object.keys(Op).filter(key => U.isFunction(Op[key])).map(key => (
-    <Button className={"ux-hidden"} key={key} id={key} onClick={Op[key](reference)}/>
-));
+const aiOp = (reference) => (Op) => Object.keys(Op)
+    .filter(key => U.isFunction(Op[key])).map(key => (
+        <Button className={"ux-hidden"} key={key} id={key} onClick={Op[key](reference)}/>
+    ));
 
 const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
 const ai2FilterButton = (window = 1) => {
