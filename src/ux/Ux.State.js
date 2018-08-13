@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import E from './Ux.Error';
 import Type from './Ux.Type';
 import U from 'underscore';
+import Prop from './Ux.Prop';
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
@@ -79,6 +80,21 @@ const rdxSubmitting = (reference, loading = true) => {
 };
 const rdxReject = (message) => Promise.reject({data: {info: message}});
 /**
+ * 专写方法，更新list.items
+ * @param reference
+ * @param values
+ */
+const rdxListItem = (reference, values = {}) => {
+    const {fnListItem} = reference.props;
+    if (fnListItem) {
+        const ref = Prop.onReference(reference, 1);
+        if (ref) {
+            const {$inited = {}} = ref.props;
+            fnListItem($inited.key, values);
+        }
+    }
+};
+/**
  * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
  * @method toEffect
  * @param state 传入的React状态
@@ -98,7 +114,6 @@ const toEffect = (state = {}) => {
  */
 export default {
     // 特殊方法，用于执行DataObject中的某个key下的
-
     rapitRecord,
     // 写状态树
     writeTree,
@@ -106,6 +121,8 @@ export default {
     rdxSubmitting,
     // 返回Promise的reject结果
     rdxReject,
+    // 更新特殊节点list.items
+    rdxListItem,
     // 老版本提取$_状态的专用方法
     toEffect
 }

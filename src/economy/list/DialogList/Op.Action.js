@@ -23,7 +23,11 @@ const rxEdit = (reference, id) => {
 
 const rxDelete = (reference, id) => {
     const {$self} = reference.props;
-    rxList(reference, true)(id, {});
+    const {$inited = {}, $items} = $self.props;
+    const dataRecord = Ux.rapitRecord($items, $inited.key, {key: id}, true);
+    Ux.writeTree(reference, {
+        "list.items": dataRecord
+    });
     const {rxDelete} = $self;
     if (rxDelete) {
         rxDelete(id);

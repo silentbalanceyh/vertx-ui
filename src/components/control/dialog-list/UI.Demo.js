@@ -40,7 +40,7 @@ class Component extends React.PureComponent {
                              $formAdd={FormAdd}
                              $formEdit={FormEdit}/>
             </HelpCard>
-            , source)
+            , source, require("./UI.Demo.json"))
     }
 }
 

@@ -6,8 +6,7 @@ const $opSubSave = (reference: any) => (values) => {
     // 关闭窗口
     Ux.closeWindow(reference);
     // 更新数据
-    values.key = Ux.randomUUID();
-    reference.props.fnListItem(Ux.randomUUID(), values);
+    Ux.rdxListItem(reference, values);
 };
 const $opSubAdd = (reference: any) => (values) => {
     // 添加窗口回调
@@ -15,7 +14,7 @@ const $opSubAdd = (reference: any) => (values) => {
     // 关闭窗口
     Ux.closeWindow(reference);
     // 更新数据
-    reference.props.fnListItem(values.key, values);
+    Ux.rdxListItem(reference, values);
 };
 const opSubDeletePost = (reference: any) => (id: any) => {
     // 列表删除回调

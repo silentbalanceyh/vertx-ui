@@ -16,15 +16,15 @@
                         },
                         {
                             "name": "rxEditPost",
-                            "color": "#e23c39"
+                            "color": "#33af43"
                         },
                         {
                             "name": "rxDeletePost",
-                            "color": "#e23c39"
+                            "color": "#33af43"
                         },
                         {
                             "name": "rxViewSwitch",
-                            "color": "#e23c39"
+                            "color": "#33af43"
                         },
                         {
                             "name": "$mockData",
