@@ -3,7 +3,6 @@ import AiLayout from './AI.Layout';
 import AiInput from './AI.Input';
 import AiButton from './AI.Action';
 import AiColumn from './AI.Column';
-import AiTab from './AI.Tab';
 import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
 import Calculator from './AI.Layout.Calculator';
@@ -17,7 +16,6 @@ export default {
     ...AiInput,
     ...AiButton,
     ...AiColumn,
-    ...AiTab,
     ...AiChart,
     ...AiNormalize,
     ...AiString,

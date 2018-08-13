@@ -31,6 +31,7 @@ export default {
     MOCK: prepareDevEnv("DEV_MOCK"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
     RENDER: prepareDevEnv("DEV_FORM"),
     DEBUG_AJAX: prepareDevEnv("DEV_MOCK", "DEV_AJAX"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
+    SIGN: prepareDevEnv("SIGN"),
     HTTP_METHOD: {
         GET: "get",
         POST: "post",

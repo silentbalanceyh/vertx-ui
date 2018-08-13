@@ -41,7 +41,8 @@ class Component extends React.PureComponent {
     render() {
         const {
             children, reference, $card = 'page-card',
-            $key = "page", $extra
+            $key = "page", $extra,
+            $leftVisible = true, $rightVisible = true,
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
@@ -53,13 +54,13 @@ class Component extends React.PureComponent {
         if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, this.props);
         const title = (
             <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
-                {Op.renderButton(reference, topbar)}
+                {$leftVisible ? Op.renderButton(reference, topbar) : false}
                 </span>
         );
         // 右边关闭按钮
         let extraContent = $extra ? $extra : (
             <span>
-                {topbar.right ? Op.renderButton(reference, topbar, 'right') : false}
+                {topbar.right && $rightVisible ? Op.renderButton(reference, topbar, 'right') : false}
                 &nbsp;&nbsp;
                 {topbar.back ? Op.renderBack(reference, topbar) : false}
             </span>

@@ -63,7 +63,14 @@ class Component extends React.PureComponent {
         );
         // 右边帮助信息
         let extraContent = ExtraComponent ?
-            <ExtraComponent/> : (topbar.help ? Op.renderHelp(reference, topbar, $current) : false);
+            <ExtraComponent/> : (
+                <span>
+                    {Ux.aiGrid([21, 3],
+                        topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
+                        topbar.back ? Op.renderBack(reference, topbar) : false
+                    )}
+                </span>
+            );
         return (
             <Card className={$card} title={title} bordered={false}
                   extra={extraContent}>

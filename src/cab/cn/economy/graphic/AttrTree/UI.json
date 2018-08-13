@@ -15,6 +15,14 @@
                 {
                     "color": "#33af43",
                     "text": "可选属性"
+                },
+                {
+                    "color": "#ff8626",
+                    "text": "AntDesign原生"
+                },
+                {
+                    "color": "#1464b4",
+                    "text": "动态属性"
                 }
             ]
         },

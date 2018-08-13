@@ -56,16 +56,6 @@ class Etat {
         return this;
     }
 
-    bind(OP: any = {}) {
-        if (!this._op) this._op = {};
-        const opRef = this._op;
-        Object.keys(OP)
-            .filter(key => !!key)
-            .filter(key => key.startsWith("$"))
-            .map(key => opRef[key] = OP[key]);
-        return this;
-    }
-
     state(state) {
         this._state = state;
         return this;
@@ -80,22 +70,6 @@ class Etat {
         return this;
     }
 
-    init(fnInit: any) {
-        if (U.isFunction(fnInit)) {
-            // 初始化专用，特殊zero前缀
-            this._dispatchTo.zxInit = fnInit;
-        }
-        return this;
-    }
-
-    search(fnSearch: any) {
-        if (U.isFunction(fnSearch)) {
-            // RxSearch专用
-            this._dispatchTo.rxSearch = fnSearch;
-        }
-        return this;
-    }
-
     connect(object, dispatch: boolean) {
         if (dispatch) {
             if (object && !object.hasOwnProperty('fnOut')) {
@@ -105,6 +79,44 @@ class Etat {
         } else {
             this._stateTo = object;
         }
+        return this;
+    }
+
+    // 特殊方法
+    // zxInit：初始化专用
+    init(fnInit: any) {
+        if (U.isFunction(fnInit)) {
+            // 初始化专用，特殊zero前缀
+            this._dispatchTo.zxInit = fnInit;
+        }
+        return this;
+    }
+
+    // rxSearch：搜索专用
+    search(fnSearch: any) {
+        if (U.isFunction(fnSearch)) {
+            // RxSearch专用
+            this._dispatchTo.rxSearch = fnSearch;
+        }
+        return this;
+    }
+
+    // 按钮绑定专用
+    bind(OP: any = {}) {
+        if (!this._op) this._op = {};
+        const opRef = this._op;
+        Object.keys(OP)
+            .filter(key => !!key)
+            .filter(key => key.startsWith("$"))
+            .map(key => opRef[key] = OP[key]);
+        return this;
+    }
+
+    // Dialog专用方法，设置$op中的show, hide
+    dialog(key = "$_show") {
+        if (!this._op) this._op = {};
+        this._op['hide'] = Ux.onHide(null, key);
+        this._op['show'] = Ux.onShow(null, key);
         return this;
     }
 

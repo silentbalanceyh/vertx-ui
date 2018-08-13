@@ -33,3 +33,4 @@ export {default as AttrTree} from './graphic/AttrTree/UI';
 export {default as MarkdownViewer} from './graphic/Markdown/UI';
 
 export {default as ComplexList} from './list/ComplexList/UI';
+export {default as DialogList} from './list/DialogList/UI';

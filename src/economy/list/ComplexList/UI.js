@@ -1,9 +1,9 @@
 import React from 'react'
 import Ux from 'ux';
-import {DataLabor} from 'entity';
 import Op from './Op';
 import {Tabs} from 'antd';
 import {_zero} from '../../_internal/index';
+import {DataLabor} from 'entity';
 import Render from './UI.Render';
 
 @_zero({

@@ -48,7 +48,7 @@ const demoSingle = (reference, jsx) => {
         </div>
     )
 };
-const demoComponent = (reference, jsx, md = "") => {
+const demoComponent = (reference, jsx, md = "", jsonDirect) => {
     const hoc = reference.props.reference.state.$hoc;
     const titleStr = hoc._("subjson").config;
     const fileStr = hoc._("subjson").source;
@@ -71,7 +71,7 @@ const demoComponent = (reference, jsx, md = "") => {
             {jsx}
             <Collapse className={"page-card-collapse"}>
                 <Collapse.Panel header={configTitle}>
-                    <ReactJson src={jsonView} name={null} enableClipboard={false}/>
+                    <ReactJson src={jsonDirect ? jsonDirect : jsonView} name={null} enableClipboard={false}/>
                 </Collapse.Panel>
                 <Collapse.Panel header={jsTitle}>
                     <MarkdownViewer $source={md}/>

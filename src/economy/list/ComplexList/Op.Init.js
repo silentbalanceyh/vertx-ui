@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Immutable from "immutable";
+import U from 'underscore';
 import {v4} from 'uuid';
 import Mock from './Op.Mock';
 
@@ -17,8 +18,12 @@ const initList = (reference = {}, queryConfig = {}) => {
     });
 };
 
-const stateView = (view, key) => {
+const stateView = (view, key, reference) => {
     view = view ? view : "list";
+    const {rxViewSwitch} = reference.props;
+    if (U.isFunction(rxViewSwitch)) {
+        rxViewSwitch(view);
+    }
     return {view, key};
 };
 
@@ -28,7 +33,7 @@ const onTabClick = (reference) => (key) => {
     tabs.activeKey = key;
     // 右边按钮计算
     const item = tabs.items.filter(item => item.key === key)[0];
-    const view = stateView(item.type, key);
+    const view = stateView(item.type, key, reference);
     reference.setState({tabs, ...view});
 };
 
@@ -44,14 +49,14 @@ const onEdit = (reference) => (key, action) => {
             tabs.activeKey = activeItem.key;
             tabs.items = tabs.items.filter(item => key !== item.key);
             if (0 === activeItem.index) {
-                view = stateView("list");
+                view = stateView("list", undefined, reference);
             } else {
-                view = stateView("edit", activeItem.key);
+                view = stateView("edit", activeItem.key, reference);
             }
         } else {
             tabs.activeKey = tabs.items[0].key;
             tabs.items = [tabs.items[0]];
-            view = stateView("list")
+            view = stateView("list", undefined, reference)
         }
         tabs.items.forEach((item, index) => {
             item.index = index;

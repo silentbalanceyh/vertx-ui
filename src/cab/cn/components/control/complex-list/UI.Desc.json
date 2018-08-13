@@ -15,6 +15,18 @@
                             "color": "#e23c39"
                         },
                         {
+                            "name": "rxEditPost",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "rxDeletePost",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "rxViewSwitch",
+                            "color": "#33af43"
+                        },
+                        {
                             "name": "$mockData",
                             "color": "#33af43"
                         },
@@ -90,7 +102,7 @@
                                     "color": "#33af43"
                                 },
                                 {
-                                    "name": "search.advanced.with",
+                                    "name": "search.advanced.width",
                                     "color": "#33af43"
                                 },
                                 {
@@ -111,6 +123,18 @@
                                 },
                                 {
                                     "name": "op.add",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "op.edit.delete",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "op.connect.edit",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "op.connect.reset",
                                     "color": "#33af43"
                                 },
                                 {
@@ -148,9 +172,9 @@
             ]
         },
         "layout": {
-            "hgap": 120,
+            "hgap": 90,
             "vgap": 10,
-            "height": 1100
+            "height": 1300
         }
     },
     "_data": [
@@ -165,6 +189,30 @@
             "source": "P",
             "name": "rxSearch",
             "comment": "（Epic函数）专用搜索函数",
+            "type": "Function",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "rxViewSwitch",
+            "comment": "视图状态发生改变时的钩子函数",
+            "type": "Function",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "rxEditPost",
+            "comment": "数据更新过后的钩子函数",
+            "type": "Function",
+            "required": true,
+            "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "rxDeletePost",
+            "comment": "数据删除过后的钩子函数",
             "type": "Function",
             "required": true,
             "value": "--"
@@ -349,6 +397,30 @@
             "option": "op.add",
             "comment": "添加按钮中的文字，不设置则不启用添加按钮功能",
             "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "op.edit.delete",
+            "comment": "是否启用更新详细界面的删除按功能？",
+            "type": "Boolean",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "op.connect.edit",
+            "comment": "将更新按钮作为外置连接点的id",
+            "type": "String",
+            "value": "--"
+        },
+        {
+            "source": "O",
+            "name": "options",
+            "option": "op.connect.reset",
+            "comment": "将重置按钮作为外置连接点的id",
+            "type": "Boolean",
             "value": "--"
         },
         {

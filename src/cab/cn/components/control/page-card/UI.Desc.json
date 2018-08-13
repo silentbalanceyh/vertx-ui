@@ -25,6 +25,14 @@
                         {
                             "name": "$extra",
                             "color": "#33af43"
+                        },
+                        {
+                            "name": "$leftVisible",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$rightVisible",
+                            "color": "#33af43"
                         }
                     ]
                 },
@@ -98,6 +106,20 @@
             "comment": "如果指定了$extra，则right/back两个属性设置信息失效，以$extra中设置优先",
             "type": "ReactNode",
             "value": "--"
+        },
+        {
+            "source": "P",
+            "name": "$leftVisible",
+            "comment": "左边按钮工具栏的显示和隐藏",
+            "type": "Boolean",
+            "value": "true"
+        },
+        {
+            "source": "P",
+            "name": "$rightVisible",
+            "comment": "右边按钮工具栏的显示和隐藏",
+            "type": "Boolean",
+            "value": "true"
         },
         {
             "source": "H",

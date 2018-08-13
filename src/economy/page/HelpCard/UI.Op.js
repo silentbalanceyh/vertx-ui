@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from "ux";
-import {Button, Icon, Steps} from "antd";
+import {Button, Steps} from "antd";
 
 const onClickBack = (reference, topbar) => (event) => {
     event.preventDefault();
@@ -10,6 +10,10 @@ const onClickBack = (reference, topbar) => (event) => {
     }
     // 导航处理
     Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
+};
+
+const renderBack = (reference, topbar) => {
+    return (<Button icon={"cross"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
 };
 
 const renderButton = (reference, topbar, key = "left") => {
@@ -31,17 +35,13 @@ const renderHelp = (reference, topbar, current) => {
         return (
             <Steps current={$current} size={topbar.help.size ? topbar.help.size : "small"}>
                 {helps.map(help => <Steps.Step {...help}/>)}
-                {topbar.back ? (
-                    <Steps.Step className="web-help-back"
-                                icon={<Icon type={"close-circle-o"}/>}
-                                onClick={onClickBack(reference, topbar)}/>
-                ) : false}
             </Steps>
         );
     } else
         return false;
 };
 export default {
+    renderBack,
     renderHelp,
     renderButton
 }

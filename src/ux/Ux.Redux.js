@@ -1,4 +1,5 @@
 import U from 'underscore'
+import Log from './Ux.Log';
 
 /**
  * 读取Tabular专用数据，读取所有数据，一般用于Rxjs
@@ -14,6 +15,7 @@ const rxDatum = (data, orderBy = 'order') => {
             result[hittedKey] = data[key].sort((left, right) => left[orderBy] - right[orderBy]);
         }
     }
+    Log.debug(result, data);
     return result;
 };
 /**
@@ -30,6 +32,7 @@ const rxAssist = (data, key, orderBy = 'order') => {
         data = data.list;
     }
     result[hittedKey] = data.sort((left, right) => left[orderBy] - right[orderBy]);
+    Log.debug(result, data);
     return result;
 };
 const rxData = (data) => ({"datum.data": data});

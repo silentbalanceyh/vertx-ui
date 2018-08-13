@@ -1,6 +1,27 @@
 import DataContainer from "./DataContainer";
+import DataArray from './DataArray';
 import * as Immutable from 'immutable';
 import * as U from 'underscore';
+
+const extractData = (original: any, key: any) => {
+    let keys: any = [];
+    if (U.isArray(key)) {
+        keys = key;
+    } else {
+        if ("string" === typeof key) {
+            if (0 <= key.indexOf('.')) {
+                keys = key.split('.');
+            } else {
+                keys = [key];
+            }
+        }
+    }
+    let data = Immutable.fromJS(original).getIn(keys);
+    if (data && data.toJS) {
+        data = data.toJS();
+    }
+    return data;
+};
 
 class DataObject implements DataContainer {
     ready: boolean = false;
@@ -35,6 +56,15 @@ class DataObject implements DataContainer {
         return {data, ready};
     }
 
+
+    $(key: string): DataArray {
+        if (this.ready && key) {
+            return new DataArray(extractData(this.data, key))
+        } else {
+            return new DataArray(undefined);
+        }
+    }
+
     /**
      * 传入属性名读取对应属性值
      * @param {string} key
@@ -42,23 +72,7 @@ class DataObject implements DataContainer {
      */
     _(key: string): any {
         if (this.ready && key) {
-            let keys: any = [];
-            if (U.isArray(key)) {
-                keys = key;
-            } else {
-                if ("string" === typeof key) {
-                    if (0 <= key.indexOf('.')) {
-                        keys = key.split('.');
-                    } else {
-                        keys = [key];
-                    }
-                }
-            }
-            let data = Immutable.fromJS(this.data).getIn(keys);
-            if (data && data.toJS) {
-                data = data.toJS();
-            }
-            return data;
+            return extractData(this.data, key);
         }
     }
 

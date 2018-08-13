@@ -8,6 +8,7 @@ class Component extends React.PureComponent {
         const {$key, $title = "", $buttons = {}} = this.props;
         const buttons = $buttons[$key] ? $buttons[$key] : [];
         const groups = Ux.elementVertical(buttons, "group");
+        console.info(buttons);
         return (
             <div>
                 {$title}

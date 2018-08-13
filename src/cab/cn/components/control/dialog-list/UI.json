@@ -1,0 +1,22 @@
+{
+    "_page": {
+        "title": "二级弹窗List（不支持服务端分页）"
+    },
+    "_tabs": {
+        "defaultActiveKey": "keyPreview",
+        "items": [
+            {
+                "key": "keyPreview",
+                "tab": "效果图"
+            },
+            {
+                "key": "keyDesc",
+                "tab": "属性信息"
+            }
+        ]
+    },
+    "_subjson": {
+        "config": "配置：:title",
+        "source": "源代码：:file"
+    }
+}
