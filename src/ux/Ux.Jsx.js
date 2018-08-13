@@ -10,6 +10,8 @@ import DFT from './_internal/Ux.Jsx.Default';
 import fieldRender from './_internal/Ux.Jsx.Single';
 import View from './_internal/Ux.Jsx.View.Fn';
 import Op from './_internal/Ux.Jsx.Op';
+// Raft
+import Raft from './Ux.Form'
 
 /**
  * 仅渲染交互式组件，Grid布局
@@ -50,32 +52,50 @@ const jsxFieldPage = (reference, renders, column = 4, values, config = {}) =>
         if (0.5 === window) column = 2;
         return jsxFieldGrid(reference, renders, column, processed, $config)
     });
+const jsxExtension = (reference, renders, column = 4, values, config = {}) =>
+    _uiForm(reference, config, column, values, (processed, $config = {}) => {
+        // 两列修正
+        const {window} = $config;
+        if (0.5 === window) column = 2;
+        console.info($config);
+        return jsxFieldGrid(reference, renders, column, processed, $config)
+    }, true);
 /**
  * window的合法值
  * 1：标准布局
  * 1/3：搜索栏专用值
  * 0.4：宽Label专用值
  */
-const _uiForm = (reference, config = {}, column, values, callback) => {
-    const {key = "form"} = config;
-    const form = Prop.fromHoc(reference, key);
-    if (form) {
-        // 初始化值信息
-        if (!values) values = DFT.uiInited(reference);
-        const window = form.window ? form.window : 1;
-        const $config = window ? {...config, window} : config;
-        // 打印信息，开始
-        Log.render(1, $config, key);
-        // Error信息
-        if (0.5 === window && 2 !== column) {
-            // 两列专用布局验证
-            return E.fxFailure(10011, column);
-        } else {
-            // 两列修正
-            return callback(values, $config, form);
-        }
+const _uiForm = (reference, config = {}, column, values, callback, disableRaft) => {
+    // Raft桥接
+    const {raft = {}} = reference.state;
+
+    // raft.enabled = false;
+    // extension部分必须disableRaft
+    if (raft.enabled && !disableRaft) {
+        // 兼容旧代码专用
+        return Raft.raftJsx(reference, values);
     } else {
-        return E.fxFailure(10012, key);
+        const {key = "form"} = config;
+        const form = Prop.fromHoc(reference, key);
+        if (form) {
+            // 初始化值信息
+            if (!values) values = DFT.uiInited(reference);
+            const window = form.window ? form.window : 1;
+            const $config = window ? {...config, window} : config;
+            // 打印信息，开始
+            Log.render(1, $config, key);
+            // Error信息
+            if (0.5 === window && 2 !== column) {
+                // 两列专用布局验证
+                return E.fxFailure(10011, column);
+            } else {
+                // 两列修正
+                return callback(values, $config, form);
+            }
+        } else {
+            return E.fxFailure(10012, key);
+        }
     }
 };
 const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = {}) =>
@@ -114,6 +134,7 @@ const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config 
  * @description 字段专用输出函数
  */
 export default {
+    uiForm: _uiForm,
     // Form专用
     uiFieldForm,
     uiFieldFilter,
@@ -152,6 +173,7 @@ export default {
     jsxFieldGrid,
     // 渲染子表单专用，可根据Form的key渲染子表单，field且不一样
     jsxFieldPage,
+    jsxExtension,
     // 计算动态Renders
     calcRenders: DFT.uiRender
 }

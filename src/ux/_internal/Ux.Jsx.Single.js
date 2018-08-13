@@ -149,4 +149,6 @@ export default {
     jsxColumn,
     jsxItem,
     jsxRow,
+    raftRow: DFT.uiRow,
+    raftRender: _getRender
 }

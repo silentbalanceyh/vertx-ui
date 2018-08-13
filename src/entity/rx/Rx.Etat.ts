@@ -12,6 +12,7 @@ class Etat {
     private _loading: any;
     private _dispatchTo: any = {};
     private _stateTo: any;
+    private _raft: any = {};
     private _op: {};
 
     /**
@@ -52,6 +53,35 @@ class Etat {
         if (!this._op) this._op = {};
         if (U.isFunction(opFun)) {
             this._op[op] = opFun;
+        }
+        return this;
+    }
+
+    raft(input, value: any) {
+        const raftRef: any = this._raft;
+        if (!raftRef.hasOwnProperty('enabled')) {
+            raftRef.enabled = true;
+        }
+        if (undefined === value) {
+            // 绑定jsx/绑定columns/绑定配置
+            if (U.isObject(input)) {
+                if (input.hasOwnProperty("_renders")) {
+                    // 特殊处理，子表单，动态表单
+                    raftRef.dynamic = {};
+                    raftRef.dynamic.renders = input._renders;
+                    raftRef.dynamic.extensions = input._extensions;
+                } else {
+                    raftRef.jsx = input;
+                }
+            } else if (U.isNumber(input)) {
+                raftRef.columns = input;
+            }
+        } else {
+            // 双参处理配置
+            if (!raftRef.hasOwnProperty("config")) {
+                raftRef.config = {};
+            }
+            raftRef.config[input] = value;
         }
         return this;
     }
@@ -134,6 +164,14 @@ class Etat {
         // 加载效果
         if (this._loading) {
             config.loading = this._loading;
+        }
+        // 启用了raft模式
+        if (this._raft['enabled']) {
+            if (!this._raft.hasOwnProperty("columns")) {
+                // 默认4列
+                this._raft.columns = 4;
+            }
+            config.raft = this._raft;
         }
         // Logger日志专用
         if (this._logger) {

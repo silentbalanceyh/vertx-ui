@@ -183,5 +183,7 @@ export default {
     extractGroupForm,
     extractForm,
     extractHidden,
-    extractOp
+    extractOp,
+    // Ui处理
+    raftUi: _normalizeUi
 }
