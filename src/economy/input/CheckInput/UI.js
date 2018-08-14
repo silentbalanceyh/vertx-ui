@@ -66,10 +66,14 @@ class Component extends React.PureComponent {
         const {config = {}, ...rest} = this.props;
         const {checkbox = [], input = {}} = config;
         // 必须提取，将value取出来
-        const {value, ...meta} = rest;
+        const {value = [], ...meta} = rest;
+        // 计算其他
+        let other = value.filter(item => item.key === "other").map(item => item.label)[0];
+        if (!other) other = "";
+        let checked = value.filter(item => item.key !== "other").map(item => item.key);
         return (
             <Input.Group compact>
-                <Checkbox.Group {...meta} onChange={this.handleChecked}>{checkbox.map(item => {
+                <Checkbox.Group {...meta} onChange={this.handleChecked} value={checked}>{checkbox.map(item => {
                     return (<Checkbox key={item.key}
                                       {...meta}
                                       value={item.value ? item.value : item.key}>
@@ -79,7 +83,7 @@ class Component extends React.PureComponent {
                 {input.label}：
                 <Input name={input.key} style={{
                     width: "120px"
-                }} {...meta} onChange={this.handleInput}/>
+                }} {...meta} onChange={this.handleInput} value={other}/>
             </Input.Group>
         )
     }

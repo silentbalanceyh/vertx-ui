@@ -36,6 +36,7 @@ const jsxLayout = (field, attr = "span") => (item = {}, value) => {
     item.optionItem[field][attr] = Value.valueInt(value);
 };
 const itemValue = (field) => (item = {}, value) => item[field] = value;
+const itemBoolean = (field) => (item = {}, value) => item[field] = Boolean(value);
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
@@ -50,7 +51,8 @@ const PARSER = {
     allowClear: jsxBoolean("allowClear"),
     sorter,
     // 自定义属性
-    _submit: itemValue("submit")
+    _submit: itemValue("submit"),
+    moment: itemBoolean("moment")
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');

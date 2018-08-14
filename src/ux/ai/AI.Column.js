@@ -324,7 +324,7 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
                onChange={(event) => Value.valueTriggerChange(reference, {
                    index, field: item.dataIndex,
                    value: event.target.value
-               })}/>
+               })} value={text}/>
     )
 };
 
@@ -347,7 +347,7 @@ const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
                     onChange={(value) => Value.valueTriggerChange(reference, {
                         index, field: item.dataIndex,
                         value
-                    })}/>
+                    })} value={Value.convertTime(text)}/>
     )
 };
 

@@ -57,7 +57,6 @@ const jsxExtension = (reference, renders, column = 4, values, config = {}) =>
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;
-        console.info($config);
         return jsxFieldGrid(reference, renders, column, processed, $config)
     }, true);
 /**
@@ -81,6 +80,7 @@ const _uiForm = (reference, config = {}, column, values, callback, disableRaft) 
         if (form) {
             // 初始化值信息
             if (!values) values = DFT.uiInited(reference);
+            // 在values中追加前缀
             const window = form.window ? form.window : 1;
             const $config = window ? {...config, window} : config;
             // 打印信息，开始

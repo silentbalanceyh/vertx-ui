@@ -65,11 +65,11 @@ class Etat {
         if (undefined === value) {
             // 绑定jsx/绑定columns/绑定配置
             if (U.isObject(input)) {
-                if (input.hasOwnProperty("_renders")) {
+                if (input.hasOwnProperty("renders")) {
                     // 特殊处理，子表单，动态表单
                     raftRef.dynamic = {};
-                    raftRef.dynamic.renders = input._renders;
-                    raftRef.dynamic.extensions = input._extensions;
+                    raftRef.dynamic.renders = input.renders;
+                    raftRef.dynamic.extensions = input.extensions;
                 } else {
                     raftRef.jsx = input;
                 }

@@ -85,6 +85,11 @@ export default {
      */
     dataIn: (state) => DataLabor.createOut(state),
     /**
+     * 初始化数据
+     */
+    dataArray: DataLabor.getArray([]),
+    dataObject: DataLabor.getObject({}),
+    /**
      * 增强版的拷贝方法，支持多种模式
      */
     dgRouter: Dg.dgRouter,

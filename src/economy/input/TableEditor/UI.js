@@ -36,7 +36,7 @@ class Component extends React.PureComponent {
         return (
             <Input.Group {...rest}>
                 <Table {...config} className={"web-table-editor"} pagination={false}
-                       dataSource={source}/>
+                       dataSource={value}/>
             </Input.Group>
         )
     }

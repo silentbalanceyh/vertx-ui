@@ -84,32 +84,44 @@ const hookerButton = (item = {}) => {
     }
 };
 
-const hookerRender = (item, renders = {}, layout, refenrece) => {
-        // 如果无规则，则省略onFocus/onBlur
-        _aiValidator(item, refenrece);
-        // 处理布局
-        Calculator.calculateLayout(item, layout);
-        // 处理fnRender
-        let fnRender = renders[item.field];
-        // 如果fnRender没有
-        Log.render(2, item, fnRender);
-        if (!fnRender) {
-            // 如果item中存在holder属性
-            if (item.field.startsWith("$")) {
-                // 特殊Op注入, 如果是$button则触发特殊处理
-                fnRender = hookerButton(item);
-            } else {
-                if (!item.hasOwnProperty('holder')) {
-                    // 设置item中的render属性
-                    let renderKey = item.render;
-                    if (!renderKey) renderKey = 'aiInput';
-                    fnRender = Ai[renderKey];
-                }
+const _findRender = (item, renders, entity) => {
+    let fnRender = renders[item.field];
+    if (!fnRender) {
+        if (entity && item.field && item.field.startsWith("children")) {
+            const hitted = item.field.split(`.${entity}.`)[1];
+            if (hitted && "string" === typeof hitted) {
+                fnRender = renders[hitted];
             }
         }
-        return fnRender;
     }
-;
+    return fnRender;
+};
+
+const hookerRender = (item, renders = {}, layout = {}, refenrece) => {
+    // 如果无规则，则省略onFocus/onBlur
+    _aiValidator(item, refenrece);
+    // 处理布局
+    Calculator.calculateLayout(item, layout);
+    // 处理fnRender
+    let fnRender = _findRender(item, renders, layout.entity);
+    // 如果fnRender没有
+    Log.render(2, item, fnRender);
+    if (!fnRender) {
+        // 如果item中存在holder属性
+        if (item.field.startsWith("$")) {
+            // 特殊Op注入, 如果是$button则触发特殊处理
+            fnRender = hookerButton(item);
+        } else {
+            if (!item.hasOwnProperty('holder')) {
+                // 设置item中的render属性
+                let renderKey = item.render;
+                if (!renderKey) renderKey = 'aiInput';
+                fnRender = Ai[renderKey];
+            }
+        }
+    }
+    return fnRender;
+}
 
 const hookerCol = (item) => {
     const style = {};

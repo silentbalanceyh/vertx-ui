@@ -6,6 +6,7 @@ import DFT from "./Ux.Jsx.Default";
 import Ai from "../ai/AI";
 import Prop from "../Ux.Prop";
 import Norm from "../Ux.Normalize";
+import Value from '../Ux.Value';
 import E from '../Ux.Error';
 import U from 'underscore';
 
@@ -117,6 +118,8 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
                             if (entity) {
                                 item.field = `children.${entity}.${item.field}`
                             }
+                            // 初始值
+                            raftValue(item, values);
                             // span的专用修正
                             if (spans[cellIndex] && !item.span) {
                                 item.span = spans[cellIndex];
@@ -142,6 +145,21 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
         </div>
     );
 };
+const raftValue = (cell = {}, values = {}) => {
+    if (values.hasOwnProperty(cell.field)) {
+        let literal = values[cell.field];
+        if (cell.moment) {
+            if (U.isArray(literal)) {
+                const newArray = [];
+                literal.forEach(item => newArray.push(Value.convertTime(item)));
+                literal = newArray;
+            } else {
+                literal = Value.convertTime(literal);
+            }
+        }
+        cell.optionConfig.initialValue = literal;
+    }
+};
 export default {
     jsxHidden,
     jsxTitle,
@@ -149,6 +167,7 @@ export default {
     jsxColumn,
     jsxItem,
     jsxRow,
+    raftValue,
     raftRow: DFT.uiRow,
     raftRender: _getRender
 }
