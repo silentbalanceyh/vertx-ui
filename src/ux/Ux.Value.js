@@ -15,14 +15,20 @@ const valueValid = (data = {}, wild = false) => {
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
-            if (wild) {
-                // 空字符串、0，以及其他值
-                if (!value) {
-                    delete data[key];
-                }
+            if (U.isArray(value)) {
+                value.forEach(item => valueValid(item, wild))
+            } else if (U.isObject(value)) {
+                valueValid(value, wild);
             } else {
-                if (undefined === value) {
-                    delete data[key];
+                if (wild) {
+                    // 空字符串、0，以及其他值
+                    if (!value) {
+                        delete data[key];
+                    }
+                } else {
+                    if (undefined === value) {
+                        delete data[key];
+                    }
                 }
             }
         }
@@ -73,6 +79,7 @@ const SEARCHERS = {
     "OPERATOR": (value) => "AND" === value
 };
 
+
 const valueSearch = (config = {}, data = {}) => {
     // 查找根节点
     const result = {};
@@ -98,12 +105,13 @@ const valueSearch = (config = {}, data = {}) => {
  * 直接转换数据成Moment对象，时间处理
  * @method convertTime
  * @param value 输入数据
+ * @param format 格式
  * @return {*}
  */
-const convertTime = (value) => {
+const convertTime = (value, format = moment.ISO_8601) => {
     if (value) {
         if (!moment.isMoment(value)) {
-            value = moment(value);
+            value = moment(value, format);
             E.fxTerminal(!moment.isMoment(value), 10028, value);
         }
         return value;

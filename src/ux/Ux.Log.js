@@ -254,8 +254,8 @@ const mocker = (mockerRef, $query) => {
  */
 const mock = (request, response, url) => {
     if (Cv.DEBUG && Cv.MOCK) {
-        let message = `%c ------> [Error] [Mock] Mock data for api ${url ? url : ""}`;
-        console.groupCollapsed(message, "color:red;font-weight:900");
+        let message = `%c ------> [Zero] [Mock] Mock data for api ${url ? url : ""}`;
+        console.groupCollapsed(message, "color:white;background-color:#c30;font-weight:900;");
         if (request) {
             console.log("%c [Zero] Mock request -> ", 'color:#99CC33', request);
         } else {

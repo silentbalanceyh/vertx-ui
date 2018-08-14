@@ -90,9 +90,10 @@ const dgMonitor = (data, second) => {
     }
     return data;
 };
-const dgDebug = (data) => {
+const dgDebug = (data, prefix) => {
     if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
-        console.debug("[DEBUG]", data);
+        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, "color:white;background-color:#c30;font-weight:900;",
+            data);
     }
     return data;
 };

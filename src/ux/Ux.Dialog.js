@@ -14,13 +14,17 @@ const _captureKey = (reference, key) => {
     }
 };
 
-const _buildConfig = (reference, message, fnSuccess, key) => {
+const _buildConfig = (reference, message, fnSuccess, key, fnFailure) => {
     const config = {
         title: _captureKey(reference, key),
         content: message
     };
     if (U.isFunction(fnSuccess)) {
         config.onOk = fnSuccess;
+    }
+    if (U.isFunction(fnFailure)) {
+        // 一般confirm的时候使用
+        config.onCancel = fnFailure;
     }
     if (!config.width) config.width = 488;
     return config;
@@ -41,7 +45,7 @@ const showError = (reference, message, fnSuccess) => Modal.error(_buildConfig(re
  * @param {Function} fnSuccess 窗口按钮的回调函数
  */
 const showSuccess = (reference, message, fnSuccess) => Modal.success(_buildConfig(reference, message, fnSuccess, "success"));
-const showConfirm = (reference, message, fnSuccess) => Modal.confirm(_buildConfig(reference, message, fnSuccess, "confirm"));
+const showConfirm = (reference, message, fnSuccess, fnFailure) => Modal.confirm(_buildConfig(reference, message, fnSuccess, "confirm", fnFailure));
 
 const _dialogFun = {
     success: showSuccess,
@@ -51,11 +55,11 @@ const _dialogFun = {
 
 const messageSuccess = (displayMsg, fnSuccess) => {
     message.destroy();
-    message.success(displayMsg, 3, fnSuccess);
+    message.success(displayMsg, 1, fnSuccess);
 };
 const messageError = (displayMsg, fnSuccess) => {
     message.destroy();
-    message.error(displayMsg, 3, fnSuccess);
+    message.error(displayMsg, 1, fnSuccess);
 };
 const _messageFun = {
     success: messageSuccess,
@@ -133,9 +137,9 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
  *          }
  *      }
  */
-const showDialog = (reference, key, fnSuccess, params) => {
+const showDialog = (reference, key, fnSuccess, params, fnFailure) => {
     const config = _configModal(reference, key, params);
-    config.fun(reference, config.message, fnSuccess);
+    config.fun(reference, config.message, fnSuccess, fnFailure);
 };
 /**
  * 显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；

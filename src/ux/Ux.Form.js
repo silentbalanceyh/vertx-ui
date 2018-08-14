@@ -13,9 +13,8 @@ const _raftCell = (reference, values) => (cell) => {
         const {title, ...cellRest} = cell;
         return (<Col {...cellRest}>{title}</Col>)
     } else {
-        if (values.hasOwnProperty(cell.field)) {
-            cell.optionConfig.initialValue = values[cell.field];
-        }
+        // 子表单
+        Jsx.raftValue(cell, values);
         return (
             <Col {...cell.col}>
                 <Form.Item {...cell.optionItem}>
@@ -43,10 +42,18 @@ const raftHidden = (reference, values = {}, raft = {}, getFieldDecorator) =>
         initialValue: values[name]
     })(<Input key={name} type={"hidden"}/>));
 
-const raftJsx = (reference, values = {}) => {
+const raftInited = (reference, values) => {
+    // 初始化数据专用
+    if (!values) values = reference.props['$inited'];
+    if (!values) values = {};
+    return values;
+};
+const raftJsx = (reference, values) => {
     const {form} = reference.props;
     const {getFieldDecorator} = form;
     const {raft = {}} = reference.state;
+    // 初始化数据
+    values = raftInited(reference, values);
     return (
         <Form {...raft.form}>
             {/** 隐藏组件 hidden **/}

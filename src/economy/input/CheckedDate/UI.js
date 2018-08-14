@@ -47,10 +47,13 @@ class Component extends React.PureComponent {
         const {agree = false} = this.state;
         const disabled = related.disabled ? !agree : false;
         const {value, ...meta} = rest;
+        let checkedValue = value && value.agree ? "YES" : undefined;
+        let dateValue = value && value.value ? Ux.convertTime(value.value) : undefined;
         return (
             <Input.Group {...meta} compact>
                 <Radio.Group className={"web-checked-radio"} onChange={
-                    related.disabled ? this.handleDisabled : () => Ux.E.fxTerminal(true, 10017, "onChange")}>
+                    related.disabled ? this.handleDisabled : () => Ux.E.fxTerminal(true, 10017, "onChange")}
+                             value={checkedValue}>
                     {config.map(item => (
                         <Radio key={item.key} value={item.value ? item.value : item.key}>
                             {item.label}</Radio>))}
@@ -60,7 +63,7 @@ class Component extends React.PureComponent {
                 {related.config && related.config.label ? `${related.config.label}：` : false}
                 </span>
                 <DatePicker {...related.config} onChange={this.handleDate} disabled={disabled}
-                            className={"rx-readonly"}/>
+                            className={"rx-readonly"} value={dateValue}/>
             </Input.Group>
         )
     }

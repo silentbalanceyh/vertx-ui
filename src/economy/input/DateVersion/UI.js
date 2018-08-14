@@ -46,18 +46,20 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, ...rest} = this.props;
-        const {value, ...meta} = rest;
+        const {value = {}, ...meta} = rest;
+        const data = value.source ? value.source : {};
         return (
             <Input.Group compact {...meta}>
                 <Input addonAfter={config.year} style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('year')}/>
+                       onChange={this.handleInput('year')} value={data.year}/>
                 <Input addonAfter={config.month} style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('month')}/>
+                       onChange={this.handleInput('month')} value={data.month}/>
                 <Input addonAfter={config.day} style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('day')}/>
+                       onChange={this.handleInput('day')} value={data.day}/>
                 {config.version ? <Input addonAfter={config.version}
                                          style={{width: config.width ? config.width : 100}} {...meta}
                                          onChange={this.handleInput('version')}
+                                         value={value.version}
                 /> : false}
             </Input.Group>
         )

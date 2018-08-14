@@ -95,7 +95,7 @@ const cycleDestoryForm = (props = {}, prevProps = {}) => {
  */
 const cycleUpdateForm = (props = {}, prevProps = {}) => {
     const {fnInit} = props;
-    E.fxWarning(!props.hasOwnProperty("fnInit"), 10013, fnInit);
+    // E.fxWarning(!props.hasOwnProperty("fnInit"), 10013, fnInit);
     if (fnInit) {
         const $key = props.$key;
         const $prevKey = prevProps.$key;
