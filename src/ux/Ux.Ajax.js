@@ -109,7 +109,7 @@ const ajaxAdapter = (body = {}) => {
  */
 const ajaxResponse = (request, mockData = {}, params) =>
     // Mock开启时，返回Mock中data节点的数据
-    (mockData['forceMock'] || (Cv.MOCK && mockData.mock)) ?
+    (Cv.MOCK && mockData.mock) ?
         Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data) :
         fetch(request)
             .then(response => Log.response(request, response, request.method))

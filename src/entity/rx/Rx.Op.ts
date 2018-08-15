@@ -1,83 +1,105 @@
 import Ux from 'ux';
+import * as U from 'underscore';
 
 class RxOp {
-    private promise: Function = undefined;
-    private success: Function = undefined;
-    private failure: Function = () => {
-    };
-    private validate: Function = () => true;
-    private reference: any;
-    private loading: String = undefined;
+    private validation: any = [];
+    private _success;
+    private _confirmKey;
+    private _postKey;
+    private isDialog: Boolean = true;
+    private reference;
 
     private constructor(reference: any) {
         this.reference = reference;
     }
 
     static from(reference: any) {
-        if (!reference) {
-            console.error("[Zero Rx] Input 'reference' must be valid.");
-        }
         return new RxOp(reference);
     }
 
-    rx(op: any = {}) {
-        if (op.success) this.success = op.success;
-        if (op.failure) this.failure = op.failure;
-        if (op.promise) this.promise = op.promise;
-        if (op.validate) this.validate = op.validate;
+    verify(...inputes) {
+        if (inputes) {
+            const reference = this.validation;
+            for (let idx = 0; idx < inputes.length - 1; idx = idx + 2) {
+                const cond = inputes[idx];
+                const key = inputes[idx + 1];
+                if (undefined !== key) {
+                    const item: any = {};
+                    item.cond = U.isFunction(cond) ? cond() : cond;
+                    item.key = key;
+                    reference.push(item);
+                }
+            }
+        }
         return this;
     }
 
-    rxValidate(validate: Function) {
-        this.validate = validate;
+    confirm(key) {
+        if (key) {
+            this._confirmKey = key;
+        }
         return this;
     }
 
-    rxPromise(promise: Function) {
-        this.promise = promise;
+    success(promise) {
+        this._success = U.isFunction(promise) ? promise() : promise;
         return this;
     }
 
-    rxLoading(loading: String) {
-        this.loading = loading;
+    dialog(key) {
+        if (key) {
+            this._postKey = key;
+            this.isDialog = true;
+        }
         return this;
     }
 
-    rxSuccess(success: Function) {
-        this.success = success;
+    message(key) {
+        if (key) {
+            this._postKey = key;
+            this.isDialog = false;
+        }
         return this;
     }
 
-    rxFailure(failure: Function) {
-        this.failure = failure;
-        return this;
-    }
-
-    /**
-     * 生成执行器
-     * @returns {() => any}
-     */
-    bind() {
-        const executor = this._options();
+    to(callback) {
         const ref = this.reference;
-        const refLoading = this.loading;
-        return () => Ux.rxSubmit(ref, refLoading, executor);
-    };
-
-    reset() {
-        const executor = this._options();
-        const ref = this.reference;
-        return executor.success ? () => executor.success(ref) :
-            () => Ux.formReset(ref);
-    }
-
-    private _options() {
-        const executor: any = {};
-        executor.success = this.success;
-        executor.failure = this.failure;
-        executor.promise = this.promise;
-        executor.validate = this.validate;
-        return executor;
+        const validation = this.validation;
+        const confirmKey = this._confirmKey;
+        const promise = this._success;
+        // 防重复提交
+        Ux.rdxSubmitting(ref, true);
+        // 验证处理
+        for (let idx = 0; idx < validation.length; idx++) {
+            const item = validation[idx];
+            if (item.cond) {
+                const message = Ux.fromPath(ref, "modal", "error", item.key);
+                return Ux.rdxReject(message);
+            }
+        }// 是否设置了postKey
+        const postDialog = this.isDialog ? Ux.showDialog : Ux.showMessage;
+        // 验证成功，是否执行confirm流程
+        if (confirmKey) {
+            return new Promise((resolve) =>
+                Ux.showDialog(ref, confirmKey,
+                    () => promise.then(data => postDialog(ref, this._postKey, () => {
+                        Ux.rdxSubmitting(ref, false);
+                        let ret = callback(data);
+                        if (!ret) ret = {};
+                        return resolve(ret);
+                    })), {},
+                    () => {
+                        Ux.rdxSubmitting(ref, false);
+                        resolve({})
+                    }));
+        } else {
+            return promise.then(data => postDialog(ref, this._postKey, () => {
+                Ux.rdxSubmitting(ref, false);
+                let ret = callback(data);
+                if (!ret) ret = {};
+                return Promise.resolve(ret);
+            }));
+        }
     }
 }
 

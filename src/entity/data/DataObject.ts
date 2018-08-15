@@ -46,8 +46,16 @@ class DataObject implements DataContainer {
         }
     }
 
-    is(): boolean {
-        return this.ready;
+    is(key: any = null): boolean {
+        if (key) {
+            if (this.ready) {
+                return this.data.hasOwnProperty(key);
+            } else {
+                return this.ready;
+            }
+        } else {
+            return this.ready;
+        }
     }
 
     raw(): Object {

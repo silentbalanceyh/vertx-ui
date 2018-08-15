@@ -40,6 +40,7 @@ const itemBoolean = (field) => (item = {}, value) => item[field] = Boolean(value
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
+    addonBefore: jsxValue('addonBefore'),
     readOnly: jsxBoolean("readOnly"),
     placeholder: jsxKv("placeholder"),
     valuePropName: configValue("valuePropName"),

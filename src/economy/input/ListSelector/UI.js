@@ -65,9 +65,10 @@ class Component extends React.PureComponent {
         if (config.table.columns) {
             config.table.columns = Ux.uiTableColumn(this, config.table.columns)
         }
+        const attr = Ux.valueFlip(jsx);
         return (
             <span>
-                <Input className="rx-readonly" readOnly {...jsx}
+                <Input className="rx-readonly" readOnly {...attr}
                        suffix={<Icon type="search" onClick={Op.fnLoading(this)}/>}/>
                 <DynamicDialog className="rx-list-dialog"
                                $visible={this.state.$visible}

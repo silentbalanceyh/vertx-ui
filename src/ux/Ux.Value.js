@@ -227,6 +227,13 @@ const valueFilter = (data = {}, keys = [], orderBy = "order") => {
     });
     return result;
 };
+const $FLIP = Immutable.fromJS(["fnOut", "reference", "config"]);
+const valueFlip = (jsx = {}) => {
+    const processed = {};
+    Object.keys(jsx).filter(key => !$FLIP.contains(key))
+        .forEach((field) => processed[field] = jsx[field]);
+    return processed;
+}
 /**
  * 两个字符串的专用连接方法，用于做不重复链接，
  * @method stringConnect
@@ -343,6 +350,8 @@ export default {
     valueOnChange,
     valueSearch,
     valueTrack: Debug.dgMonitor,
+    // 设置自定义控件的专用属性
+    valueFlip,
     // 数学运算
     mathMultiplication,
     mathDivision,

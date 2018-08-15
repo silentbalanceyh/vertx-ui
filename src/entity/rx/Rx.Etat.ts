@@ -57,7 +57,7 @@ class Etat {
         return this;
     }
 
-    raft(input, value: any) {
+    raft(input, value: any = undefined) {
         const raftRef: any = this._raft;
         if (!raftRef.hasOwnProperty('enabled')) {
             raftRef.enabled = true;
@@ -100,7 +100,8 @@ class Etat {
         return this;
     }
 
-    connect(object, dispatch: boolean) {
+    // 默认State To Props
+    connect(object, dispatch: boolean = false) {
         if (dispatch) {
             if (object && !object.hasOwnProperty('fnOut')) {
                 object.fnOut = Taper.fnFlush

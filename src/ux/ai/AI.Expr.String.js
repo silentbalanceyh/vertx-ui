@@ -209,6 +209,7 @@ const aiExprHelp = (steps = []) =>
 const aiExprButton = (buttons = [], props = {}) =>
     _iterator(buttons, (values = []) => parseItem(values, "button"))
         .map(ExprValue.applyConnect).map(item => ExprValue.applyLoading(item, props));
+const aiExprTabs = (items = [], props = {}) => items.map(item => parseItem(item, "tabs")).map(ExprValue.applyKey);
 const aiExprOp = (button = "") => {
     const splitted = button.split(',');
     if (1 === splitted.length) {
@@ -233,6 +234,7 @@ export default {
     aiExprField,
     aiExprWindow,
     aiExprAjax,
+    aiExprTabs,
     // 对象解析
     aiMetaOption,
     aiMetaColumn,

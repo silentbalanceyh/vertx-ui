@@ -139,7 +139,7 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
  */
 const showDialog = (reference, key, fnSuccess, params, fnFailure) => {
     const config = _configModal(reference, key, params);
-    config.fun(reference, config.message, fnSuccess, fnFailure);
+    return config.fun(reference, config.message, fnSuccess, fnFailure);
 };
 /**
  * 显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；

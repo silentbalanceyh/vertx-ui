@@ -7,10 +7,26 @@ import Navigator from "./flow/Navigator";
 import StateIn from "./state/StateIn";
 import StateOut from "./state/StateOut";
 
+import RxEtat from './rx/Rx.Etat';
+import RxFlow from './rx/Rx.Flow';
+import RxOp from './rx/Rx.Op';
+
 /**
  * @class DataLabor
  */
 class DataLabor {
+
+    static rxEtat(requiredFile: any): RxEtat {
+        return RxEtat.from(requiredFile);
+    }
+
+    static rxFlow(action: any): RxFlow {
+        return RxFlow.from(action);
+    }
+
+    static rxOp(reference: any): RxOp {
+        return RxOp.from(reference);
+    }
 
     static getObject(input: Object): DataObject {
         return new DataObject(input);

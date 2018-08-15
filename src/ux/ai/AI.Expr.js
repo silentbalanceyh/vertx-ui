@@ -42,7 +42,8 @@ export default {
         "text",
         "connectId",
         "type",
-        "icon"
+        "icon",
+        "disabledKey"
     ],
     "steps": [
         "title",
@@ -66,5 +67,9 @@ export default {
         "params.pager.page",
         "params.pager.size",
         "$KV$"
+    ],
+    "tabs": [
+        "tab",
+        "key"
     ]
 }
