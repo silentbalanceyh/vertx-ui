@@ -69,7 +69,22 @@ export default {
 * **React模式**：React直接模式会使用`reference.state.$loading`的值来绑定到按钮中实现防重复提交；
 * **Connect模式**：这种模式由于无法直接用React交互，会调用React中的状态来实现，状态树：`out.status.submitting.loading`；
 
-## 4.总结
+## 4.函数注入
+
+函数注入表示`rt`函数为高阶函数，允许用户直接从函数之外写入另外一个二阶函数实现自定义逻辑的写入过程，按钮本身可触发，还可支持自定义逻辑。
+
+| 函数名 | 函数注入 | 自动注入 | 注入源 | 匹配属性 | 按钮数量 |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| rtLink | 不支持 | --- | --- |  | 1 |
+| rtReset | 支持 | --- | state.$op | id | 1 |
+| rtPure | 支持 | --- | 参数onClick | 无（直接注入） | 1 |
+| rtAnt | 支持 | --- | state.$op | op | 1 |
+| rtDialog | 支持 | Yes | state.$op | bind\[x\].key | n |
+| rtBind | 支持 | Yes | state.$op | （注入源内置） | n |
+| rtInherit | 支持 | --- | props.$op | （注入源内置） | n |
+| rtNorm | 支持 | Yes | state.$op | rtAnt + rtRet | 2 |
+
+## 5.总结
 
 设计新的按钮的API的目的是真正意义目的如下：
 

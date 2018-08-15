@@ -36,10 +36,11 @@ const rtLink = (reference, metadata = {}) => {
 | 属性维度 | 说明 |
 | :--- | :--- |
 | 显示/隐藏 | 默认显示 |
-| 防止重复提交 | loading配置状态键，最终加载效果：reference.state\[loading\]，从状态中读取 |
+| 防止重复提交 | 由传入的loading配置决定 |
 | 是否Jsx渲染 | 是 |
 | 防重复提交：React模式 | 动态key，由loading配置决定 |
 | 防重复提交：Redux模式 | 不支持 |
+| 函数注入 | 不支持 |
 
 
 
