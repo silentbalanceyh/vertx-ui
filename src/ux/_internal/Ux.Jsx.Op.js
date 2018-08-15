@@ -2,8 +2,8 @@ import React from "react";
 import {Button} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
-import Immutable from "immutable";
-import Value from "../Ux.Value";
+import Immutable from 'immutable';
+import Value from '../Ux.Value';
 
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;

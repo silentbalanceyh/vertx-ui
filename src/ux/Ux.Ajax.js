@@ -5,10 +5,10 @@ import Cv from "./Ux.Constant";
 import Expr from "./Ux.Expr";
 import Env from './Ux.Env';
 import Sign from "./Ux.Sign";
-import Dg from "./Ux.Debug";
 import Immutable from 'immutable'
 import Type from './Ux.Type';
 import E from './Ux.Error';
+import Dg from './Ux.Debug';
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -107,31 +107,27 @@ const ajaxAdapter = (body = {}) => {
  * @param {Object} params
  * @return {Promise<Response>}
  */
-const ajaxResponse = (request, mockData = {}, params) =>
-    // Mock开启时，返回Mock中data节点的数据
-    (Cv.MOCK && mockData.mock) ?
-        Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data) :
-        fetch(request)
-            .then(response => Log.response(request, response, request.method))
-            .then(response => response.ok ?
-                response.json().then(body => Promise.resolve(ajaxAdapter(body))) :
-                response.json().then(data => Promise.reject({
-                    ...data,
-                    status: response.status,
-                    statusText: response.statusText
-                }))
-            )
-            .then(response => {
-                // 是否存储响应信息
-                if (Cv['DEBUG_AJAX']) {
-                    Dg.dgFileJson({
-                        request: params,
-                        response: response
-                    });
-                }
-                return response;
-            })
-            .catch(error => Promise.reject(error));
+const ajaxResponse = async (request, mockData = {}, params) => {
+    if (Cv.MOCK && mockData.mock) {
+        return Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data);
+    } else {
+        const response = await fetch(request);
+        let body = await response.json();
+        if (response.ok) {
+            body = ajaxAdapter(body);
+        } else {
+            body = {...body, status: response.status, statusText: response.statusText};
+        }
+        if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({request: params, response: body});
+        Log.response(body, params, request);
+        if (response.ok) {
+            return body;
+        } else {
+            console.error(body);
+            return Promise.reject({data: body});
+        }
+    }
+};
 /**
  * 【高阶函数：二阶】Ajax统一调用的读取方法，生成统一的Ajax远程读取方法
  * @method ajaxRead

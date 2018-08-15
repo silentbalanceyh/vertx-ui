@@ -102,16 +102,21 @@ const readQuery = (reference) => {
 };
 const updateGrid = (reference = {}, prevProps = {}) => {
     const record = reference.props['$list'];
-    if (undefined === record) {
-        // 初始化查询
-        const {rxSearch} = reference.props;
-        if (rxSearch) {
-            const {$query} = reference.props;
-            rxSearch($query.to());
+    const {$query} = reference.props;
+    if ($query.is()) {
+        if (undefined === record) {
+            // 初始化查询
+            const {rxSearch} = reference.props;
+            if (rxSearch) {
+                const {$query} = reference.props;
+                rxSearch($query.to());
+            }
+            // initList(reference, config.query);
+        } else {
+            Mock.mockInit(reference, record);
         }
-        // initList(reference, config.query);
     } else {
-        Mock.mockInit(reference, record);
+        initGrid(reference);
     }
 };
 export default {

@@ -13,7 +13,13 @@ import E from './Ux.Error';
  */
 const elementUnique = (data = [], field = "", value) => {
     E.fxTerminal(!U.isArray(data), 10071, data, "Array");
-    let reference = data.filter(item => value === item[field]);
+    let reference = [];
+    if ("object" === typeof field) {
+        // Filter模式
+        reference = elementFind(data, field);
+    } else {
+        reference = data.filter(item => value === item[field]);
+    }
     E.fxTerminal(1 < reference.length, 10069, reference, 1);
     return 0 === reference.length ? undefined : reference[0];
 };
@@ -187,7 +193,13 @@ const itData = (config = {}, consumer = () => {
             E.fxTerminal("string" !== typeof expr, 10008, key, expr);
             E.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
             const kv = expr.split(':');
-            const value = kv[1].split('.');
+            let value;
+            if ("DATUM" === kv[0]) {
+                // 映射到path[0]
+                value = [kv[1].split(',')];
+            } else {
+                value = kv[1].split('.');
+            }
             if (U.isFunction(consumer)) {
                 consumer(key, kv[0], value);
             }

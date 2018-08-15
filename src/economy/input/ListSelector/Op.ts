@@ -9,10 +9,10 @@ const fnChange = (reference: any = {}) => (pagination: any, filters: any, sorter
     reference.setState({$loading: true, $visible: true});
     const {config = {}, mock} = reference.props;
     if (config.ajax) {
-
         const params = fnParams(reference);
         params.pager.size = pagination.pageSize;
         params.pager.page = pagination.current;
+        console.info(params);
         Ux.asyncData(config.ajax, params, ($data) => {
             reference.setState({$loading: false, $data});
         }, mock)

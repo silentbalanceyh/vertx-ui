@@ -46,11 +46,19 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
             // 基本条件
             const field = rule.field;
             parameters[field] = value;
-            const {key:$key} = refereuce.props.$inited;
-            if ($key) {
-                // 更新Mode
-                const updateKey = `key,<>`;
-                parameters[updateKey] = $key;
+            const {$inited} = refereuce.props;
+            if ($inited) {
+                const {key:$key} = $inited;
+                if ($key) {
+                    // 更新Mode
+                    const updateKey = `key,<>`;
+                    parameters[updateKey] = $key;
+                }
+            }
+            // existing 时，参数间关系默认为 AND
+            if (Object.keys(parameters).length > 1){
+                const andKey = "";
+                parameters[andKey] = true;
             }
             // 远程调用
             Field.asyncTrue(rule.config, parameters, {
