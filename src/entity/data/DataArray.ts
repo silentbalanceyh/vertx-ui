@@ -13,7 +13,7 @@ class DataArray implements DataContainer {
         this.setValue(data);
     }
 
-    setValue(data: any = []) {
+    setValue(data: any) {
         this.data = JSON.stringify(data);
         this.ready = !!data;
         this.length = data ? data.length : 0;
@@ -100,7 +100,7 @@ class DataArray implements DataContainer {
 
     saveElement(element: any, idField: any = "key") {
         if (!element[idField]) {
-            element[idField] = Ux.randomString(32);
+            element[idField] = Ux.randomUUID();
         }
         // 元素信息处理
         if (!this.data) {

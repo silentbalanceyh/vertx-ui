@@ -4,7 +4,9 @@ import Adjust016 from './_layout/adjust.016';
 import Half05 from './_layout/half.05';
 import Filter_03 from './_layout/filter-03';
 import Filter_05 from './_layout/filter-05';
-import Adjust017 from './_layout/adjust.017.js';
+
+import Adjust017 from './_layout/adjust.017';
+import Adjust021 from './_layout/adjust.021';
 
 const item = {
     // 标准布局
@@ -17,6 +19,8 @@ const item = {
     0.17: Adjust017,
     // 2列专用布局（只能两列，否则报错）
     0.5: Half05,
+    // Word布局
+    0.21: Adjust021
 };
 // 抽屉搜索框布局
 item[-0.3] = Filter_03;

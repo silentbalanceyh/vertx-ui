@@ -54,13 +54,16 @@ const jsxItem = (reference, item = {}, render) => {
         </Form.Item>
     ) : jsxRender(item)
 };
-const jsxTitle = (item = {}) => (
-    <Col className={item.className ? item.className : "page-title"}
-         key={item.field} span={item.span ? item.span : 24}>
-        {/** 只渲染Title **/}
-        {item.title}
-    </Col>
-);
+const jsxTitle = (item = {}) => {
+    const key = item.key ? item.key : Random.randomString(16);
+    return (
+        <Col className={item.className ? item.className : "page-title"}
+             key={key} span={item.span ? item.span : 24}>
+            {/** 只渲染Title **/}
+            {item.title}
+        </Col>
+    )
+};
 const jsxGrid = (item = {}) => (
     <Col className={item.className ? item.className : "page-title"}
          key={item.field} span={item.span ? item.span : 24}

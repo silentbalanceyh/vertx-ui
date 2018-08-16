@@ -108,7 +108,17 @@ const aiExprTitle = (item) => {
         const result = {};
         // Ant-Design Form必须
         result.field = v4();
-        result[kv[0]] = kv[1];
+        // 解析特殊标题
+        if ("string" === typeof kv[1]) {
+            if (0 < kv[1].indexOf(",")) {
+                const title = kv[1].split(",")[0];
+                const className = kv[1].split(",")[1];
+                result.title = title;
+                result.className = className;
+            } else {
+                result[kv[0]] = kv[1];
+            }
+        }
         item = result;
     }
     return item;

@@ -14,7 +14,11 @@ const jsxValue = (field) => (item = {}, value) => {
 };
 const jsxBoolean = (field) => (item = {}, value) => {
     if (!item.optionJsx) item.optionJsx = {};
-    item.optionJsx[field] = Boolean(value);
+    item.optionJsx[field] = "true" === value;
+};
+const jsxInt = (field) => (item = {}, value) => {
+    if (!item.optionJsx) item.optionJsx = {};
+    item.optionJsx[field] = Value.valueInt(value);
 };
 const sorter = (item = {}, value) => {
     if (!item.params) item.params = {};
@@ -27,6 +31,11 @@ const jsxKv = (field) => (item = {}, value) => {
     if (value && 0 < value.indexOf('`')) {
         item.optionJsx[field] = value.split('`');
     } else {
+        if ("placeholder" === field) {
+            if ("$CLEAR$" === value) {
+                value = " "
+            }
+        }
         jsxValue(field)(item, value);
     }
 };
@@ -35,8 +44,16 @@ const jsxLayout = (field, attr = "span") => (item = {}, value) => {
     item.optionItem[field] = {};
     item.optionItem[field][attr] = Value.valueInt(value);
 };
+const jsxItem = (field) => (item = {}, value) => {
+    if (!item.optionItem) item.optionItem = {};
+    item.optionItem[field] = value;
+};
+const jsxItemBoolean = (field) => (item = {}, value) => {
+    if (!item.optionItem) item.optionItem = {};
+    item.optionItem[field] = "true" === value;
+};
 const itemValue = (field) => (item = {}, value) => item[field] = value;
-const itemBoolean = (field) => (item = {}, value) => item[field] = Boolean(value);
+const itemBoolean = (field) => (item = {}, value) => item[field] = "true" === value;
 const PARSER = {
     normalize,
     addonAfter: jsxValue("addonAfter"),
@@ -51,9 +68,13 @@ const PARSER = {
     wrapperSpan: jsxLayout("wrapperCol"),
     allowClear: jsxBoolean("allowClear"),
     sorter,
+    rows: jsxInt("rows"),
     // 自定义属性
     _submit: itemValue("submit"),
-    moment: itemBoolean("moment")
+    moment: itemBoolean("moment"),
+    // 特殊item属性
+    itemClass: jsxItem("className"),
+    colon: jsxItemBoolean("colon"),
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');
