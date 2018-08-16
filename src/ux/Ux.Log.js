@@ -1,4 +1,6 @@
 import Cv from './Ux.Constant';
+import Hoc from './Ux.Hoc';
+import U from 'underscore';
 
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
     if (Cv.DEBUG) {
@@ -7,6 +9,25 @@ const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
             ? flag
             : "Stateless Function Component"}] Control monitor: name = ${Name}`;
         console.groupCollapsed(message, `color:${color.group};font-weight:900`);
+        // 打印函数属性
+        const inited = reference.props['$inited'];
+        if (inited) {
+            console.log(`%c [Zero] Inited Values ( $inited ) -> `, `color:#09c;font-weight:900`, inited);
+        }
+        const uniform = Hoc.toUniform(reference.props);
+        console.log(`%c [Zero] Uniform -> `, `color:#666;font-weight:900`, uniform);
+        const tabular = {};
+        Object.keys(reference.props).filter(key => key.startsWith("$t_")).forEach(key => tabular[key] = reference.props[key]);
+        console.log(`%c [Zero] Tabular -> Ux.onDatum`, `color:#933;font-weight:900`, tabular);
+        const assist = {};
+        Object.keys(reference.props).filter(key => key.startsWith("$a_")).forEach(key => assist[key] = reference.props[key]);
+        console.log(`%c [Zero] Assist -> Ux.onDatum`, `color:#693;font-weight:900`, assist);
+        if (reference.props.reference) {
+            console.log(`%c [Zero] Parent Ref -> Ux.onReference`, `color:#black;font-weight:900`, reference.props.reference);
+        }
+        const functions = {};
+        Object.keys(reference.props).filter(key => U.isFunction(reference.props[key])).forEach(key => functions[key] = reference.props[key]);
+        console.log(`%c [Zero] Function -> `, `color:#060;font-weight:900`, functions);
         console.log(`%c [Zero] Props -> `, `color:${color.props};font-weight:900`, reference.props);
         if (!stateless) {
             console.log(`%c [Zero] State -> `, `color:${color.state};font-weight:900`, reference.state);
@@ -151,7 +172,7 @@ const sign = (uri, method, parameters, {
 const request = (uri, method, parameters, token = '') => {
     if (Cv.DEBUG) {
         let message = `%c [Zero] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
-        const color = Cv.SIGN ? "#06C" : "#CC3";
+        const color = Cv.SIGN ? "#06C" : "#C03";
         console.groupCollapsed(message, `color:${color};font-weight:900`);
         console.log(`%c [Zero] Parameters -> `, 'color:#669966;font-weight:900', parameters);
         console.log(`%c [Zero] Uri -> `, 'color:#06C;font-weight:900', uri);
@@ -162,21 +183,38 @@ const request = (uri, method, parameters, token = '') => {
 /**
  * 【开发模式】打印响应信息
  * @method response
- * @param err Ajax的错误对象
- * @param res Ajax的正确响应
+ * @param data Ajax的错误对象
+ * @param params Ajax的正确响应
  * @param method Http方法
+ * @param url 访问基本信息
  * @return {*}
  */
-const response = (err, res, method) => {
+const response = (data, params, request = {}) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Ajax] Ajax response got with method. ${method}`;
-        console.groupCollapsed(message, "color:#006699;font-weight:900");
-        console.log(`%c [Zero] Resource -> `, 'color:#9999CC;font-weight:900', res);
-        console.log(`%c [Zero] Error -> `, 'color:#669966;font-weight:900', err);
+        const {
+            method,
+            url,
+            headers,
+        } = request;
+        let message = `%c [Zero] [Ajax] Ajax response got from ${url} with method. ${method}`;
+        console.groupCollapsed(message, "color:#096;font-weight:900");
+        const it = headers.entries();
+        const headerData = {};
+        let item = {done: true};
+        do {
+            item = it.next();
+            const entry = item.value;
+            if (entry) {
+                headerData[entry[0]] = entry[1];
+            }
+        } while (!item.done);
+        console.log(`%c [Zero] Headers -> `, 'color:#c93;font-weight:900', headerData);
+        console.log(`%c [Zero] Request -> `, 'color:#006699;font-weight:900', params);
+        console.log(`%c [Zero] Response -> `, 'color:#039;font-weight:900', data);
         console.groupEnd();
     }
     // For fetch api 专用
-    return res
+    return Promise.resolve(data);
 };
 /**
  * 直接打印错误信息（红色文字打印）

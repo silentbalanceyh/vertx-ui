@@ -4,6 +4,7 @@ import Adjust016 from './_layout/adjust.016';
 import Half05 from './_layout/half.05';
 import Filter_03 from './_layout/filter-03';
 import Filter_05 from './_layout/filter-05';
+import Adjust017 from './_layout/adjust.017.js';
 
 const item = {
     // 标准布局
@@ -12,6 +13,8 @@ const item = {
     0.15: Adjust015,
     // 9:15 变种，宽文字布局
     0.16: Adjust016,
+    // 9:15 变种，主表单0.16，子表单专用
+    0.17: Adjust017,
     // 2列专用布局（只能两列，否则报错）
     0.5: Half05,
 };

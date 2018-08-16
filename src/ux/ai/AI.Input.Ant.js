@@ -91,7 +91,6 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
 };
 
 const aiAction = (reference, jsx = {}) => {
-    console.info(jsx);
     if (jsx.buttons) {
         // submit + reset双按钮专用生成
         E.fxInfo(true, 10076, "optionJsx.buttons");

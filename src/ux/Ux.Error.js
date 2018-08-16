@@ -1,5 +1,6 @@
 import U from 'underscore'
 import Terminal from './Ux.Terminal'
+import Cv from './Ux.Constant'
 
 const fnError = {
     10000: (type, current) => `[ ERR-10000 ] 传入参数类型不匹配，期望类型${type}，当前参数类型${current}`,
@@ -110,7 +111,9 @@ const fxMessage = (executor, code, ...args) => {
     const fn = fnError[code];
     if (U.isFunction(fn)) {
         const message = fn.apply(this, args);
-        executor.apply(this, [message].concat(args.filter(item => !U.isFunction(item))));
+        if (Cv.DEBUG) {
+            executor.apply(this, [message].concat(args.filter(item => !U.isFunction(item))));
+        }
         return message;
     }
 };

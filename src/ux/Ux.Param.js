@@ -64,6 +64,8 @@ const parseAjax = (reference, parameters = {}) => {
         // 特殊递归参数
         if ("criteria" === field) {
             result.criteria = parseAjax(reference, parameters.criteria);
+        } else if ("object" === typeof parameters[field] && "sorter" !== field) {
+            result[field] = parseAjax(reference, parameters[field])
         } else {
             const expr = parameters[field];
             const value = parseExpression(reference, expr);

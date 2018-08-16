@@ -95,6 +95,21 @@ const viewConfig = (page = [], reference, key = "view") => {
     return configMap;
 };
 
+const viewDownload = (config = {}, uri) => {
+    return (
+        <Row className={"page-view-download"}>
+            <Col span={3} style={{
+                textAlign: "right"
+            }}>
+                {config.label}
+            </Col>
+            <Col span={21}>
+                <a href={uri} target={"_target"}>{config.text}</a>
+            </Col>
+        </Row>
+    )
+};
+
 const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub = false) => {
     const configMap = viewConfig(page, reference, key);
     // 计算当前行是否呈现，动态配置扩展专用
@@ -125,4 +140,5 @@ export default {
     viewGrid,
     viewConfig,
     viewHeader,
+    viewDownload,
 }

@@ -1,6 +1,6 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
-import {DataLabor, RxEtat, RxFlow} from "entity";
+import {DataLabor} from "entity";
 import {Set} from 'immutable'
 import routeData from '../route'
 import Random from './Ux.Random'
@@ -110,10 +110,10 @@ export default {
      * @method zero
      */
     zero,
-    // 和Zero绑定专用的配置方法，Stream模式
-    rxEtat: (cab) => RxEtat.from(cab),
-    // 和Zero绑定专用的性能压缩器
-    rxFlow: (action) => RxFlow.from(action),
+    // 新配置处理，性能压缩器，提交流程化
+    rxEtat: DataLabor.rxEtat,
+    rxFlow: DataLabor.rxFlow,
+    rxOp: DataLabor.rxOp,
     // 和Zero绑定专用的Ui方法，Stream模式
     auiTab: (reference) => new AiStream(reference).tabs().init(),
     auiTable: (reference) => new AiStream(reference).table().init(),

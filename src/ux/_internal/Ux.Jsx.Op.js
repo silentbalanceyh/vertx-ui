@@ -2,8 +2,8 @@ import React from "react";
 import {Button} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
-import Immutable from "immutable";
-import Value from "../Ux.Value";
+import Immutable from 'immutable';
+import Value from '../Ux.Value';
 
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;
@@ -25,7 +25,7 @@ const _rtSubmit = (reference = {}, callback = {}) => {
                     if (Promise.prototype.isPrototypeOf(executor)) {
                         // Promise Async
                         executor.then(() => {
-                            if (!reference.isUnmount()) {
+                            if (U.isFunction(reference.isUnmount) && !reference.isUnmount()) {
                                 _rtState(reference, false);
                             }
                         }).catch(_rtError(reference, callback.failure));
@@ -165,7 +165,7 @@ const rtNorm = (reference, jsx = {}) => {
     const item = Ux.aiExprOp(buttons.submit);
     const reset = buttons.reset ? Ux.aiExprOp(buttons.reset) : false;
     if (!item.id) item.id = item.key;
-    if (!reset.id) reset.id = reset.key;
+    if (reset && !reset.id) reset.id = reset.key;
     // 构造配置
     const fnConfig = (type, item) => ({
         type: type, key: item.key, text: item.text, op: item.id, id: item.id

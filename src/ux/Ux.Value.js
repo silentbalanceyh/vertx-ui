@@ -76,20 +76,34 @@ const SEARCHERS = {
     "BOOL": (value) => Boolean(value),
     // 集合值
     "ENUM": (value) => value.split('`'),
-    "OPERATOR": (value) => "AND" === value
+    "OPERATOR": (value) => "AND" === value,
+    // 从Tabular/Assist抓取数据
+    "DATUM": (value, props) => {
+        const source = value[0];
+        const filters = {};
+        for (let idx = 1; idx < value.length; idx++) {
+            const term = value[idx];
+            if ("string" === typeof term) {
+                const kv = term.split('=');
+                filters[kv[0]] = kv[1];
+            }
+        }
+        const unique = Type.elementUniqueDatum({props}, source, filters);
+        return unique ? unique.key : undefined;
+    }
 };
 
 
-const valueSearch = (config = {}, data = {}) => {
+const valueSearch = (config = {}, props = {}) => {
     // 查找根节点
     const result = {};
     Type.itData(config, (field, p, path) => {
         if (SEARCHERS.hasOwnProperty(p)) {
-            result[field] = SEARCHERS[p](path[0]);
+            result[field] = SEARCHERS[p](path[0], props);
         } else {
             const propName = `$${p}`;
-            if (data[propName]) {
-                const dataObject = data[propName];
+            if (props[propName]) {
+                const dataObject = props[propName];
                 const value = dataObject._(path);
                 if (value) {
                     result[field] = value;
@@ -227,6 +241,13 @@ const valueFilter = (data = {}, keys = [], orderBy = "order") => {
     });
     return result;
 };
+const $FLIP = Immutable.fromJS(["fnOut", "reference", "config"]);
+const valueFlip = (jsx = {}) => {
+    const processed = {};
+    Object.keys(jsx).filter(key => !$FLIP.contains(key))
+        .forEach((field) => processed[field] = jsx[field]);
+    return processed;
+}
 /**
  * 两个字符串的专用连接方法，用于做不重复链接，
  * @method stringConnect
@@ -343,6 +364,8 @@ export default {
     valueOnChange,
     valueSearch,
     valueTrack: Debug.dgMonitor,
+    // 设置自定义控件的专用属性
+    valueFlip,
     // 数学运算
     mathMultiplication,
     mathDivision,
