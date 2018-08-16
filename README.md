@@ -93,6 +93,7 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * [AI0003 - aiExprField属性解析器](/document/ai0003-aiexprfieldshu-xing-jie-xi-qi.md)
 * [AI0004 - $KV$属性解析](/document/ai0004-kvshu-xing-jie-xi.md)
 * [AI0005 - 自动Render组件配置](/document/ai0005-zi-dong-render-zu-jian-pei-zhi.md)
+* [AI0006 - aiExprColumn属性解析器](/document/ai0006-aiexprcolumnshu-xing-jie-xi-qi.md)
 
 ### Ux工具包
 

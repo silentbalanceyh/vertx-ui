@@ -18,6 +18,7 @@
 | aiTimePicker |  | Ant Design | 时间选择框 |
 | aiTimeRanger |  | 自定义 | 从HH:mm到HH:mm的时间范围选择 |
 |  | ai2ListSelector | 自定义 | 弹出可搜索的列表（带分页、排序、查询） |
+| aiAction |  | 自定义 | 提交按钮设置 |
 
 
 

@@ -2,7 +2,7 @@
 
 rt系列的新的API为按钮操作专用的代码部分，替换原始版本中的`ui`系、`btn`系、`op`系、`jsx`系的按钮操作，所有的rt系列的文档参考子文档信息。
 
-* [UI0021-1 - rtLink（重定向专用按钮）](/document/2-kai-fa-wen-dang/ui0021-rtan-niu-xuan-ran-dai-ma/ui0021-1-rtlink.md)
+* UI0021-1 - rtLink（重定向专用按钮）
 
 ## 1.rt系列方法限制
 

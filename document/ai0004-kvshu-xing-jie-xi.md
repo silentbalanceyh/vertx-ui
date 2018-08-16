@@ -14,6 +14,7 @@
 | :--- | :--- | :--- |
 | normalize | normalize=number:10 | optionConfig.normalize |
 | addonAfter | addonAfter=人 | optionJsx.addonAfter |
+| addonBefore | addonBefore=人 | optionJsx.addonBefore |
 | readOnly | readOnly=true | optionJsx.readOnly |
 | placeholder | placeholder=必填 | optionJsx.placeholder |
 | valuePropName | valuePropName=checked | optionJsx.valuePropName |
@@ -23,6 +24,13 @@
 | text | text=上传 | 上传组件专用属性，设置上传的文字 |
 | labelSpan | labelSpan=4 | optionItem.labelCol.span |
 | wrapperSpan | wrapperSpan=4 | optionItem.wrapperCol.span |
+| allowClear | allowClear=true | optionJsx.allowClear，对应Ant Design的Select专用 |
+| sorter | sorter=name\`ASC | 【自定义】专用于解析查询引擎中的排序参数 |
+| rows | rows=5 | TextArea专用，设置默认占多少行 |
+| \_submit | \_submit=DIRECT | 【自定义】按钮专用，用于标识当前按钮是提交按钮 |
+| moment | moment=true | 【自定义】用于标识当前字段是时间字段，初始化时会转成Moment对象 |
+| itemClass | itemClass=grid-left | 【自定义】optionItem.className |
+| colon | colon=false | 设置标签的逗号：optionItem.colon |
 
 
 
