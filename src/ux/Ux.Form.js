@@ -11,7 +11,7 @@ import {Col, Form, Input, Row} from 'antd';
 const _raftCell = (reference, values) => (cell) => {
     if (cell.title) {
         const {title, ...cellRest} = cell;
-        return (<Col {...cellRest}>{title}</Col>)
+        return (<Col {...cellRest} span={24}>{title}</Col>)
     } else {
         // 子表单
         Jsx.raftValue(cell, values);

@@ -17,7 +17,7 @@ const itSwitch = (target, value, callback, supportedKeys = []) => {
     if (target) {
         if ("string" === typeof target) {
             ensureKeys(target, supportedKeys);
-            if (value) {
+            if (undefined !== value) {
                 callback(target, value);
             }
         }

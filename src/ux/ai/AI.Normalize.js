@@ -108,7 +108,7 @@ const hookerRender = (item, renders = {}, layout = {}, refenrece) => {
     Log.render(2, item, fnRender);
     if (!fnRender) {
         // 如果item中存在holder属性
-        if (item.field.startsWith("$")) {
+        if (item.field && item.field.startsWith("$")) {
             // 特殊Op注入, 如果是$button则触发特殊处理
             fnRender = hookerButton(item);
         } else {

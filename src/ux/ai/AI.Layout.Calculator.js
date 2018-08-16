@@ -29,11 +29,22 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
     }
     const labelCol = Value.valueInt(splitted[0]);
     const wrapperCol = Value.valueInt(splitted[1]);
-    const marginLeft = (adjustValue) ? adjustValue : 0;
+    let marginLeft = 0;
+    let paddingLeft = 0;
+    if ("string" === typeof adjustValue) {
+        if (0 < adjustValue.indexOf(',')) {
+            const adjustData = adjustValue.split(',');
+            marginLeft = (adjustData[0]) ? adjustData[0] : 0;
+            paddingLeft = (adjustData[1]) ? adjustData[0] : 0;
+        } else {
+            marginLeft = adjustValue ? adjustValue : 0;
+        }
+    }
     const calculated = {
         style: {
             width,
             marginLeft,
+            paddingLeft
         },
         labelCol: {
             span: labelCol

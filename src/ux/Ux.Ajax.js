@@ -113,9 +113,9 @@ const ajaxResponse = async (request, mockData = {}, params) => {
     } else {
         const response = await fetch(request);
         let body = await response.json();
-        if (response.ok) {
-            body = ajaxAdapter(body);
-        } else {
+        // 任何时候都需要调用适配器，包括errors
+        body = ajaxAdapter(body);
+        if (!response.ok) {
             body = {...body, status: response.status, statusText: response.statusText};
         }
         if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({request: params, response: body});
