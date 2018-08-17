@@ -85,7 +85,9 @@ const fnError = {
     10079: (reference) => `[ ERR-10079 ] (Web) 父组件"reference"引用未传入。reference = ${reference}`,
     10080: (validation) => `[ ERR-10080 ] (Web) 当前配置中需要"validation"，当前配置丢失：validation = ${validation}`,
     10081: (config, linker) => `[ ERR-10081 ] (Web) 链接最终的数据成功。配置：${typeof config}，数据为：${typeof linker}`,
-    10082: ($items) => `[ ERR-10082 ] (Rdx) 无法读取状态树上的"list.items"数据，该数据必须是一个DataObject。${$items}`
+    10082: ($items) => `[ ERR-10082 ] (Rdx) 无法读取状态树上的"list.items"数据，该数据必须是一个DataObject。${$items}`,
+    10083: (dataIndex, $render) => `[ ERR-10083 ] (Web) 列渲染器出了问题，缺失"$render"属性，请检查字段${dataIndex}的配置, $render = ${$render}`,
+    10084: (state) => `[ ERR-10083 ] (Web) 当前组件的状态"state"不合法，请检查是否执行过状态初始化，state = ${state}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

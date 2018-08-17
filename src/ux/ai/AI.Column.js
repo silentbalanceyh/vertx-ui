@@ -6,6 +6,7 @@ import Prop from '../Ux.Prop';
 import Format from '../Ux.Format';
 import Expr from '../Ux.Expr';
 import Ai from './AI.Input'
+import AiExpr from './AI.Expr.String';
 import Value from '../Ux.Value'
 import RxAnt from './AI.RxAnt'
 
@@ -373,10 +374,11 @@ const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
 };
 
 const aiUnitRadio = (reference, item = {}, jsx = {}) => () => {
-    const options = item['$config'] ? item['$config'] : [];
+    let options = item['$config'] ? item['$config'] : [];
     const {value, ...meta} = jsx;
+    const items = AiExpr.aiExprOption(options.items);
     return Ai.aiRadio(reference, {
-        config: {items: options},
+        config: {items},
         ...meta,
     });
 };

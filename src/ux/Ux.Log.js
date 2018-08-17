@@ -247,7 +247,11 @@ const layout = (layoutType = {}, window, dft = true) => {
  */
 const render = (phase = 1, item = {}, key = {}) => {
     if (Cv.DEBUG && Cv.RENDER) {
-        if (4 === phase) {
+        if (5 === phase) {
+            // 开始打印
+            const message = `%c [Zero] [Render] Row Config --> ${key}`;
+            console.log(message, "color:#39f;font-weight:900", item);
+        } else if (4 === phase) {
             // 打印模板
             layout(item, key.window, key.dft);
         } else if (3 === phase) {
