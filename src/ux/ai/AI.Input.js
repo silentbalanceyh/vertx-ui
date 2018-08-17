@@ -48,7 +48,14 @@ const aiConfirm = (reference, onOk, ...path) => {
         [reference].concat(path));
     Modal.confirm({...config, onOk});
 };
+const aiUI = (Component) => {
+    return (reference, jsx = {}) => (
+        <Component reference={reference} {...jsx}/>
+    )
+};
 export default {
+    // 纯写法
+    aiUI,
     // 对话框专用
     aiConfirm,
     // 直接组件

@@ -71,6 +71,7 @@ const PARSER = {
     rows: jsxInt("rows"),
     // 自定义属性
     _submit: itemValue("submit"),
+    fixed: itemValue("fixed"),
     moment: itemBoolean("moment"),
     // 特殊item属性
     itemClass: jsxItem("className"),

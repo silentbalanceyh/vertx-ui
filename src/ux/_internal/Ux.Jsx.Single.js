@@ -98,6 +98,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
     const {key = "form", entity} = config;
     let formConfig = Prop.fromHoc(reference, key);
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
+    const rowClass = formConfig['rowClass'] ? formConfig['rowClass'] : {};
     const {form = [], ...rest} = config;
     // 计算偏移量
     const adjustCol = Ai.aiAdjust(config.window);
@@ -109,8 +110,10 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
             {Norm.extractHidden(reference, key).inputs.map(name => jsxHidden(reference, name, values[name]))}
             {form.map((row, rowIndex) => {
                 const rowKey = entity ? `form-row-${entity}-${rowIndex}` : `form-row-${rowIndex}`;
+                const className = rowClass[rowIndex] ? rowClass[rowIndex] : "";
                 return (
-                    <Row key={rowKey} style={DFT.uiRow(row, rowConfig[rowIndex], config)}>
+                    <Row key={rowKey} style={DFT.uiRow(row, rowConfig[rowIndex], config)}
+                         className={className}>
                         {DFT.itRow(row).map((item, cellIndex) => {
                             item = Immutable.fromJS(item).toJS();
                             // 填平高度

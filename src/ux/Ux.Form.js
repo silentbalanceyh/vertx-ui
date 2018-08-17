@@ -113,6 +113,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
     const normalized = Normalize.raftUi(reference, form.ui);
 
     const rowConfig = form['rowConfig'] ? form["rowConfig"] : {};
+    const rowClass = form['rowClass'] ? form['rowClass'] : {};
     // 2.偏移量运算
     const adjustCol = Ai.aiAdjust($config.window);
     let spans = [];
@@ -126,7 +127,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
         rowItem.key = rowKey;
 
         const rowStyle = rowConfig[rowIndex];
-
+        rowItem.className = rowClass[rowIndex] ? rowClass[rowIndex] : "";
         rowItem.style = Jsx.raftRow(row, rowStyle, $config);
         // 挂载rowHeight
         if (!rowItem.style.hasOwnProperty("height")
@@ -190,6 +191,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
             raftDynamic(reference, cell, dynamic, metadata);
             rowItem.cells.push(cell);
         });
+        Log.render(5, rowItem, rowIndex);
         metadata.rows.push(rowItem);
     });
     Log.render(3);
