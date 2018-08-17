@@ -1,4 +1,4 @@
-import {Breadcrumb, Collapse, Menu, Steps, Tabs} from "antd";
+import {Breadcrumb, Collapse, Menu, Radio, Steps, Tabs} from "antd";
 import {ContextMenu, MenuItem} from "react-contextmenu";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -81,6 +81,16 @@ const aiCollapse = (items = [], rest = {}, ...children) => (
         ))}
     </Collapse>
 );
+const aiInputRadios = (items = [], rest = {}) => (
+    <Radio.Group {...rest}>
+        {items.map(item => (
+            <Radio key={item.key} style={item.style ? item.style : {}}
+                   value={item.hasOwnProperty('value') ? item.value : item.key}>
+                {item.name}
+            </Radio>
+        ))}
+    </Radio.Group>
+);
 const aiMenuContext = (items = [], rest = {}) => (
     <ContextMenu className="context-menu" {...rest}>
         {items.map(item => (
@@ -98,6 +108,8 @@ const aiSteps = (items = [], rest = {}) => (
     </Steps>
 );
 export default {
+    // 单选列表
+    aiInputRadios,
     // 菜单相关渲染
     aiMenuTree,
     aiMenuContext,

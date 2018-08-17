@@ -34,7 +34,28 @@ import RxAnt from './AI.RxAnt'
  */
 const aiCellLogical = (reference, config = {}) => text => {
     const {$mapping = {}} = config;
-    return (<span>{text ? $mapping["true"] : $mapping["false"]}</span>)
+    const literal = text ? $mapping["true"] : $mapping["false"];
+    const item = {};
+    if (0 < literal.indexOf(",")) {
+        const textIcon = literal.replace(/ /g, '').split(',');
+        item.text = textIcon[0];
+        const iconStr = textIcon[1];
+        item.iconStyle = {fontSize: 20};
+        if (0 < iconStr.indexOf(":")) {
+            const iconStyle = iconStr.split(":");
+            item.icon = iconStyle[0];
+            item.iconStyle.color = iconStyle[1];
+        } else {
+            item.icon = iconStr;
+        }
+    } else {
+        item.text = literal;
+    }
+    return (<span>
+        {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
+        &nbsp;&nbsp;
+        {item.text}
+    </span>)
 };
 
 /**
@@ -97,8 +118,8 @@ const aiCellDate = (reference, config) => text => {
  *      },
  */
 const aiCellCurrency = (reference, config = {}) => text => {
-    const flag = config.$flag ? config.$flag : "￥";
-    return <span>{flag}{Format.fmtCurrency(text)}</span>;
+    const unit = config.$unit ? config.$unit : "￥";
+    return <span>{unit}{Format.fmtCurrency(text)}</span>;
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理表达式格式化
