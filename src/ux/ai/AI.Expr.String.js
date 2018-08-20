@@ -149,6 +149,11 @@ const aiMetaField = (item = {}) => {
         const result = Value.assign(basic, options, 1);
         applyField(result);
         item = result;
+    } else if (item.field) {
+        // 没有副作用的解析，让result也支持
+        const result = ExprValue.applyTree(item);
+        applyField(result);
+        item = result;
     }
     return item;
 };
@@ -207,6 +212,8 @@ const aiMetaOption = (item = {}) => {
     }
     return item;
 };
+
+const aiExprIcon = (icons = []) => _iterator(icons, (values = []) => parseItem(values, "icon"));
 /**
  * 顺序：title, key, icon, description, status
  */
@@ -236,6 +243,7 @@ const aiExprFilter = (filter = "") => parseItem(filter, "filter");
 export default {
     aiExprFilter,
     aiExprHelp,
+    aiExprIcon,
     aiExpr,
     aiExprColumn,
     aiExprOption,

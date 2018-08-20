@@ -74,23 +74,27 @@ const mountNormalizer = (reference, item = {}) => {
 };
 const mountErrorFocus = (reference, item) => {
     if (item.field) {
-        if (!item.optionJsx) item.optionJsx = {};
-        // onFocus
-        item.optionJsx.onFocus = Html.htmlErrorFocus(item);
-        // onBlur
-        item.optionJsx.onBlur = Html.htmlErrorBlur(item);
+        if (item.optionConfig &&
+            item.optionConfig.hasOwnProperty("rules")) {
+            if (!item.optionJsx) item.optionJsx = {};
+            // onFocus
+            item.optionJsx.onFocus = Html.htmlErrorFocus(item);
+            // onBlur
+            item.optionJsx.onBlur = Html.htmlErrorBlur(item);
+        }
     }
 };
 
 const _normalizeUi = (reference, ui = []) => {
+    // 最开始使用属性解析器解析配置信息，先做解析
+    ui = Ai.hookerForm(ui);
     // 先处理onFocus,onBlur，在hooker中会被删除掉
     ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
-    // 最开始使用属性解析器解析配置信息
-    ui = Ai.hookerForm(ui);
     // 挂载验证器，处理rules
     ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
     // 挂载normalize专用
     ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
+
     return ui;
 };
 /**

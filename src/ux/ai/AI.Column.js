@@ -9,6 +9,7 @@ import Ai from './AI.Input'
 import AiExpr from './AI.Expr.String';
 import Value from '../Ux.Value'
 import RxAnt from './AI.RxAnt'
+import fieldRender from '../_internal/Ux.Jsx.Single';
 
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理双值
@@ -36,27 +37,8 @@ import RxAnt from './AI.RxAnt'
 const aiCellLogical = (reference, config = {}) => text => {
     const {$mapping = {}} = config;
     const literal = text ? $mapping["true"] : $mapping["false"];
-    const item = {};
-    if (0 < literal.indexOf(",")) {
-        const textIcon = literal.replace(/ /g, '').split(',');
-        item.text = textIcon[0];
-        const iconStr = textIcon[1];
-        item.iconStyle = {fontSize: 20};
-        if (0 < iconStr.indexOf(":")) {
-            const iconStyle = iconStr.split(":");
-            item.icon = iconStyle[0];
-            item.iconStyle.color = iconStyle[1];
-        } else {
-            item.icon = iconStr;
-        }
-    } else {
-        item.text = literal;
-    }
-    return (<span>
-        {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
-        &nbsp;&nbsp;
-        {item.text}
-    </span>)
+    const item = Value.valueIcon(literal);
+    return fieldRender.jsxIcon(item);
 };
 
 /**
@@ -209,7 +191,7 @@ const aiCellOp = (reference, config) => (text, record) => {
                 }}>{edit.text}</a>) : false}
                 {2 === counter ? (<Divider type="vertical"/>) : false}
                 {removed ? (
-                    <Popconfirm title={option['delete.confirm']} onConfirm={(event) => {
+                    <Popconfirm title={option['delete-confirm']} onConfirm={(event) => {
                         event.preventDefault();
                         rxDelete(reference, text);
                     }}>
@@ -276,6 +258,7 @@ const aiCellIcon = (reference, config) => text => {
  *      }
  */
 const aiCellLink = (reference, config, ops = {}) => text => {
+    console.info(text);
     return (
         <Fragment>
             {config['$config'].map((line, opIndex) => {

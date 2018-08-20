@@ -2,6 +2,8 @@ import Immutable from 'immutable';
 import Params from './Ux.Param';
 import E from './Ux.Error';
 import U from 'underscore'
+import Dg from './Ux.Debug';
+import State from './Ux.State';
 
 /**
  * 【高阶函数：三阶】用于显示对话框
@@ -133,6 +135,67 @@ const connectId = (id) => {
     }
 };
 /**
+ * 链接Form初始化区分编辑和添加模式专用
+ * @param reference
+ * @param fnAdd,
+ * @param fnUpdate
+ */
+const pipeInit = (reference, fnAdd, fnUpdate) => {
+    const {$inited, $key} = reference.props;
+    // 如果包含了$key则是更新模式
+    let data = {};
+    if ($key) {
+        // 更新模式
+        if (U.isFunction(fnUpdate)) {
+            data = fnUpdate($inited, reference);
+        } else {
+            // 直接读取$inited
+            data = $inited;
+        }
+        Dg.dgForm(reference, data, true);
+    } else {
+        // 添加模式
+        if (U.isFunction(fnAdd)) {
+            data = fnAdd($inited, reference);
+        }
+        Dg.dgForm(reference, data);
+    }
+    return data;
+};
+/**
+ * 重置当前表单专用方法
+ * @param reference
+ * @param dataArray 输入的参数，默认是空值
+ */
+const pipeReset = (reference, dataArray = []) => {
+    const {$items, $inited = {}} = reference.props;
+    if ($items && $items.is()) {
+        // 读取原来数据
+        const data = Immutable.fromJS($items.to()).toJS();
+        data[$inited.key] = dataArray;
+        State.writeTree(reference, {
+            "list.items": data,
+        });
+    }
+};
+/**
+ * 验证当前的items中是否包含了数据信息
+ * @param reference
+ */
+const pipeVerify = (reference) => {
+    return 0 < pipeGet(reference).length
+};
+const pipeGet = (reference) => {
+    const {$items, $inited = {}} = reference.props;
+    if ($items && $items.is()) {
+        const data = Immutable.fromJS($items.to()).toJS();
+        const array = data[$inited.key];
+        return array ? array : []
+    } else {
+        return [];
+    }
+};
+/**
  * @class Op
  * @description 操作专用类
  */
@@ -149,4 +212,9 @@ export default {
     connectButton: connectDialog,
     connectDialog,
     connectId,
+    // 初始化时的操作
+    pipeInit,
+    pipeReset,
+    pipeVerify,
+    pipeGet
 }

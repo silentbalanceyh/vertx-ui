@@ -10,6 +10,7 @@ import Value from '../Ux.Value';
 import {Table} from 'antd';
 import Column from '../Ux.Column';
 import E from '../Ux.Error';
+import fieldRender from './Ux.Jsx.Single'
 
 const extractValue = ($data, config) => {
     let field = config.field;
@@ -64,7 +65,9 @@ const _highFun = ($data, config, reference, convertFun = data => data) => {
 };
 const config = ($data, config, reference) => _highFun($data, config, reference, (value, config) => {
     const dataMap = config.meta;
-    return dataMap ? dataMap[value] : value;
+    const literal = dataMap ? dataMap[value] : value;
+    const item = Value.valueIcon(literal);
+    return fieldRender.jsxIcon(item);
 });
 const subview = ($data, config, reference) => _highFun($data, config, reference, (value, config) => {
     const meta = config.meta;
@@ -128,6 +131,14 @@ const file = ($data, config, reference) => _highFun($data, config, reference, (v
 
     return false;
 });
+const positive = ($data, config, reference) => _highFun($data, config, reference, (value, config) => {
+    const expr = config.meta.expr;
+    let result = 0 < value ? value : 0;
+    if (expr) {
+        result = Expr.formatExpr(expr, {value: result});
+    }
+    return result;
+});
 const files = ($data, config, reference) => _highFun($data, config, reference, (value, config) => {
 
     return false;
@@ -146,7 +157,6 @@ const table = ($data, config, reference) => {
         });
         Column.uiTableColumn(reference, config.meta.columns);
         const attrs = {};
-        attrs.size = "small";
         attrs.bordered = false;
         attrs.pagination = false;
         attrs.className = "page-view-table";
@@ -174,6 +184,7 @@ export default {
     date,
     array,
     duration,
+    positive,
     // 文件
     file,
     files,

@@ -25,6 +25,13 @@ export default {
         "icon",
         "style"
     ],
+    "icon": [
+        "key",
+        "label",
+        "icon",
+        "style.fontSize",
+        "style.color"
+    ],
     "column": [
         "dataIndex",
         "title",
@@ -43,7 +50,8 @@ export default {
         "connectId",
         "type",
         "icon",
-        "disabledKey"
+        "disabledKey",
+        "$KV$"
     ],
     "steps": [
         "title",

@@ -1,6 +1,7 @@
 import {saveAs} from "file-saver";
 import v4 from "uuid";
 import Immutable from 'immutable';
+import Constant from './Ux.Constant';
 
 /**
  * 将传入的值`data`下载成一个文件保存，文件名系统生成，该文件名被转换过，所以调用时使用Ux调用
@@ -37,7 +38,7 @@ const dgFileJson = (data, ext = "json", filename) => {
  * @param updated 判断当前调试使用的是更新/添加模式
  */
 const dgForm = (reference, data = {}, updated = false) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
         console.groupCollapsed("[Form] Form metadata when initialized. updated = ", updated);
         console.info("Init Value = ", data);
         console.info("Init Function = ", reference.props.fnInit);
@@ -52,7 +53,7 @@ const dgForm = (reference, data = {}, updated = false) => {
  * @param Cv 常量信息
  */
 const dgScript = (ux = {}, Cv = {}) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
         console.groupCollapsed("[Ux] Constant Value is as following:");
         console.info("[Ux] Ux Tool = ", ux);
         console.info("[Ux] Cv = ", Cv);
@@ -67,7 +68,7 @@ const dgScript = (ux = {}, Cv = {}) => {
  * @param component Page组件配置信息
  */
 const dgRouter = (container, component) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
         console.groupCollapsed("[Ux] UI report as following:");
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
@@ -83,7 +84,7 @@ const dgRouter = (container, component) => {
  * @return 返回传入的数据
  */
 const dgMonitor = (data, second) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
         const $data = data ? Immutable.fromJS(data).toJS() : data;
         const $second = second ? Immutable.fromJS(second).toJS() : second;
         console.debug("[Ux] Debug: ", $data, $second);
@@ -91,7 +92,7 @@ const dgMonitor = (data, second) => {
     return data;
 };
 const dgDebug = (data, prefix) => {
-    if (Boolean("development" === process.env.NODE_ENV && process.env.DEV_DEBUG)) {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
         console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, "color:white;background-color:#c30;font-weight:900;",
             data);
     }

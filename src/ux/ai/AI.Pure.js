@@ -102,11 +102,18 @@ const aiMenuContext = (items = [], rest = {}) => (
         ))}
     </ContextMenu>
 );
-const aiSteps = (items = [], rest = {}) => (
-    <Steps {...rest}>
-        {items.map(item => <Steps.Step {...item}/>)}
-    </Steps>
-);
+const aiSteps = (items = [], rest = {}) => {
+    items.forEach(item => {
+        if (!item.hasOwnProperty('key')) {
+            item.key = Ux.randomUUID();
+        }
+    });
+    return (
+        <Steps {...rest}>
+            {items.map(item => <Steps.Step {...item}/>)}
+        </Steps>
+    )
+};
 export default {
     // 单选列表
     aiInputRadios,

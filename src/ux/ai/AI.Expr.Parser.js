@@ -69,6 +69,7 @@ const PARSER = {
     allowClear: jsxBoolean("allowClear"),
     sorter,
     rows: jsxInt("rows"),
+    className: itemValue("className"),
     // 自定义属性
     _submit: itemValue("submit"),
     fixed: itemValue("fixed"),

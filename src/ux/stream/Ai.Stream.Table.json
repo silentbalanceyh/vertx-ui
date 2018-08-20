@@ -26,7 +26,8 @@
             "onExpand",
             "onExpandedRowsChange",
             "onHeaderRow",
-            "onRow"
+            "onRow",
+            "className"
         ]
     }
 }

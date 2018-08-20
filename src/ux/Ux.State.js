@@ -4,6 +4,7 @@ import E from './Ux.Error';
 import Type from './Ux.Type';
 import U from 'underscore';
 import Prop from './Ux.Prop';
+import Dialog from './Ux.Dialog';
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
@@ -42,7 +43,7 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     // 读取原始记录
     const dataRecord = dataObject && dataObject.is()
         ? Immutable.fromJS(dataObject.to()).toJS() : {};
-    console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
+    // console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
     if (id) {
         // 读取原始数据
         let $extracted = dataObject.$(id);
@@ -68,7 +69,7 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
             executeRecord(record);
         }
     }
-    console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
+    // console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
     return dataRecord;
 };
 
@@ -86,13 +87,25 @@ const rdxReject = (message) => Promise.reject({data: {info: message}});
  */
 const rdxListItem = (reference, values = {}) => {
     const {fnListItem} = reference.props;
-    if (fnListItem) {
+    E.fxTerminal(!fnListItem, 10087, fnListItem);
+    if (U.isFunction(fnListItem)) {
         const ref = Prop.onReference(reference, 1);
         if (ref) {
             const {$inited = {}} = ref.props;
             fnListItem($inited.key, values);
         }
     }
+};
+const rdxClear = (reference) => {
+    const {fnClear} = reference.props;
+    E.fxTerminal(!fnClear, 10086, fnClear);
+    if (U.isFunction(fnClear)) {
+        fnClear()
+    }
+};
+const rdxClose = (reference) => {
+    rdxClear(reference);
+    Dialog.closeWindow(reference);
 };
 /**
  * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
@@ -117,12 +130,17 @@ export default {
     rapitRecord,
     // 写状态树
     writeTree,
-    // 防重复提交专用方法
+    // ---------------- 特殊行为方法
+    // 防重复提交专用方法，写status.submitting节点
     rdxSubmitting,
     // 返回Promise的reject结果
     rdxReject,
-    // 更新特殊节点list.items
+    // 更新特殊节点list.items，调用fnListItem方法
     rdxListItem,
+    // 清除editKey，调用fnClear方法
+    rdxClear,
+    // 关闭窗口专用，调用fnClose方法
+    rdxClose,
     // 老版本提取$_状态的专用方法
     toEffect
 }

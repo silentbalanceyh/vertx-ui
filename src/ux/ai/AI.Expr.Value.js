@@ -97,15 +97,43 @@ const applyItem = (item = {}, config = [], kvs = []) => {
     }
     return $item.toJS();
 };
-const applyTree = (item = {}) => {
-    let $item = Immutable.fromJS({});
-    Type.itObject(item, (field, value) => {
-        if (0 < field.indexOf(".")) {
-            $item = $item.setIn(field.split('.'), value);
+
+const applyFlat = (field, item = {}) => {
+    const result = {};
+    for (const key in item) {
+        const value = item[key];
+        const targetKey = `${field}.${key}`;
+        if ("object" === typeof value && !U.isArray(value)) {
+            const merged = applyFlat(targetKey, value);
+            Object.assign(result, merged);
         } else {
-            $item = $item.set(field, value);
+            result[targetKey] = value;
+        }
+    }
+    return result;
+};
+const applyTree = (item = {}) => {
+    // 1. 先拉平这个对象
+    const processed = {};
+    // 过滤$option专用
+    Type.itObject(item, (field, value) => {
+        if ("object" === typeof value && !U.isArray(value)) {
+            const item = applyFlat(field, value);
+            Object.assign(processed, item);
+        } else {
+            processed[field] = value;
         }
     });
+    // 2. Key从小到大排序
+    let $item = Immutable.fromJS({});
+    Object.keys(processed).sort((left, right) => left.length - right.length)
+        .forEach(field => {
+            if (0 < field.indexOf(".")) {
+                $item = $item.setIn(field.split('.'), processed[field])
+            } else {
+                $item = $item.set(field, processed[field])
+            }
+        });
     return $item.toJS();
 };
 

@@ -15,12 +15,14 @@
             "onNextClick",
             "onPrevClick",
             "onTabClick",
-            "tabBarGutter"
+            "tabBarGutter",
+            "className"
         ],
         "tabpane": [
             "forceRender",
             "key",
-            "tab"
+            "tab",
+            "className"
         ]
     }
 }

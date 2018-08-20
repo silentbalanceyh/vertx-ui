@@ -51,10 +51,14 @@ const rxList = (reference, deleted = false) => (id, record) => {
         "list.items": dataRecord
     })
 };
+const rxReset = (reference) => () => {
+    reference.setState({editKey: undefined})
+};
 export default {
     rxAdd,
     rxClose,
     rxEdit,
     rxDelete,
-    rxList
+    rxList,
+    rxReset
 }

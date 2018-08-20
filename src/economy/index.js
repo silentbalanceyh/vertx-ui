@@ -1,4 +1,5 @@
 export {default as ListSelector} from './input/ListSelector/UI';
+export {default as AddressSelector} from './input/AddressSelector/UI';
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
 export {default as CheckInput} from './input/CheckInput/UI';
 export {default as DateVersion} from './input/DateVersion/UI';
