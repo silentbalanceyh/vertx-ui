@@ -5,6 +5,7 @@ import U from "underscore";
 import Sorter from './Ux.Sorter'
 import Type from './Ux.Type';
 import E from './Ux.Error';
+import Random from './Ux.Random'
 
 /**
  * 读取非undefined的值，去掉undefined值相关信息
@@ -299,7 +300,30 @@ const valueOnChange = (reference = {}, state, key = "source") => {
         onChange(newValue[key]);
     }
 };
-
+const valueKey = (item) => {
+    if (item && U.isObject(item) && !item.key) {
+        item.key = Random.randomUUID();
+    }
+};
+const valueIcon = (literal = "") => {
+    const item = {};
+    if (0 < literal.indexOf(",")) {
+        const textIcon = literal.replace(/ /g, '').split(',');
+        item.text = textIcon[0];
+        const iconStr = textIcon[1];
+        item.iconStyle = {fontSize: 20};
+        if (0 < iconStr.indexOf(":")) {
+            const iconStyle = iconStr.split(":");
+            item.icon = iconStyle[0];
+            item.iconStyle.color = iconStyle[1];
+        } else {
+            item.icon = iconStr;
+        }
+    } else {
+        item.text = literal;
+    }
+    return item;
+};
 /**
  * mode = 0：调用原生的Object.assign：直接覆盖
  * mode = 1：将source中的属性追加到target中，深度追加
@@ -326,7 +350,7 @@ const assign = (target = {}, source = {}, mode = 0) => {
                     result[field] = value;
                 } else if (2 === mode) {
                     // 没有属性才追加
-                    if (!result.hasOwnProperty(field)) {
+                    if (!target.hasOwnProperty(field)) {
                         result[field] = value;
                     }
                 }
@@ -363,6 +387,8 @@ export default {
     valueTriggerChange,
     valueOnChange,
     valueSearch,
+    valueIcon,
+    valueKey,
     valueTrack: Debug.dgMonitor,
     // 设置自定义控件的专用属性
     valueFlip,

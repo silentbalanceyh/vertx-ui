@@ -87,7 +87,7 @@ class RxOp {
                         let ret = callback(data);
                         if (!ret) ret = {};
                         return resolve(ret);
-                    })), {},
+                    }, data)), {},
                     () => {
                         Ux.rdxSubmitting(ref, false);
                         resolve({})
@@ -98,7 +98,7 @@ class RxOp {
                 let ret = callback(data);
                 if (!ret) ret = {};
                 return Promise.resolve(ret);
-            }));
+            }, data));
         }
     }
 }

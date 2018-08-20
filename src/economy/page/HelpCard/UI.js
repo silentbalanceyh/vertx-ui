@@ -43,7 +43,8 @@ class Component extends React.PureComponent {
         const {
             children, reference, $card = 'page-card',
             $key = "page",
-            $extra: ExtraComponent, $current
+            $extra: ExtraComponent, $current,
+            $leftVisible = true
         } = this.props;
 
         // 左边按钮
@@ -58,7 +59,7 @@ class Component extends React.PureComponent {
         // 标题和左边工具栏
         const title = (
             <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
-                {Op.renderButton(reference, topbar)}
+                {$leftVisible ? Op.renderButton(reference, topbar) : false}
                 </span>
         );
         // 右边帮助信息

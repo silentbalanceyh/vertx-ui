@@ -59,11 +59,15 @@ class Component extends React.PureComponent {
                     <Table {...table} dataSource={data}/>
                     <DynamicDialog $dialog={dialog} $visible={show}>
                         {editKey ? (FormEdit ? (
-                            <FormEdit {...rest} key={"formEdit"} $inited={initData}
-                                      fnClose={Op.rxClose(this)} fnListItem={Op.rxList(this)}/>
+                            <FormEdit {...rest} key={"formEdit"} $inited={initData} $key={$inited.key}
+                                      fnClose={Op.rxClose(this)}
+                                      fnListItem={Op.rxList(this)}
+                                      fnClear={Op.rxReset(this)}/>
                         ) : false) : (FormAdd ? (
                             <FormAdd {...rest} key={"formAdd"} $inited={initData}
-                                     fnClose={Op.rxClose(this)} fnListItem={Op.rxList(this)}/>
+                                     fnClose={Op.rxClose(this)}
+                                     fnListItem={Op.rxList(this)}
+                                     fnClear={Op.rxReset(this)}/>
                         ) : false)}
                     </DynamicDialog>
                 </div>

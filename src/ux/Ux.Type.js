@@ -3,6 +3,7 @@ import Immutable from "immutable";
 import Prop from "./Ux.Prop";
 import {DataLabor} from "entity";
 import E from './Ux.Error';
+import Value from './Ux.Value';
 
 /**
  * 在数组中查找唯一元素
@@ -222,6 +223,13 @@ const itMatrix = (matrix = [], eachFun) => {
         }
     });
     return matrix;
+};
+
+const itRepeat = (number, eachFun) => {
+    const limit = Value.valueInt(number);
+    for (let idx = 0; idx < limit; idx++) {
+        eachFun(idx);
+    }
 };
 /**
  * Array数组中的属性映射处理
@@ -455,6 +463,7 @@ export default {
     itObject,
     itMatrix,
     itData,
+    itRepeat,
     // 树的构造方法
     tree,
     treeWithFilters

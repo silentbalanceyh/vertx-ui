@@ -1,4 +1,4 @@
-import {Col, Form, Input, Row} from "antd";
+import {Col, Form, Icon, Input, Row} from "antd";
 import React from "react";
 import Immutable from "immutable";
 import Random from "../Ux.Random";
@@ -24,8 +24,10 @@ const _getRender = (reference, render) => (each = {}) => {
     if (0 <= each.field.indexOf("$")) {
         return render(reference, each.optionJsx, each.optionConfig);
     } else {
-        return getFieldDecorator(each.field, each.optionConfig)(
-            render(reference, each.optionJsx, each.optionConfig)
+        const jsx = each.optionJsx ? Immutable.fromJS(each.optionJsx).toJS() : {};
+        const config = each.optionConfig ? Immutable.fromJS(each.optionConfig).toJS() : {};
+        return getFieldDecorator(each.field, config)(
+            render(reference, jsx, config)
         )
     }
 };
@@ -166,11 +168,27 @@ const raftValue = (cell = {}, values = {}) => {
         cell.optionConfig.initialValue = literal;
     }
 };
+const jsxIcon = (item = {}) => {
+    if (item.hasOwnProperty("style") && !item.hasOwnProperty("iconStyle")) {
+        item.iconStyle = item.style;
+        if (item.iconStyle.hasOwnProperty("fontSize")) {
+            item.iconStyle.fontSize = Value.valueInt(item.iconStyle.fontSize);
+        }
+    }
+    return (
+        <span>
+            {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
+            &nbsp;&nbsp;
+            {item.text || item.label}
+        </span>
+    )
+};
 export default {
     jsxHidden,
     jsxTitle,
     jsxGrid,
     jsxColumn,
+    jsxIcon,
     jsxItem,
     jsxRow,
     raftValue,

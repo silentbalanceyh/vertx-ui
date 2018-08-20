@@ -87,7 +87,10 @@ const fnError = {
     10081: (config, linker) => `[ ERR-10081 ] (Web) 链接最终的数据成功。配置：${typeof config}，数据为：${typeof linker}`,
     10082: ($items) => `[ ERR-10082 ] (Rdx) 无法读取状态树上的"list.items"数据，该数据必须是一个DataObject。${$items}`,
     10083: (dataIndex, $render) => `[ ERR-10083 ] (Web) 列渲染器出了问题，缺失"$render"属性，请检查字段${dataIndex}的配置, $render = ${$render}`,
-    10084: (state) => `[ ERR-10083 ] (Web) 当前组件的状态"state"不合法，请检查是否执行过状态初始化，state = ${state}`
+    10084: (state) => `[ ERR-10083 ] (Web) 当前组件的状态"state"不合法，请检查是否执行过状态初始化，state = ${state}`,
+    10085: (fnClose) => `[ ERR-10085 ] 当前操作要求 props 中包含名为 "fnClose" 的特殊函数，该函数缺失：${fnClose}`,
+    10086: (fnClear) => `[ ERR-10086 ] 当前操作要求 props 中包含名为 "fnClear" 的特殊函数，该函数缺失：${fnClear}`,
+    10087: (fnListItem) => `[ ERR-10087 ] 当前操作要求 props 中包含名为 "fnListItem" 的特殊函数，该函数缺失：${fnListItem}`,
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

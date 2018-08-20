@@ -7,6 +7,7 @@ import Random from './Ux.Random'
 import Dg from './Ux.Debug';
 import Cv from './Ux.Constant';
 import AiStream from './stream/Ai.Stream'
+import U from 'underscore'
 
 /**
  * 自动生成路由专用函数
@@ -84,6 +85,22 @@ export default {
      * @param state Redux读取到的状态
      */
     dataIn: (state) => DataLabor.createOut(state),
+    /**
+     * 初始化专用方法
+     * @param input
+     */
+    init: (input, isArray = false) => {
+        let processed;
+        if (U.isArray(input)) {
+            processed = DataLabor.getArray(input);
+        } else if ("object" === typeof input) {
+            processed = DataLabor.getObject(input);
+        } else {
+            processed = (isArray) ? DataLabor.getArray(undefined)
+                : DataLabor.getObject(undefined);
+        }
+        return processed;
+    },
     /**
      * 初始化数据
      */

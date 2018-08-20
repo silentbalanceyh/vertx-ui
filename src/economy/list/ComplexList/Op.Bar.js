@@ -153,7 +153,7 @@ const renderSubmit = (reference) => {
         <Button.Group>
             <Button {...editAttrs}/>
             {("edit" === view && opDeleted) ? (
-                <Popconfirm title={options['confirm.delete']}
+                <Popconfirm title={options['delete.confirm']}
                             onConfirm={() => Act.rxDeleteDetail(reference, key)}>
                     <Button icon={"delete"} type={"danger"}/>
                 </Popconfirm>

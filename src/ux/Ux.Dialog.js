@@ -192,7 +192,7 @@ const fadeOut = (reference = {}) => {
 };
 const closeWindow = (reference = {}) => {
     const {fnClose} = reference.props;
-    E.fxTerminal(!fnClose, 10033, fnClose);
+    E.fxTerminal(!fnClose, 10085, fnClose);
     if (fnClose) {
         fnClose();
     }

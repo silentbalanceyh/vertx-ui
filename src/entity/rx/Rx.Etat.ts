@@ -8,6 +8,7 @@ class Etat {
     private _cab: undefined;
     private _cabFile: undefined;
     private _logger: undefined;
+    private _disableLog: Boolean = false;
     private _state: any;
     private _loading: any;
     private _dispatchTo: any = {};
@@ -40,6 +41,9 @@ class Etat {
     }
 
     logger(logger: any) {
+        if (null == logger) {
+            this._disableLog = true;
+        }
         this._logger = logger;
         return this;
     }
@@ -175,46 +179,48 @@ class Etat {
             config.raft = this._raft;
         }
         // Logger日志专用
-        if (this._logger) {
-            config.logger = this._logger;
-        } else {
-            const {Logger} = Ux;
-            const cabFile: String = this._cabFile ? this._cabFile : "";
-            let isContainer = false;
-            if (config['i18n.cab']) {
-                const ns = config['i18n.cab'].ns;
-                if (0 <= ns.indexOf("container/") && "UI" === cabFile) {
-                    const {Logger} = Ux;
-                    this._logger = Logger.container;
-                    isContainer = true;
+        if (!this._disableLog) {
+            if (this._logger) {
+                config.logger = this._logger;
+            } else {
+                const {Logger} = Ux;
+                const cabFile: String = this._cabFile ? this._cabFile : "";
+                let isContainer = false;
+                if (config['i18n.cab']) {
+                    const ns = config['i18n.cab'].ns;
+                    if (0 <= ns.indexOf("container/") && "UI" === cabFile) {
+                        const {Logger} = Ux;
+                        this._logger = Logger.container;
+                        isContainer = true;
+                    }
                 }
-            }
-            if (!isContainer) {
-                if ("UI" === cabFile) {
-                    // 如果是UI.json，则直接使用Logger.page打印，一般为根UI.js专用
-                    this._logger = Logger.page;
-                } else if (0 <= cabFile.indexOf("Form")) {
-                    // 如果包含了Form关键字，则直接使用Logger.form打印
-                    this._logger = Logger.form;
-                    this._form = true;
-                } else if (
-                    // 报表和图标专用
-                    0 <= cabFile.indexOf("Report") ||
-                    0 <= cabFile.indexOf("Chart")
-                ) {
-                    // 如果包含了Report/Chart关键字
-                    this._logger = Logger.stateless;
-                } else if (
-                    // 如果包含了Filter/List关键字
-                    0 <= cabFile.indexOf("Filter") ||
-                    0 <= cabFile.indexOf("List")
-                ) {
-                    this._logger = Logger.control;
-                } else {
-                    this._logger = Logger.component;
+                if (!isContainer) {
+                    if ("UI" === cabFile) {
+                        // 如果是UI.json，则直接使用Logger.page打印，一般为根UI.js专用
+                        this._logger = Logger.page;
+                    } else if (0 <= cabFile.indexOf("Form")) {
+                        // 如果包含了Form关键字，则直接使用Logger.form打印
+                        this._logger = Logger.form;
+                        this._form = true;
+                    } else if (
+                        // 报表和图标专用
+                        0 <= cabFile.indexOf("Report") ||
+                        0 <= cabFile.indexOf("Chart")
+                    ) {
+                        // 如果包含了Report/Chart关键字
+                        this._logger = Logger.stateless;
+                    } else if (
+                        // 如果包含了Filter/List关键字
+                        0 <= cabFile.indexOf("Filter") ||
+                        0 <= cabFile.indexOf("List")
+                    ) {
+                        this._logger = Logger.control;
+                    } else {
+                        this._logger = Logger.component;
+                    }
                 }
+                config.logger = this._logger;
             }
-            config.logger = this._logger;
         }
         // 连接设置
         const connect: any = {};

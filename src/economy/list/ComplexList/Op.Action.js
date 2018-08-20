@@ -47,27 +47,49 @@ const rxAdd = (reference) => (event) => {
     const tabs = stateAddTab(reference);
     reference.setState({tabs, ...view});
 };
+/**
+ * 二义性函数
+ * @param reference
+ * @param data
+ * @param id
+ */
+const rxRecord = (reference, id, data) => {
+    let {record = {}} = reference.state;
+    if (undefined !== data) {
+        record[id] = data;
+    }
+    return Immutable.fromJS(record).toJS();
+};
 
 const rxEdit = (reference, id) => {
     const {$self} = reference.props;
-    const options = Init.readOption($self);
-    const uri = options['ajax.get.uri'];
-    // Mock专用数据
-    const mockData = Mock.mockDetail($self, id);
-    const promise = Ux.ajaxGet(uri, {id}, mockData);
-    promise.then(data => {
-        let {record = {}} = $self.state;
-        record[id] = data;
-        record = Immutable.fromJS(record).toJS();
-        $self.setState({record});
-        const tabs = stateEditTab($self, id, data);
+    let {tabs = {}} = $self.state;
+    tabs = Immutable.fromJS(tabs).toJS();
+    const found = tabs.items.filter(item => item.key === id);
+    if (0 < found.length) {
+        // 如果已经打开过，则不需要重复打开记录
+        tabs.activeKey = found[0].key;
+        // 调用二义性函数
+        const record = rxRecord($self, id);
         const view = Init.stateView("edit", id, reference);
-        $self.setState({tabs, ...view});
-        const {rxEditPost} = reference.props;
-        if (rxEditPost) {
-            rxEditPost(data, id);
-        }
-    })
+        $self.setState({tabs, ...view, record});
+    } else {
+        const options = Init.readOption($self);
+        const uri = options['ajax.get.uri'];
+        // Mock专用数据
+        const mockData = Mock.mockDetail($self, id);
+        const promise = Ux.ajaxGet(uri, {id}, mockData);
+        promise.then(data => {
+            const record = rxRecord($self, id, data);
+            const tabs = stateEditTab($self, id, data);
+            const view = Init.stateView("edit", id, reference);
+            $self.setState({tabs, ...view, record});
+            const {rxEditPost} = reference.props;
+            if (rxEditPost) {
+                rxEditPost(data, id);
+            }
+        })
+    }
 };
 
 const rxDeleteDetail = (reference, id) => {

@@ -1,9 +1,8 @@
 import RxAnt from "./AI.RxAnt";
 import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from "antd";
-import {FileUpload, TimeRanger} from "web";
 import JsxOp from "../_internal/Ux.Jsx.Op";
 import React from "react";
-import E from '../Ux.Error';
+import {FileUpload, TimeRanger} from "web";
 
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
@@ -77,7 +76,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const options = RxAnt.toOptions(reference, config);
     return (config) ?
         <Checkbox.Group {...rest} options={options}/> :
-        <Checkbox {...jsx}/>
+        <Checkbox {...rest}/>
 };
 const aiTextArea = (reference, jsx = {}) => {
     return (<Input.TextArea {...jsx}/>)
@@ -93,15 +92,15 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
 const aiAction = (reference, jsx = {}) => {
     if (jsx.buttons) {
         // submit + reset双按钮专用生成
-        E.fxInfo(true, 10076, "optionJsx.buttons");
+        // E.fxInfo(true, 10076, "optionJsx.buttons");
         return JsxOp.rtNorm(reference, jsx);
     } else if (jsx.hasOwnProperty("bind")) {
         // 多个按钮
-        E.fxInfo(true, 10076, "optionJsx.bind");
+        // E.fxInfo(true, 10076, "optionJsx.bind");
         return JsxOp.rtDialog(reference, jsx);
     } else {
         // 专用Bind按钮处理
-        E.fxInfo(true, 10076, "DEFAULT");
+        // E.fxInfo(true, 10076, "DEFAULT");
         return JsxOp.rtBind(reference, !jsx.hidden)
     }
 };

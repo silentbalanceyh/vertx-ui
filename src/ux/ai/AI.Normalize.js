@@ -37,22 +37,16 @@ const _aiRowConfig = (item = {}, rowItem = {}) => {
 };
 
 const _aiValidator = (item = {}, reference) => {
-    if (item.optionConfig) {
-        if (!item.optionConfig.hasOwnProperty("rules")) {
-            if (item.optionJsx) {
-                delete item.optionJsx.onFocus;
-                delete item.optionJsx.onBlur;
+    if (item.optionConfig && item.optionConfig.hasOwnProperty('rules')) {
+        // 做纯的Place Holder的计算
+        const rules = item.optionConfig.rules.filter(item => item.required);
+        if (0 < rules.length) {
+            const placeholder = Prop.fromHoc(reference, "placeholder");
+            if (!item.optionJsx) {
+                item.optionJsx = {};
             }
-        } else {
-            const rules = item.optionConfig.rules.filter(item => item.required);
-            if (0 < rules.length) {
-                const placeholder = Prop.fromHoc(reference, "placeholder");
-                if (!item.optionJsx) {
-                    item.optionJsx = {};
-                }
-                if (!item.optionJsx.hasOwnProperty("placeholder")) {
-                    item.optionJsx.placeholder = placeholder;
-                }
+            if (!item.optionJsx.hasOwnProperty("placeholder")) {
+                item.optionJsx.placeholder = placeholder;
             }
         }
     }
@@ -121,7 +115,7 @@ const hookerRender = (item, renders = {}, layout = {}, refenrece) => {
         }
     }
     return fnRender;
-}
+};
 
 const hookerCol = (item) => {
     const style = {};
