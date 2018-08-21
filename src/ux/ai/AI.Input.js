@@ -11,9 +11,9 @@ const aiConfirm = (reference, onOk, ...path) => {
         [reference].concat(path));
     Modal.confirm({...config, onOk});
 };
-const aiUI = (Component) => {
+const aiUI = (Component, viewOnly = false) => {
     return (reference, jsx = {}) => (
-        <Component reference={reference} {...jsx}/>
+        <Component reference={reference} {...jsx} viewOnly={viewOnly}/>
     )
 };
 export default {

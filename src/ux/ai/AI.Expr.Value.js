@@ -136,7 +136,17 @@ const applyTree = (item = {}) => {
         });
     return $item.toJS();
 };
-
+const applyDynamic = (item) => {
+    const attrs = {};
+    const config = item['$config'] ? item['$config'] : {};
+    Object.assign(attrs, config);
+    if (config.width && !attrs.style) {
+        attrs.style = {
+            width: config.width
+        }
+    }
+    return attrs;
+};
 export default {
     applyArray,
     applyKey,
@@ -148,5 +158,6 @@ export default {
     applyKv,
     applyColumn,
     applyValue,
-    applyConnect
+    applyConnect,
+    applyDynamic
 }

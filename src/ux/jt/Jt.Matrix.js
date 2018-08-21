@@ -23,10 +23,10 @@ const _jemRemove = (reference, record, index) => (event) => {
     }
 };
 
-const _jemOp = (reference, config, jsx) => (text, record, index) => {
+const _jemOp = (reference, config, jsx = {}) => (text, record, index) => {
     return (
         <span>
-            <Button icon={"reload"} onClick={_jemRemove(reference, record, index)}/>
+            {jsx.refresh ? (<Button icon={"reload"} onClick={_jemRemove(reference, record, index)}/>) : false}
             &nbsp;&nbsp;
             {text}
         </span>

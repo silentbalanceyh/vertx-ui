@@ -47,7 +47,7 @@ class Component extends React.PureComponent {
         const {agree = false} = this.state;
         const disabled = related.disabled ? !agree : false;
         const {value, ...meta} = rest;
-        let checkedValue = value && value.agree ? "YES" : undefined;
+        let checkedValue = value && value.agree ? "YES" : "NO";
         let dateValue = value && value.value ? Ux.convertTime(value.value) : undefined;
         return (
             <Input.Group {...meta} compact>

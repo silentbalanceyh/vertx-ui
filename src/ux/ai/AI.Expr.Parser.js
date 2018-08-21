@@ -77,6 +77,7 @@ const PARSER = {
     // 特殊item属性
     itemClass: jsxItem("className"),
     colon: jsxItemBoolean("colon"),
+    status: jsxItem("status")
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');

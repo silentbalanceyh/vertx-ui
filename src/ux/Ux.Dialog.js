@@ -37,6 +37,10 @@ const _buildConfig = (reference, message, fnSuccess, key, fnFailure) => {
  * @param {Function} fnSuccess 窗口按钮的回调函数
  */
 const showError = (reference, message, fnSuccess) => Modal.error(_buildConfig(reference, message, fnSuccess, "error"));
+const showErrorMessage = (reference, message, fnSuccess) => {
+    message.destroy();
+    message.error(message, 1, fnSuccess);
+};
 /**
  * 成功信息显示专用窗口
  * @method showSuccess
@@ -210,6 +214,7 @@ export default {
     closeWindow,
     // fnListItem调用
     showError,
+    showErrorMessage,
     showSuccess,
     showConfirm,
     showDialog,

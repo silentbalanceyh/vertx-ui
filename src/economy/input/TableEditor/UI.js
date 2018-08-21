@@ -7,7 +7,7 @@ class Component extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = Ux.jetInit(this);
+        this.state = Ux.jetInit(this, true);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {

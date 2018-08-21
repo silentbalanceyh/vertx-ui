@@ -48,7 +48,12 @@ const jctColumn = (reference, columns = [], jsx, render = {}) => {
     columns = Ai.aiExprColumn(columns);
     columns.forEach(item => {
         if ("key" === item.dataIndex) {
-            item.render = _jetOp(reference, item, jsx);
+            if (render.hasOwnProperty('key') && U.isFunction(render['key'])) {
+                const fnRender = render['key'];
+                item.render = fnRender(reference, item, jsx);
+            } else {
+                item.render = _jetOp(reference, item, jsx);
+            }
         } else {
             let fnRender = render[item.dataIndex];
             if (!fnRender) {
@@ -71,6 +76,20 @@ const jetInit = (reference, returnState = false) => {
         return {source};
     } else {
         reference.setState({source})
+    }
+};
+
+const jetInitWithAll = (reference, returnState = false) => {
+    E.fxTerminal(!reference, 10049, reference);
+    const props = reference.props;
+    const sourceAll = props.value || {
+        source: [{key: Random.randomUUID()}],
+        _META_: undefined,
+    };
+    if (returnState) {
+        return sourceAll;
+    } else {
+        reference.setState(sourceAll)
     }
 };
 
@@ -97,6 +116,7 @@ const jctData = (reference) => {
 export default {
     // 初始化数据
     jetInit,
+    jetInitWithAll,
     // 渲染Op
     jctColumn,
     // 数据处理
