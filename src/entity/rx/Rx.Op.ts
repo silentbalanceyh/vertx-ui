@@ -1,6 +1,28 @@
 import Ux from 'ux';
 import * as U from 'underscore';
 
+const thenCallback = (promise, {
+    isDialog, ref, postDialog, callback, postKey
+}, resolve) => {
+    // 这里的promise一定是一个可执行函数，并且返回一个完整的Promise，Delay执行
+    return promise().then(data => {
+        if (isDialog) {
+            postDialog(ref, postKey, () => {
+                Ux.rdxSubmitting(ref, false);
+                let ret = callback(data);
+                if (!ret) ret = {};
+                return resolve(ret);
+            }, data)
+        } else {
+            postDialog(ref, postKey);
+            Ux.rdxSubmitting(ref, false);
+            let ret = callback(data);
+            if (!ret) ret = {};
+            return resolve(ret);
+        }
+    })
+};
+
 class RxOp {
     private validation: any = [];
     private _success;
@@ -42,7 +64,7 @@ class RxOp {
     }
 
     success(promise) {
-        this._success = U.isFunction(promise) ? promise() : promise;
+        this._success = promise;
         return this;
     }
 
@@ -78,27 +100,23 @@ class RxOp {
             }
         }// 是否设置了postKey
         const postDialog = this.isDialog ? Ux.showDialog : Ux.showMessage;
+        const isDialog = this.isDialog;
+        const postKey = this._postKey;
         // 验证成功，是否执行confirm流程
         if (confirmKey) {
             return new Promise((resolve) =>
                 Ux.showDialog(ref, confirmKey,
-                    () => promise.then(data => postDialog(ref, this._postKey, () => {
-                        Ux.rdxSubmitting(ref, false);
-                        let ret = callback(data);
-                        if (!ret) ret = {};
-                        return resolve(ret);
-                    }, data)), {},
+                    () => thenCallback(promise, {
+                        isDialog, ref, postDialog, callback, postKey
+                    }, resolve), {},
                     () => {
                         Ux.rdxSubmitting(ref, false);
                         resolve({})
                     }));
         } else {
-            return promise.then(data => postDialog(ref, this._postKey, () => {
-                Ux.rdxSubmitting(ref, false);
-                let ret = callback(data);
-                if (!ret) ret = {};
-                return Promise.resolve(ret);
-            }, data));
+            return thenCallback(promise, {
+                isDialog, ref, postDialog, callback, postKey
+            }, Promise.resolve);
         }
     }
 }

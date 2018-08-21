@@ -28,6 +28,35 @@ const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) =
     }, true);
     fnOut(DataLabor.createIn($state, dft));
 });
+
+const rapitInit = (reference, params = {}, propKey) => {
+    const fnInit = (ref) => {
+        const key = ref.props.$key;
+        if (key) {
+            const $params = Object.assign(params, {key});
+            ref.props.fnData($params);
+        }
+    };
+    if (propKey) {
+        const data = reference.props[propKey];
+        if (!data || !data.is()) {
+            fnInit(reference);
+        }
+    } else {
+        fnInit(reference);
+    }
+};
+
+const rapitUpdate = (reference, prevProps, params = {}, propKey) => {
+    if (prevProps) {
+        // 更新流程
+        const current = reference.props.$key;
+        const previous = prevProps.$key;
+        if (current !== previous) {
+            rapitInit(reference, params, propKey);
+        }
+    }
+};
 /**
  * list.items子列表专用方法，默认是Save模式
  * @param dataObject
@@ -128,6 +157,10 @@ const toEffect = (state = {}) => {
 export default {
     // 特殊方法，用于执行DataObject中的某个key下的
     rapitRecord,
+    // 特殊方法，对于自定义组件中的特殊处理
+    rapitInit,
+    // 特殊方法，对于自定义组件中的特殊处理
+    rapitUpdate,
     // 写状态树
     writeTree,
     // ---------------- 特殊行为方法

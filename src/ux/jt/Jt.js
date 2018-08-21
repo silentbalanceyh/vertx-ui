@@ -1,17 +1,11 @@
-import Immutable from 'immutable'
 import Prop from '../Ux.Prop';
 import Table from './Jt.Table';
 import Matrix from './Jt.Matrix';
 import Selector from './Jt.Selector';
+import Event from './Jt.Event';
+import Dynamic from './Jt.Dynamic';
+import E from "../Ux.Error";
 
-const jctChange = (reference, changedValue) => {
-    const onChange = reference.props.onChange;
-    if (onChange) {
-        const newValue = Object.assign({}, reference.state, changedValue);
-        const newState = Immutable.fromJS(newValue).toJS();
-        onChange(newState);
-    }
-};
 const jctUnsafe = (reference, nextProps) => {
     if ('value' in nextProps) {
         const value = nextProps.value;
@@ -36,10 +30,43 @@ const jctPointer = (ref, key) => {
         }
     }
 };
+const jctForm = (forms = {}) => {
+    const keys = [];
+    const promises = [];
+    for (const key in forms) {
+        const form = forms[key];
+        if (form) {
+            form.validateFields((error, values) => {
+                if (error) {
+                    promises.push(Promise.reject({error}));
+                } else {
+                    promises.push(Promise.resolve(values));
+                }
+            });
+            keys.push(key);
+        }
+    }
+    return Promise.all(promises).then(data => {
+        const result = {};
+        keys.forEach((key, index) => result[key] = data[index]);
+        return Promise.resolve(result);
+    }).catch(error => Promise.reject(error))
+};
+const jctSubmit = (reference, key = "$_pointer") => {
+    E.fxTerminal(!reference, 10049, reference);
+    E.fxTerminal(!reference.state, 10084, reference.state);
+    // 遍历读取所有Form引用
+    const pointers = reference.state[key];
+    if (pointers) {
+        return jctForm(pointers);
+    }
+};
 // jct -- Js Control Tool
 export default {
-    // 自定义组件专用改变值的方法
-    jctChange,
+    // Form专用取值
+    jctForm,
+    // 提交专用
+    jctSubmit,
     // 自定义组件的Unsafe修改属性方法
     jctUnsafe,
     // 自定义组件的Pointer引用交换
@@ -50,4 +77,8 @@ export default {
     ...Matrix,
     // List Selector
     ...Selector,
+    // 专用事件处理
+    ...Event,
+    // 动态处理
+    ...Dynamic,
 }

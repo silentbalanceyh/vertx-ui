@@ -103,7 +103,7 @@ const toStyle = (name, bg) => {
 };
 const toUniform = (props, ...keys) => {
     const item = toDatum(props);
-    const defaultProp = ["app", "user", "router"].concat(keys);
+    const defaultProp = ["app", "user", "router", "submitting"].concat(keys);
     const common = toProp.apply(this, [props].concat(defaultProp));
     return {
         ...item,

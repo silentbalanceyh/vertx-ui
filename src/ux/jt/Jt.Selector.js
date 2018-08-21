@@ -30,7 +30,10 @@ const _fnChange = (reference, config = {}) => (pagination, filters, sorter) => {
 };
 const _fnDialog = (reference = {}, show = false) => (event) => {
     event.preventDefault();
-    reference.setState({$visible: show})
+    let state = {};
+    state.$visible = show;
+    state = Immutable.fromJS(state).toJS();
+    reference.setState(state)
 };
 
 const _fnSelect = (reference = {}, config = {}) => (event) => {
@@ -70,7 +73,7 @@ const _fnParams = (reference, config = {}) => {
 };
 
 const jslLoading = (reference, config = {}) => event => {
-    event.preventDefault();
+    if (event) event.preventDefault();
     reference.setState({
         $loading: true, $visible: true,
         $data: [], $tableKey: Random.randomString(16),

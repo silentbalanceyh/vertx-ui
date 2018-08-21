@@ -2,7 +2,7 @@ import RxAnt from "./AI.RxAnt";
 import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from "antd";
 import JsxOp from "../_internal/Ux.Jsx.Op";
 import React from "react";
-import {FileUpload, TimeRanger} from "web";
+import {FileUpload, MagicView, TimeRanger} from "web";
 
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
@@ -109,7 +109,16 @@ const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<TimePicker {...jsx}/>)
 };
+const aiMagic = (reference, jsx = {}) => {
+    const {config = {}, ...rest} = jsx;
+    if (config.items) {
+        config.items = RxAnt.toOptions(reference, config);
+    }
+    return (<MagicView {...rest} config={config}/>)
+};
 export default {
+    // Label专用组件
+    aiMagic,
     // 直接组件
     aiSelect,
     aiInput,

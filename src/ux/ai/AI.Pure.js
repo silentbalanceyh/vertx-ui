@@ -86,7 +86,7 @@ const aiInputRadios = (items = [], rest = {}) => (
         {items.map(item => (
             <Radio key={item.key} style={item.style ? item.style : {}}
                    value={item.hasOwnProperty('value') ? item.value : item.key}>
-                {item.name}
+                {item.name || item.label}
             </Radio>
         ))}
     </Radio.Group>
