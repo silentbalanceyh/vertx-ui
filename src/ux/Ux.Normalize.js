@@ -1,16 +1,16 @@
-import Validator from './Ux.Validator'
-import Type from './Ux.Type';
-import Html from './Ux.Html';
-import E from './Ux.Error';
-import Immutable from 'immutable';
-import Ai from './ai/AI';
+import Validator from "./Ux.Validator";
+import Type from "./Ux.Type";
+import Html from "./Ux.Html";
+import E from "./Ux.Error";
+import Immutable from "immutable";
+import Ai from "./ai/AI";
 
-const limitNumber = (length) => value => {
+const limitNumber = length => value => {
     if (value) {
         // 整数限制
         value = value.toString();
         if (1 === value.length) {
-            value = value.replace(/[^1-9]/g, "");
+            value = value.replace(/[^0-9]/g, "");
         } else {
             value = value.replace(/\D/g, "");
         }
@@ -74,8 +74,7 @@ const mountNormalizer = (reference, item = {}) => {
 };
 const mountErrorFocus = (reference, item) => {
     if (item.field) {
-        if (item.optionConfig &&
-            item.optionConfig.hasOwnProperty("rules")) {
+        if (item.optionConfig && item.optionConfig.hasOwnProperty("rules")) {
             if (!item.optionJsx) item.optionJsx = {};
             // onFocus
             item.optionJsx.onFocus = Html.htmlErrorFocus(item);
@@ -89,11 +88,11 @@ const _normalizeUi = (reference, ui = []) => {
     // 最开始使用属性解析器解析配置信息，先做解析
     ui = Ai.hookerForm(ui);
     // 先处理onFocus,onBlur，在hooker中会被删除掉
-    ui = Type.itMatrix(ui, (item) => mountErrorFocus(reference, item));
+    ui = Type.itMatrix(ui, item => mountErrorFocus(reference, item));
     // 挂载验证器，处理rules
-    ui = Type.itMatrix(ui, (item) => Validator.mountValidator(reference, item));
+    ui = Type.itMatrix(ui, item => Validator.mountValidator(reference, item));
     // 挂载normalize专用
-    ui = Type.itMatrix(ui, (item) => mountNormalizer(reference, item));
+    ui = Type.itMatrix(ui, item => mountNormalizer(reference, item));
 
     return ui;
 };
@@ -105,11 +104,11 @@ const _normalizeUi = (reference, ui = []) => {
  * @return {*}
  */
 const extractForm = (reference = {}, key = "form") => {
-    const {$hoc} = reference.state;
+    const { $hoc } = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);
-    return (form) ? _normalizeUi(reference, form.ui) : [];
+    return form ? _normalizeUi(reference, form.ui) : [];
 };
 /**
  * 分组处理Form中的input控件专用
@@ -119,12 +118,13 @@ const extractForm = (reference = {}, key = "form") => {
  */
 const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
     if (undefined !== groupIndex) {
-        const {$hoc} = reference.state;
+        const { $hoc } = reference.state;
         E.fxTerminal(!$hoc, 10062, $hoc);
         const form = $hoc._(key);
         E.fxTerminal(!form, 10056, $hoc);
-        return (form && form.ui[groupIndex]) ?
-            _normalizeUi(reference, form.ui[groupIndex]) : [];
+        return form && form.ui[groupIndex]
+            ? _normalizeUi(reference, form.ui[groupIndex])
+            : [];
     } else {
         E.fxTerminal(true, 10036, groupIndex);
     }
@@ -137,14 +137,14 @@ const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
  * @return {Array}
  */
 const extractOp = (reference = {}, op, key = "form") => {
-    const {$hoc} = reference.state;
+    const { $hoc } = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);
     /**
      * 绑定Op专用，主要用于onClick的绑定操作
      */
-    let source = op ? op : reference.state['$op'];
+    let source = op ? op : reference.state["$op"];
     if (!source) source = {};
     const opData = form && form.op ? Immutable.fromJS(form.op).toJS() : [];
     opData.forEach(op => {
@@ -165,15 +165,15 @@ const extractOp = (reference = {}, op, key = "form") => {
  * @return {{}}
  */
 const extractHidden = (reference = {}, key = "form") => {
-    const {$hoc} = reference.state;
+    const { $hoc } = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);
-    const hidden = (form && form.hidden) ? form.hidden : {};
+    const hidden = form && form.hidden ? form.hidden : {};
     if (!hidden.hasOwnProperty("op")) {
         hidden.op = false;
     }
-    if (!hidden.hasOwnProperty('inputs')) {
+    if (!hidden.hasOwnProperty("inputs")) {
         hidden.inputs = [];
     }
     return hidden;
@@ -190,4 +190,4 @@ export default {
     extractOp,
     // Ui处理
     raftUi: _normalizeUi
-}
+};

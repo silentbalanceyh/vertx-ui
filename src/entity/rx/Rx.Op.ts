@@ -11,14 +11,14 @@ const thenCallback = (promise, {
                 Ux.rdxSubmitting(ref, false);
                 let ret = callback(data);
                 if (!ret) ret = {};
-                return resolve(ret);
+                resolve(ret);
             }, data)
         } else {
             postDialog(ref, postKey);
             Ux.rdxSubmitting(ref, false);
             let ret = callback(data);
             if (!ret) ret = {};
-            return resolve(ret);
+            resolve(ret);
         }
     })
 };
@@ -104,19 +104,18 @@ class RxOp {
         const postKey = this._postKey;
         // 验证成功，是否执行confirm流程
         if (confirmKey) {
-            return new Promise((resolve) =>
-                Ux.showDialog(ref, confirmKey,
-                    () => thenCallback(promise, {
-                        isDialog, ref, postDialog, callback, postKey
-                    }, resolve), {},
-                    () => {
-                        Ux.rdxSubmitting(ref, false);
-                        resolve({})
-                    }));
+            return new Promise((resolve) => Ux.showDialog(ref, confirmKey,
+                () => thenCallback(promise, {
+                    isDialog, ref, postDialog, callback, postKey
+                }, resolve), {},
+                () => {
+                    Ux.rdxSubmitting(ref, false);
+                    resolve({})
+                }));
         } else {
-            return thenCallback(promise, {
+            return new Promise((resolve) => thenCallback(promise, {
                 isDialog, ref, postDialog, callback, postKey
-            }, Promise.resolve);
+            }, resolve));
         }
     }
 }
