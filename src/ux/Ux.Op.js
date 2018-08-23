@@ -158,7 +158,6 @@ const pipeIsUpdate = (reference) => {
         // 没有传入Key则是false
         isUpdate = false;
     }
-    console.error($mode, isUpdate);
     return isUpdate;
 };
 const pipeInit = (reference, fnAdd, fnUpdate) => {

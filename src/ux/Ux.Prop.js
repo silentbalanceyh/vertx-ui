@@ -2,6 +2,7 @@ import Value from "./Ux.Value";
 import Immutable from 'immutable';
 import E from './Ux.Error';
 import {DataLabor} from 'entity';
+import U from 'underscore';
 
 /**
  * 直接从Hoc资源路径读取数据信息
@@ -89,6 +90,15 @@ const onReference = (reference, current = 0) => {
             ref = props.reference;
         }
         counter++;
+    }
+    return ref;
+};
+const onArray = (...args) => {
+    let ref = null;
+    if (1 === args.length && U.isArray(args[0])) {
+        ref = args[0];
+    } else {
+        ref = args;
     }
     return ref;
 };
@@ -232,6 +242,7 @@ export default {
     onRouting,
     onDatum,
     onReference,
+    onArray,
     // 从Hoc, Router中提取数据
     fromHoc,
     fromRouter,

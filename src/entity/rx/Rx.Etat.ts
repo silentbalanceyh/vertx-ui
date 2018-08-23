@@ -96,11 +96,7 @@ class Etat {
     }
 
     loading(...loading) {
-        const loadingArr = [];
-        loading.forEach(item => {
-            loadingArr.push(item);
-        });
-        this._loading = loadingArr;
+        this._loading = Ux.onArray.apply(null, loading);
         return this;
     }
 
