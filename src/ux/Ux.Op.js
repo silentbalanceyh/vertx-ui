@@ -4,6 +4,7 @@ import E from './Ux.Error';
 import U from 'underscore'
 import Dg from './Ux.Debug';
 import State from './Ux.State';
+import Env from './Ux.Env';
 
 /**
  * 【高阶函数：三阶】用于显示对话框
@@ -140,11 +141,31 @@ const connectId = (id) => {
  * @param fnAdd,
  * @param fnUpdate
  */
+const pipeIsUpdate = (reference) => {
+    const {$key, $mode} = reference.props;
+    // 1.没有传入$key的时候是添加
+    let isUpdate;
+    if ($key) {
+        // 2.传入$key过后，需要检查Mode
+        if ($mode) {
+            // 有$key，$mode为UPDATE时为更新
+            isUpdate = $mode === Env.Mode.UPDATE;
+        } else {
+            // 有$key没有$mode，更新
+            isUpdate = true;
+        }
+    } else {
+        // 没有传入Key则是false
+        isUpdate = false;
+    }
+    return isUpdate;
+};
 const pipeInit = (reference, fnAdd, fnUpdate) => {
-    const {$inited, $key} = reference.props;
+    const {$inited} = reference.props;
     // 如果包含了$key则是更新模式
     let data = {};
-    if ($key) {
+    // 计算添加还是更新
+    if (pipeIsUpdate(reference)) {
         // 更新模式
         if (U.isFunction(fnUpdate)) {
             data = fnUpdate($inited, reference);
@@ -216,5 +237,6 @@ export default {
     pipeInit,
     pipeReset,
     pipeVerify,
-    pipeGet
+    pipeGet,
+    pipeIsUpdate
 }

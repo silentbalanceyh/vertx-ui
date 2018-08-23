@@ -66,10 +66,10 @@ class Component extends React.PureComponent {
         let extraContent = ExtraComponent ?
             <ExtraComponent/> : (
                 <span>
-                    {Ux.aiGrid([21, 3],
+                    {topbar.help ? Ux.aiGrid([20, 4],
                         topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
                         topbar.back ? Op.renderBack(reference, topbar) : false
-                    )}
+                    ) : topbar.back ? Op.renderBack(reference, topbar) : false}
                 </span>
             );
         return (

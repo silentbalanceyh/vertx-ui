@@ -64,9 +64,10 @@ class RxFlow {
     }
 
     mount(...keys) {
+        const refArray = Ux.onArray.apply(null, keys);
         const metadata = this.metadata;
         const promiseMap = this.promiseMap;
-        keys.forEach(key => {
+        refArray.forEach(key => {
             if (key) {
                 const action = metadata[key];
                 if (action && action.ajax && action.processor) {
@@ -81,6 +82,21 @@ class RxFlow {
 
     then(promise) {
         this.next.push(promise);
+        return this;
+    }
+
+    directory(types = []) {
+        if (0 < types.length) {
+            const action = this.metadata['tabular'];
+            if (action && action.ajax && action.processor) {
+                this.promiseMap['tabular'] = action;
+                this.parameterMap['tabular'] = {
+                    types
+                };
+            } else {
+                console.error('[ZI] directory: missed require attributes "ajax" or "processor"', types)
+            }
+        }
         return this;
     }
 

@@ -73,6 +73,11 @@ export default {
     // 环境变量专用
     Env: Cv,
     fnOut: Taper.fnFlush,
+    // 专用的模式设置，主要用于区分添加和更新
+    Mode: {
+        CREATE: "CREATE",
+        UPDATE: "UPDATE"
+    },
     /**
      * Redux专用状态树的写入方法
      * @method dataOut

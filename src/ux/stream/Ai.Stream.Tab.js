@@ -58,10 +58,19 @@ class Tab {
         return this;
     }
 
-    disabled(disabled = []) {
+    disabled(disabled = [], byKey = false) {
         Sure.ensureStream(this);
         const {items = []} = this.config;
-        items.forEach((item, index) => item.disabled = !!disabled[index]);
+        items.forEach((item, index) => {
+            // 两种运算
+            if (byKey) {
+                // byKey的时候，disabled里面是key
+                const $disabled = Immutable.fromJS(disabled);
+                item.disabled = $disabled.contains(item.key);
+            } else {
+                item.disabled = !!disabled[index];
+            }
+        });
         return this;
     }
 

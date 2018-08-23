@@ -256,7 +256,6 @@ const aiCellIcon = (reference, config) => text => {
  *      }
  */
 const aiCellLink = (reference, config, ops = {}) => text => {
-    console.info(text);
     return (
         <Fragment>
             {config['$config'].map((line, opIndex) => {
