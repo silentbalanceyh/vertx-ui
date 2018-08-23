@@ -4,6 +4,7 @@ import Ux from 'ux';
 import U from 'underscore';
 import Immutable from 'immutable';
 import Value from '../Ux.Value';
+import Ai from '../ai/AI'
 
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;
@@ -156,7 +157,9 @@ const rtBind = (reference, show = false) => {
 const rtDialog = (reference, jsx = {}) => {
     const bind = jsx.bind;
     if (!U.isArray(bind)) return false;
-    return bind.map(item => <Button {...item} onClick={_rxClick(reference, item)} className="ux-hidden"/>)
+    const processed = [];
+    bind.forEach(literal => processed.push(Ai.aiExprOp(literal)));
+    return processed.map(item => <Button {...item} onClick={_rxClick(reference, item)} className="ux-hidden"/>)
 };
 const rtNorm = (reference, jsx = {}) => {
     const buttons = jsx.buttons;
