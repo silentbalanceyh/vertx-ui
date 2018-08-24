@@ -1,9 +1,9 @@
 import U from "underscore";
-import Random from "../Ux.Random";
+import Random from "../util/Ux.Random";
 import {Col, Row} from "antd";
 import React from "react";
 import viewRender from "./Ux.Jsx.View";
-import Prop from "../Ux.Prop";
+import Prop from "../prop/Ux.Prop";
 import E from '../Ux.Error';
 import DFT from './Ux.Jsx.Default';
 

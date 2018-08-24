@@ -1,5 +1,5 @@
-import Cv from './Ux.Env'
-import E from './Ux.Error'
+import Cv from '../Ux.Env'
+import E from '../Ux.Error'
 
 /**
  * 通用属性读取相关信息

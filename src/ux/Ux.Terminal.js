@@ -1,5 +1,5 @@
 import React from 'react';
-import Prop from './Ux.Prop';
+import Prop from './prop/Ux.Prop';
 import Verifier from './Ux.Terminal.Verify';
 
 const fxError = (message) => (<div className={"error-page"}>{message}</div>);

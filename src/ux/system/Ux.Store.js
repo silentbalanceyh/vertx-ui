@@ -1,5 +1,5 @@
-import Cv from './Ux.Constant';
-import E from './Ux.Error';
+import Cv from '../Ux.Constant';
+import E from '../Ux.Error';
 
 const put = (reference) => (key, value) => {
     E.fxTerminal(!reference, 10063, reference);

@@ -1,8 +1,8 @@
-import Global from './Ux.Global';
+import Global from '../system/Ux.Global';
 import Expr from './Ux.Expr';
 import Encrypt from './Ux.Encrypt';
-import Log from './Ux.Log';
-import E from './Ux.Error';
+import Log from '../Ux.Log';
+import E from '../Ux.Error';
 
 const SCHEMA = {
     OAuth: () => {

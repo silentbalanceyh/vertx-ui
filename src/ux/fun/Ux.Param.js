@@ -1,8 +1,8 @@
 import U from 'underscore'
 import Immutable from 'immutable';
-import Logger from './Ux.Log'
-import Type from './Ux.Type'
-import E from './Ux.Error';
+import Logger from '../Ux.Log'
+import Type from '../Ux.Type'
+import E from '../Ux.Error';
 
 const parseProp = (reference, path = "") => {
     const attrPath = path.split('.');

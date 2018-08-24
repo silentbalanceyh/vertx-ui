@@ -1,4 +1,4 @@
-import Prop from '../Ux.Prop'
+import Prop from '../prop/Ux.Prop'
 import Sure from './Ai.Stream.Sure';
 import Immutable from 'immutable';
 import Meta from './Ai.Stream.Tab.json';

@@ -1,6 +1,6 @@
-import Validator from "./Ux.Validator";
+import Validator from "./prop/Ux.Validator";
 import Type from "./Ux.Type";
-import Html from "./Ux.Html";
+import Html from "./util/Ux.Html";
 import E from "./Ux.Error";
 import Immutable from "immutable";
 import Ai from "./ai/AI";
@@ -104,7 +104,7 @@ const _normalizeUi = (reference, ui = []) => {
  * @return {*}
  */
 const extractForm = (reference = {}, key = "form") => {
-    const { $hoc } = reference.state;
+    const {$hoc} = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);
@@ -118,7 +118,7 @@ const extractForm = (reference = {}, key = "form") => {
  */
 const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
     if (undefined !== groupIndex) {
-        const { $hoc } = reference.state;
+        const {$hoc} = reference.state;
         E.fxTerminal(!$hoc, 10062, $hoc);
         const form = $hoc._(key);
         E.fxTerminal(!form, 10056, $hoc);
@@ -137,7 +137,7 @@ const extractGroupForm = (reference = {}, groupIndex, key = "form") => {
  * @return {Array}
  */
 const extractOp = (reference = {}, op, key = "form") => {
-    const { $hoc } = reference.state;
+    const {$hoc} = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);
@@ -165,7 +165,7 @@ const extractOp = (reference = {}, op, key = "form") => {
  * @return {{}}
  */
 const extractHidden = (reference = {}, key = "form") => {
-    const { $hoc } = reference.state;
+    const {$hoc} = reference.state;
     E.fxTerminal(!$hoc, 10062, $hoc);
     const form = $hoc._(key);
     E.fxTerminal(!form, 10056, $hoc);

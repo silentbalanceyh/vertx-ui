@@ -1,5 +1,5 @@
 import Cv from './Ux.Constant';
-import Hoc from './Ux.Hoc';
+import Hoc from './prop/Ux.Hoc';
 import U from 'underscore';
 
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {

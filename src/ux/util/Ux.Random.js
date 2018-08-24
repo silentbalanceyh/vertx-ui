@@ -1,6 +1,6 @@
 import randomjs from 'random-js';
 import {v4} from 'uuid';
-import E from './Ux.Error';
+import E from '../Ux.Error';
 
 /**
  * 生成固定长度的随机字符串

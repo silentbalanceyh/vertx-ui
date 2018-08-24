@@ -1,11 +1,11 @@
 import React from "react";
-import "./Cab.less";
+import "../Cab.less";
 import U from "underscore";
 import Ux from "ux";
-import _Icon from "./Ux.Icon";
-import Prop from "./Ux.Prop";
-import Type from "./Ux.Type";
-import Global from './Ux.Global';
+import _Icon from "../util/Ux.Icon";
+import Prop from "../prop/Ux.Prop";
+import Type from "../Ux.Type";
+import Global from '../system/Ux.Global';
 import {
     Breadcrumb,
     Button,

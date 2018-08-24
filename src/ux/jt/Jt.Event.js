@@ -21,12 +21,12 @@ const jdtInput = (reference, field) => (event) => {
 
 };
 const jdtRadio = (reference, field) => (event) => {
-    const newState = _calculateState(reference, field, event.target.checked);
+    const newState = _calculateState(reference, field, event.target.value);
     reference.setState(newState);
     jctChange(reference, newState);
 };
 const jdtRadioWithAll = (reference, field = "_META_") => (event) => {
-    const newState = _calculateState(reference, field, event.target.checked);
+    const newState = _calculateState(reference, field, event.target.value);
     reference.setState(newState);
     jctChange(reference, newState);
 };

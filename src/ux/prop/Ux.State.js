@@ -1,10 +1,8 @@
 import {DataLabor} from "entity";
 import Immutable from 'immutable';
-import E from './Ux.Error';
-import Type from './Ux.Type';
+import E from '../Ux.Error';
+import Type from '../Ux.Type';
 import U from 'underscore';
-import Prop from './Ux.Prop';
-import Dialog from './Ux.Dialog';
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
@@ -102,40 +100,6 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     return dataRecord;
 };
 
-const rdxSubmitting = (reference, loading = true) => {
-    const state = {};
-    state[`status.submitting`] = {loading};
-    const $state = Immutable.fromJS(state).toJS();
-    writeTree(reference, $state);
-};
-const rdxReject = (message) => Promise.reject({data: {info: message}});
-/**
- * 专写方法，更新list.items
- * @param reference
- * @param values
- */
-const rdxListItem = (reference, values = {}) => {
-    const {fnListItem} = reference.props;
-    E.fxTerminal(!fnListItem, 10087, fnListItem);
-    if (U.isFunction(fnListItem)) {
-        const ref = Prop.onReference(reference, 1);
-        if (ref) {
-            const {$inited = {}} = ref.props;
-            fnListItem($inited.key, values);
-        }
-    }
-};
-const rdxClear = (reference) => {
-    const {fnClear} = reference.props;
-    E.fxTerminal(!fnClear, 10086, fnClear);
-    if (U.isFunction(fnClear)) {
-        fnClear()
-    }
-};
-const rdxClose = (reference) => {
-    rdxClear(reference);
-    Dialog.closeWindow(reference);
-};
 /**
  * 读取专用的带有`$_`前缀的属性值，主要用于从state状态中读取，Zero中所有的state中的键都是`$_`的格式。
  * @method toEffect
@@ -164,16 +128,7 @@ export default {
     // 写状态树
     writeTree,
     // ---------------- 特殊行为方法
-    // 防重复提交专用方法，写status.submitting节点
-    rdxSubmitting,
-    // 返回Promise的reject结果
-    rdxReject,
-    // 更新特殊节点list.items，调用fnListItem方法
-    rdxListItem,
-    // 清除editKey，调用fnClear方法
-    rdxClear,
-    // 关闭窗口专用，调用fnClose方法
-    rdxClose,
+
     // 老版本提取$_状态的专用方法
     toEffect
 }

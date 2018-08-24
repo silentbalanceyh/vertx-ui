@@ -1,9 +1,11 @@
 import AiValue from "./AI.Expr.Value";
-import {DatePicker, Input} from "antd";
+import {DatePicker, Input, Select} from "antd";
 import Value from "../Ux.Value";
 import AiExpr from "./AI.Expr.String";
 import AiPure from "./AI.Pure";
 import Ai from "./AI.Input";
+import RxAnt from './AI.RxAnt';
+import Prop from '../prop/Ux.Prop';
 import React from "react";
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -54,7 +56,36 @@ const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
                     })} value={Value.convertTime(text)}/>
     )
 };
-
+const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
+    const datum = item["$config"].datum;
+    let options = [];
+    if (datum) {
+        const ref = Prop.onReference(reference, 1);
+        options = RxAnt.toOptions(ref, {datum});
+    }
+    const unitJsx = item.jsx ? item.jsx : {};
+    const value = jsx.value;
+    // 赋值处理
+    const attr = {};
+    if (value) {
+        const record = value[index];
+        if (record) {
+            attr.value = record[item.dataIndex];
+        }
+    }
+    return (
+        <Select onChange={(value) => Value.valueTriggerChange(reference, {
+            index, field: item.dataIndex,
+            value
+        })} {...unitJsx} {...attr}>
+            {options.map(item => (
+                <Select.Option key={item.key} value={item.value}>
+                    {item.label}
+                </Select.Option>
+            ))}
+        </Select>
+    )
+};
 const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
     let options = item['$config'] ? item['$config'] : [];
     const {value, ...meta} = jsx;
@@ -84,6 +115,7 @@ export default {
     VECTOR: aiUnitVector,
     TEXT: aiUnitText,
     DATE: aiUnitDate,
+    DATUM: aiUnitDatum,
     RADIO: aiUnitRadio,
     LABEL: aiUnitLabel,
     DECIMAL: aiUnitDecimal,

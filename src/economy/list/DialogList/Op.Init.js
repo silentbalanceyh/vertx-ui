@@ -26,7 +26,7 @@ const calcInited = (reference, key) => {
     const {editKey} = reference.state;
     if (editKey) {
         const dataArray = $items.$(key);
-        return dataArray && dataArray.is() ? dataArray.getElement(editKey) : {}
+        return dataArray && dataArray.is() ? dataArray.getElement(editKey) : {};
     } else {
         return {};
     }

@@ -32,16 +32,7 @@ const parseAction = (jsx = {}) => {
         if (jsx[field]) {
             const binds = U.isArray(jsx[field]) ? jsx[field] : [];
             const converted = [];
-            binds.forEach(item => {
-                let processed = null;
-                if ("string" === typeof item) {
-                    processed = (parseItem(item.split(','), "bind"));
-                } else {
-                    processed = (item);
-                }
-                if (!processed.id) processed.id = processed.key;
-                converted.push(processed);
-            });
+            binds.forEach(item => converted.push(aiExprOp(item)));
             jsx[field] = converted;
         }
     });
@@ -236,7 +227,9 @@ const aiExprOp = (button = "") => {
         item.text = "";
         return item;
     } else {
-        return parseItem(button, "bind");
+        const item = parseItem(button, "bind");
+        if (!item.id) item.id = item.key;
+        return item;
     }
 };
 const aiExprFilter = (filter = "") => parseItem(filter, "filter");

@@ -2,9 +2,9 @@ import Rx from "rxjs";
 import U from "underscore";
 import Log from "./Ux.Log";
 import Cv from "./Ux.Constant";
-import Expr from "./Ux.Expr";
+import Expr from "./util/Ux.Expr";
 import Env from './Ux.Env';
-import Sign from "./Ux.Sign";
+import Sign from "./util/Ux.Sign";
 import Immutable from 'immutable'
 import Type from './Ux.Type';
 import E from './Ux.Error';

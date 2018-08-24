@@ -1,6 +1,6 @@
 import Immutable from 'immutable';
 import Ux from "ux";
-import Value from './Ux.Value';
+import Value from '../Ux.Value';
 import U from 'underscore';
 
 /**
@@ -65,19 +65,10 @@ const rxInit = (props, params = {}) => {
     }
 };
 /**
- * 数据处理专用（初始化）
- * @param reference
- * @param prevProps
- */
-const rxData = (reference, prevProps) => {
-
-};
-/**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
     runSubmit,
-    rxInit,
-    rxData
+    rxInit
 }

@@ -1,6 +1,6 @@
 import {message, Modal} from 'antd';
-import Prop from './Ux.Prop';
-import Expr from './Ux.Expr';
+import Prop from './prop/Ux.Prop';
+import Expr from './util/Ux.Expr';
 import E from './Ux.Error';
 import U from 'underscore'
 

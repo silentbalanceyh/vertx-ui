@@ -4,7 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Ux from "ux";
 import U from 'underscore';
-import _Icon from "../Ux.Icon";
+import _Icon from "../util/Ux.Icon";
 
 const SubMenu = Menu.SubMenu;
 

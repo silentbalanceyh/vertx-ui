@@ -1,9 +1,9 @@
 import Value from "../Ux.Value";
-import fieldRender from "../_internal/Ux.Jsx.Single";
-import Format from "../Ux.Format";
-import Expr from "../Ux.Expr";
+import fieldRender from "../jsx/Ux.Jsx.Single";
+import Format from "../util/Ux.Format";
+import Expr from "../util/Ux.Expr";
 import RxAnt from "./AI.RxAnt";
-import Prop from "../Ux.Prop";
+import Prop from "../prop/Ux.Prop";
 import Type from "../Ux.Type";
 import React, {Fragment} from "react";
 import {Divider, Icon, Popconfirm} from "antd";

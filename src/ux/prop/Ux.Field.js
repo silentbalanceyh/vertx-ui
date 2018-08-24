@@ -1,5 +1,5 @@
-import Ajax from './Ux.Ajax';
-import E from './Ux.Error';
+import Ajax from '../Ux.Ajax';
+import E from '../Ux.Error';
 
 const ajaxFun = {
     get: Ajax.ajaxGet,

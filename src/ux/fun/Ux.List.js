@@ -1,8 +1,8 @@
-import Value from './Ux.Value';
+import Value from '../Ux.Value';
 import Immutable from 'immutable';
 import U from 'underscore';
-import Prop from './Ux.Prop';
-import Ux from "ux";
+import Prop from '../prop/Ux.Prop';
+import Ux from 'ux';
 
 const irPager = (hoc = {}) => {
     let pager = {};

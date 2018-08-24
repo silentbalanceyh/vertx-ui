@@ -1,6 +1,6 @@
 import RxAnt from "./AI.RxAnt";
 import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from "antd";
-import JsxOp from "../_internal/Ux.Jsx.Op";
+import JsxOp from "../jsx/Ux.Jsx.Op";
 import React from "react";
 import {FileUpload, MagicView, TimeRanger} from "web";
 

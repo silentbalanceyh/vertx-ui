@@ -1,10 +1,10 @@
 import U from 'underscore'
-import UI from './Ux.Html'
-import Param from './Ux.Param';
+import UI from '../util/Ux.Html'
+import Param from '../fun/Ux.Param';
 import Prop from './Ux.Prop';
 import Field from './Ux.Field';
-import Value from './Ux.Value';
-import Error from './Ux.Error';
+import Value from '../Ux.Value';
+import Error from '../Ux.Error';
 
 const _ready = (rule = {}) => {
     // 是否检查readonly和disabled
@@ -48,7 +48,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
             parameters[field] = value;
             const {$inited} = refereuce.props;
             if ($inited) {
-                const {key:$key} = $inited;
+                const {key: $key} = $inited;
                 if ($key) {
                     // 更新Mode
                     const updateKey = `key,<>`;
@@ -56,7 +56,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                 }
             }
             // existing 时，参数间关系默认为 AND
-            if (Object.keys(parameters).length > 1){
+            if (Object.keys(parameters).length > 1) {
                 const andKey = "";
                 parameters[andKey] = true;
             }

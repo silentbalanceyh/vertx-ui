@@ -1,7 +1,7 @@
 import Store from './Ux.Store';
-import Cv from './Ux.Constant';
-import E from './Ux.Error';
-import Hoc from './Ux.Hoc'
+import Cv from '../Ux.Constant';
+import E from '../Ux.Error';
+import Hoc from '../prop/Ux.Hoc'
 
 /**
  * 检查环境变量中的Session值判断用户是否登录

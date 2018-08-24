@@ -1,10 +1,10 @@
 import {Col, Form, Icon, Input, Row} from "antd";
 import React from "react";
 import Immutable from "immutable";
-import Random from "../Ux.Random";
+import Random from "../util/Ux.Random";
 import DFT from "./Ux.Jsx.Default";
 import Ai from "../ai/AI";
-import Prop from "../Ux.Prop";
+import Prop from "../prop/Ux.Prop";
 import Norm from "../Ux.Normalize";
 import Value from '../Ux.Value';
 import E from '../Ux.Error';
