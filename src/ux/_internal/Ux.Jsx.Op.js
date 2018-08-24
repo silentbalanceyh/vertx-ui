@@ -158,7 +158,9 @@ const rtDialog = (reference, jsx = {}) => {
     const bind = jsx.bind;
     if (!U.isArray(bind)) return false;
     const processed = [];
-    bind.forEach(literal => processed.push(Ai.aiExprOp(literal)));
+    // 字符串格式才执行解析
+    bind.forEach(literal => "string" === typeof literal ?
+        processed.push(Ai.aiExprOp(literal)) : processed.push(literal));
     return processed.map(item => <Button {...item} onClick={_rxClick(reference, item)} className="ux-hidden"/>)
 };
 const rtNorm = (reference, jsx = {}) => {
