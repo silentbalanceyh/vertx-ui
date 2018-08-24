@@ -5,7 +5,7 @@ import AiExpr from "./AI.Expr.String";
 import AiPure from "./AI.Pure";
 import Ai from "./AI.Input";
 import RxAnt from './AI.RxAnt';
-import Prop from '../Ux.Prop';
+import Prop from '../prop/Ux.Prop';
 import React from "react";
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -63,11 +63,21 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
         const ref = Prop.onReference(reference, 1);
         options = RxAnt.toOptions(ref, {datum});
     }
+    const unitJsx = item.jsx ? item.jsx : {};
+    const value = jsx.value;
+    // 赋值处理
+    const attr = {};
+    if (value) {
+        const record = value[index];
+        if (record) {
+            attr.value = record[item.dataIndex];
+        }
+    }
     return (
         <Select onChange={(value) => Value.valueTriggerChange(reference, {
             index, field: item.dataIndex,
             value
-        })}>
+        })} {...unitJsx} {...attr}>
             {options.map(item => (
                 <Select.Option key={item.key} value={item.value}>
                     {item.label}

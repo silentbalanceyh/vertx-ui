@@ -1,5 +1,5 @@
 import E from '../Ux.Error'
-import Random from '../Ux.Random'
+import Random from '../util/Ux.Random'
 import Ai from '../ai/AI'
 import React from 'react'
 import {Button} from 'antd';

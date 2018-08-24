@@ -1,4 +1,4 @@
-import Sorter from "../Ux.Sorter";
+import Sorter from "../util/Ux.Sorter";
 import Type from "../Ux.Type";
 import Immutable from 'immutable';
 

@@ -1,7 +1,7 @@
 import U from "underscore";
 import Ai from './AI.Input';
 import Calculator from './AI.Layout.Calculator';
-import Prop from '../Ux.Prop';
+import Prop from '../prop/Ux.Prop';
 import Expr from './AI.Expr.String';
 import Log from '../Ux.Log';
 

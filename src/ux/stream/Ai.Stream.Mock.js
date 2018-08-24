@@ -1,4 +1,4 @@
-import Prop from '../Ux.Prop';
+import Prop from '../prop/Ux.Prop';
 import Log from '../Ux.Log';
 import Ai from '../ai/AI';
 import Immutable from 'immutable';

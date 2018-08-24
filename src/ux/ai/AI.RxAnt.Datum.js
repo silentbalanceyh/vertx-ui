@@ -1,9 +1,9 @@
 import Expr from "./AI.Expr.String";
-import Random from "../Ux.Random";
+import Random from "../util/Ux.Random";
 import E from "../Ux.Error";
 import U from "underscore";
 import Type from '../Ux.Type';
-import Prop from '../Ux.Prop';
+import Prop from '../prop/Ux.Prop';
 import Value from '../Ux.Value';
 
 const _parseData = (reference, config = {}) => {

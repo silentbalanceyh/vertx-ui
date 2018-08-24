@@ -1,4 +1,4 @@
-import Prop from '../Ux.Prop';
+import Prop from '../prop/Ux.Prop';
 import Table from './Jt.Table';
 import Matrix from './Jt.Matrix';
 import Selector from './Jt.Selector';

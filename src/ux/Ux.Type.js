@@ -1,6 +1,6 @@
 import U from "underscore";
 import Immutable from "immutable";
-import Prop from "./Ux.Prop";
+import Prop from "./prop/Ux.Prop";
 import {DataLabor} from "entity";
 import E from './Ux.Error';
 import Value from './Ux.Value';

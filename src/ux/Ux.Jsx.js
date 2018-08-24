@@ -1,15 +1,15 @@
 import React from 'react';
 import Norm from './Ux.Normalize'
-import Prop from './Ux.Prop'
+import Prop from './prop/Ux.Prop'
 import Value from './Ux.Value';
 import Log from './Ux.Log';
 import E from './Ux.Error';
 import {Form} from 'antd'
 // UI专用渲染方法
-import DFT from './_internal/Ux.Jsx.Default';
-import fieldRender from './_internal/Ux.Jsx.Single';
-import View from './_internal/Ux.Jsx.View.Fn';
-import Op from './_internal/Ux.Jsx.Op';
+import DFT from './jsx/Ux.Jsx.Default';
+import fieldRender from './jsx/Ux.Jsx.Single';
+import View from './jsx/Ux.Jsx.View.Fn';
+import Op from './jsx/Ux.Jsx.Op';
 // Raft
 import Raft from './Ux.Form'
 

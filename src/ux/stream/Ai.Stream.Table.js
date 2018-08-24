@@ -1,4 +1,4 @@
-import Prop from "../Ux.Prop";
+import Prop from "../prop/Ux.Prop";
 import Column from '../Ux.Column';
 import Immutable from "immutable";
 import Sure from "./Ai.Stream.Sure";

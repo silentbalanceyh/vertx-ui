@@ -1,254 +1,8 @@
-import moment from 'moment';
-import Debug from './Ux.Debug';
 import Immutable from "immutable";
-import U from "underscore";
-import Sorter from './Ux.Sorter'
 import Type from './Ux.Type';
-import E from './Ux.Error';
-import Random from './Ux.Random'
+import {DataArray, DataObject} from 'entity';
+import Value from './value'
 
-/**
- * 读取非undefined的值，去掉undefined值相关信息
- * @method valueValid
- * @param {Object} data
- */
-const valueValid = (data = {}, wild = false) => {
-    for (const key in data) {
-        if (data.hasOwnProperty(key)) {
-            const value = data[key];
-            if (U.isArray(value)) {
-                value.forEach(item => valueValid(item, wild))
-            } else if (U.isObject(value)) {
-                valueValid(value, wild);
-            } else {
-                if (wild) {
-                    // 空字符串、0，以及其他值
-                    if (!value) {
-                        delete data[key];
-                    }
-                } else {
-                    if (undefined === value) {
-                        delete data[key];
-                    }
-                }
-            }
-        }
-    }
-};
-
-const valueInt = (literal = "", dft = 0) => {
-    let ret = parseInt(literal, 10);
-    if (isNaN(ret)) {
-        ret = dft;
-    }
-    return ret;
-};
-const valueFloat = (liberal, dft = 0.0) => {
-    let ret = parseFloat(liberal);
-    if (isNaN(ret)) {
-        ret = dft;
-    } else {
-        ret = ret.toFixed(2);
-    }
-    return ret;
-};
-const valueUnit = (literal = "") => {
-    // 无百分号
-    if (literal.endsWith("%")) {
-        const item = literal.replace(/%/g, '');
-        return valueFloat(item) / 100;
-    }
-};
-/**
- * 不重复追加值到`item`对象中（包含则不设置）
- * @method valueAppend
- * @param item 被设置的对象引用
- * @param field 设置的字段名
- * @param value 设置的字段值
- */
-const valueAppend = (item = {}, field = "", value) => {
-    if (!item.hasOwnProperty(field)) {
-        item[field] = value;
-    }
-};
-
-const SEARCHERS = {
-    // Bool值
-    "BOOL": (value) => Boolean(value),
-    // 集合值
-    "ENUM": (value) => value.split('`'),
-    "OPERATOR": (value) => "AND" === value,
-    // 从Tabular/Assist抓取数据
-    "DATUM": (value, props) => {
-        const source = value[0];
-        const filters = {};
-        for (let idx = 1; idx < value.length; idx++) {
-            const term = value[idx];
-            if ("string" === typeof term) {
-                const kv = term.split('=');
-                filters[kv[0]] = kv[1];
-            }
-        }
-        const unique = Type.elementUniqueDatum({props}, source, filters);
-        return unique ? unique.key : undefined;
-    }
-};
-
-
-const valueSearch = (config = {}, props = {}) => {
-    // 查找根节点
-    const result = {};
-    Type.itData(config, (field, p, path) => {
-        if (SEARCHERS.hasOwnProperty(p)) {
-            result[field] = SEARCHERS[p](path[0], props);
-        } else {
-            const propName = `$${p}`;
-            if (props[propName]) {
-                const dataObject = props[propName];
-                const value = dataObject._(path);
-                if (value) {
-                    result[field] = value;
-                } else {
-                    console.info(`[ Ux ] 检索节点：${propName}，检索路径：${path}，值：${value}`);
-                }
-            }
-        }
-    });
-    return result;
-};
-/**
- * 直接转换数据成Moment对象，时间处理
- * @method convertTime
- * @param value 输入数据
- * @param format 格式
- * @return {*}
- */
-const convertTime = (value, format = moment.ISO_8601) => {
-    if (value) {
-        if (!moment.isMoment(value)) {
-            value = moment(value, format);
-            E.fxTerminal(!moment.isMoment(value), 10028, value);
-        }
-        return value;
-    } else {
-        E.fxTerminal(true, 10028, value);
-    }
-};
-/**
- * 连续乘法专用乘法计算
- * @method mathMultiplication
- * @param seed 第一操作数
- * @param ops 其他操作数
- * @return {*}
- */
-const mathMultiplication = (seed, ...ops) => {
-    seed = parseFloat(seed);
-    let result = isNaN(seed) ? 0.00 : seed;
-    ops.forEach(op => {
-        op = parseFloat(op);
-        if (!isNaN(op)) {
-            result *= op;
-        }
-    });
-    return result;
-};
-/**
- * 专用除法运算
- * @method mathDivision
- * @param dividend 被除数
- * @param divisor 除数
- * @return {number}
- */
-const mathDivision = (dividend, divisor) => {
-    dividend = parseFloat(dividend);
-    divisor = parseFloat(divisor);
-    if (!isNaN(dividend) && !isNaN(divisor) && 0 !== divisor) {
-        return dividend / divisor;
-    } else {
-        E.fxTerminal(true, 10029, dividend, divisor);
-    }
-};
-/**
- * 根据from和to计算中间的duration差值
- * * years - y
- * * monthds -M
- * * weeks -w
- * * days - d
- * * hours - h
- * * minutes - m
- * * seconds - s
- * * milliseconds - ms
- * @method valueDuration
- * @param from 开始时间
- * @param to 结束时间
- * @param mode 计算模式
- */
-const valueDuration = (from, to, mode = 'day') => {
-    if (from && to) {
-        from = convertTime(from);
-        to = convertTime(to);
-        return moment(to).diff(from, mode);
-    } else {
-        E.fxTerminal(true, 10030, from, to, "NoNeed");
-    }
-};
-/**
- * 根据开始时间计算结束时间
- * @method valueEndTime
- * @param from 开始时间
- * @param duration 时差
- * @param mode 计算模式
- * @return {moment.Moment}
- */
-const valueEndTime = (from, duration, mode = 'day') => {
-    if (from && duration) {
-        from = convertTime(from);
-        E.fxTerminal(duration < 0, 10068, duration);
-        return moment(from).add(duration, mode);
-    } else {
-        E.fxTerminal(true, 10030, from, "NoNeed", duration);
-    }
-};
-/**
- * 根据结束时间计算开始时间
- * @method valueStartTime
- * @param to 结束时间
- * @param duration 时差
- * @param mode 计算模式
- * @return {moment.Moment}
- */
-const valueStartTime = (to, duration, mode = 'day') => {
-    if (to && duration) {
-        to = convertTime(to);
-        E.fxTerminal(duration < 0, 10068, duration);
-        return moment(to).subtract(duration, mode);
-    } else {
-        E.fxTerminal(true, 10030, "NoNeed", to, duration);
-    }
-};
-/**
- * 针对JavaScript中的对象进行过滤
- * @method valueFilter
- * @param data 被过滤的数据对象
- * @param keys 保留的字段名集合
- * @param orderBy 排序字段
- */
-const valueFilter = (data = {}, keys = [], orderBy = "order") => {
-    const result = {};
-    keys.forEach(key => {
-        if (data.hasOwnProperty(key)) {
-            result[key] = data[key].sort((left, right) => Sorter.sorterAsc(left, right, orderBy));
-        }
-    });
-    return result;
-};
-const $FLIP = Immutable.fromJS(["fnOut", "reference", "config"]);
-const valueFlip = (jsx = {}) => {
-    const processed = {};
-    Object.keys(jsx).filter(key => !$FLIP.contains(key))
-        .forEach((field) => processed[field] = jsx[field]);
-    return processed;
-}
 /**
  * 两个字符串的专用连接方法，用于做不重复链接，
  * @method stringConnect
@@ -264,87 +18,6 @@ const stringConnect = (left, right) => {
             return left + right;
         }
     }
-};
-
-/**
- * 变更专用处理
- * @method valueTriggerChange
- * @param reference
- * @param value
- * @param key
- * @param field
- * @param index
- */
-const valueTriggerChange = (reference = {}, {
-    index, field, key = "source", value
-}) => {
-    let source = reference.state ? reference.state[key] : [];
-    if (U.isArray(source)) {
-        if (!source[index]) {
-            source[index] = {};
-        }
-        source[index][field] = value;
-    }
-    source = Immutable.fromJS(source).toJS();
-    const state = {};
-    state[key] = source;
-    reference.setState(state);
-    // 变更
-    valueOnChange(reference, state, key)
-};
-
-const valueDynamicChange = (reference = {}, {
-    index, field, key = "dataSource", value, sequence
-}) => {
-    let dataSource = reference.state ? reference.state[key] : {};
-    if (sequence) {
-        const current = dataSource[sequence];
-        if (U.isArray(current)) {
-            if (!current[index]) {
-                current[index] = [];
-            }
-            current[index][field] = value;
-        }
-        dataSource[sequence] = current;
-        dataSource = Immutable.fromJS(dataSource).toJS();
-        const state = {};
-        state[key] = dataSource;
-        reference.setState(state);
-        // 变更
-        valueOnChange(reference, state, key)
-    }
-};
-
-const valueOnChange = (reference = {}, state, key = "source") => {
-    const onChange = reference.props.onChange;
-    if (onChange) {
-        const newValue = Object.assign({}, reference.state, state);
-        onChange(newValue[key]);
-    }
-};
-const valueKey = (item) => {
-    if (item && U.isObject(item) && !item.key) {
-        item.key = Random.randomUUID();
-    }
-};
-const valueIcon = (literal = "") => {
-    const item = {};
-    if (0 < literal.indexOf(",")) {
-        const textIcon = literal.replace(/ /g, '').split(',');
-        item.text = textIcon[0];
-        const iconStr = textIcon[1];
-        item.iconStyle = {fontSize: 20};
-        if (0 < iconStr.indexOf(":")) {
-            const iconStyle = iconStr.split(":");
-            item.icon = iconStyle[0];
-            item.iconStyle.color = iconStyle[1];
-        } else {
-            item.icon = iconStr;
-        }
-    } else {
-        item.text = literal;
-    }
-    return item;
 };
 /**
  * mode = 0：调用原生的Object.assign：直接覆盖
@@ -381,11 +54,15 @@ const assign = (target = {}, source = {}, mode = 0) => {
     }
     return result;
 };
-const safeArray = (input) => {
-    if (U.isArray(input)) {
-        return input;
+const clone = (input) => {
+    if (input instanceof DataObject || input instanceof DataArray) {
+        if (input.is()) {
+            return Immutable.fromJS(input.to()).toJS();
+        } else {
+            return input;
+        }
     } else {
-        return [];
+        return input ? Immutable.fromJS(input).toJS() : input;
     }
 };
 /**
@@ -395,32 +72,9 @@ const safeArray = (input) => {
 export default {
     // 对象处理方法
     assign,
+    clone,
     // 字符串链接
     stringConnect,
-    valueInt,
-    valueUnit,
-    valueFloat,
-    valueValid,
-    valueAppend,
-    valueDuration,
-    valueEndTime,
-    valueStartTime,
-    valueFilter,
-    valueSearch,
-    valueIcon,
-    valueKey,
-    valueTrack: Debug.dgMonitor,
-    // 设置自定义控件的专用属性
-    valueFlip,
-    // 处理变化
-    valueTriggerChange,
-    valueOnChange,
-    valueDynamicChange,
-    // 数学运算
-    mathMultiplication,
-    mathDivision,
-    // 转换处理
-    convertTime,
-    // 安全函数
-    safeArray,
+
+    ...Value,
 }

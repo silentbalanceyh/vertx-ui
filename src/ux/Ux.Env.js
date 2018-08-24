@@ -3,7 +3,7 @@ import {Taper, zero} from "environment";
 import {DataLabor} from "entity";
 import {Set} from 'immutable'
 import routeData from '../route'
-import Random from './Ux.Random'
+import Random from './util/Ux.Random'
 import Dg from './Ux.Debug';
 import Cv from './Ux.Constant';
 import AiStream from './stream/Ai.Stream'

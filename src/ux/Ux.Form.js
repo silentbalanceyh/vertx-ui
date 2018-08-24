@@ -1,4 +1,4 @@
-import Prop from './Ux.Prop';
+import Prop from './prop/Ux.Prop';
 import E from './Ux.Error';
 import Log from './Ux.Log';
 import Normalize from './Ux.Normalize';

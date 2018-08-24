@@ -1,4 +1,4 @@
-import Prop from './Ux.Prop'
+import Prop from './prop/Ux.Prop'
 
 /**
  * 处理关联字段的只读数据信息，该reference必须是Ant Design中的Form相关值

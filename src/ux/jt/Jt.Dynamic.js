@@ -1,6 +1,6 @@
 import Ai from "../ai/AI";
 import E from "../Ux.Error";
-import Random from "../Ux.Random";
+import Random from "../util/Ux.Random";
 import U from "underscore";
 import {Button} from "antd";
 import React from "react";
