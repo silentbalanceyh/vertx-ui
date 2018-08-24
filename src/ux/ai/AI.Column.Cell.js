@@ -3,11 +3,13 @@ import fieldRender from "../jsx/Ux.Jsx.Single";
 import Format from "../util/Ux.Format";
 import Expr from "../util/Ux.Expr";
 import RxAnt from "./AI.RxAnt";
+import Ai from './AI'
 import Prop from "../prop/Ux.Prop";
 import Type from "../Ux.Type";
 import React, {Fragment} from "react";
 import {Divider, Icon, Popconfirm} from "antd";
 import Immutable from "immutable";
+import U from 'underscore'
 
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理双值
@@ -152,8 +154,14 @@ const aiCellDatum = (reference, config) => text => {
     const $datum = config['$datum'];
     const datum = "string" === typeof $datum ? RxAnt.toParsed($datum) : $datum;
     const data = Prop.onDatum(reference, datum.source);
-    const item = Type.elementUnique(data, datum.value, text);
-    return <span>{item ? item[datum.display] : false}</span>;
+    if (U.isArray(text)) {
+        const result = [];
+        text.forEach(each => result.push(Type.elementUnique(data, datum.value, each)));
+        return (<span>{result.map(item => item[datum.display]).join('，')}</span>)
+    } else {
+        const item = Type.elementUnique(data, datum.value, text);
+        return <span>{item ? item[datum.display] : false}</span>;
+    }
 };
 const aiCellOp = (reference, config) => (text, record) => {
     const option = config['$option'];
@@ -293,7 +301,20 @@ const aiCellLink = (reference, config, ops = {}) => text => {
         </Fragment>
     );
 };
-
+const aiCellMapping = (reference, config) => (text) => {
+    const mapping = config['$mapping'];
+    if (mapping) {
+        const literal = mapping[text];
+        if (literal && 0 < literal.indexOf(",")) {
+            const item = Ai.aiExprIcon(literal);
+            return fieldRender.jsxIcon(item);
+        } else {
+            return <span>{mapping[text]}</span>
+        }
+    } else {
+        return <span>{text}</span>
+    }
+};
 export default {
     LOGICAL: aiCellLogical,
     DATE: aiCellDate,
@@ -304,4 +325,5 @@ export default {
     PERCENT: aiCellPercent,
     ICON: aiCellIcon,
     OP: aiCellOp,
+    MAPPING: aiCellMapping,
 }

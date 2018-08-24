@@ -1,9 +1,11 @@
 import React from 'react'
-import {Input} from 'antd';
+import './Cab.less';
+import {Input, Table} from 'antd';
+import Ux from 'ux';
 import moment from 'moment';
 import Immutable from 'immutable';
 
-const rxValue = (value, config) => {
+const rxValue = (reference, value, config) => {
     if (config.items) {
         // 字符串格式比较
         const item = config.items.filter(item => String(value) === item.key);
@@ -14,8 +16,10 @@ const rxValue = (value, config) => {
         return value.format(config.format);
     }
     if (config.columns) {
-        console.info(config.columns, value);
-        return <span></span>
+        const columns = Ux.uiTableColumn(Ux.onReference(reference, 1), config.columns);
+        return (
+            <Table dataSource={value} columns={columns} pagination={false}/>
+        )
     }
     return value;
 };
@@ -29,7 +33,7 @@ class Component extends React.PureComponent {
         if (format) {
             $config.format = format;
         }
-        const literal = rxValue(value, $config);
+        const literal = rxValue(this, value, $config);
         return (
             <Input.Group {...jsx} className={"magic-view-item"}>
                 <span>{literal}</span>

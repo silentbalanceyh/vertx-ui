@@ -114,7 +114,7 @@ const aiMagic = (reference, jsx = {}) => {
     if (config.items) {
         config.items = RxAnt.toOptions(reference, config);
     }
-    return (<MagicView {...rest} config={config}/>)
+    return (<MagicView {...rest} config={config} reference={reference}/>)
 };
 export default {
     // Label专用组件
