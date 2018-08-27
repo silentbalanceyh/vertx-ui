@@ -1,5 +1,6 @@
 import E from "../Ux.Error";
 import Type from '../Ux.Type';
+import Ct from './Ux.Value.Ct';
 
 /**
  * 连续乘法专用乘法计算
@@ -53,8 +54,19 @@ const mathLinear = (data = {}, field) => {
     });
     return array;
 };
+/**
+ * 求和
+ * @param left
+ * @param right
+ */
+const mathSum = (left, right) => {
+    const leftValue = Ct.valueInt(left);
+    const rightValue = Ct.valueInt(right);
+    return leftValue + rightValue;
+};
 export default {
     mathLinear,
     mathDivision,
-    mathMultiplication
+    mathMultiplication,
+    mathSum,
 }

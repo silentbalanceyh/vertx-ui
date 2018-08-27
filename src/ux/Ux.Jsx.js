@@ -72,7 +72,12 @@ const _uiForm = (reference, config = {}, column, values, callback, disableRaft) 
     // raft.enabled = false;
     // extension部分必须disableRaft
     if (raft.enabled && !disableRaft) {
-        // 兼容旧代码专用
+        // 兼容旧代码专用，对于$button的专用插入模式，在Raft之后接入，动态Op
+        if (config.renders && config.renders.hasOwnProperty("$button")) {
+            raft.rows.forEach(row => row.cells
+                .filter(cell => "$button" === cell.field)
+                .forEach(cell => cell.render = config.renders.$button))
+        }
         return Raft.raftJsx(reference, values);
     } else {
         const {key = "form"} = config;
@@ -99,7 +104,10 @@ const _uiForm = (reference, config = {}, column, values, callback, disableRaft) 
     }
 };
 const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = {}) =>
-    _uiForm(reference, config, column, values, (processed, $config = {}, form) => {
+    _uiForm(reference, {
+        ...config,
+        renders,
+    }, column, values, (processed, $config = {}, form) => {
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;
@@ -111,7 +119,10 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = 
         )
     });
 const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config = {}) =>
-    _uiForm(reference, config, column, values, (processed, $config = {}, form) => {
+    _uiForm(reference, {
+        ...config,
+        renders,
+    }, column, values, (processed, $config = {}, form) => {
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;

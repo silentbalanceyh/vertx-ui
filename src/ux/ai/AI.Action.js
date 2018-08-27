@@ -50,17 +50,27 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
     });
 });
 
-const aiFormButton = (reference, onClick, id = false) => {
+const aiFormButton = (reference, onClick, id = false, submit = []) => {
     if (onClick) {
         const {$inited = {}} = reference.props;
         const key = (id) ? $inited.key : "";
         const buttons = [];
+        const $submit = Immutable.fromJS(submit);
         Type.itObject(onClick, (field, fn) => {
             const item = {};
             const clientId = `${field}${key}`;
             item.key = clientId;
             item.id = clientId;
-            item.onClick = fn(reference);
+            if ($submit.contains(field)) {
+                // 动态绑定raft处理时专用
+                item.onClick = (event) => {
+                    event.preventDefault();
+                    const executor = fn(reference);
+                    return Ux.rtSubmit(reference, executor);
+                }
+            } else {
+                item.onClick = fn(reference);
+            }
             buttons.push(item);
         });
         return (
@@ -68,6 +78,8 @@ const aiFormButton = (reference, onClick, id = false) => {
                 {buttons.filter(item => item.key.startsWith("$")).map(item => (<Button {...item}/>))}
             </span>
         )
+    } else {
+        console.error("未传入'onClick'事件绑定原始数据！")
     }
 };
 
@@ -75,7 +87,11 @@ const aiOp = (reference) => (Op) => Object.keys(Op)
     .filter(key => U.isFunction(Op[key])).map(key => (
         <Button className={"ux-hidden"} key={key} id={key} onClick={Op[key](reference)}/>
     ));
-
+const ai2RaftButton = (Op, {id, event = []}) => (cell, reference) => {
+    const $event = Immutable.fromJS(event);
+    const submit = Object.keys(Op).filter(key => !$event.contains(key));
+    return aiFormButton(reference, Op, id, submit);
+};
 const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
 const ai2FilterButton = (window = 1) => {
     return {
@@ -101,6 +117,8 @@ export default {
     // ComplexList专用
     ai2FormButton,
     ai2FilterButton,
+    // 特殊模式动态渲染
+    ai2RaftButton,
     // Page中直接按钮生成
     aiOp
 }

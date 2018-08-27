@@ -1,6 +1,6 @@
 import Random from "../util/Ux.Random";
 import Ai from '../ai/AI';
-import Prop from '../prop/Ux.Prop';
+import Prop from '../prop';
 import Param from '../fun/Ux.Param';
 import Async from '../prop/Ux.Field';
 import Dialog from '../Ux.Dialog';

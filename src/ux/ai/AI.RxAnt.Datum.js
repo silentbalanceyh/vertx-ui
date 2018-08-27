@@ -3,7 +3,7 @@ import Random from "../util/Ux.Random";
 import E from "../Ux.Error";
 import U from "underscore";
 import Type from '../Ux.Type';
-import Prop from '../prop/Ux.Prop';
+import Prop from '../prop';
 import Value from '../Ux.Value';
 
 const _parseData = (reference, config = {}) => {
