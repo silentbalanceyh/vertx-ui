@@ -1,6 +1,6 @@
 import React from 'react';
 import Prop from '../prop/Ux.Prop';
-import State from '../prop/Ux.State';
+import Rdx from '../fun/Ux.Rdx';
 import U from 'underscore';
 import E from '../Ux.Error';
 import Cv from '../Ux.Constant';
@@ -19,11 +19,11 @@ const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
 };
 const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(reference, (form) => {
     event.preventDefault();
-    State.rdxSubmitting(reference, true);
+    Rdx.rdxSubmitting(reference, true);
     const {$inited} = reference.props;
     form.validateFieldsAndScroll((error, values) => {
         if (error) {
-            State.rdxSubmitting(reference, false);
+            Rdx.rdxSubmitting(reference, false);
             if (fnFailure && U.isFunction(fnFailure)) {
                 fnFailure(error);
             }
@@ -95,7 +95,7 @@ const ai2RaftButton = (Op, {id, event = []}) => (cell, reference) => {
 const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
 const ai2FilterButton = (window = 1) => {
     return {
-        $button: (reference) => {
+        $button: (cell, reference) => {
             const button = Prop.fromHoc(reference, "button");
             return (1 / 3 === window) ? Layout.aiColumns([7, 14],
                 undefined,

@@ -48,6 +48,23 @@ const elementFlat = (array = [], field = "") => {
     return result;
 };
 
+const elementZip = (left = [], right = [], from = "key", to = "key") => {
+    const result = [];
+    left.forEach(item => {
+        // 左元素
+        const source = Immutable.fromJS(item).toJS();
+        const value = source[from];
+        if (value) {
+            const target = right.filter(each => value === each[to]);
+            if (1 === target.length && target[0]) {
+                Object.assign(source, target[0]);
+            }
+        }
+        result.push(source);
+    });
+    return result;
+};
+
 /**
  * 数组连接Tabular/Assist专用算法
  * @param array 原始数组信息
@@ -449,8 +466,9 @@ export default {
     elementVertical,
     // 添加和删除重合
     elementSwitch,
-    // 拉平专用
+    // 拉平专用，支持单数组拉平和双数组拉平
     elementFlat,
+    elementZip,
     // 连接Tabular/Assist
     elementConnect,
     // 求和计算
