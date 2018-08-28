@@ -1,8 +1,8 @@
-import Prop from './prop/Ux.Prop'
+import Prop from '../prop/Ux.Prop'
 
 /**
  * 处理关联字段的只读数据信息，该reference必须是Ant Design中的Form相关值
- * @method dependReadOnlyDatum
+ * @method ReadOnlyDatum
  * @param {React.PureComponent} reference React对应组件引用
  * @param sourceKey 该sourceKey对应：Tabular/Assist专用的key值信息
  * @param filterFun 针对数据源处理的filter过滤函数信息，该过滤函数可将sourceKey结果Array处理掉
@@ -27,7 +27,7 @@ import Prop from './prop/Ux.Prop'
  *          return (<Input {...jsx} />)
  *      },
  */
-const dependReadOnlyDatum = (reference, sourceKey, filterFun, formField) => {
+const ReadOnlyDatum = (reference, sourceKey, filterFun, formField) => {
     const items = Prop.onDatum(reference, sourceKey);
     let filtered = items.filter(filterFun);
     const {form} = reference.props;
@@ -40,5 +40,5 @@ const dependReadOnlyDatum = (reference, sourceKey, filterFun, formField) => {
  * @description 用于处理关联字段专用的雷，一般处理带依赖的字段数据
  */
 export default {
-    dependReadOnlyDatum
+    ReadOnlyDatum
 };

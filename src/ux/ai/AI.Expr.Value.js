@@ -1,7 +1,7 @@
 import U from "underscore";
 import {v4} from "uuid";
 import Parser from "./AI.Expr.Parser";
-import Op from "../Ux.Op";
+import Op from "../op";
 import Immutable from "immutable";
 import Type from "../Ux.Type";
 

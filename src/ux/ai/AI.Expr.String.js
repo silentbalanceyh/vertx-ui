@@ -204,7 +204,13 @@ const aiMetaOption = (item = {}) => {
     return item;
 };
 
-const aiExprIcon = (icons = []) => _iterator(icons, (values = []) => parseItem(values, "icon"));
+const aiExprIcon = (icons) => {
+    if ("string" === typeof icons) {
+        return parseItem(icons, "icon")
+    } else if (U.isArray(icons)) {
+        return _iterator(icons, (values = []) => parseItem(values, "icon"));
+    }
+};
 /**
  * 顺序：title, key, icon, description, status
  */

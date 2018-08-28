@@ -19,6 +19,11 @@ const convertTime = (value, format = moment.ISO_8601) => {
         E.fxTerminal(true, 10028, value);
     }
 };
+const convertTimes = (data = {}, ...fields) => {
+    fields.forEach(field => {
+        if (data[field]) data[field] = convertTime(data[field]);
+    })
+};
 /**
  * 根据from和to计算中间的duration差值
  * * years - y
@@ -81,5 +86,6 @@ export default {
     valueStartTime,
     valueDuration,
     valueEndTime,
+    convertTimes,
     convertTime
 }

@@ -18,7 +18,7 @@ const _raftCell = (reference, values) => (cell) => {
         return (
             <Col {...cell.col}>
                 <Form.Item {...cell.optionItem}>
-                    {(cell.render) ? (cell.render(cell)) : false}
+                    {(cell.render) ? (cell.render(cell, reference)) : false}
                 </Form.Item>
             </Col>
         );
@@ -159,7 +159,9 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
             }
             const fnRender = Ai.hookerRender(cell, renders, entityConfig, reference);
             // 3.2.5.针对赋值
-            const render = fnRender ? fnRender : () => false;
+            const render = fnRender ? fnRender : () => {
+                console.error(`Render未找到，${cell.field}`);
+            };
             // 3.2.6.<Col/>处理
             const col = {};
             const colSpan = entityConfig.span;

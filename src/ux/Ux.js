@@ -22,6 +22,7 @@ import Prop from './prop';
 import Fun from './fun';
 import Op from './op';
 import System from './system'
+import Trigger from './trigger'
 
 export default {
     ...CONTROL,
@@ -56,6 +57,10 @@ export default {
     ...AI,
     Uarr,
     Uson,
+    /**
+     * 触发控件专用
+     */
+    ...Trigger,
     /**
      * Global全局数据处理
      */
