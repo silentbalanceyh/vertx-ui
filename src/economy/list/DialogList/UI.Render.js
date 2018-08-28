@@ -13,7 +13,8 @@ const renderHeader = (reference) => {
         // 需要显示添加按钮或者隐藏显示
         item.type = 'primary';
         item.htmlType = 'button';
-        if (!options['op.add.visible']) {
+        if (options.hasOwnProperty("op.add.visible") &&
+            !options['op.add.visible']) {
             item.className = 'ux-hidden'
         }
         if (options.hasOwnProperty('op.add.id')) {
