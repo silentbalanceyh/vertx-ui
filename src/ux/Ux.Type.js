@@ -212,7 +212,8 @@ const itData = (config = {}, consumer = () => {
             E.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
             const kv = expr.split(':');
             let value;
-            if ("DATUM" === kv[0]) {
+            // 特殊的包含.操作符合法
+            if ("DATUM" === kv[0] || "PROP" === kv[0]) {
                 // 映射到path[0]
                 value = [kv[1].split(',')];
             } else {

@@ -6,6 +6,8 @@ import Immutable from 'immutable'
 import E from './Ux.Error';
 import Dg from './Ux.Debug';
 import RxAjax from './Ux.Ajax.Rx';
+import Type from './Ux.Type';
+import U from 'underscore';
 
 /**
  * Ajax远程访问过程中的Uri处理器
@@ -82,9 +84,21 @@ const ajaxHeader = (secure = false) => {
  *      }),
  */
 const ajaxParams = (params = {}) => {
+    const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
+    const itLang = (data) => Type.itObject(data, (field, value) => {
+        if (U.isArray(value)) {
+            data[field].forEach(item => itLang(item))
+        } else {
+            if (U.isObject(data)) {
+                data.language = language;
+            }
+        }
+    });
     if (params.hasOwnProperty("$body")) {
+        itLang(params.$body);
         return JSON.stringify(params.$body);
     } else {
+        itLang(params);
         return JSON.stringify(params);
     }
 };

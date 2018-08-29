@@ -53,7 +53,7 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
 const aiFormButton = (reference, onClick, id = false, submit = []) => {
     if (onClick) {
         const {$inited = {}} = reference.props;
-        const key = (id) ? $inited.key : "";
+        const key = (id) ? ($inited.key ? $inited.key : "") : "";
         const buttons = [];
         const $submit = Immutable.fromJS(submit);
         Type.itObject(onClick, (field, fn) => {
@@ -73,6 +73,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
             }
             buttons.push(item);
         });
+        console.info(buttons);
         return (
             <span>
                 {buttons.filter(item => item.key.startsWith("$")).map(item => (<Button {...item}/>))}

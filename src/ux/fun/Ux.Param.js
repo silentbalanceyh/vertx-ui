@@ -2,6 +2,7 @@ import U from 'underscore'
 import Immutable from 'immutable';
 import Logger from '../Ux.Log'
 import Type from '../Ux.Type'
+import V from '../value'
 import E from '../Ux.Error';
 
 const parseProp = (reference, path = "") => {
@@ -16,12 +17,8 @@ const parseProp = (reference, path = "") => {
         }
     }
 };
-const parseCriteria = (reference, path = "") => {
-
-};
 const parser = {
-    p: parseProp,
-    q: parseCriteria
+    p: parseProp
 };
 const parseExpression = (reference, expr = "") => {
     let returnValue;
@@ -63,7 +60,8 @@ const parseAjax = (reference, parameters = {}) => {
     for (const field in parameters) {
         // 特殊递归参数
         if ("criteria" === field) {
-            result.criteria = parseAjax(reference, parameters.criteria);
+            // 特殊解析流程
+            result.criteria = V.valueSearch(parameters.criteria, reference.props);
         } else if ("object" === typeof parameters[field] && "sorter" !== field) {
             result[field] = parseAjax(reference, parameters[field])
         } else {

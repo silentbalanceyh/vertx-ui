@@ -24,8 +24,10 @@ const _fnChange = (reference, config = {}) => (pagination, filters, sorter) => {
         const params = _fnParams(reference, config);
         params.pager.size = pagination.pageSize;
         params.pager.page = pagination.current;
-        console.info(params);
-        Async.asyncData(config.ajax, params, ($data) => reference.setState({$loading: false, $data}), mock)
+        // 补充设置$page页面值
+        Async.asyncData(config.ajax, params, ($data) => reference.setState({
+            $loading: false, $data, $page: pagination.current
+        }), mock);
     }
 };
 const _fnDialog = (reference = {}, show = false) => (event) => {
@@ -101,7 +103,7 @@ const jslDialog = (reference, config = {}) => {
     return dialog;
 };
 const _uiPagination = (reference, config = {}) => {
-    const {$data = {}} = reference.state;
+    const {$data = {}, $page} = reference.state;
     const pagination = {
         showQuickJumper: true
     };
@@ -111,7 +113,7 @@ const _uiPagination = (reference, config = {}) => {
         E.fxTerminal(!pager, 10048, pager);
         if (pager) {
             pagination.pageSize = pager.size;
-            pagination.current = pager.page;
+            pagination.current = $page ? $page : pager.page;
         }
     }
     return pagination;
@@ -124,6 +126,7 @@ const jslPager = (reference, config = {}) => {
     } else {
         pager.pagination = true;
     }
+    return pager;
 };
 
 const jslSelection = (reference) => ({
