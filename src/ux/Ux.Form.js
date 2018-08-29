@@ -15,10 +15,11 @@ const _raftCell = (reference, values) => (cell) => {
     } else {
         // 子表单
         Jsx.raftValue(cell, values);
+        // 目前固定工具栏的field = $button，其他的不做过滤
         return (
             <Col {...cell.col}>
                 <Form.Item {...cell.optionItem}>
-                    {(cell.render) ? (cell.render(cell, reference)) : false}
+                    {(cell.render) ? cell.render(cell, reference) : false}
                 </Form.Item>
             </Col>
         );

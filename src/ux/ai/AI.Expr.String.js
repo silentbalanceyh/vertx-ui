@@ -225,17 +225,21 @@ const aiExprButton = (buttons = [], props = {}) =>
         .map(ExprValue.applyConnect).map(item => ExprValue.applyLoading(item, props));
 const aiExprTabs = (items = [], props = {}) => items.map(item => parseItem(item, "tabs")).map(ExprValue.applyKey);
 const aiExprOp = (button = "") => {
-    const splitted = button.split(',');
-    if (1 === splitted.length) {
-        const item = {};
-        item.id = button;
-        item.key = button;
-        item.text = "";
-        return item;
+    if ("string" === typeof button) {
+        const splitted = button.split(',');
+        if (1 === splitted.length) {
+            const item = {};
+            item.id = button;
+            item.key = button;
+            item.text = "";
+            return item;
+        } else {
+            const item = parseItem(button, "bind");
+            if (!item.id) item.id = item.key;
+            return item;
+        }
     } else {
-        const item = parseItem(button, "bind");
-        if (!item.id) item.id = item.key;
-        return item;
+        return button;
     }
 };
 const aiExprFilter = (filter = "") => parseItem(filter, "filter");

@@ -43,6 +43,7 @@ class Component extends React.PureComponent {
             children, reference, $card = 'page-card',
             $key = "page", $extra,
             $leftVisible = true, $rightVisible = true,
+            $backVisible = true,
         } = this.props;
         // 左边按钮
         let topbar = Ux.fromHoc(reference, $key);
@@ -62,7 +63,7 @@ class Component extends React.PureComponent {
             <span>
                 {topbar.right && $rightVisible ? Op.renderButton(reference, topbar, 'right') : false}
                 &nbsp;&nbsp;
-                {topbar.back ? Op.renderBack(reference, topbar) : false}
+                {topbar.back && $backVisible ? Op.renderBack(reference, topbar) : false}
             </span>
         );
         return (

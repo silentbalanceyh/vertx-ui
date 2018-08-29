@@ -1,4 +1,5 @@
 import Type from "../Ux.Type";
+import E from "../Ux.Error";
 
 const SEARCHERS = {
     // Bool值
@@ -19,6 +20,19 @@ const SEARCHERS = {
         }
         const unique = Type.elementUniqueDatum({props}, source, filters);
         return unique ? unique.key : undefined;
+    },
+    "PROP": (value, props) => {
+        const path = value[0];
+        const attrPath = path.split('.');
+        E.fxTerminal(2 !== attrPath.length, 10035, path);
+        if (2 === attrPath.length) {
+            const targetKey = attrPath[0];
+            const dataObj = props[`$${targetKey}`];
+            if (dataObj && dataObj.is()) {
+                const to = attrPath[1];
+                return dataObj._(to);
+            }
+        }
     }
 };
 

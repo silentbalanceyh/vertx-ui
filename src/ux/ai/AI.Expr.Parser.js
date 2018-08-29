@@ -73,6 +73,8 @@ const PARSER = {
     // 自定义属性
     _submit: itemValue("submit"),
     fixed: itemValue("fixed"),
+    // 分组专用
+    group: itemValue("group"),
     moment: itemBoolean("moment"),
     // 特殊item属性
     itemClass: jsxItem("className"),

@@ -15,7 +15,23 @@ class Table {
         this.config = Prop.fromHoc(this.reference, "table");
         if (!this.config) this.config = {};
         this.config = Immutable.fromJS(this.config).toJS();
-        if (this.config.columns) Column.uiTableColumn(this.reference, this.config.columns);
+        if (this.config.columns) {
+            this.config.columns = Column.uiTableColumn(this.reference, this.config.columns)
+        }
+        return this;
+    }
+
+    tail(item) {
+        if (item) {
+            this.config.columns.push(item);
+        }
+        return this;
+    }
+
+    head(item) {
+        if (item) {
+            this.config.columns = [item].concat(this.config.columns)
+        }
         return this;
     }
 
