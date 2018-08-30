@@ -28,6 +28,7 @@ class RxOp {
     private _success;
     private _confirmKey;
     private _postKey;
+    private isPromiseReturn: Boolean = true;
     private isDialog: Boolean = true;
     private reference;
 
@@ -37,6 +38,11 @@ class RxOp {
 
     static from(reference: any) {
         return new RxOp(reference);
+    }
+
+    direct() {
+        this.isPromiseReturn = false;
+        return this;
     }
 
     verify(...inputes) {
@@ -89,14 +95,21 @@ class RxOp {
         const validation = this.validation;
         const confirmKey = this._confirmKey;
         const promise = this._success;
+        const isPromiseReturn = this.isPromiseReturn;
         // 防重复提交
         Ux.rdxSubmitting(ref, true);
         // 验证处理
         for (let idx = 0; idx < validation.length; idx++) {
             const item = validation[idx];
             if (item.cond) {
-                const message = Ux.fromPath(ref, "modal", "error", item.key);
-                return Ux.rdxReject(message);
+                if (isPromiseReturn) {
+                    const message = Ux.fromPath(ref, "modal", "error", item.key);
+                    return Ux.rdxReject(message);
+                } else {
+                    // 暂时只在Reject部分处理isPromiseReturn
+                    Ux.showDialog(ref, item.key, () => Ux.rdxSubmitting(ref, false));
+                    return;
+                }
             }
         }// 是否设置了postKey
         const postDialog = this.isDialog ? Ux.showDialog : Ux.showMessage;

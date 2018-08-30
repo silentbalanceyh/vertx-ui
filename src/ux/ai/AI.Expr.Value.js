@@ -103,7 +103,7 @@ const applyFlat = (field, item = {}) => {
     for (const key in item) {
         const value = item[key];
         const targetKey = `${field}.${key}`;
-        if ("object" === typeof value && !U.isArray(value)) {
+        if (U.isObject(value) && !U.isArray(value)) {
             const merged = applyFlat(targetKey, value);
             Object.assign(result, merged);
         } else {
@@ -117,7 +117,7 @@ const applyTree = (item = {}) => {
     const processed = {};
     // 过滤$option专用
     Type.itObject(item, (field, value) => {
-        if ("object" === typeof value && !U.isArray(value)) {
+        if (U.isObject(value) && !U.isArray(value)) {
             const item = applyFlat(field, value);
             Object.assign(processed, item);
         } else {

@@ -37,10 +37,11 @@ class HocI18n implements HocContainer {
             let $target = $hoc.getIn(path);
             if ($target && $target.toJS) {
                 $target = $target.toJS();
-                if ("object" === typeof value) {
+                if (U.isObject(value)) {
                     // 遍历value
                     for (const field in value) {
-                        if ($target.hasOwnProperty(field)) {
+                        if (value.hasOwnProperty(field) &&
+                            $target.hasOwnProperty(field)) {
                             const ref = $target[field];
                             if (ref) {
                                 // 最终设值

@@ -15,7 +15,7 @@ import Value from './Ux.Value';
 const elementUnique = (data = [], field = "", value) => {
     E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     let reference = [];
-    if ("object" === typeof field) {
+    if (U.isObject(field)) {
         // Filter模式
         reference = elementFind(data, field);
     } else {
@@ -306,7 +306,7 @@ const itFull = (data = [], items = {}, fieldFun = () => {
  */
 const elementAdd = (array = [], element) => {
     if (element) {
-        if ("object" === typeof element) {
+        if (U.isObject(element)) {
             const filter = array.filter(item => element.key === item.key);
             if (0 === filter.length) {
                 array.push(element);

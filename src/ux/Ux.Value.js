@@ -1,4 +1,5 @@
 import Immutable from "immutable";
+import U from "underscore";
 import Type from './Ux.Type';
 import {DataArray, DataObject} from 'entity';
 import Value from './value'
@@ -28,6 +29,7 @@ const stringConnect = (left, right) => {
  * @param mode
  */
 const assign = (target = {}, source = {}, mode = 0) => {
+    if (!target) target = {};
     let result = Immutable.fromJS(target).toJS();
     if (0 === mode) {
         result = Object.assign(target, source);
@@ -35,8 +37,7 @@ const assign = (target = {}, source = {}, mode = 0) => {
         Type.itObject(source, (field, value) => {
             // 检查target中是否包含了field
             const targetValue = result[field];
-            if ("object" === typeof targetValue
-                && "object" === typeof value) {
+            if (U.isObject(targetValue) && U.isObject(value)) {
                 // 当前节点为两个对象，统一方式合并，且mode也相同
                 result[field] = assign(targetValue, value, mode);
             } else {
@@ -65,6 +66,18 @@ const clone = (input) => {
         return input ? Immutable.fromJS(input).toJS() : input;
     }
 };
+
+
+const vector = (item = {}, config = {}) => {
+    const target = clone(item);
+    Type.itObject(config, (from, to) => {
+        if (item.hasOwnProperty(from)) {
+            target[to] = item[from];
+            delete target[from];
+        }
+    });
+    return target;
+};
 /**
  * @class Value
  * @description 数值计算器
@@ -73,6 +86,7 @@ export default {
     // 对象处理方法
     assign,
     clone,
+    vector,
     // 字符串链接
     stringConnect,
 

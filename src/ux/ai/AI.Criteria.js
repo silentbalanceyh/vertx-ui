@@ -1,6 +1,7 @@
 import Sorter from "../util/Ux.Sorter";
 import Type from "../Ux.Type";
 import Immutable from 'immutable';
+import U from 'underscore';
 
 const _fnSorter = (source = [], $query = {}) => {
     if ($query.sorter) {
@@ -83,7 +84,7 @@ const _fnAnalyze = (criteria = {}) => {
     Type.itObject(criteria, (field, value) => {
         if ("" === field && true === value) {
             isAnd = true;
-        } else if ("object" === typeof value) {
+        } else if (U.isObject(value)) {
             isTree = true;
             tree[field] = value;
         } else {

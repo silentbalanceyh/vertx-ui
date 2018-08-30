@@ -58,17 +58,19 @@ const parseExpression = (reference, expr = "") => {
 const parseAjax = (reference, parameters = {}) => {
     const result = {};
     for (const field in parameters) {
-        // 特殊递归参数
-        if ("criteria" === field) {
-            // 特殊解析流程
-            result.criteria = V.valueSearch(parameters.criteria, reference.props);
-        } else if ("object" === typeof parameters[field] && "sorter" !== field) {
-            result[field] = parseAjax(reference, parameters[field])
-        } else {
-            const expr = parameters[field];
-            const value = parseExpression(reference, expr);
-            if (value) {
-                result[field] = value;
+        if (parameters.hasOwnProperty(field)) {
+            // 特殊递归参数
+            if ("criteria" === field) {
+                // 特殊解析流程
+                result.criteria = V.valueSearch(parameters.criteria, reference.props);
+            } else if (U.isObject(parameters[field]) && "sorter" !== field) {
+                result[field] = parseAjax(reference, parameters[field])
+            } else {
+                const expr = parameters[field];
+                const value = parseExpression(reference, expr);
+                if (value) {
+                    result[field] = value;
+                }
             }
         }
     }

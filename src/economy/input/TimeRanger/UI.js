@@ -13,9 +13,11 @@ class Component extends React.PureComponent {
 
     handleTime = (name, format = "HH:mm:ss") => (event) => {
         const values = {};
-        values[name] = event.format(format);
-        this.setState(values);
-        this.triggerChange(values);
+        if (event) {
+            values[name] = event.format(format);
+            this.setState(values);
+            this.triggerChange(values);
+        }
     };
 
     constructor(props) {

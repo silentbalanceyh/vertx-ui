@@ -56,7 +56,7 @@ class DataArray implements DataContainer {
         if (U.isFunction(fnFilter)) {
             const result = data.filter(fnFilter);
             this.data = JSON.stringify(result);
-        } else if ("object" === typeof fnFilter) {
+        } else if (U.isObject(fnFilter)) {
             const result = Ux.elementFind(data, fnFilter);
             this.data = JSON.stringify(result);
         }

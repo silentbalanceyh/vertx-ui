@@ -12,7 +12,7 @@ const uniform = (item, callback) => {
     E.fxTerminal(!callback || !U.isFunction(callback), 10041, callback);
     if (U.isArray(item)) {
         item.forEach(each => callback(each))
-    } else if ("object" === typeof item) {
+    } else if (U.isObject(item)) {
         callback(item);
     } else {
         E.fxTerminal(true, 10042, item);
@@ -53,7 +53,7 @@ class RxAnt {
     }
 
     static onPrefix(jsx = {}) {
-        if ("object" === typeof jsx.prefix) {
+        if (U.isObject(jsx.prefix)) {
             applyIcon(jsx, 'prefix');
         }
     }
@@ -65,7 +65,7 @@ class RxAnt {
     }
 
     static onAddonAfter(jsx = {}) {
-        if ("object" === typeof jsx.addonAfter) {
+        if (U.isObject(jsx.addonAfter)) {
             applyIcon(jsx, 'addonAfter');
         }
     }
@@ -78,7 +78,7 @@ class RxAnt {
 
     static toDialogConfig(reference, ...path) {
         const config = Prop.fromPath.apply(null, [reference].concat(path));
-        if ("object" === typeof config) {
+        if (U.isObject(config)) {
             return config;
         } else if ("string" === typeof config) {
             return {content: config};
