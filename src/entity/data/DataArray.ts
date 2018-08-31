@@ -99,19 +99,21 @@ class DataArray implements DataContainer {
     }
 
     saveElement(element: any, idField: any = "key") {
-        if (!element[idField]) {
-            element[idField] = Ux.randomUUID();
-        }
-        // 元素信息处理
-        if (!this.data) {
-            this.setValue([]);
-        }
-        // 设置信息
-        const hitted = this.searchElement(idField, element[idField]);
-        if (hitted) {
-            this.updateElement(element);
-        } else {
-            this.push(element);
+        if (element) {
+            if (!element[idField]) {
+                element[idField] = Ux.randomUUID();
+            }
+            // 元素信息处理
+            if (!this.data) {
+                this.setValue([]);
+            }
+            // 设置信息
+            const hitted = this.searchElement(idField, element[idField]);
+            if (hitted) {
+                this.updateElement(element);
+            } else {
+                this.push(element);
+            }
         }
     }
 
