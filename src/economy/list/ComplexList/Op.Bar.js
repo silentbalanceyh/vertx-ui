@@ -2,6 +2,7 @@ import React from 'react'
 import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
+import U from 'underscore';
 import Act from './Op.Action';
 
 const _renderOp = (reference, key, value = "") => {
@@ -171,7 +172,7 @@ const renderMessage = (reference) => {
             if ($query.criteria[""]) {
                 // 取子条件
                 Ux.itObject($query.criteria, (item, value) => {
-                    if ("object" === typeof value) {
+                    if (U.isObject(value)) {
                         Object.assign(condition, value);
                     }
                 })

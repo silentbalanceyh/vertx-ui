@@ -71,7 +71,7 @@ const subview = ($data, config, reference) => _highFun($data, config, reference,
     const page = config.extension;
     const renderField = (item) => Hsx.viewGrid(page, reference, DataLabor.getObject(item), {}, meta['key'], true);
     let hitData = value;
-    if (!U.isArray(value) && "object" === typeof value) {
+    if (!U.isArray(value) && U.isObject(value)) {
         hitData = Immutable.fromJS(value ? value : {}).toJS();
         const converted = [];
         Object.keys(value).forEach(item => {

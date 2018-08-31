@@ -3,6 +3,7 @@ import Expr from './Ux.Expr';
 import Encrypt from './Ux.Encrypt';
 import Log from '../Ux.Log';
 import E from '../Ux.Error';
+import U from 'underscore';
 
 const SCHEMA = {
     OAuth: () => {
@@ -40,7 +41,7 @@ const _parameters = (params = {}) => {
                 // 这两个参数不参加签名
                 if ("criterias" !== key && "sig" !== key) {
                     if (params[key]) {
-                        if ("object" === typeof params[key]) {
+                        if (U.isObject(params[key])) {
                             param += key + JSON.stringify(params[key]) + ":";
                         } else {
                             param += key + params[key] + ":";
@@ -62,7 +63,7 @@ const _parameters = (params = {}) => {
 const _secret = () => {
     const user = Global.isLogged();
     let secret = "";
-    if (user && "object" === typeof user) {
+    if (user && U.isObject(user)) {
         // 登录后的secret为用户ID
         secret += user.uniqueId;
     } else {
@@ -102,7 +103,7 @@ const signature = (uri, method = "GET", params = {}) => {
     const secret = _secret();
     // Seed中是否追加用户登录ID
     const user = Global.isLogged();
-    if (user && "object" === typeof user) {
+    if (user && U.isObject(user)) {
         seed += user.key;
     }
     // 签名

@@ -43,7 +43,7 @@ class StateIn {
                     $state = $state.setIn(path, data);
                 } else {
                     const type = typeof data;
-                    if (U.isArray(data) || "object" === type) {
+                    if (U.isArray(data) || U.isObject(data)) {
                         $state = $state.setIn(path, DataLabor.get(data));
                     } else {
                         if (data) {

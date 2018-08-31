@@ -98,7 +98,7 @@ export default {
         let processed;
         if (U.isArray(input)) {
             processed = DataLabor.getArray(input);
-        } else if ("object" === typeof input) {
+        } else if (U.isObject(input)) {
             processed = DataLabor.getObject(input);
         } else {
             processed = (isArray) ? DataLabor.getArray(undefined)

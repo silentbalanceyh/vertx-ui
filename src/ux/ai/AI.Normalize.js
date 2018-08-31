@@ -11,7 +11,7 @@ const _aiNormalizeEach = (ui = [], eachFun, eachItemFun = item => item) => {
             row.forEach((cell, cellIndex) => {
                 if ("string" === typeof cell) {
                     row[cellIndex] = eachFun(cell);
-                } else if ("object" === typeof cell) {
+                } else if (U.isObject(cell)) {
                     row[cellIndex] = eachItemFun(cell);
                 }
             });

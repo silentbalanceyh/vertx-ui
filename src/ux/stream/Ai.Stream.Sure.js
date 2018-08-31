@@ -1,4 +1,5 @@
 import Immutable from 'immutable';
+import U from 'underscore';
 
 const ensureStream = (reference) => {
     if (!reference.config) {
@@ -21,7 +22,7 @@ const itSwitch = (target, value, callback, supportedKeys = []) => {
                 callback(target, value);
             }
         }
-    } else if ("object" === typeof target) {
+    } else if (U.isObject(target)) {
         for (const key in target) {
             if (target.hasOwnProperty(key)) {
                 ensureKeys(key, supportedKeys);

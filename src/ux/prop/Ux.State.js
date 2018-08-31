@@ -3,6 +3,7 @@ import Immutable from 'immutable';
 import E from '../Ux.Error';
 import Type from '../Ux.Type';
 import U from 'underscore';
+import Ux from "ux";
 
 /**
  * 将数据会写状态树，props中需要包含`fnOut`函数
@@ -26,6 +27,24 @@ const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) =
     }, true);
     fnOut(DataLabor.createIn($state, dft));
 });
+
+const eraseTree = (reference, keys = []) => {
+    const baseKeys = [
+        // datum数据处理问题
+        "datum.data",
+        "datum.inited",
+        // ComplexList专用节点问题
+        "grid.list",
+        "grid.query",
+        // 辅助数据Assist
+        "assist",
+        // 提交按钮状态
+        "state.submitting"
+    ].concat(keys);
+    const state = {};
+    baseKeys.forEach(key => state[key] = undefined);
+    writeTree(reference, state, undefined);
+};
 
 const rapitInit = (reference, params = {}, propKey) => {
     const fnInit = (ref) => {
@@ -87,7 +106,12 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
                 dataRecord[id] = $extracted.to();
             } else {
                 // 这种只能添加，不会在删除的时候触发
-                dataRecord[id] = [single];
+                if (single) {
+                    if (!single['key'] || undefined === single['key']) {
+                        single['key'] = Ux.randomUUID();
+                    }
+                    dataRecord[id] = [single];
+                }
             }
         };
         if (U.isArray(record)) {
@@ -127,6 +151,8 @@ export default {
     rapitUpdate,
     // 写状态树
     writeTree,
+    // 清理状态树
+    eraseTree,
     // ---------------- 特殊行为方法
 
     // 老版本提取$_状态的专用方法

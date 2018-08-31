@@ -210,7 +210,7 @@ const aiCellOp = (reference, config) => (text, record) => {
 const aiCellIcon = (reference, config) => text => {
     const mapping = config['$mapping'] ? config['$mapping'] : {};
     const target = mapping[text];
-    if ("object" === typeof target) {
+    if (U.isObject(target)) {
         return <span>
             {target.icon ? <Icon type={target.icon} style={target.style ? target.style : {}}/> : false}
             &nbsp;&nbsp;{target.text}
