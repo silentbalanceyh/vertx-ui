@@ -58,22 +58,25 @@ class Component extends React.PureComponent {
                     {/** 渲染表单 **/}
                     <Table {...table} dataSource={data}/>
                     <DynamicDialog $dialog={dialog} $visible={show}>
-                        {editKey ? (FormEdit ? (
-                            <FormEdit {...rest} key={"formEdit"}
+                        {/** 只有editKey存在时渲染 **/}
+                        {FormEdit ? (editKey && show ? (
+                            <FormEdit {...rest} key={`formEdit`}
                                       $inited={initData}
-                                      $key={$inited.key}
+                                      $key={editKey}
                                       $parent={$inited}
                                       fnClose={Op.rxClose(this)}
                                       fnListItem={Op.rxList(this)}
                                       fnClear={Op.rxReset(this)}/>
-                        ) : false) : (FormAdd ? (
+                        ) : false) : false}
+                        {/** 只有editKey为undefined时渲染 **/}
+                        {FormAdd ? (!editKey && show ? (
                             <FormAdd {...rest} key={"formAdd"}
                                      $inited={initData}
                                      $parent={$inited}
                                      fnClose={Op.rxClose(this)}
                                      fnListItem={Op.rxList(this)}
                                      fnClear={Op.rxReset(this)}/>
-                        ) : false)}
+                        ) : false) : false}
                     </DynamicDialog>
                 </div>
             )

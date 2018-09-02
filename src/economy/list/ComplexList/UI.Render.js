@@ -7,19 +7,25 @@ const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, item)}
+            <Component fnClose={Op.rxClose(reference, undefined)}
                        fnMock={Op.mockfnRecord(reference)}
                        {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };
-const renderPageEdit = (reference, item = {}) => {
+const renderPageEdit = (reference, item = {}, activeKey) => {
     const {$formEdit: Component} = reference.props;
     const {record} = reference.state;
-    const $inited = record[item.key] ? record[item.key] : {};
+    /**
+     * 解决多个Tab页状态不同步的问题
+     * 1.只有Active的面板可以操作
+     * 2.根据activeKey来执行界面切换，同时刷新子界面对应的$inited
+     * 3.在关闭窗口的时候传入activeKey，需要关闭的是当前的窗口
+     */
+    const $inited = record[activeKey] ? record[activeKey] : {};
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, item)}
+            <Component fnClose={Op.rxClose(reference, activeKey)}
                        fnMock={Op.mockfnRecord(reference, true)}
                        $inited={$inited} {...reference.props}/>
         </Tabs.TabPane>

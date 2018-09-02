@@ -53,7 +53,7 @@ class Component extends React.PureComponent {
                     {items.map(item => {
                         const {type, ...itemRest} = item;
                         const fnRender = Render[type];
-                        return fnRender(this, itemRest);
+                        return fnRender(this, itemRest, rest.activeKey);
                     })}
                 </Tabs>
             );
