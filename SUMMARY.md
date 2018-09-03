@@ -56,4 +56,5 @@
     * [AI0006 - aiExprColumn属性解析器](document/ai0006-aiexprcolumnshu-xing-jie-xi-qi.md)
   * 7.Ux工具包
     * [Ux.connectId](document/uxconnectid.md)
+  * [8.UI组件示例库](document/8uizu-jian-kai-fa.md)
 

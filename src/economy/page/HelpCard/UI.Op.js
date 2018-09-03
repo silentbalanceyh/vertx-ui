@@ -13,7 +13,7 @@ const onClickBack = (reference, topbar) => (event) => {
 };
 
 const renderBack = (reference, topbar) => {
-    return (<Button icon={"cross"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
+    return (<Button icon={"close"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
 };
 
 const renderButton = (reference, topbar, key = "left") => {

@@ -46,8 +46,10 @@ const jsxItem = (reference, item = {}, render) => {
     // $button修正
     if ("$button" === item.field) {
         if (item.optionItem) {
-            item.optionItem.labelCol = {span: 0};
-            item.optionItem.wrapperCol = {span: 24};
+            item.optionItem.label = "";
+            item.optionItem.colon = false;
+            //item.optionItem.labelCol = {span: 0};
+            //item.optionItem.wrapperCol = {span: 24};
         }
     }
     return item.optionItem ? (
@@ -99,6 +101,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
     // 行配置处理
     const {key = "form", entity} = config;
     let formConfig = Prop.fromHoc(reference, key);
+    if (!formConfig) formConfig = {};
     const rowConfig = formConfig['rowConfig'] ? formConfig['rowConfig'] : {};
     const rowClass = formConfig['rowClass'] ? formConfig['rowClass'] : {};
     const {form = [], ...rest} = config;

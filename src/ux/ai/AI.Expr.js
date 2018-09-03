@@ -79,5 +79,11 @@ export default {
     "tabs": [
         "tab",
         "key"
+    ],
+    "direct": [
+        "key",
+        "text",
+        "onClick",
+        "type"
     ]
 }

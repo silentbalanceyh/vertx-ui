@@ -123,11 +123,12 @@ const rxDelete = (reference, id) => {
     rxDeleteDetail($self, id)
 };
 
-const rxClose = (reference, item) => () => {
+const rxClose = (reference, activekey) => () => {
     // 关闭时处理tab页
     let {tabs = {}} = reference.state;
     tabs = Immutable.fromJS(tabs).toJS();
-    tabs.items = tabs.items.filter(each => each.key !== item.key);
+    tabs.items = tabs.items.filter(each => each.key !== activekey);
+    tabs.items.forEach((each, index) => each.index = index);
     tabs.activeKey = tabs.items[0].key;
     // 计算view
     const view = Init.stateView("list", undefined, reference);

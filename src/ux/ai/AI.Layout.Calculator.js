@@ -61,12 +61,23 @@ const calculateWindow = (config = {}) => {
     const metadata = dft ? LayoutType[1] : LayoutType[window];
     return {window, dft, metadata}
 };
+const _isFull = (item) => {
+    // 如果是按钮
+    if ("$button" === item.field) {
+        // 隐藏时Full
+        return item.hidden;
+    } else {
+        // 不包含optionItem
+        return !item.hasOwnProperty("optionItem")
+            // 包含optionItem的话不包含label
+            || (item.optionItem && !item.optionItem.hasOwnProperty("label"))
+    }
+};
 const calculateLayout = (item, layout = {}) => {
     const {cellIndex, columns} = layout;
     let key = null;
     let window = {};
-    if (!item.hasOwnProperty("optionItem")
-        || (item.optionItem && !item.optionItem.hasOwnProperty("label"))) {
+    if (_isFull(item)) {
         /**
          * 全行布局，没有label相关属性，直接占满整行信息
          **/

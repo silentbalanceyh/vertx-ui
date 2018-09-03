@@ -220,8 +220,10 @@ const aiExprHelp = (steps = []) =>
 /**
  * 顺序：key, text, connectId, type, icon
  */
-const aiExprButton = (buttons = [], props = {}) =>
-    _iterator(buttons, (values = []) => parseItem(values, "button"))
+const aiExprButton = (buttons = [], props = {}) => _aiExprButton(buttons, props);
+const aiExprDirect = (buttons = [], props = {}) => _aiExprButton(buttons, props, "direct");
+const _aiExprButton = (buttons = [], props = {}, key = "button") =>
+    _iterator(buttons, (values = []) => parseItem(values, key))
         .map(ExprValue.applyConnect).map(item => ExprValue.applyLoading(item, props));
 const aiExprTabs = (items = [], props = {}) => items.map(item => parseItem(item, "tabs")).map(ExprValue.applyKey);
 const aiExprOp = (button = "") => {
@@ -252,6 +254,7 @@ export default {
     aiExprOption,
     aiExprButton,
     aiExprOp,
+    aiExprDirect,
     aiExprField,
     aiExprWindow,
     aiExprAjax,

@@ -55,12 +55,14 @@
 ```shell
 > ncu
 # 输出结果如下：
-⸨░░░░░░░░░░░░░░░░░░⸩ ⠴ :
+⸨░░░░░░░░░░░░░░░░░░⸩ ⠸ :
  redux-observable           ^0.19.0  →  ^1.0.0 
- rxjs                       ^5.5.11  →  ^6.2.2 
+ rxjs                       ^5.5.11  →  ^6.3.1 
  awesome-typescript-loader   ^4.0.1  →  ^5.2.0 
- webpack                     3.12.0  →  4.16.2 
- webpack-dev-server           3.0.0  →   3.1.5
+ babel-eslint                ^8.2.6  →  ^9.0.0 
+ babel-loader                 7.1.5  →   8.0.2 
+ webpack                     3.12.0  →  4.17.2 
+ webpack-dev-server           3.0.0  →   3.1.7 
 
 Run ncu with -u to upgrade package.json
 ```

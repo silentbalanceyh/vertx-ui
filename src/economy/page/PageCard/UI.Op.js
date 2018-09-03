@@ -24,7 +24,7 @@ const renderButton = (reference, topbar, key = "left") => {
     )
 };
 const renderBack = (reference, topbar) => {
-    return (<Button icon={"cross"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
+    return (<Button icon={"close"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
 };
 export default {
     renderButton,

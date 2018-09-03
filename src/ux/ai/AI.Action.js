@@ -73,7 +73,6 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
             }
             buttons.push(item);
         });
-        console.info(buttons);
         return (
             <span>
                 {buttons.filter(item => item.key.startsWith("$")).map(item => (<Button {...item}/>))}

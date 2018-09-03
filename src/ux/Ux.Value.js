@@ -3,6 +3,7 @@ import U from "underscore";
 import Type from './Ux.Type';
 import {DataArray, DataObject} from 'entity';
 import Value from './value'
+import moment from 'moment'
 
 /**
  * 两个字符串的专用连接方法，用于做不重复链接，
@@ -37,7 +38,8 @@ const assign = (target = {}, source = {}, mode = 0) => {
         Type.itObject(source, (field, value) => {
             // 检查target中是否包含了field
             const targetValue = result[field];
-            if (U.isObject(targetValue) && U.isObject(value)) {
+            if (U.isObject(targetValue) && !moment.isMoment(targetValue) &&
+				U.isObject(value) && !moment.isMoment(value)) {
                 // 当前节点为两个对象，统一方式合并，且mode也相同
                 result[field] = assign(targetValue, value, mode);
             } else {
