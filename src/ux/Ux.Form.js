@@ -175,8 +175,13 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
             // 3.2.8.Button处理
             if ("$button" === cell.field) {
                 if (cell.optionItem) {
-                    cell.optionItem.labelCol = {span: 0};
-                    cell.optionItem.wrapperCol = {span: 24};
+                    if (cell.hidden) {
+                        cell.optionItem.labelCol = {span: 0};
+                        cell.optionItem.wrapperCol = {span: 24};
+                    } else {
+                        cell.optionItem.label = " ";
+                        cell.optionItem.colon = false;
+                    }
                 }
             }
             // 特殊删除
@@ -205,4 +210,5 @@ export default {
     raftJsx,
     raftHidden,
     raftField,
+    raftCell: _raftCell
 }

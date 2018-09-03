@@ -194,6 +194,30 @@ const rtPure = (reference, jsx = {}) => {
         </Button>
     )
 };
+const rtDirect = (reference, jsx = {}) => {
+    if (jsx.hasOwnProperty("direct")) {
+        const buttons = Ai.aiExprDirect(jsx.direct, reference.props);
+        // 从Op中读取
+        const {$op = {}} = reference.state;
+        const copied = Ux.clone(buttons);
+        copied.forEach(button => {
+            if ($op.hasOwnProperty(button.onClick)) {
+                // 直接使用metadata节点传入
+                const metadata = jsx.metadata ? jsx.metadata : {};
+                button.onClick = $op[button.onClick](reference, metadata);
+            } else {
+                console.error("无法直接渲染", button)
+            }
+        });
+        return (
+            <Button.Group>
+                {copied.map(button => rtPure(reference, button))}
+            </Button.Group>
+        )
+    } else {
+        return false;
+    }
+};
 // rx - Reactive Action
 /**
  * 重定向专用链接按钮
@@ -216,6 +240,8 @@ const rtLink = (reference, metadata = {}) => {
     )
 };
 export default {
+    // Pure的另外一种模式
+    rtDirect,
     // 纯按钮
     rtPure,
     // 重置按钮专用
