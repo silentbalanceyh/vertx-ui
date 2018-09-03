@@ -31,6 +31,8 @@
 | moment | moment=true | 【自定义】用于标识当前字段是时间字段，初始化时会转成Moment对象 |
 | itemClass | itemClass=grid-left | 【自定义】optionItem.className |
 | colon | colon=false | 设置标签的逗号：optionItem.colon |
+| group | group=xxx | 按钮分组专用 |
+| status | status=xxx | 针对状态设置专用 |
 
 
 
