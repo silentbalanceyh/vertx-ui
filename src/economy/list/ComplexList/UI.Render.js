@@ -5,9 +5,10 @@ import "./Cab.less";
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
+    // 添加的时候activeKey就应该只有一个，就是item.key
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, undefined)}
+            <Component fnClose={Op.rxClose(reference, item.key)}
                        fnMock={Op.mockfnRecord(reference)}
                        {...reference.props}/>
         </Tabs.TabPane>
