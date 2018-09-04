@@ -1,7 +1,8 @@
 import React from 'react'
 import Ux from 'ux'
-import {PageCard} from 'web';
+import {AttrTree, PageCard} from 'web';
 import ViewMarkdown from './UI.Markdown';
+import ViewJson from './UI.Json';
 
 const {zero} = Ux;
 
@@ -13,9 +14,9 @@ class Component extends React.PureComponent {
     render() {
         const {
             children,
-            config = [],
-            $markdown = [],
-            attributes = {},
+            $source = [],   // Json内容
+            $markdown = [], // Markdown内容
+            $configuration = {},    // 属性配置
         } = this.props;
         return (
             <PageCard reference={this}>
@@ -25,8 +26,9 @@ class Component extends React.PureComponent {
                         <div className={"demo-window"}>
                             {children}
                         </div>,
-                        "Hello",
-                        <ViewMarkdown key={"tabMarkdown"} $markdown={$markdown}/>
+                        <ViewJson key={"tabJson"} $source={$source}/>,
+                        <ViewMarkdown key={"tabMarkdown"} $markdown={$markdown}/>,
+                        <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
             </PageCard>
         )

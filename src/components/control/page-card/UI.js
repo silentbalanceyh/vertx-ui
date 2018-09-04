@@ -1,6 +1,7 @@
 import React from 'react'
 import Ux from 'ux'
 import {Fn, UI} from 'app';
+import Demo from './UI.Demo';
 
 const {zero} = Ux;
 
@@ -13,14 +14,22 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Fn.markdown(this, require('./UI.Desc.md'))
+        Fn.markdown(this, require('./Markdown.UI.md'))
     }
 
     render() {
-        const $markdown = Fn.markdownPrepare(this, "UI.js");
+        const $markdown = Fn.prepareMarkdown(this, "UI.Demo.js");
+        const $configuration = Fn.prepareTree(this, "UI.Tree");
+        const $source = Fn.prepareJson(this, "UI.Demo");
+        const demo = Ux.fromHoc(this, "demo");
         return (<UI {...Ux.toUniform(this.props)}
-                    $markdown={$markdown}>
-            Hello
+                    $markdown={$markdown}
+                    $source={$source}
+                    $configuration={$configuration}>
+            <Demo reference={this}>
+                {Fn.demoMessage(this)}
+                {Fn.demoButtons(this, demo.buttons)}
+            </Demo>
         </UI>);
     }
 }

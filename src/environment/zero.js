@@ -115,7 +115,8 @@ const fnI18n = (target, options = {}) => {
     let i18n;
     const fullname = fnFullName(target, options);
     if (fullname) {
-        i18n = new HocI18n(fullname, {});
+        const cab = options["i18n.cab"];
+        i18n = new HocI18n(cab.ns, fullname, {});
     }
     return i18n;
 };
