@@ -1,22 +1,54 @@
 {
     "_page": {
-        "title": "PageCard组件"
-    },
-    "_tabs": {
-        "defaultActiveKey": "keyPreview",
-        "items": [
+        "title": "测试标题",
+        "left": [
+            "btnFirst,点击1,$opFirst,primary",
             {
-                "key": "keyPreview",
-                "tab": "效果图"
+                "key": "btnSecond",
+                "text": "点击2",
+                "connectId": "$opSecond"
+            }
+        ],
+        "right": [
+            "btnThird,,$opThird,,download",
+            {
+                "key": "btnForth",
+                "text": "",
+                "connectId": "$opForth",
+                "icon": "printer"
+            }
+        ],
+        "back": {
+            "state": {
+                "todos": null,
+                "datums": null
+            }
+        }
+    },
+    "_demo": {
+        "buttons": [
+            {
+                "key": "$opFirst",
+                "text": "按钮1",
+                "message": "您点击了【左边】的按钮1"
             },
             {
-                "key": "keyDesc",
-                "tab": "属性信息"
+                "key": "$opSecond",
+                "text": "按钮2",
+                "message": "您点击了【左边】的按钮2"
+            },
+            {
+                "key": "$opThird",
+                "text": "按钮3",
+                "message": "您点击了【右边】的'下载'按钮"
+            },
+            {
+                "key": "$opForth",
+                "text": "按钮4",
+                "message": "您点击了【右边】的'打印'按钮"
             }
-        ]
-    },
-    "_subjson": {
-        "config": "配置：:title",
-        "source": "源代码：:file"
+        ],
+        "md": {
+        }
     }
 }

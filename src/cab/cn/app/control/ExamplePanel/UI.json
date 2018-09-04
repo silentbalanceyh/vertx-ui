@@ -1,0 +1,18 @@
+{
+    "_page": {
+        "title": "示例",
+        "back": {
+            "state": {
+            }
+        }
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabEffect",
+        "items": [
+            "效果图,tabEffect",
+            "配置信息,tabConfig",
+            "源代码,tabSource",
+            "属性表,tabAttribute"
+        ]
+    }
+}

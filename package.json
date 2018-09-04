@@ -2,7 +2,7 @@
     "name": "vertx-zero",
     "version": "0.1.0",
     "dependencies": {
-        "@antv/data-set": "^0.9.4",
+        "@antv/data-set": "^0.9.5",
         "@antv/g2": "^3.2.7",
         "@antv/g6": "^2.1.0",
         "@antv/g6-editor": "^1.0.8",
@@ -13,7 +13,7 @@
         "ajv": "^6.5.3",
         "ant-design-pro": "^2.0.0",
         "antd": "^3.9.1",
-        "autoprefixer": "9.1.3",
+        "autoprefixer": "9.1.5",
         "bizcharts": "^3.2.3-beta.2",
         "case-sensitive-paths-webpack-plugin": "2.1.2",
         "chalk": "2.4.1",
