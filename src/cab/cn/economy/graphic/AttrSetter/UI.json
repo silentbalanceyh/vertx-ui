@@ -1,0 +1,29 @@
+{
+    "_page": {
+        "title": "属性调整器"
+    },
+    "_header": {
+        "left": "Prop直接属性",
+        "middle": "Hoc高阶属性"
+    },
+    "_table": {
+        "left": {
+            "columns": [
+                {
+                    "title": "类型",
+                    "dataIndex": "icon"
+                },
+                {
+                    "title": "属性名",
+                    "dataIndex": "field"
+                },
+                {
+                    "title": "操作",
+                    "dataIndex": "op"
+                }
+            ]
+        },
+        "middle": {
+        }
+    }
+}

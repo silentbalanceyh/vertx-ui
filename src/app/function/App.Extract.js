@@ -90,7 +90,7 @@ const demoMessage = (reference) => {
     const {message} = reference.state ? reference.state : {};
     return message ? (
         <Alert message={message} type={"success"}/>
-    ) : false;
+    ) : false
 };
 export default {
     markdown,

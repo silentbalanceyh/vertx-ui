@@ -22,5 +22,15 @@
                 "message": "您点击了【右边】的'打印'按钮"
             }
         ]
+    },
+    "_attribute": {
+        "props": {
+            "$leftVisible": "BOOLEAN",
+            "$rightVisible": "BOOLEAN",
+            "$backVisible": "BOOLEAN"
+        },
+        "hoc": {
+            "title": "TEXT"
+        }
     }
 }

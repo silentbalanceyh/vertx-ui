@@ -52,6 +52,13 @@
                 "value": "true"
             },
             {
+                "source": "P",
+                "name": "$backVisible",
+                "comment": "返回按钮工具栏的显示和隐藏",
+                "type": "Boolean",
+                "value": "true"
+            },
+            {
                 "source": "H",
                 "name": "title",
                 "comment": "PageCard的标题",
@@ -90,9 +97,11 @@
         ],
         "items": {
             "name": "PageCard组件",
+            "color": "#0099CC",
             "children": [
                 {
                     "name": "props",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "reference",
@@ -121,11 +130,16 @@
                         {
                             "name": "$rightVisible",
                             "color": "#33af43"
+                        },
+                        {
+                            "name": "$rightVisible",
+                            "color": "#33af43"
                         }
                     ]
                 },
                 {
                     "name": "_<hoc>",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "title",
@@ -141,7 +155,7 @@
                         },
                         {
                             "name": "back",
-                            "color": "#33af43",
+                            "color": "#0099CC",
                             "children": [
                                 {
                                     "name": "state",

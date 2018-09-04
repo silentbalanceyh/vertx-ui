@@ -11,10 +11,10 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
 
     render() {
-        const {children} = this.props;
+        const {children, $status = {}} = this.props;
         return (
-            <PageCard reference={this}>
-                {children};
+            <PageCard reference={this} {...$status}>
+                {children}
             </PageCard>
         )
     }

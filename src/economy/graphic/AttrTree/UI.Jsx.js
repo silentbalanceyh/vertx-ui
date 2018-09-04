@@ -19,7 +19,8 @@ const renderColumn = (columns = [], mapping = {}) => {
         if ("required" === column.dataIndex) {
             column.render = (text) => {
                 const type = text ? "check" : "close";
-                return <Icon type={type}/>;
+                const color = text ? "#f99" : "#69f";
+                return <Icon type={type} style={{fontSize: 16, color}}/>;
             }
         }
         if ("name" === column.dataIndex || "option" === column.dataIndex) {
