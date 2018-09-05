@@ -24,7 +24,9 @@
                 "op.add": "TEXT",
                 "tabs.list": "TEXT",
                 "tabs.add": "TEXT",
-                "tabs.edit": "TEXT"
+                "tabs.edit": "TEXT",
+                "op.edit.delete": "BOOLEAN",
+                "confirm.delete": "TEXT"
             }
         },
         "comment": {
@@ -36,7 +38,9 @@
             "search.advanced.title": "高级搜索框的标题文字。",
             "tabs.list": "主列表Tab页文字标题。",
             "tabs.add": "添加Tab页文字标题。",
-            "tabs.edit": "编辑Tab页文字标题（支持表达式）。"
+            "tabs.edit": "编辑Tab页文字标题（支持表达式）。",
+            "op.edit.delete": "是否启用Edit编辑页的删除功能？",
+            "confirm.delete": "Edit编辑页中删除时Confirm对话框文字？"
         }
     }
 }
