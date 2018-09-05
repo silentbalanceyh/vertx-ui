@@ -36,7 +36,8 @@ import {DataLabor} from 'entity';
 class Component extends React.PureComponent {
     static propTypes = {
         $key: PropTypes.string,
-        $card: PropTypes.string
+        $card: PropTypes.string,
+        $leftVisible: PropTypes.bool,
     };
 
     render() {

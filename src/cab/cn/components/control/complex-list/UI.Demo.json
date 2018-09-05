@@ -48,7 +48,7 @@
                     "$option": {
                         "edit": "编辑",
                         "delete": "删除",
-                        "delete.confirm": "确认删除选择的部门记录？"
+                        "delete-confirm": "确认删除选择的部门记录？"
                     }
                 },
                 {

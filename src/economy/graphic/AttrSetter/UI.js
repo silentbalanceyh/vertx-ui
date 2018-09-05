@@ -15,10 +15,12 @@ class Component extends React.PureComponent {
         const {reference} = this.props;
         const attributes = Ux.fromHoc(reference, "attribute");
         const data = Rdr.prepareData(this, attributes.props);
+        const hoc = Rdr.prepareData(this, attributes.hoc);
         // 属性设置
         const header = Ux.fromHoc(this, "header");
         const table = Ux.fromHoc(this, "table");
         Rdr.prepareRender(reference, table.left.columns);
+        Rdr.prepareRender(reference, table.middle.columns);
         return (
             <PageCard reference={this}>
                 <Row>
@@ -38,7 +40,7 @@ class Component extends React.PureComponent {
                         <Table {...table.left} pagination={false} dataSource={data}/>
                     </Col>
                     <Col span={12} className={"web-attr-container"}>
-                        <Table {...table.middle} pagination={false}/>
+                        <Table {...table.middle} pagination={false} dataSource={hoc}/>
                     </Col>
                 </Row>
             </PageCard>

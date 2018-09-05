@@ -1,10 +1,13 @@
 {
     "_configuration": {
+        "code": "ComplexList",
         "items": {
             "name": "ComplexList组件",
+            "color": "#0099CC",
             "children": [
                 {
                     "name": "props",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "reference",
@@ -46,6 +49,7 @@
                 },
                 {
                     "name": "_<hoc>",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "query",
@@ -71,7 +75,7 @@
                         },
                         {
                             "name": "options",
-                            "color": "#33af43",
+                            "color": "#0099CC",
                             "children": [
                                 {
                                     "name": "mock.enabled",
@@ -197,7 +201,7 @@
                 "name": "rxViewSwitch",
                 "comment": "视图状态发生改变时的钩子函数",
                 "type": "Function",
-                "required": true,
+                "required": false,
                 "value": "--"
             },
             {
@@ -205,7 +209,7 @@
                 "name": "rxEditPost",
                 "comment": "数据更新过后的钩子函数",
                 "type": "Function",
-                "required": true,
+                "required": false,
                 "value": "--"
             },
             {
@@ -213,7 +217,7 @@
                 "name": "rxDeletePost",
                 "comment": "数据删除过后的钩子函数",
                 "type": "Function",
-                "required": true,
+                "required": false,
                 "value": "--"
             },
             {
@@ -290,7 +294,7 @@
             {
                 "source": "H",
                 "name": "options",
-                "comment": "当前列表的所有选项",
+                "comment": "当前列表的所有可配置的选项",
                 "type": "Object",
                 "value": "--"
             },

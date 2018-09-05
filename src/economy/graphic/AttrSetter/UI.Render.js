@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import React from 'react';
-import {Icon, InputNumber, Switch} from 'antd';
+import {Icon, Input, InputNumber, Switch} from 'antd';
 import Op from './Op';
 
 const renderBoolean = (reference, record) =>
@@ -9,9 +9,13 @@ const renderBoolean = (reference, record) =>
 const renderInteger = (reference, record) =>
     (<InputNumber min={0} defaultValue={0}
                   onChange={(event) => Op.setValue(reference, record.field, event)}/>);
+const renderText = (reference, record) =>
+    (<Input style={{width: "60%"}}
+            onChange={(event) => Op.setValue(reference, record.field, event.target.value)}/>);
 const RENDER = {
     "BOOLEAN": renderBoolean,
     "INTEGER": renderInteger,
+    "TEXT": renderText,
 };
 const prepareData = (reference, data = {}) => {
     const records = [];

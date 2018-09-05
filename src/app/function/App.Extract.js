@@ -121,9 +121,22 @@ const ui = (reference, tree, ...files) => (jsx) => {
         </UI>
     )
 };
+const inject = (reference, ...keys) => {
+    const {set = {}} = reference.state;
+    set.rxInject = (data) => {
+        keys.forEach(key => {
+            if (set.hasOwnProperty(key)) {
+                data[key] = set[key];
+            }
+        });
+        return data;
+    };
+    return set;
+};
 export default {
     markdown,
     ui,
+    inject,
 
     demoMessage,
     demoButtons

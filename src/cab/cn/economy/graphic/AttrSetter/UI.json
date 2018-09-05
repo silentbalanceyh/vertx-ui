@@ -9,11 +9,13 @@
     "_vector": {
         "icon": {
             "BOOLEAN": "switcher",
-            "INTEGER": "edit"
+            "INTEGER": "edit",
+            "TEXT": "form"
         },
         "text": {
             "BOOLEAN": "布尔值",
-            "INTEGER": "整数"
+            "INTEGER": "整数",
+            "TEXT": "字符串"
         }
     },
     "_table": {
@@ -34,6 +36,24 @@
             ]
         },
         "middle": {
+            "columns": [
+                {
+                    "title": "数据类型",
+                    "dataIndex": "icon"
+                },
+                {
+                    "title": "属性节点",
+                    "dataIndex": "field"
+                },
+                {
+                    "title": "选项节点",
+                    "dataIndex": "option"
+                },
+                {
+                    "title": "操作",
+                    "dataIndex": "op"
+                }
+            ]
         }
     }
 }

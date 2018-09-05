@@ -40,8 +40,12 @@ const renderHelp = (reference, topbar, current) => {
     } else
         return false;
 };
+const initComponent = (props) => {
+
+};
 export default {
     renderBack,
     renderHelp,
-    renderButton
+    renderButton,
+    initComponent,
 }
