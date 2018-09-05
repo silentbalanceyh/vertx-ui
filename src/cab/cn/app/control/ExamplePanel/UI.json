@@ -1,6 +1,9 @@
 {
     "_page": {
         "title": "示例",
+        "left": [
+            "btnSetting,改变配置,$opSetting,danger"
+        ],
         "back": {
             "state": {
             }
@@ -14,5 +17,9 @@
             "源代码,tabSource",
             "属性表,tabAttribute"
         ]
+    },
+    "_drawer": {
+        "placement": "bottom",
+        "maskClosable": false
     }
 }

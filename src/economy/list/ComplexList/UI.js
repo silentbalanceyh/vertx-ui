@@ -47,7 +47,8 @@ class Component extends React.PureComponent {
         if (error) {
             return Ux.fxError(error)
         } else {
-            const {items = [], ...rest} = this.state.tabs;
+            const $state = Op.mockVector(this);
+            const {items = [], ...rest} = $state.tabs;
             return (
                 <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
                     {items.map(item => {

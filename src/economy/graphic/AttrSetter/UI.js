@@ -14,8 +14,8 @@ class Component extends React.PureComponent {
     render() {
         const {reference} = this.props;
         const attributes = Ux.fromHoc(reference, "attribute");
-        const data = Rdr.prepareData(this, attributes.props);
-        const hoc = Rdr.prepareData(this, attributes.hoc);
+        const data = Rdr.prepareData(this, attributes.props, attributes.comment);
+        const hoc = Rdr.prepareData(this, attributes.hoc, attributes.comment);
         // 属性设置
         const header = Ux.fromHoc(this, "header");
         const table = Ux.fromHoc(this, "table");
@@ -24,23 +24,27 @@ class Component extends React.PureComponent {
         return (
             <PageCard reference={this}>
                 <Row>
-                    <Col span={12} className={"web-attr-header web-attr-container"}>
+                    <Col span={10} className={"web-attr-header web-attr-container"}>
                         <span style={{
                             color: "#1b68b6"
                         }}>{header.left}</span>
                     </Col>
-                    <Col span={12} className={"web-attr-header web-attr-container"}>
+                    <Col span={14} className={"web-attr-header web-attr-container"}>
                         <span style={{
                             color: "#ff913a"
                         }}>{header.middle}</span>
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={12} className={"web-attr-container"}>
-                        <Table {...table.left} pagination={false} dataSource={data}/>
+                    <Col span={10} className={"web-attr-container"}>
+                        <Table {...table.left}
+                               pagination={false} size="small"
+                               dataSource={data} bordered={true}/>
                     </Col>
-                    <Col span={12} className={"web-attr-container"}>
-                        <Table {...table.middle} pagination={false} dataSource={hoc}/>
+                    <Col span={14} className={"web-attr-container"}>
+                        <Table {...table.middle}
+                               pagination={false} size="small"
+                               dataSource={hoc} bordered={true}/>
                     </Col>
                 </Row>
             </PageCard>

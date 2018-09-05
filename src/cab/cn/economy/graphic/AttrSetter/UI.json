@@ -10,12 +10,14 @@
         "icon": {
             "BOOLEAN": "switcher",
             "INTEGER": "edit",
-            "TEXT": "form"
+            "TEXT": "font-size",
+            "PERCENT": "form"
         },
         "text": {
             "BOOLEAN": "布尔值",
             "INTEGER": "整数",
-            "TEXT": "字符串"
+            "TEXT": "字符串",
+            "PERCENT": "百分比"
         }
     },
     "_table": {
@@ -23,15 +25,22 @@
             "columns": [
                 {
                     "title": "数据类型",
-                    "dataIndex": "icon"
+                    "dataIndex": "icon",
+                    "className": "web-setter-first"
                 },
                 {
                     "title": "属性名",
-                    "dataIndex": "field"
+                    "dataIndex": "field",
+                    "className": "web-setter-col"
+                },
+                {
+                    "title": "注释",
+                    "dataIndex": "comment"
                 },
                 {
                     "title": "操作",
-                    "dataIndex": "op"
+                    "dataIndex": "op",
+                    "className": "web-setter-last"
                 }
             ]
         },
@@ -39,19 +48,27 @@
             "columns": [
                 {
                     "title": "数据类型",
-                    "dataIndex": "icon"
+                    "dataIndex": "icon",
+                    "className": "web-setter-first"
                 },
                 {
                     "title": "属性节点",
-                    "dataIndex": "field"
+                    "dataIndex": "field",
+                    "className": "web-setter-col"
                 },
                 {
                     "title": "选项节点",
-                    "dataIndex": "option"
+                    "dataIndex": "option",
+                    "className": "web-setter-option"
+                },
+                {
+                    "title": "注释",
+                    "dataIndex": "comment"
                 },
                 {
                     "title": "操作",
-                    "dataIndex": "op"
+                    "dataIndex": "op",
+                    "className": "web-setter-last"
                 }
             ]
         }

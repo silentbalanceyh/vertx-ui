@@ -127,9 +127,18 @@ const inject = (reference, ...keys) => {
     return set;
 };
 const injectOptFun = (reference, ...keys) => {
+    let options = [];
+    if (0 === keys.length) {
+        const attribute = Ux.fromHoc(reference, "attribute");
+        if (attribute.hoc && attribute.hoc.options) {
+            options = Object.keys(attribute.hoc.options);
+        }
+    } else {
+        options = keys;
+    }
     const {set = {}} = reference.state;
     return (data) => {
-        keys.forEach(key => {
+        options.forEach(key => {
             if (set.hasOwnProperty(key)) {
                 data[key] = set[key];
             }

@@ -47,24 +47,22 @@ const renderSearch = (reference) => {
     const advanced = options['search.advanced'];
     return enabled ? (
         <Row>
-            <Col span={advanced ? 18 : 24}>
+            <Col span={18}>
                 <Input.Search placeholder={options['search.placeholder'] ?
                     options['search.placeholder'] : ""}
                               onSearch={Act.rxFilter(reference)}
                               value={term}
                               onChange={Act.rxInput(reference)}/>
             </Col>
-            {advanced ? (
-                <Col span={5} offset={1}>
-                    <Button.Group>
-                        <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
-                        <Button icon={"ellipsis"} onClick={() => {
-                            // 判断是否已经在快速搜索中输入了数据
-                            reference.setState({drawer: true})
-                        }}/>
-                    </Button.Group>
-                </Col>
-            ) : false}
+            <Col span={5} offset={1}>
+                <Button.Group>
+                    <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
+                    {advanced ? (<Button icon={"ellipsis"} onClick={() => {
+                        // 判断是否已经在快速搜索中输入了数据
+                        reference.setState({drawer: true})
+                    }}/>) : false}
+                </Button.Group>
+            </Col>
         </Row>
     ) : false
 };

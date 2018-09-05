@@ -1,13 +1,17 @@
 import React from 'react'
 import Ux from 'ux'
-import {AttrSetter, AttrTree, PageCard} from 'web';
+import {AttrTree, PageCard} from 'web';
 import ViewMarkdown from './UI.Markdown';
 import ViewJson from './UI.Json';
+import Drawer from './UI.Drawer';
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
+    .state({
+        $drawer: false
+    })
     .to()
 )
 class Component extends React.PureComponent {
@@ -26,12 +30,12 @@ class Component extends React.PureComponent {
                     .to(
                         <div className={"demo-window"}>
                             {children}
-                            <AttrSetter reference={reference}/>
                         </div>,
                         <ViewJson key={"tabJson"} $source={$source}/>,
                         <ViewMarkdown key={"tabMarkdown"} $markdown={$markdown}/>,
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
+                {Drawer.renderDrawer(this)}
             </PageCard>
         )
     }

@@ -1,11 +1,36 @@
 .web-attr-header {
     min-height: 36px;
     line-height: 32px;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
     text-align: center;
 }
 
 .web-attr-container {
     padding: 3px;
+    max-height: 380px;
+    overflow-y: auto;
+    table {
+        padding: 0 !important;
+        td {
+            padding: 9px 12px !important;
+            input {
+                height: 28px !important;
+            }
+        }
+        .web-setter {
+            &-first {
+                width: 120px !important;
+            }
+            &-last {
+                width: 200px !important;
+            }
+            &-col {
+                width: 100px !important;
+            }
+            &-option {
+                width: 180px !important;
+            }
+        }
+    }
 }

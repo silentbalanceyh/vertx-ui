@@ -31,6 +31,12 @@
         },
         "hoc": {
             "title": "TEXT"
+        },
+        "comment": {
+            "$leftVisible": "是否显示左边按钮？",
+            "$rightVisible": "是否显示右边按钮？",
+            "$backVisible": "是否显示回退按钮？",
+            "title": "PageCard左边的主标题文字"
         }
     }
 }

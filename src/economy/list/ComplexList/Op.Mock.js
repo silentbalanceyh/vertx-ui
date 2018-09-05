@@ -73,11 +73,25 @@ const mockfnRecord = (reference = {}, isUpdate = false) => (updated = {}) => {
     }
     return {}
 };
+const mockVector = (ref) => {
+    const state = Ux.clone(ref.state);
+    const {rxInject, parent} = ref.props;
+    if (rxInject) {
+        const {set = {}} = parent.state;
+        // 列表页专用
+        if (set.hasOwnProperty("tabs.list")) {
+            // 这里必须包含state.tabs.items元素，且最小长度为1
+            state.tabs.items[0].tab = set['tabs.list'];
+        }
+    }
+    return state;
+};
 export default {
     mockCheck,
     mockInit,
     mockConnect,
     mockDetail,
     mockDelete,
-    mockfnRecord
+    mockfnRecord,
+    mockVector,
 }

@@ -20,6 +20,11 @@
         },
         "hoc": {
             "title": "TEXT"
+        },
+        "comment": {
+            "$leftVisible": "是否显示左边按钮？",
+            "$current": "右上帮助第几步？（索引值，从0开始）",
+            "title": "HelpCard左边的主标题文字"
         }
     }
 }
