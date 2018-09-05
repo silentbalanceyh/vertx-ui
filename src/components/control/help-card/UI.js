@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
 
         return Fn.ui(this, "UI.Tree", "UI.Demo", "UI.Demo.js")(
             <Demo reference={this}
-                  $status={this.state.set}>
+                  $status={Fn.inject(this, "title")}>
                 {/** 示例代码 **/}
                 {Fn.demoMessage(this)}
                 {Fn.demoButtons(this, demo.buttons)}

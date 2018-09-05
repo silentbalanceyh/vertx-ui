@@ -10,9 +10,7 @@ const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo")
-    .connect({
-        rxSearch: Tps.fnDeptList
-    }, true)
+    .search(Tps.fnDeptList)
     .to()
 )
 class Component extends React.PureComponent {

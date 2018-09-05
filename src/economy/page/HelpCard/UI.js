@@ -3,7 +3,6 @@ import {Card} from 'antd';
 import './Cab.less';
 import Ux from 'ux';
 import PropTypes from 'prop-types';
-import Immutable from "immutable";
 import Op from "./UI.Op";
 import {_zero} from "../../_internal";
 import {DataLabor} from 'entity';
@@ -40,45 +39,43 @@ class Component extends React.PureComponent {
         $leftVisible: PropTypes.bool,
     };
 
+    componentDidMount() {
+        Op.initComponent(this);
+    }
+
     render() {
         const {
             children, reference, $card = 'page-card',
-            $key = "page",
             $extra: ExtraComponent, $current,
-            $leftVisible = true
+            $leftVisible = true,
+            // Inject专用函数，用于执行属性变幻
+            rxInject = $config => $config
         } = this.props;
-
-        // 左边按钮
-        let topbar = Ux.fromHoc(reference, $key);
-        // ZeroError：检查点
-        if (!topbar) return Ux.fxRender(reference, $key);
-        topbar = Immutable.fromJS(topbar).toJS();
-        if (topbar.left) {
-            topbar.left = Ux.aiExprButton(topbar.left, this.props);
-            // 2次提交专用
-        }
-        // 标题和左边工具栏
-        const title = (
-            <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
-                {$leftVisible ? Op.renderButton(reference, topbar) : false}
+        const topbar = rxInject(this.state.$config);
+        if (topbar) {
+            // 标题和左边工具栏
+            const title = (
+                <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
+                    {$leftVisible ? Op.renderButton(reference, topbar) : false}
                 </span>
-        );
-        // 右边帮助信息
-        let extraContent = ExtraComponent ?
-            <ExtraComponent/> : (
-                <span>
+            );
+            // 右边帮助信息
+            let extraContent = ExtraComponent ?
+                <ExtraComponent/> : (
+                    <span>
                     {topbar.help ? Ux.aiGrid([20, 4],
                         topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
                         topbar.back ? Op.renderBack(reference, topbar) : false
                     ) : topbar.back ? Op.renderBack(reference, topbar) : false}
                 </span>
-            );
-        return (
-            <Card className={$card} title={title} bordered={false}
-                  extra={extraContent}>
-                {children}
-            </Card>
-        )
+                );
+            return (
+                <Card className={$card} title={title} bordered={false}
+                      extra={extraContent}>
+                    {children}
+                </Card>
+            )
+        } else return false;
     }
 }
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import Ux from "ux";
 import {Button, Steps} from "antd";
+import Immutable from "immutable";
 
 const onClickBack = (reference, topbar) => (event) => {
     event.preventDefault();
@@ -40,8 +41,15 @@ const renderHelp = (reference, topbar, current) => {
     } else
         return false;
 };
-const initComponent = (props) => {
-
+const initComponent = (ref) => {
+    const {$key = "page", reference} = ref.props;
+    // 1.从Hoc中读取配置
+    let topbar = Ux.fromHoc(reference, $key);
+    // 2.拷贝left节点
+    topbar = Immutable.fromJS(topbar ? topbar : {}).toJS();
+    if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, ref.props);
+    // 3.解析结果保存在状态中，只执行一次
+    ref.setState({$config: topbar});
 };
 export default {
     renderBack,
