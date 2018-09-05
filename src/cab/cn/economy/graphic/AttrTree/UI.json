@@ -45,6 +45,11 @@
                     "icon": "fork"
                 },
                 {
+                    "color": "#9c3",
+                    "text": "event事件",
+                    "icon": "thunderbolt"
+                },
+                {
                     "color": "#C71585",
                     "text": "option选项",
                     "icon": "appstore-o"
@@ -118,6 +123,13 @@
                 "style": {
                     "fontSize": "18px",
                     "color": "#C71585"
+                }
+            },
+            "E": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": "18px",
+                    "color": "#9c3"
                 }
             }
         }

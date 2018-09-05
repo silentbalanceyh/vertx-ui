@@ -189,7 +189,7 @@
                 "value": "--"
             },
             {
-                "source": "P",
+                "source": "E",
                 "name": "rxSearch",
                 "comment": "（Epic函数）专用搜索函数",
                 "type": "Function",
@@ -197,7 +197,7 @@
                 "value": "--"
             },
             {
-                "source": "P",
+                "source": "E",
                 "name": "rxViewSwitch",
                 "comment": "视图状态发生改变时的钩子函数",
                 "type": "Function",
@@ -205,7 +205,7 @@
                 "value": "--"
             },
             {
-                "source": "P",
+                "source": "E",
                 "name": "rxEditPost",
                 "comment": "数据更新过后的钩子函数",
                 "type": "Function",
@@ -213,7 +213,7 @@
                 "value": "--"
             },
             {
-                "source": "P",
+                "source": "E",
                 "name": "rxDeletePost",
                 "comment": "数据删除过后的钩子函数",
                 "type": "Function",

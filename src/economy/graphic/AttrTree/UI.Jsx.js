@@ -19,12 +19,12 @@ const renderColumn = (columns = [], mapping = {}) => {
         if ("required" === column.dataIndex) {
             column.render = (text) => {
                 const type = text ? "check" : "close";
-                const color = text ? "#f99" : "#69f";
+                const color = text ? "#F00" : "#69c";
                 return <Icon type={type} style={{fontSize: 16, color}}/>;
             }
         }
         if ("name" === column.dataIndex || "option" === column.dataIndex) {
-            column.render = (text) => {
+            column.render = (text, record) => {
                 if ("reference" === text || "children" === text) {
                     return (
                         <span style={{
@@ -34,7 +34,7 @@ const renderColumn = (columns = [], mapping = {}) => {
                 } else {
                     return "name" === column.dataIndex ? (
                         <span style={{
-                            color: "#1e358c"
+                            color: "E" === record.source ? "#c93" : "#1e358c"
                         }}>{text}</span>
                     ) : (
                         <span style={{

@@ -30,7 +30,11 @@ class Component extends React.PureComponent {
             "UI.Demo.js", "UI.Demo.Filter.js",
             "UI.Demo.Form.Add.js", "UI.Demo.Form.Edit.js",
             "Op.ts")(
-            <Demo reference={this} rxInject={Fn.injectOptFun(this, "op.add")}/>
+            <Demo reference={this} rxInject={Fn.injectOptFun(this,
+                "op.add", // 是否启用添加
+                "search.enabled", // 是否启用基本搜索
+                "search.advanced" // 是否启用高级搜索
+            )}/>
         )
     }
 }

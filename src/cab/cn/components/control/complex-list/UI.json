@@ -16,7 +16,9 @@
     "_attribute": {
         "hoc": {
             "options": {
-                "op.add": "TEXT"
+                "op.add": "TEXT",
+                "search.enabled": "BOOLEAN",
+                "search.advanced": "BOOLEAN"
             }
         }
     }
