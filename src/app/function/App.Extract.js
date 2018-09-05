@@ -104,8 +104,8 @@ const ui = (reference, tree, ...files) => (jsx) => {
     // 1.读取属性
     const $configuration = prepareTree(reference, tree);
     // 2.直接将files分组
-    const jsFiles = files.filter(file => file.endsWith(".js"));
-    const jsonFiles = files.filter(file => !file.endsWith(".js"));
+    const jsFiles = files.filter(file => file.endsWith(".js") || file.endsWith(".ts"));
+    const jsonFiles = files.filter(file => !(file.endsWith(".js") || file.endsWith(".ts")));
     // 3.构造面板
     const $markdown = prepareMarkdown.apply(this, [reference].concat(jsFiles));
     const $source = prepareJson.apply(this, [reference].concat(jsonFiles));

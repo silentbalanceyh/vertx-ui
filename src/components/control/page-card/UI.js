@@ -15,7 +15,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Fn.markdown(this, require('./Markdown.UI.md'))
+        Fn.markdown(this, require('./md/Markdown.UI.Demo.md'))
     }
 
     render() {

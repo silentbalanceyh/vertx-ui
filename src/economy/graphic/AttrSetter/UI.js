@@ -22,22 +22,22 @@ class Component extends React.PureComponent {
         return (
             <PageCard reference={this}>
                 <Row>
-                    <Col span={8} className={"web-attr-header web-attr-container"}>
+                    <Col span={12} className={"web-attr-header web-attr-container"}>
                         <span style={{
                             color: "#1b68b6"
                         }}>{header.left}</span>
                     </Col>
-                    <Col span={8} className={"web-attr-header web-attr-container"}>
+                    <Col span={12} className={"web-attr-header web-attr-container"}>
                         <span style={{
                             color: "#ff913a"
                         }}>{header.middle}</span>
                     </Col>
                 </Row>
                 <Row>
-                    <Col span={8} className={"web-attr-container"}>
+                    <Col span={12} className={"web-attr-container"}>
                         <Table {...table.left} pagination={false} dataSource={data}/>
                     </Col>
-                    <Col span={8} className={"web-attr-container"}>
+                    <Col span={12} className={"web-attr-container"}>
                         <Table {...table.middle} pagination={false}/>
                     </Col>
                 </Row>

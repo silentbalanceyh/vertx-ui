@@ -73,19 +73,5 @@
                 }
             ]
         }
-    },
-    "_demo": {
-        "buttons": [
-            {
-                "key": "$opSave",
-                "text": "按钮保存",
-                "message": "您点击了保存按钮"
-            },
-            {
-                "key": "$opReset",
-                "text": "按钮重置",
-                "message": "您点击了重置按钮"
-            }
-        ]
     }
 }

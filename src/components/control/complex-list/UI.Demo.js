@@ -16,13 +16,9 @@ const {zero} = Ux;
     .to()
 )
 class Component extends React.PureComponent {
-    componentDidMount() {
-        Fn.demoMarkdown(this, require("./UI.Desc.md"))
-    }
 
     render() {
-        const {source = ""} = this.state ? this.state : {};
-        return Fn.demoComponent(this,
+        return (
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
                              reference={this}
@@ -31,7 +27,7 @@ class Component extends React.PureComponent {
                              $formAdd={FormAdd}
                              $formEdit={FormEdit}/>
             </HelpCard>
-            , source)
+        )
     }
 }
 
