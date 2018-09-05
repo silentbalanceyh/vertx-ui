@@ -14,5 +14,10 @@
         ]
     },
     "_attribute": {
+        "hoc": {
+            "options": {
+                "op.add": "TEXT"
+            }
+        }
     }
 }

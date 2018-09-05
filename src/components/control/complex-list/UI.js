@@ -30,7 +30,7 @@ class Component extends React.PureComponent {
             "UI.Demo.js", "UI.Demo.Filter.js",
             "UI.Demo.Form.Add.js", "UI.Demo.Form.Edit.js",
             "Op.ts")(
-            <Demo reference={this} $status={this.state.set}/>
+            <Demo reference={this} rxInject={Fn.injectOptFun(this, "op.add")}/>
         )
     }
 }

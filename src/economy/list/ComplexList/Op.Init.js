@@ -94,7 +94,15 @@ const initGrid = (reference = {}) => {
     Mock.mockCheck(reference, config.options, state);
     reference.setState(state);
 };
-const readOption = (reference) => readConfig(reference).options;
+const readOption = (reference) => {
+    let options = readConfig(reference).options;
+    const {rxInject} = reference.props;
+    if (rxInject) {
+        return rxInject(options);
+    } else {
+        return options;
+    }
+};
 const readTable = (reference) => readConfig(reference).table;
 const readQuery = (reference) => {
     const queryConfig = readConfig(reference).query;

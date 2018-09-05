@@ -123,7 +123,12 @@ const ui = (reference, tree, ...files) => (jsx) => {
 };
 const inject = (reference, ...keys) => {
     const {set = {}} = reference.state;
-    set.rxInject = (data) => {
+    set.rxInject = injectOptFun.apply(this, [reference].concat(keys));
+    return set;
+};
+const injectOptFun = (reference, ...keys) => {
+    const {set = {}} = reference.state;
+    return (data) => {
         keys.forEach(key => {
             if (set.hasOwnProperty(key)) {
                 data[key] = set[key];
@@ -131,12 +136,12 @@ const inject = (reference, ...keys) => {
         });
         return data;
     };
-    return set;
 };
 export default {
     markdown,
     ui,
     inject,
+    injectOptFun,
 
     demoMessage,
     demoButtons
