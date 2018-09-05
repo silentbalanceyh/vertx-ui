@@ -21,7 +21,6 @@ class Component extends React.PureComponent {
             $source = [],   // Json内容
             $markdown = [], // Markdown内容
             $configuration = {},    // 属性配置
-            reference, // 父引用
         } = this.props;
         return (
             <PageCard reference={this}>

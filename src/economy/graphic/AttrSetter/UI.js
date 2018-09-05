@@ -21,6 +21,10 @@ class Component extends React.PureComponent {
         const table = Ux.fromHoc(this, "table");
         Rdr.prepareRender(reference, table.left.columns);
         Rdr.prepareRender(reference, table.middle.columns);
+        const attrs = {
+            pagination: false,
+            bordered: true
+        };
         return (
             <PageCard reference={this}>
                 <Row>
@@ -37,14 +41,12 @@ class Component extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col span={10} className={"web-attr-container"}>
-                        <Table {...table.left}
-                               pagination={false} size="small"
-                               dataSource={data} bordered={true}/>
+                        <Table {...table.left} size="small"
+                               dataSource={data} {...attrs}/>
                     </Col>
                     <Col span={14} className={"web-attr-container"}>
-                        <Table {...table.middle}
-                               pagination={false} size="small"
-                               dataSource={hoc} bordered={true}/>
+                        <Table {...table.middle} size="small"
+                               dataSource={hoc} {...attrs}/>
                     </Col>
                 </Row>
             </PageCard>

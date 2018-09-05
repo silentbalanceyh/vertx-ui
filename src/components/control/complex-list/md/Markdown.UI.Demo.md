@@ -4,32 +4,36 @@
 ```javascript
     import React from 'react'
     import Ux from "ux";
-    import {ComplexList} from 'web';
-    import Types from './Act.Types';
+    import {Mock, Tps} from 'app';
+    import {ComplexList, HelpCard} from 'web';
     import Filter from './UI.Demo.Filter';
     import FormAdd from './UI.Demo.Form.Add';
     import FormEdit from './UI.Demo.Form.Update'
-    import Mock from './a-mock'
 
     const {zero} = Ux;
 
     @zero(Ux.rxEtat(require('./Cab.json'))
         .cab("UI.Demo")
-        .connect({
-            rxSearch: Types.fnDeptList
-        }, true)
+        .search(Tps.fnDeptList)
         .to()
     )
     class Component extends React.PureComponent {
 
         render() {
-            return <ComplexList {...this.props}
-                                $mockData={Mock}
-                                reference={this}
-                                $formFilter={Filter}
-                                $formAdd={FormAdd}
-                                $formEdit={FormEdit}/>
+            const {reference, ...rest} = this.props;
+            return (
+                <HelpCard reference={this}>
+                    <ComplexList {...rest}
+                                 parent={reference}
+                                 reference={this}
+                                 $mockData={Mock.fnDeptList}
+                                 $formFilter={Filter}
+                                 $formAdd={FormAdd}
+                                 $formEdit={FormEdit}/>
+                </HelpCard>
+            )
         }
     }
+
     export default Component
 ```
