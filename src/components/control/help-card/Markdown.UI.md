@@ -1,17 +1,17 @@
 ### 1.说明
 
-`PageCard`一般用于主体页面中的内容页，分上下两个区域：Header和Body。
+`HelpCard`一般用于当前页面需要有简单进度监控的内容页，同样分为上下两个区域：Header和Body。
 
-* Header部分包含：左边标题、左边操作按钮、右边辅助按钮、返回按钮；
+* Header部分包含：左边标题、左边操作按钮、右边进度条、返回按钮；
 * Body部分可随意放置其他组件——根据开发人员具体需求而定；
-* 顶部的操作按钮（左/右）都支持Zero UI中的Connect机制，可直接绑定到Body页面中的某个按钮；
+* 顶部操作按钮（左边）都支持Zero UI中的Connect机制，可直接绑定到Body页面中的某个按钮；
 
 ### 2.代码
 
 ```javascript
     import React from 'react'
     import Ux from "ux";
-    import {PageCard} from 'web';
+    import {HelpCard} from 'web';
 
     const {zero} = Ux;
 
@@ -22,14 +22,13 @@
     class Component extends React.PureComponent {
 
         render() {
-            // 1.children为当前PageCard中的子控件
+            // 1.children为当前HelpCard中的子控件
             // 2.$status则是传入的可调整的属性信息，规范：R-001
             const {children, $status = {}} = this.props;
             return (
-                <PageCard reference={this} {...$status}>
-                    {/** 子控件区域 **/}
+                <HelpCard reference={this} {...$status}>
                     {children}
-                </PageCard>
+                </HelpCard>
             )
         }
     }

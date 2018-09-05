@@ -14,7 +14,7 @@ class Component extends React.PureComponent {
     render() {
         const {reference} = this.props;
         const attributes = Ux.fromHoc(reference, "attribute");
-        const data = Rdr.prepareData(attributes.props);
+        const data = Rdr.prepareData(this, attributes.props);
         // 属性设置
         const header = Ux.fromHoc(this, "header");
         const table = Ux.fromHoc(this, "table");

@@ -6,11 +6,21 @@
         "left": "Prop直接属性",
         "middle": "Hoc高阶属性"
     },
+    "_vector": {
+        "icon": {
+            "BOOLEAN": "switcher",
+            "INTEGER": "edit"
+        },
+        "text": {
+            "BOOLEAN": "布尔值",
+            "INTEGER": "整数"
+        }
+    },
     "_table": {
         "left": {
             "columns": [
                 {
-                    "title": "类型",
+                    "title": "数据类型",
                     "dataIndex": "icon"
                 },
                 {

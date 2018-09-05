@@ -1,8 +1,7 @@
 import React from 'react'
 import Ux from 'ux'
-import {Fn, UI} from 'app';
+import {Fn} from 'app';
 import Demo from './UI.Demo';
-import {AttrSetter} from 'web';
 
 const {zero} = Ux;
 
@@ -20,25 +19,17 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const $markdown = Fn.prepareMarkdown(this, "UI.Demo.js");
-        const $configuration = Fn.prepareTree(this, "UI.Tree");
-        const $source = Fn.prepareJson(this, "UI.Demo");
         // 示例代码
         const demo = Ux.fromHoc(this, "demo");
-        const {set = {}} = this.state;
 
-        return (<UI {...Ux.toUniform(this.props)}
-                    $markdown={$markdown}
-                    $source={$source}
-                    $configuration={$configuration}>
+        return Fn.ui(this, "UI.Tree", "UI.Demo", "UI.Demo.js")(
             <Demo reference={this}
-                  $status={set}>
+                  $status={this.state.set}>
                 {/** 示例代码 **/}
                 {Fn.demoMessage(this)}
                 {Fn.demoButtons(this, demo.buttons)}
             </Demo>
-            <AttrSetter reference={this}/>
-        </UI>)
+        )
     }
 }
 

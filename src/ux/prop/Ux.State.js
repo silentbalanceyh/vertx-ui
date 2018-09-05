@@ -103,16 +103,16 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
                     // 更新数据
                     $extracted.saveElement(single);
                 }
-                dataRecord[id] = $extracted.to();
             } else {
                 // 这种只能添加，不会在删除的时候触发
                 if (single) {
                     if (!single['key'] || undefined === single['key']) {
                         single['key'] = Ux.randomUUID();
                     }
-                    dataRecord[id] = [single];
+                    $extracted.saveElement(single);
                 }
             }
+            dataRecord[id] = $extracted.to();
         };
         if (U.isArray(record)) {
             record.forEach(executeRecord);

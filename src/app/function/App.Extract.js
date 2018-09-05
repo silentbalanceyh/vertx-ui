@@ -2,6 +2,7 @@ import Ux from 'ux';
 import {Langue} from 'environment';
 import {Alert, Button} from "antd";
 import Op from "./App.Op";
+import UI from "../control/ExamplePanel/UI";
 import React from "react";
 import Immutable from "immutable";
 
@@ -92,11 +93,38 @@ const demoMessage = (reference) => {
         <Alert message={message} type={"success"}/>
     ) : false
 };
+/**
+ * 统一函数
+ * @param reference
+ * @param tree
+ * @param files
+ * @returns {Function}
+ */
+const ui = (reference, tree, ...files) => (jsx) => {
+    // 1.读取属性
+    const $configuration = prepareTree(reference, tree);
+    // 2.直接将files分组
+    const jsFiles = files.filter(file => file.endsWith(".js"));
+    const jsonFiles = files.filter(file => !file.endsWith(".js"));
+    // 3.构造面板
+    const $markdown = prepareMarkdown.apply(this, [reference].concat(jsFiles));
+    const $source = prepareJson.apply(this, [reference].concat(jsonFiles));
+    const attrs = {
+        $configuration,
+        $markdown, $source,
+        reference
+    };
+    return (
+        <UI {...Ux.toUniform(reference.props)}
+            {...attrs}>
+            {jsx}
+        </UI>
+    )
+};
 export default {
     markdown,
-    prepareMarkdown,
-    prepareTree,
-    prepareJson,
+    ui,
+
     demoMessage,
     demoButtons
 }
