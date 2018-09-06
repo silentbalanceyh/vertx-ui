@@ -16,9 +16,6 @@
         ]
     },
     "_toolbar": {
-        "setting": "修改配置,web-button-1",
-        "thunderbolt": "Connect机制,web-button-4",
-        "cluster": "状态树,web-button-2",
-        "search": "查询条件,web-button-3"
+        "setting": "修改配置,web-button-1"
     }
 }

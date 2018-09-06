@@ -1,9 +1,11 @@
 {
     "_tool": {
-        "search": "查询条件,zbt-1",
+        "code": "环境变量,zbt-7",
+        "setting": "应用信息,zbt-6",
         "user": "用户信息,zbt-2",
-        "cluster": "主列表信息,zbt-3",
         "api": "动态连接点,zbt-4",
+        "filter": "查询条件,zbt-1",
+        "cluster": "主列表信息,zbt-3",
         "bars": "子列表,zbt-5"
     }
 }

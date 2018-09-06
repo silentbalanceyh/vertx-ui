@@ -4,7 +4,6 @@ const thunderbolt = (reference: any) =>
     () => reference.setState({$connect: true});
 export default {
     Tool: {
-        setting,
-        thunderbolt
+        setting
     }
 }

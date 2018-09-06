@@ -14,6 +14,12 @@
         },
         "bars": {
             "title": "（DialogList专用）数据信息"
+        },
+        "code": {
+            "title": "全局环境变量"
+        },
+        "setting": {
+            "title": "当前登录应用程序数据"
         }
     }
 }

@@ -3,10 +3,10 @@ import Ux from 'ux'
 import {AttrTree, PageCard} from 'web';
 import ViewMarkdown from './UI.Markdown';
 import ViewJson from './UI.Json';
-import ToolBar from './UI.Bar';
 // 抽屉
 import Setting from './drawer/UI.Setting';
 import Connect from './drawer/UI.Connect';
+import ToolBar from './UI.Bar';
 
 const {zero} = Ux;
 
