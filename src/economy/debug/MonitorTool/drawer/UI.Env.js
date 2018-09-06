@@ -3,11 +3,6 @@ import Ux from 'ux';
 import {Table} from 'antd';
 import {_zero} from "../../../_internal";
 
-const getColumns = (reference) => {
-    const table = Ux.fromHoc(reference, "table");
-    return table;
-};
-
 @_zero({
     "i18n.cab": require('../Cab.json'),
     "i18n.name": "UI.Env",
@@ -15,14 +10,14 @@ const getColumns = (reference) => {
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        const table = getColumns(this);
+        const table = Ux.fromHoc(this, "table");
         this.setState({table});
     }
 
     render() {
-        const data = Ux.D.datumEnv(this);
         const {table = {}} = this.state;
         if (table) {
+            const data = Ux.D.datumEnv(this);
             if (table.columns) {
                 Ux.D.renderColumn(table.columns);
             }

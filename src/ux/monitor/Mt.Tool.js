@@ -32,6 +32,10 @@ const renderColumn = (columns = []) => {
                     return (<span style={{
                         color: "#393"
                     }}>{`"${text}"`}</span>)
+                } else if ("number" === record.type) {
+                    return (<span style={{
+                        color: "#990"
+                    }}>{text}</span>)
                 }
             }
         }

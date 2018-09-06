@@ -1,10 +1,31 @@
 import React from 'react'
+import {_zero} from "../../../_internal";
+import Ux from "ux";
+import {Table} from "antd";
 
+@_zero({
+    "i18n.cab": require('../Cab.json'),
+    "i18n.name": "UI.App",
+    "state": {}
+})
 class Component extends React.PureComponent {
+    componentDidMount() {
+        const table = Ux.fromHoc(this, "table");
+        this.setState({table});
+    }
+
     render() {
-        return (
-            <div>2018/9/6</div>
-        )
+        const {table = {}} = this.state;
+        if (table) {
+            const app = Ux.isInit();
+            const data = Ux.D.datumPure(app);
+            if (table.columns) {
+                Ux.D.renderColumn(table.columns);
+            }
+            return (
+                <Table {...table} dataSource={data}/>
+            )
+        } else return false;
     }
 }
 
