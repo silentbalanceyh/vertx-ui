@@ -5,7 +5,7 @@ import {Fn} from 'app';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('../Cab.json'))
-    .cab("UI.Drawer")
+    .cab("UI.Drawer.View")
     .state({})
     .to()
 )
