@@ -62,7 +62,7 @@ const parseCriteria = (queryCriteria) => {
     criteria.name = "criteria";
     criteria.color = "#36c";
     criteria.children = [];
-
+    // 判断是AND还是OR
     return criteria;
 };
 export default {

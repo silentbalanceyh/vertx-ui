@@ -3,7 +3,7 @@ import React from 'react';
 import {DebugMonitorTool} from 'web'
 
 const renderTool = (reference) => {
-    if (Ux.Env.DEBUG) {
+    if (Ux.Env.NODE_ENV === "development") {
         // 开发过程才会出现
         return (
             <div className={"zero-debug-tool"}>
