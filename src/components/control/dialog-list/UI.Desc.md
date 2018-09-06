@@ -38,7 +38,7 @@ class Component extends React.PureComponent {
 export default Component
 ```
 
-#### ------------------------------------------------------ UI.Demo.Form.Update.js
+#### ------------------------------------------------------ UI.Demo.Form.Edit.js
 
 ```javascript
 import React from 'react'

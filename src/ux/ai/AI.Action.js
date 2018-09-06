@@ -97,9 +97,9 @@ const ai2FilterButton = (window = 1) => {
     return {
         $button: (cell, reference) => {
             const button = Prop.fromHoc(reference, "button");
-            return (1 / 3 === window) ? Layout.aiColumns([7, 14],
+            return (1 / 3 === window) ? Layout.aiColumns([5, 14],
                 undefined,
-                <Button.Group>
+                <Button.Group className={"web-button"}>
                     <Button type={"primary"} icon={"search"}
                             onClick={() => Ux.irFilter(reference)}>{button.search}</Button>
                     <Button icon={"reload"} onClick={Ux.irClear(reference)}>{button.clear}</Button>

@@ -4,7 +4,7 @@ import {Mock, Tps} from 'app';
 import {ComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
-import FormEdit from './UI.Demo.Form.Update'
+import FormEdit from './UI.Demo.Form.Edit'
 
 const {zero} = Ux;
 
@@ -16,6 +16,7 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
 
     render() {
+        console.info(this.props);
         return (
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
