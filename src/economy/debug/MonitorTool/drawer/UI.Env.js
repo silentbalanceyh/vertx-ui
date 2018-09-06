@@ -23,8 +23,11 @@ class Component extends React.PureComponent {
         const data = Ux.D.datumEnv(this);
         const {table = {}} = this.state;
         if (table) {
+            if (table.columns) {
+                Ux.D.renderColumn(table.columns);
+            }
             return (
-                <Table {...table}/>
+                <Table {...table} dataSource={data}/>
             )
         } else return false;
     }

@@ -14,6 +14,30 @@ const renderTool = (reference) => {
         return false;
     }
 };
+const renderColumn = (columns = []) => {
+    columns.forEach(column => {
+        if ("value" === column.dataIndex) {
+            column.render = (text, record) => {
+                if ("boolean" === record.type) {
+                    if (text) {
+                        return (<span style={{
+                            color: "#f66"
+                        }}>true</span>)
+                    } else {
+                        return (<span style={{
+                            color: "#039"
+                        }}>false</span>)
+                    }
+                } else if ("string" === record.type) {
+                    return (<span style={{
+                        color: "#393"
+                    }}>{`"${text}"`}</span>)
+                }
+            }
+        }
+    })
+};
 export default {
-    renderTool
+    renderTool,
+    renderColumn
 }
