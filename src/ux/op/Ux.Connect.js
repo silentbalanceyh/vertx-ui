@@ -27,7 +27,7 @@ function connectId(id) {
     const ele = document.getElementById(id);
     E.fxWarning(!ele, 10015, id);
     if (ele) {
-        D.connect(id, arguments);
+        D.connect(id);
         ele.click();
     }
 };

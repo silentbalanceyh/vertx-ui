@@ -326,11 +326,10 @@ const debug = (object, original) => {
         console.groupEnd();
     }
 };
-const connect = (id, args) => {
+const connect = (id) => {
     if (Cv.DEBUG) {
         let message = `%c [Zero] Connect machine start..., target = ${id}`;
         console.groupCollapsed(message, "color:#9cf;font-weight:900");
-        console.info(args.callee);
         console.groupEnd();
     }
 };
