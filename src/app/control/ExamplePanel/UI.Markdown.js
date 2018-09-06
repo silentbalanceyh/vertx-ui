@@ -1,5 +1,5 @@
 import React from 'react'
-import {Collapse} from "antd";
+import {Tabs} from "antd";
 import {MarkdownViewer} from 'web';
 
 class Component extends React.PureComponent {
@@ -8,17 +8,17 @@ class Component extends React.PureComponent {
         if (0 < $markdown.length) {
             const key = $markdown[0].key;
             return (
-                <Collapse className={"page-card-collapse"}
-                          defaultActiveKey={key}>
+                <Tabs className={"page-card-subtab"} tabPosition={"left"}
+                      defaultActiveKey={key} size={"small"}>
                     {$markdown.map(markdown => {
                         const {content, ...rest} = markdown;
                         return (
-                            <Collapse.Panel {...rest}>
+                            <Tabs.TabPane {...rest}>
                                 <MarkdownViewer $source={content}/>
-                            </Collapse.Panel>
+                            </Tabs.TabPane>
                         )
                     })}
-                </Collapse>
+                </Tabs>
             )
         } else {
             return false;

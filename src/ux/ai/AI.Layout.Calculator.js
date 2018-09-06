@@ -1,5 +1,5 @@
 import LayoutType from "./AI.Layout.Config";
-import Log from "../Ux.Log";
+import Log from "../monitor/Mt.Logger";
 import Value from '../Ux.Value';
 
 const _FULL_OPTS = {

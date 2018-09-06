@@ -1,5 +1,5 @@
 import U from 'underscore'
-import Log from '../Ux.Log';
+import Log from '../monitor/Mt.Logger';
 
 /**
  * 读取Tabular专用数据，读取所有数据，一般用于Rxjs

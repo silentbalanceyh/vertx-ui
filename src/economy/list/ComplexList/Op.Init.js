@@ -35,8 +35,6 @@ const onTabClick = (reference) => (key) => {
     const item = tabs.items.filter(item => item.key === key)[0];
     const view = stateView(item.type, key, reference);
     const state = {tabs, ...view};
-    // Monitor监控：Tab切换时连接
-    Ux.D.connectTab(reference, state);
     reference.setState(state);
 };
 
@@ -130,9 +128,17 @@ const updateGrid = (reference = {}, prevProps = {}) => {
         initGrid(reference);
     }
 };
+const updateMonitor = (reference, prevState = {}) => {
+    const current = reference.state;
+    const previous = prevState.key;
+    if (current && current.key !== previous) {
+        console.info(current);
+    }
+};
 export default {
     initGrid,
     updateGrid,
+    updateMonitor,
     stateView,
     readOption,
     readTable,

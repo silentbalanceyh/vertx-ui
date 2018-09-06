@@ -1,6 +1,5 @@
 import ENV from "./Ux.Env";
 import AJAX from "./Ux.Ajax";
-import LOGGER from "./Ux.Log";
 import JSX from "./Ux.Jsx";
 import OP from "./Ux.Op";
 import NORM from "./Ux.Normalize";
@@ -10,11 +9,8 @@ import DIALOG from "./Ux.Dialog";
 import VALUE from "./Ux.Value";
 import AI from './ai/AI';
 import CHART from './Ux.Chart';
-import TERMINAL from './Ux.Terminal';
 import FORM from './Ux.Form';
 import CONTROL from './jt/Jt';
-import Uarr from "./structure/Ux.Uarr";
-import Uson from "./structure/Ux.Uson";
 import E from './Ux.Error';
 import G from './draw';
 import D from './monitor';
@@ -23,15 +19,15 @@ import Util from './util';
 import Prop from './prop';
 import Fun from './fun';
 import Op from './op';
-import System from './system'
-import Trigger from './trigger'
+import System from './system';
+import Trigger from './trigger';
+import Terminal from './terminal';
+import Structure from './structure';
 
 export default {
     ...CONTROL,
     // 优化Form处理
     ...FORM,
-    // 专用打断
-    ...TERMINAL,
     // 图表专用
     ...CHART,
     // 列处理
@@ -41,7 +37,7 @@ export default {
     // Ajax函数
     ...AJAX,
     // Log函数
-    Logger: LOGGER,
+    Logger: D.Logger,
     E,
     // JSX渲染
     ...JSX,
@@ -57,8 +53,11 @@ export default {
     ...VALUE,
     // 新组件用于AI化处理
     ...AI,
-    Uarr,
-    Uson,
+    /**
+     * Uson - 数据结构
+     * Uarr = 数据结构
+     */
+    ...Structure,
     /**
      * 触发控件专用
      */
@@ -102,6 +101,7 @@ export default {
      * Icon：图标处理
      */
     ...Util,
+    ...Terminal,
     // 图专用函数
     G,
     // 调试专用

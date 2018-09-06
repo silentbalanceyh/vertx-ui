@@ -38,8 +38,10 @@ class Component extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         Op.updateGrid(this, prevProps);
+        // 连接Monitor专用
+        Op.updateMonitor(this, prevState);
     }
 
     render() {

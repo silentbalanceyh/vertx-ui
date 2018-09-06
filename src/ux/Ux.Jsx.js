@@ -2,7 +2,7 @@ import React from 'react';
 import Norm from './Ux.Normalize'
 import Prop from './prop/Ux.Prop'
 import Value from './Ux.Value';
-import Log from './Ux.Log';
+import Log from './monitor/Mt.Logger';
 import E from './Ux.Error';
 import {Form} from 'antd'
 // UI专用渲染方法

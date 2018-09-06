@@ -82,13 +82,12 @@ const markdown = (reference, ...uris) => {
     return Promise.all(array).then(md => reference.setState({md}))
 };
 const prepareMarkdown = (reference, ...files) => {
-    const {md = [], $hoc} = reference.state;
-    const namespace = $hoc.namespace();
+    const {md = []} = reference.state;
     const $markdown = [];
     md.forEach((each, index) => {
         const item = {};
         item.key = Ux.randomUUID();
-        item.header = `${namespace}/${files[index]}`;
+        item.tab = `${files[index]}`;
         item.content = each;
         $markdown.push(item);
     });

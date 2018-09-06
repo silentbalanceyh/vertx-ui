@@ -1,5 +1,5 @@
-import Cv from './Ux.Constant';
-import Hoc from './prop/Ux.Hoc';
+import Cv from '../Ux.Constant';
+import Hoc from '../prop/Ux.Hoc';
 import U from 'underscore';
 
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
@@ -328,9 +328,8 @@ const debug = (object, original) => {
 };
 const connect = (id) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] Connect machine start..., target = ${id}`;
-        console.groupCollapsed(message, "color:#9cf;font-weight:900");
-        console.groupEnd();
+        let message = `%c -----> [Zero] Connect ..., id = ${id}`;
+        console.log(message, "color:#033;font-weight:900");
     }
 };
 /**

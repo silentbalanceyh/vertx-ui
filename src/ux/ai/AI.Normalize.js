@@ -3,7 +3,7 @@ import Ai from './AI.Input';
 import Calculator from './AI.Layout.Calculator';
 import Prop from '../prop/Ux.Prop';
 import Expr from './AI.Expr.String';
-import Log from '../Ux.Log';
+import Log from '../monitor/Mt.Logger';
 
 const _aiNormalizeEach = (ui = [], eachFun, eachItemFun = item => item) => {
     ui.forEach((row, rowIndex) => {

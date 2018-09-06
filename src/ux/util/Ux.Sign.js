@@ -1,7 +1,7 @@
 import Global from '../system/Ux.Global';
 import Expr from './Ux.Expr';
 import Encrypt from './Ux.Encrypt';
-import Log from '../Ux.Log';
+import Log from '../monitor/Mt.Logger';
 import E from '../Ux.Error';
 import U from 'underscore';
 

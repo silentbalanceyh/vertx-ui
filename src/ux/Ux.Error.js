@@ -1,5 +1,5 @@
 import U from 'underscore'
-import Terminal from './Ux.Terminal'
+import Terminal from './terminal/Ux.Terminal.Fx'
 import Cv from './Ux.Constant'
 
 const fnError = {

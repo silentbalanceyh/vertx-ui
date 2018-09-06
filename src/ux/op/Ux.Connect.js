@@ -1,7 +1,7 @@
 import Immutable from "immutable";
 import E from "../Ux.Error";
 import U from "underscore";
-import D from '../Ux.Log';
+import D from '../monitor/Mt.Logger';
 
 /**
  * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器

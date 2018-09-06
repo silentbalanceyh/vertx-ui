@@ -46,8 +46,6 @@ const rxAdd = (reference) => (event) => {
     const view = Init.stateView("add", undefined, reference);
     const tabs = stateAddTab(reference);
     const state = {tabs, ...view};
-    // Monitor监控：Tab切换时连接
-    Ux.D.connectTab(reference, state);
     reference.setState(state);
 };
 /**
@@ -87,8 +85,6 @@ const rxEdit = (reference, id) => {
             const tabs = stateEditTab($self, id, data);
             const view = Init.stateView("edit", id, reference);
             const state = {tabs, ...view, record};
-            // Monitor监控：Tab切换时连接
-            Ux.D.connectTab(reference, state);
             $self.setState(state);
             const {rxEditPost} = reference.props;
             if (rxEditPost) {
@@ -114,8 +110,6 @@ const rxDeleteDetail = (reference, id) => {
         tabs.activeKey = tabs.items[0].key;
         const view = Init.stateView("list", undefined, reference);
         const state = {tabs, ...view, record};
-        // Monitor监控：Tab切换时连接
-        Ux.D.connectTab(reference, state);
         reference.setState(state);
         Ux.writeTree(reference, {
             "grid.list": undefined
@@ -142,8 +136,6 @@ const rxClose = (reference, activekey) => () => {
     // 计算view
     const view = Init.stateView("list", undefined, reference);
     const state = {tabs, ...view};
-    // Monitor监控：Tab切换时连接
-    Ux.D.connectTab(reference, state);
     reference.setState(state);
     // 写状态树，重新加载List
     Ux.writeTree(reference, {"grid.list": undefined})

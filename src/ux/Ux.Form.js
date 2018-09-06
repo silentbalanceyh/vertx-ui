@@ -1,6 +1,6 @@
 import Prop from './prop/Ux.Prop';
 import E from './Ux.Error';
-import Log from './Ux.Log';
+import Log from './monitor/Mt.Logger';
 import Normalize from './Ux.Normalize';
 import Ai from './ai/AI';
 import Jsx from './Ux.Jsx';
