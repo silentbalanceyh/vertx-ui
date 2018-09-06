@@ -81,6 +81,7 @@ class Component extends React.PureComponent {
                         <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>
                 </Layout>
+                {Ux.D.renderTool(this)}
             </Layout>
         )
     }

@@ -1,0 +1,42 @@
+@import "~antd/lib/style/themes/default.less";
+
+.zero-debug {
+    &-tool {
+        width: 100%;
+        position: fixed;
+        z-index: 100;
+        background-color: #fefefe;
+        padding: 2px;
+        bottom: 0;
+    }
+    &-button {
+        button {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+        button > i {
+            font-size: 18px;
+        }
+        .zbt-1 > i {
+            color: #c03
+        }
+        .zbt-2 > i {
+            color: #633
+        }
+        .zbt-3 > i {
+            color: #39c
+        }
+        .zbt-4 > i {
+            color: #f93
+        }
+        .zbt-5 > i {
+            color: #396
+        }
+        button:hover > i {
+            color: #3457e2;
+        }
+        button:disabled > i {
+            color: #b7b7b7;
+        }
+    }
+}

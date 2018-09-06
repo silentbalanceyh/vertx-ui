@@ -1,0 +1,19 @@
+{
+    "_drawer": {
+        "search": {
+            "title": "（ComplexList专用）查询条件"
+        },
+        "user": {
+            "title": "当前登录用户信息"
+        },
+        "cluster": {
+            "title": "（ComplexList专用）数据信息"
+        },
+        "api": {
+            "title": "动态连接点"
+        },
+        "bars": {
+            "title": "（DialogList专用）数据信息"
+        }
+    }
+}
