@@ -29,7 +29,8 @@ class Component extends React.PureComponent {
             return (
                 <Drawer {...drawerConfig} visible={kv.visible}
                         onClose={() => reference.setState(state)}
-                        height={480} placement={"bottom"}>
+                        height={480} placement={"bottom"}
+                        className={"zero-debug-drawer"}>
                     {Component ? (<Component {...this.props}/>) : false}
                 </Drawer>
             )
