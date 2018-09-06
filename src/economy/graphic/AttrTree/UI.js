@@ -3,8 +3,8 @@ import {v4} from 'uuid';
 import {Col, Row, Table} from 'antd';
 import {_zero} from "../../_internal";
 import Jsx from './UI.Jsx'
-import G from './UI.Graphic'
 import Op from "./UI.Parser";
+import Ux from 'ux';
 
 @_zero({
     "i18n.cab": require('./Cab.json'),
@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
         const {id = "g6Tree"} = this.props;
         const config = Op.parseConfig(this);
         if (id && config) {
-            G.drawGraphic(id, config);
+            Ux.G.drawTree(id, config);
         }
     }
 

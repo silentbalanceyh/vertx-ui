@@ -6,6 +6,7 @@ import ViewJson from './UI.Json';
 import ToolBar from './UI.Bar';
 // 抽屉
 import Setting from './drawer/UI.Setting';
+import Connect from './drawer/UI.Connect';
 
 const {zero} = Ux;
 
@@ -13,6 +14,7 @@ const {zero} = Ux;
     .cab("UI")
     .state({
         $drawer: false,
+        $connect: false,
     })
     .to()
 )
@@ -25,7 +27,10 @@ class Component extends React.PureComponent {
             $configuration = {},    // 属性配置
             // $tool = [], // 被禁用的工具栏
         } = this.props;
-        const {$drawer} = this.state;
+        const {
+            $drawer,
+            $connect
+        } = this.state;
         return (
             <PageCard reference={this}>
                 <ToolBar reference={this}/>
@@ -39,7 +44,8 @@ class Component extends React.PureComponent {
                         <ViewMarkdown key={"tabMarkdown"} $markdown={$markdown}/>,
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
-                <Setting $drawer={$drawer} reference={this}/>
+                <Setting $visible={$drawer} reference={this}/>
+                <Connect $visible={$connect} reference={this}/>
             </PageCard>
         )
     }

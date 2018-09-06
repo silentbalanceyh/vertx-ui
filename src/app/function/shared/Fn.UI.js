@@ -1,10 +1,24 @@
-import Ux from 'ux';
-import {Langue} from 'environment';
-import {Alert, Button} from "antd";
-import Op from "./App.Op";
-import UI from "../control/ExamplePanel/UI";
+import Ux from "ux";
+import {Drawer} from "antd";
 import React from "react";
+import UI from "../../control/ExamplePanel/UI";
 import Immutable from "immutable";
+import {Langue} from "environment";
+
+const drawer = (ref, key, children, additional = {}) => {
+    const {reference, $visible = false} = ref.props;
+    const drawer = Ux.fromHoc(ref, "drawer");
+    return (
+        <Drawer {...drawer} {...additional} onClose={() => {
+            const state = {};
+            state[key] = false;
+            reference.setState(state)
+        }} visible={$visible} height={500}
+                className={"web-drawer-panel"}>
+            {children}
+        </Drawer>
+    )
+};
 
 const _removed = Immutable.fromJS([
     "_button",
@@ -34,10 +48,24 @@ const prepareJson = (reference, ...files) => {
         Object.keys(data).filter(key => !_removed.contains(key))
             .forEach(key => content[key] = data[key]);
         each.content = content;
-        each.header = `${namespace}/${files[index]}.json`;
+        each.header = `cab/${Ux.Env['LANGUAGE']}/${namespace}/${files[index]}.json`;
         $source.push(each);
     });
     return $source;
+};
+
+const connect = (reference, file) => {
+    const {$hoc} = reference.state;
+    const namespace = $hoc.namespace();
+    const each = {};
+    each.key = Ux.randomUUID();
+    const data = _prepareJson(reference, file);
+    const content = {};
+    Object.keys(data).filter(key => !_removed.contains(key))
+        .forEach(key => content[key] = data[key]);
+    each.content = content;
+    each.header = `cab/${Ux.Env['LANGUAGE']}/${namespace}/${file}.json`;
+    return each;
 };
 
 const prepareTree = (reference, file) => {
@@ -48,7 +76,6 @@ const prepareTree = (reference, file) => {
         return config;
     }
 };
-
 const markdown = (reference, ...uris) => {
     const array = [];
     uris.forEach(uri => array.push(Ux.ajaxResource(uri)));
@@ -66,32 +93,6 @@ const prepareMarkdown = (reference, ...files) => {
         $markdown.push(item);
     });
     return $markdown;
-};
-
-const demoButtons = (reference, buttons = []) => {
-    return (
-        <span style={{
-            border: "dashed 1px #ddd",
-            display: "inline-block",
-            height: 48,
-            width: "100%",
-            padding: 6,
-            borderRadius: 10,
-            marginTop: 100
-        }}>
-            {buttons.map(button => (
-                <Button id={button.key} key={button.key} type={"dashed"} ghost
-                        onClick={Op.demoClick(reference, button.message)}
-                >{button.text}</Button>
-            ))}
-        </span>
-    )
-};
-const demoMessage = (reference) => {
-    const {message} = reference.state ? reference.state : {};
-    return message ? (
-        <Alert message={message} type={"success"}/>
-    ) : false
 };
 /**
  * 统一函数
@@ -123,47 +124,9 @@ const ui = (reference, tree, ...files) => (jsx) => {
         </UI>
     )
 };
-const inject = (reference, ...keys) => {
-    const {set = {}} = reference.state;
-    set.rxInject = injectOptFun.apply(this, [reference].concat(keys));
-    return set;
-};
-const injectOptFun = (reference, ...keys) => {
-    let options = [];
-    if (0 === keys.length) {
-        const attribute = Ux.fromHoc(reference, "attribute");
-        if (attribute.hoc && attribute.hoc.options) {
-            options = Object.keys(attribute.hoc.options);
-        }
-    } else {
-        options = keys;
-    }
-    const {set = {}} = reference.state;
-    return (data) => {
-        options.forEach(key => {
-            if (set.hasOwnProperty(key)) {
-                data[key] = set[key];
-            }
-        });
-        return data;
-    };
-};
-const injectSet = (reference) => (key) => {
-    const {set = {}} = reference.state;
-    if (set.hasOwnProperty(key)) {
-        return set[key];
-    } else {
-        return undefined;
-    }
-};
 export default {
-    markdown,
     ui,
-
-    inject,
-    injectSet,
-    injectOptFun,
-
-    demoMessage,
-    demoButtons
+    markdown,
+    drawer,
+    connect
 }

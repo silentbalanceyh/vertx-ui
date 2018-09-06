@@ -1,9 +1,9 @@
 import Page from './App.Page'
 import Op from './App.Op'
-import Extract from './App.Extract'
+import Shared from './shared'
 
 export default {
     ...Page,
     ...Op,
-    ...Extract
+    ...Shared
 }

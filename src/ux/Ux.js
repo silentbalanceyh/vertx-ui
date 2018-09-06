@@ -16,6 +16,7 @@ import CONTROL from './jt/Jt';
 import Uarr from "./structure/Ux.Uarr";
 import Uson from "./structure/Ux.Uson";
 import E from './Ux.Error';
+import G from './draw';
 
 import Util from './util';
 import Prop from './prop';
@@ -100,4 +101,6 @@ export default {
      * Icon：图标处理
      */
     ...Util,
+    // 图专用函数
+    G,
 };
