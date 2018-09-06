@@ -34,7 +34,10 @@ const onTabClick = (reference) => (key) => {
     // 右边按钮计算
     const item = tabs.items.filter(item => item.key === key)[0];
     const view = stateView(item.type, key, reference);
-    reference.setState({tabs, ...view});
+    const state = {tabs, ...view};
+    // Monitor监控：Tab切换时连接
+    Ux.D.connectTab(reference, state);
+    reference.setState(state);
 };
 
 const onEdit = (reference) => (key, action) => {

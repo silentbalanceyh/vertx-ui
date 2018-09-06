@@ -45,7 +45,10 @@ const rxAdd = (reference) => (event) => {
     event.preventDefault();
     const view = Init.stateView("add", undefined, reference);
     const tabs = stateAddTab(reference);
-    reference.setState({tabs, ...view});
+    const state = {tabs, ...view};
+    // Monitor监控：Tab切换时连接
+    Ux.D.connectTab(reference, state);
+    reference.setState(state);
 };
 /**
  * 二义性函数
@@ -83,7 +86,10 @@ const rxEdit = (reference, id) => {
             const record = rxRecord($self, id, data);
             const tabs = stateEditTab($self, id, data);
             const view = Init.stateView("edit", id, reference);
-            $self.setState({tabs, ...view, record});
+            const state = {tabs, ...view, record};
+            // Monitor监控：Tab切换时连接
+            Ux.D.connectTab(reference, state);
+            $self.setState(state);
             const {rxEditPost} = reference.props;
             if (rxEditPost) {
                 rxEditPost(data, id);
@@ -107,7 +113,10 @@ const rxDeleteDetail = (reference, id) => {
         tabs.items = tabs.items.filter(item => id !== item.key);
         tabs.activeKey = tabs.items[0].key;
         const view = Init.stateView("list", undefined, reference);
-        reference.setState({tabs, ...view, record});
+        const state = {tabs, ...view, record};
+        // Monitor监控：Tab切换时连接
+        Ux.D.connectTab(reference, state);
+        reference.setState(state);
         Ux.writeTree(reference, {
             "grid.list": undefined
         });// rxView函数的触发
@@ -132,7 +141,10 @@ const rxClose = (reference, activekey) => () => {
     tabs.activeKey = tabs.items[0].key;
     // 计算view
     const view = Init.stateView("list", undefined, reference);
-    reference.setState({tabs, ...view});
+    const state = {tabs, ...view};
+    // Monitor监控：Tab切换时连接
+    Ux.D.connectTab(reference, state);
+    reference.setState(state);
     // 写状态树，重新加载List
     Ux.writeTree(reference, {"grid.list": undefined})
 };
