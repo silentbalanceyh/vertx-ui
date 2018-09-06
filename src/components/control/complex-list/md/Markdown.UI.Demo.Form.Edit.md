@@ -15,7 +15,7 @@
 * `fnClose`：关闭Tab页专用函数（关闭当前Tab页）；
 * `fnMock`：MOck环境专用参数；
 
-### 代码
+### 2.代码
 
 ```javascript
     import React from 'react'
