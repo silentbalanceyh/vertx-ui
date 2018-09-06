@@ -1,5 +1,7 @@
 {
-    "presets": ["env"],
+    "presets": [
+        "env"
+    ],
     "plugins": [
         "transform-class-properties",
         "transform-decorators-legacy",
@@ -15,7 +17,9 @@
     ],
     "env": {
         "development": {
-            "presets": ["react-hmre"]
+            "presets": [
+                "react-hmre"
+            ]
         }
     }
 }

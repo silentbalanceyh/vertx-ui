@@ -326,6 +326,14 @@ const debug = (object, original) => {
         console.groupEnd();
     }
 };
+const connect = (id, args) => {
+    if (Cv.DEBUG) {
+        let message = `%c [Zero] Connect machine start..., target = ${id}`;
+        console.groupCollapsed(message, "color:#9cf;font-weight:900");
+        console.info(args.callee);
+        console.groupEnd();
+    }
+};
 /**
  * @class Log
  * @description 日志专用类，支持不同组件的彩色日志
@@ -346,5 +354,6 @@ export default {
     debug,
     filters,
     mock,
-    mocker
+    mocker,
+    connect,
 }

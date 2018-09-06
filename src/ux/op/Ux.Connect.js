@@ -1,6 +1,7 @@
 import Immutable from "immutable";
 import E from "../Ux.Error";
 import U from "underscore";
+import D from '../Ux.Log';
 
 /**
  * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器
@@ -17,14 +18,16 @@ const connectDialog = (dialog = {}) => {
         E.fxWarning(!U.isFunction(dialog.onOk), 10016, dialog.onOk);
     }
 };
+
 /**
  * 链接某个ID的元素
  * @param id
  */
-const connectId = (id) => {
+function connectId(id) {
     const ele = document.getElementById(id);
     E.fxWarning(!ele, 10015, id);
     if (ele) {
+        D.connect(id, arguments);
         ele.click();
     }
 };
