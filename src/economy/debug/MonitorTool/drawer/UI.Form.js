@@ -1,12 +1,21 @@
 import React from 'react'
 import {_zero} from "../../../_internal";
+import {DataLabor} from 'entity';
 import Ux from "ux";
 import {Table} from "antd";
 
 @_zero({
     "i18n.cab": require('../Cab.json'),
     "i18n.name": "UI.Pure",
-    "state": {}
+    state: {},
+    connect: {
+        s2p: state => DataLabor.createOut(state)
+            .rework({
+                "debug.active": ["form"]
+            })
+            .rinit(["form"])
+            .to(),
+    }
 })
 class Component extends React.PureComponent {
     componentDidMount() {
@@ -16,9 +25,9 @@ class Component extends React.PureComponent {
 
     render() {
         const {table = {}} = this.state;
-        if (table) {
-            const user = Ux.isLogged();
-            const data = Ux.D.datumPure(user);
+        const {$form} = this.props;
+        if (table && $form.is()) {
+            const data = Ux.D.datumPure($form._("record"));
             if (table.columns) {
                 Ux.D.renderColumn(table.columns);
             }

@@ -4,7 +4,8 @@
         "setting": "应用信息,zbt-6",
         "user": "用户信息,zbt-2",
         "filter": "查询条件,zbt-1",
-        "cluster": "主列表信息,zbt-3",
+        "cluster": "当前Tab页数据,zbt-3",
+        "form": "主Form数据,zbt-8",
         "api": "动态连接点,zbt-4",
         "bars": "子列表,zbt-5"
     }

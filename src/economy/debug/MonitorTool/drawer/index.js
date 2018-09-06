@@ -5,6 +5,7 @@ import Api from './UI.Api';
 import Bars from './UI.ListItem';
 import App from './UI.App';
 import Code from './UI.Env';
+import Form from './UI.Form';
 
 export default {
     "user": User,
@@ -14,4 +15,5 @@ export default {
     "api": Api,
     "bars": Bars,
     "code": Code,
+    "form": Form,
 }

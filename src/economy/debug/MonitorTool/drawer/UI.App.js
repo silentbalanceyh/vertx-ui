@@ -5,7 +5,7 @@ import {Table} from "antd";
 
 @_zero({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "UI.App",
+    "i18n.name": "UI.Pure",
     "state": {}
 })
 class Component extends React.PureComponent {

@@ -1,14 +1,32 @@
 import Ux from "ux";
 
 const connectMajor = (reference, data) => {
-    if (Ux.Env.NODE_ENV === "development") {
+    if (Ux.Env.MONITOR) {
         const state = {};
+        /**
+         * 读取当前的view处理
+         */
+        state.key = data.tabs.activeKey;
         state.view = data.view;
-        if (data.key) state.key = data.key;
-        console.info(reference.state);
+        state.id = data.key;
+        /**
+         * Tab页专用
+         */
+        const item = Ux.elementUnique(data.tabs.items, "key", state.key);
+        if (item) {
+            state.text = item.tab;
+            state.index = item.index;
+        }
+        /**
+         * 记录专用
+         */
+        const {record} = reference.state;
+        if (record) {
+            state.record = record[state.key];
+        }
         Ux.writeTree(reference, {
-            "debug.active": state
-        })
+            "debug.active.form": state,
+        });
     }
 };
 export default {

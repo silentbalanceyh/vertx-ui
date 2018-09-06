@@ -130,9 +130,12 @@ const updateGrid = (reference = {}, prevProps = {}) => {
 };
 const updateMonitor = (reference, prevState = {}) => {
     const current = reference.state;
-    const previous = prevState.key;
-    if (current && current.key !== previous) {
-        console.info(current);
+    if (current.view !== prevState.view) {
+        // 如果view发生改变，则直接处理
+        Ux.D.connectMajor(reference, current);
+    } else if (current.key !== prevState.key) {
+        // 如果view不改变，只可能在edit中切换
+        Ux.D.connectMajor(reference, current);
     }
 };
 export default {

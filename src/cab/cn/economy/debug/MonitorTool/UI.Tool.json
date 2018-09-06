@@ -14,7 +14,12 @@
             "destroyOnClose": true
         },
         "cluster": {
-            "title": "（ComplexList专用）数据信息"
+            "title": "（ComplexList专用）当前Tab页数据",
+            "destroyOnClose": true
+        },
+        "form": {
+            "title": "（ComplexList专用）主Form数据",
+            "destroyOnClose": true
         },
         "api": {
             "title": "动态连接点"
