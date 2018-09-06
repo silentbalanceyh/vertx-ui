@@ -1,3 +1,5 @@
+import QElement from "./Mt.Parser.Element";
+
 const parsePager = (queryPager) => {
     if (!queryPager) return {};
     const pager = {};
@@ -51,17 +53,17 @@ const parseProjection = (queryProjection) => {
     if (!queryProjection) return {};
     const projection = {};
     projection.name = "projection";
-    projection.color = "#666";
+    projection.color = "#36c";
     projection.children = [];
 
     return projection;
 };
-const parseCriteria = (queryCriteria) => {
+const parseCriteria = (queryCriteria, counter = []) => {
     if (!queryCriteria) return {};
     const criteria = {};
     criteria.name = "criteria";
-    criteria.color = "#36c";
-    criteria.children = [];
+    criteria.color = "#333";
+    criteria.children = QElement.toChildren(queryCriteria, counter);
     // 判断是AND还是OR
     return criteria;
 };

@@ -26,8 +26,9 @@ class Component extends React.PureComponent {
     render() {
         const {table = {}} = this.state;
         const {$form} = this.props;
-        if (table && $form.is()) {
-            const data = Ux.D.datumPure($form._("record"));
+        if (table) {
+            const data = $form.is() ?
+                Ux.D.datumPure($form._("record")) : Ux.D.datumPure();
             if (table.columns) {
                 Ux.D.renderColumn(table.columns);
             }

@@ -39,13 +39,16 @@ const drawTree = (id, config) => {
             return config.layout.vgap;
         },
     });
-    const tree = new G6.Tree({
+    const attrs = {
         id,
-        height: config.layout.height, // 画布高
-        layout: layout,
+        layout,
         animate: true,
-        fitView: 'cc' // 自动缩放
-    });
+        fitView: 'cc'
+    };
+    if (config.layout.height) {
+        attrs.height = config.layout.height;
+    }
+    const tree = new G6.Tree(attrs);
     tree.node({
         shape: 'treeNode',
         size: 16

@@ -1,36 +1,7 @@
-import Ux from 'ux';
 import QPaser from './Mt.Parser.Query';
+import QElement from './Mt.Parser.Element';
+import System from './Mt.Parser.System';
 
-const datumEnv = (reference) => {
-    const envs = Ux.Env;
-    const comment = Ux.fromHoc(reference, "comment");
-    const data = [];
-    Ux.itObject(comment, (field, value) => {
-        const array = value.split(',');
-        const item = {};
-        item.key = field;
-        item.original = array[0];
-        item.current = field;
-        item.value = envs[field];
-        item.type = typeof item.value;
-        item.support = array[2] ? array[2] : "--";
-        item.comment = array[1];
-        data.push(item);
-    });
-    return data.sort((left, right) => Ux.sorterAsc(left, right, 'current'));
-};
-const datumPure = (object = {}) => {
-    const data = [];
-    Ux.itObject(object, (field, value) => {
-        const item = {};
-        item.key = field;
-        item.current = field;
-        item.value = value;
-        item.type = typeof value;
-        data.push(item);
-    });
-    return data;
-};
 const datumQuery = (reference) => {
     const {$query, $router} = reference.props;
     const vector = {};
@@ -38,6 +9,7 @@ const datumQuery = (reference) => {
     vector.name = $router.path();
     vector.color = "#666";
     vector.children = [];
+    const counter = [true];
     if ($query.is()) {
         const query = $query.to();
         if (query.pager) {
@@ -53,21 +25,36 @@ const datumQuery = (reference) => {
             vector.children.push(projection);
         }
         if (query.criteria) {
-            const criteria = QPaser.parseCriteria(query.criteria);
+            const criteria = QPaser.parseCriteria(query.criteria, counter);
             vector.children.push(criteria);
         }
     }
     return {
         items: vector,
         layout: {
-            height: 380,
+            height: 380 + counter.length * 40,
             hgap: 120,
             vgap: 10
         }
     };
 };
+const datumTree = (object = {}) => {
+    const vector = {};
+    vector.name = "[Object] Root";
+    vector.color = "#666";
+    const counter = [true];
+    vector.children = QElement.toChildren(object, counter);
+    return {
+        items: vector,
+        layout: {
+            height: counter.length * 40,
+            hgap: 100,
+            vgap: 10
+        }
+    };
+};
 export default {
-    datumEnv,
-    datumPure,
-    datumQuery
+    ...System,
+    datumQuery,
+    datumTree
 }

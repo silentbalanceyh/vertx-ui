@@ -5,7 +5,7 @@ import Ux from 'ux';
 
 @_zero({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "UI.App",
+    "i18n.name": "UI.Pure",
     state: {},
     connect: {
         s2p: state => DataLabor.createOut(state)
