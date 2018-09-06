@@ -8,6 +8,10 @@
     },
     "_tabs": {
         "defaultActiveKey": "tabEffect",
+        "tabBarExtraContent": [
+            "btnSetting,配置,$opSetting,,setting,tabEffect"
+        ],
+        "activeState": "$_tabIndex",
         "items": [
             "效果图,tabEffect",
             "配置信息,tabConfig",

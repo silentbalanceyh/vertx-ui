@@ -1,12 +1,12 @@
 import React from 'react'
 import Ux from 'ux'
 import {AttrTree, PageCard} from 'web';
+import {Button} from 'antd';
 import ViewMarkdown from './UI.Markdown';
 import ViewJson from './UI.Json';
 // 抽屉
 import Setting from './drawer/UI.Setting';
-import Connect from './drawer/UI.Connect';
-import ToolBar from './UI.Bar';
+import Op from './Op'
 
 const {zero} = Ux;
 
@@ -15,6 +15,7 @@ const {zero} = Ux;
     .state({
         $drawer: false,
         $connect: false,
+        $_tabIndex: "tabEffect"
     })
     .to()
 )
@@ -28,13 +29,12 @@ class Component extends React.PureComponent {
             // $tool = [], // 被禁用的工具栏
         } = this.props;
         const {
-            $drawer,
-            $connect
+            $drawer
         } = this.state;
         return (
             <PageCard reference={this}>
-                <ToolBar reference={this}/>
                 {Ux.auiTab(this)
+                    .mount("onChange", ($_tabIndex) => this.setState({$_tabIndex}))
                     .mount("type", "card")
                     .to(
                         <div className={"demo-window"}>
@@ -45,7 +45,7 @@ class Component extends React.PureComponent {
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
                 <Setting $visible={$drawer} reference={this}/>
-                <Connect $visible={$connect} reference={this}/>
+                <Button id={"$opSetting"} onClick={Op.Tool.setting(this)}/>
             </PageCard>
         )
     }
