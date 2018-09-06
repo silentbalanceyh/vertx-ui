@@ -1,9 +1,6 @@
 {
     "_page": {
         "title": "示例",
-        "left": [
-            "btnSetting,改变配置,$opSetting,danger"
-        ],
         "back": {
             "state": {
             }
@@ -18,8 +15,10 @@
             "属性表,tabAttribute"
         ]
     },
-    "_drawer": {
-        "placement": "bottom",
-        "maskClosable": false
+    "_toolbar": {
+        "setting": "修改配置,web-button-1",
+        "thunderbolt": "Connect机制,web-button-4",
+        "cluster": "状态树,web-button-2",
+        "search": "查询条件,web-button-3"
     }
 }

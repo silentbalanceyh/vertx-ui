@@ -109,9 +109,11 @@ const ui = (reference, tree, ...files) => (jsx) => {
     // 3.构造面板
     const $markdown = prepareMarkdown.apply(this, [reference].concat(jsFiles));
     const $source = prepareJson.apply(this, [reference].concat(jsonFiles));
+    // 4.工具栏禁用
+    const $tool = Ux.fromHoc(reference, "disabled");
     const attrs = {
         $configuration,
-        $markdown, $source,
+        $markdown, $source, $tool,
         reference
     };
     return (
@@ -146,10 +148,20 @@ const injectOptFun = (reference, ...keys) => {
         return data;
     };
 };
+const injectSet = (reference) => (key) => {
+    const {set = {}} = reference.state;
+    if (set.hasOwnProperty(key)) {
+        return set[key];
+    } else {
+        return undefined;
+    }
+};
 export default {
     markdown,
     ui,
+
     inject,
+    injectSet,
     injectOptFun,
 
     demoMessage,

@@ -75,13 +75,12 @@ const mockfnRecord = (reference = {}, isUpdate = false) => (updated = {}) => {
 };
 const mockVector = (ref) => {
     const state = Ux.clone(ref.state);
-    const {rxInject, parent} = ref.props;
-    if (rxInject) {
-        const {set = {}} = parent.state;
-        // 列表页专用
-        if (set.hasOwnProperty("tabs.list")) {
+    const {rxSet} = ref.props;
+    if (rxSet) {
+        const data = rxSet("tabs.list");
+        if (data) {
             // 这里必须包含state.tabs.items元素，且最小长度为1
-            state.tabs.items[0].tab = set['tabs.list'];
+            state.tabs.items[0].tab = data;
         }
     }
     return state;

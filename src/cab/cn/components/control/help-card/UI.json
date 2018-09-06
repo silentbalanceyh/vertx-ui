@@ -26,5 +26,9 @@
             "$current": "右上帮助第几步？（索引值，从0开始）",
             "title": "HelpCard左边的主标题文字"
         }
-    }
+    },
+    "_disabled": [
+        "search",
+        "cluster"
+    ]
 }

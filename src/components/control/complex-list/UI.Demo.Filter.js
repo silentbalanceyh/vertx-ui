@@ -6,9 +6,8 @@ const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo.Filter")
-    .state({
-        $op: Op
-    })
+    .bind(Op)
+    .raft(1)
     .form().to()
 )
 class Component extends React.PureComponent {

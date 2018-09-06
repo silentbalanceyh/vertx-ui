@@ -32,7 +32,8 @@ const renderHelp = (reference, topbar, current) => {
     if (topbar.help && topbar.help.steps) {
         const helps = Ux.aiExprHelp(topbar.help.steps);
         // 当前步骤
-        const $current = current ? current : topbar.help.current;
+        let $current = current ? current : topbar.help.current;
+        $current = Ux.valueInt($current);
         return (
             <Steps current={$current} size={topbar.help.size ? topbar.help.size : "small"}>
                 {helps.map(help => <Steps.Step {...help}/>)}

@@ -38,5 +38,9 @@
             "$backVisible": "是否显示回退按钮？",
             "title": "PageCard左边的主标题文字"
         }
-    }
+    },
+    "_disabled": [
+        "search",
+        "cluster"
+    ]
 }

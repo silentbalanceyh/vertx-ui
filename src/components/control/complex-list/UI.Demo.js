@@ -16,11 +16,9 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
 
     render() {
-        const {reference, ...rest} = this.props;
         return (
             <HelpCard reference={this}>
-                <ComplexList {...rest}
-                             parent={reference}
+                <ComplexList {...this.props}
                              reference={this}
                              $mockData={Mock.fnDeptList}
                              $formFilter={Filter}

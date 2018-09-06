@@ -95,7 +95,7 @@ const ai2RaftButton = (Op, {id, event = []}) => (cell, reference) => {
 const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
 const ai2FilterButton = (window = 1) => {
     return {
-        $button: (reference) => {
+        $button: (cell, reference) => {
             const button = Prop.fromHoc(reference, "button");
             return (1 / 3 === window) ? Layout.aiColumns([7, 14],
                 undefined,
