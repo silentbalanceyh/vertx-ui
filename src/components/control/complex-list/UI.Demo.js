@@ -16,7 +16,6 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
 
     render() {
-        console.info(this.props);
         return (
             <HelpCard reference={this}>
                 <ComplexList {...this.props}

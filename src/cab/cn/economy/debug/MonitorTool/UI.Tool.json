@@ -22,7 +22,7 @@
             "destroyOnClose": true
         },
         "api": {
-            "title": "动态连接点"
+            "title": "连接点收集器"
         },
         "bars": {
             "title": "（DialogList专用）数据信息"
