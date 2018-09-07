@@ -12,7 +12,7 @@
 
 #### 1.3.ComplexList传入（Function）
 
-* `fnClose`：关闭Tab页专用函数（关闭当前Tab页）；
+* `fnClose`：【无参数】关闭Tab页专用函数（关闭当前Tab页）；
 * `fnMock`：Mock环境专用参数；
 
 ### 2.代码

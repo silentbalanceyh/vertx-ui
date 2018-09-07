@@ -14,9 +14,10 @@
 
 #### 1.3.ComplexList传入（Function）
 
-* `fnClose`：关闭Tab页专用函数（关闭当前Tab页）
-* `fnQueryDefault`：读取默认的Query过滤参数
+* `fnClose`：【无参数】关闭Tab页专用函数（关闭当前Tab页）
+* `fnQueryDefault`：【无参数】读取默认的Query过滤参数
 * `fnTerm`：设置基础设置中的输入框中的数据（清除按钮专用）
+    * term：传入的值，该值将会更新基础搜索框中的搜索文字。
 
 ### 2.例子
 
