@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from "ux";
-import {Fn, Mock, Tps} from 'app';
+import {Mock, Tps} from 'app';
 import {ComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';

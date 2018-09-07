@@ -10,7 +10,7 @@
 
 * `$cond`：（Array）数组类型，当前Filter专用的条件原始数据；
 * `$inited`：（Object）Zero规范中Form专用的初始化数据；
-* `$page`：原来计算布局修正值专用，当前Drawer抽屉组件的宽度；
+* `$page`：计算布局修正值专用，当前Drawer抽屉组件的宽度；
 
 #### 1.3.ComplexList传入（Function）
 
