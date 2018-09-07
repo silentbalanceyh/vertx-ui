@@ -18,5 +18,13 @@
         },
         "props": {
         }
+    },
+    "_diagram": {
+        "items": {
+            "nodes": [
+            ],
+            "edges": [
+            ]
+        }
     }
 }

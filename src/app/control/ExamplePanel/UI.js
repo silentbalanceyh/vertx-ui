@@ -7,6 +7,7 @@ import ViewJson from './UI.Json';
 // 抽屉
 import Setting from './drawer/UI.Setting';
 import Op from './Op'
+import DataFlow from "./UI.DataFlow";
 
 const {zero} = Ux;
 
@@ -29,6 +30,9 @@ class Component extends React.PureComponent {
             $diagram = {}, // 数据流结构图
             // $tool = [], // 被禁用的工具栏
         } = this.props;
+        // 说明信息
+        const graphicData = Ux.clone($diagram);
+        const tableSub = Ux.fromHoc(this, "table");
         const {
             $drawer
         } = this.state;
@@ -43,9 +47,12 @@ class Component extends React.PureComponent {
                         </div>,
                         <ViewJson key={"tabJson"} $source={$source}/>,
                         <ViewMarkdown key={"tabMarkdown"}
-                                      $diagram={$diagram}
                                       $markdown={$markdown}/>,
-                        <AttrTree $configuration={$configuration} $name={$configuration.code}/>
+                        <AttrTree $configuration={$configuration} $name={$configuration.code}/>,
+                        <DataFlow key={Ux.randomUUID()}
+                                  $source={graphicData}
+                                  $table={tableSub}
+                                  $current={$markdown.map(item => item.tab).filter(file => file.startsWith("UI"))}/>
                     )}
                 <Setting $visible={$drawer} reference={this}/>
                 <Button id={"$opSetting"} className={"ux-hidden"} onClick={Op.Tool.setting(this)}/>

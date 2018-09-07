@@ -2,17 +2,26 @@ import React from 'react'
 import './Cab.less'
 import Ux from 'ux';
 import {Table, Tag} from 'antd';
+import Immutable from 'immutable';
 
-const analyzeItems = (source = {}) => {
+const analyzeItems = (source = {}, current = []) => {
     const nodes = [];
+    const $current = Immutable.fromJS(current);
     source.nodes.filter(item => "string" === typeof item)
         .forEach(item => {
             const itemArr = item.split(',');
             const node = {};
             node.id = itemArr[0];
-            node.name = itemArr[1];
-            if (itemArr[2]) node.color = itemArr[2];
-            if (itemArr[3]) node.width = Ux.valueInt(itemArr[3]);
+            node.name = itemArr[1] ? itemArr[1] : node.id;
+            if (itemArr[2]) {
+                node.color = itemArr[2];
+            } else {
+                node.color = "#cdcdcd";
+            }
+            // 对比处理
+            if ($current.contains(node.name)) {
+                node.color = "#f66";
+            }
             nodes.push(node);
         });
     const edges = [];
@@ -24,6 +33,18 @@ const analyzeItems = (source = {}) => {
             node.target = fromTo[1];
             edges.push(node);
         });
+    {
+        edges.forEach(item => {
+            let found = nodes.filter(each => each.id === item.source);
+            if (0 === found.length) {
+                console.info(item.source);
+            }
+            found = nodes.filter(each => each.id === item.target);
+            if (0 === found.length) {
+                console.info(item.target);
+            }
+        })
+    }
     return {nodes, edges}
 };
 
@@ -45,8 +66,8 @@ const renderColumn = (columns = []) => {
 class Component extends React.PureComponent {
     componentDidMount() {
         // 挂载过后再绘制，保证g6Tree存在
-        const {$source = {}} = this.props;
-        $source.items = analyzeItems($source.items);
+        const {$source = {}, $current = []} = this.props;
+        $source.items = analyzeItems($source.items, $current);
         Ux.G.drawFlow("g6WorkFlow", $source);
     }
 
@@ -55,9 +76,13 @@ class Component extends React.PureComponent {
         $table.data.forEach(item => item.key = Ux.randomUUID());
         const {data = [], ...rest} = $table;
         renderColumn(rest.columns);
-        return Ux.aiGrid([3, 21],
+        const attrs = {
+            pagination: false,
+            bordered: true
+        };
+        return Ux.aiGrid([2, 22],
             <Table className={"web-flow-table"}
-                   {...rest} dataSource={data} pagination={false} bordered={true}/>,
+                   {...rest} dataSource={data} {...attrs}/>,
             <div id={"g6WorkFlow"}/>
         )
     }

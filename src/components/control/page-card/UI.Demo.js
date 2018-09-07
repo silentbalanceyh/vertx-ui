@@ -12,10 +12,6 @@ class Component extends React.PureComponent {
 
     render() {
         const {children, $status = {}} = this.props;
-        console.info(this.props, this.state, {
-            reference: this,
-            ...$status
-        });
         return (
             <PageCard reference={this} {...$status}>
                 {children}

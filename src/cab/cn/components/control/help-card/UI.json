@@ -27,8 +27,67 @@
             "title": "HelpCard左边的主标题文字"
         }
     },
-    "_disabled": [
-        "search",
-        "cluster"
-    ]
+    "_diagram": {
+        "items": {
+            "nodes": [
+                "parent,UI.js,#9cf",
+                "status,$status",
+                "reference,reference",
+                "children,children",
+                "redux,Redux,#ccf",
+                "fnOut,fnOut( ),#cfc",
+                "resource,UI.Demo.json,#ccf",
+                "hoc,$hoc",
+                "_page,_page",
+                "title,title",
+                "left,left",
+                "help,help",
+                "back,back",
+                "props,props",
+                "state,state",
+                "current,UI.Demo.js,#ddd",
+                "_reference,reference",
+                "_rxInject,rxInject( data ),#cfc",
+                "_component,HelpCard,#9cf",
+                "_header,Header",
+                "_title,Title",
+                "_left,Left",
+                "_help,Help",
+                "_back,Back",
+                "_body,Body"
+            ],
+            "edges": [
+                "parent,status",
+                "parent,reference",
+                "parent,children",
+                "redux,fnOut",
+                "reference,props",
+                "children,props",
+                "fnOut,props",
+                "status,props",
+                "resource,hoc",
+                "hoc,_page",
+                "_page,title",
+                "_page,left",
+                "_page,help",
+                "_page,back",
+                "title,state",
+                "left,state",
+                "help,state",
+                "back,state",
+                "props,current",
+                "state,current",
+                "current,_reference",
+                "current,_rxInject",
+                "_reference,_component",
+                "_rxInject,_component",
+                "_component,_body",
+                "_component,_header",
+                "_header,_title",
+                "_header,_left",
+                "_header,_help",
+                "_header,_back"
+            ]
+        }
+    }
 }

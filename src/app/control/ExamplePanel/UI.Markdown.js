@@ -2,7 +2,6 @@ import React from 'react'
 import {Tabs} from "antd";
 import {MarkdownViewer} from 'web';
 import Ux from 'ux';
-import DataFlow from './UI.DataFlow';
 
 const {zero} = Ux;
 
@@ -12,8 +11,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        const {$markdown = [], $diagram = {}} = this.props;
-        const table = Ux.fromHoc(this, "table");
+        const {$markdown = []} = this.props;
         if (0 < $markdown.length) {
             const key = $markdown[0].key;
             return (
@@ -21,13 +19,11 @@ class Component extends React.PureComponent {
                       defaultActiveKey={key} size={"small"}>
                     {$markdown.map(markdown => {
                         const {content, ...rest} = markdown;
-                        const graphicData = $diagram[rest.tab];
                         return (
                             <Tabs.TabPane {...rest}>
                                 {Ux.auiTab(this)
                                     .to(
-                                        <MarkdownViewer $source={content}/>,
-                                        <DataFlow $source={graphicData} $table={table}/>
+                                        <MarkdownViewer $source={content}/>
                                     )}
                             </Tabs.TabPane>
                         )

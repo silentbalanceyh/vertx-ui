@@ -39,48 +39,67 @@
             "title": "PageCard左边的主标题文字"
         }
     },
-    "_disabled": [
-        "search",
-        "cluster"
-    ],
     "_diagram": {
-        "UI.Demo.js": {
-            "items": {
-                "nodes": [
-                    "parent,UI.js,#9cf",
-                    "status,$status,#ccc",
-                    "reference,reference,#ccc",
-                    "children,children,#ccc",
-                    "redux,Redux状态树,#ccf",
-                    "fnOut,fnOut,#9cc",
-                    "resource,UI.Demo.json,#ccf",
-                    "hoc,$hoc,#ccc",
-                    "props,UI.Demo.js - props,#fcc",
-                    "state,UI.Demo.js - state,#fcc",
-                    "current,UI.Demo.js,#fcc",
-                    "_reference,this,#ccc",
-                    "_rxInject,rxInject,#9cc",
-                    "_component,PageCard,#9cf"
-                ],
-                "edges": [
-                    "parent,status",
-                    "parent,reference",
-                    "parent,children",
-                    "redux,fnOut",
-                    "reference,props",
-                    "children,props",
-                    "fnOut,props",
-                    "status,props",
-                    "resource,hoc",
-                    "hoc,state",
-                    "props,current",
-                    "state,current",
-                    "current,_reference",
-                    "current,_rxInject",
-                    "_reference,_component",
-                    "_rxInject,_component"
-                ]
-            }
+        "items": {
+            "nodes": [
+                "parent,UI.js,#9cf",
+                "status,$status",
+                "reference,reference",
+                "children,children",
+                "redux,Redux,#ccf",
+                "fnOut,fnOut( ),#cfc",
+                "resource,UI.Demo.json,#ccf",
+                "hoc,$hoc",
+                "_page,_page",
+                "title,title",
+                "left,left",
+                "right,right",
+                "back,back",
+                "props,props",
+                "state,state",
+                "current,UI.Demo.js",
+                "_reference,reference",
+                "_rxInject,rxInject( data ),#cfc",
+                "_component,PageCard,#9cf",
+                "_header,Header",
+                "_title,Title",
+                "_left,Left",
+                "_right,Right",
+                "_back,Back",
+                "_body,Body"
+            ],
+            "edges": [
+                "parent,status",
+                "parent,reference",
+                "parent,children",
+                "redux,fnOut",
+                "reference,props",
+                "children,props",
+                "fnOut,props",
+                "status,props",
+                "resource,hoc",
+                "hoc,_page",
+                "_page,title",
+                "_page,left",
+                "_page,right",
+                "_page,back",
+                "title,state",
+                "left,state",
+                "right,state",
+                "back,state",
+                "props,current",
+                "state,current",
+                "current,_reference",
+                "current,_rxInject",
+                "_reference,_component",
+                "_rxInject,_component",
+                "_component,_body",
+                "_component,_header",
+                "_header,_title",
+                "_header,_left",
+                "_header,_right",
+                "_header,_back"
+            ]
         }
     }
 }
