@@ -22,6 +22,12 @@ const _initTablePager = (reference = {}) => {
 };
 
 const _initChange = (reference = {}) => (pagination, filter, sorter) => {
+    // 变更之前如果是Mock环境则需要清掉Mock中的ready
+    const {mock, mocker} = reference.state;
+    if (mock && mocker) {
+        // 将Mocker清空，只是在Mock环境下保留Loading效果而已
+        reference.setState({mocker: undefined});
+    }
     // 分页
     const query = Init.readQuery(reference);
     query.pager.page = pagination.current;

@@ -7,11 +7,7 @@ const fnLogout = (reference, key = "") => {
         // 路由处理
         Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN);
         // 清楚State上的数据
-        Ux.writeTree(reference, {
-            "datum.hotel": undefined,
-            "datum.menus": undefined,
-            "user": undefined
-        })
+        Ux.eraseTree(reference, ["user"]);
     }, "window", key);
 };
 

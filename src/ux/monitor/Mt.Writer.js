@@ -60,8 +60,14 @@ const earsePointer = () => {
         Ux.Session.remove(key);
     }
 };
+const connectDialog = (reference, data) => {
+    if (Ux.Env.MONITOR) {
+
+    }
+};
 export default {
     connectMajor,
+    connectDialog,
     writePointer,
     earsePointer
 }

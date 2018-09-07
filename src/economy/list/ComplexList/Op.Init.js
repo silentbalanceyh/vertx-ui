@@ -122,10 +122,13 @@ const updateGrid = (reference = {}, prevProps = {}) => {
             }
             // initList(reference, config.query);
         } else {
+            // 初始化Mock
             Mock.mockInit(reference, record);
         }
     } else {
         initGrid(reference);
+        // 初始化Mock
+        Mock.mockInit(reference, {});
     }
 };
 const updateMonitor = (reference, prevState = {}) => {

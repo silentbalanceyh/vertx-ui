@@ -23,6 +23,13 @@ class Mock {
         return this;
     }
 
+    prepare() {
+        if (this.source) {
+            this.source.ready = false;
+        }
+        return true;
+    }
+
     filter($query = {}) {
         this.source.list = Ai.aiCriteria(this.data.list).query($query);
         this.source.count = this.source.list.length;
