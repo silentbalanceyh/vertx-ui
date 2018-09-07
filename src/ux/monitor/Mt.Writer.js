@@ -51,6 +51,18 @@ const writePointer = (item = {}, id) => {
             // 存储到当前Session中
             Ux.Session.put(key, data);
         }
+        // 窗口专用
+        if (item.onOk) {
+            // 窗口连接
+            const single = {};
+            single.id = "Dialog:" + item.title;
+            single.key = "Dialog:" + item.title;
+            single.text = item.okText;
+            single.to = id;
+            data[single.key] = single;
+            // 存储到当前Session中
+            Ux.Session.put(key, data);
+        }
     }
 };
 const earsePointer = () => {
@@ -60,14 +72,14 @@ const earsePointer = () => {
         Ux.Session.remove(key);
     }
 };
-const connectDialog = (reference, data) => {
+const connectSubmit = (reference, data) => {
     if (Ux.Env.MONITOR) {
-
+        console.info(reference, data);
     }
 };
 export default {
     connectMajor,
-    connectDialog,
+    connectSubmit,
     writePointer,
     earsePointer
 }

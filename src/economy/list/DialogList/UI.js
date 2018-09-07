@@ -37,11 +37,6 @@ class Component extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps, prevState) {
-        // 连接Monitor专用
-        Op.updateMonitor(this, prevState);
-    }
-
     render() {
         const {error} = this.state;
         if (error) {
