@@ -1,7 +1,7 @@
 import Immutable from "immutable";
 import E from "../Ux.Error";
 import U from "underscore";
-import D from '../monitor/Mt.Logger';
+import M from '../monitor';
 
 /**
  * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器
@@ -12,6 +12,8 @@ const connectDialog = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
         const key = Immutable.fromJS(dialog).toJS();
+        // Monitor连接部分代码
+        M.writePointer(dialog, key.onOk);
         dialog.onOk = () => connectId(key.onOk);
     } else {
         // 防重复注入
@@ -27,7 +29,7 @@ function connectId(id) {
     const ele = document.getElementById(id);
     E.fxWarning(!ele, 10015, id);
     if (ele) {
-        D.connect(id);
+        M.Logger.connect(id);
         ele.click();
     }
 };

@@ -2,6 +2,7 @@ import React from 'react'
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from "ux";
+import EmptyContent from '../UI.Empty';
 
 @_zero({
     "i18n.cab": require('../Cab.json'),
@@ -26,7 +27,13 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return (<div id={"g6Form"}/>)
+        const {$form} = this.props;
+        if ($form.is()) {
+            return (<div id={"g6Form"}/>)
+        } else {
+            return (<EmptyContent/>)
+        }
+
     }
 }
 

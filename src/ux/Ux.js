@@ -8,7 +8,6 @@ import COLUMN from "./Ux.Column";
 import DIALOG from "./Ux.Dialog";
 import VALUE from "./Ux.Value";
 import AI from './ai/AI';
-import CHART from './Ux.Chart';
 import FORM from './Ux.Form';
 import CONTROL from './jt/Jt';
 import E from './Ux.Error';
@@ -28,8 +27,6 @@ export default {
     ...CONTROL,
     // 优化Form处理
     ...FORM,
-    // 图表专用
-    ...CHART,
     // 列处理
     ...COLUMN,
     // 环境变量

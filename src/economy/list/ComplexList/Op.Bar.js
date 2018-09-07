@@ -115,13 +115,17 @@ const renderDrawer = (reference) => {
     } else return false;
 };
 
-const renderButton = (reference, reset = false) => (event) => {
-    event.preventDefault();
+const renderButton = (reference, item = {}, reset = false) => {
     const options = Init.readOption(reference);
     const {key, view} = reference.state;
     const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
     const connectId = `${prefix}${key ? key : ""}`;
-    Ux.connectId(connectId);
+    // Monitor专用连接器
+    Ux.D.writePointer(item, connectId);
+    return (event) => {
+        event.preventDefault();
+        Ux.connectId(connectId);
+    }
 };
 
 const renderSubmit = (reference) => {
@@ -135,19 +139,21 @@ const renderSubmit = (reference) => {
     // 编辑按钮
     const editAttrs = {};
     editAttrs.icon = "save";
-    editAttrs.onClick = renderButton(reference);
     if (options["op.connect.edit"]) {
         editAttrs.className = "ux-hidden";
         editAttrs.id = options["op.connect.edit"];
+        editAttrs.key = options["op.connect.edit"];
     }
+    editAttrs.onClick = renderButton(reference, editAttrs);
     // 重置按钮
     const resetAttrs = {};
     resetAttrs.icon = "reload";
-    resetAttrs.onClick = renderButton(reference, true);
     if (options["op.connect.reset"]) {
         resetAttrs.className = "ux-hidden";
         resetAttrs.id = options["op.connect.reset"];
+        resetAttrs.key = options["op.connect.reset"];
     }
+    resetAttrs.onClick = renderButton(reference, resetAttrs, true);
     return "list" !== view ? (
         <Button.Group>
             <Button {...editAttrs}/>

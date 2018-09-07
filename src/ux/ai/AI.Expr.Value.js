@@ -4,6 +4,7 @@ import Parser from "./AI.Expr.Parser";
 import Op from "../op";
 import Immutable from "immutable";
 import Type from "../Ux.Type";
+import M from '../monitor';
 
 const applyArray = (literal) => U.isArray(literal) ? literal : literal.replace(/ /g, '').split(',');
 const applyKey = (item = {}) => {
@@ -45,6 +46,7 @@ const applyValue = (item = {}) => {
 const applyConnect = (item = {}) => {
     if (item.hasOwnProperty("connectId")) {
         const connectId = item.connectId;
+        M.writePointer(item, connectId);
         item.onClick = () => Op.connectId(connectId);
         delete item.connectId;
     }
