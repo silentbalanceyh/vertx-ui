@@ -1,22 +1,22 @@
 {
-    "_page": {
-        "title": "二级弹窗List（不支持服务端分页）"
-    },
-    "_tabs": {
-        "defaultActiveKey": "keyPreview",
-        "items": [
+    "_demo": {
+        "buttons": [
             {
-                "key": "keyPreview",
-                "tab": "效果图"
+                "key": "$opSave",
+                "text": "按钮保存",
+                "message": "您点击了保存按钮"
             },
             {
-                "key": "keyDesc",
-                "tab": "属性信息"
+                "key": "$opReset",
+                "text": "按钮重置",
+                "message": "您点击了重置按钮"
             }
         ]
     },
-    "_subjson": {
-        "config": "配置：:title",
-        "source": "源代码：:file"
+    "_attribute": {
+        "hoc": {
+        },
+        "props": {
+        }
     }
 }

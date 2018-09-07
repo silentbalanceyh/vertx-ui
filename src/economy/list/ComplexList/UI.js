@@ -38,8 +38,10 @@ class Component extends React.PureComponent {
         }
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         Op.updateGrid(this, prevProps);
+        // 连接Monitor专用
+        Op.updateMonitor(this, prevState);
     }
 
     render() {
@@ -47,7 +49,8 @@ class Component extends React.PureComponent {
         if (error) {
             return Ux.fxError(error)
         } else {
-            const {items = [], ...rest} = this.state.tabs;
+            const $state = Op.mockVector(this);
+            const {items = [], ...rest} = $state.tabs;
             return (
                 <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
                     {items.map(item => {

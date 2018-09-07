@@ -22,7 +22,7 @@ const stateView = (view, key, reference) => {
     view = view ? view : "list";
     const {rxViewSwitch} = reference.props;
     if (U.isFunction(rxViewSwitch)) {
-        rxViewSwitch(view);
+        rxViewSwitch(view, key);
     }
     return {view, key};
 };
@@ -34,7 +34,8 @@ const onTabClick = (reference) => (key) => {
     // 右边按钮计算
     const item = tabs.items.filter(item => item.key === key)[0];
     const view = stateView(item.type, key, reference);
-    reference.setState({tabs, ...view});
+    const state = {tabs, ...view};
+    reference.setState(state);
 };
 
 const onEdit = (reference) => (key, action) => {
@@ -94,7 +95,15 @@ const initGrid = (reference = {}) => {
     Mock.mockCheck(reference, config.options, state);
     reference.setState(state);
 };
-const readOption = (reference) => readConfig(reference).options;
+const readOption = (reference) => {
+    let options = readConfig(reference).options;
+    const {rxInject} = reference.props;
+    if (rxInject) {
+        return rxInject(options);
+    } else {
+        return options;
+    }
+};
 const readTable = (reference) => readConfig(reference).table;
 const readQuery = (reference) => {
     const queryConfig = readConfig(reference).query;
@@ -113,15 +122,29 @@ const updateGrid = (reference = {}, prevProps = {}) => {
             }
             // initList(reference, config.query);
         } else {
+            // 初始化Mock
             Mock.mockInit(reference, record);
         }
     } else {
         initGrid(reference);
+        // 初始化Mock
+        Mock.mockInit(reference, {});
+    }
+};
+const updateMonitor = (reference, prevState = {}) => {
+    const current = reference.state;
+    if (current.view !== prevState.view) {
+        // 如果view发生改变，则直接处理
+        Ux.D.connectMajor(reference, current);
+    } else if (current.key !== prevState.key) {
+        // 如果view不改变，只可能在edit中切换
+        Ux.D.connectMajor(reference, current);
     }
 };
 export default {
     initGrid,
     updateGrid,
+    updateMonitor,
     stateView,
     readOption,
     readTable,

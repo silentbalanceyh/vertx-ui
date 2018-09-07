@@ -47,24 +47,22 @@ const renderSearch = (reference) => {
     const advanced = options['search.advanced'];
     return enabled ? (
         <Row>
-            <Col span={advanced ? 18 : 24}>
+            <Col span={18}>
                 <Input.Search placeholder={options['search.placeholder'] ?
                     options['search.placeholder'] : ""}
                               onSearch={Act.rxFilter(reference)}
                               value={term}
                               onChange={Act.rxInput(reference)}/>
             </Col>
-            {advanced ? (
-                <Col span={5} offset={1}>
-                    <Button.Group>
-                        <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
-                        <Button icon={"ellipsis"} onClick={() => {
-                            // 判断是否已经在快速搜索中输入了数据
-                            reference.setState({drawer: true})
-                        }}/>
-                    </Button.Group>
-                </Col>
-            ) : false}
+            <Col span={5} offset={1}>
+                <Button.Group>
+                    <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
+                    {advanced ? (<Button icon={"ellipsis"} onClick={() => {
+                        // 判断是否已经在快速搜索中输入了数据
+                        reference.setState({drawer: true})
+                    }}/>) : false}
+                </Button.Group>
+            </Col>
         </Row>
     ) : false
 };
@@ -117,13 +115,18 @@ const renderDrawer = (reference) => {
     } else return false;
 };
 
-const renderButton = (reference, reset = false) => (event) => {
-    event.preventDefault();
-    const options = Init.readOption(reference);
-    const {key, view} = reference.state;
-    const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
-    const connectId = `${prefix}${key ? key : ""}`;
-    Ux.connectId(connectId);
+const renderButton = (reference, item = {}, reset = false) => {
+    return (event) => {
+        // 动态连接专用
+        event.preventDefault();
+        const options = Init.readOption(reference);
+        const {key, view} = reference.state;
+        const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
+        const connectId = `${prefix}${key ? key : ""}`;
+        // Monitor专用连接器
+        Ux.D.writePointer(item, connectId);
+        Ux.connectId(connectId);
+    }
 };
 
 const renderSubmit = (reference) => {
@@ -137,24 +140,34 @@ const renderSubmit = (reference) => {
     // 编辑按钮
     const editAttrs = {};
     editAttrs.icon = "save";
-    editAttrs.onClick = renderButton(reference);
     if (options["op.connect.edit"]) {
+        // 当前按钮被连接
         editAttrs.className = "ux-hidden";
         editAttrs.id = options["op.connect.edit"];
+        editAttrs.key = options["op.connect.edit"];
+    } else {
+        // 设置连接点
+        editAttrs.key = "_dynamic_Save"
     }
+    editAttrs.onClick = renderButton(reference, editAttrs);
     // 重置按钮
     const resetAttrs = {};
     resetAttrs.icon = "reload";
-    resetAttrs.onClick = renderButton(reference, true);
     if (options["op.connect.reset"]) {
+        // 当前按钮被连接
         resetAttrs.className = "ux-hidden";
         resetAttrs.id = options["op.connect.reset"];
+        resetAttrs.key = options["op.connect.reset"];
+    } else {
+        // 设置连接点
+        editAttrs.key = "_dynamic_Reset"
     }
+    resetAttrs.onClick = renderButton(reference, resetAttrs, true);
     return "list" !== view ? (
         <Button.Group>
             <Button {...editAttrs}/>
             {("edit" === view && opDeleted) ? (
-                <Popconfirm title={options['delete.confirm']}
+                <Popconfirm title={options['confirm.delete']}
                             onConfirm={() => Act.rxDeleteDetail(reference, key)}>
                     <Button icon={"delete"} type={"danger"}/>
                 </Popconfirm>

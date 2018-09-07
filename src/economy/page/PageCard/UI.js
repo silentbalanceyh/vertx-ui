@@ -2,7 +2,6 @@ import React from 'react'
 import './Cab.less'
 import {Card} from 'antd';
 import Ux from 'ux';
-import Immutable from 'immutable';
 import {DataLabor} from 'entity';
 import PropTypes from 'prop-types';
 import Op from './UI.Op';
@@ -35,44 +34,48 @@ import {_zero} from "../../_internal";
 class Component extends React.PureComponent {
     static propTypes = {
         $key: PropTypes.string,
-        $card: PropTypes.string
+        $card: PropTypes.string,
+        $leftVisible: PropTypes.bool,
+        $rightVisible: PropTypes.bool,
+        $backVisible: PropTypes.bool
     };
+
+    componentDidMount() {
+        Op.initComponent(this);
+    }
 
     render() {
         const {
-            children, reference, $card = 'page-card',
-            $key = "page", $extra,
+            children, reference, $card = 'page-card', $extra,
             $leftVisible = true, $rightVisible = true,
             $backVisible = true,
+            // Inject专用函数，用于执行属性变幻
+            rxInject = $config => $config
         } = this.props;
-        // 左边按钮
-        let topbar = Ux.fromHoc(reference, $key);
-        // ZeroError：检查点
-        // if (!topbar) return Ux.fxRender(reference, $key);
-        topbar = Immutable.fromJS(topbar ? topbar : {}).toJS();
-        // 解析按钮
-        if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, this.props);
-        if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, this.props);
-        const title = (
-            <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
-                {$leftVisible ? Op.renderButton(reference, topbar) : false}
+        const topbar = rxInject(this.state.$config);
+        if (topbar) {
+            // 左边按钮
+            const title = (
+                <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
+                    {$leftVisible ? Op.renderButton(reference, topbar) : false}
                 </span>
-        );
-        // 右边关闭按钮
-        let extraContent = $extra ? $extra : (
-            <span>
-                {topbar.right && $rightVisible ? Op.renderButton(reference, topbar, 'right') : false}
-                &nbsp;&nbsp;
-                {topbar.back && $backVisible ? Op.renderBack(reference, topbar) : false}
-            </span>
-        );
-        return (
-            <Card className={$card} bordered={false}
-                  title={title}
-                  extra={extraContent}>
-                {children}
-            </Card>
-        )
+            );
+            // 右边关闭按钮
+            let extraContent = $extra ? $extra : (
+                <span>
+                    {topbar.right && $rightVisible ? Op.renderButton(reference, topbar, 'right') : false}
+                    &nbsp;&nbsp;
+                    {topbar.back && $backVisible ? Op.renderBack(reference, topbar) : false}
+                </span>
+            );
+            return (
+                <Card className={$card} bordered={false}
+                      title={title}
+                      extra={extraContent}>
+                    {children}
+                </Card>
+            )
+        } else return false;
     }
 }
 

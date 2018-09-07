@@ -23,6 +23,10 @@
                 {
                     "color": "#1464b4",
                     "text": "动态属性"
+                },
+                {
+                    "color": "#0099CC",
+                    "text": "配置节点"
                 }
             ]
         },
@@ -39,6 +43,11 @@
                     "color": "#ff8626",
                     "text": "hoc属性",
                     "icon": "fork"
+                },
+                {
+                    "color": "#9c3",
+                    "text": "event事件",
+                    "icon": "thunderbolt"
                 },
                 {
                     "color": "#C71585",
@@ -114,6 +123,13 @@
                 "style": {
                     "fontSize": "18px",
                     "color": "#C71585"
+                }
+            },
+            "E": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": "18px",
+                    "color": "#9c3"
                 }
             }
         }

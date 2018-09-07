@@ -5,9 +5,10 @@ import "./Cab.less";
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
+    // 添加的时候activeKey就应该只有一个，就是item.key
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, undefined)}
+            <Component fnClose={Op.rxClose(reference, item.key)}
                        fnMock={Op.mockfnRecord(reference)}
                        {...reference.props}/>
         </Tabs.TabPane>
@@ -25,9 +26,17 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
     const $inited = record[activeKey] ? record[activeKey] : {};
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, activeKey)}
-                       fnMock={Op.mockfnRecord(reference, true)}
-                       $inited={$inited} {...reference.props}/>
+            {/**
+             * 非常影响性能的一行代码，主要用于检查当前界面是否渲染，
+             * 由于编辑界面有多个，只会出现一个激活界面，所以只有在
+             * 渲染界面的key和activeKey相等的时候才执行该渲染
+             * 这样不论打开多少个窗口，都不会引起问题
+             **/}
+            {item.key === activeKey ? (
+                <Component fnClose={Op.rxClose(reference, activeKey)}
+                           fnMock={Op.mockfnRecord(reference, true)}
+                           $inited={$inited} {...reference.props}/>
+            ) : false}
         </Tabs.TabPane>
     ) : false
 };

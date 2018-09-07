@@ -1,0 +1,25 @@
+{
+    "_page": {
+        "title": "示例",
+        "back": {
+            "state": {
+            }
+        }
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabEffect",
+        "tabBarExtraContent": [
+            "btnSetting,配置,$opSetting,,setting,tabEffect"
+        ],
+        "activeState": "$_tabIndex",
+        "items": [
+            "效果图,tabEffect",
+            "配置信息,tabConfig",
+            "源代码,tabSource",
+            "属性表,tabAttribute"
+        ]
+    },
+    "_toolbar": {
+        "setting": "修改配置,web-button-1"
+    }
+}

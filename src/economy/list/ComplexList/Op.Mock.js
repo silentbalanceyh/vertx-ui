@@ -28,7 +28,9 @@ const mockConnect = (reference, data) => {
     const {$query} = reference.props;
     if (mock && mocker) {
         // 当mock打开的时候调用mocker中的过滤数据
-        return mocker.filter($query.is() ? $query.to() : {}).to();
+        const mockData = mocker.filter($query.is() ? $query.to() : {}).to();
+        // 专用ready处理Loading效果
+        return mockData;
     } else {
         return data;
     }
@@ -41,6 +43,7 @@ const mockConnect = (reference, data) => {
 const mockDetail = (reference, id) => {
     const mockData = {};
     const {mock, mocker} = reference.state;
+    // TODO: Mock环境在两个ComplexList之间切换时有Bug
     if (mock && mocker) {
         mockData.mock = true;
         mockData.data = mocker.get(id);
@@ -73,11 +76,24 @@ const mockfnRecord = (reference = {}, isUpdate = false) => (updated = {}) => {
     }
     return {}
 };
+const mockVector = (ref) => {
+    const state = Ux.clone(ref.state);
+    const {rxSet} = ref.props;
+    if (rxSet) {
+        const data = rxSet("tabs.list");
+        if (data) {
+            // 这里必须包含state.tabs.items元素，且最小长度为1
+            state.tabs.items[0].tab = data;
+        }
+    }
+    return state;
+};
 export default {
     mockCheck,
     mockInit,
     mockConnect,
     mockDetail,
     mockDelete,
-    mockfnRecord
+    mockfnRecord,
+    mockVector,
 }

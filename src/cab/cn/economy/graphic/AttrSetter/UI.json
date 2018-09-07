@@ -1,0 +1,76 @@
+{
+    "_page": {
+        "title": "属性调整器"
+    },
+    "_header": {
+        "left": "Prop直接属性",
+        "middle": "Hoc高阶属性"
+    },
+    "_vector": {
+        "icon": {
+            "BOOLEAN": "switcher",
+            "INTEGER": "edit",
+            "TEXT": "font-size",
+            "PERCENT": "form"
+        },
+        "text": {
+            "BOOLEAN": "布尔值",
+            "INTEGER": "整数",
+            "TEXT": "字符串",
+            "PERCENT": "百分比"
+        }
+    },
+    "_table": {
+        "left": {
+            "columns": [
+                {
+                    "title": "数据类型",
+                    "dataIndex": "icon",
+                    "className": "web-setter-first"
+                },
+                {
+                    "title": "属性名",
+                    "dataIndex": "field",
+                    "className": "web-setter-col"
+                },
+                {
+                    "title": "注释",
+                    "dataIndex": "comment"
+                },
+                {
+                    "title": "操作",
+                    "dataIndex": "op",
+                    "className": "web-setter-last"
+                }
+            ]
+        },
+        "middle": {
+            "columns": [
+                {
+                    "title": "数据类型",
+                    "dataIndex": "icon",
+                    "className": "web-setter-first"
+                },
+                {
+                    "title": "属性节点",
+                    "dataIndex": "field",
+                    "className": "web-setter-col"
+                },
+                {
+                    "title": "选项节点",
+                    "dataIndex": "option",
+                    "className": "web-setter-option"
+                },
+                {
+                    "title": "注释",
+                    "dataIndex": "comment"
+                },
+                {
+                    "title": "操作",
+                    "dataIndex": "op",
+                    "className": "web-setter-last"
+                }
+            ]
+        }
+    }
+}

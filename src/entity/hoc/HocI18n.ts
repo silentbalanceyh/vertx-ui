@@ -10,10 +10,12 @@ class HocI18n implements HocContainer {
     private lg: any = {};
     private props: any = {};
     private resourcePath: String = "";
+    private ns: String = "";
 
-    constructor(name: String, hoc: Object) {
+    constructor(namespace, name: String, hoc: Object) {
         this.lg = Langue(name);
         this.hoc = hoc;
+        this.ns = namespace;
         this.ready = true;
         this.resourcePath = `cab/${Ux.Env.LANGUAGE}/${name}`;
     }
@@ -24,6 +26,10 @@ class HocI18n implements HocContainer {
 
     name() {
         return this.resourcePath;
+    }
+
+    namespace() {
+        return this.ns;
     }
 
     mergeVector(path, key, value) {

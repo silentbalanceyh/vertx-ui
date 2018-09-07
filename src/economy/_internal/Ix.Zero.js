@@ -28,7 +28,8 @@ const _ixI18n = (target, options = {}) => {
     let i18n;
     const fullName = _ixI18nName(target, options);
     if (fullName) {
-        i18n = new HocI18n(fullName, {});
+        const cab = options["i18n.cab"];
+        i18n = new HocI18n(cab.ns, fullName, {});
     }
     return i18n;
 };

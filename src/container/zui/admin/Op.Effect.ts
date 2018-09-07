@@ -32,7 +32,9 @@ const fnLocation = (reference: any = {}, prevProps: any = {}) => {
     const $prevRouter = prevProps.$router;
     if ($router.path() !== $prevRouter.path()) {
         // 不相等时清一次数据节点
-        Ux.writeTree(reference, {"datum.data": undefined});
+        Ux.eraseTree(reference, []);
+        // 切换页面清除连接点
+        Ux.D.earsePointer();
     }
 };
 

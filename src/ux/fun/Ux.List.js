@@ -1,7 +1,7 @@
 import Value from '../Ux.Value';
 import Immutable from 'immutable';
 import U from 'underscore';
-import Prop from '../prop/Ux.Prop';
+import Prop from '../prop';
 import Ux from 'ux';
 
 const irPager = (hoc = {}) => {

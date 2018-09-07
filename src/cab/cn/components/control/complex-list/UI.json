@@ -1,22 +1,46 @@
 {
-    "_page": {
-        "title": "ComplexList组件 - 标准用法"
-    },
-    "_tabs": {
-        "defaultActiveKey": "keyPreview",
-        "items": [
+    "_demo": {
+        "buttons": [
             {
-                "key": "keyPreview",
-                "tab": "效果图"
+                "key": "$opSave",
+                "text": "按钮保存",
+                "message": "您点击了保存按钮"
             },
             {
-                "key": "keyDesc",
-                "tab": "属性信息"
+                "key": "$opReset",
+                "text": "按钮重置",
+                "message": "您点击了重置按钮"
             }
         ]
     },
-    "_subjson": {
-        "config": "配置：:title",
-        "source": "源代码：:file"
+    "_attribute": {
+        "hoc": {
+            "options": {
+                "search.enabled": "BOOLEAN",
+                "search.placeholder": "TEXT",
+                "search.advanced": "BOOLEAN",
+                "search.advanced.width": "PERCENT",
+                "search.advanced.title": "TEXT",
+                "op.add": "TEXT",
+                "tabs.list": "TEXT",
+                "tabs.add": "TEXT",
+                "tabs.edit": "TEXT",
+                "op.edit.delete": "BOOLEAN",
+                "confirm.delete": "TEXT"
+            }
+        },
+        "comment": {
+            "op.add": "添加按钮上的文字。（为空，不包含则隐藏）",
+            "search.enabled": "是否启用搜索功能？",
+            "search.placeholder": "基本搜索输入框水印文字。",
+            "search.advanced": "是否启用高级搜索功能？",
+            "search.advanced.width": "高级搜索框的宽度。",
+            "search.advanced.title": "高级搜索框的标题文字。",
+            "tabs.list": "主列表Tab页文字标题。",
+            "tabs.add": "添加Tab页文字标题。",
+            "tabs.edit": "编辑Tab页文字标题（支持表达式）。",
+            "op.edit.delete": "是否启用Edit编辑页的删除功能？",
+            "confirm.delete": "Edit编辑页中删除时Confirm对话框文字？"
+        }
     }
 }

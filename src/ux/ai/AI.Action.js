@@ -46,6 +46,7 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
             } else {
                 fnSuccess(params);
             }
+            Ux.D.connectSubmit(reference, params);
         }
     });
 });
@@ -90,19 +91,26 @@ const aiOp = (reference) => (Op) => Object.keys(Op)
 const ai2RaftButton = (Op, {id, event = []}) => (cell, reference) => {
     const $event = Immutable.fromJS(event);
     const submit = Object.keys(Op).filter(key => !$event.contains(key));
-    return aiFormButton(reference, Op, id, submit);
+    const ref = Value.fix(cell, reference);
+    return aiFormButton(ref, Op, id, submit);
 };
-const ai2FormButton = (Op, id = false) => ({$button: (reference) => aiFormButton(reference, Op, id)});
+const ai2FormButton = (Op, id = false) => ({
+    $button: (cell, reference) => {
+        const ref = Value.fix(cell, reference);
+        return aiFormButton(ref, Op, id);
+    }
+});
 const ai2FilterButton = (window = 1) => {
     return {
-        $button: (reference) => {
-            const button = Prop.fromHoc(reference, "button");
-            return (1 / 3 === window) ? Layout.aiColumns([7, 14],
+        $button: (cell, reference) => {
+            const ref = Value.fix(cell, reference);
+            const button = Prop.fromHoc(ref, "button");
+            return (1 / 3 === window) ? Layout.aiColumns([5, 14],
                 undefined,
-                <Button.Group>
+                <Button.Group className={"web-button"}>
                     <Button type={"primary"} icon={"search"}
-                            onClick={() => Ux.irFilter(reference)}>{button.search}</Button>
-                    <Button icon={"reload"} onClick={Ux.irClear(reference)}>{button.clear}</Button>
+                            onClick={() => Ux.irFilter(ref)}>{button.search}</Button>
+                    <Button icon={"reload"} onClick={Ux.irClear(ref)}>{button.clear}</Button>
                 </Button.Group>
             ) : false
         }

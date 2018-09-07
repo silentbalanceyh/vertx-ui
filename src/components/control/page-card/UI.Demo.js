@@ -1,6 +1,5 @@
 import React from 'react'
 import Ux from "ux";
-import {Fn} from 'app';
 import {PageCard} from 'web';
 
 const {zero} = Ux;
@@ -10,19 +9,18 @@ const {zero} = Ux;
     .to()
 )
 class Component extends React.PureComponent {
-    componentDidMount() {
-        Fn.demoMarkdown(this, require("./UI.Desc.md"))
-    }
 
     render() {
-        const demo = Ux.fromHoc(this, "demo");
-        const {source = ""} = this.state ? this.state : {};
-        return Fn.demoComponent(this,
-            <PageCard reference={this}>
-                {Fn.demoMessage(this)}
-                {Fn.demoButtons(this, demo.buttons)}
+        const {children, $status = {}} = this.props;
+        console.info(this.props, this.state, {
+            reference: this,
+            ...$status
+        });
+        return (
+            <PageCard reference={this} {...$status}>
+                {children}
             </PageCard>
-            , source)
+        )
     }
 }
 

@@ -1,0 +1,94 @@
+@import "~antd/lib/style/themes/default.less";
+
+.zero-debug {
+    &-tool {
+        width: 100%;
+        position: fixed;
+        z-index: 1100;
+        background-color: #fefefe;
+        padding: 2px;
+        bottom: 0;
+    }
+    &-error {
+        width: 100%;
+        background-color: #fdf1f0;
+        border: solid 1px #f2a7a1;
+        border-radius: 3px;
+        padding: 10px;
+        ul li {
+            list-style: none;
+            line-height: 32px;
+        }
+        ul li:first-child {
+            font-size: 16px;
+            font-weight: 700;
+            color: red;
+        }
+    }
+    &-drawer {
+        .ant-drawer-body {
+            height: 400px !important;
+            overflow-y: auto;
+            padding: 3px !important;
+            table {
+                th {
+                    padding: 6px 16px !important;
+                }
+                td {
+                    padding: 6px 16px !important;
+                }
+            }
+            .ant-table-empty {
+                .ant-table-placeholder {
+                    padding: 6px 16px !important;
+                }
+            }
+            .column-input {
+                color: #c33;
+            }
+            .column-name {
+                color: #333;
+                font-weight: 700;
+            }
+        }
+    }
+    &-button {
+        button {
+            padding-top: 2px;
+            padding-bottom: 2px;
+        }
+        button > i {
+            font-size: 18px;
+        }
+        .zbt-1 > i {
+            color: #c03
+        }
+        .zbt-2 > i {
+            color: #633
+        }
+        .zbt-3 > i {
+            color: #333
+        }
+        .zbt-4 > i {
+            color: #39c
+        }
+        .zbt-5 > i {
+            color: #f93
+        }
+        .zbt-6 > i {
+            color: #396
+        }
+        .zbt-7 > i {
+            color: #93c
+        }
+        .zbt-8 > i {
+            color: #333
+        }
+        button:hover > i {
+            color: #3457e2;
+        }
+        button:disabled > i {
+            color: #b7b7b7;
+        }
+    }
+}

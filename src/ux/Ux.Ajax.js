@@ -1,4 +1,4 @@
-import Log from "./Ux.Log";
+import Log from "./monitor/Mt.Logger";
 import Cv from "./Ux.Constant";
 import Expr from "./util/Ux.Expr";
 import Sign from "./util/Ux.Sign";

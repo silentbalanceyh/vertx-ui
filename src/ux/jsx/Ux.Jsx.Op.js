@@ -27,7 +27,7 @@ const _rtSubmit = (reference = {}, callback = {}) => {
                         // Promise Async
                         executor.then(() => {
                             if (U.isFunction(reference.isUnmount) && !reference.isUnmount()) {
-                                _rtState(reference, false);
+                                _rtState(reference, false, params);
                             }
                         }).catch(_rtError(reference, callback.failure));
                     } else {
@@ -80,9 +80,12 @@ const _rtError = (reference = {}, failure) => (errors = {}) => {
     }
 };
 
-const _rtState = (reference, loading = true) => {
+const _rtState = (reference, loading = true, params) => {
     reference.setState({$loading: loading});
     Ux.rdxSubmitting(reference, loading);
+    if (params) {
+        Ux.D.connectSubmit(reference, params);
+    }
 };
 
 const _rxClick = (reference, item = {}) => {

@@ -1,5 +1,5 @@
 import Prop from '../prop/Ux.Prop';
-import Log from '../Ux.Log';
+import Log from '../monitor/Mt.Logger';
 import Ai from '../ai/AI';
 import Immutable from 'immutable';
 import {v4} from 'uuid';
@@ -21,6 +21,13 @@ class Mock {
         this.source = $list;
         this.data = Immutable.fromJS($list).toJS();
         return this;
+    }
+
+    prepare() {
+        if (this.source) {
+            this.source.ready = false;
+        }
+        return true;
     }
 
     filter($query = {}) {

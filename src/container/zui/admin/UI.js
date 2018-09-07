@@ -19,16 +19,17 @@ const buildNavs = (reference = {}) => {
         0 < $router.path().indexOf(menu.uri));
     current = (current[0]) ? current[0].key : undefined;
     // 构造导航栏
-    const navigator = Ux.elementBranch($menus.to(), current, "parentId");
-    const $nav = [];
+    let navigator = Ux.elementBranch($menus.to(), current, "parentId");
+    let $nav = [];
     $nav.push(Ux.fromHoc(reference, "nav"));
     if (navigator) {
+        navigator = navigator.sort((left, right) => left.level - right.level);
         navigator.forEach(item => $nav.push({
             key: item.name,
             text: item.text,
             // 必须添加"/"前缀，否则会生成错误路由
             uri: (item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined
-        }))
+        }));
     }
     return $nav;
 };
@@ -73,13 +74,14 @@ class Component extends React.PureComponent {
                     <GlobalHeader fnCollapse={$op.collapse(this)}
                                   {...Ux.toEffect(this.state)}
                                   {...Ux.toProp(this.props, 'router', 'user')} />
-                    <Content className={"rx-content"}>
+                    <Content>
                         <div className={"page-header"}>
                             <PagerHeader {...Ux.toProp(this.props, 'router')} $navs={buildNavs(this)}/>
                         </div>
                         <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>
                 </Layout>
+                {Ux.D.renderTool(this)}
             </Layout>
         )
     }

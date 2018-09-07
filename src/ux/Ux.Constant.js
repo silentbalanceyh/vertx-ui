@@ -25,12 +25,14 @@ export default {
     KEY_APP: `${process.env.K_SESSION}SESSION/APP/${process.env.APP.toUpperCase()}`,
     // Redux专用
     KEY_EVENT: process.env.K_EVENT,
+    KEY_POINTER: `${process.env.K_SESSION}SESSION/POINTER`,
     ENTRY_LOGIN: `/${process.env.ROUTE}${process.env.ENTRY_LOGIN}`,
     ENTRY_ADMIN: `/${process.env.ROUTE}${process.env.ENTRY_ADMIN}`,
     DEBUG: prepareDevEnv("DEV_DEBUG"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_DEBUG),
     MOCK: prepareDevEnv("DEV_MOCK"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
     RENDER: prepareDevEnv("DEV_FORM"),
     DEBUG_AJAX: prepareDevEnv("DEV_MOCK", "DEV_AJAX"), // Boolean("development" === process.env.NODE_ENV && "true" === process.env.DEV_MOCK),
+    MONITOR: prepareDevEnv("DEV_MONITOR"),
     SIGN: prepareDevEnv("SIGN"),
     HTTP_METHOD: {
         GET: "get",

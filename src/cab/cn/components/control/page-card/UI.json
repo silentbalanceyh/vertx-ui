@@ -1,22 +1,86 @@
 {
-    "_page": {
-        "title": "PageCard组件"
-    },
-    "_tabs": {
-        "defaultActiveKey": "keyPreview",
-        "items": [
+    "_demo": {
+        "buttons": [
             {
-                "key": "keyPreview",
-                "tab": "效果图"
+                "key": "$opFirst",
+                "text": "按钮1",
+                "message": "您点击了【左边】的按钮1"
             },
             {
-                "key": "keyDesc",
-                "tab": "属性信息"
+                "key": "$opSecond",
+                "text": "按钮2",
+                "message": "您点击了【左边】的按钮2"
+            },
+            {
+                "key": "$opThird",
+                "text": "按钮3",
+                "message": "您点击了【右边】的'下载'按钮"
+            },
+            {
+                "key": "$opForth",
+                "text": "按钮4",
+                "message": "您点击了【右边】的'打印'按钮"
             }
         ]
     },
-    "_subjson": {
-        "config": "配置：:title",
-        "source": "源代码：:file"
+    "_attribute": {
+        "props": {
+            "$leftVisible": "BOOLEAN",
+            "$rightVisible": "BOOLEAN",
+            "$backVisible": "BOOLEAN"
+        },
+        "hoc": {
+            "title": "TEXT"
+        },
+        "comment": {
+            "$leftVisible": "是否显示左边按钮？",
+            "$rightVisible": "是否显示右边按钮？",
+            "$backVisible": "是否显示回退按钮？",
+            "title": "PageCard左边的主标题文字"
+        }
+    },
+    "_disabled": [
+        "search",
+        "cluster"
+    ],
+    "_diagram": {
+        "UI.Demo.js": {
+            "items": {
+                "nodes": [
+                    "parent,UI.js,#9cf",
+                    "status,$status,#ccc",
+                    "reference,reference,#ccc",
+                    "children,children,#ccc",
+                    "redux,Redux状态树,#ccf",
+                    "fnOut,fnOut,#9cc",
+                    "resource,UI.Demo.json,#ccf",
+                    "hoc,$hoc,#ccc",
+                    "props,UI.Demo.js - props,#fcc",
+                    "state,UI.Demo.js - state,#fcc",
+                    "current,UI.Demo.js,#fcc",
+                    "_reference,this,#ccc",
+                    "_rxInject,rxInject,#9cc",
+                    "_component,PageCard,#9cf"
+                ],
+                "edges": [
+                    "parent,status",
+                    "parent,reference",
+                    "parent,children",
+                    "redux,fnOut",
+                    "reference,props",
+                    "children,props",
+                    "fnOut,props",
+                    "status,props",
+                    "resource,hoc",
+                    "hoc,state",
+                    "props,current",
+                    "state,current",
+                    "current,_reference",
+                    "current,_rxInject",
+                    "_reference,_component",
+                    "_rxInject,_component"
+                ]
+            }
+        }
     }
 }
