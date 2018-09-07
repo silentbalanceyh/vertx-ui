@@ -69,7 +69,11 @@ const datumPointer = (uri = "") => {
             // 读取当前节点
             const item = {};
             item.name = dataItem.key;
-            item.color = "#36c";
+            if (item.name.startsWith("_dynamic_")) {
+                item.color = "#9c3";
+            } else {
+                item.color = "#36c";
+            }
             // 文字节点
             const itemText = {};
             itemText.color = "#9c9";

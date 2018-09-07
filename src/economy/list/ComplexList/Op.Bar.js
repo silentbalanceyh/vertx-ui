@@ -116,14 +116,15 @@ const renderDrawer = (reference) => {
 };
 
 const renderButton = (reference, item = {}, reset = false) => {
-    const options = Init.readOption(reference);
-    const {key, view} = reference.state;
-    const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
-    const connectId = `${prefix}${key ? key : ""}`;
-    // Monitor专用连接器
-    Ux.D.writePointer(item, connectId);
     return (event) => {
+        // 动态连接专用
         event.preventDefault();
+        const options = Init.readOption(reference);
+        const {key, view} = reference.state;
+        const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
+        const connectId = `${prefix}${key ? key : ""}`;
+        // Monitor专用连接器
+        Ux.D.writePointer(item, connectId);
         Ux.connectId(connectId);
     }
 };
@@ -140,18 +141,26 @@ const renderSubmit = (reference) => {
     const editAttrs = {};
     editAttrs.icon = "save";
     if (options["op.connect.edit"]) {
+        // 当前按钮被连接
         editAttrs.className = "ux-hidden";
         editAttrs.id = options["op.connect.edit"];
         editAttrs.key = options["op.connect.edit"];
+    } else {
+        // 设置连接点
+        editAttrs.key = "_dynamic_Save"
     }
     editAttrs.onClick = renderButton(reference, editAttrs);
     // 重置按钮
     const resetAttrs = {};
     resetAttrs.icon = "reload";
     if (options["op.connect.reset"]) {
+        // 当前按钮被连接
         resetAttrs.className = "ux-hidden";
         resetAttrs.id = options["op.connect.reset"];
         resetAttrs.key = options["op.connect.reset"];
+    } else {
+        // 设置连接点
+        editAttrs.key = "_dynamic_Reset"
     }
     resetAttrs.onClick = renderButton(reference, resetAttrs, true);
     return "list" !== view ? (
