@@ -30,7 +30,7 @@ const registry = () => {
     });
 };
 
-const drawTree = (id, config) => {
+const drawTree = (id, config, view = "autoZoom") => {
     const items = Immutable.fromJS(config.items).toJS();
     registry();
     const layout = new G6.Layouts.CompactBoxTree({
@@ -48,8 +48,8 @@ const drawTree = (id, config) => {
         id,
         layout,
         animate: true,
-        fitView: 'autoZoom',
-        fitViewPadding: 20,
+        fitView: view,
+        fitViewPadding: 40,
     };
     if (config.layout.height) {
         attrs.height = config.layout.height;

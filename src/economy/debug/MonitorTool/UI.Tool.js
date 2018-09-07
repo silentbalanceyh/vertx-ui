@@ -26,10 +26,11 @@ class Component extends React.PureComponent {
             const drawerConfig = drawer[kv.key] ? drawer[kv.key] : {};
             const state = {};
             state[`$${kv.key}`] = false;
+            state.show = false;
             return (
                 <Drawer {...drawerConfig} visible={kv.visible}
                         onClose={() => reference.setState(state)}
-                        height={480} placement={"bottom"}
+                        height={480} placement={"bottom"} zIndex={1200}
                         className={"zero-debug-drawer"}>
                     {Component ? (<Component {...this.props}/>) : false}
                 </Drawer>
