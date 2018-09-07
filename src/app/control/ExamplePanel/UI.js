@@ -45,7 +45,7 @@ class Component extends React.PureComponent {
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
                 <Setting $visible={$drawer} reference={this}/>
-                <Button id={"$opSetting"} onClick={Op.Tool.setting(this)}/>
+                <Button id={"$opSetting"} className={"ux-hidden"} onClick={Op.Tool.setting(this)}/>
             </PageCard>
         )
     }

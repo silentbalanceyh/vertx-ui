@@ -18,19 +18,13 @@ const {zero} = Ux;
         .to()
     )
     .cab("UI.Demo")
-    .connect({
-        rxSearch: Tps.fnDeptList
-    }, true)
+    .search(Tps.fnDeptList)
     .to()
 )
 class Component extends React.PureComponent {
-    componentDidMount() {
-        Fn.demoMarkdown(this, require("./UI.Desc.md"))
-    }
 
     render() {
-        const {source = ""} = this.state ? this.state : {};
-        return Fn.demoComponent(this,
+        return (
             <HelpCard reference={this}>
                 <ComplexList {...this.props}
                              reference={this}
@@ -40,7 +34,7 @@ class Component extends React.PureComponent {
                              $formAdd={FormAdd}
                              $formEdit={FormEdit}/>
             </HelpCard>
-            , source, require("./UI.Demo.json"))
+        )
     }
 }
 
