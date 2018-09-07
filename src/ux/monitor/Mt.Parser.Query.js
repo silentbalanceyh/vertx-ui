@@ -67,9 +67,43 @@ const parseCriteria = (queryCriteria, counter = []) => {
     // 判断是AND还是OR
     return criteria;
 };
+
+const datumQuery = (reference) => {
+    const {$query, $router} = reference.props;
+    const vector = {};
+    // 是否传入了pager
+    vector.name = $router.path();
+    vector.color = "#666";
+    vector.children = [];
+    const counter = [true];
+    if ($query.is()) {
+        const query = $query.to();
+        if (query.pager) {
+            const pager = parsePager(query.pager);
+            vector.children.push(pager);
+        }
+        if (query.sorter) {
+            const sorter = parseSorter(query.sorter);
+            vector.children.push(sorter);
+        }
+        if (query.projection) {
+            const projection = parseProjection(query.projection);
+            vector.children.push(projection);
+        }
+        if (query.criteria) {
+            const criteria = parseCriteria(query.criteria, counter);
+            vector.children.push(criteria);
+        }
+    }
+    return {
+        items: vector,
+        layout: {
+            height: 380 + counter.length * 40,
+            hgap: 120,
+            vgap: 10
+        }
+    };
+};
 export default {
-    parsePager,
-    parseSorter,
-    parseCriteria,
-    parseProjection
+    datumQuery
 }

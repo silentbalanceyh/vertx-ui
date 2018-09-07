@@ -39,7 +39,7 @@ const assign = (target = {}, source = {}, mode = 0) => {
             // 检查target中是否包含了field
             const targetValue = result[field];
             if (U.isObject(targetValue) && !moment.isMoment(targetValue) &&
-				U.isObject(value) && !moment.isMoment(value)) {
+                U.isObject(value) && !moment.isMoment(value)) {
                 // 当前节点为两个对象，统一方式合并，且mode也相同
                 result[field] = assign(targetValue, value, mode);
             } else {
@@ -80,6 +80,16 @@ const vector = (item = {}, config = {}) => {
     });
     return target;
 };
+const fix = (cell, reference) => {
+    // Fix：特殊Fix，兼容Raft模式和非Raft模式
+    // Raft模式下应该是cell, reference
+    // 非Raft模式下允许直接调用
+    if (undefined === reference) {
+        return cell;
+    } else {
+        return reference;
+    }
+};
 /**
  * @class Value
  * @description 数值计算器
@@ -89,6 +99,7 @@ export default {
     assign,
     clone,
     vector,
+    fix,
     // 字符串链接
     stringConnect,
 

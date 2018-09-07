@@ -1,18 +1,18 @@
 import React from 'react'
-import Ux from 'ux'
-import {AttrTree} from 'web';
+import Ux from 'ux';
+import Op from './Op.Sub';
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Desc")
-    .to()
+    .cab("UI.Demo.Form.Dialog")
+    .bind(Op)
+    .raft(1)
+    .form().to()
 )
 class Component extends React.PureComponent {
     render() {
-        return (
-            <AttrTree reference={this} $name={"DialogList"}/>
-        )
+        return Ux.uiFieldForm(this, {}, 1)
     }
 }
 

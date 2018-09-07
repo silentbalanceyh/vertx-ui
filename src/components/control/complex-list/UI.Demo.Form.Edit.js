@@ -7,6 +7,7 @@ const {zero} = Ux;
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo.Form")
     .bind(Op)
+    .raft(1)
     .form().to()
 )
 class Component extends React.PureComponent {

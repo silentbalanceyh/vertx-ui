@@ -51,6 +51,8 @@ class Component extends React.PureComponent {
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
             const {$inited, ...rest} = this.props;
             const initData = Op.calcInited(this, $inited.key);
+            // 不点取消不可关闭
+            dialog.maskClosable = false;
             return (
                 <div>
                     {/** 渲染添加按钮 **/}

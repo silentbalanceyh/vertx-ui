@@ -33,7 +33,6 @@ class Component extends React.PureComponent {
         } else {
             return (<EmptyContent/>)
         }
-
     }
 }
 
