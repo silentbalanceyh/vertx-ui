@@ -22,10 +22,20 @@
             "destroyOnClose": true
         },
         "api": {
-            "title": "连接点收集器"
+            "title": "连接点收集器",
+            "destroyOnClose": true
         },
         "bars": {
             "title": "（DialogList专用）数据信息"
+        },
+        "block": {
+            "title": "（DialogList专用）窗口数据"
+        },
+        "tags": {
+            "title": "（DialogList专用）主单提交数据"
+        },
+        "tag": {
+            "title": "（DialogList专用）子单提交数据"
         }
     }
 }

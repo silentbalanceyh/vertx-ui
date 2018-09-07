@@ -22,7 +22,7 @@ const initTool = (reference: any) => {
             };
             buttons.push(button);
         });
-    return buttons;
+    return buttons.sort((left, right) => Ux.sorterAsc(left, right, "className"));
 };
 
 export default {

@@ -1,13 +1,16 @@
 {
     "_tool": {
-        "code": "环境变量,zbt-7",
-        "setting": "应用信息,zbt-6",
-        "user": "用户信息,zbt-1",
-        "filter": "查询条件,zbt-3",
-        "cluster": "当前Tab页数据,zbt-3",
-        "form": "主Form数据,zbt-3",
-        "api": "连接点收集器,zbt-4",
-        "bars": "子列表,zbt-5"
+        "user": "用户信息,zbt-3",
+        "setting": "应用信息,zbt-2",
+        "code": "环境变量,zbt-1",
+        "filter": "查询条件,zbt-4",
+        "cluster": "当前Tab页数据,zbt-4",
+        "form": "主Form数据,zbt-4",
+        "api": "连接点收集器,zbt-5",
+        "bars": "子列表,zbt-6",
+        "block": "窗口数据,zbt-6",
+        "tags": "主单提交数据,zbt-7",
+        "tag": "子单提交数据,zbt-7"
     },
     "_info": {
         "empty": "对不起，无法捕捉您想要的数据，当前状态树上没有相关信息。"
