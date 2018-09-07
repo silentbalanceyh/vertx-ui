@@ -12,6 +12,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
+        console.info(this.props);
         return Ux.uiFieldForm(this, {}, 1)
     }
 }

@@ -2,10 +2,18 @@ import Ux from 'ux';
 import Mock from './mock';
 
 const $opSave = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
-    console.info(values);
+    Ux.ajaxPut("/api/dept", values, mockData)
+        .then(data => Ux.showDialog(reference, "edit", () => {
+            console.info("更新成功：", data);
+            reference.props.fnClose();
+        }))
 });
 const $opAdd = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
-    console.info(values);
+    Ux.ajaxPost("/api/dept", values, mockData)
+        .then(data => Ux.showDialog(reference, "add", () => {
+            console.info("添加成功：", data);
+            reference.props.fnClose();
+        }))
 });
 const opEditPost = (reference: any) => (record: any, id: any) => {
     // 在编辑点击过后操作，将数据写入到items

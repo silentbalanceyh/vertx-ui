@@ -32,6 +32,8 @@ class Component extends React.PureComponent {
             "UI.Demo",
             "UI.Demo.Filter",
             "UI.Demo.Form",
+            "UI.Demo.Form.Edit",
+            "UI.Demo.Form.Dialog",
             "UI.Demo.js",
             "UI.Demo.Filter.js",
             "UI.Demo.Form.Add.js",

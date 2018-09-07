@@ -26,10 +26,12 @@
             "destroyOnClose": true
         },
         "bars": {
-            "title": "（DialogList专用）数据信息"
+            "title": "（DialogList专用）数据信息",
+            "destroyOnClose": true
         },
         "block": {
-            "title": "（DialogList专用）窗口数据"
+            "title": "（DialogList专用）窗口数据",
+            "destroyOnClose": true
         },
         "tags": {
             "title": "（DialogList专用）主单提交数据"

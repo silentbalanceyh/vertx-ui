@@ -77,9 +77,27 @@ const connectSubmit = (reference, data) => {
         console.info(reference, data);
     }
 };
+const connectDialog = (reference, data) => {
+    if (Ux.Env.MONITOR) {
+        const state = {};
+        // 处理editKey
+        state.key = data.editKey;
+        state.connectKey = data.connectKey;
+        state.show = data.show;
+        // 链接
+        Ux.writeTree(reference, {
+            "debug.active.dialog": state,
+        });
+    }
+};
 export default {
+    // 监控主表单
     connectMajor,
+    // 监控窗口
+    connectDialog,
+    // 监控提交数据
     connectSubmit,
+    // Pointer处理
     writePointer,
     earsePointer
 }

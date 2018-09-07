@@ -8,7 +8,8 @@ import MajorForm from './UI.Demo.Form.Edit'
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo.Form").to()
+    .cab("UI.Demo.Form")
+    .to()
 )
 class Component extends React.PureComponent {
     render() {

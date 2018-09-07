@@ -4,10 +4,26 @@
     &-tool {
         width: 100%;
         position: fixed;
-        z-index: 100;
+        z-index: 1100;
         background-color: #fefefe;
         padding: 2px;
         bottom: 0;
+    }
+    &-error {
+        width: 100%;
+        background-color: #fdf1f0;
+        border: solid 1px #f2a7a1;
+        border-radius: 3px;
+        padding: 10px;
+        ul li {
+            list-style: none;
+            line-height: 32px;
+        }
+        ul li:first-child {
+            font-size: 16px;
+            font-weight: 700;
+            color: red;
+        }
     }
     &-drawer {
         .ant-drawer-body {
