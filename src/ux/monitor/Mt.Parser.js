@@ -70,7 +70,7 @@ const datumPointer = (uri = "") => {
             const item = {};
             item.name = dataItem.key;
             if (item.name.startsWith("_dynamic_")) {
-                item.color = "#9c3";
+                item.color = "#939";
             } else {
                 item.color = "#36c";
             }
