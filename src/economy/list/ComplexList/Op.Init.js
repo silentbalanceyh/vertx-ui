@@ -22,7 +22,7 @@ const stateView = (view, key, reference) => {
     view = view ? view : "list";
     const {rxViewSwitch} = reference.props;
     if (U.isFunction(rxViewSwitch)) {
-        rxViewSwitch(view);
+        rxViewSwitch(view, key);
     }
     return {view, key};
 };

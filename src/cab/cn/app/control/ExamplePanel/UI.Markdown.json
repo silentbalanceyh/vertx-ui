@@ -1,0 +1,43 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "tabGuide",
+        "items": [
+            "教程,tabGuide",
+            "数据流结构,tabDiagram"
+        ]
+    },
+    "_table": {
+        "columns": [
+            {
+                "dataIndex": "name",
+                "title": "颜色分类说明"
+            }
+        ],
+        "data": [
+            {
+                "name": "React组件",
+                "color": "#9cf"
+            },
+            {
+                "name": "Json资源/Redux状态树",
+                "color": "#ccf"
+            },
+            {
+                "name": "当前组件/state/props",
+                "color": "#fcc"
+            },
+            {
+                "name": "reference/children",
+                "color": "#ccc"
+            },
+            {
+                "name": "属性/状态",
+                "color": "#ccc"
+            },
+            {
+                "name": "函数 fn/rx",
+                "color": "#9cc"
+            }
+        ]
+    }
+}

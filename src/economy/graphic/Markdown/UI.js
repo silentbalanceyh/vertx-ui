@@ -2,7 +2,7 @@ import {PureComponent} from 'react'
 import marked from 'marked'
 import renderHTML from 'react-render-html'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/tomorrow-night-eighties.css'
+import 'highlight.js/styles/xcode.css'
 
 marked.setOptions({
     highlight: (code, language) => language

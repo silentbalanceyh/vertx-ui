@@ -42,5 +42,45 @@
     "_disabled": [
         "search",
         "cluster"
-    ]
+    ],
+    "_diagram": {
+        "UI.Demo.js": {
+            "items": {
+                "nodes": [
+                    "parent,UI.js,#9cf",
+                    "status,$status,#ccc",
+                    "reference,reference,#ccc",
+                    "children,children,#ccc",
+                    "redux,Redux状态树,#ccf",
+                    "fnOut,fnOut,#9cc",
+                    "resource,UI.Demo.json,#ccf",
+                    "hoc,$hoc,#ccc",
+                    "props,UI.Demo.js - props,#fcc",
+                    "state,UI.Demo.js - state,#fcc",
+                    "current,UI.Demo.js,#fcc",
+                    "_reference,this,#ccc",
+                    "_rxInject,rxInject,#9cc",
+                    "_component,PageCard,#9cf"
+                ],
+                "edges": [
+                    "parent,status",
+                    "parent,reference",
+                    "parent,children",
+                    "redux,fnOut",
+                    "reference,props",
+                    "children,props",
+                    "fnOut,props",
+                    "status,props",
+                    "resource,hoc",
+                    "hoc,state",
+                    "props,current",
+                    "state,current",
+                    "current,_reference",
+                    "current,_rxInject",
+                    "_reference,_component",
+                    "_rxInject,_component"
+                ]
+            }
+        }
+    }
 }

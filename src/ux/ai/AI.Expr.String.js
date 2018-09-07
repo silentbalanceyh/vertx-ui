@@ -225,7 +225,9 @@ const aiExprDirect = (buttons = [], props = {}) => _aiExprButton(buttons, props,
 const _aiExprButton = (buttons = [], props = {}, key = "button") =>
     _iterator(buttons, (values = []) => parseItem(values, key))
         .map(ExprValue.applyConnect).map(item => ExprValue.applyLoading(item, props));
-const aiExprTabs = (items = [], props = {}) => items.map(item => parseItem(item, "tabs")).map(ExprValue.applyKey);
+const aiExprTabs = (items = [], props = {}) =>
+    items.map(item => parseItem(item, "tabs"))
+        .map(ExprValue.applyKey);
 const aiExprOp = (button = "") => {
     if ("string" === typeof button) {
         const splitted = button.split(',');

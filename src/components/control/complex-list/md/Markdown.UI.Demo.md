@@ -6,10 +6,12 @@
 * **$formAdd**：当启用了添加功能时的添加表单Form React组件；
 * **$formEdit**：编辑专用的表单Form React组件；
 
-#### 1.2.固定事件（Function）
+#### 1.2.特殊事件（Function）
 
-* **rxInject**：属性编辑面板专用函数（一般开发不使用）；
-* **rxSet**：读取当前组件`reference`中的状态中的set：state.set；
+* **rxInject(data)**：属性编辑面板专用函数（一般开发不使用）；
+    * **data**: 传入的数据data或等待修改的options；
+* **rxSet(key)**：读取当前组件`reference`中的状态中的set中某个键的值：state.set；
+    * **key**：需要读取`state.set`中的数据的键
 
 rxInject和rxSet为特殊函数，主要用于修改传入的一些特殊属性，并且实现对ComplexList的属性修改。属性修改包含两种：
 
@@ -33,9 +35,12 @@ const rxSet = (key = "") => {
 }
 ```
 
-* **rxSearch**：Epic函数，参考属性表中的内容，必须绑定搜索专用的Epic函数；
+#### 1.3.必须事件（Function）
 
-该搜索函数可以像示例一样直接调用`search(Action)`的方式直接绑定，绑定好过后会直接生成rxSearch并传递给ComplexList，它的参数格式如：
+* **rxSearch(params)**：Epic函数，参考属性表中的内容，必须绑定搜索专用的Epic函数；
+    * **params**：（参数格式参考下边的Json）
+
+该搜索函数可以像示例一样直接调用`search(Action)`的方式直接绑定，绑定好过后会直接生成rxSearch并传递给ComplexList，它的参数`params`格式如：
 
 ```javascript
 {
@@ -60,11 +65,17 @@ const rxSet = (key = "") => {
 
 > Mock环境使用的是客户端分页，正常环境或生产环境这里需要使用的是服务端分页（Zero和Spring Up本身是支持这里的查询树的）。
 
-#### 1.3.参数事件（Function）
+#### 1.4.回调事件（Function）
 
-* `rxEditPost`：点击列表中的"编辑"，读取了记录过后的回调函数；
-* `rxDeletePost`：点击删除"列表/详细"按钮过后的回调函数；
-* `rxViewSwitch`：切换Tab页时专用的切换回调函数；
+* **rxEditPost(record,id)**：【点击"编辑"打开Tab页之后】点击列表中的"编辑"，读取了记录过后的回调函数；
+    * **record**：（Object）主记录，编辑某条记录时被编辑的单条记录数据；
+    * **id**：主记录的主键`id`对应的数据；
+* **rxDeletePost(record,id)**：【删除某条记录之后，包括列表删除】点击删除"列表/详细"按钮过后的回调函数；
+    * **record**：从删除接口远程返回的数据信息，如果保存了原始记录则是删除之前的；
+    * **id**：被删除的记录的`id`对应的数据；
+* **rxViewSwitch(view,id)**：【ActiveTab页发生改变之后】切换Tab页时专用的切换回调函数；
+    * **view**：当前视图状态，可支持的值有：`list, add, edit`；
+    * **id**：当前视图的`activeKey`，被激活的Tab页的key信息；
 
 ### 2.代码
 

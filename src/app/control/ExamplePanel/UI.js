@@ -26,6 +26,7 @@ class Component extends React.PureComponent {
             $source = [],   // Json内容
             $markdown = [], // Markdown内容
             $configuration = {},    // 属性配置
+            $diagram = {}, // 数据流结构图
             // $tool = [], // 被禁用的工具栏
         } = this.props;
         const {
@@ -41,7 +42,9 @@ class Component extends React.PureComponent {
                             {children}
                         </div>,
                         <ViewJson key={"tabJson"} $source={$source}/>,
-                        <ViewMarkdown key={"tabMarkdown"} $markdown={$markdown}/>,
+                        <ViewMarkdown key={"tabMarkdown"}
+                                      $diagram={$diagram}
+                                      $markdown={$markdown}/>,
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>
                     )}
                 <Setting $visible={$drawer} reference={this}/>

@@ -111,8 +111,11 @@ const ui = (reference, tree, ...files) => (jsx) => {
     const $source = prepareJson.apply(this, [reference].concat(jsonFiles));
     // 4.工具栏禁用
     const $tool = Ux.fromHoc(reference, "disabled");
+    // 5.Diagram专用
+    const $diagram = Ux.fromHoc(reference, "diagram");
     const attrs = {
         $configuration,
+        $diagram,
         $markdown, $source, $tool,
         reference
     };
