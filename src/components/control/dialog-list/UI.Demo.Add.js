@@ -2,8 +2,8 @@ import React from 'react'
 import Ux from 'ux';
 import Op from './Op.Sub';
 import {DialogList} from 'web';
-import Form from './UI.Demo.Form.Dialog';
-import MajorForm from './UI.Demo.Form.Edit'
+import Form from './UI.Demo.Dialog';
+import MajorForm from './UI.Demo.Add.Major'
 
 const {zero} = Ux;
 

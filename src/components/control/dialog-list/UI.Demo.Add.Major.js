@@ -5,7 +5,7 @@ import Op from './Op';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo.Form")
+    .cab("UI.Demo.Form.Add")
     .bind(Op)
     .raft(1)
     .form().to()

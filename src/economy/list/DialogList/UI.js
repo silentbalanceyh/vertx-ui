@@ -54,7 +54,7 @@ class Component extends React.PureComponent {
             // 窗口的隐藏显示
             const {show, editKey} = this.state;
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
-            const {$inited, ...rest} = this.props;
+            const {$inited = {}, ...rest} = this.props;
             const initData = Op.calcInited(this, $inited.key);
             // 不点取消不可关闭
             dialog.maskClosable = false;
