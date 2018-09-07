@@ -2,14 +2,14 @@
 
 #### 1.1.专用数据
 
-* `$list`：（DataObject）列表数据；
-* `$mockData`：（Object）模拟数据信息；
-* `$query`：（DataObject）查询参数，从`grid.query`节点中读取；
+* **$list**：（DataObject）列表数据；
+* **$mockData**：（Object）模拟数据信息；
+* **$query**：（DataObject）查询参数，从`grid.query`节点中读取；
 
 #### 1.2.ComplexList传入（Function）
 
-* `fnClose`：【无参数】关闭Tab页专用函数（关闭当前Tab页）；
-* `fnMock`：Mock环境专用参数；
+* **fnClose()**：【无参数】关闭Tab页专用函数（关闭当前Tab页）；
+* **fnMock()**：Mock环境专用参数；
 
 ### 2.代码
 

@@ -33,19 +33,21 @@ const analyzeItems = (source = {}, current = []) => {
             node.target = fromTo[1];
             edges.push(node);
         });
-    {
-        edges.forEach(item => {
-            let found = nodes.filter(each => each.id === item.source);
-            if (0 === found.length) {
-                console.info(item.source);
-            }
-            found = nodes.filter(each => each.id === item.target);
-            if (0 === found.length) {
-                console.info(item.target);
-            }
-        })
-    }
-    return {nodes, edges}
+    const $edges = [];
+    edges.forEach(item => {
+        const source = nodes.filter(each => each.id === item.source);
+        if (0 === source.length) {
+            console.info(item.source);
+        }
+        const target = nodes.filter(each => each.id === item.target);
+        if (0 === target.length) {
+            console.info(item.target);
+        }
+        if (0 < source.length && 0 < target.length) {
+            $edges.push(item);
+        }
+    });
+    return {nodes, edges: $edges}
 };
 
 const renderColumn = (columns = []) => {

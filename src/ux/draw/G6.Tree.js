@@ -30,7 +30,7 @@ const registry = () => {
     });
 };
 
-const drawTree = (id, config, view = "autoZoom") => {
+const drawTree = (id, config, view = "cc") => {
     const items = Immutable.fromJS(config.items).toJS();
     registry();
     const layout = new G6.Layouts.CompactBoxTree({
