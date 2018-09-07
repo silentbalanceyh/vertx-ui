@@ -21,8 +21,8 @@ import {Table} from 'antd';
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        const {$form} = this.props;
-        if ($form.is()) {
+        const {$form, $items} = this.props;
+        if ($form.is() && $items.is()) {
             const record = Ux.clone($form.to());
             if (record.hasOwnProperty("record")) {
                 // 不绘制主记录信息

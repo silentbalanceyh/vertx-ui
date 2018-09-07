@@ -46,6 +46,7 @@ const ai2Event = (reference, fnSuccess, fnFailure) => (event) => E.fxForm(refere
             } else {
                 fnSuccess(params);
             }
+            Ux.D.connectSubmit(reference, params);
         }
     });
 });
