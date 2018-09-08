@@ -3,8 +3,8 @@ import Ux from "ux";
 import {Mock, Tps} from 'app';
 import {ComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
-import FormAdd from './UI.Demo.Form.Add';
-import FormEdit from './UI.Demo.Form'
+import FormAdd from './UI.Demo.Add';
+import FormEdit from './UI.Demo.Edit'
 import Op from './Op';
 
 const {zero} = Ux;

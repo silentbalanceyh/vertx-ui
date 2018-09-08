@@ -1,67 +1,14 @@
 import {Col, Collapse, Icon, Row} from "antd";
 import React from "react";
+import Ux from 'ux';
 
-const renderColumn = (columns = [], mapping = {}) => {
-    columns.forEach(column => {
-        if ("source" === column.dataIndex) {
-            column.render = (text) => {
-                const item = mapping['source'][text];
-                return (
-                    <span><Icon {...item}/></span>
-                )
-            }
-        }
-        if ("type" === column.dataIndex) {
-            column.render = (text) => (<span style={{
-                color: "#bc0981"
-            }}>{text}</span>)
-        }
-        if ("required" === column.dataIndex) {
-            column.render = (text) => {
-                const type = text ? "check" : "close";
-                const color = text ? "#F00" : "#69c";
-                return <Icon type={type} style={{fontSize: 16, color}}/>;
-            }
-        }
-        if ("name" === column.dataIndex || "option" === column.dataIndex) {
-            column.render = (text, record) => {
-                if ("reference" === text || "children" === text) {
-                    return (
-                        <span style={{
-                            color: "#9551f6"
-                        }}>{text}</span>
-                    )
-                } else {
-                    return "name" === column.dataIndex ? (
-                        <span style={{
-                            color: "E" === record.source ? "#c93" : "#1e358c"
-                        }}>{text}</span>
-                    ) : (
-                        <span style={{
-                            color: "#4169E1"
-                        }}>{text}</span>
-                    )
-                }
-            }
-        }
-        if ("value" === column.dataIndex) {
-            column.render = (text, record) => {
-                if ("String" === record.type) {
-                    text = `"${text}"`;
-                    return (<span style={{
-                        color: "#87d068"
-                    }}>{text}</span>)
-                } else if ("Boolean" === record.type) {
-                    return (<span style={{
-                        color: "#4169E1"
-                    }}>{text}</span>)
-                } else {
-                    return text;
-                }
-            }
-        }
-    })
-};
+const renderColumn = (columns = [], mapping = {}) => columns.forEach(column => {
+    Ux.D.vtSource(column, mapping);
+    Ux.D.vtType(column);
+    Ux.D.vtRequired(column);
+    Ux.D.vtNameOption(column);
+    Ux.D.vtValueByType(column);
+});
 
 const renderCode = ($name) => {
     return (
@@ -121,7 +68,7 @@ const renderComment = (icon, type) => {
             </Collapse.Panel>
         </Collapse>
     )
-}
+};
 export default {
     renderColumn,
     renderCode,

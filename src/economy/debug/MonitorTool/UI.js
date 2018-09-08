@@ -15,10 +15,11 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {buttons = [], ...rest} = this.state;
+        const {buttons = [], show = false, ...rest} = this.state;
         const lefts = {};
         Object.keys(rest).filter(key => "$hoc" !== key && "error" !== key)
             .forEach(key => lefts[key] = rest[key]);
+        buttons.forEach(item => item.disabled = show);
         return (
             <div>
                 <Button.Group className={"zero-debug-button"}>

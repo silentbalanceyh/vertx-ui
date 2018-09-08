@@ -3,41 +3,44 @@
         "defaultActiveKey": "tabGuide",
         "items": [
             "教程,tabGuide",
-            "数据流结构,tabDiagram"
+            "运行时初始属性,tabAttribute"
         ]
     },
     "_table": {
+        "pagination": false,
+        "bordered": true,
         "columns": [
             {
                 "dataIndex": "name",
-                "title": "颜色分类说明"
-            }
-        ],
-        "data": [
-            {
-                "name": "React组件",
-                "color": "#9cf"
+                "title": "属性名"
             },
             {
-                "name": "Json资源/Redux状态树",
-                "color": "#ccf"
+                "dataIndex": "secondary",
+                "title": "二级属性"
             },
             {
-                "name": "当前组件/state/props",
-                "color": "#fcc"
+                "dataIndex": "source",
+                "title": "来源"
             },
             {
-                "name": "reference/children",
-                "color": "#ccc"
+                "dataIndex": "provider",
+                "title": "提供者"
             },
             {
-                "name": "属性/状态",
-                "color": "#ccc"
+                "dataIndex": "category",
+                "title": "属性类型"
             },
             {
-                "name": "函数 fn/rx",
-                "color": "#9cc"
+                "dataIndex": "consumer",
+                "title": "消费者"
+            },
+            {
+                "dataIndex": "comment",
+                "title": "备注信息"
             }
         ]
+    },
+    "_info": {
+        "message": "\"组件属性\"和\"属性树\"的区别是组件属性描述了当前文件对应组件「单个js文件」在使用过程中的职责、连接点、实战过程中的「常用组件」相关教程，不包括消费的组件的所有支持属性，如PageCard中的$leftVisible等。"
     }
 }

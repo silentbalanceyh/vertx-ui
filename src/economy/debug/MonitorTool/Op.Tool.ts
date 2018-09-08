@@ -18,6 +18,7 @@ const initTool = (reference: any) => {
                 event.preventDefault();
                 const state: any = {};
                 state[`$${key}`] = true;
+                state.show = true;
                 reference.setState(state);
             };
             buttons.push(button);

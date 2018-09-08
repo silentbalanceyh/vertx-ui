@@ -27,6 +27,7 @@
             "search.advanced": true,
             "search.advanced.width": "30%",
             "search.advanced.title": "搜索部门",
+            "op.add": "添加",
             "tabs.list": "部门列表",
             "tabs.add": "添加部门",
             "tabs.edit": "编辑部门",

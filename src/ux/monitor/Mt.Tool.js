@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import React from 'react';
 import {DebugMonitorTool} from 'web'
+import Column from './Mt.Tool.Column';
 
 const renderTool = (reference) => {
     if (Ux.Env.MONITOR) {
@@ -15,31 +16,8 @@ const renderTool = (reference) => {
     }
 };
 const renderColumn = (columns = []) => {
-    columns.forEach(column => {
-        if ("value" === column.dataIndex) {
-            column.render = (text, record) => {
-                if ("boolean" === record.type) {
-                    if (text) {
-                        return (<span style={{
-                            color: "#f66"
-                        }}>true</span>)
-                    } else {
-                        return (<span style={{
-                            color: "#039"
-                        }}>false</span>)
-                    }
-                } else if ("string" === record.type) {
-                    return (<span style={{
-                        color: "#393"
-                    }}>{`"${text}"`}</span>)
-                } else if ("number" === record.type) {
-                    return (<span style={{
-                        color: "#990"
-                    }}>{text}</span>)
-                }
-            }
-        }
-    })
+    // value专用
+    columns.forEach(column => Column.vtValue(column))
 };
 export default {
     renderTool,

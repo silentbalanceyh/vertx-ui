@@ -39,48 +39,113 @@
             "title": "PageCard左边的主标题文字"
         }
     },
-    "_disabled": [
-        "search",
-        "cluster"
-    ],
-    "_diagram": {
-        "UI.Demo.js": {
-            "items": {
-                "nodes": [
-                    "parent,UI.js,#9cf",
-                    "status,$status,#ccc",
-                    "reference,reference,#ccc",
-                    "children,children,#ccc",
-                    "redux,Redux状态树,#ccf",
-                    "fnOut,fnOut,#9cc",
-                    "resource,UI.Demo.json,#ccf",
-                    "hoc,$hoc,#ccc",
-                    "props,UI.Demo.js - props,#fcc",
-                    "state,UI.Demo.js - state,#fcc",
-                    "current,UI.Demo.js,#fcc",
-                    "_reference,this,#ccc",
-                    "_rxInject,rxInject,#9cc",
-                    "_component,PageCard,#9cf"
-                ],
-                "edges": [
-                    "parent,status",
-                    "parent,reference",
-                    "parent,children",
-                    "redux,fnOut",
-                    "reference,props",
-                    "children,props",
-                    "fnOut,props",
-                    "status,props",
-                    "resource,hoc",
-                    "hoc,state",
-                    "props,current",
-                    "state,current",
-                    "current,_reference",
-                    "current,_rxInject",
-                    "_reference,_component",
-                    "_rxInject,_component"
-                ]
+    "_datalist": {
+        "UI.Demo.js": [
+            {
+                "source": "R",
+                "provider": "当前组件",
+                "consumer": "<PageCard/>",
+                "name": "reference",
+                "value": "this",
+                "category": "React.Reference",
+                "comment": "PageCard调用者可直接通过reference={this}的方式传入数据。"
+            },
+            {
+                "source": "R",
+                "provider": "父组件 | 当前组件",
+                "consumer": "<PageCard/>",
+                "name": "children",
+                "value": "",
+                "category": "React.Component",
+                "comment": "PageCard调用者可以从任何来源传入该组件，成为PageCard中呈现的内容。"
+            },
+            {
+                "source": "X",
+                "provider": "Zero框架封装",
+                "consumer": "<PageCard/>",
+                "name": "fnOut",
+                "category": "Function",
+                "comment": "直接调用了全局的Action来写状态树专用。"
+            },
+            {
+                "source": "Z",
+                "provider": "Zero框架封装",
+                "name": "$hoc",
+                "category": "HocI18n",
+                "comment": "该对象数据不会直接传给PageCard，而是在PageCard内部直接抽取。"
+            },
+            {
+                "source": "S",
+                "provider": "当前组件状态",
+                "consumer": "<PageCard/>",
+                "name": "$status",
+                "secondary": "rxInject",
+                "category": "Function",
+                "comment": "当前组件初始化后的状态数据，直接「全映射」到子组件中。"
             }
+        ]
+    },
+    "_diagram": {
+        "items": {
+            "nodes": [
+                "parent,UI.js,#9cf",
+                "status,$status",
+                "reference,reference",
+                "children,children",
+                "redux,Redux,#ccf",
+                "fnOut,fnOut( ),#cfc",
+                "resource,UI.Demo.json,#ccf",
+                "hoc,$hoc",
+                "_page,_page",
+                "title,title",
+                "left,left",
+                "right,right",
+                "back,back",
+                "props,props",
+                "state,state",
+                "current,UI.Demo.js",
+                "_reference,reference",
+                "_rxInject,rxInject( data ),#cfc",
+                "_component,PageCard,#9cf",
+                "_header,Header",
+                "_title,Title",
+                "_left,Left",
+                "_right,Right",
+                "_back,Back",
+                "_body,Body"
+            ],
+            "edges": [
+                "parent,status",
+                "parent,reference",
+                "parent,children",
+                "redux,fnOut",
+                "reference,props",
+                "children,props",
+                "fnOut,props",
+                "status,props",
+                "resource,hoc",
+                "hoc,_page",
+                "_page,title",
+                "_page,left",
+                "_page,right",
+                "_page,back",
+                "title,state",
+                "left,state",
+                "right,state",
+                "back,state",
+                "props,current",
+                "state,current",
+                "current,_reference",
+                "current,_rxInject",
+                "_reference,_component",
+                "_rxInject,_component",
+                "_component,_body",
+                "_component,_header",
+                "_header,_title",
+                "_header,_left",
+                "_header,_right",
+                "_header,_back"
+            ]
         }
     }
 }

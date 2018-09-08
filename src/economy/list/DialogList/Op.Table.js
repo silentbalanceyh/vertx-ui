@@ -26,10 +26,12 @@ const initTable = (reference) => {
     }
     // 数据读取
     const {$items, $inited} = reference.props;
-    const dataArray = $items.$($inited.key);
     let data = [];
-    if (dataArray && dataArray.is()) {
-        data = dataArray.to();
+    if ($inited) {
+        const dataArray = $items.$($inited.key);
+        if (dataArray && dataArray.is()) {
+            data = dataArray.to();
+        }
     }
     return {table, data}
 };

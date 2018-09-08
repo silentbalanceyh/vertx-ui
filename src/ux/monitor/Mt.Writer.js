@@ -72,9 +72,17 @@ const earsePointer = () => {
         Ux.Session.remove(key);
     }
 };
-const connectSubmit = (reference, data) => {
+const connectSubmit = (reference, data, major = true) => {
     if (Ux.Env.MONITOR) {
-        console.info(reference, data);
+        if (major) {
+            Ux.writeTree(reference, {
+                "debug.active.major": data,
+            })
+        } else {
+            Ux.writeTree(reference, {
+                "debug.active.sub": data,
+            })
+        }
     }
 };
 const connectDialog = (reference, data) => {

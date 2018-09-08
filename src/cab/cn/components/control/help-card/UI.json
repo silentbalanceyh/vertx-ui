@@ -27,8 +27,117 @@
             "title": "HelpCard左边的主标题文字"
         }
     },
-    "_disabled": [
-        "search",
-        "cluster"
-    ]
+    "_datalist": {
+        "UI.Demo.js": [
+            {
+                "source": "R",
+                "provider": "当前组件",
+                "consumer": "<HelpCard/>",
+                "name": "reference",
+                "value": "this",
+                "category": "React.Reference",
+                "comment": "HelpCard调用者可直接通过reference={this}的方式传入数据。"
+            },
+            {
+                "source": "R",
+                "provider": "父组件 | 当前组件",
+                "consumer": "<HelpCard/>",
+                "name": "children",
+                "value": "",
+                "category": "React.Component",
+                "comment": "HelpCard调用者可以从任何来源传入该组件，成为HelpCard中呈现的内容。"
+            },
+            {
+                "source": "X",
+                "provider": "Zero框架封装",
+                "consumer": "<HelpCard/>",
+                "name": "fnOut",
+                "category": "Function",
+                "comment": "直接调用了全局的Action来写状态树专用。"
+            },
+            {
+                "source": "Z",
+                "provider": "Zero框架封装",
+                "name": "$hoc",
+                "category": "HocI18n",
+                "comment": "该对象数据不会直接传给HelpCard，而是在HelpCard内部直接抽取。"
+            },
+            {
+                "source": "S",
+                "provider": "当前组件状态",
+                "consumer": "<HelpCard/>",
+                "name": "$status",
+                "secondary": "rxInject",
+                "category": "Function",
+                "comment": "当前组件初始化后的状态数据，直接「全映射」到子组件中。"
+            }
+        ]
+    },
+    "_diagram": {
+        "items": {
+            "nodes": [
+                "parent,UI.js,#9cf",
+                "status,$status",
+                "reference,reference",
+                "children,children",
+                "redux,Redux,#ccf",
+                "fnOut,fnOut( ),#cfc",
+                "resource,UI.Demo.json,#ccf",
+                "hoc,$hoc",
+                "_page,_page",
+                "title,title",
+                "left,left",
+                "help,help",
+                "$current",
+                "steps",
+                "back,back",
+                "props,props",
+                "state,state",
+                "current,UI.Demo.js,#ddd",
+                "_reference,reference",
+                "_rxInject,rxInject( data ),#cfc",
+                "_component,HelpCard,#9cf",
+                "_header,Header",
+                "_title,Title",
+                "_left,Left",
+                "_help,Help",
+                "_back,Back",
+                "_body,Body"
+            ],
+            "edges": [
+                "parent,status",
+                "parent,reference",
+                "parent,children",
+                "redux,fnOut",
+                "reference,props",
+                "children,props",
+                "fnOut,props",
+                "status,props",
+                "resource,hoc",
+                "hoc,_page",
+                "_page,title",
+                "_page,left",
+                "_page,help",
+                "_page,back",
+                "title,state",
+                "left,state",
+                "back,state",
+                "help,state",
+                "help,$current",
+                "help,steps",
+                "props,current",
+                "state,current",
+                "current,_reference",
+                "current,_rxInject",
+                "_reference,_component",
+                "_rxInject,_component",
+                "_component,_body",
+                "_component,_header",
+                "_header,_title",
+                "_header,_left",
+                "_header,_help",
+                "_header,_back"
+            ]
+        }
+    }
 }

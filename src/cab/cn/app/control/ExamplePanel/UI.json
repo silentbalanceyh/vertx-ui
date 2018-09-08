@@ -16,10 +16,45 @@
             "效果图,tabEffect",
             "配置信息,tabConfig",
             "源代码,tabSource",
-            "属性表,tabAttribute"
+            "属性树,tabAttribute",
+            "详细结构,tabDiagram"
         ]
     },
     "_toolbar": {
         "setting": "修改配置,web-button-1"
+    },
+    "_table": {
+        "columns": [
+            {
+                "dataIndex": "name",
+                "title": "颜色分类说明"
+            }
+        ],
+        "data": [
+            {
+                "name": "React组件",
+                "color": "#9cf"
+            },
+            {
+                "name": "Json/Redux",
+                "color": "#ccf"
+            },
+            {
+                "name": "当前组件",
+                "color": "#f66"
+            },
+            {
+                "name": "属性/状态",
+                "color": "#cdcdcd"
+            },
+            {
+                "name": "函数 fn/rx",
+                "color": "#cfc"
+            },
+            {
+                "name": "Ant原生",
+                "color": "#fc9"
+            }
+        ]
     }
 }
