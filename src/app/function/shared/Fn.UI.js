@@ -113,9 +113,11 @@ const ui = (reference, tree, ...files) => (jsx) => {
     const $tool = Ux.fromHoc(reference, "disabled");
     // 5.Diagram专用
     const $diagram = Ux.fromHoc(reference, "diagram");
+    // 6.内置属性列表
+    const $datalist = Ux.fromHoc(reference, "datalist");
     const attrs = {
         $configuration,
-        $diagram,
+        $diagram, $datalist, // 绘图专用
         $markdown, $source, $tool,
         reference
     };

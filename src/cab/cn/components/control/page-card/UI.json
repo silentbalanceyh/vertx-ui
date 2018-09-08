@@ -39,6 +39,10 @@
             "title": "PageCard左边的主标题文字"
         }
     },
+    "_datalist": {
+        "UI.Demo.js": [
+        ]
+    },
     "_diagram": {
         "items": {
             "nodes": [

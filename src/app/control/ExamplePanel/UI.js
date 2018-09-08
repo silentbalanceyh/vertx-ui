@@ -26,8 +26,9 @@ class Component extends React.PureComponent {
             children,
             $source = [],   // Json内容
             $markdown = [], // Markdown内容
-            $configuration = {},    // 属性配置
+            $configuration = {}, // 属性配置
             $diagram = {}, // 数据流结构图
+            $datalist = {}, // 全属性表（分组件清单）
             // $tool = [], // 被禁用的工具栏
         } = this.props;
         // 说明信息
@@ -47,6 +48,7 @@ class Component extends React.PureComponent {
                         </div>,
                         <ViewJson key={"tabJson"} $source={$source}/>,
                         <ViewMarkdown key={"tabMarkdown"}
+                                      $datalist={$datalist}
                                       $markdown={$markdown}/>,
                         <AttrTree $configuration={$configuration} $name={$configuration.code}/>,
                         <DataFlow key={Ux.randomUUID()}
