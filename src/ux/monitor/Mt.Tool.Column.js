@@ -94,17 +94,20 @@ const COLOR = {
     "React.Component": "#bc0981",
     "React.Reference": "#66c",
     "Function": "#096",
-    "Object": "#666",
-    "HocI18n": "#06c"
+    "Json": "#9c0",
+    "HocI18n": "#06c",
+    "Array": "#999",
+    "Object": "#999",
+    "String": "#999",
+    "DataObject": "#069",
+    "DataArray": "#069"
 };
 const vtCategory = (column = {}) => {
-    console.info(column);
     if ("category" === column.dataIndex) {
         column.render = (text) => {
             const color = COLOR[text];
             const style = {};
             if (color) style.color = color;
-            console.info(style);
             return (<span style={style}>{text}</span>)
         }
     }
@@ -114,8 +117,24 @@ const SOURCE = {
     "Z": "experiment,16,#f03,Zero,来源于@zero标记生成",
     "X": "deployment-unit,16,#639,Redux,来源于connect过后的结果",
     "S": "gold,16,#f93,State,来源于状态state定义",
-    "J": "fork,16,#9c0,Json,直接来源于Json文件",
-    "I": "download,16,#063,Import,直接来源于当前组件在import时的结果"
+    "E": "fork,16,#630,Epic,来自于Epic绑定特殊类的connect",
+    "I": "download,16,#06c,Import,直接来源于当前组件在import时的结果",
+    "J": "file,16,#9c0,Json,来自Json数据的导入",
+    "C": "interation,16,#399,Control,来自自定义组件",
+    "A": "alipay,16,#09c,Ant,来自Ant"
+};
+const vtConsumer = (column = {}) => {
+    if ("consumer" === column.dataIndex) {
+        column.render = (text) => {
+            if (!text) {
+                return (<Icon type={"close"} style={{
+                    color: "red"
+                }}/>)
+            } else {
+                return (<span>{text}</span>)
+            }
+        }
+    }
 };
 const vtSource = (column = {}, mapping) => {
     if ("source" === column.dataIndex) {
@@ -154,4 +173,5 @@ export default {
     vtType,
     vtSource,
     vtCategory,
+    vtConsumer,
 }

@@ -70,7 +70,6 @@
             {
                 "source": "Z",
                 "provider": "Zero框架封装",
-                "consumer": "无",
                 "name": "$hoc",
                 "category": "HocI18n",
                 "comment": "该对象数据不会直接传给PageCard，而是在PageCard内部直接抽取。"

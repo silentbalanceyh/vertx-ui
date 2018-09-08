@@ -3,21 +3,13 @@
         "defaultActiveKey": "tabGuide",
         "items": [
             "教程,tabGuide",
-            "组件属性,tabAttribute"
+            "运行时初始属性,tabAttribute"
         ]
     },
     "_table": {
         "pagination": false,
         "bordered": true,
         "columns": [
-            {
-                "dataIndex": "source",
-                "title": "来源"
-            },
-            {
-                "dataIndex": "provider",
-                "title": "提供者"
-            },
             {
                 "dataIndex": "name",
                 "title": "属性名"
@@ -27,8 +19,12 @@
                 "title": "二级属性"
             },
             {
-                "dataIndex": "value",
-                "title": "常用值"
+                "dataIndex": "source",
+                "title": "来源"
+            },
+            {
+                "dataIndex": "provider",
+                "title": "提供者"
             },
             {
                 "dataIndex": "category",

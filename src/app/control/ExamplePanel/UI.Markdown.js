@@ -9,6 +9,7 @@ const renderColumn = (columns = []) => columns.map(column => {
     Ux.D.vtCategory(column);
     Ux.D.vtNameOption(column);
     Ux.D.vtSource(column);
+    Ux.D.vtConsumer(column);
     return column;
 });
 
@@ -21,9 +22,10 @@ const renderPage = (reference, {
     } = markdown;
     // 表格数据信息
     const {$datalist = {}} = reference.props;
-    const data = $datalist[rest.tab];
+    let data = $datalist[rest.tab];
     if (data) {
-        data.forEach(item => item.key = Ux.randomUUID())
+        data.forEach(item => item.key = Ux.randomUUID());
+        data = data.sort((left, right) => Ux.sorterAsc(left, right, 'name'));
     }
     return (
         <Tabs.TabPane {...rest}>
