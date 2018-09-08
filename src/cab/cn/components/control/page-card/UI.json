@@ -41,6 +41,15 @@
     },
     "_datalist": {
         "UI.Demo.js": [
+            {
+                "source": "R",
+                "provider": "UI.Demo.js - PageCard调用者",
+                "consumer": "<PageCard/>",
+                "name": "reference",
+                "value": "this",
+                "type": "React.PureComponent",
+                "comment": "PageCard调用者可直接通过reference={this}的方式传入数据"
+            }
         ]
     },
     "_diagram": {

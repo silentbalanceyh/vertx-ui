@@ -16,7 +16,7 @@
             "效果图,tabEffect",
             "配置信息,tabConfig",
             "源代码,tabSource",
-            "属性表,tabAttribute",
+            "属性树,tabAttribute",
             "详细结构,tabDiagram"
         ]
     },
