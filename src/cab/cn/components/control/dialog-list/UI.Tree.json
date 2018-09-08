@@ -1,5 +1,6 @@
 {
     "_configuration": {
+        "code": "DialogList",
         "items": {
             "name": "DialogList组件",
             "children": [

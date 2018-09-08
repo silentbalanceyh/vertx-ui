@@ -36,7 +36,8 @@
             },
             {
                 "dataIndex": "comment",
-                "title": "备注信息"
+                "title": "备注信息",
+                "className": "web-comment"
             }
         ]
     },

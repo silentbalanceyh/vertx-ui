@@ -43,6 +43,20 @@
             "confirm.delete": "Edit编辑页中删除时Confirm对话框文字？"
         }
     },
+    "_datatree": {
+        "title": "UI.Demo.js",
+        "children": [
+            {
+                "title": "UI.Demo.Filter.js"
+            },
+            {
+                "title": "UI.Demo.Form.Add.js"
+            },
+            {
+                "title": "UI.Demo.Form.Edit.js"
+            }
+        ]
+    },
     "_datalist": {
         "UI.Demo.js": [
             {

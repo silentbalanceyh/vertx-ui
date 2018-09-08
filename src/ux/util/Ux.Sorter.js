@@ -1,3 +1,4 @@
+// 还有Bug
 const sortString = (left = "", right = "", asc = true) => {
     const minLen = Math.min(left.length, right.length);
     let order = 0;

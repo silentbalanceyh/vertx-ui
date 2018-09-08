@@ -115,9 +115,11 @@ const ui = (reference, tree, ...files) => (jsx) => {
     const $diagram = Ux.fromHoc(reference, "diagram");
     // 6.内置属性列表
     const $datalist = Ux.fromHoc(reference, "datalist");
+    // 7.内置文件结构
+    const $datatree = Ux.fromHoc(reference, "datatree");
     const attrs = {
         $configuration,
-        $diagram, $datalist, // 绘图专用
+        $diagram, $datalist, $datatree, // 绘图专用
         $markdown, $source, $tool,
         reference
     };

@@ -29,6 +29,7 @@ class Component extends React.PureComponent {
             $configuration = {}, // 属性配置
             $diagram = {}, // 数据流结构图
             $datalist = {}, // 全属性表（分组件清单）
+            $datatree = {}, // 文件树
             // $tool = [], // 被禁用的工具栏
         } = this.props;
         // 说明信息
@@ -46,18 +47,25 @@ class Component extends React.PureComponent {
                         <div className={"demo-window"}>
                             {children}
                         </div>,
-                        <ViewJson key={"tabJson"} $source={$source}/>,
+                        <ViewJson key={"tabJson"}
+                                  $source={$source}/>,
                         <ViewMarkdown key={"tabMarkdown"}
                                       $datalist={$datalist}
+                                      $datatree={$datatree}
                                       $markdown={$markdown}/>,
-                        <AttrTree $configuration={$configuration} $name={$configuration.code}/>,
+                        <AttrTree
+                            $configuration={$configuration}
+                            $name={$configuration.code}/>,
                         <DataFlow key={Ux.randomUUID()}
                                   $source={graphicData}
                                   $table={tableSub}
                                   $current={$markdown.map(item => item.tab).filter(file => file.startsWith("UI"))}/>
                     )}
-                <Setting $visible={$drawer} reference={this}/>
-                <Button id={"$opSetting"} className={"ux-hidden"} onClick={Op.Tool.setting(this)}/>
+                <Setting $visible={$drawer}
+                         reference={this}/>
+                <Button id={"$opSetting"}
+                        className={"ux-hidden"}
+                        onClick={Op.Tool.setting(this)}/>
             </PageCard>
         )
     }
