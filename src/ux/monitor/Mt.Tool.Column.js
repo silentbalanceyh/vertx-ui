@@ -1,6 +1,8 @@
 import React from "react";
 import {Icon} from "antd";
 import Value from '../value';
+import Immutable from 'immutable';
+import Ux from 'ux';
 
 const vtValue = (column = {}) => {
     if ("value" === column.dataIndex) {
@@ -164,6 +166,15 @@ const vtSource = (column = {}, mapping) => {
         }
     }
 };
+const stString = (columns = [], ...supported) => {
+    const $supported = Immutable.fromJS(supported);
+    columns.filter(column => $supported.contains(column.dataIndex))
+        .forEach(column => {
+            column.sorter = (left, right, sort) => "descend" === sort ?
+                Ux.sorterDesc(left, right, column.dataIndex) :
+                Ux.sorterAsc(left, right, column.dataIndex);
+        })
+};
 export default {
     // dataIndex = value
     vtValue,
@@ -174,4 +185,6 @@ export default {
     vtSource,
     vtCategory,
     vtConsumer,
+    // Sorter
+    stString
 }

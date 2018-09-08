@@ -25,7 +25,7 @@ const renderPage = (reference, {
     let data = $datalist[rest.tab];
     if (data) {
         data.forEach(item => item.key = Ux.randomUUID());
-        data = data.sort((left, right) => Ux.sorterAsc(left, right, 'name'));
+        data = data.sort((left, right) => Ux.sorterAsc(left, right, 'source'));
     }
     return (
         <Tabs.TabPane {...rest}>
