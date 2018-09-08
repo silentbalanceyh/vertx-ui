@@ -32,6 +32,13 @@ const initTable = (reference) => {
         if (dataArray && dataArray.is()) {
             data = dataArray.to();
         }
+    } else {
+        // 添加模式，key = undefined
+        const dataObject = $items.to();
+        if (dataObject) {
+            data = dataObject[undefined];
+            if (!data) data = [];
+        }
     }
     return {table, data}
 };

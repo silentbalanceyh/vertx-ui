@@ -75,6 +75,23 @@ const rapitUpdate = (reference, prevProps, params = {}, propKey) => {
     }
 };
 /**
+ * 读取Items专用方法
+ * @param reference
+ */
+const rapitItems = (reference) => {
+    // list.items树上的数据，主记录id只能从$parent中读取
+    const {$items, $parent = {}} = reference.props;
+    let result = [];
+    if ($items && $parent.key) {
+        // 读取主记录对应的items数据
+        const dataRecord = $items.$($parent.key);
+        if (dataRecord && dataRecord.is()) {
+            result = dataRecord.to();
+        }
+    }
+    return result;
+};
+/**
  * list.items子列表专用方法，默认是Save模式
  * @param dataObject
  * @param id
@@ -85,40 +102,38 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     // 检查数据基本信息
     E.fxTerminal(!dataObject, 10082, dataObject);
     E.fxTerminal(!record, 10062, record);
-    E.fxTerminal(!id, 10062, id);
+    // E.fxTerminal(!id, 10062, id);
     // 读取原始记录
     const dataRecord = dataObject && dataObject.is()
         ? Immutable.fromJS(dataObject.to()).toJS() : {};
     // console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
-    if (id) {
-        // 读取原始数据
-        let $extracted = dataObject.$(id);
-        const executeRecord = (single) => {
-            // 从原始记录中抽取DataArray列表
-            if ($extracted && $extracted.is()) {
-                if (deleted) {
-                    // 删除记录中的数据
-                    $extracted.removeElement(single.key);
-                } else {
-                    // 更新数据
-                    $extracted.saveElement(single);
-                }
+    // 读取原始数据
+    let $extracted = dataObject.$(id);
+    const executeRecord = (single) => {
+        // 从原始记录中抽取DataArray列表
+        if ($extracted && $extracted.is()) {
+            if (deleted) {
+                // 删除记录中的数据
+                $extracted.removeElement(single.key);
             } else {
-                // 这种只能添加，不会在删除的时候触发
-                if (single) {
-                    if (!single['key'] || undefined === single['key']) {
-                        single['key'] = Ux.randomUUID();
-                    }
-                    $extracted.saveElement(single);
-                }
+                // 更新数据
+                $extracted.saveElement(single);
             }
-            dataRecord[id] = $extracted.to();
-        };
-        if (U.isArray(record)) {
-            record.forEach(executeRecord);
         } else {
-            executeRecord(record);
+            // 这种只能添加，不会在删除的时候触发
+            if (single) {
+                if (!single['key'] || undefined === single['key']) {
+                    single['key'] = Ux.randomUUID();
+                }
+                $extracted.saveElement(single);
+            }
         }
+        dataRecord[id] = $extracted.to();
+    };
+    if (U.isArray(record)) {
+        record.forEach(executeRecord);
+    } else {
+        executeRecord(record);
     }
     // console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
     return dataRecord;
@@ -143,6 +158,8 @@ const toEffect = (state = {}) => {
  * @description 回写状态树专用方法
  */
 export default {
+    // 特殊方法，读取当前系统中的items
+    rapitItems,
     // 特殊方法，用于执行DataObject中的某个key下的
     rapitRecord,
     // 特殊方法，对于自定义组件中的特殊处理

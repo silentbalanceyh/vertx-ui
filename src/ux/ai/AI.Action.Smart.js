@@ -3,6 +3,8 @@ import U from 'underscore';
 // Rdx处理
 import Rdx from '../fun';
 import Cv from '../Ux.Constant';
+import Prop from '../prop';
+import D from '../monitor';
 
 /**
  * 计算当前提交的模式
@@ -68,16 +70,6 @@ const _getEvented = (fnPreValidate = () => true, form) =>
     ));
 const _getFormed = (fnPreValidate = () => true, values = {}) =>
     new Promise((resolve, reject) => fnPreValidate(values) ? resolve(values) : reject(values));
-const _executor = (reference, {
-    success,  // 成功过后的Callback函数
-    failure,  // 错误过后的Callback函数：此时调用_executor过后已经是Promise之后的处理
-    promise,  // 是否以纯promise的模式处理
-    mode,     // 模式处理
-    data,     // 数据信息
-    mock,     // Mock数据处理
-}) => {
-    console.info(success, failure, promise, mode, data, mock);
-};
 /**
  * Normalize规范化数据信息（包括基于子列表的数据处理）
  * @param data 原始表单提交数据信息
@@ -173,7 +165,12 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
             const {fnMock} = reference.props;
             let mockData = {};
             if (fnMock && U.isFunction(fnMock)) {
-                mockData = fnMock(params);
+                /**
+                 * 由于fnMock需要修改传入引用，为有副作用的函数
+                 * 所以直接从params拷贝数据，返回Mock后的数据信息
+                 */
+                const inputMock = Value.clone(params);
+                mockData = fnMock(inputMock);
             }
             // 执行最终处理
             return _executor(reference, {
@@ -192,10 +189,33 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
                  * 第一参为验证之前的错误信息
                  * 没有第二参
                  */
-                fnFailure(error)
+                fnFailure(error);
             }
         })
     };
+const _executor = (reference, config = {}) => {
+    const {data, mode} = config;
+    // 1.子表单模式专用
+    if ("ADD" === mode || "EDIT" === mode) {
+        const items = Prop.rapitItems(reference);
+        // 有items的主要记录提交
+        if (items) data._items = items;
+        D.connectSubmit(reference, data);
+    } else {
+        D.connectSubmit(reference, data, false);
+        // 只有list.items的提交会触发该列表信息
+        if ("ADD-EDIT" === mode || "ADD-ADD" === mode) {
+            // 添加模式
+            const {$addKey} = reference.props;
+            Rdx.rdxListItem(reference, data, $addKey);
+        } else {
+            // 主记录编辑模式（$inited中包含key）
+            Rdx.rdxListItem(reference, data)
+        }
+    }
+    // 2.读取success和failure
+    console.info(data);
+};
 export default {
     ai2Event
 }

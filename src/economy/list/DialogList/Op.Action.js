@@ -38,6 +38,7 @@ const rxClose = (reference) => (event) => {
     if (event) {
         event.preventDefault();
     }
+    console.info(reference.props);
     reference.setState({
         show: false,
         editKey: undefined,

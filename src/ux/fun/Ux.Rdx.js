@@ -16,15 +16,24 @@ const rdxReject = (message) => Promise.reject({data: {info: message}});
  * 专写方法，更新list.items
  * @param reference
  * @param values
+ * @param addKey
  */
-const rdxListItem = (reference, values = {}) => {
+const rdxListItem = (reference, values = {}, addKey) => {
     const {fnListItem} = reference.props;
     E.fxTerminal(!fnListItem, 10087, fnListItem);
     if (U.isFunction(fnListItem)) {
         const ref = Prop.onReference(reference, 1);
         if (ref) {
             const {$inited = {}} = ref.props;
-            fnListItem($inited.key, values);
+            // 是否包含了 $inited.key
+            if ($inited.key) {
+                fnListItem($inited.key, values);
+            } else {
+                // 传入了添加的addKey
+                if (addKey) {
+                    fnListItem(addKey, values);
+                }
+            }
         }
     }
 };

@@ -55,7 +55,10 @@ class Component extends React.PureComponent {
             const {show, editKey} = this.state;
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
             const {$inited = {}, ...rest} = this.props;
-            const initData = Op.calcInited(this, $inited.key);
+            // 读取key相关信息（添加模式/编辑模式）同时支持
+            const {$addKey} = this.props;
+            const hittedKey = $addKey || $inited.key;
+            const initData = Op.calcInited(this, hittedKey);
             // 不点取消不可关闭
             dialog.maskClosable = false;
             return (
@@ -64,10 +67,12 @@ class Component extends React.PureComponent {
                     {Render.renderHeader(this)}
                     {/** 渲染表单 **/}
                     <Table {...table} dataSource={data}/>
-                    <DynamicDialog $dialog={dialog} $visible={show}>
+                    <DynamicDialog $dialog={dialog}
+                                   $visible={show}>
                         {/** 只有editKey存在时渲染 **/}
                         {FormEdit ? (editKey && show ? (
-                            <FormEdit {...rest} key={`formEdit`}
+                            <FormEdit {...rest}
+                                      key={`formEdit`}
                                       $inited={initData}
                                       $key={editKey}
                                       $parent={$inited}
@@ -77,7 +82,8 @@ class Component extends React.PureComponent {
                         ) : false) : false}
                         {/** 只有editKey为undefined时渲染 **/}
                         {FormAdd ? (!editKey && show ? (
-                            <FormAdd {...rest} key={"formAdd"}
+                            <FormAdd {...rest}
+                                     key={"formAdd"}
                                      $inited={initData}
                                      $parent={$inited}
                                      fnClose={Op.rxClose(this)}
