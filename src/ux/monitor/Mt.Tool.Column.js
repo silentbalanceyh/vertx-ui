@@ -16,9 +16,15 @@ const vtValue = (column = {}) => {
                     }}>false</span>)
                 }
             } else if ("string" === record.type) {
-                return (<span style={{
-                    color: "#87d068"
-                }}>{`"${text}"`}</span>)
+                if ("this" === text) {
+                    return (<span style={{
+                        color: "#039"
+                    }}>{text}</span>)
+                } else {
+                    return (<span style={{
+                        color: "#87d068"
+                    }}>{`"${text}"`}</span>)
+                }
             } else if ("number" === record.type) {
                 return (<span style={{
                     color: "#990"
@@ -84,8 +90,32 @@ const vtType = (column = {}) => {
         }}>{text}</span>)
     }
 };
+const COLOR = {
+    "React.Component": "#bc0981",
+    "React.Reference": "#66c",
+    "Function": "#096",
+    "Object": "#666",
+    "HocI18n": "#06c"
+};
+const vtCategory = (column = {}) => {
+    console.info(column);
+    if ("category" === column.dataIndex) {
+        column.render = (text) => {
+            const color = COLOR[text];
+            const style = {};
+            if (color) style.color = color;
+            console.info(style);
+            return (<span style={style}>{text}</span>)
+        }
+    }
+};
 const SOURCE = {
-    "R": "appstore,16,#39c,React"
+    "R": "appstore,16,#6cf,React,来源于当前React组件、父组件等",
+    "Z": "experiment,16,#f03,Zero,来源于@zero标记生成",
+    "X": "deployment-unit,16,#639,Redux,来源于connect过后的结果",
+    "S": "gold,16,#f93,State,来源于状态state定义",
+    "J": "fork,16,#9c0,Json,直接来源于Json文件",
+    "I": "download,16,#063,Import,直接来源于当前组件在import时的结果"
 };
 const vtSource = (column = {}, mapping) => {
     if ("source" === column.dataIndex) {
@@ -122,5 +152,6 @@ export default {
     vtNameOption,
     vtRequired,
     vtType,
-    vtSource
+    vtSource,
+    vtCategory,
 }

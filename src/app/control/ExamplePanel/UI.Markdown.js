@@ -6,7 +6,7 @@ import Ux from 'ux';
 const {zero} = Ux;
 
 const renderColumn = (columns = []) => columns.map(column => {
-    Ux.D.vtType(column);
+    Ux.D.vtCategory(column);
     Ux.D.vtNameOption(column);
     Ux.D.vtSource(column);
     return column;

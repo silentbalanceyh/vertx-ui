@@ -11,6 +11,8 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
 
     render() {
+        console.info(this.state);
+        console.info(this.props);
         const {children, $status = {}} = this.props;
         return (
             <PageCard reference={this} {...$status}>

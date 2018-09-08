@@ -19,20 +19,24 @@
                 "title": "提供者"
             },
             {
-                "dataIndex": "consumer",
-                "title": "消费者"
-            },
-            {
                 "dataIndex": "name",
                 "title": "属性名"
+            },
+            {
+                "dataIndex": "secondary",
+                "title": "二级属性"
             },
             {
                 "dataIndex": "value",
                 "title": "常用值"
             },
             {
-                "dataIndex": "type",
+                "dataIndex": "category",
                 "title": "属性类型"
+            },
+            {
+                "dataIndex": "consumer",
+                "title": "消费者"
             },
             {
                 "dataIndex": "comment",
@@ -41,6 +45,6 @@
         ]
     },
     "_info": {
-        "message": "\"组件属性\"和\"属性树\"的区别是组件属性描述了当前文件对应组件「单个js文件」在使用过程中的职责、连接点、实战过程中的「常用组件」相关教程。"
+        "message": "\"组件属性\"和\"属性树\"的区别是组件属性描述了当前文件对应组件「单个js文件」在使用过程中的职责、连接点、实战过程中的「常用组件」相关教程，不包括消费的组件的所有支持属性，如PageCard中的$leftVisible等。"
     }
 }
