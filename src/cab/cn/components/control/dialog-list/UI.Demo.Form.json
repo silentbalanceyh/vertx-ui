@@ -28,7 +28,7 @@
                     "$option": {
                         "edit": "编辑",
                         "delete": "删除",
-                        "delete.confirm": "从部门中删除当前用户？"
+                        "delete-confirm": "从部门中删除当前用户？"
                     }
                 },
                 {

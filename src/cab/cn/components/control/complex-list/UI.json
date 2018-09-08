@@ -511,7 +511,7 @@
             {
                 "source": "X",
                 "provider": "Redux状态树",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$list",
                 "category": "DataObject",
                 "comment": "主列表呈现的「本页数据」。"
@@ -519,7 +519,7 @@
             {
                 "source": "X",
                 "provider": "Redux状态树",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$query",
                 "category": "DataObject",
                 "comment": "主列表中的「查询条件」。"
@@ -527,7 +527,7 @@
             {
                 "source": "J",
                 "provider": "当前组件",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$mockData",
                 "category": "Object",
                 "comment": "模拟数据。"
@@ -535,7 +535,7 @@
             {
                 "source": "C",
                 "provider": "<ComplexList/>",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "fnClose",
                 "category": "Function",
                 "comment": "关闭Tab标签页函数。"
@@ -543,7 +543,7 @@
             {
                 "source": "X",
                 "provider": "Zero框架封装",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "fnOut",
                 "category": "Function",
                 "comment": "直接调用了全局的Action来写状态树专用。"
@@ -551,7 +551,7 @@
             {
                 "source": "A",
                 "provider": "Ant Design框架",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "form",
                 "category": "Object",
                 "comment": "Ant Design Form专用。"
@@ -559,7 +559,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$hoc",
                 "category": "HocI18n",
                 "comment": "在当前组件中可直接使用。"
@@ -567,7 +567,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$op",
                 "secondary": "$opAdd",
                 "category": "Function",
@@ -576,7 +576,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$op",
                 "secondary": "$opSave",
                 "category": "Function",
@@ -585,7 +585,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd",
+                "consumer": "$formEdit",
                 "name": "$op",
                 "secondary": "$opReset",
                 "category": "Function",

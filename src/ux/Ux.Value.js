@@ -90,11 +90,20 @@ const fix = (cell, reference) => {
         return reference;
     }
 };
+const isEmpty = (object) => {
+    if (object) {
+        return !U.isArray(object) && 0 < Object.keys(object).length;
+    } else {
+        return true;
+    }
+};
 /**
  * @class Value
  * @description 数值计算器
  */
 export default {
+    // 严格判断
+    isEmpty,
     // 对象处理方法
     assign,
     clone,

@@ -13,8 +13,6 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        console.info(this.props);
-        console.info(this.state);
         return (
             <div>
                 <MajorForm {...this.props}/>

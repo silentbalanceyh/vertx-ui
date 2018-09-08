@@ -1,6 +1,7 @@
 ### 1.说明
 
-* 【参考ComplexList】
+在没有特殊说明的情况下，`UI.Demo.Add.Major.js/UI.Demo.Edit.Major.js`文件没有任何区别，
+唯一的区别在于变量上，可参考ComplexList中的「编辑」表单中的代码。
 
 ### 2.代码
 
@@ -12,14 +13,15 @@
     const {zero} = Ux;
 
     @zero(Ux.rxEtat(require('./Cab.json'))
-        .cab("UI.Demo.Form")
-        .bind(Op)
+        .cab("UI.Demo.Edit.Major")
+        .bind(Op.Act)
         .raft(1)
         .form().to()
     )
     class Component extends React.PureComponent {
+
         render() {
-            return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 1)
+            return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op.Act, true)}, 1)
         }
     }
 
