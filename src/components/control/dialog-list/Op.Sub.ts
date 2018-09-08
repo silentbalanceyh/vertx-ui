@@ -16,12 +16,7 @@ const $opSubAdd = (reference: any) => (values) => {
     // 更新数据
     Ux.rdxListItem(reference, values);
 };
-const opSubDeletePost = (reference: any) => (id: any) => {
-    // 列表删除回调
-    console.info(id, reference)
-};
 export default {
     $opSubSave,
-    $opSubAdd,
-    opSubDeletePost
+    $opSubAdd
 }
