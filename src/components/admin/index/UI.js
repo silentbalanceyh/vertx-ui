@@ -1,5 +1,6 @@
 import React from 'react'
 import Ux from 'ux';
+import {PageCard} from 'web';
 
 const {zero} = Ux;
 
@@ -9,7 +10,11 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return (<div>Test</div>)
+        return (
+            <PageCard reference={this}>
+
+            </PageCard>
+        )
     }
 }
 
