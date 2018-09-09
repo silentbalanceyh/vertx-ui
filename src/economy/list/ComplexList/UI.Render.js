@@ -25,7 +25,7 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
      * 2.根据activeKey来执行界面切换，同时刷新子界面对应的$inited
      * 3.在关闭窗口的时候传入activeKey，需要关闭的是当前的窗口
      */
-    const $inited = record[activeKey] ? record[activeKey] : {};
+    const $inited = record[item.key] ? record[item.key] : {};
     return Component ? (
         <Tabs.TabPane {...item}>
             {/**
