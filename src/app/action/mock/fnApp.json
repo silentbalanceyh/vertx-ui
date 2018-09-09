@@ -2,7 +2,7 @@
     "mock": true,
     "data": {
         "name": "app.vertx",
-        "title": "Vertx Zero开发框架",
+        "title": "Zero UI开发框架",
         "logo": "/img/zui/logo/logo.png",
         "copyRight": "MBCloud",
         "entry": "/login/index",

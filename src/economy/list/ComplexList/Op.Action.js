@@ -137,7 +137,8 @@ const rxClose = (reference, activekey) => () => {
     const view = Init.stateView("list", undefined, reference);
     const state = {tabs, ...view};
     reference.setState(state);
-    Ux.writeTree(reference, {"grid.list": undefined})
+    // 提交过后关闭窗口时删除树上数据
+    Init.clearByKey(reference, activekey, {"grid.list": undefined});
 };
 const rxFilter = (reference = {}) => (value, event) => {
     const $query = Init.readQuery(reference);

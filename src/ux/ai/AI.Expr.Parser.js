@@ -79,6 +79,7 @@ const PARSER = {
     // 特殊item属性
     itemClass: jsxItem("className"),
     colon: jsxItemBoolean("colon"),
+    type: jsxValue("type"),
     status: jsxItem("status")
 };
 const parseTo = (item = {}, literal = "") => {

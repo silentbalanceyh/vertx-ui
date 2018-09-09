@@ -1,2 +1,13 @@
 {
+    "_page": {
+        "title": "Zero UI / Zero Micro教程"
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabGuide",
+        "items": [
+            "教程目录,tabGuide",
+            "项目结构,tabArch",
+            "框架原理,tabAnalyze"
+        ]
+    }
 }

@@ -44,13 +44,12 @@ const itemInit = (reference) => {
         return dataArray && dataArray.is() ? dataArray.getElement(editKey) : {};
     }
 };
-const itemDelete = (reference, id) => {
+const itemDelete = (reference, id, state = {}) => {
     const {$inited = {}, $items, $addKey} = reference.props;
     const hittedKey = $addKey || $inited.key;
     const dataRecord = State.rapitRecord($items, hittedKey, {key: id}, true);
-    State.writeTree(reference, {
-        "list.items": dataRecord
-    });
+    state['list.items'] = dataRecord;
+    State.writeTree(reference, state);
 };
 /**
  * 读取Items专用方法，
@@ -60,12 +59,12 @@ const itemDelete = (reference, id) => {
  */
 const itemRead = (reference) => {
     // list.items树上的数据，主记录id只能从$parent中读取
-    const {$items, $parent = {}, $addKey} = reference.props;
+    const {$items, $inited = {}, $addKey} = reference.props;
     let result = [];
     if ($items) {
         let hittedKey;
-        if ($parent.key) {
-            hittedKey = $parent.key;
+        if ($inited.key) {
+            hittedKey = $inited.key;
         } else {
             if ($addKey) {
                 hittedKey = $addKey;

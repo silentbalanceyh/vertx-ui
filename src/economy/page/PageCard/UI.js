@@ -46,7 +46,7 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            children, reference, $card = 'page-card', $extra,
+            children, reference, $card = 'page-card', $extra, $title,
             $leftVisible = true, $rightVisible = true,
             $backVisible = true,
             // Inject专用函数，用于执行属性变幻
@@ -55,8 +55,9 @@ class Component extends React.PureComponent {
         const topbar = rxInject(this.state.$config);
         if (topbar) {
             // 左边按钮
+            const titleText = $title ? $title : (topbar ? topbar.title : "");
             const title = (
-                <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span>{titleText}&nbsp;&nbsp;&nbsp;&nbsp;
                     {$leftVisible ? Op.renderButton(reference, topbar) : false}
                 </span>
             );

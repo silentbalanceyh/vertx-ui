@@ -16,7 +16,7 @@ const renderPageAdd = (reference, item = {}) => {
         </Tabs.TabPane>
     ) : false
 };
-const renderPageEdit = (reference, item = {}, activeKey) => {
+const renderPageEdit = (reference, item = {}) => {
     const {$formEdit: Component} = reference.props;
     const {record} = reference.state;
     /**
@@ -25,7 +25,7 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
      * 2.根据activeKey来执行界面切换，同时刷新子界面对应的$inited
      * 3.在关闭窗口的时候传入activeKey，需要关闭的是当前的窗口
      */
-    const $inited = record[activeKey] ? record[activeKey] : {};
+    const $inited = record[item.key] ? record[item.key] : {};
     return Component ? (
         <Tabs.TabPane {...item}>
             {/**
@@ -34,12 +34,10 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
              * 渲染界面的key和activeKey相等的时候才执行该渲染
              * 这样不论打开多少个窗口，都不会引起问题
              **/}
-            {item.key === activeKey ? (
-                <Component
-                    fnClose={Op.rxClose(reference, activeKey)}
-                    fnMock={Op.mockfnRecord(reference, true)}
-                    $inited={$inited} {...reference.props}/>
-            ) : false}
+            <Component
+                fnClose={Op.rxClose(reference, item.key)}
+                fnMock={Op.mockfnRecord(reference, true)}
+                $inited={$inited} {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };

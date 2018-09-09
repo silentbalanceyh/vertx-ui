@@ -1,5 +1,13 @@
 import React from 'react'
-import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
+import {
+    Alert,
+    Button,
+    Col,
+    Drawer,
+    Input,
+    Popconfirm,
+    Row
+} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import U from 'underscore';
@@ -48,19 +56,22 @@ const renderSearch = (reference) => {
     return enabled ? (
         <Row>
             <Col span={18}>
-                <Input.Search placeholder={options['search.placeholder'] ?
-                    options['search.placeholder'] : ""}
-                              onSearch={Act.rxFilter(reference)}
-                              value={term}
-                              onChange={Act.rxInput(reference)}/>
+                <Input.Search
+                    placeholder={options['search.placeholder'] ?
+                        options['search.placeholder'] : ""}
+                    onSearch={Act.rxFilter(reference)}
+                    value={term}
+                    onChange={Act.rxInput(reference)}/>
             </Col>
             <Col span={5} offset={1}>
                 <Button.Group>
-                    <Button icon={"reload"} onClick={Act.rxClear(reference)}/>
-                    {advanced ? (<Button icon={"ellipsis"} onClick={() => {
-                        // 判断是否已经在快速搜索中输入了数据
-                        reference.setState({drawer: true})
-                    }}/>) : false}
+                    <Button icon={"reload"}
+                            onClick={Act.rxClear(reference)}/>
+                    {advanced ? (<Button icon={"ellipsis"}
+                                         onClick={() => {
+                                             // 判断是否已经在快速搜索中输入了数据
+                                             reference.setState({drawer: true})
+                                         }}/>) : false}
                 </Button.Group>
             </Col>
         </Row>
@@ -121,8 +132,11 @@ const renderButton = (reference, item = {}, reset = false) => {
         event.preventDefault();
         const options = Init.readOption(reference);
         const {key, view} = reference.state;
+        /**
+         * 添加只有一个，所以如果包含了添加的情况不处理key相关信息（即添加不计算)
+         */
         const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
-        const connectId = `${prefix}${key ? key : ""}`;
+        const connectId = "add" === view ? prefix : `${prefix}${key ? key : ""}`;
         // Monitor专用连接器
         Ux.D.writePointer(item, connectId);
         Ux.connectId(connectId);
@@ -160,16 +174,18 @@ const renderSubmit = (reference) => {
         resetAttrs.key = options["op.connect.reset"];
     } else {
         // 设置连接点
-        editAttrs.key = "_dynamic_Reset"
+        resetAttrs.key = "_dynamic_Reset"
     }
     resetAttrs.onClick = renderButton(reference, resetAttrs, true);
     return "list" !== view ? (
         <Button.Group>
             <Button {...editAttrs}/>
             {("edit" === view && opDeleted) ? (
-                <Popconfirm title={options['confirm.delete']}
-                            onConfirm={() => Act.rxDeleteDetail(reference, key)}>
-                    <Button icon={"delete"} type={"danger"}/>
+                <Popconfirm
+                    title={options['confirm.delete']}
+                    onConfirm={() => Act.rxDeleteDetail(reference, key)}>
+                    <Button icon={"delete"}
+                            type={"danger"}/>
                 </Popconfirm>
             ) : false}
             <Button {...resetAttrs}/>
@@ -199,7 +215,8 @@ const renderMessage = (reference) => {
             if (config) {
                 // 计算条件字符串
                 let message = Ux.irMessage(prefix, condition, config);
-                return message ? (<Alert message={message}/>) : false
+                return message ? (
+                    <Alert message={message}/>) : false
             }
         }
     }

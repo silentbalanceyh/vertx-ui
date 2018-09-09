@@ -66,17 +66,20 @@ class Component extends React.PureComponent {
     render() {
         const {$op = {}} = this.state;
         const {component: Component} = this.props;
+        const info = Ux.fromHoc(this, "info");
         return (
             <Layout>
                 <SiderBar {...Ux.toEffect(this.state)}
                           {...Ux.toProp(this.props, 'app', 'router', 'menus')} />
                 <Layout>
-                    <GlobalHeader fnCollapse={$op.collapse(this)}
+                    <GlobalHeader $banner={info}
+                                  fnCollapse={$op.collapse(this)}
                                   {...Ux.toEffect(this.state)}
                                   {...Ux.toProp(this.props, 'router', 'user')} />
                     <Content>
                         <div className={"page-header"}>
-                            <PagerHeader {...Ux.toProp(this.props, 'router')} $navs={buildNavs(this)}/>
+                            <PagerHeader {...Ux.toProp(this.props, 'router')}
+                                         $navs={buildNavs(this)}/>
                         </div>
                         <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>

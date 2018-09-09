@@ -30,6 +30,7 @@ class Component extends React.PureComponent {
             $diagram = {}, // 数据流结构图
             $datalist = {}, // 全属性表（分组件清单）
             $datatree = {}, // 文件树
+            $title = "", // 标题：可动态变更
             // $tool = [], // 被禁用的工具栏
         } = this.props;
         // 说明信息
@@ -39,7 +40,7 @@ class Component extends React.PureComponent {
             $drawer
         } = this.state;
         return (
-            <PageCard reference={this}>
+            <PageCard reference={this} $title={$title}>
                 {Ux.auiTab(this)
                     .mount("onChange", ($_tabIndex) => this.setState({$_tabIndex}))
                     .mount("type", "card")
