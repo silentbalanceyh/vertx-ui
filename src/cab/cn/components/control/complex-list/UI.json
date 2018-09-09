@@ -44,16 +44,24 @@
         }
     },
     "_datatree": {
-        "title": "UI.Demo.js",
+        "title": "<Root>",
         "children": [
             {
-                "title": "UI.Demo.Filter.js"
+                "title": "UI.Demo.js",
+                "children": [
+                    {
+                        "title": "UI.Demo.Filter.js"
+                    },
+                    {
+                        "title": "UI.Demo.Form.Add.js"
+                    },
+                    {
+                        "title": "UI.Demo.Form.Edit.js"
+                    }
+                ]
             },
             {
-                "title": "UI.Demo.Form.Add.js"
-            },
-            {
-                "title": "UI.Demo.Form.Edit.js"
+                "title": "Op.ts"
             }
         ]
     },

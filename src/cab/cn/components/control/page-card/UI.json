@@ -40,7 +40,12 @@
         }
     },
     "_datatree": {
-        "title": "UI.Demo.js"
+        "title": "<ROOT>",
+        "children": [
+            {
+                "title": "UI.Demo.js"
+            }
+        ]
     },
     "_datalist": {
         "UI.Demo.js": [

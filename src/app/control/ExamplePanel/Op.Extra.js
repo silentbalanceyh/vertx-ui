@@ -17,6 +17,24 @@ const applyKey = (data = {}) => {
     } else {
         data.icon = "file";
     }
+    if (data.title.endsWith(".js")) {
+        data.title = (<span style={{
+            color: "#e79627"
+        }}>{data.title}</span>)
+    } else if (data.title.endsWith(".ts")) {
+        data.title = (<span style={{
+            color: "#1e8cd5"
+        }}>
+            {data.title}
+        </span>)
+    } else {
+        data.title = (<span style={{
+            color: "black",
+            fontWeight: 700
+        }}>
+            {data.title}
+        </span>)
+    }
     data.selectable = false;
 };
 const applyKeys = (data = {}, ref = []) => {
@@ -37,15 +55,16 @@ const renderTreeNodes = (data = {}) => {
 };
 const renderExtra = (reference) => {
     const {$datatree = {}} = reference.props;
-    applyKey($datatree);
+    const treeData = Ux.clone($datatree);
+    applyKey(treeData);
     const keys = [];
-    applyKeys($datatree, keys);
+    applyKeys(treeData, keys);
     return (
         <Popover trigger={"click"} placement={"left"}
                  content={
                      <Tree showLine defaultExpandAll
                            expandedKeys={keys}>
-                         {renderTreeNodes($datatree)}
+                         {renderTreeNodes(treeData)}
                      </Tree>
                  }>
             <Button icon={"cluster"}/>
