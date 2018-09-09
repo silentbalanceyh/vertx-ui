@@ -28,26 +28,26 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 由于Zero UI已经使用了“所见即所得”的模式来介绍，所以读者可以直接下载代码，在本地运行（确保您的系统中安装了node）：
 
-**「1」**执行下边的命令下载代码：
+执行下边的命令下载代码：
 
 ```
 git clone https://github.com/silentbalanceyh/vertx-ui.git
 ```
 
-**「2」**下载了该项目过后，直接进入该项目，安装依赖包
+下载了该项目过后，直接进入该项目，安装依赖包
 
 ```
 cd vertx-ui
 npm install
 ```
 
-**「3」**安装完成过后执行脚本：`run-zero.sh / run-zero.bat`
+安装完成过后执行脚本：`run-zero.sh / run-zero.bat`
 
 ```
 run-zero.bat
 ```
 
-**「4」**然后在浏览器中打开地址：[http://localhost:4000/zui/login/index](http://localhost:4000/zui/login/index)，则可以看到下边界面
+然后在浏览器中打开地址：[http://localhost:4000/zui/login/index](http://localhost:4000/zui/login/index)，则可以看到下边界面
 
 ![](/document/image/login.png)
 
