@@ -10,7 +10,8 @@
             },
             {
                 "title": "变量值",
-                "dataIndex": "value"
+                "dataIndex": "value",
+                "className": "column-value"
             },
             {
                 "title": "类型",
