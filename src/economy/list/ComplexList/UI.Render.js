@@ -34,12 +34,10 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
              * 渲染界面的key和activeKey相等的时候才执行该渲染
              * 这样不论打开多少个窗口，都不会引起问题
              **/}
-            {item.key === activeKey ? (
-                <Component
-                    fnClose={Op.rxClose(reference, activeKey)}
-                    fnMock={Op.mockfnRecord(reference, true)}
-                    $inited={$inited} {...reference.props}/>
-            ) : false}
+            <Component
+                fnClose={Op.rxClose(reference, activeKey)}
+                fnMock={Op.mockfnRecord(reference, true)}
+                $inited={$inited} {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };

@@ -2,6 +2,14 @@
     "_page": {
         "title": "Zero UI教程主页"
     },
+    "_tabs": {
+        "defaultActiveKey": "tabArch",
+        "items": [
+            "整体结构,tabArch",
+            "规范说明,tabCode",
+            "原理解析,tabAnalyze"
+        ]
+    },
     "_treedata": [
         {
         }
