@@ -5,6 +5,7 @@ import Rdx from '../fun';
 import Cv from '../Ux.Constant';
 import Prop from '../prop';
 import D from '../monitor';
+import Ajax from '../Ux.Ajax';
 
 /**
  * 计算当前提交的模式
@@ -203,40 +204,41 @@ const _executor = (reference, config = {}) => {
         D.connectSubmit(reference, data);
     } else {
         // 只有list.items的提交会触发该列表信息
+        let majorKey;
         if ("ADD-EDIT" === mode || "ADD-ADD" === mode) {
             // 添加模式
             const {$addKey} = reference.props;
             Rdx.rdxListItem(reference, data, $addKey);
-            /**
-             * 连接相关数据信息，数据结构：
-             * {
-             *     majorKey：主记录key - 来自$addKey
-             *     data：子记录数据
-             * }
-             */
-            D.connectSubmit(reference, {
-                majorKey: $addKey,
-                data,
-            }, false);
+            majorKey = $addKey;
         } else {
             const {$parent = {}} = reference.props;
             // 主记录编辑模式（$inited中包含key）
             Rdx.rdxListItem(reference, data);
-            /**
-             * 连接相关数据信息，数据结构：
-             * {
-             *     majorKey：主记录key - 来自$parent.key
-             *     data：子记录数据
-             * }
-             */
-            D.connectSubmit(reference, {
-                majorKey: $parent.key,
-                data,
-            }, false);
+            majorKey = $parent.key;
         }
+        /**
+         * 连接相关数据信息，数据结构：
+         * {
+         *     majorKey：主记录key
+         *     1. 添加模式来自$addKey
+         *     2. 编辑模式来自$parent.key
+         *     data：子记录数据
+         * }
+         */
+        D.connectSubmit(reference, {
+            majorKey,
+            data,
+        }, false);
     }
-    // 2.读取success和failure
-    console.info(data);
+    return _executeCode(reference, config, data);
+};
+const _executeCode = (reference, config = {}, data) => {
+    const {success, failure, mock} = config;
+    // 1.只有包含了success过后才会触发回调
+    const fnSuccess = () => U.isFunction(success) ? success(data, mock) : undefined;
+    const fnFailure = (errors) => U.isFunction(failure) ? failure(errors, data) : undefined;
+    const fnLoading = () => Rdx.rdxSubmitting(reference, false);
+    return Ajax.ajaxUniform(fnSuccess, fnFailure, fnLoading);
 };
 export default {
     ai2Event
