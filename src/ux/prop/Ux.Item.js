@@ -59,12 +59,12 @@ const itemDelete = (reference, id, state = {}) => {
  */
 const itemRead = (reference) => {
     // list.items树上的数据，主记录id只能从$parent中读取
-    const {$items, $parent = {}, $addKey} = reference.props;
+    const {$items, $inited = {}, $addKey} = reference.props;
     let result = [];
     if ($items) {
         let hittedKey;
-        if ($parent.key) {
-            hittedKey = $parent.key;
+        if ($inited.key) {
+            hittedKey = $inited.key;
         } else {
             if ($addKey) {
                 hittedKey = $addKey;
