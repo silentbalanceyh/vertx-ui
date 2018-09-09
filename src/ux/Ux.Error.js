@@ -153,12 +153,6 @@ export default {
             callback(fnOut);
         }, 10003, reference);
     }, 10002, reference),
-    fxForm: (reference = {}, callback) => _fxTerminal(!!reference && reference.props, () => {
-        const {form} = reference.props;
-        _fxTerminal(form, () => {
-            callback(form);
-        }, 10006, reference)
-    }, 10002, reference),
     fxSubmit: (reference = {}, Op = {}, key) => _fxTerminal(!!reference && reference.props, () => {
         if (Op[key]) {
             return Op[key](reference);

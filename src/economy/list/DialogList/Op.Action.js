@@ -5,6 +5,7 @@ const rxAdd = (reference, connectKey) => (event) => {
     event.preventDefault();
     reference.setState({
         show: true,
+        // 互斥写法
         editKey: undefined,
         connectKey
     })
@@ -16,6 +17,7 @@ const rxEdit = (reference, id) => {
     const connectKey = options["op.edit.window"];
     $self.setState({
         show: true,
+        // 互斥写法
         editKey: id,
         connectKey
     })
@@ -23,11 +25,7 @@ const rxEdit = (reference, id) => {
 
 const rxDelete = (reference, id) => {
     const {$self} = reference.props;
-    const {$inited = {}, $items} = $self.props;
-    const dataRecord = Ux.rapitRecord($items, $inited.key, {key: id}, true);
-    Ux.writeTree(reference, {
-        "list.items": dataRecord
-    });
+    Ux.itemDelete(reference, id);
     const {rxDelete} = $self;
     if (rxDelete) {
         rxDelete(id);
@@ -41,6 +39,7 @@ const rxClose = (reference) => (event) => {
     reference.setState({
         show: false,
         editKey: undefined,
+        addKey: undefined,
         connectKey: ""
     })
 };

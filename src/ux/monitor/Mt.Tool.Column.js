@@ -170,9 +170,13 @@ const stString = (columns = [], ...supported) => {
     const $supported = Immutable.fromJS(supported);
     columns.filter(column => $supported.contains(column.dataIndex))
         .forEach(column => {
-            column.sorter = (left, right, sort) => "descend" === sort ?
-                Ux.sorterDesc(left, right, column.dataIndex) :
-                Ux.sorterAsc(left, right, column.dataIndex);
+            column.sorter = (left, right, sort) => {
+                if ("descend" === sort) {
+                    return Ux.sorterDesc(left, right, column.dataIndex)
+                } else {
+                    return Ux.sorterAsc(left, right, column.dataIndex);
+                }
+            }
         })
 };
 export default {

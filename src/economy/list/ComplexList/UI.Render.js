@@ -8,9 +8,11 @@ const renderPageAdd = (reference, item = {}) => {
     // 添加的时候activeKey就应该只有一个，就是item.key
     return Component ? (
         <Tabs.TabPane {...item}>
-            <Component fnClose={Op.rxClose(reference, item.key)}
-                       fnMock={Op.mockfnRecord(reference)}
-                       {...reference.props}/>
+            <Component
+                fnClose={Op.rxClose(reference, item.key)}
+                fnMock={Op.mockfnRecord(reference)}
+                $addKey={item.key}
+                {...reference.props}/>
         </Tabs.TabPane>
     ) : false
 };
@@ -33,9 +35,10 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
              * 这样不论打开多少个窗口，都不会引起问题
              **/}
             {item.key === activeKey ? (
-                <Component fnClose={Op.rxClose(reference, activeKey)}
-                           fnMock={Op.mockfnRecord(reference, true)}
-                           $inited={$inited} {...reference.props}/>
+                <Component
+                    fnClose={Op.rxClose(reference, activeKey)}
+                    fnMock={Op.mockfnRecord(reference, true)}
+                    $inited={$inited} {...reference.props}/>
             ) : false}
         </Tabs.TabPane>
     ) : false
@@ -60,7 +63,9 @@ const renderPageList = (reference, item = {}) => {
                 <Col span={24} style={{
                     paddingTop: 10
                 }}>
-                    <Table {...tableDatum.table} loading={!ready} dataSource={tableDatum.data}/>
+                    <Table {...tableDatum.table}
+                           loading={!ready}
+                           dataSource={tableDatum.data}/>
                 </Col>
             </Row>
             {Op.renderDrawer(reference)}

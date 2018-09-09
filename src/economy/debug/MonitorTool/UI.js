@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
                     {buttons.map(button => {
                         const {key, tip, ...rest} = button;
                         return (
-                            <Tooltip title={tip} key={key}>
+                            <Tooltip title={tip} key={key} trigger={"contextMenu"}>
                                 <Button {...rest}/>
                             </Tooltip>
                         )

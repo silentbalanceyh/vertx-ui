@@ -1,12 +1,12 @@
 import React from 'react'
 import Ux from 'ux';
-import Op from './Op.Sub';
+import Op from './Op';
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo.Form.Dialog")
-    .bind(Op)
+    .cab("UI.Demo.Dialog")
+    .bind(Op.Sub)
     .raft(1)
     .form().to()
 )

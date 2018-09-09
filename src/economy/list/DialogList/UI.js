@@ -54,8 +54,11 @@ class Component extends React.PureComponent {
             // 窗口的隐藏显示
             const {show, editKey} = this.state;
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
-            const {$inited = {}, ...rest} = this.props;
-            const initData = Op.calcInited(this, $inited.key);
+            const {$inited = {}, $addKey, ...rest} = this.props;
+            /**
+             * 计算初始化数据initData，
+             **/
+            const initData = Ux.itemInit(this);
             // 不点取消不可关闭
             dialog.maskClosable = false;
             return (
@@ -64,10 +67,12 @@ class Component extends React.PureComponent {
                     {Render.renderHeader(this)}
                     {/** 渲染表单 **/}
                     <Table {...table} dataSource={data}/>
-                    <DynamicDialog $dialog={dialog} $visible={show}>
+                    <DynamicDialog $dialog={dialog}
+                                   $visible={show}>
                         {/** 只有editKey存在时渲染 **/}
                         {FormEdit ? (editKey && show ? (
-                            <FormEdit {...rest} key={`formEdit`}
+                            <FormEdit {...rest}
+                                      key={`formEdit`}
                                       $inited={initData}
                                       $key={editKey}
                                       $parent={$inited}
@@ -77,9 +82,11 @@ class Component extends React.PureComponent {
                         ) : false) : false}
                         {/** 只有editKey为undefined时渲染 **/}
                         {FormAdd ? (!editKey && show ? (
-                            <FormAdd {...rest} key={"formAdd"}
+                            <FormAdd {...rest}
+                                     key={"formAdd"}
                                      $inited={initData}
                                      $parent={$inited}
+                                     $addKey={$addKey}
                                      fnClose={Op.rxClose(this)}
                                      fnListItem={Op.rxList(this)}
                                      fnClear={Op.rxReset(this)}/>

@@ -101,17 +101,23 @@ const _rxClick = (reference, item = {}) => {
             if (form) {
                 form.validateFieldsAndScroll((error, values) => {
                     if (!error) {
+                        /**
+                         * 第二参注定后续流程
+                         */
                         fnExecutor(values);
                     }
                 })
             }
         } else {
             // 纯函数
-            fnExecutor(event);
+            fnExecutor(event, form);
         }
     };
 };
-const rtSubmit = (reference = {}, success, failure) => _rtSubmit(reference, {success, failure});
+const rtSubmit = (reference = {}, success, failure) => _rtSubmit(reference, {
+    success,
+    failure
+});
 /**
  * Ant Form的提交专用按钮，其中会执行Ant Form的函数
  * metadata = {
@@ -135,11 +141,12 @@ const rtRet = (reference, metadata = {}) => {
     const {text, ...rest} = metadata;
     const fnReset = $op[metadata.id];
     return (
-        <Button onClick={U.isFunction(fnReset) ? (event) => {
-            Ux.formReset(reference);
-            fnReset(reference)(event);
-        } : () => Ux.formReset(reference)}
-                {...rest} loading={$loading}>
+        <Button
+            onClick={U.isFunction(fnReset) ? (event) => {
+                Ux.formReset(reference);
+                fnReset(reference)(event);
+            } : () => Ux.formReset(reference)}
+            {...rest} loading={$loading}>
             {text ? text : false}
         </Button>
     );
@@ -164,7 +171,9 @@ const rtDialog = (reference, jsx = {}) => {
     // 字符串格式才执行解析
     bind.forEach(literal => "string" === typeof literal ?
         processed.push(Ai.aiExprOp(literal)) : processed.push(literal));
-    return processed.map(item => <Button {...item} onClick={_rxClick(reference, item)} className="ux-hidden"/>)
+    return processed.map(item => <Button {...item}
+                                         onClick={_rxClick(reference, item)}
+                                         className="ux-hidden"/>)
 };
 const rtNorm = (reference, jsx = {}) => {
     const buttons = jsx.buttons;
@@ -176,7 +185,11 @@ const rtNorm = (reference, jsx = {}) => {
     if (reset && !reset.id) reset.id = reset.key;
     // 构造配置
     const fnConfig = (type, item) => ({
-        type: type, key: item.key, text: item.text, op: item.id, id: item.id
+        type: type,
+        key: item.key,
+        text: item.text,
+        op: item.id,
+        id: item.id
     });
     return (
         <span>
@@ -236,8 +249,9 @@ const rtLink = (reference, metadata = {}) => {
         attr.loading = reference.state[loading];
     }
     return (
-        <Button onClick={() => Ux.toRoute(reference, uri)} {...rest}
-                {...attr}>
+        <Button
+            onClick={() => Ux.toRoute(reference, uri)} {...rest}
+            {...attr}>
             {text ? text : false}
         </Button>
     )

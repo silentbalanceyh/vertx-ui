@@ -137,7 +137,6 @@ const rxClose = (reference, activekey) => () => {
     const view = Init.stateView("list", undefined, reference);
     const state = {tabs, ...view};
     reference.setState(state);
-    // 写状态树，重新加载List
     Ux.writeTree(reference, {"grid.list": undefined})
 };
 const rxFilter = (reference = {}) => (value, event) => {

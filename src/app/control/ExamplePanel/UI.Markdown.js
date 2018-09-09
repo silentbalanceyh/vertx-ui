@@ -2,6 +2,7 @@ import React from 'react'
 import {Alert, Table, Tabs} from "antd";
 import {MarkdownViewer} from 'web';
 import Ux from 'ux';
+import Rdr from './Op.Extra';
 
 const {zero} = Ux;
 
@@ -12,7 +13,6 @@ const renderColumn = (columns = []) => columns.map(column => {
     Ux.D.vtConsumer(column);
     return column;
 });
-
 const renderPage = (reference, {
     markdown, table, message
 }) => {
@@ -27,16 +27,20 @@ const renderPage = (reference, {
         data.forEach(item => item.key = Ux.randomUUID());
         data = data.sort((left, right) => Ux.sorterAsc(left, right, 'source'));
     }
+    // 给$datatree设置Key
     return (
         <Tabs.TabPane {...rest}>
             {Ux.auiTab(reference)
+                .mount("tabBarExtraContent", Rdr.renderExtra(reference))
                 .to(
                     <MarkdownViewer $source={content}/>,
                     <div>
-                        <Alert message={message} type={"warning"} style={{
+                        <Alert message={message}
+                               type={"warning"} style={{
                             marginBottom: 8
                         }}/>
-                        <Table {...table} dataSource={data}/>
+                        <Table {...table}
+                               dataSource={data}/>
                     </div>
                 )}
         </Tabs.TabPane>
@@ -55,11 +59,19 @@ class Component extends React.PureComponent {
             const table = Ux.fromHoc(this, "table");
             const info = Ux.fromHoc(this, "info");
             table.columns = renderColumn(table.columns);
+            /** 先不考虑排序
+             Ux.D.stString(table.columns,
+             "source", "provider", "consumer",
+             "name", "category"
+             );**/
             return (
-                <Tabs className={"page-card-subtab"} tabPosition={"left"}
+                <Tabs className={"page-card-subtab"}
+                      tabPosition={"left"}
                       defaultActiveKey={key} size={"small"}>
                     {$markdown.map(markdown => renderPage(this, {
-                        markdown, table, message: info.message
+                        markdown,
+                        table,
+                        message: info.message
                     }))}
                 </Tabs>
             )

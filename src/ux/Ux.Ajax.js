@@ -127,9 +127,16 @@ const ajaxResponse = async (request, mockData = {}, params) => {
         // 任何时候都需要调用适配器，包括errors
         body = ajaxAdapter(body);
         if (!response.ok) {
-            body = {...body, status: response.status, statusText: response.statusText};
+            body = {
+                ...body,
+                status: response.status,
+                statusText: response.statusText
+            };
         }
-        if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({request: params, response: body});
+        if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({
+            request: params,
+            response: body
+        });
         Log.response(body, params, request);
         if (response.ok) {
             return body;
@@ -234,12 +241,52 @@ const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockDa
  * @param uri 服务专用URI
  */
 const _buildApi = (serviceName = "", uri = "") => `/${serviceName}${uri}`.replace(/\/\//g, "/");
+
+const ajaxUniform = (success, failure, loading) => new Promise((resolve, reject) => {
+    if (U.isFunction(success)) {
+        // 1.执行success函数
+        const retSuccess = success();
+        // 2.是否Promise
+        if (Promise.prototype.isPrototypeOf(retSuccess)) {
+            return success.then(data => {
+                loading();
+                return resolve({
+                    data, success: true
+                });
+            }).catch(errors => {
+                loading();
+                if (U.isFunction(failure)) {
+                    // 执行failure专用
+                    const retFailure = failure(errors);
+                    if (Promise.prototype.isPrototypeOf(retFailure)) {
+                        return retFailure;
+                    } else {
+                        return reject(retFailure);
+                    }
+                } else {
+                    return reject(errors);
+                }
+            })
+        } else {
+            // 不返回promise，直接返回值
+            loading();
+            return resolve({
+                data: retSuccess,
+                success: true
+            })
+        }
+    } else {
+        return resolve({success: true});
+    }
+});
 /**
  * @class Ajax
  * @description 远程Ajax访问专用API方法
  */
 export default {
     ...RxAjax,
+    // 特殊方法，传入两个参数返回Promise
+    ajaxUniform,
     // 特殊方法读取当前想对路径
     ajaxResource,
     /**

@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from 'ux';
-import Op from './Op.Sub';
+import Op from './Op';
 import {DialogList} from 'web';
 import Form from './UI.Demo.Dialog';
 import MajorForm from './UI.Demo.Add.Major'
@@ -17,8 +17,9 @@ class Component extends React.PureComponent {
             <div>
                 <MajorForm {...this.props}/>
                 <DialogList {...this.props} reference={this}
-                            rxDelete={Op.opSubDeletePost(this)}
-                            $formAdd={Form} $formEdit={Form}/>
+                            rxDelete={Op.opDeletePost(this)}
+                            $formAdd={Form}
+                            $formEdit={Form}/>
             </div>
         )
     }

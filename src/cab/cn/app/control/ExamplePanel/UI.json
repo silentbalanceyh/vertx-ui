@@ -17,7 +17,7 @@
             "配置信息,tabConfig",
             "源代码,tabSource",
             "属性树,tabAttribute",
-            "详细结构,tabDiagram"
+            "数据流,tabDiagram"
         ]
     },
     "_toolbar": {

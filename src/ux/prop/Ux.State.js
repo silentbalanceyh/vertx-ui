@@ -85,40 +85,38 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     // 检查数据基本信息
     E.fxTerminal(!dataObject, 10082, dataObject);
     E.fxTerminal(!record, 10062, record);
-    E.fxTerminal(!id, 10062, id);
+    // E.fxTerminal(!id, 10062, id);
     // 读取原始记录
     const dataRecord = dataObject && dataObject.is()
         ? Immutable.fromJS(dataObject.to()).toJS() : {};
     // console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
-    if (id) {
-        // 读取原始数据
-        let $extracted = dataObject.$(id);
-        const executeRecord = (single) => {
-            // 从原始记录中抽取DataArray列表
-            if ($extracted && $extracted.is()) {
-                if (deleted) {
-                    // 删除记录中的数据
-                    $extracted.removeElement(single.key);
-                } else {
-                    // 更新数据
-                    $extracted.saveElement(single);
-                }
+    // 读取原始数据
+    let $extracted = dataObject.$(id);
+    const executeRecord = (single) => {
+        // 从原始记录中抽取DataArray列表
+        if ($extracted && $extracted.is()) {
+            if (deleted) {
+                // 删除记录中的数据
+                $extracted.removeElement(single.key);
             } else {
-                // 这种只能添加，不会在删除的时候触发
-                if (single) {
-                    if (!single['key'] || undefined === single['key']) {
-                        single['key'] = Ux.randomUUID();
-                    }
-                    $extracted.saveElement(single);
-                }
+                // 更新数据
+                $extracted.saveElement(single);
             }
-            dataRecord[id] = $extracted.to();
-        };
-        if (U.isArray(record)) {
-            record.forEach(executeRecord);
         } else {
-            executeRecord(record);
+            // 这种只能添加，不会在删除的时候触发
+            if (single) {
+                if (!single['key'] || undefined === single['key']) {
+                    single['key'] = Ux.randomUUID();
+                }
+                $extracted.saveElement(single);
+            }
         }
+        dataRecord[id] = $extracted.to();
+    };
+    if (U.isArray(record)) {
+        record.forEach(executeRecord);
+    } else {
+        executeRecord(record);
     }
     // console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
     return dataRecord;

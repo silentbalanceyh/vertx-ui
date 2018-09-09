@@ -39,6 +39,14 @@
             "title": "PageCard左边的主标题文字"
         }
     },
+    "_datatree": {
+        "title": "<ROOT>",
+        "children": [
+            {
+                "title": "UI.Demo.js"
+            }
+        ]
+    },
     "_datalist": {
         "UI.Demo.js": [
             {

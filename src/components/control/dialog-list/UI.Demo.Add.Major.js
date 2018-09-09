@@ -5,14 +5,14 @@ import Op from './Op';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo.Form.Add")
-    .bind(Op)
+    .cab("UI.Demo.Add.Major")
+    .bind(Op.Act)
     .raft(1)
     .form().to()
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 1)
+        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op.Act)}, 1)
     }
 }
 
