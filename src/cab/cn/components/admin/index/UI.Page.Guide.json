@@ -1,0 +1,59 @@
+{
+    "_treedata": [
+        {
+            "title": "UC - 「自定义组件」",
+            "icon": {
+                "type": "deployment-unit",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#9c0"
+                }
+            },
+            "children": [
+                "UC0001 - 卡片类：PageCard,/control/page-card",
+                "UC0002 - 卡片类：HelpCard,/control/help-card",
+                "UC0003 - 列表类：ComplexList,/control/complex-list",
+                "UC0004 - 列表类：DialogList,/control/dialog-list"
+            ]
+        },
+        {
+            "title": "UI - 「开发教程」",
+            "icon": {
+                "type": "code",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#639"
+                }
+            },
+            "children": [
+                "UI0001 - 路由规则,/system/route-rule"
+            ]
+        },
+        {
+            "title": "UT - 「研发教程」",
+            "icon": {
+                "type": "experiment",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#6cf"
+                }
+            },
+            "children": [
+                "UT0001 - 自定义组件开发"
+            ]
+        },
+        {
+            "title": "AI - 「工具教程」",
+            "icon": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#bc0981"
+                }
+            },
+            "children": [
+                "AI0001 - 数据生成工具,/tool/data-generation"
+            ]
+        }
+    ]
+}

@@ -3,5 +3,9 @@
         "key": "ima",
         "uri": "$MAIN$",
         "text": "主页"
+    },
+    "_info": {
+        "subject": "天行有常，不为尧存，不为桀亡。",
+        "comment": "——《天论》荀子"
     }
 }

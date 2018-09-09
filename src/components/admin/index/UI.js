@@ -1,6 +1,11 @@
 import React from 'react'
+import './Cab.less'
 import Ux from 'ux';
 import {PageCard} from 'web';
+import Tool from './UI.Tool';
+
+import PageArch from './UI.Page.Arch';
+import PageGuide from './UI.Page.Guide';
 
 const {zero} = Ux;
 
@@ -11,9 +16,18 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         return (
-            <PageCard reference={this}>
-
-            </PageCard>
+            <div className={"zero-main"}>
+                <PageCard reference={this}>
+                    <Tool/>
+                    {Ux.auiTab(this)
+                        .mount("tabPosition", "left")
+                        .mount("size", "small")
+                        .to(
+                            <PageGuide {...Ux.toUniform(this.props)}/>,
+                            <PageArch {...Ux.toUniform(this.props)}/>
+                        )}
+                </PageCard>
+            </div>
         )
     }
 }
