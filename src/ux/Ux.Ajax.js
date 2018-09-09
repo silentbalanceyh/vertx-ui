@@ -250,7 +250,9 @@ const ajaxUniform = (success, failure, loading) => new Promise((resolve, reject)
         if (Promise.prototype.isPrototypeOf(retSuccess)) {
             return success.then(data => {
                 loading();
-                return resolve(data);
+                return resolve({
+                    data, success: true
+                });
             }).catch(errors => {
                 loading();
                 if (U.isFunction(failure)) {
@@ -268,10 +270,13 @@ const ajaxUniform = (success, failure, loading) => new Promise((resolve, reject)
         } else {
             // 不返回promise，直接返回值
             loading();
-            return resolve(retSuccess)
+            return resolve({
+                data: retSuccess,
+                success: true
+            })
         }
     } else {
-        return resolve({});
+        return resolve({success: true});
     }
 });
 /**

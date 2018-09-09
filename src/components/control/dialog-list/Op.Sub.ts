@@ -1,8 +1,9 @@
 import Ux from 'ux';
 
-const $opSubSave = (reference: any) => Ux.ai2Event(reference, (values) => {
-
-});
+const $opSubSave = (reference: any) => Ux.ai2Event(reference,
+    (values) => {
+        Ux.closeWindow(reference);
+    });
 /**
  * (values) => {
     // 更新窗口回调
@@ -14,9 +15,10 @@ const $opSubSave = (reference: any) => Ux.ai2Event(reference, (values) => {
 }
  * @param reference
  */
-const $opSubAdd = (reference: any) => Ux.ai2Event(reference, (values) => {
-
-});
+const $opSubAdd = (reference: any) => Ux.ai2Event(reference,
+    (values) => {
+        Ux.closeWindow(reference);
+    });
 export default {
     $opSubSave,
     $opSubAdd
