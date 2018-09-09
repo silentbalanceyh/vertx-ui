@@ -38,7 +38,7 @@ const onTabClick = (reference) => (key) => {
     reference.setState(state);
 };
 
-const _onDelete = (reference, key) => {
+const _onDelete = (reference, key, state = {}) => {
     const {$items} = reference.props;
     if ($items) {
         // list.items处理
@@ -48,8 +48,11 @@ const _onDelete = (reference, key) => {
         }
         // 重写list.items;
         Ux.writeTree(reference, {
-            "list.items": dataRecord
+            "list.items": dataRecord,
+            ...state,
         })
+    } else {
+        Ux.writeTree(reference, state);
     }
 };
 
@@ -165,5 +168,6 @@ export default {
     stateView,
     readOption,
     readTable,
-    readQuery
+    readQuery,
+    clearByKey: _onDelete
 }

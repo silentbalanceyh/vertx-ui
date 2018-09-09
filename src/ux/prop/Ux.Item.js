@@ -44,13 +44,12 @@ const itemInit = (reference) => {
         return dataArray && dataArray.is() ? dataArray.getElement(editKey) : {};
     }
 };
-const itemDelete = (reference, id) => {
+const itemDelete = (reference, id, state = {}) => {
     const {$inited = {}, $items, $addKey} = reference.props;
     const hittedKey = $addKey || $inited.key;
     const dataRecord = State.rapitRecord($items, hittedKey, {key: id}, true);
-    State.writeTree(reference, {
-        "list.items": dataRecord
-    });
+    state['list.items'] = dataRecord;
+    State.writeTree(reference, state);
 };
 /**
  * 读取Items专用方法，
