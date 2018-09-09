@@ -39,21 +39,28 @@ const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     if (config && config.to) {
         label = record[config.to];
     }
-    return (<span style={jsx.style ? jsx.style : {}}>{label}</span>)
+    return (<span
+        style={jsx.style ? jsx.style : {}}>{label}</span>)
 };
 
 
 const aiUnitLabel = (reference, item = {}, jsx) =>
-    (text) => (<span style={jsx.style ? jsx.style : {}}>{text}</span>);
+    (text) => (<span
+        style={jsx.style ? jsx.style : {}}>{text}</span>);
 
 const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
     const {value, ...meta} = jsx;
+    const values = {};
+    if (text) {
+        values.value = Value.convertTime(text);
+    }
     return (
-        <DatePicker className={'rx-readonly'} {...meta} {...item['$config']}
-                    onChange={(value) => Value.valueTriggerChange(reference, {
-                        index, field: item.dataIndex,
-                        value
-                    })} value={Value.convertTime(text)}/>
+        <DatePicker
+            className={'rx-readonly'} {...meta} {...item['$config']}
+            onChange={(value) => Value.valueTriggerChange(reference, {
+                index, field: item.dataIndex,
+                value
+            })} {...values}/>
     )
 };
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
@@ -74,12 +81,14 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
         }
     }
     return (
-        <Select onChange={(value) => Value.valueTriggerChange(reference, {
-            index, field: item.dataIndex,
-            value
-        })} {...unitJsx} {...attr}>
+        <Select
+            onChange={(value) => Value.valueTriggerChange(reference, {
+                index, field: item.dataIndex,
+                value
+            })} {...unitJsx} {...attr}>
             {options.map(item => (
-                <Select.Option key={item.key} value={item.value}>
+                <Select.Option key={item.key}
+                               value={item.value}>
                     {item.label}
                 </Select.Option>
             ))}
@@ -96,7 +105,8 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) =>
         meta.className = "web-radio-view";
     }
     return AiPure.aiInputRadios(items, {
-        ...meta, onChange: (event) => Value.valueTriggerChange(reference, {
+        ...meta,
+        onChange: (event) => Value.valueTriggerChange(reference, {
             index, field: item.dataIndex,
             value: event.target.value
         })
