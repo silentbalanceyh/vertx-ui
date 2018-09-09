@@ -1,7 +1,7 @@
 {
     "_treedata": [
         {
-            "title": "UC - 「自定义组件」",
+            "title": "UC - 自定义组件",
             "icon": {
                 "type": "deployment-unit",
                 "style": {
@@ -10,14 +10,14 @@
                 }
             },
             "children": [
-                "UC0001 - 卡片类：PageCard,/control/page-card",
-                "UC0002 - 卡片类：HelpCard,/control/help-card",
+                "UC0001 - 卡片类「容器」：PageCard,/control/page-card",
+                "UC0002 - 卡片类「容器」：HelpCard,/control/help-card",
                 "UC0003 - 列表类：ComplexList,/control/complex-list",
                 "UC0004 - 列表类：DialogList,/control/dialog-list"
             ]
         },
         {
-            "title": "UI - 「开发教程」",
+            "title": "UI - 开发教程",
             "icon": {
                 "type": "code",
                 "style": {
@@ -26,11 +26,16 @@
                 }
             },
             "children": [
-                "UI0001 - 路由规则,/system/route-rule"
+                "UI0001 - 项目初始化,/system/init",
+                "UI0002 - 脚手架说明,/system/scaffold",
+                "UI0003 - 环境变量说明,/system/env",
+                "UI0004 - 路由测试,/system/route",
+                "UI0005 - 第一个模板,/system/container",
+                "UI0006 - 第一个页面,/system/component"
             ]
         },
         {
-            "title": "UT - 「研发教程」",
+            "title": "UT - 研发教程",
             "icon": {
                 "type": "experiment",
                 "style": {
@@ -39,11 +44,13 @@
                 }
             },
             "children": [
-                "UT0001 - 自定义组件开发"
+                "UT0001 - 「StateIn」封装的Redux,/research/redux",
+                "UT0002 - 「@zero」装饰器模式,/research/zero",
+                "UT0003 - 「TypeScript」数据模型,/research/ts"
             ]
         },
         {
-            "title": "AI - 「工具教程」",
+            "title": "AI - 工具教程",
             "icon": {
                 "type": "thunderbolt",
                 "style": {
@@ -52,7 +59,9 @@
                 }
             },
             "children": [
-                "AI0001 - 数据生成工具,/tool/data-generation"
+                "AI0001 - 默认属性表,/ai/attribute",
+                "AI0002 - 「$KV$」属性解析,/ai/parser",
+                "AI0003 - 自动Render组件配置,/ai/render"
             ]
         }
     ]
