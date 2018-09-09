@@ -1,33 +1,28 @@
 ### 1.说明
 
+参考`Op.ts`的文档。
+
 ### 2.代码
 
 ```typescript
-    import Ux from 'ux';
+    import Ux from "ux";
 
-    const $opSubSave = (reference: any) => (values) => {
-        // 更新窗口回调
-        console.info(values, reference.props);
-        // 关闭窗口
-        Ux.closeWindow(reference);
-        // 更新数据
-        Ux.rdxListItem(reference, values);
-    };
-    const $opSubAdd = (reference: any) => (values) => {
-        // 添加窗口回调
-        console.info(values, reference.props);
-        // 关闭窗口
-        Ux.closeWindow(reference);
-        // 更新数据
-        Ux.rdxListItem(reference, values);
-    };
-    const opSubDeletePost = (reference: any) => (id: any) => {
-        // 列表删除回调
-        console.info(id, reference)
-    };
+    const $opSave = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
+        Ux.ajaxPut("/api/dept", values, mockData)
+            .then(data => Ux.showDialog(reference, "edit", () => {
+                console.info("更新成功：", data);
+                reference.props.fnClose();
+            }))
+    });
+    const $opAdd = (reference: any) => Ux.ai2Event(reference, (values, mockData) => {
+        Ux.ajaxPost("/api/dept", values, mockData)
+            .then(data => Ux.showDialog(reference, "add", () => {
+                console.info("添加成功：", data);
+                reference.props.fnClose();
+            }))
+    });
     export default {
-        $opSubSave,
-        $opSubAdd,
-        opSubDeletePost
+        $opAdd,
+        $opSave
     }
 ```

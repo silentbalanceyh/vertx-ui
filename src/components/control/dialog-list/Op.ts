@@ -4,7 +4,7 @@ import Act from './Op.Act';
 import Sub from './Op.Sub';
 
 const opDeletePost = (reference: any) => (id: any) => {
-    // 列表删除回调
+    // 列表删除回调，目前没有设置相关回调信息
     console.info(id, reference)
 };
 

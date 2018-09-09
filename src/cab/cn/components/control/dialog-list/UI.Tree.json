@@ -3,9 +3,11 @@
         "code": "DialogList",
         "items": {
             "name": "DialogList组件",
+            "color": "#0099CC",
             "children": [
                 {
                     "name": "props",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "reference",
@@ -27,10 +29,11 @@
                 },
                 {
                     "name": "_<hoc>",
+                    "color": "#0099CC",
                     "children": [
                         {
                             "name": "options",
-                            "color": "#33af43",
+                            "color": "#0099CC",
                             "children": [
                                 {
                                     "name": "op.add",
@@ -52,7 +55,7 @@
                         },
                         {
                             "name": "window",
-                            "color": "#33af43",
+                            "color": "#0099CC",
                             "children": [
                                 {
                                     "name": "op.add.window键",
