@@ -132,8 +132,11 @@ const renderButton = (reference, item = {}, reset = false) => {
         event.preventDefault();
         const options = Init.readOption(reference);
         const {key, view} = reference.state;
+        /**
+         * 添加只有一个，所以如果包含了添加的情况不处理key相关信息（即添加不计算)
+         */
         const prefix = reset ? options['submit.reset'] : options[`submit.${view}`];
-        const connectId = `${prefix}${key ? key : ""}`;
+        const connectId = "add" === view ? prefix : `${prefix}${key ? key : ""}`;
         // Monitor专用连接器
         Ux.D.writePointer(item, connectId);
         Ux.connectId(connectId);
