@@ -16,7 +16,7 @@ const renderPageAdd = (reference, item = {}) => {
         </Tabs.TabPane>
     ) : false
 };
-const renderPageEdit = (reference, item = {}, activeKey) => {
+const renderPageEdit = (reference, item = {}) => {
     const {$formEdit: Component} = reference.props;
     const {record} = reference.state;
     /**
@@ -35,7 +35,7 @@ const renderPageEdit = (reference, item = {}, activeKey) => {
              * 这样不论打开多少个窗口，都不会引起问题
              **/}
             <Component
-                fnClose={Op.rxClose(reference, activeKey)}
+                fnClose={Op.rxClose(reference, item.key)}
                 fnMock={Op.mockfnRecord(reference, true)}
                 $inited={$inited} {...reference.props}/>
         </Tabs.TabPane>
