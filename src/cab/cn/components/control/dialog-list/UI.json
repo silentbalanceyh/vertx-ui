@@ -1053,7 +1053,7 @@
     },
     "_diagram": {
         "layout": {
-            "height": 2600
+            "height": 1800
         },
         "items": {
             "nodes": [
@@ -1116,7 +1116,28 @@
                 "_J.UI.Add.Major,UI.Demo.Add.Major.json,#ccf",
                 "_J.AM.$hoc,$hoc",
                 "UI.Add.Major,UI.Demo.Add.Major.js,#9cf",
-                "UI.Dialog,UI.Demo.Dialog.js,#9cf"
+                "UI.Dialog,UI.Demo.Dialog.js,#9cf",
+                "_ENTRY,按提交模式分类,#efefef",
+                "_MODE_ADD_ADD,ADD-ADD - 双添加模式,#efefef",
+                "_AA_fnListItem,fnListItem( id values ),#cfc",
+                "_AA_$inited,$inited（无值）",
+                "_AA_$parent,$parent（无值）",
+                "_AA_$addKey,$addKey",
+                "_MODE_ADD_EDIT,ADD-EDIT - 添加编辑,#efefef",
+                "_AE_fnListItem,fnListItem( id values ),#cfc",
+                "_AE_$inited,$inited（有值）",
+                "_AE_$parent,$parent（无值）",
+                "_AE_$addKey,$addKey",
+                "_MODE_EDIT_ADD,EDIT-ADD - 编辑添加,#efefef",
+                "_EA_fnListItem,fnListItem( id values ),#cfc",
+                "_EA_$inited,$inited（无值）",
+                "_EA_$parent,$parent（有值）",
+                "_EA_$addKey,$addKey",
+                "_MODE_EDIT_EDIT,EDIT-EDIT - 双编辑模式,#efefef",
+                "_EE_fnListItem,fnListItem( id values ),#cfc",
+                "_EE_$inited,$inited（有值）",
+                "_EE_$parent,$parent（有值）",
+                "_EE_$addKey,$addKey"
             ],
             "edges": [
                 "parent,rxInject",
@@ -1186,7 +1207,28 @@
                 "_J.EM.$hoc,UI.Edit.Major",
                 "UI.Edit,UI.Edit.Major",
                 "UI.Add,UI.Dialog",
-                "UI.Edit,UI.Dialog"
+                "UI.Edit,UI.Dialog",
+                "_MODE_ADD_ADD,_AA_fnListItem",
+                "_AA_fnListItem,_AA_$parent",
+                "_AA_$parent,_AA_$inited",
+                "_AA_$inited,_AA_$addKey",
+                "_MODE_ADD_EDIT,_AE_fnListItem",
+                "_AE_fnListItem,_AE_$parent",
+                "_AE_$parent,_AE_$inited",
+                "_AE_$inited,_AE_$addKey",
+                "_MODE_EDIT_ADD,_EA_fnListItem",
+                "_EA_fnListItem,_EA_$parent",
+                "_EA_$parent,_EA_$inited",
+                "_EA_$inited,_EA_$addKey",
+                "_MODE_EDIT_EDIT,_EE_fnListItem",
+                "_EE_fnListItem,_EE_$parent",
+                "_EE_$parent,_EE_$inited",
+                "_EE_$inited,_EE_$addKey",
+                "UI.Dialog,_ENTRY",
+                "_ENTRY,_MODE_ADD_ADD",
+                "_ENTRY,_MODE_ADD_EDIT",
+                "_ENTRY,_MODE_EDIT_ADD",
+                "_ENTRY,_MODE_EDIT_EDIT"
             ]
         }
     }
