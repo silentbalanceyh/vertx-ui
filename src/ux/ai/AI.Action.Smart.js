@@ -197,20 +197,42 @@ const _executor = (reference, config = {}) => {
     const {data, mode} = config;
     // 1.子表单模式专用
     if ("ADD" === mode || "EDIT" === mode) {
-        const items = Prop.rapitItems(reference);
+        const items = Prop.itemRead(reference);
         // 有items的主要记录提交
         if (items) data._items = items;
         D.connectSubmit(reference, data);
     } else {
-        D.connectSubmit(reference, data, false);
         // 只有list.items的提交会触发该列表信息
         if ("ADD-EDIT" === mode || "ADD-ADD" === mode) {
             // 添加模式
             const {$addKey} = reference.props;
             Rdx.rdxListItem(reference, data, $addKey);
+            /**
+             * 连接相关数据信息，数据结构：
+             * {
+             *     majorKey：主记录key - 来自$addKey
+             *     data：子记录数据
+             * }
+             */
+            D.connectSubmit(reference, {
+                majorKey: $addKey,
+                data,
+            }, false);
         } else {
+            const {$parent = {}} = reference.props;
             // 主记录编辑模式（$inited中包含key）
-            Rdx.rdxListItem(reference, data)
+            Rdx.rdxListItem(reference, data);
+            /**
+             * 连接相关数据信息，数据结构：
+             * {
+             *     majorKey：主记录key - 来自$parent.key
+             *     data：子记录数据
+             * }
+             */
+            D.connectSubmit(reference, {
+                majorKey: $parent.key,
+                data,
+            }, false);
         }
     }
     // 2.读取success和failure

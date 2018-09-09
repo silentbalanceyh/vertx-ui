@@ -1,15 +1,14 @@
 import Immutable from "immutable";
 import E from "../Ux.Error";
 import U from "underscore";
-import Prop from "../prop/Ux.Prop";
-import State from '../prop/Ux.State';
+import Prop from "../prop/";
 import Dialog from "../Ux.Dialog";
 
 const rdxSubmitting = (reference, loading = true) => {
     const state = {};
     state[`status.submitting`] = {loading};
     const $state = Immutable.fromJS(state).toJS();
-    State.writeTree(reference, $state);
+    Prop.writeTree(reference, $state);
 };
 const rdxReject = (message) => Promise.reject({data: {info: message}});
 /**
@@ -24,10 +23,10 @@ const rdxListItem = (reference, values = {}, addKey) => {
     if (U.isFunction(fnListItem)) {
         const ref = Prop.onReference(reference, 1);
         if (ref) {
-            const {$inited = {}} = ref.props;
+            const key = Prop.itemKey(ref);
             // 是否包含了 $inited.key
-            if ($inited.key) {
-                fnListItem($inited.key, values);
+            if (key) {
+                fnListItem(key, values);
             } else {
                 // 传入了添加的addKey
                 if (addKey) {

@@ -38,6 +38,21 @@ const onTabClick = (reference) => (key) => {
     reference.setState(state);
 };
 
+const _onDelete = (reference, key) => {
+    const {$items} = reference.props;
+    if ($items) {
+        // list.items处理
+        const dataRecord = $items.to();
+        if (dataRecord && dataRecord.hasOwnProperty(key)) {
+            delete dataRecord[key];
+        }
+        // 重写list.items;
+        Ux.writeTree(reference, {
+            "list.items": dataRecord
+        })
+    }
+};
+
 const onEdit = (reference) => (key, action) => {
     if ("remove" === action) {
         let {tabs = {}} = reference.state;
@@ -63,6 +78,8 @@ const onEdit = (reference) => (key, action) => {
             item.index = index;
         });
         reference.setState({tabs, ...view});
+        // 删除当前主节点中的 id = key
+        _onDelete(reference, key);
     }
 };
 

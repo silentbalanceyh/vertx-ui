@@ -75,23 +75,6 @@ const rapitUpdate = (reference, prevProps, params = {}, propKey) => {
     }
 };
 /**
- * 读取Items专用方法
- * @param reference
- */
-const rapitItems = (reference) => {
-    // list.items树上的数据，主记录id只能从$parent中读取
-    const {$items, $parent = {}} = reference.props;
-    let result = [];
-    if ($items && $parent.key) {
-        // 读取主记录对应的items数据
-        const dataRecord = $items.$($parent.key);
-        if (dataRecord && dataRecord.is()) {
-            result = dataRecord.to();
-        }
-    }
-    return result;
-};
-/**
  * list.items子列表专用方法，默认是Save模式
  * @param dataObject
  * @param id
@@ -158,8 +141,6 @@ const toEffect = (state = {}) => {
  * @description 回写状态树专用方法
  */
 export default {
-    // 特殊方法，读取当前系统中的items
-    rapitItems,
     // 特殊方法，用于执行DataObject中的某个key下的
     rapitRecord,
     // 特殊方法，对于自定义组件中的特殊处理

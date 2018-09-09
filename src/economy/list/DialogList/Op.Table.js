@@ -25,21 +25,7 @@ const initTable = (reference) => {
         table.columns = _initColumns(reference, table.columns);
     }
     // 数据读取
-    const {$items, $inited} = reference.props;
-    let data = [];
-    if ($inited) {
-        const dataArray = $items.$($inited.key);
-        if (dataArray && dataArray.is()) {
-            data = dataArray.to();
-        }
-    } else {
-        // 添加模式，key = undefined
-        const dataObject = $items.to();
-        if (dataObject) {
-            data = dataObject[undefined];
-            if (!data) data = [];
-        }
-    }
+    const data = Ux.itemTable(reference);
     return {table, data}
 };
 

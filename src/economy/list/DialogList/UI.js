@@ -54,11 +54,11 @@ class Component extends React.PureComponent {
             // 窗口的隐藏显示
             const {show, editKey} = this.state;
             const {$formAdd: FormAdd, $formEdit: FormEdit} = this.props;
-            const {$inited = {}, ...rest} = this.props;
-            // 读取key相关信息（添加模式/编辑模式）同时支持
-            const {$addKey} = this.props;
-            const hittedKey = $addKey || $inited.key;
-            const initData = Op.calcInited(this, hittedKey);
+            const {$inited = {}, $addKey, ...rest} = this.props;
+            /**
+             * 计算初始化数据initData，
+             **/
+            const initData = Ux.itemInit(this);
             // 不点取消不可关闭
             dialog.maskClosable = false;
             return (
@@ -86,6 +86,7 @@ class Component extends React.PureComponent {
                                      key={"formAdd"}
                                      $inited={initData}
                                      $parent={$inited}
+                                     $addKey={$addKey}
                                      fnClose={Op.rxClose(this)}
                                      fnListItem={Op.rxList(this)}
                                      fnClear={Op.rxReset(this)}/>

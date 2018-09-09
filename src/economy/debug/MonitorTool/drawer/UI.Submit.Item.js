@@ -1,10 +1,40 @@
 import React from 'react'
+import {_zero} from "../../../_internal";
+import {DataLabor} from 'entity';
+import Ux from 'ux';
+import EmptyContent from "../UI.Empty";
 
+@_zero({
+    "i18n.cab": require('../Cab.json'),
+    "i18n.name": "UI.Pure",
+    state: {},
+    connect: {
+        s2p: state => DataLabor.createOut(state)
+            .rework({
+                "debug.active": ["sub"]
+            })
+            .rinit(["sub"])
+            .to(),
+    }
+})
 class Component extends React.PureComponent {
+    componentDidMount() {
+        const {$sub} = this.props;
+        if ($sub.is()) {
+            const config = Ux.D.datumTree($sub.to());
+            Ux.G.drawTree("g6Sub", config);
+        }
+    }
+
     render() {
-        return (
-            <div>2018/9/6</div>
-        )
+        const {$sub} = this.props;
+        if ($sub.is()) {
+            return (
+                <div id={"g6Sub"}/>
+            )
+        } else {
+            return (<EmptyContent/>)
+        }
     }
 }
 

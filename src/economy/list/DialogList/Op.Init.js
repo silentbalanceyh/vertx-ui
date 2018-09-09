@@ -21,18 +21,7 @@ const readWindow = (reference, key) => {
         return Immutable.fromJS(config).toJS();
     }
 };
-const calcInited = (reference, key) => {
-    const {$items} = reference.props;
-    const {editKey} = reference.state;
-    if (editKey) {
-        const dataArray = $items.$(key);
-        return dataArray && dataArray.is() ? dataArray.getElement(editKey) : {};
-    } else {
-        return {};
-    }
-};
 export default {
-    calcInited,
     readOption,
     readTable,
     readWindow
