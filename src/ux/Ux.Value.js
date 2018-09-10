@@ -98,12 +98,30 @@ const isEmpty = (object) => {
     }
 };
 /**
+ * 二义性函数，传入的是string就执行parse处理
+ * @param input
+ * @returns {*}
+ */
+const toJson = (input) => {
+    if ("string" === typeof input) {
+        try {
+            // 如果Parse过程出错
+            return JSON.parse(input);
+        } catch (e) {
+            return null;
+        }
+    } else {
+        return input;
+    }
+};
+/**
  * @class Value
  * @description 数值计算器
  */
 export default {
     // 严格判断
     isEmpty,
+    toJson,
     // 对象处理方法
     assign,
     clone,
