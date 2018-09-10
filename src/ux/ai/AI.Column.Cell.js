@@ -157,7 +157,8 @@ const aiCellDatum = (reference, config) => text => {
     if (U.isArray(text)) {
         const result = [];
         text.forEach(each => result.push(Type.elementUnique(data, datum.value, each)));
-        return (<span>{result.map(item => item[datum.display]).join('，')}</span>)
+        return (
+            <span>{result.map(item => item[datum.display]).join('，')}</span>)
     } else {
         const item = Type.elementUnique(data, datum.value, text);
         return <span>{item ? item[datum.display] : false}</span>;
@@ -191,16 +192,20 @@ const aiCellOp = (reference, config) => (text, record) => {
         } = reference.props;
         return (
             <Fragment>
-                {edit ? (<a key={edit.key} onClick={(event) => {
-                    event.preventDefault();
-                    rxEdit(reference, text);
-                }}>{edit.text}</a>) : false}
-                {2 === counter ? (<Divider type="vertical"/>) : false}
-                {removed ? (
-                    <Popconfirm title={option['delete-confirm']} onConfirm={(event) => {
+                {edit ? (
+                    <a key={edit.key} onClick={(event) => {
                         event.preventDefault();
-                        rxDelete(reference, text);
-                    }}>
+                        rxEdit(reference, text);
+                    }}>{edit.text}</a>) : false}
+                {2 === counter ? (
+                    <Divider type="vertical"/>) : false}
+                {removed ? (
+                    <Popconfirm
+                        title={option['delete-confirm']}
+                        onConfirm={(event) => {
+                            event.preventDefault();
+                            rxDelete(reference, text);
+                        }}>
                         <a key={removed.key}>{removed.text}</a>
                     </Popconfirm>) : false}
             </Fragment>
@@ -212,7 +217,8 @@ const aiCellIcon = (reference, config) => text => {
     const target = mapping[text];
     if (U.isObject(target)) {
         return <span>
-            {target.icon ? <Icon type={target.icon} style={target.style ? target.style : {}}/> : false}
+            {target.icon ? <Icon type={target.icon}
+                                 style={target.style ? target.style : {}}/> : false}
             &nbsp;&nbsp;{target.text}
         </span>
     } else {
@@ -287,19 +293,29 @@ const aiCellLink = (reference, config, ops = {}) => text => {
                     if (fn) item.confirm.onConfirm = fn(reference)(line, text);
                 }
                 return "string" === typeof item ? (
-                    <Divider type="vertical" key={`${item}${opIndex}`}/>
+                    <Divider type="vertical"
+                             key={`${item}${opIndex}`}/>
                 ) : item.confirm ? (
-                    <Popconfirm key={item.key} {...item.confirm}>
+                    <Popconfirm
+                        key={item.key} {...item.confirm}>
                         <a>{item.text}</a>
                     </Popconfirm>
                 ) : (
-                    <a key={item.key} onClick={item.onClick}>
+                    <a key={item.key}
+                       onClick={item.onClick}>
                         {item.text}
                     </a>
                 );
             })}
         </Fragment>
     );
+};
+const aiCellDownload = (reference, config) => (text) => {
+    // TODO:
+    let downloadConfig = config["$download"];
+    if (!downloadConfig) downloadConfig = {};
+    return (
+        <a href={text}>{downloadConfig.flag ? downloadConfig.flag : text}</a>)
 };
 const aiCellMapping = (reference, config) => (text) => {
     const mapping = config['$mapping'];
@@ -326,4 +342,5 @@ export default {
     ICON: aiCellIcon,
     OP: aiCellOp,
     MAPPING: aiCellMapping,
+    DOWNLOAD: aiCellDownload,
 }

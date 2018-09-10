@@ -5,22 +5,26 @@ const thenCallback = (promise, {
     isDialog, ref, postDialog, callback, postKey
 }, resolve) => {
     // 这里的promise一定是一个可执行函数，并且返回一个完整的Promise，Delay执行
-    return promise().then(data => {
-        if (isDialog) {
-            postDialog(ref, postKey, () => {
+    const executed = promise();
+    Ux.E.fxTerminal(!(executed instanceof Promise), 10088, executed);
+    if (executed instanceof Promise) {
+        return executed.then(data => {
+            if (isDialog) {
+                postDialog(ref, postKey, () => {
+                    Ux.rdxSubmitting(ref, false);
+                    let ret = callback(data);
+                    if (!ret) ret = {};
+                    resolve(ret);
+                }, data)
+            } else {
+                postDialog(ref, postKey);
                 Ux.rdxSubmitting(ref, false);
                 let ret = callback(data);
                 if (!ret) ret = {};
                 resolve(ret);
-            }, data)
-        } else {
-            postDialog(ref, postKey);
-            Ux.rdxSubmitting(ref, false);
-            let ret = callback(data);
-            if (!ret) ret = {};
-            resolve(ret);
-        }
-    })
+            }
+        });
+    }
 };
 
 class RxOp {
@@ -119,7 +123,11 @@ class RxOp {
         if (confirmKey) {
             return new Promise((resolve) => Ux.showDialog(ref, confirmKey,
                 () => thenCallback(promise, {
-                    isDialog, ref, postDialog, callback, postKey
+                    isDialog,
+                    ref,
+                    postDialog,
+                    callback,
+                    postKey
                 }, resolve), {},
                 () => {
                     Ux.rdxSubmitting(ref, false);
