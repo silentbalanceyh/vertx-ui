@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
         return (
             <PageCard reference={this}>
                 <TreeList {...this.props}
-                          $mockData={Mock.fnDeptList}
+                          $mockData={Mock.fnCategoryList}
                           rxAddRow={Op.opAddRow(this)}
                           rxItemDelete={Op.opItemDelete(this)}
                           rxItemAdd={Op.opItemAdd(this)}

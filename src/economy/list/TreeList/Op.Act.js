@@ -133,7 +133,8 @@ const rxSelect = (reference, edit = false) => (key, node) => {
             }
             // 写Query节点
             Ux.writeTree(reference, {
-                "grid.query": filters
+                "grid.query": filters,
+                "grid.list": undefined
             })
         }
     }
