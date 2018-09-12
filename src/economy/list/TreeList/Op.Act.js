@@ -56,7 +56,7 @@ const rxPreAdd = (reference, item) => (event) => {
     // 要设置新的key相关信息（需要解决连续添加问题）
     const {expandedKeys = []} = reference.state;
     expandedKeys.push(newItem.key);
-    reference.setState({
+    const state = {
         // 设置选中项
         iAdd: true,
         // 选中项的更改，拷贝新内容变更
@@ -64,7 +64,8 @@ const rxPreAdd = (reference, item) => (event) => {
         // 新添加的也成为展开项
         expandedKeys,
         ..._rxState(newItem.key, newItem)
-    })
+    };
+    reference.setState(state)
 };
 
 const rxCancel = (reference) => event => {

@@ -43,6 +43,9 @@ const _updateExpand = (reference = {}) => {
                 const tree = readTree(reference);
                 if (!tree.key) tree.key = "key";
                 const result = $tree.to().map(item => item[tree.key]);
+                if (options["tree.root"]) {
+                    result.push("_ROOT_")
+                }
                 reference.setState({expandedKeys: result});
             }
         }
@@ -74,6 +77,26 @@ const readTreeMapping = (reference) => {
     if (!tree.display) tree.display = "name";
     return tree;
 };
+const initTable = (reference) => {
+    const table = readConfig(reference).table;
+    if (table) {
+        table.bordered = true;
+        table.pagination = false;
+    }
+    return table;
+};
+const initTabs = (reference) => {
+    const options = readOptions(reference);
+    const tabs = {items: []};
+    const tab = {};
+    if (options["tab.list"]) {
+        tab.key = Ux.randomUUID();
+        tab.tab = options["tab.list"];
+        tabs.items.push(tab);
+        tabs.defaultActiveKey = tab.key;
+    }
+    return tabs;
+};
 export default {
     initGrid,
     updateGrid,
@@ -81,4 +104,7 @@ export default {
     readOptions,
     readTree,
     readTreeMapping,
+    // 右边表格
+    initTable,
+    initTabs
 }

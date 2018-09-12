@@ -58,8 +58,8 @@ const renderOp = (reference, item = {}) => {
             {iKey === item.key ? _renderYes(reference, config, item) : false}
             {iKey === item.key ? _renderNo(reference, config, item) : false}
             {!iKey ? _renderAdd(reference, config, item) : false}
-            {!iKey ? _renderEdit(reference, config, item) : false}
-            {!iKey ? _renderDelete(reference, config, item) : false}
+            {!iKey && "_ROOT_" !== item.key ? _renderEdit(reference, config, item) : false}
+            {!iKey && "_ROOT_" !== item.key ? _renderDelete(reference, config, item) : false}
         </span>
     )
 };

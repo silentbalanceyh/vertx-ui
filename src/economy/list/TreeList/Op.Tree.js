@@ -10,20 +10,32 @@ const _initLoop = (data = {}, array = []) => {
 };
 const _initTree = (reference = {}, data = []) => {
     let source = Ux.clone(data);
-    const {iItemData, keyword} = reference.state;
-    // 新增
-    if (iItemData) {
-        // 追加新项
-        source.push(iItemData);
+    // 1.是否包含了ROOT节点？
+    const options = Init.readOptions(reference);
+    if (options["tree.root"]) {
+        // 2.由于包含了ROOT，所以需要预处理source
+        const root = {};
+        root.key = "_ROOT_";
+        root.display = options["tree.root"];
+        // 3.原始数据降级
+        source.filter(item => !item.branch).forEach(item => item.branch = "_ROOT_");
+        source.push(root);
     }
+    const {iItemData, keyword} = reference.state;
     // 如果是keyword则要执行过滤
     if (keyword) {
         source = source.filter(item => 0 < item.display.indexOf(keyword))
+    }
+    // 新增：需要先执行keyword过滤，然后添加新的Item，新项item.display是没有内容的
+    if (iItemData) {
+        // 追加新项
+        source.push(iItemData);
     }
     // 查找根节点
     const $data = source.filter(item => !item.branch);
     // 遍历根节点
     $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source));
+    // 数据源
     return $data;
 };
 const initTree = (reference) => {

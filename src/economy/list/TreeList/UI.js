@@ -5,6 +5,7 @@ import {DataLabor} from 'entity';
 import Ux from "ux";
 import Op from "./Op";
 import Rdr from './UI.Render';
+import Table from './UI.Table';
 
 @_zero({
     connect: {
@@ -40,9 +41,23 @@ class Component extends React.PureComponent {
 
     render() {
         const ref = this;
+        const {
+            // 添加专用
+            rxAdd, rxEdit, rxSearch,
+            // 列表数据
+            $query, $list,
+            // 父类引用
+            reference
+        } = this.props;
+        const attrs = Ux.toUniform(this.props);
+        // 需要传给Table专用的
+        attrs.reference = reference;
+        if (rxAdd) attrs.rxAdd = rxAdd;
+        if (rxEdit) attrs.rxEdit = rxEdit;
+        if (rxSearch) attrs.rxSearch = rxSearch;
         return Ux.fxRender(this, () => {
             return Rdr.renderLayout(ref,
-                <span>Hello</span>
+                <Table {...attrs} $query={$query} $list={$list}/>
             )
         });
     }
