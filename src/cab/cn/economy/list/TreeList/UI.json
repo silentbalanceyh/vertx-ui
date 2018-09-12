@@ -1,0 +1,12 @@
+{
+    "_item":{
+        "confirm":{
+            "delete":{
+                "title":"确认删除该节点？"
+            }
+        },
+        "over":{
+            "delete":"删除"
+        }
+    }
+}

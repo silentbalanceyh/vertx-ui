@@ -4,24 +4,22 @@
     background-color: @button-success !important;
     border: solid 1px @button-success !important;
     color: white;
+    &:hover, &:active, &:focus {
+        color: white;
+        border: solid 1px @button-success-hover !important;
+        background-color: @button-success-hover !important;
+    }
 }
 
-.ux-success:hover {
+.ux-red {
+    background-color: @color-highlight !important;
+    border: solid 1px @color-highlight !important;
     color: white;
-    border: solid 1px @button-success-hover !important;
-    background-color: @button-success-hover !important;
-}
-
-.ux-success:active {
-    color: white;
-    border: solid 1px @button-success-hover !important;
-    background-color: @button-success-hover !important;
-}
-
-.ux-success:focus {
-    color: white;
-    border: solid 1px @button-success-hover !important;
-    background-color: @button-success-hover !important;
+    &:hover, &:active, &:focus {
+        color: white;
+        border: solid 1px @color-highlight-hover !important;
+        background-color: @color-highlight-hover !important;
+    }
 }
 
 .ux-hidden {

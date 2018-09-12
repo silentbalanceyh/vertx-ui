@@ -1,6 +1,6 @@
+import Immutable from "immutable";
 import G6 from "@antv/g6";
 import G6Plugins from '@antv/g6/build/plugins'
-import Ux from 'ux';
 
 const registry = () => {
     G6.registerNode('treeNode', {
@@ -31,17 +31,17 @@ const registry = () => {
 };
 
 const drawTree = (id, config, view = "cc") => {
-    const items = Ux.clone(config.items);
+    const items = Immutable.fromJS(config.items).toJS();
     registry();
     const layout = new G6.Layouts.CompactBoxTree({
         // direction: 'LR', // 方向（LR/RL/H/TB/BT/V）
         getHGap: function getHGap() /* d */ {
             // 横向间距
-            return config.layout.hgap ? config.layout.hgap : 120;
+            return config.layout.hgap;
         },
         getVGap: function getVGap() /* d */ {
             // 竖向间距
-            return config.layout.vgap ? config.layout.vgap : 10;
+            return config.layout.vgap;
         },
     });
     const attrs = {
@@ -59,7 +59,7 @@ const drawTree = (id, config, view = "cc") => {
         shape: 'treeNode',
         size: 10
     }).label(function (obj) {
-        return obj && obj.name ? obj.name : "";
+        return obj.name;
     });
     tree.edge({
         shape: 'smooth'
@@ -86,7 +86,7 @@ const drawTree = (id, config, view = "cc") => {
     tree.draw();
 };
 const drawFlow = (id, config = {}) => {
-    const items = Ux.clone(config.items);
+    const items = Immutable.fromJS(config.items).toJS();
     registry();
     if (!config.layout) config.layout = {};
     G6.registerNode('rect', {

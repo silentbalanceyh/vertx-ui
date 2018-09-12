@@ -1,5 +1,19 @@
 {
     "_page": {
         "title": "TreeList - 「树过滤」专用多级列表"
+    },
+    "_grid": {
+        "tree": {
+            "branch": "parent",
+            "display": "name"
+        },
+        "options": {
+            "layout.divide": "5,19",
+            "tree.expand.default": true,
+            "tree.search.enabled":true,
+            "tree.edit.enabled":true
+        },
+        "table": {
+        }
     }
 }

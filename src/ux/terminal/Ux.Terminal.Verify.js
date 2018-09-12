@@ -77,15 +77,24 @@ const verifySubList = (ref) => {
     const {$key = "_sublist", reference} = ref.props;
     let message = verifyRooKey(reference, $key);
     if (!message) {
-
+        // TODO后期处理
     }
     return message
+};
+const verifyTreeList = (ref, key = "") => {
+    let message = verifyRooKey(ref, key);
+    if (!message) {
+
+    }
+    return message;
 };
 export default {
     verifyRooKey,
     verifyQuery,
     verifyOptions,
+    // 验证专用
     verifyCard,
     verifyComplex,
-    verifySubList
+    verifySubList,
+    verifyTreeList
 }

@@ -13,7 +13,8 @@
                 "UC0001 - 卡片类「容器」：PageCard,/control/page-card",
                 "UC0002 - 卡片类「容器」：HelpCard,/control/help-card",
                 "UC0003 - 列表类：ComplexList,/control/complex-list",
-                "UC0004 - 列表类：DialogList,/control/dialog-list"
+                "UC0004 - 列表类：DialogList,/control/dialog-list",
+                "UC0005 - 列表类：TreeList,/control/tree-list"
             ]
         },
         {

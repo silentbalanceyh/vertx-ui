@@ -1,5 +1,8 @@
 import Ux from "ux";
 
 export default {
-    fnDeptList: Ux.createAction("/RX/MODULE/DEPT/SEARCH")
+    fnDeptList: Ux.createAction("/RX/MODULE/DEPT/SEARCH"),
+    // Tree列表
+    fnCategoryList: Ux.createAction("/RX/MODULE/CAT/LIST"),
+    fnCategory: Ux.createAction("/RX/MODULE/CAT/TREE")
 }

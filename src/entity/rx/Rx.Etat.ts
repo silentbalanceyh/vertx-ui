@@ -132,6 +132,15 @@ class Etat {
         return this;
     }
 
+    // rxTree: 树形专用
+    tree(fnTree: any) {
+        if (U.isFunction(fnTree)) {
+            // RxTree专用
+            this._dispatchTo.rxTree = fnTree;
+        }
+        return this;
+    }
+
     // 按钮绑定专用
     bind(OP: any = {}) {
         if (!this._op) this._op = {};

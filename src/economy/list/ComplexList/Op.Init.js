@@ -6,9 +6,9 @@ import Mock from './Op.Mock';
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
-    const ref = reference.props.reference;
+    const ref = Ux.onReference(reference, 1);
     const grid = Ux.fromHoc(ref, $key);
-    return Immutable.fromJS(grid).toJS();
+    return Ux.clone(grid);
 };
 
 const initList = (reference = {}, queryConfig = {}) => {
@@ -136,10 +136,7 @@ const updateGrid = (reference = {}, prevProps = {}) => {
         if (undefined === record) {
             // 初始化查询
             const {rxSearch} = reference.props;
-            if (rxSearch) {
-                const {$query} = reference.props;
-                rxSearch($query.to());
-            }
+            if (rxSearch) rxSearch($query.to());
             // initList(reference, config.query);
         } else {
             // 初始化Mock
