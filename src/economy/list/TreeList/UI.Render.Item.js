@@ -55,7 +55,7 @@ const _renderAdd = (reference, config = {}, item) => {
 const _renderNo = (reference, config = {}, item) => {
     return (
         <Button icon={"undo"} shape={"circle"} size={"small"}
-                className={"web-tree-addon"} type={"danger"}
+                className={"web-tree-addon"}
                 onClick={event => {
                     event.preventDefault();
                     reference.setState({
