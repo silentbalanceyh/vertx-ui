@@ -63,7 +63,19 @@ const rxChange = (reference) => (event) => {
     if (!state) state = {};
     reference.setState(_rxState(state.iKey, undefined, event.target.value));
 };
-
+const rxSelect = (reference, edit = false) => (key, node) => {
+    // 特殊处理，只有Key的长度大于0即有内容被选中时才触发，防止清空
+    if (edit && 0 < key.length) {
+        // 设置selected的数据
+        reference.setState({
+            selected: key
+        })
+    }
+};
+const rxExpand = (reference) => (keys, node) => {
+    const expandedKeys = Ux.clone(keys);
+    reference.setState({expandedKeys});
+};
 export default {
     rxDelete,
     rxPreEdit,
@@ -71,4 +83,6 @@ export default {
     rxPreAdd,
     rxCancel,
     rxChange,
+    rxSelect,
+    rxExpand
 }

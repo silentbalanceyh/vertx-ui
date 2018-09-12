@@ -44,13 +44,17 @@ const renderTree = (reference) => {
     const expand = Boolean(options['tree.expand.default']);
     const attrs = {};
     if (expand) {
-        attrs.defaultExpandAll = true;
+        // 直接设置expandKey
+        if (reference.state.expandedKeys) {
+            attrs.expandedKeys = reference.state.expandedKeys;
+        }
+        attrs.onExpand = Op.rxExpand(reference);
     }
     // 是否支持Tree左边部分的搜索
     const search = options["tree.search.enabled"];
     // 是否支持Tree左边部分的编辑（添加/删除/修改）
     const edit = options["tree.edit.enabled"];
-    attrs.onSelect = Op.onSelect(reference, edit);
+    attrs.onSelect = Op.rxSelect(reference, edit);
     return (
         <div className={"web-tree"}>
             {search ? <Input.Search/> : false}

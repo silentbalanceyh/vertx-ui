@@ -43,16 +43,6 @@ const initTree = (reference) => {
         } else return [];
     } else return [];
 };
-const onSelect = (reference, edit = false) => (key, selected, record) => {
-    // 特殊处理，只有Key的长度大于0即有内容被选中时才触发，防止清空
-    if (edit && 0 < key.length) {
-        // 设置selected的数据
-        reference.setState({
-            selected: key
-        })
-    }
-};
 export default {
-    initTree,
-    onSelect,
+    initTree
 }

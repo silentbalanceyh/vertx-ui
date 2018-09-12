@@ -11,7 +11,8 @@ const visitChildren = (item = {}) => {
 const visitParent = (item = {}, array = []) => {
 
 };
+
 export default {
     visitChildren,
-    visitParent,
+    visitParent
 }

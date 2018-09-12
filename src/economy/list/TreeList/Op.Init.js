@@ -8,8 +8,8 @@ const readConfig = (reference = {}) => {
 };
 
 const initGrid = (reference = {}) => {
-    const config = readConfig(reference);
-    console.info(config);
+    // 是否所有都展开
+
 };
 
 const _updateList = (reference) => {
@@ -31,11 +31,30 @@ const _updateTree = (reference) => {
         if (rxTree) rxTree();
     }
 };
+const _updateExpand = (reference = {}) => {
+    const options = readOptions(reference);
+    const expand = Boolean(options['tree.expand.default']);
+    if (expand) {
+        const {$tree} = reference.props;
+        if ($tree.is()) {
+            const {expandedKeys} = reference.state;
+            // 为undefined时更新（第一次）
+            if (!expandedKeys) {
+                const tree = readTree(reference);
+                if (!tree.key) tree.key = "key";
+                const result = $tree.to().map(item => item[tree.key]);
+                reference.setState({expandedKeys: result});
+            }
+        }
+    }
+};
 const updateGrid = (reference = {}, prevProps = {}) => {
     // 更新表数据
     _updateList(reference);
     // 更新左边树
     _updateTree(reference);
+    // 更新展开信息
+    _updateExpand(reference);
 };
 const readOptions = (reference) => {
     let options = readConfig(reference).options;
