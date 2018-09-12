@@ -1,20 +1,12 @@
 import {Button, Input, Popconfirm, Tooltip} from "antd";
 import React from "react";
 import Ux from 'ux';
-import Op from './Op.Visit'
-import U from 'underscore';
+import Act from './Op.Act';
 
 const _renderDelete = (reference, config = {}, item) => {
     return (
-        <Popconfirm {...config.confirm.delete} onConfirm={(event) => {
-            // 是否触发外置操作
-            event.preventDefault();
-            const {rxItemDelete} = reference.props;
-            if (U.isFunction(rxItemDelete)) {
-                const keys = Op.visitChildren(item);
-                rxItemDelete(Ux.clone(item), keys);
-            }
-        }}>
+        <Popconfirm {...config.confirm.delete}
+                    onConfirm={Act.rxDelete(reference, item)}>
             <Button icon={"minus"} shape={"circle"}
                     size={"small"}
                     className={"web-tree-addon ux-red"}/>
@@ -25,62 +17,35 @@ const _renderEdit = (reference, config = {}, item) => {
     return (
         <Tooltip {...config.over.edit}>
             <Button icon={"edit"} shape={"circle"} size={"small"}
-                    className={"web-tree-addon"} onClick={event => {
-                event.preventDefault();
-                reference.setState({
-                    iKey: item.key,
-                    iItemData: item,
-                    iItemText: item.display,
-                })
-            }}/>
+                    className={"web-tree-addon"}
+                    onClick={Act.rxPreEdit(reference, item)}/>
         </Tooltip>
-    )
-};
-
-const _renderYes = (reference, config = {}, item) => {
-    return (
-        <Button icon={"check"} shape={"circle"} size={"small"}
-                className={"web-tree-addon"} type={"primary"}
-                onClick={event => {
-                    event.preventDefault();
-                    reference.setState({
-                        iKey: undefined,
-                        iItemData: undefined,
-                        iItemText: undefined,
-                    });
-                    // 确认Item处理
-                    const {rxItemAdd} = reference.props;
-                    const {iItemText = ""} = reference.state;
-                    if (U.isFunction(rxItemAdd)) {
-                        const keys = Op.visitChildren(item);
-                        const $item = Ux.clone(item);
-                        $item.display = iItemText;
-                        rxItemAdd($item, keys);
-                    }
-                }}
-        />
     )
 };
 
 const _renderAdd = (reference, config = {}, item) => {
     return (
-        <Button icon={"plus"} shape={"circle"} size={"small"}
-                className={"web-tree-addon"}/>
+        <Tooltip {...config.over.add}>
+            <Button icon={"plus"} shape={"circle"} size={"small"}
+                    className={"web-tree-addon"}
+                    onClick={Act.rxPreAdd(reference, item)}/>
+        </Tooltip>
+    )
+};
+const _renderYes = (reference, config = {}, item) => {
+    return (
+        <Button icon={"check"} shape={"circle"} size={"small"}
+                className={"web-tree-addon"} type={"primary"}
+                onClick={Act.rxEdit(reference, item)}
+        />
     )
 };
 
-const _renderNo = (reference, config = {}, item) => {
+const _renderNo = (reference) => {
     return (
         <Button icon={"undo"} shape={"circle"} size={"small"}
                 className={"web-tree-addon"}
-                onClick={event => {
-                    event.preventDefault();
-                    reference.setState({
-                        iKey: undefined,
-                        iItemData: undefined,
-                        iItemText: undefined,
-                    })
-                }}
+                onClick={Act.rxCancel(reference)}
         />
     )
 };
@@ -99,16 +64,11 @@ const renderOp = (reference, item = {}) => {
     )
 };
 
-const _onChange = (reference) => (event) => {
-    event.preventDefault();
-    reference.setState({iItemText: event.target.value});
-};
-
 const renderInput = (reference, item = {}) => {
     const {iKey, iItemText = ""} = reference.state;
-    return iKey ? (
+    return iKey === item.key ? (
         <Input value={iItemText} className={"web-tree-input"}
-               onChange={_onChange(reference, item)}/>
+               onChange={Act.rxChange(reference)}/>
     ) : item.display;
 };
 

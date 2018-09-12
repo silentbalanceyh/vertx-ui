@@ -8,11 +8,18 @@ const _initLoop = (data = {}, array = []) => {
     }
     return Ux.clone(item);
 };
-const _initTree = (data = []) => {
+const _initTree = (reference = {}, data = []) => {
+    let source = Ux.clone(data);
+    const {iItemData} = reference.state;
+    // 新增
+    if (iItemData) {
+        // 追加新项
+        source.push(iItemData);
+    }
     // 查找根节点
-    const $data = Ux.clone(data).filter(item => !item.branch);
+    const $data = source.filter(item => !item.branch);
     // 遍历根节点
-    $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, data));
+    $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source));
     return $data;
 };
 const initTree = (reference) => {
@@ -32,7 +39,7 @@ const initTree = (reference) => {
                 }
             }));
             // 生成新的树
-            return _initTree(data);
+            return _initTree(reference, data);
         } else return [];
     } else return [];
 };
