@@ -1,6 +1,7 @@
 import React from 'react'
 import Ux from 'ux';
 import {_zero} from '../../_internal/index';
+import Fn from '../../_internal/Ix.Fn';
 import {DataLabor} from 'entity';
 import {DynamicDialog} from 'web'
 import {Table} from 'antd';
@@ -39,7 +40,7 @@ class Component extends React.PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
         // 连接Monitor专用
-        Op.updateMonitor(this, prevState);
+        Fn.monitorDialogList(this, prevState);
     }
 
     render() {

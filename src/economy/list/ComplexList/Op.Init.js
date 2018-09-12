@@ -2,7 +2,10 @@ import Ux from 'ux';
 import Immutable from "immutable";
 import U from 'underscore';
 import {v4} from 'uuid';
-import Mock from './Op.Mock';
+
+import Fn from '../../_internal/Ix.Fn';
+
+const {Mock} = Fn;
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
@@ -148,20 +151,9 @@ const updateGrid = (reference = {}, prevProps = {}) => {
         Mock.mockInit(reference, {});
     }
 };
-const updateMonitor = (reference, prevState = {}) => {
-    const current = reference.state;
-    if (current.view !== prevState.view) {
-        // 如果view发生改变，则直接处理
-        Ux.D.connectMajor(reference, current);
-    } else if (current.key !== prevState.key) {
-        // 如果view不改变，只可能在edit中切换
-        Ux.D.connectMajor(reference, current);
-    }
-};
 export default {
     initGrid,
     updateGrid,
-    updateMonitor,
     stateView,
     readOption,
     readTable,

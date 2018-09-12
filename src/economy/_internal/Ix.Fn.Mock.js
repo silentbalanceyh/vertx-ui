@@ -1,4 +1,4 @@
-import Ux from 'ux';
+import Ux from "ux";
 
 const mockCheck = (reference, options = {}, state = {}) => {
     const {$mockData = {}} = reference.props;

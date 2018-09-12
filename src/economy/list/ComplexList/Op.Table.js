@@ -1,8 +1,10 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
-import Mock from './Op.Mock';
 import U from "underscore";
+import Fn from '../../_internal/Ix.Fn';
+
+const {Mock} = Fn;
 
 const _initTablePager = (reference = {}) => {
     const data = initData(reference);

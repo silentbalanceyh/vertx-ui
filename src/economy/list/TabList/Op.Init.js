@@ -2,8 +2,9 @@ import Ux from 'ux';
 import Immutable from "immutable";
 import U from 'underscore';
 import {v4} from 'uuid';
-import Mock from './Op.Mock';
+import Fn from '../../_internal/Ix.Fn'
 
+const {Mock} = Fn;
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
     const ref = Ux.onReference(reference, 1);

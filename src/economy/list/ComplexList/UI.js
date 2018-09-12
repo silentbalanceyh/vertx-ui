@@ -3,6 +3,7 @@ import Ux from 'ux';
 import Op from './Op';
 import {Tabs} from 'antd';
 import {_zero} from '../../_internal/index';
+import Fn from '../../_internal/Ix.Fn';
 import {DataLabor} from 'entity';
 import Render from './UI.Render';
 
@@ -41,7 +42,7 @@ class Component extends React.PureComponent {
     componentDidUpdate(prevProps, prevState) {
         Op.updateGrid(this, prevProps);
         // 连接Monitor专用
-        Op.updateMonitor(this, prevState);
+        Fn.monitorComplexList(this, prevState);
     }
 
     render() {

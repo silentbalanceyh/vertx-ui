@@ -1,8 +1,11 @@
 import {v4} from 'uuid';
 import Ux from 'ux';
 import Init from './Op.Init';
-import Mock from './Op.Mock';
+
+import Fn from '../../_internal/Ix.Fn';
 import Immutable from 'immutable';
+
+const {Mock} = Fn;
 
 const stateAddTab = (reference) => {
     let {tabs = {}} = reference.state;

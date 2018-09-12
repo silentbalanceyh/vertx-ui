@@ -1,11 +1,12 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
-import Mock from './Op.Mock';
+import Fn from '../../_internal/Ix.Fn'
 import U from "underscore";
 import {Button, Tooltip} from "antd";
 import React from "react";
 
+const {Mock} = Fn;
 const _initTablePager = (reference = {}) => {
     const data = initData(reference);
     const pagination = {
