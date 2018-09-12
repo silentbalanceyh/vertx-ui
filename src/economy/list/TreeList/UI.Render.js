@@ -12,7 +12,7 @@ const _renderItem = (reference, item = {}) => {
     const $selected = Immutable.fromJS(selected);
     return $selected.contains(item.key) ? (
         <span>
-            {item.display}&nbsp;&nbsp;
+            {Item.renderInput(reference, item)}&nbsp;&nbsp;
             {Item.renderOp(reference, item)}
         </span>
     ) : item.display

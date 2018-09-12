@@ -2,6 +2,7 @@ import React from 'react'
 import Ux from "ux";
 import {Tps} from "app";
 import {PageCard, TreeList} from 'web';
+import Op from './Op';
 
 const {zero} = Ux;
 
@@ -17,6 +18,9 @@ class Component extends React.PureComponent {
         return (
             <PageCard reference={this}>
                 <TreeList {...this.props}
+                          rxItemDelete={Op.opItemDelete(this)}
+                          rxItemAdd={Op.opItemAdd(this)}
+                          rxItemEdit={Op.opItemEdit(this)}
                           reference={this}/>
             </PageCard>
         )
