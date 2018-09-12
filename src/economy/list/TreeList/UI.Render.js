@@ -56,7 +56,8 @@ const renderTree = (reference) => {
     const edit = options["tree.edit.enabled"];
     attrs.onSelect = Op.rxSelect(reference, edit);
     // 搜索文字
-    const {term = ""} = reference.state;
+    const {term = "", selected = []} = reference.state;
+    attrs.selectedKeys = selected;
     return (
         <div className={"web-tree"}>
             {search ? (

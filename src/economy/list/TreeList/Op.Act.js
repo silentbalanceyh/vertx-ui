@@ -8,10 +8,17 @@ const _recoverData = (reference = {}, item = {}) => {
     const treeData = Init.readTreeMapping(reference);
     Ux.itObject(treeData, (treeKey, orignalKey) => {
         if ($item.hasOwnProperty(treeKey)) {
-            $item[orignalKey] = $item[treeKey];
-            delete $item[treeKey];
+            // 不相等时才做相关转换
+            if (treeKey !== orignalKey) {
+                $item[orignalKey] = $item[treeKey];
+                delete $item[treeKey];
+            }
         }
     });
+    // 如果包含children则直接删除，因为提交数据中不需要children
+    if ($item.hasOwnProperty("children")) {
+        delete $item.children;
+    }
     return $item;
 };
 
@@ -46,11 +53,16 @@ const rxPreAdd = (reference, item) => (event) => {
     const newItem = {};
     newItem.key = Ux.randomUUID();
     newItem.branch = $item.key;
-    // 要设置新的key相关信息
+    // 要设置新的key相关信息（需要解决连续添加问题）
+    const {expandedKeys = []} = reference.state;
+    expandedKeys.push(newItem.key);
     reference.setState({
         // 设置选中项
         iAdd: true,
-        selected: [newItem.key],
+        // 选中项的更改，拷贝新内容变更
+        selected: Ux.clone([newItem.key]),
+        // 新添加的也成为展开项
+        expandedKeys,
         ..._rxState(newItem.key, newItem)
     })
 };
