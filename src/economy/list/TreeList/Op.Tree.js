@@ -41,11 +41,7 @@ const onSelect = (reference, edit = false) => (key, selected, record) => {
     if (edit && 0 < key.length) {
         // 设置selected的数据
         reference.setState({
-            selected: key,
-            // 切换时一定会清空
-            iKey: undefined,
-            iItemData: undefined,
-            iItemText: undefined,
+            selected: key
         })
     }
 };

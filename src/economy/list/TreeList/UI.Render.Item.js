@@ -12,7 +12,7 @@ const _renderDelete = (reference, config = {}, item) => {
             const {rxItemDelete} = reference.props;
             if (U.isFunction(rxItemDelete)) {
                 const keys = Op.visitChildren(item);
-                rxItemDelete(item, keys);
+                rxItemDelete(Ux.clone(item), keys);
             }
         }}>
             <Button icon={"minus"} shape={"circle"}
@@ -41,6 +41,23 @@ const _renderYes = (reference, config = {}, item) => {
     return (
         <Button icon={"check"} shape={"circle"} size={"small"}
                 className={"web-tree-addon"} type={"primary"}
+                onClick={event => {
+                    event.preventDefault();
+                    reference.setState({
+                        iKey: undefined,
+                        iItemData: undefined,
+                        iItemText: undefined,
+                    });
+                    // 确认Item处理
+                    const {rxItemAdd} = reference.props;
+                    const {iItemText = ""} = reference.state;
+                    if (U.isFunction(rxItemAdd)) {
+                        const keys = Op.visitChildren(item);
+                        const $item = Ux.clone(item);
+                        $item.display = iItemText;
+                        rxItemAdd($item, keys);
+                    }
+                }}
         />
     )
 };
@@ -82,7 +99,7 @@ const renderOp = (reference, item = {}) => {
     )
 };
 
-const _onChange = (reference, item = {}) => (event) => {
+const _onChange = (reference) => (event) => {
     event.preventDefault();
     reference.setState({iItemText: event.target.value});
 };

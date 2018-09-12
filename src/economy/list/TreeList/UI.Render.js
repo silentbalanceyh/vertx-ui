@@ -20,6 +20,13 @@ const _renderItem = (reference, item = {}) => {
 const _renderNodes = (reference, item = {}) => {
     const attrs = {};
     attrs["data-items"] = item;
+    // 禁用处理，编辑视图下禁用其他
+    const {iKey} = reference.state;
+    if (iKey) {
+        attrs.disabled = iKey !== item.key;
+    } else {
+        attrs.disabled = false;
+    }
     return (
         <TreeNode key={item.key}
                   title={_renderItem(reference, item)} {...attrs}>
