@@ -6,23 +6,6 @@ const readConfig = (reference = {}) => {
     const grid = Ux.fromHoc(ref, $key);
     return Ux.clone(grid);
 };
-
-const initGrid = (reference = {}) => {
-    // 是否所有都展开
-
-};
-
-const _updateList = (reference) => {
-    const record = reference.props["$list"];
-    const {$query} = reference.props;
-    if ($query.is()) {
-        if (undefined === record) {
-            // 初始化查询
-            const {rxSearch} = reference.props;
-            if (rxSearch) rxSearch($query.to());
-        }
-    }
-};
 const _updateTree = (reference) => {
     const tree = reference.props["$tree"];
     if (undefined === tree || !tree.is()) {
@@ -52,8 +35,6 @@ const _updateExpand = (reference = {}) => {
     }
 };
 const updateGrid = (reference = {}, prevProps = {}) => {
-    // 更新表数据
-    _updateList(reference);
     // 更新左边树
     _updateTree(reference);
     // 更新展开信息
@@ -98,7 +79,6 @@ const initTabs = (reference) => {
     return tabs;
 };
 export default {
-    initGrid,
     updateGrid,
     readConfig,
     readOptions,

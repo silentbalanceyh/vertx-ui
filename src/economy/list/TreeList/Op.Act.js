@@ -115,7 +115,27 @@ const rxSelect = (reference, edit = false) => (key, node) => {
         // 设置selected的数据
         reference.setState({
             selected: key
-        })
+        });
+        // 写状态树专用
+        const options = Init.readOptions(reference);
+        if (options["tree.filter"]) {
+            const {$query} = reference.props;
+            const filters = $query && $query.is() ?
+                $query.to() : {};
+            // 写入到根节点
+            filters[""] = true;
+            if (1 === key.length) {
+                // 等于条件
+                filters[options["tree.filter"]] = key[0];
+            } else {
+                // 包含条件
+                filters[`${options["tree.filter"]},i`] = key;
+            }
+            // 写Query节点
+            Ux.writeTree(reference, {
+                "grid.query": filters
+            })
+        }
     }
 };
 const rxExpand = (reference) => (keys) => {

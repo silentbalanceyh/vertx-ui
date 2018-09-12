@@ -5,16 +5,15 @@ import {DataLabor} from 'entity';
 import Ux from "ux";
 import Op from "./Op";
 import Rdr from './UI.Render';
-import Table from './UI.Table';
 
 @_zero({
     connect: {
         s2p: state => DataLabor.createOut(state)
             .rework({
-                "grid": ["query", "list", "tree"]
+                "grid": ["tree", "query"]
             })
-            .rinit(["query"])
             .rinit(["tree"], true)
+            .rinit(["query"])
             .to()
     },
     "i18n.cab": require('./Cab.json'),
@@ -28,9 +27,7 @@ class Component extends React.PureComponent {
         // 验证当前组件是否准备完成
         const {reference, $key = "grid"} = this.props;
         const verified = Ux.verifyTreeList(reference, $key);
-        if (!verified) {
-            Op.initGrid(this);
-        } else {
+        if (verified) {
             this.setState({error: verified});
         }
     }
@@ -57,7 +54,7 @@ class Component extends React.PureComponent {
         if (rxSearch) attrs.rxSearch = rxSearch;
         return Ux.fxRender(this, () => {
             return Rdr.renderLayout(ref,
-                <Table {...attrs} $query={$query} $list={$list}/>
+                <span>PlaceHolder</span>
             )
         });
     }
