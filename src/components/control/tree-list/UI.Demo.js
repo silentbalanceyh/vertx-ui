@@ -16,7 +16,6 @@ const {zero} = Ux;
     .search(Tps.fnCategoryList)
     .tree(Tps.fnCategory)
     .cab("UI.Demo")
-    .search(Tps.fnDeptList)
     .to()
 )
 class Component extends React.PureComponent {

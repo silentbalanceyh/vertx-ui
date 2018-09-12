@@ -10,24 +10,12 @@
         "options": {
             "layout.divide": "5,19",
             "tree.expand.default": true,
-            "tree.search.enabled":true,
-            "tree.edit.enabled":true,
-            "tree.dialog.add":"添加节点",
-            "tree.dialog.edit":"编辑节点",
-            "tree.root":"根类型",
-            "tree.filter":"category"
-        },
-        "table": {
-            "columns":[
-                {
-                    "dataIndex":"name",
-                    "title":"记录名称"
-                },
-                {
-                    "dataIndex":"code",
-                    "title":"记录代码"
-                }
-            ]
+            "tree.search.enabled": true,
+            "tree.edit.enabled": true,
+            "tree.dialog.add": "添加节点",
+            "tree.dialog.edit": "编辑节点",
+            "tree.root": "根类型",
+            "tree.filter": "category"
         }
     }
 }
