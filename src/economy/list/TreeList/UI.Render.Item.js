@@ -1,4 +1,4 @@
-import {Button, Input, Popconfirm, Popover} from "antd";
+import {Button, Input, Popconfirm, Tooltip} from "antd";
 import React from "react";
 import Ux from 'ux';
 import Op from './Op.Visit'
@@ -23,36 +23,75 @@ const _renderDelete = (reference, config = {}, item) => {
 };
 const _renderEdit = (reference, config = {}, item) => {
     return (
-        <Popover {...config.over.edit}>
+        <Tooltip {...config.over.edit}>
             <Button icon={"edit"} shape={"circle"} size={"small"}
                     className={"web-tree-addon"} onClick={event => {
                 event.preventDefault();
                 reference.setState({
-                    iEditKey: item.key,
-                    iAddKey: undefined,
+                    iKey: item.key,
                     iItemData: item,
+                    iItemText: item.display,
                 })
             }}/>
-        </Popover>
+        </Tooltip>
+    )
+};
+
+const _renderYes = (reference, config = {}, item) => {
+    return (
+        <Button icon={"check"} shape={"circle"} size={"small"}
+                className={"web-tree-addon"} type={"primary"}
+        />
+    )
+};
+
+const _renderAdd = (reference, config = {}, item) => {
+    return (
+        <Button icon={"plus"} shape={"circle"} size={"small"}
+                className={"web-tree-addon"}/>
+    )
+};
+
+const _renderNo = (reference, config = {}, item) => {
+    return (
+        <Button icon={"undo"} shape={"circle"} size={"small"}
+                className={"web-tree-addon"} type={"danger"}
+                onClick={event => {
+                    event.preventDefault();
+                    reference.setState({
+                        iKey: undefined,
+                        iItemData: undefined,
+                        iItemText: undefined,
+                    })
+                }}
+        />
     )
 };
 
 const renderOp = (reference, item = {}) => {
     const config = Ux.fromHoc(reference, "item");
+    const {iKey} = reference.state;
     return (
         <span>
-            <Button icon={"plus"} shape={"circle"} size={"small"}
-                    className={"web-tree-addon"}/>
-            {_renderEdit(reference, config, item)}
-            {_renderDelete(reference, config, item)}
+            {iKey ? _renderYes(reference, config, item) : false}
+            {iKey ? _renderNo(reference, config, item) : false}
+            {!iKey ? _renderAdd(reference, config, item) : false}
+            {!iKey ? _renderEdit(reference, config, item) : false}
+            {!iKey ? _renderDelete(reference, config, item) : false}
         </span>
     )
 };
 
+const _onChange = (reference, item = {}) => (event) => {
+    event.preventDefault();
+    reference.setState({iItemText: event.target.value});
+};
+
 const renderInput = (reference, item = {}) => {
-    const {iEditKey, iItemData = {}} = reference.state;
-    return iEditKey ? (
-        <Input value={iItemData.display}/>
+    const {iKey, iItemText = ""} = reference.state;
+    return iKey ? (
+        <Input value={iItemText} className={"web-tree-input"}
+               onChange={_onChange(reference, item)}/>
     ) : item.display;
 };
 
