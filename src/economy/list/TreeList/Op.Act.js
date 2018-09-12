@@ -1,6 +1,19 @@
 import U from 'underscore';
 import Ux from 'ux';
 import Op from './Op.Visit'
+import Init from "./Op.Init";
+
+const _recoverData = (reference = {}, item = {}) => {
+    const $item = Ux.clone(item);
+    const treeData = Init.readTreeMapping(reference);
+    Ux.itObject(treeData, (treeKey, orignalKey) => {
+        if ($item.hasOwnProperty(treeKey)) {
+            $item[orignalKey] = $item[treeKey];
+            delete $item[treeKey];
+        }
+    });
+    return $item;
+};
 
 const _rxState = (iKey, iItemData, iItemText) => {
     return ({
@@ -13,7 +26,7 @@ const rxDelete = (reference, item) => (event) => {
     const {rxItemDelete} = reference.props;
     if (U.isFunction(rxItemDelete)) {
         const keys = Op.visitChildren(item);
-        rxItemDelete(Ux.clone(item), keys);
+        rxItemDelete(_recoverData(reference, item), keys);
     }
 };
 
@@ -54,16 +67,24 @@ const rxEdit = (reference, item) => (event) => {
     // 确认Item处理
     const {rxItemEdit, rxItemAdd} = reference.props;
     const {iItemText = "", iAdd = false} = reference.state;
-    const keys = Op.visitChildren(item);
-    const $item = Ux.clone(item);
-    $item.display = iItemText;
+    // 延迟执行
+    const fnData = (item) => {
+        const keys = Op.visitChildren(item);
+        // 更新数据信息
+        let $item = Ux.clone(item);
+        $item.display = iItemText;
+        $item = _recoverData(reference, $item);
+        return {item: $item, keys};
+    };
     if (iAdd) {
         if (U.isFunction(rxItemAdd)) {
-            rxItemAdd($item, keys);
+            const data = fnData(item);
+            rxItemAdd(data.item, data.keys);
         }
     } else {
         if (U.isFunction(rxItemEdit)) {
-            rxItemEdit($item, keys);
+            const data = fnData(item);
+            rxItemEdit(data.item, data.keys);
         }
     }
 

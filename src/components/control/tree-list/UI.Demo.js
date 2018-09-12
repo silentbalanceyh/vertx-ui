@@ -7,6 +7,12 @@ import Op from './Op';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
+    .connect(state => Ux.dataIn(state)
+        .rework({
+            "grid": ["tree"]
+        })
+        .to()
+    )
     .search(Tps.fnCategoryList)
     .tree(Tps.fnCategory)
     .cab("UI.Demo")

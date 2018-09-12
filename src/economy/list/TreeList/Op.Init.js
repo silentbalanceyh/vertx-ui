@@ -66,11 +66,19 @@ const readOptions = (reference) => {
     }
 };
 const readTree = (reference) => readConfig(reference).tree;
-
+const readTreeMapping = (reference) => {
+    const tree = readTree(reference);
+    Ux.E.fxTerminal(tree && !tree.hasOwnProperty("branch"), 10089, tree["branch"]);
+    // 呈现的默认信息
+    if (!tree.key) tree.key = "key";
+    if (!tree.display) tree.display = "name";
+    return tree;
+};
 export default {
     initGrid,
     updateGrid,
     readConfig,
     readOptions,
-    readTree
+    readTree,
+    readTreeMapping,
 }
