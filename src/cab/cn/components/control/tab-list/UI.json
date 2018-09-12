@@ -1,0 +1,19 @@
+{
+    "_title": "UC0006 - 「自定义组件」TabList",
+    "_attribute": {
+        "props": {
+        },
+        "hoc": {
+        }
+    },
+    "_datatree": {
+    },
+    "_datalist": {
+    },
+    "_diagram": {
+        "items": {
+            "nodes": [],
+            "edges": []
+        }
+    }
+}

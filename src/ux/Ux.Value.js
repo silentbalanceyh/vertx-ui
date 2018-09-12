@@ -21,6 +21,20 @@ const stringConnect = (left, right) => {
         }
     }
 };
+const arrayConnect = (item, fnEach, dividier = ',') => {
+    if (!item) return [];
+    if (U.isArray(item)) return item;
+    if ("string" === typeof item) {
+        const result = item.split(dividier);
+        if (fnEach) {
+            return result.map(fnEach);
+        } else {
+            return result;
+        }
+    } else {
+        return [];
+    }
+};
 /**
  * mode = 0：调用原生的Object.assign：直接覆盖
  * mode = 1：将source中的属性追加到target中，深度追加
@@ -128,6 +142,7 @@ export default {
     vector,
     fix,
     // 字符串链接
+    arrayConnect,
     stringConnect,
 
     ...Value,

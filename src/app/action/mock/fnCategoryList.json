@@ -1,0 +1,37 @@
+{
+    "mock": true,
+    "data": {
+        "list": [
+            {
+                "name": "记录1",
+                "code": "code1",
+                "key": "587334d5-8a8f-49be-a3a3-9293f6f491c0"
+            },
+            {
+                "name": "记录2",
+                "code": "code2",
+                "key": "a4e0b820-3e57-4408-9bc0-6cf5c518dbac"
+            },
+            {
+                "name": "记录3",
+                "code": "code3",
+                "key": "a64e637b-31c1-4e19-9977-5ba6e79826cc"
+            },
+            {
+                "name": "记录4",
+                "code": "code4",
+                "key": "5e279bba-a694-4a7c-8d0c-7fd07fbbf7b0"
+            },
+            {
+                "name": "记录5",
+                "code": "code5",
+                "key": "b64bb62b-0f19-40d0-9dd4-d84aeee7a654"
+            },
+            {
+                "name": "记录6",
+                "code": "code6",
+                "key": "b5982f68-e9ff-4bb1-9a59-4f73bc9b55d0"
+            }
+        ]
+    }
+}

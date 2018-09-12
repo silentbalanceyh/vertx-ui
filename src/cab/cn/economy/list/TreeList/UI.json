@@ -1,0 +1,17 @@
+{
+    "_item":{
+        "confirm":{
+            "delete":{
+                "title":"确认删除该节点？"
+            }
+        },
+        "over":{
+            "edit":{
+                "title":"编辑"
+            },
+            "add":{
+                "title":"添加子节点"
+            }
+        }
+    }
+}

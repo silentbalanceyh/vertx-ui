@@ -1,107 +1,70 @@
 import React from 'react'
+import './Cab.less';
 import Ux from 'ux';
-import {Button, Input, Table, Tabs} from 'antd';
-import './Cab.less'
-import Op from './UI.Op';
+import Op from './Op';
+import {Tabs} from 'antd';
+import {_zero} from '../../_internal/index';
+import {DataLabor} from 'entity';
+import Render from './UI.Render';
 
-const {TabPane} = Tabs;
-
-const buildMain = (reference) => {
-    const {
-        $list = {}, $table = {}, $query = {},
-        $op = {}, $metadata = {}, $tabs = {}
-    } = reference.props;
-    // columns渲染
-    Ux.uiTableColumn(reference, $table.columns, Op);
-    // paginator处理
-    const pagination = Ux.uiTablePager(reference, $query.pager, $list.count);
-    // selection
-    const selection = $metadata.batch ? Ux.uiTableSelection(reference) : undefined;
-    // metadata处理
-    const op = $metadata.op;
-    const dynamic = op['dynamic'] ? op['dynamic'] : [];
-    // 数据data
-    const data = $list.list;
-    return (
-        <div>
-            <div className="page-op">
-                {op.add ? <Button type="primary" icon="plus"
-                                  onClick={Op.fnAdd(reference, $tabs.add)}>{op.add.text}</Button> : false}
-                {dynamic ? dynamic.map(item => {
-                    const attrs = {};
-                    attrs.key = item.key;
-                    if (item.icon) attrs.icon = item.icon;
-                    if (item.hasOwnProperty("fnKey")) {
-                        attrs.onClick = $op[item['fnKey']] ? $op[item['fnKey']] : () => {
-                        }
-                    }
-                    return (
-                        <Button {...attrs}>{item.text}</Button>
-                    );
-                }) : false}
-                {op.search ? (
-                    <Input.Search style={{width: 160, float: "right"}}/>
-                ) : false}
-            </div>
-            <Table
-                onChange={Ux.onAdvanced(reference)}
-                rowSelection={selection}
-                loading={!data}
-                pagination={pagination}
-                dataSource={data} {...$table}/>
-        </div>
-    )
-};
-
+@_zero({
+    connect: {
+        s2p: state => DataLabor.createOut(state)
+            .rework({
+                "grid": ["query", "list"]
+            })
+            .rinit(["query"])
+            .to(),
+    },
+    "i18n.cab": require('./Cab.json'),
+    "i18n.name": "UI",
+    state: {
+        view: "list",
+        key: undefined,
+        drawer: false,
+        term: "",
+        tabs: {}
+    }
+})
 class Component extends React.PureComponent {
-    state = {
-        selectedRowKeys: [],
-        tabs: []
-    };
-
     componentDidMount() {
-        Op.fnInit(this);
-        Ux.cycleUpdatePageList(this, "list");
+        // Op.initGrid(this);
+        // 验证当前组件是否准备完成
+        const {reference, $key = "grid"} = this.props;
+        const verified = Ux.verifyComplex(reference, $key);
+        if (!verified) {
+            Op.initGrid(this);
+        } else {
+            this.setState({error: verified});
+        }
     }
 
-    componentDidUpdate(prevProps) {
-        Ux.cycleUpdatePageList(this, "list", prevProps);
+    componentDidUpdate(prevProps, prevState) {
+        Op.updateGrid(this, prevProps);
+        // 连接Monitor专用
+        Op.updateMonitor(this, prevState);
     }
 
     render() {
-        // 主页组件构造
-        const components = [];
-        components.push(buildMain(this));
-        const {$component: Component} = this.props;
-        const tabs = this.state.tabs ? this.state.tabs : [];
-        tabs.forEach((item, index) => {
-            if (0 < index) {
-                components.push(
-                    <Component key={item.key}
-                               {...this.props}
-                               fnClose={Op.fnCloseDirect(this, item.key)}
-                               $key={item.dataKey}
-                               {...Ux.toDatum(this.props)}/>
-                )
-            } else {
-                // 第一个页面不可以关闭
-                item.closable = false;
-            }
-        });
-        const activeKey = this.state.activeKey;
-        const {$extra} = this.props;
-        // 第一个界面不显示ExtraContent
-        const defaultKey = tabs[0] ? tabs[0].key : null;
-        return (
-            <div className="page-pagelist">
-                <Tabs activeKey={activeKey} type="editable-card" hideAdd
-                      onChange={Op.fnMove(this)} onEdit={Op.fnClose(this)}
-                      tabBarExtraContent={($extra && defaultKey !== activeKey) ? $extra : false}>
-                    {tabs.map((item, index) => (<TabPane {...item}>{components[index]}</TabPane>))}
+        const {error} = this.state;
+        if (error) {
+            return Ux.fxError(error)
+        } else {
+            const $state = Op.mockVector(this);
+            const {items = [], ...rest} = $state.tabs;
+            // 只能开一个Tab页
+            items.forEach((item, index) => item.disabled = 1 < items.length && 0 === index);
+            return (
+                <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
+                    {items.map((item) => {
+                        const {type, ...itemRest} = item;
+                        const fnRender = Render[type];
+                        return fnRender(this, itemRest, rest.activeKey);
+                    })}
                 </Tabs>
-            </div>
-        )
+            );
+        }
     }
 }
 
-export default Component;
+export default Component

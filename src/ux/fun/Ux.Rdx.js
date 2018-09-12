@@ -43,6 +43,19 @@ const rdxClear = (reference) => {
         fnClear()
     }
 };
+const rdxTree = (reference, values, isDeleted = false) => {
+    const {$tree} = reference.props;
+    if ($tree.is()) {
+        if (isDeleted) {
+            $tree.removeElement(values.key);
+        } else {
+            $tree.saveElement(values);
+        }
+        Prop.writeTree(reference, {
+            "grid.tree": $tree.to()
+        })
+    }
+};
 const rdxClose = (reference) => {
     rdxClear(reference);
     Dialog.closeWindow(reference);
@@ -54,6 +67,8 @@ export default {
     rdxReject,
     // 更新特殊节点list.items，调用fnListItem方法
     rdxListItem,
+    // 更新Tree相关节点专用
+    rdxTree,
     // 清除editKey，调用fnClear方法
     rdxClear,
     // 关闭窗口专用，调用fnClose方法

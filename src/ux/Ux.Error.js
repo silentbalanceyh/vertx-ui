@@ -91,7 +91,8 @@ const fnError = {
     10085: (fnClose) => `[ ERR-10085 ] 当前操作要求 props 中包含名为 "fnClose" 的特殊函数，该函数缺失：${fnClose}`,
     10086: (fnClear) => `[ ERR-10086 ] 当前操作要求 props 中包含名为 "fnClear" 的特殊函数，该函数缺失：${fnClear}`,
     10087: (fnListItem) => `[ ERR-10087 ] 当前操作要求 props 中包含名为 "fnListItem" 的特殊函数，该函数缺失：${fnListItem}`,
-    10088: (fnPromise) => `[ ERR-10088 ] 当前操作执行过后的返回结果必须是一个 "Promise" 对象，当前对象：${fnPromise}`
+    10088: (fnPromise) => `[ ERR-10088 ] 当前操作执行过后的返回结果必须是一个 "Promise" 对象，当前对象：${fnPromise}`,
+    10089: (branch) => `[ ERR-10089 ] (Web) 当前组件中的 tree 配置丢失了 "branch", ${branch}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

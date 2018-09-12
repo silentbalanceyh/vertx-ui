@@ -1,8 +1,10 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
-import Mock from './Op.Mock';
 import U from "underscore";
+import Fn from '../../_internal/Ix.Fn';
+
+const {Mock} = Fn;
 
 const _initTablePager = (reference = {}) => {
     const data = initData(reference);
@@ -82,6 +84,9 @@ const initTable = (reference = {}) => {
     table.onChange = _initChange(reference);
     let data = initData(reference);
     data = Mock.mockConnect(reference, data);
+    // 设置ready单独
+    const {$list} = reference.props;
+    data.ready = $list && $list.is();
     // Mock链接处理
     return {table, data: data.list, ready: data.ready};
 };
