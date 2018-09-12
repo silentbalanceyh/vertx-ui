@@ -3,6 +3,8 @@ import Act from "./Op.Action";
 import Init from './Op.Init';
 import Mock from './Op.Mock';
 import U from "underscore";
+import {Button, Tooltip} from "antd";
+import React from "react";
 
 const _initTablePager = (reference = {}) => {
     const data = initData(reference);
@@ -59,13 +61,55 @@ const initData = (reference) => {
         return {list: [], count: 0, ready: false};
     }
 };
+const initAdd = (reference, column) => {
+    const options = Init.readOption(reference);
+    if (options["row.add"]) {
+        const tip = options["row.add"];
+        return (
+            <Tooltip title={tip ? tip : false}>
+                <Button icon={"plus"} type="primary" onClick={event => {
+                    event.preventDefault();
+                    reference.setState({
+                        rowKey: Ux.randomUUID()
+                    });
+                }}>{tip}</Button>
+            </Tooltip>
+        )
+    } else return column.title;
+};
+const initRow = (reference, columns = [], rowKey) => {
+    columns.forEach(column => {
+        if (column.edit) {
+            const fnRender = column.render;
+            column.render = (text, record, index) => {
+                if (record.key === rowKey) {
+                    let type = column.edit["$render"];
+                    if (!type) type = "TEXT";
+                    const fnRender = Ux.aiStateRenders[type];
+                    return U.isFunction(fnRender) ?
+                        fnRender(reference, column)(text, record, index) : false
+                } else {
+                    return U.isFunction(fnRender) ?
+                        fnRender(text, record, index) : text;
+                }
+            }
+        }
+    });
+    return columns;
+};
 const initTable = (reference = {}) => {
-    const table = Init.readTable(reference);
+    let table = Init.readTable(reference);
+    table = Ux.clone(table);
     // 列渲染
     const props = reference.props;
+    // 行添加专用
+    const {rowKey} = reference.state;
     const op = {
         rxEdit: Act.rxEdit,
         rxDelete: Act.rxDelete,
+        rxSave: Act.rxSave,
+        rowKey,
+        rxCancel: () => reference.setState({rowKey: undefined})
     };
     table.columns = Ux.uiTableColumn({
         props: {
@@ -77,6 +121,11 @@ const initTable = (reference = {}) => {
             $self: reference
         },
     }, table.columns);
+    table.columns.filter(column => "key" === column.dataIndex)
+        .forEach(column => column.title = initAdd(reference, column));
+    if (rowKey) {
+        table.columns = initRow(reference, table.columns, rowKey);
+    }
     // 分页处理，客户端模式
     table.pagination = _initTablePager(reference);
     table.onChange = _initChange(reference);

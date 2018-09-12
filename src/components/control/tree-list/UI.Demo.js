@@ -1,8 +1,11 @@
 import React from 'react'
 import Ux from "ux";
-import {Tps} from "app";
+import {Mock, Tps} from "app";
 import {PageCard, TreeList} from 'web';
 import Op from './Op';
+import Filter from "./UI.Demo.Filter";
+import FormAdd from "./UI.Demo.Form.Add";
+import FormEdit from "./UI.Demo.Form.Edit";
 
 const {zero} = Ux;
 
@@ -23,10 +26,15 @@ class Component extends React.PureComponent {
         return (
             <PageCard reference={this}>
                 <TreeList {...this.props}
+                          $mockData={Mock.fnDeptList}
+                          rxAddRow={Op.opAddRow(this)}
                           rxItemDelete={Op.opItemDelete(this)}
                           rxItemAdd={Op.opItemAdd(this)}
                           rxItemEdit={Op.opItemEdit(this)}
-                          reference={this}/>
+                          reference={this}
+                          $formFilter={Filter}
+                          $formAdd={FormAdd}
+                          $formEdit={FormEdit}/>
             </PageCard>
         )
     }

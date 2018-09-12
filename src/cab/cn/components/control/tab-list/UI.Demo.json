@@ -33,28 +33,35 @@
             "submit.reset": "$opReset",
             "ajax.get.uri": "/api/dept/:id",
             "ajax.delete.uri": "/api/dept/:id",
-            "confirm.delete": "确认删除当前记录？"
+            "confirm.delete": "确认删除当前记录？",
+            "row.add": "添加"
         },
         "table": {
             "columns": [
                 {
                     "dataIndex": "name",
                     "title": "记录名称",
-                    "edit": true
+                    "edit": {
+                        "$render": "TEXT"
+                    }
                 },
                 {
                     "dataIndex": "code",
                     "title": "记录代码",
-                    "edit": true
+                    "edit": {
+                        "$render": "TEXT"
+                    }
                 },
                 {
                     "title": "操作",
                     "dataIndex": "key",
                     "$render": "BUTTON",
-                    "fixed": "right",
-                    "className": "ux-rightop-160",
+                    "className": "ux-rightop-120",
                     "$option": {
-                        "addRow": "快速添加",
+                        "row": [
+                            "保存",
+                            "取消"
+                        ],
                         "edit": "编辑",
                         "delete": "删除",
                         "delete-confirm": "是否删除该记录？"

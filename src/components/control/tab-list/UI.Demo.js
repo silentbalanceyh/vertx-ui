@@ -5,6 +5,7 @@ import {HelpCard, TabList} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Edit'
+import Op from './Op';
 
 const {zero} = Ux;
 
@@ -21,6 +22,7 @@ class Component extends React.PureComponent {
                 <TabList {...this.props}
                          reference={this}
                          $mockData={Mock.fnDeptList}
+                         rxAddRow={Op.opAddRow(this)}
                          $formFilter={Filter}
                          $formAdd={FormAdd}
                          $formEdit={FormEdit}/>

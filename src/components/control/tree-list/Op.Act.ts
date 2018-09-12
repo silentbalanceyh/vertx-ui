@@ -31,16 +31,8 @@ const $opReset = (reference: any) => (event: any) => {
     Ux.formReset(reference);
 };
 
-const opAddRow = (reference: any) => (record: any, id: any, fnClose) => {
-    // 行保存专用方法
-    console.info(record, id);
-    if (fnClose) {
-        fnClose();
-    }
-};
 export default {
     $opSave,
-    $opAdd,
     $opReset,
-    opAddRow
+    $opAdd
 }

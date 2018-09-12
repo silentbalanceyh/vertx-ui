@@ -2,6 +2,7 @@ import React from 'react'
 import {Col, Row, Table, Tabs} from "antd";
 import Op from "./Op";
 import "./Cab.less";
+import Ux from 'ux';
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
@@ -43,6 +44,12 @@ const renderPageEdit = (reference, item = {}) => {
 };
 const renderPageList = (reference, item = {}) => {
     const tableDatum = Op.initTable(reference);
+    // 是否包含添加列
+    const {rowKey} = reference.state;
+    let dataSource = Ux.clone(tableDatum.data);
+    if (rowKey) {
+        dataSource = [{key: rowKey}].concat(dataSource);
+    }
     const ready = tableDatum.ready;
     return (
         <Tabs.TabPane {...item} closable={false}>
@@ -63,7 +70,7 @@ const renderPageList = (reference, item = {}) => {
                 }}>
                     <Table {...tableDatum.table}
                            loading={!ready}
-                           dataSource={tableDatum.data}/>
+                           dataSource={dataSource}/>
                 </Col>
             </Row>
             {Op.renderDrawer(reference)}

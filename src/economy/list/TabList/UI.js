@@ -52,9 +52,11 @@ class Component extends React.PureComponent {
         } else {
             const $state = Op.mockVector(this);
             const {items = [], ...rest} = $state.tabs;
+            // 只能开一个Tab页
+            items.forEach((item, index) => item.disabled = 1 < items.length && 0 === index);
             return (
                 <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
-                    {items.map(item => {
+                    {items.map((item) => {
                         const {type, ...itemRest} = item;
                         const fnRender = Render[type];
                         return fnRender(this, itemRest, rest.activeKey);

@@ -3,6 +3,7 @@ import Ux from 'ux';
 import Init from './Op.Init';
 import Mock from './Op.Mock';
 import Immutable from 'immutable';
+import U from 'underscore';
 
 const stateAddTab = (reference) => {
     let {tabs = {}} = reference.state;
@@ -126,6 +127,21 @@ const rxDelete = (reference, id) => {
     rxDeleteDetail($self, id)
 };
 
+const rxSave = (reference) => {
+    const {$self} = reference.props;
+    const {rxAddRow} = $self.props;
+    if (U.isFunction(rxAddRow)) {
+        const {rowRecord, rowKey} = $self.state;
+        if (rowRecord) {
+            rowRecord.key = rowKey;
+            rxAddRow(rowRecord, rowKey, () => $self.setState({
+                rowRecord: {},
+                rowKey: undefined
+            }));
+        }
+    }
+};
+
 const rxClose = (reference, activekey) => () => {
     // 关闭时处理tab页
     let {tabs = {}} = reference.state;
@@ -177,11 +193,13 @@ const rxInput = (reference = {}) => (event) => {
 };
 export default {
     rxAdd,
-    rxEdit,
-    rxDelete,
     rxDeleteDetail,
     rxClose,
     rxFilter,
     rxClear,
-    rxInput
+    rxInput,
+    // 行处理
+    rxSave,
+    rxEdit,
+    rxDelete,
 }

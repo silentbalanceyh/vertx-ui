@@ -1,27 +1,18 @@
 import React, {Fragment} from "react";
 import {Button, Divider, Popconfirm, Tooltip} from "antd";
 import Immutable from "immutable";
+import U from 'underscore';
 
 const aiCellOp = (reference, config) => (text, record) => {
     const option = config['$option'];
     if (option) {
         let counter = 0;
         // 编辑按钮
-        let edit = undefined;
-        if (option.edit) {
-            edit = {};
-            edit.key = `edit${record.key}`;
-            edit.text = option.edit;
-            counter++;
-        }
+        let edit = _editConfig(option, record);
+        if (edit) counter++;
         // 删除按钮
-        let removed = undefined;
-        if (option.delete) {
-            removed = {};
-            removed.key = `delete${record.key}`;
-            removed.text = option.delete;
-            counter++
-        }
+        let removed = _deleteConfig(option, record);
+        if (removed) counter++;
         const {
             rxEdit = () => {
             },
@@ -50,59 +41,92 @@ const aiCellOp = (reference, config) => (text, record) => {
         )
     } else return false;
 };
+const _editConfig = (option = {}, record) => {
+    let edit = undefined;
+    if (option.edit) {
+        edit = {};
+        edit.key = `edit${record.key}`;
+        edit.icon = "edit";
+        edit.text = option.edit;
+    }
+    return edit;
+};
+const _deleteConfig = (option = {}, record) => {
+    let removed = undefined;
+    if (option.delete) {
+        removed = {};
+        removed.key = `delete${record.key}`;
+        removed.icon = "delete";
+        removed.text = option.delete;
+    }
+    return removed;
+};
+const _rowAddConfig = (option = {}, record) => {
+    let rowAdded = {};
+    if (option.row) {
+        rowAdded = {};
+        const textes = option.row;
+        const save = {};
+        save.key = `save${record.key}`;
+        save.icon = `save`;
+        save.text = textes[0];
+        rowAdded.save = save;
+        const cancel = {};
+        cancel.key = `undo${record.key}`;
+        cancel.icon = `undo`;
+        cancel.text = textes[1];
+        rowAdded.cancel = cancel;
+    }
+    return rowAdded;
+};
 const aiCellButton = (reference, config) => (text, record, index) => {
     const option = config['$option'];
     if (option) {
         // 编辑按钮
-        let edit = undefined;
-        if (option.edit) {
-            edit = {};
-            edit.key = `edit${record.key}`;
-            edit.icon = "edit";
-            edit.text = option.edit;
-        }
+        let edit = _editConfig(option, record);
         // 删除按钮
-        let removed = undefined;
-        if (option.delete) {
-            removed = {};
-            removed.key = `delete${record.key}`;
-            removed.icon = "delete";
-            removed.text = option.delete;
-        }
+        let removed = _deleteConfig(option, record);
+        // 当前行处理
+        let rowAdded = _rowAddConfig(option, record);
         // 快速添加按钮
-        let added = undefined;
-        if (option.addRow) {
-            added = {};
-            added.key = `add${record.key}`;
-            added.icon = "plus";
-            added.text = option.addRow;
-        }
         const {
             rxEdit = () => {
             },
             rxDelete = () => {
             },
-            rxAddRow = () => {
-            }
+            rowKey,
+            rxCancel,
+            rxSave,
         } = reference.props;
-        return (
+        const {save, cancel} = rowAdded;
+        return rowKey === record.key ? (
             <Button.Group>
-                {added ? (<Tooltip title={added.text ? added.text : false}>
-                    <Button key={added.key} icon={added.icon} onClick={event => {
+                {save ? (<Tooltip title={save.text ? save.text : false}>
+                    <Button key={save.key} icon={save.icon} onClick={event => {
                         event.preventDefault();
-                        rxAddRow(reference, text, index);
+                        if (U.isFunction(rxSave)) rxSave(reference, text, record);
                     }}/>
                 </Tooltip>) : false}
+                {cancel ? (<Tooltip title={cancel.text ? cancel.text : false}>
+                    <Button key={cancel.key} icon={cancel.icon} onClick={event => {
+                        event.preventDefault();
+                        // 直接运行
+                        if (U.isFunction(rxCancel)) rxCancel();
+                    }}/>
+                </Tooltip>) : false}
+            </Button.Group>
+        ) : (
+            <Button.Group>
                 {edit ? (<Tooltip title={edit.text ? edit.text : false}>
                     <Button key={edit.key} icon={edit.icon} onClick={event => {
                         event.preventDefault();
-                        rxEdit(reference, text);
+                        rxEdit(reference, text, record);
                     }}/>
                 </Tooltip>) : false}
                 {removed ? (
                     <Popconfirm title={option['delete-confirm']} onConfirm={(event) => {
                         event.preventDefault();
-                        rxDelete(reference, text);
+                        rxDelete(reference, text, record);
                     }}><Button key={removed.key} icon={removed.icon} type={"danger"}/>
                     </Popconfirm>) : false}
             </Button.Group>
