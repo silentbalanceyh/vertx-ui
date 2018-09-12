@@ -1,8 +1,8 @@
-import Immutable from "immutable";
 import G6 from "@antv/g6";
+import Ux from "ux";
 
 const drawGraphic = (id, config) => {
-    const items = Immutable.fromJS(config.items).toJS();
+    const items = Ux.clone(config.items);
     G6.registerNode('treeNode', {
         anchor: [[0, 0.5], [1, 0.5]],
         enterAnimate: function enterAnimate(item) {
@@ -50,24 +50,26 @@ const drawGraphic = (id, config) => {
         shape: 'treeNode',
         size: 16
     }).label(function (obj) {
-        return obj.name;
+        return obj && obj.name ? obj.name : "";
     });
     tree.edge({
         shape: 'smooth'
     });
     tree.on('afterchange', function () {
         tree.getNodes().forEach(function (node) {
-            const label = node.getLabel();
-            const keyShape = node.getKeyShape();
-            const children = node.getChildren();
-            const box = keyShape.getBBox();
-            const labelBox = label.getBBox();
-            let dx = (box.maxX - box.minX + labelBox.maxX - labelBox.minX) / 2 + 8;
-            let dy = 0;
-            if (children.length !== 0) {
-                dx = -dx;
+            if (node) {
+                const label = node.getLabel();
+                const keyShape = node.getKeyShape();
+                const children = node.getChildren();
+                const box = keyShape.getBBox();
+                const labelBox = label.getBBox();
+                let dx = (box.maxX - box.minX + labelBox.maxX - labelBox.minX) / 2 + 8;
+                let dy = 0;
+                if (children.length !== 0) {
+                    dx = -dx;
+                }
+                label.translate(dx, dy);
             }
-            label.translate(dx, dy);
         });
         tree.draw();
     });

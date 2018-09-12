@@ -17,6 +17,7 @@ export default [
     "ComplexList,table,zui.control.complex-list,/control/complex-list,1,zui.control.list",
     "DialogList,table,zui.control.dialog-list,/control/dialog-list,2,zui.control.list",
     "TreeList,table,zui.control.tree-list,/control/tree-list,3,zui.control.list",
+    "TabList,table,zui.control.tab-list,/control/tab-list,4,zui.control.list",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用
