@@ -10,11 +10,15 @@ const _initLoop = (data = {}, array = []) => {
 };
 const _initTree = (reference = {}, data = []) => {
     let source = Ux.clone(data);
-    const {iItemData} = reference.state;
+    const {iItemData, keyword} = reference.state;
     // 新增
     if (iItemData) {
         // 追加新项
         source.push(iItemData);
+    }
+    // 如果是keyword则要执行过滤
+    if (keyword) {
+        source = source.filter(item => 0 < item.display.indexOf(keyword))
     }
     // 查找根节点
     const $data = source.filter(item => !item.branch);

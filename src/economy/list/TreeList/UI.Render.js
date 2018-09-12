@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from 'ux';
-import {Input, Tree} from 'antd';
+import {Button, Input, Tree} from 'antd';
 import Op from './Op';
 import Immutable from 'immutable';
 import Item from './UI.Render.Item';
@@ -55,9 +55,17 @@ const renderTree = (reference) => {
     // 是否支持Tree左边部分的编辑（添加/删除/修改）
     const edit = options["tree.edit.enabled"];
     attrs.onSelect = Op.rxSelect(reference, edit);
+    // 搜索文字
+    const {term = ""} = reference.state;
     return (
         <div className={"web-tree"}>
-            {search ? <Input.Search/> : false}
+            {search ? (
+                Ux.aiGrid([19, "span=4,offset=1"],
+                    <Input.Search onSearch={Op.rxSearch(reference)} value={term}
+                                  onChange={Op.rxCriteria(reference)}/>,
+                    <Button icon={"undo"} onClick={Op.rxClear(reference)}/>
+                )
+            ) : false}
             <Tree {...attrs}>
                 {treeData.map(item => _renderNodes(reference, item))}
             </Tree>

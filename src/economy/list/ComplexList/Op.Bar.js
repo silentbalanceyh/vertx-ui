@@ -1,13 +1,5 @@
 import React from 'react'
-import {
-    Alert,
-    Button,
-    Col,
-    Drawer,
-    Input,
-    Popconfirm,
-    Row
-} from 'antd';
+import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
 import U from 'underscore';
@@ -65,7 +57,7 @@ const renderSearch = (reference) => {
             </Col>
             <Col span={5} offset={1}>
                 <Button.Group>
-                    <Button icon={"reload"}
+                    <Button icon={"undo"}
                             onClick={Act.rxClear(reference)}/>
                     {advanced ? (<Button icon={"ellipsis"}
                                          onClick={() => {
