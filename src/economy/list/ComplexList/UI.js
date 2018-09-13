@@ -42,7 +42,7 @@ class Component extends React.PureComponent {
     componentDidUpdate(prevProps, prevState) {
         Op.updateGrid(this, prevProps);
         // 连接Monitor专用
-        Fn.monitorComplexList(this, prevState);
+        Fn.M.monitorComplexList(this, prevState);
     }
 
     render() {

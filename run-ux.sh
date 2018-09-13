@@ -18,6 +18,10 @@ export TARGET_FOLDER=/Users/lang/Develop/Work/Source/ima-app/src
 cp -rf src/economy/* ${TARGET_FOLDER}/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/ux/
+# 资源文件
+cp -rf src/cab/cn/shared.json ${TARGET_FOLDER}/cab/cn/shared.json
+cp -rf src/cab/cn/economy/* ${TARGET_FOLDER}/cab/cn/economy/
+cp -rf src/environment/zero.js ${TARGET_FOLDER}/environment/zero.js
 # Others
 echo "[ ${TARGET_FOLDER} ] 拷贝完成！"
 export TARGET_FOLDER=/Users/lang/Develop/Source/vie-ui/src
@@ -26,3 +30,8 @@ cp -rf src/economy/* ${TARGET_FOLDER}/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/ux/
 echo "[ ${TARGET_FOLDER} ] 拷贝完成！"
+# 资源文件
+cp -rf src/cab/cn/shared.json ${TARGET_FOLDER}/cab/cn/shared.json
+cp -rf src/cab/cn/economy/* ${TARGET_FOLDER}/cab/cn/economy/
+cp -rf src/environment/zero.js ${TARGET_FOLDER}/environment/zero.js
+

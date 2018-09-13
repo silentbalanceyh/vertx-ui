@@ -47,7 +47,7 @@ const renderSearch = (reference) => {
     const advanced = options['search.advanced'];
     return enabled ? (
         <Row>
-            <Col span={18}>
+            <Col span={16}>
                 <Input.Search
                     placeholder={options['search.placeholder'] ?
                         options['search.placeholder'] : ""}
@@ -55,7 +55,7 @@ const renderSearch = (reference) => {
                     value={term}
                     onChange={Act.rxInput(reference)}/>
             </Col>
-            <Col span={5} offset={1}>
+            <Col span={7} offset={1}>
                 <Button.Group>
                     <Button icon={"undo"}
                             onClick={Act.rxClear(reference)}/>
