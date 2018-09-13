@@ -40,7 +40,7 @@ class Component extends React.PureComponent {
 
     componentDidUpdate(prevProps, prevState) {
         // 连接Monitor专用
-        Fn.monitorDialogList(this, prevState);
+        Fn.M.monitorDialogList(this, prevState);
     }
 
     render() {
