@@ -1,10 +1,14 @@
 import Ux from "ux";
 import Init from './Op.Init';
 
-const _initLoop = (data = {}, array = []) => {
+const _initLoop = (data = {}, array = [], level = 1) => {
     const item = array.filter(item => item.branch === data.key);
     if (0 < item.length) {
-        item.forEach(each => each.children = _initLoop(each, array));
+        item.forEach(each => {
+            // Level专用
+            each._level = level;
+            each.children = _initLoop(each, array, (level + 1));
+        });
     }
     return Ux.clone(item);
 };
@@ -34,7 +38,8 @@ const _initTree = (reference = {}, data = []) => {
     // 查找根节点
     const $data = source.filter(item => !item.branch);
     // 遍历根节点
-    $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source));
+    $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source, 1));
+    console.info($data);
     // 数据源
     return $data;
 };

@@ -135,6 +135,25 @@ const renderButton = (reference, item = {}, reset = false) => {
     }
 };
 
+const _isLock = (reference, options = {}) => {
+    /**
+     * 是否触发条件删除流程
+     * @type {boolean}
+     */
+    let isLock = false;
+    if (options["op.delete.condition"]) {
+        isLock = Boolean(options["op.delete.condition"]);
+    }
+    if (isLock) {
+        // 读取初始值
+        const {record, tabs = {}} = reference.state;
+        const {activeKey} = tabs;
+        const $inited = record[activeKey] ? record[activeKey] : {};
+        isLock = $inited ? !!$inited.lock : false;
+    }
+    return isLock;
+};
+
 const renderSubmit = (reference) => {
     const options = Init.readOption(reference);
     const state = reference.state;
@@ -142,6 +161,10 @@ const renderSubmit = (reference) => {
     let opDeleted = true;
     if (options.hasOwnProperty(`op.${view}.delete`)) {
         opDeleted = options[`op.${view}.delete`];
+        if (!opDeleted) {
+            // 锁定就不删除的逻辑，这个地方应该是相反的属性逻辑
+            opDeleted = !_isLock(reference, options)
+        }
     }
     // 编辑按钮
     const editAttrs = {};

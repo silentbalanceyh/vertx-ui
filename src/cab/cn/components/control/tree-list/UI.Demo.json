@@ -15,6 +15,7 @@
         },
         "options": {
             "layout.divide": "5,19",
+            "tree.level": 2,
             "tree.expand.default": true,
             "tree.search.enabled": true,
             "tree.edit.enabled": true,

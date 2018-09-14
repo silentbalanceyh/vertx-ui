@@ -2,6 +2,7 @@ import {Button, Input, Popconfirm, Tooltip} from "antd";
 import React from "react";
 import Ux from 'ux';
 import Act from './Op.Act';
+import Init from './Op.Init';
 
 const _renderDelete = (reference, config = {}, item) => {
     return (
@@ -53,11 +54,13 @@ const _renderNo = (reference) => {
 const renderOp = (reference, item = {}) => {
     const config = Ux.fromHoc(reference, "item");
     const {iKey} = reference.state;
+    const options = Init.readOptions(reference);
+    const level = options.hasOwnProperty("tree.level") ? options['tree.level'] : 1000;
     return (
         <span>
             {iKey === item.key ? _renderYes(reference, config, item) : false}
             {iKey === item.key ? _renderNo(reference, config, item) : false}
-            {!iKey ? _renderAdd(reference, config, item) : false}
+            {!iKey && (item._level <= level) ? _renderAdd(reference, config, item) : false}
             {!iKey && "_ROOT_" !== item.key ? _renderEdit(reference, config, item) : false}
             {!iKey && "_ROOT_" !== item.key ? _renderDelete(reference, config, item) : false}
         </span>
