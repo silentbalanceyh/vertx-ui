@@ -21,6 +21,7 @@ const _initTree = (reference = {}, data = []) => {
         const root = {};
         root.key = "_ROOT_";
         root.display = options["tree.root"];
+        root._level = 0;
         // 3.原始数据降级
         source.filter(item => !item.branch).forEach(item => item.branch = "_ROOT_");
         source.push(root);
