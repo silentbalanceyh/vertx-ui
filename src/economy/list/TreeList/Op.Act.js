@@ -36,7 +36,30 @@ const rxDelete = (reference, item) => (event) => {
         rxItemDelete(_recoverData(reference, item), keys);
     }
 };
-
+const rxAddDialog = (reference, item) => (event) => {
+    event.preventDefault();
+    // 只设置iKey和iItemText，不设置iItemData
+    reference.setState({
+        iAdd: true,
+        ..._rxState(item.key, undefined, item.display)
+    });
+};
+const rxEditDialog = (reference, item) => (event) => {
+    event.preventDefault();
+    // 只设置iKey和iItemText，不设置iItemData
+    reference.setState({
+        iAdd: false,
+        ..._rxState(item.key, undefined, item.display)
+    });
+};
+const rxCloseDialog = (reference, item) => (event) => {
+    event.preventDefault();
+    // 只设置iKey和iItemText，不设置iItemData
+    reference.setState({
+        iAdd: true,
+        ..._rxState(undefined, undefined, item.display)
+    });
+};
 const rxPreEdit = (reference, item) => (event) => {
     event.preventDefault();
     // 只设置iKey和iItemText，不设置iItemData
@@ -46,7 +69,6 @@ const rxPreEdit = (reference, item) => (event) => {
         ..._rxState(item.key, undefined, item.display)
     });
 };
-
 const rxPreAdd = (reference, item) => (event) => {
     event.preventDefault();
     const $item = Ux.clone(item);
@@ -154,6 +176,10 @@ const rxCriteria = (reference) => (event) => {
     reference.setState({term: event.target.value});
 };
 export default {
+    // 窗口模式下专用
+    rxCloseDialog,
+    rxAddDialog,
+    rxEditDialog,
     // 最开始的三个按钮
     rxDelete,
     rxPreEdit,

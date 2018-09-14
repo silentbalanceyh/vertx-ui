@@ -6,6 +6,8 @@ import Op from './Op';
 import Filter from "./UI.Demo.Filter";
 import FormAdd from "./UI.Demo.Form.Add";
 import FormEdit from "./UI.Demo.Form.Edit";
+import FormTreeAdd from './UI.Demo.Form.Tree.Add';
+import FormTreeEdit from './UI.Demo.Form.Tree.Edit';
 
 const {zero} = Ux;
 
@@ -29,8 +31,13 @@ class Component extends React.PureComponent {
                           $mockData={Mock.fnCategoryList}
                           rxAddRow={Op.opAddRow(this)}
                           rxItemDelete={Op.opItemDelete(this)}
-                          rxItemAdd={Op.opItemAdd(this)}
-                          rxItemEdit={Op.opItemEdit(this)}
+                    // 二选一，
+                    // 不使用Dialog模式则直接调函数
+                    // Dialog模式就直接填写Form
+                          $formTreeAdd={FormTreeAdd}
+                          $formTreeEdit={FormTreeEdit}
+                    // rxItemAdd={Op.opItemAdd(this)}
+                    // rxItemEdit={Op.opItemEdit(this)}
                           reference={this}
                           $formFilter={Filter}
                           $formAdd={FormAdd}

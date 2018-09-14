@@ -53,7 +53,8 @@ const _editConfig = (option = {}, record) => {
 };
 const _deleteConfig = (option = {}, record) => {
     let removed = undefined;
-    if (option.delete) {
+    // record中的特殊属性lock：锁定的记录不能执行删除（暂时定义active和lock两个属性为记录特有）
+    if (option.delete && !record['lock']) {
         removed = {};
         removed.key = `delete${record.key}`;
         removed.icon = "delete";
