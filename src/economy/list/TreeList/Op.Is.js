@@ -1,26 +1,34 @@
 import Init from "./Op.Init";
 
 const isPreAdd = (reference, item) => {
-    const options = Init.readOptions(reference);
-    const level = options.hasOwnProperty("tree.level") ? options['tree.level'] : 1000;
-    const {iKey} = reference.state;
-    return !iKey && (item._level <= level);
-};
-const isPreEdit = (reference, item) => {
-    const {iKey} = reference.state;
-    return !iKey && "_ROOT_" !== item.key;
-};
-const isFast = (reference, item) => {
-    const options = Init.readOptions(reference);
-    if (options["tree.dialog.mode"]) {
-        return false;
+    if (isDialog(reference)) {
+        return true;
     } else {
-        return isVisible(reference, item);
+        const options = Init.readOptions(reference);
+        const level = options.hasOwnProperty("tree.level") ? options['tree.level'] : 1000;
+        const {iKey} = reference.state;
+        return !iKey && (item._level <= level);
     }
 };
-const isVisible = (reference, item) => {
-    const {iKey} = reference.state;
-    return iKey === item.key;
+const isPreEdit = (reference, item) => {
+    if (isDialog(reference)) {
+        return true;
+    } else {
+        const {iKey} = reference.state;
+        return !iKey && "_ROOT_" !== item.key;
+    }
+};
+const isFast = (reference, item) => {
+    if (isDialog(reference)) {
+        return false;
+    } else {
+        const {iKey} = reference.state;
+        return iKey === item.key;
+    }
+};
+const isVisible = (reference, item, isAdd = true) => {
+    const {iKey, iAdd} = reference.state;
+    return iKey === item.key && iAdd === isAdd;
 };
 const isDialog = (reference) => {
     const options = Init.readOptions(reference);
