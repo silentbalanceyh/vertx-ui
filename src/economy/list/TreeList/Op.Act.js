@@ -52,6 +52,14 @@ const rxEditDialog = (reference, item) => (event) => {
         ..._rxState(item.key, undefined, item.display)
     });
 };
+const rxCloseDialog = (reference, item) => (event) => {
+    event.preventDefault();
+    // 只设置iKey和iItemText，不设置iItemData
+    reference.setState({
+        iAdd: true,
+        ..._rxState(undefined, undefined, item.display)
+    });
+};
 const rxPreEdit = (reference, item) => (event) => {
     event.preventDefault();
     // 只设置iKey和iItemText，不设置iItemData
@@ -169,6 +177,7 @@ const rxCriteria = (reference) => (event) => {
 };
 export default {
     // 窗口模式下专用
+    rxCloseDialog,
     rxAddDialog,
     rxEditDialog,
     // 最开始的三个按钮

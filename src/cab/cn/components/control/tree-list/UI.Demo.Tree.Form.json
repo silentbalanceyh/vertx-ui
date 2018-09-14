@@ -1,38 +1,21 @@
 {
     "_form": {
+        "window": 0.5,
         "ui": [
             [
                 {
-                    "field": "code",
-                    "optionItem": {
-                        "label": "部门编号"
-                    },
-                    "optionConfig": {
-                        "validateTrigger": "onBlur",
-                        "rules": [
-                            {
-                                "required": true,
-                                "message": "请输入部门编号"
-                            }
-                        ]
-                    }
+                    "metadata": "code,部门编号,24",
+                    "optionConfig.rules": [
+                        "required,请输入部门编号"
+                    ]
                 }
             ],
             [
                 {
-                    "field": "name",
-                    "optionItem": {
-                        "label": "部门名称"
-                    },
-                    "optionConfig": {
-                        "validateTrigger": "onBlur",
-                        "rules": [
-                            {
-                                "required": true,
-                                "message": "请输入部门名称"
-                            }
-                        ]
-                    }
+                    "metadata": "name,部门编号,24",
+                    "optionConfig.rules": [
+                        "required,请输入部门编号"
+                    ]
                 }
             ],
             [
