@@ -40,7 +40,6 @@ const _initTree = (reference = {}, data = []) => {
     const $data = source.filter(item => !item.branch);
     // 遍历根节点
     $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source, 1));
-    console.info($data);
     // 数据源
     return $data;
 };

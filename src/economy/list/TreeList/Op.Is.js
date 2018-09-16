@@ -1,18 +1,18 @@
 import Init from "./Op.Init";
 
 const isPreAdd = (reference, item) => {
+    const options = Init.readOptions(reference);
+    const level = options.hasOwnProperty("tree.level") ? options['tree.level'] : 1000;
     if (isDialog(reference)) {
-        return true;
+        return (item._level <= level);
     } else {
-        const options = Init.readOptions(reference);
-        const level = options.hasOwnProperty("tree.level") ? options['tree.level'] : 1000;
         const {iKey} = reference.state;
         return !iKey && (item._level <= level);
     }
 };
 const isPreEdit = (reference, item) => {
     if (isDialog(reference)) {
-        return true;
+        return "_ROOT_" !== item.key;
     } else {
         const {iKey} = reference.state;
         return !iKey && "_ROOT_" !== item.key;
