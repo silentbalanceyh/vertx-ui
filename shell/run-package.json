@@ -4,6 +4,7 @@
     "webpack": "3.12.0",
     "webpack-dev-server": "3.0.0",
     "awesome-typescript-loader": "^4.0.1",
+    "ts-loader": "5.0.0",
     "babel-eslint": "^8.2.6",
     "babel-loader": "7.1.5"
 }
