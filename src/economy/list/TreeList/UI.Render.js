@@ -7,17 +7,17 @@ import Item from './UI.Render.Item';
 
 const TreeNode = Tree.TreeNode;
 
-const _renderItem = (reference, item = {}) => {
+const _renderItem = (reference, item = {}, config = {}) => {
     const {selected = []} = reference.state;
     const $selected = Immutable.fromJS(selected);
     return $selected.contains(item.key) ? (
         <span>
             {Item.renderInput(reference, item)}&nbsp;&nbsp;
-            {Item.renderOp(reference, item)}
+            {Item.renderOp(reference, item, config)}
         </span>
     ) : item.display
 };
-const _renderNodes = (reference, item = {}) => {
+const _renderNodes = (reference, item = {}, config = {}) => {
     const attrs = {};
     attrs["data-items"] = item;
     // 禁用处理，编辑视图下禁用其他
@@ -29,9 +29,11 @@ const _renderNodes = (reference, item = {}) => {
     }
     return (
         <TreeNode key={item.key}
-                  title={_renderItem(reference, item)} {...attrs}>
+                  title={_renderItem(reference, item, config)} {...attrs}>
             {(0 < item.children.length) ? (item.children.map(
-                each => _renderNodes(reference, each)
+                (each, index) => _renderNodes(reference, each, {
+                    index, size: item.children.length
+                })
             )) : false}
         </TreeNode>
     )
@@ -68,7 +70,9 @@ const renderTree = (reference) => {
                 )
             ) : false}
             <Tree {...attrs}>
-                {treeData.map(item => _renderNodes(reference, item))}
+                {treeData.map((item, index) => _renderNodes(reference, item, {
+                    index, size: treeData.length,
+                }))}
             </Tree>
         </div>
     )

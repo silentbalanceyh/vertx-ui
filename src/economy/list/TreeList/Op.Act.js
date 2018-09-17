@@ -54,7 +54,9 @@ const rxEditDialog = (reference, item) => (event) => {
 };
 const rxCloseDialog = (reference, item) => (event) => {
     event.preventDefault();
-    // 只设置iKey和iItemText，不设置iItemData
+    rxClose(reference, item);
+};
+const rxClose = (reference, item) => {
     reference.setState({
         iAdd: true,
         ..._rxState(undefined, undefined, item.display)
@@ -142,21 +144,32 @@ const rxSelect = (reference, edit = false) => (key, node) => {
         const options = Init.readOptions(reference);
         if (options["tree.filter"]) {
             const {$query} = reference.props;
+            // 提取query
             const filters = $query && $query.is() ?
                 $query.to() : {};
+            const criteria = filters.criteria ? filters.criteria : {};
             // 写入到根节点
-            filters[""] = true;
+            criteria[""] = true;
             if (1 === key.length) {
                 // 等于条件
-                filters[options["tree.filter"]] = key[0];
+                if ("_ROOT_" !== key[0]) {
+                    criteria[options["tree.filter"]] = key[0];
+                } else {
+                    if (criteria.hasOwnProperty(options["tree.filter"])) {
+                        delete criteria[options['tree.filter']];
+                    }
+                }
             } else {
                 // 包含条件
-                filters[`${options["tree.filter"]},i`] = key;
+                criteria[`${options["tree.filter"]},i`] = key;
             }
+            console.info(filters);
             // 写Query节点
             Ux.writeTree(reference, {
                 "grid.query": filters,
-                "grid.list": undefined
+                "grid.list": undefined,
+                // 选择的树的Key信息，用于设置parentId专用
+                "tree.selected": {key}
             })
         }
     }
@@ -180,6 +193,7 @@ export default {
     rxCloseDialog,
     rxAddDialog,
     rxEditDialog,
+    rxClose,
     // 最开始的三个按钮
     rxDelete,
     rxPreEdit,

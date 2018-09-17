@@ -33,8 +33,11 @@ const _renderNo = (reference) => {
     )
 };
 
-const renderOp = (reference, item = {}) => {
+const renderOp = (reference, item = {}, metadata = {}) => {
     const config = Ux.fromHoc(reference, "item");
+    // 计算位置专用
+    if (metadata.index) config._index = metadata.index;
+    if (metadata.size) config._size = metadata.size;
     return (
         <span>
             {Is.isFast(reference, item) ? _renderYes(reference, config, item) : false}
