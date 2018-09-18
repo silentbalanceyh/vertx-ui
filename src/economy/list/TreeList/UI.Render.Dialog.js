@@ -39,7 +39,6 @@ const renderAdd = (reference, config = {}, item) => {
             <Popover content={
                 <div className={"inner-form"}>
                     <Form {...reference.props}
-                          $inited={item}
                           fnClose={() => Act.rxClose(reference, item)}/>
                 </div>}
                      placement={position}
