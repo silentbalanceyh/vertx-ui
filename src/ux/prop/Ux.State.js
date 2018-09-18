@@ -33,9 +33,12 @@ const eraseTree = (reference, keys = []) => {
         // datum数据处理问题
         "datum.data",
         "datum.inited",
-        // ComplexList专用节点问题
+        // ComplexList专用节点
         "grid.list",
         "grid.query",
+        // TreeList专用节点
+        "grid.tree",
+        "tree.selected",
         // 辅助数据Assist
         "assist",
         // 提交按钮状态

@@ -94,7 +94,7 @@ class RxFlow {
                     types
                 };
             } else {
-                console.error('[ZI] directory: missed require attributes "ajax" or "processor"', types)
+                console.error('[ZI] dictionary: missed require attributes "ajax" or "processor"', types)
             }
         }
         return this;

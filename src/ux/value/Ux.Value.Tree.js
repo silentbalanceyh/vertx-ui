@@ -6,6 +6,7 @@ const SEARCHERS = {
     "BOOL": (value) => Boolean(value),
     // 集合值
     "ENUM": (value) => value.split('`'),
+    "FIX": (value) => value,
     "OPERATOR": (value) => "AND" === value,
     // 从Tabular/Assist抓取数据
     "DATUM": (value, props) => {

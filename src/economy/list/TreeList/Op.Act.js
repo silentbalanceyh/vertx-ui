@@ -54,7 +54,9 @@ const rxEditDialog = (reference, item) => (event) => {
 };
 const rxCloseDialog = (reference, item) => (event) => {
     event.preventDefault();
-    // 只设置iKey和iItemText，不设置iItemData
+    rxClose(reference, item);
+};
+const rxClose = (reference, item) => {
     reference.setState({
         iAdd: true,
         ..._rxState(undefined, undefined, item.display)
@@ -131,7 +133,35 @@ const rxChange = (reference) => (event) => {
     if (!state) state = {};
     reference.setState(_rxState(state.iKey, state.iItemData, event.target.value));
 };
-const rxSelect = (reference, edit = false) => (key, node) => {
+
+const _rxFilters = (reference, key, options = {}, item = {}) => {
+    const {$query} = reference.props;
+    // 提取query
+    const filters = $query && $query.is() ?
+        $query.to() : {};
+    const criteria = filters.criteria ? filters.criteria : {};
+    // 写入到根节点
+    criteria[""] = true;
+    // 提取当前节点的key，单选模式
+    const selectedKey = key[0];
+    if (options['tree.filter.full']) {
+        // 全查询模式，计算全树相关信息
+        const impactKeys = Op.visitChildren(item);
+        if (U.isArray(impactKeys)) {
+            criteria[`${options["tree.filter"]},i`] = impactKeys;
+        }
+    } else {
+        if ("_ROOT_" !== selectedKey) {
+            criteria[options["tree.filter"]] = selectedKey;
+        } else {
+            if (criteria.hasOwnProperty(options["tree.filter"])) {
+                delete criteria[options['tree.filter']];
+            }
+        }
+    }
+    return filters;
+};
+const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
     // 特殊处理，只有Key的长度大于0即有内容被选中时才触发，防止清空
     if (edit && 0 < key.length) {
         // 设置selected的数据
@@ -141,22 +171,20 @@ const rxSelect = (reference, edit = false) => (key, node) => {
         // 写状态树专用
         const options = Init.readOptions(reference);
         if (options["tree.filter"]) {
-            const {$query} = reference.props;
-            const filters = $query && $query.is() ?
-                $query.to() : {};
-            // 写入到根节点
-            filters[""] = true;
-            if (1 === key.length) {
-                // 等于条件
-                filters[options["tree.filter"]] = key[0];
-            } else {
-                // 包含条件
-                filters[`${options["tree.filter"]},i`] = key;
-            }
-            // 写Query节点
+            // 选中节点
+            const node = treeNode.node ? treeNode.node : {};
+            const dataItem = node.props ? node.props["data-items"] : {};
+            // 提取更新过后的Filters
+            const filters = _rxFilters(reference, key, options, dataItem);
+            // 这里的selected有可能是数组
             Ux.writeTree(reference, {
                 "grid.query": filters,
-                "grid.list": undefined
+                "grid.list": undefined,
+                // 选择的树的Key信息，用于设置parentId专用
+                "tree.selected": {
+                    data: dataItem,
+                    key,
+                }
             })
         }
     }
@@ -180,6 +208,7 @@ export default {
     rxCloseDialog,
     rxAddDialog,
     rxEditDialog,
+    rxClose,
     // 最开始的三个按钮
     rxDelete,
     rxPreEdit,

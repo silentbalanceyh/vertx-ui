@@ -29,7 +29,7 @@ const _initTree = (reference = {}, data = []) => {
     const {iItemData, keyword} = reference.state;
     // 如果是keyword则要执行过滤
     if (keyword) {
-        source = source.filter(item => 0 < item.display.indexOf(keyword))
+        source = source.filter(item => 0 < item.display.indexOf(keyword) || "_ROOT_" === item.key);
     }
     // 新增：需要先执行keyword过滤，然后添加新的Item，新项item.display是没有内容的
     if (iItemData) {

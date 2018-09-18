@@ -216,7 +216,9 @@ const itData = (config = {}, consumer = () => {
             if ("DATUM" === kv[0] || "PROP" === kv[0]) {
                 // 映射到path[0]
                 value = [kv[1].split(',')];
-            } else {
+            } else if ("ENUM" === kv[0]) {
+            	value = [kv[1]];
+			} else {
                 value = kv[1].split('.');
             }
             if (U.isFunction(consumer)) {

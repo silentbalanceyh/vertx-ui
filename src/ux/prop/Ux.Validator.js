@@ -5,6 +5,7 @@ import Prop from './Ux.Form';
 import Field from './Ux.Field';
 import Value from '../Ux.Value';
 import Error from '../Ux.Error';
+import Immutable from "immutable";
 
 const _ready = (rule = {}) => {
     // 是否检查readonly和disabled
@@ -60,6 +61,8 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                 const andKey = "";
                 parameters[andKey] = true;
             }
+            // 北二 existing 走 搜索流程, 所有参数都放到criteria 中
+            parameters["criteria"] = Immutable.fromJS(parameters).toJS();
             // 远程调用
             Field.asyncTrue(rule.config, parameters, {
                 // 存在即返回message

@@ -8,11 +8,7 @@ const visitChildren = (item = {}) => {
     _visitChild(item, keys);
     return keys;
 };
-const visitParent = (item = {}, array = []) => {
-
-};
 
 export default {
-    visitChildren,
-    visitParent
+    visitChildren
 }
