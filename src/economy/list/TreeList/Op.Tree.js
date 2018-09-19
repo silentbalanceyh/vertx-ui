@@ -52,12 +52,17 @@ const initTree = (reference) => {
         // 使用config构造树信息
         data.forEach(item => Ux.itObject(treeData, (field, value) => {
             if (item && item.hasOwnProperty(value)) {
+                // 表达式语法
                 item[field] = item[value];
+            } else if (0 <= value.indexOf(":")) {
+                // 表达式语法，不判断hasOwnProperty
+                item[field] = Ux.formatExpr(value, item, true);
             }
         }));
         // 生成新的树
         return _initTree(reference, data);
-    } else return [];
+    }
+    ;
 };
 export default {
     initTree

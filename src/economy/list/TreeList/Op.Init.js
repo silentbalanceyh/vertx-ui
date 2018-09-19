@@ -1,4 +1,5 @@
 import Ux from 'ux'
+import U from 'underscore'
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
@@ -10,8 +11,14 @@ const _updateTree = (reference) => {
     const tree = reference.props["$tree"];
     if (undefined === tree || !tree.is()) {
         // 初始化树
-        const {rxTree} = reference.props;
-        if (rxTree) rxTree();
+        const {rxTree, rxParamTree} = reference.props;
+        if (rxTree) {
+            let params = {};
+            if (U.isFunction(rxParamTree)) {
+                params = rxParamTree();
+            }
+            rxTree(params);
+        }
     }
 };
 const _updateExpand = (reference = {}) => {

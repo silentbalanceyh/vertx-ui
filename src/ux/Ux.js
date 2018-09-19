@@ -22,7 +22,6 @@ import System from './system';
 import Trigger from './trigger';
 import Terminal from './terminal';
 import Structure from './structure';
-import Rx from './rx/Rx';
 
 export default {
     ...CONTROL,
@@ -104,6 +103,4 @@ export default {
     G,
     // 调试专用
     D,
-    // Rx专用流代码
-    Rx,
 };

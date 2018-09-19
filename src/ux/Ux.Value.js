@@ -106,7 +106,7 @@ const fix = (cell, reference) => {
 };
 const isEmpty = (object) => {
     if (object) {
-        return !U.isArray(object) && 0 < Object.keys(object).length;
+        return !U.isArray(object) && 0 === Object.keys(object).length;
     } else {
         return true;
     }
