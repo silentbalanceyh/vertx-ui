@@ -3,6 +3,7 @@ import Type from '../Ux.Type';
 import Immutable from "immutable";
 import moment from 'moment';
 import E from "../Ux.Error";
+import Ux from "ux";
 
 class Uson {
     constructor(data = []) {
@@ -14,6 +15,11 @@ class Uson {
         if (U.isObject(data)) {
             return new Uson(data);
         }
+    }
+
+    mount(reference) {
+        this.reference = reference;
+        return this;
     }
 
     add(field, any) {
@@ -59,6 +65,21 @@ class Uson {
             }
         });
         this.data = values;
+        return this;
+    }
+
+    remove(field) {
+        if (this.data.hasOwnProperty(field)) {
+            delete this.data[field];
+        }
+        return this;
+    }
+
+    selected(field) {
+        const key = Ux.pipeSelected(this.reference);
+        if (key) {
+            this.data[field] = key[0];
+        }
         return this;
     }
 

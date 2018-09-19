@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from 'ux';
-import {Button, Input, Tree} from 'antd';
+import {Button, Input, Spin, Tree} from 'antd';
 import Op from './Op';
 import Immutable from 'immutable';
 import Item from './UI.Render.Item';
@@ -64,16 +64,25 @@ const renderTree = (reference) => {
         <div className={"web-tree"}>
             {search ? (
                 Ux.aiGrid([19, "span=4,offset=1"],
-                    <Input.Search onSearch={Op.rxSearch(reference)} value={term}
-                                  onChange={Op.rxCriteria(reference)}/>,
-                    <Button icon={"undo"} onClick={Op.rxClear(reference)}/>
+                    <Input.Search
+                        onSearch={Op.rxSearch(reference)}
+                        value={term}
+                        onChange={Op.rxCriteria(reference)}/>,
+                    <Button icon={"undo"}
+                            onClick={Op.rxClear(reference)}/>
                 )
             ) : false}
-            <Tree {...attrs}>
-                {treeData.map((item, index) => _renderNodes(reference, item, {
-                    index, size: treeData.length,
-                }))}
-            </Tree>
+            {treeData ? (
+                <Tree {...attrs}>
+                    {treeData.map((item, index) => _renderNodes(reference, item, {
+                        index, size: treeData.length,
+                    }))}
+                </Tree>
+            ) : (
+                <div className={"web-tree-loading"}>
+                    <Spin/>
+                </div>
+            )}
         </div>
     )
 };

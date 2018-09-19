@@ -1,4 +1,8 @@
 .web-tree {
+    .ant-tree {
+        overflow-y: auto !important;
+        max-height: 600px !important;
+    }
     .ant-tree-treenode {
         height: 32px !important;
     }
@@ -9,6 +13,11 @@
         }
     }
     .web-tree {
+        &-loading {
+            width: 80% !important;
+            text-align: center;
+            padding-top: 120px !important;
+        }
         &-addon {
             width: 24px;
             height: 24px;

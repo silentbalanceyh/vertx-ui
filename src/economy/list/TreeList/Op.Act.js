@@ -159,6 +159,10 @@ const _rxFilters = (reference, key, options = {}, item = {}) => {
             }
         }
     }
+    // 重置pager回到第一页
+    if (filters.pager) {
+        filters.pager.page = 1;
+    }
     return filters;
 };
 const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
