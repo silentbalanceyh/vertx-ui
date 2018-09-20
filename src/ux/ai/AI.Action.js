@@ -25,21 +25,24 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
         const buttons = [];
         const $submit = Immutable.fromJS(submit);
         Type.itObject(onClick, (field, fn) => {
-            const item = {};
-            const clientId = `${field}${key}`;
-            item.key = clientId;
-            item.id = clientId;
-            if ($submit.contains(field)) {
-                // 动态绑定raft处理时专用
-                item.onClick = (event) => {
-                    event.preventDefault();
-                    const executor = fn(reference);
-                    return Ux.rtSubmit(reference, executor);
+            // 过滤掉非$开头的方法，实现完全绑定规则
+            if (field && field.startsWith("$")) {
+                const item = {};
+                const clientId = `${field}${key}`;
+                item.key = clientId;
+                item.id = clientId;
+                if ($submit.contains(field)) {
+                    // 动态绑定raft处理时专用
+                    item.onClick = (event) => {
+                        event.preventDefault();
+                        const executor = fn(reference);
+                        return Ux.rtSubmit(reference, executor);
+                    }
+                } else {
+                    item.onClick = fn(reference);
                 }
-            } else {
-                item.onClick = fn(reference);
+                buttons.push(item);
             }
-            buttons.push(item);
         });
         return (
             <span>
