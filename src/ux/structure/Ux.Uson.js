@@ -45,6 +45,11 @@ class Uson {
         return this;
     }
 
+    slice(...keys) {
+        this.data = Ux.slice.apply(this, [this.data].concat(keys));
+        return this;
+    }
+
     convert(mapping = {}) {
         const target = {};
         const reference = this.data;

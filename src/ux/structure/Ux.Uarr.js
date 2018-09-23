@@ -1,6 +1,7 @@
 import U from "underscore";
 import Types from "../Ux.Type";
 import E from '../Ux.Error';
+import Ux from "ux";
 
 const _findChild = (item = {}, key, pkey, array = []) => {
     const pValue = item[key];
@@ -55,6 +56,12 @@ class Uarr {
         return this;
     }
 
+    slice(...keys) {
+        const reference = this.data;
+        this.data = Ux.slice.apply(this, [reference].concat(keys));
+        return this;
+    }
+
     each(applyFun) {
         this.data.forEach(item => applyFun(item));
         return this;
@@ -79,7 +86,7 @@ class Uarr {
 
     flat(field = "children") {
         const reference = this.data;
-        this.data = Types.elementFlat(reference, field);
+        this.data = Types.elementFlat(reference, field, true);
         return this;
     }
 

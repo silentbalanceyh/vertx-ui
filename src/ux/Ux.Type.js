@@ -31,18 +31,39 @@ const elementUnique = (data = [], field = "", value) => {
  * @param {Array} array 被追加的数组
  * @param field 需要拉平的字段值
  */
-const elementFlat = (array = [], field = "") => {
-    const result = [];
+const elementFlat = (array = [], field = "", parent = false) => {
+    const result = parent ? Value.clone(array) : [];
     array.forEach(item => {
-        // 读取字段中的值
-        if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
-            const children = item[field];
+        const fnChildren = (children = []) => U.isArray(children) ?
             children.forEach(child => {
                 let target = Immutable.fromJS(item);
                 target = target.mergeDeep(child);
                 target = target.remove(field);
-                result.push(target.toJS());
-            })
+                const $target = target.toJS();
+                if (item.key) $target._parent = item.key;
+                result.push($target);
+            }) : {};
+        // 读取字段中的值
+        if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
+            const children = item[field];
+            fnChildren(children);
+        } else if (0 <= field.indexOf('.')) {
+            const splitted = field.split('.');
+            // 只支持一级跳跃处理数组
+            if (2 === splitted.length) {
+                const hitted = item[splitted[0]];
+                if (U.isArray(hitted)) {
+                    // 如果是数组
+                    hitted.forEach(hit => {
+                        const children = hit[splitted[1]];
+                        fnChildren(children);
+                    })
+                } else if (U.isObject(hitted)) {
+                    // 如果是对象
+                    const children = hitted[splitted[1]];
+                    fnChildren(children);
+                }
+            }
         }
     });
     return result;
@@ -216,9 +237,9 @@ const itData = (config = {}, consumer = () => {
             if ("DATUM" === kv[0] || "PROP" === kv[0]) {
                 // 映射到path[0]
                 value = [kv[1].split(',')];
-            } else if ("ENUM" === kv[0]) {
-            	value = [kv[1]];
-			} else {
+            } else if ("ENUM" === kv[0] || "FIX" === kv[0]) {
+                value = [kv[1]];
+            } else {
                 value = kv[1].split('.');
             }
             if (U.isFunction(consumer)) {

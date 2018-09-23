@@ -111,6 +111,21 @@ const isEmpty = (object) => {
         return true;
     }
 };
+const slice = (input, ...keys) => {
+    if (0 < keys.length) {
+        const fnClone = (item) => {
+            const newItem = {};
+            keys.filter(each => item.hasOwnProperty(each))
+                .forEach(key => newItem[key] = item[key]);
+            return newItem;
+        };
+        if (U.isArray(input)) {
+            return input.map(each => fnClone.apply(this, [each].concat(keys)));
+        } else if (U.isObject(input)) {
+            return fnClone.apply(this, [input].concat(keys));
+        } else return {};
+    } else return {};
+};
 /**
  * 二义性函数，传入的是string就执行parse处理
  * @param input
@@ -135,14 +150,22 @@ const toJson = (input) => {
 export default {
     // 严格判断
     isEmpty,
+    // Json转换
     toJson,
-    // 对象处理方法
+    // 对象处理专用方法
+    // 拷贝和深度拷贝
     assign,
+    // 克隆
     clone,
+    // 直接转换
     vector,
+    // 取得子对象（拷贝生成新的）
+    slice,
+    // Raft模式和非Raft模式专用方法
     fix,
-    // 字符串链接
+    // 多形态数组统一调用
     arrayConnect,
+    // 合并左右处理（left,right)，简单归并
     stringConnect,
 
     ...Value,

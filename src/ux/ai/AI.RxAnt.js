@@ -2,6 +2,7 @@ import React from 'react'
 import {Icon} from 'antd';
 import U from "underscore";
 import Prop from "../prop/Ux.Prop";
+import Util from '../util';
 import Expr from './AI.Expr.String';
 import Datum from './AI.RxAnt.Datum';
 import Attributes from '../prop/Ux.Attribute';
@@ -94,13 +95,20 @@ class RxAnt {
         } else if (config.datum) {
             options = Datum.gainDatum(reference, config);
         }
+        const processor = (code, item) => {
+            if (config.expr) {
+                return Util.formatExpr(config.expr, item);
+            } else {
+                return item.label;
+            }
+        };
         return Uarr.create(options)
             .sort((left, right) => left.left - right.left)
-            .convert("code", (code, item) => item["code"] + " - " + item["name"])
+            .convert("code", processor)
             .mapping({
                 id: "id",
                 pid: "pid",
-                label: "code",
+                title: "code",
                 value: "id"
             })
             .tree("id", "pid")
