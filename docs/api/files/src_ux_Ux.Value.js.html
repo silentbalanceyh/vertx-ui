@@ -91,6 +91,9 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
+                                        <a href="../classes/_Internal.html">_Internal</a>
+                                    </li>
+                                    <li>
                                         <a href="../classes/Action.html">Action</a>
                                     </li>
                                     <li>
@@ -151,9 +154,6 @@
                                         <a href="../classes/Op.html">Op</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/Option.html">Option</a>
-                                    </li>
-                                    <li>
                                         <a href="../classes/Param.html">Param</a>
                                     </li>
                                     <li>
@@ -161,9 +161,6 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Random.html">Random</a>
-                                    </li>
-                                    <li>
-                                        <a href="../classes/Redux.html">Redux</a>
                                     </li>
                                     <li>
                                         <a href="../classes/Sorter.html">Sorter</a>
@@ -183,6 +180,9 @@
                                     <li>
                                         <a href="../classes/Value.html">Value</a>
                                     </li>
+                                    <li>
+                                        <a href="../classes/zero.html">zero</a>
+                                    </li>
                             </ol>
                         </div>
                     </div>
@@ -198,162 +198,177 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import moment from &#x27;moment&#x27;;
-import Dg from &#x27;./Ux.Debug&#x27;;
+import Immutable from &quot;immutable&quot;;
+import U from &quot;underscore&quot;;
+import Type from &#x27;./Ux.Type&#x27;;
+import {DataArray, DataObject} from &#x27;entity&#x27;;
+import Value from &#x27;./value&#x27;
+import moment from &#x27;moment&#x27;
 
 /**
- * 不重复追加值到&#x60;item&#x60;对象中（包含则不设置）
- * @method valueAppend
- * @param item 被设置的对象引用
- * @param field 设置的字段名
- * @param value 设置的字段值
+ * 两个字符串的专用连接方法，用于做不重复链接，
+ * @method stringConnect
+ * @private
+ * @param left
+ * @param right
  */
-const valueAppend = (item = {}, field = &quot;&quot;, value) =&gt; {
-    if (!item.hasOwnProperty(field)) {
-        item[field] = value;
+const stringConnect = (left, right) =&gt; {
+    if (left &amp;&amp; right &amp;&amp; &quot;string&quot; === typeof left &amp;&amp; &quot;string&quot; === typeof right) {
+        if (right.startsWith(left)) {
+            return right;
+        } else {
+            return left + right;
+        }
+    }
+};
+const arrayConnect = (item, fnEach, dividier = &#x27;,&#x27;) =&gt; {
+    if (!item) return [];
+    if (U.isArray(item)) return item;
+    if (&quot;string&quot; === typeof item) {
+        const result = item.split(dividier);
+        if (fnEach) {
+            return result.map(fnEach);
+        } else {
+            return result;
+        }
+    } else {
+        return [];
     }
 };
 /**
- * 直接转换数据成Moment对象，时间处理
- * @method convertTime
- * @param value 输入数据
- * @return {*}
+ * mode = 0：调用原生的Object.assign：直接覆盖
+ * mode = 1：将source中的属性追加到target中，深度追加
+ * mode = 2：将source中的属性追加到target中，没有时追加
+ * @param target
+ * @param source
+ * @param mode
  */
-const convertTime = (value) =&gt; {
-    if (value) {
-        if (!moment.isMoment(value)) {
-            value = moment(value);
-            if (!moment.isMoment(value)) {
-                console.error(&quot;[V] Convert &#x27;value&#x27; to invalid &#x27;Moment&#x27; object.&quot;);
+const assign = (target = {}, source = {}, mode = 0) =&gt; {
+    if (!target) target = {};
+    let result = Immutable.fromJS(target).toJS();
+    if (0 === mode) {
+        result = Object.assign(target, source);
+    } else {
+        Type.itObject(source, (field, value) =&gt; {
+            // 检查target中是否包含了field
+            const targetValue = result[field];
+            if (U.isObject(targetValue) &amp;&amp; !moment.isMoment(targetValue) &amp;&amp;
+                U.isObject(value) &amp;&amp; !moment.isMoment(value)) {
+                // 当前节点为两个对象，统一方式合并，且mode也相同
+                result[field] = assign(targetValue, value, mode);
+            } else {
+                if (1 === mode) {
+                    // 直接覆盖
+                    result[field] = value;
+                } else if (2 === mode) {
+                    // 没有属性才追加
+                    if (!target.hasOwnProperty(field)) {
+                        result[field] = value;
+                    }
+                }
             }
-        }
-        return value;
-    } else {
-        console.error(&quot;[V] The &#x27;value&#x27; is undefined, could not be converted.&quot;);
+        })
     }
-};
-/**
- * 连续乘法专用乘法计算
- * @method mathMultiplication
- * @param seed 第一操作数
- * @param ops 其他操作数
- * @return {*}
- */
-const mathMultiplication = (seed, ...ops) =&gt; {
-    seed = parseFloat(seed);
-    let result = isNaN(seed) ? 0.00 : seed;
-    ops.forEach(op =&gt; {
-        op = parseFloat(op);
-        if (!isNaN(op)) {
-            result *= op;
-        }
-    });
     return result;
 };
-/**
- * 专用除法运算
- * @method mathDivision
- * @param dividend 被除数
- * @param divisor 除数
- * @return {number}
- */
-const mathDivision = (dividend, divisor) =&gt; {
-    dividend = parseFloat(dividend);
-    divisor = parseFloat(divisor);
-    if (!isNaN(dividend) &amp;&amp; !isNaN(divisor) &amp;&amp; 0 !== divisor) {
-        return dividend / divisor;
+const clone = (input) =&gt; {
+    if (input instanceof DataObject || input instanceof DataArray) {
+        if (input.is()) {
+            return Immutable.fromJS(input.to()).toJS();
+        } else {
+            return input;
+        }
     } else {
-        console.info(&quot;[Math] dividend / divisor = &quot;, dividend, divisor)
+        return input ? Immutable.fromJS(input).toJS() : input;
     }
 };
-/**
- * 根据from和to计算中间的duration差值
- * * years - y
- * * monthds -M
- * * weeks -w
- * * days - d
- * * hours - h
- * * minutes - m
- * * seconds - s
- * * milliseconds - ms
- * @method valueDuration
- * @param from 开始时间
- * @param to 结束时间
- * @param mode 计算模式
- */
-const valueDuration = (from, to, mode = &#x27;day&#x27;) =&gt; {
-    if (from &amp;&amp; to) {
-        from = convertTime(from);
-        to = convertTime(to);
-        return moment(to).diff(from, mode);
-    } else {
-        console.error(&quot;[V] Either &#x27;from&#x27; or &#x27;to&#x27; must not be undefined.&quot;);
-    }
-};
-/**
- * 根据开始时间计算结束时间
- * @method valueEndTime
- * @param from 开始时间
- * @param duration 时差
- * @param mode 计算模式
- * @return {moment.Moment}
- */
-const valueEndTime = (from, duration, mode = &#x27;day&#x27;) =&gt; {
-    if (from &amp;&amp; duration) {
-        from = convertTime(from);
-        Dg.ensurePositive(duration);
-        return moment(from).add(duration, mode);
-    } else {
-        console.error(&quot;[V] Either &#x27;from&#x27; or &#x27;duration&#x27; must not be undefined.&quot;)
-    }
-};
-/**
- * 根据结束时间计算开始时间
- * @method valueStartTime
- * @param to 结束时间
- * @param duration 时差
- * @param mode 计算模式
- * @return {moment.Moment}
- */
-const valueStartTime = (to, duration, mode = &#x27;day&#x27;) =&gt; {
-    if (to &amp;&amp; duration) {
-        to = convertTime(to);
-        Dg.ensurePositive(duration);
-        return moment(to).subtract(duration, mode);
-    } else {
-        console.error(&quot;[V] Either &#x27;to&#x27; or &#x27;duration&#x27; must not be undefined.&quot;)
-    }
-};
-/**
- * 针对JavaScript中的对象进行过滤
- * @method valueFilter
- * @param data 被过滤的数据对象
- * @param keys 保留的字段名集合
- */
-const valueFilter = (data = {}, keys = []) =&gt; {
-    const result = {};
-    keys.forEach(key =&gt; {
-        if (data.hasOwnProperty(key)) {
-            result[key] = data[key];
+
+
+const vector = (item = {}, config = {}) =&gt; {
+    const target = clone(item);
+    Type.itObject(config, (from, to) =&gt; {
+        if (item.hasOwnProperty(from)) {
+            target[to] = item[from];
+            delete target[from];
         }
     });
-    return result;
+    return target;
+};
+const fix = (cell, reference) =&gt; {
+    // Fix：特殊Fix，兼容Raft模式和非Raft模式
+    // Raft模式下应该是cell, reference
+    // 非Raft模式下允许直接调用
+    if (undefined === reference) {
+        return cell;
+    } else {
+        return reference;
+    }
+};
+const isEmpty = (object) =&gt; {
+    if (object) {
+        return !U.isArray(object) &amp;&amp; 0 === Object.keys(object).length;
+    } else {
+        return true;
+    }
+};
+const slice = (input, ...keys) =&gt; {
+    if (0 &lt; keys.length) {
+        const fnClone = (item) =&gt; {
+            const newItem = {};
+            keys.filter(each =&gt; item.hasOwnProperty(each))
+                .forEach(key =&gt; newItem[key] = item[key]);
+            return newItem;
+        };
+        if (U.isArray(input)) {
+            return input.map(each =&gt; fnClone.apply(this, [each].concat(keys)));
+        } else if (U.isObject(input)) {
+            return fnClone.apply(this, [input].concat(keys));
+        } else return {};
+    } else return {};
+};
+/**
+ * 二义性函数，传入的是string就执行parse处理
+ * @param input
+ * @returns {*}
+ */
+const toJson = (input) =&gt; {
+    if (&quot;string&quot; === typeof input) {
+        try {
+            // 如果Parse过程出错
+            return JSON.parse(input);
+        } catch (e) {
+            return null;
+        }
+    } else {
+        return input;
+    }
 };
 /**
  * @class Value
  * @description 数值计算器
  */
 export default {
-    valueAppend,
-    valueDuration,
-    valueEndTime,
-    valueStartTime,
-    valueFilter,
-    // 数学运算
-    mathMultiplication,
-    mathDivision,
-    // 转换处理
-    convertTime
+    // 严格判断
+    isEmpty,
+    // Json转换
+    toJson,
+    // 对象处理专用方法
+    // 拷贝和深度拷贝
+    assign,
+    // 克隆
+    clone,
+    // 直接转换
+    vector,
+    // 取得子对象（拷贝生成新的）
+    slice,
+    // Raft模式和非Raft模式专用方法
+    fix,
+    // 多形态数组统一调用
+    arrayConnect,
+    // 合并左右处理（left,right)，简单归并
+    stringConnect,
+
+    ...Value,
 }
 
     </pre>
