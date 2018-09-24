@@ -55,6 +55,17 @@ export default [
     "引导教程,reconciliation,zui.document.guide,EXPAND,3,zui.document",
     // 工具API
     "Ux相关API,api,zui.api,EXPAND,7",
+    "类信息,code,zui.api.class,EXPAND,1,zui.api",
+    "Cookie,deployment-unit,zui.api.cookie,/api/class-cookie,1,zui.api.class",
+    "D,deployment-unit,zui.api.debug,/api/class-debug,11,zui.api.class",
+    "E,deployment-unit,zui.api.error,/api/class-error,12,zui.api.class",
+    "Env,deployment-unit,zui.api.env,/api/class-env,2,zui.api.class",
+    "G,deployment-unit,zui.api.graphic,/api/class-graphic,13,zui.api.class",
+    "Logger,deployment-unit,zui.api.logger,/api/class-logger,3,zui.api.class",
+    "Session,deployment-unit,zui.api.session,/api/class-session,7,zui.api.class",
+    "Storage,deployment-unit,zui.api.storage,/api/class-storage,8,zui.api.class",
+    "Uson,deployment-unit,zui.api.uson,/api/class-uson,9,zui.api.class",
+    "Uarr,deployment-unit,zui.api.uarr,/api/class-uarr,10,zui.api.class",
     // 专用页面例子
     "实战案例,experiment,zui.experiment,EXPAND,8"
 ]
