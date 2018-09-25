@@ -88,6 +88,14 @@ class Uson {
         return this;
     }
 
+    selectedData(field) {
+        const value = Ux.pipeSelected(this.reference, true, field);
+        if (value) {
+            this.data[field] = value;
+        }
+        return this;
+    }
+
     to() {
         return this.data;
     }

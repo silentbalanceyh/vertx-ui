@@ -1,4 +1,5 @@
 import U from 'underscore';
+import Immutable from 'immutable';
 import Ux from 'ux';
 import Op from './Op.Visit'
 import Init from "./Op.Init";
@@ -146,7 +147,19 @@ const _rxFilters = (reference, key, options = {}, item = {}) => {
     const selectedKey = key[0];
     if (options['tree.filter.full']) {
         // 全查询模式，计算全树相关信息
-        const impactKeys = Op.visitChildren(item);
+        // 全查询模式开启的情况下，检查tree.filter.mode
+        let impactKeys = [];
+        if ("CHILD" === options["tree.filter.mode"]) {
+            // 只包含子节点的选择，不包含当前节点
+            let $impactKeys = Immutable.fromJS(Op.visitChildren(item));
+            if ($impactKeys.contains(selectedKey)) {
+                impactKeys = $impactKeys.toJS().filter(key => key !== selectedKey);
+            } else {
+                impactKeys = $impactKeys.toJS();
+            }
+        } else {
+            impactKeys = Op.visitChildren(item);
+        }
         if (U.isArray(impactKeys)) {
             criteria[`${options["tree.filter"]},i`] = impactKeys;
         }

@@ -86,13 +86,18 @@ const pipeGet = (reference) => {
     }
 };
 
-const pipeSelected = (reference, isData = false) => {
+const pipeSelected = (reference, isData = false, field) => {
     const {$selected} = reference.props;
     if ($selected && $selected.is()) {
         const keys = $selected._("key");
         if (!(1 === keys.length && "_ROOT_" === keys[0])) {
             if (isData) {
-                return $selected._("data");
+                const data = $selected._("data");
+                if (data && field) {
+                    return data[field];
+                } else {
+                    return data;
+                }
             } else {
                 return keys;
             }

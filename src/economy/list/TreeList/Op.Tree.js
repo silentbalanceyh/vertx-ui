@@ -10,7 +10,7 @@ const _initLoop = (data = {}, array = [], level = 1) => {
             each.children = _initLoop(each, array, (level + 1));
         });
     }
-    return Ux.clone(item);
+    return Ux.clone(item).sort((left, right) => Ux.sorterAsc(left, right, "display"));
 };
 const _initTree = (reference = {}, data = []) => {
     let source = Ux.clone(data);
@@ -41,7 +41,7 @@ const _initTree = (reference = {}, data = []) => {
     // 遍历根节点
     $data.forEach(dataItem => dataItem.children = _initLoop(dataItem, source, 1));
     // 数据源
-    return $data;
+    return $data.sort((left, right) => Ux.sorterAsc(left, right, "display"));
 };
 const initTree = (reference) => {
     const treeData = Init.readTreeMapping(reference);
@@ -51,6 +51,10 @@ const initTree = (reference) => {
         const data = $tree.to();
         // 使用config构造树信息
         data.forEach(item => Ux.itObject(treeData, (field, value) => {
+            // 特殊_key处理
+            if ("key" === field && field !== value) {
+                item["_key"] = item[field];
+            }
             if (item && item.hasOwnProperty(value)) {
                 // 表达式语法
                 item[field] = item[value];
@@ -62,7 +66,6 @@ const initTree = (reference) => {
         // 生成新的树
         return _initTree(reference, data);
     }
-    ;
 };
 export default {
     initTree
