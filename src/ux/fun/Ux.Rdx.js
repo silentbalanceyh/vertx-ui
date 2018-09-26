@@ -3,6 +3,7 @@ import E from "../Ux.Error";
 import U from "underscore";
 import Prop from "../prop/";
 import Dialog from "../Ux.Dialog";
+import Op from '../op';
 
 const rdxSubmitting = (reference, loading = true) => {
     const state = {};
@@ -44,17 +45,8 @@ const rdxClear = (reference) => {
     }
 };
 const rdxTree = (reference, values, isDeleted = false) => {
-    const {$tree} = reference.props;
-    if ($tree.is()) {
-        if (isDeleted) {
-            $tree.removeElement(values.key);
-        } else {
-            $tree.saveElement(values);
-        }
-        Prop.writeTree(reference, {
-            "grid.tree": $tree.to()
-        })
-    }
+    const treeData = Op.pipeTree(reference, values, isDeleted);
+    Prop.writeTree(reference, {"grid.tree": treeData});
 };
 const rdxClose = (reference) => {
     rdxClear(reference);

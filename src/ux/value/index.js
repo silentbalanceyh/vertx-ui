@@ -4,6 +4,7 @@ import ValueEvent from './Ux.Value.Event';
 import ValueTree from './Ux.Value.Tree';
 import ValueMath from './Ux.Value.Math';
 import ValueSafe from './Ux.Value.Safe';
+import ValueDust from './Ux.Value.Dust';
 
 export default {
     ...ValueCt,
@@ -11,5 +12,7 @@ export default {
     ...ValueEvent,
     ...ValueTree,
     ...ValueMath,
-    ...ValueSafe
+    ...ValueSafe,
+    // 原子操作
+    ...ValueDust
 }

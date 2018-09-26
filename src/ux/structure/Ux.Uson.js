@@ -1,6 +1,5 @@
 import U from "underscore";
 import Type from '../Ux.Type';
-import Immutable from "immutable";
 import moment from 'moment';
 import E from "../Ux.Error";
 import Ux from "ux";
@@ -22,13 +21,14 @@ class Uson {
         return this;
     }
 
+    each(applyFun) {
+        const ref = this.data;
+        if (ref) Ux.each(ref, applyFun);
+        return this;
+    }
+
     add(field, any) {
-        if (field) {
-            let $params = Immutable.fromJS(this.data);
-            const path = field.split(".");
-            $params = $params.setIn(path, any);
-            this.data = $params.toJS();
-        }
+        if (any) this.data = Ux.field(this.data, field, any);
         return this;
     }
 
@@ -47,6 +47,11 @@ class Uson {
 
     slice(...keys) {
         this.data = Ux.slice.apply(this, [this.data].concat(keys));
+        return this;
+    }
+
+    mapping(mapping = {}) {
+        this.data = Ux.expand(this.data, mapping);
         return this;
     }
 
@@ -73,10 +78,8 @@ class Uson {
         return this;
     }
 
-    remove(field) {
-        if (this.data.hasOwnProperty(field)) {
-            delete this.data[field];
-        }
+    remove(...fields) {
+        Ux.cut.apply(this, [this.data].concat(fields));
         return this;
     }
 
