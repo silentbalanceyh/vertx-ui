@@ -3,6 +3,7 @@ import U from "underscore";
 import Dg from "../Ux.Debug";
 import Immutable from "immutable";
 import State from "../prop/Ux.State";
+import Value from '../Ux.Value';
 
 /**
  * 链接Form初始化区分编辑和添加模式专用
@@ -86,18 +87,59 @@ const pipeGet = (reference) => {
     }
 };
 
-const pipeSelected = (reference, isData = false) => {
+const pipeSelected = (reference, isData = false, field) => {
     const {$selected} = reference.props;
     if ($selected && $selected.is()) {
         const keys = $selected._("key");
         if (!(1 === keys.length && "_ROOT_" === keys[0])) {
             if (isData) {
-                return $selected._("data");
+                const data = $selected._("data");
+                if (data && field) {
+                    return data[field];
+                } else {
+                    return data;
+                }
             } else {
                 return keys;
             }
         }
     }
+};
+
+const pipeTree = (reference = {}, values = {}, deleted = false) => {
+    const {$tree} = reference.props;
+    if ($tree && $tree.is()) {
+        // 可能是Function
+        values = Value.to(values);
+        if (deleted) {
+            $tree.removeElement(values.key);
+        } else {
+            $tree.saveElement(values);
+        }
+        return $tree.to();
+    } else return $tree;
+};
+
+const pipeCriteria = (reference = {}, filters = {}) => {
+    const {$query} = reference.props;
+    if ($query && $query.is()) {
+        let ref = $query.to().criteria;
+        // 可以是Function
+        filters = Value.to(filters);
+        if (filters) {
+            ref = Object.assign(ref, filters);
+        }
+        return ref ? ref : {};
+    } else return {};
+};
+
+const pipeQuery = (reference = {}, filters = {}) => {
+    const {$query} = reference.props;
+    if ($query && $query.is()) {
+        const criteria = pipeCriteria(reference, filters);
+        $query.set("criteria", criteria);
+        return $query.to();
+    } else return {};
 };
 
 export default {
@@ -106,5 +148,8 @@ export default {
     pipeGet,
     pipeIsUpdate,
     pipeReset,
-    pipeVerify
+    pipeVerify,
+    pipeTree,
+    pipeCriteria,
+    pipeQuery,
 }

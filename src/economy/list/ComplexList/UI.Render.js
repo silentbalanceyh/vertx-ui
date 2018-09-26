@@ -10,6 +10,7 @@ const renderPageAdd = (reference, item = {}) => {
         <Tabs.TabPane {...item}>
             <Component
                 fnClose={Op.rxClose(reference, item.key)}
+                fnView={Op.rxView(reference, item.key)}
                 fnMock={Op.mockfnRecord(reference)}
                 $addKey={item.key}
                 {...reference.props}/>
@@ -58,9 +59,7 @@ const renderPageList = (reference, item = {}) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{
-                    paddingTop: 10
-                }}>
+                <Col span={24}>
                     <Table {...tableDatum.table}
                            loading={!ready}
                            dataSource={tableDatum.data}/>

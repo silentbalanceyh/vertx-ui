@@ -17,7 +17,10 @@ const _initTablePager = (reference = {}) => {
     const {$query} = reference.props;
     if ($query.is()) {
         const query = $query.to();
-        const pager = query.pager ? query.pager : {size: 10, page: 1};
+        const pager = query.pager ? query.pager : {
+            size: 10,
+            page: 1
+        };
         pagination.pageSize = pager.size ? pager.size : 10;
         pagination.current = pager.page ? pager.page : 1;
         return pagination;
@@ -68,12 +71,13 @@ const initAdd = (reference, column) => {
         const tip = options["row.add"];
         return (
             <Tooltip title={tip ? tip : false}>
-                <Button icon={"plus"} type="primary" onClick={event => {
-                    event.preventDefault();
-                    reference.setState({
-                        rowKey: Ux.randomUUID()
-                    });
-                }}>{tip}</Button>
+                <Button icon={"plus"} type="primary"
+                        onClick={event => {
+                            event.preventDefault();
+                            reference.setState({
+                                rowKey: Ux.randomUUID()
+                            });
+                        }}>{tip}</Button>
             </Tooltip>
         )
     } else return column.title;

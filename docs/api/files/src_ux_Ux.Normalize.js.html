@@ -91,6 +91,9 @@
                         <div class="panel-body">
                             <ol>
                                     <li>
+                                        <a href="../classes/_Internal.html">_Internal</a>
+                                    </li>
+                                    <li>
                                         <a href="../classes/Action.html">Action</a>
                                     </li>
                                     <li>
@@ -151,9 +154,6 @@
                                         <a href="../classes/Op.html">Op</a>
                                     </li>
                                     <li>
-                                        <a href="../classes/Option.html">Option</a>
-                                    </li>
-                                    <li>
                                         <a href="../classes/Param.html">Param</a>
                                     </li>
                                     <li>
@@ -161,9 +161,6 @@
                                     </li>
                                     <li>
                                         <a href="../classes/Random.html">Random</a>
-                                    </li>
-                                    <li>
-                                        <a href="../classes/Redux.html">Redux</a>
                                     </li>
                                     <li>
                                         <a href="../classes/Sorter.html">Sorter</a>
@@ -183,6 +180,9 @@
                                     <li>
                                         <a href="../classes/Value.html">Value</a>
                                     </li>
+                                    <li>
+                                        <a href="../classes/zero.html">zero</a>
+                                    </li>
                             </ol>
                         </div>
                     </div>
@@ -198,17 +198,19 @@
 
 <div class="file">
     <pre class="prettyprint linenums">
-import Dg from &#x27;./Ux.Debug&#x27;
-import Validator from &#x27;./Ux.Validator&#x27;
-import Type from &#x27;./Ux.Type&#x27;;
-import Html from &#x27;./Ux.Html&#x27;;
+import Validator from &quot;./prop/Ux.Validator&quot;;
+import Type from &quot;./Ux.Type&quot;;
+import Html from &quot;./util/Ux.Html&quot;;
+import E from &quot;./Ux.Error&quot;;
+import Immutable from &quot;immutable&quot;;
+import Ai from &quot;./ai/AI&quot;;
 
-const limitNumber = (length) =&gt; value =&gt; {
+const limitNumber = length =&gt; value =&gt; {
     if (value) {
         // 整数限制
         value = value.toString();
         if (1 === value.length) {
-            value = value.replace(/[^1-9]/g, &quot;&quot;);
+            value = value.replace(/[^0-9]/g, &quot;&quot;);
         } else {
             value = value.replace(/\D/g, &quot;&quot;);
         }
@@ -272,62 +274,106 @@ const mountNormalizer = (reference, item = {}) =&gt; {
 };
 const mountErrorFocus = (reference, item) =&gt; {
     if (item.field) {
-        if (!item.optionJsx) item.optionJsx = {};
-        // onFocus
-        item.optionJsx.onFocus = Html.htmlErrorFocus(item);
-        // onBlur
-        item.optionJsx.onBlur = Html.htmlErrorBlur(item);
+        if (item.optionConfig &amp;&amp; item.optionConfig.hasOwnProperty(&quot;rules&quot;)) {
+            if (!item.optionJsx) item.optionJsx = {};
+            // onFocus
+            item.optionJsx.onFocus = Html.htmlErrorFocus(item);
+            // onBlur
+            item.optionJsx.onBlur = Html.htmlErrorBlur(item);
+        }
     }
+};
+
+const _normalizeUi = (reference, ui = []) =&gt; {
+    // 最开始使用属性解析器解析配置信息，先做解析
+    ui = Ai.hookerForm(ui);
+    // 先处理onFocus,onBlur，在hooker中会被删除掉
+    ui = Type.itMatrix(ui, item =&gt; mountErrorFocus(reference, item));
+    // 挂载验证器，处理rules
+    ui = Type.itMatrix(ui, item =&gt; Validator.mountValidator(reference, item));
+    // 挂载normalize专用
+    ui = Type.itMatrix(ui, item =&gt; mountNormalizer(reference, item));
+
+    return ui;
 };
 /**
  * 处理当前Form中的input控件专用信息
  * @method extractForm
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param key 读取的配置值
  * @return {*}
  */
-const extractForm = (reference = {}) =&gt; {
+const extractForm = (reference = {}, key = &quot;form&quot;) =&gt; {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
-    const form = $hoc._(&quot;form&quot;);
-    Dg.ensureNotNull(form);
-    if (form) {
-        form.ui = Type.itMatrix(form.ui, (item) =&gt; Validator.mountValidator(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) =&gt; mountNormalizer(reference, item));
-        form.ui = Type.itMatrix(form.ui, (item) =&gt; mountErrorFocus(reference, item));
-        return form.ui;
+    E.fxTerminal(!$hoc, 10062, $hoc);
+    const form = $hoc._(key);
+    E.fxTerminal(!form, 10056, $hoc);
+    return form ? _normalizeUi(reference, form.ui) : [];
+};
+/**
+ * 分组处理Form中的input控件专用
+ * @method extractGroupForm
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param groupIndex 组对应的索引值
+ */
+const extractGroupForm = (reference = {}, groupIndex, key = &quot;form&quot;) =&gt; {
+    if (undefined !== groupIndex) {
+        const {$hoc} = reference.state;
+        E.fxTerminal(!$hoc, 10062, $hoc);
+        const form = $hoc._(key);
+        E.fxTerminal(!form, 10056, $hoc);
+        return form &amp;&amp; form.ui[groupIndex]
+            ? _normalizeUi(reference, form.ui[groupIndex])
+            : [];
     } else {
-        return [];
+        E.fxTerminal(true, 10036, groupIndex);
     }
 };
 /**
  * 处理当前Form中的button或操作按钮配置信息
  * @method extractOp
- * @param {ReactComponent} reference React对应组件引用
- * @return {any}
+ * @param {React.PureComponent} reference React对应组件引用
+ * @param op 操作事件集
+ * @return {Array}
  */
-const extractOp = (reference = {}) =&gt; {
+const extractOp = (reference = {}, op, key = &quot;form&quot;) =&gt; {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
-    const form = $hoc._(&quot;form&quot;);
-    Dg.ensureNotNull(form);
-    return form ? form.op : [];
+    E.fxTerminal(!$hoc, 10062, $hoc);
+    const form = $hoc._(key);
+    E.fxTerminal(!form, 10056, $hoc);
+    /**
+     * 绑定Op专用，主要用于onClick的绑定操作
+     */
+    let source = op ? op : reference.state[&quot;$op&quot;];
+    if (!source) source = {};
+    const opData = form &amp;&amp; form.op ? Immutable.fromJS(form.op).toJS() : [];
+    opData.forEach(op =&gt; {
+        if (op.onClick &amp;&amp; source.hasOwnProperty(op.onClick)) {
+            op.onClick = source[op.onClick](reference);
+            if (source.$loading) {
+                // 防重复提交专用效果
+                op.loading = source.$loading;
+            }
+        }
+    });
+    return opData;
 };
 /**
  * 处理type = hidden类型的配置信息
  * @method extractHidden
- * @param {ReactComponent} reference React对应组件引用
+ * @param {React.PureComponent} reference React对应组件引用
  * @return {{}}
  */
-const extractHidden = (reference = {}) =&gt; {
+const extractHidden = (reference = {}, key = &quot;form&quot;) =&gt; {
     const {$hoc} = reference.state;
-    Dg.ensureNotNull($hoc);
-    const form = $hoc._(&quot;form&quot;);
-    Dg.ensureNotNull(form);
-    const hidden = (form &amp;&amp; form.hidden) ? form.hidden : {};
-    if (!hidden.hasOwnProperty(&#x27;opVisible&#x27;)) {
-        hidden.opVisible = true;
+    E.fxTerminal(!$hoc, 10062, $hoc);
+    const form = $hoc._(key);
+    E.fxTerminal(!form, 10056, $hoc);
+    const hidden = form &amp;&amp; form.hidden ? form.hidden : {};
+    if (!hidden.hasOwnProperty(&quot;op&quot;)) {
+        hidden.op = false;
     }
-    if (!hidden.hasOwnProperty(&#x27;inputs&#x27;)) {
+    if (!hidden.hasOwnProperty(&quot;inputs&quot;)) {
         hidden.inputs = [];
     }
     return hidden;
@@ -338,10 +384,13 @@ const extractHidden = (reference = {}) =&gt; {
  */
 export default {
     // 读取Form配置专用方法
+    extractGroupForm,
     extractForm,
     extractHidden,
-    extractOp
-}
+    extractOp,
+    // Ui处理
+    raftUi: _normalizeUi
+};
 
     </pre>
 </div>

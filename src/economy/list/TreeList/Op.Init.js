@@ -89,6 +89,7 @@ export default {
     updateGrid,
     readConfig,
     readOptions,
+    // readCriteria,
     readTree,
     readTreeMapping,
     // 右边表格

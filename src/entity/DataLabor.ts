@@ -10,6 +10,7 @@ import StateOut from "./state/StateOut";
 import RxEtat from './rx/Rx.Etat';
 import RxFlow from './rx/Rx.Flow';
 import RxOp from './rx/Rx.Op';
+import RxAct from './rx/Rx.Act';
 
 /**
  * @class DataLabor
@@ -26,6 +27,10 @@ class DataLabor {
 
     static rxOp(reference: any): RxOp {
         return RxOp.from(reference);
+    }
+
+    static rxAct(reference: any): RxAct {
+        return RxAct.from(reference);
     }
 
     static getObject(input: Object): DataObject {

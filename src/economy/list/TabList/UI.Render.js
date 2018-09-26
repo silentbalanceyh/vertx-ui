@@ -65,9 +65,7 @@ const renderPageList = (reference, item = {}) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24} style={{
-                    paddingTop: 10
-                }}>
+                <Col span={24}>
                     <Table {...tableDatum.table}
                            loading={!ready}
                            dataSource={dataSource}/>

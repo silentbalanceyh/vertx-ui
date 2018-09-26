@@ -21,17 +21,17 @@ YUI.add("yuidoc-meta", function(Y) {
         "Log",
         "Normalize",
         "Op",
-        "Option",
         "Param",
         "Prop",
         "Random",
-        "Redux",
         "Sorter",
         "State",
         "Store",
         "Type",
         "Validator",
-        "Value"
+        "Value",
+        "_Internal",
+        "zero"
     ],
     "modules": [
         "Ux"

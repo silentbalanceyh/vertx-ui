@@ -3,13 +3,12 @@ import Ux from 'ux';
 import Init from './Op.Init';
 
 import Fn from '../../_internal/Ix.Fn';
-import Immutable from 'immutable';
 
 const {Mock} = Fn;
 
 const stateAddTab = (reference) => {
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const type = tabs.items.filter(item => "add" === item.type);
     if (0 < type.length) {
         tabs.activeKey = type[0].key;
@@ -28,7 +27,7 @@ const stateAddTab = (reference) => {
 
 const stateEditTab = (reference, id, params) => {
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {
         tabs.activeKey = found[0].key;
@@ -62,13 +61,13 @@ const rxRecord = (reference, id, data) => {
     if (undefined !== data) {
         record[id] = data;
     }
-    return Immutable.fromJS(record).toJS();
+    return Ux.clone(record);
 };
 
 const rxEdit = (reference, id) => {
     const {$self} = reference.props;
     let {tabs = {}} = $self.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {
         // 如果已经打开过，则不需要重复打开记录
@@ -104,11 +103,11 @@ const rxDeleteDetail = (reference, id) => {
     promise.then(data => {
         // 删除record数据
         let {record = {}} = reference.state;
-        record = Immutable.fromJS(record).toJS();
+        record = Ux.clone(record);
         if (record[id]) delete record[id];
         // 计算tabs页
         let {tabs = {}} = reference.state;
-        tabs = Immutable.fromJS(tabs).toJS();
+        tabs = Ux.clone(tabs);
         tabs.items = tabs.items.filter(item => id !== item.key);
         tabs.activeKey = tabs.items[0].key;
         const view = Init.stateView("list", undefined, reference);
@@ -132,7 +131,7 @@ const rxDelete = (reference, id) => {
 const rxClose = (reference, activekey) => () => {
     // 关闭时处理tab页
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     tabs.items = tabs.items.filter(each => each.key !== activekey);
     tabs.items.forEach((each, index) => each.index = index);
     tabs.activeKey = tabs.items[0].key;
@@ -142,6 +141,23 @@ const rxClose = (reference, activekey) => () => {
     reference.setState(state);
     // 提交过后关闭窗口时删除树上数据
     Init.clearByKey(reference, activekey, {"grid.list": undefined});
+};
+
+const rxView = (reference, activekey) => (values = {}) => {
+    // 更新处理时的tab页
+    let {tabs = {}} = reference.state;
+    tabs = Ux.clone(tabs);
+    // 读取add引用
+    const tabView = tabs.items.filter(each => each.key === activekey);
+    // 读取编辑专用
+    const options = Init.readOption(reference);
+    if (options['tabs.edit']) {
+        const pattern = options['tabs.edit'];
+        tabView[0].tab = Ux.formatExpr(pattern, values);
+    }
+    const record = rxRecord(reference, activekey);
+    const view = Init.stateView("edit", activekey, reference);
+    console.info(tabs, record, view);
 };
 const rxFilter = (reference = {}) => (value, event) => {
     const $query = Init.readQuery(reference);
@@ -184,7 +200,8 @@ export default {
     rxDelete,
     rxDeleteDetail,
     rxClose,
+    rxView,
     rxFilter,
     rxClear,
-    rxInput
+    rxInput,
 }

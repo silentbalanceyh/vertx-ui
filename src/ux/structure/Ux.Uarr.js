@@ -1,17 +1,7 @@
 import U from "underscore";
 import Types from "../Ux.Type";
 import E from '../Ux.Error';
-
-const _findChild = (item = {}, key, pkey, array = []) => {
-    const pValue = item[key];
-    const children = array.filter(inner => inner[pkey] === pValue);
-    if (0 < children.length) {
-        children.forEach(child => {
-            child.children = _findChild(child, key, pkey, array);
-        });
-    }
-    return children;
-};
+import Ux from "ux";
 
 class Uarr {
     constructor(data = []) {
@@ -25,96 +15,73 @@ class Uarr {
         }
     }
 
-    mount(items = {}) {
-        if (0 < Object.keys(items).length) {
-            const reference = this.data;
-            Types.itFull(reference, items, (item = {}, key, value) => {
-                if (U.isArray(value)) {
-                    const id = item[key];
-                    const found = Types.elementUnique(value, "key", id);
-                    if (found) {
-                        item[key] = found;
-                    }
-                }
-            });
-            this.data = reference;
-        }
+    /**
+     * 特殊方法
+     * @param items
+     * @returns {Uarr}
+     */
+    matrix(items = {}) {
+        Ux.matrix(this.data, items, (item = {}, key, value) => {
+            const id = item[key];
+            const found = Types.elementUnique(value, "key", id);
+            if (found) {
+                item[key] = found;
+            }
+        }, U.isArray);
         return this;
     }
 
-    remove(...attr) {
-        const reference = this.data;
-        if (reference) {
-            reference.forEach(item => {
-                attr.forEach(field => {
-                    delete item[field];
-                })
-            })
-        }
-        this.data = reference;
+    mount(reference) {
+        this.reference = reference;
         return this;
     }
 
     each(applyFun) {
-        this.data.forEach(item => applyFun(item));
+        Ux.each(this.data, applyFun);
+        return this;
+    }
+
+    remove(...attr) {
+        Ux.cut.apply(this, [this.data].concat(attr));
+        return this;
+    }
+
+    slice(...keys) {
+        const reference = this.data;
+        this.data = Ux.slice.apply(this, [reference].concat(keys));
         return this;
     }
 
     mapping(mapping = {}) {
         const result = [];
-        if (0 < Object.keys(mapping).length) {
-            const reference = this.data;
-            reference.forEach(item => {
-                const object = {};
-                for (const from in mapping) {
-                    const to = mapping[from];
-                    object[from] = item[to];
-                }
-                result.push(Object.assign(object, item));
-            });
-        }
+        this.data.forEach(item => result.push(Ux.expand(item, mapping)));
         this.data = result;
         return this;
     }
 
     flat(field = "children") {
         const reference = this.data;
-        this.data = Types.elementFlat(reference, field);
+        this.data = Types.elementFlat(reference, field, true);
         return this;
     }
 
     filter(func) {
-        if (U.isFunction(func)) {
-            let reference = this.data;
-            reference = reference.filter(func);
-            this.data = reference;
-        }
+        if (U.isFunction(func)) this.data = this.data.filter(func);
         return this;
     }
 
     convert(field, func) {
-        if (field && U.isFunction(func)) {
-            Types.itElement(this.data, field, func);
-        }
+        if (field && U.isFunction(func)) Types.itElement(this.data, field, func);
         return this;
     }
 
     add(field, any) {
-        if (field) {
-            let reference = this.data;
-            reference.forEach(item => {
-                item[field] = U.isFunction(any) ? any(item) : any;
-            });
-        }
+        if (field) this.data.forEach(item => item[field] = U.isFunction(any) ? any(item) : any);
         return this;
     }
 
     sort(func) {
-        if (U.isFunction(func)) {
-            let reference = this.data;
-            reference = reference.sort(func);
-            this.data = reference;
-        }
+        if (U.isFunction(func)) this.data = this.data.sort(func);
         return this;
     }
 
@@ -125,9 +92,7 @@ class Uarr {
     tree(key = "", pkey = "") {
         const root = this.data.filter(item => !item[pkey]);
         const reference = this.data;
-        root.forEach(item => {
-            item.children = _findChild(item, key, pkey, reference);
-        });
+        root.forEach(item => item.children = Ux.Child.byField(reference, pkey, item, key));
         this.data = root;
         return this;
     }

@@ -136,6 +136,7 @@ export default {
     rxEtat: DataLabor.rxEtat,
     rxFlow: DataLabor.rxFlow,
     rxOp: DataLabor.rxOp,
+    rxAct: DataLabor.rxAct,
     // 和Zero绑定专用的Ui方法，Stream模式
     auiTab: (reference) => new AiStream(reference).tabs().init(),
     auiTable: (reference) => new AiStream(reference).table().init(),
