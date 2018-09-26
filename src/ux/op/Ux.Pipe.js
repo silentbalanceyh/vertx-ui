@@ -109,7 +109,7 @@ const pipeSelected = (reference, isData = false, field) => {
 const pipeTree = (reference = {}, values = {}, deleted = false) => {
     const {$tree} = reference.props;
     if ($tree && $tree.is()) {
-        // 可能是Function
+        // 【二义性处理】Function和值
         values = Value.to(values);
         if (deleted) {
             $tree.removeElement(values.key);
@@ -124,7 +124,7 @@ const pipeCriteria = (reference = {}, filters = {}) => {
     const {$query} = reference.props;
     if ($query && $query.is()) {
         let ref = $query.to().criteria;
-        // 可以是Function
+        // 【二义性处理】Function和值
         filters = Value.to(filters);
         if (filters) {
             ref = Object.assign(ref, filters);

@@ -99,6 +99,11 @@ class Uson {
         return this;
     }
 
+    debug(flag = "") {
+        Ux.dgDebug(this.data, flag);
+        return this;
+    }
+
     to() {
         return this.data;
     }

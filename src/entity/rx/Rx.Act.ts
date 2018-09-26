@@ -42,6 +42,21 @@ class RxAct {
         return this;
     }
 
+    view(values: any) {
+        if (this.reference) {
+            const ref = this.executor;
+            const {fnView} = this.reference.props;
+            if (fnView) {
+                if (values) {
+                    ref['fnView'] = () => fnView(values);
+                } else {
+                    ref['fnView'] = () => fnView(this.data);
+                }
+            }
+        }
+        return this;
+    }
+
     deleted() {
         this._deleted = true;
         return this;
@@ -77,10 +92,8 @@ class RxAct {
         }
         // 是否包含执行方法
         const executor: any = this.executor;
-        // 调用fnClear
-        if (executor.hasOwnProperty("fnClear")) executor.fnClear();
-        // 调用fnClose
-        if (executor.hasOwnProperty("fnClose")) executor.fnClose();
+        ["fnClear", "fnClose", "fnView"].filter(key => executor.hasOwnProperty(key))
+            .forEach(item => executor[item]());
     }
 }
 

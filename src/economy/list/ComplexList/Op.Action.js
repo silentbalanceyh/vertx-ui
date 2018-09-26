@@ -152,12 +152,18 @@ const rxView = (reference, activekey) => (values = {}) => {
     // 读取编辑专用
     const options = Init.readOption(reference);
     if (options['tabs.edit']) {
+        // 切换视图专用
         const pattern = options['tabs.edit'];
         tabView[0].tab = Ux.formatExpr(pattern, values);
+        tabView[0].type = "edit";
+        tabView[0].key = values.key;
+        tabs.activeKey = values.key;
     }
-    const record = rxRecord(reference, activekey);
-    const view = Init.stateView("edit", activekey, reference);
-    console.info(tabs, record, view);
+    // 设置record数据，初始化编辑表单
+    const record = rxRecord(reference, values.key, values);
+    const view = Init.stateView("edit", values.key, reference);
+    const state = {tabs, ...view, record};
+    reference.setState(state);
 };
 const rxFilter = (reference = {}) => (value, event) => {
     const $query = Init.readQuery(reference);
