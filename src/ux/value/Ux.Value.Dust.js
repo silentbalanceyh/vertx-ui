@@ -161,6 +161,8 @@ const field = (instance, name, value) => {
         let $instance = Immutable.fromJS(instance);
         // 如果value为undefined（2参数，读取）
         if (value) {
+            // 【二义性处理】Function和值
+            value = to(value);
             if (0 <= name.indexOf('.')) {
                 const path = name.split('.');
                 $instance = $instance.setIn(path, value);
@@ -193,7 +195,8 @@ const to = (value) => {
 const _childrenByField = (array = [], parent, item, field) => {
     if (!field) return [];
     const pValue = item[field];
-    const childrenArray = array.filter(each => each[parent] === pValue);
+    let childrenArray = array.filter(each => each[parent] === pValue);
+    childrenArray = clone(childrenArray);
     if (0 < childrenArray.length) {
         childrenArray.forEach(each => each.children = _childrenByField(array, parent, each, field))
     }

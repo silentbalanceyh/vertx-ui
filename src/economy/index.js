@@ -25,7 +25,6 @@ export {default as PageCard} from './page/PageCard/UI';
 export {default as PageList} from './list/PageList/UI';
 export {default as EditList} from './list/EditList/UI';
 export {default as SearchList} from './list/SearchList/UI';
-export {default as TabList} from './list/TabList/UI';
 
 export {default as TreeMenu} from './menu/TreeMenu/UI';
 
@@ -39,3 +38,7 @@ export {default as DebugMonitorTool} from './debug/MonitorTool/UI';
 export {default as ComplexList} from './list/ComplexList/UI';
 export {default as DialogList} from './list/DialogList/UI';
 export {default as TreeList} from './list/TreeList/UI';
+export {default as TabList} from './list/TabList/UI';
+
+export {default as TreeTable} from './table/TreeTable/UI';
+export {default as DialogButton} from './op/DialogButton/UI';

@@ -1,5 +1,7 @@
 import Type from "../Ux.Type";
 import E from "../Ux.Error";
+import U from 'underscore';
+import Value from './Ux.Value.Dust';
 
 const SEARCHERS = {
     // Bool值
@@ -58,7 +60,40 @@ const valueSearch = (config = {}, props = {}) => {
     });
     return result;
 };
-
+const valueTree = (array = [], field) => {
+    let root = array.filter(U.isObject).filter(each => !each[field]);
+    root = Value.clone(root);
+    root.forEach(item => item.children = Value.Child.byField(array, field, item, "key"));
+    return root;
+};
+const _valueDeepConvert = (record, from, to) => {
+    if (record.hasOwnProperty(from)) {
+        let appended = record[from];
+        if (U.isArray(appended)) {
+            appended = Value.clone(appended);
+            if (record[to] && U.isArray(record[to])) {
+                record[to] = record[to].concat(appended);
+            } else {
+                record[to] = Value.clone(record[from]);
+            }
+        }
+    }
+};
+const valueDeepCopy = (item = {}, from, to) => {
+    Value.element(item, (entity) => {
+        // Array和Object统一
+        _valueDeepConvert(entity, from, to);
+        Type.itObject(entity, (field, value) => {
+            if (U.isArray(value)) {
+                value.forEach(each => valueDeepCopy(each, from, to))
+            } else if (U.isObject(value) && null !== value) {
+                valueDeepCopy(value, from, to);
+            }
+        });
+    });
+};
 export default {
-    valueSearch
+    valueSearch,
+    valueTree,
+    valueDeepCopy
 }
