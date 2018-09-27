@@ -15,7 +15,7 @@
                 "UC0003 - 列表类：ComplexList,/control/complex-list,true",
                 "UC0004 - 列表类：DialogList,/control/dialog-list,true",
                 "UC0005 - 列表类：TreeList,/control/tree-list",
-                "UC0006 - 列表类：TabList,/control/tab-list",
+                "UC0006 - 列表类：TabList,/control/tab-list,true",
                 "UC0007 - 表格类：TreeTable,/control/tree-table",
                 "UC0008 - 辅助类：DialogButton,/control/dialog-button",
                 "UC0009 - 辅助类：LoadingContent,/control/loading-content",
