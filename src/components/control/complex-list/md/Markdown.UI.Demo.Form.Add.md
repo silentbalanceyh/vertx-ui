@@ -2,14 +2,13 @@
 
 #### 1.1.专用数据
 
-* **$list**：（DataObject）列表数据；
-* **$mockData**：（Object）模拟数据信息；
-* **$query**：（DataObject）查询参数，从`grid.query`节点中读取；
+* **$addKey**：（UUID）当前临时的Key信息，系统生成，只在窗口打开时使用；
 
 #### 1.2.ComplexList传入（Function）
 
 * **fnClose()**：【无参数】关闭Tab页专用函数（关闭当前Tab页）；
-* **fnMock()**：Mock环境专用参数；
+* **fnView()**:【无参数】直接从添加界面切换到编辑界面；
+* **fnMock()**:【无参数】Mock环境专用函数，生成Mock数据用；
 
 ### 2.代码
 

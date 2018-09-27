@@ -1,5 +1,6 @@
 import Cv from '../Ux.Env'
 import E from '../Ux.Error'
+import Value from '../Ux.Value'
 
 /**
  * 通用属性读取相关信息
@@ -110,6 +111,14 @@ const toUniform = (props, ...keys) => {
         ...common
     }
 };
+
+const toLimitation = (props = {}, limits = []) => {
+    const inherits = {};
+    const $limitKeys = Value.immutable(limits);
+    Object.keys(props).filter(key => !$limitKeys.contains(key))
+        .forEach(key => inherits[key] = props[key]);
+    return inherits
+};
 /**
  * @class Hoc
  * @description 专用Hoc解释器
@@ -124,6 +133,7 @@ export default {
     toUniform,
     toQueryParameter,
     // 处理专用参数信息
+    toLimitation,
 };
 
 

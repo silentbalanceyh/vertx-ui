@@ -4,6 +4,7 @@ import Init from './Op.Init';
 import Ux from 'ux';
 import U from 'underscore';
 import Act from './Op.Action';
+import Fn from '../../_internal/Ix.Fn';
 
 const _renderOp = (reference, key, value = "") => {
     if ("add" === key) {
@@ -98,6 +99,9 @@ const renderDrawer = (reference) => {
             reference.setState({term})
         };
         const fnQueryDefault = () => Init.readQuery(reference);
+        // 「LIMIT」限制继承
+        const inherits = Ux.toLimitation(reference.props,
+            Fn.Limit.ComplexList.Filter);
         return Component ? (
             <Drawer {...config}>
                 <Component
@@ -112,7 +116,7 @@ const renderDrawer = (reference) => {
                     // 读取默认Query函数，传给查询表单
                     fnQueryDefault={fnQueryDefault}
                     // 清空快速搜索栏的搜索框
-                    fnTerm={fnTerm} {...reference.props}/>
+                    fnTerm={fnTerm} {...inherits}/>
             </Drawer>
         ) : false
     } else return false;
