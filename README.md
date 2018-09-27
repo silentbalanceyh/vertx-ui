@@ -59,5 +59,13 @@ run-zero.bat
 
 新版不再提供在线的Markdown文档，所有的教程文档都会在vertx-ui运行过程中陆续开放，直接运行了可以在系统中直接查看“所见即所得”的基础教程。
 
-![](/document/image/main-page.png)
+![](/document/image/mainpage.png)
+
+
+
+
+
+
+
+
 
