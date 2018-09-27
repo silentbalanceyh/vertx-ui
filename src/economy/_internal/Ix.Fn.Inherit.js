@@ -9,6 +9,9 @@ export default {
             "rxSearch",
             "rxInject",
             "rxSet",
+            "rxEditPost",
+            "rxDeletePost",
+            "rxSwitchView",
             "$list"
         ],
         Add: [
@@ -21,6 +24,9 @@ export default {
             "rxSearch",
             "rxInject",
             "rxSet",
+            "rxEditPost",
+            "rxDeletePost",
+            "rxSwitchView",
         ],
         Edit: [
             "$formAdd",
@@ -32,6 +38,18 @@ export default {
             "rxSearch",
             "rxInject",
             "rxSet",
+            "rxEditPost",
+            "rxDeletePost",
+            "rxSwitchView",
+        ]
+    },
+    DialogList: {
+        Shared: [
+            "$formAdd",
+            "$formEdit",
+            "fnView",
+            "fnMock",
+            "rxDelete"
         ]
     }
 }

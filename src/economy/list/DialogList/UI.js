@@ -62,6 +62,7 @@ class Component extends React.PureComponent {
             const initData = Ux.itemInit(this);
             // 不点取消不可关闭
             dialog.maskClosable = false;
+            const inherits = Ux.toLimitation(rest, Fn.Limit.DialogList.Shared);
             return (
                 <div>
                     {/** 渲染添加按钮 **/}
@@ -72,7 +73,7 @@ class Component extends React.PureComponent {
                                    $visible={show}>
                         {/** 只有editKey存在时渲染 **/}
                         {FormEdit ? (editKey && show ? (
-                            <FormEdit {...rest}
+                            <FormEdit {...inherits}
                                       key={`formEdit`}
                                       $inited={initData}
                                       $key={editKey}
@@ -83,7 +84,7 @@ class Component extends React.PureComponent {
                         ) : false) : false}
                         {/** 只有editKey为undefined时渲染 **/}
                         {FormAdd ? (!editKey && show ? (
-                            <FormAdd {...rest}
+                            <FormAdd {...inherits}
                                      key={"formAdd"}
                                      $inited={initData}
                                      $parent={$inited}

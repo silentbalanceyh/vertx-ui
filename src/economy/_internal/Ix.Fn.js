@@ -6,6 +6,7 @@ export default {
     Mock,
     M,
     Limit: {
-        ComplexList: Control.ComplexList
+        ComplexList: Control.ComplexList,
+        DialogList: Control.DialogList
     }
 }

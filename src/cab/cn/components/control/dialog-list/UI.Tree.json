@@ -44,6 +44,14 @@
                                     "color": "#33af43"
                                 },
                                 {
+                                    "name": "op.add.visible",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "op.add.id",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "op.edit",
                                     "color": "#33af43"
                                 },
@@ -169,6 +177,22 @@
                 "comment": "设置添加窗口的key，链接到'window.<key>'的配置中。",
                 "type": "String",
                 "value": "connect.add"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "op.add.visible",
+                "comment": "是否显示添加按钮？",
+                "type": "Boolean",
+                "value": "true"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "op.add.id",
+                "comment": "如果不显示添加按钮而又要使用添加功能，则该按钮作为被连接对象的id？",
+                "type": "String",
+                "value": "--"
             },
             {
                 "source": "O",

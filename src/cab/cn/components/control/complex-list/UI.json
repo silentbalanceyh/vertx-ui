@@ -288,6 +288,14 @@
                 "comment": "Ant Design Form专用。"
             },
             {
+                "source": "C",
+                "provider": "<ComplexList/>",
+                "consumer": "$formAdd",
+                "name": "$addKey",
+                "category": "String",
+                "comment": "临时生成的添加主记录的ID信息。"
+            },
+            {
                 "source": "Z",
                 "provider": "Zero框架",
                 "consumer": "$formAdd",
