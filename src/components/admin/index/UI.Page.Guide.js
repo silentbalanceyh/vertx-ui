@@ -8,7 +8,8 @@ import Op from './Op';
 const {zero} = Ux;
 
 const renderPanel = (panel = []) => (panel.map(item => {
-    const {title, children = []} = item;
+    let {title, children = []} = item;
+    // 特殊处理自定义组件部分
     return (
         <Card key={item.key} title={title}
               className={"zero-half-card"}
