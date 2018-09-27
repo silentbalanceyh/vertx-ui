@@ -31,6 +31,7 @@
             "tabs.list": "记录列表",
             "tabs.edit": "编辑部门",
             "tabs.add": "添加部门",
+            "submit.add": "$opAdd",
             "submit.edit": "$opSave",
             "submit.reset": "$opReset",
             "ajax.get.uri": "/api/dept/:id",

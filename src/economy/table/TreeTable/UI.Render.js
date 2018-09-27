@@ -19,7 +19,7 @@ const renderOp = (reference, record, {
     const window = Ux.aiExprWindow(config.window);
     // 绑定函数，主要用于删除
     const {
-        $action = {}, $datum = {}, $mode,
+        $action = {}, $datum = {},
         rxRecord = data => data
     } = reference.props;
     // 处理数据信息

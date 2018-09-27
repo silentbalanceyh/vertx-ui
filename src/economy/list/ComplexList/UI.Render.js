@@ -8,6 +8,7 @@ import "./Cab.less";
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
     // 添加的时候activeKey就应该只有一个，就是item.key
+    // 「LIMIT」限制继承
     const inherits = Ux.toLimitation(reference.props, Fn.Limit.ComplexList.Add);
     return Component ? (
         <Tabs.TabPane {...item}>
@@ -30,6 +31,7 @@ const renderPageEdit = (reference, item = {}) => {
      * 3.在关闭窗口的时候传入activeKey，需要关闭的是当前的窗口
      */
     const $inited = record[item.key] ? record[item.key] : {};
+    // 「LIMIT」限制继承
     const inherits = Ux.toLimitation(reference.props, Fn.Limit.ComplexList.Edit);
     return Component ? (
         <Tabs.TabPane {...item}>

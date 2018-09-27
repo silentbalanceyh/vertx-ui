@@ -1,8 +1,8 @@
 {
     "_configuration": {
-        "code": "ComplexList",
+        "code": "TabList",
         "items": {
-            "name": "ComplexList组件",
+            "name": "TabList组件",
             "color": "#0099CC",
             "children": [
                 {

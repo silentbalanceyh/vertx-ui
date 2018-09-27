@@ -5,8 +5,5 @@ import Control from './Ix.Fn.Inherit';
 export default {
     Mock,
     M,
-    Limit: {
-        ComplexList: Control.ComplexList,
-        DialogList: Control.DialogList
-    }
+    Limit: Control
 }

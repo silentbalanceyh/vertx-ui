@@ -140,6 +140,8 @@ const rxSave = (reference) => {
                 rowRecord: {},
                 rowKey: undefined
             }));
+            // Mock专用处理，直接从$self中读取
+            Mock.mockfnRecord($self, false)(rowRecord);
         }
     }
 };
