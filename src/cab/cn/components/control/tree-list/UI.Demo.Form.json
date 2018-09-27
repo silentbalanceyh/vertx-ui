@@ -5,14 +5,14 @@
                 {
                     "field": "code",
                     "optionItem": {
-                        "label": "部门编号"
+                        "label": "记录编号"
                     },
                     "optionConfig": {
                         "validateTrigger": "onBlur",
                         "rules": [
                             {
                                 "required": true,
-                                "message": "请输入部门编号"
+                                "message": "请输入记录编号"
                             }
                         ]
                     }
@@ -22,14 +22,14 @@
                 {
                     "field": "name",
                     "optionItem": {
-                        "label": "部门名称"
+                        "label": "记录名称"
                     },
                     "optionConfig": {
                         "validateTrigger": "onBlur",
                         "rules": [
                             {
                                 "required": true,
-                                "message": "请输入部门名称"
+                                "message": "请输入记录名称"
                             }
                         ]
                     }
@@ -61,8 +61,8 @@
     "_modal": {
         "type": "success",
         "message": {
-            "add": "您的部门添加成功！",
-            "edit": "您的部门保存成功！"
+            "add": "您的记录添加成功！",
+            "edit": "您的记录保存成功！"
         }
     }
 }

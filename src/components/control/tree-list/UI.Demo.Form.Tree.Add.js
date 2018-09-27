@@ -5,14 +5,14 @@ import Op from './Op.Tree';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo.Tree.Form")
+    .cab("UI.Demo.Tree.Form.Add")
     .bind(Op)
     .raft(2)
     .form().to()
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {...Ux.ai2FormButton(Op)}, 2)
+        return Ux.uiFieldForm(this, {}, 2)
     }
 }
 

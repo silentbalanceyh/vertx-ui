@@ -25,12 +25,11 @@
             "tree.root": "根类型",
             "tree.filter": "category",
             "mock.enabled": true,
-            "mock.keys": "code,name,description,manager,active",
+            "mock.keys": "code,name,category,active",
             "search.cond.message": {
                 "code": "代码",
                 "name": "名称",
-                "manager": "经理",
-                "active": "启用"
+                "category": "经理"
             },
             "search.cond": [
                 "name,c",
@@ -42,11 +41,11 @@
             "search.advanced.width": "30%",
             "search.advanced.title": "搜索记录",
             "tabs.list": "记录列表",
-            "tabs.edit": "编辑部门",
+            "tabs.edit": "编辑记录",
             "submit.edit": "$opSave",
             "submit.reset": "$opReset",
-            "ajax.get.uri": "/api/dept/:id",
-            "ajax.delete.uri": "/api/dept/:id",
+            "ajax.get.uri": "/api/record/:id",
+            "ajax.delete.uri": "/api/record/:id",
             "confirm.delete": "确认删除当前记录？",
             "row.add": "添加"
         },

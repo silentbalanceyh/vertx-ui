@@ -4,17 +4,17 @@
         "ui": [
             [
                 {
-                    "metadata": "code,部门编号,24",
+                    "metadata": "code,分类编号,24",
                     "optionConfig.rules": [
-                        "required,请输入部门编号"
+                        "required,请输入分类编号"
                     ]
                 }
             ],
             [
                 {
-                    "metadata": "name,部门编号,24",
+                    "metadata": "name,分类编号,24",
                     "optionConfig.rules": [
-                        "required,请输入部门编号"
+                        "required,请输入分类编号"
                     ]
                 }
             ],
@@ -32,8 +32,12 @@
             ],
             [
                 {
-                    "field": "$button",
-                    "hidden": true
+                    "metadata": "$button,,24",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opTreeSave,保存,$opTreeSave",
+                        "reset": "opTreeReset,重置,$opTreeReset"
+                    }
                 }
             ]
         ],
@@ -44,8 +48,8 @@
     "_modal": {
         "type": "success",
         "message": {
-            "add": "您的部门添加成功！",
-            "edit": "您的部门保存成功！"
+            "add": "您的分类添加成功！",
+            "edit": "您的分类保存成功！"
         }
     }
 }

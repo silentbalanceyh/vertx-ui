@@ -3,6 +3,8 @@ import './Cab.less'
 import Act from "./Op.Act";
 import Is from './Op.Is'
 import React from "react";
+import Ux from "ux";
+import Fn from "../../_internal/Ix.Fn";
 
 const renderClose = (reference, item, title) => {
     return (
@@ -35,10 +37,12 @@ const renderAdd = (reference, config = {}, item) => {
     if (isDialog) {
         const {$formTreeAdd: Form} = reference.props;
         const position = _calcPosition(config);
+        // 「LIMIT」限制继承
+        const inherits = Ux.toLimitation(reference.props, Fn.Limit.TreeList.Form);
         return (
             <Popover content={
                 <div className={"inner-form"}>
-                    <Form {...reference.props}
+                    <Form {...inherits}
                           fnClose={() => Act.rxClose(reference, item)}/>
                 </div>}
                      placement={position}
@@ -61,10 +65,12 @@ const renderEdit = (reference, config = {}, item) => {
     if (isDialog) {
         const {$formTreeEdit: Form} = reference.props;
         const position = _calcPosition(config);
+        // 「LIMIT」限制继承
+        const inherits = Ux.toLimitation(reference.props, Fn.Limit.TreeList.Form);
         return (
             <Popover content={
                 <div className={"inner-form"}>
-                    <Form {...reference.props}
+                    <Form {...inherits}
                           $inited={item}
                           fnClose={() => Act.rxClose(reference, item)}/>
                 </div>}

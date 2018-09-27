@@ -1,4 +1,28 @@
 export default {
+    TreeList: {
+        Form: [
+            "$formAdd",
+            "$formEdit",
+            "$formFilter",
+            "$list",
+            "$query",
+            "$mockData",
+            "rxSearch",
+            "rxInject",
+            "rxSet",
+            "rxEditPost",
+            "rxDeletePost",
+            "rxSwitchView",
+            "rxAddRow",
+            "$tree",
+            "$formTreeAdd",
+            "$formTreeEdit",
+            "rxItemDelete",
+            "rxTree",
+            "rxItemAdd",
+            "rxItemEdit"
+        ]
+    },
     TabList: {
         // ComplexList中搜索框需要过滤的属性
         Filter: [
@@ -13,7 +37,14 @@ export default {
             "rxDeletePost",
             "rxSwitchView",
             "rxAddRow",
-            "$list"
+            "$list",
+            "$tree",
+            "$formTreeAdd",
+            "$formTreeEdit",
+            "rxItemDelete",
+            "rxTree",
+            "rxItemAdd",
+            "rxItemEdit"
         ],
         Add: [
             "$formAdd",
@@ -29,6 +60,13 @@ export default {
             "rxDeletePost",
             "rxSwitchView",
             "rxAddRow",
+            "$tree",
+            "$formTreeAdd",
+            "$formTreeEdit",
+            "rxItemDelete",
+            "rxTree",
+            "rxItemAdd",
+            "rxItemEdit"
         ],
         Edit: [
             "$formAdd",
@@ -44,6 +82,13 @@ export default {
             "rxDeletePost",
             "rxSwitchView",
             "rxAddRow",
+            "$tree",
+            "$formTreeAdd",
+            "$formTreeEdit",
+            "rxItemDelete",
+            "rxTree",
+            "rxItemAdd",
+            "rxItemEdit"
         ]
     },
     ComplexList: {

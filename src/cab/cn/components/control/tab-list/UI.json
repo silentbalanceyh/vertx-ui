@@ -121,19 +121,19 @@
         "UI.Demo.Filter.js": [
             {
                 "source": "R",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "reference",
                 "category": "React.Reference",
-                "comment": "这里的引用是ComplexList组件本身。"
+                "comment": "这里的引用是TabList组件本身。"
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "$cond",
                 "category": "Array",
-                "comment": "ComplexList提供给Filter的搜索条件。"
+                "comment": "TabList提供给Filter的搜索条件。"
             },
             {
                 "source": "X",
@@ -145,7 +145,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "$inited",
                 "category": "Object",
@@ -153,7 +153,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "$page",
                 "category": "String",
@@ -161,7 +161,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "fnClose",
                 "category": "Function",
@@ -169,7 +169,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "fnTerm",
                 "category": "Function",
@@ -177,7 +177,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formFilter",
                 "name": "fnQueryDefault",
                 "category": "Function",
@@ -211,15 +211,15 @@
         "UI.Demo.Form.Add.js": [
             {
                 "source": "R",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formAdd",
                 "name": "reference",
                 "category": "React.Reference",
-                "comment": "这里的引用是ComplexList组件本身。"
+                "comment": "这里的引用是TabList组件本身。"
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formAdd",
                 "name": "fnClose",
                 "category": "Function",
@@ -227,7 +227,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formAdd",
                 "name": "fnView",
                 "category": "Function",
@@ -235,7 +235,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formAdd",
                 "name": "fnMock",
                 "category": "Function",
@@ -259,7 +259,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formAdd",
                 "name": "$addKey",
                 "category": "String",
@@ -303,15 +303,15 @@
         "UI.Demo.Form.Edit.js": [
             {
                 "source": "R",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formEdit",
                 "name": "reference",
                 "category": "React.Reference",
-                "comment": "这里的引用是ComplexList组件本身。"
+                "comment": "这里的引用是TabList组件本身。"
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formEdit",
                 "name": "$inited",
                 "category": "Object",
@@ -319,7 +319,7 @@
             },
             {
                 "source": "C",
-                "provider": "<ComplexList/>",
+                "provider": "<TabList/>",
                 "consumer": "$formEdit",
                 "name": "fnClose",
                 "category": "Function",
