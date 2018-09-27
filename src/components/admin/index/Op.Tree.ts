@@ -30,6 +30,12 @@ const _analyzeTree = (children = []) => {
             item.title = eachArr[0];
             if (eachArr[1]) item.uri = `/${Ux.Env.ROUTE}${eachArr[1]}`;
             result[index] = item;
+            // 是否完成
+            if (eachArr[2]) {
+                item.finished = Boolean(eachArr[2]);
+            } else {
+                item.finished = false;
+            }
             _applyColor(result[index]);
         } else {
             result[index] = Ux.clone(each);

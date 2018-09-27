@@ -133,7 +133,7 @@
                 "value": "--"
             },
             {
-                "source": "P",
+                "source": "E",
                 "name": "rxDelete",
                 "comment": "子列表记录删除过后的回调函数",
                 "type": "Function",

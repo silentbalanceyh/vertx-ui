@@ -1,7 +1,7 @@
 import React from 'react'
 import './Cab.less'
 import Ux from 'ux';
-import {Card, Icon, List} from 'antd';
+import {Card, Col, Icon, List, Row} from 'antd';
 import {Link} from 'react-router-dom';
 import Op from './Op';
 
@@ -20,11 +20,26 @@ const renderPanel = (panel = []) => (panel.map(item => {
                   className={"zero-list"}
                   renderItem={each => (
                       <List.Item key={each.key}>
-                          <Link to={each.uri} style={{
-                              color: each.color
-                          }}>
-                              {each.title}
-                          </Link>
+                          <Row style={{width: "100%"}}>
+                              <Col span={23}>
+                                  <Link to={each.uri} style={{
+                                      color: each.color
+                                  }}>
+                                      {each.title}
+                                  </Link>
+                              </Col>
+                              <Col span={1}>
+                                  {each.finished ? (
+                                      <Icon type="check" style={{
+                                          color: "#52c41a"
+                                      }}/>
+                                  ) : (
+                                      <Icon type="exclamation" style={{
+                                          color: "#eb2f96"
+                                      }}/>
+                                  )}
+                              </Col>
+                          </Row>
                       </List.Item>
                   )}/>
         </Card>

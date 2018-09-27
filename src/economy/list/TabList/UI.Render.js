@@ -12,6 +12,7 @@ const renderPageAdd = (reference, item = {}) => {
             <Component
                 fnClose={Op.rxClose(reference, item.key)}
                 fnMock={Op.mockfnRecord(reference)}
+                fnView={Op.rxView(reference, item.key)}
                 $addKey={item.key}
                 {...reference.props}/>
         </Tabs.TabPane>
