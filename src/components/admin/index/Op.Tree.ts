@@ -12,6 +12,8 @@ const _applyColor = (item: any = {}) => {
             item.color = "#bc0981";
         } else if (item.title.startsWith("AI")) {
             item.color = "#990"
+        } else if (item.title.startsWith("UE")) {
+            item.color = "#963";
         } else {
             item.color = "#333";
         }

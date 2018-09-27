@@ -39,6 +39,13 @@
             },
             {
                 "source": "P",
+                "name": "$title",
+                "comment": "如果指定了$title优先使用该值作标题",
+                "type": "String | ReactNode",
+                "value": "--"
+            },
+            {
+                "source": "P",
                 "name": "$leftVisible",
                 "comment": "左边按钮工具栏的显示和隐藏",
                 "type": "Boolean",
@@ -121,6 +128,10 @@
                         },
                         {
                             "name": "$extra",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$title",
                             "color": "#33af43"
                         },
                         {
