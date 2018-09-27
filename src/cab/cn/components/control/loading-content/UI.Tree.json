@@ -1,0 +1,18 @@
+{
+    "_configuration": {
+        "code": "LoadingContent",
+        "data": [
+        ],
+        "items": {
+            "name": "LoadingContent组件",
+            "color": "#0099CC",
+            "children": [
+            ]
+        },
+        "layout": {
+            "hgap": 120,
+            "vgap": 10,
+            "height": 450
+        }
+    }
+}

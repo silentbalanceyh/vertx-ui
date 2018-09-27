@@ -1,0 +1,68 @@
+{
+    "_form": {
+        "ui": [
+            [
+                {
+                    "field": "code",
+                    "optionItem": {
+                        "label": "记录编号"
+                    },
+                    "optionConfig": {
+                        "validateTrigger": "onBlur",
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入记录编号"
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "name",
+                    "optionItem": {
+                        "label": "记录名称"
+                    },
+                    "optionConfig": {
+                        "validateTrigger": "onBlur",
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入记录名称"
+                            }
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
+                    "field": "$button",
+                    "hidden": true
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": []
+        }
+    },
+    "_modal": {
+        "type": "success",
+        "message": {
+            "add": "您的记录添加成功！",
+            "edit": "您的记录保存成功！"
+        }
+    }
+}
