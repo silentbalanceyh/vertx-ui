@@ -134,9 +134,10 @@ const matrix = (array = [], object = {}, fnExecute, fnPredicate) => {
     }
 };
 const cut = (array, ...attr) => {
+    const target = clone(array);
     const fnCut = (item = {}) => attr.filter(field => item.hasOwnProperty(field))
         .forEach(field => delete item[field]);
-    element(array, fnCut);
+    element(target, fnCut);
 };
 /**
  * 双遍历

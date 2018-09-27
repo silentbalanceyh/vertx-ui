@@ -1,0 +1,21 @@
+{
+    "_title": "UC0013 - 「自定义组件」AddressSelector",
+    "_attribute": {
+        "props": {
+        },
+        "hoc": {
+        }
+    },
+    "_datatree": {
+        "title": "<Root>",
+        "children": [
+        ]
+    },
+    "_datalist": {},
+    "_diagram": {
+        "items": {
+            "nodes": [],
+            "edges": []
+        }
+    }
+}

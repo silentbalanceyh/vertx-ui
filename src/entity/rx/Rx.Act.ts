@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import * as U from 'underscore';
 
 class RxAct {
     private reference: any;
@@ -20,13 +21,16 @@ class RxAct {
         return this;
     }
 
-    close() {
+    close(fnClose) {
+        const ref = this.executor;
         if (this.reference) {
-            const ref = this.executor;
             const {fnClose} = this.reference.props;
             if (fnClose) {
                 ref["fnClose"] = fnClose;
             }
+        }
+        if (!ref.hasOwnProperty('fnClose') && U.isFunction(fnClose)) {
+            ref["fnClose"] = fnClose;
         }
         return this;
     }

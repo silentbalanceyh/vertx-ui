@@ -3,6 +3,7 @@ import Log from '../monitor/Mt.Logger';
 import Ai from '../ai/AI';
 import Immutable from 'immutable';
 import {v4} from 'uuid';
+import Value from '../Ux.Value';
 
 class Mock {
     constructor(reference) {
@@ -53,11 +54,12 @@ class Mock {
         // 更新原始数据
         if (record.key) {
             const list = this.data.list;
-            for (let idx = 0; idx < list.length; idx++) {
-                if (record.key === list[idx].key) {
-                    list[idx] = record;
-                }
-            }
+            let $list = Value.clone(list);
+            $list = $list.filter(item => item.key !== record.key);
+            $list = $list.reverse();
+            $list.push(record);
+            $list = $list.reverse();
+            this.data.list = $list;
         }
         return record;
     }
@@ -71,7 +73,12 @@ class Mock {
             }
         });
         record.key = v4();
-        this.data.list.push(record);
+        // 保证新添加的数据在最前边
+        let $list = Value.clone(this.data.list);
+        $list = $list.reverse();
+        $list.push(record);
+        $list = $list.reverse();
+        this.data.list = $list;
         this.data.count = this.data.length;
         return record;
     }

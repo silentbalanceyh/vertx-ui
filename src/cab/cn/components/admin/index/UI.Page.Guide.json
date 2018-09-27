@@ -10,12 +10,19 @@
                 }
             },
             "children": [
-                "UC0001 - 卡片类「容器」：PageCard,/control/page-card",
-                "UC0002 - 卡片类「容器」：HelpCard,/control/help-card",
-                "UC0003 - 列表类：ComplexList,/control/complex-list",
-                "UC0004 - 列表类：DialogList,/control/dialog-list",
-                "UC0005 - 列表类：TreeList,/control/tree-list",
-                "UC0006 - 列表类：TabList,/control/tab-list"
+                "UC0001 - 卡片类「Hoc容器」：PageCard,/control/page-card,true",
+                "UC0002 - 卡片类「Hoc容器」：HelpCard,/control/help-card,true",
+                "UC0003 - 列表类「Hoc」：ComplexList,/control/complex-list,true",
+                "UC0004 - 列表类「Hoc」：DialogList,/control/dialog-list,true",
+                "UC0005 - 列表类「Hoc」：TreeList,/control/tree-list,true",
+                "UC0006 - 列表类「Hoc」：TabList,/control/tab-list,true",
+                "UC0007 - 表格类「Pure」：TreeTable,/control/tree-table",
+                "UC0008 - 辅助类「Pure」：DialogButton,/control/dialog-button",
+                "UC0009 - 辅助类「Pure」：LoadingContent,/control/loading-content",
+                "UC0010 - 辅助类「Pure」：DynamicDialog,/control/dynamic-dialog",
+                "UC0011 - 交互类：ListSelector,/control/list-selector",
+                "UC0012 - 交互类：TableEditor,/control/table-editor",
+                "UC0013 - 交互类：AddressSelector,/control/address-selector"
             ]
         },
         {
@@ -33,7 +40,67 @@
                 "UI0003 - 环境变量说明,/system/env",
                 "UI0004 - 路由测试,/system/route",
                 "UI0005 - 第一个模板,/system/container",
-                "UI0006 - 第一个页面,/system/component"
+                "UI0006 - 第一个页面,/system/component",
+                "UI0007 - 表单渲染之布局,/system/form-layout",
+                "UI0008 - 表单Raft模式,/system/form-raft",
+                "UI0009 - 字段渲染：Full模式,/system/field-full",
+                "UI0010 - 字段渲染：Expr模式,/system/field-expr",
+                "UI0011 - 列渲染：Cell静态呈现列,/system/column-cell",
+                "UI0012 - 列渲染：Dynamic动态列,/system/column-dynamic",
+                "UI0013 - 列渲染：表格编辑器Unit列,/system/column-unit",
+                "UI0014 - 列渲染：状态State列,/system/column-state",
+                "UI0015 - 调试工具：DebugMonitor,/system/monitor",
+                "UI0016 - 日志器,/system/logs",
+                "UI0017 - 按钮：1.ai2Event,/system/op-ai2event",
+                "UI0018 - 按钮：2.rxOp,/system/op-rxop",
+                "UI0019 - 按钮：3.rxAct,/system/op-rxact"
+            ]
+        },
+        {
+            "title": "AI - 工具教程",
+            "icon": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#bc0981"
+                }
+            },
+            "children": [
+                "AI0001 - 默认属性表,/ai/attribute",
+                "AI0002 - $KV$解析原理,/ai/parser",
+                "AI0007 - 一阶Render组件配置,/ai/render",
+                "AI0008 - 二阶Render组件配置,/ai/h-render"
+            ]
+        },
+        {
+            "title": "UE - 解析语法专用教程",
+            "icon": {
+                "type": "box-plot",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#666"
+                }
+            },
+            "children": [
+                "UE0001 - 查询条件：Criteria,/expr/criteria",
+                "UE0002 - 属性表达式：Ai Expr,/expr/ai-expr",
+                "UE0003 - 字段解析：Field,/expr/form",
+                "UE0004 - 表格列解析：Column,/expr/column",
+                "UE0005 - 异步验证解析：Async,/expr/async",
+                "UE0006 - Ajax参数解析：Ajax,/expr/ajax",
+                "UE0007 - 「$KV$」解析之ajax,/expr/expr-ajax",
+                "UE0008 - 「$KV$」解析之button,/expr/expr-button",
+                "UE0009 - 「$KV$」解析之field,/expr/expr-field",
+                "UE0010 - 「$KV$」解析之bind,/expr/expr-bind",
+                "UE0011 - 解析之direct,/expr/expr-direct",
+                "UE0012 - 解析之tabs,/expr/expr-tabs",
+                "UE0013 - 解析之window,/expr/expr-window",
+                "UE0014 - 解析之steps,/expr/expr-steps",
+                "UE0015 - 解析之option,/expr/expr-option",
+                "UE0016 - 解析之column,/expr/expr-column",
+                "UE0017 - 解析之icon,/expr/expr-icon",
+                "UE0018 - 解析之flag,/expr/expr-flag",
+                "UE0019 - 解析之filter,/expr/expr-filter"
             ]
         },
         {
@@ -48,22 +115,12 @@
             "children": [
                 "UT0001 - 「StateIn」封装的Redux,/research/redux",
                 "UT0002 - 「@zero」装饰器模式,/research/zero",
-                "UT0003 - 「TypeScript」数据模型,/research/ts"
-            ]
-        },
-        {
-            "title": "AI - 工具教程",
-            "icon": {
-                "type": "thunderbolt",
-                "style": {
-                    "fontSize": 24,
-                    "color": "#bc0981"
-                }
-            },
-            "children": [
-                "AI0001 - 默认属性表,/ai/attribute",
-                "AI0002 - 「$KV$」属性解析,/ai/parser",
-                "AI0003 - 自动Render组件配置,/ai/render"
+                "UT0003 - 「@zero」rxEtat写法,/research/zero-etat",
+                "UT0004 - 「@zero」rxFlow模式,/research/zero-flow",
+                "UT0005 - 「TypeScript」数据模型,/research/ts",
+                "UT0006 - 「Stream」Uson / UArr,/research/json",
+                "UT0007 - 「Stream」RxOp / RxAct,/research/op",
+                "UT0008 - 「Ant」开发自定义组件"
             ]
         }
     ]

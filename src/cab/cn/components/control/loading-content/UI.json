@@ -1,0 +1,21 @@
+{
+    "_title": "UC0009 - 「自定义组件」LoadingContent",
+    "_attribute": {
+        "props": {
+        },
+        "hoc": {
+        }
+    },
+    "_datatree": {
+        "title": "<Root>",
+        "children": [
+        ]
+    },
+    "_datalist": {},
+    "_diagram": {
+        "items": {
+            "nodes": [],
+            "edges": []
+        }
+    }
+}

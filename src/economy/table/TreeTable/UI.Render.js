@@ -47,15 +47,16 @@ const renderOp = (reference, record, {
                 <span className={"right"}>
                     {enabled ? (
                         <Button.Group>
-                            {add ? (<DialogButton $form={Form} $datum={$datum}
-                                                  $inited={rxRecord({}, record, column.level)}
-                                                  fnConfirm={() => Ux.connectId(connectAdd)}
-                                                  $config={{
-                                                      button: {
-                                                          text: add, icon: "plus",
-                                                      },
-                                                      window,
-                                                  }}/>) : false}
+                            {add ? (
+                                <DialogButton $form={Form} $datum={$datum}
+                                              $inited={rxRecord({}, record, column.level)}
+                                              fnConfirm={() => Ux.connectId(connectAdd)}
+                                              $config={{
+                                                  button: {
+                                                      text: add, icon: "plus",
+                                                  },
+                                                  window,
+                                              }}/>) : false}
                             {edit && text ? (
                                 <DialogButton $form={Form} $datum={$datum}
                                               $inited={rxRecord(data, record, column.level)}

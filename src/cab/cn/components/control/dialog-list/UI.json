@@ -136,63 +136,6 @@
                 "comment": "ComplexList提供给Filter的搜索条件。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formFilter",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
-                "category": "Function",
-                "comment": "初始化list.items专用。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formFilter",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
                 "source": "X",
                 "provider": "Redux状态树",
                 "consumer": "$formFilter",
@@ -207,14 +150,6 @@
                 "name": "$query",
                 "category": "DataObject",
                 "comment": "主列表中的「查询条件」。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "consumer": "$formFilter",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
             },
             {
                 "source": "C",
@@ -290,74 +225,11 @@
                 "comment": "这里的引用是ComplexList组件本身。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formFilter",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
                 "source": "X",
                 "provider": "Redux状态树",
                 "name": "$items",
                 "category": "DataObject",
                 "comment": "状态树上的list.items对应的数据。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "name": "$query",
-                "category": "DataObject",
-                "comment": "主列表中的「查询条件」。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
             },
             {
                 "source": "C",
@@ -367,11 +239,18 @@
                 "comment": "关闭Tab标签页函数。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
+                "source": "C",
+                "provider": "<ComplexList/>",
+                "name": "fnView",
                 "category": "Function",
-                "comment": "传入的专用编辑后的回调函数。"
+                "comment": "切换当前Tab页到Edit状态的标签函数。"
+            },
+            {
+                "source": "C",
+                "provider": "<ComplexList/>",
+                "name": "$addKey",
+                "category": "String",
+                "comment": "临时生成的添加主记录的ID信息。"
             },
             {
                 "source": "X",
@@ -398,84 +277,11 @@
                 "comment": "这里的引用是ComplexList组件本身。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formFilter",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
                 "source": "X",
                 "provider": "Redux状态树",
                 "name": "$items",
                 "category": "DataObject",
                 "comment": "状态树上的list.items对应的数据。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formAdd",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formAdd",
-                "name": "$query",
-                "category": "DataObject",
-                "comment": "主列表中的「查询条件」。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "consumer": "$formAdd",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
-                "category": "Function",
-                "comment": "传入的专用编辑后的回调函数。"
             },
             {
                 "source": "C",
@@ -521,11 +327,26 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd",
                 "name": "$op",
                 "secondary": "$opSave",
                 "category": "Function",
                 "comment": "被连接的「编辑」表单提交函数。"
+            },
+            {
+                "source": "C",
+                "provider": "<ComplexList/>",
+                "consumer": "$formAdd",
+                "name": "fnView",
+                "category": "Function",
+                "comment": "切换当前Tab页到Edit状态的标签函数。"
+            },
+            {
+                "source": "C",
+                "provider": "<ComplexList/>",
+                "consumer": "$formAdd",
+                "name": "$addKey",
+                "category": "String",
+                "comment": "临时生成的添加主记录的ID信息。"
             },
             {
                 "source": "Z",
@@ -546,55 +367,6 @@
                 "comment": "这里的引用是ComplexList组件本身。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formFilter",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
                 "source": "X",
                 "provider": "Redux状态树",
                 "name": "$items",
@@ -602,32 +374,11 @@
                 "comment": "状态树上的list.items对应的数据。"
             },
             {
-                "source": "X",
-                "provider": "Redux状态树",
-                "name": "$query",
-                "category": "DataObject",
-                "comment": "主列表中的「查询条件」。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
-            },
-            {
                 "source": "C",
                 "provider": "<ComplexList/>",
                 "name": "fnClose",
                 "category": "Function",
                 "comment": "关闭Tab标签页函数。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
-                "category": "Function",
-                "comment": "传入的专用编辑后的回调函数。"
             },
             {
                 "source": "X",
@@ -654,20 +405,6 @@
                 "comment": "这里的引用是ComplexList组件本身。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
                 "source": "C",
                 "provider": "<ComplexList/>",
                 "consumer": "$formEdit",
@@ -682,65 +419,6 @@
                 "consumer": "$formEdit",
                 "category": "DataObject",
                 "comment": "状态树上的list.items对应的数据。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
-                "category": "Function",
-                "comment": "传入的专用编辑后的回调函数。"
-            },
-            {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formEdit",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formEdit",
-                "name": "$query",
-                "category": "DataObject",
-                "comment": "主列表中的「查询条件」。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "consumer": "$formEdit",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
             },
             {
                 "source": "C",
@@ -777,7 +455,6 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formEdit",
                 "name": "$op",
                 "secondary": "$opAdd",
                 "category": "Function",
@@ -828,27 +505,6 @@
                 "comment": "「编辑专用」编辑模式中的专用主键，激活的Tab对应key信息。"
             },
             {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formEdit",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formAdd",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "$formFilter",
-                "category": "React.Component",
-                "comment": "「禁止」直接继承的属性。"
-            },
-            {
                 "source": "C",
                 "provider": "<DialogList/>",
                 "consumer": "$formAdd | $formEdit",
@@ -868,32 +524,9 @@
                 "source": "X",
                 "provider": "Redux状态树",
                 "consumer": "$formAdd | $formEdit",
-                "name": "$list",
-                "category": "DataObject",
-                "comment": "主列表呈现的「本页数据」。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "consumer": "$formAdd | $formEdit",
                 "name": "$items",
                 "category": "DataObject",
                 "comment": "保存在状态树上的激活部分的list.items信息。"
-            },
-            {
-                "source": "J",
-                "provider": "当前组件",
-                "consumer": "$formAdd | $formEdit",
-                "name": "$mockData",
-                "category": "Object",
-                "comment": "模拟数据。"
-            },
-            {
-                "source": "X",
-                "provider": "Redux状态树",
-                "name": "$query",
-                "category": "DataObject",
-                "comment": "主列表中的「查询条件」。"
             },
             {
                 "source": "C",
@@ -936,41 +569,6 @@
                 "comment": "直接调用了全局的Action来写状态树专用。"
             },
             {
-                "source": "E",
-                "provider": "Epic封装结果",
-                "name": "rxSearch",
-                "category": "Function",
-                "comment": "「必须」ComplexList的核心方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxInject",
-                "category": "Function",
-                "comment": "操作「属性连接器」，修改options或props属性。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxSet",
-                "category": "Function",
-                "comment": "操作「属性连接器」，读取state中的set = {}。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxEditPost",
-                "category": "Function",
-                "comment": "「编辑」初始化list.items的专用方法。"
-            },
-            {
-                "source": "R",
-                "provider": "当前组件",
-                "name": "rxDelete",
-                "category": "Function",
-                "comment": "「编辑」删除时的回调专用方法。"
-            },
-            {
                 "source": "A",
                 "provider": "Ant Design框架",
                 "consumer": "$formAdd | $formEdit",
@@ -989,7 +587,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd | $formEdit",
+                "consumer": "$formAdd",
                 "name": "$op",
                 "secondary": "$opSubAdd",
                 "category": "Function",
@@ -998,7 +596,7 @@
             {
                 "source": "Z",
                 "provider": "Zero框架绑定Op",
-                "consumer": "$formAdd | $formEdit",
+                "consumer": "$formEdit",
                 "name": "$op",
                 "secondary": "$opSubSave",
                 "category": "Function",

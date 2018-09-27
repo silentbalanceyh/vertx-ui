@@ -18,6 +18,14 @@ export default [
     "DialogList,table,zui.control.dialog-list,/control/dialog-list,2,zui.control.list",
     "TreeList,table,zui.control.tree-list,/control/tree-list,3,zui.control.list",
     "TabList,table,zui.control.tab-list,/control/tab-list,4,zui.control.list",
+    // 自定义组件：表格类
+    "Table类,align-center,zui.control.table,EXPAND,3,zui.control",
+    "TreeTable,table,zui.control.tree-table,/control/tree-table,1,zui.control.table",
+    // 自定义组件：辅助类
+    "Assist类,project,zui.control.assist,EXPAND,4,zui.control",
+    "DialogButton,tag,zui.control.dialog-button,/control/dialog-button,1,zui.control.assist",
+    "LoadingContent,loading-3-quarters,zui.control.loading-content,/control/loading-content,2,zui.control.assist",
+    "DynamicDialog,desktop,zui.control.dynamic-dialog,/control/dynamic-dialog,3,zui.control.assist",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用

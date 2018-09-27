@@ -16,8 +16,7 @@
             "效果图,tabEffect",
             "配置信息,tabConfig",
             "源代码,tabSource",
-            "属性树,tabAttribute",
-            "数据流,tabDiagram"
+            "属性树,tabAttribute"
         ]
     },
     "_toolbar": {

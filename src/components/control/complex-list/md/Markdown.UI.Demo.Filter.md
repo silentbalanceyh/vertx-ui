@@ -2,8 +2,6 @@
 
 #### 1.1.专用数据
 
-* **$list**：（DataObject）列表数据；
-* **$mockData**：（Object）模拟数据信息；
 * **$query**：（DataObject）查询参数，从`grid.query`节点中读取；
 
 #### 1.2.直接属性
@@ -24,13 +22,11 @@
 ```javascript
     import React from 'react'
     import Ux from 'ux';
-    import Op from './Op';
 
     const {zero} = Ux;
 
     @zero(Ux.rxEtat(require('./Cab.json'))
         .cab("UI.Demo.Filter")
-        .bind(Op)
         .raft(1)
         .form().to()
     )

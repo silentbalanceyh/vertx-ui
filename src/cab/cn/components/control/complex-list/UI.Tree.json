@@ -134,6 +134,10 @@
                                     "color": "#33af43"
                                 },
                                 {
+                                    "name": "op.delete.condition",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "op.connect.edit",
                                     "color": "#33af43"
                                 },
@@ -304,7 +308,7 @@
                 "option": "mock.enabled",
                 "comment": "是否开启Mock环境？",
                 "type": "Boolean",
-                "value": "--"
+                "value": "false"
             },
             {
                 "source": "O",
@@ -336,7 +340,7 @@
                 "option": "search.enabled",
                 "comment": "是否启用搜索功能",
                 "type": "Boolean",
-                "value": "--"
+                "value": "true"
             },
             {
                 "source": "O",
@@ -352,7 +356,7 @@
                 "option": "search.advanced",
                 "comment": "是否开启高级搜索",
                 "type": "Boolean",
-                "value": "--"
+                "value": "true"
             },
             {
                 "source": "O",
@@ -360,7 +364,7 @@
                 "option": "search.advanced.width",
                 "comment": "高级搜索中的抽屉表单整体宽度，使用CSS中的width语法",
                 "type": "String",
-                "value": "--"
+                "value": "30%"
             },
             {
                 "source": "O",
@@ -408,7 +412,15 @@
                 "option": "op.edit.delete",
                 "comment": "是否启用更新详细界面的删除按功能？",
                 "type": "Boolean",
-                "value": "--"
+                "value": "true"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "op.delete.condition",
+                "comment": "是否启用记录锁定模式，锁定记录不可删除？",
+                "type": "Boolean",
+                "value": "true"
             },
             {
                 "source": "O",
@@ -423,7 +435,7 @@
                 "name": "options",
                 "option": "op.connect.reset",
                 "comment": "将重置按钮作为外置连接点的id",
-                "type": "Boolean",
+                "type": "String",
                 "value": "--"
             },
             {

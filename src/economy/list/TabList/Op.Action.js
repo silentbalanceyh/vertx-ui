@@ -140,6 +140,8 @@ const rxSave = (reference) => {
                 rowRecord: {},
                 rowKey: undefined
             }));
+            // Mock专用处理，直接从$self中读取
+            Mock.mockfnRecord($self, false)(rowRecord);
         }
     }
 };
@@ -157,6 +159,29 @@ const rxClose = (reference, activekey) => () => {
     reference.setState(state);
     // 提交过后关闭窗口时删除树上数据
     Init.clearByKey(reference, activekey, {"grid.list": undefined});
+};
+
+const rxView = (reference, activekey) => (values = {}) => {
+    // 更新处理时的tab页
+    let {tabs = {}} = reference.state;
+    tabs = Ux.clone(tabs);
+    // 读取add引用
+    const tabView = tabs.items.filter(each => each.key === activekey);
+    // 读取编辑专用
+    const options = Init.readOption(reference);
+    if (options['tabs.edit']) {
+        // 切换视图专用
+        const pattern = options['tabs.edit'];
+        tabView[0].tab = Ux.formatExpr(pattern, values);
+        tabView[0].type = "edit";
+        tabView[0].key = values.key;
+        tabs.activeKey = values.key;
+    }
+    // 设置record数据，初始化编辑表单
+    const record = rxRecord(reference, values.key, values);
+    const view = Init.stateView("edit", values.key, reference);
+    const state = {tabs, ...view, record};
+    reference.setState(state);
 };
 const rxFilter = (reference = {}) => (value, event) => {
     const $query = Init.readQuery(reference);
@@ -195,13 +220,14 @@ const rxInput = (reference = {}) => (event) => {
 };
 export default {
     rxAdd,
+    rxEdit,
+    rxDelete,
     rxDeleteDetail,
     rxClose,
+    rxView,
     rxFilter,
     rxClear,
     rxInput,
     // 行处理
     rxSave,
-    rxEdit,
-    rxDelete,
 }

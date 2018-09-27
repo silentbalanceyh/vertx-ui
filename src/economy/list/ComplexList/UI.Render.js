@@ -1,11 +1,15 @@
 import React from 'react'
 import {Col, Row, Table, Tabs} from "antd";
 import Op from "./Op";
+import Ux from 'ux';
+import Fn from '../../_internal/Ix.Fn'
 import "./Cab.less";
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
     // 添加的时候activeKey就应该只有一个，就是item.key
+    // 「LIMIT」限制继承
+    const inherits = Ux.toLimitation(reference.props, Fn.Limit.ComplexList.Add);
     return Component ? (
         <Tabs.TabPane {...item}>
             <Component
@@ -13,7 +17,7 @@ const renderPageAdd = (reference, item = {}) => {
                 fnView={Op.rxView(reference, item.key)}
                 fnMock={Op.mockfnRecord(reference)}
                 $addKey={item.key}
-                {...reference.props}/>
+                {...inherits}/>
         </Tabs.TabPane>
     ) : false
 };
@@ -27,6 +31,8 @@ const renderPageEdit = (reference, item = {}) => {
      * 3.在关闭窗口的时候传入activeKey，需要关闭的是当前的窗口
      */
     const $inited = record[item.key] ? record[item.key] : {};
+    // 「LIMIT」限制继承
+    const inherits = Ux.toLimitation(reference.props, Fn.Limit.ComplexList.Edit);
     return Component ? (
         <Tabs.TabPane {...item}>
             {/**
@@ -38,7 +44,7 @@ const renderPageEdit = (reference, item = {}) => {
             <Component
                 fnClose={Op.rxClose(reference, item.key)}
                 fnMock={Op.mockfnRecord(reference, true)}
-                $inited={$inited} {...reference.props}/>
+                $inited={$inited} {...inherits}/>
         </Tabs.TabPane>
     ) : false
 };

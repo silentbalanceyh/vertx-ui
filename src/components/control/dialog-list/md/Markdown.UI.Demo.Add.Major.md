@@ -2,17 +2,13 @@
 
 #### 1.1.专用数据
 
-* **$list**：（DataObject）列表数据；
-* **$mockData**：（Object）模拟数据信息；
-* **$query**：（DataObject）查询参数，从`grid.query`节点中读取；
-
-#### 1.2.直接属性
-
+* **$addKey**：（UUID）当前临时的Key信息，系统生成，只在窗口打开时使用；
 * **$items**：（DataObject）状态树上专用数据，连接到 list.items ；
 
 #### 1.3.ComplexList传入（Function）
 
 * **fnClose**：关闭Tab页专用函数（关闭当前Tab页）；
+* **fnView()**:【无参数】直接从添加界面切换到编辑界面；
 * **fnMock**：Mock环境专用参数；
 
 需要特别注意的是，为了防止"子表单/主表单重复绑定问题"，所以在同时提供了ComplexList的主表单
