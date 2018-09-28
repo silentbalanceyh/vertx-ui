@@ -1,0 +1,32 @@
+{
+    "_page": {
+        "title": "使用动态模态框"
+    },
+    "_configuration": [
+        {
+            "span": 8,
+            "window": "String模式,提交,取消,false,600,false",
+            "state": "keyFirst",
+            "button": "String配置"
+        },
+        {
+            "span": 8,
+            "window": {
+                "title": "Json模式",
+                "okText": "OK按钮",
+                "cancelText": "取消按钮",
+                "visible": false,
+                "width": 600,
+                "maskClosable": false
+            },
+            "state": "keySecond",
+            "button": "Json配置"
+        },
+        {
+            "span": 8,
+            "window-error": "违法模式,提交,取消,false,600,false",
+            "state": "keyThird",
+            "button": "错误配置"
+        }
+    ]
+}

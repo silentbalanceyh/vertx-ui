@@ -18,7 +18,7 @@
                 "UC0006 - 列表类「Hoc」：TabList,/control/tab-list,true",
                 "UC0007 - 表格类「Pure」：TreeTable,/control/tree-table",
                 "UC0008 - 辅助类「Pure」：DialogButton,/control/dialog-button",
-                "UC0009 - 辅助类「Pure」：LoadingContent,/control/loading-content",
+                "UC0009 - 辅助类「Pure」：LoadingContent,/control/loading-content,true",
                 "UC0010 - 辅助类「Pure」：DynamicDialog,/control/dynamic-dialog",
                 "UC0011 - 交互类：ListSelector,/control/list-selector",
                 "UC0012 - 交互类：TableEditor,/control/table-editor",

@@ -5,6 +5,7 @@ import _control_address$selector from './control/address-selector/UI';
 import _control_complex$list from './control/complex-list/UI';
 import _control_dialog$button from './control/dialog-button/UI';
 import _control_dialog$list from './control/dialog-list/UI';
+import _control_dynamic$dialog from './control/dynamic-dialog/UI';
 import _control_help$card from './control/help-card/UI';
 import _control_list$selector from './control/list-selector/UI';
 import _control_loading$content from './control/loading-content/UI';
@@ -27,6 +28,7 @@ export default {
 	_control_complex$list,
 	_control_dialog$button,
 	_control_dialog$list,
+	_control_dynamic$dialog,
 	_control_help$card,
 	_control_list$selector,
 	_control_loading$content,
