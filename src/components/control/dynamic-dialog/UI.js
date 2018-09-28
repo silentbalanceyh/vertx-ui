@@ -23,7 +23,9 @@ class Component extends React.PureComponent {
             "UI.Demo",
             "UI.Demo.js"
         )(
-            <Demo/>
+            <Demo reference={this}
+                  rxInject={Fn.injectOptFun(this)}
+                  rxSet={Fn.injectSet(this)}/>
         )
     }
 }

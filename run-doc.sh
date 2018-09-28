@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 # 两个环境变量，生成API文档的目录和API文档服务器的端口
-export JS_OUT=docs/api
+export JS_OUT=document/api
 export JS_PORT=5000
 echo "[Zero UI] Start to generate Api documents!"
 # 删除原始目录

@@ -1,5 +1,5 @@
 {
-    "_title": "UC0009 - 「自定义组件」LoadingContent",
+    "_title": "UC0010 - 「自定义组件」DynamicDialog",
     "_attribute": {
         "props": {
         },
@@ -14,7 +14,8 @@
             }
         ]
     },
-    "_datalist": {},
+    "_datalist": {
+    },
     "_diagram": {
         "items": {
             "nodes": [],

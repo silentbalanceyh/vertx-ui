@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
         const {id = "g6Tree"} = this.props;
         const config = Op.parseConfig(this);
         if (id && config) {
-            Ux.G.drawTree(id, config, "autoZoom");
+            Ux.G.drawTree(id, config, config.fit ? config.fit : "autoZoom");
         }
     }
 
