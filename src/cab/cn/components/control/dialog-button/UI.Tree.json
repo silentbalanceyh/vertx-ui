@@ -1,8 +1,245 @@
 {
     "_configuration": {
         "code": "DialogButton",
-        "data": [],
-        "items": {},
-        "layout": {}
+        "data": [
+            {
+                "source": "P",
+                "name": "children",
+                "comment": "子组件",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$content",
+                "comment": "子组件，这种模式下是以属性传递，但children优先",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "E",
+                "name": "rxOk",
+                "comment": "$mode为DIALOG时生效，点击窗口中的确认对应的回调函数。",
+                "type": "Function",
+                "value": "--"
+            },
+            {
+                "source": "E",
+                "name": "rxClick",
+                "comment": "点击按钮本身的回调函数。",
+                "type": "Function",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$button",
+                "comment": "当前按钮中的配置信息",
+                "type": "String | Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "$button",
+                "option": "text",
+                "comment": "按钮中呈现的文字信息",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$mode",
+                "comment": "当前窗口的模式，主要分三种：DIALOG | DRAWER | POPOVER",
+                "type": "String",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$dialog",
+                "comment": "当前窗口的配置信息",
+                "type": "String | Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "$dialog",
+                "option": "onOk",
+                "comment": "「窗口」$mode = DIALOG时，确认按钮对应的按钮ID，执行「Connect」机制。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "$dialog",
+                "option": "width",
+                "comment": "「抽屉|浮游窗」$mode = DRAWER | POPOVER时，抽屉宽度，浮游窗宽度",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "$dialog",
+                "option": "closable",
+                "comment": "「浮游窗」$mode = POPOVER时，是否显示关闭按钮",
+                "type": "Boolean",
+                "value": "true"
+            }
+        ],
+        "items": {
+            "name": "DialogButton组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#0099CC",
+                    "children": [
+                        {
+                            "name": "children",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "rxOk",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "rxClick",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$mode",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$content",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$button",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "key",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "text",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "type",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "icon",
+                                    "color": "#ff8626"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "$dialog",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "$mode = DIALOG",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "title",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "okText",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "cancelText",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "visible",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "width",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "maskClosable",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "onOk",
+                                            "color": "#33af43"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "$mode = POPOVER",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "title",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "placement",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "width",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "closable",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "visible",
+                                            "color": "#ff8626"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "$mode = DRAWER",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "title",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "placement",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "width",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "closable",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "maskClosable",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "visible",
+                                            "color": "#ff8626"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 80,
+            "vgap": 10,
+            "height": 800
+        }
     }
 }

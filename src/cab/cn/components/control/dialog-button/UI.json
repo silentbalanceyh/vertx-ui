@@ -7,6 +7,12 @@
         }
     },
     "_datatree": {
+        "title": "<Root>",
+        "children": [
+            {
+                "title": "UI.Demo.js"
+            }
+        ]
     },
     "_datalist": {
     },

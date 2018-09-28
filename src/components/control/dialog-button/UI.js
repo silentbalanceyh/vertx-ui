@@ -14,8 +14,14 @@ const {zero} = Ux;
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Fn.markdown(this, require("./md/Markdown.UI.Demo.md"))
+    }
+
     render() {
-        return Fn.ui(this, "UI.Tree"
+        return Fn.ui(this, "UI.Tree",
+            "UI.Demo",
+            "UI.Demo.js"
         )(
             <Demo reference={this}
                   rxInject={Fn.injectOptFun(this)}
