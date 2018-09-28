@@ -1,49 +1,57 @@
 import React from 'react'
-import {Button} from 'antd'
 import {DynamicDialog} from "web";
+import {Button, Dropdown, Icon, Menu} from 'antd';
+import Op from './Op';
 import Ux from 'ux';
-import U from 'underscore';
+
+const renderDropdown = (reference) => {
+    const {button = {}, items = []} = reference.state;
+    const {text, ...rest} = button;
+    return (
+        <Dropdown overlay={
+            <Menu onClick={rest.onClick(button)}>
+                {items.map(item => (
+                    <Menu.Item key={item.key}>
+                        {item.icon ?
+                            <Icon type={item.icon}/> : false} {item.text}
+                    </Menu.Item>
+                ))}
+            </Menu>
+        }>
+            <Button type={rest.type}>
+                {text ? text : ""}<Icon type={"down"}/>
+            </Button>
+        </Dropdown>
+    )
+};
 
 class Component extends React.PureComponent {
-    constructor(props) {
-        super(props);
-        this.state = {};
-    }
 
     componentDidMount() {
-        this.setState({visible: false})
+        const state = Op.initState(this);
+        this.setState(state);
     }
 
     render() {
-        const {$config = {}, $form: Component, $datum, $inited, fnConfirm} = this.props;
-        const button = Ux.clone($config.button);
-        const {text, ...rest} = button;
-        const {visible = false} = this.state;
-
-        let window = {};
-        if ($config.window) {
-            window = Ux.clone($config.window);
-            window.onCancel = () => this.setState({visible: false});
-            if (U.isFunction(fnConfirm)) {
-                window.onOk = fnConfirm;
-            }
-        }
-        return (
-            <span>
-                <Button {...rest} onClick={event => {
-                    event.preventDefault();
-                    this.setState({visible: true})
-                }}>{text ? text : false}</Button>
-                {$config.window ? (
-                    <DynamicDialog $visible={visible} $dialog={window}>
-                        {Component && visible ? (
-                            <Component $inited={$inited} $datum={$datum}
-                                       fnClose={() => this.setState({visible: false})}/>
-                        ) : false}
-                    </DynamicDialog>
-                ) : false}
-            </span>
-        )
+        return Ux.fxRender(this, () => {
+            const {
+                button = {},
+                mode = "BUTTON",
+                render
+            } = this.state;
+            // 按钮专用处理
+            const {text, onClick, ...rest} = button;
+            return (
+                <span>
+                    {"BUTTON" === mode ? (
+                        <Button {...rest} onClick={onClick(button)}>
+                            {text ? text : ""}
+                        </Button>
+                    ) : renderDropdown(this)}
+                    {render(this)}
+                </span>
+            );
+        });
     }
 }
 

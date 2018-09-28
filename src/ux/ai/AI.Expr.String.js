@@ -154,8 +154,8 @@ const aiExprWindow = (literal = "") => {
     if (item.hasOwnProperty('key')) {
         delete item['key']
     }
-    if (item.hasOwnProperty('visible')) item.visible = Boolean(item.visible);
-    if (item.hasOwnProperty('maskClosable')) item.visible = Boolean(item.visible);
+    if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
+    if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
     if (item.hasOwnProperty('width')) item.width = Value.valueInt(item.width);
     return item;
 };
@@ -247,6 +247,9 @@ const aiExprOp = (button = "") => {
     }
 };
 const aiExprFilter = (filter = "") => parseItem(filter, "filter");
+const aiExprDrawer = (drawer = "") => parseItem(drawer, "drawer");
+const aiExprPopover = (popover = "") => parseItem(popover, "popover");
+const aiExprAction = (popover = "") => parseItem(popover, "action");
 export default {
     aiExprFilter,
     aiExprHelp,
@@ -258,9 +261,14 @@ export default {
     aiExprOp,
     aiExprDirect,
     aiExprField,
-    aiExprWindow,
     aiExprAjax,
     aiExprTabs,
+
+    // 解析Dialog,Drawer,Popover
+    aiExprAction,
+    aiExprDrawer,
+    aiExprPopover,
+    aiExprWindow,
     // 对象解析
     aiMetaOption,
     aiMetaColumn,

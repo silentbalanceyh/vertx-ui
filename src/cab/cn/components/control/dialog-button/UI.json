@@ -1,5 +1,5 @@
 {
-    "_title": "UC0013 - 「自定义组件」AddressSelector",
+    "_title": "UC0008 - 「自定义组件」DialogButton",
     "_attribute": {
         "props": {
         },
@@ -7,11 +7,9 @@
         }
     },
     "_datatree": {
-        "title": "<Root>",
-        "children": [
-        ]
     },
-    "_datalist": {},
+    "_datalist": {
+    },
     "_diagram": {
         "items": {
             "nodes": [],
