@@ -2,24 +2,21 @@
     "_page": {
         "title": "DialogButton - 按钮内嵌弹框"
     },
-    "_tabs": {
-        "defaultActiveKey": "keyChildDialog",
-        "items": [
-            "「子元素」- 弹框,keyChildDialog",
-            "「子元素」- 浮游,keyChildFlow",
-            "「子元素」- 抽屉,keyChildDrawer"
-        ]
-    },
     "_configuration": {
         "0": {
-            "button": "opButton,普通按钮,,check",
-            "dialog": "普通窗口,保存,取消,false,400,false,$opCommon",
-            "mode": "DIALOG",
-            "items": [
-                "opSave,保存,,save",
-                "opAdd,添加,,plus",
-                "opDelete,删除,,delete,是否删除该记录信息？"
-            ]
+            "button": "opButton,弹框,,check",
+            "dialog": "窗口,保存,取消,false,400,false,$opCommon",
+            "mode": "DIALOG"
+        },
+        "1": {
+            "button": "opButton,浮游窗口,,check",
+            "dialog": "浮游窗口,right,30%,true,false,false",
+            "mode": "POPOVER"
+        },
+        "2": {
+            "button": "opButton,抽屉,,check",
+            "dialog": "抽屉,right,120px,true,false",
+            "mode": "DRAWER"
         }
     }
 }

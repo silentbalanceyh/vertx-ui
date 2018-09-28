@@ -76,8 +76,21 @@ export default {
         "maskClosable",
         "onOk"
     ],
-    "drawer": [],
-    "popover": [],
+    "drawer": [
+        "title",
+        "placement",
+        "width",
+        "closable",
+        "maskClosable",
+        "visible"
+    ],
+    "popover": [
+        "title",
+        "placement",
+        "width",
+        "closable",
+        "visible"
+    ],
     "ajax": [
         "method",
         "uri",

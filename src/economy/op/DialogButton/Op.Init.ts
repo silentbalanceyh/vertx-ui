@@ -20,17 +20,6 @@ const parseButton = (reference) => {
     };
     return config;
 };
-const parseItems = (reference) => {
-    const {$items = []} = reference.props;
-    if ($items) {
-        const config = Ux.clone($items);
-        const items = [];
-        config.map(Ux.aiExprAction).forEach(item => items.push(item));
-        return items;
-    } else {
-        return [];
-    }
-};
 const parseDialog = (reference) => {
     const {$dialog = {}, rxOk} = reference.props;
     let config = Ux.aiExprWindow($dialog);
@@ -52,9 +41,24 @@ const parseDialog = (reference) => {
 };
 const parseDrawer = (reference) => {
     const {$dialog = {}} = reference.props;
+    let config = Ux.aiExprDrawer($dialog);
+    // 拷贝配置
+    config = Ux.clone(config);
+    config.onClose = (event) => {
+        event.preventDefault();
+        reference.setState({visible: false});
+    };
+    return config;
 };
 const parsePopover = (reference) => {
     const {$dialog = {}} = reference.props;
+    let config = Ux.aiExprPopover($dialog);
+    config = Ux.clone(config);
+    config.onClose = (event) => {
+        event.preventDefault();
+        reference.setState({visible: false});
+    };
+    return config;
 };
 const configuration = {
     DIALOG: parseDialog,
@@ -63,10 +67,8 @@ const configuration = {
 };
 const initState = (reference) => {
     // 1.判断当前组件是哪种Button，使用了哪种Dialog
-    const {$items, $mode} = reference.props;
+    const {$mode} = reference.props;
     // 2.提取模式
-    // BUTTON, DROPDOWN
-    const mode = $items ? "DROPDOWN" : "BUTTON";
     // DIALOG, DRAWER, POPOVER
     const modeDialog = $mode;
     // 3.模式处理
@@ -74,22 +76,17 @@ const initState = (reference) => {
     // 4.Window的解析不一致
     const executor = configuration[modeDialog];
     const render = Renders[modeDialog];
-    const $buttonCheck = Ux.immutable(["BUTTON", "DROPDOWN"]);
-    if (U.isFunction(executor) && U.isFunction(render)
-        && $buttonCheck.contains(mode)) {
+    if (U.isFunction(executor) && U.isFunction(render)) {
         // 5.窗口配置处理
         const dialog = executor(reference);
         // 6.处理模式
         return {
-            button, dialog, mode, items: parseItems(reference),
+            button, dialog,
             visible: false, render
         }
     } else {
         // Error
-        if (!executor) {
-            return {error: Ux.E.fxMessageError(10092, modeDialog)};
-        }
-        return {error: Ux.E.fxMessageError(10091, mode)};
+        return {error: Ux.E.fxMessageError(10092, modeDialog)};
     }
 };
 export default {

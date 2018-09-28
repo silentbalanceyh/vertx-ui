@@ -149,17 +149,6 @@ const aiMetaField = (item = {}) => {
     return item;
 };
 
-const aiExprWindow = (literal = "") => {
-    const item = parseItem(literal, "window");
-    if (item.hasOwnProperty('key')) {
-        delete item['key']
-    }
-    if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
-    if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
-    if (item.hasOwnProperty('width')) item.width = Value.valueInt(item.width);
-    return item;
-};
-
 const aiExprAjax = (ajax = {}) => {
     // 默认是POST方法
     let item = ajax;
@@ -247,8 +236,35 @@ const aiExprOp = (button = "") => {
     }
 };
 const aiExprFilter = (filter = "") => parseItem(filter, "filter");
-const aiExprDrawer = (drawer = "") => parseItem(drawer, "drawer");
-const aiExprPopover = (popover = "") => parseItem(popover, "popover");
+const aiExprWindow = (literal = "") => {
+    const item = parseItem(literal, "window");
+    if (item.hasOwnProperty('key')) {
+        delete item['key']
+    }
+    if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
+    if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
+    if (item.hasOwnProperty('width')) item.width = Value.valueInt(item.width);
+    return item;
+};
+const aiExprDrawer = (drawer = "") => {
+    const item = parseItem(drawer, "drawer");
+    if (item.hasOwnProperty('key')) {
+        delete item['key']
+    }
+    if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
+    if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
+    if (item.hasOwnProperty('closable')) item.closable = "true" === (item.closable);
+    return item;
+};
+const aiExprPopover = (popover = "") => {
+    const item = parseItem(popover, "popover");
+    if (item.hasOwnProperty('key')) {
+        delete item['key']
+    }
+    if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
+    if (item.hasOwnProperty('closable')) item.closable = "true" === (item.closable);
+    return item;
+};
 const aiExprAction = (popover = "") => parseItem(popover, "action");
 export default {
     aiExprFilter,

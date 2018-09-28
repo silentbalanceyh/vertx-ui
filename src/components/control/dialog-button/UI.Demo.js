@@ -7,19 +7,11 @@ const {zero} = Ux;
 const renderPanel = (config) => {
     const $config = Ux.clone(config);
     return (
-        Ux.aiGrid([12, 12],
-            <DialogButton $button={$config.button}
-                          $dialog={$config.dialog}
-                          $mode={$config.mode}>
-                BUTTON, DIALOG
-            </DialogButton>,
-            <DialogButton $button={config.button}
-                          $dialog={config.dialog}
-                          $mode={config.mode}
-                          $items={config.items}>
-                DROPDOWN, DIALOG
-            </DialogButton>
-        )
+        <DialogButton $button={$config.button}
+                      $dialog={$config.dialog}
+                      $mode={$config.mode}>
+            BUTTON, {$config.mode}
+        </DialogButton>
     )
 };
 
@@ -32,12 +24,11 @@ class Component extends React.PureComponent {
         const configuration = Ux.fromHoc(this, "configuration");
         return (
             <PageCard reference={this}>
-                {Ux.auiTab(this)
-                    .type("card")
-                    .to(
-                        renderPanel(configuration[0])
-                    )
-                }
+                {Ux.aiGrid([8, 8, 8],
+                    renderPanel(configuration[0]),
+                    renderPanel(configuration[1]),
+                    renderPanel(configuration[2])
+                )}
             </PageCard>
         )
     }
