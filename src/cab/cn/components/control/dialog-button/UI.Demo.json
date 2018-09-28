@@ -1,0 +1,22 @@
+{
+    "_page": {
+        "title": "DialogButton - 按钮内嵌弹框"
+    },
+    "_configuration": {
+        "0": {
+            "button": "opButton,弹框,,check",
+            "dialog": "窗口,保存,取消,false,400,false,$opCommon",
+            "mode": "DIALOG"
+        },
+        "1": {
+            "button": "opButton,浮游窗口,,check",
+            "dialog": "浮游窗口,right,30%,true,false,false",
+            "mode": "POPOVER"
+        },
+        "2": {
+            "button": "opButton,抽屉,,check",
+            "dialog": "抽屉,right,120px,true,false",
+            "mode": "DRAWER"
+        }
+    }
+}

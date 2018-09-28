@@ -7,7 +7,11 @@ const fxRender = (reference, render) => {
     if (error) {
         return fxError(error);
     } else {
-        return render()
+        if (reference.state) {
+            return render()
+        } else {
+            return false;
+        }
     }
 };
 export default {

@@ -80,6 +80,23 @@ class Tab {
         return this;
     }
 
+    type(value) {
+        this.config.type = value;
+        return this;
+    }
+
+    extra(value) {
+        this.config.tabBarExtraContent = value;
+        return this;
+    }
+
+    switch(fnSwitch) {
+        if (U.isFunction(fnSwitch)) {
+            this.config.onTabChange = fnSwitch;
+        }
+        return this;
+    }
+
     to(...children) {
         Sure.ensureStream(this);
         const {items = [], activeState, ...rest} = this.config;

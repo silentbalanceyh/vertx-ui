@@ -93,7 +93,9 @@ const fnError = {
     10087: (fnListItem) => `[ ERR-10087 ] 当前操作要求 props 中包含名为 "fnListItem" 的特殊函数，该函数缺失：${fnListItem}`,
     10088: (fnPromise) => `[ ERR-10088 ] 当前操作执行过后的返回结果必须是一个 "Promise" 对象，当前对象：${fnPromise}`,
     10089: (branch) => `[ ERR-10089 ] (Web) 当前组件中的 tree 配置丢失了 "branch", ${branch}`,
-    10090: (name) => `[ ERR-10090 ] (Web) 当前自定义组件中的 ${name} 属性丢失，请检查你的传入配置。`
+    10090: (name) => `[ ERR-10090 ] (Web) 当前自定义组件中的 ${name} 属性丢失，请检查你的传入配置。`,
+    10091: (modeButton) => `[ ERR-10091 ] (Web) 当前 DialogButton 组件的按钮模式不对，仅支持：BUTTON / DROPDOWN, current = ${modeButton}`,
+    10092: (modeDialog) => `[ ERR-10092 ] (Web) 当前 DialogButton 组件的窗口模式不对，仅支持：DIALOG / DRAWER / POPOVER, current = ${modeDialog}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

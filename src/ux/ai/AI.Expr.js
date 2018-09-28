@@ -53,6 +53,13 @@ export default {
         "disabledKey",
         "$KV$"
     ],
+    "action": [
+        "key",
+        "text",
+        "type",
+        "icon",
+        "confirm"
+    ],
     "steps": [
         "title",
         "key",
@@ -68,6 +75,21 @@ export default {
         "width",
         "maskClosable",
         "onOk"
+    ],
+    "drawer": [
+        "title",
+        "placement",
+        "width",
+        "closable",
+        "maskClosable",
+        "visible"
+    ],
+    "popover": [
+        "title",
+        "placement",
+        "width",
+        "closable",
+        "visible"
     ],
     "ajax": [
         "method",
