@@ -10,12 +10,12 @@
         },
         "1": {
             "button": "opButton,浮游窗口,,check",
-            "dialog": "浮游窗口,right,30%,true,false,false",
+            "dialog": "浮游窗口,right,400px,true,false,false",
             "mode": "POPOVER"
         },
         "2": {
             "button": "opButton,抽屉,,check",
-            "dialog": "抽屉,right,120px,true,false",
+            "dialog": "抽屉,right,30%,true,false",
             "mode": "DRAWER"
         }
     }

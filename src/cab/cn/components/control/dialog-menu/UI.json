@@ -1,0 +1,19 @@
+{
+    "_title": "UC0005 - 「自定义组件」TreeList",
+    "_attribute": {
+        "props": {
+        },
+        "hoc": {
+        }
+    },
+    "_datatree": {
+    },
+    "_datalist": {
+    },
+    "_diagram": {
+        "items": {
+            "nodes": [],
+            "edges": []
+        }
+    }
+}
