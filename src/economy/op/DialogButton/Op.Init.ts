@@ -7,15 +7,12 @@ const parseButton = (reference) => {
     const config = Ux.aiExprAction($button);
     config.onClick = (config = {}) => (event) => {
         // 二义性处理
-        const args: any = {config};
         if (U.isFunction(event.preventDefault)) {
             event.preventDefault();
-        } else {
-            args.data = event;
         }
         reference.setState({visible: true});
         if (U.isFunction(rxClick)) {
-            rxClick(args);
+            rxClick({config});
         }
     };
     return config;
@@ -68,14 +65,11 @@ const configuration = {
 const initState = (reference) => {
     // 1.判断当前组件是哪种Button，使用了哪种Dialog
     const {$mode} = reference.props;
-    // 2.提取模式
-    // DIALOG, DRAWER, POPOVER
-    const modeDialog = $mode;
-    // 3.模式处理
+    // 2.按钮处理
     const button = parseButton(reference);
-    // 4.Window的解析不一致
-    const executor = configuration[modeDialog];
-    const render = Renders[modeDialog];
+    // 3.Window的解析不一致
+    const executor = configuration[$mode];
+    const render = Renders[$mode];
     if (U.isFunction(executor) && U.isFunction(render)) {
         // 5.窗口配置处理
         const dialog = executor(reference);
@@ -86,7 +80,7 @@ const initState = (reference) => {
         }
     } else {
         // Error
-        return {error: Ux.E.fxMessageError(10092, modeDialog)};
+        return {error: Ux.E.fxMessageError(10092, $mode)};
     }
 };
 export default {

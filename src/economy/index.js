@@ -42,3 +42,4 @@ export {default as TabList} from './list/TabList/UI';
 
 export {default as TreeTable} from './table/TreeTable/UI';
 export {default as DialogButton} from './op/DialogButton/UI';
+export {default as DialogMenu} from './op/DialogMenu/UI';

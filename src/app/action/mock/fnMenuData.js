@@ -24,8 +24,9 @@ export default [
     // 自定义组件：辅助类
     "Assist类,project,zui.control.assist,EXPAND,4,zui.control",
     "DialogButton,tag,zui.control.dialog-button,/control/dialog-button,1,zui.control.assist",
-    "LoadingContent,loading-3-quarters,zui.control.loading-content,/control/loading-content,2,zui.control.assist",
-    "DynamicDialog,desktop,zui.control.dynamic-dialog,/control/dynamic-dialog,3,zui.control.assist",
+    "DialogMenu,tag,zui.control.dialog-menu,/control/dialog-menu,2,zui.control.assist",
+    "LoadingContent,loading-3-quarters,zui.control.loading-content,/control/loading-content,3,zui.control.assist",
+    "DynamicDialog,desktop,zui.control.dynamic-dialog,/control/dynamic-dialog,4,zui.control.assist",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用
