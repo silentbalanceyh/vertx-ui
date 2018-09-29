@@ -1,5 +1,37 @@
 {
     "_page": {
-        "title": "TreeList - 「树过滤」专用多级列表"
+        "title": "DialogMenu - 菜单内嵌弹框"
+    },
+    "_configuration": {
+        "0": {
+            "button": "opButton,弹框,,check",
+            "mode": "DIALOG",
+            "items": [
+                {
+                    "dialog": "窗口,添加,取消,false,400,false,$opCommon",
+                    "component": "$formAdd",
+                    "button": "itemAdd,添加,,plus"
+                },
+                {
+                    "dialog": "窗口,保存,取消,false,400,false,$opSave",
+                    "component": "$formEdit",
+                    "button": "itemSave,保存,,save"
+                },
+                {
+                    "confirm": "确认删除该记录,确认,取消",
+                    "function": "rxDeleteItem",
+                    "button": "itemDelete,删除,,delete"
+                }
+            ]
+        },
+        "1": {
+            "button": "opButton,抽屉,,check",
+            "mode": "DRAWER",
+            "items": [
+                {
+                    "dialog": "抽屉,right,30%,true,false"
+                }
+            ]
+        }
     }
 }

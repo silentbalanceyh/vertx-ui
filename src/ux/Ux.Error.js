@@ -95,7 +95,9 @@ const fnError = {
     10089: (branch) => `[ ERR-10089 ] (Web) 当前组件中的 tree 配置丢失了 "branch", ${branch}`,
     10090: (name) => `[ ERR-10090 ] (Web) 当前自定义组件中的 ${name} 属性丢失，请检查你的传入配置。`,
     10091: (modeButton) => `[ ERR-10091 ] (Web) 当前 DialogButton 组件的按钮模式不对，仅支持：BUTTON / DROPDOWN, current = ${modeButton}`,
-    10092: (modeDialog) => `[ ERR-10092 ] (Web) 当前 DialogButton 组件的窗口模式不对，仅支持：DIALOG / DRAWER / POPOVER, current = ${modeDialog}`
+    10092: (modeDialog) => `[ ERR-10092 ] (Web) 当前 DialogButton 组件的窗口模式不对，仅支持：DIALOG / DRAWER / POPOVER, current = ${modeDialog}`,
+    10093: (mode) => `[ ERR-10093 ] (Web) 当前 DialogMenu 组件的窗口模式不对，仅支持：DIALOG / DRAWER, current = ${mode}`,
+    10094: (length) => `[ ERR-10094 ] (Web) 当前 DialogMenu 组件的属性 '$items' 的长度必须大于1，current = ${length}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {
