@@ -1,9 +1,12 @@
 import React from 'react'
+import {Button} from 'antd';
 
 class Component extends React.PureComponent {
     render() {
         return (
-            <div>Add Form</div>
+            <Button onClick={(event) => {
+                this.props.fnClose()
+            }}>Add fnClose</Button>
         )
     }
 }

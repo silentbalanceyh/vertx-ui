@@ -16,7 +16,6 @@ const parseDialog = (reference, item: any = {}) => {
         event.preventDefault();
         let state = Ux.clone(reference.state);
         state.visible[item.key] = false;
-        console.info(reference);
         reference.setState(state);
     };
     const id = config.onOk;
@@ -26,7 +25,13 @@ const parseDialog = (reference, item: any = {}) => {
     return config;
 };
 const parseDrawer = (reference, item) => {
-    let config = Ux.aiExprDrawer(item);
+    let config = Ux.aiExprDrawer(item.dialog);
+    config.onClose = (event) => {
+        event.preventDefault();
+        let state = Ux.clone(reference.state);
+        state.visible[item.key] = false;
+        reference.setState(state);
+    };
     return config;
 };
 const configuration = {
@@ -44,6 +49,7 @@ const initState = (reference) => {
     if (0 < $items.length && ("DIALOG" === $mode || "DRAWER" === $mode)) {
         const items = [];
         const renders = {};
+        const windows = {};
         const visible = {};
         itemsConfig.forEach(item => {
             // 解析对应的菜单项
@@ -53,10 +59,10 @@ const initState = (reference) => {
             if (item.hasOwnProperty("dialog")) {
                 // 使用executor解析窗口
                 const executor = configuration[$mode];
-                const render = Rdr[$mode];
                 item.dialog = executor(reference, item);
                 item.type = "DIALOG";
-                renders[item.key] = render(reference, item);
+                renders[item.key] = Rdr.renderItem(reference, item);
+                windows[item.key] = Rdr[$mode](reference, item);
                 visible[item.key] = false;
             } else if (item.hasOwnProperty("confirm")) {
                 // 删除专用模式
@@ -69,7 +75,7 @@ const initState = (reference) => {
                     if (formatted[2]) confirm.cancelText = formatted[2];
                     item.confirm = confirm;
                 }
-                renders[item.key] = Rdr.renderConfirm(reference, item);
+                renders[item.key] = Rdr.renderItem(reference, item);
             } else {
                 item.type = "DIRECT";
             }
@@ -80,7 +86,7 @@ const initState = (reference) => {
             // 渲染
             renders,
             // 呈现，DIALOG专用
-            visible
+            visible, windows
         }
     } else {
         // Error

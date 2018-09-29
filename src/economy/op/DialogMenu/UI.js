@@ -6,28 +6,34 @@ import {Button, Dropdown, Icon, Menu} from 'antd'
 
 class Component extends React.PureComponent {
     render() {
+        const reference = this;
         return Ux.fxRender(this, () => {
-            const {button = {}, items = [], renders = {}, visible = {}} = this.state;
+            const {
+                button = {}, items = [],
+                renders = {}, windows = {},
+            } = reference.state;
             button.icon = "down";
             const {text, icon, onClick, ...rest} = button;
-            // console.info(renders, items);
-            console.info(visible);
             return (
-                <Dropdown overlay={
-                    <Menu onClick={onClick}>
-                        {items.map(item => (
-                            <Menu.Item key={item.key}>
-                                {U.isFunction(renders[item.key]) ? (
-                                    renders[item.key]()
-                                ) : false}
-                            </Menu.Item>
-                        ))}
-                    </Menu>
-                }>
-                    <Button {...rest}>
-                        {text ? text : ""}&nbsp;<Icon type={icon}/>
-                    </Button>
-                </Dropdown>
+                <span>
+                    <Dropdown overlay={
+                        <Menu onClick={onClick} key={Ux.randomUUID()}>
+                            {items.filter(item => U.isFunction(renders[item.key]))
+                                .map(item => (
+                                    <Menu.Item key={item.key}>
+                                        {renders[item.key]()}
+                                    </Menu.Item>
+                                ))}
+                        </Menu>
+                    }>
+                        <Button {...rest}>
+                            {text ? text : ""}&nbsp;<Icon type={icon}/>
+                        </Button>
+                    </Dropdown>
+                    {items.filter(item => windows.hasOwnProperty(item.key))
+                        .filter(item => U.isFunction(windows[item.key]))
+                        .map(item => windows[item.key]())}
+                </span>
             )
         })
     };

@@ -1,41 +1,58 @@
 import React from 'react'
-import {Icon} from 'antd'
+import {Drawer, Icon} from 'antd'
 import DynamicDialog from '../../dialog/DynamicDialog/UI';
+import Ux from "ux";
 
-const _renderPure = (button = {}, jsx) => {
-    const {text, icon} = button;
+const getChildren = (reference, item) => {
+    const {$components = {}} = reference.props;
+    const componentKey = item.component;
+    const Component = $components[componentKey];
+    if (Component) {
+        return (
+            <Component fnClose={() => {
+                const state = Ux.clone(reference.state);
+                state.visible[item.key] = false;
+                reference.setState(state);
+            }} {...Ux.toUniform(reference.props)}/>
+        )
+    } else return false;
+};
+
+const renderItem = (reference, item = {}) => () => {
+    const {text, icon} = item.button;
     return (
         <span>
             {icon ? <Icon type={icon}/> : false}&nbsp;&nbsp;
             {text ? text : ""}
-            {jsx ? jsx : false}
         </span>
     );
 };
 
-const renderConfirm = (reference, item = {}) => () =>
-    _renderPure(item.button);
-
 const renderDialog = (reference, item) => () => {
     const {visible = {}} = reference.state;
     const $visible = visible[item.key];
-    return _renderPure(item.button, (
-        <DynamicDialog $dialog={item.dialog} $visible={$visible}>
-            {item.key}
+    const jsx = getChildren(reference, item);
+    return (
+        <DynamicDialog key={item.key}
+                       $dialog={item.dialog}
+                       $visible={$visible}>
+            {jsx}
         </DynamicDialog>
-    ));
+    );
 };
 const renderDrawer = (reference, item) => () => {
-
-    return false;
-};
-const renderDirect = (reference, item) => () => {
-
-    return false;
+    const {visible = {}} = reference.state;
+    const $visible = visible[item.key];
+    const jsx = getChildren(reference, item);
+    return (
+        <Drawer key={item.key}
+                {...item.dialog} visible={$visible}>
+            {jsx}
+        </Drawer>
+    );
 };
 export default {
+    renderItem,
     DIALOG: renderDialog,
     DRAWER: renderDrawer,
-    renderConfirm,
-    renderDirect,
 }

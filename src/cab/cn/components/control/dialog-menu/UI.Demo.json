@@ -29,7 +29,19 @@
             "mode": "DRAWER",
             "items": [
                 {
-                    "dialog": "抽屉,right,30%,true,false"
+                    "dialog": "添加窗口,right,400px,true,false,false",
+                    "component": "$formAdd",
+                    "button": "itemAdd,添加,,plus"
+                },
+                {
+                    "dialog": "更新窗口,right,400px,true,false,false",
+                    "component": "$formEdit",
+                    "button": "itemSave,保存,,save"
+                },
+                {
+                    "confirm": "确认删除该记录,确认,取消",
+                    "function": "rxDeleteItem",
+                    "button": "itemDelete,删除,,delete"
                 }
             ]
         }
