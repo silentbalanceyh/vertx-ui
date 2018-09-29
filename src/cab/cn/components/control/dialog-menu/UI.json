@@ -7,6 +7,31 @@
         }
     },
     "_datatree": {
+        "title": "<Root>",
+        "children": [
+            {
+                "title": "UI.Demo.js",
+                "children": [
+                    {
+                        "title": "UI.Form.Add.js"
+                    },
+                    {
+                        "title": "UI.Form.Edit.js"
+                    }
+                ]
+            },
+            {
+                "title": "Op.ts",
+                "children": [
+                    {
+                        "title": "Op.Act.ts"
+                    },
+                    {
+                        "title": "Op.Delete.ts"
+                    }
+                ]
+            }
+        ]
     },
     "_datalist": {
     },
