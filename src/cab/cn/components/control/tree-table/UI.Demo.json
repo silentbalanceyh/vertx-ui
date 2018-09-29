@@ -1,0 +1,87 @@
+{
+    "_page": {
+        "title": "TreeTable - 可操作的树状表"
+    },
+    "_configuration": {
+        "table": {
+            "columns": [
+                {
+                    "title": "三级归类",
+                    "dataIndex": "1.name",
+                    "level": 1,
+                    "config": {
+                        "window": "三级归类管理,提交,取消,false,600,false",
+                        "form": "$formThird",
+                        "op.enabled": true,
+                        "op.edit": true,
+                        "op.add": true,
+                        "op.delete": "删除该三级归类将同时删除所有子节点，确认？",
+                        "op.delete.fun": "opDelRank"
+                    }
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "1.weight",
+                    "level": 1
+                },
+                {
+                    "title": "二级归类",
+                    "dataIndex": "2.name",
+                    "level": 2,
+                    "config": {
+                        "window": "二级归类管理,提交,取消,false,600,false",
+                        "form": "$formSecond",
+                        "op.enabled": true,
+                        "op.edit": true,
+                        "op.add": true,
+                        "op.delete": "删除该二级归类将同时删除所有子节点，确认？",
+                        "op.delete.fun": "opDelRank"
+                    }
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "2.weight",
+                    "level": 2
+                },
+                {
+                    "title": "一级归类",
+                    "dataIndex": "3.name",
+                    "level": 3,
+                    "config": {
+                        "window": "一级归类管理,提交,取消,false,600,false",
+                        "form": "$formFirst",
+                        "op.enabled": true,
+                        "op.edit": true,
+                        "op.add": true,
+                        "op.delete": "删除该一级归类将删除对应的活动和管理项，确认？",
+                        "op.delete.fun": "opDelRank"
+                    }
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "3.weight",
+                    "level": 3
+                },
+                {
+                    "title": "管理项",
+                    "dataIndex": "4.name",
+                    "level": 4,
+                    "config": {
+                        "window": "管理项,提交,取消,false,800,false",
+                        "form": "$formProcedure",
+                        "op.enabled": true,
+                        "op.edit": true,
+                        "op.add": true,
+                        "op.delete": "删除该管理项将删除对应活动，确认？",
+                        "op.delete.fun": "opDelProd"
+                    }
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "4.weight",
+                    "level": 4
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,61 @@
+{
+    "_form": {
+        "window": 0.16,
+        "ui": [
+            [
+                "parentName,上级归类,,,,readOnly=true"
+            ],
+            [
+                {
+                    "metadata": "code,归类编号",
+                    "optionConfig.rules": [
+                        "required,请输入归类编号"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "name,归类名称",
+                    "optionConfig.rules": [
+                        "required,请输入归类名称"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "weight,权重,,,aiInputNumber",
+                    "optionConfig.rules": [
+                        "required,请输入归类名称"
+                    ]
+                }
+            ],
+            [
+                "active,启用,,,aiCheckbox,valuePropName=true"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.bind": [
+                        "$opAdd,,,,_submit=DIRECT",
+                        "$opSave,,,,_submit=DIRECT"
+                    ]
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+                "key",
+                "parentId",
+                "type"
+            ]
+        }
+    },
+    "_modal": {
+        "type": "success",
+        "message": {
+            "add": "您的归类添加成功！",
+            "edit": "您的归类保存成功！"
+        }
+    }
+}

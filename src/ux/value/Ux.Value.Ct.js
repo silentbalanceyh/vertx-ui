@@ -117,6 +117,20 @@ const valueAppend = (item = {}, field = "", value) => {
         item[field] = value;
     }
 };
+
+const valueFunction = (actions = {}) => (params) => {
+    const functions = {};
+    if (actions) {
+        Object.keys(actions).filter(item => U.isFunction(actions[item]))
+            .forEach(item => {
+                const executor = actions[item](params);
+                if (U.isFunction(executor)) {
+                    functions[item] = executor;
+                }
+            });
+    }
+    return functions;
+};
 export default {
     valueInt, // 整数转换
     valueUnit,
@@ -126,6 +140,7 @@ export default {
     valueFilter,
     valueIcon,
     valueKey,
+    valueFunction,
     // 设置自定义控件的专用属性
     valueFlip,
     valueTrack: Debug.dgMonitor,

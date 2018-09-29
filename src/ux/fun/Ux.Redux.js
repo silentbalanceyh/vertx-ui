@@ -42,11 +42,12 @@ const rxTree = (data) => ({
         (U.isArray(data.list) ? data.list : [])
 });
 const rxFilter = (data) => ({"grid.query": data});
+
 export default {
     rxDatum,
     rxAssist,
     rxData,
     rxGrid,
     rxFilter,
-    rxTree
+    rxTree,
 }
