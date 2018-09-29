@@ -4,8 +4,10 @@
     },
     "_tree": {
         "options": {
+            "table.edit.enabled": true,
+            "table.edit.standalone": false
         },
-        "editable": {
+        "operations": {
             "1.name": {
                 "window": "三级归类管理,提交,取消,false,600,false",
                 "form": "$formThird",
@@ -56,52 +58,52 @@
             "columns": [
                 {
                     "title": "三级归类",
-                    "dataIndex": "1.name",
+                    "dataIndex": "name",
                     "level": 1
                 },
                 {
                     "title": "权重",
-                    "dataIndex": "1.weight",
+                    "dataIndex": "weight",
                     "level": 1
                 },
                 {
                     "title": "二级归类",
-                    "dataIndex": "2.name",
+                    "dataIndex": "name",
                     "level": 2
                 },
                 {
                     "title": "权重",
-                    "dataIndex": "2.weight",
+                    "dataIndex": "weight",
                     "level": 2
                 },
                 {
                     "title": "一级归类",
-                    "dataIndex": "3.name",
+                    "dataIndex": "name",
                     "level": 3
                 },
                 {
                     "title": "权重",
-                    "dataIndex": "3.weight",
+                    "dataIndex": "weight",
                     "level": 3
                 },
                 {
                     "title": "管理项",
-                    "dataIndex": "4.name",
+                    "dataIndex": "name",
                     "level": 4
                 },
                 {
                     "title": "权重",
-                    "dataIndex": "4.weight",
+                    "dataIndex": "weight",
                     "level": 4
                 },
                 {
                     "title": "活动",
-                    "dataIndex": "5.name",
+                    "dataIndex": "name",
                     "level": 5
                 },
                 {
                     "title": "权重",
-                    "dataIndex": "5.weight",
+                    "dataIndex": "weight",
                     "level": 5
                 }
             ]
