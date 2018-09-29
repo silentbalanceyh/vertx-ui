@@ -7,7 +7,6 @@ import Op from './Op';
 import Ux from 'ux';
 // 临时处理
 import data from './data/data';
-import inited from './data/inited';
 
 const Components = {
     $formCatFirst: FormCat,
@@ -27,12 +26,10 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         const functions = Ux.valueFunction(Op.Functions)(this);
-        const table = Ux.fromHoc(this, "configuration");
         return (
             <PageCard reference={this}>
-                <TreeTable $table={table}
-                           data={data}
-                           $inited={inited}
+                <TreeTable data={data}
+                           reference={this}
                            $components={Components}
                            $functions={functions}/>
             </PageCard>
