@@ -1,0 +1,112 @@
+{
+    "_page": {
+        "title": "TreeTable - 可操作的树状表"
+    },
+    "_tree": {
+        "options": {
+            "table.edit.enabled": true,
+            "table.edit.standalone": false
+        },
+        "operations": {
+            "1.name": {
+                "window": "三级归类管理,提交,取消,false,600,false",
+                "form": "$formThird",
+                "op.enabled": true,
+                "op.edit": true,
+                "op.add": true,
+                "op.delete": "删除该三级归类将同时删除所有子节点，确认？",
+                "op.delete.fun": "opDelRank"
+            },
+            "2.name": {
+                "window": "二级归类管理,提交,取消,false,600,false",
+                "form": "$formSecond",
+                "op.enabled": true,
+                "op.edit": true,
+                "op.add": true,
+                "op.delete": "删除该二级归类将同时删除所有子节点，确认？",
+                "op.delete.fun": "opDelRank"
+            },
+            "3.name": {
+                "window": "一级归类管理,提交,取消,false,600,false",
+                "form": "$formFirst",
+                "op.enabled": true,
+                "op.edit": true,
+                "op.add": true,
+                "op.delete": "删除该一级归类将删除对应的活动和管理项，确认？",
+                "op.delete.fun": "opDelRank"
+            },
+            "4.name": {
+                "window": "管理项,提交,取消,false,800,false",
+                "form": "$formProcedure",
+                "op.enabled": true,
+                "op.edit": true,
+                "op.add": true,
+                "op.delete": "删除该管理项将删除对应活动，确认？",
+                "op.delete.fun": "opDelProd"
+            },
+            "5.name": {
+                "window": "管理项,提交,取消,false,800,false",
+                "form": "$formProcedure",
+                "op.enabled": true,
+                "op.edit": true,
+                "op.add": true,
+                "op.delete": "删除该管理项将删除对应活动，确认？",
+                "op.delete.fun": "opDelProd"
+            }
+        },
+        "table": {
+            "columns": [
+                {
+                    "title": "三级归类",
+                    "dataIndex": "name",
+                    "level": 1
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "weight",
+                    "level": 1
+                },
+                {
+                    "title": "二级归类",
+                    "dataIndex": "name",
+                    "level": 2
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "weight",
+                    "level": 2
+                },
+                {
+                    "title": "一级归类",
+                    "dataIndex": "name",
+                    "level": 3
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "weight",
+                    "level": 3
+                },
+                {
+                    "title": "管理项",
+                    "dataIndex": "name",
+                    "level": 4
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "weight",
+                    "level": 4
+                },
+                {
+                    "title": "活动",
+                    "dataIndex": "name",
+                    "level": 5
+                },
+                {
+                    "title": "权重",
+                    "dataIndex": "weight",
+                    "level": 5
+                }
+            ]
+        }
+    }
+}
