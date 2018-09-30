@@ -27,12 +27,15 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         const functions = Ux.valueFunction(Op.Functions)(this);
+        const attrs = {};
+        attrs.reference = this;
+        attrs.$components = Components;
+        attrs.$functions = functions;
+        attrs.$inited = {key: "501c4240-aff2-4949-aca7-b15408840f8b"};
         return (
             <PageCard reference={this}>
                 <TreeTable {...this.props}
-                           reference={this}
-                           $components={Components}
-                           $functions={functions}/>
+                           {...attrs}/>
             </PageCard>
         )
     }

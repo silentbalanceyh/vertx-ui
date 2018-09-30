@@ -31,11 +31,11 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$circle} = this.props;
-        if ($circle.is()) {
+        const source = Op.initDataSource(this);
+        if (source) {
             const {table = {columns: []}} = this.state;
             // 动态渲染
-            const data = Op.initData(this, $circle.to());
+            const data = Op.initData(this, source);
             const processed = Op.calcTable(this, table);
             return (
                 <Table {...processed} className={"web-table"}

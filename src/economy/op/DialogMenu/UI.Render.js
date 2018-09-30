@@ -4,16 +4,17 @@ import DynamicDialog from '../../dialog/DynamicDialog/UI';
 import Ux from "ux";
 
 const getChildren = (reference, item) => {
-    const {$components = {}} = reference.props;
+    const {$components = {}, $inited} = reference.props;
     const componentKey = item.component;
     const Component = $components[componentKey];
+    // 初始化数据专用
     if (Component) {
         return (
             <Component fnClose={() => {
                 const state = Ux.clone(reference.state);
                 state.visible[item.key] = false;
                 reference.setState(state);
-            }} {...Ux.toUniform(reference.props)}/>
+            }} {...Ux.toUniform(reference.props)} $inited={$inited}/>
         )
     } else return false;
 };

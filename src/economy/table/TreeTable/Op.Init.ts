@@ -42,8 +42,31 @@ const initComponent = (reference: any) => {
     const operations = Rdr.initOperations(reference);
     reference.setState({table, operations});
 };
+const initDataSource = (reference: any) => {
+    // 默认走$redux流程
+    const {data, $redux = true, $circle} = reference.props;
+    if ($redux) {
+        // 优先读取data
+        if ($circle.is()) {
+            const {$inited = {}} = reference.props;
+            const dataSource = $circle.to();
+            let calculated = [];
+            console.info(dataSource);
+            if ($inited.key) {
+                const dataArray = dataSource[$inited.key];
+                if (dataArray && U.isArray(dataArray)) {
+                    calculated = dataArray;
+                }
+            }
+            return calculated;
+        }
+    } else {
+        return data;
+    }
+};
 export default {
     initComponent,
+    initDataSource,
     readOptions,
     readOperations,
     updateData,
