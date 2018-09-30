@@ -92,8 +92,8 @@ const initOperations = (reference) => {
                 operations[key].empty = emptyRender;
                 operations[key].value = valueRender;
                 // 顶层Title对应的Render
-                if (config.hasOwnProperty("root")) {
-                    operations[key].title = _calcRender(reference, config.root);
+                if (config.hasOwnProperty("title")) {
+                    operations[key].title = _calcRender(reference, config.title);
                 }
             })
     }

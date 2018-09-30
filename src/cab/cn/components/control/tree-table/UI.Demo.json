@@ -8,7 +8,7 @@
         },
         "operations": {
             "1.name": {
-                "root": {
+                "title": {
                     "button": "opThirdAdd,,,plus",
                     "mode": "DIALOG",
                     "component": "$formCatThird",
