@@ -31,6 +31,12 @@ const updateData = (reference: any) => {
         if (U.isFunction(rxTree)) {
             rxTree();
         }
+        // 写当前数据记录
+        const {current} = reference.state;
+        if (!current) {
+            const current = _readCurrent(reference);
+            reference.setState({current});
+        }
     }
 };
 const readOptions = (reference: any) => readConfig(reference).options;
@@ -42,23 +48,27 @@ const initComponent = (reference: any) => {
     const operations = Rdr.initOperations(reference);
     reference.setState({table, operations});
 };
+const _readCurrent = (reference) => {
+    const {$inited = {}, $circle} = reference.props;
+    let calculated = [];
+    if ($circle.is()) {
+        const dataSource = $circle.to();
+        if ($inited.key) {
+            const dataArray = dataSource[$inited.key];
+            if (dataArray && U.isArray(dataArray)) {
+                calculated = dataArray;
+            }
+        }
+    }
+    return calculated;
+};
 const initDataSource = (reference: any) => {
     // 默认走$redux流程
     const {data, $redux = true, $circle} = reference.props;
     if ($redux) {
         // 优先读取data
         if ($circle.is()) {
-            const {$inited = {}} = reference.props;
-            const dataSource = $circle.to();
-            let calculated = [];
-            console.info(dataSource);
-            if ($inited.key) {
-                const dataArray = dataSource[$inited.key];
-                if (dataArray && U.isArray(dataArray)) {
-                    calculated = dataArray;
-                }
-            }
-            return calculated;
+            return _readCurrent(reference);
         }
     } else {
         return data;

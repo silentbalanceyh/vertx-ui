@@ -13,7 +13,7 @@ const Components = {
     $formCatSecond: FormCat,
     $formCatThird: FormCat,
     $formActivity: FormAct,
-    $formProd: FormProd,
+    $formProcedure: FormProd,
 };
 
 const {zero} = Ux;

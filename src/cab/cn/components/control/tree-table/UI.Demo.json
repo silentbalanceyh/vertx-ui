@@ -6,14 +6,16 @@
         "options": {
             "table.pages": true,
             "table.edit.enabled": true,
-            "table.edit.standalone": false
+            "table.edit.standalone": false,
+            "extra.data.keys": "weight"
         },
         "operations": {
             "1.name": {
                 "empty": {
                     "button": "opThirdAdd,添加,,fork",
                     "mode": "DIALOG",
-                    "dialog": "添加三级归类,添加,取消,false,600,false,$opAdd"
+                    "dialog": "添加三级归类,添加,取消,false,600,false,$opAdd",
+                    "init": false
                 },
                 "value": {
                     "button": "opThirdAdd,操作",
@@ -22,7 +24,8 @@
                         {
                             "dialog": "添加三级归类,添加,取消,false,600,false,$opAdd",
                             "component": "$formCatThird",
-                            "button": "itemAdd,添加,,plus"
+                            "button": "itemAdd,添加,,plus",
+                            "init": false
                         },
                         {
                             "dialog": "编辑三级归类,保存,取消,false,600,false,$opSave",
@@ -41,7 +44,8 @@
                 "empty": {
                     "button": "opSecondAdd,添加,,fork",
                     "mode": "DIALOG",
-                    "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd"
+                    "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd",
+                    "init": false
                 },
                 "value": {
                     "button": "opSecondAdd,操作",
@@ -50,7 +54,8 @@
                         {
                             "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd",
                             "component": "$formCatSecond",
-                            "button": "itemAdd,添加,,plus"
+                            "button": "itemAdd,添加,,plus",
+                            "init": false
                         },
                         {
                             "dialog": "编辑二级归类,保存,取消,false,600,false,$opSave",
@@ -69,7 +74,8 @@
                 "empty": {
                     "button": "opFirstAdd,添加,,fork",
                     "mode": "DIALOG",
-                    "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd"
+                    "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd",
+                    "init": false
                 },
                 "value": {
                     "button": "opFirstAdd,操作",
@@ -78,7 +84,8 @@
                         {
                             "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd",
                             "component": "$formCatFirst",
-                            "button": "itemAdd,添加,,plus"
+                            "button": "itemAdd,添加,,plus",
+                            "init": false
                         },
                         {
                             "dialog": "编辑一级归类,保存,取消,false,600,false,$opSave",
@@ -95,15 +102,10 @@
             },
             "4.name": {
                 "value": {
-                    "button": "opProdAdd,操作",
-                    "mode": "DIALOG",
-                    "items": [
-                        {
-                            "dialog": "编辑管理项,保存,取消,false,600,false,$opSave",
-                            "component": "$formProcedure",
-                            "button": "itemEdit,编辑,,edit"
-                        }
-                    ]
+                    "dialog": "编辑管理项,保存,取消,false,600,false,$opSave",
+                    "component": "$formProcedure",
+                    "button": "itemEdit,,,edit",
+                    "mode": "DIALOG"
                 }
             }
         },

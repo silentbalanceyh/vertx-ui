@@ -3,18 +3,27 @@ import {Drawer, Icon} from 'antd'
 import DynamicDialog from '../../dialog/DynamicDialog/UI';
 import Ux from "ux";
 
-const getChildren = (reference, item) => {
+const _calcInit = (inited = {}) => {
+    const values = {};
+    Object.keys(inited).filter(key => key.startsWith("_"))
+        .forEach(key => values[key] = inited[key]);
+    return values;
+};
+
+const getChildren = (reference, item = {}) => {
     const {$components = {}, $inited} = reference.props;
     const componentKey = item.component;
     const Component = $components[componentKey];
     // 初始化数据专用
+    const {init = true} = item;
     if (Component) {
         return (
             <Component fnClose={() => {
                 const state = Ux.clone(reference.state);
                 state.visible[item.key] = false;
                 reference.setState(state);
-            }} {...Ux.toUniform(reference.props)} $inited={$inited}/>
+            }} {...Ux.toUniform(reference.props)}
+                       $inited={init ? $inited : _calcInit($inited)}/>
         )
     } else return false;
 };

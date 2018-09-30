@@ -2,6 +2,7 @@ import React from 'react'
 import './Cab.less';
 import U from 'underscore';
 import Op from './Op';
+import Ux from 'ux';
 
 import DialogButton from '../../op/DialogButton/UI';
 import DialogMenu from '../../op/DialogMenu/UI';
@@ -22,17 +23,19 @@ const _calcRender = (reference, config = {}) => {
     return (column, record) => {
         // 1.计算record数据
         const $inited = _calcRecord(reference, column, record);
+        const {$functions, $components = {}} = reference.props;
         if (isMenu) {
-            const {$functions, $components} = reference.props;
             return (<Component $inited={$inited}
                                $functions={$functions}
                                $components={$components}
                                {...configuration}/>)
         } else {
+            const componentKey = config.component;
+            const Child = $components[componentKey];
             return (
                 <Component $inited={$inited}
                            {...configuration}>
-                    Hello
+                    <Child $inited={$inited}/>
                 </Component>
             )
         }
@@ -40,9 +43,10 @@ const _calcRender = (reference, config = {}) => {
 };
 
 const _calcRecord = (reference, column, record = {}) => {
+    const data = {};
     // 处理数据信息
     const levelPrefix = String(column.level);
-    const data = {};
+
     Object.keys(record).map(key => String(key))
         .filter(key => key.startsWith(levelPrefix))
         .forEach(key => {
@@ -50,6 +54,23 @@ const _calcRecord = (reference, column, record = {}) => {
             const field = key.replace(reg, "");
             data[field] = record[key];
         });
+    // 处理当前数据中的附加数据
+    const _addon = {};
+    const level = column.level - 1;
+    _addon.parentId = record[`${level}.key`];
+    // 读取垂直数据
+    const options = Op.readOptions(reference);
+    if (options.hasOwnProperty("extra.data.keys")) {
+        const {current = []} = reference.state;
+        if (0 < current.length) {
+            const fields = Ux.arrayConnect(options["extra.data.keys"], (item) => ({
+                field: item, dataKey: `${level}.${item}`
+            }));
+            fields.forEach(item =>
+                _addon[item.field] = current.map(each => each[item.dataKey]))
+        }
+    }
+    data[`_extra`] = _addon;
     const {rxRecord = data => data} = reference.props;
     return rxRecord(data);
 };
