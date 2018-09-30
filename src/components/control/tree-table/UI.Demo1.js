@@ -19,8 +19,8 @@ const Components = {
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require("./Cab"))
-    .cab("UI.Demo")
-    .tree(Tps.fnTreeData)
+    .cab("UI.Demo1")
+    .tree(Tps.fnTreeData1)
     .state({})
     .to()
 )
@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
         attrs.reference = this;
         attrs.$components = Components;
         attrs.$functions = functions;
-        attrs.$inited = {key: "501c4240-aff2-4949-aca7-b15408840f8b"};
+        attrs.$inited = {key: "35eedb99-387b-4085-a435-9bcd26d78d12"};
         return (
             <TreeTable {...this.props}
                        {...attrs}/>

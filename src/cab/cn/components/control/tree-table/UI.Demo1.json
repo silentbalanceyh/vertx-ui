@@ -8,20 +8,19 @@
         },
         "operations": {
             "1.name": {
-                "root": {
-                    "button": "opThirdAdd,,,plus",
+                "empty": {
+                    "button": "opThirdAdd,添加,,fork",
                     "mode": "DIALOG",
-                    "component": "$formCatThird",
                     "dialog": "添加三级归类,添加,取消,false,600,false,$opAdd",
                     "init": false
                 },
                 "value": {
-                    "button": "opThirdOp,操作",
+                    "button": "opThirdAdd,操作",
                     "mode": "DIALOG",
                     "items": [
                         {
-                            "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd",
-                            "component": "$formCatSecond",
+                            "dialog": "添加三级归类,添加,取消,false,600,false,$opAdd",
+                            "component": "$formCatThird",
                             "button": "itemAdd,添加,,plus",
                             "init": false
                         },
@@ -39,13 +38,19 @@
                 }
             },
             "2.name": {
+                "empty": {
+                    "button": "opSecondAdd,添加,,fork",
+                    "mode": "DIALOG",
+                    "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd",
+                    "init": false
+                },
                 "value": {
                     "button": "opSecondAdd,操作",
                     "mode": "DIALOG",
                     "items": [
                         {
-                            "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd",
-                            "component": "$formCatFirst",
+                            "dialog": "添加二级归类,添加,取消,false,600,false,$opAdd",
+                            "component": "$formCatSecond",
                             "button": "itemAdd,添加,,plus",
                             "init": false
                         },
@@ -63,13 +68,19 @@
                 }
             },
             "3.name": {
+                "empty": {
+                    "button": "opFirstAdd,添加,,fork",
+                    "mode": "DIALOG",
+                    "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd",
+                    "init": false
+                },
                 "value": {
                     "button": "opFirstAdd,操作",
                     "mode": "DIALOG",
                     "items": [
                         {
-                            "dialog": "添加管理项,添加,取消,false,600,false,$opAdd",
-                            "component": "$formProcedure",
+                            "dialog": "添加一级归类,添加,取消,false,600,false,$opAdd",
+                            "component": "$formCatFirst",
                             "button": "itemAdd,添加,,plus",
                             "init": false
                         },

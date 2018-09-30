@@ -4,6 +4,7 @@ import fnDeptList from './fnDeptList'
 import fnCategory from './fnCategory'
 import fnCategoryList from './fnCategoryList'
 import fnTreeData from './fnTreeData'
+import fnTreeData1 from './fnTreeData1'
 
 export default {
     fnApp,
@@ -11,5 +12,6 @@ export default {
     fnDeptList,
     fnCategory,
     fnCategoryList,
-    fnTreeData
+    fnTreeData,
+    fnTreeData1
 }

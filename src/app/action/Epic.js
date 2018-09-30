@@ -18,5 +18,9 @@ export default {
     fnRankList: Ux.rxEdict(Types.fnTreeData,
         params => Ux.ajaxPost("/api/tree/data", params, Mock.fnTreeData),
         Ux.rxCircle,
+    ),
+    fnRank1List: Ux.rxEdict(Types.fnTreeData1,
+        params => Ux.ajaxPost("/api/tree/data", params, Mock.fnTreeData1),
+        Ux.rxCircle
     )
 };

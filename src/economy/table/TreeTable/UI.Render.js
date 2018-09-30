@@ -85,12 +85,16 @@ const initOperations = (reference) => {
             .filter(key => ops[key].hasOwnProperty('value'))
             .forEach(key => {
                 const config = ops[key];
-                // 统一计算
+                // 统一计算Empty和Value
                 const emptyRender = _calcRender(reference, config.empty);
                 const valueRender = _calcRender(reference, config.value);
                 operations[key] = {};
                 operations[key].empty = emptyRender;
                 operations[key].value = valueRender;
+                // 顶层Title对应的Render
+                if (config.hasOwnProperty("root")) {
+                    operations[key].title = _calcRender(reference, config.root);
+                }
             })
     }
     return operations;
@@ -123,7 +127,20 @@ const renderOp = (reference, record, {
     }
     return jsx;
 };
+const renderTitle = (column = {}, fnRender) => {
+    return (
+        <span className={"web-table-cell"}>
+            <span className={"left"}>
+                {column.title}
+            </span>
+            <span className={"right"}>
+                {fnRender(column, {})}
+            </span>
+        </span>
+    )
+};
 export default {
     renderOp,
-    initOperations
+    initOperations,
+    renderTitle
 }

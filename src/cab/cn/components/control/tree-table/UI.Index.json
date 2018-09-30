@@ -1,0 +1,13 @@
+{
+    "_page": {
+        "title": "TreeTable - 可操作的树状表"
+    },
+    "_tabs": {
+        "defaultActiveKey": "keyDemo",
+        "items": [
+            "有数据（标准）,keyDemo",
+            "无数据（递进）,keyDemo1",
+            "无数据（独立）,keyDemo2"
+        ]
+    }
+}

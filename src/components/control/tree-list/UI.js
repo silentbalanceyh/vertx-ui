@@ -44,8 +44,8 @@ class Component extends React.PureComponent {
             "UI.Demo.Form.Tree.Edit.js",
             "Op.ts",
             "Op.Act.ts",
-            "Op.Act.ts",
-            "Op.Act.ts"
+            "Op.Item.ts",
+            "Op.Tree.ts"
         )(
             <Demo reference={this}
                   rxInject={Fn.injectOptFun(this)}
