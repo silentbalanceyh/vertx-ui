@@ -9,13 +9,32 @@
         },
         "operations": {
             "1.name": {
-                "window": "三级归类管理,提交,取消,false,600,false",
-                "form": "$formThird",
-                "op.enabled": true,
-                "op.edit": true,
-                "op.add": true,
-                "op.delete": "删除该三级归类将同时删除所有子节点，确认？",
-                "op.delete.fun": "opDelRank"
+                "empty": {
+                    "button": "opThirdAdd,添加,,fork",
+                    "mode": "DIALOG",
+                    "dialog": "添加三级归类,添加,取消,false,600,false,$opThirdAdd"
+                },
+                "value": {
+                    "button": "opThirdAdd,操作",
+                    "mode": "DIALOG",
+                    "items": [
+                        {
+                            "dialog": "添加三级归类,添加,取消,false,600,false,$opCatAdd",
+                            "component": "$formCatThird",
+                            "button": "itemAdd,添加,,plus"
+                        },
+                        {
+                            "dialog": "编辑三级归类,保存,取消,false,600,false,$opCatSave",
+                            "component": "$formCatThird",
+                            "button": "itemEdit,保存,,edit"
+                        },
+                        {
+                            "confirm": "确认删除该三级分类，删除该三级分类会删除所有子项。,确认,取消",
+                            "function": "rxDelThird",
+                            "button": "itemDelete,删除,danger,delete"
+                        }
+                    ]
+                }
             },
             "2.name": {
                 "window": "二级归类管理,提交,取消,false,600,false",

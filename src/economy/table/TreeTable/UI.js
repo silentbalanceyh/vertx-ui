@@ -23,7 +23,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.initTable(this);
+        Op.initComponent(this);
     }
 
     componentDidUpdate() {

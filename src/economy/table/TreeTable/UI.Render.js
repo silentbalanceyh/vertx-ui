@@ -1,90 +1,106 @@
 import React from 'react'
-import DialogButton from '../../op/DialogButton/UI';
-import {Button, Popconfirm} from 'antd';
 import './Cab.less';
-import Ux from 'ux';
 import U from 'underscore';
+import Op from './Op';
 
-const renderOp = (reference, record, {
-    text, rowSpan, column
-}) => {
-    const config = column.config ? column.config : {};
-    const enabled = config["op.enabled"];
-    // 按钮部分
-    const add = config['op.add'];
-    const edit = config['op.edit'];
-    const deleted = config['op.delete'];
-    // Form组件
-    const Form = reference.props[config.form];
-    const window = Ux.aiExprWindow(config.window);
-    // 绑定函数，主要用于删除
-    const {
-        $action = {}, $datum = {},
-        rxRecord = data => data
-    } = reference.props;
+import DialogButton from '../../op/DialogButton/UI';
+import DialogMenu from '../../op/DialogMenu/UI';
+
+const _calcDoller = (config = {}) => {
+    const $config = {};
+    Object.keys(config).forEach(key => $config[`$${key}`] = config[key]);
+    return $config;
+};
+
+const _calcRender = (reference, config = {}) => {
+    // 计算Component
+    const Component = config.hasOwnProperty("items") ?
+        DialogMenu : DialogButton;
+    const isMenu = config.hasOwnProperty("items");
+    // 抽取components和functions
+    const configuration = _calcDoller(config);
+    return (column, record) => {
+        // 1.计算record数据
+        const $inited = _calcRecord(reference, column, record);
+        if (isMenu) {
+            const {$functions, $components} = reference.props;
+            return (<Component $inited={$inited}
+                               $functions={$functions}
+                               $components={$components}
+                               {...configuration}/>)
+        } else {
+            return (
+                <Component $inited={$inited}
+                           {...configuration}>
+                    Hello
+                </Component>
+            )
+        }
+    };
+};
+
+const _calcRecord = (reference, column, record = {}) => {
     // 处理数据信息
     const levelPrefix = String(column.level);
     const data = {};
-    Object.keys(record).filter(key => key.startsWith(levelPrefix))
+    Object.keys(record).map(key => String(key))
+        .filter(key => key.startsWith(levelPrefix))
         .forEach(key => {
             const reg = new RegExp(`${levelPrefix}.`, "g");
             const field = key.replace(reg, "");
             data[field] = record[key];
         });
-    // onOk确认框处理
-    const connectEdit = column["op.edit.connect"] ? column["op.edit.connect"] : "$opSave";
-    const connectAdd = column["op.add.connect"] ? column["op.add.connect"] : "$opAdd";
+    const {rxRecord = data => data} = reference.props;
+    return rxRecord(data);
+};
+
+const initOperations = (reference) => {
+    const operations = {};
+    const ops = Op.readOperations(reference);
+    if (ops && U.isObject(ops)) {
+        Object.keys(ops).filter(key => !!ops[key])
+            .filter(key => ops[key].hasOwnProperty('value'))
+            .forEach(key => {
+                const config = ops[key];
+                // 统一计算
+                const emptyRender = _calcRender(reference, config.empty);
+                const valueRender = _calcRender(reference, config.value);
+                operations[key] = {};
+                operations[key].empty = emptyRender;
+                operations[key].value = valueRender;
+            })
+    }
+    return operations;
+};
+
+const renderOp = (reference, record, {
+    text, rowSpan, column
+}) => {
+    const {operations = {}} = reference.state;
     const jsx = {};
     jsx.props = {
         rowSpan
     };
-    if (0 < rowSpan) {
-        jsx.children = (
-            <span className={"web-table-cell"}>
-                <span className={"left"}>
-                {text}
+    const render = operations[column.dataIndex];
+    if (render) {
+        if (0 < rowSpan) {
+            jsx.children = (
+                <span className={"web-table-cell"}>
+                    <span className={"left"}>
+                        {text}
+                    </span>
+                    <span className={"right"}>
+                        {text ? render.value(column, record) : render.empty(column, record)}
+                    </span>
                 </span>
-                <span className={"right"}>
-                    {enabled ? (
-                        <Button.Group>
-                            {add ? (
-                                <DialogButton $form={Form} $datum={$datum}
-                                              $inited={rxRecord({}, record, column.level)}
-                                              fnConfirm={() => Ux.connectId(connectAdd)}
-                                              $config={{
-                                                  button: {
-                                                      text: add, icon: "plus",
-                                                  },
-                                                  window,
-                                              }}/>) : false}
-                            {edit && text ? (
-                                <DialogButton $form={Form} $datum={$datum}
-                                              $inited={rxRecord(data, record, column.level)}
-                                              fnConfirm={() => Ux.connectId(connectEdit)}
-                                              $config={{
-                                                  button: {
-                                                      text: edit, icon: "edit",
-                                                  },
-                                                  window,
-                                              }}/>) : false}
-                            {deleted && text ? (
-                                <Popconfirm title={deleted} onConfirm={event => {
-                                    event.preventDefault();
-                                    const executor = $action[config["op.delete.fun"]];
-                                    if (U.isFunction(executor)) {
-                                        executor(data);
-                                    }
-                                }}>
-                                    <Button icon={"delete"} type={"danger"} style={{}}/>
-                                </Popconfirm>) : false}
-                        </Button.Group>
-                    ) : false}
-                </span>
-            </span>
-        )
+            )
+        }
+    } else {
+        jsx.children = text;
     }
     return jsx;
 };
 export default {
-    renderOp
+    renderOp,
+    initOperations
 }
