@@ -1,6 +1,7 @@
 import Ux from "ux";
 import * as U from 'underscore'
 import Rdr from './UI.Render'
+import Data from './Op.Data'
 
 const readConfig = (reference: any = {}) => {
     const {$key = "tree"} = reference.props;
@@ -31,10 +32,12 @@ const updateData = (reference: any) => {
         if (U.isFunction(rxTree)) {
             rxTree();
         }
-        // 写当前数据记录
+    } else {
+        // 这里才开始有数据
         const {current} = reference.state;
         if (!current) {
-            const current = _readCurrent(reference);
+            let current = _readCurrent(reference);
+            current = Data.initData(reference, current);
             reference.setState({current});
         }
     }
@@ -79,5 +82,6 @@ export default {
     initDataSource,
     readOptions,
     readOperations,
+    readCurrent: _readCurrent,
     updateData,
 }

@@ -26,6 +26,7 @@ const _calcRender = (reference, config = {}) => {
         const {$functions, $components = {}} = reference.props;
         if (isMenu) {
             return (<Component $inited={$inited}
+                               $parent={Ux.clone(reference.props.$inited)}
                                $functions={$functions}
                                $components={$components}
                                {...configuration}/>)
@@ -35,7 +36,8 @@ const _calcRender = (reference, config = {}) => {
             return (
                 <Component $inited={$inited}
                            {...configuration}>
-                    <Child $inited={$inited}/>
+                    <Child $inited={$inited}
+                           $parent={Ux.clone(reference.props.$inited)}/>
                 </Component>
             )
         }
@@ -61,7 +63,7 @@ const _calcRecord = (reference, column, record = {}) => {
     // 读取垂直数据
     const options = Op.readOptions(reference);
     if (options.hasOwnProperty("extra.data.keys")) {
-        const {current = []} = reference.state;
+        const {current} = reference.state;
         if (0 < current.length) {
             const fields = Ux.arrayConnect(options["extra.data.keys"], (item) => ({
                 field: item, dataKey: `${level}.${item}`

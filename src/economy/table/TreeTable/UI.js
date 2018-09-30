@@ -31,15 +31,14 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const source = Op.initDataSource(this);
-        if (source) {
+        const {current} = this.state;
+        if (current) {
             const {table = {columns: []}} = this.state;
             // 动态渲染
-            const data = Op.initData(this, source);
             const processed = Op.calcTable(this, table);
             return (
                 <Table {...processed} className={"web-table"}
-                       dataSource={data}/>
+                       dataSource={current}/>
             )
         } else return <LoadingContent/>
     }
