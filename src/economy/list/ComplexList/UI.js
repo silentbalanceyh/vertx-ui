@@ -52,6 +52,14 @@ class Component extends React.PureComponent {
         } else {
             const $state = Op.mockVector(this);
             const {items = [], ...rest} = $state.tabs;
+            // 关于tabs页的限制
+            const options = Op.readOption(this);
+            if (options.hasOwnProperty('tabs.count')) {
+                let limit = Ux.valueInt(options['tabs.count']);
+                // 最小限制是1，不应该是0
+                if (0 === limit) limit = 1;
+                items.forEach((item, index) => item.disabled = limit < items.length && 0 === index);
+            }
             return (
                 <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
                     {items.map(item => {

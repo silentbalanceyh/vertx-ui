@@ -126,6 +126,10 @@
                                     "color": "#33af43"
                                 },
                                 {
+                                    "name": "tabs.count",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "op.add",
                                     "color": "#33af43"
                                 },
@@ -397,6 +401,14 @@
                 "comment": "列表Tab页打开编辑表单的标题文字，支持表达式",
                 "type": "String",
                 "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "tabs.count",
+                "comment": "打开Tab页的数量限制，最多可打开多少Tab页",
+                "type": "Number",
+                "value": "1"
             },
             {
                 "source": "O",
