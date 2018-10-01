@@ -7,7 +7,7 @@ import U from 'underscore';
 const initState = (reference) => {
     const {$dialog = {}} = reference.props;
     let config = {};
-    if ($dialog) {
+    if ($dialog && 0 < Object.keys($dialog).length) {
         if ("string" === typeof $dialog) {
             config = Ux.aiExprWindow($dialog);
         } else if (U.isObject($dialog)) {
@@ -18,7 +18,7 @@ const initState = (reference) => {
 };
 
 class Component extends React.PureComponent {
-    componentDidMount() {
+    componentDidUpdate() {
         const state = initState(this);
         if (!this.state && 0 === Object.keys(state).length) {
             const error = Ux.E.fxInfo(true, 10090, "$dialog");

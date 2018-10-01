@@ -60,8 +60,6 @@ class Component extends React.PureComponent {
              * 计算初始化数据initData，
              **/
             const initData = Ux.itemInit(this);
-            // 不点取消不可关闭
-            dialog.maskClosable = false;
             // 「LIMIT」限制继承
             const inherits = Ux.toLimitation(rest, Fn.Limit.DialogList.Shared);
             return (

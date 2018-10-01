@@ -3,13 +3,13 @@ import {Modal} from 'antd';
 import Ux from 'ux';
 
 const rtConfirm = (reference, item) => {
-    const {$functions = {}} = reference.props;
+    const {$functions = {}, $inited = {}} = reference.props;
     Modal.confirm({
         ...item.confirm,
         onOk: () => {
             const callback = $functions[item.function];
             if (U.isFunction(callback)) {
-                callback(item);
+                callback($inited, item);
             }
         }
     })

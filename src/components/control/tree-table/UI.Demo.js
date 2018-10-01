@@ -1,8 +1,7 @@
 import React from 'react'
-import {PageCard, TreeTable} from 'web';
-import FormCat from './UI.Dialog.Cat';
-import FormProd from './UI.Dialog.Procedure';
-import FormAct from './UI.Dialog.Activity';
+import {TreeTable} from 'web';
+import FormCat from './UI.Demo.Dialog.Cat';
+import FormProd from './UI.Demo.Dialog.Procedure';
 import Op from './Op';
 import Ux from 'ux';
 import {Tps} from 'app';
@@ -12,8 +11,7 @@ const Components = {
     $formCatFirst: FormCat,
     $formCatSecond: FormCat,
     $formCatThird: FormCat,
-    $formActivity: FormAct,
-    $formProd: FormProd,
+    $formProcedure: FormProd,
 };
 
 const {zero} = Ux;
@@ -27,13 +25,14 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         const functions = Ux.valueFunction(Op.Functions)(this);
+        const attrs = {};
+        attrs.reference = this;
+        attrs.$components = Components;
+        attrs.$functions = functions;
+        attrs.$inited = {key: "501c4240-aff2-4949-aca7-b15408840f8b"};
         return (
-            <PageCard reference={this}>
-                <TreeTable {...this.props}
-                           reference={this}
-                           $components={Components}
-                           $functions={functions}/>
-            </PageCard>
+            <TreeTable {...this.props}
+                       {...attrs}/>
         )
     }
 }

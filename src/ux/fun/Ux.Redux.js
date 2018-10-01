@@ -37,8 +37,8 @@ const rxAssist = (data, key, orderBy = 'order') => {
 };
 const rxData = (data) => ({"datum.data": data});
 const rxGrid = (data) => ({"grid.list": data});
+const rxCircle = (data) => ({"grid.circle": data});
 const rxTree = (data) => ({"grid.tree": U.isArray(data) ? data : (U.isArray(data.list) ? data.list : [])});
-const rxCircle = (data) => ({"grid.circle": U.isArray(data) ? data : (U.isArray(data.list) ? data.list : [])});
 const rxFilter = (data) => ({"grid.query": data});
 
 export default {

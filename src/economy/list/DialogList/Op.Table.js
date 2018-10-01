@@ -38,7 +38,10 @@ const initDialog = (reference) => {
             window.onCancel = Act.rxClose(reference);
         }
         Ux.connectDialog(window);
+        window.maskClosable = false;
+        // 不点取消不可关闭
     }
+    window.visible = false;
     return window;
 };
 export default {

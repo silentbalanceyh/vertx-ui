@@ -23,7 +23,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.initTable(this);
+        Op.initComponent(this);
     }
 
     componentDidUpdate() {
@@ -31,15 +31,14 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$circle} = this.props;
-        if ($circle.is()) {
+        const {current} = this.state;
+        if (current) {
             const {table = {columns: []}} = this.state;
             // 动态渲染
-            const data = Op.initData(this, $circle.to());
             const processed = Op.calcTable(this, table);
             return (
                 <Table {...processed} className={"web-table"}
-                       dataSource={data}/>
+                       dataSource={current}/>
             )
         } else return <LoadingContent/>
     }

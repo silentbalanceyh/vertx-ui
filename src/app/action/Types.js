@@ -6,5 +6,6 @@ export default {
     fnCategoryList: Ux.createAction("/RX/MODULE/CAT/LIST"),
     fnCategory: Ux.createAction("/RX/MODULE/CAT/TREE"),
     // Rank列表（处理TreeTable专用）
-    fnTreeData: Ux.createAction("/RX/MODULE/TREE/DATA")
+    fnTreeData: Ux.createAction("/RX/MODULE/TREE/DATA"),
+    fnTreeData1: Ux.createAction("/RX/MODULE/TREE/DATA1")
 }

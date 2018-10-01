@@ -1,14 +1,19 @@
-const rxDelRank = (reference: any) => (record) => {
-    console.info("删除归类", record);
+const rxDelThird = (reference: any) => (record) => {
+    console.info("三级归类", record);
+};
+const rxDelSecond = (reference: any) => (record) => {
+    console.info("二级归类", record);
+};
+const rxDelFirst = (reference: any) => (record) => {
+    console.info("一级归类", record);
 };
 const rxDelProd = (reference: any) => (record) => {
-    console.info("删除管理项", record);
+    console.info("管理项", record);
 };
-const rxDelActivity = (reference: any) => (record) => {
-    console.info("删除活动", record);
-};
+
 export default {
-    rxDelRank,
+    rxDelThird,
     rxDelProd,
-    rxDelActivity
+    rxDelFirst,
+    rxDelSecond
 }

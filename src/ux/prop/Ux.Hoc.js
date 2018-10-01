@@ -104,7 +104,13 @@ const toStyle = (name, bg) => {
 };
 const toUniform = (props, ...keys) => {
     const item = toDatum(props);
-    const defaultProp = ["app", "user", "router", "submitting"].concat(keys);
+    const defaultProp = [
+        "app",      // 应用程序数据
+        "user",     // 用户数据
+        "router",       // 路由数据
+        "submitting",   // 防重复提交数据
+        "parent"    // 主记录数据
+    ].concat(keys);
     const common = toProp.apply(this, [props].concat(defaultProp));
     return {
         ...item,
