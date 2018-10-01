@@ -26,12 +26,6 @@ const $opAddProd = (reference: any) => (record) => {
 const $opSaveProd = (reference: any) => (record) => {
     console.info("管理项更新", record, reference.props);
 };
-const $opAddActivity = (reference: any) => (record) => {
-    console.info("活动添加", record);
-};
-const $opSaveActivity = (reference: any) => (record) => {
-    console.info("活动更新", record);
-};
 export default {
     Rank: {
         $opAdd: $opAddRank,
@@ -40,9 +34,5 @@ export default {
     Procedure: {
         $opAdd: $opAddProd,
         $opSave: $opSaveProd,
-    },
-    Activity: {
-        $opAdd: $opAddActivity,
-        $opSave: $opSaveActivity
     }
 }
