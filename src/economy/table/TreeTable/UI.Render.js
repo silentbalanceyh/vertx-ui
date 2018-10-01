@@ -128,7 +128,8 @@ const renderOp = (reference, record, {
     return jsx;
 };
 const renderTitle = (column = {}, fnRender) => {
-    return (
+    // 只添加一次的限制
+    return ("string" === typeof column.title) ? (
         <span className={"web-table-cell"}>
             <span className={"left"}>
                 {column.title}
@@ -137,7 +138,7 @@ const renderTitle = (column = {}, fnRender) => {
                 {fnRender(column, {})}
             </span>
         </span>
-    )
+    ) : column.title;
 };
 export default {
     renderOp,

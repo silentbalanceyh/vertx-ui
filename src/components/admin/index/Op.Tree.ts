@@ -14,6 +14,8 @@ const _applyColor = (item: any = {}) => {
             item.color = "#990"
         } else if (item.title.startsWith("UE")) {
             item.color = "#963";
+        } else if (item.title.startsWith("UL")) {
+            item.color = "#4090f7";
         } else {
             item.color = "#333";
         }
