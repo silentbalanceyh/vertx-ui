@@ -2,7 +2,7 @@ import U from 'underscore';
 import Immutable from 'immutable';
 import ExprData from './AI.Expr';
 import ExprValue from './AI.Expr.Value'
-import Value from '../Ux.Value'
+import Value from '../../Ux.Value'
 import {v4} from 'uuid';
 
 const parseItem = (kvs = [], key) => {

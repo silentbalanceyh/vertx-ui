@@ -1,7 +1,7 @@
 import React from "react";
 import {Icon, Input} from "antd";
-import Value from "../Ux.Value";
-import AiValue from './AI.Expr.Value';
+import Value from "../../Ux.Value";
+import AiValue from '../expr/AI.Expr.Value';
 import U from 'underscore';
 
 const aiDynamicEpsilon = (reference, item = {}, jsx) => (text) => {

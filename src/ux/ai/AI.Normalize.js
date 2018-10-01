@@ -1,8 +1,8 @@
 import U from "underscore";
-import Ai from './AI.Input';
-import Calculator from './AI.Layout.Calculator';
+import Ai from './input/AI.Input';
+import Calculator from './layout/AI.Layout.Calculator';
 import Prop from '../prop/Ux.Prop';
-import Expr from './AI.Expr.String';
+import Expr from './expr/AI.Expr.String';
 import Log from '../monitor/Mt.Logger';
 
 const _aiNormalizeEach = (ui = [], eachFun, eachItemFun = item => item) => {
