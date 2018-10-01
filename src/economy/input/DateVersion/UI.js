@@ -1,4 +1,5 @@
 import React from 'react';
+import './Cab.less';
 import {Input} from 'antd';
 import moment from 'moment';
 
@@ -49,12 +50,15 @@ class Component extends React.PureComponent {
         const {value = {}, ...meta} = rest;
         const data = value.source ? value.source : {};
         return (
-            <Input.Group compact {...meta}>
-                <Input addonAfter={config.year} style={{width: config.width ? config.width : 100}} {...meta}
+            <Input.Group compact {...meta} className={"web-date-version"}>
+                <Input addonAfter={config.year}
+                       style={{width: config.width ? config.width : 100}} {...meta}
                        onChange={this.handleInput('year')} value={data.year}/>
-                <Input addonAfter={config.month} style={{width: config.width ? config.width : 100}} {...meta}
+                <Input addonAfter={config.month}
+                       style={{width: config.width ? config.width : 100}} {...meta}
                        onChange={this.handleInput('month')} value={data.month}/>
-                <Input addonAfter={config.day} style={{width: config.width ? config.width : 100}} {...meta}
+                <Input addonAfter={config.day}
+                       style={{width: config.width ? config.width : 100}} {...meta}
                        onChange={this.handleInput('day')} value={data.day}/>
                 {config.version ? <Input addonAfter={config.version}
                                          style={{width: config.width ? config.width : 100}} {...meta}

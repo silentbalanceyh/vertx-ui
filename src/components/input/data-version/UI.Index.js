@@ -1,0 +1,17 @@
+import React from 'react'
+import Ux from 'ux';
+import Left from './UI.Left';
+import Right from './UI.Right';
+
+class Component extends React.PureComponent {
+    render() {
+        return Ux.aiGrid([12, 12],
+            <Left {...this.props}/>,
+            <Right {...this.props} $inited={{
+                year: 2011, month: 11, day: 10, version: 2008
+            }}/>
+        )
+    }
+}
+
+export default Component

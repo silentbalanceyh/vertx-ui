@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from 'ux'
 import {Fn} from 'app';
-import Demo from './UI.Demo';
+import Index from './UI.Index';
 
 const {zero} = Ux;
 
@@ -17,9 +17,9 @@ class Component extends React.PureComponent {
     render() {
         return Fn.ui(this, "UI.Tree"
         )(
-            <Demo reference={this}
-                  rxInject={Fn.injectOptFun(this)}
-                  rxSet={Fn.injectSet(this)}/>
+            <Index reference={this}
+                   rxInject={Fn.injectOptFun(this)}
+                   rxSet={Fn.injectSet(this)}/>
         )
     }
 }

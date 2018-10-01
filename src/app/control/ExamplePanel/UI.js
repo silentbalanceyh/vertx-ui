@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
             $source = [],   // Json内容
             $markdown = [], // Markdown内容
             $configuration = {}, // 属性配置
-            $diagram = {}, // 数据流结构图
+            // $diagram = {}, // 数据流结构图
             $datalist = {}, // 全属性表（分组件清单）
             $datatree = {}, // 文件树
             $title = "", // 标题：可动态变更
@@ -56,7 +56,6 @@ class Component extends React.PureComponent {
             jsx.push(<AttrTree key={"tabAttribute"} $configuration={$configuration}
                                $name={$configuration.code}/>)
         }
-        console.info(jsx);
         return (
             <PageCard reference={this} $title={$title}>
                 {Ux.auiTab(this)
