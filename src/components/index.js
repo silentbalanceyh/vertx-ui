@@ -19,6 +19,7 @@ import _editor_form from './editor/form/UI';
 import _editor_workflow from './editor/workflow/UI';
 import _generated_demo from './generated/demo/UI';
 import _generated_tool from './generated/tool/UI';
+import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
 
@@ -44,6 +45,7 @@ export default {
 	_editor_workflow,
 	_generated_demo,
 	_generated_tool,
+	_layout_adjust015,
 	_layout_standard,
 	_login_index,
 }
