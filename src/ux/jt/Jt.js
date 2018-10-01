@@ -5,13 +5,7 @@ import Selector from './Jt.Selector';
 import Event from './Jt.Event';
 import Dynamic from './Jt.Dynamic';
 import E from "../Ux.Error";
-
-const jctUnsafe = (reference, nextProps) => {
-    if ('value' in nextProps) {
-        const value = nextProps.value;
-        reference.setState(value);
-    }
-};
+import On from './Jt.On';
 
 const jctPointer = (ref, key) => {
     if (key) {
@@ -67,8 +61,6 @@ export default {
     jctForm,
     // 提交专用
     jctSubmit,
-    // 自定义组件的Unsafe修改属性方法
-    jctUnsafe,
     // 自定义组件的Pointer引用交换
     jctPointer,
     // Table Editor批量方法
@@ -81,4 +73,6 @@ export default {
     ...Event,
     // 动态处理
     ...Dynamic,
+    // On事件处理
+    ...On,
 }

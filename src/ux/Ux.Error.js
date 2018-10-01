@@ -97,7 +97,8 @@ const fnError = {
     10091: (modeButton) => `[ ERR-10091 ] (Web) 当前 DialogButton 组件的按钮模式不对，仅支持：BUTTON / DROPDOWN, current = ${modeButton}`,
     10092: (modeDialog) => `[ ERR-10092 ] (Web) 当前 DialogButton 组件的窗口模式不对，仅支持：DIALOG / DRAWER / POPOVER, current = ${modeDialog}`,
     10093: (mode) => `[ ERR-10093 ] (Web) 当前 DialogMenu 组件的窗口模式不对，仅支持：DIALOG / DRAWER, current = ${mode}`,
-    10094: (length) => `[ ERR-10094 ] (Web) 当前 DialogMenu 组件的属性 '$items' 的长度必须大于1，current = ${length}`
+    10094: (length) => `[ ERR-10094 ] (Web) 当前 DialogMenu 组件的属性 '$items' 的长度必须大于1，current = ${length}`,
+    10095: (onChange) => `[ ERR-10095 ] (Jct) 自定义组件中的 'onChange' 属性必须是一个合法的函数，当前类型：${typeof onChange}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {
@@ -117,6 +118,11 @@ const fxFailure = (code, ...args) => {
     const message = fxMessage.apply(this, [console.error, code].concat(args));
     console.error(message);
     return Terminal.fxError(message);
+};
+
+const fxFatal = (code, ...args) => {
+    const message = fxMessage.apply(this, [console.error, code].concat(args));
+    throw new Error(message ? message : "");
 };
 
 const fxMessage = (executor, code, ...args) => {
@@ -170,4 +176,5 @@ export default {
             }
         }
     }, 10002, reference),
+    fxFatal,
 }

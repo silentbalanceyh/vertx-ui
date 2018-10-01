@@ -8,6 +8,9 @@
             [
                 {
                     "metadata": "version,版本,,,aiDateVersion",
+                    "optionConfig.rules": [
+                        "required,请输入版本详细信息。"
+                    ],
                     "optionJsx.config": {
                         "year": "年",
                         "month": "月",

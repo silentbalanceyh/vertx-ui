@@ -1,70 +1,35 @@
 import React from 'react';
 import './Cab.less';
 import {Input} from 'antd';
-import moment from 'moment';
+import Ux from 'ux';
+
+const renderInput = (reference, field, config = {}, meta = {}) => {
+    const attrs = {};
+    const value = reference.state;
+    if (config[field]) attrs.addonAfter = config[field];
+    attrs.style = {width: config.width ? config.width : 100};
+    attrs.onChange = Ux.jonInput(reference, field);
+    attrs.value = value[field];
+    attrs.placeholder = meta.placeholder;
+    return (<Input {...attrs}/>)
+};
 
 class Component extends React.PureComponent {
-    triggerChange = (changedValue) => {
-        // 必须提供
-        const onChange = this.props.onChange;
-        if (onChange) {
-            const newValue = Object.assign({}, this.state, changedValue);
-            const targetValue = {};
-            // 计算时间
-            if (newValue.version) targetValue.version = newValue.version;
-            targetValue.source = {
-                year: newValue.year,
-                month: newValue.month,
-                day: newValue.day
-            };
-            if (newValue.year && newValue.month && newValue.day) {
-                targetValue.date = moment([newValue.year, newValue.month, newValue.day]);
-            }
-            onChange(targetValue);
-        }
-    };
-    handleInput = (name) => (event) => {
-        if (name) {
-            const value = event.target.value || "";
-            const changed = {};
-            changed[name] = value;
-            this.setState(changed);
-            this.triggerChange(changed);
-        }
-    };
-
     constructor(props) {
-        super(props);
+        super();
         this.state = props.value || {};
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        if ('value' in nextProps) {
-            const value = nextProps.value;
-            this.setState(value);
-        }
     }
 
     render() {
         const {config = {}, ...rest} = this.props;
-        const {value = {}, ...meta} = rest;
-        const data = value.source ? value.source : {};
+        const {value, ...meta} = rest;
         return (
-            <Input.Group compact {...meta} className={"web-date-version"}>
-                <Input addonAfter={config.year}
-                       style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('year')} value={data.year}/>
-                <Input addonAfter={config.month}
-                       style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('month')} value={data.month}/>
-                <Input addonAfter={config.day}
-                       style={{width: config.width ? config.width : 100}} {...meta}
-                       onChange={this.handleInput('day')} value={data.day}/>
-                {config.version ? <Input addonAfter={config.version}
-                                         style={{width: config.width ? config.width : 100}} {...meta}
-                                         onChange={this.handleInput('version')}
-                                         value={value.version}
-                /> : false}
+            <Input.Group compact className={"web-date-version"}
+                         {...rest} value={value}>
+                {renderInput(this, "year", config, meta)}
+                {renderInput(this, "month", config, meta)}
+                {renderInput(this, "day", config, meta)}
+                {config.version ? renderInput(this, "version", config, meta) : false}
             </Input.Group>
         )
     }
