@@ -1,10 +1,10 @@
-import Expr from "./AI.Expr.String";
-import Random from "../util/Ux.Random";
-import E from "../Ux.Error";
+import Expr from "../expr/AI.Expr.String";
+import Random from "../../util/Ux.Random";
+import E from "../../Ux.Error";
 import U from "underscore";
-import Type from '../Ux.Type';
-import Prop from '../prop';
-import Value from '../Ux.Value';
+import Type from '../../Ux.Type';
+import Prop from '../../prop/index';
+import Value from '../../Ux.Value';
 
 const _parseData = (reference, config = {}) => {
     // 源头

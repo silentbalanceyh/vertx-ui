@@ -1,9 +1,12 @@
 import React from 'react';
 import {Modal} from 'antd';
-import RxAnt from './AI.RxAnt'
-import RxInput from './AI.Input.Ant';
-import RxInput2 from './AI.Input.Ant2';
+import RxAnt from '../ant/AI.RxAnt'
 import RxDatum from './AI.Input.Datum';
+
+import Input from './AI.Input.Ant';
+import Input2 from './AI.Input.Ant2';
+import Defined from './AI.Input.Defined';
+import Op from './AI.Input.Op';
 
 const aiConfirm = (reference, onOk, ...path) => {
     // 构造窗口配置
@@ -22,9 +25,10 @@ export default {
     // 对话框专用
     aiConfirm,
     // 直接组件
-    ...RxInput,
+    ...Input,
+    ...Input2,
+    ...Defined,
+    ...Op,
     // 绑定组件专用
     ...RxDatum,
-
-    ...RxInput2,
 }

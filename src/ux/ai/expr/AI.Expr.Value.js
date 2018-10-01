@@ -1,10 +1,10 @@
 import U from "underscore";
 import {v4} from "uuid";
 import Parser from "./AI.Expr.Parser";
-import Op from "../op";
+import Op from "../../op/index";
 import Immutable from "immutable";
-import Type from "../Ux.Type";
-import M from '../monitor';
+import Type from "../../Ux.Type";
+import M from '../../monitor/index';
 
 const applyArray = (literal) => U.isArray(literal) ? literal : literal.replace(/ /g, '').split(',');
 const applyKey = (item = {}) => {

@@ -1,12 +1,12 @@
 import AiLink from './AI.Link';
 import AiLayout from './AI.Layout';
-import AiInput from './AI.Input';
+import AiInput from './input/AI.Input';
 import AiButton from './AI.Action';
-import AiColumn from './AI.Column';
+import AiColumn from './column/AI.Column';
 import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
-import Calculator from './AI.Layout.Calculator';
-import AiString from './AI.Expr.String';
+import Calculator from './layout/AI.Layout.Calculator';
+import AiString from './expr/AI.Expr.String';
 import AiCriteria from './AI.Criteria';
 import AiPure from './AI.Pure';
 

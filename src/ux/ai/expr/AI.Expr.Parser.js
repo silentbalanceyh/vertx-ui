@@ -1,4 +1,4 @@
-import Value from '../Ux.Value';
+import Value from '../../Ux.Value';
 
 const normalize = (item = {}, value) => {
     if (!item.optionConfig) item.optionConfig = {};

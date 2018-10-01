@@ -1,4 +1,4 @@
-import RxAnt from "./AI.RxAnt";
+import RxAnt from "../ant/AI.RxAnt";
 import {
     Checkbox,
     DatePicker,
@@ -9,9 +9,7 @@ import {
     TimePicker,
     TreeSelect
 } from "antd";
-import JsxOp from "../jsx/Ux.Jsx.Op";
 import React from "react";
-import {FileUpload, MagicView, TimeRanger} from "web";
 
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
@@ -54,14 +52,7 @@ const aiSelect = (reference, jsx = {}, onChange) => {
         </Select>
     )
 };
-const aiFileUpload = (reference, jsx = {}, onChange) => {
-    RxAnt.onChange(jsx, onChange);
-    return (<FileUpload {...jsx}/>)
-};
-const aiTimeRanger = (reference, jsx = {}, onChange) => {
-    RxAnt.onChange(jsx, onChange);
-    return (<TimeRanger {...jsx}/>)
-};
+
 const aiRadio = (reference, jsx = {}, onChange) => {
     const {config = {}, ...rest} = jsx;
     // onChange处理
@@ -98,50 +89,20 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 
-const aiAction = (reference, jsx = {}) => {
-    if (jsx.buttons) {
-        // submit + reset双按钮专用生成
-        // E.fxInfo(true, 10076, "optionJsx.buttons");
-        return JsxOp.rtNorm(reference, jsx);
-    } else if (jsx.hasOwnProperty("bind")) {
-        // 多个按钮
-        // E.fxInfo(true, 10076, "optionJsx.bind");
-        return JsxOp.rtDialog(reference, jsx);
-    } else if (jsx.hasOwnProperty("direct")) {
-        // 直接按钮处理专用
-        return JsxOp.rtDirect(reference, jsx);
-    } else {
-        // 专用Bind按钮处理
-        // E.fxInfo(true, 10076, "DEFAULT");
-        return JsxOp.rtBind(reference, !jsx.hidden)
-    }
-};
-
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<TimePicker {...jsx}/>)
 };
-const aiMagic = (reference, jsx = {}) => {
-    const {config = {}, ...rest} = jsx;
-    if (config.items) {
-        config.items = RxAnt.toOptions(reference, config);
-    }
-    return (<MagicView {...rest} config={config} reference={reference}/>)
-};
 export default {
     // Label专用组件
-    aiMagic,
     // 直接组件
     aiSelect,
     aiInput,
     aiInputNumber,
-    aiFileUpload,
     aiCheckbox,
     aiRadio,
     aiTextArea,
     aiTreeSelect,
     aiDatePicker,
     aiTimePicker,
-    aiTimeRanger,
-    aiAction,
 }

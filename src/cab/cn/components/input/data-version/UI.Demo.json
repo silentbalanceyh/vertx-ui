@@ -1,0 +1,21 @@
+{
+    "_page": {
+        "title": "「交互」DateVersion - 年份版本处理"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "version,版本,,,aiDateVersion",
+                    "optionJsx.config": {
+                        "year": "年",
+                        "month": "月",
+                        "day": "日",
+                        "version": "版"
+                    }
+                }
+            ]
+        ]
+    }
+}

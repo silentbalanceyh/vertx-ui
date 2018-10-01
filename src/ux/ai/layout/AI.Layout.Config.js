@@ -1,12 +1,12 @@
-import Standard from './_layout/standard';
-import Adjust015 from './_layout/adjust.015';
-import Adjust016 from './_layout/adjust.016';
-import Half05 from './_layout/half.05';
-import Filter_03 from './_layout/filter-03';
-import Filter_05 from './_layout/filter-05';
+import Standard from './category/standard';
+import Adjust015 from './category/adjust.015';
+import Adjust016 from './category/adjust.016';
+import Half05 from './category/half.05';
+import Filter_03 from './category/filter-03';
+import Filter_05 from './category/filter-05';
 
-import Adjust017 from './_layout/adjust.017';
-import Adjust021 from './_layout/adjust.021';
+import Adjust017 from './category/adjust.017';
+import Adjust021 from './category/adjust.021';
 
 const item = {
     // 标准布局

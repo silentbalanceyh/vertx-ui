@@ -1,11 +1,11 @@
-import AiValue from "./AI.Expr.Value";
+import AiValue from "../expr/AI.Expr.Value";
 import {DatePicker, Input, Select} from "antd";
-import Value from "../Ux.Value";
-import AiExpr from "./AI.Expr.String";
-import AiPure from "./AI.Pure";
-import Ai from "./AI.Input";
-import RxAnt from './AI.RxAnt';
-import Prop from '../prop/Ux.Prop';
+import Value from "../../Ux.Value";
+import AiExpr from "../expr/AI.Expr.String";
+import AiPure from "../AI.Pure";
+import Ai from "../input/AI.Input";
+import RxAnt from '../ant/AI.RxAnt';
+import Prop from '../../prop/Ux.Prop';
 import React from "react";
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
