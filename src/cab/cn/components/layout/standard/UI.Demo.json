@@ -1,4 +1,7 @@
 {
+    "_page": {
+        "title": "标准布局：column = 4, window = 1"
+    },
     "_form": {
         "window": 1,
         "ui": [

@@ -19,6 +19,9 @@
             "属性树,tabAttribute"
         ]
     },
+    "_dynamic": {
+        "tabLayout": "布局属性表"
+    },
     "_toolbar": {
         "setting": "修改配置,web-button-1"
     },

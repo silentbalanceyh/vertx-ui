@@ -2,14 +2,8 @@ import './Cab.less'
 import React from "react";
 import LayoutPanel from '../../control/LayoutPanel/UI'
 
-const layout = (reference, jsx) => {
-    return (
-        <LayoutPanel reference={reference}>
-            {jsx}
-        </LayoutPanel>
-    )
-};
+const fnLayout = (reference) => (<LayoutPanel key={"tabLayout"} reference={reference}/>);
 
 export default {
-    layout,
+    fnLayout,
 }

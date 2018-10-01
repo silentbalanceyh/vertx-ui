@@ -1,6 +1,5 @@
 import React from 'react'
 import Op from './Op'
-import Ux from "ux";
 import {Table} from 'antd';
 import {PageCard} from "web";
 
@@ -10,17 +9,11 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {children, reference} = this.props;
         const {table, data = []} = this.state ? this.state : {};
+        console.info(this.state);
         if (table) {
-            console.info(data);
             return (
-                <PageCard reference={reference}>
-                    {Ux.auiTab(reference).type("card")
-                        .to(children, (
-                            <Table {...table} dataSource={data}/>
-                        ))}
-                </PageCard>
+                <Table {...table} dataSource={data}/>
             )
         } else return false;
     }

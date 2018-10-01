@@ -1,6 +1,7 @@
 import React from 'react'
 import Ux from 'ux';
 import Op from './Op';
+import {PageCard} from 'web';
 
 const {zero} = Ux;
 
@@ -12,7 +13,11 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {}, 4)
+        return (
+            <PageCard reference={this}>
+                {Ux.uiFieldForm(this, {}, 4)}
+            </PageCard>
+        )
     }
 }
 
