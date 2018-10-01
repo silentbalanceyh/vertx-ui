@@ -98,7 +98,7 @@
             },
             "children": [
                 "UL0001 - 「主表单」（1）标准布局,/layout/standard,true",
-                "UL0002 - 「主表单」（0.15）9:15布局,/layout/adjust015",
+                "UL0002 - 「主表单」（0.15）9:15布局,/layout/adjust015,true",
                 "UL0003 - 「主表单」（0.16）9:15宽标签布局,/layout/adjust016",
                 "UL0004 - 「子表单」（0.17）9:15宽标签布局,/layout/adjust017",
                 "UL0004 - 「特殊」（0.5）两列专用布局,/layout/half05",
