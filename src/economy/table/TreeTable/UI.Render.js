@@ -74,7 +74,7 @@ const _calcRecord = (reference, column, record = {}) => {
     }
     data[`_extra`] = _addon;
     const {rxRecord = data => data} = reference.props;
-    return rxRecord(data);
+    return rxRecord(data, column);
 };
 
 const initOperations = (reference) => {

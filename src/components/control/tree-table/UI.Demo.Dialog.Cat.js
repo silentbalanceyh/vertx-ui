@@ -5,13 +5,13 @@ import Op from "./Op.Act";
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Dialog.Activity")
-    .bind(Op.Activity).raft(2)
+    .cab("UI.Demo.Dialog.Cat")
+    .bind(Op.Rank).raft(1)
     .form().to()
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldForm(this, {}, 2)
+        return Ux.uiFieldForm(this, {}, 1)
     }
 }
 

@@ -1,9 +1,7 @@
 {
     "_tree": {
         "options": {
-            "table.pages": true,
             "table.edit.enabled": true,
-            "table.edit.standalone": false,
             "extra.data.keys": "weight"
         },
         "operations": {

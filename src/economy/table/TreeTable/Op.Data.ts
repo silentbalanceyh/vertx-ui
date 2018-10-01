@@ -55,8 +55,6 @@ const initRow = (reference) => {
         } else {
             // TODO:
             // 依赖模式，后一个level要求前一个level必须有数据
-            const maxLevel = table.columns.map(column => column.level)
-                .reduce((left, right) => Math.max(left, right));
         }
     }
     return data;

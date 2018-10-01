@@ -1,8 +1,7 @@
 import React from 'react'
 import {TreeTable} from 'web';
-import FormCat from './UI.Dialog.Cat';
-import FormProd from './UI.Dialog.Procedure';
-import FormAct from './UI.Dialog.Activity';
+import FormCat from './UI.Demo.Dialog.Cat';
+import FormProd from './UI.Demo.Dialog.Procedure';
 import Op from './Op';
 import Ux from 'ux';
 import {Tps} from 'app';
@@ -12,7 +11,6 @@ const Components = {
     $formCatFirst: FormCat,
     $formCatSecond: FormCat,
     $formCatThird: FormCat,
-    $formActivity: FormAct,
     $formProcedure: FormProd,
 };
 

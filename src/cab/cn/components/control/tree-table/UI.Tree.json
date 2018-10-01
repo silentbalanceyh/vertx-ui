@@ -1,8 +1,272 @@
 {
     "_configuration": {
         "code": "TreeTable",
-        "data": [],
-        "items": {},
-        "layout": {}
+        "data": [
+            {
+                "source": "P",
+                "name": "reference",
+                "comment": "父组件引用",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "E",
+                "name": "rxTree",
+                "comment": "（Epic函数）专用读取数据的函数，每一级数据以是否包含 children 子节点为level的计算。",
+                "type": "Function",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "E",
+                "name": "rxRecord",
+                "comment": "初始化数据之前的运算，用于计算当前表单/浮游窗口中的初始化数据。",
+                "type": "Function",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$inited",
+                "comment": "主单的初始化数据。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$functions",
+                "comment": "「编辑模式」编辑模式下按钮中需要执行的回调函数集合，key = Function。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$components",
+                "comment": "「编辑模式」编辑模式下按钮中需要绑定的组件集合。key = Component",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "H",
+                "name": "options",
+                "comment": "当前列表的所有选项",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "table.edit.enabled",
+                "comment": "是否开启当前TreeTable的「编辑模式」？",
+                "type": "Boolean",
+                "value": "true"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "table.data.keys",
+                "comment": "需要带入到表单/函数中的当前level下的数据字段，同级传递，最终进入 record 的属性 _extra中。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "H",
+                "name": "operations",
+                "comment": "对于某个单元格中的编辑组件的配置，支持「DialogButton/DialogMenu」两种。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "operations",
+                "option": "title",
+                "comment": "「标题工具栏」启用当前列的标题工具栏的标题配置。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "operations",
+                "option": "empty",
+                "comment": "「空渲染」如果当前单元格没有数据是否执行渲染。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "operations",
+                "option": "value",
+                "comment": "「有值渲染」正常渲染。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "H",
+                "name": "table",
+                "comment": "当前列表的表格相关配置",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "table",
+                "options": "column[x].level",
+                "comment": "树状表格列中的每一个column必须包含 level 属性。",
+                "type": "Number",
+                "required": true,
+                "value": "--"
+            }
+        ],
+        "items": {
+            "name": "TreeTable组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#0099CC",
+                    "children": [
+                        {
+                            "name": "reference",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "$components",
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "<key1> = React.Component",
+                                    "color": "#1464b4"
+                                },
+                                {
+                                    "name": "……",
+                                    "color": "#1464b4"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "$functions",
+                            "color": "#33af43",
+                            "children": [
+                                {
+                                    "name": "<key1> = Function",
+                                    "color": "#1464b4"
+                                },
+                                {
+                                    "name": "……",
+                                    "color": "#1464b4"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "$inited",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "rxRecord",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "rxTree",
+                            "color": "#e23c39"
+                        }
+                    ]
+                },
+                {
+                    "name": "_<hoc>",
+                    "color": "#0099CC",
+                    "children": [
+                        {
+                            "name": "options",
+                            "color": "#0099CC",
+                            "children": [
+                                {
+                                    "name": "table.edit.enabled",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "table.data.keys",
+                                    "color": "#33af43"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "operations",
+                            "color": "#0099CC",
+                            "children": [
+                                {
+                                    "name": "<key1> = Json",
+                                    "color": "#1464b4",
+                                    "children": [
+                                        {
+                                            "name": "title",
+                                            "color": "#33af43",
+                                            "children": [
+                                                {
+                                                    "name": "<DialogButton Json>",
+                                                    "color": "#1464b4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "empty",
+                                            "color": "#33af43",
+                                            "children": [
+                                                {
+                                                    "name": "<DialogButton Json>",
+                                                    "color": "#1464b4"
+                                                },
+                                                {
+                                                    "name": "<DialogMenu Json>",
+                                                    "color": "#1464b4"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "value",
+                                            "color": "#33af43",
+                                            "children": [
+                                                {
+                                                    "name": "<DialogButton Json>",
+                                                    "color": "#1464b4"
+                                                },
+                                                {
+                                                    "name": "<DialogMenu Json>",
+                                                    "color": "#1464b4"
+                                                }
+                                            ]
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "……",
+                                    "color": "#1464b4"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "table",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "columns[x]",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "level",
+                                            "color": "#e23c39"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 90,
+            "vgap": 10,
+            "height": 500
+        }
     }
 }

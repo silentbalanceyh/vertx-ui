@@ -3,12 +3,11 @@ import Ux from 'ux'
 import {PageCard} from 'web';
 
 import Demo from './UI.Demo';
-import Demo1 from './UI.Demo1'
 
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab'))
-    .cab("UI.Index")
+    .cab("UI.Demo.Index")
     .to()
 )
 class Component extends React.PureComponent {
@@ -17,8 +16,7 @@ class Component extends React.PureComponent {
             <PageCard reference={this}>
                 {Ux.auiTab(this)
                     .to(
-                        <Demo {...this.props}/>,
-                        <Demo1 {...this.props}/>
+                        <Demo {...this.props}/>
                     )}
             </PageCard>
         )

@@ -96,7 +96,7 @@ class Tab {
         }
         return this;
     }
-
+    
     to(...children) {
         Sure.ensureStream(this);
         const {items = [], activeState, ...rest} = this.config;
