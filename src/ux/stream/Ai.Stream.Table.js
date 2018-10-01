@@ -4,6 +4,7 @@ import Immutable from "immutable";
 import Sure from "./Ai.Stream.Sure";
 import Ai from "../ai/AI";
 import Meta from './Ai.Stream.Table.json';
+import U from 'underscore';
 
 class Table {
     constructor(reference) {
@@ -32,6 +33,23 @@ class Table {
         if (item) {
             this.config.columns = [item].concat(this.config.columns)
         }
+        return this;
+    }
+
+    columns(fnColumn) {
+        if (U.isFunction(fnColumn)) {
+            fnColumn(this.config.columns);
+        }
+        return this;
+    }
+
+    pagination(pager = true) {
+        this.config.pagination = pager;
+        return this;
+    }
+
+    bordered(bordered = false) {
+        this.config.bordered = bordered;
         return this;
     }
 

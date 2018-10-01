@@ -4,6 +4,7 @@ import React from "react";
 import UI from "../../control/ExamplePanel/UI";
 import Immutable from "immutable";
 import {Langue} from "environment";
+import {PageCard} from 'web';
 
 const drawer = (ref, key, children, additional = {}) => {
     const {reference, $visible = false} = ref.props;

@@ -18,12 +18,12 @@
                 "UC0006 - 列表类「Hoc组件」：TabList,/control/tab-list,true",
                 "UC0007 - 表格类「Pure组件」：TreeTable,/control/tree-table,true",
                 "UC0009 - 辅助类「Pure组件」：LoadingContent,/control/loading-content,true",
-                "UC0014 - 辅助类「Pure容器」：DialogMenu,/control/dialog-menu,true",
-                "UC0008 - 辅助类「Pure容器」：DialogButton,/control/dialog-button,true",
-                "UC0010 - 辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
-                "UC0011 - 交互类：ListSelector,/control/list-selector",
-                "UC0012 - 交互类：TableEditor,/control/table-editor",
-                "UC0013 - 交互类：AddressSelector,/control/address-selector"
+                "UC0010 - 辅助类「Pure容器」：DialogMenu,/control/dialog-menu,true",
+                "UC0011 - 辅助类「Pure容器」：DialogButton,/control/dialog-button,true",
+                "UC0012 - 辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
+                "UC0013 - 交互类：ListSelector,/control/list-selector",
+                "UC0014 - 交互类：TableEditor,/control/table-editor",
+                "UC0015 - 交互类：AddressSelector,/control/address-selector"
             ]
         },
         {
@@ -42,10 +42,9 @@
                 "UI0004 - 路由测试,/system/route",
                 "UI0005 - 第一个模板,/system/container",
                 "UI0006 - 第一个页面,/system/component",
-                "UI0007 - 表单渲染之布局,/system/form-layout",
-                "UI0008 - 表单Raft模式,/system/form-raft",
-                "UI0009 - 字段渲染：Full模式,/system/field-full",
-                "UI0010 - 字段渲染：Expr模式,/system/field-expr",
+                "UI0007 - 表单Raft模式,/system/form-raft",
+                "UI0008 - 字段渲染：Full模式,/system/field-full",
+                "UI0009 - 字段渲染：Expr模式,/system/field-expr",
                 "UI0011 - 列渲染：Cell静态呈现列,/system/column-cell",
                 "UI0012 - 列渲染：Dynamic动态列,/system/column-dynamic",
                 "UI0013 - 列渲染：表格编辑器Unit列,/system/column-unit",
@@ -55,22 +54,6 @@
                 "UI0017 - 按钮：1.ai2Event,/system/op-ai2event",
                 "UI0018 - 按钮：2.rxOp,/system/op-rxop",
                 "UI0019 - 按钮：3.rxAct,/system/op-rxact"
-            ]
-        },
-        {
-            "title": "AI - 工具教程",
-            "icon": {
-                "type": "thunderbolt",
-                "style": {
-                    "fontSize": 24,
-                    "color": "#bc0981"
-                }
-            },
-            "children": [
-                "AI0001 - 默认属性表,/ai/attribute",
-                "AI0002 - $KV$解析原理,/ai/parser",
-                "AI0007 - 一阶Render组件配置,/ai/render",
-                "AI0008 - 二阶Render组件配置,/ai/h-render"
             ]
         },
         {
@@ -102,6 +85,42 @@
                 "UE0017 - 解析之icon,/expr/expr-icon",
                 "UE0018 - 解析之flag,/expr/expr-flag",
                 "UE0019 - 解析之filter,/expr/expr-filter"
+            ]
+        },
+        {
+            "title": "UI - 表单布局开发",
+            "icon": {
+                "type": "layout",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#d94795"
+                }
+            },
+            "children": [
+                "UL0001 - 「主表单」（1）标准布局,/layout/standard",
+                "UL0002 - 「主表单」（0.15）9:15布局,/layout/adjust015",
+                "UL0003 - 「主表单」（0.16）9:15宽标签布局,/layout/adjust016",
+                "UL0004 - 「子表单」（0.17）9:15宽标签布局,/layout/adjust017",
+                "UL0004 - 「特殊」（0.5）两列专用布局,/layout/half05",
+                "UL0004 - 「特殊」（0.21）仿Word布局,/layout/adjust021",
+                "UL0004 - 「过滤表单」（-0.3）抽屉搜索表单布局,/layout/filter-03",
+                "UL0004 - 「过滤表单」（-0.5）普通搜索表单布局,/layout/filter-05"
+            ]
+        },
+        {
+            "title": "AI - 工具教程",
+            "icon": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#bc0981"
+                }
+            },
+            "children": [
+                "AI0001 - 默认属性表,/ai/attribute",
+                "AI0002 - $KV$解析原理,/ai/parser",
+                "AI0007 - 一阶Render组件配置,/ai/render",
+                "AI0008 - 二阶Render组件配置,/ai/h-render"
             ]
         },
         {
