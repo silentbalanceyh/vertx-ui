@@ -1,6 +1,6 @@
 {
     "_page": {
-        "title": "「交互」DateVersion - 年份版本处理"
+        "title": "「交互」DateVersion - 更新"
     },
     "_form": {
         "window": 1,
@@ -13,6 +13,15 @@
                         "month": "月",
                         "day": "日",
                         "version": "版"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opSave,保存,$opSave"
                     }
                 }
             ]

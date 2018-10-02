@@ -6,7 +6,7 @@ import {PageCard} from 'web';
 const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI.Demo")
+    .cab("UI.Left")
     .bind(Op)
     .raft(1)
     .form().to()

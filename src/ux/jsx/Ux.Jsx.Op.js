@@ -131,7 +131,7 @@ const rtAnt = (reference, metadata = {}) => {
     const {text, ...rest} = metadata;
     return (
         <Button onClick={_rt2Submit(reference, metadata)}
-                {...rest} loading={$loading}>
+                {...rest} loading={!!$loading}>
             {text ? text : false}
         </Button>
     );

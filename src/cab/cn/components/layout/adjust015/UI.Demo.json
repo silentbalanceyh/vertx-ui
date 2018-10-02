@@ -1,4 +1,7 @@
 {
+    "_page": {
+        "title": "宽标签布局：column = 4, window = 0.15"
+    },
     "_form": {
         "window": 0.15,
         "ui": [

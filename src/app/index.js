@@ -4,3 +4,4 @@ export {default as Fn} from './function'
 export {default as Mock} from './action/mock'
 // 特殊组件
 export {default as UI} from './control/ExamplePanel/UI'
+export {default as FormPanel} from './control/FormPanel/UI'

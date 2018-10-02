@@ -1,8 +1,5 @@
 {
     "_title": "「主表单」布局",
-    "_page": {
-        "title": "宽标签布局：column = 4, window = 0.15"
-    },
     "_tabs": {
         "defaultActiveKey": "tabForm",
         "items": [

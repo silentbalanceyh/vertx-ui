@@ -1,5 +1,6 @@
 import E from "../Ux.Error";
 import Immutable from 'immutable';
+import On from './Jt.On';
 
 const _calculateState = (reference, field, value) => {
     E.fxTerminal(!reference, 10049, reference);
@@ -17,33 +18,19 @@ const _calculateState = (reference, field, value) => {
 const jdtInput = (reference, field) => (event) => {
     const newState = _calculateState(reference, field, event.target.value);
     reference.setState(newState);
-    jctChange(reference, newState);
-
+    On.jctChange(reference, newState);
 };
 const jdtRadio = (reference, field) => (event) => {
     const newState = _calculateState(reference, field, event.target.value);
     reference.setState(newState);
-    jctChange(reference, newState);
+    On.jctChange(reference, newState);
 };
 const jdtRadioWithAll = (reference, field = "_META_") => (event) => {
     const newState = _calculateState(reference, field, event.target.value);
     reference.setState(newState);
-    jctChange(reference, newState);
+    On.jctChange(reference, newState);
 };
-const jctChange = (reference, changedValue) => {
-    const onChange = reference.props.onChange;
-    if (onChange) {
-        const newValue = Object.assign({}, reference.state, changedValue);
-        const newState = Immutable.fromJS(newValue).toJS();
-        // 特殊处理，将$开头的全部过滤，防止被Hoc注入
-        const filteredValue = {};
-        Object.keys(newState).filter(key => !key.startsWith("$")).forEach(key => filteredValue[key] = newState[key]);
-        onChange(filteredValue);
-    }
-};
-// Js Data Input
 export default {
-    jctChange,
     jdtRadioWithAll,
     jdtInput,
     jdtRadio

@@ -1,6 +1,7 @@
 import {Alert, Button} from "antd";
 import Op from "../App.Op";
 import React from "react";
+import Ux from 'ux';
 
 const demoButtons = (reference, buttons = []) => {
     return (
@@ -28,7 +29,16 @@ const demoMessage = (reference) => {
     ) : false
 };
 
+const demoJson = (reference, level = 0, demoData = {}) => {
+    const ref = Ux.onReference(reference, level);
+    if (ref) {
+        demoData = Ux.clone(demoData);
+        ref.setState({demoData})
+    }
+};
+
 export default {
     demoButtons,
-    demoMessage
+    demoMessage,
+    demoJson,
 }

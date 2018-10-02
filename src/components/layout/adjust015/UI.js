@@ -10,17 +10,21 @@ const {zero} = Ux;
     .state({
         md: undefined, // Markdown源代码
         set: {},  // 继承属性到Demo中
+        tabs: ["tabEffect", "tabConfig"],
+        dynamic: {
+            "tabLayout": Fn.fnLayout
+        }
     })
     .to()
 )
 class Component extends React.PureComponent {
     render() {
-        return Fn.ui(this, "UI.Tree"
-        )(Fn.layout(this,
-            <Demo reference={this}
-                  rxInject={Fn.injectOptFun(this)}
-                  rxSet={Fn.injectSet(this)}/>
-        ))
+        return Fn.ui(this, "UI.Tree",
+            "UI.Demo"
+        )(<Demo reference={this}
+                rxInject={Fn.injectOptFun(this)}
+                rxSet={Fn.injectSet(this)}/>
+        )
     }
 }
 

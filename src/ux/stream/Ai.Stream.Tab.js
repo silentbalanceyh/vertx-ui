@@ -85,6 +85,18 @@ class Tab {
         return this;
     }
 
+    add(tabs) {
+        if (tabs) {
+            const itemRef = this.config.items;
+            if (U.isArray(tabs)) {
+                tabs.forEach(item => itemRef.push(item));
+            } else {
+                itemRef.push(tabs);
+            }
+        }
+        return this;
+    }
+
     extra(value) {
         this.config.tabBarExtraContent = value;
         return this;
@@ -96,10 +108,30 @@ class Tab {
         }
         return this;
     }
-    
+
+    connect(tabs) {
+        if (tabs && 0 < tabs.length) {
+            tabs = tabs.filter(item => "string" === typeof item);
+            const $tabs = Immutable.fromJS(tabs);
+            this._filter = (item) => $tabs.contains(item.key);
+        }
+        return this;
+    }
+
+    onChange(fnChange) {
+        if (U.isFunction(fnChange)) {
+            this.config.onChange = fnChange;
+        }
+        return this;
+    }
+
     to(...children) {
         Sure.ensureStream(this);
         const {items = [], activeState, ...rest} = this.config;
+        let $items = items;
+        if (this._filter) {
+            $items = $items.filter(this._filter);
+        }
         const fnOriginal = rest['onChange'];
         if (activeState) {
             rest.onChange = (item) => {
@@ -113,7 +145,17 @@ class Tab {
                 }
             }
         }
-        return Ai.aiTabs.apply(null, [items, rest].concat(children))
+        // 如果长度为1
+        const jsx = [];
+        if (1 === children.length) {
+            if (U.isArray(children[0])) {
+                children[0].forEach(child => jsx.push(child));
+            }
+        } else {
+            children.forEach(child => jsx.push(child));
+        }
+        return Ai.aiTabs.apply(null, [$items, rest]
+            .concat(jsx))
     }
 }
 

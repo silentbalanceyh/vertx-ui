@@ -1,8 +1,86 @@
 {
     "_configuration": {
         "code": "DateVersion",
-        "data": [],
-        "items": {},
-        "layout": {}
+        "data": [
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "year",
+                "comment": "最终设置到 addonAfter 属性中，版本中的「年」。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "month",
+                "comment": "最终设置到 addonAfter 属性中，版本中的「月」。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "day",
+                "comment": "最终设置到 addonAfter 属性中，版本中的「日」。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "version",
+                "comment": "可选，版本信息显示文字，呈现「版本」。",
+                "type": "String",
+                "value": "--"
+            }
+        ],
+        "fit": "cc",
+        "items": {
+            "name": "DateVersion组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#0099CC",
+                    "children": [
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "year",
+                                    "color": "#e23c39"
+                                },
+                                {
+                                    "name": "month",
+                                    "color": "#e23c39"
+                                },
+                                {
+                                    "name": "day",
+                                    "color": "#e23c39"
+                                },
+                                {
+                                    "name": "version",
+                                    "color": "#33af43"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        "layout": {
+            "hgap": 90,
+            "vgap": 10,
+            "height": 500
+        }
     }
 }
