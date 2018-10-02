@@ -27,8 +27,16 @@ const xtGet = (reference, field, supplier) => {
     }
     return Value.clone(state);
 };
+
+const xtReset = (reference, defaultValue = {}) => {
+    const value = reference.props.value;
+    if (!value) {
+        reference.setState(defaultValue);
+    }
+};
 export default {
     xtUnsafe,
     xtInit,
-    xtGet
+    xtGet,
+    xtReset,
 }

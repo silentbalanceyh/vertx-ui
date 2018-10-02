@@ -7,7 +7,6 @@ const getAttrs = (reference, field) => {
     // state -> 状态数据信息
     const {config = {}, ...meta} = reference.props;
     const value = reference.state;
-
     // 构造所需要的属性信息
     const attrs = {};
 
@@ -30,6 +29,13 @@ const getAttrs = (reference, field) => {
     return Object.assign({}, meta, attrs);
 };
 
+const getDefault = () => ({
+    year: undefined,
+    month: undefined,
+    day: undefined,
+    version: undefined
+});
 export default {
-    getAttrs
+    getAttrs,
+    getDefault
 }

@@ -79,6 +79,11 @@ class RxAct {
         return this;
     }
 
+    submitted() {
+        this.redux["status.submitting"] = false;
+        return this;
+    }
+
     query(filters: any = {}) {
         if (this.reference) {
             this.redux["grid.query"] = Ux.pipeQuery(this.reference, filters);
@@ -88,28 +93,46 @@ class RxAct {
 
     reset() {
         const ref = this.reference;
-        if (ref.form) {
-            const executor = this.executor;
-            executor['fnReset'] = (event) => {
+        const executor = this.executor;
+        executor['fnReset'] = (event) => {
+            if (event && U.isFunction(event.preventDefault)) {
                 event.preventDefault();
-
             }
-        }
+            Ux.formReset(ref);
+        };
+        return this;
     }
 
 
-    to() {
+    to(callback) {
+        // 是否包含执行方法
+        const executor: any = this.executor;
+        [
+            "fnReset",  // 重置表单专用函数
+        ].filter(key => executor.hasOwnProperty(key))
+            .forEach(item => executor[item]());
         // 是否有更新的状态
         if (this.reference) {
+            // 专用处理状态中的提交
+            // submitting = false
+            this.reference.setState({
+                submitting: false,
+                $loading: false,
+            });
             // 有状态则书写Redux状态树
             if (!Ux.isEmpty(this.redux)) {
                 Ux.writeTree(this.reference, this.redux);
             }
         }
-        // 是否包含执行方法
-        const executor: any = this.executor;
-        ["fnClear", "fnClose", "fnView"].filter(key => executor.hasOwnProperty(key))
+        [
+            "fnClear",  // 清除数据专用函数
+            "fnClose",  // 关闭窗口、Tab页专用函数
+            "fnView"    // 从添加切换到编辑的专用函数
+        ].filter(key => executor.hasOwnProperty(key))
             .forEach(item => executor[item]());
+        if (U.isFunction(callback)) {
+            callback();
+        }
     }
 }
 
