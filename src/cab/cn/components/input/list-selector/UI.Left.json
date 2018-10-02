@@ -9,7 +9,7 @@
                 {
                     "metadata": "partner,协议单位,,,aiListSelector",
                     "optionJsx.config": {
-                        "mock": true,
+                        "mock": "partner",
                         "ajax": {
                             "metadata": "POST,/api/partners/search,1,8,sorter=name`ASC",
                             "params.criteria.sigma": "PROP:hotel.sigma"

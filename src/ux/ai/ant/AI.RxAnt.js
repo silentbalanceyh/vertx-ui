@@ -69,7 +69,7 @@ class RxAnt {
         const {config = {}} = jsx;
         if (config.mock) {
             const {mock = {}} = reference.state;
-            jsx.mock = mock;
+            jsx.mock = mock[config.mock];
         }
     }
 
