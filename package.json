@@ -12,7 +12,7 @@
         "@types/react-redux": "^6.0.9",
         "ajv": "^6.5.4",
         "ant-design-pro": "^2.0.0",
-        "antd": "^3.9.3",
+        "antd": "^3.10.0",
         "autoprefixer": "9.1.5",
         "bizcharts": "^3.2.4",
         "case-sensitive-paths-webpack-plugin": "2.1.2",

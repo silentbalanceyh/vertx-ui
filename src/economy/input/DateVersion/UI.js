@@ -6,7 +6,7 @@ import Op from './Op';
 
 class Component extends React.PureComponent {
     constructor(props) {
-        super();
+        super(props);
         this.state = Ux.xtInit(props);
     }
 

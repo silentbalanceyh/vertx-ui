@@ -86,6 +86,18 @@ class RxAct {
         return this;
     }
 
+    reset() {
+        const ref = this.reference;
+        if (ref.form) {
+            const executor = this.executor;
+            executor['fnReset'] = (event) => {
+                event.preventDefault();
+
+            }
+        }
+    }
+
+
     to() {
         // 是否有更新的状态
         if (this.reference) {
