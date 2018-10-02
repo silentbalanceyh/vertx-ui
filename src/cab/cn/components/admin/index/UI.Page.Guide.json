@@ -23,8 +23,8 @@
                 "UC0012 - 辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
                 "UC0013 - 交互类：DateVersion,/input/data-version,true",
                 "UC0014 - 交互类：CheckedDate,/input/checked-date",
-                "UC0015 - 交互类：ListSelector,/control/list-selector",
-                "UC0016 - 交互类：TableEditor,/control/table-editor",
+                "UC0015 - 交互类：ListSelector,/input/list-selector",
+                "UC0016 - 交互类：TableEditor,/input/table-editor",
                 "UC0017 - 交互类：AddressSelector,/control/address-selector"
             ]
         },

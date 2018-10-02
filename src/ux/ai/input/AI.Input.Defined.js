@@ -1,4 +1,4 @@
-import {DateVersion, FileUpload, MagicView, TimeRanger} from "web";
+import {DateVersion, FileUpload, ListSelector, MagicView, TimeRanger} from "web";
 import RxAnt from "../ant/AI.RxAnt";
 import React from "react";
 
@@ -21,9 +21,15 @@ const aiDateVersion = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<DateVersion {...jsx}/>)
 };
+const aiListSelector = (reference, jsx = {}, onChange) => {
+    RxAnt.onMockData(jsx, reference);
+    return (<ListSelector {...jsx} reference={reference}
+                          onChange={onChange}/>)
+};
 export default {
     aiMagic,
     aiTimeRanger,
     aiFileUpload,
-    aiDateVersion
+    aiDateVersion,
+    aiListSelector
 }

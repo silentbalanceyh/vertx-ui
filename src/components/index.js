@@ -8,11 +8,9 @@ import _control_dialog$list from './control/dialog-list/UI';
 import _control_dialog$menu from './control/dialog-menu/UI';
 import _control_dynamic$dialog from './control/dynamic-dialog/UI';
 import _control_help$card from './control/help-card/UI';
-import _control_list$selector from './control/list-selector/UI';
 import _control_loading$content from './control/loading-content/UI';
 import _control_page$card from './control/page-card/UI';
 import _control_tab$list from './control/tab-list/UI';
-import _control_table$editor from './control/table-editor/UI';
 import _control_tree$list from './control/tree-list/UI';
 import _control_tree$table from './control/tree-table/UI';
 import _editor_form from './editor/form/UI';
@@ -20,6 +18,8 @@ import _editor_workflow from './editor/workflow/UI';
 import _generated_demo from './generated/demo/UI';
 import _generated_tool from './generated/tool/UI';
 import _input_data$version from './input/data-version/UI';
+import _input_list$selector from './input/list-selector/UI';
+import _input_table$editor from './input/table-editor/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
@@ -35,11 +35,9 @@ export default {
 	_control_dialog$menu,
 	_control_dynamic$dialog,
 	_control_help$card,
-	_control_list$selector,
 	_control_loading$content,
 	_control_page$card,
 	_control_tab$list,
-	_control_table$editor,
 	_control_tree$list,
 	_control_tree$table,
 	_editor_form,
@@ -47,6 +45,8 @@ export default {
 	_generated_demo,
 	_generated_tool,
 	_input_data$version,
+	_input_list$selector,
+	_input_table$editor,
 	_layout_adjust015,
 	_layout_standard,
 	_login_index,
