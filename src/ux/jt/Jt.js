@@ -74,5 +74,5 @@ export default {
     // 动态处理
     ...Dynamic,
     // On事件处理
-    ...On,
+    ...On
 }

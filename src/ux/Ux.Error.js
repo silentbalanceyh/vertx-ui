@@ -120,9 +120,12 @@ const fxFailure = (code, ...args) => {
     return Terminal.fxError(message);
 };
 
-const fxFatal = (code, ...args) => {
-    const message = fxMessage.apply(this, [console.error, code].concat(args));
-    throw new Error(message ? message : "");
+const fxFatal = (cond, code, ...args) => {
+    const fnCond = U.isFunction(cond) ? cond : () => cond;
+    if (fnCond()) {
+        const message = fxMessage.apply(this, [console.error, code].concat(args));
+        throw new Error(message ? message : "");
+    }
 };
 
 const fxMessage = (executor, code, ...args) => {

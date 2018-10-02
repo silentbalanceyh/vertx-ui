@@ -9,7 +9,6 @@ import DIALOG from "./Ux.Dialog";
 import VALUE from "./Ux.Value";
 import AI from './ai/AI';
 import FORM from './Ux.Form';
-import CONTROL from './jt/Jt';
 import E from './Ux.Error';
 import G from './draw';
 import D from './monitor';
@@ -23,8 +22,16 @@ import Trigger from './trigger';
 import Terminal from './terminal';
 import Structure from './structure';
 
+import CONTROL from './jt/Jt';
+import XT from './xweb';
+
 export default {
     ...CONTROL,
+    /**
+     *  XT系列组件用于替换掉CONTROL中的自定义组件对应的方法
+     *  将J系列的方法全部替换成新版
+     */
+    ...XT,
     // 优化Form处理
     ...FORM,
     // 列处理
