@@ -58,14 +58,6 @@ class StateOut {
     constructor(state: Object) {
         this.state = state;
         this.response = {};
-        // 默认带上submitting
-        const reference = this.response;
-        _zipper(this.state.out, {
-            // 提交专用
-            "status": ["submitting"]
-        }, (data: DataContainer, key: string) => {
-            reference[`$${key}`] = data;
-        });
     }
 
     /**

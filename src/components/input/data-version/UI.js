@@ -14,8 +14,23 @@ const {zero} = Ux;
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Fn.markdown(this,
+            require('./md/Markdown.UI.Left.md'),
+            require('./md/Markdown.UI.Right.md'),
+            require('./md/Markdown.Op.md'),
+            require('./md/Markdown.Op.Act.md')
+        )
+    }
+
     render() {
-        return Fn.ui(this, "UI.Tree"
+        return Fn.ui(this, "UI.Tree",
+            "UI.Left",
+            "UI.Right",
+            "UI.Left.js",
+            "UI.Right.js",
+            "Op.ts",
+            "Op.Act.ts"
         )(
             <Index reference={this}
                    rxInject={Fn.injectOptFun(this)}
