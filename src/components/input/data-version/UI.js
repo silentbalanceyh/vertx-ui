@@ -16,6 +16,7 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     componentDidMount() {
         Fn.markdown(this,
+            require('./md/Markdown.UI.Index.md'),
             require('./md/Markdown.UI.Left.md'),
             require('./md/Markdown.UI.Right.md'),
             require('./md/Markdown.Op.md'),
@@ -27,6 +28,7 @@ class Component extends React.PureComponent {
         return Fn.ui(this, "UI.Tree",
             "UI.Left",
             "UI.Right",
+            "UI.Index.js",
             "UI.Left.js",
             "UI.Right.js",
             "Op.ts",
