@@ -25,7 +25,6 @@ class Component extends React.PureComponent {
     // 核心方法，渲染组件
     render() {
         const {config = {}} = this.props;
-        console.info(this.props, this.state);
         return (
             <Input.Group className={"web-date-version"}
                          compact>
