@@ -1,8 +1,8 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Button, Row} from 'antd';
 import Op from './Op';
-import LayoutRow from './UI.Layout.Row'
+import LayoutRow from './UI.Layout.Row';
 import {_zero} from "../../_internal";
 
 @_zero({
@@ -28,7 +28,7 @@ class Component extends React.Component {
                     <Button icon={'plus'} onClick={Op.rowAdd(this)}/>
                 </Row>
             </div>
-        )
+        );
     }
 }
 

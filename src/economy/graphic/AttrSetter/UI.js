@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import Ux from 'ux';
 import {Col, Row, Table} from 'antd';
 import {_zero} from "../../_internal";
@@ -50,8 +50,8 @@ class Component extends React.PureComponent {
                     </Col>
                 </Row>
             </PageCard>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

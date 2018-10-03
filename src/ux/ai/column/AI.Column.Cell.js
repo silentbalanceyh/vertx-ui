@@ -53,7 +53,7 @@ const aiCellLogical = (reference, config = {}) => text => {
 const aiCellPercent = (reference, config) => text => {
     return (
         <span>{Format.fmtPercent(text)}</span>
-    )
+    );
 };
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理时间格式化
@@ -125,7 +125,7 @@ const aiCellCurrency = (reference, config = {}) => text => {
  */
 const aiCellExpression = (reference, config) => text => {
     return undefined !== text ? (
-        <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false
+        <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false;
 };
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理Datum类型：Tabular/Assist专用格式化
@@ -158,7 +158,7 @@ const aiCellDatum = (reference, config) => text => {
         const result = [];
         text.forEach(each => result.push(Type.elementUnique(data, datum.value, each)));
         return (
-            <span>{result.map(item => item[datum.display]).join('，')}</span>)
+            <span>{result.map(item => item[datum.display]).join('，')}</span>);
     } else {
         const item = Type.elementUnique(data, datum.value, text);
         return <span>{item ? item[datum.display] : false}</span>;
@@ -168,21 +168,20 @@ const aiCellIcon = (reference, config) => text => {
     const mapping = config['$mapping'] ? config['$mapping'] : {};
     const target = mapping[text];
     if (U.isObject(target)) {
-        return <span>
+        return (<span>
             {target.icon ? <Icon type={target.icon}
                                  style={target.style ? target.style : {}}/> : false}
             &nbsp;&nbsp;{target.text}
-        </span>
+        </span>);
     } else {
-        return <span>{target}</span>
+        return (<span>{target}</span>);
     }
 };
 const aiCellDownload = (reference, config) => (text) => {
     // TODO:
     let downloadConfig = config["$download"];
     if (!downloadConfig) downloadConfig = {};
-    return (
-        <a href={text}>{downloadConfig.flag ? downloadConfig.flag : text}</a>)
+    return (<a href={text}>{downloadConfig.flag ? downloadConfig.flag : text}</a>);
 };
 const aiCellMapping = (reference, config) => (text) => {
     const mapping = config['$mapping'];
@@ -192,10 +191,10 @@ const aiCellMapping = (reference, config) => (text) => {
             const item = Ai.aiExprIcon(literal);
             return fieldRender.jsxIcon(item);
         } else {
-            return <span>{mapping[text]}</span>
+            return (<span>{mapping[text]}</span>);
         }
     } else {
-        return <span>{text}</span>
+        return (<span>{text}</span>);
     }
 };
 export default {

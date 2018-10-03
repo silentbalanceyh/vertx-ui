@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from 'ux';
@@ -31,11 +31,11 @@ class Component extends React.PureComponent {
         if ($sub.is()) {
             return (
                 <div id={"g6Sub"}/>
-            )
+            );
         } else {
-            return (<EmptyContent/>)
+            return (<EmptyContent/>);
         }
     }
 }
 
-export default Component
+export default Component;

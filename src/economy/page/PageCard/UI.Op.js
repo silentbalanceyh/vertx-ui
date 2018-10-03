@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from "ux";
 import {Button} from "antd";
 import Immutable from 'immutable';
@@ -19,13 +19,14 @@ const renderButton = (reference, topbar, key = "left") => {
         <Button.Group>
             {buttons.map(button => {
                 const {text, ...rest} = button;
-                return <Button {...rest}>{text}</Button>
+                return (<Button {...rest}>{text}</Button>);
             })}
         </Button.Group>
-    )
+    );
 };
 const renderBack = (reference, topbar) => {
-    return (<Button icon={"close"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
+    return (<Button icon={"close"} shape="circle" type={"ghost"}
+                    onClick={onClickBack(reference, topbar)}/>);
 };
 
 const initComponent = (ref) => {
@@ -44,4 +45,4 @@ export default {
     renderButton,
     renderBack,
     initComponent
-}
+};

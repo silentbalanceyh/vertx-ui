@@ -27,4 +27,4 @@ const fmtPercent = (value) => {
 export default {
     fmtCurrency,
     fmtPercent
-}
+};

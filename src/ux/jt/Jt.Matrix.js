@@ -19,18 +19,19 @@ const _jemRemove = (reference, record, index) => (event) => {
         state.source[index] = data;
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        Ux.valueOnChange(reference, {source})
+        Ux.valueOnChange(reference, {source});
     }
 };
 
 const _jemOp = (reference, config, jsx = {}) => (text, record, index) => {
     return (
         <span>
-            {jsx.refresh ? (<Button icon={"reload"} onClick={_jemRemove(reference, record, index)}/>) : false}
+            {jsx.refresh ? (<Button icon={"reload"}
+                                    onClick={_jemRemove(reference, record, index)}/>) : false}
             &nbsp;&nbsp;
             {text}
         </span>
-    )
+    );
 };
 const jemInit = (reference, config = {}, returnState = false) => {
     E.fxTerminal(!reference, 10049, reference);
@@ -49,7 +50,7 @@ const jemInit = (reference, config = {}, returnState = false) => {
         });
     }
     if (returnState) {
-        return source
+        return source;
     } else {
         reference.setState({source});
     }
@@ -67,4 +68,4 @@ export default {
     jemColumn,
     // 读取数据
     //jetData,
-}
+};

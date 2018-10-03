@@ -20,7 +20,7 @@ const aiInput = (reference, jsx = {}, onChange) => {
     RxAnt.onAddonAfter(jsx);
     // onChange处理
     RxAnt.onChange(jsx, onChange);
-    return (<Input {...jsx}/>)
+    return (<Input {...jsx}/>);
 };
 
 const aiTreeSelect = (reference, jsx = {}, onChange) => {
@@ -29,13 +29,13 @@ const aiTreeSelect = (reference, jsx = {}, onChange) => {
     const data = RxAnt.toTreeOptions(reference, config);
     // 处理onChange
     RxAnt.onChange(rest, onChange);
-    return (<TreeSelect treeData={data} {...rest}/>)
+    return (<TreeSelect treeData={data} {...rest}/>);
 };
 
 const aiInputNumber = (reference, jsx = {}, onChange) => {
     // onChange处理
     RxAnt.onChange(jsx, onChange);
-    return (<InputNumber {...jsx}/>)
+    return (<InputNumber {...jsx}/>);
 };
 const aiSelect = (reference, jsx = {}, onChange) => {
     const {config = {}, filter, ...rest} = jsx;
@@ -50,7 +50,7 @@ const aiSelect = (reference, jsx = {}, onChange) => {
                 </Select.Option>
             ))}
         </Select>
-    )
+    );
 };
 
 const aiRadio = (reference, jsx = {}, onChange) => {
@@ -67,7 +67,7 @@ const aiRadio = (reference, jsx = {}, onChange) => {
                 </Radio>
             ))}
         </Radio.Group>
-    )
+    );
 };
 const aiCheckbox = (reference, jsx = {}, onChange) => {
     const {config, ...rest} = jsx;
@@ -76,10 +76,10 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const options = RxAnt.toOptions(reference, config);
     return (config) ?
         <Checkbox.Group {...rest} options={options}/> :
-        <Checkbox {...rest}/>
+        <Checkbox {...rest}/>;
 };
 const aiTextArea = (reference, jsx = {}) => {
-    return (<Input.TextArea {...jsx}/>)
+    return (<Input.TextArea {...jsx}/>);
 };
 const aiDatePicker = (reference, jsx = {}, onChange) => {
     // DisabledDate
@@ -91,7 +91,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
 
 const aiTimePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
-    return (<TimePicker {...jsx}/>)
+    return (<TimePicker {...jsx}/>);
 };
 export default {
     // Label专用组件
@@ -105,4 +105,4 @@ export default {
     aiTreeSelect,
     aiDatePicker,
     aiTimePicker,
-}
+};

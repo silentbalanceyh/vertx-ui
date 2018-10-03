@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {DynamicDialog} from "web";
 import {Button, Drawer, Popover} from 'antd';
 import Ux from 'ux';
@@ -14,15 +14,15 @@ const getChildren = (reference) => {
                     fnClose: () => reference.setState({visible: false}),
                     ...Ux.toUniform(reference.props)
                 });
-            } else return child
-        })
+            } else return child;
+        });
     }
     // 其次取$content，必须执行Jsx的转换
     if (Component) {
         return (
             <Component fnClose={() => reference.setState({visible: false})}
                        {...Ux.toUniform(reference.props)}/>
-        )
+        );
     }
     return false;
 };
@@ -61,7 +61,7 @@ const renderPopover = (reference) => {
                         size={"small"}
                         onClick={config.onClose}/>
             </span>
-        )
+        );
     }
     return (
         <Popover trigger={"click"}
@@ -77,4 +77,4 @@ export default {
     DIALOG: renderDialog,
     DRAWER: renderDrawer,
     POPOVER: renderPopover
-}
+};

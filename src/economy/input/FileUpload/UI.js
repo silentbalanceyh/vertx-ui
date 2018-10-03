@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Button, Icon, Upload} from 'antd';
 
 class Component extends React.PureComponent {
@@ -20,8 +20,8 @@ class Component extends React.PureComponent {
                     </Button>
                 )}
             </Upload>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

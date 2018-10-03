@@ -29,7 +29,7 @@ const dsBar = (dataSource = [], resource = {}) => {
     const config = {};
     config.color = "group";
     config.position = "key*value";
-    return {data, config}
+    return {data, config};
 };
 
 const dsRadial = (dataSource = [], resource = {}) => {
@@ -46,7 +46,7 @@ const dsRadial = (dataSource = [], resource = {}) => {
                     dataItem[targetKey] = item[key];
                     fields.push(targetKey);
                 }
-            })
+            });
         }
         dataArr.push(dataItem);
     });
@@ -54,7 +54,7 @@ const dsRadial = (dataSource = [], resource = {}) => {
     const config = {};
     config.position = `${resource.item}*value`;
     config.color = 'key';
-    return {data, config}
+    return {data, config};
 };
 export default {
     dsBar,

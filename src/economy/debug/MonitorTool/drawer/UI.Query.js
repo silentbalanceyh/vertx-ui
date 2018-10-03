@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from 'ux';
@@ -23,8 +23,8 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return (<div id={"g6Query"}/>)
+        return (<div id={"g6Query"}/>);
     }
 }
 
-export default Component
+export default Component;

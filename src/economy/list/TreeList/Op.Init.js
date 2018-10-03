@@ -1,5 +1,5 @@
-import Ux from 'ux'
-import U from 'underscore'
+import Ux from 'ux';
+import U from 'underscore';
 
 const readConfig = (reference = {}) => {
     const {$key = "grid"} = reference.props;
@@ -34,7 +34,7 @@ const _updateExpand = (reference = {}) => {
                 if (!tree.key) tree.key = "key";
                 const result = $tree.to().map(item => item[tree.key]);
                 if (options["tree.root"]) {
-                    result.push("_ROOT_")
+                    result.push("_ROOT_");
                 }
                 reference.setState({expandedKeys: result});
             }
@@ -95,4 +95,4 @@ export default {
     // 右边表格
     initTable,
     initTabs
-}
+};

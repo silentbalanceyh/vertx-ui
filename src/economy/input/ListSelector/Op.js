@@ -27,4 +27,4 @@ const getDialog = (reference, config = {}) => {
 export default {
     getDefault,
     getDialog
-}
+};

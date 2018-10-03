@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from "ux";
@@ -29,11 +29,11 @@ class Component extends React.PureComponent {
     render() {
         const {$form} = this.props;
         if ($form.is()) {
-            return (<div id={"g6Form"}/>)
+            return (<div id={"g6Form"}/>);
         } else {
-            return (<EmptyContent/>)
+            return (<EmptyContent/>);
         }
     }
 }
 
-export default Component
+export default Component;

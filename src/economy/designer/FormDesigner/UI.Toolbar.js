@@ -1,8 +1,8 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {_zero} from "../../_internal";
 import {Collapse, List} from 'antd';
-import DragItem from './UI.Toolbar.Item'
+import DragItem from './UI.Toolbar.Item';
 
 @_zero({
     "i18n.cab": require('./Cab.json'),
@@ -23,11 +23,11 @@ class Component extends React.PureComponent {
                                 <DragItem {...item} type={item.key} {...this.props}/>
                             )}/>
                         </Collapse.Panel>
-                    )
+                    );
                 })}
             </Collapse>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

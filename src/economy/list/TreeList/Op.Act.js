@@ -1,7 +1,7 @@
 import U from 'underscore';
 import Immutable from 'immutable';
 import Ux from 'ux';
-import Op from './Op.Visit'
+import Op from './Op.Visit';
 import Init from "./Op.Init";
 
 const _recoverData = (reference = {}, item = {}) => {
@@ -26,7 +26,7 @@ const _recoverData = (reference = {}, item = {}) => {
 const _rxState = (iKey, iItemData, iItemText) => {
     return ({
         iKey, iItemText, iItemData
-    })
+    });
 };
 const rxDelete = (reference, item) => (event) => {
     // 是否触发外置操作
@@ -90,13 +90,13 @@ const rxPreAdd = (reference, item) => (event) => {
         expandedKeys,
         ..._rxState(newItem.key, newItem)
     };
-    reference.setState(state)
+    reference.setState(state);
 };
 
 const rxCancel = (reference) => event => {
     event.preventDefault();
     // 清空三个核心节点
-    reference.setState(_rxState())
+    reference.setState(_rxState());
 };
 
 const rxEdit = (reference, item) => (event) => {
@@ -202,7 +202,7 @@ const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
                     data: dataItem,
                     key,
                 }
-            })
+            });
         }
     }
 };
@@ -215,7 +215,7 @@ const rxSearch = (reference) => (value) => {
     reference.setState({keyword: value});
 };
 const rxClear = (reference) => () => {
-    reference.setState({term: "", keyword: undefined})
+    reference.setState({term: "", keyword: undefined});
 };
 const rxCriteria = (reference) => (event) => {
     reference.setState({term: event.target.value});
@@ -241,4 +241,4 @@ export default {
     rxSearch,
     rxClear,
     rxCriteria
-}
+};

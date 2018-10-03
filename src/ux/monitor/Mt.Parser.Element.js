@@ -45,4 +45,4 @@ const toChildren = (object = {}, counter = []) => {
 };
 export default {
     toChildren
-}
+};

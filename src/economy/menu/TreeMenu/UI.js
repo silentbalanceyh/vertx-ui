@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {DataLabor} from 'entity';
 import {Icon, Tree} from 'antd';
 import Immutable from 'immutable';
@@ -11,7 +11,7 @@ const renderNode = (item = {}) => {
         }>
             {item.children ? (item.children.map(child => renderNode(child))) : false}
         </TreeNode>
-    )
+    );
 };
 
 class Component extends React.PureComponent {
@@ -42,7 +42,7 @@ class Component extends React.PureComponent {
             <Tree {...attrs} {...jsx}>
                 {treeData.to().map(item => renderNode(item))}
             </Tree>
-        )
+        );
     }
 }
 

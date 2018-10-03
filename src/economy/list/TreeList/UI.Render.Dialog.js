@@ -1,7 +1,7 @@
 import {Button, Popover, Tooltip} from "antd";
-import './Cab.less'
+import './Cab.less';
 import Act from "./Op.Act";
-import Is from './Op.Is'
+import Is from './Op.Is';
 import React from "react";
 import Ux from "ux";
 import Fn from "../../_internal/Ix.Fn";
@@ -13,7 +13,7 @@ const renderClose = (reference, item, title) => {
             <Button icon={"close"} type={"danger"} shape={"circle"}
                     onClick={Act.rxCloseDialog(reference, item)}/>
         </span>
-    )
+    );
 };
 
 const _calcPosition = (config = {}) => {
@@ -51,13 +51,13 @@ const renderAdd = (reference, config = {}, item) => {
                          config.over.add.title)}>
                 {renderAddButton(Act.rxAddDialog(reference, item))}
             </Popover>
-        )
+        );
     } else {
         return (
             <Tooltip {...config.over.add}>
                 {renderAddButton(Act.rxPreAdd(reference, item))}
             </Tooltip>
-        )
+        );
     }
 };
 const renderEdit = (reference, config = {}, item) => {
@@ -80,13 +80,13 @@ const renderEdit = (reference, config = {}, item) => {
                          config.over.edit.title)}>
                 {renderEditButton(Act.rxEditDialog(reference, item))}
             </Popover>
-        )
+        );
     } else {
         return (
             <Tooltip {...config.over.edit}>
                 {renderEditButton(Act.rxPreEdit(reference, item))}
             </Tooltip>
-        )
+        );
     }
 };
 
@@ -103,4 +103,4 @@ const renderAddButton = (onClick) => (
 export default {
     renderAdd,
     renderEdit
-}
+};

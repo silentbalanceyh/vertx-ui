@@ -20,7 +20,7 @@ const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     return (jsx.op.map(each => (
         <Button key={each} id={each}
                 onClick={E.fxSubmit(reference, Op, each)}/>
-    )))
+    )));
 };
 
 const aiFormButton = (reference, onClick, id = false, submit = []) => {
@@ -42,7 +42,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                         event.preventDefault();
                         const executor = fn(reference);
                         return Jsx.rtSubmit(reference, executor);
-                    }
+                    };
                 } else {
                     item.onClick = fn(reference);
                 }
@@ -54,9 +54,9 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                 {buttons.filter(item => item.key.startsWith("$")).map(item => (
                     <Button {...item}/>))}
             </span>
-        )
+        );
     } else {
-        console.error("未传入'onClick'事件绑定原始数据！")
+        console.error("未传入'onClick'事件绑定原始数据！");
     }
 };
 const aiOp = (reference) => (Op) => Object.keys(Op)
@@ -89,9 +89,9 @@ const ai2FilterButton = (window = 1) => {
                     <Button icon={"reload"}
                             onClick={Fn.irClear(ref)}>{button.clear}</Button>
                 </Button.Group>
-            ) : false
+            ) : false;
         }
-    }
+    };
 };
 export default {
     // 登录按钮替换RxOp使用

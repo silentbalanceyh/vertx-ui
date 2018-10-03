@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import {Button, Tooltip} from 'antd';
 import {_zero} from "../../_internal";
-import Op from './Op'
+import Op from './Op';
 import Tool from './UI.Tool';
 
 @_zero({
@@ -11,7 +11,7 @@ import Tool from './UI.Tool';
 class Component extends React.PureComponent {
     componentDidMount() {
         const buttons = Op.initTool(this);
-        this.setState({buttons})
+        this.setState({buttons});
     }
 
     render() {
@@ -29,13 +29,13 @@ class Component extends React.PureComponent {
                             <Tooltip title={tip} key={key} trigger={"contextMenu"}>
                                 <Button {...rest}/>
                             </Tooltip>
-                        )
+                        );
                     })}
                 </Button.Group>
                 <Tool {...this.props} reference={this} $drawer={lefts}/>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Button} from 'antd';
 import Op from './Op';
 import Ux from 'ux';
@@ -30,4 +30,4 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+export default Component;

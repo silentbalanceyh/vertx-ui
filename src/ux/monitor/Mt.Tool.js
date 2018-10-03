@@ -17,9 +17,9 @@ const renderTool = (reference) => {
 };
 const renderColumn = (columns = []) => {
     // value专用
-    columns.forEach(column => Column.vtValue(column))
+    columns.forEach(column => Column.vtValue(column));
 };
 export default {
     renderTool,
     renderColumn
-}
+};

@@ -22,4 +22,4 @@ const monitorComplexList = (reference, prevState = {}) => {
 export default {
     monitorDialogList,
     monitorComplexList
-}
+};

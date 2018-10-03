@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Input, TimePicker} from 'antd';
 import Ux from 'ux';
 
@@ -45,7 +45,7 @@ class Component extends React.PureComponent {
                             onChange={this.handleTime('to', rest.format)}
                             value={toValue}/>
             </Input.Group>
-        )
+        );
     }
 }
 

@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
-import './Cab.less'
-import {Alert, Button, Table} from 'antd'
+import './Cab.less';
+import {Alert, Button, Table} from 'antd';
 import {DynamicDialog} from "web";
 import Op from './UI.Op';
 
@@ -69,7 +69,7 @@ class Component extends React.PureComponent {
                                $key={this.state.selectedKey} {...Ux.toDatum(this.props)}/>
                 </DynamicDialog>
             </div>
-        )
+        );
     }
 }
 

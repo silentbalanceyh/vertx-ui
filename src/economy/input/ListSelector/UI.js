@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Icon, Input, Table} from "antd";
 import {DynamicDialog} from "web";
@@ -20,7 +20,7 @@ class Component extends React.PureComponent {
         this.setState({
             onClick, dialog, ready: true,
             table: {columns, rowSelection}
-        })
+        });
     }
 
     render() {
@@ -50,7 +50,7 @@ class Component extends React.PureComponent {
                                dataSource={$data.list}/>
                     </DynamicDialog>
                 </span>
-            )
+            );
         } else return false;
     }
 }

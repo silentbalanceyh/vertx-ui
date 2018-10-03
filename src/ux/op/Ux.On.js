@@ -40,4 +40,4 @@ export default {
     onShow,
     onHide,
     onDialog,
-}
+};

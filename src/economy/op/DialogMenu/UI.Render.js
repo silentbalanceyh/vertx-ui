@@ -1,5 +1,5 @@
-import React from 'react'
-import {Drawer, Icon} from 'antd'
+import React from 'react';
+import {Drawer, Icon} from 'antd';
 import DynamicDialog from '../../dialog/DynamicDialog/UI';
 import Ux from "ux";
 
@@ -24,7 +24,7 @@ const getChildren = (reference, item = {}) => {
                 reference.setState(state);
             }} {...Ux.toUniform(reference.props)}
                        $inited={init ? $inited : _calcInit($inited)}/>
-        )
+        );
     } else return false;
 };
 
@@ -65,4 +65,4 @@ export default {
     renderItem,
     DIALOG: renderDialog,
     DRAWER: renderDrawer,
-}
+};

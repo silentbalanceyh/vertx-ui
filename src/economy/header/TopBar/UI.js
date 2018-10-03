@@ -1,6 +1,6 @@
-import './Cab.less'
-import React from 'react'
-import {Button} from 'antd'
+import './Cab.less';
+import React from 'react';
+import {Button} from 'antd';
 import Ux from 'ux';
 import {_zero} from '../../_internal/index';
 import {DataLabor} from 'entity';
@@ -52,8 +52,8 @@ class Component extends React.PureComponent {
                     ))
                 )}
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

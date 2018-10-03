@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from "ux";
 import {Button, Steps} from "antd";
 import Immutable from "immutable";
@@ -14,7 +14,8 @@ const onClickBack = (reference, topbar) => (event) => {
 };
 
 const renderBack = (reference, topbar) => {
-    return (<Button icon={"close"} shape="circle" type={"ghost"} onClick={onClickBack(reference, topbar)}/>)
+    return (<Button icon={"close"} shape="circle" type={"ghost"}
+                    onClick={onClickBack(reference, topbar)}/>);
 };
 
 const renderButton = (reference, topbar, key = "left") => {
@@ -23,10 +24,10 @@ const renderButton = (reference, topbar, key = "left") => {
         <Button.Group>
             {buttons.map(button => {
                 const {text, ...rest} = button;
-                return <Button {...rest}>{text}</Button>
+                return (<Button {...rest}>{text}</Button>);
             })}
         </Button.Group>
-    )
+    );
 };
 const renderHelp = (reference, topbar, current) => {
     if (topbar.help && topbar.help.steps) {
@@ -35,7 +36,8 @@ const renderHelp = (reference, topbar, current) => {
         let $current = current ? current : topbar.help.current;
         $current = Ux.valueInt($current);
         return (
-            <Steps current={$current} size={topbar.help.size ? topbar.help.size : "small"}>
+            <Steps current={$current}
+                   size={topbar.help.size ? topbar.help.size : "small"}>
                 {helps.map(help => <Steps.Step {...help}/>)}
             </Steps>
         );
@@ -57,4 +59,4 @@ export default {
     renderHelp,
     renderButton,
     initComponent,
-}
+};

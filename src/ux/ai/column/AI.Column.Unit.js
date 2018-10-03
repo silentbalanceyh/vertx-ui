@@ -18,7 +18,7 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
                    index, field: item.dataIndex,
                    value: event.target.value
                })}/>
-    )
+    );
 };
 
 const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -32,7 +32,7 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
     return (
         <Input {...attrs}/>
         //onChange={Xt.xt2ChangeUnit(reference, params)}
-    )
+    );
 };
 
 const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
@@ -42,7 +42,7 @@ const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
         label = record[config.to];
     }
     return (<span
-        style={jsx.style ? jsx.style : {}}>{label}</span>)
+        style={jsx.style ? jsx.style : {}}>{label}</span>);
 };
 
 
@@ -63,7 +63,7 @@ const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
                 index, field: item.dataIndex,
                 value
             })} {...values}/>
-    )
+    );
 };
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
     const datum = item["$config"].datum;
@@ -95,7 +95,7 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
                 </Select.Option>
             ))}
         </Select>
-    )
+    );
 };
 const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
     let options = item['$config'] ? item['$config'] : [];
@@ -112,7 +112,7 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) =>
             index, field: item.dataIndex,
             value: event.target.value
         })
-    })
+    });
 };
 
 const aiUnitTree = (reference, item = {}, jsx = {}) => () => {
@@ -132,4 +132,4 @@ export default {
     LABEL: aiUnitLabel,
     DECIMAL: aiUnitDecimal,
     TREE: aiUnitTree
-}
+};

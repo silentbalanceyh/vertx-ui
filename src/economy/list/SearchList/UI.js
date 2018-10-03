@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
-import './Cab.less'
-import {Button, Input, Table} from 'antd'
+import './Cab.less';
+import {Button, Input, Table} from 'antd';
 import {DynamicDialog} from "web";
 import Op from './UI.Op';
 
@@ -47,7 +47,7 @@ class Component extends React.PureComponent {
                         if (item.icon) attrs.icon = item.icon;
                         if (item.hasOwnProperty("fnKey")) {
                             attrs.onClick = $op[item['fnKey']] ? $op[item['fnKey']] : () => {
-                            }
+                            };
                         }
                         return (
                             <Button {...attrs}>{item.text}</Button>
@@ -68,7 +68,7 @@ class Component extends React.PureComponent {
                                $key={this.state.selectedKey} {...Ux.toDatum(this.props)}/>
                 </DynamicDialog>
             </div>
-        )
+        );
     }
 }
 

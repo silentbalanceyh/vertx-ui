@@ -26,7 +26,7 @@ const uiRow = (row = {}, addition = {}, config) => {
             if (item.hidden) {
                 style.display = "none";
             } else {
-                style.width = "100%"
+                style.width = "100%";
             }
         }
         // 标题单行修正间距专用

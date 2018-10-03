@@ -1,13 +1,13 @@
 import {createAction} from 'redux-act';
 import {Taper, zero} from "environment";
 import {DataLabor} from "entity";
-import {Set} from 'immutable'
-import routeData from '../route'
-import Random from './util/Ux.Random'
+import {Set} from 'immutable';
+import routeData from '../route';
+import Random from './util/Ux.Random';
 import Dg from './Ux.Debug';
 import Cv from './Ux.Constant';
-import AiStream from './stream/Ai.Stream'
-import U from 'underscore'
+import AiStream from './stream/Ai.Stream';
+import U from 'underscore';
 
 /**
  * 自动生成路由专用函数
@@ -58,7 +58,7 @@ const route = (container = {}, components = {}) => {
                     route.key = Random.randomString(16);
                     routes.push(route);
                 }
-            })
+            });
         }
     }
     return routes;
@@ -142,4 +142,4 @@ export default {
     auiTable: (reference) => new AiStream(reference).table().init(),
     // 专用CRUD的Mock
     mockCrud: (reference) => new AiStream(reference).mock().init(),
-}
+};

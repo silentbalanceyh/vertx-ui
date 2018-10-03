@@ -273,7 +273,7 @@ const ajaxUniform = (success, failure, loading) => new Promise((resolve, reject)
             return resolve({
                 data: retSuccess,
                 success: true
-            })
+            });
         }
     } else {
         return resolve({success: true});

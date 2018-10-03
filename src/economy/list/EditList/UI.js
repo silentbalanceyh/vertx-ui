@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Table} from 'antd';
 import Op from './UI.Op';
@@ -10,7 +10,7 @@ class Component extends React.PureComponent {
         Ux.uiTableColumn(this, $config.columns, Op);
         return (
             <Table {...$config} dataSource={$data} className="page-list"/>
-        )
+        );
     }
 }
 

@@ -17,7 +17,7 @@ import moment from "moment";
  *      },
  */
 const propFromNow = (current) => {
-    return (current && current.format("YYYY-MM-DD") < moment().format("YYYY-MM-DD"))
+    return (current && current.format("YYYY-MM-DD") < moment().format("YYYY-MM-DD"));
 };
 /**
  * @class Attribute

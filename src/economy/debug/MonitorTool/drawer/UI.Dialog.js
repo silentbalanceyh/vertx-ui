@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from "ux";
@@ -29,11 +29,11 @@ class Component extends React.PureComponent {
     render() {
         const {$dialog} = this.props;
         if ($dialog.is()) {
-            return (<div id={"g6Dialog"}/>)
+            return (<div id={"g6Dialog"}/>);
         } else {
-            return (<EmptyContent/>)
+            return (<EmptyContent/>);
         }
     }
 }
 
-export default Component
+export default Component;

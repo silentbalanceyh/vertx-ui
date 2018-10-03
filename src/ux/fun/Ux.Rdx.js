@@ -41,7 +41,7 @@ const rdxClear = (reference) => {
     const {fnClear} = reference.props;
     E.fxTerminal(!fnClear, 10086, fnClear);
     if (U.isFunction(fnClear)) {
-        fnClear()
+        fnClear();
     }
 };
 const rdxTree = (reference, values, isDeleted = false) => {
@@ -65,4 +65,4 @@ export default {
     rdxClear,
     // 关闭窗口专用，调用fnClose方法
     rdxClose,
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Table} from 'antd';
 import {_zero} from "../../../_internal";
@@ -23,9 +23,9 @@ class Component extends React.PureComponent {
             }
             return (
                 <Table {...table} dataSource={data}/>
-            )
+            );
         } else return false;
     }
 }
 
-export default Component
+export default Component;

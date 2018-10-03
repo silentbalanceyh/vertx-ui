@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Col, Input, Row} from 'antd';
 import Immutable from "immutable";
 
@@ -56,14 +56,15 @@ class Component extends React.PureComponent {
                             </Col>
                             <Col span={3}/>
                             <Col span={7}>
-                                <Input {...meta} {...to} onChange={this.handleInput(item.key)}/>
+                                <Input {...meta} {...to}
+                                       onChange={this.handleInput(item.key)}/>
                             </Col>
                         </Row>
-                    )
+                    );
                 })}
             </Input.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

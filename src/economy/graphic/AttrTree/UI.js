@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {v4} from 'uuid';
 import {Col, Row, Table} from 'antd';
 import {_zero} from "../../_internal";
-import Jsx from './UI.Jsx'
+import Jsx from './UI.Jsx';
 import Op from "./UI.Parser";
 import Ux from 'ux';
 
@@ -45,8 +45,8 @@ class Component extends React.PureComponent {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Input, TreeSelect} from 'antd';
 
 class Component extends React.PureComponent {
@@ -7,8 +7,8 @@ class Component extends React.PureComponent {
             <Input.Group>
                 <TreeSelect/>
             </Input.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

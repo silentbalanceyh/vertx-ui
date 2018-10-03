@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
@@ -10,7 +10,7 @@ class Component extends React.PureComponent {
         super(props);
         this.state = {
             source: props.value || [{key: Ux.randomUUID()}]
-        }
+        };
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -37,7 +37,7 @@ class Component extends React.PureComponent {
                 <Table {...config} className={"web-table-editor"} pagination={false}
                        dataSource={source} size={"default"}/>
             </Input.Group>
-        )
+        );
     }
 }
 

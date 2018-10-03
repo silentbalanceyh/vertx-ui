@@ -50,4 +50,4 @@ export default {
     rxTree,
     // TreeTable组件专用
     rxCircle,
-}
+};

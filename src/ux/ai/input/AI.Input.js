@@ -17,7 +17,7 @@ const aiConfirm = (reference, onOk, ...path) => {
 const aiUI = (Component, viewOnly = false) => {
     return (reference, jsx = {}) => (
         <Component reference={reference} {...jsx} viewOnly={viewOnly}/>
-    )
+    );
 };
 export default {
     // 纯写法
@@ -31,4 +31,4 @@ export default {
     ...Op,
     // 绑定组件专用
     ...RxDatum,
-}
+};

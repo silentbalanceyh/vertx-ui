@@ -18,12 +18,12 @@ const aiHLink = (reference, key) => {
         // 仅包含key
         if (!info.hasOwnProperty(keyLabel)) {
             return (<a key={Random.randomString(7)} href={info[key]}
-                       target={"_blank"}>{info[key]}</a>)
+                       target={"_blank"}>{info[key]}</a>);
         } else {
             return (<div key={Random.randomString(7)}>
                 {info[keyLabel]}：
                 <a href={info[key]} target={"_blank"}>{info[key]}</a>
-            </div>)
+            </div>);
         }
     }
 };
@@ -39,4 +39,4 @@ const aiUri = (item = {}, $router) => {
 export default {
     aiHLink,
     aiUri,
-}
+};

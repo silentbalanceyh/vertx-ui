@@ -20,7 +20,7 @@ const _jetAdd = (reference, index) => (event) => {
         }
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        Value.valueOnChange(reference, {source})
+        Value.valueOnChange(reference, {source});
     }
 };
 
@@ -32,7 +32,7 @@ const _jetRemove = (reference, index) => (event) => {
         const item = state.source.filter((item, idx) => idx !== index);
         const source = Immutable.fromJS(item).toJS();
         reference.setState({source});
-        Value.valueOnChange(reference, {source})
+        Value.valueOnChange(reference, {source});
     }
 };
 const _jetOp = (reference, item, jsx) => (text, record, index) => {
@@ -42,7 +42,7 @@ const _jetOp = (reference, item, jsx) => (text, record, index) => {
             <Button disabled={0 === index} icon={"minus"}
                     onClick={_jetRemove(reference, index)}/>
         </Button.Group>
-    )
+    );
 };
 
 const jctColumn = (reference, columns = [], jsx, render = {}) => {
@@ -76,7 +76,7 @@ const jetInit = (reference, returnState = false) => {
     if (returnState) {
         return {source};
     } else {
-        reference.setState({source})
+        reference.setState({source});
     }
 };
 
@@ -90,7 +90,7 @@ const jetInitWithAll = (reference, returnState = false) => {
     if (returnState) {
         return sourceAll;
     } else {
-        reference.setState(sourceAll)
+        reference.setState(sourceAll);
     }
 };
 
@@ -107,7 +107,7 @@ const jctData = (reference) => {
     E.fxTerminal(!reference.state, 10084, reference.state);
     let {source} = reference.state;
     if (U.isArray(source)) {
-        source.forEach((item, index) => (item.sequence = (index + 1)))
+        source.forEach((item, index) => (item.sequence = (index + 1)));
     } else {
         source = [];
     }
@@ -124,4 +124,4 @@ export default {
     jctData,
     // 属性抽取
     jctProps,
-}
+};

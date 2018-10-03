@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../../_internal";
 import {DataLabor} from 'entity';
 import Ux from 'ux';
@@ -42,11 +42,11 @@ class Component extends React.PureComponent {
                     <div id={"g6Major"}/>
                     <Table {...table} dataSource={data}/>
                 </div>
-            )
+            );
         } else {
-            return (<EmptyContent/>)
+            return (<EmptyContent/>);
         }
     }
 }
 
-export default Component
+export default Component;

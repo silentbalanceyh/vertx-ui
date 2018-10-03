@@ -27,7 +27,7 @@ const viewColumn = (column, content) => {
         <Col {...attrs}>
             {U.isFunction(content) ? content() : content}
         </Col>
-    )
+    );
 };
 /**
  * 渲染某一个Row的内容
@@ -42,13 +42,13 @@ const viewRow = (columns = [], flex = {}, ...content) => {
         className: "page-view"
     };
     if (flex.isSub) {
-        attrs.className = "page-viewsub"
+        attrs.className = "page-viewsub";
     }
     return (flex.show && 0 < columns.length) ? (
         <Row {...attrs}>
             {columns.map((column, index) => viewColumn(column, content[index]))}
         </Row>
-    ) : false
+    ) : false;
 };
 /**
  * 渲染某一个Row的Title
@@ -56,7 +56,7 @@ const viewRow = (columns = [], flex = {}, ...content) => {
  * @param message
  */
 const viewTitle = (message) => {
-    return (<Row className={"page-title"}>{message}</Row>)
+    return (<Row className={"page-title"}>{message}</Row>);
 };
 /**
  * 渲染某一个Row的Header
@@ -64,7 +64,7 @@ const viewTitle = (message) => {
  * @param message
  */
 const viewHeader = (message) => {
-    return (<Row className={"page-view-header"}>{message}</Row>)
+    return (<Row className={"page-view-header"}>{message}</Row>);
 };
 
 /**
@@ -107,7 +107,7 @@ const viewDownload = (config = {}, uri) => {
                 <a href={uri} target={"_target"}>{config.text}</a>
             </Col>
         </Row>
-    )
+    );
 };
 
 const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub = false) => {
@@ -119,7 +119,7 @@ const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub
                 const config = configMap[field];
                 const value = viewRender.extractValue($data, config);
                 row.flex.show = !!value;
-            })
+            });
         } else {
             row.flex = {};
             row.flex.show = true;
@@ -130,7 +130,7 @@ const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub
         [row.span, row.flex].concat(row.name.map(
             field => viewCell(reference, $data, field, configMap[field], renders)
         )))
-    )
+    );
 };
 export default {
     viewColumn,
@@ -141,4 +141,4 @@ export default {
     viewConfig,
     viewHeader,
     viewDownload,
-}
+};

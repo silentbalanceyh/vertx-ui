@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Op from "./Op";
 import {Col} from 'antd';
 import {DropTarget} from "react-dnd";
@@ -23,7 +23,7 @@ class Component extends React.Component {
                     }) : false}
                 </Col>
             </div>
-        )
+        );
     }
 }
 
@@ -31,4 +31,4 @@ export default DropTarget(
     Op.DragTypes.FormDesigner,
     Op.targetSpec,
     Op.targetConnect
-)(Component)
+)(Component);

@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {_zero} from '../../_internal/index';
 import {DataLabor} from 'entity';
 import Ux from "ux";
@@ -42,9 +42,9 @@ class Component extends React.PureComponent {
         return Ux.fxRender(this, () => {
             return Rdr.renderLayout(ref,
                 <TabList {...this.props}/>
-            )
+            );
         });
     }
 }
 
-export default Component
+export default Component;

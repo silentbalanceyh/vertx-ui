@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Modal} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
@@ -51,8 +51,8 @@ class Component extends React.PureComponent {
                 <Modal {...config} visible={$visible} className={className}>
                     {children}
                 </Modal>
-            )
-        })
+            );
+        });
     }
 }
 

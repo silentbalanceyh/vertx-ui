@@ -23,19 +23,19 @@ const verifyQuery = (key, query) => {
         return E.fxMessageError(10009, key, 'query');
     }
     if (!query.projection) {
-        return E.fxMessageError(10009, `${key}.query`, 'projection')
+        return E.fxMessageError(10009, `${key}.query`, 'projection');
     }
     if (!U.isArray(query.projection)) {
-        return E.fxMessageError(10010, `${key}.query.projection`, 'Array')
+        return E.fxMessageError(10010, `${key}.query.projection`, 'Array');
     }
     if (!query.pager) {
-        return E.fxMessageError(10009, `${key}.query`, 'pager')
+        return E.fxMessageError(10009, `${key}.query`, 'pager');
     }
     if (!query.sorter) {
-        return E.fxMessageError(10009, `${key}.query`, 'sorter')
+        return E.fxMessageError(10009, `${key}.query`, 'sorter');
     }
     if (!query.criteria) {
-        return E.fxMessageError(10009, `${key}.query`, 'criteria')
+        return E.fxMessageError(10009, `${key}.query`, 'criteria');
     }
 };
 
@@ -45,7 +45,7 @@ const verifyOptions = (key, options) => {
         return E.fxMessageError(10009, key, 'options');
     }
     if (!options['tabs.list']) {
-        return E.fxMessageError(10009, `${key}.options`, 'tabs.list')
+        return E.fxMessageError(10009, `${key}.options`, 'tabs.list');
     }
 };
 
@@ -79,7 +79,7 @@ const verifySubList = (ref) => {
     if (!message) {
         // TODO后期处理
     }
-    return message
+    return message;
 };
 const verifyTreeList = (ref, key = "") => {
     let message = verifyRooKey(ref, key);
@@ -97,4 +97,4 @@ export default {
     verifyComplex,
     verifySubList,
     verifyTreeList
-}
+};

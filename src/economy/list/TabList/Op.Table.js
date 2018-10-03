@@ -1,7 +1,7 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
-import Fn from '../../_internal/Ix.Fn'
+import Fn from '../../_internal/Ix.Fn';
 import U from "underscore";
 import {Button, Tooltip} from "antd";
 import React from "react";
@@ -79,7 +79,7 @@ const initAdd = (reference, column) => {
                             });
                         }}>{tip}</Button>
             </Tooltip>
-        )
+        );
     } else return column.title;
 };
 const initRow = (reference, columns = [], rowKey) => {
@@ -97,7 +97,7 @@ const initRow = (reference, columns = [], rowKey) => {
                     return U.isFunction(fnRender) ?
                         fnRender(text, record, index) : text;
                 }
-            }
+            };
         }
     });
     return columns;
@@ -144,4 +144,4 @@ const initTable = (reference = {}) => {
 };
 export default {
     initTable
-}
+};

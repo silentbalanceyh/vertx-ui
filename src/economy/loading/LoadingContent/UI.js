@@ -1,5 +1,5 @@
-import "./Cab.less"
-import React from 'react'
+import "./Cab.less";
+import React from 'react';
 import {Spin} from "antd";
 import {_zero} from "../../_internal";
 
@@ -23,7 +23,7 @@ class Component extends React.PureComponent {
             <div className="vi-content" style={style}>
                 <Spin size="large" tip={$tip ? $tip : $hoc._("loading")}/>
             </div>
-        )
+        );
     }
 }
 
