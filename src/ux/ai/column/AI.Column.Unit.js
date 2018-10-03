@@ -14,10 +14,13 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
     const {value, ...meta} = jsx;
     return (
         <Input {...attrs} {...meta}
-               onChange={(event) => Value.valueTriggerChange(reference, {
-                   index, field: item.dataIndex,
-                   value: event.target.value
-               })}/>
+               onChange={(event) => {
+                   event.preventDefault();
+                   Value.valueTriggerChange(reference, {
+                       index, field: item.dataIndex,
+                       value: event.target.value
+                   });
+               }}/>
     );
 };
 

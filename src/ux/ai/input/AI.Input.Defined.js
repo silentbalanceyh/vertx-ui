@@ -22,20 +22,25 @@ const aiFileUpload = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<FileUpload {...jsx}/>);
 };
-const aiDateVersion = (reference, jsx = {}, onChange) => {
-    RxAnt.onChange(jsx, onChange);
+const aiDateVersion = (reference, jsx = {}) => {
+    // RxAnt.onChange(jsx, onChange);
     return (<DateVersion {...jsx}/>);
 };
-const aiListSelector = (reference, jsx = {}, onChange) => {
+const aiListSelector = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
-    return (<ListSelector {...jsx} reference={reference}
-                          onChange={onChange}/>);
+    return (<ListSelector {...jsx} reference={reference}/>);
 };
-const aiTableEditor = (reference, jsx = {}, onChange) => {
+const aiTableEditor = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
-    return (<TableEditor {...jsx} reference={reference}
-                         onChange={onChange}/>);
+    return (<TableEditor {...jsx} reference={reference}/>);
 };
+/**
+ * Uncaught TypeError:
+ * ( intermediate value )(intermediate value)[action].apply is not a function
+ * 自定义组件中不能传入onChange函数，这些函数会导致Form.create的内置封装出错，上边的异常
+ * 会直接产生错误终端，所以这里不可调用：
+ * RxAnt.onChange(jsx, onChange);
+ */
 export default {
     aiMagic,
     aiTimeRanger,
