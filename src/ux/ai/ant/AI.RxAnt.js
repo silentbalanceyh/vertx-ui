@@ -65,6 +65,14 @@ class RxAnt {
         }
     }
 
+    static onMockData(jsx = {}, reference) {
+        const {config = {}} = jsx;
+        if (config.mock) {
+            const {mock = {}} = reference.state;
+            jsx.mock = mock[config.mock];
+        }
+    }
+
     static onAddonAfter(jsx = {}) {
         if (U.isObject(jsx.addonAfter)) {
             applyIcon(jsx, 'addonAfter');

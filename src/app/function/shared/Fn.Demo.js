@@ -33,6 +33,9 @@ const demoJson = (reference, level = 0, demoData = {}) => {
     const ref = Ux.onReference(reference, level);
     if (ref) {
         demoData = Ux.clone(demoData);
+        // 删除active
+        delete demoData.language;
+        delete demoData.active;
         ref.setState({demoData})
     }
 };

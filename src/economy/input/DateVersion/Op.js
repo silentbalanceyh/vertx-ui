@@ -20,8 +20,8 @@ const getAttrs = (reference, field) => {
     attrs.style = {width: config.width ? config.width : 100};
 
     // 事件处理，onBlur主要为验证专用
-    attrs.onChange = Ux.xtBindChange(reference, field);
-    attrs.onBlur = Ux.xtBindBlur(reference, field);
+    attrs.onChange = Ux.xt2Change(reference, field);
+    attrs.onBlur = Ux.xt2Blur(reference, field);
 
     // 处理值相关信息
     attrs.value = value[field];

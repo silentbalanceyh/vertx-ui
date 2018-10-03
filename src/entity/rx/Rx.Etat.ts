@@ -95,6 +95,15 @@ class Etat {
         return this;
     }
 
+
+    mock(mock) {
+        if (mock) {
+            if (!this._state) this._state = {};
+            this._state["mock"] = mock;
+        }
+        return this;
+    }
+
     loading(...loading) {
         this._loading = Ux.onArray.apply(null, loading);
         return this;

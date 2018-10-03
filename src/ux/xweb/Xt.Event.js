@@ -17,7 +17,7 @@ const xtChange = (reference, changedValues = {}) => {
     onChange(newValue);
 };
 
-const xtBindChange = (reference, field) => (event) => {
+const xt2Change = (reference, field) => (event) => {
     // 1.读取Input数据
     const state = Dust.xtGet(reference, field, () => event.target ? event.target.value : undefined);
     // 2.更新状态
@@ -25,17 +25,17 @@ const xtBindChange = (reference, field) => (event) => {
     // 3.调用内置的onChange专用事件
     xtChange(reference, state);
 };
-const xtBindBlur = (reference, field) => (event) => {
+const xt2Blur = (reference, field) => (event) => {
     const {onBlur} = reference.props;
     if (U.isFunction(onBlur)) {
         onBlur(event);
         // 二次绑定处理
-        xtBindChange(reference, field)(event);
+        xt2Change(reference, field)(event);
     }
 };
 export default {
     xtChange,
     // 生成事件
-    xtBindChange,
-    xtBindBlur
+    xt2Change,
+    xt2Blur
 }
