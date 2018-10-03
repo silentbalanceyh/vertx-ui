@@ -20,10 +20,13 @@ const xtUnsafe = (reference, nextProps = {}) => {
 const xtInit = (props = {}) => (props.value || {});
 const xtInitArray = (props = {}, empty = false) => {
     const values = {};
-    if (empty) {
-        values.data = props.value || [];
+    // 初始化处理
+    const value = props.value;
+    if (value) {
+        values.data = U.isArray(value) ? value : (U.isArray(value.data) ? value.data :
+            ((empty) ? [] : [{key: Util.randomUUID()}]));
     } else {
-        values.data = props.value || [{key: Util.randomUUID()}];
+        values.data = ((empty) ? [] : [{key: Util.randomUUID()}]);
     }
     return values;
 };

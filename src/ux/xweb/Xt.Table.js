@@ -28,7 +28,7 @@ const _xt2Add = (reference, {
     // 更新数据信息
     reference.setState({data});
     // 变更处理
-    Evt.xtChange(reference, {data});
+    Evt.xtChange(reference, data, "data");
 };
 
 const _xt2Remove = (reference, {
@@ -44,7 +44,7 @@ const _xt2Remove = (reference, {
     data = data.filter((item, idx) => idx !== index);
     data = Value.clone(data);
     reference.setState({data});
-    Evt.xtChange(reference, {data});
+    Evt.xtChange(reference, data, "data");
 };
 
 const _xtOp = (reference, column = {}, jsx, render = {}) => {

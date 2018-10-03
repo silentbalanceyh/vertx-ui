@@ -118,7 +118,7 @@ const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => 
     const attrs = {};
     attrs.onChange = Xt.xt2ChangeUnit(reference, params);
     attrs.treeData = treeData;
-    return (<TreeSelect {...attrs} value={text}/>)
+    return (<TreeSelect {...attrs} value={text}/>);
 };
 
 export default {

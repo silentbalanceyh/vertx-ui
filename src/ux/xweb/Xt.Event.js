@@ -6,17 +6,24 @@ import Dust from './Xt.Dust';
 import Util from '../util';
 import moment from 'moment';
 
-const xtChange = (reference, changedValues = {}) => {
+const xtChange = (reference, changedValues = {}, key) => {
     const {onChange} = reference.props;
     // 10095规范：传入的自定义控件中没有onChange的函数
     E.fxFatal(!U.isFunction(onChange), 10095, onChange);
-    let newValue = Object.assign({}, reference.state, changedValues);
-    // 1.拷贝新数据
-    newValue = Value.clone(newValue);
-    // 2.过滤特殊数据
-    newValue = Filter.xtFilter$(newValue);
-    // 3.变更数据处理
-    onChange(newValue);
+    // 专用于Array类型的onChange处理，生成新的newValue
+    if (key) {
+        // Array类型处理变更数据信息
+        onChange(changedValues);
+    } else {
+        // 0.非Array类型
+        let newValue = Object.assign({}, reference.state, changedValues);
+        // 1.拷贝新数据
+        newValue = Value.clone(newValue);
+        // 2.过滤特殊数据
+        newValue = Filter.xtFilter$(newValue);
+        // 3.变更数据处理
+        onChange(newValue);
+    }
 };
 
 const xt2Change = (reference, field) => (event) => {
@@ -72,7 +79,7 @@ const xt2ChangeUnit = (reference, {
     state[key] = source;
     reference.setState(state);
     // 4.调用本地的onChange
-    xtChange(reference, state);
+    xtChange(reference, source, key);
 };
 export default {
     xtChange,
