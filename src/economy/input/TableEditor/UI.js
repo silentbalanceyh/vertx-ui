@@ -16,6 +16,7 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, ...jsx} = this.props;
+        console.info(this.props);
         // 配置处理
         config.columns = Ux.xtColumn(this, config.columns);
         config.pagination = false;

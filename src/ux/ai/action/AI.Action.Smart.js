@@ -1,11 +1,12 @@
-import Value from '../../Ux.Value'
 import U from 'underscore';
-// Rdx处理
-import Rdx from '../../fun/index';
+// 文件导入
+import Value from '../../Ux.Value'
 import Cv from '../../Ux.Constant';
-import Prop from '../../prop/index';
-import D from '../../monitor/index';
 import Ajax from '../../Ux.Ajax';
+// 包导入
+import Rdx from '../../fun';
+import Prop from '../../prop';
+import D from '../../monitor';
 
 /**
  * 计算当前提交的模式

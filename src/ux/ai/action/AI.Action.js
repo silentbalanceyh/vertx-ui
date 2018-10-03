@@ -1,14 +1,19 @@
 import React from 'react';
-import Prop from '../../prop/Ux.Prop';
 import U from 'underscore';
+import {Button} from 'antd';
+import Immutable from 'immutable';
+// Package导入
+import Fn from '../../fun'
+import Jsx from '../../jsx';
+import Prop from '../../prop';
+// 文件导入
 import E from '../../Ux.Error';
 import Value from '../../Ux.Value';
 import Type from '../../Ux.Type';
+// 内部导入
 import Layout from '../layout/AI.Layout';
-import {Button} from 'antd';
-import Immutable from 'immutable';
-import Ux from "ux";
 import Smart from './AI.Action.Smart';
+
 
 const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     if (!jsx.op) return false;
@@ -36,7 +41,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                     item.onClick = (event) => {
                         event.preventDefault();
                         const executor = fn(reference);
-                        return Ux.rtSubmit(reference, executor);
+                        return Jsx.rtSubmit(reference, executor);
                     }
                 } else {
                     item.onClick = fn(reference);
@@ -80,9 +85,9 @@ const ai2FilterButton = (window = 1) => {
                 undefined,
                 <Button.Group className={"web-button"}>
                     <Button type={"primary"} icon={"search"}
-                            onClick={() => Ux.irFilter(ref)}>{button.search}</Button>
+                            onClick={() => Fn.irFilter(ref)}>{button.search}</Button>
                     <Button icon={"reload"}
-                            onClick={Ux.irClear(ref)}>{button.clear}</Button>
+                            onClick={Fn.irClear(ref)}>{button.clear}</Button>
                 </Button.Group>
             ) : false
         }

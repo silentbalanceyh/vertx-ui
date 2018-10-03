@@ -7,6 +7,7 @@ import Ai from "../input/AI.Input";
 import RxAnt from '../ant/AI.RxAnt';
 import Prop from '../../prop/Ux.Prop';
 import React from "react";
+import Xt from '../../xweb';
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
@@ -22,14 +23,15 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
 
 const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
-    const {value, viewOnly = false, ...meta} = jsx;
+    const {viewOnly = false} = jsx;
+    const params = {
+        index, field: item.dataIndex
+    };
     return (
-        <Input {...attrs} {...meta}
+        <Input {...attrs}
                readOnly={viewOnly}
-               onChange={(event) => Value.valueTriggerChange(reference, {
-                   index, field: item.dataIndex,
-                   value: event.target.value
-               })} value={text}/>
+               onChange={Xt.xt2ChangeUnit(reference, params)}
+               value={text}/>
     )
 };
 

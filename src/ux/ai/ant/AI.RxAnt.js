@@ -1,11 +1,11 @@
 import React from 'react'
 import {Icon} from 'antd';
 import U from "underscore";
-import Prop from "../../prop/Ux.Prop";
-import Util from '../../util/index';
+import Prop from "../../prop";
+import Util from '../../util';
+import Attributes from '../../prop/Ux.Attribute';
 import Expr from '../expr/AI.Expr.String';
 import Datum from './AI.RxAnt.Datum';
-import Attributes from '../../prop/Ux.Attribute';
 import Uarr from '../../structure/Ux.Uarr'
 import E from '../../Ux.Error';
 

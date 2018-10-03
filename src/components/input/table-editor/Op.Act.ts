@@ -6,13 +6,13 @@ const $opAdd = (reference: any) => Ux.ai2Event(reference,
         .response(values.version)
         .submitted()
         .reset()
-        .to(() => Fn.demoJson(reference, 1, {version: values.version})));
+        .to(() => Fn.demoJson(reference, 1, values)));
 const $opSave = (reference: any) => Ux.ai2Event(reference,
     (values) => Ux.rxAct(reference)
         .response(values.version)
         .submitted()
         .reset()
-        .to(() => Fn.demoJson(reference, 1, {version: values.version})));
+        .to(() => Fn.demoJson(reference, 1, values)));
 export default {
     $opAdd,
     $opSave,
