@@ -9,7 +9,7 @@
                 {
                     "metadata": "pterms,付款项,24,,aiTableEditor",
                     "optionJsx.config.scroll": {
-                        "x": 1400
+                        "x": 2000
                     },
                     "optionJsx.config.columns": [
                         "key,操作",
@@ -31,7 +31,18 @@
                             "metadata": "openTime,时间（DATE）,DATE"
                         },
                         {
-                            "metadata": "termCode,树形（TREE）,TREE",
+                            "metadata": "active,启用（RADIO）,RADIO",
+                            "$config.items": [
+                                "true,启用",
+                                "false,禁用"
+                            ]
+                        },
+                        {
+                            "metadata": "roomType,房型（DATUM）,DATUM",
+                            "$config.datum": "source=table.list,key=key,label=name"
+                        },
+                        {
+                            "metadata": "termId,树形（TREE）,TREE",
                             "$config.datum": "source=table.tree,key=key,label=name",
                             "$config.tree": "key=id,parentId=pid,title=name"
                         }

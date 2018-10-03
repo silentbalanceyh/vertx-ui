@@ -9,31 +9,33 @@
                 {
                     "metadata": "pterms,付款项,24,,aiTableEditor",
                     "optionJsx.config.scroll": {
-                        "x": 1000
+                        "x": 1600
                     },
                     "optionJsx.config.columns": [
                         "key,操作",
                         {
-                            "metadata": "termName,文本（$render=TEXT）",
-                            "$config.readOnly": true,
-                            "$config.style": {
-                                "width": "70%"
-                            }
+                            "metadata": "termName,文本（TEXT）",
+                            "$config.readOnly": true
                         },
                         {
-                            "metadata": "price,金额（$render=DECIMAL）,DECIMAL",
-                            "$config.style": {
-                                "width": "70%"
-                            }
+                            "metadata": "price,金额（DECIMAL）,DECIMAL"
                         },
                         {
-                            "metadata": "type,类型（$render=VECTOR）,VECTOR",
-                            "$config.style": {
-                                "width": "70%"
-                            }
+                            "metadata": "openTime,时间（DATE）,DATE"
                         },
                         {
-                            "metadata": "termCode,树形（$render=TREE）,TREE",
+                            "metadata": "active,启用（RADIO）,RADIO",
+                            "$config.items": [
+                                "true,启用",
+                                "false,禁用"
+                            ]
+                        },
+                        {
+                            "metadata": "roomType,房型（DATUM）,DATUM",
+                            "$config.datum": "source=table.list,key=key,label=name"
+                        },
+                        {
+                            "metadata": "termId,树形（TREE）,TREE",
                             "$config.datum": "source=table.tree,key=key,label=name",
                             "$config.tree": "key=id,parentId=pid,title=name"
                         }
