@@ -2,14 +2,174 @@
     "_configuration": {
         "code": "ListSelector",
         "data": [
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "ajax",
+                "comment": "ListSelector中对应的读取远程数据Ajax接口信息。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "ajax -> method",
+                "comment": "「默认GET」Ajax中使用的远程HTTP方法。",
+                "type": "String",
+                "value": "GET"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "ajax -> uri",
+                "comment": "Ajax中使用的远程接口Uri信息。",
+                "type": "String",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "ajax -> params",
+                "comment": "Ajax中访问接口的默认参数信息。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "linker",
+                "comment": "选择某个选项后链接到表单中的数据信息，field -> formField的对象格式。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "mock",
+                "comment": "ListSelector中开启Mock时绑定的Mock数据对应的键值。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "table",
+                "comment": "「必须」ListSelector中的表格配置。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "validation",
+                "comment": "ListSelector中如果没选中某条记录的验证信息。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "window",
+                "required": true,
+                "comment": "ListSelector中弹出框的配置信息。",
+                "type": "String | Object",
+                "value": "--"
+            }
         ],
-        "fit": "cc",
         "items": {
+            "name": "ListSelector组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "ajax",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "method",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "uri",
+                                            "color": "#e23c39"
+                                        },
+                                        {
+                                            "name": "params",
+                                            "color": "#33af43"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "linker",
+                                    "color": "#e23c39"
+                                },
+                                {
+                                    "name": "mock",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "table",
+                                    "color": "#e23c39"
+                                },
+                                {
+                                    "name": "validation",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "window",
+                                    "color": "#e23c39"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "state",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "$data",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$loading",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$select",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "$visible",
+                            "color": "#e23c39"
+                        }
+                    ]
+                }
+            ]
         },
         "layout": {
-            "hgap": 90,
+            "hgap": 110,
             "vgap": 10,
-            "height": 500
+            "height": 450
         }
     }
 }

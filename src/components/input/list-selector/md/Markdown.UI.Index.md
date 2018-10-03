@@ -14,9 +14,8 @@
     class Component extends React.PureComponent {
         render() {
             const $inited = {
-                version: {
-                    year: 2011, month: 11, day: 10, version: 2008
-                }
+                partner: "协议单位",
+                partnerId: 12
             };
             return (
                 <FormPanel reference={this} $inited={$inited}>

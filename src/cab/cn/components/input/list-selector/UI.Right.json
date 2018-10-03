@@ -3,9 +3,34 @@
         "title": "「交互」ListSelector - 更新"
     },
     "_form": {
-        "window": 1,
+        "window": 0.5,
         "ui": [
             [
+                {
+                    "metadata": "partner,协议单位,,,aiListSelector",
+                    "optionJsx.config": {
+                        "mock": "partner",
+                        "ajax": {
+                            "metadata": "POST,/api/partners/search,1,8,sorter=name`ASC",
+                            "params.criteria.sigma": "PROP:hotel.sigma"
+                        },
+                        "linker": {
+                            "name": "partner",
+                            "signName": "operator",
+                            "key": "partnerId"
+                        },
+                        "table": {
+                            "columns": [
+                                "code,代码",
+                                "name,名称",
+                                "mobile,联系电话",
+                                "signName,签单人"
+                            ]
+                        },
+                        "validation": "请选择协议单位！",
+                        "window": "选择协议单位,选择,关闭,false,800,false"
+                    }
+                }
             ],
             [
                 {
@@ -16,6 +41,12 @@
                     }
                 }
             ]
-        ]
+        ],
+        "hidden": {
+            "inputs": [
+                "operator",
+                "partnerId"
+            ]
+        }
     }
 }

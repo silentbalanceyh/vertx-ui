@@ -1,6 +1,6 @@
 ### 1.说明
 
-标准的Form处理
+标准的Form处理。
 
 ### 2.代码
 
@@ -9,13 +9,15 @@
     import Ux from 'ux';
     import Op from './Op';
     import {PageCard} from 'web';
+    import Mock from './mock'
 
     const {zero} = Ux;
 
     @zero(Ux.rxEtat(require('./Cab.json'))
         .cab("UI.Right")
         .bind(Op)
-        .raft(1)
+        .mock(Mock)
+        .raft(2)
         .form().to()
     )
     class Component extends React.PureComponent {
