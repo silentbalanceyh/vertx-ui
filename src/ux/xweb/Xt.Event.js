@@ -38,6 +38,7 @@ const xt2Blur = (reference, field) => (event) => {
 const xt2ChangeUnit = (reference, {
     index, field, key = "source"
 }) => (event) => {
+    event.preventDefault();
     const value = event['target'] ? event['target'].value : undefined;
     // 1.读取数据源 source为默认值
     let source = reference.state ? reference.state[key] : [];
