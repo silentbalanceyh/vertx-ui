@@ -24,7 +24,7 @@
                 "UC0013 - 交互类：DateVersion,/input/data-version,true",
                 "UC0014 - 交互类：CheckedDate,/input/checked-date",
                 "UC0015 - 交互类：ListSelector,/input/list-selector,true",
-                "UC0016 - 交互类：TableEditor,/input/table-editor",
+                "UC0016 - 交互类：TableEditor,/input/table-editor,true",
                 "UC0017 - 交互类：AddressSelector,/control/address-selector"
             ]
         },

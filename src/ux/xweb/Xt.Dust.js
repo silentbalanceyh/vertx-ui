@@ -10,7 +10,6 @@ import Util from '../util';
 const xtUnsafe = (reference, nextProps = {}) => {
     if ('value' in nextProps) {
         const value = nextProps.value;
-        console.info(value);
         reference.setState(value);
     }
 };
@@ -21,10 +20,13 @@ const xtUnsafe = (reference, nextProps = {}) => {
 const xtInit = (props = {}) => (props.value || {});
 const xtInitArray = (props = {}, empty = false) => {
     const values = {};
-    if (empty) {
-        values.source = props.value || [];
+    // 初始化处理
+    const value = props.value;
+    if (value) {
+        values.data = U.isArray(value) ? value : (U.isArray(value.data) ? value.data :
+            ((empty) ? [] : [{key: Util.randomUUID()}]));
     } else {
-        values.source = props.value || [{key: Util.randomUUID()}];
+        values.data = ((empty) ? [] : [{key: Util.randomUUID()}]);
     }
     return values;
 };

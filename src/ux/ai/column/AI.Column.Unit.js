@@ -1,129 +1,124 @@
 import AiValue from "../expr/AI.Expr.Value";
-import {DatePicker, Input, Select} from "antd";
+import {DatePicker, Input, TreeSelect} from "antd";
 import Value from "../../Ux.Value";
 import AiExpr from "../expr/AI.Expr.String";
 import AiPure from "../AI.Pure";
-import Ai from "../input/AI.Input";
 import RxAnt from '../ant/AI.RxAnt';
 import Prop from '../../prop/Ux.Prop';
 import React from "react";
 import Xt from '../../xweb';
+import Norm from '../../Ux.Normalize';
 
-const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    const {value, ...meta} = jsx;
-    return (
-        <Input {...attrs} {...meta}
-               onChange={(event) => {
-                   event.preventDefault();
-                   Value.valueTriggerChange(reference, {
-                       index, field: item.dataIndex,
-                       value: event.target.value
-                   });
-               }}/>
-    );
-};
-
-const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    const {viewOnly = false} = jsx;
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.readOnly = viewOnly;
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (
-        <Input {...attrs}/>
-        //onChange={Xt.xt2ChangeUnit(reference, params)}
-    );
-};
 
 const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     const config = item['$config'];
     let label = text;
+    // 转换前提是包含了config.to的配置
     if (config && config.to) {
         label = record[config.to];
     }
-    return (<span
-        style={jsx.style ? jsx.style : {}}>{label}</span>);
+    const attrs = {};
+    attrs.style = jsx.style ? jsx.style : {};
+    return (<span {...attrs}>{label}</span>);
 };
 
+const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
+    const attrs = {};
+    attrs.style = jsx.style ? jsx.style : {};
+    return ((<span {...attrs}>{text}</span>));
+};
 
-const aiUnitLabel = (reference, item = {}, jsx) =>
-    (text) => (<span
-        style={jsx.style ? jsx.style : {}}>{text}</span>);
+const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = AiValue.applyDynamic(item);
+    // 处理属性相关信息
+    const {viewOnly = false} = jsx;
+    attrs.readOnly = viewOnly;
+    const params = {
+        index, field: item.dataIndex
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<Input {...attrs} value={text}/>);
+};
 
-const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
-    const {value, ...meta} = jsx;
-    const values = {};
+const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = AiValue.applyDynamic(item);
+    // 只读处理
+    const {viewOnly = false} = jsx;
+    attrs.readOnly = viewOnly;
+    // 单位处理
+    const {$config = {}} = item;
+    attrs.addonAfter = $config.unit ? $config.unit : "￥";
+    // 变更函数
+    const params = {
+        index, field: item.dataIndex,
+        // 格式化专用
+        normalize: Norm.normalizer.decimal(18, 2)
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<Input {...attrs} value={text}/>);
+};
+
+const aiUnitDate = (reference, item) => (text, record, index) => {
+    const config = item["$config"] ? item["$config"] : {};
+    const attrs = Object.assign({}, config);
     if (text) {
-        values.value = Value.convertTime(text);
+        attrs.value = Value.convertTime(text);
     }
-    return (
-        <DatePicker
-            className={'rx-readonly'} {...meta} {...item['$config']}
-            onChange={(value) => Value.valueTriggerChange(reference, {
-                index, field: item.dataIndex,
-                value
-            })} {...values}/>
-    );
+    attrs.className = "rx-readonly";
+    const params = {
+        index, field: item.dataIndex,
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<DatePicker {...attrs}/>);
 };
+
+const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
+    const config = item["$config"] ? item["$config"] : {};
+    config.items = AiExpr.aiExprOption(config.items);
+    if (jsx['viewOnly']) {
+        config.disabled = jsx['viewOnly'];
+        config.className = "web-radio-view";
+    }
+    const params = {
+        index, field: item.dataIndex,
+    };
+    config.onChange = Xt.xt2ChangeUnit(reference, params);
+    const {items = [], ...rest} = config;
+    return AiPure.aiInputRadios(items, {...rest, value: String(text)});
+};
+
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
     const datum = item["$config"].datum;
-    let options = [];
+    let items = [];
     if (datum) {
         const ref = Prop.onReference(reference, 1);
-        options = RxAnt.toOptions(ref, {datum});
+        items = RxAnt.toOptions(ref, {datum});
     }
     const unitJsx = item.jsx ? item.jsx : {};
-    const value = jsx.value;
-    // 赋值处理
-    const attr = {};
-    if (value) {
-        const record = value[index];
-        if (record) {
-            attr.value = record[item.dataIndex];
-        }
-    }
-    return (
-        <Select
-            onChange={(value) => Value.valueTriggerChange(reference, {
-                index, field: item.dataIndex,
-                value
-            })} {...unitJsx} {...attr}>
-            {options.map(item => (
-                <Select.Option key={item.key}
-                               value={item.value}>
-                    {item.label}
-                </Select.Option>
-            ))}
-        </Select>
-    );
-};
-const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    let options = item['$config'] ? item['$config'] : [];
-    const {value, ...meta} = jsx;
-    const items = AiExpr.aiExprOption(options.items);
-    meta.value = text;
-    if (meta.viewOnly) {
-        meta.disabled = meta.viewOnly;
-        meta.className = "web-radio-view";
-    }
-    return AiPure.aiInputRadios(items, {
-        ...meta,
-        onChange: (event) => Value.valueTriggerChange(reference, {
-            index, field: item.dataIndex,
-            value: event.target.value
-        })
-    });
+    let attrs = {};
+    attrs = Object.assign(attrs, unitJsx);
+    attrs.value = text;
+    const params = {
+        index, field: item.dataIndex,
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return AiPure.aiInputSelect(items, attrs);
 };
 
-const aiUnitTree = (reference, item = {}, jsx = {}) => () => {
-    const {value, onChange, ...meta} = jsx;
-    return Ai.aiTreeSelect(reference.props.reference, {
-        config: item['$config'],
-        ...meta
-    }, onChange);
+const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => {
+    const config = item['$config'];
+    let treeData = [];
+    if (config.datum) {
+        const ref = Prop.onReference(reference, 1);
+        treeData = RxAnt.toTreeOptions(ref, config);
+    }
+    const params = {
+        index, field: item.dataIndex,
+    };
+    const attrs = {};
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    attrs.treeData = treeData;
+    return (<TreeSelect {...attrs} value={text}/>);
 };
 
 export default {

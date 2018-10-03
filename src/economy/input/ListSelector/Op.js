@@ -24,7 +24,20 @@ const getDialog = (reference, config = {}) => {
     dialog.onCancel = Ux.xt2Dialog(reference, false);
     return dialog;
 };
+const getHoc = (reference = {}) => {
+    const {config = {}} = reference.props;
+    // 核心配置处理
+    const onClick = Ux.xt2Loading(reference, config);
+    const dialog = getDialog(reference, config);
+    const columns = Ux.uiTableColumn(reference, config.table.columns);
+    const rowSelection = Ux.xtSelection(reference);
+    return {
+        onClick, dialog, ready: true,
+        table: {columns, rowSelection}
+    };
+};
 export default {
     getDefault,
-    getDialog
+    getDialog,
+    getHoc,
 };

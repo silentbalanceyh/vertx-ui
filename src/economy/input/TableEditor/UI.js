@@ -2,6 +2,7 @@ import React from 'react';
 import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
+import Op from './Op';
 
 class Component extends React.PureComponent {
 
@@ -9,8 +10,7 @@ class Component extends React.PureComponent {
         super(props);
         this.state = Ux.xtInitArray(props);
         // columns专用
-        const {config = {}} = this.props;
-        this.state.columns = Ux.xtColumn(this, config.columns);
+        this.hoc = Op.getHoc(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -18,8 +18,9 @@ class Component extends React.PureComponent {
     }
 
     render() {
+        console.info(this.props);
         const {config = {}, ...jsx} = this.props;
-        const {columns = []} = this.state;
+        const {columns = []} = this.hoc;
         // 配置处理
         config.columns = columns;
         config.pagination = false;

@@ -1,4 +1,4 @@
-import {Breadcrumb, Checkbox, Collapse, Menu, Radio, Steps, Tabs} from "antd";
+import {Breadcrumb, Checkbox, Collapse, Menu, Radio, Select, Steps, Tabs} from "antd";
 import {ContextMenu, MenuItem} from "react-contextmenu";
 import React from "react";
 import {Link} from "react-router-dom";
@@ -91,6 +91,16 @@ const aiInputRadios = (items = [], rest = {}) => (
         ))}
     </Radio.Group>
 );
+const aiInputSelect = (items = [], rest = {}) => (
+    <Select {...rest}>
+        {items.map(item => (
+            <Select.Option key={item.key} style={item.style ? item.style : {}}
+                           value={item.hasOwnProperty('value') ? item.value : item.key}>
+                {item.name || item.label}
+            </Select.Option>
+        ))}
+    </Select>
+);
 const aiInputCheckboxes = (items = [], rest = {}) => (
     <Checkbox.Group {...rest}>
         {items.map(item => (
@@ -127,6 +137,7 @@ const aiSteps = (items = [], rest = {}) => {
 export default {
     // 单选列表
     aiInputRadios,
+    aiInputSelect,
     aiInputCheckboxes,
     // 菜单相关渲染
     aiMenuTree,
