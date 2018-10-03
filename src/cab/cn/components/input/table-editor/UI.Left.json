@@ -14,11 +14,6 @@
                     "optionJsx.config.columns": [
                         "key,操作",
                         {
-                            "metadata": "termCode,树形（$render=TREE）,TREE",
-                            "$config.datum": "source=table.tree,key=key,label=name",
-                            "$config.tree": "key=id,parentId=pid,title=name"
-                        },
-                        {
                             "metadata": "termName,文本（$render=TEXT）",
                             "$config.readOnly": true,
                             "$config.style": {
@@ -30,6 +25,11 @@
                             "$config.style": {
                                 "width": "70%"
                             }
+                        },
+                        {
+                            "metadata": "termCode,树形（$render=TREE）,TREE",
+                            "$config.datum": "source=table.tree,key=key,label=name",
+                            "$config.tree": "key=id,parentId=pid,title=name"
                         }
                     ]
                 }

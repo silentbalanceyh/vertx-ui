@@ -55,7 +55,7 @@ const fnError = {
     10049: (reference) => `[ ERR-10049 ] (React) 丢失了 "reference" 组件引用，该引用值不合法：${reference}`,
     10050: (Cab) => `[ ERR-10050 ] (@zero) 绑定资源文件过程中的 "Cab" 不合法，Cab=${Cab}`,
     10051: (Name) => `[ ERR-10051 ] (@zero) 无法读取当前组件的组件名，该名称不可为空，"Name" = ${Name}`,
-    10052: (source) => `[ ERR-10052 ] (Web) 自定义组件中的状态无法执行初始化，必须包含"source"的值，source = ${source}`,
+    10052: (data) => `[ ERR-10052 ] (Web) 自定义组件中的状态无法执行初始化，必须包含"data"的值，data = ${data}`,
     10053: (config) => `[ ERR-10053 ] (Web) 删除过程中的"config.ajax"的配置不合法，config = ${config}`,
     10054: (config) => `[ ERR-10054 ] (Web) Tab页签处理编辑事件时的"edit"配置丢失，config = ${config}`,
     10055: (hoc) => `[ ERR-10055 ] (@zero) 初始化 $hoc 时失败，无法初始化 $hoc = ${hoc}`,
