@@ -15,7 +15,6 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        console.info(this.props, this.state);
         return (
             <PageCard reference={this}>
                 {Ux.uiFieldForm(this, {}, 2)}
