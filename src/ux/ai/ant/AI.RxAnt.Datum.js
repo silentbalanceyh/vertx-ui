@@ -89,9 +89,21 @@ const gainDatum = (reference, config = {}, filter = () => true) => {
     }
     return options;
 };
+const gainTree = (config = {}) => {
+    let mapping = {};
+    if (config.tree) {
+        mapping = Value.valuePair(config.tree);
+    }
+    if (!mapping.id) mapping.id = "id";
+    if (!mapping.pid) mapping.pid = "pid";
+    if (!mapping.title) mapping.title = "code";
+    if (!mapping.value) mapping.value = "id";
+    return mapping;
+};
 export default {
     parseExpr,
     parseDatum,
     parseFilter,
-    gainDatum
+    gainDatum,
+    gainTree
 }

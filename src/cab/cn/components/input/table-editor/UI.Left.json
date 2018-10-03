@@ -14,20 +14,19 @@
                     "optionJsx.config.columns": [
                         "key,操作",
                         {
-                            "metadata": "termCode,消费码,TREE",
-                            "$config.datum": {
-                                "datum": "source=pay.term,key=key,label=value"
-                            }
+                            "metadata": "termCode,树形（$render=TREE）,TREE",
+                            "$config.datum": "source=table.tree,key=key,label=name",
+                            "$config.tree": "key=id,parentId=pid,title=name"
                         },
                         {
-                            "metadata": "termName,消费名称",
+                            "metadata": "termName,文本（$render=TEXT）",
                             "$config.readOnly": true,
                             "$config.style": {
                                 "width": "70%"
                             }
                         },
                         {
-                            "metadata": "price,消费金额,DECIMAL",
+                            "metadata": "price,金额（$render=DECIMAL）,DECIMAL",
                             "$config.style": {
                                 "width": "70%"
                             }

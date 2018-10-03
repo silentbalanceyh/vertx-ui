@@ -110,16 +110,12 @@ class RxAnt {
                 return item.label;
             }
         };
+        const mapping = Datum.gainTree(config);
         return Uarr.create(options)
             .sort((left, right) => left.left - right.left)
-            .convert("code", processor)
-            .mapping({
-                id: "id",
-                pid: "pid",
-                title: "code",
-                value: "id"
-            })
-            .tree("id", "pid")
+            .convert(config.processor ? config.processor : "code", processor)
+            .mapping(mapping)
+            .tree()
             .to();
     }
 

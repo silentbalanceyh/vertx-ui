@@ -131,6 +131,23 @@ const valueFunction = (actions = {}) => (params) => {
     }
     return functions;
 };
+const valuePair = (expr) => {
+    let mapping;
+    if ("string" === typeof expr) {
+        mapping = {};
+        expr.split(',').filter(kv => 0 < kv.indexOf('='))
+            .forEach(kv => {
+                const kvArr = kv.split('=');
+                if (kvArr[0] && kvArr[1]) {
+                    mapping[kvArr[0]] = kvArr[1];
+                }
+            })
+    } else {
+        if (expr && U.isObject(expr)) mapping = expr;
+        if (!mapping) mapping = {};
+    }
+    return mapping;
+};
 export default {
     valueInt, // 整数转换
     valueUnit,
@@ -140,6 +157,7 @@ export default {
     valueFilter,
     valueIcon,
     valueKey,
+    valuePair,
     valueFunction,
     // 设置自定义控件的专用属性
     valueFlip,
