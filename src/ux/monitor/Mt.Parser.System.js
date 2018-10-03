@@ -34,4 +34,4 @@ const datumPure = (object = {}) => {
 export default {
     datumPure,
     datumEnv
-}
+};

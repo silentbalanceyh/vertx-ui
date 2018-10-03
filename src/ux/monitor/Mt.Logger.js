@@ -32,7 +32,7 @@ const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
         if (!stateless) {
             console.log(`%c [Zero] State -> `, `color:${color.state};font-weight:900`, reference.state);
         }
-        console.groupEnd()
+        console.groupEnd();
     }
 };
 /**
@@ -75,7 +75,7 @@ const stateless = (props = {}, Name) => {
         group: '#99CC33',
         props: "#660099",
         state: "#666666"
-    }, 'Rx-Stateless', true)
+    }, 'Rx-Stateless', true);
 };
 /**
  * 【开发模式】Layout组件日志打印
@@ -354,4 +354,4 @@ export default {
     mock,
     mocker,
     connect,
-}
+};

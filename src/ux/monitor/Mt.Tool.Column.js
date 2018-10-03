@@ -32,7 +32,7 @@ const vtValue = (column = {}) => {
                     color: "#990"
                 }}>{text}</span>);
             }
-        }
+        };
     }
 };
 const vtValueByType = (column = {}) => {
@@ -50,7 +50,7 @@ const vtValueByType = (column = {}) => {
             } else {
                 return text;
             }
-        }
+        };
     }
 };
 const vtNameOption = (column = {}) => {
@@ -73,7 +73,7 @@ const vtNameOption = (column = {}) => {
                     }}>{text}</span>
                 );
             }
-        }
+        };
     }
 };
 const vtRequired = (column = {}) => {
@@ -110,7 +110,7 @@ const vtCategory = (column = {}) => {
             const color = COLOR[text];
             const style = {};
             if (color) style.color = color;
-            return (<span style={style}>{text}</span>)
+            return (<span style={style}>{text}</span>);
         };
     }
 };
@@ -131,9 +131,9 @@ const vtConsumer = (column = {}) => {
             if (!text) {
                 return (<Icon type={"close"} style={{
                     color: "red"
-                }}/>)
+                }}/>);
             } else {
-                return (<span>{text}</span>)
+                return (<span>{text}</span>);
             }
         };
     }
@@ -163,7 +163,7 @@ const vtSource = (column = {}, mapping) => {
                     </span>);
                 } else return false;
             }
-        }
+        };
     }
 };
 const stString = (columns = [], ...supported) => {
@@ -176,8 +176,8 @@ const stString = (columns = [], ...supported) => {
                 } else {
                     return Ux.sorterAsc(left, right, column.dataIndex);
                 }
-            }
-        })
+            };
+        });
 };
 export default {
     // dataIndex = value

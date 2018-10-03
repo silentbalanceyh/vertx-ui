@@ -34,4 +34,4 @@ const fnRemove = (reference) => (line, text) => (event) => {
 export default {
     fnEdit,
     fnRemove
-}
+};

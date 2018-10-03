@@ -38,7 +38,7 @@ const aiCellOp = (reference, config) => (text, record) => {
                         <a key={removed.key}>{removed.text}</a>
                     </Popconfirm>) : false}
             </Fragment>
-        )
+        );
     } else return false;
 };
 const _editConfig = (option = {}, record) => {
@@ -131,7 +131,7 @@ const aiCellButton = (reference, config) => (text, record, index) => {
                     }}><Button key={removed.key} icon={removed.icon} type={"danger"}/>
                     </Popconfirm>) : false}
             </Button.Group>
-        )
+        );
     } else return false;
 };
 
@@ -224,4 +224,4 @@ export default {
     BUTTON: aiCellButton,
     OP: aiCellOp,
     LINK: aiCellLink,
-}
+};

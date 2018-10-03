@@ -38,4 +38,4 @@ export default {
     ensureStream,
     ensureKeys,
     itSwitch
-}
+};

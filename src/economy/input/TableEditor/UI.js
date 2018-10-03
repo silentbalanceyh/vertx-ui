@@ -35,7 +35,7 @@ class Component extends React.PureComponent {
                 <Table {...config}
                        dataSource={data}/>
             </Input.Group>
-        )
+        );
     }
 }
 

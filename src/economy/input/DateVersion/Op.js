@@ -38,4 +38,4 @@ const getDefault = () => ({
 export default {
     getAttrs,
     getDefault
-}
+};

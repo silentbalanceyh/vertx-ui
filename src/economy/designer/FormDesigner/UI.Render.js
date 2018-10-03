@@ -37,27 +37,29 @@ const webInputNumber = (pointer, column) => _itemRender(pointer, column, (
     <InputNumber/>
 ));
 const webRadio = (pointer, column) => _itemRender(pointer, column, (config) => {
-    return <Radio.Group options={config.radio}/>
+    return (<Radio.Group options={config.radio}/>);
 });
 const webCascader = (pointer, column) => _itemRender(pointer, column, (config) => {
-    return <Cascader options={config['cascade']}/>
+    return (<Cascader options={config['cascade']}/>);
 });
 const webTreeSelect = (pointer, column) => _itemRender(pointer, column, (config) => {
-    return <TreeSelect treeData={config.tree}/>
+    return (<TreeSelect treeData={config.tree}/>);
 });
 const webSwitch = (pointer, column) => _itemRender(pointer, column, (
     <Switch/>
 ));
 const webCheckbox = (pointer, column) => _itemRender(pointer, column, (config) => {
-    return <Checkbox.Group options={config.checkbox}/>
+    return (<Checkbox.Group options={config.checkbox}/>);
 });
 const webSelect = (pointer, column) => _itemRender(pointer, column, (config) => {
-    return <Select>
-        {config.options.map(option => {
-            const {title, ...rest} = option;
-            return <Select.Option {...rest}>{title}</Select.Option>
-        })}
-    </Select>
+    return (
+        <Select>
+            {config.options.map(option => {
+                const {title, ...rest} = option;
+                return (<Select.Option {...rest}>{title}</Select.Option>);
+            })}
+        </Select>
+    );
 });
 // 布局专用
 const _calcItem = (options = {}, column = {}) => {
@@ -89,4 +91,4 @@ export default {
     webUser,
     webTreeSelect,
     webCascader
-}
+};

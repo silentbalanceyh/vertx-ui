@@ -39,7 +39,7 @@ const aiExpr = (reference) => {
                     <Button.Group>
                         {content.map(fnSingle)}
                     </Button.Group>
-                )
+                );
             }
         }
     }
@@ -143,7 +143,7 @@ class Tab {
                 if (U.isFunction(fnOriginal)) {
                     fnOriginal(item);
                 }
-            }
+            };
         }
         // 如果长度为1
         const jsx = [];
@@ -155,7 +155,7 @@ class Tab {
             children.forEach(child => jsx.push(child));
         }
         return Ai.aiTabs.apply(null, [$items, rest]
-            .concat(jsx))
+            .concat(jsx));
     }
 }
 

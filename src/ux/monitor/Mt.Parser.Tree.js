@@ -31,11 +31,11 @@ const datumMatrix = (array = []) => {
             item.dataIndex = key;
             item.title = key;
             table.columns.push(item);
-        })
+        });
     }
     return {data, table};
 };
 export default {
     datumTree,
     datumMatrix
-}
+};

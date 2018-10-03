@@ -37,7 +37,7 @@ const irSorter = (hoc = {}) => {
                 const kv = sorter.replace(/ /g, '').split('=');
                 const sorterItem = `${kv[0]},${kv[1]}`;
                 sorterData.push(sorterItem);
-            })
+            });
         }
     }
     return sorterData;
@@ -51,15 +51,15 @@ const irCriteria = (hoc = {}, props = {}) => {
             const condition = hoc.criteria.split(',');
             condition.forEach(cond => {
                 const kv = cond.replace(/ /g, '').split('=');
-                config[kv[0]] = kv[1]
-            })
+                config[kv[0]] = kv[1];
+            });
         } else if (U.isArray(hoc.criteria)) {
             hoc.criteria.filter(cond => "string" === typeof cond)
                 .forEach(cond => {
                     // 2.1.数组中的元素是字符串
                     const kv = cond.replace(/ /g, '').split('=');
-                    config[kv[0]] = kv[1]
-                })
+                    config[kv[0]] = kv[1];
+                });
         } else {
             // 3.本身就是一个对象，将该对象传入到config中进行解析
             config = Immutable.fromJS(hoc.criteria).toJS();
@@ -187,4 +187,4 @@ export default {
     irKeepCond,
     irClear,
     irFilter
-}
+};

@@ -35,7 +35,7 @@ const _fnDialog = (reference = {}, show = false) => (event) => {
     let state = {};
     state.$visible = show;
     state = Immutable.fromJS(state).toJS();
-    reference.setState(state)
+    reference.setState(state);
 };
 
 const _fnSelect = (reference = {}, config = {}) => (event) => {
@@ -55,7 +55,7 @@ const _fnSelect = (reference = {}, config = {}) => (event) => {
                 fnCallback($select);
             }
         }
-        reference.setState({$visible: false})
+        reference.setState({$visible: false});
     } else {
         E.fxTerminal(!config.validation, 10080, config.validation);
         if (config.validation) {
@@ -135,7 +135,7 @@ const jslPager = (reference, config = {}) => {
 const jslSelection = (reference) => ({
     type: 'radio',
     onSelect: keys => {
-        reference.setState({$select: keys})
+        reference.setState({$select: keys});
     }
 });
 const jslConfig = (reference, $config = {}) => {
@@ -152,4 +152,4 @@ export default {
     jslDialog,
     jslPager,
     jslSelection
-}
+};
