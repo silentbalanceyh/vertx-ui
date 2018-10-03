@@ -62,7 +62,7 @@ const valueValid = (data = {}, wild = false) => {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
             if (U.isArray(value)) {
-                value.forEach(item => valueValid(item, wild))
+                value.forEach(item => valueValid(item, wild));
             } else if (U.isObject(value)) {
                 valueValid(value, wild);
             } else {
@@ -141,7 +141,7 @@ const valuePair = (expr) => {
                 if (kvArr[0] && kvArr[1]) {
                     mapping[kvArr[0]] = kvArr[1];
                 }
-            })
+            });
     } else {
         if (expr && U.isObject(expr)) mapping = expr;
         if (!mapping) mapping = {};
@@ -162,4 +162,4 @@ export default {
     // 设置自定义控件的专用属性
     valueFlip,
     valueTrack: Debug.dgMonitor,
-}
+};

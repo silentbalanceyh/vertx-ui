@@ -15,7 +15,7 @@ const jsxHidden = (reference, name, initialValue) => {
     const {getFieldDecorator} = form;
     return getFieldDecorator(name, {
         initialValue
-    })(<Input key={name} type={"hidden"}/>)
+    })(<Input key={name} type={"hidden"}/>);
 };
 
 const _getRender = (reference, render) => (each = {}) => {
@@ -28,7 +28,7 @@ const _getRender = (reference, render) => (each = {}) => {
         const config = each.optionConfig ? Immutable.fromJS(each.optionConfig).toJS() : {};
         return getFieldDecorator(each.field, config)(
             render(reference, jsx, config)
-        )
+        );
     }
 };
 /**
@@ -56,7 +56,7 @@ const jsxItem = (reference, item = {}, render) => {
         <Form.Item {...item.optionItem}>
             {jsxRender(item)}
         </Form.Item>
-    ) : jsxRender(item)
+    ) : jsxRender(item);
 };
 const jsxTitle = (item = {}) => {
     const key = item.key ? item.key : Random.randomString(16);
@@ -66,7 +66,7 @@ const jsxTitle = (item = {}) => {
             {/** 只渲染Title **/}
             {item.title}
         </Col>
-    )
+    );
 };
 const jsxGrid = (item = {}) => (
     <Col className={item.className ? item.className : "page-title"}
@@ -86,12 +86,13 @@ const jsxColumn = (reference, renders, item = {}, layout = {}) => {
         // 渲染
         const {span} = layout;
         return (
-            <Col span={item.span ? item.span : span} key={item.field} style={Ai.hookerCol(item)}>
+            <Col span={item.span ? item.span : span} key={item.field}
+                 style={Ai.hookerCol(item)}>
                 {/** 渲染字段 **/}
                 {jsxItem(reference, item,
                     fnRender ? fnRender : () => false)}
             </Col>
-        )
+        );
     } else {
         return false;
     }
@@ -127,7 +128,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
                             Ai.hookerItem(item, values, rowItem);
                             // 是否改变field信息
                             if (entity) {
-                                item.field = `children.${entity}.${item.field}`
+                                item.field = `children.${entity}.${item.field}`;
                             }
                             // 初始值
                             raftValue(item, values);
@@ -151,7 +152,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
                             }
                         })}
                     </Row>
-                )
+                );
             })}
         </div>
     );
@@ -184,7 +185,7 @@ const jsxIcon = (item = {}) => {
             &nbsp;&nbsp;
             {item.text || item.label}
         </span>
-    )
+    );
 };
 export default {
     jsxHidden,
@@ -197,4 +198,4 @@ export default {
     raftValue,
     raftRow: DFT.uiRow,
     raftRender: _getRender
-}
+};

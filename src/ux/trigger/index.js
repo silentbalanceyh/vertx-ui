@@ -4,4 +4,4 @@ export default {
     Trigger: {
         ...Depend
     }
-}
+};

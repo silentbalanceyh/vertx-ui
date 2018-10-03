@@ -6,4 +6,4 @@ const aiDatumCascade = (reference, jsx = {}) => {
 };
 export default {
     aiDatumCascade,
-}
+};

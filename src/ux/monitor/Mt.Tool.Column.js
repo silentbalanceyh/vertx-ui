@@ -11,26 +11,26 @@ const vtValue = (column = {}) => {
                 if (text) {
                     return (<span style={{
                         color: "#f66"
-                    }}>true</span>)
+                    }}>true</span>);
                 } else {
                     return (<span style={{
                         color: "#4169E1"
-                    }}>false</span>)
+                    }}>false</span>);
                 }
             } else if ("string" === record.type) {
                 if ("this" === text) {
                     return (<span style={{
                         color: "#039"
-                    }}>{text}</span>)
+                    }}>{text}</span>);
                 } else {
                     return (<span style={{
                         color: "#87d068"
-                    }}>{`"${text}"`}</span>)
+                    }}>{`"${text}"`}</span>);
                 }
             } else if ("number" === record.type) {
                 return (<span style={{
                     color: "#990"
-                }}>{text}</span>)
+                }}>{text}</span>);
             }
         }
     }
@@ -42,11 +42,11 @@ const vtValueByType = (column = {}) => {
                 text = `"${text}"`;
                 return (<span style={{
                     color: "#87d068"
-                }}>{text}</span>)
+                }}>{text}</span>);
             } else if ("Boolean" === record.type) {
                 return (<span style={{
                     color: "#4169E1"
-                }}>{text}</span>)
+                }}>{text}</span>);
             } else {
                 return text;
             }
@@ -61,7 +61,7 @@ const vtNameOption = (column = {}) => {
                     <span style={{
                         color: "#9551f6"
                     }}>{text}</span>
-                )
+                );
             } else {
                 return "name" === column.dataIndex ? (
                     <span style={{
@@ -71,7 +71,7 @@ const vtNameOption = (column = {}) => {
                     <span style={{
                         color: "#4169E1"
                     }}>{text}</span>
-                )
+                );
             }
         }
     }
@@ -82,14 +82,14 @@ const vtRequired = (column = {}) => {
             const type = text ? "check" : "close";
             const color = text ? "#F00" : "#69c";
             return <Icon type={type} style={{fontSize: 16, color}}/>;
-        }
+        };
     }
 };
 const vtType = (column = {}) => {
     if ("type" === column.dataIndex) {
         column.render = (text) => (<span style={{
             color: "#bc0981"
-        }}>{text}</span>)
+        }}>{text}</span>);
     }
 };
 const COLOR = {
@@ -111,7 +111,7 @@ const vtCategory = (column = {}) => {
             const style = {};
             if (color) style.color = color;
             return (<span style={style}>{text}</span>)
-        }
+        };
     }
 };
 const SOURCE = {
@@ -135,7 +135,7 @@ const vtConsumer = (column = {}) => {
             } else {
                 return (<span>{text}</span>)
             }
-        }
+        };
     }
 };
 const vtSource = (column = {}, mapping) => {
@@ -146,7 +146,7 @@ const vtSource = (column = {}, mapping) => {
                 const item = mapping['source'][text];
                 return (
                     <span><Icon {...item}/></span>
-                )
+                );
             } else {
                 const item = SOURCE[text];
                 if ("string" === typeof item) {
@@ -160,7 +160,7 @@ const vtSource = (column = {}, mapping) => {
                     const text = items[3] ? items[3] : "";
                     return (<span style={style}>
                         <Icon {...icon}/>&nbsp;&nbsp;{text}
-                    </span>)
+                    </span>);
                 } else return false;
             }
         }
@@ -172,7 +172,7 @@ const stString = (columns = [], ...supported) => {
         .forEach(column => {
             column.sorter = (left, right, sort) => {
                 if ("descend" === sort) {
-                    return Ux.sorterDesc(left, right, column.dataIndex)
+                    return Ux.sorterDesc(left, right, column.dataIndex);
                 } else {
                     return Ux.sorterAsc(left, right, column.dataIndex);
                 }
@@ -191,4 +191,4 @@ export default {
     vtConsumer,
     // Sorter
     stString
-}
+};

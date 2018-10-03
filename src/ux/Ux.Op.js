@@ -77,4 +77,4 @@ export default {
     cycleUpdatePageList,
     cycleUpdateForm,
     cycleDestoryForm,
-}
+};

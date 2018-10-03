@@ -53,7 +53,7 @@ const aiDynamicText = (reference, item = {}, jsx = {}) => (text, record = {}, in
                    index, field: item.dataIndex,
                    value: event.target.value, sequence: item.sequence
                })} value={text}/>
-    )
+    );
 };
 export default {
     EPSILON: aiDynamicEpsilon,

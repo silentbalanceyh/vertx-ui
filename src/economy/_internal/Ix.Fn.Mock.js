@@ -74,7 +74,7 @@ const mockfnRecord = (reference = {}, isUpdate = false) => (updated = {}) => {
         }
         return mockData;
     }
-    return {}
+    return {};
 };
 const mockVector = (ref) => {
     const state = Ux.clone(ref.state);
@@ -96,4 +96,4 @@ export default {
     mockDelete,
     mockfnRecord,
     mockVector,
-}
+};

@@ -55,4 +55,4 @@ const aiChartRadial = (container, dataSource, chartConfig = {}) => {
 export default {
     aiChartBar,
     aiChartRadial
-}
+};

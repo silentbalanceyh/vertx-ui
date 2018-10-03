@@ -63,4 +63,4 @@ export default {
     xt2Blur,
     // 核心列变更事件
     xt2ChangeUnit
-}
+};

@@ -12,7 +12,7 @@ import E from '../../Ux.Error';
 const uniform = (item, callback) => {
     E.fxTerminal(!callback || !U.isFunction(callback), 10041, callback);
     if (U.isArray(item)) {
-        item.forEach(each => callback(each))
+        item.forEach(each => callback(each));
     } else if (U.isObject(item)) {
         callback(item);
     } else {
@@ -25,14 +25,14 @@ const applyValue = (option) => {
         if (item.key && !item.value) {
             item.value = item.key;
         }
-    })
+    });
 };
 
 const applyIcon = (jsx, key = "") => {
     const {type, ...rest} = jsx[key];
     jsx[key] = (
         <Icon type={type} {...rest}/>
-    )
+    );
 };
 
 class RxAnt {
@@ -41,7 +41,7 @@ class RxAnt {
     }
 
     static toDatum(config = {}) {
-        return Datum.parseDatum(config)
+        return Datum.parseDatum(config);
     }
 
     static onDisabledDate(jsx = {}) {

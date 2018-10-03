@@ -15,10 +15,10 @@ const aiAction = (reference, jsx = {}) => {
     } else {
         // 专用Bind按钮处理
         // E.fxInfo(true, 10076, "DEFAULT");
-        return JsxOp.rtBind(reference, !jsx.hidden)
+        return JsxOp.rtBind(reference, !jsx.hidden);
     }
 };
 
 export default {
     aiAction,
-}
+};

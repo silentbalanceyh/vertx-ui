@@ -58,7 +58,7 @@ const xt2Dialog = (reference = {}, show = false) => (event) => {
     // 重置页面数据
     state.$page = 1;
     state = Ux.clone(state);
-    reference.setState(state)
+    reference.setState(state);
 };
 const xtLinker = (reference = {}, config = {}) => {
     const {$select} = reference.state;
@@ -141,7 +141,7 @@ const xtPager = (reference, config = {}) => {
 const xtSelection = (reference) => ({
     type: 'radio',
     onSelect: keys => {
-        reference.setState({$select: keys})
+        reference.setState({$select: keys});
     }
 });
 export default {
@@ -150,4 +150,4 @@ export default {
     xt2Select,
     xtPager,
     xtSelection
-}
+};

@@ -11,4 +11,4 @@ const visitChildren = (item = {}) => {
 
 export default {
     visitChildren
-}
+};

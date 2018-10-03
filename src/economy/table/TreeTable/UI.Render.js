@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import './Cab.less';
 import U from 'underscore';
 import Op from './Op';
@@ -29,7 +29,7 @@ const _calcRender = (reference, config = {}) => {
                                $parent={Ux.clone(reference.props.$inited)}
                                $functions={$functions}
                                $components={$components}
-                               {...configuration}/>)
+                               {...configuration}/>);
         } else {
             const componentKey = config.component;
             const Child = $components[componentKey];
@@ -39,7 +39,7 @@ const _calcRender = (reference, config = {}) => {
                     <Child $inited={$inited}
                            $parent={Ux.clone(reference.props.$inited)}/>
                 </Component>
-            )
+            );
         }
     };
 };
@@ -69,7 +69,7 @@ const _calcRecord = (reference, column, record = {}) => {
                 field: item, dataKey: `${level}.${item}`
             }));
             fields.forEach(item =>
-                _addon[item.field] = current.map(each => each[item.dataKey]))
+                _addon[item.field] = current.map(each => each[item.dataKey]));
         }
     }
     data[`_extra`] = _addon;
@@ -95,7 +95,7 @@ const initOperations = (reference) => {
                 if (config.hasOwnProperty("title")) {
                     operations[key].title = _calcRender(reference, config.title);
                 }
-            })
+            });
     }
     return operations;
 };
@@ -120,7 +120,7 @@ const renderOp = (reference, record, {
                         {text ? render.value(column, record) : render.empty(column, record)}
                     </span>
                 </span>
-            )
+            );
         }
     } else {
         jsx.children = text;
@@ -144,4 +144,4 @@ export default {
     renderOp,
     initOperations,
     renderTitle
-}
+};

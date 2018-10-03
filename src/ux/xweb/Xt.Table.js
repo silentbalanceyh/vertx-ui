@@ -15,7 +15,7 @@ const _xtOp = (reference, column = {}, jsx, render = {}) => {
                 <Button icon={"plus"}/>
                 <Button disabled={0 === index} icon={"minus"} style={{marginLeft: 0}}/>
             </Button.Group>
-        )
+        );
     }
 };
 
@@ -30,7 +30,7 @@ const xtColumn = (reference, columns = []) => {
     columns.forEach(column => {
         if ("key" === column.dataIndex) {
             column.render = _xtOp(reference, column, jsx, $render);
-            column.style = {width: "80px"}
+            column.style = {width: "80px"};
         } else {
             let fnRender = $render[column.dataIndex];
             if (!fnRender) {
@@ -49,7 +49,7 @@ const xtSource = (reference) => {
     E.fxTerminal(!reference.state, 10084, reference.state);
     let {source} = reference.state;
     if (U.isArray(source)) {
-        source.forEach((item, index) => (item.sequence = (index + 1)))
+        source.forEach((item, index) => (item.sequence = (index + 1)));
     } else {
         source = [];
     }

@@ -2,7 +2,7 @@ import Log from "./monitor/Mt.Logger";
 import Cv from "./Ux.Constant";
 import Expr from "./util/Ux.Expr";
 import Sign from "./util/Ux.Sign";
-import Immutable from 'immutable'
+import Immutable from 'immutable';
 import E from './Ux.Error';
 import Dg from './Ux.Debug';
 import RxAjax from './Ux.Ajax.Rx';
@@ -41,7 +41,7 @@ const ajaxUri = (uri, method = "get", params = {}) => {
 const ajaxXSRF = (headers = {}) => {
     const xsrfToken = undefined;
     if (xsrfToken) {
-        headers.append(Cv.HTTP11.XSRF_TOKEN, xsrfToken)
+        headers.append(Cv.HTTP11.XSRF_TOKEN, xsrfToken);
     }
 };
 /**
@@ -87,7 +87,7 @@ const ajaxParams = (params = {}) => {
     const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
     const itLang = (data) => Type.itObject(data, (field, value) => {
         if (U.isArray(value)) {
-            data[field].forEach(item => itLang(item))
+            data[field].forEach(item => itLang(item));
         } else {
             if (U.isObject(data)) {
                 data.language = language;
@@ -166,7 +166,7 @@ const ajaxResource = (uri) => {
     const request = new Request(uri, {
         method: "get"
     });
-    return fetch(request).then(data => Promise.resolve(data.text()))
+    return fetch(request).then(data => Promise.resolve(data.text()));
 };
 /**
  * 【高阶函数：二阶】Ajax统一调用的读写双用方法，生成统一的Ajax远程调用方法，ajaxRead + ajaxWrite方法
@@ -266,7 +266,7 @@ const ajaxUniform = (success, failure, loading) => new Promise((resolve, reject)
                 } else {
                     return reject(errors);
                 }
-            })
+            });
         } else {
             // 不返回promise，直接返回值
             loading();

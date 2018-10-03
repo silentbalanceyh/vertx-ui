@@ -15,7 +15,7 @@ const SCHEMA = {
     Basic: () => {
         const user = Global.isLogged();
         if (user && user.token) {
-            return "Basic " + user.token
+            return "Basic " + user.token;
         }
     }
 };
@@ -116,4 +116,4 @@ export default {
     signature,
     // 读取当前用户登录过后的token，如果未登录则会返回undefined
     token
-}
+};

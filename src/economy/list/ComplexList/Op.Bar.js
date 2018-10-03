@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
@@ -35,7 +35,7 @@ const renderOp = (reference) => {
         <Button.Group>
             {buttons.map((button = {}) => {
                 const {text, ...rest} = button;
-                return (<Button {...rest}>{text}</Button>)
+                return (<Button {...rest}>{text}</Button>);
             })}
         </Button.Group>
     )

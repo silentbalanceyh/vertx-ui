@@ -74,14 +74,14 @@ const pipeReset = (reference, dataArray = []) => {
  * @param reference
  */
 const pipeVerify = (reference) => {
-    return 0 < pipeGet(reference).length
+    return 0 < pipeGet(reference).length;
 };
 const pipeGet = (reference) => {
     const {$items, $inited = {}} = reference.props;
     if ($items && $items.is()) {
         const data = Immutable.fromJS($items.to()).toJS();
         const array = data[$inited.key];
-        return array ? array : []
+        return array ? array : [];
     } else {
         return [];
     }
@@ -152,4 +152,4 @@ export default {
     pipeTree,
     pipeCriteria,
     pipeQuery,
-}
+};

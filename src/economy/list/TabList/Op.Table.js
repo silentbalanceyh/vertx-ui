@@ -92,7 +92,7 @@ const initRow = (reference, columns = [], rowKey) => {
                     if (!type) type = "TEXT";
                     const fnRender = Ux.aiStateRenders[type];
                     return U.isFunction(fnRender) ?
-                        fnRender(reference, column)(text, record, index) : false
+                        fnRender(reference, column)(text, record, index) : false;
                 } else {
                     return U.isFunction(fnRender) ?
                         fnRender(text, record, index) : text;

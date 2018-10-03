@@ -10,4 +10,4 @@ export default {
     ...Writer,
     Logger,
     ...Vt
-}
+};

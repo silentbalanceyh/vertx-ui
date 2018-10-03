@@ -182,7 +182,7 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
                 mock: mockData,
                 mode,
                 data: params
-            })
+            });
         }).catch(error => {
             // <==：关闭防重复提交
             Rdx.rdxSubmitting(reference, false);
@@ -193,7 +193,7 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
                  */
                 fnFailure(error);
             }
-        })
+        });
     };
 const _executor = (reference, config = {}) => {
     const {data, mode} = config;

@@ -64,7 +64,7 @@ const parseAjax = (reference, parameters = {}) => {
                 // 特殊解析流程
                 result.criteria = V.valueSearch(parameters.criteria, reference.props);
             } else if (U.isObject(parameters[field]) && "sorter" !== field) {
-                result[field] = parseAjax(reference, parameters[field])
+                result[field] = parseAjax(reference, parameters[field]);
             } else {
                 const expr = parameters[field];
                 const value = parseExpression(reference, expr);
@@ -142,4 +142,4 @@ const parseQuery = (reference = {}, $query) => {
 export default {
     parseAjax,
     parseQuery
-}
+};

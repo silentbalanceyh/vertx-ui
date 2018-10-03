@@ -10,7 +10,8 @@ const renderInteger = (reference, record) =>
     (<InputNumber min={0} defaultValue={0}
                   onChange={(event) => Op.setValue(reference, record.hitted, event)}/>);
 const renderText = (reference, record) =>
-    (<Input onChange={(event) => Op.setValue(reference, record.hitted, event.target.value)}/>);
+    (<Input
+        onChange={(event) => Op.setValue(reference, record.hitted, event.target.value)}/>);
 const renderPercent = (reference, record) =>
     (<InputNumber min={30} max={100} step={5} defaultValue={30}
                   formatter={value => `${value}%`}
@@ -58,7 +59,7 @@ const prepareData = (reference, data = {}, comment) => {
         Object.keys(option)
             .forEach(optionKey => records.push(_prepareRecord(option, optionKey, {
                 vector, comment,
-            }, true)))
+            }, true)));
     });
     return records.sort((left, right) => Ux.sorterAsc(left, right, "hitted"));
 };
@@ -69,14 +70,14 @@ const prepareRender = (reference, columns = {}) => {
                 <span>
                     <Icon {...text}/>&nbsp;&nbsp;{record.text}
                 </span>
-            )
+            );
         }
         if ("op" === column.dataIndex) {
-            column.render = (text, record) => RENDER[text](reference, record)
+            column.render = (text, record) => RENDER[text](reference, record);
         }
-    })
+    });
 };
 export default {
     prepareData,
     prepareRender
-}
+};

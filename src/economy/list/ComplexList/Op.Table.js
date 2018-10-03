@@ -92,4 +92,4 @@ const initTable = (reference = {}) => {
 };
 export default {
     initTable
-}
+};

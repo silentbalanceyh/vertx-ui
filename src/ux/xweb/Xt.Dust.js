@@ -53,4 +53,4 @@ export default {
     xtInitArray,
     xtGet,
     xtReset,
-}
+};

@@ -11,8 +11,8 @@ const _fnSorter = (source = [], $query = {}) => {
             const field = sortItem.split(',')[0];
             const isAsc = "ASC" === sortItem.split(',')[1];
             source = source.sort((left, right) => isAsc ? Sorter.sorterAsc(left, right, field) :
-                Sorter.sorterDesc(left, right, field))
-        })
+                Sorter.sorterDesc(left, right, field));
+        });
     }
     return source;
 };
@@ -20,7 +20,7 @@ const _fnSorter = (source = [], $query = {}) => {
 const FILTERS = {
     // 包含
     "c": (field, value) => {
-        return (item) => item && item[field] && 0 <= item[field].indexOf(value)
+        return (item) => item && item[field] && 0 <= item[field].indexOf(value);
     }
 };
 
@@ -104,7 +104,7 @@ const _fnAnalyze = (criteria = {}) => {
             }
         }
     });
-    return {isAnd, isTree, linear, tree}
+    return {isAnd, isTree, linear, tree};
 };
 
 const _fnTree = (source = [], criteria = {}, level = 1) => {

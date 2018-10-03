@@ -10,4 +10,4 @@ const debug = (reference = {}, Name) => {
 };
 export default {
     debug
-}
+};

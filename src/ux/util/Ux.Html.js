@@ -56,4 +56,4 @@ export default {
     htmlDisabled,
     htmlErrorFocus,
     htmlErrorBlur
-}
+};

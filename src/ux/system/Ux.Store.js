@@ -144,4 +144,4 @@ export default {
     },
     storeApp,
     storeUser
-}
+};

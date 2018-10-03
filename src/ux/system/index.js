@@ -4,4 +4,4 @@ import Store from './Ux.Store';
 export default {
     ...Global,
     ...Store
-}
+};
