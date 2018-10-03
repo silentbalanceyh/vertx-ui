@@ -43,6 +43,14 @@
             {
                 "source": "O",
                 "name": "config -> column[x]",
+                "option": "$config.to",
+                "comment": "「VECTOR」只有 $render = VECTOR 时生效，设置转换字段名。",
+                "type": "String",
+                "value": "￥"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
                 "option": "$config.tree",
                 "comment": "「TREE」只有 $render = TREE 时生效，树形配置。",
                 "type": "String | Object",
@@ -153,6 +161,10 @@
                                         },
                                         {
                                             "name": "$config.tree",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "$config.to",
                                             "color": "#33af43"
                                         }
                                     ]
