@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Card} from 'antd';
 import Ux from 'ux';
 import {DataLabor} from 'entity';
@@ -75,7 +75,7 @@ class Component extends React.PureComponent {
                       extra={extraContent}>
                     {children}
                 </Card>
-            )
+            );
         } else return false;
     }
 }

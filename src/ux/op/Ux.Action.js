@@ -71,4 +71,4 @@ const rxInit = (props, params = {}) => {
 export default {
     runSubmit,
     rxInit
-}
+};

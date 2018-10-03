@@ -101,8 +101,8 @@ class Mock {
     raw() {
         const keys = this.keys;
         const source = this.source;
-        return {keys, source}
+        return {keys, source};
     }
 }
 
-export default Mock
+export default Mock;

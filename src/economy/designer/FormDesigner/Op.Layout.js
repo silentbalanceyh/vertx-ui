@@ -22,7 +22,7 @@ const rowRemove = (reference, key) => (event) => {
     reference.setState({rows});
 };
 const colSelect = (reference) => (event) => {
-    reference.setState({columns: parseInt(event, 10)})
+    reference.setState({columns: parseInt(event, 10)});
 };
 export default {
     rowRemove,
@@ -30,4 +30,4 @@ export default {
     colSelect,
     // 生成key
     generateKey
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Button, Input, Spin, Tree} from 'antd';
 import Op from './Op';
@@ -15,7 +15,7 @@ const _renderItem = (reference, item = {}, config = {}) => {
             {Item.renderInput(reference, item)}&nbsp;&nbsp;
             {Item.renderOp(reference, item, config)}
         </span>
-    ) : item.display
+    ) : item.display;
 };
 const _renderNodes = (reference, item = {}, config = {}) => {
     const attrs = {};
@@ -36,7 +36,7 @@ const _renderNodes = (reference, item = {}, config = {}) => {
                 })
             )) : false}
         </TreeNode>
-    )
+    );
 };
 
 const renderTree = (reference) => {
@@ -84,7 +84,7 @@ const renderTree = (reference) => {
                 </div>
             )}
         </div>
-    )
+    );
 };
 
 const renderLayout = (reference, jsx) => {
@@ -101,4 +101,4 @@ const renderLayout = (reference, jsx) => {
 
 export default {
     renderLayout
-}
+};

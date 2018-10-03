@@ -36,7 +36,7 @@ const renderCode = ($name) => {
                 }}>'web';</span>
             </Col>
         </Row>
-    )
+    );
 };
 
 const renderComment = (icon, type) => {
@@ -67,10 +67,10 @@ const renderComment = (icon, type) => {
                 ))}
             </Collapse.Panel>
         </Collapse>
-    )
+    );
 };
 export default {
     renderColumn,
     renderCode,
     renderComment
-}
+};

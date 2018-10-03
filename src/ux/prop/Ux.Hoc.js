@@ -1,6 +1,6 @@
-import Cv from '../Ux.Env'
-import E from '../Ux.Error'
-import Value from '../Ux.Value'
+import Cv from '../Ux.Env';
+import E from '../Ux.Error';
+import Value from '../Ux.Value';
 
 /**
  * 通用属性读取相关信息
@@ -20,7 +20,7 @@ const toProp = (props = {}, ...keys) => {
     targetFor.forEach(key => {
         const targetKey = `$${key}`;
         if (props.hasOwnProperty(targetKey)) {
-            inherits[targetKey] = props[targetKey]
+            inherits[targetKey] = props[targetKey];
         }
     });
     // 特殊方法专用：reference和fnOut
@@ -53,7 +53,7 @@ const toDatum = (props = {}, keys = []) => {
             } else if (props[`$a_${key}`]) {
                 inherits[`$a_${key}`] = props[`$a_${key}`];
             }
-        })
+        });
     }
     return inherits;
 };
@@ -98,7 +98,7 @@ const toStyle = (name, bg) => {
     if (bg) {
         styles.style = {
             backgroundImage: `url(${bg})`
-        }
+        };
     }
     return styles;
 };
@@ -115,7 +115,7 @@ const toUniform = (props, ...keys) => {
     return {
         ...item,
         ...common
-    }
+    };
 };
 
 const toLimitation = (props = {}, limits = []) => {
@@ -123,7 +123,7 @@ const toLimitation = (props = {}, limits = []) => {
     const $limitKeys = Value.immutable(limits);
     Object.keys(props).filter(key => !$limitKeys.contains(key))
         .forEach(key => inherits[key] = props[key]);
-    return inherits
+    return inherits;
 };
 /**
  * @class Hoc

@@ -118,4 +118,4 @@ export default {
      * @return {String}
      */
     formatNow: (pattern = "YYYY-MM-DD") => moment().format(pattern)
-}
+};

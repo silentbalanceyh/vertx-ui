@@ -10,4 +10,4 @@ const safeArray = (input) => {
 
 export default {
     safeArray
-}
+};

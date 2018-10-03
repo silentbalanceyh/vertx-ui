@@ -1,5 +1,5 @@
-import U from 'underscore'
-import UI from '../util/Ux.Html'
+import U from 'underscore';
+import UI from '../util/Ux.Html';
 import Param from '../fun/Ux.Param';
 import Prop from './Ux.Form';
 import Field from './Ux.Field';
@@ -133,7 +133,7 @@ const equal = (reference = {}) => (rule = {}, value, callback) => {
     _executeReady(rule, value, callback, () => {
         let to = Prop.formHit(reference, rule.config.to);
         return String(value) === String(to) ||
-            Number(value) === Number(to)
+            Number(value) === Number(to);
     });
 };
 const VERFIERS = {
@@ -187,7 +187,7 @@ const mountValidator = (refereuce = {}, item = {}) => {
                         }
                     }
                 }
-            })
+            });
         }
     }
 };
@@ -197,4 +197,4 @@ const mountValidator = (refereuce = {}, item = {}) => {
  */
 export default {
     mountValidator
-}
+};

@@ -24,4 +24,4 @@ export default {
      */
     randomUUID: v4,
     randomString
-}
+};

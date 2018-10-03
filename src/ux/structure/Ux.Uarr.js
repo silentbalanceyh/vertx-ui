@@ -89,10 +89,10 @@ class Uarr {
         return this.data;
     }
 
-    tree(key = "", pkey = "") {
-        const root = this.data.filter(item => !item[pkey]);
+    tree(key = "id", parentKey = "pid") {
+        const root = this.data.filter(item => !item[parentKey]);
         const reference = this.data;
-        root.forEach(item => item.children = Ux.Child.byField(reference, pkey, item, key));
+        root.forEach(item => item.children = Ux.Child.byField(reference, parentKey, item, key));
         this.data = root;
         return this;
     }

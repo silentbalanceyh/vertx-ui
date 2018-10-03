@@ -28,7 +28,9 @@ const _xtParams = (reference, config = {}) => {
 
 const xt2Loading = (reference, config = {}) => event => {
     // 常用的事件处理
-    if (U.isFunction(event.preventDefault)) event.preventDefault();
+    if (U.isFunction(event.preventDefault)) {
+        event.preventDefault();
+    }
     // 初始化数据
     reference.setState({
         $loading: true,             // 是否在加载
@@ -47,14 +49,16 @@ const xt2Loading = (reference, config = {}) => event => {
         }), mock);
 };
 const xt2Dialog = (reference = {}, show = false) => (event) => {
-    if (U.isFunction(event.preventDefault)) event.preventDefault();
+    if (U.isFunction(event.preventDefault)) {
+        event.preventDefault();
+    }
     // 设置窗口开关事件
     let state = {};
     state.$visible = show;
     // 重置页面数据
     state.$page = 1;
     state = Ux.clone(state);
-    reference.setState(state)
+    reference.setState(state);
 };
 const xtLinker = (reference = {}, config = {}) => {
     const {$select} = reference.state;
@@ -77,7 +81,9 @@ const xtLinker = (reference = {}, config = {}) => {
     }
 };
 const xt2Select = (reference = {}, config = {}) => (event) => {
-    if (U.isFunction(event.preventDefault)) event.preventDefault();
+    if (U.isFunction(event.preventDefault)) {
+        event.preventDefault();
+    }
     const {$select} = reference.state;
     const ref = Ux.onReference(reference, 1);
     // 判断ListSelector中的选中项，状态中的$select是否存在
@@ -135,7 +141,7 @@ const xtPager = (reference, config = {}) => {
 const xtSelection = (reference) => ({
     type: 'radio',
     onSelect: keys => {
-        reference.setState({$select: keys})
+        reference.setState({$select: keys});
     }
 });
 export default {
@@ -144,4 +150,4 @@ export default {
     xt2Select,
     xtPager,
     xtSelection
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Input} from 'antd';
 
@@ -12,8 +12,8 @@ const aiStateInput = (reference, column) => () => {
                    rowRecord[column.dataIndex] = event.target.value;
                    reference.setState({rowRecord});
                }}/>
-    )
+    );
 };
 export default {
     TEXT: aiStateInput
-}
+};

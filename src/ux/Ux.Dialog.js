@@ -2,7 +2,7 @@ import {message, Modal} from 'antd';
 import Prop from './prop/Ux.Prop';
 import Expr from './util/Ux.Expr';
 import E from './Ux.Error';
-import U from 'underscore'
+import U from 'underscore';
 
 const _captureKey = (reference, key) => {
     const {$hoc} = reference.state;
@@ -219,4 +219,4 @@ export default {
     showConfirm,
     showDialog,
     showMessage
-}
+};

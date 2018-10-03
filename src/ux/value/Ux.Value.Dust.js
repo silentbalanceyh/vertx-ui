@@ -65,7 +65,7 @@ const assign = (target = {}, source = {}, mode = 0) => {
                     }
                 }
             }
-        })
+        });
     }
     return result;
 };
@@ -111,7 +111,7 @@ const element = (input, fnExecute) => {
             // 数组执行每一个元素
             input.forEach((item, index) => {
                 if (U.isObject(item)) {
-                    fnExecute(item, index)
+                    fnExecute(item, index);
                 }
             });
         } else {
@@ -130,7 +130,7 @@ const matrix = (array = [], object = {}, fnExecute, fnPredicate) => {
             if (predicate(value)) {
                 fnExecute(item, key, value);
             }
-        })
+        });
     }
 };
 const cut = (array, ...attr) => {
@@ -199,7 +199,7 @@ const _childrenByField = (array = [], parent, item, field) => {
     let childrenArray = array.filter(each => each[parent] === pValue);
     childrenArray = clone(childrenArray);
     if (0 < childrenArray.length) {
-        childrenArray.forEach(each => each.children = _childrenByField(array, parent, each, field))
+        childrenArray.forEach(each => each.children = _childrenByField(array, parent, each, field));
     }
     return childrenArray;
 };
@@ -237,4 +237,4 @@ export default {
     immutable: Immutable.fromJS,
     // 子节点检索
     Child,
-}
+};

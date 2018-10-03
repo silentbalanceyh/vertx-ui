@@ -69,4 +69,4 @@ const initTree = (reference) => {
 };
 export default {
     initTree
-}
+};

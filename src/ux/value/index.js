@@ -15,4 +15,4 @@ export default {
     ...ValueSafe,
     // 原子操作
     ...ValueDust
-}
+};

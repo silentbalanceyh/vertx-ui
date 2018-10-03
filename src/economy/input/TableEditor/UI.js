@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
 
@@ -7,24 +7,35 @@ class Component extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = Ux.jetInit(this, true);
+        this.state = Ux.xtInitArray(props);
+        // columns专用
+        const {config = {}} = this.props;
+        this.state.columns = Ux.xtColumn(this, config.columns);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.jctUnsafe(this, nextProps);
+        Ux.xtUnsafe(this, nextProps);
     }
 
     render() {
-        const {config = {}, $render, ...jsx} = this.props;
-        const {value, ...rest} = jsx;
-        config.columns = Ux.jctColumn(this, config.columns, jsx, $render);
-        const data = Ux.jctData(this);
+        const {config = {}, ...jsx} = this.props;
+        const {columns = []} = this.state;
+        // 配置处理
+        config.columns = columns;
+        config.pagination = false;
+        config.className = "web-table-editor";
+        // 数据处理
+        const data = Ux.xtSource(this);
+        // 处理InputGroup中的jsx
+        const attrs = Ux.valueFlip(jsx);
+        const $attrs = Ux.clone(attrs);
+        if ($attrs.onChange) delete $attrs.onChange;
         return (
-            <Input.Group {...rest}>
-                <Table {...config} className={"web-table-editor"} pagination={false}
+            <Input.Group {...$attrs}>
+                <Table {...config}
                        dataSource={data}/>
             </Input.Group>
-        )
+        );
     }
 }
 

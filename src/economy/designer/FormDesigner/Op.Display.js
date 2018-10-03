@@ -13,4 +13,4 @@ const calcCellStyle = (props) => {
 };
 export default {
     calcCellStyle
-}
+};

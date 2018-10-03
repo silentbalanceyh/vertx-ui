@@ -1,7 +1,7 @@
 import {v4} from 'uuid';
 import Ux from 'ux';
 import Init from './Op.Init';
-import Fn from '../../_internal/Ix.Fn'
+import Fn from '../../_internal/Ix.Fn';
 import Immutable from 'immutable';
 import U from 'underscore';
 
@@ -93,7 +93,7 @@ const rxEdit = (reference, id) => {
             if (rxEditPost) {
                 rxEditPost(data, id);
             }
-        })
+        });
     }
 };
 
@@ -126,7 +126,7 @@ const rxDeleteDetail = (reference, id) => {
 
 const rxDelete = (reference, id) => {
     const {$self} = reference.props;
-    rxDeleteDetail($self, id)
+    rxDeleteDetail($self, id);
 };
 
 const rxSave = (reference) => {
@@ -201,7 +201,7 @@ const rxFilter = (reference = {}) => (value, event) => {
     Ux.writeTree(reference, {
         "grid.query": $query,
         "grid.list": undefined
-    })
+    });
 };
 const rxClear = (reference = {}) => () => {
     const query = Init.readQuery(reference);
@@ -212,11 +212,11 @@ const rxClear = (reference = {}) => () => {
     Ux.writeTree(reference, {
         "grid.query": query,
         "grid.list": undefined
-    })
+    });
 };
 const rxInput = (reference = {}) => (event) => {
     const term = event.target.value;
-    reference.setState({term})
+    reference.setState({term});
 };
 export default {
     rxAdd,
@@ -230,4 +230,4 @@ export default {
     rxInput,
     // 行处理
     rxSave,
-}
+};

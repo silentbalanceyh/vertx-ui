@@ -77,11 +77,11 @@ const connectSubmit = (reference, data, major = true) => {
         if (major) {
             Ux.writeTree(reference, {
                 "debug.active.major": data,
-            })
+            });
         } else {
             Ux.writeTree(reference, {
                 "debug.active.sub": data,
-            })
+            });
         }
     }
 };
@@ -108,4 +108,4 @@ export default {
     // Pointer处理
     writePointer,
     earsePointer
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import "./Cab.less";
 import {DatePicker, Input, Radio} from 'antd';
@@ -62,10 +62,11 @@ class Component extends React.PureComponent {
                 <span className={"web-checked-radio"}>
                 {related.config && related.config.label ? `${related.config.label}：` : false}
                 </span>
-                <DatePicker {...related.config} onChange={this.handleDate} disabled={disabled}
+                <DatePicker {...related.config} onChange={this.handleDate}
+                            disabled={disabled}
                             className={"rx-readonly"} value={dateValue}/>
             </Input.Group>
-        )
+        );
     }
 }
 

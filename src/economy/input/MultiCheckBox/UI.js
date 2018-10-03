@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import './Cab.less';
 import Immutable from 'immutable';
@@ -69,12 +69,12 @@ class Component extends React.PureComponent {
                                     {fnChild ? fnChild(item) : false}
                                 </span>
                             )
-                        )
+                        );
                     })}
                 </Checkbox.Group>
             </span>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

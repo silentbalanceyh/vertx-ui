@@ -40,10 +40,12 @@ const _jetRemove = (reference, index, key) => (event) => {
 const _jetOp = (reference, item, jsx) => (text, record, index) => {
     return (
         <Button.Group style={{minWidth: "64px"}}>
-            <Button icon={"plus"} onClick={_jetAdd(reference, index, item.sequence, jsx.defaultValue)}/>
-            <Button disabled={0 === index} icon={"minus"} onClick={_jetRemove(reference, index, item.sequence)}/>
+            <Button icon={"plus"}
+                    onClick={_jetAdd(reference, index, item.sequence, jsx.defaultValue)}/>
+            <Button disabled={0 === index} icon={"minus"}
+                    onClick={_jetRemove(reference, index, item.sequence)}/>
         </Button.Group>
-    )
+    );
 };
 
 const jdcColumn = (reference, columns = [], jsx, render = {}, key) => {
@@ -92,4 +94,4 @@ const jdcInit = (reference, returnState = false) => {
 export default {
     jdcInit,
     jdcColumn
-}
+};

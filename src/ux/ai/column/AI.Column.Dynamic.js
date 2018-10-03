@@ -7,7 +7,7 @@ import U from 'underscore';
 const aiDynamicEpsilon = (reference, item = {}, jsx) => (text) => {
     const config = item["$config"];
     let label = config[text];
-    return (<span style={jsx.style ? jsx.style : {}}>{label}</span>)
+    return (<span style={jsx.style ? jsx.style : {}}>{label}</span>);
 };
 
 const aiDynamicState = (reference, item = {}, jsx) => (text, record, index) => {
@@ -53,10 +53,10 @@ const aiDynamicText = (reference, item = {}, jsx = {}) => (text, record = {}, in
                    index, field: item.dataIndex,
                    value: event.target.value, sequence: item.sequence
                })} value={text}/>
-    )
+    );
 };
 export default {
     EPSILON: aiDynamicEpsilon,
     STATE: aiDynamicState,
     TEXT: aiDynamicText,
-}
+};

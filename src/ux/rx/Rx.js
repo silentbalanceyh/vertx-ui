@@ -1,4 +1,4 @@
-import Transfer from './Rx.Transfer'
+import Transfer from './Rx.Transfer';
 
 export default {
     ...Transfer

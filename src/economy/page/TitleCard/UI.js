@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Card} from 'antd';
 import Ux from 'ux';
 
@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                   extra={(Extra) ? <Extra $current={topbar.current}/> : false}>
                 {children}
             </Card>
-        )
+        );
     }
 }
 

@@ -32,7 +32,7 @@ class Component extends React.PureComponent {
         this.setState({
             checked
         });
-        this.triggerChange({checked})
+        this.triggerChange({checked});
     };
 
     handleInput = (event) => {
@@ -52,7 +52,7 @@ class Component extends React.PureComponent {
         this.state = {
             checked: value.checked || [],
             input: value.input || ""
-        }
+        };
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -73,20 +73,21 @@ class Component extends React.PureComponent {
         let checked = value.filter(item => item.key !== "other").map(item => item.key);
         return (
             <Input.Group compact>
-                <Checkbox.Group {...meta} onChange={this.handleChecked} value={checked}>{checkbox.map(item => {
+                <Checkbox.Group {...meta} onChange={this.handleChecked}
+                                value={checked}>{checkbox.map(item => {
                     return (<Checkbox key={item.key}
                                       {...meta}
                                       value={item.value ? item.value : item.key}>
                         {item.label}
-                    </Checkbox>)
+                    </Checkbox>);
                 })}</Checkbox.Group>
                 {input.label}：
                 <Input name={input.key} style={{
                     width: "120px"
                 }} {...meta} onChange={this.handleInput} value={other}/>
             </Input.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

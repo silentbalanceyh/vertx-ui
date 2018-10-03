@@ -13,7 +13,7 @@ const _renderDelete = (reference, config = {}, item) => {
                     size={"small"}
                     className={"web-tree-addon ux-red"}/>
         </Popconfirm>
-    )
+    );
 };
 const _renderYes = (reference, config = {}, item) => {
     return (
@@ -21,7 +21,7 @@ const _renderYes = (reference, config = {}, item) => {
                 className={"web-tree-addon"} type={"primary"}
                 onClick={Act.rxEdit(reference, item)}
         />
-    )
+    );
 };
 
 const _renderNo = (reference) => {
@@ -30,7 +30,7 @@ const _renderNo = (reference) => {
                 className={"web-tree-addon"}
                 onClick={Act.rxCancel(reference)}
         />
-    )
+    );
 };
 
 const renderOp = (reference, item = {}, metadata = {}) => {
@@ -46,7 +46,7 @@ const renderOp = (reference, item = {}, metadata = {}) => {
             {Is.isPreEdit(reference, item) ? Rdr.renderEdit(reference, config, item) : false}
             {Is.isPreEdit(reference, item) ? _renderDelete(reference, config, item) : false}
         </span>
-    )
+    );
 };
 
 const renderInput = (reference, item = {}) => {
@@ -60,4 +60,4 @@ const renderInput = (reference, item = {}) => {
 export default {
     renderOp,
     renderInput,
-}
+};

@@ -33,7 +33,7 @@ const jsxKv = (field) => (item = {}, value) => {
     } else {
         if ("placeholder" === field) {
             if ("$CLEAR$" === value) {
-                value = " "
+                value = " ";
             }
         }
         jsxValue(field)(item, value);
@@ -122,4 +122,4 @@ const parseRule = (rule = "") => {
 export default {
     parseTo,
     parseRule
-}
+};

@@ -2,11 +2,11 @@ import Ux from 'ux';
 
 const fnClear = (reference = {}) => (event) => {
     event.preventDefault();
-    reference.setState({selectedRowKeys: []})
+    reference.setState({selectedRowKeys: []});
 };
 const _fnDialog = (reference = {}, dialogKey = "") => {
     Ux.fadeIn(reference);
-    reference.setState({dialogKey})
+    reference.setState({dialogKey});
 };
 const fnAdd = (reference = {}, dialogKey = "") => (event) => {
     event.preventDefault();
@@ -35,7 +35,7 @@ const fnRemove = (reference = {}) => (config, id) => (event) => {
                 clean.forEach(item => state[item] = undefined);
                 Ux.writeTree(reference, state);
             }
-        }, $mockRemove ? $mockRemove : {})
+        }, $mockRemove ? $mockRemove : {});
     }
 };
 export default {
@@ -47,4 +47,4 @@ export default {
     fnEdit,
     // 删除按钮
     fnRemove
-}
+};

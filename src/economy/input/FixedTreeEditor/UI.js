@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Input, Table} from 'antd';
 import Immutable from 'immutable';
 import Op from './UI.Render';
@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
                 if (item[config.children]) {
                     item.children = item[config.children];
                 }
-            })
+            });
         }
         // 处理专用的渲染
         if (config.table && config.table.columns) {
@@ -31,8 +31,8 @@ class Component extends React.PureComponent {
                        pagination={false}
                        dataSource={data}/>
             </Input.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

@@ -1,16 +1,16 @@
-import React from 'react'
-import Type from '../Ux.Type'
+import React from 'react';
+import Type from '../Ux.Type';
 import Hsx from '../Ux.Jsx';
-import Random from '../util/Ux.Random'
+import Random from '../util/Ux.Random';
 import U from 'underscore';
 import {DataLabor} from 'entity';
 import Immutable from 'immutable';
-import Expr from '../util/Ux.Expr'
+import Expr from '../util/Ux.Expr';
 import Value from '../Ux.Value';
 import {Table} from 'antd';
 import Column from '../Ux.Column';
 import E from '../Ux.Error';
-import fieldRender from './Ux.Jsx.Single'
+import fieldRender from './Ux.Jsx.Single';
 
 const extractValue = ($data, config) => {
     let field = config.field;
@@ -28,11 +28,11 @@ const _renderLabel = (label, value, config) => {
     const _renderValue = (item) => {
         if (U.isArray(item)) {
             if (config.meta && config.meta.vlist) {
-                return (item.map(each => (<li key={Random.randomString(8)}>{each}</li>)))
+                return (item.map(each => (<li key={Random.randomString(8)}>{each}</li>)));
             } else {
                 const hr = config.meta.hr;
                 return item.map(each => (hr ? (<span key={Random.randomString(8)}>{each}
-                    <hr/></span>) : each))
+                    <hr/></span>) : each));
             }
         } else {
             return item;
@@ -191,4 +191,4 @@ export default {
     picture,
     table,
     extractValue,
-}
+};

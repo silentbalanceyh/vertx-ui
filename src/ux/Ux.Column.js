@@ -1,4 +1,4 @@
-import Ai from './ai/AI'
+import Ai from './ai/AI';
 
 /**
  * Ant Design的Table组件专用的专用属性`columns`列处理器，处理每一列的`render`属性
@@ -11,7 +11,7 @@ import Ai from './ai/AI'
  */
 const uiColumnRender = (reference, columns = [], key, fnRender = () => false, hoc = false) => {
     columns.filter(column => column.dataIndex && key === column.dataIndex)
-        .forEach(column => (hoc) ? column.render = fnRender(column) : column.render = fnRender)
+        .forEach(column => (hoc) ? column.render = fnRender(column) : column.render = fnRender);
 };
 /**
  * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性

@@ -1,6 +1,6 @@
 import Op from './Op.Init';
 import Act from './Op.Action';
-import Ux from 'ux'
+import Ux from 'ux';
 
 const _initColumns = (reference, columns = []) => {
     const props = reference.props;
@@ -26,7 +26,7 @@ const initTable = (reference) => {
     }
     // 数据读取
     const data = Ux.itemTable(reference);
-    return {table, data}
+    return {table, data};
 };
 
 const initDialog = (reference) => {
@@ -47,4 +47,4 @@ const initDialog = (reference) => {
 export default {
     initTable,
     initDialog
-}
+};

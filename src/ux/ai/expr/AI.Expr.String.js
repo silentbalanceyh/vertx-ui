@@ -1,8 +1,8 @@
 import U from 'underscore';
 import Immutable from 'immutable';
 import ExprData from './AI.Expr';
-import ExprValue from './AI.Expr.Value'
-import Value from '../../Ux.Value'
+import ExprValue from './AI.Expr.Value';
+import Value from '../../Ux.Value';
 import {v4} from 'uuid';
 
 const parseItem = (kvs = [], key) => {
@@ -195,7 +195,7 @@ const aiMetaOption = (item = {}) => {
 
 const aiExprIcon = (icons) => {
     if ("string" === typeof icons) {
-        return parseItem(icons, "icon")
+        return parseItem(icons, "icon");
     } else if (U.isArray(icons)) {
         return _iterator(icons, (values = []) => parseItem(values, "icon"));
     }
@@ -239,7 +239,7 @@ const aiExprFilter = (filter = "") => parseItem(filter, "filter");
 const aiExprWindow = (literal = "") => {
     const item = parseItem(literal, "window");
     if (item.hasOwnProperty('key')) {
-        delete item['key']
+        delete item['key'];
     }
     if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
     if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
@@ -249,7 +249,7 @@ const aiExprWindow = (literal = "") => {
 const aiExprDrawer = (drawer = "") => {
     const item = parseItem(drawer, "drawer");
     if (item.hasOwnProperty('key')) {
-        delete item['key']
+        delete item['key'];
     }
     if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
     if (item.hasOwnProperty('maskClosable')) item.maskClosable = "true" === (item.maskClosable);
@@ -259,7 +259,7 @@ const aiExprDrawer = (drawer = "") => {
 const aiExprPopover = (popover = "") => {
     const item = parseItem(popover, "popover");
     if (item.hasOwnProperty('key')) {
-        delete item['key']
+        delete item['key'];
     }
     if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
     if (item.hasOwnProperty('closable')) item.closable = "true" === (item.closable);
@@ -292,4 +292,4 @@ export default {
     // 特殊解析
     aiExprTitle,
     aiExprInit
-}
+};

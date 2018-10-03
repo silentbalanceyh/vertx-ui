@@ -53,7 +53,7 @@ const _onDelete = (reference, key, state = {}) => {
         Ux.writeTree(reference, {
             "list.items": dataRecord,
             ...state,
-        })
+        });
     } else {
         Ux.writeTree(reference, state);
     }
@@ -78,7 +78,7 @@ const onEdit = (reference) => (key, action) => {
         } else {
             tabs.activeKey = tabs.items[0].key;
             tabs.items = [tabs.items[0]];
-            view = stateView("list", undefined, reference)
+            view = stateView("list", undefined, reference);
         }
         tabs.items.forEach((item, index) => {
             item.index = index;
@@ -159,4 +159,4 @@ export default {
     readTable,
     readQuery,
     clearByKey: _onDelete
-}
+};

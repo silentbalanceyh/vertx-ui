@@ -1,7 +1,7 @@
-import React from 'react'
+import React from 'react';
 import {Col, Row, Table} from 'antd';
-import RxAnt from './ant/AI.RxAnt';
-import LayoutType from './layout/AI.Layout.Config';
+import RxAnt from '../ant/AI.RxAnt';
+import LayoutType from './AI.Layout.Config';
 
 /**
  * 直接渲染多行
@@ -27,7 +27,7 @@ const aiColumns = (config = [], ...jsx) => {
                 <Col span={item} key={`$$AiCol${index}$Number`}>
                     {jsx[index] ? jsx[index] : false}
                 </Col>
-            )
+            );
         } else if (isExpr) {
             const attrs = RxAnt.toParsed(item, index);
             // 重写key值
@@ -36,7 +36,7 @@ const aiColumns = (config = [], ...jsx) => {
                 <Col {...attrs}>
                     {jsx[index] ? jsx[index] : false}
                 </Col>
-            )
+            );
         } else {
             return false;
         }
@@ -48,11 +48,11 @@ const aiGrid = (config = [], ...jsx) => {
         <Row>
             {aiColumns.apply(this, [config].concat(jsx))}
         </Row>
-    )
+    );
 };
 
 const aiTable = (dataSource = [], table = {}) => {
-    return (<Table {...table} dataSource={dataSource}/>)
+    return (<Table {...table} dataSource={dataSource}/>);
 };
 
 const aiAdjust = (window = 1) => {
@@ -67,4 +67,4 @@ export default {
     aiColumns,
     aiTable,
     aiAdjust
-}
+};

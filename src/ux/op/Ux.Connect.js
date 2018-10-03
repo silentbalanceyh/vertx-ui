@@ -32,11 +32,11 @@ function connectId(id) {
         M.Logger.connect(id);
         ele.click();
     }
-};
+}
 
 export default {
     // 连接
     connectButton: connectDialog,
     connectDialog,
     connectId,
-}
+};

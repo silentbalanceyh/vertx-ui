@@ -1,6 +1,6 @@
-import U from 'underscore'
-import Terminal from './terminal/Ux.Terminal.Fx'
-import Cv from './Ux.Constant'
+import U from 'underscore';
+import Terminal from './terminal/Ux.Terminal.Fx';
+import Cv from './Ux.Constant';
 
 const fnError = {
     10000: (type, current) => `[ ERR-10000 ] 传入参数类型不匹配，期望类型${type}，当前参数类型${current}`,
@@ -146,19 +146,19 @@ export default {
     fxTerminal: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            return fxMessage.apply(this, [console.error, code].concat(args))
+            return fxMessage.apply(this, [console.error, code].concat(args));
         }
     },
     fxWarning: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            return fxMessage.apply(this, [console.warn, code].concat(args))
+            return fxMessage.apply(this, [console.warn, code].concat(args));
         }
     },
     fxInfo: (fnCond, code, ...args) => {
         const checked = U.isFunction(fnCond) ? fnCond() : fnCond;
         if (checked) {
-            return fxMessage.apply(this, [console.info, code].concat(args))
+            return fxMessage.apply(this, [console.info, code].concat(args));
         }
     },
     fxMessageError: (code, ...args) => fxMessage.apply(this, [console.error, code].concat(args)),
@@ -176,8 +176,8 @@ export default {
             fnError[10007](Op, key);
             return (event) => {
                 event.preventDefault();
-            }
+            };
         }
     }, 10002, reference),
     fxFatal,
-}
+};

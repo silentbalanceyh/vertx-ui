@@ -22,7 +22,7 @@ const convertTime = (value, format = moment.ISO_8601) => {
 const convertTimes = (data = {}, ...fields) => {
     fields.forEach(field => {
         if (data[field]) data[field] = convertTime(data[field]);
-    })
+    });
 };
 /**
  * 根据from和to计算中间的duration差值
@@ -88,4 +88,4 @@ export default {
     valueEndTime,
     convertTimes,
     convertTime
-}
+};

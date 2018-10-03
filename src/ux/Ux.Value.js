@@ -1,5 +1,5 @@
 import U from "underscore";
-import Value from './value'
+import Value from './value';
 
 /**
  * 两个字符串的专用连接方法，用于做不重复链接，
@@ -55,4 +55,4 @@ export default {
     stringConnect,
 
     ...Value,
-}
+};

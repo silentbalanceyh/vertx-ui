@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Op from './Op';
 import {Button, Col, Row} from 'antd';
 
@@ -15,7 +15,7 @@ const renderHeader = (reference) => {
         item.htmlType = 'button';
         if (options.hasOwnProperty("op.add.visible") &&
             !options['op.add.visible']) {
-            item.className = 'ux-hidden'
+            item.className = 'ux-hidden';
         }
         if (options.hasOwnProperty('op.add.id')) {
             item.key = options['op.add.id'];
@@ -36,4 +36,4 @@ const renderHeader = (reference) => {
 
 export default {
     renderHeader
-}
+};

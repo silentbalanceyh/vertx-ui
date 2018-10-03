@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {_zero} from "../../../_internal";
 
@@ -17,8 +17,8 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return (<div id={"g6Pointer"}/>)
+        return (<div id={"g6Pointer"}/>);
     }
 }
 
-export default Component
+export default Component;

@@ -34,4 +34,4 @@ const adjust = {
 export default {
     layout,
     adjust
-}
+};

@@ -1,8 +1,8 @@
-import U from 'underscore'
+import U from 'underscore';
 import Immutable from 'immutable';
-import Logger from '../monitor/Mt.Logger'
-import Type from '../Ux.Type'
-import V from '../value'
+import Logger from '../monitor/Mt.Logger';
+import Type from '../Ux.Type';
+import V from '../value';
 import E from '../Ux.Error';
 
 const parseProp = (reference, path = "") => {
@@ -64,7 +64,7 @@ const parseAjax = (reference, parameters = {}) => {
                 // 特殊解析流程
                 result.criteria = V.valueSearch(parameters.criteria, reference.props);
             } else if (U.isObject(parameters[field]) && "sorter" !== field) {
-                result[field] = parseAjax(reference, parameters[field])
+                result[field] = parseAjax(reference, parameters[field]);
             } else {
                 const expr = parameters[field];
                 const value = parseExpression(reference, expr);
@@ -142,4 +142,4 @@ const parseQuery = (reference = {}, $query) => {
 export default {
     parseAjax,
     parseQuery
-}
+};

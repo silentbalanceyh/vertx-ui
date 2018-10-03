@@ -62,4 +62,4 @@ const asyncData = (config = {}, params = {}, callback = () => {
 export default {
     asyncTrue,
     asyncData
-}
+};

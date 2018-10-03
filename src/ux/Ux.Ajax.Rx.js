@@ -78,7 +78,7 @@ const rxEdict = (type, promise, responser = data => data) => {
                     .map(_rxLog)
                     .map(data => Env.dataOut(data))
                 );
-        }
+        };
     } else {
         E.fxTerminal(true, 10027, type, promise);
     }
@@ -98,7 +98,7 @@ const _rxPromise = (container, nextPromise = []) => {
                 middles[idx] = data;
                 return nextPromise[idx](container.request, container.response, middles)
                     .then(data => rxNext(idx, data));
-            })
+            });
         } else {
             promise = nextPromise[idx](container.request, container.response)
                 .then(data => rxNext(idx, data));
@@ -124,7 +124,7 @@ const _rxState = (container, responser, nextPromise = []) => {
                 } else {
                     state[mergeKey] = mergeData;
                 }
-            })
+            });
         }
     });
     //console.warn(Immutable.fromJS(state).toJS())
@@ -156,7 +156,7 @@ const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
                     .map(() => _rxState(container, responser, nextPromise))
                     .map(data => Env.dataOut(data))
                 );
-        }
+        };
     } else {
         E.fxTerminal(true, 10026, type, promise, nextPromise);
     }
@@ -168,4 +168,4 @@ export default {
     rxEdict,
     // 连接两个Ajax的Promise，后一个和前一个存在依赖关系
     rxEclat,
-}
+};

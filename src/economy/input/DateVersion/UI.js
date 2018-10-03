@@ -33,8 +33,8 @@ class Component extends React.PureComponent {
                 <Input {...Op.getAttrs(this, "day")}/>
                 {config.version ? <Input {...Op.getAttrs(this, "version")}/> : false}
             </Input.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

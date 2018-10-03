@@ -1,17 +1,17 @@
 import React from 'react';
-import Norm from './Ux.Normalize'
-import Prop from './prop/Ux.Prop'
+import Norm from './Ux.Normalize';
+import Prop from './prop/Ux.Prop';
 import Value from './Ux.Value';
 import Log from './monitor/Mt.Logger';
 import E from './Ux.Error';
-import {Form} from 'antd'
+import {Form} from 'antd';
 // UI专用渲染方法
 import DFT from './jsx/Ux.Jsx.Default';
 import fieldRender from './jsx/Ux.Jsx.Single';
 import View from './jsx/Ux.Jsx.View.Fn';
 import Op from './jsx/Ux.Jsx.Op';
 // Raft
-import Raft from './Ux.Form'
+import Raft from './Ux.Form';
 
 /**
  * 仅渲染交互式组件，Grid布局
@@ -50,14 +50,14 @@ const jsxFieldPage = (reference, renders, column = 4, values, config = {}) =>
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;
-        return jsxFieldGrid(reference, renders, column, processed, $config)
+        return jsxFieldGrid(reference, renders, column, processed, $config);
     });
 const jsxExtension = (reference, renders, column = 4, values, config = {}) =>
     _uiForm(reference, config, column, values, (processed, $config = {}) => {
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;
-        return jsxFieldGrid(reference, renders, column, processed, $config)
+        return jsxFieldGrid(reference, renders, column, processed, $config);
     }, true);
 /**
  * window的合法值
@@ -76,7 +76,7 @@ const _uiForm = (reference, config = {}, column, values, callback, disableRaft) 
         if (config.renders && config.renders.hasOwnProperty("$button")) {
             raft.rows.forEach(row => row.cells
                 .filter(cell => "$button" === cell.field)
-                .forEach(cell => cell.render = config.renders.$button))
+                .forEach(cell => cell.render = config.renders.$button));
         }
         return Raft.raftJsx(reference, values);
     } else {
@@ -116,7 +116,7 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = 
             <Form layout={"inline"} className={className}>
                 {jsxFieldGrid(reference, renders, column, processed, $config)}
             </Form>
-        )
+        );
     });
 const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config = {}) =>
     _uiForm(reference, {
@@ -137,7 +137,7 @@ const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config 
                     rowHeight: 64
                 })}
             </Form>
-        )
+        );
     });
 
 /**
@@ -187,4 +187,4 @@ export default {
     jsxExtension,
     // 计算动态Renders
     calcRenders: DFT.uiRender
-}
+};

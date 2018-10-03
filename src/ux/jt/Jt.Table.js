@@ -1,11 +1,11 @@
-import E from '../Ux.Error'
-import Random from '../util/Ux.Random'
-import Ai from '../ai/AI'
-import React from 'react'
+import E from '../Ux.Error';
+import Random from '../util/Ux.Random';
+import Ai from '../ai/AI';
+import React from 'react';
 import {Button} from 'antd';
 import Immutable from "immutable";
 import U from "underscore";
-import Value from '../Ux.Value'
+import Value from '../Ux.Value';
 
 const _jetAdd = (reference, index) => (event) => {
     event.preventDefault();
@@ -20,7 +20,7 @@ const _jetAdd = (reference, index) => (event) => {
         }
         const source = Immutable.fromJS(state.source).toJS();
         reference.setState({source});
-        Value.valueOnChange(reference, {source})
+        Value.valueOnChange(reference, {source});
     }
 };
 
@@ -32,16 +32,17 @@ const _jetRemove = (reference, index) => (event) => {
         const item = state.source.filter((item, idx) => idx !== index);
         const source = Immutable.fromJS(item).toJS();
         reference.setState({source});
-        Value.valueOnChange(reference, {source})
+        Value.valueOnChange(reference, {source});
     }
 };
 const _jetOp = (reference, item, jsx) => (text, record, index) => {
     return (
         <Button.Group style={{minWidth: "64px"}}>
             <Button icon={"plus"} onClick={_jetAdd(reference, index)}/>
-            <Button disabled={0 === index} icon={"minus"} onClick={_jetRemove(reference, index)}/>
+            <Button disabled={0 === index} icon={"minus"}
+                    onClick={_jetRemove(reference, index)}/>
         </Button.Group>
-    )
+    );
 };
 
 const jctColumn = (reference, columns = [], jsx, render = {}) => {
@@ -75,7 +76,7 @@ const jetInit = (reference, returnState = false) => {
     if (returnState) {
         return {source};
     } else {
-        reference.setState({source})
+        reference.setState({source});
     }
 };
 
@@ -89,7 +90,7 @@ const jetInitWithAll = (reference, returnState = false) => {
     if (returnState) {
         return sourceAll;
     } else {
-        reference.setState(sourceAll)
+        reference.setState(sourceAll);
     }
 };
 
@@ -106,7 +107,7 @@ const jctData = (reference) => {
     E.fxTerminal(!reference.state, 10084, reference.state);
     let {source} = reference.state;
     if (U.isArray(source)) {
-        source.forEach((item, index) => (item.sequence = (index + 1)))
+        source.forEach((item, index) => (item.sequence = (index + 1)));
     } else {
         source = [];
     }
@@ -123,4 +124,4 @@ export default {
     jctData,
     // 属性抽取
     jctProps,
-}
+};

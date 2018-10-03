@@ -1,11 +1,12 @@
-import Value from '../Ux.Value'
 import U from 'underscore';
-// Rdx处理
-import Rdx from '../fun';
-import Cv from '../Ux.Constant';
-import Prop from '../prop';
-import D from '../monitor';
-import Ajax from '../Ux.Ajax';
+// 文件导入
+import Value from '../../Ux.Value';
+import Cv from '../../Ux.Constant';
+import Ajax from '../../Ux.Ajax';
+// 包导入
+import Rdx from '../../fun';
+import Prop from '../../prop';
+import D from '../../monitor';
 
 /**
  * 计算当前提交的模式
@@ -181,7 +182,7 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
                 mock: mockData,
                 mode,
                 data: params
-            })
+            });
         }).catch(error => {
             // <==：关闭防重复提交
             Rdx.rdxSubmitting(reference, false);
@@ -192,7 +193,7 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
                  */
                 fnFailure(error);
             }
-        })
+        });
     };
 const _executor = (reference, config = {}) => {
     const {data, mode} = config;
@@ -242,4 +243,4 @@ const _executeCode = (reference, config = {}, data) => {
 };
 export default {
     ai2Event
-}
+};

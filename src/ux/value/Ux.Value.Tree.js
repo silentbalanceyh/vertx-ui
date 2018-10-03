@@ -85,7 +85,7 @@ const valueDeepCopy = (item = {}, from, to) => {
         _valueDeepConvert(entity, from, to);
         Type.itObject(entity, (field, value) => {
             if (U.isArray(value)) {
-                value.forEach(each => valueDeepCopy(each, from, to))
+                value.forEach(each => valueDeepCopy(each, from, to));
             } else if (U.isObject(value) && null !== value) {
                 valueDeepCopy(value, from, to);
             }
@@ -96,4 +96,4 @@ export default {
     valueSearch,
     valueTree,
     valueDeepCopy
-}
+};

@@ -81,6 +81,6 @@ const _zero = (options = {}) => {
 
         _target = _ixConnect(_target, options);
         return _target;
-    }
+    };
 };
 export default _zero;

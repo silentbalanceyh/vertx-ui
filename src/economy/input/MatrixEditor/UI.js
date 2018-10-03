@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
 
@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
                 <Table columns={config.columns} className={"web-table-editor"}
                        pagination={false} dataSource={source}/>
             </Input.Group>
-        )
+        );
     }
 }
 

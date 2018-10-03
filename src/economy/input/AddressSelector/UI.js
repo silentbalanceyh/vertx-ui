@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 class Component extends React.PureComponent {
 
@@ -6,7 +6,7 @@ class Component extends React.PureComponent {
         console.info(this.props);
         return (
             <div/>
-        )
+        );
     }
 }
 

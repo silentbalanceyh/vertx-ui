@@ -122,7 +122,7 @@ const aiSteps = (items = [], rest = {}) => {
         <Steps {...rest}>
             {items.map(item => <Steps.Step {...item}/>)}
         </Steps>
-    )
+    );
 };
 export default {
     // 单选列表
@@ -140,4 +140,4 @@ export default {
     aiTabs,
     // 纯帮助
     aiSteps
-}
+};

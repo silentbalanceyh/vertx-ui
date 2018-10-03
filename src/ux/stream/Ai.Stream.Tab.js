@@ -1,9 +1,9 @@
-import Prop from '../prop/Ux.Prop'
+import Prop from '../prop';
 import Sure from './Ai.Stream.Sure';
 import Immutable from 'immutable';
 import Meta from './Ai.Stream.Tab.json';
-import Ai from '../ai/AI'
-import React from 'react'
+import Ai from '../ai/AI';
+import React from 'react';
 import {Button} from 'antd';
 import U from 'underscore';
 
@@ -39,7 +39,7 @@ const aiExpr = (reference) => {
                     <Button.Group>
                         {content.map(fnSingle)}
                     </Button.Group>
-                )
+                );
             }
         }
     }
@@ -143,7 +143,7 @@ class Tab {
                 if (U.isFunction(fnOriginal)) {
                     fnOriginal(item);
                 }
-            }
+            };
         }
         // 如果长度为1
         const jsx = [];
@@ -155,7 +155,7 @@ class Tab {
             children.forEach(child => jsx.push(child));
         }
         return Ai.aiTabs.apply(null, [$items, rest]
-            .concat(jsx))
+            .concat(jsx));
     }
 }
 

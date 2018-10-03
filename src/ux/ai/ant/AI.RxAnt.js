@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import {Icon} from 'antd';
 import U from "underscore";
-import Prop from "../../prop/Ux.Prop";
-import Util from '../../util/index';
+import Prop from "../../prop";
+import Util from '../../util';
+import Attributes from '../../prop/Ux.Attribute';
 import Expr from '../expr/AI.Expr.String';
 import Datum from './AI.RxAnt.Datum';
-import Attributes from '../../prop/Ux.Attribute';
-import Uarr from '../../structure/Ux.Uarr'
+import Uarr from '../../structure/Ux.Uarr';
 import E from '../../Ux.Error';
 
 const uniform = (item, callback) => {
     E.fxTerminal(!callback || !U.isFunction(callback), 10041, callback);
     if (U.isArray(item)) {
-        item.forEach(each => callback(each))
+        item.forEach(each => callback(each));
     } else if (U.isObject(item)) {
         callback(item);
     } else {
@@ -25,14 +25,14 @@ const applyValue = (option) => {
         if (item.key && !item.value) {
             item.value = item.key;
         }
-    })
+    });
 };
 
 const applyIcon = (jsx, key = "") => {
     const {type, ...rest} = jsx[key];
     jsx[key] = (
         <Icon type={type} {...rest}/>
-    )
+    );
 };
 
 class RxAnt {
@@ -41,7 +41,7 @@ class RxAnt {
     }
 
     static toDatum(config = {}) {
-        return Datum.parseDatum(config)
+        return Datum.parseDatum(config);
     }
 
     static onDisabledDate(jsx = {}) {
@@ -110,16 +110,12 @@ class RxAnt {
                 return item.label;
             }
         };
+        const mapping = Datum.gainTree(config);
         return Uarr.create(options)
             .sort((left, right) => left.left - right.left)
-            .convert("code", processor)
-            .mapping({
-                id: "id",
-                pid: "pid",
-                title: "code",
-                value: "id"
-            })
-            .tree("id", "pid")
+            .convert(config.processor ? config.processor : "code", processor)
+            .mapping(mapping)
+            .tree()
             .to();
     }
 

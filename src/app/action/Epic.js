@@ -22,5 +22,13 @@ export default {
     fnRank1List: Ux.rxEdict(Types.fnTreeData1,
         params => Ux.ajaxPost("/api/tree/data", params, Mock.fnTreeData1),
         Ux.rxCircle
+    ),
+    fnTableList: Ux.rxEdict(Types.fnTableList,
+        params => Ux.ajaxGet("/api/table/list", params, Mock.fnTableList),
+        data => Ux.rxAssist(data, "table.list")
+    ),
+    fnTableTree: Ux.rxEdict(Types.fnTableTree,
+        params => Ux.ajaxGet("/api/table/tree", params, Mock.fnTableTree),
+        data => Ux.rxAssist(data, "table.tree")
     )
 };

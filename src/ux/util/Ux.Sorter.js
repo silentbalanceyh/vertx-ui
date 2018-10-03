@@ -39,4 +39,4 @@ export default {
      * @return {number|*}
      */
     sorterDesc: (left, right, key) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
-}
+};

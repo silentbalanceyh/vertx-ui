@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Icon} from 'antd';
 import {_zero} from "../../_internal";
@@ -25,8 +25,8 @@ class Component extends React.PureComponent {
                     ))}
                 </ul>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

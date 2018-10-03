@@ -8,4 +8,4 @@ export default {
     ...Query,
     ...Tree,
     ...Dynamic
-}
+};

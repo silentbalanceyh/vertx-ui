@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import Toolbar from './UI.Toolbar';
 import Topbar from './UI.Topbar';
@@ -11,7 +11,7 @@ class Component extends React.PureComponent {
         super(props);
         this.state = {
             mounted: {}
-        }
+        };
     }
 
     render() {
@@ -25,8 +25,8 @@ class Component extends React.PureComponent {
                     )
                 )}
             </div>
-        )
+        );
     }
 }
 
-export default DragDropContext(HTML5Backend)(Component)
+export default DragDropContext(HTML5Backend)(Component);

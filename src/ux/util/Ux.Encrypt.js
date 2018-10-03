@@ -80,4 +80,4 @@ export default {
     decryptBase64,
     // SHA512签名
     encryptHmac512
-}
+};

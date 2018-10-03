@@ -54,8 +54,8 @@ const datumPointer = (uri = "") => {
             hgap: 100,
             vgap: 10
         }
-    }
+    };
 };
 export default {
     datumPointer
-}
+};

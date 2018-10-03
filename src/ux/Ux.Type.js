@@ -57,7 +57,7 @@ const elementFlat = (array = [], field = "", parent = false) => {
                     hitted.forEach(hit => {
                         const children = hit[splitted[1]];
                         fnChildren(children);
-                    })
+                    });
                 } else if (U.isObject(hitted)) {
                     // 如果是对象
                     const children = hitted[splitted[1]];
@@ -394,7 +394,7 @@ const elementChildren = (array = [], parentKey, parentField) => {
         children.push(target);
         // 查找子节点
         const childrenArr = array.filter(item => parentKey === item[parentField]);
-        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)))
+        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)));
     }
     return children;
 };

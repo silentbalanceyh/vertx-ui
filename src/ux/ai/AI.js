@@ -1,7 +1,7 @@
 import AiLink from './AI.Link';
-import AiLayout from './AI.Layout';
+import AiLayout from './layout/AI.Layout';
 import AiInput from './input/AI.Input';
-import AiButton from './AI.Action';
+import AiButton from './action/AI.Action';
 import AiColumn from './column/AI.Column';
 import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
@@ -22,4 +22,4 @@ export default {
     ...AiCriteria,
     ...AiPure,
     aiLayoutItem: Calculator.calculateItem
-}
+};

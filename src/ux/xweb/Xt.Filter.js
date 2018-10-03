@@ -7,4 +7,4 @@ const xtFilter$ = (values = {}) => {
 };
 export default {
     xtFilter$
-}
+};

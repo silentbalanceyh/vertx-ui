@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {Col, Row, Table, Tabs} from "antd";
 import Op from "./Op";
 import Ux from 'ux';
-import Fn from '../../_internal/Ix.Fn'
+import Fn from '../../_internal/Ix.Fn';
 import "./Cab.less";
 
 const renderPageAdd = (reference, item = {}) => {
@@ -19,7 +19,7 @@ const renderPageAdd = (reference, item = {}) => {
                 $addKey={item.key}
                 {...inherits}/>
         </Tabs.TabPane>
-    ) : false
+    ) : false;
 };
 const renderPageEdit = (reference, item = {}) => {
     const {$formEdit: Component} = reference.props;
@@ -46,7 +46,7 @@ const renderPageEdit = (reference, item = {}) => {
                 fnMock={Op.mockfnRecord(reference, true)}
                 $inited={$inited} {...inherits}/>
         </Tabs.TabPane>
-    ) : false
+    ) : false;
 };
 const renderPageList = (reference, item = {}) => {
     const tableDatum = Op.initTable(reference);
@@ -73,10 +73,10 @@ const renderPageList = (reference, item = {}) => {
             </Row>
             {Op.renderDrawer(reference)}
         </Tabs.TabPane>
-    )
+    );
 };
 export default {
     "add": renderPageAdd,
     "edit": renderPageEdit,
     "list": renderPageList
-}
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal} from 'antd';
-import RxAnt from '../ant/AI.RxAnt'
+import RxAnt from '../ant/AI.RxAnt';
 import RxDatum from './AI.Input.Datum';
 
 import Input from './AI.Input.Ant';
@@ -17,7 +17,7 @@ const aiConfirm = (reference, onOk, ...path) => {
 const aiUI = (Component, viewOnly = false) => {
     return (reference, jsx = {}) => (
         <Component reference={reference} {...jsx} viewOnly={viewOnly}/>
-    )
+    );
 };
 export default {
     // 纯写法
@@ -31,4 +31,4 @@ export default {
     ...Op,
     // 绑定组件专用
     ...RxDatum,
-}
+};

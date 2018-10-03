@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 import {_zero} from "../../_internal";
-import {Button, Col, Form, Row, Select} from 'antd'
-import Op from './Op'
-import Cell from './UI.Layout.Row.Cell'
+import {Button, Col, Form, Row, Select} from 'antd';
+import Op from './Op';
+import Cell from './UI.Layout.Row.Cell';
 
 @_zero({
     "i18n.cab": require('./Cab.json'),
@@ -34,11 +34,11 @@ class Component extends React.Component {
                                 "web-layout-column" : "web-layout-column-none";
                             if (!column.className) column.className = "";
                             column.className = `${className} ${column.className}`;
-                            return <Cell item={column} key={column.key}
-                                         columns={columns}
-                                         columnIndex={index}
-                                         reference={this.props.reference}
-                                         pointer={pointer} target={target}/>
+                            return (<Cell item={column} key={column.key}
+                                          columns={columns}
+                                          columnIndex={index}
+                                          reference={this.props.reference}
+                                          pointer={pointer} target={target}/>);
                         })}
                     </Form>
                 </Col>
@@ -46,7 +46,8 @@ class Component extends React.Component {
                     <span>
                         <Button icon={"minus"} onClick={Op.rowRemove(reference, $key)}/>
                         &nbsp;&nbsp;
-                        <Select className={"web-layout-row-select"} value={String(columns)}
+                        <Select className={"web-layout-row-select"}
+                                value={String(columns)}
                                 onChange={Op.colSelect(this)}>
                                 {items.map(item => <Select.Option key={item.key}>
                                     {item.text}
@@ -55,8 +56,8 @@ class Component extends React.Component {
                         </span>
                 </Col>
             </Row>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

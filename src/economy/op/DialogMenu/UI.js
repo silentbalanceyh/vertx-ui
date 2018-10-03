@@ -1,8 +1,8 @@
-import React from 'react'
-import Op from './Op'
-import Ux from 'ux'
-import U from 'underscore'
-import {Button, Dropdown, Icon, Menu} from 'antd'
+import React from 'react';
+import Op from './Op';
+import Ux from 'ux';
+import U from 'underscore';
+import {Button, Dropdown, Icon, Menu} from 'antd';
 
 class Component extends React.PureComponent {
     render() {
@@ -34,8 +34,8 @@ class Component extends React.PureComponent {
                         .filter(item => U.isFunction(windows[item.key]))
                         .map(item => windows[item.key]())}
                 </span>
-            )
-        })
+            );
+        });
     };
 
     componentDidMount() {
@@ -44,4 +44,4 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+export default Component;

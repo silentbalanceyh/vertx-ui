@@ -4,7 +4,7 @@ import Ux from 'ux';
 import U from 'underscore';
 import Immutable from 'immutable';
 import Value from '../Ux.Value';
-import Ai from '../ai/AI'
+import Ai from '../ai/AI';
 
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;
@@ -39,7 +39,7 @@ const _rtSubmit = (reference = {}, callback = {}) => {
                     _rtState(reference, false);
                 }
             }
-        })
+        });
     }
 };
 const _rtFun = (reference = {}, op) => {
@@ -106,7 +106,7 @@ const _rxClick = (reference, item = {}) => {
                          */
                         fnExecutor(values);
                     }
-                })
+                });
             }
         } else {
             // 纯函数
@@ -173,7 +173,7 @@ const rtDialog = (reference, jsx = {}) => {
         processed.push(Ai.aiExprOp(literal)) : processed.push(literal));
     return processed.map(item => <Button {...item}
                                          onClick={_rxClick(reference, item)}
-                                         className="ux-hidden"/>)
+                                         className="ux-hidden"/>);
 };
 const rtNorm = (reference, jsx = {}) => {
     const buttons = jsx.buttons;
@@ -208,7 +208,7 @@ const rtPure = (reference, jsx = {}) => {
         <Button {...rest} onClick={executor} type={type}>
             {text ? text : false}
         </Button>
-    )
+    );
 };
 const rtDirect = (reference, jsx = {}) => {
     if (jsx.hasOwnProperty("direct")) {
@@ -222,14 +222,14 @@ const rtDirect = (reference, jsx = {}) => {
                 const metadata = jsx.metadata ? jsx.metadata : {};
                 button.onClick = $op[button.onClick](reference, metadata);
             } else {
-                console.error("无法直接渲染", button)
+                console.error("无法直接渲染", button);
             }
         });
         return (
             <Button.Group>
                 {copied.map(button => rtPure(reference, button))}
             </Button.Group>
-        )
+        );
     } else {
         return false;
     }
@@ -254,7 +254,7 @@ const rtLink = (reference, metadata = {}) => {
             {...attr}>
             {text ? text : false}
         </Button>
-    )
+    );
 };
 export default {
     // Pure的另外一种模式
@@ -278,4 +278,4 @@ export default {
     rtNorm,
     // 直接提交函数，封装了防重复提交
     rtSubmit
-}
+};

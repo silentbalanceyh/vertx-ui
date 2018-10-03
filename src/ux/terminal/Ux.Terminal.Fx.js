@@ -8,7 +8,7 @@ const fxRender = (reference, render) => {
         return fxError(error);
     } else {
         if (reference.state) {
-            return render()
+            return render();
         } else {
             return false;
         }
@@ -17,4 +17,4 @@ const fxRender = (reference, render) => {
 export default {
     fxError,
     fxRender
-}
+};

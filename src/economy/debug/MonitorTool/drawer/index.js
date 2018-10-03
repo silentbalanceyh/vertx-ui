@@ -22,4 +22,4 @@ export default {
     "block": Dialog,
     "tags": Submit,
     "tag": SubmitSub
-}
+};

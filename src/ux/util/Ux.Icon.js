@@ -1,5 +1,5 @@
 import React from 'react';
-import {Icon} from 'antd'
+import {Icon} from 'antd';
 
 /**
  * 针对图标进行处理，类型包含icon和image两种
@@ -12,9 +12,9 @@ import {Icon} from 'antd'
 const uiIcon = (type = "") => {
     if (0 <= type.indexOf("img:")) {
         return (<img src={`/img${type.substring(4)}`} alt="icons"
-                     style={{width: 24, height: 24}}/>)
+                     style={{width: 24, height: 24}}/>);
     } else {
-        return <Icon type={type} size={"large"}/>
+        return (<Icon type={type} size={"large"}/>);
     }
 };
 /**
@@ -23,4 +23,4 @@ const uiIcon = (type = "") => {
  */
 export default {
     uiIcon
-}
+};

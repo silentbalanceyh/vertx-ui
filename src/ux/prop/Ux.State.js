@@ -16,7 +16,7 @@ const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) =
     const $state = state ? Immutable.fromJS(state).toJS() : state;
     const fnModify = prefix => (field, value) => {
         if (field.startsWith(prefix)) {
-            const key = `assist.${field.replace(/\./g, '_').replace(/assist_/g, '')}`
+            const key = `assist.${field.replace(/\./g, '_').replace(/assist_/g, '')}`;
             $state[key] = value;
             delete $state[field];
         }
@@ -137,7 +137,7 @@ const toEffect = (state = {}) => {
             inherits[key] = state[key];
         }
     }
-    return inherits
+    return inherits;
 };
 /**
  * @class State
@@ -158,4 +158,4 @@ export default {
 
     // 老版本提取$_状态的专用方法
     toEffect
-}
+};

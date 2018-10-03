@@ -25,7 +25,7 @@ const valueTriggerChange = (reference = {}, {
     state[key] = source;
     reference.setState(state);
     // 变更
-    valueOnChange(reference, state, key)
+    valueOnChange(reference, state, key);
 };
 
 const valueDynamicChange = (reference = {}, {
@@ -46,7 +46,7 @@ const valueDynamicChange = (reference = {}, {
         state[key] = dataSource;
         reference.setState(state);
         // 变更
-        valueOnChange(reference, state, key)
+        valueOnChange(reference, state, key);
     }
 };
 
@@ -63,4 +63,4 @@ export default {
     valueTriggerChange,
     valueOnChange,
     valueDynamicChange,
-}
+};

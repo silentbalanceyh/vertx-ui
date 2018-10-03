@@ -59,7 +59,7 @@ const calculateWindow = (config = {}) => {
     const window = config.window ? config.window : 1;
     let dft = !LayoutType[window];
     const metadata = dft ? LayoutType[1] : LayoutType[window];
-    return {window, dft, metadata}
+    return {window, dft, metadata};
 };
 const _isFull = (item) => {
     // 如果是按钮
@@ -70,7 +70,7 @@ const _isFull = (item) => {
         // 不包含optionItem
         return !item.hasOwnProperty("optionItem")
             // 包含optionItem的话不包含label
-            || (item.optionItem && !item.optionItem.hasOwnProperty("label"))
+            || (item.optionItem && !item.optionItem.hasOwnProperty("label"));
     }
 };
 const calculateLayout = (item, layout = {}) => {
@@ -129,4 +129,4 @@ const calculateItem = (window = 1, key) => {
 export default {
     calculateLayout,
     calculateItem
-}
+};

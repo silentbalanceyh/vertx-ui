@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Card} from 'antd';
 import './Cab.less';
 import Ux from 'ux';
@@ -74,7 +74,7 @@ class Component extends React.PureComponent {
                       extra={extraContent}>
                     {children}
                 </Card>
-            )
+            );
         } else return false;
     }
 }

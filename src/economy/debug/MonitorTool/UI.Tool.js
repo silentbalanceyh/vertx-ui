@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {_zero} from "../../_internal";
 import DrawerControls from './drawer';
@@ -34,9 +34,9 @@ class Component extends React.PureComponent {
                         className={"zero-debug-drawer"}>
                     {Component ? (<Component {...this.props}/>) : false}
                 </Drawer>
-            )
+            );
         } else return false;
     }
 }
 
-export default Component
+export default Component;

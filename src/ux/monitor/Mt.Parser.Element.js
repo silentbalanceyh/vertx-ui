@@ -13,7 +13,7 @@ const toChildren = (object = {}, counter = []) => {
             each.children = toChildren(value, counter);
         } else if (U.isArray(value)) {
             // 值为数组
-            each.color = "#660"
+            each.color = "#660";
         } else {
             counter.push(true);
             each.color = "#963";
@@ -22,12 +22,12 @@ const toChildren = (object = {}, counter = []) => {
                 each.children.push({
                     name: value,
                     color: "#f9c"
-                })
+                });
             } else if ("boolean" === typeof value) {
                 each.children.push({
                     name: value,
                     color: "#9cf"
-                })
+                });
             } else {
                 let literal = value;
                 if (48 < literal.length) {
@@ -36,7 +36,7 @@ const toChildren = (object = {}, counter = []) => {
                 each.children.push({
                     name: literal,
                     color: "#6c6"
-                })
+                });
             }
         }
         children.push(each);
@@ -45,4 +45,4 @@ const toChildren = (object = {}, counter = []) => {
 };
 export default {
     toChildren
-}
+};

@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {_zero} from '../../_internal/index';
 import Fn from '../../_internal/Ix.Fn';
 import {DataLabor} from 'entity';
-import {DynamicDialog} from 'web'
+import {DynamicDialog} from 'web';
 import {Table} from 'antd';
 import Op from './Op';
 import Render from './UI.Render';
@@ -18,10 +18,10 @@ import Render from './UI.Render';
     },
     op: {
         show: (reference) => (event) => {
-            reference.set({"show": true})
+            reference.set({"show": true});
         },
         hide: (reference) => (event) => {
-            reference.set({"show": false})
+            reference.set({"show": false});
         }
     },
     state: {
@@ -94,9 +94,9 @@ class Component extends React.PureComponent {
                         ) : false) : false}
                     </DynamicDialog>
                 </div>
-            )
+            );
         }
     }
 }
 
-export default Component
+export default Component;

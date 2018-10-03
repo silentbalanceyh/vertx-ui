@@ -17,7 +17,7 @@ class Table {
         if (!this.config) this.config = {};
         this.config = Immutable.fromJS(this.config).toJS();
         if (this.config.columns) {
-            this.config.columns = Column.uiTableColumn(this.reference, this.config.columns)
+            this.config.columns = Column.uiTableColumn(this.reference, this.config.columns);
         }
         return this;
     }
@@ -31,7 +31,7 @@ class Table {
 
     head(item) {
         if (item) {
-            this.config.columns = [item].concat(this.config.columns)
+            this.config.columns = [item].concat(this.config.columns);
         }
         return this;
     }
@@ -62,7 +62,7 @@ class Table {
     to(dataSource = []) {
         Sure.ensureStream(this);
         const configRef = this.config;
-        return Ai.aiTable.apply(null, [dataSource, configRef])
+        return Ai.aiTable.apply(null, [dataSource, configRef]);
     }
 }
 

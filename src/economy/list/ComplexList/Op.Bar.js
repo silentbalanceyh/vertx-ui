@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Alert, Button, Col, Drawer, Input, Popconfirm, Row} from 'antd';
 import Init from './Op.Init';
 import Ux from 'ux';
@@ -35,10 +35,10 @@ const renderOp = (reference) => {
         <Button.Group>
             {buttons.map((button = {}) => {
                 const {text, ...rest} = button;
-                return (<Button {...rest}>{text}</Button>)
+                return (<Button {...rest}>{text}</Button>);
             })}
         </Button.Group>
-    )
+    );
 };
 
 const renderSearch = (reference) => {
@@ -63,12 +63,12 @@ const renderSearch = (reference) => {
                     {advanced ? (<Button icon={"ellipsis"}
                                          onClick={() => {
                                              // 判断是否已经在快速搜索中输入了数据
-                                             reference.setState({drawer: true})
+                                             reference.setState({drawer: true});
                                          }}/>) : false}
                 </Button.Group>
             </Col>
         </Row>
-    ) : false
+    ) : false;
 };
 
 const renderDrawer = (reference) => {
@@ -89,14 +89,14 @@ const renderDrawer = (reference) => {
         config.width = options['search.advanced.width'];
         config.title = options['search.advanced.title'];
         const fnClose = () => {
-            reference.setState({drawer: false})
+            reference.setState({drawer: false});
         };
         config.maskClosable = true;
         config.onClose = fnClose;
         const {$formFilter: Component} = reference.props;
         const $inited = Ux.irKeepCond(reference);
         const fnTerm = (term = "") => {
-            reference.setState({term})
+            reference.setState({term});
         };
         const fnQueryDefault = () => Init.readQuery(reference);
         // 「LIMIT」限制继承
@@ -118,7 +118,7 @@ const renderDrawer = (reference) => {
                     // 清空快速搜索栏的搜索框
                     fnTerm={fnTerm} {...inherits}/>
             </Drawer>
-        ) : false
+        ) : false;
     } else return false;
 };
 
@@ -136,7 +136,7 @@ const renderButton = (reference, item = {}, reset = false) => {
         // Monitor专用连接器
         Ux.D.writePointer(item, connectId);
         Ux.connectId(connectId);
-    }
+    };
 };
 
 const _isLock = (reference, options = {}) => {
@@ -167,7 +167,7 @@ const renderSubmit = (reference) => {
         opDeleted = options[`op.${view}.delete`];
         if (!opDeleted) {
             // 锁定就不删除的逻辑，这个地方应该是相反的属性逻辑
-            opDeleted = !_isLock(reference, options)
+            opDeleted = !_isLock(reference, options);
         }
     }
     // 编辑按钮
@@ -180,7 +180,7 @@ const renderSubmit = (reference) => {
         editAttrs.key = options["op.connect.edit"];
     } else {
         // 设置连接点
-        editAttrs.key = "_dynamic_Save"
+        editAttrs.key = "_dynamic_Save";
     }
     editAttrs.onClick = renderButton(reference, editAttrs);
     // 重置按钮
@@ -193,7 +193,7 @@ const renderSubmit = (reference) => {
         resetAttrs.key = options["op.connect.reset"];
     } else {
         // 设置连接点
-        resetAttrs.key = "_dynamic_Reset"
+        resetAttrs.key = "_dynamic_Reset";
     }
     resetAttrs.onClick = renderButton(reference, resetAttrs, true);
     return "list" !== view ? (
@@ -209,7 +209,7 @@ const renderSubmit = (reference) => {
             ) : false}
             <Button {...resetAttrs}/>
         </Button.Group>
-    ) : false
+    ) : false;
 };
 const renderMessage = (reference) => {
     let {$query} = reference.props;
@@ -223,7 +223,7 @@ const renderMessage = (reference) => {
                     if (U.isObject(value)) {
                         Object.assign(condition, value);
                     }
-                })
+                });
             } else {
                 // 取线性条件
                 Object.assign(condition, $query.criteria);
@@ -235,7 +235,7 @@ const renderMessage = (reference) => {
                 // 计算条件字符串
                 let message = Ux.irMessage(prefix, condition, config);
                 return message ? (
-                    <Alert message={message}/>) : false
+                    <Alert message={message}/>) : false;
             }
         }
     }
@@ -247,4 +247,4 @@ export default {
     renderSearch,
     renderDrawer,
     renderSubmit
-}
+};

@@ -20,7 +20,7 @@ const jctPointer = (ref, key) => {
             const parent = Prop.onReference(ref, 1);
             parent.setState({
                 $_pointer, $_child: ref,
-            })
+            });
         }
     }
 };
@@ -44,7 +44,7 @@ const jctForm = (forms = {}) => {
         const result = {};
         keys.forEach((key, index) => result[key] = data[index]);
         return Promise.resolve(result);
-    }).catch(error => Promise.reject(error))
+    }).catch(error => Promise.reject(error));
 };
 const jctSubmit = (reference, key = "$_pointer") => {
     E.fxTerminal(!reference, 10049, reference);
@@ -75,4 +75,4 @@ export default {
     ...Dynamic,
     // On事件处理
     ...On
-}
+};

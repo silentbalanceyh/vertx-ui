@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import './Cab.less';
 import Ux from 'ux';
 import Op from './Op';
@@ -48,7 +48,7 @@ class Component extends React.PureComponent {
     render() {
         const {error} = this.state;
         if (error) {
-            return Ux.fxError(error)
+            return Ux.fxError(error);
         } else {
             const $state = Op.mockVector(this);
             const {items = [], ...rest} = $state.tabs;
@@ -67,4 +67,4 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+export default Component;

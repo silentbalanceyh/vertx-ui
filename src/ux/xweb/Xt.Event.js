@@ -3,6 +3,7 @@ import U from 'underscore';
 import Value from '../Ux.Value';
 import Filter from './Xt.Filter';
 import Dust from './Xt.Dust';
+import Util from '../util';
 
 const xtChange = (reference, changedValues = {}) => {
     const {onChange} = reference.props;
@@ -33,9 +34,33 @@ const xt2Blur = (reference, field) => (event) => {
         xt2Change(reference, field)(event);
     }
 };
+
+const xt2ChangeUnit = (reference, {
+    index, field, key = "source"
+}) => (event) => {
+    const value = event['target'] ? event['target'].value : undefined;
+    // 1.读取数据源 source为默认值
+    let source = reference.state ? reference.state[key] : [];
+    if (U.isArray(source)) {
+        // 2.新处理数据源，取得新的key值
+        if (!source[index]) {
+            source[index] = {key: Util.randomUUID()};
+        }
+        source[index][field] = value;
+    }
+    source = Value.clone(source);
+    // 3.状态更新
+    const state = {};
+    state[key] = source;
+    reference.setState(state);
+    // 4.调用本地的onChange
+    xtChange(reference, state);
+};
 export default {
     xtChange,
     // 生成事件
     xt2Change,
-    xt2Blur
-}
+    xt2Blur,
+    // 核心列变更事件
+    xt2ChangeUnit
+};

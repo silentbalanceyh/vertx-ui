@@ -2,7 +2,7 @@ const sourceConnect = (connect, monitor) => {
     return {
         isDragging: monitor.isDragging(),
         connectDragSource: connect.dragSource(),
-    }
+    };
 };
 const _updateState = (pointer = {}) => {
     if (pointer.state) {
@@ -51,4 +51,4 @@ export default {
     sourceSpec,
     targetConnect,
     targetSpec
-}
+};

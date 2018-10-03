@@ -1,4 +1,4 @@
-import U from 'underscore'
+import U from 'underscore';
 import Log from '../monitor/Mt.Logger';
 
 /**
@@ -50,4 +50,4 @@ export default {
     rxTree,
     // TreeTable组件专用
     rxCircle,
-}
+};

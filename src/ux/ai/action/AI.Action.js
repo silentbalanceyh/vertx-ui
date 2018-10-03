@@ -1,21 +1,26 @@
 import React from 'react';
-import Prop from '../prop/Ux.Prop';
 import U from 'underscore';
-import E from '../Ux.Error';
-import Value from '../Ux.Value';
-import Type from '../Ux.Type';
-import Layout from './AI.Layout';
 import {Button} from 'antd';
 import Immutable from 'immutable';
-import Ux from "ux";
+// Package导入
+import Fn from '../../fun';
+import Jsx from '../../jsx';
+import Prop from '../../prop';
+// 文件导入
+import E from '../../Ux.Error';
+import Value from '../../Ux.Value';
+import Type from '../../Ux.Type';
+// 内部导入
+import Layout from '../layout/AI.Layout';
 import Smart from './AI.Action.Smart';
+
 
 const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     if (!jsx.op) return false;
     return (jsx.op.map(each => (
         <Button key={each} id={each}
                 onClick={E.fxSubmit(reference, Op, each)}/>
-    )))
+    )));
 };
 
 const aiFormButton = (reference, onClick, id = false, submit = []) => {
@@ -36,8 +41,8 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                     item.onClick = (event) => {
                         event.preventDefault();
                         const executor = fn(reference);
-                        return Ux.rtSubmit(reference, executor);
-                    }
+                        return Jsx.rtSubmit(reference, executor);
+                    };
                 } else {
                     item.onClick = fn(reference);
                 }
@@ -49,9 +54,9 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                 {buttons.filter(item => item.key.startsWith("$")).map(item => (
                     <Button {...item}/>))}
             </span>
-        )
+        );
     } else {
-        console.error("未传入'onClick'事件绑定原始数据！")
+        console.error("未传入'onClick'事件绑定原始数据！");
     }
 };
 const aiOp = (reference) => (Op) => Object.keys(Op)
@@ -80,13 +85,13 @@ const ai2FilterButton = (window = 1) => {
                 undefined,
                 <Button.Group className={"web-button"}>
                     <Button type={"primary"} icon={"search"}
-                            onClick={() => Ux.irFilter(ref)}>{button.search}</Button>
+                            onClick={() => Fn.irFilter(ref)}>{button.search}</Button>
                     <Button icon={"reload"}
-                            onClick={Ux.irClear(ref)}>{button.clear}</Button>
+                            onClick={Fn.irClear(ref)}>{button.clear}</Button>
                 </Button.Group>
-            ) : false
+            ) : false;
         }
-    }
+    };
 };
 export default {
     // 登录按钮替换RxOp使用
@@ -101,4 +106,4 @@ export default {
     ai2RaftButton,
     // Page中直接按钮生成
     aiOp
-}
+};

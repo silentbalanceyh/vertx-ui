@@ -10,4 +10,4 @@ export default {
     ...Table,
     ...Action,
     ...Fn.Mock
-}
+};

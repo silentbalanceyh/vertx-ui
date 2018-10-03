@@ -1,6 +1,6 @@
-import React from 'react'
-import './Cab.less'
-import {Table} from 'antd'
+import React from 'react';
+import './Cab.less';
+import {Table} from 'antd';
 import Op from './Op';
 import {DataLabor} from 'entity';
 import {_zero} from "../../_internal";
@@ -39,9 +39,9 @@ class Component extends React.PureComponent {
             return (
                 <Table {...processed} className={"web-table"}
                        dataSource={current}/>
-            )
-        } else return <LoadingContent/>
+            );
+        } else return (<LoadingContent/>);
     }
 }
 
-export default Component
+export default Component;

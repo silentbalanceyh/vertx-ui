@@ -136,4 +136,4 @@ export default {
     hookerForm,
     hookerItem,
     hookerRender
-}
+};

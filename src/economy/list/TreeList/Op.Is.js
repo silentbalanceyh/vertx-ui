@@ -41,4 +41,4 @@ export default {
     isPreAdd,
     isPreEdit,
     isVisible
-}
+};

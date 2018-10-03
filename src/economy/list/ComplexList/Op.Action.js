@@ -92,7 +92,7 @@ const rxEdit = (reference, id) => {
             if (rxEditPost) {
                 rxEditPost(data, id);
             }
-        })
+        });
     }
 };
 
@@ -125,7 +125,7 @@ const rxDeleteDetail = (reference, id) => {
 
 const rxDelete = (reference, id) => {
     const {$self} = reference.props;
-    rxDeleteDetail($self, id)
+    rxDeleteDetail($self, id);
 };
 
 const rxClose = (reference, activekey) => () => {
@@ -183,7 +183,7 @@ const rxFilter = (reference = {}) => (value, event) => {
     Ux.writeTree(reference, {
         "grid.query": $query,
         "grid.list": undefined
-    })
+    });
 };
 const rxClear = (reference = {}) => () => {
     const query = Init.readQuery(reference);
@@ -194,11 +194,11 @@ const rxClear = (reference = {}) => () => {
     Ux.writeTree(reference, {
         "grid.query": query,
         "grid.list": undefined
-    })
+    });
 };
 const rxInput = (reference = {}) => (event) => {
     const term = event.target.value;
-    reference.setState({term})
+    reference.setState({term});
 };
 export default {
     rxAdd,
@@ -210,4 +210,4 @@ export default {
     rxFilter,
     rxClear,
     rxInput,
-}
+};

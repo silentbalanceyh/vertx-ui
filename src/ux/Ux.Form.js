@@ -11,7 +11,7 @@ import {Col, Form, Input, Row} from 'antd';
 const _raftCell = (reference, values) => (cell) => {
     if (cell.title) {
         const {title, ...cellRest} = cell;
-        return (<Col {...cellRest} span={24}>{title}</Col>)
+        return (<Col {...cellRest} span={24}>{title}</Col>);
     } else {
         // 子表单
         Jsx.raftValue(cell, values);
@@ -68,7 +68,11 @@ const raftDynamic = (reference = {}, cell, dynamic = {}, metadata = {}) => {
     // 包含了entity键才会触发该方法
     if (cell.optionJsx && cell.optionJsx.entity) {
         const {entity, key, columns = 4, rowHeight = 32} = cell.optionJsx;
-        const configuration = raftForm(reference, dynamic.renders, columns, {entity, key, rowHeight});
+        const configuration = raftForm(reference, dynamic.renders, columns, {
+            entity,
+            key,
+            rowHeight
+        });
         // 修改metadata
         if (!metadata.hasOwnProperty('tpl')) {
             metadata.tpl = {};
@@ -211,4 +215,4 @@ export default {
     raftHidden,
     raftField,
     raftCell: _raftCell
-}
+};
