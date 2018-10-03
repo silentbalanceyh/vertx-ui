@@ -183,6 +183,8 @@ const extractHidden = (reference = {}, key = "form") => {
  * @description 专用Form配置处理类，它的方法大部分都是内部使用
  */
 export default {
+    // 专用的normalizer
+    normalizer,
     // 读取Form配置专用方法
     extractGroupForm,
     extractForm,

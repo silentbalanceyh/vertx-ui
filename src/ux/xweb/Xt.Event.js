@@ -4,6 +4,7 @@ import Value from '../Ux.Value';
 import Filter from './Xt.Filter';
 import Dust from './Xt.Dust';
 import Util from '../util';
+import moment from 'moment';
 
 const xtChange = (reference, changedValues = {}) => {
     const {onChange} = reference.props;
@@ -35,11 +36,27 @@ const xt2Blur = (reference, field) => (event) => {
     }
 };
 
+const _xtValue = (input, normalize = data => data) => {
+    let value = undefined;
+    if (U.isFunction(input.preventDefault)) {
+        input.preventDefault();
+        value = input['target'] ? input['target'].value : undefined;
+    } else {
+        // 时间格式专用处理
+        if (moment.isMoment(input)) {
+            value = input.toISOString();
+        } else {
+            value = input;
+        }
+    }
+    return normalize(value);
+};
+
 const xt2ChangeUnit = (reference, {
-    index, field, key = "data"
+    index, field, key = "data",
+    normalize = data => data,
 }) => (event) => {
-    event.preventDefault();
-    const value = event['target'] ? event['target'].value : undefined;
+    const value = _xtValue(event, normalize);
     // 1.读取数据源 source为默认值
     let source = reference.state ? reference.state[key] : [];
     if (U.isArray(source)) {

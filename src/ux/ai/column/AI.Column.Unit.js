@@ -8,21 +8,7 @@ import RxAnt from '../ant/AI.RxAnt';
 import Prop from '../../prop/Ux.Prop';
 import React from "react";
 import Xt from '../../xweb';
-
-const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    const {value, ...meta} = jsx;
-    return (
-        <Input {...attrs} {...meta}
-               onChange={(event) => {
-                   event.preventDefault();
-                   Value.valueTriggerChange(reference, {
-                       index, field: item.dataIndex,
-                       value: event.target.value
-                   });
-               }}/>
-    );
-};
+import Norm from '../../Ux.Normalize';
 
 const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
@@ -32,41 +18,53 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
     };
     attrs.readOnly = viewOnly;
     attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (
-        <Input {...attrs}/>
-        //onChange={Xt.xt2ChangeUnit(reference, params)}
-    );
+    return (<Input {...attrs} value={text}/>);
 };
+
+const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+    const attrs = AiValue.applyDynamic(item);
+    const {$config = {}} = item;
+    const params = {
+        index, field: item.dataIndex,
+        // 格式化专用
+        normalize: Norm.normalizer.decimal(18, 2)
+    };
+    attrs.addonAfter = $config.unit ? $config.unit : "￥";
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<Input {...attrs} value={text}/>);
+};
+
 
 const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     const config = item['$config'];
     let label = text;
+    // 转换前提是包含了config.to的配置
     if (config && config.to) {
         label = record[config.to];
     }
-    return (<span
-        style={jsx.style ? jsx.style : {}}>{label}</span>);
+    const attrs = {};
+    attrs.style = jsx.style ? jsx.style : {};
+    return (<span {...attrs}>{label}</span>);
 };
 
+const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
+    const attrs = {};
+    attrs.style = jsx.style ? jsx.style : {};
+    return ((<span {...attrs}>{text}</span>));
+};
 
-const aiUnitLabel = (reference, item = {}, jsx) =>
-    (text) => (<span
-        style={jsx.style ? jsx.style : {}}>{text}</span>);
-
-const aiUnitDate = (reference, item, jsx) => (text, record, index) => {
-    const {value, ...meta} = jsx;
-    const values = {};
+const aiUnitDate = (reference, item) => (text, record, index) => {
+    const config = item["$config"] ? item["$config"] : {};
+    const attrs = Object.assign({}, config);
     if (text) {
-        values.value = Value.convertTime(text);
+        attrs.value = Value.convertTime(text);
     }
-    return (
-        <DatePicker
-            className={'rx-readonly'} {...meta} {...item['$config']}
-            onChange={(value) => Value.valueTriggerChange(reference, {
-                index, field: item.dataIndex,
-                value
-            })} {...values}/>
-    );
+    attrs.className = "rx-readonly";
+    const params = {
+        index, field: item.dataIndex,
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<DatePicker {...attrs}/>);
 };
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
     const datum = item["$config"].datum;

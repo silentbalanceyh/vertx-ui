@@ -8,7 +8,7 @@ const {zero} = Ux;
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Right")
     .bind(Op)
-    .raft(1)
+    .raft(2)
     .form().to()
 )
 class Component extends React.PureComponent {

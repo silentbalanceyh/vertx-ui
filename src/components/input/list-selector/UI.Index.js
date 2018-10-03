@@ -3,13 +3,10 @@ import Ux from 'ux';
 import {FormPanel} from 'app';
 import Left from './UI.Left';
 import Right from './UI.Right';
+import $inited from './inited';
 
 class Component extends React.PureComponent {
     render() {
-        const $inited = {
-            partner: "协议单位",
-            partnerId: 12
-        };
         return (
             <FormPanel reference={this} $inited={$inited}>
                 {Ux.aiGrid([12, 12],

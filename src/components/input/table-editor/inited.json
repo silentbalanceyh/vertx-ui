@@ -1,0 +1,24 @@
+{
+    "pterms": {
+        "data": [
+            {
+                "key": "25e1b1cf-2f7c-42ac-b20b-33aed8946255",
+                "termName": "付款项1",
+                "price": 230.45,
+                "type": "SINGLE",
+                "typeText": "单人账单",
+                "label": "标签1",
+                "openTime": "2018-06-23T08:42:34"
+            },
+            {
+                "key": "92197b5a-090f-4b12-bd64-57c0d23f478b",
+                "termName": "付款项2",
+                "price": 1200,
+                "type": "MULTI",
+                "typeText": "多人账单",
+                "label": "标签2",
+                "openTime": "2018-09-23T14:42:34"
+            }
+        ]
+    }
+}
