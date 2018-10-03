@@ -7,5 +7,8 @@ export default {
     fnCategory: Ux.createAction("/RX/MODULE/CAT/TREE"),
     // Rank列表（处理TreeTable专用）
     fnTreeData: Ux.createAction("/RX/MODULE/TREE/DATA"),
-    fnTreeData1: Ux.createAction("/RX/MODULE/TREE/DATA1")
+    fnTreeData1: Ux.createAction("/RX/MODULE/TREE/DATA1"),
+    // 树形/列表输入（处理TableEditor专用）
+    fnTableList: Ux.createAction("/RX/MODULE/TABLE/LIST"),
+    fnTableTree: Ux.createAction("/RX/MODULE/TABLE/TREE"),
 }

@@ -7,21 +7,24 @@ class Component extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = Ux.jetInit(this, true);
+        this.state = Ux.xtInitArray(props);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.jctUnsafe(this, nextProps);
+        Ux.xtUnsafe(this, nextProps);
     }
 
     render() {
-        const {config = {}, $render, ...jsx} = this.props;
-        const {value, ...rest} = jsx;
-        config.columns = Ux.jctColumn(this, config.columns, jsx, $render);
-        const data = Ux.jctData(this);
+        const {config = {}, ...jsx} = this.props;
+        // 配置处理
+        config.columns = Ux.xtColumn(this, config.columns);
+        config.pagination = false;
+        config.className = "web-table-editor";
+        // 数据处理
+        const data = Ux.xtSource(this);
         return (
-            <Input.Group {...rest}>
-                <Table {...config} className={"web-table-editor"} pagination={false}
+            <Input.Group {...jsx}>
+                <Table {...config}
                        dataSource={data}/>
             </Input.Group>
         )

@@ -1,0 +1,49 @@
+{
+    "_page": {
+        "title": "「交互」TableEditor - 添加"
+    },
+    "_form": {
+        "window": 0.5,
+        "ui": [
+            [
+                {
+                    "metadata": "pterms,付款项,24,,aiTableEditor",
+                    "optionJsx.config.scroll": {
+                        "x": 1000
+                    },
+                    "optionJsx.config.columns": [
+                        "key,操作",
+                        {
+                            "metadata": "termCode,消费码,TREE",
+                            "$config.datum": {
+                                "datum": "source=pay.term,key=key,label=value"
+                            }
+                        },
+                        {
+                            "metadata": "termName,消费名称",
+                            "$config.readOnly": true,
+                            "$config.style": {
+                                "width": "70%"
+                            }
+                        },
+                        {
+                            "metadata": "price,消费金额,DECIMAL",
+                            "$config.style": {
+                                "width": "70%"
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opAdd,添加,$opAdd"
+                    }
+                }
+            ]
+        ]
+    }
+}

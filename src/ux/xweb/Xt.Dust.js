@@ -1,5 +1,6 @@
 import U from 'underscore';
 import Value from '../Ux.Value';
+import Util from '../util';
 
 /**
  * UNSAFE_componentWillReceiveProps(nextProps,context)
@@ -17,6 +18,9 @@ const xtUnsafe = (reference, nextProps = {}) => {
  * @param props
  */
 const xtInit = (props = {}) => props.value || {};
+const xtInitArray = (props = {}, empty = false) => ({
+    source: empty ? (props.value || []) : (props.value || [{key: Util.randomUUID()}])
+});
 
 const xtGet = (reference, field, supplier) => {
     let state = reference.state ? reference.state : {};
@@ -37,6 +41,7 @@ const xtReset = (reference, defaultValue = {}) => {
 export default {
     xtUnsafe,
     xtInit,
+    xtInitArray,
     xtGet,
     xtReset,
 }

@@ -1,4 +1,11 @@
-import {DateVersion, FileUpload, ListSelector, MagicView, TimeRanger} from "web";
+import {
+    DateVersion,
+    FileUpload,
+    ListSelector,
+    MagicView,
+    TableEditor,
+    TimeRanger
+} from "web";
 import RxAnt from "../ant/AI.RxAnt";
 import React from "react";
 
@@ -24,10 +31,16 @@ const aiListSelector = (reference, jsx = {}, onChange) => {
     return (<ListSelector {...jsx} reference={reference}
                           onChange={onChange}/>)
 };
+const aiTableEditor = (reference, jsx = {}, onChange) => {
+    RxAnt.onMockData(jsx, reference);
+    return (<TableEditor {...jsx} reference={reference}
+                         onChange={onChange}/>)
+};
 export default {
     aiMagic,
     aiTimeRanger,
     aiFileUpload,
     aiDateVersion,
-    aiListSelector
+    aiListSelector,
+    aiTableEditor,
 }
