@@ -138,4 +138,4 @@ export default {
             wrapperCol: {span: 17},
         },
     }
-}
+};

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Modal} from 'antd';
-import RxAnt from '../ant/AI.RxAnt'
+import RxAnt from '../ant/AI.RxAnt';
 import RxDatum from './AI.Input.Datum';
 
 import Input from './AI.Input.Ant';

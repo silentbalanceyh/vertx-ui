@@ -1,5 +1,5 @@
-import React from 'react'
-import Ux from 'ux'
+import React from 'react';
+import Ux from 'ux';
 import {Fn, Tps} from 'app';
 import Index from './UI.Index';
 

@@ -8,7 +8,7 @@ const _calculateState = (reference, field, value) => {
     let $state = Immutable.fromJS(reference.state);
     let path = [];
     if (0 < field.indexOf(".")) {
-        path = field.split('.')
+        path = field.split('.');
     } else {
         path = [field];
     }
@@ -34,4 +34,4 @@ export default {
     jdtRadioWithAll,
     jdtInput,
     jdtRadio
-}
+};

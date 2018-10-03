@@ -1,8 +1,8 @@
-import U from 'underscore'
+import U from 'underscore';
 import Immutable from 'immutable';
-import Logger from '../monitor/Mt.Logger'
-import Type from '../Ux.Type'
-import V from '../value'
+import Logger from '../monitor/Mt.Logger';
+import Type from '../Ux.Type';
+import V from '../value';
 import E from '../Ux.Error';
 
 const parseProp = (reference, path = "") => {

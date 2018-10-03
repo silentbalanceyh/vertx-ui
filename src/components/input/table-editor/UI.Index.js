@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {FormPanel} from 'app';
 import Left from './UI.Left';

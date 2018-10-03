@@ -5,7 +5,7 @@ import Param from '../fun/Ux.Param';
 import Async from '../prop/Ux.Field';
 import Dialog from '../Ux.Dialog';
 import E from '../Ux.Error';
-import Uson from '../structure/Ux.Uson'
+import Uson from '../structure/Ux.Uson';
 import {Button} from "antd";
 import React from "react";
 import Immutable from 'immutable';
@@ -84,7 +84,10 @@ const jslLoading = (reference, config = {}) => event => {
     const {mock} = reference.props;
     if (config.ajax) {
         const params = _fnParams(reference, config);
-        Async.asyncData(config.ajax, params, ($data) => reference.setState({$loading: false, $data}), mock);
+        Async.asyncData(config.ajax, params, ($data) => reference.setState({
+            $loading: false,
+            $data
+        }), mock);
     }
 };
 

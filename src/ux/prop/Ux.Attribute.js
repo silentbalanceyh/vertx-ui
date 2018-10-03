@@ -25,4 +25,4 @@ const propFromNow = (current) => {
  */
 export default {
     propFromNow
-}
+};

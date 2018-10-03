@@ -59,4 +59,4 @@ const dsRadial = (dataSource = [], resource = {}) => {
 export default {
     dsBar,
     dsRadial
-}
+};

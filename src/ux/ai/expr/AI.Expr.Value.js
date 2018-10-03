@@ -131,9 +131,9 @@ const applyTree = (item = {}) => {
     Object.keys(processed).sort((left, right) => left.length - right.length)
         .forEach(field => {
             if (0 < field.indexOf(".")) {
-                $item = $item.setIn(field.split('.'), processed[field])
+                $item = $item.setIn(field.split('.'), processed[field]);
             } else {
-                $item = $item.set(field, processed[field])
+                $item = $item.set(field, processed[field]);
             }
         });
     return $item.toJS();
@@ -145,7 +145,7 @@ const applyDynamic = (item) => {
     if (config.width && !attrs.style) {
         attrs.style = {
             width: config.width
-        }
+        };
     }
     return attrs;
 };
@@ -162,4 +162,4 @@ export default {
     applyValue,
     applyConnect,
     applyDynamic
-}
+};

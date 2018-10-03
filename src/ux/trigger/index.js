@@ -1,4 +1,4 @@
-import Depend from './Ux.Depend'
+import Depend from './Ux.Depend';
 
 export default {
     Trigger: {

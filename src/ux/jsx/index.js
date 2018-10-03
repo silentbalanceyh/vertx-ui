@@ -1,4 +1,4 @@
-import Default from './Ux.Jsx.Default'
+import Default from './Ux.Jsx.Default';
 import Op from './Ux.Jsx.Op';
 import Single from './Ux.Jsx.Single';
 import ViewFn from './Ux.Jsx.View.Fn';
@@ -10,4 +10,4 @@ export default {
     ...Single,
     ...ViewFn,
     ...View
-}
+};

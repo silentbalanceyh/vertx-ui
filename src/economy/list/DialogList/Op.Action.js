@@ -8,7 +8,7 @@ const rxAdd = (reference, connectKey) => (event) => {
         // 互斥写法
         editKey: undefined,
         connectKey
-    })
+    });
 };
 
 const rxEdit = (reference, id) => {
@@ -20,7 +20,7 @@ const rxEdit = (reference, id) => {
         // 互斥写法
         editKey: id,
         connectKey
-    })
+    });
 };
 
 const rxDelete = (reference, id) => {
@@ -41,17 +41,17 @@ const rxClose = (reference) => (event) => {
         editKey: undefined,
         addKey: undefined,
         connectKey: ""
-    })
+    });
 };
 const rxList = (reference, deleted = false) => (id, record) => {
     const {$items} = reference.props;
     const dataRecord = Ux.rapitRecord($items, id, record, deleted);
     Ux.writeTree(reference, {
         "list.items": dataRecord
-    })
+    });
 };
 const rxReset = (reference) => () => {
-    reference.setState({editKey: undefined})
+    reference.setState({editKey: undefined});
 };
 export default {
     rxAdd,
@@ -60,4 +60,4 @@ export default {
     rxDelete,
     rxList,
     rxReset
-}
+};

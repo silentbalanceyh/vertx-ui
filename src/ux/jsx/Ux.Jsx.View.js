@@ -1,7 +1,7 @@
-import React from 'react'
-import Type from '../Ux.Type'
+import React from 'react';
+import Type from '../Ux.Type';
 import Hsx from '../Ux.Jsx';
-import Random from '../util/Ux.Random'
+import Random from '../util/Ux.Random';
 import U from 'underscore';
 import {DataLabor} from 'entity';
 import Immutable from 'immutable';
@@ -10,7 +10,7 @@ import Value from '../Ux.Value';
 import {Table} from 'antd';
 import Column from '../Ux.Column';
 import E from '../Ux.Error';
-import fieldRender from './Ux.Jsx.Single'
+import fieldRender from './Ux.Jsx.Single';
 
 const extractValue = ($data, config) => {
     let field = config.field;

@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import React from 'react';
-import {DebugMonitorTool} from 'web'
+import {DebugMonitorTool} from 'web';
 import Column from './Mt.Tool.Column';
 
 const renderTool = (reference) => {

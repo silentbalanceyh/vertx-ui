@@ -22,4 +22,4 @@ export default {
     ...AiCriteria,
     ...AiPure,
     aiLayoutItem: Calculator.calculateItem
-}
+};

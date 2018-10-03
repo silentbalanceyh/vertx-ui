@@ -1,5 +1,5 @@
-import Value from '../Ux.Value'
-import Event from './Jt.Event'
+import Value from '../Ux.Value';
+import Event from './Jt.Event';
 import U from "underscore";
 import E from "../Ux.Error";
 

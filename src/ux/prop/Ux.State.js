@@ -158,4 +158,4 @@ export default {
 
     // 老版本提取$_状态的专用方法
     toEffect
-}
+};

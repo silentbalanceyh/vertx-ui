@@ -1,6 +1,6 @@
 import U from 'underscore';
 // 文件导入
-import Value from '../../Ux.Value'
+import Value from '../../Ux.Value';
 import Cv from '../../Ux.Constant';
 import Ajax from '../../Ux.Ajax';
 // 包导入
@@ -243,4 +243,4 @@ const _executeCode = (reference, config = {}, data) => {
 };
 export default {
     ai2Event
-}
+};

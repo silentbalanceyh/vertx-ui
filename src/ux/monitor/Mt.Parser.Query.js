@@ -106,4 +106,4 @@ const datumQuery = (reference) => {
 };
 export default {
     datumQuery
-}
+};

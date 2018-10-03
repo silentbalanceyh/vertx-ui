@@ -10,6 +10,7 @@ import Util from '../util';
 const xtUnsafe = (reference, nextProps = {}) => {
     if ('value' in nextProps) {
         const value = nextProps.value;
+        console.info(value);
         reference.setState(value);
     }
 };
@@ -17,17 +18,25 @@ const xtUnsafe = (reference, nextProps = {}) => {
  * 初始化专用方法
  * @param props
  */
-const xtInit = (props = {}) => props.value || {};
-const xtInitArray = (props = {}, empty = false) => ({
-    source: empty ? (props.value || []) : (props.value || [{key: Util.randomUUID()}])
-});
+const xtInit = (props = {}) => (props.value || {});
+const xtInitArray = (props = {}, empty = false) => {
+    const values = {};
+    if (empty) {
+        values.source = props.value || [];
+    } else {
+        values.source = props.value || [{key: Util.randomUUID()}];
+    }
+    return values;
+};
 
 const xtGet = (reference, field, supplier) => {
-    let state = reference.state ? reference.state : {};
+    let state = (reference.state ? reference.state : {});
     if (U.isFunction(supplier)) {
         state[field] = supplier();
     } else {
-        if (supplier) state[field] = supplier;
+        if (supplier) {
+            state[field] = supplier;
+        }
     }
     return Value.clone(state);
 };

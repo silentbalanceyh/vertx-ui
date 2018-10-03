@@ -27,11 +27,11 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
     const params = {
         index, field: item.dataIndex
     };
+    attrs.readOnly = viewOnly;
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
     return (
-        <Input {...attrs}
-               readOnly={viewOnly}
-               onChange={Xt.xt2ChangeUnit(reference, params)}
-               value={text}/>
+        <Input {...attrs}/>
+        //onChange={Xt.xt2ChangeUnit(reference, params)}
     )
 };
 

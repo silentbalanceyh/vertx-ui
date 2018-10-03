@@ -3,7 +3,7 @@ import U from 'underscore';
 import {Button} from 'antd';
 import Immutable from 'immutable';
 // Package导入
-import Fn from '../../fun'
+import Fn from '../../fun';
 import Jsx from '../../jsx';
 import Prop from '../../prop';
 // 文件导入
@@ -106,4 +106,4 @@ export default {
     ai2RaftButton,
     // Page中直接按钮生成
     aiOp
-}
+};

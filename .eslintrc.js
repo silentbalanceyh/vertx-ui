@@ -15,6 +15,7 @@ module.exports = {
     plugins: ["react", "jsx-a11y"],
     extends: ["react-app", "plugin:jsx-a11y/recommended"],
     rules: {
+        "semi": ['error', 'always'],
         "no-alert": 0, //禁止使用alert confirm prompt
         "arrow-parens": 0, // 允许使用箭头函数
         "no-debugger": 1, //禁止使用debugger

@@ -1,9 +1,9 @@
-import Prop from '../prop/Ux.Prop'
+import Prop from '../prop';
 import Sure from './Ai.Stream.Sure';
 import Immutable from 'immutable';
 import Meta from './Ai.Stream.Tab.json';
-import Ai from '../ai/AI'
-import React from 'react'
+import Ai from '../ai/AI';
+import React from 'react';
 import {Button} from 'antd';
 import U from 'underscore';
 

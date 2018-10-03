@@ -1,4 +1,4 @@
-import Act from './Op.Act'
+import Act from './Op.Act';
 
 export default {
     ...Act

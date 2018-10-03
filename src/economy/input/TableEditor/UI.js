@@ -1,5 +1,5 @@
-import React from 'react'
-import './Cab.less'
+import React from 'react';
+import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
 
@@ -8,6 +8,9 @@ class Component extends React.PureComponent {
     constructor(props) {
         super(props);
         this.state = Ux.xtInitArray(props);
+        // columns专用
+        const {config = {}} = this.props;
+        this.state.columns = Ux.xtColumn(this, config.columns);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -16,15 +19,19 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, ...jsx} = this.props;
-        console.info(this.props);
+        const {columns = []} = this.state;
         // 配置处理
-        config.columns = Ux.xtColumn(this, config.columns);
+        config.columns = columns;
         config.pagination = false;
         config.className = "web-table-editor";
         // 数据处理
         const data = Ux.xtSource(this);
+        // 处理InputGroup中的jsx
+        const attrs = Ux.valueFlip(jsx);
+        const $attrs = Ux.clone(attrs);
+        if ($attrs.onChange) delete $attrs.onChange;
         return (
-            <Input.Group {...jsx}>
+            <Input.Group {...$attrs}>
                 <Table {...config}
                        dataSource={data}/>
             </Input.Group>

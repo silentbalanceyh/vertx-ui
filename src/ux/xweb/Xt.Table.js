@@ -23,7 +23,9 @@ const xtColumn = (reference, columns = []) => {
     const {$render = {}, ...rest} = reference.props;
     // 构造核心参数，移除掉原始的config节点相关信息
     const jsx = Ux.clone(rest);
-    if (jsx) delete jsx.config;
+    if (jsx) {
+        delete jsx.config;
+    }
     columns = Ux.aiExprColumn(columns);
     columns.forEach(column => {
         if ("key" === column.dataIndex) {
@@ -56,4 +58,4 @@ const xtSource = (reference) => {
 export default {
     xtColumn,
     xtSource
-}
+};

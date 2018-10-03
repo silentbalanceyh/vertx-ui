@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from 'ux';
 import {Input} from 'antd';
 

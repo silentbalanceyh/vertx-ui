@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Icon} from 'antd';
 import U from "underscore";
 import Prop from "../../prop";
@@ -6,7 +6,7 @@ import Util from '../../util';
 import Attributes from '../../prop/Ux.Attribute';
 import Expr from '../expr/AI.Expr.String';
 import Datum from './AI.RxAnt.Datum';
-import Uarr from '../../structure/Ux.Uarr'
+import Uarr from '../../structure/Ux.Uarr';
 import E from '../../Ux.Error';
 
 const uniform = (item, callback) => {

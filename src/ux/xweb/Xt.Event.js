@@ -15,7 +15,6 @@ const xtChange = (reference, changedValues = {}) => {
     // 2.过滤特殊数据
     newValue = Filter.xtFilter$(newValue);
     // 3.变更数据处理
-    console.info(newValue);
     onChange(newValue);
 };
 
@@ -44,7 +43,9 @@ const xt2ChangeUnit = (reference, {
     let source = reference.state ? reference.state[key] : [];
     if (U.isArray(source)) {
         // 2.新处理数据源，取得新的key值
-        if (!source[index]) source[index] = {key: Util.randomUUID()};
+        if (!source[index]) {
+            source[index] = {key: Util.randomUUID()};
+        }
         source[index][field] = value;
     }
     source = Value.clone(source);
@@ -62,4 +63,4 @@ export default {
     xt2Blur,
     // 核心列变更事件
     xt2ChangeUnit
-};
+}

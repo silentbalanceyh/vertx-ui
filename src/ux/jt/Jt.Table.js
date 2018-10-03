@@ -1,11 +1,11 @@
-import E from '../Ux.Error'
-import Random from '../util/Ux.Random'
-import Ai from '../ai/AI'
-import React from 'react'
+import E from '../Ux.Error';
+import Random from '../util/Ux.Random';
+import Ai from '../ai/AI';
+import React from 'react';
 import {Button} from 'antd';
 import Immutable from "immutable";
 import U from "underscore";
-import Value from '../Ux.Value'
+import Value from '../Ux.Value';
 
 const _jetAdd = (reference, index) => (event) => {
     event.preventDefault();
@@ -39,7 +39,8 @@ const _jetOp = (reference, item, jsx) => (text, record, index) => {
     return (
         <Button.Group style={{minWidth: "64px"}}>
             <Button icon={"plus"} onClick={_jetAdd(reference, index)}/>
-            <Button disabled={0 === index} icon={"minus"} onClick={_jetRemove(reference, index)}/>
+            <Button disabled={0 === index} icon={"minus"}
+                    onClick={_jetRemove(reference, index)}/>
         </Button.Group>
     )
 };

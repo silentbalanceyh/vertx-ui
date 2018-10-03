@@ -4,7 +4,7 @@ import Ux from 'ux';
 import U from 'underscore';
 import Immutable from 'immutable';
 import Value from '../Ux.Value';
-import Ai from '../ai/AI'
+import Ai from '../ai/AI';
 
 const _rtSubmit = (reference = {}, callback = {}) => {
     const {form} = reference.props;

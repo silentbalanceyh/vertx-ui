@@ -3,12 +3,12 @@ import fieldRender from "../../jsx/Ux.Jsx.Single";
 import Format from "../../util/Ux.Format";
 import Expr from "../../util/Ux.Expr";
 import RxAnt from "../ant/AI.RxAnt";
-import Ai from '../AI'
+import Ai from '../AI';
 import Prop from "../../prop/Ux.Prop";
 import Type from "../../Ux.Type";
 import React from "react";
 import {Icon} from "antd";
-import U from 'underscore'
+import U from 'underscore';
 import CellOp from './AI.Column.Op';
 
 /**
@@ -209,4 +209,4 @@ export default {
     MAPPING: aiCellMapping,
     DOWNLOAD: aiCellDownload,
     ...CellOp,
-}
+};

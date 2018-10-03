@@ -1,6 +1,6 @@
 import E from "../Ux.Error";
 import U from 'underscore';
-import Prop from "../prop/Ux.Prop";
+import Prop from "../prop";
 
 const calcKey = (key) => {
     if (!key.startsWith("_")) key = `_${key}`;

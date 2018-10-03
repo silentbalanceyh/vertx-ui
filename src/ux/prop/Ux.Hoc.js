@@ -1,6 +1,6 @@
-import Cv from '../Ux.Env'
-import E from '../Ux.Error'
-import Value from '../Ux.Value'
+import Cv from '../Ux.Env';
+import E from '../Ux.Error';
+import Value from '../Ux.Value';
 
 /**
  * 通用属性读取相关信息

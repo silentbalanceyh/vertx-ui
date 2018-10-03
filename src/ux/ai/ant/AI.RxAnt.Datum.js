@@ -108,4 +108,4 @@ export default {
     parseFilter,
     gainDatum,
     gainTree
-}
+};

@@ -1,5 +1,5 @@
 import G2 from '@antv/g2';
-import Ct from '../draw/G2.BarRadial'
+import Ct from '../draw/G2.BarRadial';
 
 const aiChartBar = (container, dataSource, chartConfig = {}) => {
     const result = Ct.dsBar(dataSource, chartConfig);

@@ -1,4 +1,4 @@
-import U from 'underscore'
+import U from 'underscore';
 import Log from '../monitor/Mt.Logger';
 
 /**

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Col, Row, Table} from 'antd';
 import RxAnt from '../ant/AI.RxAnt';
 import LayoutType from './AI.Layout.Config';
@@ -67,4 +67,4 @@ export default {
     aiColumns,
     aiTable,
     aiAdjust
-}
+};

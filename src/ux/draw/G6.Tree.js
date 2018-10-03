@@ -1,6 +1,6 @@
 import Immutable from "immutable";
 import G6 from "@antv/g6";
-import G6Plugins from '@antv/g6/build/plugins'
+import G6Plugins from '@antv/g6/build/plugins';
 
 const registry = () => {
     G6.registerNode('treeNode', {
@@ -127,4 +127,4 @@ const drawFlow = (id, config = {}) => {
 export default {
     drawTree,
     drawFlow
-}
+};

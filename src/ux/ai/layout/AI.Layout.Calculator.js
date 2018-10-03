@@ -129,4 +129,4 @@ const calculateItem = (window = 1, key) => {
 export default {
     calculateLayout,
     calculateItem
-}
+};

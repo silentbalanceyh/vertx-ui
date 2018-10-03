@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Prop from '../prop/Ux.Prop';
 import Random from '../util/Ux.Random';
 import Cv from '../Ux.Constant';
@@ -17,7 +17,8 @@ const aiHLink = (reference, key) => {
         const keyLabel = `${key}Label`;
         // 仅包含key
         if (!info.hasOwnProperty(keyLabel)) {
-            return (<a key={Random.randomString(7)} href={info[key]} target={"_blank"}>{info[key]}</a>)
+            return (<a key={Random.randomString(7)} href={info[key]}
+                       target={"_blank"}>{info[key]}</a>)
         } else {
             return (<div key={Random.randomString(7)}>
                 {info[keyLabel]}：
