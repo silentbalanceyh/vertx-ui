@@ -2,9 +2,182 @@
     "_configuration": {
         "code": "TableEditor",
         "data": [
+            {
+                "source": "P",
+                "name": "reference",
+                "comment": "父组件引用",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
+                "option": "$render",
+                "comment": "$render设置渲染组件类型，TEXT | VECTOR | DATE | DATUM | RADIO | LABEL | DECIMAL | TREE",
+                "type": "String",
+                "value": "TEXT"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
+                "option": "$config.readOnly",
+                "comment": "「所有类型生效」只读属性",
+                "type": "Boolean",
+                "value": "false"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
+                "option": "$config.unit",
+                "comment": "「DECIMAL」只有 $render = DECIMAL 时生效，设置货币单位。",
+                "type": "String",
+                "value": "￥"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
+                "option": "$config.tree",
+                "comment": "「TREE」只有 $render = TREE 时生效，树形配置。",
+                "type": "String | Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config -> column[x]",
+                "option": "$config.datum",
+                "comment": "「DATUM | TREE」只有 $render = TREE | DATUM 时生效，数据源配置。",
+                "type": "String | Object",
+                "value": "--"
+            }
         ],
-        "fit": "cc",
         "items": {
+            "name": "TableEditor组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "reference",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "className",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "scroll",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "pagination",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "columns[x]",
+                                    "color": "#ff8626",
+                                    "children": [
+                                        {
+                                            "name": "dataIndex",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "title",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "render",
+                                            "color": "#ff8626"
+                                        },
+                                        {
+                                            "name": "$render",
+                                            "color": "#33af43",
+                                            "children": [
+                                                {
+                                                    "name": "TEXT",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "VECTOR",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "DATE",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "DATUM",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "RADIO",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "LABEL",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "DECIMAL",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "TREE",
+                                                    "color": "#660"
+                                                }
+                                            ]
+                                        },
+                                        {
+                                            "name": "$config.readOnly",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "$config.unit",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "$config.datum",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "$config.tree",
+                                            "color": "#33af43"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "state",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "state",
+                            "color": "#09c",
+                            "children": [
+                                {
+                                    "name": "data",
+                                    "color": "#e23c39"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         "layout": {
             "hgap": 90,

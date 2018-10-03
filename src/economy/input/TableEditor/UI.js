@@ -18,6 +18,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
+        console.info(this.props);
         const {config = {}, ...jsx} = this.props;
         const {columns = []} = this.hoc;
         // 配置处理
