@@ -51,6 +51,8 @@ const xt2Dialog = (reference = {}, show = false) => (event) => {
     // 设置窗口开关事件
     let state = {};
     state.$visible = show;
+    // 重置页面数据
+    state.$page = 1;
     state = Ux.clone(state);
     reference.setState(state)
 };
