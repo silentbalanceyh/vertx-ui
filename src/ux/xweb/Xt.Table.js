@@ -47,13 +47,13 @@ const xtColumn = (reference, columns = []) => {
 const xtSource = (reference) => {
     E.fxTerminal(!reference, 10049, reference);
     E.fxTerminal(!reference.state, 10084, reference.state);
-    let {source} = reference.state;
-    if (U.isArray(source)) {
-        source.forEach((item, index) => (item.sequence = (index + 1)));
+    let {data} = reference.state;
+    if (U.isArray(data)) {
+        data.forEach((item, index) => (item.sequence = (index + 1)));
     } else {
-        source = [];
+        data = [];
     }
-    return source;
+    return data;
 };
 export default {
     xtColumn,

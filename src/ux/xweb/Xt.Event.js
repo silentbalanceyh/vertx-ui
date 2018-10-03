@@ -36,7 +36,7 @@ const xt2Blur = (reference, field) => (event) => {
 };
 
 const xt2ChangeUnit = (reference, {
-    index, field, key = "source"
+    index, field, key = "data"
 }) => (event) => {
     event.preventDefault();
     const value = event['target'] ? event['target'].value : undefined;
