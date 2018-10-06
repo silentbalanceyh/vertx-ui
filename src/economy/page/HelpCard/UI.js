@@ -48,15 +48,18 @@ class Component extends React.PureComponent {
             children, reference, $card = 'page-card',
             $extra: ExtraComponent, $current,
             $leftVisible = true,
+            $leftComponent, // 左边替换title的专用组件
             // Inject专用函数，用于执行属性变幻
             rxInject = $config => $config
         } = this.props;
+
         const topbar = rxInject(this.state.$config);
         if (topbar) {
             // 标题和左边工具栏
             const title = (
                 <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
-                    {$leftVisible ? Op.renderButton(reference, topbar) : false}
+                    {$leftVisible ? ($leftComponent ? $leftComponent :
+                        Op.renderButton(reference, topbar)) : false}
                 </span>
             );
             // 右边帮助信息
