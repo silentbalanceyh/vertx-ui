@@ -15,6 +15,7 @@ class Etat {
     private _stateTo: any;
     private _raft: any = {};
     private _op: {};
+    private _isLog: boolean = true;
 
     /**
      * required必须使用这种方式绑定

@@ -79,6 +79,7 @@ const valueValid = (data = {}, wild = false) => {
             }
         }
     }
+    return data;
 };
 
 const valueInt = (literal = "", dft = 0) => {

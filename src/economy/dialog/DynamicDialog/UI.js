@@ -47,6 +47,8 @@ class Component extends React.PureComponent {
                     config.onOk = rxOk;
                 }
             }
+            // 关闭窗口时销毁子组件
+            config.destroyOnClose = true;
             return (
                 <Modal {...config} visible={$visible} className={className}>
                     {children}

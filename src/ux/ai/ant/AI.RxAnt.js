@@ -85,6 +85,12 @@ class RxAnt {
         }
     }
 
+    static onSelect(jsx = {}, onChange) {
+        if (U.isFunction(onChange)) {
+            jsx.onSelect = onChange;
+        }
+    }
+
     static toDialogConfig(reference, ...path) {
         const config = Prop.fromPath.apply(null, [reference].concat(path));
         if (U.isObject(config)) {
@@ -103,18 +109,15 @@ class RxAnt {
         } else if (config.datum) {
             options = Datum.gainDatum(reference, config);
         }
-        const processor = (code, item) => {
-            if (config.expr) {
-                return Util.formatExpr(config.expr, item);
-            } else {
-                return item.label;
-            }
-        };
+        const processor = (code, item) => (config.expr) ?
+            Util.formatExpr(config.expr, item) : item.label;
+        const applyId = (item) => item.value ? item.value : item.id;
         const mapping = Datum.gainTree(config);
         return Uarr.create(options)
             .sort((left, right) => left.left - right.left)
             .convert(config.processor ? config.processor : "code", processor)
             .mapping(mapping)
+            .add('value', applyId)
             .tree()
             .to();
     }

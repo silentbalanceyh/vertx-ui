@@ -80,7 +80,9 @@ const PARSER = {
     itemClass: jsxItem("className"),
     colon: jsxItemBoolean("colon"),
     type: jsxValue("type"),
-    status: jsxItem("status")
+    status: jsxItem("status"),
+    // 特殊解析
+    showTime: jsxBoolean("showTime")
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');

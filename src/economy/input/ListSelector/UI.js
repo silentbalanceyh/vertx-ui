@@ -6,16 +6,15 @@ import Op from './Op';
 
 class Component extends React.PureComponent {
 
-    state = Op.getDefault();
-
-    componentDidMount() {
-        this.hoc = Op.getHoc(this);
+    constructor(props) {
+        super(props);
+        this.state = Op.getDefault(this);
     }
 
     render() {
         const {config = {}, ...jsx} = this.props;
         const {$data = {}, $tableKey} = this.state;
-        const {onClick, dialog, table = {}} = this.hoc ? this.hoc : {};
+        const {onClick, dialog, table = {}} = this.state ? this.state : {};
         jsx.onClick = onClick;
         // 页码处理，分页是需要根据数据来的，必须通过data来计算
         const pageAndChange = Ux.xtPager(this, config);

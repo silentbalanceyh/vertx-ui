@@ -1,12 +1,15 @@
 import Standard from './category/standard';
 import Adjust015 from './category/adjust.015';
 import Adjust016 from './category/adjust.016';
-import Half05 from './category/half.05';
+
 import Filter_03 from './category/filter-03';
 import Filter_05 from './category/filter-05';
 
 import Adjust017 from './category/adjust.017';
 import Adjust021 from './category/adjust.021';
+
+import Half05 from './category/half.05';
+import Half051 from './category/half.051';
 
 const item = {
     // 标准布局
@@ -19,6 +22,8 @@ const item = {
     0.17: Adjust017,
     // 2列专用布局（只能两列，否则报错）
     0.5: Half05,
+    // 2列专用布局
+    0.51: Half051,
     // Word布局
     0.21: Adjust021
 };

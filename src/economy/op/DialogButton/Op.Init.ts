@@ -64,7 +64,7 @@ const configuration = {
 };
 const initState = (reference) => {
     // 1.判断当前组件是哪种Button，使用了哪种Dialog
-    const {$mode} = reference.props;
+    const {$mode, $hidden = false} = reference.props;
     // 2.按钮处理
     const button = parseButton(reference);
     // 3.Window的解析不一致
@@ -74,6 +74,10 @@ const initState = (reference) => {
         // 5.窗口配置处理
         const dialog = executor(reference);
         // 6.处理模式
+        if ($hidden) {
+            button.className = "ux-hidden";
+            button.id = button.key;
+        }
         return {
             button, dialog,
             visible: false, render

@@ -161,6 +161,9 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
             promise = _getFormed(fnVerify, ambiguity);
         }
         return promise.then(data => {
+            if (U.isFunction(metadata['rxRecord'])) {
+                data = metadata['rxRecord'](data);
+            }
             // 拷贝数据本身
             const params = _normalizeValue(data, reference, mode);
             // Mocker专用数据处理

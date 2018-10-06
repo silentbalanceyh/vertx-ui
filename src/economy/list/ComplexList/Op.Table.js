@@ -40,7 +40,6 @@ const _initChange = (reference = {}) => (pagination, filter, sorter) => {
         const desc = "descend" === sorter.order ? "DESC" : "ASC";
         query.sorter = [`${field},${desc}`];
     }
-
     Ux.writeTree(reference, {
         "grid.list": undefined,
         "grid.query": query
