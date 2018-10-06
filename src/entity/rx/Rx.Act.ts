@@ -91,15 +91,26 @@ class RxAct {
         return this;
     }
 
-    reset() {
+    reset(fields: any) {
         const ref = this.reference;
         const executor = this.executor;
         executor['fnReset'] = (event) => {
             if (event && U.isFunction(event.preventDefault)) {
                 event.preventDefault();
             }
-            Ux.formReset(ref);
+            if (U.isArray(fields) && 0 < fields.length) {
+                Ux.formReset(ref, fields);
+            } else {
+                Ux.formReset(ref);
+            }
         };
+        return this;
+    }
+
+    items(dataArray) {
+        const ref = this.reference;
+        const executor = this.executor;
+        executor["fnItems"] = () => Ux.pipeReset(ref, dataArray);
         return this;
     }
 
@@ -109,6 +120,7 @@ class RxAct {
         const executor: any = this.executor;
         [
             "fnReset",  // 重置表单专用函数
+            "fnItems",  // 重置list.items专用节点数据
         ].filter(key => executor.hasOwnProperty(key))
             .forEach(item => executor[item]());
         // 是否有更新的状态

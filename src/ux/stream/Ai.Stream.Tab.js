@@ -150,6 +150,8 @@ class Tab {
         if (1 === children.length) {
             if (U.isArray(children[0])) {
                 children[0].forEach(child => jsx.push(child));
+            } else {
+                jsx.push(children[0]);
             }
         } else {
             children.forEach(child => jsx.push(child));

@@ -2,12 +2,25 @@ import {Button} from "antd";
 import React from "react";
 import Ux from 'ux';
 
-const getDefault = () => ({
-    $visible: false,
-    $loading: false,
-    $data: [],
-    $select: undefined,
-});
+const getDefault = (reference = {}) => {
+    const {config = {}} = reference.props;
+    // 核心配置处理
+    const onClick = Ux.xt2Loading(reference, config);
+    const dialog = getDialog(reference, config);
+    const columns = Ux.uiTableColumn(reference, config.table.columns);
+    const rowSelection = Ux.xtSelection(reference);
+    const attrs = {
+        onClick, dialog, ready: true,
+        table: {columns, rowSelection}
+    };
+    return {
+        ...attrs,
+        $visible: false,
+        $loading: false,
+        $data: [],
+        $select: undefined,
+    };
+};
 const getDialog = (reference, config = {}) => {
     const dialog = Ux.aiExprWindow(config.window);
     // Footer关闭
@@ -24,20 +37,7 @@ const getDialog = (reference, config = {}) => {
     dialog.onCancel = Ux.xt2Dialog(reference, false);
     return dialog;
 };
-const getHoc = (reference = {}) => {
-    const {config = {}} = reference.props;
-    // 核心配置处理
-    const onClick = Ux.xt2Loading(reference, config);
-    const dialog = getDialog(reference, config);
-    const columns = Ux.uiTableColumn(reference, config.table.columns);
-    const rowSelection = Ux.xtSelection(reference);
-    return {
-        onClick, dialog, ready: true,
-        table: {columns, rowSelection}
-    };
-};
 export default {
     getDefault,
-    getDialog,
-    getHoc,
+    getDialog
 };

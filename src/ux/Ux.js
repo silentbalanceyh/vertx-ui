@@ -24,9 +24,11 @@ import Structure from './structure';
 
 import CONTROL from './jt/Jt';
 import XT from './xweb';
+import Jsx from './jsx';
 
 export default {
     ...CONTROL,
+    ...Jsx,
     /**
      *  XT系列组件用于替换掉CONTROL中的自定义组件对应的方法
      *  将J系列的方法全部替换成新版

@@ -28,7 +28,20 @@ class Uson {
     }
 
     add(field, any) {
-        if (any) this.data = Ux.field(this.data, field, any);
+        if (any) {
+            let values = null;
+            if (U.isFunction(any)) {
+                values = any(this.reference);
+            } else {
+                values = any;
+            }
+            this.data = Ux.field(this.data, field, values);
+        }
+        return this;
+    }
+
+    valid() {
+        this.data = Ux.valueValid(this.data);
         return this;
     }
 
@@ -95,6 +108,13 @@ class Uson {
         const value = Ux.pipeSelected(this.reference, true, field);
         if (value) {
             this.data[field] = value;
+        }
+        return this;
+    }
+
+    execute(executor) {
+        if (U.isFunction(executor)) {
+            this.data = executor(this.data);
         }
         return this;
     }
