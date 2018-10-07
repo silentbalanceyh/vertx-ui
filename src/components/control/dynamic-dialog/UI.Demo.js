@@ -29,7 +29,7 @@ class Component extends React.PureComponent {
             <PageCard reference={this}>
                 <Row>
                     {configuration.map(item => (
-                        <Col key={Ux.randomUUID()} span={item.span}>
+                        <Col key={item.state} span={item.span}>
                             <Button onClick={fnOk(item)}>{item.button}</Button>
                             <DynamicDialog $dialog={item.window}
                                            rxCancel={fnCancel(item)}
