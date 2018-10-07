@@ -39,6 +39,10 @@ const calcTable = (reference, table) => {
         if (isEdit && render && render.hasOwnProperty("title")) {
             column.title = Rdr.renderTitle(column, render.title);
         }
+        // 禁用排序尝试，对于TreeTable必须禁用
+        if (!column.hasOwnProperty('sorter')) {
+            column.sortOrder = false;
+        }
     });
     // 构造数据
     return table;

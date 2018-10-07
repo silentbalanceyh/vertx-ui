@@ -18,6 +18,13 @@
             },
             {
                 "source": "P",
+                "name": "$leftComponent",
+                "comment": "替换title旁边的left按钮专用组件，仅在「HelpCard」中使用。",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "P",
                 "name": "$key",
                 "comment": "指定hoc属性配置的根节点",
                 "type": "String",
@@ -111,6 +118,10 @@
                         },
                         {
                             "name": "children",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "$leftComponent",
                             "color": "#93f"
                         },
                         {
