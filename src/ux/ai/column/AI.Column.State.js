@@ -1,14 +1,13 @@
 import AiValue from "../expr/AI.Expr.Value";
 import React from "react";
 import Ux from "ux";
-import { Input } from "antd";
+import {Input, Select} from "antd";
 import Norm from "../../Ux.Normalize";
 import Prop from "../../prop/Ux.Prop";
 import RxAnt from "../ant/AI.RxAnt";
-import { Select } from "antd";
 
 const aiStateInput = (reference, column) => () => {
-    let { rowRecord = {} } = reference.state;
+    let {rowRecord = {}} = reference.state;
     rowRecord = Ux.clone(rowRecord);
     return (
         <Input
@@ -18,7 +17,7 @@ const aiStateInput = (reference, column) => () => {
             onChange={event => {
                 event.preventDefault();
                 rowRecord[column.dataIndex] = event.target.value;
-                reference.setState({ rowRecord });
+                reference.setState({rowRecord});
             }}
         />
     );
@@ -26,9 +25,9 @@ const aiStateInput = (reference, column) => () => {
 
 const aiStateDecimal = (reference, column = {}) => () => {
     const attrs = AiValue.applyDynamic(column);
-    const { $config = {} } = column;
+    const {$config = {}} = column;
     attrs.addonAfter = $config.unit ? $config.unit : "￥";
-    let { rowRecord = {} } = reference.state;
+    let {rowRecord = {}} = reference.state;
     rowRecord = Ux.clone(rowRecord);
     return (
         <Input
@@ -41,7 +40,7 @@ const aiStateDecimal = (reference, column = {}) => () => {
                     event.target.value
                 );
                 rowRecord[column.dataIndex] = value;
-                reference.setState({ rowRecord });
+                reference.setState({rowRecord});
             }}
             {...attrs}
         />
@@ -50,14 +49,14 @@ const aiStateDecimal = (reference, column = {}) => () => {
 
 const aiStateDatum = (reference, column = {}) => {
     const attrs = AiValue.applyDynamic(column);
-    const { $datum = {} } = column;
+    const {$datum = {}} = column;
     let items = [];
     if ($datum) {
         const ref = Prop.onReference(reference, 1);
-        items = RxAnt.toOptions(ref, { datum: $datum });
+        items = RxAnt.toOptions(ref, {datum: $datum});
     }
-    let { rowRecord = {} } = reference.state;
-    rowRecord = Ux.clone(rowRecord);
+    //let { rowRecord = {} } = reference.state;
+    //rowRecord = Ux.clone(rowRecord);
     return (
         <Select {...attrs}>
             {items.map(item => (

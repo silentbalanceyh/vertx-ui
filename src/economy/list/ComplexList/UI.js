@@ -60,8 +60,11 @@ class Component extends React.PureComponent {
                 if (0 === limit) limit = 1;
                 items.forEach((item, index) => item.disabled = limit < items.length && 0 === index);
             }
+            // 设置Style信息
+            const {className = ""} = this.props;
             return (
-                <Tabs {...rest} tabBarExtraContent={Op.renderSubmit(this)}>
+                <Tabs {...rest} className={className}
+                      tabBarExtraContent={Op.renderSubmit(this)}>
                     {items.map(item => {
                         const {type, ...itemRest} = item;
                         const fnRender = Render[type];

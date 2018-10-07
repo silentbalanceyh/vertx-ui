@@ -59,6 +59,7 @@ const PARSER = {
     addonAfter: jsxValue("addonAfter"),
     addonBefore: jsxValue('addonBefore'),
     readOnly: jsxBoolean("readOnly"),
+    disabled: jsxBoolean("disabled"),
     placeholder: jsxKv("placeholder"),
     valuePropName: configValue("valuePropName"),
     format: jsxValue("format"),
