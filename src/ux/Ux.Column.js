@@ -28,10 +28,6 @@ const uiTableColumn = (reference, columns = [], ops = {}) => {
         if (fnRender) {
             column.render = fnRender(reference, column, ops);
         }
-        // 排序禁用
-        if (!column.hasOwnProperty("sorter")) {
-            column.sortOrder = false;
-        }
     });
     return columns;
 };
