@@ -1,15 +1,12 @@
 import Ux from "ux";
 import Immutable from "immutable";
+import Fn from '../../_internal/Ix.Fn';
 
-const readConfig = (reference = {}) => {
-    const {$key = "_sublist"} = reference.props;
-    const ref = reference.props.reference;
-    const sublist = Ux.fromHoc(ref, $key);
-    return sublist ? Immutable.fromJS(sublist).toJS() : {};
-};
+const readConfig = (reference = {}) => Fn.fetchConfig(reference, "sublist");
 
 const readOption = (reference) => readConfig(reference).options;
 const readTable = (reference) => readConfig(reference).table;
+
 const readWindow = (reference, key) => {
     const window = readConfig(reference).window;
     let config = {};

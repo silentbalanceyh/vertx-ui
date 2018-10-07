@@ -165,11 +165,8 @@ const renderSubmit = (reference) => {
     let opDeleted = true;
     if (options.hasOwnProperty(`op.${view}.delete`)) {
         opDeleted = options[`op.${view}.delete`];
-        if (!opDeleted) {
-            // 锁定就不删除的逻辑，这个地方应该是相反的属性逻辑
-            opDeleted = !_isLock(reference, options);
-        }
     }
+    let isLocked = _isLock(reference, options);
     // 编辑按钮
     const editAttrs = {};
     editAttrs.icon = "save";
@@ -196,10 +193,11 @@ const renderSubmit = (reference) => {
         resetAttrs.key = "_dynamic_Reset";
     }
     resetAttrs.onClick = renderButton(reference, resetAttrs, true);
+    const deleteCond = ("edit" === view && opDeleted && !isLocked);
     return "list" !== view ? (
         <Button.Group>
             <Button {...editAttrs}/>
-            {("edit" === view && opDeleted) ? (
+            {deleteCond ? (
                 <Popconfirm
                     title={options['confirm.delete']}
                     onConfirm={() => Act.rxDeleteDetail(reference, key)}>

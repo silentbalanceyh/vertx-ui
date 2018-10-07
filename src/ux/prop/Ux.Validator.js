@@ -1,16 +1,16 @@
-import U from 'underscore';
-import UI from '../util/Ux.Html';
-import Param from '../fun/Ux.Param';
-import Prop from './Ux.Form';
-import Field from './Ux.Field';
-import Value from '../Ux.Value';
-import Error from '../Ux.Error';
+import U from "underscore";
+import UI from "../util/Ux.Html";
+import Param from "../fun/Ux.Param";
+import Prop from "./Ux.Form";
+import Field from "./Ux.Field";
+import Value from "../Ux.Value";
+import Error from "../Ux.Error";
 import Immutable from "immutable";
 
 const _ready = (rule = {}) => {
     // 是否检查readonly和disabled
     let ready = true;
-    if (rule.hasOwnProperty('status')) {
+    if (rule.hasOwnProperty("status")) {
         // 如果readonly，disabled则不触发
         if (rule.status) {
             const id = rule.field;
@@ -47,9 +47,9 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
             // 基本条件
             const field = rule.field;
             parameters[field] = value;
-            const {$inited} = refereuce.props;
+            const { $inited } = refereuce.props;
             if ($inited) {
-                const {key: $key} = $inited;
+                const { key: $key } = $inited;
                 if ($key) {
                     // 更新Mode
                     const updateKey = `key,<>`;
@@ -62,9 +62,10 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                 parameters[andKey] = true;
             }
             // 北二 existing 走 搜索流程, 所有参数都放到criteria 中
-            parameters["criteria"] = Immutable.fromJS(parameters).toJS();
+            const params = { "": true };
+            params["criteria"] = Immutable.fromJS(parameters).toJS();
             // 远程调用
-            Field.asyncTrue(rule.config, parameters, {
+            Field.asyncTrue(rule.config, params, {
                 // 存在即返回message
                 success: () => callback(rule.message),
                 failure: () => callback()
@@ -74,7 +75,6 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         }
     }
 };
-
 
 const required = (reference = {}) => (rule = {}, value, callback) => {
     if (_ready(rule)) {
@@ -132,8 +132,7 @@ const greaterOr = (reference = {}) => (rule = {}, value, callback) => {
 const equal = (reference = {}) => (rule = {}, value, callback) => {
     _executeReady(rule, value, callback, () => {
         let to = Prop.formHit(reference, rule.config.to);
-        return String(value) === String(to) ||
-            Number(value) === Number(to);
+        return String(value) === String(to) || Number(value) === Number(to);
     });
 };
 const VERFIERS = {
@@ -154,7 +153,7 @@ const VERFIERS = {
     // >= 大于等于目标字段
     greaterOr,
     // == 等于
-    equal,
+    equal
 };
 /**
  * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
@@ -166,7 +165,7 @@ const mountValidator = (refereuce = {}, item = {}) => {
     if (item.optionConfig) {
         const rules = item.optionConfig.rules;
         // 触发条件设置，默认onBlur，符合大多数习惯
-        if (!item.optionConfig.hasOwnProperty('validateTrigger')) {
+        if (!item.optionConfig.hasOwnProperty("validateTrigger")) {
             item.optionConfig.validateTrigger = "onBlur";
         }
         if (rules && Array.prototype.isPrototypeOf(rules)) {
@@ -175,13 +174,20 @@ const mountValidator = (refereuce = {}, item = {}) => {
                     // 处理条件
                     const executeFun = VERFIERS[rule.validator];
                     // 10023
-                    Error.fxTerminal(!U.isFunction(executeFun), 10023,
-                        rule.validator, Object.keys(VERFIERS));
+                    Error.fxTerminal(
+                        !U.isFunction(executeFun),
+                        10023,
+                        rule.validator,
+                        Object.keys(VERFIERS)
+                    );
                     if (U.isFunction(executeFun)) {
                         const validatorFun = executeFun(refereuce);
                         // 10024
-                        Error.fxTerminal(!U.isFunction(validatorFun), 10024,
-                            U.isFunction(validatorFun));
+                        Error.fxTerminal(
+                            !U.isFunction(validatorFun),
+                            10024,
+                            U.isFunction(validatorFun)
+                        );
                         if (U.isFunction(validatorFun)) {
                             rule.validator = validatorFun;
                         }

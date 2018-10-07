@@ -5,19 +5,11 @@ import {v4} from 'uuid';
 import Fn from '../../_internal/Ix.Fn';
 
 const {Mock} = Fn;
-const readConfig = (reference = {}) => {
-    const {$key = "grid"} = reference.props;
-    const ref = Ux.onReference(reference, 1);
-    const grid = Ux.fromHoc(ref, $key);
-    return Ux.clone(grid);
-};
 
-const initList = (reference = {}, queryConfig = {}) => {
-    const query = Ux.irGrid(queryConfig, reference.props);
-    Ux.writeTree(reference, {
-        "grid.query": query
-    });
-};
+const readConfig = (reference = {}) => Fn.fetchConfig(reference, "grid");
+const readOption = (reference) => Fn.fetchOption(reference, readConfig(reference));
+const readTable = (reference) => readConfig(reference).table;
+const readQuery = (reference) => Fn.fetchQuery(reference, readConfig(reference));
 
 const stateView = (view, key, reference) => {
     view = view ? view : "list";
@@ -108,27 +100,13 @@ const stateTabs = (reference, options = {}, state = {}) => {
 const initGrid = (reference = {}) => {
     const config = readConfig(reference);
     // 初始化查询
-    initList(reference, config.query);
+    Fn.initReduxQuery(reference, config.query);
     // 初始化Tab页
     const state = {};
     stateTabs(reference, config.options, state);
     // Mock初始化
     Mock.mockCheck(reference, config.options, state);
     reference.setState(state);
-};
-const readOption = (reference) => {
-    let options = readConfig(reference).options;
-    const {rxInject} = reference.props;
-    if (rxInject) {
-        return rxInject(options);
-    } else {
-        return options;
-    }
-};
-const readTable = (reference) => readConfig(reference).table;
-const readQuery = (reference) => {
-    const queryConfig = readConfig(reference).query;
-    return Ux.irGrid(queryConfig, reference.props);
 };
 const updateGrid = (reference = {}, prevProps = {}) => {
     const record = reference.props['$list'];
@@ -139,6 +117,7 @@ const updateGrid = (reference = {}, prevProps = {}) => {
             const {rxSearch} = reference.props;
             if (rxSearch) rxSearch($query.to());
             // initList(reference, config.query);
+            Fn.initStateQuery(reference, $query.to());
         } else {
             // 初始化Mock
             Mock.mockInit(reference, record);

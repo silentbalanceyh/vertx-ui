@@ -1,7 +1,6 @@
 import React from 'react';
 import Ux from "ux";
 import {Button} from "antd";
-import Immutable from 'immutable';
 
 const onClickBack = (reference, topbar) => (event) => {
     event.preventDefault();
@@ -34,7 +33,7 @@ const initComponent = (ref) => {
     // 1.从Hoc中读取配置
     let topbar = Ux.fromHoc(reference, $key);
     // 2.拷贝当前hoc配置
-    topbar = Immutable.fromJS(topbar ? topbar : {}).toJS();
+    topbar = Ux.clone(topbar ? topbar : {});
     // 3.解析left和right（分别解析）
     if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, ref.props);
     if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, ref.props);

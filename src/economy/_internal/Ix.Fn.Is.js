@@ -8,7 +8,6 @@ const diff = (reference, query = {}) => {
         return true;
     }
 };
-
 export default {
     diff
 };
