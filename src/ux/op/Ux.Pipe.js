@@ -4,6 +4,7 @@ import Dg from "../Ux.Debug";
 import Immutable from "immutable";
 import State from "../prop/Ux.State";
 import Value from '../Ux.Value';
+import E from '../Ux.Error';
 
 /**
  * 链接Form初始化区分编辑和添加模式专用
@@ -157,6 +158,7 @@ const pipeStream = (reference = {}, config = {}, state = {}) => {
         if (!$key) {
             const {$parent = {}} = reference.props;
             if ($parent.key) $key = $parent.key;
+            if (!$key) E.fxFailure(10096, $key);
         }
         let record = {};
         // 读数据
@@ -170,6 +172,8 @@ const pipeStream = (reference = {}, config = {}, state = {}) => {
                     record = selected[index];
                 }
             }
+        } else {
+            E.fxFailure(10097, record);
         }
         return record;
     }
