@@ -23,7 +23,8 @@ const getChildren = (reference, item = {}) => {
                 state.visible[item.key] = false;
                 reference.setState(state);
             }} {...Ux.toUniform(reference.props)}
-                       $inited={init ? $inited : _calcInit($inited)}/>
+                       $inited={init ? $inited : _calcInit($inited)}
+                       $parent={$inited}/>
         );
     } else return false;
 };

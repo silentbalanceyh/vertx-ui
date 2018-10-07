@@ -142,6 +142,38 @@ const pipeQuery = (reference = {}, filters = {}) => {
     } else return {};
 };
 
+const pipeStream = (reference = {}, config = {}, state = {}) => {
+    const {
+        stateKey, key, data, index
+    } = config;
+    // 判断是读还是写
+    if (data) {
+        // 写数据
+        if (!state[stateKey]) state[stateKey] = {};
+        state[stateKey][key] = data;
+        return state;
+    } else {
+        let $key = key;
+        if (!$key) {
+            const {$parent = {}} = reference.props;
+            if ($parent.key) $key = $parent.key;
+        }
+        let record = {};
+        // 读数据
+        const {$selected} = reference.props;
+        if ($selected && $selected.is()) {
+            const selected = $selected._($key);
+            if (U.isArray(selected)) {
+                if (undefined === index) {
+                    return selected;
+                } else {
+                    record = selected[index];
+                }
+            }
+        }
+        return record;
+    }
+};
 export default {
     pipeSelected,
     pipeInit,
@@ -152,4 +184,5 @@ export default {
     pipeTree,
     pipeCriteria,
     pipeQuery,
+    pipeStream
 };
