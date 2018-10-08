@@ -2,9 +2,114 @@
     "_configuration": {
         "code": "ChangeEditor",
         "data": [
+            {
+                "source": "P",
+                "name": "reference",
+                "comment": "父组件引用",
+                "type": "React.Component",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "from",
+                "comment": "左边列的标题以及输入框宽度设置",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "to",
+                "comment": "右边列的标题以及输入框宽度设置",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "items",
+                "comment": "「静态数据源」最终解析成source节点。",
+                "type": "Array",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "datum",
+                "comment": "「动态数据源」最终解析成source节点。",
+                "type": "String | Object",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "source",
+                "comment": "数据源解析结果，来自于 'config.items' 或 'config.datum'。",
+                "type": "Array",
+                "required": true,
+                "value": "--"
+            }
         ],
         "fit": "cc",
         "items": {
+            "name": "ChangeEditor组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "reference",
+                            "color": "#93f"
+                        },
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "from",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "to",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "datum",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "items",
+                                    "color": "#ff8626"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "source",
+                            "color": "#e23c39"
+                        }
+                    ]
+                },
+                {
+                    "name": "state",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "$value",
+                            "color": "#e23c39"
+                        }
+                    ]
+                }
+            ]
         },
         "layout": {
             "hgap": 90,

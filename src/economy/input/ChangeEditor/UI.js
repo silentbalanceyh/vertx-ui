@@ -11,6 +11,10 @@ class Component extends React.PureComponent {
         this.state = Ux.xtInit(props);
     }
 
+    componentDidMount() {
+        Ux.xtPrevious(this);
+    }
+
     UNSAFE_componentWillReceiveProps(nextProps) {
         Ux.xtUnsafe(this, nextProps);
     }

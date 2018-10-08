@@ -49,10 +49,18 @@ const xtReset = (reference, defaultValue = {}) => {
         reference.setState(defaultValue);
     }
 };
+const xtPrevious = (reference) => {
+    const {value} = reference.props;
+    if (value) {
+        // $开头的变量会被过滤掉
+        reference.setState({$value: value});
+    }
+};
 export default {
     xtUnsafe,
     xtInit,
     xtInitArray,
     xtGet,
     xtReset,
+    xtPrevious,
 };
