@@ -6,6 +6,7 @@ class RxAct {
     private data: any;
     private executor: any = {};
     private redux: any = {};
+    private state: any = {};
     private _deleted: Boolean = false;
 
     private constructor(reference: any) {
@@ -91,6 +92,7 @@ class RxAct {
 
     submitted() {
         this.redux["status.submitting"] = false;
+        this.state['$loading'] = false;
         return this;
     }
 
@@ -142,11 +144,15 @@ class RxAct {
         // 是否有更新的状态
         if (this.reference) {
             // 专用处理状态中的提交
-            // submitting = false
-            this.reference.setState({
+            let etat = {
                 submitting: false,
                 $loading: false
-            });
+            };
+            if (0 < Object.keys(this.state).length) {
+                Object.assign(etat, this.state);
+            }
+            // submitting = false
+            this.reference.setState(etat);
             // 有状态则书写Redux状态树
             if (!Ux.isEmpty(this.redux)) {
                 Ux.writeTree(this.reference, this.redux);
