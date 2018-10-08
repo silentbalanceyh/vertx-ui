@@ -178,14 +178,8 @@
                     "color": "#09c",
                     "children": [
                         {
-                            "name": "state",
-                            "color": "#09c",
-                            "children": [
-                                {
-                                    "name": "data",
-                                    "color": "#e23c39"
-                                }
-                            ]
+                            "name": "data",
+                            "color": "#e23c39"
                         }
                     ]
                 }

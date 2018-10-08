@@ -32,14 +32,11 @@ class Component extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = props.value || {};
+        this.state = Ux.xtInit(props);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
-        if ('value' in nextProps) {
-            const value = nextProps.value;
-            this.setState(value);
-        }
+        Ux.xtUnsafe(this, nextProps);
     }
 
     render() {

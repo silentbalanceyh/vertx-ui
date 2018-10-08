@@ -28,9 +28,9 @@ class Component extends React.PureComponent {
         return (
             <Input.Group className={"web-date-version"}
                          compact>
-                <Input {...Op.getAttrs(this, "year")}/>
-                <Input {...Op.getAttrs(this, "month")}/>
-                <Input {...Op.getAttrs(this, "day")}/>
+                <Input {...Op.getAttrs(this, "year")} className={"input-left"}/>
+                <Input {...Op.getAttrs(this, "month")} className={"input-left"}/>
+                <Input {...Op.getAttrs(this, "day")} className={"input-left"}/>
                 {config.version ? <Input {...Op.getAttrs(this, "version")}/> : false}
             </Input.Group>
         );

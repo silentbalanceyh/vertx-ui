@@ -11,6 +11,7 @@ class Component extends React.PureComponent {
         // columns专用
         const {config = {}} = props;
         state.columns = Ux.xtColumn(this, config.columns);
+        this.state = state;
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {

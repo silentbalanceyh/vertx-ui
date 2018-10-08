@@ -1,0 +1,27 @@
+{
+    "_page": {
+        "title": "「交互」ChangeEditor - 更新"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "headCount,变化情况,24,,aiChangeEditor",
+                    "optionJsx.config.from": "原有人员,130px",
+                    "optionJsx.config.to": "现有人员,130px",
+                    "optionJsx.config.datum": "source=table.list,key=key,label=name"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opSave,保存,$opSave"
+                    }
+                }
+            ]
+        ]
+    }
+}

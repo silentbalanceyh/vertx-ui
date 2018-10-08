@@ -1,4 +1,5 @@
 import {
+    ChangeEditor,
     DateVersion,
     FileUpload,
     ListSelector,
@@ -34,6 +35,17 @@ const aiTableEditor = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
     return (<TableEditor {...jsx} reference={reference}/>);
 };
+const aiChangeEditor = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    RxAnt.onFromTo(reference, jsx);
+    const {config = {}, ...rest} = jsx;
+    config.source = RxAnt.toOptions(reference, config);
+    const {source = [], ...extractd} = config;
+    return (<ChangeEditor {...rest}
+                          config={extractd}
+                          source={source}
+                          reference={reference}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -48,4 +60,5 @@ export default {
     aiDateVersion,
     aiListSelector,
     aiTableEditor,
+    aiChangeEditor,
 };

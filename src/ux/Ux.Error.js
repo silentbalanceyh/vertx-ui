@@ -98,7 +98,9 @@ const fnError = {
     10092: (modeDialog) => `[ ERR-10092 ] (Web) 当前 DialogButton 组件的窗口模式不对，仅支持：DIALOG / DRAWER / POPOVER, current = ${modeDialog}`,
     10093: (mode) => `[ ERR-10093 ] (Web) 当前 DialogMenu 组件的窗口模式不对，仅支持：DIALOG / DRAWER, current = ${mode}`,
     10094: (length) => `[ ERR-10094 ] (Web) 当前 DialogMenu 组件的属性 '$items' 的长度必须大于1，current = ${length}`,
-    10095: (onChange) => `[ ERR-10095 ] (Jct) 自定义组件中的 'onChange' 属性必须是一个合法的函数，当前类型：${typeof onChange}`
+    10095: (onChange) => `[ ERR-10095 ] (Jct) 自定义组件中的 'onChange' 属性必须是一个合法的函数，当前类型：${typeof onChange}`,
+    10096: ($key) => `[ ERR-10096 ] (Stream) 无法计算出在Stream中需要使用的 'key' 值，当前值：${$key}`,
+    10097: (data = {}) => `[ ERR-10097 ] (Stream) Stream中对应取得的格式不对，当前值：${JSON.stringify(data)}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

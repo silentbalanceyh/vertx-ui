@@ -51,9 +51,38 @@ const _analyzeTree = (children = []) => {
     return result;
 };
 
+const calcPrefix = (index = 0, prefix) => {
+    const seed = index + 1;
+    if (seed < 10) {
+        return `${prefix}000${seed}`;
+    } else if (seed < 100) {
+        return `${prefix}00${seed}`;
+    } else if (seed < 1000) {
+        return `${prefix}0${seed}`;
+    } else {
+        return `${prefix}${seed}`;
+    }
+};
+
 const analyzeTree = (reference: any) => {
     const treeData = Ux.fromHoc(reference, "treedata");
     let $tree = Ux.clone(treeData);
+    // 补充Title专用
+    $tree.filter(each => each.hasOwnProperty('children')).forEach(each => {
+        // 计算Prefix
+        const prefix = each.title.replace(/ /g, '').split('-')[0];
+        const children = [];
+        each.children.filter(literal => "string" === typeof literal)
+            .forEach((child, index) => {
+                if (child.startsWith(prefix)) {
+                    children.push(child);
+                } else {
+                    const sequence = calcPrefix(index, prefix);
+                    children.push(sequence + ' - ' + child);
+                }
+            });
+        each.children = children;
+    });
     return _analyzeTree($tree);
 };
 const onRoute = (reference: any) => (key, selected, nodes) => {

@@ -17,6 +17,7 @@ import _editor_form from './editor/form/UI';
 import _editor_workflow from './editor/workflow/UI';
 import _generated_demo from './generated/demo/UI';
 import _generated_tool from './generated/tool/UI';
+import _input_change$editor from './input/change-editor/UI';
 import _input_data$version from './input/data-version/UI';
 import _input_list$selector from './input/list-selector/UI';
 import _input_table$editor from './input/table-editor/UI';
@@ -44,6 +45,7 @@ export default {
 	_editor_workflow,
 	_generated_demo,
 	_generated_tool,
+	_input_change$editor,
 	_input_data$version,
 	_input_list$selector,
 	_input_table$editor,
