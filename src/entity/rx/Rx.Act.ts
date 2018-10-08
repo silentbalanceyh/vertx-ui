@@ -24,7 +24,7 @@ class RxAct {
     close(fnClose) {
         const ref = this.executor;
         if (this.reference) {
-            const { fnClose } = this.reference.props;
+            const {fnClose} = this.reference.props;
             if (fnClose) {
                 ref["fnClose"] = fnClose;
             }
@@ -38,7 +38,7 @@ class RxAct {
     clear() {
         if (this.reference) {
             const ref = this.executor;
-            const { fnClear } = this.reference.props;
+            const {fnClear} = this.reference.props;
             if (fnClear) {
                 ref["fnClear"] = fnClear;
             }
@@ -49,7 +49,7 @@ class RxAct {
     view(values: any) {
         if (this.reference) {
             const ref = this.executor;
-            const { fnView } = this.reference.props;
+            const {fnView} = this.reference.props;
             if (fnView) {
                 if (values) {
                     ref["fnView"] = () => fnView(values);
@@ -63,6 +63,12 @@ class RxAct {
 
     deleted() {
         this._deleted = true;
+        return this;
+    }
+
+    json(data) {
+        const $data = data ? data : this.data;
+        Ux.dgFileJson($data);
         return this;
     }
 

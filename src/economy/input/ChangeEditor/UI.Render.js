@@ -19,15 +19,17 @@ const renderTitle = (reference) => {
 };
 const renderBody = (reference) => {
     const {config = {}, source = [], ...jsx} = reference.props;
-    const {value, ...meta} = jsx;
+    const {value = {}, ...meta} = jsx;
     const {from = {}, to = {}} = config;
     return source.map(item => (
         <Row key={`row${item.key}`} className={"web-change-editor-row"}>
             <Col span={7}>{item.label}：</Col>
-            <Col span={7}><Input {...meta} readOnly {...from}/></Col>
+            <Col span={7}><Input {...meta} readOnly {...from}
+                                 value={value[item.key]}/></Col>
             <Col span={3}/>
             <Col span={7}><Input {...meta} {...to}
-                                 onChange={Op.on2Change(reference, item.key)}/>
+                                 onChange={Op.on2Change(reference, item.key)}
+                                 value={value[item.key]}/>
             </Col>
         </Row>
     ));

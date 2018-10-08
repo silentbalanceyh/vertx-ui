@@ -1,23 +1,16 @@
 {
     "_page": {
-        "title": "「交互」DateVersion - 添加"
+        "title": "「交互」ChangeEditor - 添加"
     },
     "_form": {
         "window": 1,
         "ui": [
             [
                 {
-                    "metadata": "firstHeadcount,变化情况,24,,aiChangeEditor",
+                    "metadata": "headCount,变化情况,24,,aiChangeEditor",
                     "optionJsx.config.from": "原有人员,130px",
                     "optionJsx.config.to": "现有人员,130px",
                     "optionJsx.config.datum": "source=table.list,key=key,label=name"
-                }
-            ],
-            [
-                {
-                    "metadata": "secondHeadcount,变化情况,24,,aiChangeEditor",
-                    "optionJsx.config.from": "原有人员,130px",
-                    "optionJsx.config.to": "现有人员,130px"
                 }
             ],
             [
