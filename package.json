@@ -8,7 +8,7 @@
         "@antv/g6-editor": "^1.0.8",
         "@antv/g6-plugins": "^1.0.9",
         "@types/random-js": "^1.0.31",
-        "@types/react": "^16.4.15",
+        "@types/react": "^16.4.16",
         "@types/react-redux": "^6.0.9",
         "ajv": "^6.5.4",
         "ant-design-pro": "^2.0.0",

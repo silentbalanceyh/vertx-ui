@@ -32,6 +32,7 @@ export default [
     "DateVersion,form,zui.control.data-version,/input/data-version,1,zui.control.interation",
     "ListSelector,form,zui.control.list-selector,/input/list-selector,2,zui.control.interation",
     "TableEditor,form,zui.control.table-editor,/input/table-editor,3,zui.control.interation",
+    "ChangeEditor,form,zui.control.change-editor,/input/change-editor,4,zui.control.interation",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用

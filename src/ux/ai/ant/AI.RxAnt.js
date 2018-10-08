@@ -1,154 +1,28 @@
-import React from 'react';
-import {Icon} from 'antd';
-import U from "underscore";
-import Prop from "../../prop";
-import Util from '../../util';
-import Attributes from '../../prop/Ux.Attribute';
-import Expr from '../expr/AI.Expr.String';
 import Datum from './AI.RxAnt.Datum';
-import Uarr from '../../structure/Ux.Uarr';
-import E from '../../Ux.Error';
-
-const uniform = (item, callback) => {
-    E.fxTerminal(!callback || !U.isFunction(callback), 10041, callback);
-    if (U.isArray(item)) {
-        item.forEach(each => callback(each));
-    } else if (U.isObject(item)) {
-        callback(item);
-    } else {
-        E.fxTerminal(true, 10042, item);
-    }
-};
-
-const applyValue = (option) => {
-    uniform(option, (item) => {
-        if (item.key && !item.value) {
-            item.value = item.key;
-        }
-    });
-};
-
-const applyIcon = (jsx, key = "") => {
-    const {type, ...rest} = jsx[key];
-    jsx[key] = (
-        <Icon type={type} {...rest}/>
-    );
-};
+import Pure from './AI.RxAnt.Pure';
+import Complex from './AI.RxAnt.Complex';
+import Data from './AI.RxAnt.Data';
 
 class RxAnt {
-    static toParsed(expr = "") {
-        return Datum.parseExpr(expr);
-    }
+    // 有返回值的走to，无返回值的走on
+    static onDisabledDate = Pure.disabledDate;
+    static onPrefix = Pure.prefix;
+    static onPlaceHolder = Pure.placeholder;
+    static onAddonAfter = Pure.addonAfter;
+    static onChange = Pure.onChange;
+    static onSelect = Pure.onSelect;
+    static onFromTo = Complex.fromTo;
+    // 特殊
+    static toParsed = Datum.parseExpr;
+    static toDatum = Datum.parseDatum;
+    // 窗口解析
+    static toDialogConfig = Complex.dialog;
+    // 树相关options解析
+    static toTreeOptions = Complex.treeOptions;
+    // 普通解析：items / datum
+    static toOptions = Complex.options;
 
-    static toDatum(config = {}) {
-        return Datum.parseDatum(config);
-    }
-
-    static onDisabledDate(jsx = {}) {
-        if (jsx.hasOwnProperty('disabledDate')) {
-            const attrFun = Attributes[jsx.disabledDate];
-            if (U.isFunction(attrFun)) {
-                jsx.disabledDate = attrFun;
-            }
-        }
-    }
-
-    static onPrefix(jsx = {}) {
-        if (U.isObject(jsx.prefix)) {
-            applyIcon(jsx, 'prefix');
-        }
-    }
-
-    static onPlaceHolder(jsx = {}) {
-        if (jsx.readOnly) {
-            delete jsx.placeholder;
-        }
-    }
-
-    static onMockData(jsx = {}, reference) {
-        const {config = {}} = jsx;
-        if (config.mock) {
-            const {mock = {}} = reference.state;
-            jsx.mock = mock[config.mock];
-        }
-    }
-
-    static onAddonAfter(jsx = {}) {
-        if (U.isObject(jsx.addonAfter)) {
-            applyIcon(jsx, 'addonAfter');
-        }
-    }
-
-    static onChange(jsx = {}, onChange) {
-        if (U.isFunction(onChange)) {
-            jsx.onChange = onChange;
-        }
-    }
-
-    static onSelect(jsx = {}, onChange) {
-        if (U.isFunction(onChange)) {
-            jsx.onSelect = onChange;
-        }
-    }
-
-    static toDialogConfig(reference, ...path) {
-        const config = Prop.fromPath.apply(null, [reference].concat(path));
-        if (U.isObject(config)) {
-            return config;
-        } else if ("string" === typeof config) {
-            return {content: config};
-        } else {
-            return {content: E.fxTerminal(true, 10045, config)};
-        }
-    }
-
-    static toTreeOptions(reference, config = {}) {
-        let options = [];
-        if (config.items) {
-            options = config.items;
-        } else if (config.datum) {
-            options = Datum.gainDatum(reference, config);
-        }
-        const processor = (code, item) => (config.expr) ?
-            Util.formatExpr(config.expr, item) : item.label;
-        const applyId = (item) => item.value ? item.value : item.id;
-        const mapping = Datum.gainTree(config);
-        return Uarr.create(options)
-            .sort((left, right) => left.left - right.left)
-            .convert(config.processor ? config.processor : "code", processor)
-            .mapping(mapping)
-            .add('value', applyId)
-            .tree()
-            .to();
-    }
-
-    static toOptions(reference, config = {}, filter = () => true) {
-        let options = [];
-        if (config.items) {
-            // 如果存在items的根节点，则直接items处理
-            options = Expr.aiExprOption(config.items);
-        } else if (config.datum) {
-            // 如果存在datum节点，则从Assist/Tabular数据源中读取
-            const data = Datum.gainDatum(reference, config, filter);
-            const {key = "key", label = "label"} = Datum.parseDatum(config);
-            data.forEach(each => {
-                const option = {};
-                if (each[key]) {
-                    option['value'] = each[key];
-                    option['key'] = each[key];
-                }
-                if (each[label]) {
-                    option['label'] = each[label];
-                }
-                if (each.hasOwnProperty('style')) {
-                    option['style'] = each.style;
-                }
-                options.push(option);
-            });
-        }
-        applyValue(options);
-        return options;
-    }
+    static onMockData = Data.mock;
 }
 
 export default RxAnt;
