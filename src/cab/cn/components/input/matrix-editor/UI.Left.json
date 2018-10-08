@@ -1,0 +1,26 @@
+{
+    "_page": {
+        "title": "「交互」DateVersion - 添加"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "cert,,24,,aiMatrixEditor",
+                    "optionJsx.config.matrix": [
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opAdd,添加,$opAdd"
+                    }
+                }
+            ]
+        ]
+    }
+}
