@@ -9,7 +9,10 @@
                 {
                     "metadata": "credits,类别,24,,aiMultiCheckBox",
                     "optionJsx.config.datum": "source=model.credit,key=key,label=:name（:code）",
-                    "optionJsx.config.childTitle": "认证依据"
+                    "optionJsx.config.prefix": "认证依据",
+                    "optionJsx.config.child": {
+                        "label": "name"
+                    }
                 }
             ],
             [

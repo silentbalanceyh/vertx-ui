@@ -49,10 +49,11 @@ const aiChangeEditor = (reference, jsx = {}) => {
 };
 const aiMultiCheckBox = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
-    const {config = {}, ...rest} = jsx;
-    config.source = RxAnt.toOptions(reference, config);
-    console.info(config);
-    return (<span/>)
+    const {config = {}} = jsx;
+    const {datum, ...rest} = config;
+    rest.source = RxAnt.toOptions(reference, {datum});
+    const {source = [], ...left} = rest;
+    return (<MultiCheckBox source={source} config={left}/>);
 };
 /**
  * Uncaught TypeError:

@@ -37,7 +37,7 @@ export default {
             if (data) {
                 data.filter(item => item.hasOwnProperty('extension'))
                     .map(item => item.extension)
-                    .map(item => item.hasOwnProperty('credits'))
+                    .filter(item => item.hasOwnProperty('credits'))
                     .map(item => item['credits'])
                     .forEach((creditArr, index) => data[index].children = creditArr);
             }
