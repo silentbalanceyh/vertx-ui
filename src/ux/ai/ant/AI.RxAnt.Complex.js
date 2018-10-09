@@ -52,6 +52,8 @@ const options = (reference, config = {}, filter = () => true) => {
             if (each.hasOwnProperty('style')) {
                 option['style'] = each.style;
             }
+            // 子项处理
+            if (each.children) option.children = each.children;
             options.push(option);
         });
     }
