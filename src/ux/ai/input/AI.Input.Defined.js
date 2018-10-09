@@ -4,8 +4,9 @@ import {
     FileUpload,
     ListSelector,
     MagicView,
+    MultiCheckBox,
     TableEditor,
-    TimeRanger
+    TimeRanger,
 } from "web";
 import RxAnt from "../ant/AI.RxAnt";
 import React from "react";
@@ -46,6 +47,13 @@ const aiChangeEditor = (reference, jsx = {}) => {
                           source={source}
                           reference={reference}/>);
 };
+const aiMultiCheckBox = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    const {config = {}, ...rest} = jsx;
+    config.source = RxAnt.toOptions(reference, config);
+    console.info(config);
+    return (<span/>)
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -61,4 +69,5 @@ export default {
     aiListSelector,
     aiTableEditor,
     aiChangeEditor,
+    aiMultiCheckBox
 };

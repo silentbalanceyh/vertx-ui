@@ -12,7 +12,7 @@ const jsx = {
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
-    .form().bind(Op)
+    .form().raft(jsx).bind(Op)
     .to()
 )
 class Component extends React.PureComponent {

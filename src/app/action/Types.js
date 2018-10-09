@@ -11,4 +11,6 @@ export default {
     // 树形/列表输入（处理TableEditor专用）
     fnTableList: Ux.createAction("/RX/MODULE/TABLE/LIST"),
     fnTableTree: Ux.createAction("/RX/MODULE/TABLE/TREE"),
+    // MultiCheckbox专用
+    fnCredits: Ux.createAction("/RX/MODULE/CHECK-BOX/CREDIT"),
 }

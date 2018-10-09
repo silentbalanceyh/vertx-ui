@@ -30,5 +30,19 @@ export default {
     fnTableTree: Ux.rxEdict(Types.fnTableTree,
         params => Ux.ajaxGet("/api/table/tree", params, Mock.fnTableTree),
         data => Ux.rxAssist(data, "table.tree")
+    ),
+    fnCredits: Ux.rxEdict(Types.fnCredits,
+        params => Ux.ajaxGet("/api/credits", params, Mock.fnCredits),
+        data => {
+            if (data.list) {
+                const list = data.list;
+                list.filter(item => item.hasOwnProperty('extension'))
+                    .map(item => item.extension)
+                    .map(item => item.hasOwnProperty('credits'))
+                    .map(item => item['credits'])
+                    .forEach((creditArr, index) => list[index].children = creditArr);
+            }
+            return Ux.rxAssist(data, "model.credit")
+        }
     )
 };
