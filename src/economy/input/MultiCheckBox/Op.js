@@ -26,13 +26,27 @@ const getOptions = (reference) => {
     });
     return source;
 };
-const on2Change = (reference, item = {}) => (event) => {
-    console.info("OnChange", event);
-
+const on2Change = (reference) => (keys) => {
+    const previous = reference.state.data;
+    const data = {};
+    keys.forEach(key => {
+        if (previous.hasOwnProperty(key)) {
+            data[key] = previous[key];
+        } else {
+            data[key] = [];
+        }
+    });
+    reference.setState({data});
+    Ux.xtChange(reference, data, true);
 };
-const on2ChildChange = (reference, item = {}) => (event) => {
-    console.info("ChildChange");
-
+const on2ChildChange = (reference, parentKey = "") => (event) => {
+    const previous = reference.state.data;
+    if (previous && previous.hasOwnProperty(parentKey)) {
+        const data = Ux.clone(previous);
+        data[parentKey] = event;
+        reference.setState({data});
+        Ux.xtChange(reference, data, true);
+    }
 };
 export default {
     getOptions,

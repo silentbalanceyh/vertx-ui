@@ -20,16 +20,31 @@ class Component extends React.PureComponent {
         Ux.xtUnsafe(this, nextProps);
     }
 
+    componentDidUpdate(prevProps) {
+        const value = this.props.value;
+        if (!value) {
+            this.setState({data: {}});
+            Ux.xtChange(this, {}, true);
+        }
+    }
+
     render() {
         const {prefix = "", source = []} = this.state;
+        const {value = {}} = this.props;
+        const $values = Ux.immutable(Object.keys(value));
         return (
-            <Checkbox.Group onChange={Op.on2Change(this)}>
+            <Checkbox.Group onChange={Op.on2Change(this)}
+                            value={Object.keys(value)}>
                 {source.map(item => (
                     <Row className={"web-check-row"} key={item.key}>
                         <Checkbox value={item.value}>
                             {item.label ? item.label : ""}
                         </Checkbox>
-                        {Rdr.renderChildren(this, prefix, item.children)}
+                        {Rdr.renderChildren(this, prefix, {
+                            ...item,
+                            $value: value[item.key],  // 传入子节,
+                            disabled: !$values.contains(item.key)
+                        })}
                     </Row>
                 ))}
             </Checkbox.Group>
