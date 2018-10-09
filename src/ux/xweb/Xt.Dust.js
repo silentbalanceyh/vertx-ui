@@ -1,6 +1,8 @@
 import U from 'underscore';
 import Value from '../Ux.Value';
 import Util from '../util';
+import Event from './Xt.Event';
+import Ux from "ux";
 
 /**
  * UNSAFE_componentWillReceiveProps(nextProps,context)
@@ -30,6 +32,14 @@ const xtInitArray = (props = {}, empty = false) => {
     }
     return values;
 };
+const xtInitObject = (props = {}) => {
+    const values = {};
+    const value = props.value;
+    if (value) {
+        values.data = value;
+    }
+    return values;
+};
 
 const xtGet = (reference, field, supplier) => {
     let state = (reference.state ? reference.state : {});
@@ -47,6 +57,14 @@ const xtReset = (reference, defaultValue = {}) => {
     const value = reference.props.value;
     if (!value) {
         reference.setState(defaultValue);
+        Event.xtChange(reference, defaultValue, true);
+    }
+};
+const xtResetData = (reference, data = {}) => {
+    const value = this.props.value;
+    if (!value) {
+        reference.setState({data});
+        Ux.xtChange(this, {}, true);
     }
 };
 const xtPrevious = (reference) => {
@@ -60,7 +78,9 @@ export default {
     xtUnsafe,
     xtInit,
     xtInitArray,
+    xtInitObject,
     xtGet,
     xtReset,
+    xtResetData,
     xtPrevious,
 };

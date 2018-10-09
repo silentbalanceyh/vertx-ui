@@ -8,7 +8,7 @@ import Rdr from './UI.Render';
 class Component extends React.PureComponent {
     constructor(props) {
         super(props);
-        const state = Ux.xtInitArray(props);
+        const state = Ux.xtInitObject(props);
         // 用于Checkbox Group
         state.source = Op.getOptions(this);
         const {config = {}} = props;
@@ -21,11 +21,7 @@ class Component extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps) {
-        const value = this.props.value;
-        if (!value) {
-            this.setState({data: {}});
-            Ux.xtChange(this, {}, true);
-        }
+        Ux.xtReset(this, {});
     }
 
     render() {
