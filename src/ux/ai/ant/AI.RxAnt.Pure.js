@@ -26,12 +26,12 @@ const addonAfter = (jsx = {}) => {
     }
 };
 const onChange = (jsx = {}, fnChange) => {
-    if (U.isFunction(onChange)) {
+    if (U.isFunction(fnChange)) {
         jsx.onChange = fnChange;
     }
 };
 const onSelect = (jsx = {}, fnSelect) => {
-    if (U.isFunction(onChange)) {
+    if (U.isFunction(fnSelect)) {
         jsx.onSelect = fnSelect;
     }
 };

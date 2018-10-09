@@ -21,6 +21,7 @@ import _input_change$editor from './input/change-editor/UI';
 import _input_data$version from './input/data-version/UI';
 import _input_list$selector from './input/list-selector/UI';
 import _input_matrix$editor from './input/matrix-editor/UI';
+import _input_multi$check$box from './input/multi-check-box/UI';
 import _input_table$editor from './input/table-editor/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
@@ -50,6 +51,7 @@ export default {
 	_input_data$version,
 	_input_list$selector,
 	_input_matrix$editor,
+	_input_multi$check$box,
 	_input_table$editor,
 	_layout_adjust015,
 	_layout_standard,

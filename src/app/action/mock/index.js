@@ -7,6 +7,7 @@ import fnTreeData from './fnTreeData'
 import fnTreeData1 from './fnTreeData1'
 import fnTableList from './fnRoomType'
 import fnTableTree from './fnPayTerm'
+import fnCredits from './fnCredit';
 
 export default {
     fnApp,
@@ -19,5 +20,6 @@ export default {
     fnTreeData1,
     // Table专用
     fnTableList,
-    fnTableTree
+    fnTableTree,
+    fnCredits
 }

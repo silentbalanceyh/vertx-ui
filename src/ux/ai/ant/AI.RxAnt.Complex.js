@@ -42,12 +42,18 @@ const options = (reference, config = {}, filter = () => true) => {
                 option['value'] = each[key];
                 option['key'] = each[key];
             }
-            if (each[label]) {
-                option['label'] = each[label];
+            if (0 <= label.indexOf(":")) {
+                option['label'] = Util.formatExpr(label, each);
+            } else {
+                if (each[label]) {
+                    option['label'] = each[label];
+                }
             }
             if (each.hasOwnProperty('style')) {
                 option['style'] = each.style;
             }
+            // 子项处理
+            if (each.children) option.children = each.children;
             options.push(option);
         });
     }
