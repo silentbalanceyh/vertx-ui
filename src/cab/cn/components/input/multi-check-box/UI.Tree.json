@@ -1,10 +1,121 @@
 {
     "_configuration": {
-        "code": "DateVersion",
+        "code": "MultiCheckBox",
         "data": [
+            {
+                "source": "P",
+                "name": "source",
+                "comment": "当前组件所需要的数据源。",
+                "type": "Array",
+                "value": "[]"
+            },
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "prefix",
+                "comment": "在子CheckBox中是否添加前缀说明，如Demo中的「认证依据」。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "child",
+                "required": true,
+                "comment": "一般配置都是在父项中解析好了，所以子项需要提供解析配置。",
+                "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "child.key",
+                "comment": "子CheckBox中对应的 key 属性字段。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "child.value",
+                "comment": "子CheckBox中对应的 value 属性字段。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "config",
+                "option": "child.label",
+                "required": true,
+                "comment": "子CheckBox中对应的 label 属性字段，用于显示。",
+                "type": "String",
+                "value": "--"
+            }
         ],
-        "fit": "cc",
         "items": {
+            "name": "MultiCheckBox组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "source",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "prefix",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "child",
+                                    "color": "#e23c39",
+                                    "children": [
+                                        {
+                                            "name": "label",
+                                            "color": "#e23c39"
+                                        },
+                                        {
+                                            "name": "key",
+                                            "color": "#33af43"
+                                        },
+                                        {
+                                            "name": "value",
+                                            "color": "#33af43"
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "state",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "prefix",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "source",
+                            "color": "#e23c39"
+                        }
+                    ]
+                }
+            ]
         },
         "layout": {
             "hgap": 90,
