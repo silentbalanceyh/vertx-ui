@@ -3,7 +3,7 @@ import './Cab.less';
 import Ux from "ux";
 import {Input, Table} from "antd";
 import Op from './Op';
-import Rdr from './UI.Render';
+import Filter from './UI.Filter';
 
 class Component extends React.PureComponent {
     constructor(props) {
@@ -16,19 +16,18 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {table = {}, config = {}, ...jsx} = this.state;
+        const {fromTable = {}, toTable = {}, config = {}, ...jsx} = this.state;
         // 根据Filter计算双重数据源
-        const fromData = Op.getFrom(this, config);
-        const toData = Op.getTo(this, config);
+        const from = Op.getFrom(this, config, fromTable);
+        const to = Op.getTo(this, config, toTable);
         // 处理InputGroup中的jsx
         const attrs = Ux.valueFlip(jsx);
         const $attrs = Ux.clone(attrs);
-        console.info(table.columns);
         return (
             <Input.Group {...$attrs} className={"web-table-transfer"}>
-                <Table {...table} dataSource={toData}/>
-                {Rdr.renderFilter(this)}
-                <Table {...table} dataSource={fromData}/>
+                <Table {...fromTable} dataSource={from}/>
+                <Filter config={config} reference={this}/>
+                <Table {...toTable} dataSource={to}/>
             </Input.Group>
         );
     }

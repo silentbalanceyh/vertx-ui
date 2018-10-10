@@ -1,6 +1,5 @@
-import React from 'react';
-import Filter from './UI.Render.Filter';
+import Op from './UI.Render.Op';
 
 export default {
-    ...Filter
+    ...Op
 };

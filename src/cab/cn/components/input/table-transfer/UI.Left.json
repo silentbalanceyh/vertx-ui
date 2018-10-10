@@ -14,10 +14,10 @@
                         "filter": "code,name,helpCode",
                         "prefix": "帅选条件"
                     },
-                    "optionJsx.config.table": {
+                    "optionJsx.config.from": {
                         "scroll": {
                             "x": 1200,
-                            "y": 250
+                            "y": 200
                         },
                         "columns": [
                             {
@@ -48,6 +48,33 @@
                             },
                             {
                                 "metadata": "amount,金额,LABEL"
+                            }
+                        ]
+                    },
+                    "optionJsx.config.to": {
+                        "scroll": {
+                            "x": 1200,
+                            "y": 200
+                        },
+                        "columns": [
+                            {
+                                "metadata": "key,操作",
+                                "className": "col-90"
+                            },
+                            {
+                                "metadata": "code,代码,LABEL"
+                            },
+                            {
+                                "metadata": "name,商品名称,LABEL"
+                            },
+                            {
+                                "metadata": "helpCode,助记码,LABEL"
+                            },
+                            {
+                                "metadata": "modal,规格型号,LABEL"
+                            },
+                            {
+                                "metadata": "unit,计量单位,LABEL"
                             }
                         ]
                     }
