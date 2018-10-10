@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import {DataLabor} from "entity";
 
 const _getSelectedFilter = (reference, revert = false) => {
     const {selected = []} = reference.state;
@@ -10,8 +11,11 @@ const _getSelectedFilter = (reference, revert = false) => {
 };
 
 const getFrom = (reference, config = {}) => {
-    const {_data = []} = reference.state;
-    let data = Ux.clone(_data).filter(_getSelectedFilter(reference));
+    const {_data = [], shared = []} = reference.state;
+    const standard = Ux.clone(_data).filter(_getSelectedFilter(reference));
+    const dataArray = DataLabor.getArray(standard);
+    shared.forEach(each => dataArray.saveElement(each));
+    let data = dataArray.to();
     data = Ux.valueTree(data, {
         ...config.tree,
         zero: false

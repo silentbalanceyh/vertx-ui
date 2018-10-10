@@ -76,6 +76,10 @@ const valueTree = (array = [], config = {}) => {
         });
         if (!zero && 0 === item.children) {
             delete item.children;
+        } else {
+            if (sorter) {
+                item.children = item.children.sort(Util.sorterAscFn(sorter));
+            }
         }
     });
     return root;
