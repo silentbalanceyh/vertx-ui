@@ -28,6 +28,7 @@ const _on2Add = (reference, record = {}) => (event) => {
     shared = Ux.clone(sharedArray.to());
     // 设置共享节处理
     reference.setState({selected, shared});
+    Ux.xtChange(reference, selected.concat(shared), true);
 };
 
 const _on2Remove = (reference, record = {}) => (event) => {
@@ -51,6 +52,7 @@ const _on2Remove = (reference, record = {}) => (event) => {
     shared = Ux.clone(sharedArray.to());
 
     reference.setState({selected, shared});
+    Ux.xtChange(reference, selected.concat(shared), true);
 };
 
 const renderOp = (reference, from = false, column = {}) => (text, record) => {

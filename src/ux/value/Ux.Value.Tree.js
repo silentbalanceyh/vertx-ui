@@ -1,6 +1,5 @@
 import Type from "../Ux.Type";
 import E from "../Ux.Error";
-import Dg from '../Ux.Debug';
 import Util from '../util';
 import U from 'underscore';
 import Value from './Ux.Value.Dust';
@@ -63,7 +62,6 @@ const valueSearch = (config = {}, props = {}) => {
     return result;
 };
 const valueTree = (array = [], config = {}) => {
-    Dg.dgDebug(config, "树专用配置");
     const {
         field = "parentId", // 树专用父节点
         key = "key", // 主键

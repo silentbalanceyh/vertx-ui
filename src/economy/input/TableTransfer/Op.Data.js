@@ -25,7 +25,7 @@ const getFrom = (reference, config = {}) => {
 };
 const getTo = (reference, config = {}) => {
     const {_data = [], filters = {}} = reference.state;
-    let data = Ux.clone(_data).filter(_getSelectedFilter(reference, true));
+    let data = _data.filter(_getSelectedFilter(reference, true));
     // 过滤信息
     const query = {criteria: filters};
     data = Ux.aiCriteria(data).query(query);
