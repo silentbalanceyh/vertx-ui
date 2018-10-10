@@ -59,9 +59,9 @@ class Uarr {
         return this;
     }
 
-    flat(field = "children") {
+    flat(field = "children", current = true) {
         const reference = this.data;
-        this.data = Types.elementFlat(reference, field, true);
+        this.data = Types.elementFlat(reference, field, current);
         return this;
     }
 

@@ -32,6 +32,8 @@ const _getTable = (reference, table = [], to) => {
         }
         column.render = _getRender(reference, column, to);
     });
+    // 默认带操作，设10
+    table.indentSize = 10;
     return table;
 };
 const _getRender = (reference, column = [], to = false) => {
