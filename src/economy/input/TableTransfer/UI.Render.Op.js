@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'antd';
+import {Button, Input} from 'antd';
 import {DataLabor} from "entity";
 import Ux from 'ux';
 
@@ -86,7 +86,26 @@ const renderTo = (column = {}) => {
         };
     } else return column.render;
 };
+const _updateItem = (array = [], record = {}, key) => {
+    const dataArray = DataLabor.getArray(array);
+    dataArray.saveElement(record, key);
+    return Ux.clone(dataArray.to());
+};
+const renderInput = (reference, field) => (text, record) => {
+    return record.children && 0 < record.children.length ? false : (
+        <Input value={text} onChange={event => {
+            let {config = {}, selected = [], _data = []} = reference.state;
+            const treeData = config.tree;
+            record[field] = event.target ? event.target.value : "";
+            selected = _updateItem(selected, record, treeData.key);
+            _data = _updateItem(_data, record, treeData.key);
+            reference.setState({selected, _data});
+            Ux.xtChange(reference, selected, true);
+        }}/>
+    );
+};
 export default {
     renderOp,
     renderTo,
+    renderInput,
 };

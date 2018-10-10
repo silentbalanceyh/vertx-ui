@@ -15,6 +15,13 @@ class Component extends React.PureComponent {
         Ux.xtUnsafe(this, nextProps);
     }
 
+    componentDidUpdate(prevProps) {
+        const value = this.props.value;
+        if (!value) {
+
+        }
+    }
+
     render() {
         const {fromTable = {}, toTable = {}, config = {}, ...jsx} = this.state;
         // 根据Filter计算双重数据源

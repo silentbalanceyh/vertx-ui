@@ -40,6 +40,10 @@ const _getRender = (reference, column = [], to = false) => {
     let fnRender = column.render;
     if ("key" === column.dataIndex) {
         fnRender = Rdr.renderOp(reference, to, column);
+    } else {
+        if ("LABEL" !== column['$render']) {
+            fnRender = Rdr.renderInput(reference, column.dataIndex);
+        }
     }
     return fnRender;
 };

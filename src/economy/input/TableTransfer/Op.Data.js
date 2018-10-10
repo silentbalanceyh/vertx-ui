@@ -27,17 +27,20 @@ const getTo = (reference, config = {}) => {
     const {_data = [], filters = {}} = reference.state;
     let data = _data.filter(_getSelectedFilter(reference, true));
     // 过滤信息
-    const query = {criteria: filters};
-    data = Ux.aiCriteria(data).query(query);
-    // 补齐带有parentId的数据
-    const formated = DataLabor.getArray(data);
-    const treeData = config.tree;
-    data.forEach(item => {
-        const recordArray = Ux.elementBranch(_data, item[treeData.key],
-            treeData.field, treeData.key);
-        recordArray.forEach(each => formated.saveElement(each));
-    });
-    data = formated.to();
+    Ux.valueValid(filters);
+    if (0 < Object.keys(filters).length) {
+        const query = {criteria: filters};
+        data = Ux.aiCriteria(data).query(query);
+        // 补齐带有parentId的数据
+        const formated = DataLabor.getArray(data);
+        const treeData = config.tree;
+        data.forEach(item => {
+            const recordArray = Ux.elementBranch(_data, item[treeData.key],
+                treeData.field, treeData.key);
+            recordArray.forEach(each => formated.saveElement(each));
+        });
+        data = formated.to();
+    }
 
     data = Ux.valueTree(data, {
         ...config.tree,
