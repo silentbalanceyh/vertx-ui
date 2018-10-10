@@ -1,8 +1,10 @@
 import Ux from "ux";
 import Types from "./Types";
 import Mock from './mock';
+import Credit from './Epic.Credits';
 
 export default {
+    ...Credit,
     fnDeptList: Ux.rxEdict(Types.fnDeptList,
         params => Ux.ajaxPost("/api/list/search", params, Mock.fnDeptList),
         Ux.rxGrid
@@ -31,17 +33,8 @@ export default {
         params => Ux.ajaxGet("/api/table/tree", params, Mock.fnTableTree),
         data => Ux.rxAssist(data, "table.tree")
     ),
-    fnCredits: Ux.rxEdict(Types.fnCredits,
-        params => Ux.ajaxGet("/api/credits", params, Mock.fnCredits),
-        data => {
-            if (data) {
-                data.filter(item => item.hasOwnProperty('extension'))
-                    .map(item => item.extension)
-                    .filter(item => item.hasOwnProperty('credits'))
-                    .map(item => item['credits'])
-                    .forEach((creditArr, index) => data[index].children = creditArr);
-            }
-            return Ux.rxAssist(data, "model.credit")
-        }
+    fnMaterials: Ux.rxEdict(Types.fnMaterials,
+        params => Ux.ajaxGet("/api/material/tree", params, Mock.fnMaterials),
+        data => Ux.rxAssist(data, "item.material")
     )
 };

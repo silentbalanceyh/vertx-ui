@@ -1,5 +1,6 @@
 import Type from "../Ux.Type";
 import E from "../Ux.Error";
+import Util from '../util';
 import U from 'underscore';
 import Value from './Ux.Value.Dust';
 
@@ -60,10 +61,24 @@ const valueSearch = (config = {}, props = {}) => {
     });
     return result;
 };
-const valueTree = (array = [], field) => {
+const valueTree = (array = [], config = {}) => {
+    const {
+        field = "parentId", // 树专用父节点
+        key = "key", // 主键
+        zero = true, // children长度为0时是否保留children，默认保留
+        sorter = "", // 是否开启排序
+    } = config;
     let root = array.filter(U.isObject).filter(each => !each[field]);
     root = Value.clone(root);
-    root.forEach(item => item.children = Value.Child.byField(array, field, item, "key"));
+    if (sorter) {
+        root = root.sort(Util.sorterAscFn(sorter));
+    }
+    root.forEach(item => {
+        item.children = Value.Child.byField(array, {
+            item, key, zero, sorter, field
+        });
+        Value.Child.normalizeData(item, config);
+    });
     return root;
 };
 const _valueDeepConvert = (record, from, to) => {

@@ -30,6 +30,7 @@ export default {
      * @return {number|*}
      */
     sorterAsc: (left, right, key) => key ? sortString(left[key], right[key]) : sortString(left, right),
+    sorterAscFn: (key) => (left, right) => key ? sortString(left[key], right[key]) : sortString(left, right),
     /**
      * 逆序排序
      * @method sorterDesc
@@ -39,4 +40,5 @@ export default {
      * @return {number|*}
      */
     sorterDesc: (left, right, key) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
+    sorterDescFn: (key) => (left, right) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
 };

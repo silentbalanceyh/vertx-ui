@@ -13,4 +13,6 @@ export default {
     fnTableTree: Ux.createAction("/RX/MODULE/TABLE/TREE"),
     // MultiCheckbox专用
     fnCredits: Ux.createAction("/RX/MODULE/CHECK-BOX/CREDIT"),
+    // 商品明细
+    fnMaterials: Ux.createAction("/RX/MODULE/MATERIAL/ITEMS")
 }

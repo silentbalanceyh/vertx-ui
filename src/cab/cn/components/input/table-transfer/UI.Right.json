@@ -1,0 +1,21 @@
+{
+    "_page": {
+        "title": "「交互」TableTransfer - 更新"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opSave,保存,$opSave"
+                    }
+                }
+            ]
+        ]
+    }
+}

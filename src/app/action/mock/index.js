@@ -8,6 +8,7 @@ import fnTreeData1 from './fnTreeData1'
 import fnTableList from './fnRoomType'
 import fnTableTree from './fnPayTerm'
 import fnCredits from './fnCredit';
+import fnMaterials from './fnMaterials';
 
 export default {
     fnApp,
@@ -21,5 +22,8 @@ export default {
     // Table专用
     fnTableList,
     fnTableTree,
-    fnCredits
+    // 多个CheckBox专用
+    fnCredits,
+    // 穿梭框专用
+    fnMaterials,
 }

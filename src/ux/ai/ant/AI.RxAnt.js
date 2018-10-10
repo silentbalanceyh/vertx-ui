@@ -14,13 +14,15 @@ class RxAnt {
     static onFromTo = Complex.fromTo;
     // 特殊
     static toParsed = Datum.parseExpr;
-    static toDatum = Datum.parseDatum;
+    static toDatum = Datum.gainDatum;   // 读取Datum
     // 窗口解析
     static toDialogConfig = Complex.dialog;
     // 树相关options解析
     static toTreeOptions = Complex.treeOptions;
     // 普通解析：items / datum
     static toOptions = Complex.options;
+
+    static toConfig = Data.toConfig;
 
     static onMockData = Data.mock;
 }

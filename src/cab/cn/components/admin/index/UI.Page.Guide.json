@@ -23,6 +23,7 @@
                 "辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
                 "交互类：ListSelector,/input/list-selector,true",
                 "交互类：TableEditor,/input/table-editor,true",
+                "交互类：TableTransfer,/input/table-transfer,true",
                 "交互类：AddressSelector,/control/address-selector",
                 "交互类：MultiCheckBox,/input/multi-check-box,true",
                 "交互类「北二」：ChangeEditor,/input/change-editor,true",

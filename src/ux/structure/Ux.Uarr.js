@@ -92,7 +92,9 @@ class Uarr {
     tree(key = "id", parentKey = "pid") {
         const root = this.data.filter(item => !item[parentKey]);
         const reference = this.data;
-        root.forEach(item => item.children = Ux.Child.byField(reference, parentKey, item, key));
+        root.forEach(item => item.children = Ux.Child.byField(reference, {
+            field: parentKey, item, key
+        }));
         this.data = root;
         return this;
     }

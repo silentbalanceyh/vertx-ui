@@ -284,7 +284,7 @@ const elementVertical = (data = [], field = "") => {
     let result = [];
     data.forEach(item => {
         if (item[field]) {
-            const $result = Immutable.fromJS(result);
+            const $result = Value.immutable(result);
             if (!$result.contains(item[field])) {
                 result.push(item[field]);
             }
@@ -364,18 +364,19 @@ const elementSwitch = (array = [], element = "") => {
  * @param {Array} array 被查找的数
  * @param leafKey 过滤条件
  * @param parentField 父节点字段
+ * @param field 主键字段
  */
-const elementBranch = (array = [], leafKey, parentField) => {
+const elementBranch = (array = [], leafKey, parentField, field = "key") => {
     // 查找的最终结果
     let branch = [];
     // 查找子节点
-    const obj = elementUnique(array, "key", leafKey);
+    const obj = elementUnique(array, field, leafKey);
     if (obj) {
         const target = Immutable.fromJS(obj).toJS();
         branch.push(target);
         // 查找父节点
         const pid = obj[parentField];
-        branch = branch.concat(elementBranch(array, pid, parentField));
+        branch = branch.concat(elementBranch(array, pid, parentField, field));
     }
     return branch.reverse();
 };
@@ -386,15 +387,15 @@ const elementBranch = (array = [], leafKey, parentField) => {
  * @param parentKey 过滤条件
  * @param parentField
  */
-const elementChildren = (array = [], parentKey, parentField) => {
+const elementChildren = (array = [], parentKey, parentField, field = "key") => {
     let children = [];
-    const obj = elementUnique(array, 'key', parentKey);
+    const obj = elementUnique(array, field, parentKey);
     if (obj) {
-        const target = Immutable.fromJS(obj).toJS();
+        const target = Value.clone(obj);
         children.push(target);
         // 查找子节点
         const childrenArr = array.filter(item => parentKey === item[parentField]);
-        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)));
+        childrenArr.forEach(child => children = children.concat(elementChildren(array, child[field], parentField, field)));
     }
     return children;
 };

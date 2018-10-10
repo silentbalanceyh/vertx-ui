@@ -1,6 +1,7 @@
 import U from 'underscore';
 import Immutable from "immutable";
 import Type from "../Ux.Type";
+import Util from '../util';
 import moment from "moment";
 import {DataArray, DataObject} from "entity";
 
@@ -193,18 +194,37 @@ const to = (value) => {
     } else return {};
 };
 // --- 子节点处理
-const _childrenByField = (array = [], parent, item, field) => {
-    if (!field) return [];
-    const pValue = item[field];
-    let childrenArray = array.filter(each => each[parent] === pValue);
+const _childrenByField = (array = [], config = {}) => {
+    const {key, item, field, zero = true, sorter} = config;
+    if (!key) return [];
+    const pValue = item[key];
+    let childrenArray = array.filter(each => each[field] === pValue);
     childrenArray = clone(childrenArray);
     if (0 < childrenArray.length) {
-        childrenArray.forEach(each => each.children = _childrenByField(array, parent, each, field));
+        childrenArray.forEach(each => {
+            each.children = _childrenByField(array, {
+                key, item: each, field, zero, sorter,
+            });
+            normalizeData(each, config);
+        });
     }
     return childrenArray;
 };
+const normalizeData = (each = {}, config = {}) => {
+    const {zero = true, sorter} = config;
+    if (!zero && 0 === each.children.length) {
+        // 是否处理zero信息
+        delete each.children;
+    } else {
+        // 再执行排序
+        if (sorter) {
+            each.children = each.children.sort(Util.sorterAscFn(sorter));
+        }
+    }
+};
 const Child = {
-    byField: _childrenByField
+    byField: _childrenByField,
+    normalizeData,
 };
 export default {
     // 判断是否为空

@@ -23,6 +23,7 @@ import _input_list$selector from './input/list-selector/UI';
 import _input_matrix$editor from './input/matrix-editor/UI';
 import _input_multi$check$box from './input/multi-check-box/UI';
 import _input_table$editor from './input/table-editor/UI';
+import _input_table$transfer from './input/table-transfer/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
@@ -53,6 +54,7 @@ export default {
 	_input_matrix$editor,
 	_input_multi$check$box,
 	_input_table$editor,
+	_input_table$transfer,
 	_layout_adjust015,
 	_layout_standard,
 	_login_index,

@@ -6,6 +6,7 @@ import {
     MagicView,
     MultiCheckBox,
     TableEditor,
+    TableTransfer,
     TimeRanger,
 } from "web";
 import RxAnt from "../ant/AI.RxAnt";
@@ -39,21 +40,18 @@ const aiTableEditor = (reference, jsx = {}) => {
 const aiChangeEditor = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
     RxAnt.onFromTo(reference, jsx);
-    const {config = {}, ...rest} = jsx;
-    config.source = RxAnt.toOptions(reference, config);
-    const {source = [], ...extractd} = config;
-    return (<ChangeEditor {...rest}
-                          config={extractd}
-                          source={source}
-                          reference={reference}/>);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
+    return (<ChangeEditor {...attrs} reference={reference}/>);
 };
 const aiMultiCheckBox = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
-    const {config = {}} = jsx;
-    const {datum, ...rest} = config;
-    rest.source = RxAnt.toOptions(reference, {datum});
-    const {source = [], ...left} = rest;
-    return (<MultiCheckBox source={source} config={left}/>);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
+    return (<MultiCheckBox {...attrs}/>);
+};
+const aiTableTransfer = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toDatum);
+    return (<TableTransfer {...attrs} reference={reference}/>);
 };
 /**
  * Uncaught TypeError:
@@ -63,12 +61,13 @@ const aiMultiCheckBox = (reference, jsx = {}) => {
  * RxAnt.onChange(jsx, onChange);
  */
 export default {
-    aiMagic,
-    aiTimeRanger,
-    aiFileUpload,
-    aiDateVersion,
-    aiListSelector,
-    aiTableEditor,
-    aiChangeEditor,
-    aiMultiCheckBox
+    aiMagic,    // 魔法视图
+    aiTimeRanger, // 00:00 ~ 00:00
+    aiFileUpload, // 上传
+    aiDateVersion, // 年、月、日、版本输入框
+    aiListSelector, // 列表选择框
+    aiChangeEditor, // 变更输入框
+    aiMultiCheckBox, // 子母多选框
+    aiTableTransfer, // 表格穿梭框
+    aiTableEditor, // 表格编辑器
 };
