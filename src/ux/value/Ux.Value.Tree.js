@@ -64,7 +64,13 @@ const valueSearch = (config = {}, props = {}) => {
 };
 const valueTree = (array = [], config = {}) => {
     Dg.dgDebug(config, "树专用配置");
-    const {field = "parentId", key = "key", zero = true, sorter = ""} = config;
+    const {
+        field = "parentId", // 树专用父节点
+        key = "key", // 主键
+        zero = true, // children长度为0时是否保留children，默认保留
+        sorter = "", // 是否开启排序
+        filters = {}, // 排序
+    } = config;
     let root = array.filter(U.isObject).filter(each => !each[field]);
     root = Value.clone(root);
     if (sorter) {
@@ -72,15 +78,9 @@ const valueTree = (array = [], config = {}) => {
     }
     root.forEach(item => {
         item.children = Value.Child.byField(array, {
-            item, key, zero, sorter, field,
+            item, key, zero, sorter, field, filters
         });
-        if (!zero && 0 === item.children) {
-            delete item.children;
-        } else {
-            if (sorter) {
-                item.children = item.children.sort(Util.sorterAscFn(sorter));
-            }
-        }
+        Value.Child.normalizeData(item, config);
     });
     return root;
 };

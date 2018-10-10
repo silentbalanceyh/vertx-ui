@@ -387,15 +387,15 @@ const elementBranch = (array = [], leafKey, parentField, field = "key") => {
  * @param parentKey 过滤条件
  * @param parentField
  */
-const elementChildren = (array = [], parentKey, parentField) => {
+const elementChildren = (array = [], parentKey, parentField, field = "key") => {
     let children = [];
-    const obj = elementUnique(array, 'key', parentKey);
+    const obj = elementUnique(array, field, parentKey);
     if (obj) {
-        const target = Immutable.fromJS(obj).toJS();
+        const target = Value.clone(obj);
         children.push(target);
         // 查找子节点
         const childrenArr = array.filter(item => parentKey === item[parentField]);
-        childrenArr.forEach(child => children = children.concat(elementChildren(array, child.key, parentField)));
+        childrenArr.forEach(child => children = children.concat(elementChildren(array, child[field], parentField, field)));
     }
     return children;
 };

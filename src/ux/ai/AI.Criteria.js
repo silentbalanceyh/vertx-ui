@@ -1,6 +1,5 @@
 import Sorter from "../util/Ux.Sorter";
 import Type from "../Ux.Type";
-import Immutable from 'immutable';
 import U from 'underscore';
 import {DataLabor} from 'entity';
 import Value from '../Ux.Value';
@@ -157,7 +156,7 @@ const _fnCriteria = (source = [], $query = {}) => {
 
 class Criteria {
     constructor(data = []) {
-        this.data = Immutable.fromJS(data).toJS();
+        this.data = Value.clone(data);
     }
 
     query($query = {}) {

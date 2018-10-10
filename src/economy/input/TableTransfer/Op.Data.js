@@ -11,14 +11,15 @@ const _getSelectedFilter = (reference, revert = false) => {
 };
 
 const getFrom = (reference, config = {}) => {
-    const {_data = [], shared = []} = reference.state;
+    const {_data = [], shared = [], filters = {}} = reference.state;
     const standard = Ux.clone(_data).filter(_getSelectedFilter(reference));
     const dataArray = DataLabor.getArray(standard);
     shared.forEach(each => dataArray.saveElement(each));
     let data = dataArray.to();
     data = Ux.valueTree(data, {
         ...config.tree,
-        zero: false
+        zero: false,
+        filters
     });
     return data;
 };
@@ -34,4 +35,4 @@ const getTo = (reference, config = {}) => {
 export default {
     getFrom,
     getTo
-}
+};

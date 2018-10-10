@@ -205,19 +205,27 @@ const _childrenByField = (array = [], config = {}) => {
             each.children = _childrenByField(array, {
                 key, item: each, field, zero, sorter
             });
-            if (!zero && 0 === each.children.length) {
-                delete each.children;
-            } else {
-                if (sorter) {
-                    each.children = each.children.sort(Util.sorterAscFn(sorter));
-                }
-            }
+            normalizeData(each, config);
         });
     }
     return childrenArray;
 };
+const normalizeData = (each = {}, config = {}) => {
+    const {zero = true, sorter, filters = {}} = config;
+    if (!zero && 0 === each.children.length) {
+        // 是否处理zero信息
+        delete each.children;
+    } else {
+        // 先执行过滤
+        // 再执行排序
+        if (sorter) {
+            each.children = each.children.sort(Util.sorterAscFn(sorter));
+        }
+    }
+};
 const Child = {
-    byField: _childrenByField
+    byField: _childrenByField,
+    normalizeData,
 };
 export default {
     // 判断是否为空

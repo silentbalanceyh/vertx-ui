@@ -22,13 +22,14 @@
                         "columns": [
                             {
                                 "metadata": "key,操作",
-                                "className": "col-90"
-                            },
-                            {
-                                "metadata": "code,代码,LABEL"
+                                "className": "col-160",
+                                "display": "code"
                             },
                             {
                                 "metadata": "name,商品名称,LABEL"
+                            },
+                            {
+                                "metadata": "code,代码,LABEL"
                             },
                             {
                                 "metadata": "helpCode,助记码,LABEL"
@@ -59,13 +60,14 @@
                         "columns": [
                             {
                                 "metadata": "key,操作",
-                                "className": "col-90"
-                            },
-                            {
-                                "metadata": "code,代码,LABEL"
+                                "className": "col-120",
+                                "display": "code"
                             },
                             {
                                 "metadata": "name,商品名称,LABEL"
+                            },
+                            {
+                                "metadata": "code,代码,LABEL"
                             },
                             {
                                 "metadata": "helpCode,助记码,LABEL"

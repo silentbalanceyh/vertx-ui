@@ -39,7 +39,7 @@ const _getTable = (reference, table = [], to) => {
 const _getRender = (reference, column = [], to = false) => {
     let fnRender = column.render;
     if ("key" === column.dataIndex) {
-        fnRender = Rdr.renderOp(reference, to);
+        fnRender = Rdr.renderOp(reference, to, column);
     }
     return fnRender;
 };
