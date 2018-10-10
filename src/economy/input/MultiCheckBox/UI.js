@@ -26,7 +26,6 @@ class Component extends React.PureComponent {
 
     render() {
         const {prefix = "", source = []} = this.state;
-        console.info(this.props, this.state);
         const {value = {}} = this.props;
         const $values = Ux.immutable(Object.keys(value));
         return (
