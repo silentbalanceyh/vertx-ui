@@ -10,7 +10,7 @@
                     "metadata": "materials,物料编码,,,aiTableTransfer",
                     "optionJsx.config.datum": "source=item.material,key=id",
                     "optionJsx.config": {
-                        "tree": "parentId",
+                        "tree": "parentId,id",
                         "filter": "code,name,helpCode",
                         "prefix": "帅选条件"
                     },

@@ -1,5 +1,7 @@
 import Type from "../Ux.Type";
 import E from "../Ux.Error";
+import Dg from '../Ux.Debug';
+import Util from '../util';
 import U from 'underscore';
 import Value from './Ux.Value.Dust';
 
@@ -60,10 +62,22 @@ const valueSearch = (config = {}, props = {}) => {
     });
     return result;
 };
-const valueTree = (array = [], field) => {
+const valueTree = (array = [], config = {}) => {
+    Dg.dgDebug(config, "树专用配置");
+    const {field = "parentId", key = "key", zero = true, sorter = ""} = config;
     let root = array.filter(U.isObject).filter(each => !each[field]);
     root = Value.clone(root);
-    root.forEach(item => item.children = Value.Child.byField(array, field, item, "key"));
+    if (sorter) {
+        root = root.sort(Util.sorterAscFn(sorter));
+    }
+    root.forEach(item => {
+        item.children = Value.Child.byField(array, {
+            item, key, zero, sorter, field,
+        });
+        if (!zero && 0 === item.children) {
+            delete item.children;
+        }
+    });
     return root;
 };
 const _valueDeepConvert = (record, from, to) => {

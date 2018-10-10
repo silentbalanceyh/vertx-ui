@@ -1,6 +1,7 @@
 import U from 'underscore';
 import Immutable from "immutable";
 import Type from "../Ux.Type";
+import Util from '../util';
 import moment from "moment";
 import {DataArray, DataObject} from "entity";
 
@@ -193,13 +194,25 @@ const to = (value) => {
     } else return {};
 };
 // --- 子节点处理
-const _childrenByField = (array = [], parent, item, field) => {
-    if (!field) return [];
-    const pValue = item[field];
-    let childrenArray = array.filter(each => each[parent] === pValue);
+const _childrenByField = (array = [], config = {}) => {
+    const {key, item, field, zero = true, sorter} = config;
+    if (!key) return [];
+    const pValue = item[key];
+    let childrenArray = array.filter(each => each[field] === pValue);
     childrenArray = clone(childrenArray);
     if (0 < childrenArray.length) {
-        childrenArray.forEach(each => each.children = _childrenByField(array, parent, each, field));
+        childrenArray.forEach(each => {
+            each.children = _childrenByField(array, {
+                key, item: each, field, zero, sorter
+            });
+            if (!zero && 0 === each.children.length) {
+                delete each.children;
+            } else {
+                if (sorter) {
+                    each.children = each.children.sort(Util.sorterAscFn(sorter));
+                }
+            }
+        });
     }
     return childrenArray;
 };

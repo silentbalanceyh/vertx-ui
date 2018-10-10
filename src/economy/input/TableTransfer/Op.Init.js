@@ -43,20 +43,38 @@ const _getRender = (reference, column = [], to = false) => {
 };
 const getInit = (reference) => {
     const state = Ux.xtInitArray(reference.props, true);
-    const {config = {}, source = []} = reference.props;
+    let {config = {}, source = []} = reference.props;
+    config = Ux.clone(config);
     const {from = {}, to = {}} = config;
-
     state.fromTable = _getTable(reference, from, false);
     state.toTable = _getTable(reference, to, true);
     // 基础配置
     config.filter = _getFilter(config, state.fromTable.columns);
-
+    config.tree = _getTree(config);
     state.config = config;
     state.filters = {};
     // 数据配置
     state._data = source;
-    console.info(state);
     return state;
+};
+
+const _getTree = (config = {}) => {
+    const tree = config.tree;
+    const treeData = {};
+    if (tree) {
+        if ("string" === typeof tree) {
+            const treeArr = tree.split(',');
+            if (treeArr[0]) treeData.field = treeArr[0];
+            if (treeArr[1]) treeData.key = treeArr[1];
+            if (treeArr[2]) treeData.sorter = treeArr[2];
+        } else {
+            Object.assign(treeData, tree);
+        }
+    }
+    if (!treeData.field) treeData.field = "parentId";
+    if (!treeData.key) treeData.key = "key";
+    if (!treeData.sorter) treeData.sorter = "code";
+    return treeData;
 };
 
 export default {

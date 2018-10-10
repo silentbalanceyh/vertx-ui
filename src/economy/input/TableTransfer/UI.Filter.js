@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Col, Input, Row, Tag} from "antd";
 import Rdr from './UI.Filter.Render';
 

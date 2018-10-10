@@ -12,13 +12,19 @@ const _getSelectedFilter = (reference, revert = false) => {
 const getFrom = (reference, config = {}) => {
     const {_data = []} = reference.state;
     let data = Ux.clone(_data).filter(_getSelectedFilter(reference));
-    data = Ux.valueTree(data, config.tree);
+    data = Ux.valueTree(data, {
+        ...config.tree,
+        zero: false
+    });
     return data;
 };
 const getTo = (reference, config = {}) => {
     const {_data = []} = reference.state;
     let data = Ux.clone(_data).filter(_getSelectedFilter(reference, true));
-    data = Ux.valueTree(data, config.tree);
+    data = Ux.valueTree(data, {
+        ...config.tree,
+        zero: false
+    });
     return data;
 };
 export default {
