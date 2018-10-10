@@ -48,8 +48,8 @@ const getInit = (reference) => {
     let {config = {}, source = []} = reference.props;
     config = Ux.clone(config);
     const {from = {}, to = {}} = config;
-    state.fromTable = _getTable(reference, from, false);
-    state.toTable = _getTable(reference, to, true);
+    state.toTable = _getTable(reference, from, true);
+    state.fromTable = _getTable(reference, to, false);
     // 基础配置
     config.filter = _getFilter(config, state.fromTable.columns);
     config.tree = _getTree(config);

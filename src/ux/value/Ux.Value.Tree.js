@@ -69,7 +69,6 @@ const valueTree = (array = [], config = {}) => {
         key = "key", // 主键
         zero = true, // children长度为0时是否保留children，默认保留
         sorter = "", // 是否开启排序
-        filters = {}, // 排序
     } = config;
     let root = array.filter(U.isObject).filter(each => !each[field]);
     root = Value.clone(root);
@@ -78,7 +77,7 @@ const valueTree = (array = [], config = {}) => {
     }
     root.forEach(item => {
         item.children = Value.Child.byField(array, {
-            item, key, zero, sorter, field, filters
+            item, key, zero, sorter, field
         });
         Value.Child.normalizeData(item, config);
     });

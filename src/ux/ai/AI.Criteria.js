@@ -78,10 +78,10 @@ const _fnLinear = (source = [], criteria = {}, and = false) => {
                 let fun = expr.split(',')[1];
                 fun = fun ? FILTERS[fun] : FILTERS['c'];
                 $source = $source.filter(fun(field, value));
-                $source.forEach($result.saveElement);
+                $source.forEach(record => $result.saveElement(record));
             }
         });
-        result = $result.toJS();
+        result = $result.to();
     }
     return result;
 };
@@ -136,8 +136,10 @@ const _fnTree = (source = [], criteria = {}, level = 1) => {
 };
 
 const _fnCriteria = (source = [], $query = {}) => {
-    if (0 < Object.keys($query.criteria).length) {
-        source = _fnTree(source, $query.criteria, 1);
+    const criteria = Value.clone($query.criteria);
+    Value.valueValid(criteria);
+    if (0 < Object.keys(criteria).length) {
+        source = _fnTree(source, criteria, 1);
         // 去重，过滤重复key的情况
         const result = [];
         const hash = {};

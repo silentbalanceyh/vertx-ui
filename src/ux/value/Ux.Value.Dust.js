@@ -203,7 +203,7 @@ const _childrenByField = (array = [], config = {}) => {
     if (0 < childrenArray.length) {
         childrenArray.forEach(each => {
             each.children = _childrenByField(array, {
-                key, item: each, field, zero, sorter
+                key, item: each, field, zero, sorter,
             });
             normalizeData(each, config);
         });
@@ -211,12 +211,11 @@ const _childrenByField = (array = [], config = {}) => {
     return childrenArray;
 };
 const normalizeData = (each = {}, config = {}) => {
-    const {zero = true, sorter, filters = {}} = config;
+    const {zero = true, sorter} = config;
     if (!zero && 0 === each.children.length) {
         // 是否处理zero信息
         delete each.children;
     } else {
-        // 先执行过滤
         // 再执行排序
         if (sorter) {
             each.children = each.children.sort(Util.sorterAscFn(sorter));

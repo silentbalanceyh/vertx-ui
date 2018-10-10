@@ -14,7 +14,7 @@
                         "filter": "code,name,helpCode",
                         "prefix": "帅选条件"
                     },
-                    "optionJsx.config.from": {
+                    "optionJsx.config.to": {
                         "scroll": {
                             "x": 1200,
                             "y": 200
@@ -52,7 +52,7 @@
                             }
                         ]
                     },
-                    "optionJsx.config.to": {
+                    "optionJsx.config.from": {
                         "scroll": {
                             "x": 1200,
                             "y": 200

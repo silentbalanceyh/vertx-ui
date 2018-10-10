@@ -18,6 +18,7 @@ const _getFilters = (reference, key, value) => {
 const _on2Clear = (reference) => (event) => {
     event.preventDefault();
     const filters = _getFilters(reference, null);
+    reference.setState({filters});
     // 上层
     const ref = Ux.onReference(reference, 1);
     ref.setState({filters});

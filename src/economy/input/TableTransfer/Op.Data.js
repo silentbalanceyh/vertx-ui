@@ -11,21 +11,34 @@ const _getSelectedFilter = (reference, revert = false) => {
 };
 
 const getFrom = (reference, config = {}) => {
-    const {_data = [], shared = [], filters = {}} = reference.state;
+    const {_data = [], shared = []} = reference.state;
     const standard = Ux.clone(_data).filter(_getSelectedFilter(reference));
     const dataArray = DataLabor.getArray(standard);
     shared.forEach(each => dataArray.saveElement(each));
     let data = dataArray.to();
     data = Ux.valueTree(data, {
         ...config.tree,
-        zero: false,
-        filters
+        zero: false
     });
+    // 补充每个分支的数据
     return data;
 };
 const getTo = (reference, config = {}) => {
-    const {_data = []} = reference.state;
+    const {_data = [], filters = {}} = reference.state;
     let data = Ux.clone(_data).filter(_getSelectedFilter(reference, true));
+    // 过滤信息
+    const query = {criteria: filters};
+    data = Ux.aiCriteria(data).query(query);
+    // 补齐带有parentId的数据
+    const formated = DataLabor.getArray(data);
+    const treeData = config.tree;
+    data.forEach(item => {
+        const recordArray = Ux.elementBranch(_data, item[treeData.key],
+            treeData.field, treeData.key);
+        recordArray.forEach(each => formated.saveElement(each));
+    });
+    data = formated.to();
+
     data = Ux.valueTree(data, {
         ...config.tree,
         zero: false
