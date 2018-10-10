@@ -1,17 +1,25 @@
-const _fn2Filter = (reference, item) => () => {
-    const {filters} = reference.state;
+import Ux from 'ux';
 
-};
-const getFrom = (reference, config = {}) => {
-    const {source = []} = reference.props;
-    const {selected = [], _data = []} = reference.state;
+const _getSelectedFilter = (reference, revert = false) => {
+    const {selected = []} = reference.state;
     // 被选择
-    return _data;
+    let keys = selected.map(item => item.key);
+    keys = Ux.immutable(keys);
+    return item => revert ? !keys.contains(item.key) :
+        keys.contains(item.key);
+};
+
+const getFrom = (reference, config = {}) => {
+    const {_data = []} = reference.state;
+    let data = Ux.clone(_data).filter(_getSelectedFilter(reference));
+    data = Ux.valueTree(data, config.tree);
+    return data;
 };
 const getTo = (reference, config = {}) => {
-    const {source = []} = reference.props;
-    const {selected = [], _data = []} = reference.state;
-    return _data;
+    const {_data = []} = reference.state;
+    let data = Ux.clone(_data).filter(_getSelectedFilter(reference, true));
+    data = Ux.valueTree(data, config.tree);
+    return data;
 };
 export default {
     getFrom,

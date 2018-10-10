@@ -24,6 +24,7 @@ const _getTable = (reference, table = [], to) => {
     // 表格配置
     table.pagination = false;
     table.columns = Ux.xtColumn(reference, table.columns);
+    table.className = "web-table-transfer-table";
     // 列专用处理
     table.columns.forEach(column => {
         if (!column.hasOwnProperty('className')) {
