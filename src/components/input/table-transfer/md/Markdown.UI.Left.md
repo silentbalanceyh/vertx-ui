@@ -14,6 +14,15 @@
 
     @zero(Ux.rxEtat(require('./Cab.json'))
         .cab("UI.Left")
+        .connect(state => Ux.dataIn(state)
+            .radial([
+                "item.material"
+            ], true)
+            .to()
+        )
+        .loading(
+            "item.material"
+        )
         .bind(Op)
         .raft(1)
         .form().to()

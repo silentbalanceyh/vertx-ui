@@ -39,7 +39,8 @@ const on2Filter = (reference, key) => (event) => {
 const renderButton = (reference) => {
     return (
         <Button.Group>
-            <Button icon={"filter"} onClick={_on2Click(reference)}/>
+            <Button icon={"filter"} type={"primary"}
+                    onClick={_on2Click(reference)}/>
             <Button icon={"undo"} onClick={_on2Clear(reference, null)}/>
         </Button.Group>
     );

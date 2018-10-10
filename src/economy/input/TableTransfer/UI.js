@@ -23,6 +23,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
+        console.info(this.props, this.state);
         const {fromTable = {}, toTable = {}, config = {}, ...jsx} = this.state;
         // 根据Filter计算双重数据源
         const from = Op.getFrom(this, config, fromTable);

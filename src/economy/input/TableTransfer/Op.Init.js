@@ -32,8 +32,6 @@ const _getTable = (reference, table = [], to) => {
         }
         column.render = _getRender(reference, column, to);
     });
-    // table.onExpand = _getExpand(reference);
-    table.defaultExpandAllRows = true;
     return table;
 };
 const _getRender = (reference, column = [], to = false) => {
