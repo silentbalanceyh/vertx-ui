@@ -6,14 +6,14 @@ const mock = (jsx = {}, reference) => {
     }
 };
 const toConfig = (reference, jsx = {}, fnDatum) => {
-    const {config = {}} = jsx;
+    const {config = {}, ...others} = jsx;
     const {datum, ...rest} = config;
     const source = fnDatum(reference, {datum, ...rest});
     if (config.table) {
         const {table = {}, ...left} = rest;
-        return {source, table, config: left};
+        return {source, table, config: left, ...others};
     } else {
-        return {source, config: rest};
+        return {source, config: rest, ...others};
     }
 };
 export default {
