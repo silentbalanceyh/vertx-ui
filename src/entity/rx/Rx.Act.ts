@@ -51,12 +51,20 @@ class RxAct {
         if (this.reference) {
             const ref = this.executor;
             const {fnView} = this.reference.props;
-            if (fnView) {
-                if (values) {
-                    ref["fnView"] = () => fnView(values);
-                } else {
-                    ref["fnView"] = () => fnView(this.data);
-                }
+            if (U.isFunction(fnView)) {
+                const $data = values ? values : this.data;
+                ref["fnView"] = () => fnView($data);
+            }
+        }
+        return this;
+    }
+
+    tab(tabIndex: Number) {
+        if (this.reference) {
+            const ref = this.executor;
+            const {fnTab} = this.reference.props;
+            if (U.isFunction(fnTab)) {
+                ref['fnTab'] = () => fnTab(tabIndex);
             }
         }
         return this;
@@ -75,17 +83,8 @@ class RxAct {
 
     tree(values: any) {
         if (this.reference) {
-            let treeData: any = {};
-            if (values) {
-                treeData = Ux.pipeTree(this.reference, values, this._deleted);
-            } else if (this.data) {
-                treeData = Ux.pipeTree(
-                    this.reference,
-                    this.data,
-                    this._deleted
-                );
-            }
-            this.redux["grid.tree"] = treeData;
+            const $data = values ? values : this.data;
+            this.redux["grid.tree"] = Ux.pipeTree(this.reference, $data, this._deleted);
         }
         return this;
     }
@@ -161,7 +160,8 @@ class RxAct {
         [
             "fnClear", // 清除数据专用函数
             "fnClose", // 关闭窗口、Tab页专用函数
-            "fnView" // 从添加切换到编辑的专用函数
+            "fnView", // 从添加切换到编辑的专用函数
+            "fnTab", // 切换Tab页专用函数
         ]
             .filter(key => executor.hasOwnProperty(key))
             .forEach(item => executor[item]());

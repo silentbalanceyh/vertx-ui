@@ -13,6 +13,7 @@ const getOptions = (reference) => {
     // 合并child生成子项标题
     if (!child.key) child.key = "key";
     if (!child.value) child.value = "key";
+    if (!child.label) child.label = "label";
     source.forEach(item => {
         if (U.isArray(item.children)) {
             // 有children时才处理
