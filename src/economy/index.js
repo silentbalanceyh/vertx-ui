@@ -1,7 +1,4 @@
 export {default as AddressSelector} from './input/AddressSelector/UI';
-export {default as CheckInput} from './input/CheckInput/UI';
-export {default as CheckedDate} from './input/CheckedDate/UI';
-export {default as TimeRanger} from './input/TimeRanger/UI';
 export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
@@ -40,6 +37,9 @@ export {default as DateVersion} from './input/DateVersion/UI';
 export {default as ChangeEditor} from './input/ChangeEditor/UI';
 export {default as TableEditor} from './input/TableEditor/UI';
 export {default as TableTransfer} from './input/TableTransfer/UI';
+export {default as CheckedInput} from './input/CheckedInput/UI';
+export {default as CheckedDate} from './input/CheckedDate/UI';
+export {default as TimeRanger} from './input/TimeRanger/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as DynamicDialog} from './dialog/DynamicDialog/UI';

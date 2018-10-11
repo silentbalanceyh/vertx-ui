@@ -18,12 +18,15 @@ import _editor_workflow from './editor/workflow/UI';
 import _generated_demo from './generated/demo/UI';
 import _generated_tool from './generated/tool/UI';
 import _input_change$editor from './input/change-editor/UI';
+import _input_checked$date from './input/checked-date/UI';
+import _input_checked$input from './input/checked-input/UI';
 import _input_data$version from './input/data-version/UI';
 import _input_list$selector from './input/list-selector/UI';
 import _input_matrix$editor from './input/matrix-editor/UI';
 import _input_multi$check$box from './input/multi-check-box/UI';
 import _input_table$editor from './input/table-editor/UI';
 import _input_table$transfer from './input/table-transfer/UI';
+import _input_time$ranger from './input/time-ranger/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
@@ -49,12 +52,15 @@ export default {
 	_generated_demo,
 	_generated_tool,
 	_input_change$editor,
+	_input_checked$date,
+	_input_checked$input,
 	_input_data$version,
 	_input_list$selector,
 	_input_matrix$editor,
 	_input_multi$check$box,
 	_input_table$editor,
 	_input_table$transfer,
+	_input_time$ranger,
 	_layout_adjust015,
 	_layout_standard,
 	_login_index,

@@ -1,0 +1,31 @@
+{
+    "_page": {
+        "title": "「交互」DateVersion - 添加"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "approvalDate,是否管理评审,24,,aiCheckedDate",
+                    "optionJsx.config.items": [
+                        "YES,是",
+                        "NO,否"
+                    ],
+                    "optionJsx.config.disabled": "YES",
+                    "optionJsx.format": "YYYY年MM月DD日",
+                    "optionJsx.placeholder": "管理评审时间"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opAdd,添加,$opAdd"
+                    }
+                }
+            ]
+        ]
+    }
+}
