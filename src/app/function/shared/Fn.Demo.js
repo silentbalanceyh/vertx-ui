@@ -36,7 +36,10 @@ const demoJson = (reference, level = 0, demoData = {}) => {
         // 删除active
         delete demoData.language;
         delete demoData.active;
+        Ux.dgDebug(demoData, "Demo的提交数据");
         ref.setState({demoData})
+    } else {
+        console.error("引用未拿到！！！", ref, reference.props);
     }
 };
 

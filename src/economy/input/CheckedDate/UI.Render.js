@@ -35,7 +35,7 @@ const renderDatePicker = (reference = {}) => {
             <DatePicker {...rest} {...attrs}
                         onChange={Op.on2ChangeDate(reference)}/>
         </span>
-    )
+    );
 };
 
 export default {

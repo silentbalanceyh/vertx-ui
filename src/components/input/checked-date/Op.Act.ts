@@ -1,12 +1,13 @@
 import Ux from 'ux';
 import {Fn} from 'app';
+import * as moment from 'moment';
 
 const getNormalized = (values: any = {}) => {
-    if (values.approvalDate.date) {
+    if (values.approvalDate.date &&
+        moment.isMoment(values.approvalDate.date)) {
         values.approvalDate.date =
             values.approvalDate.date.toISOString();
     }
-    Ux.dgDebug(values, "提交数据");
     return values;
 };
 

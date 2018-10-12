@@ -7,6 +7,7 @@ import Ajax from '../../Ux.Ajax';
 import Rdx from '../../fun';
 import Prop from '../../prop';
 import D from '../../monitor';
+import E from '../../Ux.Error';
 
 /**
  * 计算当前提交的模式
@@ -242,7 +243,15 @@ const _executor = (reference, config = {}) => {
 const _executeCode = (reference, config = {}, data) => {
     const {success, failure, mock} = config;
     // 1.只有包含了success过后才会触发回调
-    const fnSuccess = () => U.isFunction(success) ? success(data, mock) : undefined;
+    const fnSuccess = () => {
+        if (U.isFunction(success)) {
+            try {
+                success(data, mock);
+            } catch (error) {
+                E.fxJs(10098, error);
+            }
+        }
+    };
     const fnFailure = (errors) => U.isFunction(failure) ? failure(errors, data) : undefined;
     const fnLoading = () => {
         if (config.reduxSubmit) {
