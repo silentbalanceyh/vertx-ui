@@ -21,9 +21,9 @@ const renderTime = (reference, config = {}, field = "") => {
                         value={targetValue}
                         onChange={Op.on2Change(reference, field)}/>
         </span>
-    )
+    );
 };
 
 export default {
     renderTime
-}
+};
