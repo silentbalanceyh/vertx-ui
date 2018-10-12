@@ -1,11 +1,21 @@
 {
     "_page": {
-        "title": "「交互」DateVersion - 更新"
+        "title": "「交互」CheckedInput - 更新"
     },
     "_form": {
         "window": 1,
         "ui": [
             [
+                {
+                    "metadata": "selectLanguage,选择语言,24,,aiCheckedInput",
+                    "optionJsx.config.items": [
+                        "CN,中文",
+                        "EN,英文",
+                        "JP,日文"
+                    ],
+                    "optionJsx.other.label": "其他语言",
+                    "optionJsx.other.placeholder": "（输入其他）"
+                }
             ],
             [
                 {

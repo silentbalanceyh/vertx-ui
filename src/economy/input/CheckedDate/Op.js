@@ -30,8 +30,13 @@ const calcDisabled = (reference) => {
         return checked === config.disabled;
     } else return false;
 };
+const getDefault = () => ({
+    checked: undefined,
+    date: undefined
+});
 export default {
     on2Change,
     on2ChangeDate,
     calcDisabled,
+    getDefault
 };
