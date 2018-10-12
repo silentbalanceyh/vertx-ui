@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                 &nbsp;&nbsp;-&nbsp;&nbsp;
                 {Rdr.renderTime(this, to, "to")}
             </Input.Group>
-        )
+        );
     }
 }
 
