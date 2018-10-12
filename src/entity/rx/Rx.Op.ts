@@ -2,26 +2,31 @@ import Ux from 'ux';
 import * as U from 'underscore';
 
 const thenCallback = (promise, {
-    isDialog, ref, postDialog, callback, postKey
+    isDialog, isWindow, isReduxSubmit,
+    ref, postDialog, callback, postKey
 }, resolve) => {
     // 这里的promise一定是一个可执行函数，并且返回一个完整的Promise，Delay执行
     const executed = promise();
     Ux.E.fxTerminal(!(executed instanceof Promise), 10088, executed);
     if (executed instanceof Promise) {
         return executed.then(data => {
-            if (isDialog) {
-                postDialog(ref, postKey, () => {
-                    Ux.rdxSubmitting(ref, false);
-                    let ret = callback(data);
-                    if (!ret) ret = {};
-                    resolve(ret);
-                }, data)
-            } else {
-                postDialog(ref, postKey);
-                Ux.rdxSubmitting(ref, false);
+            const fnCallback = () => {
+                if (isReduxSubmit) Ux.rdxSubmitting(ref, false);
                 let ret = callback(data);
                 if (!ret) ret = {};
                 resolve(ret);
+            };
+            // isWindow使用核心模式
+            if (isWindow) {
+                // 如果出现了postDialog的参数
+                if (isDialog) {
+                    postDialog(ref, postKey, fnCallback, data)
+                } else {
+                    postDialog(ref, postKey);
+                    fnCallback();
+                }
+            } else {
+                fnCallback();
             }
         });
     }
@@ -32,8 +37,10 @@ class RxOp {
     private _success;
     private _confirmKey;
     private _postKey;
-    private isPromiseReturn: Boolean = true;
+    private isPromiseReturn: Boolean = false; // 默认不使用Promise的Reject流程
     private isDialog: Boolean = true;
+    private isWindowUse: Boolean = false; // 默认不使用窗口
+    private isReduxSubmit: Boolean = true; // 启用Redux提交
     private reference;
 
     private constructor(reference: any) {
@@ -44,8 +51,18 @@ class RxOp {
         return new RxOp(reference);
     }
 
+    submitting(on: Boolean = true) {
+        this.isReduxSubmit = on;
+        return this;
+    }
+
     direct() {
         this.isPromiseReturn = false;
+        return this;
+    }
+
+    reject() {
+        this.isPromiseReturn = true;
         return this;
     }
 
@@ -79,6 +96,7 @@ class RxOp {
     }
 
     dialog(key) {
+        this.isWindowUse = true;
         if (key) {
             this._postKey = key;
             this.isDialog = true;
@@ -87,6 +105,7 @@ class RxOp {
     }
 
     message(key) {
+        this.isWindowUse = true;
         if (key) {
             this._postKey = key;
             this.isDialog = false;
@@ -100,8 +119,9 @@ class RxOp {
         const confirmKey = this._confirmKey;
         const promise = this._success;
         const isPromiseReturn = this.isPromiseReturn;
+        const isReduxSubmit = this.isReduxSubmit;
         // 防重复提交
-        Ux.rdxSubmitting(ref, true);
+        if (isReduxSubmit) Ux.rdxSubmitting(ref, true);
         // 验证处理
         for (let idx = 0; idx < validation.length; idx++) {
             const item = validation[idx];
@@ -111,7 +131,11 @@ class RxOp {
                     return Ux.rdxReject(message);
                 } else {
                     // 暂时只在Reject部分处理isPromiseReturn
-                    Ux.showDialog(ref, item.key, () => Ux.rdxSubmitting(ref, false));
+                    Ux.showDialog(ref, item.key, () => {
+                        if (isReduxSubmit) {
+                            Ux.rdxSubmitting(ref, false);
+                        }
+                    });
                     return;
                 }
             }
@@ -119,23 +143,24 @@ class RxOp {
         const postDialog = this.isDialog ? Ux.showDialog : Ux.showMessage;
         const isDialog = this.isDialog;
         const postKey = this._postKey;
+        const isWindow = this.isWindowUse;
         // 验证成功，是否执行confirm流程
         if (confirmKey) {
             return new Promise((resolve) => Ux.showDialog(ref, confirmKey,
                 () => thenCallback(promise, {
-                    isDialog,
-                    ref,
-                    postDialog,
-                    callback,
-                    postKey
+                    postDialog, postKey,
+                    isDialog, isWindow, isReduxSubmit,
+                    ref, callback
                 }, resolve), {},
                 () => {
-                    Ux.rdxSubmitting(ref, false);
+                    if (isReduxSubmit) Ux.rdxSubmitting(ref, false);
                     resolve({})
                 }));
         } else {
             return new Promise((resolve) => thenCallback(promise, {
-                isDialog, ref, postDialog, callback, postKey
+                postDialog, postKey,
+                isDialog, isWindow, isReduxSubmit,
+                ref, callback,
             }, resolve));
         }
     }

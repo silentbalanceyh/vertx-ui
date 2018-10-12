@@ -51,12 +51,20 @@ class RxAct {
         if (this.reference) {
             const ref = this.executor;
             const {fnView} = this.reference.props;
-            if (fnView) {
-                if (values) {
-                    ref["fnView"] = () => fnView(values);
-                } else {
-                    ref["fnView"] = () => fnView(this.data);
-                }
+            if (U.isFunction(fnView)) {
+                const $data = values ? values : this.data;
+                ref["fnView"] = () => fnView($data);
+            }
+        }
+        return this;
+    }
+
+    tab(tabIndex: Number) {
+        if (this.reference) {
+            const ref = this.executor;
+            const {fnTab} = this.reference.props;
+            if (U.isFunction(fnTab)) {
+                ref['fnTab'] = () => fnTab(tabIndex);
             }
         }
         return this;
@@ -75,17 +83,8 @@ class RxAct {
 
     tree(values: any) {
         if (this.reference) {
-            let treeData: any = {};
-            if (values) {
-                treeData = Ux.pipeTree(this.reference, values, this._deleted);
-            } else if (this.data) {
-                treeData = Ux.pipeTree(
-                    this.reference,
-                    this.data,
-                    this._deleted
-                );
-            }
-            this.redux["grid.tree"] = treeData;
+            const $data = values ? values : this.data;
+            this.redux["grid.tree"] = Ux.pipeTree(this.reference, $data, this._deleted);
         }
         return this;
     }
@@ -133,40 +132,45 @@ class RxAct {
     }
 
     to(callback) {
-        // 是否包含执行方法
-        const executor: any = this.executor;
-        [
-            "fnReset", // 重置表单专用函数
-            "fnItems" // 重置list.items专用节点数据
-        ]
-            .filter(key => executor.hasOwnProperty(key))
-            .forEach(item => executor[item]());
-        // 是否有更新的状态
-        if (this.reference) {
-            // 专用处理状态中的提交
-            let etat = {
-                submitting: false,
-                $loading: false
-            };
-            if (0 < Object.keys(this.state).length) {
-                Object.assign(etat, this.state);
+        try {
+            // 是否包含执行方法
+            const executor: any = this.executor;
+            [
+                "fnReset", // 重置表单专用函数
+                "fnItems" // 重置list.items专用节点数据
+            ].filter(key => executor.hasOwnProperty(key))
+                .forEach(item => executor[item]());
+            // 是否有更新的状态
+            if (this.reference) {
+                // 专用处理状态中的提交
+                let etat = {
+                    submitting: false,
+                    $loading: false
+                };
+                if (0 < Object.keys(this.state).length) {
+                    Object.assign(etat, this.state);
+                }
+                // submitting = false
+                this.reference.setState(etat);
+                // 有状态则书写Redux状态树
+                if (!Ux.isEmpty(this.redux)) {
+                    Ux.writeTree(this.reference, this.redux);
+                }
             }
-            // submitting = false
-            this.reference.setState(etat);
-            // 有状态则书写Redux状态树
-            if (!Ux.isEmpty(this.redux)) {
-                Ux.writeTree(this.reference, this.redux);
+            [
+                "fnClear", // 清除数据专用函数
+                "fnClose", // 关闭窗口、Tab页专用函数
+                "fnView", // 从添加切换到编辑的专用函数
+                "fnTab", // 切换Tab页专用函数
+            ].filter(key => executor.hasOwnProperty(key))
+                .forEach(item => executor[item]());
+            if (U.isFunction(callback)) {
+                callback(this.data);
             }
-        }
-        [
-            "fnClear", // 清除数据专用函数
-            "fnClose", // 关闭窗口、Tab页专用函数
-            "fnView" // 从添加切换到编辑的专用函数
-        ]
-            .filter(key => executor.hasOwnProperty(key))
-            .forEach(item => executor[item]());
-        if (U.isFunction(callback)) {
-            callback();
+        } catch (error) {
+            // 从Error中读取
+            Ux.E.fxJs(10098, error);
+            throw error;
         }
     }
 }

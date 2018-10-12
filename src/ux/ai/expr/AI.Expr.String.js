@@ -1,5 +1,4 @@
 import U from 'underscore';
-import Immutable from 'immutable';
 import ExprData from './AI.Expr';
 import ExprValue from './AI.Expr.Value';
 import Value from '../../Ux.Value';
@@ -23,7 +22,7 @@ const parseItem = (kvs = [], key) => {
             ExprValue.applyKv(item, config, kvs);
         }
     } else {
-        item = Immutable.fromJS(kvs).toJS();
+        item = Value.clone(kvs);
     }
     return item;
 };
@@ -188,6 +187,7 @@ const aiMetaOption = (item = {}) => {
     if (item.metadata) {
         let each = parseItem(item.metadata, "option");
         if (item.items) each.items = aiExprOption(item.items);
+        if (item.children) each.children = aiExprOption(item.children);
         item = each;
     }
     return item;

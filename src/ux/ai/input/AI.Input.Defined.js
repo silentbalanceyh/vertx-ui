@@ -1,5 +1,7 @@
 import {
     ChangeEditor,
+    CheckedDate,
+    CheckedInput,
     DateVersion,
     FileUpload,
     ListSelector,
@@ -16,10 +18,6 @@ const aiMagic = (reference, jsx = {}) => {
     const {config = {}, ...rest} = jsx;
     config.items = RxAnt.toOptions(reference, config);
     return (<MagicView {...rest} config={config} reference={reference}/>);
-};
-const aiTimeRanger = (reference, jsx = {}, onChange) => {
-    RxAnt.onChange(jsx, onChange);
-    return (<TimeRanger {...jsx}/>);
 };
 const aiFileUpload = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
@@ -53,6 +51,20 @@ const aiTableTransfer = (reference, jsx = {}) => {
     const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toDatum);
     return (<TableTransfer {...attrs} reference={reference}/>);
 };
+const aiTimeRanger = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<TimeRanger {...jsx}/>);
+};
+const aiCheckedDate = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
+    return (<CheckedDate {...attrs}/>);
+};
+const aiCheckedInput = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
+    return (<CheckedInput {...attrs}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -69,5 +81,7 @@ export default {
     aiChangeEditor, // 变更输入框
     aiMultiCheckBox, // 子母多选框
     aiTableTransfer, // 表格穿梭框
-    aiTableEditor, // 表格编辑器
+    aiTableEditor, // 表格编辑器,
+    aiCheckedDate, // 选择框 + 时间
+    aiCheckedInput, // 选择框 + 输入框
 };

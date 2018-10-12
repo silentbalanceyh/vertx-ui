@@ -13,6 +13,7 @@ class Component extends React.PureComponent {
         state.source = Op.getOptions(this);
         const {config = {}} = props;
         state.prefix = config.prefix;
+        state.horizon = config.horizon;
         this.state = state;
     }
 
@@ -25,7 +26,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {prefix = "", source = []} = this.state;
+        const {prefix = "", source = [], horizon = false} = this.state;
         const {value = {}} = this.props;
         const $values = Ux.immutable(Object.keys(value));
         return (
@@ -39,6 +40,7 @@ class Component extends React.PureComponent {
                         {Rdr.renderChildren(this, prefix, {
                             ...item,
                             $value: value[item.key],  // 传入子节,
+                            horizon: horizon,     // 垂直排版还是水平
                             disabled: !$values.contains(item.key)
                         })}
                     </Row>

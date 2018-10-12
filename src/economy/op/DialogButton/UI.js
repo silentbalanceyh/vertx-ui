@@ -18,9 +18,12 @@ class Component extends React.PureComponent {
             } = this.state;
             // 按钮专用处理
             const {text, onClick, ...rest} = button;
+            // 是否禁用
+            const {$disabled = false} = this.props;
+            const attrs = {disabled: $disabled};
             return (
                 <span>
-                    <Button {...rest} onClick={onClick(button)}>
+                    <Button {...rest} onClick={onClick(button)} {...attrs}>
                         {text ? text : ""}
                     </Button>
                     {render(this)}

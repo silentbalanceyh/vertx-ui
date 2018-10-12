@@ -12,6 +12,13 @@
             },
             {
                 "source": "P",
+                "name": "$disabled",
+                "comment": "是否禁用当前菜单——该配置仅针对主菜单。",
+                "type": "Boolean",
+                "value": "false"
+            },
+            {
+                "source": "P",
                 "name": "$button",
                 "comment": "下拉主菜单的基本信息，主要是文字和图标。",
                 "type": "String",
@@ -82,6 +89,10 @@
                         {
                             "name": "$mode",
                             "color": "#e23c39"
+                        },
+                        {
+                            "name": "$disabled",
+                            "color": "#33af43"
                         },
                         {
                             "name": "$button",

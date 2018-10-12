@@ -14,6 +14,9 @@ class Component extends React.PureComponent {
             } = reference.state;
             button.icon = "down";
             const {text, icon, onClick, ...rest} = button;
+            // 是否禁用
+            const {$disabled = false} = this.props;
+            const attrs = {disabled: $disabled};
             return (
                 <span>
                     <Dropdown overlay={
@@ -25,7 +28,7 @@ class Component extends React.PureComponent {
                                     </Menu.Item>
                                 ))}
                         </Menu>
-                    }>
+                    } {...attrs}>
                         <Button {...rest}>
                             {text ? text : ""}&nbsp;<Icon type={icon}/>
                         </Button>

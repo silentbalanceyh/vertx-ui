@@ -37,6 +37,9 @@ const xtInitObject = (props = {}) => {
     const value = props.value;
     if (value) {
         values.data = value;
+    } else {
+        // 默认对象
+        values.data = {};
     }
     return values;
 };

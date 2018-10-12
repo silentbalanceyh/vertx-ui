@@ -7,6 +7,7 @@ import Ajax from '../../Ux.Ajax';
 import Rdx from '../../fun';
 import Prop from '../../prop';
 import D from '../../monitor';
+import E from '../../Ux.Error';
 
 /**
  * 计算当前提交的模式
@@ -146,13 +147,14 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
          * @type {*}
          */
         const fnVerify = _getValidate(metadata);
+        const reduxSubmit = metadata.reduxSubmit;
         /**
          * 如果包含第二参，则直接调用form相关信息
          */
         let promise;
         if (U.isFunction(ambiguity.preventDefault)) {
             // ==> ：验证之前防重复提交处理
-            Rdx.rdxSubmitting(reference, true);
+            if (reduxSubmit) Rdx.rdxSubmitting(reference, true);
             // event模式
             const {form} = reference.props;
             promise = _getEvented(fnVerify, form);
@@ -181,14 +183,16 @@ const ai2Event = (reference, fnSuccess, fnFailure, metadata = {}) =>
             return _executor(reference, {
                 success: fnSuccess,
                 failure: fnFailure,
-                promise: !!metadata.promise,
                 mock: mockData,
                 mode,
-                data: params
+                data: params,
+                // Metadata
+                promise: !!metadata.promise,
+                reduxSubmit,
             });
         }).catch(error => {
             // <==：关闭防重复提交
-            Rdx.rdxSubmitting(reference, false);
+            if (reduxSubmit) Rdx.rdxSubmitting(reference, false);
             if (U.isFunction(fnFailure)) {
                 /**
                  * 第一参为验证之前的错误信息
@@ -239,9 +243,21 @@ const _executor = (reference, config = {}) => {
 const _executeCode = (reference, config = {}, data) => {
     const {success, failure, mock} = config;
     // 1.只有包含了success过后才会触发回调
-    const fnSuccess = () => U.isFunction(success) ? success(data, mock) : undefined;
+    const fnSuccess = () => {
+        if (U.isFunction(success)) {
+            try {
+                success(data, mock);
+            } catch (error) {
+                E.fxJs(10098, error);
+            }
+        }
+    };
     const fnFailure = (errors) => U.isFunction(failure) ? failure(errors, data) : undefined;
-    const fnLoading = () => Rdx.rdxSubmitting(reference, false);
+    const fnLoading = () => {
+        if (config.reduxSubmit) {
+            Rdx.rdxSubmitting(reference, false);
+        }
+    };
     return Ajax.ajaxUniform(fnSuccess, fnFailure, fnLoading);
 };
 export default {

@@ -145,16 +145,22 @@ const _isLock = (reference, options = {}) => {
      * @type {boolean}
      */
     let isLock = false;
+
     if (options["op.delete.condition"]) {
         isLock = Boolean(options["op.delete.condition"]);
     }
+
     if (isLock) {
         // 读取初始值
         const {record, tabs = {}} = reference.state;
-        const {activeKey} = tabs;
-        const $inited = record[activeKey] ? record[activeKey] : {};
-        isLock = $inited ? !!$inited.lock : false;
+        if (record && tabs) {
+			// 当record和tabs不为空或空对象时才读取初始值
+			const {activeKey} = tabs;
+			const $inited = record[activeKey] ? record[activeKey] : {};
+			isLock = $inited ? $inited.lock : false;
+		}
     }
+
     return isLock;
 };
 

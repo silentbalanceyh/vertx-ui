@@ -12,9 +12,16 @@
             {
                 "source": "P",
                 "name": "$content",
-                "comment": "子组件，这种模式下是以属性传递，但children优先",
+                "comment": "子组件，这种模式下是以属性传递，但children优先。",
                 "type": "React.Component",
                 "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$disabled",
+                "comment": "是否禁用当前按钮。",
+                "type": "Boolean",
+                "value": "false"
             },
             {
                 "source": "E",
@@ -112,6 +119,10 @@
                         },
                         {
                             "name": "$content",
+                            "color": "#33af43"
+                        },
+                        {
+                            "name": "$disabled",
                             "color": "#33af43"
                         },
                         {

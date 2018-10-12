@@ -6,6 +6,7 @@ import Dialog from "../Ux.Dialog";
 import Op from '../op';
 
 const rdxSubmitting = (reference, loading = true) => {
+    // 写Redux中的status.submitting的前提是reference.props中包含了$submitting变量
     const state = {};
     state[`status.submitting`] = {loading};
     const $state = Immutable.fromJS(state).toJS();

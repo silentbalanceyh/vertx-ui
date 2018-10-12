@@ -1,0 +1,32 @@
+{
+    "_page": {
+        "title": "「交互」CheckedDate - 更新"
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                {
+                    "metadata": "approvalDate,是否管理评审,24,,aiCheckedDate",
+                    "optionJsx.config.items": [
+                        "YES,是",
+                        "NO,否"
+                    ],
+                    "optionJsx.config.disabled": "NO",
+                    "optionJsx.date.label": "评审时间",
+                    "optionJsx.date.format": "YYYY年MM月DD日",
+                    "optionJsx.date.placeholder": "请选择"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opSave,保存,$opSave"
+                    }
+                }
+            ]
+        ]
+    }
+}
