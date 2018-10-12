@@ -25,7 +25,6 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        console.info(this.props, this.state);
         return (
             <Input.Group compact>
                 {Rdr.renderCheckBox(this)}
