@@ -4,7 +4,7 @@ import {DatePicker, Radio} from 'antd';
 import Op from './Op';
 import moment from 'moment';
 
-const renderCheckBox = (reference = {}) => {
+const renderRadioBox = (reference = {}) => {
     const {source = [], value = {}} = reference.props;
     return (
         <Radio.Group className={"web-checked-radio"}
@@ -28,6 +28,8 @@ const renderDatePicker = (reference = {}) => {
         } else {
             attrs.value = moment(value.date);
         }
+    } else {
+        attrs.value = null;
     }
     return (
         <span className={"web-checked-radio"}>
@@ -39,6 +41,6 @@ const renderDatePicker = (reference = {}) => {
 };
 
 export default {
-    renderCheckBox,
+    renderRadioBox,
     renderDatePicker
 };
