@@ -1,0 +1,34 @@
+{
+    "_page": {
+        "title": "「交互」TimeRanger - 添加"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "duration,区间,24,,aiTimeRanger",
+                    "optionJsx.config.from": {
+                        "label": "上午",
+                        "format": "HH:mm",
+                        "placeholder": "选择"
+                    },
+                    "optionJsx.config.to": {
+                        "label": "下午",
+                        "format": "HH:mm",
+                        "placeholder": "选择"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opAdd,添加,$opAdd"
+                    }
+                }
+            ]
+        ]
+    }
+}

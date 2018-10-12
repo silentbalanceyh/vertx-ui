@@ -30,7 +30,7 @@
                 "交互类：DateVersion,/input/data-version,true",
                 "交互类：CheckedDate,/input/checked-date,true",
                 "交互类：CheckInput,/input/checked-input,true",
-                "交互类：TimeRanger,/input/time-ranger",
+                "交互类：TimeRanger,/input/time-ranger,true",
                 "交互类「北二」：MatrixEditor,/input/matrix-editor",
                 "函数类「Pure容器」：Ux.auiTable,/control/aui-table",
                 "函数类「Pure容器」：Ux.auiTab,/control/aui-tab",
