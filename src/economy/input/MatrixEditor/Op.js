@@ -21,6 +21,7 @@ const initData = (reference) => {
         }
         data.push(dataItem);
     });
+    console.info(data);
     return {data};
 };
 const initTable = (reference) => {

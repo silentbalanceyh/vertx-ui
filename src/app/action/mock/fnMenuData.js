@@ -29,10 +29,17 @@ export default [
     "DynamicDialog,desktop,zui.control.dynamic-dialog,/control/dynamic-dialog,4,zui.control.assist",
     // 交互类
     "Input类,interation,zui.control.interation,EXPAND,5,zui.control",
-    "DateVersion,form,zui.control.data-version,/input/data-version,1,zui.control.interation",
-    "ListSelector,form,zui.control.list-selector,/input/list-selector,2,zui.control.interation",
-    "TableEditor,form,zui.control.table-editor,/input/table-editor,3,zui.control.interation",
-    "ChangeEditor,form,zui.control.change-editor,/input/change-editor,4,zui.control.interation",
+    "ListSelector,form,zui.control.list-selector,/input/list-selector,1,zui.control.interation",
+    "TableEditor,form,zui.control.table-editor,/input/table-editor,2,zui.control.interation",
+    "TableTransfer,form,zui.control.table-transfer,/input/table-transfer,3,zui.control.interation",
+    "AddressSelector,form,zui.control.address-selector,/input/address-selector,4,zui.control.interation",
+    "MultiCheckBox,form,zui.control.multi-check-box,/input/multi-check-box,5,zui.control.interation",
+    "ChangeEditor,form,zui.control.change-editor,/input/change-editor,6,zui.control.interation",
+    "DateVersion,form,zui.control.data-version,/input/data-version,7,zui.control.interation",
+    "CheckedDate,form,zui.control.checked-date,/input/checked-date,8,zui.control.interation",
+    "CheckedInput,form,zui.control.checked-input,/input/checked-input,9,zui.control.interation",
+    "TimeRanger,form,zui.control.time-ranger,/input/time-ranger,10,zui.control.interation",
+    "MatrixEditor,form,zui.control.matrix-editor,/input/matrix-editor,11,zui.control.interation",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用
