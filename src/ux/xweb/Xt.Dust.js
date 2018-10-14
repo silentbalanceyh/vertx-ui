@@ -64,10 +64,10 @@ const xtReset = (reference, defaultValue = {}) => {
     }
 };
 const xtResetData = (reference, data = {}) => {
-    const value = this.props.value;
+    const value = reference.props.value;
     if (!value) {
         reference.setState({data});
-        Ux.xtChange(this, {}, true);
+        Ux.xtChange(reference, {}, true);
     }
 };
 const xtPrevious = (reference) => {
