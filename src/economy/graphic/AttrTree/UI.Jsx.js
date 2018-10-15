@@ -50,7 +50,7 @@ const renderComment = (icon, type) => {
                         <Icon type={"info-circle"} style={{
                             fontSize: 16,
                             color: item.color
-                        }}/>&nbsp;&nbsp;{item.text}
+                        }}/>&nbsp;&nbsp;{item.text} - {item.color}
                     </div>
                 ))}
             </Collapse.Panel>
@@ -62,7 +62,7 @@ const renderComment = (icon, type) => {
                         <Icon type={item.icon} style={{
                             fontSize: 16,
                             color: item.color
-                        }}/>&nbsp;&nbsp;{item.text}
+                        }}/>&nbsp;&nbsp;{item.text} - {item.color}
                     </div>
                 ))}
             </Collapse.Panel>

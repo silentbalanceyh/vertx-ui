@@ -1,24 +1,25 @@
-.matrix-editor-label {
-    width: 120px !important;
-    text-align: center;
-}
 
 .web-table-editor {
-    table {
-        padding: 0;
+    .ant-btn-group {
+        button {
+            margin-right: 0 !important;
+        }
     }
-    .web-matrix {
-        &-column {
-            width: 25%;
+    .ant-table {
+        table {
+            padding: 0;
+            td {
+                padding: 6px 12px !important;
+            }
+            th {
+                padding: 12px !important;
+            }
+            input {
+                min-height: 32px;
+            }
         }
-        &-10 {
-            width: 10%;
-        }
-        &-15 {
-            width: 15%;
-        }
-        &-8 {
-            width: 8%;
-        }
+    }
+    .ant-select-selection {
+        min-width: 200px !important;
     }
 }

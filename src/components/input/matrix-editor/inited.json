@@ -1,2 +1,26 @@
 {
+    "cert": [
+        {
+            "key": "pointer",
+            "comment": "aaa",
+            "active": "true"
+        },
+        {
+            "key": "goods",
+            "comment": "bbb",
+            "active": "false"
+        },
+        {
+            "key": "money",
+            "comment": "ccc",
+            "active": "true"
+        },
+        {
+            "key": "desc",
+            "comment": "ddd",
+            "active": "false"
+        }
+    ],
+    "language": "cn",
+    "active": false
 }

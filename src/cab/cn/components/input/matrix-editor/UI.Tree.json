@@ -1,10 +1,120 @@
 {
     "_configuration": {
-        "code": "DateVersion",
+        "code": "MatrixEditor",
         "data": [
+            {
+                "source": "P",
+                "name": "config",
+                "comment": "配置在Form中的optionJsx中的config节点，为一个对象。",
+                "type": "Object",
+                "required": true,
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "config",
+                "option": "items",
+                "comment": "「静态配置」根据静态配置的 Json 数据渲染当前编辑器的行。",
+                "type": "Array",
+                "value": "[]"
+            },
+            {
+                "source": "P",
+                "name": "config",
+                "option": "datum",
+                "comment": "「动态配置」根据数据源渲染当前编辑器的行。",
+                "type": "Array",
+                "value": "[]"
+            },
+            {
+                "source": "P",
+                "name": "source",
+                "comment": "用于渲染当前表格的基础数据，构造Matrix的基础。",
+                "type": "Array",
+                "required": true,
+                "value": "[]"
+            },
+            {
+                "source": "P",
+                "name": "table",
+                "comment": "渲染表格专用配置信息。",
+                "type": "Object",
+                "required": true,
+                "value": "{}"
+            },
+            {
+                "source": "P",
+                "name": "table",
+                "option": "columns",
+                "comment": "当前渲染表格的列基本信息，用法和 TableEditor 一致。",
+                "type": "Array",
+                "required": true,
+                "value": "[]"
+            }
         ],
-        "fit": "cc",
         "items": {
+            "name": "MatrixEditor组件",
+            "color": "#0099CC",
+            "children": [
+                {
+                    "name": "props",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "config",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "items",
+                                    "color": "#33af43"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "source",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "table",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "columns",
+                                    "color": "#e23c39"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "state",
+                    "color": "#09c",
+                    "children": [
+                        {
+                            "name": "data",
+                            "color": "#e23c39"
+                        },
+                        {
+                            "name": "table",
+                            "color": "#e23c39",
+                            "children": [
+                                {
+                                    "name": "scroll",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "pagination",
+                                    "color": "#ff8626"
+                                },
+                                {
+                                    "name": "columns",
+                                    "color": "#ff8626"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         },
         "layout": {
             "hgap": 90,

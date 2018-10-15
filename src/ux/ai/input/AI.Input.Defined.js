@@ -6,6 +6,7 @@ import {
     FileUpload,
     ListSelector,
     MagicView,
+    MatrixEditor,
     MultiCheckBox,
     TableEditor,
     TableTransfer,
@@ -65,6 +66,11 @@ const aiCheckedInput = (reference, jsx = {}) => {
     const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
     return (<CheckedInput {...attrs}/>);
 };
+const aiMatrixEditor = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
+    return (<MatrixEditor {...attrs}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -81,7 +87,8 @@ export default {
     aiChangeEditor, // 变更输入框
     aiMultiCheckBox, // 子母多选框
     aiTableTransfer, // 表格穿梭框
-    aiTableEditor, // 表格编辑器,
+    aiTableEditor, // 表格编辑器「固定行不固定列」,
+    aiMatrixEditor, // 矩阵编辑器「固定行并且固定列」
     aiCheckedDate, // 选择框 + 时间
     aiCheckedInput, // 选择框 + 输入框
 };

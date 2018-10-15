@@ -1,23 +1,38 @@
 import React from 'react';
 import './Cab.less';
-import {Input, Table} from 'antd';
 import Ux from 'ux';
+import Op from './Op';
+import {Input, Table} from "antd";
 
 class Component extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = Ux.jemInit(this, props.config, true);
+        // data专用：MatrixEditor是固定行
+        const state = Op.initData(this);
+        // columns专用
+        state.table = Op.initTable(this);
+        this.state = state;
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        Ux.xtUnsafe(this, nextProps);
+    }
+
+    componentDidUpdate(prevProps) {
+        Ux.xtResetData(this, Op.getDefault(this));
     }
 
     render() {
-        const {config = {}, $render, ...jsx} = this.props;
-        const {value, ...rest} = jsx;
-        config.columns = Ux.jemColumn(this, config.columns, jsx, $render);
-        const source = Ux.jctData(this);
+        console.info(this.props, this.state);
+        const {table = {}, data = []} = this.state ? this.state : {};
+        // 配置处理
+        table.pagination = false;
+        table.className = "web-table-editor";
+        // 数据本身
         return (
-            <Input.Group {...rest}>
-                <Table columns={config.columns} className={"web-table-editor"}
-                       pagination={false} dataSource={source}/>
+            <Input.Group>
+                <Table {...table}
+                       dataSource={data}/>
             </Input.Group>
         );
     }

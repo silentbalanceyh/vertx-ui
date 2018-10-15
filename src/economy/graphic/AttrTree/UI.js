@@ -32,10 +32,10 @@ class Component extends React.PureComponent {
             <div>
                 {Jsx.renderCode($name)}
                 <Row>
-                    <Col span={3}>
+                    <Col span={4}>
                         {Jsx.renderComment(icon, type)}
                     </Col>
-                    <Col span={21}>
+                    <Col span={20}>
                         <div id={id}/>
                     </Col>
                 </Row>

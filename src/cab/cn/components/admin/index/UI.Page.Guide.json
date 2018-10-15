@@ -31,7 +31,7 @@
                 "交互类：CheckedDate,/input/checked-date,true",
                 "交互类：CheckInput,/input/checked-input,true",
                 "交互类：TimeRanger,/input/time-ranger,true",
-                "交互类「北二」：MatrixEditor,/input/matrix-editor",
+                "交互类：MatrixEditor,/input/matrix-editor,true",
                 "函数类「Pure容器」：Ux.auiTable,/control/aui-table",
                 "函数类「Pure容器」：Ux.auiTab,/control/aui-tab",
                 "函数类「Pure容器」：Ux.aiCollapse,/control/ai-collapse",
