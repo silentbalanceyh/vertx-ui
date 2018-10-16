@@ -4,8 +4,11 @@ import E from '../Ux.Error';
 const ajaxFun = {
     get: Ajax.ajaxGet,
     post: Ajax.ajaxPost,
+	fetch: Ajax.ajaxFetch,
+	push: Ajax.ajaxPush,
     delete: Ajax.ajaxDelete
 };
+
 /**
  * 二义性验证专用异步验证函数，返回值为true或false
  * @method asyncTrue

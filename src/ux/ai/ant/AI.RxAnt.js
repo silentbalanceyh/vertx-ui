@@ -11,6 +11,7 @@ class RxAnt {
     static onAddonAfter = Pure.addonAfter;
     static onChange = Pure.onChange;
     static onSelect = Pure.onSelect;
+    static onMultiple = Pure.multiple;
     static onFromTo = Complex.fromTo;
     // 特殊
     static toParsed = Datum.parseExpr;

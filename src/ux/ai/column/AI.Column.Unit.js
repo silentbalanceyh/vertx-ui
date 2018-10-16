@@ -84,7 +84,7 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) =>
     };
     config.onChange = Xt.xt2ChangeUnit(reference, params);
     const {items = [], ...rest} = config;
-    return AiPure.aiInputRadios(items, {...rest, value: String(text)});
+    return AiPure.aiInputRadio(items, {...rest, value: String(text)});
 };
 
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {

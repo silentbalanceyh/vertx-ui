@@ -15,6 +15,11 @@ const prefix = (jsx = {}) => {
         Aid.applyIcon(jsx, 'prefix');
     }
 };
+const multiple = (jsx = {}) => {
+    if (!jsx.multiple) {
+        jsx.multiple = false;
+    }
+};
 const placeholder = (jsx = {}) => {
     if (jsx.readOnly) {
         delete jsx.placeholder;
@@ -40,6 +45,7 @@ export default {
     prefix,
     placeholder,
     addonAfter,
+    multiple,
     onChange,
     onSelect,
 };

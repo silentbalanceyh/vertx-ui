@@ -56,13 +56,16 @@ const ajaxHeader = (secure = false) => {
     headers.append(Cv.HTTP11.ACCEPT, Cv.MIMES.JSON);
     headers.append(Cv.HTTP11.CONTENT_TYPE, Cv.MIMES.JSON);
     // 处理Authorization
+    ajaxSecure(headers, secure);
+    return headers;
+};
+const ajaxSecure = (headers = {}, secure = false) => {
     if (secure) {
         const token = Sign.token();
         E.fxTerminal(!token, 10065, token);
         headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
     ajaxXSRF(headers);
-    return headers;
 };
 /**
  * Ajax中的特殊参数处理器，如果包含了$body字段值，则将该值当做可处理的参数处理，
@@ -224,16 +227,38 @@ const _ajaxOptions = (method, headers) => {
  * @param method HTTP方法
  * @param secure 是否安全模式
  */
-const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData) => {
+const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, mockData, options = {}) => {
     const $params = Immutable.fromJS(params).toJS();
     const api = `${Cv['ENDPOINT']}${uri}`;
     _logAjax(api, method, params, mockData);
-    const headers = ajaxHeader(secure);
+    const headers = ajaxHeader(secure, options);
     const request = new Request(api, {
         ..._ajaxOptions(method, headers),
         body: ajaxParams(params)
     });
     return ajaxResponse(request, mockData, $params);
+};
+/**
+ * 上传专用方法
+ * @param uri
+ * @param file
+ * @param mockData
+ * @returns {Promise<Response>}
+ */
+const ajaxUpload = (uri, file, mockData) => {
+    // 构造MultiPart
+    const fileData = new FormData();
+    fileData.append('file', file);
+    // 构造Api和参数
+    const api = `${Cv['ENDPOINT']}${uri}`;
+    _logAjax(api, "POST", fileData, mockData);
+    const headers = new Headers();
+    ajaxSecure(headers, true);
+    const request = new Request(api, {
+        ..._ajaxOptions("POST", headers),
+        body: fileData
+    });
+    return ajaxResponse(request, mockData, fileData);
 };
 /**
  * 构造微服务路径专用
@@ -289,6 +314,8 @@ export default {
     ajaxUniform,
     // 特殊方法读取当前想对路径
     ajaxResource,
+    // 上传
+    ajaxUpload,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch

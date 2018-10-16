@@ -1,10 +1,11 @@
-import {Breadcrumb, Checkbox, Collapse, Menu, Radio, Select, Steps, Tabs} from "antd";
+import {Breadcrumb, Collapse, Menu, Steps, Tabs} from "antd";
 import {ContextMenu, MenuItem} from "react-contextmenu";
 import React from "react";
 import {Link} from "react-router-dom";
 import Ux from "ux";
 import U from 'underscore';
 import _Icon from "../util/Ux.Icon";
+import PureInput from './pure';
 
 const SubMenu = Menu.SubMenu;
 
@@ -81,36 +82,6 @@ const aiCollapse = (items = [], rest = {}, ...children) => (
         ))}
     </Collapse>
 );
-const aiInputRadios = (items = [], rest = {}) => (
-    <Radio.Group {...rest}>
-        {items.map(item => (
-            <Radio key={item.key} style={item.style ? item.style : {}}
-                   value={item.hasOwnProperty('value') ? item.value : item.key}>
-                {item.name || item.label}
-            </Radio>
-        ))}
-    </Radio.Group>
-);
-const aiInputSelect = (items = [], rest = {}) => (
-    <Select {...rest}>
-        {items.map(item => (
-            <Select.Option key={item.key} style={item.style ? item.style : {}}
-                           value={item.hasOwnProperty('value') ? item.value : item.key}>
-                {item.name || item.label}
-            </Select.Option>
-        ))}
-    </Select>
-);
-const aiInputCheckboxes = (items = [], rest = {}) => (
-    <Checkbox.Group {...rest}>
-        {items.map(item => (
-            <Checkbox key={item.key} style={item.style ? item.style : {}}
-                      value={item.hasOwnProperty('value') ? item.value : item.key}>
-                {item.name || item.label}
-            </Checkbox>
-        ))}
-    </Checkbox.Group>
-);
 const aiMenuContext = (items = [], rest = {}) => (
     <ContextMenu className="context-menu" {...rest}>
         {items.map(item => (
@@ -135,20 +106,14 @@ const aiSteps = (items = [], rest = {}) => {
     );
 };
 export default {
-    // 单选列表
-    aiInputRadios,
-    aiInputSelect,
-    aiInputCheckboxes,
+    // 输入框
+    ...PureInput,
     // 菜单相关渲染
     aiMenuTree,
     aiMenuContext,
     aiMenuTop,
-    // 面包屑
-    aiBreadcrumb,
-    // 折叠面板
-    aiCollapse,
-    // 页签
-    aiTabs,
-    // 纯帮助
-    aiSteps
+    aiBreadcrumb, // 面包屑
+    aiCollapse,// 折叠面板
+    aiTabs,// 页签
+    aiSteps,// 纯帮助
 };

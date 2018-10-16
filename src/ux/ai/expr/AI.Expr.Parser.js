@@ -64,6 +64,7 @@ const PARSER = {
     valuePropName: configValue("valuePropName"),
     format: jsxValue("format"),
     listType: jsxValue("listType"),
+    withCredentials: jsxBoolean("withCredentials"),
     text: jsxValue("text"),
     labelSpan: jsxLayout("labelCol"),
     wrapperSpan: jsxLayout("wrapperCol"),
