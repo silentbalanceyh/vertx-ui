@@ -22,7 +22,9 @@ const aiMagic = (reference, jsx = {}) => {
 };
 const aiFileUpload = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
-    return (<FileUpload {...jsx}/>);
+    // 是否支持多文件
+    RxAnt.onMultiple(jsx);
+    return (<FileUpload {...jsx} reference={reference}/>);
 };
 const aiDateVersion = (reference, jsx = {}) => {
     // RxAnt.onChange(jsx, onChange);

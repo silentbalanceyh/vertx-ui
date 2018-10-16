@@ -1,25 +1,36 @@
 import React from 'react';
-import {Button, Icon, Upload} from 'antd';
+import './Cab.less'
+import Op from './Op';
+import {_zero} from "../../_internal";
+import Rdr from './UI.Render';
+import {Input} from 'antd';
+import Ux from "ux";
 
+@_zero({
+    "i18n.cab": require('./Cab.json'),
+    "i18n.name": "UI",
+    state: {
+        fileList: [],
+        $counter: 0
+    }
+})
 class Component extends React.PureComponent {
 
+    componentDidMount() {
+        const handler = Op.getHandler(this);
+        this.setState({handler});
+    }
+
+    UNSAFE_componentWillReceiveProps(nextProps) {
+        Ux.xtUnsafe(this, nextProps);
+    }
+    
     render() {
-        const {listType, text, reference, ...meta} = this.props;
         return (
-            <Upload {...meta} listType={listType}>
-                {"picture-card" === listType ? (
-                    <span>
-                        <Icon type={"upload"}/>
-                        {text ? <br/> : false}
-                        {text ? <span className={"ant-upload-text"}>{text}</span> : false}
-                    </span>
-                ) : (
-                    <Button>
-                        <Icon type={"upload"}/>
-                        {text ? <span className={"ant-upload-text"}>{text}</span> : false}
-                    </Button>
-                )}
-            </Upload>
+            <Input.Group className={"web-file-upload"}>
+                {Rdr.renderFile(this)}
+                {Rdr.renderPreview(this)}
+            </Input.Group>
         );
     }
 }

@@ -21,7 +21,6 @@ class Component extends React.PureComponent {
     render() {
         const {config = {}} = this.props;
         const {from, to} = config;
-        console.info(this.props, this.state);
         return (
             <Input.Group compact>
                 {Rdr.renderTime(this, from, "from")}

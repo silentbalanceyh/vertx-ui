@@ -41,7 +41,10 @@ export default {
         DELETE: "delete"
     },
     MIMES: {
-        JSON: "application/json"
+        JSON: "application/json",
+        MULTIPART: "multipart/form-data",
+        FORM: "application/x-www-form-urlencoded",
+        STREAM: "application/octet-stream"
     },
     HTTP11: {
         "ACCEPT": "Accept",
