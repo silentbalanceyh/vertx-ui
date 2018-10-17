@@ -1,11 +1,11 @@
-import Ajax from '../Ux.Ajax';
+import Ajax from '../ajax/Ux.Ajax';
 import E from '../Ux.Error';
 
 const ajaxFun = {
     get: Ajax.ajaxGet,
     post: Ajax.ajaxPost,
-	fetch: Ajax.ajaxFetch,
-	push: Ajax.ajaxPush,
+    fetch: Ajax.ajaxFetch,
+    push: Ajax.ajaxPush,
     delete: Ajax.ajaxDelete
 };
 

@@ -38,6 +38,7 @@ const aiTableEditor = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
     return (<TableEditor {...jsx} reference={reference}/>);
 };
+
 const aiChangeEditor = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
     RxAnt.onFromTo(reference, jsx);

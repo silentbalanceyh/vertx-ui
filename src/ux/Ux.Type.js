@@ -154,8 +154,8 @@ const elementFind = (data = [], filters) => {
                 reference = reference.filter(item => {
                     const value = filters[field];
                     if (U.isArray(value)) {
-                        const $value = Immutable.fromJS(value);
-                        return $value.contain(item[field]);
+                        const $value = Value.immutable(value);
+                        return $value.contains(item[field]);
                     } else {
                         return item[field] === value;
                     }

@@ -37,4 +37,4 @@ export default {
     aiInputCheckBox,
     aiInputRadio,
     aiInputSelect
-}
+};

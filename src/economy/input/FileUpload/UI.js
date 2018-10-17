@@ -1,5 +1,5 @@
 import React from 'react';
-import './Cab.less'
+import './Cab.less';
 import Op from './Op';
 import {_zero} from "../../_internal";
 import Rdr from './UI.Render';
@@ -17,14 +17,13 @@ import Ux from "ux";
 class Component extends React.PureComponent {
 
     componentDidMount() {
-        const handler = Op.getHandler(this);
-        this.setState({handler});
+        Op.initState(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
         Ux.xtUnsafe(this, nextProps);
     }
-    
+
     render() {
         return (
             <Input.Group className={"web-file-upload"}>

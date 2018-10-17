@@ -2,7 +2,7 @@ import U from 'underscore';
 // 文件导入
 import Value from '../../Ux.Value';
 import Cv from '../../Ux.Constant';
-import Ajax from '../../Ux.Ajax';
+import Ajax from '../../ajax/Ux.Ajax';
 // 包导入
 import Rdx from '../../fun';
 import Prop from '../../prop';
