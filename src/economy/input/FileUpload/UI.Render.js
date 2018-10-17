@@ -17,7 +17,7 @@ const renderFile = (reference) => {
                 {...attrs}>
             {"picture-card" === listType ? (
                 <span>
-                        <Icon type={"upload"}/>
+                    <Icon type={"upload"}/>
                     {text ? <br/> : false}
                     {text ? <span className={"ant-upload-text"}>{text}</span> : false}
                     </span>
@@ -62,9 +62,9 @@ const renderPreview = (reference) => {
                 height: style.height - 40
             }}/>
         </Modal>
-    )
+    );
 };
 export default {
     renderFile,
     renderPreview
-}
+};

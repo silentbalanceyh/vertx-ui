@@ -21,7 +21,7 @@ const rdxReject = (message) => Promise.reject({data: {info: message}});
  */
 const rdxListItem = (reference, values = {}, addKey) => {
     const {fnListItem} = reference.props;
-    E.fxTerminal(!fnListItem, 10087, fnListItem);
+    //E.fxTerminal(!fnListItem, 10087, fnListItem);
     if (U.isFunction(fnListItem)) {
         const ref = Prop.onReference(reference, 1);
         if (ref) {

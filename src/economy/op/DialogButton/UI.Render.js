@@ -9,7 +9,13 @@ const getChildren = (reference) => {
     // 优先取children
     if (children) {
         return React.Children.map(children, child => {
+            const type = Symbol.for("react.element");
             if (child instanceof React.Component) {
+                return React.cloneElement(child, {
+                    fnClose: () => reference.setState({visible: false}),
+                    ...Ux.toUniform(reference.props)
+                });
+            } else if (child.$$typeof === type) {
                 return React.cloneElement(child, {
                     fnClose: () => reference.setState({visible: false}),
                     ...Ux.toUniform(reference.props)

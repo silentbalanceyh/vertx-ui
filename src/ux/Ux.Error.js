@@ -101,7 +101,8 @@ const fnError = {
     10095: (onChange) => `[ ERR-10095 ] (Jct) 自定义组件中的 'onChange' 属性必须是一个合法的函数，当前类型：${typeof onChange}`,
     10096: ($key) => `[ ERR-10096 ] (Stream) 无法计算出在Stream中需要使用的 'key' 值，当前值：${$key}`,
     10097: (data = {}) => `[ ERR-10097 ] (Stream) Stream中对应取得的格式不对，当前值：${JSON.stringify(data)}`,
-    10098: () => `[ ERR-10098 ] (Js) 捕捉到Js的异常信息：`
+    10098: () => `[ ERR-10098 ] (Js) 捕捉到Js的异常信息：`,
+    10099: () => `[ ERR-10099 ] (Dialog) 配置构造有问题：key, message, hoc = `
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

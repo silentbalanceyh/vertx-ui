@@ -36,8 +36,10 @@ const _onChange = (reference, fileList = []) => {
     const files = fileList.filter(file => file.hasOwnProperty('response'))
         .map(item => {
             const each = {};
-            each.filename = item.name;
+            each.uid = item.uid;
+            each.name = item.name;
             each.key = item.response[field];
+            each.type = item.type;  // 数据类型
             return each;
         });
     Ux.xtChange(reference, files, true);
@@ -67,7 +69,14 @@ const on2Preview = (reference) => (file) => {
         });
     } else {
         // 2.其他模式直接下载该文件
-        saveAs(file.originFileObj, file.name);
+        // 刚刚上传过的处理
+        if (file.hasOwnProperty('originFileObj')) {
+            saveAs(file.originFileObj, file.name);
+        } else {
+            const {ajax = {}} = reference.props;
+            Ux.ajaxDownload(ajax.download, Ux.clone(file))
+                .then(data => saveAs(data, file.name));
+        }
     }
 };
 export default {

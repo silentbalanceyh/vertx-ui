@@ -29,4 +29,4 @@ const on2Before = (reference) => (file) => {
 };
 export default {
     on2Before
-}
+};

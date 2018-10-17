@@ -143,7 +143,11 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
  */
 const showDialog = (reference, key, fnSuccess, params, fnFailure) => {
     const config = _configModal(reference, key, params);
-    return config.fun(reference, config.message, fnSuccess, fnFailure);
+    if (U.isFunction(config.fun)) {
+        return config.fun(reference, config.message, fnSuccess, fnFailure);
+    } else {
+        E.fxJs(10099, [key, config.message, Prop.fromHoc(reference, "_modal")]);
+    }
 };
 /**
  * 显示窗口专用函数，该函数用于根据资源文件中的配置信息显示窗口，资源文件必须包含`_modal`或`modal`节点；
@@ -166,7 +170,11 @@ const showDialog = (reference, key, fnSuccess, params, fnFailure) => {
  */
 const showMessage = (reference, key, fnSuccess, params) => {
     const config = _configModal(reference, key, params, false);
-    config.fun(config.message, fnSuccess);
+    if (U.isFunction(config.fun)) {
+        config.fun(config.message, fnSuccess);
+    } else {
+        E.fxJs(10099, [key, config.message, Prop.fromHoc(reference, "_modal")]);
+    }
 };
 /**
  * 显示窗口专用函数，直接和React的组件联合使用

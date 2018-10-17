@@ -1,5 +1,5 @@
 import ENV from "./Ux.Env";
-import AJAX from "./Ux.Ajax";
+import AJAX from "./ajax/Ux.Ajax";
 import JSX from "./Ux.Jsx";
 import OP from "./Ux.Op";
 import NORM from "./Ux.Normalize";
