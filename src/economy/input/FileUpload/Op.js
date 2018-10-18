@@ -19,6 +19,7 @@ const on2CustomRequest = (reference) => (details = {}) => {
             .then(data => details.onSuccess(data));
     } else {
         const error = Ux.fromHoc(reference, "error");
+        message.destroy();
         message.error(error.ajax);
         return Promise.reject({error: error.ajax});
     }

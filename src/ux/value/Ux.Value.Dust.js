@@ -193,6 +193,21 @@ const to = (value) => {
         }
     } else return {};
 };
+const extract = (dataItem = {}, path, field, fnCond = () => true) => {
+    const $path = U.isArray(path) ? path : path.split(".");
+    const $data = Immutable.fromJS(dataItem);
+    const value = $data.getIn($path);
+    if (value && value.toJS) {
+        const object = value.toJS();
+        if (object) {
+            if (U.isArray(object)) {
+                return object.filter(item => fnCond(item)).map(item => item[field]);
+            } else if (U.isObject(object)) {
+                return object[field];
+            }
+        } else return null;
+    } else return null;
+};
 // --- 子节点处理
 const _childrenByField = (array = [], config = {}) => {
     const {key, item, field, zero = true, sorter} = config;
@@ -226,7 +241,13 @@ const Child = {
     byField: _childrenByField,
     normalizeData,
 };
+const download = (reference) => {
+
+};
 export default {
+    download,
+
+    extract,
     // 判断是否为空
     isEmpty,
     // 安全转换

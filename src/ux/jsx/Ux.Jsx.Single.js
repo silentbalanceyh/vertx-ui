@@ -182,7 +182,7 @@ const jsxIcon = (item = {}) => {
     return (
         <span>
             {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
-            &nbsp;&nbsp;
+            {item.icon ? (<span>&nbsp;&nbsp;</span>) : false}
             {item.text || item.label}
         </span>
     );

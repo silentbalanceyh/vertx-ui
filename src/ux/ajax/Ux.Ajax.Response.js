@@ -3,7 +3,21 @@ import Aid from "./Ux.Ajax.Aid";
 import Dg from "../Ux.Debug";
 import Log from "../monitor/Mt.Logger";
 
-
+const _ajaxExtract = (request, params, body, response) => {
+    // Body的打印处理
+    if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({
+        request: params,
+        response: body
+    });
+    Log.response(body, params, request);
+    // 最终的返回处理
+    if (response.ok) {
+        return body;
+    } else {
+        console.error(body);
+        return Promise.reject({data: body});
+    }
+};
 /**
  * Ajax中的响应处理器，Promise调用返回过后的响应专用处理器
  * @method ajaxResponse
@@ -18,27 +32,19 @@ const ajaxResponse = async (request, mockData = {}, params) => {
         return Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data);
     } else {
         const response = await fetch(request);
-        let body = await response.json();
-        // 任何时候都需要调用适配器，包括errors
-        body = Aid.ajaxAdapter(body);
-        if (!response.ok) {
+        let body = {};
+        if (response.ok) {
+            body = await response.json();
+            // 任何时候都需要调用适配器，包括errors
+            body = Aid.ajaxAdapter(body);
+        } else {
             body = {
                 ...body,
                 status: response.status,
                 statusText: response.statusText
             };
         }
-        if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({
-            request: params,
-            response: body
-        });
-        Log.response(body, params, request);
-        if (response.ok) {
-            return body;
-        } else {
-            console.error(body);
-            return Promise.reject({data: body});
-        }
+        return _ajaxExtract(request, params, body, response);
     }
 };
 
@@ -47,26 +53,18 @@ const ajaxBlob = async (request, mockData = {}, params) => {
         return Promise.resolve(mockData.processor ? mockData.processor(mockData.data, params) : mockData.data);
     } else {
         const response = await fetch(request);
-        let body = await response.blob();
+        let body = new Blob(["No Content"]);
         // 任何时候都需要调用适配器，包括errors
-        if (!response.ok) {
+        if (response.ok) {
+            body = await response.blob();
+        } else {
             body = {
                 stream: body,
                 status: response.status,
                 statusText: response.statusText
             };
         }
-        if (Cv["DEBUG_AJAX"]) Dg.dgFileJson({
-            request: params,
-            response: body
-        });
-        Log.response(body, params, request);
-        if (response.ok) {
-            return body;
-        } else {
-            console.error(body);
-            return Promise.reject({data: body});
-        }
+        return _ajaxExtract(request, params, body, response);
     }
 };
 

@@ -10,6 +10,7 @@ const on2Before = (reference) => (file) => {
     if (config.single) {
         const {$counter = 0} = reference.state;
         if (0 < $counter) {
+            message.destroy();
             message.error(error.single);
             verified = false;
         }
@@ -18,6 +19,7 @@ const on2Before = (reference) => (file) => {
     if (verified && config.limit) {
         const current = file.size / 1024;
         if (current > config.limit) {
+            message.destroy();
             message.error(Ux.formatExpr(error.limit, {
                 size: config.limit,
                 current: current.toFixed(2)
