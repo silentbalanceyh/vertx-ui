@@ -59,6 +59,15 @@ class Table {
         return this;
     }
 
+    rowSelection(object = {}) {
+        let rowSelection = object;
+        if (U.isFunction(object)) {
+            rowSelection = object(this.reference);
+        }
+        if (rowSelection) this.config.rowSelection = rowSelection;
+        return this;
+    }
+
     to(dataSource = []) {
         Sure.ensureStream(this);
         const configRef = this.config;
