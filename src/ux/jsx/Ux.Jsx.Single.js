@@ -1,6 +1,5 @@
 import {Col, Form, Icon, Input, Row} from "antd";
 import React from "react";
-import Immutable from "immutable";
 import Random from "../util/Ux.Random";
 import DFT from "./Ux.Jsx.Default";
 import Ai from "../ai/AI";
@@ -24,8 +23,8 @@ const _getRender = (reference, render) => (each = {}) => {
     if (0 <= each.field.indexOf("$")) {
         return render(reference, each.optionJsx, each.optionConfig);
     } else {
-        const jsx = each.optionJsx ? Immutable.fromJS(each.optionJsx).toJS() : {};
-        const config = each.optionConfig ? Immutable.fromJS(each.optionConfig).toJS() : {};
+        const jsx = each.optionJsx ? Value.clone(each.optionJsx) : {};
+        const config = each.optionConfig ? Value.clone(each.optionConfig) : {};
         return getFieldDecorator(each.field, config)(
             render(reference, jsx, config)
         );
@@ -41,7 +40,7 @@ const _getRender = (reference, render) => (each = {}) => {
  */
 const jsxItem = (reference, item = {}, render) => {
     E.fxTerminal(!U.isFunction(render), 10059, render, item);
-    item = Immutable.fromJS(item).toJS();
+    item = Value.clone(item);
     const jsxRender = _getRender(reference, render);
     // $button修正
     if ("$button" === item.field) {
@@ -121,7 +120,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
                     <Row key={rowKey} style={DFT.uiRow(row, rowConfig[rowIndex], config)}
                          className={className}>
                         {DFT.itRow(row).map((item, cellIndex) => {
-                            item = Immutable.fromJS(item).toJS();
+                            item = Value.clone(item);
                             // 填平高度
                             const rowItem = rowConfig[rowIndex];
                             // 初始化

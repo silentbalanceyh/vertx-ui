@@ -23,22 +23,31 @@ const initTable = (reference: any) => {
         table = {columns: []}
     }
     table.pagination = false;
+    const options = readOptions(reference);
+    if (options.hasOwnProperty("table.empty.text")) table.emptyText = options['table.empty.text'];
     if (!table.hasOwnProperty("bordered")) table.bordered = true;
     return table;
 };
 const updateData = (reference: any) => {
-    const {$circle, rxTree} = reference.props;
-    if (!$circle.is()) {
-        if (U.isFunction(rxTree)) {
-            rxTree();
-        }
-    } else {
+    const {$circle} = reference.props;
+    if ($circle.is()) {
         // 这里才开始有数据
         const {current} = reference.state;
         if (!current) {
             let current = _readCurrent(reference);
             current = Data.initData(reference, current);
             reference.setState({current});
+        }
+    } else {
+        const {
+            rxTree,
+            $category = Ux.$$.DataSource.Reactive // 组件类型默认是Reactive模式
+        } = reference.props;
+        // 只有Reactive模式才调用rxTree相关方法，该组件可以分模式处理
+        if (Ux.$$.DataSource.Reactive === $category) {
+            if (U.isFunction(rxTree)) {
+                rxTree();
+            }
         }
     }
 };
@@ -58,6 +67,7 @@ const _readCurrent = (reference) => {
         const dataSource = $circle.to();
         if ($inited.key) {
             const dataArray = dataSource[$inited.key];
+            console.info($inited.key, dataSource, dataArray);
             if (dataArray && U.isArray(dataArray)) {
                 calculated = dataArray;
             }
@@ -65,23 +75,9 @@ const _readCurrent = (reference) => {
     }
     return calculated;
 };
-const initDataSource = (reference: any) => {
-    // 默认走$redux流程
-    const {data, $redux = true, $circle} = reference.props;
-    if ($redux) {
-        // 优先读取data
-        if ($circle.is()) {
-            return _readCurrent(reference);
-        }
-    } else {
-        return data;
-    }
-};
 export default {
     initComponent,
-    initDataSource,
     readOptions,
     readOperations,
-    readCurrent: _readCurrent,
     updateData,
 }

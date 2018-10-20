@@ -2,8 +2,8 @@ import U from "underscore";
 import {v4} from "uuid";
 import Parser from "./AI.Expr.Parser";
 import Op from "../../op/index";
-import Immutable from "immutable";
 import Type from "../../Ux.Type";
+import Value from '../../Ux.Value';
 import M from '../../monitor/index';
 
 const applyArray = (literal) => U.isArray(literal) ? literal : literal.replace(/ /g, '').split(',');
@@ -86,7 +86,7 @@ const applyStyle = (item = {}) => {
     return item;
 };
 const applyItem = (item = {}, config = [], kvs = []) => {
-    let $item = Immutable.fromJS(item);
+    let $item = Value.immutable(item);
     for (let idx = 0; idx < config.length; idx++) {
         const name = config[idx];
         if (kvs[idx]) {
@@ -127,7 +127,7 @@ const applyTree = (item = {}) => {
         }
     });
     // 2. Key从小到大排序
-    let $item = Immutable.fromJS({});
+    let $item = Value.immutable({});
     Object.keys(processed).sort((left, right) => left.length - right.length)
         .forEach(field => {
             if (0 < field.indexOf(".")) {

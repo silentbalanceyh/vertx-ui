@@ -12,7 +12,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
             .rework({
                 "grid": ["circle"]
             })
-            .rinit(["circle"], true)
+            .rinit(["circle"])
             .to()
     },
     "i18n.cab": require('./Cab.json'),

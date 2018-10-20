@@ -1,4 +1,4 @@
-import Cv from "../Ux.Constant";
+import Cv from "../cv/Ux.Constant";
 import Aid from "./Ux.Ajax.Aid";
 import Dg from "../Ux.Debug";
 import Log from "../monitor/Mt.Logger";
@@ -38,8 +38,16 @@ const ajaxResponse = async (request, mockData = {}, params) => {
             // 任何时候都需要调用适配器，包括errors
             body = Aid.ajaxAdapter(body);
         } else {
+            let json = null;
+            try {
+                json = await response.json();
+                // 任何时候都需要调用适配器，包括errors
+                json = Aid.ajaxAdapter(json);
+            } catch (error) {
+                json = {data: error.toString()};
+            }
             body = {
-                ...body,
+                ...json,
                 status: response.status,
                 statusText: response.statusText
             };

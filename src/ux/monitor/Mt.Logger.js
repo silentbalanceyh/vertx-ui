@@ -1,4 +1,4 @@
-import Cv from '../Ux.Constant';
+import Cv from '../cv/Ux.Constant';
 import Hoc from '../prop/Ux.Hoc';
 import U from 'underscore';
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import Prop from '../prop/Ux.Prop';
 import Random from '../util/Ux.Random';
-import Cv from '../Ux.Constant';
+import Cv from '../cv/Ux.Constant';
 import E from '../Ux.Error';
 
 /**

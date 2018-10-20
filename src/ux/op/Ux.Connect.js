@@ -1,7 +1,7 @@
-import Immutable from "immutable";
 import E from "../Ux.Error";
 import U from "underscore";
 import M from '../monitor';
+import Value from '../Ux.Value';
 
 /**
  * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器
@@ -11,7 +11,7 @@ import M from '../monitor';
 const connectDialog = (dialog = {}) => {
     if ("string" === typeof dialog.onOk) {
         // 防止引用切换，必须使用Immutable
-        const key = Immutable.fromJS(dialog).toJS();
+        const key = Value.clone(dialog);
         // Monitor连接部分代码
         M.writePointer(dialog, key.onOk);
         dialog.onOk = () => connectId(key.onOk);

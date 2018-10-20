@@ -1,4 +1,4 @@
-import Cv from "../Ux.Constant";
+import Cv from "../cv/Ux.Constant";
 import Store from "../system";
 
 const datumPointer = (uri = "") => {

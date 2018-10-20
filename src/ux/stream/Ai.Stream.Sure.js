@@ -1,5 +1,5 @@
-import Immutable from 'immutable';
 import U from 'underscore';
+import Value from '../Ux.Value';
 
 const ensureStream = (reference) => {
     if (!reference.config) {
@@ -8,7 +8,7 @@ const ensureStream = (reference) => {
 };
 
 const ensureKeys = (key, expected = []) => {
-    const $expected = Immutable.fromJS(expected);
+    const $expected = Value.immutable(expected);
     if (!$expected.contains(key)) {
         throw new Error(`[Z-Stem] The 'key=${key}' is not supported in current component.`);
     }

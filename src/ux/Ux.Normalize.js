@@ -1,8 +1,8 @@
 import Validator from "./prop/Ux.Validator";
 import Type from "./Ux.Type";
+import Value from './Ux.Value';
 import Html from "./util/Ux.Html";
 import E from "./Ux.Error";
-import Immutable from "immutable";
 import Ai from "./ai/AI";
 
 const limitNumber = length => value => {
@@ -146,7 +146,7 @@ const extractOp = (reference = {}, op, key = "form") => {
      */
     let source = op ? op : reference.state["$op"];
     if (!source) source = {};
-    const opData = form && form.op ? Immutable.fromJS(form.op).toJS() : [];
+    const opData = form && form.op ? Value.clone(form.op) : [];
     opData.forEach(op => {
         if (op.onClick && source.hasOwnProperty(op.onClick)) {
             op.onClick = source[op.onClick](reference);

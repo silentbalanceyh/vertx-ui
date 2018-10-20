@@ -1,4 +1,3 @@
-import Immutable from 'immutable';
 import Ux from "ux";
 import Value from '../Ux.Value';
 import U from 'underscore';
@@ -38,7 +37,7 @@ const runSubmit = (reference = {}, fnSuccess, fnFailure) => {
                 }
                 return;
             }
-            const params = Immutable.fromJS(values).toJS();
+            const params = Value.clone(values);
             params.language = Ux.Env['LANGUAGE'];
             if ($key) params.key = $key;
             // 去掉undefined
@@ -55,7 +54,7 @@ const rxInit = (props, params = {}) => {
     Ux.E.fxTerminal(!U.isFunction(props.zxInit), 10019, props.zxInit);
     if (U.isFunction(props.zxInit)) {
         const {$router} = props;
-        const paramData = Immutable.fromJS(params).toJS();
+        const paramData = Value.clone(params);
         if ($router) {
             Object.assign(paramData, $router.params());
         }

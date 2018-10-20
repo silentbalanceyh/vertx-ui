@@ -1,7 +1,7 @@
-import Immutable from 'immutable';
 import E from '../Ux.Error';
 import {DataLabor} from 'entity';
 import U from 'underscore';
+import Value from '../Ux.Value';
 
 /**
  * 直接从Hoc资源路径读取数据信息
@@ -19,7 +19,7 @@ const fromPath = (reference = {}, ...keys) => {
                 path.push(item);
             }
         });
-        const $data = Immutable.fromJS(data);
+        const $data = Value.immutable(data);
         data = $data.getIn(path);
         if (data && data.toJS) {
             data = data.toJS();
@@ -76,7 +76,8 @@ const fromDatum = (reference, key) => {
  */
 const onDatum = (reference, key) => {
     const data = fromDatum(reference, key);
-    return (data && data.is()) ? data.to() : [];
+    const dataArray = (data && data.is()) ? data.to() : [];
+    return U.isArray(dataArray) ? dataArray : [];
 };
 
 const onReference = (reference, current = 0) => {

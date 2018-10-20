@@ -1,6 +1,6 @@
-import Immutable from "immutable";
 import G6 from "@antv/g6";
 import G6Plugins from '@antv/g6/build/plugins';
+import Value from '../Ux.Value';
 
 const registry = () => {
     G6.registerNode('treeNode', {
@@ -31,7 +31,7 @@ const registry = () => {
 };
 
 const drawTree = (id, config, view = "cc") => {
-    const items = Immutable.fromJS(config.items).toJS();
+    const items = Value.clone(config.items);
     registry();
     const layout = new G6.Layouts.CompactBoxTree({
         // direction: 'LR', // 方向（LR/RL/H/TB/BT/V）
@@ -88,7 +88,7 @@ const drawTree = (id, config, view = "cc") => {
     tree.draw();
 };
 const drawFlow = (id, config = {}) => {
-    const items = Immutable.fromJS(config.items).toJS();
+    const items = Value.clone(config.items);
     registry();
     if (!config.layout) config.layout = {};
     G6.registerNode('rect', {

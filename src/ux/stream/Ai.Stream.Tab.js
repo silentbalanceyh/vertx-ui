@@ -1,8 +1,8 @@
 import Prop from '../prop';
 import Sure from './Ai.Stream.Sure';
-import Immutable from 'immutable';
 import Meta from './Ai.Stream.Tab.json';
 import Ai from '../ai/AI';
+import Value from '../Ux.Value';
 import React from 'react';
 import {Button} from 'antd';
 import U from 'underscore';
@@ -10,7 +10,7 @@ import U from 'underscore';
 const aiExpr = (reference) => {
     // 读取Hoc配置信息
     let tabs = Prop.fromHoc(reference, "tabs");
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Value.clone(tabs);
     if ("string" === typeof tabs) {
         // 最简化的操作
         tabs = Ai.aiExprTabs(tabs.split(','));
@@ -54,7 +54,7 @@ class Tab {
     init() {
         this.config = aiExpr(this.reference);
         if (!this.config) this.config = {};
-        this.config = Immutable.fromJS(this.config).toJS();
+        this.config = Value.clone(this.config);
         return this;
     }
 
@@ -65,7 +65,7 @@ class Tab {
             // 两种运算
             if (byKey) {
                 // byKey的时候，disabled里面是key
-                const $disabled = Immutable.fromJS(disabled);
+                const $disabled = Value.immutable(disabled);
                 item.disabled = $disabled.contains(item.key);
             } else {
                 item.disabled = !!disabled[index];
@@ -112,7 +112,7 @@ class Tab {
     connect(tabs) {
         if (tabs && 0 < tabs.length) {
             tabs = tabs.filter(item => "string" === typeof item);
-            const $tabs = Immutable.fromJS(tabs);
+            const $tabs = Value.immutable(tabs);
             this._filter = (item) => $tabs.contains(item.key);
         }
         return this;
@@ -138,7 +138,7 @@ class Tab {
                 // 变更Key
                 let state = this.reference.state;
                 state[activeState] = item;
-                state = Immutable.fromJS(state).toJS();
+                state = Value.clone(state);
                 this.reference.setState(state);
                 if (U.isFunction(fnOriginal)) {
                     fnOriginal(item);

@@ -1,7 +1,6 @@
 import Env from "../Ux.Env";
 import U from "underscore";
 import Dg from "../Ux.Debug";
-import Immutable from "immutable";
 import State from "../prop/Ux.State";
 import Value from '../Ux.Value';
 import E from '../Ux.Error';
@@ -63,7 +62,7 @@ const pipeReset = (reference, dataArray = []) => {
     const {$items, $inited = {}} = reference.props;
     if ($items && $items.is()) {
         // 读取原来数据
-        const data = Immutable.fromJS($items.to()).toJS();
+        const data = Value.clone($items.to());
         data[$inited.key] = dataArray;
         State.writeTree(reference, {
             "list.items": data,
@@ -80,7 +79,7 @@ const pipeVerify = (reference) => {
 const pipeGet = (reference) => {
     const {$items, $inited = {}} = reference.props;
     if ($items && $items.is()) {
-        const data = Immutable.fromJS($items.to()).toJS();
+        const data = Value.clone($items.to());
         const array = data[$inited.key];
         return array ? array : [];
     } else {

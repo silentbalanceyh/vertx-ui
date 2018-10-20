@@ -1,7 +1,7 @@
 import {saveAs} from "file-saver";
 import v4 from "uuid";
-import Immutable from 'immutable';
-import Constant from './Ux.Constant';
+import Constant from './cv/Ux.Constant';
+import Value from './Ux.Value';
 
 /**
  * 将传入的值`data`下载成一个文件保存，文件名系统生成，该文件名被转换过，所以调用时使用Ux调用
@@ -85,8 +85,8 @@ const dgRouter = (container, component) => {
  */
 const dgMonitor = (data, second) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        const $data = data ? Immutable.fromJS(data).toJS() : data;
-        const $second = second ? Immutable.fromJS(second).toJS() : second;
+        const $data = data ? Value.clone(data) : data;
+        const $second = second ? Value.clone(second) : second;
         console.debug("[Ux] Debug: ", $data, $second);
     }
     return data;

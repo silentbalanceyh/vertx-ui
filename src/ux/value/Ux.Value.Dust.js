@@ -28,7 +28,11 @@ const clone = (input) => {
         if (input.is()) {
             return Immutable.fromJS(input.to()).toJS();
         } else {
-            return input;
+            if (input instanceof DataObject) {
+                return Immutable.fromJS({}).toJS();
+            } else {
+                return Immutable.fromJS([]).toJS();
+            }
         }
     } else {
         return input ? Immutable.fromJS(input).toJS() : input;

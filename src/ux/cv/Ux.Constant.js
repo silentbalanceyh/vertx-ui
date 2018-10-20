@@ -1,6 +1,6 @@
-import Immutable from 'immutable';
+import Value from '../Ux.Value';
 
-const $env = Immutable.fromJS(process.env).toJS();
+const $env = Value.clone(process.env);
 for (const key in $env) {
     if ($env.hasOwnProperty(key)) {
         // 移除原始K_和DEV_
