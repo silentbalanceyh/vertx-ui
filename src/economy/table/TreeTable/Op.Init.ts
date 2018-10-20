@@ -28,18 +28,25 @@ const initTable = (reference: any) => {
     if (!table.hasOwnProperty("bordered")) table.bordered = true;
     return table;
 };
+const _initData = (reference) => {
+    let current = _readCurrent(reference);
+    current = Data.initData(reference, current);
+    reference.setState({current: Ux.clone(current)});
+};
 const updateData = (reference: any, prevProps) => {
     const {$circle} = reference.props;
     if ($circle.is()) {
         // 这里才开始有数据
         const {current} = reference.state;
-        if (!current) {
-            // 第一次加载
-            let current = _readCurrent(reference);
-            current = Data.initData(reference, current);
-            reference.setState({current});
+        if (current) {
+            const isUpdate = Ux.isDiff($circle, prevProps.$circle);
+            if (isUpdate) {
+                _initData(reference);
+            }
+        } else {
+            // 第一次加载，初始化数据
+            _initData(reference);
         }
-        console.info(current);
     } else {
         // 执行Rx流程
         const {$params = {}} = reference.props;
@@ -62,7 +69,6 @@ const _readCurrent = (reference) => {
         const dataSource = $circle.to();
         if ($inited.key) {
             const dataArray = dataSource[$inited.key];
-            console.info($inited.key, dataSource, dataArray);
             if (dataArray && U.isArray(dataArray)) {
                 calculated = dataArray;
             }

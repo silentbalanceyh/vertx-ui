@@ -126,7 +126,8 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
         dataRecord[id] = [];
     }
     // console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
-    return dataRecord;
+    // 拷贝个新的
+    return Ux.clone(dataRecord);
 };
 
 /**

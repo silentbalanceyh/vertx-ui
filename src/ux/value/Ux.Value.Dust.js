@@ -241,19 +241,26 @@ const normalizeData = (each = {}, config = {}) => {
         }
     }
 };
+const isDiff = (left, right) => {
+    const leftValue = (left instanceof DataObject ||
+        left instanceof DataArray) ? left.to() : left;
+    const rightValue = (right instanceof DataObject ||
+        right instanceof DataArray) ? right.to() : right;
+    if (leftValue && rightValue) {
+        const $left = Immutable.fromJS(left);
+        const $right = Immutable.fromJS(right);
+        return !Immutable.is($left, $right);
+    } else return leftValue !== rightValue;
+};
 const Child = {
     byField: _childrenByField,
     normalizeData,
 };
-const download = (reference) => {
-
-};
 export default {
-    download,
+    isEmpty, // 判断是否为空
+    isDiff, // 判断两个对象是否相同
 
     extract,
-    // 判断是否为空
-    isEmpty,
     // 安全转换
     toJson,
     // 三种模式的合并

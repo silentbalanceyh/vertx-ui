@@ -178,7 +178,8 @@ Dg.dgReport(exported, [
     "「原子」🌲子节点运算 - Ux.,#039,OBJECT",
     "「原子」字符串处理 - Ux.,#039,string",
     "「原子」数组处理 - Ux.,#039,array",
-    "「原子」核心全局处理 - Ux.,#c33,OTHER:math`value`Child`string`array",
+    "「原子」判断值处理 - Ux.,#039,is",
+    "「原子」核心全局处理 - Ux.,#c33,OTHER:math`value`Child`string`array`is",
     "「全局」数据处理 - Ux.,#399,data",
     "「全局」Reactive事件 - Ux.,#399,rx",
     "「全局」函数式UI - Ux.,#399,aui",
@@ -244,6 +245,7 @@ Dg.dgReport(exported, [
     TYPES, // 基础类型处理
     TYPES, // 基础类型处理
     TYPES, // 基础类型处理
+    VALUE, // 值处理函数
     VALUE, // 值处理函数
     VALUE, // 值处理函数
     VALUE, // 值处理函数
