@@ -2,6 +2,7 @@ import {saveAs} from "file-saver";
 import v4 from "uuid";
 import Constant from './cv/Ux.Constant';
 import Value from './Ux.Value';
+import U from 'underscore';
 
 /**
  * 将传入的值`data`下载成一个文件保存，文件名系统生成，该文件名被转换过，所以调用时使用Ux调用
@@ -64,12 +65,13 @@ const dgScript = (ux = {}, Cv = {}) => {
  * 【Development Only】
  * 自动生成路由中的路由报表，可查看所有的路由信息
  * @method dgRouter
+ * @param Ux 工具箱
  * @param container Layout模板配置信息
  * @param component Page组件配置信息
  */
-const dgRouter = (container, component) => {
+const dgRouter = (Ux, container, component) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        console.groupCollapsed("[Ux] UI report as following:");
+        console.groupCollapsed("[Zero] UI Component Report:");
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
         console.groupEnd();
@@ -98,12 +100,66 @@ const dgDebug = (data, prefix) => {
     }
     return data;
 };
+
+const _reportObject = (lib = {}, kv = []) => {
+    const result = {};
+    Object.keys(lib)
+        .filter(key => !U.isFunction(lib[key]))
+        .forEach(key => result[key] = lib[key]);
+    const prefix = kv[0] + kv[2];
+    console.log(`%c ${prefix} （ Class ）: `, `font-weight:900;color:${kv[1]}`, result);
+};
+const _reportShared = (lib, kv, fnFilter, appended) => {
+    const result = {};
+    const append = appended ? appended : `${kv[2]}XXX`;
+    Object.keys(lib)
+        .filter(key => U.isFunction(lib[key]))
+        .filter(fnFilter)
+        .forEach(key => result[key] = lib[key]);
+    const prefix = kv[0] + append;
+    console.log(`%c ${prefix} （ Function ）: `, `font-weight:900;color:${kv[1]}`, result);
+};
+const _reportFunction = (lib, kv) => _reportShared(lib, kv, key => key.startsWith(kv[2]));
+const _reportOther = (lib, kv) => {
+    const splitted = kv[2].split(':')[1].split('`');
+    const fnFilter = (key) => {
+        const filtered = splitted.filter(item => key.startsWith(item));
+        return 0 === filtered.length;
+    };
+    _reportShared(lib, kv, fnFilter, "XXX");
+};
 /**
  * 1. `ensure`工具类：Zero UI内部专用断言工具类
  * 2. `dg`工具类：开发人员调试常用工具类
  * @module Ux
  * @class Debug
  */
+const dgReport = (data, prefix = [], library = []) => {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
+        console.groupCollapsed(`%c [Zero] Zero UI Framework / Tool Report ( Ux )`, "font-weight:900;color:#369");
+        prefix.forEach((item, index) => {
+            const kv = item.split(',');
+            const lib = library[index];
+            if (kv[2]) {
+                if (U.isObject(lib)) {
+                    if ("OBJECT" !== kv[2]) {
+                        if (kv[2].startsWith("OTHER")) {
+                            _reportOther(lib, kv);
+                        } else {
+                            _reportFunction(lib, kv);
+                        }
+                    } else {
+                        _reportObject(lib, kv);
+                    }
+                }
+            } else {
+                console.log(`%c ${kv[0]} （ All ）: `, `font-weight:900;color:${kv[1]}`, lib);
+            }
+        });
+        console.groupEnd();
+    }
+    return data;
+};
 export default {
     // 调试专用方法
     dgFileJson,
@@ -111,5 +167,6 @@ export default {
     dgForm,
     dgRouter,
     dgMonitor,
-    dgDebug
+    dgDebug,
+    dgReport
 };

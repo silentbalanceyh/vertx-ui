@@ -26,8 +26,8 @@ class Component extends React.PureComponent {
         Op.initComponent(this);
     }
 
-    componentDidUpdate() {
-        Op.updateData(this);
+    componentDidUpdate(prevProps) {
+        Op.updateData(this, prevProps);
     }
 
     render() {

@@ -16,6 +16,12 @@ const xtRxInit = (reference = {}, fnName, params) => {
         }
     }
 };
+const xtIsUpdate = (reference = {}, prevProps = {}) => {
+    const {$inited = {}} = reference.props;
+    const previous = prevProps['$inited'] ? prevProps['$inited'] : {};
+    return $inited.key && $inited.key !== previous.key;
+};
 export default {
-    xtRxInit
+    xtRxInit,
+    xtIsUpdate
 };

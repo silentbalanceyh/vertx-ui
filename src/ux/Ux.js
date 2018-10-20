@@ -25,8 +25,9 @@ import Structure from './structure';
 import CONTROL from './jt/Jt';
 import XT from './xweb';
 import Jsx from './jsx';
+import Dg from './Ux.Debug';
 
-export default {
+const exported = {
     ...CONTROL,
     ...Jsx,
     /**
@@ -113,3 +114,148 @@ export default {
     // 调试专用
     D,
 };
+// 日志处理
+Dg.dgReport(exported, [
+    "「g2/g6图库」 - Ux.G,#339",
+    "「调试专用库」 - Ux.D,#069",
+    "「彩色日志库」 - Ux.Logger,#099",
+    "「错误信息库」 - Ux.E,#f03",
+    "「错误」验证函数 - Ux.,#903,verify",
+    "「错误」中断函数 - Ux.,#903,fx",
+    "「远程」Ajax专用 - Ux.,#360,ajax",
+    "「远程」微服务专用 - Ux.,#360,micro",
+    "「远程」Rx模式 - Ux.,#360,rx",
+    "「全局」全局判断 - Ux.,#399,is",
+    "「全局」转换/跳转 - Ux.,#399,to",
+    "「全局」存储配置 - Ux.,#399,store",
+    "「全局」本地存储 - Ux.,#399,OBJECT",
+    "「基础」异步验证 - Ux.,#c60,async",
+    "「基础」表单专用 - Ux.,#c60,form",
+    "「基础」配置读取 - Ux.,#c60,from",
+    "「基础」子项目处理 - Ux.,#c60,item",
+    "「基础」特殊挂载 - Ux.,#c60,on",
+    "「基础」快速处理 - Ux.,#c60,rapit",
+    "「基础」属性转换 - Ux.,#c60,to",
+    "「基础」其他函数 - Ux.,#c60,OTHER:async`form`from`item`on`rapit`to",
+    "「工具」编码加密 - Ux.,#039,encrypt",
+    "「工具」解码解密 - Ux.,#039,decrypt",
+    "「工具」表格列格式化 - Ux.,#039,fmt",
+    "「工具」格式化 - Ux.,#039,format",
+    "「工具」Html专用 - Ux.,#039,html",
+    "「工具」随机数 - Ux.,#039,random",
+    "「工具」列排序 - Ux.,#039,sorter",
+    "「工具」其他函数 - Ux.,#039,OTHER:encrypt`decrypt`fmt`format`html`random`sorter",
+    "「单向」查询函数 - Ux.,#603,ir",
+    "「单向」解析函数 - Ux.,#603,parse",
+    "「单向」Redux处理函数 - Ux.,#603,rdx",
+    "「单向」Epic回调处理 - Ux.,#603,rx",
+    "「组件」Xt组件内部函数 - Ux.xtXXX,#660",
+    "「界面」列处理函数 - Ux.uiXXX,#363",
+    "「标准」Normalize标准化 - Ux.XXX",
+    "「界面」窗口显示函数 - Ux.,#096,show",
+    "「界面」窗口效果 - Ux.,#096,OTHER:show",
+    "「事件」连接点函数 - Ux.,#636,connect",
+    "「事件」绑定函数 - Ux.,#636,on",
+    "「事件」通道处理函数 - Ux.,#636,pipe",
+    "「事件」其他函数 - Ux.,#636,OTHER:connect`on`pipe",
+    "「界面」Jsx渲染函数 - Ux.,black,jsx",
+    "「界面」快速模式函数 - Ux.,black,raft",
+    "「界面」操作绑定函数 - Ux.,black,rt",
+    "「界面」视图模式函数 - Ux.,black,view",
+    "「界面」其他函数 - Ux.,black,OTHER:jsx`raft`rt`view",
+    "「智能」高阶渲染 - Ux.,#c33,ai2",
+    "「智能」属性解析 - Ux.,#c33,aiExpr",
+    "「智能」图渲染 - Ux.,#c33,aiChart",
+    "「智能」纯组件渲染 - Ux.,#c33,aiInput",
+    "「智能」其他函数 - Ux.,#c33,OTHER:ai2`aiExpr`aiChart`aiInput",
+    "「全局」UI触发控件 - Ux.Trigger,#399",
+    "「全局」数据结构 - Ux.Uxxx,#399",
+    "「原子」数组计算 - Ux.,#693,element",
+    "「原子」遍历计算 - Ux.,#693,it",
+    "「原子」🌲计算 - Ux.,#693,tree",
+    "「原子」数学运算 - Ux.,#039,math",
+    "「原子」值处理 - Ux.,#039,value",
+    "「原子」🌲子节点运算 - Ux.,#039,OBJECT",
+    "「原子」字符串处理 - Ux.,#039,string",
+    "「原子」数组处理 - Ux.,#039,array",
+    "「原子」核心全局处理 - Ux.,#c33,OTHER:math`value`Child`string`array",
+    "「全局」数据处理 - Ux.,#399,data",
+    "「全局」Reactive事件 - Ux.,#399,rx",
+    "「全局」函数式UI - Ux.,#399,aui",
+    "「全局」核心类 - Ux.,#399,OBJECT",
+    "「全局」其他全局 - Ux.,#399,OTHER:rx`aui",
+    "「Deprecated」未来移除 - Ux.( jXX ),red",
+    "「Deprecated」未来移除 - Ux.( cycle ),red",
+], [
+    G,  // 图库
+    D,  // 调试库
+    D.Logger, // 日志库
+    E,  // 错误信息专用库
+    Terminal, // 错误中断专用库
+    Terminal, // 错误中断专用库
+    AJAX, // 远程调用库
+    AJAX, // 远程调用库
+    AJAX, // 远程调用库
+    System, // 全局处理函数
+    System, // 全局处理函数
+    System, // 全局处理函数
+    System, // 全局处理函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Prop, // Prop属性基础函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Util, // 工具类函数
+    Fun, // 基础函数
+    Fun, // 基础函数
+    Fun, // 基础函数
+    Fun, // 基础函数
+    XT, // Xt自定义专用函数
+    COLUMN, // 列处理函数
+    NORM, // Normalize标准化
+    DIALOG, // 窗口专用函数
+    DIALOG, // 窗口专用函数
+    Op, // Action绑定函数
+    Op, // Action绑定函数
+    Op, // Action绑定函数
+    Op, // Action绑定函数
+    {...Jsx, ...JSX},  // Jsx新专用函数
+    {...Jsx, ...JSX, ...FORM},  // Jsx新专用函数
+    {...Jsx, ...JSX},  // Jsx新专用函数
+    {...Jsx, ...JSX},  // Jsx新专用函数
+    {...Jsx, ...JSX},  // Jsx新专用函数
+    AI, // Ai组件专用函数
+    AI, // Ai组件专用函数
+    AI, // Ai组件专用函数
+    AI, // Ai组件专用函数
+    AI, // Ai组件专用函数
+    Trigger, // UI触发控件函数
+    Structure, // 核心数据结构
+    TYPES, // 基础类型处理
+    TYPES, // 基础类型处理
+    TYPES, // 基础类型处理
+    VALUE, // 值处理函数
+    VALUE, // 值处理函数
+    VALUE, // 值处理函数
+    VALUE, // 值处理函数
+    VALUE, // 值处理函数
+    VALUE, // 值处理函数
+    ENV, // 环境变量
+    ENV, // 环境变量
+    ENV, // 环境变量
+    ENV, // 环境变量
+    ENV, // 环境变量
+    CONTROL, // J开头专用
+    OP, // OP操作函数
+]);
+export default exported;
