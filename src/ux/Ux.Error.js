@@ -1,6 +1,6 @@
 import U from 'underscore';
 import Terminal from './terminal/Ux.Terminal.Fx';
-import Cv from './Ux.Constant';
+import Cv from './cv/Ux.Constant';
 
 const fnError = {
     10000: (type, current) => `[ ERR-10000 ] 传入参数类型不匹配，期望类型${type}，当前参数类型${current}`,
@@ -102,7 +102,8 @@ const fnError = {
     10096: ($key) => `[ ERR-10096 ] (Stream) 无法计算出在Stream中需要使用的 'key' 值，当前值：${$key}`,
     10097: (data = {}) => `[ ERR-10097 ] (Stream) Stream中对应取得的格式不对，当前值：${JSON.stringify(data)}`,
     10098: () => `[ ERR-10098 ] (Js) 捕捉到Js的异常信息：`,
-    10099: () => `[ ERR-10099 ] (Dialog) 配置构造有问题：key, message, hoc = `
+    10099: () => `[ ERR-10099 ] (Dialog) 配置构造有问题：key, message, hoc = `,
+    10100: (fnName) => `[ ERR-10100 ] (Web) 当前组件使用了 Reactive 模式，传入的函数非法，fnName = ${fnName}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

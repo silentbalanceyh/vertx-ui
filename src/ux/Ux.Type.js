@@ -1,5 +1,4 @@
 import U from "underscore";
-import Immutable from "immutable";
 import Prop from "./prop/Ux.Prop";
 import {DataLabor} from "entity";
 import E from './Ux.Error';
@@ -36,7 +35,7 @@ const elementFlat = (array = [], field = "", parent = false) => {
     array.forEach(item => {
         const fnChildren = (children = []) => U.isArray(children) ?
             children.forEach(child => {
-                let target = Immutable.fromJS(item);
+                let target = Value.immutable(item);
                 target = target.mergeDeep(child);
                 target = target.remove(field);
                 const $target = target.toJS();
@@ -73,7 +72,7 @@ const elementZip = (left = [], right = [], from = "key", to = "key") => {
     const result = [];
     left.forEach(item => {
         // 左元素
-        const source = Immutable.fromJS(item).toJS();
+        const source = Value.clone(item);
         const value = source[from];
         if (value) {
             const target = right.filter(each => value === each[to]);
@@ -100,7 +99,7 @@ const elementConnect = (array = [], target = [], field, mapping = {}) => {
         array.forEach((item = {}) => {
             const entity = elementUnique(target, "key", item[field]);
             if (entity) {
-                let $item = Immutable.fromJS(item);
+                let $item = Value.immutable(item);
                 for (const fromKey in mapping) {
                     if (mapping.hasOwnProperty(fromKey)) {
                         const toKey = mapping[fromKey];
@@ -335,7 +334,7 @@ const elementAdd = (array = [], element) => {
                 array.push(element);
             }
         } else if ("string" === typeof element || "number" === typeof element) {
-            const $elements = Immutable.fromJS(array);
+            const $elements = Value.immutable(array);
             if (!$elements.contains(element)) {
                 array.push(element);
             }
@@ -350,7 +349,7 @@ const elementAdd = (array = [], element) => {
  * @return {*}
  */
 const elementSwitch = (array = [], element = "") => {
-    let $elements = Immutable.fromJS(array);
+    let $elements = Value.immutable(array);
     if ($elements.contains(element)) {
         $elements = $elements.remove(element);
     } else {
@@ -372,7 +371,7 @@ const elementBranch = (array = [], leafKey, parentField, field = "key") => {
     // 查找子节点
     const obj = elementUnique(array, field, leafKey);
     if (obj) {
-        const target = Immutable.fromJS(obj).toJS();
+        const target = Value.clone(obj);//
         branch.push(target);
         // 查找父节点
         const pid = obj[parentField];

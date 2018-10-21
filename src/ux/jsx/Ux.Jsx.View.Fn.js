@@ -12,8 +12,9 @@ import DFT from './Ux.Jsx.Default';
  * @method viewColumn
  * @param column
  * @param content
+ * @param layout
  */
-const viewColumn = (column, content) => {
+const viewColumn = (column, content, layout = {}) => {
     let attrs = {};
     if (U.isObject(column)) {
         // 可传入Object配置
@@ -25,7 +26,7 @@ const viewColumn = (column, content) => {
     attrs.key = Random.randomString(16);
     return (
         <Col {...attrs}>
-            {U.isFunction(content) ? content() : content}
+            {U.isFunction(content) ? content(layout) : content}
         </Col>
     );
 };
@@ -39,14 +40,16 @@ const viewColumn = (column, content) => {
 const viewRow = (columns = [], flex = {}, ...content) => {
     const attrs = {
         key: Random.randomString(16),
-        className: "page-view"
+        className: "page-view page-view-row"
     };
     if (flex.isSub) {
-        attrs.className = "page-viewsub";
+        attrs.className = "page-viewsub page-sub-view-row";
     }
     return (flex.show && 0 < columns.length) ? (
         <Row {...attrs}>
-            {columns.map((column, index) => viewColumn(column, content[index]))}
+            {columns.map((column, index) => viewColumn(column, content[index], {
+                _size: columns.length, _index: index, _flex: flex,
+            }))}
         </Row>
     ) : false;
 };
@@ -54,18 +57,18 @@ const viewRow = (columns = [], flex = {}, ...content) => {
  * 渲染某一个Row的Title
  * @method viewTitle
  * @param message
+ * @param className
  */
-const viewTitle = (message) => {
-    return (<Row className={"page-title"}>{message}</Row>);
-};
+const viewTitle = (message, className = "page-title") =>
+    (<Row className={className}>{message}</Row>);
 /**
  * 渲染某一个Row的Header
  * @method viewHeader
  * @param message
+ * @param className
  */
-const viewHeader = (message) => {
-    return (<Row className={"page-view-header"}>{message}</Row>);
-};
+const viewHeader = (message, className = "page-view-header") =>
+    (<Row className={className}>{message}</Row>);
 
 /**
  * 渲染某一个单元格，主要用于处理上边的content
@@ -125,10 +128,16 @@ const viewGrid = (page = [], reference, $data, renders = {}, key = "view", isSub
             row.flex.show = true;
         }
         row.flex.isSub = isSub;
+        // 当前专用的span列表
+        row.flex.spans = row.span;
     });
     return page.map(row => viewRow.apply(null,
         [row.span, row.flex].concat(row.name.map(
-            field => viewCell(reference, $data, field, configMap[field], renders)
+            field => (layout = {}) =>
+                viewCell(reference, $data, field, {
+                    ...configMap[field],
+                    ...layout
+                }, renders)
         )))
     );
 };

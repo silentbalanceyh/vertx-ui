@@ -1,7 +1,6 @@
 import React from 'react';
 import U from 'underscore';
 import {Button} from 'antd';
-import Immutable from 'immutable';
 // Package导入
 import Fn from '../../fun';
 import Jsx from '../../jsx';
@@ -13,7 +12,6 @@ import Type from '../../Ux.Type';
 // 内部导入
 import Layout from '../layout/AI.Layout';
 import Smart from './AI.Action.Smart';
-
 
 const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     if (!jsx.op) return false;
@@ -28,7 +26,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
         const {$inited = {}} = reference.props;
         const key = (id) ? ($inited.key ? $inited.key : "") : "";
         const buttons = [];
-        const $submit = Immutable.fromJS(submit);
+        const $submit = Value.immutable(submit);
         Type.itObject(onClick, (field, fn) => {
             // 过滤掉非$开头的方法，实现完全绑定规则
             if (field && field.startsWith("$")) {
@@ -65,7 +63,7 @@ const aiOp = (reference) => (Op) => Object.keys(Op)
                 onClick={Op[key](reference)}/>
     ));
 const ai2RaftButton = (Op, {id, event = []}) => (cell, reference) => {
-    const $event = Immutable.fromJS(event);
+    const $event = Value.immutable(event);
     const submit = Object.keys(Op).filter(key => !$event.contains(key));
     const ref = Value.fix(cell, reference);
     return aiFormButton(ref, Op, id, submit);

@@ -5,7 +5,8 @@ import {Set} from 'immutable';
 import routeData from '../route';
 import Random from './util/Ux.Random';
 import Dg from './Ux.Debug';
-import Cv from './Ux.Constant';
+import Cv from './cv/Ux.Constant';
+import Symbols from './cv/Ux.Symbol';
 import AiStream from './stream/Ai.Stream';
 import U from 'underscore';
 
@@ -73,11 +74,8 @@ export default {
     // 环境变量专用
     Env: Cv,
     fnOut: Taper.fnFlush,
-    // 专用的模式设置，主要用于区分添加和更新
-    Mode: {
-        CREATE: "CREATE",
-        UPDATE: "UPDATE"
-    },
+    // 各种常量信息
+    ...Symbols,
     /**
      * Redux专用状态树的写入方法
      * @method dataOut

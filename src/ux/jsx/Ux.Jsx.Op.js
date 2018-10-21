@@ -2,7 +2,6 @@ import React from "react";
 import {Button} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
-import Immutable from 'immutable';
 import Value from '../Ux.Value';
 import Ai from '../ai/AI';
 
@@ -16,7 +15,7 @@ const _rtSubmit = (reference = {}, callback = {}) => {
             if (error) {
                 _rtState(reference, false);
             } else {
-                const params = Immutable.fromJS(values).toJS();
+                const params = Value.clone(values);
                 params.language = Ux.Env['LANGUAGE'];
                 // 去掉undefined
                 Value.valueValid(params);

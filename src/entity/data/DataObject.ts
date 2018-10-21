@@ -34,7 +34,8 @@ class DataObject implements DataContainer {
 
     to(): Object {
         if (this.ready) {
-            if (!this.data.hasOwnProperty("key")) {
+            if (!this.data.hasOwnProperty("key") &&
+                this.data.uniqueId) {
                 this.data.key = this.data.uniqueId;
             }
             return Immutable.fromJS(this.data).toJS();

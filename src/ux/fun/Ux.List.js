@@ -1,5 +1,4 @@
 import Value from '../Ux.Value';
-import Immutable from 'immutable';
 import U from 'underscore';
 import Prop from '../prop';
 import Ux from 'ux';
@@ -12,7 +11,7 @@ const irPager = (hoc = {}) => {
             pager.page = Value.valueInt(pageData[0]);
             pager.size = Value.valueInt(pageData[1]);
         } else {
-            pager = Immutable.fromJS(hoc.pager).toJS();
+            pager = Value.clone(hoc.pager);
         }
     }
     return pager;
@@ -21,7 +20,7 @@ const irPager = (hoc = {}) => {
 const irProjection = (hoc = {}) => {
     let projection = [];
     if (U.isArray(hoc.projection)) {
-        projection = Immutable.fromJS(hoc.projection).toJS();
+        projection = Value.clone(hoc.projection);
     }
     return projection;
 };
@@ -30,7 +29,7 @@ const irSorter = (hoc = {}) => {
     let sorterData = [];
     if (hoc.sorter) {
         if (U.isArray(hoc.sorter)) {
-            sorterData = Immutable.fromJS(hoc.sorter).toJS();
+            sorterData = Value.clone(hoc.sorter);
         } else {
             const sorters = hoc.sorter.split(',');
             sorters.forEach(sorter => {
@@ -62,7 +61,7 @@ const irCriteria = (hoc = {}, props = {}) => {
                 });
         } else {
             // 3.本身就是一个对象，将该对象传入到config中进行解析
-            config = Immutable.fromJS(hoc.criteria).toJS();
+            config = Value.clone(hoc.criteria);
         }
     }
     return Value.valueSearch(config, props);
@@ -119,7 +118,7 @@ const irFilter = (reference = {}, postFun) => {
             if (error) {
                 return;
             }
-            const params = Immutable.fromJS(values).toJS();
+            const params = Value.clone(values);
             Value.valueValid(params, true);
             const {$query, fnClose, fnQueryDefault, fnTerm} = reference.props;
             if ($query.is()) {

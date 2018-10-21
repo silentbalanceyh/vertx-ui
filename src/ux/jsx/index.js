@@ -9,5 +9,6 @@ export default {
     ...Op,
     ...Single,
     ...ViewFn,
-    ...View
+    // 不暴露不该暴露的渲染函数
+    extractValue: View.extractValue,
 };

@@ -4,7 +4,7 @@ import Log from './monitor/Mt.Logger';
 import Normalize from './Ux.Normalize';
 import Ai from './ai/AI';
 import Jsx from './Ux.Jsx';
-import Immutable from 'immutable';
+import Value from './Ux.Value';
 import React from 'react';
 import {Col, Form, Input, Row} from 'antd';
 
@@ -93,7 +93,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
     if (!form.ui) {
         return E.fxFailure(10056, form.ui);
     }
-    form = Immutable.fromJS(form).toJS();
+    form = Value.clone(form);
     // 2.计算window，构造新配置
     const window = form.window ? form.window : 1;
     const $config = window ? {...config, window} : config;

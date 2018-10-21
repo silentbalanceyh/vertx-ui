@@ -1,5 +1,5 @@
 import Store from './Ux.Store';
-import Cv from '../Ux.Constant';
+import Cv from '../cv/Ux.Constant';
 import E from '../Ux.Error';
 import Hoc from '../prop/Ux.Hoc';
 

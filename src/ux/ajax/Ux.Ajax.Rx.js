@@ -1,11 +1,10 @@
 import U from "underscore";
-import Cv from "../Ux.Constant";
+import Cv from "../cv/Ux.Constant";
 import Rx from "rxjs";
 import Log from "../monitor/Mt.Logger";
 import Env from "../Ux.Env";
 import E from "../Ux.Error";
 import Type from "../Ux.Type";
-import Immutable from "immutable";
 
 
 /**
@@ -142,7 +141,7 @@ const rxEclat = (type, promise, responser = data => data, nextPromise = []) => {
             const actionType = $action.ofType(type.getType());
             // 链式结构
             const container = {};
-            container.next = Immutable.fromJS({}).toJS();
+            container.next = {};
             return Rx.Observable.from(actionType)
                 .map(action => action.payload)
                 .map(params => _rxParams(container, params))

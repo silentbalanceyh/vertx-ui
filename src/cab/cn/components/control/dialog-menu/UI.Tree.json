@@ -19,6 +19,13 @@
             },
             {
                 "source": "P",
+                "name": "$disabledItems",
+                "comment": "针对子菜单执行禁用处理——该配置主要针对菜单项。",
+                "type": "Boolean",
+                "value": "false"
+            },
+            {
+                "source": "P",
                 "name": "$button",
                 "comment": "下拉主菜单的基本信息，主要是文字和图标。",
                 "type": "String",

@@ -42,6 +42,7 @@ export {default as CheckedDate} from './input/CheckedDate/UI';
 export {default as TimeRanger} from './input/TimeRanger/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
+export {default as LoadingImage} from './loading/LoadingImage/UI';
 export {default as DynamicDialog} from './dialog/DynamicDialog/UI';
 
 export {default as TreeTable} from './table/TreeTable/UI';

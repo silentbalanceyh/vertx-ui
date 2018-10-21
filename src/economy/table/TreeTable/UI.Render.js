@@ -14,6 +14,7 @@ const _calcDoller = (config = {}) => {
 };
 
 const _calcRender = (reference, config = {}) => {
+    config = Ux.clone(config);
     // 计算Component
     const Component = config.hasOwnProperty("items") ?
         DialogMenu : DialogButton;
@@ -21,25 +22,29 @@ const _calcRender = (reference, config = {}) => {
     // 抽取components和functions
     const configuration = _calcDoller(config);
     return (column, record) => {
-        // 1.计算record数据
-        const $inited = _calcRecord(reference, column, record);
-        const {$functions, $components = {}} = reference.props;
-        if (isMenu) {
-            return (<Component $inited={$inited}
-                               $parent={Ux.clone(reference.props.$inited)}
-                               $functions={$functions}
-                               $components={$components}
-                               {...configuration}/>);
+        if (Ux.isEmpty(configuration)) {
+            return false;
         } else {
-            const componentKey = config.component;
-            const Child = $components[componentKey];
-            return (
-                <Component $inited={$inited}
-                           {...configuration}>
-                    <Child $inited={$inited}
-                           $parent={Ux.clone(reference.props.$inited)}/>
-                </Component>
-            );
+            // 1.计算record数据
+            const $inited = _calcRecord(reference, column, record);
+            const {$functions, $components = {}} = reference.props;
+            if (isMenu) {
+                return (<Component $inited={$inited}
+                                   $parent={Ux.clone(reference.props.$inited)}
+                                   $functions={$functions}
+                                   $components={$components}
+                                   {...configuration}/>);
+            } else {
+                const componentKey = config.component;
+                const Child = $components[componentKey];
+                return (
+                    <Component $inited={$inited}
+                               {...configuration}>
+                        <Child $inited={$inited}
+                               $parent={Ux.clone(reference.props.$inited)}/>
+                    </Component>
+                );
+            }
         }
     };
 };

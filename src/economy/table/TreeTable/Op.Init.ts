@@ -23,23 +23,34 @@ const initTable = (reference: any) => {
         table = {columns: []}
     }
     table.pagination = false;
+    const options = readOptions(reference);
+    if (options.hasOwnProperty("table.empty.text")) table.emptyText = options['table.empty.text'];
     if (!table.hasOwnProperty("bordered")) table.bordered = true;
     return table;
 };
-const updateData = (reference: any) => {
-    const {$circle, rxTree} = reference.props;
-    if (!$circle.is()) {
-        if (U.isFunction(rxTree)) {
-            rxTree();
-        }
-    } else {
+const _initData = (reference) => {
+    let current = _readCurrent(reference);
+    current = Data.initData(reference, current);
+    reference.setState({current: Ux.clone(current)});
+};
+const updateData = (reference: any, prevProps) => {
+    const {$circle} = reference.props;
+    if ($circle.is()) {
         // 这里才开始有数据
         const {current} = reference.state;
-        if (!current) {
-            let current = _readCurrent(reference);
-            current = Data.initData(reference, current);
-            reference.setState({current});
+        if (current) {
+            const isUpdate = Ux.isDiff($circle, prevProps.$circle);
+            if (isUpdate) {
+                _initData(reference);
+            }
+        } else {
+            // 第一次加载，初始化数据
+            _initData(reference);
         }
+    } else {
+        // 执行Rx流程
+        const {$params = {}} = reference.props;
+        Ux.xtRxInit(reference, "rxTree", $params);
     }
 };
 const readOptions = (reference: any) => readConfig(reference).options;
@@ -65,23 +76,9 @@ const _readCurrent = (reference) => {
     }
     return calculated;
 };
-const initDataSource = (reference: any) => {
-    // 默认走$redux流程
-    const {data, $redux = true, $circle} = reference.props;
-    if ($redux) {
-        // 优先读取data
-        if ($circle.is()) {
-            return _readCurrent(reference);
-        }
-    } else {
-        return data;
-    }
-};
 export default {
     initComponent,
-    initDataSource,
     readOptions,
     readOperations,
-    readCurrent: _readCurrent,
     updateData,
 }

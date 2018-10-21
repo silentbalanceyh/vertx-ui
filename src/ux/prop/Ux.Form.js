@@ -1,6 +1,5 @@
 import Value from "../Ux.Value";
 import E from "../Ux.Error";
-import Immutable from "immutable";
 
 /**
  * Ant Design中的Form清空专用方法
@@ -53,7 +52,7 @@ const formGet = (reference, key) => {
     E.fxTerminal(!form, 10020, form);
     if (form) {
         let data = form.getFieldsValue();
-        data = Immutable.fromJS(data).toJS();
+        data = Value.clone(data);
         return key ? data[key] : data;
     }
 };

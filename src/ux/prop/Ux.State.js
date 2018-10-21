@@ -1,7 +1,7 @@
 import {DataLabor} from "entity";
-import Immutable from 'immutable';
 import E from '../Ux.Error';
 import Type from '../Ux.Type';
+import Value from '../Ux.Value';
 import U from 'underscore';
 import Ux from "ux";
 
@@ -13,7 +13,7 @@ import Ux from "ux";
  * @param dft 默认值
  */
 const writeTree = (reference, state, dft = null) => E.fxOut(reference, (fnOut) => {
-    const $state = state ? Immutable.fromJS(state).toJS() : state;
+    const $state = state ? Value.clone(state) : state;
     const fnModify = prefix => (field, value) => {
         if (field.startsWith(prefix)) {
             const key = `assist.${field.replace(/\./g, '_').replace(/assist_/g, '')}`;
@@ -91,7 +91,7 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
     // E.fxTerminal(!id, 10062, id);
     // 读取原始记录
     const dataRecord = dataObject && dataObject.is()
-        ? Immutable.fromJS(dataObject.to()).toJS() : {};
+        ? Value.clone(dataObject.to()) : {};
     // console.info("[ 调试专用，后期删除 ] Before ", id, dataRecord, record);
     // 读取原始数据
     let $extracted = dataObject.$(id);
@@ -117,12 +117,17 @@ const rapitRecord = (dataObject, id, record, deleted = false) => {
         dataRecord[id] = $extracted.to();
     };
     if (U.isArray(record)) {
-        record.forEach(executeRecord);
+        record.forEach(item => executeRecord(item));
     } else {
         executeRecord(record);
     }
+    // 是否没有值？
+    if (!dataRecord[id]) {
+        dataRecord[id] = [];
+    }
     // console.info("[ 调试专用，后期删除 ] After ", id, dataRecord, record);
-    return dataRecord;
+    // 拷贝个新的
+    return Ux.clone(dataRecord);
 };
 
 /**

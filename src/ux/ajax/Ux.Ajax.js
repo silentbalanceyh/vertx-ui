@@ -1,5 +1,4 @@
-import Cv from "../Ux.Constant";
-import Immutable from 'immutable';
+import Cv from "../cv/Ux.Constant";
 import RxAjax from './Ux.Ajax.Rx';
 import U from 'underscore';
 import Aid from './Ux.Ajax.Aid';
@@ -37,7 +36,7 @@ const ajaxResource = (uri) => {
  * @param secure 是否安全模式
  */
 const ajaxFull = (method = "post", secure = false) => (uri, params = {}, mockData) => {
-    const $params = Immutable.fromJS(params).toJS();
+    const $params = Value.clone(params);
     const api = Aid.ajaxUri(uri, method, params);
     Log.ajaxLog(api, method, params, mockData);
     const headers = Aid.ajaxHeader(secure);

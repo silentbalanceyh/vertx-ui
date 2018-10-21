@@ -28,7 +28,11 @@ const clone = (input) => {
         if (input.is()) {
             return Immutable.fromJS(input.to()).toJS();
         } else {
-            return input;
+            if (input instanceof DataObject) {
+                return Immutable.fromJS({}).toJS();
+            } else {
+                return Immutable.fromJS([]).toJS();
+            }
         }
     } else {
         return input ? Immutable.fromJS(input).toJS() : input;
@@ -193,6 +197,21 @@ const to = (value) => {
         }
     } else return {};
 };
+const extract = (dataItem = {}, path, field, fnCond = () => true) => {
+    const $path = U.isArray(path) ? path : path.split(".");
+    const $data = Immutable.fromJS(dataItem);
+    const value = $data.getIn($path);
+    if (value && value.toJS) {
+        const object = value.toJS();
+        if (object) {
+            if (U.isArray(object)) {
+                return object.filter(item => fnCond(item)).map(item => item[field]);
+            } else if (U.isObject(object)) {
+                return object[field];
+            }
+        } else return null;
+    } else return null;
+};
 // --- 子节点处理
 const _childrenByField = (array = [], config = {}) => {
     const {key, item, field, zero = true, sorter} = config;
@@ -222,13 +241,26 @@ const normalizeData = (each = {}, config = {}) => {
         }
     }
 };
+const isDiff = (left, right) => {
+    const leftValue = (left instanceof DataObject ||
+        left instanceof DataArray) ? left.to() : left;
+    const rightValue = (right instanceof DataObject ||
+        right instanceof DataArray) ? right.to() : right;
+    if (leftValue && rightValue) {
+        const $left = Immutable.fromJS(left);
+        const $right = Immutable.fromJS(right);
+        return !Immutable.is($left, $right);
+    } else return leftValue !== rightValue;
+};
 const Child = {
     byField: _childrenByField,
     normalizeData,
 };
 export default {
-    // 判断是否为空
-    isEmpty,
+    isEmpty, // 判断是否为空
+    isDiff, // 判断两个对象是否相同
+
+    extract,
     // 安全转换
     toJson,
     // 三种模式的合并

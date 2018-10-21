@@ -1,4 +1,4 @@
-import Immutable from "immutable";
+import Value from '../Ux.Value';
 
 /**
  * 验证规则属性
@@ -74,7 +74,7 @@ const uiView = (config = {}, field) => {
         target.field = field;
         config = target;
     }
-    config = Immutable.fromJS(config).toJS();
+    config = Value.clone(config);
     if (!config.mode) config.mode = "pure";
     if (!config.meta) config.meta = {};
     if (!config.field) config.field = field;

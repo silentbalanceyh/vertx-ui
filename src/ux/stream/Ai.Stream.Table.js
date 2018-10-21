@@ -1,10 +1,10 @@
 import Prop from "../prop/Ux.Prop";
 import Column from '../Ux.Column';
-import Immutable from "immutable";
 import Sure from "./Ai.Stream.Sure";
 import Ai from "../ai/AI";
 import Meta from './Ai.Stream.Table.json';
 import U from 'underscore';
+import Value from '../Ux.Value';
 
 class Table {
     constructor(reference) {
@@ -15,7 +15,7 @@ class Table {
         // 读取Hoc配置信息
         this.config = Prop.fromHoc(this.reference, "table");
         if (!this.config) this.config = {};
-        this.config = Immutable.fromJS(this.config).toJS();
+        this.config = Value.clone(this.config);
         if (this.config.columns) {
             this.config.columns = Column.uiTableColumn(this.reference, this.config.columns);
         }
@@ -56,6 +56,15 @@ class Table {
     mount(target = "", value) {
         const configRef = this.config;
         Sure.itSwitch(target, value, (k, v) => configRef[k] = v, Meta.supported.table);
+        return this;
+    }
+
+    rowSelection(object = {}) {
+        let rowSelection = object;
+        if (U.isFunction(object)) {
+            rowSelection = object(this.reference);
+        }
+        if (rowSelection) this.config.rowSelection = rowSelection;
         return this;
     }
 

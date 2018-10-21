@@ -12,7 +12,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
             .rework({
                 "grid": ["circle"]
             })
-            .rinit(["circle"], true)
+            .rinit(["circle"])
             .to()
     },
     "i18n.cab": require('./Cab.json'),
@@ -26,8 +26,8 @@ class Component extends React.PureComponent {
         Op.initComponent(this);
     }
 
-    componentDidUpdate() {
-        Op.updateData(this);
+    componentDidUpdate(prevProps) {
+        Op.updateData(this, prevProps);
     }
 
     render() {

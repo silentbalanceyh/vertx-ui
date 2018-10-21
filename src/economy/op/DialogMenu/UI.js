@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
             button.icon = "down";
             const {text, icon, onClick, ...rest} = button;
             // 是否禁用
-            const {$disabled = false} = this.props;
+            const {$disabled = false, $disabledItems = {}} = this.props;
             const attrs = {disabled: $disabled};
             return (
                 <span>
@@ -23,7 +23,8 @@ class Component extends React.PureComponent {
                         <Menu onClick={onClick} key={Ux.randomUUID()}>
                             {items.filter(item => U.isFunction(renders[item.key]))
                                 .map(item => (
-                                    <Menu.Item key={item.key}>
+                                    <Menu.Item key={item.key}
+                                               disabled={$disabledItems[item.key]}>
                                         {renders[item.key]()}
                                     </Menu.Item>
                                 ))}

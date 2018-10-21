@@ -4,7 +4,6 @@ import Hsx from '../Ux.Jsx';
 import Random from '../util/Ux.Random';
 import U from 'underscore';
 import {DataLabor} from 'entity';
-import Immutable from 'immutable';
 import Expr from '../util/Ux.Expr';
 import Value from '../Ux.Value';
 import {Table} from 'antd';
@@ -72,7 +71,7 @@ const subview = ($data, config, reference) => _highFun($data, config, reference,
     const renderField = (item) => Hsx.viewGrid(page, reference, DataLabor.getObject(item), {}, meta['key'], true);
     let hitData = value;
     if (!U.isArray(value) && U.isObject(value)) {
-        hitData = Immutable.fromJS(value ? value : {}).toJS();
+        hitData = Value.clone(value ? value : {});
         const converted = [];
         Object.keys(value).forEach(item => {
             const ref = hitData[item];

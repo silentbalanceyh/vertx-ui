@@ -70,8 +70,10 @@ const initData = (reference: any, data: any = []) => {
     const options = Init.readOptions(reference);
     if (options["table.edit.enabled"]) {
         if (0 === flatted.length) {
-            // 最少应该有一行
-            flatted.push(initRow(reference));
+            // 最少有一行的前提就是table.empty.init = true
+            if (options['table.empty.init']) {
+                flatted.push(initRow(reference));
+            }
         }
     }
     return flatted;

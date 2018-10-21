@@ -1,7 +1,7 @@
 import React, {Fragment} from "react";
 import {Button, Divider, Popconfirm, Tooltip} from "antd";
-import Immutable from "immutable";
 import U from 'underscore';
+import Value from '../../Ux.Value';
 
 const aiCellOp = (reference, config) => (text, record) => {
     const option = config['$option'];
@@ -187,7 +187,7 @@ const aiCellLink = (reference, config, ops = {}) => text => {
                 const item =
                     "string" === typeof line
                         ? line
-                        : Immutable.fromJS(line).toJS();
+                        : Value.clone(line);
                 // 按钮onClick专用
                 if (item.onClick) {
                     const fn = ops[item.onClick];

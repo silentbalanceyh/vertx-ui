@@ -1,7 +1,6 @@
 import Prop from '../prop/Ux.Prop';
 import Log from '../monitor/Mt.Logger';
 import Ai from '../ai/AI';
-import Immutable from 'immutable';
 import {v4} from 'uuid';
 import Value from '../Ux.Value';
 
@@ -20,7 +19,7 @@ class Mock {
 
     bind($list = []) {
         this.source = $list;
-        this.data = Immutable.fromJS($list).toJS();
+        this.data = Value.clone($list);
         return this;
     }
 

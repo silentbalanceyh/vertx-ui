@@ -1,7 +1,7 @@
 import U from 'underscore';
-import Immutable from 'immutable';
 import Logger from '../monitor/Mt.Logger';
 import Type from '../Ux.Type';
+import Value from '../Ux.Value';
 import V from '../value';
 import E from '../Ux.Error';
 
@@ -79,10 +79,10 @@ const parseAjax = (reference, parameters = {}) => {
 const initQuery = (reference = {}, $query) => {
     let $queryData = {};
     if ($query) {
-        $queryData = Immutable.fromJS($query).toJS();
+        $queryData = Value.clone($query);
     } else {
         if (reference.props.$query) {
-            $queryData = Immutable.fromJS(reference.props.$query).toJS();
+            $queryData = Value.clone(reference.props.$query);
         }
     }
     return $queryData;
