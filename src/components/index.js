@@ -28,6 +28,7 @@ import _input_raftjs$editor from './input/raftjs-editor/UI';
 import _input_rich$editor from './input/rich-editor/UI';
 import _input_table$editor from './input/table-editor/UI';
 import _input_table$transfer from './input/table-transfer/UI';
+import _input_team$selector from './input/team-selector/UI';
 import _input_time$ranger from './input/time-ranger/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
@@ -64,6 +65,7 @@ export default {
 	_input_rich$editor,
 	_input_table$editor,
 	_input_table$transfer,
+	_input_team$selector,
 	_input_time$ranger,
 	_layout_adjust015,
 	_layout_standard,

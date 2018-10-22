@@ -41,6 +41,7 @@ export default [
     "TimeRanger,form,zui.control.time-ranger,/input/time-ranger,10,zui.control.interaction",
     "MatrixEditor,form,zui.control.matrix-editor,/input/matrix-editor,11,zui.control.interaction",
     "RichEditor,form,zui.control.rich-editor,/input/rich-editor,12,zui.control.interaction",
+    "TeamSelector,form,zui.control.team-selector,/input/team-selector,13,zui.control.interaction",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用

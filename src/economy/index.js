@@ -41,7 +41,7 @@ export {default as CheckedInput} from './input/CheckedInput/UI';
 export {default as CheckedDate} from './input/CheckedDate/UI';
 export {default as TimeRanger} from './input/TimeRanger/UI';
 export {default as RichEditor} from './input/RichEditor/UI';
-
+export {default as TeamSelector} from './input/TeamSelector/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as LoadingImage} from './loading/LoadingImage/UI';

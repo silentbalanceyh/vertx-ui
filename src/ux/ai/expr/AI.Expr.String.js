@@ -163,6 +163,7 @@ const aiExprAjax = (ajax = {}) => {
         }
         const lefts = ExprValue.applyTree(rest);
         // 只合并criteria
+        if (!lefts.params) lefts.params = {};
         item.params.criteria = lefts.params.criteria;
     }
     return item;

@@ -22,6 +22,7 @@
                 "辅助类「Pure容器」：DialogButton,/control/dialog-button,true",
                 "辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
                 "交互类：ListSelector,/input/list-selector,true",
+                "交互类：TeamSelector,/input/team-selector,true",
                 "交互类：TableEditor,/input/table-editor,true",
                 "交互类：TableTransfer,/input/table-transfer,true",
                 "交互类：AddressSelector,/control/address-selector",

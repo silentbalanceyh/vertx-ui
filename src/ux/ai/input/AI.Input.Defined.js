@@ -11,6 +11,7 @@ import {
     RichEditor,
     TableEditor,
     TableTransfer,
+    TeamSelector,
     TimeRanger,
 } from "web";
 import RxAnt from "../ant/AI.RxAnt";
@@ -79,6 +80,10 @@ const aiRichEditor = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<RichEditor {...jsx} reference={reference}/>);
 };
+const aiTeamSelector = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    return (<TeamSelector {...jsx} reference={reference}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -100,4 +105,5 @@ export default {
     aiCheckedDate, // 选择框 + 时间
     aiCheckedInput, // 选择框 + 输入框
     aiRichEditor, // 富客户端录入框
+    aiTeamSelector, // 团队选择框，1 Leader, N Member表格选择
 };
