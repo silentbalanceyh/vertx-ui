@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
         config.pagination = false;
         config.className = "web-table-editor";
         // 数据处理
-        const data = Ux.xtSource(this);
+        const data = Ux.xtData(this);
         // 处理InputGroup中的jsx
         const attrs = Ux.valueFlip(jsx);
         const $attrs = Ux.clone(attrs);

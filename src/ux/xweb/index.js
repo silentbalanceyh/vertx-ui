@@ -4,6 +4,7 @@ import Event from './Xt.Event';
 import Dialog from './Xt.Dialog';
 import Table from './Xt.Table';
 import Rx from './Xt.Rx';
+import Init from './Xt.Init';
 
 export default {
     ...Dust,
@@ -11,5 +12,6 @@ export default {
     ...Event,
     ...Dialog,
     ...Table,
-    ...Rx
+    ...Rx,
+    ...Init,
 };

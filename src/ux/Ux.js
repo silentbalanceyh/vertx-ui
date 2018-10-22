@@ -149,7 +149,11 @@ Dg.dgReport(exported, [
     "「单向」解析函数 - Ux.,#603,parse",
     "「单向」Redux处理函数 - Ux.,#603,rdx",
     "「单向」Epic回调处理 - Ux.,#603,rx",
-    "「组件」Xt组件内部函数 - Ux.xtXXX,#660",
+    "「组件」Xt组件事件绑定函数 - Ux.,#660,xt2",
+    "「组件」Xt组件初始化函数 - Ux.,#660,xtInit",
+    "「组件」Xt组件Reactive流程函数 - Ux.,#660,xtRx",
+    "「组件」Xt组件Reactive流程函数 - Ux.,#660,xtTo",
+    "「组件」Xt组件常用函数 - Ux.,#660,OTHER:xt2`xtInit`xtRx`xtTo",
     "「界面」列处理函数 - Ux.uiXXX,#363",
     "「标准」Normalize标准化 - Ux.XXX",
     "「界面」窗口显示函数 - Ux.,#096,show",
@@ -221,6 +225,10 @@ Dg.dgReport(exported, [
     Fun, // 基础函数
     Fun, // 基础函数
     Fun, // 基础函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
     XT, // Xt自定义专用函数
     COLUMN, // 列处理函数
     NORM, // Normalize标准化

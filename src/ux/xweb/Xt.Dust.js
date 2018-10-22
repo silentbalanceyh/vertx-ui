@@ -1,6 +1,5 @@
 import U from 'underscore';
 import Value from '../Ux.Value';
-import Util from '../util';
 import Event from './Xt.Event';
 import Ux from "ux";
 
@@ -14,34 +13,6 @@ const xtUnsafe = (reference, nextProps = {}) => {
         const value = nextProps.value;
         reference.setState(value);
     }
-};
-/**
- * 初始化专用方法
- * @param props
- */
-const xtInit = (props = {}) => (props.value || {});
-const xtInitArray = (props = {}, empty = false) => {
-    const values = {};
-    // 初始化处理
-    const value = props.value;
-    if (value) {
-        values.data = U.isArray(value) ? value : (U.isArray(value.data) ? value.data :
-            ((empty) ? [] : [{key: Util.randomUUID()}]));
-    } else {
-        values.data = ((empty) ? [] : [{key: Util.randomUUID()}]);
-    }
-    return values;
-};
-const xtInitObject = (props = {}) => {
-    const values = {};
-    const value = props.value;
-    if (value) {
-        values.data = value;
-    } else {
-        // 默认对象
-        values.data = {};
-    }
-    return values;
 };
 
 const xtGet = (reference, field, supplier) => {
@@ -79,9 +50,6 @@ const xtPrevious = (reference) => {
 };
 export default {
     xtUnsafe,
-    xtInit,
-    xtInitArray,
-    xtInitObject,
     xtGet,
     xtReset,
     xtResetData,
