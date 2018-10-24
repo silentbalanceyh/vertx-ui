@@ -8,8 +8,10 @@ import {
     MagicView,
     MatrixEditor,
     MultiCheckBox,
+    RichEditor,
     TableEditor,
     TableTransfer,
+    TeamSelector,
     TimeRanger,
 } from "web";
 import RxAnt from "../ant/AI.RxAnt";
@@ -17,7 +19,9 @@ import React from "react";
 
 const aiMagic = (reference, jsx = {}) => {
     const {config = {}, ...rest} = jsx;
-    config.items = RxAnt.toOptions(reference, config);
+    const items = RxAnt.toOptions(reference, config);
+    if (items && items.length > 0)
+    	config.items = items;
     return (<MagicView {...rest} config={config} reference={reference}/>);
 };
 const aiFileUpload = (reference, jsx = {}, onChange) => {
@@ -74,6 +78,14 @@ const aiMatrixEditor = (reference, jsx = {}) => {
     const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
     return (<MatrixEditor {...attrs}/>);
 };
+const aiRichEditor = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<RichEditor {...jsx} reference={reference}/>);
+};
+const aiTeamSelector = (reference, jsx = {}) => {
+    RxAnt.onMockData(jsx, reference);
+    return (<TeamSelector {...jsx} reference={reference}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -94,4 +106,6 @@ export default {
     aiMatrixEditor, // 矩阵编辑器「固定行并且固定列」
     aiCheckedDate, // 选择框 + 时间
     aiCheckedInput, // 选择框 + 输入框
+    aiRichEditor, // 富客户端录入框
+    aiTeamSelector, // 团队选择框，1 Leader, N Member表格选择
 };

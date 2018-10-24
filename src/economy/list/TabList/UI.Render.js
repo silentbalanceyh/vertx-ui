@@ -1,6 +1,6 @@
 import React from 'react';
 import {Col, Row, Table, Tabs} from "antd";
-import Op from "./Op";
+import Op from "./op/Op";
 import "./Cab.less";
 import Ux from 'ux';
 import Fn from "../../_internal/Ix.Fn";

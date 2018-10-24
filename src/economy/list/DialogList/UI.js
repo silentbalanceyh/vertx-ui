@@ -5,7 +5,7 @@ import Fn from '../../_internal/Ix.Fn';
 import {DataLabor} from 'entity';
 import {DynamicDialog} from 'web';
 import {Table} from 'antd';
-import Op from './Op';
+import Op from './op/Op';
 import Render from './UI.Render';
 
 @_zero({

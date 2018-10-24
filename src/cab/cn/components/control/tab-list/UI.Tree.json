@@ -52,6 +52,10 @@
                         {
                             "name": "$formEdit",
                             "color": "#e23c39"
+                        },
+                        {
+                            "name": "$fastAdd",
+                            "color": "#33af43"
                         }
                     ]
                 },
@@ -180,6 +184,10 @@
                                 {
                                     "name": "row.add",
                                     "color": "#33af43"
+                                },
+                                {
+                                    "name": "row.add.leaf",
+                                    "color": "#33af43"
                                 }
                             ]
                         },
@@ -194,7 +202,7 @@
         "layout": {
             "hgap": 90,
             "vgap": 10,
-            "height": 1300
+            "height": 1600
         },
         "data": [
             {
@@ -274,6 +282,13 @@
                 "type": "React.Component",
                 "required": true,
                 "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$fastAdd",
+                "comment": "是否启用「快速添加」，默认启用",
+                "type": "Boolean",
+                "value": "true"
             },
             {
                 "source": "P",
@@ -519,6 +534,14 @@
                 "option": "row.add",
                 "comment": "快速添加按钮上的按钮显示文字",
                 "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "row.add.leaf",
+                "comment": "和叶节点处理相关，如果$fastAdd没有传入，则以该值优先启用「快速添加」。",
+                "type": "Boolean",
                 "value": "--"
             },
             {

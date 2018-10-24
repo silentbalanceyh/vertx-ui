@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cab.less';
 import {Table} from 'antd';
-import Op from './Op';
+import Op from './op/Op';
 import {DataLabor} from 'entity';
 import {_zero} from "../../_internal";
 import LoadingContent from '../../loading/LoadingContent/UI';

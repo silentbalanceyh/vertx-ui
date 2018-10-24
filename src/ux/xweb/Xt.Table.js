@@ -96,7 +96,7 @@ const xtColumn = (reference, columns = []) => {
     });
     return columns;
 };
-const xtSource = (reference) => {
+const xtData = (reference) => {
     E.fxTerminal(!reference, 10049, reference);
     E.fxTerminal(!reference.state, 10084, reference.state);
     let {data} = reference.state;
@@ -107,7 +107,14 @@ const xtSource = (reference) => {
     }
     return data;
 };
+const xtConfig = (reference, $config = {}) => {
+    E.fxTerminal(!reference, 10049, reference);
+    const {config = {}} = reference.props;
+    $config = Ux.clone($config);
+    return Object.assign({}, $config, config);
+};
 export default {
     xtColumn,
-    xtSource
+    xtData,
+    xtConfig
 };

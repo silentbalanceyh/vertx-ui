@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from 'ux';
-import Op from './Op';
+import Op from './op/Op';
 import {Tabs} from 'antd';
 import {_zero} from '../../_internal/index';
 import Fn from '../../_internal/Ix.Fn';

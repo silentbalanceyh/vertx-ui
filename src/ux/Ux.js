@@ -21,14 +21,12 @@ import System from './system';
 import Trigger from './trigger';
 import Terminal from './terminal';
 import Structure from './structure';
-
-import CONTROL from './jt/Jt';
 import XT from './xweb';
 import Jsx from './jsx';
 import Dg from './Ux.Debug';
 
 const exported = {
-    ...CONTROL,
+    // ...CONTROL,
     ...Jsx,
     /**
      *  XT系列组件用于替换掉CONTROL中的自定义组件对应的方法
@@ -149,7 +147,12 @@ Dg.dgReport(exported, [
     "「单向」解析函数 - Ux.,#603,parse",
     "「单向」Redux处理函数 - Ux.,#603,rdx",
     "「单向」Epic回调处理 - Ux.,#603,rx",
-    "「组件」Xt组件内部函数 - Ux.xtXXX,#660",
+    "「组件」Xt组件动态类 - Ux.,#660,OBJECT",
+    "「组件」Xt组件事件绑定函数 - Ux.,#660,xt2",
+    "「组件」Xt组件初始化函数 - Ux.,#660,xtInit",
+    "「组件」Xt组件Reactive流程函数 - Ux.,#660,xtRx",
+    "「组件」Xt组件Reactive流程函数 - Ux.,#660,xtTo",
+    "「组件」Xt组件常用函数 - Ux.,#660,OTHER:xt2`xtInit`xtRx`xtTo",
     "「界面」列处理函数 - Ux.uiXXX,#363",
     "「标准」Normalize标准化 - Ux.XXX",
     "「界面」窗口显示函数 - Ux.,#096,show",
@@ -185,7 +188,6 @@ Dg.dgReport(exported, [
     "「全局」函数式UI - Ux.,#399,aui",
     "「全局」核心类 - Ux.,#399,OBJECT",
     "「全局」其他全局 - Ux.,#399,OTHER:rx`aui",
-    "「Deprecated」未来移除 - Ux.( jXX ),red",
     "「Deprecated」未来移除 - Ux.( cycle ),red",
 ], [
     G,  // 图库
@@ -222,6 +224,11 @@ Dg.dgReport(exported, [
     Fun, // 基础函数
     Fun, // 基础函数
     XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
+    XT, // Xt自定义专用函数
     COLUMN, // 列处理函数
     NORM, // Normalize标准化
     DIALOG, // 窗口专用函数
@@ -257,7 +264,7 @@ Dg.dgReport(exported, [
     ENV, // 环境变量
     ENV, // 环境变量
     ENV, // 环境变量
-    CONTROL, // J开头专用
+    // CONTROL, // J开头专用
     OP, // OP操作函数
 ]);
 export default exported;

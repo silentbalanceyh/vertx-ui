@@ -38,6 +38,5 @@ const getDialog = (reference, config = {}) => {
     return dialog;
 };
 export default {
-    getDefault,
-    getDialog
+    getDefault
 };

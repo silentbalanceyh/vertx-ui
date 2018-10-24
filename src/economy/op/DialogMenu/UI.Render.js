@@ -18,13 +18,15 @@ const getChildren = (reference, item = {}) => {
     const {init = true} = item;
     if (Component) {
         return (
-            <Component fnClose={() => {
-                const state = Ux.clone(reference.state);
-                state.visible[item.key] = false;
-                reference.setState(state);
-            }} {...Ux.toUniform(reference.props)}
+            <Component {...Ux.toUniform(reference.props)}
                        $inited={init ? $inited : _calcInit($inited)}
-                       $parent={$inited}/>
+                       $parent={$inited}
+                       fnClose={() => {
+                           const state = Ux.clone(reference.state);
+                           state.visible[item.key] = false;
+                           console.info(state);
+                           reference.setState(state);
+                       }}/>
         );
     } else return false;
 };

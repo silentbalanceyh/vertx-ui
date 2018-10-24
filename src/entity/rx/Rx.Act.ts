@@ -102,6 +102,12 @@ class RxAct {
         return this;
     }
 
+    debug(data: any) {
+        const result = data ? data : this.data;
+        Ux.dgDebug(result, "RxAct");
+        return this;
+    }
+
     reset(fields: any) {
         const ref = this.reference;
         const executor = this.executor;

@@ -8,7 +8,7 @@ import Prop from '../../prop/Ux.Prop';
 import React from "react";
 import Xt from '../../xweb';
 import Norm from '../../Ux.Normalize';
-
+import Jsx from '../../Ux.Jsx';
 
 const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     const config = item['$config'];
@@ -41,18 +41,20 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
 };
 
 const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-	// add by Hongwei: 添加对rows属性的支持
-	const config = item["$config"] ? item["$config"] : {};
-	const rows = config? config["rows"] : 2;
-	const attrs = AiValue.applyDynamic(item);
-	// 处理属性相关信息
-	const {viewOnly = false} = jsx;
-	attrs.readOnly = viewOnly;
-	const params = {
-		index, field: item.dataIndex
-	};
-	attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-	return (<Input.TextArea {...attrs} rows={rows} value={text}/>);
+    // add by Hongwei: 添加对rows属性的支持
+    const config = item["$config"] ? item["$config"] : {};
+    const rows = config ? config["rows"] : 2;
+    const attrs = AiValue.applyDynamic(item);
+    // 处理属性相关信息
+    const {viewOnly = false} = jsx;
+    attrs.readOnly = viewOnly;
+    const params = {
+        index, field: item.dataIndex
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    attrs.rows = rows;
+    // 进行协变的渲染
+    return Jsx.jsxCell(Input.TextArea, attrs, text);
 };
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -139,7 +141,7 @@ const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => 
 export default {
     VECTOR: aiUnitVector,
     TEXT: aiUnitText,
-	TextArea: aiUnitTextArea,
+    TEXT_AREA: aiUnitTextArea,
     DATE: aiUnitDate,
     DATUM: aiUnitDatum,
     RADIO: aiUnitRadio,

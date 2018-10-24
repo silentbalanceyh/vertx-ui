@@ -12,6 +12,7 @@ import View from './jsx/Ux.Jsx.View.Fn';
 import Op from './jsx/Ux.Jsx.Op';
 // Raft
 import Raft from './Ux.Form';
+import U from 'underscore';
 
 /**
  * 仅渲染交互式组件，Grid布局
@@ -140,6 +141,29 @@ const uiFieldFilter = (reference = {}, renders = {}, column = 2, values, config 
         );
     });
 
+const jsxCell = (Element, attrs = {}, text) => {
+    if (text && U.isObject(text)) {
+        // 是否包含了colSpan和className
+        const obj = {props: {}};
+        if (text.hasOwnProperty('colSpan')) {
+            obj.props.colSpan = text.colSpan;
+        }
+        // 等于0的时候直接就不计算了
+        if (0 < obj.props.colSpan) {
+            const {className = "", value} = text;
+            obj.children = (
+                <span className={className}>
+                    <Element {...attrs} value={value}/>
+                </span>
+            );
+        }
+        return obj;
+    } else {
+        // 纯渲染
+        attrs.value = text;
+    }
+    return (<Element {...attrs}/>);
+};
 /**
  * @class Jsx
  * @description 字段专用输出函数
@@ -185,6 +209,7 @@ export default {
     // 渲染子表单专用，可根据Form的key渲染子表单，field且不一样
     jsxFieldPage,
     jsxExtension,
+    jsxCell,
     // 计算动态Renders
     calcRenders: DFT.uiRender
 };

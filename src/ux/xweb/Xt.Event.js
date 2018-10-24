@@ -20,7 +20,7 @@ const xtChange = (reference, changedValues = {}, key) => {
         // 1.拷贝新数据
         newValue = Value.clone(newValue);
         // 2.过滤特殊数据
-        newValue = Filter.xtFilter$(newValue);
+        newValue = Filter.xtToValue(newValue);
         // 3.变更数据处理
         onChange(newValue);
     }

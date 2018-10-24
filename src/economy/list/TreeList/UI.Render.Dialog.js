@@ -1,7 +1,7 @@
 import {Button, Popover, Tooltip} from "antd";
 import './Cab.less';
-import Act from "./Op.Act";
-import Is from './Op.Is';
+import Act from "./op/Op.Act";
+import Is from './op/Op.Is';
 import React from "react";
 import Ux from "ux";
 import Fn from "../../_internal/Ix.Fn";

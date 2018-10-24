@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from 'ux';
 import {Button, Input, Spin, Tree} from 'antd';
-import Op from './Op';
+import Op from './op/Op';
 import Immutable from 'immutable';
 import Item from './UI.Render.Item';
 
@@ -38,7 +38,6 @@ const _renderNodes = (reference, item = {}, config = {}) => {
         </TreeNode>
     );
 };
-
 const renderTree = (reference) => {
     const treeData = Op.initTree(reference);
     const options = Op.readOptions(reference);
@@ -60,6 +59,7 @@ const renderTree = (reference) => {
     // 搜索文字
     const {term = "", selected = []} = reference.state;
     attrs.selectedKeys = selected;
+    // 计算row.add功能
     return (
         <div className={"web-tree"}>
             {search ? (

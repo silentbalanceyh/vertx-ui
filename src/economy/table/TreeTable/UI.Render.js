@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cab.less';
 import U from 'underscore';
-import Op from './Op';
+import Op from './op/Op';
 import Ux from 'ux';
 
 import DialogButton from '../../op/DialogButton/UI';
@@ -126,9 +126,11 @@ const renderOp = (reference, record, {
                     </span>
                 </span>
             );
+        } else {
+            jsx.children = text ? text : false;
         }
     } else {
-        jsx.children = text;
+        jsx.children = text ? text : false;
     }
     return jsx;
 };
