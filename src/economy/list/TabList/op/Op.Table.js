@@ -70,20 +70,31 @@ const initData = (reference) => {
         return {list: [], count: 0, ready: false};
     }
 };
+const _isDisabledAdd = (reference) => {
+    const options = Init.readOption(reference);
+    // 是否禁用快速添加，$fastAdd为启用添加，默认启用
+    let disabled = false;
+    if (reference.props.hasOwnProperty('$fastAdd')) {
+        // 以传入值为主
+        disabled = reference.props['$fastAdd'];
+    } else {
+        // 以默认值为主
+        if (options['row.add.leaf']) {
+            // 如果开启了叶节点才能执行，则默认为false，反向取值
+            disabled = !options['row.add.leaf'];
+        }
+    }
+    return disabled;
+};
 const initAdd = (reference, column) => {
     const options = Init.readOption(reference);
     if (options["row.add"]) {
         const tip = options["row.add"];
-        // 是否禁用快速添加，$fastAdd为启用添加，默认启用
-        let {$fastAdd = true} = reference.props;
-        if (options['row.add.leaf']) {
-            // 如果开启了叶节点才能执行，则默认为false，反向取值
-            $fastAdd = !options['row.add.leaf'];
-        }
+
         return (
             <Tooltip title={tip ? tip : false}>
                 <Button icon={"plus"} type="primary"
-                        disabled={!$fastAdd}
+                        disabled={_isDisabledAdd(reference)}
                         onClick={event => {
                             event.preventDefault();
                             reference.setState({

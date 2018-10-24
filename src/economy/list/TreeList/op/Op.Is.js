@@ -8,7 +8,8 @@ const _isCondAdd = (reference, item) => {
         // 如果叶节点支持带条件添加
         const field = options['leaf.field'];
         if (field) {
-            result = item[field];
+            // 非叶节点时才返回true
+            result = !item[field];
         } else {
             // 检查函数信息，启用rxCondAdd时不能开启leaf.field
             const {rxCondAdd = () => true} = reference.props;

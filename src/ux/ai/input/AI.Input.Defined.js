@@ -19,7 +19,9 @@ import React from "react";
 
 const aiMagic = (reference, jsx = {}) => {
     const {config = {}, ...rest} = jsx;
-    config.items = RxAnt.toOptions(reference, config);
+    const items = RxAnt.toOptions(reference, config);
+    if (items && items.length > 0)
+    	config.items = items;
     return (<MagicView {...rest} config={config} reference={reference}/>);
 };
 const aiFileUpload = (reference, jsx = {}, onChange) => {

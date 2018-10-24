@@ -178,6 +178,23 @@ const _rxFilters = (reference, key, options = {}, item = {}) => {
     }
     return filters;
 };
+const _rxLeaf = (state = {}, options = {}, dataItem = {}) => {
+    // 是否开启了row.add.leaf的功能
+    if (options['row.add.leaf']) {
+        // 是否有子节点，如果有子节点才支持添加功能
+        const childCount = dataItem.children.length;
+        // 是否包含了leaf.field字段
+        if (options['leaf.field']) {
+            // 包含了leaf.field配置，直接从配置处理子节点的判断
+            const field = options['leaf.field'];
+            state['tree.row.add'] = {enabled: dataItem[field]};
+        } else {
+            // 如果没有包含配置，则检查rxCondAdd
+            state['tree.row.add'] = {enabled: 0 < childCount};
+        }
+    }
+    return state;
+};
 const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
     // 特殊处理，只有Key的长度大于0即有内容被选中时才触发，防止清空
     if (edit && 0 < key.length) {
@@ -193,7 +210,7 @@ const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
             // 提取更新过后的Filters
             const filters = _rxFilters(reference, key, options, dataItem);
             // 设置待写入状态
-            const state = {
+            let state = {
                 "grid.query": filters,  // 设置过滤条件
                 "grid.list": undefined, // 刷新右边的List
                 "tree.selected": {      // 选择的树的Key信息，用于设置parentId专用
@@ -202,11 +219,7 @@ const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
                 }
             };
             // 选项处理：只有叶节点才支持添加的功能
-            if (options['row.add.leaf']) {
-                // 是否有子节点，如果有子节点才支持添加功能
-                const childCount = dataItem.children.length;
-                state['tree.row.add'] = {enabled: 0 < childCount};
-            }
+            state = _rxLeaf(state, options, dataItem);
             // 这里的selected有可能是数组
             Ux.writeTree(reference, state);
         }
