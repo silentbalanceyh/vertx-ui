@@ -1,11 +1,12 @@
 import Ux from "ux";
 import Act from "./Op.Action";
 import Init from './Op.Init';
+import Fn from '../../../_internal/Ix.Fn';
 import U from "underscore";
-import Fn from '../../_internal/Ix.Fn';
+import {Button, Tooltip} from "antd";
+import React from "react";
 
 const {Mock} = Fn;
-
 const _initTablePager = (reference = {}) => {
     const data = initData(reference);
     const pagination = {
@@ -16,7 +17,10 @@ const _initTablePager = (reference = {}) => {
     const {$query} = reference.props;
     if ($query.is()) {
         const query = $query.to();
-        const pager = query.pager ? query.pager : {size: 10, page: 1};
+        const pager = query.pager ? query.pager : {
+            size: 10,
+            page: 1
+        };
         pagination.pageSize = pager.size ? pager.size : 10;
         pagination.current = pager.page ? pager.page : 1;
         return pagination;
@@ -44,6 +48,7 @@ const _initChange = (reference = {}) => (pagination, filter, sorter) => {
             // 将Mocker清空，只是在Mock环境下保留Loading效果而已
             reference.setState({mocker: undefined});
         }
+
         Ux.writeTree(reference, {
             "grid.list": undefined,
             "grid.query": query
@@ -65,13 +70,63 @@ const initData = (reference) => {
         return {list: [], count: 0, ready: false};
     }
 };
+const initAdd = (reference, column) => {
+    const options = Init.readOption(reference);
+    if (options["row.add"]) {
+        const tip = options["row.add"];
+        // 是否禁用快速添加，$fastAdd为启用添加，默认启用
+        let {$fastAdd = true} = reference.props;
+        if (options['row.add.leaf']) {
+            // 如果开启了叶节点才能执行，则默认为false，反向取值
+            $fastAdd = !options['row.add.leaf'];
+        }
+        return (
+            <Tooltip title={tip ? tip : false}>
+                <Button icon={"plus"} type="primary"
+                        disabled={!$fastAdd}
+                        onClick={event => {
+                            event.preventDefault();
+                            reference.setState({
+                                rowKey: Ux.randomUUID()
+                            });
+                        }}>{tip}</Button>
+            </Tooltip>
+        );
+    } else return column.title;
+};
+const initRow = (reference, columns = [], rowKey) => {
+    columns.forEach(column => {
+        if (column.edit) {
+            const fnRender = column.render;
+            column.render = (text, record, index) => {
+                if (record.key === rowKey) {
+                    let type = column.edit["$render"];
+                    if (!type) type = "TEXT";
+                    const fnRender = Ux.aiStateRenders[type];
+                    return U.isFunction(fnRender) ?
+                        fnRender(reference, column)(text, record, index) : false;
+                } else {
+                    return U.isFunction(fnRender) ?
+                        fnRender(text, record, index) : text;
+                }
+            };
+        }
+    });
+    return columns;
+};
 const initTable = (reference = {}) => {
-    const table = Init.readTable(reference);
+    let table = Init.readTable(reference);
+    table = Ux.clone(table);
     // 列渲染
     const props = reference.props;
+    // 行添加专用
+    const {rowKey} = reference.state;
     const op = {
         rxEdit: Act.rxEdit,
         rxDelete: Act.rxDelete,
+        rxSave: Act.rxSave,
+        rowKey,
+        rxCancel: () => reference.setState({rowKey: undefined})
     };
     table.columns = Ux.uiTableColumn({
         props: {
@@ -83,6 +138,11 @@ const initTable = (reference = {}) => {
             $self: reference
         },
     }, table.columns);
+    table.columns.filter(column => "key" === column.dataIndex)
+        .forEach(column => column.title = initAdd(reference, column));
+    if (rowKey) {
+        table.columns = initRow(reference, table.columns, rowKey);
+    }
     // 分页处理，客户端模式
     table.pagination = _initTablePager(reference);
     table.onChange = _initChange(reference);

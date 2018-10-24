@@ -4,7 +4,7 @@ import Init from './Op.Init';
 import Ux from 'ux';
 import U from 'underscore';
 import Act from './Op.Action';
-import Fn from '../../_internal/Ix.Fn';
+import Fn from '../../../_internal/Ix.Fn';
 
 const _renderOp = (reference, key, value = "") => {
     if ("add" === key) {

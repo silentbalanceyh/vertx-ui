@@ -76,6 +76,7 @@ const initData = (reference: any, data: any = []) => {
             }
         }
     }
+    // 针对flatted的内容执行拉平处理
     return flatted;
 };
 export default {

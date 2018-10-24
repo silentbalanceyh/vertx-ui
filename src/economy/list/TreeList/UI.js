@@ -3,7 +3,7 @@ import './Cab.less';
 import {_zero} from '../../_internal/index';
 import {DataLabor} from 'entity';
 import Ux from "ux";
-import Op from "./Op";
+import Op from "./op/Op";
 import Rdr from './UI.Render';
 import TabList from '../TabList/UI';
 
@@ -11,10 +11,11 @@ import TabList from '../TabList/UI';
     connect: {
         s2p: state => DataLabor.createOut(state)
             .rework({
-                "grid": ["tree", "query"]
+                "grid": ["tree", "query"],
+                "tree.row": ["add"]
             })
             .rinit(["tree"], true)
-            .rinit(["query"])
+            .rinit(["query", "add"])
             .to()
     },
     "i18n.cab": require('./Cab.json'),
@@ -41,7 +42,7 @@ class Component extends React.PureComponent {
         const ref = this;
         return Ux.fxRender(this, () => {
             return Rdr.renderLayout(ref,
-                <TabList {...this.props}/>
+                <TabList {...this.props} $fastAdd={Op.isEnableRowAdd(this)}/>
             );
         });
     }

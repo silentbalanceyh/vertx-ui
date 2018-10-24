@@ -17,17 +17,36 @@ const _on2Click = (reference, record) => (event) => {
     reference.setState({data});
     Ux.xtChange(reference, data, true);
 };
-const renderOp = (reference) => (text, record) => {
-    return (
-        <span>
-            <Button icon={"undo"} shape={"circle"}
-                    onClick={_on2Click(reference, record)}/>
-            &nbsp;&nbsp;
-            {text}
-        </span>
-    );
-};
 
+const _renderOp = (reference, record, text) => (
+    <span>
+        <Button icon={"undo"} shape={"circle"}
+                onClick={_on2Click(reference, record)}/>
+        &nbsp;&nbsp;
+        {text}
+    </span>
+);
+const renderOp = (reference) => (text = {}, record = {}) => {
+    // 是否包含了colSpan属性
+    const obj = {};
+    // 最终的Object
+    if ("string" === typeof text) {
+        return _renderOp(reference, record, text);
+    } else {
+        const {colSpan, className = ""} = text;
+        if (undefined !== colSpan) {
+            obj.props = {colSpan};
+        } else {
+            obj.props = {colSpan: 1};
+        }
+        obj.children = (
+            <span className={className}>
+                {_renderOp(reference, record, text.children)}
+            </span>
+        );
+    }
+    return obj;
+};
 export default {
     renderOp
 };

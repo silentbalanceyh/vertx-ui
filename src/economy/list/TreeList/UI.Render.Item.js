@@ -1,8 +1,8 @@
 import {Button, Input, Popconfirm} from "antd";
 import React from "react";
 import Ux from 'ux';
-import Act from './Op.Act';
-import Is from './Op.Is';
+import Act from './op/Op.Act';
+import Is from './op/Op.Is';
 import Rdr from './UI.Render.Dialog';
 
 const _renderDelete = (reference, config = {}, item) => {

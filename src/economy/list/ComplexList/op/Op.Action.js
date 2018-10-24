@@ -1,15 +1,14 @@
 import {v4} from 'uuid';
 import Ux from 'ux';
 import Init from './Op.Init';
-import Fn from '../../_internal/Ix.Fn';
-import Immutable from 'immutable';
-import U from 'underscore';
+
+import Fn from '../../../_internal/Ix.Fn';
 
 const {Mock} = Fn;
 
 const stateAddTab = (reference) => {
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const type = tabs.items.filter(item => "add" === item.type);
     if (0 < type.length) {
         tabs.activeKey = type[0].key;
@@ -28,7 +27,7 @@ const stateAddTab = (reference) => {
 
 const stateEditTab = (reference, id, params) => {
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {
         tabs.activeKey = found[0].key;
@@ -62,13 +61,13 @@ const rxRecord = (reference, id, data) => {
     if (undefined !== data) {
         record[id] = data;
     }
-    return Immutable.fromJS(record).toJS();
+    return Ux.clone(record);
 };
 
 const rxEdit = (reference, id) => {
     const {$self} = reference.props;
     let {tabs = {}} = $self.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {
         // 如果已经打开过，则不需要重复打开记录
@@ -104,11 +103,11 @@ const rxDeleteDetail = (reference, id) => {
     promise.then(data => {
         // 删除record数据
         let {record = {}} = reference.state;
-        record = Immutable.fromJS(record).toJS();
+        record = Ux.clone(record);
         if (record[id]) delete record[id];
         // 计算tabs页
         let {tabs = {}} = reference.state;
-        tabs = Immutable.fromJS(tabs).toJS();
+        tabs = Ux.clone(tabs);
         tabs.items = tabs.items.filter(item => id !== item.key);
         tabs.activeKey = tabs.items[0].key;
         const view = Init.stateView("list", undefined, reference);
@@ -129,27 +128,10 @@ const rxDelete = (reference, id) => {
     rxDeleteDetail($self, id);
 };
 
-const rxSave = (reference) => {
-    const {$self} = reference.props;
-    const {rxAddRow} = $self.props;
-    if (U.isFunction(rxAddRow)) {
-        const {rowRecord, rowKey} = $self.state;
-        if (rowRecord) {
-            rowRecord.key = rowKey;
-            rxAddRow(rowRecord, rowKey, () => $self.setState({
-                rowRecord: {},
-                rowKey: undefined
-            }));
-            // Mock专用处理，直接从$self中读取
-            Mock.mockfnRecord($self, false)(rowRecord);
-        }
-    }
-};
-
 const rxClose = (reference, activekey) => () => {
     // 关闭时处理tab页
     let {tabs = {}} = reference.state;
-    tabs = Immutable.fromJS(tabs).toJS();
+    tabs = Ux.clone(tabs);
     tabs.items = tabs.items.filter(each => each.key !== activekey);
     tabs.items.forEach((each, index) => each.index = index);
     tabs.activeKey = tabs.items[0].key;
@@ -228,6 +210,4 @@ export default {
     rxFilter,
     rxClear,
     rxInput,
-    // 行处理
-    rxSave,
 };

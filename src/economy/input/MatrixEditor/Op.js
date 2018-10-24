@@ -21,17 +21,31 @@ const initData = (reference) => {
         }
         data.push(dataItem);
     });
-    console.info(data);
+    // 是否包含了Footer
+    const {config = {}} = reference.props;
+    if (config.footer) {
+        data.push(config.footer);
+    }
     return {data};
 };
 const initTable = (reference) => {
     const {table = {}} = reference.props;
     table.columns = Ux.xtColumn(reference, table.columns);
     // 追加第一列
-    table.columns.splice(0, 0, {
+    const labelColumn = table.columns.filter(column => "label" === column.dataIndex);
+    const filtered = table.columns.filter(column => "label" !== column.dataIndex);
+    // 追加列
+    const appended = {
         dataIndex: "label",
         render: Rdr.renderOp(reference)
-    });
+    };
+    if (0 < labelColumn.length) {
+        appended.title = labelColumn[0].title;
+        appended.className = labelColumn[0].className;
+    }
+    filtered.splice(0, 0, appended);
+    // 最终替换table中的columns
+    table.columns = filtered;
     return table;
 };
 const getDefault = (reference) => initData(reference).data;

@@ -2,6 +2,7 @@ import U from 'underscore';
 import Value from '../Ux.Value';
 import Event from './Xt.Event';
 import Ux from "ux";
+import Prop from "../prop/Ux.Prop";
 
 /**
  * UNSAFE_componentWillReceiveProps(nextProps,context)
@@ -48,7 +49,31 @@ const xtPrevious = (reference) => {
         reference.setState({$value: value});
     }
 };
+/**
+ * 将props中的Ant Design对应的Form引用挂载到父引用中的$_pointer中
+ * @param ref
+ * @param key
+ */
+const xtPointer = (ref, key) => {
+    if (key) {
+        // 当前组件属性props中的Ant Design的Form引用挂载到父状态的$_pointer中
+        const {reference} = ref.props;
+        const {$_pointer = {}} = reference.state;
+        $_pointer[key] = ref.props.form;
+    } else {
+        // 中间节点继续挂载
+        const {$_pointer} = ref.state;
+        if ($_pointer) {
+            const parent = Prop.onReference(ref, 1);
+            parent.setState({
+                $_pointer, $_child: ref,
+            });
+        }
+    }
+};
+
 export default {
+    xtPointer,
     xtUnsafe,
     xtGet,
     xtReset,

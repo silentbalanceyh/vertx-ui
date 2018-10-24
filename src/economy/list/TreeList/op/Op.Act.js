@@ -182,27 +182,33 @@ const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
     // 特殊处理，只有Key的长度大于0即有内容被选中时才触发，防止清空
     if (edit && 0 < key.length) {
         // 设置selected的数据
-        reference.setState({
-            selected: key
-        });
+        reference.setState({selected: key});
         // 写状态树专用
         const options = Init.readOptions(reference);
         if (options["tree.filter"]) {
             // 选中节点
             const node = treeNode.node ? treeNode.node : {};
+            // 读取选中节点数据
             const dataItem = node.props ? node.props["data-items"] : {};
             // 提取更新过后的Filters
             const filters = _rxFilters(reference, key, options, dataItem);
-            // 这里的selected有可能是数组
-            Ux.writeTree(reference, {
-                "grid.query": filters,
-                "grid.list": undefined,
-                // 选择的树的Key信息，用于设置parentId专用
-                "tree.selected": {
+            // 设置待写入状态
+            const state = {
+                "grid.query": filters,  // 设置过滤条件
+                "grid.list": undefined, // 刷新右边的List
+                "tree.selected": {      // 选择的树的Key信息，用于设置parentId专用
                     data: dataItem,
                     key,
                 }
-            });
+            };
+            // 选项处理：只有叶节点才支持添加的功能
+            if (options['row.add.leaf']) {
+                // 是否有子节点，如果有子节点才支持添加功能
+                const childCount = dataItem.children.length;
+                state['tree.row.add'] = {enabled: 0 < childCount};
+            }
+            // 这里的selected有可能是数组
+            Ux.writeTree(reference, state);
         }
     }
 };
@@ -226,6 +232,7 @@ export default {
     rxAddDialog,
     rxEditDialog,
     rxClose,
+    // 右边添加条件设置
     // 最开始的三个按钮
     rxDelete,
     rxPreEdit,

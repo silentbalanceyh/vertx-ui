@@ -2,7 +2,7 @@ import Ux from 'ux';
 import Immutable from "immutable";
 import U from 'underscore';
 import {v4} from 'uuid';
-import Fn from '../../_internal/Ix.Fn';
+import Fn from '../../../_internal/Ix.Fn';
 
 const {Mock} = Fn;
 

@@ -1,6 +1,6 @@
 import Ux from "ux";
 import * as U from 'underscore'
-import Rdr from './UI.Render'
+import Rdr from '../UI.Render'
 import Data from './Op.Data'
 
 const readConfig = (reference: any = {}) => {
@@ -73,6 +73,12 @@ const _readCurrent = (reference) => {
                 calculated = dataArray;
             }
         }
+    }
+    // 取出来的数据中需要调用rxTreeData，如果存在
+    // 是否存在rxTreeData函数
+    const {rxTreeData} = reference.props;
+    if (U.isFunction(rxTreeData)) {
+        calculated = rxTreeData(calculated);
     }
     return calculated;
 };

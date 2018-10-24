@@ -23,7 +23,6 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        console.info(this.props, this.state);
         const {table = {}, data = []} = this.state ? this.state : {};
         // 配置处理
         table.pagination = false;

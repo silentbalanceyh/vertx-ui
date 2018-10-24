@@ -1,6 +1,6 @@
 import Ux from "ux";
 import Immutable from "immutable";
-import Fn from '../../_internal/Ix.Fn';
+import Fn from '../../../_internal/Ix.Fn';
 
 const readConfig = (reference = {}) => Fn.fetchConfig(reference, "sublist");
 

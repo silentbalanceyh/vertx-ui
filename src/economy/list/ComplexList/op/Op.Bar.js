@@ -4,7 +4,7 @@ import Init from './Op.Init';
 import Ux from 'ux';
 import U from 'underscore';
 import Act from './Op.Action';
-import Fn from '../../_internal/Ix.Fn';
+import Fn from '../../../_internal/Ix.Fn';
 
 const _renderOp = (reference, key, value = "") => {
     if ("add" === key) {
@@ -154,11 +154,11 @@ const _isLock = (reference, options = {}) => {
         // 读取初始值
         const {record, tabs = {}} = reference.state;
         if (record && tabs) {
-			// 当record和tabs不为空或空对象时才读取初始值
-			const {activeKey} = tabs;
-			const $inited = record[activeKey] ? record[activeKey] : {};
-			isLock = $inited ? $inited.lock : false;
-		}
+            // 当record和tabs不为空或空对象时才读取初始值
+            const {activeKey} = tabs;
+            const $inited = record[activeKey] ? record[activeKey] : {};
+            isLock = $inited ? $inited.lock : false;
+        }
     }
 
     return isLock;

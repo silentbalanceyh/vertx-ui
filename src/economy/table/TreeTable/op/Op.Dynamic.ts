@@ -1,4 +1,4 @@
-import Rdr from './UI.Render'
+import Rdr from '../UI.Render'
 import Init from './Op.Init'
 
 const calcTable = (reference, table) => {
@@ -15,15 +15,25 @@ const calcTable = (reference, table) => {
             const rowKey = record[`${column.level}.key`];
             const checkKey = `${column.dataIndex}-${rowKey}`;
             if (counterContainer[checkKey]) {
-                return {
+                // 解决空行问题
+                return text ? {
                     children: text,
                     props: {
                         rowSpan: 0
                     }
+                } : {
+                    children: text,
+                    props: {
+                        rowSpan: 1
+                    }
                 }
             } else {
                 counterContainer[checkKey] = true;
-                const rowSpan = 0 === currentRowSpan ? 1 : currentRowSpan;
+                let rowSpan = 0 === currentRowSpan ? 1 : currentRowSpan;
+                // 修正不渲染的问题
+                if (undefined === rowSpan) {
+                    rowSpan = 1;
+                }
                 return (isEdit) ? Rdr.renderOp(reference, record, {
                     text, rowSpan, column
                 }) : {

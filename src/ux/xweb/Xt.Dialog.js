@@ -28,7 +28,7 @@ const _xtParams = (reference, config = {}) => {
 
 const xt2Loading = (reference, config = {}) => event => {
     // 常用的事件处理
-    if (U.isFunction(event.preventDefault)) {
+    if (event && U.isFunction(event.preventDefault)) {
         event.preventDefault();
     }
     // 初始化数据

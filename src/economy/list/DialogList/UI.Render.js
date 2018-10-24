@@ -1,5 +1,5 @@
 import React from 'react';
-import Op from './Op';
+import Op from './op/Op';
 import {Button, Col, Row} from 'antd';
 
 const renderHeader = (reference) => {
