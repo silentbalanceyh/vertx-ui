@@ -46,6 +46,10 @@
                             "color": "#33af43"
                         },
                         {
+                            "name": "rxCondItemAdd",
+                            "color": "#33af43"
+                        },
+                        {
                             "name": "$mockData",
                             "color": "#33af43"
                         },
@@ -168,6 +172,14 @@
                                     "color": "#33af43"
                                 },
                                 {
+                                    "name": "leaf.cond.add",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "leaf.field",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "mock.enabled",
                                     "color": "#33af43"
                                 },
@@ -262,6 +274,10 @@
                                 {
                                     "name": "row.add",
                                     "color": "#33af43"
+                                },
+                                {
+                                    "name": "row.add.leaf",
+                                    "color": "#33af43"
                                 }
                             ]
                         },
@@ -276,7 +292,7 @@
         "layout": {
             "hgap": 90,
             "vgap": 10,
-            "height": 2000
+            "height": 2200
         },
         "data": [
             {
@@ -346,6 +362,14 @@
                 "source": "E",
                 "name": "rxItemEdit",
                 "comment": "「快速模式」中树型菜单的「编辑」操作",
+                "type": "Function",
+                "required": false,
+                "value": "--"
+            },
+            {
+                "source": "E",
+                "name": "rxCondItemAdd",
+                "comment": "判断树上显示添加按钮的基本条件",
                 "type": "Function",
                 "required": false,
                 "value": "--"
@@ -579,6 +603,22 @@
             {
                 "source": "O",
                 "name": "options",
+                "option": "leaf.cond.add",
+                "comment": "开启子节点添加限制功能。",
+                "type": "Boolean",
+                "value": "false"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "leaf.field",
+                "comment": "如果设置该配置，则定义了当前item中哪个字段用于判断子节点，若不设置，选择rxCondItemAdd的结果，二者都不设置则以children数量为主。",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
                 "option": "mock.enabled",
                 "comment": "是否开启Mock环境？",
                 "type": "Boolean",
@@ -766,6 +806,14 @@
                 "option": "row.add",
                 "comment": "快速添加按钮上的按钮显示文字",
                 "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "row.add.leaf",
+                "comment": "是否启用子节点添加限制功能？影响右边List的「快速添加」。",
+                "type": "Boolean",
                 "value": "--"
             },
             {
