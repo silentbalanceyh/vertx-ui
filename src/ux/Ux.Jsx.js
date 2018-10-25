@@ -79,7 +79,7 @@ const _uiForm = (reference, config = {}, column, values, callback, disableRaft) 
                 .filter(cell => "$button" === cell.field)
                 .forEach(cell => cell.render = config.renders.$button));
         }
-        return Raft.raftJsx(reference, values);
+        return Raft.raftJsx(reference, values, config);
     } else {
         const {key = "form"} = config;
         const form = Prop.fromHoc(reference, key);

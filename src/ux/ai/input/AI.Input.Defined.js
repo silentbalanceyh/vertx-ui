@@ -1,4 +1,5 @@
 import {
+    BraftEditor,
     ChangeEditor,
     CheckedDate,
     CheckedInput,
@@ -21,7 +22,7 @@ const aiMagic = (reference, jsx = {}) => {
     const {config = {}, ...rest} = jsx;
     const items = RxAnt.toOptions(reference, config);
     if (items && items.length > 0)
-    	config.items = items;
+        config.items = items;
     return (<MagicView {...rest} config={config} reference={reference}/>);
 };
 const aiFileUpload = (reference, jsx = {}, onChange) => {
@@ -86,6 +87,11 @@ const aiTeamSelector = (reference, jsx = {}) => {
     RxAnt.onMockData(jsx, reference);
     return (<TeamSelector {...jsx} reference={reference}/>);
 };
+
+const aiBraftEditor = (reference, jsx = {}, onChange) => {
+    RxAnt.onChange(jsx, onChange);
+    return (<BraftEditor {...jsx} reference={reference}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -106,6 +112,7 @@ export default {
     aiMatrixEditor, // 矩阵编辑器「固定行并且固定列」
     aiCheckedDate, // 选择框 + 时间
     aiCheckedInput, // 选择框 + 输入框
-    aiRichEditor, // 富客户端录入框
     aiTeamSelector, // 团队选择框，1 Leader, N Member表格选择
+    aiRichEditor, // 富客户端录入框
+    aiBraftEditor, // 付客户端录入框
 };

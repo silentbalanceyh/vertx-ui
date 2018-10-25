@@ -63,11 +63,32 @@ const rxInit = (props, params = {}) => {
         props.zxInit(paramData);
     }
 };
+const runForm = (form, fnSuccess, fnFailure) => {
+    Ux.E.fxTerminal(!form, 10020, form);
+    if (form) {
+        form.validateFieldsAndScroll((error, values) => {
+            if (error) {
+                if (fnFailure && U.isFunction(fnFailure)) {
+                    fnFailure(error);
+                }
+                return;
+            }
+            const params = Value.clone(values);
+            params.language = Ux.Env['LANGUAGE'];
+            // 去掉undefined
+            Value.valueValid(params);
+            if (fnSuccess && U.isFunction(fnSuccess)) {
+                fnSuccess(params);
+            }
+        });
+    }
+};
 /**
  * @class Action
  * @description 通用Form操作相关方法
  */
 export default {
     runSubmit,
+    runForm,
     rxInit
 };

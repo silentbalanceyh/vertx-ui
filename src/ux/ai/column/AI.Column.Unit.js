@@ -1,5 +1,5 @@
 import AiValue from "../expr/AI.Expr.Value";
-import {DatePicker, Input, TreeSelect} from "antd";
+import {DatePicker, Input, TreeSelect, InputNumber} from "antd";
 import Value from "../../Ux.Value";
 import AiExpr from "../expr/AI.Expr.String";
 import AiPure from "../AI.Pure";
@@ -57,6 +57,18 @@ const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, i
     return Jsx.jsxCell(Input.TextArea, attrs, text);
 };
 
+const aiUnitNumber = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
+	const attrs = AiValue.applyDynamic(item);
+	// 处理属性相关信息
+	const {viewOnly = false} = jsx;
+	attrs.readOnly = viewOnly;
+	const params = {
+		index, field: item.dataIndex
+	};
+	attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+	return (<InputNumber {...attrs} value={text}/>);
+};
+
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
     // 只读处理
@@ -64,7 +76,8 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
     attrs.readOnly = viewOnly;
     // 单位处理
     const {$config = {}} = item;
-    attrs.addonAfter = $config.unit ? $config.unit : "￥";
+    if ($config.unit)
+    	attrs.addonAfter = $config.unit ? $config.unit : "￥";
     // 变更函数
     const params = {
         index, field: item.dataIndex,
@@ -103,14 +116,16 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) =>
     const {items = [], ...rest} = config;
     return AiPure.aiInputRadio(items, {...rest, value: String(text)});
 };
-
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    const datum = item["$config"].datum;
+	const config = item['$config'];
+	const { datum } = config;
     let items = [];
     if (datum) {
         const ref = Prop.onReference(reference, 1);
         items = RxAnt.toOptions(ref, {datum});
-    }
+    }else{
+    	items = RxAnt.toOptions(reference, {items:config.items});
+	}
     const unitJsx = item.jsx ? item.jsx : {};
     let attrs = {};
     attrs = Object.assign(attrs, unitJsx);
@@ -146,6 +161,7 @@ export default {
     DATUM: aiUnitDatum,
     RADIO: aiUnitRadio,
     LABEL: aiUnitLabel,
+	NUMBER: aiUnitNumber,
     DECIMAL: aiUnitDecimal,
     TREE: aiUnitTree
 };

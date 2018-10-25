@@ -3,8 +3,8 @@ import React from "react";
 import Ux from 'ux';
 import Act from './op/Op.Act';
 import Is from './op/Op.Is';
+import Init from './op/Op.Init';
 import Rdr from './UI.Render.Dialog';
-import Init from "../../page/TreeContainer/op/Op.Init";
 
 const _renderDelete = (reference, config = {}, item) => {
     return (
@@ -51,6 +51,8 @@ const renderOp = (reference, item = {}, metadata = {}) => {
     // 计算位置专用
     if (metadata.index) config._index = metadata.index;
     if (metadata.size) config._size = metadata.size;
+    // 处理Op时的操作
+
     return (
         <span>
             {Is.isFast(reference, item) ? _renderYes(reference, config, item) : false}

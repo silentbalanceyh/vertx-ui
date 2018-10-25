@@ -60,6 +60,7 @@ const xtPointer = (ref, key) => {
         const {reference} = ref.props;
         const {$_pointer = {}} = reference.state;
         $_pointer[key] = ref.props.form;
+        reference.setState({$_pointer});
     } else {
         // 中间节点继续挂载
         const {$_pointer} = ref.state;
@@ -72,6 +73,22 @@ const xtPointer = (ref, key) => {
     }
 };
 
+const xtUpdateForm = (reference, prevProps, ...fields) => {
+    const {form} = reference.props;
+    if (form) {
+        // 之前的值
+        const $previous = prevProps.$inited ? prevProps.$inited : {};
+        const {$inited = {}} = reference.props;
+        // 初始值的变化
+        const previous = Value.slice.apply(this, [$previous].concat(fields));
+        const inited = Value.slice.apply(this, [$inited].concat(fields));
+        if (Value.isDiff(previous, inited)) {
+            const values = Value.clone(inited);
+            form.setFieldsValue(values);
+        }
+    }
+};
+
 export default {
     xtPointer,
     xtUnsafe,
@@ -79,4 +96,5 @@ export default {
     xtReset,
     xtResetData,
     xtPrevious,
+    xtUpdateForm,
 };

@@ -202,7 +202,7 @@ const renderSubmit = (reference) => {
     const deleteCond = ("edit" === view && opDeleted && !isLocked);
     return "list" !== view ? (
         <Button.Group>
-            <Button {...editAttrs}/>
+            <Button {...editAttrs} type={"primary"}/>
             {deleteCond ? (
                 <Popconfirm
                     title={options['confirm.delete']}
