@@ -6,17 +6,19 @@ class Component extends React.PureComponent {
     constructor(props) {
         super(props);
         // 直接从value中提取
-        if (props.value) {
-            this.state = {markdown: props.value};
-        } else {
-            this.state = {markdown: ""};
-        }
+        this.state = Op.initValue(props);
+    }
+
+    componentDidUpdate(prevProps, prevState) {
+        Op.updateValue(this, prevState);
     }
 
     render() {
         const attrs = Op.initConfig(this);
+        attrs.active = true;
+        attrs.importContent = this.state.markdown;
         return (
-            <Editor active={false} {...attrs} importContent={this.state.markdown}/>
+            <Editor {...attrs}/>
         );
     }
 }

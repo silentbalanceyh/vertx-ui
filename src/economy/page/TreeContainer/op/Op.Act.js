@@ -201,6 +201,7 @@ const _rxRefresh = (state = {}, options = {}, filters = {}) => {
         state['grid.query'] = filters;  // 设置过滤条件
         state['grid.list'] = undefined; // 刷新右边的List
     } else {
+        // 如果包含了该值，则该值为true才执行
         if (options['search.list.refresh']) {
             state['grid.query'] = filters;  // 设置过滤条件
             state['grid.list'] = undefined; // 刷新右边的List
@@ -232,6 +233,11 @@ const rxSelect = (reference, edit = false) => (key, treeNode = {}) => {
             state = _rxRefresh(state, options, filters);
             // 选项处理：只有叶节点才支持添加的功能
             state = _rxLeaf(state, options, dataItem);
+            // 选中的回调，仅在TreeContainer中生效
+            const fnSelect = reference.props['rxSelect'];
+            if (U.isFunction(fnSelect)) {
+                fnSelect(dataItem, state);
+            }
             // 这里的selected有可能是数组
             Ux.writeTree(reference, state);
         }

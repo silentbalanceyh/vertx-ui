@@ -98,6 +98,7 @@ export default {
     ...Smart,
 
     // ComplexList专用
+    aiFormButton,
     ai2FormButton,
     ai2FilterButton,
     // 特殊模式动态渲染

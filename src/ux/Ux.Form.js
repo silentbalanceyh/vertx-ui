@@ -49,14 +49,19 @@ const raftInited = (reference, values) => {
     if (!values) values = {};
     return values;
 };
-const raftJsx = (reference, values) => {
+const raftJsx = (reference, values, config = {}) => {
     const {form} = reference.props;
     const {getFieldDecorator} = form;
     const {raft = {}} = reference.state;
     // 初始化数据
     values = raftInited(reference, values);
+    // 给Form设置key
+    const attrs = {};
+    if (config.formKey) {
+        attrs.key = config.formKey;
+    }
     return (
-        <Form {...raft.form}>
+        <Form {...raft.form} {...attrs}>
             {/** 隐藏组件 hidden **/}
             {raftHidden(reference, values, raft, getFieldDecorator)}
             {/** 字段渲染 **/}

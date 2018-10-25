@@ -157,6 +157,7 @@ const jsxRow = (reference = {}, renders = {}, column = 4, values = {}, config = 
     );
 };
 const raftValue = (cell = {}, values = {}) => {
+    // 默认active处理
     if (values.hasOwnProperty(cell.field)) {
         let literal = values[cell.field];
         if (cell.moment) {

@@ -20,7 +20,11 @@ export default {
             "rxItemDelete",
             "rxTree",
             "rxItemAdd",
-            "rxItemEdit"
+            "rxItemEdit",
+            // 新添加的属性
+            "rxParamTree",
+            "$content",
+            "$root"
         ]
     },
     TabList: {
