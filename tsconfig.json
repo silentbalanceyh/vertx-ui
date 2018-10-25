@@ -1,5 +1,9 @@
 {
     "compilerOptions": {
+        "jsx": "react",
+        "locale": "zh-CN",
+        "newLine": "lf",
+        "resolveJsonModule": true,
         "outDir": "build",
         "experimentalDecorators": true,
         "noImplicitAny": false,
