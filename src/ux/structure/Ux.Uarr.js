@@ -52,9 +52,14 @@ class Uarr {
         return this;
     }
 
-    mapping(mapping = {}) {
+    debug() {
+        Ux.dgDebug(this.data, "Uarr 调试");
+        return this;
+    }
+
+    mapping(mapping = {}, override = false) {
         const result = [];
-        this.data.forEach(item => result.push(Ux.expand(item, mapping)));
+        this.data.forEach(item => result.push(Ux.expand(item, mapping, override)));
         this.data = result;
         return this;
     }

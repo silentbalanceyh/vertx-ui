@@ -84,13 +84,17 @@ const _isDisabledAdd = (reference) => {
             disabled = !options['row.add.leaf'];
         }
     }
+    // 最后检查rowKey
+    if (!disabled) {
+        const {rowKey} = reference.state;
+        disabled = !!rowKey;
+    }
     return disabled;
 };
 const initAdd = (reference, column) => {
     const options = Init.readOption(reference);
     if (options["row.add"]) {
         const tip = options["row.add"];
-
         return (
             <Tooltip title={tip ? tip : false}>
                 <Button icon={"plus"} type="primary"
