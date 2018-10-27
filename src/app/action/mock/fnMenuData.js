@@ -12,15 +12,14 @@ export default [
     "Page类,tablet,zui.control.page,EXPAND,1,zui.control",
     "PageCard,layout,zui.control.page-card,/control/page-card,1,zui.control.page",
     "HelpCard,layout,zui.control.help-card,/control/help-card,2,zui.control.page",
+    "TreeContainer,layout,zui.control.tree-container,/control/tree-container,3,zui.control.page",
     // 自定义组件：List类
     "List类,bars,zui.control.list,EXPAND,2,zui.control",
     "ComplexList,table,zui.control.complex-list,/control/complex-list,1,zui.control.list",
     "DialogList,table,zui.control.dialog-list,/control/dialog-list,2,zui.control.list",
     "TreeList,table,zui.control.tree-list,/control/tree-list,3,zui.control.list",
     "TabList,table,zui.control.tab-list,/control/tab-list,4,zui.control.list",
-    // 自定义组件：表格类
-    "Table类,align-center,zui.control.table,EXPAND,3,zui.control",
-    "TreeTable,table,zui.control.tree-table,/control/tree-table,1,zui.control.table",
+    "TreeTable,table,zui.control.tree-table,/control/tree-table,5,zui.control.list",
     // 自定义组件：辅助类
     "Assist类,project,zui.control.assist,EXPAND,4,zui.control",
     "DialogButton,tag,zui.control.dialog-button,/control/dialog-button,1,zui.control.assist",
@@ -41,7 +40,9 @@ export default [
     "TimeRanger,form,zui.control.time-ranger,/input/time-ranger,10,zui.control.interaction",
     "MatrixEditor,form,zui.control.matrix-editor,/input/matrix-editor,11,zui.control.interaction",
     "RichEditor,form,zui.control.rich-editor,/input/rich-editor,12,zui.control.interaction",
-    "TeamSelector,form,zui.control.team-selector,/input/team-selector,13,zui.control.interaction",
+    "BraftEditor,form,zui.control.braft-editor,/input/braft-editor,13,zui.control.interaction",
+    "TeamSelector,form,zui.control.team-selector,/input/team-selector,14,zui.control.interaction",
+    "FileUpload,form,zui.control.file-upload,/input/file-upload,15,zui.control.interaction",
     // 布局相关
     "布局分析,edit,zui.layout,EXPAND,3",
     // 主表单专用
