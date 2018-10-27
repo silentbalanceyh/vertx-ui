@@ -12,6 +12,7 @@
             "children": [
                 "卡片类「Hoc容器」：PageCard,/control/page-card,true",
                 "卡片类「Hoc容器」：HelpCard,/control/help-card,true",
+                "卡片类「Hoc容器」：TreeContainer,/control/tree-container",
                 "列表类「Hoc组件」：ComplexList,/control/complex-list,true",
                 "列表类「Hoc组件」：DialogList,/control/dialog-list,true",
                 "列表类「Hoc组件」：TreeList,/control/tree-list,true",
@@ -32,7 +33,8 @@
                 "交互类：CheckedDate,/input/checked-date,true",
                 "交互类：CheckInput,/input/checked-input,true",
                 "交互类：TimeRanger,/input/time-ranger,true",
-                "交互类：RichEditor,/input/rich-editor,true",
+                "交互类：BraftEditor,/input/braft-editor",
+                "交互类：FileUpload,/input/file-upload",
                 "交互类：MatrixEditor,/input/matrix-editor,true",
                 "函数类「Pure容器」：Ux.auiTable,/control/aui-table",
                 "函数类「Pure容器」：Ux.auiTab,/control/aui-tab",

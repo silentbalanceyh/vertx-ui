@@ -78,10 +78,18 @@ const vtNameOption = (column = {}) => {
 };
 const vtRequired = (column = {}) => {
     if ("required" === column.dataIndex) {
-        column.render = (text) => {
-            const type = text ? "check" : "close";
-            const color = text ? "#F00" : "#69c";
-            return <Icon type={type} style={{fontSize: 16, color}}/>;
+        column.render = (text, record = {}) => {
+            let type = text ? "check" : "close";
+            let color = text ? "#F00" : "#69c";
+            if (record.deprecated) {
+                type = "stop";
+                color = "red";
+            }
+            return (
+                <span>
+                    <Icon type={type} style={{fontSize: 16, color}}/>
+                </span>
+            );
         };
     }
 };

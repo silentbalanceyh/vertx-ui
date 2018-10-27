@@ -34,6 +34,7 @@ import {DataLabor} from 'entity';
 })
 class Component extends React.PureComponent {
     static propTypes = {
+        className: PropTypes.string,
         $key: PropTypes.string,
         $card: PropTypes.string,
         $leftVisible: PropTypes.bool
@@ -45,7 +46,8 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            children, reference, $card = 'page-card',
+            children, reference,
+            className = "page-card", $card = 'page-card',
             $extra: ExtraComponent, $current,
             $leftVisible = true,
             $leftComponent, // 左边替换title的专用组件
@@ -66,14 +68,15 @@ class Component extends React.PureComponent {
             let extraContent = ExtraComponent ?
                 <ExtraComponent/> : (
                     <span>
-                    {topbar.help ? Ux.aiGrid([20, 4],
-                        topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
-                        topbar.back ? Op.renderBack(reference, topbar) : false
-                    ) : topbar.back ? Op.renderBack(reference, topbar) : false}
-                </span>
+                        {topbar.help ? Ux.aiGrid([20, 4],
+                            topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
+                            topbar.back ? Op.renderBack(reference, topbar) : false
+                        ) : topbar.back ? Op.renderBack(reference, topbar) : false}
+                    </span>
                 );
+            const clazz = Ux.flowable($card, className, "");
             return (
-                <Card className={$card} title={title} bordered={false}
+                <Card className={clazz} title={title} bordered={false}
                       extra={extraContent}>
                     {children}
                 </Card>

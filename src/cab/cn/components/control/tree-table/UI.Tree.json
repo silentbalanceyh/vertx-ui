@@ -10,6 +10,13 @@
                 "value": "--"
             },
             {
+                "source": "P",
+                "name": "$category",
+                "comment": "「特殊属性」定义当前组件的数据源",
+                "type": "Symbol",
+                "value": "Env.$$.DataSource.Reactive"
+            },
+            {
                 "source": "E",
                 "name": "rxTree",
                 "comment": "（Epic函数）专用读取数据的函数，每一级数据以是否包含 children 子节点为level的计算。",
@@ -59,6 +66,22 @@
                 "comment": "是否开启当前TreeTable的「编辑模式」？",
                 "type": "Boolean",
                 "value": "true"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "table.empty.init",
+                "comment": "当前TreeTable是否启用无数据默认添加行的初始化，启用后没有数据会追加一行？",
+                "type": "Boolean",
+                "value": "true"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "table.empty.text",
+                "comment": "当 table.empty.init 为false时，无数据不追加行，该配置用于呈现此时的文字信息。",
+                "type": "String",
+                "value": "--"
             },
             {
                 "source": "O",
@@ -130,6 +153,10 @@
                             "color": "#93f"
                         },
                         {
+                            "name": "$category",
+                            "color": "#93f"
+                        },
+                        {
                             "name": "$components",
                             "color": "#33af43",
                             "children": [
@@ -185,6 +212,14 @@
                                 },
                                 {
                                     "name": "table.data.keys",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "table.empty.init",
+                                    "color": "#33af43"
+                                },
+                                {
+                                    "name": "table.empty.text",
                                     "color": "#33af43"
                                 }
                             ]
@@ -266,7 +301,7 @@
         "layout": {
             "hgap": 90,
             "vgap": 10,
-            "height": 500
+            "height": 600
         }
     }
 }

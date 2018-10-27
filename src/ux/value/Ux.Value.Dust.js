@@ -84,16 +84,18 @@ const vector = (item = {}, config = {}) => {
     });
     return target;
 };
-const expand = (item = {}, mapping = {}) => {
+const expand = (item = {}, mapping = {}, overwrite = false) => {
     const object = {};
     Type.itObject(mapping, (from, to) => {
+        // 如果item包含了右边，则直接左边的值的等于右边
         if (item.hasOwnProperty(to)) {
             object[from] = item[to];
         } else if (item.hasOwnProperty(from)) {
             object[to] = item[from];
         }
     });
-    return Object.assign(object, item);
+    return overwrite ? Object.assign(item, object) :
+        Object.assign(object, item);
 };
 const slice = (input, ...keys) => {
     if (0 < keys.length) {
@@ -256,10 +258,38 @@ const Child = {
     byField: _childrenByField,
     normalizeData,
 };
+const Letter = {
+    UPPER: ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N"],
+    LOWER: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n']
+};
+const sequence = (input, mode = "DIGEST") => {
+    if ("UPPER" === mode) {
+        return Letter.UPPER[input - 1];
+    } else if ("LOWER" === mode) {
+        return Letter.LOWER[input - 1];
+    } else return input;
+};
+/**
+ * 读取第一个非undefined项目
+ * @param input
+ * @returns {*}
+ */
+const flowable = (...input) => {
+    let item;
+    for (let idx = 0; idx < input.length; idx++) {
+        const each = input[idx];
+        if (undefined !== each) {
+            item = each;
+            break;
+        }
+    }
+    return item;
+};
 export default {
     isEmpty, // 判断是否为空
     isDiff, // 判断两个对象是否相同
-
+    sequence, // 序号处理
+    flowable, // 从第一个开始读取第一个非undefined的项
     extract,
     // 安全转换
     toJson,

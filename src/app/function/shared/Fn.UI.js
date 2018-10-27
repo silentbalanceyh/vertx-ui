@@ -26,7 +26,8 @@ const _removed = Immutable.fromJS([
     "_loading",
     "_placeholder",
     "_logicals",
-    "_demo"
+    "_demo",
+    "_fatal"
 ]);
 const _prepareJson = (reference, file) => {
     const {$hoc} = reference.state;

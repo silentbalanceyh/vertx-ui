@@ -20,7 +20,7 @@
                 "source": "O",
                 "name": "config -> column[x]",
                 "option": "$render",
-                "comment": "$render设置渲染组件类型，TEXT | VECTOR | DATE | DATUM | RADIO | LABEL | DECIMAL | TREE",
+                "comment": "$render设置渲染组件类型，TEXT_AREA | NUMBER | TEXT | VECTOR | DATE | DATUM | RADIO | LABEL | DECIMAL | TREE",
                 "type": "String",
                 "value": "TEXT"
             },
@@ -114,6 +114,10 @@
                                             "color": "#33af43",
                                             "children": [
                                                 {
+                                                    "name": "TEXT_AREA",
+                                                    "color": "#660"
+                                                },
+                                                {
                                                     "name": "TEXT",
                                                     "color": "#660"
                                                 },
@@ -139,6 +143,10 @@
                                                 },
                                                 {
                                                     "name": "DECIMAL",
+                                                    "color": "#660"
+                                                },
+                                                {
+                                                    "name": "NUMBER",
                                                     "color": "#660"
                                                 },
                                                 {
@@ -188,7 +196,7 @@
         "layout": {
             "hgap": 90,
             "vgap": 10,
-            "height": 500
+            "height": 550
         }
     }
 }

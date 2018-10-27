@@ -54,6 +54,10 @@
                             "color": "#33af43"
                         },
                         {
+                            "name": "$root",
+                            "color": "#33af43"
+                        },
+                        {
                             "name": "$formTreeAdd",
                             "color": "#e23c39"
                         },
@@ -216,6 +220,10 @@
                                     "color": "#33af43"
                                 },
                                 {
+                                    "name": "search.list.refresh",
+                                    "color": "#33af43"
+                                },
+                                {
                                     "name": "tabs.list",
                                     "color": "#33af43"
                                 },
@@ -292,7 +300,7 @@
         "layout": {
             "hgap": 90,
             "vgap": 10,
-            "height": 2200
+            "height": 2400
         },
         "data": [
             {
@@ -419,6 +427,13 @@
                 "name": "$mockData",
                 "comment": "无后端时的Mock专用数据，用于设置模拟环境。",
                 "type": "Object",
+                "value": "--"
+            },
+            {
+                "source": "P",
+                "name": "$root",
+                "comment": "设置根节点显示文字，一般用于动态显示，不设置则以 tree.root 配置为主。",
+                "type": "String",
                 "value": "--"
             },
             {
@@ -685,6 +700,14 @@
                 "name": "options",
                 "option": "search.advanced.title",
                 "comment": "高级搜索中的抽屉表单标题文字",
+                "type": "String",
+                "value": "--"
+            },
+            {
+                "source": "O",
+                "name": "options",
+                "option": "search.list.refresh",
+                "comment": "是否刷新右边List，刷新List时会重写 grid.list, grid.query 两个节点，禁用后不重写该节点",
                 "type": "String",
                 "value": "--"
             },

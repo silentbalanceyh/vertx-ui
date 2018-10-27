@@ -1,5 +1,5 @@
 import AiValue from "../expr/AI.Expr.Value";
-import {DatePicker, Input, TreeSelect, InputNumber} from "antd";
+import {DatePicker, Input, InputNumber, TreeSelect} from "antd";
 import Value from "../../Ux.Value";
 import AiExpr from "../expr/AI.Expr.String";
 import AiPure from "../AI.Pure";
@@ -25,7 +25,9 @@ const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
 const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
     const attrs = {};
     attrs.style = jsx.style ? jsx.style : {};
-    return ((<span {...attrs}>{text}</span>));
+    const {$config = {}} = item;
+    const result = Value.sequence(text, $config.mode);
+    return ((<span {...attrs}>{result}</span>));
 };
 
 const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -58,15 +60,15 @@ const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, i
 };
 
 const aiUnitNumber = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-	const attrs = AiValue.applyDynamic(item);
-	// 处理属性相关信息
-	const {viewOnly = false} = jsx;
-	attrs.readOnly = viewOnly;
-	const params = {
-		index, field: item.dataIndex
-	};
-	attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-	return (<InputNumber {...attrs} value={text}/>);
+    const attrs = AiValue.applyDynamic(item);
+    // 处理属性相关信息
+    const {viewOnly = false} = jsx;
+    attrs.readOnly = viewOnly;
+    const params = {
+        index, field: item.dataIndex
+    };
+    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    return (<InputNumber {...attrs} value={text}/>);
 };
 
 const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -77,7 +79,7 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
     // 单位处理
     const {$config = {}} = item;
     if ($config.unit)
-    	attrs.addonAfter = $config.unit ? $config.unit : "￥";
+        attrs.addonAfter = $config.unit ? $config.unit : "￥";
     // 变更函数
     const params = {
         index, field: item.dataIndex,
@@ -117,15 +119,15 @@ const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) =>
     return AiPure.aiInputRadio(items, {...rest, value: String(text)});
 };
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
-	const config = item['$config'];
-	const { datum } = config;
+    const config = item['$config'];
+    const {datum} = config;
     let items = [];
     if (datum) {
         const ref = Prop.onReference(reference, 1);
         items = RxAnt.toOptions(ref, {datum});
-    }else{
-    	items = RxAnt.toOptions(reference, {items:config.items});
-	}
+    } else {
+        items = RxAnt.toOptions(reference, {items: config.items});
+    }
     const unitJsx = item.jsx ? item.jsx : {};
     let attrs = {};
     attrs = Object.assign(attrs, unitJsx);
@@ -161,7 +163,7 @@ export default {
     DATUM: aiUnitDatum,
     RADIO: aiUnitRadio,
     LABEL: aiUnitLabel,
-	NUMBER: aiUnitNumber,
+    NUMBER: aiUnitNumber,
     DECIMAL: aiUnitDecimal,
     TREE: aiUnitTree
 };
