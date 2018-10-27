@@ -39,7 +39,7 @@ export default [
     "CheckedInput,form,zui.control.checked-input,/input/checked-input,9,zui.control.interaction",
     "TimeRanger,form,zui.control.time-ranger,/input/time-ranger,10,zui.control.interaction",
     "MatrixEditor,form,zui.control.matrix-editor,/input/matrix-editor,11,zui.control.interaction",
-    "RichEditor,form,zui.control.rich-editor,/input/rich-editor,12,zui.control.interaction",
+    // "RichEditor,form,zui.control.rich-editor,/input/rich-editor,12,zui.control.interaction",
     "BraftEditor,form,zui.control.braft-editor,/input/braft-editor,13,zui.control.interaction",
     "TeamSelector,form,zui.control.team-selector,/input/team-selector,14,zui.control.interaction",
     "FileUpload,form,zui.control.file-upload,/input/file-upload,15,zui.control.interaction",
