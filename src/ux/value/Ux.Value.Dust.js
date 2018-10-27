@@ -269,10 +269,27 @@ const sequence = (input, mode = "DIGEST") => {
         return Letter.LOWER[input - 1];
     } else return input;
 };
+/**
+ * 读取第一个非undefined项目
+ * @param input
+ * @returns {*}
+ */
+const flowable = (...input) => {
+    let item;
+    for (let idx = 0; idx < input.length; idx++) {
+        const each = input[idx];
+        if (undefined !== each) {
+            item = each;
+            break;
+        }
+    }
+    return item;
+};
 export default {
     isEmpty, // 判断是否为空
     isDiff, // 判断两个对象是否相同
     sequence, // 序号处理
+    flowable, // 从第一个开始读取第一个非undefined的项
     extract,
     // 安全转换
     toJson,

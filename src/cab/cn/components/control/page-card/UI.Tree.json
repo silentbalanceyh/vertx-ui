@@ -18,6 +18,13 @@
             },
             {
                 "source": "P",
+                "name": "className",
+                "comment": "等价于 $card 的值，但 $card 的优先级更高。",
+                "type": "String",
+                "value": "page-card"
+            },
+            {
+                "source": "P",
                 "name": "$key",
                 "comment": "指定hoc属性配置的根节点",
                 "type": "String",
@@ -28,6 +35,7 @@
                 "name": "$card",
                 "comment": "指定<Card>组件的className",
                 "type": "String",
+                "deprecated": true,
                 "value": "page-card"
             },
             {
@@ -119,6 +127,10 @@
                             "color": "#93f"
                         },
                         {
+                            "name": "className",
+                            "color": "#33af43"
+                        },
+                        {
                             "name": "$key",
                             "color": "#33af43"
                         },
@@ -143,7 +155,7 @@
                             "color": "#33af43"
                         },
                         {
-                            "name": "$rightVisible",
+                            "name": "$backVisible",
                             "color": "#33af43"
                         }
                     ]
@@ -181,7 +193,7 @@
         "layout": {
             "hgap": 120,
             "vgap": 10,
-            "height": 450
+            "height": 550
         }
     }
 }

@@ -33,6 +33,7 @@ import {_zero} from "../../_internal";
 })
 class Component extends React.PureComponent {
     static propTypes = {
+        className: PropTypes.string,
         $key: PropTypes.string,
         $card: PropTypes.string,
         $leftVisible: PropTypes.bool,
@@ -46,7 +47,8 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            children, reference, $card = 'page-card', $extra, $title,
+            children, reference, $extra, $title,
+            className = "page-card", $card,
             $leftVisible = true, $rightVisible = true,
             $backVisible = true,
             // Inject专用函数，用于执行属性变幻
@@ -69,8 +71,9 @@ class Component extends React.PureComponent {
                     {topbar.back && $backVisible ? Op.renderBack(reference, topbar) : false}
                 </span>
             );
+            const clazz = Ux.flowable($card, className, "");
             return (
-                <Card className={$card} bordered={false}
+                <Card className={clazz} bordered={false}
                       title={title}
                       extra={extraContent}>
                     {children}
