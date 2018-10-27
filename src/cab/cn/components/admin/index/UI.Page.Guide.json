@@ -17,7 +17,7 @@
                 "列表类「Hoc组件」：DialogList,/control/dialog-list,true",
                 "列表类「Hoc组件」：TreeList,/control/tree-list,true",
                 "列表类「Hoc组件」：TabList,/control/tab-list,true",
-                "表格类「Pure组件」：TreeTable,/control/tree-table,true",
+                "列表类「Full组件」：TreeTable,/control/tree-table,true",
                 "辅助类「Pure组件」：LoadingContent,/control/loading-content,true",
                 "辅助类「Pure容器」：DialogMenu,/control/dialog-menu,true",
                 "辅助类「Pure容器」：DialogButton,/control/dialog-button,true",
@@ -58,7 +58,7 @@
                 }
             },
             "children": [
-                "项目初始化,/system/init",
+                "项目初始化,/guide/init",
                 "脚手架说明,/system/scaffold",
                 "环境变量说明,/system/env",
                 "路由测试,/system/route",
