@@ -15,15 +15,16 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     componentDidMount() {
         Fn.markdown(this,
-            require('./md/Markdown.T.Build.md'),
+            require('./md/Markdown.T.Init.md'),
+            require('./md/Markdown.T.Build.md')
         )
     }
 
     render() {
-        console.info(this.props, this.state);
-        return (
-            <div>2018/10/27</div>
-        )
+        return Fn.guide(this,
+            "1.代码下载",
+            "2.初始化环境"
+        );
     }
 }
 
