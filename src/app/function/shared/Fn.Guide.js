@@ -2,6 +2,7 @@ import React from 'react';
 import Ux from "ux";
 import {MarkdownViewer, PageCard} from 'web';
 import {Tabs} from 'antd';
+import {MarkdownPreview} from 'react-marked-markdown';
 
 const guide = (reference, ...files) => {
     // 构造Markdown的面板
@@ -26,7 +27,7 @@ const guide = (reference, ...files) => {
                         const {content, ...rest} = markdown;
                         return (
                             <Tabs.TabPane {...rest}>
-                                <MarkdownViewer $source={content}/>
+                                <MarkdownPreview value={content}/>
                             </Tabs.TabPane>
                         )
                     })}
