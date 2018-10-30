@@ -1,1 +1,1 @@
-# Save
+![截图](/static/img)

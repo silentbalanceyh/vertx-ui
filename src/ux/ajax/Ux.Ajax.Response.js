@@ -14,7 +14,7 @@ const _ajaxExtract = (request, params, body, response) => {
     if (response.ok) {
         return body;
     } else {
-        console.error(body);
+        Dg.dgAjax(body, "Remote Error:");
         return Promise.reject({data: body});
     }
 };

@@ -31,10 +31,18 @@ class Component extends React.PureComponent {
         const attrs = Ux.valueFlip(jsx);
         const $attrs = Ux.clone(attrs);
         if ($attrs.onChange) delete $attrs.onChange;
+        // 是否处理children节点，新特性
+        let $data = Ux.clone(data);
+        if (config.hasOwnProperty('children') &&
+            !config.children) {
+            // 不渲染子节点
+            $data.filter(item => item.hasOwnProperty('children'))
+                .forEach(item => delete item.children);
+        }
         return (
             <Input.Group {...$attrs}>
                 <Table {...config}
-                       dataSource={data}/>
+                       dataSource={$data}/>
             </Input.Group>
         );
     }

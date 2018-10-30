@@ -28,3 +28,6 @@
 ```bash
     ./run-zero.sh
 ```
+
+4. 程序运行后，在浏览器中打开：<http://localhost:4000/zui/login/index>进入主界面。
+5. 登录：账号和密码都是 lang.yu 。

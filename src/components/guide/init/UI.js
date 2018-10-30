@@ -21,10 +21,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return Fn.guide(this,
-            "1.代码下载",
-            "2.初始化环境"
-        );
+        return Fn.guide(this);
     }
 }
 

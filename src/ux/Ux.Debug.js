@@ -101,6 +101,14 @@ const dgDebug = (data, prefix) => {
     return data;
 };
 
+const dgAjax = (data, prefix) => {
+    if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
+        console.debug(`%c [DEBUG] Ajax - ${prefix ? prefix : ""}`, "color:red;font-weight:900;",
+            data);
+    }
+    return data;
+};
+
 const _reportObject = (lib = {}, kv = []) => {
     const result = {};
     Object.keys(lib)
@@ -168,5 +176,6 @@ export default {
     dgRouter,
     dgMonitor,
     dgDebug,
-    dgReport
+    dgReport,
+    dgAjax
 };

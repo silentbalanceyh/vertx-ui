@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from "ux";
-import {MarkdownViewer, PageCard} from 'web';
+import {PageCard} from 'web';
 import {Tabs} from 'antd';
 import {MarkdownPreview} from 'react-marked-markdown';
 
@@ -9,13 +9,21 @@ const guide = (reference, ...files) => {
     const {md = []} = reference.state;
     if (0 < md.length) {
         const $markdown = [];
+        // 如果files长度为0
+        let tabArray = [];
+        if (0 === files.length) {
+            tabArray = Ux.fromHoc(reference, "chapter");
+        } else {
+            tabArray = files;
+        }
         md.forEach((each, index) => {
             const item = {};
             item.key = Ux.randomUUID();
-            item.tab = `${files[index]}`;
+            item.tab = `${tabArray[index]}`;
             item.content = each;
             $markdown.push(item);
         });
+
         // 读取Tabs属性
         const tabs = {};
         tabs.defaultActiveKey = $markdown[0].key;

@@ -1,4 +1,5 @@
 import Ux from "ux";
+import defaultImage from './image/no-image.jpg';
 
 const loadImage = (reference = {}) => {
     const {config = {}, params = {}} = reference.props;
@@ -13,6 +14,12 @@ const loadImage = (reference = {}) => {
             innerRder.readAsDataURL(blob);
             innerRder.addEventListener("load",
                 () => reference.setState({src: innerRder.result}));
+        })
+        .catch(errors => {
+            const {data = {}} = errors;
+            if (404 === data.status) {
+                reference.setState({src: defaultImage});
+            }
         });
 };
 
