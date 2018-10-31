@@ -52,6 +52,7 @@ const _xtOp = (reference, column = {}, jsx, render = {}) => {
     if (render.hasOwnProperty('key') && U.isFunction(fnRender)) {
         return fnRender(reference, column, jsx);
     } else {
+        const disabled = jsx.readOnly;
         return (text, record, index) => {
             const attrs = {};
             attrs.index = index; // 索引处理专用
@@ -60,9 +61,10 @@ const _xtOp = (reference, column = {}, jsx, render = {}) => {
             return (
                 <Button.Group className={"web-table-editor-op"}>
                     <Button icon={"plus"}
+                            disabled={disabled}
                             style={{borderRight: 0}}
                             onClick={_xt2Add(reference, attrs)}/>
-                    <Button disabled={0 === index} icon={"minus"}
+                    <Button disabled={disabled || 0 === index} icon={"minus"}
                             style={{marginLeft: 0}}
                             onClick={_xt2Remove(reference, attrs)}/>
                 </Button.Group>

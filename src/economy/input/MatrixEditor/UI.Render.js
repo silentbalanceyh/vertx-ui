@@ -18,14 +18,18 @@ const _on2Click = (reference, record) => (event) => {
     Ux.xtChange(reference, data, true);
 };
 
-const _renderOp = (reference, record, text) => (
-    <span>
-        <Button icon={"undo"} shape={"circle"}
-                onClick={_on2Click(reference, record)}/>
-        &nbsp;&nbsp;
-        {text}
-    </span>
-);
+const _renderOp = (reference, record, text) => {
+    const disabled = reference.props.readOnly;
+    return (
+        <span>
+            <Button icon={"undo"} shape={"circle"}
+                    disabled={disabled}
+                    onClick={_on2Click(reference, record)}/>
+            &nbsp;&nbsp;
+            {text}
+        </span>
+    );
+};
 const renderOp = (reference) => (text = {}, record = {}) => {
     // 是否包含了colSpan属性
     const obj = {};

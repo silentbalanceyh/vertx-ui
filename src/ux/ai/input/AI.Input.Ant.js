@@ -57,6 +57,8 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     const {config = {}, ...rest} = jsx;
     // onChange处理
     RxAnt.onChange(rest, onChange);
+    // ReadOnly处理，第二参用于处理disabled的情况，非input使用
+    RxAnt.onReadOnly(rest, true);
     const options = RxAnt.toOptions(reference, config);
     return (
         <Radio.Group {...rest}>
@@ -86,6 +88,8 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onDisabledDate(jsx);
     // onChange处理
     RxAnt.onChange(jsx, onChange);
+    // 处理readOnly
+    RxAnt.onReadOnly(jsx, true);
     return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 

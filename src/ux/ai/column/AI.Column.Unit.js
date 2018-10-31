@@ -33,8 +33,8 @@ const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
 const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
     // 处理属性相关信息
-    const {viewOnly = false} = jsx;
-    attrs.readOnly = viewOnly;
+    const {readOnly = false} = jsx;
+    attrs.readOnly = readOnly;
     const params = {
         index, field: item.dataIndex
     };
@@ -48,8 +48,8 @@ const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, i
     const rows = config ? config["rows"] : 2;
     const attrs = AiValue.applyDynamic(item);
     // 处理属性相关信息
-    const {viewOnly = false} = jsx;
-    attrs.readOnly = viewOnly;
+    const {readOnly = false} = jsx;
+    attrs.readOnly = readOnly;
     const params = {
         index, field: item.dataIndex
     };
@@ -62,8 +62,8 @@ const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, i
 const aiUnitNumber = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     const attrs = AiValue.applyDynamic(item);
     // 处理属性相关信息
-    const {viewOnly = false} = jsx;
-    attrs.readOnly = viewOnly;
+    const {readOnly = false} = jsx;
+    attrs.readOnly = readOnly;
     const params = {
         index, field: item.dataIndex
     };
@@ -107,9 +107,8 @@ const aiUnitDate = (reference, item) => (text, record, index) => {
 const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
     const config = item["$config"] ? item["$config"] : {};
     config.items = AiExpr.aiExprOption(config.items);
-    if (jsx['viewOnly']) {
-        config.disabled = jsx['viewOnly'];
-        config.className = "web-radio-view";
+    if (jsx.readOnly) {
+        config.disabled = jsx.readOnly;
     }
     const params = {
         index, field: item.dataIndex,

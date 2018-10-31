@@ -12,6 +12,7 @@ class RxAnt {
     static onChange = Pure.onChange;
     static onSelect = Pure.onSelect;
     static onMultiple = Pure.multiple;
+    static onReadOnly = Pure.readOnly;
     static onFromTo = Complex.fromTo;
     // 特殊
     static toParsed = Datum.parseExpr;
