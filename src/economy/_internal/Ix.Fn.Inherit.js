@@ -147,5 +147,26 @@ export default {
             "fnMock",
             "rxDelete"
         ]
+    },
+    DialogMenu: {
+        Filter: [
+            "$disabled",
+            "$disabledItems",
+            "$inited",
+            "$items",
+            "$button",
+            "$functions",
+            "$components",
+            "$mode"
+        ]
+    },
+    DialogButton: {
+        Filter: [
+            "$disabled",
+            "$button",
+            "$dialog",
+            "$mode",
+            "$inited"
+        ]
     }
 };

@@ -35,6 +35,11 @@ const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index
     // 处理属性相关信息
     const {readOnly = false} = jsx;
     attrs.readOnly = readOnly;
+    // 如果整体是false，则以$config.readOnly节点为主
+    if (!attrs.readOnly) {
+        const {$config = {}} = item;
+        attrs.readOnly = !!$config.readOnly;
+    }
     const params = {
         index, field: item.dataIndex
     };
@@ -79,7 +84,7 @@ const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, in
     // 单位处理
     const {$config = {}} = item;
     if ($config.unit)
-        attrs.addonAfter = $config.unit ? $config.unit : "￥";
+        attrs.addonAfter = $config.unit;
     // 变更函数
     const params = {
         index, field: item.dataIndex,
@@ -135,6 +140,10 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
         index, field: item.dataIndex,
     };
     attrs.onChange = Xt.xt2ChangeUnit(reference, params);
+    // 允许清空
+    if (config.hasOwnProperty('allowClear')) {
+        attrs.allowClear = config.allowClear;
+    }
     return AiPure.aiInputSelect(items, attrs);
 };
 

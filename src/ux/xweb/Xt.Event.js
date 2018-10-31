@@ -45,7 +45,7 @@ const xt2Blur = (reference, field) => (event) => {
 
 const _xtValue = (input, normalize = data => data) => {
     let value = undefined;
-    if (U.isFunction(input.preventDefault)) {
+    if (input && U.isFunction(input.preventDefault)) {
         input.preventDefault();
         value = input['target'] ? input['target'].value : undefined;
     } else {

@@ -2,6 +2,7 @@ import React from 'react';
 import {Drawer, Icon} from 'antd';
 import DynamicDialog from '../../dialog/DynamicDialog/UI';
 import Ux from "ux";
+import Fn from "../../_internal/Ix.Fn";
 
 const _calcInit = (inited = {}) => {
     const values = {};
@@ -17,14 +18,15 @@ const getChildren = (reference, item = {}) => {
     // 初始化数据专用
     const {init = true} = item;
     if (Component) {
+        // 「LIMIT」限制继承
+        const inherits = Ux.toLimitation(reference.props, Fn.Limit.DialogMenu.Filter);
         return (
-            <Component {...Ux.toUniform(reference.props)}
+            <Component {...inherits}
                        $inited={init ? $inited : _calcInit($inited)}
                        $parent={$inited}
                        fnClose={() => {
                            const state = Ux.clone(reference.state);
                            state.visible[item.key] = false;
-                           console.info(state);
                            reference.setState(state);
                        }}/>
         );

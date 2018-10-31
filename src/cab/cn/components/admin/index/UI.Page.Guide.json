@@ -67,6 +67,7 @@
                 "表单Raft模式,/system/form-raft",
                 "字段渲染：Full模式,/system/field-full",
                 "字段渲染：Expr模式,/system/field-expr",
+                "交互类：aiTreeSelect,/input/tree-select,true",
                 "列渲染：Cell静态呈现列,/system/column-cell",
                 "列渲染：Dynamic动态列,/system/column-dynamic",
                 "列渲染：表格编辑器Unit列,/system/column-unit",

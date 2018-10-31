@@ -3,9 +3,12 @@ import './Cab.less';
 import {DynamicDialog} from "web";
 import {Button, Drawer, Popover} from 'antd';
 import Ux from 'ux';
+import Fn from "../../_internal/Ix.Fn";
 
 const getChildren = (reference) => {
     const {children, $content: Component} = reference.props;
+    // 「LIMIT」限制继承
+    const inherits = Ux.toLimitation(reference.props, Fn.Limit.DialogButton.Filter);
     // 优先取children
     if (children) {
         return React.Children.map(children, child => {
@@ -13,12 +16,12 @@ const getChildren = (reference) => {
             if (child instanceof React.Component) {
                 return React.cloneElement(child, {
                     fnClose: () => reference.setState({visible: false}),
-                    ...Ux.toUniform(reference.props)
+                    ...inherits
                 });
             } else if (child.$$typeof === type) {
                 return React.cloneElement(child, {
                     fnClose: () => reference.setState({visible: false}),
-                    ...Ux.toUniform(reference.props)
+                    ...inherits
                 });
             } else return child;
         });
@@ -27,7 +30,7 @@ const getChildren = (reference) => {
     if (Component) {
         return (
             <Component fnClose={() => reference.setState({visible: false})}
-                       {...Ux.toUniform(reference.props)}/>
+                       {...inherits}/>
         );
     }
     return false;

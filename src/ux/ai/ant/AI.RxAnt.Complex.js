@@ -22,6 +22,7 @@ const treeOptions = (reference, config = {}) => {
     return Uarr.create(options)
         .sort((left, right) => left.left - right.left)
         .convert(config.processor ? config.processor : "code", processor)
+        .each(item => item.title = item.code)   // 解决expr不生效的问题
         .mapping(mapping)
         .add('value', applyId)
         .tree()
