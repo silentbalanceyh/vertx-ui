@@ -13,7 +13,7 @@ const _calcDoller = (config = {}) => {
     return $config;
 };
 
-const _calcRender = (reference, config = {}) => {
+const _calcRender = (reference, config = {}, title = false) => {
     config = Ux.clone(config);
     // 计算Component
     const Component = config.hasOwnProperty("items") ?
@@ -41,6 +41,7 @@ const _calcRender = (reference, config = {}) => {
                     <Component $inited={$inited}
                                {...configuration}>
                         <Child $inited={$inited}
+                               $header={title}
                                $parent={Ux.clone(reference.props.$inited)}/>
                     </Component>
                 );
@@ -50,6 +51,7 @@ const _calcRender = (reference, config = {}) => {
 };
 
 const _calcRecord = (reference, column, record = {}) => {
+    const _addon = Op.prepareRecord(reference, column, record);
     const data = {};
     // 处理数据信息
     const levelPrefix = String(column.level);
@@ -62,21 +64,6 @@ const _calcRecord = (reference, column, record = {}) => {
             data[field] = record[key];
         });
     // 处理当前数据中的附加数据
-    const _addon = {};
-    const level = column.level - 1;
-    _addon.parentId = record[`${level}.key`];
-    // 读取垂直数据
-    const options = Op.readOptions(reference);
-    if (options.hasOwnProperty("extra.data.keys")) {
-        const {current} = reference.state;
-        if (0 < current.length) {
-            const fields = Ux.arrayConnect(options["extra.data.keys"], (item) => ({
-                field: item, dataKey: `${level}.${item}`
-            }));
-            fields.forEach(item =>
-                _addon[item.field] = current.map(each => each[item.dataKey]));
-        }
-    }
     data[`_extra`] = _addon;
     const {rxRecord = data => data} = reference.props;
     return rxRecord(data, column);
@@ -98,7 +85,7 @@ const initOperations = (reference) => {
                 operations[key].value = valueRender;
                 // 顶层Title对应的Render
                 if (config.hasOwnProperty("title")) {
-                    operations[key].title = _calcRender(reference, config.title);
+                    operations[key].title = _calcRender(reference, config.title, true);
                 }
             });
     }
@@ -116,10 +103,14 @@ const renderOp = (reference, record, {
     const render = operations[column.dataIndex];
     if (render) {
         if (0 < rowSpan) {
+            let literal = text;
+            if (literal && column['$expr']) {
+                literal = Ux.formatExpr(column['$expr'], record);
+            }
             jsx.children = (
                 <span className={"web-table-cell"}>
                     <span className={"left"}>
-                        {text}
+                        {literal}
                     </span>
                     <span className={"right"}>
                         {text ? render.value(column, record) : render.empty(column, record)}

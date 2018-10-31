@@ -40,12 +40,20 @@ const onSelect = (jsx = {}, fnSelect) => {
         jsx.onSelect = fnSelect;
     }
 };
+const readOnly = (jsx = {}, disabled = false) => {
+    if (jsx.readOnly) {
+        // 如果是readOnly，则执行readOnly的注入
+        jsx.readOnly = true;
+        jsx.disabled = disabled;
+    }
+};
 export default {
     disabledDate,
     prefix,
     placeholder,
     addonAfter,
     multiple,
+    readOnly,
     onChange,
     onSelect,
 };
