@@ -31,6 +31,7 @@ import _input_table$editor from './input/table-editor/UI';
 import _input_table$transfer from './input/table-transfer/UI';
 import _input_team$selector from './input/team-selector/UI';
 import _input_time$ranger from './input/time-ranger/UI';
+import _input_tree$select from './input/tree-select/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
@@ -69,6 +70,7 @@ export default {
 	_input_table$transfer,
 	_input_team$selector,
 	_input_time$ranger,
+	_input_tree$select,
 	_layout_adjust015,
 	_layout_standard,
 	_login_index,

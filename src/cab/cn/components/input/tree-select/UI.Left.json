@@ -1,0 +1,27 @@
+{
+    "_page": {
+        "title": "「交互」TreeSelect - 添加"
+    },
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "ptermId,树形菜单,12,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=table.tree",
+                    "optionJsx.config.tree": "key=id,parentId=pid,title=name",
+                    "optionJsx.config.expr": ":code - :name"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": false,
+                    "optionJsx.buttons": {
+                        "submit": "opAdd,添加,$opAdd"
+                    }
+                }
+            ]
+        ]
+    }
+}
