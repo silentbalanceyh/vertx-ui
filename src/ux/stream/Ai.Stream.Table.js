@@ -59,6 +59,11 @@ class Table {
         return this;
     }
 
+    loading(loading = false) {
+        this.config.loading = loading;
+        return this;
+    }
+
     rowSelection(object = {}) {
         let rowSelection = object;
         if (U.isFunction(object)) {

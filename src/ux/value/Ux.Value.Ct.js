@@ -3,6 +3,7 @@ import Immutable from "immutable";
 import Random from "../util/Ux.Random";
 import Sorter from "../util/Ux.Sorter";
 import Debug from "../Ux.Debug";
+import Expr from '../util/Ux.Expr';
 
 /**
  * 针对JavaScript中的对象进行过滤
@@ -149,6 +150,16 @@ const valuePair = (expr) => {
     }
     return mapping;
 };
+const valueExpr = (field = "", data = {}) => {
+    let display = "";
+    if (0 <= field.indexOf(":")) {
+        display = Expr.formatExpr(field, data);
+    } else {
+        display = data[field];
+        if (!display) display = "";
+    }
+    return display;
+};
 export default {
     valueInt, // 整数转换
     valueUnit,
@@ -160,6 +171,7 @@ export default {
     valueKey,
     valuePair,
     valueFunction,
+    valueExpr,
     // 设置自定义控件的专用属性
     valueFlip,
     valueTrack: Debug.dgMonitor,

@@ -24,7 +24,10 @@ class Component extends React.PureComponent {
         // 配置处理
         config.columns = columns;
         config.pagination = false;
-        config.className = "web-table-editor";
+        // 不配置className时才处理，size处理
+        if (!config.hasOwnProperty('className')) {
+            config.className = "web-table-editor";
+        }
         // 数据处理
         const data = Ux.xtData(this);
         // 处理InputGroup中的jsx

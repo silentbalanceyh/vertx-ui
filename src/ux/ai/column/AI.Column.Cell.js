@@ -158,10 +158,10 @@ const aiCellDatum = (reference, config) => text => {
         const result = [];
         text.forEach(each => result.push(Type.elementUnique(data, datum.value, each)));
         return (
-            <span>{result.map(item => item[datum.display]).join('，')}</span>);
+            <span>{result.map(item => Value.valueExpr(datum.display, item)).join('，')}</span>);
     } else {
         const item = Type.elementUnique(data, datum.value, text);
-        return <span>{item ? item[datum.display] : false}</span>;
+        return <span>{item ? Value.valueExpr(datum.display, item) : false}</span>;
     }
 };
 const aiCellIcon = (reference, config) => text => {
