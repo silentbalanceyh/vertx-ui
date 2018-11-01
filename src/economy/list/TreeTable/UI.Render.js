@@ -26,7 +26,7 @@ const _calcRender = (reference, config = {}, title = false) => {
             return false;
         } else {
             // 1.计算record数据
-            const $inited = _calcRecord(reference, column, record);
+            const $inited = _calcRecord(reference, column, record, title);
             const {$functions, $components = {}} = reference.props;
             if (isMenu) {
                 return (<Component $inited={$inited}
@@ -85,7 +85,8 @@ const initOperations = (reference) => {
                 operations[key].value = valueRender;
                 // 顶层Title对应的Render
                 if (config.hasOwnProperty("title")) {
-                    operations[key].title = _calcRender(reference, config.title, true);
+                    const $title = Ux.clone(config.title);
+                    operations[key].title = _calcRender(reference, $title, true);
                 }
             });
     }
@@ -125,18 +126,19 @@ const renderOp = (reference, record, {
     }
     return jsx;
 };
-const renderTitle = (column = {}, fnRender) => {
-    // 只添加一次的限制
-    return ("string" === typeof column.title) ? (
+const renderTitle = (reference, column = {}, fnRender) => {
+    // 只添加一次的限制，直接读取第一条数据专用信息
+    const title = column.title;
+    return (
         <span className={"web-table-cell"}>
             <span className={"left"}>
-                {column.title}
+                {title}
             </span>
             <span className={"right"}>
                 {fnRender(column, {})}
             </span>
         </span>
-    ) : column.title;
+    );
 };
 export default {
     renderOp,
