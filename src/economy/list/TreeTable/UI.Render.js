@@ -29,16 +29,19 @@ const _calcRender = (reference, config = {}, title = false) => {
             const $inited = _calcRecord(reference, column, record, title);
             const {$functions, $components = {}} = reference.props;
             if (isMenu) {
-                return (<Component $inited={$inited}
-                                   $parent={Ux.clone(reference.props.$inited)}
-                                   $functions={$functions}
-                                   $components={$components}
-                                   {...configuration}/>);
+                return (<Component
+                    key={$inited.key}
+                    $inited={$inited}
+                    $parent={Ux.clone(reference.props.$inited)}
+                    $functions={$functions}
+                    $components={$components}
+                    {...configuration}/>);
             } else {
                 const componentKey = config.component;
                 const Child = $components[componentKey];
                 return (
-                    <Component $inited={$inited}
+                    <Component key={$inited.key}
+                               $inited={$inited}
                                {...configuration}>
                         <Child $inited={$inited}
                                $header={title}
@@ -109,7 +112,8 @@ const renderOp = (reference, record, {
                 literal = Ux.formatExpr(column['$expr'], record);
             }
             jsx.children = (
-                <span className={"web-table-cell"}>
+                <span className={"web-table-cell"}
+                      key={`${column.dataIndex}${record.key}`}>
                     <span className={"left"}>
                         {literal}
                     </span>

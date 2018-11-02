@@ -33,7 +33,7 @@ const parseFilter = (reference, filter = () => true) => {
             if (!processed.cond) processed.cond = processed.field;
             delete processed.key;
             const value = _parseData(reference, processed);
-            if (value) {
+            if (undefined !== value) {
                 filters[processed.cond] = value;
             }
         }
@@ -98,9 +98,10 @@ const gainTree = (config = {}) => {
         mapping = Value.valuePair(config.tree);
     }
     if (!mapping.id) mapping.id = "id";
-    if (!mapping.pid) mapping.pid = "pid";
-    if (!mapping.title) mapping.title = "code";
-    if (!mapping.value) mapping.value = "id";
+    if (!mapping.pid) mapping.pid = "pid"; // 父节点
+    if (!mapping.title) mapping.title = "code"; // 编码
+    if (!mapping.value) mapping.value = "id"; // 主键和值
+    if (!mapping.leaf) mapping.leaf = "leaf"; // 叶节点处理
     return mapping;
 };
 export default {

@@ -18,7 +18,7 @@ const stateView = (view, key, reference) => {
     if (U.isFunction(rxViewSwitch)) {
         rxViewSwitch(view, key);
     }
-    return {view, key};
+    return {view, key, $$loading: "list" !== view};
 };
 
 const onTabClick = (reference) => (key) => {
@@ -74,7 +74,9 @@ const onEdit = (reference) => (key, action) => {
         tabs.items.forEach((item, index) => {
             item.index = index;
         });
-        reference.setState({tabs, ...view});
+        // 如果是list则直接关闭$$loading效果（小范围加载）
+        const state = {tabs, ...view};
+        reference.setState(state);
         // 删除当前主节点中的 id = key
         _onDelete(reference, key);
     }

@@ -67,6 +67,8 @@ const rxRecord = (reference, id, data) => {
 const rxEdit = (reference, id) => {
     const {$self} = reference.props;
     let {tabs = {}} = $self.state;
+    // 设置Loading效果
+    $self.setState({$$loading: true});
     tabs = Ux.clone(tabs);
     const found = tabs.items.filter(item => item.key === id);
     if (0 < found.length) {

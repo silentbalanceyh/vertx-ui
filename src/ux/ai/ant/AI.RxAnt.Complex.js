@@ -7,6 +7,7 @@ import Prop from "../../prop";
 import U from "underscore";
 import E from "../../Ux.Error";
 import Value from '../../Ux.Value';
+import Type from '../../Ux.Type';
 
 const treeOptions = (reference, config = {}) => {
     let options = [];
@@ -19,14 +20,37 @@ const treeOptions = (reference, config = {}) => {
         Util.formatExpr(config.expr, item) : item.label;
     const applyId = (item) => item.value ? item.value : item.id;
     const mapping = Datum.gainTree(config);
-    return Uarr.create(options)
+    let normalized = Uarr.create(options)
         .sort((left, right) => left.left - right.left)
         .convert(config.processor ? config.processor : "code", processor)
         .each(item => item.title = item.code)   // 解决expr不生效的问题
         .mapping(mapping)
         .add('value', applyId)
-        .tree()
         .to();
+    /**
+     * 1. 是否只能选择子节点
+     * 2. 在所有的树的字段处理过后执行，最后编译成🌲
+     */
+    const leafField = config['leafField'];
+    if (config['leafField']) {
+        let pids = Type.elementVertical(normalized, "pid");
+        pids = Value.immutable(pids);
+        /**
+         * 筛选两种节点
+         * 1. 节点主键存在于parentId中
+         * 2. 节点中的leaf = true
+         */
+        normalized = normalized.filter(item => {
+            // 是否子节点
+            const isLeaf = item[leafField];
+            // 是否分支
+            const isKeep = pids.contains(item.id);
+            return isLeaf || isKeep;
+        });
+        // 只有叶节点才能选中，其他节点不可以选中
+        normalized.forEach(item => item.selectable = item[leafField]);
+    }
+    return Uarr.create(normalized).tree().to();
 };
 const options = (reference, config = {}, filter = () => true) => {
     let options = [];

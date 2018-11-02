@@ -50,7 +50,15 @@ const renderPageEdit = (reference, item = {}) => {
 };
 const renderPageList = (reference, item = {}) => {
     const tableDatum = Op.initTable(reference);
-    const ready = tableDatum.ready;
+    let ready = true;
+    // Loading效果打开
+    const {$$loading = false} = reference.state;
+
+    if ($$loading) {
+        ready = !$$loading;
+    } else {
+        ready = tableDatum.ready;
+    }
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
