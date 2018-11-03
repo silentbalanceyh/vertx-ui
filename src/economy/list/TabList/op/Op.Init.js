@@ -17,7 +17,7 @@ const stateView = (view, key, reference) => {
     if (U.isFunction(rxViewSwitch)) {
         rxViewSwitch(view, key);
     }
-    return {view, key};
+    return {view, key, $$loading: "list" !== view};
 };
 
 const onTabClick = (reference) => (key) => {

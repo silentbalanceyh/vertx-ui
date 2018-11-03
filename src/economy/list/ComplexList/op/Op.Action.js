@@ -68,34 +68,36 @@ const rxEdit = (reference, id) => {
     const {$self} = reference.props;
     let {tabs = {}} = $self.state;
     // 设置Loading效果
-    $self.setState({$$loading: true});
-    tabs = Ux.clone(tabs);
-    const found = tabs.items.filter(item => item.key === id);
-    if (0 < found.length) {
-        // 如果已经打开过，则不需要重复打开记录
-        tabs.activeKey = found[0].key;
-        // 调用二义性函数
-        const record = rxRecord($self, id);
-        const view = Init.stateView("edit", id, reference);
-        $self.setState({tabs, ...view, record});
-    } else {
-        const options = Init.readOption($self);
-        const uri = options['ajax.get.uri'];
-        // Mock专用数据
-        const mockData = Mock.mockDetail($self, id);
-        const promise = Ux.ajaxGet(uri, {id}, mockData);
-        promise.then(data => {
-            const record = rxRecord($self, id, data);
-            const tabs = stateEditTab($self, id, data);
+    Ux.onLoading($self, () => {
+        // 延迟效果，保证进度条可以出来
+        tabs = Ux.clone(tabs);
+        const found = tabs.items.filter(item => item.key === id);
+        if (0 < found.length) {
+            // 如果已经打开过，则不需要重复打开记录
+            tabs.activeKey = found[0].key;
+            // 调用二义性函数
+            const record = rxRecord($self, id);
             const view = Init.stateView("edit", id, reference);
-            const state = {tabs, ...view, record};
-            $self.setState(state);
-            const {rxEditPost} = reference.props;
-            if (rxEditPost) {
-                rxEditPost(data, id);
-            }
-        });
-    }
+            $self.setState({tabs, ...view, record});
+        } else {
+            const options = Init.readOption($self);
+            const uri = options['ajax.get.uri'];
+            // Mock专用数据
+            const mockData = Mock.mockDetail($self, id);
+            const promise = Ux.ajaxGet(uri, {id}, mockData);
+            promise.then(data => {
+                const record = rxRecord($self, id, data);
+                const tabs = stateEditTab($self, id, data);
+                const view = Init.stateView("edit", id, reference);
+                const state = {tabs, ...view, record};
+                $self.setState(state);
+                const {rxEditPost} = reference.props;
+                if (rxEditPost) {
+                    rxEditPost(data, id);
+                }
+            });
+        }
+    });
 };
 
 const rxDeleteDetail = (reference, id) => {

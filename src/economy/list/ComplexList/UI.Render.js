@@ -50,15 +50,6 @@ const renderPageEdit = (reference, item = {}) => {
 };
 const renderPageList = (reference, item = {}) => {
     const tableDatum = Op.initTable(reference);
-    let ready = true;
-    // Loading效果打开
-    const {$$loading = false} = reference.state;
-
-    if ($$loading) {
-        ready = !$$loading;
-    } else {
-        ready = tableDatum.ready;
-    }
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
@@ -75,7 +66,7 @@ const renderPageList = (reference, item = {}) => {
             <Row>
                 <Col span={24}>
                     <Table {...tableDatum.table}
-                           loading={!ready}
+                           loading={Ux.onReady(reference, tableDatum.ready)}
                            dataSource={tableDatum.data}/>
                 </Col>
             </Row>

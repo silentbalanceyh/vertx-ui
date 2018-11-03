@@ -209,6 +209,29 @@ const closeWindow = (reference = {}) => {
         fnClose();
     }
 };
+const onLoading = (reference, fnSuccess) => {
+    const loading = Prop.fromHoc(reference, "loading");
+    reference.setState({
+        $$loading: {
+            tip: loading,
+            size: "large"
+        }
+    });
+    setTimeout(fnSuccess, 618);
+};
+const onLoaded = (reference) => reference.setState({$$loading: false});
+const onReady = (reference, defaultReady) => {
+    const {$$loading = false} = reference.state ? reference.state : {};
+    let ready = true;
+    if ($$loading) {
+        // 优先使用$$loading
+        ready = !$$loading;
+        return ready ? false : $$loading;
+    } else {
+        ready = defaultReady;
+        return !ready;
+    }
+};
 /**
  * @class Dialog
  * @description 窗口专用雷用于处理弹出窗口的开与关的信息
@@ -226,5 +249,9 @@ export default {
     showSuccess,
     showConfirm,
     showDialog,
-    showMessage
+    showMessage,
+    // 过程
+    onLoading,
+    onLoaded,
+    onReady,
 };

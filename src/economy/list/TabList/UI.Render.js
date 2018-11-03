@@ -55,7 +55,6 @@ const renderPageList = (reference, item = {}) => {
     if (rowKey) {
         dataSource = [{key: rowKey}].concat(dataSource);
     }
-    const ready = tableDatum.ready;
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
@@ -72,7 +71,7 @@ const renderPageList = (reference, item = {}) => {
             <Row>
                 <Col span={24}>
                     <Table {...tableDatum.table}
-                           loading={!ready}
+                           loading={Ux.onReady(reference, tableDatum.ready)}
                            dataSource={dataSource}/>
                 </Col>
             </Row>
