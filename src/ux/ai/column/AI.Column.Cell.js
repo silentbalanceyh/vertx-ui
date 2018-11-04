@@ -153,15 +153,22 @@ const aiCellExpression = (reference, config) => text => {
 const aiCellDatum = (reference, config) => text => {
     const $datum = config['$datum'];
     const datum = "string" === typeof $datum ? RxAnt.toParsed($datum) : $datum;
+    // 兼容处理，label优先，display次之
+    let display = null;
+    if (datum.label) {
+        display = datum.label;
+    } else {
+        display = datum.display;
+    }
     const data = Prop.onDatum(reference, datum.source);
     if (U.isArray(text)) {
         const result = [];
         text.forEach(each => result.push(Type.elementUnique(data, datum.value, each)));
         return (
-            <span>{result.map(item => Value.valueExpr(datum.display, item)).join('，')}</span>);
+            <span>{result.map(item => Value.valueExpr(display, item)).join('，')}</span>);
     } else {
         const item = Type.elementUnique(data, datum.value, text);
-        return <span>{item ? Value.valueExpr(datum.display, item) : false}</span>;
+        return <span>{item ? Value.valueExpr(display, item) : false}</span>;
     }
 };
 const aiCellIcon = (reference, config) => text => {

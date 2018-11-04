@@ -7,6 +7,7 @@ import Expr from "../expr/AI.Expr.String";
 import E from "../../Ux.Error";
 import Type from '../../Ux.Type';
 import Value from '../../Ux.Value';
+import Aid from './AI.RxAnt.Aid';
 
 const _parseData = (reference, config = {}) => {
     // 源头
@@ -33,7 +34,7 @@ const parseFilter = (reference, filter = () => true) => {
             if (!processed.cond) processed.cond = processed.field;
             delete processed.key;
             const value = _parseData(reference, processed);
-            if (value) {
+            if (undefined !== value) {
                 filters[processed.cond] = value;
             }
         }
@@ -68,7 +69,7 @@ const parseDatum = (config = {}) => {
  * @param reference
  * @param filter
  */
-const gainDatum = (reference, config = {}, filter = () => true) => {
+const getDatum = (reference, config = {}, filter = () => true) => {
     let options = [];
     // 如果存在datum节点，则从Assist/Tabular数据源中读取
     const {source} = parseDatum(config);
@@ -92,21 +93,28 @@ const gainDatum = (reference, config = {}, filter = () => true) => {
     }
     return options;
 };
-const gainTree = (config = {}) => {
-    let mapping = {};
-    if (config.tree) {
-        mapping = Value.valuePair(config.tree);
+
+const getSource = (reference, config, filter = {}) => {
+    let options = [];
+    if (config.items) {
+        // 如果存在根节点，则直接items处理
+        options = Expr.aiExprOption(config.items);
+    } else if (config.datum) {
+        // 如果存在datum节点，则从assist/tabular数据源中读取
+        options = getDatum(reference, config, filter);
+        const datum = parseDatum(config);
+        // 处理config中核心的expr节点
+        options.forEach(each => Aid.applyItem(each, datum, config.expr));
     }
-    if (!mapping.id) mapping.id = "id";
-    if (!mapping.pid) mapping.pid = "pid";
-    if (!mapping.title) mapping.title = "code";
-    if (!mapping.value) mapping.value = "id";
-    return mapping;
+    // 执行value的处理：value = key：如果key存在而value不存在
+    Aid.applyValue(options);
+    // 统一抽取expr表达式
+    return options;
 };
 export default {
     parseExpr,
     parseDatum,
     parseFilter,
-    gainDatum,
-    gainTree
+    getDatum,
+    getSource,
 };

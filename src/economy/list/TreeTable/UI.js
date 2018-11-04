@@ -1,4 +1,5 @@
 import React from 'react';
+import Ux from 'ux';
 import './Cab.less';
 import {Table} from 'antd';
 import Op from './op/Op';
@@ -35,7 +36,7 @@ class Component extends React.PureComponent {
         if (current) {
             const {table = {columns: []}} = this.state;
             // 动态渲染
-            const processed = Op.calcTable(this, table);
+            const processed = Op.calcTable(this, Ux.clone(table));
             return (
                 <Table {...processed} className={"web-table"}
                        dataSource={current}/>

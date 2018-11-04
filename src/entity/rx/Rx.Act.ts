@@ -95,6 +95,14 @@ class RxAct {
         return this;
     }
 
+    fastAdd(enabled: Boolean = true) {
+        const row: any = {};
+        // 快速添加的特殊处理
+        row.enabled = enabled;
+        this.redux['tree.row.add'] = row;
+        return this;
+    }
+
     query(filters: any = {}) {
         if (this.reference) {
             this.redux["grid.query"] = Ux.pipeQuery(this.reference, filters);
