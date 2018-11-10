@@ -34,33 +34,33 @@ const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     return (<span {...attrs}>{label}</span>);
 };
 
-const aiUnitLabel = (reference, column = {}, jsx) => {
+const aiUnitLabel = Aid.jsxConnect((reference, params = {}) => {
     const attrs = Aid.initEmpty();
     // jsx.style
-    Aid.onStyle(attrs, reference, {jsx, column});
-    return (text) => {
-        // $config.mode
-        Aid.outSeq(attrs, reference, {jsx, column, text});
-        // 最终输出
-        const {children, ...rest} = attrs;
-        return (<span {...rest}>{children}</span>);
-    };
-};
+    Aid.onStyle(attrs, reference, params);
+    // 记得返回
+    return attrs;
+}, (attrs = {}, reference, params = {}) => {
+    // $config.mode,
+    Aid.outSeq(attrs, reference, params);
+}, (attrs = {}, children) =>
+    (<span {...attrs}>{children}</span>));
 
-const aiUnitText = (reference, column = {}, jsx = {}) => {
+const aiUnitText = Aid.jsxConnect((reference, params = {}, channel = {}) => {
+    const {column = {}} = params;
     const attrs = Aid.initDynamic(column);
-    // 2阶变更函数
-    const on2Change = Aid.onChangeUnit(attrs, reference, {column});
-    return (text, record = {}, index) => {
-        // 2阶变更 -> 一阶变更
-        attrs.onChange = on2Change(index);
-        // jsx.readOnly
-        Aid.outReadOnly(attrs, reference, {jsx, column});
-        // 支持Child
-        return Aid.jsxChild(column, record,
-            () => <Input {...attrs} value={text}/>);
-    };
-};
+    // 穿透函数，获取2阶变更
+    channel.fnChange = Aid.onChangeUnit(attrs, reference, {column});
+    return attrs;
+}, (attrs = {}, reference, params = {}, channel = {}) => {
+    // 2阶变更 -> 一阶变更
+    attrs.onChange = channel.fnChange(params.index);
+    // jsx.readOnly
+    Aid.outReadOnly(attrs, reference, params);
+    // 设置值，直接用 = 赋值
+    attrs.value = params.text;
+
+}, (attrs = {}) => (<Input {...attrs}/>));
 
 const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
     // add by Hongwei: 添加对rows属性的支持
@@ -160,7 +160,6 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
         attrs.allowClear = config.allowClear;
     }
     // 处理childOnly的渲染模式
-    console.info(attrs, items);
     return _wrapperChild(config, record,
         () => AiPure.aiInputSelect(items, attrs));
 };

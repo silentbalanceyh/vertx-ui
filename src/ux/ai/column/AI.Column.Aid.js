@@ -17,12 +17,19 @@ const onStyle = (attrs = {}, reference, {
 const outReadOnly = (attrs = {}, reference, {
     jsx = {}, column = {}
 }) => {
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    // 如果整体是false，则以$config.readOnly节点为主
-    if (!attrs.readOnly) {
-        const {$config = {}} = column;
-        attrs.readOnly = !!$config.readOnly;
+    attrs.readOnly = false;
+    // 1.检查jsx的readOnly是不是存在
+    if (jsx.hasOwnProperty('readOnly')) {
+        const {readOnly = false} = jsx;
+        attrs.readOnly = readOnly;
+    }
+    // 2.其次检查$config中是否设置了readOnly
+    const {$config = {}} = column;
+    if ($config.hasOwnProperty("readOnly")) {
+        // 如果整体是false，则以$config.readOnly节点为主
+        if (!attrs.readOnly) {
+            attrs.readOnly = !!$config.readOnly;
+        }
     }
 };
 // -> $config.mode
@@ -48,6 +55,22 @@ const jsxChild = (column = {}, record = {}, fnRender) => {
         } else return U.isFunction(fnRender) ? fnRender() : false;
     } else return U.isFunction(fnRender) ? fnRender() : false;
 };
+const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
+    return (reference, column = {}, jsx) => {
+        // 穿透引用
+        const channel = {};
+        // 执行静态处理函数
+        const attrs = fnStatic(reference, {column, jsx}, channel);
+
+        return (text, record = {}, index) => {
+            // 执行动态处理函数
+            fnDynamic(attrs, reference, {jsx, column, text, record, index}, channel);
+            // 执行渲染专用函数
+            const {children, ...rest} = attrs;
+            return jsxChild(column, record, () => fnRender(rest, children));
+        }
+    }
+};
 export default {
     // ------- 静态
     onStyle,    // 设置渲染的span标签的风格
@@ -59,5 +82,6 @@ export default {
     initEmpty: () => ({}),
     initDynamic: (column = {}) => AiValue.applyDynamic(column),
     // ------- jsx渲染流程变化
-    jsxChild
+    jsxChild,
+    jsxConnect
 };

@@ -14,8 +14,7 @@
                     "optionJsx.config.columns": [
                         "key,操作",
                         {
-                            "metadata": "termName,文本（TEXT）",
-                            "$config.readOnly": true
+                            "metadata": "termName,文本（TEXT）"
                         },
                         {
                             "metadata": "price,金额（DECIMAL）,DECIMAL"
