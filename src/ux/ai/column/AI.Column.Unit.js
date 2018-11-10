@@ -1,177 +1,148 @@
-import AiValue from "../expr/AI.Expr.Value";
 import {DatePicker, Input, InputNumber, TreeSelect} from "antd";
-import Value from "../../Ux.Value";
-import AiExpr from "../expr/AI.Expr.String";
 import AiPure from "../AI.Pure";
-import RxAnt from '../ant/AI.RxAnt';
-import Prop from '../../prop/Ux.Prop';
 import React from "react";
-import Xt from '../../xweb';
-import Norm from '../../Ux.Normalize';
 import Jsx from '../../Ux.Jsx';
+import Aid from './AI.Column.Aid';
+import Norm from '../../Ux.Normalize';
 
-const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
-    const config = item['$config'];
-    let label = text;
-    // 转换前提是包含了config.to的配置
-    if (config && config.to) {
-        label = record[config.to];
-    }
-    const attrs = {};
-    attrs.style = jsx.style ? jsx.style : {};
-    return (<span {...attrs}>{label}</span>);
-};
-
-const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
-    const attrs = {};
-    attrs.style = jsx.style ? jsx.style : {};
-    const {$config = {}} = item;
-    const result = Value.sequence(text, $config.mode);
-    return ((<span {...attrs}>{result}</span>));
-};
-
-const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    // 如果整体是false，则以$config.readOnly节点为主
-    if (!attrs.readOnly) {
-        const {$config = {}} = item;
-        attrs.readOnly = !!$config.readOnly;
-    }
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<Input {...attrs} value={text}/>);
-};
-
-const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    // add by Hongwei: 添加对rows属性的支持
-    const config = item["$config"] ? item["$config"] : {};
-    const rows = config ? config["rows"] : 2;
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    attrs.rows = rows;
-    // 进行协变的渲染
-    return Jsx.jsxCell(Input.TextArea, attrs, text);
-};
-
-const aiUnitNumber = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<InputNumber {...attrs} value={text}/>);
-};
-
-const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 只读处理
-    const {viewOnly = false} = jsx;
-    attrs.readOnly = viewOnly;
-    // 单位处理
-    const {$config = {}} = item;
-    if ($config.unit)
-        attrs.addonAfter = $config.unit;
-    // 变更函数
-    const params = {
-        index, field: item.dataIndex,
-        // 格式化专用
-        normalize: Norm.normalizer.decimal(18, 2)
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<Input {...attrs} value={text}/>);
-};
-
-const aiUnitDate = (reference, item) => (text, record, index) => {
-    const config = item["$config"] ? item["$config"] : {};
-    const attrs = Object.assign({}, config);
-    if (text) {
-        attrs.value = Value.convertTime(text);
-    }
-    attrs.className = "rx-readonly";
-    const params = {
-        index, field: item.dataIndex,
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<DatePicker {...attrs}/>);
-};
-
-const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    const config = item["$config"] ? item["$config"] : {};
-    config.items = AiExpr.aiExprOption(config.items);
-    if (jsx.readOnly) {
-        config.disabled = jsx.readOnly;
-    }
-    const params = {
-        index, field: item.dataIndex,
-    };
-    config.onChange = Xt.xt2ChangeUnit(reference, params);
-    const {items = [], ...rest} = config;
-    return AiPure.aiInputRadio(items, {...rest, value: String(text)});
-};
-const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    const config = item['$config'];
-    const {datum} = config;
-    let items = [];
-    if (datum) {
-        const ref = Prop.onReference(reference, 1);
-        items = RxAnt.toOptions(ref, {datum});
-    } else {
-        items = RxAnt.toOptions(reference, {items: config.items});
-    }
-    const unitJsx = item.jsx ? item.jsx : {};
-    let attrs = {};
-    attrs = Object.assign(attrs, unitJsx);
-    attrs.value = text;
-    const params = {
-        index, field: item.dataIndex,
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    // 允许清空
-    if (config.hasOwnProperty('allowClear')) {
-        attrs.allowClear = config.allowClear;
-    }
-    return AiPure.aiInputSelect(items, attrs);
-};
-
-const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    const config = item['$config'];
-    let treeData = [];
-    if (config.datum) {
-        const ref = Prop.onReference(reference, 1);
-        treeData = RxAnt.toTreeOptions(ref, config);
-    }
-    const params = {
-        index, field: item.dataIndex,
-    };
-    const attrs = {};
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    attrs.treeData = treeData;
-    return (<TreeSelect {...attrs} value={text}/>);
-};
+const jsxInput = (attrs = {}) => (<Input {...attrs}/>);
 
 export default {
-    VECTOR: aiUnitVector,
-    TEXT: aiUnitText,
-    TEXT_AREA: aiUnitTextArea,
-    DATE: aiUnitDate,
-    DATUM: aiUnitDatum,
-    RADIO: aiUnitRadio,
-    LABEL: aiUnitLabel,
-    NUMBER: aiUnitNumber,
-    DECIMAL: aiUnitDecimal,
-    TREE: aiUnitTree
+    // ---- DATUM
+    DATUM: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onDatum(attrs, reference, params);
+            Aid.onJsx(attrs, reference, params);
+            Aid.onAllowClear(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            Aid.outDisabled(attrs, reference, params);
+            attrs.value = params.text;
+            attrs.onChange = channel.fnChange(params.index);
+        },
+        (attrs = {}) => {
+            const {items = [], ...rest} = attrs;
+            return AiPure.aiInputSelect(items, rest);
+        }
+    ),
+    // ---- TREE
+    TREE: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onTree(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            attrs.onChange = channel.fnChange(params.index);
+            attrs.value = params.text;
+        },
+        (attrs = {}) => (<TreeSelect {...attrs}/>)
+    ),
+    // ---- VECTOR
+    VECTOR: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outTo(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
+    // ---- LABEL
+    LABEL: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outSeq(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
+    // ---- DATE
+    DATE: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initConfig(params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            attrs.onChange = channel.fnChange(params.index);
+            attrs.className = "rx-readonly";
+            Aid.outDate(attrs, reference, params);
+        },
+        (attrs = {}) => (<DatePicker {...attrs}/>)
+    ),
+    // ---- TEXT
+    TEXT: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        null,
+        jsxInput
+    ),
+    // NUMBER
+    NUMBER: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        null,
+        (attrs = {}) => (<InputNumber {...attrs}/>),
+    ),
+    DECIMAL: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            Aid.onUnit(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, {
+                ...params, normalize: Norm.normalizer.decimal(18, 2)
+            });
+            return attrs;
+        },
+        null,
+        jsxInput
+    ),
+    // ---- RADIO
+    RADIO: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initConfig(params);
+            Aid.onOptions(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            Aid.outDisabled(attrs, reference, params);
+            attrs.value = params.text ? String(params.text) : params.text;
+            attrs.onChange = channel.fnChange(params.index);
+        },
+        (attrs) => {
+            const {items = [], ...rest} = attrs;
+            return AiPure.aiInputRadio(items, rest);
+        }
+    ),
+
+    // ---- TEXT_AREA
+    TEXT_AREA: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            Aid.onRows(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        null,
+        (attrs = {}) => {
+            const {value, ...rest} = attrs;
+            return Jsx.jsxCell(Input.TextArea, rest, value);
+        }
+    ),
 };

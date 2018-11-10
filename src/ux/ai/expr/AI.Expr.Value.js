@@ -147,6 +147,8 @@ const applyDynamic = (item) => {
             width: config.width
         };
     }
+    // 删除childOnly自定义属性
+    if (attrs.hasOwnProperty("childOnly")) delete attrs['childOnly'];
     return attrs;
 };
 export default {

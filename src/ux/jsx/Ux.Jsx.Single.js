@@ -179,11 +179,14 @@ const jsxIcon = (item = {}) => {
             item.iconStyle.fontSize = Value.valueInt(item.iconStyle.fontSize);
         }
     }
+    // 文字信息
+    let text = item.text || item.label;
+    if (!text) text = "";
     return (
         <span>
             {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
             {item.icon ? (<span>&nbsp;&nbsp;</span>) : false}
-            {item.text || item.label}
+            {text}
         </span>
     );
 };

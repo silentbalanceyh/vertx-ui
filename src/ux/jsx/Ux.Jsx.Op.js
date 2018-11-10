@@ -33,6 +33,7 @@ const _rtSubmit = (reference = {}, callback = {}) => {
                         Ux.E.fxTerminal(true, 10078, "Non Promise");
                         // Non Promise Mode
                         // _rtState(reference, false);
+                        // _rtState(reference, false);
                     }
                 } else {
                     _rtState(reference, false);
@@ -69,6 +70,7 @@ const _rt2Submit = (reference = {}, metadata = {}) => (event) => {
 const _rtError = (reference = {}, failure) => (errors = {}) => {
     const {data = {}} = errors;
     // 如果有自定义的failure函数，则调用failure
+    console.info(errors);
     if (U.isFunction(failure)) {
         failure(errors);
         _rtState(reference, false);

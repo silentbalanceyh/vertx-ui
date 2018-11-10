@@ -55,6 +55,8 @@ const valueOnChange = (reference = {}, state, key = "source") => {
     if (onChange) {
         const newValue = Object.assign({}, reference.state, state);
         onChange(newValue[key]);
+    } else {
+        console.error("valueOnChange丢失了onChange方法");
     }
 };
 

@@ -1,5 +1,6 @@
 import U from "underscore";
 import Util from "../util";
+import Value from '../value';
 
 const xtInitObject = (props = {}) => {
     const values = {};
@@ -23,7 +24,7 @@ const xtInitArray = (props = {}, empty = false) => {
     // 初始化处理
     const value = props.value;
     if (value) {
-        values.data = U.isArray(value) ? value : (U.isArray(value.data) ? value.data :
+        values.data = U.isArray(value) && value.length > 0 ? value : (U.isArray(value.data) ? value.data :
             ((empty) ? [] : [{key: Util.randomUUID()}]));
     } else {
         values.data = ((empty) ? [] : [{key: Util.randomUUID()}]);
@@ -38,16 +39,25 @@ const xtInitArray = (props = {}, empty = false) => {
 const xtInitSource = (props = {}, records = 2) => {
     const {source = []} = props;
     const keys = source.map(item => item.key);
-    const state = {};
+    // 读取旧数据
+    const state = xtInit(props);
+    // 使用keys先过滤
+    const $state = {};
+    const $keys = Value.immutable(keys);
+    Object.keys(state).filter(key => $keys.contains(key))
+        .forEach(key => $state[key] = state[key]);
+    // 其次执行操作
     keys.forEach(key => {
-        let item = [];
-        for (let idx = 0; idx < records; idx++) {
-            item.push({key: Util.randomUUID()});
+        if (!U.isArray($state[key])) {
+            let item = [];
+            for (let idx = 0; idx < records; idx++) {
+                item.push({key: Util.randomUUID()});
+            }
+            $state[key] = item;
         }
-        state[key] = item;
     });
     // initSource的核心，就是包含了一个dataSource节点
-    return {dataSource: state};
+    return {dataSource: $state};
 };
 export default {
     xtInitSource,

@@ -81,11 +81,18 @@ const xt2ChangeUnit = (reference, {
     // 4.调用本地的onChange
     xtChange(reference, source, key);
 };
+const xt3ChangeUnit = (reference, {
+    field, key = "data",
+    normalize = data => data,
+}) => (
+    index // 当前索引值，根据索引构造，三阶函数
+) => xt2ChangeUnit(reference, {index, field, key, normalize});
 export default {
     xtChange,
     // 生成事件
     xt2Change,
     xt2Blur,
     // 核心列变更事件
-    xt2ChangeUnit
+    xt2ChangeUnit,
+    xt3ChangeUnit
 };

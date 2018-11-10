@@ -36,7 +36,7 @@ const _renderLabel = (label, value, config) => {
                     <hr/></span>) : each));
             }
         } else {
-            return item;
+            return item ? item : "";
         }
     };
     if (config.hasOwnProperty('defaultValue')) {
@@ -142,7 +142,7 @@ const _extractItem = (dataItem = {}, config = {}, values = []) => {
     Object.assign(result, childrenObj);
     return result;
 };
-const extractList = (reference, config = {}, value) => {
+const extractList = (reference, config = {}, value = {}) => {
     // 配置特殊处理，针对提取专用处理
     let results = [];
     const values = value && U.isArray(value) ? value : Object.keys(value);
@@ -187,10 +187,12 @@ const on2Download = (reference, config = {}, value = {}) => (event) => {
 const extractLink = (reference, config = {}, value = {}) => {
     return (
         <li className={"download-link"} key={value.key | value.uid}>
-            <a href={"#"} onClick={on2Download(reference, config, value)}>
-                <Icon type={"link"}/>&nbsp;&nbsp;
-                {value.name}
-            </a>
+            {value.name ? (
+                <a href={"#"} onClick={on2Download(reference, config, value)}>
+                    <Icon type={"link"}/>&nbsp;&nbsp;
+                    {value.name}
+                </a>
+            ) : false}
         </li>
     );
 };
