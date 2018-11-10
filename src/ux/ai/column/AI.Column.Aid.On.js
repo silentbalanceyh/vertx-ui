@@ -75,6 +75,22 @@ const onAllowClear = (attrs = {}, reference, {
         attrs.allowClear = config.allowClear;
     }
 };
+const onList = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const $datum = column['$datum'];
+    const config = "string" === typeof $datum ? RxAnt.toParsed($datum) : $datum;
+    const list = {};
+    list.data = Prop.onDatum(reference, config.source);
+    list.config = config;
+    // 兼容处理，label优先，display次之
+    if (config.label) {
+        list.display = config.label;
+    } else {
+        list.display = config.display;
+    }
+    attrs.list = list;
+};
 export default {
     // ------- 静态：TableEditor用
     onStyle,    // 设置渲染的span标签的风格
@@ -83,6 +99,7 @@ export default {
     onRows, // 设置TextArea专用的rows属性
     onUnit, // 单位设置，unit = ￥
     onDatum, // 处理config.items的双用性
+    onList, // 处理config.$datum中的专用属性
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除
