@@ -128,7 +128,7 @@ const cellExpr = (attrs = {}, reference, {
     if (text) {
         attrs.children = Util.formatExpr(column['$expr'], {
             ...record, value: text,
-        })
+        });
     } else {
         attrs.children = false;
     }

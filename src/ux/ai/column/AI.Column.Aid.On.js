@@ -103,4 +103,4 @@ export default {
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除
-}
+};
