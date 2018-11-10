@@ -3,6 +3,7 @@ import Value from "../../value";
 import U from "underscore";
 import Util from "../../util";
 import Ai from "../AI";
+import RxAnt from "../ant/AI.RxAnt";
 
 const outReadOnly = (attrs = {}, reference, {
     jsx = {}, column = {}
@@ -128,9 +129,30 @@ const cellExpr = (attrs = {}, reference, {
     if (text) {
         attrs.children = Util.formatExpr(column['$expr'], {
             ...record, value: text,
-        })
+        });
     } else {
         attrs.children = false;
+    }
+};
+const outOrigin = (attrs = {}, reference, {
+    column = {}, record = {}
+}) => {
+    const {$config = {}} = column;
+    const expr = RxAnt.toParsed($config.origin);
+    const {origin} = reference.state ? reference.state : {};
+    // 根节点
+    const source = expr.source;
+    if (origin) {
+        const fieldData = origin[source];
+        if (fieldData) {
+            // 根据字段中的某个key读取
+            const field = expr.field;
+            const hitKey = record[field];
+            let items = fieldData[hitKey];
+            if (!U.isArray(items)) items = [];
+            // 设置attrs
+            attrs.items = RxAnt.toOrigin(items, expr);
+        }
     }
 };
 export default {
@@ -148,4 +170,5 @@ export default {
     outSeq,     // 根据不同的mode设置序号字段以及序号字段的相关规则
     outTo,   // Vector专用
     outDate,  // Moment时间格式专用转换
+    outOrigin, // 处理$config.origin专用处理
 };

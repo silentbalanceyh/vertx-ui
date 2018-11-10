@@ -77,7 +77,7 @@ export default {
                 attrs.children = result.map(item => Value.valueExpr(display, item)).join(',');
             } else {
                 const item = Type.elementUnique(data, config.value, text);
-                attrs.children = item ? Value.valueExpr(display, item) : false
+                attrs.children = item ? Value.valueExpr(display, item) : false;
             }
         },
         Aid.jsxSpan,

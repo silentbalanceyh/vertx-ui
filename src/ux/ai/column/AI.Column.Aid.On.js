@@ -3,7 +3,6 @@ import AiExpr from "../expr/AI.Expr.String";
 import Prop from "../../prop/Ux.Prop";
 import RxAnt from "../ant/AI.RxAnt";
 
-
 const _getConfig = (column = {}) => column['$config'] ? column['$config'] : {};
 // jsx.style -> style中
 // 「静态」读取jsx中的风格到当前风格中
@@ -27,7 +26,14 @@ const onUnit = (attrs = {}, reference, {
 const onChangeUnit = (attrs = {}, reference, {
     column = {},
     normalize   // 格式化专用
-}) => Xt.xt3ChangeUnit(reference, {field: column.dataIndex, normalize});
+}) => {
+    const {$config = {}} = column;
+    return Xt.xt3ChangeUnit(reference, {
+        field: column.dataIndex,
+        normalize,
+        trigger: $config.trigger, // 添加trigger处理，新功能触发专用
+    });
+};
 
 const onOptions = (attrs = {}, reference, {
     column = {},
@@ -103,4 +109,4 @@ export default {
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除
-}
+};

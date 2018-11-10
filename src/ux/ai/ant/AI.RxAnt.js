@@ -17,6 +17,7 @@ class RxAnt {
     // 特殊
     static toParsed = Datum.parseExpr;
     static toDatum = Datum.getDatum;   // 读取Datum
+    static toOrigin = Datum.parseOrigin; // Origin专用处理
     // 窗口解析
     static toDialogConfig = Complex.dialog;
     // 树相关options解析

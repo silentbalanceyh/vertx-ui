@@ -8,6 +8,26 @@ import Norm from '../../Ux.Normalize';
 const jsxInput = (attrs = {}) => (<Input {...attrs}/>);
 
 export default {
+    // ---- ORIGIN
+    ORIGIN: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onJsx(attrs, reference, params);
+            Aid.onAllowClear(attrs, reference, params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            Aid.outDisabled(attrs, reference, params);
+            attrs.value = params.text;
+            attrs.onChange = channel.fnChange(params.index);
+            Aid.outOrigin(attrs, reference, params);
+        },
+        (attrs = {}) => {
+            const {items = [], ...rest} = attrs;
+            return AiPure.aiInputSelect(items, rest);
+        }
+    ),
     // ---- DATUM
     DATUM: Aid.jsxConnect(
         (reference, params = {}, channel = {}) => {
@@ -21,7 +41,7 @@ export default {
         (attrs = {}, reference, params = {}, channel = {}) => {
             Aid.outDisabled(attrs, reference, params);
             attrs.value = params.text;
-            attrs.onChange = channel.fnChange(params.index);
+            attrs.onChange = channel.fnChange(params.index, params.record);
         },
         (attrs = {}) => {
             const {items = [], ...rest} = attrs;
