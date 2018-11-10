@@ -4,7 +4,6 @@ import AiValue from "../expr/AI.Expr.Value";
 import AiExpr from "../expr/AI.Expr.String";
 // Xt
 import Xt from '../../xweb';
-
 import U from "underscore";
 import Prop from "../../prop/Ux.Prop";
 import RxAnt from "../ant/AI.RxAnt";
@@ -172,8 +171,18 @@ const outDate = (attrs = {}, reference, {
     }
     attrs.value = value;
 };
+const outLogical = (attrs = {}, reference, {
+    column = {}, text,
+}) => {
+    const {$mapping = {}} = column;
+    const literal = text ? $mapping["true"] : $mapping["false"];
+    const item = Value.valueIcon(literal);
+    if (item && U.isObject(item)) {
+        Object.assign(attrs, item);
+    }
+};
 export default {
-    // ------- 静态
+    // ------- 静态：TableEditor用
     onStyle,    // 设置渲染的span标签的风格
     onChangeUnit, // 生成函数用于处理底层的「索引」专用结果
     onOptions,  // 设置专用的options解析
@@ -183,6 +192,8 @@ export default {
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除
+    // ------- 动态：直接表格使用
+    outLogical, // LOGICAL专用，只识别true/false
     // ------- 动态：根据值有所改变
     outReadOnly, // 设置当前组件的"只读"属性
     outDisabled, // 设置当前组件的"禁用"属性

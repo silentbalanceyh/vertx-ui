@@ -10,36 +10,7 @@ import React from "react";
 import {Icon} from "antd";
 import U from 'underscore';
 import CellOp from './AI.Column.Op';
-
-/**
- * 【高阶函数：二阶】列render方法处理器，用于处理双值
- * * 配置键：LOGICAL
- * * true/false对应不同的双值，以及不同值呈现值
- * * 附加配置项中包含$mapping用于描述双值配置
- * @method aiCellLogical
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Object} config 单列配置数据
- * @return {function(*): *}
- * @example
- *
- *      ...
- *      {
- *          "title": "房包早",
- *          "dataIndex": "brekker",
- *          "$render": "LOGICAL",
- *          "$mapping": {
- *              "true": "是",
- *              "false": "否"
- *          }
- *      }
- */
-const aiCellLogical = (reference, config = {}) => text => {
-    const {$mapping = {}} = config;
-    const literal = text ? $mapping["true"] : $mapping["false"];
-    const item = Value.valueIcon(literal);
-    return fieldRender.jsxIcon(item);
-};
+import Aid from './AI.Column.Aid';
 
 /**
  * 【高阶函数：二阶】列render方法处理器，用于处理带百分号（%）的字符串格式化
@@ -204,8 +175,19 @@ const aiCellMapping = (reference, config) => (text) => {
         return (<span>{text}</span>);
     }
 };
+const initEmpty = () => {
+    const attrs = Aid.initEmpty();
+    return attrs;
+};
 export default {
-    LOGICAL: aiCellLogical,
+    // ---- LOGICAL
+    LOGICAL: Aid.jsxConnect(
+        initEmpty,
+        (attrs = {}, reference, params = {}) => {
+            Aid.outLogical(attrs, reference, params);
+        },
+        (attrs = {}) => fieldRender.jsxIcon(attrs)
+    ),
     DATE: aiCellDate,
     CURRENCY: aiCellCurrency,
     EXPRESSION: aiCellExpression,
