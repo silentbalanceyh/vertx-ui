@@ -1,9 +1,6 @@
 import Value from "../../Ux.Value";
 import fieldRender from "../../jsx/Ux.Jsx.Single";
-import Format from "../../util/Ux.Format";
-import Expr from "../../util/Ux.Expr";
 import RxAnt from "../ant/AI.RxAnt";
-import Ai from '../AI';
 import Prop from "../../prop/Ux.Prop";
 import Type from "../../Ux.Type";
 import React from "react";
@@ -12,92 +9,6 @@ import U from 'underscore';
 import CellOp from './AI.Column.Op';
 import Aid from './AI.Column.Aid';
 
-/**
- * 【高阶函数：二阶】列render方法处理器，用于处理带百分号（%）的字符串格式化
- * * 配置值：PERCENT
- * @method aiCellPercent
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Object} config 单列配置数据
- * @return {function(*=): *}
- */
-const aiCellPercent = (reference, config) => text => {
-    return (
-        <span>{Format.fmtPercent(text)}</span>
-    );
-};
-/**
- * 【高阶函数：二阶】列render方法处理器，用于处理时间格式化
- * * 配置值：DATE
- * * 附加配置中包含$format用于描述moment的格式Pattern
- * @method aiCellDate
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Object} config 单列配置数据
- * @return {function(*=): *}
- * @example
- *
- *      ...
- *      {
- *          "title": "抵达日期",
- *          "dataIndex": "arriveTime",
- *          "$render": "DATE",
- *          "$format": "YYYY年MM月DD日 HH:mm:ss"
- *      }
- */
-const aiCellDate = (reference, config) => text => {
-    if (config.$empty) {
-        if (!text) {
-            return false;
-        }
-    }
-    return <span>{Expr.formatDate(text, config.$format)}</span>;
-};
-/**
- * 【高阶函数：二阶】列render方法处理器，用于处理货币格式化
- * * 配置值：CURRENCY
- * * 附加配置中包含$flag用于描述货币符号，默认为￥
- * @method aiCellCurrency
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Object} config 单列配置数据
- * @return {function(*=): *}
- * @example
- *
- *      ...
- *      {
- *          "title": "单价",
- *          "dataIndex": "unitPrice",
- *          "$render": "CURRENCY"
- *      },
- */
-const aiCellCurrency = (reference, config = {}) => text => {
-    const unit = config.$unit ? config.$unit : "￥";
-    return <span>{unit}{Format.fmtCurrency(text)}</span>;
-};
-/**
- * 【高阶函数：二阶】列render方法处理函数，用于处理表达式格式化
- * * 配置项：EXPRESSION
- * * 附加配置$expr用于描述表达式，表达式中的占位符使用`:value`的格式
- * @method aiCellExpression
- * @private
- * @param {React.PureComponent} reference React对应组件引用
- * @param {Object} config 单列配置数据
- * @return {function(*=): *}
- * @example
- *
- *      ...
- *      {
- *          "title": "入住天数",
- *          "dataIndex": "insideDays",
- *          "$render": "EXPRESSION",
- *          "$expr": ":value天"
- *      }
- */
-const aiCellExpression = (reference, config) => text => {
-    return undefined !== text ? (
-        <span> {Expr.formatExpr(config.$expr, {value: text})}</span>) : false;
-};
 /**
  * 【高阶函数：二阶】列render方法处理函数，用于处理Datum类型：Tabular/Assist专用格式化
  * * 配置项：DATUM
@@ -142,38 +53,11 @@ const aiCellDatum = (reference, config) => text => {
         return <span>{item ? Value.valueExpr(display, item) : false}</span>;
     }
 };
-const aiCellIcon = (reference, config) => text => {
-    const mapping = config['$mapping'] ? config['$mapping'] : {};
-    const target = mapping[text];
-    if (U.isObject(target)) {
-        return (<span>
-            {target.icon ? <Icon type={target.icon}
-                                 style={target.style ? target.style : {}}/> : false}
-            &nbsp;&nbsp;{target.text}
-        </span>);
-    } else {
-        return (<span>{target}</span>);
-    }
-};
 const aiCellDownload = (reference, config) => (text) => {
     // TODO:
     let downloadConfig = config["$download"];
     if (!downloadConfig) downloadConfig = {};
     return (<a href={text}>{downloadConfig.flag ? downloadConfig.flag : text}</a>);
-};
-const aiCellMapping = (reference, config) => (text) => {
-    const mapping = config['$mapping'];
-    if (mapping) {
-        const literal = mapping[text];
-        if (literal && 0 < literal.indexOf(",")) {
-            const item = Ai.aiExprIcon(literal);
-            return fieldRender.jsxIcon(item);
-        } else {
-            return (<span>{mapping[text]}</span>);
-        }
-    } else {
-        return (<span>{text}</span>);
-    }
 };
 const initEmpty = () => {
     const attrs = Aid.initEmpty();
@@ -183,18 +67,48 @@ export default {
     // ---- LOGICAL
     LOGICAL: Aid.jsxConnect(
         initEmpty,
-        (attrs = {}, reference, params = {}) => {
-            Aid.outLogical(attrs, reference, params);
-        },
+        Aid.cellLogical,
         (attrs = {}) => fieldRender.jsxIcon(attrs)
     ),
-    DATE: aiCellDate,
-    CURRENCY: aiCellCurrency,
-    EXPRESSION: aiCellExpression,
+    PERCENT: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellPercent,
+        Aid.jsxSpan,
+    ),
+    DATE: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellDate,
+        Aid.jsxSpan,
+    ),
+    CURRENCY: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellCurrency,
+        Aid.jsxSpan,
+    ),
+    EXPRESSION: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellExpr,
+        Aid.jsxSpan,
+    ),
+    MAPPING: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellMapping,
+        (attrs = {}, children = {}) => attrs.icon ?
+            fieldRender.jsxIcon(attrs.icon) :
+            Aid.jsxSpan(attrs, children)
+    ),
+    ICON: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellIcon,
+        (attrs = {}, children = "") => (
+            <span>
+                {attrs.icon ? <Icon style={attrs.style} type={attrs.icon}/> : false}
+                {attrs.icon ? <span>&nbsp;&nbsp;</span> : false}
+                {children}
+            </span>
+        )
+    ),
     DATUM: aiCellDatum,
-    PERCENT: aiCellPercent,
-    ICON: aiCellIcon,
-    MAPPING: aiCellMapping,
     DOWNLOAD: aiCellDownload,
     ...CellOp,
 };

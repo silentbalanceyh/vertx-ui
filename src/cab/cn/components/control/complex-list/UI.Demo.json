@@ -70,6 +70,12 @@
                         "true": "启用",
                         "false": "禁用"
                     }
+                },
+                {
+                    "title": "创建时间",
+                    "dataIndex": "created_date",
+                    "$render": "DATE",
+                    "$format": "YYYY-MM-DD"
                 }
             ]
         }

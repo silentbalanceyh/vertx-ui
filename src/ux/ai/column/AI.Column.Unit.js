@@ -5,7 +5,6 @@ import Jsx from '../../Ux.Jsx';
 import Aid from './AI.Column.Aid';
 import Norm from '../../Ux.Normalize';
 
-const jsxLabel = (attrs = {}, children) => (<span {...attrs}>{children}</span>);
 const jsxInput = (attrs = {}) => (<Input {...attrs}/>);
 
 export default {
@@ -53,7 +52,7 @@ export default {
         (attrs = {}, reference, params = {}) => {
             Aid.outTo(attrs, reference, params);
         },
-        jsxLabel
+        Aid.jsxSpan,
     ),
     // ---- LABEL
     LABEL: Aid.jsxConnect(
@@ -65,7 +64,7 @@ export default {
         (attrs = {}, reference, params = {}) => {
             Aid.outSeq(attrs, reference, params);
         },
-        jsxLabel
+        Aid.jsxSpan,
     ),
     // ---- DATE
     DATE: Aid.jsxConnect(
