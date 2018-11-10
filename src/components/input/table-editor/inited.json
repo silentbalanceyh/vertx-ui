@@ -10,7 +10,7 @@
             "openTime": "2018-06-23T08:42:34",
             "active": true,
             "roomType": "0f51e472-ab22-46e1-951b-9458a634867c",
-            "termId": "edc9a43b-37ac-4b68-9ebb-c3a0ab58ee5c",
+            "termId": "579f44ec-6e87-4faa-abf7-421abb7d9f5e",
             "sequence": 1
         },
         {
@@ -23,8 +23,9 @@
             "openTime": "2018-09-23T14:42:34",
             "active": false,
             "roomType": "1a1e8ea8-e769-42f8-99c9-cf6d36f56e8c",
-            "termId": "ce3f61fd-ee17-45f1-b5c3-42810f613726",
-            "sequence": 2
+            "termId": "b6dd0cce-f881-44db-9108-ae3fedd6c717",
+            "sequence": 2,
+            "termDesc": "描述"
         }
     ]
 }

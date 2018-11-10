@@ -20,8 +20,9 @@ export default {
             return attrs;
         },
         (attrs = {}, reference, params = {}, channel = {}) => {
-            attrs.onChange = channel.fnChange(params.index);
             Aid.outDisabled(attrs, reference, params);
+            attrs.value = params.text;
+            attrs.onChange = channel.fnChange(params.index);
         },
         (attrs = {}) => {
             const {items = [], ...rest} = attrs;

@@ -97,7 +97,7 @@ const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
             outReadOnly(attrs, reference, params); // readOnly属性
             attrs.onChange = channel.fnChange(params.index);  // 变更函数
             attrs.value = params.text;  // 设值处理
-        }
+        };
     }
     return (reference, column = {}, jsx) => {
         // 穿透引用
