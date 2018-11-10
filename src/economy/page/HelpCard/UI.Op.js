@@ -13,23 +13,32 @@ const onClickBack = (reference, topbar) => (event) => {
     Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
 };
 
-const renderBack = (reference, topbar) => {
+const renderBack = (ref, topbar) => {
+    const reference = Ux.onReference(ref, 1);
     return (<Button icon={"close"} shape="circle" type={"ghost"}
                     onClick={onClickBack(reference, topbar)}/>);
 };
-
-const renderButton = (reference, topbar, key = "left") => {
+const _applyLoading = (item, props = {}) => {
+    const {$submitting} = props;
+    if ($submitting) {
+        const submitting = $submitting.is() ? $submitting.to() : {};
+        item.loading = submitting.loading;
+    }
+    return item;
+};
+const renderButton = (ref, topbar, key = "left") => {
     const buttons = topbar[key] ? topbar[key] : [];
     return (
         <Button.Group>
             {buttons.map(button => {
-                const {text, ...rest} = button;
+                const $button = Ux.clone(_applyLoading(button, ref.props));
+                const {text, ...rest} = $button;
                 return (<Button {...rest}>{text}</Button>);
             })}
         </Button.Group>
     );
 };
-const renderHelp = (reference, topbar, current) => {
+const renderHelp = (ref, topbar, current) => {
     if (topbar.help && topbar.help.steps) {
         const helps = Ux.aiExprHelp(topbar.help.steps);
         // 当前步骤

@@ -9,6 +9,18 @@ import React from "react";
 import Xt from '../../xweb';
 import Norm from '../../Ux.Normalize';
 import Jsx from '../../Ux.Jsx';
+import U from 'underscore';
+import Aid from './AI.Column.Aid';
+
+const _wrapperChild = (config = {}, record = {}, fnRender) => {
+    // config中是否配置了childOnly
+    if (config['childOnly']) {
+        // 如果是childOnly则只有children = [] > 0 时渲染
+        if (record.children && 0 < record.children.length) {
+            return false;
+        } else return U.isFunction(fnRender) ? fnRender() : false;
+    } else return U.isFunction(fnRender) ? fnRender() : false;
+};
 
 const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     const config = item['$config'];
@@ -22,29 +34,32 @@ const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
     return (<span {...attrs}>{label}</span>);
 };
 
-const aiUnitLabel = (reference, item = {}, jsx) => (text) => {
-    const attrs = {};
-    attrs.style = jsx.style ? jsx.style : {};
-    const {$config = {}} = item;
-    const result = Value.sequence(text, $config.mode);
-    return ((<span {...attrs}>{result}</span>));
+const aiUnitLabel = (reference, column = {}, jsx) => {
+    const attrs = Aid.initEmpty();
+    // jsx.style
+    Aid.onStyle(attrs, reference, {jsx, column});
+    return (text) => {
+        // $config.mode
+        Aid.outSeq(attrs, reference, {jsx, column, text});
+        // 最终输出
+        const {children, ...rest} = attrs;
+        return (<span {...rest}>{children}</span>);
+    };
 };
 
-const aiUnitText = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    // 如果整体是false，则以$config.readOnly节点为主
-    if (!attrs.readOnly) {
-        const {$config = {}} = item;
-        attrs.readOnly = !!$config.readOnly;
-    }
-    const params = {
-        index, field: item.dataIndex
+const aiUnitText = (reference, column = {}, jsx = {}) => {
+    const attrs = Aid.initDynamic(column);
+    // 2阶变更函数
+    const on2Change = Aid.onChangeUnit(attrs, reference, {column});
+    return (text, record = {}, index) => {
+        // 2阶变更 -> 一阶变更
+        attrs.onChange = on2Change(index);
+        // jsx.readOnly
+        Aid.outReadOnly(attrs, reference, {jsx, column});
+        // 支持Child
+        return Aid.jsxChild(column, record,
+            () => <Input {...attrs} value={text}/>);
     };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<Input {...attrs} value={text}/>);
 };
 
 const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
@@ -144,7 +159,10 @@ const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) =>
     if (config.hasOwnProperty('allowClear')) {
         attrs.allowClear = config.allowClear;
     }
-    return AiPure.aiInputSelect(items, attrs);
+    // 处理childOnly的渲染模式
+    console.info(attrs, items);
+    return _wrapperChild(config, record,
+        () => AiPure.aiInputSelect(items, attrs));
 };
 
 const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => {

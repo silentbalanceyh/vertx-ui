@@ -141,6 +141,15 @@ const xtPager = (reference, config = {}) => {
 const xtSelection = (reference) => ({
     type: 'radio',
     onSelect: keys => {
+        // 保证原始的key存在
+        const applyKey = (item) => {
+            if (item.key) item._key = item.key;
+        };
+        if (U.isArray(keys)) {
+            keys.forEach(item => applyKey(item));
+        } else if (U.isObject(keys)) {
+            applyKey(keys);
+        }
         reference.setState({$select: keys});
     }
 });

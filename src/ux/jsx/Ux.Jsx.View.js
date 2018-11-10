@@ -7,7 +7,6 @@ import Expr from '../util/Ux.Expr';
 import Value from '../Ux.Value';
 import {Table} from 'antd';
 import Column from '../Ux.Column';
-import E from '../Ux.Error';
 import fieldRender from './Ux.Jsx.Single';
 import Hsx from './Ux.Jsx.View.Fn';
 import Aid from './Ux.Jsx.View.Aid';
@@ -43,7 +42,7 @@ const datum = ($data, config, reference) => Aid.highFun($data, config, reference
     if (!uniqueObj) return false;
     return meta.expr ? Expr.formatExpr(meta.expr, uniqueObj) : uniqueObj[meta.field];
 });
-const checktext = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
+const checktext = ($data, config, reference) => Aid.highFun($data, config, reference, (value = {}, config) => {
     const source = Aid.extractList(reference, config.meta, value.checked);
     const out = source.map(item => item.display);
     if (value.other) {
@@ -137,7 +136,7 @@ const file = ($data, config, reference) => Aid.highFun($data, config, reference,
     const target = value && value[0] ? value[0] : {};
     return Aid.extractLink(reference, config, target);
 });
-const files = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) =>
+const files = ($data, config, reference) => Aid.highFun($data, config, reference, (value = [], config) =>
     value.map(each => Aid.extractLink(reference, config, each)));
 const picture = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
     const target = value && value[0] ? value[0] : {};
@@ -160,7 +159,8 @@ const table = ($data, config, reference) => Aid.highFun($data, config, reference
                    {...attrs}/>
         );
     } else {
-        E.fxTerminal(true, 10040, value);
+        // 关闭表格中的错误渲染
+        // E.fxTerminal(true, 10040, value);
         return false;
     }
 });

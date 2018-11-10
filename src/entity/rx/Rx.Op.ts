@@ -128,6 +128,7 @@ class RxOp {
             if (item.cond) {
                 if (isPromiseReturn) {
                     const message = Ux.fromPath(ref, "modal", "error", item.key);
+                    // 需要关闭loading效果
                     return Ux.rdxReject(message);
                 } else {
                     // 暂时只在Reject部分处理isPromiseReturn

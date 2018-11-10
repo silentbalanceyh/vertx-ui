@@ -25,7 +25,7 @@ const renderFile = (reference) => {
                 $imageUrl ? (
                     <img src={$imageUrl} alt={"avatar"}/>
                 ) : (
-                    <Button>
+                    <Button disabled={meta.disabled}>
                         <Icon type={"upload"}/>
                         {text ?
                             <span className={"ant-upload-text"}>{text}</span> : false}

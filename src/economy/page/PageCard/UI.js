@@ -47,10 +47,12 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            children, reference, $extra, $title,
+            children, $extra, $title,
             className = "page-card", $card,
             $leftVisible = true, $rightVisible = true,
             $backVisible = true,
+            // 禁用状态
+            $disabled = {},
             // Inject专用函数，用于执行属性变幻
             rxInject = $config => $config
         } = this.props;
@@ -60,15 +62,15 @@ class Component extends React.PureComponent {
             const titleText = $title ? $title : (topbar ? topbar.title : "");
             const title = (
                 <span>{titleText}&nbsp;&nbsp;&nbsp;&nbsp;
-                    {$leftVisible ? Op.renderButton(reference, topbar) : false}
+                    {$leftVisible ? Op.renderButton(this, topbar, "left", $disabled) : false}
                 </span>
             );
             // 右边关闭按钮
             let extraContent = $extra ? $extra : (
                 <span>
-                    {topbar.right && $rightVisible ? Op.renderButton(reference, topbar, 'right') : false}
+                    {topbar.right && $rightVisible ? Op.renderButton(this, topbar, 'right', $disabled) : false}
                     &nbsp;&nbsp;
-                    {topbar.back && $backVisible ? Op.renderBack(reference, topbar) : false}
+                    {topbar.back && $backVisible ? Op.renderBack(this, topbar) : false}
                 </span>
             );
             const clazz = Ux.flowable($card, className, "");

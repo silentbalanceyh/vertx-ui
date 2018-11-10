@@ -46,7 +46,7 @@ class Component extends React.PureComponent {
 
     render() {
         const {
-            children, reference,
+            children,
             className = "page-card", $card = 'page-card',
             $extra: ExtraComponent, $current,
             $leftVisible = true,
@@ -61,7 +61,7 @@ class Component extends React.PureComponent {
             const title = (
                 <span>{topbar ? topbar.title : ""}&nbsp;&nbsp;&nbsp;&nbsp;
                     {$leftVisible ? ($leftComponent ? $leftComponent :
-                        Op.renderButton(reference, topbar)) : false}
+                        Op.renderButton(this, topbar)) : false}
                 </span>
             );
             // 右边帮助信息
@@ -69,9 +69,9 @@ class Component extends React.PureComponent {
                 <ExtraComponent/> : (
                     <span>
                         {topbar.help ? Ux.aiGrid([20, 4],
-                            topbar.help ? Op.renderHelp(reference, topbar, $current) : false,
-                            topbar.back ? Op.renderBack(reference, topbar) : false
-                        ) : topbar.back ? Op.renderBack(reference, topbar) : false}
+                            topbar.help ? Op.renderHelp(this, topbar, $current) : false,
+                            topbar.back ? Op.renderBack(this, topbar) : false
+                        ) : topbar.back ? Op.renderBack(this, topbar) : false}
                     </span>
                 );
             const clazz = Ux.flowable($card, className, "");

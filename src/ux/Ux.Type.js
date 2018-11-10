@@ -291,6 +291,16 @@ const elementVertical = (data = [], field = "") => {
     });
     return result;
 };
+const elementApeak = (data = {}, field = "") => {
+    E.fxTerminal(!U.isObject(data), 10071, data, "Object");
+    let result = [];
+    itObject(data, (key, value) => {
+        if (U.isArray(value)) {
+            result = result.concat(value);
+        }
+    });
+    return elementVertical(result, field);
+};
 /**
  * 遍历专用函数，二维遍历
  * @method itFull
@@ -484,10 +494,9 @@ export default {
      */
     elementFirstDatum: (reference, key, field) =>
         elementFirst(Prop.onDatum(reference, key), field),
-    // 不重复添加元素到数组
-    elementAdd,
-    // 查找某个垂直元素
-    elementVertical,
+    elementAdd,     // 不重复添加元素到数组
+    elementVertical,    // 查找垂直元素：Array中直接查找
+    elementApeak,   // 查找垂直元素：Object中每一个key对应的都是一个数组
     // 添加和删除重合
     elementSwitch,
     // 拉平专用，支持单数组拉平和双数组拉平
