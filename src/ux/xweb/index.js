@@ -6,6 +6,7 @@ import Table from './Xt.Table';
 import Rx from './Xt.Rx';
 import Init from './Xt.Init';
 import Dynamic from './Xt.Dynamic';
+import Change from './Xt.Change.Event';
 
 export default {
     ...Dust,
@@ -15,6 +16,8 @@ export default {
     ...Table,
     ...Rx,
     ...Init,
+    // 触发专用
+    ...Change,
     // 特殊类处理
     Dynamic,
 };

@@ -32,13 +32,13 @@ const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
         // 执行静态处理函数
         const attrs = fnStatic(reference, {column, jsx}, channel);
 
-        return (text, record = {}, index) => {
+        return (text, record = {}, index) => jsxChild(column, record, () => {
             // 执行动态处理函数
             fnDynamic(attrs, reference, {jsx, column, text, record, index}, channel);
             // 执行渲染专用函数
             const {children, ...rest} = attrs;
-            return jsxChild(column, record, () => fnRender(rest, children));
-        };
+            return fnRender(rest, children);
+        });
     };
 };
 

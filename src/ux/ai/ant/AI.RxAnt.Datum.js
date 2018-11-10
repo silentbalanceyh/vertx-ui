@@ -111,10 +111,20 @@ const getSource = (reference, config, filter = {}) => {
     // 统一抽取expr表达式
     return options;
 };
+const parseOrigin = (items = [], config = {}) => {
+    const {expr, ...rest} = config;
+    const options = [];
+    items.forEach(item => {
+        const option = Aid.applyItem(item, rest, expr);
+        options.push(option);
+    });
+    return options;
+};
 export default {
     parseExpr,
     parseDatum,
     parseFilter,
+    parseOrigin,
     getDatum,
     getSource,
 };

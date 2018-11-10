@@ -3,8 +3,6 @@ import U from 'underscore';
 import Value from '../Ux.Value';
 import Filter from './Xt.Filter';
 import Dust from './Xt.Dust';
-import Util from '../util';
-import moment from 'moment';
 
 const xtChange = (reference, changedValues = {}, key) => {
     const {onChange} = reference.props;
@@ -43,56 +41,9 @@ const xt2Blur = (reference, field) => (event) => {
     }
 };
 
-const _xtValue = (input, normalize = data => data) => {
-    let value = undefined;
-    if (input && U.isFunction(input.preventDefault)) {
-        input.preventDefault();
-        value = input['target'] ? input['target'].value : undefined;
-    } else {
-        // 时间格式专用处理
-        if (moment.isMoment(input)) {
-            value = input.toISOString();
-        } else {
-            value = input;
-        }
-    }
-    return normalize(value);
-};
-
-const xt2ChangeUnit = (reference, {
-    index, field, key = "data",
-    normalize = data => data,
-}) => (event) => {
-    const value = _xtValue(event, normalize);
-    // 1.读取数据源 source为默认值
-    let source = reference.state ? reference.state[key] : [];
-    if (U.isArray(source)) {
-        // 2.新处理数据源，取得新的key值
-        if (!source[index]) {
-            source[index] = {key: Util.randomUUID()};
-        }
-        source[index][field] = value;
-    }
-    source = Value.clone(source);
-    // 3.状态更新
-    const state = {};
-    state[key] = source;
-    reference.setState(state);
-    // 4.调用本地的onChange
-    xtChange(reference, source, key);
-};
-const xt3ChangeUnit = (reference, {
-    field, key = "data",
-    normalize = data => data,
-}) => (
-    index // 当前索引值，根据索引构造，三阶函数
-) => xt2ChangeUnit(reference, {index, field, key, normalize});
 export default {
     xtChange,
     // 生成事件
     xt2Change,
     xt2Blur,
-    // 核心列变更事件
-    xt2ChangeUnit,
-    xt3ChangeUnit
 };
