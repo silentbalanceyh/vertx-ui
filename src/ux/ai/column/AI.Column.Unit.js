@@ -1,16 +1,14 @@
-import AiValue from "../expr/AI.Expr.Value";
 import {DatePicker, Input, InputNumber, TreeSelect} from "antd";
-import Value from "../../Ux.Value";
-import AiExpr from "../expr/AI.Expr.String";
 import AiPure from "../AI.Pure";
 import RxAnt from '../ant/AI.RxAnt';
 import Prop from '../../prop/Ux.Prop';
 import React from "react";
 import Xt from '../../xweb';
-import Norm from '../../Ux.Normalize';
 import Jsx from '../../Ux.Jsx';
 import U from 'underscore';
 import Aid from './AI.Column.Aid';
+import Value from '../../value';
+import Norm from '../../Ux.Normalize';
 
 const _wrapperChild = (config = {}, record = {}, fnRender) => {
     // config中是否配置了childOnly
@@ -22,121 +20,7 @@ const _wrapperChild = (config = {}, record = {}, fnRender) => {
     } else return U.isFunction(fnRender) ? fnRender() : false;
 };
 
-const aiUnitVector = (reference, item = {}, jsx) => (text, record = {}) => {
-    const config = item['$config'];
-    let label = text;
-    // 转换前提是包含了config.to的配置
-    if (config && config.to) {
-        label = record[config.to];
-    }
-    const attrs = {};
-    attrs.style = jsx.style ? jsx.style : {};
-    return (<span {...attrs}>{label}</span>);
-};
 
-const aiUnitLabel = Aid.jsxConnect((reference, params = {}) => {
-    const attrs = Aid.initEmpty();
-    // jsx.style
-    Aid.onStyle(attrs, reference, params);
-    // 记得返回
-    return attrs;
-}, (attrs = {}, reference, params = {}) => {
-    // $config.mode,
-    Aid.outSeq(attrs, reference, params);
-}, (attrs = {}, children) =>
-    (<span {...attrs}>{children}</span>));
-
-const aiUnitText = Aid.jsxConnect((reference, params = {}, channel = {}) => {
-    const {column = {}} = params;
-    const attrs = Aid.initDynamic(column);
-    // 穿透函数，获取2阶变更
-    channel.fnChange = Aid.onChangeUnit(attrs, reference, {column});
-    return attrs;
-}, (attrs = {}, reference, params = {}, channel = {}) => {
-    // 2阶变更 -> 一阶变更
-    attrs.onChange = channel.fnChange(params.index);
-    // jsx.readOnly
-    Aid.outReadOnly(attrs, reference, params);
-    // 设置值，直接用 = 赋值
-    attrs.value = params.text;
-
-}, (attrs = {}) => (<Input {...attrs}/>));
-
-const aiUnitTextArea = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    // add by Hongwei: 添加对rows属性的支持
-    const config = item["$config"] ? item["$config"] : {};
-    const rows = config ? config["rows"] : 2;
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    attrs.rows = rows;
-    // 进行协变的渲染
-    return Jsx.jsxCell(Input.TextArea, attrs, text);
-};
-
-const aiUnitNumber = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 处理属性相关信息
-    const {readOnly = false} = jsx;
-    attrs.readOnly = readOnly;
-    const params = {
-        index, field: item.dataIndex
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<InputNumber {...attrs} value={text}/>);
-};
-
-const aiUnitDecimal = (reference, item = {}, jsx = {}) => (text, record = {}, index) => {
-    const attrs = AiValue.applyDynamic(item);
-    // 只读处理
-    const {viewOnly = false} = jsx;
-    attrs.readOnly = viewOnly;
-    // 单位处理
-    const {$config = {}} = item;
-    if ($config.unit)
-        attrs.addonAfter = $config.unit;
-    // 变更函数
-    const params = {
-        index, field: item.dataIndex,
-        // 格式化专用
-        normalize: Norm.normalizer.decimal(18, 2)
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<Input {...attrs} value={text}/>);
-};
-
-const aiUnitDate = (reference, item) => (text, record, index) => {
-    const config = item["$config"] ? item["$config"] : {};
-    const attrs = Object.assign({}, config);
-    if (text) {
-        attrs.value = Value.convertTime(text);
-    }
-    attrs.className = "rx-readonly";
-    const params = {
-        index, field: item.dataIndex,
-    };
-    attrs.onChange = Xt.xt2ChangeUnit(reference, params);
-    return (<DatePicker {...attrs}/>);
-};
-
-const aiUnitRadio = (reference, item = {}, jsx = {}) => (text, record, index) => {
-    const config = item["$config"] ? item["$config"] : {};
-    config.items = AiExpr.aiExprOption(config.items);
-    if (jsx.readOnly) {
-        config.disabled = jsx.readOnly;
-    }
-    const params = {
-        index, field: item.dataIndex,
-    };
-    config.onChange = Xt.xt2ChangeUnit(reference, params);
-    const {items = [], ...rest} = config;
-    return AiPure.aiInputRadio(items, {...rest, value: String(text)});
-};
 const aiUnitDatum = (reference, item = {}, jsx = {}) => (text, record, index) => {
     const config = item['$config'];
     const {datum} = config;
@@ -180,15 +64,167 @@ const aiUnitTree = (reference, item = {}, jsx = {}) => (text, record, index) => 
     return (<TreeSelect {...attrs} value={text}/>);
 };
 
+const jsxLabel = (attrs = {}, children) => (<span {...attrs}>{children}</span>);
+const jsxInput = (attrs = {}) => (<Input {...attrs}/>);
+
 export default {
-    VECTOR: aiUnitVector,
-    TEXT: aiUnitText,
-    TEXT_AREA: aiUnitTextArea,
-    DATE: aiUnitDate,
+
+    // TEXT_AREA: aiUnitTextArea,
+    // DATE: aiUnitDate,
     DATUM: aiUnitDatum,
-    RADIO: aiUnitRadio,
-    LABEL: aiUnitLabel,
-    NUMBER: aiUnitNumber,
-    DECIMAL: aiUnitDecimal,
-    TREE: aiUnitTree
+    TREE: aiUnitTree,
+    // ---- VECTOR
+    VECTOR: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            // jsx.style
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            // 设置to
+            Aid.outTo(attrs, reference, params);
+        },
+        jsxLabel
+    ),
+    // ---- LABEL
+    LABEL: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            // jsx.style
+            Aid.onStyle(attrs, reference, params);
+            // 记得返回
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            // $config.mode,
+            Aid.outSeq(attrs, reference, params);
+        },
+        jsxLabel
+    ),
+    // ---- DATE
+    DATE: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initConfig(params);
+            // 穿透函数，获取2阶变更
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+            // 专用日期处理
+            attrs.className = "rx-readonly";
+            let value = params.text;
+            if (value) {
+                attrs.value = Value.convertTime(value);
+            } else {
+                attrs.value = null;
+            }
+        },
+        (attrs = {}) => (<DatePicker {...attrs}/>)
+    ),
+    // ---- TEXT
+    TEXT: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            // 穿透函数，获取2阶变更
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+            // jsx.readOnly
+            Aid.outReadOnly(attrs, reference, params);
+            // 设置值，直接用 = 赋值
+            attrs.value = params.text;
+        },
+        jsxInput
+    ),
+    // NUMBER
+    NUMBER: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            // 穿透函数，获取2阶变更
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+            // jsx.readOnly
+            Aid.outReadOnly(attrs, reference, params);
+            // 设置值，直接用 = 赋值
+            attrs.value = params.text;
+        },
+        (attrs = {}) => (<InputNumber {...attrs}/>),
+    ),
+    DECIMAL: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            Aid.onUnit(attrs, reference, params);
+            // 穿透函数，获取2阶变更
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, {
+                ...params, normalize: Norm.normalizer.decimal(18, 2)
+            });
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+            // jsx.readOnly
+            Aid.outReadOnly(attrs, reference, params);
+            // 设置值
+            attrs.value = params.text;
+        },
+        jsxInput
+    ),
+    // ---- RADIO
+    RADIO: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initConfig(params);
+            // items
+            Aid.onOptions(attrs, reference, params);
+            // 获取二阶穿透函数
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // 设置disabled
+            Aid.outDisabled(attrs, reference, params);
+            // 设置值，直接用 = 赋值
+            attrs.value = params.text ? String(params.text) : params.text;
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+        },
+        (attrs) => {
+            const {items = [], ...rest} = attrs;
+            return AiPure.aiInputRadio(items, rest);
+        }
+    ),
+
+    // ---- TEXT_AREA
+    TEXT_AREA: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            // 挂载rows
+            Aid.onRows(attrs, reference, params);
+            // 获取二阶穿透函数
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // readOnly
+            Aid.outReadOnly(attrs, reference, params);
+            // 设置值，直接使用
+            attrs.value = params.text;
+            // 2阶变更 -> 一阶变更
+            attrs.onChange = channel.fnChange(params.index);
+        },
+        (attrs = {}) => {
+            const {value, ...rest} = attrs;
+            return Jsx.jsxCell(Input.TextArea, rest, value);
+        }
+    ),
 };
