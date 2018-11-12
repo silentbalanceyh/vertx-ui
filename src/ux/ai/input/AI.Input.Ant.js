@@ -1,4 +1,5 @@
 import RxAnt from "../ant/AI.RxAnt";
+import Aid from './AI.Input.Aid';
 import {
     Checkbox,
     DatePicker,
@@ -14,21 +15,27 @@ import React from "react";
 const aiInput = (reference, jsx = {}, onChange) => {
     // 处理prefix属性
     RxAnt.onPrefix(jsx);
-    // 处理PlaceHolder
-    RxAnt.onPlaceHolder(jsx);
     // 处理addonAfter
     RxAnt.onAddonAfter(jsx);
     // onChange处理
     RxAnt.onChange(jsx, onChange);
+    // ReadOnly处理
+    RxAnt.onReadOnly(jsx, false, reference);
+    // 处理PlaceHolder，先处理readOnly
+    RxAnt.onPlaceHolder(jsx);
     return (<Input {...jsx}/>);
 };
 
 const aiTreeSelect = (reference, jsx = {}, onChange) => {
-    const {config = {}, ...rest} = jsx;
+    const {config = {}} = jsx;
     // 处理TreeSelect
     const data = RxAnt.toTreeOptions(reference, config);
-    // 处理onChange
-    RxAnt.onChange(rest, onChange);
+    // 处理onChange，解决rest为 {}时引起的参数Bug
+    const rest = Aid.fixAttrs(jsx);
+    RxAnt.onChange(rest, onChange, {
+        reference, // 增强时需要使用，组件引用
+        config, // 当前Jsx中的配置
+    });
     return (<TreeSelect treeData={data} {...rest}/>);
 };
 
@@ -38,8 +45,10 @@ const aiInputNumber = (reference, jsx = {}, onChange) => {
     return (<InputNumber {...jsx}/>);
 };
 const aiSelect = (reference, jsx = {}, onChange) => {
-    const {config = {}, filter, ...rest} = jsx;
+    const {config = {}, filter} = jsx;
     // onChange处理
+    // 处理onChange，解决rest为 {}时引起的参数Bug
+    const rest = Aid.fixAttrs(jsx);
     RxAnt.onChange(rest, onChange);
     const options = RxAnt.toOptions(reference, config, filter);
     return (
@@ -54,11 +63,13 @@ const aiSelect = (reference, jsx = {}, onChange) => {
 };
 
 const aiRadio = (reference, jsx = {}, onChange) => {
-    const {config = {}, ...rest} = jsx;
+    const {config = {}} = jsx;
+    // 处理onChange，解决rest为 {}时引起的参数Bug
+    const rest = Aid.fixAttrs(jsx);
     // onChange处理
     RxAnt.onChange(rest, onChange);
     // ReadOnly处理，第二参用于处理disabled的情况，非input使用
-    RxAnt.onReadOnly(rest, true);
+    RxAnt.onReadOnly(rest, true, reference);
     const options = RxAnt.toOptions(reference, config);
     return (
         <Radio.Group {...rest}>
@@ -72,7 +83,9 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     );
 };
 const aiCheckbox = (reference, jsx = {}, onChange) => {
-    const {config, ...rest} = jsx;
+    const {config} = jsx;
+    // 处理onChange，解决rest为 {}时引起的参数Bug
+    const rest = Aid.fixAttrs(jsx);
     // 构造Checkbox专用选项
     RxAnt.onChange(rest, onChange);
     const options = RxAnt.toOptions(reference, config);
@@ -89,7 +102,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     // onChange处理
     RxAnt.onChange(jsx, onChange);
     // 处理readOnly
-    RxAnt.onReadOnly(jsx, true);
+    RxAnt.onReadOnly(jsx, true, reference);
     return (<DatePicker {...jsx} className={"rx-readonly"}/>);
 };
 
