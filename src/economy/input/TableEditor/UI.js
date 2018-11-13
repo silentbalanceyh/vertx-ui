@@ -2,6 +2,7 @@ import React from 'react';
 import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
+import Op from './Op';
 
 class Component extends React.PureComponent {
 
@@ -11,7 +12,13 @@ class Component extends React.PureComponent {
         // columns专用
         const {config = {}} = props;
         state.columns = Ux.xtColumn(this, config.columns);
+        // columns中的trigger判断
+        Op.prepareTrigger(state, state.columns);
         this.state = state;
+    }
+
+    componentDidMount() {
+        Op.initTrigger(this);
     }
 
     UNSAFE_componentWillReceiveProps(nextProps) {
@@ -42,9 +49,11 @@ class Component extends React.PureComponent {
             $data.filter(item => item.hasOwnProperty('children'))
                 .forEach(item => delete item.children);
         }
+        // loading处理
         return (
             <Input.Group {...$attrs}>
                 <Table {...config}
+                       loading={Op.renderTrigger(this)}
                        dataSource={$data}/>
             </Input.Group>
         );

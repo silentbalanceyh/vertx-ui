@@ -301,6 +301,19 @@ const elementApeak = (data = {}, field = "") => {
     });
     return elementVertical(result, field);
 };
+const elementMap = (data = [], field = "") => {
+    const result = {};
+    data.forEach(item => {
+        if (item[field]) {
+            if (!result[item[field]]) {
+                result[item[field]] = item;
+            } else {
+                console.warn(`[elementMap] Duplicated by ${field}`, item);
+            }
+        }
+    });
+    return result;
+};
 /**
  * 遍历专用函数，二维遍历
  * @method itFull
@@ -506,6 +519,8 @@ export default {
     elementConnect,
     // 求和计算
     elementSum,
+    // 根据字段将Array -> Object
+    elementMap,
     // 遍历数组并抽取对象数组中的field字段执行处理
     itElement,
     // 遍历数组以及对应对象信息
