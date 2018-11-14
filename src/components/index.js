@@ -19,6 +19,7 @@ import _editor_workflow from './editor/workflow/UI';
 import _generated_demo from './generated/demo/UI';
 import _generated_tool from './generated/tool/UI';
 import _guide_init from './guide/init/UI';
+import _guide_tutorial from './guide/tutorial/UI';
 import _input_change$editor from './input/change-editor/UI';
 import _input_checked$date from './input/checked-date/UI';
 import _input_checked$input from './input/checked-input/UI';
@@ -59,6 +60,7 @@ export default {
 	_generated_demo,
 	_generated_tool,
 	_guide_init,
+	_guide_tutorial,
 	_input_change$editor,
 	_input_checked$date,
 	_input_checked$input,

@@ -59,6 +59,7 @@
             },
             "children": [
                 "项目初始化,/guide/init",
+                "开发教程,/guide/tutorial",
                 "脚手架说明,/system/scaffold",
                 "环境变量说明,/system/env",
                 "路由测试,/system/route",
