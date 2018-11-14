@@ -1,6 +1,8 @@
 import Attributes from "../../prop/Ux.Attribute";
 import U from "underscore";
 import Aid from './AI.RxAnt.Aid';
+import E from '../../Ux.Error';
+import Prop from '../../prop';
 
 const disabledDate = (jsx = {}) => {
     if (jsx.hasOwnProperty('disabledDate')) {
@@ -40,11 +42,38 @@ const onSelect = (jsx = {}, fnSelect) => {
         jsx.onSelect = fnSelect;
     }
 };
-const readOnly = (jsx = {}, disabled = false) => {
+const _readOnlyDepend = (jsx = {}, disabled = false, reference) => {
+    // same和diff不能相同
+    const readOnly = jsx.readOnly;
+    E.fxTerminal(
+        // same和diff规则不可同时出现
+        readOnly.hasOwnProperty('same') && readOnly.hasOwnProperty('diff')
+        , 10101, readOnly.same, readOnly.diff);
+    const {same, diff} = readOnly;
+    // 读取same和diff的值
+    if (same && !diff) {
+        // 设置了同规则，readOnly和目标字段相同，即目标字段为true，则readOnly为true
+        jsx.readOnly = same ? Prop.formHit(reference, same) : false;
+    } else if (!same && diff) {
+        // 设置了差异规则，readOnly和目标字段相反，即目标字段为true，则readOnly为false
+        jsx.readOnly = !(diff ? Prop.formHit(reference, diff) : false);
+    }
+    // 设置disabled专用规则
+    if (disabled) {
+        // Select / Radio 专用
+        jsx.disabled = jsx.readOnly;
+    }
+};
+const readOnly = (jsx = {}, disabled = false, reference) => {
     if (jsx.readOnly) {
-        // 如果是readOnly，则执行readOnly的注入
-        jsx.readOnly = true;
-        jsx.disabled = disabled;
+        if (U.isObject(jsx.readOnly)) {
+            // 依赖其他字段
+            _readOnlyDepend(jsx, disabled, reference);
+        } else {
+            // 如果是readOnly，则执行readOnly的注入
+            jsx.readOnly = true;
+            jsx.disabled = disabled;
+        }
     }
 };
 export default {

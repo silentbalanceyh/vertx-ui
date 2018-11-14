@@ -14,7 +14,8 @@ const xtChange = (reference, changedValues = {}, key) => {
         onChange(changedValues);
     } else {
         // 0.非Array类型
-        let newValue = Object.assign({}, reference.state, changedValues);
+        const $state = Value.clone(reference.state);
+        let newValue = Object.assign({}, $state, changedValues);
         // 1.拷贝新数据
         newValue = Value.clone(newValue);
         // 2.过滤特殊数据

@@ -58,11 +58,21 @@ const asyncData = (config = {}, params = {}, callback = () => {
         E.fxTerminal(true, 10034, config, params);
     }
 };
+const asyncPromise = (config = {}, params = {}, mock = {}) => {
+    const ajaxFn = ajaxFun[config.method ? config.method.toLowerCase() : 'get'];
+    const uri = config.uri;
+    if (uri && ajaxFn) {
+        return ajaxFn(uri, params, mock);
+    } else {
+        E.fxTerminal(true, 10034, config, params);
+    }
+};
 /**
  * @class Field
  * @description 字段异步验证专用类
  */
 export default {
     asyncTrue,
-    asyncData
+    asyncData,
+    asyncPromise,
 };

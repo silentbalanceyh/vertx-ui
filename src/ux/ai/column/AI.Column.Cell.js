@@ -6,16 +6,35 @@ import Aid from './AI.Column.Aid';
 import U from 'underscore';
 import Type from '../../Ux.Type';
 import Value from '../../Ux.Value';
+import Util from '../../util';
+import Ajax from '../../ajax/Ux.Ajax';
+import {saveAs} from "file-saver";
 
-const aiCellDownload = (reference, config) => (text) => {
-    // TODO:
+const _aiCellSingle = (reference, config, text) => {
     let downloadConfig = config["$download"];
     if (!downloadConfig) downloadConfig = {};
-    return (<a href={text}>{downloadConfig.flag ? downloadConfig.flag : text}</a>);
+    const value = {value: text.key, name: text.name ? text.name : Util.randomUUID()};
+    return (<a href={value.name} onClick={(event) => {
+        event.preventDefault();
+        const link = Util.formatExpr(downloadConfig.ajax, value);
+        Ajax.ajaxDownload(link, value, {})
+            .then(data => saveAs(data, value.name));
+    }}>{downloadConfig.flag ? downloadConfig.flag : value.name}</a>);
+};
+
+const aiCellDownload = (reference, config) => (text) => {
+    // 上传时作了序列化，所以下载时要做反向处理
+    text = JSON.parse(text);
+    if (U.isArray(text)) {
+        return (
+            <ul>
+                {text.map(each => <li>{_aiCellSingle(reference, config, each)}</li>)}
+            </ul>
+        );
+    } else return _aiCellSingle(reference, config, text);
 };
 const initEmpty = () => {
-    const attrs = Aid.initEmpty();
-    return attrs;
+    return Aid.initEmpty();
 };
 export default {
     // ---- LOGICAL

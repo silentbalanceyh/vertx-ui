@@ -20,8 +20,7 @@ const _xtValue = (input, normalize = data => data) => {
     }
     return normalize(value);
 };
-const _xtOrigin = (reference, response = {}, root, key) => {
-    const {origin = {}} = reference.state;
+const xtOrigin = (origin = {}, response = {}, root, key) => {
     if (root && key) {
         let data = [];
         if (U.isArray(response)) {
@@ -31,11 +30,16 @@ const _xtOrigin = (reference, response = {}, root, key) => {
                 data = Value.clone(response.list);
             }
         }
-        const calculated = {};
+        // 两层结构，防止清除的情况发生，需要从origin中取上一次的基础数据
+        const calculated = origin[root] ? origin[root] : {};
         calculated[key] = data;
         origin[root] = calculated;
     }
     return Value.clone(origin);
+};
+const _xtOrigin = (reference, response = {}, root, key) => {
+    const {origin = {}} = reference.state;
+    return xtOrigin(origin, response, root, key);
 };
 const xt2ChangeUnitSync = (event, reference, {
     index, field, key = "data",
@@ -112,5 +116,6 @@ const xt3ChangeUnit = (reference, {
 export default {
     // 核心列变更事件
     xt2ChangeUnit,
-    xt3ChangeUnit
+    xt3ChangeUnit,
+    xtOrigin
 };
