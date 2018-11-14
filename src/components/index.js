@@ -1,4 +1,6 @@
+import _a$testing_ant from './a-testing/ant/UI';
 import _a$testing_test from './a-testing/test/UI';
+import _a$testing_zero from './a-testing/zero/UI';
 import _admin_index from './admin/index/UI';
 import _analyzer_layout from './analyzer/layout/UI';
 import _api_class$cookie from './api/class-cookie/UI';
@@ -38,7 +40,9 @@ import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
 
 export default {
+	_a$testing_ant,
 	_a$testing_test,
+	_a$testing_zero,
 	_admin_index,
 	_analyzer_layout,
 	_api_class$cookie,
