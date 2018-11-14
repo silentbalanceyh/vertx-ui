@@ -30,7 +30,7 @@ const aiCellDownload = (reference, config) => (text) => {
             <ul>
                 {text.map(each => <li>{_aiCellSingle(reference, config, each)}</li>)}
             </ul>
-        )
+        );
     } else return _aiCellSingle(reference, config, text);
 };
 const initEmpty = () => {
