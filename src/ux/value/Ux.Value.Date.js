@@ -82,10 +82,15 @@ const valueStartTime = (to, duration, mode = 'day') => {
         E.fxTerminal(true, 10030, "NoNeed", to, duration);
     }
 };
+const valueNow = (pattern) => {
+    return undefined === pattern ? moment() :
+        (null === pattern ? moment().toISOString() : moment().format(pattern));
+};
 export default {
     valueStartTime,
     valueDuration,
     valueEndTime,
+    valueNow,
     convertTimes,
     convertTime
 };
