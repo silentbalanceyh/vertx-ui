@@ -28,8 +28,12 @@ const rxDatum = (data, orderBy = 'order') => {
 const rxAssist = (data, key, orderBy = 'order') => {
     const result = {};
     const hittedKey = `assist.${key.replace(/\./g, '_')}`;
-    if (!U.isArray(data) && data.list) {
-        data = data.list;
+    if (!U.isArray(data)) {
+        if (data.list) {
+            data = data.list;
+        } else {
+            data = [];
+        }
     }
     result[hittedKey] = data.sort((left, right) => left[orderBy] - right[orderBy]);
     Log.debug(result, data);
