@@ -86,6 +86,30 @@ export default {
         },
         Aid.jsxSpan,
     ),
+    // ---- CURRENCY
+    CURRENCY: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outCurrency(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
+    // ---- 求乘积
+    MULTIPLE: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outMultiple(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
     // ---- DATE
     DATE: Aid.jsxConnect(
         (reference, params = {}, channel = {}) => {

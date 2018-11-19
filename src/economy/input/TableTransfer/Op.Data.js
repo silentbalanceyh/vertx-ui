@@ -41,7 +41,6 @@ const getTo = (reference, config = {}) => {
         });
         data = formated.to();
     }
-
     data = Ux.valueTree(data, {
         ...config.tree,
         zero: false

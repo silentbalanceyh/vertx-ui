@@ -1,5 +1,6 @@
 // Expr
 import AiValue from "../expr/AI.Expr.Value";
+import Value from '../../value';
 // Xt
 import U from "underscore";
 import React from "react";
@@ -48,7 +49,7 @@ export default {
     // ------- 动态
     ...Out,
     // ------- 初始化
-    initEmpty: () => ({}),
+    initEmpty: () => (Value.clone({})),
     initDynamic: (params = {}) => AiValue.applyDynamic(params.column),
     initConfig: () => (params = {}) => params.column["$config"] ? params.column["$config"] : {},
     // ------- jsx渲染流程变化

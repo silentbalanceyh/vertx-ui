@@ -97,6 +97,7 @@ const valueFloat = (liberal, dft = 0.0) => {
     } else {
         ret = ret.toFixed(2);
     }
+    ret = parseFloat(ret);
     return ret;
 };
 const valueUnit = (literal = "") => {
