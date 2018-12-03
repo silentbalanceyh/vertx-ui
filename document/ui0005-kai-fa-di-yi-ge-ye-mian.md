@@ -145,7 +145,7 @@ const jsx = {
     // 资源文件名空间
     "i18n.cab":require("./Cab.json"),
     // 资源文件名，因为前边创建了UI.json的资源文件
-    // 最终路径：src/cab/cn/components/login/index/UI.json
+    UIHomework.json
     // - cn是在环境变量Z_LANGUAGE中设置；
     // - components/login/index是在当前目录中的Cab.json中设置
     // - UI则是读取的文件名，文件后缀固定.json
