@@ -174,11 +174,12 @@ class RxOp {
             }, resolve));
         }
         // 是否包含failure
-        if (null === this._failure) {
+        if (!this._failure) {
             return fnPromise;
         } else {
             // 异常流
-            return fnPromise.catch(errors => this._failure(errors));
+			const fnFailure = this._failure;
+            return fnPromise.catch(errors => fnFailure(errors));
         }
     }
 }

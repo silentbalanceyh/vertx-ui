@@ -60,7 +60,7 @@ const xtPointer = (ref, key) => {
         const {reference} = ref.props;
         const {$_pointer = {}} = reference.state;
         $_pointer[key] = ref.props.form;
-        reference.setState({$_pointer});
+        reference.setState({$_pointer: Ux.clone($_pointer)});
     } else {
         // 中间节点继续挂载
         const {$_pointer} = ref.state;
@@ -91,6 +91,7 @@ const xtUpdateForm = (reference, prevProps, ...fields) => {
 
 export default {
     xtPointer,
+    // 同一个界面几次挂载
     xtUnsafe,
     xtGet,
     xtReset,

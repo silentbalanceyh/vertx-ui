@@ -42,6 +42,21 @@ const onOptions = (attrs = {}, reference, {
     const config = _getConfig(column);
     attrs.items = AiExpr.aiExprOption(config.items);
 };
+const onIndexOptions = (attrs = {}, reference, {
+    column = {}, index
+}) => {
+    // 解析items
+    const config = _getConfig(column);
+    // 默认值
+    let items = AiExpr.aiExprOption(config.items);
+    if (config.hasOwnProperty('dynamicItems')) {
+        const each = config['dynamicItems'];
+        if (each && each[index]) {
+            items = AiExpr.aiExprOption(each[index]);
+        }
+    }
+    attrs.items = items;
+};
 const onRows = (attrs = {}, reference, {
     column = {},
 }) => {
@@ -97,11 +112,20 @@ const onList = (attrs = {}, reference, {
     }
     attrs.list = list;
 };
+const onButton = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const {$config = {}} = column;
+    const {icon, text, trigger} = $config;
+    if (icon) attrs.icon = icon;
+    return {text, trigger};
+};
 export default {
     // ------- 静态：TableEditor用
     onStyle,    // 设置渲染的span标签的风格
     onChangeUnit, // 生成函数用于处理底层的「索引」专用结果
     onOptions,  // 设置专用的options解析
+    onIndexOptions, // 设置专用的options解析，带索引（每一行可能不同）
     onRows, // 设置TextArea专用的rows属性
     onUnit, // 单位设置，unit = ￥
     onDatum, // 处理config.items的双用性
@@ -109,4 +133,5 @@ export default {
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除
+    onButton, // Button专用解析器
 };

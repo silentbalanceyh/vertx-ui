@@ -4,6 +4,7 @@ import U from "underscore";
 import Util from "../../util";
 import Ai from "../AI";
 import RxAnt from "../ant/AI.RxAnt";
+import Ux from "ux";
 
 const outReadOnly = (attrs = {}, reference, {
     jsx = {}, column = {}
@@ -190,6 +191,17 @@ const outOrigin = (attrs = {}, reference, {
         }
     }
 };
+const outFilter =(attrs = {}, reference, {
+	column = {}, record = {}
+}) => {
+	const {$config = {}} = column;
+	const expr = RxAnt.toParsed($config.datum);
+	const items = Ux.clone(attrs.items);
+	if (expr.filter && record[expr.filter]) {
+		const $data = Ux.immutable(record[expr.filter]);
+		attrs.items = items.filter(item => $data.contains(item.key));
+	}
+};
 export default {
     // ------- 动态：直接表格使用
     cellLogical, // LOGICAL专用，只识别true/false
@@ -208,4 +220,5 @@ export default {
     outTo,   // Vector专用
     outDate,  // Moment时间格式专用转换
     outOrigin, // 处理$config.origin专用处理
+	outFilter	// 处理$config.datum中的filter
 };

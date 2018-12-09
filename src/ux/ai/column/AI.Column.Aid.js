@@ -23,7 +23,9 @@ const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
         // 默认的行为实现
         fnDynamic = (attrs = {}, reference, params = {}, channel = {}) => {
             Out.outReadOnly(attrs, reference, params); // readOnly属性
-            attrs.onChange = channel.fnChange(params.index);  // 变更函数
+            if (U.isFunction(channel.fnChange)) {
+                attrs.onChange = channel.fnChange(params.index);  // 变更函数
+            }
             attrs.value = params.text;  // 设值处理
         };
     }

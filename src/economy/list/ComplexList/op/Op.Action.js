@@ -170,22 +170,27 @@ const rxView = (reference, activekey) => (values = {}) => {
     reference.setState(state);
 };
 const rxFilter = (reference = {}) => (value, event) => {
-    const $query = Init.readQuery(reference);
+    const {$query} = reference.props;
+    const query = $query && $query.is() ? $query.to() : Init.readQuery(reference);
     const options = Init.readOption(reference);
     const search = options['search.cond'];
     const filters = {};
+    const pagination = Init.readQuery(reference).pager;
     if (value) {
         search.forEach(term => filters[term] = value);
     }
-    if (!$query.criteria) {
-        $query.criteria = {};
+    if (!query.criteria) {
+        query.criteria = {};
     }
+    // filter搜索都从第一页开始取
+    query.pager.page = pagination.page;
+    query.pager.size = pagination.size;
     if (0 < search.length && 0 < Object.keys(filters).length) {
-        $query.criteria[""] = true;
-        $query.criteria["$2"] = filters;
+        query.criteria[""] = true;
+        query.criteria["$2"] = filters;
     }
     Ux.writeTree(reference, {
-        "grid.query": $query,
+        "grid.query": query,
         "grid.list": undefined
     });
 };

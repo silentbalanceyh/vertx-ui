@@ -8,10 +8,11 @@ const initData = (reference) => {
     const data = [];
     // 原始数据
     const previous = value ? value : [];
-    source.forEach(row => {
+    source.forEach((row, sequence) => {
         let dataItem = {};
         dataItem.key = row.key;
         dataItem.label = row.label;
+        dataItem.sequence = (sequence + 1);
         // 读取
         if (U.isArray(previous)) {
             const unique = Ux.elementUnique(previous, 'key', row.key);
@@ -44,6 +45,16 @@ const initTable = (reference) => {
         appended.className = labelColumn[0].className;
     }
     filtered.splice(0, 0, appended);
+    // 是否包含序号
+    const {config = {}} = reference.props;
+    if (config.sequence) {
+        const sequenceCol = {
+            dataIndex: "sequence",
+            title: config.sequence,
+            className: "zero-column-width-min-60"
+        };
+        filtered.splice(0, 0, sequenceCol);
+    }
     // 最终替换table中的columns
     table.columns = filtered;
     return table;

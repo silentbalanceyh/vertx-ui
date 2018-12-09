@@ -11,6 +11,11 @@ class Component extends React.PureComponent {
         this.state = Op.initState(this.props);
     }
 
+    componentDidUpdate(prevProps) {
+        // 强制更新
+        Op.updateState(this);
+    }
+
     render() {
         const {config = {}, content} = this.state;
         return (
