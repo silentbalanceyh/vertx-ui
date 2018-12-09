@@ -70,6 +70,7 @@ class Tab {
             } else {
                 item.disabled = !!disabled[index];
             }
+            console.info(item);
         });
         return this;
     }

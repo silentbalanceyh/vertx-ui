@@ -1,5 +1,5 @@
 import RxAnt from "../ant/AI.RxAnt";
-import Aid from './AI.Input.Aid';
+import Aid from './fix';
 import {
     Checkbox,
     DatePicker,
@@ -91,7 +91,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const options = RxAnt.toOptions(reference, config);
     return (config) ?
         <Checkbox.Group {...rest} options={options}/> :
-        <Checkbox {...rest}/>;
+        <Checkbox/>;
 };
 const aiTextArea = (reference, jsx = {}) => {
     return (<Input.TextArea {...jsx}/>);

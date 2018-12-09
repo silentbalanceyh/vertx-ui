@@ -97,6 +97,7 @@ const valueFloat = (liberal, dft = 0.0) => {
     } else {
         ret = ret.toFixed(2);
     }
+    ret = parseFloat(ret);
     return ret;
 };
 const valueUnit = (literal = "") => {
@@ -150,10 +151,10 @@ const valuePair = (expr) => {
     }
     return mapping;
 };
-const valueExpr = (field = "", data = {}) => {
+const valueExpr = (field = "", data = {}, keep = false) => {
     let display = "";
     if (0 <= field.indexOf(":")) {
-        display = Expr.formatExpr(field, data);
+        display = Expr.formatExpr(field, data, keep);
     } else {
         display = data[field];
         if (!display) display = "";

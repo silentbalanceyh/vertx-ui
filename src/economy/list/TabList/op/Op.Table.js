@@ -29,7 +29,8 @@ const _initTablePager = (reference = {}) => {
 
 const _initChange = (reference = {}) => (pagination, filter, sorter) => {
     // 分页
-    const query = Init.readQuery(reference);
+    const {$query} = reference.props;
+    const query = $query && $query.is() ? $query.to() : Init.readQuery(reference);
     query.pager.page = pagination.current;
     query.pager.size = pagination.pageSize;
     // 排序

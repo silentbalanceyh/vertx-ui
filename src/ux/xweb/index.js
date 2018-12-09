@@ -7,6 +7,7 @@ import Rx from './Xt.Rx';
 import Init from './Xt.Init';
 import Dynamic from './Xt.Dynamic';
 import Change from './Xt.Change.Event';
+import Submit from './Xt.Submit';
 
 export default {
     ...Dust,
@@ -18,6 +19,7 @@ export default {
     ...Init,
     // 触发专用
     ...Change,
+    ...Submit,
     // 特殊类处理
     Dynamic,
 };

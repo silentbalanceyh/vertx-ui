@@ -54,6 +54,12 @@ const checktext = ($data, config, reference) => Aid.highFun($data, config, refer
         </span>
     );
 });
+const multi = ($data, config, reference) => Aid.highFun($data, config, reference, (value = {}, config) => {
+
+    return (
+        <span></span>
+    );
+});
 const list = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
     // Source的轻量级转换
     const lists = Aid.extractList(reference, config.meta, value);
@@ -181,5 +187,6 @@ export default {
     table,
     list,
     checktext,
+    multi,
     extractValue: Aid.extractValue,
 };

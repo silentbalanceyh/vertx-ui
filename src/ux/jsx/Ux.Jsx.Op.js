@@ -154,9 +154,11 @@ const rtRet = (reference, metadata = {}) => {
 };
 const _rtJsx = (reference, $op = {}, show = false) =>
     Object.keys($op).filter(key => !!key).filter(key => U.isFunction($op[key]))
-        .map(key => <Button id={key} key={key}
-                            onClick={$op[key](reference)}
-                            className={show ? "" : "ux-hidden"}/>);
+        .map(key => (
+            <Button id={key} key={key}
+                    onClick={$op[key](reference)}
+                    className={show ? "" : "ux-hidden"}/>
+        ));
 const rtInherit = (reference, show = false) => {
     const {$op = {}} = reference.props;
     return _rtJsx(reference, $op, show);

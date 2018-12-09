@@ -39,7 +39,8 @@ const rxAjaxResponse = (processors = []) => (response) => {
 const rxAjax = (ajaxes = []) => {
     return (input: any = {}) => {
         const {$props, ...params} = input;
-        return Q.all(ajaxes.map(ajax => ajax(params, $props)))
+        // 拷贝参数出来，拉平处理
+        return Q.all(ajaxes.map(ajax => ajax(Ux.clone(params), $props)))
     };
 };
 

@@ -93,10 +93,10 @@ export default {
             if (U.isArray(text)) {
                 const result = [];
                 text.forEach(each => result.push(Type.elementUnique(data, config.value, each)));
-                attrs.children = result.map(item => Value.valueExpr(display, item)).join(',');
+                attrs.children = result.map(item => Value.valueExpr(display, item, true)).join(',');
             } else {
                 const item = Type.elementUnique(data, config.value, text);
-                attrs.children = item ? Value.valueExpr(display, item) : false;
+                attrs.children = item ? Value.valueExpr(display, item, true) : false;
             }
         },
         Aid.jsxSpan,

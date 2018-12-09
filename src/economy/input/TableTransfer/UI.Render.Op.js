@@ -79,13 +79,6 @@ const renderOp = (reference, from = false, column = {}) => (text, record) => {
         );
     }
 };
-const renderTo = (column = {}) => {
-    if ("LABEL" !== column['$render']) {
-        return (text) => {
-            return (<span>{text}</span>);
-        };
-    } else return column.render;
-};
 const _updateItem = (array = [], record = {}, key) => {
     const dataArray = DataLabor.getArray(array);
     dataArray.saveElement(record, key);
@@ -106,6 +99,5 @@ const renderInput = (reference, field) => (text, record) => {
 };
 export default {
     renderOp,
-    renderTo,
-    renderInput,
+    renderInput
 };

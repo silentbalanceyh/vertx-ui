@@ -35,6 +35,7 @@ const thenCallback = (promise, {
 class RxOp {
     private validation: any = [];
     private _success;
+    private _failure;
     private _confirmKey;
     private _postKey;
     private isPromiseReturn: Boolean = false; // 默认不使用Promise的Reject流程
@@ -95,6 +96,13 @@ class RxOp {
         return this;
     }
 
+    failure(fnFailure) {
+        if (U.isFunction(fnFailure)) {
+            this._failure = fnFailure;
+        }
+        return this;
+    }
+
     dialog(key) {
         this.isWindowUse = true;
         if (key) {
@@ -146,8 +154,9 @@ class RxOp {
         const postKey = this._postKey;
         const isWindow = this.isWindowUse;
         // 验证成功，是否执行confirm流程
+        let fnPromise;
         if (confirmKey) {
-            return new Promise((resolve) => Ux.showDialog(ref, confirmKey,
+            fnPromise = new Promise((resolve) => Ux.showDialog(ref, confirmKey,
                 () => thenCallback(promise, {
                     postDialog, postKey,
                     isDialog, isWindow, isReduxSubmit,
@@ -158,11 +167,19 @@ class RxOp {
                     resolve({})
                 }));
         } else {
-            return new Promise((resolve) => thenCallback(promise, {
+            fnPromise = new Promise((resolve) => thenCallback(promise, {
                 postDialog, postKey,
                 isDialog, isWindow, isReduxSubmit,
                 ref, callback,
             }, resolve));
+        }
+        // 是否包含failure
+        if (!this._failure) {
+            return fnPromise;
+        } else {
+            // 异常流
+			const fnFailure = this._failure;
+            return fnPromise.catch(errors => fnFailure(errors));
         }
     }
 }

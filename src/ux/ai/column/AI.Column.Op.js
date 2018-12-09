@@ -155,7 +155,6 @@ const aiCellButton = (reference, config) => (text, record, index) => {
  *      {
  *          "title": "操作",
  *          "dataIndex": "key",
- *          "fixed": "left",
  *          "$render": "LINK",
  *          "$config": [
  *              {

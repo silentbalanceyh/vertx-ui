@@ -1,9 +1,11 @@
-import {DatePicker, Input, InputNumber, TreeSelect} from "antd";
+import {Button, DatePicker, Input, InputNumber, TreeSelect} from "antd";
 import AiPure from "../AI.Pure";
 import React from "react";
 import Jsx from '../../Ux.Jsx';
 import Aid from './AI.Column.Aid';
 import Norm from '../../Ux.Normalize';
+import Prop from '../../prop';
+import U from 'underscore';
 
 const jsxInput = (attrs = {}) => (<Input {...attrs}/>);
 
@@ -42,6 +44,7 @@ export default {
             Aid.outDisabled(attrs, reference, params);
             attrs.value = params.text;
             attrs.onChange = channel.fnChange(params.index, params.record);
+            Aid.outFilter(attrs, reference, params);
         },
         (attrs = {}) => {
             const {items = [], ...rest} = attrs;
@@ -83,6 +86,30 @@ export default {
         },
         (attrs = {}, reference, params = {}) => {
             Aid.outSeq(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
+    // ---- CURRENCY
+    CURRENCY: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outCurrency(attrs, reference, params);
+        },
+        Aid.jsxSpan,
+    ),
+    // ---- 求乘积
+    MULTIPLE: Aid.jsxConnect(
+        (reference, params = {}) => {
+            const attrs = Aid.initEmpty();
+            Aid.onStyle(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}) => {
+            Aid.outMultiple(attrs, reference, params);
         },
         Aid.jsxSpan,
     ),
@@ -150,7 +177,24 @@ export default {
             return AiPure.aiInputRadio(items, rest);
         }
     ),
-
+    // ---- INDEX_RADIO
+    INDEX_RADIO: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initConfig(params);
+            channel.fnChange = Aid.onChangeUnit(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            Aid.outDisabled(attrs, reference, params);
+            Aid.onIndexOptions(attrs, reference, params);
+            attrs.value = params.text ? String(params.text) : params.text;
+            attrs.onChange = channel.fnChange(params.index);
+        },
+        (attrs) => {
+            const {items = [], ...rest} = attrs;
+            return AiPure.aiInputRadio(items, rest);
+        }
+    ),
     // ---- TEXT_AREA
     TEXT_AREA: Aid.jsxConnect(
         (reference, params = {}, channel = {}) => {
@@ -165,4 +209,31 @@ export default {
             return Jsx.jsxCell(Input.TextArea, rest, value);
         }
     ),
+
+    // ---- TRIGGER_BUTTON, 用主界面中的state绑定函数处理按钮行为
+    TRIGGER_BUTTON: Aid.jsxConnect(
+        (reference, params = {}, channel = {}) => {
+            const attrs = Aid.initDynamic(params);
+            channel.button = Aid.onButton(attrs, reference, params);
+            return attrs;
+        },
+        (attrs = {}, reference, params = {}, channel = {}) => {
+            // channel中的text, trigger
+            const {text, trigger} = channel.button;
+            if (text) attrs.children = text;
+            // 注入
+            if (trigger) {
+                const ref = Prop.onReference(reference, 1);
+                const fn = ref.props[trigger];
+                if (U.isFunction(fn)) {
+                    attrs.onClick = fn(params.text, params.record);
+                }
+            }
+        },
+        (attrs = {}, children) => {
+            return children ? (
+                <Button {...attrs}>{children}</Button>
+            ) : (<Button {...attrs}/>);
+        }
+    )
 };

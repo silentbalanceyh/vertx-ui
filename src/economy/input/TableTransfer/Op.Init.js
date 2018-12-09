@@ -41,7 +41,10 @@ const _getRender = (reference, column = [], to = false) => {
     if ("key" === column.dataIndex) {
         fnRender = Rdr.renderOp(reference, to, column);
     } else {
-        if ("LABEL" !== column['$render']) {
+        const $render = Ux.immutable(["LABEL", "CURRENCY", "MULTIPLE"]);
+        
+        // 过滤掉不设置的
+        if (!$render.contains(column['$render'])) {
             fnRender = Rdr.renderInput(reference, column.dataIndex);
         }
     }

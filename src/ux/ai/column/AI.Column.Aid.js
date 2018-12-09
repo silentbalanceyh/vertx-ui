@@ -1,5 +1,6 @@
 // Expr
 import AiValue from "../expr/AI.Expr.Value";
+import Value from '../../value';
 // Xt
 import U from "underscore";
 import React from "react";
@@ -22,7 +23,9 @@ const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
         // 默认的行为实现
         fnDynamic = (attrs = {}, reference, params = {}, channel = {}) => {
             Out.outReadOnly(attrs, reference, params); // readOnly属性
-            attrs.onChange = channel.fnChange(params.index);  // 变更函数
+            if (U.isFunction(channel.fnChange)) {
+                attrs.onChange = channel.fnChange(params.index);  // 变更函数
+            }
             attrs.value = params.text;  // 设值处理
         };
     }
@@ -48,7 +51,7 @@ export default {
     // ------- 动态
     ...Out,
     // ------- 初始化
-    initEmpty: () => ({}),
+    initEmpty: () => (Value.clone({})),
     initDynamic: (params = {}) => AiValue.applyDynamic(params.column),
     initConfig: () => (params = {}) => params.column["$config"] ? params.column["$config"] : {},
     // ------- jsx渲染流程变化

@@ -90,7 +90,8 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
             const fun = dialog ? _dialogFun[modal.type] : _messageFun[modal.type];
             let message = modal.message[key];
             if (params) {
-                message = Expr.formatExpr(message, params);
+                // Keeper专用
+                message = Expr.formatExpr(message, params, true);
             }
             return {fun, message};
         } else if (modal.hasOwnProperty('success') || modal.hasOwnProperty('error') || modal.hasOwnProperty('confirm')) {
@@ -116,7 +117,8 @@ const _configModal = (reference = {}, key, params, dialog = true) => {
             const fun = dialog ? _dialogFun[type] : _messageFun[type];
             let message = success[key] || error[key] || confirm[key];
             if (params) {
-                message = Expr.formatExpr(message, params);
+                // Keeper专用
+                message = Expr.formatExpr(message, params, true);
             }
             return {fun, message};
         }
