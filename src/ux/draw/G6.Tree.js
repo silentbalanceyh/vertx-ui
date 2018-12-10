@@ -2,6 +2,7 @@ import G6 from "@antv/g6";
 import G6Plugins from '@antv/g6/build/plugins';
 import Value from '../Ux.Value';
 
+G6.track(false);
 const registry = () => {
     G6.registerNode('treeNode', {
         anchor: [[0, 0.5], [1, 0.5]],

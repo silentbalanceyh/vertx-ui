@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import {_zero} from "../../_internal";
 import {Collapse, List} from 'antd';
 import DragItem from './UI.Toolbar.Item';

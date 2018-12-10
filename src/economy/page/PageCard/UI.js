@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import {Card} from 'antd';
 import Ux from 'ux';
 import {DataLabor} from 'entity';

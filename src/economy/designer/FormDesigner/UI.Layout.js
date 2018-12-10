@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import {Button, Row} from 'antd';
 import Op from './Op';
 import LayoutRow from './UI.Layout.Row';
