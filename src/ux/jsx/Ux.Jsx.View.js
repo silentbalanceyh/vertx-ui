@@ -11,6 +11,7 @@ import fieldRender from './Ux.Jsx.Single';
 import Hsx from './Ux.Jsx.View.Fn';
 import Aid from './Ux.Jsx.View.Aid';
 import moment from 'moment';
+import Ai from '../ai/AI';
 
 const config = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
     const dataMap = config.meta;
@@ -48,17 +49,13 @@ const checktext = ($data, config, reference) => Aid.highFun($data, config, refer
     if (value.other) {
         out.push(value.other);
     }
-    return (
-        <span>
-            {out.join(', ')}
-        </span>
-    );
+    return (<span>{out.join(', ')}</span>);
 });
 const multi = ($data, config, reference) => Aid.highFun($data, config, reference, (value = {}, config) => {
-
-    return (
-        <span></span>
-    );
+    return Ai.aiCheckbox(reference, {
+        config: config.meta,
+        value, disabled: true,
+    });
 });
 const list = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
     // Source的轻量级转换

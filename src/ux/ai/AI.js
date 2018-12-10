@@ -9,6 +9,7 @@ import Calculator from './layout/AI.Layout.Calculator';
 import AiString from './expr/AI.Expr.String';
 import AiCriteria from './AI.Criteria';
 import AiPure from './AI.Pure';
+import RxAnt from './ant/AI.RxAnt';
 
 export default {
     ...AiLink,
@@ -21,5 +22,6 @@ export default {
     ...AiString,
     ...AiCriteria,
     ...AiPure,
+    RxAnt,      // 新添加Rx Ant部分
     aiLayoutItem: Calculator.calculateItem
 };
