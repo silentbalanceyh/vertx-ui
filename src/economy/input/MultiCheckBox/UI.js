@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import Ux from 'ux';
 import Op from './Op';
 import {Checkbox, Row} from 'antd';

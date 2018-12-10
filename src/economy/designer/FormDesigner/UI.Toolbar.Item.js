@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import {Icon, List} from 'antd';
 import {DragSource} from 'react-dnd';
 import Op from './Op';

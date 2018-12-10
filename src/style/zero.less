@@ -1,4 +1,21 @@
-@import '../../../global';
+@import '../global';
+// HelpCard部分
+.web-help-back {
+    i {
+        font-size: 30px;
+    }
+
+    &:hover {
+        cursor: pointer;
+
+        i {
+            color: #ff686b;
+            font-size: 30px;
+        }
+    }
+}
+
+// Form Designer 设计器
 
 .ant-collapse-content-box {
     padding: 12px !important;
@@ -14,6 +31,7 @@
     line-height: 24px !important;
     border: solid 1px white !important;
     border-radius: 3px !important;
+
     i {
         margin-top: 3px !important;
         color: @color-flag-major !important;
@@ -34,9 +52,11 @@
 .web-layout-row {
     margin: 3px;
     vertical-align: middle;
+
     &-select {
         min-width: 60px;
     }
+
     &:hover {
         cursor: pointer;
     }
@@ -46,6 +66,7 @@
     border-right: dashed 1px @color-border !important;
     border-radius: 1px !important;
     min-height: 42px !important;
+
     &-none {
         border-radius: 1px !important;
         min-height: 42px !important;
@@ -59,11 +80,13 @@
     height: 42px;
     display: inline-block;
     box-shadow: 0 8px 12px 0px rgba(0, 52, 107, 0.04);
+
     i {
         height: 36px;
         width: 36px;
         line-height: 32px;
         border: 1px solid rgba(2, 2, 2, 0);
+
         &:hover {
             cursor: pointer;
             border: 1px solid #E9E9E9;
@@ -74,4 +97,65 @@
 
 .web-layout-bar *::before {
     font-size: 18px !important;
+}
+
+// 面包屑
+.web-breadcrumb {
+    margin-bottom: 12px;
+}
+
+// MultiCheckBox
+.web-check-row {
+    min-height: 32px !important;
+    line-height: 36px !important;
+}
+
+.web-check-col {
+    margin-right: 10px !important;
+}
+
+// HelpCard / PageCard
+.ant-card-extra {
+    padding: 6px 12px !important;
+}
+
+.page-card {
+    //margin: 24px 24px 0;
+    margin: 12px 12px 0;
+    background: @component-background;
+    padding-bottom: 50px;
+
+    .ant-card-head-title {
+        span {
+            line-height: 32px;
+        }
+    }
+
+    .ant-card-body {
+        padding: 6px 12px !important;
+    }
+
+    .ant-card-head {
+        padding: 0 24px !important;
+
+        .ant-card-head-title {
+            padding: 12px 0 !important;
+        }
+
+        .ant-card-extra {
+            padding: 12px 0 !important;
+        }
+    }
+
+    .ant-tabs-bar {
+        margin: 0 0 6px 0 !important;
+    }
+
+    td {
+        padding: 12px !important;
+    }
+
+    th {
+        padding: 12px !important;
+    }
 }

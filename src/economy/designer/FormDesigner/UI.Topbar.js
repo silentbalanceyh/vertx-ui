@@ -1,5 +1,4 @@
 import React from 'react';
-import './Cab.less';
 import {Divider, Icon} from 'antd';
 
 class Component extends React.Component {
