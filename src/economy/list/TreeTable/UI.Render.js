@@ -133,7 +133,7 @@ const renderOp = (reference, record, {
 const renderTitle = (reference, column = {}, fnRender) => {
     // 只添加一次的限制，直接读取第一条数据专用信息
     const title = column.title;
-    return (
+    return U.isFunction(column.title) ? column.title : () => (
         <span className={"web-table-cell"}>
             <span className={"left"}>
                 {title}

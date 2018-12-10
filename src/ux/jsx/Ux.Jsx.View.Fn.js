@@ -60,7 +60,7 @@ const viewRow = (columns = [], flex = {}, ...content) => {
  * @param className
  */
 const viewTitle = (message, className = "page-title") =>
-    (<Row className={className}>{message}</Row>);
+    (<Row className={className}>&nbsp;&nbsp;&nbsp;&nbsp;{message}</Row>);
 /**
  * 渲染某一个Row的Header
  * @method viewHeader
@@ -68,7 +68,7 @@ const viewTitle = (message, className = "page-title") =>
  * @param className
  */
 const viewHeader = (message, className = "page-view-header") =>
-    (<Row className={className}>{message}</Row>);
+    (<Row className={className}>&nbsp;&nbsp;&nbsp;&nbsp;{message}</Row>);
 
 /**
  * 渲染某一个单元格，主要用于处理上边的content
