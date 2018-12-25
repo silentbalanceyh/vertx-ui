@@ -1,6 +1,5 @@
 import U from "underscore";
 import Prop from "./prop/Ux.Prop";
-import {DataLabor} from "entity";
 import E from './Ux.Error';
 import Value from './Ux.Value';
 
@@ -435,35 +434,6 @@ const elementSum = (data = [], field = "") => {
     return (0 < result.length) ? result.reduce((left, right) => left + right) : 0;
 };
 /**
- * 构造一颗专用的树桩结构，用于表格的处理，config的配置项如下
- *
- *      ...
- *      {
- *          "id":"用于构造树的记录主键，默认值为id",
- *          "pid":"用于构造树的父节点字段，默认值为pid",
- *          "value":"用于构造树的记录值，默认值为value",
- *          "label":"默认用于构造树的呈现字段，默认值为label",
- *          "expr":"如果该值支持表达式结构，则使用exprLabel代替label",
- *          "sort":"当前Tree中节点的排序字段，没有默认值"
- *      }
- * 数组中必须包含`level`字段：树的深度字段，必须包含该值，使用该值进行树的运算。
- * @method tree
- * @param {Array} array 原始数组
- * @param {Object} config 构造时的树的配置信息
- * @return {DataTree | *}
- */
-const tree = (array = [], config = {}) => DataLabor.getTree(array, config).to();
-/**
- * 带过滤条件的Tree专用，内置调用tree方法
- * @method treeWithFilters
- * @param {Array} array 原始数组
- * @param filters 过滤条件
- * @param {Object} config 构造时的树的配置信息
- * @return {DataTree|*}
- */
-const treeWithFilters = (array = [], filters = {}, config = {}) =>
-    tree(elementMatch(array, filters), config);
-/**
  * @class Type
  * @description 复杂数据结构计算
  */
@@ -529,8 +499,5 @@ export default {
     itObject,
     itMatrix,
     itData,
-    itRepeat,
-    // 树的构造方法
-    tree,
-    treeWithFilters
+    itRepeat
 };

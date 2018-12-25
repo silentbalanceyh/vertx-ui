@@ -47,6 +47,7 @@ export {default as BraftEditor} from './input/BraftEditor/UI';
 export {default as TeamSelector} from './input/TeamSelector/UI';
 
 export {default as LoadingContent} from './loading/LoadingContent/UI';
+export {default as LoadingAlert} from './loading/LoadingAlert/UI';
 export {default as LoadingImage} from './loading/LoadingImage/UI';
 export {default as DynamicDialog} from './dialog/DynamicDialog/UI';
 

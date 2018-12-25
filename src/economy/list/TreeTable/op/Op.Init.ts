@@ -1,7 +1,7 @@
 import Ux from "ux";
-import * as U from 'underscore'
-import Rdr from '../UI.Render'
-import Data from './Op.Data'
+import * as U from 'underscore';
+import Rdr from '../UI.Render';
+import Data from './Op.Data';
 
 const readConfig = (reference: any = {}) => {
     const {$key = "tree"} = reference.props;
@@ -11,18 +11,7 @@ const readConfig = (reference: any = {}) => {
 };
 const initTable = (reference: any) => {
     let table = readConfig(reference).table;
-    if (table && table.columns) {
-        table.columns.forEach((column) => {
-            // 是否level开始
-            const level = String(column['level'] ? column.level : "");
-            if (!column.dataIndex.startsWith(`${level}.`)) {
-                column.dataIndex = `${level}.${column.dataIndex}`;
-            }
-        });
-    } else {
-        table = {columns: []}
-    }
-    table.pagination = false;
+    table = Ux.treeTableColumns(table);
     const options = readOptions(reference);
     if (options.hasOwnProperty("table.empty.text")) table.emptyText = options['table.empty.text'];
     if (!table.hasOwnProperty("bordered")) table.bordered = true;

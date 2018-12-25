@@ -4,6 +4,7 @@ import JSX from "./Ux.Jsx";
 import OP from "./Ux.Op";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
+import TREES from "./Ux.Tree";
 import COLUMN from "./Ux.Column";
 import DIALOG from "./Ux.Dialog";
 import VALUE from "./Ux.Value";
@@ -52,6 +53,8 @@ const exported = {
     ...NORM,
     // 类型处理
     ...TYPES,
+    // 树形
+    ...TREES,
     // Redux专用
     ...DIALOG,
     // Uson/Uarr
@@ -251,7 +254,7 @@ Dg.dgReport(exported, [
     Structure, // 核心数据结构
     TYPES, // 基础类型处理
     TYPES, // 基础类型处理
-    TYPES, // 基础类型处理
+    TREES, // 基础类型处理
     VALUE, // 值处理函数
     VALUE, // 值处理函数
     VALUE, // 值处理函数

@@ -1,47 +1,6 @@
 import Ux from "ux";
 import Init from './Op.Init';
 
-const _setCounter = (item: any = {}, level: any = 1) => {
-    if (item.hasOwnProperty("children") && item.children) {
-        let validArray = item.children.filter(each => !each.children ||
-            0 === each.children.length);
-        let continueArray = item.children.filter(each => each.children &&
-            0 < each.children.length);
-        let counter = validArray.length;
-        if (0 < continueArray.length) {
-            continueArray.forEach(continueItem => {
-                _setCounter(continueItem, (level + 1));
-                counter += continueItem._counter;
-            });
-        }
-        validArray.forEach(validItem => _setCounter(validItem, (level + 1)));
-        item._counter = counter;
-    } else {
-        item._counter = 0;
-    }
-    item._level = level;
-};
-const _appendLevel = (data = [], level = 1) => {
-    let flatObjects = [];
-    data.forEach((dataItem: any = {}) => {
-        const item: any = {};
-        const {children, ...rest} = dataItem;
-        Ux.itObject(rest, (field: any, value) => item[`${level}.${field}`] = value, true);
-        // 最后处理children
-        if (!children || 0 === children.length) {
-            // 有记录信息
-            flatObjects.push(item);
-        }
-        if (children && 0 < children.length) {
-            const flattedObjects = _appendLevel(children, (level + 1));
-            flattedObjects.forEach(flattedItem => {
-                const $item = Ux.clone(item);
-                flatObjects.push(Object.assign($item, flattedItem));
-            })
-        }
-    });
-    return flatObjects;
-};
 const initRow = (reference) => {
     const options = Init.readOptions(reference);
     const {table} = reference.state;
@@ -61,9 +20,9 @@ const initRow = (reference) => {
 };
 const initData = (reference: any, data: any = []) => {
     // 计算Level
-    data.forEach(item => _setCounter(item, 1));
+    data.forEach(item => Ux.treeCounter(item, 1));
     // 追加counter
-    const flatted = _appendLevel(data);
+    const flatted = Ux.treeFlat(data);
     // 每一行追加一个key防止rowKey问题
     flatted.forEach(each => each.key = Ux.randomUUID());
     // 编辑模式才会在空数据中增加

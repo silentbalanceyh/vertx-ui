@@ -6,7 +6,8 @@ G6.track(false);
 const registry = () => {
     G6.registerNode('treeNode', {
         anchor: [[0, 0.5], [1, 0.5]],
-        enterAnimate: function enterAnimate(item) {
+        /**
+         enterAnimate: function enterAnimate(item) {
             const group = item.getGraphicGroup();
             const model = item.getModel();
             const x = model.x;
@@ -15,7 +16,7 @@ const registry = () => {
             !group.get('destroyed') && group.animate({
                 transform: [['t', -x, -y], ['s', 100, 100], ['t', x, y]]
             }, 450, 'easeBackOut');
-        },
+        },**/
     });
     G6.registerEdge('smooth', {
         getPath: function getPath(item) {
@@ -30,7 +31,11 @@ const registry = () => {
         }
     });
 };
-
+/**
+ * id - div的HTML对应id
+ * config - items：数据本身
+ * config: 其他配置信息
+ */
 const drawTree = (id, config, view = "cc") => {
     const items = Value.clone(config.items);
     registry();
@@ -88,6 +93,11 @@ const drawTree = (id, config, view = "cc") => {
     });
     tree.draw();
 };
+/**
+ * id - div的HTML对应id
+ * config - items：数据本身
+ * config: 其他配置信息
+ */
 const drawFlow = (id, config = {}) => {
     const items = Value.clone(config.items);
     registry();

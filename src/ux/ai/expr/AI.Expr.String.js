@@ -84,7 +84,7 @@ const aiMetaColumn = (item = {}) => {
     if (item.metadata) {
         const {metadata, ...rest} = item;
         const basic = parseItem(metadata, "column");
-        const options = ExprValue.applyTree(rest);
+        const options = Value.valueLadder(rest);
         Object.assign(basic, options);
         ExprValue.applyColumn(basic);
         item = basic;
@@ -134,14 +134,14 @@ const aiMetaField = (item = {}) => {
     if (item.metadata) {
         const {metadata, ...rest} = item;
         const basic = parseItem(metadata, "field");
-        const options = ExprValue.applyTree(rest);
+        const options = Value.valueLadder(rest);
         // 属性追加（不覆盖）
         const result = Value.assign(basic, options, 1);
         applyField(result);
         item = result;
     } else if (item.field) {
         // 没有副作用的解析，让result也支持
-        const result = ExprValue.applyTree(item);
+        const result = Value.valueLadder(item);
         applyField(result);
         item = result;
     }
@@ -161,7 +161,7 @@ const aiExprAjax = (ajax = {}) => {
             pager.page = Value.valueInt(pager.page);
             pager.size = Value.valueInt(pager.size);
         }
-        const lefts = ExprValue.applyTree(rest);
+        const lefts = Value.valueLadder(rest);
         // 只合并criteria
         if (!lefts.params) lefts.params = {};
         item.params.criteria = lefts.params.criteria;

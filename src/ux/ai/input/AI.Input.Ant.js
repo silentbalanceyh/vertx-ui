@@ -88,6 +88,8 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const rest = Aid.fixAttrs(jsx);
     // 构造Checkbox专用选项
     RxAnt.onChange(rest, onChange);
+    // ReadOnly处理，第二参用于处理disabled的情况，非input使用
+    RxAnt.onReadOnly(rest, true, reference);
     const options = RxAnt.toOptions(reference, config);
     return (config) ?
         <Checkbox.Group {...rest} options={options}/> :

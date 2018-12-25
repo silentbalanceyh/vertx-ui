@@ -1,5 +1,5 @@
-import Rdr from '../UI.Render'
-import Init from './Op.Init'
+import Rdr from '../UI.Render';
+import Init from './Op.Init';
 
 const calcTable = (reference, table) => {
     // 驱动最大的level
@@ -26,7 +26,7 @@ const calcTable = (reference, table) => {
                     props: {
                         rowSpan: 1
                     }
-                }
+                };
             } else {
                 counterContainer[checkKey] = true;
                 let rowSpan = 0 === currentRowSpan ? 1 : currentRowSpan;
@@ -41,7 +41,7 @@ const calcTable = (reference, table) => {
                     props: {
                         rowSpan
                     }
-                }
+                };
             }
         };
         // 另外一个维度的处理

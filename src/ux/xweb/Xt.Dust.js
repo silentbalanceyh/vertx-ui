@@ -59,8 +59,9 @@ const xtPointer = (ref, key) => {
         // 当前组件属性props中的Ant Design的Form引用挂载到父状态的$_pointer中
         const {reference} = ref.props;
         const {$_pointer = {}} = reference.state;
+        // 更新form引用需要
         $_pointer[key] = ref.props.form;
-        reference.setState({$_pointer: Ux.clone($_pointer)});
+        reference.setState({$_pointer});
     } else {
         // 中间节点继续挂载
         const {$_pointer} = ref.state;

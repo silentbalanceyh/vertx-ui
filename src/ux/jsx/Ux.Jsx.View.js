@@ -57,6 +57,12 @@ const multi = ($data, config, reference) => Aid.highFun($data, config, reference
         value, disabled: true,
     });
 });
+const radio = ($data, config, reference) => Aid.highFun($data, config, reference, (value = {}, config) => {
+    return Ai.aiRadio(reference, {
+        config: config.meta,
+        value, disabled: true,
+    });
+});
 const list = ($data, config, reference) => Aid.highFun($data, config, reference, (value, config) => {
     // Source的轻量级转换
     const lists = Aid.extractList(reference, config.meta, value);
@@ -184,6 +190,7 @@ export default {
     table,
     list,
     checktext,
-    multi,
+    multi,  // 多选框
+    radio,  // 单选框
     extractValue: Aid.extractValue,
 };
