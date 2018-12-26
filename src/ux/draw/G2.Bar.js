@@ -4,7 +4,7 @@ import Dg from '../Ux.Debug';
 import DataSet from "@antv/data-set";
 import U from 'underscore';
 // 关闭 G2 的体验改进计划
-G2.track(false);
+// G2.track(false);
 const _getChart = (id, config = {}, data = []) => {
     // Tree处理
     const metadata = Value.valueLadder(config);
