@@ -5,6 +5,7 @@ import _a$testing_zero from './a-testing/zero/UI';
 import _admin_index from './admin/index/UI';
 import _analyzer_layout from './analyzer/layout/UI';
 import _api_class$cookie from './api/class-cookie/UI';
+import _b$test_home from './b-test/home/UI';
 import _control_address$selector from './control/address-selector/UI';
 import _control_complex$list from './control/complex-list/UI';
 import _control_dialog$button from './control/dialog-button/UI';
@@ -49,6 +50,7 @@ export default {
 	_admin_index,
 	_analyzer_layout,
 	_api_class$cookie,
+	_b$test_home,
 	_control_address$selector,
 	_control_complex$list,
 	_control_dialog$button,

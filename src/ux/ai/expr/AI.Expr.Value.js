@@ -2,7 +2,6 @@ import U from "underscore";
 import {v4} from "uuid";
 import Parser from "./AI.Expr.Parser";
 import Op from "../../op/index";
-import Type from "../../Ux.Type";
 import Value from '../../Ux.Value';
 import M from '../../monitor/index';
 
@@ -99,45 +98,6 @@ const applyItem = (item = {}, config = [], kvs = []) => {
     }
     return $item.toJS();
 };
-
-const applyFlat = (field, item = {}) => {
-    const result = {};
-    for (const key in item) {
-        const value = item[key];
-        const targetKey = `${field}.${key}`;
-        if (U.isObject(value) && !U.isArray(value)) {
-            const merged = applyFlat(targetKey, value);
-            Object.assign(result, merged);
-        } else {
-            result[targetKey] = value;
-        }
-    }
-    return result;
-};
-const applyTree = (item = {}) => {
-    // 1. 先拉平这个对象
-    const processed = {};
-    // 过滤$option专用
-    Type.itObject(item, (field, value) => {
-        if (U.isObject(value) && !U.isArray(value)) {
-            const item = applyFlat(field, value);
-            Object.assign(processed, item);
-        } else {
-            processed[field] = value;
-        }
-    });
-    // 2. Key从小到大排序
-    let $item = Value.immutable({});
-    Object.keys(processed).sort((left, right) => left.length - right.length)
-        .forEach(field => {
-            if (0 < field.indexOf(".")) {
-                $item = $item.setIn(field.split('.'), processed[field]);
-            } else {
-                $item = $item.set(field, processed[field]);
-            }
-        });
-    return $item.toJS();
-};
 const applyDynamic = (item) => {
     const attrs = {};
     const config = item['$config'] ? item['$config'] : {};
@@ -155,7 +115,6 @@ export default {
     applyArray,
     applyKey,
     applyRules,
-    applyTree,
     applyItem,
     applyStyle,
     applyLoading,

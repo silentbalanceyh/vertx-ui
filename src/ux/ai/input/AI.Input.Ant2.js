@@ -1,5 +1,6 @@
 import RxInput from "./AI.Input.Ant";
 import RxDatum from "./AI.Input.Datum";
+import RxDefine from './AI.Input.Defined';
 import {AddressSelector, ListSelector} from "web";
 import React from "react";
 
@@ -45,6 +46,10 @@ const ai2Addresser = (mockData = {}, onSelect) => (reference, jsx = {}) => {
                              mock={mockData} rxHitted={onSelect}
     />);
 };
+const ai2MultiCheckBox = (onChange) => (reference, jsx = {}) => {
+    const fnChange = onChange.apply(null, [reference]);
+    return RxDefine.aiMultiCheckBox(reference, jsx, fnChange);
+};
 export default {
     // 二阶组件，带onChange事件的组件
     ai2Checkbox,
@@ -54,6 +59,7 @@ export default {
     ai2Select,
     ai2Radio,
     ai2ListSelector,
+    ai2MultiCheckBox,
     // 地址选择器
     ai2Addresser,
     // 绑定组件二阶

@@ -35,6 +35,8 @@ const rxDelete = (reference, item) => (event) => {
     if (U.isFunction(rxItemDelete)) {
         const keys = Op.visitChildren(item);
         rxItemDelete(_recoverData(reference, item), keys);
+    } else {
+        console.error("丢失属性：rxItemDelete");
     }
 };
 const rxAddDialog = (reference, item) => (event) => {

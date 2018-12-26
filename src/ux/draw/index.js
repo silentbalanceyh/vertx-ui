@@ -1,7 +1,8 @@
 import Tree from './G6.Tree';
-import BarRadial from './G2.BarRadial';
+import Bar from './G2.Bar';
 
 export default {
     ...Tree,
-    ...BarRadial
+    // ...BarRadial,
+    ...Bar,
 };

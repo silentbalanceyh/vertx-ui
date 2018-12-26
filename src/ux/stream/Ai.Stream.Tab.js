@@ -49,6 +49,7 @@ const aiExpr = (reference) => {
 class Tab {
     constructor(reference) {
         this.reference = reference;
+        this._extraVisible = true;  // 默认显示
     }
 
     init() {
@@ -70,7 +71,6 @@ class Tab {
             } else {
                 item.disabled = !!disabled[index];
             }
-            console.info(item);
         });
         return this;
     }
@@ -100,6 +100,11 @@ class Tab {
 
     extra(value) {
         this.config.tabBarExtraContent = value;
+        return this;
+    }
+
+    extraVisible(visible = true) {
+        this._extraVisible = visible;
         return this;
     }
 
@@ -156,6 +161,10 @@ class Tab {
             }
         } else {
             children.forEach(child => jsx.push(child));
+        }
+        // 是否显示
+        if (!this._extraVisible && rest.hasOwnProperty('tabBarExtraContent')) {
+            delete rest.tabBarExtraContent;
         }
         return Ai.aiTabs.apply(null, [$items, rest]
             .concat(jsx));

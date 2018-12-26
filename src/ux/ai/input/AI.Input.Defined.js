@@ -50,8 +50,9 @@ const aiChangeEditor = (reference, jsx = {}) => {
     const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
     return (<ChangeEditor {...attrs} reference={reference}/>);
 };
-const aiMultiCheckBox = (reference, jsx = {}) => {
+const aiMultiCheckBox = (reference, jsx = {}, onChange) => {
     RxAnt.onMockData(jsx, reference);
+    RxAnt.onChange(jsx, onChange);
     const attrs = RxAnt.toConfig(reference, jsx, RxAnt.toOptions);
     return (<MultiCheckBox {...attrs}/>);
 };
