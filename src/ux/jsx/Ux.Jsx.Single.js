@@ -186,7 +186,7 @@ const jsxIcon = (item = {}) => {
         <span>
             {item.icon ? (<Icon type={item.icon} style={item.iconStyle}/>) : false}
             {item.icon ? (<span>&nbsp;&nbsp;</span>) : false}
-            {text}
+            <span className={"zero-icon-text"}>{text}</span>
         </span>
     );
 };

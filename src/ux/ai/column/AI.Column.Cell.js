@@ -82,12 +82,11 @@ export default {
         )
     ),
     DATUM: Aid.jsxConnect(
-        (reference, params = {}) => {
-            const attrs = Aid.initEmpty();
-            Aid.onList(attrs, reference, params);
-            return attrs;
-        },
+        initEmpty,
         (attrs = {}, reference, params = {}) => {
+            // 动态注入数据源，防止刷新的情况
+            Aid.onList(attrs, reference, params);
+            // 动态处理
             const {text} = params;
             const {list: {data = [], config = {}, display = ""}} = attrs;
             if (U.isArray(text)) {

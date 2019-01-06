@@ -34,8 +34,11 @@ const aiColumns = (config = [], ...jsx) => {
             const attrs = RxAnt.toParsed(item, index);
             // 重写key值
             attrs.key = `$$AiCol${index}$String`;
-            if (attrs.span) {
+            if (attrs.hasOwnProperty('span')) {
                 attrs.span = Value.valueInt(attrs.span);
+            }
+            if (attrs.hasOwnProperty('offset')) {
+                attrs.offset = Value.valueInt(attrs.offset);
             }
             return (
                 <Col {...attrs}>

@@ -16,7 +16,7 @@ import U from "underscore";
  * @return {String}
  */
 const ajaxUri = (uri, method = "get", params = {}) => {
-    let api = Expr.formatExpr(uri, params);
+    let api = Expr.formatExpr(uri, params, true);
     // 签名
     if (Cv.SIGN) {
         Sign.signature(api, method, params);
