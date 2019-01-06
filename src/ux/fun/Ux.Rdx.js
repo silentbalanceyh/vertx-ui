@@ -11,6 +11,8 @@ const rdxSubmitting = (reference, loading = true) => {
     state[`status.submitting`] = {loading};
     const $state = Value.clone(state);
     Prop.writeTree(reference, $state);
+    // FIX：解决双重提交的Bug，修改掉reference中的loading状态，保证非Redux也生效
+    reference.setState({$loading: loading});
 };
 const rdxReject = (message) => Promise.reject({data: {info: message}});
 /**

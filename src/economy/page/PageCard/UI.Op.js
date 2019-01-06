@@ -38,6 +38,7 @@ const renderButton = (ref, topbar, key = "left", $disabled = {}) => {
 const renderBack = (ref, topbar) => {
     const reference = Ux.onReference(ref, 1);
     return (<Button icon={"close"} shape="circle" type={"ghost"}
+                    className={"zero-extra-button"}
                     onClick={onClickBack(reference, topbar)}/>);
 };
 

@@ -26,8 +26,13 @@ const _parseData = (reference, config = {}) => {
 };
 
 const parseFilter = (reference, filter = () => true) => {
-    const filters = {};
-    if ("string" === typeof filter) {
+    let filters;
+    if (U.isFunction(filter)) {
+        // 直接返回过滤函数
+        filters = filter;
+    } else if ("string" === typeof filter) {
+        // 通过过滤条件进行过滤
+        filters = {};
         const processed = Expr.aiExprFilter(filter);
         if (!processed.type) processed.type = "string";
         if (processed.field) {
@@ -67,6 +72,7 @@ const parseDatum = (config = {}) => {
 /**
  * 过滤器处理
  * @param reference
+ * @param config 配置信息
  * @param filter
  */
 const getDatum = (reference, config = {}, filter = () => true) => {
@@ -74,20 +80,23 @@ const getDatum = (reference, config = {}, filter = () => true) => {
     // 如果存在datum节点，则从Assist/Tabular数据源中读取
     const {source} = parseDatum(config);
     if (source && "string" === typeof source) {
+        let data = [];
         const processed = parseFilter(reference, filter);
-        let filterData = {};
-        if (0 < Object.keys(processed).length) {
-            // 包含了Filter信息
-            Object.assign(filterData, processed);
-        }
-        const data = Type.elementFindDatum(reference, source,
-            0 < Object.keys(filterData).length ? filterData : {});
         E.fxTerminal(!U.isArray(data), 10043, source);
         if (U.isFunction(processed)) {
-            options = data.filter(processed);
+            data = Type.elementFindDatum(reference, source, {});
+            data = data.filter(processed);
         } else {
-            options = data;
+            let filterData = {};
+            if (0 < Object.keys(processed).length) {
+                // 包含了Filter信息
+                Object.assign(filterData, processed);
+            }
+            data = Type.elementFindDatum(reference, source,
+                0 < Object.keys(filterData).length ? filterData : {});
         }
+        // 将data赋值给options
+        options = data;
     } else {
         E.fxTerminal(true, 10044, source);
     }

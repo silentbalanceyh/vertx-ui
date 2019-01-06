@@ -135,7 +135,7 @@ const cellIcon = (attrs = {}, reference, {
     if (U.isObject(literal)) {
         attrs.icon = literal.icon;
         attrs.style = literal.style ? literal.style : false;
-        attrs.children = text;
+        attrs.children = literal.text;
     } else {
         attrs.children = literal;
     }
@@ -162,10 +162,11 @@ const cellCurrency = (attrs = {}, reference, {
 const cellExpr = (attrs = {}, reference, {
     column = {}, text, record = {}
 }) => {
-    if (text) {
+    // 让0过掉
+    if (undefined !== text && "" !== text) {
         attrs.children = Util.formatExpr(column['$expr'], {
             ...record, value: text,
-        });
+        }, true);
     } else {
         attrs.children = false;
     }

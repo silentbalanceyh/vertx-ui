@@ -93,7 +93,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const options = RxAnt.toOptions(reference, config);
     return (config) ?
         <Checkbox.Group {...rest} options={options}/> :
-        <Checkbox/>;
+        <Checkbox disabled={rest.disabled}/>;
 };
 const aiTextArea = (reference, jsx = {}) => {
     return (<Input.TextArea {...jsx}/>);

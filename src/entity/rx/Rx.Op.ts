@@ -129,7 +129,9 @@ class RxOp {
         const isPromiseReturn = this.isPromiseReturn;
         const isReduxSubmit = this.isReduxSubmit;
         // 防重复提交
-        if (isReduxSubmit) Ux.rdxSubmitting(ref, true);
+        if (isReduxSubmit) {
+            Ux.rdxSubmitting(ref, true);
+        }
         // 验证处理
         for (let idx = 0; idx < validation.length; idx++) {
             const item = validation[idx];
@@ -140,12 +142,16 @@ class RxOp {
                     return Ux.rdxReject(message);
                 } else {
                     // 暂时只在Reject部分处理isPromiseReturn
-                    Ux.showDialog(ref, item.key, () => {
-                        if (isReduxSubmit) {
-                            Ux.rdxSubmitting(ref, false);
-                        }
-                    });
-                    return;
+                    return new Promise((resolve, reject) => {
+                        Ux.showDialog(ref, item.key, () => {
+                            if (isReduxSubmit) {
+                                Ux.rdxSubmitting(ref, false);
+                            } else {
+                                // 证明需要重设 $loading = false
+                                ref.setState({$loading: false});
+                            }
+                        });
+                    })
                 }
             }
         }// 是否设置了postKey
@@ -178,7 +184,7 @@ class RxOp {
             return fnPromise;
         } else {
             // 异常流
-			const fnFailure = this._failure;
+            const fnFailure = this._failure;
             return fnPromise.catch(errors => fnFailure(errors));
         }
     }

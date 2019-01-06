@@ -2,6 +2,8 @@ import React from 'react';
 import {Col, Row, Table} from 'antd';
 import RxAnt from '../ant/AI.RxAnt';
 import LayoutType from './AI.Layout.Config';
+import Value from '../../Ux.Value';
+
 
 /**
  * 直接渲染多行
@@ -32,6 +34,12 @@ const aiColumns = (config = [], ...jsx) => {
             const attrs = RxAnt.toParsed(item, index);
             // 重写key值
             attrs.key = `$$AiCol${index}$String`;
+            if (attrs.hasOwnProperty('span')) {
+                attrs.span = Value.valueInt(attrs.span);
+            }
+            if (attrs.hasOwnProperty('offset')) {
+                attrs.offset = Value.valueInt(attrs.offset);
+            }
             return (
                 <Col {...attrs}>
                     {jsx[index] ? jsx[index] : false}

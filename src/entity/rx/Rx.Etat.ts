@@ -106,7 +106,17 @@ class Etat {
     }
 
     loading(...loading) {
-        this._loading = Ux.onArray.apply(null, loading);
+        // 特殊取法
+        const args = [];
+        if (1 < loading.length) {
+            loading.forEach(each => args.push(each));
+        } else if (1 === loading.length) {
+            const input = loading[0];
+            if (U.isArray(input)) {
+                input.forEach(each => args.push(each));
+            }
+        }
+        this._loading = Ux.onArray.apply(null, [].concat(args));
         return this;
     }
 

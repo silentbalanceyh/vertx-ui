@@ -1,7 +1,6 @@
 import G2 from '@antv/g2';
 import Ct from '../draw/G2.BarRadial';
 // 关闭 G2 的体验改进计划打点请求
-G2.track(false);
 const aiChartBar = (container, dataSource, chartConfig = {}) => {
     const result = Ct.dsBar(dataSource, chartConfig);
     const dataView = result.data;
