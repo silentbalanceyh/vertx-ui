@@ -18,14 +18,19 @@ const aiElement = (children, index, ...args) => {
             : children[index];
     }
 };
-const _buildLink = (item = {}, $router) =>
-    item.uri ? (
-        <Link to={Ux.aiUri(item, $router)} className={item.className}>
-            {item.text}
-        </Link>
-    ) : (
+const _buildLink = (item = {}, $router) => {
+    if (item.uri) {
+        return item.disabled ? (
+            <span className={"zero-disabled"}>{item.text}</span>
+        ) : (
+            <Link to={Ux.aiUri(item, $router)} className={item.className}>
+                {item.text}
+            </Link>
+        );
+    } else return (
         <span>{item.text}</span>
     );
+};
 const aiTitle = (item = {}, $router) => (
     <span className={item.className}>
         {_Icon.uiIcon(item.icon)}
@@ -59,7 +64,7 @@ const aiMenuTree = (item = {}, rest = {}, config = {}) => (
             {item.children.map(child => aiMenuTree(child, config))}
         </SubMenu>
     ) : (
-        <Menu.Item key={item.key} style={item.style}>
+        <Menu.Item key={item.key} style={item.style} disabled={item.disabled}>
             {aiTitle(item, config['$router'])}
         </Menu.Item>
     )

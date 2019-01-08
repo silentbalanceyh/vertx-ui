@@ -93,6 +93,10 @@ const ajaxDownload = (uri, params, mockData) => {
     Log.ajaxLog(api, "GET", {}, mockData);
     const headers = new Headers();
     Aid.ajaxSecure(headers, true);
+    // 下载专用头设置，客户端只接受 octet-stream 格式
+    headers.append(Cv.HTTP11.ACCEPT, "application/octet-stream");
+    headers.append(Cv.HTTP11.CONTENT_TYPE, "application/octet-stream");
+    // Download专用
     const request = new Request(api, {
         ...Aid.ajaxOptions("GET", headers)
     });
