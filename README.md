@@ -28,7 +28,7 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 > 由于新开项目的Origin X Engine使用了TiDB，占用了4000端口，所以将端口号改成5000，特此说明。
 
-这里附上已经上线的系统的部分截图，给大家参考：[案例截图](/zai-xian-demo-jie-tu.md)。
+这里附上已经上线的系统的部分截图，给大家参考：[案例截图](/document/examples/zai-xian-demo-jie-tu.md)。
 
 ## 2. 开始
 
