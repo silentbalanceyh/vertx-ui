@@ -10,7 +10,7 @@
 
 > 本文中的案例以模块和完整功能作为基础，不介绍完整案例，所有截图取自于目前企业里已经在使用的内部系统截图（脱敏处理）。
 
-* [HTL001 - 酒店——新增订单](/document/examples/zai-xian-demo-jie-tu/jiu-dian-2014-2014-xin-zeng-ding-dan.md)
+* [HTL001 - 酒店——新增订单](/document/examples/jiu-dian-2014-2014-xin-zeng-ding-dan.md)
 
 
 
