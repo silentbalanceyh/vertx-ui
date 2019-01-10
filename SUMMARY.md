@@ -1,6 +1,8 @@
 # Summary
 
 * [Vert.x UI 1.0版脚手架](README.md)
+  * [案例截图](/document/examples/zai-xian-demo-jie-tu.md#案例截图参考)
+    * [HTL001 - 酒店——新增订单](document/examples/zai-xian-demo-jie-tu/jiu-dian-2014-2014-xin-zeng-ding-dan.md)
 * [官方文档](document/README.md)
   * [1 - 环境文档](document/1-huan-jing-wen-dang.md)
     * [UI0001 - 脚手架说明](document/ui0001-jiao-shou-jia-shuo-ming.md)
