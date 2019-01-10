@@ -28,7 +28,7 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 > 由于新开项目的Origin X Engine使用了TiDB，占用了4000端口，所以将端口号改成5000，特此说明。
 
-这里附上已经上线的系统的部分截图，给大家参考：[案例截图](/document/examples/zai-xian-demo-jie-tu.md)。
+这里附上已经上线的系统的部分截图，给大家参考：[案例截图](/document/zai-xian-demo-jie-tu.md)。
 
 ## 2. 开始
 
@@ -55,7 +55,7 @@ run-zero.bat
 
 然后在浏览器中打开地址：[http://localhost:5000/zui/login/index](http://localhost:5000/zui/login/index)，则可以看到下边界面
 
-![](/document/image/login.png)
+![](/document/backup/image/login.png)
 
 默认账号和密码：lang.yu/lang.yu
 
@@ -63,5 +63,5 @@ run-zero.bat
 
 新版不再提供在线的Markdown文档，所有的教程文档都会在vertx-ui运行过程中陆续开放，直接运行了可以在系统中直接查看“所见即所得”的基础教程。
 
-![](/document/image/mainpage.png)
+![](/document/backup/image/mainpage.png)
 
