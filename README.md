@@ -26,6 +26,10 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 * `UC`文档位自定义组件专用文档，用于描述目前系统中存在的自定义组件；
 * `AI`文档为自动化组件专用文档，用于一些目前自定义的解析规则相关；
 
+> 由于新开项目的Origin X Engine使用了TiDB，占用了4000端口，所以将端口号改成5000，特此说明。
+
+这里附上已经上线的系统的部分截图，给大家参考：[案例截图](/zai-xian-demo-jie-tu.md)。
+
 ## 2. 开始
 
 由于Zero UI已经使用了“所见即所得”的模式来介绍，所以读者可以直接下载代码，在本地运行（确保您的系统中安装了node）：
@@ -49,7 +53,7 @@ npm install
 run-zero.bat
 ```
 
-然后在浏览器中打开地址：[http://localhost:4000/zui/login/index](http://localhost:4000/zui/login/index)，则可以看到下边界面
+然后在浏览器中打开地址：[http://localhost:5000/zui/login/index](http://localhost:5000/zui/login/index)，则可以看到下边界面
 
 ![](/document/image/login.png)
 
@@ -60,12 +64,4 @@ run-zero.bat
 新版不再提供在线的Markdown文档，所有的教程文档都会在vertx-ui运行过程中陆续开放，直接运行了可以在系统中直接查看“所见即所得”的基础教程。
 
 ![](/document/image/mainpage.png)
-
-
-
-
-
-
-
-
 

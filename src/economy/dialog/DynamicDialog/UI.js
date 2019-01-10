@@ -16,16 +16,25 @@ const initState = (reference) => {
     }
     return config;
 };
+const initialize = (reference) => {
+    const state = initState(reference);
+    if (!reference.state && 0 === Object.keys(state).length) {
+        const error = Ux.E.fxInfo(true, 10090, "$dialog");
+        reference.setState({error});
+    } else {
+        reference.setState(state);
+    }
+};
 
 class Component extends React.PureComponent {
+    componentDidMount() {
+        // 解决单次显示窗口问题
+        initialize(this);
+    }
+
     componentDidUpdate() {
-        const state = initState(this);
-        if (!this.state && 0 === Object.keys(state).length) {
-            const error = Ux.E.fxInfo(true, 10090, "$dialog");
-            this.setState({error});
-        } else {
-            this.setState(state);
-        }
+        // 解决单次显示窗口问题
+        initialize(this);
     }
 
     render() {

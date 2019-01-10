@@ -20,6 +20,14 @@ const jsxInt = (field) => (item = {}, value) => {
     if (!item.optionJsx) item.optionJsx = {};
     item.optionJsx[field] = Value.valueInt(value);
 };
+const jsxIcon = (field) => (item = {}, value) => {
+    if (!item.optionJsx) item.optionJsx = {};
+    if ("string" === typeof value) {
+        item.optionJsx[field] = {
+            type: value
+        };
+    }
+};
 const sorter = (item = {}, value) => {
     if (!item.params) item.params = {};
     if (!item.params.sorter) item.params.sorter = [];
@@ -72,6 +80,8 @@ const PARSER = {
     sorter,
     rows: jsxInt("rows"),
     className: itemValue("className"),
+    prefix: jsxIcon('prefix'),
+    suffix: jsxIcon('suffix'),
     // 自定义属性
     _submit: itemValue("submit"),
     fixed: itemValue("fixed"),

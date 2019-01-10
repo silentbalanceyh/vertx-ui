@@ -197,7 +197,7 @@ const rtNorm = (reference, jsx = {}) => {
     return (
         <span>
             {rtAnt(reference, fnConfig("primary", item))}
-            &nbsp;&nbsp;&nbsp;&nbsp;
+            &nbsp;
             {reset ? rtRet(reference, fnConfig("default", reset)) : false}
         </span>
     );

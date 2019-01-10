@@ -93,7 +93,10 @@ const aiMetaColumn = (item = {}) => {
 };
 const aiExprTitle = (item) => {
     // title专用解析器
-    if ("string" === typeof item && 0 <= item.indexOf("title")) {
+    if ("string" === typeof item
+        && 0 <= item.indexOf("title")
+        && 0 > item.indexOf(",")    // 防止出现title字段
+    ) {
         const kv = item.split("=");
         const result = {};
         // Ant-Design Form必须
