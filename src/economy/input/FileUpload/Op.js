@@ -3,6 +3,7 @@ import Callback from './Op.Callback';
 import {message} from 'antd';
 import Verify from './Op.Verify';
 import Q from 'q';
+import U from 'underscore';
 
 const on2CustomRequest = (reference) => (details = {}) => {
     const {ajax = {}} = reference.props;
@@ -74,9 +75,11 @@ const initState = (reference) => {
         });
     const {value = [], listType} = reference.props;
     if ("picture-card" === listType) {
-        _asyncDownload(reference, value) // 并行下载
-            .then(_asyncPreview(reference, value)) // 并行转换URL
-            .then(item => callback(item)); // 设置FileList
+        if (U.isArray(value)) {
+            _asyncDownload(reference, value) // 并行下载
+                .then(_asyncPreview(reference, value)) // 并行转换URL
+                .then(item => callback(item)); // 设置FileList
+        }
     } else {
         callback(value);
     }
