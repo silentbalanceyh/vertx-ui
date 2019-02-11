@@ -11,6 +11,8 @@ const _parseInitItem = (reference: any, key: any) => {
         return {
             field: ajax.parent,
             uri: ajax.uri,
+            display: ajax.display,
+            parent: ajax.parent
         };
     }
 };

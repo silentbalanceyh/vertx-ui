@@ -1,5 +1,6 @@
 import Split from './Op.Load';
 import Ux from 'ux';
+import * as U from 'underscore';
 
 const loadData = (reference: any) => (selectedOptions) => {
     // 被选中的option
@@ -111,13 +112,114 @@ const _callback = (reference: any, key, parent: any = undefined) => (response: a
         reference.setState(Ux.clone(state));
     }
 };
+const _initOptions = (data = [], config, key) => {
+    const options = [];
+    data.forEach(each => {
+        const option: any = _executeData(each, config[key], key);
+        options.push(option);
+    });
+    return options;
+};
 const _initData = (reference, response: any = {}) => {
     // 先解开数据
-    const {data = {}, config = {}} = response;
+    const {config = {}} = response;
+    const remoteData = response.data ? response.data : {};
     // 先读取国家数据
     const metadata = Split.parseInit(reference);
-    console.info(data, metadata);
+    // 国家数据处理
+    Ux.dgDebug({
+        remoteData,
+        config,
+        metadata
+    }, "逆向初始化数据");
+    // 国家数据处理专用：/api/countries
+    const defaultValue = [];
+    _initCountry(reference, metadata, remoteData, defaultValue)
+        .then(_initState(reference, metadata, remoteData, defaultValue))
+        .then(_initCity(reference, metadata, remoteData, defaultValue))
+        .then(_initDistinct(reference, metadata, remoteData, defaultValue))
+        .then(({options}) => reference.setState({
+            options: Ux.clone(options),
+            defaultValue: Ux.clone(defaultValue)
+        }));
 };
+
+const _initDistinct = (reference, metadata, remoteData, defaultValue = []) => ({options, selected}) =>
+    Split.loadDistinct(reference, selected.params).then(response => new Promise((resolve, reject) => {
+        const distincts = response.data;
+        if (U.isArray(distincts)) {
+            selected.children = _initOptions(distincts, metadata, 'distinct');
+            // distinctId
+            const distinctId = remoteData['distinctId'];
+            defaultValue.push(distinctId);
+            Ux.dgDebug({options, metadata, remoteData, defaultValue}, "最终Cascader数据：");
+            resolve({options})
+        } else {
+            reject("Distinct：数据错误，请检查数据！");
+        }
+    }));
+
+const _initCity = (reference, metadata, remoteData, defaultValue = []) => ({options, selected}) =>
+    Split.loadCity(reference, selected.params).then(response => new Promise((resolve, reject) => {
+        const cities = response.data;
+        if (U.isArray(cities)) {
+            // 3.加载城市数据
+            const children = _initOptions(cities, metadata, 'city');
+            // 连接
+            selected.children = children;
+            // cityId
+            const cityId = remoteData[metadata.distinct.field];
+            defaultValue.push(cityId);
+            const hit = children.filter(option => cityId === option.value);
+            if (1 === hit.length) {
+                resolve({options, selected: hit[0]});
+            } else {
+                reject("City: 数据错误，请检查数据！");
+            }
+        }
+    }));
+
+const _initState = (reference, metadata, remoteData, defaultValue = []) => ({options, selected}) =>
+    Split.loadState(reference, selected.params).then(response => new Promise((resolve, reject) => {
+        const states = response.data;
+        if (U.isArray(states)) {
+            // 2.加载省会数据
+            const children = _initOptions(states, metadata, 'state');
+            // 连接
+            selected.children = children;
+            // stateId
+            const stateId = remoteData[metadata.city.field];
+            defaultValue.push(stateId);
+            const hit = children.filter(option => stateId === option.value);
+            if (1 === hit.length) {
+                resolve({options, selected: hit[0]});
+            } else {
+                reject("State: 数据错误，请检查数据！");
+            }
+        }
+    }));
+
+const _initCountry = (reference, metadata, remoteData, defaultValue = []) =>
+    Split.loadCountry(reference).then(response => new Promise((resolve, reject) => {
+        const countries = response.data;
+        if (U.isArray(countries)) {
+            // 1.加载国家数据
+            const options = _initOptions(countries, metadata, 'country');
+            if (U.isArray(options)) {
+                // countryId
+                const countryId = remoteData[metadata.state.field];
+                const hit = options.filter(option => countryId === option.value);
+                if (1 === hit.length) {
+                    defaultValue.push(countryId);
+                    resolve({options, selected: hit[0]});
+                } else {
+                    reject("Country: 数据错误，请检查数据！");
+                }
+            } else {
+                reject("国家数据格式错误！");
+            }
+        }
+    }));
 // 只做一级初始化（初始化国家）
 const _initEmpty = (reference: any) => {
     // 国家数据读取，暂时只支持 sigma, language作为主体查询条件

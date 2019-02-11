@@ -13,13 +13,20 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {options = []} = this.state;
+        const {options = [], defaultValue} = this.state;
         const {placeholder} = this.props;
         const attrs = {};
         if (placeholder) attrs.placeholder = placeholder;
+        // 设置默认值
+        if (defaultValue) {
+            attrs.value = defaultValue;
+        }
+        attrs.options = options;
         return (
             <Input.Group>
-                <Cascader options={options} {...attrs} loadData={Op.loadData(this)}
+                <Cascader {...attrs}
+                          loadData={Op.loadData(this)}
+                          onChange={Op.bindChange(this)}
                           style={{minWidth: 280}}/>
             </Input.Group>
         );
