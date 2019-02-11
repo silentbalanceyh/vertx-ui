@@ -10,11 +10,15 @@ const renderFile = (reference) => {
         showPreviewIcon: true, // 预览专用
         showRemoveIcon: true
     };
+    // Upload属性集
+    const upload = {
+        ...meta,
+        ...handler,
+        ...attrs
+    };
     return (
         <Upload listType={listType}
-                {...meta}
-                {...handler}
-                {...attrs}>
+                {...upload}>
             {"picture-card" === listType ? (
                 <span>
                     <Icon type={"upload"}/>

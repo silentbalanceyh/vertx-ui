@@ -88,7 +88,7 @@ const getDatum = (reference, config = {}, filter = () => true) => {
             data = data.filter(processed);
         } else {
             let filterData = {};
-            if (0 < Object.keys(processed).length) {
+            if (processed && 0 < Object.keys(processed).length) {
                 // 包含了Filter信息
                 Object.assign(filterData, processed);
             }

@@ -1,4 +1,5 @@
 import {
+    AddressSelector,
     BraftEditor,
     ChangeEditor,
     CheckedDate,
@@ -13,7 +14,7 @@ import {
     TableEditor,
     TableTransfer,
     TeamSelector,
-    TimeRanger,
+    TimeRanger
 } from "web";
 import RxAnt from "../ant/AI.RxAnt";
 import React from "react";
@@ -93,6 +94,9 @@ const aiBraftEditor = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<BraftEditor {...jsx} reference={reference}/>);
 };
+const aiAddressSelector = (reference, jsx = {}) => {
+    return (<AddressSelector {...jsx} reference={reference}/>);
+};
 /**
  * Uncaught TypeError:
  * ( intermediate value )(intermediate value)[action].apply is not a function
@@ -116,4 +120,5 @@ export default {
     aiTeamSelector, // 团队选择框，1 Leader, N Member表格选择
     aiRichEditor, // 富客户端录入框
     aiBraftEditor, // 付客户端录入框
+    aiAddressSelector, // 地址选择器
 };
