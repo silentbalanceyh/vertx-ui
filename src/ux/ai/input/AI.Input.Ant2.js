@@ -38,13 +38,12 @@ const ai2DatumCascade = (onChange) => (reference, jsx = {}) => {
     return RxDatum.aiDatumCascade(reference, jsx, fnChange);
 };
 
-const ai2ListSelector = (mockData = {}) => (reference, jsx = {}) => {
-    return (<ListSelector reference={reference} mock={mockData} {...jsx}/>);
-};
-const ai2Addresser = (mockData = {}, onSelect) => (reference, jsx = {}) => {
-    return (<AddressSelector {...jsx} reference={reference}
-                             mock={mockData} rxHitted={onSelect}
-    />);
+const ai2ListSelector = (mockData = {}) => (reference, jsx = {}) =>
+    (<ListSelector reference={reference} mock={mockData} {...jsx}/>);
+const ai2AddressSelector = (mockData = {}, onSelect) => (reference, jsx = {}) => {
+    const fnChange = onSelect.apply(null, [reference]);
+    return (<AddressSelector {...jsx} reference={reference} mock={mockData}
+                             rxSelect={fnChange}/>);
 };
 const ai2MultiCheckBox = (onChange) => (reference, jsx = {}) => {
     const fnChange = onChange.apply(null, [reference]);
@@ -61,7 +60,7 @@ export default {
     ai2ListSelector,
     ai2MultiCheckBox,
     // 地址选择器
-    ai2Addresser,
+    ai2AddressSelector,
     // 绑定组件二阶
     ai2DatumCascade
 };

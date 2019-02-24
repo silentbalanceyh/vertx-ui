@@ -12,6 +12,10 @@ class Component extends React.PureComponent {
         Op.initOptions(this);
     }
 
+    componentDidUpdate(prevProps) {
+        Op.initUpdate(this, prevProps);
+    }
+
     render() {
         const {options = [], defaultValue} = this.state;
         const {placeholder} = this.props;
