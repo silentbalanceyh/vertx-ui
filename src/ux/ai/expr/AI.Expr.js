@@ -106,6 +106,7 @@ export default {
         "key",
         "text",
         "onClick",
-        "type"
+        "type",
+        "className"
     ]
 };
