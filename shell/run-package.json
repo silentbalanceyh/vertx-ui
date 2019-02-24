@@ -10,5 +10,6 @@
     "react-dev-utils": "^5.0.2",
     "ts-loader": "5.0.0",
     "webpack": "3.12.0",
-    "webpack-dev-server": "3.0.0"
+    "webpack-dev-server": "3.0.0",
+    "random-js": "^1.0.8"
 }

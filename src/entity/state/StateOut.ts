@@ -1,5 +1,5 @@
 import * as Immutable from "immutable";
-import * as randomjs from "random-js";
+import Ux from 'ux';
 import DataContainer from "../data/DataContainer";
 import DataArray from "../data/DataArray";
 import DataObject from "../data/DataObject";
@@ -168,8 +168,7 @@ class StateOut {
      * 强制更新，引入特殊变量
      */
     rush() {
-        const engine = randomjs.engines.mt19937().autoSeed();
-        this.response["$forceUpdate"] = randomjs.string()(engine, 16);
+        this.response["$forceUpdate"] = Ux.randomString(16);
         return this;
     }
 
