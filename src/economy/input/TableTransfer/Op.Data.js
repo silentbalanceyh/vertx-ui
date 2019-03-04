@@ -9,6 +9,24 @@ const _getSelectedFilter = (reference, revert = false) => {
     return item => revert ? !keys.contains(item.key) :
         keys.contains(item.key);
 };
+/**
+ * 是否显示成平行模式，不以树形模式展开
+ */
+const _isFlat = (reference, key) => {
+    if (key) {
+        const {config = {}} = reference.props;
+        const {flat = {}} = config;
+        if (flat[key]) {
+            return flat[key];
+        } else {
+            // 不配置 key 则不使用平行模式
+            return false;
+        }
+    } else {
+        // 不配置 key 则不使用平行模式
+        return false;
+    }
+};
 
 const getFrom = (reference, config = {}) => {
     const {_data = [], shared = []} = reference.state;
@@ -16,10 +34,16 @@ const getFrom = (reference, config = {}) => {
     const dataArray = DataLabor.getArray(standard);
     shared.forEach(each => dataArray.saveElement(each));
     let data = dataArray.to();
-    data = Ux.valueTree(data, {
-        ...config.tree,
-        zero: false
-    });
+    const flatField = _isFlat(reference, 'to');
+    if (flatField) {
+        // 直接过滤
+        data = data.filter(item => item[flatField]);
+    } else {
+        data = Ux.valueTree(data, {
+            ...config.tree,
+            zero: false
+        });
+    }
     // 补充每个分支的数据
     return data;
 };
@@ -41,10 +65,15 @@ const getTo = (reference, config = {}) => {
         });
         data = formated.to();
     }
-    data = Ux.valueTree(data, {
-        ...config.tree,
-        zero: false
-    });
+    const flatField = _isFlat(reference, 'from');
+    if (flatField) {
+        data = data.filter(item => item[flatField]);
+    } else {
+        data = Ux.valueTree(data, {
+            ...config.tree,
+            zero: false
+        });
+    }
     return data;
 };
 export default {

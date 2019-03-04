@@ -42,7 +42,7 @@ const aiCellOp = (reference, config) => (text, record) => {
     } else return false;
 };
 const _editConfig = (option = {}, record) => {
-    let edit = undefined;
+    let edit;
     if (option.edit) {
         edit = {};
         edit.key = `edit${record.key}`;
@@ -52,7 +52,7 @@ const _editConfig = (option = {}, record) => {
     return edit;
 };
 const _deleteConfig = (option = {}, record) => {
-    let removed = undefined;
+    let removed;
     // record中的特殊属性lock：锁定的记录不能执行删除（暂时定义active和lock两个属性为记录特有）
     if (option.delete && !record['lock']) {
         removed = {};
