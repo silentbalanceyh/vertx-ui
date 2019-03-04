@@ -44,6 +44,7 @@ class Component extends React.PureComponent {
                 $visible = false,
                 className = "web-dynamic-dialog", children,
                 rxCancel, rxOk,
+                $loading = false, // 防重复提交
             } = this.props;
             // 配置中不包含onCancel
             if (config) {
@@ -58,6 +59,7 @@ class Component extends React.PureComponent {
             }
             // 关闭窗口时销毁子组件
             config.destroyOnClose = true;
+            config.confirmLoading = $loading;
             return (
                 <Modal {...config} visible={$visible} className={className}>
                     {children}

@@ -45,11 +45,14 @@ const renderItem = (reference, item = {}) => () => {
 
 const renderDialog = (reference, item) => () => {
     const {visible = {}} = reference.state;
+    // 弹出对话框的房重复提交
+    const {$loading} = reference.props;
     const $visible = visible[item.key];
     const jsx = getChildren(reference, item);
     return (
         <DynamicDialog key={item.key}
                        $dialog={item.dialog}
+                       $loading={$loading}
                        $visible={$visible}>
             {jsx}
         </DynamicDialog>

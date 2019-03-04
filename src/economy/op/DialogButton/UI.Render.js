@@ -39,8 +39,11 @@ const getChildren = (reference) => {
 const renderDialog = (reference) => {
     const jsx = getChildren(reference);
     const {visible = false, dialog = {}} = reference.state;
+    // 窗口中的房重复提交设置
+    const {$loading} = reference.props;
     return (
-        <DynamicDialog $dialog={dialog} $visible={visible}>
+        <DynamicDialog $dialog={dialog} $visible={visible}
+                       $loading={$loading}>
             {jsx}
         </DynamicDialog>
     );
@@ -48,7 +51,6 @@ const renderDialog = (reference) => {
 const renderDrawer = (reference) => {
     const jsx = getChildren(reference);
     const {visible = false, dialog = {}} = reference.state;
-
     return (
         <Drawer {...dialog} visible={visible}>
             {jsx}

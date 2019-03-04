@@ -190,6 +190,7 @@ const fnRender = (props = {}, options = {}) => {
                 if (!value) {
                     render = false;
                     // forEach中中断必须跳出
+                    console.debug(`[ERR]加载的数据问题（Tabular / Assist）：key = ${key}`);
                     return;
                 }
             } else {
@@ -197,6 +198,7 @@ const fnRender = (props = {}, options = {}) => {
                 if (!props[targetKey] || (props[targetKey].is && !props[targetKey].is())) {
                     render = false;
                     // forEach中中断必须跳出
+                    console.error(`[ERR]加载纯数据问题：key = ${key}`);
                     return;
                 }
             }

@@ -38,7 +38,8 @@ const getSpan = (config = {}) => {
     }
     if (_index !== 0) {
         // 如果不是第一个元素时，需要设置左边的边框
-        attrs.labelStyle.borderLeft = "solid 1px black";
+        // TODO: 北京二期需要重新考虑
+        // attrs.labelStyle.borderLeft = "solid 1px black";
     }
     if (config.hasOwnProperty('minHeight')) {
         attrs.labelStyle.minHeight = config.minHeight;

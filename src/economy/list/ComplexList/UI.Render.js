@@ -4,6 +4,7 @@ import Op from "./op/Op";
 import Ux from 'ux';
 import Fn from '../../_internal/Ix.Fn';
 import "./Cab.less";
+import U from 'underscore';
 
 const renderPageAdd = (reference, item = {}) => {
     const {$formAdd: Component} = reference.props;
@@ -50,6 +51,11 @@ const renderPageEdit = (reference, item = {}) => {
 };
 const renderPageList = (reference, item = {}) => {
     const tableDatum = Op.initTable(reference);
+    // 扩展行外置处理
+    const {rxExpandRow} = reference.props;
+    if (U.isFunction(rxExpandRow)) {
+        tableDatum.table.expandedRowRender = rxExpandRow;
+    }
     return (
         <Tabs.TabPane {...item} closable={false}>
             <Row>
@@ -64,7 +70,9 @@ const renderPageList = (reference, item = {}) => {
                 </Col>
             </Row>
             <Row>
-                <Col span={24}>
+                <Col span={24} style={{
+                    paddingTop: 8   // 将搜索栏的边距留出来
+                }}>
                     <Table {...tableDatum.table}
                            loading={Ux.onReady(reference, tableDatum.ready)}
                            dataSource={tableDatum.data}/>

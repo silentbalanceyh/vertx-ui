@@ -39,7 +39,7 @@ const valueIcon = (literal = "") => {
         const textIcon = literal.replace(/ /g, '').split(',');
         item.text = textIcon[0];
         const iconStr = textIcon[1];
-        item.iconStyle = {fontSize: 20};
+        item.iconStyle = {fontSize: 16};
         if (0 < iconStr.indexOf(":")) {
             const iconStyle = iconStr.split(":");
             item.icon = iconStyle[0];
