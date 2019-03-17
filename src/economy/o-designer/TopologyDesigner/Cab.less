@@ -1,78 +1,3 @@
-.editor {
-    display: flex;
-    flex: 1;
-    flex-direction: column;
-}
-
-.editor-hd {
-    padding: 8px;
-    border: 1px solid #E6E9ED;
-}
-
-.editor-bd {
-    flex: 1;
-}
-
-.editor-sidebar,
-.editor-content {
-    display: flex;
-    flex-direction: column;
-    min-height: 800px;
-}
-
-.editor-sidebar {
-    background: #FAFAFA;
-    min-height: 800px;
-
-    &:first-child {
-        border-right: 1px solid #E6E9ED;
-    }
-
-    &:last-child {
-        border-left: 1px solid #E6E9ED;
-    }
-}
-
-.koni {
-    flex: 1;
-}
-
-.toolbar {
-    display: flex;
-    align-items: center;
-
-    .command i {
-        cursor: pointer;
-        display: inline-block;
-        margin: 0 6px;
-        width: 27px;
-        height: 27px;
-        text-align: center;
-        border: 1px solid #FFFFFF;
-
-        &:hover {
-            border: 1px solid #E6E9ED;
-            border-radius: 3px;
-        }
-    }
-
-    .disable i {
-        cursor: auto;
-        color: rgba(0, 0, 0, 0.25);
-
-        &:hover {
-            border: 1px solid #FFFFFF;
-        }
-    }
-}
-
-.tooltip {
-    .ant-tooltip-inner {
-        font-size: 12px;
-        border-radius: 0;
-    }
-}
-
 @font-face {
     font-family: "iconfont";
     src: url('fonts/font_598462_3xve1872wizzolxr.eot?t=1522149591264');
@@ -183,6 +108,81 @@
     content: "\e8b4";
 }
 
+.editor {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+}
+
+.editor-hd {
+    padding: 8px;
+    border: 1px solid #E6E9ED;
+}
+
+.editor-bd {
+    flex: 1;
+}
+
+.editor-sidebar,
+.editor-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 800px;
+}
+
+.editor-sidebar {
+    background: #FAFAFA;
+
+    &:first-child {
+        border-right: 1px solid #E6E9ED;
+    }
+
+    &:last-child {
+        border-left: 1px solid #E6E9ED;
+    }
+}
+
+.koni {
+    flex: 1;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+
+    .command i {
+        cursor: pointer;
+        display: inline-block;
+        margin: 0 6px;
+        width: 27px;
+        height: 27px;
+        text-align: center;
+        border: 1px solid #FFFFFF;
+
+        &:hover {
+            border: 1px solid #E6E9ED;
+            border-radius: 3px;
+        }
+    }
+
+    .disable i {
+        cursor: auto;
+        color: rgba(0, 0, 0, 0.25);
+
+        &:hover {
+            border: 1px solid #FFFFFF;
+        }
+    }
+}
+
+.tooltip {
+    .ant-tooltip-inner {
+        font-size: 12px;
+        border-radius: 0;
+    }
+}
+
 .item-panel {
     flex: 1;
     background: #FAFAFA;
@@ -193,13 +193,25 @@
 
     .ant-card-body {
 
-        > div {
-            border-radius: 10px;
-            margin-bottom: 16px;
-            margin-right: 12px;
-            margin-left: 12px;
-            border: 1px solid #CED4D9;
+        .item-range {
+            width: 74px;
             float: left;
+            margin-bottom: 16px;
+
+            & > div {
+                border-radius: 10px;
+                margin-right: 12px;
+                margin-left: 12px;
+                border: 1px solid #CED4D9;
+                float: left;
+            }
+
+            & > label {
+                font-size: 12px;
+                float: left;
+                width: 100%;
+                text-align: center;
+            }
         }
     }
 }

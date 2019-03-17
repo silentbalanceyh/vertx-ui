@@ -8,6 +8,7 @@ import Op from './Op';
 // 自定义组件
 import KoniCustomNode from './control/KoniCustomNode';
 import EditorMinimap from '../EditorMinimap/UI';
+import EditorEvent from '../EditorEvent/UI';
 
 @_zero({
     "i18n.cab": require('./Cab'),
@@ -24,7 +25,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$minimap = {}} = this.state;
+        const {$minimap = {}, $event = {}} = this.state;
         return (
             <GGEditor className={"editor"}>
                 <Row type={"flex"} className={"editor-hd"}>
@@ -42,12 +43,16 @@ class Component extends React.PureComponent {
                         <Koni className={"koni"}/>
                     </Col>
                     <Col span={4} className={"editor-sidebar"}>
-                        Detail <br/>
+                        {/** 详细内容 **/}
+                        {Rdr.renderDetail(this)}
                         {/** 缩略图 **/}
                         <EditorMinimap $config={$minimap}/>
                     </Col>
                 </Row>
+                {/** 节点自定义绘制 **/}
                 <KoniCustomNode/>
+                {/** 事件处理 **/}
+                <EditorEvent $config={$event}/>
             </GGEditor>
         );
     }

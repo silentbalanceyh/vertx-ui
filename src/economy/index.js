@@ -8,16 +8,11 @@ export {default as FuncInputTree} from './input/FuncInputTree/UI';
 
 
 export {default as PagerHeader} from './page/PagerHeader/UI';
-// export {default as TopBar} from './header/TopBar/UI';
-// export {default as TitleCard} from './page/TitleCard/UI';
-// export {default as PageList} from './list/PageList/UI';
-// export {default as EditList} from './list/EditList/UI';
-// export {default as SearchList} from './list/SearchList/UI';
-// export {default as TreeMenu} from './menu/TreeMenu/UI';
+// ------ 绘图专用组件 ------
+export {default as FormDesigner} from './o-designer/FormDesigner/UI';
+// ------ 新版使用Editor替换原始的Designer
 
-export {default as FlowDesigner} from './designer/FlowDesigner/UI';
-export {default as FormDesigner} from './designer/FormDesigner/UI';
-export {default as TopologyDesigner} from './designer/TopologyDesigner/UI';
+export {default as KoniEditor} from './designer/Koni/UI';
 
 export {default as AttrTree} from './graphic/AttrTree/UI';
 export {default as AttrSetter} from './graphic/AttrSetter/UI';
