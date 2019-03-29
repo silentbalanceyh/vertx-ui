@@ -5,32 +5,32 @@ import U from 'underscore';
 const _colorful = (reference = {}, Name, color = {}, type, stateless) => {
     if (Cv.DEBUG) {
         const flag = type ? type : 'React Component';
-        let message = `%c [Zero] [${(!stateless)
+        let message = `%c 「Zero」 [${(!stateless)
             ? flag
             : "Stateless Function Component"}] Control monitor: name = ${Name}`;
         console.groupCollapsed(message, `color:${color.group};font-weight:900`);
         // 打印函数属性
         const inited = reference.props['$inited'];
         if (inited) {
-            console.log(`%c [Zero] Inited Values ( $inited ) -> `, `color:#09c;font-weight:900`, inited);
+            console.log(`%c 「Zero」 Inited Values ( $inited ) -> `, `color:#09c;font-weight:900`, inited);
         }
         const uniform = Hoc.toUniform(reference.props);
-        console.log(`%c [Zero] Uniform -> `, `color:#666;font-weight:900`, uniform);
+        console.log(`%c 「Zero」 Uniform -> `, `color:#666;font-weight:900`, uniform);
         const tabular = {};
         Object.keys(reference.props).filter(key => key.startsWith("$t_")).forEach(key => tabular[key] = reference.props[key]);
-        console.log(`%c [Zero] Tabular -> Ux.onDatum`, `color:#933;font-weight:900`, tabular);
+        console.log(`%c 「Zero」 Tabular -> Ux.onDatum`, `color:#933;font-weight:900`, tabular);
         const assist = {};
         Object.keys(reference.props).filter(key => key.startsWith("$a_")).forEach(key => assist[key] = reference.props[key]);
-        console.log(`%c [Zero] Assist -> Ux.onDatum`, `color:#693;font-weight:900`, assist);
+        console.log(`%c 「Zero」 Assist -> Ux.onDatum`, `color:#693;font-weight:900`, assist);
         if (reference.props.reference) {
-            console.log(`%c [Zero] Parent Ref -> Ux.onReference`, `color:#black;font-weight:900`, reference.props.reference);
+            console.log(`%c 「Zero」 Parent Ref -> Ux.onReference`, `color:#black;font-weight:900`, reference.props.reference);
         }
         const functions = {};
         Object.keys(reference.props).filter(key => U.isFunction(reference.props[key])).forEach(key => functions[key] = reference.props[key]);
-        console.log(`%c [Zero] Function -> `, `color:#060;font-weight:900`, functions);
-        console.log(`%c [Zero] Props -> `, `color:${color.props};font-weight:900`, reference.props);
+        console.log(`%c 「Zero」 Function -> `, `color:#060;font-weight:900`, functions);
+        console.log(`%c 「Zero」 Props -> `, `color:${color.props};font-weight:900`, reference.props);
         if (!stateless) {
-            console.log(`%c [Zero] State -> `, `color:${color.state};font-weight:900`, reference.state);
+            console.log(`%c 「Zero」 State -> `, `color:${color.state};font-weight:900`, reference.state);
         }
         console.groupEnd();
     }
@@ -129,12 +129,12 @@ const filters = (reference = {}, {
     input = {}, query = {}, filters = {}, cond
 }) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Filter] Filters Data Process`;
+        let message = `%c 「Zero」 [Filter] Filters Data Process`;
         console.groupCollapsed(message, "color:red;font-weight:900");
-        console.log(`%c [Zero] Input Query -> `, 'color:#009900;font-weight:900', input);
-        console.log(`%c [Zero] Prop Query -> `, 'color:#660099;font-weight:900', query);
-        console.log(`%c [Zero] Search Filter -> `, 'color:#0099FF;font-weight:900', filters);
-        console.log(`%c [Zero] Cond -> `, 'color:blue;font-weight:900', cond);
+        console.log(`%c 「Zero」 Input Query -> `, 'color:#009900;font-weight:900', input);
+        console.log(`%c 「Zero」 Prop Query -> `, 'color:#660099;font-weight:900', query);
+        console.log(`%c 「Zero」 Search Filter -> `, 'color:#0099FF;font-weight:900', filters);
+        console.log(`%c 「Zero」 Cond -> `, 'color:blue;font-weight:900', cond);
         console.groupEnd();
     }
 };
@@ -152,12 +152,12 @@ const sign = (uri, method, parameters, {
     seed, sig, secret
 }) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Sign] Sign with method ${method}. ( uri = ${uri})`;
+        let message = `%c 「Zero」 [Sign] Sign with method ${method}. ( uri = ${uri})`;
         console.groupCollapsed(message, "color:#CCCC33;font-weight:900");
-        console.log(`%c [Zero] Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
-        console.log(`%c [Zero] Seed -> `, 'color:#669966;font-weight:900', seed);
-        console.log(`%c [Zero] Secret -> `, 'color:blue;font-weight:900', secret);
-        console.log(`%c [Zero] Sig -> `, 'color:red;font-weight:900', sig);
+        console.log(`%c 「Zero」 Parameters -> `, 'color:#9999CC;font-weight:900', parameters);
+        console.log(`%c 「Zero」 Seed -> `, 'color:#669966;font-weight:900', seed);
+        console.log(`%c 「Zero」 Secret -> `, 'color:blue;font-weight:900', secret);
+        console.log(`%c 「Zero」 Sig -> `, 'color:red;font-weight:900', sig);
         console.groupEnd();
     }
 };
@@ -171,12 +171,12 @@ const sign = (uri, method, parameters, {
  */
 const request = (uri, method, parameters, token = '') => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
+        let message = `%c 「Zero」 [Ajax] Ajax request with method ${method}. ( uri = ${uri})`;
         const color = Cv.SIGN ? "#06C" : "#C03";
         console.groupCollapsed(message, `color:${color};font-weight:900`);
-        console.log(`%c [Zero] Parameters -> `, 'color:#669966;font-weight:900', parameters);
-        console.log(`%c [Zero] Uri -> `, 'color:#06C;font-weight:900', uri);
-        console.log(`%c [Zero] Token -> `, 'color:#339966;font-weight:900', token);
+        console.log(`%c 「Zero」 Parameters -> `, 'color:#669966;font-weight:900', parameters);
+        console.log(`%c 「Zero」 Uri -> `, 'color:#06C;font-weight:900', uri);
+        console.log(`%c 「Zero」 Token -> `, 'color:#339966;font-weight:900', token);
         console.groupEnd();
     }
 };
@@ -196,7 +196,7 @@ const response = (data, params, request = {}) => {
             url,
             headers,
         } = request;
-        let message = `%c [Zero] [Ajax] Ajax response got from ${url} with method. ${method}`;
+        let message = `%c 「Zero」 [Ajax] Ajax response got from ${url} with method. ${method}`;
         console.groupCollapsed(message, "color:#096;font-weight:900");
         const it = headers.entries();
         const headerData = {};
@@ -208,9 +208,9 @@ const response = (data, params, request = {}) => {
                 headerData[entry[0]] = entry[1];
             }
         } while (!item.done);
-        console.log(`%c [Zero] Headers -> `, 'color:#c93;font-weight:900', headerData);
-        console.log(`%c [Zero] Request -> `, 'color:#006699;font-weight:900', params);
-        console.log(`%c [Zero] Response -> `, 'color:#039;font-weight:900', data);
+        console.log(`%c 「Zero」 Headers -> `, 'color:#c93;font-weight:900', headerData);
+        console.log(`%c 「Zero」 Request -> `, 'color:#006699;font-weight:900', params);
+        console.log(`%c 「Zero」 Response -> `, 'color:#039;font-weight:900', data);
         console.groupEnd();
     }
     // For fetch api 专用
@@ -222,19 +222,19 @@ const response = (data, params, request = {}) => {
  * @param error
  */
 const error = (error) => {
-    let message = `%c [Zero] [Error] Error occurs got. status = ${error.status}, code = ${error.code}, brief = ${error.statusText}`;
+    let message = `%c 「Zero」 [Error] Error occurs got. status = ${error.status}, code = ${error.code}, brief = ${error.statusText}`;
     console.groupCollapsed(message, "color:red;font-weight:900");
-    console.log(`%c [Zero] Error message -> `, 'color:#ff0073;font-weight:900', error.message);
-    console.log(`%c [Zero] Read message -> `, 'color:#ee0033;font-weight:900', error.info);
+    console.log(`%c 「Zero」 Error message -> `, 'color:#ff0073;font-weight:900', error.message);
+    console.log(`%c 「Zero」 Read message -> `, 'color:#ee0033;font-weight:900', error.info);
     console.groupEnd();
 };
 const layout = (layoutType = {}, window, dft = true) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Layout] Layout Selector： label = ${layoutType.label}, key=${layoutType.key}`;
+        let message = `%c 「Zero」 [Layout] Layout Selector： label = ${layoutType.label}, key=${layoutType.key}`;
         console.groupCollapsed(message, "color:#7c8577;font-weight:900");
-        console.log(`%c [Zero] Window Parameter:`, "color:#006c54", window);
-        console.log(`%c [Zero] Layout Object information:`, "color:#769149", layoutType);
-        console.log(`%c [Zero] Layout Revert to default? default = `, dft ? "color:red" : "color:#d96c3", dft);
+        console.log(`%c 「Zero」 Window Parameter:`, "color:#006c54", window);
+        console.log(`%c 「Zero」 Layout Object information:`, "color:#769149", layoutType);
+        console.log(`%c 「Zero」 Layout Revert to default? default = `, dft ? "color:red" : "color:#d96c3", dft);
         console.groupEnd();
     }
 };
@@ -249,7 +249,7 @@ const render = (phase = 1, item = {}, key = {}) => {
     if (Cv.DEBUG && Cv.RENDER) {
         if (5 === phase) {
             // 开始打印
-            const message = `%c [Zero] [Render] Row Config --> ${key}`;
+            const message = `%c 「Zero」 [Render] Row Config --> ${key}`;
             console.log(message, "color:#39f;font-weight:900", item);
         } else if (4 === phase) {
             // 打印模板
@@ -261,16 +261,16 @@ const render = (phase = 1, item = {}, key = {}) => {
             // 打印字段
             if (item.optionItem) {
                 const mode = key ? `"Jsx"` : `"Hoc"`;
-                const message = `%c [Zero] [Render] (${mode}) name="${item.field}", label="${item.optionItem.label}"`;
+                const message = `%c 「Zero」 [Render] (${mode}) name="${item.field}", label="${item.optionItem.label}"`;
                 console.groupCollapsed(message, `color:#333;font-weight:900`);
-                console.log(`%c [Zero] Render mode: `, "color:#0c0", mode);
-                console.log(`%c [Zero] Field optionItem: `, "color:#06c", item.optionItem);
-                console.log(`%c [Zero] Field optionJsx：`, "color:#660", item.optionJsx);
+                console.log(`%c 「Zero」 Render mode: `, "color:#0c0", mode);
+                console.log(`%c 「Zero」 Field optionItem: `, "color:#06c", item.optionItem);
+                console.log(`%c 「Zero」 Field optionJsx：`, "color:#660", item.optionJsx);
                 console.groupEnd();
             }
         } else {
             // 开始打印
-            const message = `%c [Zero] [Render] Form configuration --> ${key}`;
+            const message = `%c 「Zero」 [Render] Form configuration --> ${key}`;
             console.groupCollapsed(message, "color:#0066CC;font-weight:900", item);
         }
     }
@@ -278,11 +278,11 @@ const render = (phase = 1, item = {}, key = {}) => {
 const mocker = (mockerRef, $query) => {
     if (Cv.DEBUG && Cv.MOCK) {
         const mocker = mockerRef.raw();
-        let message = `%c ------> [Zero] [Mock] mocker has been ${$query ? "filtered" : "initialized"}.`;
-        console.groupCollapsed(message, "color:red;font-weight:900");
-        console.log(`%c [Zero] Mocker Keys -> `, 'color:#ff0073;font-weight:900', mocker.keys);
-        console.log(`%c [Zero] Mocker Data -> `, 'color:#009900;font-weight:900', mocker.source);
-        console.log(`%c [Zero] Mocker Filter -> `, 'color:#0099FF;font-weight:900', $query);
+        let message = `%c ---> 「Zero」 Mocker has been ${$query ? "filtered" : "initialized"}.`;
+        console.groupCollapsed(message, "color:red;font-weight:100");
+        console.log(`%c 「Zero」 Mocker Keys -> `, 'color:#ff0073;font-weight:900', mocker.keys);
+        console.log(`%c 「Zero」 Mocker Data -> `, 'color:#009900;font-weight:900', mocker.source);
+        console.log(`%c 「Zero」 Mocker Filter -> `, 'color:#0099FF;font-weight:900', $query);
         console.groupEnd();
     }
 };
@@ -296,14 +296,14 @@ const mocker = (mockerRef, $query) => {
  */
 const mock = (request, response, url) => {
     if (Cv.DEBUG && Cv.MOCK) {
-        let message = `%c ------> [Zero] [Mock] Mock data for api ${url ? url : ""}`;
-        console.groupCollapsed(message, "color:white;background-color:#c30;font-weight:900;");
+        let message = `%c ---> 「Zero」Api ${url ? url : ""}`;
+        console.groupCollapsed(message, "color:white;background-color:#52c41a;font-weight:900;");
         if (request) {
-            console.log("%c [Zero] Mock request -> ", 'color:#99CC33', request);
+            console.log("%c 「Zero」 Mock request -> ", 'color:#99CC33', request);
         } else {
-            console.log("%c [Zero] Mock request -> ( Promise Mode Directly )", 'color:#99CC33');
+            console.log("%c 「Zero」 Mock request -> ( Promise Mode Directly )", 'color:#99CC33');
         }
-        console.log("%c [Zero] Mock response -> ", 'color:#0099FF', response);
+        console.log("%c 「Zero」 Mock response -> ", 'color:#0099FF', response);
         console.groupEnd();
     }
     return response;
@@ -315,20 +315,20 @@ const mock = (request, response, url) => {
  */
 const debug = (object, original) => {
     if (Cv.DEBUG) {
-        let message = `%c [Zero] [Redux] Debug Object`;
-        console.groupCollapsed(message, "color:#660099;font-weight:900");
+        let message = `%c 「Zero」 Redux Data Flow`;
+        console.groupCollapsed(message, "color:#09c;font-weight:100");
         if ("string" === typeof object) {
-            console.log("[Zero] Redux Key: ", object);
+            console.log("「Zero」 Redux Key: ", object);
         } else {
-            console.log("[Zero] Object Data: ", object);
+            console.log("「Zero」 Object Data: ", object);
         }
-        console.log("[Zero] Original Data: ", original);
+        console.log("「Zero」 Original Data: ", original);
         console.groupEnd();
     }
 };
 const connect = (id) => {
     if (Cv.DEBUG) {
-        let message = `%c -----> [Zero] Connect ..., id = ${id}`;
+        let message = `%c -----> 「Zero」 Connect ..., id = ${id}`;
         console.log(message, "color:#033;font-weight:900");
     }
 };

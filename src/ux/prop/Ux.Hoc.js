@@ -109,7 +109,7 @@ const toUniform = (props, ...keys) => {
         "user",     // 用户数据
         "profile",  // 账号数据
         "router",   // 路由数据
-        "parent",    // 主记录数据
+        "parent",   // 主记录数据
         "submitting"    // 防重复提交专用
     ].concat(keys);
     const common = toProp.apply(this, [props].concat(defaultProp));

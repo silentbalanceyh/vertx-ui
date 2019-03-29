@@ -11,7 +11,7 @@ const initPage = (reference) => (page) => {
         reference.setState({
             // 没选中组、线、节点
             selectedModel: {}
-        })
+        });
     });
     page.on('afterzoom', ev => {
         reference.setState({

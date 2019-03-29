@@ -1,4 +1,5 @@
 import Value from '../Ux.Value';
+import ECONOMY from './Ux.Economy';
 
 const $env = Value.clone(process.env);
 for (const key in $env) {
@@ -40,6 +41,7 @@ export default {
         PUT: "put",
         DELETE: "delete"
     },
+    ECONOMY,
     MIMES: {
         JSON: "application/json",
         MULTIPART: "multipart/form-data",

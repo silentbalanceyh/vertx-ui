@@ -4,6 +4,7 @@ export {default as Navigator} from "./flow/Navigator";
 
 export {default as DataObject} from "./data/DataObject";
 export {default as DataArray} from "./data/DataArray";
+export {default as DataEvent} from "./data/DataEvent";
 export {default as DataRouter} from "./flow/DataRouter";
 export {default as DataLabor} from "./DataLabor";
 

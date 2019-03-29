@@ -2,6 +2,7 @@ import DataContainer from "./DataContainer";
 import DataArray from './DataArray';
 import * as Immutable from 'immutable';
 import * as U from 'underscore';
+import Ux from 'ux';
 
 const extractData = (original: any, key: any) => {
     let keys: any = [];
@@ -25,7 +26,7 @@ const extractData = (original: any, key: any) => {
 
 class DataObject implements DataContainer {
     ready: boolean = false;
-    private data: any = {};
+    data: any = {};
 
     constructor(data: Object) {
         this.data = data;
@@ -38,7 +39,7 @@ class DataObject implements DataContainer {
                 this.data.uniqueId) {
                 this.data.key = this.data.uniqueId;
             }
-            return Immutable.fromJS(this.data).toJS();
+            return Ux.clone(this.data);
         } else {
             console.warn(
                 `[TS-VI] DataObject -> The data is not the latest, 'ready' flat is ${this
@@ -57,6 +58,10 @@ class DataObject implements DataContainer {
         } else {
             return this.ready;
         }
+    }
+
+    isEmpty(): boolean {
+        return Ux.isEmpty(this.data);
     }
 
     raw(): Object {

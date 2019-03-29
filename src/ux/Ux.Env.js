@@ -5,6 +5,7 @@ import {Set} from 'immutable';
 import routeData from '../route';
 import Random from './util/Ux.Random';
 import Dg from './Ux.Debug';
+// 常量绑定
 import Cv from './cv/Ux.Constant';
 import Symbols from './cv/Ux.Symbol';
 import AiStream from './stream/Ai.Stream';
@@ -73,6 +74,8 @@ export default {
     Null: null,
     // 环境变量专用
     Env: Cv,
+    // 自定义组件专用风格
+    ECONOMY: Cv.ECONOMY,
     fnOut: Taper.fnFlush,
     // 各种常量信息
     ...Symbols,
@@ -140,4 +143,5 @@ export default {
     auiTable: (reference) => new AiStream(reference).table().init(),
     // 专用CRUD的Mock
     mockCrud: (reference) => new AiStream(reference).mock().init(),
+    mockIr: () => new AiStream().mock(),
 };

@@ -1,6 +1,7 @@
 import DataObject from "./data/DataObject";
 import DataContainer from "./data/DataContainer";
 import DataArray from "./data/DataArray";
+import DataEvent from "./data/DataEvent";
 import DataTree from './data/DataTree';
 import DataRouter from "./flow/DataRouter";
 import Navigator from "./flow/Navigator";
@@ -39,6 +40,10 @@ class DataLabor {
 
     static getArray(input: Array<Object>): DataArray {
         return new DataArray(input);
+    }
+
+    static getEvent(source: any, target: any): DataEvent {
+        return new DataEvent(source, target);
     }
 
     static getTree(input: Array<Object>, meta: any = {}): DataTree {

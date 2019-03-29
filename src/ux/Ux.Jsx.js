@@ -112,7 +112,7 @@ const uiFieldForm = (reference = {}, renders = {}, column = 4, values, config = 
         // 两列修正
         const {window} = $config;
         if (0.5 === window) column = 2;
-        const className = form.className ? form.className : "page-form";
+        const className = form.className ? form.className : "web-form";
         return (
             <Form layout={"inline"} className={className}>
                 {jsxFieldGrid(reference, renders, column, processed, $config)}

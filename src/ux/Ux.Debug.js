@@ -71,7 +71,7 @@ const dgScript = (ux = {}, Cv = {}) => {
  */
 const dgRouter = (Ux, container, component) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        console.groupCollapsed("[Zero] UI Component Report:");
+        console.groupCollapsed("%c 「Zero」 UI Component Report:", "font-weight:900;color:#369");
         console.info("[Ux] Container = ", container);
         console.info("[Ux] Component = ", component);
         console.groupEnd();
@@ -95,7 +95,7 @@ const dgMonitor = (data, second) => {
 };
 const dgDebug = (data, prefix) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, "color:white;background-color:#c30;font-weight:900;",
+        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, "color:white;background-color:#eb2f96;font-weight:900;",
             data);
     }
     return data;
@@ -144,7 +144,7 @@ const _reportOther = (lib, kv) => {
  */
 const dgReport = (data, prefix = [], library = []) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        console.groupCollapsed(`%c [Zero] Zero UI Framework / Tool Report ( Ux )`, "font-weight:900;color:#369");
+        console.groupCollapsed(`%c 「Zero」 Zero UI Framework / Tool Report ( Ux )`, "font-weight:900;color:#369");
         prefix.forEach((item, index) => {
             const kv = item.split(',');
             const lib = library[index];

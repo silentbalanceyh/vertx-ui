@@ -1,6 +1,5 @@
 import DataContainer from './DataContainer';
 import Ux from 'ux';
-import {isArray} from "rxjs/util/isArray";
 import * as Immutable from 'immutable';
 import * as U from 'underscore';
 
@@ -122,7 +121,7 @@ class DataArray implements DataContainer {
         if (this.data && key) {
             // 处理更新功能
             const dataArray = JSON.parse(this.data).filter(item => item[idField] === key);
-            if (isArray(dataArray) && 1 === dataArray.length) {
+            if (U.isArray(dataArray) && 1 === dataArray.length) {
                 result = dataArray[0];
             }
         }
@@ -137,7 +136,7 @@ class DataArray implements DataContainer {
         if (key) {
             // 处理删除功能
             const dataArray = JSON.parse(this.data).filter(item => item[idField] !== key);
-            if (isArray(dataArray)) {
+            if (U.isArray(dataArray)) {
                 this.setValue(dataArray);
             }
         }

@@ -8,7 +8,7 @@ const _renderDetail = (type, flag, config = {}, Component) => {
                 <div className="panel-title">{title}</div>
                 {Component ? <Component/> : false}
             </div>
-        )
+        );
     } else return false;
 };
 
@@ -24,4 +24,4 @@ export default {
     renderNode,
     renderEdge,
     renderGroup
-}
+};

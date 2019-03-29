@@ -5,19 +5,23 @@ import E from '../Ux.Error';
 
 class Stream {
     constructor(reference) {
-        E.fxTerminal(!reference, 10049, reference);
         this.reference = reference;
     }
 
     tabs() {
-        return new Tab(this.reference);
+        const reference = this.reference;
+        E.fxTerminal(!reference, 10049, reference);
+        return new Tab(reference);
     }
 
     table() {
-        return new Table(this.reference);
+        const reference = this.reference;
+        E.fxTerminal(!reference, 10049, reference);
+        return new Table(reference);
     }
 
     mock() {
+        // Mock可以跳过
         return new Mock(this.reference);
     }
 }

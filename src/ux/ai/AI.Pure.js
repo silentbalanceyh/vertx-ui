@@ -47,7 +47,7 @@ const aiBreadcrumb = (items = [], rest = {}, config = {}) => (
     </Breadcrumb>
 );
 const aiMenuTop = (menus = [], rest = {}, config = {}) => (
-    <Menu className="top-menu" onClick={config.onClick} {...rest}>
+    <Menu onClick={config.onClick} {...rest}>
         {menus.map(item => item.divide ? (
             <Menu.Divider key={item.key}/>
         ) : (
