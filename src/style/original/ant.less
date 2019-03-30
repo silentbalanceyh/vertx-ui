@@ -1,4 +1,6 @@
-@import '../colorful';
+.kid-invert {
+    color: white !important;
+}
 
 .vi-red {
     color: red;
@@ -11,20 +13,16 @@ input[readonly] {
 .rx-readonly {
     input[readonly] {
         background-color: white;
-
         &:hover {
             cursor: pointer;
         }
     }
-
     input[disabled] {
         background-color: @color-readonly;
-
         &:hover {
             cursor: not-allowed;
         }
     }
-
     i:hover {
         cursor: pointer;
     }
@@ -65,16 +63,10 @@ form {
         top: -27px;
         display: none;
     }
-}
 
-.rx-content {
-    background-color: lightcyan !important;
-}
-
-.ant-menu {
-    background-color: @color-default !important;
-}
-
-.menu-sider {
-    background-color: @color-logo !important;
+    .ant-form-item-control {
+        .ant-time-picker-input {
+            min-width: 80% !important;
+        }
+    }
 }

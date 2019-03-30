@@ -23,6 +23,35 @@ const limitNumber = length => value => {
     }
     return value;
 };
+const limitPInteger = length => value => {
+    if (value) {
+        // 正整数限制
+        value = value.toString();
+        if (1 === value.length) {
+            value = value.replace(/[^1-9]/g, "");
+        } else {
+            value = value.replace(/\D/g, "");
+        }
+        // 长度限制
+        if (0 < length) {
+            if (length < value.length) {
+                value = value.substring(0, length);
+            }
+        }
+    }
+    return value;
+};
+const limitLength = length => value => {
+    if (value) {
+        // 长度限制
+        if (0 < length) {
+            if (length < value.length) {
+                value = value.substring(0, length);
+            }
+        }
+    }
+    return value;
+};
 const limitDecimal = (length, scale = 2) => value => {
     if (value) {
         // 2.正数输入限制
@@ -45,7 +74,9 @@ const limitDecimal = (length, scale = 2) => value => {
 };
 const normalizer = {
     decimal: limitDecimal,
-    number: limitNumber
+    number: limitNumber,
+    integer: limitPInteger,
+    length: limitLength
 };
 const mountNormalizer = (reference, item = {}) => {
     if (item.optionConfig && item.optionConfig.normalize) {
