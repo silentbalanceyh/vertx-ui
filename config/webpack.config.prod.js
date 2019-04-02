@@ -279,7 +279,7 @@ module.exports = {
                         options: {
                             javascriptEnabled: true,
                             modifyVars: {
-                                "@primary-color": "#3457e2",
+                                "@primary-color": process.env.Z_CSS_COLOR,
                                 "@app": process.env.Z_CSS_PREFIX
                             }
                         }
