@@ -3,6 +3,7 @@ import Ux from 'ux';
 import {Icon, Input, Table} from "antd";
 import {DynamicDialog} from "web";
 import Op from './Op';
+import '../../../global.less';
 
 class Component extends React.PureComponent {
 
@@ -22,18 +23,20 @@ class Component extends React.PureComponent {
         const attr = Ux.valueFlip(jsx);
         return (
             <span>
-                <Input className="rx-readonly"
+                <Input className="ux-readonly"
                        readOnly {...attr}
                        suffix={<Icon type="search" onClick={onClick}/>}/>
-                <DynamicDialog className="rx-list-dialog"
+                <DynamicDialog className="web-dialog"
+                               size={"small"}
                                $visible={this.state.$visible}   // 窗口是否开启
                                $dialog={dialog}>
                         <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
-                               size={"small"}
                                loading={this.state.$loading}
                                {...config.table} // 原始配置信息
                                {...table} // 处理过的表格信息
                                {...pageAndChange} // 处理分页处理
+                               bordered={false}
+                               className={"web-table"}
                                dataSource={$data.list}/>
                 </DynamicDialog>
             </span>

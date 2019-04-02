@@ -31,3 +31,20 @@
         .ix-op.width(@max, @i + 20)
     }
 }
+
+.ix-serial {
+    .width(@max, @i: 20) when (@i =< @max) {
+        .ux-serial {
+            &-@{i} {
+                text-align: center;
+                padding: 3px 12px !important;
+                width: unit(@i, px) !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: unit(@i, px);
+            }
+        }
+        .ix-serial.width(@max, @i + 20)
+    }
+}

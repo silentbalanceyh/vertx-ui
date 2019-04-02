@@ -122,7 +122,7 @@ export default {
         },
         (attrs = {}, reference, params = {}, channel = {}) => {
             attrs.onChange = channel.fnChange(params.index);
-            attrs.className = "rx-readonly";
+            attrs.className = "ux-readonly";
             Aid.outDate(attrs, reference, params);
         },
         (attrs = {}) => (<DatePicker {...attrs}/>)

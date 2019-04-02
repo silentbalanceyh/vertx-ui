@@ -28,7 +28,7 @@
     height: 38px !important;
 }
 
-.ix-table(@cell) {
+.ix-table(@cell, @empty) {
     // 普通 <Table/>
     table {
         thead > tr > th {
@@ -40,6 +40,9 @@
             padding-top: @cell;
             padding-bottom: @cell;
         }
+    }
+    .ant-empty {
+        margin: @empty 0 !important;
     }
 }
 
@@ -59,4 +62,12 @@
 .ix-form(@rowHeight) {
     // 每一行
     .ix-form-row.each(@rowHeight, 24);
+}
+
+.ix-dialog(@bodyPadding) {
+    .ant-modal {
+        &-body {
+            padding: @bodyPadding !important;
+        }
+    }
 }

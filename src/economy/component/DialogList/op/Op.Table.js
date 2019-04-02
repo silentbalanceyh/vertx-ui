@@ -24,6 +24,10 @@ const initTable = (reference) => {
     if (table.columns) {
         table.columns = _initColumns(reference, table.columns);
     }
+    if (table && !table.hasOwnProperty('className')) {
+        // Dialog List自适应布局修正
+        table.className = "web-table";
+    }
     // 数据读取
     const data = Ux.itemTable(reference);
     return {table, data};

@@ -15,8 +15,8 @@ const onClickBack = (reference, topbar) => (event) => {
 
 const renderBack = (ref, topbar) => {
     const reference = Ux.onReference(ref, 1);
-    return (<Button icon={"close"} shape="circle" type={"ghost"}
-                    className={"zero-extra-button"}
+    return (<Button icon={"close"} shape="circle"
+                    className={"ux-extra"}
                     onClick={onClickBack(reference, topbar)}/>);
 };
 const _applyLoading = (item, props = {}) => {

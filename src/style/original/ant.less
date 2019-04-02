@@ -10,19 +10,23 @@ input[readonly] {
     background-color: rgba(200, 202, 203, 0.29);
 }
 
-.rx-readonly {
+.ux-readonly {
     input[readonly] {
         background-color: white;
+
         &:hover {
             cursor: pointer;
         }
     }
+
     input[disabled] {
         background-color: @color-readonly;
+
         &:hover {
             cursor: not-allowed;
         }
     }
+
     i:hover {
         cursor: pointer;
     }
@@ -51,7 +55,7 @@ input[readonly] {
     display: none !important;
 }
 
-.rx-list-dialog {
+.web-dialog {
     .ant-modal-body {
         padding: 12px !important;
     }

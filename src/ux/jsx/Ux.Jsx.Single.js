@@ -60,7 +60,7 @@ const jsxItem = (reference, item = {}, render) => {
 const jsxTitle = (item = {}) => {
     const key = item.key ? item.key : Random.randomString(16);
     return (
-        <Col className={item.className ? item.className : "page-title"}
+        <Col className={item.className ? item.className : "ux-title"}
              key={key} span={item.span ? item.span : 24}>
             {/** 只渲染Title **/}
             {item.title}
@@ -68,7 +68,7 @@ const jsxTitle = (item = {}) => {
     );
 };
 const jsxGrid = (item = {}) => (
-    <Col className={item.className ? item.className : "page-title"}
+    <Col className={item.className ? item.className : "ux-title"}
          key={item.field} span={item.span ? item.span : 24}
          style={item.style ? item.style : {}}>
         {/** 只渲染Title **/}

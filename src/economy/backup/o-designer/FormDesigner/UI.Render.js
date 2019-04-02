@@ -28,7 +28,7 @@ const webTimePicker = (pointer, column) => _itemRender(pointer, column, (
     <TimePicker/>
 ));
 const webDatePicker = (pointer, column) => _itemRender(pointer, column, (
-    <DatePicker className={"rx-readonly"}/>
+    <DatePicker className={"ux-readonly"}/>
 ));
 const webInput = (pointer, column) => _itemRender(pointer, column, (
     <Input/>

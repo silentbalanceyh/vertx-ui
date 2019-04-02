@@ -108,7 +108,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     // 处理readOnly
     RxAnt.onReadOnly(jsx, true, reference);
-    return (<DatePicker {...jsx} className={"rx-readonly"}/>);
+    return (<DatePicker {...jsx} className={"ux-readonly"}/>);
 };
 
 const aiTimePicker = (reference, jsx = {}, onChange) => {

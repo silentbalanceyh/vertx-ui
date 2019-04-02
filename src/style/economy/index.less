@@ -3,11 +3,17 @@
 @import "./Grid.less";
 @import "./Table.less";
 @import "./Form.less";
+@import "./Dialog.less";
+@import "../zero.less";
 // PageCard / HelpCard
 .web {
     &-card {
         .web-card-fit;
         background: @component-background;
+
+        .ux-extra {
+            float: right;
+        }
     }
 
     &-tab {
@@ -46,5 +52,9 @@
             top: -27px;
             display: none;
         }
+    }
+
+    &-dialog {
+        .web-dialog-fit;
     }
 }

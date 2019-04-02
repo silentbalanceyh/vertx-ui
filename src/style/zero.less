@@ -1,11 +1,15 @@
-@import "./colorful.less";
-@import "./infix/index.less";
+@import "colorful.less";
+@import "infix/index.less";
 // 绿按钮
 .ix-button(success, @button-success, @button-success-hover);
 // 红按钮
 .ix-button(red, @button-failure, @button-failure-hover);
-// 列处理，20, 40, 80, 100, 120, 140, 160
-.ix-column.width(160); // 特殊列（直接设置列宽）
-.ix-column.min-width(160); // 特殊列（直接设置列最小宽度）
+// 返回按钮
+.ix-button(extra, @button-failure, @button-failure-hover);
+// 列处理，20 - 240
+.ix-column.width(240); // 特殊列（直接设置列宽）
+.ix-column.min-width(240); // 特殊列（直接设置列最小宽度）
 // 列处理
-.ix-op.width(160); // 特殊处理
+.ix-op.width(240); // 特殊处理
+// 单据列处理, 20 - 240
+.ix-serial.width(240);

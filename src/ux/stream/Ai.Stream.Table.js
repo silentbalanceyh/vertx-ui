@@ -5,6 +5,7 @@ import Ai from "../ai/AI";
 import Meta from './Ai.Stream.Table.json';
 import U from 'underscore';
 import Value from '../Ux.Value';
+import Debug from '../Ux.Debug';
 
 class Table {
     constructor(reference) {
@@ -76,6 +77,7 @@ class Table {
     to(dataSource = []) {
         Sure.ensureStream(this);
         const configRef = this.config;
+        Debug.dgDebug(configRef, "[Ux] Stream Table:");
         return Ai.aiTable.apply(null, [dataSource, configRef]);
     }
 }
