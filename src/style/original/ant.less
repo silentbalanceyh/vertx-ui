@@ -1,3 +1,5 @@
+@import '../colorful';
+
 .kid-invert {
     color: white !important;
 }
@@ -10,7 +12,7 @@ input[readonly] {
     background-color: rgba(200, 202, 203, 0.29);
 }
 
-.ux-readonly {
+.rx-readonly {
     input[readonly] {
         background-color: white;
 
@@ -55,7 +57,7 @@ input[readonly] {
     display: none !important;
 }
 
-.web-dialog {
+.rx-list-dialog {
     .ant-modal-body {
         padding: 12px !important;
     }
@@ -67,10 +69,16 @@ form {
         top: -27px;
         display: none;
     }
+}
 
-    .ant-form-item-control {
-        .ant-time-picker-input {
-            min-width: 80% !important;
-        }
-    }
+.rx-content {
+    background-color: lightcyan !important;
+}
+
+.ant-menu {
+    background-color: @color-default !important;
+}
+
+.menu-sider {
+    background-color: @color-logo !important;
 }

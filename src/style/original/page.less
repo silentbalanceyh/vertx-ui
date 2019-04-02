@@ -1,16 +1,14 @@
 @import "../../../node_modules/antd/lib/style/themes/default.less";
-@import "../colorful.less";
-@import "button.less";
 
 @page-prefix: page;
 .@{page-prefix}-header {
-    margin-top: 5px;
+    //margin-top: 5px;
     background: @component-background;
-    padding: 16px 32px 16px 32px;
+    padding: 12px 24px 0 24px;
     border-bottom: @border-width-base @border-style-base @border-color-split;
 
     .breadcrumb {
-        margin-bottom: 16px;
+        margin-bottom: 12px;
     }
 }
 
@@ -40,23 +38,37 @@
     }
 }
 
-.@{page-prefix}-card {
-    margin: 12px 12px 0;
-    background: @component-background;
-    padding-bottom: 5em;
+.form-col-modify {
+    .ant-col-1, .ant-col-2, .ant-col-3, .ant-col-4,
+    .ant-col-5, .ant-col-6, .ant-col-7, .ant-col-8,
+    .ant-col-9, .ant-col-10, .ant-col-11, .ant-col-12,
+    .ant-col-13, .ant-col-14, .ant-col-15, .ant-col-16,
+    .ant-col-7, .ant-col-18, .ant-col-19, .ant-col-20,
+    .ant-col-21, .ant-col-22, .ant-col-23, .ant-col-24 {
+        margin-top: 4px !important;
 
-    .ant-card-body {
-        padding: 6px 6px 12px 6px;
-    }
-
-    .ant-card-head {
-        .ant-card-extra {
-            padding: 12px 0 !important;
+        .ant-form-item {
+            margin-bottom: 0 !important;
         }
     }
+}
 
-    .ant-card-head-title {
-        padding: 12px 0;
+.@{page-prefix}-topbar {
+    padding: 6px !important;
+}
+
+.@{page-prefix}-card {
+    //margin: 24px 24px 0;
+    margin: 12px 12px 0;
+    background: @component-background;
+    padding-bottom: 50px;
+
+    :global {
+        .page-ant-modify;
+
+        .ant-card-body {
+            padding: 6px 12px !important;
+        }
     }
 }
 
@@ -74,30 +86,43 @@
     }
 }
 
+.@{page-prefix}-card-subtab {
+    margin: 12px 0 0 0 !important;
+}
+
+.@{page-prefix}-upcard {
+    //margin: 24px 24px 0;
+    margin: 12px 12px 0;
+    background: @component-background;
+    padding-bottom: 50px;
+
+    :global {
+        .page-ant-modify;
+
+        .ant-card-body {
+            padding: 0 12px !important;
+        }
+    }
+}
+
 .@{page-prefix}-left-card {
-    margin: 12px 6px 0 12px;
-    border: none;
+    margin: 24px 12px 0 24px;
     background: @component-background;
 }
 
 .@{page-prefix}-right-card {
-    margin: 12px 12px 0 6px;
-    border: none;
+    margin: 24px 24px 0 12px;
     background: @component-background;
 }
 
 .@{page-prefix}-tabcard {
-    margin: 12px 12px 0;
+    margin: 24px 24px 0;
     background: @component-background;
 
     .ant-tabs-tab {
         margin-left: 16px;
         margin-right: 16px;
         padding-top: 16px;
-    }
-
-    .ant-card-head-title {
-        padding-top: 12px;
     }
 
     :global {
@@ -115,8 +140,10 @@
 .@{page-prefix}-pagelist {
     margin-top: 15px;
 
-    .ant-table-pagination {
-        margin-top: 24px;
+    :global {
+        .ant-table-pagination {
+            margin-top: 12px;
+        }
     }
 
     .@{page-prefix}-alert {
@@ -124,7 +151,8 @@
     }
 
     .@{page-prefix}-op {
-        margin-bottom: 16px;
+        margin-bottom: 6px;
+        min-height: 32px;
 
         button {
             margin-right: 8px;
@@ -134,19 +162,28 @@
 
 .@{page-prefix}-flag {
     text-align: center;
-    font-size: 100px;
-    font-weight: 800;
+    font-size: 86px;
+    font-weight: 600;
+    font-family: "SimHei";
     color: transparent;
     background-color: @color-flag-major;
     text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px, rgba(255, 255, 255, 0.2) 1px 3px 3px;
     -webkit-background-clip: text;
-    border-radius: 40px;
+    border-radius: 25px;
     border-left: solid 1px @color-flag-bg;
     border-top: solid 1px @color-flag-bg;
     box-shadow: 5px 5px 3px @color-flag-bg;
 }
 
 .@{page-prefix}-form {
+    .form-col-modify;
+
+    button {
+        margin-right: 10px;
+    }
+}
+
+.@{page-prefix}-filter {
     .ant-col-1, .ant-col-2, .ant-col-3, .ant-col-4,
     .ant-col-5, .ant-col-6, .ant-col-7, .ant-col-8,
     .ant-col-9, .ant-col-10, .ant-col-11, .ant-col-12,
@@ -157,20 +194,33 @@
 
         .ant-form-item {
             margin-bottom: 0 !important;
+            min-height: 48px !important;
+        }
+
+        .ant-checkbox-inner {
+            margin-top: 6px !important;
+        }
+
+        .input {
+            margin-top: 6px !important;
         }
     }
+}
 
-    button {
-        margin-top: 8px;
-        margin-right: 10px;
+.clear-border {
+    border-radius: 0 !important;
+    border-top: none !important;
+    border-left: none !important;
+    border-right: none !important;
+}
+
+.@{page-prefix}-ufform {
+    input {
+        .clear-border;
     }
 
-    .ant-btn-group {
-        min-height: 48px;
-
-        button {
-            margin-right: 0 !important;
-        }
+    .ant-input-group-addon {
+        .clear-border;
     }
 }
 
@@ -180,8 +230,8 @@
     line-height: 36px;
     font-size: 16px;
     color: black;
-    padding-left: 6px;
-    margin-bottom: 6px;
+    padding-left: 10px;
+    margin-bottom: 10px;
     margin-top: 6px;
     background: -moz-linear-gradient(left, @color-title 0%, white 100%);
     background: -webkit-linear-gradient(left, @color-title 0%, white 100%);
@@ -190,35 +240,8 @@
     background: linear-gradient(to right, @color-title 0%, white 100%);
 }
 
-.error-page {
-    width: 98%;
-    height: 100%;
-    color: red;
-    padding: 1%;
-    margin: 10px;
-    background-color: #fdf2f4;
-    border: solid 1px red;
-    border-radius: 5px;
-    min-height: 200px;
-}
-
-.z-color-red {
-    color: @color-red;
-}
-
-.z-color-green {
-    color: @button-success;
-}
-
-.z-color-blue {
-    color: @color-flag-major;
-}
-
-.z-cell-right {
-    text-align: right !important;
-}
-
 .@{page-prefix}-view-header {
+    padding-right: 15%;
     height: 48px;
     line-height: 48px;
     font-size: 28px;
@@ -232,101 +255,25 @@
 
 .@{page-prefix}-view {
     padding-top: 6px;
-    padding-left: 2%;
-    padding-right: 2%;
-    line-height: 24px;
-
-    &-title {
-        width: 100%;
-        height: 36px;
-        line-height: 36px;
-        font-size: 16px;
-        color: black;
-        padding-left: 10px;
-        margin-bottom: 10px;
-        margin-top: 6px;
-    }
-
-    &-header {
-        height: 48px;
-        line-height: 48px;
-        font-size: 28px;
-        font-weight: 900;
-        color: black;
-        padding-left: 10px;
-        margin-bottom: 10px;
-        margin-top: 6px;
-        text-align: center;
-    }
-
-    &-ul {
-        padding: 0 !important;
-        margin: 0 !important;
-
-        li {
-            list-style: none !important;
-            display: inline-block;
-            width: 100%;
-            min-height: 36px;
-            line-height: 36px !important;
-            float: left;
-
-            &:last-child {
-                border-bottom: 0 !important;
-            }
-        }
-    }
-
-    li {
-        list-style: none !important;
-        line-height: 36px !important;
-        float: left;
-
-        &:last-child {
-            border-bottom: 0 !important;
-        }
-    }
-
-    &-download {
-        font-size: 16px;
-        font-weight: 900;
-    }
-
-    &-table {
-        .ant-table-body {
-            th {
-                padding: 6px;
-            }
-
-            td {
-                padding: 6px;
-            }
-        }
-    }
-}
-
-.@{page-prefix}-row-help {
-    padding: 24px 5% !important;
-}
-
-.@{page-prefix}-order-help {
-    padding: 12px 5% 24px 5% !important;
+    padding-left: 3%;
+    padding-right: 3%;
+    line-height: 22px;
 }
 
 .@{page-prefix}-viewsub {
     padding-top: 6px;
-    line-height: 24px;
+    line-height: 22px;
 }
 
 .@{page-prefix}-view-table {
     :global {
         .ant-table-body {
             th {
-                padding: 8px !important;
+                padding: 6px !important;
             }
 
             td {
-                padding: 8px !important;
+                padding: 6px !important;
             }
         }
     }
@@ -344,53 +291,16 @@
     min-height: 200px;
 }
 
-.magic-view-item {
-    text-align: left;
-    padding-left: 11px;
+.web-button {
+    button {
+        margin-right: 0 !important;
+    }
 }
 
-.zero {
-    &-extra {
-        &-button {
-            .ux-red;
-            float: right;
-        }
-    }
-
-    &-column {
-        &-width {
-            &-166 {
-                width: 16%;
-            }
-
-            &-19 {
-                width: 19%;
-            }
-
-            &-min {
-                &-60 {
-                    width: 60px;
-                }
-
-                &-90 {
-                    width: 90px;
-                }
-
-                &-160 {
-                    width: 160px;
-                }
-            }
-        }
-
-        &-title {
-            &-footer {
-                font-size: 16px;
-                color: black;
-
-                button {
-                    display: none;
-                }
-            }
-        }
-    }
+.demo-window {
+    border: dashed 1px #666;
+    background-color: #666;
+    padding: 0 0 24px 0;
+    border-radius: 5px;
+    min-height: 600px;
 }
