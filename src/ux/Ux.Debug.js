@@ -93,9 +93,9 @@ const dgMonitor = (data, second) => {
     }
     return data;
 };
-const dgDebug = (data, prefix) => {
+const dgDebug = (data, prefix, color) => {
     if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
-        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, "color:white;background-color:#eb2f96;font-weight:900;",
+        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, `color:white;background-color:${color ? color : "#eb2f96"};font-weight:900;`,
             data);
     }
     return data;

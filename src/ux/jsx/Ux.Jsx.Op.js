@@ -1,5 +1,5 @@
 import React from "react";
-import {Button} from 'antd';
+import {Button, Tooltip} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
 import Value from '../Ux.Value';
@@ -203,15 +203,42 @@ const rtNorm = (reference, jsx = {}) => {
     );
 };
 const rtPure = (reference, jsx = {}) => {
-    const {onClick, text, type = "primary", ...rest} = jsx;
+    const {onClick, text, type = "primary", tips, ...rest} = jsx;
     Ux.E.fxTerminal(!onClick, 10017, onClick);
     let executor = U.isFunction(onClick) ?
         onClick : () => Ux.E.fxTerminal(true, 10017, onClick);
-    return (
+    const fnRender = () => (
         <Button {...rest} onClick={executor} type={type}>
             {text ? text : false}
         </Button>
     );
+    const attrs = {};
+    if (tips) {
+        attrs.key = rest.key;
+        if ("string" === typeof tips) {
+            attrs.title = tips;
+            attrs.placement = "top";
+        } else {
+            Object.assign(attrs, tips);
+        }
+    }
+    return tips ? (
+        <Tooltip {...attrs}>
+            {fnRender()}
+        </Tooltip>
+    ) : fnRender()
+};
+const rtGroup = (reference, items = [], rest = {}) => {
+    return (
+        <Button.Group {...rest}>
+            {items.map(item => {
+                if (!item.hasOwnProperty('key')) {
+                    item.key = Ux.randomUUID();
+                }
+                return rtPure(reference, item);
+            })}
+        </Button.Group>
+    )
 };
 const rtDirect = (reference, jsx = {}) => {
     if (jsx.hasOwnProperty("direct")) {
@@ -262,6 +289,8 @@ const rtLink = (reference, metadata = {}) => {
 export default {
     // Pure的另外一种模式
     rtDirect,
+    // 分组专用按钮
+    rtGroup,
     // 纯按钮
     rtPure,
     // 重置按钮专用
