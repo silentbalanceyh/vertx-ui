@@ -1,97 +1,96 @@
-@import "~antd/lib/style/themes/default.less";
+@import "infix/index";
 
-.zero-debug {
-    &-tool {
-        width: 100%;
-        position: fixed;
-        z-index: 1100;
-        background-color: #fefefe;
-        padding: 2px;
-        bottom: 0;
-    }
-    &-error {
-        width: 100%;
-        background-color: #fdf1f0;
-        border: solid 1px #f2a7a1;
-        border-radius: 3px;
-        padding: 10px;
-        ul li {
-            list-style: none;
-            line-height: 32px;
+.zero {
+    &-debug {
+        // 调试工具栏
+        &-tool {
+            .ix-box.in(1px, 100%);
+            .ix-pos.fixed(1100);
+            bottom: 0;
         }
-        ul li:first-child {
-            font-size: 16px;
-            font-weight: 700;
-            color: red;
-        }
-    }
-    &-drawer {
-        .ant-drawer-body {
-            height: 400px !important;
-            overflow-y: auto;
-            padding: 3px !important;
-            table {
-                th {
-                    padding: 6px 16px !important;
-                }
-                td {
-                    padding: 6px 16px !important;
+
+        // 调试错误窗口
+        &-error {
+            .ix-box.in(10px, 100%);
+            .ix-border.round(#f2a7a1, 3, #fdf1f0);
+
+            ul {
+                .ix-list.none(32);
+
+                li:first-child {
+                    .ix-font.bold(16, red);
                 }
             }
-            .ant-table-empty {
-                .ant-table-placeholder {
+        }
+
+        // 调试抽屉信息
+        &-drawer {
+            // 重写 ant-drawer-body部分
+            .ant-drawer-body {
+                height: 400px !important;
+                overflow-y: auto;
+                padding: 3px !important;
+
+                table {
+                    th {
+                        padding: 6px 16px !important;
+                    }
+
+                    td {
+                        padding: 6px 16px !important;
+                        // 自定义表格列
+                        .column {
+                            &-input {
+                                color: #c33;
+                            }
+
+                            &-name {
+                                color: #333;
+                                font-weight: 700;
+                            }
+
+                            &-value {
+                                max-width: 300px;
+                            }
+                        }
+                    }
+                }
+
+                .ant-table-empty > .ant-table-placeholder {
                     padding: 6px 16px !important;
                 }
             }
-            .column-input {
-                color: #c33;
+        }
+
+        // 调试框中的按钮
+        &-button {
+            button {
+                .ix-box.in-v(2, 2);
+
+                i {
+                    font-size: 18px;
+                }
+
+                &:hover > i {
+                    color: #3457e2;
+                }
+
+                &:disabled > i {
+                    color: #b7b7b7;
+                }
             }
-            .column-name {
-                color: #333;
-                font-weight: 700;
+
+            // 工具栏按钮中的 i 颜色处理
+            .colorful(@list, @i:1) when (@i < length(@list)) {
+                .zbt-@{i} > i {
+                    color: extract(@list, @i);
+                }
+                .colorful(@list, @i + 1);
             }
-            .column-value {
-                max-width: 300px;
-            }
-        }
-    }
-    &-button {
-        button {
-            padding-top: 2px;
-            padding-bottom: 2px;
-        }
-        button > i {
-            font-size: 18px;
-        }
-        .zbt-1 > i {
-            color: #c03
-        }
-        .zbt-2 > i {
-            color: #633
-        }
-        .zbt-3 > i {
-            color: #333
-        }
-        .zbt-4 > i {
-            color: #39c
-        }
-        .zbt-5 > i {
-            color: #f93
-        }
-        .zbt-6 > i {
-            color: #396
-        }
-        .zbt-7 > i {
-            color: #93c
-        }
-        .zbt-8 > i {
-            color: #333
-        }
-        button:hover > i {
-            color: #3457e2;
-        }
-        button:disabled > i {
-            color: #b7b7b7;
+
+            @list: #c03, #633, #333, #39c, #f93, #396, #93c, #333;
+
+            .colorful(@list);
         }
     }
 }

@@ -10,9 +10,9 @@ export default [
     "自定义组件,appstore-o,zui.control,EXPAND,2",
     // 自定义组件：Page类
     "Page类,tablet,zui.control.page,EXPAND,1,zui.control",
-    "PageCard,layout,zui.control.page-card,/control/page-card,1,zui.control.page",
-    "HelpCard,layout,zui.control.help-card,/control/help-card,2,zui.control.page",
-    "TreeContainer,layout,zui.control.tree-container,/control/tree-container,3,zui.control.page",
+    "page",
+    "page",
+    "page",
     // 自定义组件：List类
     "List类,bars,zui.control.list,EXPAND,2,zui.control",
     "ComplexList,table,zui.control.complex-list,/control/complex-list,1,zui.control.list",

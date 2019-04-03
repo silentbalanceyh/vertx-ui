@@ -19,6 +19,13 @@ const aiCellOp = (reference, config) => (text, record) => {
             rxDelete = () => {
             }
         } = reference.props;
+        // 是否有插件
+        const {plugin} = option;
+        const {rxPlugin = {}} = reference.props;
+        let fnPlugin;
+        if (plugin && U.isFunction(rxPlugin[plugin])) {
+            fnPlugin = rxPlugin[plugin];
+        }
         return (
             <Fragment>
                 {edit ? (
@@ -37,6 +44,7 @@ const aiCellOp = (reference, config) => (text, record) => {
                         }}>
                         <a key={removed.key}>{removed.text}</a>
                     </Popconfirm>) : false}
+                {fnPlugin ? fnPlugin(record, option) : false}
             </Fragment>
         );
     } else return false;

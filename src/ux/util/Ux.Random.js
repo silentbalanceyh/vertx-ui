@@ -14,6 +14,14 @@ const randomString = (length) => {
     return randomjs.string()(engine, length);
 };
 /**
+ * 生成范围随机整数
+ * @param min
+ * @param max
+ */
+const randomInteger = (min = 0, max = 100) => {
+    return Math.floor(Math.random() * (max + 1)) + min;
+};
+/**
  * @class Random
  * @description 专用随机类
  */
@@ -23,5 +31,6 @@ export default {
      * @method randomUUID
      */
     randomUUID: v4,
-    randomString
+    randomString,
+    randomInteger
 };

@@ -7,32 +7,26 @@ export {default as MagicView} from './input/MagicView/UI';
 export {default as FuncInputTree} from './input/FuncInputTree/UI';
 
 
-export {default as PagerHeader} from './page/PagerHeader/UI';
-// export {default as TopBar} from './header/TopBar/UI';
-// export {default as TitleCard} from './page/TitleCard/UI';
-// export {default as PageList} from './list/PageList/UI';
-// export {default as EditList} from './list/EditList/UI';
-// export {default as SearchList} from './list/SearchList/UI';
-// export {default as TreeMenu} from './menu/TreeMenu/UI';
+// ------ 绘图专用组件 ------
+export {default as FormDesigner} from './backup/o-designer/FormDesigner/UI';
+// ------ 新版使用Editor替换原始的Designer
 
-export {default as FlowDesigner} from './designer/FlowDesigner/UI';
-export {default as FormDesigner} from './designer/FormDesigner/UI';
-export {default as TopologyDesigner} from './designer/TopologyDesigner/UI';
+export {default as KoniEditor} from './designer/Koni/UI';
 
-export {default as AttrTree} from './graphic/AttrTree/UI';
-export {default as AttrSetter} from './graphic/AttrSetter/UI';
-export {default as MarkdownViewer} from './graphic/Markdown/UI';
-export {default as DebugMonitorTool} from './debug/MonitorTool/UI';
+export {default as AttrTree} from './tools/AttrTree/UI';
+export {default as AttrSetter} from './tools/AttrSetter/UI';
+export {default as MarkdownViewer} from './tools/Markdown/UI';
+export {default as DebugMonitorTool} from './tools/MonitorTool/UI';
 
-export {default as ComplexList} from './list/ComplexList/UI';
-export {default as DialogList} from './list/DialogList/UI';
-export {default as TreeList} from './list/TreeList/UI';
-export {default as TreeTable} from './list/TreeTable/UI';
-export {default as TabList} from './list/TabList/UI';
+export {default as ComplexList} from './component/ComplexList/UI';
+export {default as DialogList} from './component/DialogList/UI';
+export {default as TreeList} from './component/TreeList/UI';
+export {default as TreeTable} from './component/TreeTable/UI';
+export {default as TabList} from './component/TabList/UI';
 
-export {default as HelpCard} from './page/HelpCard/UI';
-export {default as PageCard} from './page/PageCard/UI';
-export {default as TreeContainer} from './page/TreeContainer/UI';
+export {default as HelpCard} from './container/HelpCard/UI';
+export {default as PageCard} from './container/PageCard/UI';
+export {default as TreeContainer} from './container/TreeContainer/UI';
 
 export {default as ListSelector} from './input/ListSelector/UI';
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
@@ -51,7 +45,12 @@ export {default as TeamSelector} from './input/TeamSelector/UI';
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as LoadingAlert} from './loading/LoadingAlert/UI';
 export {default as LoadingImage} from './loading/LoadingImage/UI';
-export {default as DynamicDialog} from './dialog/DynamicDialog/UI';
+export {default as DynamicDialog} from './container/DynamicDialog/UI';
 
-export {default as DialogButton} from './op/DialogButton/UI';
-export {default as DialogMenu} from './op/DialogMenu/UI';
+export {default as DialogButton} from './action/DialogButton/UI';
+export {default as DialogMenu} from './action/DialogMenu/UI';
+// 重新命名
+export {default as Navigation} from './container/Navigation/UI';
+// 遗留系统，保留以前的名字
+// Navigation -> PagerHeader
+export {default as PagerHeader} from './container/Navigation/UI';

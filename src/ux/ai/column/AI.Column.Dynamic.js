@@ -29,7 +29,7 @@ const aiDynamicState = (reference, item = {}, jsx) => (text, record, index) => {
         rest = fnItem(item, rest, record);
     }
     return (
-        <Input className="rx-readonly" readOnly onClick={onClick} suffix={
+        <Input className="ux-readonly" readOnly onClick={onClick} suffix={
             <Icon type={"search"} onClick={onClick}/>
         } {...rest} value={text}/>
     );

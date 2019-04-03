@@ -1,0 +1,13 @@
+@import '../../global';
+@import './economy';
+
+.web-dialog-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ix-dialog(6px);
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ix-dialog(12px);
+    }
+}

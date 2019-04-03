@@ -1,0 +1,13 @@
+.ix-button(@flag, @color, @color-active) {
+    .ux-@{flag} {
+        background-color: @color;
+        border: solid 1px @color;
+        color: white;
+
+        &:hover, &:active, &:focus {
+            border: solid 1px @color-active;
+            background-color: @color-active;
+            color: white;
+        }
+    }
+}

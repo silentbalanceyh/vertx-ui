@@ -272,7 +272,9 @@ export default (options = {}) => {
 
             render() {
                 // 计算Render，是否执行加载
+                console.groupCollapsed("%c 「Zero」 数据加载专用日志....", `color:#eb2f96;font-weight:100`);
                 const render = fnRender(this.props, options);
+                console.groupEnd();
                 // 检查Form专用程序
                 ensureForm(this, options);
 

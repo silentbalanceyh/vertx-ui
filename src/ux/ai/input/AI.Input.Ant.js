@@ -71,13 +71,16 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     // ReadOnly处理，第二参用于处理disabled的情况，非input使用
     RxAnt.onReadOnly(rest, true, reference);
     const options = RxAnt.toOptions(reference, config);
+    // Radio的另外一种模式开启
+    const {type = "RADIO"} = config;
+    const Component = "RADIO" === type ? Radio : Radio.Button;
     return (
         <Radio.Group {...rest}>
             {options.map(item => (
-                <Radio key={item.key} style={item.style ? item.style : {}}
-                       value={item.hasOwnProperty('value') ? item.value : item.key}>
+                <Component key={item.key} style={item.style ? item.style : {}}
+                           value={item.hasOwnProperty('value') ? item.value : item.key}>
                     {item.label}
-                </Radio>
+                </Component>
             ))}
         </Radio.Group>
     );
@@ -105,7 +108,7 @@ const aiDatePicker = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     // 处理readOnly
     RxAnt.onReadOnly(jsx, true, reference);
-    return (<DatePicker {...jsx} className={"rx-readonly"}/>);
+    return (<DatePicker {...jsx} className={"ux-readonly"}/>);
 };
 
 const aiTimePicker = (reference, jsx = {}, onChange) => {

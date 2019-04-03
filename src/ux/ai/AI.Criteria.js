@@ -3,6 +3,7 @@ import Type from "../Ux.Type";
 import U from 'underscore';
 import {DataLabor} from 'entity';
 import Value from '../Ux.Value';
+import Cv from "../cv/Ux.Constant";
 
 const _fnSorter = (source = [], $query = {}) => {
     if ($query.sorter) {
@@ -18,9 +19,11 @@ const _fnSorter = (source = [], $query = {}) => {
 
 const FILTERS = {
     // 包含
-    "c": (field, value) => {
-        return (item) => item && item[field] && 0 <= item[field].indexOf(value);
-    }
+    "c": (field, value) => (item) => item && item[field] && 0 <= item[field].indexOf(value),
+    // 等于
+    "=": (field, value) => (item) => item && item[field] && value === item[field],
+    // 在之中，使用 i 操作符
+    "i": (field, value = []) => (item) => item && item[field] && Value.immutable(value).contains(item[field])
 };
 
 const _fnOr = (input = []) => {
@@ -59,24 +62,32 @@ const _fnAnd = (input = []) => {
 
 const _fnLinear = (source = [], criteria = {}, and = false) => {
     let result = [];
+    // 线性查询去要过滤掉 criteria 中的 树节点，保证不会递归执行地下的 Tree 部分
+    const filtered = {};
+    Type.itObject(criteria, (field, value) => {
+        if (U.isArray(value) || !U.isObject(value)) {
+            filtered[field] = value;
+        }
+    });
+    // And 模式的过滤
     if (and) {
-        Type.itObject(criteria, (expr, value) => {
+        Type.itObject(filtered, (expr, value) => {
             const field = expr.split(',')[0];
             if ("" !== field) {
                 let fun = expr.split(',')[1];
-                fun = fun ? FILTERS[fun] : FILTERS['c'];
+                fun = fun ? FILTERS[fun] : FILTERS['='];
                 source = source.filter(fun(field, value));
             }
         });
         result = source;
     } else {
         let $result = DataLabor.getArray([]);
-        Type.itObject(criteria, (expr, value) => {
+        Type.itObject(filtered, (expr, value) => {
             const field = expr.split(',')[0];
             if ("" !== field) {
                 let $source = Value.clone(source);
                 let fun = expr.split(',')[1];
-                fun = fun ? FILTERS[fun] : FILTERS['c'];
+                fun = fun ? FILTERS[fun] : FILTERS['='];
                 $source = $source.filter(fun(field, value));
                 $source.forEach(record => $result.saveElement(record));
             }
@@ -95,7 +106,8 @@ const _fnAnalyze = (criteria = {}) => {
         if ("" === field) {
             isAnd = (true === value);
         } else {
-            if (U.isObject(value)) {
+            // value的值必须不是Array，因为Array也是object
+            if (U.isObject(value) && !U.isArray(value)) {
                 isTree = true;
                 tree[field] = value;
             } else {
@@ -109,13 +121,17 @@ const _fnAnalyze = (criteria = {}) => {
 const _fnTree = (source = [], criteria = {}, level = 1) => {
     // 搜索线性条件
     const {isAnd, isTree, linear = {}, tree = {}} = _fnAnalyze(criteria);
-    // 打印
-    console.groupCollapsed("[ Mock ] 查询分析结果 ");
-    console.info(`[ Mock ] Level = ${level} 查询树：`, isTree);
-    console.info("[ Mock ] 连接符：and = ", isAnd);
-    console.info("[ Mock ] 当前节点线性查询：cond = ", linear);
-    console.info("[ Mock ] 查询条件：", criteria);
-    console.groupEnd();
+    if (Cv.DEBUG && Cv.MOCK) {
+        // 打印
+        console.groupCollapsed("%c [Mock] 查询分析结果 ", "font-weight:100;color:white;background-color:#4090f7");
+
+        console.info(`[Mock] Level = ${level} 查询树：`, isTree);
+        console.info("[Mock] 连接符：and = ", isAnd);
+        console.info("[Mock] 当前节点线性查询：cond = ", linear);
+        console.info("[Mock] 查询条件：", criteria);
+        Type.itObject(criteria, (field, value) => console.info(" --> [Mock] 查询条件项：", field, value));
+        console.groupEnd();
+    }
     if (isTree) {
         const result = [];
         Type.itObject(tree, (field, value) => {

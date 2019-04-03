@@ -26,6 +26,16 @@ const isInit = () => {
     return appData;
 };
 /**
+ * 路由地址是否发生了变更
+ * @param props
+ * @param prevProps
+ */
+const isRoute = (props, prevProps) => {
+    const $router = props.$router;
+    const $prevRouter = prevProps.$router;
+    return $router.path() !== $prevRouter.path();
+};
+/**
  * 当前用户的注销行为
  * @method toLogout
  * @return {*}
@@ -91,6 +101,8 @@ export default {
     isInit,
     // 登录控制
     isAuthorized,
+    // 路由变更
+    isRoute,
     // 注销
     toLogout,
     // 链接地址

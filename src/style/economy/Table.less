@@ -1,0 +1,19 @@
+@import '../../global';
+@import './economy';
+
+.web-table-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ix-table(
+                12px,
+                24px
+        );
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ix-table(
+                16px,
+                32px
+        );
+    }
+}

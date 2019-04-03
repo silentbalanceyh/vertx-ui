@@ -59,7 +59,7 @@ const viewRow = (columns = [], flex = {}, ...content) => {
  * @param message
  * @param className
  */
-const viewTitle = (message, className = "page-title") =>
+const viewTitle = (message, className = "ux-title") =>
     (<Row className={className}>&nbsp;&nbsp;&nbsp;&nbsp;{message}</Row>);
 /**
  * 渲染某一个Row的Header

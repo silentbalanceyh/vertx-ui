@@ -94,7 +94,7 @@ const toQueryParameter = (name = "") => {
  */
 const toStyle = (name, bg) => {
     const styles = {};
-    styles.className = `${Cv.Env.CSS_PREFIX}-${name}`;
+    styles.className = `${Cv.Env['CSS_PREFIX']}-${name}`;
     if (bg) {
         styles.style = {
             backgroundImage: `url(${bg})`
@@ -102,6 +102,7 @@ const toStyle = (name, bg) => {
     }
     return styles;
 };
+const toCss = (name) => `${Cv.Env['CSS_PREFIX']}-${name}`;
 const toUniform = (props, ...keys) => {
     const item = toDatum(props);
     const defaultProp = [
@@ -109,7 +110,7 @@ const toUniform = (props, ...keys) => {
         "user",     // 用户数据
         "profile",  // 账号数据
         "router",   // 路由数据
-        "parent",    // 主记录数据
+        "parent",   // 主记录数据
         "submitting"    // 防重复提交专用
     ].concat(keys);
     const common = toProp.apply(this, [props].concat(defaultProp));
@@ -135,12 +136,14 @@ export default {
     toFullName,
     // 继承专用属性
     toProp,
-    toStyle,
     toDatum,
     toUniform,
     toQueryParameter,
     // 处理专用参数信息
     toLimitation,
+    // 风格专用
+    toStyle,
+    toCss,
 };
 
 

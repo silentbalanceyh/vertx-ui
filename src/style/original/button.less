@@ -1,0 +1,50 @@
+@import "../colorful.less";
+
+.ux-success {
+    background-color: @button-success !important;
+    border: solid 1px @button-success !important;
+    color: white;
+
+    &:hover, &:active, &:focus {
+        color: white;
+        border: solid 1px @button-success-hover !important;
+        background-color: @button-success-hover !important;
+    }
+}
+
+.ux-red {
+    background-color: @color-highlight !important;
+    border: solid 1px @color-highlight !important;
+    color: white;
+
+    &:hover, &:active, &:focus {
+        color: white;
+        border: solid 1px @color-highlight-hover !important;
+        background-color: @color-highlight-hover !important;
+    }
+}
+
+.ux-hidden {
+    display: none !important;
+}
+
+.ux-rightop {
+    &-100 {
+        text-align: center;
+        padding: 3px 12px !important;
+        width: 100px !important;
+    }
+
+    &-120 {
+        text-align: center;
+        padding: 3px 12px !important;
+        width: 120px !important;
+    }
+
+    &-160 {
+        text-align: center;
+        padding: 3px 12px !important;
+        width: 160px !important;
+    }
+}
+

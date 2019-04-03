@@ -434,6 +434,27 @@ const elementSum = (data = [], field = "") => {
     return (0 < result.length) ? result.reduce((left, right) => left + right) : 0;
 };
 /**
+ * 默认三行
+ * @param data
+ * @param column
+ */
+const elementMatrix = (data = [], column = 3) => {
+    const matrix = [];
+    let row = [];
+    data.forEach((each) => {
+        row.push(each);
+        if (column === row.length) {
+            matrix.push(Value.clone(row));
+            row = [];
+        }
+    });
+    // 最后一行
+    if (0 < row.length) {
+        matrix.push(Value.clone(row));
+    }
+    return matrix;
+};
+/**
  * @class Type
  * @description 复杂数据结构计算
  */
@@ -457,6 +478,7 @@ export default {
     elementFirst,
     elementFind,
     elementMatch,
+    elementMatrix,  // 将一维数组转换成二维数组
     /**
      * 增强Find，查找Tabular/Assist专用
      * @method elementFindDatum

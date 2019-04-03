@@ -110,7 +110,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
     // Render-1: <Form> 配置构造
     metadata.form = {};
     metadata.form.layout = "inline";
-    metadata.form.className = form.className ? form.className : "page-form";
+    metadata.form.className = form.className ? form.className : "web-form";
 
     // 处理隐藏组件
     // Render-2: <Input type="hidden"/>
@@ -199,7 +199,7 @@ const raftForm = (reference = {}, renders = {}, column = 4, config = {}, dynamic
                 if (cell.optionConfig) delete cell.optionConfig;
                 if (cell.optionJsx) delete cell.optionJsx;
                 if (cell.render) delete cell.render;
-                if (!cell.className) cell.className = "page-title";
+                if (!cell.className) cell.className = "ux-title";
                 delete cell.col;
                 if (!cell.span) cell.span = 24;
             }

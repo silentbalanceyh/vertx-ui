@@ -1,0 +1,32 @@
+@import "~antd/lib/style/themes/default.less";
+@import "./colorful";
+// 反色效果
+.ux-invert {
+    color: white !important;
+
+    &:hover {
+        color: @primary-color;
+    }
+}
+
+// 基础隐藏效果
+.ux-hidden {
+    display: none;
+}
+
+// 基础标题效果
+.ux-title {
+    width: 100%;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+    color: white;
+    padding-left: 6px;
+    margin-bottom: 6px;
+    background: -moz-linear-gradient(left, @theme-main 0%, white 100%);
+    background: -webkit-linear-gradient(left, @theme-main 0%, white 100%);
+    background: -o-linear-gradient(left, @theme-main 0%, white 100%);
+    background: -ms-linear-gradient(left, @theme-main 0%, white 100%);
+    background: linear-gradient(to right, @theme-main 0%, white 100%);
+    box-shadow: 3px 3px 3px @color-title-font;
+}

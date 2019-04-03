@@ -21,7 +21,7 @@ const renderDatePicker = (reference = {}) => {
     const {date = {}, value = {}} = reference.props;
     const {label, ...rest} = date;
     rest.disabled = Op.calcDisabled(reference);
-    const attrs = {className: "rx-readonly"};
+    const attrs = {className: "ux-readonly"};
     if (value.date) {
         if (moment.isMoment(value.date)) {
             attrs.value = value.date;

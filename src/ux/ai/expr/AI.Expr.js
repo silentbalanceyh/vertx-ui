@@ -94,7 +94,7 @@ export default {
     "ajax": [
         "method",
         "uri",
-        "params.pager.page",
+        "page",
         "params.pager.size",
         "$KV$"
     ],

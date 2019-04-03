@@ -3,7 +3,7 @@ import Immutable from "immutable";
 export default name => {
     try {
         // 计算目录和文件
-        const language = process.env.$LANG ? process.env.$LANG : "cn";
+        const language = process.env.LANGUAGE ? process.env.LANGUAGE : "cn";
         const shared = require("./" + language + "/shared.json");
         // 组件资源文件
         const component = require("./" + language + "/" + name + ".json");

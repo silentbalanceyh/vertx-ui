@@ -1,0 +1,152 @@
+.ix-border {
+    .round(@color, @radius) {
+        border: solid 1px @color;
+        border-radius: unit(@radius, px);
+    }
+    .round(@color, @radius, @bg) {
+        border: solid 1px @color;
+        border-radius: unit(@radius, px);
+        background-color: @bg;
+    }
+
+    .radius(@radius, @bg) {
+        border-radius: unit(@radius, px);
+        background-color: @bg;
+    }
+}
+
+.ix-bg {
+    .trans-h(@height) {
+        height: unit(@height, px);
+        background: transparent;
+    }
+    .w(@width) {
+        width: @width;
+    }
+    .w(@width, @color) {
+        width: @width;
+        background-color: @color;
+    }
+    .color(@color, @bg-color) {
+        color: @color;
+        background-color: @bg-color;
+    }
+}
+
+.ix-box {
+    .in(@padding) {
+        padding: @padding;
+    }
+    .x-in(@padding) {
+        padding: @padding !important;
+    }
+    .in(@padding, @width) {
+        padding: @padding;
+        width: @width;
+    }
+    .in-v(@top, @bottom) {
+        padding-top: unit(@top, px);
+        padding-bottom: unit(@bottom, px);
+    }
+    .out(@margin) {
+        margin: @margin;
+    }
+    .out(@margin, @width) {
+        margin: @margin;
+        width: @width;
+    }
+    .rect(@height) {
+        height: @height;
+    }
+    .rect(@height, @width) {
+        height: @height;
+        width: @width;
+    }
+    .shadow(@size, @color) {
+        box-shadow: @size @size @size @color;
+    }
+}
+
+.ix-pos {
+    .fixed(@z-index) {
+        position: fixed;
+        z-index: @z-index;
+    }
+    .absolute(@z-index) {
+        position: absolute;
+        z-index: @z-index;
+    }
+    .relative(@z-index) {
+        position: relative;
+        z-index: @z-index;
+    }
+}
+
+.ix-list {
+    .none(@line-height) {
+        li {
+            list-style: none;
+            line-height: unit(@line-height, px);
+        }
+    }
+}
+
+.ix-width {
+    .x-fixed(@width) {
+        min-width: unit(@width, px) !important;
+        max-width: unit(@width, px) !important;
+        width: unit(@width, px) !important;
+    }
+}
+
+.ix-font {
+    .bold(@size) {
+        font-size: unit(@size, px);
+        font-weight: 700;
+    }
+    .bold(@size, @color) {
+        font-size: unit(@size, px);
+        font-weight: 700;
+        color: @color;
+    }
+    .thin(@size) {
+        font-size: unit(@size, px);
+        font-weight: 100;
+    }
+    .thin(@size, @color) {
+        font-size: unit(@size, px);
+        font-weight: 100;
+        color: @color;
+    }
+    .normal(@size) {
+        font-size: unit(@size, px);
+        font-weight: 400;
+    }
+    .normal(@size, @color) {
+        font-size: unit(@size, px);
+        font-weight: 400;
+        color: @color;
+    }
+    .line(@height) {
+        height: unit(@height, px);
+        line-height: unit(@height, px);
+    }
+    .x-line(@height) {
+        height: unit(@height, px) !important;
+        line-height: unit(@height, px) !important;
+    }
+    .line(@height, @color) {
+        height: unit(@height, px);
+        line-height: unit(@height, px);
+        color: @color;
+    }
+    .size(@height, @color) {
+        font-size: unit(@height, px);
+        line-height: unit(@height, px);
+        color: @color
+    }
+    .size(@height) {
+        font-size: unit(@height, px);
+        line-height: unit(@height, px);
+    }
+}

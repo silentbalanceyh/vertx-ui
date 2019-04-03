@@ -1,0 +1,60 @@
+@import "./Card.less";
+@import "./Tab.less";
+@import "./Grid.less";
+@import "./Table.less";
+@import "./Form.less";
+@import "./Dialog.less";
+@import "../zero.less";
+// PageCard / HelpCard
+.web {
+    &-card {
+        .web-card-fit;
+        background: @component-background;
+
+        .ux-extra {
+            float: right;
+        }
+    }
+
+    &-tab {
+        .web-tab-fit;
+        background: @component-background;
+    }
+
+    &-row {
+        &-head {
+            .web-row-head-fit;
+            background: @component-background;
+        }
+    }
+
+    &-table {
+        .web-table-fit;
+        background: @component-background;
+    }
+
+    &-form {
+        .web-form-fit;
+        background: @component-background;
+
+        .has-error .ant-form-explain {
+            position: absolute;
+            background-color: @color-error;
+            color: white;
+            border-radius: 3px;
+            border: 1px solid @color-error;
+            padding: 2px 5px;
+            z-index: 100;
+            /** From Animate.css **/
+            animation-duration: 1s;
+            animation-fill-mode: both;
+            animation-name: bounceIn;
+            top: -27px;
+            display: none;
+        }
+    }
+
+    &-dialog {
+        .web-dialog-fit;
+    }
+}

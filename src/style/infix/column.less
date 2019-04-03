@@ -1,0 +1,50 @@
+.ix-column {
+    .width(@max, @i: 20) when (@i =< @max) {
+        .ux-column {
+            &-@{i} {
+                text-align: center;
+                padding: 3px 12px !important;
+                width: unit(@i, px) !important;
+            }
+        }
+        .ix-column.width(@max, @i + 20)
+    }
+    .min-width(@max, @i:20) when (@i =< @max) {
+        .ux-column-min {
+            &-@{i} {
+                min-width: unit(@i, px) !important;
+            }
+        }
+        .ix-column.min-width(@max, @i + 20)
+    }
+}
+
+.ix-op {
+    .width(@max, @i: 20) when (@i =< @max) {
+        .ux-op {
+            &-@{i} {
+                text-align: center;
+                padding: 3px 12px !important;
+                width: unit(@i, px) !important;
+            }
+        }
+        .ix-op.width(@max, @i + 20)
+    }
+}
+
+.ix-serial {
+    .width(@max, @i: 20) when (@i =< @max) {
+        .ux-serial {
+            &-@{i} {
+                text-align: center;
+                padding: 3px 12px !important;
+                width: unit(@i, px) !important;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+                max-width: unit(@i, px);
+            }
+        }
+        .ix-serial.width(@max, @i + 20)
+    }
+}

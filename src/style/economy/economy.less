@@ -1,0 +1,73 @@
+.ix-card(@card,@head,@title,@height) {
+    margin: @card @card 0;
+    .ant-card-body {
+        padding: @card !important;
+    }
+    .ant-card-head {
+        padding: 0 @head !important;
+        height: @height !important;
+
+        .ant-card-head-wrapper {
+            height: @height !important;
+        }
+
+        .ant-card-head-title {
+            padding: @title 0;
+        }
+    }
+}
+
+.ix-tab(@bar) {
+    .ant-tabs-bar {
+        margin: 0 0 @bar 0 !important;
+    }
+}
+
+.ix-row(@bottom) {
+    margin-bottom: 0 0 @bottom 0 !important;
+    height: 38px !important;
+}
+
+.ix-table(@cell, @empty) {
+    // 普通 <Table/>
+    table {
+        thead > tr > th {
+            padding-top: @cell;
+            padding-bottom: @cell;
+        }
+
+        tbody > tr > td {
+            padding-top: @cell;
+            padding-bottom: @cell;
+        }
+    }
+    .ant-empty {
+        margin: @empty 0 !important;
+    }
+}
+
+.ix-form-row {
+    .each(@rowHeight, @max, @i:1) when (@i =< @max) {
+        .ant-col-@{i} {
+            margin-top: @rowHeight;
+
+            .ant-form-item {
+                margin-bottom: 0 !important;
+            }
+        }
+        .ix-form-row.each(@rowHeight, @max, @i + 1)
+    }
+}
+
+.ix-form(@rowHeight) {
+    // 每一行
+    .ix-form-row.each(@rowHeight, 24);
+}
+
+.ix-dialog(@bodyPadding) {
+    .ant-modal {
+        &-body {
+            padding: @bodyPadding !important;
+        }
+    }
+}

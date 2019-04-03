@@ -221,7 +221,7 @@ const onLoading = (reference, fnSuccess) => {
             size: "large"
         }
     });
-    const ms = Value.valueInt(Cv.LOADING, 618);
+    const ms = Value.valueInt(Cv.LOADING, 288);
     setTimeout(fnSuccess, ms);
 };
 const onLoaded = (reference) => reference.setState({$$loading: false});

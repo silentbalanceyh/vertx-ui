@@ -1,0 +1,38 @@
+@import "./uniform";
+
+.clear-graphic() {
+    zoom: 1;
+
+    &::before,
+    &::after {
+        content: ' ';
+        display: table;
+    }
+
+    &::after {
+        clear: both;
+        height: 0;
+        font-size: 0;
+        visibility: hidden;
+    }
+}
+
+.error-message(@color-error) {
+    background-color: @color-error;
+    color: white;
+
+    .ix-border.round(@color-error, 3);
+    .ix-pos.absolute(100);
+    padding: 2px 5px;
+    /** From Animate.css **/
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    animation-name: bounceIn;
+}
+
+.text-overflow() {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-break: break-all;
+}

@@ -47,7 +47,7 @@ const aiBreadcrumb = (items = [], rest = {}, config = {}) => (
     </Breadcrumb>
 );
 const aiMenuTop = (menus = [], rest = {}, config = {}) => (
-    <Menu className="top-menu" onClick={config.onClick} {...rest}>
+    <Menu onClick={config.onClick} {...rest}>
         {menus.map(item => item.divide ? (
             <Menu.Divider key={item.key}/>
         ) : (
@@ -58,17 +58,27 @@ const aiMenuTop = (menus = [], rest = {}, config = {}) => (
         ))}
     </Menu>
 );
-const aiMenuTree = (item = {}, rest = {}, config = {}) => (
-    item.children && 0 < item.children.length ? (
-        <SubMenu key={item.key} title={aiTitle(item, config['$router'])}>
+const aiMenuTree = (item = {}, rest = {}, config = {}) => {
+    let adjustClass = 0 < item.children.length ? `ux-submenu${item.level}` : `ux-menuitem${item.level}`;
+    if (item.collapsed) {
+        adjustClass = `${adjustClass} ux-collapsed${item.level}`;
+    }
+    return item.children && 0 < item.children.length ? (
+        <SubMenu key={item.key}
+                 style={item.style}
+                 className={adjustClass}
+                 title={aiTitle(item, config['$router'])}>
             {item.children.map(child => aiMenuTree(child, config))}
         </SubMenu>
     ) : (
-        <Menu.Item key={item.key} style={item.style} disabled={item.disabled}>
+        <Menu.Item key={item.key}
+                   style={item.style}
+                   className={adjustClass}
+                   disabled={item.disabled}>
             {aiTitle(item, config['$router'])}
         </Menu.Item>
-    )
-);
+    );
+};
 const aiTabs = (items = [], rest = {}, ...children) => (
     <Tabs {...rest}>
         {items.map((item, index) => (

@@ -185,5 +185,6 @@ export default {
     irGrid,
     irKeepCond,
     irClear,
-    irFilter
+    irFilter,
+    irParam: irCriteria
 };

@@ -1,4 +1,5 @@
 import Ai from './ai/AI';
+import Value from './Ux.Value';
 
 /**
  * Ant Design的Table组件专用的专用属性`columns`列处理器，处理每一列的`render`属性
@@ -23,10 +24,21 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
  */
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns = Ai.aiExprColumn(columns);
+    const $op = Value.immutable(["BUTTON", "OP", "LINK"]);
     columns.filter(column => column.hasOwnProperty("$render")).forEach(column => {
         const fnRender = Ai.aiCellRenders[column["$render"]];
         if (fnRender) {
             column.render = fnRender(reference, column, ops);
+        }
+        // 设置column的默认宽度，解决 fixed 列的覆盖问题
+        if (column.hasOwnProperty('fixed')
+            && $op.contains(column['$render'])
+            && !column.hasOwnProperty('width')) {
+            /**
+             * 默认两个链接
+             * 60一个链接
+             */
+            column.width = 120;
         }
     });
     return columns;
