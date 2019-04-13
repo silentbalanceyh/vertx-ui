@@ -154,7 +154,7 @@ export default {
     ...RxAjax,
     // 特殊方法，传入两个参数返回Promise
     ajaxUniform,
-    // 特殊方法读取当前想对路径
+    // 特殊方法读取当前站点相对路径
     ajaxResource,
     // 上传
     ajaxUpload,

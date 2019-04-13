@@ -1,5 +1,6 @@
 import Ai from './ai/AI';
 import Value from './Ux.Value';
+import Column from './column';
 
 /**
  * Ant Design的Table组件专用的专用属性`columns`列处理器，处理每一列的`render`属性
@@ -25,23 +26,22 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns = Ai.aiExprColumn(columns);
     const $op = Value.immutable(["BUTTON", "OP", "LINK"]);
-    columns.filter(column => column.hasOwnProperty("$render")).forEach(column => {
-        const fnRender = Ai.aiCellRenders[column["$render"]];
-        if (fnRender) {
-            column.render = fnRender(reference, column, ops);
-        }
-        // 设置column的默认宽度，解决 fixed 列的覆盖问题
-        if (column.hasOwnProperty('fixed')
-            && $op.contains(column['$render'])
-            && !column.hasOwnProperty('width')) {
-            /**
-             * 默认两个链接
-             * 60一个链接
-             */
-            column.width = 120;
-        }
+    const $columns = [];
+    // 添加列的平行解析
+    columns.forEach(column => {
+        const columnItem = Value.valueLadder(column);
+        $columns.push(columnItem);
     });
-    return columns;
+    // 生成最终列信息
+    $columns.forEach(column => {
+        // $render处理
+        Column.columnRender(column, reference, ops);
+        // fixed固定值处理
+        Column.columnFixed(column, $op);
+        // $filter过滤处理
+        Column.columnFilter(column, reference);
+    });
+    return $columns;
 };
 /**
  * Ant Design中的Table组件的Table组件专用属性`pagination`处理

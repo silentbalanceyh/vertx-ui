@@ -11,23 +11,34 @@ const verify = (target: any = {}) => {
 };
 
 class DataEvent {
+    // 基础属性
     name: any;
-    source: any = {};
-    target: any = {};
+    _control: any;
+    config: any = {};
+    container;
+    // 事件源和目标对象
+    _source: any = {};
+    _target: any = {};
     // 绑定好执行事件的函数
     events;
     // 执行期状态
     params: any = {};
     returns: any = [];
-    state: any = {};
+    _state: any = {};
 
-    constructor(source: Object, target: Object) {
+    constructor(source: Object, target: any) {
         // 1. 验证事件本身规范
         if (verify(target)) {
-            this.source = source;
-            this.target = target;
+            this._source = source;
+            this._target = target;
             // 2. 抽取元数据
-            this.name = this.target._name;
+            // 事件名称
+            this.name = target._name;
+            this._control = target._target;
+            // 事件配置
+            this.config = target._config;
+            // 获取根节点的引用信息
+            this.container = target._reference;
         }
     }
 
@@ -50,17 +61,20 @@ class DataEvent {
             this.params = input;
             /**
              * 每次调用 mount 表示输入，所以此时会清空执行期队列
-             * 执行期保留了每个 Behavior的返回值
+             * 执行期保留了每个 Behavior的返回值，
+             * 为了防止 getParams 的调用，第一次mount的时候
+             * 执行队列的第一个元素的值会被直接填充掉，后续在读取节点数据的时候就
+             * 不用Start节点了，直接读取。
              */
-            this.returns = [];
+            this.returns = [input];
             /**
              * 构造核心属性
              */
-            this.source.$input = input;
+            this._source.$input = input;
             /**
              * 清空状态
              */
-            this.state = {};
+            this._state = {};
         }
         return this;
     }
@@ -70,52 +84,119 @@ class DataEvent {
         return this;
     }
 
-    addState(key: any, data: any): DataEvent {
-        this.state[key] = data;
-        return this;
+    /**
+     * 三义函数；
+     * @param key
+     * @param data
+     */
+    state(key: any, data: any): any {
+        const argLength = arguments.length;
+        if (0 === argLength) {
+            return this._state;
+        } else if (1 === argLength) {
+            return this._state[key];
+        } else {
+            this._state[key] = data;
+            Ux.dgDebug(this._state, `[Ox] 更新状态：${key}`, "#39c");
+            return this;
+        }
     }
 
     key(): String {
         return this.name;
     }
 
+    control(): String {
+        return this._control;
+    }
+
     provider(): Function {
         if (this.events) {
             // 执行 generator
-            return this.events(this);
-        } else {
-            return () => {
-                console.error("[OXE] 事件规范冲突，无法生成事件提供者！", this.name, this.events);
+            const fnEvent = this.events(this);
+            if (U.isFunction(fnEvent)) {
+                return fnEvent;
+            } else {
+                console.error("[OXE] 函数本身不是一个高阶函数，执行过后无法生成函数！", fnEvent);
+                return () => false;
             }
+        } else {
+            console.error("[OXE] 事件规范冲突，无法生成事件提供者！", this.name, this.events);
+            return () => false;
         }
     }
 
+    generate(params): Function {
+        const fnGenerator = this._target._generator;
+        if (U.isFunction(fnGenerator)) {
+            return fnGenerator(params);
+        } else {
+            return () => Promise.resolve({error: "[OXE] Promise的生成器丢失！"});
+        }
+    }
+
+    /**
+     * 返回当前 Event 对应的配置信息
+     */
+    getConfig() {
+        return this.config ? this.config : {};
+    }
+
+    // ----------------- 下边返回的内容都是副本 ----------------
+    /**
+     * 返回上一个Behavior的返回值，
+     * 如果是第一个节点，这个函数的值就是参数 params 对应的信息
+     */
     getReturn() {
         let index = this.returns.length - 1;
         if (0 > index) index = 0;
-        return this.returns[index];
+        const returnValue = this.returns[index];
+        return returnValue ? Ux.clone(returnValue) : returnValue;
     }
 
-    getData() {
-        return this.params;
+    getQuery() {
+        const query = this._target['_query'];
+        return query ? Ux.clone(query) : {};
     }
 
-    getState() {
-        return this.state;
+    // ----------------- 下边方法是更新状态专用 -----------------
+
+    annexSource() {
+        return this._source;
     }
 
-    getTarget(key) {
-        if (key) {
-            const hit = `_${key}`;
-            return this.target[hit];
-        } else return this.target;
+    annexTarget() {
+        return this._target;
     }
 
-    getSource(key) {
-        if (key) {
-            const hit = `$${key}`;
-            return this.source[hit];
-        } else return this.source;
+    /**
+     * 读取容器
+     */
+    annexContainer() {
+        return this.container;
+    }
+
+    annexThis() {
+        const {$reference} = this._source;
+        return $reference ? $reference : {};
+    }
+
+    /**
+     * 合并获取最新的 $query 的变量
+     */
+    annexQuery(query: any = {}) {
+        const container = this.container;
+        const key = this._target._target;
+        return Ux.annexState(container, "$query", key, query);
+    }
+
+    /**
+     * 合并获取最新的 $data 的变量
+     */
+    annexData(data: any = {}) {
+        const container = this.container;
+        const key = this._target._dataKey;
+        return Ux.annexState(container, "$data", key, data);
     }
 }
 

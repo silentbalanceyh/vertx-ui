@@ -42,8 +42,9 @@ const irSorter = (hoc = {}) => {
     return sorterData;
 };
 
-const irCriteria = (hoc = {}, props = {}) => {
-    let config = {};
+const irCriteria = (hoc = {}, props = {}, state = {}) => {
+    // 同时支持两种模式
+    let config = Ux.clone(hoc);
     if (hoc.criteria) {
         if ("string" === typeof hoc.criteria) {
             // 1.直接字符串条件
@@ -64,10 +65,10 @@ const irCriteria = (hoc = {}, props = {}) => {
             config = Value.clone(hoc.criteria);
         }
     }
-    return Value.valueSearch(config, props);
+    return Value.valueSearch(config, props, state);
 };
 
-const irGrid = (hoc = {}, props = {}) => {
+const irGrid = (hoc = {}, props = {}, state = {}) => {
     const query = {};
     // pager专用处理
     query.pager = irPager(hoc);
@@ -76,7 +77,8 @@ const irGrid = (hoc = {}, props = {}) => {
     // sorter专用处理
     query.sorter = irSorter(hoc);
     // criteria条件处理
-    query.criteria = irCriteria(hoc, props);
+    query.criteria = irCriteria(hoc, props, state);
+    // 其他属性必须全部填充，不能只认Ir属性
     return query;
 };
 

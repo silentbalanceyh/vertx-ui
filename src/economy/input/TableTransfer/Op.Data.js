@@ -54,7 +54,7 @@ const getTo = (reference, config = {}) => {
     Ux.valueValid(filters);
     if (0 < Object.keys(filters).length) {
         const query = {criteria: filters};
-        data = Ux.aiCriteria(data).query(query);
+        data = Ux.aiSearcher(data).query(query);
         // 补齐带有parentId的数据
         const formated = DataLabor.getArray(data);
         const treeData = config.tree;

@@ -7,9 +7,12 @@ import AiChart from './AI.Chart';
 import AiNormalize from './AI.Normalize';
 import Calculator from './layout/AI.Layout.Calculator';
 import AiString from './expr/AI.Expr.String';
-import AiCriteria from './AI.Criteria';
 import AiPure from './AI.Pure';
 import RxAnt from './ant/AI.RxAnt';
+// 查询专用的两个方法
+import AiQuery from './query';
+// 特殊的apply系列方法
+import AiValue from './expr/AI.Expr.Value';
 
 export default {
     ...AiLink,
@@ -20,8 +23,9 @@ export default {
     ...AiChart,
     ...AiNormalize,
     ...AiString,
-    ...AiCriteria,
     ...AiPure,
+    ...AiQuery,
+    ...AiValue,
     RxAnt,      // 新添加Rx Ant部分
     aiLayoutItem: Calculator.calculateItem
 };

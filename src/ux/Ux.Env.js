@@ -141,6 +141,7 @@ export default {
     // 和Zero绑定专用的Ui方法，Stream模式
     auiTab: (reference) => new AiStream(reference).tabs().init(),
     auiTable: (reference) => new AiStream(reference).table().init(),
+    auiQuery: (reference) => new AiStream(reference).query().init(),
     // 专用CRUD的Mock
     mockCrud: (reference) => new AiStream(reference).mock().init(),
     mockIr: () => new AiStream().mock(),

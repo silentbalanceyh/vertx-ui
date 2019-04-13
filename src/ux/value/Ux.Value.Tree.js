@@ -37,15 +37,23 @@ const SEARCHERS = {
                 return dataObj._(to);
             }
         }
+    },
+    "STATE": (value, props, state = {}) => {
+        if (value) {
+            const {$env = {}} = state;
+            if ($env.hasOwnProperty(value)) {
+                return $env[value];
+            }
+        }
     }
 };
 
-const valueSearch = (config = {}, props = {}) => {
+const valueSearch = (config = {}, props = {}, state = {}) => {
     // 查找根节点
     const result = {};
     Type.itData(config, (field, p, path) => {
         if (SEARCHERS.hasOwnProperty(p)) {
-            result[field] = SEARCHERS[p](path[0], props);
+            result[field] = SEARCHERS[p](path[0], props, state);
         } else {
             const propName = `$${p}`;
             if (props[propName]) {

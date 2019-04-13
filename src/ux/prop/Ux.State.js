@@ -160,7 +160,6 @@ export default {
     // 清理状态树
     eraseTree,
     // ---------------- 特殊行为方法
-
     // 老版本提取$_状态的专用方法
     toEffect
 };
