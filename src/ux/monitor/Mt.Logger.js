@@ -316,7 +316,7 @@ const mock = (request, response, url) => {
 const debug = (object, original) => {
     if (Cv.DEBUG) {
         let message = `%c 「Zero」 Redux Data Flow`;
-        console.groupCollapsed(message, "color:#09c;font-weight:100");
+        console.groupCollapsed(message, "color:white;background-color:#09c;font-weight:100");
         if ("string" === typeof object) {
             console.log("「Zero」 Redux Key: ", object);
         } else {

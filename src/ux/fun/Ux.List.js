@@ -44,7 +44,7 @@ const irSorter = (hoc = {}) => {
 
 const irCriteria = (hoc = {}, props = {}, state = {}) => {
     // 同时支持两种模式
-    let config = Ux.clone(hoc);
+    let config = {};
     if (hoc.criteria) {
         if ("string" === typeof hoc.criteria) {
             // 1.直接字符串条件
@@ -64,6 +64,8 @@ const irCriteria = (hoc = {}, props = {}, state = {}) => {
             // 3.本身就是一个对象，将该对象传入到config中进行解析
             config = Value.clone(hoc.criteria);
         }
+    } else {
+        config = Ux.clone(hoc);
     }
     return Value.valueSearch(config, props, state);
 };

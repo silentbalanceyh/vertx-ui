@@ -229,19 +229,22 @@ const itData = (config = {}, consumer = () => {
             const expr = config[key];
             E.fxTerminal("string" !== typeof expr, 10008, key, expr);
             E.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
-            const kv = expr.split(':');
-            let value;
-            // 特殊的包含.操作符合法
-            if ("DATUM" === kv[0] || "PROP" === kv[0]) {
-                // 映射到path[0]
-                value = [kv[1].split(',')];
-            } else if ("ENUM" === kv[0] || "FIX" === kv[0]) {
-                value = [kv[1]];
-            } else {
-                value = kv[1].split('.');
-            }
-            if (U.isFunction(consumer)) {
-                consumer(key, kv[0], value);
+            if ("string" === typeof expr) {
+                const kv = expr.split(':');
+                E.fxTerminal(2 !== kv.length, 10102, kv);
+                let value;
+                // 特殊的包含.操作符合法
+                if ("DATUM" === kv[0] || "PROP" === kv[0]) {
+                    // 映射到path[0]
+                    value = [kv[1].split(',')];
+                } else if ("ENUM" === kv[0] || "FIX" === kv[0]) {
+                    value = [kv[1]];
+                } else {
+                    value = kv[1].split('.');
+                }
+                if (U.isFunction(consumer)) {
+                    consumer(key, kv[0], value);
+                }
             }
         }
     }

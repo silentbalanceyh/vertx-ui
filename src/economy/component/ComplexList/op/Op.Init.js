@@ -115,7 +115,11 @@ const updateGrid = (reference = {}, prevProps = {}) => {
     const record = reference.props['$list'];
     const {$query} = reference.props;
     if ($query.is()) {
-        if (undefined === record) {
+        // 原始的 $query
+        const $original = prevProps.$query;
+        const isRenew = Ux.isDiff($query.to(), $original.to());
+        if (undefined === record || isRenew) {
+            // 只有 $query 发生变化的时候，才执行数据的初始化
             // 初始化查询
             const {rxSearch} = reference.props;
             if (rxSearch) rxSearch($query.to());
