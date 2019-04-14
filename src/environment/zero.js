@@ -183,7 +183,8 @@ const getDatum = (props, key) => {
  */
 const fnRender = (props = {}, options = {}) => {
     let render = true;
-    if (options.loading) {
+    if (options.loading && 0 < options.loading.length) {
+        console.groupCollapsed("%c 「Zero」 数据加载专用日志....", `color:#eb2f96;font-weight:100`);
         options.loading.forEach(key => {
             if (0 <= key.indexOf(".")) {
                 const value = getDatum(props, key);
@@ -203,6 +204,7 @@ const fnRender = (props = {}, options = {}) => {
                 }
             }
         });
+        console.groupEnd();
     }
     return render;
 };
@@ -272,9 +274,7 @@ export default (options = {}) => {
 
             render() {
                 // 计算Render，是否执行加载
-                console.groupCollapsed("%c 「Zero」 数据加载专用日志....", `color:#eb2f96;font-weight:100`);
                 const render = fnRender(this.props, options);
-                console.groupEnd();
                 // 检查Form专用程序
                 ensureForm(this, options);
 
