@@ -30,9 +30,9 @@ class Component extends React.PureComponent {
         let className = "";
         if ($icon) {
             attrs.icon = $icon;
-            className = "vi-alert-iconlist";
+            className = "web-alert-iconlist";
         } else {
-            className = "vi-alert-list";
+            className = "web-alert-list";
         }
         return (
             <div className={className}>

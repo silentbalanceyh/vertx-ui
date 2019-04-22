@@ -1,5 +1,5 @@
-import Filter from './Ux.Column.Filter';
-import Render from './Ux.Column.Render';
+import Filter from './Ux.Filter';
+import Render from './Ux.Render';
 
 export default {
     ...Render,

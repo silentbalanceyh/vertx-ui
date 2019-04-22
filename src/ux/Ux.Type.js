@@ -221,34 +221,6 @@ const itObject = (data = {}, executor = () => {
         }
     }
 };
-
-const itData = (config = {}, consumer = () => {
-}) => {
-    for (const key in config) {
-        if (config.hasOwnProperty(key)) {
-            const expr = config[key];
-            E.fxTerminal("string" !== typeof expr, 10008, key, expr);
-            E.fxTerminal(0 > expr.indexOf(':'), 10008, key, expr);
-            if ("string" === typeof expr) {
-                const kv = expr.split(':');
-                E.fxTerminal(2 !== kv.length, 10102, kv);
-                let value;
-                // 特殊的包含.操作符合法
-                if ("DATUM" === kv[0] || "PROP" === kv[0]) {
-                    // 映射到path[0]
-                    value = [kv[1].split(',')];
-                } else if ("ENUM" === kv[0] || "FIX" === kv[0]) {
-                    value = [kv[1]];
-                } else {
-                    value = kv[1].split('.');
-                }
-                if (U.isFunction(consumer)) {
-                    consumer(key, kv[0], value);
-                }
-            }
-        }
-    }
-};
 /**
  * 二维数组遍历专用
  * @method itMatrix
@@ -523,6 +495,5 @@ export default {
     // 遍历对象
     itObject,
     itMatrix,
-    itData,
     itRepeat
 };

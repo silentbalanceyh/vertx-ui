@@ -120,7 +120,7 @@ const ajaxParams = (params = {}) => {
         if (U.isArray(value)) {
             data[field].forEach(item => itLang(item));
         } else {
-            if (U.isObject(data)) {
+            if (U.isObject(data) && !U.isArray(data)) {
                 data.language = language;
             }
         }

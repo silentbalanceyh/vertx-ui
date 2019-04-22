@@ -9,10 +9,21 @@ const verify = (target: any = {}) => {
     }
     return true;
 };
+const obtainQuery = (container: any = {}, dataKey) => {
+    let state = container.state ? container.state : {};
+    let original = state["$query"];
+    if (!original) original = {};
+    if (dataKey) {
+        original = original[dataKey];
+        return Ux.clone(original);
+    } else {
+        console.warn("[Ox] 不可传入空的 dataKey，", original);
+    }
+};
 
 class DataEvent {
     // 基础属性
-    name: any;
+    _name: any;
     _control: any;
     config: any = {};
     container;
@@ -24,7 +35,9 @@ class DataEvent {
     // 执行期状态
     params: any = {};
     returns: any = [];
+    // 状态和错误
     _state: any = {};
+    _error: any = {};
 
     constructor(source: Object, target: any) {
         // 1. 验证事件本身规范
@@ -33,17 +46,19 @@ class DataEvent {
             this._target = target;
             // 2. 抽取元数据
             // 事件名称
-            this.name = target._name;
+            this._name = target._name;
             this._control = target._target;
             // 事件配置
             this.config = target._config;
             // 获取根节点的引用信息
             this.container = target._reference;
+            // 读取 this.container 中的状态（执行annexState链式修改）
+            this._state = this.container.state;
         }
     }
 
     bind(Events: any): DataEvent {
-        const name = this.name;
+        const name = this._name;
         if (Events.hasOwnProperty(name)) {
             const generator = Events[name];
             if (U.isFunction(generator)) {
@@ -72,9 +87,14 @@ class DataEvent {
              */
             this._source.$input = input;
             /**
-             * 清空状态
+             * 还原状态而不是清空
+             * 读取 this.container 中的状态（执行annexState链式修改）
              */
-            this._state = {};
+            this._state = this.container.state;
+            /**
+             * 清空错误
+             */
+            this._error = {};
         }
         return this;
     }
@@ -82,6 +102,15 @@ class DataEvent {
     stored(data: any): DataEvent {
         this.returns.push(data);
         return this;
+    }
+
+    error(error: any): DataEvent {
+        if (0 === arguments.length) {
+            return this._error;
+        } else {
+            this._error = error;
+            return this;
+        }
     }
 
     /**
@@ -102,8 +131,8 @@ class DataEvent {
         }
     }
 
-    key(): String {
-        return this.name;
+    name(): String {
+        return this._name;
     }
 
     control(): String {
@@ -121,7 +150,7 @@ class DataEvent {
                 return () => false;
             }
         } else {
-            console.error("[OXE] 事件规范冲突，无法生成事件提供者！", this.name, this.events);
+            console.error("[OXE] 事件规范冲突，无法生成事件提供者！", this._name, this.events);
             return () => false;
         }
     }
@@ -135,11 +164,37 @@ class DataEvent {
         }
     }
 
+    isOk(): Boolean {
+        return Ux.isEmpty(this._error);
+    }
+
+    next(): DataEvent {
+        this.stored(this.getReturn());
+        if (!Ux.isEmpty(this._error)) {
+            this._error = {};
+        }
+        return this;
+    }
+
+    query(newQuery: any) {
+        if (Ux.isEmpty(newQuery)) {
+            this._target["_query"] = Ux.clone(newQuery);
+        }
+        return this;
+    }
+
     /**
      * 返回当前 Event 对应的配置信息
      */
     getConfig() {
         return this.config ? this.config : {};
+    }
+
+    /**
+     * 返回当前 Event 配置的规则
+     */
+    getRules() {
+        return this.config.rules ? this.config.rules : {};
     }
 
     // ----------------- 下边返回的内容都是副本 ----------------
@@ -155,7 +210,9 @@ class DataEvent {
     }
 
     getQuery() {
-        const query = this._target['_query'];
+        // 读取远程容器中的数据
+        const key = this._target._target;
+        const query = obtainQuery(this.container, key);
         return query ? Ux.clone(query) : {};
     }
 
@@ -181,22 +238,37 @@ class DataEvent {
         return $reference ? $reference : {};
     }
 
+    annexForm() {
+        const {$reference} = this._source;
+        const {form} = $reference.props;
+        if (form) {
+            return form;
+        } else {
+            console.error("[Ox-E] 对不起，您没使用Ant Design的Form封装该组件！");
+        }
+    }
+
     /**
      * 合并获取最新的 $query 的变量
      */
     annexQuery(query: any = {}) {
-        const container = this.container;
         const key = this._target._target;
-        return Ux.annexState(container, "$query", key, query);
+        // 容器层读取数据
+        return Ux.annexState(this._state, "$query", key, query);
     }
 
     /**
      * 合并获取最新的 $data 的变量
      */
     annexData(data: any = {}) {
-        const container = this.container;
         const key = this._target._dataKey;
-        return Ux.annexState(container, "$data", key, data);
+        return Ux.annexState(this._state, "$data", key, data);
+    }
+
+    annexAssist(data: any = {}) {
+        const assist = this.config.assist ? this.config.assist : {};
+        const {ajax = ""} = assist;
+        return Ux.annexState(this._state, "$data", ajax, data);
     }
 }
 

@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import U from 'underscore';
 
 class Query {
     constructor(reference) {
@@ -41,10 +42,14 @@ class Query {
             queryRef.sorter = [];
         }
         if (field) {
-            const sortItem = `${field},${isAsc ? "ASC" : "DESC"}`;
-            // 替换原始的
-            queryRef.sorter = [];
-            queryRef.sorter.push(sortItem);
+            if (U.isArray(field)) {
+                queryRef.sorter = [];
+            } else {
+                const sortItem = `${field},${isAsc ? "ASC" : "DESC"}`;
+                // 替换原始的
+                queryRef.sorter = [];
+                queryRef.sorter.push(sortItem);
+            }
         }
         return this;
     }

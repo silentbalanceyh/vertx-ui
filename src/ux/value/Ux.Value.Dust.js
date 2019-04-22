@@ -4,16 +4,8 @@ import Type from "../Ux.Type";
 import Util from '../util';
 import moment from "moment";
 import {DataArray, DataObject} from "entity";
+import Is from './Ux.Value.Dust.Is';
 
-const isEmpty = (input) => {
-    if (input) {
-        if (U.isArray(input)) {
-            return 0 === input.length;
-        } else {
-            return 0 === Object.keys(input).length;
-        }
-    } else return false;
-};
 const toJson = (input) => {
     if ("string" === typeof input) {
         try {
@@ -130,7 +122,7 @@ const element = (input, fnExecute) => {
     }
 };
 const matrix = (array = [], object = {}, fnExecute, fnPredicate) => {
-    if (!isEmpty(object)) {
+    if (!Is.isEmpty(object)) {
         // 是否检查
         const predicate = U.isFunction(fnPredicate) ? fnPredicate : () => true;
         Type.itFull(array, object, (item = {}, key, value) => {
@@ -243,17 +235,6 @@ const normalizeData = (each = {}, config = {}) => {
         }
     }
 };
-const isDiff = (left, right) => {
-    const leftValue = (left instanceof DataObject ||
-        left instanceof DataArray) ? left.to() : left;
-    const rightValue = (right instanceof DataObject ||
-        right instanceof DataArray) ? right.to() : right;
-    if (leftValue && rightValue) {
-        const $left = Immutable.fromJS(left);
-        const $right = Immutable.fromJS(right);
-        return !Immutable.is($left, $right);
-    } else return leftValue !== rightValue;
-};
 const Child = {
     byField: _childrenByField,
     normalizeData,
@@ -286,8 +267,7 @@ const flowable = (...input) => {
     return item;
 };
 export default {
-    isEmpty, // 判断是否为空
-    isDiff, // 判断两个对象是否相同
+    ...Is,
     sequence, // 序号处理
     flowable, // 从第一个开始读取第一个非undefined的项
     extract,

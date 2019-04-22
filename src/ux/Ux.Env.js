@@ -121,6 +121,7 @@ export default {
     dgMonitor: Dg.dgMonitor,
     dgScript: Dg.dgScript,
     dgDebug: Dg.dgDebug,
+    dgExecute: Dg.dgExecute,
     /**
      * Redux中的Action专用创建函数
      * @method createAction

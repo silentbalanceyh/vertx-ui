@@ -88,9 +88,9 @@ const ajaxUpload = (uri, file, mockData) => {
     return Resp.ajaxResponse(request, mockData, fileData);
 };
 
-const ajaxDownload = (uri, params, mockData) => {
-    const api = Aid.ajaxUri(uri, "GET", params);
-    Log.ajaxLog(api, "GET", {}, mockData);
+const _ajaxDown = (uri, params, mockData, method = "GET") => {
+    const api = Aid.ajaxUri(uri, method, params);
+    Log.ajaxLog(api, method, params, mockData);
     const headers = new Headers();
     Aid.ajaxSecure(headers, true);
     // 下载专用头设置，客户端只接受 octet-stream 格式
@@ -98,10 +98,14 @@ const ajaxDownload = (uri, params, mockData) => {
     headers.append(Cv.HTTP11.CONTENT_TYPE, "application/octet-stream");
     // Download专用
     const request = new Request(api, {
-        ...Aid.ajaxOptions("GET", headers)
+        ...Aid.ajaxOptions(method, headers)
     });
     return Resp.ajaxBlob(request, mockData, {});
 };
+
+const ajaxDownload = (uri, params, mockData) => _ajaxDown(uri, params, mockData);
+
+const ajaxPull = (uri, params, mockData) => _ajaxDown(uri, params, mockData, "POST");
 /**
  * 构造微服务路径专用
  * @param serviceName 服务名称
@@ -160,6 +164,7 @@ export default {
     ajaxUpload,
     // 下载
     ajaxDownload,
+    ajaxPull,
     /**
      * secure = false，非安全模式的读取方法，HttpMethod = GET，底层调ajaxRead
      * @method ajaxFetch

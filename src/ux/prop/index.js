@@ -6,7 +6,6 @@ import State from './Ux.State';
 import Prop from './Ux.Prop';
 import Validator from './Ux.Validator';
 import Item from './Ux.Item';
-import Obtain from './Ux.Obtain';
 
 export default {
     ...Attribute,
@@ -16,6 +15,5 @@ export default {
     ...State,
     ...Prop,
     ...Validator,
-    ...Item,
-    ...Obtain
+    ...Item
 };

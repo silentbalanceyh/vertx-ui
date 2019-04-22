@@ -219,5 +219,14 @@ export default {
     raftJsx,
     raftHidden,
     raftField,
-    raftCell: _raftCell
+    raftCell: _raftCell,
+    // 内部接口开放，切换名字后处理，和Ox执行桥接专用
+    raptUi: (reference, ui) => Normalize.raftUi(reference, ui),
+    raptAdjust: (window) => Ai.aiAdjust(window),
+    raptCell: (item, values, rowConfig) => Ai.hookerItem(item, values, rowConfig),
+    raptRow: (row = {}, addition = {}, config) => Jsx.raftRow(row, addition, config),
+    raptRender: (item, renders, layout, refenrece) =>
+        Ai.hookerRender(item, renders, layout, refenrece),
+    raptColumn: (item) => Ai.hookerCol(item),
+    raptJsx: (reference, render) => Jsx.raftRender(reference, render),
 };

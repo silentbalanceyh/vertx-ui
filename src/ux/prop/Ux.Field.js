@@ -4,6 +4,7 @@ import E from '../Ux.Error';
 const ajaxFun = {
     get: Ajax.ajaxGet,
     post: Ajax.ajaxPost,
+    put: Ajax.ajaxPut,
     fetch: Ajax.ajaxFetch,
     push: Ajax.ajaxPush,
     delete: Ajax.ajaxDelete
