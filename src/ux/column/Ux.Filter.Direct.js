@@ -23,7 +23,7 @@ const onClear = (reference, field, clearFilters) => (event) => {
 };
 
 const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = {}) => {
-    const {button = {}, options = []} = config;
+    const {button = {}, options = [], width = {}} = config;
     const {setSelectedKeys, selectedKeys = [], confirm, clearFilters} = filterConfig;
     const clearAttrs = T.getClearAttrs(reference, field, {
         selectedKeys, clearFilters, onClear,
@@ -31,7 +31,10 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
     return (
         <div style={{padding: 8}}>
             <Checkbox.Group onChange={_onChange(reference, field, setSelectedKeys)}
-                            style={{width: 90, marginBottom: 8, display: "block"}}
+                            style={{
+                                width: width.radio ? width.radio : 90,
+                                marginBottom: 8, display: "block"
+                            }}
                             value={selectedKeys}
             >
                 {options.map(option => (
@@ -47,11 +50,11 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                     event.preventDefault();
                     confirm();
                 }}
-                   style={{width: 48, marginRight: 8}}>
+                   style={{width: width.button ? width.button : 48, marginRight: 8}}>
                     {button['yes'] ? button['yes'] : false}
                 </a>
                 <a {...clearAttrs}
-                   style={{width: 48}}>
+                   style={{width: width.button ? width.button : 48}}>
                     {button.reset ? button.reset : false}
                 </a>
                 {T.jsxArchor(field, clearFilters)}
@@ -95,4 +98,4 @@ export default (reference, column, config) => {
     } else {
         console.error(`[Err] type = DIRECT 的模式要求必须配置 config，没配置 config 节点`);
     }
-}
+};

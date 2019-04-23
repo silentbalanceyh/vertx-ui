@@ -60,7 +60,7 @@ const jsxArchor = (field, clearFilters) => {
                 clearFilters();
             }}/>
         </div>
-    )
+    );
 };
 export default {
     getCondition,
