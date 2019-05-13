@@ -38,6 +38,7 @@ class DataEvent {
     // 状态和错误
     _state: any = {};
     _error: any = {};
+    _stack: any = [];
 
     constructor(source: Object, target: any) {
         // 1. 验证事件本身规范
@@ -155,15 +156,6 @@ class DataEvent {
         }
     }
 
-    generate(params): Function {
-        const fnGenerator = this._target._generator;
-        if (U.isFunction(fnGenerator)) {
-            return fnGenerator(params);
-        } else {
-            return () => Promise.resolve({error: "[OXE] Promise的生成器丢失！"});
-        }
-    }
-
     isOk(): Boolean {
         return Ux.isEmpty(this._error);
     }
@@ -214,6 +206,25 @@ class DataEvent {
         const key = this._target._target;
         const query = obtainQuery(this.container, key);
         return query ? Ux.clone(query) : {};
+    }
+
+    // ----------------- 堆栈跳跃操作 --------------------
+    stackPush(item: any): DataEvent {
+        this._stack.push(item);
+        return this;
+    }
+
+    stackPop() {
+        if (0 < this._stack.length) {
+            return this._stack.shift();
+        } else return {};
+    }
+
+    stackPeek() {
+        const length = this._stack.length;
+        if (0 < length) {
+            return this._stack[length - 1];
+        } else return {};
     }
 
     // ----------------- 下边方法是更新状态专用 -----------------

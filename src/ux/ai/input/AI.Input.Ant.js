@@ -1,5 +1,6 @@
 import RxAnt from "../ant/AI.RxAnt";
 import Aid from './fix';
+import Prop from '../../prop';
 import {
     Checkbox,
     DatePicker,
@@ -44,13 +45,22 @@ const aiInputNumber = (reference, jsx = {}, onChange) => {
     RxAnt.onChange(jsx, onChange);
     return (<InputNumber {...jsx}/>);
 };
+
+const aiCascase = (reference, cascade, filter) => {
+    // 如果配置了则以配置为主
+    if (cascade) {
+        const field = cascade.target;
+        const value = Prop.formGet(reference, field);
+        return item => value === item[cascade.source];
+    } else return filter;
+};
 const aiSelect = (reference, jsx = {}, onChange) => {
     const {config = {}, filter} = jsx;
     // onChange处理
     // 处理onChange，解决rest为 {}时引起的参数Bug
     const rest = Aid.fixAttrs(jsx);
     RxAnt.onChange(rest, onChange);
-    const options = RxAnt.toOptions(reference, config, filter);
+    const options = RxAnt.toOptions(reference, config, aiCascase(reference, config['cascade'], filter));
     return (
         <Select {...rest}>
             {options.map(item => (
