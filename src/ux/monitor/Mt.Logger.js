@@ -296,7 +296,7 @@ const mocker = (mockerRef, $query) => {
  */
 const mock = (request, response, url) => {
     if (Cv.DEBUG && Cv.MOCK) {
-        let message = `%c ---> 「Zero」Api ${url ? url : ""}`;
+        let message = `%c ---> 「Zero」RESTful Api ${url ? url : ""}`;
         console.groupCollapsed(message, "color:white;background-color:#52c41a;font-weight:900;");
         if (request) {
             console.log("%c 「Zero」 Mock request -> ", 'color:#99CC33', request);
@@ -316,7 +316,7 @@ const mock = (request, response, url) => {
 const debug = (object, original) => {
     if (Cv.DEBUG) {
         let message = `%c 「Zero」 Redux Data Flow`;
-        console.groupCollapsed(message, "color:#09c;font-weight:100");
+        console.groupCollapsed(message, "color:white;background-color:#09c;font-weight:100");
         if ("string" === typeof object) {
             console.log("「Zero」 Redux Key: ", object);
         } else {

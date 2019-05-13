@@ -104,7 +104,8 @@ const fnError = {
     10098: () => `[ ERR-10098 ] (Js) 捕捉到Js的异常信息：`,
     10099: () => `[ ERR-10099 ] (Dialog) 配置构造有问题：key, message, hoc = `,
     10100: (fnName) => `[ ERR-10100 ] (Web) 当前组件使用了 Reactive 模式，传入的函数非法，fnName = ${fnName}`,
-    10101: (same, diff) => `[ ERR-10101 ] (Web) 当前组件设置 ReadOnly 依赖时 same和diff值不可相同，same=${same},diff=${diff}`
+    10101: (same, diff) => `[ ERR-10101 ] (Web) 当前组件设置 ReadOnly 依赖时 same和diff值不可相同，same=${same},diff=${diff}`,
+    10102: (kv) => `[ ERR-10102 ] (Ir) valueSearch 解析的时候发现格式不对的键值对，${kv}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

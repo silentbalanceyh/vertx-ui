@@ -2,6 +2,7 @@ import Store from './Ux.Store';
 import Cv from '../cv/Ux.Constant';
 import E from '../Ux.Error';
 import Hoc from '../prop/Ux.Hoc';
+import Value from "../Ux.Value";
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -90,6 +91,10 @@ const isAuthorized = (reference) => {
         }
     }
 };
+const toLoading = (consumer, seed = 1) => {
+    const ms = Value.valueInt(Cv.LOADING, 216);
+    setTimeout(consumer, ms * seed);
+};
 /**
  * @class Global
  * @description 全局专用业务函数
@@ -109,4 +114,6 @@ export default {
     toRoute,
     // 到原来地址
     toOriginal,
+    // 统一加载设置加载时间
+    toLoading
 };

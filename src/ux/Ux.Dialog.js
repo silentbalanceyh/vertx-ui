@@ -1,9 +1,8 @@
 import {message, Modal} from 'antd';
 import Prop from './prop/Ux.Prop';
 import Expr from './util/Ux.Expr';
-import Cv from './cv/Ux.Constant';
 import E from './Ux.Error';
-import Value from './Ux.Value';
+import Global from './system';
 import U from 'underscore';
 
 const _captureKey = (reference, key) => {
@@ -221,8 +220,7 @@ const onLoading = (reference, fnSuccess) => {
             size: "large"
         }
     });
-    const ms = Value.valueInt(Cv.LOADING, 288);
-    setTimeout(fnSuccess, ms);
+    Global.toLoading(fnSuccess);
 };
 const onLoaded = (reference) => reference.setState({$$loading: false});
 const onReady = (reference, defaultReady) => {

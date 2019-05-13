@@ -226,7 +226,7 @@ const rtPure = (reference, jsx = {}) => {
         <Tooltip {...attrs}>
             {fnRender()}
         </Tooltip>
-    ) : fnRender()
+    ) : fnRender();
 };
 const rtGroup = (reference, items = [], rest = {}) => {
     return (
@@ -238,7 +238,7 @@ const rtGroup = (reference, items = [], rest = {}) => {
                 return rtPure(reference, item);
             })}
         </Button.Group>
-    )
+    );
 };
 const rtDirect = (reference, jsx = {}) => {
     if (jsx.hasOwnProperty("direct")) {

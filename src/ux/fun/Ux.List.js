@@ -42,7 +42,8 @@ const irSorter = (hoc = {}) => {
     return sorterData;
 };
 
-const irCriteria = (hoc = {}, props = {}) => {
+const irCriteria = (hoc = {}, props = {}, state = {}) => {
+    // 同时支持两种模式
     let config = {};
     if (hoc.criteria) {
         if ("string" === typeof hoc.criteria) {
@@ -63,11 +64,13 @@ const irCriteria = (hoc = {}, props = {}) => {
             // 3.本身就是一个对象，将该对象传入到config中进行解析
             config = Value.clone(hoc.criteria);
         }
+    } else {
+        config = Ux.clone(hoc);
     }
-    return Value.valueSearch(config, props);
+    return Value.valueSearch(config, props, state);
 };
 
-const irGrid = (hoc = {}, props = {}) => {
+const irGrid = (hoc = {}, props = {}, state = {}) => {
     const query = {};
     // pager专用处理
     query.pager = irPager(hoc);
@@ -76,7 +79,8 @@ const irGrid = (hoc = {}, props = {}) => {
     // sorter专用处理
     query.sorter = irSorter(hoc);
     // criteria条件处理
-    query.criteria = irCriteria(hoc, props);
+    query.criteria = irCriteria(hoc, props, state);
+    // 其他属性必须全部填充，不能只认Ir属性
     return query;
 };
 

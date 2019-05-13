@@ -1,9 +1,9 @@
-import Sorter from "../util/Ux.Sorter";
-import Type from "../Ux.Type";
+import Sorter from "../../util/Ux.Sorter";
+import Type from "../../Ux.Type";
 import U from 'underscore';
 import {DataLabor} from 'entity';
-import Value from '../Ux.Value';
-import Cv from "../cv/Ux.Constant";
+import Value from '../../Ux.Value';
+import Cv from "../../cv/Ux.Constant";
 
 const _fnSorter = (source = [], $query = {}) => {
     if ($query.sorter) {
@@ -172,7 +172,7 @@ const _fnCriteria = (source = [], $query = {}) => {
     return source;
 };
 
-class Criteria {
+class Searcher {
     constructor(data = []) {
         this.data = Value.clone(data);
     }
@@ -189,5 +189,5 @@ class Criteria {
 }
 
 export default {
-    aiCriteria: (data) => new Criteria(data)
+    aiSearcher: (data) => new Searcher(data)
 };

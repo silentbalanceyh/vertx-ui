@@ -74,7 +74,6 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         }
     }
 };
-
 const required = (reference = {}) => (rule = {}, value, callback) => {
     if (_ready(rule)) {
         // 处理required
@@ -160,7 +159,7 @@ const VERFIERS = {
  * @param {React.PureComponent} reference React对应组件引用
  * @param item
  */
-const mountValidator = (refereuce = {}, item = {}) => {
+const mountValidator = (reference = {}, item = {}) => {
     if (item.optionConfig) {
         const rules = item.optionConfig.rules;
         // 触发条件设置，默认onBlur，符合大多数习惯
@@ -180,7 +179,8 @@ const mountValidator = (refereuce = {}, item = {}) => {
                         Object.keys(VERFIERS)
                     );
                     if (U.isFunction(executeFun)) {
-                        const validatorFun = executeFun(refereuce);
+                        // supplier 处理
+                        const validatorFun = executeFun(reference);
                         // 10024
                         Error.fxTerminal(
                             !U.isFunction(validatorFun),

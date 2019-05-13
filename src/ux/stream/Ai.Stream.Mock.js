@@ -31,7 +31,7 @@ class Mock {
     }
 
     filter($query = {}) {
-        this.source.list = Ai.aiCriteria(this.data.list).query($query);
+        this.source.list = Ai.aiSearcher(this.data.list).query($query);
         this.source.count = this.source.list.length;
         this.source.ready = true;
         Log.mocker(this, $query);

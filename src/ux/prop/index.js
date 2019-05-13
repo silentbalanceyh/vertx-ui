@@ -15,5 +15,5 @@ export default {
     ...State,
     ...Prop,
     ...Validator,
-    ...Item,
+    ...Item
 };

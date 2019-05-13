@@ -3,9 +3,38 @@ import Cv from "../cv/Ux.Constant";
 import Sign from "../util/Ux.Sign";
 import E from "../Ux.Error";
 import Type from "../Ux.Type";
+import Debug from '../Ux.Debug';
 import U from "underscore";
 
+const ajaxParamDeep = (criteria = {}, collector = {}) => {
+    for (const key in criteria) {
+        if (key && criteria.hasOwnProperty(key)) {
+            const value = criteria[key];
+            if (!U.isArray(value) && U.isObject(value)) {
+                ajaxParamDeep(value, collector);
+            } else {
+                collector[key] = value;
+            }
+        }
+    }
+};
 
+const ajaxUriDeep = (uri, params = {}) => {
+    let api = uri;
+    // 只有带有路径参数的才执行这个递归
+    if (params.hasOwnProperty("criteria") && 0 < api.indexOf(":")) {
+        try {
+            const $params = {};
+            ajaxParamDeep(params.criteria, $params);
+            Debug.dgDebug($params, "[Ux] 拉平过后的数据处理：");
+            api = Expr.formatExpr(api, $params, true);
+        } catch (error) {
+            console.error(error);
+            throw error;
+        }
+    }
+    return api;
+};
 /**
  * Ajax远程访问过程中的Uri处理器
  * @method ajaxUri
@@ -17,6 +46,8 @@ import U from "underscore";
  */
 const ajaxUri = (uri, method = "get", params = {}) => {
     let api = Expr.formatExpr(uri, params, true);
+    // 针对查询引擎的特殊填充
+    api = ajaxUriDeep(api, params);
     // 签名
     if (Cv.SIGN) {
         Sign.signature(api, method, params);
@@ -89,7 +120,7 @@ const ajaxParams = (params = {}) => {
         if (U.isArray(value)) {
             data[field].forEach(item => itLang(item));
         } else {
-            if (U.isObject(data)) {
+            if (U.isObject(data) && !U.isArray(data)) {
                 data.language = language;
             }
         }

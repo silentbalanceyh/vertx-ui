@@ -136,6 +136,13 @@ const _reportOther = (lib, kv) => {
     };
     _reportShared(lib, kv, fnFilter, "XXX");
 };
+const dgExecute = (consumer) => {
+    if (consumer && U.isFunction(consumer)) {
+        if (Boolean("development" === process.env.NODE_ENV && Constant.DEBUG)) {
+            consumer();
+        }
+    }
+};
 /**
  * 1. `ensure`工具类：Zero UI内部专用断言工具类
  * 2. `dg`工具类：开发人员调试常用工具类
@@ -177,5 +184,6 @@ export default {
     dgMonitor,
     dgDebug,
     dgReport,
-    dgAjax
+    dgAjax,
+    dgExecute,
 };

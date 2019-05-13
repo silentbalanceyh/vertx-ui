@@ -19,12 +19,17 @@ const _formatNamed = (input = "", params = {}, keep = false) => {
         0 < Object.keys(params).length
     ) {
         for (const key in params) {
-            const value = params[key];
-            if (0 <= input.indexOf(":" + key) && undefined !== value) {
-                let replaced = new RegExp(`\\:${key}`, "gm");
-                input = input.replace(replaced, value);
-                if (!keep) {
-                    delete params[key];
+            // 由于查询引擎中包含了 "" 的键值，所以需要做这种处理
+            if (key && params.hasOwnProperty(key)) {
+                const value = params[key];
+                // 过滤掉 "" 的键
+                if ("string" === typeof input &&
+                    0 <= input.indexOf(":" + key) && undefined !== value) {
+                    let replaced = new RegExp(`\\:${key}`, "gm");
+                    input = input.replace(replaced, value);
+                    if (!keep) {
+                        delete params[key];
+                    }
                 }
             }
         }

@@ -1,6 +1,7 @@
 import Tab from './Ai.Stream.Tab';
 import Table from './Ai.Stream.Table';
 import Mock from './Ai.Stream.Mock';
+import Query from './Ai.Stream.Query';
 import E from '../Ux.Error';
 
 class Stream {
@@ -18,6 +19,12 @@ class Stream {
         const reference = this.reference;
         E.fxTerminal(!reference, 10049, reference);
         return new Table(reference);
+    }
+
+    query() {
+        const reference = this.reference;
+        E.fxTerminal(!reference, 10049, reference);
+        return new Query(reference);
     }
 
     mock() {

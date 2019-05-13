@@ -265,6 +265,7 @@ const aiExprPopover = (popover = "") => {
     if (item.hasOwnProperty('key')) {
         delete item['key'];
     }
+    if (item.width) item.width = Value.valueInt(item.width);
     if (item.hasOwnProperty('visible')) item.visible = "true" === (item.visible);
     if (item.hasOwnProperty('closable')) item.closable = "true" === (item.closable);
     return item;
