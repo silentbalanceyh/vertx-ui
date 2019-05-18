@@ -7,6 +7,7 @@ import Jsx from './Ux.Jsx';
 import Value from './Ux.Value';
 import React from 'react';
 import {Col, Form, Input, Row} from 'antd';
+import Dg from "./Ux.Debug";
 
 const _raftCell = (reference, values) => (cell) => {
     if (cell.title) {
@@ -55,10 +56,11 @@ const raftJsx = (reference, values, config = {}) => {
     const {raft = {}} = reference.state;
     // 初始化数据
     values = raftInited(reference, values);
+    Dg.dgDebug(values, "初始化表单数据：", "black");
     // 给Form设置key
     const attrs = {};
-    if (config.formKey) {
-        attrs.key = config.formKey;
+    if (config['formKey']) {
+        attrs.key = config['formKey'];
     }
     return (
         <Form {...raft.form} {...attrs}>
