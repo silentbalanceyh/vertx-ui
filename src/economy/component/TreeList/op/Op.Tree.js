@@ -2,7 +2,9 @@ import Ux from "ux";
 import Init from './Op.Init';
 
 const _initLoop = (data = {}, array = [], level = 1) => {
-    const item = array.filter(item => item.branch === data.key);
+    // 层级关系，所以不用key而用category
+    // const item = array.filter(item => item.branch === data.key);
+    const item = array.filter(item => item.branch === data.category);
     if (0 < item.length) {
         item.forEach(each => {
             // Level专用
@@ -19,7 +21,9 @@ const _initTree = (reference = {}, data = []) => {
     if (options["tree.root"]) {
         // 2.由于包含了ROOT，所以需要预处理source
         const root = {};
+        // ROOT 虚拟结点是用来代表层级关系，所以不用key而用category
         root.key = "_ROOT_";
+        root.category = "_ROOT_";
         const {$root} = reference.props;
         root.display = $root ? $root : options["tree.root"];
         root._level = 0;

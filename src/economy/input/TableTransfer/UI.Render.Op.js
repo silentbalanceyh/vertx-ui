@@ -64,7 +64,8 @@ const renderOp = (reference, from = false, column = {}) => (text, record) => {
         return (
             <span>
                 {label}&nbsp;&nbsp;
-                {record.children ? false :
+                {/*将判断条件由 record.children 改成 record.leaf，区别某结点是本来就是leaf结点还是由于下挂结点都被选出后形成leaf结点*/}
+                {!record.leaf ? false :
                     (<Button icon={"up"} shape={"circle"} size={"small"}
                              onClick={_on2Add(reference, record)}/>)}
             </span>
