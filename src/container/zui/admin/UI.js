@@ -4,7 +4,7 @@ import React from "react";
 import Ux from 'ux';
 import Op from './Op';
 import {Layout} from 'antd'
-import {PagerHeader} from "web";
+import {Navigation} from "web";
 import Types from './Act.Types';
 // -- Sider Bar
 import SiderBar from './UI.Sider'
@@ -68,7 +68,7 @@ class Component extends React.PureComponent {
         const {component: Component} = this.props;
         const info = Ux.fromHoc(this, "info");
         return (
-            <Layout>
+            <Layout className={"ux-layout"}>
                 <SiderBar {...Ux.toEffect(this.state)}
                           {...Ux.toProp(this.props, 'app', 'router', 'menus')} />
                 <Layout>
@@ -77,10 +77,8 @@ class Component extends React.PureComponent {
                                   {...Ux.toEffect(this.state)}
                                   {...Ux.toProp(this.props, 'router', 'user')} />
                     <Content>
-                        <div className={"page-header"}>
-                            <PagerHeader {...Ux.toProp(this.props, 'router')}
-                                         $navs={buildNavs(this)}/>
-                        </div>
+                        <Navigation {...Ux.toProp(this.props, 'router')}
+                                    $navs={Op.fnNavigator(this)}/>
                         <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>
                 </Layout>

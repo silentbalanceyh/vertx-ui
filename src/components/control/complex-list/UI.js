@@ -33,7 +33,8 @@ class Component extends React.PureComponent {
             "Op.ts", "<Type/Epic>.js")(
             <Demo reference={this}
                   rxInject={Fn.injectOptFun(this)}
-                  rxSet={Fn.injectSet(this)}/>
+                  rxSet={Fn.injectSet(this)}
+                  {...this.props}/>
         )
     }
 }

@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from "ux";
-import {Mock, Tps} from 'app';
-import {ComplexList, HelpCard} from 'web';
+import {Mock} from 'app';
+import {ExComplexList, HelpCard} from 'web';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Edit'
@@ -10,7 +10,6 @@ const {zero} = Ux;
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Demo")
-    .search(Tps.fnDeptList)
     .to()
 )
 class Component extends React.PureComponent {
@@ -18,12 +17,13 @@ class Component extends React.PureComponent {
     render() {
         return (
             <HelpCard reference={this}>
-                <ComplexList {...this.props}
-                             reference={this}
-                             $mockData={Mock.fnDeptList}
-                             $formFilter={Filter}
-                             $formAdd={FormAdd}
-                             $formEdit={FormEdit}/>
+                {/* 新版的去掉数据从Redux取的 ComplexList */}
+                <ExComplexList {...this.props}
+                               reference={this}
+                               $mockData={Mock.fnDeptList}
+                               FormFilter={Filter}
+                               FormAdd={FormAdd}
+                               FormEdit={FormEdit}/>
             </HelpCard>
         )
     }
