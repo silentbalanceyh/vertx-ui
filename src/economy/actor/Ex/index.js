@@ -5,8 +5,8 @@ export default (options = {}) => {
     /*
      * 抽取核心函数
      */
-    const fnVerify = options.verify;
-    const fnHoc = options.hoc;
+    const fnVerify = options.verify(options.type);
+    const fnHoc = options.hoc(options.type);
     /*
      * Ex专用注解，高阶封装，对组件进行核心封装
      */
@@ -20,7 +20,7 @@ export default (options = {}) => {
             // 不验证的情况 error 就是 undefined
             if (!error) {
                 if (U.isFunction(fnHoc)) {
-                    fnHoc(ref);
+                    fnHoc(ref, options.type);
                 }
                 if (U.isFunction(componentDidMount)) {
                     componentDidMount()
@@ -29,10 +29,13 @@ export default (options = {}) => {
                 ref.setState({error});
             }
         };
+        // 防止 ... 操作到 undefined
+        if (!options.state) options.state = {};
         // 定义新的 class
         return class hoc extends target {
             state = {
-                error: undefined // 默认的错误信息
+                error: undefined, // 默认的错误信息,
+                ...options.state
             };
 
             componentDidMount() {
