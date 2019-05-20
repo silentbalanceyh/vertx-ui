@@ -5,7 +5,7 @@ import {Tabs} from "antd";
 
 import RENDERS from './UI.Render';
 
-import ExExtraBar from '../ExExtraBar/UI';
+import IxExtraBar from '../IxExtraBar/UI';
 import Ux from "ux";
 
 @Ex({
@@ -35,7 +35,7 @@ class Component extends React.PureComponent {
         const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
         return (
             <Tabs {...rest}
-                  tabBarExtraContent={<ExExtraBar {...this.props} $options={options}/>}
+                  tabBarExtraContent={<IxExtraBar {...this.props} $options={options}/>}
                   className={className}>
                 {items.map(item => {
                     const {type, ...itemRest} = item;

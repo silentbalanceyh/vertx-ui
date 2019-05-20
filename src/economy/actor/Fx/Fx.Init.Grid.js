@@ -4,7 +4,6 @@ import Q from './Fx.Query';
 import Ux from 'ux';
 
 import Tab from './Fx.Tab';
-import Table from './Fx.Table';
 
 export default type => ref => {
     const config = Cfg.hocConfig(type)(ref);
@@ -24,10 +23,8 @@ export default type => ref => {
      * 准备 Tabs 的初始化状态
      */
     reactState.tabs = Tab.init(ref, config.options);
-    /*
-     * 准备 Table 的初始化状态
-     */
-    reactState.table = Table.init(ref, config.options, config.table);
+
+    reactState.table = Ux.clone(config.table);
     /*
      * 处理当前 Grid 页面所有操作
      */

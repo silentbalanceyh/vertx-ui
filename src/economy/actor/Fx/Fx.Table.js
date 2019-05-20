@@ -40,11 +40,10 @@ const init = (reference, options = {}, table = {}) => {
     }
     return table;
 };
-const render = (reference) => {
-    const {table = {}, data = {}, loading = true, options = {}} = reference.state;
+const render = (reference, options = {}, table = {}) => {
+    const {loading = true} = reference.state;
     const $table = Ux.clone(table);
     $table.loading = loading;
-    $table.dataSource = data.list ? data.list : [];
     // 动态列处理
     if (options['column.dynamic']) {
         table.columns = initColumns(reference, table);

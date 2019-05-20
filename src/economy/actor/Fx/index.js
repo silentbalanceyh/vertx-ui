@@ -11,6 +11,7 @@ const exported = {
     configTab: Tab.render,
     // Table Render
     configTable: Table.render,
+    initTable: Table.init,
 
     // 加载数据专用方法（复杂查询）
     rxSearch: Q.search,
