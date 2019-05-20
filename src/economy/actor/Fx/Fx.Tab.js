@@ -36,7 +36,12 @@ const render = (reference) => {
     items.forEach((item, index) => item.disabled = limit < items.length && 0 === index);
     return {items, ...rest};
 };
+const rxAdd = reference => event => {
+    // 添加按钮
+};
 export default {
     init,
     render,
+    // 事件专用处理
+    rxAdd
 }
