@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import U from 'underscore';
 
 const input = (reference, defaultQuery = {}) => {
     const {$query} = reference.props;
@@ -19,7 +20,11 @@ const search = (reference) => {
     if (reference) {
         const {rxSearch} = reference.props;
         const {query = {}} = reference.state;
-        console.info(rxSearch, query);
+        if (U.isFunction(rxSearch)) {
+            rxSearch(query).then(data => reference.setState({
+                data, loading: false
+            }))
+        }
     }
 };
 export default {

@@ -1,5 +1,6 @@
 import Hoc from './Fx.Hoc';
 import Tab from './Fx.Tab';
+import Table from './Fx.Table';
 import Query from './Fx.Query';
 import Is from './Fx.Is';
 
@@ -7,6 +8,7 @@ const exported = {
     ...Hoc,
     // Tab Render
     configTab: Tab.render,
+    configTable: Table.render,
     // 加载数据专用方法（复杂查询）
     rxSearch: Query.search,
     // 是否更新了 $query 一系列

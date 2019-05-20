@@ -1,11 +1,12 @@
 import Cfg from './Fx.Config';
 import Mock from './Fx.Mock';
-import Tab from './Fx.Tab';
-import Unity from './Fx.Unity';
 import Q from './Fx.Query';
 import Ux from 'ux';
 
-export default type => async ref => {
+import Tab from './Fx.Tab';
+import Table from './Fx.Table';
+
+export default type => ref => {
     const config = Cfg.hocConfig(type)(ref);
     const reactState = {};
     /*
@@ -18,14 +19,17 @@ export default type => async ref => {
      * 准备 React 中的状态
      */
     reactState.mock = Mock.isMock(ref, config.options);
+    /*
+     * 准备 Tabs 的初始化状态
+     */
     reactState.tabs = Tab.init(ref, config.options);
+    /*
+     * 准备 Table 的初始化状态
+     */
+    reactState.table = Table.init(ref, config.options, config.table);
     /*
      * 存储 options 到 状态中（以后就不用每次都读取了）
      */
     reactState.options = Ux.clone(config.options);
-    /*
-     * 最终状态写入
-     */
-    Unity.write(ref, reactState, null);
-    return true;
+    return reactState;
 }
