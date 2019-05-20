@@ -4,4 +4,4 @@
 # 最终输出信息
 echo "[Zero UI] Environment has been initialized successfully !"
 # 启动App
-node scripts/start.js
+node --max_old_space_size=4096 scripts/start.js

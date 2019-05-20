@@ -1,6 +1,6 @@
 import DATA_OP from './DATA.OP';
 import Ux from 'ux';
-import Tab from './Fx.Tab';
+import Action from './Fx.Action';
 
 const _initOpt = (options = {}) => {
     const ops = {};
@@ -16,10 +16,18 @@ const initAdd = (ref, options = {}) => {
     if (opts.add) {
         const button = Ux.clone(DATA_OP['add']);
         button.text = opts.add;
-        button.onClick = Tab.rxAdd(ref);
+        button.onClick = Action.rxAddTab(ref);
         return button;
     }
 };
+const initBtEdit = (ref, options = {}) => {
+
+};
+const initBtDelete = (ref, options = {}) => {
+
+};
 export default {
-    initAdd
+    initAdd,
+    initBtEdit,
+    initBtDelete
 }

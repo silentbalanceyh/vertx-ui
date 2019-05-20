@@ -27,7 +27,12 @@ const search = (reference) => {
         }
     }
 };
+const is = (reference, previous = {}) => {
+    const {prevState, prevProps} = previous;
+
+};
 export default {
     input,
-    search
+    search,
+    is
 }

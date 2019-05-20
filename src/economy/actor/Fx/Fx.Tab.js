@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import Action from './Fx.Action';
 
 const init = (reference, options = {}) => {
     /*
@@ -19,6 +20,8 @@ const init = (reference, options = {}) => {
     tabs.activeKey = tab.key;
     tabs.type = "editable-card";
     tabs.hideAdd = true;
+    tabs.onTabClick = Action.rxClickTab(reference);
+    tabs.onEdit = Action.rxEditTab(reference);
     /* className的注入 */
     const {className = Ux.ECONOMY.TAB_CONTAINER} = reference.props;
     tabs.className = className;
@@ -36,12 +39,7 @@ const render = (reference) => {
     items.forEach((item, index) => item.disabled = limit < items.length && 0 === index);
     return {items, ...rest};
 };
-const rxAdd = reference => event => {
-    // 添加按钮
-};
 export default {
     init,
-    render,
-    // 事件专用处理
-    rxAdd
+    render
 }

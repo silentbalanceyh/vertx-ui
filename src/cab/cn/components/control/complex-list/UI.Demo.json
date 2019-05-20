@@ -31,12 +31,17 @@
             "tabs.add": "添加部门",
             "tabs.edit": "编辑部门",
             "op.add": "添加",
+            "op.batchEdit": "批量更新",
+            "op.batchDelete": "批量删除",
+            "column.dynamic": true,
             "submit.add": "$opAdd",
             "submit.edit": "$opSave",
             "submit.reset": "$opReset",
             "ajax.get.uri": "/api/dept/:id",
             "ajax.delete.uri": "/api/dept/:id",
             "confirm.delete": "确认删除当前部门记录？"
+        },
+        "fields": {
         },
         "table": {
             "columns": [

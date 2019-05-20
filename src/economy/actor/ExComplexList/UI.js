@@ -5,7 +5,7 @@ import {Tabs} from "antd";
 
 import RENDERS from './UI.Render';
 
-import ExAction from '../ExAction/UI';
+import ExExtraBar from '../ExExtraBar/UI';
 
 @Ex({
     // 1. 验证专用函数
@@ -33,7 +33,7 @@ class Component extends React.PureComponent {
         const {options = {}} = this.state;
         return (
             <Tabs {...rest}
-                  tabBarExtraContent={<ExAction {...this.props} $options={options}/>}>
+                  tabBarExtraContent={<ExExtraBar {...this.props} $options={options}/>}>
                 {items.map(item => {
                     const {type, ...itemRest} = item;
                     const fnRender = RENDERS[type];

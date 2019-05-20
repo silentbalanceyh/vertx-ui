@@ -17,7 +17,9 @@ const renderPageList = (reference, item = {}) => {
     return (
         <Row>
             <Row>
-                {renderAdd(reference)}
+                <Col span={3}>
+                    {renderAdd(reference)}
+                </Col>
             </Row>
             <Row>
                 <Col span={24}>
@@ -27,6 +29,11 @@ const renderPageList = (reference, item = {}) => {
         </Row>
     );
 };
+const renderPageAdd = (reference, item = {}, key) => {
+
+    return false;
+};
 export default {
-    "list": renderPageList
+    "list": renderPageList,
+    "add": renderPageAdd,
 }

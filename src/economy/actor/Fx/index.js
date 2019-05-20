@@ -1,18 +1,18 @@
 import Hoc from './Fx.Hoc';
 import Tab from './Fx.Tab';
 import Table from './Fx.Table';
-import Query from './Fx.Query';
-import Is from './Fx.Is';
+import Q from './Fx.Query';
 
 const exported = {
     ...Hoc,
     // Tab Render
     configTab: Tab.render,
+    // Table Render
     configTable: Table.render,
     // 加载数据专用方法（复杂查询）
-    rxSearch: Query.search,
+    rxSearch: Q.search,
     // 是否更新了 $query 一系列
-    testQuery: Is.isQuery,
+    testQuery: Q.is,
 };
 console.info(exported);
 export default exported;
