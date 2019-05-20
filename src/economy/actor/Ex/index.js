@@ -66,6 +66,6 @@ export default (options = {}) => {
                     return ready ? super.render() : false;
                 }
             }
-        }
-    }
-}
+        };
+    };
+};

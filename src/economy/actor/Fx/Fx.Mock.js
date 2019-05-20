@@ -11,4 +11,4 @@ const isMock = (reference, options = {}) => {
 };
 export default {
     isMock
-}
+};

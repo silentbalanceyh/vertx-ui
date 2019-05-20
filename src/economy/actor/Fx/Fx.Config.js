@@ -20,11 +20,11 @@ const hocQuery = type => reference => {
 };
 const hocTable = type => reference => {
     const config = hocConfig(type)(reference);
-    return config ? config.table : {}
+    return config ? config.table : {};
 };
 export default {
     hocConfig,
     hocOptions,
     hocQuery,
     hocTable
-}
+};

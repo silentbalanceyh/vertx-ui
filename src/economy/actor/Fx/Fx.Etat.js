@@ -66,7 +66,7 @@ const removeTab = (reference, key) => {
 const viewSwitch = (reference, view = "list", key) => {
     const {rxViewSwitch} = reference.props;
     if (U.isFunction(rxViewSwitch)) {
-        rxViewSwitch(view, key)
+        rxViewSwitch(view, key);
     }
     return {view, key, $$loading: "list" !== view};
 };
@@ -80,4 +80,4 @@ export default {
     View: {
         switch: viewSwitch,
     }
-}
+};

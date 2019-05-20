@@ -30,4 +30,4 @@ export default {
     initAdd,
     initBtEdit,
     initBtDelete
-}
+};

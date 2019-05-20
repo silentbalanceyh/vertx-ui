@@ -5,7 +5,6 @@ import Ux from 'ux';
 
 import Tab from './Fx.Tab';
 import Table from './Fx.Table';
-import Op from './Fx.Init.Grid.Op';
 
 export default type => ref => {
     const config = Cfg.hocConfig(type)(ref);
@@ -20,26 +19,26 @@ export default type => ref => {
      * 准备 React 中的状态
      */
     reactState.mock = Mock.isMock(ref, config.options);
-    {
-        /*
-         * 准备 Tabs 的初始化状态
-         */
-        reactState.tabs = Tab.init(ref, config.options);
-        /*
-         * 准备 Table 的初始化状态
-         */
-        reactState.table = Table.init(ref, config.options, config.table);
-        /*
-         * 处理当前 Grid 页面所有操作
-         */
-        const op = {};
-        // 1. op.add、是否开启添加
-        op.add = Op.initAdd(ref, config.options);
-        reactState.op = op;
-    }
+
+    /*
+     * 准备 Tabs 的初始化状态
+     */
+    reactState.tabs = Tab.init(ref, config.options);
+    /*
+     * 准备 Table 的初始化状态
+     */
+    reactState.table = Table.init(ref, config.options, config.table);
+    /*
+     * 处理当前 Grid 页面所有操作
+     */
+    // const op = {};
+    // 1. op.add、是否开启添加
+    // op.add = Op.initAdd(ref, config.options);
+    // reactState.op = op;
+
     /*
      * 存储 options 到 状态中（以后就不用每次都读取了）
      */
     reactState.options = Ux.clone(config.options);
     return reactState;
-}
+};

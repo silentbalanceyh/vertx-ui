@@ -23,7 +23,7 @@ const search = (reference) => {
         if (U.isFunction(rxSearch)) {
             rxSearch(query).then(data => reference.setState({
                 data, loading: false
-            }))
+            }));
         }
     }
 };
@@ -35,4 +35,4 @@ export default {
     input,
     search,
     is
-}
+};

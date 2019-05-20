@@ -21,4 +21,4 @@ const init = type => ref => {
 export default {
     verify,
     init
-}
+};

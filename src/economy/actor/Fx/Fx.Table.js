@@ -38,9 +38,6 @@ const init = (reference, options = {}, table = {}) => {
     if (!options['column.dynamic']) {
         table.columns = initColumns(reference, table);
     }
-
-    // 扩展
-    table.className = Ux.ECONOMY.TABLE_CONTROL;
     return table;
 };
 const render = (reference) => {
@@ -62,4 +59,4 @@ const render = (reference) => {
 export default {
     init,
     render,
-}
+};

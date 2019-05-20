@@ -1,11 +1,12 @@
-import React from 'react'
-import Ex from '../Ex'
+import React from 'react';
+import Ex from '../Ex';
 import Fn from '../Fx';
 import {Tabs} from "antd";
 
 import RENDERS from './UI.Render';
 
 import ExExtraBar from '../ExExtraBar/UI';
+import Ux from "ux";
 
 @Ex({
     // 1. 验证专用函数
@@ -31,9 +32,11 @@ class Component extends React.PureComponent {
         const {items = [], ...rest} = $tabs;
         /* options */
         const {options = {}} = this.state;
+        const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
         return (
             <Tabs {...rest}
-                  tabBarExtraContent={<ExExtraBar {...this.props} $options={options}/>}>
+                  tabBarExtraContent={<ExExtraBar {...this.props} $options={options}/>}
+                  className={className}>
                 {items.map(item => {
                     const {type, ...itemRest} = item;
                     const fnRender = RENDERS[type];
@@ -42,11 +45,11 @@ class Component extends React.PureComponent {
                         <Tabs.TabPane {...itemRest}>
                             {fnRender(this, itemRest, rest.activeKey)}
                         </Tabs.TabPane>
-                    )
+                    );
                 })}
             </Tabs>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

@@ -4,4 +4,4 @@ export default {
         type: "primary",
         key: "btnAdd"
     }
-}
+};

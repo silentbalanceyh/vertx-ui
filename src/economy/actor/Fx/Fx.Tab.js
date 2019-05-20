@@ -22,9 +22,6 @@ const init = (reference, options = {}) => {
     tabs.hideAdd = true;
     tabs.onTabClick = Action.rxClickTab(reference);
     tabs.onEdit = Action.rxEditTab(reference);
-    /* className的注入 */
-    const {className = Ux.ECONOMY.TAB_CONTAINER} = reference.props;
-    tabs.className = className;
     return tabs;
 };
 const render = (reference) => {
@@ -42,4 +39,4 @@ const render = (reference) => {
 export default {
     init,
     render
-}
+};

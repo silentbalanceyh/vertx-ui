@@ -3,4 +3,4 @@ const init = (reference) => {
 };
 export default {
     init
-}
+};
