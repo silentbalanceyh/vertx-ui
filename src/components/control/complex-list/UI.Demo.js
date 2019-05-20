@@ -1,10 +1,12 @@
 import React from 'react'
 import Ux from "ux";
-import {Mock} from 'app';
 import {ExComplexList, HelpCard} from 'web';
+/* 读取数据专用 */
+import Ajax from './Ajax';
+/* 表单专用处理 */
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
-import FormEdit from './UI.Demo.Form.Edit'
+import FormEdit from './UI.Demo.Form.Edit';
 
 const {zero} = Ux;
 
@@ -19,8 +21,8 @@ class Component extends React.PureComponent {
             <HelpCard reference={this}>
                 {/* 新版的去掉数据从Redux取的 ComplexList */}
                 <ExComplexList {...this.props}
+                               {...Ajax}
                                reference={this}
-                               $mockData={Mock.fnDeptList}
                                FormFilter={Filter}
                                FormAdd={FormAdd}
                                FormEdit={FormEdit}/>

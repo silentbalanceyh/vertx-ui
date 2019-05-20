@@ -20,10 +20,14 @@ export default (options = {}) => {
             // 不验证的情况 error 就是 undefined
             if (!error) {
                 if (U.isFunction(fnHoc)) {
-                    fnHoc(ref, options.type);
-                }
-                if (U.isFunction(componentDidMount)) {
-                    componentDidMount()
+                    fnHoc(ref, options.type).then(finished => {
+                        if (finished) {
+                            if (U.isFunction(componentDidMount)) {
+                                /* options加载完成，并且没有错误的时候才执行 */
+                                componentDidMount();
+                            }
+                        }
+                    });
                 }
             } else {
                 ref.setState({error});
@@ -47,7 +51,9 @@ export default (options = {}) => {
                 if (error) {
                     return Ux.fxError(error);
                 } else {
-                    return super.render();
+                    /* 特殊变量必须保证 */
+                    const {ready = false} = this.state;
+                    return ready ? super.render() : false;
                 }
             }
         }

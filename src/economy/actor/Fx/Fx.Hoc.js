@@ -9,12 +9,14 @@ const verify = type => ref => {
     const {reference, $key = type} = ref.props;
     return Ux.verifyComplex(reference, $key);
 };
-const init = type => ref => {
+const init = type => async ref => {
     const fun = BIND[type];
+    let finished = false;
     if (U.isFunction(fun)) {
         // 这里需要 type 处理 type
-        fun(type)(ref);
+        finished = fun(type)(ref);
     }
+    return finished;
 };
 export default {
     verify,
