@@ -17,7 +17,7 @@ const _initButton = (opts = {}, key, opKey) => {
     button.text = opts[key];
     return button;
 };
-const initAdd = (ref, options = {}) => {
+const initAdd = (options = {}, ref) => {
     const opts = _initOpt(options, 'op');
     if (opts.add) {
         const button = _initButton(opts, 'add');
@@ -25,7 +25,7 @@ const initAdd = (ref, options = {}) => {
         return button;
     }
 };
-const initBatch = (ref, options = {}) => {
+const initBatch = (options = {}) => {
     const opts = _initOpt(options, 'op.batch');
     const buttons = [];
     if (opts['batch.edit']) {
@@ -36,7 +36,7 @@ const initBatch = (ref, options = {}) => {
     }
     return buttons;
 };
-const initExtra = (ref, options = {}) => {
+const initExtra = (options = {}) => {
     const opts = _initOpt(options, "op.extra");
     const buttons = [];
     if (opts['extra.column']) {
@@ -50,7 +50,7 @@ const initExtra = (ref, options = {}) => {
     }
     return buttons;
 };
-const initSearch = (ref, options = {}) => _initOpt(options, "search");
+const initSearch = (options = {}) => _initOpt(options, "search");
 
 const isBatch = (options = {}) => {
     const opts = _initOpt(options, 'op.batch');

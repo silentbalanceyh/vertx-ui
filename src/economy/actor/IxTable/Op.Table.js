@@ -26,30 +26,40 @@ const initTable = (reference, options = {}, table = {}) => {
     return table;
 };
 const init = (ref) => {
-    const {reference, $options = {}, $table = {}} = ref.props;
+    const {$options = {}, $table = {}} = ref.props;
     /*
      * 准备 Table 的初始化状态
      */
-    const table = initTable(reference, $options, $table);
+    const table = initTable(ref, $options, $table);
     ref.setState({table});
+    // 加载数据专用，第一次加载
+    Fx.rxSearch(ref);
 };
-const render = (ref, options = {}, table = {}) => {
-    const {reference} = ref.props;
-    const {loading = true} = reference.state;
+const update = (ref, previous = {}) => {
+    if (Fx.testQuery(ref, previous)) {
+        /*
+         * 1. 分页会触发
+         */
+        Fx.rxSearch(ref);
+    }
+};
+const configTable = (ref, options = {}, table = {}) => {
+    const {$loading = true} = ref.state;
     const $table = Ux.clone(table);
-    $table.loading = loading;
+    $table.loading = $loading;
     // 动态列处理
     if (options['column.dynamic']) {
-        $table.columns = initColumns(reference, table);
+        $table.columns = initColumns(ref, table);
     }
     // 分页处理
     $table.pagination = Assist.initPager(ref);
     // onChange事件
-    $table.onChange = Fx.rxChange(reference);
+    $table.onChange = Fx.rxChange(ref);
     return $table;
 };
 
 export default {
     init,
-    render,
+    update,
+    configTable,
 };

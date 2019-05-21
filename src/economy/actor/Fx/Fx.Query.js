@@ -19,10 +19,9 @@ const input = (reference, defaultQuery = {}) => {
 };
 const search = (reference) => {
     if (reference) {
-        const {rxSearch} = reference.props;
-        const {query = {}} = reference.state;
-        if (U.isFunction(rxSearch)) {
-            rxSearch(query).then(data => reference.setState({
+        const {fnSearch, $query = {}} = reference.props;
+        if (U.isFunction(fnSearch)) {
+            fnSearch($query).then(data => reference.setState({
                 data,
                 $loading: false // 和分页专用统一
             }));
@@ -30,7 +29,10 @@ const search = (reference) => {
     }
 };
 const is = (reference, previous = {}) => {
-    const {prevState, prevProps} = previous;
+    const {prevProps} = previous;
+    const prevQuery = prevProps.$query;
+    const curQuery = reference.props.$query;
+    return Ux.isDiff(prevQuery, curQuery);
 };
 const onCondition = (queryRef, reference, queries) => {
     // 读取原始条件

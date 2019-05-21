@@ -10,45 +10,23 @@ import IxTable from '../IxTable/UI';
 
 import Ux from "ux";
 import Fx from '../Fx';
+import Op from './Op';
+
 /* 添加按钮 */
-const renderAdd = (reference) => {
-    const {options = {}} = reference.state;
-    return (<IxOpOpen reference={reference} $options={options}/>);
-};
+const renderAdd = (reference) => (<IxOpOpen {...Op.inAdd(reference)}/>);
 /* 批量按钮：编辑/删除 */
 const renderBatch = (reference) => {
-    const {options = {}, $keys = []} = reference.state;
+    const {options = {}} = reference.state;
     if (Fx.testBatch(options)) {
-        return (<IxOpBatch reference={reference} $options={options} $keys={$keys}/>);
+        return (<IxOpBatch {...Op.inBatch(reference)}/>);
     } else return false;
 };
 /* 搜索/高级搜索 */
-const renderSearch = (reference) => {
-    const {options = {}} = reference.state;
-    return (<IxOpSearch reference={reference} $options={options}/>);
-};
+const renderSearch = (reference) => (<IxOpSearch {...Op.inSearch(reference)}/>);
 /* 列变更/导入/导出 */
-const renderExtra = (reference) => {
-    const {options = {}} = reference.state;
-    return (<IxOpExtra reference={reference} $options={options}/>);
-};
+const renderExtra = (reference) => (<IxOpExtra {...Op.inExtra(reference)}/>);
 /* 表格 */
-const renderTable = (reference) => {
-    const {
-        options = {},
-        table = {},
-        data = {},
-        query = {},
-        $keys = [],
-        $loading = false
-    } = reference.state;
-    return (<IxTable reference={reference}
-                     $options={options}
-                     $table={table}
-                     $data={data} $query={query}
-                     $loading={$loading}
-                     $selected={$keys}/>);
-};
+const renderTable = (reference) => (<IxTable {...Op.inTable(reference)}/>);
 const renderPageList = (reference, item = {}) => {
     return (
         <Row>

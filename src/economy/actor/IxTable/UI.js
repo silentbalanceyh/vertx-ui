@@ -12,15 +12,22 @@ class Component extends React.PureComponent {
         Op.init(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.update(this, {prevProps, prevState});
+    }
+
     render() {
-        const {$options = {}, $data = {}, $loading = false} = this.props;
-        const {table = {}} = this.state;
+        const {$options = {}} = this.props;
+        const {table = {}, data = {}} = this.state;
         const $table = Op.configTable(this, $options, table);
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxTable：", "#06c");
         return !Ux.isEmpty(table) ? (
             <Table {...$table}
                    className={Ux.ECONOMY.TABLE_CONTROL}
-                   loading={$loading}
-                   dataSource={$data.list ? $data.list : []}/>
+                   dataSource={data.list ? data.list : []}/>
         ) : false;
     }
 }

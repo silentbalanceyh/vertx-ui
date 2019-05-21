@@ -1,6 +1,8 @@
 import Etat from './Fx.Etat';
 import Ux from 'ux';
+import U from 'underscore';
 import Q from './Fx.Query';
+import Inherit from './Fx.Action.Inherit';
 
 const rxAddTab = reference => event => {
     // 添加按钮
@@ -15,6 +17,9 @@ const rxEdit = (reference, id) => {
 const rxDelete = (reference, id) => {
     // 删除记录
 };
+/*
+ * 这里的 reference 是 IxTable
+ */
 const rxChange = (reference) => (pagination, filters, sorter) => {
     // ExComplexList 引用
     /*
@@ -29,8 +34,10 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
     reference.setState(startState);
     Ux.toLoading(() => {
         const params = Q.criteria(reference)(pagination, filters, sorter);
-        const {rxSearch} = reference.props;
-        console.info(params);
+        const {fnQuery} = reference.props;
+        if (U.isFunction(fnQuery)) {
+            fnQuery(params);
+        }
     })
 };
 const rxEditTab = (reference) => (key, action) => {
@@ -64,4 +71,6 @@ export default {
     rxChange,
 
     rxClose,
+
+    ...Inherit
 };

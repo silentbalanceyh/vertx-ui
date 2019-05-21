@@ -30,7 +30,8 @@ const initTotal = (reference) => (total) => {
     } else return false;
 };
 const initPager = (reference = {}) => {
-    const {$data = {}, $query = {}} = reference.props;
+    const {$query = {}} = reference.props;
+    const {data = {}} = reference.state;
     const {pager = {}} = $query;
     return {
         showSizeChanger: true,
@@ -39,7 +40,7 @@ const initPager = (reference = {}) => {
         size: "small",
         pageSize: pager.size,
 
-        total: $data.count,
+        total: data.count,
         showTotal: initTotal(reference)
     };
 };

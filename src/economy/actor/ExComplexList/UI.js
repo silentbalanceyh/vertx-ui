@@ -19,14 +19,9 @@ import Ux from "ux";
     state: {
         tabs: {},
         options: {},     // 所有配置项
-        $keys: [],        // 选中的数据行
     }
 })
 class Component extends React.PureComponent {
-    componentDidMount() {
-        // 动态配置初始化
-        Fn.rxSearch(this);
-    }
 
     render() {
         const $tabs = Fn.configTab(this);
@@ -37,7 +32,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] 容器 Render状态属性：");
+        }, "[Ex] ComplexList：");
         return (
             <Tabs {...rest}
                   tabBarExtraContent={<IxExtraBar {...this.props} $options={options}/>}

@@ -1,8 +1,8 @@
 import Fx from '../Fx';
 
 const init = (ref) => {
-    const {reference, $options = {}} = ref.props;
-    const op = Fx.initSearch(reference, $options);
+    const {$options = {}} = ref.props;
+    const op = Fx.initSearch($options);
     if (op.enabled) {
         /* 1. 搜索框专用 */
         const state = {};

@@ -7,7 +7,6 @@ const fnState = (ref, options = {}) => {
      */
     const fnVerify = U.isFunction(options.verify) ? options.verify(options.type) : () => true;
     const fnHoc = U.isFunction(options.hoc) ? options.hoc(options.type) : () => ({});
-    const fnLoading = U.isFunction(options.loading) ? options.loading(options.type) : () => false;
     let error = undefined;
     if (U.isFunction(fnVerify)) {
         // 包含了 fnVerify
@@ -24,7 +23,6 @@ const fnState = (ref, options = {}) => {
          * 最终状态写入
          */
         state.ready = true;
-        state.loading = fnLoading(ref);   // 默认数据加载是
         return state;
     } else {
         return {error};
