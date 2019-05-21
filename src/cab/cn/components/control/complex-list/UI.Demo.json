@@ -36,7 +36,24 @@
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
             "op.extra.import": "导入",
-            "batch.edit.window": "选择批量更新的字段,更新,关闭,false,720,true,btnBatchEdit",
+            "window.batch.edit": "选择批量更新的字段,更新,关闭,false,720,true,btnBatchEdit",
+            "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
+            "window.extra.export.config": {
+                "message": "请选择字段！",
+                "description": [
+                    "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
+                    "如果您没有找到您想要的字段，请联系管理员。"
+                ]
+            },
+            "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
+            "window.extra.import.config": {
+                "message": "选择本地文件",
+                "description": [
+                    "您可以按照提供的模板导入Excel格式的数据。",
+                    "如果有相关疑问可联系管理员！"
+                ],
+                "upload": "模板文件"
+            },
             "column.dynamic": true,
             "submit.add": "$opAdd",
             "submit.edit": "$opSave",
@@ -48,6 +65,10 @@
         "batch.editor": {
         },
         "table": {
+            "total": {
+                "report": "（总共:page页，:total条数据）",
+                "selected": "勾选了:count条"
+            },
             "columns": [
                 {
                     "title": "操作",
@@ -64,7 +85,14 @@
                     "title": "部门编号",
                     "dataIndex": "code",
                     "sorter": true,
-                    "filter": true
+                    "$filter.type": "SEARCH",
+                    "$filter.config": {
+                        "placeholder": "输入部门编码",
+                        "button": {
+                            "search": "搜索",
+                            "reset": "重置"
+                        }
+                    }
                 },
                 {
                     "title": "部门名称",
@@ -78,6 +106,18 @@
                     "$mapping": {
                         "true": "启用",
                         "false": "禁用"
+                    },
+                    "$filter.config.items": [
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "$filter.config.button": {
+                        "yes": "确认",
+                        "reset": "重置"
+                    },
+                    "$filter.config.width": {
+                        "radio": 110,
+                        "button": 55
                     }
                 },
                 {

@@ -8,7 +8,7 @@ export default {
         icon: "edit",
         type: "default",
         key: "lnkBatchEdit",
-        window: "batch.edit.window" // Window 专用
+        window: "window.batch.edit" // Window 专用
     },
     batchDelete: {
         icon: "remove",
@@ -18,14 +18,17 @@ export default {
     extraColumn: {
         icon: "caret-down",
         type: "primary",
-        key: "btnColumn"
+        key: "btnColumn",
+        popover: "extra.column.popover"  // Popover 专用
     },
     extraExport: {
         icon: "export",
-        key: "btnExport"
+        key: "btnExport",
+        window: "extra.export.window" // Popover 专用
     },
     extraImport: {
         icon: "import",
-        key: "btnImport"
+        key: "btnImport",
+        window: "extra.export.window" // Popover 专用
     }
 };

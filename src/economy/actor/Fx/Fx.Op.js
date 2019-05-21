@@ -1,5 +1,6 @@
 import DATA_OP from './DATA.OP';
 import Ux from 'ux';
+import Action from './Fx.Action';
 
 const _initOpt = (options = {}, prefix = 'op') => {
     const ops = {};
@@ -19,7 +20,9 @@ const _initButton = (opts = {}, key, opKey) => {
 const initAdd = (ref, options = {}) => {
     const opts = _initOpt(options, 'op');
     if (opts.add) {
-        return _initButton(opts, 'add');
+        const button = _initButton(opts, 'add');
+        button.onClick = Action.rxAddTab(ref);
+        return button;
     }
 };
 const initBatch = (ref, options = {}) => {

@@ -13,20 +13,8 @@ const onPager = (reference = {}) => {
 };
 const initColumns = (reference, table = {}) => {
     const props = reference.props;
-    const op = {
-        rxEdit: Fx.rxEdit,
-        rxDelete: Fx.rxDelete
-    };
-    return Ux.uiTableColumn({
-        props: {
-            // 当前引用对应的props属性
-            ...props,
-            // 专用的rxEdit/rxDelete的Api调用专用数据
-            ...op,
-            // 当前组件引用
-            $self: reference
-        },
-    }, table.columns);
+    /* 不可使用 $self */
+    return Ux.uiTableColumn(reference, table.columns,);
 };
 
 const initTable = (reference, options = {}, table = {}) => {

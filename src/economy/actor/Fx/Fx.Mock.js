@@ -1,7 +1,6 @@
 const isMock = (reference, options = {}) => {
-    const {$mockData = {}} = reference.props;
     let mock = false;
-    if (options['mock.enabled'] && $mockData.mock) {
+    if (options['mock.enabled']) {
         const {$list} = reference.props;
         if (!$list) {
             mock = true;

@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
     render() {
         const {op = []} = this.state;
         return (
-            <Button.Group>
+            <Button.Group style={{float: "right"}}>
                 {op.map(button => <IxOpButton key={button.key} $config={button}
                                               {...this.props}/>)}
             </Button.Group>

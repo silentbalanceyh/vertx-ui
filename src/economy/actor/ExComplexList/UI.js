@@ -34,6 +34,10 @@ class Component extends React.PureComponent {
         /* options */
         const {options = {}} = this.state;
         const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] 容器 Render状态属性：");
         return (
             <Tabs {...rest}
                   tabBarExtraContent={<IxExtraBar {...this.props} $options={options}/>}

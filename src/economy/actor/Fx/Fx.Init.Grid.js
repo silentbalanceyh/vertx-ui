@@ -1,5 +1,4 @@
 import Cfg from './Fx.Config';
-import Mock from './Fx.Mock';
 import Q from './Fx.Query';
 import Ux from 'ux';
 
@@ -14,10 +13,6 @@ export default type => ref => {
     const defaultQuery = Ux.irGrid(config.query, ref);
     reactState.query = Q.input(ref, defaultQuery);
     // const reduxState = {"grid.query": queryData};
-    /*
-     * 准备 React 中的状态
-     */
-    reactState.mock = Mock.isMock(ref, config.options);
 
     /*
      * 准备 Tabs 的初始化状态

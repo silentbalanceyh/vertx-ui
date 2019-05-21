@@ -4,13 +4,13 @@ import React from "react";
 import U from 'underscore';
 
 const getCondition = (reference, field, values = []) => {
-    let {$condition = {}} = reference.state;
+    let {$condition = {}} = reference.state ? reference.state : {};
     $condition = Value.clone($condition);
     $condition[field] = values;
     return $condition;
 };
 const isFiltered = (reference, field) => {
-    const {$condition = {}} = reference.state;
+    const {$condition = {}} = reference.state ? reference.state : {};
     let filtered = false;
     if ($condition.hasOwnProperty(field)) {
         const value = $condition[field];
@@ -22,7 +22,7 @@ const isFiltered = (reference, field) => {
 };
 
 const getFilteredValue = (reference, column) => {
-    const {$condition = {}} = reference.state;
+    const {$condition = {}} = reference.state ? reference.state : {};
     if ($condition.hasOwnProperty(column.dataIndex)) {
         return $condition[column.dataIndex];
     } else {

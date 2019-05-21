@@ -8,7 +8,7 @@ import U from 'underscore';
 
 const _getKeyWord = (reference, field, keyword = "") => {
     // 搜索文字
-    let {$keyword = {}} = reference.state;
+    let {$keyword = {}} = reference.state ? reference.state : {};
     $keyword[field] = keyword;
     $keyword = Value.clone($keyword);
     return $keyword;
@@ -84,7 +84,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
 const _mountHighlight = (column = {}, reference) => {
     // 这种情况下需要重写 render
     column.render = (text) => {
-        const {$keyword = {}} = reference.state;
+        const {$keyword = {}} = reference.state ? reference.state : {};
         const words = Object.keys($keyword)
             .filter(cond => cond.startsWith(column.dataIndex))
             .map(cond => $keyword[cond]);
