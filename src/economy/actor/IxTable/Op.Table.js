@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import U from 'underscore';
-import Action from './Fx.Action';
+import Fx from '../Fx';
+import Selection from './Op.Selection';
 
 const onPager = (reference = {}) => {
     const pagination = {
@@ -13,8 +14,8 @@ const onPager = (reference = {}) => {
 const initColumns = (reference, table = {}) => {
     const props = reference.props;
     const op = {
-        rxEdit: Action.rxEdit,
-        rxDelete: Action.rxDelete
+        rxEdit: Fx.rxEdit,
+        rxDelete: Fx.rxDelete
     };
     return Ux.uiTableColumn({
         props: {
@@ -27,7 +28,8 @@ const initColumns = (reference, table = {}) => {
         },
     }, table.columns);
 };
-const init = (reference, options = {}, table = {}) => {
+
+const initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
     // 扩展行外置处理
     const {rxExpandRow} = reference.props;
@@ -38,7 +40,18 @@ const init = (reference, options = {}, table = {}) => {
     if (!options['column.dynamic']) {
         table.columns = initColumns(reference, table);
     }
+    if (Fx.testBatch(options)) {
+        table.rowSelection = Selection.initSelection(reference);
+    }
     return table;
+};
+const init = (ref) => {
+    const {reference, $options = {}, $table = {}} = ref.props;
+    /*
+     * 准备 Table 的初始化状态
+     */
+    const table = initTable(reference, $options, $table);
+    ref.setState({table});
 };
 const render = (reference, options = {}, table = {}) => {
     const {loading = true} = reference.state;
@@ -51,7 +64,7 @@ const render = (reference, options = {}, table = {}) => {
     // 分页处理
     table.pagination = onPager(reference);
     // onChange事件
-    table.onChange = Action.rxChange(reference);
+    table.onChange = Fx.rxChange(reference);
     return $table;
 };
 

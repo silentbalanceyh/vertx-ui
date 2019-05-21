@@ -18,7 +18,8 @@ import Ux from "ux";
     // 4. 初始化状态
     state: {
         tabs: {},
-        options: {}     // 所有配置项
+        options: {},     // 所有配置项
+        $keys: [],        // 选中的数据行
     }
 })
 class Component extends React.PureComponent {

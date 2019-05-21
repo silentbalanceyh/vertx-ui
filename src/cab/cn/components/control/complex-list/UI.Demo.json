@@ -33,6 +33,9 @@
             "op.add": "添加",
             "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
+            "batch.edit.window": "",
+            "batch.edit.ajax": {
+            },
             "column.dynamic": true,
             "submit.add": "$opAdd",
             "submit.edit": "$opSave",

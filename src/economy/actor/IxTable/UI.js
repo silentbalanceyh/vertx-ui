@@ -1,6 +1,5 @@
 import React from 'react';
 import Op from './Op';
-import Fx from '../Fx';
 import Ux from "ux";
 import {Table} from "antd";
 
@@ -16,7 +15,7 @@ class Component extends React.PureComponent {
     render() {
         const {reference, $options = {}, $data = {}} = this.props;
         const {table = {}} = this.state;
-        const $table = Fx.configTable(reference, $options, table);
+        const $table = Op.configTable(reference, $options, table);
         return !Ux.isEmpty(table) ? (
             <Table {...$table} className={Ux.ECONOMY.TABLE_CONTROL}
                    dataSource={$data.list ? $data.list : []}/>
