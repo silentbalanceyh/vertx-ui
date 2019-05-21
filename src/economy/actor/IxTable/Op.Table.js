@@ -1,16 +1,8 @@
 import Ux from 'ux';
 import U from 'underscore';
 import Fx from '../Fx';
-import Selection from './Op.Selection';
+import Assist from './Op.Assist';
 
-const onPager = (reference = {}) => {
-    const pagination = {
-        showSizeChanger: true,
-        showQuickJumper: true,
-    };
-
-    return pagination;
-};
 const initColumns = (reference, table = {}) => {
     const props = reference.props;
     /* 不可使用 $self */
@@ -29,7 +21,7 @@ const initTable = (reference, options = {}, table = {}) => {
         table.columns = initColumns(reference, table);
     }
     if (Fx.testBatch(options)) {
-        table.rowSelection = Selection.initSelection(reference);
+        table.rowSelection = Assist.initSelection(reference);
     }
     return table;
 };
@@ -41,18 +33,19 @@ const init = (ref) => {
     const table = initTable(reference, $options, $table);
     ref.setState({table});
 };
-const render = (reference, options = {}, table = {}) => {
+const render = (ref, options = {}, table = {}) => {
+    const {reference} = ref.props;
     const {loading = true} = reference.state;
     const $table = Ux.clone(table);
     $table.loading = loading;
     // 动态列处理
     if (options['column.dynamic']) {
-        table.columns = initColumns(reference, table);
+        $table.columns = initColumns(reference, table);
     }
     // 分页处理
-    table.pagination = onPager(reference);
+    $table.pagination = Assist.initPager(ref);
     // onChange事件
-    table.onChange = Fx.rxChange(reference);
+    $table.onChange = Fx.rxChange(reference);
     return $table;
 };
 

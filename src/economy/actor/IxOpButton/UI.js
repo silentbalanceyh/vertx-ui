@@ -6,7 +6,9 @@ class Component extends React.PureComponent {
         const {$config = {}} = this.props;
         const {text, ...rest} = $config;
         return (
-            <Button {...rest} htmlType={"button"}/>
+            <span>
+                <Button {...rest} htmlType={"button"}/>
+            </span>
         )
     }
 }

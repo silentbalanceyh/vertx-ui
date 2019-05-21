@@ -24,7 +24,7 @@ export default (mockData, query = {}) => {
         const {projection = []} = query;
         if (0 < projection) {
             const $columns = Ux.immutable(projection);
-            source.forEach(each => Ux.itObject(each, (field, value) => {
+            source.forEach(each => Ux.itObject(each, (field) => {
                 // 主键需要保留
                 if (!$columns.contains(field) && "key" !== field) {
                     delete each[field];

@@ -34,9 +34,12 @@ const renderExtra = (reference) => {
 };
 /* 表格 */
 const renderTable = (reference) => {
-    const {options = {}, table = {}, data = {}} = reference.state;
-    return (<IxTable reference={reference} $options={options}
-                     $table={table} $data={data}/>);
+    const {options = {}, table = {}, data = {}, query = {}, $keys = []} = reference.state;
+    return (<IxTable reference={reference}
+                     $options={options}
+                     $table={table}
+                     $data={data} $query={query}
+                     $selected={$keys}/>);
 };
 const renderPageList = (reference, item = {}) => {
     return (
