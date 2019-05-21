@@ -51,8 +51,6 @@ class Query {
                 queryRef.sorter.push(sortItem);
             }
         }
-        console.error(queryRef.sorter, field, isAsc);
-
         return this;
     }
 

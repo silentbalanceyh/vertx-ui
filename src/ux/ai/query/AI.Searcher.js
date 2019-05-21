@@ -152,7 +152,8 @@ const _fnTree = (source = [], criteria = {}, level = 1) => {
 };
 
 const _fnCriteria = (source = [], $query = {}) => {
-    const criteria = Value.clone($query.criteria);
+    let criteria = Value.clone($query.criteria);
+    if (!criteria) criteria = {}; // 防止 Object.keys报错
     Value.valueValid(criteria);
     if (0 < Object.keys(criteria).length) {
         source = _fnTree(source, criteria, 1);

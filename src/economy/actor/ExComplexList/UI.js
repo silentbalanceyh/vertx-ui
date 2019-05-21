@@ -41,6 +41,7 @@ class Component extends React.PureComponent {
                     const {type, ...itemRest} = item;
                     const fnRender = RENDERS[type];
                     /* */
+                    console.info(item.key);
                     return (
                         <Tabs.TabPane {...itemRest}>
                             {fnRender(this, itemRest, rest.activeKey)}

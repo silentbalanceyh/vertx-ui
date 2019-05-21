@@ -102,6 +102,7 @@
                 {
                     "title": "是否启用",
                     "dataIndex": "active",
+                    "sorter": true,
                     "$render": "LOGICAL",
                     "$mapping": {
                         "true": "启用",
