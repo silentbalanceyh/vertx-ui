@@ -1,11 +1,15 @@
 import Ux from 'ux';
+import U from 'underscore';
 import {Tag} from 'antd';
 import React from 'react';
 
 const initSelection = (reference) => {
     return {
-        onChange: ($keys = []) => {
-            reference.setState({$keys});
+        onChange: ($selected = []) => {
+            const {fnSelect} = reference.props;
+            if (U.isFunction(fnSelect)) {
+                fnSelect($selected);
+            }
         }
     }
 };

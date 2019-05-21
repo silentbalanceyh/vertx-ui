@@ -25,6 +25,8 @@ const search = (reference) => {
                 data,
                 $loading: false // 和分页专用统一
             }));
+        } else {
+            throw new Error("[Ex] fnSearch 函数出错！");
         }
     }
 };
@@ -48,6 +50,11 @@ const onCondition = (queryRef, reference, queries) => {
     queryRef.criteria(condition.normalized);
 };
 const criteria = (reference) => (pagination, filters, sorter) => {
+    Ux.dgDebug({
+        pagination,
+        filters,
+        sorter
+    }, "[Ex] IxTable 改变条件：", "#f96");
     const {current, pageSize} = pagination;
     const queryRef = Ux.auiQuery(reference);
     // 触发了分页操作

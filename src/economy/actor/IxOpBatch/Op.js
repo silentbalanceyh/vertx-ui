@@ -7,9 +7,9 @@ const init = (ref) => {
     ref.setState({op});
 };
 const render = (ref, ops = []) => {
-    const {$keys = []} = ref.props;
+    const {$selected = []} = ref.props;
     ops = Ux.clone(ops);
-    ops.forEach(op => op.disabled = 0 === $keys.length);
+    ops.forEach(op => op.disabled = 0 === $selected.length);
     return ops;
 };
 export default {

@@ -27,7 +27,7 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
      * 1.
      **/
     const startState = {
-        $loading: true,
+        // $loading: true,
         // 专用 $condition
         $condition: filters
     };
@@ -36,7 +36,9 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
         const params = Q.criteria(reference)(pagination, filters, sorter);
         const {fnQuery} = reference.props;
         if (U.isFunction(fnQuery)) {
-            fnQuery(params);
+            const ref = Ux.onReference(reference, 1);
+            ref.setState({query: params})
+            // fnQuery(params);
         }
     })
 };

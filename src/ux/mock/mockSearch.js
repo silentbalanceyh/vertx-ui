@@ -3,6 +3,9 @@ import Value from '../Ux.Value';
 import Ux from "ux";
 
 export default (mockData, query = {}) => {
+    // 必须要拷贝
+    mockData = Ux.clone(mockData);
+    query = Ux.clone(query);
     if (mockData.mock) {
         const mockIr = new AiStream().mock();
         const data = Value.clone(mockData.data.list);
@@ -37,6 +40,5 @@ export default (mockData, query = {}) => {
         $data.list = source;                // 列表
         mockData.data = $data;
     }
-    console.error(mockData, query);
     return mockData;
 };

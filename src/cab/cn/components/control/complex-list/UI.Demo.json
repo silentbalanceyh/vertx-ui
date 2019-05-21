@@ -84,6 +84,11 @@
                 {
                     "title": "部门编号",
                     "dataIndex": "code",
+                    "sorter": true
+                },
+                {
+                    "title": "部门名称",
+                    "dataIndex": "name",
                     "sorter": true,
                     "$filter.type": "SEARCH",
                     "$filter.config": {
@@ -93,11 +98,6 @@
                             "reset": "重置"
                         }
                     }
-                },
-                {
-                    "title": "部门名称",
-                    "dataIndex": "name",
-                    "sorter": true
                 },
                 {
                     "title": "是否启用",

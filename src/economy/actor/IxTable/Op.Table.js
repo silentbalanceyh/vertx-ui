@@ -3,12 +3,6 @@ import U from 'underscore';
 import Fx from '../Fx';
 import Assist from './Op.Assist';
 
-const initColumns = (reference, table = {}) => {
-    const props = reference.props;
-    /* 不可使用 $self */
-    return Ux.uiTableColumn(reference, table.columns,);
-};
-
 const initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
     // 扩展行外置处理
@@ -17,9 +11,7 @@ const initTable = (reference, options = {}, table = {}) => {
         table.expandedRowRender = rxExpandRow;
     }
     // 静态行处理
-    if (!options['column.dynamic']) {
-        table.columns = initColumns(reference, table);
-    }
+    table.columns = Ux.uiTableColumn(reference, table.columns);
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
@@ -47,10 +39,10 @@ const configTable = (ref, options = {}, table = {}) => {
     const {$loading = true} = ref.state;
     const $table = Ux.clone(table);
     $table.loading = $loading;
-    // 动态列处理
-    if (options['column.dynamic']) {
-        $table.columns = initColumns(ref, table);
-    }
+    /*
+     * 不造成多次改动，这里只进行列数量过滤
+     * 动态列处理
+     */
     // 分页处理
     $table.pagination = Assist.initPager(ref);
     // onChange事件
