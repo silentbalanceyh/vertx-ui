@@ -13,6 +13,7 @@ const exported = {
 
     // 加载数据专用方法（复杂查询）
     rxSearch: Q.search,
+    rxCriteria: Q.criteria,
     // 是否更新了 $query 一系列
     testQuery: Q.is,
     testBatch: Op.isBatch,

@@ -13,11 +13,13 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$options = {}, $data = {}} = this.props;
+        const {$options = {}, $data = {}, $loading = false} = this.props;
         const {table = {}} = this.state;
         const $table = Op.configTable(this, $options, table);
         return !Ux.isEmpty(table) ? (
-            <Table {...$table} className={Ux.ECONOMY.TABLE_CONTROL}
+            <Table {...$table}
+                   className={Ux.ECONOMY.TABLE_CONTROL}
+                   loading={$loading}
                    dataSource={$data.list ? $data.list : []}/>
         ) : false;
     }
