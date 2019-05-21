@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
         const {visible = false, window, fnClose} = this.state;
         return (
             <li key={`link-batch-${$config.key}`}>
-                <a {...rest} onClick={Op.onClick(this, $config)}>
+                <a {...rest} onClick={Op.onOpen(this, $config)}>
                     {icon ? <Icon type={icon}/> : false}
                     {icon ? <span>&nbsp;&nbsp;</span> : false}
                     {text ? <span className={"text"}>{text}</span> : false}

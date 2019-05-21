@@ -14,5 +14,18 @@ export default {
         icon: "remove",
         type: "default",
         key: "lnkBatchDelete"
+    },
+    extraColumn: {
+        icon: "caret-down",
+        type: "primary",
+        key: "btnColumn"
+    },
+    extraExport: {
+        icon: "export",
+        key: "btnExport"
+    },
+    extraImport: {
+        icon: "import",
+        key: "btnImport"
     }
 };

@@ -1,17 +1,14 @@
 import Ux from 'ux';
 
-const onClick = (reference, config = {}) => (event) => {
+const onOpen = (reference, config = {}) => (event) => {
     event.preventDefault();
     const {window} = config;
     if (window) {
         // 弹出框：批量编辑
-        onSwitch(reference, true);
+        reference.setState({visible: true});
     } else {
         // 非弹出框：批量删除
     }
-};
-const onSwitch = (reference, visible = false) => {
-    reference.setState({visible});
 };
 const init = (reference) => {
     /* 1.窗口配置 */
@@ -25,7 +22,7 @@ const init = (reference) => {
             /* 特殊配置 */
             state.window.onCancel = (event) => {
                 event.preventDefault();
-                onSwitch(reference);
+                reference.setState({visible: false});
             };
             /* */
             state.window.destroyOnClose = true;
@@ -36,10 +33,10 @@ const init = (reference) => {
             }
         }
     }
-    state.fnClose = () => onSwitch(reference);
+    state.fnClose = () => reference.setState({visible: false});
     reference.setState(state);
 };
 export default {
-    onClick,
+    onOpen,
     init
 }

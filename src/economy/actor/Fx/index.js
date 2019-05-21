@@ -19,7 +19,9 @@ const exported = {
 
     // 行为专用
     initAdd: Op.initAdd,
-    initBatch: Op.initBatch
+    initBatch: Op.initBatch,
+    initSearch: Op.initSearch,
+    initExtra: Op.initExtra
 };
 console.info(exported);
 export default exported;
