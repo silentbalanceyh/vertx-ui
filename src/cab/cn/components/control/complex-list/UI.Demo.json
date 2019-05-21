@@ -33,9 +33,7 @@
             "op.add": "添加",
             "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
-            "batch.edit.window": "",
-            "batch.edit.ajax": {
-            },
+            "batch.edit.window": "选择批量更新的字段,更新,关闭,false,720,true,btnBatchEdit",
             "column.dynamic": true,
             "submit.add": "$opAdd",
             "submit.edit": "$opSave",
@@ -44,7 +42,7 @@
             "ajax.delete.uri": "/api/dept/:id",
             "confirm.delete": "确认删除当前部门记录？"
         },
-        "fields": {
+        "batch.editor": {
         },
         "table": {
             "columns": [

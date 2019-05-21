@@ -32,10 +32,10 @@ const renderPageList = (reference, item = {}) => {
     return (
         <Row>
             <Row className={Ux.ECONOMY.ROW_HEAD}>
-                <Col span={2}>
+                <Col span={3}>
                     {renderAdd(reference)}
                 </Col>
-                <Col span={8}>
+                <Col span={6}>
                     {renderBatch(reference)}
                 </Col>
             </Row>

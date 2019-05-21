@@ -1,10 +1,11 @@
 import React from 'react'
 import Op from "./Op";
+import './Cab.less';
+import IxOpLink from '../IxOpLink/UI';
 
 class Component extends React.PureComponent {
     state = {
-        op: [],
-        visible: false
+        op: []
     };
 
     componentDidMount() {
@@ -12,14 +13,13 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        console.info(this.props, this.state);
         const {op = []} = this.state;
         const $op = Op.configOp(this, op);
-        console.info($op);
         return (
-            <div>
-
-            </div>
+            <ul className={"ex-batch"}>
+                {$op.map(link => <IxOpLink key={link.key} $config={link}
+                                           {...this.props}/>)}
+            </ul>
         )
     }
 }

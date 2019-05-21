@@ -7,11 +7,12 @@ export default {
     batchEdit: {
         icon: "edit",
         type: "default",
-        key: "btnBatchEdit"
+        key: "lnkBatchEdit",
+        window: "batch.edit.window" // Window 专用
     },
     batchDelete: {
         icon: "remove",
         type: "default",
-        key: "btnBatchDelete"
+        key: "lnkBatchDelete"
     }
 };
