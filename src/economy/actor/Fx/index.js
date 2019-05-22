@@ -4,6 +4,7 @@ import Q from './Fx.Query';
 import Init from './Fx.Init.Op';
 import Action from './Fx.Action';
 import Mock from './Fx.Mock';
+import Unity from './Fx.Unity';
 
 const exported = {
     ...Hoc,
@@ -21,6 +22,8 @@ const exported = {
     initBatch: Init.initBatch,
     initSearch: Init.initSearch,
     initExtra: Init.initExtra,
+    // 调用函数
+    consume: Unity.consume,
     // Mock数据
     Mock,
 };

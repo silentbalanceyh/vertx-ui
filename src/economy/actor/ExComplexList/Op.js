@@ -13,6 +13,13 @@ const inBatch = (reference) => {
     const inherit = _inUniform(reference);
     const {$selected = []} = reference.state;
     inherit.$selected = $selected;
+    const {fnLoading, fnRefresh} = reference.state;
+    if (U.isFunction(fnLoading)) {
+        inherit.fnLoading = fnLoading;
+    }
+    if (U.isFunction(fnRefresh)) {
+        inherit.fnRefresh = fnRefresh;
+    }
     return inherit;
 };
 const inTable = (reference) => {

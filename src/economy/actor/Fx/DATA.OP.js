@@ -13,7 +13,8 @@ export default {
     batchDelete: {
         icon: "remove",
         type: "default",
-        key: "lnkBatchDelete"
+        key: "lnkBatchDelete",
+        confirm: "confirm.batch.delete"
     },
     extraColumn: {
         icon: "caret-down",

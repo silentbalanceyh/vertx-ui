@@ -60,7 +60,9 @@
             "submit.reset": "$opReset",
             "ajax.get.uri": "/api/dept/:id",
             "ajax.delete.uri": "/api/dept/:id",
-            "confirm.delete": "确认删除当前部门记录？"
+            "ajax.batch.delete.uri": "/api/depts",
+            "confirm.delete": "确认删除当前部门记录？",
+            "confirm.batch.delete": "您确认要删除所有选中的部门记录？"
         },
         "batch.editor": {
         },

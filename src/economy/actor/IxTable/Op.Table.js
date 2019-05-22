@@ -22,6 +22,13 @@ const initTable = (reference, options = {}, table = {}) => {
     table.onChange = Fx.rxChange(reference);
     return table;
 };
+const mountPointer = (ref) => {
+    const reference = Ux.onReference(ref, 1);
+    reference.setState({
+        fnLoading: ($loading) => ref.setState({$loading}),
+        fnRefresh: () => Fx.rxRefresh(ref)
+    })
+};
 const init = (ref) => {
     const {$options = {}, $table = {}} = ref.props;
     /*
@@ -40,6 +47,8 @@ const init = (ref) => {
     // 加载数据专用，第一次加载
     const {$query = {}} = ref.props;
     Fx.rxSearch(ref, $query);
+    // 挂载反向函数
+    mountPointer(ref);
 };
 const update = (ref, previous = {}) => {
     if (Fx.testQuery(ref, previous)) {
