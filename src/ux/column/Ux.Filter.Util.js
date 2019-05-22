@@ -52,13 +52,10 @@ const getClearAttrs = (reference, field, {
     }
     return clearAttrs;
 };
-const jsxArchor = (field, clearFilters) => {
+const jsxArchor = (field, onClick) => {
     return (
         <div className={"ux-hidden"}>
-            <Button id={`btn-clear-${field}`} onClick={(event) => {
-                event.preventDefault();
-                clearFilters();
-            }}/>
+            <Button id={`btn-clear-${field}`} onClick={onClick}/>
         </div>
     );
 };

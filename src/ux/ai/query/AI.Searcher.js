@@ -172,6 +172,29 @@ const _fnCriteria = (source = [], $query = {}) => {
     }
     return source;
 };
+const _fnPager = (source = [], $query = {}) => {
+    /* 再分页 */
+    const {pager = {}} = $query;
+    const {page = 1, size = 10} = pager;
+    // 计算开始索引
+    const startIndex = (page - 1) * size;
+    const endIndex = startIndex + size - 1;
+    /* 构造新数据 */
+    return source.filter((item, index) => startIndex <= index && index <= endIndex);
+};
+const _fnProjection = (source = [], $query = {}) => {
+    const {projection = []} = $query;
+    if (0 < projection) {
+        const $columns = Value.immutable(projection);
+        source.forEach(each => Type.itObject(each, (field) => {
+            // 主键需要保留
+            if (!$columns.contains(field) && "key" !== field) {
+                delete each[field];
+            }
+        }))
+    }
+    return source;
+};
 
 class Searcher {
     constructor(data = []) {
@@ -184,6 +207,10 @@ class Searcher {
         source = _fnCriteria(source, $query);
         // 排序
         source = _fnSorter(source, $query);
+        // 分页
+        source = _fnPager(source, $query);
+        // 列过滤
+        source = _fnProjection(source, $query);
         // Reduce
         return source;
     }

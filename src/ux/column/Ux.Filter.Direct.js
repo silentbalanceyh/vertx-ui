@@ -7,9 +7,6 @@ import React from "react";
 
 const _onChange = (reference, field, setSelectedKeys) => (searchText) => {
     setSelectedKeys(searchText);
-    // 设置高亮
-    const $condition = T.getCondition(reference, field, searchText);
-    reference.setState({$condition});
 };
 
 const onClear = (reference, field, clearFilters) => (event) => {
@@ -18,7 +15,20 @@ const onClear = (reference, field, clearFilters) => (event) => {
     const $condition = T.getCondition(reference, field, []);
     reference.setState({
         $condition,
-        $resetCond: Util.randomString(8)
+        $resetCond: Util.randomString(8),
+        $loading: true, // 特殊条件，加载
+    });
+};
+
+const _onConfirm = (reference, field, selectedKeys, {
+    confirm,
+}) => (event) => {
+    event.preventDefault();
+    confirm();
+    const $condition = T.getCondition(reference, field, selectedKeys);
+    reference.setState({
+        $condition,
+        $loading: true, // 特殊条件，加载
     });
 };
 
@@ -46,10 +56,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                 ))}
             </Checkbox.Group>
             <div style={{textAlign: "center", width: "100%"}}>
-                <a onClick={(event) => {
-                    event.preventDefault();
-                    confirm();
-                }}
+                <a onClick={_onConfirm(reference, field, selectedKeys, {confirm})}
                    style={{width: width.button ? width.button : 48, marginRight: 8}}>
                     {button['yes'] ? button['yes'] : false}
                 </a>
@@ -57,7 +64,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                    style={{width: width.button ? width.button : 48}}>
                     {button.reset ? button.reset : false}
                 </a>
-                {T.jsxArchor(field, clearFilters)}
+                {T.jsxArchor(field, clearAttrs.onClick)}
             </div>
         </div>
     );

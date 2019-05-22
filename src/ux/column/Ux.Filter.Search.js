@@ -33,7 +33,8 @@ const onClear = (reference, field, clearFilters) => (event) => {
     const $condition = T.getCondition(reference, field, []);
     reference.setState({
         $keyword, $condition,
-        $resetCond: Util.randomString(8)
+        $resetCond: Util.randomString(8),
+        $loading: true, // 特殊条件，加载
     });
 };
 
@@ -48,7 +49,10 @@ const _onConfirm = (reference, field, selectedKeys, {
     } else {
         /* 设置条件 $condition 信息 */
         const $condition = T.getCondition(reference, field, selectedKeys);
-        reference.setState({$condition});
+        reference.setState({
+            $condition,
+            $loading: true, // 特殊条件，加载
+        });
     }
 };
 
@@ -79,7 +83,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                     style={{width: 90}}>
                 {button.reset ? button.reset : false}
             </Button>
-            {T.jsxArchor(field, clearFilters)}
+            {T.jsxArchor(field, clearAttrs.onClick)}
         </div>
     );
 };

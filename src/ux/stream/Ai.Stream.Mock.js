@@ -3,6 +3,7 @@ import Log from '../monitor/Mt.Logger';
 import Ai from '../ai/AI';
 import {v4} from 'uuid';
 import Value from '../Ux.Value';
+import U from 'underscore';
 
 class Mock {
     constructor(reference) {
@@ -11,29 +12,49 @@ class Mock {
 
     init() {
         const grid = Prop.fromHoc(this.reference, "grid");
-        if (grid.options && grid.options.hasOwnProperty("mock.keys")) {
-            this.keys = grid.options['mock.keys'].split(",");
+        // 启用了 Mock
+        const {options = {}} = grid ? grid : {};
+        if (options['mock.enabled']) {
+            const keys = options['mock.keys'];
+            if (U.isArray(keys)) {
+                this.keys = keys;
+            } else {
+                this.keys = keys.split(",");
+            }
         }
         return this;
     }
 
-    bind($list = []) {
-        this.source = $list;
-        this.data = Value.clone($list);
-        return this;
-    }
-
-    prepare() {
-        if (this.source) {
-            this.source.ready = false;
+    /*
+     * 1. source 为输入的源头，也就是输入的数据信息
+     * 2. data 为处理的数据信息
+     */
+    bind(source) {
+        this.source = source ? Value.clone(source) : undefined;
+        this.data = {};
+        if (source) {
+            if (U.isArray(source)) {
+                this.isArray = true;
+                this.data = {
+                    list: Value.clone(source),
+                    count: 0,
+                }
+            } else if (U.isObject(source)) {
+                this.isArray = false;
+                this.data = Value.clone(source);
+            }
+        } else {
+            throw new Error("[Ox] 对不起，Mock数据要求有合法输入。");
         }
-        return true;
+        return this;
     }
 
     filter($query = {}) {
-        this.source.list = Ai.aiSearcher(this.data.list).query($query);
-        this.source.count = this.source.list.length;
-        this.source.ready = true;
+        if (this.isArray) {
+            const list = Value.clone(this.source);
+            this.data.list = Ai.aiSearcher(list).query($query);
+            this.data.count = this.data.list.length;
+        }
         Log.mocker(this, $query);
         return this;
     }
@@ -94,7 +115,12 @@ class Mock {
     }
 
     to() {
-        return this.source;
+        const isArray = this.isArray;
+        if (isArray) {
+            return this.data.list;
+        } else {
+            return this.data;
+        }
     }
 
     raw() {
