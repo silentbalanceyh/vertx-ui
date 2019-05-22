@@ -52,10 +52,10 @@ const mockInit = (reference, options = {}) =>
     /* 1. Mocker 绑定数据源 */
     mockEnv(reference, options)((mocker, data) => mocker.bind(data));
 
-const mockResponse = (reference, params = {}) => async response =>
+const mockSearchResult = (reference, params = {}) => async response =>
     mockResult(reference, response, (mocker) => {
-        /* 1. 重新绑定 */
-        return mocker.bind(response).filter(params).to();
+        /* 不重新绑定 */
+        return mocker.filter(params).to();
     });
 const mockInherit = (reference, inherit = {}) => {
     const {$MOCK} = reference.props;
@@ -63,8 +63,20 @@ const mockInherit = (reference, inherit = {}) => {
         inherit.$MOCK = $MOCK;
     }
 };
+const mockDelete = (reference, id) => {
+    const {$MOCK} = reference.props;
+    const {$mocker} = reference.state;
+    if ($mocker) {
+        const data = $mocker.remove(id);
+        return {data, mock: $MOCK.mock};
+    } else {
+        return {data: {}, mock: false};
+    }
+};
 export default {
     mockInit,
     mockInherit,    // 继承专用ComplexList -> IxTable
-    mockResponse,
+    mockSearchResult,
+    // 单记录处理
+    mockDelete,     // 模拟删除
 };

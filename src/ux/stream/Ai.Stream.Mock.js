@@ -8,6 +8,7 @@ class Mock {
         this.reference = reference;
     }
 
+
     init() {
         this.keys = Tool.keys(this.reference);
         return this;
@@ -34,26 +35,13 @@ class Mock {
      * 2. 不修改 this.data
      */
     filter($query = {}) {
-        const {type} = this.data;
-        if (Symbol.for("LIST") === type ||
-            Symbol.for("ARRAY") === type) {
-            this.result = Tool.filter(this.data, $query);
-        } else {
-            throw new Error(`[Ox] 该操作对 type = ${Symbol.keyFor(type)} 的模拟数据不支持！`);
-        }
+        Tool.fnList(this.data, () => this.result = Tool.filter(this.data, $query));
         Log.mocker(this, $query);
         return this;
     }
 
     get(id = "") {
-        if (id) {
-            const list = this.data.list ? this.data.list : [];
-            const record = list.filter(item => id === item.key);
-            if (record[0]) {
-                return record[0];
-            }
-        }
-        return {};
+        return Tool.fnList(this.data, () => Tool.get(this.data, id));
     }
 
     update(record = {}) {
@@ -89,14 +77,16 @@ class Mock {
         return record;
     }
 
+    /**
+     * 副作用，修改 source
+     * @param id
+     * @returns {boolean}
+     */
     remove(id = "") {
         // 更新原始数据
-        if (id) {
-            const list = this.data.list ? this.data.list : [];
-            const filtered = list.filter(item => id !== item.key);
-            this.data.list = filtered;
-            this.data.count = filtered.length;
-        }
+        Tool.fnList(this.data, () =>
+            this.source = Tool.remove(this.data, id));
+
         return true;
     }
 

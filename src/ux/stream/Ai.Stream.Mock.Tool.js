@@ -56,8 +56,60 @@ const filter = (data = {}, $query = {}) => {
     const count = searcher.count($query);
     return {list, count};
 };
+const remove = (data = {}, id, keyField = 'key') => {
+    let result = Value.clone(data.data);
+    result = result.filter(item => id !== item[keyField]);
+    /* 刷新data */
+    data.data = result;
+    data.size = data.size - 1;
+    return resultList(data);
+};
+const get = (data = {}, id, keyField = 'key') => {
+    let result = Value.clone(data.data);
+    result = result.filter(item => id === item[keyField]);
+    if (result[0]) {
+        return result[0];
+    }
+};
+const resultList = (data) => {
+    const {type} = data;
+    if (Symbol.for("LIST") === type) {
+        /* 返回source */
+        return {
+            list: data.data,
+            count: data.size,
+        }
+    } else {
+        return data.data;
+    }
+};
+const consume = (data = {}, fnList, fnObject) => {
+    const {type} = data;
+    if (Symbol.for("LIST") === type ||
+        Symbol.for("ARRAY") === type) {
+        if (U.isFunction(fnList)) {
+            return fnList();
+        }
+    } else {
+        if (U.isFunction(fnObject)) {
+            return fnObject();
+        }
+    }
+};
+const fnList = (data = {}, fnList) => {
+    const {type} = data;
+    return consume(data, fnList,
+        () => {
+            throw new Error(`[Ox] 该操作对 type = ${Symbol.keyFor(type)} 的模拟数据不支持！`);
+        })
+};
 export default {
-    keys,
-    input,
-    filter
+    keys,       // 读取 keys
+    input,      // 输入解析
+    filter,     // 搜索
+    get,        // 读取数据
+    // ---- 返回 source ----
+    remove,     // 修改 data，返回 source
+    // 执行
+    fnList,
 };

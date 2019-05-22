@@ -1,10 +1,10 @@
 import Etat from './Fx.Etat';
 import Ux from 'ux';
-import U from 'underscore';
 import Q from './Fx.Query';
 import Mock from './Fx.Mock';
 import Cond from './Fx.Condition';
 import Inherit from './Fx.Action.Inherit';
+import Unity from './Fx.Unity';
 
 const rxAddTab = reference => event => {
     // 添加按钮
@@ -20,11 +20,20 @@ const rxEdit = (reference, id) => {
 };
 /* 这里的 reference 是 IxTable */
 const rxDelete = (reference, id) => {
-    // 删除记录
-    const {$options = {}} = reference.props;
-    const uri = $options['ajax.delete.uri'];
     reference.setState({$loading: true});
-    return Ux.ajaxDelete(uri, {id});
+    Ux.toLoading(() => {
+        // 删除记录
+        const {$options = {}} = reference.props;
+        const uri = $options['ajax.delete.uri'];
+        Ux.ajaxDelete(uri, {id}, Mock.mockDelete(reference, id))
+            .then(deleted => {
+                if (deleted) {
+                    rxRefresh(reference);
+                } else {
+                    throw new Error(`[Ox] 删除有问题 id = ${id}`);
+                }
+            })
+    });
 };
 /* 这里的 reference 是 IxTable */
 const rxRefresh = (reference) => {
@@ -33,14 +42,13 @@ const rxRefresh = (reference) => {
 };
 /* 这里的 reference 是 IxTable */
 const rxChange = (reference) => (pagination, filters, sorter) => {
-    const startState = {
+    reference.setState({
         $loading: true,
         // 专用 $condition，用于列定义，这里不更新 $condition， 会导致问题
         $condition: filters,
         // FIX：带有 filters 的列同时使用排序和过滤时的排序不生效的问题
         $sorter: sorter
-    };
-    reference.setState(startState);
+    });
     Ux.dgDebug({
         pagination,
         filters,
@@ -48,10 +56,7 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
     }, "[Ex] 改变条件专用事件");
     Ux.toLoading(() => {
         const params = Q.criteria(reference)(pagination, filters, sorter);
-        const {fnQuery} = reference.props;
-        if (U.isFunction(fnQuery)) {
-            fnQuery(params);
-        }
+        Unity.consume(reference, 'fnQuery')(fnQuery => fnQuery(params));
     })
 };
 /* ExComplexList 引用 */
@@ -71,24 +76,13 @@ const rxClose = (reference, key) => {
     const state = Etat.Tab.close(reference, key);
     reference.setState(state);
 };
-const rxSearch = (reference, query = {}) => {
-    if (reference) {
-        const {fnSearch} = reference.props;
-        if (U.isFunction(fnSearch)) {
-            Ux.dgDebug({
-                query,
-            }, "[Ex] rxSearch 参数：", "black");
-            return fnSearch(query)
-                .then(Mock.mockResponse(reference, query))
-                .then(data => reference.setState({
-                    data,
-                    $loading: false // 和分页专用统一
-                }));
-        } else {
-            throw new Error("[Ex] fnSearch 函数出错！");
-        }
-    }
-};
+const rxSearch = (reference, query = {}) =>
+    Unity.consume(reference, 'fnSearch')(fnSearch => fnSearch(query)
+        .then(Mock.mockSearchResult(reference, query))
+        .then(data => reference.setState({
+            data,
+            $loading: false // 和分页专用统一
+        })));
 export default {
     rxAddTab,   // 添加按钮
     rxEditTab,  // 编辑 Tab，主要处理关闭
