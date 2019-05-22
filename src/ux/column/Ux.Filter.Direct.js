@@ -16,7 +16,6 @@ const onClear = (reference, field, clearFilters) => (event) => {
     reference.setState({
         $condition,
         $resetCond: Util.randomString(8),
-        $loading: true, // 特殊条件，加载
     });
 };
 
@@ -28,7 +27,6 @@ const _onConfirm = (reference, field, selectedKeys, {
     const $condition = T.getCondition(reference, field, selectedKeys);
     reference.setState({
         $condition,
-        $loading: true, // 特殊条件，加载
     });
 };
 
