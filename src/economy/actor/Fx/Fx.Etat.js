@@ -1,23 +1,41 @@
 import Ux from "ux";
 import U from 'underscore';
 
-const addTab = (reference) => {
-    let {tabs = {}, options = {}} = reference.state;
-    tabs = Ux.clone(tabs);
-    const type = tabs.items.filter(item => "add" === item.type);
-    if (0 < type.length) {
-        tabs.activeKey = type[0].key;
+const _createTab = (reference, view, supplier) => {
+    if (U.isFunction(supplier)) {
+        let {tabs = {}} = reference.state;
+        tabs = Ux.clone(tabs);
+        const type = tabs.items.filter(item => view === item.type);
+        if (0 < type.length) {
+            tabs.activeKey = type[0].key;
+        } else {
+            const tab = supplier(tabs);
+            tabs.items.push(tab);
+            tabs.activeKey = tab.key;
+        }
+        return tabs;
     } else {
-        const tab = {
-            key: Ux.randomUUID(),
-            tab: options['tabs.add'],
-            type: "add",
-            index: tabs.items.length
-        };
-        tabs.items.push(tab);
-        tabs.activeKey = tab.key;
+        throw new Error("[Ex] 构造 Tab 页面的 supplier 不是一个合法函数");
     }
-    return tabs;
+};
+
+const addTab = (reference) => {
+    let {options = {}} = reference.state;
+    return _createTab(reference, "add", (tabs) => ({
+        key: Ux.randomUUID(),
+        tab: options['tabs.add'],
+        type: "add",
+        index: tabs.items.length
+    }));
+};
+const editTab = (reference, data = {}) => {
+    let {options = {}} = reference.state;
+    return _createTab(reference, "edit", (tabs) => ({
+        key: data.key,
+        tab: options['tabs.edit'],
+        type: "edit",
+        index: tabs.items.length
+    }))
 };
 const closeTab = (reference, key) => {
     let {tabs = {}} = reference.state;
@@ -68,11 +86,12 @@ const viewSwitch = (reference, view = "list", key) => {
     if (U.isFunction(rxViewSwitch)) {
         rxViewSwitch(view, key);
     }
-    return {view, key, $$loading: "list" !== view};
+    return {view, key};
 };
 export default {
     Tab: {
         add: addTab,
+        edit: editTab,
         close: closeTab,
         click: clickTab,
         remove: removeTab

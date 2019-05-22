@@ -24,10 +24,13 @@ const inTable = (reference) => {
         inherit.$query = query;
         inherit.$table = config.table;
         inherit.$selected = $selected;
+
         // 函数区域
-        inherit.fnSelect = Fx.fnSelect(reference);
         inherit.fnSearch = rxSearch;
+        inherit.fnSelect = Fx.fnSelect(reference);
         inherit.fnQuery = Fx.fnQuery(reference);
+        inherit.fnInit = Fx.fnInit(reference);
+
         // Mock环境才会使用
         Fx.Mock.mockInherit(reference, inherit);
 

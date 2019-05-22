@@ -48,6 +48,22 @@ const mockResult = (reference, response, supplier) => {
         return response;
     }
 };
+const mockSingle = (reference, consumer) => {
+    const {$MOCK} = reference.props;
+    const {$mocker} = reference.state;
+    let mockFinal = {};
+    if ($mocker) {
+        let data = {};
+        if (U.isFunction(consumer)) {
+            data = consumer($mocker);
+        }
+        mockFinal = {data, mock: $MOCK.mock};
+    } else {
+        mockFinal = {data: {}, mock: false};
+    }
+    Ux.dgDebug(mockFinal, "[Mk] 模拟数据最终。", "gray");
+    return mockFinal;
+};
 const mockInit = (reference, options = {}) =>
     /* 1. Mocker 绑定数据源 */
     mockEnv(reference, options)((mocker, data) => mocker.bind(data));
@@ -63,20 +79,15 @@ const mockInherit = (reference, inherit = {}) => {
         inherit.$MOCK = $MOCK;
     }
 };
-const mockDelete = (reference, id) => {
-    const {$MOCK} = reference.props;
-    const {$mocker} = reference.state;
-    if ($mocker) {
-        const data = $mocker.remove(id);
-        return {data, mock: $MOCK.mock};
-    } else {
-        return {data: {}, mock: false};
-    }
-};
+const mockDelete = (reference, id) =>
+    mockSingle(reference, (mocker) => mocker.remove(id));
+const mockGet = (reference, id) =>
+    mockSingle(reference, (mocker) => mocker.get(id));
 export default {
     mockInit,
     mockInherit,    // 继承专用ComplexList -> IxTable
     mockSearchResult,
     // 单记录处理
     mockDelete,     // 模拟删除
+    mockGet,
 };

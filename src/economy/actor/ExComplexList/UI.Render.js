@@ -1,10 +1,9 @@
-import renderPageList from './UI.Render.Page';
+import PageList from './UI.Page.List';
+import PageAdd from './UI.Page.Add';
+import PageEdit from './UI.Page.Edit';
 
-const renderPageAdd = (reference, item = {}, key) => {
-
-    return false;
-};
 export default {
-    "list": renderPageList,
-    "add": renderPageAdd,
+    "list": PageList,
+    "add": PageAdd,
+    "edit": PageEdit
 };

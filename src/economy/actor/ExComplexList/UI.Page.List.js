@@ -27,7 +27,7 @@ const renderSearch = (reference) => (<IxOpSearch {...Op.inSearch(reference)}/>);
 const renderExtra = (reference) => (<IxOpExtra {...Op.inExtra(reference)}/>);
 /* 表格 */
 const renderTable = (reference) => (<IxTable {...Op.inTable(reference)}/>);
-const renderPageList = (reference, item = {}) => {
+export default (reference, item = {}) => {
     return (
         <Row>
             <Row className={Ux.ECONOMY.ROW_HEAD}>
@@ -53,4 +53,3 @@ const renderPageList = (reference, item = {}) => {
         </Row>
     );
 };
-export default renderPageList;

@@ -15,8 +15,22 @@ const rxAddTab = reference => event => {
 };
 /* 这里的 reference 是 IxTable */
 const rxEdit = (reference, id) => {
-    // 编辑按钮
-    const {$options = {}} = reference.props;
+    reference.setState({$loading: true});
+    Ux.toLoading(() => {
+        // 读取记录
+        const {$options = {}} = reference.props;
+        const uri = $options['ajax.get.uri'];
+        Ux.ajaxGet(uri, {id}, Mock.mockGet(reference, id))
+            .then(data => {
+                /* 本层引用处理 */
+                reference.setState({$loading: false});
+                /* 上层引用处理 */
+                const ref = Ux.onReference(reference, 1);
+                const view = Etat.View.switch(ref, "edit", id);
+                const tabs = Etat.Tab.edit(ref, data);
+                Unity.consume(reference, 'fnInit')(fnInit => fnInit(data, {tabs, ...view}));
+            })
+    })
 };
 /* 这里的 reference 是 IxTable */
 const rxDelete = (reference, id) => {
