@@ -29,7 +29,7 @@ const rxDelete = (reference, id) => {
 /* 这里的 reference 是 IxTable */
 const rxRefresh = (reference) => {
     const query = Cond.initFilters(reference);
-    Q.search(reference, query);
+    rxSearch(reference, query.to());
 };
 /* 这里的 reference 是 IxTable */
 const rxChange = (reference) => (pagination, filters, sorter) => {
@@ -75,6 +75,9 @@ const rxSearch = (reference, query = {}) => {
     if (reference) {
         const {fnSearch} = reference.props;
         if (U.isFunction(fnSearch)) {
+            Ux.dgDebug({
+                query,
+            }, "[Ex] rxSearch 参数：", "black");
             return fnSearch(query)
                 .then(Mock.mockResponse(reference, query))
                 .then(data => reference.setState({

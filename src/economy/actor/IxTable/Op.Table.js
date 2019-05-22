@@ -46,8 +46,7 @@ const update = (ref, previous = {}) => {
         /*
          * 1. 分页会触发
          */
-        const queryRef = Fx.rxCriteria(ref);
-        Fx.rxSearch(ref, queryRef.to());
+        Fx.rxRefresh(ref);
     }
 };
 const configTable = (ref, options = {}, table = {}) => {

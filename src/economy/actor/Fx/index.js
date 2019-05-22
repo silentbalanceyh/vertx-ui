@@ -11,7 +11,7 @@ const exported = {
     // Tab Render
     configTab: Tab.render,
 
-    rxCriteria: Q.init,
+    rxCriteria: Q.criteria,
     // 是否更新了 $query 一系列
     testQuery: Q.is,
     testBatch: Init.isBatch,
