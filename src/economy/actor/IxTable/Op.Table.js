@@ -11,7 +11,7 @@ const initTable = (reference, options = {}, table = {}) => {
         table.expandedRowRender = rxExpandRow;
     }
     // 静态行处理
-    table.columns = Ux.uiTableColumn(reference, table.columns);
+    // table.columns = Ux.uiTableColumn(reference, table.columns);
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
@@ -43,6 +43,7 @@ const configTable = (ref, options = {}, table = {}) => {
      * 不造成多次改动，这里只进行列数量过滤
      * 动态列处理
      */
+    $table.columns = Ux.uiTableColumn(ref, table.columns);
     // 分页处理
     $table.pagination = Assist.initPager(ref);
     // onChange事件

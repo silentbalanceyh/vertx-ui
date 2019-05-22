@@ -28,17 +28,17 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
      **/
     const startState = {
         // $loading: true,
-        // 专用 $condition
-        $condition: filters
+        // 专用 $condition，用于列定义
+        $condition: filters,
+        // FIX：带有 filters 的列同时使用排序和过滤时的排序不生效的问题
+        $sorter: sorter
     };
     reference.setState(startState);
     Ux.toLoading(() => {
         const params = Q.criteria(reference)(pagination, filters, sorter);
         const {fnQuery} = reference.props;
         if (U.isFunction(fnQuery)) {
-            const ref = Ux.onReference(reference, 1);
-            ref.setState({query: params})
-            // fnQuery(params);
+            fnQuery(params);
         }
     })
 };

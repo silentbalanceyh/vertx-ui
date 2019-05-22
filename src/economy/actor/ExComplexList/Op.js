@@ -26,6 +26,7 @@ const inTable = (reference) => {
         // 函数区域
         inherit.fnSelect = Fx.fnSelect(reference);
         inherit.fnSearch = rxSearch;
+        inherit.fnQuery = Fx.fnQuery(reference);
         return inherit;
     } else {
         throw new Error("[Ex] rxSearch 核心函数丢失！");

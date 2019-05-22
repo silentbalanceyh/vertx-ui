@@ -40,8 +40,6 @@ class Component extends React.PureComponent {
                 {items.map(item => {
                     const {type, ...itemRest} = item;
                     const fnRender = RENDERS[type];
-                    /* */
-                    console.info(item.key);
                     return (
                         <Tabs.TabPane {...itemRest}>
                             {fnRender(this, itemRest, rest.activeKey)}
