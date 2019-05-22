@@ -15,6 +15,8 @@ const initTable = (reference, options = {}, table = {}) => {
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
+    // onChange事件
+    table.onChange = Fx.rxChange(reference);
     return table;
 };
 const init = (ref) => {
@@ -25,14 +27,15 @@ const init = (ref) => {
     const table = initTable(ref, $options, $table);
     ref.setState({table});
     // 加载数据专用，第一次加载
-    Fx.rxSearch(ref);
+    const {$query = {}} = ref.props;
+    Fx.rxSearch(ref, $query);
 };
 const update = (ref, previous = {}) => {
     if (Fx.testQuery(ref, previous)) {
         /*
          * 1. 分页会触发
          */
-        Fx.rxSearch(ref);
+        Fx.rxSearch(ref, {});
     }
 };
 const configTable = (ref, options = {}, table = {}) => {
@@ -46,8 +49,6 @@ const configTable = (ref, options = {}, table = {}) => {
     $table.columns = Ux.uiTableColumn(ref, table.columns);
     // 分页处理
     $table.pagination = Assist.initPager(ref);
-    // onChange事件
-    $table.onChange = Fx.rxChange(ref);
     return $table;
 };
 

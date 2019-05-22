@@ -28,12 +28,17 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
      **/
     const startState = {
         $loading: true,
-        // 专用 $condition，用于列定义
+        // 专用 $condition，用于列定义，这里不更新 $condition， 会导致问题
         $condition: filters,
         // FIX：带有 filters 的列同时使用排序和过滤时的排序不生效的问题
         $sorter: sorter
     };
     reference.setState(startState);
+    Ux.dgDebug({
+        pagination,
+        filters,
+        sorter
+    }, "[Ex] 改变条件专用事件");
     Ux.toLoading(() => {
         const params = Q.criteria(reference)(pagination, filters, sorter);
         const {fnQuery} = reference.props;

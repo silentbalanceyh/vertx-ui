@@ -20,10 +20,7 @@ const _onChange = (reference, field, setSelectedKeys) => (event) => {
     setSelectedKeys(searchText);
     // 设置高亮
     const $keyword = _getKeyWord(reference, field, highlight);
-    /*
-    * onChange触发的时候不更改 $condition 条件，防止直接触发搜索
-    * */
-    // const $condition = T.getCondition(reference, field, searchText);
+    // 修改 $condition，这个时候不会导致触发
     reference.setState({$keyword});
 };
 
@@ -48,6 +45,10 @@ const _onConfirm = (reference, field, selectedKeys, {
     // 空值直接触发重置
     if (0 === selectedKeys.length) {
         onClear(reference, field, clearFilters)();
+    } else {
+        /* 设置条件 $condition 信息 */
+        const $condition = T.getCondition(reference, field, selectedKeys);
+        reference.setState({$condition});
     }
 };
 

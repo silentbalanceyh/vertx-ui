@@ -17,11 +17,11 @@ const input = (reference, defaultQuery = {}) => {
     }
     return queryResult;
 };
-const search = (reference) => {
+const search = (reference, query = {}) => {
     if (reference) {
-        const {fnSearch, $query = {}} = reference.props;
+        const {fnSearch} = reference.props;
         if (U.isFunction(fnSearch)) {
-            fnSearch($query).then(data => reference.setState({
+            fnSearch(query).then(data => reference.setState({
                 data,
                 $loading: false // 和分页专用统一
             }));
@@ -31,10 +31,20 @@ const search = (reference) => {
     }
 };
 const is = (reference, previous = {}) => {
-    const {prevProps} = previous;
+    /* 外置改动，判断 $query 变量 */
+    const {prevProps, prevState = {}} = previous;
     const prevQuery = prevProps.$query;
     const curQuery = reference.props.$query;
-    return Ux.isDiff(prevQuery, curQuery);
+    /* 内置改动，判断 $condition */
+    let updated = Ux.isDiff(prevQuery, curQuery);
+    if (!updated) {
+        /* 判断条件 */
+        const state = reference.state ? reference.state : {};
+        const curCond = state.$condition;
+        const prevCond = prevState.$condition;
+        updated = Ux.isDiff(curCond, prevCond);
+    }
+    return updated;
 };
 const onCondition = (queryRef, reference, queries) => {
     // 读取原始条件
@@ -82,16 +92,10 @@ const criteria = (reference) => (pagination, filters, sorter) => {
         queryRef.sort([]);
     }
     // 执行查询操作
-    if (!Ux.isEmpty(filters)) {
-        /**
-         * 查询条件规范化处理
-         */
-        onCondition(queryRef, reference, filters);
-    }
+    onCondition(queryRef, reference, filters);
     return queryRef.to();
 };
 export default {
-    input,
     search,
     criteria,
     is
