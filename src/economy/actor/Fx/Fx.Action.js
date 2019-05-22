@@ -27,7 +27,7 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
      * 1.
      **/
     const startState = {
-        // $loading: true,
+        $loading: true,
         // 专用 $condition，用于列定义
         $condition: filters,
         // FIX：带有 filters 的列同时使用排序和过滤时的排序不生效的问题

@@ -5,7 +5,8 @@ import {Table} from "antd";
 
 class Component extends React.PureComponent {
     state = {
-        table: {}
+        table: {},
+        $stateSorter: true,   // 排序修改成可控
     };
 
     componentDidMount() {

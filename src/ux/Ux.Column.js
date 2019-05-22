@@ -40,6 +40,8 @@ const uiTableColumn = (reference, columns = [], ops = {}) => {
         Column.columnFixed(column, $op);
         // $filter过滤处理
         Column.columnFilter(column, reference);
+        // sorter = true 是否开启可控模式
+        Column.columnSorter(column, reference);
     });
     return $columns;
 };
