@@ -14,7 +14,7 @@ const onOpen = (reference, config = {}) => (event) => {
         Modal.confirm({
             ...confirm,
             onOk: () => {
-                Fx.consume(reference, 'fnRefresh')(fnLoading => fnLoading(true))
+                Fx.doLoading(reference);
             }
         })
     }

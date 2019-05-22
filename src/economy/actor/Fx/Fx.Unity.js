@@ -26,7 +26,13 @@ const consume = (reference, name) => consumer => {
         throw new Error("[Ex] 空 reference 处理。");
     }
 };
+const doLoading = (reference, loading = true) =>
+    consume(reference, 'fnLoading')(fnLoading => fnLoading(loading));
+const doRefresh = (reference) =>
+    consume(reference, "fnRefresh")(fnRefresh => fnRefresh());
 export default {
     write,
     consume,
+    doLoading,
+    doRefresh
 }

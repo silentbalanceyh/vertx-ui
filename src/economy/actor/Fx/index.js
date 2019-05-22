@@ -23,7 +23,8 @@ const exported = {
     initSearch: Init.initSearch,
     initExtra: Init.initExtra,
     // 调用函数
-    consume: Unity.consume,
+    doLoading: Unity.doLoading,
+    doRefresh: Unity.doRefresh,
     // Mock数据
     Mock,
 };
