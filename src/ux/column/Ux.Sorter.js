@@ -1,5 +1,12 @@
 import Ux from 'ux';
-
+/*
+ * 由于系统在点击表格的 onChange 会优先触发一个 loading 的效果
+ * 也就是说这个 loading 效果会使得 sorter 必须要受控，否则一旦 setState
+ * 排序的内容就会被还原，导致排序失效，这种情况在不设置 filter 的时候是不存在的
+ * 所以设置内置属性：
+ * 1. $stateSorter 变量用于控制
+ * 2. $condition 则是真正需要使用的查询条件
+ */
 const columnSorter = (column = {}, reference) => {
     /* 是否开启可控 */
     const {$stateSorter = false} = reference.state ? reference.state : {};

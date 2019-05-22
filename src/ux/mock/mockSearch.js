@@ -34,6 +34,16 @@ export default (mockData, query = {}) => {
                 }
             }))
         }
+        /* 列排序 */
+        const {sorter = []} = query;
+        if (0 < sorter.length) {
+            const sorterLiteral = sorter[0];
+            const sorterItem = sorterLiteral.split(',');
+            const field = sorterItem[0];
+            const isAsc = "ASC" === sorterItem[1];
+            source = isAsc ? source.sort(Ux.sorterAscFn(field)) :
+                source.sort(Ux.sorterDescFn(field));
+        }
         /* 重新构造数据 */
         const $data = {};
         $data.count = mockData.data.count;  // 数量
