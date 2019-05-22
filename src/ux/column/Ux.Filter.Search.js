@@ -20,15 +20,17 @@ const _onChange = (reference, field, setSelectedKeys) => (event) => {
     setSelectedKeys(searchText);
     // 设置高亮
     const $keyword = _getKeyWord(reference, field, highlight);
-    const $condition = T.getCondition(reference, field, searchText);
-    reference.setState({$keyword, $condition});
+    /*
+    * onChange触发的时候不更改 $condition 条件，防止直接触发搜索
+    * */
+    // const $condition = T.getCondition(reference, field, searchText);
+    reference.setState({$keyword});
 };
 
 const onClear = (reference, field, clearFilters) => (event) => {
     if (event && U.isFunction(event.preventDefault)) {
         event.preventDefault();
     }
-
     clearFilters();// 设置高亮
     const $keyword = _getKeyWord(reference, field, "");
     const $condition = T.getCondition(reference, field, []);
