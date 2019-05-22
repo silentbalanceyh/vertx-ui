@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import U from 'underscore';
-import Criteria from './Fx.Criteria';
+import Cond from './Fx.Condition';
 
 const input = (reference, defaultQuery = {}) => {
     const {$query} = reference.props;
@@ -46,35 +46,24 @@ const is = (reference, previous = {}) => {
     }
     return updated;
 };
-const onCondition = (queryRef, reference, queries) => {
-    // 读取原始条件
-    const {$condition = {}} = reference.state;
-    // 是否传入 queries
-    let criteria = Ux.clone($condition);
-    if (queries) {
-        Object.assign(criteria, queries);
-    }
-    // 调用 updateFilters处理
-    const condition = Criteria.update(reference, $condition);
-    Ux.dgDebug(condition.normalized, "[OX] 重新合并后的条件：", "#366");
-    queryRef.criteria(condition.normalized);
-};
 const criteria = (reference) => (pagination, filters, sorter) => {
     Ux.dgDebug({
         pagination,
         filters,
         sorter
     }, "[Ex] IxTable 改变条件：", "#f96");
-    const {current, pageSize} = pagination;
-    const queryRef = Ux.auiQuery(reference);
-    // 触发了分页操作
-    if (current && pageSize) {
-        /**
-         * 分页信息
-         * 1. current是当前页
-         * 2. pageSize则是当前页的尺寸
-         */
-        queryRef.page(current).size(pageSize);
+    const queryRef = Cond.initFilters(reference, filters);
+    if (pagination) {
+        const {current, pageSize} = pagination;
+        // 触发了分页操作
+        if (current && pageSize) {
+            /**
+             * 分页信息
+             * 1. current是当前页
+             * 2. pageSize则是当前页的尺寸
+             */
+            queryRef.page(current).size(pageSize);
+        }
     }
     // 执行排序操作
     if (!Ux.isEmpty(sorter)) {
@@ -92,10 +81,10 @@ const criteria = (reference) => (pagination, filters, sorter) => {
         queryRef.sort([]);
     }
     // 执行查询操作
-    onCondition(queryRef, reference, filters);
     return queryRef.to();
 };
 export default {
+    input,
     search,
     criteria,
     is

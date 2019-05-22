@@ -11,7 +11,7 @@ const initTable = (reference, options = {}, table = {}) => {
         table.expandedRowRender = rxExpandRow;
     }
     // 静态行处理
-    // table.columns = Ux.uiTableColumn(reference, table.columns);
+    table.columns = Ux.uiTableColumn(reference, table.columns);
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
@@ -25,7 +25,7 @@ const init = (ref) => {
      * 准备 Table 的初始化状态
      */
     const table = initTable(ref, $options, $table);
-    ref.setState({table});
+    ref.setState({$table: table});
     // 加载数据专用，第一次加载
     const {$query = {}} = ref.props;
     Fx.rxSearch(ref, $query);
@@ -35,7 +35,8 @@ const update = (ref, previous = {}) => {
         /*
          * 1. 分页会触发
          */
-        Fx.rxSearch(ref, {});
+        const queryRef = Fx.rxCriteria(ref);
+        Fx.rxSearch(ref, queryRef.to());
     }
 };
 const configTable = (ref, options = {}, table = {}) => {

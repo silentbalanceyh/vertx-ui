@@ -1,5 +1,5 @@
 import Cfg from './Fx.Config';
-import Q from './Fx.Query';
+import Cond from './Fx.Condition';
 import Ux from 'ux';
 
 import Tab from './Fx.Tab';
@@ -13,8 +13,12 @@ export default type => ref => {
      * 2. query 合并过后执行根容器的 update 方法，然后将 query 传入给 IxTable
      * 3. 当前组件：state -> query 会转换成 props -> $query 转入给 IxTable
      */
-    const defaultQuery = Ux.irGrid(config.query, ref);
-    reactState.query = Q.input(ref, defaultQuery);
+    reactState.query = Cond.initQuery(ref, config.query);
+
+    /*
+        const defaultQuery = Ux.irGrid(config.query, ref);
+        reactState.query = Q.input(ref, defaultQuery);
+    */
     /*
      * 准备 Tabs 的初始化状态
      * 1. 打开 Tab
