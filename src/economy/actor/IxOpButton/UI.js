@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Button} from 'antd';
 
 class Component extends React.PureComponent {
@@ -9,8 +9,8 @@ class Component extends React.PureComponent {
             <span>
                 <Button {...rest} htmlType={"button"}/>
             </span>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

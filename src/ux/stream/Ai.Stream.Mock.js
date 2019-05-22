@@ -1,9 +1,7 @@
-import Prop from '../prop/Ux.Prop';
 import Log from '../monitor/Mt.Logger';
-import Ai from '../ai/AI';
 import {v4} from 'uuid';
 import Value from '../Ux.Value';
-import U from 'underscore';
+import Tool from './Ai.Stream.Mock.Tool';
 
 class Mock {
     constructor(reference) {
@@ -11,17 +9,7 @@ class Mock {
     }
 
     init() {
-        const grid = Prop.fromHoc(this.reference, "grid");
-        // 启用了 Mock
-        const {options = {}} = grid ? grid : {};
-        if (options['mock.enabled']) {
-            const keys = options['mock.keys'];
-            if (U.isArray(keys)) {
-                this.keys = keys;
-            } else {
-                this.keys = keys.split(",");
-            }
-        }
+        this.keys = Tool.keys(this.reference);
         return this;
     }
 
@@ -30,30 +18,28 @@ class Mock {
      * 2. data 为处理的数据信息
      */
     bind(source) {
-        this.source = source ? Value.clone(source) : undefined;
-        this.data = {};
         if (source) {
-            if (U.isArray(source)) {
-                this.isArray = true;
-                this.data = {
-                    list: Value.clone(source),
-                    count: 0,
-                }
-            } else if (U.isObject(source)) {
-                this.isArray = false;
-                this.data = Value.clone(source);
-            }
+            /* 数据源头 */
+            this.source = Value.clone(source);
+            this.data = Tool.input(source);
         } else {
             throw new Error("[Ox] 对不起，Mock数据要求有合法输入。");
         }
         return this;
     }
 
+    /*
+     * Array / List 可用
+     * 1. 动作是一次性的
+     * 2. 不修改 this.data
+     */
     filter($query = {}) {
-        if (this.isArray) {
-            const list = Value.clone(this.source);
-            this.data.list = Ai.aiSearcher(list).query($query);
-            this.data.count = this.data.list.length;
+        const {type} = this.data;
+        if (Symbol.for("LIST") === type ||
+            Symbol.for("ARRAY") === type) {
+            this.result = Tool.filter(this.data, $query);
+        } else {
+            throw new Error(`[Ox] 该操作对 type = ${Symbol.keyFor(type)} 的模拟数据不支持！`);
         }
         Log.mocker(this, $query);
         return this;
@@ -115,18 +101,14 @@ class Mock {
     }
 
     to() {
-        const isArray = this.isArray;
-        if (isArray) {
-            return this.data.list;
-        } else {
-            return this.data;
-        }
+        return this.result;
     }
 
     raw() {
         const keys = this.keys;
         const source = this.source;
-        return {keys, source};
+        const data = this.data;
+        return {keys, source, data};
     }
 }
 

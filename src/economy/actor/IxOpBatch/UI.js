@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Op from "./Op";
 import './Cab.less';
 import IxOpLink from '../IxOpLink/UI';
@@ -20,8 +20,8 @@ class Component extends React.PureComponent {
                 {$op.map(link => <IxOpLink key={link.key} $config={link}
                                            {...this.props}/>)}
             </ul>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

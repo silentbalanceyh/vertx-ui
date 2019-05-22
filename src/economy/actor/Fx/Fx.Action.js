@@ -2,6 +2,8 @@ import Etat from './Fx.Etat';
 import Ux from 'ux';
 import U from 'underscore';
 import Q from './Fx.Query';
+import Mock from './Fx.Mock';
+import Cond from './Fx.Condition';
 import Inherit from './Fx.Action.Inherit';
 
 const rxAddTab = reference => event => {
@@ -11,21 +13,26 @@ const rxAddTab = reference => event => {
     const tabs = Etat.Tab.add(reference);
     reference.setState({tabs, ...view});
 };
+/* 这里的 reference 是 IxTable */
 const rxEdit = (reference, id) => {
     // 编辑按钮
+    const {$options = {}} = reference.props;
 };
+/* 这里的 reference 是 IxTable */
 const rxDelete = (reference, id) => {
     // 删除记录
+    const {$options = {}} = reference.props;
+    const uri = $options['ajax.delete.uri'];
+    reference.setState({$loading: true});
+    return Ux.ajaxDelete(uri, {id});
 };
-/*
- * 这里的 reference 是 IxTable
- */
+/* 这里的 reference 是 IxTable */
+const rxRefresh = (reference) => {
+    const query = Cond.initFilters(reference);
+    Q.search(reference, query);
+};
+/* 这里的 reference 是 IxTable */
 const rxChange = (reference) => (pagination, filters, sorter) => {
-    // ExComplexList 引用
-    /*
-     * 条件来自几部分
-     * 1.
-     **/
     const startState = {
         $loading: true,
         // 专用 $condition，用于列定义，这里不更新 $condition， 会导致问题
@@ -47,37 +54,50 @@ const rxChange = (reference) => (pagination, filters, sorter) => {
         }
     })
 };
+/* ExComplexList 引用 */
 const rxEditTab = (reference) => (key, action) => {
     if ("remove" === action) {
         const state = Etat.Tab.remove(reference, key);
-        // ExComplexList 引用
         reference.setState(state);
     }
 };
+/* ExComplexList 引用 */
 const rxClickTab = reference => key => {
     const state = Etat.Tab.click(reference, key);
-    // ExComplexList 引用
     reference.setState(state);
 };
+/* ExComplexList 引用 */
 const rxClose = (reference, key) => {
     const state = Etat.Tab.close(reference, key);
-    // ExComplexList 引用
     reference.setState(state);
 };
+const rxSearch = (reference, query = {}) => {
+    if (reference) {
+        const {fnSearch} = reference.props;
+        if (U.isFunction(fnSearch)) {
+            return fnSearch(query)
+                .then(Mock.mockResponse(reference, query))
+                .then(data => reference.setState({
+                    data,
+                    $loading: false // 和分页专用统一
+                }));
+        } else {
+            throw new Error("[Ex] fnSearch 函数出错！");
+        }
+    }
+};
 export default {
-    rxAddTab,
-
-    rxEditTab,
-
-    rxClickTab,
+    rxAddTab,   // 添加按钮
+    rxEditTab,  // 编辑 Tab，主要处理关闭
+    rxClickTab, // 移动 Tab 页，选择某个页
+    rxClose,    // 关闭某个 Tab页
+    rxChange,   // 表格发生变更（分页、排序、页尺寸改变、列变更）
+    rxRefresh,  // 刷新表格专用方法
+    rxSearch,   // 搜索专用方法
 
     rxEdit,
+    rxDelete,   // 行删除
 
-    rxDelete,
-
-    rxChange,
-
-    rxClose,
 
     ...Inherit
 };

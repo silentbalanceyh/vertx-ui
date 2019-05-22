@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Icon} from 'antd';
 import Op from './Op';
 
@@ -32,8 +32,8 @@ class Component extends React.PureComponent {
                     </Dialog>
                 ) : false}
             </li>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

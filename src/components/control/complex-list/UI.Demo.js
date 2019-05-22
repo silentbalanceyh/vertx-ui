@@ -7,6 +7,7 @@ import Ajax from './Ajax';
 import Filter from './UI.Demo.Filter';
 import FormAdd from './UI.Demo.Form.Add';
 import FormEdit from './UI.Demo.Form.Edit';
+import {Mock} from "app";
 
 const {zero} = Ux;
 
@@ -25,7 +26,10 @@ class Component extends React.PureComponent {
                                reference={this}
                                FormFilter={Filter}
                                FormAdd={FormAdd}
-                               FormEdit={FormEdit}/>
+                               FormEdit={FormEdit}
+                    /* mock专用数据 */
+                               $MOCK={Mock.fnDeptList}
+                />
             </HelpCard>
         )
     }

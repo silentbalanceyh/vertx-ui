@@ -8,4 +8,4 @@ const fnQuery = (reference) => (query = {}) => reference.setState({query: Ux.clo
 export default {
     fnSelect,
     fnQuery
-}
+};

@@ -191,7 +191,7 @@ const _fnProjection = (source = [], $query = {}) => {
             if (!$columns.contains(field) && "key" !== field) {
                 delete each[field];
             }
-        }))
+        }));
     }
     return source;
 };
@@ -213,6 +213,14 @@ class Searcher {
         source = _fnProjection(source, $query);
         // Reduce
         return source;
+    }
+
+    count($query = {}) {
+        let source = this.data;
+        // 只过滤计算就可以了
+        source = _fnCriteria(source, $query);
+        // 计算结果
+        return source ? source.length : 0;
     }
 }
 

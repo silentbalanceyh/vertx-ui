@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Op from './Op';
 import {Button} from 'antd';
 import IxOpButton from '../IxOpButton/UI';
@@ -19,8 +19,8 @@ class Component extends React.PureComponent {
                 {op.map(button => <IxOpButton key={button.key} $config={button}
                                               {...this.props}/>)}
             </Button.Group>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

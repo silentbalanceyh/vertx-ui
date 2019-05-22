@@ -1,35 +1,6 @@
 import Ux from 'ux';
-import U from 'underscore';
 import Cond from './Fx.Condition';
 
-const input = (reference, defaultQuery = {}) => {
-    const {$query} = reference.props;
-    const queryResult = {};
-    if ($query) {
-        /*
-         * 属性中捕捉到 $query 变量，则直接针对 $query 和 defaultQuery 执行合并
-         */
-        queryResult["$PROP"] = Ux.clone($query);
-        queryResult[""] = true;
-        queryResult["$DFT"] = defaultQuery;
-    } else {
-        Object.assign(queryResult, defaultQuery);
-    }
-    return queryResult;
-};
-const search = (reference, query = {}) => {
-    if (reference) {
-        const {fnSearch} = reference.props;
-        if (U.isFunction(fnSearch)) {
-            fnSearch(query).then(data => reference.setState({
-                data,
-                $loading: false // 和分页专用统一
-            }));
-        } else {
-            throw new Error("[Ex] fnSearch 函数出错！");
-        }
-    }
-};
 const is = (reference, previous = {}) => {
     /* 外置改动，判断 $query 变量 */
     const {prevProps, prevState = {}} = previous;
@@ -84,8 +55,7 @@ const criteria = (reference) => (pagination, filters, sorter) => {
     return queryRef.to();
 };
 export default {
-    input,
-    search,
     criteria,
+    init: Cond.initQuery,
     is
 };

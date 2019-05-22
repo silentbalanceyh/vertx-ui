@@ -30,4 +30,4 @@ const columnSorter = (column = {}, reference) => {
 };
 export default {
     columnSorter
-}
+};

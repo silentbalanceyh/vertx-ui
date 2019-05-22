@@ -25,7 +25,7 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
  */
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns = Ai.aiExprColumn(columns);
-    const $op = Value.immutable(["BUTTON", "OP", "LINK"]);
+    const $op = Value.immutable(["BUTTON", "OP", "LINK", "ACTION"]);
     const $columns = [];
     // 添加列的平行解析
     columns.forEach(column => {

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import {Drawer} from 'antd';
 
 class Component extends React.PureComponent {
@@ -8,8 +8,8 @@ class Component extends React.PureComponent {
             <Drawer {...$config} visible={$visible}>
 
             </Drawer>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

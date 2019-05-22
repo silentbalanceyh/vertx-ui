@@ -11,7 +11,10 @@ const initTable = (reference, options = {}, table = {}) => {
         table.expandedRowRender = rxExpandRow;
     }
     // 静态行处理
-    table.columns = Ux.uiTableColumn(reference, table.columns);
+    table.columns = Ux.uiTableColumn(reference, table.columns, {
+        rxEdit: Fx.rxEdit,
+        rxDelete: Fx.rxDelete,
+    });
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
@@ -24,8 +27,16 @@ const init = (ref) => {
     /*
      * 准备 Table 的初始化状态
      */
-    const table = initTable(ref, $options, $table);
-    ref.setState({$table: table});
+    const state = {};
+    state.$table = initTable(ref, $options, $table);
+    /*
+     * 初始化 $mocker
+     */
+    const $mocker = Fx.Mock.mockInit(ref, $options);
+    if ($mocker) {
+        state.$mocker = $mocker;
+    }
+    ref.setState(state);
     // 加载数据专用，第一次加载
     const {$query = {}} = ref.props;
     Fx.rxSearch(ref, $query);
@@ -47,7 +58,10 @@ const configTable = (ref, options = {}, table = {}) => {
      * 不造成多次改动，这里只进行列数量过滤
      * 动态列处理
      */
-    $table.columns = Ux.uiTableColumn(ref, table.columns);
+    $table.columns = Ux.uiTableColumn(ref, table.columns, {
+        rxEdit: Fx.rxEdit,
+        rxDelete: Fx.rxDelete,
+    });
     // 分页处理
     $table.pagination = Assist.initPager(ref);
     return $table;

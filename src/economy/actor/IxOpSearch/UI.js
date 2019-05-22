@@ -32,7 +32,7 @@ class Component extends React.PureComponent {
                     <IxDrawer $visible={visible} $config={advanced}/>
                 ) : false}
             </span>
-        ) : false
+        ) : false;
     }
 }
 

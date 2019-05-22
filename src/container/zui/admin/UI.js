@@ -13,6 +13,7 @@ import GlobalHeader from './UI.Header'
 const {zero} = Ux;
 const {Content} = Layout;
 
+/*
 const buildNavs = (reference = {}) => {
     const {$menus, $router} = reference.props;
     let current = $menus.to().filter(menu => menu.uri &&
@@ -32,7 +33,7 @@ const buildNavs = (reference = {}) => {
         }));
     }
     return $nav;
-};
+};*/
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")

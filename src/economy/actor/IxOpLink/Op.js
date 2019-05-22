@@ -39,4 +39,4 @@ const init = (reference) => {
 export default {
     onOpen,
     init
-}
+};

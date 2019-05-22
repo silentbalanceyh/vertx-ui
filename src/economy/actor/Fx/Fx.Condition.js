@@ -35,4 +35,4 @@ const initFilters = (reference, filters = {}) => {
 export default {
     initQuery,
     initFilters
-}
+};

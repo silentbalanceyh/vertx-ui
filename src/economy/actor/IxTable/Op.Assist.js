@@ -11,7 +11,7 @@ const initSelection = (reference) => {
                 fnSelect($selected);
             }
         }
-    }
+    };
 };
 const initTotal = (reference) => (total) => {
     const {$table = {}} = reference.props;
@@ -30,7 +30,7 @@ const initTotal = (reference) => (total) => {
                 ) : false}
                 {reportJsx}
             </span>
-        )
+        );
     } else return false;
 };
 const initPager = (reference = {}) => {
@@ -51,4 +51,4 @@ const initPager = (reference = {}) => {
 export default {
     initSelection,
     initPager,
-}
+};

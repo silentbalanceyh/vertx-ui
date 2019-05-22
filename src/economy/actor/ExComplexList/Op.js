@@ -20,6 +20,7 @@ const inTable = (reference) => {
     const {rxSearch} = reference.props;
     if (U.isFunction(rxSearch)) {
         const {query = {}, config = {}, $selected = []} = reference.state;
+        // 参数专用
         inherit.$query = query;
         inherit.$table = config.table;
         inherit.$selected = $selected;
@@ -27,6 +28,9 @@ const inTable = (reference) => {
         inherit.fnSelect = Fx.fnSelect(reference);
         inherit.fnSearch = rxSearch;
         inherit.fnQuery = Fx.fnQuery(reference);
+        // Mock环境才会使用
+        Fx.Mock.mockInherit(reference, inherit);
+
         return inherit;
     } else {
         throw new Error("[Ex] rxSearch 核心函数丢失！");
@@ -39,4 +43,4 @@ export default {
     inSearch,
     inExtra,
     inTable
-}
+};

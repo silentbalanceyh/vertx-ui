@@ -47,4 +47,4 @@ const update = (reference, filters) => {
 };
 export default {
     update
-}
+};
