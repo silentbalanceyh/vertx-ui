@@ -25,7 +25,7 @@ const _inheritFun = (reference, inherit = {}, name) => {
 };
 const inBatch = (reference) => {
     const inherit = _inUniform(reference);
-    const {$selected = []} = reference.state;
+    const {$selected = [], config = {}} = reference.state;
     inherit.$selected = $selected;
 
     _inheritFun(reference, inherit, 'fnLoading');
@@ -33,6 +33,9 @@ const inBatch = (reference) => {
     _inheritFun(reference, inherit, 'fnMock');
 
     inherit.fnBatchDelete = Fx.rxBatchDelete;
+    if (config.hasOwnProperty('batch.editor')) {
+        inherit.$editor = config['batch.editor']
+    }
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;

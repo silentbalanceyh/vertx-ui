@@ -1,10 +1,35 @@
 import React from 'react';
+import Op from './Op';
+import Ux from "ux";
+import {Table} from 'antd';
 
 class Component extends React.PureComponent {
+    state = {
+        $columns: [],
+        $data: []
+    };
+
+    componentDidMount() {
+        Op.init(this);
+    }
+
     render() {
+        const {$columns = [], $data = []} = this.state;
+        const {config = {}} = this.props;
+        const {button} = config;
+        const reference = this;
         return (
-            <div>2019-05-21</div>
-        );
+            <div>
+                <Table className={"web-table"}
+                       dataSource={$data}
+                       columns={$columns}
+                       pagination={false}/>
+                {Ux.rtPure(reference, {
+                    id: button,
+                    className: "ux-hidden"
+                })}
+            </div>
+        )
     }
 }
 

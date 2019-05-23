@@ -15,7 +15,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$config = {}} = this.props;
+        const {$config = {}, $editor = {}} = this.props;
         const {text, icon, ...rest} = $config;
         /* 窗口配置 */
         const {visible = false, window, fnClose} = this.state;
@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                 </a>
                 {window ? (
                     <Dialog $visible={visible} $config={window} fnClose={fnClose}>
-                        <Editor fnClose={fnClose}/>
+                        <Editor {...this.props} fnClose={fnClose} config={$editor}/>
                     </Dialog>
                 ) : false}
             </li>
