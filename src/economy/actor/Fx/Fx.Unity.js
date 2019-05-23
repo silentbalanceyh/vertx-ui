@@ -41,6 +41,8 @@ const doClose = (reference) =>
     consume(reference, 'fnClose')(fnClose => fnClose());
 const doMocker = (reference) =>
     consume(reference, "fnMock")(fnMock => fnMock());
+const doSelect = (reference, selected = []) =>
+    consume(reference, "fnSelect")(doSelect => doSelect(selected));
 
 const submit = (reference, executor) => {
     reference.setState({$loading: true});
@@ -69,6 +71,7 @@ export default {
     submit, // 提交专用
     change, // 表格专用
 
+    doSelect,   // 选中项处理
     doMocker,   // 模拟数据
     doLoading,  // 开始加载数据
     doClose,    // 关闭窗口

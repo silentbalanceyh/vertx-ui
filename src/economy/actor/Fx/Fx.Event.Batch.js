@@ -14,8 +14,12 @@ const rxBatchDelete = (reference) => () => {
         Ux.ajaxDelete(uri, {$body: $selected},
             Mock.mockDeleteWithMocker(reference, $selected, mocker))
             .then(Unity.doDelete(reference,
-                // 重新 Refresh，同时会关闭 loading
-                () => Unity.doRefresh(reference),
+                () => {
+                    // 重新 Refresh，同时会关闭 loading
+                    Unity.doRefresh(reference);
+                    // 清除选中项，防止后续操作问题
+                    Unity.doSelect(reference, []);
+                },
                 $selected));
     });
 };

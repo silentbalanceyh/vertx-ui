@@ -28,6 +28,7 @@ const inBatch = (reference) => {
     const {$selected = [], config = {}} = reference.state;
     inherit.$selected = $selected;
 
+    _inheritFun(reference, inherit, 'fnSelect');
     _inheritFun(reference, inherit, 'fnLoading');
     _inheritFun(reference, inherit, 'fnRefresh');
     _inheritFun(reference, inherit, 'fnMock');

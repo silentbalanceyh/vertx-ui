@@ -4,6 +4,7 @@ import Op from './Op';
 
 import Dialog from '../IxDialog/UI';
 import Editor from '../IxEditorBatch/UI';
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {
@@ -26,6 +27,10 @@ class Component extends React.PureComponent {
             fnClose,
             fnSubmit, // 提交
         } = this.state;
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxOpLink：", "#06c");
         return (
             <li key={`link-batch-${$config.key}`}>
                 <a {...rest} onClick={Op.onOpen(this, $config)}>
