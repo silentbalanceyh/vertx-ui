@@ -2,6 +2,7 @@ import Ux from 'ux';
 import U from 'underscore';
 import {Tag} from 'antd';
 import React from 'react';
+import Fx from '../Fx';
 
 const initSelection = (reference) => {
     return {
@@ -48,7 +49,21 @@ const initPager = (reference = {}) => {
         showTotal: initTotal(reference)
     };
 };
+const initRow = (reference = {}, row = {}) => (record) => {
+    const result = {};
+    Ux.itObject(row, (eventName, target) => {
+        const fun = Fx[target];
+        if (U.isFunction(fun)) {
+            result[eventName] = event => {
+                event.preventDefault();
+                fun(reference, record.key);
+            };
+        }
+    });
+    return result;
+};
 export default {
     initSelection,
     initPager,
+    initRow,
 };

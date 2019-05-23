@@ -71,6 +71,9 @@
                 "report": "（总共:page页，:total条数据）",
                 "selected": "勾选了:count条"
             },
+            "row": {
+                "onDoubleClick": "rxEdit"
+            },
             "columns": [
                 {
                     "title": "操作",

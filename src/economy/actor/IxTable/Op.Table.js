@@ -18,6 +18,10 @@ const initTable = (reference, options = {}, table = {}) => {
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }
+    const onRow = Assist.initRow(reference, table.row);
+    if (U.isFunction(onRow)) {
+        table.onRow = onRow;
+    }
     // onChange事件
     table.onChange = Fx.rxChange(reference);
     return table;
