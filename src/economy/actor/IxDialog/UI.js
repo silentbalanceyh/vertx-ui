@@ -1,5 +1,6 @@
 import React from 'react';
 import {Modal} from 'antd';
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     render() {
@@ -17,6 +18,10 @@ class Component extends React.PureComponent {
                 loading: $loading,
             }
         }
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxDialog：", "#c33");
         return (
             <Modal {...$config}
                    visible={$visible}

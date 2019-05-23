@@ -1,8 +1,7 @@
 import React from 'react';
 import {Icon} from 'antd';
 import Op from './Op';
-
-import Dialog from '../IxDialog/UI';
+import Fx from '../Fx';
 import Editor from '../IxEditorBatch/UI';
 import Ux from "ux";
 
@@ -13,7 +12,7 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Op.init(this);
+        Fx.initDialog(this);
     }
 
     render() {
@@ -21,9 +20,6 @@ class Component extends React.PureComponent {
         const {text, icon, ...rest} = $config;
         /* 窗口配置 */
         const {
-            $visible = false,
-            $loading = false,
-            window,
             fnClose,
             fnSubmit, // 提交
         } = this.state;
@@ -33,20 +29,17 @@ class Component extends React.PureComponent {
         }, "[Ex] IxOpLink：", "#06c");
         return (
             <li key={`link-batch-${$config.key}`}>
-                <a {...rest} onClick={Op.onOpen(this, $config)}>
+                <a {...rest} onClick={Fx.rxOpenDialog(this, $config, Op.onOk)}>
                     {icon ? <Icon type={icon}/> : false}
                     {icon ? <span>&nbsp;&nbsp;</span> : false}
                     {text ? <span className={"text"}>{text}</span> : false}
                 </a>
-                {window ? (
-                    <Dialog $visible={$visible} $loading={$loading}
-                            $config={window} fnClose={fnClose}>
-                        <Editor {...this.props}
-                                fnClose={fnClose}
-                                fnSubmit={fnSubmit}
-                                config={$editor}/>
-                    </Dialog>
-                ) : false}
+                {Fx.jsxDialog(this, (
+                    <Editor {...this.props}
+                            fnClose={fnClose}
+                            fnSubmit={fnSubmit}
+                            config={$editor}/>
+                ))}
             </li>
         );
     }

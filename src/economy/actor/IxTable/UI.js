@@ -32,7 +32,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxTable：", "#06c");
+        }, "[Ex] IxTable：", "#063");
         return !Ux.isEmpty(table) ? (
             <Table {...table}
                    className={Ux.ECONOMY.TABLE_CONTROL}

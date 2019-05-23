@@ -2,6 +2,8 @@ import Hoc from './Fx.Hoc';
 import Tab from './Fx.Tab';
 import Q from './Fx.Query';
 import Init from './Fx.Init.Op';
+import Jsx from './Fx.UI';
+import Dialog from './Fx.Init.Dialog';
 import Action from './Fx.Event';
 import Mock from './Fx.Mock';
 import Unity from './Fx.Unity';
@@ -22,6 +24,9 @@ const exported = {
     initBatch: Init.initBatch,
     initSearch: Init.initSearch,
     initExtra: Init.initExtra,
+    // 窗口专用
+    initDialog: Dialog.init,
+    jsxDialog: Jsx.jsxDialog,
     // 调用函数
     doLoading: Unity.doLoading,
     doRefresh: Unity.doRefresh,

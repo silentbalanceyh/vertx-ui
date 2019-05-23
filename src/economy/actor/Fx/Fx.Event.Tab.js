@@ -1,6 +1,8 @@
 import Etat from "./Fx.Etat";
 import Ux from "ux";
 import Unity from "./Fx.Unity";
+import U from "underscore";
+import {Modal} from "antd";
 /* ExComplexList 引用 */
 const rxAddTab = reference => event => {
     // 添加按钮
@@ -33,10 +35,29 @@ const rxEditTab = (reference, id, data = {}) => {
     const tabs = Etat.Tab.edit(ref, data);
     Unity.consume(reference, 'fnInit')(fnInit => fnInit(data, {tabs, ...view}));
 };
+const rxOpenDialog = (reference, config = {}, supplier) => (event) => {
+    event.preventDefault();
+    const {window, popover, drawer} = config;
+    if (window || popover || drawer) {
+        // 弹出
+        reference.setState({$visible: true});
+    } else {
+        const {confirm = {}} = reference.state;
+        const config = Ux.clone(confirm);
+        if (U.isFunction(supplier)) {
+            const onOk = supplier(reference);
+            if (U.isFunction(onOk)) {
+                config.onOk = onOk;
+            }
+        }
+        Modal.confirm(config);
+    }
+};
 export default {
     rxAddTab,       // 添加按钮
     rxRemoveTab,    // 删除 Tab
     rxClickTab,     // 移动 Tab 页，选择某个页
     rxCloseTab,     // 关闭某个 Tab页
     rxEditTab,      // 编辑 Tab 页呈现
+    rxOpenDialog,   // 打开窗口统一函数
 }

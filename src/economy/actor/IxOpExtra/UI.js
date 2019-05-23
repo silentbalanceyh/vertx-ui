@@ -2,6 +2,7 @@ import React from 'react';
 import Op from './Op';
 import {Button} from 'antd';
 import IxOpButton from '../IxOpButton/UI';
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {
@@ -14,6 +15,10 @@ class Component extends React.PureComponent {
 
     render() {
         const {op = []} = this.state;
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxOpExtra：", "#444");
         return (
             <Button.Group style={{float: "right"}}>
                 {op.map(button => <IxOpButton key={button.key} $config={button}

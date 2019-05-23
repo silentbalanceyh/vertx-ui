@@ -20,16 +20,16 @@ export default {
         icon: "caret-down",
         type: "primary",
         key: "btnColumn",
-        popover: "extra.column.popover"  // Popover 专用
+        popover: "window.extra.column"  // Popover 专用
     },
     extraExport: {
         icon: "export",
         key: "btnExport",
-        window: "extra.export.window" // Popover 专用
+        window: "window.extra.export" // Popover 专用
     },
     extraImport: {
         icon: "import",
         key: "btnImport",
-        window: "extra.export.window" // Popover 专用
+        window: "window.extra.import" // Popover 专用
     }
 };
