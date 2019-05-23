@@ -15,8 +15,8 @@ const initValue = (reference, config = {}) => {
     const column = {};
     column.title = valueColumn.title;
     column.dataIndex = "value";
-    column.className = "ux-column-300";
-    column.render = renderValue(reference, fieldColumn);
+    column.className = "ux-column-300 ux-left-text";
+    column.render = renderValue(reference, fieldColumn, valueColumn.render);
     return column;
 };
 const initField = (reference, config) => {
@@ -25,12 +25,12 @@ const initField = (reference, config) => {
     column.dataIndex = "name";
     column.className = "ux-column-220";
     column.title = fieldColumn.title;
-    column.render = renderField(reference, config);
+    column.render = renderField(reference, fieldColumn);
     return column;
 };
 const init = (reference) => {
     const {config = {}} = reference.props;
-    const $columns = [];
+    let $columns = [];
     $columns.push(initOp(reference, config));
     $columns.push(initField(reference, config));
     $columns.push(initValue(reference, config));

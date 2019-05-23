@@ -12,7 +12,8 @@ const onChange = (reference, record) => (select) => {
 export default (reference, config = {}) => (text, record, index) => {
     let options = Ux.RxAnt.toOptions(reference, config);
     const {$data = []} = reference.state;
-    const $existing = Ux.immutable($data.map(each => each.name).filter(item => undefined !== item));
+    const $existing = Ux.immutable($data.map(each => each.name)
+        .filter(item => undefined !== item));
     // 当前操作
     // 1. 条件1，$existing中包含的不显示
     // 2. 条件2，当前记录依旧显示

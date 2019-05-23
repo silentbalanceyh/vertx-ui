@@ -17,9 +17,12 @@ const onRemove = (reference, key) => (event) => {
     reference.setState({$data});
 };
 export default (reference, config = {}) => (text, record, index) => {
+    const {fieldColumn = {}} = config;
+    const limit = fieldColumn.items ? fieldColumn.items.length : 0;
     return (
         <Button.Group>
-            <Button icon={"plus"} onClick={onAdd(reference)}/>
+            <Button icon={"plus"} disabled={index === (limit - 1)}
+                    onClick={onAdd(reference)}/>
             <Button icon={"minus"} disabled={0 === index}
                     onClick={onRemove(reference, text)}/>
         </Button.Group>

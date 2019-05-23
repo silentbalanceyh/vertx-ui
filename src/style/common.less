@@ -30,3 +30,31 @@
     background: linear-gradient(to right, @theme-main 0%, white 100%);
     box-shadow: 3px 3px 3px @color-title-font;
 }
+
+.ux-readonly {
+    input[readonly] {
+        background-color: white;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    input[disabled] {
+        background-color: @color-readonly;
+
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    i:hover {
+        cursor: pointer;
+    }
+}
+
+.ux-left {
+    &-text {
+        text-align: left;
+    }
+}
