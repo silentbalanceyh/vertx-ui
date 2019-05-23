@@ -49,8 +49,11 @@ const mockResult = (reference, response, supplier) => {
     }
 };
 const mockSingle = (reference, consumer) => {
-    const {$MOCK} = reference.props;
     const {$mocker} = reference.state;
+    return mockSingleWithMocker(reference, consumer, $mocker);
+};
+const mockSingleWithMocker = (reference, consumer, $mocker) => {
+    const {$MOCK} = reference.props;
     let mockFinal = {};
     if ($mocker) {
         let data = {};
@@ -83,11 +86,15 @@ const mockDelete = (reference, id) =>
     mockSingle(reference, (mocker) => mocker.remove(id));
 const mockGet = (reference, id) =>
     mockSingle(reference, (mocker) => mocker.get(id));
+
+const mockDeleteWithMocker = (reference, id, $mocker) =>
+    mockSingleWithMocker(reference, (mocker) => mocker.remove(id), $mocker);
 export default {
     mockInit,
     mockInherit,    // 继承专用ComplexList -> IxTable
     mockSearchResult,
     // 单记录处理
-    mockDelete,     // 模拟删除
+    mockDelete,           // 模拟删除
+    mockDeleteWithMocker, // 批量删除
     mockGet,
 };

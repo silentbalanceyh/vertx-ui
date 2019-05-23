@@ -1,6 +1,6 @@
 import DATA_OP from './DATA.OP';
 import Ux from 'ux';
-import Action from './Fx.Action';
+import Action from './Fx.Event';
 
 const _initOpt = (options = {}, prefix = 'op') => {
     const ops = {};

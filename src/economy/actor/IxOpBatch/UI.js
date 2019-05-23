@@ -2,6 +2,7 @@ import React from 'react';
 import Op from "./Op";
 import './Cab.less';
 import IxOpLink from '../IxOpLink/UI';
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {
@@ -15,6 +16,10 @@ class Component extends React.PureComponent {
     render() {
         const {op = []} = this.state;
         const $op = Op.configOp(this, op);
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxBatch：", "#6c9");
         return (
             <ul className={"ex-batch"}>
                 {$op.map(link => <IxOpLink key={link.key} $config={link}

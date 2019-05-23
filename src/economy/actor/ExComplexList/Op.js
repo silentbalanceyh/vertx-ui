@@ -9,17 +9,32 @@ const _inUniform = (reference) => {
 const inAdd = (reference) => _inUniform(reference);
 const inSearch = (reference) => _inUniform(reference);
 const inExtra = (reference) => _inUniform(reference);
+const _inheritFun = (reference, inherit = {}, name) => {
+    let fun = reference.state[name];
+    if (U.isFunction(fun)) {
+        inherit[name] = fun;
+    } else {
+        const hocFun = Fx[name];
+        if (U.isFunction(hocFun)) {
+            fun = hocFun(reference);
+            if (U.isFunction(fun)) {
+                inherit[name] = fun;
+            }
+        }
+    }
+};
 const inBatch = (reference) => {
     const inherit = _inUniform(reference);
     const {$selected = []} = reference.state;
     inherit.$selected = $selected;
-    const {fnLoading, fnRefresh} = reference.state;
-    if (U.isFunction(fnLoading)) {
-        inherit.fnLoading = fnLoading;
-    }
-    if (U.isFunction(fnRefresh)) {
-        inherit.fnRefresh = fnRefresh;
-    }
+
+    _inheritFun(reference, inherit, 'fnLoading');
+    _inheritFun(reference, inherit, 'fnRefresh');
+    _inheritFun(reference, inherit, 'fnMock');
+
+    inherit.fnBatchDelete = Fx.rxBatchDelete;
+    // Mock环境才会使用
+    Fx.Mock.mockInherit(reference, inherit);
     return inherit;
 };
 const inTable = (reference) => {
@@ -34,9 +49,9 @@ const inTable = (reference) => {
 
         // 函数区域
         inherit.fnSearch = rxSearch;
-        inherit.fnSelect = Fx.fnSelect(reference);
-        inherit.fnQuery = Fx.fnQuery(reference);
-        inherit.fnInit = Fx.fnInit(reference);
+        _inheritFun(reference, inherit, 'fnSelect');
+        _inheritFun(reference, inherit, 'fnQuery');
+        _inheritFun(reference, inherit, 'fnInit');
 
         // Mock环境才会使用
         Fx.Mock.mockInherit(reference, inherit);

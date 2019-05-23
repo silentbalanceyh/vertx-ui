@@ -58,7 +58,14 @@ const filter = (data = {}, $query = {}) => {
 };
 const remove = (data = {}, id, keyField = 'key') => {
     let result = Value.clone(data.data);
-    result = result.filter(item => id !== item[keyField]);
+    /* 全部 id */
+    let ids;
+    if (U.isArray(id)) {
+        ids = Value.immutable(id);
+    } else {
+        ids = Value.immutable([id]);
+    }
+    result = result.filter(item => !ids.contains(item[keyField]));
     /* 刷新data */
     data.data = result;
     data.size = data.size - 1;

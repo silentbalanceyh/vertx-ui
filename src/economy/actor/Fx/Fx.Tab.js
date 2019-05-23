@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import Action from './Fx.Action';
+import Action from './Fx.Event';
 
 const init = (reference, options = {}) => {
     /*
@@ -21,7 +21,7 @@ const init = (reference, options = {}) => {
     tabs.type = "editable-card";
     tabs.hideAdd = true;
     tabs.onTabClick = Action.rxClickTab(reference);
-    tabs.onEdit = Action.rxEditTab(reference);
+    tabs.onEdit = Action.rxRemoveTab(reference);
     return tabs;
 };
 const render = (reference) => {

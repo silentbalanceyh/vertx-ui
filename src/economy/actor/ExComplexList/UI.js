@@ -8,6 +8,16 @@ import RENDERS from './UI.Render';
 import IxExtraBar from '../IxExtraBar/UI';
 import Ux from "ux";
 
+/**
+ *  三种函数的基本命名规则：
+ *  1. A 为父组件，B、C 为 A 的两个子组件，结构如：
+ *       A
+ *     /   \
+ *    B     C
+ *  2. A 继承给 B 和 C的的函数统一使用：fnXXXX命名
+ *  3. A 从 B 反向生成的函数在 C组件中使用：doXXXX命名
+ *  4. 直接使用的事件，如 A、B、C 则直接使用：rxXXXX命名
+ */
 @Ex({
     // 1. 验证专用函数
     verify: Fn.verify,

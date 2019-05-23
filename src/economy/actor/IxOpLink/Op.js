@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import Fx from '../Fx';
+import U from 'underscore';
 import {Modal} from 'antd';
 
 const onOpen = (reference, config = {}) => (event) => {
@@ -11,12 +11,16 @@ const onOpen = (reference, config = {}) => (event) => {
     } else {
         // 非弹出框：批量删除
         const {confirm = {}} = reference.state;
-        Modal.confirm({
-            ...confirm,
-            onOk: () => {
-                Fx.doLoading(reference);
+        const {fnBatchDelete} = reference.props;
+        const config = Ux.clone(confirm);
+        if (U.isFunction(fnBatchDelete)) {
+            /* 二阶处理 */
+            const onOk = fnBatchDelete(reference);
+            if (U.isFunction(onOk)) {
+                config.onOk = onOk;
             }
-        })
+        }
+        Modal.confirm(config);
     }
 };
 const initWindow = (state, reference) => {
