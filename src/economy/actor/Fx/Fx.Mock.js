@@ -86,9 +86,13 @@ const mockDelete = (reference, id) =>
     mockSingle(reference, (mocker) => mocker.remove(id));
 const mockGet = (reference, id) =>
     mockSingle(reference, (mocker) => mocker.get(id));
+const mockUpdate = (reference, record) =>
+    mockSingle(reference, (mocker) => mocker.update(record));
 
 const mockDeleteWithMocker = (reference, id, $mocker) =>
     mockSingleWithMocker(reference, (mocker) => mocker.remove(id), $mocker);
+const mockUpdateWithMocker = (reference, records, $mocker) =>
+    mockSingleWithMocker(reference, (mocker) => mocker.update(records), $mocker);
 export default {
     mockInit,
     mockInherit,    // 继承专用ComplexList -> IxTable
@@ -96,5 +100,8 @@ export default {
     // 单记录处理
     mockDelete,           // 模拟删除
     mockDeleteWithMocker, // 批量删除
+    // 批量更新
+    mockUpdate,
+    mockUpdateWithMocker, // 批量更新
     mockGet,
 };

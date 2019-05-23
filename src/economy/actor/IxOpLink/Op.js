@@ -7,7 +7,7 @@ const onOpen = (reference, config = {}) => (event) => {
     const {window} = config;
     if (window) {
         // 弹出框：批量编辑
-        reference.setState({visible: true});
+        reference.setState({$visible: true});
     } else {
         // 非弹出框：批量删除
         const {confirm = {}} = reference.state;
@@ -31,7 +31,7 @@ const initWindow = (state, reference) => {
         /* 特殊配置 */
         state.window.onCancel = (event) => {
             event.preventDefault();
-            reference.setState({visible: false});
+            reference.setState({$visible: false});
         };
         /* 窗口专用配置 */
         state.window.destroyOnClose = true;
@@ -60,7 +60,8 @@ const init = (reference) => {
         /* 带有弹出的 confirm 表单 */
         initConfirm(state, reference);
     }
-    state.fnClose = () => reference.setState({visible: false});
+    state.fnClose = () => reference.setState({$visible: false});
+    state.fnSubmit = ($loading = true) => reference.setState({$loading});
     reference.setState(state);
 };
 export default {

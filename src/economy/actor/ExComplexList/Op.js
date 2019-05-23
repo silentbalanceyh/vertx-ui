@@ -33,6 +33,7 @@ const inBatch = (reference) => {
     _inheritFun(reference, inherit, 'fnMock');
 
     inherit.fnBatchDelete = Fx.rxBatchDelete;
+    inherit.fnBatchEdit = Fx.rxBatchEdit;
     if (config.hasOwnProperty('batch.editor')) {
         inherit.$editor = config['batch.editor']
     }

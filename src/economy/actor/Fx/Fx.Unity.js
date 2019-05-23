@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import U from 'underscore';
+import CRUD from './Fx.Unity.CRUD';
 
 const write = (ref, react = {}, redux = {}) => {
     if (redux) {
@@ -32,21 +33,14 @@ const consume = (reference, name) => consumer => {
 
 const doLoading = (reference, loading = true) =>
     consume(reference, 'fnLoading')(fnLoading => fnLoading(loading));
+const doSubmit = (reference, submitting = true) =>
+    consume(reference, 'fnSubmit')(fnSubmit => fnSubmit(submitting));
 const doRefresh = (reference) =>
     consume(reference, "fnRefresh")(fnRefresh => fnRefresh());
+const doClose = (reference) =>
+    consume(reference, 'fnClose')(fnClose => fnClose());
 const doMocker = (reference) =>
     consume(reference, "fnMock")(fnMock => fnMock());
-const doDelete = (reference, executor, id) => deleted => {
-    if (deleted) {
-        if (U.isFunction(executor)) {
-            executor(deleted, id);
-        } else {
-            return Promise.reject("[Ex] 删除回调缺失！");
-        }
-    } else {
-        return Promise.reject(`[Ex] 删除有问题 id = ${U.isArray(id) ? JSON.stringify(id) : id}`);
-    }
-};
 
 const submit = (reference, executor) => {
     reference.setState({$loading: true});
@@ -75,8 +69,11 @@ export default {
     submit, // 提交专用
     change, // 表格专用
 
-    doDelete,
-    doMocker,
-    doLoading,
-    doRefresh
+    doMocker,   // 模拟数据
+    doLoading,  // 开始加载数据
+    doClose,    // 关闭窗口
+    doRefresh,  // 重新加载页面
+    doSubmit,   // 提交开始
+
+    ...CRUD,
 }

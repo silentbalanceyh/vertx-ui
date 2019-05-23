@@ -4,7 +4,12 @@ import {Select} from 'antd';
 
 const onChange = (reference, record) => (select) => {
     let {$data = []} = reference.state;
-    $data.filter(item => record === item.key).forEach(each => each.name = select);
+    $data.filter(item => record === item.key).forEach(each => {
+        each.name = select; // 根据字段选择
+        if (!each.hasOwnProperty('value')) {
+            delete each.value;  // 清空值
+        }
+    });
     $data = Ux.clone($data);
     reference.setState({$data});
 };

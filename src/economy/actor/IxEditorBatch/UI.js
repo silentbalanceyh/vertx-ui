@@ -18,6 +18,10 @@ class Component extends React.PureComponent {
         const {config = {}} = this.props;
         const {button} = config;
         const reference = this;
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxBatch：", "#960");
         return (
             <div>
                 <Table className={"web-table"}
@@ -26,7 +30,8 @@ class Component extends React.PureComponent {
                        pagination={false}/>
                 {Ux.rtPure(reference, {
                     id: button,
-                    className: "ux-hidden"
+                    className: "ux-hidden",
+                    onClick: Op.submit(reference)
                 })}
             </div>
         )

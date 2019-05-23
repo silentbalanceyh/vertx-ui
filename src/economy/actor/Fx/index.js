@@ -25,6 +25,7 @@ const exported = {
     // 调用函数
     doLoading: Unity.doLoading,
     doRefresh: Unity.doRefresh,
+    doSubmit: Unity.doSubmit,
     // Mock数据
     Mock,
 };

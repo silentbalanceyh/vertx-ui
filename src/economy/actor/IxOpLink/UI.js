@@ -7,7 +7,8 @@ import Editor from '../IxEditorBatch/UI';
 
 class Component extends React.PureComponent {
     state = {
-        visible: false
+        $visible: false,
+        $loading: false,
     };
 
     componentDidMount() {
@@ -18,7 +19,13 @@ class Component extends React.PureComponent {
         const {$config = {}, $editor = {}} = this.props;
         const {text, icon, ...rest} = $config;
         /* 窗口配置 */
-        const {visible = false, window, fnClose} = this.state;
+        const {
+            $visible = false,
+            $loading = false,
+            window,
+            fnClose,
+            fnSubmit, // 提交
+        } = this.state;
         return (
             <li key={`link-batch-${$config.key}`}>
                 <a {...rest} onClick={Op.onOpen(this, $config)}>
@@ -27,8 +34,12 @@ class Component extends React.PureComponent {
                     {text ? <span className={"text"}>{text}</span> : false}
                 </a>
                 {window ? (
-                    <Dialog $visible={visible} $config={window} fnClose={fnClose}>
-                        <Editor {...this.props} fnClose={fnClose} config={$editor}/>
+                    <Dialog $visible={$visible} $loading={$loading}
+                            $config={window} fnClose={fnClose}>
+                        <Editor {...this.props}
+                                fnClose={fnClose}
+                                fnSubmit={fnSubmit}
+                                config={$editor}/>
                     </Dialog>
                 ) : false}
             </li>

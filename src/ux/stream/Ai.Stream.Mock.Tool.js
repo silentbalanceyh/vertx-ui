@@ -78,6 +78,36 @@ const get = (data = {}, id, keyField = 'key') => {
         return result[0];
     }
 };
+/*
+ * data 是源
+ * record 是Object
+ *
+ */
+const updateItem = (data = [], record, keyField = 'key') => {
+    if (record) {
+        data.forEach(item => {
+            if (item && item[keyField] === record[keyField]) {
+                /* 覆盖掉 */
+                Object.assign(item, record);
+            }
+        });
+    }
+    return data;
+};
+const update = (data, records, keyField = 'key') => {
+    let result = Value.clone(data.data);
+    /* 全部记录 */
+    if (records) {
+        if (U.isArray(records)) {
+            records.forEach(record => updateItem(result, record, keyField));
+        } else {
+            updateItem(result, records, keyField);
+        }
+    }
+    /* 刷新data */
+    data.data = result;
+    return resultList(data);
+};
 const resultList = (data) => {
     const {type} = data;
     if (Symbol.for("LIST") === type) {
@@ -117,6 +147,7 @@ export default {
     get,        // 读取数据
     // ---- 返回 source ----
     remove,     // 修改 data，返回 source
+    update,     // 修改 data，返回 source
     // 执行
     fnList,
 };

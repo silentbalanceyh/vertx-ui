@@ -44,18 +44,9 @@ class Mock {
         return Tool.fnList(this.data, () => Tool.get(this.data, id));
     }
 
-    update(record = {}) {
+    update(records) {
         // 更新原始数据
-        if (record.key) {
-            const list = this.data.list;
-            let $list = Value.clone(list);
-            $list = $list.filter(item => item.key !== record.key);
-            $list = $list.reverse();
-            $list.push(record);
-            $list = $list.reverse();
-            this.data.list = $list;
-        }
-        return record;
+        return Tool.fnList(this.data, () => Tool.update(this.data, records));
     }
 
     add(record = {}) {

@@ -47,7 +47,7 @@ export default (reference, config = {}, renders = {}) => (text, record, index) =
         const jsx = onRender(reference, column, renders);
         return jsx(record.key, text);
     } else {
-        const jsx = RENDERS["TEXT"];
+        const jsx = RENDERS["TEXT"](reference, column);
         return jsx(record.key, text);
     }
 }
