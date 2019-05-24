@@ -39,22 +39,7 @@
             "window.batch.edit": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
             "window.extra.column": "请选择您要保存的列,保存,关闭,false,640,true,btnColumn",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
-            "window.extra.export.config": {
-                "message": "请选择字段！",
-                "description": [
-                    "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
-                    "如果您没有找到您想要的字段，请联系管理员。"
-                ]
-            },
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
-            "window.extra.import.config": {
-                "message": "选择本地文件",
-                "description": [
-                    "您可以按照提供的模板导入Excel格式的数据。",
-                    "如果有相关疑问可联系管理员！"
-                ],
-                "upload": "模板文件"
-            },
             "column.dynamic": true,
             "submit.add": "$opAdd",
             "submit.edit": "$opSave",
@@ -66,45 +51,64 @@
             "confirm.delete": "确认删除当前部门记录？",
             "confirm.batch.delete": "您确认要删除所有选中的部门记录？"
         },
-        "batch.editor": {
-            "fieldColumn": {
-                "title": "选择属性",
-                "items": [
-                    "code,部门编号",
-                    "name,部门名称",
-                    "manager,项目经理",
-                    "active,是否启用",
-                    "created_date,建立日期"
+        "component": {
+            "extra.export": {
+                "message": "请选择字段！",
+                "description": [
+                    "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
+                    "如果您没有找到您想要的字段，请联系管理员。"
                 ]
             },
-            "valueColumn": {
-                "title": "设置值",
-                "render": {
-                    "code": "TEXT",
-                    "name": "TEXT",
-                    "manager": "TEXT",
-                    "active": {
-                        "type": "RADIO",
-                        "config": [
-                            "true,启用",
-                            "false,禁用"
-                        ]
-                    },
-                    "created_date": {
-                        "type": "DATE",
-                        "config": {
-                            "format": "YYYY-MM-DD"
+            "extra.import": {
+                "message": "选择本地文件",
+                "description": [
+                    "您可以按照提供的模板导入Excel格式的数据。",
+                    "如果有相关疑问可联系管理员！"
+                ],
+                "upload": "模板文件"
+            },
+            "extra.column": {
+            },
+            "batch.editor": {
+                "fieldColumn": {
+                    "title": "选择属性",
+                    "items": [
+                        "code,部门编号",
+                        "name,部门名称",
+                        "manager,项目经理",
+                        "active,是否启用",
+                        "created_date,建立日期"
+                    ]
+                },
+                "valueColumn": {
+                    "title": "设置值",
+                    "render": {
+                        "code": "TEXT",
+                        "name": "TEXT",
+                        "manager": "TEXT",
+                        "active": {
+                            "type": "RADIO",
+                            "config": [
+                                "true,启用",
+                                "false,禁用"
+                            ]
+                        },
+                        "created_date": {
+                            "type": "DATE",
+                            "config": {
+                                "format": "YYYY-MM-DD"
+                            }
                         }
                     }
-                }
-            },
-            "button": "btnBatchEdit",
-            "modal": {
-                "error": {
-                    "content": "对不起，请选择您要批量更新的属性！"
                 },
-                "success": {
-                    "content": "您的属性信息已经全部更新成功！"
+                "button": "btnBatchEdit",
+                "modal": {
+                    "error": {
+                        "content": "对不起，请选择您要批量更新的属性！"
+                    },
+                    "success": {
+                        "content": "您的属性信息已经全部更新成功！"
+                    }
                 }
             }
         },

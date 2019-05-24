@@ -1,5 +1,6 @@
 import Fx from '../Fx';
 import U from 'underscore';
+import Ux from 'ux';
 
 const _inUniform = (reference) => {
     const {options = {}} = reference.state;
@@ -35,11 +36,9 @@ const inBatch = (reference) => {
 
     inherit.fnBatchDelete = Fx.rxBatchDelete;
     inherit.fnBatchEdit = Fx.rxBatchEdit;
-    const componentConfig = {};
-    if (config.hasOwnProperty('batch.editor')) {
-        componentConfig['batch.editor'] = config['batch.editor']
+    if (config.component) {
+        inherit.$componentConfig = Ux.clone(config.component);
     }
-    inherit.$componentConfig = componentConfig;
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;

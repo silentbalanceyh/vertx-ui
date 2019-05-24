@@ -24,9 +24,7 @@ class Component extends React.PureComponent {
             <span>
                 <Button {...rest} htmlType={"button"}
                         onClick={Fx.rxOpenDialog(this, $config)}/>
-                {Fx.jsxDialog(this, (
-                    <span>H</span>
-                ))}
+                {Fx.jsxDialog(this)}
             </span>
         );
     }

@@ -22,16 +22,22 @@ export default {
         icon: "caret-down",
         type: "primary",
         key: "btnColumn",
-        popover: "window.extra.column"  // Popover 专用
+        popover: "window.extra.column",  // Popover 专用
+        component: "UiColumnEditor",
+        componentKey: "extra.column"
     },
     extraExport: {
         icon: "export",
         key: "btnExport",
-        window: "window.extra.export" // Popover 专用
+        window: "window.extra.export",  // Popover 专用
+        component: "UiExportEditor",
+        componentKey: "extra.export"
     },
     extraImport: {
         icon: "import",
         key: "btnImport",
-        window: "window.extra.import" // Popover 专用
+        window: "window.extra.import", // Popover 专用
+        component: "UiImportEditor",
+        componentKey: "extra.import"
     }
 };

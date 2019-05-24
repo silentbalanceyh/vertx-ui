@@ -1,5 +1,6 @@
 import React from 'react';
-import Dialog from '../IxDialog/UI';
+import Window from '../IxDialog/UI';
+import Popover from '../IxPopover/UI';
 import UIS from '../Ex/UI';
 import U from 'underscore';
 /*
@@ -22,13 +23,19 @@ const jsxDialog = (reference, jsx) => {
         config.$config = window;
         const jsxResult = jsxComponent(reference, jsx);
         return (
-            <Dialog {...config}>
+            <Window {...config}>
                 {jsxResult}
-            </Dialog>
+            </Window>
         )
     } else if (popover) {
         /* 渲染浮游窗口 */
-
+        config.$config = popover;
+        const jsxResult = jsxComponent(reference, jsx);
+        return (
+            <Popover {...config}>
+                {jsxResult}
+            </Popover>
+        )
     } else return false;
 };
 const jsxComponent = (reference, jsx) => {

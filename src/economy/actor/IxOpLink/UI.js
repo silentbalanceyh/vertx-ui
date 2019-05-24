@@ -16,15 +16,17 @@ class Component extends React.PureComponent {
 
     render() {
         const {$config = {}} = this.props;
-        const {text, icon} = $config;
+        const {text, icon, disabled = false} = $config;
         /* 窗口配置 */
         Ux.dgDebug({
             props: this.props,
             state: this.state,
         }, "[Ex] IxOpLink：", "#06c");
+        const attrs = {};
+        attrs.disabled = disabled;
         return (
             <li key={`link-batch-${$config.key}`}>
-                <a onClick={Fx.rxOpenDialog(this, $config, Op.onOk)}>
+                <a onClick={Fx.rxOpenDialog(this, $config, Op.onOk)} {...attrs}>
                     {icon ? <Icon type={icon}/> : false}
                     {icon ? <span>&nbsp;&nbsp;</span> : false}
                     {text ? <span className={"text"}>{text}</span> : false}
