@@ -37,7 +37,7 @@
             "op.extra.export": "导出",
             "op.extra.import": "导入",
             "window.batch.edit": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
-            "window.extra.column": "请选择您要保存的列,保存,关闭,false,640,true,btnColumn",
+            "window.extra.column": "请选择您要显示的列,leftTop,640,true",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
             "column.dynamic": true,
@@ -68,6 +68,32 @@
                 "upload": "模板文件"
             },
             "extra.column": {
+                "grid": 3,
+                "full": {
+                    "items": [
+                        "code,部门编号",
+                        "name,部门名称",
+                        "manager,部门经理",
+                        "active,是否启用",
+                        "created_by,创建人",
+                        "created_date,创建时间",
+                        "last_modified_by,更新人",
+                        "last_modified_date,更新时间"
+                    ]
+                },
+                "buttons": [
+                    {
+                        "key": "keySave",
+                        "text": "保存",
+                        "icon": "save"
+                    },
+                    {
+                        "key": "keyReset",
+                        "text": "重置",
+                        "icon": "remove",
+                        "type": "default"
+                    }
+                ]
             },
             "batch.editor": {
                 "fieldColumn": {

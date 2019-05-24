@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button} from 'antd';
+import {Button, Tooltip} from 'antd';
 import Ux from "ux";
 import Fx from '../Fx';
 
@@ -15,16 +15,19 @@ class Component extends React.PureComponent {
 
     render() {
         const {$config = {}} = this.props;
-        const {text, ...rest} = $config;
+        const {text, icon, key, type} = $config;
+        const rest = {icon, key, type};
         Ux.dgDebug({
             props: this.props,
             state: this.state,
         }, "[Ex] IxOpButton：", "#454");
         return (
             <span>
-                <Button {...rest} htmlType={"button"}
-                        onClick={Fx.rxOpenDialog(this, $config)}/>
                 {Fx.jsxDialog(this)}
+                <Tooltip title={text}>
+                    <Button {...rest} htmlType={"button"}
+                            onClick={Fx.rxOpenDialog(this, $config)}/>
+                </Tooltip>
             </span>
         );
     }

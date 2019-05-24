@@ -33,6 +33,7 @@ const exported = {
     doLoading: Unity.doLoading,
     doRefresh: Unity.doRefresh,
     doSubmit: Unity.doSubmit,
+    doClose: Unity.doClose,
     // Mock数据
     Mock,
 };

@@ -1,12 +1,13 @@
 import React from 'react'
 import Ux from "ux";
+import {Popover} from 'antd';
+import renderTitle from './UI.Title';
 
 class Component extends React.PureComponent {
     render() {
         const {
             $config = {},
             $visible = false,
-            $loading = false,
             children
         } = this.props;
         // 状态
@@ -15,8 +16,13 @@ class Component extends React.PureComponent {
             state: this.state,
         }, "[Ex] IxPopover：", "#c33");
         return (
-            <div>2019-05-23</div>
-        )
+            <Popover {...$config} visible={$visible}
+                     overlayStyle={{width: $config.width}}
+                     title={renderTitle(this, {
+                         ...$config,
+                     })}
+                     content={children}/>
+        );
     }
 }
 

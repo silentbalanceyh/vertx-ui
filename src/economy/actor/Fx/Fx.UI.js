@@ -49,11 +49,12 @@ const jsxComponent = (reference, jsx) => {
                 fnSubmit,
             } = reference.state;
             const inherit = {};
-            inherit.config = $componentConfig[componentKey];
+            inherit.$config = $componentConfig[componentKey];
             inherit.fnClose = fnClose;
             inherit.fnSubmit = fnSubmit;
             return (
                 <Component {...reference.props}
+                    // 会出现覆盖，这里生成的 $config 会覆盖掉 原始的 $config
                            {...inherit}/>
             )
         }

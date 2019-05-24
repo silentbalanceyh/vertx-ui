@@ -21,7 +21,10 @@ const initWindow = (state, reference) => {
 };
 const initPopover = (state, reference) => {
     const {$options = {}, $config = {}} = reference.props;
-
+    const literal = $options[$config.popover];
+    if (literal) {
+        state.popover = Ux.aiExprPopover(literal);
+    }
 };
 const initConfirm = (state, reference) => {
     const {$options = {}, $config = {}} = reference.props;

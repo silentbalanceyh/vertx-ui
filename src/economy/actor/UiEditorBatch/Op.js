@@ -31,11 +31,11 @@ const initField = (reference, config) => {
     return column;
 };
 const init = (reference) => {
-    const {config = {}} = reference.props;
+    const {$config = {}} = reference.props;
     let $columns = [];
-    $columns.push(initOp(reference, config));
-    $columns.push(initField(reference, config));
-    $columns.push(initValue(reference, config));
+    $columns.push(initOp(reference, $config));
+    $columns.push(initField(reference, $config));
+    $columns.push(initValue(reference, $config));
     // 初始化数据
     const $data = [{key: Ux.randomUUID()}];
     // 提交专用

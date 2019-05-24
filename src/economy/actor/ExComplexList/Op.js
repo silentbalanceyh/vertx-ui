@@ -9,7 +9,14 @@ const _inUniform = (reference) => {
 };
 const inAdd = (reference) => _inUniform(reference);
 const inSearch = (reference) => _inUniform(reference);
-const inExtra = (reference) => _inUniform(reference);
+const inExtra = (reference) => {
+    const inherit = _inUniform(reference);
+    const {config = {}} = reference.state;
+    if (config.component) {
+        inherit.$componentConfig = Ux.clone(config.component);
+    }
+    return inherit;
+};
 const _inheritFun = (reference, inherit = {}, name) => {
     let fun = reference.state[name];
     if (U.isFunction(fun)) {

@@ -15,13 +15,13 @@ class Component extends React.PureComponent {
 
     render() {
         const {$columns = [], $data = []} = this.state;
-        const {config = {}} = this.props;
-        const {button} = config;
+        const {$config = {}} = this.props;
+        const {button} = $config;
         const reference = this;
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxBatch：", "#960");
+        }, "[Ex] IxEditorBatch：", "#960");
         return (
             <div>
                 <Table className={"web-table"}
