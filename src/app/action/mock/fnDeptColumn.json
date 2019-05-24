@@ -10,10 +10,6 @@
             "label": "部门名称"
         },
         {
-            "key": "manager",
-            "label": "部门经理"
-        },
-        {
             "key": "active",
             "label": "是否启用"
         },

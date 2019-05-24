@@ -27,19 +27,6 @@ const initTable = (reference, options = {}, table = {}) => {
     table.onChange = Fx.rxChange(reference);
     return table;
 };
-const initColumn = (ref, options = {}, state = {}) => {
-    const {$query = {}} = ref.props;
-    if (options['column.dynamic']) {
-        const {fnColumn} = ref.props;
-        fnColumn().then(columns => {
-            /* 列过滤初始化表格 */
-            state.$columns = Ux.clone(columns);
-            Fx.rxSearch(ref, $query, state);
-        })
-    } else {
-        Fx.rxSearch(ref, $query);
-    }
-};
 const initMocker = (ref, options = {}) => {
     const state = {};
     /*
@@ -60,7 +47,8 @@ const init = (ref) => {
     const state = {};
     state.$table = initTable(ref, $options, $table);
     // 加载数据专用，第一次加载
-    initColumn(ref, $options, state);
+    const {$query = {}} = ref.props;
+    Fx.rxSearch(ref, $query, state);
 
     // 挂载反向函数
     Mount.mountPointer(ref);

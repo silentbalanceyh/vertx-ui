@@ -7,6 +7,7 @@ import RENDERS from './UI.Render';
 
 import IxExtraBar from '../IxExtraBar/UI';
 import Ux from "ux";
+import Op from './Op';
 
 /**
  *  三种函数的基本命名规则：
@@ -33,31 +34,38 @@ import Ux from "ux";
 })
 class Component extends React.PureComponent {
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.update(this, {prevState, prevProps});
+    }
+
     render() {
-        const $tabs = Fn.configTab(this);
-        const {items = [], ...rest} = $tabs;
-        /* options */
-        const {options = {}} = this.state;
-        const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
-        Ux.dgDebug({
-            props: this.props,
-            state: this.state,
-        }, "[Ex] ComplexList：");
-        return (
-            <Tabs {...rest}
-                  tabBarExtraContent={<IxExtraBar {...this.props} $options={options}/>}
-                  className={className}>
-                {items.map(item => {
-                    const {type, ...itemRest} = item;
-                    const fnRender = RENDERS[type];
-                    return (
-                        <Tabs.TabPane {...itemRest}>
-                            {fnRender(this, itemRest, rest.activeKey)}
-                        </Tabs.TabPane>
-                    );
-                })}
-            </Tabs>
-        );
+        if (Op.isRender(this)) {
+            const $tabs = Fn.configTab(this);
+            const {items = [], ...rest} = $tabs;
+            /* options */
+            const {options = {}} = this.state;
+            const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
+            Ux.dgDebug({
+                props: this.props,
+                state: this.state,
+            }, "[Ex] ComplexList：");
+            return (
+                <Tabs {...rest}
+                      tabBarExtraContent={<IxExtraBar {...this.props}
+                                                      $options={options}/>}
+                      className={className}>
+                    {items.map(item => {
+                        const {type, ...itemRest} = item;
+                        const fnRender = RENDERS[type];
+                        return (
+                            <Tabs.TabPane {...itemRest}>
+                                {fnRender(this, itemRest, rest.activeKey)}
+                            </Tabs.TabPane>
+                        );
+                    })}
+                </Tabs>
+            );
+        } else return false;
     }
 }
 

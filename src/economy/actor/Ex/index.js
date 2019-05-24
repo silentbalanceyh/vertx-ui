@@ -1,5 +1,7 @@
 import U from 'underscore';
 import Ux from 'ux';
+import React from 'react';
+import IxLoading from '../IxLoading/UI';
 
 const fnState = (ref, options = {}) => {
     /*
@@ -48,12 +50,6 @@ export default (options = {}) => {
                 };
             }
 
-            componentDidMount() {
-                if (U.isFunction(super.componentDidMount)) {
-                    super.componentDidMount();
-                }
-            }
-
             render() {
                 const {error} = this.state;
                 if (error) {
@@ -61,7 +57,7 @@ export default (options = {}) => {
                 } else {
                     /* 特殊变量必须保证 */
                     const {ready = false} = this.state;
-                    return ready ? super.render() : false;
+                    return ready ? super.render() : <IxLoading/>;
                 }
             }
         };

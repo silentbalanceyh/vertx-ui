@@ -27,6 +27,7 @@ const renderSearch = (reference) => (<IxOpSearch {...Op.inSearch(reference)}/>);
 const renderExtra = (reference) => (<IxOpExtra {...Op.inExtra(reference)}/>);
 /* 表格 */
 const renderTable = (reference) => (<IxTable {...Op.inTable(reference)}/>);
+
 export default (reference, item = {}) => {
     return (
         <Row>
