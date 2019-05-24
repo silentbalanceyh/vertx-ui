@@ -34,6 +34,8 @@ const exported = {
     doRefresh: Unity.doRefresh,
     doSubmit: Unity.doSubmit,
     doClose: Unity.doClose,
+    // Css
+    cssGrid: Jsx.cssGrid,
     // Mock数据
     Mock,
 };

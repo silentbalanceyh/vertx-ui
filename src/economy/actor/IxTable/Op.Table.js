@@ -2,6 +2,7 @@ import Ux from 'ux';
 import U from 'underscore';
 import Fx from '../Fx';
 import Assist from './Op.Assist';
+import Mount from './Op.Mount';
 
 const initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
@@ -26,37 +27,43 @@ const initTable = (reference, options = {}, table = {}) => {
     table.onChange = Fx.rxChange(reference);
     return table;
 };
-const mountPointer = (ref) => {
-    const reference = Ux.onReference(ref, 1);
-    reference.setState({
-        // 加载函数
-        fnLoading: ($loading) => ref.setState({$loading}),
-        // 刷新函数
-        fnRefresh: () => Fx.rxRefresh(ref),
-        // 读取 mocker 引用
-        fnMock: () => ref.state ? ref.state.$mocker : null
-    })
+const initColumn = (ref, options = {}, state = {}) => {
+    const {$query = {}} = ref.props;
+    if (options['column.dynamic']) {
+        const {fnColumn} = ref.props;
+        fnColumn().then(columns => {
+            /* 列过滤初始化表格 */
+            state.$columns = Ux.clone(columns);
+            Fx.rxSearch(ref, $query, state);
+        })
+    } else {
+        Fx.rxSearch(ref, $query);
+    }
 };
-const init = (ref) => {
-    const {$options = {}, $table = {}} = ref.props;
-    /*
-     * 准备 Table 的初始化状态
-     */
+const initMocker = (ref, options = {}) => {
     const state = {};
-    state.$table = initTable(ref, $options, $table);
     /*
      * 初始化 $mocker
      */
-    const $mocker = Fx.Mock.mockInit(ref, $options);
+    const $mocker = Fx.Mock.mockInit(ref, options);
     if ($mocker) {
         state.$mocker = $mocker;
     }
     ref.setState(state);
+};
+const init = (ref) => {
+    const {$options = {}, $table = {}} = ref.props;
+    /* 初始化Mocker */
+    initMocker(ref, $options);
+
+    // 初始化状态
+    const state = {};
+    state.$table = initTable(ref, $options, $table);
     // 加载数据专用，第一次加载
-    const {$query = {}} = ref.props;
-    Fx.rxSearch(ref, $query);
+    initColumn(ref, $options, state);
+
     // 挂载反向函数
-    mountPointer(ref);
+    Mount.mountPointer(ref);
 };
 const update = (ref, previous = {}) => {
     if (Fx.testQuery(ref, previous)) {

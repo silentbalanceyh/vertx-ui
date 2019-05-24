@@ -9,12 +9,17 @@ const _inUniform = (reference) => {
 };
 const inAdd = (reference) => _inUniform(reference);
 const inSearch = (reference) => _inUniform(reference);
+
 const inExtra = (reference) => {
     const inherit = _inUniform(reference);
     const {config = {}} = reference.state;
     if (config.component) {
         inherit.$componentConfig = Ux.clone(config.component);
     }
+    // 由于要知道原始列信息
+    inherit.$table = config.table;
+    const {rxColumn} = reference.props;
+    inherit.fnColumn = rxColumn;
     return inherit;
 };
 const _inheritFun = (reference, inherit = {}, name) => {
@@ -52,7 +57,7 @@ const inBatch = (reference) => {
 };
 const inTable = (reference) => {
     const inherit = _inUniform(reference);
-    const {rxSearch} = reference.props;
+    const {rxSearch, rxColumn} = reference.props;
     if (U.isFunction(rxSearch)) {
         const {query = {}, config = {}, $selected = []} = reference.state;
         // 参数专用
@@ -62,6 +67,7 @@ const inTable = (reference) => {
 
         // 函数区域
         inherit.fnSearch = rxSearch;
+        inherit.fnColumn = rxColumn;
         _inheritFun(reference, inherit, 'fnSelect');
         _inheritFun(reference, inherit, 'fnQuery');
         _inheritFun(reference, inherit, 'fnInit');

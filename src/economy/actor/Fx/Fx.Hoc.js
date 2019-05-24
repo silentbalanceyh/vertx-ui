@@ -1,20 +1,23 @@
-import Ux from "ux";
 import U from 'underscore';
-import InitGrid from './Fx.Init.Grid';
+import Grid from './Fx.Init.Grid';
 
 const BIND = {
-    "grid": InitGrid
+    "grid": Grid
 };
 const verify = type => ref => {
-    const {reference, $key = type} = ref.props;
-    return Ux.verifyComplex(reference, $key);
+    const component = BIND[type];
+    let error = null;
+    if (U.isFunction(component.verify)) {
+        error = component.verify(type)(ref);
+    }
+    return error;
 };
 const init = type => ref => {
-    const fun = BIND[type];
+    const component = BIND[type];
     let state = null;
-    if (U.isFunction(fun)) {
+    if (U.isFunction(component.init)) {
         // 这里需要 type 处理 type
-        state = fun(type)(ref);
+        state = component.init(type)(ref);
     }
     return state;
 };

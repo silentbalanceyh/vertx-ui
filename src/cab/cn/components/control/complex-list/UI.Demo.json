@@ -48,6 +48,7 @@
             "ajax.delete.uri": "/api/dept/:id",
             "ajax.batch.delete.uri": "/api/depts",
             "ajax.batch.put.uri": "/api/depts",
+            "ajax.get.column": "/api/my/columns/depts",
             "confirm.delete": "确认删除当前部门记录？",
             "confirm.batch.delete": "您确认要删除所有选中的部门记录？"
         },
@@ -85,13 +86,15 @@
                     {
                         "key": "keySave",
                         "text": "保存",
-                        "icon": "save"
+                        "icon": "save",
+                        "event": "fnSaveColumn"
                     },
                     {
                         "key": "keyReset",
                         "text": "重置",
                         "icon": "remove",
-                        "type": "default"
+                        "type": "default",
+                        "event": "RESET"
                     }
                 ]
             },

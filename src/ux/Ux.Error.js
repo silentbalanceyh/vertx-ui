@@ -105,7 +105,8 @@ const fnError = {
     10099: () => `[ ERR-10099 ] (Dialog) 配置构造有问题：key, message, hoc = `,
     10100: (fnName) => `[ ERR-10100 ] (Web) 当前组件使用了 Reactive 模式，传入的函数非法，fnName = ${fnName}`,
     10101: (same, diff) => `[ ERR-10101 ] (Web) 当前组件设置 ReadOnly 依赖时 same和diff值不可相同，same=${same},diff=${diff}`,
-    10102: (kv) => `[ ERR-10102 ] (Ir) valueSearch 解析的时候发现格式不对的键值对，${kv}`
+    10102: (kv) => `[ ERR-10102 ] (Ir) valueSearch 解析的时候发现格式不对的键值对，${kv}`,
+    10103: (key) => `[ ERR-10103 ] (Ir) 对不起，由于开启了 dynamic column 的功能，必须保证有 rxColumn 函数，检测不到该函数！key=${key}`
 };
 const _fxError = (_condition, code, message) => {
     if (_condition) {

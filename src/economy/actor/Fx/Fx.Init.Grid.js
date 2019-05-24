@@ -4,7 +4,7 @@ import Ux from 'ux';
 
 import Tab from './Fx.Tab';
 
-export default type => ref => {
+const init = type => ref => {
     const config = Cfg.hocConfig(type)(ref);
     const reactState = {};
     /*
@@ -36,3 +36,13 @@ export default type => ref => {
     reactState.options = Ux.clone(config.options);
     return reactState;
 };
+
+const verify = type => (ref) => {
+    const config = Cfg.hocConfig(type)(ref);
+    return Ux.ensureGrid(ref, type, config);
+};
+
+export default {
+    init,
+    verify
+}

@@ -44,21 +44,27 @@ const rxChange = (reference) => (pagination, filters, sorter) => Unity.change(re
 }, {pagination, filters, sorter});
 
 /* 这里的 reference 是 IxTable */
-const rxSearch = (reference, query = {}) =>
+const rxSearch = (reference, query = {}, extraState = {}) =>
     Unity.consume(reference, 'fnSearch')(fnSearch => fnSearch(query)
         .then(Mock.mockSearchResult(reference, query))
         .then(data => reference.setState({
             data,
-            $loading: false // 和分页专用统一
+            $loading: false, // 和分页专用统一
+            ...extraState
         })));
-
+const rxSaveColumn = (reference) => (event) => {
+    event.preventDefault();
+    // 提交表单
+    Unity.doSubmit(reference);
+};
 export default {
     rxChange,   // 表格发生变更（分页、排序、页尺寸改变、列变更）
     rxRefresh,  // 刷新表格专用方法
     rxSearch,   // 搜索专用方法
 
     rxEdit,
-    rxDelete,   // 行删除
+    rxDelete,       // 行删除
+    rxSaveColumn,   // 列信息保存
 
     ...Batch,   // Batch批量操作
     ...Tab,     // Tab页签相关

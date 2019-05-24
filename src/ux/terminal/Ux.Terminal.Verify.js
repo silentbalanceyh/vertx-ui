@@ -48,12 +48,6 @@ const verifyOptions = (key, options) => {
         return E.fxMessageError(10009, `${key}.options`, 'tabs.list');
     }
 };
-
-/**
- * 专用ComplexList的错误检测函数
- * @param reference
- * @param key
- */
 const verifyComplex = (reference = {}, key = "") => {
     // 检查基础配置key下边有内容
     let message = verifyRooKey(reference, key);
@@ -94,7 +88,9 @@ export default {
     verifyOptions,
     // 验证专用
     verifyCard,
+
     verifyComplex,
+
     verifySubList,
-    verifyTreeList
+    verifyTreeList,
 };

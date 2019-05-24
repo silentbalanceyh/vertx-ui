@@ -9,7 +9,7 @@ const fnState = (ref, options = {}) => {
     const fnHoc = U.isFunction(options.hoc) ? options.hoc(options.type) : () => ({});
     let error = undefined;
     if (U.isFunction(fnVerify)) {
-        // 包含了 fnVerify
+        // fnVerify 需要验证的是传入的属性内容，而不是当前，由于构造部分还没完成
         error = fnVerify(ref);
     }
     // 不验证的情况 error 就是 undefined

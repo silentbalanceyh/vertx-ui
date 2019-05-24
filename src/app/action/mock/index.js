@@ -1,6 +1,9 @@
 import fnApp from './fnApp'
 import fnMenu from './fnMenu'
+
 import fnDeptList from './fnDeptList'
+import fnDeptColumn from './fnDeptColumn'
+
 import fnCategory from './fnCategory'
 import fnCategoryList from './fnCategoryList'
 import fnTreeData from './fnTreeData'
@@ -13,7 +16,10 @@ import fnMaterials from './fnMaterials';
 export default {
     fnApp,
     fnMenu,
+
     fnDeptList,
+    fnDeptColumn,
+
     fnCategory,
     fnCategoryList,
     // Tree专用

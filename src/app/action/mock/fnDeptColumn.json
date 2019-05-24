@@ -1,0 +1,29 @@
+{
+    "mock": true,
+    "data": [
+        {
+            "key": "code",
+            "label": "部门编号"
+        },
+        {
+            "key": "name",
+            "label": "部门名称"
+        },
+        {
+            "key": "manager",
+            "label": "部门经理"
+        },
+        {
+            "key": "active",
+            "label": "是否启用"
+        },
+        {
+            "key": "created_by",
+            "label": "创建人"
+        },
+        {
+            "key": "created_date",
+            "label": "创建时间"
+        }
+    ]
+}

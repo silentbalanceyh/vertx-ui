@@ -74,7 +74,7 @@ const mockInit = (reference, options = {}) =>
 const mockSearchResult = (reference, params = {}) => async response =>
     mockResult(reference, response, (mocker) => {
         /* 不重新绑定 */
-        return mocker.filter(params).to();
+        return mocker ? mocker.filter(params).to() : {};
     });
 const mockInherit = (reference, inherit = {}) => {
     const {$MOCK} = reference.props;
