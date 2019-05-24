@@ -1,1 +1,6 @@
-export default {}
+const initJsx = (reference) => {
+
+};
+export default {
+    initJsx
+}

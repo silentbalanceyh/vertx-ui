@@ -8,7 +8,9 @@ export default {
         icon: "edit",
         type: "default",
         key: "lnkBatchEdit",
-        window: "window.batch.edit" // Window 专用
+        window: "window.batch.edit", // Window 专用
+        component: "UiBatchEditor",  // 组件类型
+        componentKey: "batch.editor",// 配置Key
     },
     batchDelete: {
         icon: "remove",

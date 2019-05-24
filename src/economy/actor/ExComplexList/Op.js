@@ -35,9 +35,11 @@ const inBatch = (reference) => {
 
     inherit.fnBatchDelete = Fx.rxBatchDelete;
     inherit.fnBatchEdit = Fx.rxBatchEdit;
+    const componentConfig = {};
     if (config.hasOwnProperty('batch.editor')) {
-        inherit.$editor = config['batch.editor']
+        componentConfig['batch.editor'] = config['batch.editor']
     }
+    inherit.$componentConfig = componentConfig;
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;

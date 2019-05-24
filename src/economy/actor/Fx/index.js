@@ -26,7 +26,9 @@ const exported = {
     initExtra: Init.initExtra,
     // 窗口专用
     initDialog: Dialog.init,
+
     jsxDialog: Jsx.jsxDialog,
+    jsxComponent: Jsx.jsxComponent,
     // 调用函数
     doLoading: Unity.doLoading,
     doRefresh: Unity.doRefresh,
