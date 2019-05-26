@@ -27,7 +27,8 @@ class Component extends React.PureComponent {
         $buttons.forEach(button => button.loading = $loading);
         return (
             <div className={"ex-column"}>
-                <Checkbox.Group value={$selected} onChange={Op.onSelected(this)}>
+                <Checkbox.Group value={$selected} onChange={Op.onSelected(this)}
+                                className={"group"}>
                     {$options.map(item => {
                         return (
                             <div style={style} key={item.key} className={"item"}>

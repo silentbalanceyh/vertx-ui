@@ -7,7 +7,7 @@ import Mount from './Op.Mount';
 const initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
     // 扩展行外置处理
-    const {rxExpandRow} = reference.props;
+    const {rxExpandRow, fnFilterColumn} = reference.props;
     if (U.isFunction(rxExpandRow)) {
         table.expandedRowRender = rxExpandRow;
     }
@@ -16,6 +16,11 @@ const initTable = (reference, options = {}, table = {}) => {
         rxEdit: Fx.rxEdit,
         rxDelete: Fx.rxDelete,
     });
+    // 列过滤处理，去掉不可访问的列
+    if (fnFilterColumn) {
+
+        table.columns = table.columns.filter(fnFilterColumn);
+    }
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }

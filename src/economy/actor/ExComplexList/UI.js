@@ -51,8 +51,9 @@ class Component extends React.PureComponent {
             }, "[Ex] ComplexList：");
             return (
                 <Tabs {...rest}
-                      tabBarExtraContent={<IxExtraBar {...this.props}
-                                                      $options={options}/>}
+                      tabBarExtraContent={
+                          <IxExtraBar {...this.props} $options={options}/>
+                      }
                       className={className}>
                     {items.map(item => {
                         const {type, ...itemRest} = item;

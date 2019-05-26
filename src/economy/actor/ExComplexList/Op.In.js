@@ -1,27 +1,9 @@
 import Fx from '../Fx';
 import U from 'underscore';
 import Ux from 'ux';
-
-const _inUniform = (reference) => {
-    const {options = {}} = reference.state;
-    Object.freeze(options); // 不允许修改 options
-    return {reference, $options: options};
-};
-const inAdd = (reference) => _inUniform(reference);
-const inSearch = (reference) => _inUniform(reference);
-
-const inExtra = (reference) => {
-    const inherit = _inUniform(reference);
-    const {config = {}} = reference.state;
-    if (config.component) {
-        inherit.$componentConfig = Ux.clone(config.component);
-    }
-    // 由于要知道原始列信息
-    inherit.$table = config.table;
-    const {rxColumn} = reference.props;
-    inherit.fnColumn = rxColumn;
-    return inherit;
-};
+/*
+ * 函数注入函数
+ */
 const _inheritFun = (reference, inherit = {}, name) => {
     let fun = reference.state[name];
     if (U.isFunction(fun)) {
@@ -36,9 +18,56 @@ const _inheritFun = (reference, inherit = {}, name) => {
         }
     }
 };
+
+const _inheritComponent = (reference, inherit = {}) => {
+    const {config = {}} = reference.state;
+    if (config.component) {
+        inherit.$componentConfig = Ux.clone(config.component);
+        /* 不可变更 */
+        Object.freeze(inherit.$componentConfig);
+    }
+};
+
+const _inProjection = (reference, inherit = {}) => {
+    const {projection = []} = reference.state;
+    /* 基本列过滤，直接使用 projection 生成列过滤函数 */
+    inherit.fnFilterColumn = item => {
+        if (0 === projection.length) {
+            /* 没有任何projection的情况，无权限 */
+            return true;
+        } else {
+            /* 有内容 */
+            const $projection = Ux.immutable(projection.map(each => each.key));
+            return $projection.contains(item.dataIndex);
+        }
+    }
+};
+/*
+ * 统一处理函数
+ */
+const _inUniform = (reference) => {
+    const {options = {}} = reference.state;
+    /* 不可变更 */
+    Object.freeze(options); // 不允许修改 options
+    return {reference, $options: options};
+};
+const inAdd = (reference) => _inUniform(reference);
+const inSearch = (reference) => _inUniform(reference);
+
+const inExtra = (reference) => {
+    const inherit = _inUniform(reference);
+
+    _inheritComponent(reference, inherit);
+    // 列处理（更改列、导出都需要）
+    _inProjection(reference, inherit);
+    // 由于要知道原始列信息
+    const {config = {}} = reference.state;
+    inherit.$table = config.table;
+    return inherit;
+};
 const inBatch = (reference) => {
     const inherit = _inUniform(reference);
-    const {$selected = [], config = {}} = reference.state;
+    const {$selected = []} = reference.state;
     inherit.$selected = $selected;
 
     _inheritFun(reference, inherit, 'fnSelect');
@@ -48,26 +77,27 @@ const inBatch = (reference) => {
 
     inherit.fnBatchDelete = Fx.rxBatchDelete;
     inherit.fnBatchEdit = Fx.rxBatchEdit;
-    if (config.component) {
-        inherit.$componentConfig = Ux.clone(config.component);
-    }
+    // 列处理，批量更新必须用
+    _inProjection(reference, inherit);
+
+    _inheritComponent(reference, inherit);
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;
 };
 const inTable = (reference) => {
     const inherit = _inUniform(reference);
-    const {rxSearch, rxColumn} = reference.props;
+    const {rxSearch} = reference.props;
     if (U.isFunction(rxSearch)) {
         const {query = {}, config = {}, $selected = []} = reference.state;
         // 参数专用
         inherit.$query = query;
         inherit.$table = config.table;
         inherit.$selected = $selected;
-
+        // 列处理（更改列、导出都需要）
+        _inProjection(reference, inherit);
         // 函数区域
         inherit.fnSearch = rxSearch;
-        inherit.fnColumn = rxColumn;
         _inheritFun(reference, inherit, 'fnSelect');
         _inheritFun(reference, inherit, 'fnQuery');
         _inheritFun(reference, inherit, 'fnInit');
