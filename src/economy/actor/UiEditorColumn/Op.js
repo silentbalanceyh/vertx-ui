@@ -10,21 +10,15 @@ import Fx from '../Fx';
  * @private
  */
 const _initColumns = (reference, $config = {}) => {
-    const {$table = {}, fnFilterColumn} = reference.props;
-    let $selected = [];
-    if ($table.columns) {
-        if (U.isFunction(fnFilterColumn)) {
-            $selected = $table.columns.filter(fnFilterColumn)
-                .map(column => column.dataIndex);
-        } else {
-            $selected = $table.columns.map(column => column.dataIndex);
-        }
-    }
+    const {$table = {}} = reference.props;
+    // 列过滤
+    let $selected = Fx.mapColumns(reference, $table.columns)
+        .map(column => column.dataIndex);
+
     const {full = {}} = $config;
     let $options = Ux.RxAnt.toOptions(this, full);
-    if (U.isFunction(fnFilterColumn)) {
-        $options = $options.filter(item => fnFilterColumn({dataIndex: item.key}));
-    }
+    $options = Fx.mapOptions(reference, $options);
+
     return {$selected, $options};
 };
 

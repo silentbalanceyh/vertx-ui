@@ -1,6 +1,7 @@
 import Ux from "ux";
 import React from 'react';
 import {Select} from 'antd';
+import Fx from '../Fx';
 
 const onChange = (reference, record) => (select) => {
     let {$data = []} = reference.state;
@@ -19,6 +20,8 @@ export default (reference, config = {}) => (text, record, index) => {
     const {$data = []} = reference.state;
     const $existing = Ux.immutable($data.map(each => each.name)
         .filter(item => undefined !== item));
+    // 先执行列过滤
+    options = Fx.mapOptions(reference, options);
     // 当前操作
     // 1. 条件1，$existing中包含的不显示
     // 2. 条件2，当前记录依旧显示

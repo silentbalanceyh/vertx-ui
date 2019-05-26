@@ -4,6 +4,7 @@ import Q from './Fx.Query';
 import Init from './Fx.Init.Op';
 import Jsx from './Fx.UI';
 import Dialog from './Fx.Init.Dialog';
+import Projection from './Fx.Projection';
 import Action from './Fx.Event';
 import Mock from './Fx.Mock';
 import Unity from './Fx.Unity';
@@ -13,6 +14,11 @@ const exported = {
     ...Action,
     // Tab Render
     configTab: Tab.render,
+
+    // 列处理，垂直映射处理（列过滤专用）
+    mapColumns: Projection.initColumns,
+    mapOptions: Projection.initOptions,
+    mapFields: Projection.initFields,
 
     rxCriteria: Q.criteria,
     // 是否更新了 $query 一系列

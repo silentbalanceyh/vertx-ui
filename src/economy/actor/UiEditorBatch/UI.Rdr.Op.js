@@ -1,6 +1,7 @@
 import React from 'react';
 import {Button} from 'antd';
 import Ux from "ux";
+import Fx from '../Fx';
 
 const onAdd = (reference) => (event) => {
     event.preventDefault();
@@ -18,7 +19,9 @@ const onRemove = (reference, key) => (event) => {
 };
 export default (reference, config = {}) => (text, record, index) => {
     const {fieldColumn = {}} = config;
-    const limit = fieldColumn.items ? fieldColumn.items.length : 0;
+    let options = Ux.RxAnt.toOptions(reference, fieldColumn);
+    options = Fx.mapOptions(reference, options);
+    const limit = options.length;
     return (
         <Button.Group>
             <Button icon={"plus"} disabled={index === (limit - 1)}
