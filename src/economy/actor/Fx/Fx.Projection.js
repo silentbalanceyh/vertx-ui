@@ -1,17 +1,11 @@
 import U from 'underscore';
 import Ux from "ux";
 
-const initOptions = (reference, options = []) => {
-    const {fnFilterView} = reference.props;
-    if (U.isFunction(fnFilterView)) {
-        return options.filter(item => fnFilterView({dataIndex: item.key}));
-    } else return options;
-};
-const initFull = (reference, options = []) => {
+const initFull = (reference, columns = []) => {
     const {fnFilterColumn} = reference.props;
     if (U.isFunction(fnFilterColumn)) {
-        return options.filter(item => fnFilterColumn({dataIndex: item.key}));
-    } else return options;
+        return columns.filter(fnFilterColumn);
+    } else return columns;
 };
 const initColumns = (reference, columns = []) => {
     const {fnFilterView} = reference.props;
@@ -19,6 +13,19 @@ const initColumns = (reference, columns = []) => {
         return columns.filter(fnFilterView);
     } else return columns;
 };
+const initOptions = (reference, options = []) => {
+    const {fnFilterView} = reference.props;
+    if (U.isFunction(fnFilterView)) {
+        return options.filter(item => fnFilterView({dataIndex: item.key}));
+    } else return options;
+};
+const initOptionFull = (reference, options = []) => {
+    const {fnFilterColumn} = reference.props;
+    if (U.isFunction(fnFilterColumn)) {
+        return options.filter(item => fnFilterColumn({dataIndex: item.key}));
+    } else return options;
+};
+
 const initFields = (reference, fields = []) => {
     const {fnFilterView} = reference.props;
     if (U.isFunction(fnFilterView)) {
@@ -33,7 +40,7 @@ const inColumns = (reference, $config = {}) => {
 
     const {full = {}} = $config;
     let $options = Ux.RxAnt.toOptions(this, full);
-    $options = initFull(reference, $options);
+    $options = initOptionFull(reference, $options);
 
     return {$selected, $options};
 };
