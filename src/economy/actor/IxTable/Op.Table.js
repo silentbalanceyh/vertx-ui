@@ -16,8 +16,9 @@ const initTable = (reference, options = {}, table = {}) => {
         rxEdit: Fx.rxEdit,
         rxDelete: Fx.rxDelete,
     });
-    // 列过滤处理，去掉不可访问的列
-    table.columns = Fx.mapColumns(reference, table.columns);
+    /*
+     * 列过滤处理，去掉不可访问的列，不可访问的列不在这里处理，在render中
+     */
 
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
