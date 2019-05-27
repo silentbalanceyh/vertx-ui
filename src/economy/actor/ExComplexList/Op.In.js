@@ -28,19 +28,30 @@ const _inheritComponent = (reference, inherit = {}) => {
     }
 };
 
-const _inProjection = (reference, inherit = {}) => {
-    const {projection = []} = reference.state;
-    /* 基本列过滤，直接使用 projection 生成列过滤函数 */
-    inherit.fnFilterColumn = item => {
-        if (0 === projection.length) {
-            /* 没有任何projection的情况，无权限 */
-            return true;
-        } else {
-            /* 有内容 */
-            const $projection = Ux.immutable(projection.map(each => each.key));
-            return $projection.contains(item.dataIndex);
-        }
+const _inFilter = (projection = []) => item => {
+    if (0 === projection.length) {
+        /* 没有任何projection的情况，无权限 */
+        return true;
+    } else {
+        /* 有内容 */
+        const items = projection.map(each => each.key);
+        items.push('key');  // 操作行
+        const $projection = Ux.immutable(items);
+        return $projection.contains(item.dataIndex);
     }
+};
+
+const _inProjection = (reference, inherit = {}) => {
+    const {projection = [], projectionCurrent = []} = reference.state;
+    /* 基本列过滤，直接使用 projection 生成列过滤函数 */
+    inherit.fnFilterColumn = _inFilter(projection);
+    /* 同时将 projection 继承传递 */
+    inherit.fnFilterView = _inFilter(projectionCurrent);
+    /* 修改函数 */
+    inherit.fnSaveView = (views = []) => {
+        const state = Fx.etatProjection(reference, views);
+        reference.setState(state)
+    };
 };
 /*
  * 统一处理函数
@@ -63,6 +74,8 @@ const inExtra = (reference) => {
     // 由于要知道原始列信息
     const {config = {}} = reference.state;
     inherit.$table = config.table;
+    // Mock环境才会使用
+    Fx.Mock.mockInherit(reference, inherit);
     return inherit;
 };
 const inBatch = (reference) => {

@@ -9,24 +9,12 @@ import Fx from '../Fx';
  * @returns {{$selected: Array, $options}}
  * @private
  */
-const _initColumns = (reference, $config = {}) => {
-    const {$table = {}} = reference.props;
-    // 列过滤
-    let $selected = Fx.mapColumns(reference, $table.columns)
-        .map(column => column.dataIndex);
-
-    const {full = {}} = $config;
-    let $options = Ux.RxAnt.toOptions(this, full);
-    $options = Fx.mapOptions(reference, $options);
-
-    return {$selected, $options};
-};
 
 const init = (reference) => {
     const {$config = {}} = reference.props;
     let {buttons = []} = $config;
     // 选中行处理，直接从表格列中读取
-    const columns = _initColumns(reference, $config);
+    const columns = Fx.initColumns(reference, $config);
     const {$selected = []} = columns;
     // 按钮专用处理
     const $buttons = Ux.clone(buttons);

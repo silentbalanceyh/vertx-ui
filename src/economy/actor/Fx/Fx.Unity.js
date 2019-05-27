@@ -42,7 +42,10 @@ const doClose = (reference) =>
 const doMocker = (reference) =>
     consume(reference, "fnMock")(fnMock => fnMock());
 const doSelect = (reference, selected = []) =>
-    consume(reference, "fnSelect")(doSelect => doSelect(selected));
+    consume(reference, "fnSelect")(fnSelect => fnSelect(selected));
+const doSaveColumn = (reference, column = []) =>
+    consume(reference, "fnSaveView")(fnSaveView => fnSaveView(column));
+
 
 const submit = (reference, executor) => {
     reference.setState({$loading: true});
@@ -77,6 +80,7 @@ export default {
     doClose,    // 关闭窗口
     doRefresh,  // 重新加载页面
     doSubmit,   // 提交开始
+    doSaveColumn, // 存储列
 
     ...CRUD,
 }

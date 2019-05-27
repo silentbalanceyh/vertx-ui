@@ -76,6 +76,7 @@ const configTable = (ref, options = {}, table = {}) => {
         rxEdit: Fx.rxEdit,
         rxDelete: Fx.rxDelete,
     });
+    $table.columns = Fx.mapColumns(ref, table.columns);
     // 分页处理
     $table.pagination = Assist.initPager(ref);
     return $table;

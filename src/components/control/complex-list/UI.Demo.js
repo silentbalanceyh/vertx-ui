@@ -28,8 +28,11 @@ class Component extends React.PureComponent {
                                FormAdd={FormAdd}
                                FormEdit={FormEdit}
                     /* mock专用数据 */
-                               $MOCK={Mock.fnDeptList}
-                />
+                               $MOCK_LIST={Mock.fnDeptList}
+                               $MOCK_COLUMN={{
+                                   CURRENT: Mock.fnDeptColumnCurrent,
+                                   FULL: Mock.fnDeptColumnFull
+                               }}/>
             </HelpCard>
         )
     }

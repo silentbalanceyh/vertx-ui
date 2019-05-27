@@ -7,15 +7,15 @@ const mockEnv = (reference, options) => (executor) => {
     }
     if (options) {
         if (options['mock.enabled']) {
-            const {$MOCK} = reference.props;
-            if ($MOCK) {
+            const {$MOCK_LIST = {}} = reference.props;
+            if ($MOCK_LIST) {
                 if (U.isFunction(executor)) {
                     /*
                      * 两个参数
                      * 第一参数为 Mocker
                      * 第二参数为 mockData中的 data 部分
                      */
-                    return executor(Ux.mockCrud(reference), $MOCK.data);
+                    return executor(Ux.mockCrud(reference), $MOCK_LIST.data);
                 }
             }
         }
@@ -24,11 +24,11 @@ const mockEnv = (reference, options) => (executor) => {
     }
 };
 const mockResult = (reference, response, supplier) => {
-    const {$MOCK, $options = {}} = reference.props;
+    const {$MOCK_LIST, $options = {}} = reference.props;
     /* 1. 打开Mock的第一条件必须是 $options */
     if ($options['mock.enabled']) {
         /* 2. 第二条件是数据 $MOCK 中的 mock */
-        if ($MOCK && $MOCK.mock) {
+        if ($MOCK_LIST && $MOCK_LIST.mock) {
             if (U.isFunction(supplier)) {
                 const {$mocker} = reference.state;
                 return supplier($mocker);
@@ -53,14 +53,14 @@ const mockSingle = (reference, consumer) => {
     return mockSingleWithMocker(reference, consumer, $mocker);
 };
 const mockSingleWithMocker = (reference, consumer, $mocker) => {
-    const {$MOCK} = reference.props;
+    const {$MOCK_LIST} = reference.props;
     let mockFinal = {};
     if ($mocker) {
         let data = {};
         if (U.isFunction(consumer)) {
             data = consumer($mocker);
         }
-        mockFinal = {data, mock: $MOCK.mock};
+        mockFinal = {data, mock: $MOCK_LIST.mock};
     } else {
         mockFinal = {data: {}, mock: false};
     }
@@ -77,9 +77,12 @@ const mockSearchResult = (reference, params = {}) => async response =>
         return mocker ? mocker.filter(params).to() : {};
     });
 const mockInherit = (reference, inherit = {}) => {
-    const {$MOCK} = reference.props;
-    if ($MOCK) {
-        inherit.$MOCK = $MOCK;
+    const {$MOCK_LIST, $MOCK_COLUMN} = reference.props;
+    if ($MOCK_LIST) {
+        inherit.$MOCK_LIST = $MOCK_LIST;
+    }
+    if ($MOCK_COLUMN) {
+        inherit.$MOCK_COLUMN = $MOCK_COLUMN;
     }
 };
 const mockDelete = (reference, id) =>

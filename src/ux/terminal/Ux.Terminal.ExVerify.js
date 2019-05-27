@@ -33,10 +33,11 @@ const ensureGrid = (reference = {}, key, grid = {}) => {
         message = Verify.verifyOptions(key, grid.options);
     }
     // 其他验证
+    /*
     if (!message) {
         // 动态验证
         message = verifyDynamic(reference, key, grid.options);
-    }
+    } */
     return message;
 };
 

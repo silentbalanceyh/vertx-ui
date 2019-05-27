@@ -49,24 +49,43 @@
             "ajax.delete.uri": "/api/dept/:id",
             "ajax.batch.delete.uri": "/api/depts",
             "ajax.batch.put.uri": "/api/depts",
-            "ajax.get.column": "/api/my/columns/depts",
+            "ajax.column.full": "/api/columns/:module",
+            "ajax.column.my": "/api/columns/my/:module",
+            "ajax.column.save": "/api/columns/:module",
             "confirm.delete": "确认删除当前部门记录？",
             "confirm.batch.delete": "您确认要删除所有选中的部门记录？"
         },
         "component": {
             "extra.export": {
-                "message": "请选择字段！",
-                "description": [
-                    "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
-                    "如果您没有找到您想要的字段，请联系管理员。"
-                ]
+                "notice": {
+                    "message": "请选择字段！",
+                    "description": [
+                        "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
+                        "如果您没有找到您想要的字段，请联系管理员。"
+                    ]
+                },
+                "full": {
+                    "items": [
+                        "code,部门编号",
+                        "name,部门名称",
+                        "manager,部门经理",
+                        "active,是否启用",
+                        "created_by,创建人",
+                        "created_date,创建时间",
+                        "last_modified_by,更新人",
+                        "last_modified_date,更新时间"
+                    ]
+                },
+                "button": "btnExport"
             },
             "extra.import": {
-                "message": "选择本地文件",
-                "description": [
-                    "您可以按照提供的模板导入Excel格式的数据。",
-                    "如果有相关疑问可联系管理员！"
-                ],
+                "notice": {
+                    "message": "选择本地文件",
+                    "description": [
+                        "您可以按照提供的模板导入Excel格式的数据。",
+                        "如果有相关疑问可联系管理员！"
+                    ]
+                },
                 "upload": "模板文件"
             },
             "extra.column": {

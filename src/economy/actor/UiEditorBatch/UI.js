@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxEditorBatch：", "#960");
+        }, "[Ex] UiEditorBatch：", "#960");
         return (
             <div>
                 <Table className={"web-table"}

@@ -1,0 +1,17 @@
+{
+    "mock": true,
+    "data": [
+        {
+            "key": "code",
+            "label": "部门编号"
+        },
+        {
+            "key": "name",
+            "label": "部门名称"
+        },
+        {
+            "key": "created_date",
+            "label": "创建时间"
+        }
+    ]
+}

@@ -7,6 +7,7 @@ import Unity from './Fx.Unity';
 import Inherit from './Fx.Event.Inherit';
 import Tab from './Fx.Event.Tab';
 import Batch from './Fx.Event.Batch';
+import Column from './Fx.Event.Column';
 
 /* 这里的 reference 是 IxTable */
 const rxEdit = (reference, id) => Unity.submit(reference, () => {
@@ -52,11 +53,6 @@ const rxSearch = (reference, query = {}, extraState = {}) =>
             $loading: false, // 和分页专用统一
             ...extraState
         })));
-const rxSaveColumn = (reference) => (event) => {
-    event.preventDefault();
-    // 提交表单
-    Unity.doSubmit(reference);
-};
 export default {
     rxChange,   // 表格发生变更（分页、排序、页尺寸改变、列变更）
     rxRefresh,  // 刷新表格专用方法
@@ -64,8 +60,8 @@ export default {
 
     rxEdit,
     rxDelete,       // 行删除
-    rxSaveColumn,   // 列信息保存
 
+    ...Column,  // 列相关处理
     ...Batch,   // Batch批量操作
     ...Tab,     // Tab页签相关
     ...Inherit  // 继承操作相关

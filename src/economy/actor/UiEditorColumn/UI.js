@@ -20,7 +20,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxEditorColumn：", "#960");
+        }, "[Ex] UiEditorColumn：", "#960");
         const {$selected = [], $options = [], $buttons} = this.state;
         const {$config = {}, $loading = false} = this.props;
         const style = Fx.cssGrid($config);

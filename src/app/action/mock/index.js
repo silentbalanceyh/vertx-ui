@@ -2,7 +2,8 @@ import fnApp from './fnApp'
 import fnMenu from './fnMenu'
 
 import fnDeptList from './fnDeptList'
-import fnDeptColumn from './fnDeptColumn'
+import fnDeptColumnFull from './fnDeptColumn'
+import fnDeptColumnCurrent from './fnDeptColumnCurrent'
 
 import fnCategory from './fnCategory'
 import fnCategoryList from './fnCategoryList'
@@ -18,7 +19,8 @@ export default {
     fnMenu,
 
     fnDeptList,
-    fnDeptColumn,
+    fnDeptColumnFull,
+    fnDeptColumnCurrent,
 
     fnCategory,
     fnCategoryList,
