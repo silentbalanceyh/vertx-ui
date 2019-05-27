@@ -31,11 +31,6 @@ const initTable = (reference, options = {}, table = {}) => {
     if (U.isFunction(rxExpandRow)) {
         table.expandedRowRender = rxExpandRow;
     }
-    // 静态处理
-    table.columns = Ux.uiTableColumn(reference, table.columns, {
-        rxEdit: Fx.rxEdit,
-        rxDelete: Fx.rxDelete,
-    });
 
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);

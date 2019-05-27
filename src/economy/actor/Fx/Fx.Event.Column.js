@@ -9,9 +9,17 @@ const _rxSaveMock = (reference, selected = []) => {
         const $selected = Ux.immutable(selected);
         const original = Ux.clone(FULL.data);
         // 添加还是删除
+        const data = [];
+        original.filter(item => $selected.contains(item.dataIndex))
+            .forEach(item => {
+                const dataItem = {};
+                dataItem.key = item.dataIndex;
+                dataItem.label = item.title;
+                data.push(dataItem);
+            });
         return {
             mock: CURRENT.mock,
-            data: original.filter(item => $selected.contains(item.key))
+            data
         };
     } else {
         return {mock: false};
