@@ -4,6 +4,26 @@ import Fx from '../Fx';
 import Assist from './Op.Assist';
 import Mount from './Op.Mount';
 
+const isDynamic = (reference) => {
+    const {$options = {}} = reference.props;
+    return $options['column.dynamic'];
+};
+
+const initColumns = (reference, table = {}) => {
+    const {$columns = []} = reference.props;
+    const {columns = []} = table;
+    const source = Ux.clone(columns).concat($columns);
+    /*
+     * 不造成多次改动，这里只进行列数量过滤
+     * 动态列处理
+     */
+    table.columns = Ux.uiTableColumn(reference, source, {
+        rxEdit: Fx.rxEdit,
+        rxDelete: Fx.rxDelete,
+    });
+    table.columns = Fx.mapColumns(reference, table.columns);
+};
+
 const initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
     // 扩展行外置处理
@@ -11,16 +31,11 @@ const initTable = (reference, options = {}, table = {}) => {
     if (U.isFunction(rxExpandRow)) {
         table.expandedRowRender = rxExpandRow;
     }
-    // 静态行处理
+    // 静态处理
     table.columns = Ux.uiTableColumn(reference, table.columns, {
         rxEdit: Fx.rxEdit,
         rxDelete: Fx.rxDelete,
     });
-
-    /*
-     * 列过滤处理，去掉不可访问的列，不可访问的列不在这里处理，在render中
-     */
-    table.columns = Fx.mapFull(reference, table.columns);
 
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
@@ -67,21 +82,16 @@ const update = (ref, previous = {}) => {
         Fx.rxRefresh(ref);
     }
 };
-const configTable = (ref, options = {}, table = {}) => {
-    const {$loading = true} = ref.state;
+const configTable = (reference, options = {}, table = {}) => {
+    const {$loading = true} = reference.state;
     const $table = Ux.clone(table);
     $table.loading = $loading;
-    /*
-     * 不造成多次改动，这里只进行列数量过滤
-     * 动态列处理
-     */
-    $table.columns = Ux.uiTableColumn(ref, table.columns, {
-        rxEdit: Fx.rxEdit,
-        rxDelete: Fx.rxDelete,
-    });
-    $table.columns = Fx.mapColumns(ref, table.columns);
+
+    if (isDynamic(reference)) {
+        initColumns(reference, $table);
+    }
     // 分页处理
-    $table.pagination = Assist.initPager(ref);
+    $table.pagination = Assist.initPager(reference);
     return $table;
 };
 

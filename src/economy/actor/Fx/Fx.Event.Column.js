@@ -24,8 +24,7 @@ const rxSaveColumn = (reference) => (event) => {
     // 保存专用（修改显示列）
     const {$options = {}} = reference.props;
     const {$selected = []} = reference.state;
-    const params = {module: $options['column.module']};
-    return Ux.ajaxPut($options['ajax.column.save'], params, _rxSaveMock(reference, $selected)).then(response => {
+    return Ux.ajaxPut($options['ajax.column.save'], {}, _rxSaveMock(reference, $selected)).then(response => {
         if (U.isArray(response)) {
             Unity.doSubmit(reference, false);
             Unity.doSaveColumn(reference, response);

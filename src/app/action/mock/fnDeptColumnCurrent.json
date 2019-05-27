@@ -2,16 +2,16 @@
     "mock": true,
     "data": [
         {
-            "key": "code",
-            "label": "部门编号"
+            "dataIndex": "code",
+            "title": "部门编号"
         },
         {
-            "key": "name",
-            "label": "部门名称"
+            "dataIndex": "name",
+            "title": "部门名称"
         },
         {
-            "key": "created_date",
-            "label": "创建时间"
+            "dataIndex": "created_date",
+            "title": "创建时间"
         }
     ]
 }

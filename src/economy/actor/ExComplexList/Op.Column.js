@@ -2,7 +2,7 @@ import Q from "q";
 import Ux from 'ux';
 import Fx from '../Fx';
 
-const initPromise = (reference) => {
+const _initPromise = (reference) => {
     const {$MOCK_COLUMN = {}} = reference.props;
     const {FULL = {}, CURRENT = {}} = $MOCK_COLUMN;
     const {options = {}} = reference.state;
@@ -23,22 +23,38 @@ const initPromise = (reference) => {
     return Q.all(promise);
 };
 
+const _normalizeArray = (projection = []) => {
+    const items = [];
+    projection.forEach(pItem => {
+        const item = {};
+        item.key = pItem.dataIndex;
+        item.label = pItem.title;
+        items.push(item);
+    });
+    return items;
+};
+
+const _initProjection = (reference) => (response = []) => {
+    const columns = response[0];
+    const projection = _normalizeArray(columns);
+    const projectionCurrent = _normalizeArray(response[1]);
+    const updatedState = Fx.etatProjection(reference, projectionCurrent);
+    /* 注意 */
+    reference.setState({
+        columns, projection,
+        ...updatedState,
+        readyColumn: true,
+    });
+};
+
 const initColumn = (reference) => {
     const {options = {}, readyColumn = false} = reference.state;
     if (options['column.dynamic'] && !readyColumn) {
         const {readyColumn = false} = reference.state;
         /* 只读取一次列信息 */
         if (!readyColumn) {
-            initPromise(reference).then((response = []) => {
-                const projection = response[0];
-                const projectionCurrent = response[1];
-                const updatedState = Fx.etatProjection(reference, projectionCurrent);
-                reference.setState({
-                    projection,
-                    readyColumn: true,
-                    ...updatedState,
-                });
-            });
+            _initPromise(reference)
+                .then(_initProjection(reference));
         }
     } else {
         reference.setState({ready: true});

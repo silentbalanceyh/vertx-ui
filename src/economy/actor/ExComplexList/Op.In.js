@@ -42,16 +42,21 @@ const _inFilter = (projection = []) => item => {
 };
 
 const _inProjection = (reference, inherit = {}) => {
-    const {projection = [], projectionCurrent = []} = reference.state;
-    /* 基本列过滤，直接使用 projection 生成列过滤函数 */
-    inherit.fnFilterColumn = _inFilter(projection);
-    /* 同时将 projection 继承传递 */
-    inherit.fnFilterView = _inFilter(projectionCurrent);
-    /* 修改函数 */
-    inherit.fnSaveView = (views = []) => {
-        const state = Fx.etatProjection(reference, views);
-        reference.setState(state)
-    };
+    const {options = {}} = reference.state;
+    if (options['column.dynamic']) {
+        const {projection = [], projectionCurrent = [], columns = {}} = reference.state;
+        /* 基本列过滤，直接使用 projection 生成列过滤函数 */
+        inherit.fnFilterColumn = _inFilter(projection);
+        /* 同时将 projection 继承传递 */
+        inherit.fnFilterView = _inFilter(projectionCurrent);
+        /* 修改函数 */
+        inherit.fnSaveView = (views = []) => {
+            const state = Fx.etatProjection(reference, views);
+            reference.setState(state)
+        };
+        /* 特殊函数处理 */
+        inherit.$columns = columns;
+    }
 };
 /*
  * 统一处理函数

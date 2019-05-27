@@ -32,11 +32,21 @@ const initFields = (reference, fields = []) => {
         return fields.map(field => fnFilterView({dataIndex: field}));
     } else return fields;
 };
-const inColumns = (reference, $config = {}) => {
-    const {$table = {}} = reference.props;
+const initSelected = (reference) => {
+    const {$table = {}, $options = {}, $columns = []} = reference.props;
+    let source = [];
+    if ($options['column.dynamic']) {
+        source = Ux.clone($table.columns).concat($columns);
+    } else {
+        source = Ux.clone($table.columns);
+    }
     // 列过滤
-    let $selected = initColumns(reference, $table.columns)
+    return initColumns(reference, source)
         .map(column => column.dataIndex);
+};
+const inColumns = (reference, $config = {}) => {
+    // 列过滤
+    let $selected = initSelected(reference);
 
     const {full = {}} = $config;
     let $options = Ux.RxAnt.toOptions(this, full);
