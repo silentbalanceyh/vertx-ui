@@ -1,5 +1,5 @@
 import In from './Op.In';
-import Column from './Op.Column';
+import Fx from '../Fx';
 
 const isRender = (reference) => {
     const {options = {}, ready = false} = reference.state;
@@ -15,7 +15,7 @@ const update = (reference, previous = {}) => {
     const {ready = false} = state;
     if (ready) {
         // 特殊情况需要初始化列信息
-        Column.initColumn(reference);
+        Fx.initColumn(reference);
     }
 };
 export default {

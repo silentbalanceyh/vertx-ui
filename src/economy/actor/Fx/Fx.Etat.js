@@ -88,11 +88,11 @@ const viewSwitch = (reference, view = "list", key) => {
     }
     return {view, key};
 };
-const projection = (reference, projectionCurrent = []) => {
+const projection = (reference, projection = []) => {
     let {query = {}} = reference.state ? reference.state : {};
     query = Ux.clone(query);
-    query.projection = Ux.clone(projectionCurrent.map(projection => projection.key));
-    return {query, projectionCurrent}
+    query.projection = Ux.clone(projection.map(projection => projection.key));
+    return {query, projection}
 };
 export default {
     Tab: {

@@ -8,7 +8,7 @@ import U from "underscore";
 const init = (reference) => {
     const {$config = {}} = reference.props;
     // 选中行处理，直接从表格中读取
-    const columns = Fx.initColumns(reference, $config);
+    const columns = Fx.initColumnWithSelected(reference, $config);
     // notice处理
     const {notice = {}, button = ""} = $config;
     // 状态设置

@@ -14,7 +14,7 @@ const init = (reference) => {
     const {$config = {}} = reference.props;
     let {buttons = []} = $config;
     // 选中行处理，直接从表格列中读取
-    const columns = Fx.initColumns(reference, $config);
+    const columns = Fx.initColumnWithSelected(reference, $config);
     const {$selected = []} = columns;
     // 按钮专用处理
     const $buttons = Ux.clone(buttons);

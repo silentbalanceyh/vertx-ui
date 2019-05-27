@@ -27,37 +27,6 @@ const _inheritComponent = (reference, inherit = {}) => {
         Object.freeze(inherit.$componentConfig);
     }
 };
-
-const _inFilter = (projection = []) => item => {
-    if (0 === projection.length) {
-        /* 没有任何projection的情况，无权限 */
-        return true;
-    } else {
-        /* 有内容 */
-        const items = projection.map(each => each.key);
-        items.push('key');  // 操作行
-        const $projection = Ux.immutable(items);
-        return $projection.contains(item.dataIndex);
-    }
-};
-
-const _inProjection = (reference, inherit = {}) => {
-    const {options = {}} = reference.state;
-    if (options['column.dynamic']) {
-        const {projection = [], projectionCurrent = [], columns = {}} = reference.state;
-        /* 基本列过滤，直接使用 projection 生成列过滤函数 */
-        inherit.fnFilterColumn = _inFilter(projection);
-        /* 同时将 projection 继承传递 */
-        inherit.fnFilterView = _inFilter(projectionCurrent);
-        /* 修改函数 */
-        inherit.fnSaveView = (views = []) => {
-            const state = Fx.etatProjection(reference, views);
-            reference.setState(state)
-        };
-        /* 特殊函数处理 */
-        inherit.$columns = columns;
-    }
-};
 /*
  * 统一处理函数
  */
@@ -75,7 +44,7 @@ const inExtra = (reference) => {
 
     _inheritComponent(reference, inherit);
     // 列处理（更改列、导出都需要）
-    _inProjection(reference, inherit);
+    Fx.inheritProjection(reference, inherit);
     // 由于要知道原始列信息
     const {config = {}} = reference.state;
     inherit.$table = config.table;
@@ -96,7 +65,7 @@ const inBatch = (reference) => {
     inherit.fnBatchDelete = Fx.rxBatchDelete;
     inherit.fnBatchEdit = Fx.rxBatchEdit;
     // 列处理，批量更新必须用
-    _inProjection(reference, inherit);
+    Fx.inheritProjection(reference, inherit);
 
     _inheritComponent(reference, inherit);
     // Mock环境才会使用
@@ -113,7 +82,7 @@ const inTable = (reference) => {
         inherit.$table = config.table;
         inherit.$selected = $selected;
         // 列处理（更改列、导出都需要）
-        _inProjection(reference, inherit);
+        Fx.inheritProjection(reference, inherit);
         // 函数区域
         inherit.fnSearch = rxSearch;
         _inheritFun(reference, inherit, 'fnSelect');

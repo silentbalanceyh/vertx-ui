@@ -44,7 +44,7 @@ const doMocker = (reference) =>
 const doSelect = (reference, selected = []) =>
     consume(reference, "fnSelect")(fnSelect => fnSelect(selected));
 const doSaveColumn = (reference, column = []) =>
-    consume(reference, "fnSaveView")(fnSaveView => fnSaveView(column));
+    consume(reference, "fnProjection")(fnProjection => fnProjection(column));
 
 
 const submit = (reference, executor) => {
