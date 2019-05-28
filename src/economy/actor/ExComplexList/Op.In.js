@@ -42,7 +42,16 @@ const inOpen = (reference) => {
     _inheritFun(reference, inherit, 'fnCondition');
     return inherit;
 };
-const inSearch = (reference) => _inUniform(reference);
+const inSearch = (reference) => {
+    const inherit = _inUniform(reference);
+
+    _inheritFun(reference, inherit, 'fnCondition');
+    const {FormFilter} = reference.props;
+    if (FormFilter) {
+        inherit.FormFilter = FormFilter;
+    }
+    return inherit;
+};
 
 const inExtra = (reference) => {
     const inherit = _inUniform(reference);

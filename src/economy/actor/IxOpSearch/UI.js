@@ -18,6 +18,7 @@ class Component extends React.PureComponent {
 
     render() {
         const {search, advanced, visible = false} = this.state;
+        const {FormFilter} = this.props;
         Ux.dgDebug({
             props: this.props,
             state: this.state,
@@ -34,7 +35,9 @@ class Component extends React.PureComponent {
                     ) : false}
                 </Button.Group>
                 {advanced ? (
-                    <IxDrawer $visible={visible} $config={advanced}/>
+                    <IxDrawer $visible={visible} $config={advanced}>
+                        <FormFilter/>
+                    </IxDrawer>
                 ) : false}
             </span>
         ) : false;

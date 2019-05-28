@@ -77,6 +77,7 @@ const update = (reference, $condition = {}) => {
         const term = _inNorm(reference, field);
         // 针对条件设值
         _inNormValue(term, value);
+        Ux.dgDebug(term, "[Ex] 合并查询条件", "black");
         // 条件处理
         normalized[term.field] = term.value;
     });

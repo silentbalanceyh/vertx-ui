@@ -1,13 +1,15 @@
 import React from 'react';
-import {Button} from "antd";
+import {Button, Tooltip} from "antd";
 import Op from './Op';
 import Ux from "ux";
 
 const renderEach = (op = {}) => {
-    const {text, ...rest} = op;
-    return (
-        <Button {...rest}>{text}</Button>
-    );
+    const {text, tooltip = false, ...rest} = op;
+    return tooltip ? (
+        <Tooltip title={text} placement={"top"}>
+            <Button {...rest}/>
+        </Tooltip>
+    ) : (<Button {...rest}>{text}</Button>);
 };
 
 class Component extends React.PureComponent {

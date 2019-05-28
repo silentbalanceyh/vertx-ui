@@ -7,7 +7,8 @@ export default {
     openFilter: {
         icon: "remove",
         type: "default",
-        key: "btnFilter"
+        key: "btnFilter",
+        tooltip: true,
     },
     batchEdit: {
         icon: "edit",

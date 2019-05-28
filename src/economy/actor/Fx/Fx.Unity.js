@@ -62,7 +62,7 @@ const change = (reference, executor, {
     reference.setState({
         $loading: true,
         // 专用 $condition，用于列定义，这里不更新 $condition， 会导致问题
-        $condition: filters,
+        // $condition: filters 防止第一次触发请求
         // FIX：带有 filters 的列同时使用排序和过滤时的排序不生效的问题
         $sorter: sorter
     });
