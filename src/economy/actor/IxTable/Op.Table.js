@@ -92,6 +92,10 @@ const update = (ref, previous = {}) => {
          * 1. 分页会触发
          */
         Fx.rxRefresh(ref);
+        /*
+         * 2. 更新根路径中的 $cond 变量
+         */
+        Mount.mountCond(ref);
     }
 };
 const configTable = (reference, options = {}, table = {}) => {

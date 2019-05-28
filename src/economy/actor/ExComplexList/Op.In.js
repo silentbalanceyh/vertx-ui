@@ -38,14 +38,16 @@ const _inUniform = (reference) => {
 };
 const inOpen = (reference) => {
     const inherit = _inUniform(reference);
-
-    _inheritFun(reference, inherit, 'fnCondition');
+    const {$cond} = reference.state;
+    if ($cond) {
+        // 条件对象专用
+        inherit.$cond = $cond;
+    }
     return inherit;
 };
 const inSearch = (reference) => {
     const inherit = _inUniform(reference);
 
-    _inheritFun(reference, inherit, 'fnCondition');
     const {FormFilter} = reference.props;
     if (FormFilter) {
         inherit.FormFilter = FormFilter;

@@ -1,6 +1,5 @@
 import {Modal} from 'antd';
 import U from 'underscore';
-import Unity from './Fx.Unity';
 /* 这里的 reference 是 ExComplexList */
 const rxClean = (reference) => (event) => {
     event.preventDefault();
@@ -9,7 +8,7 @@ const rxClean = (reference) => (event) => {
     // 执行函数
     const executor = () => {
         // 清除 $condition
-        Unity.doCondition(reference, {});
+        // Unity.doCondition(reference, {});
     };
     if (content) {
         Modal.confirm({
@@ -28,7 +27,7 @@ const rxFilter = (reference) => (event) => {
         const cond = {};
         searchCond.forEach(field => cond[field] = event);
         cond[""] = false;   // 需要使用 OR 连接
-        Unity.doCondition(reference, cond);
+        // Unity.doCondition(reference, cond);
     }
 };
 export default {

@@ -6,7 +6,7 @@ import Ux from "ux";
 const renderEach = (op = {}) => {
     const {text, tooltip = false, ...rest} = op;
     return tooltip ? (
-        <Tooltip title={text} placement={"top"}>
+        <Tooltip title={text} key={rest.key} placement={"top"}>
             <Button {...rest}/>
         </Tooltip>
     ) : (<Button {...rest}>{text}</Button>);
@@ -27,7 +27,7 @@ class Component extends React.PureComponent {
             props: this.props,
             state: this.state,
         }, "[Ex] IxOpOpen：", "#f66");
-        const {op = []} = this.state;
+        const op = Op.configOp(this);
         if (0 < op.length) {
             if (1 === op.length) {
                 const each = op[0];

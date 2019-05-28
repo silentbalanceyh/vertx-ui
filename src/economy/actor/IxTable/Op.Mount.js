@@ -20,6 +20,18 @@ const _getKeyword = (reference, $condition = {}) => {
     return Ux.clone($keyword);
 };
 
+const _getCond = (reference) => {
+    const {$condition = {}} = reference.state;
+    return {
+        // 读取条件信息, IxTable 中的 $condition
+        getCond: () => $condition,
+        // 设置条件信息
+        setCond: ($condition) => reference.setState({$condition}),
+        // 是否有条件
+        isCond: () => 0 < Object.keys($condition).length,
+    };
+};
+
 const mountPointer = (ref) => {
     const reference = Ux.onReference(ref, 1);
     reference.setState({
@@ -28,23 +40,15 @@ const mountPointer = (ref) => {
         // 刷新函数
         fnRefresh: () => Fx.rxRefresh(ref),
         // 读取 mocker 引用
-        fnMock: () => ref.state ? ref.state.$mocker : null,
-        // 修改 $condition 的条件函数，同时清空 $keyword
-        fnCondition: ($condition = {}) => {
-            // 清空查询条件
-            const $original = ref.state.$condition;
-            _clearFilter(ref, $original);
-            // 更改状态
-            const $keyword = _getKeyword(reference, $original);
-            ref.setState({
-                $condition,
-                $keyword,
-                $loading: true,
-            });
-        }
+        fnMock: () => ref.state ? ref.state.$mocker : null
     });
 };
-
+const mountCond = (ref) => {
+    const reference = Ux.onReference(ref, 1);
+    const {$condition = {}} = ref.state;
+    reference.setState({$cond: $condition});
+};
 export default {
-    mountPointer
+    mountPointer,
+    mountCond,
 };

@@ -48,9 +48,6 @@ const doSelect = (reference, selected = []) =>
     consume(reference, "fnSelect")(fnSelect => fnSelect(selected));
 const doSaveColumn = (reference, column = []) =>
     consume(reference, "fnProjection")(fnProjection => fnProjection(column));
-const doCondition = (reference, condition = {}) =>
-    consume(reference, "fnCondition")(fnCondition => fnCondition(condition));
-
 
 const submit = (reference, executor) => {
     reference.setState({$loading: true});
@@ -86,7 +83,6 @@ export default {
     doRefresh,  // 重新加载页面
     doSubmit,   // 提交开始
     doSaveColumn, // 存储列
-    doCondition,    // 更改 condition 中的信息
 
     ...CRUD,
 };
