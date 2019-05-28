@@ -10,9 +10,7 @@ const _isDynamic = (reference) => {
 };
 
 const _initColumns = (reference, table = {}) => {
-    const {$columns = []} = reference.props;
-    const {columns = []} = table;
-    const source = Ux.clone(columns).concat($columns);
+    const source = _saveColumn(reference, table);
     /*
      * 不造成多次改动，这里只进行列数量过滤
      * 动态列处理
@@ -24,6 +22,24 @@ const _initColumns = (reference, table = {}) => {
     table.columns = Fx.mapColumns(reference, table.columns);
 };
 
+const _saveColumn = (reference, table = {}) => {
+    const {$columns = []} = reference.props;
+    const {columns = []} = table;
+    // 合并查找
+    const source = Ux.clone(columns).concat($columns);
+    const resultColumns = [];
+    // 插入专用的map
+    const mapColumn = {};
+    source.forEach(column => {
+        if (!mapColumn[column.dataIndex]) {
+            const normalized = Ux.valueLadder(column);
+            resultColumns.push(normalized);
+            mapColumn[column.dataIndex] = true;
+        }
+    });
+    return resultColumns;
+};
+
 const _initTable = (reference, options = {}, table = {}) => {
     table = Ux.clone(table);
     // 扩展行外置处理
@@ -31,7 +47,8 @@ const _initTable = (reference, options = {}, table = {}) => {
     if (U.isFunction(rxExpandRow)) {
         table.expandedRowRender = rxExpandRow;
     }
-
+    // 必须初始化，用于列过滤
+    table.columns = _saveColumn(reference, table);
     if (Fx.testBatch(options)) {
         table.rowSelection = Assist.initSelection(reference);
     }

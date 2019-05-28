@@ -36,7 +36,12 @@ const _inUniform = (reference) => {
     Object.freeze(options); // 不允许修改 options
     return {reference, $options: options};
 };
-const inAdd = (reference) => _inUniform(reference);
+const inOpen = (reference) => {
+    const inherit = _inUniform(reference);
+
+    _inheritFun(reference, inherit, 'fnCondition');
+    return inherit;
+};
 const inSearch = (reference) => _inUniform(reference);
 
 const inExtra = (reference) => {
@@ -98,7 +103,7 @@ const inTable = (reference) => {
     }
 };
 export default {
-    inAdd,
+    inOpen,
     inBatch,
     inSearch,
     inExtra,

@@ -1,8 +1,13 @@
 export default {
-    add: {
+    openAdd: {
         icon: "plus",
         type: "primary",
         key: "btnAdd"
+    },
+    openFilter: {
+        icon: "remove",
+        type: "default",
+        key: "btnFilter"
     },
     batchEdit: {
         icon: "edit",

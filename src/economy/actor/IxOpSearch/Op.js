@@ -9,7 +9,7 @@ const init = (ref) => {
         const search = {};
         search.style = {width: "72%"};
         search.placeholder = op.placeholder;
-        search.onSearch = onSearch(ref);
+        search.onSearch = Fx.rxFilter(ref);
         state.search = search;
         /* 2. 条件处理 */
         state.cond = op.cond;
@@ -24,9 +24,6 @@ const init = (ref) => {
         }
         ref.setState(state);
     }
-};
-const onSearch = (reference) => event => {
-
 };
 const onClear = (reference) => event => {
 

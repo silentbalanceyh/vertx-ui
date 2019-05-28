@@ -6,6 +6,8 @@ import {Tabs} from "antd";
 import RENDERS from './UI.Render';
 
 import IxExtraBar from '../IxExtraBar/UI';
+import IxLoading from '../IxLoading/UI';
+
 import Ux from "ux";
 import Op from './Op';
 
@@ -66,7 +68,7 @@ class Component extends React.PureComponent {
                     })}
                 </Tabs>
             );
-        } else return false;
+        } else return (<IxLoading/>);
     }
 }
 

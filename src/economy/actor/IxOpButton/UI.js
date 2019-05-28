@@ -20,7 +20,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpButton：", "#454");
+        }, "[Ex] IxOpButton：", "#09c");
         return (
             <span>
                 {Fx.jsxDialog(this)}

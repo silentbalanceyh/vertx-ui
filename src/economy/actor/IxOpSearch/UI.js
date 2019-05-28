@@ -2,6 +2,7 @@ import React from 'react';
 import Op from './Op';
 import {Button, Input} from 'antd';
 import IxDrawer from '../IxDrawer/UI';
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {
@@ -17,6 +18,10 @@ class Component extends React.PureComponent {
 
     render() {
         const {search, advanced, visible = false} = this.state;
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxOpButton：", "#f66");
         return search ? (
             <span>
                 <Input.Search {...search}/>

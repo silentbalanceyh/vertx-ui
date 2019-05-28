@@ -1,6 +1,14 @@
 import React from 'react';
 import {Button} from "antd";
 import Op from './Op';
+import Ux from "ux";
+
+const renderEach = (op = {}) => {
+    const {text, ...rest} = op;
+    return (
+        <Button {...rest}>{text}</Button>
+    );
+};
 
 class Component extends React.PureComponent {
     state = {
@@ -12,12 +20,23 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {op} = this.state;
-        if (op) {
-            const {text, ...rest} = op;
-            return (
-                <Button {...rest}>{text}</Button>
-            );
+        /* 窗口配置 */
+        Ux.dgDebug({
+            props: this.props,
+            state: this.state,
+        }, "[Ex] IxOpOpen：", "#f66");
+        const {op = []} = this.state;
+        if (0 < op.length) {
+            if (1 === op.length) {
+                const each = op[0];
+                return renderEach(each);
+            } else {
+                return (
+                    <Button.Group>
+                        {op.map(each => renderEach(each))}
+                    </Button.Group>
+                )
+            }
         } else return false;
     }
 }

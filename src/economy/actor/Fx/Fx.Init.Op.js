@@ -1,6 +1,6 @@
 import DATA_OP from './DATA.OP';
 import Ux from 'ux';
-import Action from './Fx.Event';
+import Event from './Fx.Event';
 
 const _initOpt = (options = {}, prefix = 'op') => {
     const ops = {};
@@ -17,13 +17,20 @@ const _initButton = (opts = {}, key, opKey) => {
     button.text = opts[key];
     return button;
 };
-const initAdd = (options = {}, ref) => {
-    const opts = _initOpt(options, 'op');
-    if (opts.add) {
-        const button = _initButton(opts, 'add');
-        button.onClick = Action.rxAddTab(ref);
-        return button;
+const initOpen = (options = {}, ref) => {
+    const opts = _initOpt(options, 'op.open');
+    const buttons = [];
+    if (opts['open.add']) {
+        const button = _initButton(opts, 'open.add', 'openAdd');
+        button.onClick = Event.rxAddTab(ref);
+        buttons.push(button);
     }
+    if (opts['open.filter']) {
+        const button = _initButton(opts, 'open.filter', 'openFilter');
+        button.onClick = Event.rxClean(ref);
+        buttons.push(button);
+    }
+    return buttons;
 };
 const initBatch = (options = {}) => {
     const opts = _initOpt(options, 'op.batch');
@@ -57,7 +64,7 @@ const isBatch = (options = {}) => {
     return !Ux.isEmpty(opts);
 };
 export default {
-    initAdd,
+    initOpen,
     initBatch,
     initSearch,
     initExtra,

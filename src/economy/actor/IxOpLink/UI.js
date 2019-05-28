@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpLink：", "#06c");
+        }, "[Ex] IxOpLink：", "#09c");
         const attrs = {};
         attrs.disabled = disabled;
         return (

@@ -15,15 +15,18 @@ const write = (ref, react = {}, redux = {}) => {
 };
 const consume = (reference, name) => consumer => {
     if (reference) {
-        const fun = reference.props[name];
+        let fun = reference.props[name];
         if (U.isFunction(fun)) {
-            if (U.isFunction(consumer)) {
-                return consumer(fun);
-            } else {
-                throw new Error("[Ex] 未传入consumer");
-            }
+            return consumer(fun);
         } else {
-            throw new Error(`[Ex] ${name} 函数出错！`);
+            if (reference.state) {
+                fun = reference.state[name];
+                if (U.isFunction(fun)) {
+                    return consumer(fun);
+                }
+            } else {
+                throw new Error(`[Ex] ${name} 函数出错！`);
+            }
         }
     } else {
         throw new Error("[Ex] 空 reference 处理。");
@@ -45,6 +48,8 @@ const doSelect = (reference, selected = []) =>
     consume(reference, "fnSelect")(fnSelect => fnSelect(selected));
 const doSaveColumn = (reference, column = []) =>
     consume(reference, "fnProjection")(fnProjection => fnProjection(column));
+const doCondition = (reference, condition = {}) =>
+    consume(reference, "fnCondition")(fnCondition => fnCondition(condition));
 
 
 const submit = (reference, executor) => {
@@ -81,6 +86,7 @@ export default {
     doRefresh,  // 重新加载页面
     doSubmit,   // 提交开始
     doSaveColumn, // 存储列
+    doCondition,    // 更改 condition 中的信息
 
     ...CRUD,
 };

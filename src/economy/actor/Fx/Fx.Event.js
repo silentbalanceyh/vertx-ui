@@ -8,7 +8,8 @@ import Inherit from './Fx.Event.Inherit';
 import Tab from './Fx.Event.Tab';
 import Batch from './Fx.Event.Batch';
 import Column from './Fx.Event.Column';
-
+/* 过滤 */
+import Filter from './Fx.Event.Filter';
 /* 这里的 reference 是 IxTable */
 const rxEdit = (reference, id) => Unity.submit(reference, () => {
     // 读取记录
@@ -53,6 +54,7 @@ const rxSearch = (reference, query = {}, extraState = {}) =>
             $loading: false, // 和分页专用统一
             ...extraState
         })));
+
 export default {
     rxChange,   // 表格发生变更（分页、排序、页尺寸改变、列变更）
     rxRefresh,  // 刷新表格专用方法
@@ -61,6 +63,7 @@ export default {
     rxEdit,
     rxDelete,       // 行删除
 
+    ...Filter,  // 过滤处理专用方法
     ...Column,  // 列相关处理
     ...Batch,   // Batch批量操作
     ...Tab,     // Tab页签相关

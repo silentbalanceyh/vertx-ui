@@ -13,7 +13,7 @@ import Fx from '../Fx';
 import Op from './Op';
 
 /* 添加按钮 */
-const renderAdd = (reference) => (<IxOpOpen {...Op.inAdd(reference)}/>);
+const renderAdd = (reference) => (<IxOpOpen {...Op.inOpen(reference)}/>);
 /* 批量按钮：编辑/删除 */
 const renderBatch = (reference) => {
     const {options = {}} = reference.state;
@@ -32,10 +32,10 @@ export default (reference, item = {}) => {
     return (
         <Row>
             <Row className={Ux.ECONOMY.ROW_HEAD}>
-                <Col span={3} xl={3} xxl={2}>
+                <Col span={4} xl={4} xxl={3}>
                     {renderAdd(reference)}
                 </Col>
-                <Col span={10} xl={10} xxl={13}>
+                <Col span={9} xl={9} xxl={12}>
                     {renderBatch(reference)}
                 </Col>
                 <Col span={8} xl={8} xxl={7}>

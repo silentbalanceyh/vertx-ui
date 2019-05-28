@@ -30,7 +30,8 @@
             "tabs.list": "部门列表",
             "tabs.add": "添加部门",
             "tabs.edit": "编辑部门",
-            "op.add": "添加",
+            "op.open.add": "添加",
+            "op.open.filter": "清除",
             "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
@@ -55,7 +56,8 @@
             "ajax.file.export": "/api/dept/export",
             "ajax.file.import": "/api/dept/import",
             "confirm.delete": "确认删除当前部门记录？",
-            "confirm.batch.delete": "您确认要删除所有选中的部门记录？"
+            "confirm.batch.delete": "您确认要删除所有选中的部门记录？",
+            "confirm.clean.filter": "该操作将清空所有的查询条件，确认？"
         },
         "component": {
             "extra.export": {

@@ -28,7 +28,7 @@ const exported = {
     testBatch: Init.isBatch,
 
     // 行为专用
-    initAdd: Init.initAdd,
+    initOpen: Init.initOpen,
     initBatch: Init.initBatch,
     initSearch: Init.initSearch,
     initExtra: Init.initExtra,
