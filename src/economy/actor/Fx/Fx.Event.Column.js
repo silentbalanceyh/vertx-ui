@@ -73,7 +73,11 @@ const rxExport = (reference) => (event) => {
             Unity.doClose(reference);
         });
 };
+const rxImport = (reference) => (event) => {
+
+};
 export default {
     rxSaveColumn,
     rxExport,
+    rxImport,
 };
