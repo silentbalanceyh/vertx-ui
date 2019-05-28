@@ -3,6 +3,7 @@ import Op from './Op';
 import {Button, Input} from 'antd';
 import IxDrawer from '../IxDrawer/UI';
 import Ux from "ux";
+import {LoadingAlert} from "web";
 
 class Component extends React.PureComponent {
     state = {
@@ -18,12 +19,18 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {search, advanced, visible = false, searchText = ""} = this.state;
+        const {
+            search, visible = false,
+            searchText = "",
+            advanced,
+            advancedNotice
+        } = this.state;
         const {FormFilter} = this.props;
         Ux.dgDebug({
             props: this.props,
             state: this.state,
         }, "[Ex] IxOpButton：", "#3c3");
+        const $inited = Op.initFilters(this);
         return search ? (
             <span>
                 <Input.Search {...search} onChange={Op.onChange(this)}
@@ -38,7 +45,10 @@ class Component extends React.PureComponent {
                 </Button.Group>
                 {advanced ? (
                     <IxDrawer $visible={visible} $config={advanced}>
-                        <FormFilter/>
+                        {advancedNotice ? (
+                            <LoadingAlert $alert={advancedNotice} $type={"warning"}/>
+                        ) : false}
+                        <FormFilter $inited={$inited} {...this.props}/>
                     </IxDrawer>
                 ) : false}
             </span>

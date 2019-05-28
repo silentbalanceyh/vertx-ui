@@ -1,4 +1,5 @@
 import Fx from '../Fx';
+import Ux from 'ux';
 
 const init = (ref) => {
     const {$options = {}} = ref.props;
@@ -21,9 +22,29 @@ const init = (ref) => {
                 maskClosable: false,
                 onClose: () => ref.setState({visible: false})
             };
+            /* 4. 高级搜索提示 */
+            state.advancedNotice = $options['search.advanced.notice'];
         }
         ref.setState(state);
     }
+};
+const initFilters = (ref) => {
+    const data = {};
+    const {$query = {}} = ref.props;
+    const criteria = $query.criteria;
+    if (!Ux.isEmpty(criteria)) {
+        Object.keys(criteria).forEach(key => {
+            if ("" === key) {
+                data.connector = criteria[""] ? "AND" : "OR";
+            } else {
+                data[key] = criteria[key];
+            }
+        })
+    } else {
+        // 默认连接符使用的是 AND
+        data.connector = "AND";
+    }
+    return data;
 };
 const onClear = (reference) => event => {
     event.preventDefault();
@@ -41,6 +62,7 @@ const onOpen = (reference) => event => {
 };
 export default {
     init,
+    initFilters,
     onClear,
     onOpen,
     onChange,

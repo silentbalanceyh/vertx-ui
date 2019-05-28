@@ -19,8 +19,15 @@
             "search.enabled": true,
             "search.placeholder": "名称/代码",
             "search.advanced": true,
-            "search.advanced.width": "30%",
+            "search.advanced.width": "40%",
             "search.advanced.title": "搜索部门",
+            "search.advanced.notice": {
+                "message": "注意！",
+                "description": [
+                    "如果之前您已经使用过基础搜索，基础搜索值会自动填充表单。",
+                    "本表单的\"\"清除\"不会清除基础搜索的值。"
+                ]
+            },
             "tabs.list": "部门列表",
             "tabs.add": "添加部门",
             "tabs.edit": "编辑部门",

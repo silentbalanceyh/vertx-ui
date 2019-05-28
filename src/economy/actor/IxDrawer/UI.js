@@ -1,6 +1,7 @@
 import React from 'react';
 import {Drawer} from 'antd';
 import Ux from "ux";
+import './Cab.less';
 
 class Component extends React.PureComponent {
     render() {
@@ -10,7 +11,7 @@ class Component extends React.PureComponent {
             state: this.state,
         }, "[Ex] IxDrawer：", "#c33");
         return (
-            <Drawer {...$config} visible={$visible}>
+            <Drawer {...$config} visible={$visible} className={"ex-drawer"}>
                 {children}
             </Drawer>
         );

@@ -55,6 +55,8 @@ const inSearch = (reference) => {
     if (FormFilter) {
         inherit.FormFilter = FormFilter;
     }
+    const {query = {}} = reference.state;
+    inherit.$query = query;   // 拷贝则只提供镜像
     return inherit;
 };
 
