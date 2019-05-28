@@ -48,6 +48,10 @@ const doSelect = (reference, selected = []) =>
     consume(reference, "fnSelect")(fnSelect => fnSelect(selected));
 const doSaveColumn = (reference, column = []) =>
     consume(reference, "fnProjection")(fnProjection => fnProjection(column));
+const doCondition = (reference) =>
+    consume(reference, "fnCondition")(fnCondition => fnCondition());
+const doQueryMerge = (reference, query = {}) =>
+    consume(reference, "fnQueryMerge")(fnQueryMerge => fnQueryMerge(query));
 
 const submit = (reference, executor) => {
     reference.setState({$loading: true});
@@ -83,6 +87,8 @@ export default {
     doRefresh,  // 重新加载页面
     doSubmit,   // 提交开始
     doSaveColumn, // 存储列
+    doCondition,  // 调用 fnCondition 清除 IxTable 中的 $condition 变量
+    doQueryMerge, // 调用 fnQueryMerge 合并外层的 $query 变量
 
     ...CRUD,
 };

@@ -91,7 +91,8 @@ const viewSwitch = (reference, view = "list", key) => {
 const projection = (reference, projection = []) => {
     let {query = {}} = reference.state ? reference.state : {};
     query = Ux.clone(query);
-    query.projection = Ux.clone(projection.map(projection => projection.key));
+    // 修改 query
+    query.projection = Ux.clone(projection.map(projection => projection.dataIndex));
     return {query, projection};
 };
 export default {

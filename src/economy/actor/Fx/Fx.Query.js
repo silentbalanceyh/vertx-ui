@@ -22,7 +22,7 @@ const criteria = (reference) => (pagination, filters, sorter) => {
         pagination,
         filters,
         sorter
-    }, "[Ex] IxTable 改变条件：", "#f96");
+    }, "[Ex] 调用 Query.criteria 改变条件：", "#f96");
     const queryRef = Cond.initFilters(reference, filters);
     if (pagination) {
         const {current, pageSize} = pagination;

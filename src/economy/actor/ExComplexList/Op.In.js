@@ -40,14 +40,17 @@ const inOpen = (reference) => {
     const inherit = _inUniform(reference);
     const {$cond} = reference.state;
     if ($cond) {
-        // 条件对象专用
+        // 条件对象专用（ $cond 引用 IxTable 中的条件）
         inherit.$cond = $cond;
     }
+    _inheritFun(reference, inherit, 'fnCondition');
     return inherit;
 };
 const inSearch = (reference) => {
     const inherit = _inUniform(reference);
-
+    // 更改 query
+    _inheritFun(reference, inherit, 'fnCondition');
+    _inheritFun(reference, inherit, 'fnQueryMerge');
     const {FormFilter} = reference.props;
     if (FormFilter) {
         inherit.FormFilter = FormFilter;
@@ -107,7 +110,6 @@ const inTable = (reference) => {
 
         // Mock环境才会使用
         Fx.Mock.mockInherit(reference, inherit);
-
         return inherit;
     } else {
         throw new Error("[Ex] rxSearch 核心函数丢失！");
