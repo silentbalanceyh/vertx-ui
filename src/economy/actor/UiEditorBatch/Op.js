@@ -75,4 +75,4 @@ const submit = (reference) => (event) => {
 export default {
     init,
     submit,
-}
+};

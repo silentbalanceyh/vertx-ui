@@ -29,5 +29,5 @@ export default (reference, config = {}) => (text, record, index) => {
             <Button icon={"minus"} disabled={0 === index}
                     onClick={onRemove(reference, text)}/>
         </Button.Group>
-    )
+    );
 };

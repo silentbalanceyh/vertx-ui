@@ -12,7 +12,7 @@ const _mockFlow = (reference, supplier) => {
         return {
             mock: FULL.mock && CURRENT.mock,
             data
-        }
+        };
     } else {
         return {mock: false};
     }
@@ -71,9 +71,9 @@ const rxExport = (reference) => (event) => {
             UI.jsxSuccess(reference);
             /* 关闭浮游 */
             Unity.doClose(reference);
-        })
+        });
 };
 export default {
     rxSaveColumn,
     rxExport,
-}
+};

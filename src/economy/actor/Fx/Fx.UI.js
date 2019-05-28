@@ -1,5 +1,5 @@
 import React from 'react';
-import {message} from 'antd'
+import {message} from 'antd';
 import Window from '../IxDialog/UI';
 import Popover from '../IxPopover/UI';
 import UIS from '../Ex/UI';
@@ -27,7 +27,7 @@ const jsxDialog = (reference, jsx) => {
             <Window {...config}>
                 {jsxResult}
             </Window>
-        )
+        );
     } else if (popover) {
         /* 渲染浮游窗口 */
         config.$config = popover;
@@ -36,7 +36,7 @@ const jsxDialog = (reference, jsx) => {
             <Popover {...config}>
                 {jsxResult}
             </Popover>
-        )
+        );
     } else return false;
 };
 const jsxComponent = (reference, jsx) => {
@@ -59,7 +59,7 @@ const jsxComponent = (reference, jsx) => {
                 <Component {...reference.props}
                     // 会出现覆盖，这里生成的 $config 会覆盖掉 原始的 $config
                            {...inherit}/>
-            )
+            );
         }
     } else return jsx;
 };
@@ -110,4 +110,4 @@ export default {
     jsxSuccess,     // 成功消息
     jsxFailure,     // 失败消息
     cssGrid
-}
+};

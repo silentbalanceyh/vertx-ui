@@ -11,9 +11,9 @@ const mountPointer = (ref) => {
         fnRefresh: () => Fx.rxRefresh(ref),
         // 读取 mocker 引用
         fnMock: () => ref.state ? ref.state.$mocker : null
-    })
+    });
 };
 
 export default {
     mountPointer
-}
+};

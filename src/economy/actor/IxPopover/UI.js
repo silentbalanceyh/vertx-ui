@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from "ux";
 import {Popover} from 'antd';
 import renderTitle from './UI.Title';
@@ -26,4 +26,4 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+export default Component;

@@ -41,7 +41,7 @@ class Component extends React.PureComponent {
                                             {item.label}
                                         </Checkbox>
                                     </div>
-                                )
+                                );
                             })}
                         </Checkbox.Group>
                         {$button ? (
@@ -51,8 +51,8 @@ class Component extends React.PureComponent {
                     </Col>
                 </Row>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

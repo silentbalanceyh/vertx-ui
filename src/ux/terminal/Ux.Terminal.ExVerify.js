@@ -1,9 +1,5 @@
 import Verify from './Ux.Terminal.Verify';
 
-const calcKey = (key) => {
-    if (!key.startsWith("_")) key = `_${key}`;
-    return key;
-};
 /*
 const verifyDynamic = (reference, key, options) => {
     key = calcKey(key);
@@ -41,4 +37,4 @@ const ensureGrid = (reference = {}, key, grid = {}) => {
 
 export default {
     ensureGrid
-}
+};

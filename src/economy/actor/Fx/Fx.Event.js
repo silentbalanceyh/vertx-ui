@@ -19,7 +19,7 @@ const rxEdit = (reference, id) => Unity.submit(reference, () => {
         reference.setState({$loading: false});
         /* 上层引用处理 */
         Tab.rxEditTab(reference, id, data);
-    })
+    });
 });
 
 /* 这里的 reference 是 IxTable */

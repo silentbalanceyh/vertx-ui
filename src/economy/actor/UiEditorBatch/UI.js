@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
                     onClick: Op.submit(reference)
                 })}
             </div>
-        )
+        );
     }
 }
 

@@ -20,7 +20,7 @@ const consume = (reference, name) => consumer => {
             if (U.isFunction(consumer)) {
                 return consumer(fun);
             } else {
-                throw new Error("[Ex] 未传入consumer")
+                throw new Error("[Ex] 未传入consumer");
             }
         } else {
             throw new Error(`[Ex] ${name} 函数出错！`);
@@ -83,4 +83,4 @@ export default {
     doSaveColumn, // 存储列
 
     ...CRUD,
-}
+};

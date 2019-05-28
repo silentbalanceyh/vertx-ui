@@ -17,5 +17,5 @@ export default (reference, config) => {
                         }}/>
             </Col>
         </Row>
-    )
+    );
 };

@@ -19,14 +19,14 @@ const RENDERS = {
                 {options.map(option => (
                     <Radio value={option.value} key={option.key}>{option.label}</Radio>))}
             </Radio.Group>
-        )
+        );
     },
     "DATE": (reference, config = {}) => (key) => {
         const {format = "YYYY/MM/DD"} = config;
         return (
             <DatePicker format={format} className={"ux-readonly"}
                         onChange={onInput(reference, key)}/>
-        )
+        );
     }
 };
 const onRender = (reference, column = {}, renders = {}) => {
@@ -50,4 +50,4 @@ export default (reference, config = {}, renders = {}) => (text, record, index) =
         const jsx = RENDERS["TEXT"](reference, column);
         return jsx(record.key, text);
     }
-}
+};

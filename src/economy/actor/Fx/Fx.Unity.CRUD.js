@@ -23,4 +23,4 @@ const doUpdate = (reference, executor, records) => response => {
 export default {
     doDelete,
     doUpdate,
-}
+};

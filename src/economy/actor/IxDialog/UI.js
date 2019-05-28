@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
             status.confirmLoading = $loading;
             status.cancelButtonProps = {
                 loading: $loading,
-            }
+            };
         }
         Ux.dgDebug({
             props: this.props,

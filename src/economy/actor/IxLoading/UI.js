@@ -14,8 +14,8 @@ class Component extends React.PureComponent {
             <div style={style} className={"ex-content"}>
                 <Spin size="large"/>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

@@ -45,4 +45,4 @@ const verify = type => (ref) => {
 export default {
     init,
     verify
-}
+};

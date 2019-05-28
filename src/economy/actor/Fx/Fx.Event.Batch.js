@@ -44,10 +44,10 @@ const rxBatchEdit = (reference) => (records = []) => {
                     UI.jsxSuccess(reference);
                     // 关闭窗口
                     Unity.doClose(reference);
-                }, records))
+                }, records));
     });
 };
 export default {
     rxBatchDelete,
     rxBatchEdit,
-}
+};

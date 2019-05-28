@@ -35,7 +35,7 @@ const editTab = (reference, data = {}) => {
         tab: options['tabs.edit'],
         type: "edit",
         index: tabs.items.length
-    }))
+    }));
 };
 const closeTab = (reference, key) => {
     let {tabs = {}} = reference.state;
@@ -92,7 +92,7 @@ const projection = (reference, projection = []) => {
     let {query = {}} = reference.state ? reference.state : {};
     query = Ux.clone(query);
     query.projection = Ux.clone(projection.map(projection => projection.key));
-    return {query, projection}
+    return {query, projection};
 };
 export default {
     Tab: {

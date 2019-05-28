@@ -37,7 +37,7 @@ const onSelected = (reference, defaultSelected) => ($selected) => {
         reference.setState({$selected});
     } else {
         if (defaultSelected) {
-            reference.setState({$selected: defaultSelected})
+            reference.setState({$selected: defaultSelected});
         } else {
             reference.setState({$selected});
         }
@@ -47,4 +47,4 @@ const onSelected = (reference, defaultSelected) => ($selected) => {
 export default {
     onSelected,
     init
-}
+};

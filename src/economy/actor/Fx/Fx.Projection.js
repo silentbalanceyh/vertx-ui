@@ -44,7 +44,7 @@ const initColumn = (reference) => {
                      * 3. query：根据列更新的 query 信息
                      * 4. 闭合 readyColumn = true
                      */
-                    reference.setState({columns, ...state, readyColumn: true})
+                    reference.setState({columns, ...state, readyColumn: true});
                 });
         }
     } else {
@@ -130,4 +130,4 @@ export default {
     initColumn, // 初始化列信息，位于顶层ComplexList中
     initColumnWithSelected, // 初始化 选中 和 所有 （子组件中使用）
     inheritProjection,  // 从ComplexList继承
-}
+};

@@ -60,4 +60,4 @@ export default {
     rxCloseTab,     // 关闭某个 Tab页
     rxEditTab,      // 编辑 Tab 页呈现
     rxOpenDialog,   // 打开窗口统一函数
-}
+};

@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import Ux from "ux";
 import Op from './Op';
 import {Checkbox} from 'antd';
@@ -36,15 +36,15 @@ class Component extends React.PureComponent {
                                     {item.label}
                                 </Checkbox>
                             </div>
-                        )
+                        );
                     })}
                 </Checkbox.Group>
                 <div className={"button"}>
                     {Ux.rtGroup(this, $buttons)}
                 </div>
             </div>
-        )
+        );
     }
 }
 
-export default Component
+export default Component;

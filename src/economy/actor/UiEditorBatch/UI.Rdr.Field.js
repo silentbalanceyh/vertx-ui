@@ -34,4 +34,4 @@ export default (reference, config = {}) => (text, record, index) => {
             ))}
         </Select>
     );
-}
+};
