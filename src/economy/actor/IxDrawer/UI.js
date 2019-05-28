@@ -10,6 +10,7 @@ class Component extends React.PureComponent {
             props: this.props,
             state: this.state,
         }, "[Ex] IxDrawer：", "#c33");
+        $config.destroyOnClose = true;  // 必须有
         return (
             <Drawer {...$config} visible={$visible} className={"ex-drawer"}>
                 {children}

@@ -1,5 +1,4 @@
 import Fx from '../Fx';
-import Ux from 'ux';
 
 const init = (ref) => {
     const {$options = {}} = ref.props;
@@ -28,20 +27,20 @@ const init = (ref) => {
         ref.setState(state);
     }
 };
+/*
+ * 根据 SearchText 来执行初始化，比搜索过后的内容更实时
+ */
 const initFilters = (ref) => {
     const data = {};
-    const {$query = {}} = ref.props;
-    const criteria = $query.criteria;
-    if (!Ux.isEmpty(criteria)) {
-        Object.keys(criteria).forEach(key => {
-            if ("" === key) {
-                data.connector = criteria[""] ? "AND" : "OR";
-            } else {
-                data[key] = criteria[key];
-            }
-        })
+    const {$options = {}} = ref.props;
+    const {searchText = ""} = ref.state;
+    const cond = $options['search.cond'];
+    if (searchText) {
+        // 有值
+        data.connector = "OR";
+        cond.forEach(key => data[key] = searchText);
     } else {
-        // 默认连接符使用的是 AND
+        // 无值
         data.connector = "AND";
     }
     return data;

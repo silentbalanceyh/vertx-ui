@@ -30,7 +30,6 @@ class Component extends React.PureComponent {
             props: this.props,
             state: this.state,
         }, "[Ex] IxOpButton：", "#3c3");
-        const $inited = Op.initFilters(this);
         return search ? (
             <span>
                 <Input.Search {...search} onChange={Op.onChange(this)}
@@ -48,7 +47,7 @@ class Component extends React.PureComponent {
                         {advancedNotice ? (
                             <LoadingAlert $alert={advancedNotice} $type={"warning"}/>
                         ) : false}
-                        <FormFilter $inited={$inited} {...this.props}/>
+                        <FormFilter $inited={Op.initFilters(this)} {...this.props}/>
                     </IxDrawer>
                 ) : false}
             </span>
