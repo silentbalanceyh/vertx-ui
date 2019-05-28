@@ -18,7 +18,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpExtra：", "#f66");
+        }, "[Ex] IxOpExtra：", "#3c3");
         return (
             <Button.Group style={{float: "right"}}>
                 {op.map(button => <IxOpButton key={button.key} $config={button}

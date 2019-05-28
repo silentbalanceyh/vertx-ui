@@ -29,7 +29,13 @@ const rxFilter = (reference) => (event) => {
         // Unity.doCondition(reference);
         // 构造查询条件
         const cond = {};
-        searchCond.forEach(field => cond[field] = event);
+        searchCond.forEach(field => {
+            if (event) {
+                cond[field] = event;
+            } else {
+                cond[field] = "__DELETE__";
+            }
+        });
         cond[""] = false;   // 需要使用 OR 连接
         // 清空 $query 外层条件
         Unity.doQueryMerge(reference, cond);

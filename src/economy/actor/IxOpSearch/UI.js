@@ -7,9 +7,10 @@ import Ux from "ux";
 class Component extends React.PureComponent {
     state = {
         search: undefined,  // undefined 禁用
-        cond: [],
         advanced: undefined, // undefined 禁用
+        cond: [],
         visible: false,
+        searchText: ""
     };
 
     componentDidMount() {
@@ -17,15 +18,16 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {search, advanced, visible = false} = this.state;
+        const {search, advanced, visible = false, searchText = ""} = this.state;
         const {FormFilter} = this.props;
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpButton：", "#f66");
+        }, "[Ex] IxOpButton：", "#3c3");
         return search ? (
             <span>
-                <Input.Search {...search}/>
+                <Input.Search {...search} onChange={Op.onChange(this)}
+                              value={searchText}/>
                 &nbsp;&nbsp;
                 <Button.Group>
                     <Button icon={"redo"} htmlType={"button"} onClick={Op.onClear(this)}/>

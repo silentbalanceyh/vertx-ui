@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpBatch：", "#f66");
+        }, "[Ex] IxOpBatch：", "#3c3");
         return (
             <ul className={"ex-batch"}>
                 {$op.map(link => <IxOpLink key={link.key} $config={link}

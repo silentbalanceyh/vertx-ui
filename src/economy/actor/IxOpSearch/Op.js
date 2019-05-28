@@ -26,7 +26,14 @@ const init = (ref) => {
     }
 };
 const onClear = (reference) => event => {
-
+    event.preventDefault();
+    Fx.rxFilter(reference)("");
+    reference.setState({searchText: ""});
+};
+const onChange = (reference) => event => {
+    event.preventDefault();
+    const searchText = event.target.value;
+    reference.setState({searchText})
 };
 const onOpen = (reference) => event => {
     event.preventDefault();
@@ -36,4 +43,5 @@ export default {
     init,
     onClear,
     onOpen,
+    onChange,
 };

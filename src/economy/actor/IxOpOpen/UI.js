@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
         Ux.dgDebug({
             props: this.props,
             state: this.state,
-        }, "[Ex] IxOpOpen：", "#f66");
+        }, "[Ex] IxOpOpen：", "#3c3");
         const op = Op.configOp(this);
         if (0 < op.length) {
             if (1 === op.length) {
