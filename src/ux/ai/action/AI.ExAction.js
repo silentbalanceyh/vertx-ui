@@ -12,7 +12,7 @@ const ai2ExFilterButton = () => {
             return (
                 <Button.Group className={"ux-group"}>
                     <Button type={"primary"} icon={"search"}
-                            onClick={() => Fn.irExFilter(ref)}>{button.search}</Button>
+                            onClick={Fn.irExFilter(ref)}>{button.search}</Button>
                     <Button icon={"reload"}
                             onClick={Fn.irExClear(ref)}>{button.clear}</Button>
                 </Button.Group>

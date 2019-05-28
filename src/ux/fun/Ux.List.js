@@ -117,53 +117,51 @@ const irClear = (reference = {}) => (event) => {
 const irFilter = (reference = {}, postFun) => {
     const {form} = reference.props;
     Ux.E.fxTerminal(!form, 10020, form);
-    if (form) {
-        form.validateFieldsAndScroll((error, values) => {
-            if (error) {
-                return;
+    form.validateFieldsAndScroll((error, values) => {
+        if (error) {
+            return;
+        }
+        const params = Value.clone(values);
+        Value.valueValid(params, true);
+        const {$query, fnClose, fnQueryDefault, fnTerm} = reference.props;
+        if ($query.is()) {
+            // 读取当前的查询条件
+            let query = $query.to();
+            if (!query.criteria) query.criteria = {};
+            if (0 < Object.keys(params).length) {
+                query.criteria["$2"] = params;
+                query.criteria[""] = true;
+            } else {
+                // 读取默认的Query，表单不传值
+                if (fnQueryDefault) {
+                    query = fnQueryDefault();
+                }
             }
-            const params = Value.clone(values);
-            Value.valueValid(params, true);
-            const {$query, fnClose, fnQueryDefault, fnTerm} = reference.props;
-            if ($query.is()) {
-                // 读取当前的查询条件
-                let query = $query.to();
-                if (!query.criteria) query.criteria = {};
-                if (0 < Object.keys(params).length) {
-                    query.criteria["$2"] = params;
-                    query.criteria[""] = true;
-                } else {
-                    // 读取默认的Query，表单不传值
-                    if (fnQueryDefault) {
-                        query = fnQueryDefault();
+            // 后期处理，如果传入的话可调用
+            if (U.isFunction(postFun)) {
+                query = postFun(query, reference);
+            }
+            // 最终写查询树
+            Ux.writeTree(reference, {
+                "grid.query": query,
+                "grid.list": undefined
+            });
+            // 恢复查询条件
+            if (fnTerm) {
+                const {$cond = []} = reference.props;
+                let term = "";
+                $cond.forEach(field => {
+                    if (params.hasOwnProperty(field)) {
+                        term = params[field];
+                        return;
                     }
-                }
-                // 后期处理，如果传入的话可调用
-                if (U.isFunction(postFun)) {
-                    query = postFun(query, reference);
-                }
-                // 最终写查询树
-                Ux.writeTree(reference, {
-                    "grid.query": query,
-                    "grid.list": undefined
                 });
-                // 恢复查询条件
-                if (fnTerm) {
-                    const {$cond = []} = reference.props;
-                    let term = "";
-                    $cond.forEach(field => {
-                        if (params.hasOwnProperty(field)) {
-                            term = params[field];
-                            return;
-                        }
-                    });
-                    fnTerm(term);
-                }
-                // 关闭抽屉
-                if (fnClose) fnClose();
+                fnTerm(term);
             }
-        });
-    }
+            // 关闭抽屉
+            if (fnClose) fnClose();
+        }
+    });
 };
 const MESSAGE = {
     "c": ":field包含\":value\""

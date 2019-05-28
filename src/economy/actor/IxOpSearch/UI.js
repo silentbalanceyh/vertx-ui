@@ -47,7 +47,9 @@ class Component extends React.PureComponent {
                         {advancedNotice ? (
                             <LoadingAlert $alert={advancedNotice} $type={"warning"}/>
                         ) : false}
-                        <FormFilter $inited={Op.initFilters(this)} {...this.props}/>
+                        <FormFilter $inited={Op.initFilters(this)}
+                                    {...this.props}
+                                    fnClose={() => this.setState({visible: false})}/>
                     </IxDrawer>
                 ) : false}
             </span>
