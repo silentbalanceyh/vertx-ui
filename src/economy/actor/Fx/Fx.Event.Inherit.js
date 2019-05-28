@@ -15,7 +15,8 @@ const fnQueryMerge = (reference) => (input = {}) => {
         connector = input[""] ? "AND" : "OR";
     }
     const merged = Ux.aiCriteria(query, input, connector);
-    console.info(merged);
+    /* 2. 设置 */
+    reference.setState({query: Ux.clone(merged)});
 };
 const fnInit = (reference) => (inited = {}, extra = {}) =>
     reference.setState({

@@ -97,7 +97,7 @@ const inTable = (reference) => {
     if (U.isFunction(rxSearch)) {
         const {query = {}, config = {}, $selected = []} = reference.state;
         // 参数专用
-        inherit.$query = query;
+        inherit.$query = query;   // 拷贝则只提供镜像
         inherit.$table = config.table;
         inherit.$selected = $selected;
         // 列处理（更改列、导出都需要）

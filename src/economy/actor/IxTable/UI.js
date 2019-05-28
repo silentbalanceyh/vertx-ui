@@ -13,7 +13,8 @@ import {Table} from "antd";
  */
 class Component extends React.PureComponent {
     state = {
-        table: {},
+        $table: {},
+        $defaultQuery: {},
         $stateSorter: true,   // 排序修改成可控
     };
 

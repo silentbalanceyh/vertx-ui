@@ -6,14 +6,21 @@ const is = (reference, previous = {}) => {
     const {prevProps, prevState = {}} = previous;
     const prevQuery = prevProps.$query;
     const curQuery = reference.props.$query;
-    /* 内置改动，判断 $condition */
+    /* 1. 外置条件，判断 $query 是否改变 */
     let updated = Ux.isDiff(prevQuery, curQuery);
     if (!updated) {
-        /* 判断条件 */
+        /* 2. 内置条件，判断 $condition 是否改动 */
         const state = reference.state ? reference.state : {};
         const curCond = state.$condition;
         const prevCond = prevState.$condition;
         updated = Ux.isDiff(curCond, prevCond);
+    }
+    /* 3. defaultQuery 改变 */
+    if (!updated) {
+        const state = reference.state ? reference.state : {};
+        const curDefault = state.$defaultQuery;
+        const prevDefault = prevState.$defaultQuery;
+        updated = Ux.isDiff(curDefault, prevDefault);
     }
     return updated;
 };

@@ -71,6 +71,21 @@ const _initMocker = (ref, options = {}) => {
     }
     ref.setState(state);
 };
+const _getDefaultQuery = (ref) => {
+    const {$defaultQuery = {}} = ref.state;
+    const {$query = {}} = ref.props;
+    if (Ux.isDiff($defaultQuery, $query)) {
+        return {
+            value: Ux.clone($query),
+            updated: true,
+        }
+    } else {
+        return {
+            value: $defaultQuery,
+            updated: false,
+        }
+    }
+};
 const init = (ref) => {
     const {$options = {}, $table = {}} = ref.props;
     /* 初始化Mocker */
@@ -80,6 +95,7 @@ const init = (ref) => {
     const state = {};
     state.$table = _initTable(ref, $options, $table);
     // 加载数据专用，第一次加载
+    state.$defaultQuery = _getDefaultQuery(ref).value;
     const {$query = {}} = ref.props;
     Fx.rxSearch(ref, $query, state);
 
@@ -87,6 +103,13 @@ const init = (ref) => {
     Mount.mountPointer(ref);
 };
 const update = (ref, previous = {}) => {
+    // 更新专用
+    const query = _getDefaultQuery(ref);
+    if (query.updated) {
+        const $defaultQuery = query.value;
+        ref.setState({$defaultQuery});
+    }
+    // 特殊条件
     if (Fx.testQuery(ref, previous)) {
         /*
          * 1. 分页会触发
