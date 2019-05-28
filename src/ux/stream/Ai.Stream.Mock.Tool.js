@@ -115,7 +115,7 @@ const resultList = (data) => {
         return {
             list: data.data,
             count: data.size,
-        }
+        };
     } else {
         return data.data;
     }
@@ -138,7 +138,7 @@ const fnList = (data = {}, fnList) => {
     return consume(data, fnList,
         () => {
             throw new Error(`[Ox] 该操作对 type = ${Symbol.keyFor(type)} 的模拟数据不支持！`);
-        })
+        });
 };
 export default {
     keys,       // 读取 keys

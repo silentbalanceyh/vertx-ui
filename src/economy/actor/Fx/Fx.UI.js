@@ -1,4 +1,5 @@
 import React from 'react';
+import {message} from 'antd'
 import Window from '../IxDialog/UI';
 import Popover from '../IxPopover/UI';
 import UIS from '../Ex/UI';
@@ -88,8 +89,25 @@ const cssGrid = (config = {}) => {
     }
     return style;
 };
+const jsxFailure = (reference) => {
+    // 特殊配置节点（$config）
+    const {$config: {modal = {}}} = reference.props;
+    message.config({maxCount: 1});
+    const {error = {}} = modal;
+    message.error(error.content, 2);
+};
+
+const jsxSuccess = (reference) => {
+    // 特殊配置节点（$config）
+    const {$config: {modal = {}}} = reference.props;
+    message.config({maxCount: 1});
+    const {success = {}} = modal;
+    message.success(success.content, 1.2);
+};
 export default {
     jsxDialog,
     jsxComponent,
+    jsxSuccess,     // 成功消息
+    jsxFailure,     // 失败消息
     cssGrid
 }

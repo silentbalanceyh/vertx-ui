@@ -104,7 +104,9 @@ const _initSelected = (reference) => {
     }
     // 列过滤
     return mapColumns(reference, source)
-        .map(column => column.dataIndex);
+        .map(column => column.dataIndex)
+        // 选择项处理（过滤掉 key 信息）
+        .filter(key => 'key' !== key);
 };
 const _initOptions = (reference, config = {}) => {
     const {$columns = []} = reference.props;

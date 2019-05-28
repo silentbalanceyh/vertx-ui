@@ -1,4 +1,5 @@
 import Unity from './Fx.Unity';
+import UI from './Fx.UI';
 import Mock from './Fx.Mock';
 import Ux from 'ux';
 /*
@@ -39,6 +40,8 @@ const rxBatchEdit = (reference) => (records = []) => {
                     Unity.doSubmit(reference, false);
                     // 重新Refresh，同时会关闭 loading
                     Unity.doRefresh(reference);
+                    // 成功消息提示
+                    UI.jsxSuccess(reference);
                     // 关闭窗口
                     Unity.doClose(reference);
                 }, records))

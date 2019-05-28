@@ -40,6 +40,8 @@ const exported = {
 
     jsxDialog: Jsx.jsxDialog,
     jsxComponent: Jsx.jsxComponent,
+    jsxFailure: Jsx.jsxFailure,
+    jsxSuccess: Jsx.jsxSuccess,
     // 调用函数
     doLoading: Unity.doLoading,
     doRefresh: Unity.doRefresh,

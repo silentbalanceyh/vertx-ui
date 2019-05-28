@@ -2,8 +2,8 @@ import renderOp from './UI.Rdr.Op';
 import renderField from './UI.Rdr.Field';
 import renderValue from './UI.Rdr.Value';
 import Ux from "ux";
-import {message} from 'antd'
 import U from 'underscore';
+import Fx from '../Fx';
 
 const initOp = (reference, config) => {
     const column = {};
@@ -69,10 +69,7 @@ const submit = (reference) => (event) => {
             fnEdit(records);
         }
     } else {
-        const {config: {modal = {}}} = reference.props;
-        message.config({maxCount: 1});
-        const {error = {}} = modal;
-        message.error(error.content, 2);
+        Fx.jsxFailure(reference);
     }
 };
 export default {

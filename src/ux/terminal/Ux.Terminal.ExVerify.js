@@ -1,12 +1,10 @@
 import Verify from './Ux.Terminal.Verify';
-import E from "../Ux.Error";
-import U from "underscore";
 
 const calcKey = (key) => {
     if (!key.startsWith("_")) key = `_${key}`;
     return key;
 };
-
+/*
 const verifyDynamic = (reference, key, options) => {
     key = calcKey(key);
     if (!options) {
@@ -18,7 +16,7 @@ const verifyDynamic = (reference, key, options) => {
             return E.fxMessageError(10103, key, 'options');
         }
     }
-};
+}; */
 /**
  * 专用ComplexList的错误检测函数
  * @param reference
