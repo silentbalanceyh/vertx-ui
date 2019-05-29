@@ -1,4 +1,5 @@
 import Value from "../../Ux.Value";
+import Dialog from '../../Ux.Dialog';
 import Cv from "../../cv/Ux.Constant";
 import U from 'underscore';
 
@@ -34,16 +35,77 @@ const _validated = (reference) => new Promise((resolve, reject) => {
         }
     });
 });
+const getModal = (reference) => {
+    const {$addKey} = reference.props;
+    return !!$addKey ? "add" : "edit";
+};
 const ai2Form = (reference, supplier) => (event) => {
     event.preventDefault();
+    const modal = getModal(reference);
+    const {$options = {}} = reference.props;
+    const to = $options['submit.to'];
     return _validated(reference).then(data => {
         /*
          * 提取Mock专用函数
          */
-        const {fnMock, fnLoading} = reference.props;
+        const {fnMock, fnSubmitting, fnLoading} = reference.props;
+        /* 模拟函数 */
         let mockData = {};
         if (U.isFunction(fnMock)) {
             mockData = fnMock(data)
+        }
+        /* 表单提交 */
+        if (U.isFunction(fnSubmitting)) {
+            fnSubmitting();
+        }
+        /* 加载效果 */
+        if (U.isFunction(fnLoading)) {
+            fnLoading();
+        }
+        return supplier(data, mockData);
+    }).then(response => {
+        /* 判断是 Message 还是 Dialog */
+        const mode = $options['submit.response'];
+        const key = `submit.${modal}.modal`;
+        const modalKey = $options[key];
+        if ("MESSAGE" === mode) {
+            return new Promise((resolve) => {
+                Dialog.showMessage(reference, modalKey, null, response);
+                resolve(response);
+            })
+        } else {
+            // 默认 DIALOG
+            return new Promise((resolve) => Dialog.showDialog(reference, modalKey,
+                () => resolve(response), response, null))
+        }
+    }).then(response => {
+        const {fnClose, fnView, fnSubmitting, fnRefresh} = reference.props;
+        // 防止编辑按钮的 loading
+        if (U.isFunction(fnSubmitting)) {
+            fnSubmitting(false);
+        }
+        if ("add" === modal) {
+            if ("EDIT" === to) {
+                // 直接进入 EDIT 界面
+                if (U.isFunction(fnView)) {
+                    fnView(response);
+                }
+            } else {
+                // 默认 LIST
+                if (U.isFunction(fnClose)) {
+                    fnClose();
+                }
+                if (U.isFunction(fnRefresh)) {
+                    fnRefresh();
+                }
+            }
+        } else {
+            if (U.isFunction(fnClose)) {
+                fnClose();
+            }
+            if (U.isFunction(fnRefresh)) {
+                fnRefresh();
+            }
         }
     });
 };

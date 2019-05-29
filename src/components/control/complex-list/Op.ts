@@ -14,15 +14,7 @@ const $opSave = (reference: any) => Ux.ai2Event(reference,
  * @param reference
  */
 const $opAdd = (reference: any) => Ux.Ex.ai2Form(reference,
-    (values, mockData) => {
-        console.info(values, mockData);
-    });
-/*
- Ux.ai2Event(reference,
-(values, mockData) => Ux.ajaxPost("/api/dept", values, _mocker(mockData))
-    .then(data => Ux.showDialog(reference, "add",
-        () => Ux.rxAct(reference).response(data).close().to())))
- */
+    (values, mockData) => Ux.ajaxPost("/api/dept", values, mockData));
 /**
  * 主表单中的重置数据（重置专用）
  * @param reference

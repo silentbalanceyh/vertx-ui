@@ -109,7 +109,8 @@ const update = (data, records, keyField = 'key') => {
     return resultList(data);
 };
 const add = (data, records) => {
-    let result = Value.clone(data.data);
+    let original = Value.clone(data.data);
+    let result = [];
     if (records) {
         if (U.isArray(records)) {
             records.forEach(record => result.push(record));
@@ -117,6 +118,7 @@ const add = (data, records) => {
             result.push(records);
         }
     }
+    original.forEach(old => result.push(old));
     data.data = result;
     return resultList(data);
 };

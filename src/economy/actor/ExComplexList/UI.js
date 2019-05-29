@@ -32,6 +32,7 @@ import Op from './Op';
     state: {
         tabs: {},
         options: {},     // 所有配置项
+        $submitting: false, // 控制右上角的提交，防止和底层的 $loading 变量冲突
     }
 })
 class Component extends React.PureComponent {
@@ -45,7 +46,7 @@ class Component extends React.PureComponent {
             const $tabs = Fn.configTab(this);
             const {items = [], ...rest} = $tabs;
             /* options */
-            const {options = {}} = this.state;
+            const {options = {}, $submitting = false} = this.state;
             const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
             Ux.dgDebug({
                 props: this.props,
@@ -56,7 +57,9 @@ class Component extends React.PureComponent {
             return (
                 <Tabs {...rest}
                       tabBarExtraContent={
-                          <IxExtra {...this.props} $options={options} $view={view}/>
+                          <IxExtra {...this.props} $options={options}
+                                   $view={view}
+                                   $loading={$submitting}/>
                       }
                       className={className}>
                     {items.map(item => {

@@ -1,6 +1,7 @@
 import Fx from '../Fx';
 import U from 'underscore';
 import Ux from 'ux';
+import React from "react";
 /*
  * 函数注入函数
  */
@@ -94,11 +95,36 @@ const inBatch = (reference) => {
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;
 };
-const inFormAdd = (reference) => {
+const inFormAdd = (reference, item = {}) => {
     const inherit = _inUniform(reference);
     inherit.fnMock = Fx.Mock.mockRecord(reference);
+    // 处理 Loading
     _inheritFun(reference, inherit, 'fnLoading');
+    // 处理 Refresh
     _inheritFun(reference, inherit, 'fnRefresh');
+    // 特殊函数，只在子表单提交中使用
+    inherit.fnSubmitting = ($submitting = true) =>
+        reference.setState({$submitting});
+    // 回调函数注入
+    inherit.fnClose = Fx.rxCloseTab(reference, item.key);
+    inherit.fnView = Fx.rxSwitchView(reference);
+    inherit.$addKey = item.key;
+    return inherit;
+};
+const inFormEdit = (reference, item = {}) => {
+    const inherit = _inUniform(reference);
+    inherit.fnMock = Fx.Mock.mockRecord(reference);
+    // 处理 Loading
+    _inheritFun(reference, inherit, 'fnLoading');
+    // 处理 Refresh
+    _inheritFun(reference, inherit, 'fnRefresh');
+    // 特殊函数，只在子表单提交中使用
+    inherit.fnSubmitting = ($submitting = true) =>
+        reference.setState({$submitting});
+    // 回调函数注入
+    inherit.fnClose = Fx.rxCloseTab(reference, item.key);
+    const {$inited = {}} = reference.state;
+    inherit.$inited = $inited;
     return inherit;
 };
 const inTable = (reference) => {
@@ -132,4 +158,5 @@ export default {
     inExtra,
     inTable,
     inFormAdd,
+    inFormEdit,
 };

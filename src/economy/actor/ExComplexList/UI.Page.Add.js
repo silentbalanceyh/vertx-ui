@@ -8,10 +8,9 @@ export default (reference, item = {}) => {
     // 添加的时候activeKey就应该只有一个，就是item.key
     // 「LIMIT」限制继承
     const limitation = Ux.toLimitation(reference.props, Fx.Limit.Form.Add);
-    const inherit = Op.inFormAdd(reference);
+    const inherit = Op.inFormAdd(reference, item);
     return Component ? (
-        <Component $addKey={item.key}
-                   {...limitation}
+        <Component {...limitation}
                    {...inherit}/>
     ) : false;
 };

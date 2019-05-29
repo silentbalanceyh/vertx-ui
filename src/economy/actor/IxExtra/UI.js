@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
             props: this.props,
             state: this.state,
         }, "[Ex] IxExtra：", "#063");
-        const {$view = "list", $options = {}} = this.props;
+        const {$view = "list", $options = {}, $loading = false} = this.props;
         const op = Fx.initBar($options, $view);
         return ("list" === $view) ? false : (
             <Button.Group style={{float: "right"}}>
@@ -26,12 +26,14 @@ class Component extends React.PureComponent {
                         const {key, ...rest} = config;
                         return (
                             <Tooltip key={key} placement={"top"} title={text}>
-                                <Button {...rest} htmlType={"button"}/>
+                                <Button {...rest} htmlType={"button"}
+                                        loading={$loading}/>
                             </Tooltip>
                         );
                     } else {
                         return (
-                            <Button {...config} htmlType={"button"}>
+                            <Button {...config} htmlType={"button"}
+                                    loading={$loading}>
                                 {text}
                             </Button>
                         );
