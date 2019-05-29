@@ -108,6 +108,18 @@ const update = (data, records, keyField = 'key') => {
     data.data = result;
     return resultList(data);
 };
+const add = (data, records) => {
+    let result = Value.clone(data.data);
+    if (records) {
+        if (U.isArray(records)) {
+            records.forEach(record => result.push(record));
+        } else {
+            result.push(records);
+        }
+    }
+    data.data = result;
+    return resultList(data);
+};
 const resultList = (data) => {
     const {type} = data;
     if (Symbol.for("LIST") === type) {
@@ -148,6 +160,7 @@ export default {
     // ---- 返回 source ----
     remove,     // 修改 data，返回 source
     update,     // 修改 data，返回 source
+    add,        // 修改 data，返回 source
     // 执行
     fnList,
 };

@@ -46,6 +46,7 @@
             "column.module": "res.department",
             "submit.add": "$opAdd",
             "submit.add.text": "添加",
+            "submit.add.submitted": "DIALOG",
             "submit.edit": "$opSave",
             "submit.edit.text": "保存",
             "submit.reset": "$opReset",

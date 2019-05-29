@@ -96,8 +96,27 @@ const mockDeleteWithMocker = (reference, id, $mocker) =>
     mockSingleWithMocker(reference, (mocker) => mocker.remove(id), $mocker);
 const mockUpdateWithMocker = (reference, records, $mocker) =>
     mockSingleWithMocker(reference, (mocker) => mocker.update(records), $mocker);
-const mockRecord = (reference, update = false) => {
-
+/*
+ * 添加、修改的模拟
+ */
+const mockRecord = (reference, isUpdate = false) => {
+    const {fnMock} = reference.state;
+    if (U.isFunction(fnMock)) {
+        const $mocker = fnMock();
+        return (updated = {}) => {
+            const mockData = {mock: true};
+            if (isUpdate) {
+                // 编辑
+                mockData.data = $mocker.updateAndGet(updated);
+            } else {
+                // 添加
+                mockData.data = $mocker.addAndGet(updated);
+            }
+            return mockData;
+        };
+    } else {
+        return () => ({mock: false})
+    }
 };
 export default {
     mockInit,

@@ -1,5 +1,4 @@
 import Log from '../monitor/Mt.Logger';
-import {v4} from 'uuid';
 import Value from '../Ux.Value';
 import Tool from './Ai.Stream.Mock.Tool';
 
@@ -49,23 +48,18 @@ class Mock {
         return Tool.fnList(this.data, () => Tool.update(this.data, records));
     }
 
-    add(record = {}) {
-        // 更新原始数据
-        const keys = this.keys;
-        keys.forEach(key => {
-            if (!record.hasOwnProperty(key)) {
-                record[key] = undefined;
-            }
-        });
-        record.key = v4();
-        // 保证新添加的数据在最前边
-        let $list = Value.clone(this.data.list);
-        $list = $list.reverse();
-        $list.push(record);
-        $list = $list.reverse();
-        this.data.list = $list;
-        this.data.count = this.data.length;
-        return record;
+    add(records) {
+        return Tool.fnList(this.data, () => Tool.add(this.data, records));
+    }
+
+    updateAndGet(records) {
+        Tool.fnList(this.data, () => Tool.update(this.data, records));
+        return records;
+    }
+
+    addAndGet(records) {
+        Tool.fnList(this.data, () => Tool.add(this.data, records));
+        return records;
     }
 
     /**

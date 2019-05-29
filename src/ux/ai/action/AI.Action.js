@@ -13,7 +13,7 @@ import Type from '../../Ux.Type';
 import Layout from '../layout/AI.Layout';
 import Smart from './AI.Action.Smart';
 // 内部导入
-import ExAction from './AI.ExAction';
+import Ex from './AI.Ex.Action';
 
 const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     if (!jsx.op) return false;
@@ -103,10 +103,10 @@ export default {
     aiFormButton,
     ai2FormButton,
     ai2FilterButton,
-    // ExComplexList专用
-    ...ExAction,
     // 特殊模式动态渲染
     ai2RaftButton,
     // Page中直接按钮生成
-    aiOp
+    aiOp,
+    // ExComplexList专用
+    Ex,
 };

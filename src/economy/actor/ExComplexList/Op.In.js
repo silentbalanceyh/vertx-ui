@@ -69,6 +69,7 @@ const inExtra = (reference) => {
     // 由于要知道原始列信息
     const {config = {}} = reference.state;
     inherit.$table = config.table;
+    _inheritFun(reference, inherit, 'fnLoading');
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
     return inherit;
@@ -91,6 +92,13 @@ const inBatch = (reference) => {
     _inheritComponent(reference, inherit);
     // Mock环境才会使用
     Fx.Mock.mockInherit(reference, inherit);
+    return inherit;
+};
+const inFormAdd = (reference) => {
+    const inherit = _inUniform(reference);
+    inherit.fnMock = Fx.Mock.mockRecord(reference);
+    _inheritFun(reference, inherit, 'fnLoading');
+    _inheritFun(reference, inherit, 'fnRefresh');
     return inherit;
 };
 const inTable = (reference) => {
@@ -122,5 +130,6 @@ export default {
     inBatch,
     inSearch,
     inExtra,
-    inTable
+    inTable,
+    inFormAdd,
 };

@@ -33,45 +33,52 @@ const rxSaveColumn = (reference) => (event) => {
     event.preventDefault();
     // 提交表单
     Unity.doSubmit(reference);
-    // 保存专用（修改显示列）
-    const {$options = {}} = reference.props;
-    const {$selected = []} = reference.state;
-    return Ux.ajaxPut($options['ajax.column.save'], {}, _mockColumn(reference, $selected)).then(response => {
-        if (U.isArray(response)) {
-            /* 重复提交完成 */
-            Unity.doSubmit(reference, false);
-            /* 更新列基本信息 */
-            Unity.doSaveColumn(reference, response);
-            // 成功消息提示
-            UI.jsxSuccess(reference);
-            /* 关闭浮游 */
-            Unity.doClose(reference);
-        }
-    });
+    Unity.doLoading(reference);
+    Ux.toLoading(() => {
+        // 保存专用（修改显示列）
+        const {$options = {}} = reference.props;
+        const {$selected = []} = reference.state;
+        return Ux.ajaxPut($options['ajax.column.save'], {}, _mockColumn(reference, $selected)).then(response => {
+            if (U.isArray(response)) {
+                /* 重复提交完成 */
+                Unity.doSubmit(reference, false);
+                /* 更新列基本信息 */
+                Unity.doSaveColumn(reference, response);
+                // 成功消息提示
+                UI.jsxSuccess(reference);
+                /* 关闭浮游 */
+                Unity.doClose(reference);
+                /* 加载效果 */
+                Unity.doLoading(reference, false);
+            }
+        });
+    })
 };
 const rxExport = (reference) => (event) => {
     event.preventDefault();
     // 提交表单
     Unity.doSubmit(reference);
-    // 导出专用（根据选中列导出）
-    const {$options = {}} = reference.props;
-    const {$selected = []} = reference.state;
-    // 参数信息
-    const params = {
-        columns: $selected,
-        format: 'xlsx',     // TODO: 后边支持多种格式
-    };
-    return Ux.ajaxPull($options['ajax.file.export'], params, _mockDownload(reference))
-        .then(file => {
-            // 重复提交完成
-            Unity.doSubmit(reference, false);
-            // 下载保存
-            saveAs(file, `${Ux.randomUUID()}.${params.format}`);
-            // 成功消息提示
-            UI.jsxSuccess(reference);
-            /* 关闭浮游 */
-            Unity.doClose(reference);
-        });
+    Ux.toLoading(() => {
+        // 导出专用（根据选中列导出）
+        const {$options = {}} = reference.props;
+        const {$selected = []} = reference.state;
+        // 参数信息
+        const params = {
+            columns: $selected,
+            format: 'xlsx',     // TODO: 后边支持多种格式
+        };
+        return Ux.ajaxPull($options['ajax.file.export'], params, _mockDownload(reference))
+            .then(file => {
+                // 重复提交完成
+                Unity.doSubmit(reference, false);
+                // 下载保存
+                saveAs(file, `${Ux.randomUUID()}.${params.format}`);
+                // 成功消息提示
+                UI.jsxSuccess(reference);
+                /* 关闭浮游 */
+                Unity.doClose(reference);
+            });
+    });
 };
 const rxImport = (reference) => (event) => {
 

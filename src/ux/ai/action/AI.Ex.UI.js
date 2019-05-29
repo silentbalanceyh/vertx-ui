@@ -1,10 +1,10 @@
 import Prop from '../../prop';
 import Value from '../../Ux.Value';
-import {Button} from "antd";
+import {Button} from "antd/lib/index";
 import Fn from "../../fun";
 import React from "react";
 
-const ai2ExFilterButton = () => {
+const ai2FilterButton = () => {
     return {
         $button: (cell, reference) => {
             const ref = Value.fix(cell, reference);
@@ -20,7 +20,6 @@ const ai2ExFilterButton = () => {
         }
     }
 };
-
 export default {
-    ai2ExFilterButton,
+    ai2FilterButton,
 }
