@@ -8,6 +8,8 @@ const rxClean = (reference) => (event) => {
     const content = options['confirm.clean.filter'];
     // 执行函数
     const executor = () => {
+        // 加载效果
+        Unity.doLoading(reference, true);
         // 清除 $condition
         Unity.doCondition(reference);
     };

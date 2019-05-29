@@ -96,6 +96,9 @@ const mockDeleteWithMocker = (reference, id, $mocker) =>
     mockSingleWithMocker(reference, (mocker) => mocker.remove(id), $mocker);
 const mockUpdateWithMocker = (reference, records, $mocker) =>
     mockSingleWithMocker(reference, (mocker) => mocker.update(records), $mocker);
+const mockRecord = (reference, update = false) => {
+
+};
 export default {
     mockInit,
     mockInherit,    // 继承专用ComplexList -> IxTable
@@ -107,4 +110,6 @@ export default {
     mockUpdate,
     mockUpdateWithMocker, // 批量更新
     mockGet,
+    // 记录模拟
+    mockRecord,
 };

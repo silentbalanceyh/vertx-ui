@@ -45,5 +45,27 @@ export default {
         window: "window.extra.import", // Popover 专用
         component: "UiImportEditor",
         componentKey: "extra.import"
+    },
+    submitAdd: {
+        icon: "plus",
+        key: "btnFormAdd",
+        type: "primary"
+    },
+    submitSave: {
+        icon: "save",
+        key: "btnFormSave",
+        type: "primary"
+    },
+    submitDelete: {
+        icon: "remove",
+        key: "btnFormDelete",
+        type: "danger",
+        tooltip: true,
+    },
+    submitReset: {
+        icon: "redo",
+        key: "btnFormReset",
+        type: "default",
+        tooltip: true,
     }
 };

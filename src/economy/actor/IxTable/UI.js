@@ -28,13 +28,15 @@ class Component extends React.PureComponent {
 
     render() {
         const {$options = {}} = this.props;
-        const {$table = {}, data = {}, $condition = {}} = this.state;
+        const {$table = {}, data = {}, $condition = {}, $loading = true} = this.state;
         const table = Op.configTable(this, $options, $table);
+        Ux.dgDebug($condition, "[Ex] IxTable 中的条件 $condition: ", "#777");
+        console.groupEnd();
         Ux.dgDebug({
             props: this.props,
             state: this.state,
+            $loading,
         }, "[Ex] IxTable：", "#063");
-        Ux.dgDebug($condition, "[Ex] $condition: ", "#777");
         return !Ux.isEmpty(table) ? (
             <Table {...table}
                    className={Ux.ECONOMY.TABLE_CONTROL}

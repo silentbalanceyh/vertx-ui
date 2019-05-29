@@ -8,6 +8,7 @@ import Projection from './Fx.Projection';
 import Action from './Fx.Event';
 import Mock from './Fx.Mock';
 import Unity from './Fx.Unity';
+import Limit from './Fx.Limit';
 
 const exported = {
     ...Hoc,
@@ -32,6 +33,7 @@ const exported = {
     initBatch: Init.initBatch,
     initSearch: Init.initSearch,
     initExtra: Init.initExtra,
+    initBar: Init.initBar,
     // 窗口专用
     initDialog: Dialog.init,
     // initColumn: Projection.initColumn,
@@ -51,6 +53,7 @@ const exported = {
     cssGrid: Jsx.cssGrid,
     // Mock数据
     Mock,
+    Limit,
 };
 console.info(exported);
 export default exported;

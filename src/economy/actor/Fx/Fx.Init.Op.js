@@ -63,10 +63,44 @@ const isBatch = (options = {}) => {
     const opts = _initOpt(options, 'op.batch');
     return !Ux.isEmpty(opts);
 };
+const initBar = (options = {}, view = "list") => {
+    const opts = _initOpt(options, 'submit');
+    const buttons = [];
+    if ("add" === view) {
+        // 添加模式
+        if (options['submit.add']) {
+            const button = _initButton(opts, "add.text", "submitAdd");
+            button.onClick = () => Ux.connectId(options['submit.add']);
+            buttons.push(button);
+        }
+    } else if ("edit" === view) {
+        // 编辑模式
+        if (options['submit.edit']) {
+            const button = _initButton(opts, "edit.text", "submitSave");
+            button.onClick = () => Ux.connectId(options['submit.edit']);
+            buttons.push(button);
+        }
+        if (options['submit.delete.text']) {
+            const button = _initButton(opts, "delete.text", "submitDelete");
+            button.onClick = () => {
+
+            };
+            buttons.push(button);
+        }
+    }
+    if (options['submit.reset']) {
+        const button = _initButton(opts, "reset", "submitReset");
+        button.text = options['submit.reset.text'];
+        button.onClick = () => Ux.connectId(options['submit.reset']);
+        buttons.push(button);
+    }
+    return buttons;
+};
 export default {
     initOpen,
     initBatch,
     initSearch,
     initExtra,
+    initBar,
     isBatch
 };

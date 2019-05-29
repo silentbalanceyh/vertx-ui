@@ -1,6 +1,6 @@
-const init = (reference) => {
+const configOp = (reference) => {
     // console.info(reference.props);
 };
 export default {
-    init
+    configOp
 };

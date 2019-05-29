@@ -5,7 +5,7 @@ import {Tabs} from "antd";
 
 import RENDERS from './UI.Render';
 
-import IxExtraBar from '../IxExtraBar/UI';
+import IxExtra from '../IxExtra/UI';
 import IxLoading from '../IxLoading/UI';
 
 import Ux from "ux";
@@ -51,10 +51,12 @@ class Component extends React.PureComponent {
                 props: this.props,
                 state: this.state,
             }, "[Ex] ComplexList：");
+            const {view = "list"} = this.state;
+            console.groupCollapsed("[Ex] ExComplexList 子组件: ");
             return (
                 <Tabs {...rest}
                       tabBarExtraContent={
-                          <IxExtraBar {...this.props} $options={options}/>
+                          <IxExtra {...this.props} $options={options} $view={view}/>
                       }
                       className={className}>
                     {items.map(item => {

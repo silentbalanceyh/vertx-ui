@@ -69,12 +69,15 @@ const _initMocker = (ref, options = {}) => {
     if ($mocker) {
         state.$mocker = $mocker;
     }
-    ref.setState(state);
+    return state;
+    // Mock这里不设
+    // ref.setState(state);
 };
 const _getDefaultQuery = (ref) => {
     const {$defaultQuery = {}} = ref.state;
     const {$query = {}} = ref.props;
-    if (Ux.isDiff($defaultQuery, $query)) {
+    // 主要针对 criteria 变量
+    if (Ux.isDiff($defaultQuery.criteria, $query.criteria)) {
         return {
             value: Ux.clone($query),
             updated: true,
@@ -88,37 +91,42 @@ const _getDefaultQuery = (ref) => {
 };
 const init = (ref) => {
     const {$options = {}, $table = {}} = ref.props;
-    /* 初始化Mocker */
-    _initMocker(ref, $options);
-
     // 初始化状态
     const state = {};
+    /* 初始化Mocker */
+    const mockState = _initMocker(ref, $options);
+    Object.assign(state, mockState);
+    // 表格状态初始化
     state.$table = _initTable(ref, $options, $table);
     // 加载数据专用，第一次加载
     state.$defaultQuery = _getDefaultQuery(ref).value;
-    const {$query = {}} = ref.props;
-    Fx.rxSearch(ref, $query, state);
-
+    // const {$query = {}} = ref.props;
+    // Fx.rxSearch(ref, $query, state);
+    ref.setState(state);
     // 挂载反向函数
     Mount.mountPointer(ref);
 };
 const update = (ref, previous = {}) => {
-    // 更新专用
     const query = _getDefaultQuery(ref);
     if (query.updated) {
+        /*
+         * 先执行，执行过后 updated 就是 false 了
+         * 这里要使用 if / else 防止过多的 update
+         */
         const $defaultQuery = query.value;
         ref.setState({$defaultQuery});
-    }
-    // 特殊条件
-    if (Fx.testQuery(ref, previous)) {
-        /*
-         * 1. 分页会触发
-         */
-        Fx.rxRefresh(ref);
-        /*
-         * 2. 更新根路径中的 $cond 变量
-         */
-        Mount.mountCond(ref);
+    } else {
+        // 特殊条件
+        if (Fx.testQuery(ref, previous)) {
+            /*
+             * 1. 分页会触发
+             */
+            Fx.rxRefresh(ref);
+            /*
+             * 2. 更新根路径中的 $cond 变量
+             */
+            Mount.mountCond(ref);
+        }
     }
 };
 const configTable = (reference, options = {}, table = {}) => {
