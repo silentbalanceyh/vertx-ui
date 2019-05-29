@@ -30,3 +30,51 @@
     background: linear-gradient(to right, @theme-main 0%, white 100%);
     box-shadow: 3px 3px 3px @color-title-font;
 }
+
+.ux-readonly {
+    input[readonly] {
+        background-color: white;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    input[disabled] {
+        background-color: @color-readonly;
+
+        &:hover {
+            cursor: not-allowed;
+        }
+    }
+
+    i:hover {
+        cursor: pointer;
+    }
+}
+
+.ux-left {
+    &-text {
+        text-align: left;
+    }
+}
+
+.ux-error {
+    width: 98%;
+    height: 100%;
+    color: red;
+    padding: 1%;
+    margin: 10px;
+    background-color: #fdf2f4;
+    border: solid 1px red;
+    border-radius: 5px;
+    min-height: 200px;
+}
+
+.ux-group {
+    float: left !important;
+
+    button {
+        margin-right: 0 !important;
+    }
+}

@@ -16,7 +16,7 @@ const {zero} = Ux;
 class Component extends React.PureComponent {
     render() {
         return (
-            <div className={"zero-main"}>
+            <div className={"zui-main"}>
                 <PageCard reference={this}>
                     <Tool/>
                     {Ux.auiTab(this)

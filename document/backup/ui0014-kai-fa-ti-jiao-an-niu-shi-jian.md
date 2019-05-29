@@ -80,11 +80,11 @@ export default Component
 
 ```typescript
 // Op.ts
-import Action from './Op.Action';
+import Action from Event;
 export default {
     ...Action
 }
-// Op.Action.ts
+Event
 import Ux from 'ux';
 import Mock from './mock';
 

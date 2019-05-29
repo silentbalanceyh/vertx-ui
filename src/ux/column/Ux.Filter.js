@@ -13,6 +13,7 @@ const columnFilter = (column = {}, reference = {}) => {
             renderDirect(reference, column, config);
         } else if ("SEARCH" === type) {
             renderSearch(reference, column, config);
+            /* 特殊情况的问题解决 */
         } else {
             console.error(`[Err] type = ${type} 的模式目前不支持！`);
         }

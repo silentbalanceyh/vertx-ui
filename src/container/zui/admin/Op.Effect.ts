@@ -6,11 +6,16 @@ const fnCollapse = (reference) => () => {
 };
 
 const fnMenuData = (menu = [], app: any = {}) => {
+    // 计算 style，修正缩进
+    menu.forEach(item => {
+        if (!item.style) item.style = {};
+        if (!item.className) item.className = "ux-invert";
+        item.itemClass = `node${item.level}`;
+    });
     return Ux.Uarr.create(menu)
         .filter(item => "SIDEBAR" !== item.type)
         .sort((left, right) => left.left - right.left)
         .convert('uri', (uri) => `/${app._("path")}${uri}`)
-        .add('className', "kid-invert")
         .mapping({
             key: "key",
             level: "level",
@@ -55,9 +60,28 @@ const fnRouting = (reference, uris = {}) => ({item, key, keyPath}) => {
         $router.to("/" + $app._('path') + uris[key]);
     }
 };
-
+const fnNavigator = (reference: any = {}) => {
+    const {$menus, $router} = reference.props;
+    let current = $menus.to().filter(menu => menu.uri &&
+        0 < $router.path().indexOf(menu.uri));
+    current = (current[0]) ? current[0].key : undefined;
+    // 构造导航栏
+    const navigator = Ux.elementBranch($menus.to(), current, "parentId");
+    const $nav = [];
+    $nav.push(Ux.fromHoc(reference, "nav"));
+    if (navigator) {
+        navigator.forEach(item => $nav.push({
+            key: item.name,
+            text: item.text,
+            // 必须添加"/"前缀，否则会生成错误路由
+            uri: (item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined
+        }))
+    }
+    return $nav;
+};
 export default {
     fnCollapse,
+    fnNavigator,
     fnMenuData,
     fnLocation,
     fnUriMapping,

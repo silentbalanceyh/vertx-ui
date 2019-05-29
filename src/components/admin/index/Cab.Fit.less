@@ -1,0 +1,31 @@
+@import "../../../global";
+
+.zui-main {
+    .tpl(@listPadding) {
+        .web-card {
+            .zui {
+                &-half-card {
+                    margin-bottom: 6px;
+
+                    .zui-list {
+                        .ant-list-item {
+                            padding: @listPadding !important;
+                            font-weight: 200 !important;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.zui-main-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .zui-main.tpl(3px 6px);
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .zui-main.tpl(6px 12px);
+    }
+}

@@ -12,12 +12,12 @@ class Component extends React.PureComponent {
     render() {
         const {$_collapsed, fnCollapse} = this.props;
         return (
-            <Header className="top-header">
-                <Icon className="top-trigger"
+            <Header className="ux-header">
+                <Icon className="trigger"
                       type={$_collapsed ? 'menu-unfold' : 'menu-fold'}
                       onClick={fnCollapse}
                 />
-                <div className="top-right">
+                <div className="right">
                     {/** 提醒菜单 **/}
                     <Notify/>
                     {/** 用户信息 **/}

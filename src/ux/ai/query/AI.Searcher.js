@@ -152,7 +152,8 @@ const _fnTree = (source = [], criteria = {}, level = 1) => {
 };
 
 const _fnCriteria = (source = [], $query = {}) => {
-    const criteria = Value.clone($query.criteria);
+    let criteria = Value.clone($query.criteria);
+    if (!criteria) criteria = {}; // 防止 Object.keys报错
     Value.valueValid(criteria);
     if (0 < Object.keys(criteria).length) {
         source = _fnTree(source, criteria, 1);
@@ -171,6 +172,29 @@ const _fnCriteria = (source = [], $query = {}) => {
     }
     return source;
 };
+const _fnPager = (source = [], $query = {}) => {
+    /* 再分页 */
+    const {pager = {}} = $query;
+    const {page = 1, size = 10} = pager;
+    // 计算开始索引
+    const startIndex = (page - 1) * size;
+    const endIndex = startIndex + size - 1;
+    /* 构造新数据 */
+    return source.filter((item, index) => startIndex <= index && index <= endIndex);
+};
+const _fnProjection = (source = [], $query = {}) => {
+    const {projection = []} = $query;
+    if (0 < projection) {
+        const $columns = Value.immutable(projection);
+        source.forEach(each => Type.itObject(each, (field) => {
+            // 主键需要保留
+            if (!$columns.contains(field) && "key" !== field) {
+                delete each[field];
+            }
+        }));
+    }
+    return source;
+};
 
 class Searcher {
     constructor(data = []) {
@@ -183,8 +207,20 @@ class Searcher {
         source = _fnCriteria(source, $query);
         // 排序
         source = _fnSorter(source, $query);
+        // 分页
+        source = _fnPager(source, $query);
+        // 列过滤
+        source = _fnProjection(source, $query);
         // Reduce
         return source;
+    }
+
+    count($query = {}) {
+        let source = this.data;
+        // 只过滤计算就可以了
+        source = _fnCriteria(source, $query);
+        // 计算结果
+        return source ? source.length : 0;
     }
 }
 

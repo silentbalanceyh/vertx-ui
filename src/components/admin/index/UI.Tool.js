@@ -7,7 +7,7 @@ class Component extends React.PureComponent {
     render() {
         return (
             Ux.aiGrid([21, 3],
-                <Button.Group className={"zero-tool"}>
+                <Button.Group className={"zui-tool"}>
                     <Button icon={"github"}/>
                     <Button icon={"user"}/>
                     <Button icon={"cluster"}/>

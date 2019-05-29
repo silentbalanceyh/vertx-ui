@@ -12,13 +12,13 @@ const renderPanel = (panel = []) => (panel.map(item => {
     // 特殊处理自定义组件部分
     return (
         <Card key={item.key} title={title}
-              className={"zero-half-card"}
+              className={"zui-half-card"}
               extra={item.icon ? (
                   <Icon {...item.icon}/>
               ) : false}>
             <List bordered={false}
                   dataSource={children.filter(each => !!each.uri)}
-                  className={"zero-list"}
+                  className={"zui-list"}
                   renderItem={each => (
                       <List.Item key={each.key}>
                           <Row style={{width: "100%"}}>

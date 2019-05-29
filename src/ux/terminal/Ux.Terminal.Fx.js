@@ -1,6 +1,10 @@
 import React from 'react';
 
-const fxError = (message) => (<div className={"error-page"}>{message}</div>);
+const fxError = (message) => (
+    <div className={"ux-error"}>
+        {message}
+    </div>
+);
 
 const fxRender = (reference, render) => {
     const {error} = reference.state ? reference.state : {};

@@ -10,7 +10,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     render() {
-        return Ux.uiFieldFilter(this, {...Ux.ai2FilterButton(1 / 3)}, 1)
+        return Ux.uiFieldFilter(this, {...Ux.Ex.ai2FilterButton()}, 1)
     }
 }
 

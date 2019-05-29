@@ -25,7 +25,7 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
  */
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns = Ai.aiExprColumn(columns);
-    const $op = Value.immutable(["BUTTON", "OP", "LINK"]);
+    const $op = Value.immutable(["BUTTON", "OP", "LINK", "ACTION"]);
     const $columns = [];
     // 添加列的平行解析
     columns.forEach(column => {
@@ -40,6 +40,8 @@ const uiTableColumn = (reference, columns = [], ops = {}) => {
         Column.columnFixed(column, $op);
         // $filter过滤处理
         Column.columnFilter(column, reference);
+        // sorter = true 是否开启可控模式
+        Column.columnSorter(column, reference);
     });
     return $columns;
 };

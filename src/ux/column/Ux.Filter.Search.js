@@ -8,7 +8,7 @@ import U from 'underscore';
 
 const _getKeyWord = (reference, field, keyword = "") => {
     // 搜索文字
-    let {$keyword = {}} = reference.state;
+    let {$keyword = {}} = reference.state ? reference.state : {};
     $keyword[field] = keyword;
     $keyword = Value.clone($keyword);
     return $keyword;
@@ -20,21 +20,20 @@ const _onChange = (reference, field, setSelectedKeys) => (event) => {
     setSelectedKeys(searchText);
     // 设置高亮
     const $keyword = _getKeyWord(reference, field, highlight);
-    const $condition = T.getCondition(reference, field, searchText);
-    reference.setState({$keyword, $condition});
+    // 修改 $condition，这个时候不会导致触发
+    reference.setState({$keyword});
 };
 
 const onClear = (reference, field, clearFilters) => (event) => {
     if (event && U.isFunction(event.preventDefault)) {
         event.preventDefault();
     }
-
     clearFilters();// 设置高亮
     const $keyword = _getKeyWord(reference, field, "");
     const $condition = T.getCondition(reference, field, []);
     reference.setState({
         $keyword, $condition,
-        $resetCond: Util.randomString(8)
+        $resetCond: Util.randomString(8),
     });
 };
 
@@ -46,6 +45,12 @@ const _onConfirm = (reference, field, selectedKeys, {
     // 空值直接触发重置
     if (0 === selectedKeys.length) {
         onClear(reference, field, clearFilters)();
+    } else {
+        /* 设置条件 $condition 信息 */
+        const $condition = T.getCondition(reference, field, selectedKeys);
+        reference.setState({
+            $condition,
+        });
     }
 };
 
@@ -76,7 +81,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                     style={{width: 90}}>
                 {button.reset ? button.reset : false}
             </Button>
-            {T.jsxArchor(field, clearFilters)}
+            {T.jsxArchor(field, clearAttrs.onClick)}
         </div>
     );
 };
@@ -84,7 +89,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
 const _mountHighlight = (column = {}, reference) => {
     // 这种情况下需要重写 render
     column.render = (text) => {
-        const {$keyword = {}} = reference.state;
+        const {$keyword = {}} = reference.state ? reference.state : {};
         const words = Object.keys($keyword)
             .filter(cond => cond.startsWith(column.dataIndex))
             .map(cond => $keyword[cond]);

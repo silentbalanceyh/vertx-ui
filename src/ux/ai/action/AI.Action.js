@@ -12,6 +12,8 @@ import Type from '../../Ux.Type';
 // 内部导入
 import Layout from '../layout/AI.Layout';
 import Smart from './AI.Action.Smart';
+// 内部导入
+import Ex from './AI.Ex.Action';
 
 const ai2Submit = (Op = {}) => (reference, jsx = {}) => {
     if (!jsx.op) return false;
@@ -34,6 +36,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                 const clientId = `${field}${key}`;
                 item.key = clientId;
                 item.id = clientId;
+                // Dg.dgDebug(item, "[Ux] 按钮配置数据", "gray");
                 if ($submit.contains(field)) {
                     // 动态绑定raft处理时专用
                     item.onClick = (event) => {
@@ -79,9 +82,9 @@ const ai2FilterButton = (window = 1) => {
         $button: (cell, reference) => {
             const ref = Value.fix(cell, reference);
             const button = Prop.fromHoc(ref, "button");
-            return (1 / 3 === window) ? Layout.aiColumns([5, 14],
+            return (1 / 3 === window) ? Layout.aiColumns([5, 19],
                 undefined,
-                <Button.Group className={"web-button"}>
+                <Button.Group className={"ux-group"}>
                     <Button type={"primary"} icon={"search"}
                             onClick={() => Fn.irFilter(ref)}>{button.search}</Button>
                     <Button icon={"reload"}
@@ -104,5 +107,7 @@ export default {
     // 特殊模式动态渲染
     ai2RaftButton,
     // Page中直接按钮生成
-    aiOp
+    aiOp,
+    // ExComplexList专用
+    Ex,
 };

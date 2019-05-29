@@ -1,0 +1,17 @@
+{
+    "mock": true,
+    "data": [
+        {
+            "dataIndex": "code",
+            "title": "部门编号"
+        },
+        {
+            "dataIndex": "name",
+            "title": "部门名称"
+        },
+        {
+            "dataIndex": "created_date",
+            "title": "创建时间"
+        }
+    ]
+}

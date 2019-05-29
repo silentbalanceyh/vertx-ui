@@ -16,9 +16,9 @@ class Component extends React.PureComponent {
         const dataArray = Op.fnMenuData($menus.to(), $app);
         return (
             <Sider trigger={null} collapsible collapsed={$_collapsed}
-                   width={264} className="menu-sider">
+                   className={$_collapsed ? "ux-sider" : "ux-sider ux-sider-expand"}>
                 {/** 菜单顶部Logo链接 **/}
-                <div className="menu-logo">
+                <div className="logo">
                     <Link to={Ux.Env.ENTRY_ADMIN}>
                         <img src={$app._("logo")} alt="Logo"/>
                         <h1>{$app._("title")}</h1>
@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
                       onClick={Op.fnRouting(this, dataUris)}>
                     {dataArray.map(item => Ux.aiMenuTree({
                         ...item,
-                        className: `menu-icon ${$_collapsed ? "menu-collapse" : ""}`
+                        collapsed: $_collapsed
                     }))}
                 </Menu>
             </Sider>

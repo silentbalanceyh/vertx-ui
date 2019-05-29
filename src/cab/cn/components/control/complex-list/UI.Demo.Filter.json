@@ -4,6 +4,15 @@
         "ui": [
             [
                 {
+                    "metadata": "connector,连接符,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "AND,并（AND）",
+                        "OR,或（OR）"
+                    ]
+                }
+            ],
+            [
+                {
                     "field": "name,c",
                     "optionItem": {
                         "label": "部门名称"
