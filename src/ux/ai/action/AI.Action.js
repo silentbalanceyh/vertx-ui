@@ -36,6 +36,7 @@ const aiFormButton = (reference, onClick, id = false, submit = []) => {
                 const clientId = `${field}${key}`;
                 item.key = clientId;
                 item.id = clientId;
+                // Dg.dgDebug(item, "[Ux] 按钮配置数据", "gray");
                 if ($submit.contains(field)) {
                     // 动态绑定raft处理时专用
                     item.onClick = (event) => {

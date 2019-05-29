@@ -60,7 +60,7 @@ const inSearch = (reference) => {
     return inherit;
 };
 
-const inExtra = (reference) => {
+const inExtra = (reference, item = {}) => {
     const inherit = _inUniform(reference);
 
     _inheritComponent(reference, inherit);

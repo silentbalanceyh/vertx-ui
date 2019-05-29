@@ -59,6 +59,7 @@ class Component extends React.PureComponent {
                       tabBarExtraContent={
                           <IxExtra {...this.props} $options={options}
                                    $view={view}
+                                   $activeKey={$tabs.activeKey}
                                    $loading={$submitting}/>
                       }
                       className={className}>

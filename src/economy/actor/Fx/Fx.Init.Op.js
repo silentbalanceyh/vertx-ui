@@ -63,21 +63,38 @@ const isBatch = (options = {}) => {
     const opts = _initOpt(options, 'op.batch');
     return !Ux.isEmpty(opts);
 };
-const initBar = (options = {}, view = "list") => {
+
+const _connectAdd = (options) => (event) => {
+    event.preventDefault();
+    Ux.connectId(options['submit.add']);
+};
+const _connectEdit = (options, key) => (event) => {
+    event.preventDefault();
+    Ux.connectId(`${options['submit.edit']}${key}`);
+};
+const _connectReset = (options, view, key) => (event) => {
+    event.preventDefault();
+    if ("add" === view) {
+        Ux.connectId(options['submit.reset']);
+    } else {
+        Ux.connectId(`${options['submit.reset']}${key}`);
+    }
+};
+const initBar = (options = {}, view = "list", key) => {
     const opts = _initOpt(options, 'submit');
     const buttons = [];
     if ("add" === view) {
         // 添加模式
         if (options['submit.add']) {
             const button = _initButton(opts, "add.text", "submitAdd");
-            button.onClick = () => Ux.connectId(options['submit.add']);
+            button.onClick = _connectAdd(options);
             buttons.push(button);
         }
     } else if ("edit" === view) {
         // 编辑模式
         if (options['submit.edit']) {
             const button = _initButton(opts, "edit.text", "submitSave");
-            button.onClick = () => Ux.connectId(options['submit.edit']);
+            button.onClick = _connectEdit(options, key);
             buttons.push(button);
         }
         if (options['submit.delete.text']) {
@@ -91,7 +108,7 @@ const initBar = (options = {}, view = "list") => {
     if (options['submit.reset']) {
         const button = _initButton(opts, "reset", "submitReset");
         button.text = options['submit.reset.text'];
-        button.onClick = () => Ux.connectId(options['submit.reset']);
+        button.onClick = _connectReset(options, view, key);
         buttons.push(button);
     }
     return buttons;

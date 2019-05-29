@@ -1,7 +1,6 @@
 import Value from "../../Ux.Value";
 import Dialog from '../../Ux.Dialog';
 import Cv from "../../cv/Ux.Constant";
-import U from 'underscore';
 
 const _normalizeValue = (data = {}, reference) => {
     // 先拷贝一份新的数据
@@ -50,18 +49,11 @@ const ai2Form = (reference, supplier) => (event) => {
          */
         const {fnMock, fnSubmitting, fnLoading} = reference.props;
         /* 模拟函数 */
-        let mockData = {};
-        if (U.isFunction(fnMock)) {
-            mockData = fnMock(data);
-        }
+        const mockData = fnMock(data);
         /* 表单提交 */
-        if (U.isFunction(fnSubmitting)) {
-            fnSubmitting();
-        }
+        fnSubmitting();
         /* 加载效果 */
-        if (U.isFunction(fnLoading)) {
-            fnLoading();
-        }
+        fnLoading();
         return supplier(data, mockData);
     }).then(response => {
         /* 判断是 Message 还是 Dialog */
@@ -81,31 +73,20 @@ const ai2Form = (reference, supplier) => (event) => {
     }).then(response => {
         const {fnClose, fnView, fnSubmitting, fnRefresh} = reference.props;
         // 防止编辑按钮的 loading
-        if (U.isFunction(fnSubmitting)) {
-            fnSubmitting(false);
-        }
+        fnSubmitting(false);
         if ("add" === modal) {
             if ("EDIT" === to) {
                 // 直接进入 EDIT 界面
-                if (U.isFunction(fnView)) {
-                    fnView(response);
-                }
+                fnView(response);
+                fnRefresh();
             } else {
                 // 默认 LIST
-                if (U.isFunction(fnClose)) {
-                    fnClose();
-                }
-                if (U.isFunction(fnRefresh)) {
-                    fnRefresh();
-                }
-            }
-        } else {
-            if (U.isFunction(fnClose)) {
                 fnClose();
-            }
-            if (U.isFunction(fnRefresh)) {
                 fnRefresh();
             }
+        } else {
+            fnClose();
+            fnRefresh();
         }
     });
 };
