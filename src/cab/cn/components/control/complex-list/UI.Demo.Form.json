@@ -55,7 +55,9 @@
             ]
         ],
         "hidden": {
-            "inputs": []
+            "inputs": [
+                "key"
+            ]
         }
     },
     "_modal": {

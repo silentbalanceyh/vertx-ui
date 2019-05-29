@@ -1,5 +1,6 @@
 import Value from "../../Ux.Value";
 import Dialog from '../../Ux.Dialog';
+import Dg from '../../Ux.Debug';
 import Cv from "../../cv/Ux.Constant";
 
 const _normalizeValue = (data = {}, reference) => {
@@ -50,6 +51,9 @@ const ai2Form = (reference, supplier) => (event) => {
         const {fnMock, fnSubmitting, fnLoading} = reference.props;
         /* 模拟函数 */
         const mockData = fnMock(data);
+        Dg.dgDebug({
+            key: mockData.data.key,
+        }, '[Ex] 模拟数据主键', 'black');
         /* 表单提交 */
         fnSubmitting();
         /* 加载效果 */

@@ -52,6 +52,9 @@ class Component extends React.PureComponent {
                 props: this.props,
                 state: this.state,
             }, "[Ex] ComplexList：");
+            Ux.dgDebug({
+                key: $tabs.activeKey,
+            }, "[Ex] 激活Tab页ID", "#369");
             const {view = "list"} = this.state;
             console.groupCollapsed("[Ex] ExComplexList 子组件: ");
             return (

@@ -112,7 +112,8 @@ const inFormAdd = (reference, item = {}) => {
 };
 const inFormEdit = (reference, item = {}) => {
     const inherit = _inUniform(reference);
-    inherit.fnMock = Fx.Mock.mockRecord(reference);
+    // 必须走更新流程
+    inherit.fnMock = Fx.Mock.mockRecord(reference, true);
     // 处理 Loading
     _inheritFun(reference, inherit, 'fnLoading');
     // 处理 Refresh

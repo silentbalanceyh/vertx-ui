@@ -87,8 +87,10 @@ const updateItem = (data = [], record, keyField = 'key') => {
     if (record) {
         data.forEach(item => {
             if (item && item[keyField] === record[keyField]) {
-                /* 覆盖掉 */
+                /* 覆盖掉，但是不覆盖主键 */
+                const key = item.key;
                 Object.assign(item, record);
+                item.key = key;
             }
         });
     }
