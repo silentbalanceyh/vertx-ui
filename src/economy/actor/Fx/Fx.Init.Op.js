@@ -80,35 +80,34 @@ const _connectReset = (options, view, key) => (event) => {
         Ux.connectId(`${options['submit.reset']}${key}`);
     }
 };
-const initBar = (options = {}, view = "list", key) => {
-    const opts = _initOpt(options, 'submit');
+const initBar = (reference) => {
+    const {$options, $view, $activeKey} = reference.props;
+    const opts = _initOpt($options, 'submit');
     const buttons = [];
-    if ("add" === view) {
+    if ("add" === $view) {
         // 添加模式
-        if (options['submit.add']) {
+        if ($options['submit.add']) {
             const button = _initButton(opts, "add.text", "submitAdd");
-            button.onClick = _connectAdd(options);
+            button.onClick = _connectAdd($options);
             buttons.push(button);
         }
-    } else if ("edit" === view) {
+    } else if ("edit" === $view) {
         // 编辑模式
-        if (options['submit.edit']) {
+        if ($options['submit.edit']) {
             const button = _initButton(opts, "edit.text", "submitSave");
-            button.onClick = _connectEdit(options, key);
+            button.onClick = _connectEdit($options, $activeKey);
             buttons.push(button);
         }
-        if (options['submit.delete.text']) {
+        if ($options['submit.delete.text']) {
             const button = _initButton(opts, "delete.text", "submitDelete");
-            button.onClick = () => {
-
-            };
+            button.onClick = Event.rxDeleteDetail(reference, $activeKey);
             buttons.push(button);
         }
     }
-    if (options['submit.reset']) {
+    if ($options['submit.reset']) {
         const button = _initButton(opts, "reset", "submitReset");
-        button.text = options['submit.reset.text'];
-        button.onClick = _connectReset(options, view, key);
+        button.text = $options['submit.reset.text'];
+        button.onClick = _connectReset($options, $view, $activeKey);
         buttons.push(button);
     }
     return buttons;

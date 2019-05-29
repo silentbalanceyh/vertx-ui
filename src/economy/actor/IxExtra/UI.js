@@ -16,8 +16,8 @@ class Component extends React.PureComponent {
             props: this.props,
             state: this.state,
         }, "[Ex] IxExtra：", "#063");
-        const {$view = "list", $options = {}, $loading = false, $activeKey} = this.props;
-        const op = Fx.initBar($options, $view, $activeKey);
+        const {$view = "list", $loading = false} = this.props;
+        const op = Fx.initBar(this);
         return ("list" === $view) ? false : (
             <Button.Group style={{float: "right"}}>
                 {op.map(button => {

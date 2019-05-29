@@ -151,12 +151,32 @@ const inTable = (reference) => {
         throw new Error("[Ex] rxSearch 核心函数丢失！");
     }
 };
+const inBar = (reference, $tabs = {}) => {
+    const inherit = _inUniform(reference);
+    const {$submitting = false, view = "list"} = reference.state;
+    inherit.$loading = $submitting;
+    inherit.$activeKey = $tabs.activeKey;
+    inherit.$view = view;
+
+    _inheritFun(reference, inherit, 'fnLoading');
+    _inheritFun(reference, inherit, 'fnRefresh');
+    _inheritFun(reference, inherit, 'fnMock');
+
+    inherit.fnSubmitting = ($submitting = true) =>
+        reference.setState({$submitting});
+    // 回调函数注入
+    inherit.fnClose = Fx.rxCloseTab(reference, $tabs.activeKey);
+
+    Fx.Mock.mockInherit(reference, inherit);
+    return inherit;
+};
 export default {
     inOpen,
     inBatch,
     inSearch,
     inExtra,
     inTable,
+    inBar,  // 外层按钮
     inFormAdd,
     inFormEdit,
 };

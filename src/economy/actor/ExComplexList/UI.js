@@ -46,7 +46,6 @@ class Component extends React.PureComponent {
             const $tabs = Fn.configTab(this);
             const {items = [], ...rest} = $tabs;
             /* options */
-            const {options = {}, $submitting = false} = this.state;
             const {className = Ux.ECONOMY.TAB_CONTAINER} = this.props;
             Ux.dgDebug({
                 props: this.props,
@@ -55,15 +54,11 @@ class Component extends React.PureComponent {
             Ux.dgDebug({
                 key: $tabs.activeKey,
             }, "[Ex] 激活Tab页ID", "#369");
-            const {view = "list"} = this.state;
             console.groupCollapsed("[Ex] ExComplexList 子组件: ");
             return (
                 <Tabs {...rest}
                       tabBarExtraContent={
-                          <IxExtra {...this.props} $options={options}
-                                   $view={view}
-                                   $activeKey={$tabs.activeKey}
-                                   $loading={$submitting}/>
+                          <IxExtra {...this.props} {...Op.inBar(this, $tabs)}/>
                       }
                       className={className}>
                     {items.map(item => {
