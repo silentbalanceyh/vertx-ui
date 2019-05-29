@@ -1,7 +1,6 @@
 import Fx from '../Fx';
 import U from 'underscore';
 import Ux from 'ux';
-import React from "react";
 /*
  * 函数注入函数
  */
@@ -107,7 +106,7 @@ const inFormAdd = (reference, item = {}) => {
         reference.setState({$submitting});
     // 回调函数注入
     inherit.fnClose = Fx.rxCloseTab(reference, item.key);
-    inherit.fnView = Fx.rxSwitchView(reference);
+    inherit.fnView = Fx.rxSwitchView(reference, item);
     inherit.$addKey = item.key;
     return inherit;
 };

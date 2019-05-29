@@ -19,7 +19,7 @@ const irExFilter = (reference = {}) => (event) => {
         submitValues[""] = "AND" === connector;
         Ux.itObject(rest, (field, value) => {
             if (undefined === value) {
-                submitValues[field] = "__DELETE__"
+                submitValues[field] = "__DELETE__";
             } else {
                 submitValues[field] = value;
             }
@@ -35,4 +35,4 @@ const irExFilter = (reference = {}) => (event) => {
 export default {
     irExClear,
     irExFilter,
-}
+};

@@ -37,7 +37,7 @@ class Component extends React.PureComponent {
                     <Button.Group>
                         {op.map(each => renderEach(each))}
                     </Button.Group>
-                )
+                );
             }
         } else return false;
     }

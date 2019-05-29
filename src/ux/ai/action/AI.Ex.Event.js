@@ -52,7 +52,7 @@ const ai2Form = (reference, supplier) => (event) => {
         /* 模拟函数 */
         let mockData = {};
         if (U.isFunction(fnMock)) {
-            mockData = fnMock(data)
+            mockData = fnMock(data);
         }
         /* 表单提交 */
         if (U.isFunction(fnSubmitting)) {
@@ -72,11 +72,11 @@ const ai2Form = (reference, supplier) => (event) => {
             return new Promise((resolve) => {
                 Dialog.showMessage(reference, modalKey, null, response);
                 resolve(response);
-            })
+            });
         } else {
             // 默认 DIALOG
             return new Promise((resolve) => Dialog.showDialog(reference, modalKey,
-                () => resolve(response), response, null))
+                () => resolve(response), response, null));
         }
     }).then(response => {
         const {fnClose, fnView, fnSubmitting, fnRefresh} = reference.props;
@@ -111,4 +111,4 @@ const ai2Form = (reference, supplier) => (event) => {
 };
 export default {
     ai2Form,
-}
+};

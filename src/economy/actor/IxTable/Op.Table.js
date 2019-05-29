@@ -81,12 +81,12 @@ const _getDefaultQuery = (ref) => {
         return {
             value: Ux.clone($query),
             updated: true,
-        }
+        };
     } else {
         return {
             value: $defaultQuery,
             updated: false,
-        }
+        };
     }
 };
 const init = (ref) => {

@@ -81,6 +81,22 @@ const removeTab = (reference, key) => {
     });
     return {tabs, ...view};
 };
+const saveTab = (reference, data, item) => {
+    // 删除
+    let {tabs = {}, options = {}} = reference.state;
+    tabs = Ux.clone(tabs);
+    tabs.items = tabs.items.filter(each => each.key !== item.key);
+    // 添加新的
+    const tab = {
+        key: data.key,
+        tab: options['tabs.edit'],
+        type: "edit",   // 类型
+        index: tabs.items.length
+    };
+    tabs.items.push(tab);
+    tabs.activeKey = data.key;
+    return tabs;
+};
 const viewSwitch = (reference, view = "list", key) => {
     const {rxViewSwitch} = reference.props;
     if (U.isFunction(rxViewSwitch)) {
@@ -101,7 +117,8 @@ export default {
         edit: editTab,
         close: closeTab,
         click: clickTab,
-        remove: removeTab
+        remove: removeTab,
+        save: saveTab,
     },
     View: {
         switch: viewSwitch,

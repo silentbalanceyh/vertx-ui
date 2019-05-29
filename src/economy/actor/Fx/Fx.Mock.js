@@ -115,7 +115,7 @@ const mockRecord = (reference, isUpdate = false) => {
             return mockData;
         };
     } else {
-        return () => ({mock: false})
+        return () => ({mock: false});
     }
 };
 export default {

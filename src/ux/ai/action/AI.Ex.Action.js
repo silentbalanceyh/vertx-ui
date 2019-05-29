@@ -4,4 +4,4 @@ import Event from './AI.Ex.Event';
 export default {
     ...UI,
     ...Event
-}
+};

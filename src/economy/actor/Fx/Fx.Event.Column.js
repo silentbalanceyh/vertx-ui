@@ -52,7 +52,7 @@ const rxSaveColumn = (reference) => (event) => {
                 Unity.doLoading(reference, false);
             }
         });
-    })
+    });
 };
 const rxExport = (reference) => (event) => {
     event.preventDefault();

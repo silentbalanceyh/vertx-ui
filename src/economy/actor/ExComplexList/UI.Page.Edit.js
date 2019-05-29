@@ -9,6 +9,7 @@ export default (reference, item = {}) => {
     // 「LIMIT」限制继承
     const limitation = Ux.toLimitation(reference.props, Fx.Limit.Form.Edit);
     const inherit = Op.inFormEdit(reference, item);
+    Ux.dgDebug(inherit, "[Ex] 编辑表单");
     return Component ? (
         <Component {...limitation}
                    {...inherit}/>

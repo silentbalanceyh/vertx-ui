@@ -17,7 +17,7 @@ const rxClean = (reference) => (event) => {
         Modal.confirm({
             content,
             onOk: executor
-        })
+        });
     } else {
         executor();
     }
@@ -46,4 +46,4 @@ const rxFilter = (reference) => (event) => {
 export default {
     rxClean, // 重置清空所有查询条件
     rxFilter, // 基本搜索专用
-}
+};

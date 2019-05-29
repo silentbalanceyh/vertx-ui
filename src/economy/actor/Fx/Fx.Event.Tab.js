@@ -55,9 +55,10 @@ const rxOpenDialog = (reference, config = {}, supplier) => (event) => {
     }
 };
 /* ExComplexList 引用 */
-const rxSwitchView = (reference) => (data = {}) => {
+const rxSwitchView = (reference, item = {}) => (data = {}) => {
+    /* 先删除原始的 */
     const view = Etat.View.switch(reference, "edit", data.key);
-    const tabs = Etat.Tab.edit(reference, data);
+    const tabs = Etat.Tab.save(reference, data, item);
     Inherit.fnInit(reference)(data, {tabs, ...view});
 };
 export default {

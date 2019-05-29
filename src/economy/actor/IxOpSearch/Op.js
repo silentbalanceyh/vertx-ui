@@ -53,7 +53,7 @@ const onClear = (reference) => event => {
 const onChange = (reference) => event => {
     event.preventDefault();
     const searchText = event.target.value;
-    reference.setState({searchText})
+    reference.setState({searchText});
 };
 const onOpen = (reference) => event => {
     event.preventDefault();

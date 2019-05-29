@@ -16,10 +16,10 @@ const ai2FilterButton = () => {
                     <Button icon={"reload"}
                             onClick={Fn.irExClear(ref)}>{button.clear}</Button>
                 </Button.Group>
-            )
+            );
         }
-    }
+    };
 };
 export default {
     ai2FilterButton,
-}
+};
