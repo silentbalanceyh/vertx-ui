@@ -118,6 +118,7 @@ const update = (ref, previous = {}) => {
     } else {
         // 特殊条件
         if (Fx.testQuery(ref, previous)) {
+            ref.setState({$loading: true});  // 开启Loading效果
             /*
              * 1. 分页会触发
              */

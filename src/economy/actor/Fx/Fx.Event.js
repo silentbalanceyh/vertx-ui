@@ -34,10 +34,10 @@ const rxDelete = (reference, id) => Unity.submit(reference, () => {
 });
 
 /* 这里的 reference 是 IxTable */
-const rxRefresh = (reference) => {
+const rxRefresh = (reference) => Ux.toLoading(() => {
     const query = Cond.initFilters(reference);
     rxSearch(reference, query.to());
-};
+});
 
 /* 这里的 reference 是 IxTable */
 const rxChange = (reference) => (pagination, filters, sorter) => Unity.change(reference, () => {
