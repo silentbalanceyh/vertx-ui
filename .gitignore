@@ -17,6 +17,7 @@ Cab.css
 src/*/*/*.css
 src/*/*.css
 src/*.css
+!src/style/animate.css
 
 # 基本生成文件Ignore
 src/environment/datum.js
