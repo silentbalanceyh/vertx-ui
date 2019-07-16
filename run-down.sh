@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
-ncu -a
+ncu -u
 node ./shell/run-package.js
 npm install
