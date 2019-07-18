@@ -85,7 +85,8 @@
         "underscore": "^1.9.1",
         "url-loader": "2.0.1",
         "uuid": "^3.3.2",
-        "yuidoc-mdeditor-theme": "^1.4.1"
+        "yuidoc-mdeditor-theme": "^1.4.1",
+        "zero-ix": "file:../zero-ix"
     },
     "scripts": {
         "prestart": "sh shell/run-generate.sh",

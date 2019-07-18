@@ -63,3 +63,6 @@ export {default as PagerHeader} from './container/Navigation/UI';
 export {
     default as ExComplexList        // 新组件，替换原生的 ComplexList，保证基本结构不发生太大的变化
 } from './actor/ExComplexList/UI';
+export {
+    default as ExLogin              // 登录主界面
+} from './actor/ExLogin/UI';

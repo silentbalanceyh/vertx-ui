@@ -1,8 +1,7 @@
 import React from 'react'
 import './Cab.less';
 import Bg from './image/bg.jpg';
-import Ux from 'ux';
-import {Layout} from 'antd'
+import {Col, Layout, Row} from 'antd'
 
 const {Header, Content} = Layout;
 
@@ -16,10 +15,13 @@ class Component extends React.PureComponent {
             }}>
                 <Header className={"login-header"}/>
                 <Content className={"login-content"}>
-                    {Ux.aiGrid([8, 8, 8],
-                        undefined,
-                        <Component {...this.props}/>
-                    )}
+                    <Row>
+                        <Col xxl={8} xl={7} span={8}/>
+                        <Col xxl={8} xl={10} span={8}>
+                            <Component {...this.props}/>
+                        </Col>
+                        <Col xxl={8} xl={7} span={8}/>
+                    </Row>
                 </Content>
             </Layout>
         )
