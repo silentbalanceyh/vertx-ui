@@ -106,7 +106,7 @@ const toCss = (name) => `${Cv.Env['CSS_PREFIX']}-${name}`;
 const toUniform = (props, ...keys) => {
     const item = toDatum(props);
     const defaultProp = [
-        "app",      // 应用程序数据
+        "application.js",      // 应用程序数据
         "user",     // 用户数据
         "profile",  // 账号数据
         "router",   // 路由数据

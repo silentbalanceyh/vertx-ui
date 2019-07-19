@@ -12,7 +12,7 @@ module.exports = {
     web: path.resolve(__dirname, "../src", "economy"),
     // ----------------------------组件包----------------------------
     // 新的Hotel组件包
-    app: path.resolve(__dirname, "../src", "app"),
+    app: path.resolve(__dirname, "../src", "application.js"),
     // 新统一工具包
     ux: path.resolve(__dirname, "../src", "ux"),
     // Fix moment issu

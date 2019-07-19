@@ -1,0 +1,64 @@
+@import "../../../../global";
+
+.ux-layout {
+    .tpl(@height,@padding, @action, @notify, @avatar, @sider) {
+        .ux-sider {
+
+        }
+        .ux-header {
+            height: unit(@height, px);
+            padding: 0 unit(@height / 4, px) 0 0;
+
+            i.trigger {
+                .ix-font.x-line(@height);
+                .ix-box.in(@padding);
+            }
+
+            .right {
+                // 右上角图标修正高度
+                line-height: unit(@height, px) !important;
+
+                .action {
+                    .ix-box.in(@action);
+                }
+
+                .notify-notice-button {
+                    padding: @notify;
+                }
+
+                .account {
+                    .ix-font.line(@height);
+
+                    .avatar {
+                        .ix-box.out(@avatar);
+                    }
+                }
+            }
+        }
+    }
+}
+
+.ux-layout-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ux-layout.tpl(
+                48,
+                4px 20px,
+                0px 4px,
+                8px,
+                6px 2px 6px 0,
+                72
+        );
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ux-layout.tpl(
+                56,
+                4px 24px,
+                0px 6px,
+                8px,
+                12px 4px 12px 0,
+                80
+        );
+    }
+}

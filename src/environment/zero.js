@@ -286,12 +286,6 @@ export default (options = {}) => {
         // Form连接配置：顺序不可替换
         Component = fnForm(Component, options);
 
-        return class hoc extends Component {
-            render() {
-                // 是否打印日志
-                fnLog(this, options);
-                return super.render();
-            }
-        };
+        return Component;
     };
 };

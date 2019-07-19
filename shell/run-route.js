@@ -85,22 +85,48 @@ pageDir.forEach(layout => {
     line.push(`import ${key} from '${layout}/UI';`);
     variables.push(key);
 });
+
+// Extension Dir for Zero Modules
+const extensionDir = collect('./src/extension/components');
+const extensionVariables = [];
+let extensionLine = [];
+extensionDir.forEach(page => {
+    const key = page.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
+    extensionLine.push(`import ${key} from '${page}/UI';`);
+    extensionVariables.push(key);
+});
+
+line.push(`import _extension from '../extension/components';`);
 line.push('\nexport default {');
 variables.forEach(variable => {
     line.push(`\t${variable},`)
 });
+line.push(`\t..._extension,`);
 line.push('}\n');
 content = line.join("\n");
+// Extension
+extensionLine.push('\nexport default {');
+extensionVariables.forEach(variable => {
+    extensionLine.push(`\t${variable},`)
+});
+extensionLine.push('}\n');
+fs.writeFileSync("src/extension/components/index.js", extensionLine.join("\n"));
+
 fs.writeFile("src/components/index.js", content, () => {
     console.log("[SUC] Successfully to write data to src/components/index.js");
     // 1.读取路由模板，生成静态路由
     const routeConfig = JSON.parse(fs.readFileSync("src/route.json"));
     // 2.计算路由关联关系
-    const routes = generateRoute(variables, routeConfig);
+    const routes = generateRoute(variables.concat(extensionVariables), routeConfig);
     // 3.根据路由规则计算生成片段
     const lines = [];
     routes.forEach(route => {
-        lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`);
+        if ("/module/page" === route.uri) {
+            // 特殊页面，动态加载用，Origin X专用页
+            lines.push(`{connect("/dp/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
+        } else {
+            lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`);
+        }
     });
     // 4.代码块
     let codeBlock = "";
@@ -110,6 +136,6 @@ fs.writeFile("src/components/index.js", content, () => {
     const codes = tpl.replace(/#{ROUTE}#/g, codeBlock);
     // 6.写入路径
     fs.writeFile("src/environment/routes.js", codes, () => {
-        console.info("[Zero] Routes have been updated successfully! > src/environment/routes.js");
+        console.info("「Zero」 Routes have been updated successfully! > src/environment/routes.js");
     })
 });

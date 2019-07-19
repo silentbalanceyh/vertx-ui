@@ -35,6 +35,12 @@
             ],
             "app": [
                 "src/app"
+            ],
+            "ex": [
+                "src/extension/library"
+            ],
+            "ei": [
+                "src/extension/ecosystem"
             ]
         }
     },
