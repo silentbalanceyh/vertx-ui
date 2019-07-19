@@ -70,7 +70,6 @@ const _rt2Submit = (reference = {}, metadata = {}) => (event) => {
 const _rtError = (reference = {}, failure) => (errors = {}) => {
     const {data = {}} = errors;
     // 如果有自定义的failure函数，则调用failure
-    console.info(errors);
     if (U.isFunction(failure)) {
         failure(errors);
         _rtState(reference, false);
