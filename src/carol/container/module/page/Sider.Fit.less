@@ -1,0 +1,50 @@
+@import "../../../../global";
+
+.ox-sider {
+    .tpl(@width, @height, @left, @title) {
+
+        .ix-width.x-fixed(@width);
+        &-expand {
+            .ix-width.x-fixed(@left);
+        }
+        .ant-menu {
+
+            .ant-menu-submenu-title {
+                // 菜单内边距修改
+                .ix-box.x-in(0 unit(@title, px))
+            }
+        }
+        .logo {
+            .ix-font.line(@height);
+
+            img {
+                height: unit(@height, px);
+            }
+
+            h1 {
+                line-height: unit(@height - 8, px);
+            }
+        }
+    }
+}
+
+.ox-sider-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ox-sider.tpl(
+                72,
+                48,
+                210,
+                28
+        );
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ox-sider.tpl(
+                80,
+                56,
+                250,
+                32
+        );
+    }
+}

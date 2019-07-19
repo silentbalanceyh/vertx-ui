@@ -41,6 +41,7 @@ import _input_tree$select from './input/tree-select/UI';
 import _layout_adjust015 from './layout/adjust015/UI';
 import _layout_standard from './layout/standard/UI';
 import _login_index from './login/index/UI';
+import _extension from '../extension/components';
 
 export default {
 	_a$testing_ant,
@@ -86,4 +87,5 @@ export default {
 	_layout_adjust015,
 	_layout_standard,
 	_login_index,
+	..._extension,
 }

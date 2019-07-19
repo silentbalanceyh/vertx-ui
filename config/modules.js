@@ -16,5 +16,8 @@ module.exports = {
     // 新统一工具包
     ux: path.resolve(__dirname, "../src", "ux"),
     // Fix moment issu
-    moment$: "moment/moment.js"
+    moment$: "moment/moment.js",
+    // Zero Extension
+    ex: path.resolve(__dirname, "../src", "extension/library"),
+    ei: path.resolve(__dirname, "../src", "extension/ecosystem")
 };
