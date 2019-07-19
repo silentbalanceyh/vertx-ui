@@ -6,8 +6,8 @@ export default {
     fnInited: Ux.rxFlow(Types.fnInited)
         .bind(Ajax)
         .mount(
-            'application.js',
-            'application.js.menus'
+            'app',
+            'app.menus'
         )
         .to()
 }

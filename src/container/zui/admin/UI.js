@@ -37,11 +37,11 @@ const buildNavs = (reference = {}) => {
 
 @zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
-    .loading("application.js", "menus")
+    .loading("app", "menus")
     .op("collapse", Op.fnCollapse)
     .connect(state => Ux.dataIn(state)
         .rework({datum: ["menus"]})
-        .revamp(["application.js", "user"])
+        .revamp(["app", "user"])
         .to())
     .connect({
         fnInited: Types.fnInited,
@@ -71,7 +71,7 @@ class Component extends React.PureComponent {
         return (
             <Layout className={"ux-layout"}>
                 <SiderBar {...Ux.toEffect(this.state)}
-                          {...Ux.toProp(this.props, 'application.js', 'router', 'menus')} />
+                          {...Ux.toProp(this.props, 'app', 'router', 'menus')} />
                 <Layout>
                     <GlobalHeader $banner={info}
                                   fnCollapse={$op.collapse(this)}
@@ -80,7 +80,7 @@ class Component extends React.PureComponent {
                     <Content>
                         <Navigation {...Ux.toProp(this.props, 'router')}
                                     $navs={Op.fnNavigator(this)}/>
-                        <Component {...Ux.toProp(this.props, "application.js", "user", "router", "hotel")} />
+                        <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
                     </Content>
                 </Layout>
                 {Ux.D.renderTool(this)}
