@@ -1,5 +1,8 @@
 import Ux from 'ux';
 
+const PREFIX = "Επέκταση μηδέν";
+
 export default {
-    fnExApp: Ux.createAction("/EX-ZERO/APP/BY/NAME")
+    fnExApp: Ux.createAction(`/${PREFIX}/APP/BY/NAME`),
+    fnExInit: Ux.createAction(`/${PREFIX}/APP/INIT`),
 }

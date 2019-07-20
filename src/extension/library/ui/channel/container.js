@@ -36,12 +36,14 @@ const yoComponent = (reference) => Ux.toProp(reference.props,
     'app',
     'user',
     'router',
-    'hotel'
+    'hotel'     // Fixed for old system
 );
 const yoHeader = (reference) => {
     const headers = Ux.toProp(reference.props,
+        'app',
         'router',
-        'user'
+        'user',
+        'menus'
     );
     const effect = Ux.toEffect(reference.state);
     const {$_collapsed} = reference.state;
@@ -54,13 +56,15 @@ const yoHeader = (reference) => {
     return headers;
 };
 const yoAccount = (reference) => {
+    const {$menus} = reference.props;
     const accounts = Ux.toProp(reference.props,
         'user',
+        'app',
         'router'
     );
     const {$hoc} = reference.state ? reference.state : {};
     if ($hoc) {
-        accounts.data = $hoc._('menu');
+        accounts.data = Fn.toArray($menus);    // X_MENU 菜单信息
         accounts.config = {
             window: $hoc._('window')
         }

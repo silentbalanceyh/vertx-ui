@@ -9,6 +9,7 @@ import E from './Epic';
 import I from './api';
 import O from './op';
 import U from './ui';
+import F from './functions';
 /*
  * Channel通道部分
  */
@@ -18,6 +19,7 @@ const exported = {
     I, // Ajax专用汇总接口
     O, // Act（按钮独特函数）
     U, // UI配置信息,
+    F, // Function处理
 };
 console.info(exported);
 export default exported;

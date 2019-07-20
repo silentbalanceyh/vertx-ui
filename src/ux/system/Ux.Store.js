@@ -24,6 +24,13 @@ const get = (reference) => (key) => {
     }
 };
 
+const getDirect = (reference) => (key) => {
+    E.fxTerminal(!reference, 10063, reference);
+    if (key) {
+        return reference.getItem(key);
+    }
+};
+
 const remove = (reference) => (key) => {
     E.fxTerminal(!reference, 10063, reference);
     if (key) {
@@ -39,11 +46,19 @@ const clear = (reference) => () => {
  * 存储应用程序配置
  * @method storeApp
  * @param data
+ * @param appKey
  */
-const storeApp = (data) => {
+const storeApp = (data, appKey = false) => {
     if (data) {
-        const key = Cv.KEY_APP;
-        put(window.localStorage)(key, data);
+        const fnPut = put(window['localStorage']);
+        fnPut(Cv.KEY_APP, data);
+        {
+            fnPut(Cv.X_APP_ID, data.key);
+            fnPut(Cv.X_SIGMA, data.sigma);
+        }
+        if (appKey && data.appKey) {
+            fnPut(Cv.X_APP_KEY, data.appKey);
+        }
     }
     // Fluent for Rxjs
     return data;
@@ -56,7 +71,7 @@ const storeApp = (data) => {
 const storeUser = (data) => {
     if (data) {
         const key = Cv.KEY_USER;
-        put(window.sessionStorage)(key, data);
+        put(window['sessionStorage'])(key, data);
     }
     return data;
 };
@@ -97,24 +112,24 @@ export default {
          * @param {String} key 存储键名
          * @param value 存储的键值
          */
-        put: put(window.sessionStorage),
+        put: put(window['sessionStorage']),
         /**
          * SessionStorage读取数据
          * @method Session.get
          * @param {String} key 读取键名
          */
-        get: get(window.sessionStorage),
+        get: get(window['sessionStorage']),
         /**
          * SessionStorage移除数据
          * @method Session.remove
          * @param {String} key 移除键名
          */
-        remove: remove(window.sessionStorage),
+        remove: remove(window['sessionStorage']),
         /**
          * SessionStorage清除
          * @method Session.clear
          */
-        clear: clear(window.sessionStorage)
+        clear: clear(window['sessionStorage'])
     },
     Storage: {
         /**
@@ -123,24 +138,25 @@ export default {
          * @param {String} key 存储键名
          * @param value 存储的键值
          */
-        put: put(window.localStorage),
+        put: put(window['localStorage']),
         /**
          * LocalStorage读取数据
          * @method Storage.get
          * @param {String} key 读取键名
          */
-        get: get(window.localStorage),
+        get: get(window['localStorage']),
+        getDirect: getDirect(window['localStorage']),
         /**
          * LocalStorage移除数据
          * @method Storage.remove
          * @param {String} key 移除键名
          */
-        remove: remove(window.localStorage),
+        remove: remove(window['localStorage']),
         /**
          * LocalStorage清除
          * @method Storage.clear
          */
-        clear: clear(window.localStorage)
+        clear: clear(window['localStorage'])
     },
     storeApp,
     storeUser

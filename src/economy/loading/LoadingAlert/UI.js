@@ -1,11 +1,11 @@
 import React from 'react';
-import {Alert} from 'antd';
+import {Alert, Icon} from 'antd';
 import './Cab.less';
 import U from 'underscore';
 
 class Component extends React.PureComponent {
     render() {
-        const {$alert = {}, $type = "info", $icon} = this.props;
+        const {$alert = {}, $type = "info", $icon, $size = 28} = this.props;
         const {message, description} = $alert;
 
         let descJsx = false;
@@ -29,7 +29,9 @@ class Component extends React.PureComponent {
         attrs.showIcon = true;
         let className = "";
         if ($icon) {
-            attrs.icon = $icon;
+            attrs.icon = (<Icon type={$icon} style={{
+                fontSize: $size
+            }}/>);
             className = "web-alert-iconlist";
         } else {
             className = "web-alert-list";

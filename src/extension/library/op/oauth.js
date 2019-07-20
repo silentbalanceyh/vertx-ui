@@ -20,13 +20,17 @@ const login = (reference, callback) => (params) => Api.login(params)
         const token = {};
         token.code = data['code'];
         token.client_id = data['client_id'];
-        return Api.token(token)
+        return Api.token(token).then((response) => {
+            response.key = token.client_id;
+            return Promise.resolve(response);
+        })
     })
-    .then((token = {}) => {
+    .then((response = {}) => {
         // 读取Token信息
         const user = {};
-        user.token = token.access_token;
-        user.refreshToken = token.refresh_token;
+        user.token = response.access_token;
+        user.refreshToken = response.refresh_token;
+        user.key = response.key;
         user.username = params.username;
         if (U.isFunction(callback)) {
             return callback(user);

@@ -1,11 +1,12 @@
 import U from 'underscore';
 import Ux from 'ux';
 import {Modal} from 'antd';
+import Ex from 'ex';
 
-const fnLogout = (reference, key = "") => {
+const fnLogout = (reference) => {
     const {config = {}} = reference.props;
     const {window = {}} = config;
-    const dialog = window[key];
+    const dialog = window['logout'];
     let $config = {};
     if (U.isObject(dialog)) {
         $config = Ux.clone(dialog);
@@ -25,16 +26,33 @@ const fnLogout = (reference, key = "") => {
     })
 };
 const _DISPATCH = {
-    "key.menu.logout": fnLogout
+    fnLogout
 };
 const _2fnSelect = (reference) => (event) => {
-    const executor = _DISPATCH[event.key];
-    if (U.isFunction(executor)) {
-        executor(reference, event.key);
-    } else {
-        console.error("配置键没有对应的函数：", event.key);
+    const {data} = event.item.props;
+    if (data && U.isObject(data)) {
+        const {metadata = {}} = data;
+        const executor = _DISPATCH[metadata.function];
+        if (U.isFunction(executor)) {
+            executor(reference);
+        }
     }
 };
+const _1normalizeMenu = (reference = {}) => {
+    const {data = [], $app} = reference.props;
+    const result = Ux.clone(data)
+        .filter(item => "TOP-MENU" === item.type)
+        .sort((left, right) => left.order - right.order);
+    result.forEach(item => {
+        Ex.F.toMeta(item);
+        /* 如果 uri 无值，则不设置 */
+        if ($app && U.isFunction($app.is) && item.uri) {
+            item.uri = `/${$app._('path')}${item.uri}`
+        }
+    });
+    return result;
+};
 export default {
-    _2fnSelect
+    _2fnSelect,
+    _1normalizeMenu,
 }

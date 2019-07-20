@@ -9,16 +9,27 @@ const _1normalizeUri = (data = []) => {
     });
     return uris;
 };
+/*
+ * 菜单种类
+ * 1. 左边菜单：SIDE-MENU
+ * 2. 导航菜单：NAV-MENU
+ * 3. 顶部菜单：TOP-MENU
+ * 4. 右键菜单：CONTEXT-MENU
+ */
 const _1normalizeMenu = (data = [], app = {}) => {
     data = Ux.clone(data);
     const path = app._("path") ? app._("path") : Ux.Env['ROUTE'];
     return Ux.Uarr.create(data)
-        .filter(item => "SIDEBAR" !== item.type)
-        .sort((left, right) => left.left - right.left)
+    /* 必须是 SIDEBAR */
+        .filter(item => "SIDE-MENU" === item.type)
+        .sort((left, right) => left.order - right.order)
         .convert('uri', (uri) => {
             // 处理 undefined 专用，父目录处理
             if ("EXPAND" !== uri) {
-                return `/${path}${uri}`;
+                /*
+                 * 最终处理
+                 */
+                return `${path}${uri}`;
             } else {
                 return undefined;
             }
