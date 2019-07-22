@@ -277,6 +277,8 @@ export default (options = {}) => {
                 const render = fnRender(this.props, options);
                 // 检查Form专用程序
                 ensureForm(this, options);
+                // 打印日志
+                fnLog(this, options);
 
                 return render ? super.render() : <LoadingContent/>;
             }
