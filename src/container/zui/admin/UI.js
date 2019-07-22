@@ -41,7 +41,7 @@ const buildNavs = (reference = {}) => {
     .op("collapse", Op.fnCollapse)
     .connect(state => Ux.dataIn(state)
         .rework({datum: ["menus"]})
-        .revamp(["app", "user"])
+        .revamp(["app", "employee.js"])
         .to())
     .connect({
         fnInited: Types.fnInited,
@@ -76,11 +76,11 @@ class Component extends React.PureComponent {
                     <GlobalHeader $banner={info}
                                   fnCollapse={$op.collapse(this)}
                                   {...Ux.toEffect(this.state)}
-                                  {...Ux.toProp(this.props, 'router', 'user')} />
+                                  {...Ux.toProp(this.props, 'router', 'employee.js')} />
                     <Content>
                         <Navigation {...Ux.toProp(this.props, 'router')}
                                     $navs={Op.fnNavigator(this)}/>
-                        <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
+                        <Component {...Ux.toProp(this.props, "app", "employee.js", "router", "hotel")} />
                     </Content>
                 </Layout>
                 {Ux.D.renderTool(this)}

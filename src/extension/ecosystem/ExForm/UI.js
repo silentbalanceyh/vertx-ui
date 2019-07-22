@@ -3,6 +3,8 @@ import {LoadingContent} from "web";
 import {Form} from 'antd';
 import Op from './Op';
 import Ux from "ux";
+import Ex from "ex";
+import jsxAction from "./Op.Jsx";
 
 class Component extends React.PureComponent {
     state = {
@@ -15,9 +17,13 @@ class Component extends React.PureComponent {
 
     render() {
         const {$ready = false} = this.state;
-        return $ready ? (
-            Ux.uiFieldForm(this, {}, 1)
-        ) : (<LoadingContent/>)
+        const {$height} = this.props;
+        return $ready ? (Ux.uiFieldForm(this, {
+            $button: (config, reference) => {
+                const {extension = []} = config.optionJsx;
+                return jsxAction(Ex.F.parseButtons(extension, reference));
+            }
+        }, 1)) : (<LoadingContent $height={$height}/>)
     }
 }
 

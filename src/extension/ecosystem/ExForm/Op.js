@@ -46,11 +46,34 @@ const yiForm = (reference) => {
             .then($ui => Promise.resolve(Ex.U.yiForm($ui, addon, id)))
             .then(state => {
                 state = Ux.clone(state);
-                state.$ready = true;    // 和前边 $ready = false 对应
                 Ux.dgDebug(state, "[ExForm] 表单配置");
-                reference.setState(state);
+                // Action 专用处理
+                yiAction(reference, state);
             })
     );
+};
+/*
+ * 扩展 Op 专用 render 处理
+ */
+const yiAction = (reference, state) => {
+    /*
+     * 提取核心配置
+     */
+    const {config = {}} = reference.props;
+    const {form = {}, control} = config;
+    const {actions = {}} = form;
+    if (actions) {
+        /* 检查配置核心信息 */
+        Ex.U.yiAction(actions, control).then(result => {
+            state.$action = Ux.clone(result);
+            state.$ready = true;
+            reference.setState(state);
+        })
+    } else {
+        state.$ready = true;
+        state.$action = {};
+        reference.setState(state);
+    }
 };
 export default {
     yiForm

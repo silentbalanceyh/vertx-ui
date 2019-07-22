@@ -26,6 +26,7 @@ import XT from './xweb';
 import Jsx from './jsx';
 import Dg from './Ux.Debug';
 import Mock from './mock';
+import Validator from './validator';
 
 const exported = {
     // ...CONTROL,
@@ -111,6 +112,7 @@ const exported = {
      * Html：专用Html属性处理
      * Icon：图标处理
      */
+    ...Validator,
     ...Util,
     ...Terminal,
     // 图专用函数

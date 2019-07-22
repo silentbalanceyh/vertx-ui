@@ -41,8 +41,21 @@ const login = (reference, callback) => (params) => Api.login(params)
     .then((user = {}) => {
         /* 存储用户信息 */
         Ux.storeUser(user);
+        /* 先存储一份用户数据，后续请求需要拿 token */
+        return Promise.resolve(user);
+    })
+    /* 直接读取员工信息 */
+    .then(() => Api.user())
+    .then(employee => {
+        const user = Ux.isLogged();
+        const logged = Object.assign(Ux.clone(user), employee);
+        /* 第二次存储 */
+        Ux.storeUser(logged);
         /* 重定向 */
         Ux.toOriginal(reference);
+    })
+    .catch(error => {
+        console.error(error);
     });
 export default {
     login,

@@ -1,4 +1,4 @@
-import Validator from "./prop/Ux.Validator";
+import Validator from "./validator";
 import Type from "./Ux.Type";
 import Value from './Ux.Value';
 import Html from "./util/Ux.Html";

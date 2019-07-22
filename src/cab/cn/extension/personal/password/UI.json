@@ -22,7 +22,11 @@
                     "metadata": "opassword,旧密码,14,,,type=password",
                     "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
-                        "required,请输入旧密码"
+                        "required,请输入旧密码",
+                        {
+                            "min": 8,
+                            "message": "密码长度必须大于8个字符！"
+                        }
                     ]
                 }
             ],
@@ -34,18 +38,17 @@
                         "required,请输入新密码",
                         {
                             "min": 8,
-                            "message": "密码长度必须大于8个字符！",
-                            "first": true
+                            "message": "密码长度必须大于8个字符！"
                         },
                         {
                             "validator": "diff",
                             "message": "新密码不能和旧密码相同！",
-                            "$comparedTo": "npassword",
-                            "$trigger": {
-                                "opassword": {
-                                    "length": ">8"
-                                }
-                            }
+                            "config": {
+                                "to": "opassword"
+                            },
+                            "condition": [
+                                "value.length >= 8"
+                            ]
                         }
                     ]
                 }
@@ -58,18 +61,17 @@
                         "required,请输入新密码",
                         {
                             "min": 8,
-                            "message": "密码长度必须大于等于8个字符！",
-                            "first": true
+                            "message": "密码长度必须大于等于8个字符！"
                         },
                         {
                             "validator": "same",
                             "message": "两次输入密码不一致！",
-                            "$comparedTo": "npassword",
-                            "$trigger": {
-                                "cpassword": {
-                                    "length": ">8"
-                                }
-                            }
+                            "config": {
+                                "to": "npassword"
+                            },
+                            "condition": [
+                                "to.length >= 8"
+                            ]
                         }
                     ]
                 }
@@ -77,11 +79,11 @@
             [
                 {
                     "metadata": "$button",
-                    "hidden": true,
-                    "optionJsx.buttons": {
-                        "submit": "$opSave",
-                        "reset": "$opReset"
-                    }
+                    "optionJsx.extension": [
+                        "opPassword,更改密码,$opPassword,primary",
+                        "opReset,重置,$opReset"
+                    ],
+                    "span": 24
                 }
             ]
         ],
@@ -89,6 +91,11 @@
             "inputs": [
                 "key"
             ]
+        },
+        "actions": {
+            "op": {
+                "opPassword": "act.user.password"
+            }
         }
     }
 }

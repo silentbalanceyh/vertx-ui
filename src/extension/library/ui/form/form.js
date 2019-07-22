@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import Ex from 'ex';
 import U from 'underscore';
 import Raft from './form.raft';
 /* ExForm 属性继承 */
@@ -6,7 +7,7 @@ const yoForm = (reference, addOn = {}, data = {}) => {
     const attrs = Ux.toProp(reference.props,
         'app',      // 应用程序 X_APP 信息
         'router',   // 路由信息 react-router
-        'user',     // 用户基本信息
+        'employee.js',     // 用户基本信息
     );
     const config = {};
     /*
@@ -93,7 +94,54 @@ const yiForm = (form = {}, addon = {}, id) => {
     }
     return state;
 };
+/*
+ * actions格式：
+ * {
+ *      "name": 表单名称
+ *      "op":{
+ *          "id": "key"
+ *      }
+ * }
+ * 合并后的请求格式
+ * {
+ *      "name": 表单名称
+ *      "control": 控件ID
+ *      "op": [
+ *          key1,
+ *          key2
+ *      ]
+ * }
+ * 响应格式
+ * {
+ *      "id1": true,
+ *      "id2": false
+ * }
+ */
+const yiAction = (params = {}, control) => {
+    const actionParams = {};
+    if (control) {
+        /*
+         * 动态权限控制
+         */
+        actionParams.control = control;
+        actionParams.remote = true;
+    } else if (params.hasOwnProperty('name')) {
+        /*
+         * 后端静态权限控制
+         */
+        actionParams.name = params.name;
+        actionParams.remote = true;
+    } else {
+        /*
+         * 无权限控制
+         */
+        actionParams.remote = false;
+    }
+    actionParams.op = params.op;
+    return Ex.I.action(actionParams);
+};
 export default {
     yoForm,
     yiForm,
+    yiAction,
 }

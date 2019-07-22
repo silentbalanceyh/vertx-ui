@@ -1,5 +1,4 @@
 import Ux from "ux";
-import renders from "../../../../app/hoc/Ox.Rdr.Action";
 
 const raftAttribute = (metadata = {}, {
     form = {}, addon = {}, id,
@@ -97,7 +96,7 @@ const raftPreCell = (metadata, {
         cell.field = `children.${entity}.${cell.field}`;
         entityConfig.entity = entity;
     }
-    const fnRender = Ux.raptRender(cell, renders, entityConfig, reference);
+    const fnRender = Ux.raptRender(cell, {}, entityConfig, reference);
     // 赋值处理
     const render = fnRender ? fnRender : () => {
         console.error(`Render未找到，${cell.field}`);

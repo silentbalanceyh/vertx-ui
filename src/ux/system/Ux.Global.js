@@ -101,7 +101,7 @@ const isAuthorized = (reference) => {
     }
 };
 const toLoading = (consumer, seed = 1) => {
-    const ms = Value.valueInt(Cv.LOADING, 324);
+    const ms = Value.valueInt(Cv.LOADING, 256);
     setTimeout(consumer, ms * seed);
 };
 /**

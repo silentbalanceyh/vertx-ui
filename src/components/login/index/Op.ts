@@ -21,7 +21,7 @@ const fnLogin = (values: any, reference: any) => {
 };
 const _validate = (reference, values: any) => {
     if ("lang.yu" !== values.username) {
-        Ux.showMessage(reference, "user");
+        Ux.showMessage(reference, "employee.js");
         return false;
     }
     if ("lang.yu" !== values.password) {

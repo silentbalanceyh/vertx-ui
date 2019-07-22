@@ -9,7 +9,7 @@ class Component extends React.PureComponent {
             Ux.aiGrid([21, 3],
                 <Button.Group className={"zui-tool"}>
                     <Button icon={"github"}/>
-                    <Button icon={"user"}/>
+                    <Button icon={"employee.js"}/>
                     <Button icon={"cluster"}/>
                     <Button icon={"mail"}/>
                     <Button icon={"search"}/>

@@ -21,7 +21,8 @@ class Component extends React.PureComponent {
                               $icon={"warning"}
                               $type={"warning"}
                               $size={40}/>
-                <ExForm {...form}/>
+                <ExForm {...form} $height={"200px"}
+                        $actions={Op.actions}/>
             </PageCard>
         )
     }

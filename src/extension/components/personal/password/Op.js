@@ -11,9 +11,15 @@ const yoForm = (reference) => {
     inited.username = user.username;
     /* 合并配置 */
     return Ex.U.yoForm(reference, {
-        form: config
+        form: config,
     }, inited);
+};
+const $opPassword = (reference) => (event) => {
+    console.info($opPassword);
 };
 export default {
     yoForm,
+    actions: {
+        $opPassword
+    }
 }
