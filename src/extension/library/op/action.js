@@ -5,6 +5,7 @@
 import Ux from "ux";
 import U from "underscore";
 import Fn from "../functions";
+import {Modal} from 'antd';
 /*
  * 必须生成 Promise
  */
@@ -52,9 +53,16 @@ const _applyError = (reference, error = {}) => {
         /*
          * 弹框处理
          */
+        const dialog = Ux.fromHoc(reference, "dialog");
+        const config = {};
+        config.title = dialog.error;
+        config.content = data.info;
+        config.maskClosable = false;
+        config.onOk = () => reference.setState({$loading: false});
+        Modal.error(config);
+    } else {
+        console.error("核心错误：", data);
     }
-    console.info(data);
-    reference.setState({$loading: false});
 };
 /*
  * 特殊流程函数
@@ -99,4 +107,5 @@ const generateOp = (reference, executor = {}) => (event) => {
 };
 export default {
     generateOp,
+    generateError: _applyError
 }

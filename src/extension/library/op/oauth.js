@@ -1,6 +1,7 @@
 import Api from '../api';
 import Ux from 'ux';
 import U from 'underscore';
+import Action from './action';
 
 const login = (reference, callback) => (params) => Api.login(params)
     .then((data = {}) => {
@@ -54,9 +55,7 @@ const login = (reference, callback) => (params) => Api.login(params)
         /* 重定向 */
         Ux.toOriginal(reference);
     })
-    .catch(error => {
-        console.error(error);
-    });
+    .catch(error => Action.generateError(reference, error));
 export default {
     login,
 }
