@@ -21,7 +21,7 @@ const fnLogout = (reference) => {
             // 路由处理
             Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN);
             // 清楚State上的数据
-            Ux.eraseTree(reference, ["employee.js"]);
+            Ux.eraseTree(reference, ["user"]);
         }
     })
 };

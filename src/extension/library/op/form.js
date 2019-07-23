@@ -7,5 +7,5 @@ const $opReset = (reference) => (event) => {
 export default {
     DEFAULT_ACTION: {
         $opReset,
-    },
+    }
 }

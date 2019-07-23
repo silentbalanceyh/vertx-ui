@@ -7,7 +7,7 @@ const yoForm = (reference, addOn = {}, data = {}) => {
     const attrs = Ux.toProp(reference.props,
         'app',      // 应用程序 X_APP 信息
         'router',   // 路由信息 react-router
-        'employee.js',     // 用户基本信息
+        'user',     // 用户基本信息
     );
     const config = {};
     /*
@@ -25,6 +25,17 @@ const yoForm = (reference, addOn = {}, data = {}) => {
         config.magic = Ux.clone(addOn.magic);
         config.control = addOn.control;
         config.addon = Ux.clone(addOn.addon);
+    }
+    /*
+     * Dialog 窗口配置
+     */
+    const dialog = Ux.fromHoc(reference, "dialog");
+    const modal = Ux.fromHoc(reference, "modal");
+    if (dialog) {
+        config.dialog = {
+            title: Ux.clone(dialog),
+            modal
+        }
     }
     attrs.config = Ux.clone(config);
     /* Form 特殊配置 */

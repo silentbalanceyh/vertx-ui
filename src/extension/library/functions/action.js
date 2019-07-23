@@ -35,6 +35,7 @@ const _parseClick = (action, reference) => {
 
 const _parseAction = (action, reference) => {
     if (action) {
+        let button = {};
         if ("string" === typeof action) {
             const actions = {};
             const parsed = action.split(',');
@@ -46,10 +47,16 @@ const _parseAction = (action, reference) => {
             if (parsed[4]) {
                 actions.icon = parsed[4];
             }
-            return _parseClick(actions, reference);
+            button = _parseClick(actions, reference);
         } else if (U.isObject(action)) {
-            return Ux.clone(action);
+            button = Ux.clone(action);
         }
+        /*
+         * 防重复提交加载表单效果处理
+         */
+        const {$loading = false} = reference.state;
+        button.loading = $loading;
+        return button;
     }
 };
 const _parseAuthorized = (action = {}, reference) => {

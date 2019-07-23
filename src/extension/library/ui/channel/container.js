@@ -34,7 +34,7 @@ const yoNavigation = (reference, addOn = {}) => {
 };
 const yoComponent = (reference) => Ux.toProp(reference.props,
     'app',
-    'employee.js',
+    'user',
     'router',
     'hotel'     // Fixed for old system
 );
@@ -42,7 +42,7 @@ const yoHeader = (reference) => {
     const headers = Ux.toProp(reference.props,
         'app',
         'router',
-        'employee.js',
+        'user',
         'menus'
     );
     const effect = Ux.toEffect(reference.state);
@@ -58,7 +58,7 @@ const yoHeader = (reference) => {
 const yoAccount = (reference) => {
     const {$menus} = reference.props;
     const accounts = Ux.toProp(reference.props,
-        'employee.js',
+        'user',
         'app',
         'router'
     );

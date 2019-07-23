@@ -14,9 +14,27 @@ const yoForm = (reference) => {
         form: config,
     }, inited);
 };
-const $opPassword = (reference) => (event) => {
-    console.info($opPassword);
-};
+const $opPassword = (reference) => Ex.O.generateOp(reference, {
+    /*
+     * 先不考虑 failure 的情况
+     */
+    success: params => {
+        const input = {};
+        input.password = params.npassword;
+        return Ex.I.password(input)/* 更新密码回调处理 */.then(data => Ex.U.yiDialog(reference, {
+            data, /* 响应数据 */
+            key: "password", /* 专用窗口对应的key */
+        })).then(closed => {
+            // 清掉Session
+            Ux.toLogout();
+            // 路由处理
+            Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN);
+            // 清楚State上的数据
+            Ux.eraseTree(reference, ["user"]);
+        });
+    }
+});
+
 export default {
     yoForm,
     actions: {

@@ -97,5 +97,10 @@
                 "opPassword": "act.user.password"
             }
         }
+    },
+    "_modal": {
+        "success": {
+            "password": "您好，:realname！您的密码已修改完成，请确认后重新登录系统！"
+        }
     }
 }
