@@ -1,7 +1,7 @@
 import Ux from "ux";
 
-const fnExApp = (data) => ({app: Ux.storeApp(data)});
-const fnExInit = (data = []) => {
+const procApp = (data) => ({app: Ux.storeApp(data)});
+const procInit = (data = []) => {
     const result = {};
     if (data[0]) {
         /* 第二参，写AppKey */
@@ -12,6 +12,6 @@ const fnExInit = (data = []) => {
     return result;
 };
 export default {
-    fnExApp,
-    fnExInit,
+    procApp,
+    procInit,
 }

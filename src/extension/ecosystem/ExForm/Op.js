@@ -18,7 +18,8 @@ const yiForm = (reference) => {
         /*
          * 静态
          */
-        supplier = () => Promise.resolve(config.form);
+        console.info("[Ex] 静态表单：", config.form);
+        supplier = () => Ex.promise(config.form);
     } else if (config.control && !config.form) {
         /*
          * 动态
@@ -29,6 +30,7 @@ const yiForm = (reference) => {
          */
         const params = Ux.valueSearch(magic, reference.props, reference.state);
         params.control = control;
+        console.info("[Ex] 动态表单：", config.control);
         supplier = () => Ex.I.form(params);
     } else {
         /*
@@ -43,7 +45,7 @@ const yiForm = (reference) => {
          * 2）动态模式（Ox）
          * 3）混合（Ex）模式
          */
-            .then($ui => Promise.resolve(Ex.U.yiForm($ui, addon, id)))
+            .then($ui => Ex.promise(Ex.configForm($ui, addon, id)))
             .then(state => {
                 state = Ux.clone(state);
                 Ux.dgDebug(state, "[ExForm] 表单配置");
@@ -64,7 +66,7 @@ const yiAction = (reference, state) => {
     const {actions = {}} = form;
     if (actions) {
         /* 检查配置核心信息 */
-        Ex.U.yiAction(actions, control).then(result => {
+        Ex.configAction(actions, control).then(result => {
             state.$action = Ux.clone(result);
             state.$ready = true;
             reference.setState(state);

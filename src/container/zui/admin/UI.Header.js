@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
                     {/** 提醒菜单 **/}
                     <Notify/>
                     {/** 用户信息 **/}
-                    <Account {...Ux.toProp(this.props, 'employee.js', 'router')} />
+                    <Account {...Ux.toProp(this.props, 'user', 'router')} />
                 </div>
             </Header>
         )

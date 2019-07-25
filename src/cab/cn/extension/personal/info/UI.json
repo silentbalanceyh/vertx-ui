@@ -1,5 +1,66 @@
 {
     "_page": {
-        "title": "个人信息"
+        "title": "更新个人信息"
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=个人信息"
+            ],
+            [
+                "username,登录账号,14,,,readOnly=true"
+            ],
+            [
+                "realname,真实姓名,10",
+                "alias,昵称,14"
+            ],
+            [
+                "mobile,手机号,10",
+                "email,电子邮件,14"
+            ],
+            [
+                "title=办公信息"
+            ],
+            [
+                "workNumber,工号,14,,,readOnly=true"
+            ],
+            [
+                "workTitle,工作头衔,14"
+            ],
+            [
+                "workPhone,工作电话,10",
+                "workEmail,工作邮件,14"
+            ],
+            [
+                "workLocation,办公地点,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "opProfile,保存,$opProfile,primary",
+                        "opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+                "key",
+                "employeeId"
+            ]
+        },
+        "actions": {
+            "op": {
+                "opProfile": "act.user.profile"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "profile": "您好，:realname！您的个人信息更新成功！"
+        }
     }
 }

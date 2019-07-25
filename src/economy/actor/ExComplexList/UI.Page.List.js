@@ -44,7 +44,6 @@ export default (reference, item = {}) => {
                 <Col span={3} xl={3} xxl={2}>
                     {renderExtra(reference)}
                 </Col>
-
             </Row>
             <Row>
                 <Col span={24}>

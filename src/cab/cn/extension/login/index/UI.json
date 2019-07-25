@@ -1,0 +1,50 @@
+{
+    "_form": {
+        "ui": [
+            [
+                {
+                    "field": "username",
+                    "optionJsx": {
+                        "prefix": {
+                            "type": "user",
+                            "style": {
+                                "color": "white"
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "password",
+                    "optionJsx": {
+                        "type": "password",
+                        "prefix": {
+                            "type": "lock",
+                            "style": {
+                                "color": "white"
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.buttons": {
+                        "submit": "btnLogin,登录,$opLogin",
+                        "reset": "btnReset,重置,$opReset"
+                    }
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "success": {
+        },
+        "error": {
+            "user": "账号不存在！",
+            "password": "密码错误，请输入正确密码！"
+        }
+    }
+}

@@ -1,25 +1,46 @@
-/*
- * Redux部分
- */
-import T from './Types';
-import E from './Epic';
-/*
- * Exported部分
- */
-import I from './api';
-import O from './op';
-import U from './ui';
-import F from './functions';
-/*
- * Channel通道部分
- */
+import Types from './Types';
+
+import Op from './op';
+import Fun from './functions';
+import Channel from './channel';
+import I from './ajax';
+
 const exported = {
-    T, // Pre：Redux中需要连接的 Types
-    E, // Pre: Redux中的 Epics
-    I, // Ajax专用汇总接口
-    O, // Act（按钮独特函数）
-    U, // UI配置信息,
-    F, // Function处理
+    /*
+     * Redux 部分专用
+     * 1) Types - `epicXxx`
+     * 2) Epic - `epicXxx`
+     * 3) Processor - `procXxx`
+     */
+    ...Types,
+    /*
+     * Ex.Op
+     * $opLogin：登录专用
+     */
+    Op,
+    /*
+     * 1）`yo`调用
+     * yoAmbient
+     * yoComponent
+     * yoSider
+     * yoNavigation
+     * yoHeader
+     * yoAccount
+     * 2) `yi`调用
+     * 3) `yl`调用
+     */
+    ...Channel,
+    /*
+     * 全局函数
+     * array,
+     * props
+     * state
+     * metadata
+     * promise
+     * failure
+     */
+    ...Fun,
+    I,
 };
 console.info(exported);
 export default exported;

@@ -74,12 +74,13 @@ const _parseAuthorized = (action = {}, reference) => {
         }
     }
 };
-const parseButtons = (extension = [], reference) => {
+const toButtons = (extension = [], reference) => {
     return extension
         .map(each => _parseAction(each, reference))
         .map(each => _parseAuthorized(each, reference))
         .filter(item => !!item);
 };
+
 export default {
-    parseButtons,
+    toButtons,
 }

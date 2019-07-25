@@ -1,0 +1,49 @@
+{
+    "_page": {
+        "title": "查看企业信息"
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "title,企业标题,14,,aiMagic",
+                "name,企业名称,10,,aiMagic"
+            ],
+            [
+                "code,企业系统编号,14,,aiMagic"
+            ],
+            [
+                "phone,座机,14,,aiMagic",
+                "email,邮箱,10,,aiMagic"
+            ],
+            [
+                "fax,传真,14,,aiMagic",
+                "homepage,公司主页,10,,aiMagic"
+            ],
+            [
+                "address,公司地址,19,,aiMagic"
+            ],
+            [
+                "title=商务信息"
+            ],
+            [
+                "taxTitle,开票标题,14,,aiMagic",
+                "taxCode,企业税号,10,,aiMagic"
+            ],
+            [
+                "corporationName,企业法人,14,,aiMagic",
+                "corporationPhone,法人电话,10,,aiMagic"
+            ],
+            [
+                "contactName,联系人姓名,14,,aiMagic",
+                "contactPhone,联系人电话,10,,aiMagic"
+            ],
+            [
+                "comment,企业简介,19,,aiMagic"
+            ]
+        ]
+    }
+}

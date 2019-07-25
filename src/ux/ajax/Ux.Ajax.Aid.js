@@ -166,6 +166,7 @@ const ajaxOptions = (method, headers) => {
     if (Cv.hasOwnProperty('CORS_CREDENTIALS')) {
         options.credentials = Cv['CORS_CREDENTIALS'];
     }
+    // console.info(options);
     return options;
 };
 export default {

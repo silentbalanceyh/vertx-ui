@@ -28,4 +28,4 @@ export default {
     equal,
     same: equal,
     diff,
-}
+};

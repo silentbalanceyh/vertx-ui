@@ -1,0 +1,11 @@
+{
+    "_window": {
+        "logout": {
+            "title": "警告",
+            "content": "您将注销当前账号退出该系统，确认？",
+            "okText": "注销",
+            "cancelText": "取消",
+            "maskClosable": false
+        }
+    }
+}
