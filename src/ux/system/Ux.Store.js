@@ -52,10 +52,10 @@ const storeApp = (data, appKey = false) => {
     if (data) {
         const fnPut = put(window['localStorage']);
         fnPut(Cv.KEY_APP, data);
-        {
-            fnPut(Cv.X_APP_ID, data.key);
-            fnPut(Cv.X_SIGMA, data.sigma);
-        }
+
+        fnPut(Cv.X_APP_ID, data.key);
+        fnPut(Cv.X_SIGMA, data.sigma);
+
         if (appKey && data.appKey) {
             fnPut(Cv.X_APP_KEY, data.appKey);
         }

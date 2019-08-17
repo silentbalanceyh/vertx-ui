@@ -42,4 +42,4 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
 };
 export default {
     existing
-}
+};

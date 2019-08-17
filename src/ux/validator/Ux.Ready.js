@@ -83,4 +83,4 @@ const isReadyWithCond = (reference, fnCompare = () => true) => (rule = {}, value
 export default {
     isReady,
     isReadyWithCond
-}
+};

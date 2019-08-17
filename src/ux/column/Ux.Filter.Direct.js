@@ -62,7 +62,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                    style={{width: width.button ? width.button : 48}}>
                     {button.reset ? button.reset : false}
                 </a>
-                {T.jsxArchor(field, clearAttrs.onClick)}
+                {T.jsxArchor(field, clearFilters)}
             </div>
         </div>
     );

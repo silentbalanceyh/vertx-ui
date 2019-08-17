@@ -55,7 +55,7 @@ const getClearAttrs = (reference, field, {
 const jsxArchor = (field, onClick) => {
     return (
         <div className={"ux-hidden"}>
-            <Button id={`btn-clear-${field}`} onClick={onClick}/>
+            <Button id={`__BTN_CLEAR_${field}`} onClick={onClick}/>
         </div>
     );
 };

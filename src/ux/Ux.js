@@ -1,7 +1,6 @@
 import ENV from "./Ux.Env";
 import AJAX from "./ajax/Ux.Ajax";
 import JSX from "./Ux.Jsx";
-import OP from "./Ux.Op";
 import NORM from "./Ux.Normalize";
 import TYPES from "./Ux.Type";
 import TREES from "./Ux.Tree";
@@ -51,8 +50,6 @@ const exported = {
     E,
     // JSX渲染
     ...JSX,
-    // OP操作
-    ...OP,
     // Normalize 标准化
     ...NORM,
     // 类型处理
@@ -165,10 +162,6 @@ Dg.dgReport(exported, [
     "「标准」Normalize标准化 - Ux.XXX",
     "「界面」窗口显示函数 - Ux.,#096,show",
     "「界面」窗口效果 - Ux.,#096,OTHER:show",
-    "「事件」连接点函数 - Ux.,#636,connect",
-    "「事件」绑定函数 - Ux.,#636,on",
-    "「事件」通道处理函数 - Ux.,#636,pipe",
-    "「事件」其他函数 - Ux.,#636,OTHER:connect`on`pipe",
     "「界面」Jsx渲染函数 - Ux.,black,jsx",
     "「界面」快速模式函数 - Ux.,black,raft",
     "「界面」操作绑定函数 - Ux.,black,rt",
@@ -195,8 +188,7 @@ Dg.dgReport(exported, [
     "「全局」Reactive事件 - Ux.,#399,rx",
     "「全局」函数式UI - Ux.,#399,aui",
     "「全局」核心类 - Ux.,#399,OBJECT",
-    "「全局」其他全局 - Ux.,#399,OTHER:rx`aui",
-    "「Deprecated」未来移除 - Ux.( cycle ),red",
+    "「全局」其他全局 - Ux.,#399,OTHER:rx`aui"
 ], [
     G,  // 图库
     D,  // 调试库
@@ -241,10 +233,6 @@ Dg.dgReport(exported, [
     NORM, // Normalize标准化
     DIALOG, // 窗口专用函数
     DIALOG, // 窗口专用函数
-    Op, // Action绑定函数
-    Op, // Action绑定函数
-    Op, // Action绑定函数
-    Op, // Action绑定函数
     {...Jsx, ...JSX},  // Jsx新专用函数
     {...Jsx, ...JSX, ...FORM},  // Jsx新专用函数
     {...Jsx, ...JSX},  // Jsx新专用函数
@@ -273,6 +261,5 @@ Dg.dgReport(exported, [
     ENV, // 环境变量
     ENV, // 环境变量
     // CONTROL, // J开头专用
-    OP, // OP操作函数
 ]);
 export default exported;

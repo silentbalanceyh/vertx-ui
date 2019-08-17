@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import {Button, Divider, Popconfirm, Tooltip} from "antd";
 import U from 'underscore';
 import Value from '../../Ux.Value';
+import aiExecutor from './AI.Column.Op.Unity';
 
 const aiCellOp = (reference, config) => (text, record) => {
     const option = config['$option'];
@@ -227,66 +228,15 @@ const aiCellLink = (reference, config, ops = {}) => text => {
         </Fragment>
     );
 };
-const aiCellAction = (reference, config, ops = {}) => (text, record) => {
-    const {$option = []} = config;
-    const options = [];
-    $option.forEach((item, index) => {
-        if ("string" === typeof item) {
-            options.push({
-                key: `link-vertical-${text}-${index}`,
-                divider: true,
-            });
-        } else {
-            const option = {};
-            option.key = `link-${text}-${index}`;
-            option.text = item.text;
-            // Executor 处理
-            if (item.executor) {
-                const fn = ops[item.executor];
-                if (U.isFunction(fn)) {
-                    const fnExecutor = (event) => {
-                        event.preventDefault();
-                        fn(reference, text, {config, record});
-                    };
-                    if (item.confirm) {
-                        option.confirm = item.confirm;
-                        option.onConfirm = fnExecutor;
-                    } else {
-                        option.onClick = fnExecutor;
-                    }
-                } else {
-                    option.error = "Not Function";
-                    console.error(option.error);
-                }
-            } else {
-                option.error = "No Executor";
-                console.error(option.error);
-            }
-            options.push(option);
-        }
-    });
-    return (
-        <Fragment>
-            {options.map(item => {
-                return item.divider ? (
-                    <Divider type="vertical" key={item.key}/>
-                ) : item.confirm ? (
-                    <Popconfirm key={item.key} title={item.confirm}
-                                onConfirm={item.onConfirm}>
-                        <a>{item.text}</a>
-                    </Popconfirm>
-                ) : (
-                    <a key={item.key} onClick={item.onClick}>
-                        {item.text}
-                    </a>
-                );
-            })}
-        </Fragment>
-    );
-};
 export default {
     BUTTON: aiCellButton,
-    ACTION: aiCellAction,
+    // ACTION: aiCellAction,
     OP: aiCellOp,
     LINK: aiCellLink,
+    /*
+    * 统一处理，Extension专用
+    * 1）标准函数：fnEdit / fnDelete
+    * 2）外围传入函数：$executor 变量
+    * */
+    EXECUTOR: aiExecutor,
 };

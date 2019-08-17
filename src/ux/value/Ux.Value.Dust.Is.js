@@ -24,7 +24,14 @@ const isEmpty = (input) => {
     } else return false;
 };
 
+const isObject = (input) => {
+    if (input) {
+        return !U.isArray(input) && U.isObject(input);
+    } else return false;
+};
+
 export default {
     isEmpty, // 判断是否为空
     isDiff, // 判断两个对象是否相同
+    isObject,
 };
