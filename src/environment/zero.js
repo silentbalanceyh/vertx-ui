@@ -278,7 +278,16 @@ export default (options = {}) => {
                 // 检查Form专用程序
                 ensureForm(this, options);
                 // 打印日志
-                fnLog(this, options);
+                const {form} = this.props;
+                if (form) {
+                    const isTouched = form.isFieldsTouched();
+                    if (!isTouched) {
+                        fnLog(this, options);
+                    }
+                } else {
+                    // 打印日志
+                    fnLog(this, options);
+                }
 
                 return render ? super.render() : <LoadingContent/>;
             }
