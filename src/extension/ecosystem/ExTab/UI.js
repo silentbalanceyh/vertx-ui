@@ -1,7 +1,6 @@
 import React from 'react';
 import {Tabs} from 'antd';
 import U from 'underscore';
-import Ex from "ex";
 
 /*
  * React属性props:
@@ -27,16 +26,11 @@ class Component extends React.PureComponent {
     render() {
         const {
             config = {},
-            $activeKey = "",
-            $items = []
         } = this.props;
-        Ex.F.Log.tab({
-            props: this.props,
-            state: this.state,
-        }, false);
+        const {items = []} = config;
         return (
-            <Tabs {...config} activeKey={$activeKey}>
-                {$items.map((item) => {
+            <Tabs {...config}>
+                {items.map((item) => {
                     const {fnRender, ...rest} = item;
                     return (
                         <Tabs.TabPane {...item}>

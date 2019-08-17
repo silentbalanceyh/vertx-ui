@@ -4,6 +4,7 @@ import Op from './op';
 import Fun from './functions';
 import Channel from './channel';
 import I from './ajax';
+import Qr from './query';
 
 const exported = {
     /*
@@ -41,6 +42,10 @@ const exported = {
      */
     ...Fun,
     I,
+    /*
+     * Qr 中不开放所有内容
+     */
+    ...Qr,
 };
 console.info(exported);
 export default exported;

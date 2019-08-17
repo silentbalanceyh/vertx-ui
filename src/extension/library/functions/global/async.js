@@ -2,6 +2,7 @@ import U from 'underscore';
 import E from '../debug/error';
 import Ux from 'ux';
 import {Modal} from 'antd';
+import Q from 'q';
 
 /*
  * 单参数
@@ -49,10 +50,24 @@ const failure = (reference, error = {}) => {
         config.onOk = () => reference.setState({$loading: false});
         Modal.error(config);
     } else {
-        console.error("核心错误！");
+        console.error("核心错误！", error);
     }
+};
+const all = (promiseArray = [], ...keys) => {
+    return Q.all(promiseArray)
+        .then(response => {
+            const result = {};
+            response.forEach((item, index) => {
+                const key = keys[index];
+                if (key) {
+                    result[key] = Ux.clone(item);
+                }
+            });
+            return promise(result);
+        })
 };
 export default {
     promise,
     failure,
+    all,
 }

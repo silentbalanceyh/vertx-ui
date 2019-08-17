@@ -55,6 +55,12 @@ export default (reference, additional = {}, data = {}) => {
     attrs.config = Ux.clone(config);
     /* Form 特殊配置 */
     attrs.$inited = Ux.clone(data);
+    /* Add表单专用 */
+    const {$addKey} = reference.props;
+    if ($addKey) {
+        /* 客户端提供主键 */
+        attrs.$addKey = $addKey;
+    }
     /* 外置Form */
     return attrs;
 };

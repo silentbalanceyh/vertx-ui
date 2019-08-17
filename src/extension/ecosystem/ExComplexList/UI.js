@@ -1,6 +1,7 @@
 import React from 'react';
-import Init from './Init';
+import Op from './Op';
 import Ex from 'ex';
+import renderJsx from './Web.jsx';
 /*
  * React属性props:
  * {
@@ -34,29 +35,46 @@ import Ex from 'ex';
  *    ./specification/workflow.js
  * React往下传入配置
  */
-import ExTab from '../ExTab/UI';
+
+const LOG = {
+    name: "ExComplexList",
+    color: "#09C"
+};
 
 class Component extends React.PureComponent {
     state = {
-        $loading: false,        // 数据加载
-        $submitting: false,     // 表单提交
+        // $loading: false,        // 数据加载
+        // $submitting: false,     // 表单提交
+        $ready: false,
+        /*
+         * 列表状态和值
+         */
+        $view: "list",         // 当前列表类型
+        $key: undefined,       // 默认无（第一次会初始化）
+        /*
+         * 底层 Table 选中项
+         */
+        $selected: [],         // 底层选中项
+        $condition: {},        // 条件设置项，默认 Object
+        /*
+         * 当前组件需要生成的 fn函数集
+         */
     };
 
     componentDidMount() {
-        Init.yiList(this);
+        Op.yiList(this);
     }
 
     render() {
-        Ex.F.Log.list({
-            props: this.props,
-            state: this.state,
-        }, false);
-        return Ex.U.yxRender(this, () => {
+        return Ex.yoRender(this, () => {
             const {tabs = {}} = this.state;
-            return (
-                <ExTab {...this.props} {...Ex.U.yoTab(this, tabs)}/>
-            )
-        })
+            /*
+             * 当前组件不调用 ExTab 来处理 Tab
+             * 页签行为，而是直接使用 antd 中的 Tabs，主要是防止和原始的
+             * ComplexList / ExComplexList 产生冲突
+             */
+            return renderJsx(this, tabs);
+        }, LOG)
     }
 }
 

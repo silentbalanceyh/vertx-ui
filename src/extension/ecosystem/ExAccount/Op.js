@@ -3,7 +3,7 @@ import {Modal} from 'antd';
 import Ex from 'ex';
 
 const fnLogout = (reference) => {
-    const {config: {window: {logout}}} = Ex.props(reference);
+    const {config: {window: {logout}}} = reference.props;
     const $config = Ex.toDialog(logout);
     $config.onOk = () => Ex.Op.$opLogout(reference);
     Modal.confirm($config);

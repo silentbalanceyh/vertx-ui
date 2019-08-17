@@ -1,22 +1,27 @@
 import React from 'react';
 import Ux from 'ux';
-import {ExComplexList} from 'ei';
-import {PageCard} from 'web';
+import renderJsx from './Web.jsx';
+import FormAdd from './form/UI.Add';
+import FormEdit from './form/UI.Edit';
+import FormFilter from './form/UI.Filter';
 
-const {zero} = Ux;
-
-@zero(Ux.rxEtat(require("./Cab"))
+@Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .to()
 )
 class Component extends React.PureComponent {
     render() {
         const config = Ux.fromHoc(this, "grid");
-        return (
-            <PageCard reference={this}>
-                <ExComplexList config={config} {...this.props}/>
-            </PageCard>
-        )
+        /* 专用组件信息 */
+        const form = {
+            FormAdd,    // 添加表单
+            FormEdit,   // 更新表单
+            FormFilter  // 搜索表单
+        };
+        return renderJsx(this, {
+            config,
+            form
+        })
     }
 }
 

@@ -18,7 +18,6 @@ const yiForm = (reference) => {
         /*
          * 静态
          */
-        console.info("[Ex] 静态表单：", config.form);
         supplier = () => Ex.promise(config.form);
     } else if (config.control && !config.form) {
         /*
@@ -30,7 +29,6 @@ const yiForm = (reference) => {
          */
         const params = Ux.valueSearch(magic, reference.props, reference.state);
         params.control = control;
-        console.info("[Ex] 动态表单：", config.control);
         supplier = () => Ex.I.form(params);
     } else {
         /*
@@ -48,7 +46,6 @@ const yiForm = (reference) => {
             .then($ui => Ex.promise(Ex.configForm($ui, addon, id)))
             .then(state => {
                 state = Ux.clone(state);
-                Ux.dgDebug(state, "[ExForm] 表单配置");
                 // Action 专用处理
                 yiAction(reference, state);
             })

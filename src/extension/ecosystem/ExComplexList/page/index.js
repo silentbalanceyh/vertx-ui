@@ -1,11 +1,10 @@
-import Opts from '../options';
+import Ex from 'ex';
 import PageList from './P.list';
 import PageAdd from './P.add';
 import PageEdit from './P.edit';
 
-const {Type} = Opts;
 const exported = {};
-exported[Type.LIST] = PageList;
-exported[Type.ADD] = PageAdd;
-exported[Type.EDIT] = PageEdit;
+exported[Ex.Mode.LIST] = PageList;
+exported[Ex.Mode.ADD] = PageAdd;
+exported[Ex.Mode.EDIT] = PageEdit;
 export default exported;

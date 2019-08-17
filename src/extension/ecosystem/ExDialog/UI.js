@@ -1,5 +1,7 @@
 import React from 'react';
-
+import Ex from 'ex';
+import Op from './Op';
+import renderJsx from './Web.jsx'
 /*
  * React中的props属性
  * {
@@ -16,17 +18,47 @@ import React from 'react';
  * }
  * React属性state：
  * {
- *      $ready: "当前组件是否满足渲染",
  *      $visible: "窗口是否隐藏"
  * }
  */
+const LOG = {
+    name: "ExDialog",
+    color: "#8FBC8F"
+};
+
 class Component extends React.PureComponent {
+    state = {
+        $visible: false,
+        $ready: false,
+    };
+
+    componentDidMount() {
+        Op.yiDialog(this);
+    }
+
     render() {
-        return (
-            <div>
-                Component
-            </div>
-        );
+        return Ex.yoRender(this, () => {
+            const attributes = Ex.yoAmbient(this);
+            /*
+             * 按钮形态：按钮或链接
+             * 禁用 / 启用 连接
+             */
+            const {$category = "BUTTON"} = this.props;
+            attributes.$category = $category;
+            /*
+             * 按钮
+             */
+            const button = Op.yoButton(this);
+            /*
+             * 窗口
+             */
+            const dialog = Op.yoDialog(this);
+            return renderJsx(this, {
+                button,
+                dialog,
+                attributes
+            });
+        }, LOG);
     }
 }
 

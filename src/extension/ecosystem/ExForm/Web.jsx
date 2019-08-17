@@ -21,7 +21,7 @@ const _jsxAction = (events = []) => {
             </Button.Group>
         )
     }
-}
+};
 export default (reference) => (
     <div style={{paddingBottom: 64}}>
         {Ux.uiFieldForm(reference, {

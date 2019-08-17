@@ -16,5 +16,5 @@ const $opLogout = (reference) => Api.logout().then(result => {
 });
 export default {
     $opReset,
-    $opLogout
+    $opLogout,
 }

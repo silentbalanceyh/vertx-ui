@@ -8,7 +8,7 @@ const $opProfile = (reference) => Ex.xtOp(reference, {
             delete params.key;
         }
         return Ex.I.profile(params)/* 更新完成 */
-            .then(data => Ex.yoDialog(reference, {
+            .then(data => Ex.showDialog(reference, {
                 data, /* 响应数据 */
                 key: "profile", /* 专用窗口数据 */
             }))

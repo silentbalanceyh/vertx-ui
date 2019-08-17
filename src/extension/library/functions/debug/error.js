@@ -11,6 +11,10 @@ const error005 = _generate(-200005, "绑定函数过程出错，最终无法绑�
     "Bind function is not generated successfully");
 const error006 = _generate(-200006, "参数长度有问题！",
     "The length of arguments is wrong, should be one of (1,2,3)");
+const error007 = _generate(-200007, "传入的 fnEvent 必须是一个合法函数，才可以执行包装",
+    "The input `fnEvent` must be a javascript Function.");
+const error008 = _generate(-200008, "对不起，搜索方法参数不可为空，必须包含 `$query`",
+    "The parameter `$query` is invalid when you do `fnSearch`.");
 export default {
     error001,
     error002,
@@ -18,4 +22,6 @@ export default {
     error004,
     error005,
     error006,
+    error007,
+    error008,
 }

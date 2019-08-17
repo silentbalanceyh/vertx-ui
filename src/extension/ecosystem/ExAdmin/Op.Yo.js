@@ -5,7 +5,7 @@ const yoSider = (reference = {}) => {
     /*
      * 数据
      */
-    const {$menus} = Ex.props(reference);
+    const {$menus} = reference.props;
     attrs.data = Ex.array($menus)        // X_MENU 菜单信息
         .filter(menu => "SIDE-MENU" === menu.type)
         .sort((left, right) => left.order - right.order);
@@ -23,7 +23,7 @@ const yoNavigation = (reference = {}, {
     /*
      * 数据
      */
-    const {$menus, $router} = Ex.props(reference);
+    const {$menus, $router} = reference.props;
     attrs.data = Ex.array($menus)        // X_MENU 菜单信息
         .filter(menu => menu.uri && 0 < $router.path().indexOf(menu.uri));
     /*
@@ -63,7 +63,7 @@ const yoAccount = (reference = {}, {
     /*
      * 数据
      */
-    const {$menus} = Ex.props(reference);
+    const {$menus} = reference.props;
     attrs.data = Ex.array($menus)        // X_MENU 菜单信息
         .filter(menu => "TOP-MENU" === menu.type)
         .sort((left, right) => left.order - right.order);

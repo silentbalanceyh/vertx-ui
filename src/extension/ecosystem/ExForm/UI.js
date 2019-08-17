@@ -48,6 +48,12 @@ import renderJsx from './Web.jsx';
  *      }
  * }
  */
+
+const LOG = {
+    name: "ExForm",
+    color: "#C03"
+};
+
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -59,7 +65,7 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () =>
-            renderJsx(this))
+            renderJsx(this), LOG)
     }
 }
 
