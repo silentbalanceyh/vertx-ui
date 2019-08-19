@@ -59,7 +59,6 @@ const $opLogin = (reference, callback) => (params) => Api.login(params)
         const user = Ux.isLogged();
         const logged = Object.assign(Ux.clone(user), employee);
         /* 第二次存储 */
-        console.info(logged, reference);
         Ux.storeUser(logged);
         /* 重定向 */
         Ux.toOriginal(reference);
