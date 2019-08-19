@@ -17,7 +17,7 @@ const $opLogout = (reference) => Api.logout().then(result => {
  * ExEntry：会员和普通用户专用
  * ExLogin：后台管理员专用（带重置）
  */
-const $opLogin = (reference, callback) => (params) => Api.login(params)
+const $opLogin = (reference) => (params) => Api.login(params)
     .then((data = {}) => {
         // 交换授权码专用请求
         const request = {};
@@ -41,11 +41,7 @@ const $opLogin = (reference, callback) => (params) => Api.login(params)
         user.refreshToken = response.refresh_token;
         user.key = response.key;
         user.username = params.username;
-        if (U.isFunction(callback)) {
-            return callback(user);
-        } else {
-            return Fn.promise(user);
-        }
+        return Fn.promise(user);
     })
     .then((user = {}) => {
         /* 存储用户信息 */
@@ -58,6 +54,18 @@ const $opLogin = (reference, callback) => (params) => Api.login(params)
     .then(employee => {
         const user = Ux.isLogged();
         const logged = Object.assign(Ux.clone(user), employee);
+        return Fn.promise(logged);
+    })
+    .then(logged => {
+        // 读取 rxLogin ：外层传入
+        const {rxLogin} = reference.props;
+        if (U.isFunction(rxLogin)) {
+            return rxLogin(logged);
+        } else {
+            return Fn.promise(logged);
+        }
+    })
+    .then(logged => {
         /* 第二次存储 */
         Ux.storeUser(logged);
         /* 重定向 */

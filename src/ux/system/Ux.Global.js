@@ -73,7 +73,6 @@ const toRoute = (reference = {}, uri = "") => {
         target = `/${Cv['ROUTE']}${uri}`;
     }
     target = target.replace(/\/\//g, '/');
-    console.error(target);
     $router.to(target);
 };
 const toOriginal = (reference = {}) => {
