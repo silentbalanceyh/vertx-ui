@@ -73,6 +73,7 @@ const toRoute = (reference = {}, uri = "") => {
         target = `/${Cv['ROUTE']}${uri}`;
     }
     target = target.replace(/\/\//g, '/');
+    console.error(target);
     $router.to(target);
 };
 const toOriginal = (reference = {}) => {
@@ -101,7 +102,7 @@ const isAuthorized = (reference) => {
     }
 };
 const toLoading = (consumer, seed = 1) => {
-    const ms = Value.valueInt(Cv.LOADING, 256);
+    const ms = Value.valueInt(Cv['LOADING'], 256);
     setTimeout(consumer, ms * seed);
 };
 /**

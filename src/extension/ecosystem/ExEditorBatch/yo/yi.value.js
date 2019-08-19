@@ -26,8 +26,11 @@ export default (reference, config) => {
             if (1 === row.length) {
                 row = row[0];
                 const {render = {}} = valueColumn;
-                const raw = render[row.key];
-                if ("string" === typeof raw) {
+                let raw = render[row.key];
+                // 修正专用
+                if (undefined === raw) {
+                    fnRender = Rdr['TEXT'](reference);
+                } else if ("string" === typeof raw) {
                     fnRender = Rdr[raw](reference);
                 } else {
                     const {type, config} = raw;

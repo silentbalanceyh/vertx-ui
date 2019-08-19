@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from "ux";
+import Ex from 'ex';
 import {Form} from "antd";
-import Op from './Op';
 
 const jsx = {
     username: Ux.aiInput,
@@ -10,7 +10,7 @@ const jsx = {
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
-    .form().bind(Op)
+    .form().bind(Ex.Op)
     .to()
 )
 class Component extends React.PureComponent {
