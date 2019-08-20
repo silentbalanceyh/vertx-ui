@@ -5,6 +5,7 @@ import E from "../Ux.Error";
 import Type from "../Ux.Type";
 import Debug from '../Ux.Debug';
 import U from "underscore";
+import System from '../system';
 
 const ajaxParamDeep = (criteria = {}, collector = {}) => {
     for (const key in criteria) {
@@ -93,6 +94,18 @@ const ajaxSecure = (headers = {}, secure = false) => {
         E.fxTerminal(!token, 10065, token);
         headers.append(Cv.HTTP11.AUTHORIZATION, token);
     }
+    /* 启用了 X_ 的Header发送请求 */
+    if (Cv['X_HEADER_SUPPORT']) {
+        /* X_APP_KEY */
+        const appKey = System.Storage.getDirect(Cv.X_APP_KEY);
+        if (appKey) headers.append(Cv.X_HEADER.X_APP_KEY, appKey);
+        /* X_APP_ID */
+        const appId = System.Storage.getDirect(Cv.X_APP_ID);
+        if (appId) headers.append(Cv.X_HEADER.X_APP_ID, appId);
+        /* X_SIGMA */
+        const sigma = System.Storage.getDirect(Cv.X_SIGMA);
+        if (sigma) headers.append(Cv.X_HEADER.X_SIGMA, sigma);
+    }
     ajaxXSRF(headers);
 };
 /**
@@ -153,6 +166,7 @@ const ajaxOptions = (method, headers) => {
     if (Cv.hasOwnProperty('CORS_CREDENTIALS')) {
         options.credentials = Cv['CORS_CREDENTIALS'];
     }
+    // console.info(options);
     return options;
 };
 export default {

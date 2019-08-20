@@ -54,15 +54,3 @@ export {default as Navigation} from './container/Navigation/UI';
 // 遗留系统，保留以前的名字
 // Navigation -> PagerHeader
 export {default as PagerHeader} from './container/Navigation/UI';
-/**
- * 新的组件，比较大点的重构
- * 1. 组件本身只使用 Ux 中的函数以及第三方函数，不使用 _internal包中的函数
- * 2. 新组件摒弃掉 Redux中存在的一些内容
- * 3. 新组件以业务为主心骨，以基本业务驱动
- **/
-export {
-    default as ExComplexList        // 新组件，替换原生的 ComplexList，保证基本结构不发生太大的变化
-} from './actor/ExComplexList/UI';
-export {
-    default as ExLogin              // 登录主界面
-} from './actor/ExLogin/UI';

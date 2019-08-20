@@ -98,7 +98,9 @@ const _ajaxDown = (uri, params, mockData, method = "GET") => {
     headers.append(Cv.HTTP11.CONTENT_TYPE, "application/octet-stream");
     // Download专用
     const request = new Request(api, {
-        ...Aid.ajaxOptions(method, headers)
+        ...Aid.ajaxOptions(method, headers),
+        // 解决无法传参的问题
+        body: JSON.stringify(params)
     });
     return Resp.ajaxBlob(request, mockData, {});
 };

@@ -1,39 +1,33 @@
 import React from 'react';
 import Ux from 'ux';
 import Op from './Op';
+import renderJsx from './Web.jsx';
 
 /*
  * React属性props:
+ * 1) 全局：$router, $menus, $app, $user
+ * 2) 统一：config, data
+ * 3) 函数：fnApp, fnOut
+ * 4) 风格：css
+ * css =
  * {
- *      $router: DataRouter - （react-router）构造对象,
- *      $menus: DataArray - 菜单信息,
- *      config:{
- *          homepage: 主页对象，描述主页导航信息
- *      },
- *      css:{
- *          clsNav: "",
- *          clsBreadcrumb: ""
- *      }
+ *      clsNav,
+ *      clsBreadcrumb
+ * }
+ * config =
+ * {
+ *      homepage
  * }
  */
 class Component extends React.PureComponent {
     render() {
+        Ux.dgDebug(this.props, "[ ExNavigation ]", "#c60");
         const {$router, css = {}} = this.props;
-        const $navs = Op._1normalizeNavs(this);
-        /*
-         * 风格专用处理
-         */
-        const {
-            clsNav = "",
-            clsBreadcrumb = ""
-        } = css;
-        return (
-            <div className={clsNav}>
-                {Ux.aiBreadcrumb($navs, {
-                    className: clsBreadcrumb
-                }, {$router})}
-            </div>
-        );
+        return renderJsx(this, {
+            css,
+            $router,
+            $navs: Op._1normalizeNavs(this)
+        });
     }
 }
 

@@ -25,7 +25,13 @@ const uiColumnRender = (reference, columns = [], key, fnRender = () => false, ho
  */
 const uiTableColumn = (reference, columns = [], ops = {}) => {
     columns = Ai.aiExprColumn(columns);
-    const $op = Value.immutable(["BUTTON", "OP", "LINK", "ACTION"]);
+    const $op = Value.immutable([
+        "BUTTON",   // 最早的 ComplexList专用版本（按钮模式）
+        "OP",       // 最早的 Op 专用版本（按钮链接双模式）
+        "LINK",     // 最早的 ComplexList专用版本（链接模式）
+        /* 废除了 ACTION，添加新的 EXECUTOR 模式 */
+        "EXECUTOR"  // 最新版 ExComplexList
+    ]);
     const $columns = [];
     // 添加列的平行解析
     columns.forEach(column => {

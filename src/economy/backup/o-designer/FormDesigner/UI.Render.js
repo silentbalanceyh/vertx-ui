@@ -22,7 +22,7 @@ const webListSelector = (pointer, column) => _itemRender(pointer, column, (
     <Search/>
 ));
 const webUser = (pointer, column) => _itemRender(pointer, column, (
-    <Search enterButton={<Icon type={"user"}/>}/>
+    <Search enterButton={<Icon type={"employee.js"}/>}/>
 ));
 const webTimePicker = (pointer, column) => _itemRender(pointer, column, (
     <TimePicker/>

@@ -1,4 +1,4 @@
-import { Langue } from "environment";
+import {Langue} from "environment";
 import * as Immutable from "immutable";
 
 import HocContainer from "./HocContainer";
@@ -81,6 +81,7 @@ const fnField = (fields: Array<String> = []) => {
     });
     return result;
 };
+
 /**
  * 表单专用数据模型，用于配置表单各种关联项
  * @class HocForm
@@ -89,16 +90,16 @@ class HocForm implements HocContainer {
     private hoc: any = {};
     private validators: any = null;
     private normalizer: any = null;
-    private ready: boolean = false;
+    private readonly ready: boolean = false;
     private form: any = {};
     // Form专用配置
-    private _rules: any = {};
-    private _fields: Array<String> = [];
-    private _placeholders = {};
-    private _button: any = {};
-    private _logicals: any = {};
-    private _dialog: any = {};
-    private _extension: any = {};
+    private readonly _rules: any = {};
+    private readonly _fields: Array<String> = [];
+    private readonly _placeholders = {};
+    private readonly _button: any = {};
+    private readonly _logicals: any = {};
+    private readonly _dialog: any = {};
+    private readonly _extension: any = {};
 
     constructor(name: string, hoc: Object) {
         const lg = Langue(name);
@@ -135,7 +136,7 @@ class HocForm implements HocContainer {
     $(field: string, jsx: any, initial: any = {}): any {
         if (field && jsx) {
             if (this.form) {
-                const { getFieldDecorator } = this.form;
+                const {getFieldDecorator} = this.form;
                 const config: any = {};
                 // Option选项配置
                 if (this._extension) {
@@ -173,6 +174,7 @@ class HocForm implements HocContainer {
             );
         }
     }
+
     /**
      * 转换成JavaScript，专用Hoc变量合集
      * @returns {Object}
@@ -195,11 +197,12 @@ class HocForm implements HocContainer {
             ..._extension
         };
     }
+
     /**
      * 绑定的时候指定Promise以及默认参数
      */
     bind(props: any, promise: any): HocForm {
-        const { form, Verifier, Sateur } = props;
+        const {form, Verifier, Sateur} = props;
         this.normalizer = Sateur;
         this.validators = Verifier;
         // 2.连接rules中的validators

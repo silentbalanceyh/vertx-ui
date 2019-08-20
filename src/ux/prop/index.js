@@ -4,7 +4,6 @@ import Field from './Ux.Field';
 import Hoc from './Ux.Hoc';
 import State from './Ux.State';
 import Prop from './Ux.Prop';
-import Validator from './Ux.Validator';
 import Item from './Ux.Item';
 
 export default {
@@ -14,6 +13,5 @@ export default {
     ...Hoc,
     ...State,
     ...Prop,
-    ...Validator,
     ...Item
 };

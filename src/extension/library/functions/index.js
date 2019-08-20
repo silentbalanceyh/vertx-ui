@@ -1,7 +1,56 @@
-import submit from './submit';
-import datum from './datum';
+import global from './global';
+import business from './business';
+// ------------- 上边是全局处理 -------------
+import E from './debug/error';
+// ------------- 上边是调试专用 -------------
+import is from './is';
+
+import func from './func';
+import parser from './parser';
+import object from './object';
+import generator from './generator';
+import control from './control';
 
 export default {
-    ...submit,
-    ...datum
+    /*
+     * mapMeta
+     * mapUri
+     * toUri
+     * toDialog
+     */
+    ...func,
+    /*
+     * xtParam
+     * xtOp
+     */
+    ...control,
+    /*
+     * 变化检查
+     */
+    ...is,
+    /*
+     *
+     */
+    ...generator,
+    // ...funcGenerate,
+    // ...funcBind,
+    /*
+     * 创建专用对象
+     * ExQuery
+     */
+    ...object,
+    /*
+     * 全局处理
+     */
+    ...global,
+    /*
+     * 所有合法选项
+     */
+    E,
+    /*
+     * 业务方法
+     */
+    ...business,
+
+    ...parser
 }

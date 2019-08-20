@@ -1,40 +1,30 @@
 import U from 'underscore';
-import Ux from 'ux';
 import {Modal} from 'antd';
+import Ex from 'ex';
 
-const fnLogout = (reference, key = "") => {
-    const {config = {}} = reference.props;
-    const {window = {}} = config;
-    const dialog = window[key];
-    let $config = {};
-    if (U.isObject(dialog)) {
-        $config = Ux.clone(dialog);
-    } else if ("string" === typeof dialog) {
-        $config = {content: $config}
-    }
-    Modal.confirm({
-        ...$config,
-        onOk: () => {
-            // 清掉Session
-            Ux.toLogout();
-            // 路由处理
-            Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN);
-            // 清楚State上的数据
-            Ux.eraseTree(reference, ["user"]);
-        }
-    })
+const fnLogout = (reference) => {
+    const {config: {window: {logout}}} = reference.props;
+    const $config = Ex.toDialog(logout);
+    $config.onOk = () => Ex.Op.$opLogout(reference);
+    Modal.confirm($config);
 };
 const _DISPATCH = {
-    "key.menu.logout": fnLogout
+    fnLogout
 };
 const _2fnSelect = (reference) => (event) => {
-    const executor = _DISPATCH[event.key];
+    const {data: {metadata = {}}} = event.item.props;
+    const executor = _DISPATCH[metadata.function];
     if (U.isFunction(executor)) {
-        executor(reference, event.key);
-    } else {
-        console.error("配置键没有对应的函数：", event.key);
+        executor(reference);
     }
 };
+const _1normalizeMenu = (reference = {}) => {
+    const {data = [], $app} = reference.props;
+    return data
+        .map(item => Ex.mapMeta(item))
+        .map(item => Ex.mapUri(item, $app))
+};
 export default {
-    _2fnSelect
+    _2fnSelect,
+    _1normalizeMenu,
 }

@@ -8,6 +8,10 @@ for (const key in $env) {
         if (key.startsWith("K_") || key.startsWith("DEV_")) {
             delete $env[key];
         }
+        // Boolean处理
+        if ("true" === $env[key] || "false" === $env[key]) {
+            $env[key] = Boolean($env[key]);
+        }
     }
 }
 
@@ -18,12 +22,24 @@ const prepareDevEnv = (...keys) => {
     });
     return Boolean(result);
 };
+const KEY_APP = `${process.env.K_SESSION}SESSION/APP/${process.env.APP.toUpperCase()}`;
 export default {
     ...$env,
     // 保存用户Session回话的环境变量
     KEY_USER: `${process.env.K_SESSION}SESSION/USER`,
     // 保存应用配置的专用环境变量
-    KEY_APP: `${process.env.K_SESSION}SESSION/APP/${process.env.APP.toUpperCase()}`,
+    KEY_APP,
+    /*
+     * 应用程序三套件
+     */
+    X_APP_ID: `${KEY_APP}/ID`,
+    X_APP_KEY: `${KEY_APP}/KEY`,
+    X_SIGMA: `${KEY_APP}/SIGMA`,
+    X_HEADER: {
+        X_APP_KEY: "X-App-Key",
+        X_APP_ID: "X-App-Id",
+        X_SIGMA: "X-Sigma",
+    },
     // Redux专用
     KEY_EVENT: process.env.K_EVENT,
     KEY_POINTER: `${process.env.K_SESSION}SESSION/POINTER`,

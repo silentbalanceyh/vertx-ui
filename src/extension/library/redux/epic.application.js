@@ -1,10 +1,10 @@
 import Ux from 'ux';
+import I from '../ajax';
+
 import Types from './types.application';
-import I from '../api';
+import Proc from './proc.application';
 
 export default {
-    fnExApp: Ux.rxEdict(Types.fnExApp,
-        I.app,
-        data => ({app: Ux.storeApp(data)})
-    )
+    epicApp: Ux.rxEdict(Types.epicApp, I.app, Proc.procApp),
+    epicInit: Ux.rxEdict(Types.epicInit, I.inited, Proc.procInit)
 }

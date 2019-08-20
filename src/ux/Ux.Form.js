@@ -56,7 +56,11 @@ const raftJsx = (reference, values, config = {}) => {
     const {raft = {}} = reference.state;
     // 初始化数据
     values = raftInited(reference, values);
-    Dg.dgDebug(values, "初始化表单数据：", "black");
+    /* Form 专用日志 */
+    const isTouched = form.isFieldsTouched();
+    if (!isTouched) {
+        Dg.dgDebug(values, "初始化表单数据：", "black");
+    }
     // 给Form设置key
     const attrs = {};
     if (config['formKey']) {

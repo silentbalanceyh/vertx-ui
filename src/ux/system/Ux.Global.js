@@ -42,8 +42,17 @@ const isRoute = (props, prevProps) => {
  * @return {*}
  */
 const toLogout = () => {
+    /* 注销用户 */
     const key = Cv.KEY_USER;
-    return Store.Session.remove(key);
+    const result = Store.Session.remove(key);
+    /* 删除 appKey */
+    Store.Storage.remove(Cv.X_APP_KEY);
+    const app = Store.Session.get(Cv.KEY_APP);
+    if (app && app.appKey) {
+        delete app.appKey;
+        Store.Storage.put(Cv.KEY_APP, app);
+    }
+    return result;
 };
 /**
  * 执行路由操作
@@ -92,7 +101,7 @@ const isAuthorized = (reference) => {
     }
 };
 const toLoading = (consumer, seed = 1) => {
-    const ms = Value.valueInt(Cv.LOADING, 324);
+    const ms = Value.valueInt(Cv['LOADING'], 256);
     setTimeout(consumer, ms * seed);
 };
 /**

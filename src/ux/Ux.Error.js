@@ -147,7 +147,9 @@ const fxMessage = (executor, code, ...args) => {
     if (U.isFunction(fn)) {
         const message = fn.apply(this, args);
         if (Cv.DEBUG) {
-            executor.apply(this, [message].concat(args.filter(item => !U.isFunction(item))));
+            executor.apply(this, [message].concat(
+                args.filter(item => !U.isFunction(item)).map(item => `'${item}'`)
+            ));
         }
         return message;
     }

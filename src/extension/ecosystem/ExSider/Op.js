@@ -1,4 +1,5 @@
 import Ux from "ux";
+import Ex from 'ex';
 
 const _1normalizeUri = (data = []) => {
     const uris = {};
@@ -9,20 +10,16 @@ const _1normalizeUri = (data = []) => {
     });
     return uris;
 };
+/*
+ * 菜单种类
+ * 1. 左边菜单：SIDE-MENU
+ * 2. 导航菜单：NAV-MENU
+ * 3. 顶部菜单：TOP-MENU
+ * 4. 右键菜单：CONTEXT-MENU
+ */
 const _1normalizeMenu = (data = [], app = {}) => {
-    data = Ux.clone(data);
-    const path = app._("path") ? app._("path") : Ux.Env['ROUTE'];
+    data = Ux.clone(data).map(item => Ex.mapUri(item, app));
     return Ux.Uarr.create(data)
-        .filter(item => "SIDEBAR" !== item.type)
-        .sort((left, right) => left.left - right.left)
-        .convert('uri', (uri) => {
-            // 处理 undefined 专用，父目录处理
-            if ("EXPAND" !== uri) {
-                return `/${path}${uri}`;
-            } else {
-                return undefined;
-            }
-        })
         .add('className', "ux-invert")
         .mapping({
             key: "key",

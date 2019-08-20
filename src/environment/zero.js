@@ -277,6 +277,17 @@ export default (options = {}) => {
                 const render = fnRender(this.props, options);
                 // 检查Form专用程序
                 ensureForm(this, options);
+                // 打印日志
+                const {form} = this.props;
+                if (form) {
+                    const isTouched = form.isFieldsTouched();
+                    if (!isTouched) {
+                        fnLog(this, options);
+                    }
+                } else {
+                    // 打印日志
+                    fnLog(this, options);
+                }
 
                 return render ? super.render() : <LoadingContent/>;
             }

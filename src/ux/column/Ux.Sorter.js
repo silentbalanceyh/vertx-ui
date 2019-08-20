@@ -7,7 +7,7 @@ import Ux from 'ux';
  * 1. $stateSorter 变量用于控制
  * 2. $condition 则是真正需要使用的查询条件
  */
-const columnSorter = (column = {}, reference) => {
+const columnSorter = (column = {}, reference = {}) => {
     /* 是否开启可控 */
     const {$stateSorter = false} = reference.state ? reference.state : {};
     if ($stateSorter) {

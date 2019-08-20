@@ -9,6 +9,7 @@ export {default as DataRouter} from "./flow/DataRouter";
 export {default as DataLabor} from "./DataLabor";
 
 export {default as HocI18n} from "./hoc/HocI18n";
+export {default as HocI18r} from './hoc/HocI18r';
 
 export {default as RxEtat} from './rx/Rx.Etat';
 export {default as RxFlow} from './rx/Rx.Flow';

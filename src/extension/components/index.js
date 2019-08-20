@@ -1,6 +1,8 @@
+import _ambient_category from './ambient/category/UI';
 import _ambient_job from './ambient/job/UI';
 import _ambient_log from './ambient/log/UI';
 import _ambient_sync from './ambient/sync/UI';
+import _ambient_tabular from './ambient/tabular/UI';
 import _epic_form from './epic/form/UI';
 import _epic_integration from './epic/integration/UI';
 import _epic_metadata from './epic/metadata/UI';
@@ -19,9 +21,11 @@ import _rbac_role from './rbac/role/UI';
 import _rbac_user from './rbac/user/UI';
 
 export default {
+	_ambient_category,
 	_ambient_job,
 	_ambient_log,
 	_ambient_sync,
+	_ambient_tabular,
 	_epic_form,
 	_epic_integration,
 	_epic_metadata,

@@ -51,7 +51,7 @@ const aiMenuTop = (menus = [], rest = {}, config = {}) => (
         {menus.map(item => item.divide ? (
             <Menu.Divider key={item.key}/>
         ) : (
-            <Menu.Item key={item.key}>
+            <Menu.Item key={item.key} data={item}>
                 {_Icon.uiIcon(item.icon)}
                 {_buildLink(item, config['$router'])}
             </Menu.Item>

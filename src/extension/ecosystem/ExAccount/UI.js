@@ -1,38 +1,39 @@
 import React from 'react';
 import Ux from 'ux';
-import {Avatar, Dropdown, Spin} from 'antd'
 import Op from './Op';
 
+import renderJsx from './Web.jsx';
+
+/*
+ * React属性props:
+ * 1) 全局：$router, $menus, $app, $user
+ * 2) 统一：config, data
+ * 3) 函数：fnApp, fnCollapse, fnOut
+ * 4) 风格：css
+ * css =
+ * {
+ *      clsDropdown: "",
+ *      clsAccount: "",
+ *      clsAvatar: "",
+ *      clsUser: ""
+ * }
+ * config =
+ * {
+ *      window:{
+ *          logout
+ *      }
+ * }
+ */
 class Component extends React.PureComponent {
     render() {
+        Ux.dgDebug(this.props, "[ ExAccount ]", "#c60");
         const $user = Ux.isLogged();
-        const {data = [], css = {}} = this.props;
-        /*
-         * 风格数据
-         */
-        const {
-            clsDropdown,
-            clsAccount,
-            clsAvatar,
-            clsUser
-        } = css;
-        /*
-         * 路径信息
-         * */
-        const src = ($user['logo'] ? $user['logo'] : "/img/zui/account/default.jpeg");
-        console.info(this.props);
-        return $user ? (
-            <Dropdown overlay={Ux.aiMenuTop(data, {
-                className: clsDropdown,
-            }, {onClick: Op._2fnSelect(this)})}>
-                {/** 用户头像和名字，登陆后状态 **/}
-                <span className={clsAccount}>
-                    <Avatar size="default" className={clsAvatar}
-                            src={src}/>
-                    <span className={clsUser}>{$user['realname']}</span>
-                </span>
-            </Dropdown>
-        ) : (<Spin size="small" style={{marginLeft: 0}}/>)
+        const {css = {}} = this.props;
+        return renderJsx(this, {
+            $user,
+            data: Op._1normalizeMenu(this),
+            css,
+        })
     }
 }
 

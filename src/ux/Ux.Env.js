@@ -145,4 +145,5 @@ export default {
     auiQuery: (reference) => new AiStream(reference).query().init(),
     // 专用CRUD的Mock
     mockCrud: (reference) => new AiStream(reference).mock().init(),
+    mockIr: () => new AiStream().mock(),
 };

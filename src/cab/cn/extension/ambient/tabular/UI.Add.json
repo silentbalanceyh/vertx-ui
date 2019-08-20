@@ -1,0 +1,42 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "name,名称,14"
+            ],
+            [
+                "code,编码,14"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,$opAdd,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+                "type"
+            ]
+        },
+        "actions": {
+            "op": {
+                "$opAdd": "act.tabular.add"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的信息添加成功！"
+        }
+    }
+}
