@@ -75,8 +75,11 @@ import yuCondition from './yu.condition';
 import yuQuery from './yu.query';
 import yuDirty from './yu.dirty';
 import yuLoading from './yu.loading';
+// -------------- 列表专用 --------------------
+import yiTabular from './yi.tabular';
 
 export default {
+    yiTabular,
     yoAmbient,      // 环境数据（统一处理）
     yoComponent: yoAmbient,
     // -- 容器层

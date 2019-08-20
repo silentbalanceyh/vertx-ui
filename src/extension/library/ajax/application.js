@@ -9,7 +9,7 @@ const _application = () => {
         /* 已经初始化过一次 */
         if (appData.appKey) {
             /* 二次初始化完成后 */
-            return Promise.resolve(appData);
+            return Fn.promise(appData);
         } else {
             /* 直接调用接口 */
             return Ux.ajaxGet("/api/app");
@@ -30,6 +30,14 @@ const _menus = () => {
     }
 };
 
+const _module = (uri = "") => {
+    /*
+     * encodeURI 方法执行 encoding URI的编码动作
+     */
+    const entry = encodeURI(uri);
+    return Ux.ajaxGet('/api/module', {entry});
+};
+
 export default {
     /* /app/name/:name */
     app: () => Ux.ajaxFetch("/app/name/:name", {name: Ux['Env']['APP']}),
@@ -37,6 +45,8 @@ export default {
     application: _application,
     /* /api/menus */
     menus: _menus,
+    /* /api/module?entry={entry} */
+    module: _module,
     /*
      * 首页初始化
      * /api/app

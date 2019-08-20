@@ -15,6 +15,8 @@ const error007 = _generate(-200007, "传入的 fnEvent 必须是一个合法函�
     "The input `fnEvent` must be a javascript Function.");
 const error008 = _generate(-200008, "对不起，搜索方法参数不可为空，必须包含 `$query`",
     "The parameter `$query` is invalid when you do `fnSearch`.");
+const error009 = _generate(-200009, "对不起，Promise构造的前置条件不满足。",
+    "The pre-condition is invalid to build promise");
 export default {
     error001,
     error002,
@@ -24,4 +26,5 @@ export default {
     error006,
     error007,
     error008,
+    error009
 }

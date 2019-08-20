@@ -5,12 +5,12 @@ import Ux from "ux";
 import HocContainer from "./HocContainer";
 
 class HocI18n implements HocContainer {
-    private hoc: any = {};
-    private ready: boolean = false;
+    private readonly hoc: any = {};
+    private readonly ready: boolean = false;
     private lg: any = {};
     private props: any = {};
-    private resourcePath: String = "";
-    private ns: String = "";
+    private readonly resourcePath: String = "";
+    private readonly ns: String = "";
 
     constructor(namespace, name: String, hoc: Object) {
         this.lg = Langue(name);

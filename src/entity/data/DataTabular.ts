@@ -15,8 +15,8 @@ const _grouped: Function = (array: Array<Object> = []) => {
 
 class DataTabular implements DataContainer {
     ready: boolean = false;
-    private data: any = {};
-    private size: number = 0;
+    private readonly data: any = {};
+    private readonly size: number = 0;
 
     constructor(data: Array<Object>) {
         const grouped = _grouped(data);
@@ -52,7 +52,7 @@ class DataTabular implements DataContainer {
         const data = this.data;
         const size = this.size;
         const ready = this.ready;
-        return { data, size, ready };
+        return {data, size, ready};
     }
 
     _(key: string): DataArray {

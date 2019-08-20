@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 
 const yoSider = (reference = {}) => {
     const attrs = Ex.yoAmbient(reference);
@@ -24,7 +25,8 @@ const yoNavigation = (reference = {}, {
      * 数据
      */
     const {$menus, $router} = reference.props;
-    attrs.data = Ex.array($menus)        // X_MENU 菜单信息
+    const source = Ex.array($menus);
+    attrs.data = source      // X_MENU 菜单信息
         .filter(menu => menu.uri && 0 < $router.path().indexOf(menu.uri));
     /*
      * 配置
@@ -32,6 +34,7 @@ const yoNavigation = (reference = {}, {
     attrs.config = {
         homepage
     };
+    attrs.source = Ux.clone(source);
     return attrs;
 };
 const yoHeader = (reference = {}, {
