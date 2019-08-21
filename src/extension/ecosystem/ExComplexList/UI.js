@@ -65,6 +65,10 @@ class Component extends React.PureComponent {
         Op.yiList(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuList(this, {prevProps, prevState});
+    }
+
     render() {
         return Ex.yoRender(this, () => {
             const {tabs = {}} = this.state;

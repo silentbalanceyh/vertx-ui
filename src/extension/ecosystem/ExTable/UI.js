@@ -40,6 +40,7 @@ class Component extends React.PureComponent {
             const {config = {}} = this.props;
             const $columns = config.columns ? config.columns : [];
             $table.columns = Rdr.renderColumn(this, $columns);
+            Ex.configScroll($table,$columns);
             /*
              * （必须结合数据）分页组件
              */

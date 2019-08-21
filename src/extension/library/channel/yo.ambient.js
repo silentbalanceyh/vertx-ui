@@ -87,6 +87,13 @@ export default (reference = {}, config = {}) => {
         uniform.react = reference;
     }
     if (!uniform.config) uniform.config = {};
+    /*
+     * 开合状态处理
+     */
+    {
+        const {$collapsed = false} = reference.props;
+        uniform.$collapsed = $collapsed;
+    }
     Object.assign(uniform.config, config);
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;

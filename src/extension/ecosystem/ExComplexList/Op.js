@@ -1,5 +1,7 @@
 import Ensurer from './ensurer';
 import Init from './state';
+import Ex from 'ex';
+import Ux from 'ux';
 
 const yiList = (reference) => {
     const {config = {}, /* 基本配置 */} = reference.props;
@@ -14,6 +16,19 @@ const yiList = (reference) => {
             .then(state => reference.setState(state))
     }
 };
+const yuList = (reference, previous = {}) => {
+    const prevProps = previous.prevProps;
+    const props = reference.props;
+    const $defaultChecked = Ex.upQuery(props, prevProps);
+    if ($defaultChecked) {
+        const query = Ux.clone($defaultChecked.current);
+        /*
+         * 修改当前记录中的 query
+         */
+        reference.setState({query});
+    }
+};
 export default {
     yiList,
+    yuList,
 }

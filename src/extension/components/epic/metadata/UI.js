@@ -1,19 +1,48 @@
 import React from 'react'
 import Ux from "ux";
-import {HelpCard} from "web";
+import Ex from 'ex';
+import Op from './Op';
+import renderJsx from './Web';
 
-const {zero} = Ux;
+const LOG = {
+    name: "PxMetadata",
+    color: "#1874CD"
+};
 
-@zero(Ux.rxEtat(require('./Cab.json'))
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
     .to()
 )
 class Component extends React.PureComponent {
+    state = {
+        $ready: false
+    };
+
+    componentDidMount() {
+        Op.yiPage(this);
+    }
+
     render() {
-        return (
-            <HelpCard reference={this}>
-            </HelpCard>
-        )
+        return Ex.yoRender(this, () => {
+            const siderAttrs = Op.yoSider(this);
+            /*
+             * 是否已经选择
+             */
+            const {$selected = false} = Ex.state(this);
+            /*
+             * 基本信息说明
+             */
+            const alert = Ux.fromHoc(this, "alert");
+            /* 专用组件信息 */
+            const listAttrs = Op.yoList(this);
+
+            return renderJsx(this, {
+                siderAttrs,
+                alert,
+                selected: $selected,
+                listAttrs,
+            })
+        }, LOG)
     }
 }
 

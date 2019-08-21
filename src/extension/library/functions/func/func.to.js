@@ -59,9 +59,17 @@ const toGrid = (config = {}) => {
     }
     return style;
 };
+const toHeight = (adjust = 0) => {
+    const style = {};
+    const height = document.body.clientHeight;
+    style.maxHeight = height - adjust;
+    style.overflow = "auto";
+    return style;
+};
 export default {
     toUri,
     toDialog,
     toMessage,
     toGrid, // Grid 转换
+    toHeight,   // 高度计算
 }
