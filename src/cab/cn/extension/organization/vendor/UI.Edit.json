@@ -1,0 +1,160 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=客户基本信息"
+            ],
+            [
+                "name,客户名称,14"
+            ],
+            [
+                "code,客户编号,14"
+            ],
+            [
+                "title=客户业务信息"
+            ],
+            [
+                "title,客户显示标题,14"
+            ],
+            [
+                "comment,客户备注,14"
+            ],
+            [
+                {
+                    "metadata":"taxCode,税号,14,,,type=taxCode",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入税号",
+                        {
+                            "min": 15,
+                            "pattern": "^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$",
+                            "message": "请正确输入税号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "taxTitle,开票抬头,14"
+            ],
+            [
+                "contactName,联系人名称,14"
+            ],
+            [
+                {
+                    "metadata":"contactPhone,联系人电话,14,,,type=contactPhone",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入手机号",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "请正确输入手机号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "contactOnline,在线联系方式,14"
+            ],
+            [
+                {
+                    "metadata":"email,企业邮箱,14,,,type=email",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入电子邮件",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "请正确输入邮件地址！"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata":"fax,传真号,14,,,type=fax",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入传真号",
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8})$|^((1[0-9][0-9]\\d{8}$))",
+                            "message": "请正确输入传真号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "homepage,客户主页,14"
+            ],
+            [
+                "logo,LOGO,14"
+            ],
+            [
+                {
+                    "metadata":"phone,客户座机,14,,,type=phone",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入客户座机",
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "请正确输入客户座机！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "address,客户地址,14"
+            ],
+            [
+                "companyId,客户所属单位,14"
+            ],
+            [
+                "type,客户分类,14"
+            ],
+            [
+                "metadata,附加配置,14"
+            ],
+            [
+                {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,$opSave,primary",
+                        "$opDelete,删除,$opDelete",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+                "key"
+            ]
+        },
+        "actions": {
+            "op": {
+                "$opSave": "act.customer.save",
+                "$opDelete": "act.customer.delete"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，客户信息编辑成功！",
+            "removed": "当前客户信息已删除成功！"
+        }
+    }
+}

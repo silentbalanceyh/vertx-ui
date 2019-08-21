@@ -3,16 +3,28 @@
         "window": 0.15,
         "ui": [
             [
-                "title=组基本信息"
+                "title=部门基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,部门名称,14"
             ],
             [
-                "code,用户组编码,14"
+                "code,部门编号,14"
             ],
             [
-                "parentId,父组,14"
+                "managerId,部门经理,14"
+            ],
+            [
+                "managerName,经理名称,14"
+            ],
+            [
+                "companyId,所属公司,14"
+            ],
+            [
+                "comment,部门备注,14"
+            ],
+            [
+                "metadata,附加配置,14"
             ],
             [
                 {
@@ -44,13 +56,13 @@
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opAdd": "act.dept.add"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "added": "您好，部门信息添加成功！"
         }
     }
 }

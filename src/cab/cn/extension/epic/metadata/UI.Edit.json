@@ -3,7 +3,7 @@
         "window": 0.15,
         "ui": [
             [
-                "title=组基本信息"
+                "title=基本信息"
             ],
             [
                 "name,用户组名称,14"
@@ -12,26 +12,12 @@
                 "code,用户组编码,14"
             ],
             [
-                "parentId,父组,14"
-            ],
-            [
-                {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
-                }
-            ],
-            [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
+                        "$opSave,保存,$opSave,primary",
+                        "$opDelete,删除,$opDelete",
                         "$opReset,重置,$opReset"
                     ],
                     "span": 24
@@ -40,17 +26,21 @@
         ],
         "hidden": {
             "inputs": [
+                "key",
+                "type"
             ]
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opSave": "act.tabular.save",
+                "$opDelete": "act.tabular.delete"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "saved": "您好，您的信息更新成功！",
+            "removed": "当前记录删除成功！"
         }
     }
 }

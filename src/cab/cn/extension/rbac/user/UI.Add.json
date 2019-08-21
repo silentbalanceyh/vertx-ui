@@ -1,0 +1,83 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=用户基本信息"
+            ],
+            [
+                "username,用户账号,14"
+            ],
+            [
+                "realname,用户姓名,14"
+            ],
+            [
+                {
+                    "metadata":"mobile,手机号,14,,,type=mobile",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入手机号",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "请正确输入手机号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata":"email,邮箱地址,14,,,type=email",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入邮箱地址",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "请正确输入邮件地址！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "alias,备注,14"
+            ],
+            [
+                {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,$opAdd,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+            ]
+        },
+        "actions": {
+            "op": {
+                "$opAdd": "act.user.add"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，用户信息添加成功！"
+        }
+    }
+}

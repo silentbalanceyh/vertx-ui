@@ -3,16 +3,31 @@
         "window": 0.15,
         "ui": [
             [
-                "title=组基本信息"
+                "title=部门基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,部门名称,14"
             ],
             [
-                "code,用户组编码,14"
+                "code,部门编号,14"
             ],
             [
-                "parentId,父组,14"
+                "companyId,所属公司,14"
+            ],
+            [
+                "comment,部门备注,14"
+            ],
+            [
+                "title=部门业务信息"
+            ],
+            [
+                "managerId,部门经理,14"
+            ],
+            [
+                "managerName,经理名称,14"
+            ],
+            [
+                "metadata,附加配置,14"
             ],
             [
                 {
@@ -31,7 +46,8 @@
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
+                        "$opSave,保存,$opSave,primary",
+                        "$opDelete,删除,$opDelete",
                         "$opReset,重置,$opReset"
                     ],
                     "span": 24
@@ -40,17 +56,20 @@
         ],
         "hidden": {
             "inputs": [
+                "key"
             ]
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opSave": "act.dept.save",
+                "$opDelete": "act.dept.delete"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "saved": "您好，部门信息编辑成功！",
+            "removed": "当前部门信息已删除成功！"
         }
     }
 }

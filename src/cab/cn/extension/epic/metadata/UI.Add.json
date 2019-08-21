@@ -3,28 +3,13 @@
         "window": 0.15,
         "ui": [
             [
-                "title=组基本信息"
+                "title=基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,名称,14"
             ],
             [
-                "code,用户组编码,14"
-            ],
-            [
-                "parentId,父组,14"
-            ],
-            [
-                {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
-                }
+                "code,编码,14"
             ],
             [
                 {
@@ -40,17 +25,18 @@
         ],
         "hidden": {
             "inputs": [
+                "type"
             ]
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opAdd": "act.tabular.add"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "added": "您好，您的信息添加成功！"
         }
     }
 }

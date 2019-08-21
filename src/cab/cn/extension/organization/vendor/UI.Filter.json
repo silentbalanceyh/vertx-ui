@@ -1,0 +1,80 @@
+{
+    "_form": {
+        "window": -0.3,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                "name`c,客户名称,24"
+            ],
+            [
+                "code`c,客户编号,24"
+            ],
+            [
+                "title`c,客户显示标题,24"
+            ],
+            [
+                "comment`c,客户备注,24"
+            ],
+            [
+                "taxCode`c,税号,24"
+            ],
+            [
+                "taxTitle`c,开票抬头,24"
+            ],
+            [
+                "contactName`c,联系人名称,24"
+            ],
+            [
+                "contactPhone`c,联系人电话,24"
+            ],
+            [
+                "contactOnline`c,在线联系方式,24"
+            ],
+            [
+                "email`c,企业邮箱,24"
+            ],
+            [
+                "fax`c,传真号,24"
+            ],
+            [
+                "homepage`c,客户主页,24"
+            ],
+            [
+                "logo`c,LOGO,24"
+            ],
+            [
+                "phone`c,客户座机,24"
+            ],
+            [
+                "address`c,客户地址,24"
+            ],
+            [
+                "type`c,客户分类,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,$opFilter,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "actions": {
+            "op": {
+                "$opFilter": "act.customer.filter",
+                "$opDelete": "act.customer.delete"
+            }
+        }
+    }
+}

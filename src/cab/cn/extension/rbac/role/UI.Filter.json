@@ -1,0 +1,41 @@
+{
+    "_form": {
+        "window": -0.3,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                "name`c,角色名称,24"
+            ],
+            [
+                "code`c,角色系统名,24"
+            ],
+            [
+                "comment`c,备注,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,$opFilter,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "actions": {
+            "op": {
+                "$opFilter": "act.role.filter",
+                "$opDelete": "act.role.delete"
+            }
+        }
+    }
+}

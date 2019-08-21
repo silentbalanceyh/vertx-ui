@@ -3,16 +3,16 @@
         "window": 0.15,
         "ui": [
             [
-                "title=组基本信息"
+                "title=角色基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,角色名称,14"
             ],
             [
-                "code,用户组编码,14"
+                "code,角色编码,14"
             ],
             [
-                "parentId,父组,14"
+                "comment,角色备注,14"
             ],
             [
                 {
@@ -27,11 +27,21 @@
                 }
             ],
             [
+                "title=业务模型信息"
+            ],
+            [
+                "modelId,描述模型,14"
+            ],
+            [
+                "modelKey,描述记录,14"
+            ],
+            [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
+                        "$opSave,保存,$opSave,primary",
+                        "$opDelete,删除,$opDelete",
                         "$opReset,重置,$opReset"
                     ],
                     "span": 24
@@ -40,17 +50,20 @@
         ],
         "hidden": {
             "inputs": [
+                "key"
             ]
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opSave": "act.role.save",
+                "$opDelete": "act.role.delete"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "saved": "您好，角色信息编辑成功！",
+            "removed": "当前角色信息已删除成功！"
         }
     }
 }

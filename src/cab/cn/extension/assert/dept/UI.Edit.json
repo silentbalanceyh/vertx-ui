@@ -15,23 +15,21 @@
                 "parentId,父组,14"
             ],
             [
-                {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
-                }
+                "title=业务模型信息"
+            ],
+            [
+                "modelId,描述模型,14"
+            ],
+            [
+                "modelKey,描述记录,14"
             ],
             [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
+                        "$opSave,保存,$opSave,primary",
+                        "$opDelete,删除,$opDelete",
                         "$opReset,重置,$opReset"
                     ],
                     "span": 24
@@ -40,17 +38,20 @@
         ],
         "hidden": {
             "inputs": [
+                "key"
             ]
         },
         "actions": {
             "op": {
-                "$opAdd": "act.group.add"
+                "$opSave": "act.group.save",
+                "$opDelete": "act.group.delete"
             }
         }
     },
     "_modal": {
         "success": {
-            "added": "您好，您的用户组信息添加成功！"
+            "saved": "您好，您的用户组信息更新成功！",
+            "removed": "当前用户组信息已删除成功！"
         }
     }
 }

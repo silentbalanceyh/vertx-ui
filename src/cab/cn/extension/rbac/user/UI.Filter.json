@@ -1,0 +1,44 @@
+{
+    "_form": {
+        "window": -0.3,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                "username`c,用户账号,24"
+            ],
+            [
+                "realname`c,用户姓名,24"
+            ],
+            [
+                "mobile`c,手机号,24"
+            ],
+            [
+                "email`c,邮件,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,$opFilter,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "actions": {
+            "op": {
+                "$opFilter": "act.user.filter",
+                "$opDelete": "act.user.delete"
+            }
+        }
+    }
+}
