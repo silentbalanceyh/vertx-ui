@@ -4,6 +4,11 @@ import Ex from 'ex';
 import Op from './Op';
 import renderJsx from "./Web.jsx";
 
+const LOG = {
+    name: "PxCompany",
+    color: "#5CACEE"
+};
+
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .to()
@@ -27,7 +32,7 @@ class Component extends React.PureComponent {
                 form: formAttrs,
                 actions: Op.actions
             })
-        });
+        }, LOG);
     }
 }
 

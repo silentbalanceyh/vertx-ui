@@ -23,6 +23,13 @@ const rxBatchDelete = (reference) => (event) => {
                 Fn.rsLoading(reference, false)({
                     $dirty: true
                 }), message)
+            ).then(()=>
+                {
+                    //删除后从选中项中清除
+                    $selected.splice(0,$selected.length);
+                    //修改状态
+                    reference.setState({$selected:[]});
+                }
             );
     } else {
         throw new Error("[ Ex ] 选择项丢失！rxBatchDelete.");

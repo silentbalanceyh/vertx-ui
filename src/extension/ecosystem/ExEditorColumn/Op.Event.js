@@ -24,6 +24,12 @@ const rxSave = (reference) => (event) => {
          */
         Ex.rsSubmitting(reference, false)();
     } else {
+        /**
+         * key为查询时必得的值
+         */
+        if(!$selected.includes("key")){
+            $selected.unshift("key");
+        }
         const keys = Ux.immutable($selected);
         /*
          * 计算参数：projection = []

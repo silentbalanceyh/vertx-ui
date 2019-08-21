@@ -1,0 +1,56 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=角色基本信息"
+            ],
+            [
+                "name,角色名称,14"
+            ],
+            [
+                "code,角色编码,14"
+            ],
+            [
+                "comment,角色备注,14"
+            ],
+            [
+                {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,$opAdd,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+            ]
+        },
+        "actions": {
+            "op": {
+                "$opAdd": "act.role.add"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，角色信息添加成功！"
+        }
+    }
+}

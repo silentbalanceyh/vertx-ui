@@ -16,7 +16,7 @@ const _assist = (uris = {}) => (params) => {
             } else {
                 if (params.identifier) {
                     return Ux.ajaxGet(uris.code, {
-                        type: "__zero__",           // 默认系统顶级类型
+                        type: uris.category,           // 默认系统顶级类型
                         code: params.identifier
                     })
                 } else {
@@ -33,13 +33,15 @@ const _assist = (uris = {}) => (params) => {
 const _tabular = _assist({
     code: "/api/:type/tabular/:code",
     type: "/api/type/tabulars/:type",
-    types: "/api/type/tabulars"
+    types: "/api/type/tabulars",
+    category: "__zero.tabular__"
 });
 
 const _category = _assist({
     code: "/api/:type/category/:code",
     type: "/api/type/categories/:type",
-    types: "/api/type/categories"
+    types: "/api/type/categories",
+    category: "__zero.category__"
 });
 export default {
     /*

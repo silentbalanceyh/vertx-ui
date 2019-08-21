@@ -14,7 +14,7 @@ export default (id, record, metadata = {}) => {
     /* 行删除专用 */
     Ex.rsLoading(reference)({$dirty: true});
     /* 删除数据 */
-    Ex.rx(reference).delete(id)
+    Ex.rx(reference).delete(id);
     /* 删除时不调用上层数据 */
     // .then(result => Ex.rx(reference).dirty(result));
 }

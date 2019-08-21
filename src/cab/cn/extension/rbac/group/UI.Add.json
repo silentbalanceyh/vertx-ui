@@ -16,6 +16,18 @@
             ],
             [
                 {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [

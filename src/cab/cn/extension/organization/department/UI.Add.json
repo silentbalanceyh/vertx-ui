@@ -1,0 +1,68 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=部门基本信息"
+            ],
+            [
+                "name,部门名称,14"
+            ],
+            [
+                "code,部门编号,14"
+            ],
+            [
+                "managerId,部门经理,14"
+            ],
+            [
+                "managerName,经理名称,14"
+            ],
+            [
+                "companyId,所属公司,14"
+            ],
+            [
+                "comment,部门备注,14"
+            ],
+            [
+                "metadata,附加配置,14"
+            ],
+            [
+                {
+                    "field": "active",
+                    "optionItem": {
+                        "label": "启用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    },
+                    "render": "aiCheckbox"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,$opAdd,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": {
+            "inputs": [
+            ]
+        },
+        "actions": {
+            "op": {
+                "$opAdd": "act.dept.add"
+            }
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，部门信息添加成功！"
+        }
+    }
+}

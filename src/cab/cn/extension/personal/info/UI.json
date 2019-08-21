@@ -16,8 +16,29 @@
                 "alias,昵称,14"
             ],
             [
-                "mobile,手机号,10",
-                "email,电子邮件,14"
+                {
+                    "metadata":"mobile,手机号,10,,,type=mobile",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入手机号",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "请正确输入手机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"email,电子邮件,14,,,type=email",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入电子邮件",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "请正确输入邮件地址！"
+                        }
+                    ]
+                }
             ],
             [
                 "title=办公信息"
@@ -29,8 +50,28 @@
                 "workTitle,工作头衔,14"
             ],
             [
-                "workPhone,工作电话,10",
-                "workEmail,工作邮件,14"
+                {
+                    "metadata":"workPhone,工作电话,10,,,type=workPhone",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入工作电话",
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "请正确输入工作电话！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"workEmail,工作邮件,14,,,type=workEmail",
+                    "optionConfig.validateTrigger": "onBlur",
+                    "optionConfig.rules": [
+                        "required,请输入工作邮件",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "请正确输入工作邮件！"
+                        }
+                    ]
+                }
             ],
             [
                 "workLocation,办公地点,24"

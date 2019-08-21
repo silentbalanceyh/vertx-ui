@@ -1,0 +1,50 @@
+{
+    "_form": {
+        "window": -0.3,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                "name`c,部门名称,24"
+            ],
+            [
+                "code`c,部门编号,24"
+            ],
+            [
+                "managerId`c,部门经理,24"
+            ],
+            [
+                "managerName`c,经理名称,24"
+            ],
+            [
+                "companyId`c,所属公司,24"
+            ],
+            [
+                "comment`c,部门备注,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,$opFilter,primary",
+                        "$opReset,重置,$opReset"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "actions": {
+            "op": {
+                "$opFilter": "act.dept.filter",
+                "$opDelete": "act.dept.delete"
+            }
+        }
+    }
+}

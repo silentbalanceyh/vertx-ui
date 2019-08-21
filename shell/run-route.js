@@ -57,6 +57,31 @@ const generateRoute = (Component = [], Config) => {
     });
     return routes;
 };
+/*
+ * 生成三种页面
+ * 1）/module/page -> Ox动态加载页
+ * 2）/ambient/tabular -> 字典 Tabular 管理页
+ * 3）/ambient/category -> 分类 Category 管理页
+ * 4）其他页面
+ */
+const generateTpl = (lines = [], route = {}) => {
+    if ("/module/page" === route.uri) {
+        /*
+         * 特殊页面，动态加载用，Origin X专用页
+         */
+        lines.push(`{connect("/dp/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
+    } else if (
+        "/ambient/tabular" === route.uri     // Tabular处理
+        || "/ambient/category" === route.uri // Category 处理
+    ) {
+        /*
+         * 字典页面
+         */
+        lines.push(`{connect("${route.uri}/:type",Container["${route.layout}"],Component["${route.page}"])}`);
+    } else {
+        lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`);
+    }
+};
 
 const layoutDir = collect('./src/container');
 // index.js for container
@@ -120,14 +145,7 @@ fs.writeFile("src/components/index.js", content, () => {
     const routes = generateRoute(variables.concat(extensionVariables), routeConfig);
     // 3.根据路由规则计算生成片段
     const lines = [];
-    routes.forEach(route => {
-        if ("/module/page" === route.uri) {
-            // 特殊页面，动态加载用，Origin X专用页
-            lines.push(`{connect("/dp/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
-        } else {
-            lines.push(`{connect("${route.uri}",Container["${route.layout}"],Component["${route.page}"])}`);
-        }
-    });
+    routes.forEach(route => generateTpl(lines, route));
     // 4.代码块
     let codeBlock = "";
     lines.forEach(line => codeBlock += "\t\t" + line + "\n");
