@@ -6,6 +6,8 @@ import React from "react";
 import ExNavigation from '../ExNavigation/UI';
 import ExSider from '../ExSider/UI';
 
+import './Cab.less';
+
 const {Content} = Layout;
 
 export default (ref, {
@@ -19,8 +21,8 @@ export default (ref, {
     <Layout className={"ux-layout"}>
         <ExSider {...siders} css={
             {
-                clsSider: "ox-sider",
-                clsSiderExpand: "ox-sider-expand"
+                clsSider: "ux-sider",
+                clsSiderExpand: "ux-sider-expand"
             }
         }/>
         <Layout>
@@ -28,7 +30,7 @@ export default (ref, {
             <Content>
                 <ExNavigation {...navigations} css={
                     {
-                        clsNav: "ox-navigation",
+                        clsNav: "ux-navigation",
                         clsBreadcrumb: "breadcrumb",
                     }
                 }/>

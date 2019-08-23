@@ -57,6 +57,5 @@ export default (reference) => {
         .then(data => {
             data.$ready = true;
             reference.setState(data);
-
         })
 };

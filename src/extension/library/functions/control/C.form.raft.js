@@ -20,10 +20,10 @@ const raftHidden = (metadata = {}, {
 const raftCalculated = (metadata = {}, {
     form = {}, addon = {},
 }) => {
-    // 默认 column 为 4
-    const {column = 4, reference, entity, ...rest} = addon;
+    // 默认 columns 为 4
+    const {columns = 4, reference, entity, ...rest} = addon;
     const {options = {}} = metadata;
-    const span = 24 / column;
+    const span = 24 / columns;
     // ui 节点运算
     const normalized = Ux.raptUi(reference, form.ui);
     // 行处理
@@ -33,7 +33,7 @@ const raftCalculated = (metadata = {}, {
     const adjustCol = Ux.raptAdjust(options.window);
     let spans = [];
     if (adjustCol && adjustCol.row) {
-        spans = adjustCol.row[column];
+        spans = adjustCol.row[columns];
     }
     return {
         span,
@@ -96,7 +96,15 @@ const raftPreCell = (metadata, {
         cell.field = `children.${entity}.${cell.field}`;
         entityConfig.entity = entity;
     }
-    const fnRender = Ux.raptRender(cell, {}, entityConfig, reference);
+    /*
+     * 外置 renders
+     */
+    const renders = {};
+    const {$jsx} = reference.props;
+    if ($jsx) {
+        Object.assign(renders, $jsx);
+    }
+    const fnRender = Ux.raptRender(cell, renders, entityConfig, reference);
     // 赋值处理
     const render = fnRender ? fnRender : () => {
         console.error(`Render未找到，${cell.field}`);

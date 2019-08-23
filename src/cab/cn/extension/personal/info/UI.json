@@ -1,6 +1,11 @@
 {
     "_page": {
-        "title": "更新个人信息"
+        "title": "更新个人信息",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
     },
     "_form": {
         "window": 0.15,
@@ -17,7 +22,7 @@
             ],
             [
                 {
-                    "metadata":"mobile,手机号,10,,,type=mobile",
+                    "metadata": "mobile,手机号,10,,,type=mobile",
                     "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入手机号",
@@ -29,7 +34,7 @@
                     ]
                 },
                 {
-                    "metadata":"email,电子邮件,14,,,type=email",
+                    "metadata": "email,电子邮件,14,,,type=email",
                     "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入电子邮件",
@@ -51,7 +56,7 @@
             ],
             [
                 {
-                    "metadata":"workPhone,工作电话,10,,,type=workPhone",
+                    "metadata": "workPhone,工作电话,10,,,type=workPhone",
                     "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入工作电话",
@@ -62,7 +67,7 @@
                     ]
                 },
                 {
-                    "metadata":"workEmail,工作邮件,14,,,type=workEmail",
+                    "metadata": "workEmail,工作邮件,14,,,type=workEmail",
                     "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入工作邮件",

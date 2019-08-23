@@ -1,4 +1,5 @@
 import Ex from 'ex';
+import Ux from "ux";
 
 const $opPassword = (reference) => Ex.xtOp(reference, {
     /*
@@ -16,8 +17,19 @@ const $opPassword = (reference) => Ex.xtOp(reference, {
             .then(() => Ex.Op.$opLogout(reference));
     }
 });
-
+const yoAlert = (reference) => {
+    const alert = Ux.fromHoc(reference, "alert");
+    if (alert) {
+        const header = {};
+        header.$icon = "warning";
+        header.$type = "warning";
+        header.$size = 40;
+        header.$alert = Ux.clone(alert);
+        return header;
+    }
+};
 export default {
+    yoAlert,
     actions: {
         $opPassword
     }

@@ -1,18 +1,35 @@
 import U from 'underscore';
 import Log from '../monitor/Mt.Logger';
+import Immutable from 'immutable';
+import Value from '../value';
 
 /**
  * 读取Tabular专用数据，读取所有数据，一般用于Rxjs
  * @method rxDatum
- * @param data 从响应数据中读取
+ * @param input 从响应数据中读取
  * @param orderBy 排序字段
  */
-const rxDatum = (data, orderBy = 'order') => {
+const rxDatum = (input = [], orderBy = 'order') => {
+    let data = null;
+    if (U.isArray(input)) {
+        /*
+         * 直接修改，data 为数组，按 type 执行 group by 的动作
+         */
+        let $array = Immutable.fromJS(input);
+        $array = $array.groupBy(item => item.get('type'));
+        data = $array.toJS();
+    } else {
+        data = Value.clone(input);
+    }
+    /*
+     * 数据信息
+     */
     const result = {};
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const hittedKey = `tabular.${key.replace(/\./g, '_')}`;
-            result[hittedKey] = data[key].sort((left, right) => left[orderBy] - right[orderBy]);
+            result[hittedKey] = data[key]
+                .sort((left, right) => left[orderBy] - right[orderBy]);
         }
     }
     Log.debug(result, data);

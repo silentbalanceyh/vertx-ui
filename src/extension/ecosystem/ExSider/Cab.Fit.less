@@ -1,0 +1,90 @@
+@import "../../../global";
+
+.ux-sider {
+    .tpl(@width, @height, @left, @title) {
+
+        .ix-width.x-fixed(@width);
+        &-expand {
+            .ix-width.x-fixed(@left);
+        }
+        .ant-menu {
+
+            .ant-menu-submenu-title {
+                // 菜单内边距修改
+                .ix-box.x-in(0 unit(@title, px))
+            }
+        }
+        .logo {
+            .ix-font.line(@height);
+
+            img {
+                height: unit(@height, px);
+            }
+
+            h1 {
+                line-height: unit(@height - 8, px);
+            }
+        }
+    }
+    .menu(@indent, @indent2, @indent3,@adjust,@bottom) {
+        .ant-menu {
+            .ux-menuitem1 {
+                padding-left: @indent !important;
+                margin-bottom: @bottom !important;
+            }
+
+            .ux-collapsed1 {
+                a {
+                    margin-left: 40px;
+                }
+            }
+
+            .ux-submenu1 {
+                .ant-menu-submenu-title {
+                    padding-left: @indent !important;
+                    margin-bottom: @bottom !important;
+                }
+            }
+
+            .ux-menuitem2 {
+                padding-left: @indent2 !important;
+                margin-bottom: @bottom !important;
+            }
+
+            .ux-submenu2 {
+                .ant-menu-submenu-title {
+                    padding-left: @indent2 !important;
+                    margin-bottom: @bottom !important;
+                }
+            }
+
+            .ux-menuitem3 {
+                padding-left: @indent3 !important;
+                margin-bottom: @bottom !important;
+            }
+        }
+    }
+}
+
+.ux-sider-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ux-sider.tpl(
+                72,
+                48,
+                210,
+                28
+        );
+        .ux-sider.menu(28px, 42px, 56px, 40px, 4px);
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ux-sider.tpl(
+                80,
+                56,
+                250,
+                32
+        );
+        .ux-sider.menu(28px, 60px, 88px, 40px, 8px);
+    }
+}

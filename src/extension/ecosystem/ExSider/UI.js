@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
         return renderJsx(this, {
             $collapsed,
             $theme,
-            dataUri: Op._1normalizeMenu(data),
+            dataUri: Op._1normalizeUri(data),
             dataArray: Op._1normalizeMenu(data, $app),
             $app,
             css,

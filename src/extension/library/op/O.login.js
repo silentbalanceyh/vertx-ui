@@ -37,8 +37,8 @@ const $opLogin = (reference) => (params) => Api.login(params)
     .then((response = {}) => {
         // 读取Token信息
         const user = {};
-        user.token = response.access_token;
-        user.refreshToken = response.refresh_token;
+        user.token = response['access_token'];
+        user.refreshToken = response['refresh_token'];
         user.key = response.key;
         user.username = params.username;
         return Fn.promise(user);
@@ -68,6 +68,8 @@ const $opLogin = (reference) => (params) => Api.login(params)
     .then(logged => {
         /* 第二次存储 */
         Ux.storeUser(logged);
+        /* Redux防重复提交完成 */
+        Ux.rdxSubmitting(reference, false);
         /* 重定向 */
         Ux.toOriginal(reference);
     })

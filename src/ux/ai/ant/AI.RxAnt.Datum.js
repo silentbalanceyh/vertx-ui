@@ -112,7 +112,6 @@ const getSource = (reference, config, filter = {}) => {
         // 如果存在datum节点，则从assist/tabular数据源中读取
         options = getDatum(reference, config, filter);
         const datum = parseDatum(config);
-        console.error(Value.clone(datum), Value.clone(config));
         // 处理config中核心的expr节点
         options.forEach(each => Aid.applyItem(each, datum, config.expr));
     }

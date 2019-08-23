@@ -77,21 +77,13 @@ import yuDirty from './yu.dirty';
 import yuLoading from './yu.loading';
 // -------------- 列表专用 --------------------
 import yiTabular from './yi.tabular';
+// -------------- 模板函数 --------------------
+import Tpl from './tpl';
 
 export default {
     yiTabular,
     yoAmbient,      // 环境数据（统一处理）
     yoComponent: yoAmbient,
-    // -- 容器层
-    // yoSider,        // 容器处理
-    // yoNavigation,
-    // yoHeader,
-    /* Header */
-    // yoAccount,
-    // -- 表单
-    // yoForm,
-    // -- 统一方法
-    yoRender,
     // -- 配置
     yoForm,
     yoFilter,
@@ -106,4 +98,12 @@ export default {
     yuQuery,
     yuDirty,
     yuLoading,
+
+    // -- 统一方法（渲染相关）
+    yoRender,           // 普通组件专用渲染
+    /*
+     * -- 模板方法
+     * ylCard - <PageCard/> （内含 yoRender）
+     */
+    ...Tpl,
 }

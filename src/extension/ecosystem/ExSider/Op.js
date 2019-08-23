@@ -36,7 +36,9 @@ const _1normalizeMenu = (data = [], app = {}) => {
         .tree("key", "pid")
         .to();
 };
-
+/*
+ * 解决 onClick 点击事件的切换问题
+ */
 const _2fnRouting = (reference, uris = {}) => ({item, key, keyPath}) => {
     // 如何维持菜单状态？
     if (uris.hasOwnProperty(key)) {
@@ -46,7 +48,8 @@ const _2fnRouting = (reference, uris = {}) => ({item, key, keyPath}) => {
         if (!path) {
             path = Ux.Env['ROUTE'];
         }
-        $router.to("/" + path + uris[key]);
+        path = `${path}${uris[key]}`;
+        $router.to(path);
     }
 };
 export default {

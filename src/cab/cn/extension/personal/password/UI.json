@@ -1,6 +1,11 @@
 {
     "_page": {
-        "title": "修改密码"
+        "title": "修改密码",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
     },
     "_alert": {
         "message": "修改说明",

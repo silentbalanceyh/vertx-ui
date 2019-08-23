@@ -20,6 +20,7 @@ class Component extends React.PureComponent {
         // 处理 button
         const form = Yo.yoForm(this);
         const button = Yo.yoButton(this);
+        // 按钮专用
         return (
             <Form layout="horizontal">
                 {form.map(item => (

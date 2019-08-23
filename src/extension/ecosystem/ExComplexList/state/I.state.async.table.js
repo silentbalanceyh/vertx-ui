@@ -9,6 +9,14 @@ export default (reference, config = {}, state = {}) => Ex.all([
     Ex.rxColumnMy(reference, config)()
 ], "columns", "filters")
     .then(response => {
+        /*
+         * 启用表达式模式的列处理
+         */
+        const {columns = []} = response;
+        response.columns = Ux.uiTableColumn(reference, columns);
+        return Ex.promise(response);
+    })
+    .then(response => {
         const table = Ux.clone(config.table);
         /*
          * 静态列配置信息

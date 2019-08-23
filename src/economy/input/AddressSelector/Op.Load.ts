@@ -21,7 +21,7 @@ const parseInit = (reference: any) => {
     config.country = _parseInitItem(reference, "country");
     config.state = _parseInitItem(reference, "state");
     config.city = _parseInitItem(reference, "city");
-    config.distinct = _parseInitItem(reference, "distinct");
+    config.region = _parseInitItem(reference, "region");
     return config;
 };
 const _initParams = (reference: any) => {
@@ -77,7 +77,7 @@ export default {
     loadCountry,
     loadState: loadSub("state"),
     loadCity: loadSub("city"),
-    loadDistinct: loadSub("distinct"),
+    loadRegion: loadSub("region"),
     loadLeaf,
     parseInit,
 }

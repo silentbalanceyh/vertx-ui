@@ -2,7 +2,7 @@ import React from 'react'
 import Ux from 'ux';
 import Ex from 'ex';
 import Op from './Op';
-import renderJsx from "./Web.jsx";
+import {ExForm} from "ei";
 
 const LOG = {
     name: "PxCompany",
@@ -15,11 +15,11 @@ const LOG = {
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.init(this);
+        Op.yiPage(this);
     }
 
     render() {
-        return Ex.yoRender(this, () => {
+        return Ex.ylCard(this, () => {
             const form = Ux.fromHoc(this, "form");
             const {$inited = {}} = this.state;
             /*
@@ -28,10 +28,10 @@ class Component extends React.PureComponent {
             const formAttrs = Ex.yoForm(this, {
                 form,
             }, $inited);
-            return renderJsx(this, {
-                form: formAttrs,
-                actions: Op.actions
-            })
+            return (
+                <ExForm {...formAttrs} $height={"200px"}
+                        $actions={Op.actions}/>
+            )
         }, LOG);
     }
 }

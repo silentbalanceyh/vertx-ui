@@ -4,6 +4,7 @@ import Ux from "ux";
 import React from "react";
 import {Link} from "react-router-dom";
 import Empty from "./image/empty.jpg";
+import './Cab.less';
 
 const {Sider} = Layout;
 
@@ -14,8 +15,8 @@ export default (reference, {
     dataUri = {},
     dataArray = [],
     css: {
-        clsSider = "",
-        clsSiderExpand = ""
+        clsSider = "ux-sider",
+        clsSiderExpand = "ux-sider-expand"
     }
 }) => (
     <Sider trigger={null}

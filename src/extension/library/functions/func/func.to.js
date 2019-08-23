@@ -1,5 +1,6 @@
 import Ux from "ux";
 import U from 'underscore';
+import To from './func.to.date';
 
 const toUri = (uri = "", $app) => {
     const path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
@@ -72,4 +73,5 @@ export default {
     toMessage,
     toGrid, // Grid 转换
     toHeight,   // 高度计算
+    ...To,
 }

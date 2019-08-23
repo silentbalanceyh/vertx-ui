@@ -14,8 +14,8 @@ const loadData = (reference: any) => (selectedOptions) => {
         Split.loadCity(reference, option.params)
             .then(_callback(reference, "city", option));
     } else if ("city" === option.type) {
-        Split.loadDistinct(reference, option.params)
-            .then(_callback(reference, "distinct", option));
+        Split.loadRegion(reference, option.params)
+            .then(_callback(reference, "region", option));
     }
 };
 
@@ -23,7 +23,7 @@ const _executeData = (item: any, config: any, key) => {
     const option: any = {};
     option.value = item.key;
     option.label = item[config.display];
-    option.isLeaf = "distinct" === key;
+    option.isLeaf = "region" === key;
     option.type = key;
     option.params = Ux.clone(item);
     return option;
@@ -45,7 +45,7 @@ const _findSelected = (
     } else if ("city" === key) {
         // 省份到城市
         source = options.flatMap(item => item.children).filter(item => !!item);
-    } else if ("distinct" === key) {
+    } else if ("region" === key) {
         // 城市到二级县
         const states = options.flatMap(item => item.children);
         source = states.flatMap(item => item.children).filter(item => !!item);
@@ -137,25 +137,25 @@ const _initData = (reference, response: any = {}) => {
     _initCountry(reference, metadata, remoteData, defaultValue)
         .then(_initState(reference, metadata, remoteData, defaultValue))
         .then(_initCity(reference, metadata, remoteData, defaultValue))
-        .then(_initDistinct(reference, metadata, remoteData, defaultValue))
+        .then(_initRegion(reference, metadata, remoteData, defaultValue))
         .then(({options}) => reference.setState({
             options: Ux.clone(options),
             defaultValue: Ux.clone(defaultValue)
         }));
 };
 
-const _initDistinct = (reference, metadata, remoteData, defaultValue = []) => ({options, selected}) =>
-    Split.loadDistinct(reference, selected.params).then(response => new Promise((resolve, reject) => {
-        const distincts = response.data;
-        if (U.isArray(distincts)) {
-            selected.children = _initOptions(distincts, metadata, 'distinct');
-            // distinctId
-            const distinctId = remoteData['distinctId'];
-            defaultValue.push(distinctId);
+const _initRegion = (reference, metadata, remoteData, defaultValue = []) => ({options, selected}) =>
+    Split.loadRegion(reference, selected.params).then(response => new Promise((resolve, reject) => {
+        const regions = response.data;
+        if (U.isArray(regions)) {
+            selected.children = _initOptions(regions, metadata, 'region');
+            // regionId
+            const regionId = remoteData['regionId'];
+            defaultValue.push(regionId);
             Ux.dgDebug({options, metadata, remoteData, defaultValue}, "最终Cascader数据：");
             resolve({options})
         } else {
-            reject("Distinct：数据错误，请检查数据！");
+            reject("Region：数据错误，请检查数据！");
         }
     }));
 
@@ -168,7 +168,7 @@ const _initCity = (reference, metadata, remoteData, defaultValue = []) => ({opti
             // 连接
             selected.children = children;
             // cityId
-            const cityId = remoteData[metadata.distinct.field];
+            const cityId = remoteData[metadata.region.field];
             defaultValue.push(cityId);
             const hit = children.filter(option => cityId === option.value);
             if (1 === hit.length) {

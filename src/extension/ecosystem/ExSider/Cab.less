@@ -1,0 +1,76 @@
+@import "Cab.Fit";
+
+.ux-sider {
+    .ux-sider-fit; // 响应式
+    min-height: 100vh;
+    box-shadow: 2px 0 6px rgba(27, 29, 28, .35);
+    .ix-pos.relative(10);
+
+    .collapse {
+        a {
+            margin-left: 40px !important;
+        }
+    }
+
+    .icon {
+        img {
+            height: 32px;
+            width: 32px;
+            margin-right: 25px;
+        }
+
+        a {
+            color: white !important;
+        }
+    }
+
+    .ant-menu {
+        padding-top: 4px !important;
+
+        .ant-menu-item, .ant-menu-submenu-title {
+            line-height: 40px;
+
+            &:hover {
+                background-color: @primary-color;
+            }
+
+            span {
+                display: inline-block;
+
+                svg {
+                    .ix-box.rect(17px, 17px);
+                    .ux-invert;
+                }
+            }
+        }
+    }
+
+    .menu-icon {
+        a {
+            color: white !important;
+        }
+    }
+
+    .logo {
+        position: relative;
+        padding-left: (@menu-collapsed-width - 72px) / 2;
+        transition: all .3s;
+        background: @color-logo;
+        overflow: hidden;
+
+        img {
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        h1 {
+            color: @font-invert;
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 17px;
+            margin: 0 0 0 12px;
+            font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+            font-weight: 600;
+        }
+    }
+}
