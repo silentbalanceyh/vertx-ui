@@ -18,15 +18,10 @@ export {default as AttrSetter} from './tools/AttrSetter/UI';
 export {default as MarkdownViewer} from './tools/Markdown/UI';
 export {default as DebugMonitorTool} from './tools/MonitorTool/UI';
 
-export {default as ComplexList} from './component/ComplexList/UI';
-export {default as DialogList} from './component/DialogList/UI';
-export {default as TreeList} from './component/TreeList/UI';
 export {default as TreeTable} from './component/TreeTable/UI';
-export {default as TabList} from './component/TabList/UI';
 
 export {default as HelpCard} from './container/HelpCard/UI';
 export {default as PageCard} from './container/PageCard/UI';
-export {default as TreeContainer} from './container/TreeContainer/UI';
 
 export {default as ListSelector} from './input/ListSelector/UI';
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
@@ -51,6 +46,14 @@ export {default as DialogButton} from './action/DialogButton/UI';
 export {default as DialogMenu} from './action/DialogMenu/UI';
 // 重新命名
 export {default as Navigation} from './container/Navigation/UI';
-// 遗留系统，保留以前的名字
+/*
+ * 遗留系统
+ * 被删除的原始代码
+ */
 // Navigation -> PagerHeader
 export {default as PagerHeader} from './container/Navigation/UI';
+// export {default as ComplexList} from './component/ComplexList/UI';
+// export {default as TreeContainer} from './container/TreeContainer/UI';
+// export {default as TabList} from './component/TabList/UI';
+// export {default as DialogList} from './component/DialogList/UI';
+// export {default as TreeList} from './component/TreeList/UI';

@@ -28,6 +28,15 @@ const _seekOptional = (uniform = {}, reference, key) => {
     }
 };
 
+const _seekAssist = (uniform = {}, input = {}) => {
+    /*
+     * props
+     */
+    Object.keys(input)
+        .filter(field => field.startsWith(`$a_`))
+        .forEach(key => uniform[key] = input[key]);
+};
+
 export default (reference = {}, config = {}) => {
     const props = reference.props;
     /*
@@ -95,6 +104,11 @@ export default (reference = {}, config = {}) => {
         uniform.$collapsed = $collapsed;
     }
     Object.assign(uniform.config, config);
+    /*
+     * Assist数据专用
+     */
+    _seekAssist(uniform, reference.props);
+    _seekAssist(uniform, Fn.state(reference));
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

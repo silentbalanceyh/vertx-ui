@@ -21,7 +21,7 @@ const isEmpty = (input) => {
         } else {
             return 0 === Object.keys(input).length;
         }
-    } else return false;
+    } else return true; // undefined 也是 empty
 };
 
 const isObject = (input) => {

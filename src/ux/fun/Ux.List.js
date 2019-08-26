@@ -1,4 +1,5 @@
 import Value from '../Ux.Value';
+import Fn from '../fun';
 import U from 'underscore';
 import Prop from '../prop';
 import Ux from 'ux';
@@ -67,7 +68,7 @@ const irCriteria = (hoc = {}, props = {}, state = {}) => {
     } else {
         config = Ux.clone(hoc);
     }
-    return Value.valueSearch(config, props, state);
+    return Fn.parseInput(config, {props, state});
 };
 
 const irGrid = (hoc = {}, props = {}, state = {}) => {

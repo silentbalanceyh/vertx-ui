@@ -45,7 +45,7 @@ const yiForm = (reference) => {
         /*
          * props + state 构造查询参数
          */
-        const params = Ux.valueSearch(magic, reference.props, reference.state);
+        const params = Ux.parseInput(magic, reference);
         params.control = control;
         supplier = () => Ex.I.form(params);
     } else {

@@ -2,8 +2,11 @@ import U from 'underscore';
 import Logger from '../monitor/Mt.Logger';
 import Type from '../Ux.Type';
 import Value from '../Ux.Value';
-import V from '../value';
 import E from '../Ux.Error';
+/*
+ * 新版解析器处理
+ */
+import Expr from './expression';
 
 const parseProp = (reference, path = "") => {
     const attrPath = path.split('.');
@@ -62,7 +65,7 @@ const parseAjax = (reference, parameters = {}) => {
             // 特殊递归参数
             if ("criteria" === field) {
                 // 特殊解析流程
-                result.criteria = V.valueSearch(parameters.criteria, reference.props);
+                result.criteria = Expr.parseInput(parameters.criteria, reference);
             } else if (U.isObject(parameters[field]) && "sorter" !== field) {
                 result[field] = parseAjax(reference, parameters[field]);
             } else {
@@ -141,5 +144,6 @@ const parseQuery = (reference = {}, $query) => {
  */
 export default {
     parseAjax,
-    parseQuery
+    parseQuery,
+    ...Expr,
 };

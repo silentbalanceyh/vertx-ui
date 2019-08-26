@@ -1,10 +1,11 @@
 import React from 'react';
 import Ex from 'ex';
 import Ux from 'ux';
+
 import FormAdd from "./form/UI.Add";
 import FormEdit from "./form/UI.Edit";
 import FormFilter from "./form/UI.Filter";
-import Op from './Op';
+
 import {ExComplexList} from "ei";
 
 const LOG = {
@@ -21,8 +22,10 @@ class Component extends React.PureComponent {
         Ex.yiTabular(this);
     }
 
-    componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.yuPage(this, {prevProps, prevState});
+    componentDidUpdate(props, state, snapshot) {
+        Ex.yuRouter(this, {props, state}, () => {
+            Ex.yiTabular(this);
+        });
     }
 
     render() {

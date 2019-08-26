@@ -1,16 +1,7 @@
 import RxAnt from "../ant/AI.RxAnt";
 import Aid from './fix';
 import Prop from '../../prop';
-import {
-    Checkbox,
-    DatePicker,
-    Input,
-    InputNumber,
-    Radio,
-    Select,
-    TimePicker,
-    TreeSelect
-} from "antd";
+import {Checkbox, DatePicker, Input, InputNumber, Radio, Select, TimePicker, TreeSelect} from "antd";
 import React from "react";
 
 const aiInput = (reference, jsx = {}, onChange) => {

@@ -1,4 +1,3 @@
-import Type from '../../Ux.Type';
 import Value from '../../Ux.Value';
 import U from 'underscore';
 import Ux from "ux";
@@ -141,26 +140,16 @@ const _removeCondition = (criteria = {}, field) => {
     }
     return criteria;
 };
+/*
+ * 新方法合并查询树
+ */
 const aiCriteria = (query = {}, values = {}, connector = "AND") => {
-    // 1. 初始化 criteria
-    if (!query.criteria) query.criteria = {};
-    // 2. 读取 criteria 的引用
-    let reference = query.criteria;
-    // 3. 遍历 values 中的信息
-    Type.itObject(values, (field, value) => {
-        if ("__DELETE__" === value) {
-            // 移除当前条件
-            reference = _removeCondition(reference, field);
-        } else {
-            // 保存当前条件
-            reference = _saveCondition(reference, field, value, connector);
-        }
-    });
-    // 4. 查询条件的替换
-    query.criteria = reference;
-    Ux.dgDebug(reference, "[Ox] 最终查询条件：", "#639");
+
     return query;
 };
+/*
+ * 新方法（核心方法处理Criteria）
+ */
 export default {
-    aiCriteria,
+    aiCriteria
 };

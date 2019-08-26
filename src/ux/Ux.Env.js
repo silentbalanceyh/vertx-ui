@@ -70,8 +70,6 @@ const route = (container = {}, components = {}) => {
  * @description 环境变量专用类信息
  */
 export default {
-    // 用于处理Null引用
-    Null: null,
     // 环境变量专用
     Env: Cv,
     // 自定义组件专用风格

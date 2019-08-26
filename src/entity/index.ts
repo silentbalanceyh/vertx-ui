@@ -16,4 +16,5 @@ export {default as RxFlow} from './rx/Rx.Flow';
 export {default as RxOp} from './rx/Rx.Op';
 export {default as RxAct} from './rx/Rx.Act';
 // Query查询专用
-export {default as QTree} from "./query/QTree";
+export {default as QTree} from "./query/QForest";
+export {default as QQuery} from './query/QQuery';

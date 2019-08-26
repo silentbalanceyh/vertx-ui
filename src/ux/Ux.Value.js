@@ -1,22 +1,6 @@
 import U from "underscore";
 import Value from './value';
 
-/**
- * 两个字符串的专用连接方法，用于做不重复链接，
- * @method stringConnect
- * @private
- * @param left
- * @param right
- */
-const stringConnect = (left, right) => {
-    if (left && right && "string" === typeof left && "string" === typeof right) {
-        if (right.startsWith(left)) {
-            return right;
-        } else {
-            return left + right;
-        }
-    }
-};
 const arrayConnect = (item, fnEach, dividier = ',') => {
     if (!item) return [];
     if (U.isArray(item)) return item;
@@ -51,8 +35,6 @@ export default {
     fix,
     // 多形态数组统一调用
     arrayConnect,
-    // 合并左右处理（left,right)，简单归并
-    stringConnect,
 
     ...Value,
 };

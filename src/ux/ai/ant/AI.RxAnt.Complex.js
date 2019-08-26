@@ -66,7 +66,6 @@ const treeOptions = (reference, config = {}) => {
      */
     const tree = _parseTree(config);
     let normalized = Uarr.create(options)
-        .sort((left, right) => left.left - right.left)
         .mapping(tree)
         .to();
     /**

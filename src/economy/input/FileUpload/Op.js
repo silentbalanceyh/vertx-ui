@@ -14,7 +14,7 @@ const on2CustomRequest = (reference) => (details = {}) => {
         // 读取Form引用
         const ref = Ux.onReference(reference, 1);
         // 构造最终的下载Action
-        params = Ux.valueSearch(params, ref.props);
+        params = Ux.parseInput(params, ref);
         api = Ux.formatExpr(api, params);
         return Ux.ajaxUpload(api, details.file)
             .then(data => details.onSuccess(data));

@@ -1,5 +1,5 @@
 import It from '../func';
-import Fn from '../global/async';
+import toAsync from './P.async';
 import Ux from "ux";
 /*
  * 传入的 ops 必须是一个对象，每个 key 都会最终生成 category 属性
@@ -77,13 +77,6 @@ const parseComponent = (buttons = {}, options = {}, components = {}) => {
         }
     }, 'component');
     return buttons;
-};
-const toAsync = (result, async = true) => {
-    if (async) {
-        return Fn.promise(result);
-    } else {
-        return result;
-    }
 };
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
