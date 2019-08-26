@@ -78,7 +78,7 @@ const yiAction = (reference, state) => {
      */
     const {config = {}} = reference.props;
     const {form = {}, control} = config;
-    const {actions = {}, columns = 4} = form;
+    const {actions = {}} = form;
     if (actions) {
         /* 检查配置核心信息 */
         Ex.configAction(actions, control).then(result => {

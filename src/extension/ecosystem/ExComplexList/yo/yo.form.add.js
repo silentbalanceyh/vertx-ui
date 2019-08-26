@@ -16,5 +16,11 @@ export default (reference, item = {}) => {
      * 这个值就是 Tab 中的 activeKey
      */
     formAttrs.$addKey = item.key;
+    /*
+     * 提供 $query 用于处理特殊条件
+     * Tabular / Category
+     */
+    const {$query = {}} = reference.props;
+    formAttrs.$query = $query;
     return formAttrs;
 }

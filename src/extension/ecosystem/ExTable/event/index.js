@@ -5,7 +5,6 @@ import fnEdit from "./fnEdit";
 /*
  * 静态事件，非 render 周期
  */
-import rowSelection from './rowSelection';
 import onRow from './onRow';
 
 export default {
@@ -14,5 +13,4 @@ export default {
 
     onChange,
     onRow,
-    rowSelection
 }

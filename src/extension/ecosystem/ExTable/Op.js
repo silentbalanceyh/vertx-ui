@@ -38,14 +38,7 @@ const yiTable = (reference) => {
         })
         .then(state => {
             /*
-             * 1. rowSelection
-             */
-            const rowSelection = Event.rowSelection(reference);
-            if (rowSelection) {
-                state.$table.rowSelection = rowSelection;
-            }
-            /*
-             * 2. onRow
+             * 1. onRow
              */
             const row = state.$table.row;
             state.$table.onRow = Event.onRow(reference, row);
@@ -53,7 +46,7 @@ const yiTable = (reference) => {
                 state.$table.rowClassName = "ex-row-double";
             }
             /*
-             * 3. onChange
+             * 2. onChange
              */
             state.$table.onChange = Event.onChange(reference);
             return Ex.promise(state);

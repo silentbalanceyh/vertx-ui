@@ -25,4 +25,6 @@ export {default as ExAdmin} from './ExAdmin/UI';
 
 // ------------- 侧边栏
 /* （Tabular专用）字典管理 */
-export {default as ExSiderList} from './ExSiderList/UI';
+export {default as ExTabular} from './ExTabular/UI';
+/* （Category专用）分类管理 */
+export {default as ExCategory} from './ExCategory/UI';

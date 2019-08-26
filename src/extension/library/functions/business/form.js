@@ -25,7 +25,9 @@ const remove = (reference) => (params = {}, config = {}) => {
     const input = {key: params.key};
     return Ux.ajaxDelete(config.uri, input)
         .then(Bs.cbDialog(reference, config.dialog))
-        .then(Bs.cbTrue(() => Fn.rx(reference).close(params)));
+        .then(Bs.cbTrue(() => Fn.rx(reference).close(params, {
+            $selected: []
+        })));
 };
 const filter = (reference) => (params = {}) => {
     const {connector = "AND", ...rest} = params;

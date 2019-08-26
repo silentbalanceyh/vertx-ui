@@ -76,12 +76,11 @@ import yuQuery from './yu.query';
 import yuDirty from './yu.dirty';
 import yuLoading from './yu.loading';
 // -------------- 列表专用 --------------------
-import yiTabular from './yi.tabular';
 // -------------- 模板函数 --------------------
 import Tpl from './tpl';
+import Yi from './yi';
 
 export default {
-    yiTabular,
     yoAmbient,      // 环境数据（统一处理）
     yoComponent: yoAmbient,
     // -- 配置
@@ -106,4 +105,9 @@ export default {
      * ylCard - <PageCard/> （内含 yoRender）
      */
     ...Tpl,
+    /*
+     * 特殊界面
+     * tabular / category
+     */
+    ...Yi,
 }

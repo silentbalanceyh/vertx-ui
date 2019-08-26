@@ -111,5 +111,8 @@ export default (condition = {}, {
         // 条件处理
         normalized[term.field] = term.value;
     });
+    if (1 < Object.keys(normalized).length) {
+        normalized[""] = true;
+    }
     return normalized;
 };

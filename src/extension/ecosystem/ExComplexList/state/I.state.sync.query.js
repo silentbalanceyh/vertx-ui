@@ -1,7 +1,6 @@
 import Ux from "ux";
 
 export default (reference, config = {}) => {
-
     let defaultQuery = {};
     const {$query} = reference.props;
     if (Ux.isEmpty($query)) {

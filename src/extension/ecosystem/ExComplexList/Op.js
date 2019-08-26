@@ -43,9 +43,12 @@ const yuList = (reference, previous = {}) => {
         if ($queryChecked) {
             /*
              * 修改当前记录中的 query
+             * 由于 $query 变量发生了改变，所以
+             * 1）$selected 变量清空
              */
             const updatedState = {};
             updatedState.query = Ux.clone($queryChecked.current);
+            updatedState.$selected = [];
             reference.setState(updatedState);
         }
     }

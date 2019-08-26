@@ -4,7 +4,7 @@ import Ex from 'ex';
 import {Menu} from 'antd';
 
 const LOG = {
-    name: "ExSiderList",
+    name: "ExTabular",
     color: "#3CB371"
 };
 

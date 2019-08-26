@@ -13,16 +13,19 @@ export default (reference) => {
      */
     const inherit = yoAmbient(reference);
     const {
-        query = {},     // 外层默认的 query（查询引擎专用）
         options = {},   // 当前状态中保存的 options 配置项
         $selected = [], // 内存选中项（多选时使用）
         // 清空时专用
         $condition = {},    // 外置条件保存
     } = Fn.state(reference);
     /*
+     * 默认的 query 应该走 reference.props 中的
+     */
+    const {$query} = reference.props;
+    /*
      * 核心业务专用
      */
-    inherit.$query = Ir.qrCondition(query, reference);
+    inherit.$query = Ir.qrCondition($query, reference);
     inherit.$selected = $selected;
     inherit.$options = options;
     inherit.$condition = $condition;

@@ -16,5 +16,10 @@ export default (reference, item = {}) => {
      */
     const {$inited = {}} = Ex.state(reference);
     formAttrs.$inited = $inited;
+    /*
+     * 设置基础查询条件
+     */
+    const {$query = {}} = reference.props;
+    formAttrs.$query = $query;
     return formAttrs;
 }

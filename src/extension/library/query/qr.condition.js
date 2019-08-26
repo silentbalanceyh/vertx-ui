@@ -1,5 +1,5 @@
 import Fn from "../functions";
-import Ux from "ux";
+import {QQuery} from 'entity';
 import qrQuery from './qr.condition.normalized';
 
 export default (
@@ -18,7 +18,7 @@ export default (
     /*
      * 查询条件合并，直接在 query 中合并 criteria 节点的查询条件
      */
-    const queryRef = Fn.newQuery(query);
+    const queryRef = new QQuery(query, reference);
     /*
      * 更新合并过后的条件
      */
@@ -26,11 +26,7 @@ export default (
         filterType: $terms
     });
     /*
-     * query是传入的核心查询条件，它需要和 $condition / $filters 中的条件进行运算
-     * $condition 和 $filters 都是查询条件，但 $condition 优先计算
+     * 初始化
      */
-    if (!Ux.isEmpty($filters)) {
-        Object.assign(condition, $filters);
-    }
-    return queryRef.criteria(condition).to();
+    return queryRef.init($filters).and(condition).to();
 };

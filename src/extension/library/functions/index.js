@@ -7,7 +7,6 @@ import is from './is';
 
 import func from './func';
 import parser from './parser';
-import object from './object';
 import generator from './generator';
 import control from './control';
 
@@ -34,11 +33,6 @@ export default {
     ...generator,
     // ...funcGenerate,
     // ...funcBind,
-    /*
-     * 创建专用对象
-     * ExQuery
-     */
-    ...object,
     /*
      * 全局处理
      */

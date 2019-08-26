@@ -48,6 +48,10 @@ const _2fnRouting = (reference, uris = {}) => ({item, key, keyPath}) => {
         if (!path) {
             path = Ux.Env['ROUTE'];
         }
+        // 没有以 / 开头，需要修正
+        if (!path.startsWith('/')) {
+            path = `/${path}`;
+        }
         path = `${path}${uris[key]}`;
         $router.to(path);
     }
