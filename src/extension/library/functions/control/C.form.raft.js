@@ -5,7 +5,7 @@ const raftAttribute = (metadata = {}, {
 }) => {
     const window = form.window ? form.window : 1;
     const $config = window ? {...addon, window} : addon;
-    Ux.D.Logger.render(1, $config, id);
+    // Ux.D.Logger.render(1, $config, id);
     metadata.form = {};
     metadata.form.layout = "inline";
     metadata.form.className = form.className ? form.className : "web-form";

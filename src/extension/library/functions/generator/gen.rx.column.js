@@ -2,7 +2,7 @@ import G from '../global';
 import F from './gen.common';
 import Ux from "ux";
 
-const rxColumn = (reference, config = {}) => F.ux(reference, 'rxColumn',
+const rxColumn = (reference, config = {}) => F.switcher(reference, 'rxColumn',
     (params) => {
         const {options = {}, columns = []} = config;
         if (options[G.Opt.DYNAMIC_COLUMN]) {
@@ -19,7 +19,7 @@ const rxColumn = (reference, config = {}) => F.ux(reference, 'rxColumn',
             return F.promise(columns);
         }
     });
-const rxColumnMy = (reference, config = {}) => F.ux(reference, 'rxColumnMy',
+const rxColumnMy = (reference, config = {}) => F.switcher(reference, 'rxColumnMy',
     (params) => {
         const {options = {}} = config;
         if (options[G.Opt.DYNAMIC_COLUMN]) {
@@ -31,7 +31,7 @@ const rxColumnMy = (reference, config = {}) => F.ux(reference, 'rxColumnMy',
             return Ux.ajaxGet(uri, params);
         }
     });
-const rxColumnSave = (reference, consumer = {}) => F.ux(reference, 'rxColumnSave',
+const rxColumnSave = (reference, consumer = {}) => F.switcher(reference, 'rxColumnSave',
     (params = []) => {
         const {options = {}} = G.state(reference);
         /* 当前组件中的状态定义 */

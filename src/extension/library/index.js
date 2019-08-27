@@ -47,5 +47,7 @@ const exported = {
      */
     ...Qr,
 };
-console.info(exported);
+console.groupCollapsed("%c 「 Ex 」 Zero Extension Framework ( Ex )", "font-weight:900;color:#228B22");
+console.info("「 Ex 」 Zero Common Library ( zero-ui include )", exported);
+console.groupEnd();
 export default exported;

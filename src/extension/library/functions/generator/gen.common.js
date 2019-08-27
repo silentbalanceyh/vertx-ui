@@ -23,7 +23,7 @@ const prevent = (event) => {
  * Ux 组件兼容函数
  * 1）必须是 `rx` 的函数头
  */
-const ux = (reference, name, supplier) => {
+const switcher = (reference, name, supplier) => {
     if (U.isString(name) && name.startsWith("rx")) {
         const fun = reference.props[name];
         /*
@@ -96,7 +96,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
 };
 export default {
     prevent,
-    ux,
+    switcher,
     /* 内部调用 */
     boolean,
     seek,

@@ -1,7 +1,6 @@
 import React from 'react'
 import {KoniEditor} from 'web';
 import Ux from 'ux';
-import {Tps} from 'app';
 import Op from './Op';
 import Detail from './UI.Detail';
 
@@ -17,7 +16,7 @@ const {zero} = Ux;
         .to()
     )
     .connect({
-        fnPointTypes: Tps.fnPointTypes,
+        // fnPointTypes: Tps.fnPointTypes,
     }, true)
     .loading(
         "nodes" // 图左边的节点数据信息
@@ -28,7 +27,7 @@ class Component extends React.PureComponent {
     componentDidMount() {
         const {$app} = this.props;
         // 初始化左边节点类型
-        this.props.fnPointTypes({appId: $app._('key')})
+        // this.props.fnPointTypes({appId: $app._('key')})
     }
 
     render() {

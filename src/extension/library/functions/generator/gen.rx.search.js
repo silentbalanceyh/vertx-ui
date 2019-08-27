@@ -3,7 +3,7 @@ import G from "../global";
 import Ux from "ux";
 import Qr from '../../query';
 
-const rxSearch = (reference) => Cm.ux(reference, 'rxSearch',
+const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
     (params) => {
         /*
          * 必须配置 ajax.search.uri

@@ -3,7 +3,6 @@ import qrTerms from './qr.terms';
 import qrClear from './qr.clear';
 
 import qrQuery from './qr.query';
-import qiButton from './qr.ui.button';
 
 export default {
     /*
@@ -33,5 +32,5 @@ export default {
     /*
      * 标准按钮类
      */
-    qiButton,
+    // qiButton,
 }

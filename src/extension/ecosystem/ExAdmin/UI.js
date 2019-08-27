@@ -9,6 +9,10 @@ class Component extends React.PureComponent {
         $collapsed: true, // 默认将菜单收起来
     };
 
+    componentDidMount() {
+        Op.yiPage(this);
+    }
+
     render() {
         Ux.dgDebug(this.props, "[ ExAdmin ] ", "#366");
         const {config = {}, children} = this.props;

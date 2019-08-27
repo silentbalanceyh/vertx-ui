@@ -2,6 +2,12 @@ import Ux from 'ux';
 import Fn from '../functions';
 import U from 'underscore';
 
+const _seekFun = (fnName) => U.isString(fnName) && (
+    fnName.startsWith('rx') ||
+    fnName.startsWith('fn') ||
+    fnName.startsWith('do')
+);
+
 const _seekState = (uniform = {}, reference, key) => {
     /*
      * 先在属性中查询（属性优先）
@@ -82,7 +88,7 @@ export default (reference = {}, config = {}) => {
     Object.keys(props)
         .filter(propKey => !!propKey)
         .filter(propKey => U.isFunction(props[propKey]))
-        .filter(Fn.specFun)
+        .filter(_seekFun)
         .forEach(propKey => uniform[propKey] = props[propKey]);
     /*
      * 特殊引用
