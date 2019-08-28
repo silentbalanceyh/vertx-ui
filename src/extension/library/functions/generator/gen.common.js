@@ -1,7 +1,7 @@
 import U from 'underscore';
 import Ux from "ux";
 import G from "../global/datum";
-import Is from '../is';
+import Fn from '../func';
 /*
  * 拦截专用函数
  */
@@ -57,7 +57,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
         inError = true
     } = config;
     if (reference) {
-        if (Is.specFun(fnName)) {
+        if (Fn.isExFun(fnName)) {
             /* 参数规范化 */
             args = (args && U.isArray(args)) ? args : [];
             /* 优先从 props 中读取 函数 */

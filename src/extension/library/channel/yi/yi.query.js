@@ -4,7 +4,7 @@ import Fn from '../../functions';
 export default (reference, state = {}) => {
     const config = Ux.fromHoc(reference, "grid");
     let query = {};
-    if (config.query) {
+    if (config && config.query) {
         query = Ux.clone(config.query);
         /*
          * $query构造

@@ -11,7 +11,7 @@ import file from './gen.rx.file';
 
 export default {
     prevent: common.prevent,    // prevent，其他的不开放
-    ux: common.ux,              // 开放 ux
+    switcher: common.switcher,  // 开放 ux
     ...tab,
     ...search,
     ...row,

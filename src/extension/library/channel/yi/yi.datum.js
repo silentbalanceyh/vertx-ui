@@ -13,26 +13,28 @@ export default (reference, state = {}) => {
     /*
      * keys / promise
      */
-    const keys = Object.keys(assist);
-    const promises = keys
-        .map(key => assist[key])
-        .filter(config => undefined !== config)
-        .map(config => ajaxParser.parseRequest(config));
-    return Q.all(promises).then(response => {
-        /*
-         * 构造 Assist / Tabular
-         */
-        state = Ux.clone(state);
-        keys.forEach((key, index) => {
+    if (assist) {
+        const keys = Object.keys(assist);
+        const promises = keys
+            .map(key => assist[key])
+            .filter(config => undefined !== config)
+            .map(config => ajaxParser.parseRequest(config));
+        return Q.all(promises).then(response => {
             /*
-             * Assist 专用
+             * 构造 Assist / Tabular
              */
-            const stateKey = `$a_${key.replace(/\./g, '_')}`;
-            const data = response[index];
-            if (U.isArray(data)) {
-                state[stateKey] = DataLabor.getArray(data);
-            }
+            state = Ux.clone(state);
+            keys.forEach((key, index) => {
+                /*
+                 * Assist 专用
+                 */
+                const stateKey = `$a_${key.replace(/\./g, '_')}`;
+                const data = response[index];
+                if (U.isArray(data)) {
+                    state[stateKey] = DataLabor.getArray(data);
+                }
+            });
+            return Fn.promise(state);
         });
-        return Fn.promise(state);
-    });
+    } else return Fn.promise(state);
 }

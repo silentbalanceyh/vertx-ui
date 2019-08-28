@@ -24,8 +24,3 @@ export {default as ExAdmin} from './ExAdmin/UI';
 export {default as ExTabular} from './ExTabular/UI';
 /* （Category专用）分类管理 */
 export {default as ExCategory} from './ExCategory/UI';
-/*
- * Zero 扩展模块专用组件
- * Origin X 核心组件
- */
-export {default as OxLayout} from './OxLayout/UI';

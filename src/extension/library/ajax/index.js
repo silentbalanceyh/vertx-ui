@@ -3,6 +3,7 @@ import oauth from './oauth';
 import form from './form';
 import employee from './employee';
 import datum from './datum';
+import ui from './ui';
 
 export default {
     ...application,
@@ -10,4 +11,5 @@ export default {
     ...form,
     ...employee,
     ...datum,
+    ...ui,
 }

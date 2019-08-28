@@ -14,7 +14,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        Ux.dgDebug(this.props, "[ ExAdmin ] ", "#366");
+        Ux.dgDebug(this.props, "[ ExAdmin ] ", "#1C86EE");
         const {config = {}, children} = this.props;
         const {homepage, banner} = config;
 

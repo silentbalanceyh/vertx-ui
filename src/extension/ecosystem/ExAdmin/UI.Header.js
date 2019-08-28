@@ -25,7 +25,7 @@ import Op from './Op';
 class Component extends React.PureComponent {
 
     render() {
-        Ux.dgDebug(this.props, "[ Header ]", "#66c");
+        Ux.dgDebug(this.props, "[ ExHeader ]", "#c60");
         const {config = {}, fnCollapse} = this.props;
         const window = Ux.fromHoc(this, 'window');
         const accounts = Op.yoAccount(this, {

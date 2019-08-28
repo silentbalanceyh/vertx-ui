@@ -3,8 +3,6 @@ import business from './business';
 // ------------- 上边是全局处理 -------------
 import E from './debug/error';
 // ------------- 上边是调试专用 -------------
-import is from './is';
-
 import func from './func';
 import parser from './parser';
 import generator from './generator';
@@ -23,10 +21,6 @@ export default {
      * xtOp
      */
     ...control,
-    /*
-     * 变化检查
-     */
-    ...is,
     /*
      *
      */
