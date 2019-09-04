@@ -1,39 +1,47 @@
 import React from 'react';
-import Ux from 'ux';
+import Ux from "ux";
 import Op from './Op';
+import Ex from 'ex';
+import './Cab.less';
+import {Icon} from "antd";
 
-import renderJsx from './Web.jsx';
+const LOG = {
+    name: "ExAccount",
+    color: "#3CB371"
+};
 
-/*
- * React属性props:
- * 1) 全局：$router, $menus, $app, $user
- * 2) 统一：config, data
- * 3) 函数：fnApp, fnCollapse, fnOut
- * 4) 风格：css
- * css =
- * {
- *      clsDropdown: "",
- *      clsAccount: "",
- *      clsAvatar: "",
- *      clsUser: ""
- * }
- * config =
- * {
- *      window:{
- *          logout
- *      }
- * }
- */
+@Ux.zero(Ux.rxEtat(require("./Cab"))
+    .cab("ExAccount")
+    .to()
+)
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Op.yiAccount(this);
+    }
+
     render() {
-        Ux.dgDebug(this.props, "[ ExAccount ]", "#c60");
-        const $user = Ux.isLogged();
-        const {css = {}} = this.props;
-        return renderJsx(this, {
-            $user,
-            data: Op._1normalizeMenu(this),
-            css,
-        })
+        return Ex.yoRender(this, () => {
+            const {$data = {}} = this.state;
+            const {alias, icon, name, items = []} = $data;
+            return (
+                <div className={"ex-account"}>
+                    <div className={"avatar-holder"}>
+                        {Ux.aiIcon(icon)}
+                        <div className={"name"}>{name}</div>
+                        <div>{alias}</div>
+                    </div>
+                    <div className={"detail"}>
+                        {items.map(item => (
+                            <p key={Ux.randomUUID()}>
+                                <Icon type={item.icon}/>
+                                &nbsp;&nbsp;
+                                {item.value}
+                            </p>
+                        ))}
+                    </div>
+                </div>
+            )
+        }, LOG)
     }
 }
 

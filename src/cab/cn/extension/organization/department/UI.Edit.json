@@ -1,44 +1,37 @@
 {
     "_form": {
-        "window": 0.15,
+        "window": 1,
         "ui": [
             [
-                "title=部门基本信息"
+                "title=基本信息"
             ],
             [
-                "name,部门名称,14"
+                "name,名称,12",
+                "code,编号,12"
             ],
             [
-                "code,部门编号,14"
-            ],
-            [
-                "companyId,所属公司,14"
-            ],
-            [
-                "comment,部门备注,14"
-            ],
-            [
-                "title=部门业务信息"
-            ],
-            [
-                "managerId,部门经理,14"
-            ],
-            [
-                "managerName,经理名称,14"
-            ],
-            [
-                "metadata,附加配置,14"
+                "managerId,部门经理,12",
+                {
+                    "metadata": "deptId,上级部门,12,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
+                }
             ],
             [
                 {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
+                    "metadata": "companyId,所属公司,12,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                },
+                {
+                    "metadata": "active,启用,12,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
                 }
             ],
             [
@@ -46,24 +39,20 @@
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opSave,保存,$opSave,primary",
-                        "$opDelete,删除,$opDelete",
-                        "$opReset,重置,$opReset"
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "key"
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opSave": "act.dept.save",
-                "$opDelete": "act.dept.delete"
-            }
+        "hidden": [
+            "key"
+        ],
+        "op": {
+            "$opSave": "act.dept.save",
+            "$opDelete": "act.dept.delete"
         }
     },
     "_modal": {

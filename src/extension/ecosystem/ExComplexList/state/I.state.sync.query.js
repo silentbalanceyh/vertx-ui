@@ -1,4 +1,5 @@
 import Ux from "ux";
+import {QQuery} from 'entity';
 
 export default (reference, config = {}) => {
     let defaultQuery = {};
@@ -13,8 +14,8 @@ export default (reference, config = {}) => {
          * 2）直接处理 config.query
          * */
         if (config.query) {
-            const query = Ux.clone(config.query);
-            defaultQuery = Ux.irGrid(query, reference);
+            const query = new QQuery(config.query, reference);
+            defaultQuery = query.to();
         }
     } else {
         /*

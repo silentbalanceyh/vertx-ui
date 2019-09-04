@@ -5,7 +5,7 @@ const updateInternal = (reference, prevState, consumer) => {
     /*
      * 先检查 props 中的 $query 变化
      */
-    const state = Fn.state(reference, true);
+    const state = Ux.clone(reference.state);
     const current = state['$dirty'];
     const original = prevState['$dirty'];
     /*
@@ -20,7 +20,7 @@ const updateInternal = (reference, prevState, consumer) => {
              * 内置更新
              */
             if (state.$loading) {
-                const {$query = {}} = Fn.state(reference, true);
+                const {$query = {}} = Ux.clone(reference.state);
                 Ux.toLoading(() => Fn.rx(reference).search($query)
                     .then($data => consumer($data)));
             }
@@ -30,7 +30,7 @@ const updateInternal = (reference, prevState, consumer) => {
 
 export default (reference, virtualRef) => {
     const {$dirty = false} = reference.props;
-    const prevState = Fn.state(virtualRef);
+    const prevState = virtualRef.state;
     if ($dirty) {
         /*
          * 侦测到上层 Dirty（外置 Reload）

@@ -18,8 +18,8 @@ export default (reference, virtualRef) => {
         const $condition = $defaultCond.current;
         reference.setState({$condition});
     } else {
-        const prevState = Fn.state(virtualRef);
-        const state = Fn.state(reference);
+        const prevState = virtualRef.state;
+        const state = reference.state;
         /*
          * 检查 $condition
          */

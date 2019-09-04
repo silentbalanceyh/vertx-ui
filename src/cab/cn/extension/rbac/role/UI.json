@@ -112,13 +112,13 @@
                         "key": "keySave",
                         "text": "保存",
                         "icon": "save",
+                        "type": "primary",
                         "event": "rxSave"
                     },
                     {
                         "key": "keyReset",
                         "text": "重置",
                         "icon": "remove",
-                        "type": "default",
                         "event": "rxReset"
                     }
                 ],

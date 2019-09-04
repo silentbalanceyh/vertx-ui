@@ -8,7 +8,7 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
         /*
          * 必须配置 ajax.search.uri
          */
-        const {options = {}} = G.state(reference);
+        const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_SEARCH_URI];
         return Ux.ajaxPost(uri, params);
     });
@@ -18,8 +18,8 @@ const rxCondition = (reference, isClear = false) => {
          * 清空列筛选
          */
         return (event) => {
-            Cm.prevent(event);
-            const {$condition = {}} = G.state(reference);
+            Ux.prevent(event);
+            const {$condition = {}} = reference.state;
             /*
              * 条件本身大于0的时候执行
              */

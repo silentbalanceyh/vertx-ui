@@ -1,6 +1,5 @@
 import './Cab.less';
 import React from 'react';
-import Ex from 'ex';
 import {Button, Col, Icon, Row, Upload} from 'antd';
 import {LoadingAlert} from "web";
 
@@ -9,7 +8,7 @@ export default (reference, {
     upload = {},
     notice = {}
 }) => {
-    const {$fileList = [], $loading = false} = Ex.state(reference);
+    const {$fileList = [], $loading = false} = reference.state;
     button.loading = $loading;
     return (
         <div>

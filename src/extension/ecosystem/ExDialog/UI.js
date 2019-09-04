@@ -23,7 +23,7 @@ import renderJsx from './Web.jsx'
  */
 const LOG = {
     name: "ExDialog",
-    color: "#8FBC8F"
+    color: "#228B22"
 };
 
 class Component extends React.PureComponent {

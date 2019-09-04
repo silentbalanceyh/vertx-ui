@@ -29,7 +29,7 @@ class Component extends React.PureComponent {
             const form = Ex.yoForm(this, null, Ux.clone(logged));
             return (
                 <ExForm {...form} $height={"200px"}
-                        $actions={Op.actions}/>
+                        $op={Op.actions}/>
             )
         }, LOG)
     }

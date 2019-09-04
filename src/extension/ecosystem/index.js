@@ -6,6 +6,10 @@
 export {default as ExComplexList} from './ExComplexList/UI';
 /* （通用表单）*/
 export {default as ExForm} from './ExForm/UI';
+/* （通用页签）原始版本的 auiTab */
+export {default as ExTab} from './ExTab/UI';
+/* （账号信息）用户数据（左边专用的用户基本信息） */
+export {default as ExAccount} from './ExAccount/UI';
 
 /*
  * 【不可重用】业务类型控件
@@ -16,9 +20,12 @@ export {default as ExLogin} from './ExLogin/UI';
 /* （会员入口）   ----- ExEntry 会员登录专用 */
 export {default as ExEntry} from './ExEntry/UI';
 
+
 // ------------- 整页模板
 /* （管理员模板） ----- ExAdmin 模板专用 */
 export {default as ExAdmin} from './ExAdmin/UI';
+
+
 // ------------- 侧边栏
 /* （Tabular专用）字典管理 */
 export {default as ExTabular} from './ExTabular/UI';

@@ -12,39 +12,40 @@
                 }
             ],
             [
-                "name`c,部门名称,24"
+                "name`c,名称,24"
             ],
             [
-                "code`c,部门编号,24"
+                "code`c,编号,24"
             ],
             [
-                "managerId`c,部门经理,24"
+                "managerName`c,部门经理,24"
             ],
             [
-                "managerName`c,经理名称,24"
+                {
+                    "metadata": "companyId`=,所属公司,24,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                }
             ],
             [
-                "companyId`c,所属公司,24"
-            ],
-            [
-                "comment`c,部门备注,24"
+                {
+                    "metadata": "deptId`=,上级部门,24,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
+                }
             ],
             [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opFilter,搜索,$opFilter,primary",
-                        "$opReset,重置,$opReset"
+                        "$opFilter,搜索,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "actions": {
-            "op": {
-                "$opFilter": "act.dept.filter",
-                "$opDelete": "act.dept.delete"
-            }
+        "op": {
+            "$opFilter": "act.dept.filter",
+            "$opDelete": "act.dept.delete"
         }
     }
 }

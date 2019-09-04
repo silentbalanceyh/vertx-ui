@@ -31,8 +31,8 @@ export default (reference, virtualRef) => {
         /*
          * 状态变更
          */
-        const prevState = Fn.state(virtualRef);
-        const state = Fn.state(reference);
+        const prevState = virtualRef.state;
+        const state = reference.state;
         /*
          * 检查状态中的 query
          */

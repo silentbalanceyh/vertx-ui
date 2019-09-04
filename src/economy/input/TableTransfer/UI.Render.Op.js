@@ -1,6 +1,6 @@
 import React from 'react';
 import {Button, Input} from 'antd';
-import {DataLabor} from "entity";
+import {Dsl} from "entity";
 import Ux from 'ux';
 
 const _on2Add = (reference, record = {}) => (event) => {
@@ -16,13 +16,13 @@ const _on2Add = (reference, record = {}) => (event) => {
         treeData.field, treeData.key);
 
     // 计算分支上的数据
-    const dataArray = DataLabor.getArray(selected);
+    const dataArray = Dsl.getArray(selected);
     recordArray.filter(each => each[treeData.key] === record[treeData.key])
         .forEach(each => dataArray.saveElement(each));
     selected = Ux.clone(dataArray.to());
 
     // 设置共享数据项
-    const sharedArray = DataLabor.getArray(shared);
+    const sharedArray = Dsl.getArray(shared);
     recordArray.filter(each => each[treeData.key] !== record[treeData.key])
         .forEach(each => sharedArray.saveElement(each));
     shared = Ux.clone(sharedArray.to());
@@ -43,11 +43,11 @@ const _on2Remove = (reference, record = {}) => (event) => {
     const children = Ux.elementChildren(_data, record[treeData.key],
         treeData.field, treeData.key);
 
-    const dataArray = DataLabor.getArray(selected);
+    const dataArray = Dsl.getArray(selected);
     children.forEach(each => dataArray.removeElement(each[treeData.key], treeData.key));
     selected = Ux.clone(dataArray.to());
 
-    const sharedArray = DataLabor.getArray(shared);
+    const sharedArray = Dsl.getArray(shared);
     children.forEach(each => sharedArray.removeElement(each[treeData.key], treeData.key));
     shared = Ux.clone(sharedArray.to());
 
@@ -81,7 +81,7 @@ const renderOp = (reference, from = false, column = {}) => (text, record) => {
     }
 };
 const _updateItem = (array = [], record = {}, key) => {
-    const dataArray = DataLabor.getArray(array);
+    const dataArray = Dsl.getArray(array);
     dataArray.saveElement(record, key);
     return Ux.clone(dataArray.to());
 };

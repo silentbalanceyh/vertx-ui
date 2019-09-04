@@ -1,7 +1,7 @@
 import Api from '../../ajax';
-import Fn from '../../functions';
 import U from 'underscore';
 import {HocI18r} from 'entity';
+import Ux from 'ux'
 
 export default (reference, state = {}) => {
     const {$router} = reference.props;
@@ -19,6 +19,6 @@ export default (reference, state = {}) => {
              */
             state.$hoc = new HocI18r(module.metadata);
         }
-        return Fn.promise(state);
+        return Ux.promise(state);
     });
 }

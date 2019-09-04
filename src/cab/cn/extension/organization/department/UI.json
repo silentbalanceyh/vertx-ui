@@ -1,6 +1,19 @@
 {
     "_page": {
-        "title": "科室管理"
+        "title": "科室管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_assist": {
+        "ajax.depts": {
+            "uri": "/api/depts"
+        },
+        "ajax.companys": {
+            "uri": "/api/companys"
+        }
     },
     "_grid": {
         "query": {
@@ -8,10 +21,6 @@
             "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "name,code,managerId,managerName,companyId,comment,metadata,active"
         },
         "options": {
             "search.cond": [
@@ -122,13 +131,13 @@
                         "key": "keySave",
                         "text": "保存",
                         "icon": "save",
+                        "type": "primary",
                         "event": "rxSave"
                     },
                     {
                         "key": "keyReset",
                         "text": "重置",
                         "icon": "remove",
-                        "type": "default",
                         "event": "rxReset"
                     }
                 ],
@@ -150,7 +159,7 @@
                         "managerId,部门经理",
                         "managerName,经理名称",
                         "companyId,所属公司",
-                        "deptId,父部门",
+                        "deptId,上级部门",
                         "comment,部门备注",
                         "metadata,附加配置",
                         "active,是否启用",

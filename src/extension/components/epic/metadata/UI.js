@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
             /*
              * 是否已经选择
              */
-            const {$selected = false} = Ex.state(this);
+            const {$selected = false} = this.state;
             /*
              * 基本信息说明
              */

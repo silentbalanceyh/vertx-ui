@@ -6,7 +6,7 @@ import renderDrawer from './Web.Filter';
 import './Cab.less';
 
 const _renderInput = (reference) => {
-    const {$search, searchText} = Ex.state(reference);
+    const {$search, searchText} = reference.state;
     return (
         <Input.Search {...$search} value={searchText}/>
     )

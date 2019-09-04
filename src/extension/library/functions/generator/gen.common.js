@@ -1,22 +1,6 @@
 import U from 'underscore';
 import Ux from "ux";
-import G from "../global/datum";
 import Fn from '../func';
-/*
- * 拦截专用函数
- */
-const prevent = (event) => {
-    /* 保证安全调用 */
-    if (event && U.isFunction(event.preventDefault)) {
-        event.preventDefault();
-        return {};
-    } else {
-        /* 二义性，返回对应的Object值 */
-        if (Ux.isObject(event)) {
-            return event;
-        } else return {};
-    }
-};
 /*
  * 优先选择 name 方法作为函数，只考虑 props 中（外置传入）
  * 其次使用 supplier 作为函数
@@ -44,7 +28,7 @@ const switcher = (reference, name, supplier) => {
  * 核心状态管理
  */
 const boolean = (reference, key, value = true) => (event) => {
-    const addOn = prevent(event);
+    const addOn = Ux.prevent(event);
     const state = {};
     state[key] = value;
     Object.assign(state, addOn);
@@ -67,7 +51,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
             } else {
                 if (inState) {
                     /* 没找到的情况，直接从 state 中读取 */
-                    fun = G.state(reference)[fnName];
+                    fun = reference.state[fnName];
                     if (U.isFunction(fun)) {
                         return fun.apply(this, [].concat(args));
                     } else {
@@ -95,7 +79,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
     }
 };
 export default {
-    prevent,
+
     switcher,
     /* 内部调用 */
     boolean,

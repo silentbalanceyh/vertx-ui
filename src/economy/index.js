@@ -8,7 +8,7 @@ export {default as FuncInputTree} from './input/FuncInputTree/UI';
 
 
 // ------ 绘图专用组件 ------
-export {default as FormDesigner} from './backup/o-designer/FormDesigner/UI';
+// export {default as FormDesigner} from './backup/o-designer/FormDesigner/UI';
 // ------ 新版使用Editor替换原始的Designer
 
 export {default as KoniEditor} from './designer/Koni/UI';

@@ -1,0 +1,16 @@
+{
+    "_page": {
+        "title": "表单管理"
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "size": "small",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabCreate",
+        "items": [
+            "新建表单,tabCreate,plus",
+            "表单管理,tabManage,form",
+            "设计器,tabDesigner,tool:#eb2f96::twoTone"
+        ]
+    }
+}

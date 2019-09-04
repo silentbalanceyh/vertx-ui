@@ -14,7 +14,7 @@ export default (reference, item = {}) => {
     /*
      * 设置表单初始值
      */
-    const {$inited = {}} = Ex.state(reference);
+    const {$inited = {}} = reference.state;
     formAttrs.$inited = $inited;
     /*
      * 设置基础查询条件

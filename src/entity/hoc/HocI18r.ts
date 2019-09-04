@@ -17,6 +17,10 @@ class HocI18r implements HocContainer {
         this.ready = true;
     }
 
+    name() {
+        return "HocI18r";
+    }
+
     is(): boolean {
         return this.ready;
     }

@@ -2,7 +2,6 @@ import Ux from 'ux';
 import Callback from './Op.Callback';
 import {message} from 'antd';
 import Verify from './Op.Verify';
-import Q from 'q';
 import U from 'underscore';
 
 const on2CustomRequest = (reference) => (details = {}) => {
@@ -52,7 +51,7 @@ const _asyncToUrl = (each = {}, blob) => new Promise((resolve) => {
     });
 });
 const _asyncDownload = (reference, value = []) =>
-    Q.all(value.map(file => {
+    Ux.parallel(value.map(file => {
         const {ajax = {}} = reference.props;
         return Ux.ajaxDownload(ajax.download, Ux.clone(file));
     }));
@@ -63,7 +62,7 @@ const _asyncPreview = (reference, value = []) => (downloaded = []) => {
         const promise = _asyncToUrl(each, downloaded[index]);
         promises.push(promise);
     });
-    return Q.all(promises);
+    return Ux.parallel(promises);
 };
 const initState = (reference) => {
     const handler = getHandler(reference);

@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Fn from '../../functions';
 import Api from '../../ajax';
 import yiModule from './yi.module';
 /*
@@ -66,11 +65,13 @@ const _seekPage = (reference, state = {}) => {
      * 1）页面是否安全
      * 2）assist专用配置
      * 3）grid专用配置
+     * 4）controls配置
      */
-    state.$secure = $output.secure; // 重写该属性，鉴别安全页面
-    state.$grid = $output.grid ? $output.grid : {};
+    state.$secure = $output.secure;                         // 重写该属性，鉴别安全页面
+    state.$grid = $output.grid ? $output.grid : [];         // 注意数据格式是 []
     state.$assist = $output.assist ? $output.assist : {};
-    return Fn.promise(state);
+    state.$controls = $output.controls ? $output.controls : {};
+    return Ux.promise(state);
 };
 /*
  * 设置渲染信息
@@ -107,7 +108,9 @@ const startAsync = (state) => {
     state.$container = {};
     state.$grid = {};
     state.$assist = {};
-    return Fn.promise(state);
+    // state.$hoc = null;      // Zero 控制
+    state.$controls = {};
+    return Ux.promise(state);
 };
 export default (reference) => {
     /*
@@ -121,11 +124,11 @@ export default (reference) => {
     return (state.$dynamic ? startAsync(state)
             /* 先读取模块相关数据 */.then(data => yiModule(reference, data))
             /* 再读取页面 */.then(data => Api.page(data.$input)
-            /* 将页面数据加入 */.then(page => Fn.promise(data, '$output', page)))
+            /* 将页面数据加入 */.then(page => Ux.promise(data, '$output', page)))
             /* 填充 Container / Component 专用配置 */.then(data => _seekPage(reference, data)) :
             startAsync(state)
     ).then(response => {
         response.$ready = true;
-        return Fn.promise(response);
+        return Ux.promise(response);
     });
 }

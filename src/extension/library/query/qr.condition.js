@@ -1,4 +1,3 @@
-import Fn from "../functions";
 import {QQuery} from 'entity';
 import qrQuery from './qr.condition.normalized';
 
@@ -14,7 +13,7 @@ export default (
         $condition = {},
         $terms = {},
         $filters = {},
-    } = Fn.state(reference);
+    } = reference.state ? reference.state : {};
     /*
      * 查询条件合并，直接在 query 中合并 criteria 节点的查询条件
      */

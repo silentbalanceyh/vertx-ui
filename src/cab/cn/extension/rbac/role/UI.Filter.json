@@ -24,18 +24,16 @@
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opFilter,搜索,$opFilter,primary",
-                        "$opReset,重置,$opReset"
+                        "$opFilter,搜索,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "actions": {
-            "op": {
-                "$opFilter": "act.role.filter",
-                "$opDelete": "act.role.delete"
-            }
+        "op": {
+            "$opFilter": "act.role.filter",
+            "$opDelete": "act.role.delete"
         }
     }
 }

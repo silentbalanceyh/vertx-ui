@@ -1,5 +1,12 @@
 {
     "_page": {
         "title": "集成管理"
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "size": "small",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabApi",
+        "items": "接口管理,tabApi,api;服务管理,tabService,setting"
     }
 }

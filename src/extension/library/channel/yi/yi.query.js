@@ -1,15 +1,14 @@
 import Ux from "ux";
-import Fn from '../../functions';
+import {QQuery} from "entity";
 
 export default (reference, state = {}) => {
     const config = Ux.fromHoc(reference, "grid");
-    let query = {};
     if (config && config.query) {
-        query = Ux.clone(config.query);
         /*
          * $query构造
          */
-        let $query = Ux.irGrid(query, reference);
+        const query = new QQuery(config.query, reference);
+        let $query = query.to();
         const {$router} = reference.props;
         const params = $router.params();
         $query.criteria['type,='] = params.type;
@@ -18,5 +17,5 @@ export default (reference, state = {}) => {
          */
         state.$query = $query;
     }
-    return Fn.promise(state);
+    return Ux.promise(state);
 }

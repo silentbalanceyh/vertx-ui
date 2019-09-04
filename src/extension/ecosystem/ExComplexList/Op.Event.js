@@ -1,7 +1,7 @@
 import Ex from "ex";
 
 const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) => {
-    const {options = {}} = Ex.state(reference);
+    const {options = {}} = reference.state;
     if (options[Ex.Opt.DYNAMIC_SWITCH] && isAdd) {
         Ex.rxTabEdit(reference)(data.key, data, item, {
             $submitting: false,

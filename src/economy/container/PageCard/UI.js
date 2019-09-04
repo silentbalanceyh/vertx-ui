@@ -1,7 +1,7 @@
 import React from 'react';
 import {Card} from 'antd';
 import Ux from 'ux';
-import {DataLabor} from 'entity';
+import {Dsl} from 'entity';
 import PropTypes from 'prop-types';
 import Op from './UI.Op';
 import {_zero} from "../../_internal";
@@ -21,14 +21,13 @@ import {_zero} from "../../_internal";
  */
 @_zero({
     connect: {
-        s2p: state => DataLabor.createOut(state)
+        s2p: state => Dsl.createOut(state)
             .rework({
                 "status": ["submitting"]
             })
             .rinit(["submitting"])
             .to()
-    },
-    verify: (reference) => Ux.verifyCard(reference)
+    }
 })
 class Component extends React.PureComponent {
     static propTypes = {
@@ -47,7 +46,7 @@ class Component extends React.PureComponent {
     render() {
         const {
             children, $extra, $title,
-            className = Ux.ECONOMY.CARD_CONTAINER, $card,
+            className = Ux.Env.ECONOMY.CARD_CONTAINER,
             $leftVisible = true, $rightVisible = true,
             $backVisible = true,
             // 禁用状态
@@ -72,9 +71,8 @@ class Component extends React.PureComponent {
                     {topbar.back && $backVisible ? Op.renderBack(this, topbar) : false}
                 </span>
             );
-            const clazz = Ux.flowable($card, className, "");
             return (
-                <Card className={clazz} bordered={false}
+                <Card className={className} bordered={false}
                       title={title}
                       extra={extraContent}>
                     {children}

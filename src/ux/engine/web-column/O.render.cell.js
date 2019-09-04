@@ -1,0 +1,103 @@
+import React from "react";
+import {Icon} from "antd";
+import CellOp from './O.render.op';
+import Aid from './I.tool.render';
+import U from 'underscore';
+import Ele from '../../element';
+import Ut from '../../unity';
+import Ajax from '../../ajax';
+import {saveAs} from "file-saver";
+
+const _aiCellSingle = (reference, config, text) => {
+    let downloadConfig = config["$download"];
+    if (!downloadConfig) downloadConfig = {};
+    const value = {value: text.key, name: text.name ? text.name : Ut.randomUUID()};
+    return (<a href={value.name} onClick={(event) => {
+        event.preventDefault();
+        const link = Ut.formatExpr(downloadConfig.ajax, value);
+        Ajax.ajaxDownload(link, value, {})
+            .then(data => saveAs(data, value.name));
+    }}>{downloadConfig.flag ? downloadConfig.flag : value.name}</a>);
+};
+
+const aiCellDownload = (reference, config) => (text) => {
+    // 上传时作了序列化，所以下载时要做反向处理
+    text = JSON.parse(text);
+    if (U.isArray(text)) {
+        return (
+            <ul>
+                {text.map(each => <li>{_aiCellSingle(reference, config, each)}</li>)}
+            </ul>
+        );
+    } else return _aiCellSingle(reference, config, text);
+};
+const initEmpty = () => {
+    return Aid.initEmpty();
+};
+export default {
+    // ---- LOGICAL
+    LOGICAL: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellLogical,
+        (attrs = {}) => Aid.jsxIcon(attrs)
+    ),
+    PERCENT: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellPercent,
+        Aid.jsxSpan,
+    ),
+    DATE: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellDate,
+        Aid.jsxSpan,
+    ),
+    CURRENCY: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellCurrency,
+        Aid.jsxSpan,
+    ),
+    EXPRESSION: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellExpr,
+        Aid.jsxSpan,
+    ),
+    MAPPING: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellMapping,
+        (attrs = {}, children = {}) => attrs.icon ?
+            Aid.jsxIcon(attrs.icon) :
+            Aid.jsxSpan(attrs, children)
+    ),
+    ICON: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellIcon,
+        (attrs = {}, children = "") => (
+            <span>
+                {attrs.icon ? <Icon style={attrs.style} type={attrs.icon}/> : false}
+                {attrs.icon ? <span>&nbsp;&nbsp;</span> : false}
+                {children}
+            </span>
+        )
+    ),
+    DATUM: Aid.jsxConnect(
+        initEmpty,
+        (attrs = {}, reference, params = {}) => {
+            // 动态注入数据源，防止刷新的情况
+            Aid.onList(attrs, reference, params);
+            // 动态处理
+            const {text} = params;
+            const {list: {data = [], config = {}, display = ""}} = attrs;
+            if (U.isArray(text)) {
+                const result = [];
+                text.forEach(each => result.push(Ele.elementUnique(data, config.value, each)));
+                attrs.children = result.map(item => Ut.valueExpr(display, item, true)).join(',');
+            } else {
+                const item = Ele.elementUnique(data, config.value, text);
+                attrs.children = item ? Ut.valueExpr(display, item, true) : false;
+            }
+        },
+        Aid.jsxSpan,
+    ),
+    DOWNLOAD: aiCellDownload,
+    ...CellOp,
+};

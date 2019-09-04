@@ -6,7 +6,7 @@ import renderJsx from './Web';
 
 const LOG = {
     name: "ExSearch",
-    color: "#063"
+    color: "#00868B"
 };
 
 class Component extends React.PureComponent {

@@ -22,7 +22,7 @@ const yiSider = (reference) => {
         })
 };
 const yoMenu = (reference) => {
-    const {$data = []} = Ex.state(reference);
+    const {$data = []} = reference.state;
     const menu = [];
     $data.forEach(item => {
         const each = {};

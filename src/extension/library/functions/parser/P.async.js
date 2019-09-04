@@ -1,8 +1,8 @@
-import Fn from "../global/async";
+import Ux from 'ux';
 
 export default (result, async = true) => {
     if (async) {
-        return Fn.promise(result);
+        return Ux.promise(result);
     } else {
         return result;
     }

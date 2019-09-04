@@ -47,12 +47,12 @@ const yiSearch = (reference) => {
 };
 const isSearch = (reference) => {
     const {config = {}} = reference.props;
-    const {$search} = Ex.state(reference);
+    const {$search} = reference.state;
     return !!config[Ex.Opt.SEARCH_ENABLED] && !!$search;
 };
 const isAdvanced = (reference) => {
     const {config = {}} = reference.props;
-    const {$advanced} = Ex.state(reference);
+    const {$advanced} = reference.state;
     return !!config[Ex.Opt.SEARCH_ADVANCED] && !!$advanced;
 };
 export default {

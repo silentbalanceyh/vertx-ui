@@ -1,0 +1,138 @@
+import R from "../expression";
+import Ut from '../../unity';
+import Datum from '../datum';
+
+const _getConfig = (column = {}) => column['$config'] ? column['$config'] : {};
+// jsx.style -> style中
+// 「静态」读取jsx中的风格到当前风格中
+const onStyle = (attrs = {}, reference, {
+    jsx = {}
+}) => {
+    // 将jsx中的style拷贝到
+    attrs.style = jsx.style ? jsx.style : {};
+};
+
+const onUnit = (attrs = {}, reference, {
+    column = {}
+}) => {
+    // 解析items
+    const config = _getConfig(column);
+    if (config.hasOwnProperty('unit')) {
+        attrs.addonAfter = config.unit;
+    }
+};
+
+const onChangeUnit = (attrs = {}, reference, {
+    column = {},
+    normalize   // 格式化专用
+}) => {
+    const {$config = {}} = column;
+    /*
+    return Xt.xt3ChangeUnit(reference, {
+        field: column.dataIndex,
+        normalize,
+        trigger: $config.trigger, // 添加trigger处理，新功能触发专用
+    });*/
+};
+
+const onOptions = (attrs = {}, reference, {
+    column = {},
+}) => {
+    // 解析items
+    const config = _getConfig(column);
+    attrs.items = R.aiExprOption(config.items);
+};
+const onIndexOptions = (attrs = {}, reference, {
+    column = {}, index
+}) => {
+    // 解析items
+    const config = _getConfig(column);
+    // 默认值
+    let items = R.aiExprOption(config.items);
+    if (config.hasOwnProperty('dynamicItems')) {
+        const each = config['dynamicItems'];
+        if (each && each[index]) {
+            items = R.aiExprOption(each[index]);
+        }
+    }
+    attrs.items = items;
+};
+const onRows = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const config = _getConfig(column);
+    const rows = config ? config["rows"] : 2;
+    attrs.rows = rows;
+};
+const onDatum = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const config = _getConfig(column);
+    // 读取父类专用ref
+    const ref = Datum.onReference(reference, 1);
+    const options = R.Ant.toOptions(ref, config);
+    attrs.items = options;
+};
+const onTree = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const config = _getConfig(column);
+    if (config.datum) {
+        const ref = Datum.onReference(reference, 1);
+        attrs.treeData = R.Ant.toTreeOptions(ref, config);
+    }
+};
+const onJsx = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const jsxAttrs = column.jsx ? column.jsx : {};
+    Object.assign(attrs, jsxAttrs);
+};
+const onAllowClear = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const config = _getConfig(column);
+    if (config.hasOwnProperty('allowClear')) {
+        attrs.allowClear = config.allowClear;
+    }
+};
+const onList = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const $datum = column['$datum'];
+    const config = "string" === typeof $datum ?
+        Ut.formatObject($datum, true) : $datum;
+    const list = {};
+    list.data = Datum.onDatum(reference, config.source);
+    list.config = config;
+    // 兼容处理，label优先，display次之
+    if (config.label) {
+        list.display = config.label;
+    } else {
+        list.display = config.display;
+    }
+    attrs.list = list;
+};
+const onButton = (attrs = {}, reference, {
+    column = {},
+}) => {
+    const {$config = {}} = column;
+    const {icon, text, trigger} = $config;
+    if (icon) attrs.icon = icon;
+    return {text, trigger};
+};
+export default {
+    // ------- 静态：TableEditor用
+    onStyle,    // 设置渲染的span标签的风格
+    onChangeUnit, // 生成函数用于处理底层的「索引」专用结果
+    onOptions,  // 设置专用的options解析
+    onIndexOptions, // 设置专用的options解析，带索引（每一行可能不同）
+    onRows, // 设置TextArea专用的rows属性
+    onUnit, // 单位设置，unit = ￥
+    onDatum, // 处理config.items的双用性
+    onList, // 处理config.$datum中的专用属性
+    onTree, // Tree专用属性
+    onJsx, // 处理jsx直接节点对应的数据信息
+    onAllowClear, // Select专用属性，允许清除
+    onButton, // Button专用解析器
+};

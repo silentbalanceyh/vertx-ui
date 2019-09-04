@@ -13,7 +13,7 @@ const yoDialog = (reference) => {
     const {config = {}} = reference.props;
     const {
         $visible = false
-    } = Ex.state(reference);
+    } = reference.state;
     const dialog = {};
     dialog.config = Ux.clone(config.dialog);
     dialog.config.visible = $visible;

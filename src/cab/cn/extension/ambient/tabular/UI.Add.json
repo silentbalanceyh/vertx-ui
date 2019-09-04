@@ -13,25 +13,27 @@
             ],
             [
                 {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
+            ],
+            [
+                {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
-                        "$opReset,重置,$opReset"
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "type"
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opAdd": "act.tabular.add"
-            }
+        "hidden": [
+            "type"
+        ],
+        "op": {
+            "$opAdd": "act.tabular.add"
         }
     },
     "_modal": {

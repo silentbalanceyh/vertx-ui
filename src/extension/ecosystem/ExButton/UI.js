@@ -6,7 +6,7 @@ import U from "underscore";
 
 const LOG = {
     name: "ExButton",
-    color: "#036"
+    color: "#EE6AA7"
 };
 
 class Component extends React.PureComponent {

@@ -10,8 +10,7 @@ const _seekState = (uniform = {}, reference, key) => {
     if (value) {
         uniform[key] = value;
     } else {
-        const state = Fn.state(reference);
-        value = state[key];
+        value = reference.state ? reference.state[key] : null;
         if (value) {
             uniform[key] = value;
         }
@@ -32,9 +31,11 @@ const _seekAssist = (uniform = {}, input = {}) => {
     /*
      * props
      */
-    Object.keys(input)
-        .filter(field => field.startsWith(`$a_`))
-        .forEach(key => uniform[key] = input[key]);
+    if (input) {
+        Object.keys(input)
+            .filter(field => field.startsWith(`$a_`))
+            .forEach(key => uniform[key] = input[key]);
+    }
 };
 
 export default (reference = {}, config = {}) => {
@@ -46,7 +47,7 @@ export default (reference = {}, config = {}) => {
      * $router
      * $menus
      * */
-    const uniform = Ux.toUniform(props,
+    const uniform = Ux.onUniform(props,
         "app", "user", "router",
         "menus",
         "hotel",     // 旧系统专用
@@ -108,7 +109,7 @@ export default (reference = {}, config = {}) => {
      * Assist数据专用
      */
     _seekAssist(uniform, reference.props);
-    _seekAssist(uniform, Fn.state(reference));
+    _seekAssist(uniform, reference.state);
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

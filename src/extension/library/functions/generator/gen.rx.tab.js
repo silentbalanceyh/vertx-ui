@@ -1,10 +1,9 @@
-import Cm from './gen.common';
 import Mode from "../global/mode";
 import _Tab from './gen.tab.inner';
 import Ux from 'ux';
 
 const rxTabAdd = (reference) => event => {
-    Cm.prevent(event);
+    Ux.prevent(event);
     const tabs = _Tab.Tab.add(reference);
     /*
      * Tab中的 activeKey 需要拷贝到 $key 中赋值（保证数据本身是同步）

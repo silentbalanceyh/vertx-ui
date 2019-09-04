@@ -15,6 +15,10 @@ const jsx = {
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Ex.yiForm(this);
+    }
+
     render() {
         Ux.dgDebug(this.props, "[ ExEntry ]", "#696");
         // 处理 button

@@ -1,0 +1,26 @@
+@import "../../../global";
+
+.ex-tabs {
+    .ant-tabs-left-content {
+        padding-left: 8px;
+    }
+
+    &-tab-block {
+        .ant-tabs-tab {
+            padding-top: 16px !important;
+            padding-bottom: 0 !important;
+            margin-bottom: 8px !important;
+
+            &-active {
+                background-color: @primary-color;
+                color: white;
+                border-top-left-radius: 8px;
+                border-bottom-left-radius: 8px;
+
+                &:hover {
+                    color: #FFEC8B;
+                }
+            }
+        }
+    }
+}

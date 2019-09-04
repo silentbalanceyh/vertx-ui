@@ -41,6 +41,12 @@
             ],
             "ei": [
                 "src/extension/ecosystem"
+            ],
+            "oi": [
+                "src/extension/eclat"
+            ],
+            "mock": [
+                "src/mock"
             ]
         }
     },

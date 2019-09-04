@@ -10,7 +10,7 @@ const rxSelect = (reference) => (selected = {}) => {
      * 设置 $query 专用
      */
     if (!Ux.isEmpty(selected)) {
-        const {$query = {}} = Ex.state(reference);
+        const {$query = {}} = reference.state;
         if (!$query.criteria) $query.criteria = {};
         $query.criteria['type,='] = selected.code;
         /*
@@ -44,7 +44,7 @@ const yoSider = (reference) => {
 };
 const yoList = (reference) => {
     const listAttrs = Ex.yoAmbient(reference);
-    const {$query = {}, $config = {}} = Ex.state(reference);
+    const {$query = {}, $config = {}} = reference.state;
     /*
      * 查询条件：重要
      */

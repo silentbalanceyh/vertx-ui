@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import {DataLabor} from "entity";
+import {Dsl} from "entity";
 
 const _getSelectedFilter = (reference, revert = false) => {
     const {selected = []} = reference.state;
@@ -31,7 +31,7 @@ const _isFlat = (reference, key) => {
 const getFrom = (reference, config = {}) => {
     const {_data = [], shared = []} = reference.state;
     const standard = Ux.clone(_data).filter(_getSelectedFilter(reference));
-    const dataArray = DataLabor.getArray(standard);
+    const dataArray = Dsl.getArray(standard);
     shared.forEach(each => dataArray.saveElement(each));
     let data = dataArray.to();
     const flatField = _isFlat(reference, 'to');
@@ -56,7 +56,7 @@ const getTo = (reference, config = {}) => {
         const query = {criteria: filters};
         data = Ux.aiSearcher(data).query(query);
         // 补齐带有parentId的数据
-        const formated = DataLabor.getArray(data);
+        const formated = Dsl.getArray(data);
         const treeData = config.tree;
         data.forEach(item => {
             const recordArray = Ux.elementBranch(_data, item[treeData.key],

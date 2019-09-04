@@ -1,0 +1,53 @@
+import React from 'react';
+import Ex from 'ex';
+import Ux from 'ux';
+import {Collapse} from 'antd';
+import './Cab.less';
+import Op from './Op';
+
+const configuration = {
+    name: "OxCategory",
+    color: "#A52A2A",
+    type: "Control"
+};
+const {Panel} = Collapse;
+
+@Ex.ox(configuration)
+class Component extends React.PureComponent {
+    state = {
+        $ready: false
+    };
+
+    render() {
+        return Ex.yoRender(this, () => {
+            const {config: {ui = {}}, data = []} = this.props;
+            const {tree} = ui;
+            const treeData = Ux.toTree(data, tree);
+            /*
+             * 1）顶层是 Collapse Panel
+             * 2）从第二层开始是 Menu
+             * 3）默认展开第一个
+             */
+            const defaultActiveKey = treeData
+                .filter((item, index) => 0 === index)
+                .map(item => item.key);
+            /*
+             * Tree专用属性
+             */
+            const attrsTree = {};
+            attrsTree.onSelect = Op.onSelect(this);
+            return (
+                <Collapse defaultActiveKey={defaultActiveKey} className={"ox-collapse"}>
+                    {treeData.map(item => (
+                        <Panel key={item.key} header={item.text}
+                               showArrow={false}>
+                            {Ux.aiTree(item.children, attrsTree)}
+                        </Panel>
+                    ))}
+                </Collapse>
+            );
+        }, configuration)
+    }
+}
+
+export default Component;

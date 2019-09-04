@@ -21,9 +21,6 @@
                 "title`c,客户显示标题,24"
             ],
             [
-                "comment`c,客户备注,24"
-            ],
-            [
                 "taxCode`c,税号,24"
             ],
             [
@@ -48,33 +45,37 @@
                 "homepage`c,客户主页,24"
             ],
             [
-                "logo`c,LOGO,24"
-            ],
-            [
                 "phone`c,客户座机,24"
             ],
             [
                 "address`c,客户地址,24"
             ],
             [
-                "type`c,客户分类,24"
+                {
+                    "metadata": "type`=,分类,24,,aiSelect",
+                    "optionJsx.config.datum": "source=company.nature,value=key,label=name"
+                }
+            ],
+            [
+                {
+                    "metadata": "companyId`=,所属公司,24,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                }
             ],
             [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opFilter,搜索,$opFilter,primary",
-                        "$opReset,重置,$opReset"
+                        "$opFilter,搜索,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "actions": {
-            "op": {
-                "$opFilter": "act.customer.filter",
-                "$opDelete": "act.customer.delete"
-            }
+        "op": {
+            "$opFilter": "act.customer.filter",
+            "$opDelete": "act.customer.delete"
         }
     }
 }

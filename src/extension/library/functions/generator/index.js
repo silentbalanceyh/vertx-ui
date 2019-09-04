@@ -10,7 +10,6 @@ import row from './gen.rx.row';
 import file from './gen.rx.file';
 
 export default {
-    prevent: common.prevent,    // prevent，其他的不开放
     switcher: common.switcher,  // 开放 ux
     ...tab,
     ...search,

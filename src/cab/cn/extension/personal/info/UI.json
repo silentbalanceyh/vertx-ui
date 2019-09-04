@@ -1,11 +1,6 @@
 {
     "_page": {
-        "title": "更新个人信息",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
+        "title": "更新个人信息"
     },
     "_form": {
         "window": 0.15,
@@ -83,25 +78,20 @@
             ],
             [
                 {
-                    "metadata": "$button",
+                    "metadata": "$button,,14",
                     "optionJsx.extension": [
-                        "opProfile,保存,$opProfile,primary",
-                        "opReset,重置,$opReset"
-                    ],
-                    "span": 24
+                        "$opProfile,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "key",
-                "employeeId"
-            ]
-        },
-        "actions": {
-            "op": {
-                "opProfile": "act.user.profile"
-            }
+        "hidden": [
+            "key",
+            "employeeId"
+        ],
+        "op": {
+            "$opProfile": "act.user.profile"
         }
     },
     "_modal": {

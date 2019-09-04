@@ -12,7 +12,7 @@ import U from 'underscore';
  * }
  */
 export default (reference, fnRender, config = {}) => {
-    const {title, header, ...LOG} = config;
+    const {title, header,...LOG} = config;
     return yoRender(reference, () => {
         const attrs = {};
         if (title) {

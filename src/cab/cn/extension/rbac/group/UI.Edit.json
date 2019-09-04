@@ -25,14 +25,10 @@
             ],
             [
                 {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
+                    "metadata": "active,启用,14,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
+                    }
                 }
             ],
             [
@@ -40,24 +36,20 @@
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opSave,保存,$opSave,primary",
-                        "$opDelete,删除,$opDelete",
-                        "$opReset,重置,$opReset"
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "key"
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opSave": "act.group.save",
-                "$opDelete": "act.group.delete"
-            }
+        "hidden": [
+            "key"
+        ],
+        "op": {
+            "$opSave": "act.group.save",
+            "$opDelete": "act.group.delete"
         }
     },
     "_modal": {

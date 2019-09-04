@@ -17,7 +17,7 @@ const jsxTitle = (reference, config = {}) =>
                         size={"small"}
                         className={"ux-red"}
                         onClick={event => {
-                            Ex.prevent(event);
+                            Ux.prevent(event);
                             Ex.rsVisible(reference, false)();
                         }}/>
             </Col>

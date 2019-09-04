@@ -1,7 +1,7 @@
-import Ex from 'ex';
+import Ux from 'ux';
 
 export default (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     const searchText = event.target.value;
     reference.setState({searchText});
 }

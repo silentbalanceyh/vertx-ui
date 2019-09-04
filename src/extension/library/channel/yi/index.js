@@ -6,6 +6,9 @@ import yiCategory from './yi.category';
 import yiModule from './yi.module';
 // UI_LAYOUT 表访问
 import yiLayout from './yi.layout';
+// UI_FORM
+import yiForm from './yi.form';
+import yiAssist from './yi.datum';
 
 export default {
     yiTabular,
@@ -13,4 +16,7 @@ export default {
     /* */
     yiModule,
     yiLayout,
+    yiForm,
+    /* */
+    yiAssist,
 }

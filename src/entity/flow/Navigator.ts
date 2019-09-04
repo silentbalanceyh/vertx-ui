@@ -1,6 +1,6 @@
 import DataRouter from "./DataRouter";
 import BindContainer from "./BindContainer";
-import DataLabor from "../DataLabor";
+import Dsl from "../Dsl";
 
 class Navigator implements BindContainer {
     private active: string = "";
@@ -34,12 +34,12 @@ class Navigator implements BindContainer {
      * @param props
      */
     flush(props: any = {}): void {
-        const { fnFlush } = props;
+        const {fnFlush} = props;
         // 必须更新引用，不仅仅是更新内容
         const reference = this;
         if (fnFlush) {
             fnFlush(
-                DataLabor.createIn(
+                Dsl.createIn(
                     {
                         "layout.navigator": reference
                     },
@@ -53,8 +53,9 @@ class Navigator implements BindContainer {
         const sid = this.aside;
         const nid = this.active;
         const keys = this.keys;
-        return { sid, nid, keys };
+        return {sid, nid, keys};
     }
+
     /**
      * 生成绑定按钮执行操作的函数：Link
      * @param props

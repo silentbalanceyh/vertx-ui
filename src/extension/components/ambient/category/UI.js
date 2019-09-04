@@ -48,7 +48,7 @@ class Component extends React.PureComponent {
             /*
              * 外置传入查询条件
              */
-            const {$query = {}} = Ex.state(this);
+            const {$query = {}} = this.state;
             return (
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config}

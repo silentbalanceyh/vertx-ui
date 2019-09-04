@@ -1,6 +1,5 @@
 import {Layout} from "antd";
 import Header from "./UI.Header";
-import Ux from "ux";
 import React from "react";
 
 import ExNavigation from '../ExNavigation/UI';
@@ -37,6 +36,5 @@ export default (ref, {
                 {children}
             </Content>
         </Layout>
-        {Ux.D.renderTool(ref)}
     </Layout>
 )

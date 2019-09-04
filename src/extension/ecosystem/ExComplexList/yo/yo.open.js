@@ -14,7 +14,7 @@ export default (reference) => {
     if (0 < isFiltered.length) {
         const ref = isFiltered[0];
         if (ref) {
-            const {$condition = {}} = Ex.state(reference);
+            const {$condition = {}} = reference.state;
             if (0 === Object.keys($condition).length) {
                 /*
                  * $condition 无值

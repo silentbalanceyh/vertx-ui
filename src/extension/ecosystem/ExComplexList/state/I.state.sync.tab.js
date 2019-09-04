@@ -27,7 +27,7 @@ export default (reference, config = {}) => {
     /* Tab 专用风格初始化 */
     const {css = {}} = reference.props;
     const {
-        clsTab = Ux.ECONOMY.TAB_CONTAINER
+        clsTab = Ux.Env.ECONOMY.TAB_CONTAINER
     } = css;
     tabs.className = clsTab;
     /* Tab 函数处理 */

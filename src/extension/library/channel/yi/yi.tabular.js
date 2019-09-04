@@ -1,6 +1,6 @@
-import Fn from '../../functions';
 import yiModule from './yi.module';
 import yiQuery from './yi.query';
+import Ux from 'ux';
 
 export default (reference) => {
     /*
@@ -10,7 +10,7 @@ export default (reference) => {
     return yiModule(reference, state)
         .then(data => {
             reference.setState(data);
-            return Fn.promise(data);
+            return Ux.promise(data);
         })
         .then(data => yiQuery(reference, data))
         .then(data => {

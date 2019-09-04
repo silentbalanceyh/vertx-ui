@@ -10,11 +10,11 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Op.yiPage(this);
+        Op.yiLayout(this);
     }
 
     render() {
-        Ux.dgDebug(this.props, "[ ExAdmin ] ", "#1C86EE");
+        Ux.dgDebug(this.props, "[ ExAdmin ] ", "#c60");
         const {config = {}, children} = this.props;
         const {homepage, banner} = config;
 

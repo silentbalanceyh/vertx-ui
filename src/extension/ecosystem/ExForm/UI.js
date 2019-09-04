@@ -1,8 +1,7 @@
 import React from 'react'
 import {Form} from 'antd';
-import Op from './Op';
 import Ex from "ex";
-import renderJsx from './Web.jsx';
+import Ux from 'ux';
 
 /*
  * React属性props：
@@ -60,12 +59,12 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Op.yiForm(this);
+        Ex.yiForm(this);
     }
 
     render() {
         return Ex.yoRender(this, () =>
-            renderJsx(this), LOG)
+            Ux.aiForm(this), LOG)
     }
 }
 

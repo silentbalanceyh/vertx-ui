@@ -17,7 +17,7 @@ export default (reference) => {
         $selected = [], // 内存选中项（多选时使用）
         // 清空时专用
         $condition = {},    // 外置条件保存
-    } = Fn.state(reference);
+    } = reference.state;
     /*
      * 默认的 query 应该走 reference.props 中的
      */

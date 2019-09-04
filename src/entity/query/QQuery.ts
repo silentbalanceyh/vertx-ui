@@ -107,7 +107,10 @@ class QQuery {
     to() {
         const $query = Ux.clone(this.query);
         $query.criteria = this.forest.to();
-        Ux.dgDebug($query.criteria, "[ Qr ] 森林分析最终的 $query = ", "#666");
+        Ux.dgDebug({
+            condition: $query.criteria,
+            query: $query,
+        }, "[ Qr ] 森林分析最终的 $query = ", "#666");
         return $query;
     }
 }

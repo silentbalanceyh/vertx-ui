@@ -1,11 +1,6 @@
 {
     "_page": {
-        "title": "查看企业信息",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
+        "title": "查看企业信息"
     },
     "_form": {
         "window": 0.15,

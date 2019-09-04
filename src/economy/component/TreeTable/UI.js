@@ -3,13 +3,13 @@ import Ux from 'ux';
 import './Cab.less';
 import {Table} from 'antd';
 import Op from './op/Op';
-import {DataLabor} from 'entity';
+import {Dsl} from 'entity';
 import {_zero} from "../../_internal";
 import LoadingContent from '../../loading/LoadingContent/UI';
 
 @_zero({
     connect: {
-        s2p: state => DataLabor.createOut(state)
+        s2p: state => Dsl.createOut(state)
             .rework({
                 "grid": ["circle"]
             })

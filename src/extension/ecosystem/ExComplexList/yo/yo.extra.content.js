@@ -9,7 +9,7 @@ export default (reference, tabs = {}) => {
      * state -> $submitting
      * state -> view
      */
-    const {$submitting = false, $view = Ex.Mode.LIST} = Ex.state(reference);
+    const {$submitting = false, $view = Ex.Mode.LIST} = reference.state;
     if (Ex.Mode.LIST !== $view) {
         const prefix = Ex.Mode.ADD === $view ? "op.add" : "op.edit";
         const attrs = Ex.yoAction(reference, prefix, Order);

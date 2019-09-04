@@ -10,7 +10,7 @@ export default (reference) => {
     /*
      * batch是数组，则处理 disabled 状态
      */
-    const {$selected = [], $submitting = false} = Ex.state(reference);
+    const {$selected = [], $submitting = false} = reference.state;
     /*
      * Disabled-001：初始化
      */

@@ -69,7 +69,7 @@ const generateTpl = (lines = [], route = {}) => {
         /*
          * 特殊页面，动态加载用，Origin X专用页
          */
-        lines.push(`{connect("/dp/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
+        lines.push(`{connect("/ui/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
     } else if (
         "/ambient/tabular" === route.uri     // Tabular处理
         || "/ambient/category" === route.uri // Category 处理

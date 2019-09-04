@@ -1,0 +1,58 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "name,名称,14"
+            ],
+            [
+                "code,编码,14"
+            ],
+            [
+                {
+                    "metadata": "identifier,关联模型,14,,aiSelect",
+                    "optionJsx.config.datum": "source=ci.identifier,value=identifier,label=name"
+                }
+            ],
+            [
+                {
+                    "metadata": "parentId,父类型,14,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=ci.type,key=key",
+                    "optionJsx.config.tree": "text=name",
+                    "optionJsx.config.selection": "mode=FULL"
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "type"
+        ],
+        "op": {
+            "$opAdd": "act.tabular.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的信息添加成功！"
+        }
+    }
+}

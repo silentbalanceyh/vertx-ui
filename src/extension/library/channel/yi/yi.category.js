@@ -1,7 +1,7 @@
 import yiModule from "./yi.module";
-import Fn from "../../functions";
 import yiQuery from "./yi.query";
 import yiDatum from './yi.datum';
+import Ux from 'ux';
 
 export default (reference) => {
     /*
@@ -11,7 +11,7 @@ export default (reference) => {
     return yiModule(reference, state)
         .then(data => {
             reference.setState(data);
-            return Fn.promise(data);
+            return Ux.promise(data);
         })
         .then(data => yiDatum(reference, data))
         .then(data => yiQuery(reference, data))

@@ -1,7 +1,7 @@
 import {Icon, Layout} from "antd";
 import Notify from "./UI.Notify";
 import React from "react";
-import ExAccount from '../ExAccount/UI';
+import ExLogged from '../ExLogged/UI';
 
 const {Header} = Layout;
 
@@ -19,7 +19,7 @@ export default (ref, {
             {/** 提醒菜单 **/}
             <Notify/>
             {/** 用户信息 **/}
-            <ExAccount {...accounts} css={
+            <ExLogged {...accounts} css={
                 {
                     clsDropdown: "menu-item",
                     clsAccount: "action account",

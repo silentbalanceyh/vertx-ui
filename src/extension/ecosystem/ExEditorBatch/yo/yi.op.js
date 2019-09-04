@@ -12,7 +12,7 @@ export default (reference, config = {}) => {
     column.render = (text, record, index) => {
         const {fieldColumn = {}} = config;
         const columns = config.$columnsMy;
-        let options = Ux.RxAnt.toOptions(reference, fieldColumn);
+        let options = Ux.Ant.toOptions(reference, fieldColumn);
         /*
          * 过滤
          */

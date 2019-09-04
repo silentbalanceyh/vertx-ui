@@ -30,7 +30,7 @@ class Component extends React.PureComponent {
                 $buttons = [], $options = [],
                 $submitting = false,
                 $group = {}, $selected = []
-            } = Ex.state(this);
+            } = this.state;
 
             const buttons = Ux.clone($buttons);
             buttons.forEach(button => button.loading = $submitting);
