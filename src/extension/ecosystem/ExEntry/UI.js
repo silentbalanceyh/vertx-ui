@@ -13,7 +13,7 @@ const LOG = {
 };
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI")
+    .cab("ExEntry")
     .form().raft(1).raft(jsx)
     .bind(Ex.Op)
     .to()
