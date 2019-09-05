@@ -16,9 +16,6 @@ const LOG = {
     .cab("ExLogin")
     .form().raft(1).raft(jsx)
     .bind(Ex.Op)
-    .state({
-        $ready: false
-    })
     .to()
 )
 class Component extends React.PureComponent {

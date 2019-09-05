@@ -4,11 +4,22 @@ import Ut from '../unity';
 import Abs from '../abyss';
 import E from '../error';
 import U from 'underscore';
+
+const onEnd = (reference, redux) => () => {
+    reference.setState({$loading: false});
+    /*
+     * 专用处理
+     */
+    if (redux) {
+        Ut.writeSubmit(reference, false);
+    }
+};
 /*
  * 专用窗口响应方法，用于返回 failure 窗口
- * reference 必须绑定了 Cab
+ * 1）如果 redux = false 则只针对当前表单
+ * 2）如果 redux = true 则还需要处理针对远端按钮的情况，回写 redux 的树
  */
-const ajaxError = (reference, error = {}) => {
+const ajaxError = (reference, error = {}, redux = false) => {
     const {data = {}} = error;
     if (data.info) {
         const dialog = Eng.fromHoc(reference, "dialog");
@@ -16,8 +27,9 @@ const ajaxError = (reference, error = {}) => {
             title: dialog.error, content: data.info,
             maskClosable: false,
         };
-        config.onOk = () => reference.setState({$loading: false});
+        config.onOk = onEnd(reference, redux);
         Modal.error(config);
+        return Abs.promise(error);
     } else {
         console.error("[ Ux ] 核心错误！", error);
     }
@@ -49,10 +61,13 @@ const _showDialog = (reference, dialogConfig = {}, data) => {
         "confirm": Modal.confirm,
     };
     const fnDialog = FUN[mode];
-    config.onCancel = () => reference.setState({$loading: false});
+    config.onCancel = onEnd(reference, dialogConfig.redux);
     return new Promise((resolve) => {
         config.onOk = () => {
-            reference.setState({$loading: false});
+            /*
+             * 执行一次
+             */
+            onEnd(reference, dialogConfig.redux)();
             resolve(data)
         };
         fnDialog(config);
@@ -61,7 +76,7 @@ const _showDialog = (reference, dialogConfig = {}, data) => {
 const ajax2Dialog = (reference, key) => (data) =>
     ajaxDialog(reference, {key, data});
 const ajaxDialog = (reference, {
-    data, key
+    data, key, redux = false
 }) => {
     const {config = {}} = reference.props;
     const {dialog = {}} = config;
@@ -82,6 +97,7 @@ const ajaxDialog = (reference, {
     if (dialogConfig.pattern) {
         dialogConfig.content = Ut.formatExpr(dialogConfig.pattern, data);
     }
+    dialogConfig.redux = redux;     // 连接 redux 处理响应
     return _showDialog(reference, dialogConfig, data);
 };
 const ajax2True = (consumer, content) => (result) => {

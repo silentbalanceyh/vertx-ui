@@ -14,9 +14,13 @@ export {default as DataEvent} from './flow/DataEvent';
  */
 export {default as HocI18n} from "./hoc/HocI18n";
 export {default as HocI18r} from './hoc/HocI18r';
+/*
+ * Zero辅助
+ * 1）配置读取
+ * 2）Stream模式设置
+ */
 export {default as RxEtat} from './rx/Rx.Etat';
-
-// export {default as RxFlow} from './rx/Rx.Flow';
+export {default as RxFlow} from './rx/Rx.Flow';
 // export {default as RxOp} from './rx/Rx.Op';
 // export {default as RxAct} from './rx/Rx.Act';
 // Query查询专用

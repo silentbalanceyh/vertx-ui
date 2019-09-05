@@ -27,40 +27,41 @@
         }
     }
     .menu(@indent, @indent2, @indent3,@adjust,@bottom) {
-        .ant-menu {
-            .ux-menuitem1 {
+        .ux-menu {
+            // 叶节点优先
+            .ant-menu-item {
                 padding-left: @indent !important;
-                margin-bottom: @bottom !important;
             }
 
-            .ux-collapsed1 {
-                a {
-                    margin-left: 40px;
-                }
-            }
-
+            // 分支节点
             .ux-submenu1 {
                 .ant-menu-submenu-title {
                     padding-left: @indent !important;
-                    margin-bottom: @bottom !important;
                 }
-            }
 
-            .ux-menuitem2 {
-                padding-left: @indent2 !important;
-                margin-bottom: @bottom !important;
+                .ant-menu-item {
+                    padding-left: @indent2 !important;
+                }
+
+                .ant-menu-submenu {
+                    .ant-menu-submenu-title {
+                        padding-left: @indent2 !important;
+                    }
+                }
             }
 
             .ux-submenu2 {
                 .ant-menu-submenu-title {
-                    padding-left: @indent2 !important;
-                    margin-bottom: @bottom !important;
+                    padding-left: @indent3 !important;
+                }
+
+                .ant-menu-item {
+                    padding-left: @indent3 !important;
                 }
             }
 
-            .ux-menuitem3 {
-                padding-left: @indent3 !important;
-                margin-bottom: @bottom !important;
+            .ant-menu-item, .ant-menu-submenu-title {
+                margin: 0 !important;
             }
         }
     }
@@ -75,7 +76,7 @@
                 210,
                 28
         );
-        .ux-sider.menu(28px, 42px, 56px, 40px, 4px);
+        .ux-sider.menu(28px, 44px, 60px, 40px, 4px);
     }
     // > 1600
     @media (min-width: @screen-xxl) {
@@ -85,6 +86,6 @@
                 250,
                 32
         );
-        .ux-sider.menu(28px, 60px, 88px, 40px, 8px);
+        .ux-sider.menu(28px, 52px, 76px, 40px, 8px);
     }
 }

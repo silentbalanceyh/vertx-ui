@@ -8,6 +8,7 @@ import object from './O.object';
 import element from './O.element';
 
 import event from './O.event';
+import to from './O.to';
 
 export default {
     ...arg,
@@ -18,5 +19,6 @@ export default {
 
     ...element,
 
-    ...event
+    ...event,
+    ...to,
 }

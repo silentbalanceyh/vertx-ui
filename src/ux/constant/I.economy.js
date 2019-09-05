@@ -15,5 +15,10 @@ export default {
         CHILDREN: "CHILDREN",                               // 直接子节点
         CHILDREN_ALL: "CHILDREN_ALL",                        // 所有子节点
         CHILDREN_ALL_INCLUDE: "CHILDREN_ALL_INCLUDE",       // 当前节点 + 所有子节点
+    },
+    RX_SOURCE: {
+        REACTIVE: "REACTIVE",
+        REACT: "REACT",
+        REDUX: "REDUX"
     }
 };

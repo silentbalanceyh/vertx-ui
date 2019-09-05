@@ -8,10 +8,11 @@ import webComponent from './web-component';
 import webNavigation from './web-navigation';
 // 成套组件
 import webField from './web-field';
+import webColumn from './web-column';
 import webUnit from './web-unit';
 // 特殊函数
 import functions from './functions';
-
+// 桥接Column中的特殊函数
 export default {
     ...datum,
     ...config,
@@ -24,4 +25,5 @@ export default {
     ...webNavigation,
     ...webUnit,
     ...webField,
+    ...webColumn
 }

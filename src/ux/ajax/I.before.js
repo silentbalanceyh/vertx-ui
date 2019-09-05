@@ -8,7 +8,7 @@ import Dev from '../develop';
 
 const ajaxParamDeep = (criteria = {}, collector = {}) => {
     for (const key in criteria) {
-        if (key && criteria.hasOwnProperty(key)) {
+        if (criteria.hasOwnProperty(key)) {
             const value = criteria[key];
             if (!U.isArray(value) && U.isObject(value)) {
                 ajaxParamDeep(value, collector);

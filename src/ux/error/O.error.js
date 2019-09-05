@@ -17,7 +17,7 @@ const fxMessage = (executor, code, ...args) => {
     const fn = ERROR_CODE[code];
     if (U.isFunction(fn)) {
         const message = fn.apply(this, args);
-        if (Cv.DEBUG) {
+        if (Cv.DEBUG && U.isFunction(executor)) {
             executor.apply(this, [message].concat(
                 args.filter(item => !U.isFunction(item)).map(item => `'${item}'`)
             ));

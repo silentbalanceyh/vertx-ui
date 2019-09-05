@@ -1,3 +1,5 @@
+import Cv from "../../constant";
+
 const toGrid = (config = {}) => {
     const {grid = 3} = config;
     const style = {};
@@ -18,7 +20,7 @@ const toGrid = (config = {}) => {
             style.width = "100%";
             break;
         default: {
-            console.error("[OX] 暂时不支持该值：", grid);
+            console.error("[ Ux ] 暂时不支持该值：", grid);
             break;
         }
     }
@@ -32,15 +34,7 @@ const toHeight = (adjust = 0) => {
     return style;
 };
 
-const toJson = (input) => {
-    if ("string" === typeof input) {
-        try {
-            return JSON.parse(input);
-        } catch (e) {
-            return null;
-        }
-    } else return input;
-};
+const toCss = (name) => `${Cv['CSS_PREFIX']}-${name}`;
 
 const toMessage = (content, error = false) => {
     if (content) {
@@ -57,6 +51,7 @@ const toMessage = (content, error = false) => {
 export default {
     toHeight,
     toGrid,
-    toJson,
     toMessage,
+    /* 根据 CSS_PREFIX 前缀计算的 Class */
+    toCss,
 }

@@ -192,14 +192,6 @@ class Etat {
         return this;
     }
 
-    // Dialog专用方法，设置$op中的show, hide
-    dialog(key = "$_show") {
-        if (!this._op) this._op = {};
-        this._op['hide'] = Ux.onHide(null, key);
-        this._op['show'] = Ux.onShow(null, key);
-        return this;
-    }
-
     to() {
         const config: any = {};
         // Cab专用

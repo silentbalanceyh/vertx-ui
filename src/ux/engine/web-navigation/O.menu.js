@@ -11,7 +11,10 @@ const aiMenuBranch = (item = {}, rest = {}, addOn = {}) => {
     if (item.children && 0 < item.children.length) {
         const attrs = {...item};
         attrs.title = Unit.aiTitle(item, addOn);
-        return aiMenuSub(attrs, child => aiMenuBranch(child, addOn));
+        return aiMenuSub(attrs, child => aiMenuBranch({
+            ...child,
+            className: _toBranchClass(child)
+        }, addOn));
     } else {
         const attrs = {...item};
         return aiMenuItem(attrs, addOn)
@@ -54,21 +57,28 @@ const aiMenuTop = (items = [], rest = {}, addOn = {}) => (
         ))}
     </Menu>
 );
+
+const _toBranchClass = (item) => {
+    let className = 0 < item.children.length ? `ux-submenu${item.level}` : `ux-menuitem${item.level}`;
+    if (item.collapsed) {
+        className = `${className} ux-collapsed${item.level}`;
+    }
+    return className;
+};
 /*
  * 特殊方法，左边菜单
  */
 const aiSider = (items = [], rest = {}, addOn = {}) => {
-    const {...menuAttrs} = rest;
+    if (!rest.className) {
+        rest.className = "";
+    }
+    rest.className = `ux-menu`;
     return (
-        <Menu {...menuAttrs}>
+        <Menu {...rest}>
             {items.map(item => {
-                let className = 0 < item.children.length ? `ux-submenu${item.level}` : `ux-menuitem${item.level}`;
-                if (item.collapsed) {
-                    className = `${className} ux-collapsed${item.level}`;
-                }
                 return aiMenuBranch({
                     ...item,
-                    className
+                    className: _toBranchClass(item)
                 }, rest, addOn);
             })}
         </Menu>

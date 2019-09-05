@@ -1,5 +1,6 @@
 import Abs from '../../abyss';
 import Grid from '../layout';
+import Adjust from './O.raft.adjust';
 
 const raftColumn = (raft = {}, config = {}) => {
     const {cell = {}, index = 0, calculated = {}, row = {}} = config;
@@ -53,28 +54,15 @@ const raftColumn = (raft = {}, config = {}) => {
     return $cell;
 };
 const raftSpecial = (cell = {}) => {
-    // 特殊配置：$button 按钮
-    if ("$button" === cell.field) {  // 特殊按钮
-        if (cell.optionItem) {
-            if (cell.hidden) {
-                cell.optionItem.labelCol = {span: 0};
-                cell.optionItem.wrapperCol = {span: 24};
-            } else {
-                cell.optionItem.label = " ";
-                cell.optionItem.colon = false;
-            }
-        }
-    }
-    // 特殊配置：title
-    if (cell.title) {
-        if (cell.optionItem) delete cell.optionItem;
-        if (cell.optionConfig) delete cell.optionConfig;
-        if (cell.optionJsx) delete cell.optionJsx;
-        if (cell.render) delete cell.render;
-        if (!cell.className) cell.className = "ux-title";
-        delete cell.col;
-        if (!cell.span) cell.span = 24;
-    }
+    /*
+     * field = $button
+     */
+    Adjust.adjustButton(cell);
+    /*
+     * type = title 类别的调整
+     */
+    Adjust.adjustTitle(cell);
+
     cell.key = cell.field;
 };
 export default {

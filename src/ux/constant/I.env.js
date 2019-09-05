@@ -6,6 +6,7 @@ import Immutable from "immutable";
 Object.freeze(process.env);     // 只读
 const ENV = Immutable.fromJS(process.env).toJS();
 
+// eslint-disable-next-line
 for (const key in ENV) {
     if (ENV.hasOwnProperty(key)) {
         // 移除原始K_和DEV_

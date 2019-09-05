@@ -7,6 +7,7 @@ import engine from './engine';
 import entity from './entity';
 import unity from './unity';
 import graphic from './graphic';
+import xweb from './xweb';
 
 import E from './error';
 import reportUx from './Ux.Report';
@@ -26,6 +27,7 @@ const exported = {
      */
     ...unity,
     ...graphic,
+    ...xweb,
     Env: {
         ...constant,
     },

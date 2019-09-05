@@ -4,21 +4,20 @@ import Abs from '../../abyss';
 import Dev from '../../develop';
 import U from 'underscore';
 
-const exprReset = (reference, expr = "") => {
-    const reset = Expr.aiExprOp(expr);
-    reset.type = "default";
-    reset.event = "RESET";
-    reset.onClick = EVENT[reset.event](reference, reset);
-    Object.freeze(reset);
-    return reset;
-};
-const exprSubmit = (reference, expr = "") => {
-    const item = Expr.aiExprOp(expr);
-    item.type = "primary";
-    item.event = "SUBMIT";
-    item.onClick = EVENT[item.event](reference, item);
-    Object.freeze(item);
-    return item;
+const mountEvent = (config = {}, reference, eventName = 'onClick') => {
+    const eventFun = EVENT[config.event];
+    if (U.isFunction(eventFun)) {
+        const onEvent = eventFun(reference, config);
+        if (U.isFunction(onEvent)) {
+            config[eventName] = onEvent;
+        } else {
+            config[eventName] = () =>
+                console.error(`[ Ux ] 找到的事件 key = ${config.event} 不是一个高阶函数，无法生成最终事件`);
+        }
+    } else {
+        config[eventName] = () =>
+            console.error(`[ Ux ] 无法找到对应的事件信息，key = ${config.event}`, EVENT);
+    }
 };
 /*
  * 执行 $op 中的函数相关信息
@@ -39,9 +38,25 @@ const performFn = (reference, config = {}) => {
         return Abs.promise(() => false);
     }
 };
+const exprReset = (reference, expr = "") => {
+    const reset = Expr.aiExprOp(expr);
+    reset.type = "default";
+    reset.event = "RESET";
+    mountEvent(reset, reference);
+    Object.freeze(reset);
+    return reset;
+};
+const exprSubmit = (reference, expr = "") => {
+    const item = Expr.aiExprOp(expr);
+    item.type = "primary";
+    item.event = "SUBMIT";
+    mountEvent(item, reference);
+    Object.freeze(item);
+    return item;
+};
 const exprUniform = (reference, expr = "") => {
     const item = Expr.aiExprOp(expr);
-    item.onClick = EVENT[item.event](reference, item);
+    mountEvent(item, reference);
     Object.freeze(item);
     return item;
 };
