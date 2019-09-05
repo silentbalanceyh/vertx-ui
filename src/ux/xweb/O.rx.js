@@ -2,6 +2,7 @@ import U from 'underscore';
 
 import E from '../error';
 import Cv from '../constant';
+import React from "react";
 
 const xtRxInit = (reference = {}, fnName, params) => {
     E.fxTerminal("string" !== typeof fnName, 10100, fnName);
@@ -16,6 +17,24 @@ const xtRxInit = (reference = {}, fnName, params) => {
         }
     }
 };
+const jsxError = (message) => (
+    <div className={"ux-error"}>
+        {message}
+    </div>
+);
+const xtRender = (reference, render) => {
+    const {error} = reference.state ? reference.state : {};
+    if (error) {
+        return jsxError(error);
+    } else {
+        if (reference.state) {
+            return render();
+        } else {
+            return false;
+        }
+    }
+};
 export default {
-    xtRxInit
+    xtRxInit,
+    xtRender,
 };

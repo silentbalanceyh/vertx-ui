@@ -7,7 +7,7 @@ const getDefault = (reference = {}) => {
     // 核心配置处理
     const onClick = Ux.xt2Loading(reference, config);
     const dialog = getDialog(reference, config);
-    const columns = Ux.uiTableColumn(reference, config.table.columns);
+    const columns = Ux.configColumn(reference, config.table.columns);
     const rowSelection = Ux.xtSelection(reference);
     const attrs = {
         onClick, dialog, ready: true,

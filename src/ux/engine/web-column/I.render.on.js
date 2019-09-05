@@ -1,6 +1,7 @@
 import R from "../expression";
 import Ut from '../../unity';
 import Datum from '../datum';
+import Xt from '../../xweb';
 
 const _getConfig = (column = {}) => column['$config'] ? column['$config'] : {};
 // jsx.style -> style中
@@ -27,12 +28,12 @@ const onChangeUnit = (attrs = {}, reference, {
     normalize   // 格式化专用
 }) => {
     const {$config = {}} = column;
-    /*
+
     return Xt.xt3ChangeUnit(reference, {
         field: column.dataIndex,
         normalize,
         trigger: $config.trigger, // 添加trigger处理，新功能触发专用
-    });*/
+    });
 };
 
 const onOptions = (attrs = {}, reference, {

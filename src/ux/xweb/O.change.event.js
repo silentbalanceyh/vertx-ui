@@ -1,10 +1,11 @@
 import U from "underscore";
 import Event from './O.event';
-import Trigger from './O.change.trigger';
 import moment from "moment";
 
 import Ut from '../element';
 import Abs from '../abyss';
+import Eng from "../engine";
+import Ajax from "../ajax";
 
 const _xtValue = (input, normalize = data => data) => {
     let value = undefined;
@@ -77,7 +78,7 @@ const xt2ChangeUnitAsync = (event, reference, {
     record = Abs.clone(record);
     record[field] = value;
     // 异步Trigger处理
-    Trigger.xtCallback(reference, trigger, record, (response = {}) => {
+    xtCallback(reference, trigger, record, (response = {}) => {
         // 1.修改源头
         const to = trigger.to;
         // 2.新状态，更新最新的数据源
@@ -113,10 +114,28 @@ const xt3ChangeUnit = (reference, {
     trigger,    // Ajax触发器配置
     record      // 当前行记录/表单记录：record
 });
+const _mockData = (reference, trigger = {}) => {
+    let mockData = {};
+    if (trigger.mock) {
+        const ref = Eng.onReference(reference, 1);
+        if (ref) {
+            const {mock = {}} = ref.state ? ref.state : {};
+            mockData = mock[trigger.mock];
+        }
+    }
+    return mockData;
+};
 
+const xtCallback = (reference, trigger = {}, record = {}, fnCallback) => {
+    // 读取Mock数据
+    const mockData = _mockData(reference, trigger);
+    // 处理专用
+    Ajax.asyncData(trigger.ajax, record, fnCallback, mockData);
+};
 export default {
     // 核心列变更事件
     xt2ChangeUnit,
     xt3ChangeUnit,
-    xtOrigin
+    xtOrigin,
+    xtCallback,
 };

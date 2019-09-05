@@ -3,9 +3,10 @@ import U from 'underscore';
 import Ent from '../entity';
 import E from '../error';
 import Eng from '../engine';
-import Ut from '../element';
+import Ut from '../unity';
 import Ajax from '../ajax';
 import Abs from '../abyss';
+import Dev from "../develop";
 
 const {Uson} = Ent;
 
@@ -72,7 +73,10 @@ const xtLinker = (reference = {}, config = {}) => {
             .keep(Object.keys(linker))
             .convert(linker)
             .date(config['linkerDate']).to();
-        E.fxInfo(true, 10081, linker, values);
+        Dev.dgDebug({
+            linker,
+            values,
+        }, "[ Xt ] 自定义组件 linker 信息", "#104E8B");
         // 调用Form数据处理Linker
         Ut.formHits(ref, values);
         // 执行Linker过后的回调
@@ -109,6 +113,7 @@ const _xtPagination = (reference, config = {}) => {
         showQuickJumper: true
     };
     pagination.total = $data.count;
+    pagination.size = "small";
     if (config.ajax && config.ajax.params) {
         const pager = config.ajax.params.pager;
         E.fxTerminal(!pager, 10048, pager);

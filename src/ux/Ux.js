@@ -43,6 +43,7 @@ console.info(entity);
 console.info(unity);
 console.info(graphic);
 console.info(E);
+console.warn(exported);
 console.groupEnd();
 reportUx();
 export default exported;

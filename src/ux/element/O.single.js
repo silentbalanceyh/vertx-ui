@@ -1,4 +1,5 @@
 import U from "underscore";
+import Abs from '../abyss';
 
 const valueInt = (literal = "", dft = 0) => {
     let ret = parseInt(literal, 10);
@@ -60,10 +61,22 @@ const valueIcon = (literal = "") => {
     }
     return item;
 };
+const valueFlip = (jsx = {}) => {
+    const processed = {};
+    const flips = Abs.immutable([
+        "fnOut",
+        "reference",
+        "config"
+    ]);
+    Object.keys(jsx).filter(key => !flips.contains(key))
+        .forEach((field) => processed[field] = jsx[field]);
+    return processed;
+};
 export default {
     valueInt,
     valueFloat,
     valueUnit,
     valuePair,
     valueIcon,
+    valueFlip,
 }

@@ -71,5 +71,5 @@ export default {
     fxReject: (code = 10104) => {
         const error = ERROR_CODE[code]();
         return Promise.reject({code, error})
-    },
+    }
 }

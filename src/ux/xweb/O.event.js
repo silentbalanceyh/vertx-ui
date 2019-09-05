@@ -1,6 +1,5 @@
 import U from 'underscore';
-import Filter from './O.filter';
-import Dust from './O.dust';
+import Dust from './O.foundation';
 
 import E from '../error';
 import Abs from '../abyss';
@@ -20,7 +19,7 @@ const xtChange = (reference, changedValues = {}, key) => {
         // 1.拷贝新数据
         newValue = Abs.clone(newValue);
         // 2.过滤特殊数据
-        newValue = Filter.xtToValue(newValue);
+        newValue = Dust.xtToValue(newValue);
         // 3.变更数据处理
         onChange(newValue);
     }

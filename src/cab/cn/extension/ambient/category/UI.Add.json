@@ -13,8 +13,26 @@
             ],
             [
                 {
-                    "metadata": "identifier,关联模型,14,,aiSelect",
-                    "optionJsx.config.datum": "source=ci.identifier,value=identifier,label=name"
+                    "metadata": "modelName,关联模型,14,,aiListSelector",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/model/search,1,8,sorter=createdAt`DESC"
+                        },
+                        "linker": {
+                            "identifier": "identifier",
+                            "alias": "modelName"
+                        },
+                        "table": {
+                            "columns": [
+                                "alias,名称",
+                                "name,系统名称",
+                                "identifier,系统标识",
+                                "comments,备注"
+                            ]
+                        },
+                        "validation": "请选择关联模型！",
+                        "window": "请选择关联模型,选择,关闭,false,800,false"
+                    }
                 }
             ],
             [
@@ -44,7 +62,8 @@
             ]
         ],
         "hidden": [
-            "type"
+            "type",
+            "identifier"
         ],
         "op": {
             "$opAdd": "act.tabular.add"

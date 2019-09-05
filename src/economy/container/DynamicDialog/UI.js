@@ -38,7 +38,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return Ux.fxRender(this, () => {
+        return Ux.xtRender(this, () => {
             const config = this.state;
             const {
                 $visible = false,
