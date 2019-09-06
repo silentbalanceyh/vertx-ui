@@ -1,6 +1,5 @@
 import Foundation from './O.foundation';
 import Event from './O.event';
-import Dialog from './O.dialog';
 import Table from './O.table';
 import Rx from './O.rx';
 import Init from './O.init';
@@ -11,7 +10,6 @@ import Submit from './O.submit';
 export default {
     ...Foundation,
     ...Event,
-    ...Dialog,
     ...Table,
     ...Rx,
     ...Init,

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Drawer, Icon} from 'antd';
-import DynamicDialog from '../../container/DynamicDialog/UI';
+import DynamicDialog from '../../container/Dialog/UI';
 import Ux from "ux";
 import Fn from "../../_internal/Ix.Fn";
 

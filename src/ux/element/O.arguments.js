@@ -45,6 +45,25 @@ const ambiguityKv = (input, fnKv) => {
         return fnKv(input);
     }
 };
+
+/*
+ * 二义性函数
+ * 从 event 中提取数据
+ */
+const ambiguityEvent = (event, defaultValue) => {
+    let value;
+    if (event && U.isFunction(event.preventDefault)) {
+        event.preventDefault();
+        value = event.target.value;
+    } else {
+        value = event;
+    }
+    /** 默认值设置 **/
+    if (!value && undefined !== defaultValue) {
+        value = defaultValue;
+    }
+    return value;
+};
 export default {
     /*
      * 二义性处理，最终转换成数组
@@ -60,4 +79,10 @@ export default {
      * 3.如果 Array 和 Object 相互包含，则递归
      */
     ambiguityKv,
+    /*
+     * 1.如果 event 是常用的 event.preventDefault 的检查（原生事件），读取 event.target.value
+     * 2.如果并不是则直接返回 event
+     * 3.如果值不存在，则考虑使用 defaultValue
+     */
+    ambiguityEvent,
 }

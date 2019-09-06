@@ -1,6 +1,7 @@
 import Value from "../element";
 import Abs from '../abyss';
 import E from "../error";
+import U from 'underscore';
 
 /**
  * Ant Design中的Form清空专用方法
@@ -54,7 +55,13 @@ const formGet = (reference, key) => {
     if (form) {
         let data = form.getFieldsValue();
         data = Abs.clone(data);
-        return key ? data[key] : data;
+        if (U.isArray(key)) {
+            const result = {};
+            key.forEach(each => result[each] = data[each]);
+            return Value.valueValid(result);
+        } else {
+            return key ? data[key] : data;
+        }
     }
 };
 /**

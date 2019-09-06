@@ -27,7 +27,7 @@ const rxChange = (reference, record) => (select) => {
     reference.setState({$data});
 };
 const rxInput = (reference, key) => (event) => {
-    const text = Ux.annexValue(event);
+    const text = Ux.ambiguityEvent(event);
     let {$data = []} = reference.state;
     $data = Ux.clone($data);
     $data.filter(item => key === item.key).forEach(each => each.value = text);

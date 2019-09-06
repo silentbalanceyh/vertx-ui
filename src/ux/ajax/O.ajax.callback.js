@@ -135,7 +135,7 @@ const messageSuccess = (content = "") => {
 const messageFailure = (content = "") => {
     if ("string" === typeof content) {
         message.config({maxCount: 1});
-        message.success(content, 1.2);
+        message.error(content, 1.2);
     } else if (Abs.isObject(content)) {
         const {modal: {error = {}}} = content;
         /*

@@ -1,44 +1,68 @@
 import React from 'react';
 import Ux from 'ux';
-import {Icon, Input, Table} from "antd";
-import {DynamicDialog} from "web";
+import {Col, Icon, Input, Row, Table} from "antd";
 import Op from './Op';
-import '../../../global.less';
+
+import {Dialog} from 'web'; // 直接读取 Dialog 专用
 
 class Component extends React.PureComponent {
 
     constructor(props) {
         super(props);
-        this.state = Op.getDefault(this);
+        this.state = Op.yiDefault(this);
+    }
+
+    componentDidMount() {
+        Op.yiInit(this);
     }
 
     render() {
         const {config = {}, ...jsx} = this.props;
         const {$data = {}, $tableKey} = this.state;
-        const {onClick, dialog, table = {}} = this.state ? this.state : {};
+        const {onClick, dialog, table = {}, search} = this.state ? this.state : {};
         jsx.onClick = onClick;
-        // 页码处理，分页是需要根据数据来的，必须通过data来计算
-        const pageAndChange = Ux.xtPager(this, config);
-        // 属性拉平处理
-        const attr = Ux.valueFlip(jsx);
+        /*
+         * 分页计算
+         */
+        const pageAndChange = Op.yoPager(this, config);
+        /*
+         * 属性拉平处理
+         */
+        const inputAttrs = Op.yoValue(this, jsx);
+        /*
+         * 搜索专用
+         */
         return (
             <span>
                 <Input className="ux-readonly"
-                       readOnly {...attr}
+                       readOnly {...inputAttrs}
                        suffix={<Icon type="search" onClick={onClick}/>}/>
-                <DynamicDialog className="web-dialog"
-                               size={"small"}
-                               $visible={this.state.$visible}   // 窗口是否开启
-                               $dialog={dialog}>
-                        <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
-                               loading={this.state.$loading}
-                               {...config.table} // 原始配置信息
-                               {...table} // 处理过的表格信息
-                               {...pageAndChange} // 处理分页处理
-                               bordered={false}
-                               className={"web-table"}
-                               dataSource={$data.list}/>
-                </DynamicDialog>
+                <Dialog className="web-dialog"
+                        size={"small"}
+                        $visible={this.state.$visible}   // 窗口是否开启
+                        $dialog={dialog}>
+                    {search ? (
+                        <Row style={{
+                            marginBottom: 8
+                        }}>
+                            <Col span={6}>
+                                <Input.Search {...search}/>
+                            </Col>
+                        </Row>
+                    ) : false}
+                    <Row>
+                        <Col span={24}>
+                            <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
+                                   loading={this.state.$loading}
+                                   {...config.table} // 原始配置信息
+                                   {...table} // 处理过的表格信息
+                                   {...pageAndChange} // 处理分页处理
+                                   bordered={false}
+                                   className={"web-table"}
+                                   dataSource={$data.list}/>
+                        </Col>
+                    </Row>
+                </Dialog>
             </span>
         );
     }

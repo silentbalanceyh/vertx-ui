@@ -40,16 +40,18 @@ export {default as TeamSelector} from './input/TeamSelector/UI';
 export {default as LoadingContent} from './loading/LoadingContent/UI';
 export {default as LoadingAlert} from './loading/LoadingAlert/UI';
 export {default as LoadingImage} from './loading/LoadingImage/UI';
-export {default as DynamicDialog} from './container/DynamicDialog/UI';
 
 export {default as DialogButton} from './action/DialogButton/UI';
 export {default as DialogMenu} from './action/DialogMenu/UI';
 // 重新命名
+export {default as Dialog} from './container/Dialog/UI';
 export {default as Navigation} from './container/Navigation/UI';
 /*
  * 遗留系统
  * 被删除的原始代码
  */
+// Dialog -> DynamicDialog
+export {default as DynamicDialog} from './container/Dialog/UI';
 // Navigation -> PagerHeader
 export {default as PagerHeader} from './container/Navigation/UI';
 // export {default as ComplexList} from './component/ComplexList/UI';
