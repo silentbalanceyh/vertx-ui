@@ -210,8 +210,11 @@ const fnRender = (props = {}, options = {}) => {
 const fnOp = (options = {}) => {
     const binding = {};
     if (options.op) {
+        // eslint-disable-next-line
         for (const key in options.op) {
-            binding[key] = options.op[key];
+            if (options.op.hasOwnProperty(key)) {
+                binding[key] = options.op[key];
+            }
         }
     }
     return binding;
