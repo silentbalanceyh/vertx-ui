@@ -1,6 +1,5 @@
 import Ux from 'ux';
 import Fn from '../functions';
-import Q from 'q';
 
 const _application = () => {
     /* 读取应用程序 */
@@ -9,7 +8,7 @@ const _application = () => {
         /* 已经初始化过一次 */
         if (appData.appKey) {
             /* 二次初始化完成后 */
-            return Fn.promise(appData);
+            return Ux.promise(appData);
         } else {
             /* 直接调用接口 */
             return Ux.ajaxGet("/api/app");
@@ -52,7 +51,7 @@ export default {
      * /api/app
      * /api/menus
      * */
-    inited: () => Q.all([
+    inited: () => Ux.parallel([
         _application(), // 应用程序
         _menus()        // 菜单
     ])

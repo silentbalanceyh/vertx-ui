@@ -1,29 +1,13 @@
 import U from 'underscore';
 import Ux from "ux";
-import G from "../global/datum";
-import Is from '../is';
-/*
- * 拦截专用函数
- */
-const prevent = (event) => {
-    /* 保证安全调用 */
-    if (event && U.isFunction(event.preventDefault)) {
-        event.preventDefault();
-        return {};
-    } else {
-        /* 二义性，返回对应的Object值 */
-        if (Ux.isObject(event)) {
-            return event;
-        } else return {};
-    }
-};
+import Fn from '../func';
 /*
  * 优先选择 name 方法作为函数，只考虑 props 中（外置传入）
  * 其次使用 supplier 作为函数
  * Ux 组件兼容函数
  * 1）必须是 `rx` 的函数头
  */
-const ux = (reference, name, supplier) => {
+const switcher = (reference, name, supplier) => {
     if (U.isString(name) && name.startsWith("rx")) {
         const fun = reference.props[name];
         /*
@@ -44,7 +28,7 @@ const ux = (reference, name, supplier) => {
  * 核心状态管理
  */
 const boolean = (reference, key, value = true) => (event) => {
-    const addOn = prevent(event);
+    const addOn = Ux.prevent(event);
     const state = {};
     state[key] = value;
     Object.assign(state, addOn);
@@ -57,7 +41,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
         inError = true
     } = config;
     if (reference) {
-        if (Is.specFun(fnName)) {
+        if (Fn.isExFun(fnName)) {
             /* 参数规范化 */
             args = (args && U.isArray(args)) ? args : [];
             /* 优先从 props 中读取 函数 */
@@ -67,7 +51,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
             } else {
                 if (inState) {
                     /* 没找到的情况，直接从 state 中读取 */
-                    fun = G.state(reference)[fnName];
+                    fun = reference.state[fnName];
                     if (U.isFunction(fun)) {
                         return fun.apply(this, [].concat(args));
                     } else {
@@ -95,8 +79,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
     }
 };
 export default {
-    prevent,
-    ux,
+    switcher,
     /* 内部调用 */
     boolean,
     seek,

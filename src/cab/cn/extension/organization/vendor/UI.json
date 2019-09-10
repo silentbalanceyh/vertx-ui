@@ -1,6 +1,22 @@
 {
     "_page": {
-        "title": "第三方管理"
+        "title": "第三方管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_assist": {
+        "company.nature": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:company.nature"
+            }
+        },
+        "ajax.companys": {
+            "uri": "/api/companys"
+        }
     },
     "_grid": {
         "query": {
@@ -8,10 +24,6 @@
             "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "name,code,title,taxCode,taxTitle,comment,contactName,contactPhone,contactOnline,email,fax,homepage,logo,address,companyId,type,metadata,active"
         },
         "options": {
             "search.cond": [
@@ -122,13 +134,13 @@
                         "key": "keySave",
                         "text": "保存",
                         "icon": "save",
+                        "type": "primary",
                         "event": "rxSave"
                     },
                     {
                         "key": "keyReset",
                         "text": "重置",
                         "icon": "remove",
-                        "type": "default",
                         "event": "rxReset"
                     }
                 ],
@@ -160,7 +172,7 @@
                         "logo,LOGO",
                         "phone,客户座机",
                         "address,客户地址",
-                        "companyId,客户所属单位",
+                        "companyId,所属公司",
                         "type,客户分类",
                         "metadata,附加配置",
                         "active,是否启用",
@@ -224,7 +236,7 @@
                         {
                             "text": "删除",
                             "executor": "fnDelete",
-                            "confirm": "确认删除选择的角色记录？"
+                            "confirm": "确认删除选择的客户记录？"
                         }
                     ]
                 }

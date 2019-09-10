@@ -2,7 +2,7 @@ import G from '../global';
 import F from './gen.common';
 import Ux from "ux";
 
-const rxColumn = (reference, config = {}) => F.ux(reference, 'rxColumn',
+const rxColumn = (reference, config = {}) => F.switcher(reference, 'rxColumn',
     (params) => {
         const {options = {}, columns = []} = config;
         if (options[G.Opt.DYNAMIC_COLUMN]) {
@@ -16,10 +16,10 @@ const rxColumn = (reference, config = {}) => F.ux(reference, 'rxColumn',
             /*
              * 静态配置
              */
-            return F.promise(columns);
+            return Ux.promise(columns);
         }
     });
-const rxColumnMy = (reference, config = {}) => F.ux(reference, 'rxColumnMy',
+const rxColumnMy = (reference, config = {}) => F.switcher(reference, 'rxColumnMy',
     (params) => {
         const {options = {}} = config;
         if (options[G.Opt.DYNAMIC_COLUMN]) {
@@ -31,9 +31,9 @@ const rxColumnMy = (reference, config = {}) => F.ux(reference, 'rxColumnMy',
             return Ux.ajaxGet(uri, params);
         }
     });
-const rxColumnSave = (reference, consumer = {}) => F.ux(reference, 'rxColumnSave',
+const rxColumnSave = (reference, consumer = {}) => F.switcher(reference, 'rxColumnSave',
     (params = []) => {
-        const {options = {}} = G.state(reference);
+        const {options = {}} = reference.state;
         /* 当前组件中的状态定义 */
         const uri = options[G.Opt.AJAX_COLUMN_SAVE];
         return Ux.ajaxPut(uri, params);
@@ -48,7 +48,7 @@ const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
     /*
      * 处理 state 中的 table 部分
      */
-    let {table = {}} = G.state(reference);
+    let {table = {}} = reference.state;
     /*
      * 表格 table 中的内容
      */
@@ -59,7 +59,7 @@ const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
         /*
          * $columns 为全列
          */
-        const {$columns = []} = G.state(reference);
+        const {$columns = []} = reference.state;
         /*
          * 本次更新列为 $columnsMy
          * $calculated 为计算的保留列信息，该列在 table 中会用来更新 table.columns 的信息

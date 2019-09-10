@@ -38,7 +38,7 @@ export default (reference, config = {}) => {
                 button.category = opKey;
                 buttons[opKey] = button;
             });
-        return Ex.promise(buttons);
+        return Ux.promise(buttons);
     })
     /* 按钮配置解析 */.then((buttons = {}) => buttonParser.parsePlugin(buttons, options))
     /* 组件解析 */.then((buttons = {}) => buttonParser.parseComponent(buttons, options, {

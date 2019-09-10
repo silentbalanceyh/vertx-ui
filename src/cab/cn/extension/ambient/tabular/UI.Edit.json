@@ -6,35 +6,37 @@
                 "title=基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,名称,14"
             ],
             [
-                "code,用户组编码,14"
+                "code,编码,14"
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
             ],
             [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opSave,保存,$opSave,primary",
-                        "$opDelete,删除,$opDelete",
-                        "$opReset,重置,$opReset"
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "key",
-                "type"
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opSave": "act.tabular.save",
-                "$opDelete": "act.tabular.delete"
-            }
+        "hidden": [
+            "key",
+            "type"
+        ],
+        "op": {
+            "$opSave": "act.tabular.save",
+            "$opDelete": "act.tabular.delete"
         }
     },
     "_modal": {

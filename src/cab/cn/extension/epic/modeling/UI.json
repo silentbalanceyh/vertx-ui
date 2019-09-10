@@ -1,0 +1,12 @@
+{
+    "_page": {
+        "title": "建模管理"
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "size": "small",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabModel",
+        "items": "模型管理,tabModel,appstore;实体管理,tabEntity,database;关系设置,tabRelation,deployment-unit"
+    }
+}

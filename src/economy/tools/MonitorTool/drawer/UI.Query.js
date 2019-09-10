@@ -1,6 +1,6 @@
 import React from 'react';
 import {_zero} from "../../../_internal";
-import {DataLabor} from 'entity';
+import {Dsl} from 'entity';
 import Ux from 'ux';
 
 @_zero({
@@ -8,7 +8,7 @@ import Ux from 'ux';
     "i18n.name": "UI.Pure",
     state: {},
     connect: {
-        s2p: state => DataLabor.createOut(state)
+        s2p: state => Dsl.createOut(state)
             .rework({
                 "grid": ["query"]
             })

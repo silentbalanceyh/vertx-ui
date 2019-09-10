@@ -30,7 +30,7 @@ class Component extends React.PureComponent {
                 $button = {}, $options = {},
                 $submitting = false,
                 $group = {}, $notice = {}
-            } = Ex.state(this);
+            } = this.state;
             /*
              * 选项处理
              */

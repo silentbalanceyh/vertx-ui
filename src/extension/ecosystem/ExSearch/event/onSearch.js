@@ -1,4 +1,5 @@
 import Ex from 'ex';
+import Ux from 'ux';
 import U from 'underscore';
 
 export default (reference) => (searchText) => {
@@ -11,7 +12,7 @@ export default (reference) => (searchText) => {
          */
         let $filters = {};
         if (searchText) {
-            $filters = Ex.qdInput(cond, searchText);
+            $filters = Ux.qrInput(cond, searchText);
         }
         /*
          * 基础搜索

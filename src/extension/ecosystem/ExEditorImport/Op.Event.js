@@ -15,18 +15,18 @@ const rxBeforeUpload = (reference) => (file = {}) => {
     return false;
 };
 const rxImport = (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     /*
      * 提交专用处理
      */
     Ex.rx(reference).submitting();
-    const {$fileList = []} = Ex.state(reference);
+    const {$fileList = []} = reference.state;
     const {config = {}} = reference.props;
     if (0 === $fileList.length) {
         /*
          * 错误信息
          */
-        Ex.showFailure(config);
+        Ux.messageFailure(config);
         /*
          * rxSubmitting提交
          */
@@ -61,7 +61,7 @@ const rxImport = (reference) => (event) => {
                              * 消息提示
                              */
                             const {config = {}} = reference.props;
-                            Ex.showSuccess(config);
+                            Ux.messageSuccess(config);
                         });
                     } else {
                         console.error("[ Ex ] 导入出错！！！")
@@ -74,7 +74,7 @@ const rxImport = (reference) => (event) => {
     }
 };
 const rxRemove = (reference) => (file) => {
-    const {$fileList = []} = Ex.state(reference);
+    const {$fileList = []} = reference.state;
     const index = $fileList.indexOf(file);
     const newFileList = $fileList.slice();
     newFileList.splice(index, 1);

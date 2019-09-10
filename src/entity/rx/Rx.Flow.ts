@@ -45,7 +45,7 @@ const rxAjax = (ajaxes = []) => {
 };
 
 class RxFlow {
-    private action: any;
+    private readonly action: any;
     private metadata: any;
     private promiseMap: any = {};
     private parameterMap: any = {};
@@ -65,17 +65,15 @@ class RxFlow {
     }
 
     mount(...keys) {
-        const refArray = Ux.onArray.apply(null, keys);
+        const refArray = Ux.ambiguityArray.apply(null, keys);
         const metadata = this.metadata;
         const promiseMap = this.promiseMap;
-        refArray.forEach(key => {
-            if (key) {
-                const action = metadata[key];
-                if (action && action.ajax && action.processor) {
-                    promiseMap[key] = action;
-                } else {
-                    console.error('[ZI] mount: missed require attributes "ajax" or "processor"', key)
-                }
+        refArray.filter(key => undefined !== key).forEach(key => {
+            const action = metadata[key];
+            if (action && action.ajax && action.processor) {
+                promiseMap[key] = action;
+            } else {
+                console.error('[ZI] mount: missed require attributes "ajax" or "processor"', key)
             }
         });
         return this;

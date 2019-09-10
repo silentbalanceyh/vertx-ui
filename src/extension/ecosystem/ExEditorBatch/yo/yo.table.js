@@ -1,7 +1,5 @@
-import Ex from 'ex';
-
 export default (reference) => {
-    const {$columns = [], $data = []} = Ex.state(reference);
+    const {$columns = [], $data = []} = reference.state;
     const tables = {};
     tables.className = "web-table";
     tables.dataSource = $data;

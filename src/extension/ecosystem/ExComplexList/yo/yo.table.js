@@ -5,13 +5,13 @@ export default (reference) => {
     /*
      * 配置数据
      */
-    const state = Ex.state(reference);
+    const state = reference.state;
     const {table = {}, $terms = {}} = state;
     inherit.config = table;
     /*
      * 是否支持批量
      */
-    const {op = {}} = Ex.state(reference);
+    const {op = {}} = reference.state;
     const counter = Object.keys(op)
         .filter(opKey => opKey.startsWith('op.batch')).length;
     inherit.$batch = 0 < counter;

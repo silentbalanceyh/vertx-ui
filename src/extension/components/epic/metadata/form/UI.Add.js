@@ -13,12 +13,19 @@ class Component extends React.PureComponent {
         /*
          * 配置处理
          */
-        const {$router} = this.props;
-        const params = $router.params();
-        const form = Ex.yoForm(this, null, Ux.clone(params));
+        const {$query = {}} = this.props;
+        /*
+         * 特殊解析，提取 type 参数
+         */
+        const criteria = $query.criteria;
+        const $inited = {};
+        if (criteria['type,=']) {
+            $inited.type = criteria['type,='];
+        }
+        const form = Ex.yoForm(this, null, $inited);
         return (
             <ExForm {...form} $height={"300px"}
-                    $actions={Op.actions}/>
+                    $op={Op.actions}/>
         );
     }
 }

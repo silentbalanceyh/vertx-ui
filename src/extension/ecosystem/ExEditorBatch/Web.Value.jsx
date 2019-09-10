@@ -9,7 +9,7 @@ export default {
         <Input onChange={Event.rxInput(reference, key)} value={value}/>),
     /* 单选 */
     "RADIO": (reference, items = []) => (key) => {
-        let options = Ux.RxAnt.toOptions(reference, {items});
+        let options = Ux.Ant.toOptions(reference, {items});
         return (
             <Radio.Group onChange={Event.rxInput(reference, key)}>
                 {options.map(option => (

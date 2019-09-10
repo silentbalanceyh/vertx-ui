@@ -1,19 +1,15 @@
-import Dust from './Xt.Dust';
-import Filter from './Xt.Filter';
-import Event from './Xt.Event';
-import Dialog from './Xt.Dialog';
-import Table from './Xt.Table';
-import Rx from './Xt.Rx';
-import Init from './Xt.Init';
-import Dynamic from './Xt.Dynamic';
-import Change from './Xt.Change.Event';
-import Submit from './Xt.Submit';
+import Foundation from './O.foundation';
+import Event from './O.event';
+import Table from './O.table';
+import Rx from './O.rx';
+import Init from './O.init';
+import Dynamic from './O.plugin.dynamic';
+import Change from './O.change.event';
+import Submit from './O.submit';
 
 export default {
-    ...Dust,
-    ...Filter,
+    ...Foundation,
     ...Event,
-    ...Dialog,
     ...Table,
     ...Rx,
     ...Init,

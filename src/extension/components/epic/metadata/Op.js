@@ -9,7 +9,7 @@ const rxSelect = (reference) => (selected = {}) => {
      * 设置 $query 专用
      */
     if (!Ux.isEmpty(selected)) {
-        const {$query = {}} = Ex.state(reference);
+        const {$query = {}} = reference.state;
         if (!$query.criteria) $query.criteria = {};
         $query.criteria['type,='] = selected.code;
         /*
@@ -24,13 +24,9 @@ const rxSelect = (reference) => (selected = {}) => {
 const yiPage = (reference) => {
     const state = {};
     const config = Ux.fromHoc(reference, "grid");
-    let query = {};
-    if (config.query) {
-        query = Ux.clone(config.query);
-        /*
-         * 构造 $query
-         */
-        state.$query = Ux.irGrid(query, reference);
+    const $query = Ux.cabQuery(reference);
+    if ($query) {
+        state.$query = $query;
     }
     state.$selected = false;
     state.$config = Ux.clone(config);
@@ -44,7 +40,7 @@ const yoSider = (reference) => {
 };
 const yoList = (reference) => {
     const listAttrs = Ex.yoAmbient(reference);
-    const {$query = {}, $config = {}} = Ex.state(reference);
+    const {$query = {}, $config = {}} = reference.state;
     /*
      * 查询条件：重要
      */

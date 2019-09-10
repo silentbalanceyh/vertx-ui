@@ -15,7 +15,7 @@ export default (reference, columns = []) => {
     /*
      * 先使用 projection 过滤
      */
-    const {$projection = []} = Ex.state(reference);
+    const {$projection = []} = reference.state;
     if (0 < $projection.length) {
         const filtered = Ux.immutable($projection);
         resultColumns = resultColumns.filter(column => !filtered.contains(column.dataIndex));
@@ -25,6 +25,6 @@ export default (reference, columns = []) => {
      */
     const executor = Ex.executor(reference, STD_ACTION);
 
-    resultColumns = Ux.uiTableColumn(reference, resultColumns, executor);
+    resultColumns = Ux.configColumn(reference, resultColumns, executor);
     return resultColumns;
 };

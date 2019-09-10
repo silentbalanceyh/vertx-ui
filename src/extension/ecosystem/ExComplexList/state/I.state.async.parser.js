@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 /*
  * 权限控制专用解析
  */
@@ -11,7 +12,7 @@ const parseAuthorized = (reference, buttons = {}) => {
      * Extra区域
      * Row区域
      */
-    return Ex.promise(buttons);
+    return Ux.promise(buttons);
 };
 /*
  * 事件处理专用解析
@@ -32,7 +33,7 @@ const parseEvent = (reference, buttons = {}) => {
         const configRef = buttons['op.batch.delete'];
         configRef.onClick = Ex.rxBatchDelete(reference);
     }
-    return Ex.promise(buttons);
+    return Ux.promise(buttons);
 };
 export default (reference) => ({
     parseAuthorized: (buttons = {}) => parseAuthorized(reference, buttons),

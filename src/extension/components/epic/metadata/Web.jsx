@@ -1,6 +1,6 @@
 import {Col, Row} from "antd";
-import Ex from "ex";
-import {ExComplexList, ExSiderList} from "ei";
+import Ux from "ux";
+import {ExComplexList, ExTabular} from "ei";
 import {HelpCard, LoadingAlert} from "web";
 import React from "react";
 
@@ -17,8 +17,8 @@ export default (reference, {
     <HelpCard reference={reference}>
         {/* 左边选择菜单专用 */}
         <Row>
-            <Col span={span.left} style={Ex.toHeight(148)}>
-                <ExSiderList {...siderAttrs}/>
+            <Col span={span.left} style={Ux.toHeight(148)}>
+                <ExTabular {...siderAttrs}/>
             </Col>
             <Col span={span.right}>
                 {selected ? (

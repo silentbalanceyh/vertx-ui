@@ -78,24 +78,19 @@
             ],
             [
                 {
-                    "metadata": "$button",
+                    "metadata": "$button,,14",
                     "optionJsx.extension": [
-                        "opPassword,更改密码,$opPassword,primary",
-                        "opReset,重置,$opReset"
-                    ],
-                    "span": 24
+                        "$opPassword,更改密码,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "key"
-            ]
-        },
-        "actions": {
-            "op": {
-                "opPassword": "act.user.password"
-            }
+        "hidden": [
+            "key"
+        ],
+        "op": {
+            "$opPassword": "act.user.password"
         }
     },
     "_modal": {

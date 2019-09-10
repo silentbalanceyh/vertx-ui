@@ -10,7 +10,7 @@ const yiTable = (reference) => {
     const {config = {}, $query = {}, $terms = {}} = reference.props;
     initState.$table = Ux.clone(config);
     initState.$table.loading = true;        // 加载中（数据未完成）
-    initState.$table.className = Ux.ECONOMY.TABLE_CONTROL;
+    initState.$table.className = Ux.Env.ECONOMY.TABLE_CONTROL;
     /*
      * 默认的 query：只考虑 props 中传入的 $query
      * 1）读取默认的 query：props -> $query
@@ -24,28 +24,21 @@ const yiTable = (reference) => {
     /*
      * 初始化数据
      */
-    Ex.promise(initState)
+    Ux.promise(initState)
         .then(state => {
             /*
              * 第一次读取
              */
             if (state.$query) {
                 return Ex.rx(reference).search(state.$query)
-                    .then(data => Ex.promise(state, "$data", data));
+                    .then(data => Ux.promise(state, "$data", data));
             } else {
                 return Ex.E.error008();
             }
         })
         .then(state => {
             /*
-             * 1. rowSelection
-             */
-            const rowSelection = Event.rowSelection(reference);
-            if (rowSelection) {
-                state.$table.rowSelection = rowSelection;
-            }
-            /*
-             * 2. onRow
+             * 1. onRow
              */
             const row = state.$table.row;
             state.$table.onRow = Event.onRow(reference, row);
@@ -53,10 +46,10 @@ const yiTable = (reference) => {
                 state.$table.rowClassName = "ex-row-double";
             }
             /*
-             * 3. onChange
+             * 2. onChange
              */
             state.$table.onChange = Event.onChange(reference);
-            return Ex.promise(state);
+            return Ux.promise(state);
         })
         .then(state => {
             if (!state.error) {
@@ -65,6 +58,7 @@ const yiTable = (reference) => {
                  */
                 state.$ready = true;
                 reference.setState(state);
+                Ux.dgQuery(reference, "Table 组件：$loading = true");
             } else {
                 console.error(state);
             }

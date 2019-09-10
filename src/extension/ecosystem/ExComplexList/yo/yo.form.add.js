@@ -11,10 +11,17 @@ export default (reference, item = {}) => {
      * 设置 state -> $dirty 的函数
      */
     formAttrs.doDirty = Ex.rxDirty(reference);
+    formAttrs.doSubmitting = Ex.rxSubmitting(reference);
     /*
      * 设置唯一的 $addKey
      * 这个值就是 Tab 中的 activeKey
      */
     formAttrs.$addKey = item.key;
+    /*
+     * 提供 $query 用于处理特殊条件
+     * Tabular / Category
+     */
+    const {$query = {}} = reference.props;
+    formAttrs.$query = $query;
     return formAttrs;
 }

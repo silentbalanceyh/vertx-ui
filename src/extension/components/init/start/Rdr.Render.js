@@ -7,7 +7,7 @@ const renderModel = (reference, data = [], key) => {
     const config = table[key];
     config.pagination = false;
     config.defaultExpandAllRows = true;
-    config.columns = Ux.uiTableColumn(reference, config.columns);
+    config.columns = Ux.configColumn(reference, config.columns);
     return (
         <Table {...config} dataSource={data}/>
     )

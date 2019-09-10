@@ -1,5 +1,5 @@
 import Ux from "ux";
-import Ex from 'ex';
+import {QQuery} from 'entity';
 
 export default (reference) => (pagination, filters, sorter) => {
     /*
@@ -27,8 +27,9 @@ export default (reference) => (pagination, filters, sorter) => {
         /*
          * 最终条件计算
          */
-        const query = Ex.qrCondition($query, {$condition, $terms, $filters: filters});
-        const queryRef = Ex.newQuery(query);
+        Ux.dgQuery(reference, "Table 组件：$loading = false, onChange");
+        const query = Ux.qrComplex($query, {state: {$condition, $terms, $filters: filters}});
+        const queryRef = new QQuery(query, reference);
         /*
          * 分页参数处理
          */

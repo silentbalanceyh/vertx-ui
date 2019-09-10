@@ -23,7 +23,6 @@ const array = (data) => {
         }
     }
 };
-const state = (reference, isCopy = false) => reference.state ? (isCopy ? Ux.clone(reference.state) : reference.state) : {};
 /*
  * 统一执行 executor
  * 函数格式：
@@ -58,6 +57,5 @@ const executor = (reference, EVENTS = {} /* fnEdit, fnDelete */) => {
 };
 export default {
     array,
-    state,
     executor,
 }

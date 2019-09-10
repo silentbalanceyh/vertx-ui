@@ -1,4 +1,3 @@
-import Fn from '../functions';
 import U from 'underscore';
 import yoAmbient from './yo.ambient';
 
@@ -10,7 +9,7 @@ export default (reference, prefix = "", ordered) => {
     /*
      * 配置数据
      */
-    const {op = {}} = Fn.state(reference);
+    const {op = {}} = reference.state;
     /*
      * 前缀处理
      */

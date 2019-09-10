@@ -9,11 +9,11 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Op.initOptions(this);
+        Op.yiInit(this);
     }
 
-    componentDidUpdate(prevProps) {
-        Op.initUpdate(this, prevProps);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yiUpdate(this, prevProps);
     }
 
     render() {
@@ -29,8 +29,8 @@ class Component extends React.PureComponent {
         return (
             <Input.Group>
                 <Cascader {...attrs}
-                          loadData={Op.loadData(this)}
-                          onChange={Op.bindChange(this)}
+                          loadData={Op.yoData(this)}
+                          onChange={Op.onChange(this)}
                           style={{minWidth: 280}}/>
             </Input.Group>
         );

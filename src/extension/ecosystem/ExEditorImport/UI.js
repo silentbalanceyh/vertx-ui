@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
                 $notice = {}, $upload = {}, $image,
                 $button = {},
                 $loading = false
-            } = Ex.state(this);
+            } = this.state;
             /*
              * 是否在加载，以及更改过的 $image 图片路径
              */

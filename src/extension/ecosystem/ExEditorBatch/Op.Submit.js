@@ -2,8 +2,8 @@ import Ex from 'ex';
 import Ux from 'ux';
 
 export default (reference) => (event) => {
-    Ex.prevent(event);
-    const {$data = []} = Ex.state(reference);
+    Ux.prevent(event);
+    const {$data = []} = reference.state;
     const {$selected = [], config = {}} = reference.props;
     /*
      * 验证是否完整
@@ -35,7 +35,7 @@ export default (reference) => (event) => {
                     /*
                      * 成功消息
                      */
-                    Ex.showSuccess(config);
+                    Ux.messageSuccess(config);
                     /*
                      * 关闭窗口
                      */
@@ -46,6 +46,6 @@ export default (reference) => (event) => {
             console.error("[ Ex ] 运行时错误，$selected 为空！");
         }
     } else {
-        Ex.showFailure(config);
+        Ux.messageFailure(config);
     }
 }

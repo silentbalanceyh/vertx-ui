@@ -11,7 +11,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return Ux.fxRender(this, () => {
+        return Ux.xtRender(this, () => {
             const {
                 button = {},
                 render

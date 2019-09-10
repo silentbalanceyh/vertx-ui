@@ -1,4 +1,4 @@
-import Ex from 'ex';
+import Ux from 'ux';
 import './Cab.less';
 import React from 'react';
 import {Button, Checkbox, Col, Row} from 'antd';
@@ -11,7 +11,7 @@ export default (reference, {
     notice = {},
 }) => {
     const {config = {}} = reference.props;
-    const style = Ex.toGrid(config);
+    const style = Ux.toGrid(config);
     return (
         <div>
             <Row>

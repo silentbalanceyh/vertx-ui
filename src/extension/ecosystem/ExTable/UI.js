@@ -10,7 +10,7 @@ import renderJsx from './Web.jsx';
  */
 const LOG = {
     name: 'ExTable',
-    color: '#CD4F39'
+    color: '#09C'
 };
 
 class Component extends React.PureComponent {
@@ -33,18 +33,25 @@ class Component extends React.PureComponent {
     render() {
         // console.info(this.props.$query);
         return Ex.yoRender(this, () => {
-            const {$table = {}, $data = {}, $loading = false} = Ex.state(this);
+            const {$table = {}, $data = {}, $loading = false} = this.state;
             /*
              * （必须动态，执行列选择）处理 columns
              */
             const {config = {}} = this.props;
             const $columns = config.columns ? config.columns : [];
             $table.columns = Rdr.renderColumn(this, $columns);
-            Ex.configScroll($table,$columns);
+            Ex.configScroll($table, $columns);
             /*
              * （必须结合数据）分页组件
              */
             $table.pagination = Rdr.renderPager(this, $data);
+            /*
+             * 选中项处理
+             */
+            const rowSelection = Rdr.renderSelection(this);
+            if (rowSelection) {
+                $table.rowSelection = rowSelection;
+            }
             /*
              * 加载效果
              */

@@ -1,0 +1,70 @@
+{
+    "_form": {
+        "layout": "horizontal",
+        "ui": [
+            [
+                {
+                    "field": "username",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入用户名！"
+                            },
+                            {
+                                "min": 4,
+                                "max": 16,
+                                "message": "用户名长度必须在4 ~ 16字符之间"
+                            }
+                        ]
+                    },
+                    "optionJsx": {
+                        "placeholder": "用户名",
+                        "prefix": {
+                            "type": "user"
+                        }
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "password",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入登陆密码！"
+                            },
+                            {
+                                "min": 8,
+                                "message": "密码长度必须大于8个字符！"
+                            }
+                        ]
+                    },
+                    "optionJsx": {
+                        "placeholder": "密码",
+                        "prefix": {
+                            "type": "lock"
+                        },
+                        "type": "password"
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.align": "center",
+                    "optionJsx.buttons": {
+                        "submit": "$opLogin,登录"
+                    }
+                }
+            ]
+        ]
+    }
+}

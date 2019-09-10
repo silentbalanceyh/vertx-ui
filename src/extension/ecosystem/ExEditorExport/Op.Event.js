@@ -4,16 +4,16 @@ import U from 'underscore';
 import Ux from 'ux';
 
 const rxExport = (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     Ex.rx(reference).submitting();
-    const {$selected = []} = Ex.state(reference);
+    const {$selected = []} = reference.state;
     const {config = {}} = reference.props;
     if (0 === $selected
         .filter(item => "key" !== item).length) {
         /*
          * 错误信息
          */
-        Ex.showFailure(config);
+        Ux.messageFailure(config);
         /*
          * rxSubmitting提交
          */
@@ -47,7 +47,7 @@ const rxExport = (reference) => (event) => {
                      * 消息提示
                      */
                     const {config = {}} = reference.props;
-                    Ex.showSuccess(config);
+                    Ux.messageSuccess(config);
                 })
             }).catch(error => {
                 console.error(error);

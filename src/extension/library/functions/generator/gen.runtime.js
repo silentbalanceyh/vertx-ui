@@ -44,8 +44,8 @@ export default {
         open: (id, data) =>
             Cm.seek(reference, 'rxOpen')([id, data]),
         /* 窗口记录 关闭方法调用 */
-        close: (data = {}) =>
-            Cm.seek(reference, 'rxClose')([data]),
+        close: (data = {}, addOn) =>
+            Cm.seek(reference, 'rxClose')([data, addOn]),
         // ------------ 状态 -----------------
         /* loading */
         loading: (loading = true, addOn = {}) =>

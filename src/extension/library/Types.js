@@ -1,4 +1,4 @@
-import App from './redux/types.application';
+import App from './redux/types';
 
 export default {
     ...App,

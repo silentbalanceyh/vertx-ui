@@ -1,27 +1,19 @@
-import {Layout, Menu} from "antd";
-import Op from "./Op";
+import {Layout} from "antd";
 import Ux from "ux";
 import React from "react";
 import {Link} from "react-router-dom";
 import Empty from "./image/empty.jpg";
+import './Cab.less';
 
 const {Sider} = Layout;
 
 export default (reference, {
     $app,
-    $collapsed = false,
-    $theme = "dark",
-    dataUri = {},
+    $attrsMenu = {},
+    $attrsSider = {},
     dataArray = [],
-    css: {
-        clsSider = "",
-        clsSiderExpand = ""
-    }
 }) => (
-    <Sider trigger={null}
-           collapsible
-           collapsed={$collapsed}
-           className={$collapsed ? clsSider : `${clsSider} ${clsSiderExpand}`}>
+    <Sider {...$attrsSider}>
         {/* 菜单顶部Logo */}
         <div className="logo">
             <Link to={Ux.Env.ENTRY_ADMIN}>
@@ -31,13 +23,6 @@ export default (reference, {
             </Link>
         </div>
         {/** 左边 **/}
-        <Menu key="mSider" theme={$theme} mode={"inline"}
-              style={{padding: '16px 0px', width: '100%'}}
-              onClick={Op._2fnRouting(reference, dataUri)}>
-            {dataArray.map(item => Ux.aiMenuTree({
-                ...item,
-                className: `icon ${$collapsed ? "collapse" : ""}`
-            }))}
-        </Menu>
+        {Ux.aiSider(dataArray, $attrsMenu)}
     </Sider>
 )

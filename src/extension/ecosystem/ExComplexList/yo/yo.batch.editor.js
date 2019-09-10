@@ -1,4 +1,3 @@
-import Ex from 'ex';
 /*
  * ExBatchEditor处理
  */
@@ -9,7 +8,7 @@ export default (batch, reference) => {
         /*
          * 抽取列信息
          */
-        const {$columns = [], $columnsMy = []} = Ex.state(reference);
+        const {$columns = [], $columnsMy = []} = reference.state;
         /*
          * 抽取配置信息，直接从引用入手，需要修改引用
          */

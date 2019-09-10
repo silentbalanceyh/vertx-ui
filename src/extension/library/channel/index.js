@@ -55,8 +55,13 @@ import yoRender from './yo.render';
  * yc - 配，config
  * yx - yxRender -> 切换 render 处理
  */
+import yoList from './yo.list';
 import yoForm from './yo.form';
 import yoFilter from './yo.filter';
+/*
+ * 动态 Control
+ */
+import yoControl from './yo.control';
 /*
  * 按钮专用过滤函数，主要过滤几种：
  * 1）Open区
@@ -66,44 +71,38 @@ import yoFilter from './yo.filter';
  * 5）Row区
  */
 import yoAction from './yo.action';
-/*
- * List专用配置，基本规范
- */
-import yoList from './yo.list';
-// -------------- 更新专用方法 -----------------
-import yuCondition from './yu.condition';
-import yuQuery from './yu.query';
-import yuDirty from './yu.dirty';
-import yuLoading from './yu.loading';
 // -------------- 列表专用 --------------------
-import yiTabular from './yi.tabular';
+// -------------- 模板函数 --------------------
+import Tpl from './tpl';
+import Yi from './yi';
+import Yu from './yu';
 
 export default {
-    yiTabular,
-    yoAmbient,      // 环境数据（统一处理）
-    yoComponent: yoAmbient,
-    // -- 容器层
-    // yoSider,        // 容器处理
-    // yoNavigation,
-    // yoHeader,
-    /* Header */
-    // yoAccount,
-    // -- 表单
-    // yoForm,
-    // -- 统一方法
-    yoRender,
+    yoAmbient,              // 环境数据（统一处理）
+    yoComponent: yoAmbient, // 环境数据（统一处理）
+    yoControl,
     // -- 配置
     yoForm,
     yoFilter,
     yoAction,
     yoList,
+
+    // -- 统一方法（渲染相关）
+    yoRender,           // 普通组件专用渲染
+    /*
+     * -- 模板方法
+     * ylCard - <PageCard/> （内含 yoRender）
+     */
+    ...Tpl,
+    /*
+     * 特殊界面
+     * tabular / category
+     */
+    ...Yi,
     // -- 更新专用方法
     /*
     * 检查 props 中的 $query 变化
     * 检查 state 中的 query 变化
     */
-    yuCondition,    // 检查 state 中的 $condition 变化
-    yuQuery,
-    yuDirty,
-    yuLoading,
+    ...Yu,
 }

@@ -1,14 +1,13 @@
 import Cm from "./gen.common";
 import G from "../global";
 import Ux from "ux";
-import Qr from '../../query';
 
-const rxSearch = (reference) => Cm.ux(reference, 'rxSearch',
+const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
     (params) => {
         /*
          * 必须配置 ajax.search.uri
          */
-        const {options = {}} = G.state(reference);
+        const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_SEARCH_URI];
         return Ux.ajaxPost(uri, params);
     });
@@ -18,8 +17,8 @@ const rxCondition = (reference, isClear = false) => {
          * 清空列筛选
          */
         return (event) => {
-            Cm.prevent(event);
-            const {$condition = {}} = G.state(reference);
+            Ux.prevent(event);
+            const {$condition = {}} = reference.state;
             /*
              * 条件本身大于0的时候执行
              */
@@ -27,7 +26,7 @@ const rxCondition = (reference, isClear = false) => {
                 /*
                  * Qr专用清除
                  */
-                Qr.qrClear(reference);
+                Ux.qrClear(reference);
             }
         };
     } else {

@@ -1,7 +1,7 @@
 import Ux from 'ux';
 import I from '../ajax';
 
-import Types from './types.application';
+import Types from './types';
 import Proc from './proc.application';
 
 export default {

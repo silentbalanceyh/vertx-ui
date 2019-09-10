@@ -1,6 +1,14 @@
 import React from 'react';
+import Ex from 'ex';
+import Op from './Op';
 import {Tabs} from 'antd';
-import U from 'underscore';
+import Ux from 'ux';
+import './Cab.less';
+
+const LOG = {
+    name: "ExTab",
+    color: "#5D478B"
+};
 
 /*
  * React属性props:
@@ -21,25 +29,35 @@ import U from 'underscore';
  * }
  */
 class Component extends React.PureComponent {
-    state = {};
+    state = {
+        $ready: false
+    };
+
+    componentDidMount() {
+        Op.yiTab(this)
+    }
 
     render() {
-        const {
-            config = {},
-        } = this.props;
-        const {items = []} = config;
-        return (
-            <Tabs {...config}>
-                {items.map((item) => {
-                    const {fnRender, ...rest} = item;
-                    return (
-                        <Tabs.TabPane {...item}>
-                            {U.isFunction(fnRender) ? fnRender(this, rest) : false}
-                        </Tabs.TabPane>
-                    )
-                })}
-            </Tabs>
-        );
+        return Ex.yoRender(this, () => {
+            const {$tabs = {}} = this.state;
+            /*
+             * items 抽取
+             */
+            const {items = [], ...rest} = $tabs;
+            /*
+             * className
+             */
+            if (rest.className) {
+                rest.className = `ex-tabs ${rest.className}`;
+            } else {
+                rest.className = `ex-tabs`;
+            }
+            return (
+                <Tabs {...rest}>
+                    {items.map(item => Ux.aiChild(item))}
+                </Tabs>
+            );
+        }, LOG)
     }
 }
 

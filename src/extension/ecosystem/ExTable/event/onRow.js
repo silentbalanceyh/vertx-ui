@@ -13,7 +13,7 @@ export default (reference, row = {}) => (record) => {
         const executor = events[target];
         if (U.isFunction(executor)) {
             result[event] = event => {
-                Ex.prevent(event);
+                Ux.prevent(event);
                 executor(record.key, record, {
                     config: Ux.clone(row),
                     reference

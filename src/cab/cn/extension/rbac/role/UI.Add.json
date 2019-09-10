@@ -9,21 +9,17 @@
                 "name,角色名称,14"
             ],
             [
-                "code,角色编码,14"
+                "code,角色编码,14,,,readOnly=true"
             ],
             [
                 "comment,角色备注,14"
             ],
             [
                 {
-                    "field": "active",
-                    "optionItem": {
-                        "label": "启用"
-                    },
+                    "metadata": "active,启用,14,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
-                    },
-                    "render": "aiCheckbox"
+                    }
                 }
             ],
             [
@@ -31,21 +27,16 @@
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
-                        "$opReset,重置,$opReset"
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opAdd": "act.role.add"
-            }
+        "hidden": [],
+        "op": {
+            "$opAdd": "act.role.add"
         }
     },
     "_modal": {

@@ -9,7 +9,7 @@ export default (reference, config) => {
     column.title = valueColumn.title;
     column.render = (text, record) => {
         const columns = config.$columnsMy;
-        let options = Ux.RxAnt.toOptions(reference, fieldColumn);
+        let options = Ux.Ant.toOptions(reference, fieldColumn);
         /*
         * 过滤
         */

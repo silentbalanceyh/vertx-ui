@@ -6,32 +6,55 @@
                 "title=基本信息"
             ],
             [
-                "name,名称,14"
+                {
+                    "metadata": "name,名称,14",
+                    "optionConfig.rules": [
+                        "required,请输入名称"
+                    ]
+                }
             ],
             [
-                "code,编码,14"
+                {
+                    "metadata": "code,编码,14",
+                    "optionConfig.rules": [
+                        "required,请输入编码",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，该编码已在系统中存在！",
+                            "config": {
+                                "uri": "/api/x-tabular/existing",
+                                "method": "POST",
+                                "params": {
+                                    "type": "ROUTE:type"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
             ],
             [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opAdd,添加,$opAdd,primary",
-                        "$opReset,重置,$opReset"
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": {
-            "inputs": [
-                "type"
-            ]
-        },
-        "actions": {
-            "op": {
-                "$opAdd": "act.tabular.add"
-            }
+        "hidden": [
+            "type"
+        ],
+        "op": {
+            "$opAdd": "act.tabular.add"
         }
     },
     "_modal": {

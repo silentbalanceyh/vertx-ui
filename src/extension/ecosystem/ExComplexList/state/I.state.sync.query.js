@@ -1,7 +1,7 @@
 import Ux from "ux";
+import {QQuery} from 'entity';
 
 export default (reference, config = {}) => {
-
     let defaultQuery = {};
     const {$query} = reference.props;
     if (Ux.isEmpty($query)) {
@@ -14,8 +14,9 @@ export default (reference, config = {}) => {
          * 2）直接处理 config.query
          * */
         if (config.query) {
-            const query = Ux.clone(config.query);
-            defaultQuery = Ux.irGrid(query, reference);
+            // cabQuery 不可以在这个组件中调用，因为该组件和 Cab.json 不绑定
+            const query = new QQuery(config.query, reference);
+            defaultQuery = query.to();
         }
     } else {
         /*

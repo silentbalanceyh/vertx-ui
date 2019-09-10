@@ -4,7 +4,7 @@ import React from "react";
 import {LoadingAlert} from "web";
 
 const _renderNotice = (reference) => {
-    const {$notice} = Ex.state(reference);
+    const {$notice} = reference.state;
     return $notice ? (
         <LoadingAlert $alert={$notice} $type={"warning"}/>
     ) : false;
@@ -14,7 +14,7 @@ export default (reference) => {
     const {
         $advanced,
         $visible = false
-    } = Ex.state(reference);
+    } = reference.state;
     $advanced.visible = $visible;
     const {$form = {}} = reference.props;
     const {FormFilter} = $form;

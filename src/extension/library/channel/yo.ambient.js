@@ -10,8 +10,7 @@ const _seekState = (uniform = {}, reference, key) => {
     if (value) {
         uniform[key] = value;
     } else {
-        const state = Fn.state(reference);
-        value = state[key];
+        value = reference.state ? reference.state[key] : null;
         if (value) {
             uniform[key] = value;
         }
@@ -28,6 +27,17 @@ const _seekOptional = (uniform = {}, reference, key) => {
     }
 };
 
+const _seekAssist = (uniform = {}, input = {}) => {
+    /*
+     * props
+     */
+    if (input) {
+        Object.keys(input)
+            .filter(field => field.startsWith(`$a_`))
+            .forEach(key => uniform[key] = input[key]);
+    }
+};
+
 export default (reference = {}, config = {}) => {
     const props = reference.props;
     /*
@@ -37,7 +47,7 @@ export default (reference = {}, config = {}) => {
      * $router
      * $menus
      * */
-    const uniform = Ux.toUniform(props,
+    const uniform = Ux.onUniform(props,
         "app", "user", "router",
         "menus",
         "hotel",     // 旧系统专用
@@ -73,7 +83,7 @@ export default (reference = {}, config = {}) => {
     Object.keys(props)
         .filter(propKey => !!propKey)
         .filter(propKey => U.isFunction(props[propKey]))
-        .filter(Fn.specFun)
+        .filter(Fn.isExFun)
         .forEach(propKey => uniform[propKey] = props[propKey]);
     /*
      * 特殊引用
@@ -95,6 +105,11 @@ export default (reference = {}, config = {}) => {
         uniform.$collapsed = $collapsed;
     }
     Object.assign(uniform.config, config);
+    /*
+     * Assist数据专用
+     */
+    _seekAssist(uniform, reference.props);
+    _seekAssist(uniform, reference.state);
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

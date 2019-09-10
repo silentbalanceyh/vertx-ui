@@ -6,7 +6,7 @@ export default (reference) => {
     /*
      * 提取选项
      */
-    const {options = {}} = Ex.state(reference);
+    const {options = {}} = reference.state;
     const config = {};
     attrs.$options = options;
     Object.keys(options)
@@ -21,7 +21,7 @@ export default (reference) => {
     /*
      * 查询条件专用处理
      */
-    const {$filters = {}} = Ex.state(reference);
+    const {$filters = {}} = reference.state;
     attrs.$inited = $filters;
     /*
      * 清空按钮专用状态

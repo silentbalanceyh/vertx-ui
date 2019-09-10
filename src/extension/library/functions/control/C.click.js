@@ -1,7 +1,6 @@
 import Fn from '../generator';
 import U from 'underscore';
 import Ux from 'ux';
-import Op from './C.op';
 
 const configGenerator = (onClickStr, reference) => {
     /*
@@ -68,7 +67,7 @@ const configConnect = (onClick, plugin = {}, reference) => {
                  * 同时又是 submit = true
                  */
                 onClick = (event) => {
-                    Fn.prevent(event);
+                    Ux.prevent(event);
                     Fn.rx(reference).submitting();
                     Ux.connectId(connect);
                 };
@@ -80,7 +79,7 @@ const configConnect = (onClick, plugin = {}, reference) => {
                  * 同时又是 submit = false
                  */
                 onClick = (event) => {
-                    Fn.prevent(event);
+                    Ux.prevent(event);
                     Ux.connectId(connect);
                 };
             }
@@ -92,7 +91,7 @@ const configConnect = (onClick, plugin = {}, reference) => {
              */
             const fnOriginal = onClick;
             onClick = (event) => {
-                Fn.prevent(event);
+                Ux.prevent(event);
                 Fn.rx(reference).submitting(true);
                 fnOriginal(event);
             }
@@ -133,7 +132,7 @@ const configClick = (config = {}, reference) => {
      */
     const content = plugin.confirm;
     if (content) {
-        onClick = Op.xtConfirm(onClick, content);
+        onClick = Ux.eventConfirm(onClick, content);
     }
     return onClick;
 };

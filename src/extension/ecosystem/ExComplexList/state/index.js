@@ -4,7 +4,8 @@ import stateQuery from './I.state.sync.query';
 
 import asyncOp from './I.state.async.op';
 import asyncTable from './I.state.async.table';
-import Ex from 'ex';
+
+import Ux from 'ux';
 /*
  * 基本配置解析
  * 1. query：（静态默认的query）；
@@ -54,19 +55,19 @@ const sync = (reference, config = {}) => {
     /*
      * 提交和加载
      */
-    return Ex.promise(state);
+    return Ux.promise(state);
 };
 const async = (reference, config = {}, state = {}) =>
     /* 动态OP */
     asyncOp(reference, config)
-        .then(op => Ex.promise(state, 'op', op))
+        .then(op => Ux.promise(state, 'op', op))
         /* 动态列 */
         .then(() => asyncTable(reference, config, state))
-        .then(table => Ex.promise(state, 'table', table));
+        .then(table => Ux.promise(state, 'table', table));
 
 const ready = (reference = {}, state = {}) => {
     state.$ready = true;    // 只有 $ready 是单独控制
-    return Ex.promise(state);
+    return Ux.promise(state);
 };
 export default {
     sync,

@@ -1,0 +1,77 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "name,名称,14"
+            ],
+            [
+                "code,编码,14"
+            ],
+            [
+                {
+                    "metadata": "modelName,关联模型,14,,aiListSelector",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/model/search,1,8,sorter=createdAt`DESC"
+                        },
+                        "linker": {
+                            "identifier": "identifier",
+                            "alias": "modelName"
+                        },
+                        "table": {
+                            "columns": [
+                                "alias,名称",
+                                "name,系统名称",
+                                "identifier,系统标识",
+                                "comments,备注"
+                            ]
+                        },
+                        "validation": "请选择关联模型！",
+                        "window": "请选择关联模型,选择,关闭,false,800,false"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "parentId,父类型,14,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=ci.type,key=key",
+                    "optionJsx.config.tree": "text=name",
+                    "optionJsx.config.selection": "mode=FULL"
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "type",
+            "identifier"
+        ],
+        "op": {
+            "$opAdd": "act.tabular.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的信息添加成功！"
+        }
+    }
+}

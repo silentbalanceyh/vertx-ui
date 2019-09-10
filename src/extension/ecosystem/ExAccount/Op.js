@@ -1,30 +1,17 @@
-import U from 'underscore';
-import {Modal} from 'antd';
-import Ex from 'ex';
+import Ux from 'ux';
+import ImgPhoto from './image/user.png';
 
-const fnLogout = (reference) => {
-    const {config: {window: {logout}}} = reference.props;
-    const $config = Ex.toDialog(logout);
-    $config.onOk = () => Ex.Op.$opLogout(reference);
-    Modal.confirm($config);
-};
-const _DISPATCH = {
-    fnLogout
-};
-const _2fnSelect = (reference) => (event) => {
-    const {data: {metadata = {}}} = event.item.props;
-    const executor = _DISPATCH[metadata.function];
-    if (U.isFunction(executor)) {
-        executor(reference);
-    }
-};
-const _1normalizeMenu = (reference = {}) => {
-    const {data = [], $app} = reference.props;
-    return data
-        .map(item => Ex.mapMeta(item))
-        .map(item => Ex.mapUri(item, $app))
+const yiAccount = (reference) => {
+    const state = {};
+    const user = Ux.isLogged();
+    const config = Ux.fromHoc(reference, "account");
+    /* 解决无内容的Bug */
+    if (!user.icon) user.icon = `image:${ImgPhoto}`;
+    const data = Ux.formatTpl(user, config);
+    state.$data = Ux.clone(data);
+    state.$ready = true;
+    reference.setState(state);
 };
 export default {
-    _2fnSelect,
-    _1normalizeMenu,
+    yiAccount
 }

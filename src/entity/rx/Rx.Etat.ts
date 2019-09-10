@@ -5,15 +5,15 @@ import {Taper} from 'environment';
 
 class Etat {
     private _form: boolean = false;
-    private _cab: undefined;
+    private readonly _cab: undefined;
     private _cabFile: undefined;
     private _logger: undefined;
     private _disableLog: Boolean = false;
-    private _state: any;
+    private _state: any = {};   // 初始状态有值，防止 null 异常
     private _loading: any;
     private _dispatchTo: any = {};
     private _stateTo: any;
-    private _raft: any = {};
+    private _raft: any = {enabled: true};      // 默认打开 Raft模式
     private _op: {};
     private _isLog: boolean = true;
 
@@ -62,37 +62,50 @@ class Etat {
         return this;
     }
 
-    raft(input, value: any = undefined) {
+    raft(input) {
+        /*
+         * 开启 Raft 模式，只针对 Form 生效
+         */
         const raftRef: any = this._raft;
-        if (!raftRef.hasOwnProperty('enabled')) {
-            raftRef.enabled = true;
-        }
-        if (undefined === value) {
-            // 绑定jsx/绑定columns/绑定配置
-            if (U.isObject(input)) {
-                if (input.hasOwnProperty("renders")) {
-                    // 特殊处理，子表单，动态表单
-                    raftRef.dynamic = {};
-                    raftRef.dynamic.renders = input.renders;
-                    raftRef.dynamic.extensions = input.extensions;
-                } else {
-                    raftRef.jsx = input;
+        /*
+         * 输入分流
+         * 1）第一种调用 raft(n)，n为数值
+         * 2）第二种直接配置 config
+         *
+         */
+        if (U.isNumber(input)) {
+            raftRef.columns = input;
+        } else if (U.isObject(input)) {
+            /*
+             * 数据结构
+             * {
+             *     dynamic: {
+             *         renders: {},
+             *         extensions: {}
+             *     },    // 动态渲染部分
+             *     ...,            // 基本部分
+             * }
+             */
+            if (input) {
+                // null 也是 Object
+                const {dynamic, ...jsx} = input;
+                if (dynamic) {
+                    raftRef.dynamic = dynamic;
                 }
-            } else if (U.isNumber(input)) {
-                raftRef.columns = input;
+                raftRef.jsx = jsx;
             }
-        } else {
-            // 双参处理配置
-            if (!raftRef.hasOwnProperty("config")) {
-                raftRef.config = {};
-            }
-            raftRef.config[input] = value;
         }
         return this;
     }
 
     state(state) {
         this._state = state;
+        return this;
+    }
+
+    ready(ready = false) {
+        if (!this._state) this._state = {};
+        this._state.$ready = ready;
         return this;
     }
 
@@ -112,11 +125,13 @@ class Etat {
             loading.forEach(each => args.push(each));
         } else if (1 === loading.length) {
             const input = loading[0];
-            if (U.isArray(input)) {
+            if (Array.isArray(input)) {
                 input.forEach(each => args.push(each));
+            } else {
+                args.push(input);
             }
         }
-        this._loading = Ux.onArray.apply(null, [].concat(args));
+        this._loading = Ux.ambiguityArray.apply(null, [].concat(args));
         return this;
     }
 
@@ -166,17 +181,14 @@ class Etat {
         if (!this._op) this._op = {};
         const opRef = this._op;
         Object.keys(OP)
+        /* 过滤不存在的 key 信息 */
             .filter(key => !!key)
-            .filter(key => key.startsWith("$"))
+            .filter(key => "string" === typeof key)
+            /* 过滤 key 不以 $op 开头 */
+            .filter(key => key.startsWith("$op"))
+            /* 过滤 value 不为 Function */
+            .filter(key => U.isFunction(OP[key]))
             .map(key => opRef[key] = OP[key]);
-        return this;
-    }
-
-    // Dialog专用方法，设置$op中的show, hide
-    dialog(key = "$_show") {
-        if (!this._op) this._op = {};
-        this._op['hide'] = Ux.onHide(null, key);
-        this._op['show'] = Ux.onShow(null, key);
         return this;
     }
 
@@ -260,6 +272,7 @@ class Etat {
         }
         // 操作设置
         if (this._op) {
+            // 判断 Function 的 op类型
             config.op = this._op;
         }
         return config;

@@ -8,6 +8,6 @@ export default (reference, {
 }) => (
     <div>
         <Table {...tables}/>
-        {Ux.rtPure(reference, buttons)}
+        {Ux.aiButton(reference, buttons)}
     </div>
 )

@@ -44,26 +44,10 @@ class DataTree implements DataContainer {
     ready: boolean = false;
     data: string = "";
     tree: Array<Object> = [];
+    treeRoot: Array<Object> = [];       // 当前树的根节点
 
-    constructor(data: Array<Object> = [], meta: any = {}) {
-        data = _initDataArray(data, meta);
-        this.data = JSON.stringify(data);
-        // 按ParentId分组
-        let $data = Immutable.fromJS(data);
-
-        let level = $data.map((item: any) => item.get("level")).min();
-        const roots = meta.sort ?
-            $data.filter((item: any) => level === item.get("level"))
-                .sortBy((item: any) => item.get(meta.sort))
-                .toJS() :
-            $data.filter((item: any) => level === item.get("level"))
-                .toJS();
-        // 从根节点往下处理
-        const $keys = Immutable.fromJS(roots.map((item: any) => item["id"]));
-        let left = $data.filter((item: any) => !$keys.contains(item.get("id"))).toJS();
-        // 递归遍历roots读取children
-        _calculateChildren(roots, left, meta);
-        this.tree = roots;
+    constructor(data: Array<Object> = [], config: any = {}) {
+        this.data = JSON.stringify(data);       // 存储 raw
     }
 
     _(index: number): any {

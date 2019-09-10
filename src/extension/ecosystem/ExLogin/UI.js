@@ -1,26 +1,28 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import {Form} from "antd";
 
 const jsx = {
     username: Ux.aiInput,
     password: Ux.aiInput
 };
 
+const LOG = {
+    name: "ExLogin",
+    color: "#696"
+};
+
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI")
-    .form().bind(Ex.Op)
+    .cab("ExLogin")
+    .form().raft(1).raft(jsx)
+    .bind(Ex.Op)
     .to()
 )
 class Component extends React.PureComponent {
+
     render() {
-        Ux.dgDebug(this.props, "[ ExLogin ]", "#696");
-        return (
-            <Form layout={"horizontal"}>
-                {Ux.jsxFieldGrid(this, jsx, 1)}
-            </Form>
-        );
+        return Ex.yoRender(this, () =>
+            Ux.aiForm(this), LOG)
     }
 }
 

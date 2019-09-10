@@ -1,12 +1,11 @@
-import Ex from 'ex';
 import Ux from 'ux';
 import renderTotal from './R.total.jsx';
 
 const _initTotal = (reference) => (total) => {
-    const {$table = {}} = Ex.state(reference);
+    const {$table = {}} = reference.state;
     if ($table.total) {
         const {$selected = []} = reference.props;
-        const {$query = {}} = Ex.state(reference);
+        const {$query = {}} = reference.state;
         const {pager = {}} = $query;
         /*
          * 除尽的情况
@@ -26,7 +25,7 @@ const _initTotal = (reference) => (total) => {
 };
 
 export default (reference, data = {}) => {
-    const {$query = {}} = Ex.state(reference);
+    const {$query = {}} = reference.state;
     const {pager = {}} = $query;
     return {
         showSizeChanger: true,

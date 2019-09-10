@@ -62,7 +62,8 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Op.yiList(this);
+        Op.yiList(this)/* Promise处理 */
+            .then(state => this.setState(state));
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {

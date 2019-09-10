@@ -4,7 +4,7 @@ import DataTabular from "../data/DataTabular";
 import DataObject from "../data/DataObject";
 import DataArray from "../data/DataArray";
 import Navigator from "../flow/Navigator";
-import DataLabor from "../DataLabor";
+import Dsl from "../Dsl";
 import * as U from 'underscore';
 
 const _isTyped = (reference: any) => {
@@ -18,9 +18,7 @@ const _isTyped = (reference: any) => {
 };
 
 class StateIn {
-    callback: Function = () => {
-    };
-    private mapping: any = {};
+    private readonly mapping: any = {};
     private keys: Array<String> = [];
 
     constructor(mapping: any = {}, callback: Function) {
@@ -30,6 +28,9 @@ class StateIn {
             this.callback = callback;
         }
     }
+
+    callback: Function = () => {
+    };
 
     to(state: any = {}) {
         let $state = Immutable.fromJS(state);
@@ -44,13 +45,13 @@ class StateIn {
                 } else {
                     const type = typeof data;
                     if (U.isArray(data) || U.isObject(data)) {
-                        $state = $state.setIn(path, DataLabor.get(data));
+                        $state = $state.setIn(path, Dsl.get(data));
                     } else {
                         if (data) {
                             console.error(`[ StateIn ] The data type is invalid, support (Object/Array) only. \n ` +
                                 `(key = ${key}, value = ${data} type = ${type})`)
                         } else {
-                            $state = $state.setIn(path, DataLabor.get(data));
+                            $state = $state.setIn(path, Dsl.get(data));
                         }
                     }
                 }

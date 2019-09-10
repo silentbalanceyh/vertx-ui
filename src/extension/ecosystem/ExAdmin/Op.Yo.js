@@ -13,7 +13,7 @@ const yoSider = (reference = {}) => {
     /*
      * 配置
      */
-    const {$collapsed = false} = Ex.state(reference);
+    const {$collapsed = false} = reference.state;
     attrs.config = {$collapsed};
     return attrs;
 };
@@ -44,7 +44,7 @@ const yoHeader = (reference = {}, {
     /*
      * 配置
      */
-    const state = Ex.state(reference);
+    const state = reference.state;
     const {$collapsed = false} = state;
     attrs.config = {
         banner,
@@ -78,9 +78,18 @@ const yoAccount = (reference = {}, {
     };
     return attrs;
 };
+const yiLayout = (reference) => {
+    const props = reference.props;
+    if (props.hasOwnProperty("$collapsed")) {
+        const {$collapsed = true} = props;
+        reference.setState({$collapsed});
+    }
+};
 export default {
     yoSider,
     yoNavigation,
     yoHeader,
     yoAccount,
+    //
+    yiLayout
 }

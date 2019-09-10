@@ -1,15 +1,20 @@
 import Ex from "ex";
 
-const rxClose = (reference, item = {}, isAdd = true) => (data = {}) => {
-    const {options = {}} = Ex.state(reference);
+const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) => {
+    const {options = {}} = reference.state;
+    if (!data.key) {
+        console.error("[ Ex ] 传入数据没有 key，tab 操作会失败，请检查数据：", data);
+    }
     if (options[Ex.Opt.DYNAMIC_SWITCH] && isAdd) {
         Ex.rxTabEdit(reference)(data.key, data, item, {
             $submitting: false,
+            ...addOn
         });
     } else {
         Ex.rxTabClose(reference)(data.key, {
             $dirty: true,
             $submitting: false,
+            ...addOn
         });
     }
 };

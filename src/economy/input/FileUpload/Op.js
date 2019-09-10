@@ -2,7 +2,6 @@ import Ux from 'ux';
 import Callback from './Op.Callback';
 import {message} from 'antd';
 import Verify from './Op.Verify';
-import Q from 'q';
 import U from 'underscore';
 
 const on2CustomRequest = (reference) => (details = {}) => {
@@ -14,7 +13,7 @@ const on2CustomRequest = (reference) => (details = {}) => {
         // 读取Form引用
         const ref = Ux.onReference(reference, 1);
         // 构造最终的下载Action
-        params = Ux.valueSearch(params, ref.props);
+        params = Ux.parseInput(params, ref);
         api = Ux.formatExpr(api, params);
         return Ux.ajaxUpload(api, details.file)
             .then(data => details.onSuccess(data));
@@ -52,7 +51,7 @@ const _asyncToUrl = (each = {}, blob) => new Promise((resolve) => {
     });
 });
 const _asyncDownload = (reference, value = []) =>
-    Q.all(value.map(file => {
+    Ux.parallel(value.map(file => {
         const {ajax = {}} = reference.props;
         return Ux.ajaxDownload(ajax.download, Ux.clone(file));
     }));
@@ -63,7 +62,7 @@ const _asyncPreview = (reference, value = []) => (downloaded = []) => {
         const promise = _asyncToUrl(each, downloaded[index]);
         promises.push(promise);
     });
-    return Q.all(promises);
+    return Ux.parallel(promises);
 };
 const initState = (reference) => {
     const handler = getHandler(reference);

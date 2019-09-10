@@ -1,10 +1,10 @@
 import form from './form';
-import callback from './callback';
+import dialog from './dialog';
 
 export default {
     /*
      * 表单提交
      */
     form,
-    ...callback
+    dialog,
 }

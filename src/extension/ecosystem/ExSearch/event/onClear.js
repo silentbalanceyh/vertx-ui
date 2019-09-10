@@ -1,4 +1,5 @@
 import Ex from 'ex';
+import Ux from 'ux';
 import {Modal} from 'antd';
 
 const _nextConfirm = (reference) => {
@@ -12,12 +13,12 @@ const _nextConfirm = (reference) => {
             })
         })
     } else {
-        return Ex.promise(true);
+        return Ux.promise(true);
     }
 };
 
 export default (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     /*
      * 提示信息处理，清除操作
      */
@@ -25,7 +26,7 @@ export default (reference) => (event) => {
     /*
      * 确认后的操作
      */
-        .then(Ex.cbTrue(() => {
+        .then(Ux.ajax2True(() => {
             /*
              * 清除专用操作
              * reference 为当前引用

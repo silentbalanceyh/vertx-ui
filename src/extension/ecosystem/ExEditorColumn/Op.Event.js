@@ -3,12 +3,12 @@ import Ex from 'ex';
 import U from 'underscore';
 
 const rxSave = (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     Ex.rsSubmitting(reference)();
     /*
      * 列信息处理
      */
-    const {$selected = []} = Ex.state(reference);
+    const {$selected = []} = reference.state;
     const {config = {}} = reference.props;
     /*
      * 提取 rxColumnSave 函数
@@ -18,7 +18,7 @@ const rxSave = (reference) => (event) => {
         /*
          * 错误信息
          */
-        Ex.showFailure(config);
+        Ux.messageFailure(config);
         /*
          * 防重复提交
          */
@@ -27,7 +27,7 @@ const rxSave = (reference) => (event) => {
         /**
          * key为查询时必得的值
          */
-        if(!$selected.includes("key")){
+        if (!$selected.includes("key")) {
             $selected.unshift("key");
         }
         const keys = Ux.immutable($selected);
@@ -70,7 +70,7 @@ const rxSave = (reference) => (event) => {
                      * 消息提示
                      */
                     const {config = {}} = reference.props;
-                    Ex.showSuccess(config);
+                    Ux.messageSuccess(config);
                 })
                 .catch(error => {
                     console.error(error);
@@ -81,7 +81,7 @@ const rxSave = (reference) => (event) => {
     }
 };
 const rxReset = (reference) => (event) => {
-    Ex.prevent(event);
+    Ux.prevent(event);
     const {config = {}} = reference.props;
     const $selected = Ux.clone(config.$columnsMy);
     reference.setState({$selected});

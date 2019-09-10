@@ -13,6 +13,8 @@ import _epic_report from './epic/report/UI';
 import _epic_topology from './epic/topology/UI';
 import _home_todo from './home/todo/UI';
 import _init_start from './init/start/UI';
+import _organization_assert from './organization/assert/UI';
+import _organization_branch from './organization/branch/UI';
 import _organization_department from './organization/department/UI';
 import _organization_vendor from './organization/vendor/UI';
 import _personal_company from './personal/company/UI';
@@ -40,6 +42,8 @@ export default {
 	_epic_topology,
 	_home_todo,
 	_init_start,
+	_organization_assert,
+	_organization_branch,
 	_organization_department,
 	_organization_vendor,
 	_personal_company,

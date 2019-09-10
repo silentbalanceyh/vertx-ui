@@ -1,13 +1,21 @@
 import Ux from 'ux';
 import Ex from 'ex';
 
-export default (reference, config = {}, state = {}) => Ex.all([
+export default (reference, config = {}, state = {}) => Ux.parallel([
     Ex.rxColumn(reference, {
         ...config,
         columns: config.table ? config.table.columns : []
     })(),
     Ex.rxColumnMy(reference, config)()
 ], "columns", "filters")
+    .then(response => {
+        /*
+         * 启用表达式模式的列处理
+         */
+        const {columns = []} = response;
+        response.columns = Ux.configColumn(reference, columns);
+        return Ux.promise(response);
+    })
     .then(response => {
         const table = Ux.clone(config.table);
         /*
@@ -33,8 +41,8 @@ export default (reference, config = {}, state = {}) => Ex.all([
         /*
          * Qr 处理，生成 $terms 数据结构
          */
-        state.$terms = Ex.qrTerms(table.columns);
-        return Ex.promise(table);
+        state.$terms = Ux.qrTerms(table.columns);
+        return Ux.promise(table);
     })
     .then(table => {
         /*
@@ -65,5 +73,5 @@ export default (reference, config = {}, state = {}) => Ex.all([
                 }
             })
         }
-        return Ex.promise(table);
+        return Ux.promise(table);
     });

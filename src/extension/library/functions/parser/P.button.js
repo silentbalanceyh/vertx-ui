@@ -1,11 +1,10 @@
-import It from '../func';
-import Fn from '../global/async';
+import toAsync from './P.async';
 import Ux from "ux";
 /*
  * 传入的 ops 必须是一个对象，每个 key 都会最终生成 category 属性
  */
 const parsePlugin = (buttons = {}, options = {}) => {
-    It.itValue(buttons, (button = {}) => {
+    Ux.itValue(buttons, (button = {}) => {
         const {plugin = {}} = button;
         const configuration = {};
         /* 启用 tooltip 的button专用 */
@@ -52,7 +51,7 @@ const _parseContainer = (component = {}, plugin = {}, options = {}) => {
     return component;
 };
 const parseComponent = (buttons = {}, options = {}, components = {}) => {
-    It.itValue(buttons, (button = {}) => {
+    Ux.itValue(buttons, (button = {}) => {
         const Jsx = components.plugin;
         const config = components.config;
         if (Jsx && config) {
@@ -77,13 +76,6 @@ const parseComponent = (buttons = {}, options = {}, components = {}) => {
         }
     }, 'component');
     return buttons;
-};
-const toAsync = (result, async = true) => {
-    if (async) {
-        return Fn.promise(result);
-    } else {
-        return result;
-    }
 };
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),

@@ -9,7 +9,7 @@ import ExSearch from '../../ExSearch/UI';
 
 export default (reference, {
     css: {
-        clsRow = Ux.ECONOMY.ROW_HEAD
+        clsRow = Ux.Env.ECONOMY.ROW_HEAD
     },
     opens = {},  // Open区域
     batch = {},  // Batch区域

@@ -1,4 +1,3 @@
-import Fn from '../functions';
 import React from 'react';
 import {LoadingContent} from 'web';
 import U from 'underscore';
@@ -17,11 +16,11 @@ const _outReady = (form, message, debug = {}) => {
 };
 
 const _outLoading = (name, message) => {
-    Ux.dgDebug(message, `[ ${name} ] ...... `, "#8F8F8F");
+    Ux.dgDebug(message, `[ ${name} ] ...... `, "#BFBFBF");
 };
 
 export default (reference = {}, jsx, debug = {}) => {
-    const state = Fn.state(reference);
+    const state = reference.state;
     const {error} = state;
     if (error) {
         return Ux.fxError(error);

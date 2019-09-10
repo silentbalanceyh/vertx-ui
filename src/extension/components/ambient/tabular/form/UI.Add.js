@@ -18,7 +18,7 @@ class Component extends React.PureComponent {
         const form = Ex.yoForm(this, null, Ux.clone(params));
         return (
             <ExForm {...form} $height={"300px"}
-                    $actions={Op.actions}/>
+                    $op={Op.actions}/>
         );
     }
 }

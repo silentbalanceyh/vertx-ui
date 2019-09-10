@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Q from 'q';
 
 const _mockData = (reference, trigger = {}) => {
     let mockData = {};
@@ -32,7 +31,7 @@ const _initColumnPromises = (reference = {}, column = {}) => {
         const promise = _initPromise(reference, $config.trigger, record);
         promises.push(promise);
     });
-    return Q.all(promises);
+    return Ux.parallel(promises);
 };
 
 const _initPromises = (reference) => {
@@ -51,7 +50,7 @@ const _initPromises = (reference) => {
         }
     });
     return {
-        keys, promises: Q.all(promises)
+        keys, promises: Ux.parallel(promises)
     };
 };
 
