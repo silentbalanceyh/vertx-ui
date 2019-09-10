@@ -10,7 +10,34 @@
                 "code,编号,12"
             ],
             [
-                "managerId,部门经理,12",
+                {
+                    "metadata": "managerName,部门经理,12,,aiListSelector",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
+                        },
+                        "linker": {
+                            "key": "managerId",
+                            "realname": "managerName"
+                        },
+                        "table": {
+                            "columns": [
+                                "username,用户账号",
+                                "realname,用户名称",
+                                "comment,备注",
+                                "mobile,手机号",
+                                "email,邮箱",
+                                "active,是否启用"
+                            ]
+                        },
+                        "validation": "请选择部门经理！",
+                        "window": "请选择部门经理,选择,关闭,false,800,false",
+                        "search": {
+                            "username,c": "账号",
+                            "realname,c": "名称"
+                        }
+                    }
+                },
                 {
                     "metadata": "deptId,上级部门,12,,aiSelect",
                     "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
@@ -46,7 +73,9 @@
                 }
             ]
         ],
-        "hidden": [],
+        "hidden": [
+            "managerId"
+        ],
         "op": {
             "$opAdd": "act.dept.add"
         }

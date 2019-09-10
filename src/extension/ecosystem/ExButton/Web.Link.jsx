@@ -32,11 +32,21 @@ export default (reference, config = {}) => {
         ...rest
     } = config;
     if (plugin.prompt) {
-        return (
-            <Popconfirm title={plugin.prompt} placement={"top"} onConfirm={onClick}>
-                {_renderLink(reference, rest)}
-            </Popconfirm>
-        )
+        if (rest.disabled) {
+            /*
+             * 禁用的时候不设置 Popconfirm
+             */
+            return _renderLink(reference, rest);
+        } else {
+            /*
+             * 只有不禁用的时候使用下边这种格式
+             */
+            return (
+                <Popconfirm title={plugin.prompt} placement={"top"} onConfirm={onClick}>
+                    {_renderLink(reference, rest)}
+                </Popconfirm>
+            )
+        }
     } else {
         return _renderLink(reference, {
             ...rest,

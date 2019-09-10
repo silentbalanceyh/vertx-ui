@@ -14,6 +14,7 @@ export default (reference, config = {}) => {
          * 2）直接处理 config.query
          * */
         if (config.query) {
+            // cabQuery 不可以在这个组件中调用，因为该组件和 Cab.json 不绑定
             const query = new QQuery(config.query, reference);
             defaultQuery = query.to();
         }

@@ -4,12 +4,21 @@ import renderJsx from './Web.jsx';
 import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
+import Ex from "ex";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .to()
 )
 class Component extends React.PureComponent {
+    state = {
+        $ready: false
+    };
+
+    componentDidMount() {
+        Ex.yiCategory(this);
+    }
+
     render() {
         const config = Ux.fromHoc(this, "grid");
         /* 专用组件信息 */

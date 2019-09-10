@@ -16,6 +16,7 @@ const itMatrix = (matrix = [], eachFun) => {
 const itObject = (data = {}, executor = () => {
 }, invalid = false) => {
     const iterator = V.clone(data);
+    // eslint-disable-next-line
     for (const key in iterator) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];
@@ -66,10 +67,10 @@ const itFull = (data = [], items = {}, fieldFun = () => {
 }) => {
     E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     E.fxTerminal(!U.isFunction(fieldFun), 10071, fieldFun, "Function");
-    data.forEach(item => {
-        // 遍历数组中的每个元素
-        if (item) {
-            for (const key in items) {
+    data.filter(item => !!item).forEach(item => {
+        // eslint-disable-next-line
+        for (const key in items) {
+            if (items.hasOwnProperty(key)) {
                 // item中的值处理
                 const value = items[key];
                 if (key && value) {

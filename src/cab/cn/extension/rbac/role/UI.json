@@ -5,7 +5,7 @@
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
+            "pager": "1,8",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },

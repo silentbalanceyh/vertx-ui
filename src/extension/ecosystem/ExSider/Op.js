@@ -20,5 +20,5 @@ const onClick = (reference, uris = {}) => ({item, key, keyPath}) => {
     }
 };
 export default {
-    onClick,
+    onClick
 }

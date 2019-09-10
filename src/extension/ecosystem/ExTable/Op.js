@@ -58,6 +58,7 @@ const yiTable = (reference) => {
                  */
                 state.$ready = true;
                 reference.setState(state);
+                Ux.dgQuery(reference, "Table 组件：$loading = true");
             } else {
                 console.error(state);
             }

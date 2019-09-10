@@ -31,9 +31,10 @@ const performFn = (reference, config = {}) => {
         /* 空函数，防止 then 之后无法调用 */
         if ("RESET" !== config.event) {
             Dev.dgDebug({
+                event: config.event,
                 config,
                 $op,
-            }, "[ Ux ] 未捕捉到对应配置", "#CDAD00");
+            }, "[ Ux ] 未捕捉到对应配置", "red");
         }
         return Abs.promise(() => false);
     }

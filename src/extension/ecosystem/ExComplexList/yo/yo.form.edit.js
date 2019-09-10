@@ -11,6 +11,7 @@ export default (reference, item = {}) => {
      * 设置 state -> $dirty
      */
     formAttrs.doDirty = Ex.rxDirty(reference);
+    formAttrs.doSubmitting = Ex.rxSubmitting(reference);
     /*
      * 设置表单初始值
      */

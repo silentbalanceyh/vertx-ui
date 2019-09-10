@@ -1,12 +1,16 @@
 import datum from './datum';
 import config from './config';
-// 属性解析器 和 内置的表达式解析
+/*
+ * 1）属性解析器
+ * 2）表达式解析器
+ * 3）查询引擎
+ */
 import parser from './parser';
 import expression from './expression';
-
+import query from './query';
+// 成套组件
 import webComponent from './web-component';
 import webNavigation from './web-navigation';
-// 成套组件
 import webField from './web-field';
 import webColumn from './web-column';
 import webUnit from './web-unit';
@@ -19,6 +23,7 @@ export default {
 
     ...parser,
     ...expression,
+    ...query,
     ...functions,
 
     ...webComponent,

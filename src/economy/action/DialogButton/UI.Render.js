@@ -1,6 +1,6 @@
 import React from 'react';
 import './Cab.less';
-import {DynamicDialog} from "web";
+import {Dialog} from "web";
 import {Button, Drawer, Popover} from 'antd';
 import Ux from 'ux';
 import Fn from "../../_internal/Ix.Fn";
@@ -8,19 +8,19 @@ import Fn from "../../_internal/Ix.Fn";
 const getChildren = (reference) => {
     const {children, $content: Component} = reference.props;
     // 「LIMIT」限制继承
-    const inherits = Ux.toLimitation(reference.props, Fn.Limit.DialogButton.Filter);
+    const inherits = Ux.toLimit(reference.props, Fn.Limit.DialogButton.Filter);
     // 优先取children
     if (children) {
         return React.Children.map(children, child => {
             const type = Symbol.for("react.element");
             if (child instanceof React.Component) {
                 return React.cloneElement(child, {
-                    fnClose: () => reference.setState({visible: false}),
+                    rxClose: () => reference.setState({visible: false}),
                     ...inherits
                 });
             } else if (child.$$typeof === type) {
                 return React.cloneElement(child, {
-                    fnClose: () => reference.setState({visible: false}),
+                    rxClose: () => reference.setState({visible: false}),
                     ...inherits
                 });
             } else return child;
@@ -37,15 +37,16 @@ const getChildren = (reference) => {
 };
 
 const renderDialog = (reference) => {
-    const jsx = getChildren(reference);
+    
     const {visible = false, dialog = {}} = reference.state;
     // 窗口中的房重复提交设置
     const {$loading} = reference.props;
+    const jsx = getChildren(reference);
     return (
-        <DynamicDialog $dialog={dialog} $visible={visible}
-                       $loading={$loading}>
+        <Dialog $dialog={dialog} $visible={visible}
+                $loading={$loading}>
             {jsx}
-        </DynamicDialog>
+        </Dialog>
     );
 };
 const renderDrawer = (reference) => {

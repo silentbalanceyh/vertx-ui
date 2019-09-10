@@ -1,6 +1,5 @@
 import Ux from "ux";
 import U from 'underscore';
-import To from './func.to.date';
 
 const toUri = (uri = "", $app) => {
     const path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
@@ -25,5 +24,4 @@ const toDialog = (dialog) => {
 export default {
     toUri,
     toDialog,
-    ...To,
 }

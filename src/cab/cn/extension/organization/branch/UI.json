@@ -46,8 +46,8 @@
                 ]
             },
             "tabs.list": "公司列表",
-            "tabs.add": "添加",
-            "tabs.edit": "编辑",
+            "tabs.add": "添加公司",
+            "tabs.edit": "编辑公司",
             "identifier": "company",
             "dynamic.op": false,
             "dynamic.column": true,

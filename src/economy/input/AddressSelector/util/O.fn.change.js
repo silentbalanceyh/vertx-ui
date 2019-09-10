@@ -1,7 +1,7 @@
-import Ux from 'ux';
-import * as U from 'underscore';
+import Ux from "ux";
+import U from 'underscore';
 
-const _setChange = (reference: any, value: any = [], updated: any) => {
+const _setChange = (reference, value = [], updated) => {
     // 选择触发时，country / state / city 整个一条链上的数据已经加载完成，这里value为数组，直接设置
     reference.setState({defaultValue: Ux.clone(value)});
     const {onChange, rxSelect} = reference.props;
@@ -18,7 +18,7 @@ const _setChange = (reference: any, value: any = [], updated: any) => {
     }
 };
 
-const bindChange = (reference: any) => (value, selectedOptions) => {
+export default (reference) => (value, selectedOptions) => {
     if (4 === value.length) {
         /*
          * 长度为 4 表示选择完成
@@ -36,6 +36,3 @@ const bindChange = (reference: any) => (value, selectedOptions) => {
         }
     }
 };
-export default {
-    bindChange
-}

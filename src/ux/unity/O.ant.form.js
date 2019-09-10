@@ -32,6 +32,7 @@ const formRead = (reference, data = {}) => {
     const {$record} = reference.props;
     if ($record && $record.is()) {
         const record = $record.to();
+        // eslint-disable-next-line
         for (const key in record) {
             if (record.hasOwnProperty(key)) {
                 data[key] = record[key];

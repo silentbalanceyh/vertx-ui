@@ -1,53 +1,27 @@
 import U from 'underscore';
 
 import Expr from '../parser';
-
-import E from '../../error';
 import Abs from '../../abyss';
-import Logger from '../../develop/logger';
+import Dev from '../../develop';
 
-const parseProp = (reference, path = "") => {
-    const attrPath = path.split('.');
-    E.fxTerminal(2 !== attrPath.length, 10035, path);
-    if (2 === attrPath.length) {
-        const targetKey = attrPath[0];
-        const dataObj = reference.props[`$${targetKey}`];
-        if (dataObj && dataObj.is()) {
-            const to = attrPath[1];
-            return dataObj._(to);
-        }
-    }
-};
-const parser = {
-    p: parseProp
-};
+const {Logger} = Dev;
+
 const parseExpression = (reference, expr = "") => {
     let returnValue;
-    console.groupCollapsed("[Parser] Start to parsing.", expr);
     if (expr) {
         // 是否包含表达式
         if ("string" === typeof expr) {
-            if (0 <= expr.indexOf(",")) {
-                // 持续递归处理
-                const prefix = expr.split(',')[0];
-                const parserFun = parser[prefix];
-                if (U.isFunction(parserFun)) {
-                    const value = parserFun(reference, expr.split(',')[1]);
-                    if (value) {
-                        returnValue = value;
-                    }
-                } else {
-                    console.warn("[Parser] 前缀值prefix将会被忽略.", prefix);
-                }
+            const value = Expr.parseValue(expr, reference);
+            if (value) {
+                returnValue = value;
             } else {
                 returnValue = expr;
             }
         } else {
             returnValue = expr;
         }
+        Dev.dgDebug({expr, returnValue}, "[ UxP ] 异步验证解析结果.", "#DAA520");
     }
-    console.info("[Parser] End Parsing.", expr, returnValue);
-    console.groupEnd();
     return returnValue;
 };
 /**
@@ -58,6 +32,7 @@ const parseExpression = (reference, expr = "") => {
  */
 const parseAjax = (reference, parameters = {}) => {
     const result = {};
+    // eslint-disable-next-line
     for (const field in parameters) {
         if (parameters.hasOwnProperty(field)) {
             // 特殊递归参数

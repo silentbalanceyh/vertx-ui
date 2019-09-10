@@ -12,6 +12,7 @@ const raftItem = (item = {}, values = {}, config = {}) => {
     if (item.optionItem && rowStyle && 0 < Object.keys(rowStyle).length) {
         if (item.optionItem.style) {
             // 直接合并
+            // eslint-disable-next-line
             for (const key in rowStyle) {
                 if (rowStyle.hasOwnProperty(key)) {
                     item.optionItem.style[key] = rowStyle[key];

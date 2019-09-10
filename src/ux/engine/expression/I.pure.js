@@ -32,11 +32,6 @@ const addonAfter = (jsx = {}) => {
         T.applyIcon(jsx, 'addonAfter');
     }
 };
-const onChange = (jsx = {}, fnChange) => {
-    if (U.isFunction(fnChange)) {
-        jsx.onChange = fnChange;
-    }
-};
 const onSelect = (jsx = {}, fnSelect) => {
     if (U.isFunction(fnSelect)) {
         jsx.onSelect = fnSelect;
@@ -83,6 +78,5 @@ export default {
     addonAfter,
     multiple,
     readOnly,
-    onChange,
     onSelect,
 };

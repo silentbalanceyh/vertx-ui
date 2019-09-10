@@ -280,7 +280,7 @@ const raftForm = (reference, config = {}) => {
     });
 };
 export default {
-    // cabForm,        // 同步处理
+    cabForm,        // 同步处理
     capForm,        // 异步处理（基本配置）
     configForm,     // 执行 raft 处理
     raftForm,       // Legacy遗留系统

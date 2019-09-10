@@ -1,6 +1,16 @@
 {
     "_page": {
-        "title": "用户组管理"
+        "title": "用户组管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_assist": {
+        "ajax.groups": {
+            "uri": "/api/groups"
+        }
     },
     "_grid": {
         "query": {

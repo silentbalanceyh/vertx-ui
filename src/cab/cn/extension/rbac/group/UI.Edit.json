@@ -12,7 +12,10 @@
                 "code,用户组编码,14"
             ],
             [
-                "parentId,父组,14"
+                {
+                    "metadata": "parentId,父组,14,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.groups,value=key,label=name"
+                }
             ],
             [
                 "title=业务模型信息"

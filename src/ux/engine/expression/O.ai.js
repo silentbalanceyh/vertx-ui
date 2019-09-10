@@ -54,7 +54,7 @@ const applyField = (item = {}) => {
 const aiMetaColumn = (item = {}) => {
     if (item.metadata) {
         const {metadata, ...rest} = item;
-        const basic = Apply.parseItem(metadata, "column");
+        const basic = Parser.parseItem(metadata, "column");
         const options = Value.valueLadder(rest);
         Object.assign(basic, options);
         Apply.applyColumn(basic);

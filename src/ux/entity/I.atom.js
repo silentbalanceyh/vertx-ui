@@ -36,6 +36,7 @@ const each = (input, fnExecute) => {
         if (U.isArray(input)) {
             input.forEach((item, index) => fnExecute(item, index, input));
         } else if (U.isObject(input)) {
+            // eslint-disable-next-line
             for (const key in input) {
                 if (input.hasOwnProperty(key)) {
                     fnExecute(key, input[key], input);

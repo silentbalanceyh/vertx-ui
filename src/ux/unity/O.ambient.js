@@ -4,6 +4,7 @@ import Store from './O.store';
 import Cv from '../constant';
 import E from '../error';
 import Value from "../element";
+import Abs from '../abyss';
 
 /**
  * 检查环境变量中的Session值判断用户是否登录
@@ -82,6 +83,13 @@ const toQuery = (name = "") => {
     if (r != null) return unescape(r[2]);
     return null;
 };
+const toLimit = (props = {}, limits = []) => {
+    const inherits = {};
+    const $limitKeys = Abs.immutable(limits);
+    Object.keys(props).filter(key => !$limitKeys.contains(key))
+        .forEach(key => inherits[key] = props[key]);
+    return inherits;
+};
 const toOriginal = (reference = {}) => {
     const target = toQuery("target");
     if (target) {
@@ -130,4 +138,6 @@ export default {
     toLoading,
     // 读取 Query String
     toQuery,
+    // 限制继承
+    toLimit,
 };

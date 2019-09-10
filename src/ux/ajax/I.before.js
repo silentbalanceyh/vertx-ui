@@ -7,6 +7,7 @@ import Ut from '../unity';
 import Dev from '../develop';
 
 const ajaxParamDeep = (criteria = {}, collector = {}) => {
+    // eslint-disable-next-line
     for (const key in criteria) {
         if (criteria.hasOwnProperty(key)) {
             const value = criteria[key];

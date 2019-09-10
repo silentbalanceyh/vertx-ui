@@ -22,6 +22,7 @@ const _formatNamed = (input = "", params = {}, keep = false) => {
         !Array.prototype.isPrototypeOf(params) &&
         0 < Object.keys(params).length
     ) {
+        // eslint-disable-next-line
         for (const key in params) {
             // 由于查询引擎中包含了 "" 的键值，所以需要做这种处理
             if (key && params.hasOwnProperty(key)) {
@@ -76,6 +77,7 @@ const formatQuery = (uri = "", params = {}, encode = true) => {
     if (0 <= uri.indexOf("?")) {
         start = false;
     }
+    // eslint-disable-next-line
     for (const key in params) {
         if (params.hasOwnProperty(key)) {
             const value = params[key];

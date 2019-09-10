@@ -3,6 +3,7 @@ import Abs from '../abyss';
 
 const valueFlat = (field, item = {}) => {
     const result = {};
+    // eslint-disable-next-line
     for (const key in item) {
         if (item.hasOwnProperty(key)) {
             const value = item[key];

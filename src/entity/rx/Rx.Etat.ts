@@ -9,7 +9,7 @@ class Etat {
     private _cabFile: undefined;
     private _logger: undefined;
     private _disableLog: Boolean = false;
-    private _state: any;
+    private _state: any = {};   // 初始状态有值，防止 null 异常
     private _loading: any;
     private _dispatchTo: any = {};
     private _stateTo: any;

@@ -86,6 +86,7 @@ const applyInited = (reference) => {
 const applyRender = (renders = {}, code) => {
     if (code) {
         const dynamic = {};
+        // eslint-disable-next-line
         for (const field in renders) {
             const target = `children.${code}.${field}`;
             dynamic[target] = renders[field];

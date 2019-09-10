@@ -1,14 +1,8 @@
 import Ux from "ux";
-import {QQuery} from "entity";
 
 export default (reference, state = {}) => {
-    const config = Ux.fromHoc(reference, "grid");
-    if (config && config.query) {
-        /*
-         * $query构造
-         */
-        const query = new QQuery(config.query, reference);
-        let $query = query.to();
+    const $query = Ux.cabQuery(reference);
+    if ($query) {
         const {$router} = reference.props;
         const params = $router.params();
         $query.criteria['type,='] = params.type;

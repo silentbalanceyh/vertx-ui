@@ -1,8 +1,6 @@
-export {default as AddressSelector} from './input/AddressSelector/UI';
 export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
-export {default as FileUpload} from './input/FileUpload/UI';
 export {default as MagicView} from './input/MagicView/UI';
 export {default as FuncInputTree} from './input/FuncInputTree/UI';
 
@@ -23,7 +21,6 @@ export {default as TreeTable} from './component/TreeTable/UI';
 export {default as HelpCard} from './container/HelpCard/UI';
 export {default as PageCard} from './container/PageCard/UI';
 
-export {default as ListSelector} from './input/ListSelector/UI';
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
 export {default as DateVersion} from './input/DateVersion/UI';
 export {default as ChangeEditor} from './input/ChangeEditor/UI';
@@ -43,9 +40,17 @@ export {default as LoadingImage} from './loading/LoadingImage/UI';
 
 export {default as DialogButton} from './action/DialogButton/UI';
 export {default as DialogMenu} from './action/DialogMenu/UI';
+// 重写过的可用的自定义组件
+export {default as ListSelector} from './input/ListSelector/UI';
+export {default as AddressSelector} from './input/AddressSelector/UI';
+// 暂时稳定不重写的自定义组件
+export {default as FileUpload} from './input/FileUpload/UI';
+
 // 重新命名
 export {default as Dialog} from './container/Dialog/UI';
 export {default as Navigation} from './container/Navigation/UI';
+
+
 /*
  * 遗留系统
  * 被删除的原始代码

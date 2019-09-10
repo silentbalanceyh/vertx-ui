@@ -41,7 +41,7 @@ export default (reference, config = {}, state = {}) => Ux.parallel([
         /*
          * Qr 处理，生成 $terms 数据结构
          */
-        state.$terms = Ex.qrTerms(table.columns);
+        state.$terms = Ux.qrTerms(table.columns);
         return Ux.promise(table);
     })
     .then(table => {

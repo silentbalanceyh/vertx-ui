@@ -1,6 +1,5 @@
 import Ux from 'ux';
 import Ex from 'ex';
-import {QQuery} from 'entity';
 import FormAdd from "./form/UI.Add";
 import FormEdit from "./form/UI.Edit";
 import FormFilter from "./form/UI.Filter";
@@ -25,12 +24,9 @@ const rxSelect = (reference) => (selected = {}) => {
 const yiPage = (reference) => {
     const state = {};
     const config = Ux.fromHoc(reference, "grid");
-    if (config.query) {
-        /*
-         * 构造 $query
-         */
-        const queryRef = new QQuery(config.query, reference);
-        state.$query = queryRef.to();
+    const $query = Ux.cabQuery(reference);
+    if ($query) {
+        state.$query = $query;
     }
     state.$selected = false;
     state.$config = Ux.clone(config);

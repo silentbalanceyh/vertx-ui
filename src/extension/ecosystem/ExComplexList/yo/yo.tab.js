@@ -25,7 +25,15 @@ export default (reference, {
              */
             if (0 === index) {
                 item.disabled = true;
+            } else {
+                item.disabled = false;
             }
+        }
+        /*
+         * 强制打开最后剩余的一页
+         */
+        if (1 === items.length && 0 === index) {
+            item.disabled = false;
         }
         return item;
     }

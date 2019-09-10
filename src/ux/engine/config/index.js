@@ -8,8 +8,10 @@ import form from './O.form';
  * 3）config类方法 -> 正式配置组件，初始化完成所有的静态配置
  */
 import table from './O.table';
+import query from './O.query';
 
 export default {
     ...form,
     ...table,
+    ...query,
 }

@@ -11,6 +11,7 @@ export default (reference, item = {}) => {
      * 设置 state -> $dirty 的函数
      */
     formAttrs.doDirty = Ex.rxDirty(reference);
+    formAttrs.doSubmitting = Ex.rxSubmitting(reference);
     /*
      * 设置唯一的 $addKey
      * 这个值就是 Tab 中的 activeKey

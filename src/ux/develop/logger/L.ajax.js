@@ -37,6 +37,9 @@ const request = (request, parameters, token = '') => {
         const color = Cv.SIGN ? "#06C" : "#4682B4";
         console.groupCollapsed(message, `color:${color};font-weight:900`);
         console.log(`%c 「Zero」 Request -> `, 'color:#7A8B8B;font-weight:900', request);
+        if (parameters.criteria) {
+            console.log(`%c 「Zero」 Criteria -> `, 'color:#DB7093;font-weight:900', parameters.criteria);
+        }
         console.log(`%c 「Zero」 Parameters -> `, 'color:#669966;font-weight:900', parameters);
         console.log(`%c 「Zero」 Uri -> `, 'color:#06C;font-weight:900', uri);
         console.log(`%c 「Zero」 Token -> `, 'color:#339966;font-weight:900', token);

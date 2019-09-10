@@ -127,7 +127,18 @@ const parseOrigin = (items = [], config = {}) => {
     });
     return options;
 };
+const parseCascade = (reference, config = {}) => {
+    let $filters = {};
+    if (config['cascade']) {
+        const cascade = config['cascade'];
+        const field = cascade.target;
+        const value = Ut.formGet(reference, field);
+        $filters = item => value === item[cascade.source];
+    }
+    return $filters;
+};
 export default {
+    parseCascade,
     parseExpr,
     parseDatum: getDatum,
     parseOrigin,

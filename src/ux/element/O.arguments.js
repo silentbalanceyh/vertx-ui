@@ -1,4 +1,5 @@
 import U from "underscore";
+import {DataObject} from 'entity';
 
 const ambiguityArray = (...args) => {
     let ref = null;
@@ -18,6 +19,7 @@ const ambiguityArray = (...args) => {
  */
 const _itObject = (object = {}, fnKv) => {
     const ref = object;
+    // eslint-disable-next-line
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
             const item = object[key];
@@ -64,6 +66,21 @@ const ambiguityEvent = (event, defaultValue) => {
     }
     return value;
 };
+
+const ambiguityFind = (props = {}, key, name) => {
+    const dataObj = props[key];
+    let value;
+    if (dataObj instanceof DataObject) {
+        if (dataObj && dataObj.is()) {
+            value = dataObj._(name);
+        }
+    } else if (U.isObject(dataObj)) {
+        if (dataObj && !U.isArray(dataObj)) {
+            value = dataObj[name];
+        }
+    }
+    return value;
+};
 export default {
     /*
      * 二义性处理，最终转换成数组
@@ -85,4 +102,8 @@ export default {
      * 3.如果值不存在，则考虑使用 defaultValue
      */
     ambiguityEvent,
+    /*
+     * 二义性路径检索
+     */
+    ambiguityFind,
 }

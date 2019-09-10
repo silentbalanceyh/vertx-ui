@@ -21,6 +21,7 @@ const valueAppend = (item = {}, field = "", value) => {
  * @param wild
  */
 const valueValid = (data = {}, wild = false) => {
+    // eslint-disable-next-line
     for (const key in data) {
         if (data.hasOwnProperty(key)) {
             const value = data[key];

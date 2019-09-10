@@ -4,19 +4,20 @@ import Dev from '../develop'
 import Cv from "../constant";
 import Amt from "./O.ambient";
 
-const formSubmit = (reference) => {
+const formSubmit = (reference, redux = false) => {
     // 提取 Form
     const {form} = reference.props;
     if (form) {
-        return new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => form.validateFieldsAndScroll((error, values) => {
             // 执行 values
-            form.validateFieldsAndScroll((error, values) => {
-                if (error) {
-                    reject(error);
-                }
-                resolve(values);
-            })
-        }).then((params) => {
+            if (error) {
+                const data = {};
+                data.error = error;
+                data.client = true;
+                reject({data});
+            }
+            resolve(values);
+        })).then((params) => {
             // 拷贝参数
             const data = Abs.clone(params);
             /*
@@ -44,6 +45,7 @@ const valueRequest = (params = {}) => {
      */
     const app = Amt.isInit();
     if (app && app.sigma) {
+        // 双字段处理
         data.sigma = app.sigma;
     }
     return data;

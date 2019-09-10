@@ -28,6 +28,17 @@ class QQuery {
      * 2）只执行基础格式解析，不处理 state / props 中的部分
      */
     constructor(query = {}, reference) {
+        /*
+         * 传入的是 query 参数
+         * 1）主要是处理四个核心节点
+         * - pager
+         * - sorter
+         * - projection
+         * - criteria
+         * 2）是否包含了 reference
+         * 如果包含了 reference，则 criteria 是需要解析的
+         * 可执行 parser 中的所有解析操作！
+         */
         this.query = {};
         this.query.pager = Qt.irPager(query);
         this.query.sorter = Qt.irSorter(query);

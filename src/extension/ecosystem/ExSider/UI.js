@@ -22,6 +22,20 @@ import Op from './Op';
  * }
  */
 class Component extends React.PureComponent {
+    state = {};
+
+    componentDidMount() {
+        window.addEventListener("resize", Ux.rxResize(this));
+        /*
+         * 第一次初始化
+         */
+        Ux.rxResize(this)();
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", Ux.rxResize(this));
+    }
+
     render() {
         Ux.dgDebug(this.props, "[ ExSider ]", "#c60");
         const {$app, data = [], config = {}, css = {}} = this.props;
@@ -60,6 +74,10 @@ class Component extends React.PureComponent {
         $attrsMenu.theme = $theme;
         $attrsMenu.onClick = Op.onClick(this, dataUri);
         $attrsMenu.style = {padding: '16px 0px', width: '100%'};
+        const {$heightStyle = {}} = this.state;
+        if (!Ux.isEmpty($heightStyle)) {
+            Object.assign($attrsMenu, $heightStyle);
+        }
         /*
          * 特殊注入
          */

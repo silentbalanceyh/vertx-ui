@@ -1,6 +1,6 @@
 // 导入外层
 import E from "../../error";
-import Value from "../../element";
+import Ele from "../../element";
 
 const findValue = (target = {}, attrPath = []) => {
     E.fxTerminal(2 !== attrPath.length, 10035, target);
@@ -8,12 +8,12 @@ const findValue = (target = {}, attrPath = []) => {
         const targetKey = attrPath[0];
         const name = attrPath[1];
         if (targetKey && name) {
-            return Value.annexObject(target, `${targetKey}`, attrPath[1]);
+            return Ele.ambiguityFind(target, `$${targetKey}`, attrPath[1]);
         } else {
-            console.error(`[ Ux ] 解析的配置不对，key = ${targetKey}, name = ${name}`);
+            console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
         }
     } else {
-        console.error(`[ Ux ] 解析表达式有问题，请检查：${target}`);
+        console.error(`[ Ux ] 解析表达式有问题，请检查：$${target}`);
     }
 };
 export default {

@@ -25,7 +25,16 @@ const jsxError = (message) => (
 const xtRender = (reference, render) => {
     const {error} = reference.state ? reference.state : {};
     if (error) {
-        return jsxError(error);
+        console.error(error);
+        if ("string" === typeof error) {
+            return jsxError(error);
+        } else {
+            let message = ``;
+            if (error.code) {
+                message = `${error.code} ${error.error}`
+            }
+            return jsxError(message);
+        }
     } else {
         if (reference.state) {
             return render();

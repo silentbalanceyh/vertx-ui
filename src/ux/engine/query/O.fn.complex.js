@@ -1,14 +1,7 @@
+import normalizer from './I.fn.normalized';
 import {QQuery} from 'entity';
-import qrQuery from './qr.condition.normalized';
 
-export default (
-    /*
-     * 列表中默认的查询条件
-     * List : state.query
-     */
-    query = {},
-    reference,
-) => {
+export default (query = {}, reference) => {
     const {
         $condition = {},
         $terms = {},
@@ -21,11 +14,11 @@ export default (
     /*
      * 更新合并过后的条件
      */
-    const condition = qrQuery($condition, {
+    const condition = normalizer($condition, {
         filterType: $terms
     });
     /*
      * 初始化
      */
     return queryRef.init($filters).and(condition).to();
-};
+}

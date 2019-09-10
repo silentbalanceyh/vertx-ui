@@ -1,7 +1,6 @@
 import Cm from "./gen.common";
 import G from "../global";
 import Ux from "ux";
-import Qr from '../../query';
 
 const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
     (params) => {
@@ -27,7 +26,7 @@ const rxCondition = (reference, isClear = false) => {
                 /*
                  * Qr专用清除
                  */
-                Qr.qrClear(reference);
+                Ux.qrClear(reference);
             }
         };
     } else {

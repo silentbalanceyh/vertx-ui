@@ -70,6 +70,7 @@ const elementFind = (data = [], filters) => {
     E.fxTerminal(!U.isArray(data), 10071, data, "Array");
     let reference = data;
     if (filters) {
+        // eslint-disable-next-line
         for (const field in filters) {
             if (filters.hasOwnProperty(field)) {
                 // 这里用双等号匹配，用于检查字符串和数值的比较

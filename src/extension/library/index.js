@@ -4,7 +4,6 @@ import Op from './op';
 import Fun from './functions';
 import Channel from './channel';
 import I from './ajax';
-import Qr from './query';
 import Xui from './xui';
 /*
  * Hoc 高阶组件
@@ -47,10 +46,6 @@ const exported = {
      */
     ...Fun,
     I,
-    /*
-     * Qr 中不开放所有内容
-     */
-    ...Qr,
     ...Xui,
     // 高阶组件专用
     ox,

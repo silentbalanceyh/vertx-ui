@@ -67,6 +67,7 @@ const initGrahpic = (id, config = {}, data = []) => {
         options,
         label,
     };
+    // eslint-disable-next-line
     for (const key in exported) {
         if (!exported[key]) {
             delete exported[key];

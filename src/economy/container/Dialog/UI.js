@@ -60,6 +60,9 @@ class Component extends React.PureComponent {
             // 关闭窗口时销毁子组件
             config.destroyOnClose = true;
             config.confirmLoading = $loading;
+            config.cancelButtonProps = {
+                loading: $loading
+            };
             return (
                 <Modal {...config} visible={$visible} className={className}>
                     {children}

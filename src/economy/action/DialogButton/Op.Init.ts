@@ -84,7 +84,7 @@ const initState = (reference) => {
         }
     } else {
         // Error
-        return {error: Ux.E.fxMessageError(10092, $mode)};
+        return {error: Ux.E.fxError(10092, $mode)};
     }
 };
 export default {

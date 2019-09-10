@@ -27,11 +27,15 @@ const toGrid = (config = {}) => {
     return style;
 };
 const toHeight = (adjust = 0) => {
-    const style = {};
     const height = document.body.clientHeight;
-    style.maxHeight = height - adjust;
-    style.overflow = "auto";
-    return style;
+    const width = document.body.clientWidth;
+    let maxHeight = height;
+    if (1400 < width && width < 1900) {
+        maxHeight = height - 48 - adjust;
+    } else if (1900 < width) {
+        maxHeight = height - 56 - adjust;
+    }
+    return maxHeight;
 };
 
 const toCss = (name) => `${Cv['CSS_PREFIX']}-${name}`;

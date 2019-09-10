@@ -79,7 +79,6 @@ const seek = (reference, fnName, config = {}) => (args) => {
     }
 };
 export default {
-
     switcher,
     /* 内部调用 */
     boolean,

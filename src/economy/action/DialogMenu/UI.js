@@ -7,7 +7,7 @@ import {Button, Dropdown, Icon, Menu} from 'antd';
 class Component extends React.PureComponent {
     render() {
         const reference = this;
-        return Ux.fxRender(this, () => {
+        return Ux.xtRender(this, () => {
             const {
                 button = {}, items = [],
                 renders = {}, windows = {},

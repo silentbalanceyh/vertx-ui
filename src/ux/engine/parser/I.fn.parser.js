@@ -18,7 +18,7 @@ export default {
             parseDatum(value, {props, state})
     },
     PROP: {
-        parser: (kv1 = "") => [kv1.split(',')],
+        parser: (kv1 = "") => [kv1.split('.')],
         searcher: (value, props) =>
             parseProp(value, {props})
     },

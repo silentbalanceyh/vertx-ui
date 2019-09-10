@@ -13,6 +13,13 @@ const onEnd = (reference, redux) => () => {
     if (redux) {
         Ut.writeSubmit(reference, false);
     }
+    /*
+     * 处理 doSubmitting 函数（Extension中专用）
+     */
+    const {doSubmitting} = reference.props;
+    if (U.isFunction(doSubmitting)) {
+        doSubmitting(false);
+    }
 };
 /*
  * 专用窗口响应方法，用于返回 failure 窗口
@@ -21,7 +28,10 @@ const onEnd = (reference, redux) => () => {
  */
 const ajaxError = (reference, error = {}, redux = false) => {
     const {data = {}} = error;
-    if (data.info) {
+    if (data.code < 0 && data.info) {
+        /*
+         * 这种情况下，错误信息来自于服务端
+         */
         const dialog = Eng.fromHoc(reference, "dialog");
         const config = {
             title: dialog.error, content: data.info,
@@ -29,9 +39,20 @@ const ajaxError = (reference, error = {}, redux = false) => {
         };
         config.onOk = onEnd(reference, redux);
         Modal.error(config);
-        return Abs.promise(error);
+        // return Promise.reject(error);
     } else {
-        console.error("[ Ux ] 核心错误！", error);
+        /*
+         * 是否包含了 client
+         */
+        if (data.client) {
+            /*
+             * 根据 redux 执行 onEnd
+             */
+            onEnd(reference, redux)();
+            // return Promise.reject(error);
+        } else {
+            console.error("[ Ux ] 核心错误！", error);
+        }
     }
 };
 
@@ -73,8 +94,8 @@ const _showDialog = (reference, dialogConfig = {}, data) => {
         fnDialog(config);
     })
 };
-const ajax2Dialog = (reference, key) => (data) =>
-    ajaxDialog(reference, {key, data});
+const ajax2Dialog = (reference, key, redux = false) => (data) =>
+    ajaxDialog(reference, {key, data, redux});
 const ajaxDialog = (reference, {
     data, key, redux = false
 }) => {
@@ -99,6 +120,32 @@ const ajaxDialog = (reference, {
     }
     dialogConfig.redux = redux;     // 连接 redux 处理响应
     return _showDialog(reference, dialogConfig, data);
+};
+const ajax2Message = (reference, key, redux = false) => (data) =>
+    ajaxMessage(reference, {key, data, redux});
+const ajaxMessage = (reference, {
+    data, key, redux = false
+}) => {
+    const {config = {}} = reference.props;
+    const {dialog = {}} = config;
+    /*
+     * modal:{
+     *      confirm: （ 第一优先级 ）
+     *      error:   （ 第二优先级 ）
+     *      success: （ 第三优先级 ）
+     * }
+     */
+    const {modal} = dialog;
+    const dialogConfig = {};
+    _setType(dialogConfig, modal, key);
+    /*
+     * 使用数据执行 format
+     */
+    if (dialogConfig.pattern) {
+        const message = Ut.formatExpr(dialogConfig.pattern, data);
+        messageSuccess(message);
+    }
+    return Abs.promise(data);
 };
 const ajax2True = (consumer, content) => (result) => {
     if (result) {
@@ -151,7 +198,9 @@ const messageFailure = (content = "") => {
 export default {
     ajaxError,
     ajaxDialog,
+    ajaxMessage,
     ajax2Dialog,    // 2阶
+    ajax2Message,   // 2阶
     ajax2True,      // 2阶
     messageSuccess,
     messageFailure

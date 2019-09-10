@@ -9,7 +9,7 @@
                 "name,角色名称,14"
             ],
             [
-                "code,角色编码,14"
+                "code,角色编码,14,,,readOnly=true"
             ],
             [
                 "comment,角色备注,14"

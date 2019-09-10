@@ -89,8 +89,31 @@ const passion = async (generator = [], input) => {
     }
 };
 
+/*
+ * 二义性 promise 调试函数
+ */
+function debug() {
+    if (1 === arguments.length) {
+        const input = arguments[0];
+        if (input) {
+            if (U.isObject(input)) {
+                console.debug(input);
+                return promise(input);
+            } else if ("string" === typeof input) {
+                return response => {
+                    console.debug(response[input]);
+                    return promise(response);
+                }
+            }
+        }
+    } else {
+        throw new Error("[ Ux ] 调试方法不对")
+    }
+}
+
 export default {
     promise,
     parallel,
     passion,
+    debug
 }

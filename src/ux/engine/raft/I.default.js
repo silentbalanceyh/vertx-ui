@@ -32,7 +32,7 @@ const applyRow = (row = {}, addition = {}, config) => {
         }
         // 标题单行修正间距专用
         if (item.title) {
-            style.height = `42px`;
+            style.height = `36px`;
         }
     }
     // style.paddingBottom = 5;
@@ -86,9 +86,12 @@ const applyInited = (reference) => {
 const applyRender = (renders = {}, code) => {
     if (code) {
         const dynamic = {};
+        // eslint-disable-next-line
         for (const field in renders) {
-            const target = `children.${code}.${field}`;
-            dynamic[target] = renders[field];
+            if (renders.hasOwnProperty(field)) {
+                const target = `children.${code}.${field}`;
+                dynamic[target] = renders[field];
+            }
         }
         return dynamic;
     } else {

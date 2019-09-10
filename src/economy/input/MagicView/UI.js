@@ -3,7 +3,6 @@ import './Cab.less';
 import {Input, Table} from 'antd';
 import Ux from 'ux';
 import moment from 'moment';
-import Immutable from 'immutable';
 
 const rxValue = (reference, value, config) => {
     if (config.items) {
@@ -29,7 +28,7 @@ class Component extends React.PureComponent {
     render() {
         const {value, config, format, ...jsx} = this.props;
         // 是否一个Radio
-        const $config = Immutable.fromJS(config).toJS();
+        const $config = Ux.clone(config);
         if (format) {
             $config.format = format;
         }

@@ -8,6 +8,7 @@ const onDatum = (props = {}, keys = []) => {
     const inherits = {};
     if (0 === keys.length) {
         // 读取所有
+        // eslint-disable-next-line
         for (const key in props) {
             if (props.hasOwnProperty(key)) {
                 if (key.startsWith("$t_") || key.startsWith("$a_")) {
