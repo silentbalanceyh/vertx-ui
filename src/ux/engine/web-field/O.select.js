@@ -1,21 +1,32 @@
-import Aid from "./I.fix";
 import {Select} from "antd";
 import React from "react";
 import R from '../expression';
-
-const aiSelect = (reference, jsx = {}, onChange) => {
-    const {config = {}} = jsx;
+import normalizeAttribute from './I.fn.uniform';
+/*
+ *
     // onChange处理
     // 处理onChange，解决rest为 {}时引起的参数Bug
-    const rest = Aid.fixAttrs(jsx);
+    // const rest = Aid.fixAttrs(jsx);
+ */
+const aiSelect = (reference, jsx = {}, onChange) => {
     /*
      * filters 计算
      * 1）$filters 就是一个 Object
      * 2）$filters 是一个函数
      */
+    const {config = {}} = jsx;
     let cascade = R.Ant.toCascade(reference, config);
-
     const options = R.Ant.toOptions(reference, config, cascade);
+    /*
+     * 1）onChange
+     * 2）readOnly
+     * 3）disabled
+     */
+    const rest = normalizeAttribute(reference, {
+        ...jsx,
+        eventDisabled: true,        // 只读时需要禁用
+        options,
+    }, onChange);
     /*
      * Linker处理，修改 onChange
      */

@@ -30,7 +30,10 @@ const toHeight = (adjust = 0) => {
     const height = document.body.clientHeight;
     const width = document.body.clientWidth;
     let maxHeight = height;
-    if (1400 < width && width < 1900) {
+    if (1024 < width && width <= 1400) {
+        // 直接计算（郑州项目）
+        maxHeight = height - 48 - adjust;
+    } else if (1400 < width && width < 1900) {
         maxHeight = height - 48 - adjust;
     } else if (1900 < width) {
         maxHeight = height - 56 - adjust;
@@ -52,10 +55,18 @@ const toMessage = (content, error = false) => {
         return config;
     }
 };
+const toKey = (key, assist = true) => {
+    if (assist) {
+        return `$a_${key.replace(/\./g, '_')}`;
+    } else {
+        return `$t_${key.replace(/\./g, '_')}`;
+    }
+};
 export default {
     toHeight,
     toGrid,
     toMessage,
     /* 根据 CSS_PREFIX 前缀计算的 Class */
     toCss,
+    toKey,  // 生成 assist / tabular 相关 key
 }

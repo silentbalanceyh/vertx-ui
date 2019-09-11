@@ -19,26 +19,30 @@ const initState = (reference) => {
 const initialize = (reference) => {
     const state = initState(reference);
     if (!reference.state && 0 === Object.keys(state).length) {
-        const error = Ux.E.fxInfo(true, 10090, "$dialog");
-        reference.setState({error});
+        const content = Ux.E.fxError(10090, "$dialog");
+        console.error(content);
+        reference.setState({error: content.error});
     } else {
+        state.$ready = true;
         reference.setState(state);
     }
 };
 
 class Component extends React.PureComponent {
+    state = {};
+
     componentDidMount() {
         // 解决单次显示窗口问题
         initialize(this);
     }
 
-    componentDidUpdate() {
+    componentDidUpdate(prevProps, prevState, snapshot) {
         // 解决单次显示窗口问题
         initialize(this);
     }
 
     render() {
-        return Ux.xtRender(this, () => {
+        return Ux.xtReady(this, () => {
             const config = this.state;
             const {
                 $visible = false,

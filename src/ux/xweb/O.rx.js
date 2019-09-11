@@ -3,6 +3,7 @@ import U from 'underscore';
 import E from '../error';
 import Cv from '../constant';
 import React from "react";
+import Dev from '../develop';
 
 const xtRxInit = (reference = {}, fnName, params) => {
     E.fxTerminal("string" !== typeof fnName, 10100, fnName);
@@ -43,7 +44,20 @@ const xtRender = (reference, render) => {
         }
     }
 };
+const xtReady = (reference, render, LOG = {}) => {
+    const {$ready = false} = reference.state ? reference.state : {};
+    if ($ready) {
+        const {color = "#4682B4", name = ""} = LOG;
+        if (name) {
+            Dev.dgDebug(reference.state, `[ Xt ] 自定义组件 ${name} 初始化完成时的状态`, color);
+        }
+        return xtRender(reference, render);
+    } else {
+        return false;
+    }
+};
 export default {
     xtRxInit,
     xtRender,
+    xtReady,
 };

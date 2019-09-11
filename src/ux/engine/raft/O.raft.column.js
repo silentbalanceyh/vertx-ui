@@ -1,6 +1,6 @@
 import Abs from '../../abyss';
 import Grid from '../layout';
-import Adjust from './O.raft.adjust';
+import Adjust from './I.raft.adjust';
 
 const raftColumn = (raft = {}, config = {}) => {
     const {cell = {}, index = 0, calculated = {}, row = {}} = config;

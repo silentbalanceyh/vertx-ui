@@ -20,5 +20,9 @@ export default {
         REACTIVE: "REACTIVE",
         REACT: "REACT",
         REDUX: "REDUX"
+    },
+    FORM_MODE: {
+        ADD: "ADD",
+        EDIT: "EDIT"
     }
 };

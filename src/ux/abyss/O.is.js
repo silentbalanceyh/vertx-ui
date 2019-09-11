@@ -29,8 +29,15 @@ const isObject = (input) => {
         return !U.isArray(input) && U.isObject(input);
     } else return false;
 };
+const isIn = (input, array = []) => {
+    if (U.isArray(array)) {
+        const $array = Immutable.fromJS(array);
+        return $array.contains(input);
+    } else return false;
+};
 export default {
     isObject,
     isEmpty,
-    isDiff
+    isDiff,
+    isIn,
 }

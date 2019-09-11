@@ -46,8 +46,8 @@ const parseValue = (valueOrExpr, {state, props}) => {
                 /*
                  * 读取 parser
                  */
-                const parser = Expr[source].parser;
                 let searcherInput;
+                const parser = Expr[source] ? Expr[source].parser : undefined;
                 if (U.isFunction(parser)) {
                     searcherInput = parser(expression);
                 } else {

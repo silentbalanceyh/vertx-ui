@@ -2,9 +2,8 @@ import React from 'react'
 import Ux from "ux";
 import {ExTab} from 'ei';
 import Ex from 'ex';
-
 import PageModal from './UI.Modeling';
-import PageEntity from './UI.Entity';
+import PageEntity from './entity/UI';
 import PageRelation from './UI.Relation';
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
@@ -22,8 +21,8 @@ class Component extends React.PureComponent {
         const inherit = Ex.yoAmbient(this);
         return Ex.ylCard(this, () => (
             <ExTab {...inherit} config={tabs}>
-                <PageModal {...inherit}/>
                 <PageEntity {...inherit}/>
+                <PageModal {...inherit}/>
                 <PageRelation {...inherit}/>
             </ExTab>
         ))

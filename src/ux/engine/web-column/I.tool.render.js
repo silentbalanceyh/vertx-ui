@@ -9,6 +9,7 @@ import React from "react";
 import On from './I.render.on';
 import Out from './I.render.out';
 import {Icon} from "antd";
+import {ColumnUser} from 'web';
 
 const jsxChild = (column = {}, record = {}, fnRender) => {
     // config中是否配置了childOnly
@@ -38,10 +39,12 @@ const jsxConnect = (fnStatic, fnDynamic, fnRender) => {
         const attrs = fnStatic(reference, {column, jsx}, channel);
 
         return (text, record = {}, index) => jsxChild(column, record, () => {
+            // 拷贝属性，防止 attrs 覆盖
+            const $attrs = Abs.clone(attrs);
             // 执行动态处理函数
-            fnDynamic(attrs, reference, {jsx, column, text, record, index}, channel);
+            fnDynamic($attrs, reference, {jsx, column, text, record, index}, channel);
             // 执行渲染专用函数
-            const {children, ...rest} = attrs;
+            const {children, ...rest} = $attrs;
             return fnRender(rest, children);
         });
     };
@@ -75,6 +78,9 @@ export default {
     initConfig: () => (params = {}) => params.column["$config"] ? params.column["$config"] : {},
     // ------- jsx渲染流程变化
     jsxConnect,
-    jsxSpan: (attrs = {}, children) => (<span {...attrs}>{children}</span>),
+    jsxSpan: (attrs = {}, children) =>
+        // 解决 React 无法渲染 Object的 BUG
+        (<span {...attrs}>{Abs.isObject(children) ? false : children}</span>),
     jsxIcon,
+    jsxUser: (attrs = {}) => (<ColumnUser {...attrs}/>)
 };

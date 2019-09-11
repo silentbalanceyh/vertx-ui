@@ -3,7 +3,6 @@ import Ux from "ux";
 import U from 'underscore';
 import {Input} from 'antd';
 import Rdr from "./UI.Render";
-import Op from "./Op";
 
 class Component extends React.PureComponent {
     constructor(props) {
@@ -13,15 +12,6 @@ class Component extends React.PureComponent {
             state.checked = [];
         }
         this.state = state;
-    }
-
-    // Required：更新数据，主要用于form中的Reset动作
-    componentDidUpdate(prevProps) {
-        Ux.xtReset(this, Op.getDefault());
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.xtUnsafe(this, nextProps);
     }
 
     render() {

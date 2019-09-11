@@ -52,10 +52,16 @@ const ambiguityKv = (input, fnKv) => {
  * 二义性函数
  * 从 event 中提取数据
  */
-const ambiguityEvent = (event, defaultValue) => {
+const ambiguityEvent = (event, config = {}, defaultValue) => {
     let value;
     if (event && U.isFunction(event.preventDefault)) {
-        event.preventDefault();
+        const {prevent = true} = config;
+        if (prevent) {
+            /*
+             * 特殊情况才关闭默认的 preventDefault
+             */
+            event.preventDefault();
+        }
         value = event.target.value;
     } else {
         value = event;

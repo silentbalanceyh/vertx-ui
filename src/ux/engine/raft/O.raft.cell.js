@@ -1,3 +1,7 @@
+import Abs from "../../abyss";
+import Col from './O.raft.column';
+import Rdr from './O.raft.render';
+
 const raftItem = (item = {}, values = {}, config = {}) => {
     const {
         rowStyle = {},
@@ -33,6 +37,23 @@ const raftItem = (item = {}, values = {}, config = {}) => {
     // 初始值设置
     // raftValue(item, values);
 };
+const raftCell = (cell = {}, config = {}, raft) => {
+    const {rowStyle = {}, params = {}} = config;
+    // 高度修正
+    raftItem(cell, {}, rowStyle);
+    /*
+     * 解决 rowStyle, 处理Cell和 <Col/>
+     */
+    const column = Col.raftColumn(raft, Abs.clone(params));
+    /*
+     * 处理 title 和 $button
+     */
+    Col.raftSpecial(column);
+
+    column.render = Rdr.raftRender(raft, Abs.clone(params));
+    return column;
+};
 export default {
+    raftCell,
     raftItem,
 }

@@ -5,6 +5,7 @@ import Hidden from './O.hidden';
 import Magic from './O.magic';
 import Select from './O.select';
 import TextArea from './O.textarea';
+import Transfer from './O.transfer';
 
 import DatePicker from './O.picker.date';
 import TimePicker from './O.picker.time';
@@ -29,8 +30,10 @@ import CheckedInput from './O.checked.input';
 import MatrixEditor from './O.editor.matrix';
 import RichEditor from './O.editor.rich';
 import TeamSelector from './O.selector.team'
+import DialogEditor from './O.editor.dialog';
+import Dev from '../../develop';
 
-export default {
+const exported = {
     ...Input,
     ...Action,
     ...Hidden,
@@ -43,6 +46,8 @@ export default {
     ...TreeSelect,
     ...InputNumber,
     ...Radio,
+    ...Transfer,
+
     ...ListSelector,
     ...MultiCheckBox,
     ...AddressSelector,
@@ -59,4 +64,7 @@ export default {
     ...RichEditor,
     ...TeamSelector,
     ...Button,
-}
+    ...DialogEditor,
+};
+Dev.dgDebug(exported, "所有合法的表单字段", "#DAA520");
+export default exported;

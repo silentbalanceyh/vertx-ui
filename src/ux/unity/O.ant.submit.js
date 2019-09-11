@@ -2,6 +2,7 @@ import E from '../error';
 import Abs from '../abyss';
 import Dev from '../develop'
 import Cv from "../constant";
+import Ele from '../element';
 import Amt from "./O.ambient";
 
 const formSubmit = (reference, redux = false) => {
@@ -48,7 +49,7 @@ const valueRequest = (params = {}) => {
         // 双字段处理
         data.sigma = app.sigma;
     }
-    return data;
+    return Ele.valueValid(data);
 };
 export default {
     formSubmit,

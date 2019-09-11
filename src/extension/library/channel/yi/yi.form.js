@@ -9,11 +9,11 @@ export default (reference) => {
     const state = {};
     let {
         config = {},
-        $op = {}
+        $op = {},
     } = reference.props;
     // 内置拷贝相关信息保证不冲突
     config = Ux.clone(config);
-    Ux.capForm(reference, config).then(response => {
+    Ux.capForm(reference, config,).then(response => {
         const {form, addOn = {}} = response;
         state.raft = Ux.configForm(form, addOn);
         state.$ready = true;
