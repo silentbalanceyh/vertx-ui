@@ -1,16 +1,27 @@
-import Aid from "./I.fix";
 import {Radio} from "antd";
 import React from "react";
 import R from '../expression';
-
-const aiRadio = (reference, jsx = {}, onChange) => {
-    const {config = {}} = jsx;
-    // 处理onChange，解决rest为 {}时引起的参数Bug
+import normalizeAttribute from './I.fn.uniform';
+/*
+ // 处理onChange，解决rest为 {}时引起的参数Bug
     const rest = Aid.fixAttrs(jsx);
     // onChange处理
     R.Ant.onChange(rest, onChange);
     // ReadOnly处理，第二参用于处理disabled的情况，非input使用
     R.Ant.onReadOnly(rest, true, reference);
+ */
+const aiRadio = (reference, jsx = {}, onChange) => {
+    /*
+     * 1）onChange
+     * 2）readOnly
+     * 3）disabled
+     */
+    const rest = normalizeAttribute(reference, {
+        ...jsx,
+        eventDisabled: true,         // 只读时候需要禁用
+    }, onChange);
+    // 处理 Radio 相关
+    const {config = {}} = jsx;
     const options = R.Ant.toOptions(reference, config);
     // Radio的另外一种模式开启
     const {type = "RADIO"} = config;

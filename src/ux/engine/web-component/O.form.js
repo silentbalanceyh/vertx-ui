@@ -5,7 +5,7 @@ import React from 'react';
 import U from 'underscore';
 import {Col, Form, Row} from 'antd';
 
-const _aiHidden = (reference, values = {}, raft = {}) => {
+const aiHidden = (reference, values = {}, raft = {}) => {
     if (raft.hidden) {
         return raft.hidden
             .filter(item => U.isFunction(item.render))
@@ -35,7 +35,7 @@ const _aiInput = (reference, values) => (cell = {}) => {
         )
     }
 };
-const _aiField = (reference, values = {}, raft = {}) =>
+const aiField = (reference, values = {}, raft = {}) =>
     raft.rows.map((row) => {
         const {cells = [], ...rest} = row;
         return (
@@ -82,12 +82,13 @@ const aiForm = (reference, values, config = {}) => {
     return (
         <Form {...attrs}>
             {/** 隐藏组件 hidden **/}
-            {_aiHidden(reference, initials, raft)}
+            {aiHidden(reference, initials, raft)}
             {/** 字段渲染 **/}
-            {_aiField(reference, initials, raft)}
+            {aiField(reference, initials, raft)}
         </Form>
     );
 };
 export default {
-    aiForm
+    aiForm,
+    aiField,
 }

@@ -5,7 +5,7 @@ import Abs from '../abyss';
 import E from '../error';
 import U from 'underscore';
 
-const onEnd = (reference, redux) => () => {
+const ajaxEnd = (reference, redux) => () => {
     reference.setState({$loading: false});
     /*
      * 专用处理
@@ -37,7 +37,7 @@ const ajaxError = (reference, error = {}, redux = false) => {
             title: dialog.error, content: data.info,
             maskClosable: false,
         };
-        config.onOk = onEnd(reference, redux);
+        config.onOk = ajaxEnd(reference, redux);
         Modal.error(config);
         // return Promise.reject(error);
     } else {
@@ -48,7 +48,7 @@ const ajaxError = (reference, error = {}, redux = false) => {
             /*
              * 根据 redux 执行 onEnd
              */
-            onEnd(reference, redux)();
+            ajaxEnd(reference, redux)();
             // return Promise.reject(error);
         } else {
             console.error("[ Ux ] 核心错误！", error);
@@ -82,13 +82,13 @@ const _showDialog = (reference, dialogConfig = {}, data) => {
         "confirm": Modal.confirm,
     };
     const fnDialog = FUN[mode];
-    config.onCancel = onEnd(reference, dialogConfig.redux);
+    config.onCancel = ajaxEnd(reference, dialogConfig.redux);
     return new Promise((resolve) => {
         config.onOk = () => {
             /*
              * 执行一次
              */
-            onEnd(reference, dialogConfig.redux)();
+            ajaxEnd(reference, dialogConfig.redux)();
             resolve(data)
         };
         fnDialog(config);
@@ -143,7 +143,11 @@ const ajaxMessage = (reference, {
      */
     if (dialogConfig.pattern) {
         const message = Ut.formatExpr(dialogConfig.pattern, data);
-        messageSuccess(message);
+        if ("success" === dialogConfig.mode) {
+            messageSuccess(message);
+        } else {
+            messageFailure(message);
+        }
     }
     return Abs.promise(data);
 };

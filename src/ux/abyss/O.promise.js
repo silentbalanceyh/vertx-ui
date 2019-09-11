@@ -48,12 +48,22 @@ function parallel(promises = [], ...keys) {
         /*
          * 返回 处理结果
          */
+        let args = null;
+        if (1 === keys.length && U.isArray(keys[0])) {
+            args = keys[0];
+        } else {
+            if (U.isArray(keys)) {
+                args = keys;
+            } else {
+                args = [keys];
+            }
+        }
         return Q.all(promises)
             .then(response => {
                 const result = {};
                 response.forEach((item, index) => {
-                    const key = keys[index];
-                    if (keys) {
+                    const key = args[index];
+                    if (args) {
                         result[key] = V.clone(item);
                     }
                 });

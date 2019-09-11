@@ -17,7 +17,6 @@ const $opDelete = (reference) => params =>
     });
 const $opFilter = (reference) =>
     params => Ex.form(reference).filter(params);
-
 export default {
     actions: {
         $opAdd,

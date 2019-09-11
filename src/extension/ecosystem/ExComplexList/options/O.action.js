@@ -15,7 +15,7 @@ export default {
         key: 'opAdd'
     },
     "op.open.filter": {
-        icon: 'remove',
+        icon: 'delete',
         type: 'default',
         key: 'opFilter',
         plugin: {
@@ -91,7 +91,7 @@ export default {
         }
     },
     'op.submit.delete': {
-        icon: 'remove',
+        icon: 'delete',
         key: 'opFormDelete',
         type: 'danger',
         plugin: {

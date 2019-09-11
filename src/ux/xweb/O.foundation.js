@@ -1,5 +1,4 @@
 import U from 'underscore';
-import Event from './O.event';
 import Abs from '../abyss';
 import Eng from '../engine';
 import E from "../error";
@@ -27,21 +26,6 @@ const xtGet = (reference, field, supplier) => {
         }
     }
     return Abs.clone(state);
-};
-
-const xtReset = (reference, defaultValue = {}) => {
-    const value = reference.props.value;
-    if (!value) {
-        reference.setState(defaultValue);
-        Event.xtChange(reference, defaultValue, true);
-    }
-};
-const xtResetData = (reference, data = {}) => {
-    const value = reference.props.value;
-    if (!value) {
-        reference.setState({data});
-        Event.xtChange(reference, {}, true);
-    }
 };
 const xtPrevious = (reference) => {
     const {value} = reference.props;
@@ -110,8 +94,8 @@ export default {
     // 同一个界面几次挂载
     xtUnsafe,
     xtGet,
-    xtReset,
-    xtResetData,
+    // xtReset,
+    // xtResetData,
     xtPrevious,
     xtUpdateForm,
 

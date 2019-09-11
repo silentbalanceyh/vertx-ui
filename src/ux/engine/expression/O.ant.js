@@ -2,6 +2,7 @@ import Datum from './I.datum';
 import Pure from './I.pure';
 import Complex from './I.complex';
 import Data from './I.data';
+import onChange from './I.fn.change';
 
 class RxAnt {
     // 有返回值的走to，无返回值的走on
@@ -9,7 +10,7 @@ class RxAnt {
     static onPrefix = Pure.prefix;
     static onPlaceHolder = Pure.placeholder;
     static onAddonAfter = Pure.addonAfter;
-    static onChange = Complex.onChange;
+    static onChange = onChange;
     static onSelect = Pure.onSelect;
     static onMultiple = Pure.multiple;
     static onReadOnly = Pure.readOnly;

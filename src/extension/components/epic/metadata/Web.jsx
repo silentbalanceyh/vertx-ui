@@ -1,7 +1,7 @@
 import {Col, Row} from "antd";
 import Ux from "ux";
 import {ExComplexList, ExTabular} from "ei";
-import {HelpCard, LoadingAlert} from "web";
+import {LoadingAlert, PageCard} from "web";
 import React from "react";
 
 export default (reference, {
@@ -14,10 +14,13 @@ export default (reference, {
         right: 20,
     }
 }) => (
-    <HelpCard reference={reference}>
+    <PageCard reference={reference}>
         {/* 左边选择菜单专用 */}
         <Row>
-            <Col span={span.left} style={Ux.toHeight(148)}>
+            <Col span={span.left} style={{
+                maxHeight: Ux.toHeight(102),
+                overflow: "auto"
+            }}>
                 <ExTabular {...siderAttrs}/>
             </Col>
             <Col span={span.right}>
@@ -28,5 +31,5 @@ export default (reference, {
                 )}
             </Col>
         </Row>
-    </HelpCard>
+    </PageCard>
 )

@@ -4,6 +4,7 @@ import Op from './Op';
 import {Tabs} from 'antd';
 import Ux from 'ux';
 import './Cab.less';
+import U from 'underscore';
 
 const LOG = {
     name: "ExTab",
@@ -43,7 +44,7 @@ class Component extends React.PureComponent {
             /*
              * items 抽取
              */
-            const {items = [], ...rest} = $tabs;
+            const {items = [], fnExtra, ...rest} = $tabs;
             /*
              * className
              */
@@ -51,6 +52,9 @@ class Component extends React.PureComponent {
                 rest.className = `ex-tabs ${rest.className}`;
             } else {
                 rest.className = `ex-tabs`;
+            }
+            if (U.isFunction(fnExtra)) {
+                rest.tabBarExtraContent = fnExtra();
             }
             return (
                 <Tabs {...rest}>

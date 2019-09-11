@@ -11,17 +11,6 @@ class Component extends React.PureComponent {
         this.state = Ux.xtInit(props);
     }
 
-    // Required：更新数据，主要用于form中的Reset动作
-    componentDidUpdate(prevProps) {
-        Ux.xtReset(this, Op.getDefault());
-    }
-
-    // Required：绑定更新数据专用
-    // componentWillReceiveProps
-    UNSAFE_componentWillReceiveProps(nextProps, context) {
-        Ux.xtUnsafe(this, nextProps);
-    }
-
     // 核心方法，渲染组件
     render() {
         const {config = {}} = this.props;

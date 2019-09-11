@@ -1,0 +1,48 @@
+{
+    "_form": {
+        "window": -0.3,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                "identifier`c,全局ID,24"
+            ],
+            [
+                "tableName`c,数据库表名,24"
+            ],
+            [
+                "name`c,系统名称,24"
+            ],
+            [
+                {
+                    "metadata": "type`i,实体类型,24,,aiCheckbox",
+                    "optionJsx.config.items": [
+                        "ENTITY,实体模型",
+                        "RELATION,关系模型"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "op": {
+            "$opFilter": "act.entity.filter",
+            "$opDelete": "act.entity.delete"
+        }
+    }
+}

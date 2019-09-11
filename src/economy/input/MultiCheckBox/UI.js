@@ -16,14 +16,6 @@ class Component extends React.PureComponent {
         this.state = state;
     }
 
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.xtUnsafe(this, nextProps);
-    }
-
-    componentDidUpdate(prevProps) {
-        Ux.xtReset(this, {});
-    }
-
     render() {
         const {prefix = "", source = [], horizon = false} = this.state;
         const {value = {}} = this.props;

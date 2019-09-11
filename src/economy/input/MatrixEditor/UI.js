@@ -1,6 +1,5 @@
 import React from 'react';
 import './Cab.less';
-import Ux from 'ux';
 import Op from './Op';
 import {Input, Table} from "antd";
 
@@ -12,14 +11,6 @@ class Component extends React.PureComponent {
         // columns专用
         state.table = Op.initTable(this);
         this.state = state;
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.xtUnsafe(this, nextProps);
-    }
-
-    componentDidUpdate(prevProps) {
-        Ux.xtResetData(this, Op.getDefault(this));
     }
 
     render() {

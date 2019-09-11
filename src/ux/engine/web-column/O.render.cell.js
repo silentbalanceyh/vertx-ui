@@ -51,6 +51,11 @@ export default {
         Aid.cellDate,
         Aid.jsxSpan,
     ),
+    USER: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellUser,
+        Aid.jsxUser,
+    ),
     CURRENCY: Aid.jsxConnect(
         initEmpty,
         Aid.cellCurrency,
@@ -64,9 +69,11 @@ export default {
     MAPPING: Aid.jsxConnect(
         initEmpty,
         Aid.cellMapping,
-        (attrs = {}, children = {}) => attrs.icon ?
-            Aid.jsxIcon(attrs.icon) :
-            Aid.jsxSpan(attrs, children)
+        (attrs = {}, children = {}) => {
+            return attrs.icon ?
+                Aid.jsxIcon(attrs.icon) :
+                Aid.jsxSpan(attrs, children);
+        }
     ),
     ICON: Aid.jsxConnect(
         initEmpty,

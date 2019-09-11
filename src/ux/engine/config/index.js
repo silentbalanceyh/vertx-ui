@@ -9,9 +9,17 @@ import form from './O.form';
  */
 import table from './O.table';
 import query from './O.query';
+import tab from './O.tab';
+import dialog from './O.dialog';
 
-export default {
+import Dev from "../../develop";
+
+const exported = {
     ...form,
     ...table,
     ...query,
-}
+    ...tab,
+    ...dialog,
+};
+Dev.dgDebug(exported, "所有配置类方法", "#DAA520");
+export default exported;

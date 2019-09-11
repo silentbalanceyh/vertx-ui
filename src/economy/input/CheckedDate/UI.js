@@ -4,7 +4,6 @@ import "./Cab.less";
 import {Input} from "antd";
 import Rdr from './UI.Render';
 import moment from 'moment';
-import Op from "./Op";
 
 class Component extends React.PureComponent {
 
@@ -17,14 +16,6 @@ class Component extends React.PureComponent {
             }
         }
         this.state = state;
-    }
-
-    componentDidUpdate(prevProps) {
-        Ux.xtReset(this, Op.getDefault());
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.xtUnsafe(this, nextProps);
     }
 
     render() {

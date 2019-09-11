@@ -82,47 +82,9 @@ const plxFromTo = (reference, jsx = {}) => {
     if (config.to) normalized.to = fnNorm(config.to);
     jsx.config = normalized;
 };
-const onLinker = (jsx = {}, fnSupplier) => {
-    const {
-        reference,
-        config,
-        options = []
-    } = jsx;
-    if (reference && config.linker && options) {
-        const {linker = {}, linkerField = "key"} = config;
-        return (selected) => {
-            if (!Abs.isEmpty(linker)) {
-                const row = options.filter(option => option[linkerField] === selected);
-                if (row[0]) {
-                    const formValues = {};
-                    Object.keys(linker).forEach(rowField => {
-                        const formField = linker[rowField];
-                        if (formField && rowField) {
-                            formValues[formField] = row[0][rowField];
-                        }
-                    })
-                    Ut.formHits(reference, formValues);
-                }
-            }
-            if (U.isFunction(fnSupplier())) {
-                fnSupplier()(selected);
-            }
-        }
-    } else {
-        return fnSupplier();
-    }
-}
-const onChange = (rest = {}, fnChange, jsx = {}) => {
-    if (U.isFunction(fnChange)) {
-        rest.onChange = onLinker(jsx, () => fnChange)
-    } else {
-        rest.onChange = onLinker(jsx, () => undefined);
-    }
-};
 export default {
     plxTreeOptions,
     plxOptions,
     plxDialog,
-    plxFromTo,
-    onChange
+    plxFromTo
 };

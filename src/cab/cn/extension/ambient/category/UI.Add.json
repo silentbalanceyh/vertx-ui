@@ -31,7 +31,11 @@
                             ]
                         },
                         "validation": "请选择关联模型！",
-                        "window": "请选择关联模型,选择,关闭,false,800,false"
+                        "window": "请选择关联模型,选择,关闭,false,800,false",
+                        "search": {
+                            "alias": "名称",
+                            "identifier": "系统标识"
+                        }
                     }
                 }
             ],

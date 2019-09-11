@@ -232,9 +232,20 @@ const configForm = (form, addOn = {}) => {
              * 处理 title 和 $button
              */
             Raft.raftSpecial(column);
-
-            column.render = Raft.raftRender(raft, Abs.clone(params));
-
+            if (cell.complex) {
+                /*
+                 * 子表单模式（用于静态扩展专用）
+                 */
+                column.col.key = `${cell.name}-${rowIndex}-${cellIndex}`;
+                const render = Raft.raftContainer(cell, Abs.clone(params), configForm);
+                if (render) {
+                    column.render = render;
+                } else {
+                    throw new Error("[ Ux ] 容器模式没有生成正确的 render ")
+                }
+            } else {
+                column.render = Raft.raftRender(cell, Abs.clone(params));
+            }
             rowItem.cells.push(column);
         });
         Logger.render(5, rowItem, rowIndex);

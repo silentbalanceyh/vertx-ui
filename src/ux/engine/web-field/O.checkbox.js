@@ -1,20 +1,59 @@
-import Aid from "./I.fix";
 import {Checkbox} from "antd";
 import React from "react";
 import R from '../expression';
-
-const aiCheckbox = (reference, jsx = {}, onChange) => {
-    const {config} = jsx;
+import normalizeAttribute from './I.fn.uniform';
+import Abs from '../../abyss';
+import U from 'underscore';
+/*
     // 处理onChange，解决rest为 {}时引起的参数Bug
-    const rest = Aid.fixAttrs(jsx);
+    // const rest = Aid.fixAttrs(jsx);
     // 构造Checkbox专用选项
-    R.Ant.onChange(rest, onChange);
+    // R.Ant.onChange(rest, onChange, {
+    //     reference, // 增强时需要使用，组件引用
+    //     config, // 当前Jsx中的配置
+    //     trigger: jsx.trigger, // 触发项
+    //     prevent: false,     // 默认行为开启
+    // });
     // ReadOnly处理，第二参用于处理disabled的情况，非input使用
-    R.Ant.onReadOnly(rest, true, reference);
-    const options = R.Ant.toOptions(reference, config);
-    return (config) ?
-        <Checkbox.Group {...rest} options={options}/> :
-        <Checkbox disabled={rest.disabled}/>;
+    // R.Ant.onReadOnly(rest, true, reference);
+    上边是旧代码
+ */
+const aiCheckbox = (reference, jsx = {}, onChange) => {
+    /*
+     * 1）onChange
+     * 2）readOnly
+     * 3）disabled
+     */
+    const rest = normalizeAttribute(reference, {
+        ...jsx,
+        eventPrevent: false,        // 不关闭默认行为
+        eventDisabled: true,        // 只读时候需要禁用
+    }, onChange);
+    /*
+     * 分流：
+     * 1）多选
+     * 2）单选
+     */
+    const {config} = jsx;
+    if (config) {
+        const options = R.Ant.toOptions(reference, config);
+        return (
+            <Checkbox.Group {...rest} options={options}/>
+        )
+    } else {
+        const $rest = Abs.clone(rest);
+        const {onChange, ...left} = $rest;
+
+        return (
+            <Checkbox {...left} onChange={event => {
+                // 解决特殊的 BUG，主要是单处理
+                const value = event.target.checked;
+                if (U.isFunction(onChange)) {
+                    onChange(value);
+                }
+            }}/>
+        )
+    }
 };
 
 const ai2Checkbox = (onChange) => (reference, jsx = {}) => {

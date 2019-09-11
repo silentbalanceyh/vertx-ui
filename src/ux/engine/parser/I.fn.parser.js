@@ -2,6 +2,7 @@ import parseDatum from './I.fn.datum';
 import parseState from './I.fn.state';
 import parseRouter from './I.fn.router';
 import parseProp from './I.fn.prop';
+import parseForm from './I.fn.form';
 /* 渗透处理 */
 import Ut from '../../unity';
 
@@ -34,6 +35,11 @@ export default {
         parser: (kv1 = "") => [kv1],
         searcher: (value, props) =>
             parseRouter(value, {props})
+    },
+    FORM: {
+        parser: (kv1 = "") => [kv1],
+        searcher: (value, props) =>
+            parseForm(value, {props})
     },
     STATE: {
         parser: (kv1) => [kv1.split('.')],

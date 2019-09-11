@@ -14,7 +14,7 @@ class Component extends React.PureComponent {
          * 配置处理
          */
         const {$inited = {}} = this.props;    // 只设置 type
-        const form = Ex.yoForm(this, null, $inited);
+        const form = Ex.yoForm(this, null, Ex.onApp($inited));
         return (
             <ExForm {...form} $height={"300px"}
                     $op={Op.actions}/>

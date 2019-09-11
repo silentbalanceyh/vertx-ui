@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Ex from 'ex';
 import STD_ACTION from '../event';
 
 export default (reference, columns = []) => {
@@ -23,7 +22,7 @@ export default (reference, columns = []) => {
     /*
      * 核心处理 Action 节点
      */
-    const executor = Ex.executor(reference, STD_ACTION);
+    const executor = Ux.configExecutor(reference, STD_ACTION);
 
     resultColumns = Ux.configColumn(reference, resultColumns, executor);
     return resultColumns;

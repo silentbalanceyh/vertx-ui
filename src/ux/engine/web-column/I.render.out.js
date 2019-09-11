@@ -115,8 +115,20 @@ const cellMapping = (attrs = {}, reference, {
     column = {}, text,
 }) => {
     const mapping = column['$mapping'];
-    if (mapping) {
-        const literal = mapping[text];
+    if (mapping && text) {
+        /*
+         * valueLadder 中符号冲突
+         * 1）.号需要转换成 ` 来处理 literal 中的值
+         * 2）因为值中可能包含 . 号
+         */
+        let literal = "";
+        if (0 < text.indexOf('.')) {
+            const reg = new RegExp("\\.", "g");
+            const key = text.replace(reg, '`');
+            literal = mapping[key];
+        } else {
+            literal = mapping[text];
+        }
         if (literal && 0 < literal.indexOf(',')) {
             attrs.icon = R.aiExprIcon(literal);
         } else {
@@ -170,6 +182,17 @@ const cellExpr = (attrs = {}, reference, {
         attrs.children = false;
     }
 };
+const cellUser = (attrs = {}, reference, {
+    column = {}, text, record = {}
+}) => {
+    const {$config} = column;
+    if ($config && text) {
+        attrs.config = Abs.clone($config);
+        attrs.$key = text;
+    }
+    attrs.$data = Abs.clone(record);
+    attrs.$empty = column['$empty'];
+};
 const outOrigin = (attrs = {}, reference, {
     column = {}, record = {}
 }) => {
@@ -211,6 +234,7 @@ export default {
     cellCurrency, // CURRENCY专用，识别货币
     cellExpr, // EXPR专用，识别表达式
     cellIcon, // ICON专用，识别Icon图标
+    cellUser, // USER专用，识别创建者
     // ------- 动态：根据值有所改变
     outReadOnly, // 设置当前组件的"只读"属性
     outDisabled, // 设置当前组件的"禁用"属性
@@ -220,5 +244,5 @@ export default {
     outTo,   // Vector专用
     outDate,  // Moment时间格式专用转换
     outOrigin, // 处理$config.origin专用处理
-    outFilter	// 处理$config.datum中的filter
+    outFilter,	// 处理$config.datum中的filter
 };

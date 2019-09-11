@@ -5,6 +5,8 @@ import Abs from '../../abyss';
 import Action from '../action';
 import Value from "../../element";
 
+import raftDepend from './I.fn.depend';
+
 const raftValue = (cell = {}, values = {}) => {
     // 默认active处理
     if (values.hasOwnProperty(cell.field)) {
@@ -24,9 +26,8 @@ const raftValue = (cell = {}, values = {}) => {
 /*
  * 最复杂的一个方法，用于设置 render 的最终状态
  */
-const raftRender = (raft = {}, config = {}) => {
+const raftRender = (cell = {}, config = {}) => {
     const {
-        cell = {},
         calculated = {},
         addOn = {}
     } = config;
@@ -53,8 +54,10 @@ const raftRender = (raft = {}, config = {}) => {
      * reference
      * renders
      * cell
-     * 1）先从 renders 中查找，看是否可以找到
-     * 2）然后搜索标准表单库查找
+     * 1）这里的 renders 来源两个方向
+     * -- 编程的时候传入的第三参数 program
+     * -- $jsx 变量，直接从属性之外传入
+     * *：它拥有最高优先级
      */
     let fnRender = renders[cell.field];
     if (!U.isFunction(fnRender)) {
@@ -70,7 +73,7 @@ const raftRender = (raft = {}, config = {}) => {
     }
     Log.render(2, cell, fnRender);
     let isAction = false;       // 表示按钮工具
-    if (!U.isFunction(fnRender)) {
+    if (!U.isFunction(fnRender) && cell.field) {
         /*
          * 第一次查找未找到：执行过查找和自查找
          */
@@ -133,9 +136,12 @@ const raftRender = (raft = {}, config = {}) => {
              * 拷贝动作必须在这里做
              */
             raftValue(cell, values);
-            const optionJsx = Abs.clone(cell.optionJsx);
             const optionConfig = Abs.clone(cell.optionConfig);
-
+            /*
+             * 新增 depend 规则
+             */
+            let optionJsx = Abs.clone(cell.optionJsx);
+            optionJsx = raftDepend(reference, optionJsx);
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );
