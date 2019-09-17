@@ -15,7 +15,9 @@ import _home_todo from './home/todo/UI';
 import _init_start from './init/start/UI';
 import _organization_assert from './organization/assert/UI';
 import _organization_branch from './organization/branch/UI';
+import _organization_company from './organization/company/UI';
 import _organization_department from './organization/department/UI';
+import _organization_employee from './organization/employee/UI';
 import _organization_vendor from './organization/vendor/UI';
 import _personal_company from './personal/company/UI';
 import _personal_info from './personal/info/UI';
@@ -44,7 +46,9 @@ export default {
 	_init_start,
 	_organization_assert,
 	_organization_branch,
+	_organization_company,
 	_organization_department,
+	_organization_employee,
 	_organization_vendor,
 	_personal_company,
 	_personal_info,
