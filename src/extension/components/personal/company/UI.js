@@ -1,7 +1,6 @@
 import React from 'react'
 import Ux from 'ux';
 import Ex from 'ex';
-import Op from './Op';
 import {ExForm} from "ei";
 
 const LOG = {
@@ -15,7 +14,7 @@ const LOG = {
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiPage(this);
+        Ex.init(this).company();
     }
 
     render() {
@@ -29,8 +28,7 @@ class Component extends React.PureComponent {
                 form,
             }, $inited);
             return (
-                <ExForm {...formAttrs} $height={"200px"}
-                        $actions={Op.actions}/>
+                <ExForm {...formAttrs} $height={"200px"}/>
             )
         }, LOG);
     }

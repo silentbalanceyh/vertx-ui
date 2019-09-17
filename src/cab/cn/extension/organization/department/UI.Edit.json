@@ -37,17 +37,27 @@
                             "realname,c": "名称"
                         }
                     }
-                },
-                {
-                    "metadata": "deptId,上级部门,12,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
                 }
             ],
             [
                 {
-                    "metadata": "companyId,所属公司,12,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                    "metadata": "companyId,所属公司,12,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=resource.companies,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=companyId",
+                    "optionJsx.config.selection":"mode=FULL"
                 },
+                {
+                    "metadata": "deptId,上级部门,12,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=resource.department,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=deptId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.config.cascade": {
+                        "source": "companyId",
+                        "target": "companyId"
+                    }
+                }
+            ],
+            [
                 {
                     "metadata": "active,启用,12,,aiCheckbox",
                     "optionConfig": {

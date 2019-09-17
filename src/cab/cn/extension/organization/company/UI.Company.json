@@ -1,0 +1,76 @@
+{
+
+    "_form": {
+        "window": 1,
+        "columns":3,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "title,公司标题",
+                {
+                    "metadata":"name,公司名称",
+                    "optionConfig.rules":[
+                        "required,请输入公司名称",
+                        {
+                            "validator":"existing",
+                            "message":"对不起，该公司名称已经在系统中存在！",
+                            "config":{
+                                "uri":"/api/company/existing",
+                                "method":"POST"
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                "code,公司系统编号,,,,readOnly=true",
+                "homepage,公司主页,16"
+            ],
+            [
+                "phone,座机",
+                "email,邮箱",
+                "fax,传真"
+            ],
+            [
+                "address,公司地址,24"
+            ],
+            [
+                "title=商务信息"
+            ],
+            [
+                "taxTitle,发票抬头",
+                "taxCode,公司税号"
+            ],
+            [
+                "corporationName,公司法人",
+                "corporationPhone,法人电话"
+            ],
+            [
+                "contactName,联系人姓名",
+                "contactPhone,联系人电话"
+            ],
+            [
+                "comment,公司简介,24,,aiTextArea,rows=4"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveMy,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ],
+        "hidden": [
+            "key"
+        ]
+    },
+    "_modal": {
+        "success": {
+            "savedMy": "您好，您的公司信息已经成功保存！"
+        }
+    }
+}

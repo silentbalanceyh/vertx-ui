@@ -189,6 +189,10 @@ const cellUser = (attrs = {}, reference, {
     if ($config && text) {
         attrs.config = Abs.clone($config);
         attrs.$key = text;
+        /* 专用处理 */
+        if ($config.icon) {
+            attrs.$icon = $config.icon;
+        }
     }
     attrs.$data = Abs.clone(record);
     attrs.$empty = column['$empty'];

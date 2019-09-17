@@ -175,6 +175,7 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
     /*
      * 6）权限控制
      */
+    // TODO: 权限控制部分，用于控制 $op 的权限信息
     return {
         form: rest,
         addOn

@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Fn from '../functions';
+import U from 'underscore';
 
 const _application = () => {
     /* 读取应用程序 */
@@ -39,7 +40,8 @@ const _module = (uri = "") => {
 
 export default {
     /* /app/name/:name */
-    app: () => Ux.ajaxFetch("/app/name/:name", {name: Ux['Env']['APP']}),
+    app: (failure) => Ux.ajaxFetch("/app/name/:name", {name: Ux['Env']['APP']})
+        .catch(error => U.isFunction(failure) ? failure(error) : false),
     /* /api/app */
     application: _application,
     /* /api/menus */

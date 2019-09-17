@@ -1,26 +1,14 @@
 {
-    "_page": {
-        "title": "科室管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
-    },
-    "_assist": {
-        "resource.department": {
-            "uri": "/api/depts"
-        },
-        "resource.companies": {
-            "uri": "/api/companys"
-        }
-    },
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
+            "pager": "1,8",
             "sorter": "createdAt=DESC",
             "criteria": {}
+        },
+        "mock": {
+            "enabled": true,
+            "keys": "code,name,description,manager,active"
         },
         "options": {
             "search.cond": [
@@ -31,10 +19,10 @@
             "search.confirm.clear": "该操作会清空所有的查询条件，确认清空？",
             "search.op.redo": "清除条件",
             "search.op.advanced": "高级搜索",
-            "search.placeholder": "名称/编号",
+            "search.placeholder": "名称/编码",
             "search.advanced": true,
             "search.advanced.width": "40%",
-            "search.advanced.title": "搜索部门",
+            "search.advanced.title": "搜索分公司",
             "search.advanced.notice": {
                 "message": "注意！",
                 "description": [
@@ -42,10 +30,10 @@
                     "高级搜索表单中的搜索条件会被保存，再次打开时会重置到上次的搜索状态。"
                 ]
             },
-            "tabs.list": "部门列表",
-            "tabs.add": "添加部门",
-            "tabs.edit": "编辑部门",
-            "identifier": "dept",
+            "tabs.list": "分公司列表",
+            "tabs.add": "添加分公司",
+            "tabs.edit": "编辑分公司",
+            "identifier": "company",
             "dynamic.op": false,
             "dynamic.column": true,
             "dynamic.switch": false,
@@ -70,18 +58,18 @@
             "id.submit.save": "$opSave",
             "id.submit.reset": "$opReset",
             "id.submit.delete": "$opDelete",
-            "ajax.search.uri": "/api/dept/search",
-            "ajax.get.uri": "/api/dept/:key",
-            "ajax.delete.uri": "/api/dept/:key",
-            "ajax.batch.delete.uri": "/api/batch/dept/delete",
-            "ajax.batch.update.uri": "/api/batch/dept/update",
-            "ajax.column.full": "/api/columns/dept/full",
-            "ajax.column.my": "/api/columns/dept/my",
-            "ajax.column.save": "/api/columns/dept/my",
-            "ajax.file.export": "/api/dept/export",
-            "ajax.file.import": "/api/dept/import",
-            "confirm.delete": "确认删除当前部门记录？",
-            "confirm.batch.delete": "您确认要删除所有选中的部门记录？",
+            "ajax.search.uri": "/api/company/search",
+            "ajax.get.uri": "/api/company/:key",
+            "ajax.delete.uri": "/api/company/:key",
+            "ajax.batch.delete.uri": "/api/batch/company/delete",
+            "ajax.batch.update.uri": "/api/batch/company/update",
+            "ajax.column.full": "/api/columns/company/full",
+            "ajax.column.my": "/api/columns/company/my",
+            "ajax.column.save": "/api/columns/company/my",
+            "ajax.file.export": "/api/company/export",
+            "ajax.file.import": "/api/company/import",
+            "confirm.delete": "确认删除当前分公司记录？",
+            "confirm.batch.delete": "您确认要删除所有选中的分公司记录？",
             "confirm.clean.filter": "该操作将清空所有的查询条件，确认？",
             "message.batch.delete": "您所选择的记录已经全部删除成功！"
         },
@@ -154,20 +142,11 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "name,部门名称",
-                        "code,部门编号",
-                        "managerId,部门经理",
-                        "managerName,经理名称",
-                        "companyId,所属公司",
-                        "deptId,上级部门",
-                        "comment,部门备注",
-                        "metadata,附加配置",
+                        "code,分公司编号",
+                        "name,分公司名称",
                         "active,是否启用",
-                        "language,使用的语言",
                         "createdBy,创建人",
-                        "createdAt,创建时间",
-                        "updatedBy,更新人",
-                        "updatedAt,更新时间"
+                        "createdAt,创建时间"
                     ]
                 },
                 "valueColumn": {
@@ -223,7 +202,7 @@
                         {
                             "text": "删除",
                             "executor": "fnDelete",
-                            "confirm": "确认删除选择的部门记录？"
+                            "confirm": "确认删除选择的分公司记录？"
                         }
                     ]
                 }
