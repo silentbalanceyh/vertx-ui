@@ -1,28 +1,34 @@
 import React from 'react';
 import Ux from 'ux';
-import renderJsx from './Web.jsx';
-import FormAdd from './form/UI.Add';
-import FormEdit from './form/UI.Edit';
-import FormFilter from './form/UI.Filter';
+import {ExTab} from 'ei';
+import Ex from 'ex';
 
-@Ux.zero(Ux.rxEtat(require("./Cab"))
+import ListUser from './UI.List';
+import FormSearch from './UI.Search';
+
+const LOG = {
+    name: "PxUser",
+    color: "#36648B"
+};
+
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
+    .ready(true)
     .to()
 )
 class Component extends React.PureComponent {
     render() {
-        const config = Ux.fromHoc(this, "grid");
-        /* 专用组件信息 */
-        const form = {
-            FormAdd,    // 添加表单
-            FormEdit,   // 更新表单
-            FormFilter  // 搜索表单
-        };
-        return renderJsx(this, {
-            config,
-            form
-        })
+        return Ex.yoRender(this, () => {
+            const tabs = Ux.fromHoc(this, "tabs");
+            const inherit = Ex.yoAmbient(this);
+            return Ex.ylCard(this, () => (
+                <ExTab {...inherit} config={tabs}>
+                    <ListUser {...inherit}/>
+                    <FormSearch {...inherit}/>
+                </ExTab>
+            ))
+        }, LOG);
     }
 }
 
-export default Component
+export default Component;

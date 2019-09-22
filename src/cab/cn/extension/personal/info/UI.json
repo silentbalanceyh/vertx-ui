@@ -17,10 +17,9 @@
             ],
             [
                 {
-                    "metadata": "mobile,手机号,10,,,type=mobile",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata":"mobile,手机号,10,,,placeholder=（请输入手机号）",
                     "optionConfig.rules": [
-                        "required,请输入手机号",
+                        "required,请输入手机号，手机号不能为空",
                         {
                             "max": 11,
                             "pattern": "0?(13|14|15|18|17)[0-9]{9}",
@@ -29,13 +28,12 @@
                     ]
                 },
                 {
-                    "metadata": "email,电子邮件,14,,,type=email",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata":"email,电子邮件,14,,,placeholder=（XXX@XXX格式）",
                     "optionConfig.rules": [
-                        "required,请输入电子邮件",
+                        "required,请输入电子邮件，电子邮件不能为空",
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "请正确输入邮件地址！"
+                            "message": "格式错误,请正确输入邮件地址！"
                         }
                     ]
                 }
@@ -51,24 +49,22 @@
             ],
             [
                 {
-                    "metadata": "workPhone,工作电话,10,,,type=workPhone",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata":"workPhone,工作电话,10,,,placeholder=（XXX-XXXXXXXX格式）",
                     "optionConfig.rules": [
-                        "required,请输入工作电话",
+                        "required,请输入工作电话，工作电话不能为空",
                         {
                             "pattern": "[0-9-()（）]{7,18}",
-                            "message": "请正确输入工作电话！"
+                            "message": "格式错误,请正确输入工作电话！"
                         }
                     ]
                 },
                 {
-                    "metadata": "workEmail,工作邮件,14,,,type=workEmail",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata":"workEmail,工作邮件,14,,,placeholder=（XXX@XXX格式）",
                     "optionConfig.rules": [
                         "required,请输入工作邮件",
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "请正确输入工作邮件！"
+                            "message": "格式错误,请正确输入邮件地址！"
                         }
                     ]
                 }

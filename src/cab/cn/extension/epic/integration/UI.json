@@ -1,6 +1,11 @@
 {
     "_page": {
-        "title": "集成管理"
+        "title": "集成管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
     },
     "_tabs": {
         "className": "ex-tabs-tab-block",

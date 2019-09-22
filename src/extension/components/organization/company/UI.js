@@ -15,7 +15,6 @@ const LOG = {
     .cab("UI")
     .to()
 )
-
 class Component extends React.PureComponent {
     componentDidMount() {
         Ex.init(this).company();

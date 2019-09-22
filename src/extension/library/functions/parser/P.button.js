@@ -77,7 +77,22 @@ const parseComponent = (buttons = {}, options = {}, components = {}) => {
     }, 'component');
     return buttons;
 };
+const parseOps = (config = [], options = {}) => {
+    const {type} = options;
+    if ("LIST" === type) {
+        const {ops = []} = options;
+        if (config.options) {
+            ops.forEach(op => {
+                const item = {};
+                item.key = op['clientKey'];
+                config.options[item.key] = op['text'];
+            });
+        }
+    }
+    return config;
+};
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
-    parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async)
+    parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
+    parseOps: (config = [], options = {}, async = true) => toAsync(parseOps(config, options), async),
 })

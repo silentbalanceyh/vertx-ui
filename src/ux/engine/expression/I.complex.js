@@ -18,6 +18,14 @@ const plxTreeOptions = (reference, config = {}) => {
      * 2.规范化处理，读取全树配置（补全）
      */
     let tree = Ut.toTreeConfig(config.tree);
+
+    const id = Ut.formGet(reference, tree.key);
+    if (id) {
+        /*
+         * 1.1 必须过滤当前节点，即主键和当前节点不等
+         */
+        options = options.filter(option => option[tree.key] !== id);
+    }
     /*
      * 构造 Uarr 引用
      */

@@ -7,13 +7,19 @@ const _seekComponent = (attrs = {}, control = {}) => {
     } = control;
     attrs.config = Ux.clone(componentConfig);
     attrs.source = componentData;
+    attrs.key = control.key;
+    attrs.pageId = control['pageId'];
 };
-const _seekContainer = (attrs = {}, control = {}) => {
+const _seekContainer = (attrs = {}, control = {}, componentType) => {
     const {containerConfig, containerName} = control;
     if (containerName) {
         attrs.container = {
             name: containerName,
-            config: containerConfig ? containerConfig : {}
+            config: containerConfig ? containerConfig : {},
+            // For $metadata generation
+            key: control.key,
+            pageId: control['pageId'],
+            componentType,
         };
     }
 };
@@ -27,16 +33,8 @@ export default (control = {}) => {
      * 第一层解析，解析 component，这是必须的
      */
     attrs.name = componentName;
-    if ("COMPONENT" === type) {
-        /*
-         * 组件配置抓取
-         */
-        _seekComponent(attrs, control);
-        /*
-         * 容器配置（可选）
-         */
-        _seekContainer(attrs, control);
-    } else if ("CONTAINER" === type) {
+    const $component = Ux.immutable(["LIST", "FORM", "COMPONENT"]);
+    if ("CONTAINER" === type) {
         /*
          * 容器配置，由于该类型，所以是必须
          */
@@ -44,16 +42,13 @@ export default (control = {}) => {
         if (!attrs.container) {
             throw new Error("[ Ex ] 由于 type = CONTAINER，必须包含 containerName！");
         }
-    } else if ("LIST" === type) {
+    } else if ($component.contains(type)) {
         /*
-         * List 类型
+         * LIST / COMPONENT / FORM
+         * 容器（可选）
          */
         _seekComponent(attrs, control);
-    } else if ("FORM" === type) {
-        /*
-         * Form 类型
-         */
-        _seekComponent(attrs, control);
+        _seekContainer(attrs, control, type);   // 加入 type 作为 component 类型
     } else {
         throw new Error(`[ Ex ] 使用了不支持的类型：type = ${type}`);
     }

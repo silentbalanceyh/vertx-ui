@@ -19,6 +19,12 @@ class Component extends React.PureComponent {
         Ex.yiCategory(this);
     }
 
+    componentDidUpdate(props, state, snapshot) {
+        Ex.yuRouter(this, {props, state}, () => {
+            Ex.yiCategory(this);
+        });
+    }
+
     render() {
         const config = Ux.fromHoc(this, "grid");
         /* 专用组件信息 */

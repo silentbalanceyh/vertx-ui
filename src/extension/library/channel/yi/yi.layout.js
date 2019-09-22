@@ -55,7 +55,9 @@ const _seekPage = (reference, state = {}) => {
         const $container = {};
         $container.name = $output['containerName'];
         $container.config = $output['containerConfig'] ? $output['containerConfig'] : {};
+        // 解决底层 $metadata 没有值的 BUG
         $container.key = `container-${$output.key}`;
+        $container.pageId = $output.key;
         state.$container = $container;
     } else {
         state.$container = false;

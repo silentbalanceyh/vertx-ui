@@ -8,7 +8,7 @@
                 "title=基本信息"
             ],
             [
-                "title,公司标题",
+                "title,公司标题,,,,placeholder=（如：******有限公司）",
                 {
                     "metadata":"name,公司名称",
                     "optionConfig.rules":[
@@ -22,15 +22,46 @@
                             }
                         }
                     ]
+                },
+                {
+                    "metadata": "type,公司性质,,,aiSelect,placeholder=（请选择公司性质）",
+                    "optionJsx.config.datum": "source=company.nature,value=key,label=name"
                 }
             ],
             [
                 "homepage,公司主页,16"
             ],
             [
-                "phone,座机",
-                "email,邮箱",
-                "fax,传真"
+                {
+                    "metadata":"phone,座机,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入座机号，座机号不能为空",
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "格式错误,请正确输入座机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"email,邮箱,,,,placeholder=（XXX@XXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入邮箱地址",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮箱地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"fax,传真,,,,placeholder=请输入传真号",
+                    "optionConfig.rules": [
+                        "required,请输入传真号，传真号不能为空",
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8})$|^((1[0-9][0-9]\\d{8}$))",
+                            "message": "格式错误,请正确输入传真号！"
+                        }
+                    ]
+                }
             ],
             [
                 "address,公司地址,24"
@@ -39,16 +70,46 @@
                 "title=商务信息"
             ],
             [
-                "taxTitle,发票抬头",
-                "taxCode,公司税号"
+                "taxTitle,发票抬头,,,,placeholder=（如：购物人名称、付款单位等）",
+                {
+                    "metadata":"taxCode,税号,,,,placeholder=（由15/17/18/20位字符组成）",
+                    "optionConfig.rules": [
+                        "required,请输入税号，税号不能为空",
+                        {
+                            "min": 15,
+                            "pattern": "^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$",
+                            "message": "格式错误,请正确输入税号！"
+                        }
+                    ]
+                }
             ],
             [
-                "corporationName,公司法人",
-                "corporationPhone,法人电话"
+                "corporationName,公司法人,,,,placeholder=（如：张**、王**等）",
+                {
+                    "metadata":"corporationPhone,法人电话,,,,placeholder=请输入法人电话",
+                    "optionConfig.rules": [
+                        "required,请输入法人电话，法人电话不能为空",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "格式错误,请正确输入法人电话！"
+                        }
+                    ]
+                }
             ],
             [
-                "contactName,联系人姓名",
-                "contactPhone,联系人电话"
+                "contactName,联系人姓名,,,,placeholder=（如：张**、王**等）",
+                {
+                    "metadata":"contactPhone,联系人电话,,,,placeholder=请输入联系人电话",
+                    "optionConfig.rules": [
+                        "required,请输入联系人电话，联系人电话不能为空",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "格式错误,请正确输入联系人电话！"
+                        }
+                    ]
+                }
             ],
             [
                 "comment,公司简介,24,,aiTextArea,rows=4"

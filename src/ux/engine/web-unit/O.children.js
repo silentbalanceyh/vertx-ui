@@ -28,12 +28,12 @@ function aiChild() {
             return false;
         }
     } else {
-        const child = arguments[0];
+        const children = arguments[0];
         const additional = arguments[1];
         if (Ux.isEmpty(additional)) {
-            return child;
+            return children;
         } else {
-            return React.cloneElement(child, {
+            return React.cloneElement(children, {
                 ...additional
             });
         }
@@ -49,12 +49,12 @@ const aiChildren = (reference, additional = {}) => {
              */
             return children
                 .filter(item => undefined !== item)
-                .map(child => aiChild(reference, additional, child));
+                .map(child => aiChild(child, additional));
         } else {
             /*
              * 单独唯一的对象
              */
-            return aiChild(reference, additional, children);
+            return aiChild(children, additional);
         }
     } else {
         /*

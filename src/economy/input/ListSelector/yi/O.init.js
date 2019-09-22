@@ -14,7 +14,19 @@ const yiInit = (reference) => {
         const fields = Object.keys(linker)
             .map(from => linker[from]);
         const ref = Ux.onReference(reference, 1);
-        const values = Ux.formGet(ref, fields);
+        const val = Ux.formGet(ref, fields);
+        const values={};
+        for (const key in val) {
+            if(key in linker){
+                values[key]=val[key];
+            }else{
+                for (const keys in linker) {
+                    if(linker[keys]===key){
+                        values[keys]=val[key];
+                    }
+                }
+            }
+        }
         if (!Ux.isEmpty(values)) {
             values[""] = true;      // 构造严格条件
             /*

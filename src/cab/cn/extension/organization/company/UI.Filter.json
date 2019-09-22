@@ -29,8 +29,7 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.company.filter",
-            "$opDelete": "act.company.delete"
+            "$opFilter": "act.company.filter"
         }
     }
 }

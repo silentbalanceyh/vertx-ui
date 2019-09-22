@@ -21,8 +21,11 @@ const yiList = (reference) => {
         $query.criteria['companyId,='] = $inited.key;
         state.$query = $query;
     }
-    state.$ready = true;
-    reference.setState(state);
+    Ex.yiAssist(reference, state)
+        .then(updated => {
+            updated.$ready = true;
+            reference.setState(updated);
+        });
 };
 export default {
     actions: {

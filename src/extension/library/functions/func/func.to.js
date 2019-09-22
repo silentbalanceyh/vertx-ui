@@ -46,5 +46,5 @@ const toNamespace = (reference) => {
 export default {
     toUri,
     toDialog,
-    toNamespace
+    toNamespace,
 }

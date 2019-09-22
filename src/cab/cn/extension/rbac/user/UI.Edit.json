@@ -6,44 +6,50 @@
                 "title=用户基本信息"
             ],
             [
-                "username,用户账号,14"
-            ],
-            [
-                "realname,用户姓名,14"
-            ],
-            [
                 {
-                    "metadata":"mobile,手机号,14,,,type=mobile",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata": "username,账号,9,,,placeholder=请输入账号!",
                     "optionConfig.rules": [
-                        "required,请输入手机号",
+                        "required,请输入账号，账号不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，账号重复！",
+                            "config": {
+                                "uri": "/api/user/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
+                        }
+                    ]
+                },
+                "realname,姓名,5"
+            ],
+            [
+                "alias,昵称,9",
+                {
+                    "metadata":"mobile,手机号,5,,,placeholder=请输入手机号!",
+                    "optionConfig.rules": [
+                        "required,请输入手机号,手机号不能为空!",
                         {
                             "max": 11,
                             "pattern": "0?(13|14|15|18|17)[0-9]{9}",
-                            "message": "请正确输入手机号！"
+                            "message": "格式错误,请正确输入手机号！"
                         }
                     ]
                 }
             ],
             [
                 {
-                    "metadata":"email,邮箱地址,14,,,type=email",
-                    "optionConfig.validateTrigger": "onBlur",
+                    "metadata":"email,邮箱,9,,,placeholder=请输入邮箱!",
                     "optionConfig.rules": [
-                        "required,请输入邮箱地址",
+                        "required,请输入邮箱,邮箱不能为空!",
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "请正确输入邮件地址！"
+                            "message": "格式错误,请正确输入邮件地址！"
                         }
                     ]
-                }
-            ],
-            [
-                "alias,备注,14"
-            ],
-            [
+                },
                 {
-                    "metadata": "active,启用,14,,aiCheckbox",
+                    "metadata": "active,启用,5,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }

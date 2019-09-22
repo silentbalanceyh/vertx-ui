@@ -1,4 +1,12 @@
 {
+    "_assist": {
+        "company.nature": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:__zero.company.type__"
+            }
+        }
+    },
     "_grid": {
         "query": {
             "projection": [],
