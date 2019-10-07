@@ -1,5 +1,7 @@
 import form from './form';
 import dialog from './dialog';
+import init from './init';
+import bind from './bind';
 
 export default {
     /*
@@ -7,4 +9,7 @@ export default {
      */
     form,
     dialog,
+    init,
+
+    ...bind,
 }

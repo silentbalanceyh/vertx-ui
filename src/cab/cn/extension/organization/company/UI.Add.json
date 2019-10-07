@@ -1,0 +1,140 @@
+{
+
+    "_form": {
+        "window": 1,
+        "columns":3,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "title,公司标题,,,,placeholder=（如：******有限公司）",
+                {
+                    "metadata":"name,公司名称",
+                    "optionConfig.rules":[
+                        "required,请输入公司名称",
+                        {
+                            "validator":"existing",
+                            "message":"对不起，该公司名称已经在系统中存在！",
+                            "config":{
+                                "uri":"/api/company/existing",
+                                "method":"POST"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "metadata": "type,公司性质,,,aiSelect,placeholder=（请选择公司性质）",
+                    "optionJsx.config.datum": "source=company.type,value=key,label=name"
+                }
+            ],
+            [
+                "homepage,公司主页,16"
+            ],
+            [
+                {
+                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号)或(座机号)",
+                    "optionConfig.rules": [
+                        "required,请输入座机号，座机号不能为空",
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入座机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"email,邮箱,,,,placeholder=（XXX@XXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入邮箱地址",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮箱地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号)或(传真号)",
+                    "optionConfig.rules": [
+                        "required,请输入传真号，传真号不能为空",
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入传真号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "address,公司地址,24"
+            ],
+            [
+                "title=商务信息"
+            ],
+            [
+                "taxTitle,发票抬头,,,,placeholder=（如：购物人名称、付款单位等）",
+                {
+                    "metadata":"taxCode,税号,,,,placeholder=由15/18/20位字符组成",
+                    "optionConfig.rules": [
+                        "required,请输入税号，税号不能为空",
+                        {
+                            "min": 15,
+                            "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
+                            "message": "格式错误,请正确输入税号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "corporationName,公司法人,,,,placeholder=（如：张**、王**等）",
+                {
+                    "metadata":"corporationPhone,法人电话,,,,placeholder=请输入法人电话",
+                    "optionConfig.rules": [
+                        "required,请输入法人电话，法人电话不能为空",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "格式错误,请正确输入法人电话！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "contactName,联系人姓名,,,,placeholder=（如：张**、王**等）",
+                {
+                    "metadata":"contactPhone,联系人电话,,,,placeholder=请输入联系人电话",
+                    "optionConfig.rules": [
+                        "required,请输入联系人电话，联系人电话不能为空",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "格式错误,请正确输入联系人电话！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "comment,公司简介,24,,aiTextArea,rows=4"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden":true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ],
+        "hidden": [
+            "companyId"
+        ],
+        "op": {
+            "$opAdd": "act.company.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的公司信息已经成功保存！"
+        }
+    }
+}

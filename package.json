@@ -86,7 +86,6 @@
         "url-loader": "2.1.0",
         "uuid": "^3.3.3",
         "yuidoc-mdeditor-theme": "^1.4.1",
-        "zero-ix": "file:../zero-ix"
     },
     "scripts": {
         "prestart": "sh shell/run-generate.sh",

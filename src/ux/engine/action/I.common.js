@@ -8,6 +8,9 @@ const mountEvent = (config = {}, reference, eventName = 'onClick') => {
     const eventFun = EVENT[config.event];
     if (U.isFunction(eventFun)) {
         const onEvent = eventFun(reference, config);
+        /*
+         * 权限限制处理，后期引入表单级别的权限控制
+         */
         if (U.isFunction(onEvent)) {
             config[eventName] = onEvent;
         } else {

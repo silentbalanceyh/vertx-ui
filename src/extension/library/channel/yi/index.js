@@ -9,6 +9,8 @@ import yiLayout from './yi.layout';
 // UI_FORM
 import yiForm from './yi.form';
 import yiAssist from './yi.datum';
+// 特殊加载
+import yiControl from './yi.control';
 
 export default {
     yiTabular,
@@ -19,4 +21,5 @@ export default {
     yiForm,
     /* */
     yiAssist,
+    yiControl,
 }

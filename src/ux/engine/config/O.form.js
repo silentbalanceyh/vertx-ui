@@ -175,6 +175,7 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
     /*
      * 6）权限控制
      */
+    // TODO: 权限控制部分，用于控制 $op 的权限信息
     return {
         form: rest,
         addOn
@@ -260,6 +261,12 @@ const configForm = (form, addOn = {}) => {
          * 配置 Raft 对应的 op
          */
         raft.authorized = Abs.clone(form.op);
+    }
+    /*
+     * initial 专用配置（初始化）
+     */
+    if (form.initial) {
+        raft.initial = Abs.clone(form.initial);
     }
     Logger.render(3);
     return raft;

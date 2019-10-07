@@ -35,8 +35,7 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.user.filter",
-            "$opDelete": "act.user.delete"
+            "$opFilter": "act.user.filter"
         }
     }
 }

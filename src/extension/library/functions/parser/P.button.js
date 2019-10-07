@@ -77,7 +77,41 @@ const parseComponent = (buttons = {}, options = {}, components = {}) => {
     }, 'component');
     return buttons;
 };
+const parseOps = (config = [], options = {}) => {
+    const {type} = options;
+    if ("LIST" === type) {
+        const {ops = []} = options;
+        if (config.options) {
+            ops.forEach(op => {
+                const item = {};
+                item.key = op['clientKey'];
+                config.options[item.key] = op['text'];
+            });
+        }
+    } else if ("FORM" === type) {
+        const {ops = []} = options;
+        if (config.form) {
+            const op = {};
+            const event = {};
+            ops.forEach(each => {
+                // 先嫁接 op
+                op[each['clientKey']] = each['action'];
+                event[each['clientKey']] = {
+                    event: each.event,
+                    config: each.config ? each.config : {}
+                };  // 处理 event
+            });
+            config.form.op = op;
+            // event 专用信息
+            if (!Ux.isEmpty(event)) {
+                config.event = event;
+            }
+        }
+    }
+    return config;
+};
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
-    parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async)
+    parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
+    parseOps: (config = [], options = {}, async = true) => toAsync(parseOps(config, options), async),
 })

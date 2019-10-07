@@ -20,7 +20,6 @@
             [
                 {
                     "metadata": "opassword,旧密码,14,,,type=password",
-                    "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入旧密码",
                         {
@@ -33,7 +32,6 @@
             [
                 {
                     "metadata": "npassword,新密码,14,,,type=password",
-                    "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入新密码",
                         {
@@ -56,7 +54,6 @@
             [
                 {
                     "metadata": "cpassword,确认密码,14,,,type=password",
-                    "optionConfig.validateTrigger": "onBlur",
                     "optionConfig.rules": [
                         "required,请输入新密码",
                         {

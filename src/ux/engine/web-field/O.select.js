@@ -15,8 +15,7 @@ const aiSelect = (reference, jsx = {}, onChange) => {
      * 2）$filters 是一个函数
      */
     const {config = {}} = jsx;
-    let cascade = R.Ant.toCascade(reference, config);
-    const options = R.Ant.toOptions(reference, config, cascade);
+    const options = R.Ant.toOptions(reference, config);
     /*
      * 1）onChange
      * 2）readOnly

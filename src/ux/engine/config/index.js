@@ -13,6 +13,7 @@ import tab from './O.tab';
 import dialog from './O.dialog';
 
 import Dev from "../../develop";
+import init from './O.init';
 
 const exported = {
     ...form,
@@ -20,6 +21,7 @@ const exported = {
     ...query,
     ...tab,
     ...dialog,
+    ...init,
 };
 Dev.dgDebug(exported, "所有配置类方法", "#DAA520");
 export default exported;

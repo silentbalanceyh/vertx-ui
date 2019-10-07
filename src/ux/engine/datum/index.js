@@ -7,5 +7,5 @@ export default {
     ...fromFn,
     ...yo,
     ...on,
-    ...element
+    ...element,
 }

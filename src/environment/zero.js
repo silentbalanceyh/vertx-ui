@@ -1,6 +1,6 @@
 import React from "react";
 import Ux from "ux";
-import {LoadingContent} from 'web';
+import {LoadingAlert, LoadingContent} from 'web';
 import Fn from './zero.fn';
 import U from 'underscore';
 
@@ -82,23 +82,39 @@ export default (options = {}) => {
             }
 
             render() {
-                // 计算Render，是否执行加载
-                const render = Fn.fnRender(this.props, options);
-                // 检查Form专用程序
-                ensureForm(this, options);
-                // 打印日志
-                const {form} = this.props;
-                if (form) {
-                    const isTouched = form.isFieldsTouched();
-                    if (!isTouched) {
+                const {error} = this.state;
+                if (error) {
+                    const {$hoc} = this.state;
+                    const fatal = $hoc ? $hoc._("_fatal") : {};
+                    console.error(error);
+                    return (
+                        <div style={{
+                            paddingTop: "10%",
+                            paddingLeft: "20%",
+                            paddingRight: "20%"
+                        }}>
+                            <LoadingAlert $alert={fatal.run}
+                                          $icon={"stop"} $type={"error"}/>
+                        </div>
+                    )
+                } else {
+                    // 计算Render，是否执行加载
+                    const render = Fn.fnRender(this.props, options);
+                    // 检查Form专用程序
+                    ensureForm(this, options);
+                    // 打印日志
+                    const {form} = this.props;
+                    if (form) {
+                        const isTouched = form.isFieldsTouched();
+                        if (!isTouched) {
+                            Fn.fnLog(this, options);
+                        }
+                    } else {
+                        // 打印日志
                         Fn.fnLog(this, options);
                     }
-                } else {
-                    // 打印日志
-                    Fn.fnLog(this, options);
+                    return render ? super.render() : <LoadingContent/>;
                 }
-
-                return render ? super.render() : <LoadingContent/>;
             }
         };
         // Redux连接配置：顺序不可替换

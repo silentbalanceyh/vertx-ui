@@ -7,11 +7,25 @@
             ],
             [
                 "name,名称,12",
-                "code,编号,12"
+                {
+                    "metadata": "code,编码,12,,,placeholder=（根据规范编码全大写，如DETP.IT）",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/dept/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
+                        }
+                    ]
+                }
             ],
             [
                 {
-                    "metadata": "managerName,部门经理,12,,aiListSelector",
+                    "metadata": "managerName,部门经理,12,,aiListSelector,placeholder=（请选择部门经理）",
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
@@ -37,17 +51,31 @@
                             "realname,c": "名称"
                         }
                     }
-                },
-                {
-                    "metadata": "deptId,上级部门,12,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
                 }
             ],
             [
                 {
-                    "metadata": "companyId,所属公司,12,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                    "metadata": "companyId,所属公司,12,,aiTreeSelect,placeholder=（请选择所属公司）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=companyId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionConfig.rules":[
+                        "required,请选择部门所挂靠的公司！"
+                    ]
                 },
+                {
+                    "metadata": "deptId,上级部门,12,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=deptId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.config.cascade": {
+                        "source": "companyId",
+                        "target": "companyId"
+                    },
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
                 {
                     "metadata": "active,启用,12,,aiCheckbox",
                     "optionConfig": {

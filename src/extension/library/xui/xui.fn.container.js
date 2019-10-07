@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import U from 'underscore';
 import React from 'react';
+import seekInherit from './xui.fn.inherit';
 
 export default (container = {}, UI = {}, inherit, fnJsx) => {
     const fnRender = U.isFunction(fnJsx) ? fnJsx : () => false;
@@ -16,11 +17,7 @@ export default (container = {}, UI = {}, inherit, fnJsx) => {
              * 覆盖 config
              */
             attrs.config = config;
-            attrs.key = container.key;
-            /*
-             * 元数据统一处理
-             */
-            attrs._type = container.name;
+            seekInherit(attrs, container);
             return (
                 <Component {...attrs}>
                     {fnRender()}
@@ -28,6 +25,7 @@ export default (container = {}, UI = {}, inherit, fnJsx) => {
             )
         } else {
             // 无容器
+            console.error(`[ Ox ] 设置了容器但未找到，name = ${container.name}`);
             return fnRender();
         }
     }

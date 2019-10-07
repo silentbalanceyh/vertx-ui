@@ -29,6 +29,7 @@ const remove = (reference) => (params = {}, config = {}) => {
 };
 const filter = (reference) => (params = {}) => {
     const {connector = "AND", ...rest} = params;
+    console.info(params);
     const values = Ux.qrForm(rest, connector);
     Fn.rx(reference).filter(values);    // 维持数据专用
     return Ux.promise(values)

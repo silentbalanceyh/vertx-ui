@@ -1,8 +1,6 @@
-export default (path, {props}) => {
+import Cmn from './I.common';
+
+export default (expression, {props}) => Cmn.fnPredicate("FORM", expression, () => {
     const {form} = props;
-    const field = path[0];
-    if (field) {
-        const value = form.getFieldValue(field);
-        return value;
-    }
-}
+    return form.getFieldValue(expression);
+});

@@ -6,7 +6,8 @@
 import T from "./O.to";
 
 const rxResize = (reference) => (adjust = 0) => {
-    const maxHeight = T.toHeight(adjust);
+    const maxHeight = T.toHeight("number" === typeof adjust ?
+        adjust : 0);
     let $heightStyle = {style: {maxHeight}};
     reference.setState({$heightStyle});
 };

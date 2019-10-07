@@ -1,6 +1,6 @@
 {
     "_page": {
-        "title": "查看企业信息"
+        "title": "查看公司信息"
     },
     "_form": {
         "window": 0.15,
@@ -9,11 +9,11 @@
                 "title=基本信息"
             ],
             [
-                "title,企业标题,14,,aiMagic",
-                "name,企业名称,10,,aiMagic"
+                "title,公司标题,14,,aiMagic",
+                "name,公司名称,10,,aiMagic"
             ],
             [
-                "code,企业系统编号,14,,aiMagic"
+                "code,公司系统编号,14,,aiMagic"
             ],
             [
                 "phone,座机,14,,aiMagic",
@@ -31,10 +31,10 @@
             ],
             [
                 "taxTitle,开票标题,14,,aiMagic",
-                "taxCode,企业税号,10,,aiMagic"
+                "taxCode,公司税号,10,,aiMagic"
             ],
             [
-                "corporationName,企业法人,14,,aiMagic",
+                "corporationName,公司法人,14,,aiMagic",
                 "corporationPhone,法人电话,10,,aiMagic"
             ],
             [
@@ -42,7 +42,7 @@
                 "contactPhone,联系人电话,10,,aiMagic"
             ],
             [
-                "comment,企业简介,19,,aiMagic"
+                "comment,公司简介,19,,aiMagic"
             ]
         ]
     }

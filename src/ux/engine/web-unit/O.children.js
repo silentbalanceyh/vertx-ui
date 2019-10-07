@@ -28,12 +28,26 @@ function aiChild() {
             return false;
         }
     } else {
-        const child = arguments[0];
+        const children = arguments[0];
         const additional = arguments[1];
         if (Ux.isEmpty(additional)) {
-            return child;
+            return children;
         } else {
-            return React.cloneElement(child, {
+            /*
+             * 暂时只合并配置 config
+             */
+            if (additional && additional.config
+                && children.props.config) {
+                /* 合并配置到 additional 中的 config，构造合并后的配置
+                *  componentConfig + container构造的新的 config
+                *  针对组件：
+                *  1）List
+                *  2）Form
+                * */
+                const {$form = {}} = children.props.config;
+                additional.$form = Ux.clone($form);
+            }
+            return React.cloneElement(children, {
                 ...additional
             });
         }
@@ -49,12 +63,12 @@ const aiChildren = (reference, additional = {}) => {
              */
             return children
                 .filter(item => undefined !== item)
-                .map(child => aiChild(reference, additional, child));
+                .map(child => aiChild(child, additional));
         } else {
             /*
              * 单独唯一的对象
              */
-            return aiChild(reference, additional, children);
+            return aiChild(children, additional);
         }
     } else {
         /*

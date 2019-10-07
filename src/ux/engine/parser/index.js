@@ -1,7 +1,5 @@
-// 导入第三方库
-import U from 'underscore';
 // 导入当前目录
-import Expr from './I.fn.parser';
+import parseValue from './I.fn.value';
 // 导入外层
 import Dev from '../../develop';
 /*
@@ -25,61 +23,6 @@ const parseField = (input) => {
         field = input;
     }
     return {op, field};
-};
-/*
- * 值解析
- */
-const parseValue = (valueOrExpr, {state, props}) => {
-    let value;
-    if (valueOrExpr) {
-        if ("string" === typeof valueOrExpr) {
-            /*
-             * 表达式
-             */
-            const kv = valueOrExpr.split(":");
-            if (2 === kv.length) {
-                /*
-                 * 表达式分为两部分
-                 */
-                const source = kv[0];
-                const expression = kv[1];
-                /*
-                 * 读取 parser
-                 */
-                let searcherInput;
-                const parser = Expr[source] ? Expr[source].parser : undefined;
-                if (U.isFunction(parser)) {
-                    searcherInput = parser(expression);
-                } else {
-                    searcherInput = expression.split('.');
-                }
-                /*
-                 * 读取 searcher
-                 */
-                const searcher = Expr[source].searcher;
-                if (U.isFunction(searcher)) {
-                    value = searcher(searcherInput, props, state);
-                } else {
-                    const propName = `$${source}`;
-                    const dataObject = props[propName];
-                    if (dataObject && U.isFunction(dataObject._)) {
-                        value = dataObject._(searcherInput);
-                    }
-                }
-            } else {
-                /*
-                 * 保留原始值
-                 */
-                value = valueOrExpr;
-            }
-        } else {
-            /*
-             * 非表达式
-             */
-            value = valueOrExpr;
-        }
-    }
-    return value;
 };
 const parseInput = (input = {}, {props, state}) => {
     // 查找根节点

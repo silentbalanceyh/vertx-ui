@@ -12,7 +12,7 @@ import U from 'underscore';
  * }
  */
 export default (reference, fnRender, config = {}) => {
-    const {title, header,...LOG} = config;
+    const {title, header, ...LOG} = config;
     return yoRender(reference, () => {
         const attrs = {};
         if (title) {
@@ -21,6 +21,11 @@ export default (reference, fnRender, config = {}) => {
              */
             attrs.$title = title;
         }
+        /*
+         * 切换类按钮处理
+         * 1）切换显示按钮专用
+         * 2）处理 $activeKey 的状态
+         */
         return (
             <PageCard reference={reference} {...attrs}>
                 {

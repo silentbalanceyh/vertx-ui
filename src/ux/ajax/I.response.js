@@ -25,6 +25,7 @@ const _ajaxExtract = (request, params, body, response) => {
 const ajaxResponse = async (request, params) => mockAjax(request, params,
     async () => {
         const response = await fetch(request);
+
         let body = {};
         if (response.ok) {
             body = await response.json();

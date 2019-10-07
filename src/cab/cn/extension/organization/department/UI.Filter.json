@@ -44,8 +44,7 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.dept.filter",
-            "$opDelete": "act.dept.delete"
+            "$opFilter": "act.dept.filter"
         }
     }
 }

@@ -9,7 +9,7 @@
     },
     "_assist": {
         "ajax.groups": {
-            "uri": "/api/groups"
+            "uri": "/api/group/by/sigma"
         }
     },
     "_grid": {

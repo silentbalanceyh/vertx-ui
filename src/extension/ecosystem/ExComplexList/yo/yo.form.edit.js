@@ -1,5 +1,6 @@
 import Ex from "ex";
 import Op from "../Op.Event";
+import Ux from "ux";
 
 export default (reference, item = {}) => {
     const formAttrs = Ex.yoAmbient(reference);
@@ -12,6 +13,14 @@ export default (reference, item = {}) => {
      */
     formAttrs.doDirty = Ex.rxDirty(reference);
     formAttrs.doSubmitting = Ex.rxSubmitting(reference);
+    formAttrs.$mode = Ux.Env.FORM_MODE.EDIT;
+    /*
+     * 读取 $identifier（动态表单必须）
+     */
+    const {options = {}} = reference.state;
+    if (options[Ex.Opt.IDENTIFIER]) {
+        formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
+    }
     /*
      * 设置表单初始值
      */

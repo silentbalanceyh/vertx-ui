@@ -1,6 +1,11 @@
 {
     "_page": {
-        "title": "角色管理"
+        "title": "角色管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
     },
     "_grid": {
         "query": {
@@ -138,6 +143,7 @@
                         "name,角色名",
                         "code,角色系统名",
                         "comment,备注",
+                        "power,是否具有定制权限",
                         "active,是否启用",
                         "createdBy,创建人",
                         "createdAt,创建时间",

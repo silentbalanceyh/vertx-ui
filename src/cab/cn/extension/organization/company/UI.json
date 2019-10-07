@@ -1,0 +1,16 @@
+{
+    "_page": {
+        "title": "企业信息管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabCompany",
+        "items": "公司信息,tabCompany,bank;分公司管理,tabSub,cluster"
+    }
+}

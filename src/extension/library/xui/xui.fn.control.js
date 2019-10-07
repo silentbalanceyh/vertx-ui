@@ -3,15 +3,18 @@ import Ex from 'ex';
 import Ux from 'ux';
 
 import xuiContainer from './xui.fn.container';
+import seekInherit from './xui.fn.inherit';
 
 const getData = (inherit, source = "") => {
     /*
      * 读取上层引用
      */
-    const {reference} = inherit;
-    const state = reference.state ? reference.state : {};
-    const props = Ux.clone(inherit);
-    return Ux.parseValue(source, {state, props});
+    if (source) {
+        const {reference} = inherit;
+        const state = reference.state ? reference.state : {};
+        const props = Ux.clone(inherit);
+        return Ux.parseValue(source, {state, props});
+    }
 };
 
 export default (control = {}, UI = {}, inherit = {}) => {
@@ -37,12 +40,8 @@ export default (control = {}, UI = {}, inherit = {}) => {
                 const {event = {}, ...rest} = $control.config;
                 attrs.config = rest;
                 attrs.event = event;
-                attrs.key = control.key;
-                /*
-                 * 元数据统一处理
-                 */
-                attrs._type = $control.name;
-                attrs._page = control['pageId'];
+                seekInherit(attrs, $control);
+
                 return (
                     <Component {...attrs}/>
                 )

@@ -116,7 +116,7 @@ const isAuthorized = (reference) => {
     }
 };
 const toLoading = (consumer, seed = 1) => {
-    const ms = Value.valueInt(Cv['LOADING'], 256);
+    const ms = Value.valueInt(Cv['LOADING'], 288);
     setTimeout(consumer, ms * seed);
 };
 export default {

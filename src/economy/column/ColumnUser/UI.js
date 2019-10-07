@@ -10,13 +10,10 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$ready = false, value = "", $system = true} = this.state;
+        const {$ready = false, value = ""} = this.state;
         return $ready ? (
             <Fragment>
-                <Icon type={$system ? "setting" : "user"} style={{
-                    color: "#CD2990",   // 默认颜色
-                    fontSize: 16
-                }}/>
+                <Icon {...Op.yoIcon(this)}/>
                 &nbsp;&nbsp;
                 {value}
             </Fragment>

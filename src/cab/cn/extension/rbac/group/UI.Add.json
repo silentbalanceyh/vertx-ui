@@ -6,10 +6,24 @@
                 "title=组基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,名称,14"
             ],
             [
-                "code,用户组编码,14"
+                {
+                    "metadata": "code,编码,14,,,placeholder=（根据规范编码全大写，如G10 - GROUP.COMPANY）",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/group/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
+                        }
+                    ]
+                }
             ],
             [
                 {

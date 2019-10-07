@@ -33,7 +33,6 @@ const configDialog = (input = {}) => {
         button,
     };
 };
-
 export default {
     configDialog
 }

@@ -1,3 +1,5 @@
+import Ux from 'ux';
+
 export default {
     IDENTIFIER: (identifier) => {
         const state = {};
@@ -10,5 +12,12 @@ export default {
         const state = {};
         state.$filters = condition;
         return state;
+    },
+    RECORD: (normalized = {}) => {
+        const state = {};
+        if (!Ux.isEmpty(normalized)) {
+            state.$record = normalized;
+            return state;
+        }
     }
 }
