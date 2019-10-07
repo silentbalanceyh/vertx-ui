@@ -1,6 +1,6 @@
 {
     "_assist": {
-        "company.nature": {
+        "company.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
                 "type": "FIX:__zero.company.type__"

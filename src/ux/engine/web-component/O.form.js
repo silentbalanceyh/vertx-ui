@@ -1,5 +1,6 @@
 import Abs from '../../abyss';
 import Dev from '../../develop';
+import Cfg from '../config';
 
 import React from 'react';
 import U from 'underscore';
@@ -45,6 +46,34 @@ const aiField = (reference, values = {}, raft = {}) =>
             </Row>
         )
     });
+const aiInit = (reference, values = {}) => {
+    /*
+     * 基础初始化
+     */
+    const {$inited = {}, $record = {}} = reference.props;
+    let initials = {};
+    if (values && !Abs.isEmpty(values)) {
+        initials = Abs.clone(values);
+    } else {
+        initials = Abs.clone($inited);
+    }
+    /*
+     * 配置初始化
+     */
+    const {raft = {}} = reference.state;
+    let detect = {};
+    if (raft.initial) {
+        /*
+         * 基础解析
+         */
+        detect = Cfg.initial(reference, raft, $record);
+    }
+    /*
+     * initials 的优先级高于 detect
+     */
+    Object.assign(detect, initials);
+    return Abs.clone(detect);   // 拷贝最终的值
+};
 /*
  * config 数据结构：
  * {
@@ -53,18 +82,9 @@ const aiField = (reference, values = {}, raft = {}) =>
  */
 const aiForm = (reference, values, config = {}) => {
     /*
-     * 初始值计算，代码优先的初始化
-     */
-    const {$inited = {}} = reference.props;
-    /*
      * 初始值 initial 优先
      */
-    let initials = {};
-    if (values && !Abs.isEmpty(values)) {
-        initials = Abs.clone(values);
-    } else {
-        initials = Abs.clone($inited);
-    }
+    let initials = aiInit(reference, values);
     /*
      * 日志记录
      */

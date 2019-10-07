@@ -9,10 +9,12 @@ const getData = (inherit, source = "") => {
     /*
      * 读取上层引用
      */
-    const {reference} = inherit;
-    const state = reference.state ? reference.state : {};
-    const props = Ux.clone(inherit);
-    return Ux.parseValue(source, {state, props});
+    if (source) {
+        const {reference} = inherit;
+        const state = reference.state ? reference.state : {};
+        const props = Ux.clone(inherit);
+        return Ux.parseValue(source, {state, props});
+    }
 };
 
 export default (control = {}, UI = {}, inherit = {}) => {

@@ -49,13 +49,13 @@
                 },
                 {
                     "metadata": "type,员工分类,,,aiSelect",
-                    "optionJsx.config.datum": "source=company.nature,value=key,label=name"
+                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
                 }
             ],
             [
                 {
                     "metadata": "companyId,所属公司,,,aiTreeSelect",
-                    "optionJsx.config.datum": "source=resource.companies,value=key,label=name",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=companyId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
@@ -64,7 +64,7 @@
                 },
                 {
                     "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
-                    "optionJsx.config.datum": "source=resource.department,value=key,label=name",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
@@ -131,8 +131,8 @@
     },
     "_modal": {
         "success": {
-            "saved": "您好，您的分公司信息更新成功！",
-            "removed": "当前分公司信息已删除成功！"
+            "saved": "您好，您的职员信息更新成功！",
+            "removed": "当前职员信息已删除成功！"
         }
     }
 }

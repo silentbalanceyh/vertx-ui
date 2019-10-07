@@ -4,20 +4,39 @@ import Field from '../web-field';
 import Abs from '../../abyss';
 import Action from '../action';
 import Value from "../../element";
+import parser from '../parser';
 
 import raftDepend from './I.fn.depend';
 
-const raftValue = (cell = {}, values = {}) => {
+const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
     if (values.hasOwnProperty(cell.field)) {
+        /*
+         * 计算初始值
+         * 1）如果 literal 是 Object 且包含了 $delay，执行二次表达
+         * 2）如果 literal 就是 Object 且不包含 $delay，直接用 literal
+         * 3）非 Object 的时候，是否处理时间格式，cell.moment 有定义
+         */
         let literal = values[cell.field];
-        if (cell.moment) {
-            if (U.isArray(literal)) {
-                const newArray = [];
-                literal.forEach(item => newArray.push(Value.valueTime(item)));
-                literal = newArray;
-            } else {
-                literal = Value.valueTime(literal);
+        if (U.isObject(literal)) {
+            if (literal) {
+                const {$delay = false, expression = ""} = literal;
+                if ($delay) {
+                    /*
+                     * 解析
+                     */
+                    literal = parser.parseValue(expression, reference);
+                }
+            }
+        } else {
+            if (cell.moment) {
+                if (U.isArray(literal)) {
+                    const newArray = [];
+                    literal.forEach(item => newArray.push(Value.valueTime(item)));
+                    literal = newArray;
+                } else {
+                    literal = Value.valueTime(literal);
+                }
             }
         }
         cell.optionConfig.initialValue = literal;
@@ -133,9 +152,9 @@ const raftRender = (cell = {}, config = {}) => {
          */
         return (values) => {
             /*
-             * 拷贝动作必须在这里做
+             * 执行初始值，包含 $delay 模式
              */
-            raftValue(cell, values);
+            raftValue(cell, values, reference);
             const optionConfig = Abs.clone(cell.optionConfig);
             /*
              * 新增 depend 规则

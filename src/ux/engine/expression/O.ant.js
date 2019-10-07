@@ -16,7 +16,6 @@ class RxAnt {
     static onReadOnly = Pure.readOnly;
     // 特殊
     static toParsed = Datum.parseExpr;
-    static toCascade = Datum.parseCascade;  // 解析依赖
     static toDatum = Datum.parseDatum;      // 读取Datum
     static toOrigin = Datum.parseOrigin;    // Origin专用处理
 

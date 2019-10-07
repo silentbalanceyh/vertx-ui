@@ -1,12 +1,12 @@
 {
     "_assist": {
-        "resource.companies": {
-            "uri": "/api/companys"
+        "resource.companys": {
+            "uri": "/api/company/by/sigma"
         },
-        "resource.department": {
-            "uri": "/api/depts"
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
         },
-        "company.nature": {
+        "identity.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
                 "type": "FIX:__zero.identity.type__"

@@ -5,6 +5,7 @@ import E from "../../error";
 import Expr from "./index";
 import Datum from '../datum';
 import T from './I.tool';
+import Pr from '../parser';
 import Ut from '../../unity';
 
 const _parseData = (reference, config = {}) => {
@@ -100,15 +101,68 @@ const getDatum = (reference, config = {}, filter = () => true) => {
     }
     return options;
 };
+/*
+ * 读取 filter 的函数信息
+ */
+const getFilter = (reference, config = {}) => {
+    let fnCascade = (nil) => true;    // 默认不做任何过滤
+    // let fnFilter = (nil) => true;     // 默认不做任何过滤
+    if (config['cascade']) {
+        /*
+         * 联动下拉处理 fnCascade
+         * 特殊情况处理，等价于 filter 中的 target = FORM:field
+         */
+        const cascade = config['cascade'];
+        const expr = cascade.target;
+        const value = Pr.parseValue(expr, reference);
+        fnCascade = item => {
+            if (value) {
+                /*
+                 * Cascade 计算
+                 * 有值的时候很好处理，直接针对值进行 cascade 的过滤
+                 * */
+                return value === item[cascade.source];
+            } else {
+                /*
+                 * 无值的时候分为两种情况
+                 * 1）如果 NULL == expr，那么直接使用 ! 进行过滤
+                 * 2）否则什么都不筛选，直接返回 false
+                 */
+                if ("NULL" === expr) {
+                    return !item[cascade.source];
+                } else {
+                    return false;
+                }
+            }
+        }
+        // const value = Ut.formGet(reference, field);
+        // fnCascade = item => value === item[cascade.source];
+    }
+    return fnCascade; // 双函数合并 && fnFilter(item)
+};
 
 const getSource = (reference, config, filter = {}) => {
     let options = [];
     if (config.items) {
-        // 如果存在根节点，则直接items处理
+        /*
+         * 直接配置 config.items
+         * 1）这种情况不存在 filter
+         * 2）这种情况同样不存在 cascade
+         * 这种方式解析出来的 options 就是下拉的所有值，因为值是常量，所以可以固定处理
+         * 在设置 initial 的时候可以直接根据常量处理成 FIX:xxx 的方式得到最终的初始值
+         * 所以在这种情况下 filter 和 cascade 没有任何作用，也就是说如果使用 items 则
+         * 不能启用 filter / cascade
+         */
         options = Expr.aiExprOption(config.items);
     } else if (config.datum) {
-        // 如果存在datum节点，则从assist/tabular数据源中读取
-        options = getDatum(reference, config, filter);
+        /*
+         * 如果存在datum节点，则从assist/tabular数据源中读取
+         * 1）这种情况下主要用于在 assist / tabular 数据源中执行计算
+         * 2）filter / cascade 是互斥的，不可同时操作，如果启用了 filter 那么就不执行联动过滤，如果启用了 cascade 就已经执行了初始过滤了
+         * -- 后续考虑是否合并，目前没有场景
+         * 3）解析 config.filter / config.cascade
+         */
+        options = getDatum(reference, config, getFilter(reference, config));
         const datum = parseDatum(config);
         // 处理config中核心的expr节点
         options.forEach(each => T.applyItem(each, datum, config.expr));
@@ -127,18 +181,7 @@ const parseOrigin = (items = [], config = {}) => {
     });
     return options;
 };
-const parseCascade = (reference, config = {}) => {
-    let $filters = {};
-    if (config['cascade']) {
-        const cascade = config['cascade'];
-        const field = cascade.target;
-        const value = Ut.formGet(reference, field);
-        $filters = item => value === item[cascade.source];
-    }
-    return $filters;
-};
 export default {
-    parseCascade,
     parseExpr,
     parseDatum: getDatum,
     parseOrigin,

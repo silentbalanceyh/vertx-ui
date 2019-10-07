@@ -1,5 +1,8 @@
 import React from 'react';
 import Ex from 'ex';
+import Op from './Op';
+import {ExComplexList} from 'ei';
+import Ux from 'ux';
 
 const LOG = {
     name: "OxList",
@@ -9,11 +12,28 @@ const LOG = {
 class Component extends React.PureComponent {
     state = {};
 
-    render() {
-        console.error(this.props);
-        return Ex.yoRender(this, () => {
+    componentDidMount() {
+        Op.yiModule(this);
+    }
 
-            return false;
+    render() {
+        return Ex.yoRender(this, () => {
+            const {config = {}, $record = {}} = this.props;  // 基本配置
+            const $config = Ux.clone(config);
+            if ($config.options) {
+                // 动静切换（由于OxList外置已经处理过 Op了，所以此处仅强制 dynamic.op = false;
+                $config.options[Ex.Opt.DYNAMIC_OP] = false;
+            }
+            const {$form = {}} = this.state;   // 表单配置
+            const inherit = Ex.yoAmbient(this);
+            /*
+             * 添加专用变量
+             */
+            return (
+                <ExComplexList {...inherit} config={$config}
+                               $form={$form}    // 添加专用
+                               $record={$record}/>
+            );
         }, LOG);
     }
 }

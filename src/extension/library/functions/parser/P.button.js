@@ -88,6 +88,25 @@ const parseOps = (config = [], options = {}) => {
                 config.options[item.key] = op['text'];
             });
         }
+    } else if ("FORM" === type) {
+        const {ops = []} = options;
+        if (config.form) {
+            const op = {};
+            const event = {};
+            ops.forEach(each => {
+                // 先嫁接 op
+                op[each['clientKey']] = each['action'];
+                event[each['clientKey']] = {
+                    event: each.event,
+                    config: each.config ? each.config : {}
+                };  // 处理 event
+            });
+            config.form.op = op;
+            // event 专用信息
+            if (!Ux.isEmpty(event)) {
+                config.event = event;
+            }
+        }
     }
     return config;
 };

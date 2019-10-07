@@ -14,8 +14,8 @@
                 "type": "FIX:__zero.customer.type__"
             }
         },
-        "resource.companies": {
-            "uri": "/api/companys"
+        "resource.companys": {
+            "uri": "/api/company/by/sigma"
         }
     },
     "_grid": {

@@ -12,7 +12,7 @@ export default (reference, config = {}) => {
     return new Promise((resolve) => {
         if (options[Ex.Opt.DYNAMIC_OP]) {
             /* 动态 Op */
-
+            console.error("动态");
         } else {
             /* 静态 Op */
             const opts = Ux.clone(options);

@@ -25,7 +25,7 @@
             ],
             [
                 {
-                    "metadata": "managerName,部门经理,12,,aiListSelector",
+                    "metadata": "managerName,部门经理,12,,aiListSelector,placeholder=（请选择部门经理）",
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
@@ -55,8 +55,8 @@
             ],
             [
                 {
-                    "metadata": "companyId,所属公司,12,,aiTreeSelect",
-                    "optionJsx.config.datum": "source=resource.companies,value=key,label=name",
+                    "metadata": "companyId,所属公司,12,,aiTreeSelect,placeholder=（请选择所属公司）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=companyId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
@@ -65,7 +65,7 @@
                 },
                 {
                     "metadata": "deptId,上级部门,12,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
-                    "optionJsx.config.datum": "source=resource.department,value=key,label=name",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {

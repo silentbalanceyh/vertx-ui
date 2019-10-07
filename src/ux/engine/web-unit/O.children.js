@@ -33,6 +33,20 @@ function aiChild() {
         if (Ux.isEmpty(additional)) {
             return children;
         } else {
+            /*
+             * 暂时只合并配置 config
+             */
+            if (additional && additional.config
+                && children.props.config) {
+                /* 合并配置到 additional 中的 config，构造合并后的配置
+                *  componentConfig + container构造的新的 config
+                *  针对组件：
+                *  1）List
+                *  2）Form
+                * */
+                const {$form = {}} = children.props.config;
+                additional.$form = Ux.clone($form);
+            }
             return React.cloneElement(children, {
                 ...additional
             });

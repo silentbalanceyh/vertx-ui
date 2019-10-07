@@ -30,11 +30,11 @@
             ],
             [
                 {
-                    "metadata":"phone,座机,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号)或(座机号)",
                     "optionConfig.rules": [
                         "required,请输入座机号，座机号不能为空",
                         {
-                            "pattern": "[0-9-()（）]{7,18}",
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
                             "message": "格式错误,请正确输入座机号！"
                         }
                     ]
@@ -50,11 +50,11 @@
                     ]
                 },
                 {
-                    "metadata":"fax,传真,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号)或(传真号)",
                     "optionConfig.rules": [
                         "required,请输入传真号，传真号不能为空",
                         {
-                            "pattern": "(^(\\d{3,4}-)?\\d{7,8})$|^((1[0-9][0-9]\\d{8}$))",
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
                             "message": "格式错误,请正确输入传真号！"
                         }
                     ]
@@ -69,12 +69,12 @@
             [
                 "taxTitle,发票抬头,,,,placeholder=（如：购物人名称、付款单位等）",
                 {
-                    "metadata":"taxCode,税号,,,,placeholder=（由15/17/18/20位字符组成）",
+                    "metadata":"taxCode,税号,,,,placeholder=由15/18/20位字符组成",
                     "optionConfig.rules": [
                         "required,请输入税号，税号不能为空",
                         {
                             "min": 15,
-                            "pattern": "^[A-Z0-9]{15}$|^[A-Z0-9]{18}$|^[A-Z0-9]{20}$",
+                            "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
                             "message": "格式错误,请正确输入税号！"
                         }
                     ]

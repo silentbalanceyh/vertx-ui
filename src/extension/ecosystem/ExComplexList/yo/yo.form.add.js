@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 import Op from "../Op.Event";
 
 export default (reference, item = {}) => {
@@ -17,6 +18,14 @@ export default (reference, item = {}) => {
      * 这个值就是 Tab 中的 activeKey
      */
     formAttrs.$addKey = item.key;
+    formAttrs.$mode = Ux.Env.FORM_MODE.ADD;
+    /*
+     * 读取 $identifier（动态表单必须）
+     */
+    const {options = {}} = reference.state;
+    if (options[Ex.Opt.IDENTIFIER]) {
+        formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
+    }
     /*
      * 提供 $query 用于处理特殊条件
      * Tabular / Category

@@ -15,6 +15,10 @@ class Component extends React.PureComponent {
         Op.yiModule(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuModule(this, {state: prevState, props: prevProps});
+    }
+
     render() {
         return Ex.yoRender(this, () => {
             /*
@@ -24,6 +28,7 @@ class Component extends React.PureComponent {
             return Ux.aiChildren(this, {
                 config: $config,
             })
+
         }, LOG)
     }
 }

@@ -49,13 +49,13 @@
                 },
                 {
                     "metadata": "type,员工分类,,,aiSelect,placeholder=（请选择员工分类）",
-                    "optionJsx.config.datum": "source=company.nature,value=key,label=name"
+                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
                 }
             ],
             [
                 {
                     "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择部门所挂靠的公司）",
-                    "optionJsx.config.datum": "source=resource.companies,value=key,label=name",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=companyId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
@@ -64,7 +64,7 @@
                 },
                 {
                     "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
-                    "optionJsx.config.datum": "source=resource.department,value=key,label=name",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
@@ -127,7 +127,7 @@
     },
     "_modal": {
         "success": {
-            "added": "您好，您的公司信息已经成功保存！"
+            "added": "您好，您的职员信息已经成功保存！"
         }
     }
 }

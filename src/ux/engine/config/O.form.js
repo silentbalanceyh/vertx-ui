@@ -262,6 +262,12 @@ const configForm = (form, addOn = {}) => {
          */
         raft.authorized = Abs.clone(form.op);
     }
+    /*
+     * initial 专用配置（初始化）
+     */
+    if (form.initial) {
+        raft.initial = Abs.clone(form.initial);
+    }
     Logger.render(3);
     return raft;
 };

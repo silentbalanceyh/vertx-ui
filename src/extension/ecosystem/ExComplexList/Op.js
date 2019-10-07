@@ -12,7 +12,7 @@ const yiList = (reference) => {
         return Init
             .sync(reference, config)                                /* W02: 静态状态，来源 config */
             .then(state => Init.async(reference, config, state))    /* W03: 动态状态，来源 远程或其他 */
-            .then(state => Init.ready(reference, state))                       /* W04: 处理准备状态 */
+            .then(state => Init.ready(reference, state));           /* W04: 处理准备状态 */
     }
 };
 const yuList = (reference, previous = {}) => {
@@ -30,14 +30,13 @@ const yuList = (reference, previous = {}) => {
          * 默认的 配置处理
          */
         reference.setState({$ready: false});
-        Ux.toLoading(() =>
-            yiList(reference)
-                .then(state => {
-                    /*
-                     * 更新状态
-                     */
-                    reference.setState(Ux.clone(state));
-                }))
+        Ux.toLoading(() => yiList(reference)
+            .then(state => {
+                /*
+                 * 更新状态
+                 */
+                reference.setState(Ux.clone(state));
+            }))
     } else {
         const $queryChecked = Ex.upQuery(props, prevProps);
         if ($queryChecked) {

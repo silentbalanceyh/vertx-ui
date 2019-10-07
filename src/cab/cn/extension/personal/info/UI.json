@@ -49,11 +49,11 @@
             ],
             [
                 {
-                    "metadata":"workPhone,工作电话,10,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "metadata":"workPhone,工作电话,10,,,placeholder=格式:(区号-座机号)或(座机号)",
                     "optionConfig.rules": [
                         "required,请输入工作电话，工作电话不能为空",
                         {
-                            "pattern": "[0-9-()（）]{7,18}",
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
                             "message": "格式错误,请正确输入工作电话！"
                         }
                     ]

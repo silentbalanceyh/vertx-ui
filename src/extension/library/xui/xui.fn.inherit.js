@@ -17,21 +17,28 @@ export default (attrs = {}, config) => {
      * Fabric 传入值
      */
     const {reference} = attrs;
-    if (reference && reference.state) {
-        const {$fabric = {}} = reference.state;
-        /*
-         * 命中当前 control 的信息
-         */
-        if (!Ux.isEmpty($fabric)) {
-            const fabric = $fabric[config.key];
-            if (fabric) {
-                /*
-                 * 直接读取 $fabric 专用数据信息
-                 * 1）这里需要注意的是 $fabric 中的数据会进行一次筛选（在配置中针对 control 筛选）
-                 * 2）筛选过后，会直接合并到 attrs 中，如果出现了重名，原始的内容会被覆盖掉，所以请小心
-                 */
-                Object.assign(attrs, fabric);
+    if (reference) {
+        if (reference.state) {
+            const {$fabric = {}} = reference.state;
+            /*
+             * 命中当前 control 的信息
+             */
+            if (!Ux.isEmpty($fabric)) {
+                const fabric = $fabric[config.key];
+                if (fabric) {
+                    /*
+                     * 直接读取 $fabric 专用数据信息
+                     * 1）这里需要注意的是 $fabric 中的数据会进行一次筛选（在配置中针对 control 筛选）
+                     * 2）筛选过后，会直接合并到 attrs 中，如果出现了重名，原始的内容会被覆盖掉，所以请小心
+                     */
+                    Object.assign(attrs, fabric);
+                }
             }
+        }
+        const {$controls} = reference.props;
+        if ($controls) {
+            Object.freeze($controls);   // 不可不变更的属性
+            attrs.$controls = $controls;
         }
     }
 }

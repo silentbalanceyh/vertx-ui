@@ -5,10 +5,13 @@ const $opAdd = (reference) => params =>
         uri: "/api/entity",
         dialog: "added",
     });
-const $opFilter = (reference) =>
-    params => Ex.form(reference).filter(params);
-const $opSave = (reference) => params => {
-    console.info(params);
+const $opFilter = (reference) => params =>
+    Ex.form(reference).filter(params);
+const $opSave = (reference) => params =>{
+    Ex.form(reference).save(params, {
+        uri: "/api/entity/:key",
+        dialog: "saved"
+    });
 };
 const $opSaveField = (reference) => params =>
     Ex.dialog(reference).saveRow(params);

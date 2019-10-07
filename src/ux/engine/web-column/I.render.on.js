@@ -104,15 +104,19 @@ const onList = (attrs = {}, reference, {
     const config = "string" === typeof $datum ?
         Ut.formatObject($datum, true) : $datum;
     const list = {};
-    list.data = Datum.onDatum(reference, config.source);
-    list.config = config;
-    // 兼容处理，label优先，display次之
-    if (config.label) {
-        list.display = config.label;
+    if (config) {
+        list.data = Datum.onDatum(reference, config.source);
+        list.config = config;
+        // 兼容处理，label优先，display次之
+        if (config.label) {
+            list.display = config.label;
+        } else {
+            list.display = config.display;
+        }
+        attrs.list = list;
     } else {
-        list.display = config.display;
+        attrs.list = {data: []};
     }
-    attrs.list = list;
 };
 const onButton = (attrs = {}, reference, {
     column = {},
