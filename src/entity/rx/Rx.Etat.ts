@@ -109,7 +109,6 @@ class Etat {
         return this;
     }
 
-
     mock(mock) {
         if (mock) {
             if (!this._state) this._state = {};

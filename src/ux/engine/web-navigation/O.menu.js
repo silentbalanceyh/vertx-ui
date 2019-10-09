@@ -2,6 +2,8 @@ import {Menu} from "antd";
 import Unit from '../web-unit';
 import React from "react";
 import U from 'underscore';
+import {ContextMenu, MenuItem} from "react-contextmenu";
+import Ux from "ux";
 
 const SubMenu = Menu.SubMenu;
 /*
@@ -58,6 +60,17 @@ const aiMenuTop = (items = [], rest = {}, addOn = {}) => (
     </Menu>
 );
 
+const aiMenuContext = (items = [], rest = {}) => (
+    <ContextMenu className="context-menu" {...rest}>
+        {items.map(item => (
+            <MenuItem key={item.key}
+                      onClick={item.onClick ? item.onClick : () =>
+                          Ux.E.fxTerminal(true, 10017, item.onClick)}>
+                {Unit.aiIcon(item.icon)}&nbsp;&nbsp;{item.text}
+            </MenuItem>
+        ))}
+    </ContextMenu>
+);
 const _toBranchClass = (item) => {
     let className = 0 < item.children.length ? `ux-submenu${item.level}` : `ux-menuitem${item.level}`;
     if (item.collapsed) {
@@ -87,4 +100,5 @@ const aiSider = (items = [], rest = {}, addOn = {}) => {
 export default {
     aiMenuTop,          // （完整）带 <Menu/>
     aiSider,            // （完整）带 <Menu/>
+    aiMenuContext,      // （完整）右键菜单专用 <ContextMenu/>
 }

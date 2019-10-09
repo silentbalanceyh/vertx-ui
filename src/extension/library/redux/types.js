@@ -7,5 +7,5 @@ export default {
     epicApp: Ux.createAction(`/${PREFIX}/APP/BY/NAME`),
     epicInit: Ux.createAction(`/${PREFIX}/APP/INIT`),
     /* Category 专用 */
-    epicCategory: Ux.createAction(`/${PREFIX}/CATEGORY/BY/TYPE`)
+    epicTabular: Ux.createAction(`/${PREFIX}/TABULAR/BY/TYPE`),
 }

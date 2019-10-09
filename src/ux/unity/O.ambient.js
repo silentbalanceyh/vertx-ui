@@ -36,7 +36,9 @@ const isInit = () => {
 const isRoute = (props, prevProps) => {
     const $router = props.$router;
     const $prevRouter = prevProps.$router;
-    return $router.path() !== $prevRouter.path();
+    if ($router && $prevRouter) {
+        return $router.path() !== $prevRouter.path();
+    } else return false;     // 防止没有调用 Ex.yoAmbient 检查的情况
 };
 /**
  * 当前用户的注销行为

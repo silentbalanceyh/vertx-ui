@@ -124,9 +124,7 @@ class StateOut {
             key = key.replace(/\./g, '_');
             const path = isAssist ? ["assist"] : ["tabular"];
             let data = $state.getIn(path.concat(key));
-            const targetKey = isAssist
-                ? `$a_${key}`
-                : `$t_${key}`;
+            const targetKey = isAssist ? `$a_${key}` : `$t_${key}`;
             reference[targetKey] = data;
         });
         return this;

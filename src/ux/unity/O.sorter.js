@@ -20,6 +20,23 @@ const sortString = (left = "", right = "", asc = true) => {
     }
     return order;
 };
+const sortT = (left, right, asc = true) => {
+    if ("string" === typeof left && "string" === typeof right) {
+        /*
+         * 两个字符串
+         */
+        return sortString(left, right, asc);
+    } else if ("number" === typeof left && "number" === typeof right) {
+        /*
+         * 两个数值
+         */
+        if (asc) {
+            return left - right;
+        } else {
+            return right - left;
+        }
+    }
+};
 /**
  * @class Sorter
  * @description Table组件排序专用函数，对应列中的sorter
@@ -35,6 +52,8 @@ export default {
      */
     sorterAsc: (left, right, key) => key ? sortString(left[key], right[key]) : sortString(left, right),
     sorterAscFn: (key) => (left, right) => key ? sortString(left[key], right[key]) : sortString(left, right),
+    sorterAscT: (left, right, key) => key ? sortT(left[key], right[key]) : sortT(left, right),
+    sorterAscTFn: (key) => (left, right) => key ? sortT(left[key], right[key]) : sortT(left, right),
     /**
      * 逆序排序
      * @method sorterDesc
@@ -45,4 +64,6 @@ export default {
      */
     sorterDesc: (left, right, key) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
     sorterDescFn: (key) => (left, right) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
+    sorterDescT: (left, right, key) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
+    sorterDescTFn: (key) => (left, right) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
 };
