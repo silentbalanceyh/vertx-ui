@@ -1,0 +1,27 @@
+@import '../../../global';
+
+.ux-app {
+    .app(@width,@margin,@icon, @iconPadding, @iconRadius) {
+        i {
+            .ix-box.rect(@icon, @icon);
+            padding: @iconPadding;
+            border-radius: @iconRadius;
+        }
+
+        a {
+            max-width: @width;
+            margin: @margin;
+        }
+    }
+}
+
+.ux-app-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ux-app.app(60px, 10px, 60px, 10px, 10px)
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ux-app.app(80px, 12px, 80px, 16px, 16px)
+    }
+}

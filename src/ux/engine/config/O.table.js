@@ -2,7 +2,7 @@ import Expr from '../expression';
 import Abs from '../../abyss';
 import Column from "../web-column";
 import U from "underscore";
-import Ux from "ux";
+import Ut from '../../unity';
 
 /**
  * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
@@ -51,11 +51,9 @@ const configTable = (reference, table = {}, ops = {}) => {
     const $table = Abs.clone(table);
     $table.pagination = false;
     $table.columns = configColumn(reference, table.columns, ops);
-    if (6 < table.columns.length) {
-        $table.scroll = {
-            x: table.columns.length * 144
-        }
-    }
+    $table.scroll = {
+        x: Ut.toX(table.columns)
+    };
     $table.className = "web-table";
     return $table;
 };
@@ -81,9 +79,9 @@ const configExecutor = (reference, EVENTS) => {
         .filter(key => key.startsWith('fn'))
         .filter(key => U.isFunction(EVENTS[key]))
         .forEach(key => events[key] = EVENTS[key]);
-    let executor = Ux.clone(events);
+    let executor = Abs.clone(events);
     const {$executor = {}} = reference.props;
-    if (!Ux.isEmpty($executor)) {
+    if (!Abs.isEmpty($executor)) {
         /*
          * 如果 $executor 中包含了 fnEdit / fnDelete 会被覆盖掉
          */

@@ -131,7 +131,7 @@ const ajaxParams = (params = {}) => {
     const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
     const itLang = (data) => Abs.itObject(data, (field, value) => {
         if (U.isArray(value)) {
-            data[field].forEach(item => itLang(item));
+            data[field].filter(U.isObject).forEach(item => itLang(item));
         } else {
             if (U.isObject(data) && !U.isArray(data)) {
                 data.language = language;

@@ -90,9 +90,28 @@ const plxFromTo = (reference, jsx = {}) => {
     if (config.to) normalized.to = fnNorm(config.to);
     jsx.config = normalized;
 };
+/*
+ * 特殊格式解析
+ */
+const plxRecord = (reference, jsx = {}) => {
+    let rxRecord = (data) => data;
+    if (jsx.record) {
+        rxRecord = (data) => {
+            const index = data.indexOf('{');
+            const prefix = data.substring(0, index);
+            const record = data.substring(index);
+            return {
+                record: JSON.parse(record),
+                prefix,
+            }
+        }
+    }
+    return rxRecord;
+};
 export default {
     plxTreeOptions,
     plxOptions,
     plxDialog,
-    plxFromTo
+    plxFromTo,
+    plxRecord
 };

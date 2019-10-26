@@ -1,4 +1,5 @@
 import yoAmbient from './yo.ambient';
+import yoDynamic from './yo.dynamic';
 /*
  * -------------> Component规范
  * 「一个组件传入到另外一个组件的基本规范参考此文件」：
@@ -79,6 +80,7 @@ import Yu from './yu';
 
 export default {
     yoAmbient,              // 环境数据（统一处理）
+    yoDynamic,              // 比 yoAmbient 多两个核心变量：$identifier / $controls
     yoComponent: yoAmbient, // 环境数据（统一处理）
     yoControl,
     // -- 配置

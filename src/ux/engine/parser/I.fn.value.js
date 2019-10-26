@@ -44,7 +44,6 @@ export default (valueOrExpr, reference) => {
             /*
              * 不执行任何解析，value 直接等于原始值
              */
-            console.warn("[ Ux ] 未解析 expr = ", valueOrExpr);
             value = valueOrExpr;
         }
     }

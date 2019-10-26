@@ -1,7 +1,7 @@
 /*
  * 【可重用】通用类型的控件
  */
-// ------------- 列表组件
+// ------------- 可重用组件
 /* （常用完整列表组件）*/
 export {default as ExComplexList} from './ExComplexList/UI';
 /* （通用表单）*/
@@ -10,6 +10,8 @@ export {default as ExForm} from './ExForm/UI';
 export {default as ExTab} from './ExTab/UI';
 /* （账号信息）用户数据（左边专用的用户基本信息） */
 export {default as ExAccount} from './ExAccount/UI';
+/* （通用树）左边的树形结构 */
+export {default as ExArbor} from './ExArbor/UI';
 
 /*
  * 【不可重用】业务类型控件
@@ -20,14 +22,16 @@ export {default as ExLogin} from './ExLogin/UI';
 /* （会员入口）   ----- ExEntry 会员登录专用 */
 export {default as ExEntry} from './ExEntry/UI';
 
-
 // ------------- 整页模板
 /* （管理员模板） ----- ExAdmin 模板专用 */
 export {default as ExAdmin} from './ExAdmin/UI';
 
-
-// ------------- 侧边栏
+// ------------- 菜单选择器
 /* （Tabular专用）字典管理 */
 export {default as ExTabular} from './ExTabular/UI';
 /* （Category专用）分类管理 */
 export {default as ExCategory} from './ExCategory/UI';
+
+// ------------- 菜单选择器
+/* （Dashboard专用）*/
+export {default as ExApps} from './ExApps/UI';

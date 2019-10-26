@@ -45,6 +45,7 @@ const initial = (reference, form, program = {}) => {
         return initial;
     } else {
         console.error("[ Ux ] 初始化流程失败，不可调用 `initial` 方法，必须参数 `$mode` 缺失。");
+        return {};  // 防止错误信息
     }
 };
 export default {

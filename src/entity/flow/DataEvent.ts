@@ -10,6 +10,7 @@ class DataEvent {
     private _previous: any;
     private _input: any;
     private _config: any;
+    private _ref: any;
     /*
      * 定义信息
      */
@@ -25,10 +26,18 @@ class DataEvent {
         /* 拷贝专用方法 */
         return new DataEvent(Ux.clone(this.data))
             .start(Ux.clone(this._input))
+            .bind(this._ref)
             .metadata(definition)
             .config(this._config)
             .previous(Ux.clone(this._previous))
             .response(Ux.clone(this._response))
+    }
+
+    bind(ref: any) {
+        if (ref) {
+            this._ref = ref;
+        }
+        return this;
     }
 
     /*
@@ -74,6 +83,11 @@ class DataEvent {
 
     getTarget() {
         return this._target;
+    }
+
+    getRef() {
+        // reference 处理
+        return this._ref;
     }
 
     getData() {

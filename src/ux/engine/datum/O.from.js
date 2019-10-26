@@ -1,6 +1,7 @@
 import E from "../../error";
 import {Dsl} from 'entity';
 import Abs from '../../abyss';
+import Ele from '../../element';
 
 /**
  * 资源文件数据读取方法
@@ -34,14 +35,16 @@ const fromDatum = (reference, key) => {
  * 直接从Hoc资源路径读取数据信息
  * @method fromPath
  * @param reference
- * @param keys
+ * @param args
  */
-const fromPath = (reference = {}, ...keys) => {
-    E.fxTerminal(1 > keys.length, 10070, keys, 1);
+const fromPath = (reference = {}, ...args) => {
+    let keys = Ele.ambiguityArray.apply(this, args);
+    const length = keys['length'];
+    E.fxTerminal(1 > length, 10070, keys, 1);
     let data = fromHoc(reference, keys[0]);
-    if (1 < keys.length && data) {
+    if (1 < length && data) {
         const path = [];
-        keys.forEach((item, index) => {
+        [].concat(keys).forEach((item, index) => {
             if (0 < index) {
                 path.push(item);
             }

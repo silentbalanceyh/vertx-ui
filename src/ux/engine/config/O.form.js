@@ -131,7 +131,8 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
                 supplier = () => Ajax.asyncPromise(rest, params);
             }
         } else {
-            throw new Error("[ Ux ] Form无法初始化！")
+            console.error(config);      // 检查后端数据
+            throw new Error("[ Ux ] Form无法初始化，检查配置数据！")
         }
     }
     /*

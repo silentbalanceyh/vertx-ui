@@ -16,13 +16,7 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiCategory(this);
-    }
-
-    componentDidUpdate(props, state, snapshot) {
-        Ex.yuRouter(this, {props, state}, () => {
-            Ex.yiCategory(this);
-        });
+        Ex.yiStandard(this);
     }
 
     render() {

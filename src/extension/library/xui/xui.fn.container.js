@@ -1,7 +1,7 @@
 import Ux from 'ux';
 import U from 'underscore';
 import React from 'react';
-import seekInherit from './xui.fn.inherit';
+import Cmn from './I.common';
 
 export default (container = {}, UI = {}, inherit, fnJsx) => {
     const fnRender = U.isFunction(fnJsx) ? fnJsx : () => false;
@@ -17,7 +17,7 @@ export default (container = {}, UI = {}, inherit, fnJsx) => {
              * 覆盖 config
              */
             attrs.config = config;
-            seekInherit(attrs, container);
+            Cmn.seekInherit(attrs, container);
             return (
                 <Component {...attrs}>
                     {fnRender()}

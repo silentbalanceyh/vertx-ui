@@ -4,14 +4,16 @@ import _ambient_job from './ambient/job/UI';
 import _ambient_log from './ambient/log/UI';
 import _ambient_sync from './ambient/sync/UI';
 import _ambient_tabular from './ambient/tabular/UI';
-import _assert_dept from './assert/dept/UI';
+import _ambient_todo from './ambient/todo/UI';
+import _element_employee from './element/employee/UI';
+import _element_identity from './element/identity/UI';
+import _epic_category from './epic/category/UI';
 import _epic_form from './epic/form/UI';
 import _epic_integration from './epic/integration/UI';
 import _epic_metadata from './epic/metadata/UI';
 import _epic_modeling from './epic/modeling/UI';
 import _epic_report from './epic/report/UI';
 import _epic_topology from './epic/topology/UI';
-import _home_todo from './home/todo/UI';
 import _init_start from './init/start/UI';
 import _organization_company from './organization/company/UI';
 import _organization_customer from './organization/customer/UI';
@@ -33,14 +35,16 @@ export default {
 	_ambient_log,
 	_ambient_sync,
 	_ambient_tabular,
-	_assert_dept,
+	_ambient_todo,
+	_element_employee,
+	_element_identity,
+	_epic_category,
 	_epic_form,
 	_epic_integration,
 	_epic_metadata,
 	_epic_modeling,
 	_epic_report,
 	_epic_topology,
-	_home_todo,
 	_init_start,
 	_organization_company,
 	_organization_customer,

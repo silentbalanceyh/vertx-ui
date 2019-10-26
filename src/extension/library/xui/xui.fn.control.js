@@ -1,59 +1,56 @@
 import React from 'react';
-import Ex from 'ex';
 import Ux from 'ux';
-
+import Cmn from './I.common';
 import xuiContainer from './xui.fn.container';
-import seekInherit from './xui.fn.inherit';
-
-const getData = (inherit, source = "") => {
-    /*
-     * 读取上层引用
-     */
-    if (source) {
-        const {reference} = inherit;
-        const state = reference.state ? reference.state : {};
-        const props = Ux.clone(inherit);
-        return Ux.parseValue(source, {state, props});
-    }
-};
 
 export default (control = {}, UI = {}, inherit = {}) => {
     if (Ux.isEmpty(control)) {
         console.error("[ ExR ] 配置数据有问题，control = ", control);
         return false;
     } else {
-        const $control = Ex.yoControl(control);
-        const Component = UI[$control.name];
-        if (Component) {
+        if (control.isContainer) {
             /*
-             * 配置和数据解析
+             * 只渲染容器，不包含容器内部相关信息
+             * 不传第四参，直接进入容器渲染过程
              */
-            const fnRender = () => {
-                const attrs = Ux.clone(inherit);
-                const data = getData(inherit, $control.source);
-                if (data) {
-                    attrs.data = data;
-                }
-                /*
-                 * 特殊配置处理，用于存储 control 特定的配置信息
-                 */
-                const {event = {}, ...rest} = $control.config;
-                attrs.config = rest;
-                attrs.event = event;
-                seekInherit(attrs, $control);
-
-                return (
-                    <Component {...attrs}/>
-                )
-            };
-            if ($control.container) {
-                return xuiContainer($control.container, UI, inherit, fnRender)
-            } else {
-                return fnRender();
-            }
+            return xuiContainer(control.container, UI, inherit);
         } else {
-            console.error("[ ExR ] 配置的组件不存在", $control, UI);
-            return false;
+            const Component = UI[control.name];
+            if (Component) {
+                /*
+                 * 配置和数据解析
+                 */
+                const fnRender = () => {
+                    const attrs = Ux.clone(inherit);
+                    /*
+                     * Component 专用流程
+                     */
+                    const data = Cmn.getData(inherit, control.source);
+                    if (data) {
+                        attrs.data = data;
+                    }
+                    const {event = {}, ...rest} = control.config;
+                    attrs.config = rest;
+                    /*
+                     * 只有 Component 才出现的事件流程
+                     */
+                    attrs.event = event;
+                    Cmn.seekInherit(attrs, control);
+                    return (
+                        <Component {...attrs}/>
+                    )
+                };
+                if (control.container) {
+                    return xuiContainer(control.container, UI, inherit, fnRender)
+                } else {
+                    return fnRender();
+                }
+            } else {
+                console.error("[ ExR ] 配置的组件不存在", control, UI);
+                return false;
+            }
         }
+        console.info(control);
+        return false;
     }
 }

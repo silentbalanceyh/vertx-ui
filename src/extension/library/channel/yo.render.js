@@ -20,10 +20,13 @@ const _outLoading = (name, message) => {
 };
 
 export default (reference = {}, jsx, debug = {}) => {
-    const state = reference.state;
+    const state = reference.state ? reference.state : {};
     const {error} = state;
     if (error) {
-        return Ux.fxError(error);
+        /*
+         * fxError 已经切换 fxFailure
+         */
+        return Ux.E.jsxError(error);
     } else {
         /*
          * Debug专用

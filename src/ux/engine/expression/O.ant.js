@@ -24,6 +24,7 @@ class RxAnt {
     static toDialogConfig = Complex.plxDialog;
     static toTreeOptions = Complex.plxTreeOptions;  // 树相关options解析
     static toOptions = Complex.plxOptions;  // 普通解析：items / datum
+    static toRecord = Complex.plxRecord;    // 解析记录
     // 数据相关
     static toConfig = Data.toConfig;
     static toMock = Data.toMock;

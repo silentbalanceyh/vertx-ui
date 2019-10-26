@@ -34,14 +34,14 @@ const _tabular = _assist({
     code: "/api/:type/tabular/:code",
     type: "/api/type/tabulars/:type",
     types: "/api/types/tabulars",
-    category: "__zero.tabular__"
+    category: Fn.V.TYPE_TABULAR
 });
 
 const _category = _assist({
     code: "/api/:type/category/:code",
     type: "/api/type/categories/:type",
     types: "/api/types/categories",
-    category: "__zero.category__"
+    category: Fn.V.TYPE_CATEGORY
 });
 export default {
     /*

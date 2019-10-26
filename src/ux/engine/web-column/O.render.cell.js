@@ -75,6 +75,14 @@ export default {
                 Aid.jsxSpan(attrs, children);
         }
     ),
+    HYPERLINK: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellHyper,
+        (attrs = {}, children = "") => {
+            console.info(attrs, children);
+            return false;
+        }
+    ),
     ICON: Aid.jsxConnect(
         initEmpty,
         Aid.cellIcon,
@@ -85,6 +93,11 @@ export default {
                 {children}
             </span>
         )
+    ),
+    TEXT: Aid.jsxConnect(
+        initEmpty,
+        Aid.cellText,
+        Aid.jsxText,
     ),
     DATUM: Aid.jsxConnect(
         initEmpty,

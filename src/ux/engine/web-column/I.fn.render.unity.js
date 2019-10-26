@@ -1,6 +1,7 @@
 import React, {Fragment} from "react";
 import {Divider, Popconfirm} from "antd";
 import U from 'underscore';
+import Ut from '../../unity';
 /*
  * 设置 divider
  */
@@ -52,7 +53,8 @@ const _setExecutors = (options = [], item, rowKey, metadata = {}) => {
     if (rowKey && "string" !== typeof item) {
         const option = {};
         option.key = `link-${rowKey}`;
-        option.text = item.text;
+        const {record = {}} = metadata;
+        option.text = Ut.formatExpr(item.text, record);
         // Executor 处理
         _setExecutor(option, item, metadata);
         options.push(option);
@@ -91,7 +93,7 @@ export default (reference, config, executor = {}) => (text, record) => {
             config,
             executor,
             reference,
-        })
+        });
     });
     return (
         <Fragment>

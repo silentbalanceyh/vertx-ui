@@ -19,12 +19,12 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiTabular(this);
+        Ex.yiStandard(this);
     }
 
     componentDidUpdate(props, state, snapshot) {
         Ex.yuRouter(this, {props, state}, () => {
-            Ex.yiTabular(this);
+            Ex.yiStandard(this);
         });
     }
 

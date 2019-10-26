@@ -9,8 +9,17 @@ import Xui from './xui';
  * Hoc 高阶组件
  */
 import ox from './annotation/ox';
+import Evt from './event';
 
 const exported = {
+    /*
+     * 外置绑定，执行单个 fabric
+     * et类的事件方法集合
+     * 1）统一：etUniform
+     * 2）串行：etSequence
+     * 3）并行：etParallel
+     */
+    ...Evt,
     /*
      * Redux 部分专用
      * 1) Types - `epicXxx`

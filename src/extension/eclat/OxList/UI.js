@@ -23,12 +23,11 @@ class Component extends React.PureComponent {
             if ($config.options) {
                 // 动静切换（由于OxList外置已经处理过 Op了，所以此处仅强制 dynamic.op = false;
                 $config.options[Ex.Opt.DYNAMIC_OP] = false;
+                // 编辑按钮在 EXTRA 中不呈现
+                $config.options[Ex.Opt.TABS_EXTRA_EDIT] = false;
             }
             const {$form = {}} = this.state;   // 表单配置
-            const inherit = Ex.yoAmbient(this);
-            /*
-             * 添加专用变量
-             */
+            const inherit = Ex.yoDynamic(this); // 新方法
             return (
                 <ExComplexList {...inherit} config={$config}
                                $form={$form}    // 添加专用

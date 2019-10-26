@@ -4,6 +4,8 @@ export default {
     TABS_COUNT: 'tabs.count',   /* 当前 Tab 页的限制，只能打开的页面数量，打开的新的 Tab 页不能大于该值 */
     TABS_ADD: 'tabs.add',       /* 添加表单Tab页专用标题 */
     TABS_EDIT: 'tabs.edit',     /* 编辑表单Tab页专用标题 */
+    TABS_EXTRA_ADD: "tabs.extra.add", /* 隐藏Extra功能，在表单中提供按钮 */
+    TABS_EXTRA_EDIT: "tabs.extra.edit", /* 隐藏Extra功能，在表单中提供按钮 */
 
     // 动态静态配置
     DYNAMIC_OP: 'dynamic.op',           /* 动态 Op */
