@@ -12,7 +12,8 @@
             "projection": [],
             "pager": "1,8",
             "sorter": "createdAt=DESC",
-            "criteria": {}
+            "criteria": {
+            }
         },
         "mock": {
             "enabled": true,

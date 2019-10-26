@@ -12,13 +12,10 @@
                 }
             ],
             [
-                "name`c,名称,24"
+                "name`c,用户组名称,24"
             ],
             [
-                "code`c,编码,24"
-            ],
-            [
-                "comment`c,备注,24"
+                "code`c,用户组编码,24"
             ],
             [
                 {
@@ -32,8 +29,8 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.role.filter",
-            "$opDelete": "act.role.delete"
+            "$opFilter": "act.group.filter",
+            "$opDelete": "act.group.delete"
         }
     }
 }

@@ -60,7 +60,7 @@
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
-                        "required,请选择部门所挂靠的公司！"
+                        "required,请选择组所挂靠的部门！"
                     ]
                 },
                 {
@@ -70,7 +70,7 @@
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
                         "source": "deptId",
-                        "target": "deptId"
+                        "target": "FORM:deptId"
                     },
                     "optionJsx.allowClear":true
                 }
@@ -86,7 +86,7 @@
             [
                 {
                     "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
+                    "optionJsx.rows": 3
                 }
             ],
             [

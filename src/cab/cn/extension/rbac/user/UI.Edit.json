@@ -33,6 +33,15 @@
                             "max": 11,
                             "pattern": "0?(13|14|15|18|17)[0-9]{9}",
                             "message": "格式错误,请正确输入手机号！"
+                        },
+                        {
+                            "validator": "existing",
+                            "message": "对不起，该手机号已绑定其他账号！",
+                            "config": {
+                                "uri": "/api/user/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
                         }
                     ]
                 }
@@ -45,6 +54,15 @@
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
                             "message": "格式错误,请正确输入邮件地址！"
+                        },
+                        {
+                            "validator": "existing",
+                            "message": "对不起，该邮箱已绑定其他账号！",
+                            "config": {
+                                "uri": "/api/user/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
                         }
                     ]
                 },

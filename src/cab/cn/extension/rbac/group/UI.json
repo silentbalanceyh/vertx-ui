@@ -157,6 +157,8 @@
                     "items": [
                         "code,用户组编号",
                         "name,用户组名称",
+                        "parentId,父组",
+                        "category,组类型",
                         "active,是否启用",
                         "createdBy,创建人",
                         "createdAt,创建时间"

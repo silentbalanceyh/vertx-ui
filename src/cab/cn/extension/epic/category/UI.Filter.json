@@ -18,9 +18,6 @@
                 "code`c,编码,24"
             ],
             [
-                "comment`c,备注,24"
-            ],
-            [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
@@ -32,8 +29,8 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.role.filter",
-            "$opDelete": "act.role.delete"
+            "$opFilter": "act.tabular.filter",
+            "$opDelete": "act.tabular.delete"
         }
     }
 }

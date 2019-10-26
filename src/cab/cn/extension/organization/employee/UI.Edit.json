@@ -69,7 +69,7 @@
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
                         "source": "companyId",
-                        "target": "companyId"
+                        "target": "FORM:companyId"
                     },
                     "optionJsx.allowClear":true
                 }

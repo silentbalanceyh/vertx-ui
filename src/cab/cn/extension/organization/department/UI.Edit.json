@@ -25,7 +25,7 @@
             ],
             [
                 {
-                    "metadata": "managerName,部门经理,12,,aiListSelector,placeholder=（请选择部门经理）",
+                    "metadata": "managerName,经理,12,,aiListSelector,placeholder=（请选择部门经理）",
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
@@ -70,7 +70,7 @@
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
                         "source": "companyId",
-                        "target": "companyId"
+                        "target": "FORM:companyId"
                     },
                     "optionJsx.allowClear":true
                 }
@@ -86,7 +86,7 @@
             [
                 {
                     "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
+                    "optionJsx.rows": 3
                 }
             ],
             [

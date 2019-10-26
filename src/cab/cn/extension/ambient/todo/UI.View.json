@@ -1,0 +1,23 @@
+{
+    "_form": {
+        "ui": [
+            [
+                "title=待确认单据信息"
+            ],
+            [
+                "serial,单号,14,,aiMagic"
+            ]
+        ],
+        "hidden": [
+        ],
+        "op": {
+            "$opSave": "act.group.save"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，您的用户组信息更新成功！",
+            "removed": "当前用户组信息已删除成功！"
+        }
+    }
+}

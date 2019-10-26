@@ -9,7 +9,7 @@
             ],
             [
                 "realname,姓名",
-                "code,编号",
+                "code,编号,,,,readOnly=true",
                 {
                     "metadata": "gender,性别,,,aiRadio",
                     "optionJsx.config.items": [
@@ -32,13 +32,13 @@
             [
                 "nativePlace,籍贯",
                 {
-                    "metadata":"birthday,出生日期,,,aiDatePicker"
+                    "metadata":"birthday,出生日期,,,aiDatePicker",
+                    "optionJsx.format": "YYYY-MM-DD",
+                    "moment": true
                 },
                 {
-                    "metadata": "type,类型,,,aiRadio",
-                    "optionJsx.config.items": [
-                        "zero.identity,员工档案"
-                    ]
+                    "metadata": "type,类型,,,aiSelect,placeholder=（请选择类型）",
+                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
                 }
             ],
             [
@@ -123,8 +123,10 @@
             [
                 {
                     "metadata": "$button",
+                    "hidden": true,
                     "optionJsx.extension": [
-                        "$opIdentity,保存,SUBMIT,primary",
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
                         "$opReset,重置,RESET"
                     ],
                     "span": 24
@@ -135,13 +137,14 @@
             "key"
         ],
         "op": {
-            "$opIdentity": "act.identity.identity"
+            "$opSave": "act.identity.save",
+            "$opDelete": "act.identity.delete"
         }
     },
     "_modal": {
         "success": {
-            "addedMy": "您好，您的档案信息已经添加成功！",
-            "savedMy": "您好，您的档案信息已经成功保存！"
+            "saved": "您好，您的档案信息已经编辑成功！",
+            "removed": "您好，您的档案信息已经删除保存！"
         }
     }
 }

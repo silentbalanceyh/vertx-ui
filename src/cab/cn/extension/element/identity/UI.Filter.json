@@ -12,13 +12,10 @@
                 }
             ],
             [
-                "name`c,名称,24"
+                "realname`c,员工姓名,24"
             ],
             [
-                "code`c,编码,24"
-            ],
-            [
-                "comment`c,备注,24"
+                "code`c,档案编码,24"
             ],
             [
                 {
@@ -32,8 +29,7 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.role.filter",
-            "$opDelete": "act.role.delete"
+            "$opFilter": "act.identity.filter"
         }
     }
 }

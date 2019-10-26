@@ -9,7 +9,7 @@
         "identity.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:__zero.identity.type__"
+                "type": "FIX:zero.identity"
             }
         }
     },

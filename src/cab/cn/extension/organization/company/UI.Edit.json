@@ -8,7 +8,7 @@
                 "title=基本信息"
             ],
             [
-                "title,公司标题,,,,placeholder=（如：******有限公司）",
+                "title,标题,,,,placeholder=（如：******有限公司）",
                 {
                     "metadata":"name,公司名称",
                     "optionConfig.rules":[
@@ -22,18 +22,57 @@
                             }
                         }
                     ]
+                }
+            ],
+            [
+                "code,系统编号,,,,readOnly=true",
+                {
+                    "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择所属公司）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=companyId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionConfig.rules":[
+                        "required,请选择客户所属的公司！"
+                    ]
                 },
                 {
-                    "metadata": "type,公司性质,,,aiSelect,placeholder=（请选择公司性质）",
+                    "metadata": "type,性质,,,aiSelect,placeholder=（请选择公司性质）",
                     "optionJsx.config.datum": "source=company.type,value=key,label=name"
                 }
             ],
             [
-                "homepage,公司主页,16"
+                {
+                    "metadata": "customerId,客户信息,,,aiListSelector,placeholder=（请选择对应客户信息）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/customer/search,1,8,sorter=createdAt`DESC"
+                        },
+                        "linker": {
+                            "name": "customerId"
+                        },
+                        "table": {
+                            "columns": [
+                                "name,客户名称",
+                                "code,客户编号",
+                                "type,客户分类",
+                                "contactName,联系人名称",
+                                "contactPhone,联系人电话",
+                                "active,是否启用"
+                            ]
+                        },
+                        "validation": "请选择客户信息！",
+                        "window": "请选择客户信息,选择,关闭,false,800,false",
+                        "search": {
+                            "name,c": "客户名称",
+                            "code,c": "客户编号"
+                        }
+                    }
+                },
+                "homepage,主页,16"
             ],
             [
                 {
-                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号)或(座机号)",
+                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号/座机号)",
                     "optionConfig.rules": [
                         "required,请输入座机号，座机号不能为空",
                         {
@@ -53,7 +92,7 @@
                     ]
                 },
                 {
-                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号)或(传真号)",
+                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号/传真号)",
                     "optionConfig.rules": [
                         "required,请输入传真号，传真号不能为空",
                         {
@@ -64,7 +103,7 @@
                 }
             ],
             [
-                "address,公司地址,24"
+                "address,地址,24,,aiTextArea,rows=3"
             ],
             [
                 "title=商务信息"
@@ -84,7 +123,7 @@
                 }
             ],
             [
-                "corporationName,公司法人,,,,placeholder=（如：张**、王**等）",
+                "corporationName,法人,,,,placeholder=（如：张**、王**等）",
                 {
                     "metadata":"corporationPhone,法人电话,,,,placeholder=请输入法人电话",
                     "optionConfig.rules": [
@@ -112,7 +151,7 @@
                 }
             ],
             [
-                "comment,公司简介,24,,aiTextArea,rows=4"
+                "comment,简介,24,,aiTextArea,rows=3"
             ],
             [
                 {

@@ -1,6 +1,6 @@
 {
     "_page": {
-        "title": "第三方管理",
+        "title": "职员管理",
         "back": {
             "state": {
                 "status.submitting": null
@@ -8,33 +8,42 @@
         }
     },
     "_assist": {
-        "customer.type": {
+        "resource.companys": {
+            "uri": "/api/company/by/sigma"
+        },
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "identity.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:zero.customer"
+                "type": "FIX:zero.identity"
             }
         }
     },
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
+            "pager": "1,8",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },
+        "mock": {
+            "enabled": true,
+            "keys": "workNumber,workTitle,workEmail,deptId,companyId,identityId,workLocation,workPhone,type,active"
+        },
         "options": {
             "search.cond": [
-                "name,c",
-                "code,c"
+                "workNumber,c"
             ],
             "search.enabled": true,
             "search.confirm.clear": "该操作会清空所有的查询条件，确认清空？",
             "search.op.redo": "清除条件",
             "search.op.advanced": "高级搜索",
-            "search.placeholder": "名称/编号",
+            "search.placeholder": "编码",
             "search.advanced": true,
             "search.advanced.width": "40%",
-            "search.advanced.title": "搜索客户",
+            "search.advanced.title": "搜索员工",
             "search.advanced.notice": {
                 "message": "注意！",
                 "description": [
@@ -42,10 +51,10 @@
                     "高级搜索表单中的搜索条件会被保存，再次打开时会重置到上次的搜索状态。"
                 ]
             },
-            "tabs.list": "客户列表",
-            "tabs.add": "添加客户",
-            "tabs.edit": "编辑客户",
-            "identifier": "customer",
+            "tabs.list": "员工列表",
+            "tabs.add": "添加员工",
+            "tabs.edit": "编辑员工",
+            "identifier": "employee",
             "dynamic.op": false,
             "dynamic.column": true,
             "dynamic.switch": false,
@@ -70,18 +79,18 @@
             "id.submit.save": "$opSave",
             "id.submit.reset": "$opReset",
             "id.submit.delete": "$opDelete",
-            "ajax.search.uri": "/api/customer/search",
-            "ajax.get.uri": "/api/customer/:key",
-            "ajax.delete.uri": "/api/customer/:key",
-            "ajax.batch.delete.uri": "/api/batch/customer/delete",
-            "ajax.batch.update.uri": "/api/batch/customer/update",
-            "ajax.column.full": "/api/columns/customer/full",
-            "ajax.column.my": "/api/columns/customer/my",
-            "ajax.column.save": "/api/columns/customer/my",
-            "ajax.file.export": "/api/customer/export",
-            "ajax.file.import": "/api/customer/import",
-            "confirm.delete": "确认删除当前客户记录？",
-            "confirm.batch.delete": "您确认要删除所有选中的客户记录？",
+            "ajax.search.uri": "/api/employee/search",
+            "ajax.get.uri": "/api/employee/:key",
+            "ajax.delete.uri": "/api/employee/:key",
+            "ajax.batch.delete.uri": "/api/batch/employee/delete",
+            "ajax.batch.update.uri": "/api/batch/employee/update",
+            "ajax.column.full": "/api/columns/employee/full",
+            "ajax.column.my": "/api/columns/employee/my",
+            "ajax.column.save": "/api/columns/employee/my",
+            "ajax.file.export": "/api/employee/export",
+            "ajax.file.import": "/api/employee/import",
+            "confirm.delete": "确认删除当前员工记录？",
+            "confirm.batch.delete": "您确认要删除所有选中的员工记录？",
             "confirm.clean.filter": "该操作将清空所有的查询条件，确认？",
             "message.batch.delete": "您所选择的记录已经全部删除成功！"
         },
@@ -154,30 +163,18 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "name,客户名称",
-                        "code,客户编号",
-                        "title,客户显示标题",
-                        "taxCode,税号",
-                        "taxTitle,开票抬头",
-                        "comment,客户备注",
-                        "contactName,联系人名称",
-                        "contactPhone,联系人电话",
-                        "contactOnline,在线联系方式",
-                        "email,企业邮箱",
-                        "fax,传真号",
-                        "homepage,客户主页",
-                        "logo,LOGO",
-                        "phone,客户座机",
-                        "address,客户地址",
+                        "identityId,员工名称",
+                        "workNumber,员工编号",
+                        "workTitle,头衔",
+                        "workEmail,办公邮箱",
                         "companyId,所属公司",
-                        "type,客户分类",
-                        "metadata,附加配置",
+                        "deptId,所属部门",
+                        "workPhone,办公电话",
+                        "type,员工分类",
+                        "workLocation,办公地点",
                         "active,是否启用",
-                        "language,使用的语言",
                         "createdBy,创建人",
-                        "createdAt,创建时间",
-                        "updatedBy,更新人",
-                        "updatedAt,更新时间"
+                        "createdAt,创建时间"
                     ]
                 },
                 "valueColumn": {
@@ -233,7 +230,7 @@
                         {
                             "text": "删除",
                             "executor": "fnDelete",
-                            "confirm": "确认删除选择的客户记录？"
+                            "confirm": "确认删除选择的员工记录？"
                         }
                     ]
                 }

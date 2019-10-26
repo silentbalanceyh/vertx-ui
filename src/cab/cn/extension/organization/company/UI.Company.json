@@ -8,9 +8,9 @@
                 "title=基本信息"
             ],
             [
-                "title,公司标题",
+                "title,标题",
                 {
-                    "metadata":"name,公司名称,,,,placeholder=（必填）",
+                    "metadata":"name,名称,,,,placeholder=（必填）",
                     "optionConfig.rules":[
                         "required,请输入公司名称",
                         {
@@ -25,12 +25,12 @@
                 }
             ],
             [
-                "code,公司系统编号,,,,readOnly=true",
-                "homepage,公司主页,16"
+                "code,系统编号,,,,readOnly=true",
+                "homepage,主页,16"
             ],
             [
                 {
-                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号)或(座机号)",
+                    "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号/座机号)",
                     "optionConfig.rules": [
                         "required,请输入座机号，座机号不能为空",
                         {
@@ -50,7 +50,7 @@
                     ]
                 },
                 {
-                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号)或(传真号)",
+                    "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号/传真号)",
                     "optionConfig.rules": [
                         "required,请输入传真号，传真号不能为空",
                         {
@@ -61,7 +61,7 @@
                 }
             ],
             [
-                "address,公司地址,24"
+                "address,地址,24,,aiTextArea,rows=3"
             ],
             [
                 "title=商务信息"
@@ -81,7 +81,7 @@
                 }
             ],
             [
-                "corporationName,公司法人,,,,placeholder=（如：张**、王**等）",
+                "corporationName,法人,,,,placeholder=（如：张**、王**等）",
                 {
                     "metadata":"corporationPhone,法人电话,,,,placeholder=请输入法人电话",
                     "optionConfig.rules": [
@@ -109,7 +109,7 @@
                 }
             ],
             [
-                "comment,公司简介,24,,aiTextArea,rows=4"
+                "comment,简介,24,,aiTextArea,rows=3"
             ],
             [
                 {

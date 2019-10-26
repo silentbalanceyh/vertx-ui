@@ -32,13 +32,13 @@
             [
                 "nativePlace,籍贯",
                 {
-                    "metadata":"birthday,出生日期,,,aiDatePicker"
+                    "metadata":"birthday,出生日期,,,aiDatePicker",
+                    "optionJsx.format": "YYYY-MM-DD",
+                    "moment": true
                 },
                 {
-                    "metadata": "type,类型,,,aiRadio",
-                    "optionJsx.config.items": [
-                        "zero.identity,员工档案"
-                    ]
+                    "metadata": "type,类型,,,aiSelect,placeholder=（请选择类型）",
+                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
                 }
             ],
             [
@@ -123,25 +123,23 @@
             [
                 {
                     "metadata": "$button",
+                    "hidden": true,
                     "optionJsx.extension": [
-                        "$opIdentity,保存,SUBMIT,primary",
+                        "$opAdd,添加,SUBMIT,primary",
                         "$opReset,重置,RESET"
                     ],
                     "span": 24
                 }
             ]
         ],
-        "hidden": [
-            "key"
-        ],
+        "hidden": [],
         "op": {
-            "$opIdentity": "act.identity.identity"
+            "$opAdd": "act.identity.add"
         }
     },
     "_modal": {
         "success": {
-            "addedMy": "您好，您的档案信息已经添加成功！",
-            "savedMy": "您好，您的档案信息已经成功保存！"
+            "added": "您好，您的档案信息已经成功保存！"
         }
     }
 }

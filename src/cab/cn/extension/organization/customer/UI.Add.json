@@ -70,26 +70,20 @@
             ],
             [
                 {
-                    "metadata": "companyId,所属公司,12,,aiTreeSelect",
-                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
-                    "optionJsx.config.tree":"text=name,parent=companyId",
-                    "optionJsx.config.selection":"mode=FULL",
-                    "optionConfig.rules":[
-                        "required,请选择客户所属的公司！"
-                    ]
-                },
-                {
                     "metadata": "type,分类,12,,aiSelect",
                     "optionJsx.config.datum": "source=customer.type,value=key,label=name"
-                }
-            ],
-            [
-                "address,地址,12",
+                },
                 {
                     "metadata": "active,启用,12,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
+                }
+            ],
+            [
+                {
+                    "metadata": "address,地址,24,,aiTextArea",
+                    "optionJsx.rows": 3
                 }
             ],
             [
@@ -115,7 +109,7 @@
             [
                 {
                     "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
+                    "optionJsx.rows": 3
                 }
             ],
             [

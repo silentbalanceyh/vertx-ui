@@ -12,13 +12,10 @@
                 }
             ],
             [
-                "name`c,名称,24"
+                "workNumber`c,编号,24"
             ],
             [
-                "code`c,编码,24"
-            ],
-            [
-                "comment`c,备注,24"
+                "workTitle`c,职务,24"
             ],
             [
                 {
@@ -32,8 +29,7 @@
             ]
         ],
         "op": {
-            "$opFilter": "act.role.filter",
-            "$opDelete": "act.role.delete"
+            "$opFilter": "act.employee.filter"
         }
     }
 }

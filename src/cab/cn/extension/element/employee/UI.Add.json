@@ -8,47 +8,14 @@
                 "title=基本信息"
             ],
             [
-                "workNumber,员工编号",
-                "workTitle,头衔"
+                "workCnName,中文名",
+                "workEnName,英文名",
+                "workNumber,工号"
             ],
             [
+                "workTitle,职务",
                 {
-                    "metadata": "realname,员工名称,,,aiListSelector",
-                    "optionJsx.config": {
-                        "ajax": {
-                            "metadata": "POST,/api/identity/search,1,8,sorter=createdAt`DESC"
-                        },
-                        "linker": {
-                            "key": "identityId",
-                            "realname": "realname"
-                        },
-                        "table": {
-                            "columns": [
-                                "code,系统编号",
-                                "realname,真实姓名",
-                                "country,国籍",
-                                "nativePlace,籍贯",
-                                "nation,民族",
-                                {
-                                    "title": "出生日期",
-                                    "dataIndex": "birthday",
-                                    "$render": "DATE",
-                                    "$format": "YYYY-MM-DD"
-                                },
-                                "contactMobile,联系手机",
-                                "address,居住地址"
-                            ]
-                        },
-                        "validation": "请选择员工！",
-                        "window": "请选择员工,选择,关闭,false,800,false",
-                        "search": {
-                            "realname,c": "真实姓名",
-                            "code,c": "系统编号"
-                        }
-                    }
-                },
-                {
-                    "metadata": "type,员工分类,,,aiSelect,placeholder=（请选择员工分类）",
+                    "metadata": "type,分类,,,aiSelect,placeholder=（请选择员工分类）",
                     "optionJsx.config.datum": "source=identity.type,value=key,label=name"
                 }
             ],
@@ -86,12 +53,34 @@
                     ]
                 },
                 {
+                    "metadata":"workMobile,办公用手机,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入办公用手机，办公用手机不能为空",
+                        {
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "格式错误,请正确输入办公用手机！"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
                     "metadata":"workPhone,办公电话,,,,placeholder=（XXX-XXXXXXXX格式）",
                     "optionConfig.rules": [
                         "required,请输入办公电话，办公电话不能为空",
                         {
                             "pattern": "[0-9-()（）]{7,18}",
                             "message": "格式错误,请正确输入办公电话！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"workExtension,分机号,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入分机号，分机号不能为空",
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "格式错误,请正确输入分机号！"
                         }
                     ]
                 }
@@ -105,7 +94,7 @@
                 }
             ],
             [
-                "workLocation,办公地点,24,,aiTextArea,rows=4"
+                "workLocation,办公地点,24,,aiTextArea,rows=3"
             ],
             [
                 {
