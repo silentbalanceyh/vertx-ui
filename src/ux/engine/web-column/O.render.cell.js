@@ -3,7 +3,6 @@ import {Icon} from "antd";
 import CellOp from './O.render.op';
 import Aid from './I.tool.render';
 import U from 'underscore';
-import Ele from '../../element';
 import Ut from '../../unity';
 import Ajax from '../../ajax';
 import {saveAs} from "file-saver";
@@ -101,21 +100,7 @@ export default {
     ),
     DATUM: Aid.jsxConnect(
         initEmpty,
-        (attrs = {}, reference, params = {}) => {
-            // 动态注入数据源，防止刷新的情况
-            Aid.onList(attrs, reference, params);
-            // 动态处理
-            const {text} = params;
-            const {list: {data = [], config = {}, display = ""}} = attrs;
-            if (U.isArray(text)) {
-                const result = [];
-                text.forEach(each => result.push(Ele.elementUnique(data, config.value, each)));
-                attrs.children = result.map(item => Ut.valueExpr(display, item, true)).join(',');
-            } else {
-                const item = Ele.elementUnique(data, config.value, text);
-                attrs.children = item ? Ut.valueExpr(display, item, true) : false;
-            }
-        },
+        Aid.cellDatum,
         Aid.jsxSpan,
     ),
     DOWNLOAD: aiCellDownload,

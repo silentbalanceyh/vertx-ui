@@ -78,10 +78,9 @@ const toX = (columns = []) => {
         if (column.hasOwnProperty('width')) {
             x += Ele.valueInt(column.width, 144);
         } else {
-            x += 188;
+            x += 200;
         }
     });
-    console.error(x);
     return x;
 };
 export default {

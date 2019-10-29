@@ -2,6 +2,8 @@ import Ux from 'ux';
 import U from 'underscore';
 
 export default (config = {}) => {
+    // 解决 Bug: Cannot read property 'query' of null
+    if (!config) config = {};
     /* SPC-01.1: config 中必须包含 query 节点 */
     if (!config.query) return Ux.E.fxMessage(10009, 'config', 'query');
     /* SPC-01.2: config 中的 query 必须是 Object */

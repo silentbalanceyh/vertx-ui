@@ -25,6 +25,9 @@ const multiple = (jsx = {}) => {
 const placeholder = (jsx = {}) => {
     if (jsx.readOnly) {
         delete jsx.placeholder;
+        if (jsx.inscribe) {
+            jsx.placeholder = jsx.inscribe;
+        }
     }
 };
 const addonAfter = (jsx = {}) => {

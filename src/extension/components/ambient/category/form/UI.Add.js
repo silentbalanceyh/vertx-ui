@@ -17,6 +17,7 @@ class Component extends React.PureComponent {
         const {$router} = this.props;
         const params = $router.params();
         const form = Ex.yoForm(this, null, Ux.clone(params));
+
         return (
             <ExForm {...form} $height={"300px"}
                     $op={Op.actions}/>

@@ -54,6 +54,7 @@ const aiMenuTop = (items = [], rest = {}, addOn = {}) => (
         ) : (
             <Menu.Item key={item.key} data={item}>
                 {Unit.aiIcon(item.icon)}
+                &nbsp;&nbsp;
                 {Unit.aiLink(item, addOn)}
             </Menu.Item>
         ))}

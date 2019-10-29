@@ -32,7 +32,6 @@
                 {
                     "metadata":"phone,座机,,,,placeholder=格式:(区号-座机号/座机号)",
                     "optionConfig.rules": [
-                        "required,请输入座机号，座机号不能为空",
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
                             "message": "格式错误,请正确输入座机号！"
@@ -42,7 +41,6 @@
                 {
                     "metadata":"email,邮箱,,,,placeholder=（XXX@XXX格式）",
                     "optionConfig.rules": [
-                        "required,请输入邮箱地址",
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
                             "message": "格式错误,请正确输入邮箱地址！"
@@ -52,7 +50,6 @@
                 {
                     "metadata":"fax,传真,,,,placeholder=格式:(分机号-传真号/传真号)",
                     "optionConfig.rules": [
-                        "required,请输入传真号，传真号不能为空",
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
                             "message": "格式错误,请正确输入传真号！"
@@ -71,7 +68,6 @@
                 {
                     "metadata":"taxCode,税号,,,,placeholder=由15/18/20位字符组成",
                     "optionConfig.rules": [
-                        "required,请输入税号，税号不能为空",
                         {
                             "min": 15,
                             "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
@@ -83,13 +79,12 @@
             [
                 "corporationName,法人,,,,placeholder=（如：张**、王**等）",
                 {
-                    "metadata":"corporationPhone,法人电话,,,,placeholder=请输入法人电话",
+                    "metadata":"corporationPhone,法人手机,,,,placeholder=请输入法人手机",
                     "optionConfig.rules": [
-                        "required,请输入法人电话，法人电话不能为空",
                         {
                             "max": 11,
                             "pattern": "0?(13|14|15|18|17)[0-9]{9}",
-                            "message": "格式错误,请正确输入法人电话！"
+                            "message": "格式错误,请正确输入法人手机！"
                         }
                     ]
                 }
@@ -97,13 +92,12 @@
             [
                 "contactName,联系人姓名,,,,placeholder=（如：张**、王**等）",
                 {
-                    "metadata":"contactPhone,联系人电话,,,,placeholder=请输入联系人电话",
+                    "metadata":"contactPhone,联系人手机,,,,placeholder=请输入联系人手机",
                     "optionConfig.rules": [
-                        "required,请输入联系人电话，联系人电话不能为空",
                         {
                             "max": 11,
                             "pattern": "0?(13|14|15|18|17)[0-9]{9}",
-                            "message": "格式错误,请正确输入联系人电话！"
+                            "message": "格式错误,请正确输入联系人手机！"
                         }
                     ]
                 }

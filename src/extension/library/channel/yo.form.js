@@ -22,7 +22,6 @@ const _cabData = (reference, addOn = {}) => {
     }
     return {dialog, modal, form};
 };
-
 export default (reference, additional = {}, data = {}) => {
     const addOn = _cabData(reference, additional);
     const attrs = Ex.yoAmbient(reference);
@@ -31,7 +30,33 @@ export default (reference, additional = {}, data = {}) => {
      * `form`：从 hoc 的 _form 节点读取到的配置信息
      */
     if (U.isObject(addOn.form)) {
-        config.form = Ux.clone(addOn.form);
+        const form = Ux.clone(addOn.form);
+        /*
+         * 处理 form，合并专用
+         */
+        const {$options} = reference.props;
+        if ($options && $options.form) {
+            const dynamicForm = $options.form;
+            /*
+             * ui 合并
+             * 1）dynamicForm 中的 ui 只能追加到 configForm 之后
+             * 2）dynamicForm 中的 hidden 和 configForm 中的 hidden 合并
+             */
+            if (U.isArray(dynamicForm.ui)) {
+                form.ui = [].concat(form.ui, dynamicForm.ui);
+            }
+            if (U.isArray(dynamicForm.hidden)) {
+                form.hidden = [].concat(form.hidden, dynamicForm.hidden);
+            }
+            /*
+             * mapping 处理
+             */
+            if (!form.mapping) form.mapping = {};
+            if (dynamicForm.mapping) {
+                Object.assign(form.mapping, dynamicForm.mapping);
+            }
+        }
+        config.form = form;
     }
     /*
      * `magic`：特殊参数
@@ -56,13 +81,17 @@ export default (reference, additional = {}, data = {}) => {
     /* Form 特殊配置 */
     attrs.$inited = Ux.clone(data);
     /* Add表单专用 */
-    const {$addKey, $mode} = reference.props;
+    const {$addKey, $mode, $identifier} = reference.props;
     if ($addKey) {
         /* 客户端提供主键 */
         attrs.$addKey = $addKey;
     }
     if ($mode) {
         attrs.$mode = $mode;
+    }
+    /* 挂载 identifier 专用 */
+    if ($identifier) {
+        attrs.$identifier = $identifier;
     }
     /* 外置Form */
     return attrs;

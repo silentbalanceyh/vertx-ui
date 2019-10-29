@@ -18,17 +18,9 @@ export default (reference, state = {}, hoc = true) => {
              */
             if (hoc) {
                 /*
-                 * 单独从后端拿数据
+                 * 没有 $hoc 变量证明没有静态导入，才会执行该操作
                  */
-                const {$hoc} = reference.state;
-                if ($hoc) {
-                    console.info(module.metadata);
-                } else {
-                    /*
-                     * 没有 $hoc 变量证明没有静态导入，才会执行该操作
-                     */
-                    state.$hoc = new HocI18r(module.metadata);
-                }
+                state.$hoc = new HocI18r(module.metadata);
             } else {
                 /*
                  * 前端静态 + 后端动态

@@ -150,12 +150,25 @@ const raftRender = (cell = {}, config = {}) => {
          *  const optionJsx = Abs.clone(cell.optionJsx);
          *  const optionConfig = Abs.clone(cell.optionConfig);
          */
+        const onValidate = Abs.immutable([
+            "aiSelect",
+            "aiListSelector",
+            "aiTreeSelect"
+        ]);
         return (values) => {
             /*
              * 执行初始值，包含 $delay 模式
              */
             raftValue(cell, values, reference);
             const optionConfig = Abs.clone(cell.optionConfig);
+            {
+                /*
+                 * 解决特殊控件的验证触发时间，保证红色验证结果
+                 */
+                if (optionConfig.rules && onValidate.contains(cell.render)) {
+                    optionConfig.validateTrigger = "onChange";
+                }
+            }
             /*
              * 新增 depend 规则
              */

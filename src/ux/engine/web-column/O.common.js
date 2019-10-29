@@ -1,17 +1,4 @@
 import Abs from '../../abyss';
-
-const columnFixed = (column = {}, $op = {}) => {
-    // 设置column的默认宽度，解决 fixed 列的覆盖问题
-    if (column.hasOwnProperty('fixed')
-        && $op.contains(column['$render'])
-        && !column.hasOwnProperty('width')) {
-        /**
-         * 默认两个链接
-         * 60一个链接
-         */
-        column.width = 120;
-    }
-};
 /*
  * 由于系统在点击表格的 onChange 会优先触发一个 loading 的效果
  * 也就是说这个 loading 效果会使得 sorter 必须要受控，否则一旦 setState
@@ -42,6 +29,5 @@ const columnSorter = (column = {}, reference = {}) => {
     }
 };
 export default {
-    columnFixed,
     columnSorter,
 }

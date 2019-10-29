@@ -35,9 +35,11 @@ const isIn = (input, array = []) => {
         return $array.contains(input);
     } else return false;
 };
+const isCn = (input) => /.*[\u4e00-\u9fa5]+.*$/.test(input);
 export default {
     isObject,
     isEmpty,
     isDiff,
     isIn,
+    isCn,
 }

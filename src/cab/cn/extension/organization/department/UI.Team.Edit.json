@@ -38,10 +38,8 @@
                             "columns": [
                                 "username,用户账号",
                                 "realname,用户名称",
-                                "comment,备注",
                                 "mobile,手机号",
-                                "email,邮箱",
-                                "active,是否启用"
+                                "email,邮箱"
                             ]
                         },
                         "validation": "请选择组长！",

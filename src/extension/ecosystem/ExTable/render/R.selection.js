@@ -8,9 +8,7 @@ export default (reference) => {
          */
         const {$selected = []} = reference.props;
         return {
-            onChange: ($selected = []) => {
-                Ex.rx(reference).selected($selected);
-            },
+            onChange: ($selected = []) => Ex.rx(reference).selected($selected),
             /* 受控处理（用于设置受控的情况）*/
             selectedRowKeys: $selected
         }

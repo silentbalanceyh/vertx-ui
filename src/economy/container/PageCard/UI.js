@@ -71,10 +71,19 @@ class Component extends React.PureComponent {
                     {topbar.back && $backVisible ? Op.renderBack(this, topbar) : false}
                 </span>
             );
+            /*
+             * 允许没有 title
+             */
+            const attrs = {};
+            if ($title || topbar.title) {
+                attrs.title = title;
+            }
+            if (topbar.right || topbar.back || $extra) {
+                attrs.extra = extraContent;
+            }
             return (
                 <Card className={className} bordered={false}
-                      title={title}
-                      extra={extraContent}>
+                      {...attrs}>
                     {children}
                 </Card>
             );

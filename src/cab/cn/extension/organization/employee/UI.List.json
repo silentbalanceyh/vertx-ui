@@ -6,10 +6,13 @@
         "resource.departments": {
             "uri": "/api/dept/by/sigma"
         },
-        "identity.type": {
+        "resource.teams": {
+             "uri": "/api/team/by/sigma"
+        },
+        "employee.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:zero.identity"
+                "type": "FIX:zero.employee"
             }
         }
     },

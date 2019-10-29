@@ -123,6 +123,37 @@ const cellText = (attrs = {}, reference, {
     }
     attrs.children = text;
 };
+const cellDatum = (attrs = {}, reference, {
+    column = {}, text
+}) => {
+    const normalized = R.Ant.toUnique(reference, column);
+    const {data = [], config = {}} = normalized;
+    const {display, value} = config;
+    if (U.isArray(text)) {
+        /*
+         * 多值
+         */
+        const result = text
+            .map(item => Ele.elementUnique(data, value, item))
+            .map(item => Ut.valueExpr(display, item, true));
+        attrs.children = result.join(',');
+    } else {
+        /*
+         * 单值
+         */
+        const item = Ele.elementUnique(data, value, text);
+        if (item) {
+            attrs.children = Ut.valueExpr(display, item, true);
+        } else {
+            const {$empty} = column;
+            if ($empty) {
+                attrs.children = $empty;
+            } else {
+                attrs.children = false;
+            }
+        }
+    }
+};
 export default {
     // ------- 动态：直接表格使用
     cellLogical, // LOGICAL专用，只识别true/false
@@ -135,4 +166,5 @@ export default {
     cellHyper, // HYPERLINK专用
     cellUser, // USER专用，识别创建者
     cellText, // TEXT专用，长文本
+    cellDatum, // DATUM专用，识别数据源
 };

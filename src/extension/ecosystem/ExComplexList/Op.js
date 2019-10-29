@@ -7,7 +7,7 @@ const yiList = (reference) => {
     const {config = {}, /* 基本配置 */} = reference.props;
     const error = Ensurer.verify(reference, config);    /* W01: 验证生成 error */
     if (error) {
-        reference.setState({error});                    /* ERROR: 有错误的页面 */
+        return Ux.promise({error});                     /* ERROR: 有错误的页面 */
     } else {
         return Init
             .sync(reference, config)                                /* W02: 静态状态，来源 config */

@@ -1,12 +1,4 @@
 {
-    "_page": {
-        "title": "角色管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
-    },
     "_grid": {
         "query": {
             "projection": [],

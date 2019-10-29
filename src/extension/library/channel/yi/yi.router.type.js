@@ -7,11 +7,17 @@ export default (reference, state = {}) => {
         const params = $router.params();
         if (params.type) {
             $query.criteria['type,='] = params.type;
-            /*
-             * 构造 state
-             */
-            state.$query = $query;
         }
+        if (params.status) {
+            $query.criteria['status,='] = params.status;
+        }
+        if (1 < Object.keys($query.criteria).length) {
+            $query.criteria[''] = true;
+        }
+        /*
+         * 构造 state
+         */
+        state.$query = $query;
     }
     return Ux.promise(state);
 }

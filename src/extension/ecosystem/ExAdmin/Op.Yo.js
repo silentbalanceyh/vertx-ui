@@ -36,7 +36,6 @@ const yoNavigation = (reference = {}, {
     attrs.data = source      // X_MENU 菜单信息// 特殊类型（导航栏）
         .filter(menu => "SIDE-MENU" === menu.type)
         .filter(menu => menu.uri && 0 < $router.path().indexOf(menu.uri));
-
     /*
      * 配置
      */

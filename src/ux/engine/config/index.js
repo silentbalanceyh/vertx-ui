@@ -14,6 +14,10 @@ import dialog from './O.dialog';
 
 import Dev from "../../develop";
 import init from './O.init';
+/*
+ * 特殊运算，专用于新版的列宽度自适应运算
+ */
+import configScroll from './O.fn.scroll';
 
 const exported = {
     ...form,
@@ -22,6 +26,7 @@ const exported = {
     ...tab,
     ...dialog,
     ...init,
+    configScroll,
 };
 Dev.dgDebug(exported, "所有配置类方法", "#DAA520");
 export default exported;

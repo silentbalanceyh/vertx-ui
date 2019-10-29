@@ -22,7 +22,7 @@ const _isDynamic = ($router) => {
     const prefix = `/${app}/ui/`;
     if (path.startsWith(prefix)) {
         const {module, page} = params;
-        if (module, page) {
+        if (module && page) {
             return {app, module, page}
         }
     }

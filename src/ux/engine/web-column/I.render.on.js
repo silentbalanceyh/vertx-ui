@@ -1,5 +1,4 @@
 import R from "../expression";
-import Ut from '../../unity';
 import Datum from '../datum';
 import Xt from '../../xweb';
 
@@ -62,8 +61,7 @@ const onRows = (attrs = {}, reference, {
     column = {},
 }) => {
     const config = _getConfig(column);
-    const rows = config ? config["rows"] : 2;
-    attrs.rows = rows;
+    attrs.rows = config ? config["rows"] : 2;
 };
 const onDatum = (attrs = {}, reference, {
     column = {},
@@ -71,8 +69,7 @@ const onDatum = (attrs = {}, reference, {
     const config = _getConfig(column);
     // 读取父类专用ref
     const ref = Datum.onReference(reference, 1);
-    const options = R.Ant.toOptions(ref, config);
-    attrs.items = options;
+    attrs.items = R.Ant.toOptions(ref, config);
 };
 const onTree = (attrs = {}, reference, {
     column = {},
@@ -97,27 +94,6 @@ const onAllowClear = (attrs = {}, reference, {
         attrs.allowClear = config.allowClear;
     }
 };
-const onList = (attrs = {}, reference, {
-    column = {},
-}) => {
-    const $datum = column['$datum'];
-    const config = "string" === typeof $datum ?
-        Ut.formatObject($datum, true) : $datum;
-    const list = {};
-    if (config) {
-        list.data = Datum.onDatum(reference, config.source);
-        list.config = config;
-        // 兼容处理，label优先，display次之
-        if (config.label) {
-            list.display = config.label;
-        } else {
-            list.display = config.display;
-        }
-        attrs.list = list;
-    } else {
-        attrs.list = {data: []};
-    }
-};
 const onButton = (attrs = {}, reference, {
     column = {},
 }) => {
@@ -135,7 +111,6 @@ export default {
     onRows, // 设置TextArea专用的rows属性
     onUnit, // 单位设置，unit = ￥
     onDatum, // 处理config.items的双用性
-    onList, // 处理config.$datum中的专用属性
     onTree, // Tree专用属性
     onJsx, // 处理jsx直接节点对应的数据信息
     onAllowClear, // Select专用属性，允许清除

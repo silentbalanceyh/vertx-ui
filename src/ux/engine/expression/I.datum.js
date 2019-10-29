@@ -2,7 +2,7 @@ import U from "underscore";
 // 文件导入
 import Ele from '../../element';
 import E from "../../error";
-import Expr from "./index";
+import Expr from "./O.ai";
 import Datum from '../datum';
 import T from './I.tool';
 import Pr from '../parser';
@@ -77,7 +77,8 @@ const parseDatum = (config = {}) => {
 const getDatum = (reference, config = {}, filter = () => true) => {
     let options = [];
     // 如果存在datum节点，则从Assist/Tabular数据源中读取
-    const {source} = parseDatum(config);
+    const $config = parseDatum(config);
+    const {source} = $config;
     if (source && "string" === typeof source) {
         let data = [];
         const processed = parseFilter(reference, filter);
@@ -98,6 +99,16 @@ const getDatum = (reference, config = {}, filter = () => true) => {
         options = data;
     } else {
         E.fxTerminal(true, 10044, source);
+    }
+    /*
+     * 解决 value / label 无法解析的问题
+     */
+    const {value, label} = $config;
+    if (value && label) {
+        options.forEach(option => {
+            option.value = option[value];
+            option.label = option[label];
+        })
     }
     return options;
 };

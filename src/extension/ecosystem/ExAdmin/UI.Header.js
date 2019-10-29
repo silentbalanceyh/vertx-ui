@@ -19,7 +19,7 @@ import Op from './Op';
  * }
  */
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI")
+    .cab("ExAdmin")
     .to()
 )
 class Component extends React.PureComponent {

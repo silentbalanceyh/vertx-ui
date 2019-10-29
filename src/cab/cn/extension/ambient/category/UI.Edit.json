@@ -1,54 +1,6 @@
 {
     "_form": {
-        "window": 0.15,
         "ui": [
-            [
-                "title=基本信息"
-            ],
-            [
-                "name,名称,14"
-            ],
-            [
-                "code,编码,14"
-            ],
-            [
-                {
-                    "metadata": "modelName,关联模型,14,,aiListSelector",
-                    "optionJsx.config": {
-                        "ajax": {
-                            "metadata": "POST,/api/model/search,1,8,sorter=createdAt`DESC"
-                        },
-                        "linker": {
-                            "identifier": "identifier",
-                            "alias": "modelName"
-                        },
-                        "table": {
-                            "columns": [
-                                "name,系统名称",
-                                "identifier,系统标识",
-                                "alias,名称",
-                                "comments,备注"
-                            ]
-                        },
-                        "validation": "请选择关联模型！",
-                        "window": "请选择关联模型,选择,关闭,false,800,false"
-                    }
-                }
-            ],
-            [
-                {
-                    "metadata": "parentId,父类型,14,,aiTreeSelect",
-                    "optionJsx.config.datum": "source=ci.type,key=key",
-                    "optionJsx.config.tree": "text=name",
-                    "optionJsx.config.selection": "mode=FULL"
-                }
-            ],
-            [
-                {
-                    "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
-                }
-            ],
             [
                 {
                     "metadata": "$button",
@@ -60,6 +12,64 @@
                     ],
                     "span": 24
                 }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,名称,8,,,placeholder=请输入名称",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,编码,8,,,placeholder=（全大写，如:已审核-APPROVED）",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/x-category/existing",
+                                "method": "POST",
+                                "params": {
+                                    "type": "FORM:type",
+                                    "sigma":"PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "parentId,父类型,8,,aiTreeSelect",
+                    "optionJsx.config.datum": "source=data.category,key=key",
+                    "optionJsx.config.tree": "text=name",
+                    "optionJsx.config.selection": "mode=FULL",
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "leaf,叶节点,8,,aiCheckbox",
+                    "optionConfig":{
+                        "valuePropName":"checked"
+                    }
+                },
+                {
+                    "metadata": "active,是否启用,8,,aiCheckbox",
+                    "optionConfig":{
+                        "valuePropName":"checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 4
+                }
             ]
         ],
         "hidden": [
@@ -68,8 +78,8 @@
             "identifier"
         ],
         "op": {
-            "$opSave": "act.tabular.save",
-            "$opDelete": "act.tabular.delete"
+            "$opSave": "act.category.save",
+            "$opDelete": "act.category.delete"
         }
     },
     "_modal": {

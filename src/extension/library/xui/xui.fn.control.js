@@ -50,7 +50,5 @@ export default (control = {}, UI = {}, inherit = {}) => {
                 return false;
             }
         }
-        console.info(control);
-        return false;
     }
 }

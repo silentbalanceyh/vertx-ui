@@ -1,5 +1,6 @@
 import yoAmbient from './yo.ambient';
 import yoDynamic from './yo.dynamic';
+import yoPolymorphism from './yo.polymorphism';
 /*
  * -------------> Component规范
  * 「一个组件传入到另外一个组件的基本规范参考此文件」：
@@ -80,7 +81,19 @@ import Yu from './yu';
 
 export default {
     yoAmbient,              // 环境数据（统一处理）
-    yoDynamic,              // 比 yoAmbient 多两个核心变量：$identifier / $controls
+    /*
+     * 比 yoAmbient 多两个核心变量：
+     * $identifier / $controls
+     */
+    yoDynamic,
+    /*
+     * 比 yoAmbient 多
+     * 1）直接读取 fromHoc 中的 grid 配置
+     * 2）state 中的 $query
+     * 3）state 中的 config.options 中读取 $identifier
+     * 4）构造 $inited 中的 $identifier
+     */
+    yoPolymorphism,
     yoComponent: yoAmbient, // 环境数据（统一处理）
     yoControl,
     // -- 配置
