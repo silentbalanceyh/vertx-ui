@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
             return (
                 <ExComplexList {...attrs}/>
             );
-        })
+        }, Ex.parserOfColor("PxIdentityType").type())
     }
 }
 

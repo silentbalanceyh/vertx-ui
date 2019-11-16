@@ -21,13 +21,13 @@ const configColumn = (reference, columns = [], ops = {}) => {
      */
     columns.forEach(column => {
         // $render处理
-        Column.columnRender(column, reference, ops);
+        Column.columnRender(reference, column, ops);
         // fixed固定值处理
         // Column.columnFixed(column, $op);
         // $filter过滤处理
-        Column.columnFilter(column, reference);
+        Column.columnFilter(reference, column);
         // sorter = true 是否开启可控模式
-        Column.columnSorter(column, reference);
+        Column.columnSorter(reference, column);
         // 计算当前列的宽度
     });
     return columns;

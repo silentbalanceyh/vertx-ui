@@ -45,7 +45,7 @@
                     "metadata": "customerId,客户信息,,,aiListSelector,placeholder=（请选择对应客户信息）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/customer/search,1,8,sorter=createdAt`DESC"
+                            "metadata": "POST,/api/customer/search,1,10,sorter=createdAt`DESC"
                         },
                         "linker": {
                             "name": "customerId"

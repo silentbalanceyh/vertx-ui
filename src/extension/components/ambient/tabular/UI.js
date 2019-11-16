@@ -7,11 +7,6 @@ import FormFilter from "./form/UI.Filter";
 
 import {ExComplexList} from "ei";
 
-const LOG = {
-    name: "PxTabular",
-    color: "#36648B"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -39,7 +34,7 @@ class Component extends React.PureComponent {
             return (
                 <ExComplexList {...attrs}/>
             );
-        }, LOG);
+        }, Ex.parserOfColor("PxTabularType").type());
     }
 }
 

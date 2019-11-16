@@ -30,31 +30,16 @@ export default (reference, additional = {}, data = {}) => {
      * `form`：从 hoc 的 _form 节点读取到的配置信息
      */
     if (U.isObject(addOn.form)) {
-        const form = Ux.clone(addOn.form);
+        let form = addOn.form;
         /*
          * 处理 form，合并专用
          */
         const {$options} = reference.props;
         if ($options && $options.form) {
-            const dynamicForm = $options.form;
             /*
-             * ui 合并
-             * 1）dynamicForm 中的 ui 只能追加到 configForm 之后
-             * 2）dynamicForm 中的 hidden 和 configForm 中的 hidden 合并
+             * options 中的合并
              */
-            if (U.isArray(dynamicForm.ui)) {
-                form.ui = [].concat(form.ui, dynamicForm.ui);
-            }
-            if (U.isArray(dynamicForm.hidden)) {
-                form.hidden = [].concat(form.hidden, dynamicForm.hidden);
-            }
-            /*
-             * mapping 处理
-             */
-            if (!form.mapping) form.mapping = {};
-            if (dynamicForm.mapping) {
-                Object.assign(form.mapping, dynamicForm.mapping);
-            }
+            form = Ux.toForm(form, $options.form);
         }
         config.form = form;
     }

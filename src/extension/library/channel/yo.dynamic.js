@@ -3,7 +3,7 @@ import Ux from 'ux';
 
 export default (reference = {}) => {
     const attrs = yoAmbient(reference);
-    const {$identifier, $controls = {}, $inited} = reference.props;
+    const {$identifier, $controls = {}, $inited, $mode} = reference.props;
     if ($identifier) {
         /*
          * 动态选择模型专用标识符
@@ -21,6 +21,12 @@ export default (reference = {}) => {
          * 表单专用初始化数据相关信息
          */
         attrs.$inited = $inited;
+    }
+    if ($mode) {
+        /*
+         * 表单专用信息
+         */
+        attrs.$mode = $mode;
     }
     return attrs;
 }

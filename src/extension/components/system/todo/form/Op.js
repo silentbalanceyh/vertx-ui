@@ -1,21 +1,6 @@
 import Ex from 'ex';
 import Ux from 'ux';
 
-const $opAdd = (reference) =>
-    params => Ex.form(reference).add(params, {
-        uri: "/api/group",
-        dialog: "added",
-    });
-const $opSave = (reference) =>
-    params => Ex.form(reference).save(params, {
-        uri: "/api/group/:key",
-        dialog: "saved"
-    });
-const $opDelete = (reference) =>
-    params => Ex.form(reference).remove(params, {
-        uri: "/api/group/:key",
-        dialog: "removed"
-    });
 const $opFilter = (reference) =>
     params => Ex.form(reference).filter(params);
 
@@ -26,20 +11,28 @@ const yiForm = (reference) => {
     const {$inited = {}, $options = {}} = reference.props;
     if (!$options.form) $options.form = {};
     const code = $options.form[$inited['modelId']];    // 从 XTodo 中提取 $identifier
-    Ex.I.form({code}).then(config => {
+    Ex.I.form({code}).then(dynamicForm => {
         /*
          * XTODO record 规范化处理
          */
-        const formConfig = Ux.fromHoc(reference, "form");
-        console.info(config, formConfig);
+        const staticForm = Ux.fromHoc(reference, "form");
+        const $form = Ux.toForm(staticForm, dynamicForm);
+        reference.setState({
+            $form, $ready: true
+        });
     });
+};
+const $opConfirm = (reference) => (params) => {
+    console.info(params);
+};
+const $opReject = (reference) => (params) => {
+    console.info(params);
 };
 export default {
     yiForm,
     actions: {
-        $opAdd,
-        $opSave,
-        $opDelete,
+        $opConfirm,
+        $opReject,
         $opFilter
     }
 }

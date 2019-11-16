@@ -11,11 +11,13 @@ import redux from './O.redux';
 import math from './O.math';
 
 import tree from './O.tree';
+import treeSelect from './O.tree.select';
 
 import antForm from './O.ant.form';
 import antSubmit from './O.ant.submit';
 
 import pluginElement from './O.plugin.element';
+import pluginTo from './O.plugin.to';
 
 export default {
     ...random,
@@ -31,9 +33,11 @@ export default {
     ...math,
 
     ...tree,
+    ...treeSelect,
 
     ...antSubmit,
     ...antForm,
 
     ...pluginElement,
+    ...pluginTo,
 }

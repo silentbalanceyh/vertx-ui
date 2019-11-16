@@ -90,7 +90,7 @@ const yiLayout = (reference) => {
     const props = reference.props;
     if (props.hasOwnProperty("$collapsed")) {
         const {$collapsed = true} = props;
-        reference.setState({$collapsed});
+        reference.setState({$collapsed, $ready: true});
     }
 };
 export default {

@@ -17,6 +17,7 @@ const rxSelect = (reference) => (selected = {}) => {
          */
         reference.setState({
             $query: Ux.clone($query),   // 拷贝触发条件的变更
+            $type: selected.code,       // 类型选择
             $selected: true
         })
     }
@@ -51,6 +52,8 @@ const yoList = (reference) => {
         FormEdit,   // 更新表单
         FormFilter  // 搜索表单
     };
+    listAttrs.rxOpenPost = Ex.rxOpenPost(reference);
+    listAttrs.rxClosePost = Ex.rxClosePost(reference);
     return listAttrs;
 };
 export default {

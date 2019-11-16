@@ -4,11 +4,6 @@ import Ex from 'ex';
 import Yo from './yo';
 import renderJsx from './Web';
 
-const LOG = {
-    name: "ExEditorBatch",
-    color: "#228B22"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -32,7 +27,7 @@ class Component extends React.PureComponent {
                 tables,
                 buttons,
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExEditorBatch").private());
     }
 }
 

@@ -8,29 +8,96 @@
                 "title=基本信息"
             ],
             [
-                "workCnName,中文名",
-                "workEnName,英文名",
-                "workNumber,工号"
+                {
+                    "metadata":"workNumber,工号,,,,placeholder=（不填写则系统自动生成）",
+                    "optionConfig.rules":[
+                        {
+                            "validator":"existing",
+                            "message":"对不起，填写的工号重复，请重填！",
+                            "config":{
+                                "uri":"/api/employee/existing",
+                                "method":"POST",
+                                "params":{
+                                    "sigma":"PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "metadata":"viceName,姓名",
+                    "optionConfig.rules":[
+                        "required,请输入员工姓名"
+                    ]
+                },
+                "workTitle,头衔"
             ],
             [
-                "workTitle,职务",
                 {
-                    "metadata": "type,分类,,,aiSelect,placeholder=（请选择员工分类）",
-                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
+                    "metadata":"viceEmail,邮箱,,,,placeholder=（XXX@XXX格式）",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"viceMobile,手机号,,,,placeholder=（请输入手机号）",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "格式错误,请正确输入手机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "username,关联账号,8,,aiListSelector,placeholder=（请选择账号）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC",
+                            "params.criteria":{
+                                "modelId":"FIX:employee",
+                                "":"OPERATOR:AND"
+                            }
+                        },
+                        "linker": {
+                            "key": "userId",
+                            "username": "username",
+                            "realname":"viceName",
+                            "email": "viceEmail",
+                            "mobile": "viceMobile"
+                        },
+                        "table": {
+                            "columns": [
+                                "username,用户账号",
+                                "realname,用户名称",
+                                "mobile,手机号",
+                                "email,邮箱"
+                            ]
+                        },
+                        "validation": "请选择关联账号！",
+                        "window": "关联账号,选择,关闭,false,800,false",
+                        "search": {
+                            "username,c": "账号",
+                            "realname,c": "姓名"
+                        }
+                    },
+                    "optionJsx.allowClear":true
                 }
             ],
             [
                 {
-                    "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择部门所挂靠的公司）",
+                    "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择所属公司）",
                     "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=companyId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
-                        "required,请选择部门所挂靠的公司！"
+                        "required,请选择员工所属的公司！"
                     ]
                 },
                 {
-                    "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
+                    "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择时无所属部门）",
                     "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
@@ -39,50 +106,18 @@
                         "target": "FORM:companyId"
                     },
                     "optionJsx.allowClear":true
-                }
-            ],
-            [
-                {
-                    "metadata":"workEmail,办公邮箱,,,,placeholder=（XXX@XXX格式）",
-                    "optionConfig.rules": [
-                        "required,请输入电子邮件",
-                        {
-                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "格式错误,请正确输入邮件地址！"
-                        }
-                    ]
                 },
                 {
-                    "metadata":"workMobile,办公用手机,,,,placeholder=（XXX-XXXXXXXX格式）",
-                    "optionConfig.rules": [
-                        "required,请输入办公用手机，办公用手机不能为空",
-                        {
-                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
-                            "message": "格式错误,请正确输入办公用手机！"
-                        }
-                    ]
-                }
-            ],
-            [
-                {
-                    "metadata":"workPhone,办公电话,,,,placeholder=（XXX-XXXXXXXX格式）",
-                    "optionConfig.rules": [
-                        "required,请输入办公电话，办公电话不能为空",
-                        {
-                            "pattern": "[0-9-()（）]{7,18}",
-                            "message": "格式错误,请正确输入办公电话！"
-                        }
-                    ]
-                },
-                {
-                    "metadata":"workExtension,分机号,,,,placeholder=（XXX-XXXXXXXX格式）",
-                    "optionConfig.rules": [
-                        "required,请输入分机号，分机号不能为空",
-                        {
-                            "pattern": "[0-9-()（）]{7,18}",
-                            "message": "格式错误,请正确输入分机号！"
-                        }
-                    ]
+                    "metadata": "teamId,所属组,,,aiTreeSelect,placeholder=（不选择时无所属组）",
+                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=teamId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.config.cascade": {
+                        "source": "deptId",
+                        "target": "FORM:deptId"
+                    },
+
+                    "optionJsx.allowClear":true
                 }
             ],
             [
@@ -94,7 +129,7 @@
                 }
             ],
             [
-                "workLocation,办公地点,24,,aiTextArea,rows=3"
+                "workLocation,办公地点,24,,aiTextArea,rows=4"
             ],
             [
                 {
@@ -107,8 +142,14 @@
                 }
             ]
         ],
+        "initial":{
+            "active":"BOOL:true",
+            "type":"ROUTE:type"
+        },
         "hidden": [
-            "identityId"
+            "identityId",
+            "userId",
+            "type"
         ],
         "op": {
             "$opAdd": "act.employee.add"

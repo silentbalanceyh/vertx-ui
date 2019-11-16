@@ -51,6 +51,8 @@ const yoList = (reference) => {
         FormEdit,   // 更新表单
         FormFilter  // 搜索表单
     };
+    listAttrs.rxOpenPost = Ex.rxOpenPost(reference);
+    listAttrs.rxClosePost = Ex.rxClosePost(reference);
     return listAttrs;
 };
 export default {

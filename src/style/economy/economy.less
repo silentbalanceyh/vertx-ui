@@ -49,7 +49,9 @@
 .ix-form-row {
     .each(@rowHeight, @max, @i:1) when (@i =< @max) {
         .ant-col-@{i} {
-            margin-top: @rowHeight;
+            /*
+             * margin-top: @rowHeight;
+             */
 
             .ant-form-item {
                 margin-bottom: 0 !important;

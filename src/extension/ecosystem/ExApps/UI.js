@@ -5,11 +5,6 @@ import Ex from 'ex';
 import {Icon} from "antd";
 import {Link} from "react-router-dom";
 
-const LOG = {
-    name: "ExApps",
-    color: "#c60"
-};
-
 class Component extends React.PureComponent {
     componentDidMount() {
         Op.yiPage(this);
@@ -26,14 +21,14 @@ class Component extends React.PureComponent {
                             <Icon type={menu.icon}
                                   style={{
                                       color: "white",
-                                      backgroundColor: Op.toColor(index)
+                                      backgroundColor: Ex.toColor(index)
                                   }}/>
                             <span className={"label"}>{menu.text}</span>
                         </Link>
                     ))}
                 </div>
             );
-        }, LOG);
+        }, Ex.parserOfColor("ExApps").component());
     }
 }
 

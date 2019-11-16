@@ -12,7 +12,14 @@ export {default as ExTab} from './ExTab/UI';
 export {default as ExAccount} from './ExAccount/UI';
 /* （通用树）左边的树形结构 */
 export {default as ExArbor} from './ExArbor/UI';
-
+/* （通用选择器）搜索、选择、多选、反选专用面板 */
+export {default as ExRegiment} from './ExRegiment/UI';
+/* （通用历史记录）X_ACTIVITY / X_ACTIVITY_CHANGE */
+export {default as ExHistory} from './ExHistory/UI';
+/* （通用记录显示）
+ *  UI_FORM / Record 合并到一起（动态表单）
+ **/
+export {default as ExRecord} from './ExRecord/UI';
 /*
  * 【不可重用】业务类型控件
  */
@@ -35,3 +42,10 @@ export {default as ExCategory} from './ExCategory/UI';
 // ------------- 菜单选择器
 /* （Dashboard专用）*/
 export {default as ExApps} from './ExApps/UI';
+/*
+ * 日志颜色分类
+ * 私有：
+ * 公有组件：#
+ * 公有表单：#C03
+ * 公有列表：#09C
+ */

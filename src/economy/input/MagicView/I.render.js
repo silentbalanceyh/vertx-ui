@@ -1,8 +1,9 @@
 import React from 'react';
-import {Icon} from 'antd';
+import {Icon, Table} from 'antd';
 import JsonView from 'react-json-view';
 import Ux from 'ux';
 import U from 'underscore';
+import {ColumnUser} from "web";
 
 const jsxMoment = (reference, value, config = {}) => {
     // 时间信息处理
@@ -54,10 +55,32 @@ const jsxRecord = (reference, value, config = {}) => {
 };
 const jsxLabel = (reference, value, config = {}) => (<span>{value}</span>);
 const jsxIcon = (reference, icon, style = {}) => (<Icon type={icon} style={style}/>);
+const jsxUser = (reference, value, config = {}) => {
+    const {user = {}, $empty = ""} = config;
+    const attrs = {};
+    attrs.config = user;
+    attrs.$empty = $empty;
+    attrs.$key = value;
+    return (
+        <ColumnUser {...attrs}/>
+    )
+};
+const jsxTable = (reference, value = [], config = {}) => {
+    const {table = {}} = config;
+    const tableAttrs = Ux.clone(table);
+    tableAttrs.pagination = false;
+    tableAttrs.className = "web-table";
+    tableAttrs.columns = Ux.configColumn(reference, table.columns);
+    return (
+        <Table {...tableAttrs} dataSource={value}/>
+    )
+};
 export default {
     /* 普通标签 */
     jsxMoment,
     jsxLabel,
     jsxItems,
     jsxRecord,
+    jsxUser,
+    jsxTable
 }

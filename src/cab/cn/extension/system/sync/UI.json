@@ -1,16 +1,8 @@
 {
-    "_page": {
-        "title": "同步日志",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
-    },
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,8",
+            "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },

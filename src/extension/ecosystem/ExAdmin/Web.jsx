@@ -26,7 +26,7 @@ export default (ref, {
         }/>
         <Layout>
             <Header {...headers}/>
-            <Content>
+            <Content className={"ux-content"}>
                 <ExNavigation {...navigations} css={
                     {
                         clsNav: "ux-navigation",

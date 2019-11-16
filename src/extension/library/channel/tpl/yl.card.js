@@ -12,7 +12,11 @@ import U from 'underscore';
  * }
  */
 export default (reference, fnRender, config = {}) => {
-    const {title, header, ...LOG} = config;
+    const {
+        title, extra, header,
+        leftVisible = true,
+        ...LOG
+    } = config;
     return yoRender(reference, () => {
         const attrs = {};
         if (title) {
@@ -21,6 +25,13 @@ export default (reference, fnRender, config = {}) => {
              */
             attrs.$title = title;
         }
+        if (extra) {
+            /*
+             * 页数配置，extraContent 部分的内容
+             */
+            attrs.$extra = extra;
+        }
+        attrs.$leftVisible = leftVisible;
         /*
          * 切换类按钮处理
          * 1）切换显示按钮专用

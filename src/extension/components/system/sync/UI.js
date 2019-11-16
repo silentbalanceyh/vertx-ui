@@ -6,11 +6,6 @@ import FormFilter from './form/UI.Filter';
 import {ExComplexList} from "ei";
 import Op from './Op';
 
-const LOG = {
-    name: "PxLog",
-    color: "#36648B"
-};
-
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .to()
@@ -37,7 +32,7 @@ class Component extends React.PureComponent {
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config} $form={form} $query={$query}/>
             )
-        }, LOG)
+        }, Ex.parserOfColor("PxSync").page())
     }
 }
 

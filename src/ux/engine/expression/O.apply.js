@@ -99,6 +99,7 @@ const applyItem = (item = {}, config = [], kvs = []) => {
     }
     return $item.toJS();
 };
+/*
 const applyDynamic = (item) => {
     const attrs = {};
     const config = item['$config'] ? item['$config'] : {};
@@ -108,10 +109,9 @@ const applyDynamic = (item) => {
             width: config.width
         };
     }
-    // 删除childOnly自定义属性
     if (attrs.hasOwnProperty("childOnly")) delete attrs['childOnly'];
     return attrs;
-};
+}; */
 export default {
     applyArray,
     applyKey,
@@ -123,5 +123,5 @@ export default {
     applyColumn,
     applyValue,
     applyConnect,
-    applyDynamic
+    // applyDynamic
 };

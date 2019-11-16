@@ -2,11 +2,7 @@ import React from 'react';
 import Op from './Op';
 import Ex from 'ex';
 import Ux from 'ux';
-
-const LOG = {
-    name: "PxView",
-    color: "#36648B"
-};
+import {ExForm} from 'ei';
 
 @Ux.zero(Ux.rxEtat(require('../Cab'))
     .cab("UI.View")
@@ -19,9 +15,16 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
-
-            return false;
-        }, LOG);
+            const {$inited = {}} = this.props;
+            const {$form = {}} = this.state;
+            const form = Ex.yoForm(this, {
+                form: $form,
+            }, $inited);
+            return (
+                <ExForm {...form} $height={"300px"}
+                        $op={Op.actions}/>
+            );
+        });
     }
 }
 

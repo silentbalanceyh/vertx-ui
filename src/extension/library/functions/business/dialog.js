@@ -58,9 +58,19 @@ const saveRow = (reference) => (params = {}, config = {}) => {
     }
     return Ux.promise(request);
 };
-
+const saveSelected = (reference) => (data = []) => {
+    const {doRows} = reference.props;
+    if (U.isFunction(doRows)) {
+        doRows(data, {
+            $visible: false, // 关闭窗口
+        })
+    } else {
+        throw new Error("[ Ux ] 缺失核心函数 doRow()");
+    }
+};
 export default (reference) => ({
     add: add(reference),
     save: save(reference),
-    saveRow: saveRow(reference)
+    saveRow: saveRow(reference),
+    saveSelected: saveSelected(reference)
 })

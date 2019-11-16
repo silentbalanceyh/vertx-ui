@@ -5,13 +5,10 @@ import Op from './Op';
 import Rdr from './render';
 import U from 'underscore';
 import renderJsx from './Web.jsx';
+
 /*
  * 表格专用
  */
-const LOG = {
-    name: 'ExTable',
-    color: '#09C'
-};
 
 class Component extends React.PureComponent {
     state = {
@@ -64,7 +61,7 @@ class Component extends React.PureComponent {
                 table: Ux.clone($table),
                 data
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExTable").private());
     }
 }
 

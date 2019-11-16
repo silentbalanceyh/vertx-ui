@@ -4,11 +4,6 @@ import Op from './Op';
 import {Tabs} from "antd";
 import U from 'underscore';
 
-const LOG = {
-    name: "OxTab",
-    color: "#A52A2A"
-};
-
 class Component extends React.PureComponent {
     componentDidMount() {
         Op.yiPage(this);
@@ -35,7 +30,7 @@ class Component extends React.PureComponent {
                     })}
                 </Tabs>
             );
-        }, LOG)
+        }, Ex.parserOfColor("OxTab").container())
     }
 }
 

@@ -46,7 +46,6 @@ export default (reference) => {
              * 构造 QQuery
              */
             const queryRef = new QQuery(params, reference);
-            console.info(params, value);
             queryRef.and(values);
             const request = queryRef.to();
             Ux.asyncData(config.ajax, request, ($data = {}) => {

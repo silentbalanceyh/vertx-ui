@@ -6,11 +6,6 @@ import {ExComplexList} from "ei";
 
 import {EntityAdd as FormAdd, EntityEdit as FormEdit, EntityFilter as FormFilter,} from "../form";
 
-const LOG = {
-    name: "ExEntity",
-    color: "#698B69"
-};
-
 @Ux.zero(Ux.rxEtat(require('../Cab.json'))
     .cab("UI.Entity")
     .to()
@@ -32,7 +27,7 @@ class Component extends React.PureComponent {
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             );
-        }, LOG)
+        }, Ex.parserOfColor("PxEntity").control())
     }
 }
 

@@ -19,7 +19,8 @@ export default (reference, {
         <Row>
             <Col span={span.left} style={{
                 maxHeight: Ux.toHeight(102),
-                overflow: "auto"
+                overflow: "auto",
+                paddingRight: 6
             }}>
                 <ExCategory {...siderAttrs}/>
             </Col>

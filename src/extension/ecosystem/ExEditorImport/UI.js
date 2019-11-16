@@ -5,11 +5,6 @@ import Ux from 'ux';
 
 import renderJsx from './Web.jsx';
 
-const LOG = {
-    name: "ExEditorImport",
-    color: "#228B22"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: false,
@@ -38,7 +33,7 @@ class Component extends React.PureComponent {
                 // image: $image,
                 button: $button,
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExEditorImport").private());
     }
 }
 

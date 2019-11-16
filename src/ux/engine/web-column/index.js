@@ -1,9 +1,10 @@
-import common from './O.common';
-import filter from './O.filter';
-import render from './O.render';
+import columnFilter from './O.fn.filter';
+import columnSorter from './O.fn.sorter';
+import columnRender from './O.fn.render';
 
-export default {
-    ...common,
-    ...filter,
-    ...render,
+const exported = {
+    columnFilter,
+    columnSorter,
+    columnRender,
 };
+export default exported;

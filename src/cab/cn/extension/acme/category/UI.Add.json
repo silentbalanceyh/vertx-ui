@@ -1,79 +1,6 @@
 {
     "_form": {
-        "window": 0.15,
         "ui": [
-            [
-                "title=基本信息"
-            ],
-            [
-                {
-                    "metadata": "name,名称,14,,,placeholder=请输入名称",
-                    "optionConfig.rules": [
-                        "required,请输入名称，名称不可为空！"
-                    ]
-                }
-            ],
-            [
-                {
-                    "metadata": "code,编码,14,,,placeholder=（根据规范编码全大写，如:已审核-APPROVED）",
-                    "optionConfig.rules": [
-                        "required,请输入编码，编码不可为空！",
-                        {
-                            "validator": "existing",
-                            "message": "对不起，编码重复！",
-                            "config": {
-                                "uri": "/api/x-category/existing",
-                                "method": "POST",
-                                "params": {
-                                    "type": "FORM:type"
-                                }
-                            }
-                        }
-                    ]
-                }
-            ],
-            [
-                {
-                    "metadata": "modelName,关联模型,14,,aiListSelector",
-                    "optionJsx.config": {
-                        "ajax": {
-                            "metadata": "POST,/api/model/search,1,8,sorter=createdAt`DESC"
-                        },
-                        "linker": {
-                            "identifier": "identifier",
-                            "alias": "modelName"
-                        },
-                        "table": {
-                            "columns": [
-                                "alias,名称",
-                                "name,系统名称",
-                                "identifier,系统标识",
-                                "comments,备注"
-                            ]
-                        },
-                        "validation": "请选择关联模型！",
-                        "window": "请选择关联模型,选择,关闭,false,800,false",
-                        "search": {
-                            "alias": "名称",
-                            "identifier": "系统标识"
-                        }
-                    }
-                }
-            ],
-            [
-                {
-                    "metadata": "parentId,父类型,14,,aiTreeSelect",
-                    "optionJsx.config.datum": "source=ci.type,key=key",
-                    "optionJsx.config.tree": "text=name",
-                    "optionJsx.config.selection": "mode=FULL"
-                }
-            ],
-            [
-                {
-                    "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
-                }
-            ],
             [
                 {
                     "metadata": "$button",
@@ -84,14 +11,94 @@
                     ],
                     "span": 24
                 }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,名称,8,,,placeholder=请输入名称",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,编码,8,,,placeholder=（全大写，如:已审核-APPROVED）",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/x-category/existing",
+                                "method": "POST",
+                                "params": {
+                                    "type": "FORM:type",
+                                    "sigma":"PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "parentName,父类型,8,,aiTreeSelector,placeholder=（请选择）",
+                    "optionJsx.config":{
+                        "ajax":{
+                            "uri":"/api/type/categories/:type",
+                            "magic":{
+                                "type":"FORM:type"
+                            }
+                        },
+                        "linker": {
+                            "name": "parentName",
+                            "key":"parentId"
+                        },
+                        "selection":{
+                            "multiple": false,
+                            "checkStrictly":true
+                        },
+                        "tree":{
+                            "title":"name"
+                        },
+                        "validation": "请选择父类！",
+                        "window": "选择父类型,选择,关闭,false,400,false"
+                    },
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "leaf,叶节点,8,,aiCheckbox",
+                    "optionConfig":{
+                        "valuePropName":"checked"
+                    }
+                },
+                {
+                    "metadata": "active,是否启用,8,,aiCheckbox",
+                    "optionConfig":{
+                        "valuePropName":"checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 3
+                }
             ]
         ],
         "hidden": [
             "type",
-            "identifier"
+            "identifier",
+            "parentId"
         ],
         "op": {
-            "$opAdd": "act.tabular.add"
+            "$opAdd": "act.category.add"
+        },
+        "initial":{
+            "active":"BOOL:true"
         }
     },
     "_modal": {

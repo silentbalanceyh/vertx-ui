@@ -25,7 +25,7 @@ class Component extends React.PureComponent {
                 <PageModal {...inherit}/>
                 <PageRelation {...inherit}/>
             </ExTab>
-        ))
+        ), Ex.parserOfColor("PxModeling").page())
     }
 }
 

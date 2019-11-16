@@ -15,17 +15,34 @@ const fromHoc = (reference = {}, key = "") => {
     const {$hoc} = reference.state;
     return ($hoc) ? $hoc._(key) : null;
 };
-
+const parseDatum = (target, key) => {
+    const targetKey = target[`$t_${key}`] || target[`$a_${key}`];
+    if (targetKey) {
+        if (targetKey.is()) {
+            return targetKey;
+        } else {
+            return targetKey;
+        }
+    }
+};
 const fromDatum = (reference, key) => {
     key = key.replace(/\./g, "_");
+    /*
+     * 先从 props 中读取
+     */
     if (reference.props) {
-        const targetKey =
-            reference.props[`$t_${key}`] || reference.props[`$a_${key}`];
-        if (targetKey) {
-            if (targetKey.is()) {
-                return targetKey;
-            } else {
-                return targetKey;
+        let parsed = parseDatum(reference.props, key);
+        if (parsed) {
+            return parsed;
+        } else {
+            /*
+             * 再从 state 中读取
+             */
+            if (reference.state) {
+                parsed = parseDatum(reference.state, key);
+                if (parsed) {
+                    return parsed;
+                }
             }
         }
     }

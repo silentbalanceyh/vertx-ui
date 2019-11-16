@@ -4,11 +4,6 @@ import Op from './Op';
 import {ExComplexList} from 'ei';
 import Ux from 'ux';
 
-const LOG = {
-    name: "OxList",
-    color: "#A52A2A"
-};
-
 class Component extends React.PureComponent {
     state = {};
 
@@ -33,7 +28,7 @@ class Component extends React.PureComponent {
                                $form={$form}    // 添加专用
                                $record={$record}/>
             );
-        }, LOG);
+        }, Ex.parserOfColor("OxList").list());
     }
 }
 

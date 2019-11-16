@@ -35,6 +35,7 @@ class Component extends React.PureComponent {
             return (
                 <Input.Group {...attrs}>
                     <Table {...$table} dataSource={data}
+                           className={"web-table"}
                            loading={$submitting}/>
                     <Dialog className={"web-dialog"}
                             size={"small"}

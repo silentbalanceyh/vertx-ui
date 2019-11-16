@@ -1,9 +1,9 @@
 import parserOfButton from './P.button';
-import parserOfAjax from './P.ajax';
+import parserOfColor from './P.color';
 /*
  * 统一配置解析器
  */
 export default {
     parserOfButton,
-    parserOfAjax,
+    parserOfColor
 }

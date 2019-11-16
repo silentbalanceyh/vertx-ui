@@ -3,11 +3,6 @@ import Ex from 'ex';
 import Op from './Op';
 import {ExForm} from 'ei';
 
-const LOG = {
-    name: "OxForm",
-    color: "#A52A2A"
-};
-
 class Component extends React.PureComponent {
     state = {};
 
@@ -30,7 +25,7 @@ class Component extends React.PureComponent {
                 <ExForm {...this.props} $height={"300px"}
                         $op={$op}/>
             );
-        }, LOG)
+        }, Ex.parserOfColor("OxForm").form())
     }
 }
 

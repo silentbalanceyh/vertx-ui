@@ -13,6 +13,14 @@
             ],
             [
                 {
+                    "metadata": "active,启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
                     "metadata": "comment,备注,24,,aiTextArea",
                     "optionJsx.rows": 4
                 }

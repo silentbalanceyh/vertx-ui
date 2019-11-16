@@ -1,4 +1,5 @@
 import U from 'underscore';
+import moment from 'moment';
 import Abs from '../../abyss';
 import Dev from '../../develop';
 import Ele from '../../element';
@@ -9,11 +10,22 @@ import Rx from '../expression';
  */
 const px = 12;
 const widthString = (input) => {
+    let length = 0;
+    for (let idx = 0; idx < input.length; idx++) {
+        const str = String(input.charAt(idx));
+        if (Abs.isCn(str)) {
+            length += (2 * px);
+        } else {
+            length += px;
+        }
+    }
+    return length;
+    /*
     if (Abs.isCn(input)) {
         return input.length * px * 2;
     } else {
         return input.length * px;
-    }
+    }*/
 };
 const widthData = (data = [], field = "") => {
     let defaultWidth = 0;
@@ -71,7 +83,19 @@ const widthUser = (titleWidth = 0, column = {}, data = []) => {
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthDate = (titleWidth = 0, column = {}, data = []) => {
-    const textWidth = widthData(data, column.dataIndex);
+    let textWidth = 0;
+    const format = column['$format'];
+    data.map(record => record[column.dataIndex])
+        .filter(value => !!value)
+        .map(value => Ele.valueTime(value, format))
+        .filter(moment.isMoment)
+        .map(value => value.format(format))
+        .map(widthString)
+        .forEach(current => {
+            if (textWidth < current) {
+                textWidth = current;
+            }
+        });
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {
@@ -84,8 +108,8 @@ const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {
         .map(text => Ele.elementUnique(source, value, text))
         .filter(found => !!found)
         .map(found => Ut.valueExpr(display, found, true))
-        .forEach(parsed => {
-            let current = widthString(parsed);
+        .map(found => widthString(found))
+        .forEach(current => {
             if (textWidth < current) {
                 textWidth = current; // 暂时使用固定值，防止越界
             }

@@ -10,14 +10,22 @@ import raftDepend from './I.fn.depend';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
+    let literal;
     if (values.hasOwnProperty(cell.field)) {
+        literal = values[cell.field];
+    } else {
+        if (0 < cell.field.indexOf('.')) {
+            const path = cell.field.split('.');
+            literal = Abs.immutable(values).getIn(path);
+        }
+    }
+    if (literal) {
         /*
          * 计算初始值
          * 1）如果 literal 是 Object 且包含了 $delay，执行二次表达
          * 2）如果 literal 就是 Object 且不包含 $delay，直接用 literal
          * 3）非 Object 的时候，是否处理时间格式，cell.moment 有定义
          */
-        let literal = values[cell.field];
         if (U.isObject(literal)) {
             if (literal) {
                 const {$delay = false, expression = ""} = literal;

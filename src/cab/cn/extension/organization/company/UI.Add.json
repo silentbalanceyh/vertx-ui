@@ -18,7 +18,10 @@
                             "message":"对不起，该公司名称已经在系统中存在！",
                             "config":{
                                 "uri":"/api/company/existing",
-                                "method":"POST"
+                                "method":"POST",
+                                "params":{
+                                    "sigma":"PROP:app.sigma"
+                                }
                             }
                         }
                     ]
@@ -30,7 +33,8 @@
                     "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择所属公司）,readOnly=true",
                     "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=companyId",
-                    "optionJsx.config.selection":"mode=FULL"
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.className":"ux-readonly-select"
                 },
                 {
                     "metadata": "type,性质,,,aiSelect,placeholder=（请选择公司性质）",
@@ -42,7 +46,7 @@
                     "metadata": "customerId,客户信息,,,aiListSelector,placeholder=（请选择对应客户信息）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/customer/search,1,8,sorter=createdAt`DESC"
+                            "metadata": "POST,/api/customer/search,1,10,sorter=createdAt`DESC"
                         },
                         "linker": {
                             "name": "customerId"

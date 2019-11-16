@@ -13,7 +13,7 @@ const getControl = (reference, $identifier) => {
         $control = vector.__DEFAULT__;
     }
     Ux.dgDebug({$identifier, $control}, "[ Ox ] 选择的：$identifier 和 $control.");
-    return $control;
+    return {$control, $identifier};
 };
 /*
  * 计算 control 的id
@@ -41,16 +41,18 @@ const asyncControl = (reference) => {
         return Ux.promise(getControl(reference, $identifier));
     }
 };
-const yiModule = (reference) => asyncControl(reference).then(control => {
+const yiModule = (reference) => asyncControl(reference).then((combine = {}) => {
     const state = {};
-    if (control) {
+    const {$control, $identifier} = combine;
+    if ($control) {
         const {$metadata = {}} = reference.props;
         const type = $metadata.componentType;
         if (type) {
-            return Ex.yiControl(control, type)
+            return Ex.yiControl($control, type)
                 .then($config => {
                     state.$ready = true;
                     state.$config = $config;
+                    state.$identifier = $identifier;
                     reference.setState(state);
                 });
         } else {
@@ -58,7 +60,11 @@ const yiModule = (reference) => asyncControl(reference).then(control => {
         }
     } else {
         state.$ready = true;
-        console.error("[ Ox ] 当前传入的 $identifier 没有值！", control);
+        if ($identifier) {
+            state.$identifier = $identifier;
+        } else {
+            console.error("[ Ox ] 当前传入的 $identifier 没有值！", $identifier);
+        }
         reference.setState(state);
     }
 });
@@ -66,7 +72,8 @@ const yuModule = (reference, previous = {}) => {
     const current = reference.props.$identifier;
     const prev = previous.props.$identifier;
     if (current !== prev) {
-        yiModule(reference);
+        yiModule(reference)
+            .then(state => Ux.dgDebug("[ Ox ] 最终状态", state));
     }
 };
 export default {

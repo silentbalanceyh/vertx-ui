@@ -1,6 +1,5 @@
 import Ux from 'ux';
-import {Dsl, HocI18r} from 'entity';
-import U from "underscore";
+import {HocI18r} from 'entity';
 import Fn from '../functions';
 import Event from '../event';
 
@@ -33,29 +32,10 @@ const yiThis = async (reference) => {
         state.$container = Ux.clone($container);
     }
     if (!Ux.isEmpty($assist)) {
-        /*
-         * 构造辅助数据集
-         */
-        const ajaxParser = Fn.parserOfAjax(reference);
-        const keys = Object.keys($assist);
-        const promises = keys
-            .map(key => $assist[key])
-            .filter(config => undefined !== config)
-            .map(config => ajaxParser.parseRequest(config));
-        const response = await Ux.parallel(promises);
-        /*
-         * 给 state 赋值
-         */
-        keys.forEach((key, index) => {
-            /*
-             * Assist 专用
-             */
-            const stateKey = `$a_${key.replace(/\./g, '_')}`;
-            const data = response[index];
-            if (U.isArray(data)) {
-                state[stateKey] = Dsl.getArray(data);
-            }
-        });
+        const mounted = await Ux.asyncAssist($assist, reference, state);
+        if (mounted) {
+            Object.assign(state, mounted);
+        }
     }
     /*
      * 设置统一的高阶函数 rxChannel

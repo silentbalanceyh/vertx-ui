@@ -4,11 +4,6 @@ import Ex from 'ex';
 
 import renderJsx from './Web';
 
-const LOG = {
-    name: "ExSearch",
-    color: "#00868B"
-};
-
 class Component extends React.PureComponent {
     state = {
         searchText: "",     // 输入的文本
@@ -28,7 +23,7 @@ class Component extends React.PureComponent {
              * 拆组件
              */
             return renderJsx(this, null);
-        }, LOG);
+        }, Ex.parserOfColor("ExNavigation").private());
     }
 }
 

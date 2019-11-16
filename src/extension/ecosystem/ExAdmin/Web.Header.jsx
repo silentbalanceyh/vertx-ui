@@ -1,5 +1,4 @@
 import {Icon, Layout} from "antd";
-import Notify from "./UI.Notify";
 import React from "react";
 import ExLogged from '../ExLogged/UI';
 
@@ -16,8 +15,6 @@ export default (ref, {
               onClick={fnCollapse}
         />
         <div className="right">
-            {/** 提醒菜单 **/}
-            <Notify/>
             {/** 用户信息 **/}
             <ExLogged {...accounts} css={
                 {

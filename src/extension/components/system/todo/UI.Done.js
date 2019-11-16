@@ -4,13 +4,7 @@ import Ex from "ex";
 import Op from './Op';
 
 import FormFilter from './form/UI.Filter';
-import FormEdit from './form/UI.View';
 import renderJsx from './Web';
-
-const LOG = {
-    name: "PxDone",
-    color: "#36648B"
-};
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.Done")
@@ -25,15 +19,14 @@ class Component extends React.PureComponent {
         return Ex.yoRender(this, () => {
             const grid = Ux.fromHoc(this, "grid");
             const form = {
-                FormFilter,
-                FormEdit,
+                FormFilter
             };
             /*
              * category data
              */
             const category = Ux.onDatum(this, "data.done");
             return renderJsx(this, {grid, form, category});
-        }, LOG)
+        }, Ex.parserOfColor("PxDone").control())
     }
 }
 

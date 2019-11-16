@@ -16,7 +16,7 @@ const _outReady = (form, message, debug = {}) => {
 };
 
 const _outLoading = (name, message) => {
-    Ux.dgDebug(message, `[ ${name} ] ...... `, "#BFBFBF");
+    Ux.dgDebug(message, `............ [ ${name} ] `, "#9E9E9E");
 };
 
 export default (reference = {}, jsx, debug = {}) => {

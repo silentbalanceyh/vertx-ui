@@ -36,6 +36,19 @@ const onRow = (reference) => (row = {}, additional = {}) => {
     }
     reference.setState(state);
 };
+const onRows = (reference) => (rows = [], additional = {}) => {
+    const state = Ux.clone(additional);
+    const {data = []} = reference.state;
+    const dataArray = Dsl.getArray(data);
+    rows.forEach(row => dataArray.saveElement(row));
+    const request = dataArray.to();
+    state.data = Ux.clone(request);
+    const {onChange} = reference.props;
+    if (U.isFunction(onChange)) {
+        onChange(state.data);
+    }
+    reference.setState(state);
+};
 const fnDelete = (id, record, metadata = {}) => {
     /*
      * 删除当前行的信息
@@ -99,6 +112,7 @@ const yoInherit = (reference) => {
      * 自定义组件，这里要调用外围方法
      */
     inherit.doRow = onRow(reference);
+    inherit.doRows = onRows(reference);
     /*
      * 构造 Form 类的 Assist
      * 这个属于特殊规则，主要针对 form 中 Array 类型的提供数据源

@@ -16,6 +16,7 @@ import Radio from './O.radio';
 import Button from './O.button';
 // 自定义部分
 import ListSelector from './O.selector.list';
+import TreeSelector from './O.selector.tree';
 import MultiCheckBox from './O.checkbox.multi';
 import AddressSelector from './O.selector.address';
 import DatumCascade from './O.cascade.datum';
@@ -49,6 +50,7 @@ const exported = {
     ...Transfer,
 
     ...ListSelector,
+    ...TreeSelector,
     ...MultiCheckBox,
     ...AddressSelector,
     ...DatumCascade,

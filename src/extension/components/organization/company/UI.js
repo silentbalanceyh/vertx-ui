@@ -6,11 +6,6 @@ import Ex from 'ex';
 import FormCompany from './UI.Company';
 import ListCompany from './UI.List';
 
-const LOG = {
-    name: "PxCompany",
-    color: "#36648B"
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
     .to()
@@ -34,7 +29,7 @@ class Component extends React.PureComponent {
                     <ListCompany {...inherit} $inited={$inited}/>
                 </ExTab>
             ))
-        }, LOG);
+        }, Ex.parserOfColor("PxCompany").page());
     }
 }
 

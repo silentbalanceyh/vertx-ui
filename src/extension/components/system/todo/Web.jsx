@@ -9,25 +9,32 @@ export default (reference, {
     form = {},
     category = []
 }) => {
-    const {$category = false, config = {}} = reference.props;
+    const {
+        $category = false, config = {}
+    } = reference.props;
+    const {$query = {}} = reference.state;
     if ($category && 0 < category.length) {
+        const {$opened = false} = reference.state;
         return (
             <Row>
-                <Col span={4}>
+                <Col span={$opened ? 0 : 4}>
                     <ExArbor data={category}
                              config={config.tree}
                              fnSelect={Op.rxCategory(reference)}/>
                 </Col>
-                <Col span={20}>
+                <Col span={$opened ? 24 : 20}>
                     <ExComplexList {...Ex.yoAmbient(reference)}
-                                   config={grid} $form={form}/>
+                                   config={grid} $form={form}
+                                   $query={$query}
+                                   rxOpenPost={Ex.rxOpenPost(reference)}
+                                   rxClosePost={Ex.rxClosePost(reference)}/>
                 </Col>
             </Row>
         )
     } else {
-        console.info(grid);
         return (
             <ExComplexList {...Ex.yoAmbient(reference)}
+                           $query={$query}
                            config={grid} $form={form}/>
         )
     }

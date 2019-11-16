@@ -42,7 +42,7 @@ const yiTable = (reference) => {
              */
             const row = state.$table.row;
             state.$table.onRow = Event.onRow(reference, row);
-            if (row.onDoubleClick) {
+            if (row && row.onDoubleClick) {
                 state.$table.rowClassName = "ex-row-double";
             }
             /*

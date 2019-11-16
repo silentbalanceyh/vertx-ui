@@ -151,11 +151,25 @@ const elementChild = (array = [], current = {}) => {
     }
     return children;
 };
+/*
+ * 分组专用方法
+ */
+const elementGroup = (array = [], field) => {
+    let result = {};
+    if (0 < array.length) {
+        let $result = Abs.immutable(array).groupBy(item => item.get(field));
+        if ($result) {
+            result = $result.toJS();
+        }
+    }
+    return result;
+};
 export default {
     elementFlat,
     elementUnique,
     elementFind,
     elementVertical,
+    elementGroup,
     // 树操作
     elementBranch,
     elementChild,

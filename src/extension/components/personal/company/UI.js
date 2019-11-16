@@ -3,11 +3,6 @@ import Ux from 'ux';
 import Ex from 'ex';
 import {ExForm} from "ei";
 
-const LOG = {
-    name: "PxCompany",
-    color: "#5CACEE"
-};
-
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .to()
@@ -30,7 +25,7 @@ class Component extends React.PureComponent {
             return (
                 <ExForm {...formAttrs} $height={"200px"}/>
             )
-        }, LOG);
+        }, Ex.parserOfColor("PxEnterprise").page());
     }
 }
 

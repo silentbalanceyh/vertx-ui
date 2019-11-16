@@ -28,7 +28,7 @@ export {default as DialogMenu} from './action/DialogMenu/UI';
 /*
  * raftContainer方法专用
  */
-export {default as Container} from './form';// 容器型字段
+export {default as Container} from './input/_container';// 容器型字段
 // -------------------------------  表单专用
 // 待验证（北京二期标展专用）
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
@@ -49,10 +49,11 @@ export {default as CheckTransfer} from './input/CheckTransfer/UI';      // 多�
 export {default as DialogEditor} from './input/DialogEditor/UI';        // 表格 + 弹框（子表单），支持增删改
 export {default as MagicView} from './input/MagicView/UI';              // 各种视图专用
 export {default as ListSelector} from './input/ListSelector/UI';        // 列表选择器
+export {default as TreeSelector} from './input/TreeSelector/UI';        // 树选择器
 export {default as AddressSelector} from './input/AddressSelector/UI';  // 地址选择器
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
 // -------------------------------  表格列专用
-export {default as ColumnUser} from './column/ColumnUser/UI';
+export {default as ColumnUser} from './action/ColumnUser/UI';
 // -------------------------------  重新命名过的组件
 /*
  * 新：Dialog

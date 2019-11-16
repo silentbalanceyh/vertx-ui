@@ -1,7 +1,7 @@
 import React from 'react';
-import Ux from 'ux';
 import Op from './Op';
 import renderJsx from './Web.jsx';
+import Ex from "ex";
 
 /*
  * React属性props:
@@ -20,14 +20,18 @@ import renderJsx from './Web.jsx';
  * }
  */
 class Component extends React.PureComponent {
+    state = {$ready: true};
+
     render() {
-        Ux.dgDebug(this.props, "[ ExNavigation ]", "#c60");
-        const {$router, css = {}} = this.props;
-        return renderJsx(this, {
-            css,
-            $router,
-            $navs: Op._1normalizeNavs(this)
-        });
+        return Ex.yoRender(this, () => {
+            const {$router, css = {}} = this.props;
+            return renderJsx(this, {
+                css,
+                $router,
+                $navs: Op._1normalizeNavs(this)
+            });
+        }, Ex.parserOfColor("ExNavigation").private());
+
     }
 }
 

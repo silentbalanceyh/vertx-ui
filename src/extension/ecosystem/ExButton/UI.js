@@ -4,11 +4,6 @@ import renderJsx from './Web.jsx';
 import Op from './Op';
 import U from "underscore";
 
-const LOG = {
-    name: "ExButton",
-    color: "#EE6AA7"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: true
@@ -30,7 +25,7 @@ class Component extends React.PureComponent {
             } else {
                 return renderJsx(this, config);
             }
-        }, LOG);
+        }, Ex.parserOfColor("ExButton").action());
     }
 }
 

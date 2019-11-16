@@ -5,11 +5,6 @@ import Ex from 'ex';
 import './Cab.less';
 import {Icon} from "antd";
 
-const LOG = {
-    name: "ExAccount",
-    color: "#3CB371"
-};
-
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExAccount")
     .to()
@@ -41,7 +36,7 @@ class Component extends React.PureComponent {
                     </div>
                 </div>
             )
-        }, LOG)
+        }, Ex.parserOfColor("ExAccount").component())
     }
 }
 

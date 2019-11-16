@@ -25,22 +25,25 @@ import Ex from "ex";
  * }
  */
 class Component extends React.PureComponent {
+    state = {$ready: true};
+
     render() {
-        Ux.dgDebug(this.props, "[ ExAccount ]", "#c60");
-        const $user = Ux.isLogged();
-        const {css = {}} = this.props;
-        /*
-         * 菜单操作
-         */
-        const {data = [], $app} = this.props;
-        const $data = data
-            .map(item => Ex.mapMeta(item))
-            .map(item => Ex.mapUri(item, $app));
-        return renderJsx(this, {
-            $user,
-            $data,
-            css,
-        })
+        return Ex.yoRender(this, () => {
+            const $user = Ux.isLogged();
+            const {css = {}} = this.props;
+            /*
+             * 菜单操作
+             */
+            const {data = [], $app} = this.props;
+            const $data = data
+                .map(item => Ex.mapMeta(item))
+                .map(item => Ex.mapUri(item, $app));
+            return renderJsx(this, {
+                $user,
+                $data,
+                css,
+            })
+        }, Ex.parserOfColor("ExLogged").component())
     }
 }
 

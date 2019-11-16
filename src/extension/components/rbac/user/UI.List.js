@@ -6,12 +6,6 @@ import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
 
-
-const LOG = {
-    name: "PxUserList",
-    color: "#1874CD",
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI.List")
     .ready(true)
@@ -31,7 +25,7 @@ class Component extends React.PureComponent {
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             )
-        }, LOG);
+        }, Ex.parserOfColor("PxUserList").control());
     }
 }
 

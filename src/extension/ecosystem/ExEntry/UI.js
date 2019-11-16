@@ -7,11 +7,6 @@ const jsx = {
     password: Ux.aiInput,
 };
 
-const LOG = {
-    name: "ExLogin",
-    color: "#696"
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExEntry")
     .form().raft(1).raft(jsx)
@@ -21,7 +16,8 @@ const LOG = {
 class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () =>
-            Ux.aiForm(this), LOG)
+                Ux.aiForm(this),
+            Ex.parserOfColor("ExEntry").form())
     }
 }
 

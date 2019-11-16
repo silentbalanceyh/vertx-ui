@@ -28,7 +28,7 @@
                     "metadata": "managerName,经理,12,,aiListSelector,placeholder=（请选择部门经理）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC"
                         },
                         "linker": {
                             "key": "managerId",

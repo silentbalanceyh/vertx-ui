@@ -8,7 +8,22 @@
                 "title=基本信息"
             ],
             [
-                "workNumber,工号,,,,placeholder=（不填写自动生成）",
+                {
+                    "metadata":"workNumber,工号,,,,placeholder=（不填写则系统自动生成）",
+                    "optionConfig.rules":[
+                        {
+                            "validator":"existing",
+                            "message":"对不起，填写的工号重复，请重填！",
+                            "config":{
+                                "uri":"/api/employee/existing",
+                                "method":"POST",
+                                "params":{
+                                    "sigma":"PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
                 {
                     "metadata":"viceName,姓名",
                     "optionConfig.rules":[
@@ -42,7 +57,7 @@
                     "metadata": "username,关联账号,8,,aiListSelector,placeholder=（请选择账号）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC",
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC",
                             "params.criteria":{
                                 "modelId":"FIX:employee",
                                 "":"OPERATOR:AND"
@@ -80,7 +95,7 @@
                     "metadata": "identityNum,关联档案,,,aiListSelector,placeholder=（选择档案）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/identity/search,1,8,sorter=createdAt`DESC",
+                            "metadata": "POST,/api/identity/search,1,10,sorter=createdAt`DESC",
                             "params.criteria":{
                                 "type":"FIX:id.employee",
                                 "status":"FIX:running",
