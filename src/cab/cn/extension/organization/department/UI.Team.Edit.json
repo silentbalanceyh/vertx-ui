@@ -8,7 +8,7 @@
             [
                 "name,名称,12",
                 {
-                    "metadata": "code,编码,12,,,placeholder=（根据规范编码全大写，如DETP.IT）",
+                    "metadata": "code,编码,12,,,placeholder=（根据规范编码全大写，如DEPT.IT）",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {

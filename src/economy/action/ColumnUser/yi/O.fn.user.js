@@ -10,15 +10,23 @@ const yiValue = (reference, value = "", isPerson = false) => {
 export default (reference) => {
     const {config, $empty = "", $key} = reference.props;
     if (config) {
-        const {uri, field} = config;
-        if (uri && field && $key) {
+        const {uri, field, expr} = config;
+        if (uri && $key) {
             Ux.ajaxGet(uri, {key: $key})
                 .then(result => {
                     if (Ux.isEmpty(result)) {
                         yiValue(reference, $empty);
                     } else {
-                        const value = result[field];
-                        yiValue(reference, value, true);
+                        /*
+                         * expr 专用，可支持表达式
+                         */
+                        if (expr) {
+                            const value = Ux.formatExpr(expr, result, true);
+                            yiValue(reference, value, true);
+                        } else {
+                            const value = result[field];
+                            yiValue(reference, value, true);
+                        }
                     }
                 })
                 .catch(error => {

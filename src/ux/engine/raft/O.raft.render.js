@@ -168,20 +168,32 @@ const raftRender = (cell = {}, config = {}) => {
              * 执行初始值，包含 $delay 模式
              */
             raftValue(cell, values, reference);
-            const optionConfig = Abs.clone(cell.optionConfig);
-            {
-                /*
-                 * 解决特殊控件的验证触发时间，保证红色验证结果
-                 */
-                if (optionConfig.rules && onValidate.contains(cell.render)) {
-                    optionConfig.validateTrigger = "onChange";
-                }
-            }
             /*
              * 新增 depend 规则
              */
             let optionJsx = Abs.clone(cell.optionJsx);
             optionJsx = raftDepend(reference, optionJsx);
+            /*
+             * 如果 disabled 的情况下，禁用 rules
+             */
+            const optionConfig = Abs.clone(cell.optionConfig);
+            const disabled = optionJsx.disabled;
+            if (disabled) {
+                /*
+                 * 禁用时删除所有验证规则
+                 */
+                if (optionConfig.rules) {
+                    delete optionConfig.rules;
+                }
+            } else {
+                /*
+                 * 解决特殊控件的验证触发时间，保证红色验证结果
+                 * 未禁用，开验证
+                 */
+                if (optionConfig.rules && onValidate.contains(cell.render)) {
+                    optionConfig.validateTrigger = "onChange";
+                }
+            }
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

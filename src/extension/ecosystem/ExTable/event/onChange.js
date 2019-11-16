@@ -20,6 +20,19 @@ export default (reference) => (pagination, filters, sorter) => {
     }, "[ ExTable ] 改变条件专用事件");
     Ux.toLoading(() => {
         /*
+         * 结合 Ant Design 中 Table 的特殊属性
+         * filters 一般的格式是：field = []
+         * 这种情况下，直接删除掉本身条件，即不包含 length = 0 的情况
+         * 解决BUG
+         * 1）后端 500
+         * 2）主要原因 code,=: [] 这种格式会非法，= 和 [] 冲突
+         */
+        const $filters = {};
+        Object.keys(filters)
+            .filter(key => undefined !== filters[key])
+            .filter(key => 1 < filters[key].length)
+            .forEach(key => $filters[key] = filters[key]);
+        /*
          * 由于当前引用的 props 中包含了 $query
          * 构造四个核心参数
          */
@@ -28,7 +41,7 @@ export default (reference) => (pagination, filters, sorter) => {
          * 最终条件计算
          */
         Ux.dgQuery(reference, "Table 组件：$loading = false, onChange");
-        const query = Ux.qrComplex($query, {state: {$condition, $terms, $filters: filters}});
+        const query = Ux.qrComplex($query, {state: {$condition, $terms, $filters}});
         const queryRef = new QQuery(query, reference);
         /*
          * 分页参数处理
@@ -63,10 +76,11 @@ export default (reference) => (pagination, filters, sorter) => {
              */
             queryRef.sort(field, isAsc);
         }
+        const request = queryRef.to();
         /*
          * 最终的 Query 变更
          */
         // Ex.rx(reference).query(queryRef.to());
-        reference.setState({$query: queryRef.to()});
+        reference.setState({$query: request});
     })
 };

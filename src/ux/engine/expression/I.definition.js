@@ -44,6 +44,9 @@ const formDefinition = {
     ],
 };
 const buttonDefinition = {
+    /*
+     * 连接按钮专用，点击该按钮过后会触发 connectId操作
+     */
     button: [
         "key",
         "text",
@@ -53,7 +56,9 @@ const buttonDefinition = {
         "disabledKey",
         "$KV$"
     ],
-    // 按钮相关
+    /*
+     * 提交按钮专用，点击该按钮过后会触发 EVENT 事件
+     */
     op: [
         "key",
         "text",
@@ -62,6 +67,17 @@ const buttonDefinition = {
         "className",
         "$KV$"
     ],
+    /*
+     * DialogMenu / DialogButton 专用
+     */
+    action: [
+        "key",
+        "text",
+        "type",
+        "icon",
+        "confirm",
+        "$KV$"
+    ]
 };
 const columnDefinition = {
     icon: [

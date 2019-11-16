@@ -1,6 +1,7 @@
 import {Langue} from "environment";
 import HocContainer from "./HocContainer";
 import * as Immutable from 'immutable';
+import Fn from './I.common';
 
 class HocI18r implements HocContainer {
     private readonly hoc: any = {};
@@ -29,6 +30,11 @@ class HocI18r implements HocContainer {
         let ret = {};
         Object.assign(ret, this.hoc);
         return ret;
+    }
+
+    merge(metadata: any): HocI18r {
+        Fn.toMerge(this.hoc, metadata);
+        return this;
     }
 
     _(key: string): any {

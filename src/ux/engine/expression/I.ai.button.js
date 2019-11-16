@@ -31,7 +31,10 @@ const aiExprOp = (button = "") => {
     }
     return parsed;
 };
+const aiExprAction = (popover = "") => Parser.parseItem(popover, "action");
+
 export default {
     aiExprButton,
     aiExprOp,
+    aiExprAction,   // Web 组件中需要使用，不可缺
 }

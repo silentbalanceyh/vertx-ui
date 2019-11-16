@@ -29,6 +29,7 @@ class Component extends React.PureComponent {
          */
         const treeData = Ux.toTree($data, config.tree);
         const treeAttrs = Ux.clone(tree);
+        treeAttrs.showLine = true;
         treeAttrs.treeData = treeData;
         return (
             <div>
@@ -41,7 +42,7 @@ class Component extends React.PureComponent {
                         $dialog={dialog}>
                     <div style={{
                         overflow: "auto",
-                        maxHeight: 550
+                        maxHeight: 450
                     }}>
                         <Tree {...treeAttrs}/>
                     </div>

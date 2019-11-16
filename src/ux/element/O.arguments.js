@@ -12,7 +12,7 @@ const ambiguityArray = (...args) => {
             ref = [args];
         }
     }
-    return ref;
+    return U.isArray(ref) ? ref.filter(item => undefined !== item) : [];
 };
 /*
  * 二义性遍历

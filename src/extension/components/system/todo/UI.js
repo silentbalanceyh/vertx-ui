@@ -24,9 +24,11 @@ class Component extends React.PureComponent {
             const inherit = Ex.yoAmbient(this);
             let tabs = Ux.fromHoc(this, "tabs");
             {
-                tabs = Ux.clone(tabs);
-                const {$activeKey = "tabPending"} = this.state;
-                tabs.activeKey = $activeKey;
+                if (tabs) {
+                    tabs = Ux.clone(tabs);
+                    const {$activeKey = "tabPending"} = this.state;
+                    tabs.activeKey = $activeKey;
+                }
             }
             /*
              * 是否开启 左树

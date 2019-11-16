@@ -1,5 +1,8 @@
 import Ut from '../../unity';
 import Abs from '../../abyss';
+import Ele from '../../element';
+
+import G from '../datum';
 import U from 'underscore';
 
 const readForm = (reference, fields = []) => {
@@ -42,7 +45,34 @@ export default (reference, jsx = {}) => {
                 const expected = config[field];
                 const actual = values[field];
                 if (U.isArray(expected)) {
+                    /*
+                     * 固定值配置
+                     * field = []
+                     */
                     return Abs.isIn(actual, expected);
+                } else if (U.isObject(expected)) {
+                    /*
+                     * 特殊配置，用于处理 DATUM 这种下拉
+                     * {
+                     *     "source": "surety.type",
+                     *     "field": "code",
+                     *     "value": "None"
+                     * }
+                     */
+                    if (expected.source || expected.field) {
+                        /*
+                         *  读取数据
+                         */
+                        const dataArray = G.onDatum(reference, expected.source);
+                        const $values = Abs.immutable(Ele.ambiguityArray(expected.value));
+                        let compared = Abs.immutable(dataArray
+                            .filter(each => undefined !== each[expected.field])
+                            .filter(each => $values.contains(each[expected.field]))
+                            .map(each => each.key));
+                        return compared.contains(actual);
+                    } else {
+                        return false;
+                    }
                 } else {
                     if (false === expected) {
                         /*

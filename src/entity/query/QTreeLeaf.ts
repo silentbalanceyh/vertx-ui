@@ -30,6 +30,10 @@ class QTreeLeaf implements QTreeNode {
      */
     to() {
         const kv: any = {};
+        /*
+         * 返回空对象的条件
+         * 1）删除 value = __DELETE__
+         */
         if ("__DELETE__" !== this.value) {
             kv[`${this.field},${this.op}`] = this.value;
         }

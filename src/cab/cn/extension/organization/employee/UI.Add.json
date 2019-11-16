@@ -34,7 +34,7 @@
             ],
             [
                 {
-                    "metadata":"viceEmail,邮箱,,,,placeholder=（XXX@XXX格式）",
+                    "metadata":"viceEmail,邮箱,,,,placeholder=（xxx@xxx.xx）",
                     "optionConfig.rules": [
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
@@ -43,7 +43,7 @@
                     ]
                 },
                 {
-                    "metadata":"viceMobile,手机号,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "metadata":"viceMobile,手机号,,,,placeholder=（合法手机格式）",
                     "optionConfig.rules": [
                         {
                             "pattern": "[0-9-()（）]{7,18}",

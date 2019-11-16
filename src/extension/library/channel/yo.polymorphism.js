@@ -9,7 +9,12 @@ export default (reference = {}, {form}) => {
      */
     const config = Ux.fromHoc(reference, "grid");
     if (config) {
-        attrs.config = config;
+        /*
+         * 通过拷贝检查最终的 config 发生改变
+         * 这里必须使用拷贝以方便切换，如果不拷贝那么切换会导致最终的
+         * 界面不刷新（动态切换必须在这里处理）
+         */
+        attrs.config = Ux.clone(config);
     }
     /*
      * 专用组件信息
