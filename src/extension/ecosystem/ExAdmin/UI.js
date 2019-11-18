@@ -21,7 +21,6 @@ class Component extends React.PureComponent {
             const siders = Op.yoSider(this);
             const navigations = Op.yoNavigation(this, {homepage});
             const headers = Op.yoHeader(this, {banner});
-            console.info(navigations);
             return renderJsx(this, {
                 children,
                 siders,

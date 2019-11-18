@@ -117,6 +117,37 @@ const formHits = (reference, values = {}) => {
         form.setFieldsValue(values);
     }
 };
+/*
+ * 通过 data 来读取
+ * 1）data 是 Array，则长度为 1 的处理
+ * 2）data 是 Object，则直接处理
+ */
+const formLinker = (data, config = {}, linkerField) => {
+    const {linker} = config;
+    if (linker && !Abs.isEmpty(linker) && linkerField) {
+        if (data) {
+            if (U.isArray(data)) {
+                /*
+                 * 数组处理
+                 */
+                if (1 === data.length) {
+                    const response = data[0];
+                    return formLinker(response, config);
+                }
+            } else {
+                /*
+                 * 递归处理
+                 */
+                const hitField = Object.keys(linker)
+                    .filter(field => linker[field] === linkerField)
+                    .filter(field => undefined !== field);
+                if (1 === hitField.length) {
+                    return data[hitField[0]];
+                }
+            }
+        }
+    }
+};
 export default {
     // Form数据处理
     formClear,
@@ -126,4 +157,5 @@ export default {
     // Hit
     formHit,
     formHits,
+    formLinker,
 };

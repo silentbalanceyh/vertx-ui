@@ -1,113 +1,6 @@
 {
-    "_form": {
-        "window": 1,
-        "columns":3,
-        "ui": [
-            [
-                "title=基本信息"
-            ],
-            [
-                "title,标题,,,,placeholder=（如何称呼？）",
-                {
-                    "metadata": "name,名称,,,,placeholder=（必填）",
-                    "optionConfig.rules": [
-                        "required,请输入客户名称"
-                    ]
-                },
-                "code,编码,,,,readOnly=true,inscribe=（系统自动生成）"
-            ],
-            [
-                {
-                    "metadata": "taxCode,税号,,,,placeholder=（由15/18/20位字符组成）",
-                    "optionConfig.rules": [
-                        "required,请输入税号，税号不能为空",
-                        {
-                            "min": 15,
-                            "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
-                            "message": "格式错误,请正确输入税号！"
-                        }
-                    ]
-                },
-                "taxTitle,开票抬头,,,,placeholder=（开发票专用标题）"
-            ],
-            [
-                {
-                    "metadata": "email,企业信箱,,,,placeholder=（XXX@XXX格式）",
-                    "optionConfig.rules": [
-                        {
-                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "格式错误,请正确输入邮件地址！"
-                        }
-                    ]
-                },
-                {
-                    "metadata": "phone,座机,,,,placeholder=格式:(区号-座机号)或(座机号)",
-                    "optionConfig.rules": [
-                        {
-                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
-                            "message": "格式错误,请正确输入座机号！"
-                        }
-                    ]
-                },
-                {
-                    "metadata": "fax,传真,,,,placeholder=格式:(分机号-传真号)或(传真号)",
-                    "optionConfig.rules": [
-                        {
-                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
-                            "message": "格式错误,请正确输入传真号！"
-                        }
-                    ]
-                }
-            ],
-            [
-                {
-                    "metadata": "address,地址,24,,aiTextArea",
-                    "optionJsx.rows": 3
-                }
-            ],
-            [
-                "title=联系人信息"
-            ],
-            [
-                "contactName,联系人姓名,,,,placeholder=（如：张**、王**等）",
-                {
-                    "metadata": "contactPhone,联系人电话,,,,placeholder=请输入手机号",
-                    "optionConfig.rules": [
-                        {
-                            "max": 11,
-                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
-                            "message": "格式错误,请正确输入手机号！"
-                        }
-                    ]
-                },
-                {
-                    "metadata": "email,企业信箱,,,,placeholder=（XXX@XXX格式）",
-                    "optionConfig.rules": [
-                        {
-                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
-                            "message": "格式错误,请正确输入邮件地址！"
-                        }
-                    ]
-                }
-            ],
-            [
-                "contactOnline,在线联系方式,,,,placeholder=（QQ、微博等在线联系方式）",
-                "homepage,公司主页,16"
-            ],
-            [
-                {
-                    "metadata": "active,启用,,,aiCheckbox",
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    }
-                }
-            ],
-            [
-                {
-                    "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 3
-                }
-            ],
+    "_formUp":{
+        "ui":[
             [
                 {
                     "metadata": "$button",
@@ -118,6 +11,96 @@
                         "$opReset,重置,RESET"
                     ],
                     "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                "title,标题,16,,,placeholder=如何称呼？"
+            ],
+            [
+                {
+                    "metadata": "name,名称,,,,placeholder=（必填）",
+                    "optionConfig.rules": [
+                        "required,请输入客户名称"
+                    ]
+                },
+                "code,编码,,,,readOnly=true,inscribe=（系统自动生成）"
+            ],
+            [
+                {
+                    "metadata": "taxCode,税号,,,,placeholder=由15/18/20位字符组成",
+                    "optionConfig.rules": [
+                        "required,请输入税号，税号不能为空",
+                        {
+                            "min": 15,
+                            "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
+                            "message": "格式错误,请正确输入税号！"
+                        },
+                        {
+                            "validator": "existing",
+                            "message": "对不起，税号重复！",
+                            "config": {
+                                "uri": "/api/customer/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "taxTitle,开票抬头,,,,placeholder=开发票专用标题"
+            ]
+        ]
+    },
+    "_form": {
+        "window": 1,
+        "columns":3,
+        "ui": [
+            [
+                "title=公司信息"
+            ],
+            [
+                {
+                    "metadata": "email,企业信箱,,,,placeholder=格式：xxx@xxx.xx",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "phone,座机,,,,placeholder=格式：000-00000000",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入座机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "fax,传真,,,,placeholder=格式：000-00000000",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入传真号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "homepage,客户主页,16,,,addonBefore=http://,placeholder=合法在线地址格式"
+            ],
+            [
+                "address,地址,16"
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea",
+                    "optionJsx.rows": 3
                 }
             ]
         ],

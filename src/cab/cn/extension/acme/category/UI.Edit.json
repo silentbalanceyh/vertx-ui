@@ -24,7 +24,7 @@
                     ]
                 },
                 {
-                    "metadata": "code,编码,8,,,placeholder=（全大写，如:已审核-APPROVED）",
+                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {

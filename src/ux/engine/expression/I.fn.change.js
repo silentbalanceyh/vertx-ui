@@ -4,12 +4,12 @@ import Abs from '../../abyss';
 import Ut from '../../unity';
 import Dev from '../../develop';
 
-export default (rest = {}, jsx = {}, fnChange) => {
+export default (rest = {}, fnChange, jsx = {}) => {
     const {
         reference,
         options = [],
         config = {},        // 默认是 {}
-        trigger,
+        depend,
         prevent = true
     } = jsx;
     if (reference) {
@@ -27,41 +27,18 @@ export default (rest = {}, jsx = {}, fnChange) => {
              * optionJsx.config.linkerField
              */
             const formValues = {};
-
-            const {linker = {}, linkerField = "key"} = config;
-            if (!Abs.isEmpty(linker)) {
-                const row = Ele.elementUnique(options, linkerField, value);
-                if (row) {
-                    const formValues = {};
-                    Object.keys(linker)
-                        .filter(rowField => !!rowField)    // rowField 存在
-                        .forEach(rowField => {
-                            const formField = linker[rowField];
-                            if (formField) {
-                                formValues[formField] = row[rowField];
-                            }
-                        });
-                }
-            }
+            Ut.writeLinker(formValues, config,
+                (field) => Ele.elementUnique(options, field, value));
             /*
              * depend 专用处理
              * optionJsx.depend.impact
              */
-            if (trigger && Abs.isObject(trigger['impact'])) {
-                const expected = trigger['impact'];
-                let values;
-                if ("boolean" === typeof value) {
-                    values = expected[String(value)];
-                } else {
-                    values = expected[value];
-                }
-                Object.assign(formValues, values);
-            }
+            Ut.writeImpact(formValues, depend, value);
             /*
              * 不为空就设值
              */
             if (!Abs.isEmpty(formValues)) {
-                Dev.dgDebug(formValues, "[ Ux ] trigger.impact / linker 结果！");
+                Dev.dgDebug(formValues, "[ Ux ] depend.impact / linker 结果！");
                 Ut.formHits(reference, formValues);
             }
             /*

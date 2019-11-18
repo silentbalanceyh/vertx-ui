@@ -5,8 +5,7 @@ import Abs from '../../abyss';
 import Action from '../action';
 import Value from "../../element";
 import parser from '../parser';
-
-import raftDepend from './I.fn.depend';
+import Ut from '../../unity';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -158,42 +157,29 @@ const raftRender = (cell = {}, config = {}) => {
          *  const optionJsx = Abs.clone(cell.optionJsx);
          *  const optionConfig = Abs.clone(cell.optionConfig);
          */
-        const onValidate = Abs.immutable([
-            "aiSelect",
-            "aiListSelector",
-            "aiTreeSelect"
-        ]);
         return (values) => {
             /*
              * 执行初始值，包含 $delay 模式
              */
             raftValue(cell, values, reference);
             /*
-             * 新增 depend 规则
+             * depend 计算
+             * 1）impact
+             * 2）enabled
              */
-            let optionJsx = Abs.clone(cell.optionJsx);
-            optionJsx = raftDepend(reference, optionJsx);
+            const optionJsx = Abs.clone(cell.optionJsx);
+            Ut.writeDisabled(optionJsx, reference);
+            // const optionJsx = raftDepend(reference, Abs.clone(cell.optionJsx));
             /*
-             * 如果 disabled 的情况下，禁用 rules
+             * 1）rules 和 validateTrigger 计算，特殊连接
+             * 2）optionJsx 必须经过计算来执行 rules 的筛选，计算过后才会出现 disabled 属性
              */
-            const optionConfig = Abs.clone(cell.optionConfig);
-            const disabled = optionJsx.disabled;
-            if (disabled) {
-                /*
-                 * 禁用时删除所有验证规则
-                 */
-                if (optionConfig.rules) {
-                    delete optionConfig.rules;
-                }
-            } else {
-                /*
-                 * 解决特殊控件的验证触发时间，保证红色验证结果
-                 * 未禁用，开验证
-                 */
-                if (optionConfig.rules && onValidate.contains(cell.render)) {
-                    optionConfig.validateTrigger = "onChange";
-                }
-            }
+            const optionConfig = Ut.connectValidator({
+                optionJsx,
+                optionConfig: cell.optionConfig,
+                render: cell.render,
+            });
+
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

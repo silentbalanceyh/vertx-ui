@@ -8,9 +8,9 @@
                 "title=基本信息"
             ],
             [
-                "title,标题",
+                "title,标题,,,,placeholder=格式如：**公司",
                 {
-                    "metadata":"name,名称,,,,placeholder=（必填）",
+                    "metadata":"name,名称,,,,placeholder=（名称唯一）",
                     "optionConfig.rules":[
                         "required,请输入公司名称",
                         {
@@ -30,7 +30,7 @@
             ],
             [
                 {
-                    "metadata":"phone,座机,,,,placeholder=（000-00000000）",
+                    "metadata":"phone,座机,,,,placeholder=格式：000-00000000",
                     "optionConfig.rules": [
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
@@ -39,7 +39,7 @@
                     ]
                 },
                 {
-                    "metadata":"email,邮箱,,,,placeholder=（xxx@xxx.xx）",
+                    "metadata":"email,邮箱,,,,placeholder=格式：xxx@xxx.xx",
                     "optionConfig.rules": [
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
@@ -48,7 +48,7 @@
                     ]
                 },
                 {
-                    "metadata":"fax,传真,,,,placeholder=（000-00000000）",
+                    "metadata":"fax,传真,,,,placeholder=格式：000-00000000",
                     "optionConfig.rules": [
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
@@ -77,7 +77,7 @@
                 }
             ],
             [
-                "corporationName,法人,,,,placeholder=（如：王**等）",
+                "corporationName,法人,,,,placeholder=请输入真实姓名",
                 {
                     "metadata":"corporationPhone,法人手机,,,,placeholder=请输入法人手机",
                     "optionConfig.rules": [
@@ -90,7 +90,7 @@
                 }
             ],
             [
-                "contactName,联系人姓名,,,,placeholder=（如：王**等）",
+                "contactName,联系人姓名,,,,placeholder=请输入真实姓名",
                 {
                     "metadata":"contactPhone,联系人手机,,,,placeholder=请输入联系人手机",
                     "optionConfig.rules": [

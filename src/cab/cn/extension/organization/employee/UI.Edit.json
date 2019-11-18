@@ -34,7 +34,7 @@
             ],
             [
                 {
-                    "metadata":"viceEmail,邮箱,,,,placeholder=（xxx@xxx.xx）",
+                    "metadata":"viceEmail,邮箱,,,,placeholder=格式：xxx@xxx.xx",
                     "optionConfig.rules": [
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
@@ -43,7 +43,7 @@
                     ]
                 },
                 {
-                    "metadata":"viceMobile,手机号,,,,placeholder=（合法手机格式）",
+                    "metadata":"viceMobile,手机号,,,,placeholder=请输入合法手机格式",
                     "optionConfig.rules": [
                         {
                             "pattern": "[0-9-()（）]{7,18}",
@@ -144,7 +144,7 @@
                     ]
                 },
                 {
-                    "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择时无所属部门）",
+                    "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择则无所属部门）",
                     "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
@@ -155,7 +155,7 @@
                     "optionJsx.allowClear":true
                 },
                 {
-                    "metadata": "teamId,所属组,,,aiTreeSelect,placeholder=（不选择时无所属组）",
+                    "metadata": "teamId,所属组,,,aiTreeSelect,placeholder=（不选择则无所属组）",
                     "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=teamId",
                     "optionJsx.config.selection":"mode=FULL",

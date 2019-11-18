@@ -8,7 +8,7 @@
             [
                 "name,名称,12",
                 {
-                    "metadata": "code,编码,12,,,placeholder=（根据规范编码全大写，如DEPT.IT）",
+                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -62,7 +62,7 @@
                     ]
                 },
                 {
-                    "metadata": "deptId,上级部门,12,,aiTreeSelect,placeholder=（不选择时就无上级部门）",
+                    "metadata": "deptId,上级部门,12,,aiTreeSelect,placeholder=（不选择则无上级部门）",
                     "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",

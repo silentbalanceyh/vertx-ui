@@ -5,8 +5,8 @@
 * 实际上是 Ox 中的 normalize 方法
 * */
 import Ux from "ux";
-import Ex from 'ex';
-import U from 'underscore';
+import yoAmbient from './yo.ambient';
+import yoFormPlugin from './yo.form.plugin';
 
 const _cabData = (reference, addOn = {}) => {
     if (!addOn) addOn = {};
@@ -17,32 +17,26 @@ const _cabData = (reference, addOn = {}) => {
     if (!modal) {
         modal = Ux.fromHoc(reference, "modal");
     }
-    if (!form) {
+    /*if (!form) {
         form = Ux.fromHoc(reference, "form");
-    }
+    }*/
     return {dialog, modal, form};
 };
 export default (reference, additional = {}, data = {}) => {
     const addOn = _cabData(reference, additional);
-    const attrs = Ex.yoAmbient(reference);
+    const attrs = yoAmbient(reference);
     const config = {};
+    config.form = yoFormPlugin(addOn, reference);
     /*
-     * `form`：从 hoc 的 _form 节点读取到的配置信息
-     */
     if (U.isObject(addOn.form)) {
         let form = addOn.form;
-        /*
-         * 处理 form，合并专用
-         */
         const {$options} = reference.props;
         if ($options && $options.form) {
-            /*
-             * options 中的合并
-             */
             form = Ux.toForm(form, $options.form);
         }
         config.form = form;
     }
+    */
     /*
      * `magic`：特殊参数
      * `addon`：特殊配置

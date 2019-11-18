@@ -9,17 +9,11 @@ const onConfirm = (reference = {}, config = {}) => (event) => {
     const ref = Ux.onReference(reference, 1);
     // 判断ListSelector中的选中项，状态中的$select是否存在
     if ($select) {
-        const linker = config['linker'];
-        if (linker) {
-            // 使用Linker设置最终数据
-            const values = Ux.Uson.create($select)
-                .keep(Object.keys(linker))
-                .convert(linker)
-                .date(config['linkerDate']).to();
-            Ux.dgDebug({
-                linker,
-                values,
-            }, "[ Xt ] 自定义组件 linker 信息", "#104E8B");
+        /*
+         * Linker取值
+         */
+        const values = Ux.writeLinker({}, config, () => $select);
+        if (!Ux.isEmpty(values)) {
             // 调用Form数据处理Linker
             Ux.formHits(ref, values);
             // 执行Linker过后的回调

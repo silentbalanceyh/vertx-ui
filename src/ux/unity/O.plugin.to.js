@@ -14,7 +14,7 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
      * 5）执行 mapping 的合并
      */
     // 先执行拷贝
-    const form = Abs.clone(staticForm);
+    const form = staticForm ? Abs.clone(staticForm) : {};
     /*
      * 动态中的属性优先
      */
