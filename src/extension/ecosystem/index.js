@@ -20,6 +20,7 @@ export {default as ExHistory} from './ExHistory/UI';
  *  UI_FORM / Record 合并到一起（动态表单）
  **/
 export {default as ExRecord} from './ExRecord/UI';
+export {default as ExRelation} from './ExRelation/UI';
 /*
  * 【不可重用】业务类型控件
  */

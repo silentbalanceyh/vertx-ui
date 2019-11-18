@@ -13,6 +13,7 @@ const add = (reference) => (params = {}, config = {}) => {
 const save = (reference) => (params = {}, config = {}) => {
     let request = Ux.valueRequest(params);
     request = Ux.valueValid(request);
+    console.error(request);
     return Ux.ajaxPut(config.uri, request)
         .then(Ux.ajax2Dialog(reference, config.dialog))
         .then(response => Fn.rx(reference).close(response))

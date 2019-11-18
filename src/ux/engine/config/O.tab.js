@@ -19,7 +19,11 @@ const configTab = (reference, config = {}) => {
      */
     if ("string" === typeof items) {
         // 第一种格式化
-        tabs.items = R.aiExprTabs(items.split(';'));
+        tabs.items = R.aiExprTabs(items.split(';')
+        /*
+         * 除去空字符串
+         */
+            .filter(item => "" !== item));
     } else {
         if (U.isArray(items)) {
             tabs.items = R.aiExprTabs(items);

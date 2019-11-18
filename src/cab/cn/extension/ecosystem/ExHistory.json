@@ -25,9 +25,9 @@
             {
                 "metadata":"type,变更类型,MAPPING",
                 "$mapping":{
-                    "ADD":"添加,plus-circle,,#228B22",
-                    "UPDATE":"更新,edit,,#3A5FCD",
-                    "DELETE":"删除,delete,,#CD2626"
+                    "ADD":"添加属性,plus-circle,,#228B22",
+                    "UPDATE":"更新属性,edit,,#3A5FCD",
+                    "DELETE":"移除属性,delete,,#CD2626"
                 }
             },
             {

@@ -1,0 +1,12 @@
+{
+    "_header": {
+        "category": "类别",
+        "identifier": "模型ID",
+        "code": "编号",
+        "name": "名称"
+    },
+    "_table":{
+        "columns":[
+        ]
+    }
+}
