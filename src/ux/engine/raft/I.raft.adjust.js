@@ -52,6 +52,7 @@ const adjustButton = (cell = {}) => {
                     // TODO: 其他模式
                 }
             } else {
+                const span = cell.span;
                 /*
                  * 没有配置或者无值的时候，使用第二种标准表单
                  * 1）这种模式下部管宽度
@@ -59,8 +60,12 @@ const adjustButton = (cell = {}) => {
                  *    $metadata: "$button,,14"
                  * 3）通过这种模式设置 span
                  */
-                cell.optionItem.label = " ";
-                cell.optionItem.colon = false;
+                if (undefined === span) {
+                    cell.optionItem.label = " ";
+                    cell.optionItem.colon = false;
+                } else {
+                    cell.optionItem.label = "";
+                }
             }
         }
     }

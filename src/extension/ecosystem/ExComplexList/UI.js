@@ -2,6 +2,7 @@ import React from 'react';
 import Op from './Op';
 import Ex from 'ex';
 import renderJsx from './Web.jsx';
+
 /*
  * React属性props:
  * {
@@ -35,11 +36,6 @@ import renderJsx from './Web.jsx';
  *    ./specification/workflow.js
  * React往下传入配置
  */
-
-const LOG = {
-    name: "ExComplexList",
-    color: "#09C"
-};
 
 class Component extends React.PureComponent {
     state = {
@@ -79,7 +75,7 @@ class Component extends React.PureComponent {
              * ComplexList / ExComplexList 产生冲突
              */
             return renderJsx(this, tabs);
-        }, LOG)
+        }, Ex.parserOfColor("ExComplexList").list())
     }
 }
 

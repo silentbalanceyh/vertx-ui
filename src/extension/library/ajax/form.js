@@ -4,7 +4,7 @@ export default {
     /*
      * 读取表单配置
      */
-    form: (params) => Ux.ajaxGet(`/api/form/:control`, params),
+    form: (params) => Ux.ajaxGet(`/api/ui/form/:code`, params),
     /*
      * 读取表单中的 actions
      * {
@@ -21,7 +21,7 @@ export default {
             const permit = {};
             const {op = {}} = params;
             Object.keys(op).forEach(field => permit[field] = !!op[field]);
-            return Promise.resolve(permit);
+            return Ux.promise(permit);
         }
     }
 }

@@ -3,11 +3,6 @@ import Ex from 'ex';
 import Ux from 'ux';
 import Op from './Op';
 
-const LOG = {
-    name: "OxModule",
-    color: "#00868B"
-};
-
 class Component extends React.PureComponent {
     state = {};
 
@@ -24,12 +19,19 @@ class Component extends React.PureComponent {
             /*
              * 读取 $control 配置
              */
-            const {$config = {}} = this.state;
+            const {$config = {}, $identifier} = this.state;
             return Ux.aiChildren(this, {
+                /*
+                 * 配置基本信息
+                 */
                 config: $config,
+                /*
+                 * 当前组件处理的 $identifier（模型ID）
+                 */
+                $identifier,
             })
 
-        }, LOG)
+        }, Ex.parserOfColor("OxModule").container())
     }
 }
 

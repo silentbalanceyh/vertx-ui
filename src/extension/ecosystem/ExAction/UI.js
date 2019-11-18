@@ -1,6 +1,7 @@
 import React from 'react';
 import Ex from 'ex';
 import Rdr from './Web.jsx';
+
 /*
  * Action分流，包含几种：
  * 1）普通的 Button
@@ -14,10 +15,6 @@ import Rdr from './Web.jsx';
  * -- 2.3. 带有 Popover 的 Button
  * 直接使用：<div><ExButton/><ExDialog></ExDialog></div>
  */
-const LOG = {
-    name: "ExAction",
-    color: "#00868B"
-};
 
 class Component extends React.PureComponent {
     state = {
@@ -44,7 +41,7 @@ class Component extends React.PureComponent {
                 attributes.$category = $category;
                 return renderJsx(this, config, attributes);
             }
-        }, LOG);
+        }, Ex.parserOfColor("ExAction").action());
     }
 }
 

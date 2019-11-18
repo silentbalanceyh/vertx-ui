@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
                 <PageApi {...inherit}/>
                 <PageService {...inherit}/>
             </ExTab>
-        ))
+        ), Ex.parserOfColor("PxIntegration").page())
     }
 }
 

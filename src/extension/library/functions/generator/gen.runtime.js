@@ -12,6 +12,11 @@ export default {
             Cm.seek(reference, 'rxColumn')([]) :
             // 读取我的列
             Cm.seek(reference, 'rxColumnMy')([]), */
+        openPost: (data) =>
+            Cm.seek(reference, 'rxOpenPost', ARGS)([data]),
+        closePost: (key) =>
+            Cm.seek(reference, 'rxClosePost', ARGS)([key]),
+        // ------------ 处理开关页 ----------
         /* 主搜索方法 */
         search: (params) =>
             Cm.seek(reference, 'rxSearch')([params]),

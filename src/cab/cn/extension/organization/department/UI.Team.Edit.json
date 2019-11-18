@@ -8,7 +8,7 @@
             [
                 "name,名称,12",
                 {
-                    "metadata": "code,编码,12,,,placeholder=（根据规范编码全大写，如DETP.IT）",
+                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -28,7 +28,7 @@
                     "metadata": "leaderName,组长,12,,aiListSelector,placeholder=（请选择组长）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/user/search,1,8,sorter=createdAt`DESC"
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC"
                         },
                         "linker": {
                             "key": "leaderId",
@@ -38,10 +38,8 @@
                             "columns": [
                                 "username,用户账号",
                                 "realname,用户名称",
-                                "comment,备注",
                                 "mobile,手机号",
-                                "email,邮箱",
-                                "active,是否启用"
+                                "email,邮箱"
                             ]
                         },
                         "validation": "请选择组长！",
@@ -60,17 +58,17 @@
                     "optionJsx.config.tree":"text=name,parent=deptId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionConfig.rules":[
-                        "required,请选择部门所挂靠的公司！"
+                        "required,请选择组所挂靠的部门！"
                     ]
                 },
                 {
-                    "metadata": "teamId,上级组,12,,aiTreeSelect,placeholder=（不选择时就无上级组）",
+                    "metadata": "teamId,上级组,12,,aiTreeSelect,placeholder=（不选择则无上级组）",
                     "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
                     "optionJsx.config.tree":"text=name,parent=teamId",
                     "optionJsx.config.selection":"mode=FULL",
                     "optionJsx.config.cascade": {
                         "source": "deptId",
-                        "target": "deptId"
+                        "target": "FORM:deptId"
                     },
                     "optionJsx.allowClear":true
                 }
@@ -86,7 +84,7 @@
             [
                 {
                     "metadata": "comment,备注,24,,aiTextArea",
-                    "optionJsx.rows": 4
+                    "optionJsx.rows": 3
                 }
             ],
             [

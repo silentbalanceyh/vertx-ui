@@ -26,7 +26,7 @@ class Component extends React.PureComponent {
                 <PageEdit {...inherit}/>
                 <PageDesigner {...inherit}/>
             </ExTab>
-        ))
+        ), Ex.parserOfColor("PxForm").page())
     }
 }
 

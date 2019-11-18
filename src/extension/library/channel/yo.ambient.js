@@ -17,7 +17,7 @@ const _seekState = (uniform = {}, reference, key) => {
     }
 };
 
-const _seekOptional = (uniform = {}, reference, key) => {
+const _seekSelected = (uniform = {}, reference, key) => {
     /*
      * 属性中包含就处理
      */
@@ -36,6 +36,31 @@ const _seekAssist = (uniform = {}, input = {}) => {
             .filter(field => field.startsWith(`$a_`))
             .forEach(key => uniform[key] = input[key]);
     }
+};
+
+const _seekOption = (uniform = {}, reference) => {
+    /*
+    * 选项合并处理
+    * reference.props -> $options
+    * reference.state -> $options
+    * 合并到一起，state 中的 $options 优先
+    * 最后 $hoc 部分
+    */
+    let optionData = uniform.$options ? Ux.clone(uniform.$options) : {};
+    const {$options = {}} = reference.state ? reference.state : {};
+    Object.assign(optionData, $options);
+    /*
+     * $hoc 存在的时候才读取 module
+     */
+    const {$hoc} = reference.state ? reference.state : {};
+    if ($hoc) {
+        let module = Ux.fromHoc(reference, "module");
+        if (!module) module = {};
+        if (module.$options) {
+            Object.assign(optionData, module.$options);
+        }
+    }
+    uniform.$options = optionData;
 };
 
 export default (reference = {}, config = {}) => {
@@ -75,7 +100,7 @@ export default (reference = {}, config = {}) => {
          * （主要用于配置无法处理继承的情况）
          * $selected：选中项
          */
-        _seekOptional(uniform, reference, "$selected");
+        _seekSelected(uniform, reference, "$selected");
     }
     /*
      * 函数处理
@@ -97,12 +122,18 @@ export default (reference = {}, config = {}) => {
         uniform.react = reference;
     }
     if (!uniform.config) uniform.config = {};
-    /*
-     * 开合状态处理
-     */
     {
+        /*
+         * 开合状态处理
+         */
         const {$collapsed = false} = reference.props;
         uniform.$collapsed = $collapsed;
+    }
+    {
+        /*
+         * $options 选择
+         */
+        _seekOption(uniform, reference);
     }
     Object.assign(uniform.config, config);
     /*
@@ -110,6 +141,9 @@ export default (reference = {}, config = {}) => {
      */
     _seekAssist(uniform, reference.props);
     _seekAssist(uniform, reference.state);
+    /*
+     * options 专用处理
+     */
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

@@ -1,7 +1,7 @@
 import application from './redux/epic.application';
-import category from './redux/epic.category';
+import ambient from './redux/epic.ambient';
 
 export default {
     ...application,
-    ...category,
+    ...ambient,
 }

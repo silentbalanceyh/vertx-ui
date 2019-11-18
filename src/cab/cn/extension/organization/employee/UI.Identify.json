@@ -37,7 +37,7 @@
                 {
                     "metadata": "type,类型,,,aiRadio",
                     "optionJsx.config.items": [
-                        "__zero.identity.type__,员工档案"
+                        "zero.identity,员工档案"
                     ]
                 }
             ],

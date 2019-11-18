@@ -1,0 +1,163 @@
+{
+
+    "_form": {
+        "window": 1,
+        "columns":3,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata":"workNumber,工号,,,,placeholder=（不填写则系统自动生成）",
+                    "optionConfig.rules":[
+                        {
+                            "validator":"existing",
+                            "message":"对不起，填写的工号重复，请重填！",
+                            "config":{
+                                "uri":"/api/employee/existing",
+                                "method":"POST",
+                                "params":{
+                                    "sigma":"PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "metadata":"viceName,姓名",
+                    "optionConfig.rules":[
+                        "required,请输入员工姓名"
+                    ]
+                },
+                "workTitle,头衔"
+            ],
+            [
+                {
+                    "metadata":"viceEmail,邮箱,,,,placeholder=格式：xxx@xxx.xx",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"viceMobile,手机号,,,,placeholder=请输入合法手机号",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "[0-9-()（）]{7,18}",
+                            "message": "格式错误,请正确输入手机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "username,关联账号,8,,aiListSelector,placeholder=（请选择账号）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC",
+                            "params.criteria":{
+                                "modelId":"FIX:employee",
+                                "":"OPERATOR:AND"
+                            }
+                        },
+                        "linker": {
+                            "key": "userId",
+                            "username": "username",
+                            "realname":"viceName",
+                            "email": "viceEmail",
+                            "mobile": "viceMobile"
+                        },
+                        "table": {
+                            "columns": [
+                                "username,用户账号",
+                                "realname,用户名称",
+                                "mobile,手机号",
+                                "email,邮箱"
+                            ]
+                        },
+                        "validation": "请选择关联账号！",
+                        "window": "关联账号,选择,关闭,false,800,false",
+                        "search": {
+                            "username,c": "账号",
+                            "realname,c": "姓名"
+                        }
+                    },
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择所属公司）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=companyId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionConfig.rules":[
+                        "required,请选择员工所属的公司！"
+                    ]
+                },
+                {
+                    "metadata": "deptId,所属部门,,,aiTreeSelect,placeholder=（不选择则无所属部门）",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=deptId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.config.cascade": {
+                        "source": "companyId",
+                        "target": "FORM:companyId"
+                    },
+                    "optionJsx.allowClear":true
+                },
+                {
+                    "metadata": "teamId,所属组,,,aiTreeSelect,placeholder=（不选择则无所属组）",
+                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
+                    "optionJsx.config.tree":"text=name,parent=teamId",
+                    "optionJsx.config.selection":"mode=FULL",
+                    "optionJsx.config.cascade": {
+                        "source": "deptId",
+                        "target": "FORM:deptId"
+                    },
+
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "active,启用,,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                "workLocation,办公地点,24,,aiTextArea,rows=4"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden":true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ],
+        "initial":{
+            "active":"BOOL:true",
+            "type":"ROUTE:type"
+        },
+        "hidden": [
+            "identityId",
+            "userId",
+            "type"
+        ],
+        "op": {
+            "$opAdd": "act.employee.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的职员信息已经成功保存！"
+        }
+    }
+}

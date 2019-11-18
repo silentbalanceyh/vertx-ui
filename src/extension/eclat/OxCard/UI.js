@@ -3,11 +3,6 @@ import Op from './Op';
 import Ex from 'ex';
 import {PageCard} from 'web';
 
-const LOG = {
-    name: "OxCard",
-    color: "#A52A2A"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -25,7 +20,7 @@ class Component extends React.PureComponent {
                     {children}
                 </PageCard>
             );
-        }, LOG);
+        }, Ex.parserOfColor("OxCard").container());
     }
 }
 

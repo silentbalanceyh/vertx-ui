@@ -10,7 +10,7 @@ const aiTransfer = (reference, jsx = {}, onChange) => {
      * 1）$filters 就是一个 Object
      * 2）$filters 是一个函数
      */
-    const {config = {}} = jsx;
+    const {config = {}, depend} = jsx;
     const options = R.Ant.toOptions(reference, config);
     /*
      * 1）onChange
@@ -25,7 +25,9 @@ const aiTransfer = (reference, jsx = {}, onChange) => {
     /*
      * Linker处理，修改 onChange
      */
-    R.Ant.onChange(rest, onChange, {config, options, reference});
+    R.Ant.onChange(rest, onChange, {
+        config, options, reference, depend
+    });
     const $rest = Ut.toLimit(rest, ["onChange"]);
     return (
         <CheckTransfer {...$rest} config={config}  // 因为 rest 中去掉了 config, trigger, filter

@@ -1,12 +1,4 @@
 {
-    "_page": {
-        "title": "用户组管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
-    },
     "_assist": {
         "ajax.groups": {
             "uri": "/api/group/by/sigma"
@@ -15,7 +7,7 @@
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,8",
+            "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },
@@ -157,6 +149,8 @@
                     "items": [
                         "code,用户组编号",
                         "name,用户组名称",
+                        "parentId,父组",
+                        "category,组类型",
                         "active,是否启用",
                         "createdBy,创建人",
                         "createdAt,创建时间"

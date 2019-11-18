@@ -25,7 +25,7 @@ const {zero} = Ux;
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        const {$app} = this.props;
+        // const {$app} = this.props;
         // 初始化左边节点类型
         // this.props.fnPointTypes({appId: $app._('key')})
     }

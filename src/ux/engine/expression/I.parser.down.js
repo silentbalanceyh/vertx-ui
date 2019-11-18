@@ -70,6 +70,7 @@ const PARSER = {
     readOnly: jsxBoolean("readOnly"),
     disabled: jsxBoolean("disabled"),
     placeholder: jsxKv("placeholder"),
+    inscribe: jsxKv("inscribe"),
     valuePropName: configValue("valuePropName"),
     format: jsxValue("format"),
     listType: jsxValue("listType"),

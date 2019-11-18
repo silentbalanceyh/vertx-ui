@@ -6,8 +6,7 @@ import './Cab.less';
 import Op from './Op';
 
 const configuration = {
-    name: "OxCategory",
-    color: "#A52A2A",
+    ...Ex.parserOfColor("OxCategory").component(),
     type: "Control"
 };
 const {Panel} = Collapse;

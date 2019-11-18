@@ -62,10 +62,13 @@
         transition: all .3s;
         background: @color-logo;
         overflow: hidden;
+        text-align: center;
 
         img {
             display: inline-block;
             vertical-align: middle;
+            height: 40px;
+            margin-left: 20px;
         }
 
         h1 {
@@ -76,6 +79,16 @@
             margin: 0 0 0 12px;
             font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
             font-weight: 600;
+        }
+    }
+}
+
+.ux-sider-expand {
+    .logo {
+        img {
+            width: 130px;
+            height: 32px;
+            margin-left: 0;
         }
     }
 }

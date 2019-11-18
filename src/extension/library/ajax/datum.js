@@ -33,15 +33,15 @@ const _assist = (uris = {}) => (params) => {
 const _tabular = _assist({
     code: "/api/:type/tabular/:code",
     type: "/api/type/tabulars/:type",
-    types: "/api/type/tabulars",
-    category: "__zero.tabular__"
+    types: "/api/types/tabulars",
+    category: Fn.V.TYPE_TABULAR
 });
 
 const _category = _assist({
     code: "/api/:type/category/:code",
     type: "/api/type/categories/:type",
-    types: "/api/type/categories",
-    category: "__zero.category__"
+    types: "/api/types/categories",
+    category: Fn.V.TYPE_CATEGORY
 });
 export default {
     /*

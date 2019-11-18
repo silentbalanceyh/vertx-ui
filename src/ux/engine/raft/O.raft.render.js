@@ -5,19 +5,26 @@ import Abs from '../../abyss';
 import Action from '../action';
 import Value from "../../element";
 import parser from '../parser';
-
-import raftDepend from './I.fn.depend';
+import Ut from '../../unity';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
+    let literal;
     if (values.hasOwnProperty(cell.field)) {
+        literal = values[cell.field];
+    } else {
+        if (0 < cell.field.indexOf('.')) {
+            const path = cell.field.split('.');
+            literal = Abs.immutable(values).getIn(path);
+        }
+    }
+    if (literal) {
         /*
          * 计算初始值
          * 1）如果 literal 是 Object 且包含了 $delay，执行二次表达
          * 2）如果 literal 就是 Object 且不包含 $delay，直接用 literal
          * 3）非 Object 的时候，是否处理时间格式，cell.moment 有定义
          */
-        let literal = values[cell.field];
         if (U.isObject(literal)) {
             if (literal) {
                 const {$delay = false, expression = ""} = literal;
@@ -155,12 +162,24 @@ const raftRender = (cell = {}, config = {}) => {
              * 执行初始值，包含 $delay 模式
              */
             raftValue(cell, values, reference);
-            const optionConfig = Abs.clone(cell.optionConfig);
             /*
-             * 新增 depend 规则
+             * depend 计算
+             * 1）impact
+             * 2）enabled
              */
-            let optionJsx = Abs.clone(cell.optionJsx);
-            optionJsx = raftDepend(reference, optionJsx);
+            const optionJsx = Abs.clone(cell.optionJsx);
+            Ut.writeDisabled(optionJsx, reference);
+            // const optionJsx = raftDepend(reference, Abs.clone(cell.optionJsx));
+            /*
+             * 1）rules 和 validateTrigger 计算，特殊连接
+             * 2）optionJsx 必须经过计算来执行 rules 的筛选，计算过后才会出现 disabled 属性
+             */
+            const optionConfig = Ut.connectValidator({
+                optionJsx,
+                optionConfig: cell.optionConfig,
+                render: cell.render,
+            });
+
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

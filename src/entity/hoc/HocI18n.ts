@@ -3,6 +3,7 @@ import * as U from 'underscore';
 import * as Immutable from 'immutable';
 import Ux from "ux";
 import HocContainer from "./HocContainer";
+import Fn from './I.common';
 
 class HocI18n implements HocContainer {
     private readonly hoc: any = {};
@@ -71,6 +72,11 @@ class HocI18n implements HocContainer {
         }
         Object.assign(ret, this.lg);
         return ret;
+    }
+
+    merge(metadata: any): HocI18n {
+        Fn.toMerge(this.lg, metadata);
+        return this;
     }
 
     _(key: string): any {

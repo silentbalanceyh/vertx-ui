@@ -15,6 +15,13 @@ const yoSider = (reference = {}) => {
      */
     const {$collapsed = false} = reference.state;
     attrs.config = {$collapsed};
+    /*
+     * Logo默认设置
+     */
+    const {$logo} = reference.props;
+    if ($logo) {
+        attrs.$logo = $logo;
+    }
     return attrs;
 };
 const yoNavigation = (reference = {}, {
@@ -26,7 +33,8 @@ const yoNavigation = (reference = {}, {
      */
     const {$menus, $router} = reference.props;
     const source = Ex.array($menus);
-    attrs.data = source      // X_MENU 菜单信息
+    attrs.data = source      // X_MENU 菜单信息// 特殊类型（导航栏）
+        .filter(menu => "SIDE-MENU" === menu.type)
         .filter(menu => menu.uri && 0 < $router.path().indexOf(menu.uri));
     /*
      * 配置
@@ -82,7 +90,7 @@ const yiLayout = (reference) => {
     const props = reference.props;
     if (props.hasOwnProperty("$collapsed")) {
         const {$collapsed = true} = props;
-        reference.setState({$collapsed});
+        reference.setState({$collapsed, $ready: true});
     }
 };
 export default {

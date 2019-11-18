@@ -1,5 +1,6 @@
 import Fr from './O.from';
 import U from 'underscore';
+import Abs from '../../abyss';
 
 /**
  * 从reference的props中读取`key`对应的值，一般用于读取Tabular/Assist
@@ -43,8 +44,40 @@ const onRouter = (reference, key) => {
         }
     }
 };
+/*
+ * 根据 linker 读取 values
+ */
+const onLinker = (config = {}, valueSupplier) => {
+    const values = {};
+    const {linker} = config;
+    if (linker && !Abs.isEmpty(linker)
+        && U.isFunction(valueSupplier)) {
+        const fields = Object.keys(linker)
+            .map(field => linker[field])
+            .filter(field => !!field);
+        const sourceValues = valueSupplier(fields);
+        if (sourceValues) {
+            Object.keys(sourceValues).forEach(key => {
+                /*
+                 * linker 中包含了 field 的信息，则直接处理
+                 */
+                if (linker.hasOwnProperty(key)) {
+                    values[key] = sourceValues[key];
+                } else {
+                    Object.keys(linker)
+                        .filter(linkerField => key === linkerField[key])
+                        .forEach(linkerField => {
+                            values[linkerField] = sourceValues[key];
+                        })
+                }
+            });
+        }
+    }
+    return values;
+};
 export default {
     onDatum,        // 读取 Tabular 或 Assist
     onReference,    // 读取上层引用
     onRouter,       // 读取路由中的参数
+    onLinker,       // 根据 linker 读取数据信息
 }

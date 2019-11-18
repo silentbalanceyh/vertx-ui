@@ -1,9 +1,10 @@
 import QTreeNode from './QTreeNode';
 import * as U from 'underscore';
 import QTreeLeaf from "./QTreeLeaf";
+import Qt from './QtConnect';
 
 const _findRef = (nodes: Array<QTreeNode>, hit: QTreeLeaf, isFull: Boolean = false): QTreeLeaf => {
-    let reference: QTreeLeaf;
+    let reference: QTreeLeaf = null;
     nodes.forEach(node => {
         if (node instanceof QTreeLeaf) {
             /*
@@ -18,12 +19,6 @@ const _findRef = (nodes: Array<QTreeNode>, hit: QTreeLeaf, isFull: Boolean = fal
         }
     });
     return reference;
-};
-/*
- * 从 nodes 中删除 hit
- */
-const _removeRef = (nodes: Array<QTreeNode>, hit: QTreeLeaf) => {
-
 };
 
 class QTreeBranch implements QTreeNode {
@@ -62,33 +57,7 @@ class QTreeBranch implements QTreeNode {
     }
 
     to() {
-        const content: any = {};
-        const validNodes = this.nodes.filter(node => node.valid());
-        if (0 < validNodes.length) {
-            if (1 === validNodes.length) {
-                const node: QTreeNode = validNodes[0];
-                if (node instanceof QTreeLeaf) {
-                    /*
-                     * 如果是叶节点，直接合并
-                     */
-                    Object.assign(content, node.to())
-                } else {
-                    content[`$0`] = node.to();
-                }
-            } else {
-                content[""] = this._isAnd;       // 这种情况才处理操作符
-                validNodes.forEach((node, index) => {
-                    if (node instanceof QTreeLeaf) {
-                        const merged = node.to();
-                        Object.assign(content, merged);
-                    } else {
-                        const key = `$${index}`;
-                        content[key] = node.to();
-                    }
-                });
-            }
-        }
-        return content;
+        return Qt.combine(this.nodes, this._isAnd);
     }
 
     leaf() {

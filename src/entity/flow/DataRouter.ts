@@ -108,7 +108,9 @@ class DataRouter implements BindContainer {
         const params = _query(this.location.search);
         const pathParams = this.match.params;
         for (const key in pathParams) {
-            params[key] = pathParams[key];
+            if (pathParams.hasOwnProperty(key)) {
+                params[key] = pathParams[key];
+            }
         }
         return params;
     }

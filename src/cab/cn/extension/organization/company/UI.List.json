@@ -3,14 +3,17 @@
         "company.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:__zero.company.type__"
+                "type": "FIX:zero.company"
             }
+        },
+        "resource.companys": {
+            "uri": "/api/company/by/sigma"
         }
     },
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,8",
+            "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },

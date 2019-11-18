@@ -6,17 +6,20 @@
         "resource.departments": {
             "uri": "/api/dept/by/sigma"
         },
-        "identity.type": {
+        "resource.teams": {
+             "uri": "/api/team/by/sigma"
+        },
+        "employee.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:__zero.identity.type__"
+                "type": "FIX:zero.employee"
             }
         }
     },
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,8",
+            "pager": "1,10",
             "sorter": "createdAt=DESC",
             "criteria": {}
         },

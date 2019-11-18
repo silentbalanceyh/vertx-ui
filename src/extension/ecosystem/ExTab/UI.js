@@ -6,11 +6,6 @@ import Ux from 'ux';
 import './Cab.less';
 import U from 'underscore';
 
-const LOG = {
-    name: "ExTab",
-    color: "#5D478B"
-};
-
 /*
  * React属性props:
  * {
@@ -41,6 +36,7 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             const {$tabs = {}} = this.state;
+            const {config = {}} = this.props;
             /*
              * items 抽取
              */
@@ -56,12 +52,31 @@ class Component extends React.PureComponent {
             if (U.isFunction(fnExtra)) {
                 rest.tabBarExtraContent = fnExtra();
             }
+            /*
+             * 外层和里层的 activeKey 交替关系
+             */
+            if (config.activeKey) {
+                /*
+                 * 外层传入了 activeKey（受控模式）
+                 */
+                rest.activeKey = config.activeKey;
+            } else {
+                /*
+                 * 里层提供了 activeKey（受控模式）
+                 */
+                if ($tabs.activeKey) {
+                    rest.activeKey = $tabs.activeKey;
+                }
+                /*
+                 * 其余情况为不受控模式
+                 */
+            }
             return (
                 <Tabs {...rest}>
                     {items.map(item => Ux.aiChild(item))}
                 </Tabs>
             );
-        }, LOG)
+        }, Ex.parserOfColor("ExTab").component())
     }
 }
 

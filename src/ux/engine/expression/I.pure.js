@@ -23,8 +23,16 @@ const multiple = (jsx = {}) => {
     }
 };
 const placeholder = (jsx = {}) => {
-    if (jsx.readOnly) {
+    /*
+     * 双开处理 placeholder
+     * disabled / readOnly 都为 true 的时候，直接删除
+     * placeholder，这种情况下只能依赖 inscribe 来处理文字呈现
+     */
+    if (jsx.readOnly || jsx.disabled) {
         delete jsx.placeholder;
+    }
+    if (jsx.inscribe) {
+        jsx.placeholder = jsx.inscribe;
     }
 };
 const addonAfter = (jsx = {}) => {

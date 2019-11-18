@@ -108,17 +108,31 @@ const ajaxDialog = (reference, {
      *      success: （ 第三优先级 ）
      * }
      */
-    const {modal, title = {}} = dialog;
     const dialogConfig = {};
-    _setType(dialogConfig, modal, key);
-    dialogConfig.title = title[dialogConfig.mode];
-    /*
-     * 使用数据执行 format
-     */
-    if (dialogConfig.pattern) {
-        dialogConfig.content = Ut.formatExpr(dialogConfig.pattern, data);
+    if ("string" === typeof key) {
+        const {modal, title = {}} = dialog;
+        _setType(dialogConfig, modal, key);
+        dialogConfig.title = title[dialogConfig.mode];
+        /*
+         * 使用数据执行 format
+         */
+        if (dialogConfig.pattern) {
+            dialogConfig.content = Ut.formatExpr(dialogConfig.pattern, data);
+        }
+        dialogConfig.redux = redux;     // 连接 redux 处理响应
+    } else {
+        if (U.isObject(key)) {
+            // 配置模式
+            const configuration = Abs.clone(key);
+            dialogConfig.title = configuration.title;
+            if (configuration.pattern) {
+                dialogConfig.content = Ut.formatExpr(configuration.pattern, data);
+            } else {
+                dialogConfig.content = configuration.content;
+            }
+            dialogConfig.mode = configuration.mode;
+        }
     }
-    dialogConfig.redux = redux;     // 连接 redux 处理响应
     return _showDialog(reference, dialogConfig, data);
 };
 const ajax2Message = (reference, key, redux = false) => (data) =>

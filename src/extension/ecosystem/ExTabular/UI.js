@@ -2,11 +2,7 @@ import React from 'react';
 import Op from './Op';
 import Ex from 'ex';
 import {Menu} from 'antd';
-
-const LOG = {
-    name: "ExTabular",
-    color: "#3CB371"
-};
+import './Cab.less';
 
 class Component extends React.PureComponent {
     state = {
@@ -25,7 +21,7 @@ class Component extends React.PureComponent {
             const menuData = Op.yoMenu(this);
 
             return (
-                <Menu onSelect={Op.rxSelect(this)}>
+                <Menu onSelect={Op.rxSelect(this)} className={'ex-tabular'}>
                     {menuData.map(menu => {
                         const {text, ...rest} = menu;
                         return (
@@ -34,7 +30,7 @@ class Component extends React.PureComponent {
                     })}
                 </Menu>
             );
-        }, LOG)
+        }, Ex.parserOfColor("ExTabular").component())
     }
 }
 

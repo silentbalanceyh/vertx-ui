@@ -12,7 +12,7 @@ const ambiguityArray = (...args) => {
             ref = [args];
         }
     }
-    return ref;
+    return U.isArray(ref) ? ref.filter(item => undefined !== item) : [];
 };
 /*
  * 二义性遍历
@@ -87,6 +87,24 @@ const ambiguityFind = (props = {}, key, name) => {
     }
     return value;
 };
+/*
+ * 默认执行二义性合并
+ */
+const ambiguityItem = (reference = {}, name, merged = false) => {
+    const {props, state = {}} = reference;
+    let values = {};
+    if (props[name]) {
+        Object.assign(values, props[name]);
+    }
+    if (state[name]) {
+        if (merged) {
+            Object.assign(values, state[name]);
+        } else {
+            values = state[name];
+        }
+    }
+    return values;
+};
 export default {
     /*
      * 二义性处理，最终转换成数组
@@ -112,4 +130,10 @@ export default {
      * 二义性路径检索
      */
     ambiguityFind,
+    /*
+     * 二义性读取 对应变量信息
+     * 1）优先读取 props 中的
+     * 2）然后读取 state 中的
+     */
+    ambiguityItem,
 }

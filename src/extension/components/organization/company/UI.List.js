@@ -7,11 +7,6 @@ import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
 
-const LOG = {
-    name: "PxCompanyList",
-    color: "#1874CD",
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI.List")
     .to()
@@ -40,7 +35,7 @@ class Component extends React.PureComponent {
                                $record={$inited}    // 特殊变量，form 中需要穿透传递
                                config={config} $form={form}/>
             );
-        }, LOG);
+        }, Ex.parserOfColor("PxCompanyList").control());
     }
 }
 

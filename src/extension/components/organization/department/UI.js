@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
                 <Dept {...inherit}/>
                 <Team {...inherit}/>
             </ExTab>
-        ))
+        ), Ex.parserOfColor("PxDepartment").page())
     }
 }
 

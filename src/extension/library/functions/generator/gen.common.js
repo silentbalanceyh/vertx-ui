@@ -58,16 +58,12 @@ const seek = (reference, fnName, config = {}) => (args) => {
                         const message = `[ Ex ] ${fnName} 函数出错！`;
                         if (inError) {
                             throw new Error(message);
-                        } else {
-                            console.error(message);
                         }
                     }
                 } else {
                     const message = `[ Ex ] ${fnName} 函数未出现在 props 中！`;
                     if (inError) {
                         throw new Error(message);
-                    } else {
-                        console.error(message);
                     }
                 }
             }

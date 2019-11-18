@@ -1,0 +1,78 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=组基本信息"
+            ],
+            [
+                "name,用户组名称,14"
+            ],
+            [
+                {
+                    "metadata": "code,编码,14,,,placeholder=（根据规范编码全大写，如G10 - GROUP.COMPANY）",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/group/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "parentId,父组,14,,aiSelect",
+                    "optionJsx.config.datum": "source=ajax.groups,value=key,label=name"
+                }
+            ],
+            [
+                "title=业务模型信息"
+            ],
+            [
+                "modelId,描述模型,14"
+            ],
+            [
+                "modelKey,描述记录,14"
+            ],
+            [
+                {
+                    "metadata": "active,启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "key"
+        ],
+        "op": {
+            "$opSave": "act.group.save",
+            "$opDelete": "act.group.delete"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，您的用户组信息更新成功！",
+            "removed": "当前用户组信息已删除成功！"
+        }
+    }
+}

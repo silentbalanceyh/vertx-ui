@@ -1,6 +1,7 @@
 import form from './form';
 import dialog from './dialog';
 import init from './init';
+import todo from './todo';
 import bind from './bind';
 
 export default {
@@ -10,6 +11,7 @@ export default {
     form,
     dialog,
     init,
+    todo,
 
     ...bind,
 }

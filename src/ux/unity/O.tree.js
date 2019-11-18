@@ -10,6 +10,7 @@
  *     parent: "parentId",
  *     value: "key",
  *     text: "text",
+ *     title: "text",
  *     sort: "sort",
  *     level: "level"
  * }
@@ -38,6 +39,7 @@ const toTreeConfig = (config = {}) => {
          */
         if (!config.value) $config.value = $config.key;
         if (!config.text) $config.text = "text";
+        if (!config.title) $config.title = "title";
         /*
          * 3. 是否支持表达式
          * 标准化：expr，默认 无

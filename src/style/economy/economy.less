@@ -28,7 +28,7 @@
     height: 38px !important;
 }
 
-.ix-table(@cell, @empty) {
+.ix-table(@cell, @empty, @adjust) {
     // 普通 <Table/>
     table {
         thead > tr > th {
@@ -40,16 +40,22 @@
             padding-top: @cell;
             padding-bottom: @cell;
         }
+
+        tbody > tr:last-child > td {
+            padding-bottom: @adjust;
+        }
     }
     .ant-empty {
-        margin: @empty 0 !important;
+        // margin: @empty 0 !important;
     }
 }
 
 .ix-form-row {
     .each(@rowHeight, @max, @i:1) when (@i =< @max) {
         .ant-col-@{i} {
-            margin-top: @rowHeight;
+            /*
+             * margin-top: @rowHeight;
+             */
 
             .ant-form-item {
                 margin-bottom: 0 !important;

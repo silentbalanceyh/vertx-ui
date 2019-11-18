@@ -2,6 +2,7 @@ import React from 'react'
 import Ux from "ux";
 import renderJsx from './Web.Header.jsx';
 import Op from './Op';
+import Ex from 'ex';
 
 /*
  * React属性props:
@@ -19,23 +20,25 @@ import Op from './Op';
  * }
  */
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("UI")
+    .cab("ExAdmin")
+    .ready(true)
     .to()
 )
 class Component extends React.PureComponent {
 
     render() {
-        Ux.dgDebug(this.props, "[ ExHeader ]", "#c60");
-        const {config = {}, fnCollapse} = this.props;
-        const window = Ux.fromHoc(this, 'window');
-        const accounts = Op.yoAccount(this, {
-            window
-        });
-        return renderJsx(this, {
-            accounts,
-            icon: config.icon,
-            fnCollapse
-        })
+        return Ex.yoRender(this, () => {
+            const {config = {}, fnCollapse} = this.props;
+            const window = Ux.fromHoc(this, 'window');
+            const accounts = Op.yoAccount(this, {
+                window
+            });
+            return renderJsx(this, {
+                accounts,
+                icon: config.icon,
+                fnCollapse
+            })
+        }, Ex.parserOfColor("ExHeader").private())
     }
 }
 

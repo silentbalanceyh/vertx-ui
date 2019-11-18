@@ -44,8 +44,21 @@ const renderBack = (ref, topbar) => {
 
 const initComponent = (ref) => {
     const {$key = "page", reference} = ref.props;
-    // 1.从Hoc中读取配置
-    let topbar = Ux.fromHoc(reference, $key);
+    /*
+     * 开启双读取模式
+     * 1. 直接读取，$key 中不包含 . 操作符
+     * 2. 如果 $key 中包含了 . 操作符，则用命中的方式
+     */
+    let topbar = {};
+    if (0 < $key.indexOf('.')) {
+        const args = $key.split('.');
+        const config = Ux.fromPath.apply(this, [reference].concat(args));
+        topbar = Ux.clone(config ? config : {});
+    } else {
+        const config = Ux.fromHoc(reference, $key);
+        topbar = Ux.clone(config ? config : {});
+    }
+
     // 2.拷贝当前hoc配置
     topbar = Ux.clone(topbar ? topbar : {});
     // 3.解析left和right（分别解析）

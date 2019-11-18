@@ -26,7 +26,12 @@
             }
         }
     }
-    .menu(@indent, @indent2, @indent3,@adjust,@bottom) {
+    .menu(@indent, @indent2, @indent3,@width) {
+
+        .ant-menu-inline-collapsed {
+            width: @width !important;
+        }
+
         .ux-menu {
             // 叶节点优先
             .ant-menu-item {
@@ -70,22 +75,12 @@
 .ux-sider-fit {
     // 1280 x 1024
     @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
-        .ux-sider.tpl(
-                72,
-                48,
-                210,
-                28
-        );
-        .ux-sider.menu(28px, 44px, 60px, 40px, 4px);
+        .ux-sider.menu(28px, 44px, 60px, 72px);
+        .ux-sider.tpl(72, 48, 190, 28);
     }
     // > 1600
     @media (min-width: @screen-xxl) {
-        .ux-sider.tpl(
-                80,
-                56,
-                250,
-                32
-        );
-        .ux-sider.menu(28px, 52px, 76px, 40px, 8px);
+        .ux-sider.menu(28px, 52px, 76px, 80px);
+        .ux-sider.tpl(80, 56, 230, 32);
     }
 }

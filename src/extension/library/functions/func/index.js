@@ -9,5 +9,5 @@ export default {
     ...funcTo,
     ...funcUp,
     ...funcIs,
-    ...funcInit
+    ...funcInit,
 }

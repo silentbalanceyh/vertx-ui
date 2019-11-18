@@ -22,7 +22,7 @@
     font-size: 16px;
     color: white;
     padding-left: 6px;
-    margin-bottom: 6px;
+    margin-bottom: 3px;
     background: -moz-linear-gradient(left, @theme-main 0%, white 100%);
     background: -webkit-linear-gradient(left, @theme-main 0%, white 100%);
     background: -o-linear-gradient(left, @theme-main 0%, white 100%);
@@ -59,6 +59,17 @@
     }
 }
 
+.ux-right {
+    &-text {
+        text-align: right;
+    }
+
+    &-cell {
+        text-align: right;
+        padding-right: 32px !important;
+    }
+}
+
 .ux-error {
     width: 98%;
     height: 100%;
@@ -77,4 +88,8 @@
     button {
         margin-right: 0 !important;
     }
+}
+
+textarea {
+    resize: none !important;
 }

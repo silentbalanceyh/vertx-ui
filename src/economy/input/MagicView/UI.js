@@ -1,26 +1,42 @@
 import React from 'react';
 import './Cab.less';
-import {Input, Table} from 'antd';
+import {Input} from 'antd';
 import Ux from 'ux';
+import Rdr from './I.render';
 import moment from 'moment';
 
-const rxValue = (reference, value, config) => {
-    if (config.items) {
-        // 字符串格式比较
-        const item = config.items.filter(item => String(value) === item.key);
-        return 1 === item.length ? item[0].label : undefined;
-    }
+const rxContent = (reference, value, config) => {
+    /* 默认全走标签 */
     if (moment.isMoment(value)) {
-        // 时间信息处理
-        return value.format(config.format);
+        return Rdr.jsxMoment(reference, value, config);
+    } else if (config.items) {
+        return Rdr.jsxItems(reference, value, config);
+    } else if (config.record) {
+        return Rdr.jsxRecord(reference, value, config);
+    } else if (config.table) {
+        return Rdr.jsxTable(reference, value, config);
+    } else if (config.user) {
+        return Rdr.jsxUser(reference, value, config);
     }
-    if (config.columns) {
-        const columns = Ux.uiTableColumn(Ux.onReference(reference, 1), config.columns);
-        return (
-            <Table dataSource={value} columns={columns} pagination={false}/>
-        );
+    return Rdr.jsxLabel(reference, value, config);
+};
+const rxValue = (reference, value, config) => {
+    if (config.boolean) {
+        if (!value) {
+            return rxContent(reference, false, config);
+        }
+    } else {
+        let literal = value;
+        if (config.expr) {
+            literal = Ux.formatExpr(config.expr, {value}, true);
+        }
+        if (value) {
+            return rxContent(reference, literal, config);
+        } else {
+            /* 如果值为undefined或其他，则直接不呈现 */
+            return false;
+        }
     }
-    return value;
 };
 
 class Component extends React.PureComponent {
@@ -32,10 +48,9 @@ class Component extends React.PureComponent {
         if (format) {
             $config.format = format;
         }
-        const literal = rxValue(this, value, $config);
         return (
             <Input.Group {...jsx} className={"magic-view-item"}>
-                <span>{literal}</span>
+                {rxValue(this, value, $config)}
             </Input.Group>
         );
     }

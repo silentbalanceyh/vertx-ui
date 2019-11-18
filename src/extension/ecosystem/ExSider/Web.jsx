@@ -12,17 +12,23 @@ export default (reference, {
     $attrsMenu = {},
     $attrsSider = {},
     dataArray = [],
-}) => (
-    <Sider {...$attrsSider}>
-        {/* 菜单顶部Logo */}
-        <div className="logo">
-            <Link to={Ux.Env.ENTRY_ADMIN}>
-                <img src={$app.isEmpty() ? Empty : $app._("logo")}
-                     alt={'Logo'}/>
-                <h1>{$app._("title")}</h1>
-            </Link>
-        </div>
-        {/** 左边 **/}
-        {Ux.aiSider(dataArray, $attrsMenu)}
-    </Sider>
-)
+}) => {
+    let logo = $app._("logo");
+    if (!logo) {
+        const {$logo} = reference.props;
+        logo = $logo ? $logo : Empty;
+    }
+    return (
+        <Sider {...$attrsSider}>
+            {/* 菜单顶部Logo */}
+            <div className="logo">
+                <Link to={Ux.Env.ENTRY_ADMIN}>
+                    <img src={logo}
+                         alt={'Logo'}/>
+                </Link>
+            </div>
+            {/** 左边 **/}
+            {Ux.aiSider(dataArray, $attrsMenu)}
+        </Sider>
+    )
+}

@@ -9,7 +9,9 @@ import webField from '../web-field';
 
 const configTab = (reference, config = {}) => {
     const tabs = Abs.clone(config);
-    const {tabPosition, items} = tabs;
+    const {
+        tabPosition, items
+    } = tabs;
     /*
      * 处理 tabs，解析分两种模式，主要针对 items
      * 1）全字符串格式：key,value;key,value
@@ -61,6 +63,10 @@ const configTab = (reference, config = {}) => {
              * 激活的 activeKey 设置
              */
             reference.setState({$activeKey});
+            const {rxTabClick} = reference.props;
+            if (U.isFunction(rxTabClick)) {
+                rxTabClick($activeKey);
+            }
         };
         /*
          * 计算有状态的 fnExtra
@@ -76,6 +82,12 @@ const configTab = (reference, config = {}) => {
             const {$activeKey} = reference.state ? reference.state : {};
             const content = normalized[$activeKey];
             return webField.aiButtonGroup(reference, content);
+        }
+    }
+    if (!tabs.onTabClick) {
+        const {rxTabClick} = reference.props;
+        if (U.isFunction(rxTabClick)) {
+            tabs.onTabClick = rxTabClick;
         }
     }
     return tabs;

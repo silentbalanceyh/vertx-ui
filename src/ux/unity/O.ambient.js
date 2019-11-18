@@ -36,7 +36,9 @@ const isInit = () => {
 const isRoute = (props, prevProps) => {
     const $router = props.$router;
     const $prevRouter = prevProps.$router;
-    return $router.path() !== $prevRouter.path();
+    if ($router && $prevRouter) {
+        return $router.path() !== $prevRouter.path();
+    } else return false;     // 防止没有调用 Ex.yoAmbient 检查的情况
 };
 /**
  * 当前用户的注销行为
@@ -69,7 +71,7 @@ const toRoute = (reference = {}, uri = "") => {
         || !reference.props.hasOwnProperty("$router"), 10004, reference);
     const {$router} = reference.props;
     let target;
-    if (0 <= uri.indexOf(Cv['ROUTE'])) {
+    if (uri.startsWith(`/${Cv['ROUTE']}`)) {
         target = uri;
     } else {
         target = `/${Cv['ROUTE']}${uri}`;
@@ -91,9 +93,23 @@ const toLimit = (props = {}, limits = []) => {
     return inherits;
 };
 const toOriginal = (reference = {}) => {
-    const target = toQuery("target");
-    if (target) {
-        toRoute(reference, target);
+    const original = toQuery("target");
+    if (original) {
+        const {$router} = reference.props;
+        const params = Abs.clone($router.params());
+        if (params.key) delete params.key;
+        if (params.id) delete params.id;
+        if (params.target) delete params.target;
+        /*
+         * 计算链接
+         */
+        let calculated = original;
+        if (0 <= Object.keys(params).length) {
+            calculated += "?";
+            Object.keys(params)
+                .forEach(paramName => calculated += `${paramName}=${params[paramName]}`);
+        }
+        toRoute(reference, calculated);
     } else {
         toRoute(reference, Cv.ENTRY_ADMIN);
     }
@@ -116,7 +132,10 @@ const isAuthorized = (reference) => {
     }
 };
 const toLoading = (consumer, seed = 1) => {
-    const ms = Value.valueInt(Cv['LOADING'], 288);
+    /*
+     * 改成 108 ms，即108毫秒
+     */
+    const ms = Value.valueInt(Cv['LOADING'], 108);
     setTimeout(consumer, ms * seed);
 };
 export default {

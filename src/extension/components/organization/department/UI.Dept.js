@@ -8,11 +8,6 @@ import FormFilter from './form/UI.Filter';
 import Op from "../company/Op";
 
 
-const LOG = {
-    name: "PxDeptList",
-    color: "#1874CD",
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI.Dept")
     .ready(true)
@@ -35,7 +30,7 @@ class Component extends React.PureComponent {
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             )
-        }, LOG);
+        }, Ex.parserOfColor("PxDepartmentList").control());
     }
 }
 

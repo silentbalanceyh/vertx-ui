@@ -4,24 +4,38 @@ input[readonly] {
     background-color: rgba(200, 202, 203, 0.29);
 }
 
-.ux-readonly {
-    input[readonly] {
-        background-color: white;
+.ux {
+    &-date {
+        &-picker {
+            width: 100% !important
+        }
+    }
 
-        &:hover {
+    &-readonly {
+        &-select {
+            .ant-select-selection-selected-value {
+                color: black !important;
+            }
+        }
+
+        input[readonly] {
+            background-color: white;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        input[disabled] {
+            background-color: @color-readonly;
+
+            &:hover {
+                cursor: not-allowed;
+            }
+        }
+
+        i:hover {
             cursor: pointer;
         }
-    }
-
-    input[disabled] {
-        background-color: @color-readonly;
-
-        &:hover {
-            cursor: not-allowed;
-        }
-    }
-
-    i:hover {
-        cursor: pointer;
     }
 }

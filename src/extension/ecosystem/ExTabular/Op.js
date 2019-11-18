@@ -6,7 +6,7 @@ const yiSider = (reference) => {
     /*
      * 读取根路径上的 tabular
      */
-    Ex.I.tabular({type: "__zero.tabular__"})
+    Ex.I.tabular({type: Ex.V.TYPE_TABULAR})
         .then(response => {
             /*
              * 设置当前组件的基本状态

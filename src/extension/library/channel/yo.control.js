@@ -39,19 +39,25 @@ export default (control = {}) => {
     const $component = Ux.immutable(["LIST", "FORM", "COMPONENT"]);
     if ("CONTAINER" === type) {
         /*
-         * 容器配置，由于该类型，所以是必须
+         * 容器配置，这种情况下，只有 container 节点，没有其他节点
+         * component 节点没有
          */
         _seekContainer(attrs, control, type);
         if (!attrs.container) {
             throw new Error("[ Ex ] 由于 type = CONTAINER，必须包含 containerName！");
         }
+        /* 表示只有 container 容器，不包含 component */
+        attrs.isContainer = true;
     } else if ($component.contains(type)) {
         /*
          * LIST / COMPONENT / FORM
          * 容器（可选）
+         * 注意顺序，这里需要
+         * 1）先处理 container 级别的配置
+         * 2）再处理 component 级别的配置，最终这里需要执行覆盖
          */
-        _seekComponent(attrs, control);
         _seekContainer(attrs, control, type);   // 加入 type 作为 component 类型
+        _seekComponent(attrs, control);
     } else {
         throw new Error(`[ Ex ] 使用了不支持的类型：type = ${type}`);
     }

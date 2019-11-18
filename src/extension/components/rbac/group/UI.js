@@ -16,27 +16,24 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiCategory(this);
-    }
-
-    componentDidUpdate(props, state, snapshot) {
-        Ex.yuRouter(this, {props, state}, () => {
-            Ex.yiCategory(this);
-        });
+        Ex.yiStandard(this);
     }
 
     render() {
-        const config = Ux.fromHoc(this, "grid");
-        /* 专用组件信息 */
-        const form = {
-            FormAdd,    // 添加表单
-            FormEdit,   // 更新表单
-            FormFilter  // 搜索表单
-        };
-        return renderJsx(this, {
-            config,
-            form
-        })
+        return Ex.yoRender(this, () => {
+
+            const config = Ux.fromHoc(this, "grid");
+            /* 专用组件信息 */
+            const form = {
+                FormAdd,    // 添加表单
+                FormEdit,   // 更新表单
+                FormFilter  // 搜索表单
+            };
+            return renderJsx(this, {
+                config,
+                form
+            })
+        }, Ex.parserOfColor("PxRBACGroup").page());
     }
 }
 

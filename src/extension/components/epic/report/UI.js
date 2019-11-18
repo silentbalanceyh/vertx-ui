@@ -12,6 +12,7 @@ class Component extends React.PureComponent {
     render() {
         return (
             <HelpCard reference={this}>
+                Report
             </HelpCard>
         )
     }

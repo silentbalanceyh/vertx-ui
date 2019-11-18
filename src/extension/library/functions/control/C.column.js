@@ -21,18 +21,6 @@ const configColumn = (original = [], config = {}) => {
     }
     return resultColumns;
 };
-const configScroll = ($table = {}, columns = []) => {
-    if (!$table.hasOwnProperty("scroll")) {
-        if (6 < columns.length) {
-            $table.scroll = {
-                // 暂时使用固定算法
-                x: 160 * $table.columns.length
-            };
-        }
-    }
-    return $table;
-};
 export default {
-    configColumn,
-    configScroll,
+    configColumn
 }

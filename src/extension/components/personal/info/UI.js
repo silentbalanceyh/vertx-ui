@@ -4,11 +4,6 @@ import Ex from 'ex';
 import Op from './Op';
 import {ExForm} from "ei";
 
-const LOG = {
-    name: "PxInfo",
-    color: "#5CACEE"
-};
-
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
     .state({
@@ -31,7 +26,7 @@ class Component extends React.PureComponent {
                 <ExForm {...form} $height={"200px"}
                         $op={Op.actions}/>
             )
-        }, LOG)
+        }, Ex.parserOfColor("PxPersonal").page())
     }
 }
 

@@ -6,11 +6,6 @@ import Ex from 'ex';
 import ListUser from './UI.List';
 import FormSearch from './UI.Search';
 
-const LOG = {
-    name: "PxUser",
-    color: "#36648B"
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
     .ready(true)
@@ -27,7 +22,7 @@ class Component extends React.PureComponent {
                     <FormSearch {...inherit}/>
                 </ExTab>
             ))
-        }, LOG);
+        }, Ex.parserOfColor("PxRBACUser").page());
     }
 }
 

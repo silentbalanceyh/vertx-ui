@@ -4,6 +4,7 @@ import form from './form';
 import employee from './employee';
 import datum from './datum';
 import ui from './ui';
+import todo from './todo';
 
 export default {
     ...application,
@@ -12,4 +13,5 @@ export default {
     ...employee,
     ...datum,
     ...ui,
+    ...todo,
 }

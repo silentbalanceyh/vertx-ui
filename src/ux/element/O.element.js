@@ -114,10 +114,9 @@ const elementVertical = (data = [], field = "") => {
  * @method elementBranch
  * @param {Array} array 被查找的数
  * @param leafKey 过滤条件
- * @param parentField 父节点字段
- * @param field 主键字段
+ * @param parentField 构造树的字段
  */
-const elementBranch = (array = [], leafKey) => {
+const elementBranch = (array = [], leafKey, parentField = "parent") => {
     // 查找的最终结果
     let branch = [];
     // 查找子节点
@@ -126,7 +125,7 @@ const elementBranch = (array = [], leafKey) => {
         const target = Abs.clone(obj);//
         branch.push(target);
         // 查找父节点
-        const pid = obj.parent;
+        const pid = obj[parentField];
         branch = branch.concat(elementBranch(array, pid));
     }
     return branch.reverse();
@@ -152,11 +151,25 @@ const elementChild = (array = [], current = {}) => {
     }
     return children;
 };
+/*
+ * 分组专用方法
+ */
+const elementGroup = (array = [], field) => {
+    let result = {};
+    if (0 < array.length) {
+        let $result = Abs.immutable(array).groupBy(item => item.get(field));
+        if ($result) {
+            result = $result.toJS();
+        }
+    }
+    return result;
+};
 export default {
     elementFlat,
     elementUnique,
     elementFind,
     elementVertical,
+    elementGroup,
     // 树操作
     elementBranch,
     elementChild,

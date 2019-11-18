@@ -2,9 +2,12 @@
 @import "Cab.Fit";
 
 .ux-layout {
-
     // 响应式处理
     .ux-layout-fit;
+
+    .ux-content {
+        padding-bottom: 30px;
+    }
 
     .ux-header {
         background: #fff;
@@ -12,6 +15,8 @@
         position: relative;
 
         i.trigger {
+            vertical-align: 0 !important;
+
             .ix-font.normal(24);
             cursor: pointer;
             transition: all .3s, padding 0s;

@@ -31,9 +31,11 @@ class Component extends React.PureComponent {
             /*
              * 按钮专用处理（$dialog完善）
              */
+            Ux.configScroll($table, data);
             return (
                 <Input.Group {...attrs}>
                     <Table {...$table} dataSource={data}
+                           className={"web-table"}
                            loading={$submitting}/>
                     <Dialog className={"web-dialog"}
                             size={"small"}

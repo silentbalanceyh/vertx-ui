@@ -18,7 +18,7 @@ const yiThis = async (reference) => {
         /*
          * 构造事件发送器：Fabric 链式结构
          */
-        const fabric = Event.onBind(reference, event[eventName]);
+        const fabric = Event.etUniform(reference, event[eventName]);
         if (U.isFunction(fabric)) {
             state[eventName] = fabric;
         }

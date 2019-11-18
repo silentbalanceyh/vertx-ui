@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row} from 'antd';
 
-import xuiControl from './xui.fn.control';
+import xuiDecorator from './xui.fn.decorator';
 
 const getRender = (column = {}, UI = {}, inherit = {}) => {
     /*
@@ -13,7 +13,7 @@ const getRender = (column = {}, UI = {}, inherit = {}) => {
         fnRender = () => xuiGrid(column.rows, UI, inherit);
     } else {
         // 组件渲染
-        fnRender = () => xuiControl(column.control, UI, inherit);
+        fnRender = () => xuiDecorator(column.control, UI, inherit);
     }
     return fnRender;
 };

@@ -1,0 +1,64 @@
+{
+    "_table": {
+        "rowKey":"key",
+        "size": "small",
+        "columns":[
+            {
+                "metadata":"fieldName,系统名称",
+                "style":{
+                    "color":"#27408B"
+                }
+            },
+            "fieldAlias,属性名",
+            {
+                "metadata":"fieldType,类型,MAPPING",
+                "$mapping": {
+                    "java`lang`String": "字符串,,,,#1E90FF",
+                    "java`lang`Integer": "整数,,,,#EE4000",
+                    "java`lang`Long": "长整数,,,,#EE1289",
+                    "java`lang`Boolean": "布尔值,,,,#1874CD",
+                    "java`math`BigDecimal": "浮点数,,,,#218868",
+                    "java`time`LocalTime": "时间格式,,,,#7D26CD",
+                    "java`time`LocalDateTime": "时间格式,,,,#7D26CD"
+                }
+            },
+            {
+                "metadata":"type,变更类型,MAPPING",
+                "$mapping":{
+                    "ADD":"添加,plus-circle,,#228B22",
+                    "UPDATE":"更新,edit,,#3A5FCD",
+                    "DELETE":"删除,delete,,#CD2626"
+                }
+            },
+            {
+                "metadata":"valueOld,旧值,DICT",
+                "$config":{
+                    "field":"fieldName"
+                }
+            },
+            {
+                "metadata":"valueNew,新值,DICT",
+                "$config":{
+                    "field":"fieldName"
+                }
+            }
+        ]
+    },
+    "_history":{
+        "rowKey":"key",
+        "columns": [
+            {
+                "metadata":"createdAt,创建时间,DATE",
+                "$format": "YYYY年MM月DD日 HH点mm分"
+            },
+            {
+                "metadata":"createdBy,创建人,USER",
+                "$config": {
+                    "uri": "/api/user/:key",
+                    "field": "realname"
+                },
+                "$empty": "（系统）"
+            }
+        ]
+    }
+}

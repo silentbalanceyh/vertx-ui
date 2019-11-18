@@ -4,6 +4,7 @@ import PROP from './I.fn.prop';
 import DATUM from './I.fn.datum';
 import FORM from './I.fn.form';
 import STATE from './I.fn.state';
+import USER from './I.fn.user';
 /* 渗透处理 */
 
 export default {
@@ -23,6 +24,7 @@ export default {
      * 格式如：
      * 1）OPERATOR:AND （并）
      * 2）OPERATOR:OR （或）
+     *
      */
     OPERATOR: (expression) => "AND" === expression,
     /*
@@ -80,4 +82,8 @@ export default {
      * 直接从 state 中读取值
      */
     STATE,
+    /*
+     * 从用户对象中提取数据
+     */
+    USER,
 }

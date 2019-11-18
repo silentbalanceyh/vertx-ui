@@ -4,11 +4,6 @@ import Ex from 'ex';
 import Ux from 'ux';
 import renderJsx from './Web.jsx';
 
-const LOG = {
-    name: "ExEditorColumn",
-    color: "#228B22"
-};
-
 class Component extends React.PureComponent {
     state = {
         $buttons: [],   // 按钮初始化
@@ -44,7 +39,7 @@ class Component extends React.PureComponent {
                 options: Ux.clone($options),
                 buttons
             });
-        }, LOG)
+        }, Ex.parserOfColor("ExEditorColumn").private())
     }
 }
 

@@ -5,13 +5,10 @@ import Op from './Op';
 import Rdr from './render';
 import U from 'underscore';
 import renderJsx from './Web.jsx';
+
 /*
  * 表格专用
  */
-const LOG = {
-    name: 'ExTable',
-    color: '#09C'
-};
 
 class Component extends React.PureComponent {
     state = {
@@ -40,7 +37,6 @@ class Component extends React.PureComponent {
             const {config = {}} = this.props;
             const $columns = config.columns ? config.columns : [];
             $table.columns = Rdr.renderColumn(this, $columns);
-            Ex.configScroll($table, $columns);
             /*
              * （必须结合数据）分页组件
              */
@@ -57,11 +53,15 @@ class Component extends React.PureComponent {
              */
             $table.loading = $loading;
             const data = U.isArray($data.list) ? $data.list : [];
+            /*
+             * 修改 x
+             */
+            Ux.configScroll($table, data, this);
             return renderJsx(this, {
                 table: Ux.clone($table),
                 data
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExTable").private());
     }
 }
 

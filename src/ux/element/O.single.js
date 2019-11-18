@@ -42,25 +42,6 @@ const valuePair = (expr) => {
     }
     return mapping;
 };
-const valueIcon = (literal = "") => {
-    const item = {};
-    if (0 < literal.indexOf(",")) {
-        const textIcon = literal.replace(/ /g, '').split(',');
-        item.text = textIcon[0];
-        const iconStr = textIcon[1];
-        item.iconStyle = {fontSize: 16};
-        if (0 < iconStr.indexOf(":")) {
-            const iconStyle = iconStr.split(":");
-            item.icon = iconStyle[0];
-            item.iconStyle.color = iconStyle[1];
-        } else {
-            item.icon = iconStr;
-        }
-    } else {
-        item.text = literal;
-    }
-    return item;
-};
 const valueFlip = (jsx = {}) => {
     const processed = {};
     const flips = Abs.immutable([
@@ -72,11 +53,28 @@ const valueFlip = (jsx = {}) => {
         .forEach((field) => processed[field] = jsx[field]);
     return processed;
 };
+const valueCopy = (target = {}, source = {}, field) => {
+    if (field) {
+        if ("string" === typeof field) {
+            if (source[field]) {
+                if (Abs.isObject(source[field])) {
+                    target[field] = Abs.clone(source[field]);
+                } else if (U.isArray(source[field])) {
+                    target[field] = Abs.clone(source[field]);
+                } else {
+                    target[field] = source[field];
+                }
+            }
+        } else if (U.isArray(field)) {
+            field.forEach(eachField => valueCopy(target, source, eachField));
+        }
+    }
+};
 export default {
     valueInt,
     valueFloat,
     valueUnit,
     valuePair,
-    valueIcon,
     valueFlip,
+    valueCopy,
 }

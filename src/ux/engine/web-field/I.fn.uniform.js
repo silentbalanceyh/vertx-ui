@@ -7,7 +7,7 @@ export default (reference, jsx, onChange) => {
      */
     const exclude = Abs.immutable([
         "config",   // optionJsx.config
-        "trigger",  // optionJsx.trigger
+        "depend",  // optionJsx.depend
         "filter",    // optionJsx.filter
         // 下边是注入类配置
         "eventPrevent",
@@ -23,7 +23,7 @@ export default (reference, jsx, onChange) => {
      */
     const {
         config,                  // 基本项配置：optionJsx.config
-        trigger,                 // 触发项配置：optionJsx.trigger
+        depend,                 // 触发项配置：optionJsx.depend
         eventPrevent = true,     // 行为项配置：（编程传入）
         eventDisabled = false,   // ReadOnly的时候是否禁用（用于特殊配置）
         options = [],            // options，用于后期处理
@@ -36,13 +36,13 @@ export default (reference, jsx, onChange) => {
     if (config) {
         $config.config = Abs.clone(config);      // 当前 Jsx 核心配置
     }
-    if (trigger) {
-        $config.trigger = Abs.clone(trigger);    // 当前 trigger 配置
+    if (depend) {
+        $config.depend = Abs.clone(depend);    // 当前 depend 配置
     }
     /*
      * 往 rest 中注入特殊的 onChange
      */
-    R.Ant.onChange(rest, $config, onChange);
+    R.Ant.onChange(rest, onChange, $config);
 
     /*
      * 2）ReadOnly处理

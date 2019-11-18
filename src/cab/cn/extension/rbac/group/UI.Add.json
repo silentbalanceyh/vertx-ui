@@ -32,6 +32,9 @@
                 }
             ],
             [
+                "category,组类型,14"
+            ],
+            [
                 {
                     "metadata": "active,启用,14,,aiCheckbox",
                     "optionConfig": {

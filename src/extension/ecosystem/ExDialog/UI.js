@@ -2,6 +2,7 @@ import React from 'react';
 import Ex from 'ex';
 import Op from './Op';
 import renderJsx from './Web.jsx'
+
 /*
  * React中的props属性
  * {
@@ -21,10 +22,6 @@ import renderJsx from './Web.jsx'
  *      $visible: "窗口是否隐藏"
  * }
  */
-const LOG = {
-    name: "ExDialog",
-    color: "#228B22"
-};
 
 class Component extends React.PureComponent {
     state = {
@@ -58,7 +55,7 @@ class Component extends React.PureComponent {
                 dialog,
                 attributes
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExDialog").private());
     }
 }
 

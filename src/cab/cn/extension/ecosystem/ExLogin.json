@@ -32,10 +32,12 @@
             [
                 {
                     "metadata": "$button",
+                    "optionJsx.align":"center",
                     "optionJsx.buttons": {
                         "submit": "$opLogin,登录",
                         "reset": "$opReset,重置"
-                    }
+                    },
+                    "span":24
                 }
             ]
         ]

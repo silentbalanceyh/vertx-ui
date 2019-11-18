@@ -1,3 +1,10 @@
-.ex-row-double:hover {
-  cursor: url("./image/cursor.png"), pointer;
+.ex-row-double {
+    &:hover {
+        cursor: url("./image/cursor.png"), pointer;
+    }
+
+    .ant-table-selection-column {
+        width: 32px !important;
+        max-width: 32px !important;
+    }
 }

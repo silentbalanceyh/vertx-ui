@@ -48,11 +48,6 @@ import Ux from 'ux';
  * }
  */
 
-const LOG = {
-    name: "ExForm",
-    color: "#C03"
-};
-
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -64,7 +59,8 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () =>
-            Ux.aiForm(this), LOG)
+                Ux.aiForm(this),
+            Ex.parserOfColor("ExForm").form())
     }
 }
 

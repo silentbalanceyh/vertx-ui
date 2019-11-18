@@ -4,11 +4,6 @@ import Ux from 'ux';
 import Op from './Op';
 import renderJsx from './Web.jsx';
 
-const LOG = {
-    name: "ExEditorExport",
-    color: "#228B22"
-};
-
 /*
  * 导出
  */
@@ -45,7 +40,7 @@ class Component extends React.PureComponent {
                 notice: Ux.clone($notice),
                 group,
             });
-        }, LOG);
+        }, Ex.parserOfColor("ExEditorExport").private());
     }
 }
 

@@ -6,7 +6,7 @@
                 "title=组基本信息"
             ],
             [
-                "name,用户组名称,14"
+                "name,名称,14"
             ],
             [
                 {
@@ -30,6 +30,9 @@
                     "metadata": "parentId,父组,14,,aiSelect",
                     "optionJsx.config.datum": "source=ajax.groups,value=key,label=name"
                 }
+            ],
+            [
+                "category,组类型,14"
             ],
             [
                 "title=业务模型信息"

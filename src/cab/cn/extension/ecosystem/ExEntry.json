@@ -62,7 +62,8 @@
                     "optionJsx.align": "center",
                     "optionJsx.buttons": {
                         "submit": "$opLogin,登录"
-                    }
+                    },
+                    "span":24
                 }
             ]
         ]

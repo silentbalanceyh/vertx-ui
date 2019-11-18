@@ -12,10 +12,10 @@
                 }
             ],
             [
-                "username`c,用户账号,24"
+                "username`c,账号,24"
             ],
             [
-                "realname`c,用户姓名,24"
+                "realname`c,姓名,24"
             ],
             [
                 "mobile`c,手机号,24"

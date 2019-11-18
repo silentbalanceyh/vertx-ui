@@ -1,4 +1,5 @@
 import Cv from "../../constant";
+import Ele from '../../element';
 
 const toGrid = (config = {}) => {
     const {grid = 3} = config;
@@ -62,6 +63,26 @@ const toKey = (key, assist = true) => {
         return `$t_${key.replace(/\./g, '_')}`;
     }
 };
+const toLink = (data = [], $app) => data.map(item => {
+    const path = $app._("path") ? $app._("path") : Cv.Env['ROUTE'];
+    let relatedPath = `${path}${item.uri}`;
+    if (!relatedPath.startsWith('/')) {
+        relatedPath = `/${relatedPath}`;
+    }
+    item.uri = relatedPath;
+    return item;
+});
+const toX = (columns = []) => {
+    let x = 0;
+    columns.forEach(column => {
+        if (column.hasOwnProperty('width')) {
+            x += Ele.valueInt(column.width, 144);
+        } else {
+            x += 200;
+        }
+    });
+    return x;
+};
 export default {
     toHeight,
     toGrid,
@@ -69,4 +90,6 @@ export default {
     /* 根据 CSS_PREFIX 前缀计算的 Class */
     toCss,
     toKey,  // 生成 assist / tabular 相关 key
+    toLink,
+    toX,    // 表格专用列生成
 }

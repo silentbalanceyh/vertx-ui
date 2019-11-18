@@ -43,8 +43,42 @@ const toNamespace = (reference) => {
         }
     }
 };
+
+const COLORS = [
+    "#48aaf7",
+    "#d00036",
+    "#44bc78",
+    "#030f1f",
+    "#e79627",
+    "#7d4ab8",
+    "#70d5fe",
+    "#7077eb"
+];
+const toColor = (current) => {
+    if (undefined === current) {
+        const index = Ux.randomInteger(0, COLORS.length);
+        return COLORS[index];
+    } else {
+        const index = current % COLORS.length;
+        return COLORS[index];
+    }
+};
+/*
+ * 搜索 module 中对应的 ID 信息
+ */
+const toModelId = (reference, field) => {
+    const inited = Ux.ambiguityItem(reference, "$inited");
+    const module = Ux.fromHoc(reference, "module");
+    if (module[field]) {
+        const config = module[field];
+        const modelId = Ux.isEmpty(inited) ? "__DEFAULT__" : inited['modelId'];
+        if (config) return config[modelId];
+    }
+};
 export default {
     toUri,
     toDialog,
     toNamespace,
+    toColor,
+    toModelId
 }

@@ -5,5 +5,5 @@ export default {
 
     control: params => Ux.ajaxPost('/api/ui/control', params),
 
-    ops: params => Ux.ajaxPost('/api/ui/ops', params)
+    ops: params => Ux.ajaxPost('/api/ui/ops', params),
 }

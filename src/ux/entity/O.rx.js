@@ -1,6 +1,7 @@
 import E from '../error';
 import U from 'underscore';
 import Abs from '../abyss';
+import Ut from '../unity';
 
 const rxInit = (reference, params = {}) => {
     const props = reference.props;
@@ -23,12 +24,14 @@ const rxPrefix = (data = {}, prefix = "", order = "sort") => {
         // eslint-disable-next-line
         for (const key in data) {
             if (data.hasOwnProperty(key)) {
-                const newKey = `${prefix}.${key.replace(/\./g, '_')}`
+                const newKey = `${prefix}.${key.replace(/\./g, '_')}`;
                 const value = Abs.clone(data[key]);
                 if (U.isArray(value)) {
-                    normalized[newKey] = value
-                    /* 固定顺序处理 */
-                        .sort((left, right) => left[order] - right[order]);
+                    if (order) {
+                        normalized[newKey] = value.sort(Ut.sorterAscTFn(order));
+                    } else {
+                        normalized[newKey] = value;
+                    }
                 }
             }
         }
@@ -42,33 +45,72 @@ const rxPrefix = (data = {}, prefix = "", order = "sort") => {
  * 1）处理 Tabular
  * 2）多种 Tabular 时，仅按类别分组处理
  */
-const rxDatum = (input, order = 'sort') => {
+const rxDatum = (input, orderField = 'sort', groupField = 'type') => {
     let data = null;
     if (U.isArray(input)) {
         /*
          * 直接修改，data 为数组，按 type 执行 group by
          */
         let $array = Abs.immutable(input);
-        $array = $array.groupBy(item => item.get('type'));
+        $array = $array.groupBy(item => item.get(groupField));
         data = $array.toJS();
     } else {
         data = Abs.clone(input);
     }
-    return rxPrefix(data, 'tabular', order);
+    return rxPrefix(data, 'tabular', orderField);
 };
 const rxAssist = (input, key, order = 'sort') => {
     let data = null;
-    if (!U.isArray(input)) {
+    if (U.isArray(input)) {
+        data = Abs.clone(input);
+    } else {
         if (input.list) {
             data = Abs.clone(input.list);
         } else {
             data = [];
         }
     }
-    return rxPrefix(data, 'assist', order);
+    const response = {};
+    response[key] = data;
+    return rxPrefix(response, 'assist', order);
 };
 export default {
     rxInit,
     rxDatum,
-    rxAssist
+    rxAssist,
+    /*
+     * Ajax 专用方法用于生成 ajax, processor 结构
+     */
+    rjAssist: (key, ajax, sortField = null, merged = true) => {
+        const result = {
+            ajax,
+            processor: data => rxAssist(data, key, sortField)
+        };
+        if (merged) {
+            /*
+             * 用于格式：...处理
+             */
+            const response = {};
+            response[key] = result;
+            return response;
+        } else {
+            /*
+             * 直接返回某个键的结果
+             */
+            return result;
+        }
+    },
+    rjTabular: (ajax, merged = true) => {
+        const result = {
+            ajax,
+            processor: rxDatum,
+        };
+        if (merged) {
+            const response = {};
+            response.tabular = result;
+            return response;
+        } else {
+            return result;
+        }
+    }
 }

@@ -16,6 +16,10 @@ class Component extends React.PureComponent {
         Op.yiInit(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yiUpdate(this, prevProps);
+    }
+
     render() {
         const {config = {}, ...jsx} = this.props;
         const {$data = {}, $tableKey} = this.state;

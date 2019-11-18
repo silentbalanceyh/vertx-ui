@@ -50,6 +50,7 @@ export default {
         const error = fxMessage.apply(this, [null, code].concat(args));
         return {code, error};
     },
+    fxMessage: (code, ...args) => fxMessage.apply(this, [null, code].concat(args)),
     fxFatal: (code, ...args) => {
         const error = fxMessage.apply(this, [null, code].concat(args));
         throw new Error(error);
@@ -64,6 +65,7 @@ export default {
         console.error(message);
         return jsxError(message);
     },
+    jsxError,   // 特殊方法，用于渲染
     /*
      * 直接返回 promise 错误信息
      * Promise
