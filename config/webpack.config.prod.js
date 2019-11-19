@@ -107,13 +107,18 @@ module.exports = {
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
-                loaders: ["babel-loader", "awesome-typescript-loader"],
-                exclude: ["/node_modules/"]
+                use: ["babel-loader", "awesome-typescript-loader"],
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
-                loader: "source-map-loader"
+                use: "source-map-loader",
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
