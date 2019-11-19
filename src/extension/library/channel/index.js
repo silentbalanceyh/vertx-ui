@@ -71,6 +71,11 @@ import yoControl from './yo.control';
  * 3）Search区
  * 4）Extra区
  * 5）Row区
+ * 扩展区域
+ * 1）op.extension.open
+ * 2）op.extension.batch
+ * 3）op.extension.search
+ * 4）op.extension.extra
  */
 import yoAction from './yo.action';
 // -------------- 列表专用 --------------------
@@ -99,7 +104,9 @@ export default {
     // -- 配置
     yoForm,
     yoFilter,
+    // 按钮区域
     yoAction,
+    // -- List处理
     yoList,
 
     // -- 统一方法（渲染相关）

@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Ex from 'ex';
 import Opt from '../options';
+import U from 'underscore';
 import Plugin from '../Web.Plugin';
 import parserOfEvent from './I.state.async.parser';
 
@@ -38,6 +39,32 @@ export default (reference, config = {}) => {
                 button.category = opKey;
                 buttons[opKey] = button;
             });
+        /* 按钮转换处理，扩展 op.extension.generate */
+        const {$op = {}} = reference.props;
+        if (!Ux.isEmpty($op)) {
+            Object.keys(ops)
+                .filter(opKey => !!opKey)
+                .filter(opKey => "string" === typeof opKey)
+                .filter(opKey => opKey.startsWith('op.extension'))
+                .forEach(opKey => {
+                    const op = Ux.clone(ops[opKey]);
+                    /*
+                     * 抽取 region / executor 两个值以处理
+                     * 对应区域的 onClick 事件
+                     */
+                    const {config = {}} = op;
+                    if (config.executor && $op.hasOwnProperty(config.executor)) {
+                        let rxClick = $op[config.executor];
+                        if (U.isFunction(rxClick)) {
+                            rxClick = rxClick(reference);
+                            if (U.isFunction(rxClick)) {
+                                op.onClick = rxClick;
+                                buttons[opKey] = op;
+                            }
+                        }
+                    }
+                });
+        }
         return Ux.promise(buttons);
     })
     /* 按钮配置解析 */.then((buttons = {}) => buttonParser.parsePlugin(buttons, options))

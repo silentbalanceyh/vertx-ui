@@ -1,5 +1,5 @@
 import Ex from "ex";
-
+import yoPhantom from './yo.phantom';
 import Opt from '../options';
 
 const {Order = {}} = Opt;
@@ -35,5 +35,10 @@ export default (reference) => {
             }
         }
     }
+    /*
+     * 挂载 extension 部分
+     */
+    const extension = yoPhantom(reference, "op.open");
+    attrs.config = [].concat(extension).concat(attrs.config);
     return attrs;
 }

@@ -12,6 +12,7 @@ const yoButton = (reference) => {
         type = "default",   // 按钮类型
         plugin = {},        // 插件
         disabled = false,   // 被默认值
+        className,          // 风格处理
     } = config;
     /*
      * 这里的目的是做一件事，主要
@@ -23,7 +24,8 @@ const yoButton = (reference) => {
         type,
         onClick,                    // 最终按钮点击事件
         plugin,                     // 插件直接放置到配置中，不转换
-        disabled
+        disabled,
+        className
     };
 };
 export default {
