@@ -194,6 +194,10 @@ export default ($table = {}, data = [], reference) => {
         if (6 < $table.columns.length) {
             $table.scroll = {};
             $table.scroll.x = 'max-content';  //width + adjust * 2;
+            /*
+             * className 计算
+             *
+             */
         }
     }
 }

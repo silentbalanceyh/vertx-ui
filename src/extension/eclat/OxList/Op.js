@@ -24,6 +24,24 @@ const yiModule = (reference) => {
         });
     }
 };
+const yoQuery = (reference, $config = {}) => {
+    /*
+     * 特殊的 $query 配置
+     */
+    const {$query, ...rest} = $config;
+    const config = Ux.clone(rest);
+    if ($query && config.query) {
+        /*
+         * 合并基础规则
+         */
+        if (!config.query.criteria) {
+            config.query.criteria = {};
+        }
+        Object.assign(config.query.criteria, $query);
+    }
+    return config;
+};
 export default {
-    yiModule
+    yiModule,
+    yoQuery,
 }

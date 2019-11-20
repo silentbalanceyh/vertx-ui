@@ -1,5 +1,4 @@
 import Ux from "ux";
-import {QQuery} from 'entity';
 
 export default (reference) => {
     const {config = {}, value, id} = reference.props;
@@ -16,11 +15,9 @@ export default (reference) => {
              */
             const params = Ux.parseAjax(ref, config.ajax.params);
             /*
-             * 构造 QQuery
+             * 构造
              */
-            const queryRef = new QQuery(params, reference);
-            queryRef.and(values);
-            const request = queryRef.to();
+            const request = Ux.qrCombine(params, reference, values);
             Ux.asyncData(config.ajax, request, ($data = {}) => {
                 /*
                  * 是否命中

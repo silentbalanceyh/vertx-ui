@@ -36,7 +36,7 @@ const qrTerms = (columns = []) => {
     }
     Object.freeze($terms);
     return $terms;
-}
+};
 const qrClear = (reference = {}, state = {}) => {
     let append = state ? state : {};
     Object.assign(append, {$condition: {}});
@@ -47,7 +47,7 @@ const qrClear = (reference = {}, state = {}) => {
     /* 列筛选必须调用 */
         .map(id => `__BTN_CLEAR_${id}`)
         .forEach(id => Ut.connectId(id))
-}
+};
 const qrInput = (cond = [], value) => {
     const condition = {};
     if (value) {

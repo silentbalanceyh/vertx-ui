@@ -1,5 +1,4 @@
 import Ux from "ux";
-import {QQuery} from 'entity';
 
 export default (reference, config = {}) => {
     let defaultQuery = {};
@@ -15,8 +14,7 @@ export default (reference, config = {}) => {
          * */
         if (config.query) {
             // cabQuery 不可以在这个组件中调用，因为该组件和 Cab.json 不绑定
-            const query = new QQuery(config.query, reference);
-            defaultQuery = query.to();
+            defaultQuery = Ux.qrCombine(config.query, reference);
         }
     } else {
         /*

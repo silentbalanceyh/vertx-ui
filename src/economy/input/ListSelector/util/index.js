@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import {QQuery} from 'entity';
 
 const parseParams = (reference, config = {}) => {
     // 必须保证ajax参数信息
@@ -24,9 +23,7 @@ const parseParams = (reference, config = {}) => {
                 /*
                  * 构造新的查询条件
                  */
-                const queryRef = new QQuery(params, reference);
-                queryRef.and($filters);
-                request = queryRef.to();
+                request = Ux.qrCombine(params, reference, $filters);
             }
             Ux.dgDebug(request, "[ Xt ] 自定义组件参数解析");
             return request;

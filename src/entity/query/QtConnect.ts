@@ -2,9 +2,48 @@ import QTreeBranch from "./QTreeBranch";
 import QTreeNode from "./QTreeNode";
 import QTreeLeaf from "./QTreeLeaf";
 
+const searchLeft = (left: QTreeNode, right: QTreeLeaf) => {
+    if (right.deleted()) {
+        if (left instanceof QTreeBranch) {
+            const hitted = left as QTreeBranch;
+            hitted.getNodes().forEach(hittedItem => searchLeft(hittedItem, right));
+        } else {
+            const leaf = left as QTreeLeaf;
+            /*
+             * 只比较条件，不比较值
+             */
+            if (leaf.isSame(right)) {
+                /*
+                 * field,op 部分相等，而值不相等
+                 */
+                leaf.saveNode(right);
+            }
+        }
+    }
+};
+
+const updateTree = (left: QTreeBranch, right: QTreeNode) => {
+    if (right instanceof QTreeBranch) {
+        const hitted = right as QTreeBranch;
+        hitted.getNodes().forEach(hittedItem => updateTree(left, hittedItem));
+    } else {
+        searchLeft(left, right as QTreeLeaf);
+    }
+};
+
 const join = (left: QTreeBranch, right: QTreeBranch,
               isAnd: Boolean = false): QTreeBranch => {
+    /*
+     * 构造新的树处理
+     */
     const branch = new QTreeBranch({"": isAnd});
+    /*
+     * 删除节点的更新
+     */
+    updateTree(left, right);
+    /*
+     * 比较左树和右树
+     */
     if (isAnd) {
         /*
          * left 和 right 使用 AND 连接符

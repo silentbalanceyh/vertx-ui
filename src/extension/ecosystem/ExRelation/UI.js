@@ -2,7 +2,9 @@ import React from 'react';
 import Ex from 'ex';
 import Ux from 'ux';
 import Op from './Op';
+
 import renderHeader from './Web.Header';
+import renderTab from './Web.Tab';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("ExRelation")
@@ -25,6 +27,7 @@ class Component extends React.PureComponent {
             return (
                 <div>
                     {renderHeader(current, header)}
+                    {renderTab(this, tabs)}
                 </div>
             )
         }, Ex.parserOfColor("ExRelation").component())

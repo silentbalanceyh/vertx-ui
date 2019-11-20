@@ -4,10 +4,20 @@
 .web-dialog-fit {
     // 1280 x 1024
     @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
-        .ix-dialog(6px);
+        .ix-dialog(
+                6px,
+                12px 18px,
+                5px 8px,
+                48px
+        );
     }
     // > 1600
     @media (min-width: @screen-xxl) {
-        .ix-dialog(12px);
+        .ix-dialog(
+                12px,
+                16px 24px,
+                10px 12px,
+                56px
+        );
     }
 }

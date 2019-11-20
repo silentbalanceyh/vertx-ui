@@ -10,9 +10,14 @@ import Abs from '../../abyss';
  * @return {*}
  */
 const onDatum = (reference, key) => {
-    const data = Fr.fromDatum(reference, key);
-    const dataArray = (data && data.is()) ? data.to() : [];
-    return U.isArray(dataArray) ? dataArray : [];
+    if (key && "string" === typeof key) {
+        const data = Fr.fromDatum(reference, key);
+        const dataArray = (data && data.is()) ? data.to() : [];
+        return U.isArray(dataArray) ? dataArray : [];
+    } else {
+        console.warn("[ Ux ] 传入的 `key` 值不对", key);
+        return [];
+    }
 };
 const onReference = (reference, current = 0) => {
     let ref = reference;

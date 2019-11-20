@@ -6,7 +6,13 @@
         "name": "名称"
     },
     "_table":{
+        "rowKey":"key",
         "columns":[
+            "sourceCode,上游编号",
+            "sourceName,上游名称",
+            "targetCode,下游编号",
+            "targetName,下游名称",
+            "targetIdentifier,下游模型ID"
         ]
     }
 }

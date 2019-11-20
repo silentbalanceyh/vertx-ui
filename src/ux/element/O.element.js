@@ -126,9 +126,10 @@ const elementBranch = (array = [], leafKey, parentField = "parent") => {
         branch.push(target);
         // 查找父节点
         const pid = obj[parentField];
-        branch = branch.concat(elementBranch(array, pid));
+        branch = [].concat(elementBranch(array, pid, parentField)).concat(branch);
     }
-    return branch.reverse();
+    // console.info(found.map(item => elementUnique(array, "key", item)));
+    return branch;
 };
 /*
  * 该方法只处理已经配置过的

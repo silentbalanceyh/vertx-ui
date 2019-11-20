@@ -1,20 +1,59 @@
 .ex-regiment {
     .row-search {
-        margin-bottom: 8px;
+        margin-bottom: 4px;
+        padding-right: 6px;
+    }
+
+    .row-tag {
+        .tag {
+            padding: 3px 6px;
+            font-size: 14px;
+        }
+    }
+
+    .row-divider {
+        padding-top: 4px;
+        padding-bottom: 4px;
+
+
+        .tag {
+            padding: 3px 6px;
+            font-size: 14px;
+        }
     }
 
     .row-left {
-        padding-right: 8px;
         max-height: 500px;
         overflow: auto;
+    }
 
-        .ant-card-body {
-            padding: 6px !important;
+    .regiment-table {
+        min-height: 240px;
+
+        .ant-table-placeholder {
+            border-bottom: none !important;
         }
 
-        .row-item {
-            width: 100%;
-            margin-bottom: 12px;
+        .row-remove {
+            width: 64px;
+            text-align: center;
+            padding: 3px 6px !important;
+        }
+
+        .ant-pagination {
+            margin: 6px !important;
+        }
+
+        table {
+            thead > tr > th {
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
+
+            tbody > tr > td {
+                padding-top: 6px;
+                padding-bottom: 6px;
+            }
         }
     }
 }

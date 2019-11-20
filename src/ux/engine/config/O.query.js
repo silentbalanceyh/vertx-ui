@@ -1,4 +1,4 @@
-import {QQuery} from 'entity';
+import Q from '../query';
 
 const cabQuery = (reference, key = "grid") => {
     const {$hoc} = reference.state;
@@ -8,8 +8,7 @@ const cabQuery = (reference, key = "grid") => {
             /*
              * 构造 $query
              */
-            const queryRef = new QQuery(config.query, reference);
-            return queryRef.to();
+            return Q.qrCombine(config.query, reference);
         }
     }
 };

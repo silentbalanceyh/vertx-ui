@@ -28,7 +28,7 @@
     height: 38px !important;
 }
 
-.ix-table(@cell, @empty, @adjust) {
+.ix-table(@cell, @empty) {
     // 普通 <Table/>
     table {
         thead > tr > th {
@@ -39,10 +39,6 @@
         tbody > tr > td {
             padding-top: @cell;
             padding-bottom: @cell;
-        }
-
-        tbody > tr:last-child > td {
-            padding-bottom: @adjust;
         }
     }
     .ant-empty {
@@ -70,10 +66,29 @@
     .ix-form-row.each(@rowHeight, 24);
 }
 
-.ix-dialog(@bodyPadding) {
+.ix-dialog(@bodyPadding, @headerPadding, @footerPadding, @close) {
     .ant-modal {
         &-body {
             padding: @bodyPadding !important;
+        }
+
+        &-header {
+            padding: @headerPadding !important;
+        }
+
+        &-close {
+            width: @close !important;
+            height: @close !important;
+
+            &-x {
+                width: @close !important;
+                height: @close !important;
+                line-height: @close !important;
+            }
+        }
+
+        &-footer {
+            padding: @footerPadding !important;
         }
     }
 }
