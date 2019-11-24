@@ -5,7 +5,13 @@ import mapIterator from './I.ai.fn.iterator';
 /**
  * 顺序：key, text, connectId, type, icon
  */
-const aiExprButton = (buttons = [], props = {}) => _aiExprButton(buttons, props);
+const aiExprButton = (literal, props = {}) => {
+    let button = Parser.parseItem(literal, "button");
+    button = Apply.applyConnect(button);
+    button = Apply.applyLoading(button, props);
+    return button;
+};
+const aiExprButtons = (buttons = [], props = {}) => _aiExprButton(buttons, props);
 // const aiExprDirect = (buttons = [], props = {}) => _aiExprButton(buttons, props, "direct");
 const _aiExprButton = (buttons = [], props = {}, key = "button") =>
     mapIterator(buttons, (values = []) => Parser.parseItem(values, key))
@@ -34,6 +40,7 @@ const aiExprOp = (button = "") => {
 const aiExprAction = (popover = "") => Parser.parseItem(popover, "action");
 
 export default {
+    aiExprButtons,
     aiExprButton,
     aiExprOp,
     aiExprAction,   // Web 组件中需要使用，不可缺

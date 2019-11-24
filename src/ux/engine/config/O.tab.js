@@ -48,7 +48,7 @@ const configTab = (reference, config = {}) => {
      * tabBarExtraContent解析（和PageCard中类似）， 构造 tabBarExtraContent 的 render 函数
      */
     if (U.isArray(tabs.tabBarExtraContent)) {
-        const content = R.aiExprButton(tabs.tabBarExtraContent, reference.props);
+        const content = R.aiExprButtons(tabs.tabBarExtraContent, reference.props);
         /*
          * 无状态解析
          */
@@ -77,7 +77,7 @@ const configTab = (reference, config = {}) => {
          */
         const normalized = {};
         Abs.itObject(tabs.tabBarExtraContent, (field, value) =>
-            normalized[field] = R.aiExprButton(value, reference.props));
+            normalized[field] = R.aiExprButtons(value, reference.props));
         tabs.activeKey = tabs.defaultActiveKey;
         tabs.fnExtra = () => {
             /*

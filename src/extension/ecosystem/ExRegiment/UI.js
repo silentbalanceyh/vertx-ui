@@ -7,10 +7,11 @@ import './Cab.less';
 import Ux from 'ux';
 import ExArbor from '../ExArbor/UI';
 
+@Ux.zero(Ux.rxEtat(require('./Cab'))
+    .cab("ExRegiment")
+    .to()
+)
 class Component extends React.PureComponent {
-    state = {
-        $ready: false
-    };
 
     componentDidMount() {
         Op.yiPage(this);
@@ -29,7 +30,7 @@ class Component extends React.PureComponent {
                 /* 选择后的操作 */
                 $submit = {},
                 /* 数据、加载 */
-                $loading = false, $selected = [],
+                $loading = false,
                 /* 左边树，搜索框，表格 */
                 $category = {}, $search = {}, $table = {},
                 /* 选中项 */
@@ -37,7 +38,8 @@ class Component extends React.PureComponent {
                 /* 和category 相关的选中 */
                 $clean
             } = this.state;
-            const dataSource = Op.yoData(this);
+            const dataSource = Event.yoUnSelected(this);
+            const selectedSource = Event.yoSelected(this);
             Ux.configScroll($table, dataSource, this);
             /*
              * 选择列表和清单
@@ -52,7 +54,7 @@ class Component extends React.PureComponent {
                         </Col>
                         <Col span={20} className={"row-tag"}>
                             {$clean ? (
-                                <Tag color={"volcano"} closable={true}
+                                <Tag color={"volcano"} closable
                                      visible={!Ux.isEmpty($clean)} className={"tag"}
                                      onClose={Event.onClean(this, $clean.query)}>
                                     {$clean.label}
@@ -76,7 +78,7 @@ class Component extends React.PureComponent {
                                 </Tag>
                             </div>
                             <Table {...$tabulation}
-                                   dataSource={$selected}/>
+                                   dataSource={selectedSource}/>
                         </Col>
                     </Row>
                     {Ux.aiButton(this, $submit)}

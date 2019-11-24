@@ -5,6 +5,7 @@ import onRemove from './onRemove';
 import onRefresh from './onRefresh';
 import onSelect from './onSelect';
 import onClean from './onClean';
+import data from './O.data';
 
 export default {
     onSearch,
@@ -13,5 +14,6 @@ export default {
     onRemove,
     onRefresh,
     onSelect,
-    onClean
+    onClean,
+    ...data,
 }

@@ -71,12 +71,12 @@ const aiExprField = (literal = "") => applyField(Parser.parseItem(literal, "fiel
 const aiExprFieldEx = (item = {}) => {
     if (item.metadata) {
         const {metadata, ...rest} = item;
-        const basic = Parser.parseItem(metadata, "field");
+        const basic = "string" === typeof metadata ? aiExprField(metadata) : {};
         const options = Value.valueLadder(rest);
         // 属性追加（不覆盖）
-        const result = Abs.assign(basic, options, 1);
-        applyField(result);
-        item = result;
+        const final = Abs.assign(basic, options, 1);
+        applyField(final);
+        item = final;
     } else if (item.field) {
         // 没有副作用的解析，让result也支持
         const result = Value.valueLadder(item);

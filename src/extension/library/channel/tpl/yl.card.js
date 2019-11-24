@@ -1,4 +1,4 @@
-import yoRender from '../yo.render';
+import yoRender from '../yo/yo.render';
 import React from "react";
 import {LoadingAlert, PageCard} from 'web';
 import U from 'underscore';

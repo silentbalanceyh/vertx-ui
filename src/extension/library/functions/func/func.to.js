@@ -67,7 +67,7 @@ const toColor = (current) => {
  * 搜索 module 中对应的 ID 信息
  */
 const toModelId = (reference, field) => {
-    const inited = Ux.ambiguityItem(reference, "$inited");
+    const inited = Ux.ambiguityObject(reference, "$inited");
     const module = Ux.fromHoc(reference, "module");
     if (module[field]) {
         const config = module[field];

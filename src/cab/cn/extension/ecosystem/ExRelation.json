@@ -5,14 +5,95 @@
         "code": "编号",
         "name": "名称"
     },
-    "_table":{
-        "rowKey":"key",
-        "columns":[
-            "sourceCode,上游编号",
-            "sourceName,上游名称",
-            "targetCode,下游编号",
-            "targetName,下游名称",
-            "targetIdentifier,下游模型ID"
+    "_table": {
+        "rowKey": "key",
+        "columns": [
+            "targetCode,编号",
+            "targetName,名称",
+            "targetIdentifier,模型ID"
         ]
+    },
+    "_op": {
+        "dialog": "添加关系,添加,关闭,false,960,true,$opAddRel",
+        "button": "opShowRel,添加关系,primary,plus"
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "defaultActiveKey": "tabField",
+                    "items": "选择配置项,tabField",
+                    "tabBarExtraContent": {
+                        "tabField": [
+                            "$opAddCi,添加关联项,$opShowCi,primary,plus"
+                        ]
+                    },
+                    "pages": {
+                        "tabField": {
+                            "ui": [
+                                [
+                                    {
+                                        "metadata": "items,,24,,aiDialogEditor",
+                                        "optionJsx.config": {
+                                            "form": "FormCI",
+                                            "dialog": "选择配置项,保存,关闭,false,900,true,$opSaveCi",
+                                            "op": {
+                                                "add": "$opShowCi"
+                                            },
+                                            "table": {
+                                                "columns": [
+                                                    {
+                                                        "title": "操作",
+                                                        "dataIndex": "key",
+                                                        "fixed": "left",
+                                                        "$render": "EXECUTOR",
+                                                        "width": 100,
+                                                        "$option": [
+                                                            {
+                                                                "text": "删除",
+                                                                "executor": "fnDelete",
+                                                                "confirm": "确认删除已选配置项？"
+                                                            }
+                                                        ]
+                                                    },
+                                                    "uiName,配置项名称",
+                                                    "ciCode,配置项编号",
+                                                    "uiCategory,配置项类型",
+                                                    "ciIdentifier,模型ID"
+                                                ]
+                                            }
+                                        }
+                                    }
+                                ]
+                            ]
+                        }
+                    },
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAddRel,保存,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+        ],
+        "op": {
+            "$opAddRel": "act.circle.save"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，您的关系信息已成功保存！"
+        }
     }
 }

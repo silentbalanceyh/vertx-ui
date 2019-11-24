@@ -78,7 +78,17 @@ const yoTabs = (reference) => {
         return tabs;
     }
 };
+const $opAddRel = (reference) => (params = {}) => {
+
+};
+const rxSaveCi = (reference) => (params = {}) => {
+    console.info(params);
+};
 export default {
     yiPage,
     yoTabs,
+    rxSaveCi,
+    actions: {
+        $opAddRel
+    }
 }

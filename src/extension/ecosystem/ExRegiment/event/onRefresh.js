@@ -9,7 +9,7 @@ export default (reference) => {
      * 进入 loading 环节
      */
     reference.setState({$loading: true});
-    const {config = {}} = reference.props;
+    const {config = {}} = reference.state;
     const ajax = config.ajax;
     if (ajax) {
         /*

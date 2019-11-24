@@ -3,7 +3,11 @@ import Ux from 'ux';
 import renderOp from './Web.Op';
 
 const yiPage = (reference) => {
-    const {config = {}} = reference.props;
+    const {config = {}, $selected = []} = reference.props;
+    const configuration = Ux.fromHoc(reference, "regiment");
+    if (!Ux.isEmpty(config)) {
+        Object.assign(configuration, config);
+    }
     /*
      * 三个组件的专用配置处理
      */
@@ -11,7 +15,7 @@ const yiPage = (reference) => {
         search = {}, ajax = {},
         table = {}, divider = {},
         submit = {}, category = {}
-    } = config;
+    } = configuration;
     const $search = {};
     {
         /*
@@ -61,8 +65,8 @@ const yiPage = (reference) => {
             /*
              * $tabulation 需要追加: 删除选项额按钮
              */
-            if (config.remove) {
-                $tabulation.columns = [renderOp(reference, config.remove)]
+            if (configuration.remove) {
+                $tabulation.columns = [renderOp(reference, configuration.remove)]
                     .concat($tabulation.columns);
             }
             if (!Ux.isEmpty(divider)) {
@@ -104,7 +108,9 @@ const yiPage = (reference) => {
         $table, $search, $query, $path,
         $tabulation, $divider,
         $category,
-        $submit, $ready: true
+        $submit, $ready: true,
+        config: configuration,
+        $selected
     };
     reference.setState(state);
 };
@@ -115,14 +121,7 @@ const yuPage = (reference, virtualRef = {}) => {
         Event.onRefresh(reference);
     }
 };
-const yoData = (reference) => {
-    const {$data = [], $selected = []} =
-        reference.state ? reference.state : {};
-    const $keys = Ux.immutable($selected.map(each => each.key));
-    return $data.filter(each => !$keys.contains(each.key));
-};
 export default {
     yiPage,
-    yuPage,
-    yoData
+    yuPage
 }

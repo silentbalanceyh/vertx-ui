@@ -10,8 +10,13 @@ import Xui from './xui';
  */
 import ox from './annotation/ox';
 import Evt from './event';
+import Sex from './romantic';
 
 const exported = {
+    /*
+     * 新的Api处理
+     */
+    ...Sex,
     /*
      * 外置绑定，执行单个 fabric
      * et类的事件方法集合

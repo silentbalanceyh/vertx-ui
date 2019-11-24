@@ -16,7 +16,7 @@ const yiPage = (reference) => {
         })
 };
 const yiHistory = (reference) => {
-    const $inited = Ux.ambiguityItem(reference, "$inited");
+    const $inited = Ux.ambiguityObject(reference, "$inited");
     const {activity = {}} = $inited;
     const module = activity['modelId'];
     const state = {};

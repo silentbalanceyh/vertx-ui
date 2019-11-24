@@ -1,6 +1,8 @@
 import React from 'react';
 import {Col, Row, Table, Tabs} from 'antd';
 import Ux from 'ux';
+import Ex from "ex";
+import RelForm from './UI.Selector';
 
 const renderPage = (reference, data) => {
     const table = Ux.fromHoc(reference, "table");
@@ -9,12 +11,22 @@ const renderPage = (reference, data) => {
     $table.pagination = false;
     $table.className = "web-table ex-relation-table";
     const {config = {}} = reference.props;
+    /*
+     * 窗口配置
+     */
     return (
-        <div>
+        <div className={"ex-relation-body"}>
             {config.editable ? (
                 <Row>
-                    <Col span={24}>
-                        操作按钮
+                    <Col span={24} className={"row-op"}>
+                        {Ux.sexModal(reference, "op", () => {
+                            const inherit = Ex.yoAmbient(reference);
+                            inherit.$mode = Ux.Env.FORM_MODE.ADD;
+                            inherit.rxClose = Ex.rsVisible(reference, false);
+                            return (
+                                <RelForm {...inherit}/>
+                            )
+                        })}
                     </Col>
                 </Row>
             ) : false}

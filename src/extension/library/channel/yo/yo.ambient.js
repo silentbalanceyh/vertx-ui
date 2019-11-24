@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import Fn from '../functions';
+import Fn from '../../functions';
 import U from 'underscore';
 
 const _seekState = (uniform = {}, reference, key) => {

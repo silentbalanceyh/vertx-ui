@@ -20,11 +20,13 @@ const initialize = (reference) => {
     const state = initState(reference);
     if (!reference.state && 0 === Object.keys(state).length) {
         const content = Ux.E.fxError(10090, "$dialog");
-        console.error(content);
         reference.setState({error: content.error});
     } else {
-        state.$ready = true;
-        reference.setState(state);
+        const {$ready = false} = reference.state;
+        if (!$ready) {
+            state.$ready = true;
+            reference.setState(state);
+        }
     }
 };
 

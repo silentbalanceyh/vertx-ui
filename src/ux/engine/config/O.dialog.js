@@ -1,16 +1,23 @@
 import R from '../expression';
 import Ut from '../../unity';
+import Ele from '../../element';
 import U from 'underscore';
 import Abs from '../../abyss';
-
+import Ux from "ux";
+/*
+ * 标准窗口的配置流程，以后全部走标准配置流程处理
+ */
 const configDialog = (reference, config = {}) => {
     const $dialog = R.aiExprWindow(config);
     /*
+     * 使用解析结果来拷贝
+     */
+    const $config = Ux.clone($dialog);
+    /*
      * onOk按钮
      */
-    if ("string" === typeof $dialog.onOk) {
-        const id = $dialog.onOk;
-        $dialog.onOk = () => Ut.connectId(id);
+    if ("string" === typeof $config.onOk) {
+        $dialog.onOk = () => Ut.connectId($config.onOk);
     }
     /*
      * onCancel按钮
@@ -18,6 +25,17 @@ const configDialog = (reference, config = {}) => {
     $dialog.onCancel = () => reference.setState({$visible: false});
     $dialog.destroyOnClose = true;
     $dialog.maskClosable = false;
+    $dialog.className = "web-dialog";   // 默认窗口风格
+    /*
+     * 防重复提交
+     */
+    const {$visible = false} = reference.state;
+    const $submitting = Ele.ambiguityValue(reference, "$submitting");
+    $dialog.visible = $visible;
+    $dialog.confirmLoading = $submitting;
+    $dialog.cancelButtonProps = {
+        loading: $submitting
+    };
     return $dialog;
 };
 /*

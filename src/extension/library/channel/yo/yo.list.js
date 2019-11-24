@@ -1,5 +1,5 @@
 import yoAmbient from './yo.ambient';
-import Fn from '../functions';
+import Fn from '../../functions';
 import Ux from 'ux';
 /*
  * List 必须传入的配置

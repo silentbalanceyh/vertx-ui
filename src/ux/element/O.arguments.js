@@ -1,5 +1,6 @@
 import U from "underscore";
 import {DataObject} from 'entity';
+import Abs from '../abyss';
 
 const ambiguityArray = (...args) => {
     let ref = null;
@@ -90,20 +91,25 @@ const ambiguityFind = (props = {}, key, name) => {
 /*
  * 默认执行二义性合并
  */
-const ambiguityItem = (reference = {}, name, merged = false) => {
-    const {props, state = {}} = reference;
+const ambiguityObject = (reference = {}, name, merged = false) => {
+    const extracted = ambiguityValue(reference, name);
     let values = {};
-    if (props[name]) {
-        Object.assign(values, props[name]);
-    }
-    if (state[name]) {
+    if (Abs.isObject(extracted)) {
         if (merged) {
-            Object.assign(values, state[name]);
+            Object.assign(values, extracted);
         } else {
-            values = state[name];
+            values = extracted;
         }
     }
     return values;
+};
+const ambiguityValue = (reference = {}, name) => {
+    const {props = {}, state = {}} = reference;
+    if (undefined !== props[name]) {
+        return props[name];
+    } else {
+        return state[name];
+    }
 };
 export default {
     /*
@@ -128,12 +134,22 @@ export default {
     ambiguityEvent,
     /*
      * 二义性路径检索
+     * 1. 直接读取 props 中，或者 state 中的 key 相关数据
+     * 2. 如果读取的数据是 DataObject，则调用 _(name) 读取数据
+     * 3. 如果是 Object （非数组），则直接读取 obj[name] 的值
      */
     ambiguityFind,
     /*
      * 二义性读取 对应变量信息
-     * 1）优先读取 props 中的
-     * 2）然后读取 state 中的
+     * 1. 这个方法内置可调用 ambiguityValue
+     * 2. 直接提取 props / state 中的name属性
+     * 3. 只有 object 类型的数据会返回，否则会返回 {}
      */
-    ambiguityItem,
+    ambiguityObject,
+    /*
+     * 二义性检索 对应变量信息
+     * 1. 这个方法和 ambiguityObject 唯一不同的是，该方法可返回所有类型值
+     * 2. 并且只有 undefined 不会返回
+     */
+    ambiguityValue,
 }
