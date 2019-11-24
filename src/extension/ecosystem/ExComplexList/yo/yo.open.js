@@ -40,6 +40,5 @@ export default (reference) => {
      */
     const extension = yoPhantom(reference, "op.open");
     attrs.config = [].concat(extension).concat(attrs.config);
-    console.info(attrs);
     return attrs;
 }

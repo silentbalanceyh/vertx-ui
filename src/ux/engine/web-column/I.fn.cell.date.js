@@ -20,7 +20,7 @@ export default (reference, config) => {
         /*
          * 2.格式化
          */
-        if (normalizedText) {
+        if (normalizedText && text) {
             normalizedText = Ut.formatDate(normalizedText, config['$format']);
         }
         return Cmn.jsxSpan(attrs, normalizedText);

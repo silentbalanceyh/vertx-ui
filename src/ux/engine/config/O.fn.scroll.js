@@ -196,8 +196,13 @@ export default ($table = {}, data = [], reference) => {
             $table.scroll.x = 'max-content';  //width + adjust * 2;
             /*
              * className 计算
-             *
              */
+            let className = $table.className;
+            if (!className) {
+                className = "";
+            }
+            className = `${className} web-table-adjust`;
+            $table.className = className;
         }
     }
 }

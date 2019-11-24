@@ -1,6 +1,7 @@
 import {DataArray, DataObject} from "entity";
 import Immutable from "immutable";
 import U from "underscore";
+import Reg from './O.is.regexp';
 
 const isDiff = (left, right) => {
     const leftValue = (left instanceof DataObject ||
@@ -35,11 +36,10 @@ const isIn = (input, array = []) => {
         return $array.contains(input);
     } else return false;
 };
-const isCn = (input) => /.*[\u4e00-\u9fa5]+.*$/.test(input);
 export default {
-    isObject,
-    isEmpty,
-    isDiff,
-    isIn,
-    isCn,
+    isObject,   /* 验证合法的对象 */
+    isEmpty,    /* Object 是否 Empty，支持数组 */
+    isDiff,     /* 两个 Object 是否不同 */
+    isIn,       /* input 是否存在于 Array 中 */
+    ...Reg,     /* 正则表达式验证专用库 */
 }
