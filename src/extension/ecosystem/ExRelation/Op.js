@@ -82,7 +82,7 @@ const $opAddRel = (reference) => (params = {}) => {
 
 };
 const rxSaveCi = (reference) => (params = {}) => {
-    console.info(params);
+
 };
 export default {
     yiPage,

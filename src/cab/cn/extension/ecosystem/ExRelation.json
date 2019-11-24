@@ -8,9 +8,11 @@
     "_table": {
         "rowKey": "key",
         "columns": [
-            "targetCode,编号",
-            "targetName,名称",
-            "targetIdentifier,模型ID"
+            "sourceCode,上游编号",
+            "sourceName,上游名称",
+            "targetCode,下游编号",
+            "targetName,下游名称",
+            "targetIdentifier,下游模型ID"
         ]
     },
     "_op": {
