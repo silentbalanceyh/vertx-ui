@@ -1,6 +1,8 @@
 import {QQuery} from 'entity';
 import Abs from '../../abyss';
-
+/*
+ * 直接合并条件处理
+ */
 export default (query = {}, reference, ...condition) => {
     /*
      * 查询条件初始化

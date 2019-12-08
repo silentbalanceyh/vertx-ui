@@ -2,23 +2,37 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
 import {ExRelation} from "ei";
+import Op from './Op';
 
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Op.yiRelation(this);
+    }
+
     render() {
-        const {config = {}, $inited = {}} = this.props;
-        const {category = {}, ...rest} = config;
-        /*
-         * 底层需要
-         */
-        const attrs = Ex.configRelation($inited, {category}, this);
-        attrs.config = Ux.clone(rest);
-        /*
-         * 继承属性
-         */
-        const inherit = Ex.yoAmbient(this);
-        return (
-            <ExRelation {...inherit} {...attrs}/>
-        );
+        return Ex.yoRender(this, () => {
+            const {config = {}, $inited = {}} = this.props;
+            const {category = {}, ...rest} = config;
+            /*
+             * 底层需要
+             */
+            const {$definition = false} = this.state;
+            const attrs = Ex.configRelation($inited, {category}, this);
+            attrs.config = Ux.clone(rest);
+            /*
+             * 继承属性
+             */
+            const inherit = Ex.yoAmbient(this);
+            if ($definition) {
+                /*
+                 * 读取关系定义数据
+                 */
+                inherit.$definition = $definition;
+            }
+            return (
+                <ExRelation {...inherit} {...attrs}/>
+            );
+        }, Ex.parserOfColor("OxTab").component())
     }
 }
 

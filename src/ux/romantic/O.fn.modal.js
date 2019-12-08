@@ -21,8 +21,7 @@ export default (reference, key, fnRender) => {
             /*
              * Dialog
              */
-            const dialog = R.configDialog(reference, config.dialog);
-            configuration.$dialog = dialog;
+            configuration.$dialog = R.configDialog(reference, config.dialog);
             /*
              * Button
              */

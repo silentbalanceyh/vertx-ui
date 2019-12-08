@@ -34,16 +34,24 @@ class Component extends React.PureComponent {
                 /* 左边树，搜索框，表格 */
                 $category = {}, $search = {}, $table = {},
                 /* 选中项 */
-                $divider = {}, $tabulation = {},
+                $divider = {}, $tabulation = {}, $selected = [],
                 /* 和category 相关的选中 */
                 $clean
             } = this.state;
             const dataSource = Event.yoUnSelected(this);
-            const selectedSource = Event.yoSelected(this);
             Ux.configScroll($table, dataSource, this);
             /*
              * 选择列表和清单
              */
+            const {$isCategory = true} = this.props;
+            const divide = {};
+            if ($isCategory) {
+                divide.left = 4;
+                divide.right = 20;
+            } else {
+                divide.left = 0;
+                divide.right = 24;
+            }
             return (
                 <div className={"ex-regiment"}>
                     <Row>
@@ -63,12 +71,12 @@ class Component extends React.PureComponent {
                         </Col>
                     </Row>
                     <Row>
-                        <Col span={4}>
+                        <Col span={divide.left}>
                             <div className={"row-left"}>
                                 <ExArbor {...$category}/>
                             </div>
                         </Col>
-                        <Col span={20}>
+                        <Col span={divide.right}>
                             <Table {...$table} loading={$loading}
                                    dataSource={dataSource}/>
                             <div className={"row-divider"}>
@@ -78,7 +86,7 @@ class Component extends React.PureComponent {
                                 </Tag>
                             </div>
                             <Table {...$tabulation}
-                                   dataSource={selectedSource}/>
+                                   dataSource={$selected}/>
                         </Col>
                     </Row>
                     {Ux.aiButton(this, $submit)}

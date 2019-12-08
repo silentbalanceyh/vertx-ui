@@ -18,18 +18,15 @@
                 "code`c,编号,24"
             ],
             [
-                "managerName`c,部门经理,24"
-            ],
-            [
                 {
                     "metadata": "companyId`=,所属公司,24,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name"
                 }
             ],
             [
                 {
                     "metadata": "deptId`=,上级部门,24,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.depts,value=key,label=name"
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
                 }
             ],
             [

@@ -5,6 +5,8 @@ import employee from './employee';
 import datum from './datum';
 import ui from './ui';
 import todo from './todo';
+import job from './job';
+import relation from './relation';
 
 export default {
     ...application,
@@ -14,4 +16,6 @@ export default {
     ...datum,
     ...ui,
     ...todo,
+    ...job,
+    ...relation
 }

@@ -12,10 +12,19 @@
                 }
             ],
             [
-                "workNumber`c,编号,24"
+                "viceName`c,员工姓名,24"
             ],
             [
-                "workTitle`c,职务,24"
+                "workNumber`c,工号,24"
+            ],
+            [
+                "workTitle`c,头衔,24"
+            ],
+            [
+                "viceMobile`c,手机号,24"
+            ],
+            [
+                "viceEmail`c,邮箱,24"
             ],
             [
                 {

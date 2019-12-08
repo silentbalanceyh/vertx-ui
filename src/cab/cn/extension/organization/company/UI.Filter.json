@@ -12,10 +12,16 @@
                 }
             ],
             [
-                "title`c,标题,24"
+                "name`c,公司名称,24"
             ],
             [
-                "name`c,名称,24"
+                "code`c,系统编号,24"
+            ],
+            [
+                "corporationName`c,法人,24"
+            ],
+            [
+                "corporationPhone`c,法人手机,24"
             ],
             [
                 {

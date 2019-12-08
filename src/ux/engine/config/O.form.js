@@ -237,8 +237,13 @@ const configForm = (form, addOn = {}) => {
             if (cell.complex) {
                 /*
                  * 子表单模式（用于静态扩展专用）
+                 * 1）key 会发生变化
+                 * 2）span 默认为 24
                  */
                 column.col.key = `${cell.name}-${rowIndex}-${cellIndex}`;
+                if (!cell.hasOwnProperty('span')) {
+                    column.col.span = 24;
+                }
                 const render = Raft.raftContainer(cell, Abs.clone(params), configForm);
                 if (render) {
                     column.render = render;

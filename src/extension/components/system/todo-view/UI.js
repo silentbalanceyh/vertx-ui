@@ -30,10 +30,6 @@ class Component extends React.PureComponent {
             const tabs = Ux.fromHoc(this, "tabs");
             const rAttrs = Op.yoRecord(this);
             const relAttrs = Op.yoRelation(this);
-            console.info({
-                ...inherit,
-                ...relAttrs
-            });
             return (
                 <div>
                     <ExForm {...formData} $height={"300px"}

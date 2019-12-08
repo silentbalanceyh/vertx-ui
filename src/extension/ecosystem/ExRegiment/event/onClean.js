@@ -1,9 +1,14 @@
 import Ux from 'ux';
+import T from './O.data';
 
-export default (reference, $query = {}) => (event) => {
+export default (reference, original = {}) => (event) => {
     Ux.prevent(event);
     const state = {};
     state.$clean = undefined;
-    state.$query = $query;
+    /*
+     * 重设成默认的 $query
+     */
+    const {config = {}} = reference.state;
+    state.$query = T.yoQuery(reference, config);
     reference.setState(state);
 }

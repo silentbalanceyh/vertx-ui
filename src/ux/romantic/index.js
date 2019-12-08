@@ -1,5 +1,6 @@
 import sexCab from './O.fn.cab';
 import sexModal from './O.fn.modal';
+import sexTable from './O.fn.table';
 
 export default {
     /*
@@ -16,5 +17,7 @@ export default {
      *     "button": ""
      * }
      */
-    sexModal
+    sexModal,
+
+    sexTable,
 }

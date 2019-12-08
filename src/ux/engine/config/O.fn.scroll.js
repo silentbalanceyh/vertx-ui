@@ -187,7 +187,7 @@ export default ($table = {}, data = [], reference) => {
     if (!$table.scroll) {
         Dev.dgDebug({
             width, adjust, report, columns: $table.columns.length
-        }, "[ Ux ] Scroll滚动条宽度计算结果：", "#00CED1");
+        }, "[ Ux ] Scroll滚动条宽度计算结果：", "#436EEE");
         /*
          * 基础计算：必须是超过6列才执行
          */

@@ -75,153 +75,155 @@
                 {
                     "complex": true,
                     "name": "FieldContainer",
-                    "defaultActiveKey": "tabField",
-                    "items": "字段设置,tabField;键设置,tabKey",
-                    "tabBarExtraContent": {
-                        "tabField": [
-                            "$opAddField,添加字段,$opShowField,primary,plus"
-                        ],
-                        "tabKey": [
-                            "$opAddKey,添加键,$opShowKey,primary,plus"
-                        ]
-                    },
-                    "pages": {
-                        "tabField": {
-                            "ui": [
-                                [
-                                    {
-                                        "metadata": "fields,,24,,aiDialogEditor",
-                                        "optionJsx.config": {
-                                            "form": "FormField",
-                                            "dialog": "字段设置,保存,关闭,false,800,true,$opSaveField",
-                                            "op": {
-                                                "add": "$opShowField"
-                                            },
-                                            "table": {
-                                                "columns": [
-                                                    {
-                                                        "title": "操作",
-                                                        "dataIndex": "key",
-                                                        "fixed": "left",
-                                                        "$render": "EXECUTOR",
-                                                        "$option": [
-                                                            {
-                                                                "text": "编辑",
-                                                                "executor": "fnEdit"
-                                                            },
-                                                            "divider",
-                                                            {
-                                                                "text": "删除",
-                                                                "executor": "fnDelete",
-                                                                "confirm": "确认删除选择的实体记录？"
-                                                            }
-                                                        ]
-                                                    },
-                                                    "name,字段名",
-                                                    {
-                                                        "metadata": "type,字段类型,MAPPING",
-                                                        "$mapping": {
-                                                            "java`lang`String": "字符串",
-                                                            "java`lang`Integer": "整数",
-                                                            "java`lang`Long": "长整数",
-                                                            "java`lang`Boolean": "布尔值",
-                                                            "java`math`BigDecimal": "浮点数",
-                                                            "java`time`LocalTime": "时间格式"
-                                                        }
-                                                    },
-                                                    "columnName,数据库列名",
-                                                    {
-                                                        "metadata": "columnType,数据库类型,MAPPING",
-                                                        "$mapping": {
-                                                            "STRING1": "字符串",
-                                                            "STRING2": "长文本",
-                                                            "INT": "整数",
-                                                            "LONG": "长整数",
-                                                            "BOOLEAN": "布尔值",
-                                                            "DECIMAL": "精度浮点数",
-                                                            "DATE1": "日期格式",
-                                                            "DATE2": "日期/时间格式",
-                                                            "DATE3": "时间戳",
-                                                            "DATE4": "时间格式",
-                                                            "JSON": "JSON格式",
-                                                            "XML": "XML格式",
-                                                            "SCRIPT": "扩展脚本",
-                                                            "BINARY": "二进制"
-                                                        }
-                                                    },
-                                                    {
-                                                        "metadata": "primary,主键？,LOGICAL",
-                                                        "$mapping": {
-                                                            "true": "是",
-                                                            "false": "否"
-                                                        }
-                                                    },
-                                                    {
-                                                        "metadata": "nullable,可为空？,LOGICAL",
-                                                        "$mapping": {
-                                                            "true": "是",
-                                                            "false": "否"
-                                                        }
-                                                    },
-                                                    "length,长度",
-                                                    "precision,精度",
-                                                    "format,时间格式"
-                                                ]
-                                            }
-                                        }
-                                    }
-                                ]
+                    "config": {
+                        "activeKey": "tabField",
+                        "items": "字段设置,tabField;键设置,tabKey",
+                        "tabBarExtraContent": {
+                            "tabField": [
+                                "$opAddField,添加字段,$opShowField,primary,plus"
+                            ],
+                            "tabKey": [
+                                "$opAddKey,添加键,$opShowKey,primary,plus"
                             ]
                         },
-                        "tabKey": {
-                            "ui": [
-                                [
-                                    {
-                                        "metadata": "keys,,24,,aiDialogEditor",
-                                        "optionJsx.config": {
-                                            "form": "FormKey",
-                                            "dialog": "键设置,保存,关闭,false,640,true,$opSaveKey",
-                                            "op": {
-                                                "add": "$opShowKey"
-                                            },
-                                            "table": {
-                                                "columns": [
-                                                    {
-                                                        "title": "操作",
-                                                        "dataIndex": "key",
-                                                        "fixed": "left",
-                                                        "$render": "EXECUTOR",
-                                                        "$option": [
-                                                            {
-                                                                "text": "编辑",
-                                                                "executor": "fnEdit"
-                                                            },
-                                                            "divider",
-                                                            {
-                                                                "text": "删除",
-                                                                "executor": "fnDelete",
-                                                                "confirm": "确认删除选择的实体记录？"
+                        "pages": {
+                            "tabField": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "fields,,24,,aiDialogEditor",
+                                            "optionJsx.config": {
+                                                "form": "FormField",
+                                                "dialog": "字段设置,保存,关闭,false,800,true,$opSaveField",
+                                                "op": {
+                                                    "add": "$opShowField"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "操作",
+                                                            "dataIndex": "key",
+                                                            "fixed": "left",
+                                                            "$render": "EXECUTOR",
+                                                            "$option": [
+                                                                {
+                                                                    "text": "编辑",
+                                                                    "executor": "fnEdit"
+                                                                },
+                                                                "divider",
+                                                                {
+                                                                    "text": "删除",
+                                                                    "executor": "fnDelete",
+                                                                    "confirm": "确认删除选择的实体记录？"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "name,字段名",
+                                                        {
+                                                            "metadata": "type,字段类型,MAPPING",
+                                                            "$mapping": {
+                                                                "java`lang`String": "字符串",
+                                                                "java`lang`Integer": "整数",
+                                                                "java`lang`Long": "长整数",
+                                                                "java`lang`Boolean": "布尔值",
+                                                                "java`math`BigDecimal": "浮点数",
+                                                                "java`time`LocalTime": "时间格式"
                                                             }
-                                                        ]
-                                                    },
-                                                    "name,键名",
-                                                    {
-                                                        "metadata": "type,键类型,MAPPING",
-                                                        "$mapping": {
-                                                            "PRIMARY": "主键",
-                                                            "UNIQUE": "唯一键"
-                                                        }
-                                                    },
-                                                    "columns,包含的列,ARRAY"
-                                                ]
+                                                        },
+                                                        "columnName,数据库列名",
+                                                        {
+                                                            "metadata": "columnType,数据库类型,MAPPING",
+                                                            "$mapping": {
+                                                                "STRING1": "字符串",
+                                                                "STRING2": "长文本",
+                                                                "INT": "整数",
+                                                                "LONG": "长整数",
+                                                                "BOOLEAN": "布尔值",
+                                                                "DECIMAL": "精度浮点数",
+                                                                "DATE1": "日期格式",
+                                                                "DATE2": "日期/时间格式",
+                                                                "DATE3": "时间戳",
+                                                                "DATE4": "时间格式",
+                                                                "JSON": "JSON格式",
+                                                                "XML": "XML格式",
+                                                                "SCRIPT": "扩展脚本",
+                                                                "BINARY": "二进制"
+                                                            }
+                                                        },
+                                                        {
+                                                            "metadata": "primary,主键？,LOGICAL",
+                                                            "$mapping": {
+                                                                "true": "是",
+                                                                "false": "否"
+                                                            }
+                                                        },
+                                                        {
+                                                            "metadata": "nullable,可为空？,LOGICAL",
+                                                            "$mapping": {
+                                                                "true": "是",
+                                                                "false": "否"
+                                                            }
+                                                        },
+                                                        "length,长度",
+                                                        "precision,精度",
+                                                        "format,时间格式"
+                                                    ]
+                                                }
                                             }
                                         }
-                                    }
+                                    ]
                                 ]
-                            ]
-                        }
-                    },
-                    "span": 24
+                            },
+                            "tabKey": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "keys,,24,,aiDialogEditor",
+                                            "optionJsx.config": {
+                                                "form": "FormKey",
+                                                "dialog": "键设置,保存,关闭,false,640,true,$opSaveKey",
+                                                "op": {
+                                                    "add": "$opShowKey"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "操作",
+                                                            "dataIndex": "key",
+                                                            "fixed": "left",
+                                                            "$render": "EXECUTOR",
+                                                            "$option": [
+                                                                {
+                                                                    "text": "编辑",
+                                                                    "executor": "fnEdit"
+                                                                },
+                                                                "divider",
+                                                                {
+                                                                    "text": "删除",
+                                                                    "executor": "fnDelete",
+                                                                    "confirm": "确认删除选择的实体记录？"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "name,键名",
+                                                        {
+                                                            "metadata": "type,键类型,MAPPING",
+                                                            "$mapping": {
+                                                                "PRIMARY": "主键",
+                                                                "UNIQUE": "唯一键"
+                                                            }
+                                                        },
+                                                        "columns,包含的列,ARRAY"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        },
+                        "span": 24
+                    }
                 }
             ],
             [

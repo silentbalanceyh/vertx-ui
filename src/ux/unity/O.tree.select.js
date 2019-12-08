@@ -24,17 +24,17 @@ const treeChildren = (keys = [], data = []) =>
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 // 所有子节点
-const treeChildrenAll = (keys = [], data = []) =>
+const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item))
+        .map(item => Ele.elementChild(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 // 常用：当前节点 和 所有子节点
-const treeChildrenAllIn = (keys = [], data = []) =>
+const treeChildrenAllIn = (keys = [], data = [], parentField = "parent") =>
     keys.concat(keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item))
+        .map(item => Ele.elementChild(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
     );

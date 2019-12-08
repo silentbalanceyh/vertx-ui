@@ -15,7 +15,7 @@ export default (reference) => {
         /*
          * 参数准备，处理参数基本信息
          */
-        const {$query} = reference.state;
+        const $query = Ux.qrCommon(reference);
         return Ux.ajaxPost(ajax.uri, {
             $body: $query
         }).then(data => reference.setState({

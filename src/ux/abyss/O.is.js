@@ -36,10 +36,15 @@ const isIn = (input, array = []) => {
         return $array.contains(input);
     } else return false;
 };
+const isFunction = (input) => U.isFunction(input);
+const isArray = (input) => U.isArray(input);
 export default {
     isObject,   /* 验证合法的对象 */
     isEmpty,    /* Object 是否 Empty，支持数组 */
     isDiff,     /* 两个 Object 是否不同 */
     isIn,       /* input 是否存在于 Array 中 */
+    /* underscore 连接 */
+    isFunction,
+    isArray,
     ...Reg,     /* 正则表达式验证专用库 */
 }

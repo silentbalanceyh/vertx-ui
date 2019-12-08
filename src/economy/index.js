@@ -28,7 +28,7 @@ export {default as DialogMenu} from './action/DialogMenu/UI';
 /*
  * raftContainer方法专用
  */
-export {default as Container} from './input/_container';// 容器型字段
+export {default as Container} from './input/_container';        // 容器型字段
 // -------------------------------  表单专用
 // 待验证（北京二期标展专用）
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
@@ -43,6 +43,7 @@ export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
 export {default as FuncInputTree} from './input/FuncInputTree/UI';
+export {default as JsonEditor} from './input/JsonEditor/UI';
 
 // 重写过的可用的自定义组件
 export {default as CheckTransfer} from './input/CheckTransfer/UI';      // 多选列表型穿梭框

@@ -32,6 +32,7 @@ import MatrixEditor from './O.editor.matrix';
 import RichEditor from './O.editor.rich';
 import TeamSelector from './O.selector.team'
 import DialogEditor from './O.editor.dialog';
+import JsonEditor from './O.editor.json';
 import Dev from '../../develop';
 
 const exported = {
@@ -67,6 +68,7 @@ const exported = {
     ...TeamSelector,
     ...Button,
     ...DialogEditor,
+    ...JsonEditor
 };
 Dev.dgDebug(exported, "所有合法的表单字段", "#DAA520");
 export default exported;

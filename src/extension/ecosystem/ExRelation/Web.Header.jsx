@@ -13,10 +13,7 @@ export default (data = {}, header = {}) => (
         </Col>
         <Col span={6}>
             <span className={"prefix"}>{header.identifier}：</span>
-            <Tag color={"green"}
-                 style={{fontSize: 15}}>
-                {data.identifier}
-            </Tag>
+            {data.identifier}
         </Col>
         <Col span={6}>
             <span className={"prefix"}>{header.code}：</span>

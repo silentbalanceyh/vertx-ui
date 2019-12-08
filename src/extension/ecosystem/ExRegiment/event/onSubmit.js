@@ -1,6 +1,5 @@
 import Ux from 'ux';
 import U from 'underscore';
-import D from './O.data';
 
 export default (reference, config = {}) => (event) => {
     Ux.prevent(event);
@@ -13,7 +12,7 @@ export default (reference, config = {}) => (event) => {
     } else {
         const {rxSubmit} = reference.props;
         if (U.isFunction(rxSubmit)) {
-            rxSubmit(D.yoSelected(reference));
+            rxSubmit($selected, reference);
         }
     }
 }

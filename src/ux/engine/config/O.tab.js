@@ -20,9 +20,9 @@ const configTab = (reference, config = {}) => {
     if ("string" === typeof items) {
         // 第一种格式化
         tabs.items = R.aiExprTabs(items.split(';')
-        /*
-         * 除去空字符串
-         */
+            /*
+             * 除去空字符串
+             */
             .filter(item => "" !== item));
     } else {
         if (U.isArray(items)) {
@@ -47,6 +47,16 @@ const configTab = (reference, config = {}) => {
     /*
      * tabBarExtraContent解析（和PageCard中类似）， 构造 tabBarExtraContent 的 render 函数
      */
+    const fnSwitch = ($activeKey) => {
+        /*
+         * 激活的 activeKey 设置
+         */
+        reference.setState({$activeKey});
+        const {rxTabClick} = reference.props;
+        if (U.isFunction(rxTabClick)) {
+            rxTabClick($activeKey);
+        }
+    };
     if (U.isArray(tabs.tabBarExtraContent)) {
         const content = R.aiExprButtons(tabs.tabBarExtraContent, reference.props);
         /*
@@ -62,23 +72,13 @@ const configTab = (reference, config = {}) => {
         /*
          * 有状态解析
          */
-        tabs.onTabClick = ($activeKey) => {
-            /*
-             * 激活的 activeKey 设置
-             */
-            reference.setState({$activeKey});
-            const {rxTabClick} = reference.props;
-            if (U.isFunction(rxTabClick)) {
-                rxTabClick($activeKey);
-            }
-        };
+        tabs.onTabClick = fnSwitch;
         /*
          * 计算有状态的 fnExtra
          */
         const normalized = {};
         Abs.itObject(tabs.tabBarExtraContent, (field, value) =>
             normalized[field] = R.aiExprButtons(value, reference.props));
-        tabs.activeKey = tabs.defaultActiveKey;
         tabs.fnExtra = () => {
             /*
              * render部分
@@ -89,9 +89,13 @@ const configTab = (reference, config = {}) => {
         }
     }
     if (!tabs.onTabClick) {
-        const {rxTabClick} = reference.props;
-        if (U.isFunction(rxTabClick)) {
-            tabs.onTabClick = rxTabClick;
+        if (tabs.hasOwnProperty('activeKey')) {
+            tabs.onTabClick = fnSwitch;
+        } else {
+            const {rxTabClick} = reference.props;
+            if (U.isFunction(rxTabClick)) {
+                tabs.onTabClick = rxTabClick;
+            }
         }
     }
     return tabs;

@@ -12,7 +12,7 @@ const yiPage = (reference) => {
      * 三个组件的专用配置处理
      */
     const {
-        search = {}, ajax = {},
+        search = {},
         table = {}, divider = {},
         submit = {}, category = {}
     } = configuration;
@@ -27,24 +27,7 @@ const yiPage = (reference) => {
         $search.allowClear = true;
         $search.onSearch = Event.onSearch(reference, {condition})
     }
-    const $query = {};
-    {
-        /*
-         * 查询参数 $query
-         * 1）默认 100 条（第一页，每一页100条）
-         * 2）参数来源：$condition
-         * - config.ajax.magic - 配置中的参数
-         * - 搜索框的配置（带清空）
-         * - 选择左边树（带清空）
-         */
-        if (ajax.magic) {
-            /*
-             * 性能考虑
-             */
-            $query.pager = {page: 1, size: 100};
-            $query.criteria = Ux.parseInput(ajax.magic, reference);
-        }
-    }
+    const $query = Event.yoQuery(reference, configuration);
     const $table = {};
     const $tabulation = {};
     const $divider = {};
@@ -56,7 +39,7 @@ const yiPage = (reference) => {
         Object.assign($table, restTable);
         $table.columns = Ux.configColumn(reference, columns);
         $table.className = "regiment-table";
-        $table.pagination = {simple: true, size: "small"};
+        $table.pagination = {simple: true, size: "small", pageSize: 6};
         {
             /*
              * 选择项

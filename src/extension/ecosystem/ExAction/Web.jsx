@@ -8,7 +8,7 @@ export default {
     "BUTTON": (reference, config = [], attributes = {}) =>
         1 < config.length ?
             (
-                <Button.Group>
+                <Button.Group className={"ux-group"}>
                     {/* 多个按钮，使用 Button.Group */}
                     {config.map(each => renderItem(reference, each, Ux.clone(attributes)))}
                 </Button.Group>

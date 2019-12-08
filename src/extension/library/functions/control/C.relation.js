@@ -5,18 +5,30 @@
 import U from "underscore";
 import Ux from 'ux';
 
+const onKey = (array = []) => array.forEach(each => {
+    if (!each.key) {
+        each.key = Ux.randomUUID();
+    }
+});
 const configRelation = (data = {}, config = {}, reference) => {
     const attrs = {};
     const $data = {};
-    if (U.isArray(data['downstreams'])) {
-        $data.down = data['downstreams'];
+    if (U.isArray(data.down)) {
+        $data.down = data.down;
     } else {
         $data.down = [];
     }
-    if (U.isArray(data['upstreams'])) {
-        $data.up = data['upstreams'];
+    if (U.isArray(data.up)) {
+        $data.up = data.up;
     } else {
         $data.up = [];
+    }
+    {
+        /*
+         * 注入 key 的 uuid 值
+         */
+        onKey($data.up);
+        onKey($data.down);
     }
     attrs.data = $data;
     /*
@@ -25,6 +37,8 @@ const configRelation = (data = {}, config = {}, reference) => {
     const current = {};
     current.name = data.name;
     current.code = data.code;
+    current.key = data.key;
+    current['globalId'] = data['globalId'];
     /*
      * 计算 category 和 identifier
      */
@@ -40,9 +54,12 @@ const configRelation = (data = {}, config = {}, reference) => {
              */
             current.identifier = category.identifier;
             current.category = category.name;
+            current.categoryKey = category.key;
             attrs.current = current;
             /*
              * 只有 category 出现的时候才执行 $path
+             * 1）如果 definition 有值，则从 definition 中读取
+             * 2）如果 definition = false，则从数据中读取
              */
             $path = Ux.treeFlip(categoryArray, {parent: "parentId", keyField: "identifier"});
         }
