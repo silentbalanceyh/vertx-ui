@@ -10,7 +10,7 @@ const composeEnhancers =
     "production" !== process.env.NODE_ENV && DEVTOOL ? DEVTOOL({}) : compose;
 
 // Inject middleware: Epic, Router
-const epicMiddleware = createEpicMiddleware(datum.epics);
+const epicMiddleware = createEpicMiddleware();
 // epicMiddleware.run(datum.epics);
 const logger = createLogger({
     duration: true,
@@ -30,4 +30,5 @@ const enhancer =
         );
 // Initialize the store of current.
 const store = createStore(datum.reducers, {}, enhancer);
+epicMiddleware.run(datum.epics);
 export default () => store;

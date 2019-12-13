@@ -51,3 +51,5 @@ yarn-error.log*
 # 忽略脚本
 /run-ux.sh
 /src/environment/routes.js
+!/src/style/animate.css
+.awcache
