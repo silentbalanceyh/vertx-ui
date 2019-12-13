@@ -86,14 +86,45 @@ const applyStyle = (item = {}) => {
     return item;
 };
 const applyItem = (item = {}, config = [], kvs = []) => {
+    /*
+     * 查找定义的 $KV$ 的索引
+     */
+    let kvIndex = -1;
+    config.forEach((item, index) => {
+        if ("$KV$" === item) {
+            kvIndex = index;
+        }
+    });
+    /*
+     * kvs 的变幻
+     * 1）超过 $KV$ 索引的位置执行 '' 的压缩，也就是 $KV$ 之后丢弃掉空字符串
+     * 2）压缩的时候需要保留 $KV$ 之前的应用
+     */
+    const compress = [];
+    if (0 < kvIndex) {
+        kvs.forEach((kv, index) => {
+            if (index < kvIndex) {
+                compress.push(kv);
+            } else {
+                if (kv) {
+                    compress.push(kv);
+                }
+            }
+        });
+    } else {
+        kvs.forEach(kv => compress.push(kv));
+    }
+    /*
+     * 执行压缩过后的处理操作
+     */
     let $item = Abs.immutable(item);
     for (let idx = 0; idx < config.length; idx++) {
         const name = config[idx];
-        if (kvs[idx]) {
+        if (compress[idx]) {
             if (0 < name.indexOf(".")) {
-                $item = $item.setIn(name.split('.'), kvs[idx]);
+                $item = $item.setIn(name.split('.'), compress[idx]);
             } else {
-                $item = $item.set(name, kvs[idx]);
+                $item = $item.set(name, compress[idx]);
             }
         }
     }

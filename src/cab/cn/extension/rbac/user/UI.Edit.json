@@ -7,7 +7,7 @@
             ],
             [
                 {
-                    "metadata": "username,账号,9,,,placeholder=请输入账号!",
+                    "metadata": "username,账号,14,,,placeholder=请输入账号!",
                     "optionConfig.rules": [
                         "required,请输入账号，账号不可为空！",
                         {
@@ -20,13 +20,17 @@
                             }
                         }
                     ]
-                },
-                "realname,姓名,5"
+                }
             ],
             [
-                "alias,昵称,9",
+                "realname,姓名,14"
+            ],
+            [
+                "alias,昵称,14"
+            ],
+            [
                 {
-                    "metadata":"mobile,手机号,5,,,placeholder=请输入手机号!",
+                    "metadata":"mobile,手机号,14,,,placeholder=请输入手机号!",
                     "optionConfig.rules": [
                         "required,请输入手机号,手机号不能为空!",
                         {
@@ -48,7 +52,7 @@
             ],
             [
                 {
-                    "metadata":"email,邮箱,9,,,placeholder=请输入邮箱!",
+                    "metadata":"email,邮箱,14,,,placeholder=请输入邮箱!",
                     "optionConfig.rules": [
                         "required,请输入邮箱,邮箱不能为空!",
                         {
@@ -65,22 +69,37 @@
                             }
                         }
                     ]
-                },
+                }
+            ],
+            [
                 {
-                    "metadata": "active,启用,5,,aiCheckbox",
+                    "metadata": "active,启用,14,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
                 }
             ],
             [
-                "title=业务模型信息"
+                {
+                    "metadata": "roles,用户角色,19,,aiTransfer",
+                    "optionJsx.config.datum": "source=ajax.roles,value=key,label=name",
+                    "optionJsx.config.valueKey": "key",
+                    "optionJsx.config.titles": [
+                        "待选择",
+                        "已选择"
+                    ]
+                }
             ],
             [
-                "modelId,描述模型,14"
-            ],
-            [
-                "modelKey,描述记录,14"
+                {
+                    "metadata": "groups,用户组,19,,aiTransfer",
+                    "optionJsx.config.datum": "source=ajax.groups,value=key,label=name",
+                    "optionJsx.config.valueKey": "key",
+                    "optionJsx.config.titles": [
+                        "待选择",
+                        "已选择"
+                    ]
+                }
             ],
             [
                 {

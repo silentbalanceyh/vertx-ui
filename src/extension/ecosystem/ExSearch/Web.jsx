@@ -44,7 +44,7 @@ const _renderAdvanced = (reference) => {
 };
 
 const _renderButtons = (reference) => (
-    <Button.Group>
+    <Button.Group className={"ux-group"}>
         {_renderAdvanced(reference)}
         {_renderRedo(reference)}
     </Button.Group>

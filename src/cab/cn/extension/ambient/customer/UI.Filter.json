@@ -1,6 +1,7 @@
 {
     "_form": {
-        "window": -0.3,
+        "window": -0.5,
+        "columns":2,
         "ui": [
             [
                 {
@@ -12,55 +13,58 @@
                 }
             ],
             [
-                "name`c,名称,24"
+                "title`c,标题,12",
+                "name`c,名称,12"
             ],
             [
-                "code`c,编号,24"
-            ],
-            [
-                "title`c,显示标题,24"
-            ],
-            [
-                "taxCode`c,税号,24"
-            ],
-            [
-                "taxTitle`c,开票抬头,24"
-            ],
-            [
-                "contactName`c,联系人名称,24"
-            ],
-            [
-                "contactPhone`c,联系人电话,24"
-            ],
-            [
-                "contactOnline`c,在线联系方式,24"
-            ],
-            [
-                "email`c,企业邮箱,24"
-            ],
-            [
-                "fax`c,传真号,24"
-            ],
-            [
-                "homepage`c,主页,24"
-            ],
-            [
-                "phone`c,座机,24"
-            ],
-            [
-                "address`c,地址,24"
+                "code`c,编号,12"
             ],
             [
                 {
-                    "metadata": "type`=,分类,24,,aiSelect",
-                    "optionJsx.config.datum": "source=company.nature,value=key,label=name"
+                    "metadata":"taxCode,税号,12,,aiSearchInput",
+                    "optionJsx.layout": {
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "taxTitle`c,开票抬头,12"
+            ],
+            [
+                "phone`c,公司座机,12",
+                "fax`c,公司传真,12"
+            ],
+            [
+                "email`c,公司信箱,12",
+                {
+                    "metadata":"active`i,启用,12,,aiCheckbox",
+                    "optionJsx.config.items":[
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "optionConfig":{
+                        "valuePropName": "checked"
+                    }
                 }
             ],
             [
+                "homepage`c,客户主页,24"
+            ],
+            [
+                "address`c,客户地址,24"
+            ],
+            [
                 {
-                    "metadata": "companyId`=,所属公司,24,,aiSelect",
-                    "optionJsx.config.datum": "source=ajax.companys,value=key,label=name"
-                }
+                    "metadata":"contactName,联系人,12,,aiSearchInput",
+                    "optionJsx.layout":{
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "contactPhone`c,联系电话,12"
+            ],
+            [
+                "contactEmail`c,联系邮箱,12",
+                "contactOnline`c,在线联系方式,12"
             ],
             [
                 {

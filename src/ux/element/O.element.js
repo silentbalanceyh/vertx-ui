@@ -126,9 +126,10 @@ const elementBranch = (array = [], leafKey, parentField = "parent") => {
         branch.push(target);
         // 查找父节点
         const pid = obj[parentField];
-        branch = branch.concat(elementBranch(array, pid));
+        branch = [].concat(elementBranch(array, pid, parentField)).concat(branch);
     }
-    return branch.reverse();
+    // console.info(found.map(item => elementUnique(array, "key", item)));
+    return branch;
 };
 /*
  * 该方法只处理已经配置过的
@@ -141,13 +142,13 @@ const elementBranch = (array = [], leafKey, parentField = "parent") => {
  *     level: "level"
  * }
  */
-const elementChild = (array = [], current = {}) => {
+const elementChild = (array = [], current = {}, parentField = "parent") => {
     const parentKey = current.key;
     let children = array
-        .filter(each => each.parent === parentKey)
+        .filter(each => each[parentField] === parentKey)
         .sort((left, right) => left.sort - right.sort);
     if (0 < children.length) {
-        children.forEach(child => child.children = elementChild(array, child));
+        children.forEach(child => child.children = elementChild(array, child, parentField));
     }
     return children;
 };

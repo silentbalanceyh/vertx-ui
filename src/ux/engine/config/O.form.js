@@ -209,6 +209,7 @@ const configForm = (form, addOn = {}) => {
     /*
      * 行遍历
      */
+    raft.search = {};
     normalized.forEach((row, rowIndex) => {
         // 计算行处理信息
         const rowData = Raft.raftRow(raft, {row, index: rowIndex, calculated});
@@ -237,8 +238,13 @@ const configForm = (form, addOn = {}) => {
             if (cell.complex) {
                 /*
                  * 子表单模式（用于静态扩展专用）
+                 * 1）key 会发生变化
+                 * 2）span 默认为 24
                  */
                 column.col.key = `${cell.name}-${rowIndex}-${cellIndex}`;
+                if (!cell.hasOwnProperty('span')) {
+                    column.col.span = 24;
+                }
                 const render = Raft.raftContainer(cell, Abs.clone(params), configForm);
                 if (render) {
                     column.render = render;
@@ -247,6 +253,21 @@ const configForm = (form, addOn = {}) => {
                 }
             } else {
                 column.render = Raft.raftRender(cell, Abs.clone(params));
+            }
+            /*
+             * 搜索表单辅助工具，主要是搜索的时候需要执行值处理
+             */
+            {
+                const {render, field} = cell;
+                if (field && "$button" !== field) {
+                    if (undefined === render) {
+                        raft.search[field] = "aiInput";
+                    } else {
+                        if ("string" === typeof render) {
+                            raft.search[field] = render;
+                        }
+                    }
+                }
             }
             rowItem.cells.push(column);
         });

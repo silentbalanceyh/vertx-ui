@@ -3,6 +3,18 @@ import {Button} from 'antd';
 import Op from './Op';
 import Ux from 'ux';
 
+/*
+ * props结构
+ * {
+ *     $mode = DIALOG / DRAWER / POPOVER
+ *     $hidden
+ *     $button = {},
+ *     $loading: 加载
+ *     $dialog = {},
+ *     rxClick
+ *     "子组件": children / $content
+ * }
+ */
 class Component extends React.PureComponent {
 
     componentDidMount() {

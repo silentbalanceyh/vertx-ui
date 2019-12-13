@@ -5,7 +5,7 @@ const yoRecord = (reference) => {
     const code = Ex.toModelId(reference, "form");
     const attrs = {};
     attrs.$name = code;
-    const $inited = Ux.ambiguityItem(reference, "$inited");
+    const $inited = Ux.ambiguityObject(reference, "$inited");
     const {record = {}, data = {}} = $inited;
     /*
      * 数据信息
@@ -25,7 +25,7 @@ const yoLeft = (reference = {}) => {
     return leftVisible;
 };
 const yoHistory = (reference) => {
-    const $inited = Ux.ambiguityItem(reference, "$inited");
+    const $inited = Ux.ambiguityObject(reference, "$inited");
     const {activity = {}, changes = []} = $inited;
     const $data = {};
     Object.assign($data, activity);
@@ -34,8 +34,24 @@ const yoHistory = (reference) => {
     attrs.data = $data;
     return attrs;
 };
+const yoRelation = (reference) => {
+    const $inited = Ux.ambiguityObject(reference, "$inited");
+    const {data = {}} = $inited;
+    const attrs = Ex.configRelation(data, {
+        category: {field: "categoryThird"}
+    }, reference);
+    /*
+     * 配置处理
+     */
+    const configuration = Ux.fromPath(reference, "module", "configuration", "tabRelation");
+    if (configuration) {
+        attrs.config = configuration;
+    }
+    return attrs;
+};
 export default {
     yoLeft,
     yoRecord,
     yoHistory,
+    yoRelation,
 }

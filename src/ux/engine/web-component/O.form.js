@@ -37,7 +37,7 @@ const _aiInput = (reference, values) => (cell = {}) => {
     }
 };
 const aiField = (reference, values = {}, raft = {}) =>
-    raft.rows.map((row) => {
+    (U.isArray(raft.rows)) ? raft.rows.map((row) => {
         const {cells = [], ...rest} = row;
         return (
             <Row {...rest}>
@@ -45,7 +45,7 @@ const aiField = (reference, values = {}, raft = {}) =>
                 {cells.map(_aiInput(reference, values))}
             </Row>
         )
-    });
+    }) : false;
 const aiInit = (reference, values = {}) => {
     /*
      * 基础初始化
@@ -108,7 +108,22 @@ const aiForm = (reference, values, config = {}) => {
         </Form>
     );
 };
+const aiFormInput = (reference, values, raft = {}) => {
+    /*
+     * 初始值 initial 优先
+     */
+    let initials = aiInit(reference, values);
+    return (
+        <div>
+            {/** 隐藏组件 hidden **/}
+            {aiHidden(reference, initials, raft)}
+            {/** 字段渲染 **/}
+            {aiField(reference, initials, raft)}
+        </div>
+    )
+};
 export default {
     aiForm,
     aiField,
+    aiFormInput
 }

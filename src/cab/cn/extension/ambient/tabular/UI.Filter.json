@@ -19,12 +19,23 @@
             ],
             [
                 {
-                    "metadata": "$button",
+                    "metadata":"active`i,启用,24,,aiCheckbox",
+                    "optionJsx.config.items":[
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "optionConfig":{
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button,,24",
                     "optionJsx.extension": [
                         "$opFilter,搜索,SUBMIT,primary",
                         "$opReset,重置,RESET"
-                    ],
-                    "span": 24
+                    ]
                 }
             ]
         ],

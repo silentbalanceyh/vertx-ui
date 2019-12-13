@@ -2,6 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Op from './Op';
 import {Input, Transfer} from 'antd';
+import './Cab.less';
 
 class Component extends React.PureComponent {
     constructor(props) {
@@ -20,17 +21,22 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtReady(this, () => {
             const {$transfer = {}} = this.state;
-            const {$source = [], ...rest} = this.props;
+            /*
+             * modified by Hongwei
+             * get value from reference.props
+             * line 38: set targetKeys using variable: value
+             */
+            const {$source = [], value = [], ...rest} = this.props;
             /*
              * targetKeys
              * selectedKeys
              */
-            const {$sourceKeys = [], $targetKeys = []} = this.state;
+            const {$sourceKeys = []} = this.state;
             return (
-                <Input.Group {...rest}>
+                <Input.Group {...rest} className={"web-transfer"}>
                     <Transfer {...$transfer} dataSource={$source}
                               selectedKeys={$sourceKeys}
-                              targetKeys={$targetKeys}/>
+                              targetKeys={value}/>
                 </Input.Group>
             )
         });

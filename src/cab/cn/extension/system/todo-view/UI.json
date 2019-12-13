@@ -33,8 +33,8 @@
                     "metadata":"type,类型,,,aiMagic",
                     "optionJsx.config.items":[
                         "ADD_CI,添加:plus,16:#458B00",
-                        "DELETE_CI,删除:delete,16:#1C86EE",
-                        "CHANGE_CI,变更:edit,16:#CD0000"
+                        "DELETE_CI,删除:delete,16:#CD0000",
+                        "CHANGE_CI,更新:edit,16:#1C86EE"
                     ]
                 },
                 {
@@ -58,11 +58,6 @@
             "$opConfirm":"act.todo.confirm",
             "$opReject":"act.todo.reject"
         }
-    },
-    "_tabs": {
-        "defaultActiveKey": "tabRecord",
-        "type":"card",
-        "items": "主单信息,tabRecord;变更历史,tabHistory"
     },
     "_modal": {
         "success": {

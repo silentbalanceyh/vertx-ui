@@ -1,6 +1,7 @@
 import U from 'underscore';
 import React from 'react';
-import Ux from 'ux';
+import Abs from '../../abyss';
+import Dev from '../../develop';
 
 function aiChild() {
     /*
@@ -24,13 +25,13 @@ function aiChild() {
                 return fnChild(rest);
             }
         } else {
-            console.warn("[ Ux ] 未检测到 fnChild 函数", child);
+            Dev.dgDebug({child}, "[ Ux ] 未检测到 fnChild 函数，返回 false");
             return false;
         }
     } else {
         const children = arguments[0];
         const additional = arguments[1];
-        if (Ux.isEmpty(additional)) {
+        if (Abs.isEmpty(additional)) {
             return children;
         } else {
             /*
@@ -45,7 +46,7 @@ function aiChild() {
                 *  2）Form
                 * */
                 const {$form = {}} = children.props.config;
-                additional.$form = Ux.clone($form);
+                additional.$form = Abs.clone($form);
             }
             return React.cloneElement(children, {
                 ...additional

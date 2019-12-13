@@ -28,7 +28,7 @@ export {default as DialogMenu} from './action/DialogMenu/UI';
 /*
  * raftContainer方法专用
  */
-export {default as Container} from './input/_container';// 容器型字段
+export {default as Container} from './input/_container';        // 容器型字段
 // -------------------------------  表单专用
 // 待验证（北京二期标展专用）
 export {default as MultiCheckBox} from './input/MultiCheckBox/UI';
@@ -43,6 +43,7 @@ export {default as TableRowEditor} from './input/TableRowEditor/UI';
 export {default as MatrixEditor} from './input/MatrixEditor/UI';
 export {default as FixedTreeEditor} from './input/FixedTreeEditor/UI';
 export {default as FuncInputTree} from './input/FuncInputTree/UI';
+export {default as JsonEditor} from './input/JsonEditor/UI';
 
 // 重写过的可用的自定义组件
 export {default as CheckTransfer} from './input/CheckTransfer/UI';      // 多选列表型穿梭框
@@ -52,6 +53,9 @@ export {default as ListSelector} from './input/ListSelector/UI';        // 列�
 export {default as TreeSelector} from './input/TreeSelector/UI';        // 树选择器
 export {default as AddressSelector} from './input/AddressSelector/UI';  // 地址选择器
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
+// 复杂搜索组件
+export {default as SearchInput} from './input/SearchInput/UI';
+export {default as SearchRangeDate} from './input/SearchRangeDate/UI';
 // -------------------------------  表格列专用
 export {default as ColumnUser} from './action/ColumnUser/UI';
 // -------------------------------  重新命名过的组件
@@ -61,6 +65,7 @@ export {default as ColumnUser} from './action/ColumnUser/UI';
  */
 export {default as Dialog} from './container/Dialog/UI';
 export {default as DynamicDialog} from './container/Dialog/UI';
+export {default as Rectangle} from './container/Rectangle/UI';
 /*
  * 新：Navigation
  * 旧：PagerHeader

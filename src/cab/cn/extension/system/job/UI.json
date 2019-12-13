@@ -1,0 +1,103 @@
+{
+    "_tabs": {
+        "activeKey": "tabTask",
+        "type": "card",
+        "items": [
+            {
+                "tab":"任务列表",
+                "key":"tabTask",
+                "closable": false
+            }
+        ],
+        "dynamic":{
+            "tab":"编辑任务",
+            "key":"tabTaskEdit"
+        }
+    },
+    "_extra":[
+        "opSave,保存,$opSave,primary,save",
+        "opReset,重置,$opReset,,redo"
+    ],
+    "_assert":{
+        "model.identifiers": {
+            "uri": "/api/model"
+        }
+    },
+    "_alert":{
+        "message": "任务管理说明",
+        "description": [
+            "只有 `已停止` 或 `运行错误` 的任务可以编辑。",
+            "任务流程：启动中 -> 就绪 -> 运行中。异常流程：出现错误则转换成 `运行错误` ，手动停止则停止该任务变成 `已停止` 。",
+            "所有编程模式的任务都是 `只读` 类型，扩展存储任务都是 `可编辑`。",
+            "任务面板每隔10秒会刷新一次，编辑时任务列表刷新会停止。"
+        ]
+    },
+    "_toolbar":{
+        "starting":{
+            "text":"启动",
+            "icon":"check-circle",
+            "style":{
+                "color":"#458B00",
+                "borderColor":"#458B00"
+            }
+        },
+        "stopping":{
+            "text":"禁用",
+            "icon":"stop",
+            "style":{
+                "color":"#EE30A7",
+                "borderColor":"#EE30A7"
+            }
+        },
+        "resuming":{
+            "text":"恢复",
+            "icon":"reload"
+        },
+        "edit":{
+            "text":"编辑",
+            "icon":"edit",
+            "type":"primary"
+        }
+    },
+    "_table":{
+        "columns":[
+            "name,任务名称",
+            "comment,任务备注",
+            {
+                "metadata":"readOnly,性质,LOGICAL",
+                "$mapping":{
+                    "true":"只读",
+                    "false":"可编辑"
+                }
+            },
+            {
+                "metadata":"type,任务类型,MAPPING",
+                "$mapping":{
+                    "PLAN":"轮询任务,clock-circle,,#1874CD",
+                    "ONCE":"一次性任务,thunderbolt,,#D02090",
+                    "FIXED":"定时任务,calendar,,#228B22"
+                }
+            },
+            {
+                "metadata":"status,任务状态,MAPPING",
+                "$mapping":{
+                    "STARTING":"启动中,rise,,#CD8500",
+                    "READY":"就绪,api,,#4876FF",
+                    "RUNNING":"运行中,loading,,#228B22",
+                    "ERROR":"运行错误,issues-close,,#EE3B3B",
+                    "STOPPED":"已停止,stop,,#CD0000"
+                }
+            },
+            {
+                "metadata":"duration,间隔时间",
+                "$expr":":value秒",
+                "$empty":"（未使用）"
+            },
+            {
+                "metadata":"threshold,超时时间",
+                "$expr":":value秒",
+                "$empty":"900秒"
+            }
+        ]
+    }
+}

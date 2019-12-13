@@ -26,8 +26,7 @@
                     "optionConfig.rules":[
                         "required,请输入员工姓名"
                     ]
-                },
-                "workTitle,头衔"
+                }
             ],
             [
                 {
@@ -115,6 +114,11 @@
                     },
                     "optionJsx.allowClear":true
                 }
+            ],
+            [
+                "workTitle,头衔",
+                "workPhone,工作座机",
+                "workExtension,分机号"
             ],
             [
                 {

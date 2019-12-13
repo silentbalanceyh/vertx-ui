@@ -13,9 +13,11 @@ const renderRow = (reference) => (record = {}) => {
     data.items = Ux.clone(recordData.$data ? recordData.$data : []);
     const attrs = Ex.yoAmbient(reference);
     return (
-        <ExHistory {...attrs} data={data}
-                   $dict={$dict}
-                   $loading={recordData.$loading}/>
+        <div style={{marginBottom: 3}}>
+            <ExHistory {...attrs} data={data}
+                       $dict={$dict}
+                       $loading={recordData.$loading}/>
+        </div>
     )
 };
 const rxExpand = (reference) => (expanded, record = {}) => {
@@ -70,19 +72,26 @@ const yiPage = (reference) => {
         const params = {identifier: $identifier, key: $inited.key};
         Ux.parallel([
             Ux.ajaxGet("/api/ox/columns/:module/full", {module: $identifier})
+                .then(columns => {
+                    const auditor = Ux.fromHoc(reference, "auditor");
+                    let merged = Ux.clone(columns);
+                    if (Ux.isArray(auditor) && 0 < auditor.length) {
+                        merged = merged.concat(Ux.configColumn(reference, auditor));
+                    }
+                    return Ux.promise(merged);
+                })
                 .then(columns => Ex.mapAsyncDatum(columns, reference)),
             Ux.ajaxGet("/api/history/:identifier/:key", params),
         ], "dict", "data").then(response => {
-            /*
-             * 配置绑定在静态里，由于 extension 在后端有 XActivity / XActivityChange 支撑
-             */
             state.$dict = response['dict'];
-            state.$data = response.data;
+            if (Ux.isArray(response.data)) {
+                state.$data = response.data.sort(Ux.sorterDescDFn('createdAt'));
+            }
             /*
              * 统计属性数量
              */
             reference.setState(state);
-        });
+        }).catch(error => console.error(error));
     } else {
         state.$error = "模型选择失败！";
         reference.setState(state);

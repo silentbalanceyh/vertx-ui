@@ -139,7 +139,9 @@ const ajaxParams = (params = {}) => {
         }
     });
     if (params.hasOwnProperty("$body")) {
-        itLang(params.$body);
+        if (!U.isArray(params.$body)) {
+            itLang(params.$body);
+        }
         return JSON.stringify(params.$body);
     } else {
         // 拷贝 language = cn 的问题

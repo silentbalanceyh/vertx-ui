@@ -1,0 +1,62 @@
+{
+    "_header": {
+        "category": "类别",
+        "identifier": "模型ID",
+        "code": "编号",
+        "name": "名称"
+    },
+    "_relation": {
+        "combine": {
+            "title": "所有配置项",
+            "key": "__DELETE__",
+            "up": {
+                "dataIndex":"sourceCategory",
+                "title":"配置项类型",
+                "$field":"sourceIdentifier"
+            },
+            "down":{
+                "dataIndex":"targetCategory",
+                "title":"配置项类型",
+                "$field":"targetIdentifier"
+            }
+        },
+        "up":{
+            "table":{
+                "rowKey": "key",
+                "columns": [
+                    "sourceCode,配置项编号",
+                    "sourceName,配置项名称"
+                ]
+            },
+            "tips":{
+                "title":"上游配置项",
+                "color":"green"
+            }
+        },
+        "down":{
+            "table":{
+                "rowKey": "key",
+                "columns": [
+                    "targetCode,配置项编号",
+                    "targetName,配置项名称"
+                ]
+            },
+            "tips":{
+                "title":"下游配置项",
+                "color":"magenta"
+            }
+        }
+    },
+    "_upOp": {
+        "dialog": "添加上游关系,添加,关闭,false,960,true,$opSaveCi",
+        "button": "opShowRel,添加上游关系,primary,plus"
+    },
+    "_downOp": {
+        "dialog": "添加下游关系,添加,关闭,false,960,true,$opSaveCi",
+        "button": "opShowRel,添加下游关系,,plus,,className=ux-red"
+    },
+    "_batch":{
+        "text":"删除所选",
+        "confirm":"是否删除所选择的记录？"
+    }
+}

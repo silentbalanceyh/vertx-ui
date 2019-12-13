@@ -110,7 +110,7 @@
                     "metadata": "$button",
                     "optionJsx.extension": [
                         "$opSaveMy,保存,SUBMIT,primary",
-                        "$opReset,重置,RESET"
+                        "$opResetOne,重置,RESET"
                     ]
                 }
             ]

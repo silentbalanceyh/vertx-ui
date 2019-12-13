@@ -22,6 +22,7 @@ export default (reference) => {
         const filterAttrs = Ex.yoFilter(reference);
         return (
             <Drawer {...$advanced} className={"ex-drawer"}>
+                {/* Drawer issue: https://github.com/ant-design/ant-design/issues/20175 */}
                 {_renderNotice(reference)}
                 <FormFilter {...filterAttrs}/>
             </Drawer>

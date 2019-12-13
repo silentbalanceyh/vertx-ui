@@ -62,7 +62,6 @@ const raftSpecial = (cell = {}) => {
      * type = title 类别的调整
      */
     Adjust.adjustTitle(cell);
-
     cell.key = cell.field;
 };
 export default {

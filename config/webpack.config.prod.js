@@ -8,6 +8,9 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+
+const UglifyESPlugin = require('uglifyjs-webpack-plugin');
+
 const paths = require("./paths");
 // 自定义模块
 const modules = require("./modules");
@@ -44,7 +47,6 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     ? // Making sure that the publicPath goes back to to build folder.
     {publicPath: Array(cssFilename.split("/").length).join("../")}
     : {};
-
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -85,7 +87,7 @@ module.exports = {
         // We also include JSX as a common component filename extension to support
         // some tools, although we do not recommend using it, see:
         // https://github.com/facebookincubator/create-react-app/issues/290
-        extensions: [".js", ".json", ".jsx", ".ts", ".tsx"],
+        extensions: [".js", ".json", ".jsx", ".ts", ".tsx", ".(css|less)"],
         alias: {
             // Support React Native Web
             // https://www.smashingmagazine.com/2016/08/a-glimpse-into-the-future-with-react-native-for-web/
@@ -107,13 +109,35 @@ module.exports = {
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
-                loaders: ["babel-loader", "awesome-typescript-loader"],
-                exclude: ["/node_modules/"]
+                use: [
+                    {
+                        options: {
+                            useTranspileModule: true,
+                            forceIsolatedModules: true,
+                            useCache: true,
+                            useBabel: true,
+                            babelOptions: {
+                                "babelrc": false, /* Important line */
+                                "presets": [
+                                    ["@babel/preset-env", {"modules": false}]
+                                ]
+                            },
+                            babelCore: "@babel/core"
+                        },
+                        loader: require.resolve("awesome-typescript-loader")
+                    }
+                ],
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
-                loader: "source-map-loader"
+                use: "source-map-loader",
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -177,18 +201,67 @@ module.exports = {
                 options: {
                     plugins: [
                         ["import", {libraryName: "antd", style: true}],
-                        "transform-class-properties",
-                        "transform-decorators-legacy",
-                        "transform-decorators",
-                        "transform-async-to-generator",
-                        "transform-react-jsx",
-                        "transform-do-expressions",
-                        "syntax-do-expressions",
-                        "transform-object-rest-spread",
-                        "transform-function-bind",
-                        "transform-object-assign",
-                        "transform-runtime"
-                    ]
+                        [
+                            "@babel/plugin-transform-runtime",
+                            {
+                                "corejs": 2
+                            }
+                        ],
+                        "@babel/plugin-proposal-function-bind",
+                        "@babel/plugin-proposal-export-default-from",
+                        "@babel/plugin-proposal-logical-assignment-operators",
+                        [
+                            "@babel/plugin-proposal-optional-chaining",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        [
+                            "@babel/plugin-proposal-pipeline-operator",
+                            {
+                                "proposal": "minimal"
+                            }
+                        ],
+                        [
+                            "@babel/plugin-proposal-nullish-coalescing-operator",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        "@babel/plugin-proposal-do-expressions",
+                        [
+                            "@babel/plugin-proposal-decorators",
+                            {
+                                "legacy": true
+                            }
+                        ],
+                        "@babel/plugin-proposal-function-sent",
+                        "@babel/plugin-proposal-export-namespace-from",
+                        "@babel/plugin-proposal-numeric-separator",
+                        "@babel/plugin-proposal-throw-expressions",
+                        "@babel/plugin-syntax-dynamic-import",
+                        "@babel/plugin-syntax-import-meta",
+                        [
+                            "@babel/plugin-proposal-class-properties",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        "@babel/plugin-proposal-json-strings"
+                    ],
+                    // This is a feature of `babel-loader` for webpack (not Babel itself).
+                    // It enables caching results in ./node_modules/.cache/babel-loader/
+                    // directory for faster rebuilds.
+                    presets: [
+                        [
+                            "@babel/preset-env",
+                            {
+                                "modules": false
+                            }
+                        ],
+                        "@babel/preset-react"
+                    ],
+                    cacheDirectory: true
                 }
             },
             // The notation here is somewhat confusing.
@@ -214,7 +287,6 @@ module.exports = {
                                     loader: require.resolve("css-loader"),
                                     options: {
                                         importLoaders: 1,
-                                        minimize: true,
                                         sourceMap: true
                                     }
                                 },
@@ -277,6 +349,27 @@ module.exports = {
         ]
     },
     plugins: [
+        /*        new ParallelUglifyPlugin({
+                    // 传递给 UglifyJS 的参数
+                    uglifyJS: {
+                        output: {
+                            // 最紧凑的输出
+                            beautify: false,
+                            // 删除所有的注释
+                            comments: false,
+                        },
+                        compress: {
+                            // 在UglifyJs删除没有用到的代码时不输出警告
+                            warnings: false,
+                            // 删除所有的 `console` 语句，可以兼容ie浏览器
+                            drop_console: true,
+                            // 内嵌定义了但是只用到一次的变量
+                            collapse_vars: true,
+                            // 提取出出现多次但是没有定义成变量去引用的静态值
+                            reduce_vars: true,
+                        }
+                    },
+                }),*/
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             inject: true,
@@ -305,7 +398,7 @@ module.exports = {
         // It is absolutely essential that NODE_ENV was set to production here.
         // Otherwise React will be compiled in the very slow development mode.
         new webpack.DefinePlugin(env.stringified),
-        // Minify the code.
+        /*
         new webpack.optimize.UglifyJsPlugin({
             compress: {
                 warnings: false,
@@ -325,7 +418,7 @@ module.exports = {
                 ascii_only: true,
             },
             sourceMap: shouldUseSourceMap,
-        }),
+        }),*/
         // Note: this won't work without ExtractTextPlugin.extract(..) in `loaders`.
         new ExtractTextPlugin({
             filename: cssFilename

@@ -39,9 +39,14 @@ const rxCondition = (reference, isClear = false) => {
     }
 };
 const rxFilter = (reference) =>
-    ($filters = {}) => reference.setState({
-        $filters,       // 该条件也会在合并中出现
-    });
+    ($filters = {}, $filtersRaw) => {
+        const state = {};
+        if ($filtersRaw) {
+            state['$filtersRaw'] = $filtersRaw;
+        }
+        state.$filters = $filters;
+        reference.setState(state);
+    };
 export default {
     rxSearch,
     /*

@@ -21,7 +21,7 @@
             ],
             [
                 {
-                    "metadata": "name,名称,,,,placeholder=（必填）",
+                    "metadata": "name,名称,,,,placeholder=请填写名称",
                     "optionConfig.rules": [
                         "required,请输入客户名称"
                     ]

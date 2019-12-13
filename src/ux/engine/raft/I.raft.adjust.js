@@ -19,6 +19,7 @@ const adjustButton = (cell = {}) => {
             /*
              * 如果隐藏直接设置 optionItem 中的内容，清空
              * 隐藏的优先级最高，可占用全行处理
+             * 这种情况下，设置可以不生效，因为已经隐藏 hidden = true
              */
             if (!cell.optionItem) cell.optionItem = {};
             cell.optionItem.labelCol = {span: 0};
@@ -32,18 +33,19 @@ const adjustButton = (cell = {}) => {
              * 3）居中处理（登录表单专用）
              */
             const {align} = cell.optionJsx;
+            if (!cell.optionItem) cell.optionItem = {};
+            cell.optionItem.colon = false;
             if (align) {
-                /*
-                 * 这种模式下，先清空展开成全行
-                 */
-                if (!cell.optionItem) cell.optionItem = {};
-                cell.optionItem.labelCol = {span: 0};
-                cell.optionItem.wrapperCol = {span: 24};
                 /*
                  * 然后为按钮中的列注入 style
                  */
                 if (cell.col.style) cell.col.style = {};
                 if ("center" === align || "left" === align || "right" === align) {
+                    /*
+                     * 这种模式下，先清空展开成全行
+                     */
+                    cell.optionItem.labelCol = {span: 0};
+                    cell.optionItem.wrapperCol = {span: 24};
                     /*
                      * 三种 html 中常用的对齐模式
                      */
@@ -52,7 +54,6 @@ const adjustButton = (cell = {}) => {
                     // TODO: 其他模式
                 }
             } else {
-                const span = cell.span;
                 /*
                  * 没有配置或者无值的时候，使用第二种标准表单
                  * 1）这种模式下部管宽度
@@ -60,12 +61,7 @@ const adjustButton = (cell = {}) => {
                  *    $metadata: "$button,,14"
                  * 3）通过这种模式设置 span
                  */
-                if (undefined === span) {
-                    cell.optionItem.label = " ";
-                    cell.optionItem.colon = false;
-                } else {
-                    cell.optionItem.label = "";
-                }
+                cell.optionItem.label = " ";
             }
         }
     }

@@ -41,6 +41,7 @@ const writeTree = (reference, state, dft = null) => {
 const writeClean = (reference, keys = []) => {
     const baseKeys = [
         "datum.data",       // datum数据处理问题
+        "datum.menus",      // menus数据清除
         "datum.inited",     // inited初始化数据
         "assist",           // 辅助数据Assist
         "state.submitting", // 提交按钮状态（尤其重要）

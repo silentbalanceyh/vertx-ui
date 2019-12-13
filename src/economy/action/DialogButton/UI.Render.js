@@ -15,13 +15,15 @@ const getChildren = (reference) => {
             const type = Symbol.for("react.element");
             if (child instanceof React.Component) {
                 return React.cloneElement(child, {
+                    ...inherits,
                     rxClose: () => reference.setState({visible: false}),
-                    ...inherits
+                    /* rxClose 需要重写 */
                 });
             } else if (child.$$typeof === type) {
                 return React.cloneElement(child, {
+                    ...inherits,
+                    /* rxClose 需要重写 */
                     rxClose: () => reference.setState({visible: false}),
-                    ...inherits
                 });
             } else return child;
         });
@@ -37,7 +39,7 @@ const getChildren = (reference) => {
 };
 
 const renderDialog = (reference) => {
-    
+
     const {visible = false, dialog = {}} = reference.state;
     // 窗口中的房重复提交设置
     const {$loading} = reference.props;

@@ -3,7 +3,7 @@
         "company.type": {
             "uri": "/api/type/tabulars/:type",
             "magic": {
-                "type": "FIX:zero.company"
+                "type": "FIX:company.nature"
             }
         },
         "resource.companys": {
@@ -32,7 +32,7 @@
             "search.op.advanced": "高级搜索",
             "search.placeholder": "名称/编码",
             "search.advanced": true,
-            "search.advanced.width": "40%",
+            "search.advanced.width": "64%",
             "search.advanced.title": "搜索分公司",
             "search.advanced.notice": {
                 "message": "注意！",

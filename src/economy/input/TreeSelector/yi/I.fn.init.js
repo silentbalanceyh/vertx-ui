@@ -18,7 +18,7 @@ export default (reference) => {
              */
             const params = Ux.parseAjax(ref, config.ajax.magic);
             /*
-             * 构造 QQuery
+             * 构造
              */
             Ux.asyncData(config.ajax, params, ($data = {}) => {
                 /*

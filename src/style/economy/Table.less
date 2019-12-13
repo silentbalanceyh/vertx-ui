@@ -6,16 +6,27 @@
     @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
         .ix-table(
                 8px,
-                24px,
-                16px
+                24px
         );
     }
     // > 1600
     @media (min-width: @screen-xxl) {
         .ix-table(
                 12px,
-                32px,
-                24px
+                32px
         );
+    }
+}
+
+.web-table-adjust-fit {
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        tbody > tr:last-child > td {
+            // padding-bottom: 10px;
+        }
+    }
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        tbody > tr:last-child > td {
+            // padding-bottom: 14px;
+        }
     }
 }

@@ -16,10 +16,18 @@ export {default as ExArbor} from './ExArbor/UI';
 export {default as ExRegiment} from './ExRegiment/UI';
 /* （通用历史记录）X_ACTIVITY / X_ACTIVITY_CHANGE */
 export {default as ExHistory} from './ExHistory/UI';
+
+
 /* （通用记录显示）
  *  UI_FORM / Record 合并到一起（动态表单）
  **/
 export {default as ExRecord} from './ExRecord/UI';
+export {default as ExRelation} from './ExRelation/UI';
+
+/*
+ * SubForm 专用组件（子表单，本身不带表单结构）
+ */
+export {default as ExService} from './ExService/UI';
 /*
  * 【不可重用】业务类型控件
  */

@@ -18,9 +18,10 @@ export default (reference) => {
     /*
      * 是否 dirty
      */
-    const {$dirty = false, $loading = false} = state;
+    const {$dirty = false, $loading = false, $dirtyAsync = false} = state;
     inherit.$dirty = $dirty;
     inherit.$loading = $loading;
+    inherit.$dirtyAsync = $dirtyAsync;
     /*
      * 列过滤信息
      */

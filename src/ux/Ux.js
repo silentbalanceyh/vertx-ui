@@ -8,6 +8,7 @@ import entity from './entity';
 import unity from './unity';
 import graphic from './graphic';
 import xweb from './xweb';
+import romantic from './romantic';
 
 import E from './error';
 import reportUx from './Ux.Report';
@@ -28,6 +29,7 @@ const exported = {
     ...unity,
     ...graphic,
     ...xweb,
+    ...romantic,
     Env: {
         ...constant,
     },
@@ -43,6 +45,7 @@ console.info(entity);
 console.info(unity);
 console.info(graphic);
 console.info(E);
+console.info(romantic);
 console.warn(exported);
 console.groupEnd();
 reportUx();

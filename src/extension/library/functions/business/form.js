@@ -29,15 +29,36 @@ const remove = (reference) => (params = {}, config = {}) => {
 };
 const filter = (reference) => (params = {}) => {
     const {connector = "AND", ...rest} = params;
-    console.info(params);
-    const values = Ux.qrForm(rest, connector);
-    Fn.rx(reference).filter(values);    // 维持数据专用
+    const values = Ux.qrForm(rest, connector, reference);
+    /*
+     * 注意双参数
+     */
+    Fn.rx(reference).filter(values, params);    // 维持数据专用
     return Ux.promise(values)
         .then(response => Fn.rx(reference).close(response));
+};
+const query = (reference) => (params = {}, filters = {}) => {
+    params = Ux.valueValid(params);
+    const {connector = "AND", ...rest} = params;
+    const values = Ux.qrForm(rest, connector, reference);
+    const query = {};
+    query.form = Ux.clone(params);
+    if (Ux.isEmpty(filters)) {
+        query.condition = values;
+    } else {
+        const request = {};
+        request["$filters"] = filters;
+        request[""] = true;
+        request["$condition"] = values;
+        query.condition = request;
+    }
+    query.request = Ux.clone(values);
+    return Ux.promise(query);
 };
 export default (reference) => ({
     add: add(reference),
     save: save(reference),
     remove: remove(reference),
-    filter: filter(reference)
+    filter: filter(reference),
+    query: query(reference)
 })

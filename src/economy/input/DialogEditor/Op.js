@@ -48,6 +48,10 @@ const yiPage = (reference) => {
             const inherit = Event.yoInherit(reference);
             inherit.$inited = $inited;
             inherit.$mode = $mode;
+            const {value} = reference.props;
+            if (value) {
+                inherit.value = value;
+            }
             return (
                 <Component {...inherit}/>
             );

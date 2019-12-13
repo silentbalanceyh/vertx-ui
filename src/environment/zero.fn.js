@@ -169,14 +169,18 @@ const getDatum = (props, key) => {
 const fnRender = (props = {}, options = {}) => {
     let render = true;
     if (options.loading && 0 < options.loading.length) {
-        console.groupCollapsed("%c 「Zero」 数据加载专用日志....", `color:#eb2f96;font-weight:100`);
+        if (Ux.Env.DEBUG) {
+            console.groupCollapsed("%c 「Zero」 数据加载专用日志....", `color:#eb2f96;font-weight:100`);
+        }
         options.loading.forEach(key => {
             if (0 <= key.indexOf(".")) {
                 const value = getDatum(props, key);
                 if (!value) {
                     render = false;
                     // forEach中中断必须跳出
-                    console.debug(`[ERR]加载的数据问题（Tabular / Assist）：key = ${key}`);
+                    if (Ux.Env.DEBUG) {
+                        console.debug(`[ERR]加载的数据问题（Tabular / Assist）：key = ${key}`);
+                    }
                     return;
                 }
             } else {
@@ -184,12 +188,16 @@ const fnRender = (props = {}, options = {}) => {
                 if (!props[targetKey] || (props[targetKey].is && !props[targetKey].is())) {
                     render = false;
                     // forEach中中断必须跳出
-                    console.error(`[ERR]加载纯数据问题：key = ${key}`);
+                    if (Ux.Env.DEBUG) {
+                        console.error(`[ERR]加载纯数据问题：key = ${key}`);
+                    }
                     return;
                 }
             }
         });
-        console.groupEnd();
+        if (Ux.Env.DEBUG) {
+            console.groupEnd();
+        }
     }
     return render;
 };

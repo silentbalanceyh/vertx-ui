@@ -48,6 +48,10 @@ class QTreeLeaf implements QTreeNode {
         return this.isValid;
     }
 
+    deleted() {
+        return "__DELETE__" === this.value;
+    }
+
     /*
      * 两个叶子节点是否相同
      */

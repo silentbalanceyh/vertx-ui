@@ -2,7 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
 import Op from './Op';
-import {ExForm, ExRecord, ExTab} from 'ei';
+import {ExForm, ExRecord, ExRelation, ExTab} from 'ei';
 
 import History from './UI.History';
 
@@ -29,6 +29,7 @@ class Component extends React.PureComponent {
              */
             const tabs = Ux.fromHoc(this, "tabs");
             const rAttrs = Op.yoRecord(this);
+            const relAttrs = Op.yoRelation(this);
             return (
                 <div>
                     <ExForm {...formData} $height={"300px"}
@@ -40,6 +41,7 @@ class Component extends React.PureComponent {
                     <ExTab {...inherit} config={tabs}>
                         <ExRecord {...inherit} {...rAttrs}/>
                         <History {...inherit} $inited={$inited}/>
+                        <ExRelation {...inherit} {...relAttrs}/>
                     </ExTab>
                 </div>
             )

@@ -1,3 +1,5 @@
+import Abs from '../../abyss';
+
 const limitNumber = length => value => {
     if (value) {
         // 整数限制
@@ -13,6 +15,7 @@ const limitNumber = length => value => {
                 value = value.substring(0, length);
             }
         }
+        value = Abs.isNumber(value) ? parseInt(value, 10) : value;
     }
     return value;
 };
@@ -31,6 +34,7 @@ const limitPInteger = length => value => {
                 value = value.substring(0, length);
             }
         }
+        value = Abs.isNumber(value) ? parseInt(value, 10) : value;
     }
     return value;
 };
@@ -61,7 +65,8 @@ const limitDecimal = (length, scale = 2) => value => {
         if (length < value.length) {
             value = value.substring(0, length);
         }
-        return value;
+        // 4.最终数据成型
+        value = Abs.isDecimal(value) ? parseFloat(value) : value;
     }
     return value;
 };

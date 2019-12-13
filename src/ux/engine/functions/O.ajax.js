@@ -17,7 +17,17 @@ const asyncMagic = (config = {}, reference) => {
         if ("GET" === method) {
             return Ajax.ajaxGet(uri, parsed);
         } else {
-            return Ajax.ajaxPost(uri, parsed);
+            /*
+             * POST 的时候需要处理
+             */
+            const params = {};
+            if (config['qr']) {
+                params.criteria = parsed;
+            } else {
+                Object.assign(params, parsed);
+            }
+
+            return Ajax.ajaxPost(uri, params);
         }
     } else {
         return Promise.reject({error: "[ Ox ] ajax 配置中丢失了`uri`参数！"});

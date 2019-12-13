@@ -1,4 +1,4 @@
-import {Icon} from "antd";
+import {Empty, Icon} from "antd";
 import React from "react";
 import {Link} from "react-router-dom";
 import Cv from '../../constant';
@@ -173,6 +173,11 @@ const aiBlock = (icon, text, key) => {
         </dl>
     )
 };
+const aiEmpty = (size = 30) => (
+    <div style={{paddingTop: size, paddingBottom: size}}>
+        <Empty/>
+    </div>
+);
 export default {
     aiIcon,     // 图标解析
     aiUrl,      // 路由表地址解析
@@ -180,4 +185,5 @@ export default {
     aiTitle,    // 标题解析
     aiCell,     // 单元格解析
     aiBlock,    // 上边文字 / 下边图标
+    aiEmpty,    // 空处理
 }

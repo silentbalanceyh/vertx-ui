@@ -1,0 +1,105 @@
+{
+    "_form":{
+        "window":1,
+        "columns":3,
+        "ui":[
+            [
+                "namespace,名空间,12,,,readOnly=true",
+                "identifier,模型ID,12"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "serviceContainer",
+                    "config": {
+                        "activeKey": "tabCore",
+                        "items": "核心配置,tabCore;组件属性,tabBusiness;通道配置,tabChannel;字典配置,tabDict;映射配置,tabMapping",
+                        "pages": {
+                            "tabCore": {
+                                "ui": [
+                                    [
+                                        "identifierComponent,模型选择器,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        "configDatabase,数据库配置,24,,aiJsonEditor"
+                                    ],
+                                    [
+                                        "configIntegration,集成配置,24,,aiJsonEditor"
+                                    ]
+                                ]
+                            },
+                            "tabBusiness": {
+                                "ui": [
+                                    [
+                                        "serviceRecord,业务记录类,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        "serviceComponent,业务组件,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        "serviceConfig,业务组件配置,24,,aiJsonEditor"
+                                    ]
+                                ]
+                            },
+                            "tabChannel":{
+                                "ui":[
+                                    [
+                                        {
+                                            "metadata":"channelType,通道类型,24,,aiRadio",
+                                            "optionJsx.config.items":[
+                                                "ADAPTOR,适配器",
+                                                "ACTOR,任务管理器",
+                                                "CONNECTOR,连接器",
+                                                "DIRECTOR,数据访问器"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "channelComponent,通道组件,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        "channelConfig,通道组件配置,24,,aiJsonEditor"
+                                    ]
+                                ]
+                            },
+                            "tabDict":{
+                                "ui":[
+                                    [
+                                        "dictComponent,字典组件,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        "dictConfig,字典配置,24,,aiJsonEditor"
+                                    ]
+                                ]
+                            },
+                            "tabMapping":{
+                                "ui":[
+                                    [
+                                        "mappingComponent,映射组件,16,,,addonBefore=Java"
+                                    ],
+                                    [
+                                        {
+                                            "metadata":"mappingMode,映射模式,24,,aiRadio",
+                                            "optionJsx.config.items":[
+                                                "BEFORE,前置模式",
+                                                "AFTER,后置模式",
+                                                "AROUND,环绕模式"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "mappingConfig,映射配置,24,,aiJsonEditor"
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ],
+        "hidden":[
+            "serviceId"
+        ]
+    }
+}

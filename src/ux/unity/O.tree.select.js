@@ -1,13 +1,13 @@
 import Ele from '../element';
 import Abs from '../abyss';
 // 常用：当前节点 和 所有父节点
-const treeParentAllIn = (keys = [], data = []) =>
-    keys.map(key => Ele.elementBranch(data, key))
+const treeParentAllIn = (keys = [], data = [], parent = "parent") =>
+    keys.map(key => Ele.elementBranch(data, key, parent))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 // 所有父节点
-const treeParentAll = (keys = [], data = []) =>
-    keys.map(key => Ele.elementBranch(data, key))
+const treeParentAll = (keys = [], data = [], parent = "parent") =>
+    keys.map(key => Ele.elementBranch(data, key, parent))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
         .filter(item => !Abs.immutable(keys).contains(item));
@@ -24,20 +24,42 @@ const treeChildren = (keys = [], data = []) =>
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 // 所有子节点
-const treeChildrenAll = (keys = [], data = []) =>
+const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item))
+        .map(item => Ele.elementChild(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 // 常用：当前节点 和 所有子节点
-const treeChildrenAllIn = (keys = [], data = []) =>
+const treeChildrenAllIn = (keys = [], data = [], parentField = "parent") =>
     keys.concat(keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item))
+        .map(item => Ele.elementChild(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
     );
+const treeFlip = (data = [], config = {}) => {
+    const {
+        parent = 'parent',  // 构造树的父字段
+        divider = '/',      // 拉平的分隔符
+        keyField,           // 拉平过后的 key 字段
+    } = config;
+    const $path = {};
+    if (keyField && "string" === typeof keyField) {
+        let $category = Abs.clone(data);
+        data.forEach(each => {
+            const keyValue = each[keyField];
+            if (keyValue) {
+                $path[keyValue] = treeParentAllIn([each.key], $category, parent)
+                    .map(key => Ele.elementUnique(data, "key", key))
+                    .filter(record => !!record)
+                    .map(record => record.name)
+                    .join(divider);
+            }
+        });
+    }
+    return $path;
+};
 export default {
     // 常用：当前节点 和 所有父节点
     treeParentAllIn,
@@ -51,6 +73,8 @@ export default {
     treeChildrenAll,
     // 常用：当前节点 和 所有子节点
     treeChildrenAllIn,
+    // 拉平构造 $path,
+    treeFlip,
     Tree: {
         CHILDREN_ALL_INCLUDE: treeChildrenAllIn,
         CHILDREN_ALL: treeChildrenAll,

@@ -1,5 +1,5 @@
 import U from 'underscore';
-import Ux from "ux";
+import Abs from '../abyss';
 
 /**
  * 不重复追加值到`item`对象中（包含则不设置）
@@ -43,6 +43,17 @@ const valueValid = (data = {}, wild = false) => {
             }
         }
     }
+    // Number / Float 自动转换
+    // eslint-disable-next-line
+    /*
+    for (const key in data) {
+        if (Abs.isCurrency(data[key])) {
+            data[key] = Num.valueFloat(data[key], 0.0);
+        } else if (Abs.isInteger(data[key])) {
+            data[key] = Num.valueInt(data[key], 0.0);
+        }
+    }
+    */
     return data;
 };
 const valuePath = (data = {}, path) => {
@@ -51,7 +62,7 @@ const valuePath = (data = {}, path) => {
         throw new Error("[ Ux ] valuePath 要求第二个参数必须是 String 类型");
     }
     if (path.indexOf('.')) {
-        const $data = Ux.immutable(data);
+        const $data = Abs.immutable(data);
         const fullPath = path.split('.');
         const calculated = $data.getIn(fullPath);
         if (calculated) {

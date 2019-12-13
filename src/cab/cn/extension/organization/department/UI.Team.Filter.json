@@ -18,18 +18,36 @@
                 "code`c,编号,24"
             ],
             [
-                "leaderName`c,组长名称,24"
+                "leaderName,组长名称,24,,aiSearchInput"
             ],
             [
                 {
-                    "metadata": "deptId`=,所属部门,24,,aiSelect",
-                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                    "metadata": "deptId`i,所属部门,24,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 2,
+                    "optionJsx.allowClear":true
                 }
             ],
             [
                 {
-                    "metadata": "teamId`=,上级组,24,,aiSelect",
-                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                    "metadata": "teamId`i,上级组,24,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 2,
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata":"active`i,启用,24,,aiCheckbox",
+                    "optionJsx.config.items":[
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "optionConfig":{
+                        "valuePropName": "checked"
+                    }
                 }
             ],
             [

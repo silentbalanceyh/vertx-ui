@@ -1,7 +1,10 @@
 import U from "underscore";
 import Ut from '../../unity';
 import Cmn from './I.common';
-import Ux from "ux";
+/*
+ * query 专用的表单
+ */
+import qrForm from './O.fn.input.query';
 
 const qrTerms = (columns = []) => {
     /*
@@ -36,7 +39,7 @@ const qrTerms = (columns = []) => {
     }
     Object.freeze($terms);
     return $terms;
-}
+};
 const qrClear = (reference = {}, state = {}) => {
     let append = state ? state : {};
     Object.assign(append, {$condition: {}});
@@ -44,10 +47,10 @@ const qrClear = (reference = {}, state = {}) => {
 
     const {$terms = {}} = reference.state ? reference.state : {};
     Object.keys($terms)
-    /* 列筛选必须调用 */
+        /* 列筛选必须调用 */
         .map(id => `__BTN_CLEAR_${id}`)
         .forEach(id => Ut.connectId(id))
-}
+};
 const qrInput = (cond = [], value) => {
     const condition = {};
     if (value) {
@@ -56,18 +59,6 @@ const qrInput = (cond = [], value) => {
         cond.forEach(field => condition[field] = "__DELETE__");
     }
     condition[""] = false;
-    return Cmn.finalize(condition);
-};
-const qrForm = (input, connector = "OR") => {
-    const condition = {};
-    condition[""] = ("AND" === connector);
-    Ux.itObject(input, (field, value) => {
-        if (value) {
-            condition[field] = value;
-        } else {
-            condition[field] = "__DELETE__";
-        }
-    });
     return Cmn.finalize(condition);
 };
 export default {

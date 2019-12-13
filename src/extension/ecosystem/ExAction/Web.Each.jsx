@@ -8,6 +8,7 @@ import Ux from 'ux';
 export default (reference, config = {}, attributes = {}) => {
     const type = Op.getType(config);
     config = Ux.clone(config);  // 拷贝以保证 ExAction 和 ExDialog 每次都刷新
+
     return "NONE" === type ?
         (<ExButton {...attributes} key={config.key}
                    config={config}/>) :

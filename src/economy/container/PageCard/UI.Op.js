@@ -8,8 +8,16 @@ const onClickBack = (reference, topbar) => (event) => {
     if (topbar.back.state) {
         Ux.writeTree(reference, topbar.back.state);
     }
+    // 可使用target
+    const target = Ux.toQuery("target");
+    let previous;
+    if (target) {
+        previous = target;
+    } else {
+        previous = topbar.back.uri ? topbar.back.uri : Ux.Env.ENTRY_ADMIN;
+    }
     // 导航处理
-    Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
+    Ux.toRoute(reference, previous);
 };
 const _applyLoading = (item, props = {}) => {
     const {$submitting} = props;
@@ -62,8 +70,8 @@ const initComponent = (ref) => {
     // 2.拷贝当前hoc配置
     topbar = Ux.clone(topbar ? topbar : {});
     // 3.解析left和right（分别解析）
-    if (topbar.left) topbar.left = Ux.aiExprButton(topbar.left, ref.props);
-    if (topbar.right) topbar.right = Ux.aiExprButton(topbar.right, ref.props);
+    if (topbar.left) topbar.left = Ux.aiExprButtons(topbar.left, ref.props);
+    if (topbar.right) topbar.right = Ux.aiExprButtons(topbar.right, ref.props);
     // 4.解析结果保存在状态中，只执行一次
     ref.setState({$config: topbar});
 };

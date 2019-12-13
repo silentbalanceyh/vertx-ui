@@ -1,6 +1,7 @@
 {
     "_form": {
-        "window": -0.3,
+        "window": -0.5,
+        "columns":2,
         "ui": [
             [
                 {
@@ -12,10 +13,52 @@
                 }
             ],
             [
-                "title`c,标题,24"
+                "title`c,标题,12",
+                "name`c,名称,12"
             ],
             [
-                "name`c,名称,24"
+                {
+                    "metadata": "type`i,性质,24,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=company.type,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 3,
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                "code`c,系统编号,12",
+                "phone`c,座机,12"
+            ],
+            [
+                "email`c,邮箱,12",
+                "fax`c,传真,12"
+            ],
+            [
+                "address`c,地址,24"
+            ],
+            [
+                "taxTitle`c,发票抬头,12",
+                "taxCode`c,税号,12"
+            ],
+            [
+                {
+                    "metadata":"corporationName,法人姓名,12,,aiSearchInput",
+                    "optionJsx.layout": {
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "corporationPhone`c,法人电话,12"
+            ],
+            [
+                {
+                    "metadata":"contactName,联系人姓名,12,,aiSearchInput",
+                    "optionJsx.layout": {
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "contactPhone`c,联系人电话,12"
             ],
             [
                 {

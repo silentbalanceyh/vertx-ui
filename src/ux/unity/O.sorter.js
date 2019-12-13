@@ -1,3 +1,5 @@
+import Ele from '../element';
+import moment from 'moment';
 // 还有Bug
 const sortString = (left = "", right = "", asc = true) => {
     const minLen = Math.max(left.length, right.length);
@@ -37,6 +39,19 @@ const sortT = (left, right, asc = true) => {
         }
     }
 };
+
+const sortDate = (left, right, asc = true) => {
+    const leftDate = Ele.valueTime(left);
+    const rightDate = Ele.valueTime(right);
+    if (moment.isMoment(leftDate) && moment.isMoment(rightDate)) {
+        if (asc) {
+            return leftDate.isBefore(rightDate) ? -1 : 1;
+        } else {
+            return leftDate.isBefore(rightDate) ? 1 : -1;
+        }
+    } else return 0;
+};
+
 /**
  * @class Sorter
  * @description Table组件排序专用函数，对应列中的sorter
@@ -54,6 +69,8 @@ export default {
     sorterAscFn: (key) => (left, right) => key ? sortString(left[key], right[key]) : sortString(left, right),
     sorterAscT: (left, right, key) => key ? sortT(left[key], right[key]) : sortT(left, right),
     sorterAscTFn: (key) => (left, right) => key ? sortT(left[key], right[key]) : sortT(left, right),
+    sorterAscD: (left, right, key) => key ? sortDate(left[key], right[key]) : sortDate(left, right),
+    sorterAscDFn: (key) => (left, right) => key ? sortDate(left[key], right[key]) : sortDate(left, right),
     /**
      * 逆序排序
      * @method sorterDesc
@@ -66,4 +83,6 @@ export default {
     sorterDescFn: (key) => (left, right) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
     sorterDescT: (left, right, key) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
     sorterDescTFn: (key) => (left, right) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
+    sorterDescD: (left, right, key) => key ? sortDate(left[key], right[key], false) : sortDate(left, right, false),
+    sorterDescDFn: (key) => (left, right) => key ? sortDate(left[key], right[key], false) : sortDate(left, right, false)
 };

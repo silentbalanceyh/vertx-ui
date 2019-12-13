@@ -14,7 +14,7 @@ const finalize = (params = {}) => {
         }
     }
     return $filters;
-}
+};
 export default {
     finalize
 }

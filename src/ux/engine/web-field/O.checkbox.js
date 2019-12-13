@@ -37,6 +37,15 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const {config} = jsx;
     if (config) {
         const options = R.Ant.toOptions(reference, config);
+        /*
+         * 特殊初始值
+         */
+        const initial = jsx['data-initial'];
+        if (initial) {
+            if (U.isArray(initial)) {
+                rest.defaultValue = initial;
+            }
+        }
         return (
             <Checkbox.Group {...rest} options={options}/>
         )

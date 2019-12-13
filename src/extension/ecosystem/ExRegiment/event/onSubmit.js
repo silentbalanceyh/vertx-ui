@@ -12,7 +12,7 @@ export default (reference, config = {}) => (event) => {
     } else {
         const {rxSubmit} = reference.props;
         if (U.isFunction(rxSubmit)) {
-            rxSubmit($selected);
+            rxSubmit($selected, reference);
         }
     }
 }
