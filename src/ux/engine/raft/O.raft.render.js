@@ -179,7 +179,12 @@ const raftRender = (cell = {}, config = {}) => {
                 optionConfig: cell.optionConfig,
                 render: cell.render,
             });
-
+            /*
+             * 解决某些场景无法复制的忧伤
+             */
+            if (optionJsx && values[cell.field]) {
+                optionJsx['data-initial'] = values[cell.field];
+            }
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

@@ -12,12 +12,22 @@ class Component extends React.PureComponent {
         Op.yiPage(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuPage(this, {props: prevProps, state: prevState});
+    }
+
     render() {
         return Ex.yoRender(this, () => {
             const {$config = {}, $inited = {}} = this.state;
-            const form = Ex.yoForm(this, {form: $config}, $inited);
+            const {$op = {}} = this.props;
+            const form = Ex.yoForm(this,
+                {form: $config},
+                $inited);
+            /*
+             * 多一阶函数
+             */
             return (
-                <ExForm {...form} $height={"300px"}/>
+                <ExForm {...form} $height={"300px"} $op={$op}/>
             )
         }, Ex.parserOfColor("ExRecord").component())
     }

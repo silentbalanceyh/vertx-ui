@@ -23,9 +23,9 @@ export default (reference) => (event) => {
      * 提示信息处理，清除操作
      */
     return _nextConfirm(reference)
-    /*
-     * 确认后的操作
-     */
+        /*
+         * 确认后的操作
+         */
         .then(Ux.ajax2True(() => {
             /*
              * 清除专用操作
@@ -34,7 +34,12 @@ export default (reference) => (event) => {
             reference.setState({
                 searchText: ""
             });
-            Ex.rx(reference).filter();
+            /*
+             * 清除两个变量
+             * 1）$filters（条件）
+             * 2）$filtersRaw（表单）
+             */
+            Ex.rx(reference).filter({}, {});
         }))
     // onSearch(reference)("");    // onSearch 处理事件
     // reference.setState({searchText: ""});

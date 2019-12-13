@@ -33,6 +33,10 @@ import RichEditor from './O.editor.rich';
 import TeamSelector from './O.selector.team'
 import DialogEditor from './O.editor.dialog';
 import JsonEditor from './O.editor.json';
+// 搜索
+import SearchInput from './O.search.input';
+import SearchRangeDate from './O.search.range.date';
+
 import Dev from '../../develop';
 
 const exported = {
@@ -68,7 +72,10 @@ const exported = {
     ...TeamSelector,
     ...Button,
     ...DialogEditor,
-    ...JsonEditor
+    ...JsonEditor,
+
+    ...SearchInput,
+    ...SearchRangeDate
 };
 Dev.dgDebug(exported, "所有合法的表单字段", "#DAA520");
 export default exported;

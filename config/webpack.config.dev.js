@@ -5,8 +5,11 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const {CheckerPlugin} = require('awesome-typescript-loader');
+
+const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
@@ -22,7 +25,6 @@ const publicPath = "/";
 const publicUrl = "";
 // Get environment variables to inject into our app.
 const env = getClientEnvironment(publicUrl);
-
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
@@ -118,7 +120,24 @@ module.exports = {
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
-                use: ["babel-loader", "awesome-typescript-loader"],
+                use: [
+                    {
+                        options: {
+                            useTranspileModule: true,
+                            forceIsolatedModules: true,
+                            useCache: true,
+                            useBabel: true,
+                            babelOptions: {
+                                "babelrc": false, /* Important line */
+                                "presets": [
+                                    ["@babel/preset-env", {"modules": false}]
+                                ]
+                            },
+                            babelCore: "@babel/core"
+                        },
+                        loader: require.resolve("awesome-typescript-loader")
+                    }
+                ],
                 exclude: [
                     path.resolve(path.join(__dirname, "../node_modules"))
                 ]
@@ -195,22 +214,68 @@ module.exports = {
                 options: {
                     plugins: [
                         ["import", {libraryName: "antd", style: true}],
-                        "transform-class-properties",
-                        "transform-decorators-legacy",
-                        "transform-decorators",
-                        "transform-async-to-generator",
-                        "transform-react-jsx",
-                        "transform-do-expressions",
-                        "syntax-do-expressions",
-                        "transform-object-rest-spread",
-                        "transform-function-bind",
-                        "transform-object-assign",
-                        "transform-runtime"
+                        [
+                            "@babel/plugin-transform-runtime",
+                            {
+                                "corejs": 2
+                            }
+                        ],
+                        "@babel/plugin-proposal-function-bind",
+                        "@babel/plugin-proposal-export-default-from",
+                        "@babel/plugin-proposal-logical-assignment-operators",
+                        [
+                            "@babel/plugin-proposal-optional-chaining",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        [
+                            "@babel/plugin-proposal-pipeline-operator",
+                            {
+                                "proposal": "minimal"
+                            }
+                        ],
+                        [
+                            "@babel/plugin-proposal-nullish-coalescing-operator",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        "@babel/plugin-proposal-do-expressions",
+                        [
+                            "@babel/plugin-proposal-decorators",
+                            {
+                                "legacy": true
+                            }
+                        ],
+                        "@babel/plugin-proposal-function-sent",
+                        "@babel/plugin-proposal-export-namespace-from",
+                        "@babel/plugin-proposal-numeric-separator",
+                        "@babel/plugin-proposal-throw-expressions",
+                        "@babel/plugin-syntax-dynamic-import",
+                        "@babel/plugin-syntax-import-meta",
+                        [
+                            "@babel/plugin-proposal-class-properties",
+                            {
+                                "loose": false
+                            }
+                        ],
+                        "@babel/plugin-proposal-json-strings",
+                        "@babel/plugin-transform-modules-commonjs"
                     ],
                     // This is a feature of `babel-loader` for webpack (not Babel itself).
                     // It enables caching results in ./node_modules/.cache/babel-loader/
                     // directory for faster rebuilds.
-                    presets: [["env", {modules: false}]],
+                    presets: [
+                        [
+                            "@babel/preset-env",
+                            {
+                                "modules": false
+                            }
+                        ],
+                        "@babel/preset-react",
+                        "@babel/preset-typescript"
+                    ],
                     cacheDirectory: true
                 }
             },
@@ -281,6 +346,10 @@ module.exports = {
         ]
     },
     plugins: [
+        // 同时启动专用端口
+        new BundleAnalyzerPlugin({
+            analyzerPort: 5888
+        }),
         new CheckerPlugin(),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({

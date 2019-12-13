@@ -4,9 +4,11 @@ import U from "underscore";
 export default (reference, config = {}) => {
     const options = Ux.clone(config.options);
     const {rxInject} = reference.props;
+    let $options = {};
     if (U.isFunction(rxInject)) {
-        return rxInject(options);
+        $options = rxInject(options);
     } else {
-        return options;
+        $options = options;
     }
+    return $options;
 };

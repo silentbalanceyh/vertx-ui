@@ -5,13 +5,21 @@ import {ExComplexList} from "ei";
 import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
+import Op from "../../organization/company/Op";
 
+/*
+ * modified by Hongwei
+ * .ready(true) removed
+ * componentDidMount added
+ */
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI.List")
-    .ready(true)
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Op.yiList(this);
+    }
 
     render() {
         return Ex.yoRender(this, () => {

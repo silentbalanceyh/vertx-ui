@@ -1,4 +1,12 @@
 {
+    "_assist": {
+        "ajax.groups": {
+            "uri": "/api/group/by/sigma"
+        },
+        "ajax.roles": {
+            "uri": "/api/role/by/sigma"
+        }
+    },
     "_grid": {
         "query": {
             "projection": [],
@@ -36,7 +44,7 @@
             "identifier": "user",
             "dynamic.op": false,
             "dynamic.column": true,
-            "dynamic.switch": false,
+            "dynamic.switch": true,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
             "op.batch.edit": "批量更新",

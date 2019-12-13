@@ -14,13 +14,16 @@ const rxDelete = (reference) => (key) => {
                     }
                     //修改状态
                     if (0 === $selected.length) {
-                        reference.setState({$selected: []});
+                        reference.setState({$selected: [], $dirtyAsync: false});
                     } else {
-                        reference.setState($selected);
+                        reference.setState({$selected, $dirtyAsync: false});
                     }
                 }
-            );
-        ;
+            )
+            .catch(error => {
+                console.error(error);
+                reference.setState({$dirtyAsync: false})
+            })
     }
 };
 const rxView = (reference) => (key) => {

@@ -9,7 +9,7 @@
         "noImplicitAny": false,
         "module": "commonjs",
         "target": "es2016",
-        "sourceMap": false,
+        "sourceMap": true,
         "alwaysStrict": false,
         "allowJs": true,
         "noImplicitUseStrict": true,
@@ -17,45 +17,47 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "removeComments": true,
+        "traceResolution": true,
         "paths": {
             "environment": [
-                "src/environment"
+                "src/environment/"
             ],
             "entity": [
-                "src/entity"
+                "src/entity/"
             ],
             "lang": [
-                "src/cab"
+                "src/cab/"
             ],
             "web": [
-                "src/economy"
+                "src/economy/"
             ],
             "ux": [
-                "src/ux"
+                "src/ux/"
             ],
             "app": [
-                "src/app"
+                "src/app/"
             ],
             "ex": [
-                "src/extension/library"
+                "src/extension/library/"
             ],
             "ei": [
-                "src/extension/ecosystem"
+                "src/extension/ecosystem/"
             ],
             "oi": [
-                "src/extension/eclat"
+                "src/extension/eclat/"
             ],
             "mock": [
-                "src/mock"
+                "src/mock/"
             ]
         }
     },
     "exclude": [
-        "node_modules/**/*.*",
+        "node_modules/**/*.ts",
         "src/**/*.js",
         "config/**/*.js"
     ],
     "include": [
+        "src/economy/**/*.ts",
         "src/entity/**/*.ts",
         "src/c*/**/*.ts"
     ],

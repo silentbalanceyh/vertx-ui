@@ -30,6 +30,40 @@
             ],
             [
                 {
+                    "metadata": "password,新密码,14,,,type=password",
+                    "optionConfig.rules": [
+                        "required,请输入密码",
+                        {
+                            "min": 8,
+                            "message": "密码长度必须大于8个字符！"
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "cpassword,确认密码,14,,,type=password",
+                    "optionConfig.rules": [
+                        "required,请再次输入密码",
+                        {
+                            "min": 8,
+                            "message": "密码长度必须大于等于8个字符！"
+                        },
+                        {
+                            "validator": "same",
+                            "message": "两次输入密码不一致！",
+                            "config": {
+                                "to": "password"
+                            },
+                            "condition": [
+                                "to.length >= 8"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            [
+                {
                     "metadata":"mobile,手机号,14,,,placeholder=请输入手机号!",
                     "optionConfig.rules": [
                         "required,请输入手机号,手机号不能为空!",

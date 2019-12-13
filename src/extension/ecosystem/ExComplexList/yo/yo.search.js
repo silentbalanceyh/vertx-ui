@@ -21,8 +21,15 @@ export default (reference) => {
     /*
      * 查询条件专用处理
      */
-    const {$filters = {}} = reference.state;
-    attrs.$inited = $filters;
+    const {$filters = {}, $filtersRaw = {}} = reference.state;
+    if ($filtersRaw) {
+        /*
+         * 引入组件过后的操作
+         */
+        attrs.$inited = $filtersRaw;
+    } else {
+        attrs.$inited = $filters;
+    }
     /*
      * 清空按钮专用状态
      */

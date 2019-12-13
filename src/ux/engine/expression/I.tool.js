@@ -17,7 +17,7 @@ const uniform = (item, callback) => {
 
 const applyValue = (option) => {
     uniform(option, (item) => {
-        if (item.key && !item.value) {
+        if (item.key && undefined === item.value) {
             item.value = item.key;
         }
     });

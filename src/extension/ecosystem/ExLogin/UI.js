@@ -2,14 +2,9 @@ import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
 
-const jsx = {
-    username: Ux.aiInput,
-    password: Ux.aiInput
-};
-
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExLogin")
-    .form().raft(1).raft(jsx)
+    .form().raft(1).raft(Ex.Jsx.Login)
     .bind(Ex.Op)
     .to()
 )

@@ -7,6 +7,7 @@ import Datum from '../datum';
 import T from './I.tool';
 import Pr from '../parser';
 import Ut from '../../unity';
+import Abs from '../../abyss';
 
 const _parseData = (reference, config = {}) => {
     // 源头
@@ -131,8 +132,14 @@ const getFilter = (reference, config = {}) => {
                 /*
                  * Cascade 计算
                  * 有值的时候很好处理，直接针对值进行 cascade 的过滤
+                 * 多选和单选的处理方法不同
                  * */
-                return value === item[cascade.source];
+                if (U.isArray(value)) {
+                    const $value = Abs.immutable(value);
+                    return $value.contains(item[cascade.source]);
+                } else {
+                    return value === item[cascade.source];
+                }
             } else {
                 /*
                  * 无值的时候分为两种情况
@@ -165,6 +172,19 @@ const getSource = (reference, config, filter = {}) => {
          * 不能启用 filter / cascade
          */
         options = Expr.aiExprOption(config.items);
+        if (2 === options.length) {
+            /*
+             * true 和 false 专用
+             */
+            options.forEach(option => {
+                if ("true" === option.value) {
+                    option.value = true;
+                }
+                if ("false" === option.value) {
+                    option.value = false;
+                }
+            })
+        }
     } else if (config.datum) {
         /*
          * 如果存在datum节点，则从assist/tabular数据源中读取

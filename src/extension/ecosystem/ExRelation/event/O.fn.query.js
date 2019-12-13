@@ -63,16 +63,14 @@ export default (reference, key) => {
                     keys = source.filter(cat => $ids.contains(cat.identifier))
                         .map(cat => cat.key);
                 }
-                if (0 < keys.length) {
-                    const {categoryField = []} = editConfig;
-                    const subset = {};
-                    categoryField.forEach(field => subset[`${field},i`] = keys);
-                    subset[""] = false;
-                    /*
-                     * 条件描述追加
-                     */
-                    criteria["$0"] = subset;
-                }
+                const {categoryField = []} = editConfig;
+                const subset = {};
+                categoryField.forEach(field => subset[`${field},i`] = keys);
+                subset[""] = false;
+                /*
+                 * 条件描述追加
+                 */
+                criteria["$0"] = subset;
             }
         }
         {

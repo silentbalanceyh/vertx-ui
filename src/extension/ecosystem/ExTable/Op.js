@@ -106,6 +106,7 @@ const yuTable = (reference, previous = {}) => {
      * -- 2）state 中的 $dirty 发生了变化，并且是 true，直接刷新界面
      */
     Ex.yuDirty(reference, {state, props});
+    Ex.yuDirtyAsync(reference, {state, props});
     /*
      * $loading 专用
      */

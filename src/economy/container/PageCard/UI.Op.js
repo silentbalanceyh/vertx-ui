@@ -8,8 +8,16 @@ const onClickBack = (reference, topbar) => (event) => {
     if (topbar.back.state) {
         Ux.writeTree(reference, topbar.back.state);
     }
+    // 可使用target
+    const target = Ux.toQuery("target");
+    let previous;
+    if (target) {
+        previous = target;
+    } else {
+        previous = topbar.back.uri ? topbar.back.uri : Ux.Env.ENTRY_ADMIN;
+    }
     // 导航处理
-    Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
+    Ux.toRoute(reference, previous);
 };
 const _applyLoading = (item, props = {}) => {
     const {$submitting} = props;

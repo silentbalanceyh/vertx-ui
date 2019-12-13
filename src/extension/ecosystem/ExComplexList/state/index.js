@@ -16,6 +16,23 @@ import Ux from 'ux';
  */
 const sync = (reference, config = {}) => {
     const state = {};
+    {
+        /*
+         * 禁止选项专用，禁止掉 config 中的多余选项，保证最终信息
+         */
+        const {$forbidden = {}} = reference.props;
+        if (!Ux.isEmpty($forbidden) && config.options) {
+            /*
+             * 旧代码：config = Ux.clone(config)
+             * *：不可以拷贝，需要删除原始配置中的 options
+             */
+            Object.keys($forbidden).forEach(optKey => {
+                if (!$forbidden[optKey] && config.options.hasOwnProperty(optKey)) {
+                    delete config.options[optKey];
+                }
+            })
+        }
+    }
     /*
      * 存储 options 到状态中（以后每次从 options 中读取）
      * 1. options中的配置比较多，需要单独提取

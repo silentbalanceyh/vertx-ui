@@ -71,8 +71,21 @@ const toModelId = (reference, field) => {
     const module = Ux.fromHoc(reference, "module");
     if (module[field]) {
         const config = module[field];
-        const modelId = Ux.isEmpty(inited) ? "__DEFAULT__" : inited['modelId'];
-        if (config) return config[modelId];
+        return toIdentifier(config, inited['modelId']);
+    }
+};
+const toIdentifier = (config = {}, program) => {
+    if (Ux.isEmpty(config)) {
+        throw new Error(" config 在解析 modelId 的时候不可为空，请检查！")
+    } else {
+        const defaultValue = config.__DEFAULT__ ? config.__DEFAULT__ : "__DEFAULT__";
+        const identifier = program ? program : defaultValue;
+        if (config.hasOwnProperty('__PATTERN__')) {
+            const expr = config.__PATTERN__;
+            return Ux.formatExpr(expr, {identifier});
+        } else {
+            return config[identifier];
+        }
     }
 };
 export default {
@@ -80,5 +93,6 @@ export default {
     toDialog,
     toNamespace,
     toColor,
-    toModelId
+    toModelId,
+    toIdentifier,
 }

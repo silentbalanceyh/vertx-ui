@@ -12,10 +12,36 @@
                 }
             ],
             [
-                "type`c,日志分类,24"
+                {
+                    "metadata":"level`c,日志级别,24,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.items": [
+                        "INFO,信息",
+                        "WARN,警告",
+                        "ERROR,错误"
+                    ],
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 4,
+                    "optionJsx.allowClear":true
+                }
             ],
             [
-                "level`c,日志级别,24"
+                "infoReadable`c,详细内容,24"
+            ],
+            [
+                "infoStack`c,错误堆栈,24"
+            ],
+            [
+                "infoSystem`c,系统信息,24"
+            ],
+            [
+                {
+                    "metadata":"infoAt,日志记录时间,24,,aiSearchRangeDate",
+                    "optionJsx.config":{
+                        "mode":"FULL",
+                        "format":"YYYY-MM-DD HH:mm",
+                        "placeholder":["开始时间","结束时间"]
+                    }
+                }
             ],
             [
                 {

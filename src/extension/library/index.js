@@ -11,8 +11,12 @@ import Xui from './xui';
 import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
+import Jsx from './jsx';
+
+import Ux from 'ux';
 
 const exported = {
+    Jsx,
     /*
      * 新的Api处理
      */
@@ -64,7 +68,9 @@ const exported = {
     // 高阶组件专用
     ox,
 };
-console.groupCollapsed("%c 「 Ex 」 Zero Extension Framework ( Ex )", "font-weight:900;color:#228B22");
-console.info("「 Ex 」 Zero Common Library ( zero-ui include )", exported);
-console.groupEnd();
+if (Ux.Env.DEBUG) {
+    console.groupCollapsed("%c 「 Ex 」 Zero Extension Framework ( Ex )", "font-weight:900;color:#228B22");
+    console.info("「 Ex 」 Zero Common Library ( zero-ui include )", exported);
+    console.groupEnd();
+}
 export default exported;

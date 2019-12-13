@@ -29,9 +29,11 @@ class Component extends React.PureComponent {
             $config = Op.yoQuery(this, $config);
             return (
                 <ExComplexList {...inherit} config={$config}
-                               $form={$form}    // 添加专用
-                               $record={$record}
-                               $query={$config.query}/>
+                               $form={$form}            // 增删改专用Form注入
+                               $record={$record}        // 复杂表单专用的记录，替换 $inited 的第二原始数据
+                               $forbidden={$config.$forbidden} // 关闭 options 专用
+                               $query={$config.query}   // 外置专用的 query 读取
+                />
             );
         }, Ex.parserOfColor("OxList").list());
     }

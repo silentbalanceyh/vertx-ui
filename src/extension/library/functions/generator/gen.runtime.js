@@ -24,8 +24,8 @@ export default {
         condition: (condition = {}) =>
             Cm.seek(reference, 'rxCondition')([condition]),
         /* 更改 $filters */
-        filter: (filters = {}) =>
-            Cm.seek(reference, "rxFilter")([filters]),
+        filter: (filters = {}, filtersRaw) =>
+            Cm.seek(reference, "rxFilter")([filters, filtersRaw]),
         /* 更改 $columnsMy */
         projection: (columnsMy = [], addOn = {}) =>
             Cm.seek(reference, 'rxProjection')([columnsMy, addOn]),

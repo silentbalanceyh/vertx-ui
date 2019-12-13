@@ -12,16 +12,32 @@
                 }
             ],
             [
-                "username`c,账号,24"
+                "realname,姓名,24,,aiSearchInput"
             ],
             [
-                "realname`c,姓名,24"
+                "alias`c,昵称,24"
+            ],
+
+            [
+                "username,账号,24,,aiSearchInput"
             ],
             [
                 "mobile`c,手机号,24"
             ],
             [
                 "email`c,邮件,24"
+            ],
+            [
+                {
+                    "metadata":"active`i,启用,24,,aiCheckbox",
+                    "optionJsx.config.items":[
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "optionConfig":{
+                        "valuePropName": "checked"
+                    }
+                }
             ],
             [
                 {
