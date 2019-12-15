@@ -2,8 +2,6 @@ import yiDialog from './I.fn.dialog';
 import yiTable from './I.fn.table';
 import yiSearch from './I.fn.search';
 import yiClick from './I.fn.click';
-import yiInit from './I.fn.init';
-import yiUpdate from './I.fn.update';
 
 const yiDefault = (reference = {}) => {
     const {config = {}} = reference.props;
@@ -28,6 +26,4 @@ const yiDefault = (reference = {}) => {
 
 export default {
     yiDefault,
-    yiInit,
-    yiUpdate,
 }

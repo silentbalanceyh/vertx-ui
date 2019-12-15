@@ -1,7 +1,8 @@
 import G from "../global";
 import Ux from "ux";
+import U from 'underscore';
 
-const rxDelete = (reference) => (key) => {
+const rxDelete = (reference) => (key, callback) => {
     if (key) {
         const {options = {}, $selected = []} = reference.state;
         const uri = options[G.Opt.AJAX_DELETE_URI];
@@ -14,15 +15,21 @@ const rxDelete = (reference) => (key) => {
                     }
                     //修改状态
                     if (0 === $selected.length) {
-                        reference.setState({$selected: [], $dirtyAsync: false});
+                        reference.setState({$selected: []});
                     } else {
-                        reference.setState({$selected, $dirtyAsync: false});
+                        reference.setState({$selected});
                     }
+                    // 删除后续方法
+                    const {rxPostDelete} = reference.props;
+                    if (U.isFunction(rxPostDelete)) {
+                        rxPostDelete({key});
+                    }
+                    callback(key);
                 }
             )
             .catch(error => {
                 console.error(error);
-                reference.setState({$dirtyAsync: false})
+                reference.setState({$dirtyAsync: false});
             })
     }
 };

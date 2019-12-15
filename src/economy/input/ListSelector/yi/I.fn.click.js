@@ -1,5 +1,4 @@
 import Ux from "ux";
-import T from '../util';
 
 export default (reference, config = {}) => event => {
     // 常用的事件处理
@@ -15,7 +14,7 @@ export default (reference, config = {}) => event => {
     /**
      * 解析Ajax参数信息
      */
-    const params = T.parseParams(reference, config);
+    const params = Ux.xtLazyAjax(reference, config);
     Ux.asyncData(config.ajax, params,
         ($data) => reference.setState({
             $loading: false,

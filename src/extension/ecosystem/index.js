@@ -16,6 +16,8 @@ export {default as ExArbor} from './ExArbor/UI';
 export {default as ExRegiment} from './ExRegiment/UI';
 /* （通用历史记录）X_ACTIVITY / X_ACTIVITY_CHANGE */
 export {default as ExHistory} from './ExHistory/UI';
+/* 双表单依赖搜索专用 */
+export {default as ExWizard} from './ExWizard/UI';
 
 
 /* （通用记录显示）

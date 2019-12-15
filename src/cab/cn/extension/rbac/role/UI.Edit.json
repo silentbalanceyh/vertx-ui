@@ -43,15 +43,6 @@
                 }
             ],
             [
-                "title=业务模型信息"
-            ],
-            [
-                "modelId,描述模型,14"
-            ],
-            [
-                "modelKey,描述记录,14"
-            ],
-            [
                 {
                     "metadata": "$button",
                     "hidden": true,

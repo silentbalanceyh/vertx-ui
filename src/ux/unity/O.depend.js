@@ -151,14 +151,14 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
          * 输入源头读取
          */
         const linkerSource = U.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
-        if (!Abs.isEmpty(linkerSource)) {
+        if (linkerSource) {
             /*
              * 使用Linker设置最终值
              */
             Object.keys(linker)
                 .filter(field => !!field)                               // field 必须存在
                 .filter(field => !!linker[field])                       // linker 中定义了 field
-                .filter(field => linkerSource.hasOwnProperty(field))    // 数据源中包含
+                // .filter(field => linkerSource.hasOwnProperty(field))    // 不包含就直接 undefined
                 .forEach(field => {
                     const formField = linker[field];
                     let value = linkerSource[field];

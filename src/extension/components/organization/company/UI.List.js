@@ -2,7 +2,6 @@ import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
 import {ExComplexList} from "ei";
-import Op from './Op';
 import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
@@ -13,7 +12,7 @@ import FormFilter from './form/UI.Filter';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiList(this);
+        Ex.yiCompany(this);
     }
 
     render() {

@@ -13,11 +13,11 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Op.yiInit(this);
+        Ux.xtLazyInit(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.yiUpdate(this, prevProps);
+        Ux.xtLazyUp(this, {props: prevProps, state: prevState});
     }
 
     render() {

@@ -141,6 +141,10 @@ export default (reference = {}, config = {}) => {
      */
     _seekAssist(uniform, reference.props);
     _seekAssist(uniform, reference.state);
+    const {rxAssist} = reference.props;
+    if (U.isFunction(rxAssist)) {
+        uniform.rxAssist = rxAssist;
+    }
     /*
      * options 专用处理
      */

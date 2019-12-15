@@ -217,9 +217,11 @@ export default {
     ajaxError,
     ajaxDialog,
     ajaxMessage,
+
     ajax2Dialog,    // 2阶
     ajax2Message,   // 2阶
     ajax2True,      // 2阶
+
     messageSuccess,
     messageFailure
 }

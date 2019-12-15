@@ -2,6 +2,7 @@ import {ExComplexList} from "ei";
 import {PageCard} from "web";
 import React from "react";
 import Ex from 'ex';
+import Op from "./form/Op";
 
 export default (reference, {
     config,
@@ -9,6 +10,8 @@ export default (reference, {
 }) => (
     <PageCard reference={reference}>
         <ExComplexList {...Ex.yoAmbient(reference)}
+                       rxPostDelete={Op.rxPostDelete(reference)}
+                       rxAssist={Op.rxAssist(reference)}
                        config={config} $form={form}/>
     </PageCard>
 )

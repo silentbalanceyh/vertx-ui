@@ -13,9 +13,14 @@ export default {
             // 读取我的列
             Cm.seek(reference, 'rxColumnMy')([]), */
         openPost: (data) =>
-            Cm.seek(reference, 'rxOpenPost', ARGS)([data]),
+            Cm.seek(reference, 'rxPostOpen', ARGS)([data]),
         closePost: (key) =>
-            Cm.seek(reference, 'rxClosePost', ARGS)([key]),
+            Cm.seek(reference, 'rxPostClose', ARGS)([key]),
+        // ------------ 辅助数据专用 --------
+        assistIn: (key, data) =>
+            Cm.seek(reference, 'rxAssist', ARGS)([key, data, false]),
+        assistOut: (key, data) =>
+            Cm.seek(reference, 'rxAssist', ARGS)([key, data, true]),
         // ------------ 处理开关页 ----------
         /* 主搜索方法 */
         search: (params) =>
@@ -34,16 +39,14 @@ export default {
         selected: (selected = []) =>
             Cm.seek(reference, 'rxSelected')([selected]),
         /* Ajax 单行删除 */
-        delete: (id) =>
-            Cm.seek(reference, 'rxDelete')([id]),
+        delete: (id, callback) =>
+            Cm.seek(reference, 'rxDelete')([id, callback]),
         /* Ajax 批量更新 */
         batchEdit: (params = []) =>
             Cm.seek(reference, 'rxBatchEdit')([params]),
         /* Ajax 单行查看 */
         view: (id) =>
             Cm.seek(reference, 'rxView')([id]),
-        /* Ajax 列更新 */
-
         // ------------ 打开 -----------------
         /* 打开新窗口 */
         open: (id, data) =>

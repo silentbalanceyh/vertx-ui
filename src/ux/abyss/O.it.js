@@ -1,7 +1,7 @@
 import U from 'underscore';
 import E from '../error';
 import V from './O.immutable';
-import Ux from "ux";
+import Is from './O.is';
 
 const itMatrix = (matrix = [], eachFun) => {
     matrix.forEach(row => {
@@ -18,12 +18,16 @@ const itObject = (data = {}, executor = () => {
     const iterator = V.clone(data);
     // eslint-disable-next-line
     for (const key in iterator) {
-        if (data.hasOwnProperty(key)) {
+        if (iterator.hasOwnProperty(key) &&
+            data.hasOwnProperty(key)) {
             const value = data[key];
             if (invalid) {
                 executor(key, value);
             } else {
-                if (value) {
+                /*
+                 * false / null / 0 都属于业务边界值
+                 */
+                if (undefined !== value) {
                     executor(key, value);
                 }
             }
@@ -91,7 +95,7 @@ const itFull = (data = [], items = {}, fieldFun = () => {
  * 3. 自身迭代没有任何意义
  */
 const itValue = (object = {}, transformer, key) => {
-    if (U.isFunction(transformer) && Ux.isObject(object)) {
+    if (U.isFunction(transformer) && Is.isObject(object)) {
         Object.keys(object).forEach(field => {
             const valueRef = object[field];
             if (U.isObject(valueRef)) {
@@ -104,13 +108,23 @@ const itValue = (object = {}, transformer, key) => {
                             valueRef[key] = processed;
                         }
                     } else {
-                        if (Ux.isObject(processed)) {
+                        if (Is.isObject(processed)) {
                             Object.assign(valueRef, processed);
                         }
                     }
                 }
             }
         });
+    }
+};
+const itTree = (treeArray = [], executor) => {
+    if (U.isFunction(executor)) {
+        treeArray.forEach(item => {
+            executor(item);
+            if (item.children && 0 < item.children.length) {
+                itTree(item.children, executor);
+            }
+        })
     }
 };
 export default {
@@ -121,4 +135,5 @@ export default {
     itRow,
     itFull,
     itElement,
+    itTree,
 }

@@ -126,6 +126,11 @@
             ]
         ],
         "hidden": [],
+        "initial":{
+            "active":"BOOL:true",
+            "mobile":"FIX:15900000000",
+            "email":"FIX:lang.xx@hpe.com"
+        },
         "op": {
             "$opAdd": "act.user.add"
         }

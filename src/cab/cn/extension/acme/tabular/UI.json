@@ -51,7 +51,6 @@
             "dynamic.switch": false,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
-            "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",

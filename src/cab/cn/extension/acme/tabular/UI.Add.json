@@ -59,11 +59,13 @@
             ]
         ],
         "initial":{
-            "active":"BOOL:true"
+            "active":"BOOL:true",
+            "appId":"PROP:app.key"
         },
         "hidden": [
             "type",
-            "sigma"
+            "sigma",
+            "appId"
         ],
         "op": {
             "$opAdd": "act.tabular.add"

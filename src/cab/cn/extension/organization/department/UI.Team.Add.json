@@ -6,7 +6,12 @@
                 "title=基本信息"
             ],
             [
-                "name,名称,12",
+                {
+                    "metadata": "name,名称,12,,,placeholder=必填",
+                    "optionConfig.rules":[
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                },
                 {
                     "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT",
                     "optionConfig.rules": [

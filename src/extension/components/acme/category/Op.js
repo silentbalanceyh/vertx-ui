@@ -31,8 +31,8 @@ const yiPage = (reference) => {
     }
     state.$selected = false;
     state.$config = Ux.clone(config);
-    state.$ready = true;
-    reference.setState(state);
+    Ex.yiStandard(reference, state)
+        .then(state => reference.setState(state));
 };
 const yoSider = (reference) => {
     const siderAttrs = Ex.yoAmbient(reference);
@@ -52,8 +52,14 @@ const yoList = (reference) => {
         FormEdit,   // 更新表单
         FormFilter  // 搜索表单
     };
-    listAttrs.rxOpenPost = Ex.rxOpenPost(reference);
-    listAttrs.rxClosePost = Ex.rxClosePost(reference);
+    listAttrs.rxPostOpen = Ex.rxPostOpen(reference);
+    listAttrs.rxPostClose = Ex.rxPostClose(reference);
+    const $options = {};
+    const module = Ux.fromHoc(reference, "module");
+    if (module && module.options) {
+        Object.assign($options, module.options);
+    }
+    listAttrs.$options = $options;
     return listAttrs;
 };
 export default {

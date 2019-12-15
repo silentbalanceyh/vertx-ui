@@ -44,7 +44,6 @@
             "dynamic.switch": false,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
-            "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
@@ -147,19 +146,13 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "code,用户组编号",
-                        "name,用户组名称",
-                        "parentId,父组",
-                        "category,组类型",
                         "active,是否启用",
-                        "createdBy,创建人",
                         "createdAt,创建时间"
                     ]
                 },
                 "valueColumn": {
                     "title": "设置值",
                     "render": {
-                        "name": "TEXT",
                         "active": {
                             "type": "RADIO",
                             "config": [

@@ -5,8 +5,8 @@ import U from 'underscore';
 
 class Component extends React.PureComponent {
     render() {
-        const {$alert = {}, $type = "info", $icon, $size = 28} = this.props;
-        const {message, description} = $alert;
+        const {$alert = {}, $type, $icon, $size = 28} = this.props;
+        const {message, description, type = "info"} = $alert;
 
         let descJsx = false;
         if ("string" === typeof description) {
@@ -25,7 +25,14 @@ class Component extends React.PureComponent {
             attrs.message = message;
         }
         attrs.description = descJsx;
-        attrs.type = $type;
+        /*
+         * 类型处理
+         */
+        if ($type) {
+            attrs.type = $type;
+        } else {
+            attrs.type = type;
+        }
         attrs.showIcon = true;
         let className = "";
         if ($icon) {

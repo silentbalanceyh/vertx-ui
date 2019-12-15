@@ -21,6 +21,12 @@ const onConfirm = (reference = {}, config = {}) => (event) => {
             if (U.isFunction(fnCallback)) {
                 fnCallback($select);
             }
+            // onChange 保证表单的 isTouched
+            const {onChange, id} = reference.props;
+            if (U.isFunction(onChange)) {
+                const changeValue = values[id];
+                onChange(changeValue);
+            }
         }
         // 关闭窗口
         reference.setState({$visible: false});

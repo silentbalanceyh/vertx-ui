@@ -38,6 +38,15 @@ const yiTable = (reference) => {
         })
         .then(state => {
             /*
+             * 添加 lazy 流程
+             */
+            const lazyColumn = state.$table.columns
+                .filter(item => "USER" === item['$render']);
+            return Ux.ajaxEager(reference, lazyColumn, state.$data ? state.$data.list : [])
+                .then($lazy => Ux.promise(state, "$lazy", $lazy))
+        })
+        .then(state => {
+            /*
              * 1. onRow
              */
             const row = state.$table.row;
@@ -106,7 +115,6 @@ const yuTable = (reference, previous = {}) => {
      * -- 2）state 中的 $dirty 发生了变化，并且是 true，直接刷新界面
      */
     Ex.yuDirty(reference, {state, props});
-    Ex.yuDirtyAsync(reference, {state, props});
     /*
      * $loading 专用
      */

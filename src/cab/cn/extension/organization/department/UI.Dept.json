@@ -43,7 +43,6 @@
             "dynamic.switch": false,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
-            "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
@@ -146,8 +145,6 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "name,部门名称",
-                        "code,部门编号",
                         "managerId,部门经理",
                         "managerName,经理名称",
                         "companyId,所属公司",
@@ -165,7 +162,6 @@
                 "valueColumn": {
                     "title": "设置值",
                     "render": {
-                        "name": "TEXT",
                         "active": {
                             "type": "RADIO",
                             "config": [

@@ -62,7 +62,7 @@ export default (reference) => (pagination, filters, sorter) => {
     /*
      * 执行排序操作
      */
-    if (Ux.isEmpty(sorter)) {
+    if (!sorter.hasOwnProperty('order')) {
         queryRef.sort([]);
     } else {
         const {field = "", order = "ascend"} = sorter;

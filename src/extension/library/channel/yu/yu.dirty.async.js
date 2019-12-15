@@ -35,7 +35,10 @@ export default (reference, virtualRef) => {
          * $dirty = true
          * $loading = true （效果）
          */
-        Fn.rsLoading(reference)();
+        const {$loading = false} = reference.state;
+        if ($loading) {
+            Fn.rsLoading(reference)();
+        }
     } else {
         updateInternal(reference, prevState, ($data => {
             /*

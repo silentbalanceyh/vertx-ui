@@ -144,11 +144,17 @@ const elementBranch = (array = [], leafKey, parentField = "parent") => {
  */
 const elementChild = (array = [], current = {}, parentField = "parent") => {
     const parentKey = current.key;
+    if (!current._level) {
+        current._level = 1;
+    }
     let children = array
         .filter(each => each[parentField] === parentKey)
         .sort((left, right) => left.sort - right.sort);
     if (0 < children.length) {
-        children.forEach(child => child.children = elementChild(array, child, parentField));
+        children.forEach(child => {
+            child._level = current._level + 1;
+            child.children = elementChild(array, child, parentField)
+        });
     }
     return children;
 };

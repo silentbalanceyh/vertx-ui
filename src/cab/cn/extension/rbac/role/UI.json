@@ -40,7 +40,6 @@
             "dynamic.switch": false,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
-            "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
@@ -133,21 +132,23 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "name,角色名",
-                        "code,角色系统名",
                         "comment,备注",
-                        "power,是否具有定制权限",
+                        "power,超级权限",
                         "active,是否启用",
-                        "createdBy,创建人",
                         "createdAt,创建时间",
-                        "updatedBy,更新人",
                         "updatedAt,更新时间"
                     ]
                 },
                 "valueColumn": {
                     "title": "设置值",
                     "render": {
-                        "name": "TEXT",
+                        "power": {
+                            "type": "RADIO",
+                            "config": [
+                                "true,拥有",
+                                "false,没有"
+                            ]
+                        },
                         "active": {
                             "type": "RADIO",
                             "config": [
@@ -158,7 +159,13 @@
                         "createdAt": {
                             "type": "DATE",
                             "config": {
-                                "format": "YYYY-MM-DD"
+                                "format": "YYYY-MM-DD HH:mm"
+                            }
+                        },
+                        "updatedAt": {
+                            "type": "DATE",
+                            "config": {
+                                "format": "YYYY-MM-DD HH:mm"
                             }
                         }
                     }

@@ -64,5 +64,5 @@ export default {
     /* 写树统一方法 */
     writeTree,
     /* 清空树统一方法 */
-    writeClean
+    writeClean,
 }

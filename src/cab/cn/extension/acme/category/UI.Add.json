@@ -92,13 +92,15 @@
         "hidden": [
             "type",
             "identifier",
-            "parentId"
+            "parentId",
+            "appId"
         ],
         "op": {
             "$opAdd": "act.category.add"
         },
         "initial":{
-            "active":"BOOL:true"
+            "active":"BOOL:true",
+            "appId":"PROP:app.key"
         }
     },
     "_modal": {

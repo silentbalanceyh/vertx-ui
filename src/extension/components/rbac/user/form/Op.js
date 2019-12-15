@@ -18,9 +18,11 @@ const $opDelete = (reference) =>
         uri: "/api/user/:key",
         dialog: "removed"
     });
-const $opFilter = (reference) =>
-    params => Ex.form(reference).filter(params);
-
+const $opFilter = (reference) => params =>
+    Ex.form(reference).wizard(params, (request = {}) =>
+        Ux.ajaxPost('/api/user/search', request)
+            .then(result => Ux.promise(result.list))
+    );
 const $opPassword = (reference) => params => {
     const request = Ux.valueRequest(params);
     request.password = Ux.encryptMD5(params['npassword']);

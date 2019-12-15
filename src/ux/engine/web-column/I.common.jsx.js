@@ -1,12 +1,18 @@
 import {Divider, Icon, Popconfirm} from "antd";
 import Abs from "../../abyss";
 import React from "react";
-import {ColumnUser} from 'web';
 import {Link} from 'react-router-dom';
 
 const jsxSpan = (attrs = {}, children) =>
     // 解决 React 无法渲染 Object的 BUG
     (<span {...attrs}>{Abs.isObject(children) ? false : children}</span>);
+const jsxIcon = (attrs = {}, children, icon) => (
+    <span>
+        {icon && icon.icon ? (<Icon type={icon.icon} style={icon.iconStyle}/>) : false}
+        {icon && icon.icon ? (<span>&nbsp;&nbsp;</span>) : false}
+        {jsxSpan(attrs, children)}
+    </span>
+);
 export default {
     /* 分割线 */
     jsxDivider: (key) => (<Divider type={"vertical"} key={key}/>),
@@ -22,15 +28,12 @@ export default {
     /* jsxSpan */
     jsxSpan,
     /* jsxIcon */
-    jsxIcon: (attrs = {}, children, icon) => (
-        <span>
-            {icon ? (<Icon type={icon.icon} style={icon.iconStyle}/>) : false}
-            {icon ? (<span>&nbsp;&nbsp;</span>) : false}
-            {jsxSpan(attrs, children)}
-        </span>
-    ),
+    jsxIcon,
     /* jsxUser */
-    jsxUser: (attrs = {}) => (<ColumnUser {...attrs}/>),
+    jsxLazy: (attrs = {}, dataMap = {}) => {
+        const value = dataMap[attrs.$key];
+        return jsxIcon({}, value, {icon: attrs.$icon})
+    },
     /* jsxHyper */
     jsxHyper: (attributes = {}, children) => {
         let {reference, url, ...attrs} = attributes;

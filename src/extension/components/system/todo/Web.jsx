@@ -26,8 +26,8 @@ export default (reference, {
                     <ExComplexList {...Ex.yoAmbient(reference)}
                                    config={grid} $form={form}
                                    $query={$query}
-                                   rxOpenPost={Ex.rxOpenPost(reference)}
-                                   rxClosePost={Ex.rxClosePost(reference)}/>
+                                   rxPostOpen={Ex.rxPostOpen(reference)}
+                                   rxPostClose={Ex.rxPostClose(reference)}/>
                 </Col>
             </Row>
         )

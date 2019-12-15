@@ -1,6 +1,7 @@
 import yoAmbient from './yo.ambient';
 import Fn from '../../functions';
 import Ux from 'ux';
+import U from 'underscore';
 /*
  * List 必须传入的配置
  * 1）外置：state -> query, 内置：props -> $query
@@ -74,5 +75,15 @@ export default (reference) => {
      */
     inherit.doLoading = Fn.rxLoading(reference);
     inherit.doDirty = Fn.rxDirty(reference);
+    /*
+     * rxPostDelete处理
+     */
+    const {rxPostDelete} = reference.props;
+    if (U.isFunction(rxPostDelete)) {
+        inherit.rxPostDelete = rxPostDelete;
+    }
+    /*
+     * rxPost系列
+     */
     return inherit;
 }

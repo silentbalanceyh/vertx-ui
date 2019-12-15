@@ -50,7 +50,8 @@
                             "uri":"/api/type/categories/:type",
                             "magic":{
                                 "type":"FORM:type"
-                            }
+                            },
+                            "engine":false
                         },
                         "linker": {
                             "name": "parentName",
@@ -64,7 +65,8 @@
                             "title":"name"
                         },
                         "validation": "请选择父类！",
-                        "window": "选择父类型,选择,关闭,false,400,false"
+                        "window": "选择父类型,选择,关闭,false,400,false",
+                        "exclude":"FORM:key"
                     },
                     "optionJsx.allowClear":true
                 }

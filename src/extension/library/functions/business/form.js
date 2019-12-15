@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Fn from '../generator';
+import U from 'underscore';
 
 const add = (reference) => (params = {}, config = {}) => {
     let request = Ux.valueRequest(params);
@@ -25,7 +26,7 @@ const remove = (reference) => (params = {}, config = {}) => {
             () => Fn.rx(reference).close(params, {
                 $selected: []
             })
-        ));
+        ))
 };
 const filter = (reference) => (params = {}) => {
     const {connector = "AND", ...rest} = params;
@@ -55,10 +56,52 @@ const query = (reference) => (params = {}, filters = {}) => {
     query.request = Ux.clone(values);
     return Ux.promise(query);
 };
+const wizard = (reference) => (params, promiseSupplier) => {
+    const {rxFailure} = reference.props;
+    const filters = Ux.valueValid(params);
+    if (0 < Object.keys(filters).length) {
+        const request = {};
+        request.criteria = {"": true, ...filters};
+        if (U.isFunction(promiseSupplier)) {
+            const promise = promiseSupplier(request);
+            return promise.then(result => {
+                if (!result || 0 === result.length) {
+                    if (U.isFunction(rxFailure)) {
+                        rxFailure(() => reference.setState({
+                            $loading: false, $submitting: false
+                        }), false);
+                    }
+                } else {
+                    const {rxSubmit} = reference.props;
+                    if (U.isFunction(rxSubmit)) {
+                        /*
+                         * 关闭防重复提交
+                         */
+                        reference.setState({
+                            $loading: false, $submitting: false
+                        });
+                        return rxSubmit(result, reference);
+                    } else {
+                        throw new Error("[ Ex ] wizard调用非法，缺失 rxSubmit主方法");
+                    }
+                }
+            })
+        } else {
+            throw new Error("[ Ex ] wizard调用非法，缺失 promiseSupplier");
+        }
+    } else {
+        if (U.isFunction(rxFailure)) {
+            return rxFailure(() => reference.setState({
+                $loading: false, $submitting: false
+            }));
+        }
+    }
+};
 export default (reference) => ({
     add: add(reference),
     save: save(reference),
     remove: remove(reference),
     filter: filter(reference),
-    query: query(reference)
+    query: query(reference),
+    wizard: wizard(reference),
 })
