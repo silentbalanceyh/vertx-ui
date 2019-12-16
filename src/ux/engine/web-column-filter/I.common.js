@@ -1,5 +1,5 @@
 import Value from "../../abyss";
-import {Button, Icon} from "antd";
+import {Icon} from "antd";
 import React from "react";
 import U from 'underscore';
 
@@ -52,18 +52,10 @@ const getClearAttrs = (reference, field, {
     }
     return clearAttrs;
 };
-const jsxArchor = (field, onClick) => {
-    return (
-        <div className={"ux-hidden"}>
-            <Button id={`__BTN_CLEAR_${field}`} onClick={onClick}/>
-        </div>
-    );
-};
 export default {
     getCondition,
     getFilteredValue,
     getFilterIcon,
     getClearAttrs,
-    isFiltered,
-    jsxArchor
+    isFiltered
 };

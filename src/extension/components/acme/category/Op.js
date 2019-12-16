@@ -15,6 +15,7 @@ const rxSelect = (reference) => (selected = {}) => {
         /*
          * 更新
          */
+        Ux.activeSearch();
         reference.setState({
             $query: Ux.clone($query),   // 拷贝触发条件的变更
             $type: selected.code,       // 类型选择

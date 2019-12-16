@@ -4,6 +4,7 @@ import Ex from 'ex';
 import {Button, Input, Tooltip} from 'antd';
 import renderDrawer from './Web.Filter';
 import './Cab.less';
+import Ux from "ux";
 
 const _renderInput = (reference) => {
     const {$search, searchText} = reference.state;
@@ -47,6 +48,7 @@ const _renderButtons = (reference) => (
     <Button.Group className={"ux-group"}>
         {_renderAdvanced(reference)}
         {_renderRedo(reference)}
+        {Ux.anchorSearch(reference)}
     </Button.Group>
 );
 

@@ -57,8 +57,11 @@ const rxClick = (reference) => () => {
         /*
          * 关闭窗口，打开新页
          */
-        const $inited = $selected[0];
-        openTab(reference, {$visible: false, $inited});
+        const {$data = []} = reference.state;
+        const $inited = Ux.elementUnique($data, "key", $selected[0]);
+        if ($inited) {
+            openTab(reference, {$visible: false, $inited});
+        }
     } else {
         const {config = {}} = reference.props;
         const {modal = {}} = config;

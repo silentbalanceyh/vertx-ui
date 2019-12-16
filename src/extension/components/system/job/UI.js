@@ -7,17 +7,26 @@ import Op from './Op';
 import Form from './UI.Form';
 import Event from './event';
 import renderExtra from './Web.Extra';
+import renderTool from './Web.Tool';
 
 const renderChild = (reference, item, $inited = {}) => {
     if ("tabTask" === item.key) {
         const {
-            $table = {}, $data = [], $loading = false
+            $table = {}, $data = [], $loading = false,
+            $searchText,
         } = reference.state;
         const alert = Ux.fromHoc(reference, "alert");
+        let dataSource = [];
+        if ($searchText) {
+            dataSource = Ux.clone($data.filter(item => (0 <= item.name.indexOf($searchText))))
+        } else {
+            dataSource = Ux.clone($data);
+        }
         return (
             <div>
                 <LoadingAlert $alert={alert} $type={"success"}/>
-                <Table {...$table} dataSource={$data} loading={$loading}/>
+                {renderTool(reference)}
+                <Table {...$table} dataSource={dataSource} loading={$loading}/>
             </div>
         )
     } else {

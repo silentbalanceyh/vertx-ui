@@ -30,7 +30,7 @@ const parseExpression = (reference, expr = "") => {
  * @param reference React对应组件引用 React.PureComponent
  * @param parameters 传入的参数值信息
  */
-const parseAjax = (reference, parameters = {}) => {
+const parseAjax = (parameters = {}, reference) => {
     const result = {};
     // eslint-disable-next-line
     for (const field in parameters) {
@@ -40,7 +40,7 @@ const parseAjax = (reference, parameters = {}) => {
                 // 特殊解析流程
                 result.criteria = Expr.parseInput(parameters.criteria, reference);
             } else if (U.isObject(parameters[field]) && "sorter" !== field) {
-                result[field] = parseAjax(reference, parameters[field]);
+                result[field] = parseAjax(parameters[field], reference);
             } else {
                 const expr = parameters[field];
                 const value = parseExpression(reference, expr);

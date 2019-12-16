@@ -1,5 +1,5 @@
 import U from "underscore";
-import Ut from '../../unity';
+import Ft from '../web-column-filter';
 import Cmn from './I.common';
 /*
  * query 专用的表单
@@ -46,10 +46,7 @@ const qrClear = (reference = {}, state = {}) => {
     reference.setState(append);
 
     const {$terms = {}} = reference.state ? reference.state : {};
-    Object.keys($terms)
-        /* 列筛选必须调用 */
-        .map(id => `__BTN_CLEAR_${id}`)
-        .forEach(id => Ut.connectId(id))
+    Ft.activeColumn($terms);
 };
 const qrInput = (cond = [], value) => {
     const condition = {};

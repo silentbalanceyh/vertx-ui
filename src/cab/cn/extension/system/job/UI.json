@@ -59,6 +59,15 @@
             "type":"primary"
         }
     },
+    "_tool":{
+        "frequency":{
+            "label":"刷新频率",
+            "unit":"秒"
+        },
+        "search":{
+            "placeholder":"任务名称"
+        }
+    },
     "_table":{
         "columns":[
             "name,任务名称",

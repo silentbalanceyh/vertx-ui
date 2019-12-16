@@ -4,6 +4,7 @@ import T from './I.common';
 import Value from "../../abyss";
 import Ut from '../../unity';
 import U from 'underscore';
+import Fn from '../functions';
 
 const _getKeyWord = (reference, field, keyword = "") => {
     // 搜索文字
@@ -80,7 +81,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                     style={{width: 90}}>
                 {button.reset ? button.reset : false}
             </Button>
-            {T.jsxArchor(field, clearAttrs.onClick)}
+            {Fn.anchorColumn(field, clearAttrs.onClick)}
         </div>
     );
 };

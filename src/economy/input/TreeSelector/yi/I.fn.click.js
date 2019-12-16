@@ -24,7 +24,7 @@ export default (reference, config = {}) => event => {
              */
             if (!engine && config.exclude) {
                 const ref = Ux.onReference(reference, 1);
-                const except = Ux.parseAjax(ref, {key: config.exclude});
+                const except = Ux.parseAjax({key: config.exclude}, ref);
                 $data = $data.filter(item => except.key !== item.key);
             }
             reference.setState({

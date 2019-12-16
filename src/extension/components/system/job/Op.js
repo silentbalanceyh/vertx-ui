@@ -22,8 +22,16 @@ const yiPage = (reference) => {
         /*
          * Assist 和模块读取
          */
+        if (!$table.pagination) {
+            $table.pagination = {};
+        }
+        $table.pagination.pageSize = 8;
         state.$table = $table;
-        state.$timer = Event.rxTimer(reference);
+
+        const sec = 30;     // default的值是 30 s
+        state.$duration = sec;
+        state.$durationValue = sec;
+        state.$timer = Event.rxTimer(reference, sec * 1000);
         /*
          * tabs 动态处理
          */

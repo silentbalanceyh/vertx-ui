@@ -11,6 +11,9 @@ import Rx from '../expression';
 const px = 12;
 const widthString = (input) => {
     let length = 0;
+    if ("string" !== typeof input) {
+        return 0;
+    }
     for (let idx = 0; idx < input.length; idx++) {
         const str = String(input.charAt(idx));
         if (Abs.isCn(str)) {

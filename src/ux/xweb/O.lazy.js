@@ -3,31 +3,9 @@ import T from '../unity';
 import Abs from '../abyss';
 import Ajx from '../ajax';
 import Ele from '../element';
-import U from "underscore";
-import E from '../error';
+import Dev from '../develop';
 
-/*
- * 根据 linker 读取 values
- */
-const xtLinker = (config = {}, valueSupplier) => {
-    const values = {};
-    const {linker} = config;
-    if (linker && !Abs.isEmpty(linker)
-        && U.isFunction(valueSupplier)) {
-        const fields = Object.keys(linker)
-            .map(field => linker[field])
-            .filter(field => !!field);
-        const sourceValues = valueSupplier(fields);
-        if (!Abs.isEmpty(sourceValues)) {
-            Object.keys(sourceValues).forEach(formField => Object.keys(linker)
-                .filter(linkerField => formField === linker[linkerField])
-                .forEach(linkerField => {
-                    values[linkerField] = sourceValues[formField];
-                }));
-        }
-    }
-    return values;
-};
+import xtLazyAjax from './I.fn.lazy.ajax';
 
 const xtValues = (reference) => {
     const {config = {}} = reference.props;
@@ -36,7 +14,7 @@ const xtValues = (reference) => {
      */
     const ref = Eng.onReference(reference, 1);
     if (ref) {
-        return xtLinker(config, (fields) => T.formGet(ref, fields));
+        return Eng.onLinker(config, (fields) => T.formGet(ref, fields));
     } else {
         return {};
     }
@@ -47,56 +25,55 @@ const xtLazyInit = (reference) => {
     if (undefined === value) {
         const values = xtValues(reference);
         if (!Abs.isEmpty(values)) {
+            Dev.dgDebug(values, "[ Xt ] 初始化时的 linker 值", "#8B3A62");
             const ref = Eng.onReference(reference, 1);
             /*
              * 有值，执行 loading 操作
              */
-            const params = Eng.parseAjax(ref, config.ajax.magic);
-            const {engine = true} = config.ajax;
-            if (engine) {
+            const params = xtLazyAjax(reference, config);
+            /*
+             * 回调处理
+             */
+            const fnCallback = (unique = {}) => {
+                const formValues = {};
+                T.writeLinker(formValues, config, () => unique);
+                if (formValues.hasOwnProperty(id)) {
+                    reference.setState({initialValue: formValues});
+                    T.formHits(ref, formValues);
+                } else {
+                    console.warn(`${id} 字段并没配置在 linker 中，请检查：`, unique);
+                }
+            };
+            /*
+             * engine模式和非engine模式的自动判断
+             */
+            const isQr = Abs.isQr(config);
+            if (isQr) {
                 /*
-                 * 查询引擎接口（默认）
+                 * 查询引擎接口
                  */
+                const inputCond = Abs.clone(values);
+                inputCond[""] = true;
+                const request = Eng.qrCombine(params, ref, inputCond);
+                Dev.dgDebug(request, "[ Xt ] engine = true 的最终查询条件", "#8B3A62");
+                Ajx.asyncData(config.ajax, request, (data) => {
+                    const unique = Abs.isArray(data.list) ? data.list : [];
+                    if (1 === unique.length) {
+                        fnCallback(unique[0]);
+                    }
+                });
             } else {
                 /*
                  * 非查询引擎接口
                  */
-                Ajx.asyncData(config.ajax, params, ($data = {}) => {
-                    /*
-                     * 执行过滤
-                     */
-                    const unique = Ele.elementFind($data, values);
+                Dev.dgDebug(params, "[ Xt ] engine = false 的最终查询条件", "#8B3A62");
+                Ajx.asyncData(config.ajax, params, (sourceArray) => {
+                    const unique = Ele.elementFind(sourceArray, values);
                     if (1 === unique.length) {
-                        const formValues = {};
-                        T.writeLinker(formValues, config, () => unique[0]);
-                        if (formValues.hasOwnProperty(id)) {
-                            reference.setState({initialValue: formValues});
-                            T.formHits(ref, formValues);
-                        } else {
-                            console.warn(`${id} 字段并没配置在 linker 中，请检查：`, unique[0]);
-                        }
+                        fnCallback(unique[0]);
                     }
                 });
             }
-        }
-    }
-};
-
-const xtLazyAjax = (reference, config = {}) => {
-    // 必须保证ajax参数信息
-    E.fxTerminal(!config.ajax, 10053, config);
-    if (config.ajax) {
-        /**
-         * 读取上层引用，这里是ListSelector中对应的Form本身
-         * 所以上层引用才会是reference
-         */
-        const ref = Eng.onReference(reference, 1);
-        E.fxTerminal(!ref, 10079, ref);
-        if (ref) {
-            /*
-             * ajax两种接触模式，engine 类
-             */
-            return Eng.parseAjax(ref, config.ajax.magic);
         }
     }
 };
@@ -163,5 +140,5 @@ const xtLazyUp = (reference, virtualRef) => {
 export default {
     xtLazyInit,
     xtLazyUp,
-    xtLazyAjax,
+    xtLazyAjax
 }
