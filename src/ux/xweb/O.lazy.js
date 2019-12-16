@@ -93,8 +93,8 @@ const xtLazyAjax = (reference, config = {}) => {
         const ref = Eng.onReference(reference, 1);
         E.fxTerminal(!ref, 10079, ref);
         if (ref) {
-            /**
-             * 解析Ajax参数信息
+            /*
+             * ajax两种接触模式，engine 类
              */
             return Eng.parseAjax(ref, config.ajax.magic);
         }
