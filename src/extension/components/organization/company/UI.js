@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                     <FormCompany {...inherit} $inited={$inited}/>
                     <ListCompany {...inherit} $inited={$inited}/>
                 </ExTab>
-            ))
+            ), Ex.parserOfColor("PxCompanyCard").tpl())
         }, Ex.parserOfColor("PxCompany").page());
     }
 }

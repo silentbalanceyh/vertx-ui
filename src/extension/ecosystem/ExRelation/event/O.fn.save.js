@@ -27,7 +27,7 @@ export default (reference, key) => (selected = [], ref = {}) => {
         } else {
             $dataArray = Dsl.getArray(Ux.isArray($data.down) ? $data.down : []);
             data.forEach(dataItem => $dataArray.saveElement(dataItem));
-            $data.up = $dataArray.to();
+            $data.down = $dataArray.to();
         }
         /*
          * 内层钩子函数，用于关闭窗口（必须）

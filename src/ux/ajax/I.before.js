@@ -138,18 +138,20 @@ const ajaxParams = (params = {}) => {
             }
         }
     });
+    let requestBody;
     if (params.hasOwnProperty("$body")) {
         if (!U.isArray(params.$body)) {
             itLang(params.$body);
         }
-        return JSON.stringify(params.$body);
+        requestBody = JSON.stringify(params.$body);
     } else {
         // 拷贝 language = cn 的问题
         if (!params.hasOwnProperty('criteria')) {
             itLang(params);
         }
-        return JSON.stringify(params);
+        requestBody = JSON.stringify(params);
     }
+    return requestBody;
 };
 /**
  *

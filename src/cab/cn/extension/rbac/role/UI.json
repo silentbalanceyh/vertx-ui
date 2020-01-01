@@ -3,8 +3,9 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
+            "sorter": "updatedAt=DESC",
             "criteria": {
+                "sigma":"PROP:app.sigma"
             }
         },
         "mock": {
@@ -100,7 +101,16 @@
                         "如果有相关疑问可联系管理员！"
                     ]
                 },
-                "upload": "模板文件"
+                "upload": "模板文件",
+                "button": "btnImport",
+                "modal": {
+                    "success": {
+                        "content": "您的数据已经导入成功！"
+                    },
+                    "error": {
+                        "content": "对不起，请选择您要上传的模板文件！"
+                    }
+                }
             },
             "extra.column": {
                 "grid": 3,

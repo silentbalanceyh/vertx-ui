@@ -86,8 +86,8 @@ const xtLazyUp = (reference, virtualRef) => {
      */
     if (prevValue !== curValue) {
         /*
-     * 表单专用判断
-     */
+         * 表单专用判断
+         */
         const ref = Eng.onReference(reference, 1);
         const {form} = ref.props;
         const {value, config = {}} = reference.props;

@@ -5,7 +5,7 @@ export default (reference, item = {}) => {
         const expr = item.optionConfig.normalize;
         if (expr) {
             const segments = expr.toString().split(",");
-            if (1 < segments.length) {
+            if (1 <= segments.length) {
                 // 读取类型
                 const type = segments[0];
                 const executor = Normalizer[type];
@@ -20,6 +20,8 @@ export default (reference, item = {}) => {
                     if (jFun) {
                         item.optionConfig.normalize = jFun;
                     }
+                } else {
+                    console.error("[ Ux ] normalize 属性解析失败：", expr, item);
                 }
             }
         }

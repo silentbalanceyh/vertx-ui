@@ -17,16 +17,21 @@ const _cabData = (reference, addOn = {}) => {
     if (!modal) {
         modal = Ux.fromHoc(reference, "modal");
     }
-    /*if (!form) {
-        form = Ux.fromHoc(reference, "form");
-    }*/
-    return {dialog, modal, form};
+    const assist = Ux.fromHoc(reference, "assist");
+    const state = {dialog, modal, form};
+    if (assist) {
+        state.assist = Ux.clone(assist);
+    }
+    return state;
 };
 export default (reference, additional = {}, data = {}) => {
     const addOn = _cabData(reference, additional);
     const attrs = yoAmbient(reference);
     const config = {};
     config.form = yoFormPlugin(addOn, reference);
+    if (addOn.assist) {
+        config.assist = addOn.assist;
+    }
     /*
     if (U.isObject(addOn.form)) {
         let form = addOn.form;

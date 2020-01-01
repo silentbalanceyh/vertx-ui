@@ -20,8 +20,10 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
-            "criteria": {}
+            "sorter": "updatedAt=DESC",
+            "criteria": {
+                "sigma":"PROP:app.sigma"
+            }
         },
         "mock": {
             "enabled": true,

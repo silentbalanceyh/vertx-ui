@@ -46,7 +46,7 @@ const yoQuery = (reference, $config = {}) => {
     let query = Ux.toQuery("query");
     if (query && "string" === typeof query) {
         try {
-            query = decodeURIComponent(query);
+            query = Ux.decryptBase64(query);
             query = JSON.parse(query);
             if (Ux.isEmpty(criteriaRef)) {
                 Object.assign(criteriaRef, query);

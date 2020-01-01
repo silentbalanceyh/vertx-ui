@@ -194,7 +194,7 @@ export default ($table = {}, data = [], reference) => {
         /*
          * 基础计算：必须是超过6列才执行
          */
-        if (6 < $table.columns.length) {
+        if (5 <= $table.columns.length) {
             $table.scroll = {};
             $table.scroll.x = 'max-content';  //width + adjust * 2;
             /*

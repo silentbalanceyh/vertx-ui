@@ -8,18 +8,19 @@
         }
     },
     "_alert": {
-        "message": "字段管理说明",
+        "message": "字典管理说明",
         "description": [
             "您可以从左边选择您要管理的字典类型。",
-            "字典管理需要管理员权限，一旦变更数据过后，字段本身内容会立即生效，但不会影响原始数据，由于字段管理的影响范围比较大，请在管理员的指导下完成！"
+            "字典管理需要管理员权限，一旦变更数据过后，字段本身内容会立即生效，但不会影响原始数据，由于字典管理的影响范围比较大，请在管理员的指导下完成！"
         ]
     },
     "_grid": {
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
+            "sorter": "updatedAt=DESC",
             "criteria": {
+                "sigma":"PROP:app.sigma"
             }
         },
         "options": {

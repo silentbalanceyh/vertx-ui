@@ -46,11 +46,18 @@ class Component extends React.PureComponent {
         // 是否一个Radio
         const $config = Ux.clone(config);
         if (format) {
+            // Overwrite Here
             $config.format = format;
+        }
+        // 时间格式
+        let $value = value;
+        const {moment = false} = this.props;
+        if (moment && value) {
+            $value = Ux.valueTime(value, $config.format);
         }
         return (
             <Input.Group {...jsx} className={"magic-view-item"}>
-                {rxValue(this, value, $config)}
+                {rxValue(this, $value, $config)}
             </Input.Group>
         );
     }

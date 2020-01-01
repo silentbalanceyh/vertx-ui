@@ -14,14 +14,11 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.ylCard(this, () => {
-            const form = Ux.fromHoc(this, "form");
             const {$inited = {}} = this.state;
             /*
              * 配置处理
              */
-            const formAttrs = Ex.yoForm(this, {
-                form,
-            }, $inited);
+            const formAttrs = Ex.yoForm(this, {}, $inited);
             return (
                 <ExForm {...formAttrs} $height={"200px"}/>
             )

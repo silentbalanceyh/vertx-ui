@@ -20,6 +20,7 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             const {config: {ui = {}}, data = []} = this.props;
+            const {$disabled = false} = this.state;
             const {tree} = ui;
             const treeData = Ux.toTree(data, tree);
             /*
@@ -35,15 +36,20 @@ class Component extends React.PureComponent {
              */
             const attrsTree = {};
             attrsTree.onSelect = Op.onSelect(this);
+            attrsTree.disabled = $disabled;     // 关闭树的选择功能
             return (
-                <Collapse defaultActiveKey={defaultActiveKey} className={"ox-collapse"}>
-                    {treeData.map(item => (
-                        <Panel key={item.key} header={item.text}
-                               showArrow={false}>
-                            {Ux.aiTree(item.children, attrsTree)}
-                        </Panel>
-                    ))}
-                </Collapse>
+                <div>
+                    <Collapse defaultActiveKey={defaultActiveKey}
+                              className={"ox-collapse"}>
+                        {treeData.map(item => (
+                            <Panel key={item.key} header={item.text}
+                                   showArrow={false}>
+                                {Ux.aiTree(item.children, attrsTree)}
+                            </Panel>
+                        ))}
+                    </Collapse>
+                    {Ux.anchorTree(this)}
+                </div>
             );
         }, configuration)
     }

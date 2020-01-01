@@ -28,6 +28,18 @@ const anchorSearch = (reference) => (
         }}/>
     </div>
 );
+const anchorTree = (reference) => (
+    <div className={"ux-hidden"}>
+        <Button id={"__BTN_TREE_OFF"} onClick={(event) => {
+            Abs.prevent(event);
+            reference.setState({$disabled: true});
+        }}/>
+        <Button id={"__BTN_TREE_ON"} onClick={(event) => {
+            Abs.prevent(event);
+            reference.setState({$disabled: false});
+        }}/>
+    </div>
+);
 const activeColumn = ($terms = {}) => {
     Object.keys($terms)
         /* 列筛选必须调用 */
@@ -35,8 +47,13 @@ const activeColumn = ($terms = {}) => {
         .forEach(id => Ut.connectId(id))
 };
 const activeSearch = () => Ut.connectId("__BTN_CLEAR_SEARCH");
-
+const activeTreeOn = () => Ut.connectId("__BTN_TREE_ON");
+const activeTreeOff = () => Ut.connectId("__BTN_TREE_OFF");
 export default {
+    anchorTree,
+    activeTreeOff,
+    activeTreeOn,
+
     anchorColumn,
     activeColumn,
     anchorSearch,

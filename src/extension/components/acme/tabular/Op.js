@@ -11,6 +11,12 @@ const rxSelect = (reference) => (selected = {}) => {
     if (!Ux.isEmpty(selected)) {
         const {$query = {}} = reference.state;
         if (!$query.criteria) $query.criteria = {};
+        /*
+         * 双条件合并，大于0的时候需要取新条件
+         */
+        if (0 < Object.keys($query.criteria).length) {
+            $query.criteria[''] = true;
+        }
         $query.criteria['type,='] = selected.code;
         /*
          * 更新

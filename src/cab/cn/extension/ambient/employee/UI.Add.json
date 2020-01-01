@@ -9,7 +9,7 @@
             ],
             [
                 {
-                    "metadata":"workNumber,工号,,,,placeholder=（不填写则系统自动生成）",
+                    "metadata":"workNumber,工号,,,,placeholder=（不填写则系统自动生成）,maxLength=32",
                     "optionConfig.rules":[
                         {
                             "validator":"existing",
@@ -18,14 +18,16 @@
                                 "uri":"/api/employee/existing",
                                 "method":"POST",
                                 "params":{
-                                    "sigma":"PROP:app.sigma"
+                                    "sigma":"PROP:app.sigma",
+                                    "companyId":"USER:companyId",
+                                    "":"OPERATOR:AND"
                                 }
                             }
                         }
                     ]
                 },
                 {
-                    "metadata":"viceName,姓名",
+                    "metadata":"viceName,姓名,,,,normalize=text:40",
                     "optionConfig.rules":[
                         "required,请输入员工姓名"
                     ]
@@ -33,7 +35,7 @@
             ],
             [
                 {
-                    "metadata":"viceEmail,邮箱,,,,placeholder=格式：xxx@xxx.xx",
+                    "metadata":"viceEmail,邮箱,,,,placeholder=格式：xxx@xxx.xx,maxLength=255",
                     "optionConfig.rules": [
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
@@ -42,7 +44,7 @@
                     ]
                 },
                 {
-                    "metadata":"viceMobile,手机号,,,,placeholder=请输入合法手机号",
+                    "metadata":"viceMobile,手机号,,,,placeholder=请输入合法手机号,maxLength=20",
                     "optionConfig.rules": [
                         {
                             "pattern": "[0-9-()（）]{7,18}",
@@ -54,7 +56,7 @@
                     "metadata": "username,关联账号,8,,aiListSelector,placeholder=（请选择账号）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC",
+                            "metadata": "POST,/api/user/search,1,10,sorter=updatedAt`DESC",
                             "params.criteria":{
                                 "modelId":"FIX:employee",
                                 "":"OPERATOR:AND"
@@ -120,9 +122,9 @@
                 }
             ],
             [
-                "workTitle,头衔",
-                "workPhone,工作座机",
-                "workExtension,分机号"
+                "workTitle,头衔,,,,normalize=text:40",
+                "workPhone,工作座机,,,,maxLength=20",
+                "workExtension,分机号,,,,maxLength=10"
             ],
             [
                 {
@@ -133,7 +135,7 @@
                 }
             ],
             [
-                "workLocation,办公地点,24,,aiTextArea,rows=4"
+                "workLocation,办公地点,24,,aiTextArea,rows=4,maxLength=1024"
             ],
             [
                 {

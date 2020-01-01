@@ -7,7 +7,7 @@
             ],
             [
                 {
-                    "metadata":"name,名称,14",
+                    "metadata":"name,名称,14,,,placeholder=20个中文字以内,normalize=text:40",
                     "optionConfig.rules":[
                         "required,请输入名称，名称不可为空！"
                     ]
@@ -15,7 +15,7 @@
             ],
             [
                 {
-                    "metadata": "code,编码,14,,,placeholder=（根据规范编码全大写，如G10 - GROUP.COMPANY）",
+                    "metadata": "code,编码,14,,,placeholder=根据规范编码全大写，如G10 - GROUP.COMPANY,normalize=upper:40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -24,7 +24,9 @@
                             "config": {
                                 "uri": "/api/group/existing",
                                 "method": "POST",
-                                "params": {}
+                                "params": {
+                                    "sigma":"PROP:app.sigma"
+                                }
                             }
                         }
                     ]
@@ -40,7 +42,14 @@
                 }
             ],
             [
-                "category,组类型,14"
+                {
+                    "metadata":"category,组类型,14,,aiRadio",
+                    "optionJsx.config.items":[
+                        "FIXED,固定组",
+                        "PRO,项目组",
+                        "TEMP,临时组"
+                    ]
+                }
             ],
             [
                 {
@@ -65,7 +74,8 @@
         "hidden": [
         ],
         "initial":{
-            "active":"BOOL:true"
+            "active":"BOOL:true",
+            "category":"FIX:FIXED"
         },
         "op": {
             "$opAdd": "act.group.add"

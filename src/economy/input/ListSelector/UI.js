@@ -43,7 +43,7 @@ class Component extends React.PureComponent {
                        suffix={<Icon type="search" onClick={onClick}/>}/>
                 <Dialog className="web-dialog"
                         size={"small"}
-                        $visible={this.state.$visible}   // 窗口是否开启
+                        $visible={this.state['$visible']}   // 窗口是否开启
                         $dialog={dialog}>
                     {search ? (
                         <Row style={{

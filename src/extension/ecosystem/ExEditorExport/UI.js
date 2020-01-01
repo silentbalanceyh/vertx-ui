@@ -22,7 +22,7 @@ class Component extends React.PureComponent {
              * 根据核心状态处理
              */
             const {
-                $button = {}, $options = {},
+                $button = {}, $options = [],
                 $submitting = false,
                 $group = {}, $notice = {}
             } = this.state;

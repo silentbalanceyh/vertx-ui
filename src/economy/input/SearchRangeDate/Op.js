@@ -40,6 +40,8 @@ const onStart = (reference) => (value) => {
     let {$data = {}} = reference.state;
     if (moment.isMoment(value)) {
         $data.start = value;
+    } else {
+        $data.start = null;
     }
     _onChange(reference, $data);
 };
@@ -47,6 +49,8 @@ const onEnd = (reference) => (value) => {
     let {$data = {}} = reference.state;
     if (moment.isMoment(value)) {
         $data.end = value;
+    } else {
+        $data.end = null;
     }
     _onChange(reference, $data);
 };

@@ -3,7 +3,7 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
+            "sorter": "updatedAt=DESC",
             "criteria": {
                 "":"OPERATOR:AND",
                 "sigma":"PROP:app.sigma",

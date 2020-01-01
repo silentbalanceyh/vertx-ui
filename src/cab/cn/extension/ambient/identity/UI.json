@@ -19,7 +19,7 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
+            "sorter": "updatedAt=DESC",
             "criteria": {}
         },
         "mock": {

@@ -12,7 +12,6 @@ const cabQuery = (reference, key = "grid") => {
         }
     }
 };
-
 export default {
     cabQuery,
 }

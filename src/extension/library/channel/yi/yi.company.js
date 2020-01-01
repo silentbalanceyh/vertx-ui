@@ -13,6 +13,12 @@ export default (reference) => {
          * 追加条件进入到 criteria
          */
         if (!$query.criteria) $query.criteria = {};
+        /*
+         * 双条件合并，大于0的时候需要取新条件
+         */
+        if (0 < Object.keys($query.criteria).length) {
+            $query.criteria[''] = true;
+        }
         const {$inited = {}} = reference.props;
         $query.criteria['companyId,='] = $inited.key;
         state.$query = $query;

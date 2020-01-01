@@ -7,13 +7,13 @@
             ],
             [
                 {
-                    "metadata": "name,名称,12,,,placeholder=必填",
+                    "metadata": "name,名称,12,,,placeholder=必填,normalize=text:128",
                     "optionConfig.rules":[
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
                 {
-                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT",
+                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT,normalize=upper:40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -22,7 +22,10 @@
                             "config": {
                                 "uri": "/api/dept/existing",
                                 "method": "POST",
-                                "params": {}
+                                "params": {
+                                    "sigma":"PROP:app.sigma",
+                                    "":"OPERATOR:AND"
+                                }
                             }
                         }
                     ]
@@ -33,7 +36,10 @@
                     "metadata": "managerName,经理,12,,aiListSelector,placeholder=（请选择部门经理）",
                     "optionJsx.config": {
                         "ajax": {
-                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`DESC"
+                            "metadata": "POST,/api/user/search,1,10,sorter=updatedAt`DESC",
+                            "params.criteria":{
+                                "modelId":"FIX:employee"
+                            }
                         },
                         "linker": {
                             "key": "managerId",
@@ -88,7 +94,7 @@
             ],
             [
                 {
-                    "metadata": "comment,备注,24,,aiTextArea",
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
                     "optionJsx.rows": 3
                 }
             ],

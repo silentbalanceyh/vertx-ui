@@ -15,8 +15,12 @@ const onSelect = (reference) => (input = []) => {
                 .start(input)       // 设置 input
                 .config(config);    // 设置 config
         const {onSelect} = reference.state;
+        // 必须
+        Ux.activeSearch();
         if (U.isFunction(onSelect)) {
             onSelect(dataEvent)
+        } else {
+            console.warn("[ Ox ] onSelect 函数未传入", onSelect);
         }
     }
 };

@@ -10,9 +10,13 @@ export default {
      */
     company: () => {
         const user = Ux.isLogged();
-        return Ux.ajaxGet(`/api/company/employee/:eid`, {
-            eid: user['employeeId']
-        });
+        if (user['employeeId']) {
+            return Ux.ajaxGet(`/api/company/employee/:eid`, {
+                eid: user['employeeId']
+            });
+        } else {
+            return Ux.promise({});
+        }
     },
     /*
      * 更新当前用户密码

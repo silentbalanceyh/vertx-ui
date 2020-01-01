@@ -2,6 +2,7 @@ import {Select} from "antd";
 import React from "react";
 import R from '../expression';
 import normalizeAttribute from './I.fn.uniform';
+import filterOption from './I.fn.filter.option';
 /*
  *
     // onChange处理
@@ -34,6 +35,9 @@ const aiSelect = (reference, jsx = {}, onChange) => {
         depend,
         reference
     });
+    if (!rest.disabled && !rest.readOnly) {
+        rest.filterOption = filterOption
+    }
     return (
         <Select {...rest}>
             {options.map(item => (

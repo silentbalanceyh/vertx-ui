@@ -3,9 +3,8 @@ import Cm from './gen.common';
 const ARGS = {
     inError: false
 };
-
 export default {
-    rx: (reference) => ({
+    rx: (reference, off = false) => ({
         /*
         column: (full = true) => full ?
             // 读取全列
@@ -53,7 +52,9 @@ export default {
             Cm.seek(reference, 'rxOpen')([id, data]),
         /* 窗口记录 关闭方法调用 */
         close: (data = {}, addOn) =>
-            Cm.seek(reference, 'rxClose')([data, addOn]),
+            Cm.seek(reference, 'rxClose', {
+                inError: !off,      // 特殊处理
+            })([data, addOn]),
         // ------------ 状态 -----------------
         /* loading */
         loading: (loading = true, addOn = {}) =>

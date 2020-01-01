@@ -15,7 +15,7 @@ export default (reference, column) => {
         /*
          * 设置 icon Style
          */
-        const {$lazy} = reference.state ? reference.state : {};
+        const {$lazy = {}} = reference.state ? reference.state : {};
         const columnValue = $lazy[column.dataIndex];
         let children;
         if (columnValue) {

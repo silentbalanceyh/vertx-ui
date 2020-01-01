@@ -75,7 +75,12 @@ const readOnly = (jsx = {}, disabled = false, reference) => {
         } else {
             // 如果是readOnly，则执行readOnly的注入
             jsx.readOnly = true;
-            jsx.disabled = disabled;
+            if ("multiple" !== jsx.mode) {
+                /*
+                 * 多选不禁用
+                 */
+                jsx.disabled = disabled;
+            }
         }
     }
 };

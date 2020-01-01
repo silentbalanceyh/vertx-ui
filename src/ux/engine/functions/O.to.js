@@ -1,5 +1,6 @@
 import Cv from "../../constant";
 import Ele from '../../element';
+import Abs from "../../abyss";
 
 const toGrid = (config = {}) => {
     const {grid = 3} = config;
@@ -83,13 +84,28 @@ const toX = (columns = []) => {
     });
     return x;
 };
+const toWidth = (literal = "") => {
+    if ("string" === typeof literal) {
+        let width = 0;
+        for (let idx = 0; idx < literal.length; idx++) {
+            const str = String(literal.charAt(idx));
+            if (Abs.isCn(str)) {
+                width += 2;
+            } else {
+                width += 1;
+            }
+        }
+        return width;
+    } else return -1;
+};
 export default {
     toHeight,
     toGrid,
     toMessage,
-    /* 根据 CSS_PREFIX 前缀计算的 Class */
-    toCss,
+
+    toCss,  // /* 根据 CSS_PREFIX 前缀计算的 Class */
     toKey,  // 生成 assist / tabular 相关 key
     toLink,
     toX,    // 表格专用列生成
+    toWidth, // 计算字符串长度，中文字 x 2
 }

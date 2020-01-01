@@ -1,5 +1,5 @@
 import U from "underscore";
-import Ft from '../web-column-filter';
+import Ft from '../functions';
 import Cmn from './I.common';
 /*
  * query 专用的表单

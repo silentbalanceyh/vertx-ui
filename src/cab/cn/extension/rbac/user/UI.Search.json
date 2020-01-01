@@ -36,16 +36,16 @@
             "window": 0.15,
             "ui": [
                 [
-                    "username`c,账号,14,,,placeholder=（输入账号模糊匹配）"
+                    "username`c,账号,14,,,placeholder=（输入账号模糊匹配）,normalize=id:16"
                 ],
                 [
-                    "realname`c,真实姓名,14,,,placeholder=（输入真实姓名模糊匹配）"
+                    "realname`c,真实姓名,14,,,placeholder=（输入真实姓名模糊匹配）,normalize=text:40"
                 ],
                 [
                     {
                         "metadata": "$button",
                         "optionJsx.extension": [
-                            "$opFilter,搜索,SUBMIT,primary",
+                            "$opWizard,搜索,SUBMIT,primary",
                             "$opReset,重置,RESET"
                         ],
                         "span": 24
@@ -53,7 +53,7 @@
                 ]
             ],
             "op": {
-                "$opFilter": "act.user.search"
+                "$opWizard": "act.user.wizard"
             }
         }
 }

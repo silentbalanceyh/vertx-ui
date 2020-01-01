@@ -26,13 +26,13 @@ const aiTreeNode = (item = {}) => {
 const aiTree = (item = {}, rest = {}) => {
     if (U.isArray(item)) {
         return (
-            <Tree {...rest}>
+            <Tree {...rest} className={"web-tree"}>
                 {item.map(each => aiTreeNode(each))}
             </Tree>
         )
     } else {
         return (
-            <Tree {...rest}>
+            <Tree {...rest} className={"web-tree"}>
                 {aiTreeNode(item)}
             </Tree>
         )

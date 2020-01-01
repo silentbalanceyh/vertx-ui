@@ -44,10 +44,36 @@ const configRelation = (data = {}, config = {}, reference) => {
      */
     const {category = {}} = config;
     const {field, source = "data.category"} = category;
+    /*
+     * hitField
+     */
+    let hitField;
+    const findValue = (fields = []) => {
+        let found;
+        for (let idx = 0; idx < fields.length; idx++) {
+            if (data[fields[idx]]) {
+                found = fields[idx];
+                break;
+            }
+        }
+        return found;
+    };
+    if ("string" === typeof field) {
+        if (0 <= field.indexOf(',')) {
+            const fields = field.split(',');
+            hitField = findValue(fields);
+        } else {
+            hitField = field;
+        }
+    } else {
+        if (Ux.isArray(field)) {
+            hitField = findValue(field);
+        }
+    }
     let $path = {};
-    if (data[field]) {
+    if (data[hitField]) {
         const categoryArray = Ux.onDatum(reference, source);
-        const category = Ux.elementUnique(categoryArray, "key", data[field]);
+        const category = Ux.elementUnique(categoryArray, "key", data[hitField]);
         if (category) {
             /*
              * X_CATEGORY 中包含了固定的结构

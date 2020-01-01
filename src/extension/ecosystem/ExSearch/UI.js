@@ -23,7 +23,7 @@ class Component extends React.PureComponent {
              * 拆组件
              */
             return renderJsx(this, null);
-        }, Ex.parserOfColor("ExNavigation").private());
+        }, Ex.parserOfColor("ExSearch").private());
     }
 }
 

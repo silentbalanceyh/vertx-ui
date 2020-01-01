@@ -1,4 +1,5 @@
 import Abs from '../../abyss';
+import Fn from '../functions';
 
 const limitNumber = length => value => {
     if (value) {
@@ -41,11 +42,53 @@ const limitPInteger = length => value => {
 const limitLength = length => value => {
     if (value) {
         // 长度限制
+        value = value.toString();
         if (0 < length) {
             if (length < value.length) {
                 value = value.substring(0, length);
             }
         }
+    }
+    return value;
+};
+const limitText = length => value => {
+    if (value) {
+        const width = Fn.toWidth(value);
+        if (0 < length) {
+            if (length < width) {
+                const last = value.charAt(value.length - 1);
+                if (Abs.isCn(last)) {
+                    value = value.substring(0, length - 2);
+                } else {
+                    value = value.substring(0, length);
+                }
+            }
+        }
+    }
+    return value;
+};
+const limitId = (length) => value => {
+    if (value) {
+        value = value.toString();
+        value = value.replace(/[^A-Za-z0-9.\-_]/g, ""); //清除“数字”和“.”以外的字符
+        if (0 < length) {
+            if (length < value.length) {
+                value = value.substring(0, length);
+            }
+        }
+    }
+    return value;
+};
+const limitUpper = (length) => value => {
+    if (value) {
+        value = value.toString();
+        value = value.replace(/[^A-Za-z0-9.\-_ ]/g, ""); //清除“数字”和“.”以外的字符
+        if (0 < length) {
+            if (length < value.length) {
+                value = value.substring(0, length);
+            }
+        }
+        value = value.toUpperCase();
     }
     return value;
 };
@@ -73,6 +116,9 @@ const limitDecimal = (length, scale = 2) => value => {
 export default {
     decimal: limitDecimal,
     number: limitNumber,
+    id: limitId,
     integer: limitPInteger,
-    length: limitLength
+    length: limitLength,
+    text: limitText,
+    upper: limitUpper,
 };

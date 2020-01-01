@@ -1,4 +1,5 @@
 import Standard from './category/standard';
+import Standard11 from './category/standard.11';
 import Adjust015 from './category/adjust.015';
 import Adjust016 from './category/adjust.016';
 
@@ -14,6 +15,7 @@ import Half051 from './category/half.051';
 const item = {
     // 标准布局
     1: Standard,
+    1.1: Standard11,
     // 9:15 专用布局
     0.15: Adjust015,
     // 9:15 变种，宽文字布局

@@ -88,9 +88,16 @@ const yiPage = (reference) => {
                 state.$data = response.data.sort(Ux.sorterDescDFn('createdAt'));
             }
             /*
+             * 添加 lazy 流程
+             */
+            const lazyColumn = state.$table.columns
+                .filter(item => "USER" === item['$render']);
+            /*
              * 统计属性数量
              */
-            reference.setState(state);
+            Ux.ajaxEager(reference, lazyColumn, state.$data)
+                .then($lazy => Ux.promise(state, "$lazy", $lazy))
+                .then(state => reference.setState(state));
         }).catch(error => console.error(error));
     } else {
         state.$error = "模型选择失败！";

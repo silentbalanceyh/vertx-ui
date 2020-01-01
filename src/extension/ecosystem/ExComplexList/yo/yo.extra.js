@@ -11,7 +11,7 @@ export default (reference) => {
      */
     const {
         options = {},   // 当前状态中保存的 options 配置项
-        $columns = [], $columnsMy = []
+        $columns = [], $columnsMy = [],
     } = reference.state;
     /*
      * 核心配置信息传入

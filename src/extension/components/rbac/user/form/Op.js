@@ -18,7 +18,9 @@ const $opDelete = (reference) =>
         uri: "/api/user/:key",
         dialog: "removed"
     });
-const $opFilter = (reference) => params =>
+const $opFilter = (reference) =>
+    params => Ex.form(reference).filter(params);
+const $opWizard = (reference) => params =>
     Ex.form(reference).wizard(params, (request = {}) =>
         Ux.ajaxPost('/api/user/search', request)
             .then(result => Ux.promise(result.list))
@@ -37,6 +39,7 @@ export default {
         $opSave,
         $opDelete,
         $opFilter,
+        $opWizard,
         $opPassword
     }
 }

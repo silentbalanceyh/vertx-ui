@@ -189,7 +189,7 @@ const fnRender = (props = {}, options = {}) => {
                     render = false;
                     // forEach中中断必须跳出
                     if (Ux.Env.DEBUG) {
-                        console.error(`[ERR]加载纯数据问题：key = ${key}`);
+                        console.warn(`[ERR]加载纯数据问题：key = ${key}`);
                     }
                     return;
                 }

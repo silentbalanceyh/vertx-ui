@@ -5,6 +5,13 @@ const rxExport = (reference) => (params = {}) => {
     if (!Ux.isEmpty(params)) {
         const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_EXPORT_URI];
+        const query = Ux.qrInherit(reference);
+        /*
+         * 带搜索条件导出
+         */
+        if (query.criteria) {
+            params.criteria = Ux.clone(query.criteria);
+        }
         return Ux.ajaxPull(uri, params);
     }
 };
