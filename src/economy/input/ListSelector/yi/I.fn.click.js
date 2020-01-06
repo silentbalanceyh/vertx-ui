@@ -20,8 +20,17 @@ export default (reference, config = {}) => event => {
         params = Ux.qrCombine(params, reference, $filters);
     }
     Ux.asyncData(config.ajax, params,
-        ($data) => reference.setState({
-            $loading: false,
-            $data
-        }));
+        ($data) => {
+            const {table} = reference.state;
+            const state = {$data, $loading: false};
+            if (table && table.columns) {
+                const lazyColumn = table.columns
+                    .filter(item => "USER" === item['$render']);
+                Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
+                    .then($lazy => Ux.promise(state, "$lazy", $lazy))
+                    .then(done => reference.setState(done));
+            } else {
+                console.error("Table columns error: ", table);
+            }
+        });
 };

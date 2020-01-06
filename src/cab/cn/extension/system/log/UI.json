@@ -35,7 +35,7 @@
             "tabs.list": "日志列表",
             "tabs.edit": "查看日志",
             "identifier": "log",
-            "dynamic.op": false,
+            "dynamic.op": true,
             "dynamic.column": true,
             "dynamic.switch": false,
             "op.extra.column": "修改显示列",

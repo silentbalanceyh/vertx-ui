@@ -146,6 +146,23 @@ export default (reference = {}, config = {}) => {
         uniform.rxAssist = rxAssist;
     }
     /*
+     * 动态 $opKey
+     */
+    let {$opKey} = reference.props;
+    if ($opKey) {
+        uniform.$opKey = $opKey;
+    } else {
+        /*
+         * 有状态才做二次读取
+         */
+        if (reference.state) {
+            $opKey = reference.state.$opKey;
+            if ($opKey) {
+                uniform.$opKey = $opKey;
+            }
+        }
+    }
+    /*
      * options 专用处理
      */
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更

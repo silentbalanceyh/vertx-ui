@@ -11,7 +11,10 @@ import yiAssist from './yi.assist';
 import yiControl from './yi.control';
 import yiCompany from './yi.company';
 
+import yiColumn from './yi.column';
+
 export default {
+    yiColumn,
     /*
      * 1. yiModule
      * 2. 路由信息：/xxx/yyy/:type --> type,= <value>

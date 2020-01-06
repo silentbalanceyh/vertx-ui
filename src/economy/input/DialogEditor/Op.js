@@ -18,7 +18,6 @@ const yiPage = (reference) => {
      */
     const state = {};
     const executors = Ux.configExecutor(reference, Event.EVENTS);
-    state.$table = Ux.configTable(reference, table, executors);
     /*
      * 窗口
      */
@@ -27,6 +26,7 @@ const yiPage = (reference) => {
      * 提取当前 Dialog 需要使用的 Form
      */
     const ref = Ux.onReference(reference, 1);
+    state.$table = Ux.configTable(ref, table, executors);
     /*
      * 按钮处理
      */

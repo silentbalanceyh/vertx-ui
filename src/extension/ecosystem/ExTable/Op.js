@@ -31,19 +31,10 @@ const yiTable = (reference) => {
              */
             if (state.$query) {
                 return Ex.rx(reference).search(state.$query)
-                    .then(data => Ux.promise(state, "$data", data));
+                    .then(data => Ex.yiColumn(reference, state, data));
             } else {
                 return Ex.E.error008();
             }
-        })
-        .then(state => {
-            /*
-             * 添加 lazy 流程
-             */
-            const lazyColumn = state.$table.columns
-                .filter(item => "USER" === item['$render']);
-            return Ux.ajaxEager(reference, lazyColumn, state.$data ? state.$data.list : [])
-                .then($lazy => Ux.promise(state, "$lazy", $lazy))
         })
         .then(state => {
             /*

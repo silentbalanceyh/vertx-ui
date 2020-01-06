@@ -13,6 +13,9 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
+        /*
+         * Lazy Init
+         */
         Ux.xtLazyInit(this);
     }
 
