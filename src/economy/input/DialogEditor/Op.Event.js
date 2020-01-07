@@ -49,11 +49,7 @@ const onRows = (reference) => (rows = [], additional = {}) => {
     }
     reference.setState(state);
 };
-const fnDelete = (id, record, metadata = {}) => {
-    /*
-     * 删除当前行的信息
-     */
-    const {reference} = metadata;
+const fnDelete = (reference) => (id, record) => {
     /*
      * 提交处理
      */
@@ -66,8 +62,7 @@ const fnDelete = (id, record, metadata = {}) => {
         rxRow(id, {$submitting: false});
     })
 };
-const fnEdit = (id, record, metadata = {}) => {
-    const {reference} = metadata;
+const fnEdit = (reference) => (id, record) => {
     const ref = Ux.onReference(reference, 1);
     const data = Ux.clone(record);
     const {$inited = {}} = ref.props;
@@ -79,6 +74,11 @@ const fnEdit = (id, record, metadata = {}) => {
      * 状态重新设置
      */
     const state = {};
+    /*
+     * data 中的日期格式需要解析
+     * The value/defaultValue of DatePicker or MonthPicker must be a moment object after `antd@2.0`
+     * 防止上述错误，执行表单的初始值
+     */
     state.$inited = data;
     state.$mode = Ux.Env.FORM_MODE.EDIT;
     state.$visible = true;

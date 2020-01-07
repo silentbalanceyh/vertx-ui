@@ -15,6 +15,10 @@ class Component extends React.PureComponent {
         Op.yiPage(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuPage(this, {state: prevState, props: prevProps});
+    }
+
     render() {
         return Ux.xtReady(this, () => {
             const {
@@ -35,6 +39,7 @@ class Component extends React.PureComponent {
             Ux.configScroll($table, data, ref);
             return (
                 <Input.Group {...attrs}>
+                    {Ux.aiFloatError(this, !$visible)}
                     <Table {...$table} dataSource={data}
                            className={"web-table"}
                            loading={$submitting}/>
@@ -50,7 +55,7 @@ class Component extends React.PureComponent {
                     {Ux.aiButtonGroup(this, $button)}
                 </Input.Group>
             );
-        }, {name: "DialogEditor"})
+        }, {name: "DialogEditor", logger: true})
     }
 }
 

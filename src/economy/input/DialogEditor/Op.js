@@ -26,7 +26,19 @@ const yiPage = (reference) => {
      * 提取当前 Dialog 需要使用的 Form
      */
     const ref = Ux.onReference(reference, 1);
-    state.$table = Ux.configTable(ref, table, executors);
+    /*
+     * executors 格式化，DialogEditor 专用
+     */
+    const normalized = {};
+    Object.keys(executors).forEach(key => {
+        if (Ux.isFunction(executors[key])) {
+            const normalizeFn = executors[key](reference);
+            if (Ux.isFunction(normalizeFn)) {
+                normalized[key] = normalizeFn;
+            }
+        }
+    });
+    state.$table = Ux.configTable(ref, table, normalized);
     /*
      * 按钮处理
      */
@@ -36,7 +48,13 @@ const yiPage = (reference) => {
          */
         add: Event.onOpen(reference)
     });
-
+    /*
+     * initialValue
+     */
+    const {value = []} = reference.props;
+    if (Ux.isArray(value)) {
+        state.initialValue = value;
+    }
     state.$ready = true;
     const {$form = {}} = ref.props;
     const Component = $form[form];
@@ -63,6 +81,53 @@ const yiPage = (reference) => {
         reference.setState(state);
     }
 };
+const yuPage = (reference, virtualRef) => {
+    const prevValue = virtualRef.props.value;
+    const curValue = reference.props.value;
+    /*
+     * 发生改变的时候操作
+     */
+    if (prevValue !== curValue) {
+        /*
+         * Form 处理
+         */
+        const ref = Ux.onReference(reference, 1);
+        const {form} = ref.props;
+        /*
+         * 是否操作过（未操作就是重置状态）
+         */
+        const isTouched = form.isFieldsTouched();
+        if (isTouched) {
+
+        } else {
+            /*
+             * 重置表单
+             */
+            const {initialValue = []} = reference.state;
+            const {onChange, id} = reference.props;
+            if (Ux.isFunction(onChange)) {
+                /*
+                 * 初始化表单
+                 */
+                reference.setState({data: initialValue});
+                if (0 < initialValue.length) {
+                    /*
+                     * 编辑重置
+                     */
+                    const state = {};
+                    state[id] = initialValue;
+                    Ux.formHits(ref, state);
+                } else {
+                    /*
+                     * 添加重置
+                     */
+                    Ux.formReset(ref, [id])
+                }
+            }
+        }
+    }
+};
 export default {
-    yiPage
+    yiPage,
+    yuPage,
 }

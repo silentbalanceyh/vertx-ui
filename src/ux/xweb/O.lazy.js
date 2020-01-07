@@ -136,9 +136,8 @@ const xtLazyUp = (reference, virtualRef) => {
         }
     }
 };
-
 export default {
     xtLazyInit,
     xtLazyUp,
-    xtLazyAjax
+    xtLazyAjax,
 }

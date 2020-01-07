@@ -47,9 +47,12 @@ const xtRender = (reference, render) => {
 const xtReady = (reference, render, LOG = {}) => {
     const {$ready = false} = reference.state ? reference.state : {};
     if ($ready) {
-        const {color = "#4682B4", name = ""} = LOG;
-        if (name) {
-            Dev.dgDebug(reference.state, `[ Xt ] 自定义组件 ${name} 初始化完成时的状态`, color);
+        const {color = "#4682B4", name = "", logger = false} = LOG;
+        if (logger) {
+            const {$visible = false} = reference.state;
+            if ($visible && name) {
+                Dev.dgDebug(reference.state, `[ Xt ] 自定义组件 ${name} 初始化完成时的状态`, color);
+            }
         }
         return xtRender(reference, render);
     } else {

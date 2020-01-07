@@ -1,13 +1,25 @@
 import Ready from './I.ready';
 import Rule from './I.rule';
+import U from 'underscore';
 
 const required = (reference = {}) => (rule = {}, value, callback) => {
     if (Ready.isReady(rule, reference)) {
-        // 处理required
-        if (value) {
-            callback();
+        if (U.isArray(value)) {
+            /*
+             * Array 类型的，长度必须 > 0
+             */
+            if (0 < value.length) {
+                callback();
+            } else {
+                callback(rule.message);
+            }
         } else {
-            callback(rule.message);
+            // 处理required
+            if (value) {
+                callback();
+            } else {
+                callback(rule.message);
+            }
         }
     } else {
         callback();

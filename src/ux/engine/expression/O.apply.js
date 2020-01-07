@@ -3,6 +3,7 @@ import U from "underscore";
 import {v4} from "uuid";
 // 导入当前目录
 import Parser from "./I.parser.down";
+import Ruler from './I.parser.rule';
 // 导入外层
 import Abs from '../../abyss';
 import Ut from '../../unity';
@@ -18,7 +19,7 @@ const applyRules = (rules = []) => {
     const processed = [];
     rules.forEach(rule => {
         if ("string" === typeof rule) {
-            const result = Parser.parseRule(rule);
+            const result = Ruler.parseRule(rule);
             if (result) {
                 processed.push(result);
             }

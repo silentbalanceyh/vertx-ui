@@ -42,7 +42,8 @@ const connectValidator = (cell = {}) => {
     const onValidate = Abs.immutable([
         "aiSelect",
         "aiListSelector",
-        "aiTreeSelect"
+        "aiTreeSelect",
+        "aiDialogEditor"
     ]);
     const optionConfig = Abs.clone(cell.optionConfig);
     const {optionJsx = {}} = cell;
