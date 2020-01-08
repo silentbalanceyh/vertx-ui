@@ -23,8 +23,8 @@ const updateInternal = (reference, prevState, consumer) => {
             if (state.$loading) {
                 const {$query = {}} = Ux.clone(reference.state);
                 Ux.toLoading(() => Fn.rx(reference).search($query)
-                    .then($data => Yi.yiColumn(reference, reference.state, $data)))
-                    .then(done => consumer(done))
+                    .then($data => Yi.yiColumn(reference, reference.state, $data))
+                    .then(done => consumer(done)))
             }
         }
     }
