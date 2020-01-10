@@ -43,6 +43,14 @@
                         {
                             "key": "java.time.LocalTime",
                             "label": "时间格式"
+                        },
+                        {
+                            "key": "java.time.LocalDate",
+                            "label": "日期格式"
+                        },
+                        {
+                            "key": "java.time.LocalDateTime",
+                            "label": "日期/时间格式"
                         }
                     ],
                     "optionConfig.rules": [

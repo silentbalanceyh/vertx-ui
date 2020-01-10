@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
             const {
                 $button = {}, $options = [],
                 $submitting = false,
-                $group = {}, $notice = {}
+                $group = {}, $notice = {},
             } = this.state;
             /*
              * 选项处理
@@ -34,6 +34,9 @@ class Component extends React.PureComponent {
             if (!Ux.isEmpty(button)) {
                 button.loading = $submitting;
             }
+            /*
+             * 受控选项处理，默认权限
+             */
             return renderJsx(this, {
                 button,
                 options: Ux.clone($options),

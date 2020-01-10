@@ -76,7 +76,6 @@ const toRoute = (reference = {}, uri = "") => {
     } else {
         target = `/${Cv['ROUTE']}${uri}`;
     }
-    target = target.replace(/\/\//g, '/');
     $router.to(target);
 };
 const toQuery = (name = "") => {
@@ -106,8 +105,10 @@ const toOriginal = (reference = {}) => {
         let calculated = original;
         if (0 <= Object.keys(params).length) {
             calculated += "?";
+            const paramQueue = [];
             Object.keys(params)
-                .forEach(paramName => calculated += `${paramName}=${params[paramName]}`);
+                .forEach(paramName => paramQueue.push(`${paramName}=${params[paramName]}`));
+            calculated += paramQueue.join('&');
         }
         toRoute(reference, calculated);
     } else {

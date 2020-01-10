@@ -51,8 +51,8 @@ const $opSave = (reference) => (params) =>
         dialog: "saved"
     });
 const yuPage = (reference) => {
-    const {$loading = false} = reference.state;
-    if ($loading) {
+    const {$loading = false, $timer} = reference.state;
+    if ($loading && $timer) {
         let state = reference.state;
         Ux.toLoading(() => Ex.I.jobs().then((data = []) => {
             state = Ux.clone(state);
@@ -66,6 +66,10 @@ const yoPage = (reference) => {
     const {$timer} = reference.state;
     if ($timer) {
         clearInterval($timer);
+        /*
+         * 更新 $timer 设置
+         */
+        reference.setState({$timer: undefined});
     }
 };
 export default {

@@ -4,9 +4,22 @@ import Ex from 'ex';
 const yiPage = (reference) => {
     const state = {};
     state.$ready = true;
-    const grid = Ux.fromHoc(reference, "grid");
-    if (grid.query) {
-        state.$query = Ux.clone(grid.query);
+    /*
+     * condition 处理
+     */
+    const condition = Ux.toQuery("condition");
+    if (condition) {
+        const conditionStr = Ux.decryptBase64(condition);
+        try {
+            state.$query = JSON.parse(conditionStr);
+        } catch (error) {
+
+        }
+    } else {
+        const grid = Ux.fromHoc(reference, "grid");
+        if (grid.query) {
+            state.$query = Ux.clone(grid.query);
+        }
     }
     reference.setState(state);
 };

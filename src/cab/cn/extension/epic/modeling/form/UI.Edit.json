@@ -127,7 +127,9 @@
                                                                 "java`lang`Long": "长整数",
                                                                 "java`lang`Boolean": "布尔值",
                                                                 "java`math`BigDecimal": "浮点数",
-                                                                "java`time`LocalTime": "时间格式"
+                                                                "java`time`LocalTime": "时间格式",
+                                                                "java`time`LocalDate": "日期格式",
+                                                                "java`time`LocalDateTime":"日期/时间格式"
                                                             }
                                                         },
                                                         "columnName,数据库列名",

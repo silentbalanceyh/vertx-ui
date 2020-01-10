@@ -10,7 +10,7 @@ const yiEditor = (reference) => {
     const {notice = {}} = config;
     state.$notice = Ux.clone(notice);
     /*
-     * 选项处理
+     * 选项处理，默认全选
      */
     const {$columns = [], button = ""} = config;
     const $options = $columns.map(column => {
@@ -21,8 +21,11 @@ const yiEditor = (reference) => {
         return option;
     }).filter(column => "key" !== column.key);
     state.$options = $options;
-
-    state.$selected = []; // Ux.clone($columnsMy);
+    /*
+     * 默认全选
+     */
+    const selected = $options.map(item => item.key);
+    state.$selected = selected;
     /*
      * Group专用
      */
@@ -40,6 +43,7 @@ const yiEditor = (reference) => {
         reference.setState({$selected});
     };
     group.className = "group";
+    group.defaultValue = selected;
     state.$group = group;
     /*
      * 按钮专用选项

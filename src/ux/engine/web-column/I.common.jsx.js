@@ -2,6 +2,7 @@ import {Divider, Icon, Popconfirm} from "antd";
 import Abs from "../../abyss";
 import React from "react";
 import {Link} from 'react-router-dom';
+import T from "../../unity";
 
 const jsxSpan = (attrs = {}, children) =>
     // 解决 React 无法渲染 Object的 BUG
@@ -13,6 +14,16 @@ const jsxIcon = (attrs = {}, children, icon) => (
         {jsxSpan(attrs, children)}
     </span>
 );
+const queryStored = (reference = {}) => {
+    /* query 专用 */
+    const {$query} = reference.props;
+    if (Abs.isObject($query)) {
+        const queryStr = T.encryptBase64(JSON.stringify($query));
+        return `condition=${queryStr}`;
+    } else {
+        return "";
+    }
+};
 export default {
     /* 分割线 */
     jsxDivider: (key) => (<Divider type={"vertical"} key={key}/>),
@@ -42,10 +53,12 @@ export default {
             url = `/${$app._("path")}${url}`;
         }
         if (0 < url.indexOf("?")) {
-            url += `&target=${$router.path()}`
+            url += `&`
         } else {
-            url += `?target=${$router.path()}`
+            url += `?`
         }
+        url += queryStored(reference);
+        url += `&target=${$router.path()}`;
         return (
             <Link {...attrs} to={url}>{children}</Link>
         )
