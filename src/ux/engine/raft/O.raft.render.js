@@ -149,6 +149,10 @@ const raftRender = (cell = {}, config = {}) => {
              */
             const {$loading = false} = reference.state;
             if ($loading) optionJsx.loading = $loading;      // 为 true 时
+            /*
+             * 处理
+             */
+            Ut.writeShield(reference, optionJsx);
             return render(reference, optionJsx);
         };
     } else {
@@ -185,6 +189,10 @@ const raftRender = (cell = {}, config = {}) => {
             if (optionJsx && values[cell.field]) {
                 optionJsx['data-initial'] = values[cell.field];
             }
+            /*
+             * 插件专用处理
+             */
+            Ut.writeShield(reference, optionJsx);
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

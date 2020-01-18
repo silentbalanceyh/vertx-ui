@@ -1,0 +1,10 @@
+.ix-form {
+    .width(@max, @i: 20) when (@i =< @max) {
+        .ux-form {
+            &-@{i} {
+                padding-bottom: unit(@i, px) !important;
+            }
+        }
+        .ix-form.width(@max, @i + 20)
+    }
+}

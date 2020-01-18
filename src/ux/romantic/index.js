@@ -1,6 +1,10 @@
 import sexCab from './O.fn.cab';
 import sexModal from './O.fn.modal';
 import sexTable from './O.fn.table';
+import sexBatch from './O.fn.batch';
+
+import sexDialog from './O.fn.dialog';
+import sexMessage from './O.fn.message';
 
 export default {
     /*
@@ -20,4 +24,8 @@ export default {
     sexModal,
 
     sexTable,
+
+    sexBatch,
+    sexDialog,  /* 窗口 */
+    sexMessage
 }

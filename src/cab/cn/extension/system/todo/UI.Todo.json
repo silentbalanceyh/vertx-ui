@@ -41,9 +41,39 @@
             "dynamic.op": false,
             "dynamic.column": true,
             "dynamic.switch": false,
+            "op.extension.approval":{
+                "text":"批量确认",
+                "region":"op.batch.approval",
+                "index":0,
+                "plugin":{
+                    "window":"window.batch.approval",
+                    "componentType":"ExApprovalBatch",
+                    "component": "batch.approval"
+                },
+                "config":{
+                    "executor":"rxApproval"
+                }
+            },
+            "op.extension.reject":{
+                "text":"批量拒绝",
+                "region":"op.batch.reject",
+                "index":1,
+                "plugin":{
+                    "prompt":"confirm.batch.reject"
+                },
+                "config":{
+                    "executor":"rxReject",
+                    "ajax":{
+                        "uri":"/api/todo/reject",
+                        "method":"POST"
+                    },
+                    "message":"message.batch.approval"
+                }
+            },
             "op.row.edit": true,
             "op.row.delete": true,
-            "window.batch.edit": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
+            "window.batch.editor": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
+            "window.batch.approval":"请填写需要批量补充的字段,确认,关闭,false,1024,true,$opSaveApproval",
             "window.extra.column": "请选择您要显示的列,leftTop,640,true",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
@@ -64,7 +94,9 @@
             "confirm.delete": "确认删除当前待办记录？",
             "confirm.batch.delete": "您确认要删除所有选中的待办记录？",
             "confirm.clean.filter": "该操作将清空所有的查询条件，确认？",
-            "message.batch.delete": "您所选择的记录已经全部删除成功！"
+            "confirm.batch.reject": "您确认您要拒绝选择的所有记录？",
+            "message.batch.delete": "您所选择的记录已经全部删除成功！",
+            "message.batch.approval": "您所选择的记录已经全部处理完成！"
         },
         "component": {
             "extra.export": {

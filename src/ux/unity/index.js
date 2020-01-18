@@ -17,6 +17,7 @@ import antSubmit from './O.ant.submit';
 
 import pluginElement from './O.plugin.element';
 import pluginTo from './O.plugin.to';
+import plugins from './O.plugin.dynamic';
 
 import connect from './O.connect';
 import depend from './O.depend';
@@ -41,6 +42,7 @@ export default {
 
     ...pluginElement,
     ...pluginTo,
+    ...plugins,
 
     ...connect,
     ...depend

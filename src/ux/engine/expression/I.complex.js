@@ -97,12 +97,18 @@ const plxRecord = (reference, jsx = {}) => {
     let rxRecord = (data) => data;
     if (jsx.record) {
         rxRecord = (data) => {
-            const index = data.indexOf('{');
-            const prefix = data.substring(0, index);
-            const record = data.substring(index);
-            return {
-                record: JSON.parse(record),
-                prefix,
+            if (0 < data.indexOf('{')) {
+                const index = data.indexOf('{');
+                const prefix = data.substring(0, index);
+                const record = data.substring(index);
+                return {
+                    record: JSON.parse(record),
+                    prefix,
+                }
+            } else {
+                return {
+                    prefix: data
+                }
             }
         }
     }

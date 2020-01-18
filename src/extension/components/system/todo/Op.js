@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Ex from 'ex';
+import event from './Op.Event';
 
 const yiPage = (reference) => {
     const state = {};
@@ -59,11 +60,21 @@ const rxCategory = (reference) => (selected = []) => {
         reference.setState({$query});
     }
 };
-const rxTabClick = (reference) => ($activeKey) =>
+const rxTabClick = (reference) => ($activeKey) => {
     reference.setState({$activeKey});
+    const {$router} = reference.props;
+    if ($router) {
+        /*
+         * 重写路由链接
+         */
+        const path = $router.path();
+        Ux.toRoute(reference, path);
+    }
+};
 export default {
     yiPage,
     yiTodo,
     rxCategory,
-    rxTabClick
+    rxTabClick,
+    $op: event
 }

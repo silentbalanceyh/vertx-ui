@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 
 export default (reference) => {
     const {$batch = false} = reference.props;
@@ -10,7 +11,13 @@ export default (reference) => {
         return {
             onChange: ($selected = []) => Ex.rx(reference).selected($selected),
             /* 受控处理（用于设置受控的情况）*/
-            selectedRowKeys: $selected
+            selectedRowKeys: $selected,
+            /* 行特殊控制（是否可选择） */
+            getCheckboxProps: (record = {}) => {
+                const props = {};
+                props.disabled = Ux.pluginRow(reference, "pluginRow", record);
+                return props;
+            }
         }
     }
 }

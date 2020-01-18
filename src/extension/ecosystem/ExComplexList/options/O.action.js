@@ -28,7 +28,7 @@ export default {
         type: 'default',
         key: 'opBatchEdit',
         plugin: {
-            window: 'window.batch.edit',    // Window专用
+            window: 'window.batch.editor',    // Window专用
             componentType: 'ExEditorBatch',     // 组件类型
             component: `batch.editor`,   // 配置专用Key
         }

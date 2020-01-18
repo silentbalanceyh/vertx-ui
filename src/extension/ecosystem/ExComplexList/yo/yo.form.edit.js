@@ -17,7 +17,7 @@ export default (reference, item = {}) => {
     /*
      * 读取 $identifier（动态表单必须）
      */
-    const {options = {}} = reference.state;
+    const {options = {}, plugins = {}} = reference.state;
     if (options[Ex.Opt.IDENTIFIER]) {
         formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
     }
@@ -26,6 +26,7 @@ export default (reference, item = {}) => {
      */
     const {$inited = {}} = reference.state;
     formAttrs.$inited = $inited;
+    formAttrs.$plugins = plugins;
     /*
      * 设置基础查询条件
      */

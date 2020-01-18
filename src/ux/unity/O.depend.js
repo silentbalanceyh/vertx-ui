@@ -179,6 +179,13 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
     }
     return formValues;
 };
+const writeShield = (reference, optionJsx = {}) => {
+    const {$shield = false} = reference.props;
+    if ($shield) {
+        optionJsx.disabled = true;
+        optionJsx.readOnly = true;
+    }
+};
 export default {
     /*
     *  linker专用配置处理
@@ -193,4 +200,8 @@ export default {
      */
     writeDisabled,
     writeReadOnly,
+    /*
+     * 写全局数据信息
+     */
+    writeShield,
 }

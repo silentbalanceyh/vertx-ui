@@ -7,7 +7,8 @@ import Op from './Op';
 export default (reference, {
     grid = {},
     form = {},
-    category = []
+    category = [],
+    op = {}
 }) => {
     const {
         $category = false, config = {}
@@ -25,7 +26,7 @@ export default (reference, {
                 <Col span={$opened ? 24 : 20}>
                     <ExComplexList {...Ex.yoAmbient(reference)}
                                    config={grid} $form={form}
-                                   $query={$query}
+                                   $query={$query} $op={op}
                                    rxPostOpen={Ex.rxPostOpen(reference)}
                                    rxPostClose={Ex.rxPostClose(reference)}/>
                 </Col>

@@ -22,10 +22,15 @@ class Component extends React.PureComponent {
                 FormFilter,
             };
             /*
+             * 三阶降级为二阶
+             */
+            const op = {};
+            Object.keys(Op.$op).forEach(key => op[key] = Op.$op[key](this));
+            /*
              * category data
              */
             const category = Ux.onDatum(this, "data.pending");
-            return renderJsx(this, {grid, form, category});
+            return renderJsx(this, {grid, form, category, op});
         }, Ex.parserOfColor("PxPending").control())
     }
 }

@@ -12,7 +12,7 @@ const dgRouter = (Ux, container, component) => {
     }
 };
 
-const dgDebug = (data, prefix, color) => {
+const dgDebug = (data = {}, prefix, color) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
         console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, `color:white;background-color:${color ? color : "#eb2f96"};font-weight:900;`,
             data);

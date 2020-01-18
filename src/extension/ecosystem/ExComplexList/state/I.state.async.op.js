@@ -2,14 +2,22 @@ import Ux from 'ux';
 import Ex from 'ex';
 import Opt from '../options';
 import U from 'underscore';
-import Plugin from '../Web.Plugin';
+import standardPlugin from '../Web.Plugin';
 import parserOfEvent from './I.state.async.parser';
+
+import Plugin from 'plugin';
 
 const {Op} = Opt;
 export default (reference, config = {}) => {
     const {options = {}, component = {}} = config;
     const eventParser = parserOfEvent(reference);
     const buttonParser = Ex.parserOfButton(reference);
+    const pluginComponent = Ux.clone(standardPlugin);
+    /*
+     * 扩展包 Plugin.Extension 中的插件会覆盖标准插件
+     */
+    Object.keys(Plugin.Extension).filter(field => field.startsWith("Ex"))
+        .forEach(field => pluginComponent[field] = Plugin.Extension[field]);
     return new Promise((resolve) => {
         if (options[Ex.Opt.DYNAMIC_OP]) {
             /* 动态 Op */
@@ -71,13 +79,13 @@ export default (reference, config = {}) => {
                         if (config.executor && $op.hasOwnProperty(config.executor)) {
                             let rxClick = $op[config.executor];
                             if (U.isFunction(rxClick)) {
-                                rxClick = rxClick(reference);
+                                rxClick = rxClick(reference, Ux.clone(config));
                                 if (U.isFunction(rxClick)) {
                                     op.onClick = rxClick;
-                                    buttons[opKey] = op;
                                 }
                             }
                         }
+                        buttons[opKey] = op;
                     });
             }
             return Ux.promise(buttons);
@@ -85,8 +93,8 @@ export default (reference, config = {}) => {
         /* 按钮配置解析 */.then((buttons = {}) => buttonParser.parsePlugin(buttons, options))
         /* 组件解析 */.then((buttons = {}) => buttonParser.parseComponent(buttons, options, {
             config: component,
-            plugin: Plugin
+            plugin: pluginComponent
         }))
-        /* 权限控制统一处理 */.then((buttons = {}) => eventParser.parseAuthorized(buttons))
-        /* 绑定按钮事件 */.then((buttons = {}) => eventParser.parseEvent(buttons))
+        /* 权限控制统一处理 */.then((buttons = {}) => eventParser.parseAuthorized(buttons, options))
+        /* 绑定按钮事件 */.then((buttons = {}) => eventParser.parseEvent(buttons, options))
 }

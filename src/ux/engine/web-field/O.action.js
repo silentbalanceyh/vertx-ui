@@ -26,10 +26,17 @@ const aiAction = (reference, jsx = {}) =>
     _jsxUniform(jsx, (config = {}) => {
         const {actions = [], loading = false} = jsx;
         return actions.map(item => {
-            const {text, ...reset} = item;
-            reset.loading = loading;
+            const {text, ...rest} = item;
+            rest.loading = loading;
+            /*
+             * 禁用处理
+             */
+            if (!rest.hasOwnProperty('disabled')) {
+                const {disabled = false} = jsx;
+                rest.disabled = disabled;
+            }
             return (
-                <Button {...reset} style={config.style}>{text}</Button>
+                <Button {...rest} style={config.style}>{text}</Button>
             );
         })
     });

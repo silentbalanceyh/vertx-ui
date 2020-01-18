@@ -2,6 +2,7 @@ import Ex from "ex";
 import Ux from 'ux';
 import Opt from '../options';
 import yoBatchEditor from './yo.batch.editor';
+import yoPhantom from "./yo.phantom";
 
 const {Order = {}} = Opt;
 
@@ -10,15 +11,12 @@ export default (reference) => {
     /*
      * batch是数组，则处理 disabled 状态
      */
-    const {$selected = [], $submitting = false} = reference.state;
-    /*
-     * Disabled-001：初始化
-     */
-    if (batch.config) {
-        batch.config.map(each => each.disabled = 0 === $selected.length);
-    }
+    const {$selected = [], $submitting = false, options = {}} = reference.state;
+
     batch.$category = "LINK";
+    batch.$options = Ux.clone(options);
     batch.doSubmitting = Ex.rxSubmitting(reference);
+    batch.doDirty = Ex.rxDirty(reference);
     /*
      * ExBatchEditor 列专用处理
      */
@@ -32,5 +30,16 @@ export default (reference) => {
      */
     batch.$selected = Ux.clone($selected);
     batch.$submitting = $submitting;
+    /*
+     * 挂载 extension 部分
+     */
+    const extension = yoPhantom(reference, "op.batch");
+    batch.config = [].concat(batch.config).concat(extension);
+    /*
+     * Disabled-001：初始化
+     */
+    if (batch.config) {
+        batch.config.map(each => each.disabled = 0 === $selected.length);
+    }
     return batch;
 }

@@ -126,8 +126,11 @@ export default (reference = {}, config = {}) => {
         /*
          * 开合状态处理
          */
-        const {$collapsed = false} = reference.props;
+        const {$collapsed = false, $plugins = {}} = reference.props;
         uniform.$collapsed = $collapsed;
+        if (!Ux.isEmpty($plugins)) {
+            uniform.$plugins = $plugins;
+        }
     }
     {
         /*

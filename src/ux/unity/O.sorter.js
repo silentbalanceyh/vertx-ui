@@ -52,11 +52,18 @@ const sortDate = (left, right, asc = true) => {
     } else return 0;
 };
 
+const sorterObject = (input = {}) => {
+    const normalized = {};
+    const keys = Object.keys(input).sort((left, right) => sortString(left, right, true));
+    keys.forEach(key => normalized[key] = input[key]);
+    return normalized;
+};
 /**
  * @class Sorter
  * @description Table组件排序专用函数，对应列中的sorter
  */
 export default {
+    sorterObject,
     /**
      * 顺序排序
      * @method sorterAsc

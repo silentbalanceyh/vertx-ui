@@ -39,6 +39,9 @@ export default {
     AJAX_IMPORT_URI: 'ajax.file.import',                /* 导入 */
 
     MESSAGE_BATCH_DELETE: 'message.batch.delete',       /* 批量删除消息 */
+    MESSAGE_BATCH_UPDATE: 'message.batch.update',       /* 批量更新消息 */
     // 模型
     IDENTIFIER: 'identifier',                           /* 模块名称 */
+    // 插件
+    PLUGIN_ROW_EDITION: "plugin.row.edition",           /* 插件 */
 }

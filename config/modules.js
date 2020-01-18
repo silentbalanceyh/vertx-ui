@@ -22,4 +22,5 @@ module.exports = {
     ei: path.resolve(__dirname, "../src", "extension/ecosystem"),   // Ex 专用组件
     oi: path.resolve(__dirname, "../src", "extension/eclat"),       // Ox 专用组件
     mock: path.resolve(__dirname, "../src", "mock"),               // Mock 专用数据
+    plugin: path.resolve(__dirname, "../src", "plugin"),            // 插件
 };
