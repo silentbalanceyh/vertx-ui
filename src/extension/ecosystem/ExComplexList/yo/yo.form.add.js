@@ -22,7 +22,7 @@ export default (reference, item = {}) => {
     /*
      * 读取 $identifier（动态表单必须）
      */
-    const {options = {}} = reference.state;
+    const {options = {}, plugins = {}} = reference.state;
     if (options[Ex.Opt.IDENTIFIER]) {
         formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
     }
@@ -32,6 +32,14 @@ export default (reference, item = {}) => {
      */
     const {$query = {}, $record} = reference.props;
     formAttrs.$query = $query;
+    /*
+     * 插件
+     */
+    const $plugins = {};
+    if (Ux.isFunction(plugins.pluginField)) {
+        $plugins.pluginField = plugins.pluginField;
+    }
+    formAttrs.$plugins = $plugins;
     /*
      * 添加的时候需要使用初始化的默认值
      * 所以引入外层变量 $record 来存储

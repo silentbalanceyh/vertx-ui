@@ -36,8 +36,9 @@ export default (control = {}, UI = {}, inherit = {}) => {
                      */
                     attrs.event = event;
                     Cmn.seekInherit(attrs, control);
+                    const sorted = Ux.sorterObject(attrs);
                     return (
-                        <Component {...attrs}/>
+                        <Component {...sorted}/>
                     )
                 };
                 if (control.container) {

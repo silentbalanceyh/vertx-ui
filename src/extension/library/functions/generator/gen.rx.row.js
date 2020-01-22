@@ -40,8 +40,13 @@ const rxView = (reference) => (key) => {
         return Ux.ajaxGet(uri, {key});
     }
 };
-const rxSelected = (reference) => ($selected = []) =>
+const rxSelected = (reference) => ($selected = [], $data = []) => {
     reference.setState({$selected});
+    const {rxPostSelected} = reference.props;
+    if (Ux.isFunction(rxPostSelected)) {
+        rxPostSelected($data);
+    }
+};
 export default {
     rxDelete,
     rxSelected,

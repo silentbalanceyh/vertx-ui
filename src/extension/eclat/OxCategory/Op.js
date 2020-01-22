@@ -10,10 +10,9 @@ const onSelect = (reference) => (input = []) => {
     if (0 < input.length) {
         const {ui: {tree}} = config;
         const $data = Ux.toTreeArray(data, tree);
-        const dataEvent =
-            Dsl.getEvent($data)     // 设置 source
-                .start(input)       // 设置 input
-                .config(config);    // 设置 config
+        const dataEvent = Dsl.getEvent($data)     // 设置 source
+            .start(input)       // 设置 input
+            .config(config);    // 设置 config
         const {onSelect} = reference.state;
         // 必须
         Ux.activeSearch();

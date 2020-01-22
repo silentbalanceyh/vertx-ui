@@ -22,7 +22,7 @@ const yoConfig = (reference, rest = {}) => {
     /*
      * 设置 config.editable（配合 pluginRow）
      */
-    config.editable = !Ux.pluginShield(reference);
+    config.editable = Ux.pluginEdition(reference);
     return config;
 };
 export default {

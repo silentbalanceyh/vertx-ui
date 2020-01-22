@@ -179,9 +179,55 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
     }
     return formValues;
 };
-const writeShield = (reference, optionJsx = {}) => {
-    const {$shield = false} = reference.props;
-    if ($shield) {
+const _edition = (reference) => {
+    /*
+     * 优先从 reference.props 中读取 $edition
+     */
+    let $edition = {};
+    if (reference.props.hasOwnProperty("$edition")) {
+        /*
+         * 属性中包含了，则证明定制过，那么取属性中的
+         */
+        const propEdition = reference.props.$edition;
+        if (Abs.isObject(propEdition)) {
+            Object.assign($edition, propEdition);
+        } else {
+            $edition = propEdition;
+        }
+    }
+    /*
+     * 不可编辑，直接切断
+     */
+    if (false === $edition) {
+        return $edition;
+    }
+    if (reference.state.hasOwnProperty("$edition")) {
+        const stateEdition = reference.state.$edition;
+        if (Abs.isObject(stateEdition)) {
+            Object.assign($edition, stateEdition);
+        } else {
+            $edition = stateEdition;
+        }
+    }
+    return $edition;
+};
+const writeSegment = (reference, optionJsx = {}, field) => {
+    /*
+     * 默认值为 true
+     */
+    const $edition = _edition(reference);
+    if ($edition && Abs.isObject($edition)) {
+        /*
+         * 部分表单禁用
+         */
+        if ($edition.hasOwnProperty(field)) {
+            optionJsx.disabled = !$edition[field];
+            optionJsx.readOnly = !$edition[field];
+        }
+    } else {
+        /*
+         * 直接禁用（全表单禁用）
+         */
         optionJsx.disabled = true;
         optionJsx.readOnly = true;
     }
@@ -203,5 +249,5 @@ export default {
     /*
      * 写全局数据信息
      */
-    writeShield,
+    writeSegment,
 }

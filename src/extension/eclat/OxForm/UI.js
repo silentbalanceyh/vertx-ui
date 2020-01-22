@@ -22,10 +22,10 @@ class Component extends React.PureComponent {
              * 2）编辑
              * -- 不存在 $addKey 则不需要考虑模式，直接处理
              */
-            const $shield = Ux.pluginShield(this);
+            const $edition = Ux.pluginForm(this);
             return (
                 <ExForm {...this.props} $height={"300px"}
-                        $op={$op} $shield={$shield}/>
+                        $op={$op} $edition={$edition}/>
             );
         }, Ex.parserOfColor("OxForm").form())
     }

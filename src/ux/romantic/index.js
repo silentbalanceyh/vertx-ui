@@ -5,6 +5,7 @@ import sexBatch from './O.fn.batch';
 
 import sexDialog from './O.fn.dialog';
 import sexMessage from './O.fn.message';
+import sexIdentifier from './O.fn.identifier';
 
 export default {
     /*
@@ -27,5 +28,6 @@ export default {
 
     sexBatch,
     sexDialog,  /* 窗口 */
-    sexMessage
+    sexMessage,
+    sexIdentifier
 }

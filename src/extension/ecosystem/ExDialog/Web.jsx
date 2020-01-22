@@ -13,7 +13,7 @@ const _jsxChildren = (reference, component = {}, attributes = {}) => {
         const inherit = Ux.clone(attributes);
         inherit.rxClose = Ex.rsVisible(reference, false);
         return (
-            <Component {...inherit} config={config}/>
+            <Component {...Ux.sorterObject(inherit)} config={config}/>
         );
     } else {
         console.error("未捕捉到组件！", component);

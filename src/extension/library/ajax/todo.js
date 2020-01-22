@@ -2,7 +2,7 @@ import Ux from 'ux';
 
 export default {
     todo: (params = {}, confirmed = true) => {
-        const request = {key: params.key};
+        const request = {key: params.key, data: params.data};
         if (confirmed) {
             return Ux.ajaxPut('/api/todo/confirm/:key', request);
         } else {

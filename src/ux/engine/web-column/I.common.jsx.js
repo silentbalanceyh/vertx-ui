@@ -28,14 +28,14 @@ export default {
     /* 分割线 */
     jsxDivider: (key) => (<Divider type={"vertical"} key={key}/>),
     /* onClick 专用链接 */
-    jsxLink: (item = {}) => (<a key={item.key} onClick={item.onClick}>{item.text}</a>),
+    jsxLink: (item = {}) => item.enabled ? (<a key={item.key} onClick={item.onClick}>{item.text}</a>) : false,
     /* onConfirm 专用 */
-    jsxConfirm: (item = {}) => (
+    jsxConfirm: (item = {}) => item.enabled ? (
         <Popconfirm key={item.key} title={item.confirm}
                     onConfirm={item.onConfirm}>
             <a>{item.text}</a>
         </Popconfirm>
-    ),
+    ) : false,
     /* jsxSpan */
     jsxSpan,
     /* jsxIcon */

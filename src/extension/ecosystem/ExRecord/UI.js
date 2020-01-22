@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             const {$config = {}, $inited = {}} = this.state;
-            const {$op = {}} = this.props;
+            const {$op = {}, rxClose, $edition = {}} = this.props;
             const form = Ex.yoForm(this,
                 {form: $config},
                 $inited);
@@ -27,7 +27,10 @@ class Component extends React.PureComponent {
              * 多一阶函数
              */
             return (
-                <ExForm {...form} $height={"300px"} $op={$op}/>
+                <ExForm {...form} $height={"300px"}
+                        rxClose={rxClose}
+                        $edition={$edition}
+                        $op={$op}/>
             )
         }, Ex.parserOfColor("ExRecord").component())
     }

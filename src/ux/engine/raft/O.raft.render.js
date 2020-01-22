@@ -152,7 +152,7 @@ const raftRender = (cell = {}, config = {}) => {
             /*
              * 处理
              */
-            Ut.writeShield(reference, optionJsx);
+            Ut.writeSegment(reference, optionJsx);
             return render(reference, optionJsx);
         };
     } else {
@@ -192,7 +192,7 @@ const raftRender = (cell = {}, config = {}) => {
             /*
              * 插件专用处理
              */
-            Ut.writeShield(reference, optionJsx);
+            Ut.writeSegment(reference, optionJsx, cell.field);
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

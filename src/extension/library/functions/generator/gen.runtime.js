@@ -35,8 +35,8 @@ export default {
             Cm.seek(reference, 'rxProjection')([columnsMy, addOn]),
         // ------------ 行操作 ---------------
         /* 更改 $selected */
-        selected: (selected = []) =>
-            Cm.seek(reference, 'rxSelected')([selected]),
+        selected: (selected = [], data = []) =>
+            Cm.seek(reference, 'rxSelected')([selected, data]),
         /* Ajax 单行删除 */
         delete: (id, callback) =>
             Cm.seek(reference, 'rxDelete')([id, callback]),

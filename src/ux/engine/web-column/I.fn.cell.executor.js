@@ -34,66 +34,75 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
     }
 };
 
+const _setEnabled = (calculated, item = {}, reference) => {
+    if (calculated.edition && "fnEdit" === item.executor) {
+        return true;
+    } else if (calculated.deletion && "fnDelete" === item.executor) {
+        return true;
+    } else {
+        console.info("其他条件");
+        return false;
+    }
+};
+
 export default (reference, config, executor = {}) => (text, record) => {
     const {$option = []} = config;
     const options = [];
     /*
      * 执行 pluginRow
      */
-    let pluginRow = Ut.pluginRow(reference, "pluginRow", record);
-    if (pluginRow) {
-        return false;
-    } else {
-        $option.forEach((item, index) => {
-            /*
-             * 行专用的 key
-             */
-            const rowKey = `${text}-${index}`;
-            /*
-            * 追加 string 类型的 options
-            * 扩展：如果 item 是 string，那么表示直接设置该属性为 true
-            * _setDivider(options, item, rowKey);
-            */
-            {
-                if (rowKey && "string" === typeof item) {
-                    const option = {};
-                    option[item] = true;
-                    option.key = `link-vertical-${rowKey}`;
-                    options.push(option);
-                }
+    $option.forEach((item, index) => {
+        // 函数过滤
+        const calculated = Ut.pluginOp(reference, record);
+        /*
+         * 行专用的 key
+         */
+        const rowKey = `${text}-${index}`;
+        /*
+        * 追加 string 类型的 options
+        * 扩展：如果 item 是 string，那么表示直接设置该属性为 true
+        * _setDivider(options, item, rowKey);
+        */
+        {
+            if (rowKey && "string" === typeof item) {
+                const option = {};
+                option[item] = true;
+                option.key = `link-vertical-${rowKey}`;
+                options.push(option);
             }
+        }
+        /*
+         * 追加 object 类型的 options
+         */
+        {
             /*
-             * 追加 object 类型的 options
+            * 从 metadata中抽取想要的内容
              */
-            {
-                /*
-                * 从 metadata中抽取想要的内容
-                 */
-                if (rowKey && "string" !== typeof item) {
-                    const option = {};
-                    option.key = `link-${rowKey}`;
-                    option.text = Ut.formatExpr(item.text, record);
-                    // Executor 处理
-                    _setExecutor(option, item, {
-                        text, record,
-                        config,
-                        executor,
-                        reference,
-                    });
-                    options.push(option);
-                }
+            if (rowKey && "string" !== typeof item) {
+                const option = {};
+                option.key = `link-${rowKey}`;
+                option.text = Ut.formatExpr(item.text, record);
+                // Executor 处理
+                _setExecutor(option, item, {
+                    text, record,
+                    config,
+                    executor,
+                    reference,
+                });
+                option.enabled = _setEnabled(calculated, item, reference);
+                options.push(option);
             }
-        });
-        return (
-            <Fragment>
-                {options.map(item => item.divider ?
-                    Jsx.jsxDivider(item.key) :     // Divider 渲染
-                    (item.confirm ?
-                            Jsx.jsxConfirm(item) : // Confirm 窗口处理
-                            Jsx.jsxLink(item)      // 链接专用处理
-                    )
-                )}
-            </Fragment>
-        );
-    }
+        }
+    });
+    return (
+        <Fragment>
+            {options.map(item => item.divider ?
+                Jsx.jsxDivider(item.key) :     // Divider 渲染
+                (item.confirm ?
+                        Jsx.jsxConfirm(item) : // Confirm 窗口处理
+                        Jsx.jsxLink(item)      // 链接专用处理
+                )
+            )}
+        </Fragment>
+    );
 }

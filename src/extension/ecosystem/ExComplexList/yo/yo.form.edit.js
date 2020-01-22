@@ -26,7 +26,20 @@ export default (reference, item = {}) => {
      */
     const {$inited = {}} = reference.state;
     formAttrs.$inited = $inited;
-    formAttrs.$plugins = plugins;
+    /*
+     * 表单编辑的优雅转换
+     */
+    const $plugins = {};
+    if (Ux.isFunction(plugins.pluginRow)) {
+        /*
+         * 标准的编辑内容
+         */
+        $plugins.pluginForm = plugins.pluginRow;
+    }
+    if (Ux.isFunction(plugins.pluginField)) {
+        $plugins.pluginField = plugins.pluginField;
+    }
+    formAttrs.$plugins = $plugins;
     /*
      * 设置基础查询条件
      */

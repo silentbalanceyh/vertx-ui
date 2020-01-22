@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Fn from '../../functions';
 import U from 'underscore';
+import yoOption from './yo.option';
 
 const _seekState = (uniform = {}, reference, key) => {
     /*
@@ -76,8 +77,8 @@ export default (reference = {}, config = {}) => {
         "app", "user", "router",
         "menus",
         "hotel",     // 旧系统专用
-        "options",   // 选项专用
     );
+    uniform.$options = yoOption(reference);
     /*
      * 特殊变量
      * $disabled

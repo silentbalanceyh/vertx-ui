@@ -65,7 +65,16 @@ const yoQuery = (reference, $config = {}) => {
     }
     return config;
 };
+const rxPostSelected = (reference) => (data = []) => {
+    const categoryData = Ux.onDatum(reference, "data.category");
+    if (0 < categoryData.length) {
+        let $tree = data.map(item => item['categoryThird']);
+        $tree = Ux.clone($tree);
+        reference.setState({$tree});
+    }
+};
 export default {
+    rxPostSelected,
     yiModule,
     yoQuery
 }

@@ -11,10 +11,8 @@ export default (reference) => {
     /*
      * batch是数组，则处理 disabled 状态
      */
-    const {$selected = [], $submitting = false, options = {}} = reference.state;
-
+    const {$selected = [], $submitting = false} = reference.state;
     batch.$category = "LINK";
-    batch.$options = Ux.clone(options);
     batch.doSubmitting = Ex.rxSubmitting(reference);
     batch.doDirty = Ex.rxDirty(reference);
     /*
@@ -41,5 +39,5 @@ export default (reference) => {
     if (batch.config) {
         batch.config.map(each => each.disabled = 0 === $selected.length);
     }
-    return batch;
+    return Ux.sorterObject(batch);
 }

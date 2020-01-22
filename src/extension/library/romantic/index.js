@@ -10,5 +10,5 @@ export default {
     /*
      * 插件系统，只能放到 Extension 中，不可出现在标准包
      */
-    sexExPlugin
+    sexExPlugin,
 }
