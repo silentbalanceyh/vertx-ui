@@ -133,6 +133,7 @@ const ajaxDialog = (reference, {
                 dialogConfig.content = configuration.content;
             }
             dialogConfig.mode = configuration.mode;
+            dialogConfig.redux = redux;     // 连接 redux 处理响应
         }
     }
     return _showDialog(reference, dialogConfig, data);
