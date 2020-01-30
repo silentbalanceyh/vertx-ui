@@ -78,6 +78,12 @@ export default (reference = {}, config = {}) => {
         "menus",
         "hotel",     // 旧系统专用
     );
+    {
+        const {$identifier} = reference.props;
+        if ($identifier) {
+            uniform.$identifier = $identifier;
+        }
+    }
     uniform.$options = yoOption(reference);
     /*
      * 特殊变量
