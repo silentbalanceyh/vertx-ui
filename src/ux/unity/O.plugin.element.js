@@ -34,5 +34,5 @@ const valueFind = (target = {}, attrPath = []) => {
 };
 export default {
     valueExpr,
-    valueFind,
+    valueFind
 }

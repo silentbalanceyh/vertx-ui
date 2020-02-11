@@ -153,14 +153,14 @@
                                                             }
                                                         },
                                                         {
-                                                            "metadata": "primary,主键？,LOGICAL",
+                                                            "metadata": "isPrimary,主键？,LOGICAL",
                                                             "$mapping": {
                                                                 "true": "是",
                                                                 "false": "否"
                                                             }
                                                         },
                                                         {
-                                                            "metadata": "nullable,可为空？,LOGICAL",
+                                                            "metadata": "isNullable,可为空？,LOGICAL",
                                                             "$mapping": {
                                                                 "true": "是",
                                                                 "false": "否"

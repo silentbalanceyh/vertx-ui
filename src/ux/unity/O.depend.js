@@ -167,9 +167,15 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
                      */
                     if (linkerDate.hasOwnProperty(field)) {
                         const pattern = linkerDate[field];              // 是否有日期
-                        const formatted = moment(value, pattern);       // 执行日期格式化
-                        if (moment.isMoment(formatted)) {
-                            value = formatted;
+                        if (value) {
+                            const formatted = moment(value, pattern);       // 执行日期格式化
+                            if (moment.isMoment(formatted)) {
+                                value = formatted;
+                            } else {
+                                value = null;   // Fix issue of Moment
+                            }
+                        } else {
+                            value = null;
                         }
                     }
                     formValues[formField] = value;                      // linker 赋值

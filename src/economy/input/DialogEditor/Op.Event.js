@@ -2,6 +2,25 @@ import Ux from "ux";
 import {Dsl} from "entity";
 import U from "underscore";
 
+const callbackRow = (reference, input) => {
+    /*
+     * rxPostRow
+     */
+    const ref = Ux.onReference(reference, 1);
+    const {doRow} = ref.props;
+    const {id = ""} = reference.props;
+    if (U.isFunction(doRow)) {
+        /*
+         * 1）input：添加、删除、编辑都好，最终处理的内容为 {} 或 key
+         * 2）form：当前组件需要使用的上层 form 引用（Ant Form）
+         * 3）reference：表单引用
+         */
+        const value = Ux.formHit(ref, id);
+        const field = id;
+        const current = input;
+        doRow({field, value, current}, reference);
+    }
+};
 const saveData = (reference, record) => {
     const {data = []} = reference.state;
     if ("string" === typeof record) {
@@ -35,6 +54,10 @@ const onRow = (reference) => (row = {}, additional = {}) => {
         onChange(state.data);
     }
     reference.setState(state);
+    /*
+     * rxPostRow 调用
+     */
+    callbackRow(reference, row);
 };
 const onRows = (reference) => (rows = [], additional = {}) => {
     const state = Ux.clone(additional);
@@ -48,6 +71,10 @@ const onRows = (reference) => (rows = [], additional = {}) => {
         onChange(state.data);
     }
     reference.setState(state);
+    /*
+     * doRow 调用
+     */
+    callbackRow(reference, rows);
 };
 const fnDelete = (reference) => (id, record) => {
     /*
@@ -100,6 +127,14 @@ const onOpen = (reference) => () => {
         $mode: Ux.Env.FORM_MODE.ADD
     });
 };
+const yoUniform = (uniform = {}, reference) => {
+    /*
+     * $record 主记录处理
+     */
+    const {$record, $options} = reference.props;
+    uniform.$record = $record;
+    uniform.$options = $options;
+};
 const yoInherit = (reference) => {
     const ref = Ux.onReference(reference, 1);
     const inherit = Ux.onUniform(ref.props);
@@ -118,6 +153,10 @@ const yoInherit = (reference) => {
      * 这个属于特殊规则，主要针对 form 中 Array 类型的提供数据源
      */
     const {form} = ref.props;
+    /*
+     * 特殊统一处理
+     */
+    yoUniform(inherit, ref);
     if (form) {
         const values = form.getFieldsValue();
         Object.keys(values)

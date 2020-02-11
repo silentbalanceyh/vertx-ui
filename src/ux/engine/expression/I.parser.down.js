@@ -76,6 +76,7 @@ const PARSER = {
     _submit: itemValue("submit"),           // 按钮提交专用（旧版）
     fixed: itemValue("fixed"),              // 布局专用（旧版）
     group: itemValue("group"),              // 分组专用
+    key: itemValue("key"),                  // 所有组件都可以用的 key
     moment: itemBoolean("moment"),          // 时间格式必须（初始化防止 undefined 或时间格式的 bug）
     /*
      * Ant-Design 标准属性

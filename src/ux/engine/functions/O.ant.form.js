@@ -1,4 +1,5 @@
 import Dt from '../datum';
+import U from "underscore";
 
 const formAdvReset = (reference, keys = []) => {
     const {form} = reference.props;
@@ -7,6 +8,13 @@ const formAdvReset = (reference, keys = []) => {
             form.resetFields(keys);
         } else {
             form.resetFields();
+        }
+        /*
+         * callback，reset回调
+         */
+        const {doReset} = reference.props;
+        if (U.isFunction(doReset)) {
+            doReset(keys, reference);
         }
     } else {
         const ref = Dt.onReference(reference, 1);

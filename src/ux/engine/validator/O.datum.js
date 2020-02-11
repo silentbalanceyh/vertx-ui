@@ -36,5 +36,5 @@ const duplicatedDatum = (reference = {}) => (rule = {}, value, callback) => {
 };
 export default {
     // 重复检查
-    duplicatedDatum
+    duplicatedDatum,
 }

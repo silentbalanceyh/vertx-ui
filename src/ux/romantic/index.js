@@ -29,5 +29,5 @@ export default {
     sexBatch,
     sexDialog,  /* 窗口 */
     sexMessage,
-    sexIdentifier
+    sexIdentifier,
 }

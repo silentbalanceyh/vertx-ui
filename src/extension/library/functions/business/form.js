@@ -10,6 +10,7 @@ const add = (reference) => (params = {}, config = {}) => {
     return Ux.ajaxPost(config.uri, request)
         .then(Ux.ajax2Dialog(reference, config.dialog))
         .then(response => Fn.rx(reference, config.off).close(response))
+        .catch(error => Ux.ajaxError(reference, error));
 };
 const save = (reference) => (params = {}, config = {}) => {
     const normalized = {};
@@ -28,6 +29,7 @@ const save = (reference) => (params = {}, config = {}) => {
     return Ux.ajaxPut(config.uri, request)
         .then(Ux.ajax2Dialog(reference, config.dialog))
         .then(response => Fn.rx(reference, config.off).close(response))
+        .catch(error => Ux.ajaxError(reference, error));
 };
 const remove = (reference) => (params = {}, config = {}) => {
     const input = {key: params.key};
@@ -38,6 +40,7 @@ const remove = (reference) => (params = {}, config = {}) => {
                 $selected: []
             })
         ))
+        .catch(error => Ux.ajaxError(reference, error));
 };
 const filter = (reference) => (params = {}) => {
     const {connector = "AND", ...rest} = params;
@@ -47,7 +50,8 @@ const filter = (reference) => (params = {}) => {
      */
     Fn.rx(reference).filter(values, params);    // 维持数据专用
     return Ux.promise(values)
-        .then(response => Fn.rx(reference).close(response));
+        .then(response => Fn.rx(reference).close(response))
+        .catch(error => Ux.ajaxError(reference, error));
 };
 const query = (reference) => (params = {}, filters = {}) => {
     params = Ux.valueValid(params);

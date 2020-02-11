@@ -19,8 +19,14 @@ class Component extends React.PureComponent {
         Ex.yiStandard(this);
     }
 
+    componentDidUpdate(props, state, snapshot) {
+        Ex.yuRouter(this, {props, state}, () => {
+            Ex.yiStandard(this);
+        });
+    }
+
     render() {
-        return Ex.ylCard(this, () => {
+        return Ex.ylDynamic(this, () => {
             const attrs = Ex.yoPolymorphism(this, {
                 form: {
                     FormAdd,    // 添加表单

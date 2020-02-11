@@ -18,6 +18,9 @@ const raftValue = (cell = {}, values = {}, reference) => {
             literal = Abs.immutable(values).getIn(path);
         }
     }
+    /*
+     * 防止 false 无法给值
+     */
     if (literal) {
         /*
          * 计算初始值
@@ -47,6 +50,13 @@ const raftValue = (cell = {}, values = {}, reference) => {
             }
         }
         cell.optionConfig.initialValue = literal;
+    } else {
+        /*
+         * 布尔值初始化
+         */
+        if (false === literal) {
+            cell.optionConfig.initialValue = false;
+        }
     }
 };
 /*
@@ -184,7 +194,7 @@ const raftRender = (cell = {}, config = {}) => {
                 render: cell.render,
             });
             /*
-             * 解决某些场景无法复制的忧伤
+             * 解决某些场景无法赋值的忧伤
              */
             if (optionJsx && values[cell.field]) {
                 optionJsx['data-initial'] = values[cell.field];

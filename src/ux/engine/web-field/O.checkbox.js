@@ -38,7 +38,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     if (config) {
         const options = R.Ant.toOptions(reference, config);
         /*
-         * 特殊初始值
+         * 特殊初始值，暂时不取消这里的处理
          */
         const initial = jsx['data-initial'];
         if (initial) {

@@ -1,7 +1,6 @@
 import U from 'underscore';
 import moment from 'moment';
 import Abs from '../../abyss';
-import Dev from '../../develop';
 import Ele from '../../element';
 import Ut from '../../unity';
 import Rx from '../expression';
@@ -188,9 +187,11 @@ export default ($table = {}, data = [], reference) => {
      * 未配置 scroll 的时候计算，配置了就不用计算了
      */
     if (!$table.scroll) {
+        /*
         Dev.dgDebug({
             width, adjust, report, columns: $table.columns.length
         }, "[ Ux ] Scroll滚动条宽度计算结果：", "#436EEE");
+        */
         /*
          * 基础计算：必须是超过6列才执行
          */

@@ -20,7 +20,9 @@
             "projection": [],
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
-            "criteria": {}
+            "criteria": {
+                "sigma":"PROP:app.sigma"
+            }
         },
         "mock": {
             "enabled": true,
@@ -209,7 +211,7 @@
                     "$render": "EXECUTOR",
                     "$option": [
                         {
-                            "text": "编辑",
+                            "text": "查看档案",
                             "executor": "fnEdit"
                         }
                     ]

@@ -172,19 +172,6 @@ const getSource = (reference, config, filter = {}) => {
          * 不能启用 filter / cascade
          */
         options = Expr.aiExprOption(config.items);
-        if (2 === options.length) {
-            /*
-             * true 和 false 专用
-             */
-            options.forEach(option => {
-                if ("true" === option.value) {
-                    option.value = true;
-                }
-                if ("false" === option.value) {
-                    option.value = false;
-                }
-            })
-        }
     } else if (config.datum) {
         /*
          * 如果存在datum节点，则从assist/tabular数据源中读取

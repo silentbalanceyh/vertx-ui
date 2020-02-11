@@ -66,6 +66,10 @@ const isReadyWithCond = (reference, fnCompare = () => true) => (rule = {}, value
         // 处理required
         if (value && rule.config) {
             const to = Ut.formHit(reference, rule.config.to);
+            // 如果目标值为 undefined 时,大概率情况为不满足对比的先决条件,直接返回
+            if (undefined === to) {
+                callback();
+            }
             if (fnCompare(value, to)) {
                 callback();
             } else {

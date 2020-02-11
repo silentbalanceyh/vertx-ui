@@ -9,23 +9,23 @@ const _submit = (reference, config, redux = false) => {
     // $loading设置
     reference.setState({$loading: true});
     return Ut.formSubmit(reference, redux)
-    /* Performer */
+        /* Performer */
         .then(data => Cmn.performFn(reference, config)
             /* 记得拷贝数据传入 perform，否则 data 无法被扩展 */
-                .then(perform => perform(data))
+            .then(perform => perform(data))
         )
 };
 const RESET = (reference, config = {}) => (event) => {
     Abs.prevent(event);
     Ut.formReset(reference);
     Cmn.performFn(reference, config)
-    /* 执行函数 */
+        /* 执行函数 */
         .then(perform => perform(event));
 };
 const SUBMIT = (reference, config = {}) => (event) => {
     Abs.prevent(event);
     return _submit(reference, config)
-    /* 统一 Error 处理 */
+        /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error))
 };
 /*
@@ -37,7 +37,7 @@ const SUBMIT_REDUX = (reference, config = {}) => (event) => {
     Ut.writeSubmit(reference);
 
     return _submit(reference, config, true)
-    /* 统一 Error 处理 */
+        /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error, true))
 };
 const SUBMIT_DIALOG = (reference, config = {}) => (event) => {
@@ -54,12 +54,12 @@ const KEY = (reference, config = {}) => (event) => {
     // $loading设置
     reference.setState({$loading: true});
     return Ut.formSubmit(reference)
-    /* Performer */
+        /* Performer */
         .then(data => Abs.promise({key: data.key}))
         /* */
         .then(data => Cmn.performFn(reference, config)
             /* 记得拷贝数据传入 perform，否则 data 无法被扩展 */
-                .then(perform => perform(data))
+            .then(perform => perform(data))
         )
         /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error))

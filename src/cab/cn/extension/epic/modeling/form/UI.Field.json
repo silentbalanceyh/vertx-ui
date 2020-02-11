@@ -103,34 +103,52 @@
                             "STRING1",
                             "DECIMAL"
                         ]
-                    }
+                    },
+                    "optionConfig.rules": [
+                        {
+                            "validator": "greater",
+                            "message": "对不起，您输入的长度必须大于精度",
+                            "config": {
+                                "to": "precision"
+                            }
+                        }
+                    ]
                 },
                 {
                     "metadata": "precision,精度,,,aiInputNumber",
                     "optionJsx.depend.enabled": {
                         "columnType": "DECIMAL"
-                    }
+                    },
+                    "optionConfig.rules": [
+                        {
+                            "validator": "less",
+                            "message": "对不起，您输入的精度必须小于长度",
+                            "config": {
+                                "to": "length"
+                            }
+                        }
+                    ]
                 }
             ],
             [
                 {
-                    "metadata": "primary,主键？,,,aiCheckbox",
+                    "metadata": "isPrimary,主键？,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     },
                     "optionJsx.trigger.impact": {
                         "true": {
-                            "nullable": false
+                            "isNullable": false
                         }
                     }
                 },
                 {
-                    "metadata": "nullable,可为空？,,,aiCheckbox",
+                    "metadata": "isNullable,可为空？,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     },
                     "optionJsx.depend.enabled": {
-                        "primary": false
+                        "isPrimary": false
                     }
                 }
             ],

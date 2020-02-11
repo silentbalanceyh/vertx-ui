@@ -2,6 +2,7 @@ import {Radio} from "antd";
 import React from "react";
 import R from '../expression';
 import normalizeAttribute from './I.fn.uniform';
+import './Cab.less';
 /*
  // 处理onChange，解决rest为 {}时引起的参数Bug
     const rest = Aid.fixAttrs(jsx);
@@ -23,6 +24,17 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     // 处理 Radio 相关
     const {config = {}} = jsx;
     const options = R.Ant.toOptions(reference, config);
+    // true / false 专用，不影响 Select 的专用处理
+    if (2 === options.length) {
+        options.forEach(option => {
+            if ("true" === option.value) {
+                option.value = true;
+            }
+            if ("false" === option.value) {
+                option.value = false;
+            }
+        })
+    }
     // Radio的另外一种模式开启
     const {type = "RADIO"} = config;
     const Component = "RADIO" === type ? Radio : Radio.Button;

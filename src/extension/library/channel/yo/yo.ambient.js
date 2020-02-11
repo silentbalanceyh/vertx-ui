@@ -158,7 +158,7 @@ export default (reference = {}, config = {}) => {
     /*
      * 动态 $opKey
      */
-    let {$opKey} = reference.props;
+    let {$opKey, $record} = reference.props;
     if ($opKey) {
         uniform.$opKey = $opKey;
     } else {
@@ -173,8 +173,14 @@ export default (reference = {}, config = {}) => {
         }
     }
     /*
-     * options 专用处理
+     * 添加的时候需要使用初始化的默认值
+     * 所以引入外层变量 $record 来存储
+     * 1）外层变量是单变量，主要用于记录拷贝
+     * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
      */
+    if ($record) {
+        uniform.$record = $record;
+    }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

@@ -46,7 +46,7 @@ const aiField = (reference, values = {}, raft = {}) =>
             </Row>
         )
     }) : false;
-const aiInit = (reference, values = {}) => {
+const aiInit = (reference, values) => {
     /*
      * 基础初始化
      */
@@ -129,6 +129,7 @@ const aiFormInput = (reference, values, raft = {}) => {
 };
 export default {
     aiForm,
+    aiInit, // 统一处理
     aiField,
     aiFormInput
 }

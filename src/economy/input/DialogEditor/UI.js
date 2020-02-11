@@ -37,24 +37,37 @@ class Component extends React.PureComponent {
              */
             const ref = Ux.onReference(this, 1);
             Ux.configScroll($table, data, ref);
-            return (
-                <Input.Group {...attrs}>
-                    {Ux.aiFloatError(this, !$visible)}
-                    <Table {...$table} dataSource={data}
-                           className={"web-table"}
-                           loading={$submitting}/>
-                    <Dialog className={"web-dialog"}
-                            size={"small"}
-                            $visible={$visible}
-                            $loading={$submitting}
-                            $dialog={$dialog}>
-                        {U.isFunction(fnComponent) ?
-                            fnComponent($inited, $mode) :
-                            false}
-                    </Dialog>
-                    {Ux.aiButtonGroup(this, $button)}
-                </Input.Group>
-            );
+            const {readOnly = false} = this.props;
+            if (readOnly) {
+                return (
+                    <Input.Group {...attrs}>
+                        {Ux.aiFloatError(this, !$visible)}
+                        <Table {...$table} dataSource={data}
+                               className={"web-table"}
+                               loading={$submitting}/>
+                    </Input.Group>
+                )
+            } else {
+                return (
+                    <Input.Group {...attrs}>
+                        {Ux.aiFloatError(this, !$visible)}
+                        <Table {...$table} dataSource={data}
+                               className={"web-table"}
+                               loading={$submitting}/>
+                        <Dialog className={"web-dialog"}
+                                size={"small"}
+                                $visible={$visible}
+                                $loading={$submitting}
+                                $dialog={$dialog}>
+                            {U.isFunction(fnComponent) ?
+                                fnComponent($inited, $mode) :
+                                false}
+                        </Dialog>
+                        {Ux.aiButtonGroup(this, $button)}
+                    </Input.Group>
+                )
+            }
+            ;
         }, {name: "DialogEditor", logger: true})
     }
 }
