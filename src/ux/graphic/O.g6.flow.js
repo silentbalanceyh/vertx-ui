@@ -1,6 +1,5 @@
 import Abs from "../abyss";
 import G6 from "@antv/g6";
-import G6Plugins from "@antv/g6/build/plugins";
 import Cmn from "./I.common";
 
 
@@ -25,7 +24,7 @@ export default (id, config = {}) => {
         fitView: 'autoZoom',
         fitViewPadding: 20,
         height: config.layout.height ? config.layout.height : window.innerHeight, // 画布高
-        plugins: [new G6Plugins['layout.dagre']()],
+        // plugins: [new G6Plugins['layout.dagre']()],
         defaultIntersectBox: 'rect' // 使用矩形包围盒
     });
 
