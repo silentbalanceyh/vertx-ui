@@ -1,7 +1,4 @@
 {
-    "redux-observable": "^0.19.0",
-    "random-js": "^1.0.8",
-    "rxjs": "^5.5.11",
     "awesome-typescript-loader": "^4.0.1",
     "react-dev-utils": "^5.0.2",
     "webpack": "3.12.0",

@@ -1,4 +1,5 @@
 import Ex from 'ex';
+import Ux from 'ux';
 import Opt from '../options';
 
 const {Order} = Opt;
@@ -47,6 +48,6 @@ export default (reference, tabs = {}) => {
         /* 核心参数传入 ExAction */
         attrs.doSubmitting = Ex.rxSubmitting(reference);
         // attrs.fnSubmitting = Ex.generate(reference).submitting;
-        return attrs;
+        return Ux.sorterObject(attrs);
     }
 }

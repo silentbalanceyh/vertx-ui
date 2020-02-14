@@ -19,29 +19,9 @@ const onClickBack = (reference, topbar) => (event) => {
     // 导航处理
     Ux.toRoute(reference, previous);
 };
-const _applyLoading = (item, props = {}) => {
-    const {$submitting} = props;
-    if ($submitting) {
-        const submitting = $submitting.is() ? $submitting.to() : {};
-        item.loading = submitting.loading;
-    }
-    return item;
-};
 const renderButton = (ref, topbar, key = "left", $disabled = {}) => {
     const buttons = topbar[key] ? topbar[key] : [];
-    return (
-        <Button.Group>
-            {buttons.map(button => {
-                const $button = Ux.clone(_applyLoading(button, ref.props));
-                const {text, ...rest} = $button;
-                // 状态禁用按钮
-                if ($disabled.hasOwnProperty(rest.key)) {
-                    rest.disabled = $disabled[rest.key];
-                }
-                return (<Button {...rest}>{text}</Button>);
-            })}
-        </Button.Group>
-    );
+    return Ux.aiOpLeft(ref, buttons, $disabled);
 };
 const renderBack = (ref, topbar) => {
     const reference = Ux.onReference(ref, 1);

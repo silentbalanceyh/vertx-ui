@@ -53,6 +53,10 @@ const saveRow = (reference) => (params = {}, config = {}) => {
                 $submitting: false, // 关闭提交
             });
         }
+        /*
+         * 提交专用（防止重复提交问题）
+         */
+        reference.setState({$loading: false});
     } else {
         throw new Error("[ Ux ] 缺失核心函数 doRow()");
     }

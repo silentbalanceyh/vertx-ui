@@ -1,4 +1,5 @@
 import Ex from 'ex';
+import Ux from 'ux';
 
 const yiRelation = (reference) => {
     const {config = {}} = reference.props;
@@ -16,6 +17,15 @@ const yiRelation = (reference) => {
         reference.setState(state);
     }
 };
+const yoConfig = (reference, rest = {}) => {
+    const config = Ux.clone(rest);
+    /*
+     * 设置 config.editable（配合 pluginRow）
+     */
+    config.editable = Ux.pluginEdition(reference);
+    return config;
+};
 export default {
-    yiRelation
+    yiRelation,
+    yoConfig,
 }

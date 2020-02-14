@@ -25,7 +25,7 @@ const calcItem = (item = "", window = 1, adjustValue = 0) => {
     } else {
         let percent = window * 100;
         // 特殊布局
-        if (window <= 0.8 || 1 === window) {
+        if (window <= 0.8 || 1 === window || 1.1 === window) {
             percent = 100;
         }
         width = `${Value.valueInt(percent)}%`;

@@ -1,9 +1,10 @@
 import Eng from "../engine";
-import {message, Modal} from "antd";
+import {Modal} from "antd";
 import Ut from '../unity';
 import Abs from '../abyss';
 import E from '../error';
 import U from 'underscore';
+import Msg from './O.ajax.message';
 
 const ajaxEnd = (reference, redux) => () => {
     reference.setState({$loading: false});
@@ -32,7 +33,8 @@ const ajaxError = (reference, error = {}, redux = false) => {
         /*
          * 这种情况下，错误信息来自于服务端
          */
-        const dialog = Eng.fromHoc(reference, "dialog");
+        let dialog = Eng.fromHoc(reference, "dialog");
+        if (!dialog) dialog = {};
         const config = {
             title: dialog.error, content: data.info,
             maskClosable: false,
@@ -131,6 +133,7 @@ const ajaxDialog = (reference, {
                 dialogConfig.content = configuration.content;
             }
             dialogConfig.mode = configuration.mode;
+            dialogConfig.redux = redux;     // 连接 redux 处理响应
         }
     }
     return _showDialog(reference, dialogConfig, data);
@@ -158,9 +161,9 @@ const ajaxMessage = (reference, {
     if (dialogConfig.pattern) {
         const message = Ut.formatExpr(dialogConfig.pattern, data);
         if ("success" === dialogConfig.mode) {
-            messageSuccess(message);
+            Msg.messageSuccess(message);
         } else {
-            messageFailure(message);
+            Msg.messageFailure(message);
         }
     }
     return Abs.promise(data);
@@ -170,7 +173,7 @@ const ajax2True = (consumer, content) => (result) => {
         if (U.isFunction(consumer)) {
             consumer();
             if (content) {
-                messageSuccess(content);
+                Msg.messageSuccess(content);
             }
             return Abs.promise(result);
         } else {
@@ -180,46 +183,13 @@ const ajax2True = (consumer, content) => (result) => {
         return E.fxReject(10107);
     }
 };
-const messageSuccess = (content = "") => {
-    if ("string" === typeof content) {
-        message.config({maxCount: 1});
-        message.success(content, 1.2);
-    } else if (Abs.isObject(content)) {
-        const {modal: {success = {}}} = content;
-        /*
-         * 递归调用
-         */
-        if ("string" === typeof success.content) {
-            messageSuccess(success.content);
-        }
-    } else {
-        console.warn("[ Ux ] 没有被显示的成功消息：", content);
-    }
-};
-
-const messageFailure = (content = "") => {
-    if ("string" === typeof content) {
-        message.config({maxCount: 1});
-        message.error(content, 1.2);
-    } else if (Abs.isObject(content)) {
-        const {modal: {error = {}}} = content;
-        /*
-         * 递归调用
-         */
-        if ("string" === typeof error.content) {
-            messageFailure(error.content);
-        }
-    } else {
-        console.warn("[ Ux ] 没有被显示的失败消息：", content);
-    }
-};
 export default {
     ajaxError,
     ajaxDialog,
     ajaxMessage,
+
     ajax2Dialog,    // 2阶
     ajax2Message,   // 2阶
     ajax2True,      // 2阶
-    messageSuccess,
-    messageFailure
+    ...Msg,
 }

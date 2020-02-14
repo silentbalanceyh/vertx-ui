@@ -2,6 +2,7 @@ import React from 'react';
 import Ex from 'ex';
 import Op from './Op';
 import {ExForm} from 'ei';
+import Ux from 'ux';
 
 class Component extends React.PureComponent {
     state = {};
@@ -21,9 +22,10 @@ class Component extends React.PureComponent {
              * 2）编辑
              * -- 不存在 $addKey 则不需要考虑模式，直接处理
              */
+            const $edition = Ux.pluginForm(this);
             return (
                 <ExForm {...this.props} $height={"300px"}
-                        $op={$op}/>
+                        $op={$op} $edition={$edition}/>
             );
         }, Ex.parserOfColor("OxForm").form())
     }

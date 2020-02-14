@@ -8,7 +8,10 @@ const rxClose = (reference, key) => {
     $tabs.items = $tabs.items.filter(item => key !== item.key);
     $tabs.activeKey = $tabs.items[0].key;
     $tabs.items[0].disabled = false;
-    const $timer = rxTimer(reference);
+
+    const {$duration = 10} = reference.state;
+    const $timer = rxTimer(reference, $duration * 1000);
+
     const state = {};
     state.$tabs = $tabs;
     state.$timer = $timer;
@@ -29,10 +32,10 @@ const rxRefresh = (reference, callback) => {
         }
     }), 5)
 };
-const rxTimer = (reference) =>
+const rxTimer = (reference, duration = 10000) =>
     setInterval(() => rxRefresh(reference,
         state => reference.setState(state)),
-        10000);
+        duration);
 
 const rxTabEdit = (reference) => (key, action) => {
     if ("remove" === action) {
@@ -51,10 +54,38 @@ const onTask = (reference, record, status) => {
     dataArray.saveElement(record);
     reference.setState({$data: dataArray.to()});
 };
+const rxDuration = (reference) => (event) => {
+    const text = event.target.value;
+    const result = Number(text);
+    if (!isNaN(result) && 10 <= result) {
+        const {$timer} = reference.state;
+        if ($timer) {
+            clearInterval($timer);
+            const state = {};
+            state.$duration = result;
+            state.$timer = rxTimer(reference, result * 1000);
+            reference.setState(state);
+        }
+    }
+};
+const rxDurationChange = (reference) => (event) => {
+    const text = event.target.value;
+    const $durationValue = Number(text);
+    if (!isNaN($durationValue) && 10 <= $durationValue) {
+        reference.setState({$durationValue})
+    }
+};
+const rxSearch = (reference) => (text) => {
+    const $searchText = text;
+    reference.setState({$searchText});
+};
 export default {
     rxTimer,
     rxTabEdit,
     rxTabClose,
     rxRefresh,
+    rxDuration,
+    rxDurationChange,
+    rxSearch,
     onTask,
 }

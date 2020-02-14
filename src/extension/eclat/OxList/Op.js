@@ -46,7 +46,7 @@ const yoQuery = (reference, $config = {}) => {
     let query = Ux.toQuery("query");
     if (query && "string" === typeof query) {
         try {
-            query = decodeURIComponent(query);
+            query = Ux.decryptBase64(query);
             query = JSON.parse(query);
             if (Ux.isEmpty(criteriaRef)) {
                 Object.assign(criteriaRef, query);
@@ -65,7 +65,16 @@ const yoQuery = (reference, $config = {}) => {
     }
     return config;
 };
+const rxPostSelected = (reference) => (data = []) => {
+    const categoryData = Ux.onDatum(reference, "data.category");
+    if (0 < categoryData.length) {
+        let $tree = data.map(item => item['categoryThird']);
+        $tree = Ux.clone($tree);
+        reference.setState({$tree});
+    }
+};
 export default {
+    rxPostSelected,
     yiModule,
     yoQuery
 }

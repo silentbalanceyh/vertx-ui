@@ -4,7 +4,9 @@
             "projection": [],
             "pager": "1,10",
             "sorter": "createdAt=DESC",
-            "criteria": {}
+            "criteria": {
+                "sigma":"PROP:app.sigma"
+            }
         },
         "mock": {
             "enabled": true,
@@ -38,7 +40,6 @@
             "dynamic.switch": false,
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
-            "op.extra.import": "导入",
             "op.row.edit": true,
             "op.row.delete": true,
             "window.extra.column": "请选择您要显示的列,leftTop,640,true",

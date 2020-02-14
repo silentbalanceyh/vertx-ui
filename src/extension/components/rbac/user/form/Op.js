@@ -20,7 +20,11 @@ const $opDelete = (reference) =>
     });
 const $opFilter = (reference) =>
     params => Ex.form(reference).filter(params);
-
+const $opWizard = (reference) => params =>
+    Ex.form(reference).wizard(params, (request = {}) =>
+        Ux.ajaxPost('/api/user/search', request)
+            .then(result => Ux.promise(result.list))
+    );
 const $opPassword = (reference) => params => {
     const request = Ux.valueRequest(params);
     request.password = Ux.encryptMD5(params['npassword']);
@@ -35,6 +39,7 @@ export default {
         $opSave,
         $opDelete,
         $opFilter,
+        $opWizard,
         $opPassword
     }
 }

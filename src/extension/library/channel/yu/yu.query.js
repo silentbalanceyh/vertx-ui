@@ -1,5 +1,6 @@
 import Fn from '../../functions';
 import Ux from "ux";
+import Yi from '../yi';
 
 export default (reference, virtualRef) => {
     /*
@@ -44,12 +45,14 @@ export default (reference, virtualRef) => {
              */
             if (state.$loading) {
                 Ux.toLoading(() => Fn.rx(reference).search(current)
-                    .then($data => {
+                    .then($data => Yi.yiColumn(reference, state, $data))
+                    .then(state => {
+                        const {$data, $lazy} = state;
                         /*
                          * 设置当前组件的加载
                          * ( ExTable )
                          */
-                        Fn.rsLoading(reference, false)({$data});
+                        Fn.rsLoading(reference, false)({$data, $lazy});
                     })
                 );
             }

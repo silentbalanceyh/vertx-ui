@@ -1,11 +1,19 @@
 export default {
     __DEFAULT__: (params = []) => async (dataEvent) => {
-        const field = params[0];
+        /*
+         * 读取所有的 params
+         */
         const prev = dataEvent.getPrev();
-        if (prev && field) {
-            return prev[field];
-        } else {
-            return null;
+        let returnValue = null;
+        for (let idx = 0; idx < params.length; idx++) {
+            const field = params[idx];
+            if (prev && field) {
+                returnValue = prev[field];
+            }
+            if (returnValue) {
+                break;
+            }
         }
+        return returnValue;
     }
 }

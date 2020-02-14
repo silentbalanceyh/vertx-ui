@@ -11,8 +11,10 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
-            "criteria": {}
+            "sorter": "updatedAt=DESC",
+            "criteria": {
+                "sigma":"PROP:app.sigma"
+            }
         },
         "mock": {
             "enabled": true,
@@ -47,7 +49,6 @@
             "dynamic.switch": true,
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
-            "op.batch.edit": "批量更新",
             "op.batch.delete": "批量删除",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
@@ -58,7 +59,7 @@
             "op.submit.save": "保存",
             "op.submit.delete": "删除",
             "op.submit.reset": "重置",
-            "window.batch.edit": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
+            "window.batch.editor": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
             "window.extra.column": "请选择您要显示的列,leftTop,640,true",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
@@ -108,7 +109,16 @@
                         "如果有相关疑问可联系管理员！"
                     ]
                 },
-                "upload": "模板文件"
+                "upload": "模板文件",
+                "button": "btnImport",
+                "modal": {
+                    "success": {
+                        "content": "您的数据已经导入成功！"
+                    },
+                    "error": {
+                        "content": "对不起，请选择您要上传的模板文件！"
+                    }
+                }
             },
             "extra.column": {
                 "grid": 3,
@@ -140,22 +150,16 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "username,用户账号",
-                        "realname,用户名称",
                         "comment,备注",
-                        "mobile,手机号",
-                        "email,邮箱",
                         "active,是否启用",
-                        "createdBy,创建人",
                         "createdAt,创建时间",
-                        "updatedBy,更新人",
                         "updatedAt,更新时间"
                     ]
                 },
                 "valueColumn": {
                     "title": "设置值",
                     "render": {
-                        "name": "TEXT",
+                        "comment": "TEXT",
                         "active": {
                             "type": "RADIO",
                             "config": [
@@ -164,6 +168,12 @@
                             ]
                         },
                         "createdAt": {
+                            "type": "DATE",
+                            "config": {
+                                "format": "YYYY-MM-DD"
+                            }
+                        },
+                        "updatedAt": {
                             "type": "DATE",
                             "config": {
                                 "format": "YYYY-MM-DD"
@@ -208,19 +218,6 @@
                             "confirm": "确认删除选择的角色记录？"
                         }
                     ]
-                },
-                {
-                    "title": "用户账号",
-                    "dataIndex": "username",
-                    "sorter": true,
-                    "$filter.type": "SEARCH",
-                    "$filter.config": {
-                        "placeholder": "输入用户账号",
-                        "button": {
-                            "search": "搜索",
-                            "reset": "重置"
-                        }
-                    }
                 }
             ]
         }

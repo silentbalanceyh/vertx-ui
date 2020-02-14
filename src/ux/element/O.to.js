@@ -31,7 +31,25 @@ const Moment = (input = {}, config = {}) => ({
         return $data;
     }
 });
+const toTimeFixed = (momentValue, timeStr) => {
+    if (moment.isMoment(momentValue) && "string" === typeof timeStr) {
+        /*
+         * Time
+         */
+        const defaultTime = moment(timeStr, "HH:mm:ss");
+        if (defaultTime.isValid()) {
+            /*
+             * Copy hour, min, second
+             */
+            momentValue.hour(defaultTime.hour());
+            momentValue.minute(defaultTime.minute());
+            momentValue.second(defaultTime.second());
+            return momentValue;
+        } else return momentValue;
+    } else return momentValue;
+};
 export default {
     toJson,
+    toTimeFixed,
     Moment,
 }

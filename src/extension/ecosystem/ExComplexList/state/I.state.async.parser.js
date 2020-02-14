@@ -3,7 +3,7 @@ import Ux from 'ux';
 /*
  * 权限控制专用解析
  */
-const parseAuthorized = (reference, buttons = {}) => {
+const parseAuthorized = (reference, buttons = {}, options = {}) => {
     // TODO: 权限控制
     /*
      * Open区域
@@ -36,6 +36,6 @@ const parseEvent = (reference, buttons = {}) => {
     return Ux.promise(buttons);
 };
 export default (reference) => ({
-    parseAuthorized: (buttons = {}) => parseAuthorized(reference, buttons),
-    parseEvent: (buttons = {}) => parseEvent(reference, buttons)
+    parseAuthorized: (buttons = {}, options) => parseAuthorized(reference, buttons, options),
+    parseEvent: (buttons = {}, options) => parseEvent(reference, buttons, options)
 });

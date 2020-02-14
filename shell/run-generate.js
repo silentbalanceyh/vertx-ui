@@ -1,6 +1,6 @@
 const fs = require("fs");
 const Immutable = require("immutable");
-const randomjs = require("random-js");
+const Random = require("random-js");
 const separator = "/";
 // 读取当前目录的根目录，收集路径信息
 const dir = fs.readdirSync("./src");
@@ -25,8 +25,9 @@ for (let idx = 0; idx < dir.length; idx++) {
 }
 
 const generate = length => {
-    const engine = randomjs.engines.mt19937().autoSeed();
-    const id = randomjs.string()(engine, length);
+    const engine = Random.MersenneTwister19937.autoSeed();
+    const randomjs = new Random.Random(engine);
+    const id = randomjs.string(length);
     return id.replace(/-/g, "_");
 };
 

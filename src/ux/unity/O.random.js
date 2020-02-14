@@ -1,5 +1,5 @@
 // 导入第三方库
-import randomjs from 'random-js';
+import {MersenneTwister19937, Random} from 'random-js';
 import {v4} from 'uuid';
 // 导入外层
 import E from '../error';
@@ -12,8 +12,10 @@ import E from '../error';
  */
 const randomString = (length) => {
     E.fxTerminal(!length, 10062, length);
-    const engine = randomjs.engines.mt19937().autoSeed();
-    return randomjs.string()(engine, length);
+    // 1.0 旧版本：const engine = randomjs.engines.mt19937().autoSeed();
+    const engine = MersenneTwister19937.autoSeed();
+    const random = new Random(engine);
+    return random.string(length); // randomjs.string()(engine, length);
 };
 /**
  * 生成范围随机整数

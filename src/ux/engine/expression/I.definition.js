@@ -28,7 +28,7 @@ const ajaxDefinition = {
     ajax: [
         "method",
         "uri",
-        "page",
+        "params.pager.page",
         "params.pager.size",
         "$KV$"
     ],

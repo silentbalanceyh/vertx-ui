@@ -26,8 +26,6 @@ import _system_job from './system/job/UI';
 import _system_log from './system/log/UI';
 import _system_start from './system/start/UI';
 import _system_sync from './system/sync/UI';
-import _system_todo from './system/todo/UI';
-import _system_todo$view from './system/todo-view/UI';
 
 export default {
 	_acme_category,
@@ -58,6 +56,4 @@ export default {
 	_system_log,
 	_system_start,
 	_system_sync,
-	_system_todo,
-	_system_todo$view,
 }

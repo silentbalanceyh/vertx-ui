@@ -1,9 +1,9 @@
-import yoAmbient from './yo.ambient';
+import yoDynamic from './yo.dynamic';
 import Fn from '../../functions';
 import Ux from 'ux';
 
 export default (reference) => {
-    const attrs = yoAmbient(reference);
+    const attrs = yoDynamic(reference);
     /*
      * 初始化数据
      */

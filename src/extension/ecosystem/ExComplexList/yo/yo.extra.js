@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 import Opt from '../options';
 
 const {Order = {}} = Opt;
@@ -10,13 +11,11 @@ export default (reference) => {
      * $columnsMy：我选择的列
      */
     const {
-        options = {},   // 当前状态中保存的 options 配置项
-        $columns = [], $columnsMy = []
+        $columns = [], $columnsMy = [],
     } = reference.state;
     /*
      * 核心配置信息传入
      */
-    editorRef.$options = options;
     editorRef.config.forEach((config = {}) => {
         /*
          * 抽取组件配置信息
@@ -53,5 +52,5 @@ export default (reference) => {
      * 计算最新配置
      * ExEditorColumn
      */
-    return editorRef;
+    return Ux.sorterObject(editorRef);
 }

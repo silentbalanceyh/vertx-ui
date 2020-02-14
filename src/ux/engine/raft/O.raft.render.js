@@ -18,6 +18,9 @@ const raftValue = (cell = {}, values = {}, reference) => {
             literal = Abs.immutable(values).getIn(path);
         }
     }
+    /*
+     * 防止 false 无法给值
+     */
     if (literal) {
         /*
          * 计算初始值
@@ -47,6 +50,13 @@ const raftValue = (cell = {}, values = {}, reference) => {
             }
         }
         cell.optionConfig.initialValue = literal;
+    } else {
+        /*
+         * 布尔值初始化
+         */
+        if (false === literal) {
+            cell.optionConfig.initialValue = false;
+        }
     }
 };
 /*
@@ -149,6 +159,10 @@ const raftRender = (cell = {}, config = {}) => {
              */
             const {$loading = false} = reference.state;
             if ($loading) optionJsx.loading = $loading;      // 为 true 时
+            /*
+             * 处理
+             */
+            Ut.writeSegment(reference, optionJsx);
             return render(reference, optionJsx);
         };
     } else {
@@ -180,11 +194,15 @@ const raftRender = (cell = {}, config = {}) => {
                 render: cell.render,
             });
             /*
-             * 解决某些场景无法复制的忧伤
+             * 解决某些场景无法赋值的忧伤
              */
             if (optionJsx && values[cell.field]) {
                 optionJsx['data-initial'] = values[cell.field];
             }
+            /*
+             * 插件专用处理
+             */
+            Ut.writeSegment(reference, optionJsx, cell.field);
             return getFieldDecorator(cell.field, optionConfig)(
                 render(reference, optionJsx)
             );

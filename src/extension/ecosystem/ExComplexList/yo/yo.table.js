@@ -1,5 +1,22 @@
 import Ex from 'ex';
 
+const isBatchEnabled = (reference) => {
+    const {op = {}} = reference.state;
+    let counter = 0;
+    Object.keys(op).forEach(opKey => {
+        if (opKey.startsWith('op.batch')) {
+            counter += 1;
+        } else if (opKey.startsWith("op.extension")) {
+            const button = op[opKey];
+            const region = button.region ? button.region : "";
+            if (region.startsWith("op.batch")) {
+                counter += 1;
+            }
+        }
+    });
+    return 0 < counter;
+};
+
 export default (reference) => {
     const inherit = Ex.yoList(reference);
     /*
@@ -11,10 +28,9 @@ export default (reference) => {
     /*
      * 是否支持批量
      */
-    const {op = {}} = reference.state;
-    const counter = Object.keys(op)
-        .filter(opKey => opKey.startsWith('op.batch')).length;
-    inherit.$batch = 0 < counter;
+    const {plugins = {}} = reference.state;
+    inherit.$batch = isBatchEnabled(reference);
+    inherit.$plugins = plugins;
     /*
      * 是否 dirty
      */

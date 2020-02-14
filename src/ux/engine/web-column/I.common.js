@@ -73,6 +73,9 @@ export default {
             attrs.style.maxWidth = width;
             attrs.style.width = width;
             attrs.style.display = "inline-block";  // 必须有内容才会生效
+            return true;
+        } else {
+            return false;
         }
     }
 }

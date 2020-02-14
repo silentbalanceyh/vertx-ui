@@ -18,13 +18,13 @@
             ],
             [
                 {
-                    "metadata": "name,名称,8,,,placeholder=请输入名称",
+                    "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=text:40",
                     "optionConfig.rules": [
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
                 {
-                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码",
+                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,maxLength=40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -50,7 +50,8 @@
                             "uri":"/api/type/categories/:type",
                             "magic":{
                                 "type":"FORM:type"
-                            }
+                            },
+                            "engine":false
                         },
                         "linker": {
                             "name": "parentName",
@@ -64,7 +65,8 @@
                             "title":"name"
                         },
                         "validation": "请选择父类！",
-                        "window": "选择父类型,选择,关闭,false,400,false"
+                        "window": "选择父类型,选择,关闭,false,400,false",
+                        "exclude":"FORM:key"
                     },
                     "optionJsx.allowClear":true
                 }
@@ -85,7 +87,7 @@
             ],
             [
                 {
-                    "metadata": "comment,备注,24,,aiTextArea",
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
                     "optionJsx.rows": 4
                 }
             ]

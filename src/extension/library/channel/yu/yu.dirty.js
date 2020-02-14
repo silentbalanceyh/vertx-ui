@@ -1,5 +1,6 @@
 import Fn from "../../functions";
 import Ux from 'ux';
+import Yi from '../yi';
 
 const updateInternal = (reference, prevState, consumer) => {
     /*
@@ -22,7 +23,8 @@ const updateInternal = (reference, prevState, consumer) => {
             if (state.$loading) {
                 const {$query = {}} = Ux.clone(reference.state);
                 Ux.toLoading(() => Fn.rx(reference).search($query)
-                    .then($data => consumer($data)));
+                    .then($data => Yi.yiColumn(reference, reference.state, $data))
+                    .then(done => consumer(done)))
             }
         }
     }
@@ -44,13 +46,14 @@ export default (reference, virtualRef) => {
          */
         Fn.rsLoading(reference)({$dirty: true});
     } else {
-        updateInternal(reference, prevState, ($data => {
+        updateInternal(reference, prevState, ((state = {}) => {
+            const {$data, $lazy} = state;
             /*
              * 修改内部状态双变量
              * $dirty = false
              * $loading = false
              */
-            Fn.rsLoading(reference, false)({$data, $dirty: false});
+            Fn.rsLoading(reference, false)({$data, $lazy, $dirty: false});
         }));
     }
 }

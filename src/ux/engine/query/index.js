@@ -2,6 +2,7 @@ import input from './O.input';
 import qrComplex from './O.fn.complex';
 import qrCombine from './O.fn.combine';
 import qrCommon from './O.fn.common';
+import qrInherit from './O.fn.inherit';
 /*
  * 查询专用方法
  * ir 打头
@@ -20,4 +21,8 @@ export default {
      * 处理 common 相关的查询条件
      */
     qrCommon,
+    /*
+     * List 继承
+     */
+    qrInherit,
 }

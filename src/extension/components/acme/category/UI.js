@@ -32,6 +32,7 @@ class Component extends React.PureComponent {
             const listAttrs = Op.yoList(this);
 
             const span = $opened ? {left: 0, right: 24} : {left: 4, right: 20};
+            /* $options */
             return renderJsx(this, {
                 siderAttrs,
                 alert,

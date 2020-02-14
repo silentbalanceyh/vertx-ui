@@ -48,6 +48,9 @@
             ],
             "mock": [
                 "src/mock/"
+            ],
+            "plugin": [
+                "src/plugin/"
             ]
         }
     },

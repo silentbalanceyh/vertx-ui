@@ -1,7 +1,7 @@
 import stateTab from './I.state.sync.tab';
 import stateOption from './I.state.sync.option';
 import stateQuery from './I.state.sync.query';
-
+import statePlugin from './I.state.sync.plugin'
 import asyncOp from './I.state.async.op';
 import asyncTable from './I.state.async.table';
 
@@ -69,6 +69,7 @@ const sync = (reference, config = {}) => {
      * 由于包含了列信息，所以改成异步
      */
     // state.table = stateTable(reference, config);
+    state.plugins = statePlugin(reference, config);
     /*
      * 提交和加载
      */

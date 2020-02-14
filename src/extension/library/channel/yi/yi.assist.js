@@ -9,6 +9,17 @@ export default (reference, state = {}) => {
      * keys / promise
      */
     if (assist) {
+        /*
+         * 第一选择
+         */
         return Ux.asyncAssist(assist, reference, state);
-    } else return Ux.promise(state);
+    } else {
+        const {config = {}} = reference.props;
+        if (config.assist) {
+            /*
+             * 第二选择
+             */
+            return Ux.asyncAssist(config.assist, reference, state);
+        } else return Ux.promise(state);
+    }
 }

@@ -60,7 +60,36 @@ const treeFlip = (data = [], config = {}) => {
     }
     return $path;
 };
+const treeShared = (selected = [], treeArray = [], config = {}) => {
+    const {
+        parent = "parent",
+        target = "key"
+    } = config;
+    const matrix = selected
+        .map(key => treeParentAllIn([key], treeArray, parent))
+        .map(keys => keys.map(each => Ele.elementUnique(treeArray, "key", each))
+            .filter(each => undefined !== each)
+            .map(each => each[target])
+        );
+    /*
+     * 逆序处理
+     */
+    let length = Math.min.apply(null, matrix.map(each => each.length));
+    let selectedValue = null;
+    for (let idx = (length - 1); idx >= 0; idx--) {
+        const vertical = matrix.map(item => item[idx]);
+        const value = {};
+        vertical.forEach(each => value[each] = true);
+        if (1 === Object.keys(value).length) {
+            selectedValue = vertical[0];
+            break;
+        }
+    }
+    return selectedValue;
+};
 export default {
+    // 计算最大公约数
+    treeShared,
     // 常用：当前节点 和 所有父节点
     treeParentAllIn,
     // 所有父节点

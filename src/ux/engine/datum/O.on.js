@@ -1,6 +1,7 @@
 import Fr from './O.from';
 import U from 'underscore';
 import Abs from '../../abyss';
+import {Dsl} from "entity";
 
 /**
  * 从reference的props中读取`key`对应的值，一般用于读取Tabular/Assist
@@ -53,6 +54,7 @@ const onRouter = (reference, key) => {
  * 根据 linker 读取 values
  */
 const onLinker = (config = {}, valueSupplier) => {
+    /*
     const values = {};
     const {linker} = config;
     if (linker && !Abs.isEmpty(linker)
@@ -61,26 +63,51 @@ const onLinker = (config = {}, valueSupplier) => {
             .map(field => linker[field])
             .filter(field => !!field);
         const sourceValues = valueSupplier(fields);
-        if (sourceValues) {
-            Object.keys(sourceValues).forEach(key => {
-                /*
-                 * linker 中包含了 field 的信息，则直接处理
-                 */
-                if (linker.hasOwnProperty(key)) {
-                    values[key] = sourceValues[key];
-                } else {
-                    Object.keys(linker)
-                        .filter(linkerField => key === linkerField[key])
-                        .forEach(linkerField => {
-                            values[linkerField] = sourceValues[key];
-                        })
-                }
+        if (!Abs.isEmpty(sourceValues)) {
+            Object.keys(sourceValues).forEach(formField => {
+                Object.keys(linker)
+                    .filter(linkerField => formField === linker[linkerField])
+                    .forEach(linkerField => {
+                        values[linkerField] = sourceValues[formField];
+                    })
             });
+        }
+    }
+    return values; */
+    const values = {};
+    const {linker} = config;
+    if (linker && !Abs.isEmpty(linker)
+        && U.isFunction(valueSupplier)) {
+        const fields = Object.keys(linker)
+            .map(field => linker[field])
+            .filter(field => !!field);
+        const sourceValues = valueSupplier(fields);
+        if (!Abs.isEmpty(sourceValues)) {
+            Object.keys(sourceValues).forEach(formField => Object.keys(linker)
+                .filter(linkerField => formField === linker[linkerField])
+                .forEach(linkerField => {
+                    values[linkerField] = sourceValues[formField];
+                }));
         }
     }
     return values;
 };
+const onSave = (reference, key, data, isDeleted = false) => {
+    if (key) {
+        const dataArray = onDatum(reference, key);
+        if (dataArray) {
+            const $data = Dsl.getArray(dataArray);
+            if (isDeleted) {
+                $data.removeElement(data.key);
+            } else {
+                $data.saveElement(data);
+            }
+            return $data.to();
+        }
+    }
+};
 export default {
+    onSave,         // 处理 Assist / Tabular 的合并
     onDatum,        // 读取 Tabular 或 Assist
     onReference,    // 读取上层引用
     onRouter,       // 读取路由中的参数

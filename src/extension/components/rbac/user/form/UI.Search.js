@@ -2,7 +2,6 @@ import React from 'react'
 import Ux from 'ux';
 import Ex from 'ex';
 import {ExForm} from "ei";
-import {LoadingAlert} from 'web';
 import Op from "./Op";
 
 @Ux.zero(Ux.rxEtat(require('../Cab'))
@@ -12,15 +11,14 @@ import Op from "./Op";
 )
 class Component extends React.PureComponent {
     render() {
-        const alert = Ux.fromHoc(this, 'alert');
         const {$inited = {}} = this.props;
         const form = Ex.yoForm(this, null, $inited);
+        /*
+         * $op
+         */
         return (
-            <div>
-                <LoadingAlert $alert={alert} $type={"error"}/>
-                <ExForm {...form} $height={"200px"}
-                        $op={Op.actions}/>
-            </div>
+            <ExForm {...form} $height={"200px"}
+                    $op={Op.actions}/>
         )
     }
 }

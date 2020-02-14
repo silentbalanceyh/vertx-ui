@@ -93,6 +93,9 @@
     "_modal": {
         "success": {
             "password": "您好，:realname！您的密码已修改完成，请确认后重新登录系统！"
+        },
+        "error": {
+            "passwordError": "旧密码错误，请输入正确的旧密码！"
         }
     }
 }

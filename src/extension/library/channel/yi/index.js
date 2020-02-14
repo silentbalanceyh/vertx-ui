@@ -9,8 +9,12 @@ import yiForm from './yi.form'; // 普通表单
 import yiAssist from './yi.assist';
 // 特殊加载
 import yiControl from './yi.control';
+import yiCompany from './yi.company';
+
+import yiColumn from './yi.column';
 
 export default {
+    yiColumn,
     /*
      * 1. yiModule
      * 2. 路由信息：/xxx/yyy/:type --> type,= <value>
@@ -46,4 +50,8 @@ export default {
      * 从后端读取配置：UI_CONTROL / UI_FORM / UI_LIST
      * */
     yiControl,
+    /*
+     * Company 专用
+     */
+    yiCompany,
 }

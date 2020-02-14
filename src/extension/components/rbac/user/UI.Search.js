@@ -1,10 +1,9 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
-import {ExTab} from 'ei';
-
-import FormPassword from './form/UI.Password';
+import {ExWizard} from 'ei';
 import FormSearch from './form/UI.Search';
+import FormDynamic from './form/UI.Password';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI.Search")
@@ -12,13 +11,21 @@ import FormSearch from './form/UI.Search';
 )
 class Component extends React.PureComponent {
     render() {
-        const tabs = Ux.fromHoc(this, "tabs");
         const inherit = Ex.yoAmbient(this);
+        /*
+         * ExWizard 专用
+         */
+        const $form = {
+            FormSearch,
+            FormDynamic
+        };
+        /*
+         * Tab页专用
+         */
+        const config = Ux.fromHoc(this, "wizard");
         return (
-            <ExTab config={tabs}>
-                <FormSearch {...inherit}/>
-                <FormPassword/>
-            </ExTab>
+            <ExWizard {...inherit} config={config}
+                      $form={$form}/>
         );
     }
 }

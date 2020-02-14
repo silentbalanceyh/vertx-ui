@@ -1,4 +1,3 @@
-import T from "../util";
 import Ux from "ux";
 
 export default (reference, config = {}) => {
@@ -8,7 +7,7 @@ export default (reference, config = {}) => {
             reference.setState({$loading: true, $visible: true});
             const {mock} = reference.props;
             if (config.ajax) {
-                const params = T.parseParams(reference, config);
+                const params = Ux.xtLazyAjax(reference, config);
                 params.pager.size = pagination.pageSize;
                 params.pager.page = pagination.current;
                 // 补充设置$page页面值

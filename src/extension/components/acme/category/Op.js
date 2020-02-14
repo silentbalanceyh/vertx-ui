@@ -11,10 +11,17 @@ const rxSelect = (reference) => (selected = {}) => {
     if (!Ux.isEmpty(selected)) {
         const {$query = {}} = reference.state;
         if (!$query.criteria) $query.criteria = {};
+        /*
+         * 双条件合并，大于0的时候需要取新条件
+         */
+        if (0 < Object.keys($query.criteria).length) {
+            $query.criteria[''] = true;
+        }
         $query.criteria['type,='] = selected.code;
         /*
          * 更新
          */
+        Ux.activeSearch();
         reference.setState({
             $query: Ux.clone($query),   // 拷贝触发条件的变更
             $type: selected.code,       // 类型选择
@@ -31,8 +38,8 @@ const yiPage = (reference) => {
     }
     state.$selected = false;
     state.$config = Ux.clone(config);
-    state.$ready = true;
-    reference.setState(state);
+    Ex.yiStandard(reference, state)
+        .then(state => reference.setState(state));
 };
 const yoSider = (reference) => {
     const siderAttrs = Ex.yoAmbient(reference);
@@ -52,8 +59,14 @@ const yoList = (reference) => {
         FormEdit,   // 更新表单
         FormFilter  // 搜索表单
     };
-    listAttrs.rxOpenPost = Ex.rxOpenPost(reference);
-    listAttrs.rxClosePost = Ex.rxClosePost(reference);
+    listAttrs.rxPostOpen = Ex.rxPostOpen(reference);
+    listAttrs.rxPostClose = Ex.rxPostClose(reference);
+    const $options = {};
+    const module = Ux.fromHoc(reference, "module");
+    if (module && module.options) {
+        Object.assign($options, module.options);
+    }
+    listAttrs.$options = $options;
     return listAttrs;
 };
 export default {

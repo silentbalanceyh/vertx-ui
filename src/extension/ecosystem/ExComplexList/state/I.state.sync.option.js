@@ -8,7 +8,7 @@ export default (reference, config = {}) => {
     if (U.isFunction(rxInject)) {
         $options = rxInject(options);
     } else {
-        $options = options;
+        $options = Ux.sorterObject(options);
     }
     return $options;
 };

@@ -18,8 +18,9 @@ export default (container = {}, UI = {}, inherit, fnJsx) => {
              */
             attrs.config = config;
             Cmn.seekInherit(attrs, container);
+            const sorted = Ux.sorterObject(attrs);
             return (
-                <Component {...attrs}>
+                <Component {...sorted}>
                     {fnRender()}
                 </Component>
             )

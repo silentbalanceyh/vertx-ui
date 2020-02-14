@@ -1,4 +1,6 @@
 import Cm from './gen.common';
+import Ux from 'ux';
+import {Dsl} from 'entity';
 
 const rsVisible = (reference, visible = true) =>
     Cm.boolean(reference, "$visible", visible);
@@ -18,10 +20,25 @@ export default {
     /*
      * 判断页面是打开还是关闭
      */
-    rxClosePost: (reference) => (key) => rsOpened(reference, false)(key),
-    rxOpenPost: (reference) => (data) => rsOpened(reference, true)(data),
+    rxPostClose: (reference) => (key) => rsOpened(reference, false)(key),
+    rxPostOpen: (reference) => (data) => rsOpened(reference, true)(data),
 
     rxLoading: (reference) => (loading, addOn = {}) => rsLoading(reference, loading)(addOn),
     rxSubmitting: (reference) => (submitting, addOn = {}) => rsSubmitting(reference, submitting)(addOn),
-    rxDirty: (reference) => (dirty, addOn = {}) => rsDirty(reference, dirty)(addOn)
+    rxDirty: (reference) => (dirty, addOn = {}) => rsDirty(reference, dirty)(addOn),
+    /*
+     * Assist 专用处理
+     */
+    rxAssist: (reference) => (key, data, deleted = false) => {
+        const saved = Ux.onSave(reference, key, data, deleted);
+        if (saved && Ux.isArray(saved)) {
+            /*
+             * 写 $a_<key> 专用
+             */
+            const $key = Ux.toKey(key);
+            const state = {};
+            state[$key] = Dsl.getArray(saved);
+            reference.setState(state);
+        }
+    }
 }

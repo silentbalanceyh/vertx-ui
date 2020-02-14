@@ -1,4 +1,5 @@
 import Ex from "ex";
+import Ux from 'ux';
 
 const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) => {
     const {options = {}} = reference.state;
@@ -17,6 +18,7 @@ const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) 
             ...addOn
         });
     }
+    return Ux.promise(data);
 };
 export default {
     rxClose

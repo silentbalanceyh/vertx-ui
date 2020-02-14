@@ -1,5 +1,4 @@
 import Ex from 'ex';
-import Ux from 'ux';
 /*
  * 行删除功能，绑定到 fnDelete 中
  * id: 当前行的ID
@@ -15,10 +14,10 @@ export default (id, record, metadata = {}) => {
     /*
      * 上层 $dirtyAsync
      */
-    const ref = Ux.onReference(reference, 1);
-    if (ref) {
-        ref.setState({$dirtyAsync: true});
-    }
+    Ex.rsLoading(reference)({});
     /* 删除数据 */
-    Ex.rx(reference).delete(id);
+    Ex.rx(reference).delete(id, () => {
+        /* $dirty 标记处理 */
+        Ex.rx(reference).dirty();
+    });
 }

@@ -5,7 +5,7 @@ import {ExComplexList} from "ei";
 import FormAdd from './team/UI.Add';
 import FormEdit from './team/UI.Edit';
 import FormFilter from './team/UI.Filter';
-import Op from "../company/Op";
+import Op from "./team/Op";
 
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
@@ -15,7 +15,7 @@ import Op from "../company/Op";
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiList(this);
+        Ex.yiCompany(this);
     }
 
     render() {
@@ -28,6 +28,8 @@ class Component extends React.PureComponent {
             };
             return (
                 <ExComplexList {...Ex.yoAmbient(this)}
+                               rxPostDelete={Op.rxPostDelete(this)}
+                               rxAssist={Op.rxAssist(this)}
                                config={config} $form={form}/>
             )
         }, Ex.parserOfColor("PxTeamList").control());

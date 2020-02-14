@@ -13,11 +13,14 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Op.yiInit(this);
+        /*
+         * Lazy Init
+         */
+        Ux.xtLazyInit(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.yiUpdate(this, prevProps);
+        Ux.xtLazyUp(this, {props: prevProps, state: prevState});
     }
 
     render() {
@@ -31,11 +34,12 @@ class Component extends React.PureComponent {
         const pageAndChange = Op.yoPager(this, config);
         /*
          * 属性拉平处理
+         * 表格处理
          */
         const inputAttrs = Op.yoValue(this, jsx);
-        /*
-         * 搜索专用
-         */
+        const ref = Ux.onReference(this, 1);
+        let $table = Ux.clone(table);
+        Ux.configScroll($table, $data.list, ref);
         return (
             <span>
                 <Input className="ux-readonly"
@@ -43,7 +47,7 @@ class Component extends React.PureComponent {
                        suffix={<Icon type="search" onClick={onClick}/>}/>
                 <Dialog className="web-dialog"
                         size={"small"}
-                        $visible={this.state.$visible}   // 窗口是否开启
+                        $visible={this.state['$visible']}   // 窗口是否开启
                         $dialog={dialog}>
                     {search ? (
                         <Row style={{
@@ -57,9 +61,9 @@ class Component extends React.PureComponent {
                     <Row>
                         <Col span={24}>
                             <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
-                                   loading={this.state.$loading}
+                                   loading={this.state['$loading']}
                                    {...config.table} // 原始配置信息
-                                   {...table} // 处理过的表格信息
+                                   {...$table} // 处理过的表格信息
                                    {...pageAndChange} // 处理分页处理
                                    bordered={false}
                                    className={"web-table"}

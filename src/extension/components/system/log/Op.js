@@ -28,8 +28,10 @@ const yiPage = (reference) => Ex.yiModule(reference, {}, false)
                 /*
                  * 重置
                  */
-                $query.criteria = {};
-                Object.assign($query.criteria, hoc._query);
+                $query = Ux.qrCombine($query, reference, hoc._query);
+            }
+            if (hoc._op && hoc._op.key) {
+                initState.$opKey = hoc._op.key;
             }
         }
         initState.$query = $query;

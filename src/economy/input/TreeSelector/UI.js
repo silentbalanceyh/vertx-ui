@@ -12,11 +12,11 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Op.yiInit(this);
+        Ux.xtLazyInit(this);
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.yiUpdate(this, prevProps);
+        Ux.xtLazyUp(this, {props: prevProps, state: prevState});
     }
 
     render() {
@@ -27,7 +27,18 @@ class Component extends React.PureComponent {
         /*
          * treeData
          */
+        const {$selectable = {}} = config;
         const treeData = Ux.toTree($data, config.tree);
+        /*
+         * selectable
+         */
+        const selectable = $selectable[jsx.id];
+        Ux.itTree(treeData, (item) => {
+            if (item.hasOwnProperty("_level")) {
+                item.selectable = item._level <= selectable;
+            }
+        });
+
         const treeAttrs = Ux.clone(tree);
         treeAttrs.showLine = true;
         treeAttrs.treeData = treeData;
@@ -38,7 +49,7 @@ class Component extends React.PureComponent {
                        suffix={<Icon type="search" onClick={onClick}/>}/>
                 <Dialog className="web-dialog"
                         size={"small"}
-                        $visible={this.state.$visible}   // 窗口是否开启
+                        $visible={this.state['$visible']}   // 窗口是否开启
                         $dialog={dialog}>
                     <div style={{
                         overflow: "auto",

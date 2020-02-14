@@ -66,9 +66,9 @@ const rxImport = (reference) => (event) => {
                     } else {
                         console.error("[ Ex ] 导入出错！！！")
                     }
-                }).catch(error => {
-                    console.error(error);
-                });
+                }).catch((error = {}) => Ux.messageCatch(error,
+                    () => Ex.rx(reference).submitting(false))
+                );
             }
         }
     }

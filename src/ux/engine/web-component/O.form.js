@@ -46,7 +46,7 @@ const aiField = (reference, values = {}, raft = {}) =>
             </Row>
         )
     }) : false;
-const aiInit = (reference, values = {}) => {
+const aiInit = (reference, values) => {
     /*
      * 基础初始化
      */
@@ -95,9 +95,14 @@ const aiForm = (reference, values, config = {}) => {
     }
     // form 专用属性
     const {raft = {}} = reference.state;
-    const attrs = Abs.clone(raft.form);
+    let attrs = Abs.clone(raft.form);
+    if (!attrs) attrs = {};
     if (config['formKey']) {
         attrs.key = config['formKey'];
+    }
+    // form 中的 className
+    if (config.className) {
+        attrs.className = config.className;
     }
     return (
         <Form {...attrs}>
@@ -124,6 +129,7 @@ const aiFormInput = (reference, values, raft = {}) => {
 };
 export default {
     aiForm,
+    aiInit, // 统一处理
     aiField,
     aiFormInput
 }

@@ -9,7 +9,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         if (value) {
             try {
                 // 有值才验证
-                const parameters = Parser.parseAjax(refereuce, rule.config.params);
+                const parameters = Parser.parseAjax(rule.config.params, refereuce);
                 // 基本条件
                 const field = rule.field;
                 parameters[field] = value;

@@ -14,7 +14,6 @@ const yiForm = (reference) => {
      */
     reference.setState(state);
 };
-
 export default {
-    yiForm,
+    yiForm
 };

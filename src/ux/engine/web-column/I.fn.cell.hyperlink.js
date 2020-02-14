@@ -1,6 +1,9 @@
 import Cmn from "./I.common";
 import Abs from "../../abyss";
 import Ut from '../../unity';
+import {Tooltip} from 'antd'
+import React from 'react';
+import './Cab.less';
 
 export default (reference, config) => {
     /*
@@ -17,6 +20,7 @@ export default (reference, config) => {
          * 1.格式化文字
          **/
         let normalizedText = Cmn.normalizeText(text, config, record);
+        let isPop = false;
         if (normalizedText) {
             /*
              * 2.链接专用处理
@@ -28,8 +32,13 @@ export default (reference, config) => {
             /*
              * 3.Overflow
              */
-            Cmn.normalizeOverflow(attrs, config);
+            isPop = Cmn.normalizeOverflow(attrs, config);
         }
-        return Cmn.jsxHyper(attrs, normalizedText);
+        return isPop ? (
+            <Tooltip title={normalizedText}
+                     overlayClassName={"web-tool-tip"}>
+                {Cmn.jsxHyper(attrs, normalizedText)}
+            </Tooltip>
+        ) : Cmn.jsxHyper(attrs, normalizedText);
     }
 }

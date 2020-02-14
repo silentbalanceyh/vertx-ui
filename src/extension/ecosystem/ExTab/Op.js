@@ -8,5 +8,5 @@ const yiTab = (reference) => {
     reference.setState(state);
 };
 export default {
-    yiTab
+    yiTab,
 }

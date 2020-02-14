@@ -4,6 +4,7 @@ import Ut from '../../unity';
 import Value from "../../abyss";
 import R from '../expression';
 import React from "react";
+import Fn from '../functions';
 
 const _onChange = (reference, field, setSelectedKeys) => (searchText) => {
     setSelectedKeys(searchText);
@@ -62,7 +63,7 @@ const _filterDropdown = (field, config = {}, reference = {}) => (filterConfig = 
                    style={{width: width.button ? width.button : 48}}>
                     {button.reset ? button.reset : false}
                 </a>
-                {T.jsxArchor(field, clearFilters)}
+                {Fn.anchorColumn(field, clearFilters)}
             </div>
         </div>
     );

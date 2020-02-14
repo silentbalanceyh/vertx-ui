@@ -23,11 +23,7 @@ export default (reference, {
             /*
              * 禁用第一页（如果打开页码超过上限，那么直接禁用第一页，防止再打开新的页签
              */
-            if (0 === index) {
-                item.disabled = true;
-            } else {
-                item.disabled = false;
-            }
+            item.disabled = (0 === index);
         }
         /*
          * 强制打开最后剩余的一页

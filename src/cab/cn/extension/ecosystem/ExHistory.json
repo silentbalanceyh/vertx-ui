@@ -19,6 +19,7 @@
                     "java`lang`Boolean": "布尔值,,,,#1874CD",
                     "java`math`BigDecimal": "浮点数,,,,#218868",
                     "java`time`LocalTime": "时间格式,,,,#7D26CD",
+                    "java`time`LocalDate": "时间格式,,,,#7D26CD",
                     "java`time`LocalDateTime": "时间格式,,,,#7D26CD"
                 }
             },

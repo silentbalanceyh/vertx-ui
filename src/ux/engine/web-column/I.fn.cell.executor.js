@@ -34,10 +34,26 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
     }
 };
 
+const _setEnabled = (calculated, item = {}, reference) => {
+    if (calculated.edition && "fnEdit" === item.executor) {
+        return true;
+    } else if (calculated.deletion && "fnDelete" === item.executor) {
+        return true;
+    } else {
+        console.info("其他条件");
+        return false;
+    }
+};
+
 export default (reference, config, executor = {}) => (text, record) => {
     const {$option = []} = config;
     const options = [];
+    /*
+     * 执行 pluginRow
+     */
     $option.forEach((item, index) => {
+        // 函数过滤
+        const calculated = Ut.pluginOp(reference, record);
         /*
          * 行专用的 key
          */
@@ -73,6 +89,7 @@ export default (reference, config, executor = {}) => (text, record) => {
                     executor,
                     reference,
                 });
+                option.enabled = _setEnabled(calculated, item, reference);
                 options.push(option);
             }
         }

@@ -151,14 +151,14 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
          * 输入源头读取
          */
         const linkerSource = U.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
-        if (!Abs.isEmpty(linkerSource)) {
+        if (linkerSource) {
             /*
              * 使用Linker设置最终值
              */
             Object.keys(linker)
                 .filter(field => !!field)                               // field 必须存在
                 .filter(field => !!linker[field])                       // linker 中定义了 field
-                .filter(field => linkerSource.hasOwnProperty(field))    // 数据源中包含
+                // .filter(field => linkerSource.hasOwnProperty(field))    // 不包含就直接 undefined
                 .forEach(field => {
                     const formField = linker[field];
                     let value = linkerSource[field];
@@ -167,9 +167,15 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
                      */
                     if (linkerDate.hasOwnProperty(field)) {
                         const pattern = linkerDate[field];              // 是否有日期
-                        const formatted = moment(value, pattern);       // 执行日期格式化
-                        if (moment.isMoment(formatted)) {
-                            value = formatted;
+                        if (value) {
+                            const formatted = moment(value, pattern);       // 执行日期格式化
+                            if (moment.isMoment(formatted)) {
+                                value = formatted;
+                            } else {
+                                value = null;   // Fix issue of Moment
+                            }
+                        } else {
+                            value = null;
                         }
                     }
                     formValues[formField] = value;                      // linker 赋值
@@ -178,6 +184,59 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
         }
     }
     return formValues;
+};
+const _edition = (reference) => {
+    /*
+     * 优先从 reference.props 中读取 $edition
+     */
+    let $edition = {};
+    if (reference.props.hasOwnProperty("$edition")) {
+        /*
+         * 属性中包含了，则证明定制过，那么取属性中的
+         */
+        const propEdition = reference.props.$edition;
+        if (Abs.isObject(propEdition)) {
+            Object.assign($edition, propEdition);
+        } else {
+            $edition = propEdition;
+        }
+    }
+    /*
+     * 不可编辑，直接切断
+     */
+    if (false === $edition) {
+        return $edition;
+    }
+    if (reference.state.hasOwnProperty("$edition")) {
+        const stateEdition = reference.state.$edition;
+        if (Abs.isObject(stateEdition)) {
+            Object.assign($edition, stateEdition);
+        } else {
+            $edition = stateEdition;
+        }
+    }
+    return $edition;
+};
+const writeSegment = (reference, optionJsx = {}, field) => {
+    /*
+     * 默认值为 true
+     */
+    const $edition = _edition(reference);
+    if ($edition && Abs.isObject($edition)) {
+        /*
+         * 部分表单禁用
+         */
+        if ($edition.hasOwnProperty(field)) {
+            optionJsx.disabled = !$edition[field];
+            optionJsx.readOnly = !$edition[field];
+        }
+    } else {
+        /*
+         * 直接禁用（全表单禁用）
+         */
+        optionJsx.disabled = true;
+        optionJsx.readOnly = true;
+    }
 };
 export default {
     /*
@@ -193,4 +252,8 @@ export default {
      */
     writeDisabled,
     writeReadOnly,
+    /*
+     * 写全局数据信息
+     */
+    writeSegment,
 }

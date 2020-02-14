@@ -1,7 +1,6 @@
 import U from 'underscore';
 import moment from 'moment';
 import Abs from '../../abyss';
-import Dev from '../../develop';
 import Ele from '../../element';
 import Ut from '../../unity';
 import Rx from '../expression';
@@ -11,6 +10,9 @@ import Rx from '../expression';
 const px = 12;
 const widthString = (input) => {
     let length = 0;
+    if ("string" !== typeof input) {
+        return 0;
+    }
     for (let idx = 0; idx < input.length; idx++) {
         const str = String(input.charAt(idx));
         if (Abs.isCn(str)) {
@@ -185,13 +187,15 @@ export default ($table = {}, data = [], reference) => {
      * 未配置 scroll 的时候计算，配置了就不用计算了
      */
     if (!$table.scroll) {
+        /*
         Dev.dgDebug({
             width, adjust, report, columns: $table.columns.length
         }, "[ Ux ] Scroll滚动条宽度计算结果：", "#436EEE");
+        */
         /*
          * 基础计算：必须是超过6列才执行
          */
-        if (6 < $table.columns.length) {
+        if (5 <= $table.columns.length) {
             $table.scroll = {};
             $table.scroll.x = 'max-content';  //width + adjust * 2;
             /*

@@ -7,6 +7,7 @@ import Dynamic from './O.plugin.dynamic';
 import Change from './O.change.event';
 import Submit from './O.submit';
 import xtReset from './O.fn.reset';
+import Lazy from './O.lazy';
 
 export default {
     ...Foundation,
@@ -19,6 +20,7 @@ export default {
     ...Submit,
     // 新版本重置
     xtReset,
+    ...Lazy,
     // 特殊类处理
     Dynamic,
 };

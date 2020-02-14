@@ -1,7 +1,7 @@
 import Ux from "ux";
 
 export default (reference, keys = [], key) => {
-    const {data = {}} = reference.props;
+    const data = reference.state.$data;
     /*
      * 选择的 keys 的记录处理
      */

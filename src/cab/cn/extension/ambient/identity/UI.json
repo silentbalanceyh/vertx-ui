@@ -19,8 +19,10 @@
         "query": {
             "projection": [],
             "pager": "1,10",
-            "sorter": "createdAt=DESC",
-            "criteria": {}
+            "sorter": "updatedAt=DESC",
+            "criteria": {
+                "sigma":"PROP:app.sigma"
+            }
         },
         "mock": {
             "enabled": true,
@@ -59,7 +61,7 @@
             "op.submit.add": "添加",
             "op.submit.save": "保存",
             "op.submit.reset": "重置",
-            "window.batch.edit": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
+            "window.batch.editor": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",
             "window.extra.column": "请选择您要显示的列,leftTop,640,true",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
@@ -209,7 +211,7 @@
                     "$render": "EXECUTOR",
                     "$option": [
                         {
-                            "text": "编辑",
+                            "text": "查看档案",
                             "executor": "fnEdit"
                         }
                     ]

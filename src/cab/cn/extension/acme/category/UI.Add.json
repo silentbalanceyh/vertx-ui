@@ -17,13 +17,13 @@
             ],
             [
                 {
-                    "metadata": "name,名称,8,,,placeholder=请输入名称",
+                    "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=text:40",
                     "optionConfig.rules": [
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
                 {
-                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码",
+                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,maxLength=40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -84,7 +84,7 @@
             ],
             [
                 {
-                    "metadata": "comment,备注,24,,aiTextArea",
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
                     "optionJsx.rows": 3
                 }
             ]
@@ -92,13 +92,15 @@
         "hidden": [
             "type",
             "identifier",
-            "parentId"
+            "parentId",
+            "appId"
         ],
         "op": {
             "$opAdd": "act.category.add"
         },
         "initial":{
-            "active":"BOOL:true"
+            "active":"BOOL:true",
+            "appId":"PROP:app.key"
         }
     },
     "_modal": {

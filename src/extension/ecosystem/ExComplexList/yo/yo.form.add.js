@@ -22,7 +22,7 @@ export default (reference, item = {}) => {
     /*
      * 读取 $identifier（动态表单必须）
      */
-    const {options = {}} = reference.state;
+    const {options = {}, plugins = {}} = reference.state;
     if (options[Ex.Opt.IDENTIFIER]) {
         formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
     }
@@ -30,16 +30,15 @@ export default (reference, item = {}) => {
      * 提供 $query 用于处理特殊条件
      * Tabular / Category
      */
-    const {$query = {}, $record} = reference.props;
+    const {$query = {}} = reference.props;
     formAttrs.$query = $query;
     /*
-     * 添加的时候需要使用初始化的默认值
-     * 所以引入外层变量 $record 来存储
-     * 1）外层变量是单变量，主要用于记录拷贝
-     * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
+     * 插件
      */
-    if ($record) {
-        formAttrs.$record = $record;
+    const $plugins = {};
+    if (Ux.isFunction(plugins.pluginField)) {
+        $plugins.pluginField = plugins.pluginField;
     }
+    formAttrs.$plugins = $plugins;
     return formAttrs;
 }

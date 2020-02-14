@@ -11,6 +11,7 @@ import PERCENT from './I.fn.cell.percent';
 import TEXT from './I.fn.cell.text';
 import USER from './I.fn.cell.user';
 import DICT from './I.fn.cell.dict';
+import ARRAY from './I.fn.cell.array';
 
 export default {
     CURRENCY,
@@ -49,10 +50,12 @@ export default {
     PURE,
     TEXT,
     USER,
+    ARRAY,
     supports: [
         "TEXT",
         "PURE",
         "LOGICAL",
-        "MAPPING"
+        "MAPPING",
+        "ARRAY"
     ]
 };

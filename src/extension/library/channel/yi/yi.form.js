@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import yiAssist from './yi.assist';
 
 /*
  * 统一表单
@@ -24,7 +25,8 @@ function yiForm() {
              * 直接做权限过滤（二者执行权限过滤）
              */
             state.$op = $op;    // 绑定的Op
-            reference.setState(state);
+            yiAssist(reference, state)
+                .then(finalState => reference.setState(finalState));
         }).catch(error => {
             console.error(error);
         });

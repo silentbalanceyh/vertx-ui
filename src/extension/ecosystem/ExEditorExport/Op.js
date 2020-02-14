@@ -10,29 +10,40 @@ const yiEditor = (reference) => {
     const {notice = {}} = config;
     state.$notice = Ux.clone(notice);
     /*
-     * 选项处理
+     * 选项处理，默认全选
      */
     const {$columns = [], button = ""} = config;
-    state.$options = $columns.map(column => {
+    const $options = $columns.map(column => {
         const option = {};
         option.key = column.dataIndex;
         option.label = column.title;
         option.value = column.dataIndex;
         return option;
     }).filter(column => "key" !== column.key);
-
-    state.$selected = []; // Ux.clone($columnsMy);
+    state.$options = $options;
+    /*
+     * 默认全选
+     */
+    const selected = $options.map(item => item.key);
+    state.$selected = selected;
     /*
      * Group专用
      */
     const group = {};
-    group.onChange = ($selected = []) => {
+    group.onChange = (selected = []) => {
         /*
          * 设置选中项
+         * 按照列呈现的本身顺序进行排序
          */
+        const $selectedKeys = Ux.immutable(selected);
+        const $selected = [];
+        $options
+            .filter(item => $selectedKeys.contains(item.key))
+            .forEach(item => $selected.push(item.key));
         reference.setState({$selected});
     };
     group.className = "group";
+    group.defaultValue = selected;
     state.$group = group;
     /*
      * 按钮专用选项

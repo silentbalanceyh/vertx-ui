@@ -1,6 +1,6 @@
 export default (reference, prefix) => {
     const {op = {}} = reference.state;
-    return Object.keys(op)
+    const extension = Object.keys(op)
         .filter(key => key.startsWith("op.extension"))
         .filter(key => !!op[key])
         .filter(key => !!op[key].region)
@@ -10,4 +10,9 @@ export default (reference, prefix) => {
             normalized.key = op[key].region;
             return normalized;
         });
+    if (1 === extension.length) {
+        return extension;
+    } else {
+        return extension.sort((left, right) => left.index - right.index);
+    }
 }

@@ -78,6 +78,13 @@ const formReset = (reference, keys = []) => {
             form.resetFields(keys);
         } else {
             form.resetFields();
+            /*
+             * callback，reset回调
+             */
+            const {doReset} = reference.props;
+            if (U.isFunction(doReset)) {
+                doReset(keys, reference);
+            }
         }
     }
 };

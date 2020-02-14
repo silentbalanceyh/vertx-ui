@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Fn from '../../functions';
 import U from 'underscore';
+import yoOption from './yo.option';
 
 const _seekState = (uniform = {}, reference, key) => {
     /*
@@ -76,8 +77,14 @@ export default (reference = {}, config = {}) => {
         "app", "user", "router",
         "menus",
         "hotel",     // 旧系统专用
-        "options",   // 选项专用
     );
+    {
+        const {$identifier} = reference.props;
+        if ($identifier) {
+            uniform.$identifier = $identifier;
+        }
+    }
+    uniform.$options = yoOption(reference);
     /*
      * 特殊变量
      * $disabled
@@ -126,8 +133,11 @@ export default (reference = {}, config = {}) => {
         /*
          * 开合状态处理
          */
-        const {$collapsed = false} = reference.props;
+        const {$collapsed = false, $plugins = {}} = reference.props;
         uniform.$collapsed = $collapsed;
+        if (!Ux.isEmpty($plugins)) {
+            uniform.$plugins = $plugins;
+        }
     }
     {
         /*
@@ -141,9 +151,36 @@ export default (reference = {}, config = {}) => {
      */
     _seekAssist(uniform, reference.props);
     _seekAssist(uniform, reference.state);
+    const {rxAssist} = reference.props;
+    if (U.isFunction(rxAssist)) {
+        uniform.rxAssist = rxAssist;
+    }
     /*
-     * options 专用处理
+     * 动态 $opKey
      */
+    let {$opKey, $record} = reference.props;
+    if ($opKey) {
+        uniform.$opKey = $opKey;
+    } else {
+        /*
+         * 有状态才做二次读取
+         */
+        if (reference.state) {
+            $opKey = reference.state.$opKey;
+            if ($opKey) {
+                uniform.$opKey = $opKey;
+            }
+        }
+    }
+    /*
+     * 添加的时候需要使用初始化的默认值
+     * 所以引入外层变量 $record 来存储
+     * 1）外层变量是单变量，主要用于记录拷贝
+     * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
+     */
+    if ($record) {
+        uniform.$record = $record;
+    }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
 };

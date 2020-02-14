@@ -2,6 +2,13 @@ import Ex from 'ex';
 import Ux from "ux";
 
 const $opPassword = (reference) => (params) => {
+    const user = Ux.isLogged();
+    const opassword=Ux.encryptMD5( params['opassword']);
+    if(opassword !== user.password){
+        return Ux.ajaxDialog(reference, {
+            key: "passwordError", /* 专用窗口对应的key */
+        });
+    }
     const request = Ux.valueRequest(params);
     request.password = params['npassword'];
     return Ex.I.password(request)/* 更新密码回调处理 */

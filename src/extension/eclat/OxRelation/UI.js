@@ -1,5 +1,4 @@
 import React from 'react';
-import Ux from 'ux';
 import Ex from 'ex';
 import {ExRelation} from "ei";
 import Op from './Op';
@@ -18,7 +17,7 @@ class Component extends React.PureComponent {
              */
             const {$definition = false} = this.state;
             const attrs = Ex.configRelation($inited, {category}, this);
-            attrs.config = Ux.clone(rest);
+            attrs.config = Op.yoConfig(this, rest);
             /*
              * 继承属性
              */

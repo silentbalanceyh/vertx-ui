@@ -40,7 +40,8 @@ const valueLadder = (item = {}) => {
                 $item = $item.set(field, processed[field]);
             }
         });
-    return $item.toJS();
+    const result = $item.toJS();
+    return result;
 };
 export default {
     valueLadder,

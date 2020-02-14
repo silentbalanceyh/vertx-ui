@@ -38,6 +38,35 @@ const isIn = (input, array = []) => {
 };
 const isFunction = (input) => U.isFunction(input);
 const isArray = (input) => U.isArray(input);
+const isQr = (config = {}) => {
+    const ajaxRef = config.ajax;
+    if (isObject(ajaxRef)) {
+        if (ajaxRef.hasOwnProperty('magic')) {
+            /*
+             * 非查询引擎模式，直接配置
+             * magic: {
+             *
+             * }
+             */
+            return false;
+        } else {
+            /*
+             * 查询引擎模式，一般配置，必须包含
+             * params.criteria: {
+             *
+             * }
+             */
+            if (ajaxRef.hasOwnProperty('params')) {
+                if (isObject(ajaxRef.params)) {
+                    return ajaxRef.params.hasOwnProperty('criteria');
+                } else return false;
+            } else return false;
+        }
+    } else {
+        console.error(config);
+        throw new Error("[ Ux ] 查询引擎方法不可调用于不带 ajax 配置的输入");
+    }
+};
 export default {
     isObject,   /* 验证合法的对象 */
     isEmpty,    /* Object 是否 Empty，支持数组 */
@@ -46,5 +75,6 @@ export default {
     /* underscore 连接 */
     isFunction,
     isArray,
+    isQr,       /* 配置是否查询引擎配置 */
     ...Reg,     /* 正则表达式验证专用库 */
 }

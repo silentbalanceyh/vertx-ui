@@ -1,8 +1,6 @@
 import yiClick from './I.fn.click';
 import yiDialog from './I.fn.dialog';
 import yiTree from './I.fn.tree';
-import yiUpdate from './I.fn.update';
-import yiInit from './I.fn.init';
 import Ux from "ux";
 
 const yiDefault = (reference = {}) => {
@@ -32,7 +30,5 @@ const yiValue = (reference, jsx = {}) => {
 };
 export default {
     yiDefault,
-    yiUpdate,
-    yiInit,
     yiValue,
 }

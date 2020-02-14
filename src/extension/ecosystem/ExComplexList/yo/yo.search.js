@@ -1,8 +1,7 @@
 import Ex from 'ex';
 
 export default (reference) => {
-    // const attrs = Ex.yoAction(reference, "op.");
-    const attrs = Ex.yoAmbient(reference);
+    const attrs = Ex.yoDynamic(reference);
     /*
      * 提取选项
      */

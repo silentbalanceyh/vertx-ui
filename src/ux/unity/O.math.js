@@ -64,9 +64,26 @@ const mathSum = (left, right) => {
     const rightValue = Ele.valueInt(right);
     return leftValue + rightValue;
 };
+/*
+ * 1 折
+ * .x 折
+ * 9 折
+ */
+const mathDiscount = (up, down) => {
+    const upValue = Ele.valueFloat(up, 0.0);
+    const downValue = Ele.valueFloat(down, 0.0);
+    if (upValue === downValue || 0 === downValue) {
+        return 10;  // 无折扣
+    } else {
+        let divided = mathDivision(upValue, downValue);
+        divided = divided * 10;
+        return Ele.valueFloat(divided.toFixed(1));
+    }
+};
 export default {
     mathLinear,
     mathDivision,
     mathMultiplication,
     mathSum,
+    mathDiscount,
 };

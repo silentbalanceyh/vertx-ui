@@ -14,14 +14,14 @@ const parseItem = (kvs = [], key) => {
             const config = DEFINITION[key];
             // 基本属性解析
             item = Apply.applyItem(item, config, kvs);
-            // 补上key（无key的时候处理）
-            Apply.applyKey(item);
             // 检查connectId：Button专用，其他的不影响
             Apply.applyConnect(item);
             // style计算，所有组件通用
             Apply.applyStyle(item);
             // 额外的键值对
             Apply.applyKv(item, config, kvs);
+            // 补上key（无key的时候处理）
+            Apply.applyKey(item);
         }
     } else {
         item = Abs.clone(kvs);

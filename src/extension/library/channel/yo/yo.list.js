@@ -1,6 +1,7 @@
 import yoAmbient from './yo.ambient';
 import Fn from '../../functions';
 import Ux from 'ux';
+import U from 'underscore';
 /*
  * List 必须传入的配置
  * 1）外置：state -> query, 内置：props -> $query
@@ -17,33 +18,10 @@ export default (reference) => {
         // 清空时专用
         $condition = {},    // 外置条件保存
     } = reference.state;
-    /*
-     * 默认的 query 应该走 reference.props 中的
-     */
-    const {$query} = reference.props;
-    let defaultQuery = {};
-    if ($query) {
-        /*
-         * props 属性中的 $query 优先
-         */
-        defaultQuery = Ux.clone($query);
-    } else {
-        /*
-         * 只有 List组件才会做的事
-         */
-        const seekQuery = reference.state.query;
-        if (seekQuery) {
-            defaultQuery = Ux.clone(seekQuery);
-        }
-    }
-    /*
-     * 核心业务专用
-     */
-    Ux.dgQuery(reference, "List组件: $ready = true, yo ( render )");
-    inherit.$query = Ux.qrComplex(defaultQuery, reference);
+    inherit.$query = Ux.qrInherit(reference);
     inherit.$selected = $selected;
     inherit.$options = options;
-    inherit.$condition = $condition;
+    inherit.$condition = $condition;    // 主要是为了维持状态专用
     /*
      * 二义性方法
      * rxSearch
@@ -74,5 +52,15 @@ export default (reference) => {
      */
     inherit.doLoading = Fn.rxLoading(reference);
     inherit.doDirty = Fn.rxDirty(reference);
+    /*
+     * rxPostDelete处理
+     */
+    const {rxPostDelete} = reference.props;
+    if (U.isFunction(rxPostDelete)) {
+        inherit.rxPostDelete = rxPostDelete;
+    }
+    /*
+     * rxPost系列
+     */
     return inherit;
 }

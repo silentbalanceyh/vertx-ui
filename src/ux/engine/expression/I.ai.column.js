@@ -22,10 +22,21 @@ const aiExprColumn = (columns = []) =>
         .map(column => Value.valueLadder(column)); /* 列的拉平处理 */
 
 const aiExprIcon = (icons) => {
+    const fnNorm = (item = {}) => {
+        if (item.iconStyle && item.iconStyle.fontSize) {
+            const fontSize = Value.valueInt(item.iconStyle.fontSize, -1);
+            if (-1 < fontSize) {
+                item.iconStyle.fontSize = fontSize;
+            } else {
+                item.iconStyle.fontSize = 12;
+            }
+        }
+        return item;
+    };
     if ("string" === typeof icons) {
-        return Parser.parseItem(icons, "icon");
+        return fnNorm(Parser.parseItem(icons, "icon"));
     } else if (U.isArray(icons)) {
-        return mapIterator(icons, (values = []) => Parser.parseItem(values, "icon"));
+        return mapIterator(icons, (values = []) => fnNorm(Parser.parseItem(values, "icon")));
     }
 };
 export default {

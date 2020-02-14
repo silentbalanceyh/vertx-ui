@@ -38,7 +38,10 @@
                 }
             ],
             [
-                "infoSystem,系统信息,19,,aiMagic"
+                {
+                    "metadata":"infoSystem,系统信息,19,,aiMagic",
+                    "optionJsx.config.record": true
+                }
             ],
             [
                 "infoStack,错误堆栈,19,,aiMagic"
