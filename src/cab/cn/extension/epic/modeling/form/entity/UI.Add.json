@@ -75,6 +75,9 @@
                 }
             ],
             [
+                "comments,备注,24,,aiTextArea,rows=3"
+            ],
+            [
                 {
                     "metadata": "$button",
                     "hidden": true,
@@ -95,7 +98,7 @@
     },
     "_modal": {
         "success": {
-            "added": "您好，您的模型信息添加成功！"
+            "added": "您好，您的实体信息添加成功！"
         }
     }
 }

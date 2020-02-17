@@ -138,6 +138,8 @@ const yoUniform = (uniform = {}, reference) => {
 const yoInherit = (reference) => {
     const ref = Ux.onReference(reference, 1);
     const inherit = Ux.onUniform(ref.props);
+
+    inherit.reference = reference;
     /*
      * 传入 submit 专用函数
      */

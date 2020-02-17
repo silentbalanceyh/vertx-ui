@@ -2,7 +2,7 @@ import React from 'react'
 import Ux from "ux";
 import {ExTab} from 'ei';
 import Ex from 'ex';
-import PageModal from './UI.Modeling';
+import PageModal from './model/UI';
 import PageEntity from './entity/UI';
 import PageRelation from './UI.Relation';
 

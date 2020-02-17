@@ -4,15 +4,16 @@ import Ex from 'ex';
 import Op from './Op';
 import {ExComplexList} from "ei";
 
-import {EntityAdd as FormAdd, EntityEdit as FormEdit, EntityFilter as FormFilter,} from "./form";
+import {ModelAdd as FormAdd, ModelEdit as FormEdit, ModelFilter as FormFilter,} from "./form";
 
 @Ux.zero(Ux.rxEtat(require('../Cab.json'))
-    .cab("UI.Entity")
+    .cab("UI.Model")
     .to()
 )
 class Component extends React.PureComponent {
     componentDidMount() {
         Op.yiPage(this);
+        Ex.yiStandard(this);
     }
 
     render() {
@@ -27,7 +28,7 @@ class Component extends React.PureComponent {
                 <ExComplexList {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             );
-        }, Ex.parserOfColor("PxEntity").control())
+        }, Ex.parserOfColor("PxModel").control())
     }
 }
 

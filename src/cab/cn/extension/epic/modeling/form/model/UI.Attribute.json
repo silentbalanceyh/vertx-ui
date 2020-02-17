@@ -1,0 +1,100 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "ui": [
+            [
+                {
+                    "metadata": "name,属性名称,12,,,placeholder=必填",
+                    "optionConfig.rules": [
+                        "required,请输入属性名称！"
+                    ]
+                },
+                {
+                    "metadata": "alias,别名,12,,,placeholder=必填",
+                    "optionConfig.rules": [
+                        "required,请输入别名！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,类型,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "INTERNAL,内部",
+                        "EXTERNAL,外部"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "source,实体名称,,,aiSelect,placeholder=必填",
+                    "optionJsx.config.datum": "source=resource.entities,value=identifier,label=identifier",
+                    "optionConfig.rules": [
+                        "required,请输入实体名称！"
+                    ],
+                    "optionJsx.config.cascade": {
+                        "source": "identifier",
+                        "target": "FORM:selectedEntityIds"
+                    }
+                },
+                {
+                    "metadata": "sourceField,字段名称,,,aiSelect,placeholder=必填",
+                    "optionJsx.config.datum": "source=resource.fields,value=name,label=name",
+                    "optionJsx.config.cascade": {
+                        "source": "entityId",
+                        "target": "FORM:entityId"
+                    },
+                    "optionConfig.rules": [
+                        "required,请输入字段名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "isSyncIn,IN？,,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "isSyncOut,OUT？,,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "isTrack,Track？,,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                "comments,备注,24,,aiTextArea,rows=3"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSaveAttribute,保存,SAVE_ROW,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "modelId",
+            "entityId",
+            "selectedEntityIds"
+        ],
+        "op": {
+            "$opSaveAttribute": "$CLIENT$"
+        }
+    }
+}
