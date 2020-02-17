@@ -1,0 +1,93 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=模型基本信息"
+            ],
+            [
+                {
+                    "metadata": "appName,名空间,14,,,readOnly=true",
+                    "optionJsx.addonBefore": "cn.originx."
+                }
+            ],
+            [
+                {
+                    "metadata": "identifier,全局ID,14,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）",
+                    "optionConfig.rules": [
+                        "required,请输入全局ID，不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，全局ID重复！",
+                            "config": {
+                                "uri": "/api/model/existing",
+                                "method": "POST",
+                                "params": {
+                                    "namespace": "FORM:namespace"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "name,系统名称,14",
+                    "optionConfig.rules": [
+                        "required,请输入系统名称，该名称不可为空！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "alias,系统别名,14",
+                    "optionConfig.rules": [
+                        "required,请输入系统别名，该名称不可为空！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,关联类型,14,,aiRadio",
+                    "optionJsx.config.items": [
+                        "JOINED,组合",
+                        "DIRECT,直连"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "active,启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                "comments,备注,24,,aiTextArea,rows=3"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "namespace"
+        ],
+        "op": {
+            "$opAdd": "act.model.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的模型信息添加成功！"
+        }
+    }
+}

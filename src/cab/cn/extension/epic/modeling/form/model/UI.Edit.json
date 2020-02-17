@@ -3,7 +3,7 @@
         "window": 1,
         "ui": [
             [
-                "title=实体信息"
+                "title=模型信息"
             ],
             [
                 {
@@ -18,7 +18,7 @@
                             "validator": "existing",
                             "message": "对不起，全局ID重复！",
                             "config": {
-                                "uri": "/api/entity/existing",
+                                "uri": "/api/model/existing",
                                 "method": "POST",
                                 "params": {
                                     "namespace": "FORM:namespace"
@@ -36,29 +36,18 @@
                     ]
                 },
                 {
-                    "metadata": "tableName,数据库表名,12,,,placeholder=（根据规范表名全大写，如RES_COMPANY）",
+                    "metadata": "alias,系统别名,12",
                     "optionConfig.rules": [
-                        "required,请输入表名，表名不可为空！",
-                        {
-                            "validator": "existing",
-                            "message": "对不起，数据库表名重复！",
-                            "config": {
-                                "uri": "/api/entity/existing",
-                                "method": "POST",
-                                "params": {
-                                    "namespace": "FORM:namespace"
-                                }
-                            }
-                        }
+                        "required,请输入系统别名，该名称不可为空！"
                     ]
                 }
             ],
             [
                 {
-                    "metadata": "type,模型类型,12,,aiRadio",
+                    "metadata": "type,关联类型,12,,aiRadio",
                     "optionJsx.config.items": [
-                        "ENTITY,实体模型",
-                        "RELATION,关系模型"
+                        "JOINED,组合",
+                        "DIRECT,直连"
                     ]
                 },
                 {
@@ -69,34 +58,34 @@
                 }
             ],
             [
-                "title=详细信息"
+                "comments,备注,24,,aiTextArea,rows=3"
+            ],
+            [
+                "title=实体信息"
             ],
             [
                 {
                     "complex": true,
                     "name": "FieldContainer",
                     "config": {
-                        "activeKey": "tabField",
-                        "items": "字段设置,tabField;键设置,tabKey",
+                        "activeKey": "tabRelation",
+                        "items": "实体设置,tabRelation",
                         "tabBarExtraContent": {
-                            "tabField": [
-                                "$opAddField,添加字段,$opShowField,primary,plus"
-                            ],
-                            "tabKey": [
-                                "$opAddKey,添加键,$opShowKey,primary,plus"
+                            "tabRelation": [
+                                "$opAddRelation,添加实体,$opShowRelation,primary,plus"
                             ]
                         },
                         "pages": {
-                            "tabField": {
+                            "tabRelation": {
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "fields,,24,,aiDialogEditor",
+                                            "metadata": "joins,,24,,aiDialogEditor",
                                             "optionJsx.config": {
-                                                "form": "FormField",
-                                                "dialog": "字段设置,保存,关闭,false,800,true,$opSaveField",
+                                                "form": "FormRelation",
+                                                "dialog": "实体设置,保存,关闭,false,800,true,$opSaveRelation",
                                                 "op": {
-                                                    "add": "$opShowField"
+                                                    "add": "$opShowRelation"
                                                 },
                                                 "table": {
                                                     "columns": [
@@ -118,74 +107,54 @@
                                                                 }
                                                             ]
                                                         },
-                                                        "name,字段名",
+                                                        "entity,实体名",
+                                                        "entityKey,实体键",
                                                         {
-                                                            "metadata": "type,字段类型,MAPPING",
+                                                            "metadata": "priority,优先级,MAPPING",
                                                             "$mapping": {
-                                                                "java`lang`String": "字符串",
-                                                                "java`lang`Integer": "整数",
-                                                                "java`lang`Long": "长整数",
-                                                                "java`lang`Boolean": "布尔值",
-                                                                "java`math`BigDecimal": "浮点数",
-                                                                "java`time`LocalTime": "时间格式",
-                                                                "java`time`LocalDate": "日期格式",
-                                                                "java`time`LocalDateTime":"日期/时间格式"
+                                                                "3": "高",
+                                                                "2": "中",
+                                                                "1": "低"
                                                             }
-                                                        },
-                                                        "columnName,数据库列名",
-                                                        {
-                                                            "metadata": "columnType,数据库类型,MAPPING",
-                                                            "$mapping": {
-                                                                "STRING1": "字符串",
-                                                                "STRING2": "长文本",
-                                                                "INT": "整数",
-                                                                "LONG": "长整数",
-                                                                "BOOLEAN": "布尔值",
-                                                                "DECIMAL": "精度浮点数",
-                                                                "DATE1": "日期格式",
-                                                                "DATE2": "日期/时间格式",
-                                                                "DATE3": "时间戳",
-                                                                "DATE4": "时间格式",
-                                                                "JSON": "JSON格式",
-                                                                "XML": "XML格式",
-                                                                "SCRIPT": "扩展脚本",
-                                                                "BINARY": "二进制"
-                                                            }
-                                                        },
-                                                        {
-                                                            "metadata": "isPrimary,主键？,LOGICAL",
-                                                            "$mapping": {
-                                                                "true": "是",
-                                                                "false": "否"
-                                                            }
-                                                        },
-                                                        {
-                                                            "metadata": "isNullable,可为空？,LOGICAL",
-                                                            "$mapping": {
-                                                                "true": "是",
-                                                                "false": "否"
-                                                            }
-                                                        },
-                                                        "length,长度",
-                                                        "precision,精度",
-                                                        "format,时间格式"
+                                                        }
                                                     ]
                                                 }
                                             }
                                         }
                                     ]
                                 ]
-                            },
-                            "tabKey": {
+                            }
+                        },
+                        "span": 24
+                    }
+                }
+            ],
+            [
+                "title=属性信息"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "config": {
+                        "activeKey": "tabAttribute",
+                        "items": "属性设置,tabAttribute",
+                        "tabBarExtraContent": {
+                            "tabAttribute": [
+                                "$opAddAttribute,添加属性,$opShowAttribute,primary,plus"
+                            ]
+                        },
+                        "pages": {
+                            "tabAttribute": {
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "keys,,24,,aiDialogEditor",
+                                            "metadata": "attributes,,24,,aiDialogEditor",
                                             "optionJsx.config": {
-                                                "form": "FormKey",
-                                                "dialog": "键设置,保存,关闭,false,640,true,$opSaveKey",
+                                                "form": "FormAttribute",
+                                                "dialog": "属性设置,保存,关闭,false,640,true,$opSaveAttribute",
                                                 "op": {
-                                                    "add": "$opShowKey"
+                                                    "add": "$opShowAttribute"
                                                 },
                                                 "table": {
                                                     "columns": [
@@ -203,19 +172,21 @@
                                                                 {
                                                                     "text": "删除",
                                                                     "executor": "fnDelete",
-                                                                    "confirm": "确认删除选择的实体记录？"
+                                                                    "confirm": "确认删除选择的属性记录？"
                                                                 }
                                                             ]
                                                         },
-                                                        "name,键名",
+                                                        "name,属性名",
+                                                        "alias,别名",
                                                         {
-                                                            "metadata": "type,键类型,MAPPING",
+                                                            "metadata": "type,类型,MAPPING",
                                                             "$mapping": {
-                                                                "PRIMARY": "主键",
-                                                                "UNIQUE": "唯一键"
+                                                                "INTERNAL": "内部",
+                                                                "EXTERNAL": "外部"
                                                             }
                                                         },
-                                                        "columns,包含的列,ARRAY"
+                                                        "source,来源实体",
+                                                        "sourceField,来源字段"
                                                     ]
                                                 }
                                             }
@@ -246,14 +217,14 @@
             "namespace"
         ],
         "op": {
-            "$opSave": "act.entity.save",
-            "$opDelete": "act.entity.delete"
+            "$opSave": "act.model.save",
+            "$opDelete": "act.model.delete"
         }
     },
     "_modal": {
         "success": {
-            "saved": "您好，您的信息已经更新成功！",
-            "removed": "当前记录删除成功！"
+            "saved": "您好，您的模型信息已经更新成功！",
+            "removed": "当前模型记录删除成功！"
         }
     }
 }
