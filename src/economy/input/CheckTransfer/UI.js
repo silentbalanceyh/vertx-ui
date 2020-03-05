@@ -26,7 +26,14 @@ class Component extends React.PureComponent {
              * get value from reference.props
              * line 38: set targetKeys using variable: value
              */
-            const {$source = [], value = [], ...rest} = this.props;
+            /*
+             * modified by huarui
+             * as the targetKeys receive 'key' field as default,
+             * when using other field as below has to explicitly specify value's field
+             * as rowKey instead.
+             */
+            const {$source = [], value = [], config, ...rest} = this.props;
+            const {valueKey = "key"} = config;
             /*
              * targetKeys
              * selectedKeys
@@ -35,6 +42,7 @@ class Component extends React.PureComponent {
             return (
                 <Input.Group {...rest} className={"web-transfer"}>
                     <Transfer {...$transfer} dataSource={$source}
+                              rowKey={$source => $source[valueKey]}
                               selectedKeys={$sourceKeys}
                               targetKeys={value}/>
                 </Input.Group>

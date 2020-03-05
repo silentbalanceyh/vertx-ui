@@ -6,6 +6,9 @@
             [
                 {
                     "metadata": "name,字段名称,,,,placeholder=必填",
+                    "optionJsx.depend.enabled": {
+                        "clientFormMode": "ADD"
+                    },
                     "optionConfig.rules": [
                         "required,请输入字段名称！",
                         {
@@ -61,6 +64,9 @@
             [
                 {
                     "metadata": "columnName,列名,,,,placeholder=必填",
+                    "optionJsx.depend.enabled": {
+                        "clientFormMode": "ADD"
+                    },
                     "optionConfig.rules": [
                         "required,请输入数据库列名！",
                         {
@@ -105,6 +111,7 @@
                         ]
                     },
                     "optionConfig.rules": [
+                        "requiredTrue,请输入长度！",
                         {
                             "validator": "greater",
                             "message": "对不起，您输入的长度必须大于精度",
@@ -120,6 +127,7 @@
                         "columnType": "DECIMAL"
                     },
                     "optionConfig.rules": [
+                        "requiredTrue,请输入精度！",
                         {
                             "validator": "less",
                             "message": "对不起，您输入的精度必须小于长度",
@@ -192,7 +200,8 @@
         ],
         "hidden": [
             "key",
-            "entityId"
+            "entityId",
+            "clientFormMode"
         ],
         "op": {
             "$opSaveField": "$CLIENT$"

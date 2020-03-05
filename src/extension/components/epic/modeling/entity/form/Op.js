@@ -13,6 +13,10 @@ const $opSave = (reference) => params =>{
         dialog: "saved"
     });
 };
+const $opDelete = (reference) => params => Ex.form(reference).remove(params, {
+    uri: "/api/entity/:key",
+    dialog: "removed"
+});
 const $opSaveField = (reference) => params =>
     Ex.dialog(reference).saveRow(params);
 const $opSaveKey = (reference) => params =>
@@ -22,6 +26,7 @@ export default {
         $opFilter,
         $opAdd,
         $opSave,
+        $opDelete,
         $opSaveField,
         $opSaveKey,
     }

@@ -60,7 +60,6 @@ const doClose = (reference, $selected = []) => {
         rxClose();
     }
     if (Abs.isFunction(doDirty)) {
-
         doDirty(true, {$selected});
     }
 };

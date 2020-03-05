@@ -53,7 +53,7 @@
                 "$format": "YYYY年MM月DD日 HH点mm分"
             },
             {
-                "metadata":"createdBy,创建人,USER",
+                "metadata":"updatedBy,创建人,USER",
                 "$config": {
                     "uri": "/api/user/:key",
                     "field": "realname"

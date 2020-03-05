@@ -11,7 +11,7 @@
                     "optionJsx.addonBefore": "cn.originx."
                 },
                 {
-                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）",
+                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）,readOnly=true",
                     "optionConfig.rules": [
                         "required,请输入全局ID，不可为空！",
                         {

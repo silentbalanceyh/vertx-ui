@@ -2,6 +2,7 @@ import {saveAs} from "file-saver";
 import Cv from "../constant";
 import v4 from "uuid";
 import Abs from '../abyss';
+import {detailedDiff} from 'deep-object-diff';
 
 const dgRouter = (Ux, container, component) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
@@ -54,8 +55,16 @@ const dgQuery = (reference = {}, name) => {
         console.groupEnd();
     }
 };
+const dgDiff = (left, right) => {
+    if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
+        if (left && right) {
+            console.error(detailedDiff(left, right));
+        }
+    }
+};
 export default {
     dgRouter,
+    dgDiff,
     dgDebug,
     dgQuery,
     dgAjax,

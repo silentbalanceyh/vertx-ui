@@ -20,9 +20,32 @@ const xtValues = (reference) => {
     }
 };
 
-const xtLazyInit = (reference) => {
-    const {value, config = {}, id} = reference.props;
+const xtTrigger = (reference) => {
+    const {value} = reference.props;
     if (undefined === value) {
+        /*
+         * 无值直接触发
+         */
+        return true;
+    } else {
+        /*
+         * 有值检查是否完整
+         */
+        const values = xtValues(reference);
+        const {config = {}} = reference.props;
+        /*
+         * 针对 key 的专用检查
+         */
+        const {linker = {}} = config;
+        const sureField = linker.key;
+        return !values[sureField];
+    }
+};
+
+const xtLazyInit = (reference) => {
+    const {config = {}, id} = reference.props;
+    const isTrigger = xtTrigger(reference);
+    if (isTrigger) {
         const values = xtValues(reference);
         if (!Abs.isEmpty(values)) {
             Dev.dgDebug(values, "[ Xt ] 初始化时的 linker 值", "#8B3A62");

@@ -14,6 +14,12 @@ export default (reference, key = "", callback) => {
         } else if ("success" === type) {
             Modal.success(config);
         } else if ("confirm" === type) {
+            config.onCancel = () => {
+                /*
+                 * $loading: SUBMIT 专用状态
+                 */
+                reference.setState({$loading: false});
+            };
             Modal.confirm(config);
         }
     } else {

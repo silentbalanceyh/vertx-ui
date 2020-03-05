@@ -11,15 +11,6 @@ const _ajaxExtract = (request, params, body, response) => {
     } else {
         Dev.dgAjax(body, "Remote Error:");
         return Promise.reject({data: body});
-        // 401，403 的特殊
-        /*
-        const status = response.status;
-        if (401 === status || 403 === status) {
-            T.toLogout();
-            window.location.reload();
-        } else {
-            return Promise.reject({data: body});
-        }*/
     }
 };
 /**

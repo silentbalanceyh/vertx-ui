@@ -40,7 +40,6 @@ const _setEnabled = (calculated, item = {}, reference) => {
     } else if (calculated.deletion && "fnDelete" === item.executor) {
         return true;
     } else {
-        console.info("其他条件");
         return false;
     }
 };

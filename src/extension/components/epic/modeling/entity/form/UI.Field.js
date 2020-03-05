@@ -13,10 +13,11 @@ class Component extends React.PureComponent {
         /*
          * 配置处理
          */
-        const {$inited = {}, $mode} = this.props;
+        const {$inited = {}, $mode, reference} = this.props;
         let initials = {};
         initials.key = $inited.key;
         initials.entityId = $inited.parentId;
+        initials.clientFormMode = $mode;
         if (Ux.Env.FORM_MODE.ADD === $mode) {
             /*
              * 默认值
@@ -25,6 +26,8 @@ class Component extends React.PureComponent {
             initials.active = true;
             initials.primary = false;
             initials.nullable = true;
+            const ref = Ux.onReference(reference, 1);
+            initials.entityId = Ux.formHit(ref, "key");
         } else {
             /*
              * 更新表单专用值

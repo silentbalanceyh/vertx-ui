@@ -132,7 +132,9 @@ export default ($table = {}, data = [], reference) => {
     /*
      * 计算当前列的最大长度
      */
+    // eslint-disable-next-line
     let width = 0;
+    // eslint-disable-next-line
     let adjust = 0;
     const report = {};
     $columns.forEach(column => {
