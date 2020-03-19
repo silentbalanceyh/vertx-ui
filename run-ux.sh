@@ -26,7 +26,7 @@ cp -rf src/cab/cn/shared.json ${TARGET_FOLDER}/src/cab/cn/shared.json
 cp -rf src/environment/zero.js ${TARGET_FOLDER}/src/environment/zero.js
 cp -rf src/environment/zero.fn.js ${TARGET_FOLDER}/src/environment/zero.fn.js
 cp -rf shell/tpl/route/routes.zt ${TARGET_FOLDER}/shell/tpl/route/routes.zt
-cp -rf shell/run-package.json ${TARGET_FOLDER}/shell/package.json
+cp -rf shell/run-package.json ${TARGET_FOLDER}/shell/run-package.json
 cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
 cp -rf src/style/common.less ${TARGET_FOLDER}/src/style/common.less
