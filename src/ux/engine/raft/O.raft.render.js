@@ -181,7 +181,8 @@ const raftRender = (cell = {}, config = {}) => {
              * 1）impact
              * 2）enabled
              */
-            const optionJsx = Abs.clone(cell.optionJsx);
+            let optionJsx = Abs.clone(cell.optionJsx);
+            if (!optionJsx) optionJsx = {};      // 防止 undefined 出现
             Ut.writeDisabled(optionJsx, reference);
             // const optionJsx = raftDepend(reference, Abs.clone(cell.optionJsx));
             /*

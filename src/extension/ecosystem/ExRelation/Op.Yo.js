@@ -62,7 +62,8 @@ const yoTabs = (reference) => {
 };
 const yoTable = (reference, table = {}, key, combine) => {
     const $table = Ux.clone(table);
-    $table.columns = Ux.configColumn(reference, table.columns);
+    const {$renders = {}} = reference.props;
+    $table.columns = Ux.configColumn(reference, table.columns, $renders);
     Yo.combineTable($table, reference, key, combine);
     // $table.columns.forEach(column => column.width = config.editable ? "25%" : "32%");
     $table.pagination = false;

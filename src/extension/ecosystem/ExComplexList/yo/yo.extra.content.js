@@ -21,6 +21,36 @@ const isSatisfy = (reference, view = Ex.Mode.LIST) => {
         } else return false; // 否则 false
     } else return false; // 否则 false
 };
+const isOk = (item = {}) => {
+    const $category = Ux.immutable([
+        "op.submit.save", "op.submit.delete", "op.submit.reset"
+    ]);
+    return $category.contains(item.category)
+};
+const setEdition = (attrs = {}, reference) => {
+    const {$inited = {}} = reference.state;
+    const {metadata} = $inited;
+    if (!Ux.isEmpty(metadata)) {
+        const {plugins} = reference.state;
+        const executor = plugins && Ux.isFunction(plugins.pluginRow) ?
+            plugins.pluginRow : () => null;
+        const result = executor($inited, reference);
+        attrs.config.filter(isOk).forEach(item => {
+            /*
+             * 是否可编辑
+             */
+            if ("op.submit.delete" === item.category) {
+                item.visible = !!result.deletion;
+            }
+            if ("op.submit.save" === item.category) {
+                item.visible = !!result.edition;
+            }
+            if ("op.submit.reset" === item.category) {
+                item.visible = !!result.edition || !!result.deletion;
+            }
+        })
+    }
+};
 export default (reference, tabs = {}) => {
 
     /*
@@ -42,6 +72,12 @@ export default (reference, tabs = {}) => {
          * 2）tab.extra.edit
          */
         const attrs = Ex.yoAction(reference, prefix, Order);
+        /*
+         * 编辑界面核心操作
+         */
+        if (Ex.Mode.EDIT === $view) {
+            setEdition(attrs, reference);
+        }
         attrs.$submitting = $submitting;
         attrs.$activeKey = tabs.activeKey;
         attrs.$view = $view;

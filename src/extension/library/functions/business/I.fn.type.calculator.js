@@ -77,7 +77,7 @@ export default (reference, record = {}) => {
                  * 使用 fromId 查找
                  */
                 const fromRet = findFDefinition(reference, fromId, categories);
-                if (0 < fromRet.length) {
+                if (fromRet && 0 < fromRet.length) {
                     return findTUnique(fromRet, toId, categories);
                 }
             }

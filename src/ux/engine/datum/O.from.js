@@ -25,28 +25,33 @@ const parseDatum = (target, key) => {
         }
     }
 };
+const _fromDatum = (reference, key) => {
+    if (reference.state) {
+        const parsed = parseDatum(reference.state, key);
+        if (parsed) {
+            return parsed;
+        }
+    }
+};
 const fromDatum = (reference, key) => {
     key = key.replace(/\./g, "_");
     /*
      * 先从 props 中读取
      */
+    let parsed;
     if (reference.props) {
-        let parsed = parseDatum(reference.props, key);
-        if (parsed) {
-            return parsed;
-        } else {
-            /*
-             * 再从 state 中读取
-             */
-            if (reference.state) {
-                parsed = parseDatum(reference.state, key);
-                if (parsed) {
-                    return parsed;
-                }
-            }
+        parsed = parseDatum(reference.props, key);
+        if (!parsed) {
+            parsed = _fromDatum(reference, key);
         }
+    } else {
+        parsed = _fromDatum(reference, key);
     }
-    return Dsl.getArray(undefined);
+    if (parsed) {
+        return parsed;
+    } else {
+        return Dsl.getArray(undefined);
+    }
 };
 /**
  * 直接从Hoc资源路径读取数据信息

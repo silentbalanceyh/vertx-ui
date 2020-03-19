@@ -4,7 +4,7 @@ import {ExTab} from 'ei';
 import Ex from 'ex';
 import PageModal from './model/UI';
 import PageEntity from './entity/UI';
-import PageRelation from './UI.Relation';
+import PageRelation from './relation/UI';
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")

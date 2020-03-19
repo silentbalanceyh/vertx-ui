@@ -1,6 +1,6 @@
 import {saveAs} from "file-saver";
 import Cv from "../constant";
-import v4 from "uuid";
+import {v4} from "uuid";
 import Abs from '../abyss';
 import {detailedDiff} from 'deep-object-diff';
 

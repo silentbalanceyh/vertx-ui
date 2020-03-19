@@ -1,9 +1,12 @@
 import React from 'react'
+import {ExDrawerRelation} from "ei";
+
+import items from './items';
 
 class Component extends React.PureComponent {
     render() {
         return (
-            <div> Permission </div>
+            <ExDrawerRelation $items={items}/>
         )
     }
 }

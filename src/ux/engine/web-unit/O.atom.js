@@ -144,7 +144,7 @@ const aiBlock = (icon, text, key) => {
         if (kv[2]) {
             style.fontSize = Ele.valueInt(kv[2]);
         }
-        if (!style.fontSize) style.fontSize = 36;
+        if (!style.fontSize) style.fontSize = 24;
         iconAttrs.style = style;
         if (kv[3]) {
             iconAttrs.theme = kv[3];
@@ -159,7 +159,7 @@ const aiBlock = (icon, text, key) => {
     } else {
         iconAttrs.type = icon;
         iconAttrs.style = {
-            fontSize: 36
+            fontSize: 24
         }
     }
     return (

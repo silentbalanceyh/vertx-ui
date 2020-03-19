@@ -201,10 +201,8 @@ const _edition = (reference) => {
             $edition = propEdition;
         }
     }
-    /*
-     * 不可编辑，直接切断
-     */
     if (false === $edition) {
+        /* 不可编辑，直接切断 */
         return $edition;
     }
     if (reference.state.hasOwnProperty("$edition")) {
@@ -213,6 +211,23 @@ const _edition = (reference) => {
             Object.assign($edition, stateEdition);
         } else {
             $edition = stateEdition;
+        }
+    }
+    if (false === $edition) {
+        /* 不可编辑，直接切断 */
+        return $edition;
+    }
+    const {$inited = {}} = reference.props;
+    const {metadata} = $inited;
+    if (Abs.isEmpty(metadata)) {
+        $edition = {};
+    } else {
+        if (Abs.isObject(metadata) && metadata.hasOwnProperty("edition")) {
+            if (metadata.edition) {
+                $edition = {};
+            } else {
+                $edition = false;
+            }
         }
     }
     return $edition;

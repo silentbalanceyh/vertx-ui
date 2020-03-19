@@ -52,7 +52,6 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     } else {
         const $rest = Abs.clone(rest);
         const {onChange, ...left} = $rest;
-
         return (
             <Checkbox {...left} onChange={event => {
                 // 解决特殊的 BUG，主要是单处理

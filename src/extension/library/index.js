@@ -12,6 +12,7 @@ import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
 import Jsx from './jsx';
+import Graphic from './graphic';
 
 import Ux from 'ux';
 
@@ -21,6 +22,7 @@ const exported = {
      * 新的Api处理
      */
     ...Sex,
+    ...Graphic,
     /*
      * 外置绑定，执行单个 fabric
      * et类的事件方法集合

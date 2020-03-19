@@ -97,7 +97,7 @@
                                             "metadata": "fields,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormField",
-                                                "dialog": "字段设置,保存,关闭,false,800,true,$opSaveField",
+                                                "dialog": "字段设置,保存,关闭,false,900,true,$opSaveField",
                                                 "op": {
                                                     "add": "$opShowField"
                                                 },
@@ -186,7 +186,7 @@
                                             "metadata": "keys,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormKey",
-                                                "dialog": "键设置,保存,关闭,false,640,true,$opSaveKey",
+                                                "dialog": "键设置,保存,关闭,false,900,true,$opSaveKey",
                                                 "op": {
                                                     "add": "$opShowKey"
                                                 },

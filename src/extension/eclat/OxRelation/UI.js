@@ -1,6 +1,7 @@
 import React from 'react';
 import Ex from 'ex';
 import {ExRelation} from "ei";
+import OxAnchor from '../OxAnchor/UI';
 import Op from './Op';
 
 class Component extends React.PureComponent {
@@ -28,10 +29,17 @@ class Component extends React.PureComponent {
                  */
                 inherit.$definition = $definition;
             }
+            /*
+             * $column render for code = OxCi
+             */
+            attrs.$renders = {
+                sourceCode: OxAnchor,
+                targetCode: OxAnchor
+            };
             return (
                 <ExRelation {...inherit} {...attrs}/>
             );
-        }, Ex.parserOfColor("OxTab").component())
+        }, Ex.parserOfColor("OxRelation").component())
     }
 }
 

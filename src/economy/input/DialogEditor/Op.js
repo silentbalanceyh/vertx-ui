@@ -95,7 +95,9 @@ const yiView = (reference, config) => {
     /*
      * executors 格式化，DialogEditor 专用
      */
-    state.$table = Ux.configTable(ref, table, {});
+    const $table = Ux.clone(table);
+    $table.columns = table.columns.filter(item => "EXECUTOR" !== item['$render']);
+    state.$table = Ux.configTable(ref, $table, {});
     state.$ready = true;
     reference.setState(state);
 };
@@ -112,46 +114,49 @@ const yiPage = (reference) => {
     }
 };
 const yuPage = (reference, virtualRef) => {
-    const prevValue = virtualRef.props.value;
-    const curValue = reference.props.value;
-    /*
-     * 发生改变的时候操作
-     */
-    if (prevValue !== curValue) {
+    const {readOnly = false} = reference.props;
+    if (!readOnly) {
+        const prevValue = virtualRef.props.value;
+        const curValue = reference.props.value;
         /*
-         * Form 处理
+         * 发生改变的时候操作
          */
-        const ref = Ux.onReference(reference, 1);
-        const {form} = ref.props;
-        /*
-         * 是否操作过（未操作就是重置状态）
-         */
-        const isTouched = form.isFieldsTouched();
-        if (isTouched) {
-
-        } else {
+        if (prevValue !== curValue) {
             /*
-             * 重置表单
+             * Form 处理
              */
-            const {initialValue = []} = reference.state;
-            const {onChange, id} = reference.props;
-            if (Ux.isFunction(onChange)) {
+            const ref = Ux.onReference(reference, 1);
+            const {form} = ref.props;
+            /*
+             * 是否操作过（未操作就是重置状态）
+             */
+            const isTouched = form.isFieldsTouched();
+            if (isTouched) {
+
+            } else {
                 /*
-                 * 初始化表单
+                 * 重置表单
                  */
-                reference.setState({data: initialValue});
-                if (0 < initialValue.length) {
+                const {initialValue = []} = reference.state;
+                const {onChange, id} = reference.props;
+                if (Ux.isFunction(onChange)) {
                     /*
-                     * 编辑重置
+                     * 初始化表单
                      */
-                    const state = {};
-                    state[id] = initialValue;
-                    Ux.formHits(ref, state);
-                } else {
-                    /*
-                     * 添加重置
-                     */
-                    Ux.formReset(ref, [id])
+                    reference.setState({data: initialValue});
+                    if (0 < initialValue.length) {
+                        /*
+                         * 编辑重置
+                         */
+                        const state = {};
+                        state[id] = initialValue;
+                        Ux.formHits(ref, state);
+                    } else {
+                        /*
+                         * 添加重置
+                         */
+                        Ux.formReset(ref, [id])
+                    }
                 }
             }
         }

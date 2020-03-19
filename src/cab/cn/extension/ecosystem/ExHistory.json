@@ -4,12 +4,11 @@
         "size": "small",
         "columns":[
             {
-                "metadata":"fieldName,系统名称",
+                "metadata":"fieldAlias,属性名",
                 "style":{
                     "color":"#27408B"
                 }
             },
-            "fieldAlias,属性名",
             {
                 "metadata":"fieldType,类型,MAPPING",
                 "$mapping": {
@@ -35,13 +34,15 @@
                 "metadata":"valueOld,旧值,DICT",
                 "$config":{
                     "field":"fieldName"
-                }
+                },
+                "className":"value-column"
             },
             {
                 "metadata":"valueNew,新值,DICT",
                 "$config":{
                     "field":"fieldName"
-                }
+                },
+                "className":"value-column"
             }
         ]
     },

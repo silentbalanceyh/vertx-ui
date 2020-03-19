@@ -1,20 +1,10 @@
 // ------ 绘图专用组件 ------
-// export {default as FormDesigner} from './backup/o-designer/FormDesigner/UI';
 // ------ 新版使用Editor替换原始的Designer
-
 // -------------------------------  还在实验
 export {default as RichEditor} from './input/RichEditor/UI';
 export {default as BraftEditor} from './input/BraftEditor/UI';
 export {default as TeamSelector} from './input/TeamSelector/UI';
-export {default as KoniEditor} from './designer/Koni/UI';
-export {default as AttrTree} from './designer/AttrTree/UI';
-export {default as AttrSetter} from './designer/AttrSetter/UI';
-export {default as MarkdownViewer} from './designer/Markdown/UI';
-export {default as DebugMonitorTool} from './designer/MonitorTool/UI';
 
-// export {default as TreeTable} from './component/TreeTable/UI';
-
-// export {default as HelpCard} from './container/HelpCard/UI';
 // -------------------------------  表单专用
 export {default as PageCard} from './container/PageCard/UI';
 
@@ -61,19 +51,18 @@ export {default as ColumnUser} from './action/ColumnUser/UI';
 // -------------------------------  重新命名过的组件
 /*
  * 新：Dialog
- * 旧：DynamicDialog
+ * 新：Navigation
  */
 export {default as Dialog} from './container/Dialog/UI';
-export {default as DynamicDialog} from './container/Dialog/UI';
+export {default as Navigation} from './container/Navigation/UI';
 export {default as Rectangle} from './container/Rectangle/UI';
 /*
- * 新：Navigation
  * 旧：PagerHeader
+ * 旧：DynamicDialog
  */
-export {default as Navigation} from './container/Navigation/UI';
+export {default as DynamicDialog} from './container/Dialog/UI';
 export {default as PagerHeader} from './container/Navigation/UI';
-// export {default as ComplexList} from './component/ComplexList/UI';
-// export {default as TreeContainer} from './container/TreeContainer/UI';
-// export {default as TabList} from './component/TabList/UI';
-// export {default as DialogList} from './component/DialogList/UI';
-// export {default as TreeList} from './component/TreeList/UI';
+/*
+ * 编辑器
+ */
+export {default as EditorNexus} from './designer/Nexus/UI';

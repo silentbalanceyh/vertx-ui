@@ -1,5 +1,6 @@
 import Plugin from 'plugin';
 import U from 'underscore';
+import Ux from 'ux';
 
 export default (reference, options = {}, key) => {
     const pluginKey = options[key];
@@ -22,5 +23,13 @@ export default (reference, options = {}, key) => {
                 return pluginFn;
             }
         }
+    } else {
+        /*
+         * 普通插件专用
+         * metadata正式启用：
+         * edition = true
+         * deletion = true
+         */
+        return Ux.pluginMetadata;
     }
 }

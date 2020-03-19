@@ -12,6 +12,7 @@ import TEXT from './I.fn.cell.text';
 import USER from './I.fn.cell.user';
 import DICT from './I.fn.cell.dict';
 import ARRAY from './I.fn.cell.array';
+import RENDERS from './I.fn.cell.renders';
 
 export default {
     CURRENCY,
@@ -51,6 +52,7 @@ export default {
     TEXT,
     USER,
     ARRAY,
+    RENDERS,
     supports: [
         "TEXT",
         "PURE",

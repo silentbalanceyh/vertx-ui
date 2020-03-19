@@ -36,10 +36,19 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
 
 const _setEnabled = (calculated, item = {}, reference) => {
     if (calculated.edition && "fnEdit" === item.executor) {
+        /*
+         * 编辑按钮
+         */
         return true;
     } else if (calculated.deletion && "fnDelete" === item.executor) {
+        /*
+         * 删除按钮
+         */
         return true;
     } else {
+        /*
+         * 后期扩展
+         */
         return false;
     }
 };
@@ -73,22 +82,19 @@ export default (reference, config, executor = {}) => (text, record) => {
         /*
          * 追加 object 类型的 options
          */
-        {
-            /*
-            * 从 metadata中抽取想要的内容
-             */
-            if (rowKey && "string" !== typeof item) {
-                const option = {};
-                option.key = `link-${rowKey}`;
-                option.text = Ut.formatExpr(item.text, record);
-                // Executor 处理
+        if (rowKey && "string" !== typeof item) {
+            const option = {};
+            option.key = `link-${rowKey}`;
+            option.text = Ut.formatExpr(item.text, record);
+            // Executor 处理
+            option.enabled = _setEnabled(calculated, item, reference);
+            if (option.enabled) {
                 _setExecutor(option, item, {
                     text, record,
                     config,
                     executor,
                     reference,
                 });
-                option.enabled = _setEnabled(calculated, item, reference);
                 options.push(option);
             }
         }

@@ -20,9 +20,10 @@ class Component extends React.PureComponent {
         style.paddingTop = $top ? $top : header + "px";
         style.height = $height ? $height : "100%";
         style.marginBottom = style.paddingTop;
+        const tip = $tip ? $tip : $hoc._("loading");
         return (
             <div className="vi-content" style={style}>
-                <Spin size="large" tip={$tip ? $tip : $hoc._("loading")}/>
+                <Spin size="large" tip={tip}/>
             </div>
         );
     }

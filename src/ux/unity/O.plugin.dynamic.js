@@ -1,12 +1,40 @@
 import Abs from '../abyss';
 
+const pluginMetadata = (record = {}, reference) => {
+    const {metadata} = record;
+    const status = {};
+    if (Abs.isEmpty(metadata)) {
+        /*
+         * 没有 metadata（metadata为 null 或 empty
+         */
+        status.edition = true;
+        status.deletion = true;
+    } else {
+        /*
+         * 没有时也使用 true
+         */
+        if (metadata.hasOwnProperty('edition')) {
+            status.edition = metadata.edition;
+        } else {
+            status.edition = true;
+        }
+        if (metadata.hasOwnProperty('deletion')) {
+            status.deletion = metadata.deletion;
+        } else {
+            status.deletion = true;
+        }
+    }
+    return status;
+};
 const pluginFn = (reference, name = "", record = {}) => {
     if (name) {
         const {$plugins = {}} = reference.props;
         const executor = $plugins[name];
         if (executor && Abs.isFunction(executor)) {
             return executor(record, reference);
-        } else return false; /* 插件函数有问题 */
+        } else {
+            return pluginMetadata(record, reference);
+        }
     } else return false; /* 没设置名称 */
 };
 const pluginEdition = (reference) => {
@@ -102,6 +130,10 @@ export default {
      * 检查 edition
      */
     pluginEdition,
+    /*
+     * 核心插件函数
+     */
+    pluginMetadata,
     /*
      * 表单编辑计算
      * 检查 edition

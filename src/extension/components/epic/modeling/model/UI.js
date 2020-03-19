@@ -1,7 +1,6 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import Op from './Op';
 import {ExComplexList} from "ei";
 
 import {ModelAdd as FormAdd, ModelEdit as FormEdit, ModelFilter as FormFilter,} from "./form";
@@ -12,7 +11,6 @@ import {ModelAdd as FormAdd, ModelEdit as FormEdit, ModelFilter as FormFilter,} 
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiPage(this);
         Ex.yiStandard(this);
     }
 

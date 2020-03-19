@@ -52,6 +52,9 @@ export {default as ExCategory} from './ExCategory/UI';
 // ------------- 菜单选择器
 /* （Dashboard专用）*/
 export {default as ExApps} from './ExApps/UI';
+
+// ------------- 拓扑图定义
+export {default as ExDrawerRelation} from './ExDrawerRelation/UI';
 /*
  * 日志颜色分类
  * 私有：

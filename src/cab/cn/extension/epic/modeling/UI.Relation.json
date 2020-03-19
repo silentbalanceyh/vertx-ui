@@ -1,0 +1,32 @@
+{
+    "_assist": {
+        "resource.models": {
+            "uri": "/api/model/by/sigma"
+        },
+        "graphic.nodes":{
+            "uri":"/api/type/categories/:type",
+            "magic":{
+                "type":"FIX:ci.type"
+            }
+        }
+    },
+    "_title":{
+        "left": "只选二级模型",
+        "expand": "重选模型",
+        "right": {
+            "message": "关系管理",
+            "description":[
+                "请在右边列表中选择您要定义关系的模型！",
+                "关系模型中，红色为二级模型，蓝色为三级模型。",
+                "在管理关系过程中，每一种类型只能管理一种关系（上游、下游）！",
+                "关系定义会影响真实的关系信息。",
+                "如果选择了二级关系模型定义关系，那么它会包含它所有子类的三级模型！"
+            ],
+            "type":"success"
+        },
+        "header":{
+            "name": "正在管理关系的模型",
+            "identifier":"模型的系统标识"
+        }
+    }
+}

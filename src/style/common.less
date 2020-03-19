@@ -28,7 +28,7 @@
     background: -o-linear-gradient(left, @theme-main 0%, white 100%);
     background: -ms-linear-gradient(left, @theme-main 0%, white 100%);
     background: linear-gradient(to right, @theme-main 0%, white 100%);
-    box-shadow: 3px 3px 3px @color-title-font;
+    // box-shadow: 3px 3px 3px @color-title-font;
 }
 
 .ux-readonly {
@@ -83,10 +83,8 @@
 }
 
 .ux-group {
-    float: left !important;
-
-    button {
-        margin-right: 0 !important;
+    button[disabled] {
+        top: 1px;
     }
 }
 

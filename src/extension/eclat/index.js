@@ -18,6 +18,7 @@ import OxForm from './OxForm/UI';
 import OxTopology from './OxTopology/UI';
 import OxHistory from './OxHistory/UI';
 import OxRelation from './OxRelation/UI';
+import OxAnchor from './OxAnchor/UI';
 /*
  * eclat 中的所有组件都是配置过程中使用的组件
  * 1）这些组件只能出现在配置文件中，不可直接使用
@@ -29,6 +30,7 @@ export default {
     OxTopology,
     OxHistory,
     OxRelation,
+    OxAnchor,
     // OxAdmin -> ExAdmin 连接，OxAdmin属于可配置
     OxAdmin: ExAdmin,
     // OxCard -> PageCard 连接
