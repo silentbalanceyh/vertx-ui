@@ -1,10 +1,10 @@
-import {guid} from '../../../utils';
-import global from '../../../common/global';
-import {EditorCommand, GraphMode, GraphType, ItemType} from '../../../common/constants';
-import {Behavior, GraphEvent, NodeModel} from '../../../common/interfaces';
+import {guid} from '../../utils';
+import global from '../../common/global';
+import {EditorCommand, GraphMode, GraphType, ItemType} from '../../common/constants';
+import {Behavior, GraphEvent, NodeModel} from '../../common/interfaces';
 import {G} from '@antv/g6/types/g';
-import commandManager from '../../../common/commandManager';
-import behaviorManager from '../../../common/behaviorManager';
+import commandManager from '../../common/commandManager';
+import behaviorManager from '../../common/behaviorManager';
 import * as isArray from "lodash/isArray";
 
 interface DragAddNodeBehavior extends Behavior {

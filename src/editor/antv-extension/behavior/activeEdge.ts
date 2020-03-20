@@ -1,6 +1,6 @@
-import {GraphType} from '../../../common/constants';
-import {Behavior, GraphEvent} from '../../../common/interfaces';
-import behaviorManager from '../../../common/behaviorManager';
+import {GraphType} from '../../common/constants';
+import {Behavior, GraphEvent} from '../../common/interfaces';
+import behaviorManager from '../../common/behaviorManager';
 
 interface ActiveEdgeBehavior extends Behavior {
     setAllItemStates(e: GraphEvent): void;

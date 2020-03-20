@@ -1,14 +1,14 @@
 import {ItemState} from "../../common/constants";
 
 export default {
-    size: [60, 60],
+    size: [80, 80],
     wrapperStyle: {
         /* 根据环境变量更改主题颜色 */
         fill: process.env.CSS_COLOR,
         radius: 8,
     },
     contentStyle: {
-        fill: '#E9F7FF',
+        fill: '#F5F5F5',
         radius: 6,
     },
     labelStyle: {

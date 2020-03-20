@@ -2,6 +2,7 @@ import './base';
 import './redo';
 import './undo';
 import './add';
+import './save';
 import './remove';
 import './update';
 import './copy';

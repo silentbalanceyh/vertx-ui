@@ -97,7 +97,6 @@ class Graph extends React.Component<GraphProps, GraphState> {
             ...GraphCanvasEvent,
             ...GraphCustomEvent,
         };
-
         (Object.keys(events) as GraphReactEvent[]).forEach(event => {
             if (typeof props[event] === 'function') {
                 graph.on(events[event], props[event]);
@@ -121,7 +120,6 @@ class Graph extends React.Component<GraphProps, GraphState> {
 
     render() {
         const {containerId, children} = this.props;
-
         return (
             <div id={containerId} {...pick(this.props, ['className', 'style'])}>
                 {children}

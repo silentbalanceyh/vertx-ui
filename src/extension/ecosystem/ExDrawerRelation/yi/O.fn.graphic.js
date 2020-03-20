@@ -7,11 +7,14 @@ export default (reference) => {
         minZoom: 1,
         maxZoom: 1,
         /* 高度设置 */
-        height: Ux.toHeight(146),
+        height: Ux.toHeight(168),
         /* 开启动画 */
         animate: true,
         defaultNode: {
-            shape: Cv.SHAPE
+            shape: Cv.NODE_SHAPE
+        },
+        defaultEdge: {
+            shape: Cv.LINE_SHAPE
         }
     }
 };

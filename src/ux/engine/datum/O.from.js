@@ -12,8 +12,12 @@ import Ele from '../../element';
  */
 const fromHoc = (reference = {}, key = "") => {
     E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
-    const {$hoc} = reference.state;
-    return ($hoc) ? $hoc._(key) : null;
+    if (reference) {
+        const {$hoc} = reference.state;
+        return ($hoc) ? $hoc._(key) : null;
+    } else {
+        console.error("传入第一个参数 reference 为 null 或 undefined");
+    }
 };
 const parseDatum = (target, key) => {
     const targetKey = target[`$t_${key}`] || target[`$a_${key}`];

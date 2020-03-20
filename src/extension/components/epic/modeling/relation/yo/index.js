@@ -6,7 +6,7 @@ import layout from './O.layout';
 const yiModel = (reference, state) => {
     const models = Ux.onDatum({state}, "resource.models");
     const category = Ux.onDatum({state}, "graphic.nodes");
-    state.$models = Ex.g6Model(models, category);
+    state.$models = Ex.g6Models(models, category);
     state.$switcher = false;
     state.$selected = undefined;
     state.$expand = false;

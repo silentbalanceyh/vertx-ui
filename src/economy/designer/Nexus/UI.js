@@ -1,67 +1,31 @@
 import React from 'react';
-import Editor, {Flow, Item, ItemPanel} from "editor";
+import Editor, {ContextMenu} from "editor";
 import './Cab.less';
-import {Tooltip} from 'antd';
-import {Grid} from '@antv/g6/build/plugins';
 
-const initData = {
-    // 点集
-    nodes: [{
-        id: 'node1', // 节点的唯一标识
-        label: '起始点' // 节点文本
-    }, {
-        id: 'node2',
-        label: '目标点'
-    }],
-    // 边集
-    edges: [
-        // 表示一条从 node1 节点连接到 node2 节点的边
-        {
-            source: 'node1',  // 起始点 id
-            target: 'node2',  // 目标点 id
-            label: '我是连线'   // 边的文本
-        }
-    ]
-};
+import renderItem from './Web.Item';
+import renderGraphic from './Web.Graphic';
+import renderCommand from './Web.Command';
 
 class Component extends React.PureComponent {
 
     render() {
-        const {items = [], config = {}, graphConfig = {}} = this.props;
-        /*
-         * 网格插件
-         */
-        const grid = new Grid();
-        const $graphConfig = {
-            ...graphConfig,
-            plugins: [grid],
-            layout: {
-                type: 'fruchterman',
-                preventOverlap: true,
-                linkDistance: 144
-            }
-        };
+        const {
+            context = {},
+            config = {},
+        } = this.props;
         return (
-            <Editor className={"ex-nexus"}>
+            <Editor className={"ex-nexus"} command={config.command}>
                 <div className={"ex-nexus-hd"}>
-                    <ItemPanel className={"box"} style={{
-                        maxHeight: config.maxHeight ? config.maxHeight : 600
-                    }}>
-                        {items.map(each => {
-                            return (
-                                <Item {...each.item}>
-                                    <Tooltip title={each.text} placement={"leftTop"}>
-                                        <img alt={each.img.alt} {...each.img}/>
-                                        <label>{each.text}</label>
-                                    </Tooltip>
-                                </Item>
-                            )
-                        })}
-                    </ItemPanel>
+                    {renderItem(this)}
                 </div>
-                <Flow className={"ex-nexus-bd"}
-                      data={initData}
-                      graphConfig={$graphConfig}/>
+                <div className={"ex-nexus-bd"}>
+                    <div className={"toolbar"}>
+                        {renderCommand(this)}
+                    </div>
+                    {renderGraphic(this)}
+                </div>
+                {context.node ? (<ContextMenu renderContent={context.node} type={"node"}/>) : false}
+                {context.edge ? (<ContextMenu renderContent={context.edge} type={"edge"}/>) : false}
             </Editor>
         );
     }

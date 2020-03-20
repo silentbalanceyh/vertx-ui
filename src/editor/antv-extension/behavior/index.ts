@@ -1,4 +1,4 @@
 import './activeEdge';
 import './dragAddEdge';
-import './dragAddNode';
+// import './dragAddNode';
 import './hoverAnchor';

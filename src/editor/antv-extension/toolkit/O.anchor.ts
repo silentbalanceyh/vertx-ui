@@ -1,5 +1,5 @@
-import globalStyle from '../../components/Flow/common/globalStyle';
-import FSM, {StateTable} from '../../components/Flow/common/stateMachine';
+import FSM, {StateTable} from './O.fsm';
+import Style from '../style';
 import {NodeModel} from '../../common/interfaces';
 
 type Events = 'hoverNode' | 'leaveNode' | 'enterAnchor' | 'leaveAnchor' | 'drag' | 'dragEnd';
@@ -11,7 +11,13 @@ interface ThisProps {
     getAnchorPoints: (model: NodeModel) => number[];
 }
 
-const {anchorPointStyle, anchorPointHoverStyle, anchorHotsoptActivedStyle, anchorHotsoptStyle, zIndex} = globalStyle;
+const {
+    anchorPointStyle,
+    anchorPointHoverStyle,
+    anchorHotsoptActivedStyle,
+    anchorHotsoptStyle,
+    zIndex
+} = Style.STYLE_FLOW_NODE;
 
 interface Item extends G6.Item {
     _anchorFSM: FSM<States, Events>;
@@ -112,11 +118,10 @@ function drawBanAnchor(this: ThisProps, model: NodeModel, group) {
             },
             endNode: {x: width * x - width / 2 - 6, y: height * y - height / 2 - 6},
         };
-        const shape = group.addShape('image', {
+        return group.addShape('image', {
             className: 'banAnchor',
             attrs: {
-                img:
-                    'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xLjUxNSAxLjE3Mmw1LjY1NyA1LjY1Nm0wLTUuNjU2TDEuNTE1IDYuODI4IiBzdHJva2U9IiNGRjYwNjAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PC9zdmc+',
+                img: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iOSIgaGVpZ2h0PSI4IiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxwYXRoIGQ9Ik0xLjUxNSAxLjE3Mmw1LjY1NyA1LjY1Nm0wLTUuNjU2TDEuNTE1IDYuODI4IiBzdHJva2U9IiNGRjYwNjAiIHN0cm9rZS13aWR0aD0iMS42IiBmaWxsPSJub25lIiBzdHJva2UtbGluZWNhcD0ic3F1YXJlIi8+PC9zdmc+',
                 width: 16,
                 height: 16,
                 ...(attrs[keyShape.baseType] || attrs['flowNode']),
@@ -124,7 +129,7 @@ function drawBanAnchor(this: ThisProps, model: NodeModel, group) {
             index,
             zIndex: zIndex.anchorPoint,
         });
-        return shape;
+        ;
     });
 }
 
@@ -182,4 +187,6 @@ function drawAnchor(this: ThisProps, model, group) {
     });
 }
 
-export {handleAnchor};
+export default {
+    handleAnchor
+};

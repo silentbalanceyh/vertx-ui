@@ -24,7 +24,7 @@ commandManager.register('undo', {
 
     execute(graph) {
         const {commandQueue, commandIndex} = commandManager;
-
+        console.info(commandQueue, commandIndex);
         commandQueue[commandIndex - 1].undo(graph);
 
         commandManager.commandIndex -= 1;

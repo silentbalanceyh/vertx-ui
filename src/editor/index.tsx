@@ -5,9 +5,11 @@ import './antv-extension';
 
 import * as Util from './utils';
 import {CustomEdge, CustomNode, CustomShape} from './common/interfaces';
+
 import Editor from './components/Editor';
 import Flow from './components/Flow';
 import Mind from './components/Mind';
+import Topology from "./components/Topology";
 import Command from './components/Command';
 import ItemPanel, {Item} from './components/ItemPanel';
 import DetailPanel from './components/DetailPanel';
@@ -27,6 +29,7 @@ export {
     G6,
     Util,
     Flow,
+    Topology,
     Mind,
     Command,
     Item,
@@ -46,7 +49,7 @@ export {
     behaviorManager,
     CustomEdge,
     CustomShape,
-    CustomNode
+    CustomNode,
 };
 
 export default Editor;

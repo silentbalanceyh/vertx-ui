@@ -36,7 +36,7 @@ const _sortTree = (categoryData) => {
  * 1）模型中 metadata.relation = true
  * 2）分类中如果没有 metadata.image 就直接使用 identifier 计算，如果有，则直接 metadata.image
  */
-export default (models = [], category = []) => {
+const g6Models = (models = [], category = []) => {
     /*
      * 模型列表处理
      */
@@ -54,4 +54,7 @@ export default (models = [], category = []) => {
             each.image = fnImage(each.data);
             return each;
         });
+};
+export default {
+    g6Models,
 }

@@ -1,7 +1,7 @@
-import {guid} from '../../../utils';
-import {GraphCustomEvent, GraphType} from '../../../common/constants';
-import {Behavior, GraphEvent} from '../../../common/interfaces';
-import behaviorManager from '../../../common/behaviorManager';
+import {guid} from '../../utils';
+import {GraphCustomEvent, GraphType} from '../../common/constants';
+import {Behavior, GraphEvent} from '../../common/interfaces';
+import behaviorManager from '../../common/behaviorManager';
 import {Item, Node} from '@antv/g6';
 
 type LinkRule = {
@@ -130,19 +130,30 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
                     graph.setItemState(n, 'limitLink', true);
                 graph.setItemState(n, 'addingEdge', true);
             } else graph.setItemState(n, 'addingSource', true);
-        });
 
+            /* 激活过后可重写 limitLink 限制连接进入，每一个 */
+            graph.emit(GraphCustomEvent.onAfterEachAnchorActive, {
+                source: ev.item,
+                target: n,
+                graph
+            });
+        });
         const point = {x: ev.x, y: ev.y};
         const model = node.getModel();
         // 点击节点，触发增加边
         if (!this.addingEdge && !this.edge) {
-            const item = {
+            const edge = graph.get('defaultEdge');
+            const item: any = {
                 id: guid(),
-                shape: edgeType,
                 source: model.id,
                 target: point,
                 sourceAnchor: ev.target.get('index'),
             };
+            if (edge.shape) {
+                item.shape = edge.shape;
+            } else {
+                item.shape = edgeType;
+            }
             this.edge = graph.addItem('edge', item);
             this.addingEdge = true;
         }
@@ -152,15 +163,25 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
         if (this.addingEdge && this.edge) {
             const point = {x: ev.x, y: ev.y};
             // 鼠标放置到一个锚点上时，更新边
+            const edge = graph.get("defaultEdge");
+            const config: any = {};
+            if (edge.shape) config.shape = edge.shape;
             // 否则只更新线的终点位置
             if (this.addEdgeCheck.call(this, ev, 'in') && this.notSelf(ev)) {
                 const node = ev.item;
                 const model = node.getModel();
-                graph.updateItem(this.edge, {
+                /* 拖拽过程中找到了点 */
+                Object.assign(config, {
                     targetAnchor: ev.target.get('index'),
-                    target: model.id,
+                    target: model.id
                 });
-            } else graph.updateItem(this.edge, {target: point});
+                graph.updateItem(this.edge, config);
+            } else {
+                /* 拖拽过程中找不到点 */
+                Object.assign(config, {target: point});
+                graph.updateItem(this.edge, config);
+            }
+            ;
         }
     },
     onMouseup(ev) {
@@ -203,14 +224,16 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
             }
             graph.emit(GraphCustomEvent.onBeforeConnect, {
                 edge: this.edge,
+                graph
             });
             graph.setItemState(this.edge, 'drag', false);
             graph.updateItem(this.edge, {
                 targetAnchor: ev.target.get('index'),
-                target: model.id,
+                target: model.id
             });
             graph.emit(GraphCustomEvent.onAfterConnect, {
                 edge: this.edge,
+                graph
             });
             this.edge = null;
             this.addingEdge = false;

@@ -1,6 +1,6 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
-import delay from 'lodash/delay';
+import * as ReactDOM from 'react-dom';
+import * as delay from 'lodash/delay';
 import global from '../../common/global';
 import {GraphNodeEvent} from '../../common/constants';
 import {EditorContextProps, withEditorContext} from '../../components/EditorContext';

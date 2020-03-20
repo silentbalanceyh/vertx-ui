@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import * as G6 from '@antv/g6';
 import {getSelectedNodes, isMind} from '../../utils';
 import global from '../../common/global';

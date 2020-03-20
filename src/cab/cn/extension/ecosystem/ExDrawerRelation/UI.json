@@ -1,0 +1,21 @@
+{
+    "_context":{
+        "node-delete": "删除节点",
+        "edge-delete": "删除连接"
+    },
+    "_window":"设置关系属性,保存,撤销,false,640,true,$opSaveEdge",
+    "_modal":{
+        "error":{
+            "forbidden": "对不起，父子级节点在目前版本中不可创建任何关系！",
+            "direction": "对不起，关系设置中只能设置选择模型和其他模型之间的关系！",
+            "unique": "对不起，关系管理中两个模型之间只能创建一条关系！"
+        }
+    },
+    "_designer":{
+        "commandLabel":{
+            "save":"保存",
+            "redo":"重做",
+            "undo":"撤销"
+        }
+    }
+}

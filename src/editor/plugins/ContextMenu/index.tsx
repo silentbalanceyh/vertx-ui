@@ -1,5 +1,5 @@
 import * as React from 'react';
-import ReactDOM from 'react-dom';
+import * as ReactDOM from 'react-dom';
 import {clearSelectedState} from '../../utils';
 import global from '../../common/global';
 import {GraphCanvasEvent, GraphCommonEvent, GraphEdgeEvent, GraphNodeEvent, ItemState} from '../../common/constants';
@@ -83,7 +83,11 @@ class ContextMenu extends React.Component<ContextMenuProps, ContextMenuState> {
 
         this.setState({
             visible: true,
-            content: renderContent(item, position, this.hideContextMenu),
+            content: renderContent(item, {
+                ...position,
+                /* 拿到图引用，方便外层操作图 */
+                graph,
+            }, this.hideContextMenu),
         });
     };
 

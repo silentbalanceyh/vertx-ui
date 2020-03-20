@@ -8,7 +8,7 @@ import {FLOW_CONTAINER_ID, GraphType} from '../../common/constants';
 import {FlowData, GraphEvent, GraphReactEventProps} from '../../common/interfaces';
 import behaviorManager from '../../common/behaviorManager';
 import Graph from '../Graph';
-import './behavior';
+import '../../antv-extension/behavior';
 
 interface FlowProps extends Partial<GraphReactEventProps> {
     style?: React.CSSProperties;

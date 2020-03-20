@@ -9,10 +9,10 @@ import {guid} from "../../utils";
 
 const nodeAdd = (graph: G6.Graph, shape: G.Shape) => {
     if (Cond.isDrag(graph)) {
-        let {x, y, width, height} = shape.getBBox();
+        let {x, y} = shape.getBBox();
         const model: NodeModel = global.component.itemPanel.model;
-        x += width / 2;
-        y += height / 2;
+        // x += width / 2;
+        // y += height / 2;
 
         shape.remove(true);
         graph.paint();

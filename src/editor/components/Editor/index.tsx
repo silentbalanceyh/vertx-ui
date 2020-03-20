@@ -10,6 +10,7 @@ import {EditorContext, EditorContextProps, EditorPrivateContext, EditorPrivateCo
 interface EditorProps {
     style?: React.CSSProperties;
     className?: string;
+    command?: any;
     [EditorEvent.onBeforeExecuteCommand]?: (e: CommandEvent) => void;
     [EditorEvent.onAfterExecuteCommand]?: (e: CommandEvent) => void;
 }
@@ -139,13 +140,20 @@ class Editor extends React.Component<EditorProps, EditorState> {
         const {graph} = this.state;
 
         if (graph) {
-            commandManager.execute(graph, name, params);
+            /* 传入数据，直接传入和 command 对应的相关数据信息 */
+            const {command = {}} = this.props;
+            const normalized: any = params ? params : {};
+            if (command) {
+                normalized.executor = command[name];
+            }
+            commandManager.execute(graph, name, normalized);
         }
     };
 
     render() {
         const {children} = this.props;
         const {graph, setGraph, executeCommand} = this.state;
+
         return (
             <EditorContext.Provider
                 value={{

@@ -27,15 +27,30 @@ const exBaseNode: CustomNode = {
 
         this.drawContent(model, group);
         this.drawLabel(model, group);
+        this.drawIcon(model, group);
 
         return keyShape;
+    },
+
+    drawIcon(model, group) {
+        const {data = {}} = model;
+        if (data.icon) {
+            group.addShape('image', {
+                attrs: {
+                    x: 14,
+                    y: 3,
+                    width: 52,
+                    height: 52,
+                    img: data.icon
+                }
+            })
+        }
     },
 
     drawWrapper(model: NodeModel, group: G.Group) {
         const [width, height] = this.getSize(model);
         const {wrapperStyle} = this.getOptions(model);
-
-        const shape = group.addShape('rect', {
+        const config: any = {
             className: WRAPPER_CLASS_NAME,
             attrs: {
                 x: 0,
@@ -43,17 +58,15 @@ const exBaseNode: CustomNode = {
                 width,
                 height: height + WRAPPER_BORDER_WIDTH * 2,
                 ...wrapperStyle,
-            },
-        });
-
-        return shape;
+            }
+        };
+        return group.addShape('rect', config);
     },
 
     drawContent(model: NodeModel, group: G.Group) {
         const [width, height] = this.getSize(model);
         const {contentStyle} = this.getOptions(model);
-
-        return group.addShape('rect', {
+        const config: any = {
             className: CONTENT_CLASS_NAME,
             attrs: {
                 x: 0,
@@ -62,18 +75,25 @@ const exBaseNode: CustomNode = {
                 height,
                 ...contentStyle,
             },
-        });
+        };
+        return group.addShape('rect', config);
     },
 
     drawLabel(model: NodeModel, group: G.Group) {
         const [width, height] = this.getSize(model);
         const {labelStyle} = this.getOptions(model);
-
+        const {data = {}} = model;
+        let y;
+        if (data.icon) {
+            y = height / 5 * 4 + 3;
+        } else {
+            y = height / 2;
+        }
         return group.addShape('text', {
             className: LABEL_CLASS_NAME,
             attrs: {
                 x: width / 2,
-                y: height / 2,
+                y,
                 text: model.label,
                 ...labelStyle,
             },
