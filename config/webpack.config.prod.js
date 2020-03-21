@@ -14,6 +14,7 @@ const UglifyESPlugin = require('uglifyjs-webpack-plugin');
 const paths = require("./paths");
 // 自定义模块
 const modules = require("./modules");
+const plug = require('./plugins');
 const getClientEnvironment = require("./env");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -47,38 +48,11 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     ? // Making sure that the publicPath goes back to to build folder.
     {publicPath: Array(cssFilename.split("/").length).join("../")}
     : {};
-const pluginHtml = (env) => {
-    if (process.env.Z_4) {
-        const isWebpack4 = Boolean(process.env.Z_4);
-        if (isWebpack4) {
-            return new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw);
-        } else {
-            return new InterpolateHtmlPlugin(env.raw);
-        }
-    } else {
-        return new InterpolateHtmlPlugin(env.raw);
-    }
-};
-const pluginNonSource = [
-    path.resolve(path.join(__dirname, "../.awcache")),
-    path.resolve(path.join(__dirname, "../.storybook")),
-    path.resolve(path.join(__dirname, "../.cache")),
-    path.resolve(path.join(__dirname, "../.zero")),
-    path.resolve(path.join(__dirname, "../build")),
-    path.resolve(path.join(__dirname, "../config")),
-    path.resolve(path.join(__dirname, "../document")),
-    path.resolve(path.join(__dirname, "../node_modules")),
-    path.resolve(path.join(__dirname, "../public")),
-    path.resolve(path.join(__dirname, "../scripts")),
-    path.resolve(path.join(__dirname, "../shell")),
-    path.resolve(path.join(__dirname, "../stories")),
-    path.resolve(path.join(__dirname, "../storybook-static")),
-    path.resolve(path.join(__dirname, "../test")),
-];
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
 module.exports = {
+    mode: 'production',
     // Don't attempt to continue if there are any errors.
     bail: true,
     // We generate sourcemaps in production. This is slow but gives good results.
@@ -155,13 +129,13 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -180,7 +154,7 @@ module.exports = {
                     }
                 ],
                 include: paths.appSrc,
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -287,7 +261,7 @@ module.exports = {
                         "@babel/preset-react"
                     ],
                     cacheDirectory: true,
-                    exclude: pluginNonSource
+                    exclude: plug.pluginNonSource
                 }
             },
             // The notation here is somewhat confusing.
@@ -418,7 +392,7 @@ module.exports = {
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In production, it will be an empty string unless you specify "homepage"
         // in `package.json`, in which case it will be the pathname of that URL.
-        pluginHtml(env),
+        plug.pluginHtml(env),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
         // It is absolutely essential that NODE_ENV was set to production here.

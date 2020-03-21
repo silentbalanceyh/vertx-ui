@@ -1,0 +1,13 @@
+/.awcache
+/.storybook
+/.zero
+/build
+/config
+/document
+/node_modules
+/public
+/scripts
+/shell
+/stories
+/storybook-static
+/test

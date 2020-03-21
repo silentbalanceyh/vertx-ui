@@ -83,11 +83,10 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
     });
 
     ['SIGINT', 'SIGTERM'].forEach(function (sig) {
-        process
-            .on(sig, function () {
-                devServer.close();
-                process.exit();
-            });
+        process.on(sig, function () {
+            devServer.close();
+            process.exit();
+        });
     });
 }).catch(err => {
     if (err && err.message) {

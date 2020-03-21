@@ -3,7 +3,6 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
-const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
@@ -15,6 +14,7 @@ const getClientEnvironment = require("./env");
 const paths = require("./paths");
 // 自定义模块
 const modules = require("./modules");
+const plug = require('./plugins');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -27,36 +27,9 @@ const publicUrl = "";
 const env = getClientEnvironment(publicUrl);
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
-const pluginHtml = (env) => {
-    if (process.env.Z_4) {
-        const isWebpack4 = Boolean(process.env.Z_4);
-        if (isWebpack4) {
-            return new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw);
-        } else {
-            return new InterpolateHtmlPlugin(env.raw);
-        }
-    } else {
-        return new InterpolateHtmlPlugin(env.raw);
-    }
-};
-const pluginNonSource = [
-    path.resolve(path.join(__dirname, "../.awcache")),
-    path.resolve(path.join(__dirname, "../.storybook")),
-    path.resolve(path.join(__dirname, "../.cache")),
-    path.resolve(path.join(__dirname, "../.zero")),
-    path.resolve(path.join(__dirname, "../build")),
-    path.resolve(path.join(__dirname, "../config")),
-    path.resolve(path.join(__dirname, "../document")),
-    path.resolve(path.join(__dirname, "../node_modules")),
-    path.resolve(path.join(__dirname, "../public")),
-    path.resolve(path.join(__dirname, "../scripts")),
-    path.resolve(path.join(__dirname, "../shell")),
-    path.resolve(path.join(__dirname, "../stories")),
-    path.resolve(path.join(__dirname, "../storybook-static")),
-    path.resolve(path.join(__dirname, "../test")),
-];
 // The production configuration is different and lives in a separate file.
 module.exports = {
+    mode: 'development',
     // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
     // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
     devtool: "cheap-module-source-map",
@@ -166,13 +139,13 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -191,7 +164,7 @@ module.exports = {
                     }
                 ],
                 include: paths.appSrc,
-                exclude: pluginNonSource
+                exclude: plug.pluginNonSource
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -302,7 +275,7 @@ module.exports = {
                         "@babel/preset-typescript"
                     ],
                     cacheDirectory: true,
-                    exclude: pluginNonSource
+                    exclude: plug.pluginNonSource
                 }
             },
             // "postcss" loader applies autoprefixer to our CSS.
@@ -386,7 +359,7 @@ module.exports = {
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In development, this will be an empty string.
-        pluginHtml(env),
+        plug.pluginHtml(env),
         // Add module names to factory functions so they appear in browser profiler.
         new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
