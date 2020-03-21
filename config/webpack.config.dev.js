@@ -39,6 +39,22 @@ const pluginHtml = (env) => {
         return new InterpolateHtmlPlugin(env.raw);
     }
 };
+const pluginNonSource = [
+    path.resolve(path.join(__dirname, "../.awcache")),
+    path.resolve(path.join(__dirname, "../.storybook")),
+    path.resolve(path.join(__dirname, "../.cache")),
+    path.resolve(path.join(__dirname, "../.zero")),
+    path.resolve(path.join(__dirname, "../build")),
+    path.resolve(path.join(__dirname, "../config")),
+    path.resolve(path.join(__dirname, "../document")),
+    path.resolve(path.join(__dirname, "../node_modules")),
+    path.resolve(path.join(__dirname, "../public")),
+    path.resolve(path.join(__dirname, "../scripts")),
+    path.resolve(path.join(__dirname, "../shell")),
+    path.resolve(path.join(__dirname, "../stories")),
+    path.resolve(path.join(__dirname, "../storybook-static")),
+    path.resolve(path.join(__dirname, "../test")),
+];
 // The production configuration is different and lives in a separate file.
 module.exports = {
     // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
@@ -137,7 +153,7 @@ module.exports = {
                         options: {
                             useTranspileModule: true,
                             forceIsolatedModules: true,
-                            useCache: true,
+                            useCache: false,
                             useBabel: true,
                             babelOptions: {
                                 "babelrc": false, /* Important line */
@@ -150,17 +166,13 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: [
-                    path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                exclude: pluginNonSource
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: [
-                    path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                exclude: pluginNonSource
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -178,7 +190,8 @@ module.exports = {
                         loader: require.resolve("eslint-loader")
                     }
                 ],
-                include: paths.appSrc
+                include: paths.appSrc,
+                exclude: pluginNonSource
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -288,7 +301,8 @@ module.exports = {
                         "@babel/preset-react",
                         "@babel/preset-typescript"
                     ],
-                    cacheDirectory: true
+                    cacheDirectory: true,
+                    exclude: pluginNonSource
                 }
             },
             // "postcss" loader applies autoprefixer to our CSS.

@@ -59,6 +59,22 @@ const pluginHtml = (env) => {
         return new InterpolateHtmlPlugin(env.raw);
     }
 };
+const pluginNonSource = [
+    path.resolve(path.join(__dirname, "../.awcache")),
+    path.resolve(path.join(__dirname, "../.storybook")),
+    path.resolve(path.join(__dirname, "../.cache")),
+    path.resolve(path.join(__dirname, "../.zero")),
+    path.resolve(path.join(__dirname, "../build")),
+    path.resolve(path.join(__dirname, "../config")),
+    path.resolve(path.join(__dirname, "../document")),
+    path.resolve(path.join(__dirname, "../node_modules")),
+    path.resolve(path.join(__dirname, "../public")),
+    path.resolve(path.join(__dirname, "../scripts")),
+    path.resolve(path.join(__dirname, "../shell")),
+    path.resolve(path.join(__dirname, "../stories")),
+    path.resolve(path.join(__dirname, "../storybook-static")),
+    path.resolve(path.join(__dirname, "../test")),
+];
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -139,17 +155,13 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: [
-                    path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                exclude: pluginNonSource
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: [
-                    path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                exclude: pluginNonSource
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -167,7 +179,8 @@ module.exports = {
                         loader: require.resolve("eslint-loader")
                     }
                 ],
-                include: paths.appSrc
+                include: paths.appSrc,
+                exclude: pluginNonSource
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -273,7 +286,8 @@ module.exports = {
                         ],
                         "@babel/preset-react"
                     ],
-                    cacheDirectory: true
+                    cacheDirectory: true,
+                    exclude: pluginNonSource
                 }
             },
             // The notation here is somewhat confusing.

@@ -53,4 +53,5 @@ yarn-error.log*
 /src/environment/routes.js
 !/src/style/animate.css
 .awcache
+.awcache/*
 storybook-static
