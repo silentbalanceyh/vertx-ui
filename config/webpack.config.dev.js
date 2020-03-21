@@ -8,6 +8,7 @@ const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const {CheckerPlugin} = require('awesome-typescript-loader');
+const TerserJSPlugin = require('terser-webpack-plugin');
 
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 

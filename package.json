@@ -98,7 +98,7 @@
         "pretest": "sh shell/run-generate.sh",
         "pretestwin": "call shell/run-generate.bat",
         "test": "node scripts/test.js --env=jsdom",
-        "storybook": "start-storybook -p $SB_PORT",
+        "storybook": "start-storybook -p $SB_PORT --debug-webpack",
         "build-storybook": "build-storybook"
     },
     "devDependencies": {
@@ -156,8 +156,10 @@
         "less": "^3.11.1",
         "less-loader": "^5.0.0",
         "react-dev-utils": "^5.0.2",
+        "react-scripts": "^3.4.1",
         "source-map-loader": "^0.2.4",
         "sw-precache-webpack-plugin": "1.0.0",
+        "terser-webpack-plugin": "^2.3.5",
         "typescript": "^3.8.3",
         "uglify-js": "^3.8.0",
         "uglifyjs-webpack-plugin": "^2.2.0",

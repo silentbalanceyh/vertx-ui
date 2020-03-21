@@ -17,7 +17,7 @@
         "skipLibCheck": true,
         "baseUrl": ".",
         "removeComments": true,
-        "traceResolution": true,
+        "traceResolution": false,
         "paths": {
             "environment": [
                 "src/environment/"
