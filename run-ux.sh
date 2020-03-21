@@ -35,6 +35,15 @@ cp -rf run-update.sh ${TARGET_FOLDER}/run-update.sh
 cp -rf run-ux.sh ${TARGET_FOLDER}/run-ux.sh
 echo "[ Proc ] 框架核心文件！"
 
+# Webpack 4.0
+cp -rf scripts/start.js ${TARGET_FOLDER}/scripts/start.js
+cp -rf scripts/build.js ${TARGET_FOLDER}/scripts/build.js
+cp -rf scripts/test.js ${TARGET_FOLDER}/scripts/test.js
+cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
+cp -rf config/webpack.config.dev.js ${TARGET_FOLDER}/config/webpack.config.dev.js
+cp -rf config/webpack.config.prod.js ${TARGET_FOLDER}/config/webpack.config.prod.js
+cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
+cp -rf config/env.js ${TARGET_FOLDER}/config/env.js
 
 rm -rf ${TARGET_FOLDER}/src/cab/cn/economy/*
 rm -rf ${TARGET_FOLDER}/src/cab/cn/extension/*

@@ -3,6 +3,7 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
+const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
@@ -14,7 +15,6 @@ const getClientEnvironment = require("./env");
 const paths = require("./paths");
 // 自定义模块
 const modules = require("./modules");
-const plug = require('./plugins');
 
 // Webpack uses `publicPath` to determine where the app is being served from.
 // In development, we always serve from the root. This makes config easier.
@@ -29,7 +29,7 @@ const env = getClientEnvironment(publicUrl);
 // It is focused on developer experience and fast rebuilds.
 // The production configuration is different and lives in a separate file.
 module.exports = {
-    mode: 'development',
+    mode: "development",
     // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
     // See the discussion in https://github.com/facebookincubator/create-react-app/issues/343.
     devtool: "cheap-module-source-map",
@@ -92,10 +92,10 @@ module.exports = {
         // for React Native Web.
         extensions: [
             ".web.js",
-            ".js",
-            ".json",
             ".web.jsx",
+            ".js",
             ".jsx",
+            ".json",
             ".ts",
             ".tsx",
             ".(css|less)"
@@ -126,12 +126,17 @@ module.exports = {
                         options: {
                             useTranspileModule: true,
                             forceIsolatedModules: true,
-                            useCache: false,
+                            useCache: true,
                             useBabel: true,
                             babelOptions: {
                                 "babelrc": false, /* Important line */
                                 "presets": [
-                                    ["@babel/preset-env", {"modules": false}]
+                                    [
+                                        "@babel/preset-env",
+                                        {
+                                            "modules": false
+                                        }
+                                    ]
                                 ]
                             },
                             babelCore: "@babel/core"
@@ -139,13 +144,17 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: plug.pluginNonSource
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: plug.pluginNonSource
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -163,8 +172,7 @@ module.exports = {
                         loader: require.resolve("eslint-loader")
                     }
                 ],
-                include: paths.appSrc,
-                exclude: plug.pluginNonSource
+                include: paths.appSrc
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -181,7 +189,7 @@ module.exports = {
                     /\.(js|jsx)$/,
                     /\.css$/,
                     /\.less$/,
-                    /\.ts$/,
+                    /\.(ts|tsx)$/,
                     /\.json$/,
                     /\.bmp$/,
                     /\.gif$/,
@@ -274,8 +282,7 @@ module.exports = {
                         "@babel/preset-react",
                         "@babel/preset-typescript"
                     ],
-                    cacheDirectory: true,
-                    exclude: plug.pluginNonSource
+                    cacheDirectory: true
                 }
             },
             // "postcss" loader applies autoprefixer to our CSS.
@@ -359,7 +366,7 @@ module.exports = {
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In development, this will be an empty string.
-        plug.pluginHtml(env),
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Add module names to factory functions so they appear in browser profiler.
         new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:

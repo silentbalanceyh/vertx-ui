@@ -76,23 +76,6 @@
     "awesomeTypescriptLoaderOptions": {
         "forkChecker": true,
         "resolveGlobs": true,
-        "useTranspileModule": true,
-        "forceIsolatedModules": true,
-        "traceResolution": true,
-        "useCache": false,
-        "useBabel": true,
-        "babelOptions": {
-            "babelrc": false,
-            /* Important line */
-            "presets": [
-                [
-                    "@babel/preset-env",
-                    {
-                        "modules": false
-                    }
-                ]
-            ]
-        },
-        "babelCore": "@babel/core"
+        "useCache": false
     }
 }

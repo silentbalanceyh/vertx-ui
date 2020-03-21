@@ -45,16 +45,17 @@ measureFileSizesBeforeBuild(paths.appBuild)
     .then(previousFileSizes => {
         // Remove all content but keep the directory so that
         // if you're in it, you don't end up in Trash
-        console.log(chalk.blue('Start to empty folder.\n'));
+        console.log(chalk.blue('Start to clean `build` folder...\n'));
         fs.emptyDirSync(paths.appBuild);
-        console.log(chalk.blue('Copy resource in public folder.\n'));
+        console.log(chalk.blue('Start to copy resources of `public` folder...\n'));
         // Merge with the public folder
         copyPublicFolder();
-        console.log(chalk.blue('Start webpack building....\n'));
+        console.log(chalk.blue('Start to do `webpack` building...\n'));
         // Start the webpack build
         return build(previousFileSizes);
     })
-    .then(({stats, previousFileSizes, warnings}) => {
+    .then(
+        ({stats, previousFileSizes, warnings}) => {
             if (warnings.length) {
                 console.log(chalk.yellow('Compiled with warnings.\n'));
                 console.log(warnings.join('\n\n'));
@@ -104,7 +105,6 @@ measureFileSizesBeforeBuild(paths.appBuild)
 // Create the production build and print the deployment instructions.
 function build(previousFileSizes) {
     console.log('Creating an optimized production build...');
-
     let compiler = webpack(config);
     return new Promise((resolve, reject) => {
         compiler.run((err, stats) => {

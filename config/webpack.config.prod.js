@@ -9,12 +9,9 @@ const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 
-const UglifyESPlugin = require('uglifyjs-webpack-plugin');
-
 const paths = require("./paths");
 // 自定义模块
 const modules = require("./modules");
-const plug = require('./plugins');
 const getClientEnvironment = require("./env");
 
 // Webpack uses `publicPath` to determine where the app is being served from.
@@ -52,7 +49,7 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
 module.exports = {
-    mode: 'production',
+    mode: "production",
     // Don't attempt to continue if there are any errors.
     bail: true,
     // We generate sourcemaps in production. This is slow but gives good results.
@@ -129,13 +126,17 @@ module.exports = {
                         loader: require.resolve("awesome-typescript-loader")
                     }
                 ],
-                exclude: plug.pluginNonSource
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             {
                 enforce: "pre",
                 test: /\.js$/,
                 use: "source-map-loader",
-                exclude: plug.pluginNonSource
+                exclude: [
+                    path.resolve(path.join(__dirname, "../node_modules"))
+                ]
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -153,8 +154,7 @@ module.exports = {
                         loader: require.resolve("eslint-loader")
                     }
                 ],
-                include: paths.appSrc,
-                exclude: plug.pluginNonSource
+                include: paths.appSrc
             },
             // ** ADDING/UPDATING LOADERS **
             // The "file" loader handles all assets unless explicitly excluded.
@@ -170,7 +170,7 @@ module.exports = {
                     /\.(js|jsx)$/,
                     /\.css$/,
                     /\.less$/,
-                    /\.ts$/,
+                    /\.(ts|tsx)$/,
                     /\.json$/,
                     /\.bmp$/,
                     /\.gif$/,
@@ -260,8 +260,7 @@ module.exports = {
                         ],
                         "@babel/preset-react"
                     ],
-                    cacheDirectory: true,
-                    exclude: plug.pluginNonSource
+                    cacheDirectory: true
                 }
             },
             // The notation here is somewhat confusing.
@@ -392,7 +391,7 @@ module.exports = {
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In production, it will be an empty string unless you specify "homepage"
         // in `package.json`, in which case it will be the pathname of that URL.
-        plug.pluginHtml(env),
+        new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
         // It is absolutely essential that NODE_ENV was set to production here.
