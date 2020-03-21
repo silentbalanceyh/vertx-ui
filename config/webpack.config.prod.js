@@ -47,6 +47,18 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
     ? // Making sure that the publicPath goes back to to build folder.
     {publicPath: Array(cssFilename.split("/").length).join("../")}
     : {};
+const pluginHtml = (env) => {
+    if (process.env.Z_4) {
+        const isWebpack4 = Boolean(process.env.Z_4);
+        if (isWebpack4) {
+            return new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw);
+        } else {
+            return new InterpolateHtmlPlugin(env.raw);
+        }
+    } else {
+        return new InterpolateHtmlPlugin(env.raw);
+    }
+};
 // This is the production configuration.
 // It compiles slowly and is focused on producing a fast and minimal bundle.
 // The development configuration is different and lives in a separate file.
@@ -392,7 +404,7 @@ module.exports = {
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In production, it will be an empty string unless you specify "homepage"
         // in `package.json`, in which case it will be the pathname of that URL.
-        new InterpolateHtmlPlugin(env.raw),
+        pluginHtml(env),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'production') { ... }. See `./env.js`.
         // It is absolutely essential that NODE_ENV was set to production here.

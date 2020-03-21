@@ -38,6 +38,20 @@ const HOST = process.env.HOST || '0.0.0.0';
 
 // We attempt to use the default port but if it is busy, we offer the user to
 // run on a different port. `detect()` Promise resolves to the next free port.
+const getCompiler = (appName, urls) => {
+    let literal = "";
+    if (process.env.Z_4) {
+        const isWebpack4 = Boolean(process.env.Z_4);
+        if (isWebpack4) {
+            literal = "createCompiler({webpack, config, appName, urls, useYarn});";
+        } else {
+            literal = "createCompiler(webpack, config, appName, urls, useYarn);";
+        }
+    } else {
+        literal = "createCompiler(webpack, config, appName, urls, useYarn)";
+    }
+    return eval(literal);
+};
 choosePort(HOST, DEFAULT_PORT).then(port => {
     if (port == null) {
         // We have not found a port.
@@ -49,7 +63,7 @@ choosePort(HOST, DEFAULT_PORT).then(port => {
     const appName = require(paths.appPackageJson).name;
     const urls = prepareUrls(protocol, HOST, port);
     // Create a webpack compiler that is configured with custom messages.
-    const compiler = createCompiler(webpack, config, appName, urls, useYarn);
+    const compiler = getCompiler(appName, urls);
     // Load proxy config
     const proxySetting = require(paths.appPackageJson).proxy;
     const proxyConfig = prepareProxy(proxySetting, paths.appPublic);

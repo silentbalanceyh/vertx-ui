@@ -8,7 +8,6 @@ const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const {CheckerPlugin} = require('awesome-typescript-loader');
-const TerserJSPlugin = require('terser-webpack-plugin');
 
 const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
 
@@ -28,6 +27,18 @@ const publicUrl = "";
 const env = getClientEnvironment(publicUrl);
 // This is the development configuration.
 // It is focused on developer experience and fast rebuilds.
+const pluginHtml = (env) => {
+    if (process.env.Z_4) {
+        const isWebpack4 = Boolean(process.env.Z_4);
+        if (isWebpack4) {
+            return new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw);
+        } else {
+            return new InterpolateHtmlPlugin(env.raw);
+        }
+    } else {
+        return new InterpolateHtmlPlugin(env.raw);
+    }
+};
 // The production configuration is different and lives in a separate file.
 module.exports = {
     // You may want 'eval' instead if you prefer to see the compiled output in DevTools.
@@ -361,7 +372,7 @@ module.exports = {
         // The public URL is available as %PUBLIC_URL% in index.html, e.g.:
         // <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
         // In development, this will be an empty string.
-        new InterpolateHtmlPlugin(env.raw),
+        pluginHtml(env),
         // Add module names to factory functions so they appear in browser profiler.
         new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
