@@ -7,6 +7,7 @@
         "items": [
             "配置项详情,tabDetail",
             "关系详情,tabRelation",
+            "拓扑图,tabTopology",
             "变更历史,tabHistory"
         ]
     },

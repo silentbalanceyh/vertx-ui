@@ -10,6 +10,7 @@ import StateOut from "./state/StateOut";
 
 import RxEtat from './rx/Rx.Etat';
 import RxFlow from './rx/Rx.Flow';
+import QQuery from "./query/QQuery";
 
 /**
  * @class Dsl
@@ -39,6 +40,10 @@ class Dsl {
 
     static getEvent(data: any): DataEvent {
         return new DataEvent(data);
+    }
+
+    static getQuery(query: any, reference): QQuery {
+        return new QQuery(query, reference);
     }
 
     /*

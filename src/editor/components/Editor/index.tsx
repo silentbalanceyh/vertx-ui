@@ -9,6 +9,7 @@ import {EditorContext, EditorContextProps, EditorPrivateContext, EditorPrivateCo
 
 interface EditorProps {
     style?: React.CSSProperties;
+    event: any;
     className?: string;
     command?: any;
     [EditorEvent.onBeforeExecuteCommand]?: (e: CommandEvent) => void;
@@ -131,6 +132,12 @@ class Editor extends React.Component<EditorProps, EditorState> {
         this.setState({
             graph,
         });
+
+        const {event} = this.props;
+        if (event) {
+            /* 如果存在 GEvent 则直接绑定当前 graph 到 GEvent 中*/
+            event.onGraph(graph);
+        }
 
         this.bindEvent(graph);
         this.bindShortcut(graph);

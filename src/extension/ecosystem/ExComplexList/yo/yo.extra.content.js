@@ -77,6 +77,13 @@ export default (reference, tabs = {}) => {
          */
         if (Ex.Mode.EDIT === $view) {
             setEdition(attrs, reference);
+
+            /* 处理 config */
+            if (attrs.config && 1 === attrs.config.length) {
+                /* 单 reset 不呈现 */
+                attrs.config = attrs.config
+                    .filter(item => "op.submit.reset" !== item.category);
+            }
         }
         attrs.$submitting = $submitting;
         attrs.$activeKey = tabs.activeKey;

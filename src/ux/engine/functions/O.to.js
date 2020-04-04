@@ -64,15 +64,27 @@ const toKey = (key, assist = true) => {
         return `$t_${key.replace(/\./g, '_')}`;
     }
 };
-const toLink = (data = [], $app) => data.map(item => {
-    const path = $app._("path") ? $app._("path") : Cv.Env['ROUTE'];
-    let relatedPath = `${path}${item.uri}`;
-    if (!relatedPath.startsWith('/')) {
-        relatedPath = `/${relatedPath}`;
+const toLink = (data, $app) => {
+    if (!data) data = [];
+    if (Abs.isArray(data)) {
+        return data.map(item => toLink(item, $app));
+    } else {
+        if ("string" === typeof data) {
+            const path = $app._("path") ? $app._("path") : Cv.Env['ROUTE'];
+            if (!data.startsWith("/")) {
+                data = `/${data}`;
+            }
+            let relatedPath = `${path}${data}`;
+            if (!relatedPath.startsWith('/')) {
+                relatedPath = `/${relatedPath}`;
+            }
+            return relatedPath;
+        } else if (Abs.isObject(data)) {
+            data.uri = toLink(data.uri, $app);
+            return data;
+        }
     }
-    item.uri = relatedPath;
-    return item;
-});
+};
 const toX = (columns = []) => {
     let x = 0;
     columns.forEach(column => {

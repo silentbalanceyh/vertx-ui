@@ -10,3 +10,4 @@ import './paste';
 import './pasteHere';
 import './zoomIn';
 import './zoomOut';
+import './create';

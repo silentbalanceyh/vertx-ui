@@ -4,10 +4,8 @@ import Op from "../event";
 import layout from './O.layout';
 
 const yiModel = (reference, state) => {
-    const models = Ux.onDatum({state}, "resource.models");
-    const category = Ux.onDatum({state}, "graphic.nodes");
-    state.$models = Ex.g6Models(models, category);
-    state.$switcher = false;
+    state.$menus = Ux.g6DataTree({state});
+    state.$switcher = true;         // 默认只选择二级分类
     state.$selected = undefined;
     state.$expand = false;
     return Ux.promise(state);
@@ -23,6 +21,8 @@ const yoSwitch = (reference) => {
     const attrs = {};
     attrs.checkedChildren = true;
     attrs.unCheckedChildren = false;
+    const {$switcher = true} = reference.state;
+    attrs.checked = $switcher;
     attrs.onChange = Op.onSwitch(reference);
     return attrs;
 };

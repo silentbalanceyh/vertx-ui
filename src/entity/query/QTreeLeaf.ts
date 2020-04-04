@@ -11,7 +11,7 @@ class QTreeLeaf implements QTreeNode {
      * 构造该节点
      */
     constructor(field: String, value: any) {
-        if (field && value) {
+        if (field && undefined !== value) {
             const fieldData = Ux.parseField(field);
             this.field = fieldData.field;
             this.op = fieldData.op;

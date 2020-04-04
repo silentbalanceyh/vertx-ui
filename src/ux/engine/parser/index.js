@@ -31,7 +31,7 @@ const parseInput = (input = {}, {props, state}) => {
         .filter(field => undefined !== input[field])
         .forEach(field => {
             const value = parseValue(input[field], {state, props});
-            if (value) {
+            if (undefined !== value) {        // value 不为 undefined 就处理
                 parsed[field] = value;
             }
         });

@@ -7,7 +7,7 @@ import yiRouterType from "./yi.router.type";
 /*
  * 二义性方法
  */
-export default (reference, inputState = {}) => {
+export default (reference, inputState) => {
     /*
      * 读取参数信息
      */
@@ -24,7 +24,7 @@ export default (reference, inputState = {}) => {
         .then(data => yiRouterType(reference, data))
         .then(data => {
             data.$ready = true;
-            if (inputState && true === inputState) {
+            if (inputState) {
                 return Ux.promise(data);
             } else {
                 reference.setState(data);

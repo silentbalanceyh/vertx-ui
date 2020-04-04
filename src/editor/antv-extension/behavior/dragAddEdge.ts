@@ -134,8 +134,7 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
             /* 激活过后可重写 limitLink 限制连接进入，每一个 */
             graph.emit(GraphCustomEvent.onAfterEachAnchorActive, {
                 source: ev.item,
-                target: n,
-                graph
+                target: n
             });
         });
         const point = {x: ev.x, y: ev.y};
@@ -224,7 +223,6 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
             }
             graph.emit(GraphCustomEvent.onBeforeConnect, {
                 edge: this.edge,
-                graph
             });
             graph.setItemState(this.edge, 'drag', false);
             graph.updateItem(this.edge, {
@@ -233,7 +231,6 @@ const dragAddEdge: DragAddEdgeBehavior & ThisType<DragAddEdgeBehavior & DefaultC
             });
             graph.emit(GraphCustomEvent.onAfterConnect, {
                 edge: this.edge,
-                graph
             });
             this.edge = null;
             this.addingEdge = false;

@@ -11,7 +11,7 @@ export default (name = "") => ({
     page: (state = {}) => ({name, color: "#1874CD", ...state}),         // 页面
     type: (state = {}) => ({name, color: "#4F94CD", ...state}),
     control: (state = {}) => ({name, color: "#2E8B57", ...state}),          // 自定义组件
-    dynamic: (state = {}) => ({name, color: "#8A2BE2", ...state}),          // 动态
+    dynamic: (state = {}) => ({name, color: "#8B6914", ...state}),          // 动态
     view: (state = {}) => ({name, color: "#CDAD00", ...state}),          // 动态
     define: (state = {}) => ({name, color: "#7CCD7C", ...state}),               // 用户自定义
 })

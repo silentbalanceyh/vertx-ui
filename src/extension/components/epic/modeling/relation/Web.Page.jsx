@@ -1,17 +1,15 @@
 import React from 'react';
 import {LoadingAlert} from 'web';
-import {ExDrawerRelation} from "ei";
+import {ExGraphicSpider} from "ei";
 import {Col, Row, Tag} from 'antd';
 import Ex from 'ex';
-import Ux from 'ux';
 
 export default (reference, title = {}) => {
-    const {$selected, $models = []} = reference.state;
+    const {$selected} = reference.state;
     if ($selected) {
         const header = title.header;
         const data = $selected.data ? $selected.data : {};
         const inherit = Ex.yoAmbient(reference);
-        const config = Ux.fromHoc(reference, "graphic");
         return (
             <div>
                 <Row className={"header"}>
@@ -32,9 +30,7 @@ export default (reference, title = {}) => {
                 </Row>
                 <Row>
                     <Col span={24}>
-                        <ExDrawerRelation {...inherit}
-                                          data={$models} $current={data}
-                                          config={config}/>
+                        <ExGraphicSpider {...inherit} $current={data}/>
                     </Col>
                 </Row>
             </div>

@@ -3,6 +3,7 @@ import {ExForm, ExRelation} from 'ei';
 import Ex from 'ex';
 import Ux from 'ux';
 import OxHistory from '../OxHistory/UI';
+import OxTopology from '../OxTopology/UI';
 import fnLink from './web/UI';
 
 const _toHeight = () => {
@@ -64,8 +65,20 @@ const tabHistory = reference => () => {
         </div>
     );
 };
+const tabTopology = reference => () => {
+    const {$inited = {}, $identifier} = reference.state;
+    const inherit = Ex.yoAmbient(reference);
+    inherit.$inited = $inited;
+    inherit.$identifier = $identifier;
+    return (
+        <div style={_toHeight()}>
+            <OxTopology {...inherit}/>
+        </div>
+    )
+};
 export default {
     tabDetail,
     tabRelation,
     tabHistory,
+    tabTopology
 }

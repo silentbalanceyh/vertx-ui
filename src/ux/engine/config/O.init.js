@@ -22,11 +22,11 @@ const initial = (reference, form, program = {}) => {
                  */
                 let definition = {};
                 Object.keys(form.initial)
-                /* 直接过滤得到最终的表达式 */
+                    /* 直接过滤得到最终的表达式 */
                     .filter(key => "string" === typeof form.initial[key])
                     .forEach(key => {
                         const value = Pr.parseValue(form.initial[key], reference);
-                        if (value) {      // undefined !== value
+                        if (undefined !== value) {      // undefined !== value
                             definition[key] = value;
                         }
                     });

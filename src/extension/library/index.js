@@ -12,7 +12,6 @@ import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
 import Jsx from './jsx';
-import Graphic from './graphic';
 
 import Ux from 'ux';
 
@@ -22,7 +21,6 @@ const exported = {
      * 新的Api处理
      */
     ...Sex,
-    ...Graphic,
     /*
      * 外置绑定，执行单个 fabric
      * et类的事件方法集合
@@ -72,7 +70,7 @@ const exported = {
 };
 if (Ux.Env.DEBUG) {
     console.groupCollapsed("%c 「 Ex 」 Zero Extension Framework ( Ex )", "font-weight:900;color:#228B22");
-    console.info("「 Ex 」 Zero Common Library ( zero-ui include )", exported);
+    console.info("「 Ex 」 Zero Common Library ( zero-ui include )", Ux.sorterObject(exported));
     console.groupEnd();
 }
 export default exported;

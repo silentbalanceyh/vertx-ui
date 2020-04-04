@@ -23,9 +23,11 @@ const nodeAdd = (graph: G6.Graph, shape: G.Shape) => {
                 id: guid(),
                 x,
                 y,
+                graph,      /* 补充：Model 中读取 graph */
                 ...model
             }
         });
+
         graph.paint();
         global.component.itemPanel.model = null;
 

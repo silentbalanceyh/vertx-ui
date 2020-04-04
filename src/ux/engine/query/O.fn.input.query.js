@@ -5,7 +5,7 @@ import U from 'underscore';
 import Cmn from "./I.common";
 import Rdr from './render';
 
-export default (input, connector = "OR", reference) => {
+export default (input, connector = "AND", reference) => {
     const condition = {};
     condition[""] = ("AND" === connector);
     /*

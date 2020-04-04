@@ -1,5 +1,5 @@
 import normalizer from './I.fn.normalized';
-import {QQuery} from 'entity';
+import {Dsl} from 'entity';
 
 export default (query = {}, reference) => {
     const {
@@ -10,7 +10,7 @@ export default (query = {}, reference) => {
     /*
      * 查询条件合并，直接在 query 中合并 criteria 节点的查询条件
      */
-    const queryRef = new QQuery(query, reference);
+    const queryRef = Dsl.getQuery(query, reference);
     /*
      * 更新合并过后的条件
      */

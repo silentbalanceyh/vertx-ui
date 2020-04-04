@@ -1,0 +1,51 @@
+{
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabGraphic",
+        "items": "图管理,tabGraphic,contacts;主图设置,tabMaster,idcard"
+    },
+    "_page": {
+        "title": "拓扑图管理"
+    },
+    "_graphic": {
+        "css": {
+            "maxHeight": 136,
+            "canvasHeight": 172,
+            "className": "web-editor-2",
+            "center": {
+                "x": 300,
+                "y": 300
+            }
+        }
+    },
+    "_assist": {
+        "resource.models": {
+            "uri": "/api/model/by/sigma"
+        },
+        "graphic.nodes": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:ci.type"
+            }
+        },
+        "relation.type": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:relation.type"
+            }
+        },
+        "graphic.type": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:graphic.type"
+            }
+        },
+        "data.category": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:ci.type"
+            }
+        }
+    }
+}

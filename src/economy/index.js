@@ -65,4 +65,5 @@ export {default as PagerHeader} from './container/Navigation/UI';
 /*
  * 编辑器
  */
-export {default as EditorNexus} from './designer/Nexus/UI';
+export {default as GraphicEditor} from './editor/GraphicEditor/UI';
+export {default as GraphicViewer} from './editor/GraphicViewer/UI';

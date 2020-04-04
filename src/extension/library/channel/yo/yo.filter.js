@@ -10,7 +10,7 @@ export default (reference) => {
     const {$inited = {}} = reference.props;
     if (Ux.isEmpty($inited)) {
         attrs.$inited = {
-            connector: "OR"
+            connector: "AND"
         };
     } else {
         const data = Ux.clone($inited);

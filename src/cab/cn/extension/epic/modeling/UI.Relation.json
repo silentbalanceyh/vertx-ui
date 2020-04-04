@@ -35,16 +35,5 @@
             "name": "正在管理关系的模型",
             "identifier":"模型的系统标识"
         }
-    },
-    "_graphic":{
-        "init":{
-            "models": "resource.models",
-            "nodes": "graphic.nodes",
-            "types": "relation.type"
-        },
-        "center":{
-            "x":300,
-            "y":300
-        }
     }
 }

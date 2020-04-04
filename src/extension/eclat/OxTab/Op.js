@@ -26,12 +26,19 @@ const yiPage = (reference) => {
             if (controlId) {
                 const controlData = $controls[controlId];
                 if (controlData) {
-                    item.fnRender = (props) => Ex.xuiDecorator(controlData, UI, props);
+                    item.fnRender = (props) =>
+                        /* controlData, props, state */
+                        Ex.xuiDecorator(controlData, UI, props, reference.state);
                 }
             }
         })
     }
     $tabs.className = "ex-tab"; // 特殊 css
+    $tabs.onTabClick = () => {
+        /* $switcher 变更 */
+        const $switcher = Ux.randomString(32);
+        reference.setState({$switcher});
+    };
     state.$tabs = $tabs;
     reference.setState(state);
 };

@@ -29,6 +29,10 @@ const _renderPage = (reference, data, key, combine) => {
     if (relation[key]) {
         const {table = {}, tips = {}} = relation[key];
         const $table = Op.yoTable(reference, table, key, combine);
+        if (4 < data.length) {
+            $table.scroll = {};
+            $table.scroll.y = 240;
+        }
         return (
             <div className={"ex-relation-body"}>
                 <Row className={"row"}>

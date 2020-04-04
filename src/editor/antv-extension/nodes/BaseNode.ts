@@ -19,7 +19,8 @@ const exBaseNode: CustomNode = {
     options: Style.OPT_RECT,
 
     getOptions(model: NodeModel) {
-        return merge({}, this.options, this.getCustomConfig(model) || {}, model);
+        const style = model.data.contentStyle ? model.data.contentStyle : {};
+        return merge({}, this.options, this.getCustomConfig(model) || {}, model, {contentStyle: style});
     },
 
     draw(model, group) {
@@ -33,15 +34,14 @@ const exBaseNode: CustomNode = {
     },
 
     drawIcon(model, group) {
-        const {data = {}} = model;
-        if (data.icon) {
+        if (model.icon) {
             group.addShape('image', {
                 attrs: {
                     x: 14,
                     y: 3,
                     width: 52,
                     height: 52,
-                    img: data.icon
+                    img: model.icon
                 }
             })
         }
@@ -82,19 +82,22 @@ const exBaseNode: CustomNode = {
     drawLabel(model: NodeModel, group: G.Group) {
         const [width, height] = this.getSize(model);
         const {labelStyle} = this.getOptions(model);
-        const {data = {}} = model;
         let y;
-        if (data.icon) {
+        if (model.icon) {
             y = height / 5 * 4 + 3;
         } else {
             y = height / 2;
+        }
+        let label = model.label;
+        if (model._counter) {
+            label += model._counter;
         }
         return group.addShape('text', {
             className: LABEL_CLASS_NAME,
             attrs: {
                 x: width / 2,
                 y,
-                text: model.label,
+                text: label,
                 ...labelStyle,
             },
         });

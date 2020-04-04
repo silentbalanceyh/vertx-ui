@@ -39,7 +39,7 @@ const dgFileJson = (data, ext = "json", filename) => {
 };
 const dgQuery = (reference = {}, name) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
-        console.groupCollapsed(`%c [DEBUG] Qr - 条件分析专用日志：`, "background-color:#6959CD;color:white;font-weight:900;", name);
+        console.groupCollapsed(`%c [DEBUG] Qr - 条件分析专用日志：`, "background-color:#668B8B;color:white;font-weight:900;", name);
         const {
             $terms,      // 列过滤配置
             $filters,    // 表单提交配置
@@ -55,6 +55,9 @@ const dgQuery = (reference = {}, name) => {
         console.groupEnd();
     }
 };
+const dgGraphic = (input, message, color = "#556B2F") => {
+    dgDebug(input, `[ GEvent ] ${message}`, color);
+};
 const dgDiff = (left, right) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
         if (left && right) {
@@ -68,5 +71,6 @@ export default {
     dgDebug,
     dgQuery,
     dgAjax,
-    dgFileJson
+    dgFileJson,
+    dgGraphic,
 }

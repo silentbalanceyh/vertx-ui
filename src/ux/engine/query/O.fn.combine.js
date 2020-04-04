@@ -1,4 +1,4 @@
-import {QQuery} from 'entity';
+import {Dsl} from 'entity';
 import Abs from '../../abyss';
 /*
  * 直接合并条件处理
@@ -7,7 +7,7 @@ export default (query = {}, reference, ...condition) => {
     /*
      * 查询条件初始化
      */
-    const queryRef = new QQuery(query, reference);
+    const queryRef = Dsl.getQuery(query, reference);
     /*
      * 条件过滤
      */
