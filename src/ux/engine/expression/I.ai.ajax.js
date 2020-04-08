@@ -1,6 +1,15 @@
 import Parser from "./I.parser.up";
 import Value from "../../element";
 
+/**
+ * ## 标准函数
+ *
+ * Ajax配置专用解析函数，解析表达式，在 ListSelector 中常用的 Ajax 表达式完整信息。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Object} ajax 基本的 ajax 配置。
+ * @returns {Object} 解析过后的标准 ajax 配置对象。
+ */
 const aiExprAjax = (ajax = {}) => {
     // 默认是POST方法
     let item = ajax;

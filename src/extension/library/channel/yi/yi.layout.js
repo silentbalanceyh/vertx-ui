@@ -1,13 +1,7 @@
 import Ux from 'ux';
 import Api from '../../ajax';
 import yiModule from './yi.module';
-/*
- * 动态页面判断条件
- * 1）$router 中的 path 路径以：/ui/ 开头
- * 2）$router 中的参数同时包含：module / page
- * 最终返回
- * { app, module, page }
- */
+
 const _isDynamic = ($router) => {
     let params = $router.params();
     if (!params) params = {};
@@ -114,6 +108,36 @@ const startAsync = (state) => {
     state.$controls = {};
     return Ux.promise(state);
 };
+/**
+ * ## 扩展函数
+ *
+ * ### 模板专用处理器
+ *
+ * 1. 静态模板
+ * 2. 动态模板
+ *
+ * ### 动态模板判断
+ *
+ * 1. $router 中的 path 路径以：/ui/ 开头
+ * 2. $router 中的参数同时包含：module / page
+ *
+ * 最终返回 `{ app, module, page }`
+ *
+ * * $container：容器配置
+ * * $component：内部组件配置
+ *
+ * ### 渲染计算
+ *
+ * $dynamic：
+ *
+ * * = true：动态渲染，Ox Engine
+ * * = false：静态渲染，Zero UI
+ *
+ * @memberOf module:_channel
+ * @method yiLayout
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Promise<T>} 执行更新过后的状态
+ */
 export default (reference) => {
     /*
      * $router检查
@@ -123,14 +147,12 @@ export default (reference) => {
     /*
      * 动态和静态
      */
-    return (state.$dynamic ? startAsync(state)
-            /* 先读取模块相关数据 */.then(data => yiModule(reference, data))
-            /* 再读取页面 */.then(data => Api.page(data.$input)
-            /* 将页面数据加入 */.then(page => Ux.promise(data, '$output', page)))
-            /* 填充 Container / Component 专用配置 */.then(data => _seekPage(reference, data)) :
+    return (state.$dynamic ?
             startAsync(state)
-    ).then(response => {
-        response.$ready = true;
-        return Ux.promise(response);
-    });
+                /* 先读取模块相关数据 */.then(data => yiModule(reference, data))
+                /* 再读取页面 */.then(data => Api.page(data.$input)
+                /* 将页面数据加入 */.then(page => Ux.promise(data, '$output', page)))
+                /* 填充 Container / Component 专用配置 */.then(data => _seekPage(reference, data)) :
+            startAsync(state)
+    ).then(Ux.ready);
 }

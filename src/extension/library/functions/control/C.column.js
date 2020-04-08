@@ -1,5 +1,15 @@
 import Ux from 'ux';
 
+/**
+ * ## 扩展函数
+ *
+ * 表格列扩展配置。
+ *
+ * @memberOf module:_config
+ * @param {Array} original 原始列配置
+ * @param {Object} config 表格专用输入配置
+ * @returns {Array} 返回处理过后的列配置
+ */
 const configColumn = (original = [], config = {}) => {
     const {columns = [], filters = []} = config;
     /*

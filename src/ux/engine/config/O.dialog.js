@@ -4,8 +4,16 @@ import Ele from '../../element';
 import U from 'underscore';
 import Abs from '../../abyss';
 import Ux from "ux";
-/*
- * 标准窗口的配置流程，以后全部走标准配置流程处理
+
+/**
+ * ## 引擎函数
+ *
+ * 「标准配置」Dialog 专用的配置信息。
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} config 窗口配置专用数据。
+ * @return {Object} 返回处理好的窗口配置。
  */
 const configDialog = (reference, config = {}) => {
     const $dialog = R.aiExprWindow(config);
@@ -38,18 +46,35 @@ const configDialog = (reference, config = {}) => {
     };
     return $dialog;
 };
-/*
- * Array
+/**
+ *
+ * ## 引擎函数
+ *
+ * 锚点专用函数信息
+ *
+ * Array类型
+ *
+ * ```js
  * [
  *    id1, id2
  * ]
+ * ```
+ *
  * Object
+ *
+ * ```js
  * {
  *    key1 = id1,
  *    key2 = id2
  * }
+ * ```
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Array|Object} op 锚点按钮配置生成器。
+ * @param {Function} callback 按钮执行函数，可以从callback中执行该函数。
+ * @return {Array} 配置的最终锚点。
  */
-
 const configAnchor = (reference, op, callback) => {
     const $button = [];
     const rxClick = (key) => (event) => {

@@ -1,6 +1,17 @@
 import normalizer from './I.fn.normalized';
 import {Dsl} from 'entity';
 
+/**
+ * ## 特殊函数「Qr」
+ *
+ * 复杂模式的处理流程，三合一的查询条件处理。
+ *
+ * @memberOf module:_qr
+ * @method qrComplex
+ * @param {Object} query 查询条件专用结构。
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Object} 返回最终的 query 结构。
+ */
 export default (query = {}, reference) => {
     const {
         $condition = {},    // 基础条件

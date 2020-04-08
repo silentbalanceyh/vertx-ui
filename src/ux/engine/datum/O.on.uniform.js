@@ -1,9 +1,3 @@
-/**
- * 读取Tabular和Assist专用属性：`$t_`和`$a_`开头的属性值。
- * @method toDatum
- * @param props 传入的React属性
- * @param keys 需提取的所有keys属性名集
- */
 const onDatum = (props = {}, keys = []) => {
     const inherits = {};
     if (0 === keys.length) {
@@ -29,12 +23,6 @@ const onDatum = (props = {}, keys = []) => {
     return inherits;
 };
 
-/**
- * 通用属性读取相关信息
- * @method toProp
- * @param props 传入的React属性
- * @param keys 需提取的所有keys属性名集
- */
 const onProp = (props = {}, ...keys) => {
     const inherits = {};
     // Fix Issue
@@ -57,6 +45,24 @@ const onProp = (props = {}, ...keys) => {
     }
     return inherits;
 };
+/**
+ * ## 引擎函数
+ *
+ * 原生 Zero UI中的组件继承属性专用方法，在 Zero Extension 中会调用`yoAmbient`方法实现属性继承，
+ * 继承过程中包含几个核心数据：
+ *
+ * 1. `$t_` 和 `$a_` 的辅助数据，Tabular和Assist两种。
+ * 2. `app`应用程序相关数据。
+ * 3. `user, profile`用户登录后的数据。
+ * 4. `submitting`防重复提交状态数据。
+ * 5. `router`核心路由数据。
+ * 6. 输入的`keys`对应的键相关数据。
+ *
+ * @memberOf module:_on
+ * @param {Props} props 当前React组件的属性信息。
+ * @param {String[]} keys 待提取的属性集合。
+ * @return {Object} 返回最终的数据信息。
+ */
 const onUniform = (props, ...keys) => {
     const item = onDatum(props);
     const defaultProp = [

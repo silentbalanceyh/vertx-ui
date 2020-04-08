@@ -40,8 +40,5 @@ export default (reference) => {
     return yiTab(reference, initState)
         .then(state => yiInit(reference, state))
         .then(state => yiDefinition(reference, state))
-        .then(state => {
-            state.$ready = true;
-            reference.setState(state);
-        });
+        .then(Ux.ready).then(Ux.pipe(reference));
 }

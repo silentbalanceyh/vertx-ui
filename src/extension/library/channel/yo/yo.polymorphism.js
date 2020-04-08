@@ -2,6 +2,23 @@ import yoAmbient from './yo.ambient';
 import Fn from '../../functions';
 import Ux from 'ux';
 
+/**
+ * ## 扩展函数
+ *
+ * 动态扩展配置，前置调用`yoAmbient`方法处理统一配置，之后追加：
+ *
+ * 1. 直接读取 fromHoc 中的 grid 配置
+ * 2. 如果传入了专用表单配置，则处理 form 表单配置，填充 $form 变量
+ * 3. state 中的 $query 读取
+ * 4. state 中的 config.options 中读取 $identifier
+ * 5. 构造 $inited 中的 $identifier
+ *
+ * @memberOf module:_channel
+ * @method yoPolymorphism
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} form
+ * @returns {Object} 计算最终生成的继承属性专用方法
+ */
 export default (reference = {}, {form}) => {
     const attrs = yoAmbient(reference);
     /*

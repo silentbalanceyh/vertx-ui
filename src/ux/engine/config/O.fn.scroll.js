@@ -127,6 +127,17 @@ const FUNS = {
     "DATE": widthDate,
     "DATUM": widthDatum,
 };
+/**
+ * ## 引擎函数
+ *
+ * 计算表格中的 `scroll` 列自适应性的专用函数，不同的渲染器计算列宽度方法不同。
+ *
+ * @memberOf module:_config
+ * @method configScroll
+ * @param {Object} $table 传入的表格配置信息。
+ * @param {Array} data 传入的表格数据信息。
+ * @param {ReactComponent} reference React对应组件引用。
+ */
 export default ($table = {}, data = [], reference) => {
     const $columns = $table.columns;
     /*

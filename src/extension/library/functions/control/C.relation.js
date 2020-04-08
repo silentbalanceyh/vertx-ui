@@ -10,6 +10,24 @@ const onKey = (array = []) => array.forEach(each => {
         each.key = Ux.randomUUID();
     }
 });
+/**
+ * ## 扩展函数
+ *
+ * 关系扩展配置，data 中的数据结构：
+ *
+ * ```json
+ * {
+ *     "up": [],
+ *     "down": []
+ * }
+ * ```
+ *
+ * @memberOf module:_config
+ * @param {Object} data 基本数据信息
+ * @param {Object} config 关系完整配置
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Object} 最终的关系配置数据信息
+ */
 const configRelation = (data = {}, config = {}, reference) => {
     const attrs = {};
     const $data = {};

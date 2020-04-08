@@ -2,10 +2,20 @@ import yoAmbient from './yo.ambient';
 import Fn from '../../functions';
 import Ux from 'ux';
 import U from 'underscore';
-/*
+
+/**
+ * ## 扩展函数
+ *
  * List 必须传入的配置
- * 1）外置：state -> query, 内置：props -> $query
- * 这个会作为默认的 query 值传入，并且会和对应的判断形成呼应
+ *
+ * 1. 外置：state -> query, 内置：props -> $query
+ * 2. 这个会作为默认的 query 值传入，并且会和对应的判断形成呼应
+ *
+ *
+ * @memberOf module:_channel
+ * @method yoList
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Object} 计算最终生成的继承属性专用方法
  */
 export default (reference) => {
     /*

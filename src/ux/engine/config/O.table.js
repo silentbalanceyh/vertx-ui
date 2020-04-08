@@ -4,12 +4,15 @@ import Column from "../web-column";
 import U from "underscore";
 
 /**
- * Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
- * @method uiTableColumn
- * @param reference React对应组件引用 React.PureComponent
- * @param {Array} columns 当前Table组件的columns配置
- * @param ops 当前列是否可操作列：如列中包含了编辑、删除按钮
- * @return {Array}
+ * ## 引擎函数
+ *
+ * 「标准配置」Ant Design的Table组件的Table组件专用属性`columns`列处理器，处理每一列的`render`属性
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Array} columns 当前Table组件的columns配置。
+ * @param {Object} ops 当前列是否可操作列：如列中包含了编辑、删除按钮，如果出现扩展则执行扩展替换。
+ * @return {Array} 返回处理过后的表格列信息。
  */
 const configColumn = (reference, columns = [], ops = {}) => {
     /*
@@ -32,6 +35,17 @@ const configColumn = (reference, columns = [], ops = {}) => {
     });
     return columns;
 };
+/**
+ * ## 引擎函数
+ *
+ * 「标准配置」Table 专用的配置信息。
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} table 表格配置数据相关信息。
+ * @param {Object} ops 外置处理的 executor 专用信息。
+ * @return {Object} 返回处理好的配置信息。
+ */
 const configTable = (reference, table = {}, ops = {}) => {
     /*
      * 基本表格
@@ -43,28 +57,42 @@ const configTable = (reference, table = {}, ops = {}) => {
     $table.columns = configColumn(reference, table.columns, ops);
     return $table;
 };
-/*
- * 统一执行 executor
+/**
+ * ## 引擎函数
+ *
+ * ### 统一执行 executor
+ *
  * 函数格式：
+ *
+ * ```js
  * const fun = (reference) => (id, record) => {}
- * 1）reference：当前组件，如 ExTable
- * 2）id：记录的ID
- * 3）record：记录数据全部
- * 合并 executor 的方式：
- * 1）来源于 reference.props 中的 $executor 变量
- * 2）标准函数：
- * -- fnEdit：打开编辑Tab页专用
- * -- fnDelete：删除一行记录专用
+ * ```
+ *
+ * 1. reference：当前组件，如 ExTable
+ * 2. id：记录的ID
+ * 3. record：记录数据全部
+ *
+ * ### 合并 executor 的方式：
+ *
+ * 1. 来源于 reference.props 中的 $executor 变量
+ * 2. 标准函数：
+ *      * fnEdit：打开编辑Tab页专用
+ *      * fnDelete：删除一行记录专用
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} executors 待绑定的事件专用信息。
+ * @return {Object} 返回处理过后的 executors 信息。
  */
-const configExecutor = (reference, EVENTS) => {
+const configExecutor = (reference, executors) => {
     /*
      * 基本规范，executor 必须是 fn 打头的
      */
     const events = {};
-    Object.keys(EVENTS)
+    Object.keys(executors)
         .filter(key => key.startsWith('fn'))
-        .filter(key => U.isFunction(EVENTS[key]))
-        .forEach(key => events[key] = EVENTS[key]);
+        .filter(key => U.isFunction(executors[key]))
+        .forEach(key => events[key] = executors[key]);
     let executor = Abs.clone(events);
     const {$executor = {}} = reference.props;
     if (!Abs.isEmpty($executor)) {

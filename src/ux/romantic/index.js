@@ -23,11 +23,10 @@ export default {
      * }
      */
     sexModal,
-
+    sexIdentifier,
     sexTable,
+    sexDialog,  /* 窗口 */
 
     sexBatch,
-    sexDialog,  /* 窗口 */
     sexMessage,
-    sexIdentifier,
 }

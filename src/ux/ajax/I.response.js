@@ -2,6 +2,7 @@ import Aid from "./I.before";
 import mockAjax from './I.fn.ajax.mock';
 import Dev from '../develop';
 
+/* 纯私有函数，不提供文档 */
 const _ajaxExtract = (request, params, body, response) => {
     // Body的打印处理
     Dev.Logger.response(body, params, request);
@@ -14,13 +15,14 @@ const _ajaxExtract = (request, params, body, response) => {
     }
 };
 /**
- * Ajax中的响应处理器，Promise调用返回过后的响应专用处理器
- * @method ajaxResponse
- * @private
- * @param {Request} request 请求对象
- * @param {Object} mockData 【Mock环境可用】专用Mock响应处理
- * @param {Object} params
- * @return {Promise<Response>}
+ * ## 私有函数
+ *
+ * ES7 语法中的响应处理函数，字符流响应处理器
+ *
+ * @memberOf module:__private
+ * @param {Request} request fetch库中需要使用的Http请求对象
+ * @param {Object} params 请求参数
+ * @return {Promise<T>} 最终返回的 Promise 核心信息
  */
 const ajaxResponse = async (request, params) => mockAjax(request, params,
     async () => {
@@ -49,6 +51,16 @@ const ajaxResponse = async (request, params) => mockAjax(request, params,
         return _ajaxExtract(request, params, body, response);
     });
 
+/**
+ * ## 私有函数
+ *
+ * ES7 语法中的响应处理函数，字节流的响应处理器，主要用于 Blob 处理
+ *
+ * @memberOf module:__private
+ * @param {Request} request fetch库中需要使用的Http请求对象
+ * @param {Object} params 请求参数
+ * @return {Promise<T>} 最终返回的 Promise 核心信息
+ */
 const ajaxBlob = async (request, params = {}) => mockAjax(request, params,
     async () => {
         const response = await fetch(request);

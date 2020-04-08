@@ -5,9 +5,14 @@ import E from "../error";
 
 
 /**
- * UNSAFE_componentWillReceiveProps(nextProps,context)
- * @param reference
- * @param nextProps
+ * ## 标准函数
+ *
+ * 新版中的`UNSAFE_componentWillReceiveProps(nextProps,context)`的内部调用，虽然不提倡使用，
+ * 但在自定义组件中，该函数依然会控制内部状态变更，所以依旧采用该方法。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Props} nextProps 下一个属性。
  */
 const xtUnsafe = (reference, nextProps = {}) => {
     if ('value' in nextProps) {
@@ -15,7 +20,18 @@ const xtUnsafe = (reference, nextProps = {}) => {
         reference.setState(value);
     }
 };
-
+/**
+ * ## 标准函数
+ *
+ * 如果`supplier`是函数，则设置状态中的`field`为该函数的执行数据。
+ * 如果`supplier`是合法值，则设置状态中的`field`为这个值。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {String} field 字段名。
+ * @param {Function|any} supplier 读取数据的默认函数。
+ * @return {Object} 返回最终状态信息。
+ */
 const xtGet = (reference, field, supplier) => {
     let state = (reference.state ? reference.state : {});
     if (U.isFunction(supplier)) {
@@ -27,6 +43,17 @@ const xtGet = (reference, field, supplier) => {
     }
     return Abs.clone(state);
 };
+/**
+ * ## 标准函数
+ *
+ * 还原状态专用函数，还原步骤：
+ *
+ * 1. 提取reference中的`props`的值`value`。
+ * 2. 如果有value则设置`$value`状态信息，如果没有则不执行。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ */
 const xtPrevious = (reference) => {
     const {value} = reference.props;
     if (value) {
@@ -35,9 +62,31 @@ const xtPrevious = (reference) => {
     }
 };
 /**
- * 将props中的Ant Design对应的Form引用挂载到父引用中的$_pointer中
- * @param ref
- * @param key
+ * ## 标准函数「Ambiguity」
+ *
+ * 该方法支持两种模式，带`key`参数和不带该参数的模式。
+ *
+ * ### 带`key`的模式
+ *
+ * 带key值的模式下，执行步骤如：
+ *
+ * 1. 从当前引用`ref`的状态中读取`reference`父引用。
+ * 2. 从父引用中读取`$_pointer`变量信息。
+ * 3. 从该变量中设置`key`为当前引用的 form 变量（绑定Form）实现反向挂载。
+ * 4. 并且将该反向挂载的最终数据写入到上层 state 中。
+ *
+ * ### 不带`key`的模式
+ *
+ * 这种模式下：
+ *
+ * 1. 直接提取当前`ref`状态中的 `$_pointer` 变量。
+ * 2. 拿到该变量过后，提取父类引用 `reference`。
+ * 3. 将该值的 $_pointer 和 $_child 同时更新，实现双向绑定。
+ *
+ * @deprecated 最早的北二项目使用过的多表单模式才有效，将来可能会废弃。
+ * @memberOf module:_xt
+ * @param {ReactComponent} ref React组件引用。
+ * @param {String} [key] 可选键值。
  */
 const xtPointer = (ref, key) => {
     if (key) {
@@ -58,22 +107,16 @@ const xtPointer = (ref, key) => {
         }
     }
 };
-
-const xtUpdateForm = (reference, prevProps, ...fields) => {
-    const {form} = reference.props;
-    if (form) {
-        // 之前的值
-        const $previous = prevProps.$inited ? prevProps.$inited : {};
-        const {$inited = {}} = reference.props;
-        // 初始值的变化
-        const previous = Abs.slice.apply(this, [$previous].concat(fields));
-        const inited = Abs.slice.apply(this, [$inited].concat(fields));
-        if (Abs.isDiff(previous, inited)) {
-            const values = Abs.clone(inited);
-            form.setFieldsValue(values);
-        }
-    }
-};
+/**
+ * ## 标准函数
+ *
+ * 在 Zero UI中，以`$`打头的变量名称信息为专用的 Zero UI 属性，这些属性不出现在当前方法结果中，
+ * 当前方法中仅包含特殊的值信息，提供给自定义组件。
+ *
+ * @memberOf module:_xt
+ * @param {Object} values 只提取不以`$`开始的变量信息，将该值继承下去。
+ * @return {Object} 返回最终的值对象。
+ */
 const xtToValue = (values = {}) => {
     const filteredValue = {};
     Object.keys(values)
@@ -82,6 +125,18 @@ const xtToValue = (values = {}) => {
     return filteredValue;
 };
 const IGNORE_KEYS = Abs.immutable(["reference", "fnOut"]);
+/**
+ * ## 标准函数
+ *
+ * 将当前引用中的属性过滤掉一部分，然后执行继承，等价于`valueLimit`和`toLimit`。
+ *
+ * * reference：当前React组件引用信息。
+ * * fnOut：Redux专用的fnOut对应reducer函数。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @return {Object} 返回最终继承对象。
+ */
 const xtToProp = (reference = {}) => {
     E.fxTerminal(!reference, 10049, reference);
     const result = {};
@@ -94,10 +149,7 @@ export default {
     // 同一个界面几次挂载
     xtUnsafe,
     xtGet,
-    // xtReset,
-    // xtResetData,
     xtPrevious,
-    xtUpdateForm,
 
     xtToValue,
     xtToProp

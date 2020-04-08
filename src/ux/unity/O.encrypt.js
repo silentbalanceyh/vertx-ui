@@ -18,10 +18,13 @@ const _toHexStr = (bytes) => {
     return hex.join("");
 };
 /**
- * MD5加密函数，针对value进行MD5加密（全大小）
- * @method encryptMD5
- * @param value 被加密字符串
- * @return {String}
+ * ## 标准函数
+ *
+ * MD5加密函数，针对value进行MD5加密，加密过后的密文全部转换成大写。
+ *
+ * @memberOf module:_encrypt
+ * @param {String} value 被加密字符串。
+ * @return {String} 加密过后的密文。
  */
 const encryptMD5 = (value) => {
     if (value) {
@@ -31,29 +34,38 @@ const encryptMD5 = (value) => {
     }
 };
 /**
- * Base64编码函数，针对value进行Base64编码
- * @method encryptBase64
- * @param value 被编码字符串
- * @return {String}
+ * ## 标准函数
+ *
+ * Base64编码函数，针对value进行Base64编码，生成Base64的密文。
+ *
+ * @memberOf module:_encrypt
+ * @param {String} value 被编码字符串。
+ * @return {String} 编码好的Base64的字符串。
  */
 const encryptBase64 = (value) => {
     return CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(value));
 };
 /**
- * Base64解码函数，针对value进行Base64解码
- * @method decryptBase64
- * @param value 被解码字符串
- * @return {String}
+ * ## 标准函数
+ *
+ * Base64解码函数，针对value进行Base64解码。
+ *
+ * @memberOf module:_encrypt
+ * @param {String} value 已经被编码过的Base64字符串。
+ * @return {String} 解码过后的明文。
  */
 const decryptBase64 = (value) => {
     return CryptoJS.enc.Base64.parse(value).toString(CryptoJS.enc.Utf8);
 };
 /**
- * 数字签名专用Hmac512算法加密，针对value和secret一起进行Hmac512数字签名加密
- * @method encryptHmac512
- * @param value 被签名字符串
- * @param secret 随机密钥
- * @return {String}
+ * ## 标准函数
+ *
+ * 数字签名专用Hmac512算法加密，针对value和secret一起进行Hmac512数字签名加密。
+ *
+ * @memberOf module:_encrypt
+ * @param {String} value 待执行签名的字符串，一般是明文。
+ * @param {String} secret 密钥信息，和当前被签名的客户端绑定。
+ * @return {String} 签名的最终信息，生成的 sig 值。
  */
 const encryptHmac512 = (value, secret) => {
     const raw = CryptoJS.HmacSHA512(value, secret);
@@ -67,10 +79,6 @@ const encryptHmac512 = (value, secret) => {
     }
     return retVal;
 };
-/**
- * @class Encrypt
- * @description 加密、编码、解码函数
- */
 export default {
     // MD5加密
     encryptMD5,

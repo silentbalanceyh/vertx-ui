@@ -2,6 +2,16 @@ import Api from "../ajax";
 import Ux from "ux";
 import U from "underscore";
 
+/**
+ * ## 扩展函数
+ *
+ * 注销专用操作。
+ *
+ * @memberOf module:_op
+ * @async
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Promise<T>} 返回最终Promise
+ */
 const $opLogout = (reference) => Api.logout().then(result => {
     console.info("登出系统！", result);
     // 清除Session
@@ -12,9 +22,14 @@ const $opLogout = (reference) => Api.logout().then(result => {
     Ux.writeClean(reference, ['user']);
 }).catch(error => Ux.ajaxError(reference, error));
 /*
- * 登录框统一使用，目前有两种
- * ExEntry：会员和普通用户专用
- * ExLogin：后台管理员专用（带重置）
+ * ## 扩展函数
+ *
+ * 登录专用操作。
+ *
+ * @memberOf module:_op
+ * @async
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Promise<T>} 返回最终Promise
  */
 const $opLogin = (reference) => (params) => Api.login(params)
     .then((data = {}) => {

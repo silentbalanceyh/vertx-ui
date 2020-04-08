@@ -13,6 +13,16 @@ const FUNS = {
     "event.delete": (config = {}) => reference => params =>
         form(reference).remove(params, config)
 };
+/**
+ * ## 扩展函数
+ *
+ * 生成操作类专用函数执行器执行绑定。
+ *
+ * @memberOf module:_on
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} metadata 元数据配置信息
+ * @returns {Function} 返回事件函数
+ */
 const onOp = (reference, metadata = {}) => {
     const {event = "", config = {}} = metadata;
     const executor = FUNS[event];

@@ -22,6 +22,14 @@ const _xtValue = (input, normalize = data => data) => {
     }
     return normalize(value);
 };
+/**
+ * ## 标准函数
+ *
+ * 表格编辑器专用
+ *
+ * @memberOf module:_xt
+ * @deprecated 后续使用表格编辑器时再考虑要不要删除。
+ */
 const xtOrigin = (origin = {}, response = {}, root, key) => {
     if (root && key) {
         let data = [];
@@ -134,8 +142,5 @@ const xtCallback = (reference, trigger = {}, record = {}, fnCallback) => {
 };
 export default {
     // 核心列变更事件
-    xt2ChangeUnit,
-    xt3ChangeUnit,
     xtOrigin,
-    xtCallback,
 };

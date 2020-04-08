@@ -35,10 +35,8 @@ const mockConnect = (reference, data) => {
         return data;
     }
 };
-/**
+/*
  * Detail数据读取
- * @param reference
- * @param id
  */
 const mockDetail = (reference, id) => {
     const mockData = {};

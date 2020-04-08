@@ -3,7 +3,6 @@ import Ex from 'ex';
 
 export default (reference) => {
     const state = {};
-    state.$ready = true;
     const {$inited = {}} = reference.props;
     const items = Ux.g6DataTree(reference);
     const {nodes = [], edges = []} = $inited;
@@ -34,6 +33,7 @@ export default (reference) => {
     };
     Ex.I.relation().then(relations => {
         state.$autoLink = relations;
+        state.$ready = true;
         reference.setState(state);
     });
 

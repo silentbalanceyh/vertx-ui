@@ -1,7 +1,20 @@
 import Abs from '../abyss';
 import U from 'underscore';
-/*
- * 重写 form 的合并规则
+
+/**
+ * ## 特殊函数「Zero」
+ *
+ * 将两个form的配置进行合并的专用操作，主要合并项：
+ *
+ * 1. ui：两个表单直接连接。
+ * 2. hidden：两个表单的隐藏字段连接。
+ * 3. initial：初始值二者合并。
+ * 4. mapping：映射值二者合并。
+ *
+ * @memberOf module:_to
+ * @param {Object} staticForm 静态表单配置。
+ * @param {Object} dynamicForm 动态表单配置。
+ * @return {Object} 返回最终的表单配置。
  */
 const toForm = (staticForm = {}, dynamicForm = {}) => {
     /*

@@ -43,7 +43,6 @@ const rxExpand = (reference) => (expanded, record = {}) => {
 
 const yiPage = (reference) => {
     const state = {};
-    state.$ready = true;
     /*
      * 参数构造
      * 1) 针对 full column 的构造（用于处理字典）
@@ -97,10 +96,11 @@ const yiPage = (reference) => {
              */
             Ux.ajaxEager(reference, lazyColumn, state.$data)
                 .then($lazy => Ux.promise(state, "$lazy", $lazy))
-                .then(state => reference.setState(state));
+                .then(Ux.ready).then(Ux.pipe(reference));
         }).catch(error => console.error(error));
     } else {
         state.$error = "模型选择失败！";
+        state.$ready = true;
         reference.setState(state);
     }
 };

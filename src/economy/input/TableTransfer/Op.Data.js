@@ -9,9 +9,6 @@ const _getSelectedFilter = (reference, revert = false) => {
     return item => revert ? !keys.contains(item.key) :
         keys.contains(item.key);
 };
-/**
- * 是否显示成平行模式，不以树形模式展开
- */
 const _isFlat = (reference, key) => {
     if (key) {
         const {config = {}} = reference.props;

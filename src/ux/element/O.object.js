@@ -2,11 +2,26 @@ import U from 'underscore';
 import Abs from '../abyss';
 
 /**
+ * ## 标准函数
+ *
  * 不重复追加值到`item`对象中（包含则不设置）
- * @method valueAppend
- * @param item 被设置的对象引用
- * @param field 设置的字段名
- * @param value 设置的字段值
+ *
+ * 框架内部的使用代码如：
+ *
+ * ```js
+ *
+ *     const {$clear, form} = reference.props;
+ *     // 记录切换：从更新表单 -> 添加表单切换
+ *     if ($clear && $clear.is()) {
+ *          const keys = $clear.to();
+ *          keys.forEach(key => Value.valueAppend(data, key, undefined));
+ *     }
+ * ```
+ *
+ * @memberOf module:_value
+ * @param {Object} item 被设置的对象引用
+ * @param {String} field 将要设置的字段名
+ * @param {any} value 将要设置的字段值
  */
 const valueAppend = (item = {}, field = "", value) => {
     if (!item.hasOwnProperty(field)) {
@@ -15,10 +30,17 @@ const valueAppend = (item = {}, field = "", value) => {
 };
 
 /**
- * 读取非undefined的值，去掉undefined值相关信息
- * @method valueValid
- * @param {Object} data
- * @param wild
+ * ## 标准函数
+ *
+ * 将输入数据处理成合法对象，两种模式处理对象Object，由于后端无法识别某些值，所以执行下边处理
+ *
+ * 1. 宽模式，0, null, undefined，false 都会被移除，包括 ""。
+ * 2. 严格模式，仅移除 undefined，其他的保留。
+ *
+ * @memberOf module:_value
+ * @param {Object} data 输入的Object对象。
+ * @param {boolean} wild 是否使用宽模式。
+ * @returns {Object} 返回处理好的数据。
  */
 const valueValid = (data = {}, wild = false) => {
     // eslint-disable-next-line
@@ -43,19 +65,30 @@ const valueValid = (data = {}, wild = false) => {
             }
         }
     }
-    // Number / Float 自动转换
-    // eslint-disable-next-line
-    /*
-    for (const key in data) {
-        if (Abs.isCurrency(data[key])) {
-            data[key] = Num.valueFloat(data[key], 0.0);
-        } else if (Abs.isInteger(data[key])) {
-            data[key] = Num.valueInt(data[key], 0.0);
-        }
-    }
-    */
     return data;
 };
+/**
+ * ## 标准函数
+ *
+ * 对象树检索专用函数，可根据 path 检索对象树
+ *
+ * ```js
+ * const user = {
+ *     "teacher":{
+ *         "son":{
+ *             "username": "Lang"
+ *         }
+ *     }
+ * }
+ * const son = Ux.valuePath(user, "teacher.son");
+ * const username = Ux.valuePath(user, "teacher.son.username");
+ * ```
+ *
+ * @memberOf module:_value
+ * @param {Object} data 将要搜索的对象。
+ * @param {String} path 路径必须是一个字符串，并且包含`.`格式。
+ * @return {null|any} 返回最终搜索到的值，否则为 null。
+ */
 const valuePath = (data = {}, path) => {
     if ("string" !== typeof path) {
         console.error(data, path);

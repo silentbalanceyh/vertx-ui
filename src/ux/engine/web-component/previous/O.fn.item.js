@@ -4,14 +4,6 @@ import React from 'react';
 import {Form} from 'antd';
 import Abs from '../../../abyss';
 
-/**
- * Jsx单行字段的Render处理
- * @method jsxItem
- * @param reference React对应组件引用 React.PureComponent
- * @param item
- * @param render
- * @return {*}
- */
 export default (reference, item = {}, render) => {
     E.fxTerminal(!U.isFunction(render), 10059, render, item);
     item = Abs.clone(item);

@@ -18,6 +18,60 @@ const valueFlat = (field, item = {}) => {
     }
     return result;
 };
+/**
+ * ## 标准函数
+ *
+ * 梯度处理专用函数，函数执行流程
+ *
+ * 1. 先全部拉平，生成带`.`属性的对象（一层结构）。
+ * 2. 按照拉平的属性名进行排序（顺序处理）。
+ * 3. 然后执行**结构化**，将所有的`.`操作符移除。
+ *
+ * 最终目的是生成`Json`树。
+ *
+ * ```js
+ * const config = {
+ *     "optionJsx.item": 12,
+ *     "optionItem.label": "标签",
+ *     "field": "email",
+ *     "optionItem.style.color": "red",
+ *     "ajax.magic.params": {
+ *         "name": "Lang",
+ *         "age": 13
+ *     }
+ * }
+ * const values = Ux.valueLadder(config);
+ * ```
+ *
+ * 上述代码执行过后，会返回下边的结果：
+ *
+ * ```json
+ * {
+ *     "ajax":{
+ *         "magic":{
+ *             "params":{
+ *                 "name": "Lang",
+ *                 "age": 13
+ *             }
+ *         }
+ *     },
+ *     "field": "email",
+ *     "optionItem":{
+ *         "label": "标签",
+ *         "style": {
+ *             "color": "red"
+ *         }
+ *     },
+ *     "optionJsx":{
+ *         "item": 12
+ *     }
+ * }
+ * ```
+ *
+ * @memberOf module:_value
+ * @param {Object} item 输入对象处理
+ * @return {Object} 返回最终构造的对象信息
+ */
 const valueLadder = (item = {}) => {
     // 1. 先拉平这个对象
     const processed = {};
@@ -40,8 +94,7 @@ const valueLadder = (item = {}) => {
                 $item = $item.set(field, processed[field]);
             }
         });
-    const result = $item.toJS();
-    return result;
+    return $item.toJS();
 };
 export default {
     valueLadder,

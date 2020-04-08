@@ -3,6 +3,29 @@
  */
 import Ux from "ux";
 
+/**
+ *
+ * ## 扩展函数
+ *
+ * 计算关系的 identifier 专用函数，返回的数据结构如：
+ *
+ * ```json
+ * {
+ *     "up": [],
+ *     "down": []
+ * }
+ * ```
+ *
+ * * up: 上游关系数据。
+ * * down: 下游关系数据。
+ *
+ * @memberOf module:_on
+ * @method onRelationIdentifiers
+ * @param {String} identifier 统一标识符
+ * @param {Array} source 关系数据源
+ * @param {Array} definition 关系定义数据源
+ * @returns {Object} 返回关系数据对象
+ */
 export default (identifier, source = [], definition = []) => {
     /*
      * 读取传入的 identifier 的 category key

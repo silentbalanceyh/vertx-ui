@@ -69,12 +69,6 @@ const parseDatum = (config = {}) => {
     return meta;
 };
 
-/**
- * 过滤器处理
- * @param reference
- * @param config 配置信息
- * @param filter
- */
 const getDatum = (reference, config = {}, filter = () => true) => {
     let options = [];
     // 如果存在datum节点，则从Assist/Tabular数据源中读取

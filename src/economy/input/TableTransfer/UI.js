@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
         const from = Op.getFrom(this, config, fromTable);
         const to = Op.getTo(this, config, toTable);
         // 处理InputGroup中的jsx
-        const attrs = Ux.valueFlip(jsx);
+        const attrs = Ux.valueLimit(jsx);
         const $attrs = Ux.clone(attrs);
         return (
             <Input.Group {...$attrs} className={"web-table-transfer"}>

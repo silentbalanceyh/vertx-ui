@@ -2,12 +2,6 @@ import E from '../../error';
 import U from 'underscore';
 import VALIDATORS from '../validator';
 
-/**
- * 挂载Ant Design中的验证规则，访问`optionConfig`以及处理对应的`rules`节点
- * @method mountValidator
- * @param reference React对应组件引用
- * @param item
- */
 export default (reference = {}, item = {}) => {
     if (item.optionConfig) {
         const rules = item.optionConfig.rules;

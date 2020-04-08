@@ -7,6 +7,11 @@ import Dev from '../develop';
 import At from './I.atom';
 import Ut from '../unity';
 
+/**
+ * Stream模式的 JsonArray处理。
+ * @class Uarr
+ * @deprecated 后溪直接采用Ux更方便。
+ */
 class Uarr {
     constructor(data = []) {
         /*
@@ -23,11 +28,6 @@ class Uarr {
         }
     }
 
-    /**
-     * 特殊方法
-     * @param items
-     * @returns {Uarr}
-     */
     matrix(items = {}) {
         At.matrix(this.data, items, (item = {}, key, value) => {
             const id = item[key];

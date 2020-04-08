@@ -39,7 +39,6 @@ const _module = (uri = "") => {
 };
 
 export default {
-    /* /app/name/:name */
     app: (failure) => Ux.ajaxFetch("/app/name/:name", {name: Ux['Env']['APP']})
         .catch(error => U.isFunction(failure) ? failure(error) : false),
     /* /api/app */

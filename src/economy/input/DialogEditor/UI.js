@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
                 $submitting = false,    // 是否在提交状态
                 data = [],              // 数据源
             } = this.state;
-            const attrs = Ux.valueFlip(this.props);
+            const attrs = Ux.valueLimit(this.props);
             /*
              * 按钮专用处理（$dialog完善）
              */

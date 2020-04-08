@@ -1,6 +1,16 @@
 import Fn from '../../functions';
 import Ux from 'ux';
 
+/**
+ * ## 扩展函数
+ *
+ * 检查 $condition 是否执行了变化，如果变化则重新加载。
+ *
+ * @memberOf module:_channel
+ * @method yuCondition
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} virtualRef 旧的属性和状态
+ */
 export default (reference, virtualRef) => {
     /*
      * 先检查 $condition 是否有变化

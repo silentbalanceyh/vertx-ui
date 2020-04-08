@@ -1,0 +1,3347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>__private - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://localhost:1017" class="menu-item" id="website_link" >Zero Api</a></h2><h2><a href="http://localhost:1231" class="menu-item" id="website_link" >Zero Extension</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Epic Fabric</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >Origin X Engine</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toParsed">toParsed</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Moment.html">Moment</a><ul class='methods'><li data-type='method'><a href="Moment.html#.from">from</a></li><li data-type='method'><a href="Moment.html#.to">to</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li><li><a href="Uarr.html">Uarr</a></li><li><a href="Uson.html">Uson</a></li></ul><h3>Modules</h3><ul><li><a href="module-__private.html">__private</a><ul class='methods'><li data-type='method'><a href="module-__private.html#.ajaxAdapter">ajaxAdapter</a></li><li data-type='method'><a href="module-__private.html#.ajaxBlob">ajaxBlob</a></li><li data-type='method'><a href="module-__private.html#.ajaxEnd">ajaxEnd</a></li><li data-type='method'><a href="module-__private.html#.ajaxFull">ajaxFull</a></li><li data-type='method'><a href="module-__private.html#.ajaxHeader">ajaxHeader</a></li><li data-type='method'><a href="module-__private.html#.ajaxHeaderJ">ajaxHeaderJ</a></li><li data-type='method'><a href="module-__private.html#.ajaxMock">ajaxMock</a></li><li data-type='method'><a href="module-__private.html#.ajaxOptions">ajaxOptions</a></li><li data-type='method'><a href="module-__private.html#.ajaxParams">ajaxParams</a></li><li data-type='method'><a href="module-__private.html#.ajaxPatternUri">ajaxPatternUri</a></li><li data-type='method'><a href="module-__private.html#.ajaxPatternValue">ajaxPatternValue</a></li><li data-type='method'><a href="module-__private.html#.ajaxRead">ajaxRead</a></li><li data-type='method'><a href="module-__private.html#.ajaxResponse">ajaxResponse</a></li><li data-type='method'><a href="module-__private.html#.ajaxUri">ajaxUri</a></li><li data-type='method'><a href="module-__private.html#.ajaxWrite">ajaxWrite</a></li><li data-type='method'><a href="module-__private.html#.ajaxXSRF">ajaxXSRF</a></li><li data-type='method'><a href="module-__private.html#.cabModal">cabModal</a></li></ul></li><li><a href="module-_aiExpr.html">_aiExpr</a><ul class='methods'><li data-type='method'><a href="module-_aiExpr.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-_aiExpr.html#.aiExprWindow">aiExprWindow</a></li></ul></li><li><a href="module-_ajax.html">_ajax</a><ul class='methods'><li data-type='method'><a href="module-_ajax.html#.%255BP%255DajaxFetch">[P] ajaxFetch</a></li><li data-type='method'><a href="module-_ajax.html#.%255BP%255DajaxPush">[P] ajaxPush</a></li><li data-type='method'><a href="module-_ajax.html#.%255BP%255DajaxResource">[P] ajaxResource</a></li><li data-type='method'><a href="module-_ajax.html#.%255BP%255DmicroFetch">[P] microFetch</a></li><li data-type='method'><a href="module-_ajax.html#.%255BP%255DmicroPush">[P] microPush</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-_ajax.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-_ajax.html#.microGet">microGet</a></li><li data-type='method'><a href="module-_ajax.html#.microPost">microPost</a></li><li data-type='method'><a href="module-_ajax.html#.microPut">microPut</a></li></ul></li><li><a href="module-_ambiguity.html">_ambiguity</a><ul class='methods'><li data-type='method'><a href="module-_ambiguity.html#.ambiguityArray">ambiguityArray</a></li><li data-type='method'><a href="module-_ambiguity.html#.ambiguityEvent">ambiguityEvent</a></li><li data-type='method'><a href="module-_ambiguity.html#.ambiguityFind">ambiguityFind</a></li><li data-type='method'><a href="module-_ambiguity.html#.ambiguityKv">ambiguityKv</a></li><li data-type='method'><a href="module-_ambiguity.html#.ambiguityObject">ambiguityObject</a></li><li data-type='method'><a href="module-_ambiguity.html#.ambiguityValue">ambiguityValue</a></li></ul></li><li><a href="module-_anchor.html">_anchor</a><ul class='methods'><li data-type='method'><a href="module-_anchor.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-_anchor.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-_anchor.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-_anchor.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-_anchor.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-_anchor.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-_anchor.html#.anchorTree">anchorTree</a></li></ul></li><li><a href="module-_ant.html">_ant</a><ul class='methods'><li data-type='method'><a href="module-_ant.html#.formAdvReset">formAdvReset</a></li><li data-type='method'><a href="module-_ant.html#.formClear">formClear</a></li><li data-type='method'><a href="module-_ant.html#.formGet">formGet</a></li><li data-type='method'><a href="module-_ant.html#.formHit">formHit</a></li><li data-type='method'><a href="module-_ant.html#.formHits">formHits</a></li><li data-type='method'><a href="module-_ant.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-_ant.html#.formRead">formRead</a></li><li data-type='method'><a href="module-_ant.html#.formReset">formReset</a></li><li data-type='method'><a href="module-_ant.html#.formSubmit">formSubmit</a></li><li data-type='method'><a href="module-_ant.html#.writeDisabled">writeDisabled</a></li><li data-type='method'><a href="module-_ant.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-_ant.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-_ant.html#.writeReadOnly">writeReadOnly</a></li><li data-type='method'><a href="module-_ant.html#.writeSegment">writeSegment</a></li></ul></li><li><a href="module-_app.html">_app</a><ul class='methods'><li data-type='method'><a href="module-_app.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-_app.html#.isInit">isInit</a></li><li data-type='method'><a href="module-_app.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-_app.html#.signature">signature</a></li><li data-type='method'><a href="module-_app.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-_app.html#.storeUser">storeUser</a></li><li data-type='method'><a href="module-_app.html#.token">token</a></li><li data-type='method'><a href="module-_app.html#.toLogout">toLogout</a></li></ul></li><li><a href="module-_apply.html">_apply</a><ul class='methods'><li data-type='method'><a href="module-_apply.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-_apply.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-_apply.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-_apply.html#.applyItem">applyItem</a></li><li data-type='method'><a href="module-_apply.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-_apply.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-_apply.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-_apply.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-_apply.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-_apply.html#.applyValue">applyValue</a></li></ul></li><li><a href="module-_async.html">_async</a><ul class='methods'><li data-type='method'><a href="module-_async.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-_async.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-_async.html#.debug">debug</a></li><li data-type='method'><a href="module-_async.html#.parallel">parallel</a></li><li data-type='method'><a href="module-_async.html#.passion">passion</a></li><li data-type='method'><a href="module-_async.html#.pipe">pipe</a></li><li data-type='method'><a href="module-_async.html#.promise">promise</a></li><li data-type='method'><a href="module-_async.html#.ready">ready</a></li></ul></li><li><a href="module-_callback.html">_callback</a><ul class='methods'><li data-type='method'><a href="module-_callback.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-_callback.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-_callback.html#.asyncTrue">asyncTrue</a></li></ul></li><li><a href="module-_config.html">_config</a><ul class='methods'><li data-type='method'><a href="module-_config.html#.cabForm">cabForm</a></li><li data-type='method'><a href="module-_config.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-_config.html#.capForm">capForm</a></li><li data-type='method'><a href="module-_config.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-_config.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-_config.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-_config.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-_config.html#.configForm">configForm</a></li><li data-type='method'><a href="module-_config.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-_config.html#.configTab">configTab</a></li><li data-type='method'><a href="module-_config.html#.configTable">configTable</a></li><li data-type='method'><a href="module-_config.html#.raftForm">raftForm</a></li></ul></li><li><a href="module-_connect.html">_connect</a><ul class='methods'><li data-type='method'><a href="module-_connect.html#.connectId">connectId</a></li><li data-type='method'><a href="module-_connect.html#.connectValidator">connectValidator</a></li></ul></li><li><a href="module-_constant.html">_constant</a><ul class='members'><li data-type='member'><a href="module-_constant.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-_constant.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-_constant.html#.ENV">ENV</a></li><li data-type='member'><a href="module-_constant.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-_constant.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-_constant.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-_constant.html#.KEY_APP">KEY_APP</a></li><li data-type='member'><a href="module-_constant.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-_constant.html#.KEY_POINTER">KEY_POINTER</a></li><li data-type='member'><a href="module-_constant.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-_constant.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-_constant.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-_constant.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-_constant.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-_constant.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-_constant.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-_constant.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-_constant.html#.X_SIGMA">X_SIGMA</a></li></ul></li><li><a href="module-_debug.html">_debug</a><ul class='methods'><li data-type='method'><a href="module-_debug.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-_debug.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-_debug.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-_debug.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-_debug.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-_debug.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-_debug.html#.dgRouter">dgRouter</a></li></ul></li><li><a href="module-_element.html">_element</a><ul class='methods'><li data-type='method'><a href="module-_element.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-_element.html#.elementChild">elementChild</a></li><li data-type='method'><a href="module-_element.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-_element.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-_element.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-_element.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-_element.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-_element.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-_element.html#.elementUniqueDatum">elementUniqueDatum</a></li><li data-type='method'><a href="module-_element.html#.elementVertical">elementVertical</a></li></ul></li><li><a href="module-_encrypt.html">_encrypt</a><ul class='methods'><li data-type='method'><a href="module-_encrypt.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-_encrypt.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-_encrypt.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-_encrypt.html#.encryptMD5">encryptMD5</a></li></ul></li><li><a href="module-_error.html">_error</a><ul class='methods'><li data-type='method'><a href="module-_error.html#.fxError">fxError</a></li><li data-type='method'><a href="module-_error.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-_error.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-_error.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-_error.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-_error.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-_error.html#.fxReport">fxReport</a></li><li data-type='method'><a href="module-_error.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-_error.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-_format.html">_format</a><ul class='methods'><li data-type='method'><a href="module-_format.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-_format.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-_format.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-_format.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-_format.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-_format.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-_format.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-_format.html#.formatTpl">formatTpl</a></li></ul></li><li><a href="module-_from.html">_from</a><ul class='methods'><li data-type='method'><a href="module-_from.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-_from.html#.fromPath">fromPath</a></li></ul></li><li><a href="module-_html.html">_html</a><ul class='methods'><li data-type='method'><a href="module-_html.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-_html.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-_html.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-_html.html#.htmlReadOnly">htmlReadOnly</a></li></ul></li><li><a href="module-_is.html">_is</a><ul class='methods'><li data-type='method'><a href="module-_is.html#.isArray">isArray</a></li><li data-type='method'><a href="module-_is.html#.isCn">isCn</a></li><li data-type='method'><a href="module-_is.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-_is.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-_is.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-_is.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-_is.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-_is.html#.isIn">isIn</a></li><li data-type='method'><a href="module-_is.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-_is.html#.isObject">isObject</a></li><li data-type='method'><a href="module-_is.html#.isQr">isQr</a></li><li data-type='method'><a href="module-_is.html#.isRoute">isRoute</a></li></ul></li><li><a href="module-_it.html">_it</a><ul class='methods'><li data-type='method'><a href="module-_it.html#.itElement">itElement</a></li><li data-type='method'><a href="module-_it.html#.itFull">itFull</a></li><li data-type='method'><a href="module-_it.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-_it.html#.itObject">itObject</a></li><li data-type='method'><a href="module-_it.html#.itRow">itRow</a></li><li data-type='method'><a href="module-_it.html#.itTree">itTree</a></li><li data-type='method'><a href="module-_it.html#.itUi">itUi</a></li><li data-type='method'><a href="module-_it.html#.itValue">itValue</a></li></ul></li><li><a href="module-_math.html">_math</a><ul class='methods'><li data-type='method'><a href="module-_math.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-_math.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-_math.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-_math.html#.mathSum">mathSum</a></li></ul></li><li><a href="module-_message.html">_message</a><ul class='methods'><li data-type='method'><a href="module-_message.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-_message.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-_message.html#.messageSuccess">messageSuccess</a></li></ul></li><li><a href="module-_on.html">_on</a><ul class='methods'><li data-type='method'><a href="module-_on.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-_on.html#.onLinker">onLinker</a></li><li data-type='method'><a href="module-_on.html#.onReference">onReference</a></li><li data-type='method'><a href="module-_on.html#.onRouter">onRouter</a></li><li data-type='method'><a href="module-_on.html#.onSave">onSave</a></li><li data-type='method'><a href="module-_on.html#.onUniform">onUniform</a></li></ul></li><li><a href="module-_parser.html">_parser</a><ul class='methods'><li data-type='method'><a href="module-_parser.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-_parser.html#.parseField">parseField</a></li><li data-type='method'><a href="module-_parser.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-_parser.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-_parser.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-_plugin.html">_plugin</a><ul class='methods'><li data-type='method'><a href="module-_plugin.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-_plugin.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-_plugin.html#.pluginFn">pluginFn</a></li><li data-type='method'><a href="module-_plugin.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-_plugin.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-_plugin.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-_plugin.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-_primary.html">_primary</a><ul class='methods'><li data-type='method'><a href="module-_primary.html#.assign">assign</a></li><li data-type='method'><a href="module-_primary.html#.clone">clone</a></li><li data-type='method'><a href="module-_primary.html#.cut">cut</a></li><li data-type='method'><a href="module-_primary.html#.each">each</a></li><li data-type='method'><a href="module-_primary.html#.eventConfirm">eventConfirm</a></li><li data-type='method'><a href="module-_primary.html#.expand">expand</a></li><li data-type='method'><a href="module-_primary.html#.field">field</a></li><li data-type='method'><a href="module-_primary.html#.immutable">immutable</a></li><li data-type='method'><a href="module-_primary.html#.initial">initial</a></li><li data-type='method'><a href="module-_primary.html#.matrix">matrix</a></li><li data-type='method'><a href="module-_primary.html#.prevent">prevent</a></li><li data-type='method'><a href="module-_primary.html#.sequence">sequence</a></li><li data-type='method'><a href="module-_primary.html#.slice">slice</a></li></ul></li><li><a href="module-_qr.html">_qr</a><ul class='methods'><li data-type='method'><a href="module-_qr.html#.qrClear">qrClear</a></li><li data-type='method'><a href="module-_qr.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-_qr.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-_qr.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-_qr.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-_qr.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-_qr.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-_qr.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-_random.html">_random</a><ul class='methods'><li data-type='method'><a href="module-_random.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-_random.html#.randomString">randomString</a></li><li data-type='method'><a href="module-_random.html#.randomUUID">randomUUID</a></li></ul></li><li><a href="module-_redux.html">_redux</a><ul class='methods'><li data-type='method'><a href="module-_redux.html#.createAction">createAction</a></li><li data-type='method'><a href="module-_redux.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-_redux.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-_redux.html#.fnOut">fnOut</a></li><li data-type='method'><a href="module-_redux.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-_redux.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-_redux.html#.writeTree">writeTree</a></li></ul></li><li><a href="module-_romantic.html">_romantic</a><ul class='methods'><li data-type='method'><a href="module-_romantic.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-_romantic.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-_romantic.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-_romantic.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-_romantic.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-_romantic.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-_romantic.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-_rx.html">_rx</a><ul class='methods'><li data-type='method'><a href="module-_rx.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-_rx.html#.rxChecked">rxChecked</a></li><li data-type='method'><a href="module-_rx.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-_rx.html#.rxEtat">rxEtat</a></li><li data-type='method'><a href="module-_rx.html#.rxFlow">rxFlow</a></li><li data-type='method'><a href="module-_rx.html#.rxInit">rxInit</a></li><li data-type='method'><a href="module-_rx.html#.rxResize">rxResize</a></li><li data-type='method'><a href="module-_rx.html#~rxEdict">rxEdict</a></li></ul></li><li><a href="module-_sorter.html">_sorter</a><ul class='methods'><li data-type='method'><a href="module-_sorter.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-_sorter.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-_sorter.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-_sorter.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-_sorter.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-_sorter.html#.sorterObject">sorterObject</a></li></ul></li><li><a href="module-_to.html">_to</a><ul class='methods'><li data-type='method'><a href="module-_to.html#.toChildItem">toChildItem</a></li><li data-type='method'><a href="module-_to.html#.toCss">toCss</a></li><li data-type='method'><a href="module-_to.html#.toForm">toForm</a></li><li data-type='method'><a href="module-_to.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-_to.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-_to.html#.toJson">toJson</a></li><li data-type='method'><a href="module-_to.html#.toKey">toKey</a></li><li data-type='method'><a href="module-_to.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-_to.html#.toLink">toLink</a></li><li data-type='method'><a href="module-_to.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-_to.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-_to.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-_to.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-_to.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-_to.html#.toTimeFixed">toTimeFixed</a></li><li data-type='method'><a href="module-_to.html#.toTree">toTree</a></li><li data-type='method'><a href="module-_to.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-_to.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-_to.html#.toWidth">toWidth</a></li><li data-type='method'><a href="module-_to.html#.toX">toX</a></li></ul></li><li><a href="module-_tree.html">_tree</a><ul class='methods'><li data-type='method'><a href="module-_tree.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-_tree.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-_tree.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-_tree.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-_tree.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-_tree.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-_tree.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-_tree.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-_value.html">_value</a><ul class='methods'><li data-type='method'><a href="module-_value.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-_value.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-_value.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-_value.html#.valueDynamicChange">valueDynamicChange</a></li><li data-type='method'><a href="module-_value.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-_value.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-_value.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-_value.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-_value.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-_value.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-_value.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-_value.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-_value.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-_value.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-_value.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-_value.html#.valueOnChange">valueOnChange</a></li><li data-type='method'><a href="module-_value.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-_value.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-_value.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-_value.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-_value.html#.valueTime">valueTime</a></li><li data-type='method'><a href="module-_value.html#.valueTimes">valueTimes</a></li><li data-type='method'><a href="module-_value.html#.valueTriggerChange">valueTriggerChange</a></li><li data-type='method'><a href="module-_value.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-_xt.html">_xt</a><ul class='methods'><li data-type='method'><a href="module-_xt.html#.xt2Blur">xt2Blur</a></li><li data-type='method'><a href="module-_xt.html#.xt2Change">xt2Change</a></li><li data-type='method'><a href="module-_xt.html#.xtChange">xtChange</a></li><li data-type='method'><a href="module-_xt.html#.xtColumn">xtColumn</a></li><li data-type='method'><a href="module-_xt.html#.xtConfig">xtConfig</a></li><li data-type='method'><a href="module-_xt.html#.xtData">xtData</a></li><li data-type='method'><a href="module-_xt.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-_xt.html#.xtInit">xtInit</a></li><li data-type='method'><a href="module-_xt.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-_xt.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-_xt.html#.xtInitSource">xtInitSource</a></li><li data-type='method'><a href="module-_xt.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-_xt.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-_xt.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-_xt.html#.xtOrigin">xtOrigin</a></li><li data-type='method'><a href="module-_xt.html#.xtPointer">xtPointer</a></li><li data-type='method'><a href="module-_xt.html#.xtPrevious">xtPrevious</a></li><li data-type='method'><a href="module-_xt.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-_xt.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-_xt.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-_xt.html#.xtToProp">xtToProp</a></li><li data-type='method'><a href="module-_xt.html#.xtToValue">xtToValue</a></li><li data-type='method'><a href="module-_xt.html#.xtUnsafe">xtUnsafe</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">__private</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h1>内部私有模块</h1>
+<p>私有函数，不可以通过 <code>Ux.xxx</code> 调用，没有 exported 内容</p></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxAdapter"><span class="type-signature">(static) </span>ajaxAdapter<span class="signature">(body)</span><span class="type-signature"> &rarr; {Object|Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数「Zero」</h2>
+<p>响应处理器，解析 Zero 中的响应数据专用，Zero 中的响应数据如下：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;data&quot;: &quot;...响应格式&quot;
+}
+</code></pre>
+<ul>
+<li>在搜索引擎返回页面中，<code>data</code>包含<code>list</code>和<code>count</code>两个参数（包括分页的最终统计）</li>
+<li>在直接界面中，<code>data</code>的格式如<code>[]</code>格式，Array数组。</li>
+<li>在其他响应数据中，<code>data</code>的格式如<code>{}</code>的 Object 数据格式。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>body</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Zero中的核心响应格式</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>解析过后的格式，<code>body.data</code>的数据信息</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxBlob"><span class="type-signature">(async, static) </span>ajaxBlob<span class="signature">(request, params)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>ES7 语法中的响应处理函数，字节流的响应处理器，主要用于 Blob 处理</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>fetch库中需要使用的Http请求对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求参数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>最终返回的 Promise 核心信息</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxEnd"><span class="type-signature">(static) </span>ajaxEnd<span class="signature">(reference, redux)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>响应的最终处理器，在接收到响应数据过后的界面操作，主要执行下边步骤：</p>
+<ol>
+<li>设置 reference 中的状态 <code>$loading</code> 为 false。</li>
+<li>调用 <code>writeSubmit</code> 写入 redux 中的 Tree 数据相关信息，修改 Store。</li>
+<li>抓取 <code>doSubmitting</code> 函数，执行它确认提交完成，关闭防重复提交。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">React.Component</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>redux</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>是否开启了 redux 数据流</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxFull"><span class="type-signature">(static) </span>ajaxFull<span class="signature">(method, secure)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>标准私有函数「2阶」</h2>
+<p>Http写资源的核心函数，分为两种模式</p>
+<ol>
+<li>secure = false：非安全模式的信息读取</li>
+<li>secure = true：安全模式的信息读取</li>
+</ol>
+<p>这种模式下会处理更多的 Http 请求体部分的内容</p>
+<blockquote>
+<p>这种模式只处理当前站点的 uri 路径，不结合 ENDPOINT 的路径执行远程请求</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>post</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>HTTP方法，可支持的 Http 相关方法</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否安全模式的读取</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>最终的 Promise 生成器</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxHeader"><span class="type-signature">(static) </span>ajaxHeader<span class="signature">(headers, secure)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数「Zero」</h2>
+<p>处理Zero Ui框架自带的 Http请求头相关信息，支持两种模式处理请求头</p>
+<ol>
+<li>secure = true：安全模式，会加入 Authorization 头信息，使用 token信息。</li>
+<li>secure = false：非安全模式的请求头相关信息。</li>
+</ol>
+<p>检查环境变量看是否开启了<code>X_HEADER_SUPPORT</code>执行，如果开启了则直接对接 Zero 框架，如果对接框架，则
+引入<code>X-App-Key、X-App-Id、X-Sigma、X-Lang</code>四个参数。</p>
+<ul>
+<li>X-App-Key|X-App-Id：应用相关参数</li>
+<li>X-Sigma：容器专用环境 sigma 参数</li>
+<li>X-Lang：多语言环境，用于提供语言信息，从环境变量中获取</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Headers</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>构造的 Headers 对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>执行安全和非安全模式处理</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxHeaderJ"><span class="type-signature">(static) </span>ajaxHeaderJ<span class="signature">(secure)</span><span class="type-signature"> &rarr; {Headers}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>针对 headers 的服务端偏好和客户端偏好的默认处理（处理 Mime）</p>
+<ol>
+<li>默认的 Content-Type 的值：application/json</li>
+<li>默认的 Accept 的值：application/json;q=1</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否执行安全请求处理，安全请求会带上 Authorization</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回 fetch 库中的 Headers 类型数据</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Headers</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxMock"><span class="type-signature">(async, static) </span>ajaxMock<span class="signature">(request, params, executor)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>Ajax的 Mock专用接口，用于模拟 Mock 数据所需的模拟数据接口，模拟数据位于：<code>src/mock</code> 中。
+调用时可直接使用：</p>
+<pre class="prettyprint source lang-js"><code>import Mock from 'mock';
+</code></pre>
+<p>mock数据格式如下：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;mock&quot;: true,
+    &quot;data&quot;: &quot;...数据格式&quot;,
+    &quot;processor&quot;: &quot;内部数据处理函数，可自定义逻辑&quot;
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">mock</td>
+<td style="text-align:left">true 开启Mock，必须在环境变量开启模拟数据时生效，false则直接关闭mock</td>
+</tr>
+<tr>
+<td style="text-align:left">data</td>
+<td style="text-align:left">对象或数组，Object或Array格式</td>
+</tr>
+<tr>
+<td style="text-align:left">processor</td>
+<td style="text-align:left">函数，参数参考下边函数参数</td>
+</tr>
+</tbody>
+</table>
+<h2>参数函数</h2>
+<h3>processor</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">source</td>
+<td style="text-align:left">any</td>
+<td style="text-align:left">输入的参数核心信息</td>
+</tr>
+<tr>
+<td style="text-align:left">params</td>
+<td style="text-align:left">any</td>
+<td style="text-align:left">请求的格式相关数据</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求基本信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求参数相关信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>executor</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>最终 Promise<T> 的执行器</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>模拟数据后的最终数据处理。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxOptions"><span class="type-signature">(static) </span>ajaxOptions<span class="signature">(method, headers, inputOpts)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>跨域访问专用参数，针对不同的跨域模式使用不同的跨域参数，跨域受环境变量影响</p>
+<ol>
+<li>CORS_MODE：如果是 cors 则是标准跨域模式</li>
+<li>CORS_CREDENTIALS：表示跨域中的 credential 的设置信息</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP相关请求方法</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Headers</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP请求头相关信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>inputOpts</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>需要存储的头部信息的相关内容</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的 HTTP 头部信息</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxParams"><span class="type-signature">(static) </span>ajaxParams<span class="signature">(params)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<ol>
+<li>追加<code>language</code>字段信息，从环境变量中读取，注意查询引擎 Qr 参数不追加 language。</li>
+<li>是否包含 $body 参数，如果包含则直接将 <code>$body</code> 作为 Http 请求体。</li>
+</ol>
+<p>$body 的存在主要是用于路径和请求体同时存在的情况，如：</p>
+<pre class="prettyprint source lang-shell"><code>PUT /api/user/:key
+</code></pre>
+<p>上述请求中，请求内容很可能是：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;key&quot;: &quot;用户id信息&quot;,
+    &quot;$body&quot;: {
+        &quot;...&quot;: &quot;请求体内容&quot;
+    }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>参数相关信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>核心数据内容，以字符串的方式存储</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxPatternUri"><span class="type-signature">(static) </span>ajaxPatternUri<span class="signature">(uri, params)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>特殊私有函数「Qr」</h2>
+<p>该函数同样用于 uri 的路径参数解析，并且是查询引擎专用方法，特殊查询参数才会使用，参数<code>params</code>为查询引擎参数，它的基本
+格式如：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;criteria&quot;: {
+        &quot;...&quot;: &quot;查询条件参数&quot;
+    }
+}
+</code></pre>
+<p>该函数内部会调用 <code>ajaxPatternValue</code> 执行参数本身的<code>拉平</code>解析步骤。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>uri</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>ajax调用访问的路径信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>传入的参数信息，该参数可以是来自 body</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回处理过后的 uri normalized 结果</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxPatternValue"><span class="type-signature">(static) </span>ajaxPatternValue<span class="signature">(criteria, collector)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>特殊私有函数</h2>
+<p>该函数近似于 <code>itObject</code>，但在处理过程中，仅用于 <code>ajax</code> 库中处理核心函数 criteria 函数，这种类型的处理十分特殊，它只负责
+处理 uri 中带路径函数的情况：<code>/api/:name</code>这种情况，在这种情况中，有可能传入参数如下：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;criteria&quot;: {
+        &quot;email&quot;: &quot;lang.yu@hpe.com&quot;,
+        &quot;&quot;: true,
+        &quot;$0&quot;: {
+             &quot;name,=&quot;: &quot;doc-api&quot;
+        }
+    }
+}
+</code></pre>
+<p>上述参数生成的 connector 如下：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;email&quot;: &quot;lang.yu@hpe.com&quot;,
+    &quot;name&quot;: &quot;doc-api&quot;
+}
+</code></pre>
+<p>使用参数格式直接替换路径中的 <code>:name</code> 参数生成：<code>/api/doc-api</code> 的最终路径信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>criteria</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>查询条件专用方法</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>collector</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>最终计算的收集器，收集所有数据信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxRead"><span class="type-signature">(static) </span>ajaxRead<span class="signature">(method, secure)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>标准私有函数「2阶」</h2>
+<p>Http读取资源的核心函数，分为两种模式</p>
+<ol>
+<li>secure = false：非安全模式的信息读取</li>
+<li>secure = true：安全模式的信息读取</li>
+</ol>
+<p>读取的最终结果为<code>Function</code>得到最终函数信息，该二阶函数是统一资源读取函数，生成的函数执行最终的Ajax请求处理，这个方法只会
+被内部调用，在上层调用时会被直接分流。</p>
+<blockquote>
+<p>这种模式只处理当前站点的 uri 路径，不结合 ENDPOINT 的路径执行远程请求</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>get</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>HTTP方法，可支持的 Http 相关方法</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否安全模式的读取</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>最终的 Promise 生成器</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxResponse"><span class="type-signature">(async, static) </span>ajaxResponse<span class="signature">(request, params)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>ES7 语法中的响应处理函数，字符流响应处理器</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Request</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>fetch库中需要使用的Http请求对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求参数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>最终返回的 Promise 核心信息</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxUri"><span class="type-signature">(static) </span>ajaxUri<span class="signature">(uri, method, params)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>特殊私有函数</h2>
+<p>该方法执行步骤：</p>
+<ol>
+<li>先执行<code>pattern</code>的直接解析。</li>
+<li>再执行带<code>criteria</code>的深度解析，Qr模式的内容。</li>
+<li>如果环境变量打开了数字签名，执行uri的数字签名。</li>
+<li>解析<code>GET/DELETE</code>方法专用的 query string 的内容。</li>
+<li>根据 HTTP 的方法判断是否要追加 query 到最终路径中。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>uri</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>未解析的原始路径</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>get</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>HTTP方法名称，大小写无碍</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>params</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>当前请求需要的所有参数对</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行过处理的路径（解析后）</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxWrite"><span class="type-signature">(static) </span>ajaxWrite<span class="signature">(method, secure)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>标准私有函数「2阶」</h2>
+<p>Http写资源的核心函数，分为两种模式</p>
+<ol>
+<li>secure = false：非安全模式的信息读取</li>
+<li>secure = true：安全模式的信息读取</li>
+</ol>
+<p>这种模式下会处理更多的 Http 请求体部分的内容，并且结合 ENDPOINT 计算远程路径，SOA标准调用的 Ajax 函数，执行写入</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>method</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>post</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>HTTP方法，可支持的 Http 相关方法</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>secure</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否安全模式的读取</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>最终的 Promise 生成器</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ajaxXSRF"><span class="type-signature">(static) </span>ajaxXSRF<span class="signature">(headers)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>私有函数</h2>
+<p>XSRF请求专用，从cookie中读取XSRF的Token并且放在 xsrf 头中。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>headers</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求头相关信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".cabModal"><span class="type-signature">(static) </span>cabModal<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>内部私有函数「Zero」</h2>
+<p>该方法会读取配置数据，在资源文件中如<code>UI.json</code>会包含如下数据：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;_model&quot;: {},
+    &quot;_dialog&quot;: {
+        &quot;...&quot;: &quot;该配置在 shared.json 中已经包含&quot;
+    }
+}
+</code></pre>
+<p>该配置主要读取模态窗口专用配置而存在，并且执行不同层级的读取，最终生成：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;type&quot;: &quot;窗口类型&quot;,
+    &quot;title&quot;: &quot;窗口标题&quot;,
+    &quot;content&quot;: &quot;窗口内容&quot;
+}
+</code></pre>
+<p>返回的结果可直接被 antd 中的 <code>Modal</code> 组件消费。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>将要读取的键值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终读取到的数据</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.3</a> on Wed Apr 08 2020 17:34:31 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

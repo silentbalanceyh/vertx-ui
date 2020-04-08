@@ -35,7 +35,15 @@ const applyField = (item = {}) => {
     }
     return item;
 };
-
+/**
+ * ## 标准函数
+ *
+ * 解析 `title` = 值的专用标题处理，解析带标题的行。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Object|String} item 标准入口解析。
+ * @returns {Object} 被解析过的字段标准对象。
+ */
 const aiExprTitle = (item) => {
     // title专用解析器
     if ("string" === typeof item
@@ -62,11 +70,24 @@ const aiExprTitle = (item) => {
     return item;
 };
 /**
- * 顺序：field, optionItem.label, span, optionJsx.style.width, render, $KV$
+ * ## 标准函数
+ *
+ * 解析顺序：`field, optionItem.label, span, optionJsx.style.width, render, $KV$`。
+ *
+ * @memberOf module:_aiExpr
+ * @param {String} literal 被解析的字段表达式信息。
+ * @returns {Object} 被解析过的字段标准对象。
  */
 const aiExprField = (literal = "") => applyField(Parser.parseItem(literal, "field"));
 /**
- * 如果是Object：只有metadata，然后包含各种options
+ *
+ * ## 标准函数
+ *
+ * 双源解析器，解析 field 和 metadata 专用。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Object} item 标准入口解析。
+ * @returns {Object} 被解析过的字段标准对象。
  */
 const aiExprFieldEx = (item = {}) => {
     if (item.metadata) {

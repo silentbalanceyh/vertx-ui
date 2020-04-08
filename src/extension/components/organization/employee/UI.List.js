@@ -13,7 +13,7 @@ import FormFilter from './form/UI.Filter';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Ex.yiCompany(this);
+        Ex.yiCompany(this).then(Ux.pipe(this));
     }
 
     render() {

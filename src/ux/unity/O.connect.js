@@ -1,27 +1,15 @@
 import E from "../error";
-import U from "underscore";
 import Abs from '../abyss';
 
 /**
- * 窗口onOk连接在函数，连接Html元素并设置onOk的触发器
- * @method connectButton
- * @param dialog 传入的dialog窗口配置
- */
-const connectButton = (dialog = {}) => {
-    if ("string" === typeof dialog.onOk) {
-        // 防止引用切换，必须使用Immutable
-        const key = Abs.clone(dialog);
-        // Monitor连接部分代码
-        dialog.onOk = () => connectId(key.onOk);
-    } else {
-        // 防重复注入
-        E.fxWarning(!U.isFunction(dialog.onOk), 10016, dialog.onOk);
-    }
-};
-
-/**
- * 链接某个ID的元素
- * @param id
+ * ## 标准函数
+ *
+ * > 必须在`componentDidMount`之后才能执行。
+ *
+ * 使用外围的代码触发`onClick`操作，点击`id`相匹配的元素。
+ *
+ * @memberOf module:_connect
+ * @param {String} id 触发id的点击事件。
  */
 function connectId(id) {
     const ele = document.getElementById(id);
@@ -31,9 +19,23 @@ function connectId(id) {
     }
 }
 
-/*
- * validation的专用
- * 针对 rules 的规则处理
+/**
+ * ## 特殊函数「Zero」
+ *
+ * 加载特殊属性的实时验证专用函数，解析 optionConfig 中的 rules，并且执行验证。特殊规则如：
+ *
+ * 修改`validateTrigger`为 onChange的组件：
+ *
+ * * aiSelect
+ * * aiListSelector
+ * * aiTreeSelect
+ * * aiDialogEditor
+ *
+ * 禁用组件时删除`rules`属性不执行绑定。
+ *
+ * @memberOf module:_connect
+ * @param {Object} cell 当前表单输入字段专用配置。
+ * @return {Object} 返回需要配置的`optionConfig`对象。
  */
 const connectValidator = (cell = {}) => {
     /*
@@ -73,11 +75,6 @@ const connectValidator = (cell = {}) => {
     return optionConfig;
 };
 export default {
-    /*
-     * 连接 Button，Id
-     * 连接 Validator 中的 rules 通用处理
-     */
-    connectButton,
     connectId,
     connectValidator,
 };

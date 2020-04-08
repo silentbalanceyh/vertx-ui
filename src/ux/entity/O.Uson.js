@@ -7,6 +7,11 @@ import At from './I.atom';
 import Ele from '../element';
 import Abs from '../abyss';
 
+/**
+ * Stream模式的 JsonObject处理。
+ * @class Uson
+ * @deprecated 后溪直接采用Ux更方便。
+ */
 class Uson {
     constructor(data = {}) {
         this.data = Abs.clone(data);

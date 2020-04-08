@@ -15,12 +15,29 @@ const aiMetaColumn = (item = {}) => {
     }
     return item;
 };
+/**
+ * ## 标准函数
+ *
+ * 列专用解析器，表格中的 columns 配置解析
+ *
+ * @memberOf module:_aiExpr
+ * @param {Array} columns 针对字符串数组和对象数组的合并解析流程。
+ * @returns {Array} 解析成标准的 column 数组格式。
+ */
 const aiExprColumn = (columns = []) =>
     mapIterator(columns, (values = []) =>
             Apply.applyColumn(Parser.parseItem(values, "column")),
         aiMetaColumn)
         .map(column => Value.valueLadder(column)); /* 列的拉平处理 */
-
+/**
+ * ## 标准函数
+ *
+ * 图标解析专用，解析图标中的风格数据，解析多个图标。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Array} icons 图标解析。
+ * @returns {Array} 解析成标准的 icons 数组格式。
+ */
 const aiExprIcon = (icons) => {
     const fnNorm = (item = {}) => {
         if (item.iconStyle && item.iconStyle.fontSize) {

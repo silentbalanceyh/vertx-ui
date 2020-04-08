@@ -41,7 +41,14 @@ const xtTrigger = (reference) => {
         return !values[sureField];
     }
 };
-
+/**
+ * ## 标准函数
+ *
+ * 延迟初始化，统一处理，在 `componentDidMount` 中调用。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ */
 const xtLazyInit = (reference) => {
     const {config = {}, id} = reference.props;
     const isTrigger = xtTrigger(reference);
@@ -101,6 +108,15 @@ const xtLazyInit = (reference) => {
     }
 };
 
+/**
+ * ## 标准函数
+ *
+ * 延迟初始化，统一处理，在 `componentDidUpdate` 中调用。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} virtualRef 包含了`props`和`state`的前一个状态的引用。
+ */
 const xtLazyUp = (reference, virtualRef) => {
     const prevValue = virtualRef.props.value;
     const curValue = reference.props.value;

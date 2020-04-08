@@ -4,11 +4,14 @@ import U from 'underscore';
 import E from '../error';
 
 /**
- * 将数据会写状态树，props中需要包含`fnOut`函数
- * @method writeTree
- * @param reference React对应组件引用 React.PureComponent
- * @param state 写入的状态数据
- * @param dft 默认值
+ * ## 特殊函数「Zero」
+ *
+ * Zero UI中和 redux 连接到一起的状态统一修改函数，主要修改节点为 `out` 根节点下的数据。
+ *
+ * @memberOf module:_redux
+ * @param {ReactComponent} reference React组件。
+ * @param {Object} state 被修改的状态信息。
+ * @param {any} dft 状态默认值
  */
 const writeTree = (reference, state, dft = null) => {
     const {fnOut} = reference.props;
@@ -32,12 +35,21 @@ const writeTree = (reference, state, dft = null) => {
         E.fxFatal(10003, reference);
     }
 };
-// ComplexList专用节点，旧节点
-// "grid.list",
-// "grid.query",
-// TreeList专用节点
-// "grid.tree",
-// "tree.selected",
+/**
+ * ## 特殊函数「Zero」
+ *
+ * Zero UI 中的 redux 树的清除方法，用于清除该节点上的数据，该清除会清掉默认信息。
+ *
+ * * `datum.data`。
+ * * `datum.menus`。
+ * * `datum.inited`。
+ * * `assist`。
+ * * `state.submitting`.
+ *
+ * @memberOf module:_redux
+ * @param {ReactComponent} reference React组件。
+ * @param {Array} keys 被清除的所有节点信息。
+ */
 const writeClean = (reference, keys = []) => {
     const baseKeys = [
         "datum.data",       // datum数据处理问题
@@ -50,7 +62,15 @@ const writeClean = (reference, keys = []) => {
     baseKeys.forEach(key => state[key] = undefined);
     writeTree(reference, state, undefined);
 };
-
+/**
+ * ## 特殊函数「Zero」
+ *
+ * Zero UI 中的 redux 树的房重复提交专用方法，用于检查 redux 引擎下的防重复提交。
+ *
+ * @memberOf module:_redux
+ * @param {ReactComponent} reference React组件。
+ * @param {boolean} loading 防重复提交专用状态值。
+ */
 const writeSubmit = (reference, loading = true) => {
     const state = {};
     state[`status.submitting`] = {loading};

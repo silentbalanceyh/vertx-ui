@@ -122,6 +122,49 @@ const wizard = (reference) => (params, promiseSupplier) => {
         }
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 根据 `reference` 执行表单操作
+ *
+ * ```json
+ * {
+ *     add: (params) => Promise,
+ *     save: (params) => Promise,
+ *     remove: (params) => Promise,
+ *     filter: (params) => Promise,
+ *     query: (params) => Promise,
+ *     wizard: (params) => Promise
+ * }
+ * ```
+ *
+ * ### 函数说明
+ *
+ * | 函数名 | 说明 |
+ * |:---|:---|
+ * | add | 添加表单提交 |
+ * | save | 保存表单提交 |
+ * | remove | 删除表单提交 |
+ * | filter | 高级搜索查询条件处理 |
+ * | query | 直接搜索表单处理 |
+ * | wizard | 步骤表单提交 |
+ *
+ * 当前API的框架内部调用代码如：
+ *
+ * ```js
+ * import Ex from 'ex';
+ *
+ * const $opAdd = (reference) => params => Ex.form(reference).add(params, {
+ *      uri: "/api/role",
+ *      dialog: "added",
+ * });
+ * ```
+ *
+ * @memberOf module:_business
+ * @method form
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Object} 返回对象信息
+ * */
 export default (reference) => ({
     add: add(reference),
     save: save(reference),

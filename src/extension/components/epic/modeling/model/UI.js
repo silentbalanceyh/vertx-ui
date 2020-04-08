@@ -11,7 +11,7 @@ import {ModelAdd as FormAdd, ModelEdit as FormEdit, ModelFilter as FormFilter,} 
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Ex.yiStandard(this);
+        Ex.yiStandard(this).then(Ux.pipe(this));
     }
 
     render() {

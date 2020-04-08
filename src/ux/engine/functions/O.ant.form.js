@@ -1,6 +1,15 @@
 import Dt from '../datum';
 import U from "underscore";
 
+/**
+ * ## 引擎函数
+ *
+ * `formReset`的强化版本，内部可调用`doReset`方法。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String[]} keys 被重设的表单字段。
+ */
 const formAdvReset = (reference, keys = []) => {
     const {form} = reference.props;
     if (form) {

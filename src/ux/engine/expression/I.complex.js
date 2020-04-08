@@ -90,9 +90,6 @@ const plxFromTo = (reference, jsx = {}) => {
     if (config.to) normalized.to = fnNorm(config.to);
     jsx.config = normalized;
 };
-/*
- * 特殊格式解析
- */
 const plxRecord = (reference, jsx = {}) => {
     let rxRecord = (data) => data;
     if (jsx.record) {

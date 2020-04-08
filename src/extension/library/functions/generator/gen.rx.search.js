@@ -2,6 +2,15 @@ import Cm from "./gen.common";
 import G from "../global";
 import Ux from "ux";
 
+/**
+ * ## 扩展函数
+ *
+ * 搜索专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
     (params) => {
         /*
@@ -11,6 +20,16 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
         const uri = options[G.Opt.AJAX_SEARCH_URI];
         return Ux.ajaxPost(uri, params);
     });
+/**
+ * ## 扩展函数
+ *
+ * 条件专用函数：清空设置双用
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {boolean} isClear 是否清除查询条件
+ * @returns {Function} 生成函数
+ */
 const rxCondition = (reference, isClear = false) => {
     if (isClear) {
         /*
@@ -38,6 +57,15 @@ const rxCondition = (reference, isClear = false) => {
         })
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 基础搜索 / 高级搜索
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxFilter = (reference) =>
     ($filters = {}, $filtersRaw) => {
         const state = {};

@@ -57,7 +57,18 @@ const findTUnique = (fromRet, identifier, categories = []) => {
         }
     }
 };
-
+/**
+ *
+ * ## 扩展函数
+ *
+ * 计算关系类型专用函数，计算唯一关系信息。
+ *
+ * @memberOf module:_on
+ * @method onRelationType
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} record 当前数据记录
+ * @returns {undefined|Object} 返回唯一关系值
+ */
 export default (reference, record = {}) => {
     /*
      * 定义

@@ -12,9 +12,9 @@ const yiModel = (reference, state) => {
 };
 
 const yiPage = (reference) => {
-    Ex.yiStandard(reference, true)
+    Ex.yiStandard(reference)
         .then(state => yiModel(reference, state))
-        .then(state => reference.setState(state));
+        .then(Ux.pipe(reference));
 };
 
 const yoSwitch = (reference) => {

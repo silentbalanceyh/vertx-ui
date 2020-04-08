@@ -89,4 +89,4 @@ const input = {
     ajax,
     engine,
 };
-export default () => E.reportExported(input, config);
+export default () => E.fxReport(input, config);

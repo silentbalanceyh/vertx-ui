@@ -2,14 +2,29 @@ import yoRender from '../yo/yo.render';
 import React from "react";
 import {LoadingAlert, PageCard} from 'web';
 import U from 'underscore';
-/*
- * config 配置
+
+/**
+ * ## 渲染函数
+ *
+ * 渲染带 `PageCard` 的页面专用组件。
+ *
+ * config 配置的数据结构
+ *
+ * ```js
  * {
  *      title: 坐上标题（同一个页面切换刷参数时必须）
  *      header：提示信息，用于加载 LoadingAlert 的表单说明信息（头）
  *      name: 当前组件的名称
  *      color：当前日志的背景色（白色字体）
  * }
+ * ```
+ *
+ * @memberOf module:_channel
+ * @method ylCard
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Function} fnRender 渲染函数
+ * @param {Object} config 输入的配置数据
+ * @returns {Jsx}
  */
 export default (reference, fnRender, config = {}) => {
     const {

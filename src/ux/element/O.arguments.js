@@ -2,8 +2,36 @@ import U from "underscore";
 import {DataObject} from 'entity';
 import Abs from '../abyss';
 
+/**
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性函数数组规范化
+ *
+ * 1. 如果 args 本身是数组，则直接返回 args，并且过滤掉 undefined 的元素。
+ * 2. 如果 args 的第一个元素是数组，则直接返回第一个元素，并且过滤掉 undefined 的元素。
+ * 3. 如果 args 不是数组，也不是变参数组，则直接使用 `[]` 修饰过后返回最终数组。
+ *
+ * 框架内部的使用代码：
+ *
+ * ```js
+ *
+ * // 支持三种输入数据格式
+ * //     args 变参：("path1","path2");
+ * //     args 数组：(["path1","path2"]);
+ * //     args 修饰：("path1");
+ * const fromPath = (reference = {}, ...args) => {
+ *     let keys = Ele.ambiguityArray.apply(this, args);
+ *     const length = keys['length'];
+ *     // ... 其他代码部分
+ * }
+ * ```
+ *
+ * @memberOf module:_ambiguity
+ * @param {any[]|Array} args 传入的二义性参数信息
+ * @return {Array} 返回最终的数组信息
+ */
 const ambiguityArray = (...args) => {
-    let ref = null;
+    let ref;
     if (1 === args.length && U.isArray(args[0])) {
         ref = args[0];
     } else {
@@ -15,9 +43,6 @@ const ambiguityArray = (...args) => {
     }
     return U.isArray(ref) ? ref.filter(item => undefined !== item) : [];
 };
-/*
- * 二义性遍历
- */
 const _itObject = (object = {}, fnKv) => {
     const ref = object;
     // eslint-disable-next-line
@@ -35,6 +60,19 @@ const _itArray = (array = [], fnKv) => {
     array.forEach((each, index) => result[index] = ambiguityKv(each, fnKv));
     return result;
 };
+/**
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性遍历函数
+ *
+ * 1. 如果输入的是 Object，则直接遍历，并且传入参数`(key, value)`给 fnKv。
+ * 2. 如果输入的的 Array，则遍历每一个 Object 元素，将元素的遍历信息`(key, value)`传入 fnKv。
+ *
+ * @memberOf module:_ambiguity
+ * @param {Object|Array} input 输入的被遍历的源
+ * @param {Function} fnKv key=value 的处理函数
+ * @return {any} 返回`fnKv`的执行结果
+ */
 const ambiguityKv = (input, fnKv) => {
     /*
      * 先判断 Array，因为 Array 调用 isObject 也是 true
@@ -48,10 +86,19 @@ const ambiguityKv = (input, fnKv) => {
         return fnKv(input);
     }
 };
-
-/*
- * 二义性函数
- * 从 event 中提取数据
+/**
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性Event读取专用函数
+ *
+ * 1. Input触发时，直接从`event.target.value`中读取相关数据。
+ * 2. 表单直接触发或Select触发，则`event`就是value，包括`onSearch`，这种情况直接将`event`作为读取值。
+ *
+ * @memberOf module:_ambiguity
+ * @param {Event|Object} event 传入方法和Ant Design中常用的 event 参数`event.target`存在。
+ * @param {Object} config 是否启用`prevent`属性，有些特殊情况不能调用`event.preventDefault`，默认关闭。
+ * @param {any} defaultValue 默认值，如果没有读取到值则使用默认值
+ * @return {any} 返回最终读取到的值。
  */
 const ambiguityEvent = (event, config = {}, defaultValue) => {
     let value;
@@ -73,7 +120,33 @@ const ambiguityEvent = (event, config = {}, defaultValue) => {
     }
     return value;
 };
-
+/**
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性数据提取专用函数
+ *
+ * 1. 传入`key`和`name`，提取属性或状态之下的"对象包含的属性"值。
+ * 2. 一级提取：可能返回Object，也可能返回DataObject。
+ * 3. 二级提取：任意值。
+ *
+ * 框架内的使用代码如：
+ *
+ * ```js
+ * const targetKey = attrPath[0];
+ * const name = attrPath[1];
+ * if (targetKey && name) {
+ *     return Ele.ambiguityFind(target, `$${targetKey}`, attrPath[1]);
+ * } else {
+ *     console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
+ * }
+ * ```
+ *
+ * @memberOf module:_ambiguity
+ * @param {Props|State} props 传入的React组件的状态或属性对象
+ * @param {String} key 待提取的属性名或状态名称，提取内容必须是一个`Object`或者`DataObject`。
+ * @param {String} name 待提取的二级属性名
+ * @return {any} 返回最终提取的值。
+ */
 const ambiguityFind = (props = {}, key, name) => {
     const dataObj = props[key];
     let value;
@@ -88,21 +161,58 @@ const ambiguityFind = (props = {}, key, name) => {
     }
     return value;
 };
-/*
- * 默认执行二义性合并
+/**
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性合并专用函数
+ *
+ * 1. 直接从 reference 的 props 或 state 中提取属性名为 `name` 的值。
+ * 2. 如果无值则直接返回 `{}`。
+ *
+ * 框架内部代码：
+ *
+ * ```js
+ *
+ * const yoHistory = (reference) => {
+ *     const $inited = Ux.ambiguityObject(reference, "$inited");
+ *     const {activity = {}, changes = []} = $inited;
+ *     // 其他处理代码……
+ * }
+ * ```
+ *
+ * @memberOf module:_ambiguity
+ * @param {ReactComponent} reference React组件引用，通常是reference统一变量名
+ * @param {String} name 字符串变量名称，读取变量值专用
+ * @return {any} 返回最终的值
  */
-const ambiguityObject = (reference = {}, name, merged = false) => {
+const ambiguityObject = (reference = {}, name) => {
     const extracted = ambiguityValue(reference, name);
     let values = {};
     if (Abs.isObject(extracted)) {
-        if (merged) {
-            Object.assign(values, extracted);
-        } else {
-            values = extracted;
-        }
+        Object.assign(values, extracted);
     }
     return values;
 };
+/**
+ *
+ * ## 标准函数「Ambiguity」
+ *
+ * 二义性专用提取数据函数
+ *
+ * 1. 先从 `props` 中提取属性为 name 的值。
+ * 2. 如果无法从 `props` 中提取，则直接从 `state` 中提取对应的值。
+ *
+ * 框架内部代码：
+ *
+ * ```js
+ *     const $submitting = Ele.ambiguityValue(reference, "$submitting");
+ * ```
+ *
+ * @memberOf module:_ambiguity
+ * @param {ReactComponent} reference React组件引用，通常是reference统一变量名
+ * @param {String} name 字符串变量名称，读取变量值专用
+ * @return {any} 返回变量对应的值
+ */
 const ambiguityValue = (reference = {}, name) => {
     const {props = {}, state = {}} = reference;
     if (undefined !== props[name]) {

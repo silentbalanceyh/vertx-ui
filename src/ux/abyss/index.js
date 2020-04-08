@@ -5,9 +5,10 @@ import object from './O.object';
 import promise from './O.promise';
 
 export default {
+
     ...clone,
+    ...object,
     ...it,
     ...is,
-    ...object,
     ...promise,
 }

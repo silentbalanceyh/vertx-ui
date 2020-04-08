@@ -6,6 +6,24 @@ const hoc = {
     "Page": pageHoc,
     "Control": controlHoc
 };
+/**
+ * Origin X引擎专用注解。
+ *
+ * 使用方法：
+ *
+ * ```js
+ * import Ex from 'ex';
+ *
+ * &#64;Ex.ox() -- 注释掉的调用方法，由于包含 @ 符号不可解析
+ * class Component extends React.Component{
+ *
+ * }
+ * ```
+ *
+ * @method @ox
+ * @param {Object} options 配置项信息
+ *
+ */
 export default (options = {}) => {
     if (!options.type) {
         throw new Error("[ Ox ] 对不起，渲染类型丢失！")

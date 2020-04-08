@@ -30,6 +30,18 @@ const xuiColumn = (column) => {
     if (column.xxl) attrs.xxl = column.xxl;
     return attrs;
 };
+/**
+ * ## 扩展函数
+ *
+ * 执行 `xuiGrid` 专用Grid控件布局。
+ *
+ * @memberOf module:_xui
+ * @method xuiGrid
+ * @param {Array<Array>} grid Grid布局专用二维数组配置
+ * @param {Object} UI 组件配置
+ * @param {Object} inherit 将被继承的属性表
+ * @returns {Jsx} 渲染行列`<Row>, <Col>`的Grid组件
+ */
 const xuiGrid = (grid = [], UI = {}, inherit = {}) =>
     grid.map(row => {
         const {columns = [], key} = row;

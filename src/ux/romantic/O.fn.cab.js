@@ -1,6 +1,23 @@
 import Eg from '../engine';
 import U from 'underscore';
 
+/**
+ * ## 特殊函数「Zero」
+ *
+ * 配置增强读取的多义性函数。
+ *
+ * 1. 如果 key 传入为 undefined，则直接从 `props`中读取 `config` 变量，默认：`{}`。
+ * 2. 如果 key 是字符串不带 `.` 操作符，则直接读取资源文件中的 `_<key`，内部调用 `fromHoc`（高频方式）。
+ * 3. 如果 key 是字符串带 `.` 操作符，则直接将该值如：`key.xt` 转换成 `["key","xt"]`，对应 `_key -> xt` 节点。
+ * 4. 如果 key 是Array，则执行 `fromPath` 方法。
+ *
+ * 该方法保证最终得到的值是合法的。
+ *
+ * @memberOf module:_romantic
+ * @param {ReactComponent} reference React组件引用
+ * @param {String} key 将要读取的配置的 key 值信息
+ * @return {any} 返回读取到的最终信息
+ */
 const sexCab = (reference = {}, key) => {
     if (undefined === key) {
         /*

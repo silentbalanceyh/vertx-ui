@@ -1,6 +1,17 @@
 import Ux from 'ux';
 import U from 'underscore';
 
+/**
+ * ## 扩展函数
+ *
+ * 路由路径是否发生了变化。
+ *
+ * @memberOf module:_channel
+ * @method yuRouter
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} virtualRef 旧的属性和状态
+ * @param {Function} callback 路由变化的回调函数
+ */
 export default (reference, virtualRef, callback) => {
     if (U.isFunction(callback)) {
         /*

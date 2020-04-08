@@ -9,10 +9,7 @@ export default (reference, virtualRef) => {
             reference.setState({$ready: false});
             let initState = reference.state;
             initState = Ux.clone(initState);
-            yiData(reference, initState).then(state => {
-                state.$ready = true;
-                reference.setState(state);
-            })
+            yiData(reference, initState).then(Ux.ready).then(Ux.pipe(reference))
         }
     }
 }

@@ -7,7 +7,6 @@ const yiPage = (reference) => Ex.yiModule(reference, {}, false)
          * 前端静态包含了，所以这里需要整合后端
          */
         const initState = {};
-        initState.$ready = true;
         /*
          * 初始化 $query 设置
          */
@@ -35,6 +34,7 @@ const yiPage = (reference) => Ex.yiModule(reference, {}, false)
             }
         }
         initState.$query = $query;
+        initState.$ready = true;
         reference.setState(initState);
     });
 export default {

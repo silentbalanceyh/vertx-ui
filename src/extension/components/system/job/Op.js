@@ -42,7 +42,7 @@ const yiPage = (reference) => {
         $tabs.className = "ex-tabs";
         state.$tabs = $tabs;
         state.$extra = yiExtra(reference);
-        Ex.yiStandard(reference, state);
+        Ex.yiStandard(reference, state).then(Ux.pipe(reference));
     })
 };
 const $opSave = (reference) => (params) =>

@@ -110,6 +110,24 @@ const parseOps = (config = [], options = {}) => {
     }
     return config;
 };
+/**
+ * ## 扩展函数
+ *
+ * 生成按钮专用解析器，返回对象结构如（每个键都是函数）：
+ *
+ * ```js
+ * {
+ *     parsePlugin: () => "按钮插件解析函数",
+ *     parseComponent: () => "组件解析函数",
+ *     parseOps: () => "按钮本身解析函数"
+ * }
+ * ```
+ *
+ * @memberOf module:_parser
+ * @method parserOfButton
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Object}
+ */
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
     parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
