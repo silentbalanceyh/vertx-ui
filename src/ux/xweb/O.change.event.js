@@ -8,7 +8,7 @@ import Eng from "../engine";
 import Ajax from "../ajax";
 
 const _xtValue = (input, normalize = data => data) => {
-    let value = undefined;
+    let value;
     if (input && U.isFunction(input.preventDefault)) {
         input.preventDefault();
         value = input['target'] ? input['target'].value : undefined;
@@ -107,6 +107,7 @@ const xt2ChangeUnit = (reference, params = {}) => (event) => {
         xt2ChangeUnitSync(event, reference, params);
     }
 };
+// eslint-disable-next-line
 const xt3ChangeUnit = (reference, {
     field, key = "data",
     normalize = data => data,
