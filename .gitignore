@@ -55,3 +55,6 @@ yarn-error.log*
 .awcache
 .awcache/*
 document/story-web
+.Archive/
+.markeditor
+.configs/

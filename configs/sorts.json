@@ -1,0 +1,41 @@
+{
+    "": [
+        "readme.md", 
+        "summary.md", 
+        "build", 
+        "config", 
+        "document", 
+        "node_modules", 
+        "public", 
+        "scripts", 
+        "shell", 
+        "src", 
+        "test"
+    ], 
+    "__positions": {
+        "src": 10, 
+        "shell": 9, 
+        "node_modules": 6, 
+        "summary.md": 2, 
+        "build": 3, 
+        "scripts": 8, 
+        "test": 11, 
+        "document": 5, 
+        "config": 4, 
+        "public": 7, 
+        "readme.md": 1
+    }, 
+    "__raw_positions": {
+        "src": 10, 
+        "summary.md": 2, 
+        "node_modules": 6, 
+        "shell": 9, 
+        "build": 3, 
+        "scripts": 8, 
+        "test": 11, 
+        "document": 5, 
+        "config": 4, 
+        "public": 7, 
+        "readme.md": 1
+    }
+}
