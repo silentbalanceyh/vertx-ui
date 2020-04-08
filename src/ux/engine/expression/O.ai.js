@@ -9,10 +9,29 @@ import aiButton from './I.ai.button';
 import aiColumn from './I.ai.column';
 import aiOption from './I.ai.option';
 
+/**
+ * ## 标准函数
+ *
+ * 标准解析，解析成 Tabs 组件需要使用的子组件专用配置。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Array} items 每一个Tab页对应的item表达式解析。
+ * @param {Props} props 传入当前React组件属性信息。
+ * @returns {Array} 转换成标准的 Tab 对应 items。
+ */
 const aiExprTabs = (items = [], props = {}) =>
     items.map(item => Parser.parseItem(item, "tabs"))
         .map(Apply.applyKey);
-
+/**
+ *
+ * ## 标准函数
+ *
+ * 按照 Item 解析过滤条件，针对过滤条件对相关信息执行过滤，智能化表达式解析。
+ *
+ * @memberOf module:_aiExpr
+ * @param {String|Object} filter 过滤条件解析
+ * @returns {Object} 解析成条件
+ */
 const aiExprFilter = (filter = "") =>
     Parser.parseItem(filter, "filter");
 

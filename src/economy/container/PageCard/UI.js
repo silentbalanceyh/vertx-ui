@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import Op from './UI.Op';
 import {_zero} from "../../_internal";
 
-/**
+/*
  * 基本要求：
  * reference为父引用，和该组件绑定的资源文件必须包含：
  * {

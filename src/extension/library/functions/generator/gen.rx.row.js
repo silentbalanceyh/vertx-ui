@@ -2,6 +2,15 @@ import G from "../global";
 import Ux from "ux";
 import U from 'underscore';
 
+/**
+ * ## 扩展函数
+ *
+ * 删除专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxDelete = (reference) => (key, callback) => {
     if (key) {
         const {options = {}, $selected = []} = reference.state;
@@ -33,6 +42,15 @@ const rxDelete = (reference) => (key, callback) => {
             })
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 查询记录专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxView = (reference) => (key) => {
     if (key) {
         const {options = {}} = reference.state;
@@ -40,6 +58,15 @@ const rxView = (reference) => (key) => {
         return Ux.ajaxGet(uri, {key});
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 多选专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxSelected = (reference) => ($selected = [], $data = []) => {
     reference.setState({$selected});
     const {rxPostSelected} = reference.props;

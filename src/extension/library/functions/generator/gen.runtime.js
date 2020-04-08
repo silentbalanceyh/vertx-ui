@@ -4,6 +4,51 @@ const ARGS = {
     inError: false
 };
 export default {
+    /**
+     * ## 扩展函数
+     *
+     * 主要用于调用上层函数
+     *
+     * 1. 调用 props 中的某个函数
+     * 2. 调用 state 中的某个函数
+     * 3. 最后执行该函数
+     *
+     * ```js
+     *     return Ex.I.todo(request, false)
+     *          .then(Ux.ajax2Dialog(ref, buildConfig(ref, "rejected"), true))
+     *
+     *              // 调用代码
+     *              .then(response => Ex.rx(reference).close(response));
+     * ```
+     *
+     * 返回的数据结构如下：
+     *
+     * | 函数名 | 调用函数 | 说明 |
+     * |:---|:---|:---|
+     * | openPost | rxPostOpen | 打开Tab页后的执行函数 |
+     * | closePost | rxPostClose | 关闭Tab页后的执行函数 |
+     * | assistIn | rxAssist | 辅助数据输入函数 |
+     * | assistOut | rxAssist | 辅助数据输出函数 |
+     * | search | rxSearch | 搜索专用函数 |
+     * | condition | rxCondition | 条件处理专用函数 |
+     * | filter | rxFilter | 查询条件专用函数 |
+     * | projection | rxProjection | 列过滤专用函数 |
+     * | selected | rxSelected | 多选专用函数 |
+     * | delete | rxDelete | 单行删除专用函数 |
+     * | batchEdit | rxBatchEdit | 批量更新专用函数 |
+     * | view | rxView | 单行查看专用函数 |
+     * | open | rxOpen | 打开页面专用函数 |
+     * | close | rxClose | 关闭页面专用函数 |
+     * | loading | doLoading | 加载状态处理函数 |
+     * | dirty | doDirty | 脏状态处理函数 |
+     * | submitting | doSubmitting | 提交状态专用函数 |
+     * | submittingStrict | doSubmitting | 提交状态专用函数（带错误信息） |
+     *
+     * @memberOf module:_rx
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {boolean} off 关闭错误信息
+     * @returns {Object} 返回最终对象
+     * */
     rx: (reference, off = false) => ({
         /*
         column: (full = true) => full ?

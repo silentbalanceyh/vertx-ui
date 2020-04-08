@@ -7,6 +7,17 @@ import Abs from '../../abyss';
 import webUnit from '../web-unit';
 import webField from '../web-field';
 
+/**
+ * ## 引擎函数
+ *
+ *
+ * 「标准配置」Tabs 专用的配置信息。
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} config 传入的配置数据信息。
+ * @return {Object} 处理完成的配置数据。
+ */
 const configTab = (reference, config = {}) => {
     const tabs = Abs.clone(config);
     const {

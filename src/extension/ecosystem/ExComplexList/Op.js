@@ -24,7 +24,7 @@ const yuList = (reference, previous = {}) => {
     /*
      * 配置优先考虑
      */
-    const $configChecked = Ex.upValue(props, prevProps, "config");
+    const $configChecked = Ex.upList(props, prevProps);
     if ($configChecked) {
         /*
          * 默认的 配置处理

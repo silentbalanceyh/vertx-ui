@@ -15,10 +15,8 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtRender(this, () => {
             const {$tabs = {}, $activeKey} = this.state;
-            const {items = [], fnExtra, ...rest} = $tabs;
-            if (U.isFunction(fnExtra)) {
-                rest.tabBarExtraContent = fnExtra($activeKey);
-            }
+            const tabs = Op.yoExtra($tabs, this);
+            const {items = [], ...rest} = tabs;
             const {$inited = {}} = this.props;
             return (
                 <Tabs {...rest} activeKey={$activeKey}

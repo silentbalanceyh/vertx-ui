@@ -5,6 +5,17 @@ import Cv from "../constant";
 import Ele from '../element';
 import Amt from "./O.ambient";
 
+/**
+ * ## 特殊函数「Zero」
+ *
+ * Ant Design中的表单提交函数，返回最终的表单提交数据值。
+ *
+ * @memberOf module:_ant
+ * @async
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {boolean} redux 是否执行 redux 提交。
+ * @return {Promise<T>} 返回最终的表单提交数据值。
+ */
 const formSubmit = (reference, redux = false) => {
     // 提取 Form
     const {form} = reference.props;
@@ -31,6 +42,20 @@ const formSubmit = (reference, redux = false) => {
         return E.fxReject(10020);
     }
 };
+/**
+ * ## 特殊函数「Zero」
+ *
+ * Ant Design提交表单被规范化过后的数据。
+ *
+ * 1. 注入默认语言信息，`Cv['Language']`读取语言信息，默认`cn`。
+ * 2. 如果记录中不包含`active`字段，则注入默认的 active。
+ * 3. 如果包含了应用数据，则将应用的 `sigma` 注入到请求数据中。
+ * 4. 移除掉所有的 undefined 节点。
+ *
+ * @memberOf module:_value
+ * @param {Object} params 输入数据值。
+ * @return {Object} 被处理过后的请求数据值。
+ */
 const valueRequest = (params = {}) => {
     // 执行默认参数处理
     const data = Abs.clone(params);

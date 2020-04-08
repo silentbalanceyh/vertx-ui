@@ -5,6 +5,24 @@
         "code": "编号",
         "name": "名称"
     },
+    "_empty":{
+        "up":{
+            "type":"warning",
+            "message": "无上游关系定义",
+            "description": [
+                "当前选择类型没有上游关系定义。",
+                "您可以在建模管理中重新定义该配置项分类的上游关联关系。"
+            ]
+        },
+        "down":{
+            "type":"warning",
+            "message": "无下游关系定义",
+            "description": [
+                "当前选择类型没有下游关系定义。",
+                "您可以在建模管理中重新定义该配置项分类的下游关联关系。"
+            ]
+        }
+    },
     "_relation": {
         "combine": {
             "title": "所有配置项",
@@ -24,7 +42,17 @@
             "table":{
                 "rowKey": "key",
                 "columns": [
-                    "sourceCode,配置项编号",
+                    {
+                        "metadata":"sourceCode,配置项编号,RENDERS",
+                        "config":{
+                            "value": "code",
+                            "mapping":{
+                                "globalId": "sourceGlobalId",
+                                "name": "sourceName",
+                                "identifier": "sourceIdentifier"
+                            }
+                        }
+                    },
                     "sourceName,配置项名称"
                 ]
             },
@@ -37,7 +65,17 @@
             "table":{
                 "rowKey": "key",
                 "columns": [
-                    "targetCode,配置项编号",
+                    {
+                        "metadata": "targetCode,配置项编号,RENDERS",
+                        "config":{
+                            "value": "code",
+                            "mapping":{
+                                "globalId": "targetGlobalId",
+                                "name": "targetName",
+                                "identifier": "targetIdentifier"
+                            }
+                        }
+                    },
                     "targetName,配置项名称"
                 ]
             },

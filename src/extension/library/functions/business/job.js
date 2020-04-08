@@ -1,5 +1,14 @@
 import Ux from "ux";
 
+/**
+ * ## 扩展函数
+ *
+ * 任务处理输入
+ *
+ * @memberOf module:_io
+ * @param {Object} mission 任务配置
+ * @returns {Object} 处理过的任务数据
+ */
 const inJob = (mission = {}) => {
     const {metadata = {}} = mission;
     const {service = {}, job = {}} = metadata;
@@ -84,6 +93,16 @@ const inService = (processed = {}, service = {}) => {
     processed.configDatabase = service.configDatabase;
     processed.configIntegration = service.configIntegration;
 };
+/**
+ *
+ * ## 扩展函数
+ *
+ * 任务处理输出
+ *
+ * @memberOf module:_io
+ * @param {Object} params 提交之前原始任务数据
+ * @returns {Object} 任务输出数据
+ */
 const outJob = (params = {}) => {
     const request = {};
     const {

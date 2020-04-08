@@ -4,12 +4,6 @@ import {v4} from 'uuid';
 // 导入外层
 import E from '../error';
 
-/**
- * 生成固定长度的随机字符串
- * @method randomString
- * @param {Number} length 生成字符串的长度
- * @return {String}
- */
 const randomString = (length) => {
     E.fxTerminal(!length, 10062, length);
     // 1.0 旧版本：const engine = randomjs.engines.mt19937().autoSeed();
@@ -17,24 +11,37 @@ const randomString = (length) => {
     const random = new Random(engine);
     return random.string(length); // randomjs.string()(engine, length);
 };
-/**
- * 生成范围随机整数
- * @param min
- * @param max
- */
 const randomInteger = (min = 0, max = 100) => {
     return Math.floor(Math.random() * (max + 1)) + min;
 };
-/**
- * @class Random
- * @description 专用随机类
- */
 export default {
     /**
-     * 随机生成UUID
+     * ## 集成函数
+     *
+     * 随机生成UUID，内部调用 uuid 库函数。
+     *
+     * @memberOf module:_random
      * @method randomUUID
      */
     randomUUID: v4,
+    /**
+     * ## 集成函数
+     *
+     * 随机生成字符串，内部调用 random-js。
+     *
+     * @memberOf module:_random
+     * @method randomString
+     * @param {Number} length 输入需要生成随机字符串的长度。
+     */
     randomString,
+    /**
+     * ## 标准函数
+     *
+     * 随机生成数值。
+     * @memberOf module:_random
+     * @method randomInteger
+     * @param {Number} min 生成数值区域的最小值。
+     * @param {Number} max 生成数值区域的最大值。
+     */
     randomInteger
 };

@@ -9,10 +9,13 @@ export default (reference, config = {}, attributes = {}) => {
     const type = Op.getType(config);
     config = Ux.clone(config);  // 拷贝以保证 ExAction 和 ExDialog 每次都刷新
     attributes = Ux.sorterObject(attributes);   // 按顺序打印属性信息
-    return "NONE" === type ?
-        (<ExButton {...attributes} key={config.key}
-                   config={config}/>) :
-        (<ExDialog {...attributes} key={config.key}
-            // 第二参 reference 需要传入，负责隐藏界面
-                   config={Ex.configDialog(config)}/>);
+    const {visible = true} = config;
+    return visible ? (
+        "NONE" === type ?
+            (<ExButton {...attributes} key={config.key}
+                       config={config}/>) :
+            (<ExDialog {...attributes} key={config.key}
+                // 第二参 reference 需要传入，负责隐藏界面
+                       config={Ex.configDialog(config)}/>)
+    ) : false
 };

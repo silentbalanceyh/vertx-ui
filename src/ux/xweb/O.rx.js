@@ -1,28 +1,21 @@
-import U from 'underscore';
-
-import E from '../error';
-import Cv from '../constant';
 import React from "react";
 import Dev from '../develop';
 
-const xtRxInit = (reference = {}, fnName, params) => {
-    E.fxTerminal("string" !== typeof fnName, 10100, fnName);
-    // 默认组件的模式都是取的Reactive
-    const {$category = Cv.RX_SOURCE.REACTIVE} = reference.props;
-    // 只有Reactive模式下才调用绑定好的fnName对应的Reactive方法，则组件具有二义性
-    if (Cv.RX_SOURCE.REACTIVE === $category) {
-        const rxFun = reference.props[fnName];
-        // 第三参为可选参数
-        if (U.isFunction(rxFun)) {
-            rxFun(params);
-        }
-    }
-};
 const jsxError = (message) => (
     <div className={"ux-error"}>
         {message}
     </div>
 );
+/**
+ * ## 标准函数
+ *
+ * 检查系统状态内部是否存在`error`节点，如果存在`error`节点，则直接渲染错误信息，配置出错的统一调用流程。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Function} render 执行 render 的函数。
+ * @return {Jsx|boolean} 直接渲染。
+ */
 const xtRender = (reference, render) => {
     const {error} = reference.state ? reference.state : {};
     if (error) {
@@ -44,6 +37,21 @@ const xtRender = (reference, render) => {
         }
     }
 };
+/**
+ * ## 标准函数
+ *
+ * 由于 Zero 框架无法调用 Extension 中的`yoRender`，所以可直接使用`xtReady` 实现和 `yoRender`中
+ * 同样的逻辑
+ *
+ * 1. 检查配置是否准备完成，如果准备完成：`$ready = true`，否则为false。
+ * 2. 准备没有完成时，则不渲染。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Function} render 执行 render 的函数。
+ * @param {Object} LOG 日志配置。
+ * @return {Jsx|boolean} 直接渲染。
+ */
 const xtReady = (reference, render, LOG = {}) => {
     const {$ready = false} = reference.state ? reference.state : {};
     if ($ready) {
@@ -60,7 +68,6 @@ const xtReady = (reference, render, LOG = {}) => {
     }
 };
 export default {
-    xtRxInit,
     xtRender,
     xtReady,
 };

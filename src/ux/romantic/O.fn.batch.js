@@ -60,7 +60,6 @@ const doClose = (reference, $selected = []) => {
         rxClose();
     }
     if (Abs.isFunction(doDirty)) {
-
         doDirty(true, {$selected});
     }
 };
@@ -89,6 +88,27 @@ const sexBatchProp = (reference, callback, config = {}) => {
         throw new Error(`[ Ux ] 选择项丢失！${name}`);
     }
 };
+/**
+ * ## 特殊函数「Zero」
+ *
+ * 批量专用函数，用于处理批量按钮的特殊配置提取（同时从 props 属性和 state 状态中提取数据），内部调用代码如：
+ *
+ * ```js
+ *
+ * // 专用的批量处理按钮设置器。
+ * const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($selected = []) => {
+ *      const {options = {}} = reference.state;
+ *      const uri = options[G.Opt.AJAX_BATCH_UPDATE_URI];
+ *      return Ux.ajaxPut(uri, params);
+ * }, {name: "rxBatchEdit", reset: true, message: G.Opt.MESSAGE_BATCH_UPDATE});
+ * ```
+ *
+ * @memberOf module:_romantic
+ * @method sexBatch
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Function} callback 回调函数处理。
+ * @param {Object} config 传入的配置数据。
+ */
 export default (reference, callback, config = {}) => {
     /*
      * 1. 先检索 state 中是否包含了 $selected

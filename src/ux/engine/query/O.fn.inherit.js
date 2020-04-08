@@ -1,8 +1,16 @@
 import Abs from '../../abyss';
 import Dev from '../../develop';
 import qrComplex from './O.fn.complex';
-/*
- * 继承 Query 专用
+
+/**
+ * ## 特殊函数「Qr」
+ *
+ * 根据当前引用读取默认的 $query 专用信息。
+ *
+ * @memberOf module:_qr
+ * @method qrInherit
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Object} 返回最终的 query 结构。
  */
 export default (reference) => {
     /*

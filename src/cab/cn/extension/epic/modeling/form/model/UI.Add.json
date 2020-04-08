@@ -50,8 +50,8 @@
                 {
                     "metadata": "type,关联类型,14,,aiRadio",
                     "optionJsx.config.items": [
-                        "JOINED,组合",
-                        "DIRECT,直连"
+                        "JOINED,多表连接",
+                        "DIRECT,单表连接"
                     ]
                 }
             ],

@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import U from "underscore";
 
 const yiPage = (reference) => {
     const {config = {}, children} = reference.props;
@@ -57,11 +58,30 @@ const yiPage = (reference) => {
                      */
                     item.fnChild = (values = {}) => Ux.aiField(ref, values, raftItem);
                 });
+                /*
+                 * readOnly 删除 tabBarExtraContent
+                 */
                 state.$tabs = $tabs;
                 reference.setState(state);
             });
     }
 };
+const yoExtra = ($tabs = {}, reference) => {
+    const tabs = Ux.clone($tabs);
+    const {$inited = {}} = reference.props;
+    const calculated = Ux.pluginOp(reference, $inited);
+    if (!calculated.edition && !calculated.deletion) {
+        delete tabs.tabBarExtraContent;
+    } else {
+        const {fnExtra} = tabs;
+        const {$activeKey} = reference.state;
+        if (U.isFunction(fnExtra)) {
+            tabs.tabBarExtraContent = fnExtra($activeKey);
+        }
+    }
+    return tabs;
+};
 export default {
     yiPage,
+    yoExtra
 }

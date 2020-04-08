@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiStandard(this);
+        Ex.yiStandard(this).then(Ux.pipe(this));
     }
 
     render() {

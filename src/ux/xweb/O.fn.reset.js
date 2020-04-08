@@ -15,9 +15,19 @@ const isDiff = (left, right) => {
         // 类型不同则二者不同
         return true;
     }
-    ;
 };
 
+/**
+ * ## 标准函数
+ *
+ * 重置专用函数，内部关联 Ant Design 的 Form信息。
+ *
+ * @memberOf module:_xt
+ * @method xtReset
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} virtualRef 带有state和props的前一次状态信息。
+ * @param {Function} callback 回调函数处理。
+ */
 export default (reference, virtualRef = {}, callback) => {
     /*
      * 三个值相互比较

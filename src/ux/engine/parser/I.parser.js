@@ -16,7 +16,7 @@ export default {
      * 1）为真的格式：BOOL:true
      * 2）为假的格式：BOOL:false
      */
-    BOOL: (expression) => Boolean(expression),
+    BOOL: (expression) => "true" === expression,
     /*
      * OPERATOR 操作符处理
      * 1）前置，（无）

@@ -11,7 +11,7 @@
                     "optionJsx.addonBefore": "cn.originx."
                 },
                 {
-                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）",
+                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）,readOnly=true",
                     "optionConfig.rules": [
                         "required,请输入全局ID，不可为空！",
                         {
@@ -46,8 +46,8 @@
                 {
                     "metadata": "type,关联类型,12,,aiRadio",
                     "optionJsx.config.items": [
-                        "JOINED,组合",
-                        "DIRECT,直连"
+                        "JOINED,多表连接",
+                        "DIRECT,单表连接"
                     ]
                 },
                 {
@@ -83,7 +83,7 @@
                                             "metadata": "joins,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormRelation",
-                                                "dialog": "实体设置,保存,关闭,false,800,true,$opSaveRelation",
+                                                "dialog": "实体设置,保存,关闭,false,720,true,$opSaveRelation",
                                                 "op": {
                                                     "add": "$opShowRelation"
                                                 },
@@ -152,7 +152,7 @@
                                             "metadata": "attributes,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormAttribute",
-                                                "dialog": "属性设置,保存,关闭,false,640,true,$opSaveAttribute",
+                                                "dialog": "属性设置,保存,关闭,false,900,true,$opSaveAttribute",
                                                 "op": {
                                                     "add": "$opShowAttribute"
                                                 },

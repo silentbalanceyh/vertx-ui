@@ -1,0 +1,11 @@
+{
+    "name": "Zero UI框架专用文档",
+    "url": "https://github.com/silentbalanceyh/vertx-ui.git",
+    "description": "Ux工具类、Ex工具类、标配组件、扩展组件Extension、Ox配置组件",
+    "version": "0.1.0",
+    "options": {
+        "paths": "./src",
+        "outdir": "./document/doc-web",
+        "exclude": "environment,mock,plugin,app,editor,style"
+    }
+}

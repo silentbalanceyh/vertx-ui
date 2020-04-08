@@ -81,29 +81,24 @@ import yoAction from './yo.action';
 
 export default {
     yoAmbient,              // 环境数据（统一处理）
-    /*
-     * 比 yoAmbient 多两个核心变量：
-     * $identifier / $controls
-     */
     yoDynamic,
-    /*
-     * 比 yoAmbient 多
-     * 1）直接读取 fromHoc 中的 grid 配置
-     * 2）state 中的 $query
-     * 3）state 中的 config.options 中读取 $identifier
-     * 4）构造 $inited 中的 $identifier
-     */
     yoPolymorphism,
+    /**
+     * ## 扩展函数
+     *
+     * 同`yoAmbient`，重名函数，赋予语义的函数名。
+     *
+     * @memberOf module:_channel
+     * @method yoComponent
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object} config 额外的配置数据
+     * @returns {Object} 计算最终生成的继承属性专用方法
+     */
     yoComponent: yoAmbient, // 环境数据（统一处理）
     yoControl,
-    // -- 配置
     yoForm,
     yoFilter,
-    // 按钮区域
     yoAction,
-    // -- List处理
     yoList,
-
-    // -- 统一方法（渲染相关）
     yoRender,           // 普通组件专用渲染
 }

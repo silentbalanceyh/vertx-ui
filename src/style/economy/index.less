@@ -5,6 +5,7 @@
 @import "./Form.less";
 @import "./Dialog.less";
 @import "./Tree.less";
+@import "./Editor.less";
 @import "../zero.less";
 // PageCard / HelpCard
 .web {
@@ -63,5 +64,12 @@
 
     &-dialog {
         .web-dialog-fit;
+    }
+
+    // editor
+    &-editor {
+        display: flex;
+        flex-direction: row;
+        .web-editor-fit;
     }
 }

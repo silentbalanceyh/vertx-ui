@@ -6,6 +6,7 @@ import FormEdit from "./form/UI.Edit";
 import FormFilter from "./form/UI.Filter";
 
 import {ExComplexList} from "ei";
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {
@@ -13,13 +14,13 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiStandard(this);
+        Ex.yiStandard(this).then(Ux.pipe(this));
     }
 
     componentDidUpdate(props, state, snapshot) {
-        Ex.yuRouter(this, {props, state}, () => {
-            Ex.yiStandard(this);
-        });
+        const reference = this;
+        Ex.yuRouter(reference, {props, state}, () =>
+            Ex.yiStandard(reference).then(Ux.pipe(reference)));
     }
 
     render() {

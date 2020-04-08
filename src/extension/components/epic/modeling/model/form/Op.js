@@ -13,6 +13,10 @@ const $opSave = (reference) => params =>{
         dialog: "saved"
     });
 };
+const $opDelete = (reference) => params => Ex.form(reference).remove(params, {
+    uri: "/api/model/:key",
+    dialog: "removed"
+});
 const $opSaveRelation = (reference) => params =>
     Ex.dialog(reference).saveRow(params);
 const $opSaveAttribute = (reference) => params =>
@@ -22,6 +26,7 @@ export default {
         $opFilter,
         $opAdd,
         $opSave,
+        $opDelete,
         $opSaveRelation,
         $opSaveAttribute,
     }

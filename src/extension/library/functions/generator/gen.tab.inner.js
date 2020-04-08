@@ -110,16 +110,107 @@ const viewSwitch = (reference, $view = Mode.LIST, $key) => {
     }
     return {$view, $key};
 };
+
+/**
+ * @class View
+ * @private
+ */
+class View {
+    /**
+     * 切换视图专用方法
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {String} $view 视图状态`list, add, edit`
+     * @param {String} $key 处理专用key 值
+     * @returns {Object} 执行
+     */
+    static switch(reference, $view = Mode.LIST, $key) {
+        return viewSwitch(reference, $view, $key);
+    }
+}
+
+/**
+ * 返回状态信息：
+ *
+ * ```json
+ * {
+ *     tabs: {},
+ *     $key: "",
+ *     $view: ""
+ * }
+ * ```
+ *
+ * @class Tab
+ * @private
+ */
+class Tab {
+    /**
+     * 添加Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @returns {Object} 返回最终状态
+     */
+    static add(reference) {
+        return addTab(reference);
+    }
+
+    /**
+     * 编辑Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object} data 当前数据记录
+     * @returns {Object} 返回最终状态
+     */
+    static edit(reference, data = {}) {
+        return editTab(reference, data);
+    }
+
+    /**
+     * 关闭Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {String} key 当前 active 的键值
+     * @returns {Object} 返回最终状态
+     */
+    static close(reference, key) {
+        return closeTab(reference, key);
+    }
+
+    /**
+     * 点击Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {String} key 当前 active 的键值
+     * @returns {Object} 返回最终状态
+     */
+    static click(reference, key) {
+        return clickTab(reference, key);
+    }
+
+    /**
+     * 移除Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {String} key 当前 active 的键值
+     * @returns {Object} 返回最终状态
+     */
+    static remove(reference, key) {
+        return removeTab(reference, key);
+    }
+
+    /**
+     * 保存Tab页
+     *
+     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object} data 当前数据记录
+     * @param {Object} item 设置页面配置信息
+     * @returns {Object} 返回最终状态
+     */
+    static save(reference, data, item) {
+        return saveTab(reference, data, item);
+    }
+}
+
 export default {
-    Tab: {
-        add: addTab,
-        edit: editTab,
-        close: closeTab,
-        click: clickTab,
-        remove: removeTab,
-        save: saveTab,
-    },
-    View: {
-        switch: viewSwitch,
-    },
+    Tab,
+    View,
 }

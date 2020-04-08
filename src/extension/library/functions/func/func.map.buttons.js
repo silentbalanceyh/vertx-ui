@@ -74,6 +74,17 @@ const _parseAuthorized = (action = {}, reference) => {
         }
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 按钮专用处理，用于处理：`optionJsx.extension` 配置的专用扩展函数。
+ *
+ * @memberOf module:_function
+ * @method mapButtons
+ * @param {Array} extension 扩展按钮配置
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Array} 返回最终处理配置数据
+ */
 export default (extension = [], reference) => {
     return extension
         .map(each => _parseAction(each, reference))

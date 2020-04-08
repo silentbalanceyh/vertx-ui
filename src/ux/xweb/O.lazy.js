@@ -20,9 +20,39 @@ const xtValues = (reference) => {
     }
 };
 
-const xtLazyInit = (reference) => {
-    const {value, config = {}, id} = reference.props;
+const xtTrigger = (reference) => {
+    const {value} = reference.props;
     if (undefined === value) {
+        /*
+         * 无值直接触发
+         */
+        return true;
+    } else {
+        /*
+         * 有值检查是否完整
+         */
+        const values = xtValues(reference);
+        const {config = {}} = reference.props;
+        /*
+         * 针对 key 的专用检查
+         */
+        const {linker = {}} = config;
+        const sureField = linker.key;
+        return !values[sureField];
+    }
+};
+/**
+ * ## 标准函数
+ *
+ * 延迟初始化，统一处理，在 `componentDidMount` 中调用。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ */
+const xtLazyInit = (reference) => {
+    const {config = {}, id} = reference.props;
+    const isTrigger = xtTrigger(reference);
+    if (isTrigger) {
         const values = xtValues(reference);
         if (!Abs.isEmpty(values)) {
             Dev.dgDebug(values, "[ Xt ] 初始化时的 linker 值", "#8B3A62");
@@ -78,6 +108,15 @@ const xtLazyInit = (reference) => {
     }
 };
 
+/**
+ * ## 标准函数
+ *
+ * 延迟初始化，统一处理，在 `componentDidUpdate` 中调用。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} virtualRef 包含了`props`和`state`的前一个状态的引用。
+ */
 const xtLazyUp = (reference, virtualRef) => {
     const prevValue = virtualRef.props.value;
     const curValue = reference.props.value;

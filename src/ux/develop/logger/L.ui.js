@@ -10,16 +10,8 @@ const layout = (layoutType = {}, window, dft = true) => {
         console.groupEnd();
     }
 };
-/**
- * phase = 1，开始打印
- * phase = 2，字段打印
- * phase = 3，打印结束
- * @param item
- * @param phase
- * @param key
- */
 const render = (phase = 1, item = {}, key = {}) => {
-    if (Cv.DEBUG && Cv.RENDER) {
+    if (Cv.DEBUG && Cv.DEBUG_FORM) {
         if (5 === phase) {
             // 开始打印
             const message = `%c 「Zero」 [Render] Row Config --> ${key}`;

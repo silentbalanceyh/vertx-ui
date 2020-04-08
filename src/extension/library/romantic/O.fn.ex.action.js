@@ -1,8 +1,27 @@
 import Ux from 'ux';
 import U from 'underscore';
-/*
- * 输入格式
+
+/**
+ * ## 扩展函数
  *
+ * 统一处理特殊带窗口操作按钮：
+ *
+ * ```json
+ * {
+ *     "button": {
+ *
+ *     },
+ *     "dialog":{
+ *
+ *     }
+ * }
+ * ```
+ *
+ * @memberOf module:_romantic
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String} key 被读取的配置键值。
+ * @param {ReactComponent} Component 组件类型。
+ * @returns {Object} 处理过后的 Action 相关配置。
  */
 const sexExAction = (reference, key, Component) => {
     const config = Ux.sexCab(reference, key);

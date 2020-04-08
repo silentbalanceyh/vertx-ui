@@ -74,9 +74,12 @@ const _secret = () => {
     return secret;
 };
 /**
- * 读取Token信息
- * @method token
- * @return {*}
+ * 特殊函数「Zero」
+ *
+ * 返回安全请求中的令牌信息，最终会根据应用模式处理成 Authorization 的计算值。
+ *
+ * @memberOf module:_app
+ * @return {String} 返回当前用户登录过后的令牌`token`信息。
  */
 const token = () => {
     const app = Amt.isInit();
@@ -87,11 +90,14 @@ const token = () => {
     return fnExecute();
 };
 /**
- * 数字签名函数
- * @method signature
- * @param {String} uri Ajax访问专用Uri
- * @param method Http方法
- * @param params Http参数
+ * 特殊函数「Zero」
+ *
+ * Zero UI中的RESTful 数字签名功能专用函数。
+ *
+ * @memberOf module:_app
+ * @param {String} uri 待签名的路径信息。
+ * @param {String} method 待签名的方法信息。
+ * @param {Object} params 待签名的方法参数。
  */
 const signature = (uri, method = "GET", params = {}) => {
     // 构造签名的method和参数

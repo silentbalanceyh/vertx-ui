@@ -1,6 +1,6 @@
 {
     "_form": {
-        "window": 1,
+        "window": 1.1,
         "columns": 2,
         "ui": [
             [
@@ -52,13 +52,13 @@
             ],
             [
                 {
-                    "metadata": "isSyncIn,IN？,,,aiCheckbox",
+                    "metadata": "isSyncIn,同步入,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
                 },
                 {
-                    "metadata": "isSyncOut,OUT？,,,aiCheckbox",
+                    "metadata": "isSyncOut,同步出,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -66,7 +66,7 @@
             ],
             [
                 {
-                    "metadata": "isTrack,Track？,,,aiCheckbox",
+                    "metadata": "isTrack,生成变更历史,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -93,6 +93,9 @@
             "entityId",
             "selectedEntityIds"
         ],
+        "initial":{
+            "type":"FIX:INTERNAL"
+        },
         "op": {
             "$opSaveAttribute": "$CLIENT$"
         }

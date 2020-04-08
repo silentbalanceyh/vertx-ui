@@ -1,0 +1,30 @@
+{
+    "_empty":{
+        "message": "无相关数据",
+        "description":[
+            "对不起，系统无法读取当前配置项相关的拓扑图信息，请联系管理员。",
+            "您可以在关系管理中添加和配置项相关的关系。",
+            "如果数据有误，您可以联系管理员查看后台数据。"
+        ],
+        "type":"info"
+    },
+    "_graphic":{
+        "css": {
+            "maxHeight": 184,
+            "canvasHeight": 196,
+            "className": "web-editor-1",
+            "center": {
+                "x": 300,
+                "y": 300
+            }
+        },
+        "source": {
+            "type": "ONCE",
+            "data": {
+                "models": "resource.models",
+                "nodes": "graphic.nodes",
+                "types": "relation.type"
+            }
+        }
+    }
+}

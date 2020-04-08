@@ -3,6 +3,23 @@ import Ux from 'ux';
 import fabricSequence from './fabric.fn.sequence';
 import fabricParallel from './fabric.fn.parallel';
 
+/**
+ * ## 扩展函数「Monad」
+ *
+ * event的触发流程：
+ *
+ * * 如果event是一个Array，则顺序执行。
+ * * 如果event是一个Object，则并行执行。
+ *
+ * 统一事件调度专用。
+ *
+ * @memberOf module:_event
+ * @method etUniform
+ * @async
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Array|Object} event 根据事件传入数据结构判断哪一种执行方式。
+ * @returns {Promise<T>} 返回执行的 Promise
+ */
 export default (reference, event = {}) => {
     /*
      * 为事件做准备，直接处理 event 的配置信息

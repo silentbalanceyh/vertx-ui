@@ -54,7 +54,7 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Ex.yiForm(this);
+        Ex.yiForm(this).then(Ux.pipe(this));
     }
 
     render() {

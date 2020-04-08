@@ -24,6 +24,32 @@ const _cabData = (reference, addOn = {}) => {
     }
     return state;
 };
+/**
+ * ## 扩展函数
+ *
+ * 表单专用处理函数，前置调用 `yoAmbient`，处理内容：
+ *
+ * 1. form 基本配置处理
+ * 2. assist 赋值数据处理
+ * 3. control 控件配置
+ *      magic：处理Ajax专用
+ *      control：控件配置
+ *      addon：处理AddOn
+ * 4. dialog 窗口专用配置
+ * 5. config 核心配置
+ * 6. $inited 初始化数据
+ * 7. 表单处理专用
+ *      $identifier：统一标识符
+ *      $mode：表单模式，ADD/EDIT
+ *      $addKey：添加表单的组件
+ *
+ * @memberOf module:_channel
+ * @method yoForm
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} additional 额外配置处理
+ * @param {Object} data 数据记录相关信息
+ * @returns {Object} 计算最终生成的继承属性专用方法
+ */
 export default (reference, additional = {}, data = {}) => {
     const addOn = _cabData(reference, additional);
     const attrs = yoAmbient(reference);

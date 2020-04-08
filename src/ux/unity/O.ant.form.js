@@ -4,11 +4,14 @@ import E from "../error";
 import U from 'underscore';
 
 /**
- * Ant Design中的Form清空专用方法
- * @method formClear
- * @param reference React对应组件引用 React.PureComponent
- * @param data
- * @return {*}
+ * ## 特殊函数「Zero」
+ *
+ * Ant Design中的表单清空专用方法，用于清空当前 Ant Design表单。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object} data 需要清空的对象值。
+ * @return {Object} 处理被清空的所有方法。
  */
 const formClear = (reference, data) => {
     const {$clear, form} = reference.props;
@@ -23,10 +26,18 @@ const formClear = (reference, data) => {
     return data;
 };
 /**
- * Ant Design中的Form读取，将`$record`记录中的数据读取到`data`中；
- * @method formRead
- * @param reference React对应组件引用 React.PureComponent
- * @param data 被修改的数据引用
+ *
+ * ## 特殊函数「Zero」
+ *
+ * 根据数据填充 data 变量。
+ *
+ * 1. 如果包含了`$record`在 props 属性中，则直接使用 $record 数据执行填充，$record 的类型是 DataObject。
+ * 2. 如果不包含`$record`变量，则直接用 form 的 `getFieldsValue` 读取当前表单值来填充 data 变量。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object} data 需要填充的对象值。
+ * @return {Object} 返回最终填充的结果。
  */
 const formRead = (reference, data = {}) => {
     const {$record} = reference.props;
@@ -45,10 +56,18 @@ const formRead = (reference, data = {}) => {
     return data;
 };
 /**
- * Ant Design中的Form的表单数据读取
- * @method formGet
- * @param reference React对应组件引用 React.PureComponent
- * @param key 指定重置的字段值
+ * ## 特殊函数「Zero」
+ *
+ * 直接从 form 中按 `key` 读取表单数据值。
+ *
+ * 1. 如果传入了 Array 类型的 key，则读取包含了 key 中所有元素的表单对象值。
+ * 2. 如果传入了 String 类型的 key，则直接读取表单字段为 `key` 的字段值。
+ * 3. 如果什么都没传入，则直接返回所有表单值。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {String|Array} key 字段名称，有可能是字段集合。
+ * @return {Object|any} 返回读取的字段值。
  */
 const formGet = (reference, key) => {
     const {form} = reference.props;
@@ -66,10 +85,13 @@ const formGet = (reference, key) => {
     }
 };
 /**
- * Ant Design中的Form的表单重置函数
- * @method formReset
- * @param reference React对应组件引用 React.PureComponent
- * @param keys 指定重置的字段值
+ * ## 特殊函数「Zero」
+ *
+ * 重设表单值专用方法。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {String|Array} keys 字段名称，有可能是字段集合。
  */
 const formReset = (reference, keys = []) => {
     const {form} = reference.props;
@@ -89,14 +111,21 @@ const formReset = (reference, keys = []) => {
     }
 };
 /**
+ * ## 特殊函数「Zero,Ambiguity」
+ *
  * Ant Design中的Form操作的二义性函数
+ *
  * * `value`有值时直接设置`key`的表单值；
  * * `value`为undefined时则直接读取Form中的`key`对应的值
- * @method formHit
- * @param reference React对应组件引用 React.PureComponent
- * @param key 字段名
- * @param value 字段值
- * @return {any}
+ *
+ * 这个方法是一个典型的二义性方法，如果有 value 则设置字段`key`的值，如果没有value则读取`value`的值，但是它的读取不如 `formGet`，
+ * `formGet`是增强版的表单读取方法，不仅仅可以读单字段的值，还可以读一个子对象（Object）。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {String} key 字段名称。
+ * @param {any} value 字段值
+ * @return {any} 只有在 value 不传入时使用该值。
  */
 const formHit = (reference, key, value) => {
     const {form} = reference.props;
@@ -112,10 +141,13 @@ const formHit = (reference, key, value) => {
     }
 };
 /**
- * Ant Design中的Form表单执行值设置
- * @method formHits
- * @param reference React对应组件引用 React.PureComponent
- * @param values 设置Form表单中的字段值
+ * ## 特殊函数「Zero」
+ *
+ * Ant Design中的Form表单执行值设置，直接使用values执行设置，values中如果有undefined则清空该字段。
+ *
+ * @memberOf module:_ant
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object} values 设置Form表单中的字段值
  */
 const formHits = (reference, values = {}) => {
     const {form} = reference.props;
@@ -124,10 +156,21 @@ const formHits = (reference, values = {}) => {
         form.setFieldsValue(values);
     }
 };
-/*
+/**
+ * ## 特殊函数「Zero」
+ *
+ * > 该函数主要使用在`ListSelector、TreeSelector`这种复杂的自定义组件中。
+ *
  * 通过 data 来读取
- * 1）data 是 Array，则长度为 1 的处理
- * 2）data 是 Object，则直接处理
+ *
+ * 1. data 是 Array，则按长度为 1 来处理。
+ * 2. data 是 Object，则直接处理。
+ *
+ * @memberOf module:_ant
+ * @param {Object} data linker关联的数据信息。
+ * @param {Object} config linker关联的配置信息。
+ * @param {String} linkerField linker关联的字段值。
+ * @return {undefined|*} 返回undefined或者最终计算的 linker 数据。
  */
 const formLinker = (data, config = {}, linkerField) => {
     const {linker} = config;

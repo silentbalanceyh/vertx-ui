@@ -1,0 +1,82 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc",
+            "closure"
+        ]
+    },
+    "source": {
+        "include": [
+            "src"
+        ],
+        "exclude": [
+            "src/app",
+            "src/style",
+            "src/plugin",
+            "src/style",
+            "src/components",
+            "src/container",
+            "src/extension"
+        ],
+        "includePattern": "\\.(js)$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "default": {
+            "outputSourceFiles": false
+        }
+    },
+    "opts": {
+        "template": "node_modules/docdash",
+        "encoding": "utf8",
+        "destination": "document/doc-web",
+        "recurse": true
+    },
+    "docdash": {
+        "static": true,
+        "meta": {
+            "title": "Zero UI框架专用前端文档",
+            "description": "前端开发框架，官方地址：http://www.vertx-ui.cn",
+            "keyword": "zero,zero-ui,vert.x"
+        },
+        "collapse": false,
+        "search": true,
+        "private": true,
+        "menu": {
+            "Zero Api": {
+                "href": "http://localhost:1017",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero Extension": {
+                "href": "http://localhost:1231",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero UI": {
+                "href": "http://www.vertxui.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero Epic Fabric": {
+                "href": "http://www.vertxup.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Origin X Engine": {
+                "href": "http://www.origin-x.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            }
+        }
+    }
+}

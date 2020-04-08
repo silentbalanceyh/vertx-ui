@@ -1,13 +1,5 @@
 import Cv from '../../constant';
 
-/**
- * 【开发模式，并且开启Mock】打印Mock数据
- * @method mock
- * @param {Request} request 请求数据
- * @param {Response} response 响应数据
- * @param {String} url 请求的url
- * @return {*}
- */
 const mock = (request, response, url) => {
     if (Cv.DEBUG && Cv.MOCK) {
         let message = `%c --->「Zero」 [Ajax] 模拟请求 ${url ? url : ""}`;
@@ -22,13 +14,6 @@ const mock = (request, response, url) => {
     }
     return response;
 };
-/**
- * 【开发模式】打印请求数据
- * @method request
- * @param request 请求的Http方法
- * @param parameters 请求的参数信息
- * @param token 当前请求的token
- */
 const request = (request, parameters, token = '') => {
     const method = request.method;
     const uri = request.url;
@@ -46,16 +31,6 @@ const request = (request, parameters, token = '') => {
         console.groupEnd();
     }
 };
-/**
- * 【开发模式】签名专用函数
- * @method sign
- * @param uri 请求的Uri地址
- * @param method 请求的Http方法
- * @param parameters 请求的参数信息
- * @param seed 签名种子值
- * @param sig 签名最终结果
- * @param secret 签名的secret
- */
 const sign = (uri, method, parameters, {
     seed, sig, secret
 }) => {
@@ -70,15 +45,6 @@ const sign = (uri, method, parameters, {
     }
 };
 
-/**
- * 【开发模式】打印响应信息
- * @method response
- * @param data Ajax的错误对象
- * @param params Ajax的正确响应
- * @param request
- * @param isMock
- * @return {*}
- */
 const response = (data, params, request = {}, isMock = false) => {
     if (Cv.DEBUG) {
         const {

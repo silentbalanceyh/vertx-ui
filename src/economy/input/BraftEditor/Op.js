@@ -38,7 +38,7 @@ const on2Change = (reference) => (editorState) => {
         Ux.xtChange(reference, editorState.toHTML(), true);
     }
 };
-/**
+/*
  * controls = [
  * 'undo', 'redo', 'separator',
  'font-size', 'line-height', 'letter-spacing', 'separator',

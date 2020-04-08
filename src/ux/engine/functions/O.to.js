@@ -2,6 +2,30 @@ import Cv from "../../constant";
 import Ele from '../../element';
 import Abs from "../../abyss";
 
+/**
+ * ## 标准函数
+ *
+ * 生成 Grid 布局的宽度运算，表单中专用，1、2、3、4列不同布局处理。
+ *
+ * ```json
+ * {
+ *     grid: "数值，不同数值对应不同宽度"
+ * }
+ * ```
+ *
+ *
+ * | grid值 | 宽度 |
+ * |:---|:---|
+ * | 5 | 20% |
+ * | 4 | 25% |
+ * | 3 | 33.33% |
+ * | 2 | 50% |
+ * | 1 | 100% |
+ *
+ * @memberOf module:_to
+ * @param {Object} config 传入配置数据
+ * @returns {Object} 返回 style 属性
+ */
 const toGrid = (config = {}) => {
     const {grid = 3} = config;
     const style = {};
@@ -28,6 +52,15 @@ const toGrid = (config = {}) => {
     }
     return style;
 };
+/**
+ * ## 标准函数
+ *
+ * 根据修正宽度计算组件最大高度信息，按分辨率智能切换。
+ *
+ * @memberOf module:_to
+ * @param {Number} adjust 修正高度值。
+ * @returns {number} 返回最终计算的页面高度值。
+ */
 const toHeight = (adjust = 0) => {
     const height = document.body.clientHeight;
     const width = document.body.clientWidth;
@@ -42,9 +75,29 @@ const toHeight = (adjust = 0) => {
     }
     return maxHeight;
 };
-
+/**
+ * ## 标准函数
+ *
+ * 执行CSS前缀的注入流程。
+ *
+ * @memberOf module:_to
+ * @param {String} name 当前类名称。
+ * @returns {string} 返回带前缀的 css 类名。
+ */
 const toCss = (name) => `${Cv['CSS_PREFIX']}-${name}`;
-
+/**
+ * ## 标准函数
+ *
+ * 消息配置转换函数
+ *
+ * 1. error = true：最终调用 message.error 处理。
+ * 2. error = false：最终调用 message.success 处理。
+ *
+ * @memberOf module:_to
+ * @param {String} content 内容信息。
+ * @param {boolean} error 是否呈现错误信息。
+ * @returns {Object} 返回消息配置。
+ */
 const toMessage = (content, error = false) => {
     if (content) {
         const config = {};
@@ -57,6 +110,16 @@ const toMessage = (content, error = false) => {
         return config;
     }
 };
+/**
+ * ## 标准函数
+ *
+ * 生成 Assist / Tabular 专用键值数据。
+ *
+ * @memberOf module:_to
+ * @param {String} key `Assist/Tabular`辅助数据的 key 值。
+ * @param {boolean} assist 是否 Assist 直接数据。
+ * @returns {string} 生成最终键。
+ */
 const toKey = (key, assist = true) => {
     if (assist) {
         return `$a_${key.replace(/\./g, '_')}`;
@@ -64,15 +127,48 @@ const toKey = (key, assist = true) => {
         return `$t_${key.replace(/\./g, '_')}`;
     }
 };
-const toLink = (data = [], $app) => data.map(item => {
-    const path = $app._("path") ? $app._("path") : Cv.Env['ROUTE'];
-    let relatedPath = `${path}${item.uri}`;
-    if (!relatedPath.startsWith('/')) {
-        relatedPath = `/${relatedPath}`;
+/**
+ * ## 标准函数
+ *
+ * 1. 如果 data 是 Object，则针对 data 中的任何一个对象的 `uri` 执行路由转换。
+ * 2. 如果 data 是 Array，则针对 data 中的任何一个元素对象执行 `uri` 转换。
+ * 3. 如果 data 是 String，则直接执行转换。
+ *
+ * @memberOf module:_to
+ * @param {String|Object} data 输入的转换源。
+ * @param {DataObject} $app 应用程序对象。
+ * @returns {string|any} 转换的最终数据。
+ */
+const toLink = (data, $app) => {
+    if (!data) data = [];
+    if (Abs.isArray(data)) {
+        return data.map(item => toLink(item, $app));
+    } else {
+        if ("string" === typeof data) {
+            const path = $app._("path") ? $app._("path") : Cv.Env['ROUTE'];
+            if (!data.startsWith("/")) {
+                data = `/${data}`;
+            }
+            let relatedPath = `${path}${data}`;
+            if (!relatedPath.startsWith('/')) {
+                relatedPath = `/${relatedPath}`;
+            }
+            return relatedPath;
+        } else if (Abs.isObject(data)) {
+            data.uri = toLink(data.uri, $app);
+            return data;
+        }
     }
-    item.uri = relatedPath;
-    return item;
-});
+};
+/**
+ * ## 标准函数
+ *
+ * 根据列信息自动计算表格宽度，计算值会包含多种不同的列值。
+ *
+ * @memberOf module:_to
+ * @param {Array} columns 列配置数组
+ * @returns {number} 返回最终宽度
+ */
 const toX = (columns = []) => {
     let x = 0;
     columns.forEach(column => {
@@ -84,6 +180,15 @@ const toX = (columns = []) => {
     });
     return x;
 };
+/**
+ * ## 标准函数
+ *
+ * 如果是中文字符返回长度 2，如果是英文字符返回长度 1，可计算像素。
+ *
+ * @memberOf module:_to
+ * @param {String} literal 输入字符。
+ * @returns {number} 返回字符宽度。
+ */
 const toWidth = (literal = "") => {
     if ("string" === typeof literal) {
         let width = 0;

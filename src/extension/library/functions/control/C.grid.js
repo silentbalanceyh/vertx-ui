@@ -1,6 +1,6 @@
 import U from "underscore";
 
-/**
+/*
  * 样本
  * 1. 布局行：
  *      - key：React专用
@@ -64,6 +64,17 @@ const toRowItem = (item, prefix, control) => {
     }
     return row;
 };
+/**
+ * ## 扩展函数
+ *
+ * Grid布局扩展配置。
+ *
+ * @memberOf module:_config
+ * @param {Array<Array>} grid 矩阵专用扩展Grid布局配置
+ * @param {Object} control 控件表
+ * @param {String} prefix 前缀信息，用于识别组件的key专用
+ * @returns {Array} 返回最终布局
+ */
 const configGrid = (grid = [], control = {}, prefix) => {
     // 行处理
     const rows = [];

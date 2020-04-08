@@ -26,7 +26,7 @@ const extractData = (original: any, key: any) => {
 
 class DataObject implements DataContainer {
     ready: boolean = false;
-    data: any = {};
+    private readonly data: any = {};
 
     constructor(data: Object) {
         this.data = data;

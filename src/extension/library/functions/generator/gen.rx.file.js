@@ -1,6 +1,15 @@
 import Ux from 'ux';
 import G from '../global';
 
+/**
+ * ## 扩展函数
+ *
+ * 导出专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxExport = (reference) => (params = {}) => {
     if (!Ux.isEmpty(params)) {
         const {options = {}} = reference.state;
@@ -15,6 +24,15 @@ const rxExport = (reference) => (params = {}) => {
         return Ux.ajaxPull(uri, params);
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 导入专用函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxImport = (reference) => (file) => {
     if (file) {
         const {options = {}} = reference.state;

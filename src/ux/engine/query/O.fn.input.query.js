@@ -5,7 +5,19 @@ import U from 'underscore';
 import Cmn from "./I.common";
 import Rdr from './render';
 
-export default (input, connector = "OR", reference) => {
+/**
+ * ## 标准函数
+ *
+ * 针对查询专用表单的条件数据收集处理，大部分是多选解析专用。
+ *
+ * @memberOf module:_qr
+ * @method qrForm
+ * @param {Object} input 输入的字段信息。
+ * @param {String} connector 查询条件。
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Object} 返回最终查询条件，写入$filters变量。
+ */
+export default (input, connector = "AND", reference) => {
     const condition = {};
     condition[""] = ("AND" === connector);
     /*

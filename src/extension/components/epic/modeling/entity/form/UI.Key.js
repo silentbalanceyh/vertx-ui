@@ -13,7 +13,7 @@ class Component extends React.PureComponent {
         /*
          * 配置处理
          */
-        const {$inited = {}, $mode} = this.props;
+        const {$inited = {}, $mode, reference} = this.props;
         let initials = {};
         initials.key = $inited.key;
         initials.entityId = $inited.parentId;
@@ -22,6 +22,8 @@ class Component extends React.PureComponent {
              * 默认值
              */
             initials.active = true;
+            const ref = Ux.onReference(reference, 1);
+            initials.entityId = Ux.formHit(ref, "key");
         } else {
             /*
              * 更新表单专用值

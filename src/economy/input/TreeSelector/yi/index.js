@@ -16,7 +16,7 @@ const yiDefault = (reference = {}) => {
     }
 };
 const yiValue = (reference, jsx = {}) => {
-    const inputAttrs = Ux.valueFlip(jsx);
+    const inputAttrs = Ux.valueLimit(jsx);
     if (undefined === inputAttrs.value) {
         /*
          * 只有 undefined 的时候触发

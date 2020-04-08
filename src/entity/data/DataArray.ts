@@ -109,7 +109,7 @@ class DataArray implements DataContainer {
             // 设置信息
             const hitted = this.searchElement(idField, element[idField]);
             if (hitted) {
-                this.updateElement(element);
+                this.updateElement(element, idField);
             } else {
                 this.push(element);
             }
@@ -188,15 +188,15 @@ class DataArray implements DataContainer {
 
     // -------------- 内部自动排序函数 -------------
 
-    updateElement(element: any) {
-        if (!element.key) {
+    updateElement(element: any, idField: any = "key") {
+        if (!element[idField]) {
             console.error("[TS-VI] Could not setObject for null key element.");
         }
         // 查找唯一元素
         const source = JSON.parse(this.data);
         for (let idx = 0; idx < source.length; idx++) {
             const item = source[idx];
-            if (item && item.key === element.key) {
+            if (item && item[idField] === element[idField]) {
                 source[idx] = element;
             }
         }

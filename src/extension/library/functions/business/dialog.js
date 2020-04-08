@@ -72,6 +72,43 @@ const saveSelected = (reference) => (data = []) => {
         throw new Error("[ Ux ] 缺失核心函数 doRow()");
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 根据 `reference` 执行窗口操作
+ *
+ * ```json
+ * {
+ *     add: (data) => Promise,
+ *     save: (data) => Promise,
+ *     saveRow: (data) => Promise,
+ *     saveSelected: (data) => Promise
+ * }
+ * ```
+ *
+ * ### 函数说明
+ *
+ * | 函数名 | 说明 |
+ * |:---|:---|
+ * | add | 窗口添加执行 |
+ * | save | 窗口保存执行 |
+ * | saveRow | 保存当前行 |
+ * | saveSelected | 保存当前窗口选择的 |
+ *
+ * 当前API的框架内部调用代码如：
+ *
+ * ```js
+ * import Ex from 'ex';
+ *
+ * const $opSaveField = (reference) => params =>
+ *      Ex.dialog(reference).saveRow(params);
+ * ```
+ *
+ * @memberOf module:_business
+ * @method dialog
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Object} 返回对象信息
+ * */
 export default (reference) => ({
     add: add(reference),
     save: save(reference),

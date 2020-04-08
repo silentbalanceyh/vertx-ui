@@ -69,9 +69,8 @@ const _initOrigin = (reference, response, data = [], keys = []) => {
         }));
     return origin;
 };
-/**
+/*
  * 解决带有Trigger的初始化配置的触发后的问题
- * @param reference
  */
 const initTrigger = (reference = {}) => {
     if (reference.state) {

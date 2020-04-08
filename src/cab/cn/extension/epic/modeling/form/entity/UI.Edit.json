@@ -11,7 +11,7 @@
                     "optionJsx.addonBefore": "cn.originx."
                 },
                 {
-                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）",
+                    "metadata": "identifier,全局ID,12,,,placeholder=（使用形如\"xx.yy\"的格式，如ci.device）,readOnly=true",
                     "optionConfig.rules": [
                         "required,请输入全局ID，不可为空！",
                         {
@@ -36,7 +36,7 @@
                     ]
                 },
                 {
-                    "metadata": "tableName,数据库表名,12,,,placeholder=（根据规范表名全大写，如RES_COMPANY）",
+                    "metadata": "tableName,数据库表名,12,,,placeholder=（根据规范表名全大写，如RES_COMPANY）,readOnly=true",
                     "optionConfig.rules": [
                         "required,请输入表名，表名不可为空！",
                         {
@@ -97,7 +97,7 @@
                                             "metadata": "fields,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormField",
-                                                "dialog": "字段设置,保存,关闭,false,800,true,$opSaveField",
+                                                "dialog": "字段设置,保存,关闭,false,900,true,$opSaveField",
                                                 "op": {
                                                     "add": "$opShowField"
                                                 },
@@ -186,7 +186,7 @@
                                             "metadata": "keys,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": "FormKey",
-                                                "dialog": "键设置,保存,关闭,false,640,true,$opSaveKey",
+                                                "dialog": "键设置,保存,关闭,false,900,true,$opSaveKey",
                                                 "op": {
                                                     "add": "$opShowKey"
                                                 },

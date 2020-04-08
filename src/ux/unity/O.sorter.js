@@ -51,45 +51,161 @@ const sortDate = (left, right, asc = true) => {
         }
     } else return 0;
 };
-
+/**
+ *
+ * ## 标准函数「Zero」
+ *
+ * 针对对象按照`key`的字典序进行排序，主要用于打印过程中生成更容易分析的日志专用。
+ *
+ * @memberOf module:_sorter
+ * @param {Object} input 传入的对象Object的值。
+ * @return {Object} 排序过后的对象。
+ */
 const sorterObject = (input = {}) => {
     const normalized = {};
     const keys = Object.keys(input).sort((left, right) => sortString(left, right, true));
     keys.forEach(key => normalized[key] = input[key]);
     return normalized;
 };
-/**
- * @class Sorter
- * @description Table组件排序专用函数，对应列中的sorter
- */
 export default {
     sorterObject,
     /**
-     * 顺序排序
-     * @method sorterAsc
-     * @param left 左值
-     * @param right 右值
-     * @param key 排序的值，这种情况针对对象数组
-     * @return {number|*}
+     * ## 标准函数「Zero」
+     *
+     * 按字符串顺序排序。
+     *
+     * ```js
+     * Object.keys(groupedData).sort(Ux.sorterAsc).forEach(identifier => {
+     *      // 排序后的执行
+     * });
+     * ```
+     *
+     * @memberOf module:_sorter
+     * @param {Object|any} left 左值。
+     * @param {Object|any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
      */
     sorterAsc: (left, right, key) => key ? sortString(left[key], right[key]) : sortString(left, right),
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按字符串顺序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterAscFn: (key) => (left, right) => key ? sortString(left[key], right[key]) : sortString(left, right),
+    /**
+     * ## 标准函数「Zero」
+     *
+     * 按任意类型顺序排序。
+     *
+     * @memberOf module:_sorter
+     * @param {any} left 左值。
+     * @param {any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
+     */
     sorterAscT: (left, right, key) => key ? sortT(left[key], right[key]) : sortT(left, right),
+
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按任意类型顺序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterAscTFn: (key) => (left, right) => key ? sortT(left[key], right[key]) : sortT(left, right),
+    /**
+     * ## 标准函数「Zero」
+     *
+     * 按时间类型顺序排序。
+     *
+     * @memberOf module:_sorter
+     * @param {any} left 左值。
+     * @param {any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
+     */
     sorterAscD: (left, right, key) => key ? sortDate(left[key], right[key]) : sortDate(left, right),
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按时间类型顺序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterAscDFn: (key) => (left, right) => key ? sortDate(left[key], right[key]) : sortDate(left, right),
     /**
-     * 逆序排序
-     * @method sorterDesc
-     * @param left 左值
-     * @param right 右值
-     * @param key 排序的字段，这种清空针对对象数组
-     * @return {number|*}
+     * ## 标准函数「Zero」
+     *
+     * 按字符串逆序排序。
+     *
+     * @memberOf module:_sorter
+     * @param {Object|any} left 左值。
+     * @param {Object|any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
      */
     sorterDesc: (left, right, key) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按字符串逆序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterDescFn: (key) => (left, right) => key ? sortString(left[key], right[key], false) : sortString(left, right, false),
+    /**
+     * ## 标准函数「Zero」
+     *
+     * 按任意类型逆序排序。
+     *
+     * @memberOf module:_sorter
+     * @param {any} left 左值。
+     * @param {any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
+     */
     sorterDescT: (left, right, key) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按任意类型逆序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterDescTFn: (key) => (left, right) => key ? sortT(left[key], right[key], false) : sortT(left, right, false),
+    /**
+     * ## 标准函数「Zero」
+     *
+     * 按时间类型逆序排序。
+     *
+     * @memberOf module:_sorter
+     * @param {any} left 左值。
+     * @param {any} right 右值。
+     * @param {String} key 键值。
+     * @return {number} 排序因子
+     */
     sorterDescD: (left, right, key) => key ? sortDate(left[key], right[key], false) : sortDate(left, right, false),
+    /**
+     * ## 标准函数「2阶，Zero」
+     *
+     * 按时间类型逆序排序，生成函数。
+     *
+     * @memberOf module:_sorter
+     * @param {String} key 生成函数需要比较的字段`key`的值。
+     * @return {function(*=, *=): number} 排序函数。
+     */
     sorterDescDFn: (key) => (left, right) => key ? sortDate(left[key], right[key], false) : sortDate(left, right, false)
 };

@@ -6,11 +6,10 @@ import U from "underscore";
 import Ele from '../../element';
 import './Cab.less';
 
-/**
+/*
  * 针对图标进行处理，类型包含icon和image两种
  * * 如果type以`img:`开头，则使用`<img/>`标签
  * * 其他情况则使用Ant Design中的`<Icon/>`处理
- * @method uiIcon
  * @param {String} type 传入的字符串值
  * @param {Object} addOn 附加配置
  * @return {*}
@@ -144,7 +143,7 @@ const aiBlock = (icon, text, key) => {
         if (kv[2]) {
             style.fontSize = Ele.valueInt(kv[2]);
         }
-        if (!style.fontSize) style.fontSize = 36;
+        if (!style.fontSize) style.fontSize = 24;
         iconAttrs.style = style;
         if (kv[3]) {
             iconAttrs.theme = kv[3];
@@ -159,7 +158,7 @@ const aiBlock = (icon, text, key) => {
     } else {
         iconAttrs.type = icon;
         iconAttrs.style = {
-            fontSize: 36
+            fontSize: 24
         }
     }
     return (

@@ -17,14 +17,102 @@ const error008 = _generate(-200008, "对不起，搜索方法参数不可为空�
     "The parameter `$query` is invalid when you do `fnSearch`.");
 const error009 = _generate(-200009, "对不起，Promise构造的前置条件不满足。",
     "The pre-condition is invalid to build promise");
-export default {
-    error001,
-    error002,
-    error003,
-    error004,
-    error005,
-    error006,
-    error007,
-    error008,
-    error009
+
+/**
+ * Extension 内部的专用错
+ *
+ * @class E
+ */
+class E {
+    /**
+     * -200001, 应用程序初始化读取失败
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error001() {
+        return error001();
+    }
+
+    /**
+     * -200002, Ant Design 中的 Form 没经过封装
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error002() {
+        return error002();
+    }
+
+    /**
+     * -200003, 当前构造的必须是 Promise
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error003() {
+        return error003();
+    }
+
+    /**
+     * -200004, 当前构造的必须是 Promise（初始化流程）
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error004() {
+        return error004();
+    }
+
+    /**
+     * -200005, 无法绑定合法函数，绑定过程出错
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error005() {
+        return error005();
+    }
+
+    /**
+     * -200006, 参数长度有问题
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error006() {
+        return error006();
+    }
+
+    /**
+     * -200007, fnEvent 不合法
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error007() {
+        return error007();
+    }
+
+    /**
+     * -200008, 搜索方法参数不可为空
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error008() {
+        return error008();
+    }
+
+    /**
+     * -200009, Promise 构造的前置条件不满足
+     *
+     * @async
+     * @returns {Promise<T>} Promise
+     */
+    static error009() {
+        return error009();
+    }
 }
+
+export default E;

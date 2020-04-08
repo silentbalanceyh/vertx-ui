@@ -1,58 +1,35 @@
 import E from "../../error";
-import {Dsl} from 'entity';
 import Abs from '../../abyss';
 import Ele from '../../element';
 
 /**
- * 资源文件数据读取方法
- * @method fromHoc
- * @param reference React对应组件引用 React.PureComponent
- * @param {String} key 读取对应属性名
+ * ## 引擎函数
+ *
+ * 资源文件数据读取专用方法，从 $hoc 中读取主键值相关信息。
+ *
+ * @memberOf module:_from
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String} key 读取对应属性名。
  * @return {null}
  */
 const fromHoc = (reference = {}, key = "") => {
     E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
-    const {$hoc} = reference.state;
-    return ($hoc) ? $hoc._(key) : null;
-};
-const parseDatum = (target, key) => {
-    const targetKey = target[`$t_${key}`] || target[`$a_${key}`];
-    if (targetKey) {
-        if (targetKey.is()) {
-            return targetKey;
-        } else {
-            return targetKey;
-        }
+    if (reference) {
+        const {$hoc} = reference.state;
+        return ($hoc) ? $hoc._(key) : null;
+    } else {
+        console.error("传入第一个参数 reference 为 null 或 undefined");
     }
-};
-const fromDatum = (reference, key) => {
-    key = key.replace(/\./g, "_");
-    /*
-     * 先从 props 中读取
-     */
-    if (reference.props) {
-        let parsed = parseDatum(reference.props, key);
-        if (parsed) {
-            return parsed;
-        } else {
-            /*
-             * 再从 state 中读取
-             */
-            if (reference.state) {
-                parsed = parseDatum(reference.state, key);
-                if (parsed) {
-                    return parsed;
-                }
-            }
-        }
-    }
-    return Dsl.getArray(undefined);
 };
 /**
- * 直接从Hoc资源路径读取数据信息
- * @method fromPath
- * @param reference
- * @param args
+ * ## 引擎函数
+ *
+ * 资源文件数据读取专用方法，从 $hoc 中读取主键值相关信息，可以处理深度路径信息。
+ *
+ * @memberOf module:_from
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String[]} args 读取属性名核心路径。
+ * @return {null}
  */
 const fromPath = (reference = {}, ...args) => {
     let keys = Ele.ambiguityArray.apply(this, args);
@@ -76,6 +53,5 @@ const fromPath = (reference = {}, ...args) => {
 };
 export default {
     fromHoc,
-    fromDatum,
     fromPath,
 }

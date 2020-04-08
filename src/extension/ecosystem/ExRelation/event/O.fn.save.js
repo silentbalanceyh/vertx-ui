@@ -40,5 +40,12 @@ export default (reference, key) => (selected = [], ref = {}) => {
             $selectedUp: [], $loadingUp: false,
             $selectedDown: [], $loadingDown: false,
         });
+    }).catch(error => {
+        reference.setState({
+            $submitting: false,
+            $selectedUp: [], $loadingUp: false,
+            $selectedDown: [], $loadingDown: false,
+        });
+        return Ux.ajaxError(reference, error);
     }));
 };

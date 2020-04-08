@@ -38,7 +38,7 @@ class Component extends React.PureComponent {
         // 数据处理
         const data = Ux.xtData(this);
         // 处理InputGroup中的jsx
-        const attrs = Ux.valueFlip(jsx);
+        const attrs = Ux.valueLimit(jsx);
         const $attrs = Ux.clone(attrs);
         if ($attrs.onChange) delete $attrs.onChange;
         // 是否处理children节点，新特性

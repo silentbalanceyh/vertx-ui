@@ -2,12 +2,23 @@ import qrCombine from './O.fn.combine';
 import Abs from '../../abyss';
 import Pr from '../parser';
 import Dev from '../../develop';
-/*
+
+/**
+ * ## 特殊函数「Qr」
+ *
  * 复杂内容核心操作，用于设置默认的 $query 信息
+ *
  * 优先级选取
- * 1）props 中的 $query 优先
- * 2）config 中的 query 第一级，直接合并 config.query （全合并）
- * 3）config 中的 ajax.magic 合并（需解析，只合并 criteria）
+ *
+ * 1. props 中的 $query 优先
+ * 2. config 中的 query 第一级，直接合并 config.query （全合并）
+ * 3. config 中的 ajax.magic 合并（需解析，只合并 criteria）
+ *
+ * @memberOf module:_qr
+ * @method qrCommon
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} config 查询配置
+ * @returns {Object} 返回最终的 query 结构。
  */
 export default (reference, config) => {
     if (config) {

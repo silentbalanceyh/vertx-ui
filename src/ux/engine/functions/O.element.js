@@ -13,7 +13,16 @@ const configFabric = (input = {}) => {
     }
     return config;
 };
-
+/**
+ * ## 引擎函数
+ *
+ * 解析 fabric 专用事件配置处理器。
+ *
+ * @memberOf module:_value
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} input 输入数据。
+ * @param {Function} consumer 执行函数。
+ */
 const valueFabric = (reference, input = {}, consumer) => {
     if (Abs.isFunction(consumer)) {
         const config = configFabric(input);
@@ -26,6 +35,16 @@ const valueFabric = (reference, input = {}, consumer) => {
         }
     }
 };
+/**
+ * ## 引擎函数
+ *
+ * 解析 fabric 专用事件配置处理器（可支持过滤器的版本）。
+ *
+ * @memberOf module:_value
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} input 输入数据。
+ * @param {Function} consumer 执行函数。
+ */
 const valueFabrics = (reference, input = {}, consumer) => {
     if (Abs.isFunction(consumer)) {
         const config = configFabric(input);

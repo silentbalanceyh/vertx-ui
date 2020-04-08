@@ -10,12 +10,15 @@ import Logger from '../../develop/logger';
 
 
 /**
- * 处理当前Form中的input控件专用信息
- * @method extractForm
- * @param reference React对应组件引用 React.PureComponent
- * @param key 读取的配置值
- * @return {*}
- * 上层方法，直接从 cab.json 中读取
+ * ## 引擎函数
+ *
+ * 配置专用方法，处理当前Form中的input控件专用信息，该配置方法为**上层方法**，直接从
+ * 绑定的资源文件`Cab.json`引用的配置中读取相关配置。
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String} key 表单配置读取必须的键。
+ * @return {any}
  */
 const cabForm = (reference = {}, key = "form") => {
     const {$hoc} = reference.state;
@@ -24,9 +27,15 @@ const cabForm = (reference = {}, key = "form") => {
     E.fxTerminal(!form, 10056, $hoc);
     return Abs.clone(form);
 };
-/*
- * 下层方法
+/**
+ *
+ * ## 引擎函数
+ *
+ * 配置专用方法，该方法为**下层方法**，直接使用Object作为配置输入。
+ *
  * cab: Cab.json 中读取的 form 配置
+ *
+ * ```json
  * {
  *     form:{
  *          className: "表单对应的CSS",
@@ -48,7 +57,11 @@ const cabForm = (reference = {}, key = "form") => {
  *          method: "调用远程的 uri对应的 Ajax 方法，默认 GET"
  *     }
  * }
+ * ```
+ *
  * program：通过编程方式传入的配置
+ *
+ * ```json
  * {
  *     key: "form",     // 默认使用 form
  *     jsx: {
@@ -61,7 +74,11 @@ const cabForm = (reference = {}, key = "form") => {
  *     columns: （优先）使用 grid 时表单支持的布局,
  *     supplier: （优先）构造 magic 专用的 supplier，和上边的配置结合使用
  * }
+ * ```
+ *
  * capForm 主要用于设置 addOn 附加信息，最终返回数据结构
+ *
+ * ```json
  * {
  *     form: {
  *         window,
@@ -81,7 +98,11 @@ const cabForm = (reference = {}, key = "form") => {
  *         }
  *     },
  * }
+ * ```
+ *
  * supplier 响应格式（参考form）
+ *
+ * ```json
  * {
  *     className: "表单对应的CSS",
  *     window: 布局选择,
@@ -93,6 +114,13 @@ const cabForm = (reference = {}, key = "form") => {
  *          "Button的id": "SAction的 code"
  *     }
  * }
+ * ```
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} config 基本输入的配置信息。
+ * @param {Object} program 编程传入的配置信息。
+ * @return {Promise<T>} 返回异步的 Promise。
  */
 const capForm = async (reference = {}, config = {}, program = {}) => {
     const addOn = {};
@@ -182,6 +210,16 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
         addOn
     };
 };
+/**
+ * ## 引擎函数
+ *
+ * 「标准配置」表单配置的标准处理方法，和 React 隔离的独立配置函数，处理 form 配置专用。
+ *
+ * @memberOf module:_config
+ * @param {Object} form 传入的特殊Form配置，Object类型。
+ * @param {Object} addOn 编程专用的Object类型。
+ * @return {Object} 配置规范化完成后的Form数据。
+ */
 const configForm = (form, addOn = {}) => {
     /*
      * 1）form 配置存在
@@ -293,9 +331,16 @@ const configForm = (form, addOn = {}) => {
     Logger.render(3);
     return raft;
 };
-
-/*
- * 原生的RaftForm改变过来的
+/**
+ * ## 引擎函数
+ *
+ * Legacy遗留系统专用的Form配置处理。
+ *
+ * @deprecated 后期会废弃该方法，目前唯一的一个表单级的遗留方法
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} config 基本输入的配置信息。
+ * @return {Promise<T>} 返回最终的 Promise。
  */
 const raftForm = (reference, config = {}) => {
     const {

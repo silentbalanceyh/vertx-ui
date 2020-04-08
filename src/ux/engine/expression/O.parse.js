@@ -25,10 +25,14 @@ const parseExpression = (reference, expr = "") => {
     return returnValue;
 };
 /**
- * 针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理
- * @method parseAjax
- * @param reference React对应组件引用 React.PureComponent
- * @param parameters 传入的参数值信息
+ * ## 引擎函数
+ *
+ * 标准的ajax配置解析函数，针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理
+ *
+ * @memberOf module:_parser
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} parameters 传入的参数值相关信息。
+ * @returns {Object} 返回最终解析好的 Ajax 参数。
  */
 const parseAjax = (parameters = {}, reference) => {
     const result = {};
@@ -68,11 +72,14 @@ const initCond = (reference = {}) => {
     return $metadata.cond ? $metadata.cond : {};
 };
 /**
+ * ## 引擎函数
+ *
  * 针对Query的专用参数解析器
- * @method parseQuery
- * @param reference React对应组件引用 React.PureComponent
- * @param $query 查询参数相关信息
- * @return {*}
+ *
+ * @memberOf module:_parser
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} $query 查询参数数据结构。
+ * @return {Object} 返回解析好的查询参数。
  */
 const parseQuery = (reference = {}, $query) => {
     Logger.filters(reference, {
@@ -111,10 +118,6 @@ const parseQuery = (reference = {}, $query) => {
     queryData.criteria = criteria;
     return queryData;
 };
-/**
- * @class Param
- * @description 复杂参数解析器
- */
 export default {
     parseAjax,
     parseQuery,

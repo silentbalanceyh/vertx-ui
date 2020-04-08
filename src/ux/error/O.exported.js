@@ -49,7 +49,32 @@ const _reportEach = (expr, library = {}) => {
         console.log(`%c ${kv[0]} （ All ）: `, `font-weight:900;color:${kv[1]}`, library);
     }
 };
-const reportExported = (data, config = {}) => {
+/**
+ * ## 标准函数
+ *
+ * 该函数直接生成框架报表，在最早的 console 中打印，内部调用代码如：
+ *
+ * ```js
+ * const input = {
+ *      E,
+ *      develop,
+ *      abs,
+ *      element,
+ *      entity,
+ *      graphic,
+ *      unity,
+ *      ajax,
+ *      engine,
+ * };
+ * export default () => E.fxReport(input, config);
+ * ```
+ *
+ * @memberOf module:_error
+ * @param {Object} data 需要生成报表的数据
+ * @param {Object} config 是需要解析的
+ * @return {Object} 返回生成的报表数据
+ */
+const fxReport = (data, config = {}) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
         console.groupCollapsed(`%c 「Zero」 Zero UI Framework / Tool Report ( Ux )`, "font-weight:900;color:#369");
         /*
@@ -70,7 +95,48 @@ const reportExported = (data, config = {}) => {
     }
     return data;
 };
-
+/**
+ * ## 标准函数
+ *
+ * 只会使用在 Redux 环境中的响应处理器，目前是框架内部使用，带监控流程生成日志。
+ *
+ * 内部调用代码如下：
+ *
+ * ```js
+ * const actionType = $action.ofType(type.getType());
+ * const source = from(actionType);
+ * return source.pipe(
+ *      map(action => action.payload),
+ *      map(promise),
+ *      switchMap(promise => from(promise).pipe(
+ *          map(responser),
+ *          map(E.fxRedux),
+ *          map(data => Rdx.dataOut(data))
+ *      ))
+ * );
+ * ```
+ *
+ * @memberOf module:_error
+ * @param {String|Object} object 传入的数据信息。
+ * @param {any} original 原始数据问题。
+ * @return {any} 传入什么返回什么，使用函数链操作。
+ */
+const fxRedux = (object, original) => {
+    if (Cv.DEBUG) {
+        let message = `%c 「Zero」 Redux Data Flow`;
+        console.groupCollapsed(message, "color:white;background-color:#09c;font-weight:100");
+        if ("string" === typeof object) {
+            console.log("「Zero」 Redux Key: ", object);
+        } else {
+            console.log("「Zero」 Object Data: ", object);
+        }
+        console.log("「Zero」 Original Data: ", original);
+        console.groupEnd();
+    }
+    // 解决Redux中的数据问题
+    return object;
+};
 export default {
-    reportExported
+    fxReport,
+    fxRedux
 }

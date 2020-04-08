@@ -27,6 +27,22 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
         };
     }
 };
+/**
+ * ## 扩展函数
+ *
+ * 输入配置的基本信息如（四大基本组件）：
+ *
+ * ```
+ * {
+ *     "type": "COMPONENT / LIST / FORM / CONTAINER"
+ * }
+ * ```
+ *
+ * @memberOf module:_channel
+ * @method yoControl
+ * @param {Object} control 控件原始配置。
+ * @returns {Object} 返回动态处理中的控件专用配置。
+ */
 export default (control = {}) => {
     const attrs = {};
     const {type = "COMPONENT", sign = ""} = control;

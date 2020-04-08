@@ -6,6 +6,15 @@ import Cmn from './I.common';
  */
 import qrForm from './O.fn.input.query';
 
+/**
+ * ## 标准函数
+ *
+ * 收集列中的`$filter`过滤配置数据，生成最终的 $terms 变量。
+ *
+ * @memberOf module:_qr
+ * @param {Array} columns 列过滤中的所有列配置数据
+ * @returns {Object} 返回列配置构造的数据
+ */
 const qrTerms = (columns = []) => {
     /*
      * 在列确认之后，执行 $terms 变量的注入
@@ -40,6 +49,15 @@ const qrTerms = (columns = []) => {
     Object.freeze($terms);
     return $terms;
 };
+/**
+ * ## 标准函数
+ *
+ * 列筛选专用的清除筛选条件专用API。
+ *
+ * @memberOf module:_qr
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} state 状态数据
+ */
 const qrClear = (reference = {}, state = {}) => {
     let append = state ? state : {};
     Object.assign(append, {$condition: {}});
@@ -48,6 +66,15 @@ const qrClear = (reference = {}, state = {}) => {
     const {$terms = {}} = reference.state ? reference.state : {};
     Ft.activeColumn($terms);
 };
+/**
+ * ## 标准函数
+ *
+ * 单独输入框的搜索条件构造专用函数，如果清除则值设为`__DELETE__`。
+ *
+ * @memberOf module:_qr
+ * @param {Array} cond 查询条件字段信息。
+ * @param {any} value 值信息，如果无值则清除条件。
+ */
 const qrInput = (cond = [], value) => {
     const condition = {};
     if (value) {

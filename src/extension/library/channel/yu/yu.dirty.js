@@ -29,7 +29,16 @@ const updateInternal = (reference, prevState, consumer) => {
         }
     }
 };
-
+/**
+ * ## 扩展函数
+ *
+ * 检查 $dirty 标记执行是否脏数据变化，如果变化则重新加载。
+ *
+ * @memberOf module:_channel
+ * @method yuDirty
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} virtualRef 旧的属性和状态
+ */
 export default (reference, virtualRef) => {
     const {$dirty = false} = reference.props;
     const prevState = virtualRef.state;

@@ -1,6 +1,33 @@
 import U from 'underscore';
 import yoAmbient from './yo.ambient';
 
+/**
+ * ## 扩展函数
+ *
+ * 按钮和操作专用，`ExAction/ExButton` 专用的处理。
+ *
+ * 按钮专用过滤函数，主要过滤几种：
+ *
+ * 1. Open区
+ * 2. Batch区
+ * 3. Search区
+ * 4. Extra区
+ * 5. Row区
+ *
+ * 扩展区域
+ *
+ * 1. op.extension.open
+ * 2. op.extension.batch
+ * 3. op.extension.search
+ * 4. op.extension.extra
+ *
+ * @memberOf module:_channel
+ * @method yoAction
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {String} prefix 操作前缀
+ * @param {Object} ordered 排序专用
+ * @returns {Object} 计算最终生成的继承属性专用方法
+ */
 export default (reference, prefix = "", ordered) => {
     /*
      * 环境数据

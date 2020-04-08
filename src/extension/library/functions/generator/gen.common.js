@@ -1,11 +1,21 @@
 import U from 'underscore';
 import Ux from "ux";
 import Fn from '../func';
-/*
- * 优先选择 name 方法作为函数，只考虑 props 中（外置传入）
- * 其次使用 supplier 作为函数
+
+/**
+ * ## 扩展函数
+ *
+ * 优先选择 name 方法作为函数，只考虑 props 中（外置传入），其次使用 supplier 作为函数
+ *
  * Ux 组件兼容函数
- * 1）必须是 `rx` 的函数头
+ *
+ * 1. 必须是 `rx` 的函数头
+ *
+ * @memberOf module:_function
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {String} name 函数名称
+ * @param {Function} supplier 默认执行处理，如果 name 不是Function的时候的处理
+ * @returns {Function} 返回执行函数
  */
 const switcher = (reference, name, supplier) => {
     if (U.isString(name) && name.startsWith("rx")) {
@@ -41,7 +51,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
         inError = true
     } = config;
     if (reference) {
-        if (Fn.isExFun(fnName)) {
+        if (Fn.mapFun(fnName)) {
             /* 参数规范化 */
             args = (args && U.isArray(args)) ? args : [];
             /* 优先从 props 中读取 函数 */

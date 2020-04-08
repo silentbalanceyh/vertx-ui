@@ -1,0 +1,29 @@
+{
+    "_modal": {
+        "success": {
+            "submitted": "您的图模板保存成功！"
+        }
+    },
+    "_graphic":{
+        "css": {
+            "maxHeight": 200,
+            "canvasHeight": 210,
+            "className": "web-editor-2",
+            "center": {
+                "x": 300,
+                "y": 300
+            }
+        },
+        "source": {
+            "type": "ONCE",
+            "data": {
+                "models": "resource.models",
+                "nodes": "graphic.nodes",
+                "types": "relation.type"
+            }
+        }
+    },
+    "_toolbar":{
+        "tips":"系统自动绘制关系"
+    }
+}

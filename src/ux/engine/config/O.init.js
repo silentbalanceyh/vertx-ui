@@ -1,9 +1,18 @@
 import Abs from '../../abyss';
 import Pr from '../parser';
-/*
+
+/**
+ * ## 引擎函数
+ *
  * 该方法和其他方法独立出来，用于将初始值
  * 的配置和表单本身的配置直接剥离开，防止混乱
  * 而且添加和编辑过程中的初始化方法不一样
+ *
+ * @memberOf module:_primary
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} form 表单配置。
+ * @param {Object} program 编程专用的配置数据传入。
+ * @return {Object} 初始化数据（表单初始化数据）。
  */
 const initial = (reference, form, program = {}) => {
     /*
@@ -22,11 +31,11 @@ const initial = (reference, form, program = {}) => {
                  */
                 let definition = {};
                 Object.keys(form.initial)
-                /* 直接过滤得到最终的表达式 */
+                    /* 直接过滤得到最终的表达式 */
                     .filter(key => "string" === typeof form.initial[key])
                     .forEach(key => {
                         const value = Pr.parseValue(form.initial[key], reference);
-                        if (value) {      // undefined !== value
+                        if (undefined !== value) {      // undefined !== value
                             definition[key] = value;
                         }
                     });

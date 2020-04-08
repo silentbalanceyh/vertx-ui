@@ -14,7 +14,7 @@ import Op from './form/Op';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Ex.yiCompany(this);
+        Ex.yiCompany(this).then(Ux.pipe(this));
     }
 
     render() {

@@ -1,14 +1,25 @@
 #!/usr/bin/env bash
-export PORT=4000                                    # 当前用户使用的端口号
-export APP_LANGUAGE=cn                              # 当前应用使用的语言，如果有多语言则需要在不同语言中启动不同应用进行切换，不建议单库多语言部署
-export APP_ENDPOINT=http://localhost:7000           # 当前应用需要访问的远程EndPoint
-export APP_NAME=vie.app.htl                         # 该应用名称
-export APP_ROUTE=zui                                # 该应用的动态路由根路径地址
-export KEY_SESSION=@@ZUI/                           # Session Key前缀
-export KEY_EVENT=@@ZUI-ACT                          # Redux 中的Event对应的Key前缀
-export DEV_DEBUG=true                               # 是否开启Debug模式
-export DEV_MOCK=true                                # 是否启用Mock
-export UX_SHARED=app
+export PORT=4000
+export Z_TITLE=Zero教程文档说明
+export Z_LANGUAGE=cn
+export Z_ENDPOINT=http://localhost:7000
+export Z_APP=vie.app.htl
+export Z_ROUTE=zui
+export Z_SHARED=app
+export Z_ENTRY_LOGIN=/login/index
+export Z_ENTRY_ADMIN=/admin/index
+export Z_K_SESSION=@@ZUI/
+export Z_K_EVENT=@@ZUI-ACT
+export REACT_APP_LESS_MODULES=true
+
+export Z_DEV_DEBUG=true
+export Z_DEV_MOCK=true
+export Z_DEV_AJAX=false
+export Z_DEV_FORM=true
+export Z_DEV_MONITOR=false
+
+export Z_CSS_COLOR="#3457e2"
+export Z_CSS_PREFIX=zui
 
 export SB_PORT=6006
 npm run-script build-storybook

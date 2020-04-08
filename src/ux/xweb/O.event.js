@@ -4,6 +4,16 @@ import Dust from './O.foundation';
 import E from '../error';
 import Abs from '../abyss';
 
+/**
+ * ## 标准函数
+ *
+ * 自定义函数专用的 onChange 统一更新值的核心函数。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} changedValues 改变过后的状态信息，改变状态必须是`Object`类型。
+ * @param {key} key 如果存在该值，则表示数组类型或基础类型的处理，直接更新，不计算。
+ */
 const xtChange = (reference, changedValues = {}, key) => {
     const {onChange} = reference.props;
     // 10095规范：传入的自定义控件中没有onChange的函数
@@ -24,7 +34,16 @@ const xtChange = (reference, changedValues = {}, key) => {
         onChange(newValue);
     }
 };
-
+/**
+ * ## 标准函数「2阶」
+ *
+ * 核心变更函数，二阶，生成onChange专用，内部调用被绑定的`onChange`方法，以及更改状态，修正 Ant Design 的 form 内部状态。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {String} field 待验证的字段名称。
+ * @return {Function}
+ */
 const xt2Change = (reference, field) => (event) => {
     // 1.读取Input数据
     const state = Dust.xtGet(reference, field, () => event.target ? event.target.value : undefined);
@@ -33,6 +52,16 @@ const xt2Change = (reference, field) => (event) => {
     // 3.调用内置的onChange专用事件
     xtChange(reference, state);
 };
+/**
+ * ## 标准函数
+ *
+ * `onBlur`函数触发验证规则，自定义中需要使用时可调用`onBlur`来执行验证。
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {String} field 待验证的字段名称。
+ * @return {Function}
+ */
 const xt2Blur = (reference, field) => (event) => {
     const {onBlur} = reference.props;
     if (U.isFunction(onBlur)) {

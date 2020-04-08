@@ -6,6 +6,17 @@ import Ut from '../../unity';
 import U from "underscore";
 import {Dsl} from "entity";
 
+/**
+ * ## 标准函数
+ *
+ * 新版的 magic 对应 ajax 解析专用函数。
+ *
+ * @memberOf module:_async
+ * @async
+ * @param {Object} config 包含了 magic 配置的异步函数。
+ * @param {ReactComponent} reference React对应组件引用。
+ * @returns {Promise<T>} 返回Promise。
+ */
 const asyncMagic = (config = {}, reference) => {
     let parsed = {};
     if (config.magic) {
@@ -72,6 +83,19 @@ const seekData = (state, key, data = [], clientSort) => {
     }
     state[stateKey] = Dsl.getArray(dataResult);
 };
+/**
+ * ## 标准函数
+ *
+ * 新版的 assist 对应 ajax 解析专用函数。
+ *
+ *
+ * @memberOf module:_async
+ * @async
+ * @param {Object} assist 辅助数据配置信息。
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} state 处理的状态数据信息。
+ * @returns {Promise<T>} 返回Promise。
+ */
 const asyncAssist = (assist = {}, reference, state = {}) => {
     const keys = Object.keys(assist);
     /*

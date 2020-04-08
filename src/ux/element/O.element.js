@@ -3,15 +3,25 @@ import E from '../error';
 import U from 'underscore';
 
 /**
- * 数组拉平专用算法，以子节点field中的key为主
- * @method elementFlat
- * @param {Array} array 被追加的数组
- * @param field 需要拉平的字段值
- * @param parent
+ * ## 标准函数
+ *
+ * 数组元素拉平函数，将一个完整的树拉平成不带树结构的数据。
+ *
+ * @deprecated 由于目前只在 Uarr 中使用，所以将来可能被废弃。
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {String} field 需要拉平的字段信息
+ * @param {boolean} parent 是否包含父数组
+ * @return {Array} 返回拉平后的数组
  */
 const elementFlat = (array = [], field = "", parent = false) => {
     const result = parent ? Abs.clone(array) : [];
     array.forEach(item => {
+        /*
+         * 查找子节点、并且将子节点拉平到当前节点，执行合并
+         * 1. 移除原始的 field。
+         * 2. 创建 _parent 和 key 之间的关系。
+         */
         const fnChildren = (children = []) => U.isArray(children) ?
             children.forEach(child => {
                 let target = Abs.immutable(item);
@@ -21,7 +31,9 @@ const elementFlat = (array = [], field = "", parent = false) => {
                 if (item.key) $target._parent = item.key;
                 result.push($target);
             }) : {};
-        // 读取字段中的值
+        /*
+         * 如果属性是 Array，则直接处理
+         */
         if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
             const children = item[field];
             fnChildren(children);
@@ -47,28 +59,64 @@ const elementFlat = (array = [], field = "", parent = false) => {
     return result;
 };
 /**
+ * ## 标准函数
+ *
  * 在数组中查找唯一元素
- * @method elementUnique
- * @param {Array} data 查找的数组
- * @param {String} field 字段
- * @param value
+ *
+ * 1. 查找条件为`field = value`。
+ * 2. 目前只支持单字段查找，查找到多个则直接返回第一个。
+ *
+ * 框架内的调用如
+ *
+ * ```js
+ *     const found = Ux.elementUnique(nodes, 'identifier', identifier);
+ * ```
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {String} field 查找的字段名。
+ * @param {any} value 作为条件的字段值。
+ * @returns {Object} 返回最终查找到的唯一元素Object。
  */
-const elementUnique = (data = [], field = "", value) => {
-    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
+const elementUnique = (array = [], field = "", value) => {
+    E.fxTerminal(!U.isArray(array), 10071, array, "Array");
     let reference = [];
     if (U.isObject(field)) {
         // Filter模式
-        reference = elementFind(data, field);
+        reference = elementFind(array, field);
     } else {
-        reference = data.filter(item => value === item[field]);
+        reference = array.filter(item => value === item[field]);
     }
     E.fxTerminal(1 < reference.length, 10069, reference, 1);
     return 0 === reference.length ? undefined : reference[0];
 };
-
-const elementFind = (data = [], filters) => {
-    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
-    let reference = data;
+/**
+ * ## 标准函数
+ *
+ * 针对数组的查找操作，查找符合 filters 条件的数组，内部使用该函数的代码
+ *
+ * ```js
+ * const _g6Find = ($data = [], identifier) => {
+ *      const found = Ele.elementFind($data, {identifier});
+ *      if (1 === found.length) {
+ *          return found[0];
+ *      } else {
+ *          const filter = found.filter(item => item.leaf); // 叶节点优先
+ *          if (1 === filter.length) {
+ *              return filter[0];
+ *          }
+ *      }
+ * };
+ * ```
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} filters 过滤专用键值对。
+ * @return {Array} 返回查找到的数组信息，最终结果也是一个`[]`。
+ */
+const elementFind = (array = [], filters) => {
+    E.fxTerminal(!U.isArray(array), 10071, array, "Array");
+    let reference = array;
     if (filters) {
         // eslint-disable-next-line
         for (const field in filters) {
@@ -89,16 +137,32 @@ const elementFind = (data = [], filters) => {
     return reference;
 };
 /**
- * Array数组中的属性映射处理
- * @method elementVertical
- * @param {Array} data
- * @param field 需要映射的字段名
- * @return {Array}
+ * ## 标准函数
+ *
+ * 针对数组执行映射操作，将垂直映射过的值合并成一个无重复元素的集合。
+ *
+ * ```js
+ * const user = [
+ *     {name:"lang1", email":"silentbalanceyh@126.com"},
+ *     {name:"lang2", type:"employee"},
+ *     {name:"lang3", type:"user"},
+ *     {name:"lang4", type:"user"}
+ * ]
+ * const mapped = Ux.elementVertical(user, "type");
+ * // 最终计算的值
+ * // mapped = ["user", "employee"]
+ * // 映射最终结果是一个 Array（无重复记录）
+ * ```
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息
+ * @param {String} field 执行映射的字段名
+ * @return {Array} 新字段值构造的最终集合
  */
-const elementVertical = (data = [], field = "") => {
-    E.fxTerminal(!U.isArray(data), 10071, data, "Array");
+const elementVertical = (array = [], field = "") => {
+    E.fxTerminal(!U.isArray(array), 10071, array, "Array");
     let result = [];
-    data.forEach(item => {
+    array.forEach(item => {
         if (item[field]) {
             const $result = Abs.immutable(result);
             if (!$result.contains(item[field])) {
@@ -108,19 +172,25 @@ const elementVertical = (data = [], field = "") => {
     });
     return result;
 };
-
 /**
- * 查找一个颗树的某个分支构成一个新的数组
- * @method elementBranch
- * @param {Array} array 被查找的数
- * @param leafKey 过滤条件
- * @param parentField 构造树的字段
+ * ## 标准函数「Zero」
+ *
+ * Zero UI中的树函数，从当前节点查找整个节点所在的分支数组（父节点、父父节点、…… 顶层祖辈），`elementBranch` 和 `elementChild` 为互逆函数。
+ *
+ * 1. 每个节点的默认主键字段为`key`。
+ * 2. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {any} leafValue 被检索的子节点的值。
+ * @param {String} parentField 检索树的父字段信息。
+ * @return {Array} 返回分支的数组。
  */
-const elementBranch = (array = [], leafKey, parentField = "parent") => {
+const elementBranch = (array = [], leafValue, parentField = "parent") => {
     // 查找的最终结果
     let branch = [];
     // 查找子节点
-    const obj = elementUnique(array, "key", leafKey);
+    const obj = elementUnique(array, "key", leafValue);
     if (obj) {
         const target = Abs.clone(obj);//
         branch.push(target);
@@ -131,16 +201,22 @@ const elementBranch = (array = [], leafKey, parentField = "parent") => {
     // console.info(found.map(item => elementUnique(array, "key", item)));
     return branch;
 };
-/*
- * 该方法只处理已经配置过的
- * {
- *     key: "key",
- *     parent: "parentId",
- *     value: "key",
- *     label: "label",
- *     sort: "order",
- *     level: "level"
- * }
+/**
+ * ## 标准函数「Zero」
+ *
+ * Zero UI中的树函数，在数组中查找当前节点的所有子节点信息，并且构成子树，`elementBranch` 和 `elementChild` 为互逆函数。
+ *
+ * 1. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ * 2. 每个节点中有两个固定值
+ *      1. key 表示每个节点的主键。
+ *      2. children 表示每个节点中的子节点信息`[]`。
+ * 3. 在每个节点中计算出 `_level` 参数表示生成树中每个节点所在树的`层级`。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} current 目标节点。
+ * @param {String} parentField 执行树搜索中的父字段。
+ * @return {Array} 返回子节点数组
  */
 const elementChild = (array = [], current = {}, parentField = "parent") => {
     const parentKey = current.key;
@@ -158,8 +234,40 @@ const elementChild = (array = [], current = {}, parentField = "parent") => {
     }
     return children;
 };
-/*
- * 分组专用方法
+/**
+ *
+ * ## 标准函数
+ *
+ * 按照某个字段对这个数组进行分组操作。
+ *
+ * ```js
+ *
+ * const input = [
+ *      {"name": "lang", type: "user"},
+ *      {"name": "lang2", type: "employee"},
+ *      {"name": "lang3", type: "employee"}
+ * ]
+ * const grouped = Ux.elementGroup(input, "type");
+ * ```
+ *
+ * 最终计算出来的`grouped`的数据结构如下：
+ *
+ * ```json
+ * {
+ *     "user": [
+ *         {"name": "lang", type: "user"}
+ *     ],
+ *     "employee: [
+ *         {"name": "lang2", type: "employee"},
+ *         {"name": "lang3", type: "employee"}
+ *     ]
+ * }
+ * ```
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组
+ * @param {String} field 分组专用的字段信息
+ * @return {Object} 分组过后每一个键值对为`key = Array`
  */
 const elementGroup = (array = [], field) => {
     let result = {};

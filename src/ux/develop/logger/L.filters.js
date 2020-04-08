@@ -1,14 +1,6 @@
 import Cv from '../../constant';
 
-/**
- * 【开发模式】过滤参数专用
- * @method filters
- * @param reference React对应组件引用 React.PureComponent
- * @param input 输入的Query参数
- * @param query Prop属性中的Query参数
- * @param filters 最终搜索用的Query参数
- * @param cond 搜索条件
- */
+
 const filters = (reference = {}, {
     input = {}, query = {}, filters = {}, cond
 }) => {

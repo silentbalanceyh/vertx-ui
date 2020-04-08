@@ -38,8 +38,7 @@ const yiPage = (reference) => {
     }
     state.$selected = false;
     state.$config = Ux.clone(config);
-    Ex.yiStandard(reference, state)
-        .then(state => reference.setState(state));
+    Ex.yiStandard(reference, state).then(Ux.pipe(reference))
 };
 const yoSider = (reference) => {
     const siderAttrs = Ex.yoAmbient(reference);

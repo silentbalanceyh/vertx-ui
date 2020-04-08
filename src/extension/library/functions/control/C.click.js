@@ -99,7 +99,16 @@ const configConnect = (onClick, plugin = {}, reference) => {
     }
     return onClick
 };
-
+/**
+ * ## 扩展函数
+ *
+ * 按钮扩展配置。
+ *
+ * @memberOf module:_config
+ * @param {Object} config 按钮完整配置
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 返回需要绑定的执行函数
+ */
 const configClick = (config = {}, reference) => {
     const {
         plugin = {}

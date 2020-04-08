@@ -28,6 +28,18 @@ const _prepare = (...keys) => {
     return Boolean(result);
 };
 export default {
+    /**
+     * ## 常量
+     *
+     * ```js
+     * import Ux from 'ux';
+     *
+     * const value = Ux.Env.KEY_APP;
+     * ```
+     * @constant
+     *
+     * @memberOf module:_constant
+     */
     KEY_APP,        // App专用Key值
     ENV,            // 环境变量
     _prepare,    // 准备开发环境变量

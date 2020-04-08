@@ -22,11 +22,11 @@ class Component extends React.PureComponent {
             /*
              * 头部数据基础
              */
-            const {current = {}} = this.props;
+            const {current = {}, $header = true} = this.props;
             const tabs = Op.yoTabs(this);
             return (
                 <div>
-                    {renderHeader(current, header)}
+                    {$header ? renderHeader(current, header) : false}
                     {renderTab(this, tabs)}
                 </div>
             )

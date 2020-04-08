@@ -2,6 +2,16 @@ import G from '../global';
 import F from './gen.common';
 import Ux from "ux";
 
+/**
+ * ## 扩展函数
+ *
+ * 全列读取专用
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} config 列配置
+ * @returns {Function} 生成函数
+ */
 const rxColumn = (reference, config = {}) => F.switcher(reference, 'rxColumn',
     (params) => {
         const {options = {}, columns = []} = config;
@@ -19,6 +29,16 @@ const rxColumn = (reference, config = {}) => F.switcher(reference, 'rxColumn',
             return Ux.promise(columns);
         }
     });
+/**
+ * ## 扩展函数
+ *
+ * 读取我的列
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} config 列配置
+ * @returns {Function} 生成函数
+ */
 const rxColumnMy = (reference, config = {}) => F.switcher(reference, 'rxColumnMy',
     (params) => {
         const {options = {}} = config;
@@ -31,6 +51,16 @@ const rxColumnMy = (reference, config = {}) => F.switcher(reference, 'rxColumnMy
             return Ux.ajaxGet(uri, params);
         }
     });
+/**
+ * ## 扩展函数
+ *
+ * 视图保存函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Function} consumer 后置函数，用于执行保存过后的回调
+ * @returns {Function} 生成函数
+ */
 const rxColumnSave = (reference, consumer = {}) => F.switcher(reference, 'rxColumnSave',
     (params = []) => {
         const {options = {}} = reference.state;
@@ -39,6 +69,15 @@ const rxColumnSave = (reference, consumer = {}) => F.switcher(reference, 'rxColu
         return Ux.ajaxPut(uri, params);
     }
 );
+/**
+ * ## 扩展函数
+ *
+ * 列过滤专用执行函数
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
 const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
     const $my = Ux.immutable($columnsMy);
     $columnsMy = Ux.clone($columnsMy);
