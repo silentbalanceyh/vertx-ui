@@ -54,4 +54,4 @@ yarn-error.log*
 !/src/style/animate.css
 .awcache
 .awcache/*
-storybook-static
+document/story-web
