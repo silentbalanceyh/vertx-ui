@@ -50,12 +50,12 @@
         "private": true,
         "menu": {
             "Zero Api": {
-                "href": "http://localhost:1017",
+                "href": "http://www.vertxui.cn/document/doc-web/index.html",
                 "class": "menu-item",
                 "id": "website_link"
             },
             "Zero Extension": {
-                "href": "http://localhost:1231",
+                "href": "http://www.vertxui.cn/document/doc-web-extension/index.html",
                 "class": "menu-item",
                 "id": "website_link"
             },
