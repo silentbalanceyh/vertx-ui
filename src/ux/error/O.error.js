@@ -107,12 +107,12 @@ export default {
      * 容错专用函数，渲染错误界面（渲染内部带有错误编码的错误界面）。
      *
      * @memberOf module:_error
-     * @param {Number} code 内部错误编码
+     * @param {Number|String} code 内部错误编码
      * @param {any[]} args 错误信息中所需的参数（可变）
      * @return {Jsx}
      */
     fxFailure: (code, ...args) => {
-        let input = arguments[0];
+        let input = code;
         if ("string" === typeof input) {
             return jsxError(input);
         } else if ("number" === typeof input) {
