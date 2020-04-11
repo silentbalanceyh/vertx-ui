@@ -115,8 +115,92 @@ const rxAssist = (input, key, order = 'sort') => {
     response[key] = data;
     return rxPrefix(response, 'assist', order);
 };
+/**
+ * ## 标准函数「Zero」
+ *
+ * Redux 响应处理器，针对Assist数据执行响应处理，专用于Assist辅助数据的响应处理器，必须和 Redux 连用，使用代码如：
+ *
+ * ```java
+ * export default{
+ *      ...Ux.rjAssist("today.preorders",
+ *          () => Ux.ajaxGet('/api/today/orders/pre')),
+ *      ...Ux.rjAssist("today.orders",
+ *          () => Ux.ajaxGet("/api/today/orders/all")),
+ * }
+ * ```
+ *
+ * 上述代码会生成 Redux 中的 `today.preorders` 和 `today.orders` 两个核心节点，该节点会被 `Ux.onDatum` 调用，
+ * 直接调用可以得到 Assist 的核心数据。
+ *
+ * 最终返回结果：
+ *
+ * ```json
+ * {
+ *     ajax: "执行的 Promise",
+ *     processor: "响应处理器"
+ * }
+ * ```
+ *
+ * @memberOf module:_rx
+ * @param {String} key 将要生成的 Assist 辅助数据的键。
+ * @param {Promise} ajax 生成远程异步专用的 Promise。
+ * @param {String} sortField 最终返回数据的排序字段。
+ * @param {boolean} merged 是否执行合并，或者直接返回当前结果。
+ * @returns {Object} 返回最终结果。
+ */
+const rjAssist = (key, ajax, sortField = null, merged = true) => {
+    const result = {
+        ajax,
+        processor: data => rxAssist(data, key, sortField)
+    };
+    if (merged) {
+        /* 用于格式：...处理 */
+        const response = {};
+        response[key] = result;
+        return response;
+    } else {
+        /* 直接返回某个键的结果 */
+        return result;
+    }
+}
+/**
+ * ## 标准函数「Zero」
+ *
+ * Redux 响应处理器，专用于 Tabular 数据的响应处理流程，后端绑定`X_TABULAR`表，形成最终的
+ * 字典类响应数据专用。
+ *
+ * 最终返回结果：
+ *
+ * ```json
+ * {
+ *     ajax: "执行的 Promise",
+ *     processor: "响应处理器"
+ * }
+ * ```
+ *
+ * @memberOf module:_rx
+ * @param {Promise} ajax 生成远程异步专用的 Promise。
+ * @param {boolean} merged 是否执行合并，或者直接返回当前结果。
+ * @returns {Object} 返回最终结果。
+ */
+const rjTabular = (ajax, merged = true) => {
+    const result = {
+        ajax,
+        processor: rxDatum,
+    };
+    if (merged) {
+        const response = {};
+        response.tabular = result;
+        return response;
+    } else {
+        return result;
+    }
+}
 export default {
     rxInit,
     rxDatum,
     rxAssist,
+    /* Ajax 专用方法用于生成 ajax / processor 结构 */
+    rjTabular,
+    rjAssist
 }
