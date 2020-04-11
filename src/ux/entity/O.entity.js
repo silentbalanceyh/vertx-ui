@@ -62,7 +62,7 @@ export default {
      * 调用代码如：
      *
      * ```js
-     * @Ux.zero(Ux.rxEtat(require('../Cab.json'))
+     * &#64;Ux.zero(Ux.rxEtat(require('../Cab.json'))
      *      .cab("UI.Filter")
      *      .raft(1)
      *      .form().to()

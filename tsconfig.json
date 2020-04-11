@@ -58,6 +58,7 @@
         }
     },
     "exclude": [
+        "node_modules/**/*.js",
         "node_modules/**/*.ts",
         "src/**/*.js",
         "config/**/*.js"

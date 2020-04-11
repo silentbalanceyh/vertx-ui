@@ -8,69 +8,6 @@ import parser from './parser';
 import generator from './generator';
 import control from './control';
 
-/**
- * 内部模块
- *
- * 解析器模块
- *
- * @module _parser
- */
-/**
- * 内部模块
- *
- * 挂载模块
- *
- * @module _on
- */
-/**
- * 内部模块
- *
- * 数据输入输出
- *
- * @module _io
- */
-/**
- * 内部模块
- *
- * 业务专用
- *
- * @module _business
- */
-/**
- * 内部模块
- *
- * 原子操作
- *
- * @module _function
- */
-/**
- * 内部模块
- *
- * 常量模块
- *
- * @module _constant
- */
-/**
- * 内部模块
- *
- * 配置模块
- *
- * @module _config
- */
-/**
- * 内部模块
- *
- * 更新判断
- *
- * @module _up
- */
-/**
- * 内部模块
- *
- * 转换模块
- *
- * @module _to
- */
 export default {
     /*
      * mapMeta
