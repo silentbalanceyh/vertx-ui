@@ -218,9 +218,9 @@ const isAuthorized = (reference) => {
  */
 const toLoading = (consumer, seed = 1) => {
     /*
-     * 改成 108 ms，即108毫秒
+     * 改成 10 ms 毫秒级
      */
-    const ms = Value.valueInt(Cv['LOADING'], 108);
+    const ms = Value.valueInt(Cv['LOADING'], 10);
     setTimeout(consumer, ms * seed);
 };
 export default {

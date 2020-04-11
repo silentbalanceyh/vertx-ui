@@ -59,7 +59,7 @@ const yuPage = (reference) => {
             state.$loading = false;
             state.$data = data;
             reference.setState(state);
-        }), 5)
+        }))
     }
 };
 const yoPage = (reference) => {

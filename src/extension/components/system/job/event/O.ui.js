@@ -30,7 +30,7 @@ const rxRefresh = (reference, callback) => {
         if (Ux.isFunction(callback)) {
             callback(state);
         }
-    }), 5)
+    }))
 };
 const rxTimer = (reference, duration = 10000) =>
     setInterval(() => rxRefresh(reference,
