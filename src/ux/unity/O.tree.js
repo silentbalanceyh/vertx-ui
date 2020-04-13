@@ -177,7 +177,7 @@ const toTree = (data = [], config = {}) => {
          * 针对每一个 root 节点查找子节点
          * 不拷贝，直接追加 children 方法
          */
-        item.children = Ele.elementChild(normalized, item);
+        item.children = Ele.elementChildTree(normalized, item);
     });
     return root;
 };

@@ -88,6 +88,8 @@ export default (reference, key) => {
                 criteria[`globalId,!i`] = existing;
             }
         }
+        /* 已确认条件 */
+        criteria.confirmStatus = "confirmed";
         // console.info(criteria);
         query.criteria = criteria;
     }
