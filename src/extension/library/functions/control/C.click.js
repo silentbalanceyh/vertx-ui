@@ -141,7 +141,7 @@ const configClick = (config = {}, reference) => {
      */
     const content = plugin.confirm;
     if (content) {
-        onClick = Ux.eventConfirm(onClick, content);
+        onClick = Ux.onConfirm(onClick, content);
     }
     return onClick;
 };

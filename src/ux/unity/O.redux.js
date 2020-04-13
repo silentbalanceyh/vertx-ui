@@ -65,7 +65,7 @@ const writeClean = (reference, keys = []) => {
 /**
  * ## 特殊函数「Zero」
  *
- * Zero UI 中的 redux 树的房重复提交专用方法，用于检查 redux 引擎下的防重复提交。
+ * Zero UI 中的 redux 树的防重复提交专用方法，用于检查 redux 引擎下的防重复提交。
  *
  * @memberOf module:_redux
  * @param {ReactComponent} reference React组件。

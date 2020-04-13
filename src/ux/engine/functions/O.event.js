@@ -10,12 +10,12 @@ import E from "../../error";
  * 1. 如果带 content 则将原始函数处理在 onOk 回调中。
  * 2. 如果不带 content 则直接执行函数。
  *
- * @memberOf module:_primary
+ * @memberOf module:_on
  * @param {Function} fnEvent 原始事件方法。
  * @param {String} content 提示框中的内容数据。
  * @returns {Function} 返回事件函数
  */
-const eventConfirm = (fnEvent, content) => (event) => {
+const onConfirm = (fnEvent, content) => (event) => {
     if (U.isFunction(fnEvent)) {
         event.preventDefault();
         if (content) {
@@ -34,5 +34,5 @@ const eventConfirm = (fnEvent, content) => (event) => {
 };
 
 export default {
-    eventConfirm
+    onConfirm
 }

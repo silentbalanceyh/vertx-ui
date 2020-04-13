@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import {Provider} from "react-redux";
-import {LocaleProvider} from 'antd';
+import {ConfigProvider} from 'antd';
 import zhCN from 'antd/lib/locale-provider/zh_CN';
 import {BrowserRouter} from "react-router-dom";
 import workers from "./environment/workers";
@@ -116,11 +116,11 @@ const store = createStore();
  * @author 戒子猪
  */
 ReactDOM.render(
-    <LocaleProvider locale={zhCN}>
+    <ConfigProvider locale={zhCN}>
         <Provider store={store}>
             <BrowserRouter>
                 {routes}
             </BrowserRouter>
         </Provider>
-    </LocaleProvider>, document.getElementById("root"));
+    </ConfigProvider>, document.getElementById("root"));
 workers();

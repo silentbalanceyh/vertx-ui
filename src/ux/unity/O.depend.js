@@ -260,12 +260,12 @@ const _edition = (reference) => {
         /* 不可编辑，直接切断 */
         return $edition;
     }
+
+    /* state 中的优先级高于 props 中 */
     if (reference.state.hasOwnProperty("$edition")) {
         const stateEdition = reference.state.$edition;
         if (Abs.isObject(stateEdition)) {
             Object.assign($edition, stateEdition);
-        } else {
-            $edition = stateEdition;
         }
     }
     if (false === $edition) {
@@ -274,9 +274,9 @@ const _edition = (reference) => {
     }
     const {$inited = {}} = reference.props;
     const {metadata} = $inited;
-    if (Abs.isEmpty(metadata)) {
-        $edition = {};
-    } else {
+
+    /* state 中的优先级高于 props 中 */
+    if (!Abs.isEmpty(metadata)) {
         if (Abs.isObject(metadata) && metadata.hasOwnProperty("edition")) {
             if (metadata.edition) {
                 $edition = {};

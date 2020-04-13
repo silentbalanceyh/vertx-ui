@@ -6,8 +6,10 @@ import ajax from './O.ajax';
 import anchor from './O.anchor';
 import form from './O.ant.form';
 import element from './O.element';
+import redux from './O.redux';
 
 export default {
+    ...redux,
     ...event,
     ...to,
     ...child,
