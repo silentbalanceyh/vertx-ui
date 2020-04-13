@@ -40,8 +40,7 @@ const _on2Remove = (reference, record = {}) => (event) => {
         _data // 原始数据
     } = reference.state;
     const treeData = config.tree;
-    const children = Ux.elementChildren(_data, record[treeData.key],
-        treeData.field, treeData.key);
+    const children = Ux.elementChildTree(_data, record[treeData.key], treeData.field);
 
     const dataArray = Dsl.getArray(selected);
     children.forEach(each => dataArray.removeElement(each[treeData.key], treeData.key));

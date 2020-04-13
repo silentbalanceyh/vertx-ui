@@ -5,6 +5,13 @@
 import sexExAction from './O.fn.ex.action';
 import sexExPlugin from './O.fn.ex.plugin';
 
+/**
+ * 内部模块
+ *
+ * 专用骚操作
+ *
+ * @module _romantic
+ */
 export default {
     sexExAction,
     /*

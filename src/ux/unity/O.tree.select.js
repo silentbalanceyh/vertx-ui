@@ -83,7 +83,7 @@ const treeChildren = (keys = [], data = [], parentField = "parent") =>
 const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item, parentField))
+        .map(item => Ele.elementChildren(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
 /**
@@ -101,7 +101,7 @@ const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
 const treeChildrenAllIn = (keys = [], data = [], parentField = "parent") =>
     keys.concat(keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChild(data, item, parentField))
+        .map(item => Ele.elementChildren(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
     );

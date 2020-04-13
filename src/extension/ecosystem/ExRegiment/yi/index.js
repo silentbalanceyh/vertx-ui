@@ -28,6 +28,7 @@ const yiPage = (reference) => {
         $search.onSearch = Event.onSearch(reference, {condition})
     }
     const $query = Event.yoQuery(reference, configuration);
+
     const $table = {};
     const $tabulation = {};
     const $divider = {};
