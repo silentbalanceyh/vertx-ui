@@ -49,7 +49,7 @@ yarn-error.log*
 # 语言Mapping文件
 *.map
 # 忽略脚本
-/run-ux.sh
+/run-current-ux.sh
 /src/environment/routes.js
 !/src/style/animate.css
 .awcache
