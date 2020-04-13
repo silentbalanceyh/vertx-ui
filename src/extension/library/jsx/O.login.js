@@ -58,4 +58,7 @@ class Login {
     }
 }
 
-export default Login;
+export default {
+    username: Login.username,
+    password: Login.password
+};

@@ -19,51 +19,50 @@ const yiPage = (reference) => {
         const keys = Object.keys(pages);
         const promises = keys.map(activeKey => pages[activeKey])
             .map(form => Ux.capForm(ref, {form}));
-        Ux.parallel(promises, keys)
-            .then(response => {
-                Object.freeze(response);
-                /*
-                 * 多个Form的处理
-                 */
-                Ux.itObject(response, (activeKey, raftConfig = {}) => {
-                    const {form, addOn = {}} = raftConfig;
-                    raft[activeKey] = Ux.configForm(form, addOn);
-                });
-                /*
-                 * pages 解析完成过后处理 $tabs
-                 */
-                const state = {};
-                const $tabs = Ux.configTab(reference, Ux.toLimit(config, [
-                    "pages"
-                ]));
-                if ($tabs.hasOwnProperty('activeKey')) {
-                    /*
-                     * 有状态的 activeKey 优先
-                     */
-                    state.$activeKey = $tabs.activeKey;
-                } else {
-                    if ($tabs.hasOwnProperty("defaultActiveKey")) {
-                        /*
-                         * 无状态转换成有状态
-                         * defaultActiveKey 转换成 $activeKey
-                         */
-                        state.$activeKey = $tabs.defaultActiveKey;
-                    }
-                }
-                $tabs.type = "card";
-                $tabs.items.forEach(item => {
-                    const raftItem = raft[item.key];
-                    /*
-                     * 延迟处理
-                     */
-                    item.fnChild = (values = {}) => Ux.aiField(ref, values, raftItem);
-                });
-                /*
-                 * readOnly 删除 tabBarExtraContent
-                 */
-                state.$tabs = $tabs;
-                reference.setState(state);
+        Ux.parallel.apply(null, [promises].concat(keys)).then(response => {
+            Object.freeze(response);
+            /*
+             * 多个Form的处理
+             */
+            Ux.itObject(response, (activeKey, raftConfig = {}) => {
+                const {form, addOn = {}} = raftConfig;
+                raft[activeKey] = Ux.configForm(form, addOn);
             });
+            /*
+             * pages 解析完成过后处理 $tabs
+             */
+            const state = {};
+            const $tabs = Ux.configTab(reference, Ux.toLimit(config, [
+                "pages"
+            ]));
+            if ($tabs.hasOwnProperty('activeKey')) {
+                /*
+                 * 有状态的 activeKey 优先
+                 */
+                state.$activeKey = $tabs.activeKey;
+            } else {
+                if ($tabs.hasOwnProperty("defaultActiveKey")) {
+                    /*
+                     * 无状态转换成有状态
+                     * defaultActiveKey 转换成 $activeKey
+                     */
+                    state.$activeKey = $tabs.defaultActiveKey;
+                }
+            }
+            $tabs.type = "card";
+            $tabs.items.forEach(item => {
+                const raftItem = raft[item.key];
+                /*
+                 * 延迟处理
+                 */
+                item.fnChild = (values = {}) => Ux.aiField(ref, values, raftItem);
+            });
+            /*
+             * readOnly 删除 tabBarExtraContent
+             */
+            state.$tabs = $tabs;
+            reference.setState(state);
+        });
     }
 };
 const yoExtra = ($tabs = {}, reference) => {

@@ -3,8 +3,21 @@ import Ut from '../../unity';
 import Ele from '../../element';
 import U from 'underscore';
 import Abs from '../../abyss';
-import Ux from "ux";
-
+import {DataObject} from 'entity';
+/*
+ * 解决 redux 模式下的 BUG 问题
+ */
+const isLoading = (reference) => {
+    let submitting = Ele.ambiguityValue(reference, "$submitting");
+    if (submitting instanceof DataObject) {
+        /*
+         * redux 模式下的加载效果处理
+         * DataObject -> loading 数据
+         */
+        submitting = submitting._("loading");
+    }
+    return submitting;
+}
 /**
  * ## 引擎函数
  *
@@ -20,7 +33,7 @@ const configDialog = (reference, config = {}) => {
     /*
      * 使用解析结果来拷贝
      */
-    const $config = Ux.clone($dialog);
+    const $config = Abs.clone($dialog);
     /*
      * onOk按钮
      */
@@ -38,7 +51,7 @@ const configDialog = (reference, config = {}) => {
      * 防重复提交
      */
     const {$visible = false} = reference.state;
-    const $submitting = Ele.ambiguityValue(reference, "$submitting");
+    const $submitting = isLoading(reference);
     $dialog.visible = $visible;
     $dialog.confirmLoading = $submitting;
     $dialog.cancelButtonProps = {
