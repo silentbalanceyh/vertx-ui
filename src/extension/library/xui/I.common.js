@@ -11,6 +11,41 @@ const getData = (inherit, source = "") => {
         return Ux.parseValue(source, {state, props});
     }
 };
+const _seekFabric = (attrs = {}, config = {}, target) => {
+    if (target) {
+        const {$fabric = {}} = target;
+        /*
+         * 命中当前 control 的信息
+         */
+        if (!Ux.isEmpty($fabric)) {
+            const fabric = $fabric[config.key];
+            if (fabric) {
+                /*
+                 * 直接读取 $fabric 专用数据信息
+                 * （当前）
+                 * 1）这里需要注意的是 $fabric 中的数据会进行一次筛选（在配置中针对 control 筛选）
+                 * 2）筛选过后，会直接合并到 attrs 中，如果出现了重名，原始的内容会被覆盖掉，所以请小心
+                 */
+                Object.assign(attrs, fabric);
+            }
+            /*
+             * 直接注入 $fabric 处理
+             * （继承）
+             */
+            attrs.$fabric = $fabric;
+        }
+    }
+}
+const seekFabric = (attrs = {}, config = {}, reference = {}) => {
+    /**
+     * 先从 props 中读取 $fabric 数据，如果 $fabric 存在则执行第一轮处理
+     */
+    _seekFabric(attrs, config, reference.props);
+    /**
+     * 然后从 state 中读取 $fabric 数据，存在则执行第一轮处理
+     */
+    _seekFabric(attrs, config, reference.state);
+}
 
 const seekInherit = (attrs = {}, config) => {
     // 容器主键
@@ -30,23 +65,8 @@ const seekInherit = (attrs = {}, config) => {
      */
     const {reference} = attrs;
     if (reference) {
-        if (reference.state) {
-            const {$fabric = {}} = reference.state;
-            /*
-             * 命中当前 control 的信息
-             */
-            if (!Ux.isEmpty($fabric)) {
-                const fabric = $fabric[config.key];
-                if (fabric) {
-                    /*
-                     * 直接读取 $fabric 专用数据信息
-                     * 1）这里需要注意的是 $fabric 中的数据会进行一次筛选（在配置中针对 control 筛选）
-                     * 2）筛选过后，会直接合并到 attrs 中，如果出现了重名，原始的内容会被覆盖掉，所以请小心
-                     */
-                    Object.assign(attrs, fabric);
-                }
-            }
-        }
+        /* 处理 Fabric 的查询功能 */
+        seekFabric(attrs, config, reference);
         const {$controls} = reference.props;
         if ($controls) {
             Object.freeze($controls);   // 不可不变更的属性

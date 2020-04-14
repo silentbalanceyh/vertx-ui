@@ -32,7 +32,7 @@ export default (reference) => {
      * 堆栈初始化
      */
     initState.$stack = [];
-    initState.$stack.push(Event.ciStart(reference));
+    initState.$stack.push(Event.onStart(reference));
     initState.$index = 0;
     /*
      * 构造第一次请求

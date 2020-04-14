@@ -7,6 +7,7 @@ import ZIP from './ZIP';
 import INPUT from './INPUT';
 import FIELD from './FIELD';
 import DATUM from './DATUM';
+import DIALOG from './DIALOG';
 
 export default {
     TREE_SELECT,
@@ -18,4 +19,5 @@ export default {
     INPUT,
     FIELD,
     DATUM,
+    DIALOG
 }

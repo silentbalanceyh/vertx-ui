@@ -3,12 +3,24 @@ import processor from "./processor";
 import behavior from "./fabric.behavior";
 import U from "underscore";
 import Ux from "ux";
+/*
+ * 响应统一处理，生成最终的 DataEvent 的 Promise
+ * 1) 如果不是 DataEvent 则直接转换成 DataEvent
+ * 2）如果是 DataEvent 则直接返回
+ */
+const fabricResponse = async (processor, dataEvent) => {
+    const finished = await processor;
+    if (finished instanceof DataEvent) {
+        return finished;
+    } else {
+        return dataEvent.end(finished);
+    }
+}
 
 const fabricPassion = async (generator = [], dataEvent) => {
     try {
         if (1 === generator.length) {
-            // 这种模式下必须是 generator，而不是promise
-            return await generator[0](dataEvent);
+            return fabricResponse(generator[0](dataEvent), dataEvent);
         } else {
             let processor = generator[0](dataEvent);
             for (let idx = 1; idx < generator.length; idx++) {
@@ -20,12 +32,7 @@ const fabricPassion = async (generator = [], dataEvent) => {
                     processor = generator[idx](next);
                 }
             }
-            const finished = await processor;
-            if (finished instanceof DataEvent) {
-                return finished;
-            } else {
-                return dataEvent.end(finished);
-            }
+            return fabricResponse(processor, dataEvent);
         }
     } catch (error) {
         console.error(error);
@@ -77,6 +84,26 @@ const fabricAnalyzer = (fabric = []) => {
     }
 };
 
+const fabricAction = (reference, response = {}) => {
+    /*
+     * 此处比较复杂
+     * 1）通道函数用于顶层处理
+     * - props 是顶层通道，会一层一层往下传递（低优先级）
+     * - state 中是当前层通道，只会当前组件使用（高优先级，只用于编程模式）
+     * 2）如果 state 中存在则执行 state 中的，否则执行 props的
+     * 3）两个通道函数不可同时执行
+     */
+    const {rxChannel} = reference.state;
+    if (U.isFunction(rxChannel)) {
+        rxChannel(response);
+    } else {
+        const {rxChannel} = reference.props;
+        if (U.isFunction(rxChannel)) {
+            rxChannel(response);
+        }
+    }
+}
+
 const fabricBehavior = (reference) => (fabricResult = []) => {
     try {
         /*
@@ -112,13 +139,7 @@ const fabricBehavior = (reference) => (fabricResult = []) => {
                 .filter(item => undefined !== item)
                 .reduce((prev = {}, current = {}) => Ux.assign(prev, current, 1), {});
         });
-        /*
-         * 调用 rxChannel 函数
-         */
-        const {rxChannel} = reference.props;
-        if (U.isFunction(rxChannel)) {
-            rxChannel(behaviors);
-        }
+        fabricAction(reference, behaviors);
     } catch (error) {
         console.error(error);
     }

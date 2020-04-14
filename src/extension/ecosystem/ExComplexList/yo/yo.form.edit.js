@@ -8,6 +8,7 @@ export default (reference, item = {}) => {
      * 关闭函数
      */
     formAttrs.rxClose = Op.rxClose(reference, item, false);
+    formAttrs.rxView = Ex.rxView(reference);
     /*
      * 设置 state -> $dirty
      */

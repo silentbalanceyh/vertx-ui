@@ -1,4 +1,5 @@
 import fnPrepare from './O.fn.remove.prepare';
+import fnRefresh from './I.fn.refresh';
 import Ex from 'ex';
 import Ux from 'ux';
 
@@ -24,11 +25,11 @@ export default (reference, keys = [], key) => {
                 const array = Ux.isArray($data.down) ? $data.down : [];
                 $data.down = array.filter(item => !$keys.contains(item.key));
             }
-            reference.setState({
+            fnRefresh(reference).then(nil => reference.setState({
                 $data,
                 $selectedUp: [], $loadingUp: false,
                 $selectedDown: [], $loadingDown: false,
-            })
+            }))
         }
     }))
 }

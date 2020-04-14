@@ -31,7 +31,6 @@ class Component extends React.PureComponent {
             /*
              * pluginField 转入 ExComplexList
              */
-
             return (
                 <ExComplexList {...inherit}
                                config={$config}

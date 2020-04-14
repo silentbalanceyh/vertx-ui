@@ -1,4 +1,5 @@
 import fnPrepare from './O.fn.save.prepare';
+import fnRefresh from './I.fn.refresh';
 import Ux from "ux";
 import Ex from "ex";
 import {Dsl} from 'entity';
@@ -35,11 +36,11 @@ export default (reference, key) => (selected = [], ref = {}) => {
         if (ref.props) {
             Ex.rx(ref).close();
         }
-        reference.setState({
+        fnRefresh(reference).then(nil => reference.setState({
             $data, $submitting: false,
             $selectedUp: [], $loadingUp: false,
             $selectedDown: [], $loadingDown: false,
-        });
+        }))
     }).catch(error => {
         reference.setState({
             $submitting: false,

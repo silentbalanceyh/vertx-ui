@@ -1,10 +1,18 @@
 import Ux from "ux";
 
+const toIdentifier = (reference, current = {}) => {
+    if (current.identifier) {
+        return current.identifier;
+    } else {
+        const {$identifier} = reference.props;
+        return $identifier;
+    }
+};
 const yiForm = (reference, state = {}) => {
     const {$index = 0, $stack = []} = state;
     const current = $stack[$index];
     if (current) {
-        const {identifier} = current;
+        const identifier = toIdentifier(reference, current);
         const code = Ux.formatExpr("form.:identifier.view", {identifier});
         return Ux.ajaxGet('/api/ui/form/:code', {code}).then(response => {
             if (Ux.isEmpty(response)) {

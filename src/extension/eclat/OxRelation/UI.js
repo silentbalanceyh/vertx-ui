@@ -36,6 +36,10 @@ class Component extends React.PureComponent {
                 sourceCode: OxAnchor,
                 targetCode: OxAnchor
             };
+            /*
+             * 特殊处理 rxView 外置方法，处理成标准 rxRefresh 方法
+             */
+            attrs.rxRefresh = inherit.rxView;
             return (
                 <ExRelation {...inherit} {...attrs}/>
             );

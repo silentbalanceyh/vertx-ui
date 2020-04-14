@@ -31,6 +31,10 @@ export default (container = {}, UI = {}, inherit, fnJsx) => {
              */
             attrs.config = config;
             Cmn.seekInherit(attrs, container);
+            /*
+             * 容器的特殊点处理
+             * $fabric 需要下放，继承往下处理
+             */
             const sorted = Ux.sorterObject(attrs);
             return (
                 <Component {...sorted}>

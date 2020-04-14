@@ -45,6 +45,5 @@ export default (reference, event = []) => {
          * 开始的 generator 专用参数
          */
         dataEvent,
-    ).then(dataEvent => Ux.promise([dataEvent]))
-        .then(Cmn.fabricBehavior(reference));
+    ).then(dataEvent => Ux.promise([dataEvent])).then(Cmn.fabricBehavior(reference));
 }
