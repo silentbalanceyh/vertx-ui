@@ -40,6 +40,10 @@ const yiPage = (reference) => {
         reference.setState({$switcher});
     };
     state.$tabs = $tabs;
+    const {$inited = {}} = reference.props;
+    if (!Ux.isEmpty($inited)) {
+        state.$inited = $inited;
+    }
     reference.setState(state);
 };
 export default {

@@ -4,6 +4,7 @@ import Ex from 'ex';
 import Ux from 'ux';
 import OxHistory from '../OxHistory/UI';
 import OxTopology from '../OxTopology/UI';
+import Event from './event';
 import fnLink from './web/UI';
 
 const _toHeight = () => {
@@ -70,9 +71,13 @@ const tabTopology = reference => () => {
     const inherit = Ex.yoAmbient(reference);
     inherit.$inited = $inited;
     inherit.$identifier = $identifier;
+    /* 处理 $event 配置信息，到 topology 中去合并 */
+
     return (
         <div style={_toHeight()}>
-            <OxTopology {...inherit}/>
+            <OxTopology {...inherit} $event={{
+                onNodeDoubleClick: Event.onVisit(reference)
+            }}/>
         </div>
     )
 };

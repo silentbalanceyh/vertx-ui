@@ -1,7 +1,5 @@
-import common from './O.common';
-import onSelected from './O.fn.selected';
+import probe from './O.probe';
 
 export default {
-    ...common,
-    onSelected,
+    ...probe,
 }

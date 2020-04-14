@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Ex from 'ex';
+/* 必须走内部 */
 
 const toCriteria = (reference) => {
     const {$inited = {}} = reference.props;
@@ -23,11 +24,27 @@ const toCriteria = (reference) => {
     return criteria;
 };
 
+const toDialog = (reference) => {
+    const {config = {}} = reference.props;
+    const {$dialog} = config;
+    if ($dialog) {
+        const dialog = Ux.configDialog(reference, $dialog.window);
+        const button = $dialog.button;
+        return {dialog, button};
+    }
+}
+
 export default (reference) => {
     const state = {};
     Ex.yiStandard(reference, state).then(processed => {
         const {$inited = {}} = reference.props;
         const key = $inited.globalId;
+
+        /* 窗口专用配置 */
+        const $dialog = toDialog(reference);
+        if ($dialog) {
+            processed.$dialog = $dialog;
+        }
 
         Ux.ajaxGet("/api/graphic/analyze/:key?level=2", {key}).then(response => {
             /* 是否过多 */

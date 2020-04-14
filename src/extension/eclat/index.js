@@ -8,6 +8,7 @@ import {ExAdmin} from 'ei';
 import OxCard from './OxCard/UI';
 import OxCategory from './OxCategory/UI';
 import OxTab from './OxTab/UI';
+import OxCi from './OxCi/UI';
 
 import OxList from './OxList/UI';
 import OxModule from './OxModule/UI';
@@ -44,4 +45,6 @@ export default {
     OxModule,
     OxTab,
     OxForm,
+    // OxCi 配置专用组件（查看配置项信息）
+    OxCi,
 }
