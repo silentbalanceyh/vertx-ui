@@ -391,7 +391,32 @@ const itTree = (treeArray = [], executor) => {
         })
     }
 };
+/**
+ * ## 标准函数
+ *
+ * 二义性函数，consumer 负责每一个元素的生成
+ *
+ * 1. 如果输入是 `Array` 则返回 `Array`。
+ * 2. 如果输入是 `Object` 则返回 `Object`。
+ *
+ * @memberOf module:_it
+ * @param {Object/Array} input 二义性专用方法
+ * @param {Function} consumer 执行函数
+ * @return {Object/Array} 返回任意值
+ */
+const itAmb = (input, consumer) => {
+    if (Is.isFunction(consumer)) {
+        if (Is.isArray(input)) {
+            const normalized = [];
+            input.map(consumer).forEach(each => itAmb(each, consumer));
+            return normalized;
+        } else {
+            return consumer(input);
+        }
+    } else return input;
+}
 export default {
+    itAmb,
     itMatrix,
     itObject,
     itValue,

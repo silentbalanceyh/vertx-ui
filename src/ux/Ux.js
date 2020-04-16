@@ -290,6 +290,16 @@ const exported = {
      *
      * @module _sorter
      */
+    /**
+     * # 内部模块
+     *
+     * entity 中专用语言模块，处理专用 Dsl 的数据类型专用
+     *
+     * * DataObject
+     * * DataArray
+     *
+     * @module _dsl
+     */
     ...unity,
     ...graphic,
     /**
@@ -339,19 +349,21 @@ const exported = {
      */
     E,
 };
-console.groupCollapsed("Report Debug");
-console.info(abs);
-console.info(ajax);
-console.info(develop);
-console.info(element);
-console.info(engine);
-console.info(entity);
-console.info(unity);
-console.info(graphic);
-console.info(E);
-console.info(romantic);
-console.warn(exported);
-console.groupEnd();
-reportUx();
+if (constant.DEBUG) {
+    console.groupCollapsed("Report Debug");
+    console.info(abs);
+    console.info(ajax);
+    console.info(develop);
+    console.info(element);
+    console.info(engine);
+    console.info(entity);
+    console.info(unity);
+    console.info(graphic);
+    console.info(E);
+    console.info(romantic);
+    console.warn(unity.sorterObject(exported));
+    console.groupEnd();
+    reportUx();
+}
 export default exported;
 

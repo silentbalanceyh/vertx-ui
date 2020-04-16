@@ -15,9 +15,10 @@ import U from "underscore";
  *
  * @memberOf module:_ant
  * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object} response 响应最终信息数据。
  * @param {String[]} keys 被重设的表单字段。
  */
-const formAdvReset = (reference, keys = []) => {
+const formAdvReset = (reference, response = {}, keys = []) => {
     const {form} = reference.props;
     if (form) {
         /* 上级 */
@@ -28,12 +29,12 @@ const formAdvReset = (reference, keys = []) => {
         }
         const {doReset} = reference.props;
         if (U.isFunction(doReset)) {
-            doReset(keys, reference);
+            doReset(response, reference, keys);
         }
     } else {
         const ref = Dt.onReference(reference, 1);
         if (ref) {
-            formAdvReset(ref, keys)
+            formAdvReset(ref, response, keys)
         }
     }
 };
