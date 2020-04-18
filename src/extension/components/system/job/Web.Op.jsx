@@ -43,7 +43,7 @@ export default (reference) => {
     return ({
         dataIndex: "key",
         fixed: "left",
-        width: 120,
+        width: 72,
         className: "job-op",
         render: (text, record = {}) => {
             const status = record.status;

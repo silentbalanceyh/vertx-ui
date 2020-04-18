@@ -1,7 +1,6 @@
-import React from 'react';
-import './Cab.less';
-import {Button, Tooltip} from 'antd';
-import Ux from 'ux';
+import {Button, Tooltip} from "antd";
+import Ux from "ux";
+import React from "react";
 
 export default (reference) => {
     const {$extra = [], $tabs = {}, $submitting = false} = reference.state;

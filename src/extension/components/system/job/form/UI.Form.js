@@ -4,7 +4,7 @@ import Ex from 'ex';
 import {ExForm, ExService} from 'ei';
 import Op from './Op';
 
-@Ux.zero(Ux.rxEtat(require('./Cab'))
+@Ux.zero(Ux.rxEtat(require('../Cab.json'))
     .cab("UI.Form")
     .ready(true)
     .to()

@@ -1,5 +1,4 @@
 import Ux from "ux";
-import Ex from "ex";
 import {Dsl} from "entity";
 
 const rxClose = (reference, key) => {
@@ -9,40 +8,42 @@ const rxClose = (reference, key) => {
     $tabs.activeKey = $tabs.items[0].key;
     $tabs.items[0].disabled = false;
 
-    const {$duration = 10} = reference.state;
-    const $timer = rxTimer(reference, $duration * 1000);
+    // const {$duration = 10} = reference.state;
+    // const $timer = rxTimer(reference, $duration * 1000);
 
     const state = {};
     state.$tabs = $tabs;
-    state.$timer = $timer;
+    // state.$timer = $timer;
     state.$loading = true;
     reference.setState(state);
 };
-const rxRefresh = (reference, callback) => {
-    let state = reference.state;
-    state = Ux.clone(state);
-    state.$loading = true;
-    reference.setState(state);
-    return Ux.toLoading(() => Ex.I.jobs().then((data = []) => {
-        state = Ux.clone(state);
-        state.$loading = false;
-        state.$data = data;
-        if (Ux.isFunction(callback)) {
-            callback(state);
-        }
-    }))
-};
-const rxTimer = (reference, duration = 10000) =>
-    setInterval(() => rxRefresh(reference,
-        state => reference.setState(state)),
-        duration);
+/*
+const rxTimer = (reference, duration = 10000) =>{
+    rxClear(reference,
+        () => setInterval(() =>
+            reference.setState({$loading: true}), duration))
+}*/
+
+
+const rxClear = (reference, consumer) => {
+    const {$timer} = reference.state;
+    if ($timer) {
+        clearInterval($timer);
+    }
+    /*
+     * 清除 $timer
+     */
+    if (Ux.isFunction(consumer)) {
+        consumer($timer);
+    }
+}
 
 const rxTabEdit = (reference) => (key, action) => {
     if ("remove" === action) {
         rxClose(reference, key);
     }
 };
-const rxTabClose = (reference, item) => (record = {}) =>
+const rxTabClose = (reference, item) => () =>
     rxClose(reference, item.key);
 /*
  * 单独的任务处理
@@ -54,38 +55,58 @@ const onTask = (reference, record, status) => {
     dataArray.saveElement(record);
     reference.setState({$data: dataArray.to()});
 };
-const rxDuration = (reference) => (event) => {
+const rxDurationBlur = (reference) => (event) => {
     const text = event.target.value;
     const result = Number(text);
     if (!isNaN(result) && 10 <= result) {
-        const {$timer} = reference.state;
-        if ($timer) {
-            clearInterval($timer);
+        rxClear(reference, () => {
             const state = {};
             state.$duration = result;
-            state.$timer = rxTimer(reference, result * 1000);
+            // state.$timer = rxTimer(reference, result * 1000);
             reference.setState(state);
-        }
+        })
     }
 };
 const rxDurationChange = (reference) => (event) => {
-    const text = event.target.value;
-    const $durationValue = Number(text);
-    if (!isNaN($durationValue) && 10 <= $durationValue) {
-        reference.setState({$durationValue})
-    }
+    const $durationValue = event.target.value;
+    reference.setState({$durationValue});
+};
+const rxDurationFocus = (reference) => (event) => {
+    Ux.prevent(event);
+    rxClear(reference);
 };
 const rxSearch = (reference) => (text) => {
     const $searchText = text;
     reference.setState({$searchText});
 };
+const rxFilter = (reference) => (item) => {
+    reference.setState({$searchPrefix: item.key, $menusKey: [item.key]})
+};
+const rxFilterClean = (reference) => (event) => {
+    Ux.prevent(event);
+    reference.setState({$searchPrefix: undefined, $menusKey: []})
+}
+const rxRefresh = (reference) => (event) => {
+    Ux.prevent(event);
+    reference.setState({$loading: true})
+}
+const rxChecked = (reference) => (keys = []) => {
+    reference.setState({$searchChecked: keys});
+}
 export default {
-    rxTimer,
     rxTabEdit,
     rxTabClose,
-    rxRefresh,
-    rxDuration,
-    rxDurationChange,
-    rxSearch,
+
     onTask,
+
+    rxDurationFocus,
+    rxDurationBlur,
+    rxDurationChange,
+
+    rxChecked,
+    rxRefresh,
+    rxSearch,
+
+    rxFilter,
+    rxFilterClean
 }
