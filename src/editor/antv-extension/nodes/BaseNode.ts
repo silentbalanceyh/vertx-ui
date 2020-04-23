@@ -19,7 +19,8 @@ const exBaseNode: CustomNode = {
     options: Style.OPT_RECT,
 
     getOptions(model: NodeModel) {
-        const style = model.data.contentStyle ? model.data.contentStyle : {};
+        const style = model.data && model.data.contentStyle
+            ? model.data.contentStyle : {};
         return merge({}, this.options, this.getCustomConfig(model) || {}, model, {contentStyle: style});
     },
 
