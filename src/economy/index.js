@@ -1,7 +1,7 @@
 // ------ 绘图专用组件 ------
 // ------ 新版使用Editor替换原始的Designer
 // -------------------------------  还在实验
-export {default as RichEditor} from './input/RichEditor/UI';
+// export {default as RichEditor} from './input/RichEditor/UI';
 export {default as BraftEditor} from './input/BraftEditor/UI';
 export {default as TeamSelector} from './input/TeamSelector/UI';
 

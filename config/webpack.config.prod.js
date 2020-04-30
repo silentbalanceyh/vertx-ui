@@ -8,6 +8,9 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 const paths = require("./paths");
 // 自定义模块
@@ -20,7 +23,6 @@ const publicPath = paths.servedPath;
 // Some apps do not use client-side routing with pushState.
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === "./";
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -35,7 +37,8 @@ if (env.stringified["process.env"].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = "static/css/[name].[contenthash:8].css";
+// const cssFilename = "static/css/[name].[contenthash:8].css";
+const cssFilename = "static/css/[name].[md5:contenthash:hex:8].css";
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -54,9 +57,12 @@ module.exports = {
     bail: true,
     // We generate sourcemaps in production. This is slow but gives good results.
     // You can exclude the *.map files from the build during deployment.
-    devtool: "source-map",
+    devtool: "cheap-module-source-map",
     // In production, we only want to load the polyfills and the app code.
-    entry: [require.resolve("./polyfills"), paths.appIndexJs],
+    entry: [
+        require.resolve("./polyfills"),
+        paths.appIndexJs,
+    ],
     output: {
         // The build folder.
         path: paths.appBuild,
@@ -105,6 +111,12 @@ module.exports = {
     module: {
         strictExportPresence: true,
         rules: [
+            {
+                test: /\.js$/,
+                use: 'happypack/loader?id=babel',
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, 'src')
+            },
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
@@ -347,7 +359,37 @@ module.exports = {
             }
         ]
     },
+    optimization: {
+        minimize: true,
+        splitChunks: {
+            chunks: "async",    // 共有三个值可选：initial(初始模块)、async(按需加载模块)和all(全部模块)
+            minSize: 30000, // 模块超过30k自动被抽离成公共模块
+            minChunks: 1, // 模块被引用>=1次，便分割
+            maxAsyncRequests: 5,  // 异步加载chunk的并发请求数量<=5
+            maxInitialRequests: 3, // 一个入口并发加载的chunk数量<=3
+            // name: true, // 默认由模块名+hash命名，名称相同时多个模块将合并为1个，可以设置为function
+            automaticNameDelimiter: '~', // 命名分隔符
+            cacheGroups: { // 缓存组，会继承和覆盖splitChunks的配置
+                default: { // 模块缓存规则，设置为false，默认缓存组将禁用
+                    minChunks: 2, // 模块被引用>=2次，拆分至vendors公共模块
+                    priority: -20, // 优先级
+                    reuseExistingChunk: true, // 默认使用已有的模块
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/, // 表示默认拆分node_modules中的模块
+                    priority: -10
+                }
+            }
+        }
+    },
     plugins: [
+        new HappyPack({ // 基础参数设置
+            id: 'babel', // 上面loader?后面指定的id
+            loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
+            threadPool: happyThreadPool,
+            // cache: true // 已被弃用
+            verbose: true
+        }),
         /*        new ParallelUglifyPlugin({
                     // 传递给 UglifyJS 的参数
                     uglifyJS: {

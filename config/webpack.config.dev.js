@@ -8,8 +8,9 @@ const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const {CheckerPlugin} = require('awesome-typescript-loader');
-
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
+const HappyPack = require('happypack');
+const os = require('os');
+const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
@@ -53,7 +54,7 @@ module.exports = {
         // Errors should be considered fatal in development
         require.resolve("react-error-overlay"),
         // Finally, this is your app's code:
-        paths.appIndexJs
+        paths.appIndexJs,
         // We include the app code last so that if there is a runtime error during
         // initialization, it doesn't blow up the WebpackDevServer client, and
         // changing JS code would still trigger a refresh.
@@ -118,6 +119,12 @@ module.exports = {
     module: {
         strictExportPresence: true,
         rules: [
+            {
+                test: /\.js$/,
+                use: 'happypack/loader?id=babel',
+                exclude: /node_modules/,
+                include: path.resolve(__dirname, 'src')
+            },
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
@@ -146,7 +153,8 @@ module.exports = {
                 ],
                 exclude: [
                     path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                ],
+                include: paths.appSrc
             },
             {
                 enforce: "pre",
@@ -154,7 +162,8 @@ module.exports = {
                 use: "source-map-loader",
                 exclude: [
                     path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                ],
+                include: paths.appSrc
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -351,7 +360,38 @@ module.exports = {
             // Remember to add the new extension(s) to the "file" loader exclusion list.
         ]
     },
+    optimization: {
+        minimize: false,
+        splitChunks: {
+            chunks: "all",    // 共有三个值可选：initial(初始模块)、async(按需加载模块)和all(全部模块)
+            minSize: 30000, // 模块超过30k自动被抽离成公共模块
+            minChunks: 1, // 模块被引用>=1次，便分割
+            maxAsyncRequests: 5,  // 异步加载chunk的并发请求数量<=5
+            maxInitialRequests: 3, // 一个入口并发加载的chunk数量<=3
+            // name: true, // 默认由模块名+hash命名，名称相同时多个模块将合并为1个，可以设置为function
+            automaticNameDelimiter: '~', // 命名分隔符
+            cacheGroups: { // 缓存组，会继承和覆盖splitChunks的配置
+                default: { // 模块缓存规则，设置为false，默认缓存组将禁用
+                    test: /[\\/]src[\\/]js[\\/]/,
+                    minChunks: 2, // 模块被引用>=2次，拆分至vendors公共模块
+                    priority: -20, // 优先级
+                    reuseExistingChunk: true, // 默认使用已有的模块
+                },
+                vendors: {
+                    test: /[\\/]node_modules[\\/]/, // 表示默认拆分node_modules中的模块
+                    priority: -10
+                }
+            }
+        }
+    },
     plugins: [
+        new HappyPack({ // 基础参数设置
+            id: 'babel', // 上面loader?后面指定的id
+            loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
+            threadPool: happyThreadPool,
+            // cache: true // 已被弃用
+            verbose: true
+        }),
         // 同时启动专用端口
         new BundleAnalyzerPlugin({
             analyzerPort: 5888
@@ -368,7 +408,7 @@ module.exports = {
         // In development, this will be an empty string.
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Add module names to factory functions so they appear in browser profiler.
-        new webpack.NamedModulesPlugin(),
+        // new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
         new webpack.DefinePlugin(env.stringified),
