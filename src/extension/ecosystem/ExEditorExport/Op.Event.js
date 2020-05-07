@@ -2,6 +2,7 @@ import Ex from 'ex';
 import {saveAs} from "file-saver";
 import U from 'underscore';
 import Ux from 'ux';
+import Plugin from 'plugin';
 
 const rxExport = (reference) => (event) => {
     Ux.prevent(event);
@@ -32,7 +33,13 @@ const rxExport = (reference) => (event) => {
                 /*
                  * 下载保存文件
                  */
-                saveAs(response, `${Ux.randomUUID()}.${params.format}`);
+                let baseFile = `${Ux.valueNow('YYYY-MM-DD-HHmmss')}.${params.format}`
+                if (Plugin.Function && Ux.isFunction(Plugin.Function.yiPluginExport)) {
+                    baseFile = Plugin.Function.yiPluginExport(reference, {
+                        filename: baseFile
+                    })
+                }
+                saveAs(response, baseFile);
                 Ux.toLoading(() => {
                     /*
                      * rxSubmitting提交修正

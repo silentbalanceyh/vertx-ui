@@ -1,16 +1,16 @@
 {
     "_table": {
-        "rowKey":"key",
+        "rowKey": "key",
         "size": "small",
-        "columns":[
+        "columns": [
             {
-                "metadata":"fieldAlias,属性名",
-                "style":{
-                    "color":"#27408B"
+                "metadata": "fieldAlias,属性名",
+                "style": {
+                    "color": "#27408B"
                 }
             },
             {
-                "metadata":"fieldType,类型,MAPPING",
+                "metadata": "fieldType,类型,MAPPING",
                 "$mapping": {
                     "java`lang`String": "字符串,,,,#1E90FF",
                     "java`lang`Integer": "整数,,,,#EE4000",
@@ -23,38 +23,39 @@
                 }
             },
             {
-                "metadata":"type,变更类型,MAPPING",
-                "$mapping":{
-                    "ADD":"添加属性,plus-circle,,#228B22",
-                    "UPDATE":"更新属性,edit,,#3A5FCD",
-                    "DELETE":"移除属性,delete,,#CD2626"
+                "metadata": "type,变更类型,MAPPING",
+                "$mapping": {
+                    "ADD": "添加属性,plus-circle,,#228B22",
+                    "UPDATE": "更新属性,edit,,#3A5FCD",
+                    "DELETE": "移除属性,delete,,#CD2626",
+                    "REVERT": "确认后回写,upload,,#228B22"
                 }
             },
             {
-                "metadata":"valueOld,旧值,DICT",
-                "$config":{
-                    "field":"fieldName"
+                "metadata": "valueOld,旧值,DICT",
+                "$config": {
+                    "field": "fieldName"
                 },
-                "className":"value-column"
+                "className": "value-column"
             },
             {
-                "metadata":"valueNew,新值,DICT",
-                "$config":{
-                    "field":"fieldName"
+                "metadata": "valueNew,新值,DICT",
+                "$config": {
+                    "field": "fieldName"
                 },
-                "className":"value-column"
+                "className": "value-column"
             }
         ]
     },
-    "_history":{
-        "rowKey":"key",
+    "_history": {
+        "rowKey": "key",
         "columns": [
             {
-                "metadata":"createdAt,创建时间,DATE",
+                "metadata": "createdAt,创建时间,DATE",
                 "$format": "YYYY年MM月DD日 HH点mm分"
             },
             {
-                "metadata":"updatedBy,创建人,USER",
+                "metadata": "updatedBy,创建人,USER",
                 "$config": {
                     "uri": "/api/user/:key",
                     "field": "realname"
@@ -63,13 +64,13 @@
             }
         ]
     },
-    "_auditor":[
+    "_auditor": [
         {
-            "metadata":"createdAt,创建时间,DATE",
+            "metadata": "createdAt,创建时间,DATE",
             "$format": "YYYY年MM月DD日 HH点mm分"
         },
         {
-            "metadata":"createdBy,创建人,USER",
+            "metadata": "createdBy,创建人,USER",
             "$config": {
                 "uri": "/api/user/:key",
                 "field": "realname"
@@ -77,16 +78,21 @@
             "$empty": "（系统）"
         },
         {
-            "metadata":"updatedAt,更新时间,DATE",
+            "metadata": "updatedAt,更新时间,DATE",
             "$format": "YYYY年MM月DD日 HH点mm分"
         },
         {
-            "metadata":"updatedBy,更新人,USER",
+            "metadata": "updatedBy,更新人,USER",
             "$config": {
                 "uri": "/api/user/:key",
                 "field": "realname"
             },
             "$empty": "（系统）"
         }
-    ]
+    ],
+    "_adjust": {
+        "code": {
+            "DELETE": "REVERT"
+        }
+    }
 }
