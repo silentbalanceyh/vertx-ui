@@ -8,7 +8,6 @@ const jsx = {
         const {config = {}, buttons = {}} = jsx;
         const {rememberMe = "", forgotPassword = {}} = config;
         const button = Ux.aiExprOp(buttons.submit);
-        const {$op = {}} = reference.props;
         return (
             <div className={"login-action"}>
                 <span className={"remember"}>

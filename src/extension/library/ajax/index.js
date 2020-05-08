@@ -217,6 +217,38 @@ class I {
     /**
      * ## 接口函数
      *
+     * * 接口：`/api/ui/forms/:identifier`（GET）
+     * * 安全：是
+     *
+     * 读取模型下的表单配置信息。
+     *
+     * @async
+     * @param {String} identifier 模型统一标识符。
+     * @returns {Promise<T>} 返回Promise
+     */
+    static forms(identifier) {
+        return _form.forms(identifier)
+    }
+
+    /**
+     * ## 接口函数
+     *
+     * * 接口：`/api/ui/lists/:identifier`（GET）
+     * * 安全：是
+     *
+     * 读取模型下的所有列表配置信息
+     *
+     * @async
+     * @param {String} identifier 模型统一标识符。
+     * @returns {Promise<T>} 返回Promise
+     */
+    static lists(identifier) {
+        return _form.lists(identifier)
+    }
+
+    /**
+     * ## 接口函数
+     *
      * * 接口：`/api/form/actions`（POST）
      * * 安全：是
      *

@@ -1,11 +1,13 @@
 import React from 'react'
 import Ux from "ux";
-import {ExTab} from 'ei';
 import Ex from 'ex';
+import Yo from './yo';
 
-import PageWizard from './UI.Wizard';
-import PageEdit from './UI.Edit';
-import PageDesigner from './UI.Designer';
+import {Col, Row} from 'antd';
+import './Cab.less';
+import renderMenu from './Web.Fn.Menu';
+import Form from './Web.Form';
+import {ModelingPpt} from "app";
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
@@ -14,19 +16,37 @@ import PageDesigner from './UI.Designer';
 )
 
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Yo.yiPage(this);
+    }
+
     render() {
-        const tabs = Ux.fromHoc(this, "tabs");
-        /*
-         * Ex部分的状态处理
-         */
-        const inherit = Ex.yoAmbient(this);
-        return Ex.ylCard(this, () => (
-            <ExTab {...inherit} config={tabs}>
-                <PageWizard {...inherit}/>
-                <PageEdit {...inherit}/>
-                <PageDesigner {...inherit}/>
-            </ExTab>
-        ), Ex.parserOfColor("PxForm").page())
+        return Ex.ylCard(this, () => {
+            const {$selected, $model} = this.state;
+            return (
+                <Row>
+                    <Col span={4}>
+                        <div style={{
+                            maxHeight: Ux.toHeight(106),
+                            overflow: "auto",
+                            paddingRight: 6
+                        }}>
+                            {renderMenu(this)}
+                        </div>
+                    </Col>
+                    <Col span={20} className={"ext-form-comment"}>
+                        {$selected ? (
+                            <Form {...Ex.yoAmbient(this)}
+                                  $identifier={$selected}
+                                  $model={$model}/>
+                        ) : (() => {
+                            const alert = Ux.fromHoc(this, "alert");
+                            return (<ModelingPpt alert={alert} adjust={380} step={2}/>)
+                        })()}
+                    </Col>
+                </Row>
+            );
+        }, Ex.parserOfColor("PxForm").page())
     }
 }
 

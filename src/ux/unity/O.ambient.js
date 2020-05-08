@@ -216,12 +216,13 @@ const isAuthorized = (reference) => {
  * @param {Function} consumer 执行函数
  * @param {Number} seed 加载的时间单位
  */
-const toLoading = (consumer, seed = 1) => {
+const toLoading = (consumer, seed) => {
     /*
      * 改成 10 ms 毫秒级
      */
     const ms = Value.valueInt(Cv['LOADING'], 10);
-    setTimeout(consumer, ms * seed);
+    const loadingMs = seed ? seed : ms;
+    setTimeout(consumer, ms * loadingMs);
 };
 export default {
     // 是否登录

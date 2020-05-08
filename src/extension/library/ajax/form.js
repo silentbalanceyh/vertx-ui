@@ -2,6 +2,14 @@ import Ux from 'ux';
 
 export default {
     /*
+     * 读取模型下所有表单配置
+     */
+    forms: (identifier) => Ux.ajaxGet(`/api/ui/forms/:identifier`, {identifier}),
+    /*
+     * 读取模型下所有列表配置
+     */
+    lists: (identifier) => Ux.ajaxGet(`/api/ui/lists/:identifier`, {identifier}),
+    /*
      * 读取表单配置
      */
     form: (params) => Ux.ajaxGet(`/api/ui/form/:code`, params),

@@ -1,0 +1,43 @@
+{
+    "_toolbar": {
+        "buttons": [
+            {
+                "text": "添加新表单",
+                "icon": "plus",
+                "onClick": "onAdd",
+                "key": "btnAdd",
+                "type": "primary"
+            }
+        ],
+        "manage": "管理模型",
+        "searchText": "（名称/编码）"
+    },
+    "_card": {
+        "actions": [
+            {
+                "key": "onDesign",
+                "type": "audit",
+                "tooltip": "设计表单",
+                "className": "action-design",
+                "metadata": "edition"
+            },
+            {
+                "key": "onEdit",
+                "type": "edit",
+                "tooltip": "编辑表单",
+                "className": "action-edit",
+                "metadata": "edition"
+            },
+            {
+                "key": "onDelete",
+                "type": "delete",
+                "tooltip": "删除表单",
+                "className": "action-delete",
+                "metadata": "deletion"
+            }
+        ],
+        "img": {
+            "tooltip": "双击打开表单设计器"
+        }
+    }
+}
