@@ -16,7 +16,7 @@ const exported = {
     Jsx,
     ...Sex,
     ...Evt,
-    /*
+    /*d
      * Redux 部分专用
      * 1) Types - `epicXxx`
      * 2) Epic - `epicXxx`

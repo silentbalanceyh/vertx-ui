@@ -38,6 +38,8 @@ export {default as ExService} from './ExService/UI';
 export {default as ExLogin} from './ExLogin/UI';
 /* （会员入口）   ----- ExEntry 会员登录专用 */
 export {default as ExEntry} from './ExEntry/UI';
+/* */
+export {default as ExLogin1} from './ExLogin1/UI';
 
 // ------------- 整页模板
 /* （管理员模板） ----- ExAdmin 模板专用 */
