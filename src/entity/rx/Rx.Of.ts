@@ -72,11 +72,11 @@ class Of {
         return this;
     }
 
-    to(): Function {
+    to(params: any = undefined): any {
         const promise = this._promise;
         const reference = this._reference;
         const callback = this._callback;
-        return values => {
+        const executor = values => {
             /*
              * 是否包含了 prompt
              */
@@ -100,6 +100,17 @@ class Of {
                         } else return Ux.ajaxError(reference, error);
                     } else return Ux.ajaxError(reference, error);
                 })
+        }
+        if (params) {
+            /*
+             * 有参数返回执行结果
+             */
+            return executor(params);
+        } else {
+            /*
+             * 无参数返回函数
+             */
+            return executor;
         }
     }
 }

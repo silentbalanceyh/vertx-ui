@@ -18,6 +18,7 @@ class Etat {
     private _raft: any = {enabled: true};      // 默认打开 Raft模式
     private _op: {};
     private _isLog: boolean = true;
+    private _unmount: boolean = false;
 
     /**
      * required必须使用这种方式绑定
@@ -40,6 +41,11 @@ class Etat {
 
     form() {
         this._form = true;
+        return this;
+    }
+
+    unmount() {
+        this._unmount = true;
         return this;
     }
 
@@ -276,6 +282,7 @@ class Etat {
             // 判断 Function 的 op类型
             config.op = this._op;
         }
+        config.unmount = this._unmount;
         return config;
     }
 }

@@ -27,6 +27,7 @@ const jsx = {
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExSubmit")
+    .unmount()
     .form().raft(1).raft({
         ...Ex.Jsx.Login, ...jsx
     })

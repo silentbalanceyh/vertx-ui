@@ -369,11 +369,32 @@ const ready = (state = {}) => {
     state.$ready = true;
     return promise(state);
 };
+/**
+ * ## 包装过的 Promise，解决内存Bug，中途 Cancel
+ *
+ * @param promise
+ */
+const packet = (promise) => {
+    let hasCanceled = false
+    const wrappedPromise = new Promise((resolve, reject) => {
+        promise.then(
+            response => (hasCanceled ? reject({isCanceled: true}) : resolve(response)),
+            error => (hasCanceled ? reject({isCanceled: true}) : reject(error))
+        )
+    })
+    return {
+        promise: wrappedPromise,
+        cancel() {
+            hasCanceled = true
+        }
+    }
+}
 export default {
     promise,
     parallel,
     passion,
+    packet,
     pipe,
     ready,
-    debug
+    debug,
 }

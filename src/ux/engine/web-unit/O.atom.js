@@ -94,7 +94,7 @@ const aiLink = (item = {}, addOn = {}) => {
 
 const aiTitle = (item = {}, addOn = {}) => (
     <span className={item.className}>
-        {aiIcon(item.icon)}
+        {aiIcon(item.icon, addOn)}
         {aiLink(item, addOn)}
     </span>
 );

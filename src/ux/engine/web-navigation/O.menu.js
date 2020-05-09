@@ -86,7 +86,7 @@ const aiSider = (items = [], rest = {}, addOn = {}) => {
     if (!rest.className) {
         rest.className = "";
     }
-    rest.className = `ux-menu`;
+    rest.className = `ux-menu ${rest.className}`;
     return (
         <Menu {...rest}>
             {items.map(item => {
