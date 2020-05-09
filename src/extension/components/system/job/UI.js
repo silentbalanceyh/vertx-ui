@@ -27,10 +27,6 @@ class Component extends React.PureComponent {
         Op.yuPage(this);
     }
 
-    componentWillUnmount() {
-        Op.yoPage(this);
-    }
-
     render() {
         return Ex.ylCard(this, () => {
             const {$tabs = {}, $inited = {}} = this.state;
