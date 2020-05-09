@@ -20,6 +20,7 @@
                     },
                     "optionJsx": {
                         "placeholder": "手机/邮箱/用户名",
+                        "allowClear": true,
                         "prefix": {
                             "type": "user"
                         }
@@ -46,6 +47,7 @@
                     },
                     "optionJsx": {
                         "placeholder": "密码",
+                        "allowClear": true,
                         "prefix": {
                             "type": "lock",
                             "theme": "filled"

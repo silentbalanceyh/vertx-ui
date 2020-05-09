@@ -163,8 +163,9 @@ const toLimit = (props = {}, limits = []) => {
  *
  * @memberOf module:_to
  * @param {ReactComponent} reference React组件引用。
+ * @param {String} switched 传入内容替换掉 Cv.ENTRY_ADMIN
  */
-const toOriginal = (reference = {}) => {
+const toOriginal = (reference = {}, switched) => {
     const original = toQuery("target");
     if (original) {
         const {$router} = reference.props;
@@ -185,7 +186,8 @@ const toOriginal = (reference = {}) => {
         }
         toRoute(reference, calculated);
     } else {
-        toRoute(reference, Cv.ENTRY_ADMIN);
+        const uri = switched ? switched : Cv.ENTRY_ADMIN;
+        toRoute(reference, uri);
     }
 };
 /**

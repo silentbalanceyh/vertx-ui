@@ -24,13 +24,31 @@ const hoc = {
  * @param {Object} options 配置项信息
  *
  */
+
+/*
+ * 防内存泄漏专用方法
+ */
+const unmount = (target) => {
+    // 改装componentWillUnmount，销毁的时候记录一下
+    let next = target.prototype.componentWillUnmount
+    target.prototype.componentWillUnmount = function () {
+        if (next) next.call(this, ...arguments);
+        this.unmount = true
+    }
+    // 对setState的改装，setState查看目前是否已经销毁
+    let setState = target.prototype.setState
+    target.prototype.setState = function () {
+        if (this.unmount) return;
+        setState.call(this, ...arguments)
+    }
+}
 export default (options = {}) => {
     if (!options.type) {
         throw new Error("[ Ox ] 对不起，渲染类型丢失！")
     }
     const pointer = hoc[options.type];
     return (target, property, descriptor) => {
-        return class extends target {
+        let Component = class extends target {
             constructor(props) {
                 super(props);
                 this.state = {$ready: false}
@@ -46,5 +64,7 @@ export default (options = {}) => {
                 }, options)
             }
         }
+        unmount(Component);
+        return Component;
     }
 }

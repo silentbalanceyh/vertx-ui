@@ -347,10 +347,12 @@ module.exports = {
                     {
                         loader: "less-loader",
                         options: {
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                "@primary-color": process.env.Z_CSS_COLOR,
-                                "@app": process.env.Z_CSS_PREFIX
+                            lessOptions: {
+                                javascriptEnabled: true,
+                                modifyVars: {
+                                    "@primary-color": process.env.Z_CSS_COLOR,
+                                    "@app": process.env.Z_CSS_PREFIX
+                                }
                             }
                         }
                     }

@@ -64,7 +64,19 @@ import Is from './O.is';
 function promise() {
     if (1 === arguments.length) {
         const value = arguments[0];
-        return new Promise(resolve => resolve(value));
+        if (value instanceof Promise) {
+            return value
+                .then(data => [null, data])
+                .catch(error => [error, null]);
+        } else {
+            return new Promise((resolve, reject) => {
+                if (value._error) {
+                    reject(value);
+                } else {
+                    resolve(value);
+                }
+            });
+        }
     } else if (2 === arguments.length) {
         const supplier = arguments[0];
         const params = arguments[1];

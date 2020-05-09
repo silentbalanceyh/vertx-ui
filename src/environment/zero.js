@@ -14,6 +14,23 @@ const ensureForm = (target = {}, options = {}) => {
         }
     }
 };
+/*
+ * 防内存泄漏专用方法
+ */
+const unmount = (target) => {
+    // 改装componentWillUnmount，销毁的时候记录一下
+    let next = target.prototype.componentWillUnmount
+    target.prototype.componentWillUnmount = function () {
+        if (next) next.call(this, ...arguments);
+        this.unmount = true
+    }
+    // 对setState的改装，setState查看目前是否已经销毁
+    let setState = target.prototype.setState
+    target.prototype.setState = function () {
+        if (this.unmount) return;
+        setState.call(this, ...arguments)
+    }
+}
 export default (options = {}) => {
     /**
      * zero注解过后执行Hoc高阶封装操作
@@ -124,6 +141,7 @@ export default (options = {}) => {
                 }
             }
         };
+        unmount(Component);
         // Redux连接配置：顺序不可替换
         Component = Fn.fnConnect(Component, options);
         // Form连接配置：顺序不可替换

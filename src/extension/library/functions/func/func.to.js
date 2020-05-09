@@ -12,7 +12,12 @@ import U from 'underscore';
  * @returns {string} 返回最终的Uri信息
  */
 const toUri = (uri = "", $app) => {
-    const path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
+    let path;
+    if ($app) {
+        path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
+    } else {
+        path = Ux.Env['ROUTE'];
+    }
     let relatedPath = `${path}${uri}`;
     if (!relatedPath.startsWith('/')) {
         relatedPath = `/${relatedPath}`;

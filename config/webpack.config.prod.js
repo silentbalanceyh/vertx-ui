@@ -8,9 +8,6 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
-const HappyPack = require('happypack');
-const os = require('os');
-const happyThreadPool = HappyPack.ThreadPool({size: os.cpus().length})
 
 const paths = require("./paths");
 // 自定义模块
@@ -111,12 +108,6 @@ module.exports = {
     module: {
         strictExportPresence: true,
         rules: [
-            {
-                test: /\.js$/,
-                use: 'happypack/loader?id=babel',
-                exclude: /node_modules/,
-                include: path.resolve(__dirname, 'src')
-            },
             // TODO: Disable require.ensure as it's not a standard language feature.
             {
                 test: /\.(ts|tsx)?$/,
@@ -360,13 +351,6 @@ module.exports = {
         ]
     },
     plugins: [
-        new HappyPack({ // 基础参数设置
-            id: 'babel', // 上面loader?后面指定的id
-            loaders: ['babel-loader?cacheDirectory'], // 实际匹配处理的loader
-            threadPool: happyThreadPool,
-            // cache: true // 已被弃用
-            verbose: true
-        }),
         /*        new ParallelUglifyPlugin({
                     // 传递给 UglifyJS 的参数
                     uglifyJS: {

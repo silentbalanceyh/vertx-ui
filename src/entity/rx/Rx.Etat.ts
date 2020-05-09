@@ -1,7 +1,9 @@
 import * as U from 'underscore';
 import StateOut from '../state/StateOut';
-import Ux from 'ux';
-import {Taper} from 'environment';
+// @ts-ignore
+import Ux from "ux";
+// @ts-ignore
+import {Taper} from "environment";
 
 class Etat {
     private _form: boolean = false;
@@ -180,7 +182,7 @@ class Etat {
         if (!this._op) this._op = {};
         const opRef = this._op;
         Object.keys(OP)
-        /* 过滤不存在的 key 信息 */
+            /* 过滤不存在的 key 信息 */
             .filter(key => !!key)
             .filter(key => "string" === typeof key)
             /* 过滤 key 不以 $op 开头 */

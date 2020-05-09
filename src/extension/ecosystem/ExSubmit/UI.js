@@ -1,13 +1,13 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import {Button, Checkbox} from 'antd';
+import {Checkbox} from 'antd';
+import Op from './Op';
 
 const jsx = {
     $button: (reference, jsx) => {
-        const {config = {}, buttons = {}} = jsx;
+        const {config = {}} = jsx;
         const {rememberMe = "", forgotPassword = {}} = config;
-        const button = Ux.aiExprOp(buttons.submit);
         return (
             <div className={"login-action"}>
                 <span className={"remember"}>
@@ -18,13 +18,7 @@ const jsx = {
                     <a>{forgotPassword.text}</a>
                 </span>
                 <span className={"button"}>
-                    <Button onClick={event => {
-                        /*
-                         * 关联引擎中的核心Button
-                         */
-                    }}>
-                        {button.text}
-                    </Button>
+                    {Ux.aiSubmit(reference, jsx)}
                 </span>
             </div>
         )
@@ -32,14 +26,17 @@ const jsx = {
 }
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
-    .cab("ExLogin1")
+    .cab("ExSubmit")
     .form().raft(1).raft({
         ...Ex.Jsx.Login, ...jsx
     })
-    .bind(Ex.Op)
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Op.yiComponent(this)
+    }
+
     render() {
         return Ex.yoRender(this, () =>
                 Ux.aiForm(this),

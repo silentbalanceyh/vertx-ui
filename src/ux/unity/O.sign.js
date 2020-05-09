@@ -2,7 +2,6 @@ import U from 'underscore';
 import Amt from './O.ambient';
 import Expr from './O.format';
 import Encrypt from './O.encrypt';
-import E from '../error';
 // 开发专用
 import Log from '../develop/logger';
 
@@ -83,9 +82,11 @@ const _secret = () => {
  */
 const token = () => {
     const app = Amt.isInit();
-    E.fxTerminal(!app, 10067, app);
-    let auth = app.auth;
-    if (!auth) auth = 'OAuth';
+    let auth = "OAuth";
+    if (app) {
+        auth = app.auth;
+        if (!auth) auth = 'OAuth';
+    }
     const fnExecute = SCHEMA[auth];
     return fnExecute();
 };
