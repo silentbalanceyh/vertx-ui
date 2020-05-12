@@ -5,7 +5,7 @@ import Cv from '../../constant';
 import U from "underscore";
 import Ele from '../../element';
 import './Cab.less';
-
+import Abs from '../../abyss';
 /*
  * 针对图标进行处理，类型包含icon和image两种
  * * 如果type以`img:`开头，则使用`<img/>`标签
@@ -64,11 +64,20 @@ const aiIcon = (type, addOn = {}) => {
 const aiUrl = (item = {}, addOn = {}) => {
     const {$router} = addOn;
     if ("$MAIN$" === item.uri) {
-        return Cv.ENTRY_ADMIN;
+        return Cv.ENTRY_ADMIN
     } else if ("$SELF$" === item.uri) {
         return $router ? $router.uri() : "";
     } else {
-        return $router ? $router.uri(item.uri) : item.uri;
+        let uri;
+        if (item.uri.startsWith("/")) {
+            uri = item.uri;
+        } else {
+            uri = "/" + item.uri;
+        }
+        if (!uri.startsWith(`/${Cv['ROUTE']}/`)) {
+            uri = `/${Cv['ROUTE']}${uri}`
+        }
+        return $router ? $router.uri(uri) : uri;
     }
 };
 /*
@@ -79,16 +88,28 @@ const aiUrl = (item = {}, addOn = {}) => {
  * }
  */
 const aiLink = (item = {}, addOn = {}) => {
-    if (item.uri) {
-        return item.disabled ? (
-            <span className={`ux-disabled ${item.className ? item.className : ""}`}>
+    if (item.uri && "EXPAND" !== item.uri) {
+        if (item.disabled) {
+            return (
+                <span className={`ux-disabled ${item.className ? item.className : ""}`}>
                 {item.text}
-            </span>
-        ) : (
-            <Link className={item.className ? item.className : ""} to={aiUrl(item, addOn)}>
-                {item.text}
-            </Link>
-        );
+                </span>
+            )
+        } else {
+            if (Abs.isFunction(item.__uri)) {
+                return (
+                    <a href={""} onClick={item.__uri} className={item.className ? item.className : ""}>
+                        {item.text}
+                    </a>
+                )
+            } else {
+                return (
+                    <Link className={item.className ? item.className : ""} to={aiUrl(item, addOn)}>
+                        {item.text}
+                    </Link>
+                )
+            }
+        }
     } else return (<span>{item.text}</span>);
 };
 

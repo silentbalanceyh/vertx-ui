@@ -70,7 +70,7 @@ function promise() {
                 .catch(error => [error, null]);
         } else {
             return new Promise((resolve, reject) => {
-                if (value._error) {
+                if (value && value._error) {
                     reject(value);
                 } else {
                     resolve(value);

@@ -72,6 +72,10 @@ class Of {
         return this;
     }
 
+    async(params: any = {}): any {
+        return this.to(params ? params : {})
+    }
+
     to(params: any = undefined): any {
         const promise = this._promise;
         const reference = this._reference;
