@@ -1,8 +1,8 @@
 import React from 'react';
 import Ux from 'ux';
 import {Button, Tooltip} from 'antd';
-import FUNS from './event';
-import './Cab.less';
+import FUNS from '../event';
+import '../Cab.less';
 /*
  * 按照状态设置按钮
  */

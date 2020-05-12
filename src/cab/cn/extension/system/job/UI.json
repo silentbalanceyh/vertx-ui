@@ -30,6 +30,13 @@
             "所有编程模式的任务都是 `只读` 类型，扩展存储任务都是 `可编辑`。"
         ]
     },
+    "_pagination": {
+        "pager": {
+            "page": 1,
+            "size": 10
+        },
+        "total": "当前记录总数:count"
+    },
     "_toolbar": {
         "starting": {
             "text": "启动",
@@ -73,9 +80,9 @@
             "clean": "清除"
         },
         "checked": {
-            "RUNNING": "运行中",
-            "ERROR": "运行错误",
-            "STOPPED": "已停止"
+            "FIXED": "定时任务",
+            "ONCE": "一次性任务",
+            "PLAN": "轮询任务"
         }
     },
     "_table": {

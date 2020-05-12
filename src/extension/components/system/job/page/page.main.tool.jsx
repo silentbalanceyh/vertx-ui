@@ -5,49 +5,32 @@ import Event from '../event';
 
 const renderSearch = (reference, tool = {}) => {
     const {search} = tool;
+    const {$condText} = reference.state;
     if (search) {
         return (
             <Input.Search placeholder={search.placeholder} allowClear
-                          onChange={event => {
-                              const text = event.target.value;
-                              if (!text) {
-                                  Event.rxSearch(reference)(text);
-                              }
-                          }}
-                          onSearch={Event.rxSearch(reference)}/>
-        )
-    } else return false;
-}
-// eslint-disable-next-line
-const renderDuration = (reference, tool = {}) => {
-    const {frequency} = tool;
-    const {$durationValue} = reference.state;
-    if (frequency) {
-        return (
-            <Input addonBefore={frequency.label} suffix={frequency.unit}
-                   value={$durationValue}
-                   onChange={Event.rxDurationChange(reference)}
-                   onBlur={Event.rxDurationBlur(reference)}
-                   onFocus={Event.rxDurationFocus(reference)}/>
+                          value={$condText}
+                          onChange={Event.onSearchChange(reference)}
+                          onSearch={Event.onSearch(reference)}/>
         )
     } else return false;
 }
 
 const renderButton = (reference, tool = {}) => {
     const {button = {}} = tool;
-    const {$searchPrefix, $loading = false} = reference.state;
+    const {$query, $loading = false} = reference.state;
     return (
         <Button.Group>
             <Button icon={"redo"}
                     className={"ux-red"}
                     loading={$loading}
-                    onClick={Event.rxRefresh(reference)}>
+                    onClick={Event.onRefresh(reference)}>
                 {button.refresh}
             </Button>
             <Button icon={"filter"}
                     loading={$loading}
-                    disabled={!$searchPrefix}
-                    onClick={Event.rxFilterClean(reference)}>
+                    disabled={Ux.isEmpty($query.criteria)}
+                    onClick={Event.onClean(reference)}>
                 {button.clean}
             </Button>
         </Button.Group>
@@ -56,8 +39,10 @@ const renderButton = (reference, tool = {}) => {
 
 const renderChecked = (reference, tool = {}) => {
     const {checked = {}} = tool;
+    const {$condChecked = []} = reference.state;
     return (
-        <Checkbox.Group onChange={Event.rxChecked(reference)}>
+        <Checkbox.Group onChange={Event.onChecked(reference)}
+                        value={$condChecked}>
             {Object.keys(checked).map(key => {
                 const text = checked[key];
                 return (
@@ -76,10 +61,10 @@ export default (reference) => {
             <Col span={4}>
                 {renderButton(reference, tool)}
             </Col>
-            <Col span={6} className={"check-group"}>
+            <Col span={8} className={"check-group"}>
                 {renderChecked(reference, tool)}
             </Col>
-            <Col span={5} offset={9}>
+            <Col span={5} offset={7}>
                 {renderSearch(reference, tool)}
             </Col>
         </Row>

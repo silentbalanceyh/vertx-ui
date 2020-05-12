@@ -1,4 +1,5 @@
-import UiOp from './O.ui';
+import UiTabs from './O.tabs';
+import UiCond from './O.condition';
 
 import edit from './O.fn.edit';
 import starting from './O.fn.start';
@@ -12,5 +13,6 @@ export default {
         stopping,
         resuming
     },
-    ...UiOp,
+    ...UiTabs,
+    ...UiCond
 }

@@ -462,8 +462,8 @@ class I {
      * @async
      * @returns {Promise<T>} 返回Promise
      */
-    static jobs() {
-        return _job.jobs()
+    static jobs(params) {
+        return _job.jobs(params)
     }
 
     /**

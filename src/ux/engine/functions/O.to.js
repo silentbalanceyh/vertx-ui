@@ -203,6 +203,48 @@ const toWidth = (literal = "") => {
         return width;
     } else return -1;
 };
+/**
+ * ## 标准函数
+ *
+ * data的数据结构
+ *
+ * ```json
+ * {
+ *     "list": [],
+ *     "count":10
+ * }
+ * ```
+ *
+ * 查询条件类
+ *
+ * ```json
+ * {
+ *     "pager":{
+ *         "page": 1,
+ *         "size": 10
+ *     },
+ *     "criteria": {
+ *
+ *     },
+ *     "sorter":[],
+ *     "projection":[]
+ * }
+ * ```
+ *
+ * @param {Object} data 数据信息
+ * @param {Object} query 查询条件专用雷
+ * @param {Object} config 额外的配置
+ * @returns 返回生成好的 Table 专用的 pagination
+ */
+const toPagination = (data = {}, query = {}, config = {}) => {
+    const pagination = {};
+    const {pager = {}} = query;
+    pagination.current = pager.page ? pager.page : 1;
+    pagination.pageSize = pager.size ? pager.size : 10;
+    pagination.total = data.count ? data.count : 0;
+    Object.assign(pagination, config);
+    return pagination;
+}
 export default {
     toHeight,
     toGrid,
@@ -213,4 +255,6 @@ export default {
     toLink,
     toX,    // 表格专用列生成
     toWidth, // 计算字符串长度，中文字 x 2
+
+    toPagination, // 根据传入的数据转换
 }
