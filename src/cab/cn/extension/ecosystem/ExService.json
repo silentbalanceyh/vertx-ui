@@ -8,22 +8,26 @@
                 "identifier,模型ID,12"
             ],
             [
+                "identifierComponent,模型选择器,16,,,addonBefore=Java"
+            ],
+            [
                 {
                     "complex": true,
                     "name": "FieldContainer",
                     "key": "serviceContainer",
                     "config": {
-                        "activeKey": "tabCore",
-                        "items": "核心配置,tabCore;组件属性,tabBusiness;通道配置,tabChannel;字典配置,tabDict;映射配置,tabMapping",
+                        "activeKey": "tabIntegration",
+                        "items": "集成配置,tabIntegration;数据库配置,tabDatabase;组件属性,tabBusiness;通道配置,tabChannel;字典配置,tabDict;映射配置,tabMapping",
                         "pages": {
-                            "tabCore": {
+                            "tabDatabase": {
                                 "ui": [
                                     [
-                                        "identifierComponent,模型选择器,16,,,addonBefore=Java"
-                                    ],
-                                    [
                                         "configDatabase,数据库配置,24"
-                                    ],
+                                    ]
+                                ]
+                            },
+                            "tabIntegration": {
+                                "ui": [
                                     [
                                         "configIntegration,集成配置,24"
                                     ]

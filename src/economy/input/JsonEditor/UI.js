@@ -7,14 +7,14 @@ import Op from './Op';
 class Component extends React.PureComponent {
 
     render() {
-        const {value = {}} = this.props;
+        const {value = {}, height = 240} = this.props;
         return (
             <Input.Group {...this.props}>
                 <JSONInput id={"content"} locale={locale}
-                           height={240}
+                           height={height}
                            onChange={Op.rxChange(this)}
                            placeholder={value}
-                           waitAfterKeyPress={2000}
+                           waitAfterKeyPress={1000}
                            theme={"light_mitsuketa_tribute"}
                            width={"100%"}/>
             </Input.Group>

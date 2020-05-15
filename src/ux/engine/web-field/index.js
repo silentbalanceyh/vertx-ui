@@ -17,20 +17,11 @@ import Button from './O.button';
 // 自定义部分
 import ListSelector from './O.selector.list';
 import TreeSelector from './O.selector.tree';
-import MultiCheckBox from './O.checkbox.multi';
 import AddressSelector from './O.selector.address';
 import DatumCascade from './O.cascade.datum';
 import FileUpload from './O.file.upload';
-import DateVersion from './O.date.version';
 import TableEditor from './O.editor.table';
-import ChangeEditor from './O.editor.change';
-import TableTransfer from './O.transfer.table';
-import TimeRanger from './O.ranger.time';
-import CheckedDate from './O.checked.date';
-import CheckedInput from './O.checked.input';
-import MatrixEditor from './O.editor.matrix';
 import RichEditor from './O.editor.rich';
-import TeamSelector from './O.selector.team'
 import DialogEditor from './O.editor.dialog';
 import JsonEditor from './O.editor.json';
 // 搜索
@@ -56,20 +47,11 @@ const exported = {
 
     ...ListSelector,
     ...TreeSelector,
-    ...MultiCheckBox,
     ...AddressSelector,
     ...DatumCascade,
     ...FileUpload,
-    ...DateVersion,
     ...TableEditor,
-    ...ChangeEditor,
-    ...TableTransfer,
-    ...TimeRanger,
-    ...CheckedDate,
-    ...CheckedInput,
-    ...MatrixEditor,
     ...RichEditor,
-    ...TeamSelector,
     ...Button,
     ...DialogEditor,
     ...JsonEditor,

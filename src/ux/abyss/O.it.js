@@ -408,7 +408,8 @@ const itAmb = (input, consumer) => {
     if (Is.isFunction(consumer)) {
         if (Is.isArray(input)) {
             const normalized = [];
-            input.map(consumer).forEach(each => itAmb(each, consumer));
+            input.map(each => itAmb(each, consumer))
+                .forEach(each => normalized.push(each));
             return normalized;
         } else {
             return consumer(input);

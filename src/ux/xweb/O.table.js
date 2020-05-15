@@ -99,11 +99,11 @@ const xtColumn = (reference, columns = []) => {
             let fnRender = $render[column.dataIndex];
             if (!fnRender) {
                 const type = column['$render'] ? column["$render"] : "TEXT";
-                const renders = Eng.aiUnitRenders;
-                fnRender = renders[type];
-                E.fxTerminal(!fnRender, 10083, column.dataIndex, fnRender);
+                // const renders = Eng.aiUnitRenders;
+                // fnRender = renders[type];
+                // E.fxTerminal(!fnRender, 10083, column.dataIndex, fnRender);
             }
-            column.render = fnRender(reference, column, jsx);
+            // column.render = fnRender(reference, column, jsx);
         }
     });
     return columns;
@@ -128,24 +128,7 @@ const xtData = (reference) => {
     }
     return data;
 };
-/**
- * ## 标准函数
- *
- * 根据属性`props`中的`config`节点以及额外辅助信息来计算表格所需的所有配置。
- *
- * @memberOf module:_xt
- * @param {ReactComponent} reference React组件引用。
- * @param {Object} $config 传入额外的配置信息。
- * @return {Object} 返回合并过后的配置信息，额外配置信息为辅。
- */
-const xtConfig = (reference, $config = {}) => {
-    E.fxTerminal(!reference, 10049, reference);
-    const {config = {}} = reference.props;
-    $config = Abs.clone($config);
-    return Object.assign({}, $config, config);
-};
 export default {
     xtColumn,
     xtData,
-    xtConfig
 };

@@ -1,0 +1,84 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "tabDatabase",
+        "items": "基本配置,tabDatabase;附加选项,tabOptions",
+        "type": "card",
+        "tabPosition": "right"
+    },
+    "_form": {
+        "options": {
+            "placeholder": "请使用Json格式录入配置信息。",
+            "height": 192
+        },
+        "hostname": {
+            "label": "主机地址",
+            "placeholder": "IP地址 / 域名"
+        },
+        "port": {
+            "label": "端口",
+            "placeholder": "最大65536",
+            "min": 1,
+            "max": 65536,
+            "style": {
+                "width": "40%"
+            }
+        },
+        "instance": {
+            "label": "实例名称",
+            "placeholder": "数据库实例名"
+        },
+        "username": {
+            "label": "登录账号"
+        },
+        "password": {
+            "label": "登录密码"
+        },
+        "jdbcUrl": {
+            "label": "JDBC连接串",
+            "placeholder": "Java连接数据库专用JDBC连接字符串",
+            "style": {
+                "width": "101%"
+            }
+        },
+        "driverClassName": {
+            "label": "JDBC驱动",
+            "placeholder": "（选择JDBC驱动程序）",
+            "options": [
+                "com.mysql.jdbc.Driver,com.mysql.jdbc.Driver",
+                "com.mysql.cj.jdbc.Driver,com.mysql.cj.jdbc.Driver"
+            ]
+        },
+        "category": {
+            "label": "数据库类型",
+            "placeholder": "（请选择目前支持的数据库类型）",
+            "options": [
+                "MYSQL5,MySQL 5.x",
+                "MYSQL8,MySQL 8.x",
+                "MYSQL,MySQL (Legacy)"
+            ],
+            "trigger": {
+                "MYSQL": {
+                    "hostname": "localhost",
+                    "username": "root",
+                    "port": 3306,
+                    "driverClassName": "com.mysql.jdbc.Driver",
+                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                },
+                "MYSQL8": {
+                    "hostname": "localhost",
+                    "username": "root",
+                    "port": 3306,
+                    "driverClassName": "com.mysql.cj.jdbc.Driver",
+                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                },
+                "MYSQL5": {
+                    "hostname": "localhost",
+                    "username": "root",
+                    "port": 3306,
+                    "driverClassName": "com.mysql.jdbc.Driver",
+                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                }
+            }
+        }
+    }
+}

@@ -1,4 +1,6 @@
 import U from 'underscore';
+import Abs from "./index";
+import Ele from "../element";
 
 /**
  * ## 标准函数
@@ -82,7 +84,40 @@ const sequence = (input, mode = "DIGEST") => {
         console.info("输入参数 input 类型错误", input);
     }
 };
+const merge = (original, newValue, field = "key") => {
+    if (Abs.isArray(newValue)) {
+        /*
+         * 数组更新
+         */
+        let merged = [];
+        if (original && 0 < original.length) {
+            merged = newValue;
+        } else {
+            original.forEach(each => {
+                /*
+                 * 从新数据中查找
+                 */
+                const hit = Ele.elementUnique(newValue, field, each.key);
+                if (hit) {
+                    merged.push(Object.assign({}, each, hit));
+                } else {
+                    merged.push(Abs.clone(each));
+                }
+            });
+        }
+        return merged;
+    } else {
+        let merged = {};
+        if (original) {
+            merged = Object.assign({}, original, newValue);
+        } else {
+            merged = Abs.clone(newValue);
+        }
+        return merged;
+    }
+}
 export default {
     slice,
     sequence,
+    merge,
 }

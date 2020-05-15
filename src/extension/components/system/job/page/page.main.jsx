@@ -24,7 +24,7 @@ export default (reference) => {
                 <Col span={4}>
                     {renderMenu(reference)}
                 </Col>
-                <Col span={20}>
+                <Col span={20} className={"job-table"}>
                     <Table {...configTable} dataSource={$data} loading={$loading}/>
                 </Col>
             </Row>

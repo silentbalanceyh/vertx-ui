@@ -1,1 +1,1 @@
-export {default as _zero} from './Ix.Zero';
+export {default as component} from './Ix.Zero';

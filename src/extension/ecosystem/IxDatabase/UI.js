@@ -1,13 +1,29 @@
 import React from 'react';
+import Ux from 'ux';
+import {component} from 'web';
+import Ex from 'ex';
+import PageForm from './Web.Form';
+import IxOption from '../IxOption/UI';
 
+/*
+ * 自定义组件，编辑数据库Json
+ */
+@component({
+    "i18n.cab": require("./Cab.json"),
+    "i18n.name": "IxDatabase"
+})
 class Component extends React.PureComponent {
+    constructor(props) {
+        super(props);
+        this.state = Ux.xtInitObject(props);
+    }
+
+    componentDidMount() {
+        Ex.yiComplex(this);
+    }
+
     render() {
-        console.info(this.props);
-        return (
-            <div>
-                Database Editor
-            </div>
-        )
+        return Ex.xuiComplex(this, "IxDatabase")(PageForm, IxOption);
     }
 }
 

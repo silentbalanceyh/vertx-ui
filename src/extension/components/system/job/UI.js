@@ -32,7 +32,14 @@ class Component extends React.PureComponent {
             const {$tabs = {}, $inited = {}} = this.state;
             const {items = [], ...tabsAttrs} = $tabs;
             return (
-                <Tabs {...tabsAttrs}>
+                <Tabs {...tabsAttrs} tabBarExtraContent={(() => {
+                    /* extra */
+                    let buttons = Ux.fromHoc(this, "extra");
+                    if (Ux.isArray(buttons)) {
+                        buttons = Ux.aiExprButtons(buttons);
+                    }
+                    return Rdr.pageExtra(this, buttons);
+                })()}>
                     {items.map(item => (
                         <Tabs.TabPane {...item}>
                             {renderChild(this, item, $inited)}

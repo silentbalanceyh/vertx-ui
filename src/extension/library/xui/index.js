@@ -1,6 +1,7 @@
 import xuiGrid from './xui.fn.grid';
 import xuiContainer from './xui.fn.container';
 import xuiDecorator from './xui.fn.decorator';
+import xuiComplex from './xui.fn.complex';
 
 /**
  * 内部模块
@@ -12,5 +13,6 @@ import xuiDecorator from './xui.fn.decorator';
 export default {
     xuiGrid,
     xuiContainer,
-    xuiDecorator
+    xuiDecorator,
+    xuiComplex
 }

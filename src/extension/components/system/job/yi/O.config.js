@@ -11,14 +11,6 @@ const yiTabs = (reference) => {
     $tabs.type = "editable-card";
     $tabs.hideAdd = true;
     $tabs.className = "ex-tabs";
-    /*
-     * extra
-     */
-    let buttons = Ux.fromHoc(reference, "extra");
-    if (Ux.isArray(buttons)) {
-        buttons = Ux.aiExprButtons(buttons);
-    }
-    $tabs.tabBarExtraContent = Rdr.pageExtra(reference, $tabs, buttons);
     return Ux.promise($tabs);
 }
 /*

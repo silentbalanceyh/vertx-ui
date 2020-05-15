@@ -1,5 +1,4 @@
 import U from "underscore";
-import Abs from '../abyss';
 import Ut from '../unity';
 
 /**
@@ -23,26 +22,6 @@ const xtInitObject = (props = {}) => {
     }
     return values;
 };
-/**
- * ## 标准函数
- *
- * * 如果属性 props 中存在 `value` 变量，则返回该值。
- * * 如果属性 props 中不存在 `value` 变量，则返回 `{}`。
- *
- * 返回结构：
- *
- * ```json
- * {
- *     "...":"数据内容"
- * }
- * ```
- *
- * @deprecated 未来使用`xtInitObject`替换。
- * @memberOf module:_xt
- * @param {Props} props React属性信息。
- * @return {any|{}} 返回初始值。
- */
-const xtInit = (props = {}) => (props.value || {});
 /**
  *
  * ## 标准函数
@@ -89,52 +68,28 @@ const xtInitArray = (props = {}, empty = false) => {
     return values;
 };
 /**
+ *
  * ## 标准函数
  *
- * 内部使用特殊信息，可选择初始化行数，默认生成：
+ * 双格式处理
  *
  * ```json
  * {
- *     dataSource: {
- *         "key1": {},
- *         "key2": {},
- *         "key3": {},
- *         "...": "其他记录集"
- *     }
+ *     "Array直接格式":[],
+ *     "Json格式":{}
  * }
  * ```
  *
  * @memberOf module:_xt
  * @param {Props} props React属性信息。
- * @param {Number} records 初始化的数据记录值，默认为2.
- * @return {Object} 返回特殊结构。
+ * @return {{}}
  */
-const xtInitSource = (props = {}, records = 2) => {
-    const {source = []} = props;
-    const keys = source.map(item => item.key);
-    // 读取旧数据
-    const state = xtInit(props);
-    // 使用keys先过滤
-    const $state = {};
-    const $keys = Abs.immutable(keys);
-    Object.keys(state).filter(key => $keys.contains(key))
-        .forEach(key => $state[key] = state[key]);
-    // 其次执行操作
-    keys.forEach(key => {
-        if (!U.isArray($state[key])) {
-            let item = [];
-            for (let idx = 0; idx < records; idx++) {
-                item.push({key: Ut.randomUUID()});
-            }
-            $state[key] = item;
-        }
-    });
-    // initSource的核心，就是包含了一个dataSource节点
-    return {dataSource: $state};
-};
+const xtInitFormat = (props = {}) => {
+    const {config = {}} = props;
+    const {format = {}} = config;
+}
 export default {
-    xtInitSource,
     xtInitArray,
-    xtInit,
-    xtInitObject
+    xtInitObject,
+    xtInitFormat,
 };

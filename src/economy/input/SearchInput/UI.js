@@ -1,10 +1,10 @@
 import React from 'react';
 import {Checkbox, Col, Input, Row} from 'antd';
 import Op from './Op';
-import {_zero} from "../../_internal";
+import {component} from "../../_internal";
 import Ux from 'ux';
 
-@_zero({
+@component({
     "i18n.cab": require('./Cab.json'),
     "i18n.name": "UI",
     state: {

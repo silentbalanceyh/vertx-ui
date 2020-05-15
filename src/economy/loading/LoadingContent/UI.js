@@ -1,9 +1,9 @@
 import "./Cab.less";
 import React from 'react';
 import {Spin} from "antd";
-import {_zero} from "../../_internal";
+import {component} from "../../_internal";
 
-@_zero({
+@component({
     "i18n.cab": require("./Cab.json"),
     "i18n.name": "LoadingContent"
 })

@@ -240,7 +240,7 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
     }
     return formValues;
 };
-const _edition = (reference) => {
+const _edition = (reference, optionJsx = {}, field) => {
     /*
      * 优先从 reference.props 中读取 $edition
      */
@@ -282,6 +282,21 @@ const _edition = (reference) => {
                 $edition = {};
             } else {
                 $edition = false;
+            }
+        }
+    }
+    if (false === $edition) {
+        /* 不可编辑，直接切断 */
+        return $edition;
+    }
+    /* 如果当前字段为可编辑 */
+    if (false !== $edition[field]) {
+        const {config = {}} = optionJsx;
+        if (config.once) {
+            const value = $inited[field];
+            if (undefined !== value) {
+                /* 不可编辑 */
+                $edition[field] = false;
             }
         }
     }
@@ -331,7 +346,7 @@ const writeSegment = (reference, optionJsx = {}, field) => {
     /*
      * 默认值为 true
      */
-    const $edition = _edition(reference);
+    const $edition = _edition(reference, optionJsx, field);
     if ($edition && Abs.isObject($edition)) {
         /*
          * 部分表单禁用

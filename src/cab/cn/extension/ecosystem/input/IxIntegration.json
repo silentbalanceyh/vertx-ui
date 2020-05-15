@@ -1,0 +1,61 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "tabIntegration",
+        "items": "基本配置,tabIntegration;附加选项,tabOptions",
+        "type": "card",
+        "tabPosition": "right"
+    },
+    "_form": {
+        "options": {
+            "placeholder": "请使用Json格式录入配置信息。",
+            "height": 192
+        },
+        "endpoint": {
+            "label": "集成地址",
+            "placeholder": "一般为 Web Service专用 EndPoint 地址。"
+        },
+        "hostname": {
+            "label": "主机地址",
+            "placeholder": "IP地址 / 域名"
+        },
+        "protocol": {
+            "label": "协议类型",
+            "placeholder": "（选择您集成使用的协议类型）",
+            "type": "radio",
+            "options": [
+                "http,HTTP",
+                "https,HTTPS"
+            ]
+        },
+        "apis": {
+            "label": "接口列表",
+            "config": {
+                "columns": [
+                    "key,操作",
+                    "name,API键",
+                    "method,HTTP方法",
+                    "uri,API地址"
+                ],
+                "format": {
+                    "type": "OBJECT",
+                    "key": "name"
+                }
+            }
+        },
+        "port": {
+            "label": "端口",
+            "placeholder": "最大65536",
+            "min": 1,
+            "max": 65536,
+            "style": {
+                "width": "40%"
+            }
+        },
+        "username": {
+            "label": "登录账号"
+        },
+        "password": {
+            "label": "登录密码"
+        }
+    }
+}

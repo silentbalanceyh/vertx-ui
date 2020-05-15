@@ -12,17 +12,19 @@ function aiChild() {
         const child = arguments[0];
         const {fnChild, container: Component, ...rest} = child;
         if (U.isFunction(fnChild)) {
+            /* 因为要调用函数，则直接执行 fnChild 时引入特殊属性触发 */
+            const $rest = Abs.clone(rest);
             if (Component) {
                 /*
                  * 包含了外层容器的联动渲染
                  */
                 return (
-                    <Component {...rest}>
-                        {fnChild(rest)}
+                    <Component {...$rest}>
+                        {fnChild($rest)}
                     </Component>
                 );
             } else {
-                return fnChild(rest);
+                return fnChild($rest);
             }
         } else {
             Dev.dgDebug({child}, "[ Ux ] 未检测到 fnChild 函数，返回 false");
