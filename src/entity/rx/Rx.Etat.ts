@@ -138,7 +138,7 @@ class Etat {
                 args.push(input);
             }
         }
-        this._loading = Ux.ambiguityArray.apply(null, [].concat(args));
+        this._loading = Ux.ambArray.apply(null, [].concat(args));
         return this;
     }
 

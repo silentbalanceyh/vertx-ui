@@ -3,17 +3,17 @@ import Is from './O.is';
 const generator = (reference, names = []) => {
     const object = {};
     names.forEach(name => {
-        object[name] = (values) => {
+        object[name] = function () {
             let executor;
             if (reference.state) {
                 executor = reference.state[name];
             }
             if (Is.isFunction(executor)) {
-                return executor(values);
+                return executor.apply(null, arguments);
             } else {
                 executor = reference.props[name];
                 if (Is.isFunction(executor)) {
-                    return executor(values);
+                    return executor.apply(null, arguments);
                 } else {
                     console.error(`${name} function 不存在！`);
                 }

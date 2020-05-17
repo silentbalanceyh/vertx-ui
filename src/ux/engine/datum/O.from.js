@@ -32,7 +32,7 @@ const fromHoc = (reference = {}, key = "") => {
  * @return {null}
  */
 const fromPath = (reference = {}, ...args) => {
-    let keys = Ele.ambiguityArray.apply(this, args);
+    let keys = Ele.ambArray.apply(this, args);
     const length = keys['length'];
     E.fxTerminal(1 > length, 10070, keys, 1);
     let data = fromHoc(reference, keys[0]);

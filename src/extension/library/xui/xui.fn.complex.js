@@ -2,19 +2,20 @@ import Ux from 'ux';
 import {Input, Tabs} from "antd";
 import React from "react";
 
-export default (reference, config = {}) => (...UIS) => {
-    const {name} = config;
+export default (reference, name) => (...UIS) => {
     const attrs = Ux.valueLimit(reference.props);
     return Ux.xtReady(reference, () => {
         const {$tabs = {}, $form} = reference.state;
-        const {value} = reference.props;
+        const {value, name} = reference.props;
         // 子属性
         const childAttrs = {};
         childAttrs.config = $form;
-        /* 上层 onChange 函数 */
-        childAttrs.onChange = values => {
-            // Ux.xtChange(reference, values);
-        };
+        /*
+         * 上层 onChange 函数
+         * 此处 onChange 函数是 Ant-Form 中的 native 函数
+         * */
+        childAttrs.onChange = Ux.xt(reference)
+            .onChange(name, reference.props.config);
         childAttrs.value = value;
         const {items = [], ...rest} = $tabs;
         return (

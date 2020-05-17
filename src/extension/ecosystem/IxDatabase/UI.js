@@ -15,11 +15,11 @@ import IxOption from '../IxOption/UI';
 class Component extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = Ux.xtInitObject(props);
+        this.state = Ux.xtInitFormat(props);
     }
 
     componentDidMount() {
-        Ex.yiComplex(this);
+        Ex.yiFormSegment(this);
     }
 
     render() {

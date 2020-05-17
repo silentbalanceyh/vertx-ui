@@ -57,7 +57,7 @@ const isDepend = (depend = {}, reference) => {
                      * 读取数据
                      */
                     const dataArray = G.onDatum(reference, expected.source);
-                    const $values = Abs.immutable(Ele.ambiguityArray(expected.value));
+                    const $values = Abs.immutable(Ele.ambArray(expected.value));
                     let compared = Abs.immutable(dataArray
                         .filter(each => undefined !== each[expected.field])
                         .filter(each => $values.contains(each[expected.field]))

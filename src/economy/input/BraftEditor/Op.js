@@ -35,7 +35,7 @@ const on2Change = (reference) => (editorState) => {
     if (editorState) {
         reference.setState({content: editorState});
         // 调用Ant中的OnChange
-        Ux.xtChange(reference, editorState.toHTML(), true);
+        // Ux.xtChange(reference, editorState.toHTML(), true);
     }
 };
 /*

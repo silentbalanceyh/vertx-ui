@@ -12,7 +12,7 @@
         },
         "endpoint": {
             "label": "集成地址",
-            "placeholder": "一般为 Web Service专用 EndPoint 地址。"
+            "placeholder": "一般为 Web Service专用 EndPoint 地址，SDK集成则略。"
         },
         "hostname": {
             "label": "主机地址",

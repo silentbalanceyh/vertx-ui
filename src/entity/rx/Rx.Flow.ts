@@ -65,7 +65,7 @@ class RxFlow {
     }
 
     mount(...keys) {
-        const refArray = Ux.ambiguityArray.apply(null, keys);
+        const refArray = Ux.ambArray.apply(null, keys);
         const metadata = this.metadata;
         const promiseMap = this.promiseMap;
         refArray.filter(key => undefined !== key).forEach(key => {

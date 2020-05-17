@@ -84,6 +84,20 @@ const sequence = (input, mode = "DIGEST") => {
         console.info("输入参数 input 类型错误", input);
     }
 };
+/**
+ * ## 标准函数
+ *
+ * 双合并方法：
+ *
+ * 1）如果是两个对象传入，则直接 Object.assign，新的覆盖旧的
+ * 2）如果是两个数组对象传入，则直接用新的合并到旧的，但是需要按 field 执行合并
+ *
+ * @memberOf module:_primary
+ * @param {Array|Object} original 原始数据结构
+ * @param {Array|Object} newValue 更新后的数据结构
+ * @param {String} field 如果是数组则按field合并
+ * @returns {Array|Object} 返回合并后的值
+ */
 const merge = (original, newValue, field = "key") => {
     if (Abs.isArray(newValue)) {
         /*
@@ -97,7 +111,7 @@ const merge = (original, newValue, field = "key") => {
                 /*
                  * 从新数据中查找
                  */
-                const hit = Ele.elementUnique(newValue, field, each.key);
+                const hit = Ele.elementUnique(newValue, field, each[field]);
                 if (hit) {
                     merged.push(Object.assign({}, each, hit));
                 } else {

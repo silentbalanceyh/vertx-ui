@@ -186,7 +186,7 @@ const formatPercent = (value) => {
 const formatTpl = (data, tpl = {}) => {
     if (data) {
         const $tpl = Abs.clone(tpl);
-        return Ele.ambiguityKv($tpl,
+        return Ele.ambKv($tpl,
             (expr) => formatExpr(expr, data, true));
     } else {
         /* 没有传入值直接不做 */

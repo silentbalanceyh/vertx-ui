@@ -1,5 +1,4 @@
 import Event from './Op.Change';
-import Ux from "ux";
 
 const DFT_CONFIG = {
     undoRedo: true, // 撤销/继续功能
@@ -38,7 +37,7 @@ const updateValue = (reference, prevState) => {
         // 先更新状态
         reference.setState({markdown: updated});
         // Change触发
-        Ux.xtChange(reference, updated, true);
+        // Ux.xtChange(reference, updated, true);
     }
 };
 export default {

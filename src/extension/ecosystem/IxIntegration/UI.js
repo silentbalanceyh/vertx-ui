@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Ex.yiComplex(this);
+        Ex.yiFormSegment(this);
     }
 
     render() {

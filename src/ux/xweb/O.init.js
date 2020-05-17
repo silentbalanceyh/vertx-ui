@@ -1,5 +1,6 @@
 import U from "underscore";
 import Ut from '../unity';
+import Cv from '../constant';
 
 /**
  * ## 标准函数
@@ -81,12 +82,22 @@ const xtInitArray = (props = {}, empty = false) => {
  * ```
  *
  * @memberOf module:_xt
- * @param {Props} props React属性信息。
+ * @param {Props} props React属性信息
  * @return {{}}
  */
 const xtInitFormat = (props = {}) => {
     const {config = {}} = props;
-    const {format = {}} = config;
+    const {format = Cv.XT_FORMAT.OBJECT} = config;
+    if (Cv.XT_FORMAT.OBJECT === format) {
+        /* 默认格式：OBJECT */
+        return xtInitObject(props);
+    } else if (Cv.XT_FORMAT.ARRAY === format) {
+        /* 默认格式：ARRAY */
+        return xtInitArray(props);
+    } else if (Cv.XT_FORMAT.SET === format) {
+        /* 特殊格式 */
+        return [];
+    }
 }
 export default {
     xtInitArray,

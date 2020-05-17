@@ -2,7 +2,7 @@ import Ux from "ux";
 
 export default (reference, field, config = {}) => (event) => {
     // 1.读取Input数据
-    const value = Ux.ambiguityEvent(event);
+    const value = Ux.ambEvent(event);
     let state = Ux.xtGet(reference, field, () => value ? value : undefined);
     // 2.构造触发器
     const {trigger = {}} = config;

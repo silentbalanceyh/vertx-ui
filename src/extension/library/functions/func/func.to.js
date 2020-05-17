@@ -114,7 +114,7 @@ const toColor = (current) => {
  * @returns {String} 返回最终的模型ID（统一标识符计算值）
  */
 const toModelId = (reference, field) => {
-    const inited = Ux.ambiguityObject(reference, "$inited");
+    const inited = Ux.ambObject(reference, "$inited");
     const module = Ux.fromHoc(reference, "module");
     if (module[field]) {
         const config = module[field];

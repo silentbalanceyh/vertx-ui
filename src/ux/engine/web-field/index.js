@@ -28,8 +28,6 @@ import JsonEditor from './O.editor.json';
 import SearchInput from './O.search.input';
 import SearchRangeDate from './O.search.range.date';
 
-import Dev from '../../develop';
-
 const exported = {
     ...Input,
     ...Action,
@@ -59,5 +57,4 @@ const exported = {
     ...SearchInput,
     ...SearchRangeDate
 };
-Dev.dgDebug(exported, "所有合法的表单字段", "#DAA520");
 export default exported;

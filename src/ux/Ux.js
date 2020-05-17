@@ -11,7 +11,6 @@ import xweb from './xweb';
 import romantic from './romantic';
 
 import E from './error';
-import reportUx from './Ux.Report';
 
 const exported = {
     /**
@@ -349,21 +348,6 @@ const exported = {
      */
     E,
 };
-if (constant.DEBUG) {
-    console.groupCollapsed("Report Debug");
-    console.info(abs);
-    console.info(ajax);
-    console.info(develop);
-    console.info(element);
-    console.info(engine);
-    console.info(entity);
-    console.info(unity);
-    console.info(graphic);
-    console.info(E);
-    console.info(romantic);
-    console.warn(unity.sorterObject(exported));
-    console.groupEnd();
-    reportUx();
-}
+console.warn(exported);
 export default exported;
 

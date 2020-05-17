@@ -67,5 +67,19 @@ export default {
     FORM_MODE: {
         ADD: "ADD",
         EDIT: "EDIT"
+    },
+    /**
+     * ## 常量
+     *
+     * 自定义组件配置格式
+     *
+     * * OBJECT：Json对象格式
+     * * ARRAY：Json数组格式（对象数组）
+     * * SET: 纯数组格式
+     */
+    XT_FORMAT: {
+        OBJECT: "OBJECT",
+        ARRAY: "ARRAY",
+        SET: "纯数组格式"
     }
 };

@@ -54,12 +54,17 @@ const _zero = (options = {}) => {
         const verify = options.verify ? options.verify : () => undefined;
 
         class _target extends target {
-            // 静态资源放到State状态中
-            state = {
-                // $hoc变量处理
-                $hoc: _ixI18n(target, options),
-                ...injectState
-            };
+            constructor(props) {
+                super(props);
+                // 静态资源放到State状态中
+                const original = this.state ? this.state : {};
+                this.state = {
+                    // $hoc变量处理
+                    $hoc: _ixI18n(target, options),
+                    ...injectState,
+                    ...original
+                };
+            }
 
             componentDidMount() {
                 const error = verify(this);

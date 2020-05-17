@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Form, Input, Radio, Row, Select} from 'antd';
 import Abs from '../abyss';
-import Ele from "../element";
+import O from './O.event';
 
 const xtSelect = (rest = {}, options = []) => (
     <Select {...rest}>
@@ -118,12 +118,7 @@ const xtItem = (rows = [], reference) => {
         /* onChangeJ 专用函数 */
         if (!Abs.isFunction(rest['onChange'])) {
             /* 下层 onChange 函数 */
-            rest.onChange = (event) => {
-                const value = Ele.ambiguityEvent(event);
-                const data = {};
-                data[field] = value ? value : undefined;
-                Abs.fn(reference).onChange(data);
-            }
+            rest.onChange = O.xt(reference).onChange(rest.name);
         }
         field.field = rest;
         field.item = item;
