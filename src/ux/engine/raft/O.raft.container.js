@@ -1,7 +1,6 @@
 import {Container} from 'web';
 import React from 'react';
 import Datum from '../datum';
-import Abs from '../../abyss'
 
 const raftContainer = (cell = {}, config = {}) => {
     const {
@@ -22,17 +21,13 @@ const raftContainer = (cell = {}, config = {}) => {
         const config = cell.config ? cell.config : {};
         return (values = {}) => {
             /*
-             * 子组件调用父组件对应的 renders，生成 $jsx 变量
+             * 子组件调用父组件对应的 renders，生成 $renders 变量
              */
-            const jsx = {};
             const {renders = {}} = addOn;
-            if (!Abs.isEmpty(renders)) {
-                Object.assign(jsx, renders);
-            }
             return (
                 <Component {...Datum.onUniform(reference.props)}
                            config={config} $inited={values}
-                           $jsx={renders}
+                           $renders={renders}
                            reference={reference}/>
             )
         }

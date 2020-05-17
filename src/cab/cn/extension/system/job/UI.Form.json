@@ -79,8 +79,8 @@
             [
                 {
                     "complex": true,
-                    "name": "FormSegment",
-                    "key": "serviceSegment",
+                    "name": "FormContainer",
+                    "key": "serviceForm",
                     "config": {
                         "source": "FORM",
                         "component": "ExService"

@@ -12,7 +12,7 @@ import yiControl from './yi.control';
 import yiCompany from './yi.company';
 
 import yiColumn from './yi.column';
-import yiFormSegment from './yi.complex'
+import yiFormSegment from './yi.form.segment'
 
 export default {
     yiFormSegment,

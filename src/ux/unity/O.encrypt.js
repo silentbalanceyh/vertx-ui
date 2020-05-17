@@ -55,7 +55,7 @@ const encryptBase64 = (value) => {
  * @return {String} 解码过后的明文。
  */
 const decryptBase64 = (value) => {
-    return CryptoJS.enc.Base64.parse(value).toString();
+    return CryptoJS.enc.Base64.parse(value).toString(CryptoJS.enc.Utf8);
 };
 /**
  * ## 标准函数
@@ -79,17 +79,7 @@ const encryptHmac512 = (value, secret) => {
     }
     return retVal;
 };
-const encryptAES = (value, secret) => {
-    return CryptoJS.AES.encrypt(
-        CryptoJS.enc.Utf8.parse(value),
-        CryptoJS.enc.Utf8.parse(secret), {
-            mode: CryptoJS.mode.ECB,
-            padding: CryptoJS.pad.Pkcs7
-        }).toString();
-};
 export default {
-    // AES加密
-    encryptAES,
     // MD5加密
     encryptMD5,
     // Base64加密

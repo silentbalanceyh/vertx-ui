@@ -24,7 +24,7 @@ import Abs from '../abyss';
 const ajaxRead = (method = "get", secure = false) => (uri, params = {}, options) => {
     const $params = Abs.clone(params);
     const api = Aid.ajaxUri(uri, method, params);
-    const headers = Aid.ajaxHeaderJ(secure, options);
+    const headers = Aid.ajaxHeaderJ(secure);
     const request = new Request(api, Aid.ajaxOptions(method, headers, options));
     return Resp.ajaxResponse(request, $params);
 };
@@ -50,10 +50,10 @@ const ajaxRead = (method = "get", secure = false) => (uri, params = {}, options)
 const ajaxFull = (method = "post", secure = false) => (uri, params = {}, options = {}) => {
     const $params = Abs.clone(params);
     const api = Aid.ajaxUri(uri, method, params);
-    const headers = Aid.ajaxHeaderJ(secure, options);
+    const headers = Aid.ajaxHeaderJ(secure);
     const request = new Request(api, {
         ...Aid.ajaxOptions(method, headers, options),
-        body: Aid.ajaxParams(params, options)
+        body: Aid.ajaxParams(params)
     });
     return Resp.ajaxResponse(request, $params);
 };
@@ -75,10 +75,10 @@ const ajaxFull = (method = "post", secure = false) => (uri, params = {}, options
 const ajaxWrite = (method = "post", secure = false) => (uri, params = {}, options = {}) => {
     const $params = Abs.clone(params);
     const api = `${Cv['ENDPOINT']}${uri}`;
-    const headers = Aid.ajaxHeaderJ(secure, options);
+    const headers = Aid.ajaxHeaderJ(secure);
     const request = new Request(api, {
         ...Aid.ajaxOptions(method, headers, options),
-        body: Aid.ajaxParams(params, options)
+        body: Aid.ajaxParams(params)
     });
     return Resp.ajaxResponse(request, $params);
 };

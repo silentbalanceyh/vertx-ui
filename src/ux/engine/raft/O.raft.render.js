@@ -74,15 +74,15 @@ const raftRender = (cell = {}, config = {}) => {
     /*
      * 外置 renders 计算
      * 1）addOn 中为编程使用的 renders，优先考虑
-     * 2）其次以配置驱动的 props 中的 $jsx 优先（Zero Extension在使用）
+     * 2）其次以配置驱动的 props 中的 $renders 优先（Zero Extension在使用）
      */
     const renders = {};
     if (addOn.renders) {
         Object.assign(renders, addOn.renders);
     } else {
-        const {$jsx} = reference.props;
-        if ($jsx) {
-            Object.assign(renders, $jsx);
+        const {$renders} = reference.props;
+        if ($renders) {
+            Object.assign(renders, $renders);
         }
     }
     /*
@@ -92,7 +92,7 @@ const raftRender = (cell = {}, config = {}) => {
      * cell
      * 1）这里的 renders 来源两个方向
      * -- 编程的时候传入的第三参数 program
-     * -- $jsx 变量，直接从属性之外传入
+     * -- $renders 变量，直接从属性之外传入
      * *：它拥有最高优先级
      */
     let fnRender = renders[cell.field];

@@ -1,7 +1,7 @@
 import FieldContainer from './FieldContainer/UI';
-import FormSegment from './FormSegment/UI';
+import FormContainer from './FormContainer/UI';
 
 export default {
     FieldContainer,
-    FormSegment,
+    FormContainer,
 }

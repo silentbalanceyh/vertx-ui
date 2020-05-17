@@ -1,6 +1,6 @@
 import Ux from "ux";
 
-export default (ref, config = {}, direct = true) => {
+export default (ref, config = {}, inherit = true) => {
     /*
     * segment
     * 1) direct = false
@@ -10,9 +10,17 @@ export default (ref, config = {}, direct = true) => {
     * */
     const form = Ux.fromHoc(ref, "form");
     let reference;
-    if (direct) {
+    if (inherit) {
+        /*
+         * Form 直接从父类继承，绑定到 Ant-Form 中的 form 变量里
+         * 这种情况下会包含 onChange 的 native 方法
+         */
         reference = Ux.onReference(ref, 1);
     } else {
+        /*
+         * Form 不继承父类信息，位于自定义控件内部，不绑定到 Ant-Form 中的 form 变量
+         * 这种情况下会执行外部的 onChange（自定义组件内部专用）
+         */
         reference = ref;
     }
     const raft = Ux.configForm(form, {

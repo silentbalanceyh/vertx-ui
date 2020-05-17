@@ -53,7 +53,7 @@ class Component extends React.PureComponent {
         return (
             <ExForm {...form} $height={"300px"}
                     $mode={$mode}
-                    $jsx={Jsx}
+                    $renders={Jsx}
                     $op={Op.actions}/>
         );
     }

@@ -19,7 +19,7 @@ const yiPage = (reference) => {
         const keys = Object.keys(pages);
         const promises = keys.map(activeKey => pages[activeKey])
             .map(form => Ux.capForm(ref, {form}));
-        const {$jsx = {}} = reference.props;
+        const {$renders = {}} = reference.props;
         Ux.parallel.apply(null, [promises].concat(keys)).then(response => {
             Object.freeze(response);
             /*
@@ -28,7 +28,7 @@ const yiPage = (reference) => {
             Ux.itObject(response, (activeKey, raftConfig = {}) => {
                 const {form, addOn = {}} = raftConfig;
                 raft[activeKey] = Ux.configForm(form, {
-                    ...addOn, renders: $jsx,
+                    ...addOn, renders: $renders,
                 });
             });
             /*
