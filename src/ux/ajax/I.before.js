@@ -164,12 +164,15 @@ const ajaxXSRF = (headers = {}) => {
  *
  * @memberOf module:__private
  * @param {boolean} secure 是否执行安全请求处理，安全请求会带上 Authorization
+ * @param {Object} options 是否传入了其他请求头相关信息
  * @return {Headers} 返回 fetch 库中的 Headers 类型数据
  */
-const ajaxHeaderJ = (secure = false) => {
+const ajaxHeaderJ = (secure = false, options = {}) => {
     const headers = new Headers();
     headers.append(Cv.HTTP11.ACCEPT, Cv.MIMES.JSON);
-    headers.append(Cv.HTTP11.CONTENT_TYPE, Cv.MIMES.JSON);
+    if (!options.hasOwnProperty(Cv.HTTP11.CONTENT_TYPE)) {
+        headers.append(Cv.HTTP11.CONTENT_TYPE, Cv.MIMES.JSON);
+    }
     // 处理Authorization
     ajaxHeader(headers, secure);
     return headers;
@@ -241,33 +244,50 @@ const ajaxHeader = (headers = {}, secure = false) => {
  *
  * @memberOf module:__private
  * @param {Object} params 参数相关信息
+ * @param {Object} options 参数配置（主要是查看 application/x-www-form-urlencoded）
  * @return {String} 核心数据内容，以字符串的方式存储
  */
-const ajaxParams = (params = {}) => {
-    const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
-    const itLang = (data) => Abs.itObject(data, (field, value) => {
-        if (U.isArray(value)) {
-            data[field].filter(U.isObject).forEach(item => itLang(item));
-        } else {
-            if (U.isObject(data) && !U.isArray(data)) {
-                data.language = language;
-            }
-        }
-    });
-    let requestBody;
-    if (params.hasOwnProperty("$body")) {
-        if (!U.isArray(params.$body)) {
-            itLang(params.$body);
-        }
-        requestBody = JSON.stringify(params.$body);
-    } else {
-        // 拷贝 language = cn 的问题
-        if (!params.hasOwnProperty('criteria')) {
-            itLang(params);
-        }
-        requestBody = JSON.stringify(params);
+const ajaxParams = (params = {}, options = {}) => {
+    let isForm = false;
+    if (options.hasOwnProperty(Cv.HTTP11.CONTENT_TYPE)) {
+        isForm = Cv.MIMES.FORM === options[Cv.HTTP11.CONTENT_TYPE];
     }
-    return requestBody;
+    if (isForm) {
+        const formData = new FormData();
+        Object.keys(params).forEach(key => {
+            if (Abs.isObject(params[key]) || Abs.isArray(params[key])) {
+                formData.append(key, JSON.stringify(params[key]));
+            } else {
+                formData.append(key, params[key]);
+            }
+        });
+        return formData;
+    } else {
+        const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
+        const itLang = (data) => Abs.itObject(data, (field, value) => {
+            if (U.isArray(value)) {
+                data[field].filter(U.isObject).forEach(item => itLang(item));
+            } else {
+                if (U.isObject(data) && !U.isArray(data)) {
+                    data.language = language;
+                }
+            }
+        });
+        let requestBody;
+        if (params.hasOwnProperty("$body")) {
+            if (!U.isArray(params.$body)) {
+                itLang(params.$body);
+            }
+            requestBody = JSON.stringify(params.$body);
+        } else {
+            // 拷贝 language = cn 的问题
+            if (!params.hasOwnProperty('criteria')) {
+                itLang(params);
+            }
+            requestBody = JSON.stringify(params);
+        }
+        return requestBody;
+    }
 };
 /**
  * ## 私有函数「Zero」
