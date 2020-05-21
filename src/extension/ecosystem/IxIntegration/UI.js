@@ -2,8 +2,6 @@ import React from 'react';
 import {component} from "web";
 import Ux from "ux";
 import Ex from "ex";
-import IxOption from "../IxOption/UI";
-import PageForm from './Web.Form';
 
 /*
  * 自定义组件，编辑数据库Json
@@ -19,11 +17,16 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Ex.yiFormSegment(this);
+        Ex.yiPartForm(this, {}, false)
+            .then(Ux.ready).then(Ux.pipe(this));
     }
 
     render() {
-        return Ex.xuiComplex(this, "IxIntegration")(PageForm, IxOption);
+        return Ex.yoRender(this, () => {
+            const {$form} = this.state;
+            const $inited = this.props.value;
+            return Ux.aiFormInput(this, $inited, $form);
+        }, Ex.parserOfColor("IxIntegration").form({off: true}))
     }
 }
 

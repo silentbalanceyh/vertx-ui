@@ -1,7 +1,11 @@
-import onSelect from './O.fn.select';
-import jsxDriver from './O.fn.driver';
+import category from './O.fn.category';
+import driverClassName from './Jsx.driver.class.name';
 
 export default {
-    onSelect,
-    jsxDriver,
+    onChange: (reference) => ({
+        category: category(reference)
+    }),
+    renders: {
+        driverClassName
+    }
 }

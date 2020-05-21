@@ -1,4 +1,6 @@
 import Ex from 'ex';
+import Form from "../form/UI.Form";
+import React from "react";
 
 export default (reference) => {
     const {$identifier} = reference.props;
@@ -7,6 +9,13 @@ export default (reference) => {
         Ex.I.forms($identifier).then(forms => {
             state.$data = forms;
             state.$ready = true;
+            /*
+             * 窗口配置
+             */
+            Ex.uiDialog(reference).child(() => {
+                const {$inited = {}} = reference.state;
+                return (<Form {...Ex.yoAmbient(reference)} $inited={$inited}/>)
+            }).onMount(state);
             reference.setState(state);
         })
     } else {

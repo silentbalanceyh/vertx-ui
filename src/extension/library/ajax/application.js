@@ -16,7 +16,7 @@ const _application = () => {
         }
     } else {
         /* 拒绝调用，应用程序未初始化 */
-        return Fn.error001();
+        return Fn.E.error001();
     }
 };
 
@@ -26,7 +26,7 @@ const _menus = () => {
         return Ux.ajaxGet("/api/menus");
     } else {
         /* 拒绝调用，应用程序未初始化 */
-        return Fn.error001();
+        return Fn.E.error001();
     }
 };
 

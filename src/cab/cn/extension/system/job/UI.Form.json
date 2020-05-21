@@ -66,12 +66,12 @@
                 "proxy,任务执行组件,16,,,addonBefore=Java,readOnly=true"
             ],
             [
-                "incomeAddress,前置地址",
-                "incomeComponent,前置组件,16,,,addonBefore=Java"
+                "incomeAddress,前置地址,12",
+                "incomeComponent,前置组件,12,,,addonBefore=Java"
             ],
             [
-                "outcomeAddress,后置地址",
-                "outcomeComponent,后置组件,16,,,addonBefore=Java"
+                "outcomeAddress,后置地址,12",
+                "outcomeComponent,后置组件,12,,,addonBefore=Java"
             ],
             [
                 "title=业务层配置（*：请在专业人员指导下进行配置）"

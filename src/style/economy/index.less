@@ -45,20 +45,22 @@
         .web-form-fit;
         background: @component-background;
 
-        .has-error .ant-form-explain {
-            position: absolute;
-            background-color: @color-error;
-            color: white;
-            border-radius: 3px;
-            border: 1px solid @color-error;
-            padding: 2px 5px;
-            z-index: 100;
-            /** From Animate.css **/
-            animation-duration: 1s;
-            animation-fill-mode: both;
-            animation-name: bounceIn;
-            top: -27px;
-            display: none;
+        .has-error {
+            .ant-form-explain {
+                position: absolute;
+                background-color: @color-error;
+                color: white;
+                border-radius: 3px;
+                border: 1px solid @color-error;
+                padding: 2px 5px;
+                z-index: 100;
+                /** From Animate.css **/
+                animation-duration: 1s;
+                animation-fill-mode: both;
+                animation-name: bounceIn;
+                top: -27px;
+                display: none;
+            }
         }
     }
 

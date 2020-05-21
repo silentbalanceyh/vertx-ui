@@ -4,7 +4,7 @@ import IxService from '../IxService/UI';
 import IxChannel from '../IxChannel/UI';
 import IxDict from '../IxDict/UI';
 import IxMapping from '../IxMapping/UI';
-
+import IxRule from '../IxRule/UI';
 import React from "react";
 
 export default {
@@ -25,5 +25,10 @@ export default {
     },
     mappingConfig: (reference, jsx) => {
         return (<IxMapping reference={reference} {...jsx}/>)
+    },
+    ruleUnique: (reference, jsx) => {
+        const {$inited = {}} = reference.props;
+        return (<IxRule reference={reference} {...jsx}
+                        $source={$inited.identifier}/>)
     }
 }

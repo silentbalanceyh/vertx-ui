@@ -6,6 +6,7 @@ import Action from '../action';
 import Value from "../../element";
 import parser from '../parser';
 import Ut from '../../unity';
+import Unit from '../web-unit';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -143,9 +144,6 @@ const raftRender = (cell = {}, config = {}) => {
     const render = fnRender ? fnRender : () => {
         console.error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
     };
-    // Ant-Design 表单化处理
-    const {form} = reference.props;
-    const {getFieldDecorator} = form;
     /*
      * 是 Action 就不需要 getFieldDecorator 修饰
      */
@@ -204,9 +202,26 @@ const raftRender = (cell = {}, config = {}) => {
              * 插件专用处理
              */
             Ut.writeSegment(reference, optionJsx, cell.field);
-            return getFieldDecorator(cell.field, optionConfig)(
-                render(reference, optionJsx)
-            );
+            const {form} = reference.props;
+            if (form) {
+                /*
+                 * Ant-Design 表单化处理
+                 */
+                const {getFieldDecorator} = form;
+                return getFieldDecorator(cell.field, optionConfig)(
+                    render(reference, optionJsx)
+                );
+            } else {
+                if (reference.props.hasOwnProperty('data-__field')) {
+                    /* 自定义组件专用 */
+                    return Unit.aiOn(render).onChange(reference, {
+                        ...cell,
+                        optionJsx
+                    })
+                } else {
+                    return render(reference, optionJsx, optionJsx.onChange);
+                }
+            }
         }
     }
 };

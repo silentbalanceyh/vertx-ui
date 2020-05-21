@@ -1,4 +1,5 @@
 import Is from './O.is';
+import Cv from '../constant';
 
 const generator = (reference, names = []) => {
     const object = {};
@@ -15,7 +16,9 @@ const generator = (reference, names = []) => {
                 if (Is.isFunction(executor)) {
                     return executor.apply(null, arguments);
                 } else {
-                    console.error(`${name} function 不存在！`);
+                    if (Cv.DEBUG) {
+                        console.warn(`${name} function 不存在！`);
+                    }
                 }
             }
         }

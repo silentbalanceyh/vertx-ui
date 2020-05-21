@@ -1,16 +1,12 @@
-import Foundation from './O.common';
-import Event from './O.event';
+import Common from './O.common';
 import Rx from './O.render';
-import Init from './O.init';
-import xtForm from './O.fn.form';
 import Lazy from './O.lazy';
+import Table from './O.table';
 
 export default {
-    ...Foundation,
-    ...Event,
+    ...Table,
+    ...Common,
     ...Rx,
-    ...Init,
     // 新版本重置
-    xtForm,
     ...Lazy,
 };

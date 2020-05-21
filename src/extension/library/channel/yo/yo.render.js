@@ -11,7 +11,9 @@ const _outReady = (form, message, debug = {}) => {
             Ux.dgDebug(message, `[ ${name} ] Form Ready `, color);
         }
     } else {
-        Ux.dgDebug(message, `[ ${name} ] Ready `, color);
+        if (!debug.off) {
+            Ux.dgDebug(message, `[ ${name} ] Ready `, color);
+        }
     }
 };
 

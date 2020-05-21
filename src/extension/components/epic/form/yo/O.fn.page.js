@@ -1,6 +1,8 @@
 import Ex from "ex";
 import Ux from "ux";
 
+import tabForm from '../Web.Fn.Page.Main';
+
 export default (reference) => {
     Ex.yiStandard(reference)
         .then(state => {
@@ -10,5 +12,10 @@ export default (reference) => {
             state.$selected = undefined;
             return Ux.promise(state);
         })
+        .then(state => Ux.promise(Ex.uiTab(reference)
+            .children({
+                tabForm: tabForm(reference)
+            }).onMount(state))
+        )
         .then(Ux.pipe(reference));
 }

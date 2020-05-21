@@ -47,7 +47,7 @@ const connectValidator = (cell = {}) => {
         "aiTreeSelect",
         "aiDialogEditor"
     ]);
-    const optionConfig = Abs.clone(cell.optionConfig);
+    const optionConfig = Abs.clone(cell.optionConfig ? cell.optionConfig : {});
     const {optionJsx = {}} = cell;
     /*
      * 是否禁用

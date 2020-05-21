@@ -63,6 +63,11 @@ const yiPage = (reference) => {
             /*
              * readOnly 删除 tabBarExtraContent
              */
+            if ($tabs.className) {
+                $tabs.className = `ux-field-container ${$tabs.className}`;
+            } else {
+                $tabs.className = `ux-field-container`;
+            }
             state.$tabs = $tabs;
             reference.setState(state);
         });

@@ -17,19 +17,19 @@
                     "key": "serviceContainer",
                     "config": {
                         "activeKey": "tabIntegration",
-                        "items": "集成配置,tabIntegration;数据库配置,tabDatabase;组件属性,tabBusiness;通道配置,tabChannel;字典配置,tabDict;映射配置,tabMapping",
+                        "items": "集成配置,tabIntegration;数据库配置,tabDatabase;业务配置,tabBusiness;标识规则,tabRule;字典配置,tabDict;映射配置,tabMapping;通道配置,tabChannel;",
                         "pages": {
                             "tabDatabase": {
                                 "ui": [
                                     [
-                                        "configDatabase,数据库配置,24"
+                                        "configDatabase,,24"
                                     ]
                                 ]
                             },
                             "tabIntegration": {
                                 "ui": [
                                     [
-                                        "configIntegration,集成配置,24"
+                                        "configIntegration,,24"
                                     ]
                                 ]
                             },
@@ -74,6 +74,13 @@
                                     ],
                                     [
                                         "dictConfig,字典配置,24"
+                                    ]
+                                ]
+                            },
+                            "tabRule": {
+                                "ui": [
+                                    [
+                                        "ruleUnique,,24"
                                     ]
                                 ]
                             },

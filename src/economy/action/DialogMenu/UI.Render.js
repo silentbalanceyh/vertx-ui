@@ -2,7 +2,7 @@ import React from 'react';
 import {Drawer, Icon} from 'antd';
 import DynamicDialog from '../../container/Dialog/UI';
 import Ux from "ux";
-import Fn from "../../_internal/Ix.Fn";
+import Fn from "../../_internal/ix.fn";
 
 const _calcInit = (inited = {}) => {
     const values = {};

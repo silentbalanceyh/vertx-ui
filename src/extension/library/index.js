@@ -9,8 +9,11 @@ import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
 import Jsx from './jsx';
+/* 新的扩展包，直接和资源*/
+import Web from './web';
 
 const exported = {
+    ...Web,
     Jsx,
     ...Sex,
     ...Evt,

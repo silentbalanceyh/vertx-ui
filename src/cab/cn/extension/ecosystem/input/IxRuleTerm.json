@@ -1,0 +1,40 @@
+{
+    "_pending": {
+        "name": "规则",
+        "source": {
+            "title": "待选择属性表",
+            "selected": "正在操作：",
+            "rule": "规则"
+        },
+        "target": {
+            "title": "已定义规则",
+            "sort": {
+                "true": "（有顺序）",
+                "false": "（无顺序）"
+            },
+            "column": {
+                "dataIndex": "sorter",
+                "title": "优先级",
+                "width": 72
+            },
+            "table": {
+                "columns": [
+                    {
+                        "dataIndex": "key",
+                        "title": "操作",
+                        "width": 80
+                    },
+                    {
+                        "dataIndex": "ruleName",
+                        "title": "规则名",
+                        "width": 80
+                    },
+                    {
+                        "dataIndex": "rules",
+                        "title": "字段集合"
+                    }
+                ]
+            }
+        }
+    }
+}

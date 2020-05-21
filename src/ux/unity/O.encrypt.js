@@ -79,7 +79,16 @@ const encryptHmac512 = (value, secret) => {
     }
     return retVal;
 };
+const encryptAES = (value, secret) => {
+    return CryptoJS.AES.encrypt(
+        CryptoJS.enc.Utf8.parse(value),
+        CryptoJS.enc.Utf8.parse(secret), {
+            mode: CryptoJS.mode.ECB,
+            padding: CryptoJS.pad.Pkcs7
+        }).toString();
+};
 export default {
+    encryptAES,
     // MD5加密
     encryptMD5,
     // Base64加密

@@ -9,10 +9,10 @@ import renders from './UI.renders';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Ex.yiFormSegment(this, {
+        Ex.yiPartForm(this, {
             id: "formService",
             renders,
-        })
+        }).then(Ux.ready).then(Ux.pipe(this))
     }
 
     render() {

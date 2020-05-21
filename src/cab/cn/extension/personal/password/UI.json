@@ -19,7 +19,7 @@
             ],
             [
                 {
-                    "metadata": "opassword,旧密码,14,,,type=password",
+                    "metadata": "opassword,旧密码,14,,aiPassword",
                     "optionConfig.rules": [
                         "required,请输入旧密码",
                         {
@@ -31,7 +31,7 @@
             ],
             [
                 {
-                    "metadata": "npassword,新密码,14,,,type=password",
+                    "metadata": "npassword,新密码,14,,aiPassword",
                     "optionConfig.rules": [
                         "required,请输入新密码",
                         {

@@ -3,7 +3,7 @@ import './Cab.less';
 import {Dialog} from "web";
 import {Button, Drawer, Popover} from 'antd';
 import Ux from 'ux';
-import Fn from "../../_internal/Ix.Fn";
+import Fn from "../../_internal/ix.fn";
 
 const getChildren = (reference) => {
     const {children, $content: Component} = reference.props;

@@ -1,5 +1,6 @@
 import Input from './O.input';
 import InputNumber from './O.input.number';
+import InputPassword from './O.input.password';
 import Action from './O.action';
 import Hidden from './O.hidden';
 import Magic from './O.magic';
@@ -30,6 +31,9 @@ import SearchRangeDate from './O.search.range.date';
 
 const exported = {
     ...Input,
+    ...InputPassword,
+    ...InputNumber,
+
     ...Action,
     ...Hidden,
     ...Magic,
@@ -39,7 +43,6 @@ const exported = {
     ...TimePicker,
     ...Checkbox,
     ...TreeSelect,
-    ...InputNumber,
     ...Radio,
     ...Transfer,
 

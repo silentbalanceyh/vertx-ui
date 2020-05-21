@@ -12,10 +12,13 @@ import yiControl from './yi.control';
 import yiCompany from './yi.company';
 
 import yiColumn from './yi.column';
-import yiFormSegment from './yi.form.segment'
+/*
+ * 子类专用
+ */
+import yiPartForm from './yi.part.form'
 
 export default {
-    yiFormSegment,
+    yiPartForm,
     yiColumn,
     yiStandard,
     yiModule,

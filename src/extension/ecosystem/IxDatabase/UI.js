@@ -2,6 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import {component} from 'web';
 import Ex from 'ex';
+import Op from './op';
 
 /*
  * 自定义组件，编辑数据库Json
@@ -17,7 +18,10 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Ex.yiFormSegment(this, {}, false);
+        Ex.yiPartForm(this, {
+            onChange: Op.onChange(this),
+            renders: Op.renders
+        }, false).then(Ux.ready).then(Ux.pipe(this))
     }
 
     render() {
@@ -25,7 +29,7 @@ class Component extends React.PureComponent {
             const {$form} = this.state;
             const $inited = this.props.value;
             return Ux.aiFormInput(this, $inited, $form);
-        }, Ex.parserOfColor("IxDatabase").form())
+        }, Ex.parserOfColor("IxDatabase").form({off: true}))
     }
 }
 

@@ -1,10 +1,9 @@
 {
-    "_page": {
-        "title": "表单管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
+    "_tabs": {
+        "defaultActiveKey": "tabForm",
+        "items": "表单管理,tabForm",
+        "dynamic": {
+            "tabDesign": "表单设计器"
         }
     },
     "_alert": {

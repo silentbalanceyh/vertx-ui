@@ -2,6 +2,7 @@ import React from "react";
 import Dev from '../develop';
 import U from "underscore";
 import Abs from "../abyss";
+import {Progress} from 'antd';
 
 const jsxError = (message) => (
     <div className={"ux-error"}>
@@ -66,7 +67,12 @@ const xtReady = (reference, render, LOG = {}) => {
         }
         return xtRender(reference, render);
     } else {
-        return false;
+        return (<Progress percent={62.8}
+                          size={"small"}
+                          status={"active"}
+                          style={{
+                              width: "60%"
+                          }}/>);
     }
 };
 
@@ -103,13 +109,15 @@ const xtReset = (reference, virtualRef = {}, callback) => {
      */
     const current = reference.props.value;
     const original = virtualRef.props.value;
-    const metadata = reference.props['data-__meta'];
     /*
-     * 初始值
+     * 这是标准自定义控件中会存在的内容
      */
-    const initial = metadata.initialValue;
-    if (isDiff(current, original) && !isDiff(current, initial)) {
-        callback(initial);
+    if (reference.props.hasOwnProperty("data-__meta")) {
+        const metadata = reference.props['data-__meta'];
+        const initial = metadata.initialValue;
+        if (isDiff(current, original) && !isDiff(current, initial)) {
+            callback(initial);
+        }
     }
 };
 export default {

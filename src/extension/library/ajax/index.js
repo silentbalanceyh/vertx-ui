@@ -7,6 +7,7 @@ import _ui from './ui';
 import _todo from './todo';
 import _job from './job';
 import _relation from './relation';
+import _model from './model';
 
 /**
  * ## 接口专用类
@@ -26,6 +27,22 @@ import _relation from './relation';
  * @class I
  */
 class I {
+    /**
+     * ## 接口函数
+     *
+     * 读取单个模型的属性信息
+     *
+     * * 接口：`/api/model/identifier/:identifier`（GET）
+     * * 安全：是
+     *
+     * @async
+     * @param {String} identifier 模型标识符
+     * @returns {Promise<T>} 返回Promise。
+     */
+    static attributes(identifier) {
+        return _model.attributes(identifier);
+    }
+
     /**
      * ## 接口函数
      *
