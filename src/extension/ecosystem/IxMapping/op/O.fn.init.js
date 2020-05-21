@@ -16,6 +16,11 @@ export default (reference) => {
             .then(state => {
                 state.$alert = Ux.fromHoc(reference, "alert");
                 return Ux.promise(state)
+            })
+            .then(state => {
+                /* 配置 button */
+                state.$ready = true;
+                reference.setState(state);
             });
     } else {
         const state = {};

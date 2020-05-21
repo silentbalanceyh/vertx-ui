@@ -11,7 +11,7 @@ import Transfer from './O.transfer';
 import DatePicker from './O.picker.date';
 import TimePicker from './O.picker.time';
 
-import Checkbox from './O.checkbox';
+import Checkbox from './O.check.box';
 import TreeSelect from './O.tree.select';
 import Radio from './O.radio';
 import Button from './O.button';
@@ -25,6 +25,7 @@ import TableEditor from './O.editor.table';
 import RichEditor from './O.editor.rich';
 import DialogEditor from './O.editor.dialog';
 import JsonEditor from './O.editor.json';
+import CheckJson from './O.check.json';
 // 搜索
 import SearchInput from './O.search.input';
 import SearchRangeDate from './O.search.range.date';
@@ -34,6 +35,9 @@ const exported = {
     ...InputPassword,
     ...InputNumber,
 
+    ...Checkbox,
+    ...CheckJson,
+
     ...Action,
     ...Hidden,
     ...Magic,
@@ -41,7 +45,6 @@ const exported = {
     ...TextArea,
     ...DatePicker,
     ...TimePicker,
-    ...Checkbox,
     ...TreeSelect,
     ...Radio,
     ...Transfer,

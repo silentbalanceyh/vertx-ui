@@ -1,9 +1,33 @@
 {
     "_form": {
-        "window": 1.1,
-        "columns": 2,
+        "window": 0.15,
+        "columns": 1,
         "ui": [
             [
+                "title=基本信息"
+            ],
+            [
+                "identifier,模型标识符,,,,readOnly=true"
+            ],
+            [
+                "modelName,模型名,,,,readOnly=true"
+            ],
+            [
+                "code,表单编码"
+            ],
+            [
+                "name,表单名称"
+            ],
+            [
+                {
+                    "metadata": "metadata,基本配置,24,,aiCheckJson",
+                    "optionJsx.config.items": [
+                        "edition,可编辑",
+                        "deletion,可删除",
+                        "relation,可关联",
+                        "visible,可见"
+                    ]
+                }
             ]
         ]
     }

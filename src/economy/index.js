@@ -27,7 +27,8 @@ export {default as ListSelector} from './input/ListSelector/UI';        // 列�
 export {default as TreeSelector} from './input/TreeSelector/UI';        // 树选择器
 export {default as AddressSelector} from './input/AddressSelector/UI';  // 地址选择器
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
-export {default as JsonEditor} from './input/JsonEditor/UI';
+export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
+export {default as CheckJson} from './input/CheckJson/UI';              // CheckBox多项属性Json格式
 // 复杂搜索组件
 export {default as SearchInput} from './input/SearchInput/UI';
 export {default as SearchRangeDate} from './input/SearchRangeDate/UI';

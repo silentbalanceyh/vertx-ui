@@ -61,7 +61,7 @@
                 "comments,备注,24,,aiTextArea,rows=3"
             ],
             [
-                "title=实体信息"
+                "title=详细信息"
             ],
             [
                 {
@@ -69,10 +69,13 @@
                     "name": "FieldContainer",
                     "config": {
                         "activeKey": "tabRelation",
-                        "items": "实体设置,tabRelation",
+                        "items": "实体设置,tabRelation;属性设置,tabAttribute",
                         "tabBarExtraContent": {
                             "tabRelation": [
                                 "$opAddRelation,添加实体,$opShowRelation,primary,plus"
+                            ],
+                            "tabAttribute": [
+                                "$opAddAttribute,添加属性,$opShowAttribute,primary,plus"
                             ]
                         },
                         "pages": {
@@ -123,28 +126,7 @@
                                         }
                                     ]
                                 ]
-                            }
-                        },
-                        "span": 24
-                    }
-                }
-            ],
-            [
-                "title=属性信息"
-            ],
-            [
-                {
-                    "complex": true,
-                    "name": "FieldContainer",
-                    "config": {
-                        "activeKey": "tabAttribute",
-                        "items": "属性设置,tabAttribute",
-                        "tabBarExtraContent": {
-                            "tabAttribute": [
-                                "$opAddAttribute,添加属性,$opShowAttribute,primary,plus"
-                            ]
-                        },
-                        "pages": {
+                            },
                             "tabAttribute": {
                                 "ui": [
                                     [
