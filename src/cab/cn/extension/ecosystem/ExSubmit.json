@@ -5,6 +5,7 @@
             [
                 {
                     "field": "username",
+                    "optionItem.hasFeedback": true,
                     "optionConfig": {
                         "rules": [
                             {
@@ -13,8 +14,8 @@
                             },
                             {
                                 "min": 4,
-                                "max": 16,
-                                "message": "用户名长度必须在4 ~ 16字符之间"
+                                "max": 32,
+                                "message": "用户名长度必须在4 ~ 32字符之间"
                             }
                         ]
                     },
@@ -24,15 +25,13 @@
                         "prefix": {
                             "type": "user"
                         }
-                    },
-                    "optionItem": {
-                        "hasFeedback": true
                     }
                 }
             ],
             [
                 {
                     "field": "password",
+                    "optionItem.hasFeedback": true,
                     "optionConfig": {
                         "rules": [
                             {
@@ -53,9 +52,6 @@
                             "theme": "filled"
                         },
                         "type": "password"
-                    },
-                    "optionItem": {
-                        "hasFeedback": true
                     }
                 }
             ],
