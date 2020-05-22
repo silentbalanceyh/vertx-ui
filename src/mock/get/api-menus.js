@@ -11,7 +11,7 @@ export default {
         },
         {
             "key": "mock_control_checkjson",
-            "text": "CheckJson",
+            "text": "元数据编辑器",
             "uri": "/economy/check-json",
             "parentId": "mock_control"
         }
