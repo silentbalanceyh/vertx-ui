@@ -1,6 +1,5 @@
 import Ux from "ux";
 import moment from "moment";
-import U from "underscore";
 import To from './func.to';
 import mapButtons from './func.map.buttons';
 
@@ -30,7 +29,7 @@ const mapMeta = (data = {}) => {
  * @returns {Object} 处理过后的对象数据
  */
 const mapUri = (item = {}, $app) => {
-    if ($app && U.isFunction($app.is) && item.uri) {
+    if (item.uri) {
         if ("EXPAND" !== item.uri) {
             item.uri = To.toUri(item.uri, $app);
         } else {

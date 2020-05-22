@@ -163,8 +163,9 @@ const toLimit = (props = {}, limits = []) => {
  *
  * @memberOf module:_to
  * @param {ReactComponent} reference React组件引用。
+ * @param {String} switched 传入内容替换掉 Cv.ENTRY_ADMIN
  */
-const toOriginal = (reference = {}) => {
+const toOriginal = (reference = {}, switched) => {
     const original = toQuery("target");
     if (original) {
         const {$router} = reference.props;
@@ -185,7 +186,8 @@ const toOriginal = (reference = {}) => {
         }
         toRoute(reference, calculated);
     } else {
-        toRoute(reference, Cv.ENTRY_ADMIN);
+        const uri = switched ? switched : Cv.ENTRY_ADMIN;
+        toRoute(reference, uri);
     }
 };
 /**
@@ -216,12 +218,13 @@ const isAuthorized = (reference) => {
  * @param {Function} consumer 执行函数
  * @param {Number} seed 加载的时间单位
  */
-const toLoading = (consumer, seed = 1) => {
+const toLoading = (consumer, seed) => {
     /*
      * 改成 10 ms 毫秒级
      */
     const ms = Value.valueInt(Cv['LOADING'], 10);
-    setTimeout(consumer, ms * seed);
+    const loadingMs = seed ? seed : ms;
+    setTimeout(consumer, ms * loadingMs);
 };
 export default {
     // 是否登录

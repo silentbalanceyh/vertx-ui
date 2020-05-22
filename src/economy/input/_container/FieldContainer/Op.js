@@ -19,6 +19,7 @@ const yiPage = (reference) => {
         const keys = Object.keys(pages);
         const promises = keys.map(activeKey => pages[activeKey])
             .map(form => Ux.capForm(ref, {form}));
+        const {$renders = {}} = reference.props;
         Ux.parallel.apply(null, [promises].concat(keys)).then(response => {
             Object.freeze(response);
             /*
@@ -26,7 +27,9 @@ const yiPage = (reference) => {
              */
             Ux.itObject(response, (activeKey, raftConfig = {}) => {
                 const {form, addOn = {}} = raftConfig;
-                raft[activeKey] = Ux.configForm(form, addOn);
+                raft[activeKey] = Ux.configForm(form, {
+                    ...addOn, renders: $renders,
+                });
             });
             /*
              * pages 解析完成过后处理 $tabs
@@ -60,6 +63,11 @@ const yiPage = (reference) => {
             /*
              * readOnly 删除 tabBarExtraContent
              */
+            if ($tabs.className) {
+                $tabs.className = `ux-field-container ${$tabs.className}`;
+            } else {
+                $tabs.className = `ux-field-container`;
+            }
             state.$tabs = $tabs;
             reference.setState(state);
         });

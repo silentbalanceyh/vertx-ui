@@ -39,6 +39,10 @@ const rxValue = (reference, value, config) => {
     }
 };
 
+/*
+ * 纯渲染，不带任何 state
+ * 也不会出现改变相关操作，纯逻辑
+ */
 class Component extends React.PureComponent {
 
     render() {

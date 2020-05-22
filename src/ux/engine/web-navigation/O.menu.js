@@ -73,9 +73,10 @@ const aiMenuContext = (items = [], rest = {}) => (
     </ContextMenu>
 );
 const _toBranchClass = (item) => {
-    let className = 0 < item.children.length ? `ux-submenu${item.level}` : `ux-menuitem${item.level}`;
+    const level = item.hasOwnProperty("level") ? item.level : (item._level);
+    let className = 0 < item.children.length ? `ux-submenu${level}` : `ux-menuitem${level}`;
     if (item.collapsed) {
-        className = `${className} ux-collapsed${item.level}`;
+        className = `${className} ux-collapsed${level}`;
     }
     return className;
 };
@@ -86,7 +87,7 @@ const aiSider = (items = [], rest = {}, addOn = {}) => {
     if (!rest.className) {
         rest.className = "";
     }
-    rest.className = `ux-menu`;
+    rest.className = `ux-menu ${rest.className}`;
     return (
         <Menu {...rest}>
             {items.map(item => {

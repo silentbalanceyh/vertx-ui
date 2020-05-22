@@ -12,5 +12,5 @@ import xuiDecorator from './xui.fn.decorator';
 export default {
     xuiGrid,
     xuiContainer,
-    xuiDecorator
+    xuiDecorator,
 }

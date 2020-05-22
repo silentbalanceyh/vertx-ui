@@ -2,7 +2,6 @@ import React from 'react';
 import Ex from 'ex';
 import Op from './Op';
 import Ux from 'ux';
-import U from 'underscore';
 import {Table} from 'antd';
 import './Cab.less';
 
@@ -23,13 +22,13 @@ class Component extends React.PureComponent {
                 return false;
             } else {
                 const {$table = {}} = this.state;
-                const {$loading = false, data = {}} = this.props;
-                const changes = U.isArray(data.items) ? data.items : [];
+                const {$loading = false} = this.props;
                 /*
                  * 默认不用 $loading
                  */
+                const dataSource = Op.yoAdjust(this);
                 return (
-                    <Table {...$table} dataSource={changes}
+                    <Table {...$table} dataSource={dataSource}
                            $loading={$loading}/>
                 )
             }

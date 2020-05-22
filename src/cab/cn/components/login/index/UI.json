@@ -3,65 +3,17 @@
         "title": "ZeroUI开发框架",
         "links": [
             {
-                "text": "后端",
+                "text": "后端框架",
                 "uri": "http://www.vertxup.cn"
             },
             {
-                "text": "前端",
+                "text": "前端框架",
                 "uri": "http://www.vertxui.cn"
             },
             {
-                "text": "工具",
+                "text": "工具箱",
                 "uri": "http://www.vertxai.cn"
             }
         ]
-    },
-    "_form": {
-        "ui": [
-            [
-                {
-                    "field": "username",
-                    "optionJsx": {
-                        "prefix": {
-                            "type": "user",
-                            "style": {
-                                "color": "white"
-                            }
-                        }
-                    }
-                }
-            ],
-            [
-                {
-                    "field": "password",
-                    "optionJsx": {
-                        "type": "password",
-                        "prefix": {
-                            "type": "lock",
-                            "style": {
-                                "color": "white"
-                            }
-                        }
-                    }
-                }
-            ],
-            [
-                {
-                    "metadata": "$button",
-                    "optionJsx.buttons": {
-                        "submit": "btnLogin,登录,$opLogin",
-                        "reset": "btnReset,重置,$opReset"
-                    }
-                }
-            ]
-        ]
-    },
-    "_modal": {
-        "success": {
-        },
-        "error": {
-            "user": "账号不存在！",
-            "password": "密码错误，请输入正确密码！"
-        }
     }
 }

@@ -9,14 +9,15 @@ import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
 import Jsx from './jsx';
-
-import Ux from 'ux';
+/* 新的扩展包，直接和资源*/
+import Web from './web';
 
 const exported = {
+    ...Web,
     Jsx,
     ...Sex,
     ...Evt,
-    /*
+    /*d
      * Redux 部分专用
      * 1) Types - `epicXxx`
      * 2) Epic - `epicXxx`
@@ -136,9 +137,4 @@ const exported = {
  * 如果您有什么疑问，请联系：[silentbalanceyh@126.com](mailto:silentbalanceyh@126.com)，整体框架相关链接参考左侧菜单。
  * @author 戒子猪
  */
-if (Ux.Env.DEBUG) {
-    console.groupCollapsed("%c 「 Ex 」 Zero Extension Framework ( Ex )", "font-weight:900;color:#228B22");
-    console.info("「 Ex 」 Zero Common Library ( zero-ui include )", Ux.sorterObject(exported));
-    console.groupEnd();
-}
 export default exported;

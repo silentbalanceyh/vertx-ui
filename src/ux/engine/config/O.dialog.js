@@ -8,7 +8,7 @@ import {DataObject} from 'entity';
  * 解决 redux 模式下的 BUG 问题
  */
 const isLoading = (reference) => {
-    let submitting = Ele.ambiguityValue(reference, "$submitting");
+    let submitting = Ele.ambValue(reference, "$submitting");
     if (submitting instanceof DataObject) {
         /*
          * redux 模式下的加载效果处理

@@ -1,12 +1,12 @@
 import React from 'react';
 import './Cab.less';
 import Op from './Op';
-import {_zero} from "../../_internal";
+import {component} from "../../_internal";
 import Rdr from './UI.Render';
 import {Input} from 'antd';
 import Ux from "ux";
 
-@_zero({
+@component({
     "i18n.cab": require('./Cab.json'),
     "i18n.name": "UI",
     state: {

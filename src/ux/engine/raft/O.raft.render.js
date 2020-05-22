@@ -6,6 +6,7 @@ import Action from '../action';
 import Value from "../../element";
 import parser from '../parser';
 import Ut from '../../unity';
+import Unit from '../web-unit';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -74,15 +75,15 @@ const raftRender = (cell = {}, config = {}) => {
     /*
      * 外置 renders 计算
      * 1）addOn 中为编程使用的 renders，优先考虑
-     * 2）其次以配置驱动的 props 中的 $jsx 优先（Zero Extension在使用）
+     * 2）其次以配置驱动的 props 中的 $renders 优先（Zero Extension在使用）
      */
     const renders = {};
     if (addOn.renders) {
         Object.assign(renders, addOn.renders);
     } else {
-        const {$jsx} = reference.props;
-        if ($jsx) {
-            Object.assign(renders, $jsx);
+        const {$renders} = reference.props;
+        if ($renders) {
+            Object.assign(renders, $renders);
         }
     }
     /*
@@ -92,7 +93,7 @@ const raftRender = (cell = {}, config = {}) => {
      * cell
      * 1）这里的 renders 来源两个方向
      * -- 编程的时候传入的第三参数 program
-     * -- $jsx 变量，直接从属性之外传入
+     * -- $renders 变量，直接从属性之外传入
      * *：它拥有最高优先级
      */
     let fnRender = renders[cell.field];
@@ -143,9 +144,6 @@ const raftRender = (cell = {}, config = {}) => {
     const render = fnRender ? fnRender : () => {
         console.error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
     };
-    // Ant-Design 表单化处理
-    const {form} = reference.props;
-    const {getFieldDecorator} = form;
     /*
      * 是 Action 就不需要 getFieldDecorator 修饰
      */
@@ -204,9 +202,26 @@ const raftRender = (cell = {}, config = {}) => {
              * 插件专用处理
              */
             Ut.writeSegment(reference, optionJsx, cell.field);
-            return getFieldDecorator(cell.field, optionConfig)(
-                render(reference, optionJsx)
-            );
+            const {form} = reference.props;
+            if (form) {
+                /*
+                 * Ant-Design 表单化处理
+                 */
+                const {getFieldDecorator} = form;
+                return getFieldDecorator(cell.field, optionConfig)(
+                    render(reference, optionJsx)
+                );
+            } else {
+                if (reference.props.hasOwnProperty('data-__field')) {
+                    /* 自定义组件专用 */
+                    return Unit.aiOn(render).onChange(reference, {
+                        ...cell,
+                        optionJsx
+                    })
+                } else {
+                    return render(reference, optionJsx, optionJsx.onChange);
+                }
+            }
         }
     }
 };

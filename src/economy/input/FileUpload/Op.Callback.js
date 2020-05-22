@@ -42,7 +42,7 @@ const _onChange = (reference, fileList = []) => {
             each.type = item.type;  // 数据类型
             return each;
         });
-    Ux.xtChange(reference, files, true);
+    // Ux.xtChange(reference, files, true);
 };
 const on2Change = (reference) => (info = {}) => {
     // 正在上传

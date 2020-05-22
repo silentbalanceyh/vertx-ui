@@ -1,9 +1,0 @@
-{
-    "_form": {
-        "ui": [
-            [
-                "active,启用,12,,aiCheckbox,valuePropName=checked"
-            ]
-        ]
-    }
-}

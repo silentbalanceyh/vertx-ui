@@ -1,5 +1,12 @@
-import toAsync from './P.async';
 import Ux from "ux";
+
+const toAsync = (result, async = true) => {
+    if (async) {
+        return Ux.promise(result);
+    } else {
+        return result;
+    }
+};
 /*
  * 传入的 ops 必须是一个对象，每个 key 都会最终生成 category 属性
  */

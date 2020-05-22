@@ -20,7 +20,7 @@ import Abs from '../abyss';
  * //     args 数组：(["path1","path2"]);
  * //     args 修饰：("path1");
  * const fromPath = (reference = {}, ...args) => {
- *     let keys = Ele.ambiguityArray.apply(this, args);
+ *     let keys = Ele.ambArray.apply(this, args);
  *     const length = keys['length'];
  *     // ... 其他代码部分
  * }
@@ -30,7 +30,7 @@ import Abs from '../abyss';
  * @param {any[]|Array} args 传入的二义性参数信息
  * @return {Array} 返回最终的数组信息
  */
-const ambiguityArray = (...args) => {
+const ambArray = (...args) => {
     let ref;
     if (1 === args.length && U.isArray(args[0])) {
         ref = args[0];
@@ -49,7 +49,7 @@ const _itObject = (object = {}, fnKv) => {
     for (const key in object) {
         if (object.hasOwnProperty(key)) {
             const item = object[key];
-            ref[key] = ambiguityKv(item, fnKv);
+            ref[key] = ambKv(item, fnKv);
         }
     }
     return ref;
@@ -57,7 +57,7 @@ const _itObject = (object = {}, fnKv) => {
 
 const _itArray = (array = [], fnKv) => {
     const result = [];
-    array.forEach((each, index) => result[index] = ambiguityKv(each, fnKv));
+    array.forEach((each, index) => result[index] = ambKv(each, fnKv));
     return result;
 };
 /**
@@ -73,7 +73,7 @@ const _itArray = (array = [], fnKv) => {
  * @param {Function} fnKv key=value 的处理函数
  * @return {any} 返回`fnKv`的执行结果
  */
-const ambiguityKv = (input, fnKv) => {
+const ambKv = (input, fnKv) => {
     /*
      * 先判断 Array，因为 Array 调用 isObject 也是 true
      */
@@ -100,7 +100,7 @@ const ambiguityKv = (input, fnKv) => {
  * @param {any} defaultValue 默认值，如果没有读取到值则使用默认值
  * @return {any} 返回最终读取到的值。
  */
-const ambiguityEvent = (event, config = {}, defaultValue) => {
+const ambEvent = (event, config = {}, defaultValue) => {
     let value;
     if (event && U.isFunction(event.preventDefault)) {
         const {prevent = true} = config;
@@ -135,7 +135,7 @@ const ambiguityEvent = (event, config = {}, defaultValue) => {
  * const targetKey = attrPath[0];
  * const name = attrPath[1];
  * if (targetKey && name) {
- *     return Ele.ambiguityFind(target, `$${targetKey}`, attrPath[1]);
+ *     return Ele.ambFind(target, `$${targetKey}`, attrPath[1]);
  * } else {
  *     console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
  * }
@@ -147,7 +147,7 @@ const ambiguityEvent = (event, config = {}, defaultValue) => {
  * @param {String} name 待提取的二级属性名
  * @return {any} 返回最终提取的值。
  */
-const ambiguityFind = (props = {}, key, name) => {
+const ambFind = (props = {}, key, name) => {
     const dataObj = props[key];
     let value;
     if (dataObj instanceof DataObject) {
@@ -174,7 +174,7 @@ const ambiguityFind = (props = {}, key, name) => {
  * ```js
  *
  * const yoHistory = (reference) => {
- *     const $inited = Ux.ambiguityObject(reference, "$inited");
+ *     const $inited = Ux.ambObject(reference, "$inited");
  *     const {activity = {}, changes = []} = $inited;
  *     // 其他处理代码……
  * }
@@ -185,8 +185,8 @@ const ambiguityFind = (props = {}, key, name) => {
  * @param {String} name 字符串变量名称，读取变量值专用
  * @return {any} 返回最终的值
  */
-const ambiguityObject = (reference = {}, name) => {
-    const extracted = ambiguityValue(reference, name);
+const ambObject = (reference = {}, name) => {
+    const extracted = ambValue(reference, name);
     let values = {};
     if (Abs.isObject(extracted)) {
         Object.assign(values, extracted);
@@ -205,7 +205,7 @@ const ambiguityObject = (reference = {}, name) => {
  * 框架内部代码：
  *
  * ```js
- *     const $submitting = Ele.ambiguityValue(reference, "$submitting");
+ *     const $submitting = Ele.ambValue(reference, "$submitting");
  * ```
  *
  * @memberOf module:_ambiguity
@@ -213,7 +213,7 @@ const ambiguityObject = (reference = {}, name) => {
  * @param {String} name 字符串变量名称，读取变量值专用
  * @return {any} 返回变量对应的值
  */
-const ambiguityValue = (reference = {}, name) => {
+const ambValue = (reference = {}, name) => {
     const {props = {}, state = {}} = reference;
     if (undefined !== props[name]) {
         return props[name];
@@ -228,38 +228,38 @@ export default {
      * 2.传入的参数就是数组，则直接转换成数组
      * 3.传入其他的非数组，则直接加上 [] 转换成数组
      */
-    ambiguityArray,
+    ambArray,
     /*
      * 二义性遍历，直接提取最终的 key = value
      * 1.如果是 Object，遍历每一对 key = value
      * 2.如果是 Array，先遍历每一个元素，然后 key = value（也就是每个元素中的 key = value）
      * 3.如果 Array 和 Object 相互包含，则递归
      */
-    ambiguityKv,
+    ambKv,
     /*
      * 1.如果 event 是常用的 event.preventDefault 的检查（原生事件），读取 event.target.value
      * 2.如果并不是则直接返回 event
      * 3.如果值不存在，则考虑使用 defaultValue
      */
-    ambiguityEvent,
+    ambEvent,
     /*
      * 二义性路径检索
      * 1. 直接读取 props 中，或者 state 中的 key 相关数据
      * 2. 如果读取的数据是 DataObject，则调用 _(name) 读取数据
      * 3. 如果是 Object （非数组），则直接读取 obj[name] 的值
      */
-    ambiguityFind,
+    ambFind,
     /*
      * 二义性读取 对应变量信息
-     * 1. 这个方法内置可调用 ambiguityValue
+     * 1. 这个方法内置可调用 ambValue
      * 2. 直接提取 props / state 中的name属性
      * 3. 只有 object 类型的数据会返回，否则会返回 {}
      */
-    ambiguityObject,
+    ambObject,
     /*
      * 二义性检索 对应变量信息
-     * 1. 这个方法和 ambiguityObject 唯一不同的是，该方法可返回所有类型值
+     * 1. 这个方法和 ambObject 唯一不同的是，该方法可返回所有类型值
      * 2. 并且只有 undefined 不会返回
      */
-    ambiguityValue,
+    ambValue,
 }

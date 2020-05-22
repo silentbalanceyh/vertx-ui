@@ -18,19 +18,10 @@
                 "title=任务属性"
             ],
             [
-                "namespace,名空间,,,,readOnly=true",
                 "name,任务名称,,,,readOnly=true",
-                "opKey,操作键,,,,readOnly=true"
+                "opKey,任务标识,16,,,readOnly=true"
             ],
             [
-                {
-                    "metadata": "type,任务类型,16,,aiRadio",
-                    "optionJsx.config.items": [
-                        "ONCE,一次性任务",
-                        "PLAN,轮询任务",
-                        "FIXED,定时任务"
-                    ]
-                },
                 {
                     "metadata": "status,任务状态,,,aiMagic",
                     "optionJsx.config.items": [
@@ -39,6 +30,14 @@
                         "RUNNING,运行中:loading,16:#228B22",
                         "ERROR,运行错误:issues-close,16:#EE3B3B",
                         "STOPPED,已停止:stop,16:#CD0000"
+                    ]
+                },
+                {
+                    "metadata": "type,任务类型,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "ONCE,一次性任务",
+                        "PLAN,轮询任务",
+                        "FIXED,定时任务"
                     ]
                 }
             ],
@@ -67,12 +66,12 @@
                 "proxy,任务执行组件,16,,,addonBefore=Java,readOnly=true"
             ],
             [
-                "incomeAddress,前置地址",
-                "incomeComponent,前置组件,16,,,addonBefore=Java"
+                "incomeAddress,前置地址,12",
+                "incomeComponent,前置组件,12,,,addonBefore=Java"
             ],
             [
-                "outcomeAddress,后置地址",
-                "outcomeComponent,后置组件,16,,,addonBefore=Java"
+                "outcomeAddress,后置地址,12",
+                "outcomeComponent,后置组件,12,,,addonBefore=Java"
             ],
             [
                 "title=业务层配置（*：请在专业人员指导下进行配置）"
@@ -80,8 +79,8 @@
             [
                 {
                     "complex": true,
-                    "name": "FormSegment",
-                    "key": "serviceSegment",
+                    "name": "FormContainer",
+                    "key": "serviceForm",
                     "config": {
                         "source": "FORM",
                         "component": "ExService"
@@ -89,7 +88,7 @@
                 }
             ]
         ],
-        "hidden":[
+        "hidden": [
             "key",
             "code"
         ],

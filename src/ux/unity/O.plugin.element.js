@@ -55,7 +55,7 @@ const valueFind = (target = {}, attrPath = []) => {
         const targetKey = attrPath[0];
         const name = attrPath[1];
         if (targetKey && name) {
-            return Ele.ambiguityFind(target, `$${targetKey}`, attrPath[1]);
+            return Ele.ambFind(target, `$${targetKey}`, attrPath[1]);
         } else {
             console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
         }

@@ -8,6 +8,7 @@ import sign from './O.sign';
 import sorter from './O.sorter';
 import redux from './O.redux';
 import math from './O.math';
+import dsl from './O.dsl';
 
 import tree from './O.tree';
 import treeSelect from './O.tree.select';
@@ -33,6 +34,7 @@ export default {
     ...sorter,
     ...redux,
     ...math,
+    ...dsl,
 
     ...tree,
     ...treeSelect,

@@ -2,7 +2,6 @@ import R from "../expression";
 import normalizeAttribute from "./I.fn.uniform";
 import React from 'react';
 import {CheckTransfer} from 'web';
-import Ut from '../../unity';
 
 const aiTransfer = (reference, jsx = {}, onChange) => {
     /*
@@ -28,9 +27,10 @@ const aiTransfer = (reference, jsx = {}, onChange) => {
     R.Ant.onChange(rest, onChange, {
         config, options, reference, depend
     });
-    const $rest = Ut.toLimit(rest, ["onChange"]);
+    // 打开限制继承
+    // const $rest = Ut.toLimit(rest, ["onChange"]);
     return (
-        <CheckTransfer {...$rest} config={config}  // 因为 rest 中去掉了 config, trigger, filter
+        <CheckTransfer {...rest} config={config}  // 因为 rest 中去掉了 config, trigger, filter
                        $source={options}
                        reference={reference}/>
     )

@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
             /*
              * 更新表单专用值
              */
-            const entity = Ux.elementUniqueDatum(this, "resource.entities","identifier",  $inited.entity);
+            const entity = Ux.elementUniqueDatum(this, "resource.entities", "identifier", $inited.entity);
             initials.entityId = entity.key;
             Object.assign(initials, $inited);
         }
@@ -42,7 +42,7 @@ class Component extends React.PureComponent {
         return (
             <ExForm {...form} $height={"300px"}
                     $mode={$mode}
-                    $jsx={Jsx}
+                    $renders={Jsx}
                     $op={Op.actions}/>
         );
     }

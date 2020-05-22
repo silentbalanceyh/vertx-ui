@@ -13,8 +13,11 @@ import USER from './I.fn.cell.user';
 import DICT from './I.fn.cell.dict';
 import ARRAY from './I.fn.cell.array';
 import RENDERS from './I.fn.cell.renders';
+/* 特殊类型 EDITOR */
+import EDITOR from './I.fn.cell.editor';
 
 export default {
+    EDITOR,
     CURRENCY,
     DATE,
     DATUM,

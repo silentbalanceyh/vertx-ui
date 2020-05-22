@@ -9,8 +9,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
 const {CheckerPlugin} = require('awesome-typescript-loader');
 
-const ParallelUglifyPlugin = require('webpack-parallel-uglify-plugin');
-
 const getClientEnvironment = require("./env");
 const paths = require("./paths");
 // 自定义模块
@@ -53,7 +51,7 @@ module.exports = {
         // Errors should be considered fatal in development
         require.resolve("react-error-overlay"),
         // Finally, this is your app's code:
-        paths.appIndexJs
+        paths.appIndexJs,
         // We include the app code last so that if there is a runtime error during
         // initialization, it doesn't blow up the WebpackDevServer client, and
         // changing JS code would still trigger a refresh.
@@ -146,7 +144,8 @@ module.exports = {
                 ],
                 exclude: [
                     path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                ],
+                include: paths.appSrc
             },
             {
                 enforce: "pre",
@@ -154,7 +153,8 @@ module.exports = {
                 use: "source-map-loader",
                 exclude: [
                     path.resolve(path.join(__dirname, "../node_modules"))
-                ]
+                ],
+                include: paths.appSrc
             },
             // We are waiting for https://github.com/facebookincubator/create-react-app/issues/2176.
             // { parser: { requireEnsure: false } },
@@ -338,10 +338,12 @@ module.exports = {
                     {
                         loader: "less-loader",
                         options: {
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                "@primary-color": process.env.Z_CSS_COLOR,
-                                "@app": process.env.Z_CSS_PREFIX
+                            lessOptions: {
+                                javascriptEnabled: true,
+                                modifyVars: {
+                                    "@primary-color": process.env.Z_CSS_COLOR,
+                                    "@app": process.env.Z_CSS_PREFIX
+                                }
                             }
                         }
                     }
@@ -368,7 +370,7 @@ module.exports = {
         // In development, this will be an empty string.
         new InterpolateHtmlPlugin(HtmlWebpackPlugin, env.raw),
         // Add module names to factory functions so they appear in browser profiler.
-        new webpack.NamedModulesPlugin(),
+        // new webpack.NamedModulesPlugin(),
         // Makes some environment variables available to the JS code, for example:
         // if (process.env.NODE_ENV === 'development') { ... }. See `./env.js`.
         new webpack.DefinePlugin(env.stringified),

@@ -73,7 +73,7 @@ export default {
      * @method rxEtat
      * @returns {RxEtat} 返回最终 @zero 注解中的状态，构造资源文件绑定对象。
      */
-    rxEtat: Dsl.rxEtat,
+    rxEtat: requiredFile => Dsl.rxEtat(requiredFile),
     /**
      * ## 标准函数
      *
@@ -101,5 +101,5 @@ export default {
      * @method rxFlow
      * @returns {rxFlow} 返回最终 @zero 注解中的Stream模式的 redux处理器。
      */
-    rxFlow: Dsl.rxFlow,
+    rxFlow: actions => Dsl.rxFlow(actions),
 }

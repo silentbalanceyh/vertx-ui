@@ -70,8 +70,16 @@ reference.forEach(key => {
 });
 const shared = process.env.UX_SHARED;
 if (shared) {
+    /*
+     * 基本开发扩展
+     */
     epics['shareEpics'] = `../${shared}/action/Epic`;
     handlers['shareTypes'] = `../${shared}/action/Types`;
+    /*
+     * Zero Extension扩展模块
+     */
+    epics['extensionEpics'] = `../extension/library/Epic`;
+    handlers['extensionTypes'] = `../extension/library/Types`;
 }
 // 写入文件
 let line = [];

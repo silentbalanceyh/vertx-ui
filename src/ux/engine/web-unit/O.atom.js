@@ -5,53 +5,8 @@ import Cv from '../../constant';
 import U from "underscore";
 import Ele from '../../element';
 import './Cab.less';
-
-/*
- * 针对图标进行处理，类型包含icon和image两种
- * * 如果type以`img:`开头，则使用`<img/>`标签
- * * 其他情况则使用Ant Design中的`<Icon/>`处理
- * @param {String} type 传入的字符串值
- * @param {Object} addOn 附加配置
- * @return {*}
- */
-const aiIcon = (type, addOn = {}) => {
-    if (type) {
-        if ("string" === typeof type) {
-            /*
-             * 不同前缀下的图片处理
-             * 1）如果以 `image:` 开头，格式如：`image:/`的方式，则直接读取 image:/ 后边的部分，标记 <img/>
-             * 2）否则直接将 type 作为 <Icon/> 中的 type 属性
-             */
-            if (type.startsWith("image:/")) {
-                const attrs = {};
-                attrs.src = type.substring(6);
-                return (<img alt={"icons"} {...attrs} {...addOn}/>)
-            } else {
-                return (<Icon type={type} size={"large"} {...addOn}/>);
-            }
-        } else if (U.isObject(type)) {
-            /*
-             * 另外一种渲染（提示图标）
-             */
-            if (type.hasOwnProperty("style") && !type.hasOwnProperty("iconStyle")) {
-                type.iconStyle = type.style;
-                if (type.iconStyle.hasOwnProperty("fontSize")) {
-                    type.iconStyle.fontSize = Ele.valueInt(type.iconStyle.fontSize);
-                }
-            }
-            // 文字信息
-            let text = type.text || type.label;
-            if (!text) text = "";
-            return (
-                <span>
-                    {type['icon'] ? (<Icon type={type['icon']} style={type['iconStyle']}/>) : false}
-                    {type['icon'] ? (<span>&nbsp;&nbsp;</span>) : false}
-                    <span className={"zero-icon-text"}>{text}</span>
-                </span>
-            )
-        }
-    } else return false;     // 没有传入则直接不显示
-};
+import Abs from '../../abyss';
+import aiIcon from './O.fn.atom.icon';
 /*
  * 基本输入
  * {
@@ -64,11 +19,20 @@ const aiIcon = (type, addOn = {}) => {
 const aiUrl = (item = {}, addOn = {}) => {
     const {$router} = addOn;
     if ("$MAIN$" === item.uri) {
-        return Cv.ENTRY_ADMIN;
+        return Cv.ENTRY_ADMIN
     } else if ("$SELF$" === item.uri) {
         return $router ? $router.uri() : "";
     } else {
-        return $router ? $router.uri(item.uri) : item.uri;
+        let uri;
+        if (item.uri.startsWith("/")) {
+            uri = item.uri;
+        } else {
+            uri = "/" + item.uri;
+        }
+        if (!uri.startsWith(`/${Cv['ROUTE']}/`)) {
+            uri = `/${Cv['ROUTE']}${uri}`
+        }
+        return $router ? $router.uri(uri) : uri;
     }
 };
 /*
@@ -79,22 +43,34 @@ const aiUrl = (item = {}, addOn = {}) => {
  * }
  */
 const aiLink = (item = {}, addOn = {}) => {
-    if (item.uri) {
-        return item.disabled ? (
-            <span className={`ux-disabled ${item.className ? item.className : ""}`}>
+    if (item.uri && "EXPAND" !== item.uri) {
+        if (item.disabled) {
+            return (
+                <span className={`ux-disabled ${item.className ? item.className : ""}`}>
                 {item.text}
-            </span>
-        ) : (
-            <Link className={item.className ? item.className : ""} to={aiUrl(item, addOn)}>
-                {item.text}
-            </Link>
-        );
+                </span>
+            )
+        } else {
+            if (Abs.isFunction(item.__uri)) {
+                return (
+                    <a href={""} onClick={item.__uri} className={item.className ? item.className : ""}>
+                        {item.text}
+                    </a>
+                )
+            } else {
+                return (
+                    <Link className={item.className ? item.className : ""} to={aiUrl(item, addOn)}>
+                        {item.text}
+                    </Link>
+                )
+            }
+        }
     } else return (<span>{item.text}</span>);
 };
 
 const aiTitle = (item = {}, addOn = {}) => (
     <span className={item.className}>
-        {aiIcon(item.icon)}
+        {aiIcon(item.icon, addOn)}
         {aiLink(item, addOn)}
     </span>
 );

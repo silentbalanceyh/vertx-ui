@@ -15,7 +15,7 @@ import Ele from '../../element';
 const fromHoc = (reference = {}, key = "") => {
     E.fxTerminal("string" !== typeof key, 10000, "string", typeof key);
     if (reference) {
-        const {$hoc} = reference.state;
+        const {$hoc} = reference.state ? reference.state : {};
         return ($hoc) ? $hoc._(key) : null;
     } else {
         console.error("传入第一个参数 reference 为 null 或 undefined");
@@ -32,7 +32,7 @@ const fromHoc = (reference = {}, key = "") => {
  * @return {null}
  */
 const fromPath = (reference = {}, ...args) => {
-    let keys = Ele.ambiguityArray.apply(this, args);
+    let keys = Ele.ambArray.apply(this, args);
     const length = keys['length'];
     E.fxTerminal(1 > length, 10070, keys, 1);
     let data = fromHoc(reference, keys[0]);

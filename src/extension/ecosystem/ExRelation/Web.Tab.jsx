@@ -63,7 +63,6 @@ const _renderIf = (reference, key, fnRender) => {
             const config = empty[key];
             return <LoadingAlert $alert={config} $icon={`arrow-${key}`}/>
         }
-        ;
     } else {
         /*
          * 上游关系处理，前提是 $defineMap.up > 0

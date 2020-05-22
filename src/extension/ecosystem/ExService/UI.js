@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
-import Op from './Op';
+import renders from './UI.renders';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("ExService")
@@ -9,7 +9,10 @@ import Op from './Op';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiPage(this);
+        Ex.yiPartForm(this, {
+            id: "formService",
+            renders,
+        }).then(Ux.ready).then(Ux.pipe(this))
     }
 
     render() {

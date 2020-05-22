@@ -13,7 +13,7 @@ const _1normalizeNavs = (reference = {}) => {
     if (navigator) {
         navigator = navigator.sort((left, right) => left.level - right.level);
         navigator.forEach(item => $nav.push({
-            key: item.name,
+            key: item.name ? item.name : Ux.randomUUID(),
             text: item.text,
             // 必须添加"/"前缀，否则会生成错误路由
             uri: (item.uri && "EXPAND" !== item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined

@@ -13,7 +13,7 @@ export default (reference, {
     $attrsSider = {},
     dataArray = [],
 }) => {
-    let logo = $app._("logo");
+    let logo = $app ? $app._("logo") : undefined;
     if (!logo) {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;
@@ -21,7 +21,7 @@ export default (reference, {
     return (
         <Sider {...$attrsSider}>
             {/* 菜单顶部Logo */}
-            <div className="logo">
+            <div className={`logo`}>
                 <Link to={Ux.Env.ENTRY_ADMIN}>
                     <img src={logo}
                          alt={'Logo'}/>

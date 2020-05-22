@@ -5,6 +5,63 @@ import U from 'underscore';
 /**
  * ## 标准函数
  *
+ * 数组索引查找元素，查找 field = value 的索引专用
+ *
+ * 1）查找1：传入了 field，直接查找 field = value 的元素所在的 index
+ * 2）查找2：未传入 field，直接查找值（纯数组）
+ *
+ * @memberOf module:_element
+ * @param {Array} array 被查找的数组
+ * @param {String} field 字段名
+ * @param {any} value 字段值
+ * @returns {Number} 找到的索引
+ */
+const elementIndex = (array = [], value, field) => {
+    let foundIndex = -1;
+    array.forEach((each, index) => {
+        if (field) {
+            /* 第一种查找 */
+            if (value === each[field]) {
+                foundIndex = index;
+            }
+        } else {
+            /* 第二种查找 */
+            if (value === each) {
+                foundIndex = index;
+            }
+        }
+    });
+    return foundIndex;
+}
+/**
+ * ## 标准函数
+ *
+ * 数组元素交换元素，将两个元素交换位置专用
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Number} fromIndex 交换的开始索引
+ * @param {Number} toIndex 交换的结束索引
+ * @return {Array} 返回原始数组引用
+ */
+const elementWrap = (array = [], fromIndex, toIndex) => {
+    let from = array[fromIndex];
+    if (from) {
+        from = Abs.clone(from);
+    }
+    let to = array[toIndex];
+    if (to) {
+        to = Abs.clone(to);
+    }
+    if (from && to) {
+        array[fromIndex] = to;
+        array[toIndex] = from;
+    }
+    return array;
+}
+/**
+ * ## 标准函数
+ *
  * 数组元素拉平函数，将一个完整的树拉平成不带树结构的数据。
  *
  * @deprecated 由于目前只在 Uarr 中使用，所以将来可能被废弃。
@@ -327,6 +384,8 @@ const elementGroup = (array = [], field) => {
 };
 export default {
     elementFlat,
+    elementWrap,
+    elementIndex,
     elementUnique,
     elementFind,
     elementVertical,

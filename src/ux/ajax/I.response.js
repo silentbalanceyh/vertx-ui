@@ -40,9 +40,13 @@ const ajaxResponse = async (request, params) => mockAjax(request, params,
                 // 任何时候都需要调用适配器，包括errors
                 json = Aid.ajaxAdapter(json);
             } catch (error) {
-                json = {data: error.toString()};
+                json = {
+                    data: error.toString(),
+                    _error: true
+                };
             }
             body = {
+                _error: true,
                 ...json,
                 status: response.status,
                 statusText: response.statusText

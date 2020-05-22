@@ -67,5 +67,26 @@ export default {
     FORM_MODE: {
         ADD: "ADD",
         EDIT: "EDIT"
+    },
+    /**
+     * ## 常量
+     *
+     * 自定义组件配置格式
+     *
+     * * OBJECT：Json对象格式
+     * * ARRAY：Json数组格式（对象数组）
+     * * ARRAY_PURE: 纯数组格式
+     *
+     * 复杂格式
+     *
+     * * ARRAY_MAP: 按 Unique 键分组专用格式，值为 Object
+     * * ARRAY_GROUP：按某个字段分组专用格式，值为 Array
+     */
+    XT_FORMAT: {
+        OBJECT: "OBJECT",
+        ARRAY: "ARRAY",
+        ARRAY_MAP: "ARRAY_MAP",
+        ARRAY_PURE: "ARRAY_PURE",
+        ARRAY_GROUP: "ARRAY_GROUP"
     }
 };

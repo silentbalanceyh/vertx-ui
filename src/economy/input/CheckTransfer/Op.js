@@ -1,40 +1,18 @@
 import Ux from 'ux';
-import U from 'underscore';
+import Event from './event';
 
 const yiPage = (reference) => {
     const state = {};
-    const {config = {}, $source = []} = reference.props;
+    const {config = {}} = reference.props;
     // state.$source = $source;
     /*
      * 抽取 jsx 数据（除开 onChange）
      */
-    const {onChange, valueKey = "key", ...rest} = config;
+    const {...rest} = config;
     const $transfer = Ux.clone(rest);
 
-    $transfer.onChange = ($targetKeys) => {
-        reference.setState({$targetKeys});
-        const {onChange} = reference.props;
-        if (U.isFunction(onChange)) {
-            /*
-             * $targetKeys
-             */
-            const $keys = Ux.immutable($targetKeys);
-            const items = $source
-                .filter(item => $keys.contains(item.key))
-                .map(item => item[valueKey]);
-            /*
-             * items 处理
-             */
-            onChange(items);
-        }
-    };
-    $transfer.onSelectChange = (sourceKeys, targetKeys) => {
-        /*
-         * 暂时不考虑右边的选中
-         */
-        const $sourceKeys = [...sourceKeys, ...targetKeys];
-        reference.setState({$sourceKeys});
-    };
+    $transfer.onChange = Event.onChange(reference, config);
+    $transfer.onSelectChange = Event.onSelectChange(reference, config);
     /*
      * 处理可选择的 key
      */

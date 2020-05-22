@@ -45,6 +45,6 @@ export default (options = {}) => {
                     return super.render();
                 }, options)
             }
-        }
+        };
     }
 }

@@ -57,9 +57,10 @@ const _sortTree = (categoryData) => {
  *      }
  * }
  */
-const g6DataTree = (reference) => {
-    const models = Eng.onDatum(reference, "resource.models");
-    const category = Eng.onDatum(reference, "graphic.nodes");
+const g6DataTree = (reference, config = {}) => {
+    const {model = "resource.models", category = "graphic.nodes"} = config;
+    const models = Eng.onDatum(reference, model);
+    const categoryList = Eng.onDatum(reference, category);
     /*
      * 模型列表处理
      */
@@ -70,7 +71,7 @@ const g6DataTree = (reference) => {
     /*
      * category 中过滤
      */
-    const treeArray = U.toTreeArray(category, {text: "name", title: "name"});
+    const treeArray = U.toTreeArray(categoryList, {text: "name", title: "name"});
     return _sortTree(treeArray)
         .filter(each => $identifiers.contains(each.data.identifier))
         .map(each => {

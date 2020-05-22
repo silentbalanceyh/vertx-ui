@@ -8,7 +8,7 @@ export default {
         processor: data => ({app: Ux.storeApp(data)})
     },
     "app.menus": {
-        ajax: () => Ux.ajaxGet("/api/menus/app/:appId", {appId: Ux.isInit().key}, Mock.fnMenu),
+        ajax: () => Ux.ajaxGet("/api/menus/:appId", {appId: Ux['Env']['APP']}, Mock.fnMenu),
         processor: data => ({"datum.menus": data})
     }
 }

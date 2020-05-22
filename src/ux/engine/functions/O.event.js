@@ -1,6 +1,7 @@
 import U from "underscore";
 import {Modal} from "antd";
 import E from "../../error";
+import Rft from '../raft';
 
 /**
  * ## 引擎函数
@@ -32,7 +33,15 @@ const onConfirm = (fnEvent, content) => (event) => {
         E.fxFatal(10105);
     }
 };
+const onRender = (reference, column = {}) => {
+    return Rft.raftRender(column, {
+        addOn: {
+            reference
+        },
+    });
+}
 
 export default {
-    onConfirm
+    onConfirm,
+    onRender,
 }

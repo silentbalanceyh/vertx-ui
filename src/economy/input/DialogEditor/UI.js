@@ -67,7 +67,6 @@ class Component extends React.PureComponent {
                     </Input.Group>
                 )
             }
-            ;
         }, {name: "DialogEditor", logger: true})
     }
 }

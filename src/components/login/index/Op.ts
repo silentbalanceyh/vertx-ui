@@ -1,9 +1,8 @@
 import Ux from 'ux';
-import Mock from './mock';
 
 const fnLogin = (values: any, reference: any) => {
 
-    Ux.ajaxPush("/auth/login", values, Mock.fnLogin).then(response => {
+    Ux.ajaxPush("/auth/login", values).then(response => {
         response.token = Ux.randomString(32);
         Ux.storeUser(response);
         Ux.writeTree(reference, {user: response});
@@ -32,7 +31,7 @@ const _validate = (reference, values: any) => {
 };
 const $opLogin = (reference: any) => (values: any) => {
     if (_validate(reference, values)) {
-        return Ux.ajaxPush("/auth/login", values, Mock.fnLogin).then(response => {
+        return Ux.ajaxPush("/auth/login", values).then(response => {
             response.token = Ux.randomString(32);
             Ux.storeUser(response);
             Ux.writeTree(reference, {

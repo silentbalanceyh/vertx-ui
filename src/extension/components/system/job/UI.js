@@ -1,42 +1,15 @@
 import React from 'react'
 import Ux from 'ux';
 import Ex from 'ex';
-import {Table, Tabs} from 'antd';
-import {LoadingAlert} from 'web';
-import Op from './Op';
-import Form from './UI.Form';
-import Event from './event';
-import renderExtra from './Web.Extra';
-import renderTool from './Web.Tool';
+import {Tabs} from 'antd';
+import Op from './yi';
+import Rdr from "./page";
 
 const renderChild = (reference, item, $inited = {}) => {
     if ("tabTask" === item.key) {
-        const {
-            $table = {}, $data = [], $loading = false,
-            $searchText,
-        } = reference.state;
-        const alert = Ux.fromHoc(reference, "alert");
-        let dataSource = [];
-        if ($searchText) {
-            dataSource = Ux.clone($data.filter(item => (0 <= item.name.indexOf($searchText))))
-        } else {
-            dataSource = Ux.clone($data);
-        }
-        return (
-            <div>
-                <LoadingAlert $alert={alert} $type={"success"}/>
-                {renderTool(reference)}
-                <Table {...$table} dataSource={dataSource} loading={$loading}/>
-            </div>
-        )
+        return Rdr.pageMain(reference, item, $inited);
     } else {
-        const inherit = Ex.yoAmbient(reference);
-        inherit.$inited = $inited;
-        inherit.doSubmitting = Ex.rxSubmitting(reference);
-        inherit.rxClose = Event.rxTabClose(reference, item);
-        return (
-            <Form {...inherit}/>
-        )
+        return Rdr.pageForm(reference, item, $inited);
     }
 };
 
@@ -54,20 +27,19 @@ class Component extends React.PureComponent {
         Op.yuPage(this);
     }
 
-    componentWillUnmount() {
-        Op.yoPage(this);
-    }
-
     render() {
         return Ex.ylCard(this, () => {
             const {$tabs = {}, $inited = {}} = this.state;
-            /*
-             * 列表
-             */
             const {items = [], ...tabsAttrs} = $tabs;
             return (
-                <Tabs {...tabsAttrs}
-                      tabBarExtraContent={renderExtra(this)}>
+                <Tabs {...tabsAttrs} tabBarExtraContent={(() => {
+                    /* extra */
+                    let buttons = Ux.fromHoc(this, "extra");
+                    if (Ux.isArray(buttons)) {
+                        buttons = Ux.aiExprButtons(buttons);
+                    }
+                    return Rdr.pageExtra(this, buttons);
+                })()}>
                     {items.map(item => (
                         <Tabs.TabPane {...item}>
                             {renderChild(this, item, $inited)}

@@ -1,0 +1,19 @@
+{
+    "_editor": {
+        "column": {
+            "dataIndex": "key",
+            "title": "操作",
+            "className": "web-table-editor-op",
+            "config": {
+                "add": {
+                    "icon": "plus",
+                    "tooltip": "添加该行"
+                },
+                "remove": {
+                    "icon": "delete",
+                    "tooltip": "删除该行"
+                }
+            }
+        }
+    }
+}

@@ -13,6 +13,9 @@ const _query: Function = (path: string = "") => {
                 if (key) params[key] = value;
             }
         });
+    } else if (0 < path.indexOf("?")) {
+        const paris = _query(`?${path.split("?")[1]}`);
+        Object.assign(params, paris);
     }
     return params;
 };
@@ -100,7 +103,24 @@ class DataRouter implements BindContainer {
     }
 
     uri(uri: string = ""): string {
-        return uri + this.location.search;
+        const original = _query(this.location.search);
+        const params = _query(uri);
+        const merged = Object.assign({}, original, params);
+        let target;
+        if (0 < uri.indexOf("?")) {
+            target = uri.split("?")[0];
+        } else {
+            target = uri;
+        }
+        let calculated = target;
+        if (0 <= Object.keys(merged).length) {
+            calculated += "?";
+            const paramQueue = [];
+            Object.keys(params)
+                .forEach(paramName => paramQueue.push(`${paramName}=${params[paramName]}`));
+            calculated += paramQueue.join('&');
+        }
+        return calculated;
     }
 
     params(): any {

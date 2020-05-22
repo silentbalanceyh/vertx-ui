@@ -18,10 +18,9 @@ const yoSider = (reference = {}) => {
     /*
      * Logo默认设置
      */
-    const {$logo} = reference.props;
-    if ($logo) {
-        attrs.$logo = $logo;
-    }
+    const {$logo, css} = reference.props;
+    if ($logo) attrs.$logo = $logo;
+    if (css) attrs.css = css;
     return attrs;
 };
 const yoNavigation = (reference = {}, {

@@ -1,7 +1,9 @@
 import * as U from 'underscore';
 import StateOut from '../state/StateOut';
-import Ux from 'ux';
-import {Taper} from 'environment';
+// @ts-ignore
+import Ux from "ux";
+// @ts-ignore
+import {Taper} from "environment";
 
 class Etat {
     private _form: boolean = false;
@@ -16,6 +18,7 @@ class Etat {
     private _raft: any = {enabled: true};      // 默认打开 Raft模式
     private _op: {};
     private _isLog: boolean = true;
+    private _unmount: boolean = false;
 
     /**
      * required必须使用这种方式绑定
@@ -38,6 +41,11 @@ class Etat {
 
     form() {
         this._form = true;
+        return this;
+    }
+
+    unmount() {
+        this._unmount = true;
         return this;
     }
 
@@ -130,7 +138,7 @@ class Etat {
                 args.push(input);
             }
         }
-        this._loading = Ux.ambiguityArray.apply(null, [].concat(args));
+        this._loading = Ux.ambArray.apply(null, [].concat(args));
         return this;
     }
 
@@ -180,7 +188,7 @@ class Etat {
         if (!this._op) this._op = {};
         const opRef = this._op;
         Object.keys(OP)
-        /* 过滤不存在的 key 信息 */
+            /* 过滤不存在的 key 信息 */
             .filter(key => !!key)
             .filter(key => "string" === typeof key)
             /* 过滤 key 不以 $op 开头 */
@@ -274,6 +282,7 @@ class Etat {
             // 判断 Function 的 op类型
             config.op = this._op;
         }
+        config.unmount = this._unmount;
         return config;
     }
 }

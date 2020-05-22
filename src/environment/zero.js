@@ -14,6 +14,9 @@ const ensureForm = (target = {}, options = {}) => {
         }
     }
 };
+/*
+ * 防内存泄漏专用方法
+ */
 export default (options = {}) => {
     /**
      * zero注解过后执行Hoc高阶封装操作
@@ -42,15 +45,21 @@ export default (options = {}) => {
     return (target, property, descriptor) => {
         // 修改target过后的继承
         let Component = class extends target {
-            // 静态资源放到State状态中
-            state = {
-                // $hoc：Hoc专用资源处理流程，生成$hoc
-                $hoc: Fn.fnI18n(target, options),
-                // $op：Bind专用流程，用于绑定事件信息，生成$op
-                $op: Fn.fnOp(options),
-                // 初始化状态
-                ...options.state ? options.state : {}
-            };
+            constructor(props) {
+                super(props);
+                // 静态资源放到State状态中
+                const original = this.state ? this.state : {};
+                this.state = {
+                    // $hoc：Hoc专用资源处理流程，生成$hoc
+                    $hoc: Fn.fnI18n(target, options),
+                    // $op：Bind专用流程，用于绑定事件信息，生成$op
+                    $op: Fn.fnOp(options),
+                    // 初始化状态
+                    ...options.state ? options.state : {},
+                    // 当前状态
+                    ...original
+                };
+            }
 
             componentDidMount() {
                 // 启用异步 Raft模式，主要针对Form
@@ -124,11 +133,11 @@ export default (options = {}) => {
                 }
             }
         };
+        Component = Fn.fnUnmount(Component, options);
         // Redux连接配置：顺序不可替换
         Component = Fn.fnConnect(Component, options);
         // Form连接配置：顺序不可替换
         Component = Fn.fnForm(Component, options);
-
         return Component;
     };
 };

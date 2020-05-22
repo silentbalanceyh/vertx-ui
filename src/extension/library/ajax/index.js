@@ -7,6 +7,7 @@ import _ui from './ui';
 import _todo from './todo';
 import _job from './job';
 import _relation from './relation';
+import _model from './model';
 
 /**
  * ## 接口专用类
@@ -26,6 +27,22 @@ import _relation from './relation';
  * @class I
  */
 class I {
+    /**
+     * ## 接口函数
+     *
+     * 读取单个模型的属性信息
+     *
+     * * 接口：`/api/model/identifier/:identifier`（GET）
+     * * 安全：是
+     *
+     * @async
+     * @param {String} identifier 模型标识符
+     * @returns {Promise<T>} 返回Promise。
+     */
+    static attributes(identifier) {
+        return _model.attributes(identifier);
+    }
+
     /**
      * ## 接口函数
      *
@@ -212,6 +229,38 @@ class I {
      */
     static form(params = {}) {
         return _form.form(params);
+    }
+
+    /**
+     * ## 接口函数
+     *
+     * * 接口：`/api/ui/forms/:identifier`（GET）
+     * * 安全：是
+     *
+     * 读取模型下的表单配置信息。
+     *
+     * @async
+     * @param {String} identifier 模型统一标识符。
+     * @returns {Promise<T>} 返回Promise
+     */
+    static forms(identifier) {
+        return _form.forms(identifier)
+    }
+
+    /**
+     * ## 接口函数
+     *
+     * * 接口：`/api/ui/lists/:identifier`（GET）
+     * * 安全：是
+     *
+     * 读取模型下的所有列表配置信息
+     *
+     * @async
+     * @param {String} identifier 模型统一标识符。
+     * @returns {Promise<T>} 返回Promise
+     */
+    static lists(identifier) {
+        return _form.lists(identifier)
     }
 
     /**
@@ -430,8 +479,8 @@ class I {
      * @async
      * @returns {Promise<T>} 返回Promise
      */
-    static jobs() {
-        return _job.jobs()
+    static jobs(params) {
+        return _job.jobs(params)
     }
 
     /**

@@ -1,63 +1,35 @@
 import React from 'react';
+import {component} from "../../_internal";
+import Ux from "ux";
+import Op from './op';
+import {Table} from 'antd';
 import './Cab.less';
-import {Input, Table} from 'antd';
-import Ux from 'ux';
-import Op from './Op';
 
+/*
+ * 自定义组件，编辑数据库Json
+ */
+@component({
+    "i18n.cab": require("./Cab.json"),
+    "i18n.name": "UI"
+})
 class Component extends React.PureComponent {
-
     constructor(props) {
         super(props);
-        const state = Ux.xtInitArray(props);
-        // columns专用
-        const {config = {}} = props;
-        state.columns = Ux.xtColumn(this, config.columns);
-        // columns中的trigger判断
-        Op.prepareTrigger(state, state.columns);
-        this.state = state;
+        this.state = Ux.xtInitFormat(props);
     }
 
     componentDidMount() {
-        Op.initTrigger(this);
-    }
-
-    UNSAFE_componentWillReceiveProps(nextProps) {
-        Ux.xtUnsafe(this, nextProps);
+        Op.yiPage(this);
     }
 
     render() {
-        const {config = {}, ...jsx} = this.props;
-        const {columns = []} = this.state ? this.state : {};
-        // 配置处理
-        config.columns = columns;
-        config.pagination = false;
-        // 不配置className时才处理，size处理
-        if (!config.hasOwnProperty('className')) {
-            config.className = "web-table-editor";
-        }
-        // 数据处理
-        const data = Ux.xtData(this);
-        // 处理InputGroup中的jsx
-        const attrs = Ux.valueLimit(jsx);
-        const $attrs = Ux.clone(attrs);
-        if ($attrs.onChange) delete $attrs.onChange;
-        // 是否处理children节点，新特性
-        let $data = Ux.clone(data);
-        if (config.hasOwnProperty('children') &&
-            !config.children) {
-            // 不渲染子节点
-            $data.filter(item => item.hasOwnProperty('children'))
-                .forEach(item => delete item.children);
-        }
-        // loading处理
-        return (
-            <Input.Group {...$attrs}>
-                <Table {...config}
-                       loading={Op.renderTrigger(this)}
-                       dataSource={$data}/>
-            </Input.Group>
-        );
+        return Ux.xtReady(this, () => {
+            const {$table = {}, data = []} = this.state;
+            return (
+                <Table {...$table} dataSource={data}/>
+            );
+        }, {name: "TableEditor", logger: true})
     }
 }
 
-export default Component;
+export default Component

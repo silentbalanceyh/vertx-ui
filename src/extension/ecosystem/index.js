@@ -36,8 +36,11 @@ export {default as ExService} from './ExService/UI';
 // ------------- 登录入口
 /* （管理员入口） ----- ExLogin 后台登录专用界面 */
 export {default as ExLogin} from './ExLogin/UI';
+export {default as ExLogged} from './ExLogged/UI';
 /* （会员入口）   ----- ExEntry 会员登录专用 */
 export {default as ExEntry} from './ExEntry/UI';
+/* */
+export {default as ExSubmit} from './ExSubmit/UI';
 
 // ------------- 整页模板
 /* （管理员模板） ----- ExAdmin 模板专用 */

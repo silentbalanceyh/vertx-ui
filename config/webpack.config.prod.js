@@ -20,7 +20,6 @@ const publicPath = paths.servedPath;
 // Some apps do not use client-side routing with pushState.
 // For these, "homepage" can be set to "." to enable relative asset paths.
 const shouldUseRelativeAssetPaths = publicPath === "./";
-const shouldUseSourceMap = process.env.GENERATE_SOURCEMAP !== 'false';
 // `publicUrl` is just like `publicPath`, but we will provide it to our app
 // as %PUBLIC_URL% in `index.html` and `process.env.PUBLIC_URL` in JavaScript.
 // Omit trailing slash as %PUBLIC_URL%/xyz looks better than %PUBLIC_URL%xyz.
@@ -35,7 +34,8 @@ if (env.stringified["process.env"].NODE_ENV !== '"production"') {
 }
 
 // Note: defined here because it will be used more than once.
-const cssFilename = "static/css/[name].[contenthash:8].css";
+// const cssFilename = "static/css/[name].[contenthash:8].css";
+const cssFilename = "static/css/[name].[md5:contenthash:hex:8].css";
 
 // ExtractTextPlugin expects the build output to be flat.
 // (See https://github.com/webpack-contrib/extract-text-webpack-plugin/issues/27)
@@ -54,9 +54,12 @@ module.exports = {
     bail: true,
     // We generate sourcemaps in production. This is slow but gives good results.
     // You can exclude the *.map files from the build during deployment.
-    devtool: "source-map",
+    devtool: "cheap-module-source-map",
     // In production, we only want to load the polyfills and the app code.
-    entry: [require.resolve("./polyfills"), paths.appIndexJs],
+    entry: [
+        require.resolve("./polyfills"),
+        paths.appIndexJs,
+    ],
     output: {
         // The build folder.
         path: paths.appBuild,
@@ -336,10 +339,12 @@ module.exports = {
                     {
                         loader: require.resolve("less-loader"),
                         options: {
-                            javascriptEnabled: true,
-                            modifyVars: {
-                                "@primary-color": process.env.Z_CSS_COLOR,
-                                "@app": process.env.Z_CSS_PREFIX
+                            lessOptions: {
+                                javascriptEnabled: true,
+                                modifyVars: {
+                                    "@primary-color": process.env.Z_CSS_COLOR,
+                                    "@app": process.env.Z_CSS_PREFIX
+                                }
                             }
                         }
                     }

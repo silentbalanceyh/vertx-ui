@@ -33,15 +33,19 @@ class Component extends React.PureComponent {
         } else {
             attrs.type = type;
         }
-        attrs.showIcon = true;
-        let className = "";
-        if ($icon) {
-            attrs.icon = (<Icon type={$icon} style={{
-                fontSize: $size
-            }}/>);
-            className = "web-alert-iconlist";
+        attrs.showIcon = !$alert.hideIcon;
+        let className;
+        if (attrs.showIcon) {
+            if ($icon) {
+                attrs.icon = (<Icon type={$icon} style={{
+                    fontSize: $size
+                }}/>);
+                className = "web-alert-iconlist";
+            } else {
+                className = "web-alert-list";
+            }
         } else {
-            className = "web-alert-list";
+            className = "web-alert-text";
         }
         return (
             <div className={className}>

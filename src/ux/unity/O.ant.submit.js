@@ -32,6 +32,9 @@ const formSubmit = (reference, redux = false) => {
         })).then((params) => {
             // 拷贝参数
             const data = Abs.clone(params);
+            Object.keys(data)
+                .filter(key => key.startsWith("$"))
+                .forEach(key => delete data[key])
             /*
              * 成功处理
              */

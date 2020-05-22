@@ -20,7 +20,7 @@ export default (rest = {}, fnChange, jsx = {}) => {
             /*
              * 使用二义性函数处理值
              */
-            const value = Ele.ambiguityEvent(event, {prevent});
+            const value = Ele.ambEvent(event, {prevent});
             /*
              * linker 专用处理，配置项
              * optionJsx.config.linker

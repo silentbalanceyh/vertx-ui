@@ -1,91 +1,44 @@
-import './Cab.less';
 import React from "react";
-// -- Defined
-import Ux from 'ux';
+import Ex from 'ex';
 import Op from './Op';
-import {Layout} from 'antd'
-import {Navigation} from "web";
-import Types from './Act.Types';
-// -- Sider Bar
-import SiderBar from './UI.Sider'
-import GlobalHeader from './UI.Header'
 
-const {zero} = Ux;
-const {Content} = Layout;
+import Ux from "ux";
+import renderJsx from './Web';
 
-/*
-const buildNavs = (reference = {}) => {
-    const {$menus, $router} = reference.props;
-    let current = $menus.to().filter(menu => menu.uri &&
-        0 < $router.path().indexOf(menu.uri));
-    current = (current[0]) ? current[0].key : undefined;
-    // 构造导航栏
-    let navigator = Ux.elementBranch($menus.to(), current, "parentId");
-    let $nav = [];
-    $nav.push(Ux.fromHoc(reference, "nav"));
-    if (navigator) {
-        navigator = navigator.sort((left, right) => left.level - right.level);
-        navigator.forEach(item => $nav.push({
-            key: item.name,
-            text: item.text,
-            // 必须添加"/"前缀，否则会生成错误路由
-            uri: (item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined
-        }));
-    }
-    return $nav;
-};*/
-
-@zero(Ux.rxEtat(require('./Cab.json'))
+@Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI")
-    .loading("app", "menus")
-    .op("collapse", Op.fnCollapse)
     .connect(state => Ux.dataIn(state)
         .rework({datum: ["menus"]})
         .revamp(["app", "user"])
-        .to())
+        .to()
+    )
+    .loading("app", "menus")
     .connect({
-        fnInited: Types.fnInited,
+        fnApp: Ex.epicInit,
         fnOut: Ux.fnOut,
     }, true)
     .state({
-        $_collapsed: false
+        $collapsed: false,
+        $ready: false,
     })
-    .to()
-)
+    .to())
 class Component extends React.PureComponent {
     componentDidMount() {
-        // 登陆控制（框架专用）
-        Ux.isAuthorized(this);
-        // 加载应用程序配置（App和Hotel）
-        this.props.fnInited();
+        Ex.yiLayout(this)
+            .then(state => Op.yiContainer(this, state))
     }
 
-    componentDidUpdate(prevProps) {
-        Op.fnLocation(this, prevProps);
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuContainer(this, {
+            props: prevProps,
+            state: prevState,
+        })
     }
 
     render() {
-        const {$op = {}} = this.state;
-        const {component: Component} = this.props;
-        const info = Ux.fromHoc(this, "info");
-        return (
-            <Layout className={"ux-layout"}>
-                <SiderBar {...Ux.toEffect(this.state)}
-                          {...Ux.toProp(this.props, 'app', 'router', 'menus')} />
-                <Layout>
-                    <GlobalHeader $banner={info}
-                                  fnCollapse={$op.collapse(this)}
-                                  {...Ux.toEffect(this.state)}
-                                  {...Ux.toProp(this.props, 'router', 'user')} />
-                    <Content>
-                        <Navigation {...Ux.toProp(this.props, 'router')}
-                                    $navs={Op.fnNavigator(this)}/>
-                        <Component {...Ux.toProp(this.props, "app", "user", "router", "hotel")} />
-                    </Content>
-                </Layout>
-                {Ux.D.renderTool(this)}
-            </Layout>
-        )
+        return Ex.yoRender(this, () =>
+                renderJsx(this),
+            Ex.parserOfColor("PxSwitcher").dynamic());
     }
 }
 

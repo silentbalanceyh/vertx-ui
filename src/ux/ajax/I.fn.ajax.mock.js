@@ -81,16 +81,27 @@ export default async (request = {}, params = {}, executor = {}) => {
         if (Mock[mockKey]) {
             const mockData = Mock[mockKey];
             if (mockData.mock) {
+                /* Mock日志 */
                 Log.mock(params, mockData.data, method + " " + api);
                 let response = {};
                 if (U.isFunction(mockData.processor)) {
-                    /*
-                     * 带 processor 的 mock 流程
-                     */
+                    /* 带 processor 流程 */
                     const source = Abs.clone(mockData.data);
-                    const result = mockData.processor(source, Abs.clone(params));
-                    Dev.Logger.response(result, params, request, true);
-                    response = await Abs.promise(result);
+                    let called = mockData.processor(source, Abs.clone(params));
+                    if (called instanceof Promise) {
+                        const [error, data] = await Abs.promise(called);
+                        called = {}
+                        if (data) {
+                            called = data;
+                        } else {
+                            called = {
+                                data: error,
+                                _error: true
+                            }
+                        }
+                    }
+                    Dev.Logger.response(called, params, request, true);
+                    response = await Abs.promise(called);
                 } else {
                     /*
                      * 不带 processor 的 mock 流程
@@ -98,18 +109,22 @@ export default async (request = {}, params = {}, executor = {}) => {
                     Dev.Logger.response(mockData.data, params, request, true);
                     response = await Abs.promise(mockData.data);
                 }
+                if (!response) response = {}
                 if (response.continue) {
                     return await fnExecute();
                 } else {
                     return response;
                 }
             } else {
+                /* 接口数据Mock关闭，真实请求 */
                 return await fnExecute();
             }
         } else {
+            /* 无法查找Mock对应的key，真实请求 */
             return await fnExecute();
         }
     } else {
+        /* 全局环境Mock未打开，真实请求 */
         return await fnExecute();
     }
 }

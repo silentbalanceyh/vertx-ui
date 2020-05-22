@@ -72,6 +72,7 @@ const inService = (processed = {}, service = {}) => {
      * mapping - 映射配置
      * identifier - ID选择器配置
      */
+    processed.ruleUnique = service.ruleUnique;
     processed.serviceRecord = service.serviceRecord;
     processed.serviceComponent = service.serviceComponent;
     processed.serviceConfig = service.serviceConfig;

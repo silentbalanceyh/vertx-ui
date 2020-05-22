@@ -30,5 +30,5 @@ export default {
     ...webNavigation,
     ...webUnit,
     ...webField,
-    ...webColumn
+    ...webColumn,
 }

@@ -197,7 +197,8 @@ class DataArray implements DataContainer {
         for (let idx = 0; idx < source.length; idx++) {
             const item = source[idx];
             if (item && item[idField] === element[idField]) {
-                source[idx] = element;
+                /* 更新专用 */
+                source[idx] = Object.assign(item, element);
             }
         }
         this.data = JSON.stringify(source);

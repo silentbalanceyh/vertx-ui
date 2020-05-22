@@ -2,6 +2,25 @@ import Ux from 'ux';
 
 export default {
     /*
+     * 读取模型下所有表单配置
+     */
+    forms: (identifier) => Ux.ajaxGet(`/api/ui/forms/:identifier`, {identifier})
+        .then(response => {
+            response.forEach(item => {
+                if (item.metadata) {
+                    /* 没有设计 */
+                    if (!item.metadata.hasOwnProperty('design')) {
+                        item.metadata.design = true;
+                    }
+                }
+            })
+            return Ux.promise(response);
+        }),
+    /*
+     * 读取模型下所有列表配置
+     */
+    lists: (identifier) => Ux.ajaxGet(`/api/ui/lists/:identifier`, {identifier}),
+    /*
      * 读取表单配置
      */
     form: (params) => Ux.ajaxGet(`/api/ui/form/:code`, params),

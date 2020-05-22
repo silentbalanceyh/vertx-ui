@@ -26,8 +26,11 @@ const toChildItem = (items = [], reference, Component) => {
         items.forEach((item, index) => {
             const element = childRef[index];
             if (element) {
-                item.fnChild = (extraAttrs = {}) =>
-                    Unit.aiChild(element, extraAttrs)
+                item.fnChild = (extraAttrs = {}) => {
+                    /* 必须在函数内作作用域处理 */
+                    const {value} = reference.props;
+                    return Unit.aiChild(element, Object.assign(extraAttrs, {value}));
+                }
             }
             if (Component) {
                 // 特殊注入，注入容器

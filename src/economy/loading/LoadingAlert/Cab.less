@@ -2,13 +2,13 @@
     .web-alert-shared {
 
         .shared-layout {
-            padding-left: 80px !important;
-            margin-bottom: 10px !important;
+            padding-left: 80px;
+            margin-bottom: 10px;
         }
 
         .ant-alert {
-            padding-left: 80px !important;
-            margin-bottom: 10px !important;
+            padding: 12px 12px 12px 80px;
+            margin-bottom: 10px;
 
             &-info {
                 .shared-layout;
@@ -34,7 +34,21 @@
         }
     }
 
+    &-text {
+        .web-alert-shared;
+        .web-alert-ul;
+
+        .ant-alert {
+            padding: 8px;
+            margin-bottom: 0;
+        }
+    }
+
     &-list {
+        i {
+            font-size: 36px !important;
+        }
+
         .web-alert-shared;
         .web-alert-ul;
     }

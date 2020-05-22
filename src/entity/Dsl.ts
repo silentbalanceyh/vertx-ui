@@ -10,6 +10,7 @@ import StateOut from "./state/StateOut";
 
 import RxEtat from './rx/Rx.Etat';
 import RxFlow from './rx/Rx.Flow';
+import RxOf from './rx/Rx.Of';
 import QQuery from "./query/QQuery";
 
 /**
@@ -25,6 +26,13 @@ class Dsl {
 
     static rxFlow(action: any): RxFlow {
         return RxFlow.from(action);
+    }
+
+    /*
+     * 高频流式Api处理
+     */
+    static of(reference: any): RxOf {
+        return RxOf.from(reference);
     }
 
     /*

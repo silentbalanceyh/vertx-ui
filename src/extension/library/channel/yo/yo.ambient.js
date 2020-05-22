@@ -34,7 +34,8 @@ const _seekAssist = (uniform = {}, input = {}) => {
      */
     if (input) {
         Object.keys(input)
-            .filter(field => field.startsWith(`$a_`))
+            .filter(field => field.startsWith(`$a_`) ||
+                field.startsWith(`__`)) // 新组件继承
             .forEach(key => uniform[key] = input[key]);
     }
 };

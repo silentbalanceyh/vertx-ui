@@ -12,7 +12,12 @@ import U from 'underscore';
  * @returns {string} 返回最终的Uri信息
  */
 const toUri = (uri = "", $app) => {
-    const path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
+    let path;
+    if ($app) {
+        path = $app._("path") ? $app._("path") : Ux.Env['ROUTE'];
+    } else {
+        path = Ux.Env['ROUTE'];
+    }
     let relatedPath = `${path}${uri}`;
     if (!relatedPath.startsWith('/')) {
         relatedPath = `/${relatedPath}`;
@@ -109,7 +114,7 @@ const toColor = (current) => {
  * @returns {String} 返回最终的模型ID（统一标识符计算值）
  */
 const toModelId = (reference, field) => {
-    const inited = Ux.ambiguityObject(reference, "$inited");
+    const inited = Ux.ambObject(reference, "$inited");
     const module = Ux.fromHoc(reference, "module");
     if (module[field]) {
         const config = module[field];

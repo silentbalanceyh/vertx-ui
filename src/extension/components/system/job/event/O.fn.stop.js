@@ -1,5 +1,5 @@
 import Ux from "ux";
-import Ui from "./O.ui";
+import Ui from "./O.tabs";
 import Ex from "ex";
 
 export default (reference, record) => (event) => {

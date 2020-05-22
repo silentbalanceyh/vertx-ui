@@ -55,6 +55,22 @@
 
             .ant-form-item {
                 margin-bottom: 0 !important;
+
+                .has-success, .has-error {
+                    width: 100%;
+                }
+
+                .has-success {
+                    .ant-form-item-children {
+                        .ant-select-arrow {
+                            right: 11px;
+                        }
+
+                        .ant-form-item-children-icon {
+                            display: none;
+                        }
+                    }
+                }
             }
         }
         .ix-form-row.each(@rowHeight, @max, @i + 1)

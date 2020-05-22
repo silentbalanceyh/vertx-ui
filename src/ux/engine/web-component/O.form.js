@@ -1,10 +1,11 @@
 import Abs from '../../abyss';
 import Dev from '../../develop';
 import Cfg from '../config';
-
+import Ut from '../../unity';
 import React from 'react';
 import U from 'underscore';
 import {Col, Form, Row} from 'antd';
+import {LoadingAlert} from 'web';
 
 const aiHidden = (reference, values = {}, raft = {}) => {
     if (raft.hidden) {
@@ -13,23 +14,46 @@ const aiHidden = (reference, values = {}, raft = {}) => {
             .map(each => each.render(values))
     } else return false;
 };
-const _aiInput = (reference, values) => (cell = {}) => {
-    if (cell.title) {
-        // Fix issue: render is invalid for prop
-        const attrs = Abs.clone(cell);
-        if (attrs.render) {
-            delete attrs.render;
-        }
-        const {title, ...cellRest} = attrs;
+
+const _aiTitle = (reference, cell = {}) => {
+    // Fix issue: render is invalid for prop
+    const attrs = Abs.clone(cell);
+    if (attrs.render) {
+        delete attrs.render;
+    }
+    const {title, ...cellRest} = attrs;
+    // Fix issue: list should has `key`
+    if (!cellRest.key) cellRest.key = Ut.randomUUID();
+    // 第二种格式出台
+    const {config = {}} = cell;
+    if (config.description) {
         return (
-            <Col {...cellRest} span={24}>{title}</Col>
+            <Col {...cellRest} span={24}>
+                <LoadingAlert $alert={config}/>
+            </Col>
         )
     } else {
+        cellRest.className = `ux-title ux-title-pure`
+        return (
+            <Col {...cellRest} span={24}>
+                {title}
+            </Col>
+        )
+    }
+}
+const _aiInput = (reference, values) => (cell = {}) => {
+    if (cell.title) {
+        return _aiTitle(reference, cell);
+    } else {
         // 其他项
-        const {col = {}, optionItem = {}} = cell;
+        const {col = {}, optionItem = {}, optionConfig = {}} = cell;
+        const attached = {};
+        if (optionConfig.rules && 0 < optionConfig.rules.length) {
+            attached.hasFeedback = true;
+        }
         return (
             <Col {...col}>
-                <Form.Item {...optionItem}>
+                <Form.Item {...optionItem} {...attached}>
                     {cell.render ? cell.render(values) : false}
                 </Form.Item>
             </Col>
@@ -118,8 +142,9 @@ const aiFormInput = (reference, values, raft = {}) => {
      * 初始值 initial 优先
      */
     let initials = aiInit(reference, values);
+    const {form = {}} = raft;
     return (
-        <div>
+        <div className={form.className}>
             {/** 隐藏组件 hidden **/}
             {aiHidden(reference, initials, raft)}
             {/** 字段渲染 **/}

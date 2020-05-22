@@ -64,7 +64,19 @@ import Is from './O.is';
 function promise() {
     if (1 === arguments.length) {
         const value = arguments[0];
-        return new Promise(resolve => resolve(value));
+        if (value instanceof Promise) {
+            return value
+                .then(data => [null, data])
+                .catch(error => [error, null]);
+        } else {
+            return new Promise((resolve, reject) => {
+                if (value && value._error) {
+                    reject(value);
+                } else {
+                    resolve(value);
+                }
+            });
+        }
     } else if (2 === arguments.length) {
         const supplier = arguments[0];
         const params = arguments[1];
@@ -357,11 +369,32 @@ const ready = (state = {}) => {
     state.$ready = true;
     return promise(state);
 };
+/**
+ * ## 包装过的 Promise，解决内存Bug，中途 Cancel
+ *
+ * @param promise
+ */
+const packet = (promise) => {
+    let hasCanceled = false
+    const wrappedPromise = new Promise((resolve, reject) => {
+        promise.then(
+            response => (hasCanceled ? reject({isCanceled: true}) : resolve(response)),
+            error => (hasCanceled ? reject({isCanceled: true}) : reject(error))
+        )
+    })
+    return {
+        promise: wrappedPromise,
+        cancel() {
+            hasCanceled = true
+        }
+    }
+}
 export default {
     promise,
     parallel,
     passion,
+    packet,
     pipe,
     ready,
-    debug
+    debug,
 }

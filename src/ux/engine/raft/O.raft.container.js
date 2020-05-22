@@ -20,9 +20,14 @@ const raftContainer = (cell = {}, config = {}) => {
          */
         const config = cell.config ? cell.config : {};
         return (values = {}) => {
+            /*
+             * 子组件调用父组件对应的 renders，生成 $renders 变量
+             */
+            const {renders = {}} = addOn;
             return (
                 <Component {...Datum.onUniform(reference.props)}
                            config={config} $inited={values}
+                           $renders={renders}
                            reference={reference}/>
             )
         }

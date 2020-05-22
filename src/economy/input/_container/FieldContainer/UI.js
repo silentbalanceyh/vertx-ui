@@ -19,8 +19,7 @@ class Component extends React.PureComponent {
             const {items = [], ...rest} = tabs;
             const {$inited = {}} = this.props;
             return (
-                <Tabs {...rest} activeKey={$activeKey}
-                      className={"ux-field-container"}>
+                <Tabs {...rest} activeKey={$activeKey}>
                     {items.map(item => {
                         const {fnChild, ...rest} = item;
                         return (

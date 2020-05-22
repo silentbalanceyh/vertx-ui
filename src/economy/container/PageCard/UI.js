@@ -4,7 +4,7 @@ import Ux from 'ux';
 import {Dsl} from 'entity';
 import PropTypes from 'prop-types';
 import Op from './UI.Op';
-import {_zero} from "../../_internal";
+import {component} from "../../_internal";
 
 /*
  * 基本要求：
@@ -19,7 +19,7 @@ import {_zero} from "../../_internal";
  * $key用于解析配置文件
  * $extra用于设置额外的附加工具栏
  */
-@_zero({
+@component({
     connect: {
         s2p: state => Dsl.createOut(state)
             .rework({

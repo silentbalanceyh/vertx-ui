@@ -1,0 +1,110 @@
+{
+    "_form": {
+        "className": "ix-form-segment",
+        "ui": [
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "integrationContainer",
+                    "config": {
+                        "activeKey": "tabIntegration",
+                        "tabPosition": "right",
+                        "defaultActiveKey": "tabIntegration",
+                        "items": "基本配置,tabIntegration;附加选项,tabOptions",
+                        "pages": {
+                            "tabIntegration": {
+                                "window": 1.1,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "endpoint,集成地址,24",
+                                            "optionJsx.placeholder": "一般为 Web Service专用 EndPoint 地址，SDK集成则略。"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "hostname,主机地址",
+                                            "optionJsx.placeholder": "IP地址 / 域名"
+                                        },
+                                        "port,端口号,,40%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "username,登录账号",
+                                            "optionJsx.autoComplete": "new-username"
+                                        },
+                                        "password,登录密码,,,aiPassword"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "protocol,协议类型,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "http,HTTP",
+                                                "https,HTTPS"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "apis,接口列表,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY_MAP",
+                                                    "keyField": "apiKey"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "apiKey",
+                                                            "title": "API键",
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "method",
+                                                            "title": "HTTP方法",
+                                                            "$render": "EDITOR",
+                                                            "config": {
+                                                                "render": "aiSelect",
+                                                                "optionJsx.config.items": [
+                                                                    "GET,GET方法",
+                                                                    "POST,POST方法",
+                                                                    "DELETE,DELETE方法",
+                                                                    "PUT,PUT方法"
+                                                                ]
+                                                            }
+                                                        },
+                                                        {
+                                                            "dataIndex": "path",
+                                                            "title": "API路径",
+                                                            "$render": "EDITOR",
+                                                            "config": {
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabOptions": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "options,,24,,aiJsonEditor",
+                                            "optionJsx.height": 220
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

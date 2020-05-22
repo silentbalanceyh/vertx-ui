@@ -1,21 +1,12 @@
-import Foundation from './O.foundation';
-import Event from './O.event';
-import Table from './O.table';
-import Rx from './O.rx';
-import Init from './O.init';
-import Change from './O.change.event';
-import xtReset from './O.fn.reset';
+import Common from './O.common';
+import Rx from './O.render';
 import Lazy from './O.lazy';
+import Table from './O.table';
 
 export default {
-    ...Foundation,
-    ...Event,
     ...Table,
+    ...Common,
     ...Rx,
-    ...Init,
-    // 触发专用
-    ...Change,
     // 新版本重置
-    xtReset,
     ...Lazy,
 };
