@@ -37,7 +37,7 @@
         "immutable": "^4.0.0-rc.12",
         "is-wsl": "^2.2.0",
         "jest": "^26.0.1",
-        "jquery": "^3.5.1",
+        "jquery": "^3.5.0",
         "jwt-decode": "^2.2.0",
         "lodash.keys": "^4.2.0",
         "lru-cache": "^5.1.1",
