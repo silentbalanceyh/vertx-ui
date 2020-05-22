@@ -14,7 +14,6 @@ export default (reference, {
     dataArray = [],
 }) => {
     let logo = $app ? $app._("logo") : undefined;
-    const {} = reference.props;
     if (!logo) {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;

@@ -2,8 +2,8 @@ import React from "react";
 import Dev from '../develop';
 import U from "underscore";
 import Abs from "../abyss";
-import Eng from '../engine';
 import {Progress} from 'antd';
+import Eng from "../engine";
 
 const jsxError = (message) => (
     <div className={"ux-error"}>
@@ -121,6 +121,44 @@ const xtReset = (reference, virtualRef = {}, callback) => {
         }
     }
 };
+
+const _xtRevert = (reference, callback = {}) => {
+    /*
+     * prevValue（之前的值）
+     * curValue（之后的值）
+     */
+    const ref = Eng.onReference(reference, 1);
+    if (ref) {
+        /*
+         * 传入了 reference 变量
+         */
+        const {form} = ref.props;
+        if (form) {
+            const isTouched = form.isFieldsTouched();
+            const {value, onChange} = reference.props;
+            if (isTouched) {
+                console.debug("绑定了 Form，touched: true");
+            } else {
+                /*
+                 * 重置
+                 */
+                if (Abs.isFunction(onChange)) {
+                    onChange(value);
+                }
+            }
+        } else {
+            console.debug("未绑定 Form");
+            /*
+             * 非直接自定义控件
+             */
+        }
+    } else {
+        console.debug("普通控件");
+        /*
+         * 没有传入 reference 变量
+         */
+    }
+}
 /**
  * ## 标准函数
  *
@@ -136,29 +174,17 @@ const xtRevert = (reference, virtualRef, callback = {}) => {
     if (!readOnly) {
         const prevValue = virtualRef.props.value;
         const curValue = reference.props.value;
-        /*
-         * prevValue（之前的值）
-         * curValue（之后的值）
-         */
-        const ref = Eng.onReference(reference, 1);
-        if (ref) {
+        if (Abs.isObject(prevValue) || Abs.isObject(curValue)) {
             /*
-             * 传入了 reference 变量
+             * 数据结构是 Object 或 Array
              */
-            const {form} = ref.props;
-            if (form) {
-                /*
-                 * 直接自定义控件
-                 */
-            } else {
-                /*
-                 * 非直接自定义控件
-                 */
+            if (Abs.isDiff(prevValue, curValue)) {
+                _xtRevert(reference, callback);
             }
         } else {
-            /*
-             * 没有传入 reference 变量
-             */
+            if (prevValue !== curValue) {
+                _xtRevert(reference, callback);
+            }
         }
     } else {
         /**

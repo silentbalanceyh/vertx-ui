@@ -10,7 +10,7 @@ class Component extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        Op.yuPage(this, {state: prevState, props: prevProps});
     }
 
     render() {
@@ -20,6 +20,9 @@ class Component extends React.PureComponent {
             return (
                 <Input.Group {...attrs}>
                     <Checkbox.Group options={$source}
+                                    value={attrs.value ? Object.keys(attrs.value)
+                                            .filter(item => attrs.value[item])
+                                        : []}
                                     onChange={Op.rxChange(this)}/>
                 </Input.Group>
             );

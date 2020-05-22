@@ -1,5 +1,6 @@
 import React from 'react';
 import Ux from "ux";
+import Ex from 'ex';
 import {Fn} from 'app';
 
 import FmAdd from './UI.Add';
@@ -13,9 +14,8 @@ class Component extends React.PureComponent {
     render() {
         return Fn.tplPage(this, {
             tabAdd: () => {
-
                 return (
-                    <FmAdd/>
+                    <FmAdd {...Ex.yoAmbient(this)}/>
                 );
             }
         })

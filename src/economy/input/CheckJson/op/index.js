@@ -12,7 +12,7 @@ const rxChange = (reference) => (checked = []) => {
     Ux.fn(reference).onChange(data);
 }
 const yuPage = (reference, virtualRef) => {
-
+    Ux.xtRevert(reference, virtualRef, {})
 }
 export default {
     yiPage,
