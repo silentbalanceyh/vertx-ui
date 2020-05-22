@@ -14,7 +14,7 @@ export default (reference, {
     dataArray = [],
 }) => {
     let logo = $app ? $app._("logo") : undefined;
-    const {$logoClass = {}} = reference.props;
+    const {} = reference.props;
     if (!logo) {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;
@@ -22,7 +22,7 @@ export default (reference, {
     return (
         <Sider {...$attrsSider}>
             {/* 菜单顶部Logo */}
-            <div className={`logo ${$logoClass ? $logoClass : ""}`}>
+            <div className={`logo`}>
                 <Link to={Ux.Env.ENTRY_ADMIN}>
                     <img src={logo}
                          alt={'Logo'}/>

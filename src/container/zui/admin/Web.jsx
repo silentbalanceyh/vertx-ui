@@ -41,7 +41,11 @@ export default (reference) => {
      */
     const {$dynamic = false} = reference.state;
     return Component ? (
-        <Component {...inherit} $logo={Logo} $logoClass={"zui-logo"}>
+        <Component {...inherit}
+                   $logo={Logo}
+                   css={{
+                       clsSider: "zui-sider"
+                   }}>
             {$dynamic ?
                 renderDynamic(reference, inherit) :
                 renderComponent(reference)

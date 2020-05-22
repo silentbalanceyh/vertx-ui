@@ -1,12 +1,37 @@
+@import "../../../global";
 
-.zui-logo {
-    background-color: #001528 !important;
+.zui-sider {
+    .logo {
+        background-color: #001528 !important;
 
-    img {
-        height: 46px !important;
-        width: 172px !important;
-        margin-left: 3px !important;
-        display: block;
-        float: left;
+        @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+            img {
+                height: 46px !important;
+                width: 172px !important;
+                margin-left: 3px !important;
+                display: block;
+                float: left;
+            }
+        }
+
+        @media (min-width: @screen-xxl) {
+            img {
+                height: 54px !important;
+                width: 206px !important;
+                margin-left: 6px !important;
+                display: block;
+                float: left;
+            }
+        }
+    }
+
+    .ant-menu-item {
+        .icon-svg {
+            padding-right: 8px;
+
+            svg {
+                line-height: 24px;
+            }
+        }
     }
 }

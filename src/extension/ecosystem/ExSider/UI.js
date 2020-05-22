@@ -54,10 +54,15 @@ class Component extends React.PureComponent {
                     dataUri[menu.key] = menu.uri;
                 }
             });
-            const {
-                clsSider = "ux-sider",
+            let {
+                clsSider,
                 clsSiderExpand = "ux-sider-expand"
             } = css;
+            if (clsSider) {
+                clsSider = `ux-sider ${clsSider}`;
+            } else {
+                clsSider = `ux-sider`
+            }
             /*
              * Sider属性计算
              */

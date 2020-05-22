@@ -18,12 +18,12 @@ export default (ref, {
     navigations
 }) => (
     <Layout className={"ux-layout"}>
-        <ExSider {...siders} css={
+        <ExSider css={
             {
                 clsSider: "ux-sider",
                 clsSiderExpand: "ux-sider-expand"
             }
-        }/>
+        } {...siders}/>
         <Layout>
             <Header {...headers}/>
             <Content className={"ux-content"}>
