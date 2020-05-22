@@ -28,6 +28,16 @@
                         "visible,可见"
                     ]
                 }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSubmit,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
             ]
         ]
     }

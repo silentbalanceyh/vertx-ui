@@ -11,7 +11,11 @@ const rxChange = (reference) => (checked = []) => {
     reference.setState({data: checked});
     Ux.fn(reference).onChange(data);
 }
+const yuPage = (reference, virtualRef) => {
+
+}
 export default {
     yiPage,
+    yuPage,
     rxChange,
 }

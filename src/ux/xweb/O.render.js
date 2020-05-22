@@ -2,6 +2,7 @@ import React from "react";
 import Dev from '../develop';
 import U from "underscore";
 import Abs from "../abyss";
+import Eng from '../engine';
 import {Progress} from 'antd';
 
 const jsxError = (message) => (
@@ -120,8 +121,54 @@ const xtReset = (reference, virtualRef = {}, callback) => {
         }
     }
 };
+/**
+ * ## 标准函数
+ *
+ * 自定义组件的新重置处理，用于设置表单的重置相关信息
+ *
+ * @memberOf module:_xt
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} virtualRef 带有state和props的前一次状态信息。
+ * @param {Function} callback 回调函数处理。
+ */
+const xtRevert = (reference, virtualRef, callback = {}) => {
+    const {readOnly = false} = reference.props;
+    if (!readOnly) {
+        const prevValue = virtualRef.props.value;
+        const curValue = reference.props.value;
+        /*
+         * prevValue（之前的值）
+         * curValue（之后的值）
+         */
+        const ref = Eng.onReference(reference, 1);
+        if (ref) {
+            /*
+             * 传入了 reference 变量
+             */
+            const {form} = ref.props;
+            if (form) {
+                /*
+                 * 直接自定义控件
+                 */
+            } else {
+                /*
+                 * 非直接自定义控件
+                 */
+            }
+        } else {
+            /*
+             * 没有传入 reference 变量
+             */
+        }
+    } else {
+        /**
+         * ReadOnly 的情况下，不执行任何重置，因为不会被改变
+         */
+    }
+}
 export default {
     xtRender,
     xtReady,
     xtReset,
+    xtRevert,
 };
