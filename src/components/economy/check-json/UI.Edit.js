@@ -5,7 +5,7 @@ import {ExForm} from "ei";
 import {Fn} from 'app';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
-    .cab("UI.Add")
+    .cab("UI.Edit")
     .to()
 )
 class Component extends React.PureComponent {
@@ -13,7 +13,14 @@ class Component extends React.PureComponent {
         /*
          * 配置处理
          */
-        const {$inited = {}} = this.props;
+        const {
+            $inited = {
+                data: {
+                    edition: true,
+                    visible: true
+                }
+            }
+        } = this.props;
         const form = Ex.yoForm(this, null, $inited);
         return (
             <ExForm {...form} $height={"300px"}

@@ -4,6 +4,7 @@ import Ex from 'ex';
 import {Fn} from 'app';
 
 import FmAdd from './UI.Add';
+import FmEdit from './UI.Edit';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("UI")
@@ -13,11 +14,8 @@ import FmAdd from './UI.Add';
 class Component extends React.PureComponent {
     render() {
         return Fn.tplPage(this, {
-            tabAdd: () => {
-                return (
-                    <FmAdd {...Ex.yoAmbient(this)}/>
-                );
-            }
+            tabAdd: () => (<FmAdd {...Ex.yoAmbient(this)}/>),
+            tabEdit: () => (<FmEdit {...Ex.yoAmbient(this)}/>)
         })
     }
 }

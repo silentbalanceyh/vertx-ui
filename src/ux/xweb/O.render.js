@@ -137,7 +137,7 @@ const _xtRevert = (reference, callback = {}) => {
             const isTouched = form.isFieldsTouched();
             const {value, onChange} = reference.props;
             if (isTouched) {
-                console.debug("绑定了 Form，touched: true");
+
             } else {
                 /*
                  * 重置
@@ -147,13 +147,11 @@ const _xtRevert = (reference, callback = {}) => {
                 }
             }
         } else {
-            console.debug("未绑定 Form");
             /*
              * 非直接自定义控件
              */
         }
     } else {
-        console.debug("普通控件");
         /*
          * 没有传入 reference 变量
          */
