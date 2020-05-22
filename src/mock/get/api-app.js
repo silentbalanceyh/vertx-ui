@@ -1,6 +1,6 @@
 export default {
     mock: true,
     data: {
-        appId: "mock_app_id"
+        key: "mock_app_key"
     }
 }

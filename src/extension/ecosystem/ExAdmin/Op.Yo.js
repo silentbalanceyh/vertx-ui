@@ -18,9 +18,12 @@ const yoSider = (reference = {}) => {
     /*
      * Logo默认设置
      */
-    const {$logo} = reference.props;
+    const {$logo, $logoClass} = reference.props;
     if ($logo) {
         attrs.$logo = $logo;
+    }
+    if ($logoClass) {
+        attrs.$logoClass = $logoClass;
     }
     return attrs;
 };

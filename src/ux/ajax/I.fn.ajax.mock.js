@@ -109,6 +109,7 @@ export default async (request = {}, params = {}, executor = {}) => {
                     Dev.Logger.response(mockData.data, params, request, true);
                     response = await Abs.promise(mockData.data);
                 }
+                if (!response) response = {}
                 if (response.continue) {
                     return await fnExecute();
                 } else {

@@ -1,6 +1,8 @@
 import Op from './Op';
 import Ex from 'ex';
 import React from 'react';
+import Logo from './image/logo.png';
+import './Cab.less';
 
 const renderComponent = (reference) => {
     const {component: Component} = reference.props;
@@ -39,7 +41,7 @@ export default (reference) => {
      */
     const {$dynamic = false} = reference.state;
     return Component ? (
-        <Component {...inherit}>
+        <Component {...inherit} $logo={Logo} $logoClass={"zui-logo"}>
             {$dynamic ?
                 renderDynamic(reference, inherit) :
                 renderComponent(reference)

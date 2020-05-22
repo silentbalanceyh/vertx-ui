@@ -11,6 +11,7 @@ export default {
     post_oauth_authorize,
     post_oauth_token,
     get_api_user,
-    "get_apps_vie.app.zui": get_app,
-    "get_api_menus_vie.app.zui": get_menus
+    "get_app_name_vie.app.zui": get_app,
+    "get_api_app": get_app,
+    "get_api_menus": get_menus
 }

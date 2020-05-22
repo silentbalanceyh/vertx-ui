@@ -2,10 +2,27 @@ import React from 'react'
 import './Cab.less';
 import Bg from './image/bg.jpg';
 import {Col, Layout, Row} from 'antd'
+import Ux from "ux";
+import Ex from "ex";
 
 const {Header, Content} = Layout;
 
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
+    .cab("UI")
+    .loading("app")
+    .connect(state => Ux.dataIn(state)
+        .revamp(["app"])
+        .to()
+    )
+    .connect({
+        fnApp: Ex.epicApp
+    }, true)
+    .to()
+)
 class Component extends React.PureComponent {
+    componentDidMount() {
+        this.props.fnApp(error => this.setState({error}));
+    }
 
     render() {
         const {component: Component} = this.props;
