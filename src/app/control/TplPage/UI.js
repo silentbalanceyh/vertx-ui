@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                     })}
                 </Tabs>
             )
-        })
+        }, Ex.parserOfColor("TplPage").component())
     }
 }
 

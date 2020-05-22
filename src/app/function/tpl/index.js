@@ -26,7 +26,7 @@ const tplPage = (reference, pages = {}) => {
         return (
             <TplPage pages={$pages}/>
         )
-    }, Ex.parserOfColor("TplPage").tpl())
+    }, Ex.parserOfColor("TplPageFn").tpl())
 }
 export default {
     tplPage
