@@ -32,11 +32,19 @@ class Component {
         });
     }
 
-    onClose() {
+    onClose(state = {}) {
         this.reference.setState({
             $inited: undefined,
             $visible: false,
-            $submitting: false
+            $submitting: false,
+            ...state,
+        })
+    }
+
+    onSubmit(state = {}, $submitting = true) {
+        this.reference.setState({
+            $submitting,
+            ...state,
         })
     }
 

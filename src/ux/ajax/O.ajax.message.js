@@ -14,7 +14,7 @@ import U from 'underscore';
  * @param {String|Object} content 消息呈现的内容
  * @param {Number} duration 消息显示的时间，以秒为单位
  */
-const messageSuccess = (content = "", duration = 1.2) => {
+const messageSuccess = (content = "", duration = 1.628) => {
     if ("string" === typeof content) {
         message.config({maxCount: 1});
         message.success(content, duration);
@@ -43,7 +43,7 @@ const messageSuccess = (content = "", duration = 1.2) => {
  * @param {String|Object} content 消息呈现的内容
  * @param {Number} duration 消息显示的时间，以秒为单位
  */
-const messageFailure = (content = "", duration = 1.2) => {
+const messageFailure = (content = "", duration = 1.628) => {
     if ("string" === typeof content) {
         message.config({maxCount: 1});
         message.error(content, duration);

@@ -4,7 +4,18 @@ export default {
     /*
      * 读取模型下所有表单配置
      */
-    forms: (identifier) => Ux.ajaxGet(`/api/ui/forms/:identifier`, {identifier}),
+    forms: (identifier) => Ux.ajaxGet(`/api/ui/forms/:identifier`, {identifier})
+        .then(response => {
+            response.forEach(item => {
+                if (item.metadata) {
+                    /* 没有设计 */
+                    if (!item.metadata.hasOwnProperty('design')) {
+                        item.metadata.design = true;
+                    }
+                }
+            })
+            return Ux.promise(response);
+        }),
     /*
      * 读取模型下所有列表配置
      */

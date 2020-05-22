@@ -14,7 +14,11 @@ export default (reference) => {
         })
         .then(state => Ux.promise(Ex.uiTab(reference)
             .children({
-                tabForm: tabForm(reference)
+                tabForm: tabForm(reference),
+                tabDesign: () => {
+
+                    return false;
+                },
             }).onMount(state))
         )
         .then(Ux.pipe(reference));

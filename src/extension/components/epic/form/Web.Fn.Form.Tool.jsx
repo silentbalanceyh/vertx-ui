@@ -3,8 +3,7 @@ import {Button, Col, Input, Row, Tag} from 'antd';
 import React from "react";
 import Event from './event';
 
-export default (reference) => {
-    const toolbar = Ux.fromHoc(reference, "toolbar");
+export default (reference, toolbar = {}) => {
     const {buttons = []} = toolbar;
     return (
         <Row className={"ext-tool"}>

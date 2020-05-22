@@ -1,37 +1,60 @@
 {
     "_form": {
-        "window": 0.15,
-        "columns": 1,
+        "window": 0.16,
+        "columns": 2,
         "ui": [
             [
                 "title=基本信息"
             ],
             [
-                "identifier,模型标识符,,,,readOnly=true"
+                "category,模型分类,24,,,readOnly=true"
             ],
             [
-                "modelName,模型名,,,,readOnly=true"
+                "modelName,模型名,12,,,readOnly=true",
+                "identifier,模型标识符,12,,,readOnly=true"
             ],
             [
-                "code,表单编码"
+                {
+                    "metadata": "code,表单编码,24,,,placeholder=表单系统编码不可重复",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，表单编码重复！",
+                            "config": {
+                                "uri": "/api/ui-form/existing-with",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma",
+                                    "": "OPERATOR:AND",
+                                    "identifier": "FORM:identifier"
+                                }
+                            }
+                        }
+                    ]
+                }
             ],
             [
-                "name,表单名称"
+                {
+                    "metadata": "name,表单名称,24",
+                    "optionConfig.rules": [
+                        "required,请输入表单名称，表单名称不可为空！"
+                    ]
+                }
             ],
             [
                 {
                     "metadata": "metadata,基本配置,24,,aiCheckJson",
                     "optionJsx.config.items": [
-                        "edition,可编辑",
-                        "deletion,可删除",
-                        "relation,可关联",
-                        "visible,可见"
+                        "design,可设计",
+                        "deletion,可删除"
                     ]
                 }
             ],
             [
                 {
                     "metadata": "$button",
+                    "hidden": true,
                     "optionJsx.extension": [
                         "$opSubmit,添加,SUBMIT,primary",
                         "$opReset,重置,RESET"
@@ -39,6 +62,10 @@
                     "span": 24
                 }
             ]
+        ],
+        "hidden": [
+            "key",
+            "active"
         ]
     }
 }

@@ -119,6 +119,22 @@ const xtLazyInit = (reference) => {
                     console.warn(`${id} 字段并没配置在 linker 中，请检查：`, unique);
                 }
             };
+            const fnFix = () => {
+                const {form} = ref.props;
+                if (form) {
+                    const values = form.getFieldsValue();
+                    const {linker = {}} = config;
+                    const formValues = {};
+                    Object.keys(linker)
+                        .map(fromField => linker[fromField])
+                        .forEach(toField => {
+                            if (values.hasOwnProperty(toField)) {
+                                formValues[toField] = values[toField];
+                            }
+                        });
+                    reference.setState({initialValue: formValues});
+                }
+            }
             /*
              * engine模式和非engine模式的自动判断
              */
@@ -135,6 +151,9 @@ const xtLazyInit = (reference) => {
                     const unique = Abs.isArray(data.list) ? data.list : [];
                     if (1 === unique.length) {
                         fnCallback(unique[0]);
+                    } else if (0 === unique.length) {
+                        // 特殊情况
+                        fnFix();
                     }
                 });
             } else {
@@ -146,6 +165,9 @@ const xtLazyInit = (reference) => {
                     const unique = Ele.elementFind(sourceArray, values);
                     if (1 === unique.length) {
                         fnCallback(unique[0]);
+                    } else if (0 === unique.length) {
+                        // 特殊情况
+                        fnFix();
                     }
                 });
             }
@@ -183,7 +205,8 @@ const xtLazyUp = (reference, virtualRef) => {
             /*
              * 非重置
              */
-            if (!value) {
+            if (value) {
+            } else {
                 /*
                  * 添加：重置
                  */

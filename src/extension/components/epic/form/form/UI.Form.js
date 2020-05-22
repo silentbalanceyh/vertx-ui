@@ -3,7 +3,6 @@ import Ux from "ux";
 import Ex from "ex";
 import {ExForm} from "ei";
 import Op from "./Op";
-import UiCode from './UI.Form.Code';
 
 @Ux.zero(Ux.rxEtat(require('../Cab'))
     .cab("UI.Form")
@@ -20,7 +19,12 @@ class Component extends React.PureComponent {
             <ExForm {...form} $height={"300px"}
                     $renders={{
                         code: (reference, jsx) => {
-                            return (<UiCode reference={reference} {...jsx}/>)
+                            const $jsx = Ux.clone(jsx);
+                            $jsx.addonBefore = `form.${$inited.identifier}.`;
+                            if ($inited.key) {
+                                $jsx.readOnly = true;
+                            }
+                            return Ux.aiInput(reference, $jsx);
                         }
                     }}
                     $op={Op.actions}/>

@@ -1,5 +1,5 @@
 import React from 'react';
-import {Card, Icon, Tooltip} from 'antd';
+import {Card, Icon, Popconfirm, Tooltip} from 'antd';
 import Img from './images/form.jpg';
 import Ux from 'ux';
 import Event from './event';
@@ -7,11 +7,11 @@ import Event from './event';
 export default (reference, data = {}) => {
     const card = Ux.fromHoc(reference, "card");
     const {img = {}, actions = []} = card;
-    const $metadata = data.metadata;
+    const $metadata = data.metadata ? data.metadata : {};
     return (
         <div className={"item"}>
             <Card cover={(() => {
-                const isDisabled = !$metadata.edition;
+                const isDisabled = !$metadata['design'];
                 return isDisabled ? (
                     <img alt={"Form"} src={Img}/>
                 ) : (
@@ -34,17 +34,34 @@ export default (reference, data = {}) => {
                 if (isDisabled) {
                     $rest.className = `${$rest.className} action-disabled`;
                 }
-                const fnClick = Event.actions[$rest.key];
-                if (Ux.isFunction(fnClick)) {
-                    $rest.onClick = fnClick(reference, data);
+                if (isDisabled) {
+                    return (<Icon {...$rest}/>)
+                } else {
+                    const fnClick = Event.actions[$rest.key];
+                    if (Ux.isFunction(fnClick)) {
+                        if ($rest.hasOwnProperty("confirm")) {
+                            const {confirm, ...$lefts} = $rest;
+                            return (
+                                <Popconfirm title={confirm}
+                                            onConfirm={
+                                                fnClick(reference, data)
+                                            }>
+                                    <Tooltip title={tooltip} mouseLeaveDelay={0.01}>
+                                        <Icon {...$lefts}/>
+                                    </Tooltip>
+                                </Popconfirm>
+                            )
+                        } else {
+                            $rest.onClick = fnClick(reference, data);
+                            return (
+                                <Tooltip title={tooltip}>
+                                    <Icon {...$rest}/>
+                                </Tooltip>
+                            )
+                        }
+                    } else return false;
                 }
-                return isDisabled ? (
-                    <Icon {...$rest}/>
-                ) : (
-                    <Tooltip title={tooltip}>
-                        <Icon {...$rest}/>
-                    </Tooltip>
-                )
+
             })} className={"card"}>
                 <Card.Meta title={data.name}/>
             </Card>
