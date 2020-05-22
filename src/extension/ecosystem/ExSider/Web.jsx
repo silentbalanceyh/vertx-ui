@@ -13,7 +13,7 @@ export default (reference, {
     $attrsSider = {},
     dataArray = [],
 }) => {
-    let logo = $app._("logo");
+    let logo = $app ? $app._("logo") : undefined;
     if (!logo) {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;
