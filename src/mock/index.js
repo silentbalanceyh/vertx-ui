@@ -5,6 +5,7 @@ import post_oauth_token from './mock-empty/token';
 import get_api_user from './get/api-user';
 import get_app from './get/api-app';
 import get_menus from './get/api-menus';
+import FormData from './editor/input.json';
 
 export default {
     post_oauth_login,
@@ -13,5 +14,8 @@ export default {
     get_api_user,
     "get_app_name_vie.app.zui": get_app,
     "get_api_app": get_app,
-    "get_api_menus": get_menus
+    "get_api_menus": get_menus,
+    Editor: {
+        form: FormData
+    }
 }
