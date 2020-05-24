@@ -1,4 +1,8 @@
 {
-    "_toolbar": {
-    }
+    "_commands": [
+        "save,保存",
+        "redo,,重置",
+        "divider",
+        "setting,,配置"
+    ]
 }
