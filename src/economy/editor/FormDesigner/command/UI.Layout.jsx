@@ -14,7 +14,15 @@ class Component extends React.PureComponent {
          */
         const {$inited = {}} = this.props;
         const config = Ux.fromHoc(this, "form");
-        return (<UiForm config={{form: config}} $inited={$inited}/>);
+        return (<UiForm config={{form: config}}
+                        $renders={{
+                            layoutView: (reference, jsx = {}) => {
+                                return (
+                                    <span>Hello</span>
+                                )
+                            }
+                        }}
+                        $inited={$inited}/>);
     }
 }
 

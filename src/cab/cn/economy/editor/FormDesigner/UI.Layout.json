@@ -19,9 +19,12 @@
                     "optionJsx.config.items": [
                         "1,标准布局",
                         "1.1,常用布局",
-                        "0.15,宽文字布局"
+                        "0.16,宽文字布局"
                     ]
                 }
+            ],
+            [
+                "layoutView"
             ],
             [
                 {
@@ -32,6 +35,12 @@
                     "span": 24
                 }
             ]
-        ]
+        ],
+        "initial": {
+            "cssMode": "FIX:APPEND"
+        }
+    },
+    "_layout": {
+        "title": "布局指示器"
     }
 }

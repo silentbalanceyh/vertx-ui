@@ -21,41 +21,43 @@ const initial = (reference, form, program = {}) => {
      * - $mode = ADD 的时候
      * 2）如果 $mode = EDIT 则直接跳过该流程
      */
-    const {$mode} = reference.props;
-    if ($mode) {
-        let initial = {};
-        if ("ADD" === $mode) {
-            if (form && form.initial) {
-                /*
-                 * 解析表达式
-                 */
-                let definition = {};
-                Object.keys(form.initial)
-                    /* 直接过滤得到最终的表达式 */
-                    .filter(key => "string" === typeof form.initial[key])
-                    .forEach(key => {
-                        const value = Pr.parseValue(form.initial[key], reference);
-                        if (undefined !== value) {      // undefined !== value
-                            definition[key] = value;
-                        }
-                    });
-                initial = definition;
-            }
-        } else {
+    const {$mode = "ADD"} = reference.props;
+    let initial = {};
+    if ("ADD" === $mode) {
+        if (form && form.initial) {
             /*
-             * EDIT 编辑模式
+             * 解析表达式
              */
-            const {$inited = {}} = reference.props;
-            initial = Abs.clone($inited);
+            let definition = {};
+            Object.keys(form.initial)
+                /* 直接过滤得到最终的表达式 */
+                .filter(key => "string" === typeof form.initial[key])
+                .forEach(key => {
+                    const value = Pr.parseValue(form.initial[key], reference);
+                    if (undefined !== value) {      // undefined !== value
+                        definition[key] = value;
+                    }
+                });
+            initial = definition;
         }
-        if (!Abs.isEmpty(program)) {
-            Object.assign(initial, program);
-        }
-        return initial;
+    } else {
+        /*
+         * EDIT 编辑模式
+         */
+        const {$inited = {}} = reference.props;
+        initial = Abs.clone($inited);
+    }
+    if (!Abs.isEmpty(program)) {
+        Object.assign(initial, program);
+    }
+    return initial;
+    /* 旧代码
+    if ($mode) {
+
     } else {
         console.error("[ Ux ] 初始化流程失败，不可调用 `initial` 方法，必须参数 `$mode` 缺失。");
         return {};  // 防止错误信息
-    }
+    }*/
 };
 export default {
     initial,
