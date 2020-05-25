@@ -1,5 +1,7 @@
 import React from 'react';
 import {component} from "../../../_internal";
+import UiForm from '../Web.Form';
+import Ux from 'ux';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -11,7 +13,8 @@ class Component extends React.PureComponent {
          * 配置处理
          */
         const {$inited = {}} = this.props;
-        return false;
+        const config = Ux.fromHoc(this, "form");
+        return (<UiForm config={{form: config}} $inited={$inited}/>);
     }
 }
 

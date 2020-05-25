@@ -1,19 +1,29 @@
 {
     "_form": {
-        "window": 1,
+        "window": 0.15,
         "columns": 1,
         "ui": [
             [
-                "className,CSS名称"
+                "className,CSS名称,,,,placeholder=系统默认：web-form"
             ],
             [
                 {
-                    "metadata": "window,布局种类,,,aiSelect",
+                    "metadata": "window,布局种类,,,aiSelect,placeholder=系统默认：标准布局",
                     "optionJsx.config.items": [
                         "1,标准布局",
                         "1.1,常用布局",
                         "0.15,宽文字布局"
                     ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
                 }
             ]
         ]
