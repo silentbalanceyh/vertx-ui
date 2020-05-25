@@ -36,7 +36,17 @@ const yiPalette = (reference, state) => {
     const paletteJson = Ux.fromHoc(reference, "palette");
     const palette = {};
     palette.title = paletteJson.title;
-    palette.items = paletteJson.items;
+    palette.items = [];
+    if (Ux.isArray(paletteJson.items)) {
+        paletteJson.items.forEach(item => {
+            if ("string" === typeof item) {
+                const itemArr = item.split(',');
+                const [key, text] = itemArr;
+                const pushed = {key, text};
+                palette.items.push(pushed);
+            } else palette.items.push(Ux.clone(item));
+        })
+    }
     state.$palette = palette;
     return Ux.promise(state);
 }

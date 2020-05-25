@@ -27,10 +27,9 @@
     "_palette": {
         "title": "可用控件列表",
         "items": [
-            {
-                "key": "aiInput",
-                "text": "文本输入框"
-            }
+            "aiInput,文本输入框",
+            "aiPassword,密码输入框",
+            "aiInputNumber,数字录入框"
         ]
     }
 }
