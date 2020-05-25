@@ -1,0 +1,21 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 1,
+        "ui": [
+            [
+                "className,CSS名称"
+            ],
+            [
+                {
+                    "metadata": "window,布局种类,,,aiSelect",
+                    "optionJsx.config.items": [
+                        "1,标准布局",
+                        "1.1,常用布局",
+                        "0.15,宽文字布局"
+                    ]
+                }
+            ]
+        ]
+    }
+}
