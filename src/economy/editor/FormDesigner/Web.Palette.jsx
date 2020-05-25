@@ -5,6 +5,23 @@ import React from 'react';
 import {Collapse, Menu} from "antd";
 import Img from './images';
 import Ux from 'ux';
+import {useDrag as DragSource} from 'react-dnd';
+
+const toDraggableItem = (reference, item) => {
+    const [collected, drag] = DragSource({
+        item: {id: item.key, type: "DRAG-ITEM", data: item}
+    });
+    const image = Img[item.key];
+    return (
+        <div ref={drag} key={item.key}>
+            <Menu.Item key={item.key}>
+                <img alt={item.text} src={image}/>
+                &nbsp;&nbsp;
+                {item.text}
+            </Menu.Item>
+        </div>
+    );
+}
 
 export default (reference) => {
     const {$palette = []} = reference.state;
@@ -20,16 +37,7 @@ export default (reference) => {
                           style={{
                               height: Ux.toHeight($height)
                           }}>
-                        {palette.items.map(item => {
-                            const image = Img[item.key];
-                            return (
-                                <Menu.Item key={item.key}>
-                                    <img alt={item.text} src={image}/>
-                                    &nbsp;&nbsp;
-                                    {item.text}
-                                </Menu.Item>
-                            );
-                        })}
+                        {palette.items.map(item => toDraggableItem(reference, item))}
                     </Menu>
                 </Collapse.Panel>
             ))}

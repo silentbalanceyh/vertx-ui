@@ -4,6 +4,8 @@ import {component} from "../../_internal";
 import {Col, Row} from 'antd';
 import Op from './op';
 import Ux from 'ux';
+import {DndProvider} from 'react-dnd';
+import {HTML5Backend} from 'react-dnd-html5-backend';
 
 import LoadingContent from '../../loading/LoadingContent/UI';
 
@@ -28,14 +30,16 @@ class Component extends React.PureComponent {
                             {renderCmd(this)}
                         </Col>
                     </Row>
-                    <Row>
-                        <Col span={4}>
-                            {renderPalette(this)}
-                        </Col>
-                        <Col span={20}>
+                    <DndProvider backend={HTML5Backend}>
+                        <Row>
+                            <Col span={4}>
+                                {renderPalette(this)}
+                            </Col>
+                            <Col span={20}>
 
-                        </Col>
-                    </Row>
+                            </Col>
+                        </Row>
+                    </DndProvider>
                 </div>
             )
         }, {component: LoadingContent})
