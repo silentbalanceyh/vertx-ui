@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import yiData from './O.yi.data';
 
 const yiCommand = (reference, state = {}) => {
     const commandArr = Ux.fromHoc(reference, "commands");
@@ -61,5 +62,6 @@ export default (reference) => {
     /* _commands 命令工具栏 */
     yiCommand(reference, state)
         .then(processed => yiPalette(reference, processed))
+        .then(processed => yiData(reference, processed))
         .then(Ux.ready).then(Ux.pipe(reference));
 }

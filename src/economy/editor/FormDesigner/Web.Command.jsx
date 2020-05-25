@@ -2,9 +2,24 @@
  * 命令按钮基本操作
  */
 import React from "react";
-import {Divider, Tooltip} from 'antd';
+import {Divider, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
 import Op from './op';
+import renderPop from './Web.Popover';
+
+const renderPopover = (reference, item = {}, children) => {
+    const {$popover} = reference.state;
+    const visible = $popover ? $popover === item.key : false;
+    const fnContent = renderPop[item.key];
+    return (
+        <Popover visible={visible} trigger={"click"}
+                 overlayClassName={"web-form-designer-popover"}
+                 content={Ux.isFunction(fnContent) ? fnContent(reference) : false}
+                 placement={"bottomLeft"}>
+            {children}
+        </Popover>
+    )
+}
 
 export default (reference) => {
     const {$commands = []} = reference.state;
@@ -18,7 +33,7 @@ export default (reference) => {
                 } else {
                     const tooltip = command.tooltip;
                     /* 不带文字 */
-                    const renderLink = (item = {}) => (
+                    const renderLink = (item = {}) => renderPopover(reference, item, (
                         <a href={""} className={item.className ? `op-link ${item.className}` : `op-link`}
                            onClick={event => {
                                Ux.prevent(event);
@@ -31,7 +46,7 @@ export default (reference) => {
                            }}>
                             {Ux.aiIcon(item.icon, {"data-color": item['svgColor'] ? item['svgColor'] : "#595959"})}
                         </a>
-                    )
+                    ))
                     if (tooltip) {
                         return (
                             <Tooltip title={tooltip} key={command.key}>

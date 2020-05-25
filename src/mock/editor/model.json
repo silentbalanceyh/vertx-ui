@@ -1,0 +1,12 @@
+{
+    "identifier": "ci.service",
+    "name": "业务服务",
+    "category": "业务分类",
+    "attributes": [
+        {
+            "name": "name",
+            "type": "String",
+            "label": "配置项名称"
+        }
+    ]
+}

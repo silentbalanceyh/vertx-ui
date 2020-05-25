@@ -1,7 +1,7 @@
 import React from 'react';
 import './Cab.less';
 import {component} from "../../_internal";
-import {Col, Row} from 'antd';
+import {Col, Row, Spin} from 'antd';
 import Op from './op';
 import Ux from 'ux';
 import {DndProvider} from 'react-dnd';
@@ -24,6 +24,7 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
+            const {$forbidden = false} = this.state;
             return (
                 <div className={"web-form-designer"}>
                     <Row>
@@ -31,16 +32,18 @@ class Component extends React.PureComponent {
                             {renderCmd(this)}
                         </Col>
                     </Row>
-                    <DndProvider backend={HTML5Backend}>
-                        <Row>
-                            <Col span={4}>
-                                {renderPalette(this)}
-                            </Col>
-                            <Col span={20}>
-                                {renderEditor(this)}
-                            </Col>
-                        </Row>
-                    </DndProvider>
+                    <Spin spinning={$forbidden} indicator={null} onClick={Op.onSpin(this)}>
+                        <DndProvider backend={HTML5Backend}>
+                            <Row>
+                                <Col span={4}>
+                                    {renderPalette(this)}
+                                </Col>
+                                <Col span={20}>
+                                    {renderEditor(this)}
+                                </Col>
+                            </Row>
+                        </DndProvider>
+                    </Spin>
                 </div>
             )
         }, {component: LoadingContent})
