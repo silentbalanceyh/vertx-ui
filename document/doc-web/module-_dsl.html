@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>_encrypt - Zero UI框架专用前端文档</title>
+    <title>_dsl - Zero UI框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -40,7 +40,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">_encrypt</h1>
+    <h1 class="page-title">_dsl</h1>
     
 
     
@@ -64,7 +64,11 @@
         
             
                 <div class="description usertext"><h1>内部模块</h1>
-<p>编码解码模块</p></div>
+<p>entity 中专用语言模块，处理专用 Dsl 的数据类型专用</p>
+<ul>
+<li>DataObject</li>
+<li>DataArray</li>
+</ul></div>
             
 
             
@@ -166,7 +170,7 @@
 
     
 
-    <h4 class="name" id=".decryptBase64"><span class="type-signature">(static) </span>decryptBase64<span class="signature">(value)</span><span class="type-signature"> &rarr; {String}</span></h4>
+    <h4 class="name" id=".dslArray"><span class="type-signature">(static) </span>dslArray<span class="signature">(reference, key, data, config)</span><span class="type-signature"></span></h4>
 
     
 
@@ -213,8 +217,13 @@
 
 
 <div class="description usertext">
-    <h2>标准函数</h2>
-<p>Base64解码函数，针对value进行Base64解码。</p>
+    <h2>特殊函数「Zero」</h2>
+<p>Zero UI 中存储 Array 的专用数据，配置数据格式</p>
+<pre class="prettyprint source lang-json"><code>{
+    field: &quot;主键字段&quot;,
+    remove: &quot;是否 true / false&quot;
+}
+</code></pre>
 </div>
 
 
@@ -252,7 +261,30 @@
 
         <tr>
             
-                <td class="name"><code>value</code></td>
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
             
 
             <td class="type">
@@ -268,7 +300,53 @@
 
             
 
-            <td class="description last"><p>已经被编码过的Base64字符串。</p></td>
+            <td class="description last"><p>写内容所需的 key</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>合并到 reference state 中的数据本身</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>配置数据</p></td>
         </tr>
 
     
@@ -290,513 +368,6 @@
 
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>解码过后的明文。</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".encryptBase64"><span class="type-signature">(static) </span>encryptBase64<span class="signature">(value)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>标准函数</h2>
-<p>Base64编码函数，针对value进行Base64编码，生成Base64的密文。</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>被编码字符串。</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>编码好的Base64的字符串。</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".encryptHmac512"><span class="type-signature">(static) </span>encryptHmac512<span class="signature">(value, secret)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>标准函数</h2>
-<p>数字签名专用Hmac512算法加密，针对value和secret一起进行Hmac512数字签名加密。</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>待执行签名的字符串，一般是明文。</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>secret</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>密钥信息，和当前被签名的客户端绑定。</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>签名的最终信息，生成的 sig 值。</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".encryptMD5"><span class="type-signature">(static) </span>encryptMD5<span class="signature">(value)</span><span class="type-signature"> &rarr; {String}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>标准函数</h2>
-<p>MD5加密函数，针对value进行MD5加密，加密过后的密文全部转换成大写。</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>value</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>被加密字符串。</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>加密过后的密文。</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">String</span>
-
-
-    </dd>
-</dl>
-
-    
 
 
 

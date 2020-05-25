@@ -11,7 +11,7 @@ import U from 'underscore';
 import Logger from '../../develop/logger';
 
 
-/**
+/*
  * ## 引擎函数
  *
  * 配置专用方法，处理当前Form中的input控件专用信息，该配置方法为**上层方法**，直接从
