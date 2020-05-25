@@ -32,9 +32,18 @@ const yiCommand = (reference, state = {}) => {
     state.$commands = commands;
     return Ux.promise(state);
 }
+const yiPalette = (reference, state) => {
+    const paletteJson = Ux.fromHoc(reference, "palette");
+    const palette = {};
+    palette.title = paletteJson.title;
+    palette.items = paletteJson.items;
+    state.$palette = palette;
+    return Ux.promise(state);
+}
 export default (reference) => {
     const state = {};
     /* _commands 命令工具栏 */
     yiCommand(reference, state)
+        .then(processed => yiPalette(reference, processed))
         .then(Ux.ready).then(Ux.pipe(reference));
 }
