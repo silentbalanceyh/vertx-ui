@@ -25,11 +25,31 @@
         "help,,帮助"
     ],
     "_palette": {
-        "title": "可用控件列表",
+        "title": "控件列表",
         "items": [
-            "aiInput,文本输入框",
-            "aiPassword,密码输入框",
-            "aiInputNumber,数字录入框"
+            "aiTitle,行标题",
+            "aiMagic,数据显示器",
+            "aiInput,单行文本",
+            "aiPassword,密码录入",
+            "aiInputNumber,数字录入",
+            "aiTextArea,多行文本录入",
+            "aiSelect,下拉框",
+            "aiTreeSelect,下拉树",
+            "aiCheckbox,多选框",
+            "aiRadio,单选框",
+            "aiDatePicker,日期选择器",
+            "aiTimePicker,时间选择器",
+            "aiFileUpload,附件上传",
+            "aiTransfer,穿梭框",
+            "aiBraftEditor,富文本编辑器",
+            "aiAddressSelector,地址选择器",
+            "aiDatumCascade,级联下拉框",
+            "aiCheckJson,属性编辑器",
+            "aiJsonEditor,Json编辑器",
+            "aiListSelector,列表选择器",
+            "aiTreeSelector,树选择器",
+            "aiTableEditor,表格编辑器",
+            "aiDialogEditor,子表单编辑器"
         ]
     }
 }

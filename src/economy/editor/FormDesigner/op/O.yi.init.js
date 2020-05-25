@@ -33,19 +33,25 @@ const yiCommand = (reference, state = {}) => {
     return Ux.promise(state);
 }
 const yiPalette = (reference, state) => {
+
+    /* 执行单处理 */
+    const fnNorm = (item) => {
+        if ("string" === typeof item) {
+            const itemArr = item.split(',');
+            const [key, text] = itemArr;
+            return {key, text};
+        } else return Ux.clone(item);
+    }
     const paletteJson = Ux.fromHoc(reference, "palette");
-    const palette = {};
-    palette.title = paletteJson.title;
-    palette.items = [];
-    if (Ux.isArray(paletteJson.items)) {
-        paletteJson.items.forEach(item => {
-            if ("string" === typeof item) {
-                const itemArr = item.split(',');
-                const [key, text] = itemArr;
-                const pushed = {key, text};
-                palette.items.push(pushed);
-            } else palette.items.push(Ux.clone(item));
-        })
+    const palette = [];
+    /* 基础控件 */
+    if (paletteJson.items) {
+        const basicTool = {items: []};
+        basicTool.title = paletteJson.title;
+        basicTool.key = "pageBasic";
+        paletteJson.items.map(fnNorm)
+            .forEach(item => basicTool.items.push(item));
+        palette.push(basicTool);
     }
     state.$palette = palette;
     return Ux.promise(state);
