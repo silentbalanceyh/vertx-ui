@@ -10,17 +10,25 @@ const yiCommand = (reference, state = {}) => {
             if ("divider" === commandJson) {
                 commands.push(commandJson);
             } else {
-                const commandItem = commandJson.split(',');
-                const [key, text, tooltip] = commandItem;
-                const command = {};
-                command.key = key;
-                command.icon = key;
-                command.text = text;
-                command.tooltip = tooltip;
-                commands.push(command);
+                if ("string" === typeof commandJson) {
+                    const commandItem = commandJson.split(',');
+                    const [key, text, tooltip, className] = commandItem;
+                    const command = {};
+                    command.key = key;
+                    command.icon = key;
+                    command.text = text;
+                    command.tooltip = tooltip;
+                    if (className) command.className = className;
+                    commands.push(command);
+                } else {
+                    commands.push(Ux.clone(commandJson));
+                }
             }
         })
     }
+    /* svg 图标 */
+    commands.filter(command => command.icon && command.icon.startsWith("svg"))
+        .forEach(command => command.className = `op-ilink`)
     state.$commands = commands;
     return Ux.promise(state);
 }

@@ -1,7 +1,71 @@
+@import "../../../global";
+
 .web-form-designer {
     .designer {
         &-tool {
             width: 100%;
+            display: inline-block;
+            margin-bottom: 3px;
+            padding-bottom: 8px;
+            border-bottom: solid 1px #e8e8e8;
+
+            .link {
+                padding: 6px 8px;
+                color: #595959;
+                border: solid 1px white;
+            }
+
+            .op {
+
+                &-link {
+                    .link;
+                }
+
+                &-ilink {
+                    .link;
+
+                    .icon-svg {
+                        line-height: 21px;
+
+                        i {
+
+                            svg {
+                                width: 14px;
+                                height: 14px;
+                            }
+                        }
+
+                    }
+                }
+
+                &-primary i {
+                    color: @primary-color;
+                }
+
+                &-cancel i {
+                    color: @color-error;
+                }
+
+                &-field i {
+                    color: #00939c;
+                }
+
+                &-source i {
+                    color: #4296de;
+                }
+            }
+
+            a:hover {
+                border: solid 1px #8C8C8C;
+                border-radius: 4px;
+            }
+
+            .ant-divider {
+                margin: 0 6px;
+            }
+        }
+
+        &-body {
         }
     }
 }

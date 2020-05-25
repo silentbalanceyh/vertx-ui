@@ -2,7 +2,8 @@
  * 命令按钮基本操作
  */
 import React from "react";
-import {Divider, Icon, Tooltip} from 'antd';
+import {Divider, Tooltip} from 'antd';
+import Ux from 'ux';
 
 export default (reference) => {
     const {$commands = []} = reference.state;
@@ -16,22 +17,19 @@ export default (reference) => {
                 } else {
                     const tooltip = command.tooltip;
                     /* 不带文字 */
+                    const renderLink = (item = {}) => (
+                        <a href={""} className={item.className ? `op-link ${item.className}` : `op-link`}>
+                            {Ux.aiIcon(item.icon, {"data-color": item['svgColor'] ? item['svgColor'] : "#595959"})}
+                        </a>
+                    )
                     if (tooltip) {
                         return (
                             <Tooltip title={tooltip} key={command.key}>
-                                <a href={""}>
-                                    <Icon type={command.icon}/>
-                                </a>
+                                {renderLink(command)}
                             </Tooltip>
                         )
                     } else {
-                        return (
-                            <a href={""} key={command.key}>
-                                <Icon type={command.icon}/>
-                                &nbsp;&nbsp;
-                                {command.text}
-                            </a>
-                        )
+                        return renderLink(command);
                     }
                 }
             })}
