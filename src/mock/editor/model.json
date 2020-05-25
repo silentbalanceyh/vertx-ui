@@ -5,8 +5,8 @@
     "attributes": [
         {
             "name": "name",
-            "type": "String",
-            "label": "配置项名称"
+            "type": "java.lang.String",
+            "alias": "配置项名称"
         }
     ]
 }

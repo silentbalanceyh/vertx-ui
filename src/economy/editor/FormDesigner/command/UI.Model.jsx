@@ -1,7 +1,7 @@
 import React from 'react';
 import {component} from "../../../_internal";
 import Ux from 'ux';
-import {Col, Row, Tag} from 'antd';
+import {Col, Row, Table, Tag} from 'antd';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -11,21 +11,31 @@ class Component extends React.PureComponent {
     render() {
         const {data = {}} = this.props;
         const config = Ux.fromHoc(this, "config");
+        const {attributes = []} = data;
+        const {table = {}} = config;
+        const $table = Ux.clone(table);
+        $table.columns = Ux.configColumn(this, $table.columns);
         return (
             <div className={"model-viewer"}>
-                <Row>
+                <Row className={"row"}>
                     <Col span={8}>
-                        {config.name}：{data.name}
+                        {config.name}：
+                        <Tag color={"green"} style={{fontSize: 14}}>
+                            {data.name}
+                        </Tag>
                     </Col>
                     <Col span={8}>
                         {config.category}：
-                        <Tag color={"geekblue"} style={{fontSize: 14}}>
-                            {data.category}
-                        </Tag>
+                        {data.category}
                     </Col>
                     <Col span={8}>
                         {config.identifier}：
                         {data.identifier}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24}>
+                        <Table {...$table} dataSource={attributes}/>
                     </Col>
                 </Row>
             </div>
