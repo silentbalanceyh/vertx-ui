@@ -16,7 +16,9 @@ import webColumn from './web-column';
 import webUnit from './web-unit';
 // 特殊函数
 import functions from './functions';
-// 桥接Column中的特殊函数
+// 特殊方法处理布局
+import Lt from './layout';
+
 export default {
     ...datum,
     ...config,
@@ -31,4 +33,5 @@ export default {
     ...webUnit,
     ...webField,
     ...webColumn,
+    aiLayout: Lt.aiLayout
 }
