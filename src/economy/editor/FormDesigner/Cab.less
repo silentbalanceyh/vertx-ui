@@ -8,15 +8,26 @@
 
         .ant-popover-inner-content {
             padding: 4px 6px;
-        }
 
-        .model {
-            &-viewer {
-                .row {
-                    margin-bottom: 4px !important;
+            .viewer {
+                &-model {
+                    .row {
+                        margin-bottom: 4px !important;
+                    }
+                }
+
+                &-layout {
+                    &-row {
+                        height: 4px;
+
+                        .ant-col {
+                            height: 6px;
+                        }
+                    }
                 }
             }
         }
+
     }
 
     .designer {

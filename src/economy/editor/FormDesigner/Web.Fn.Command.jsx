@@ -5,7 +5,7 @@ import React from "react";
 import {Divider, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
 import Op from './op';
-import renderPop from './Web.Popover';
+import renderPop from './Web.O.Popover';
 
 const renderPopover = (reference, item = {}, children) => {
     const {$popover} = reference.state;

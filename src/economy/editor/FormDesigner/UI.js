@@ -9,9 +9,9 @@ import {HTML5Backend} from 'react-dnd-html5-backend';
 
 import LoadingContent from '../../loading/LoadingContent/UI';
 
-import renderCmd from './Web.Command';
-import renderPalette from './Web.Palette';
-import renderEditor from './Web.Editor';
+import renderCmd from './Web.Fn.Command';
+import renderPalette from './Web.Fn.Palette';
+import renderEditor from './Web.Fn.Editor';
 
 @component({
     "i18n.cab": require('./Cab.json'),

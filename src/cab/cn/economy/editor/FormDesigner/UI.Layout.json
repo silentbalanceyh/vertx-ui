@@ -24,9 +24,6 @@
                 }
             ],
             [
-                "layoutView"
-            ],
-            [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
@@ -34,6 +31,9 @@
                     ],
                     "span": 24
                 }
+            ],
+            [
+                "layoutView"
             ]
         ],
         "initial": {
@@ -46,10 +46,10 @@
             "1": {
                 "ui": [
                     [
-                        "field1006,,6",
-                        "field1106,,6",
-                        "field1206,,6",
-                        "field1306,,6"
+                        "field1006,--,6",
+                        "field1106,--,6",
+                        "field1206,--,6",
+                        "field1306,--,6"
                     ]
                 ]
             }

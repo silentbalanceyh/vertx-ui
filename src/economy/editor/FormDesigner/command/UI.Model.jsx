@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
         const $table = Ux.clone(table);
         $table.columns = Ux.configColumn(this, $table.columns);
         return (
-            <div className={"model-viewer"}>
+            <div className={"viewer-model"}>
                 <Row className={"row"}>
                     <Col span={8}>
                         {config.name}：

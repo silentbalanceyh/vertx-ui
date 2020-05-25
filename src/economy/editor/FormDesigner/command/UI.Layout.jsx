@@ -3,36 +3,7 @@ import {component} from "../../../_internal";
 import UiForm from '../Web.Form';
 import Ux from 'ux';
 import Op from '../op';
-import {Col, Empty, Icon, Row, Tag} from 'antd';
-
-const layoutView = (reference, jsx = {}) => {
-    const ref = Ux.onReference(reference, 1);
-    const {$layoutTitle} = ref.state;
-    return (
-        <div>
-            <Row>
-                <Col span={24}>
-                    <Tag color={"blue"} style={{fontSize: 14}}>
-                        <Icon type={"arrow-down"}/>&nbsp;&nbsp;
-                        {$layoutTitle}
-                    </Tag>
-                </Col>
-            </Row>
-            <Row>
-                <Col span={24}>
-                    {(() => {
-                        const value = Ux.formHit(reference, "window");
-                        if (value) {
-                            return "Hello"
-                        } else {
-                            return (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>)
-                        }
-                    })()}
-                </Col>
-            </Row>
-        </div>
-    )
-}
+import layoutView from '../Web.Fn.Layout';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -49,12 +20,16 @@ class Component extends React.PureComponent {
          */
         const {$inited = {}} = this.props;
         const config = Ux.fromHoc(this, "form");
-        return (<UiForm reference={this}
+        return (
+            <div className={"viewer-layout"}>
+                <UiForm reference={this}
                         config={{form: config}}
                         $renders={{
                             layoutView
                         }}
-                        $inited={$inited}/>);
+                        $inited={$inited}/>
+            </div>
+        );
     }
 }
 
