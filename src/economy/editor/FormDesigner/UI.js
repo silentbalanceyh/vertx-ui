@@ -11,6 +11,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
 
 import renderCmd from './Web.Command';
 import renderPalette from './Web.Palette';
+import renderEditor from './Web.Editor';
 
 @component({
     "i18n.cab": require('./Cab.json'),
@@ -36,7 +37,7 @@ class Component extends React.PureComponent {
                                 {renderPalette(this)}
                             </Col>
                             <Col span={20}>
-
+                                {renderEditor(this)}
                             </Col>
                         </Row>
                     </DndProvider>
