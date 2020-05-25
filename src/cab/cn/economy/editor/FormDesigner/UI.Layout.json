@@ -1,10 +1,17 @@
 {
     "_form": {
-        "window": 0.15,
+        "window": 1.1,
         "columns": 1,
         "ui": [
             [
-                "className,CSS名称,,,,placeholder=系统默认：web-form"
+                "className,CSS类名,12,,,placeholder=系统默认：web-form",
+                {
+                    "metadata": "cssMode,模式,12,,aiRadio",
+                    "optionJsx.config.items": [
+                        "REPLACE,替换",
+                        "APPEND,追加"
+                    ]
+                }
             ],
             [
                 {
@@ -20,8 +27,7 @@
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opSave,保存,SUBMIT,primary",
-                        "$opReset,重置,RESET"
+                        "$opSave,保存,SUBMIT,primary"
                     ],
                     "span": 24
                 }
