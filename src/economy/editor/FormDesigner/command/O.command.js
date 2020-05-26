@@ -9,5 +9,6 @@ const showPopover = (reference, item) => {
 export default {
     layout: showPopover,
     "deployment-unit": showPopover,
-    "eye-invisible": showPopover
+    "eye-invisible": showPopover,
+    code: showPopover
 }

@@ -21,5 +21,8 @@ export default {
         }
         return (<UiHidden data={$models} reference={reference}
                           $inited={{hidden}}/>)
+    },
+    code: (reference) => {
+
     }
 }
