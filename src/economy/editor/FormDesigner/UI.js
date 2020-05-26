@@ -12,6 +12,7 @@ import LoadingContent from '../../loading/LoadingContent/UI';
 import renderCmd from './Web.Fn.Command';
 import renderPalette from './Web.Fn.Palette';
 import renderEditor from './Web.Fn.Editor';
+import renderStatus from './Web.Fn.Status';
 
 @component({
     "i18n.cab": require('./Cab.json'),
@@ -35,10 +36,11 @@ class Component extends React.PureComponent {
                     <Spin spinning={$forbidden} indicator={null} onClick={Op.onSpin(this)}>
                         <DndProvider backend={HTML5Backend}>
                             <Row>
-                                <Col span={4}>
+                                <Col span={4} className={"content-left"}>
                                     {renderPalette(this)}
                                 </Col>
                                 <Col span={20}>
+                                    {renderStatus(this)}
                                     {renderEditor(this)}
                                 </Col>
                             </Row>

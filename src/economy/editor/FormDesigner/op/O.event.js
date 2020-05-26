@@ -45,9 +45,9 @@ const onLayout = (raft = {}, params = {}) => {
 }
 const onHidden = (raft = {}, params = {}) => {
     if (params.hidden) {
-        raft.hidden = Ux.clone(params.hidden);
+        raft.form.hidden = Ux.clone(params.hidden);
     } else {
-        raft.hidden = [];
+        raft.form.hidden = [];
     }
     return raft;
 }

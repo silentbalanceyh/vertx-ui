@@ -6,6 +6,13 @@ import {Divider, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
 import Cmd from './command';
 
+const isDisabled = (reference, item) => {
+    const fnDisabled = Cmd.CommandDisabled[item.key];
+    if (Ux.isFunction(fnDisabled)) {
+        return fnDisabled(reference);
+    } else return false;
+}
+
 const renderPopover = (reference, item = {}, children) => {
     const {$popover} = reference.state;
     const visible = $popover ? $popover === item.key : false;
@@ -19,20 +26,36 @@ const renderPopover = (reference, item = {}, children) => {
         </Popover>
     )
 }
-const renderLink = (reference, item) => renderPopover(reference, item, (
-    <a href={""} className={item.className ? `op-link ${item.className}` : `op-link`}
-       onClick={event => {
-           Ux.prevent(event);
-           const executor = Cmd.CommandAction[item.key];
-           if (Ux.isFunction(executor)) {
-               executor(reference, item);
-           } else {
-               console.error("丢失命令：", item);
-           }
-       }}>
-        {Ux.aiIcon(item.icon, {"data-color": item['svgColor'] ? item['svgColor'] : "#595959"})}
-    </a>
-));
+const renderLink = (reference, item) => renderPopover(reference, item, (() => {
+    const attrs = {};
+    attrs['aria-disabled'] = isDisabled(reference, item);
+    if (!attrs['aria-disabled']) {
+        attrs.onClick = (event) => {
+            Ux.prevent(event);
+            const executor = Cmd.CommandAction[item.key];
+            if (Ux.isFunction(executor)) {
+                executor(reference, item);
+            } else {
+                console.error("丢失命令：", item);
+            }
+        }
+    } else {
+        attrs.onClick = (event) => {
+            Ux.prevent(event);
+        }
+    }
+    attrs.className = item.className ? `op-link ${item.className}` : `op-link`;
+    if (attrs['aria-disabled']) {
+        attrs.className = `${attrs.className} op-disabled`
+    }
+    return (
+        <a href={""} {...attrs}>
+            {Ux.aiIcon(item.icon, {
+                "data-color": attrs.disabled ? "#ececec" : (item['svgColor'] ? item['svgColor'] : "#595959")
+            })}
+        </a>
+    )
+})());
 
 export default (reference) => {
     const {$commands = []} = reference.state;
@@ -46,7 +69,8 @@ export default (reference) => {
                 } else {
                     const tooltip = command.tooltip;
                     if (tooltip) {
-                        return (
+                        const disabled = isDisabled(reference, command);
+                        return disabled ? renderLink(reference, command) : (
                             <Tooltip title={tooltip} key={command.key}>
                                 {renderLink(reference, command)}
                             </Tooltip>

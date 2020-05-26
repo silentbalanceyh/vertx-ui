@@ -1,0 +1,19 @@
+{
+    "list": [
+        {
+            "name": "name",
+            "type": "java.lang.String",
+            "code": "配置项名称"
+        },
+        {
+            "name": "code",
+            "type": "java.lang.String",
+            "code": "配置项编码"
+        },
+        {
+            "name": "key",
+            "type": "java.lang.String",
+            "code": "配置项主键"
+        }
+    ]
+}

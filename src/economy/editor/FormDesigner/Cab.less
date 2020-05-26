@@ -1,6 +1,21 @@
 @import "../../../global";
 
 .web-form-designer {
+    .content {
+        &-left {
+            padding-right: 6px;
+        }
+
+        &-status {
+            label {
+                font-weight: 900;
+            }
+
+            border-bottom: dashed 1px #Ececec;
+            line-height: 32px;
+        }
+    }
+
     &-popover {
         .ant-popover-content {
             min-width: 720px !important;
@@ -66,6 +81,12 @@
                 border: solid 1px white;
             }
 
+
+            a:hover {
+                border: solid 1px #8C8C8C;
+                border-radius: 4px;
+            }
+
             .op {
 
                 &-link {
@@ -104,11 +125,16 @@
                 &-source i {
                     color: #4296de;
                 }
-            }
 
-            a:hover {
-                border: solid 1px #8C8C8C;
-                border-radius: 4px;
+                &-disabled i {
+                    color: #8C8C8C;
+                }
+
+                &-disabled:hover {
+                    cursor: not-allowed !important;
+                    border: solid 1px white !important;
+                    border-radius: 0 !important;
+                }
             }
 
             .ant-divider {

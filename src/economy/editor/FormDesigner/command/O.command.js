@@ -10,5 +10,6 @@ export default {
     layout: showPopover,
     "deployment-unit": showPopover,
     "eye-invisible": showPopover,
-    code: showPopover
+    code: showPopover,
+    database: showPopover
 }

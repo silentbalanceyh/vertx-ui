@@ -3,6 +3,7 @@ import Ux from 'ux';
 import Ex from 'ex';
 import Op from './Op';
 import {FormDesigner} from 'web';
+import Mock from 'mock';
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
@@ -18,6 +19,9 @@ class Component extends React.PureComponent {
             const {$data = {}, $model = {}} = this.state;
             return (
                 <FormDesigner config={$data}
+                              $source={event => {
+                                  return Ux.promise(Mock.Editor.assist)
+                              }}
                               $models={$model}/>
             );
         }, Ex.parserOfColor("PxFormEditor").page())
