@@ -90,9 +90,7 @@
             ]
         ],
         "hidden": [
-            "type",
-            "identifier",
-            "parentId"
+            "name"
         ],
         "op": {
             "$opAdd": "act.category.add"
