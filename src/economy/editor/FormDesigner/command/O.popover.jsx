@@ -2,6 +2,7 @@ import React from 'react';
 import UiModel from '../forms/UI.Model';
 import UiLayout from '../forms/UI.Layout';
 import UiHidden from '../forms/UI.Hidden';
+import UiSource from '../forms/UI.Source';
 
 export default {
     layout: (reference) => {
@@ -26,6 +27,7 @@ export default {
 
     },
     database: (reference) => {
-
+        const {$source} = reference.props;
+        return (<UiSource exeuctor={$source} reference={reference}/>)
     }
 }

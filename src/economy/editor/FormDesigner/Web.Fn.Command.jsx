@@ -17,9 +17,11 @@ const renderPopover = (reference, item = {}, children) => {
     const {$popover} = reference.state;
     const visible = $popover ? $popover === item.key : false;
     const fnContent = Cmd.CommandPop[item.key];
+    const popoverStyle = Cmd.CommandPopStyle[item.key];
     return (
         <Popover visible={visible} trigger={"click"}
                  overlayClassName={"web-form-designer-popover"}
+                 overlayStyle={popoverStyle ? popoverStyle : {}}
                  content={Ux.isFunction(fnContent) ? fnContent(reference) : false}
                  placement={"bottomLeft"}>
             {children}

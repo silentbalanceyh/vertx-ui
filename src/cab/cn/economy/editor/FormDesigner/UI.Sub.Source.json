@@ -1,0 +1,14 @@
+{
+    "_table": {
+        "size": "small",
+        "pagination": {
+            "size": "small"
+        },
+        "columns": [
+            "name,数据标识",
+            "comment,手工备注",
+            "uri,远程路径",
+            "method,HTTP方法"
+        ]
+    }
+}
