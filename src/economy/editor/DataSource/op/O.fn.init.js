@@ -6,7 +6,9 @@ export default (reference) => {
     state.$ready = true;
     const {$inited = {}} = reference.props;
     /* 是否包含了初始化数据 */
-    if (!Ux.isEmpty($inited)) {
+    if (Ux.isEmpty($inited)) {
+        state.$data = [];
+    } else {
         const normalized = [];
         Object.keys($inited).forEach(key => {
             const hitted = $inited[key];
@@ -18,12 +20,14 @@ export default (reference) => {
                 /* 三种分离 */
                 assist.method = hitted.method ? hitted.method : "GET";
                 assist.uri = hitted.uri;
+                /* magic 参数节点 */
+                if (hitted.magic) {
+                    assist.magic = hitted.magic;
+                }
                 normalized.push(assist);
             }
         })
         state.$data = normalized;
-    } else {
-        state.$data = [];
     }
     /* 选择类型 */
     const selection = Ux.fromHoc(reference, "selection");

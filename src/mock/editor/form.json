@@ -105,7 +105,6 @@
                 "method": "POST",
                 "magic": {
                     "$body": [
-                        "ci.application"
                     ]
                 },
                 "group": "type"

@@ -36,10 +36,11 @@
                 "title=已设置数据源"
             ]
         ],
+        "hidden": [
+            "group"
+        ],
         "initial": {
-            "name": "FIX:tabular",
-            "method": "FIX:POST",
-            "uri": "/api/types/tabulars"
+            "group": "FIX:type"
         }
     }
 }

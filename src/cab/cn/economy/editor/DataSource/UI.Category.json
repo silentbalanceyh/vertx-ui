@@ -4,35 +4,30 @@
         "columns": 4,
         "ui": [
             [
+                "name,数据标识,12,,,readOnly=true",
+                "method,HTTP方法,12,,,readOnly=true"
+            ],
+            [
+                "uri,远程访问路径,12,,,readOnly=true",
+                "comment,手工备注,12,,,placeholder=（添加备注）"
+            ],
+            [
                 {
-                    "metadata": "name,数据标识,12,,,placeholder=（数据标识推荐小写，中间带.操作符）",
-                    "optionConfig.rules": [
-                        "required,数据标识不可为空！"
+                    "metadata": "types,类型设置,16,,aiTransfer",
+                    "optionJsx.config.datum": "source=define.types,value=code,label=name",
+                    "optionJsx.config.valueKey": "code",
+                    "optionJsx.config.titles": [
+                        "待选择",
+                        "已选择"
                     ]
                 },
-                {
-                    "metadata": "method,HTTP方法,12,,aiRadio",
-                    "optionJsx.config.items": [
-                        "GET,GET方法",
-                        "POST,POST查询"
-                    ]
-                }
-            ],
-            [
-                "uri,远程访问路径,18,,,placeholder=（可手工录入，或使用API选择器选择）",
-                "source,,6"
-            ],
-            [
-                "params,参数设置表,18"
-            ],
-            [
-                "comment,手工备注,18,,,placeholder=（添加备注）"
+                "typesJson,,8"
             ],
             [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opSaveLayout,保存,SUBMIT,primary"
+                        "$opSaveCategory,保存,SUBMIT,primary"
                     ],
                     "span": 24
                 }
@@ -40,6 +35,12 @@
             [
                 "title=已设置数据源"
             ]
-        ]
+        ],
+        "hidden": [
+            "group"
+        ],
+        "initial": {
+            "group": "FIX:type"
+        }
     }
 }

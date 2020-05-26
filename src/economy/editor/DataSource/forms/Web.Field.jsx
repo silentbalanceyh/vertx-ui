@@ -27,8 +27,8 @@ export default {
             }}>
                 <Popover trigger={"click"} content={
                     <ReactJson src={view} name={null} enableClipboard={false}
-                               style={{width: 300}}/>
-                } placement={"rightTop"} overlayClassName={"web-data-types"}>
+                               theme={'monokai'}/>
+                } placement={"bottom"} overlayClassName={"web-data-types"}>
                     <Button icon={"code"} type={"primary"} shape={"circle"}
                             disabled={!values || 0 === values.length}/>
                 </Popover>
