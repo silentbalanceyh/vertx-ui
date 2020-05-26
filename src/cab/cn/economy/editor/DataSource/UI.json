@@ -19,7 +19,8 @@
         ]
     },
     "_comment": {
-        "selected": "已配置数据源"
+        "selected": "已配置数据源",
+        "submit": "当前辅助数据源信息已经保存成功！"
     },
     "_selection": {
         "title": "字典类型：",

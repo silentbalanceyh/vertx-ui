@@ -4,6 +4,9 @@
         "columns": 4,
         "ui": [
             [
+                "comment,手工备注,18,,,placeholder=（添加备注）"
+            ],
+            [
                 {
                     "metadata": "name,数据标识,12,,,placeholder=（数据标识推荐小写，中间带.操作符）",
                     "optionConfig.rules": [
@@ -24,9 +27,6 @@
             ],
             [
                 "params,参数设置表,18"
-            ],
-            [
-                "comment,手工备注,18,,,placeholder=（添加备注）"
             ],
             [
                 {

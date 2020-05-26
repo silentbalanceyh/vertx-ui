@@ -21,6 +21,21 @@ export default {
         const $checked = Ux.ambEvent(checked);
         reference.setState({$checked});
     },
+    toInit: ($data = [], key) => {
+        const dict = Ux.elementUnique($data, "name", key);
+        const $inited = {};
+        if (dict) {
+            const {magic = {}, ...rest} = dict;
+            Object.assign($inited, rest);
+            $inited.types = magic.$body ? magic.$body : [];
+        }
+        return $inited;
+    },
+    onSubmit: (reference) => (params) => {
+        const comment = Ux.fromHoc(reference, "comment");
+        Ux.fn(reference).rxSubmit(params);
+        Ux.messageSuccess(comment.submit);
+    },
     actions: {
         $opSaveAssist: (reference) => (params) => {
 

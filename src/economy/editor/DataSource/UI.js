@@ -12,17 +12,6 @@ import AssistForm from './forms/Web.Assist';
 import TabularForm from './forms/Web.Tabular';
 import CategoryForm from './forms/Web.Category';
 
-const toInited = ($data = [], key) => {
-    const dict = Ux.elementUnique($data, "name", key);
-    const $inited = {};
-    if (dict) {
-        const {magic = {}, ...rest} = dict;
-        Object.assign($inited, rest);
-        $inited.types = magic.$body ? magic.$body : [];
-    }
-    return $inited;
-}
-
 @component({
     "i18n.cab": require('./Cab.json'),
     "i18n.name": "UI",
@@ -42,28 +31,27 @@ class Component extends React.PureComponent {
                         <Col span={24} className={"data-form"}>
                             {(() => {
                                 const {$checked} = this.state;
-                                const {rxSubmit} = this.props;
                                 if ("ASSIST" === $checked) {
                                     const {rxApi} = this.props;
                                     return (
                                         <AssistForm reference={this}
-                                                    rxSubmit={rxSubmit}
+                                                    rxSubmit={Op.onSubmit(this)}
                                                     rxSource={rxApi}/>
                                     )
                                 } else if ("TABULAR" === $checked) {
                                     const {rxType} = this.props;
                                     return (
                                         <TabularForm reference={this}
-                                                     $inited={toInited($data, 'tabular')}
-                                                     rxSubmit={rxSubmit}
+                                                     $inited={Op.toInit($data, 'tabular')}
+                                                     rxSubmit={Op.onSubmit(this)}
                                                      rxSource={rxType}/>
                                     )
                                 } else if ("CATEGORY" === $checked) {
                                     const {rxType} = this.props;
                                     return (
                                         <CategoryForm reference={this}
-                                                      $inited={toInited($data, 'category')}
-                                                      rxSubmit={rxSubmit}
+                                                      $inited={Op.toInit($data, 'category')}
+                                                      rxSubmit={Op.onSubmit(this)}
                                                       rxSource={rxType}/>
                                     )
                                 } else {

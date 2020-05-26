@@ -23,11 +23,7 @@ const onRaft = (reference, consumer) => {
             console.error("没找到 form 配置！！", $raft)
         }
         /* 更新 */
-        reference.setState({
-            raft: $raft,
-            $forbidden: false,     // 可执行主屏幕操作
-            $popover: undefined,   // 将所有的 popover 全部关闭
-        });
+        return Ux.promise($raft);
     } else {
         console.error("引用搜索失败！！", reference)
     }
@@ -66,11 +62,21 @@ const onAssist = (raft = {}, params) => {
     }
     return raft;
 }
+const onCallback = (reference) => ($raft) => {
+    reference.setState({
+        raft: $raft,
+        $forbidden: false,     // 可执行主屏幕操作
+        $popover: undefined,   // 将所有的 popover 全部关闭
+    });
+}
 export default {
     onSpin,
     raft: (reference) => ({
-        onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params)),
-        onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params)),
+        onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params))
+            .then(onCallback(reference)),
+        onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params))
+            .then(onCallback(reference)),
         onAssist: (params) => onRaft(reference, (raft) => onAssist(raft, params))
+            .then($raft => reference.setState({$raft}))
     })
 }
