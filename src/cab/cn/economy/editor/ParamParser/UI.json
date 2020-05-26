@@ -1,5 +1,15 @@
 {
-    "_input": {
-        "text": "参数设置器"
+    "_table": {
+        "columns": [
+            "name,参数名",
+            "source,参数来源",
+            "value,参数值"
+        ]
+    },
+    "_window": "设置当前数据源的参数表,保存,关闭,false,800,true,$opSave",
+    "_op": {
+        "edit": "编辑参数表",
+        "search": "查看",
+        "report": "当前数据源设置了:counter个参数。"
     }
 }

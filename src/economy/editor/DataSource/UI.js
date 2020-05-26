@@ -30,11 +30,12 @@ class Component extends React.PureComponent {
                     <Row>
                         <Col span={24} className={"data-form"}>
                             {(() => {
-                                const {$checked} = this.state;
+                                const {$checked, $assist} = this.state;
                                 if ("ASSIST" === $checked) {
                                     const {rxApi} = this.props;
                                     return (
                                         <AssistForm reference={this}
+                                                    $inited={$assist}
                                                     rxSubmit={Op.onSubmit(this)}
                                                     rxSource={rxApi}/>
                                     )

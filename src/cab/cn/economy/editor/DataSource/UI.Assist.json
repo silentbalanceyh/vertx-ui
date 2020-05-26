@@ -26,13 +26,13 @@
                 "source,,6"
             ],
             [
-                "params,参数设置表,18"
+                "magic,参数设置表,18"
             ],
             [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opSaveLayout,保存,SUBMIT,primary"
+                        "$opSaveAssist,添加/保存,SUBMIT,primary"
                     ],
                     "span": 24
                 }

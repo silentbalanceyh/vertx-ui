@@ -11,7 +11,8 @@ const yiInternal = (reference) => {
     /* 构造 $layout 变量 */
     Ux.raftForm(reference, {
         id: "SubForm-Assist", renders: {
-            source: Rdr.source
+            source: Rdr.source,
+            magic: Rdr.magic
         }
     }).then(raft => {
         state.raft = raft;
