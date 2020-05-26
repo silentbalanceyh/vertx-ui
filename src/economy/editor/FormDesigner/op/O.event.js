@@ -17,7 +17,11 @@ const onRaft = (reference, consumer) => {
          * 直接变更 form 节点的数据（修改原始数据）
          */
         let $raft = Ux.clone(raft);
-        $raft = consumer($raft);
+        if ($raft.form) {
+            $raft = consumer($raft);
+        } else {
+            console.error("没找到 form 配置！！", $raft)
+        }
         /* 更新 */
         reference.setState({
             raft: $raft,
@@ -30,16 +34,14 @@ const onRaft = (reference, consumer) => {
 }
 const onLayout = (raft = {}, params = {}) => {
     const {form} = raft;
-    if (form) {
-        form.columns = Ux.valueInt(params.columns, 4);
-        form.window = Ux.valueInt(params.window, 1);
-        const {className = ""} = form;
-        const inputCls = params.className ? params.className : "";
-        if ("APPEND" === params['cssMode']) {
-            form.className = `${className} ${inputCls}`;
-        } else {
-            form.className = inputCls;
-        }
+    form.columns = Ux.valueInt(params.columns, 4);
+    form.window = Ux.valueInt(params.window, 1);
+    const {className = ""} = form;
+    const inputCls = params.className ? params.className : "";
+    if ("APPEND" === params['cssMode']) {
+        form.className = `${className} ${inputCls}`;
+    } else {
+        form.className = inputCls;
     }
     return raft;
 }
@@ -51,10 +53,24 @@ const onHidden = (raft = {}, params = {}) => {
     }
     return raft;
 }
+const onAssist = (raft = {}, params) => {
+    if (params) {
+        const {form} = raft;
+        if (!form.assist) {
+            form.assist = {};
+        }
+        const {name, ...rest} = params;
+        if (rest) {
+            form.assist[name] = rest;
+        }
+    }
+    return raft;
+}
 export default {
     onSpin,
     raft: (reference) => ({
         onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params)),
-        onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params))
+        onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params)),
+        onAssist: (params) => onRaft(reference, (raft) => onAssist(raft, params))
     })
 }

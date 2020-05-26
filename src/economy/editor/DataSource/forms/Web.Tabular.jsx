@@ -5,6 +5,7 @@ import Ux from 'ux';
 import {Form} from "antd";
 import {Dsl} from 'entity';
 import Rdr from './Web.Field';
+import Op from "../op";
 
 const yiInternal = (reference) => {
     const state = {};
@@ -16,21 +17,12 @@ const yiInternal = (reference) => {
         }
     }).then(raft => {
         state.raft = raft;
-        state.$op = {
-            $opSaveTabular: (reference) => (params = {}) => {
-            }
-        };
-        const {rxSource} = reference.props;
-        if (Ux.isFunction(rxSource)) {
-            return rxSource({type: "TABULAR"}).then(response => {
-                /* 读取数据 */
-                state.$a_define_types = Dsl.getArray(response);
-                return Ux.promise(state);
-            })
-        } else {
-            console.error("丢失重要函数 rxType ")
-            Ux.promise(state);
-        }
+        state.$op = Op.actions;
+        return Ux.fn(reference).rxSource({type: "TABULAR"}).then(response => {
+            /* 读取数据 */
+            state.$a_define_types = Dsl.getArray(response);
+            return Ux.promise(state);
+        })
     }).then(Ux.ready).then(Ux.pipe(reference));
 }
 

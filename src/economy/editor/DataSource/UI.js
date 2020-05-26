@@ -42,10 +42,12 @@ class Component extends React.PureComponent {
                         <Col span={24} className={"data-form"}>
                             {(() => {
                                 const {$checked} = this.state;
+                                const {rxSubmit} = this.props;
                                 if ("ASSIST" === $checked) {
                                     const {rxApi} = this.props;
                                     return (
                                         <AssistForm reference={this}
+                                                    rxSubmit={rxSubmit}
                                                     rxSource={rxApi}/>
                                     )
                                 } else if ("TABULAR" === $checked) {
@@ -53,6 +55,7 @@ class Component extends React.PureComponent {
                                     return (
                                         <TabularForm reference={this}
                                                      $inited={toInited($data, 'tabular')}
+                                                     rxSubmit={rxSubmit}
                                                      rxSource={rxType}/>
                                     )
                                 } else if ("CATEGORY" === $checked) {
@@ -60,6 +63,7 @@ class Component extends React.PureComponent {
                                     return (
                                         <CategoryForm reference={this}
                                                       $inited={toInited($data, 'category')}
+                                                      rxSubmit={rxSubmit}
                                                       rxSource={rxType}/>
                                     )
                                 } else {

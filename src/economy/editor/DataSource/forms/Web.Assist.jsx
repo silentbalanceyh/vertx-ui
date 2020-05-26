@@ -4,6 +4,7 @@ import LoadingContent from '../../../loading/LoadingContent/UI';
 import Ux from 'ux';
 import {Form} from "antd";
 import Rdr from './Web.Field';
+import Op from "../op";
 
 const yiInternal = (reference) => {
     const state = {};
@@ -14,10 +15,7 @@ const yiInternal = (reference) => {
         }
     }).then(raft => {
         state.raft = raft;
-        state.$op = {
-            $opSaveAssist: (reference) => (params = {}) => {
-            }
-        };
+        state.$op = Op.actions;
         return Ux.promise(state);
     }).then(Ux.ready).then(Ux.pipe(reference));
 }

@@ -3,6 +3,7 @@ import UiModel from '../forms/Web.Model';
 import UiLayout from '../forms/Web.Layout';
 import UiHidden from '../forms/Web.Hidden';
 import DataSource from '../../DataSource/UI';
+import Op from '../op';
 
 export default {
     layout: (reference) => {
@@ -35,6 +36,7 @@ export default {
         }
         return (<DataSource rxApi={rxApi}
                             rxType={rxType}
+                            rxSubmit={Op.raft(reference).onAssist}
                             reference={reference}
                             $inited={assist}/>)
     }
