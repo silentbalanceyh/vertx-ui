@@ -3,9 +3,7 @@ import {component} from "../../../_internal";
 import Ux from 'ux';
 import {Table} from 'antd';
 
-const yiColumn = (reference) => {
-
-}
+import toColumn from './Web.Source.Fn.Column';
 
 const yiInternal = (reference) => {
     const state = {};
@@ -15,15 +13,26 @@ const yiInternal = (reference) => {
     if (!Ux.isEmpty($inited)) {
         const normalized = [];
         Object.keys($inited).forEach(key => {
-            /* 读取 assert 数据 */
+            const hitted = $inited[key];
+            if (hitted && hitted.uri) {
+                /* 读取 assert 数据 */
+                const assist = {};
+                assist.name = key;
+                assist.key = key;
+                /* 三种分离 */
+                assist.method = hitted.method ? hitted.method : "GET";
+                assist.uri = hitted.uri;
+                normalized.push(assist);
+            }
         })
+        state.$data = normalized;
     } else {
         state.$data = [];
     }
     /* 已选中的表格配置 */
     const table = Ux.fromHoc(reference, "table");
     const $table = Ux.clone(table);
-    $table.columns = Ux.configColumn(reference, $table.columns);
+    $table.columns = [toColumn(reference)].concat(Ux.configColumn(reference, $table.columns));
     state.$table = $table;
     state.$ready = true;
     reference.setState(state);
@@ -40,10 +49,10 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
-            const {$table = {}} = this.state;
+            const {$table = {}, $data = []} = this.state;
             return (
                 <div className={"viewer-database"}>
-                    <Table {...$table}/>
+                    <Table {...$table} dataSource={$data}/>
 
                 </div>
             )

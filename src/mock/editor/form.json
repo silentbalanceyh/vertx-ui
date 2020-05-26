@@ -98,6 +98,74 @@
         "initial": {
             "identifier": "PROP:$identifier",
             "active": "BOOL:true"
+        },
+        "assist": {
+            "category": {
+                "uri": "/api/types/categories",
+                "method": "POST",
+                "magic": {
+                    "$body": [
+                        "ci.application"
+                    ]
+                },
+                "group": "type"
+            },
+            "tabular": {
+                "uri": "/api/types/tabulars",
+                "method": "POST",
+                "magic": {
+                    "$body": [
+                        "ci.environment",
+                        "ci.status",
+                        "ci.approval.status",
+                        "ci.line.status",
+                        "ci.line.type",
+                        "integration.ucmdb",
+                        "level.protect",
+                        "level.info.system",
+                        "deployment.mode",
+                        "archiving.mode",
+                        "read.write.mode",
+                        "payment.mode",
+                        "colony.type",
+                        "company.nature",
+                        "company.status",
+                        "system.type",
+                        "high.availability.mode",
+                        "add.mode",
+                        "remove.mode",
+                        "category.network.area",
+                        "vendor.type",
+                        "category.middleware",
+                        "category.database"
+                    ]
+                },
+                "group": "type"
+            },
+            "data.category": {
+                "uri": "/api/type/categories/:type",
+                "magic": {
+                    "type": "FIX:ci.type"
+                }
+            },
+            "resource.customers": {
+                "uri": "/api/customer/by/sigma"
+            },
+            "resource.departments": {
+                "uri": "/api/dept/by/sigma"
+            },
+            "resource.teams": {
+                "uri": "/api/team/by/sigma"
+            },
+            "resource.employees": {
+                "uri": "/api/employee/by/sigma"
+            },
+            "security.users": {
+                "uri": "/api/user/by/sigma"
+            },
+            "model.identifiers": {
+                "uri": "/api/model"
+            }
         }
     },
     "modal": {

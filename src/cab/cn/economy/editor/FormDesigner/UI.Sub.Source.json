@@ -2,13 +2,17 @@
     "_table": {
         "size": "small",
         "pagination": {
-            "size": "small"
+            "size": "small",
+            "pageSize": 5
         },
         "columns": [
             "name,数据标识",
-            "comment,手工备注",
+            "comment,手工备注（当前页生效）",
             "uri,远程路径",
             "method,HTTP方法"
         ]
+    },
+    "_comment": {
+        "selected": "已配置数据源"
     }
 }

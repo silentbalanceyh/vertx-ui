@@ -1,8 +1,8 @@
 import React from 'react';
-import UiModel from '../forms/UI.Model';
-import UiLayout from '../forms/UI.Layout';
-import UiHidden from '../forms/UI.Hidden';
-import UiSource from '../forms/UI.Source';
+import UiModel from '../forms/Web.Model';
+import UiLayout from '../forms/Web.Layout';
+import UiHidden from '../forms/Web.Hidden';
+import UiSource from '../forms/Web.Source';
 
 export default {
     layout: (reference) => {
@@ -28,6 +28,12 @@ export default {
     },
     database: (reference) => {
         const {$source} = reference.props;
-        return (<UiSource exeuctor={$source} reference={reference}/>)
+        const {raft = {}} = reference.state;
+        let assist = [];
+        if (raft.form) {
+            assist = raft.form.assist;
+        }
+        return (<UiSource exeuctor={$source} reference={reference}
+                          $inited={assist}/>)
     }
 }
