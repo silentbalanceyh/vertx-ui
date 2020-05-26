@@ -19,15 +19,7 @@ export default (reference) => {
     const table = Ux.fromHoc(reference, "table");
     const $table = Ux.clone(table);
     $table.columns = Ux.configColumn(reference, $table.columns);
-    $table.rowSelection = {
-        type: "radio",
-        onChange: (changeKey) => {
-            if (1 === changeKey) {
-                const $selected = changeKey[0];
-                reference.setState({$selected});
-            }
-        }
-    }
+    $table.rowSelection = Event.onRowSelect(reference);
     state.$table = $table;
     state.$data = [];
     reference.setState(state);

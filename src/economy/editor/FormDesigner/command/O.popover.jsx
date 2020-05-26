@@ -27,13 +27,13 @@ export default {
 
     },
     database: (reference) => {
-        const {$source} = reference.props;
+        const {rxSource} = reference.props;
         const {raft = {}} = reference.state;
         let assist = [];
         if (raft.form) {
             assist = raft.form.assist;
         }
-        return (<UiSource $source={$source} reference={reference}
+        return (<UiSource rxSource={rxSource} reference={reference}
                           $inited={assist}/>)
     }
 }

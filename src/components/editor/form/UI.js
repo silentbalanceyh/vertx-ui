@@ -19,7 +19,7 @@ class Component extends React.PureComponent {
             const {$data = {}, $model = {}} = this.state;
             return (
                 <FormDesigner config={$data}
-                              $source={input => {
+                              rxSource={input => {
                                   Ux.dgDebug({
                                       input,
                                   }, "搜索参数：", "red")

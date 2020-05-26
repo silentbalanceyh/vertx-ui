@@ -2,9 +2,9 @@ import React from "react";
 import RestfulApi from '../../RestfulApi/UI';
 
 export default (reference, jsx) => {
-    const {$source} = reference.props;
+    const {rxSource} = reference.props;
     return (
-        <RestfulApi $source={$source} rxSubmit={(value) => {
+        <RestfulApi rxSource={rxSource} rxSubmit={(value) => {
             console.info(value);
         }}/>
     )

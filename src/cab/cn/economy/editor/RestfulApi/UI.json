@@ -19,7 +19,13 @@
         "columns": [
             "name,接口描述",
             "uri,RESTful路径",
-            "method,HTTP方法"
+            {
+                "metadata": "method,HTTP方法,MAPPING",
+                "$mapping": {
+                    "GET": "GET,download,16,#278741",
+                    "POST": "POST,cloud-download,16,#ffb400"
+                }
+            }
         ]
     }
 }

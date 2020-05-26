@@ -9,7 +9,15 @@ export default {
         Ux.prevent(event);
         const {$selected} = reference.state;
         if ($selected) {
-
+            const {rxSubmit} = reference.props;
+            if (Ux.isFunction(rxSubmit)) {
+                const {$data = []} = reference.state;
+                const unique = Ux.elementUnique($data, 'key', $selected);
+                rxSubmit(unique);
+                reference.setState({$visible: false});
+            } else {
+                console.error("核心函数 rxSubmit 丢失！");
+            }
         } else {
             const {$op = {}} = reference.state;
             if ($op.submit) {
@@ -18,15 +26,28 @@ export default {
             }
         }
     },
+    onRowSelect: (reference) => {
+        return {
+            type: "radio",
+            onChange: (changeKey) => {
+                if (1 === changeKey.length) {
+                    const $selected = changeKey[0];
+                    reference.setState({$selected});
+                }
+            }
+        }
+    },
     onSearch: (reference) => (searchText) => {
-        const {$source} = reference.props;
-        if (Ux.isFunction($source)) {
-            reference.setState({$loading: true})
-            $source(searchText).then(($data = []) => {
+        const {rxSource} = reference.props;
+        if (Ux.isFunction(rxSource)) {
+            reference.setState({$loading: true, $selected: undefined})
+            rxSource(searchText).then(($data = []) => {
                 /* 前端备注 key */
                 $data.forEach(Ux.applyKey);
                 reference.setState({$loading: false, $data})
             })
+        } else {
+            console.error("核心函数 rxSource 丢失！");
         }
     }
 }
