@@ -4,13 +4,12 @@
 import React from "react";
 import {Divider, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
-import Op from './op';
-import renderPop from './Web.O.Popover';
+import Cmd from './command';
 
 const renderPopover = (reference, item = {}, children) => {
     const {$popover} = reference.state;
     const visible = $popover ? $popover === item.key : false;
-    const fnContent = renderPop[item.key];
+    const fnContent = Cmd.CommandPop[item.key];
     return (
         <Popover visible={visible} trigger={"click"}
                  overlayClassName={"web-form-designer-popover"}
@@ -20,6 +19,20 @@ const renderPopover = (reference, item = {}, children) => {
         </Popover>
     )
 }
+const renderLink = (reference, item) => renderPopover(reference, item, (
+    <a href={""} className={item.className ? `op-link ${item.className}` : `op-link`}
+       onClick={event => {
+           Ux.prevent(event);
+           const executor = Cmd.CommandAction[item.key];
+           if (Ux.isFunction(executor)) {
+               executor(reference, item);
+           } else {
+               console.error("丢失命令：", item);
+           }
+       }}>
+        {Ux.aiIcon(item.icon, {"data-color": item['svgColor'] ? item['svgColor'] : "#595959"})}
+    </a>
+));
 
 export default (reference) => {
     const {$commands = []} = reference.state;
@@ -32,29 +45,14 @@ export default (reference) => {
                     );
                 } else {
                     const tooltip = command.tooltip;
-                    /* 不带文字 */
-                    const renderLink = (item = {}) => renderPopover(reference, item, (
-                        <a href={""} className={item.className ? `op-link ${item.className}` : `op-link`}
-                           onClick={event => {
-                               Ux.prevent(event);
-                               const executor = Op.Command[item.key];
-                               if (Ux.isFunction(executor)) {
-                                   executor(reference, item);
-                               } else {
-                                   console.error("丢失命令：", item);
-                               }
-                           }}>
-                            {Ux.aiIcon(item.icon, {"data-color": item['svgColor'] ? item['svgColor'] : "#595959"})}
-                        </a>
-                    ))
                     if (tooltip) {
                         return (
                             <Tooltip title={tooltip} key={command.key}>
-                                {renderLink(command)}
+                                {renderLink(reference, command)}
                             </Tooltip>
                         )
                     } else {
-                        return renderLink(command);
+                        return renderLink(reference, command);
                     }
                 }
             })}

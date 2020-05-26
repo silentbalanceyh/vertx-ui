@@ -1,5 +1,4 @@
 import dragging from './O.dragging';
-import Command from './O.command';
 import event from './O.event';
 import yiPage from './O.yi.page';
 
@@ -9,7 +8,6 @@ export default {
 
     ...dragging,
     ...event,
-    Command,
     DragTypes: {
         FormDesigner: "FormDesigner"
     }

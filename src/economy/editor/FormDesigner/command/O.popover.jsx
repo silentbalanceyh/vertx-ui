@@ -1,7 +1,7 @@
 import React from 'react';
-import UiModel from './command/UI.Model';
-import UiLayout from './command/UI.Layout';
-import UiHidden from './command/UI.Hidden';
+import UiModel from '../forms/UI.Model';
+import UiLayout from '../forms/UI.Layout';
+import UiHidden from '../forms/UI.Hidden';
 
 export default {
     layout: (reference) => {
