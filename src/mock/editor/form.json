@@ -1,5 +1,5 @@
 {
-    "_form": {
+    "form": {
         "ui": [
             [
                 {
@@ -102,7 +102,7 @@
             "active": "BOOL:true"
         }
     },
-    "_modal": {
+    "modal": {
         "success": {
             "added": "您好，您的信息添加成功！"
         }

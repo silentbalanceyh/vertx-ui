@@ -24,6 +24,7 @@ class Component extends React.PureComponent {
             <div className={"viewer-layout"}>
                 <UiForm reference={this}
                         config={{form: config}}
+                        $op={Op.actions}
                         $renders={{
                             layoutView
                         }}

@@ -3,7 +3,7 @@
 .web-form-designer {
     &-popover {
         .ant-popover-content {
-            min-width: 640px !important;
+            min-width: 800px !important;
         }
 
         .ant-popover-inner-content {
@@ -18,10 +18,32 @@
 
                 &-layout {
                     &-row {
-                        height: 4px;
+                        height: 12px;
+                        margin-bottom: 3px;
 
                         .ant-col {
-                            height: 6px;
+                            height: 12px;
+                        }
+
+                        .ant-form-item-label {
+                            border-radius: 6px;
+                            color: #fef0f6;
+                            background-color: #fef0f6;
+                            border: solid 1px #eb2f95;
+
+                            label {
+                                color: #fef0f6;
+                            }
+                        }
+
+                        .ant-form-item-control {
+                            margin-right: 3px;
+                            margin-left: 3px;
+                            color: #f6feec;
+                            background-color: #f6feec;
+                            border: solid 1px #52c41b;
+                            border-radius: 6px;
+                            height: 12px;
                         }
                     }
                 }

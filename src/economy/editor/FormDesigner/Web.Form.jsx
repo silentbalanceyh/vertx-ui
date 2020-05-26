@@ -10,8 +10,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return Ux.xtReady(this,
-            () => Ux.aiForm(this),
+        return Ux.xtReady(this, () => Ux.aiForm(this),
             {component: LoadingContent});
     }
 }

@@ -1,11 +1,14 @@
 import Ux from "ux";
-import {Col, Empty, Icon, Row, Tag} from "antd";
+import {Col, Empty, Form, Icon, Row, Tag} from "antd";
 import React from "react";
 
 const renderItem = (reference, item = {}) => {
     const {optionItem = {}} = item;
-    console.info(optionItem);
-    return false;
+    return (
+        <Form.Item {...optionItem}>
+            --
+        </Form.Item>
+    );
 }
 
 const renderData = (reference, config = {}) => {
@@ -23,15 +26,17 @@ const renderData = (reference, config = {}) => {
 
 export default (reference, jsx = {}) => {
     const ref = Ux.onReference(reference, 1);
-    const {$layoutTitle, $layoutData = {}} = ref.state;
+    const {$layout = {}} = ref.state;
     return (
         <div>
             <Row>
                 <Col span={24}>
                     <Tag color={"blue"} style={{fontSize: 14}}>
                         <Icon type={"arrow-down"}/>&nbsp;&nbsp;
-                        {$layoutTitle}
+                        {$layout.title}
                     </Tag>
+                    &nbsp;&nbsp;
+                    {$layout.comment}
                 </Col>
             </Row>
             <Row>
@@ -39,7 +44,7 @@ export default (reference, jsx = {}) => {
                     {(() => {
                         const value = Ux.formHit(reference, "window");
                         if (value) {
-                            return renderData(reference, $layoutData[value]);
+                            return renderData(reference, $layout.data[value]);
                         } else {
                             return (<Empty image={Empty.PRESENTED_IMAGE_SIMPLE}/>)
                         }

@@ -3,7 +3,7 @@ import Ux from 'ux';
 import dragging from './O.dragging';
 import Command from './O.command';
 import event from './O.event';
-
+import actions from "./O.action";
 import yiPage from './O.yi.page';
 import yiLayout from './O.yi.layout';
 
@@ -16,6 +16,7 @@ export default {
 
     ...dragging,
     ...event,
+    actions,
     Command,
     DragTypes: {
         FormDesigner: "FormDesigner"

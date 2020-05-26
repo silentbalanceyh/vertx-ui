@@ -7,15 +7,16 @@ export default (reference) => {
     const layout = Ux.fromHoc(reference, "layout");
     const $layout = {};
     if (layout) {
-        const {data = {}, title = ""} = layout;
-        state.$layoutTitle = title;
+        const {data = {}, ...rest} = layout;
+        Object.assign($layout, rest);
+        $layout.data = {};
         Object.keys(data).forEach(value => {
             const raw = data[value];
 
             /* Layout 数据 */
-            $layout[value] = Ux.configForm(raw, {reference});
+            $layout.data[value] = Ux.configForm(raw, {reference});
         })
     }
-    state.$layoutData = $layout;
+    state.$layout = $layout;
     reference.setState(state);
 }

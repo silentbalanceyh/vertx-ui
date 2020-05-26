@@ -27,13 +27,10 @@
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opSave,保存,SUBMIT,primary"
+                        "$opSaveLayout,保存,SUBMIT,primary"
                     ],
                     "span": 24
                 }
-            ],
-            [
-                "layoutView"
             ]
         ],
         "initial": {
@@ -42,15 +39,10 @@
     },
     "_layout": {
         "title": "布局指示器",
+        "comment": "（红色为文字位置，文字右对齐，绿色为交互式组件窗口！）",
         "data": {
             "1": {
                 "ui": [
-                    [
-                        "field1006,--,6",
-                        "field1106,--,6",
-                        "field1206,--,6",
-                        "field1306,--,6"
-                    ]
                 ]
             }
         }
