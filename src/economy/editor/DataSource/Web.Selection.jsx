@@ -24,14 +24,15 @@ const renderPrefix = (option = {}) => {
     }
 }
 export default (reference) => {
-    const {$selection = {}} = reference.state;
+    const {$selection = {}, $checked} = reference.state;
     return (
         <Row className={"op-select"}>
             <Col span={3} className={"header"}>
                 {$selection.title}
             </Col>
             <Col span={21}>
-                <Radio.Group onChange={Op.onCheck(reference)}>
+                <Radio.Group onChange={Op.onCheck(reference)}
+                             value={$checked}>
                     {$selection.items.map(option => {
                         return (
                             <Radio key={option.value} value={option.value}>

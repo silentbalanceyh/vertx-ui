@@ -1,13 +1,27 @@
-import Ux from 'ux';
 import React from "react";
+import {Button} from 'antd';
+import Op from './op';
 
 export default (reference) => {
-    const button = Ux.fromHoc(reference, "button");
     return {
         dataIndex: "key",
+        className: "op-cell",
         render: (text, record, index) => {
             return (
-                <span>Hello</span>
+                <Button.Group>
+                    <Button icon={"edit"} size={"small"}
+                            onClick={Op.onEdit(reference, record)}/>
+                    {(() => {
+                        if ("tabular" === text || "category" === text) {
+                            return false;
+                        } else {
+                            return (
+                                <Button icon={"delete"} type={"danger"} size={"small"}
+                                        onClick={Op.onRemove(reference, record)}/>
+                            )
+                        }
+                    })()}
+                </Button.Group>
             )
         }
     }

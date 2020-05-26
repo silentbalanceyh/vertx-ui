@@ -4,7 +4,6 @@ import LoadingContent from '../../../loading/LoadingContent/UI';
 import Ux from 'ux';
 import {Form} from "antd";
 import {Dsl} from 'entity';
-import Rdr from './Web.Field';
 import Op from '../op';
 
 const yiInternal = (reference) => {
@@ -12,9 +11,6 @@ const yiInternal = (reference) => {
     /* 构造 $layout 变量 */
     Ux.raftForm(reference, {
         id: "SubForm-Category",
-        renders: {
-            typesJson: Rdr.typesJson
-        }
     }).then(raft => {
         state.raft = raft;
         state.$op = Op.actions;

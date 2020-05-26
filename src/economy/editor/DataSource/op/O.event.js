@@ -1,6 +1,7 @@
 import Ux from 'ux';
+import {Dsl} from 'entity';
 
-const onSubmit = (reference, params = {}) => {
+const _onSubmit = (reference, params = {}) => {
     const $params = Ux.clone(params);
     const {types = [], ...rest} = $params;
     if (rest.hasOwnProperty('typesJson')) {
@@ -35,6 +36,32 @@ export default {
         const comment = Ux.fromHoc(reference, "comment");
         Ux.fn(reference).rxSubmit(params);
         Ux.messageSuccess(comment.submit);
+        {
+            const {$data = []} = reference.state;
+            const dataArray = Dsl.getArray($data);
+            const $params = Ux.clone(params);
+            $params.key = $params.name;
+            dataArray.saveElement($params);
+            reference.setState({$data: dataArray.to()})
+        }
+    },
+    onEdit: (reference, record) => (event) => {
+        Ux.promise(event);
+        const state = {};
+        if ("tabular" === record.key) {
+            state.$checked = "TABULAR";
+            state.$assist = undefined;
+        } else if ("category" === record.key) {
+            state.$checked = "CATEGORY";
+            state.$assist = undefined;
+        } else {
+            state.$checked = "ASSIST";
+            state.$assist = record;
+        }
+        reference.setState(state);
+    },
+    onRemove: (reference, record) => (event) => {
+
     },
     actions: {
         $opSaveAssist: (reference) => (params) => {
@@ -44,8 +71,8 @@ export default {
          * assist -> tabular 节点
          */
         $opSaveTabular: (reference) => (params) =>
-            onSubmit(reference, params),
+            _onSubmit(reference, params),
         $opSaveCategory: (reference) => (params) =>
-            onSubmit(reference, params)
+            _onSubmit(reference, params)
     }
 }
