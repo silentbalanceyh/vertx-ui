@@ -1,33 +1,8 @@
 {
-    "_table": {
-        "size": "small",
-        "pagination": {
-            "size": "small",
-            "pageSize": 5
-        },
-        "columns": [
-            "name,数据标识",
-            "comment,手工备注（当前页生效）",
-            "uri,远程路径",
-            {
-                "metadata": "method,HTTP方法,MAPPING",
-                "$mapping": {
-                    "GET": "GET,download,16,#278741",
-                    "POST": "POST,cloud-download,16,#ffb400"
-                }
-            }
-        ]
-    },
-    "_comment": {
-        "selected": "已配置数据源"
-    },
     "_form": {
         "window": 1.1,
         "columns": 4,
         "ui": [
-            [
-                "title=设置数据源详细信息"
-            ],
             [
                 {
                     "metadata": "name,数据标识,12,,,placeholder=（数据标识推荐小写，中间带.操作符）",

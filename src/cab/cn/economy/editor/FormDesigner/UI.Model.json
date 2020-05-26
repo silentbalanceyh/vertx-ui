@@ -4,8 +4,8 @@
         "category": "所属分类",
         "identifier": "模型标识",
         "table": {
+            "className": "web-table",
             "rowKey": "name",
-            "size": "small",
             "pagination": false,
             "columns": [
                 {

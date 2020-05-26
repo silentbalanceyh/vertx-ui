@@ -19,17 +19,17 @@ class Component extends React.PureComponent {
             <div className={"viewer-model"}>
                 <Row className={"row"}>
                     <Col span={8}>
-                        {config.name}：
+                        <label>{config.name}</label>：
                         <Tag color={"green"} style={{fontSize: 14}}>
                             {data.name}
                         </Tag>
                     </Col>
                     <Col span={8}>
-                        {config.category}：
+                        <label>{config.category}</label>：
                         {data.category}
                     </Col>
                     <Col span={8}>
-                        {config.identifier}：
+                        <label>{config.identifier}</label>：
                         {data.identifier}
                     </Col>
                 </Row>

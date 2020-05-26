@@ -2,7 +2,7 @@ import React from 'react';
 import UiModel from '../forms/Web.Model';
 import UiLayout from '../forms/Web.Layout';
 import UiHidden from '../forms/Web.Hidden';
-import UiSource from '../forms/Web.Source';
+import DataSource from '../../DataSource/UI';
 
 export default {
     layout: (reference) => {
@@ -33,7 +33,7 @@ export default {
         if (raft.form) {
             assist = raft.form.assist;
         }
-        return (<UiSource rxSource={rxSource} reference={reference}
-                          $inited={assist}/>)
+        return (<DataSource rxSource={rxSource} reference={reference}
+                            $inited={assist}/>)
     }
 }
