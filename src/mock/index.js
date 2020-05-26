@@ -8,6 +8,7 @@ import get_menus from './get/api-menus';
 
 import FormData from './editor/form.json';
 import ModelData from './editor/model.json';
+import AssistData from './editor/assist.json';
 
 export default {
     post_oauth_login,
@@ -19,6 +20,7 @@ export default {
     "get_api_menus": get_menus,
     Editor: {
         form: FormData,
-        model: ModelData
+        model: ModelData,
+        assist: AssistData,
     }
 }

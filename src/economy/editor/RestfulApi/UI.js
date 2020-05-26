@@ -22,7 +22,7 @@ class Component extends React.PureComponent {
             const {$disabled = false} = this.props;
             return (
                 <div className={"web-restful"}>
-                    <Button icon={"api"} disabled={$disabled}
+                    <Button icon={"api"} className={"ux-spec"} disabled={$disabled}
                             onClick={Op.onClick(this)}>
                         {$button.text}
                     </Button>
@@ -32,6 +32,8 @@ class Component extends React.PureComponent {
                             $dialog={$dialog}>
                         {renderContent(this)}
                     </Dialog>
+                    <Button className={"ux-hidden"} id={"$opSaveApi"}
+                            onClick={Op.onSubmit(this)}/>
                 </div>
             )
         });

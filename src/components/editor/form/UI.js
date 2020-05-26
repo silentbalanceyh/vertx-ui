@@ -19,10 +19,13 @@ class Component extends React.PureComponent {
             const {$data = {}, $model = {}} = this.state;
             return (
                 <FormDesigner config={$data}
-                              $source={event => {
-                                  return Ux.promise(Mock.Editor.assist)
-                              }}
-                              $models={$model}/>
+                              $source={input => {
+                                  Ux.dgDebug({
+                                      input,
+                                  }, "搜索参数：", "red")
+                                  const response = Mock.Editor.assist;
+                                  return Ux.promise(response.list)
+                              }} $models={$model}/>
             );
         }, Ex.parserOfColor("PxFormEditor").page())
     }

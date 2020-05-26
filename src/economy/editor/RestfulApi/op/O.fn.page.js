@@ -12,13 +12,23 @@ export default (reference) => {
     /* _op */
     const op = Ux.fromHoc(reference, "op");
     if (op && op.search) {
-        op.search.onChange = Event.onSearch(reference);
+        op.search.onSearch = Event.onSearch(reference);
     }
     state.$op = op;
     /* _table */
     const table = Ux.fromHoc(reference, "table");
     const $table = Ux.clone(table);
     $table.columns = Ux.configColumn(reference, $table.columns);
+    $table.rowSelection = {
+        type: "radio",
+        onChange: (changeKey) => {
+            if (1 === changeKey) {
+                const $selected = changeKey[0];
+                reference.setState({$selected});
+            }
+        }
+    }
     state.$table = $table;
+    state.$data = [];
     reference.setState(state);
 }

@@ -33,7 +33,7 @@ export default {
         if (raft.form) {
             assist = raft.form.assist;
         }
-        return (<UiSource exeuctor={$source} reference={reference}
+        return (<UiSource $source={$source} reference={reference}
                           $inited={assist}/>)
     }
 }

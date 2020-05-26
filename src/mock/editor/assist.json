@@ -1,19 +1,19 @@
 {
     "list": [
         {
-            "name": "name",
-            "type": "java.lang.String",
-            "code": "配置项名称"
+            "method": "GET",
+            "name": "读取所有配置项",
+            "uri": "/ci.device/by/sigma"
         },
         {
-            "name": "code",
-            "type": "java.lang.String",
-            "code": "配置项编码"
+            "method": "POST",
+            "name": "读取用户信息（查询引擎）",
+            "uri": "/user/search"
         },
         {
-            "name": "key",
-            "type": "java.lang.String",
-            "code": "配置项主键"
+            "method": "POST",
+            "name": "读取所有部门信息（查询引擎）",
+            "uri": "/dept/search"
         }
     ]
 }

@@ -2,14 +2,20 @@
     "_input": {
         "text": "API选择器"
     },
-    "_window": "请选择您要操作API,选择,关闭,false,800,true,$opSaveApi",
+    "_window": "请选择您要配置的RESTful API信息,选择,关闭,false,800,true,$opSaveApi",
     "_op": {
         "search": {
             "placeholder": "（您可以输入`业务关键字`搜索）"
+        },
+        "submit": {
+            "empty": "对不起，您没有选择任何API，不可提交该数据！"
         }
     },
     "_table": {
-        "className": "web-table",
+        "className": "web-table web-table-api",
+        "pagination": {
+            "size": "small"
+        },
         "columns": [
             "name,接口描述",
             "uri,RESTful路径",
