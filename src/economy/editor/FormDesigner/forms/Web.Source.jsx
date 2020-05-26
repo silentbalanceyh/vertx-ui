@@ -1,9 +1,12 @@
 import React from 'react';
 import {component} from "../../../_internal";
 import Ux from 'ux';
-import {Table} from 'antd';
+import {Col, Form, Row, Table} from 'antd';
 
 import toColumn from './Web.Source.Fn.Column';
+import source from './Web.Source.Fn.Source';
+
+import LoadingContent from "../../../loading/LoadingContent/UI";
 
 const yiInternal = (reference) => {
     const state = {};
@@ -34,8 +37,14 @@ const yiInternal = (reference) => {
     const $table = Ux.clone(table);
     $table.columns = [toColumn(reference)].concat(Ux.configColumn(reference, $table.columns));
     state.$table = $table;
-    state.$ready = true;
-    reference.setState(state);
+    Ux.raftForm(reference, {
+        id: "SubForm-Layout",
+        renders: {source}
+    }).then(raft => {
+        state.raft = raft;
+        state.$op = {}
+        return Ux.promise(state)
+    }).then(Ux.ready).then(Ux.pipe(reference));
 }
 
 @component({
@@ -49,15 +58,31 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
-            const {$table = {}, $data = []} = this.state;
+            const {$table = {}, $data = [], $inited = {}} = this.state;
             return (
                 <div className={"viewer-database"}>
-                    <Table {...$table} dataSource={$data}/>
-
+                    <Row>
+                        <Col span={24}>
+                            {(() => {
+                                return (
+                                    <div className={"database-form"}>
+                                        {Ux.xtReady(this, () => Ux.aiForm(this, $inited),
+                                            {component: LoadingContent}
+                                        )}
+                                    </div>
+                                );
+                            })()}
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24}>
+                            <Table {...$table} dataSource={$data}/>
+                        </Col>
+                    </Row>
                 </div>
             )
         })
     }
 }
 
-export default Component
+export default Form.create({})(Component)

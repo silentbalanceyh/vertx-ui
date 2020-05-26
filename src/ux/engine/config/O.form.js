@@ -184,12 +184,12 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
     /*
      * 3）是否包含编程传入的 jsx
      */
-    if (program.hasOwnProperty('jsx')) {
+    if (program.hasOwnProperty('renders')) {
         addOn.renders = {};
-        const {jsx = {}} = program;
-        Object.keys(jsx).filter(key => !!jsx[key])
-            .filter(key => U.isFunction(jsx[key]))
-            .forEach(key => addOn.renders[key] = jsx[key]);
+        const {renders = {}} = program;
+        Object.keys(renders).filter(key => !!renders[key])
+            .filter(key => U.isFunction(renders[key]))
+            .forEach(key => addOn.renders[key] = renders[key]);
     }
     /*
      * 4）是否包含了动态信息

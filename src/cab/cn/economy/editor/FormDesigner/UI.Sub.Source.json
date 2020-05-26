@@ -14,5 +14,36 @@
     },
     "_comment": {
         "selected": "已配置数据源"
+    },
+    "_form": {
+        "window": 1.1,
+        "columns": 4,
+        "ui": [
+            [
+                "title=设置数据源详细信息"
+            ],
+            [
+                {
+                    "metadata": "name,数据标识,12,,,placeholder=（数据标识推荐小写，中间带.操作符）",
+                    "optionConfig.rules": [
+                        "required,数据标识不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "method,HTTP方法,12,,aiRadio",
+                    "optionJsx.config.items": [
+                        "GET,GET方法",
+                        "POST,POST查询"
+                    ]
+                }
+            ],
+            [
+                "uri,远程访问路径,18,,,placeholder=（可手工录入，或使用API选择器选择）",
+                "source,,6"
+            ],
+            [
+                "title=已选择列表"
+            ]
+        ]
     }
 }

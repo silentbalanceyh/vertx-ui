@@ -17,6 +17,8 @@
     }
 
     &-popover {
+        z-index: 999;
+
         .ant-popover-content {
             // min-width: 720px !important;
         }
@@ -25,6 +27,13 @@
             padding: 4px 6px;
 
             .viewer {
+                &-database {
+                    .ant-pagination {
+                        margin-top: 6px !important;
+                        margin-bottom: 6px !important;
+                    }
+                }
+
                 &-model {
                     .row {
                         margin-bottom: 4px !important;

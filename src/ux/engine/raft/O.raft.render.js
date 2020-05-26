@@ -78,6 +78,7 @@ const raftRender = (cell = {}, config = {}) => {
      * 2）其次以配置驱动的 props 中的 $renders 优先（Zero Extension在使用）
      */
     const renders = {};
+    console.info(addOn);
     if (addOn.renders) {
         Object.assign(renders, addOn.renders);
     } else {

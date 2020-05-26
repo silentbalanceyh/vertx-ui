@@ -1,0 +1,19 @@
+{
+    "_input": {
+        "text": "API选择器"
+    },
+    "_window": "请选择您要操作API,选择,关闭,false,800,true,$opSaveApi",
+    "_op": {
+        "search": {
+            "placeholder": "（您可以输入`业务关键字`搜索）"
+        }
+    },
+    "_table": {
+        "className": "web-table",
+        "columns": [
+            "name,接口描述",
+            "uri,RESTful路径",
+            "method,HTTP方法"
+        ]
+    }
+}
