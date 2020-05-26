@@ -48,6 +48,21 @@
                 "source,,6"
             ],
             [
+                "params,参数设置表,18"
+            ],
+            [
+                "comment,手工备注,18,,,placeholder=（添加备注）"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveLayout,保存,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
                 "title=已选择列表"
             ]
         ]
