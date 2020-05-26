@@ -49,5 +49,12 @@
             "aiTableEditor,表格编辑器",
             "aiDialogEditor,子表单编辑器"
         ]
+    },
+    "_status": {
+        "set": "已设置",
+        "hidden": "隐藏字段",
+        "assist": "辅助数据源",
+        "initial": "初始值",
+        "count": ":counter个"
     }
 }

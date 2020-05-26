@@ -4,6 +4,19 @@
         "columns": 1,
         "ui": [
             [
+                {
+                    "title": "`布局`说明",
+                    "config": {
+                        "message": "关于`布局`",
+                        "description": [
+                            "目前的版本支持 3 种不同的表单基础布局。",
+                            "表单本身是以 Grid 模式布局。",
+                            "设置完成过后记得点击`保存`按钮！"
+                        ]
+                    }
+                }
+            ],
+            [
                 "className,CSS类名,12,,,placeholder=系统默认：web-form",
                 {
                     "metadata": "cssMode,模式,12,,aiRadio",

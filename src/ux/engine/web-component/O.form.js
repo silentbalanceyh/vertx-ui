@@ -28,7 +28,7 @@ const _aiTitle = (reference, cell = {}) => {
     const {config = {}} = cell;
     if (config.description) {
         return (
-            <Col {...cellRest} span={24}>
+            <Col {...cellRest} span={24} className={"ux-comment"}>
                 <LoadingAlert $alert={config}/>
             </Col>
         )
