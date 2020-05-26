@@ -9,6 +9,7 @@ import get_menus from './get/api-menus';
 import FormData from './editor/form.json';
 import ModelData from './editor/model.json';
 import AssistData from './editor/assist.json';
+import DictData from './editor/source.json';
 
 export default {
     post_oauth_login,
@@ -22,5 +23,6 @@ export default {
         form: FormData,
         model: ModelData,
         assist: AssistData,
+        dict: DictData
     }
 }

@@ -19,7 +19,14 @@ class Component extends React.PureComponent {
             const {$data = {}, $model = {}} = this.state;
             return (
                 <FormDesigner config={$data}
-                              rxSource={input => {
+                              rxType={input => {
+                                  Ux.dgDebug({
+                                      input,
+                                  }, "数据源参数：", "red")
+                                  const data = Mock.Editor.dict[input.type];
+                                  return Ux.promise(data ? data : [])
+                              }}
+                              rxApi={input => {
                                   Ux.dgDebug({
                                       input,
                                   }, "搜索参数：", "red")

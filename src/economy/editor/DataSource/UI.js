@@ -32,20 +32,24 @@ class Component extends React.PureComponent {
                             {(() => {
                                 const {$checked} = this.state;
                                 if ("ASSIST" === $checked) {
-                                    const {rxSource} = this.props;
+                                    const {rxApi} = this.props;
                                     return (
                                         <AssistForm reference={this}
-                                                    rxSource={rxSource}
+                                                    rxSource={rxApi}
                                                     $inited={$inited}/>
                                     )
                                 } else if ("TABULAR" === $checked) {
+                                    const {rxType} = this.props;
                                     return (
                                         <TabularForm reference={this}
+                                                     rxSource={rxType}
                                                      $inited={$inited}/>
                                     )
                                 } else if ("CATEGORY" === $checked) {
+                                    const {rxType} = this.props;
                                     return (
                                         <CategoryForm reference={this}
+                                                      rxSource={rxType}
                                                       $inited={$inited}/>
                                     )
                                 } else {

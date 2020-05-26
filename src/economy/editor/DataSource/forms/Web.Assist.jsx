@@ -3,14 +3,14 @@ import {component} from "../../../_internal";
 import LoadingContent from '../../../loading/LoadingContent/UI';
 import Ux from 'ux';
 import {Form} from "antd";
-import source from './Web.Source';
+import Rdr from './Web.Field';
 
 const yiInternal = (reference) => {
     const state = {};
     /* 构造 $layout 变量 */
     Ux.raftForm(reference, {
         id: "SubForm-Assist", renders: {
-            source
+            source: Rdr.source
         }
     }).then(raft => {
         state.raft = raft;

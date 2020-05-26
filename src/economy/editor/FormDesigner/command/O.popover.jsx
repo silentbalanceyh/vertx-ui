@@ -27,13 +27,15 @@ export default {
 
     },
     database: (reference) => {
-        const {rxSource} = reference.props;
+        const {rxApi, rxType} = reference.props;
         const {raft = {}} = reference.state;
         let assist = [];
         if (raft.form) {
             assist = raft.form.assist;
         }
-        return (<DataSource rxSource={rxSource} reference={reference}
+        return (<DataSource rxApi={rxApi}
+                            rxType={rxType}
+                            reference={reference}
                             $inited={assist}/>)
     }
 }

@@ -116,28 +116,7 @@
                 "magic": {
                     "$body": [
                         "ci.environment",
-                        "ci.status",
-                        "ci.approval.status",
-                        "ci.line.status",
-                        "ci.line.type",
-                        "integration.ucmdb",
-                        "level.protect",
-                        "level.info.system",
-                        "deployment.mode",
-                        "archiving.mode",
-                        "read.write.mode",
-                        "payment.mode",
-                        "colony.type",
-                        "company.nature",
-                        "company.status",
-                        "system.type",
-                        "high.availability.mode",
-                        "add.mode",
-                        "remove.mode",
-                        "category.network.area",
-                        "vendor.type",
-                        "category.middleware",
-                        "category.database"
+                        "ci.status"
                     ]
                 },
                 "group": "type"

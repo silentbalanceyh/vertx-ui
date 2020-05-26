@@ -12,13 +12,22 @@
                 "comment,手工备注,12,,,placeholder=（添加备注）"
             ],
             [
-                "types,类型设置,18"
+                {
+                    "metadata": "types,类型设置,16,,aiTransfer",
+                    "optionJsx.config.datum": "source=define.types,value=code,label=name",
+                    "optionJsx.config.valueKey": "code",
+                    "optionJsx.config.titles": [
+                        "待选择",
+                        "已选择"
+                    ]
+                },
+                "typesJson,,8"
             ],
             [
                 {
                     "metadata": "$button",
                     "optionJsx.extension": [
-                        "$opSaveLayout,保存,SUBMIT,primary"
+                        "$opSaveTabular,保存,SUBMIT,primary"
                     ],
                     "span": 24
                 }

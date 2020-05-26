@@ -15,7 +15,16 @@ const yiInternal = (reference) => {
             $opSaveCategory: (reference) => (params = {}) => {
             }
         };
-        return Ux.promise(state);
+        const {rxSource} = reference.props;
+        if (Ux.isFunction(rxSource)) {
+            rxSource({type: "TABULAR"}).then(response => {
+                /* 读取数据 */
+                console.info(response);
+            })
+        } else {
+            console.error("丢失重要函数 rxType ")
+            Ux.promise(state);
+        }
     }).then(Ux.ready).then(Ux.pipe(reference));
 }
 
