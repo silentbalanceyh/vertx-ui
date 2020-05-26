@@ -30,7 +30,9 @@ class Component extends React.PureComponent {
                         </Tooltip>
                     </Button.Group>
                     &nbsp;&nbsp;
-                    <Tag>
+                    <Tag style={{
+                        fontSize: 14
+                    }}>
                         {(() => {
                             const expr = $op.report;
                             return Ux.formatExpr(expr, {counter: $data.length})
