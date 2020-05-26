@@ -6,7 +6,11 @@ import './Cab.less';
 import Op from './op';
 
 import renderRadio from './Web.Selection';
+import LoadingAlert from '../../loading/LoadingAlert/UI';
+
 import AssistForm from './forms/Web.Assist';
+import TabularForm from './forms/Web.Tabular';
+import CategoryForm from './forms/Web.Category';
 
 @component({
     "i18n.cab": require('./Cab.json'),
@@ -24,7 +28,7 @@ class Component extends React.PureComponent {
                 <div className={"web-data-source"}>
                     {renderRadio(this)}
                     <Row>
-                        <Col span={24}>
+                        <Col span={24} className={"data-form"}>
                             {(() => {
                                 const {$checked} = this.state;
                                 if ("ASSIST" === $checked) {
@@ -34,8 +38,21 @@ class Component extends React.PureComponent {
                                                     rxSource={rxSource}
                                                     $inited={$inited}/>
                                     )
+                                } else if ("TABULAR" === $checked) {
+                                    return (
+                                        <TabularForm reference={this}
+                                                     $inited={$inited}/>
+                                    )
+                                } else if ("CATEGORY" === $checked) {
+                                    return (
+                                        <CategoryForm reference={this}
+                                                      $inited={$inited}/>
+                                    )
                                 } else {
-                                    return false;
+                                    const alert = Ux.fromHoc(this, "alert");
+                                    return (
+                                        <LoadingAlert $alert={alert}/>
+                                    );
                                 }
                             })()}
                         </Col>

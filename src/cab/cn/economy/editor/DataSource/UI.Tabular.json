@@ -1,0 +1,36 @@
+{
+    "_form": {
+        "window": 1.1,
+        "columns": 4,
+        "ui": [
+            [
+                "name,数据标识,12,,,readOnly=true",
+                "method,HTTP方法,12,,,readOnly=true"
+            ],
+            [
+                "uri,远程访问路径,12,,,readOnly=true",
+                "comment,手工备注,12,,,placeholder=（添加备注）"
+            ],
+            [
+                "types,类型设置,18"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveLayout,保存,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=已设置数据源"
+            ]
+        ],
+        "initial": {
+            "name": "FIX:tabular",
+            "method": "FIX:POST",
+            "uri": "/api/types/tabulars"
+        }
+    }
+}
