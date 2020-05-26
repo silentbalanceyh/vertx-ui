@@ -17,7 +17,7 @@ class Component extends React.PureComponent {
         return Ex.ylCard(this, () => {
             const {$data = {}, $model = {}} = this.state;
             return (
-                <FormDesigner data={$data}
+                <FormDesigner config={$data}
                               $models={$model}/>
             );
         }, Ex.parserOfColor("PxFormEditor").page())

@@ -1,9 +1,10 @@
 import Ux from 'ux';
+import Event from './O.event';
 
 const $opSaveLayout = (reference) => (params = {}) => {
-    const ref = Ux.onReference(reference, 1);
-    const {raft} = ref.state;
-    console.info(raft, ref.state);
+    const ref = Ux.onReference(reference, 2);
+    Event.raft(ref).onLayout(params);
+    reference.setState({$submitting: false, $loading: false});
 }
 export default {
     $opSaveLayout

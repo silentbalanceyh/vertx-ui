@@ -25,6 +25,17 @@
             ],
             [
                 {
+                    "metadata": "columns,默认列数,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "1,1列",
+                        "2,2列",
+                        "3,3列",
+                        "4,4列"
+                    ]
+                }
+            ],
+            [
+                {
                     "metadata": "$button",
                     "optionJsx.extension": [
                         "$opSaveLayout,保存,SUBMIT,primary"
@@ -34,7 +45,10 @@
             ]
         ],
         "initial": {
-            "cssMode": "FIX:APPEND"
+            "className": "FIX:web-form",
+            "cssMode": "FIX:APPEND",
+            "columns": "FIX:4",
+            "window": "FIX:1"
         }
     },
     "_layout": {
