@@ -30,7 +30,6 @@ export default {
          */
         const magic = {};
         data.forEach(item => magic[item.name] = item.value);
-        console.info(magic, data);
         Ux.fn(reference).onChange(magic);
         reference.setState({$visible: false});
     },

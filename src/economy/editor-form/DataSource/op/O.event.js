@@ -4,9 +4,6 @@ import {Dsl} from 'entity';
 const _onSubmit = (reference, params = {}) => {
     const $params = Ux.clone(params);
     const {types = [], ...rest} = $params;
-    if (rest.hasOwnProperty('typesJson')) {
-        delete rest.typesJson;
-    }
     /* 关闭防重复提交 */
     reference.setState({$submitting: false, $loading: false});
     if (0 < types.length) {
@@ -66,11 +63,17 @@ export default {
         reference.setState(state);
     },
     onRemove: (reference, record) => (event) => {
-
+        Ux.prevent(event);
+        let {$data = []} = reference.state;
+        $data = Ux.clone($data);
+        $data = $data.filter(item => record.key !== item.key);
+        reference.setState({$data});
     },
     actions: {
         $opSaveAssist: (reference) => (params) => {
-
+            /* 关闭防重复提交 */
+            reference.setState({$submitting: false, $loading: false});
+            return Ux.fn(reference).rxSubmit(params);
         },
         /*
          * assist -> tabular 节点
