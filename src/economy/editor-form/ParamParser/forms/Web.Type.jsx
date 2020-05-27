@@ -9,7 +9,7 @@ const _EXECUTOR = {
     ROUTE: (reference, jsx) => Ux.aiInput(reference, jsx),
     USER: (reference, jsx) => Ux.aiInput(reference, jsx),
     FORM: (reference, jsx) => Ux.aiInput(reference, jsx),
-
+    ENUM: (reference, jsx) => Ux.aiInputMulti(reference, jsx),
     BOOL: (reference, jsx) => Ux.aiRadio(reference, jsx),
 }
 

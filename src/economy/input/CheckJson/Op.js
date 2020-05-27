@@ -1,4 +1,3 @@
-import yiPage from './O.fn.init'
 import Ux from 'ux';
 
 const rxChange = (reference) => (checked = []) => {
@@ -11,11 +10,20 @@ const rxChange = (reference) => (checked = []) => {
     reference.setState({data: checked});
     Ux.fn(reference).onChange(data);
 }
-const yuPage = (reference, virtualRef) => {
-    Ux.xtRevert(reference, virtualRef, {})
+const yiPage = (reference) => {
+    const state = {};
+    state.$ready = true;
+    /* 属性数据 */
+    const {value} = reference.props;
+    const data = [];
+    if (value) {
+        Object.keys(value).filter(key => value[key])
+            .forEach(item => data.push(item));
+    }
+    state.data = data;
+    reference.setState(state);
 }
 export default {
     yiPage,
-    yuPage,
     rxChange,
 }

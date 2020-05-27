@@ -60,6 +60,11 @@
         "FORM": {
             "placeholder": "（您可以输入表单字段名）"
         },
+        "ENUM": {
+            "config": {
+                "limit": 8
+            }
+        },
         "BOOL": {
             "config": {
                 "items": [

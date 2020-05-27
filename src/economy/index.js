@@ -29,6 +29,7 @@ export {default as AddressSelector} from './input/AddressSelector/UI';  // 地�
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
 export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
 export {default as CheckJson} from './input/CheckJson/UI';              // CheckBox多项属性Json格式
+export {default as InputMulti} from './input/InputMulti/UI';            // 多值
 // 复杂搜索组件
 export {default as SearchInput} from './input/SearchInput/UI';
 export {default as SearchRangeDate} from './input/SearchRangeDate/UI';
@@ -51,9 +52,9 @@ export {default as PagerHeader} from './container/Navigation/UI';
 /*
  * 编辑器
  */
-export {default as GraphicEditor} from './editor/GraphicEditor/UI';
-export {default as GraphicViewer} from './editor/GraphicViewer/UI';
-export {default as FormDesigner} from './editor/FormDesigner/UI';
+export {default as GraphicEditor} from './editor-graphic/GraphicEditor/UI';
+export {default as GraphicViewer} from './editor-graphic/GraphicViewer/UI';
+export {default as FormDesigner} from './editor-form/FormDesigner/UI';
 /*
  * 自定义组件专用
  */
