@@ -5,9 +5,6 @@ export default {
         Ux.prevent(event);
         reference.setState({$visible: true})
     },
-    onRadioChange: (reference) => (event) => {
-        console.info("Hello")
-    },
     toValue: (reference) => {
         const {value} = reference.props;
         const data = [];

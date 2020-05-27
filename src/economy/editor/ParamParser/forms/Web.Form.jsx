@@ -2,9 +2,10 @@ import React from 'react';
 import {component} from "../../../_internal";
 import LoadingContent from '../../../loading/LoadingContent/UI';
 import Ux from 'ux';
-import {Form} from "antd";
+import {Form, Tag} from "antd";
 import Op from '../op';
 import '../Cab.less';
+import renderType from './Web.Type';
 
 const yiInternal = (reference) => {
     const state = {};
@@ -12,8 +13,14 @@ const yiInternal = (reference) => {
     Ux.raftForm(reference, {
         id: "SubForm-Parser",
         renders: {
-            type: (reference, jsx) => {
-                return Ux.aiRadio(reference, jsx, Op.onRadioChange(reference))
+            expression: (reference, jsx) => {
+                const type = Ux.formHit(reference, "type");
+                const {config = {}} = jsx;
+                return type ? renderType(reference, jsx) : (
+                    <Tag color={"purple"} style={{
+                        fontSize: 14
+                    }}>{config.empty}</Tag>
+                )
             }
         }
     }).then(raft => {
