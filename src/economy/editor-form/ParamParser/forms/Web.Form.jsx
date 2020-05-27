@@ -2,10 +2,10 @@ import React from 'react';
 import {component} from "../../../_internal";
 import LoadingContent from '../../../loading/LoadingContent/UI';
 import Ux from 'ux';
-import {Form, Tag} from "antd";
+import {Form} from "antd";
 import Op from '../op';
 import '../Cab.less';
-import renderType from './Web.Type';
+import ValueSource from './Web.Source';
 
 const yiInternal = (reference) => {
     const state = {};
@@ -13,15 +13,13 @@ const yiInternal = (reference) => {
     Ux.raftForm(reference, {
         id: "SubForm-Parser",
         renders: {
-            expression: (reference, jsx) => {
-                const type = Ux.formHit(reference, "type");
-                const {config = {}} = jsx;
-                return type ? renderType(reference, jsx) : (
-                    <Tag color={"purple"} style={{
-                        fontSize: 14
-                    }}>{config.empty}</Tag>
+            value: (reference, jsx = {}) => {
+                const {$expression = {}} = reference.state;
+                jsx.$expression = $expression;
+                return (
+                    <ValueSource {...jsx} reference={reference}/>
                 )
-            }
+            },
         }
     }).then(raft => {
         state.raft = raft;

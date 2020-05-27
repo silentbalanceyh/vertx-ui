@@ -1,0 +1,27 @@
+{
+    "_input": {
+        "source": {
+            "label": "数据标识",
+            "optionJsx": {
+                "placeholder": "请输入您的数据标识信息。"
+            }
+        },
+        "output": {
+            "label": "输出字段名",
+            "optionJsx": {
+                "placeholder": "如果不设置默认输入`主键`（key）。"
+            }
+        },
+        "condField": {
+            "label": "条件字段",
+            "optionJsx": {
+            }
+        },
+        "condValue": {
+            "label": "条件值",
+            "optionJsx": {
+                "placeholder": "当前版本只支持 FIX: 固定模式。"
+            }
+        }
+    }
+}

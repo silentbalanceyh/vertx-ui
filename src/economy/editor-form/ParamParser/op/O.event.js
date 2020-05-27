@@ -20,5 +20,10 @@ export default {
             })
         }
         return data;
+    },
+    actions: {
+        $opSaveParam: (reference) => (params = {}) => {
+            console.info(params);
+        }
     }
 }

@@ -33,10 +33,19 @@
             ],
             [
                 {
-                    "metadata": "expression,参数值,24",
+                    "metadata": "value,参数值,24",
                     "optionJsx.config": {
                         "empty": "（请先选择参数类型，再设置参数值！）"
                     }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveParam,追加参数,SUBMIT,primary"
+                    ],
+                    "span": 24
                 }
             ]
         ]
@@ -63,6 +72,15 @@
         "ENUM": {
             "config": {
                 "limit": 8
+            },
+            "styleInput": {
+                "width": "23%",
+                "marginRight": "1%"
+            }
+        },
+        "DATUM": {
+            "config": {
+                "unique": true
             }
         },
         "BOOL": {
