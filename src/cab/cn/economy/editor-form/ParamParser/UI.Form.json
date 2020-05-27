@@ -1,6 +1,6 @@
 {
     "_form": {
-        "window": 0.15,
+        "window": 1,
         "columns": 4,
         "ui": [
             [
@@ -8,7 +8,7 @@
             ],
             [
                 {
-                    "metadata": "name,参数名称,14,,,placeholder=（输入您要设置的参数名）",
+                    "metadata": "name,参数名称,12,,,placeholder=（输入您要设置的参数名）",
                     "optionConfig.rules": [
                         "required,请填写参数名称，参数名称不可为空"
                     ]

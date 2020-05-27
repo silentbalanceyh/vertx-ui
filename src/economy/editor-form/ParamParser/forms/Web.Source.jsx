@@ -1,7 +1,7 @@
 import React from 'react';
 import {Col, Row, Tag} from "antd";
 import Ux from "ux";
-import ParamDatum from '../../DatumUnique/UI';
+import DatumUnique from '../../DatumUnique/UI';
 
 const onInput = (type, reference) => (value) => {
     let expr = type + ":";
@@ -23,16 +23,16 @@ const _EXECUTOR = {
         Ux.fn(reference).onChange(expr);
     }),
     BOOL: (reference, jsx) => Ux.aiRadio(reference, jsx),
-    DATUM: (reference, jsx) => (
-        <ParamDatum {...jsx} reference={reference} onChange={values => {
-            console.info(values);
+    UNIQUE: (reference, jsx) => (
+        <DatumUnique {...jsx} reference={reference} onChange={(expr) => {
+            Ux.fn(reference).onChange(expr);
         }}/>
     )
 }
 
 const renderByType = (reference, jsx = {}) => {
     const ref = Ux.onReference(reference, 1);
-    const type = Ux.formHit(ref, "type")
+    const type = Ux.formHit(ref, "type");
     if (type) {
         const {$expression = {}} = reference.props;
         const config = $expression[type];

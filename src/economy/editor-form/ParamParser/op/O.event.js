@@ -13,9 +13,8 @@ export default {
                 const valueOrExpr = value[item];
                 const record = {};
                 record.name = item;
-                const firstIndex = valueOrExpr.indexOf(":");
-                record.type = valueOrExpr.substring(0, firstIndex);
-                record.expression = valueOrExpr.substring(firstIndex + 1, valueOrExpr.length);
+                const parsed = Ux.valueExpr(valueOrExpr);
+                Object.assign(record, parsed);
                 data.push(record);
             })
         }
