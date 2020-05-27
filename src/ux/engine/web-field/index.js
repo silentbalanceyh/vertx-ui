@@ -26,7 +26,7 @@ import RichEditor from './O.editor.rich';
 import DialogEditor from './O.editor.dialog';
 import JsonEditor from './O.editor.json';
 import CheckJson from './O.check.json';
-import InputMulti from './O.input.multi';
+import InputArray from './O.input.array';
 // 搜索
 import SearchInput from './O.search.input';
 import SearchRangeDate from './O.search.range.date';
@@ -35,7 +35,7 @@ const exported = {
     ...Input,
     ...InputPassword,
     ...InputNumber,
-    ...InputMulti,
+    ...InputArray,
 
     ...Checkbox,
     ...CheckJson,

@@ -143,16 +143,24 @@ const _xtRevert = (reference, callback = {}) => {
             const isTouched = form.isFieldsTouched();
             const {value, onChange} = reference.props;
             if (isTouched) {
-
+                console.debug("ANT-FORM, touched = true");
             } else {
+                console.debug("ANT-FORM, touched = false");
                 /*
                  * 重置
                  */
                 if (Abs.isFunction(onChange)) {
                     onChange(value);
+                    /*
+                     * 外置函数
+                     */
+                    if (Abs.isFunction(callback.reset)) {
+                        callback.reset(value);
+                    }
                 }
             }
         } else {
+            console.debug("NO-FORM");
             /*
              * 非直接自定义控件
              */
@@ -161,6 +169,7 @@ const _xtRevert = (reference, callback = {}) => {
         /*
          * 没有传入 reference 变量
          */
+        console.debug("NO-REF, reference = null");
     }
 }
 /**

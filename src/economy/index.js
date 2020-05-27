@@ -29,7 +29,7 @@ export {default as AddressSelector} from './input/AddressSelector/UI';  // 地�
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
 export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
 export {default as CheckJson} from './input/CheckJson/UI';              // CheckBox多项属性Json格式
-export {default as InputMulti} from './input/InputMulti/UI';            // 多值
+export {default as InputArray} from './input/InputArray/UI';            // 多值输入，值结构为 Array
 // 复杂搜索组件
 export {default as SearchInput} from './input/SearchInput/UI';
 export {default as SearchRangeDate} from './input/SearchRangeDate/UI';

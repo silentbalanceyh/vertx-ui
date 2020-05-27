@@ -1,0 +1,23 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "data,测试组件,,,aiInputMulti"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    }
+}

@@ -1,13 +1,13 @@
 import R from '../../engine/expression';
 import React from 'react';
-import {InputMulti} from 'web';
+import {InputArray} from 'web';
 
 const aiInputMulti = (reference, jsx = {}, onChange) => {
     // 处理 onChange 处理
     R.Ant.onChange(jsx, onChange);
     // ReadOnly 处理
     R.Ant.onReadOnly(jsx, false, reference);
-    return (<InputMulti {...jsx}/>)
+    return (<InputArray {...jsx} reference={reference}/>)
 }
 const ai2InputMulti = (onChange) => (reference, jsx = {}) => {
     const fnChange = onChange.apply(null, [reference]);
