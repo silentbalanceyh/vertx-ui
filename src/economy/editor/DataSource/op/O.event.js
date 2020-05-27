@@ -56,7 +56,12 @@ export default {
             state.$assist = undefined;
         } else {
             state.$checked = "ASSIST";
-            state.$assist = record;
+            // Fix：解决重复选择记录界面不刷新的问题
+            const $record = Ux.clone(record);
+            if (!$record.magic) {
+                $record.magic = {};
+            }
+            state.$assist = $record;
         }
         reference.setState(state);
     },

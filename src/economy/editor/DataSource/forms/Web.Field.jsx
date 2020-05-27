@@ -25,7 +25,7 @@ export default {
     },
     magic: (reference, jsx) => {
         return (
-            <ParamParser reference={reference}/>
+            <ParamParser reference={reference} {...jsx}/>
         )
     },
     typesJson: (reference, jsx) => {

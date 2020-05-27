@@ -15,10 +15,13 @@ class Component extends React.PureComponent {
         Op.yiPage(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuPage(this, {props: prevProps, state: prevState});
+    }
+
     render() {
         return Ux.xtReady(this, () => {
-            const {$op = {}, $dialog = {}, $visible = false} = this.state;
-            const $data = Op.toValue(this);
+            const {$op = {}, $dialog = {}, $visible = false, $data = []} = this.state;
             return (
                 <div>
                     <Button.Group>
