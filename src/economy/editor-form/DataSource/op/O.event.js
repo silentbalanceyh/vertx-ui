@@ -35,11 +35,11 @@ export default {
         Ux.messageSuccess(comment.submit);
         {
             const {$data = []} = reference.state;
-            const dataArray = Dsl.getArray($data);
+            const dataArray = Dsl.getArray($data.reverse());
             const $params = Ux.clone(params);
             $params.key = $params.name;
             dataArray.saveElement($params);
-            reference.setState({$data: dataArray.to()})
+            reference.setState({$data: dataArray.to().reverse()})
         }
     },
     onEdit: (reference, record) => (event) => {
