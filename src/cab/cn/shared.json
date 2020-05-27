@@ -11,7 +11,9 @@
         "previous": "上一步",
         "approve": "批准",
         "reject": "拒绝",
-        "clear": "清除"
+        "clear": "清除",
+        "edit": "编辑",
+        "remove": "删除"
     },
     "_dialog": {
         "error": "错误",

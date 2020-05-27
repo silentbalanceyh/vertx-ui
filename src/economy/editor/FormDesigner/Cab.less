@@ -1,0 +1,187 @@
+@import "../../../global";
+
+.web-form-designer {
+    .content {
+        &-left {
+            padding-right: 6px;
+        }
+
+        &-status {
+            label {
+                font-weight: 900;
+            }
+
+            border-bottom: dashed 1px #Ececec;
+            line-height: 32px;
+        }
+    }
+
+    &-popover {
+        z-index: 999;
+
+        .ant-popover-content {
+            // min-width: 720px !important;
+        }
+
+        .ant-popover-inner-content {
+            padding: 4px 6px;
+
+            .viewer {
+
+                &-model {
+                    .row {
+                        margin-bottom: 4px !important;
+                        height: 38px;
+                        line-height: 38px;
+
+                        label {
+                            font-weight: 900;
+                        }
+                    }
+                }
+
+                &-layout {
+                    &-row {
+                        height: 12px;
+                        margin-bottom: 3px;
+
+                        .ant-col {
+                            height: 12px;
+                        }
+
+                        .ant-form-item-label {
+                            border-radius: 6px;
+                            color: #fef0f6;
+                            background-color: #fef0f6;
+                            border: solid 1px #eb2f95;
+
+                            label {
+                                color: #fef0f6;
+                            }
+                        }
+
+                        .ant-form-item-control {
+                            margin-right: 3px;
+                            margin-left: 3px;
+                            color: #f6feec;
+                            background-color: #f6feec;
+                            border: solid 1px #52c41b;
+                            border-radius: 6px;
+                            height: 12px;
+                        }
+                    }
+                }
+            }
+        }
+
+    }
+
+    .designer {
+        &-tool {
+            width: 100%;
+            display: inline-block;
+            margin-bottom: 3px;
+            padding-bottom: 8px;
+            border-bottom: solid 1px #e8e8e8;
+
+            .link {
+                padding: 6px 8px;
+                color: #595959;
+                border: solid 1px white;
+            }
+
+
+            a:hover {
+                border: solid 1px #8C8C8C;
+                border-radius: 4px;
+            }
+
+            .op {
+
+                &-link {
+                    .link;
+                }
+
+                &-ilink {
+                    .link;
+
+                    .icon-svg {
+                        line-height: 21px;
+
+                        i {
+
+                            svg {
+                                width: 14px;
+                                height: 14px;
+                            }
+                        }
+
+                    }
+                }
+
+                &-primary i {
+                    color: @primary-color;
+                }
+
+                &-cancel i {
+                    color: @color-error;
+                }
+
+                &-field i {
+                    color: #00939c;
+                }
+
+                &-source i {
+                    color: #4296de;
+                }
+
+                &-disabled i {
+                    color: #8C8C8C;
+                }
+
+                &-disabled:hover {
+                    cursor: not-allowed !important;
+                    border: solid 1px white !important;
+                    border-radius: 0 !important;
+                }
+            }
+
+            .ant-divider {
+                margin: 0 6px;
+            }
+        }
+
+        &-control {
+            .ant-collapse-header {
+                padding-top: 4px !important;
+                padding-bottom: 4px !important;
+            }
+
+            .ant-collapse-content-box {
+                padding: 0 !important;
+            }
+
+            .web-items {
+                border-right: none;
+                overflow: auto;
+
+                img {
+                    width: 28px;
+                    height: auto;
+                }
+
+                .draggable-item {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    height: 32px;
+                    line-height: 32px;
+                    padding: 0 8px;
+                }
+
+                .draggable-item:hover {
+                    cursor: move;
+                }
+            }
+        }
+    }
+}

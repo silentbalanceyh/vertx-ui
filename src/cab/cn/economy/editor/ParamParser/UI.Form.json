@@ -1,0 +1,52 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 4,
+        "ui": [
+            [
+                "title=添加参数详细信息"
+            ],
+            [
+                {
+                    "metadata": "name,参数名称,14",
+                    "optionConfig.rules": [
+                        "required,请填写参数名称，参数名称不可为空"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,参数类型,24,,aiRadio",
+                    "optionItem.className": "web-radio-two",
+                    "optionJsx.config.items": [
+                        "BOOL,逻辑值",
+                        "FIX,固定值",
+                        "ENUM,枚举值",
+                        "UNIQUE,字典值",
+                        "USER,用户值",
+                        "FORM,表单值",
+                        "ROUTE,路由值",
+                        "PROP,属性值（React组件）",
+                        "STATE,状态值（React组件）"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "expression,参数值,24",
+                    "optionJsx.config": {
+                        "empty": "（请先选择参数类型，再设置参数值！）"
+                    }
+                }
+            ]
+        ]
+    },
+    "_type": {
+        "BOOL": {
+            "items": [
+                "true,逻辑真值（true）",
+                "false,逻辑假值（false）"
+            ]
+        }
+    }
+}

@@ -5,7 +5,6 @@ import yiModule from './yi.module';
 // UI_LAYOUT 表访问
 import yiLayout from './yi.layout';
 // UI_FORM
-import yiForm from './yi.form'; // 普通表单
 import yiAssist from './yi.assist';
 // 特殊加载
 import yiControl from './yi.control';
@@ -23,7 +22,6 @@ export default {
     yiStandard,
     yiModule,
     yiLayout,
-    yiForm,
     yiAssist,
     yiControl,
     yiCompany,

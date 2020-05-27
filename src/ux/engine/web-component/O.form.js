@@ -28,7 +28,7 @@ const _aiTitle = (reference, cell = {}) => {
     const {config = {}} = cell;
     if (config.description) {
         return (
-            <Col {...cellRest} span={24}>
+            <Col {...cellRest} span={24} className={"ux-comment"}>
                 <LoadingAlert $alert={config}/>
             </Col>
         )
@@ -115,7 +115,7 @@ const aiForm = (reference, values, config = {}) => {
     const {form} = reference.props;
     const touched = form.isFieldsTouched();
     if (!touched) {
-        Dev.dgDebug(initials, "初始化表单数据：", "black");
+        Dev.dgDebug(initials, "初始化表单数据：", "#faad14");
     }
     // form 专用属性
     const {raft = {}} = reference.state;

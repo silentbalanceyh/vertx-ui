@@ -68,12 +68,18 @@ const xtReady = (reference, render, LOG = {}) => {
         }
         return xtRender(reference, render);
     } else {
-        return (<Progress percent={62.8}
-                          size={"small"}
-                          status={"active"}
-                          style={{
-                              width: "60%"
-                          }}/>);
+        const {component: Component} = LOG;
+        if (Component) {
+            /* 提供了加载组件 */
+            return (<Component/>);
+        } else {
+            return (<Progress percent={62.8}
+                              size={"small"}
+                              status={"active"}
+                              style={{
+                                  width: "60%"
+                              }}/>);
+        }
     }
 };
 

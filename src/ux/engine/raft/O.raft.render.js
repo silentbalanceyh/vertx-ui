@@ -235,13 +235,17 @@ const raftHidden = (raft = {}, $form, reference) => {
         $form.hidden.forEach(field => {
             const hidden = {};
             const {form} = reference.props;
-            const {getFieldDecorator} = form;
-            hidden.render = (values = {}) => {
-                const initialValue = values[field];
-                return getFieldDecorator(field, {
-                    initialValue
-                })(Field.aiHidden(reference, {name: field, key: field}))
-            };
+            if (form) {
+                const {getFieldDecorator} = form;
+                hidden.render = (values = {}) => {
+                    const initialValue = values[field];
+                    return getFieldDecorator(field, {
+                        initialValue
+                    })(Field.aiHidden(reference, {name: field, key: field}))
+                };
+            } else {
+                hidden.render = Field.aiHidden(reference, {name: field, key: field});
+            }
             raft.hidden.push(hidden);
         })
     }

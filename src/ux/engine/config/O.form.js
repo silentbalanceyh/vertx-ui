@@ -4,12 +4,14 @@ import Ajax from '../../ajax';
 
 import Parser from '../parser';
 import Raft from '../raft';
+import Datum from '../datum';
+import Fn from '../functions';
 import U from 'underscore';
 
 import Logger from '../../develop/logger';
 
 
-/**
+/*
  * ## 引擎函数
  *
  * 配置专用方法，处理当前Form中的input控件专用信息，该配置方法为**上层方法**，直接从
@@ -182,12 +184,12 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
     /*
      * 3）是否包含编程传入的 jsx
      */
-    if (program.hasOwnProperty('jsx')) {
+    if (program.hasOwnProperty('renders')) {
         addOn.renders = {};
-        const {jsx = {}} = program;
-        Object.keys(jsx).filter(key => !!jsx[key])
-            .filter(key => U.isFunction(jsx[key]))
-            .forEach(key => addOn.renders[key] = jsx[key]);
+        const {renders = {}} = program;
+        Object.keys(renders).filter(key => !!renders[key])
+            .filter(key => U.isFunction(renders[key]))
+            .forEach(key => addOn.renders[key] = renders[key]);
     }
     /*
      * 4）是否包含了动态信息
@@ -200,6 +202,12 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
      */
     const {id = ""} = reference.props;
     addOn.id = id;
+    if (!addOn.id) {
+        // 修正 id 来源
+        if (program.hasOwnProperty("id")) {
+            addOn.id = program.id;
+        }
+    }
     addOn.reference = reference;
     /*
      * 6）权限控制
@@ -331,41 +339,74 @@ const configForm = (form, addOn = {}) => {
     Logger.render(3);
     return raft;
 };
+
 /**
  * ## 引擎函数
  *
- * Legacy遗留系统专用的Form配置处理。
+ * 新函数，两种情况
  *
- * @deprecated 后期会废弃该方法，目前唯一的一个表单级的遗留方法
+ * 1. 长度为1
+ * 2. 长度为2
+ *
  * @memberOf module:_config
- * @param {ReactComponent} reference React对应组件引用。
- * @param {Object} config 基本输入的配置信息。
  * @return {Promise<T>} 返回最终的 Promise。
  */
-const raftForm = (reference, config = {}) => {
-    const {
-        key = "form",        // 读取 Cab文件的配置，key 默认为 form
-        ...rest              // 其他 配置
-    } = config;
-    const form = cabForm(reference, key);
-    /*
-     * options 专用
-     */
-    const options = capForm(reference, {form}, rest);
-    /*
-     * 执行 configForm 核心操作
-     */
-    return options.then(response => {
-        const {form, addOn = {}} = response;
-        const raft = configForm(form, addOn);
+function raftForm() {
+    if (1 === arguments.length) {
         /*
-         * 构造 raft
+         * 返回 Promise
+         * 1. 普通功能，capForm
+         * 2. 配置功能，configForm
+         * 3. 辅助信息，assist 数据处理
          */
-        return Abs.promise(raft);
-    });
-};
+        const reference = arguments[0];
+        if (reference) {
+            const {config = {}, $op = {}} = reference.props;
+            const $config = Abs.clone(config);
+            return capForm(reference, $config).then((response = {}) => {
+                const {form, addOn = {}} = response;
+                const raft = configForm(form, addOn);
+                const state = {};
+                state.raft = raft;
+                state.$op = $op;
+                return Abs.promise(state);
+            }).then(processed => {
+                const assist = Datum.fromHoc(reference, "assist");
+                if (assist) {
+                    return Fn.asyncAssist(assist, reference, processed);
+                } else {
+                    return Abs.promise(processed);
+                }
+            });
+        }
+    } else if (2 === arguments.length) {
+        const reference = arguments[0];
+        const config = arguments[1] ? arguments[1] : {};
+        const {
+            key = "form",        // 读取 Cab文件的配置，key 默认为 form
+            ...rest              // 其他 配置
+        } = config;
+        const form = cabForm(reference, key);
+        /*
+         * options 专用
+         */
+        const options = capForm(reference, {form}, rest);
+        /*
+         * 执行 configForm 核心操作
+         */
+        return options.then(response => {
+            const {form, addOn = {}} = response;
+            const raft = configForm(form, addOn);
+            /*
+             * 构造 raft
+             */
+            return Abs.promise(raft);
+        });
+    }
+}
+
 export default {
-    cabForm,        // 同步处理
+    // cabForm,        // 同步处理
     capForm,        // 异步处理（基本配置）
     configForm,     // 执行 raft 处理
     raftForm,       // Legacy遗留系统

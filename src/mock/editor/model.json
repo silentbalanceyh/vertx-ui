@@ -1,0 +1,22 @@
+{
+    "identifier": "ci.service",
+    "name": "业务服务",
+    "category": "业务分类",
+    "attributes": [
+        {
+            "name": "name",
+            "type": "java.lang.String",
+            "alias": "配置项名称"
+        },
+        {
+            "name": "code",
+            "type": "java.lang.String",
+            "alias": "配置项编码"
+        },
+        {
+            "name": "key",
+            "type": "java.lang.String",
+            "alias": "配置项主键"
+        }
+    ]
+}

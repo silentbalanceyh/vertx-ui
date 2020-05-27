@@ -26,5 +26,9 @@ const generator = (reference, names = []) => {
     return object;
 }
 export default (reference) => generator(reference, [
-    "onChange"
+    /* Ant 系列 */
+    "onChange",
+    /* Rx 系列 */
+    "rxSource",
+    "rxSubmit"
 ]);

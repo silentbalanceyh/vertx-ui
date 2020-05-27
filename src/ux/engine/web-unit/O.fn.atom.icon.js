@@ -26,11 +26,16 @@ export default (type, addOn = {}) => {
                 return (<img alt={"icons"} {...attrs} {...addOn}/>)
             } else if (type.startsWith("svg:")) {
                 const d = type.substring(4);
+                const svgColor = addOn['data-color'];
                 return (
                     <span className={"icon-svg"}>
-                        <svg viewBox="0 0 1024 1024" fill={"#fff"}>
-                            <path d={d}/>
-                        </svg>
+                        <i className={"anticon"}>
+                            <svg viewBox="0 0 1024 1024"
+                                 width={"1em"} height={"1em"}
+                                 fill={svgColor ? svgColor : "#fff"}>
+                                <path d={d}/>
+                            </svg>
+                        </i>
                     </span>
                 )
             } else {

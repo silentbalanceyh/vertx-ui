@@ -53,6 +53,7 @@ export {default as PagerHeader} from './container/Navigation/UI';
  */
 export {default as GraphicEditor} from './editor/GraphicEditor/UI';
 export {default as GraphicViewer} from './editor/GraphicViewer/UI';
+export {default as FormDesigner} from './editor/FormDesigner/UI';
 /*
  * 自定义组件专用
  */

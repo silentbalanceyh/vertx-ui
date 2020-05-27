@@ -1,8 +1,17 @@
 import {HocI18n} from "entity";
-import Logger from './ix.logger';
 import {connect} from "react-redux";
 import Ux from "ux";
 
+const _DEBUG = Boolean("development" === process.env.NODE_ENV && process.env.$DEBUG);
+const debug = (reference = {}, Name) => {
+    if (_DEBUG) {
+        const message = `%c 「Zero」 [Rx-Economy] Component Monitor: name = ${Name}`;
+        console.groupCollapsed(message, 'color:#0099FF;font-weight:900;');
+        console.log(`%c 「Zero」 Props -> `, 'color:#660099;font-weight:900;', reference.props);
+        console.log(`%c 「Zero」 State -> `, 'color:#666666;font-weight:900;', reference.state);
+        console.groupEnd();
+    }
+};
 const _ixFullName = (Component, Cab = {}, Name) => {
     // ns 属性检查
     Ux.E.fxTerminal(!Cab || !Cab.hasOwnProperty("ns"), 10050, Cab);
@@ -79,7 +88,7 @@ const _zero = (options = {}) => {
                 if (error) return Ux.fxError(error);
 
                 const fullName = _ixI18nName(this, options);
-                Logger.debug(this, fullName);
+                debug(this, fullName);
                 return super.render();
             }
         }
