@@ -22,11 +22,10 @@ const _EXECUTOR = {
         }
         Ux.fn(reference).onChange(expr);
     }),
-    BOOL: (reference, jsx) => Ux.aiRadio(reference, jsx),
+    BOOL: (reference, jsx) => Ux.aiRadio(reference, jsx, onInput("BOOL", reference)),
     UNIQUE: (reference, jsx) => (
-        <DatumUnique {...jsx} reference={reference} onChange={(expr) => {
-            Ux.fn(reference).onChange(expr);
-        }}/>
+        <DatumUnique {...jsx} reference={reference}
+                     onChange={(expr) => Ux.fn(reference).onChange(expr)}/>
     )
 }
 

@@ -27,11 +27,12 @@ export default (type, addOn = {}) => {
             } else if (type.startsWith("svg:")) {
                 const d = type.substring(4);
                 const svgColor = addOn['data-color'];
+                const svgSize = addOn['data-size'] ? (addOn['data-size'] / 10) : 1;
                 return (
                     <span className={"icon-svg"}>
                         <i className={"anticon"}>
                             <svg viewBox="0 0 1024 1024"
-                                 width={"1em"} height={"1em"}
+                                 width={`${svgSize}em`} height={`${svgSize}em`}
                                  fill={svgColor ? svgColor : "#fff"}>
                                 <path d={d}/>
                             </svg>

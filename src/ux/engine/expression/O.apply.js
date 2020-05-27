@@ -28,7 +28,7 @@ import Ut from '../../unity';
  * @param {String} literal 字面量专用数据。
  * @returns {Array} 返回解析后的数组。
  */
-const applyArray = (literal) => U.isArray(literal) ? literal : literal.replace(/ /g, '').split(',');
+const applyArray = (literal) => U.isArray(literal) ? literal : literal.split(',');
 /**
  * ## 引擎函数
  *
