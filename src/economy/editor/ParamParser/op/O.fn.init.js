@@ -16,6 +16,7 @@ export default {
         state.$table = $table;
         /* 数据信息 */
         state.$data = Event.toValue(reference);
+        /* onChange 专用 */
         reference.setState(state);
     },
     yuPage: (reference, virtualRef) => {

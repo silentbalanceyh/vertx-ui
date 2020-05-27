@@ -1,12 +1,15 @@
 {
     "_table": {
+        "rowKey": "name",
+        "className": "web-table",
+        "pagination": false,
         "columns": [
             "name,参数名",
-            "source,参数来源",
-            "value,参数值"
+            "type,参数来源",
+            "expression,参数值格式"
         ]
     },
-    "_window": "设置当前数据源的参数表,保存,关闭,false,800,true,$opSave",
+    "_window": "设置当前数据源的参数表,保存,关闭,false,900,true,$opSave",
     "_op": {
         "edit": "编辑参数表",
         "search": "查看",

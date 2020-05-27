@@ -5,6 +5,7 @@ import Ux from 'ux';
 import Op from './op';
 import renderContent from "./Web.Content";
 import Dialog from "../../container/Dialog/UI";
+import './Cab.less';
 
 @component({
     "i18n.cab": require('./Cab.json'),
@@ -23,7 +24,7 @@ class Component extends React.PureComponent {
         return Ux.xtReady(this, () => {
             const {$op = {}, $dialog = {}, $visible = false, $data = []} = this.state;
             return (
-                <div>
+                <div className={"web-param-parser"}>
                     <Button.Group>
                         <Tooltip title={$op.edit}>
                             <Button icon={"edit"} onClick={Op.onClick(this)}/>

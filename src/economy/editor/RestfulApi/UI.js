@@ -22,7 +22,8 @@ class Component extends React.PureComponent {
             const {$disabled = false} = this.props;
             return (
                 <div className={"web-restful"}>
-                    <Button icon={"api"} className={"ux-spec"} disabled={$disabled}
+                    <Button icon={"api"} className={"ux-spec"}
+                            disabled={$disabled}
                             onClick={Op.onClick(this)}>
                         {$button.text}
                     </Button>

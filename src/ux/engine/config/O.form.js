@@ -202,6 +202,12 @@ const capForm = async (reference = {}, config = {}, program = {}) => {
      */
     const {id = ""} = reference.props;
     addOn.id = id;
+    if (!addOn.id) {
+        // 修正 id 来源
+        if (program.hasOwnProperty("id")) {
+            addOn.id = program.id;
+        }
+    }
     addOn.reference = reference;
     /*
      * 6）权限控制

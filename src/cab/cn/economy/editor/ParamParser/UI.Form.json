@@ -1,0 +1,28 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "ui": [
+            [
+                "name,参数名称"
+            ],
+            [
+                {
+                    "metadata": "type,参数类型,,,aiRadio",
+                    "optionItem.className": "web-radio-two",
+                    "optionJsx.config.items": [
+                        "FIX,固定值",
+                        "BOOL,逻辑值",
+                        "ENUM,枚举值",
+                        "UNIQUE,字典值",
+                        "USER,用户值",
+                        "FORM,表单值",
+                        "ROUTE,路由值",
+                        "PROP,属性值（React组件）",
+                        "STATE,状态值（React组件）"
+                    ]
+                }
+            ]
+        ]
+    }
+}
