@@ -77,6 +77,6 @@ export default {
         onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params))
             .then(onCallback(reference)),
         onAssist: (params) => onRaft(reference, (raft) => onAssist(raft, params))
-            .then($raft => reference.setState({$raft}))
+            .then(raft => reference.setState({raft}))
     })
 }
