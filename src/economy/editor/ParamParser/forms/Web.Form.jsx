@@ -26,6 +26,11 @@ const yiInternal = (reference) => {
     }).then(raft => {
         state.raft = raft;
         state.$op = Op.actions;
+        {
+            // _expr 专用字段
+            const expression = Ux.fromHoc(reference, "expression");
+            state.$expression = Ux.clone(expression);
+        }
         return Ux.promise(state);
     }).then(Ux.ready).then(Ux.pipe(reference));
 }
