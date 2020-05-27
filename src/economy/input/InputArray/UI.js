@@ -34,6 +34,7 @@ class Component extends React.PureComponent {
                         )
                     })}
                     <Button icon={"plus"} size={"small"}
+                            disabled={Op.isDisabled(this)}
                             onClick={Op.onAdd(this)}/>
                 </div>
             )
