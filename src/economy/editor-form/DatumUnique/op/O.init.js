@@ -35,6 +35,10 @@ const yiPage = (reference) => {
          * UNIQUE:ci.status,key,code=FIX:RUNNING
          **/
         state.data = yoValue(value);
+    } else {
+        state.data = {
+            output: "key"    // 默认输出字段是主键
+        }
     }
     state.$ready = true;
     reference.setState(state);

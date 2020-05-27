@@ -22,7 +22,7 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
-            const {$op = {}, $dialog = {}, $visible = false, $data = []} = this.state;
+            const {$op = {}, $dialog = {}, $visible = false, data = []} = this.state;
             return (
                 <div className={"web-param-parser"}>
                     <Button.Group>
@@ -39,7 +39,7 @@ class Component extends React.PureComponent {
                     }}>
                         {(() => {
                             const expr = $op.report;
-                            return Ux.formatExpr(expr, {counter: $data.length})
+                            return Ux.formatExpr(expr, {counter: data.length})
                         })()}
                     </Tag>
                     <Dialog className={"web-dialog"}
