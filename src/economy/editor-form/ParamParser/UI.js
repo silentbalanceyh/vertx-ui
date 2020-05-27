@@ -1,11 +1,13 @@
 import React from 'react';
-import {Button, Tag, Tooltip} from 'antd';
+import {Button, Popover, Tag, Tooltip} from 'antd';
 import {component} from "../../_internal";
 import Ux from 'ux';
 import Op from './op';
-import renderContent from "./Web.Content";
 import Dialog from "../../container/Dialog/UI";
 import './Cab.less';
+
+import renderContent from "./Web.Content";
+import ReactJson from "react-json-view";
 
 @component({
     "i18n.cab": require('./Cab.json'),
@@ -23,6 +25,7 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtReady(this, () => {
             const {$op = {}, $dialog = {}, $visible = false, data = []} = this.state;
+            const {value} = this.props;
             return (
                 <div className={"web-param-parser"}>
                     <Button.Group>
@@ -30,7 +33,13 @@ class Component extends React.PureComponent {
                             <Button icon={"edit"} onClick={Op.onClick(this)}/>
                         </Tooltip>
                         <Tooltip title={$op.search}>
-                            <Button icon={"search"}/>
+                            <Popover trigger={"click"} placement={"right"}
+                                     content={<ReactJson src={value} name={null}
+                                                         enableClipboard={false}/>}
+                                     overlayClassName={"json-types"}
+                                     overlayStyle={{minWidth: 480}}>
+                                <Button icon={"search"}/>
+                            </Popover>
                         </Tooltip>
                     </Button.Group>
                     &nbsp;&nbsp;

@@ -25,8 +25,8 @@ export default {
         const previous = virtualRef.props.value;
         const current = reference.props.value;
         if (Ux.isDiff(previous, current)) {
-            const $data = Event.toValue(reference);
-            reference.setState({$data});
+            const data = Event.toValue(reference);
+            reference.setState({data});
         }
     }
 }

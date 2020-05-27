@@ -196,7 +196,7 @@ const valueCopy = (target = {}, source = {}, field) => {
  * ## 标准函数
  * 处理解析流程
  **/
-const valueExpr = (valueOrExpr) => {
+const valueParse = (valueOrExpr) => {
     const firstIndex = valueOrExpr.indexOf(":");
     const parsed = {};
     parsed.type = valueOrExpr.substring(0, firstIndex);
@@ -204,7 +204,7 @@ const valueExpr = (valueOrExpr) => {
     return parsed;
 }
 export default {
-    valueExpr,
+    valueParse,
     valueInt,
     valueFloat,
     valueFactor,

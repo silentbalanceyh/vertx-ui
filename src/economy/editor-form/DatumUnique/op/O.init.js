@@ -3,7 +3,7 @@ import Ux from 'ux';
 const yoValue = (value) => {
     if ("string" === value && value) {
         try {
-            const parsed = Ux.valueExpr(value);
+            const parsed = Ux.valueParse(value);
             const segment = parsed.expression.split(',');
             const [source, output, condition] = segment;
             const segmentCond = condition.split('=');
@@ -12,7 +12,7 @@ const yoValue = (value) => {
             $data.source = source;
             $data.output = output;
             $data.condField = condField;
-            const valueParsed = Ux.valueExpr(condValue);
+            const valueParsed = Ux.valueParse(condValue);
             $data.condValue = valueParsed.expression;
             return $data;
         } catch (e) {

@@ -1,9 +1,8 @@
 import React from 'react';
-import {Col, Row, Table} from 'antd';
+import {Button, Col, Row, Table} from 'antd';
 import UiForm from './forms/Web.Form';
-import {Dsl} from 'entity';
 import './Cab.less';
-import Ux from 'ux';
+import Op from './op';
 
 export default (reference) => {
     const {$table = {}, data = []} = reference.state;
@@ -16,17 +15,10 @@ export default (reference) => {
             </Row>
             <Row>
                 <Col span={24}>
-                    <UiForm reference={reference} onChange={params => {
-                        if (params.name) {
-                            const $params = Ux.clone(params);
-                            const {data = []} = reference.state;
-                            const dataArray = Dsl.getArray(data);
-                            dataArray.saveElement($params);
-                            reference.setState({data: dataArray.to()});
-                        }
-                    }}/>
+                    <UiForm reference={reference} onChange={Op.onChange(reference)}/>
                 </Col>
             </Row>
+            <Button className={"ux-hidden"} id={"$opSave"} onClick={Op.onSubmit(reference)}/>
         </div>
     );
 }

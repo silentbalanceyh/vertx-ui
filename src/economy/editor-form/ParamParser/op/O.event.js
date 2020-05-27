@@ -1,4 +1,5 @@
 import Ux from "ux";
+import {Dsl} from 'entity';
 
 export default {
     onClick: (reference) => (event) => {
@@ -12,18 +13,42 @@ export default {
         data = data.filter(item => key !== item.key);
         reference.setState({data});
     },
+    onChange: (reference) => (params = {}) => {
+        if (params.name) {
+            const $params = Ux.clone(params);
+            const {data = []} = reference.state;
+            const dataArray = Dsl.getArray(data);
+            dataArray.saveElement($params);
+            reference.setState({data: dataArray.to()});
+        }
+    },
+    onSubmit: (reference) => (event = {}) => {
+        Ux.prevent(event);
+        const {data = []} = reference.state;
+        /*
+         * 生成 magic 格式
+         */
+        const magic = {};
+        data.forEach(item => magic[item.name] = item.value);
+        console.info(magic, data);
+        Ux.fn(reference).onChange(magic);
+        reference.setState({$visible: false});
+    },
     toValue: (reference) => {
         const {value} = reference.props;
         const data = [];
         if (value) {
             Object.keys(value).forEach(item => {
                 const valueOrExpr = value[item];
-                const record = {};
-                /* 数据信息 */
-                record.name = item;
-                const parsed = Ux.valueExpr(valueOrExpr);
-                Object.assign(record, parsed);
-                data.push(record);
+                if (valueOrExpr) {
+                    const record = {};
+                    /* 数据信息 */
+                    record.name = item;
+                    record.value = valueOrExpr;
+                    const parsed = Ux.valueParse(valueOrExpr);
+                    Object.assign(record, parsed);
+                    data.push(record);
+                }
             })
         }
         return data;
@@ -39,9 +64,6 @@ export default {
             });
             /* 调用父类 onChange */
             Ux.fn(reference).onChange(params);
-        },
-        $opSave: (reference) => (params = {}) => {
-
         }
     }
 }
