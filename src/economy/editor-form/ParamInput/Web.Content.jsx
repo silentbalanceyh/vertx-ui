@@ -13,6 +13,6 @@ export default (reference) => {
             /* 将 magic 传入 */
             Ux.fn(reference).onChange(magic);
             reference.setState({$visible: false});
-        })} reference={reference}/>
+        })} reference={reference} $changeCascade={false}/>
     );
 }

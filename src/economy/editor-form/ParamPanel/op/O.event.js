@@ -8,14 +8,29 @@ export default {
         data = Ux.clone(data);
         data = data.filter(item => key !== item.key);
         reference.setState({data});
+        /*
+         * 直接提交，调 onSubmit
+         */
+        const {$changeCascade = true} = reference.props;
+        if ($changeCascade) {
+            Ux.fn(reference).onChange(data);
+        }
     },
     onChange: (reference) => (params = {}) => {
         if (params.name) {
             const $params = Ux.clone(params);
             const {data = []} = reference.state;
             const dataArray = Dsl.getArray(data);
-            dataArray.saveElement($params);
-            reference.setState({data: dataArray.to()});
+            dataArray.saveElement($params, 'name');
+            const $data = dataArray.to();
+            reference.setState({data: $data});
+            /*
+             * 直接提交，调 onSubmit
+             */
+            const {$changeCascade = true} = reference.props;
+            if ($changeCascade) {
+                Ux.fn(reference).onChange($data);
+            }
         }
     },
     onSubmit: (reference) => (event = {}) => {

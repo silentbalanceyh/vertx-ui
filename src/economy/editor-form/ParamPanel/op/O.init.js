@@ -14,7 +14,10 @@ export default {
         state.$table = $table;
         /* 内置数据基础 */
         const {data = []} = reference.props;
-        state.data = data;
+        const $data = Ux.clone(data);
+        $data.filter(item => !item.key)
+            .forEach(item => item.key = Ux.randomUUID())
+        state.data = $data;
         /* onChange 专用 */
         state.$ready = true;
         reference.setState(state);

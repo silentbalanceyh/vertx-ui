@@ -30,7 +30,10 @@ class Component extends React.PureComponent {
                 <div className={"web-param-parser"}>
                     <Button.Group>
                         <Tooltip title={$op.edit}>
-                            <Button icon={"edit"} onClick={Op.onClick(this)}/>
+                            <Button icon={"edit"} onClick={(event) => {
+                                Ux.prevent(event);
+                                this.setState({$visible: true})
+                            }}/>
                         </Tooltip>
                         <Tooltip title={$op.search}>
                             <Popover trigger={"click"} placement={"right"}

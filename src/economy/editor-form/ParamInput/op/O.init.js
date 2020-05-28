@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Event from './O.event';
 
 export default {
     yiPage: (reference) => {
@@ -11,7 +10,8 @@ export default {
         const window = Ux.fromHoc(reference, "window");
         state.$dialog = Ux.configDialog(reference, window);
         /* 数据信息 */
-        state.data = Event.toValue(reference);
+        const {value} = reference.props;
+        state.data = Ux.xtExprFlat(value)
         /* onChange 专用 */
         reference.setState(state);
     },
@@ -20,7 +20,8 @@ export default {
         const current = reference.props.value;
 
         if (Ux.isDiff(previous, current)) {
-            const data = Event.toValue(reference);
+            const {value} = reference.props;
+            const data = Ux.xtExprFlat(value);
             reference.setState({data});
         }
     }

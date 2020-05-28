@@ -4,7 +4,7 @@ import UiLayout from '../forms/Web.Layout';
 import UiHidden from '../forms/Web.Hidden';
 import DataSource from '../../DataSource/UI';
 import ParamPanel from '../../ParamPanel/UI';
-
+import Ux from 'ux';
 import Op from '../op';
 
 export default {
@@ -35,11 +35,11 @@ export default {
                 Object.assign(values, initial);
             }
         }
+        const data = Ux.xtExprFlat(values);
         return (<ParamPanel reference={reference}
-                            value={values}
-                            onChange={(data = []) => {
-                                console.info(data);
-                            }}/>)
+                            data={data}
+                            onChange={(data = []) =>
+                                Op.raft(reference).onInit(data)}/>)
     },
     database: (reference) => {
         const {rxApi, rxType} = reference.props;

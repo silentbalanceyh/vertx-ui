@@ -62,6 +62,15 @@ const onAssist = (raft = {}, params) => {
     }
     return raft;
 }
+const onInit = (raft = {}, params) => {
+    if (Ux.isArray(params)) {
+        const {form} = raft;
+        const magic = {};
+        params.forEach(item => magic[item.name] = item.value);
+        form.initial = magic;
+    }
+    return raft;
+}
 const onCallback = (reference) => ($raft) => {
     reference.setState({
         raft: $raft,
@@ -77,6 +86,8 @@ export default {
         onHidden: (params) => onRaft(reference, (raft) => onHidden(raft, params))
             .then(onCallback(reference)),
         onAssist: (params) => onRaft(reference, (raft) => onAssist(raft, params))
+            .then(raft => reference.setState({raft})),
+        onInit: (params) => onRaft(reference, (raft) => onInit(raft, params))
             .then(raft => reference.setState({raft}))
     })
 }
