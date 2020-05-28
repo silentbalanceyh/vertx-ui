@@ -3,6 +3,8 @@ import UiModel from '../forms/Web.Model';
 import UiLayout from '../forms/Web.Layout';
 import UiHidden from '../forms/Web.Hidden';
 import DataSource from '../../DataSource/UI';
+import ParamPanel from '../../ParamPanel/UI';
+
 import Op from '../op';
 
 export default {
@@ -25,7 +27,19 @@ export default {
                           $inited={{hidden}}/>)
     },
     code: (reference) => {
-
+        const {raft = {}} = reference.state;
+        const values = {};
+        if (raft.form) {
+            const initial = raft.form.initial;
+            if (initial) {
+                Object.assign(values, initial);
+            }
+        }
+        return (<ParamPanel reference={reference}
+                            value={values}
+                            onChange={(data = []) => {
+                                console.info(data);
+                            }}/>)
     },
     database: (reference) => {
         const {rxApi, rxType} = reference.props;

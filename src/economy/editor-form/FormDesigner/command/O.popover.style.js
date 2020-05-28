@@ -10,5 +10,8 @@ export default {
     },
     database: {
         minWidth: 900
+    },
+    code: {
+        minWidth: 720
     }
 }
