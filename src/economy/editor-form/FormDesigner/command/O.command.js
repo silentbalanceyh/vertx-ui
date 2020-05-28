@@ -14,6 +14,7 @@ const showDrawer = (reference, item, config = {}) => {
         $drawer: item.key,      // 打开 Popover
         $setting: {
             type: "row",
+            className: "web-form-designer-drawer",
             rowIndex,
         }
     })

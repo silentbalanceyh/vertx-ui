@@ -3,5 +3,64 @@
         "setting,,设置",
         "minus-circle,,删除,,如果删除该行，所有配置也将会被清除，确认？",
         "plus-circle,,插入行"
-    ]
+    ],
+    "_form": {
+        "window": 0.16,
+        "columns": 1,
+        "className": "setting-form",
+        "ui": [
+            [
+                "title=行基本属性"
+            ],
+            [
+                {
+                    "metadata": "type,行类型,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "TITLE,标题行",
+                        "WEB,控件行",
+                        "BUTTON,按钮行"
+                    ]
+                }
+            ],
+            [
+                "columns,列数量"
+            ],
+            [
+                "title=行视觉风格"
+            ],
+            [
+                {
+                    "metadata": "rowStyle,行专用风格,,,aiJsonEditor",
+                    "optionJsx": {
+                        "height": 200
+                    }
+                }
+            ],
+            [
+                "rowClass,行专用CSS,,,,placeholder=（默认无设置）"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveRow,设置行属性,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "title": "行类型",
+                    "config": {
+                        "description": [
+                            "`标题行`和`按钮行`在任何布局中只能设置1列。",
+                            "特殊的行`视觉风格`请在专家指导下设置。",
+                            "每行的`列数量`配置时不可超过表单默认列数列。"
+                        ],
+                        "type": "warning"
+                    }
+                }
+            ]
+        ]
+    }
 }

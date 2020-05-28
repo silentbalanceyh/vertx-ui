@@ -7,6 +7,7 @@ import Op from '../op';
 import UiModel from '../control/Web.Model';
 import UiLayout from '../control/Web.Layout';
 import UiHidden from '../control/Web.Hidden';
+import UiSettingRow from '../control/Web.Setting.Row';
 
 export default {
     layout: (reference) => {
@@ -58,9 +59,7 @@ export default {
     /* 行操作 */
     setting: (reference) => {
         return (
-            <div>
-                Hello
-            </div>
+            <UiSettingRow reference={reference}/>
         )
     }
 }
