@@ -1,7 +1,7 @@
 import React from "react";
 import Ux from 'ux';
 import RestfulApi from '../../RestfulApi/UI';
-import ParamParser from '../../ParamParser/UI';
+import ParamInput from '../../ParamInput/UI';
 
 export default {
     source: (reference, jsx) => {
@@ -20,9 +20,5 @@ export default {
             }}/>
         )
     },
-    magic: (reference, jsx) => {
-        return (
-            <ParamParser reference={reference} {...jsx}/>
-        )
-    }
+    magic: (reference, jsx) => (<ParamInput reference={reference} {...jsx}/>)
 }

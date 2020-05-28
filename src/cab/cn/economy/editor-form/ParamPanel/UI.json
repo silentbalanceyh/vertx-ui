@@ -1,4 +1,7 @@
 {
+    "_op": {
+        "remove": "删除"
+    },
     "_table": {
         "rowKey": "name",
         "className": "web-table",
@@ -21,12 +24,5 @@
             },
             "value,值最终格式"
         ]
-    },
-    "_window": "设置当前数据源的参数表,保存,关闭,false,900,true,$opSave",
-    "_op": {
-        "edit": "编辑参数表",
-        "search": "查看",
-        "remove": "删除",
-        "report": "当前数据源设置了:counter个参数。"
     }
 }
