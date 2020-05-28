@@ -1,7 +1,7 @@
 import {Menu} from "antd";
 import React from "react";
-import Img from "./images";
-import Op from './op';
+import Img from "../images";
+import Op from '../op';
 import {DragSource} from 'react-dnd';
 
 class Component extends React.Component {

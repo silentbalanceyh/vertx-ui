@@ -1,11 +1,12 @@
 import React from 'react';
-import UiModel from '../forms/Web.Model';
-import UiLayout from '../forms/Web.Layout';
-import UiHidden from '../forms/Web.Hidden';
 import DataSource from '../../DataSource/UI';
 import ParamPanel from '../../ParamPanel/UI';
 import Ux from 'ux';
 import Op from '../op';
+
+import UiModel from '../control/Web.Model';
+import UiLayout from '../control/Web.Layout';
+import UiHidden from '../control/Web.Hidden';
 
 export default {
     layout: (reference) => {

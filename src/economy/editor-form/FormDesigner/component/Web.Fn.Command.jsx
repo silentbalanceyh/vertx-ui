@@ -4,7 +4,7 @@
 import React from "react";
 import {Divider, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
-import Cmd from './command';
+import Cmd from '../command';
 
 const isDisabled = (reference, item) => {
     const fnDisabled = Cmd.CommandDisabled[item.key];

@@ -4,7 +4,7 @@
 import React from 'react';
 import {Collapse, Menu} from "antd";
 import Ux from 'ux';
-import DragItem from './Web.Source';
+import DragItem from '../control/Web.DragSource';
 
 export default (reference) => {
     const {$palette = []} = reference.state;
