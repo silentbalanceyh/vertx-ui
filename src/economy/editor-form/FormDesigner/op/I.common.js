@@ -12,12 +12,13 @@ const yiCommand = (reference, state = {}) => {
             } else {
                 if ("string" === typeof commandJson) {
                     const commandItem = commandJson.split(',');
-                    const [key, text, tooltip, className] = commandItem;
+                    const [key, text, tooltip, className, confirm] = commandItem;
                     const command = {};
                     command.key = key;
                     command.icon = key;
                     command.text = text;
                     command.tooltip = tooltip;
+                    command.confirm = confirm;
                     if (className) command.className = className;
                     commands.push(command);
                 } else {

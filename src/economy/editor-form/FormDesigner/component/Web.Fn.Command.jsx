@@ -2,7 +2,7 @@
  * 命令按钮基本操作
  */
 import React from "react";
-import {Divider, Popover, Tooltip} from 'antd';
+import {Divider, Popconfirm, Popover, Tooltip} from 'antd';
 import Ux from 'ux';
 import Cmd from '../command';
 
@@ -28,6 +28,13 @@ const renderPopover = (reference, item = {}, children) => {
         </Popover>
     )
 }
+const renderIcon = (attrs, item) => (
+    <a href={""} {...attrs}>
+        {Ux.aiIcon(item.icon, {
+            "data-color": attrs.disabled ? "#ececec" : (item['svgColor'] ? item['svgColor'] : "#595959")
+        })}
+    </a>
+)
 const renderLink = (reference, item, config) => renderPopover(reference, item, (() => {
     const attrs = {};
     attrs['aria-disabled'] = isDisabled(reference, item);
@@ -50,13 +57,17 @@ const renderLink = (reference, item, config) => renderPopover(reference, item, (
     if (attrs['aria-disabled']) {
         attrs.className = `${attrs.className} op-disabled`
     }
-    return (
-        <a href={""} {...attrs}>
-            {Ux.aiIcon(item.icon, {
-                "data-color": attrs.disabled ? "#ececec" : (item['svgColor'] ? item['svgColor'] : "#595959")
-            })}
-        </a>
-    )
+    /* 渲染 */
+    if (item.confirm) {
+        const {onClick, ...lefts} = attrs;
+        return (
+            <Popconfirm title={item.confirm} onConfirm={onClick}>
+                {renderIcon(lefts, item)}
+            </Popconfirm>
+        )
+    } else {
+        return renderIcon(attrs, item);
+    }
 })());
 
 export default (reference, config = {}) => {

@@ -14,6 +14,10 @@ const rowAdd = (reference, item, config) => {
     let {rowIndex} = config;
     Ux.fn(reference).rxRowAdd(rowIndex);
 }
+const rowDel = (reference, item, config) => {
+    let {rowIndex} = config;
+    Ux.fn(reference).rxRowDel(rowIndex);
+}
 
 export default {
     layout: showPopover,
@@ -23,4 +27,5 @@ export default {
     database: showPopover,
     // 画布上的操作
     "plus-circle": rowAdd,
+    "minus-circle": rowDel,
 }

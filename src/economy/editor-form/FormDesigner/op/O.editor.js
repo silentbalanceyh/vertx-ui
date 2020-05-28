@@ -25,7 +25,13 @@ export default {
     rxRowDel: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
         $rows = Ux.clone($rows);
-        $rows = $rows.filter((row, index) => rowIndex !== index);
+        if (1 < $rows.length) {
+            /* 删除指定行 */
+            $rows = $rows.filter((row, index) => rowIndex !== index);
+        } else {
+            /* 清空当前行数据 */
+            $rows[0] = {};
+        }
         reference.setState({$rows});
     },
     rxRowAdd: (reference) => (rowIndex) => {
