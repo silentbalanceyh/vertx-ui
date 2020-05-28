@@ -1,0 +1,65 @@
+@import "./common";
+
+.canvas {
+    padding-top: 4px;
+
+    &-row {
+        .flex-display;
+        margin-bottom: 4px;
+
+        .left {
+            flex: 1;
+            flex-direction: column;
+            .flex-display;
+
+            .v-command {
+                padding-top: 2px;
+
+                .op-link {
+                    background-color: #fafafa;
+
+                    padding-top: 2px;
+                    display: inline-block;
+                    text-align: center;
+
+                    &:hover {
+                        border-radius: 3px;
+                    }
+
+                    .ix-box.square(24px);
+
+                    .ix-text.hover-invert(#f13a54);
+
+                    &:first-child {
+                        .ix-text.hover-invert(#00b9f0)
+                    }
+
+                    &:last-child {
+                        .ix-text.hover-invert(#5dcd52)
+                    }
+
+                    i, svg {
+                        .ix-box.square(18px);
+                    }
+                }
+            }
+        }
+
+        .right {
+            flex: 35;
+            flex-wrap: wrap;
+            margin: 2px 0;
+            background-color: #ECECEC;
+            min-height: 72px;
+            background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+            linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+            linear-gradient(0deg, white 2px, transparent 0),
+            linear-gradient(90deg, white 2px, transparent 0);
+            background-size: 5px 5px;
+        }
+    }
+
+    &-cell {
+        background-color: #00a4c2;
+    }
+}

@@ -30,5 +30,8 @@ export default (reference) => generator(reference, [
     "onChange",
     /* Rx 系列 */
     "rxSource",
-    "rxSubmit"
+    "rxSubmit",
+    /* Designer 系列 */
+    "rxRowAdd",
+    "rxRowDel"
 ]);

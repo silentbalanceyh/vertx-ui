@@ -1,8 +1,8 @@
 import React from 'react';
 import {Row} from 'antd';
 import {component} from "../../../_internal";
-import Rdr from '../component'
 import Op from '../op';
+import Rdr from "../component";
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -14,11 +14,20 @@ class Component extends React.PureComponent {
     }
 
     render() {
-
+        const {config = {}} = this.props;
         return (
-            <Row className={"canvas-row"}>
-                {Rdr.renderCmd(this, {className: "top-command"})}
-            </Row>
+            <div className={"canvas-row"}>
+                <div className={"left"}>
+                    {Rdr.renderCmd(this, {
+                        ...config,
+                        className: "v-command",
+                        placement: "left"
+                    })}
+                </div>
+                <Row className={"right"}>
+                    Hello
+                </Row>
+            </div>
         )
     }
 }

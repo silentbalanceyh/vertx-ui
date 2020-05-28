@@ -16,16 +16,24 @@ class Component extends React.PureComponent {
             const {$rows = []} = this.state;
             /* 处理 columns 列信息 */
             const {data = {}} = this.props;
-            const rowConfig = {};
+            let rowConfig = {};
             {
-                /* 列类型 */
+                // 列类型
                 if (!data.columns) data.columns = 4;
                 rowConfig.grid = data.columns;
             }
             return $rows.map((row, index) => {
                 const key = `key-row-${index}`;
-                return (<RowEditor config={rowConfig} data={row}
-                                   key={key}/>);
+                // 行对应元数据
+                rowConfig = Ux.clone(rowConfig);
+                rowConfig.rowIndex = index;
+                return (
+                    <RowEditor config={rowConfig} data={row} key={key}
+
+                               rxRowAdd={Op.rxRowAdd(this)}/* 添加行 */
+                               rxRowDel={Op.rxRowDel(this)}
+                    />
+                );
             });
         }, {component: LoadingContent})
     }

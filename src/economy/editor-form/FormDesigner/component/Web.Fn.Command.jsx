@@ -28,7 +28,7 @@ const renderPopover = (reference, item = {}, children) => {
         </Popover>
     )
 }
-const renderLink = (reference, item) => renderPopover(reference, item, (() => {
+const renderLink = (reference, item, config) => renderPopover(reference, item, (() => {
     const attrs = {};
     attrs['aria-disabled'] = isDisabled(reference, item);
     if (!attrs['aria-disabled']) {
@@ -36,7 +36,7 @@ const renderLink = (reference, item) => renderPopover(reference, item, (() => {
             Ux.prevent(event);
             const executor = Cmd.CommandAction[item.key];
             if (Ux.isFunction(executor)) {
-                executor(reference, item);
+                executor(reference, item, config);
             } else {
                 console.error("丢失命令：", item);
             }
@@ -61,7 +61,7 @@ const renderLink = (reference, item) => renderPopover(reference, item, (() => {
 
 export default (reference, config = {}) => {
     const {$commands = []} = reference.state;
-    const {className = "designer-tool"} = config;
+    const {className = "designer-tool", placement = "top"} = config;
     return (
         <div className={className}>
             {$commands.map((command, index) => {
@@ -70,16 +70,18 @@ export default (reference, config = {}) => {
                         <Divider type={"vertical"} key={`divider${index}`}/>
                     );
                 } else {
+                    // 设置 item
                     const tooltip = command.tooltip;
                     if (tooltip) {
                         const disabled = isDisabled(reference, command);
-                        return disabled ? renderLink(reference, command) : (
-                            <Tooltip title={tooltip} key={command.key}>
-                                {renderLink(reference, command)}
+                        return disabled ? renderLink(reference, command, config) : (
+                            <Tooltip title={tooltip} key={command.key}
+                                     placement={placement}>
+                                {renderLink(reference, command, config)}
                             </Tooltip>
                         )
                     } else {
-                        return renderLink(reference, command);
+                        return renderLink(reference, command, config);
                     }
                 }
             })}
