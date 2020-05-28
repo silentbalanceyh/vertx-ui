@@ -55,9 +55,15 @@ const onAssist = (raft = {}, params) => {
         if (!form.assist) {
             form.assist = {};
         }
-        const {name, ...rest} = params;
-        if (rest) {
-            form.assist[name] = rest;
+        if ("string" === typeof params) {
+            if (form.assist.hasOwnProperty(params)) {
+                delete form.assist[params];
+            }
+        } else {
+            const {name, ...rest} = params;
+            if (rest) {
+                form.assist[name] = rest;
+            }
         }
     }
     return raft;

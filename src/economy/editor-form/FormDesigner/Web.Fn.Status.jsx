@@ -19,7 +19,7 @@ export default (reference) => {
                 &nbsp;&nbsp;
                 {(() => {
                     const {form = {}} = raft;
-                    let counter = 0;
+                    let counter;
                     if (form.hidden) {
                         counter = form.hidden.length;
                     } else {
@@ -34,11 +34,39 @@ export default (reference) => {
             </Col>
             <Col span={5}>
                 <label>{status.initial}</label>
-
+                &nbsp;&nbsp;
+                {(() => {
+                    const {form = {}} = raft;
+                    let counter;
+                    if (form.initial) {
+                        counter = Object.keys(form.initial).length;
+                    } else {
+                        counter = 0;
+                    }
+                    return (
+                        <Tag>
+                            {Ux.formatExpr(status.count, {counter}, true)}
+                        </Tag>
+                    )
+                })()}
             </Col>
             <Col span={5}>
                 <label>{status.assist}</label>
-
+                &nbsp;&nbsp;
+                {(() => {
+                    const {form = {}} = raft;
+                    let counter;
+                    if (form.assist) {
+                        counter = Object.keys(form.assist).length;
+                    } else {
+                        counter = 0;
+                    }
+                    return (
+                        <Tag>
+                            {Ux.formatExpr(status.count, {counter}, true)}
+                        </Tag>
+                    )
+                })()}
             </Col>
         </Row>
     )

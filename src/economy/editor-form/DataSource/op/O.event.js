@@ -29,9 +29,16 @@ export default {
         }
         return $inited;
     },
+    onRemove: (reference, record) => (event) => {
+        Ux.prevent(event);
+        let {$data = []} = reference.state;
+        $data = Ux.clone($data);
+        $data = $data.filter(item => record.key !== item.key);
+        reference.setState({$data});
+        Ux.fn(reference).rxSubmit(record.key);
+    },
     onSubmit: (reference) => (params) => {
         const comment = Ux.fromHoc(reference, "comment");
-        Ux.fn(reference).rxSubmit(params);
         Ux.messageSuccess(comment.submit);
         {
             const {$data = []} = reference.state;
@@ -43,7 +50,9 @@ export default {
             reference.setState({
                 $data: dataArray.to().reverse(),
                 $assist: undefined      // 清空 AssistForm 表单
-            })
+            });
+            /* 后提交 */
+            Ux.fn(reference).rxSubmit(params);
         }
     },
     onEdit: (reference, record) => (event) => {
@@ -66,13 +75,6 @@ export default {
             state.$assist = $record;
         }
         reference.setState(state);
-    },
-    onRemove: (reference, record) => (event) => {
-        Ux.prevent(event);
-        let {$data = []} = reference.state;
-        $data = Ux.clone($data);
-        $data = $data.filter(item => record.key !== item.key);
-        reference.setState({$data});
     },
     actions: {
         $opSaveAssist: (reference) => (params) => {
