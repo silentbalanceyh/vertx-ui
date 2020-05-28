@@ -58,8 +58,9 @@ export default {
     },
     /* 行操作 */
     setting: (reference) => {
+        const {config = {}} = reference.props;
         return (
-            <UiSettingRow reference={reference}/>
+            <UiSettingRow reference={reference} config={config}/>
         )
     }
 }

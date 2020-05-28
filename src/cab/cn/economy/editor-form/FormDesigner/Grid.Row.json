@@ -23,7 +23,12 @@
                 }
             ],
             [
-                "columns,列数量"
+                {
+                    "metadata": "columns,列数量",
+                    "optionJsx.items": {
+                        "display": ":column列"
+                    }
+                }
             ],
             [
                 "title=行视觉风格"

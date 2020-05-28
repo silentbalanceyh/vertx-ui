@@ -6,7 +6,30 @@ import {Form} from "antd";
 
 const yiInternal = (reference) => {
     const state = {};
-    Ux.raftForm(reference, {id: "SubForm-GridRow"}).then(raft => {
+    Ux.raftForm(reference, {
+        id: "SubForm-GridRow",
+        renders: {
+            columns: (reference, jsx) => {
+                const {config = {}} = reference.props;
+                const {items = {}} = jsx;
+                const {grid} = config;
+                const options = [];
+                for (let idx = 1; idx <= grid; idx++) {
+                    const option = {};
+                    option.value = `${idx}`;
+                    option.key = `${idx}`;
+                    option.label = Ux.formatExpr(items.display, {column: idx});
+                    options.push(option);
+                }
+                return Ux.aiRadio(reference, {
+                    ...jsx,
+                    config: {
+                        items: options
+                    }
+                })
+            }
+        }
+    }).then(raft => {
         state.raft = raft;
         state.$op = {
             $opSaveRow: (reference, jsx = {}) => (params = {}) => {
