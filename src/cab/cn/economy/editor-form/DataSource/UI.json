@@ -19,7 +19,7 @@
         ]
     },
     "_comment": {
-        "selected": "已配置数据源",
+        "counter": "已配置辅助数据源:counter个",
         "submit": "当前辅助数据源信息已经设置到表单管理器中！"
     },
     "_selection": {

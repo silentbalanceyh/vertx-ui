@@ -18,6 +18,8 @@ const yiInternal = (reference) => {
         state.raft = raft;
         state.$op = Op.actions;
         /* 初始值 */
+        const {$inited = {}} = reference.props;
+        state.data = $inited;
         return Ux.promise(state);
     }).then(Ux.ready).then(Ux.pipe(reference));
 }
@@ -31,14 +33,22 @@ class Component extends React.PureComponent {
         yiInternal(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const previous = prevProps.$inited;
+        const current = this.props.$inited;
+        if (Ux.isDiff(current, previous)) {
+            this.setState({data: Ux.clone(current)});
+        }
+    }
+
     render() {
         /*
          * 配置处理
          */
-        const {$inited = {}} = this.props;
+        const {data = {}} = this.state;
         return (
             <div className={"assist-form"}>
-                {Ux.xtReady(this, () => Ux.aiForm(this, $inited),
+                {Ux.xtReady(this, () => Ux.aiForm(this, data),
                     {component: LoadingContent}
                 )}
             </div>

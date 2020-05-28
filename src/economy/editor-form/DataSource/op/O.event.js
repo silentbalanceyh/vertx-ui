@@ -39,16 +39,20 @@ export default {
             const $params = Ux.clone(params);
             $params.key = $params.name;
             dataArray.saveElement($params);
-            reference.setState({$data: dataArray.to().reverse()})
+            /* 状态更新 */
+            reference.setState({
+                $data: dataArray.to().reverse(),
+                $assist: undefined      // 清空 AssistForm 表单
+            })
         }
     },
     onEdit: (reference, record) => (event) => {
         Ux.promise(event);
         const state = {};
-        if ("tabular" === record.key) {
+        if ("tabular" === record.name) {
             state.$checked = "TABULAR";
             state.$assist = undefined;
-        } else if ("category" === record.key) {
+        } else if ("category" === record.name) {
             state.$checked = "CATEGORY";
             state.$assist = undefined;
         } else {
@@ -58,6 +62,7 @@ export default {
             if (!$record.magic) {
                 $record.magic = {};
             }
+            if ($record.key) delete $record.key;
             state.$assist = $record;
         }
         reference.setState(state);
@@ -72,7 +77,16 @@ export default {
     actions: {
         $opSaveAssist: (reference) => (params) => {
             /* 关闭防重复提交 */
-            reference.setState({$submitting: false, $loading: false});
+            reference.setState({
+                $submitting: false, $loading: false,
+            });
+            /* 重置表单 */
+            const {form, $inited = {}} = reference.props;
+            if (form) {
+                form.setFieldsInitialValue($inited);
+                Ux.formReset(reference);
+            }
+            /* 重置表单 */
             return Ux.fn(reference).rxSubmit(params);
         },
         /*

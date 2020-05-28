@@ -1,5 +1,7 @@
 import Ux from "ux";
-import column from "../Web.Column";
+import React from 'react';
+import uiColumn from "../Web.Column";
+import uiTotal from '../Web.Total';
 
 export default (reference) => {
     const state = {};
@@ -51,7 +53,8 @@ export default (reference) => {
     /* 已选中的表格配置 */
     const table = Ux.fromHoc(reference, "table");
     const $table = Ux.clone(table);
-    $table.columns = [column(reference)].concat(Ux.configColumn(reference, $table.columns));
+    $table.columns = [uiColumn(reference)].concat(Ux.configColumn(reference, $table.columns));
+    $table.pagination.showTotal = uiTotal(reference)
     state.$table = $table;
     /* 处理 raft 处理 */
     state.$ready = true;

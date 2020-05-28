@@ -30,9 +30,10 @@ class Component extends React.PureComponent {
                     <Row>
                         <Col span={24} className={"data-form"}>
                             {(() => {
-                                const {$checked, $assist} = this.state;
+                                const {$checked} = this.state;
                                 if ("ASSIST" === $checked) {
                                     const {rxApi} = this.props;
+                                    const {$assist} = this.state;
                                     return (
                                         <AssistForm reference={this}
                                                     $inited={$assist}
