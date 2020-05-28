@@ -2,9 +2,10 @@
  * 命令按钮基本操作
  */
 import React from "react";
-import {Divider, Popconfirm, Popover, Tooltip} from 'antd';
+import {Divider, Popconfirm, Tooltip} from 'antd';
 import Ux from 'ux';
 import Cmd from '../command';
+import renderContent from './Web.Fn.Cmd.Dialog';
 
 const isDisabled = (reference, item) => {
     const fnDisabled = Cmd.CommandDisabled[item.key];
@@ -13,21 +14,6 @@ const isDisabled = (reference, item) => {
     } else return false;
 }
 
-const renderPopover = (reference, item = {}, children) => {
-    const {$popover} = reference.state;
-    const visible = $popover ? $popover === item.key : false;
-    const fnContent = Cmd.CommandPop[item.key];
-    const popoverStyle = Cmd.CommandPopStyle[item.key];
-    return (
-        <Popover visible={visible} trigger={"click"}
-                 overlayClassName={"web-form-designer-popover"}
-                 overlayStyle={popoverStyle ? popoverStyle : {}}
-                 content={Ux.isFunction(fnContent) ? fnContent(reference) : false}
-                 placement={"bottomLeft"}>
-            {children}
-        </Popover>
-    )
-}
 const renderIcon = (attrs, item) => (
     <a href={""} {...attrs}>
         {Ux.aiIcon(item.icon, {
@@ -35,7 +21,9 @@ const renderIcon = (attrs, item) => (
         })}
     </a>
 )
-const renderLink = (reference, item, config) => renderPopover(reference, item, (() => {
+const renderLink = (reference, item, config) => renderContent(reference, {
+    item, config,
+}, (() => {
     const attrs = {};
     attrs['aria-disabled'] = isDisabled(reference, item);
     if (!attrs['aria-disabled']) {

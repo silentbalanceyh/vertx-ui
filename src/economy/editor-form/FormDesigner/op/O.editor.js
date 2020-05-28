@@ -43,5 +43,12 @@ export default {
         }
         $rows.splice(rowIndex, 0, {});
         reference.setState({$rows});
+    },
+    rxSettingClose: (reference) => (event) => {
+        Ux.prevent(event);
+        reference.setState({
+            $drawer: undefined,
+            $setting: undefined
+        })
     }
 }

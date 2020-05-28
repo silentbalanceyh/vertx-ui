@@ -54,5 +54,13 @@ export default {
                             rxSubmit={Op.raft(reference).onAssist}
                             reference={reference}
                             $inited={assist}/>)
+    },
+    /* 行操作 */
+    setting: (reference) => {
+        return (
+            <div>
+                Hello
+            </div>
+        )
     }
 }

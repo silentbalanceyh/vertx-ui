@@ -1,11 +1,11 @@
-import CommandPop from './O.popover';
-import CommandPopStyle from './O.popover.style';
+import Command from './O.content';
+import CommandStyle from './O.content.style';
 import CommandAction from './O.command';
 import CommandDisabled from './O.disabled';
 
 export default {
-    CommandPop,
-    CommandPopStyle,
+    Command,
+    CommandStyle,
     CommandAction,
     CommandDisabled
 }

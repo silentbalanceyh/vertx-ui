@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
                     <RowEditor config={rowConfig} data={row} key={key}
 
                                rxRowAdd={Op.rxRowAdd(this)}/* 添加行 */
-                               rxRowDel={Op.rxRowDel(this)}
+                               rxRowDel={Op.rxRowDel(this)}/* 删除行 */
                     />
                 );
             });

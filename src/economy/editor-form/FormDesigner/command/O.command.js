@@ -7,6 +7,17 @@ const showPopover = (reference, item) => {
         $popover: item.key,  // 打开 Popover
     });
 }
+const showDrawer = (reference, item, config = {}) => {
+    // 屏蔽主操作
+    let {rowIndex} = config;
+    reference.setState({
+        $drawer: item.key,      // 打开 Popover
+        $setting: {
+            type: "row",
+            rowIndex,
+        }
+    })
+}
 /*
  * 绘图过程中添加行操作
  */
@@ -28,4 +39,5 @@ export default {
     // 画布上的操作
     "plus-circle": rowAdd,
     "minus-circle": rowDel,
+    setting: showDrawer,
 }
