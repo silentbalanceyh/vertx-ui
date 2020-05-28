@@ -59,10 +59,11 @@ const renderLink = (reference, item) => renderPopover(reference, item, (() => {
     )
 })());
 
-export default (reference) => {
+export default (reference, config = {}) => {
     const {$commands = []} = reference.state;
+    const {className = "designer-tool"} = config;
     return (
-        <div className={"designer-tool"}>
+        <div className={className}>
             {$commands.map((command, index) => {
                 if ("divider" === command) {
                     return (

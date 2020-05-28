@@ -20,7 +20,7 @@
             "tooltip": "预览",
             "className": "op-release"
         },
-        "help,,帮助"
+        "question,,帮助"
     ],
     "_palette": {
         "title": "控件列表",
@@ -55,6 +55,8 @@
         "hidden": "隐藏字段",
         "assist": "辅助数据源",
         "initial": "初始值",
-        "count": ":counter个"
+        "count": ":counter个",
+        "window": "默认列数",
+        "windowValue": ":columns列"
     }
 }
