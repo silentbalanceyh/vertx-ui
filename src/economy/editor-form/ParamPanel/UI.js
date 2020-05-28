@@ -17,8 +17,7 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
-            const {$table = {}} = this.state;
-            const {data = []} = this.props;
+            const {$table = {}, data = []} = this.state;
             return (
                 <div>
                     <Row className={"web-param-table"}>

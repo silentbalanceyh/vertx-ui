@@ -18,6 +18,7 @@ export default {
     yuPage: (reference, virtualRef) => {
         const previous = virtualRef.props.value;
         const current = reference.props.value;
+
         if (Ux.isDiff(previous, current)) {
             const data = Event.toValue(reference);
             reference.setState({data});

@@ -2,7 +2,7 @@ import Ux from "ux";
 import {Dsl} from 'entity';
 
 export default {
-    onRowSelect: (reference, key) => (event) => {
+    onRowRemove: (reference, key) => (event) => {
         Ux.prevent(event);
         let {data = []} = reference.state;
         data = Ux.clone(data);
@@ -24,10 +24,7 @@ export default {
         /*
          * 生成 magic 格式
          */
-        const magic = {};
-        data.forEach(item => magic[item.name] = item.value);
-        Ux.fn(reference).onChange(magic);
-        reference.setState({$visible: false});
+        Ux.fn(reference).onChange(data);
     },
     actions: {
         $opSaveParam: (reference) => (params = {}) => {

@@ -6,7 +6,7 @@ export default (reference, op = {}) => {
     return {
         dataIndex: "key",
         render: (text) => (
-            <a href={""} onClick={Op.onRowSelect(reference, text)}>
+            <a href={""} onClick={Op.onRowRemove(reference, text)}>
                 <Icon type={"delete"}/>
                 &nbsp;&nbsp;
                 {op.remove}

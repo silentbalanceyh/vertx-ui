@@ -12,6 +12,9 @@ export default {
         $table.columns = [uiColumn(reference, $op)]
             .concat(Ux.configColumn(reference, $table.columns));
         state.$table = $table;
+        /* 内置数据基础 */
+        const {data = []} = reference.props;
+        state.data = data;
         /* onChange 专用 */
         state.$ready = true;
         reference.setState(state);

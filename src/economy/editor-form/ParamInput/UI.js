@@ -25,7 +25,7 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtReady(this, () => {
             const {$op = {}, $dialog = {}, $visible = false, data = []} = this.state;
-            const {value} = this.props;
+            const {value = {}} = this.props;
             return (
                 <div className={"web-param-parser"}>
                     <Button.Group>

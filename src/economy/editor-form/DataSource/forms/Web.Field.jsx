@@ -20,5 +20,7 @@ export default {
             }}/>
         )
     },
-    magic: (reference, jsx) => (<ParamInput reference={reference} {...jsx}/>)
+    magic: (reference, jsx) => {
+        return (<ParamInput reference={reference} {...jsx}/>)
+    }
 }

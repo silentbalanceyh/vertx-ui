@@ -17,6 +17,7 @@ const yiInternal = (reference) => {
     }).then(raft => {
         state.raft = raft;
         state.$op = Op.actions;
+        /* 初始值 */
         return Ux.promise(state);
     }).then(Ux.ready).then(Ux.pipe(reference));
 }
