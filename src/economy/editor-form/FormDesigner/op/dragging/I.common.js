@@ -31,6 +31,9 @@ export default {
         if (config.hasOwnProperty('cellIndex')) {
             item.cellIndex = config.cellIndex;
         }
+        if (config.hasOwnProperty("span")) {
+            item.span = config.span;
+        }
         return item;
     },
     itemRowSame: (left, right) => {
