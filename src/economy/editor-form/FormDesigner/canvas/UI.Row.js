@@ -5,6 +5,7 @@ import Op from '../op';
 import Ux from 'ux';
 import Rdr from "../component";
 import CellEditor from './UI.Cell';
+import {DragSource} from "react-dnd";
 
 const configRowCmd = {
     // 最外层 Css
@@ -31,10 +32,10 @@ class Component extends React.PureComponent {
 
     render() {
         return Ux.xtReady(this, () => {
-            const {config = {}} = this.props;
+            const {config = {}, connectDragSource} = this.props;
             const {$drawer} = this.state;
             const active = $drawer ? "right-active" : "";
-            return (
+            return connectDragSource(
                 <div className={"canvas-row"}>
                     <div className={"left"}>
                         {Rdr.renderCmds(this, {
@@ -60,4 +61,8 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+export default DragSource(
+    Op.DragTypes.RowDesigner,
+    Op.Row.sourceSpec,
+    Op.Row.sourceConnect
+)(Component);

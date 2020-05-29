@@ -3,6 +3,8 @@ import {Col, Input} from 'antd';
 import {component} from "../../../_internal";
 import Op from "../op";
 import Rdr from "../component";
+import Ux from 'ux';
+import {DragSource} from "react-dnd";
 
 const configCellCmd = {
     // 最外层 Css
@@ -21,34 +23,41 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}} = this.props;
+        const {config = {}, connectDragSource} = this.props;
         const {span} = config;
         if (span) {
             return (
                 <Col span={span} className={"canvas-cell"}>
-                    <div className={"content"}>
-                        <div className={"content-tool"}>
-                            <Input/>
-                            {Rdr.renderCmds(this, {
-                                ...configCellCmd,
-                            })}
-                        </div>
-                        <div className={"content-drop"}>
+                    {connectDragSource(
+                        <div className={"content"}>
+                            <div className={"content-tool"}>
+                                <Input placeholder={(() => Ux.fromHoc(this, "label"))()}/>
+                                {Rdr.renderCmds(this, {
+                                    ...configCellCmd,
+                                })}
+                            </div>
+                            <div className={"content-drop"}>
 
+                            </div>
+                            <div className={"t-command"}>
+                                {(() => {
+                                    const {$merge} = this.state;
+                                    if ($merge) {
+                                        return Rdr.renderCmd(this, $merge)
+                                    } else return false;
+                                })()}
+                            </div>
                         </div>
-                        <div className={"t-command"}>
-                            {(() => {
-                                const {$merge} = this.state;
-                                if ($merge) {
-                                    return Rdr.renderCmd(this, $merge)
-                                } else return false;
-                            })()}
-                        </div>
-                    </div>
+                    )}
+                    {Rdr.renderDrawer(this)}
                 </Col>
             )
         } else return false;
     }
 }
 
-export default Component
+export default DragSource(
+    Op.DragTypes.CellDesigner,
+    Op.Cell.sourceSpec,
+    Op.Cell.sourceConnect
+)(Component);

@@ -11,6 +11,8 @@ export default {
     ...dragging,
     ...event,
     DragTypes: {
-        FormDesigner: "FormDesigner"
+        FormDesigner: "FormDesigner",
+        RowDesigner: "RowDesigner",
+        CellDesigner: "CellDesigner"
     }
 }

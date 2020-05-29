@@ -17,4 +17,12 @@
             background-color: @primary-color;
         }
     }
+    .hover-border(@color) {
+        color: @color;
+        border: solid 1px white;
+        &:hover {
+            border: solid 1px @color;
+            border-radius: 3px;
+        }
+    }
 }

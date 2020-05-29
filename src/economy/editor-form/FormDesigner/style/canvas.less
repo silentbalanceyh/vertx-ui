@@ -4,6 +4,10 @@
     padding-top: 4px;
 
     &-row {
+        &:hover {
+            cursor: move;
+        }
+
         .flex-display;
         margin-bottom: 4px;
 
@@ -16,7 +20,7 @@
                 padding-top: 2px;
 
                 .op-link {
-                    background-color: #fafafa;
+                    background-color: white;
 
                     padding-top: 2px;
                     display: inline-block;
@@ -28,7 +32,7 @@
 
                     .ix-box.square(24px);
 
-                    .ix-text.hover-invert(#f13a54);
+                    .ix-text.hover-invert(#eb2f95);
 
                     &:first-child {
                         .ix-text.hover-invert(#00b9f0)
@@ -46,7 +50,7 @@
         }
 
         .right {
-            flex: 35;
+            flex: 30;
             flex-wrap: wrap;
             margin: 2px 0;
             background-color: #ECECEC;
@@ -106,6 +110,14 @@
             margin: 4px;
             min-height: 63px;
 
+            &:hover {
+                .content-tool {
+                    .c-command {
+                        display: block;
+                    }
+                }
+            }
+
             &-tool {
                 padding-left: 5%;
                 padding-right: 5%;
@@ -114,7 +126,7 @@
                     padding: 0 !important;
                     height: 21px !important;
                     line-height: 21px !important;
-                    width: 27%;
+                    width: 50%;
                     border-radius: 0;
                     border: none;
                     border-bottom: solid 1px #d9d9d9;
@@ -122,6 +134,7 @@
 
                 .c-command {
                     float: right;
+                    display: none;
 
                     .op-link {
                         display: inline-block;
@@ -133,10 +146,10 @@
 
                         .ix-box.square(22px);
 
-                        .ix-text.hover-invert(#f13a54);
+                        .ix-text.hover-border(#A1A1A1);
 
                         &:first-child {
-                            .ix-text.hover-invert(#00b9f0);
+                            .ix-text.hover-border(#00b9f0);
                         }
 
                         i, svg {

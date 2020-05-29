@@ -7,8 +7,7 @@ const showPopover = (reference, item) => {
         $popover: item.key,  // 打开 Popover
     });
 }
-const showDrawer = (reference, item, config = {}) => {
-    // 屏蔽主操作
+const showRowDrawer = (reference, item, config = {}) => {
     let {rowIndex} = config;
     reference.setState({
         $drawer: item.key,      // 打开 Popover
@@ -18,6 +17,11 @@ const showDrawer = (reference, item, config = {}) => {
             rowIndex,
         }
     })
+}
+const showCellDrawer = (reference, item, config = {}) => {
+    reference.setState({
+        $drawer: item.key,      // 打开 Popover
+    });
 }
 /*
  * 绘图过程中添加行操作
@@ -30,15 +34,25 @@ const rowDel = (reference, item, config) => {
     let {rowIndex} = config;
     Ux.fn(reference).rxRowDel(rowIndex);
 }
-
+const cellMerge = (reference, item, config) => {
+    console.info(item, config);
+}
 export default {
     layout: showPopover,
     "deployment-unit": showPopover,
     "eye-invisible": showPopover,
     code: showPopover,
     database: showPopover,
-    // 画布上的操作
+
+    /*  画布上的操作 */
+    // 添加行
     "plus-circle": rowAdd,
+    // 删除行
     "minus-circle": rowDel,
-    setting: showDrawer,
+    // 行配置
+    setting: showRowDrawer,
+    // 单元格配置
+    control: showCellDrawer,
+    // 合并单元格
+    "merge-cell": cellMerge,
 }

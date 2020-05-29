@@ -24,6 +24,6 @@ class Component extends React.Component {
 
 export default DragSource(
     Op.DragTypes.FormDesigner,
-    Op.sourceSpec,
-    Op.sourceConnect
+    Op.Form.sourceSpec,
+    Op.Form.sourceConnect
 )(Component);
