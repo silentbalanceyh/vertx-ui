@@ -46,6 +46,10 @@ const cellSplit = (reference, item, config) => {
     let {cellIndex} = config;
     Ux.fn(reference).rxCellSplit(cellIndex);
 }
+const cellFill = (reference, item, config) => {
+    let {cellIndex} = config;
+    Ux.fn(reference).rxCellFill(cellIndex);
+}
 export default {
     layout: showPopover,
     "deployment-unit": showPopover,
@@ -68,4 +72,6 @@ export default {
     "delete": cellDel,
     // 拆分单元格
     scissor: cellSplit,
+    // 填充单元格
+    fullscreen: cellFill,
 }

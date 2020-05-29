@@ -37,4 +37,5 @@ export default (reference) => generator(reference, [
     "rxCellMerge",  // 合并单元格
     "rxCellDel",    // 删除单元格
     "rxCellSplit",  // 拆分单元格
+    "rxCellFill",   // 填充单元格
 ]);

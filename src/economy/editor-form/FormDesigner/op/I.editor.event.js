@@ -1,40 +1,8 @@
 import Ux from "ux";
+import CellEvent from './I.editor.event.cell';
 
 export default {
-    rxCellMerge: (reference) => (cellIndex) => {
-        const {$cells = []} = reference.state;
-        // 当前索引：cellIndex
-        // 前一个索引：cellIndex - 1
-        const preIndex = cellIndex - 1;
-        const curIndex = cellIndex;
-        const replaced = [];
-        let appendSpan = 0;
-        for (let idx = $cells.length - 1; idx >= 0; idx--) {
-            if (curIndex === idx) {
-                appendSpan = $cells[idx].span;
-                continue;
-            }
-            const append = Ux.clone($cells[idx]);
-            if (preIndex === idx) {
-                append.span += appendSpan;
-            }
-            // 更改列索引
-            replaced.push(append);
-        }
-        /*
-         * 最后需要反序，并且更新列索引
-         */
-        const revered = replaced.reverse();
-        revered.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells: revered});
-    },
-    rxCellDel: (reference) => (cellIndex) => {
-        const {$cells = []} = reference.state;
-        let replaced = $cells.filter((item, index) => index !== cellIndex);
-        replaced.forEach((item, index) => item.cellIndex = index);
-        replaced = Ux.clone(replaced);
-        reference.setState({$cells: replaced});
-    },
+    ...CellEvent,
     rxRowDel: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
         $rows = Ux.clone($rows);
