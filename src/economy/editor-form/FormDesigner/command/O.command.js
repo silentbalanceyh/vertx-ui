@@ -35,7 +35,8 @@ const rowDel = (reference, item, config) => {
     Ux.fn(reference).rxRowDel(rowIndex);
 }
 const cellMerge = (reference, item, config) => {
-    console.info(item, config);
+    let {cellIndex} = config;
+    Ux.fn(reference).rxCellMerge(cellIndex);
 }
 export default {
     layout: showPopover,

@@ -47,9 +47,10 @@ class Component extends React.PureComponent {
                         {(() => {
                             const {$cells = []} = this.state;
                             return $cells.map(cell => {
-                                const cellAttrs = Op.yoCell(this, cell);
+                                const cellAttrs = Op.yoCell(this, cell, config);
                                 return (
-                                    <CellEditor {...cellAttrs}/>
+                                    <CellEditor {...cellAttrs}
+                                                rxCellMerge={Op.rxCellMerge(this)}/>
                                 )
                             })
                         })()}

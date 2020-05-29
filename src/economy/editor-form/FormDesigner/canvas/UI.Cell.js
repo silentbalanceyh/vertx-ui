@@ -43,7 +43,7 @@ class Component extends React.PureComponent {
                                 {(() => {
                                     const {$merge} = this.state;
                                     if ($merge) {
-                                        return Rdr.renderCmd(this, $merge)
+                                        return Rdr.renderCmd(this, $merge, config)
                                     } else return false;
                                 })()}
                             </div>

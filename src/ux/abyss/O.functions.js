@@ -32,6 +32,7 @@ export default (reference) => generator(reference, [
     "rxSource",
     "rxSubmit",
     /* Designer 系列 */
-    "rxRowAdd",
-    "rxRowDel"
+    "rxRowAdd",     // 添加行
+    "rxRowDel",     // 删除行
+    "rxCellMerge",  // 合并单元格
 ]);

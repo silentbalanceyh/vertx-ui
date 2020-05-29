@@ -17,7 +17,7 @@ export default {
         rowConfig.rowIndex = index;
         return {config: rowConfig, data: row, key};
     },
-    yoCell: (reference, cell) => {
+    yoCell: (reference, cell, config = {}) => {
         const {rowIndex, cellIndex} = cell;
         const key = `key-cell-${rowIndex}-${cellIndex}`;
         return {config: cell, key};
