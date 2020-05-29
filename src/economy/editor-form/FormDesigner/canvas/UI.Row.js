@@ -37,7 +37,7 @@ class Component extends React.PureComponent {
             return (
                 <div className={"canvas-row"}>
                     <div className={"left"}>
-                        {Rdr.renderCmd(this, {
+                        {Rdr.renderCmds(this, {
                             ...config,
                             ...configRowCmd,
                         })}

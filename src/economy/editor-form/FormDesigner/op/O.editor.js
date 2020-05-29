@@ -26,8 +26,21 @@ export default {
             .then(Ux.ready).then(Ux.pipe(reference))
     },
     yiCell: (reference) => {
+        /*
+         * 特殊按钮
+         */
         const state = {};
-        Cmn.yiCommand(reference, state)
+        Cmn.yiCommand(reference, {}, "merge")
+            .then(processed => {
+                if (Ux.isArray(processed.$commands)) {
+                    const $merge = processed.$commands[0];
+                    if ($merge) {
+                        state.$merge = $merge;
+                    }
+                }
+                return Ux.promise(state);
+            })
+            .then(processed => Cmn.yiCommand(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
     ...yo,

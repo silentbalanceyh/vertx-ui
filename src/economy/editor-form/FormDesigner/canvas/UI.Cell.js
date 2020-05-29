@@ -29,13 +29,21 @@ class Component extends React.PureComponent {
                     <div className={"content"}>
                         <div className={"content-tool"}>
                             <Input/>
+                            {Rdr.renderCmds(this, {
+                                ...configCellCmd,
+                            })}
                         </div>
                         <div className={"content-drop"}>
 
                         </div>
-                        {Rdr.renderCmd(this, {
-                            ...configCellCmd,
-                        })}
+                        <div className={"t-command"}>
+                            {(() => {
+                                const {$merge} = this.state;
+                                if ($merge) {
+                                    return Rdr.renderCmd(this, $merge)
+                                } else return false;
+                            })()}
+                        </div>
                     </div>
                 </Col>
             )

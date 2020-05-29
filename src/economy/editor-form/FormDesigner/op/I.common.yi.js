@@ -1,7 +1,7 @@
 import Ux from "ux";
 
-const yiCommand = (reference, state = {}) => {
-    const commandArr = Ux.fromHoc(reference, "commands");
+const yiCommand = (reference, state = {}, key = "commands") => {
+    const commandArr = Ux.fromHoc(reference, key);
     /* 命令行专用 */
     const commands = [];
     if (Ux.isArray(commandArr)) {

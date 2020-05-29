@@ -64,22 +64,30 @@
     }
 
     &-cell {
+
         &:first-child {
-            .c-command {
+            .t-command {
                 display: none;
             }
         }
 
-        .c-command {
+        .t-command {
             .op-link {
                 position: absolute;
                 top: 0;
-                left: -18px;
+                left: -14px;
 
-                padding: 2px 4px 0 4px;
+                padding: 2px 2px 0 2px;
                 border: solid 1px white;
                 display: inline-block;
                 text-align: center;
+
+                background-color: #ECECEC;
+                background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                linear-gradient(0deg, white 2px, transparent 0),
+                linear-gradient(90deg, white 2px, transparent 0);
+                background-size: 5px 5px;
 
                 &:hover {
                     border-radius: 3px;
@@ -87,7 +95,7 @@
                 }
 
                 svg {
-                    .ix-box.square(24px);
+                    .ix-box.square(22px);
                 }
             }
 
@@ -111,6 +119,38 @@
                     border: none;
                     border-bottom: solid 1px #d9d9d9;
                 }
+
+                .c-command {
+                    float: right;
+
+                    .op-link {
+                        display: inline-block;
+                        text-align: center;
+
+                        &:hover {
+                            border-radius: 3px;
+                        }
+
+                        .ix-box.square(22px);
+
+                        .ix-text.hover-invert(#f13a54);
+
+                        &:first-child {
+                            .ix-text.hover-invert(#00b9f0);
+                        }
+
+                        i, svg {
+                            .ix-box.square(18px);
+                        }
+                    }
+                }
+            }
+
+            &-drop {
+                margin: 3px 3%;
+                border-radius: 5px;
+                border-left: solid 3px #ececec;
+                min-height: 36px;
             }
         }
 

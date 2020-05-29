@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
                 <div className={"web-form-designer"}>
                     <Row>
                         <Col span={24}>
-                            {Rdr.renderCmd(this)}
+                            {Rdr.renderCmds(this)}
                         </Col>
                     </Row>
                     <Spin spinning={$forbidden} indicator={null} onClick={Op.onSpin(this)}>

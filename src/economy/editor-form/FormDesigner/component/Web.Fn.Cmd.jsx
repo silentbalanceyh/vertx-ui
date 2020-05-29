@@ -58,32 +58,37 @@ const renderLink = (reference, item, config) => renderContent(reference, {
     }
 })());
 
-export default (reference, config = {}) => {
-    const {$commands = []} = reference.state;
-    const {className = "designer-tool", placement = "top"} = config;
-    return (
-        <div className={className}>
-            {$commands.map((command, index) => {
-                if ("divider" === command) {
-                    return (
-                        <Divider type={"vertical"} key={`divider${index}`}/>
-                    );
-                } else {
-                    // 设置 item
-                    const tooltip = command.tooltip;
-                    if (tooltip) {
-                        const disabled = isDisabled(reference, command);
-                        return disabled ? renderLink(reference, command, config) : (
-                            <Tooltip title={tooltip} key={command.key}
-                                     placement={placement}>
-                                {renderLink(reference, command, config)}
-                            </Tooltip>
-                        )
-                    } else {
-                        return renderLink(reference, command, config);
-                    }
-                }
-            })}
-        </div>
-    );
+const renderCmd = (reference, command, config = {}) => {
+    // 设置 item
+    const tooltip = command.tooltip;
+    const {placement = "top"} = config;
+    if (tooltip) {
+        const disabled = isDisabled(reference, command);
+        return disabled ? renderLink(reference, command, config) : (
+            <Tooltip title={tooltip} key={command.key}
+                     placement={placement}>
+                {renderLink(reference, command, config)}
+            </Tooltip>
+        )
+    } else {
+        return renderLink(reference, command, config);
+    }
+}
+export default {
+    renderCmd,
+    renderCmds: (reference, config = {}) => {
+        const {$commands = []} = reference.state;
+        const {className = "designer-tool"} = config;
+        return (
+            <div className={className}>
+                {$commands.map((command, index) => {
+                    if ("divider" === command) {
+                        return (
+                            <Divider type={"vertical"} key={`divider${index}`}/>
+                        );
+                    } else return renderCmd(reference, command, config);
+                })}
+            </div>
+        );
+    }
 }
