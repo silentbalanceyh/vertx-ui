@@ -1,4 +1,5 @@
 import Cmd from './I.common';
+import Ux from 'ux';
 
 const sourceConnect = (connect, monitor) => {
     return {
@@ -11,13 +12,15 @@ const sourceSpec = {
     beginDrag: Cmd.itemRow
 };
 const targetSpec = {
-    drop: (props, monitor) => {
+    drop: (props, monitor, component) => {
         const sourceItem = monitor.getItem();
         const targetItem = Cmd.itemRow(props);
         if (sourceItem && targetItem) {
             const fromIndex = sourceItem.rowIndex;
             const toIndex = targetItem.rowIndex;
-            console.info(fromIndex, toIndex);
+            Ux.fn(component).rxRowWrap(fromIndex, toIndex);
+            // 关闭覆盖效果
+            Cmd.dropColor(component, false);
         }
     },
     /* 浮游在 Target 之上 */

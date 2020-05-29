@@ -38,7 +38,7 @@ class Component extends React.PureComponent {
                                 })}
                             </div>
                             <div className={"content-drop"}>
-
+                                {config.key}
                             </div>
                             <div className={"t-command"}>
                                 {(() => {
