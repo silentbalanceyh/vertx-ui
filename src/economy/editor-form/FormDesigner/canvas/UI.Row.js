@@ -50,7 +50,8 @@ class Component extends React.PureComponent {
                                 const cellAttrs = Op.yoCell(this, cell, config);
                                 return (
                                     <CellEditor {...cellAttrs}
-                                                rxCellMerge={Op.rxCellMerge(this)}/>
+                                                rxCellMerge={Op.rxCellMerge(this)} /* 单元格合并 */
+                                                rxCellDel={Op.rxCellDel(this)} /* 单元格删除 */ />
                                 )
                             })
                         })()}

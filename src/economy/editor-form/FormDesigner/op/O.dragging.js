@@ -1,6 +1,6 @@
-import Form from './O.dragging.web';
-import Row from './O.dragging.row';
-import Cell from './O.dragging.cell';
+import Form from './I.dragging';
+import Row from './I.dragging.row';
+import Cell from './I.dragging.cell';
 
 export default {
     Form,

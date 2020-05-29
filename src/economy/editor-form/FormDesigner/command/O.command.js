@@ -38,6 +38,10 @@ const cellMerge = (reference, item, config) => {
     let {cellIndex} = config;
     Ux.fn(reference).rxCellMerge(cellIndex);
 }
+const cellDel = (reference, item, config) => {
+    let {cellIndex} = config;
+    Ux.fn(reference).rxCellDel(cellIndex);
+}
 export default {
     layout: showPopover,
     "deployment-unit": showPopover,
@@ -56,4 +60,6 @@ export default {
     control: showCellDrawer,
     // 合并单元格
     "merge-cell": cellMerge,
+    // 删除单元格
+    "delete": cellDel,
 }

@@ -33,6 +33,7 @@ class Component extends React.PureComponent {
                             <div className={"content-tool"}>
                                 <Input placeholder={(() => Ux.fromHoc(this, "label"))()}/>
                                 {Rdr.renderCmds(this, {
+                                    ...config,
                                     ...configCellCmd,
                                 })}
                             </div>

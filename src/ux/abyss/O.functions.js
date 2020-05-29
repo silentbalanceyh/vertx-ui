@@ -35,4 +35,5 @@ export default (reference) => generator(reference, [
     "rxRowAdd",     // 添加行
     "rxRowDel",     // 删除行
     "rxCellMerge",  // 合并单元格
+    "rxCellDel",    // 删除单元格
 ]);

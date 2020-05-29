@@ -2,7 +2,6 @@ import Ux from "ux";
 
 export default {
     rxCellMerge: (reference) => (cellIndex) => {
-        // console.info(rowIndex, cellIndex);
         const {$cells = []} = reference.state;
         // 当前索引：cellIndex
         // 前一个索引：cellIndex - 1
@@ -28,6 +27,13 @@ export default {
         const revered = replaced.reverse();
         revered.forEach((item, index) => item.cellIndex = index);
         reference.setState({$cells: revered});
+    },
+    rxCellDel: (reference) => (cellIndex) => {
+        const {$cells = []} = reference.state;
+        let replaced = $cells.filter((item, index) => index !== cellIndex);
+        replaced.forEach((item, index) => item.cellIndex = index);
+        replaced = Ux.clone(replaced);
+        reference.setState({$cells: replaced});
     },
     rxRowDel: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
