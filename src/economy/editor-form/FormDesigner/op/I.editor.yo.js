@@ -11,15 +11,16 @@ export default {
             if (!data.columns) data.columns = 3;
             rowConfig.grid = data.columns;
         }
-        const key = `key-row-${index}`;
         // 行对应元数据
         rowConfig = Ux.clone(rowConfig);
         rowConfig.rowIndex = index;
-        return {config: rowConfig, data: row, key};
+        return {
+            config: rowConfig,
+            data: row,
+            key: row.key
+        };
     },
     yoCell: (reference, cell, config = {}) => {
-        const {rowIndex, cellIndex} = cell;
-        const key = `key-cell-${rowIndex}-${cellIndex}`;
         /*
          * 占用行计算
          */
@@ -29,6 +30,6 @@ export default {
         const $status = {};
         $status.used = spans;
         $status.cells = $cells.length;
-        return {config: cell, key, $status};
+        return {config: cell, key: cell.key, $status};
     }
 }

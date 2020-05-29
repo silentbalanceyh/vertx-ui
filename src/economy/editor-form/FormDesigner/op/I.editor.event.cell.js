@@ -58,7 +58,7 @@ export default {
                 cell.span = calculated;
                 added.push(Ux.clone(cell));
                 /* 再添加一个 */
-                added.push({span: calculated});
+                added.push({span: calculated, key: `cell-${Ux.randomString(8)}`});
             } else {
                 added.push(Ux.clone(cell));
             }

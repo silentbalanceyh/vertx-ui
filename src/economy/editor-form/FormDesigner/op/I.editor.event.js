@@ -22,7 +22,9 @@ export default {
         if (undefined === rowIndex) {
             rowIndex = $rows.length - 1;
         }
-        $rows.splice(rowIndex, 0, {});
+        $rows.splice(rowIndex, 0, {
+            key: `row-${Ux.randomString(8)}`
+        });
         reference.setState({$rows});
     },
     rxSettingClose: (reference) => (event) => {

@@ -4,13 +4,6 @@ const sourceConnect = (connect, monitor) => {
         connectDragSource: connect.dragSource(),
     };
 };
-const _updateState = (pointer = {}) => {
-    if (pointer.state) {
-        const {targetType, targetKey} = pointer.state;
-        if (targetType && targetKey) {
-        }
-    }
-};
 const sourceSpec = {
     beginDrag: (props) => {
         return {};
@@ -18,11 +11,15 @@ const sourceSpec = {
     endDrag: (props, monitor) => {
         const dropResult = monitor.getDropResult();
         if (dropResult) {
+            console.info(dropResult);
         }
     }
 };
 const targetSpec = {
     drop: (props) => {
+    },
+    hover: (props, monitor, component) => {
+        hoverSwitch(component, () => monitor.isOver());
     }
 };
 const targetConnect = (connect, monitor) => {
@@ -33,7 +30,20 @@ const targetConnect = (connect, monitor) => {
         connectDropTarget: connect.dropTarget()
     };
 };
+const hoverSwitch = (reference, predicate) => {
+    const {$hover} = reference.state;
+    if (predicate()) {
+        if (!$hover) {
+            reference.setState({$hover: true});
+        }
+    } else {
+        if ($hover) {
+            reference.setState({$hover: false});
+        }
+    }
+}
 export default {
+    hoverSwitch,
     sourceConnect,
     sourceSpec,
     targetConnect,

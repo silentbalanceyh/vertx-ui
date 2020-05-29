@@ -16,7 +16,10 @@ export default {
         state.$ready = true;
 
         /* 初始化行专用操作 */
-        state.$rows = [{}];
+        const key = `row-${Ux.randomString(8)}`;
+        state.$rows = [{
+            key,
+        }];
         reference.setState(state);
     },
     yiRow: (reference) => {

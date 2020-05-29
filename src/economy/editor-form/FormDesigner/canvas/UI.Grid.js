@@ -4,6 +4,7 @@ import Ux from 'ux';
 
 import LoadingContent from "../../../loading/LoadingContent/UI";
 import RowEditor from './UI.Row';
+import RowDrop from './UI.Row.Drop';
 
 class Component extends React.PureComponent {
     componentDidMount() {
@@ -16,11 +17,15 @@ class Component extends React.PureComponent {
             const {$rows = []} = this.state;
             return $rows.map((row, index) => {
                 const rowAttrs = Op.yoRow(this, row, index);
+                const {key, ...rest} = rowAttrs;
                 return (
-                    <RowEditor {...rowAttrs}
-                               rxRowAdd={Op.rxRowAdd(this)}/* 添加行 */
-                               rxRowDel={Op.rxRowDel(this)}/* 删除行 */
-                    />
+                    <div key={key}>
+                        <RowEditor {...rest}
+                                   rxRowAdd={Op.rxRowAdd(this)}/* 添加行 */
+                                   rxRowDel={Op.rxRowDel(this)}/* 删除行 */
+                        />
+                        <RowDrop {...rest}/>
+                    </div>
                 );
             });
         }, {component: LoadingContent})

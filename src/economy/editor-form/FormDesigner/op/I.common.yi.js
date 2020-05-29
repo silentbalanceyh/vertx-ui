@@ -41,9 +41,12 @@ export default {
             const $grid = [];
             const span = 24 / config.grid;
             Ux.itRepeat(config.grid, (idx) => {
+                // 提供一个默认的 key 格式
+                const key = `cell-${Ux.randomString(8)}`;
                 $grid.push({
-                    span,                // 默认宽度
-                    cellIndex: idx,              // 列索引
+                    key,                        // 默认的 key
+                    span,                       // 默认宽度
+                    cellIndex: idx,             // 列索引
                     rowIndex: config.rowIndex,  // 行索引
                 })
             })
