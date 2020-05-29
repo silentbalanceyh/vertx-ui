@@ -60,7 +60,7 @@ export default (reference) => {
                 &nbsp;&nbsp;
                 <Tag color={"red"} style={{fontSize: 14}}>
                     {(() => {
-                        const columns = form.columns ? form.columns : 4;
+                        const columns = form.columns ? form.columns : 3;
                         return Ux.formatExpr(expr, {columns})
                     })()}
                 </Tag>

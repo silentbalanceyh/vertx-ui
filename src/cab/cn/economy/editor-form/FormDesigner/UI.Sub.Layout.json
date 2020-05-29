@@ -59,7 +59,7 @@
         "initial": {
             "className": "FIX:web-form",
             "cssMode": "FIX:APPEND",
-            "columns": "FIX:4",
+            "columns": "FIX:3",
             "window": "FIX:1"
         }
     },

@@ -64,6 +64,66 @@
     }
 
     &-cell {
-        background-color: #00a4c2;
+        &:first-child {
+            .c-command {
+                display: none;
+            }
+        }
+
+        .c-command {
+            .op-link {
+                position: absolute;
+                top: 0;
+                left: -18px;
+
+                padding: 2px 4px 0 4px;
+                border: solid 1px white;
+                display: inline-block;
+                text-align: center;
+
+                &:hover {
+                    border-radius: 3px;
+                    border: solid 1px #8C8C8C;
+                }
+
+                svg {
+                    .ix-box.square(24px);
+                }
+            }
+
+        }
+
+        .content {
+            background-color: white;
+            margin: 4px;
+            min-height: 63px;
+
+            &-tool {
+                padding-left: 5%;
+                padding-right: 5%;
+
+                .ant-input {
+                    padding: 0 !important;
+                    height: 21px !important;
+                    line-height: 21px !important;
+                    width: 27%;
+                    border-radius: 0;
+                    border: none;
+                    border-bottom: solid 1px #d9d9d9;
+                }
+            }
+        }
+
+        &:first-child {
+            .content {
+                margin-left: 8px;
+            }
+        }
+
+        &:last-child {
+            .content {
+                margin-right: 8px;
+            }
+        }
     }
 }

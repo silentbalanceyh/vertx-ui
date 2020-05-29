@@ -1,5 +1,4 @@
 import Ux from "ux";
-import React from 'react';
 import uiColumn from "../Web.Column";
 import uiTotal from '../Web.Total';
 

@@ -1,5 +1,7 @@
-import Cmn from "./I.common";
+import Cmn from "./I.common.yi";
 import Ux from 'ux';
+import event from './I.editor.event';
+import yo from './I.editor.yo';
 
 export default {
     /*
@@ -17,39 +19,17 @@ export default {
         state.$rows = [{}];
         reference.setState(state);
     },
-    yiGridRow: (reference) => {
+    yiRow: (reference) => {
         const state = {};
         Cmn.yiCommand(reference, state)
-            .then(processed => Cmn.yiCell(reference, processed))
+            .then(processed => Cmn.yiRowCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
-    rxRowDel: (reference) => (rowIndex) => {
-        let {$rows = []} = reference.state;
-        $rows = Ux.clone($rows);
-        if (1 < $rows.length) {
-            /* 删除指定行 */
-            $rows = $rows.filter((row, index) => rowIndex !== index);
-        } else {
-            /* 清空当前行数据 */
-            $rows[0] = {};
-        }
-        reference.setState({$rows});
+    yiCell: (reference) => {
+        const state = {};
+        Cmn.yiCommand(reference, state)
+            .then(Ux.ready).then(Ux.pipe(reference))
     },
-    rxRowAdd: (reference) => (rowIndex) => {
-        let {$rows = []} = reference.state;
-        $rows = Ux.clone($rows);
-        /* 在指定位置插入 */
-        if (undefined === rowIndex) {
-            rowIndex = $rows.length - 1;
-        }
-        $rows.splice(rowIndex, 0, {});
-        reference.setState({$rows});
-    },
-    rxSettingClose: (reference) => (event) => {
-        Ux.prevent(event);
-        reference.setState({
-            $drawer: undefined,
-            $setting: undefined
-        })
-    }
+    ...yo,
+    ...event
 }

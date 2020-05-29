@@ -2,7 +2,9 @@ import React from 'react';
 import {Row} from 'antd';
 import {component} from "../../../_internal";
 import Op from '../op';
+import Ux from 'ux';
 import Rdr from "../component";
+import CellEditor from './UI.Cell';
 
 const configRowCmd = {
     // 最外层 Css
@@ -24,27 +26,37 @@ const configRowCmd = {
 })
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiGridRow(this);
+        Op.yiRow(this);
     }
 
     render() {
-        const {config = {}} = this.props;
-        const {$drawer} = this.state;
-        const active = $drawer ? "right-active" : "";
-        return (
-            <div className={"canvas-row"}>
-                <div className={"left"}>
-                    {Rdr.renderCmd(this, {
-                        ...config,
-                        ...configRowCmd,
-                    })}
+        return Ux.xtReady(this, () => {
+            const {config = {}} = this.props;
+            const {$drawer} = this.state;
+            const active = $drawer ? "right-active" : "";
+            return (
+                <div className={"canvas-row"}>
+                    <div className={"left"}>
+                        {Rdr.renderCmd(this, {
+                            ...config,
+                            ...configRowCmd,
+                        })}
+                    </div>
+                    <Row className={`right ${active}`}>
+                        {(() => {
+                            const {$cells = []} = this.state;
+                            return $cells.map(cell => {
+                                const cellAttrs = Op.yoCell(this, cell);
+                                return (
+                                    <CellEditor {...cellAttrs}/>
+                                )
+                            })
+                        })()}
+                    </Row>
+                    {Rdr.renderDrawer(this)}
                 </div>
-                <Row className={`right ${active}`}>
-
-                </Row>
-                {Rdr.renderDrawer(this)}
-            </div>
-        )
+            )
+        })
     }
 }
 

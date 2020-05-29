@@ -1,9 +1,8 @@
 import Ux from 'ux';
 import yiData from './O.yi.data';
-import Cmn from './I.common';
+import Cmn from './I.common.yi';
 
 const yiPalette = (reference, state) => {
-
     /* 执行单处理 */
     const fnNorm = (item) => {
         if ("string" === typeof item) {
