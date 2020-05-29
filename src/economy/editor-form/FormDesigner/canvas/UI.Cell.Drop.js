@@ -19,7 +19,8 @@ class Component extends React.PureComponent {
         const targetItem = Op.item(this.props);
         const sourceItem = this.props['dragItem'];
         if (!Op.itemRowSame(sourceItem, targetItem)) {
-            Op.dropColor(this, this.props['isOver']);
+            const {reference} = this.props;
+            Op.dropColor(reference, this.props['isOver']);
         }
     }
 

@@ -23,7 +23,7 @@ const targetSpec = {
             Ux.fn(component).rxCellWrap(sourceItem, targetItem);
             // 关闭覆盖效果
             const {reference} = props;
-            Cmd.dropColor(reference, monitor.isOver());
+            Cmd.dropColor(reference, false);
         }
     },
     /* 浮游在 Target 之上 */

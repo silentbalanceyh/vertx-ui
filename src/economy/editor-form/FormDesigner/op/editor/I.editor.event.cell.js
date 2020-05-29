@@ -1,4 +1,5 @@
 import Ux from "ux";
+import rxCellWrap from './I.editor.event.cell.wrap';
 
 export default {
     rxCellMerge: (reference) => (cellIndex) => {
@@ -35,9 +36,7 @@ export default {
         replaced = Ux.clone(replaced);
         reference.setState({$cells: replaced});
     },
-    rxCellWrap: (reference) => (fromItem, toItem) => {
-        console.info(fromItem, toItem);
-    },
+    rxCellWrap,
     rxCellFill: (reference) => (cellIndex) => {
         let {$cells = []} = reference.state;
         const spans = $cells.map(cell => cell.span)

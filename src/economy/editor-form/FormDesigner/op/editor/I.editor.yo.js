@@ -16,6 +16,7 @@ export default {
         rowConfig.rowIndex = index;
         rowConfig.key = row.key;
         return {
+            reference,      /* 顶层引用 */
             config: rowConfig,
             data: {},   // 后期要使用
             key: row.key
@@ -31,10 +32,13 @@ export default {
         const $status = {};
         $status.used = spans;
         $status.cells = $cells.length;
+        /* 单元格交换函数 */
+        const {rxCellWrap} = reference.props;
         return {
+            rxCellWrap, /* 继承的单元格交换函数 */
             config: {
-                ...cell,
                 ...config,
+                ...cell,
             }, key: cell.key, $status
         };
     }

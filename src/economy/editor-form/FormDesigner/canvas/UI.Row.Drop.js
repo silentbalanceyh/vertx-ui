@@ -9,15 +9,15 @@ class Component extends React.PureComponent {
         const targetItem = Op.item(this.props);
         const sourceItem = this.props['dragItem'];
         if (!Op.itemRowSame(sourceItem, targetItem)) {
-            const {reference} = this.props;
-            Op.dropColor(reference, this.props['isOver']);
+            Op.dropColor(this, this.props['isOver']);
         }
     }
 
     render() {
         const {connectDropTarget} = this.props;
+        const {$hover = false} = this.state;
         return connectDropTarget(
-            <div className={`canvas-row-drop`}>
+            <div className={`canvas-row-drop ${$hover ? "canvas-row-drop-hover" : ""}`}>
 
             </div>
         )
