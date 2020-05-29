@@ -8,7 +8,11 @@ const sourceConnect = (connect, monitor) => {
     };
 };
 const sourceSpec = {
-    beginDrag: Cmd.item,
+    beginDrag: (props, monitor, component) => {
+        const item = Cmd.item(props);
+        item.source = component;
+        return item;
+    },
     endDrag: (props, monitor) => {
         const dropResult = monitor.getDropResult();
         if (dropResult) {
@@ -22,16 +26,16 @@ const targetSpec = {
         if (sourceItem && targetItem) {
             Ux.fn(component).rxCellWrap(sourceItem, targetItem);
             // 关闭覆盖效果
-            const {reference} = props;
+            const {reference} = component.props;
             Cmd.dropColor(reference, false);
         }
     },
     /* 浮游在 Target 之上 */
-    hover: (props, monitor) => {
+    hover: (props, monitor, component) => {
         const sourceItem = monitor.getItem();
         const targetItem = Cmd.item(props);
         if (!Cmd.itemCellSame(sourceItem, targetItem)) {
-            const {reference} = props;
+            const {reference} = component.props;
             Cmd.dropColor(reference, monitor.isOver());
         }
     }

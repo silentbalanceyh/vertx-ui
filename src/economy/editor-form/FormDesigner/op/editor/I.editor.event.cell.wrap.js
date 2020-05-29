@@ -1,5 +1,3 @@
-export default (rowRef) => (fromItem, toItem) => {
-    /*
-     * 读取原始 $rows
-     */
+export default (reference) => (fromItem, toItem) => {
+
 }

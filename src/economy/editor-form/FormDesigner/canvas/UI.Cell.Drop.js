@@ -18,7 +18,7 @@ class Component extends React.PureComponent {
     componentDidUpdate(prevProps, prevState, snapshot) {
         const targetItem = Op.item(this.props);
         const sourceItem = this.props['dragItem'];
-        if (!Op.itemRowSame(sourceItem, targetItem)) {
+        if (!Op.itemCellSame(sourceItem, targetItem)) {
             const {reference} = this.props;
             Op.dropColor(reference, this.props['isOver']);
         }
