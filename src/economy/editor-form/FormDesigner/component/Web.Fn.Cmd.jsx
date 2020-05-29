@@ -10,7 +10,7 @@ import renderContent from './Web.Fn.Cmd.Dialog';
 const isDisabled = (reference, item) => {
     const fnDisabled = Cmd.CommandDisabled[item.key];
     if (Ux.isFunction(fnDisabled)) {
-        return fnDisabled(reference);
+        return fnDisabled(reference, item);
     } else return false;
 }
 
@@ -45,6 +45,7 @@ const renderLink = (reference, item, config) => renderContent(reference, {
     if (attrs['aria-disabled']) {
         attrs.className = `${attrs.className} op-disabled`
     }
+    console.info(attrs);
     /* 渲染 */
     if (item.confirm) {
         const {onClick, ...lefts} = attrs;

@@ -42,6 +42,10 @@ const cellDel = (reference, item, config) => {
     let {cellIndex} = config;
     Ux.fn(reference).rxCellDel(cellIndex);
 }
+const cellSplit = (reference, item, config) => {
+    let {cellIndex} = config;
+    Ux.fn(reference).rxCellSplit(cellIndex);
+}
 export default {
     layout: showPopover,
     "deployment-unit": showPopover,
@@ -62,4 +66,6 @@ export default {
     "merge-cell": cellMerge,
     // 删除单元格
     "delete": cellDel,
+    // 拆分单元格
+    scissor: cellSplit,
 }
