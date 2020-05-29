@@ -102,7 +102,6 @@
                     .ix-box.square(22px);
                 }
             }
-
         }
 
         .content {
@@ -127,6 +126,15 @@
                 .c-command {
                     float: right;
 
+                    .op-link[aria-disabled=true] {
+                        color: #d9d9d9;
+
+                        &:hover {
+                            cursor: not-allowed;
+                            border: none;
+                        }
+                    }
+
                     .op-link {
                         display: inline-block;
                         text-align: center;
@@ -137,7 +145,7 @@
 
                         .ix-box.square(22px);
 
-                        .ix-text.hover-border(#A1A1A1);
+                        .ix-text.hover-border(#1874CD);
 
                         &:first-child {
                             .ix-text.hover-border(#00b9f0);

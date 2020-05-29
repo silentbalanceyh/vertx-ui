@@ -14,7 +14,7 @@ export default (reference, inputConfig = {}, children) => {
     const {popover = {}} = config;
     const popoverAttrs = popover[item.key] ? popover[item.key] : {};
     return (
-        <Popover visible={visible} trigger={"click"}
+        <Popover visible={visible} trigger={"click"} key={item.key}
                  overlayClassName={"web-form-designer-popover"}
                  overlayStyle={popoverStyle ? popoverStyle : {}}
                  content={Ux.isFunction(fnContent) ? fnContent(reference) : false}

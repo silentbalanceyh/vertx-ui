@@ -20,6 +20,15 @@ export default {
     yoCell: (reference, cell, config = {}) => {
         const {rowIndex, cellIndex} = cell;
         const key = `key-cell-${rowIndex}-${cellIndex}`;
-        return {config: cell, key};
+        /*
+         * 占用行计算
+         */
+        const {$cells = []} = reference.state;
+        const spans = $cells.map(cell => cell.span)
+            .reduce((left, right) => left + right, 0);
+        const $status = {};
+        $status.used = spans;
+        $status.cells = $cells.length;
+        return {config: cell, key, $status};
     }
 }

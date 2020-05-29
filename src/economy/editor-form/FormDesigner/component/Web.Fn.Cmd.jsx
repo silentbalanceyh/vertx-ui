@@ -7,15 +7,21 @@ import Ux from 'ux';
 import Cmd from '../command';
 import renderContent from './Web.Fn.Cmd.Dialog';
 
-const isDisabled = (reference, item) => {
+const isDisabled = (reference, item, config) => {
     const fnDisabled = Cmd.CommandDisabled[item.key];
     if (Ux.isFunction(fnDisabled)) {
-        return fnDisabled(reference, item);
+        return fnDisabled(reference, item, config);
     } else return false;
+}
+const isVisible = (reference, item, config) => {
+    const fnVisible = Cmd.CommandVisible[item.key];
+    if (Ux.isFunction(fnVisible)) {
+        return fnVisible(reference, item, config);
+    } else return true;
 }
 
 const renderIcon = (attrs, item) => (
-    <a href={""} {...attrs}>
+    <a href={""} {...attrs} key={item.key}>
         {Ux.aiIcon(item.icon, {
             "data-color": attrs.disabled ? "#ececec" : (item['svgColor'] ? item['svgColor'] : "#595959")
         })}
@@ -24,39 +30,42 @@ const renderIcon = (attrs, item) => (
 const renderLink = (reference, item, config) => renderContent(reference, {
     item, config,
 }, (() => {
-    const attrs = {};
-    attrs['aria-disabled'] = isDisabled(reference, item);
-    if (!attrs['aria-disabled']) {
-        attrs.onClick = (event) => {
-            Ux.prevent(event);
-            const executor = Cmd.CommandAction[item.key];
-            if (Ux.isFunction(executor)) {
-                executor(reference, item, config);
-            } else {
-                console.error("丢失命令：", item);
+    const visible = isVisible(reference, item, config);
+    if (visible) {
+        const attrs = {};
+        attrs.key = item.key;
+        attrs['aria-disabled'] = isDisabled(reference, item, config);
+        if (!attrs['aria-disabled']) {
+            attrs.onClick = (event) => {
+                Ux.prevent(event);
+                const executor = Cmd.CommandAction[item.key];
+                if (Ux.isFunction(executor)) {
+                    executor(reference, item, config);
+                } else {
+                    console.error("丢失命令：", item);
+                }
+            }
+        } else {
+            attrs.onClick = (event) => {
+                Ux.prevent(event);
             }
         }
-    } else {
-        attrs.onClick = (event) => {
-            Ux.prevent(event);
+        attrs.className = item.className ? `op-link ${item.className}` : `op-link`;
+        if (attrs['aria-disabled']) {
+            attrs.className = `${attrs.className} op-disabled`
         }
-    }
-    attrs.className = item.className ? `op-link ${item.className}` : `op-link`;
-    if (attrs['aria-disabled']) {
-        attrs.className = `${attrs.className} op-disabled`
-    }
-    console.info(attrs);
-    /* 渲染 */
-    if (item.confirm) {
-        const {onClick, ...lefts} = attrs;
-        return (
-            <Popconfirm title={item.confirm} onConfirm={onClick}>
-                {renderIcon(lefts, item)}
-            </Popconfirm>
-        )
-    } else {
-        return renderIcon(attrs, item);
-    }
+        /* 渲染 */
+        if (item.confirm && !attrs['aria-disabled']) {
+            const {onClick, ...lefts} = attrs;
+            return (
+                <Popconfirm key={item.key} title={item.confirm} onConfirm={onClick}>
+                    {renderIcon(lefts, item)}
+                </Popconfirm>
+            )
+        } else {
+            return renderIcon(attrs, item);
+        }
+    } else return false;
 })());
 
 const renderCmd = (reference, command, config = {}) => {
