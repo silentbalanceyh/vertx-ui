@@ -53,7 +53,9 @@ class Component extends React.PureComponent {
                                                 rxCellFill={Op.rxCellFill(this)}    /* 单元格填充 */
                                                 rxCellSplit={Op.rxCellSplit(this)}  /* 单元格拆分 */
                                                 rxCellMerge={Op.rxCellMerge(this)}  /* 单元格合并 */
-                                                rxCellDel={Op.rxCellDel(this)}      /* 单元格删除 */ />
+                                                rxCellDel={Op.rxCellDel(this)}      /* 单元格删除 */
+                                                rxCellWrap={Op.rxCellWrap(this)}    /* 单元格交换 */
+                                    />
                                 )
                             })
                         })()}

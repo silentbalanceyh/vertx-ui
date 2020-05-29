@@ -13,10 +13,21 @@ const configCellCmd = {
 }
 
 class Component extends React.PureComponent {
+    state = {}
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const targetItem = Op.item(this.props);
+        const sourceItem = this.props['dragItem'];
+        if (!Op.itemRowSame(sourceItem, targetItem)) {
+            Op.dropColor(this, this.props['isOver']);
+        }
+    }
+
     render() {
         const {config = {}, connectDropTarget, reference} = this.props;
+        const {$hover = false} = this.state;
         return connectDropTarget(
-            <div className={"content-tool"}>
+            <div className={`content-tool ${$hover ? "content-tool-hover" : ""}`}>
                 <Input placeholder={(() => Ux.fromHoc(reference, "label"))()}/>
                 {Rdr.renderCmds(reference, {
                     ...config,

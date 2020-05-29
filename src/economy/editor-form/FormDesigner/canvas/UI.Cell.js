@@ -21,8 +21,9 @@ class Component extends React.PureComponent {
         const {span} = config;
         if (span) {
             return Ux.xtReady(this, () => {
+                const {$hover = false} = this.state;
                 return (
-                    <Col span={span} className={"canvas-cell"}>
+                    <Col span={span} className={`canvas-cell ${$hover ? "canvas-cell-hover" : ""}`}>
                         {connectDragSource(
                             <div className={"content"}>
                                 <CellDrop {...this.props} reference={this}/>

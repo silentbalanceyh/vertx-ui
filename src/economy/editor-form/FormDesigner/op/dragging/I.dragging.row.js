@@ -9,12 +9,12 @@ const sourceConnect = (connect, monitor) => {
 };
 const sourceSpec = {
     /* 返回需要使用的数据结构，item */
-    beginDrag: Cmd.itemRow
+    beginDrag: Cmd.item
 };
 const targetSpec = {
     drop: (props, monitor, component) => {
         const sourceItem = monitor.getItem();
-        const targetItem = Cmd.itemRow(props);
+        const targetItem = Cmd.item(props);
         if (sourceItem && targetItem) {
             const fromIndex = sourceItem.rowIndex;
             const toIndex = targetItem.rowIndex;
@@ -26,7 +26,7 @@ const targetSpec = {
     /* 浮游在 Target 之上 */
     hover: (props, monitor, component) => {
         const sourceItem = monitor.getItem();
-        const targetItem = Cmd.itemRow(props);
+        const targetItem = Cmd.item(props);
         if (!Cmd.itemRowSame(sourceItem, targetItem)) {
             Cmd.dropColor(component, monitor.isOver());
         }

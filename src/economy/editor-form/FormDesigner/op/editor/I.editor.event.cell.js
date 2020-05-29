@@ -35,6 +35,9 @@ export default {
         replaced = Ux.clone(replaced);
         reference.setState({$cells: replaced});
     },
+    rxCellWrap: (reference) => (fromItem, toItem) => {
+        console.info(fromItem, toItem);
+    },
     rxCellFill: (reference) => (cellIndex) => {
         let {$cells = []} = reference.state;
         const spans = $cells.map(cell => cell.span)

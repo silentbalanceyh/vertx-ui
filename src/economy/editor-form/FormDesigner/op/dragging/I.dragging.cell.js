@@ -1,20 +1,14 @@
+import Cmd from "./I.common";
+import Ux from "ux";
+
 const sourceConnect = (connect, monitor) => {
     return {
         isDragging: monitor.isDragging(),
         connectDragSource: connect.dragSource(),
     };
 };
-const _updateState = (pointer = {}) => {
-    if (pointer.state) {
-        const {targetType, targetKey} = pointer.state;
-        if (targetType && targetKey) {
-        }
-    }
-};
 const sourceSpec = {
-    beginDrag: (props) => {
-        return {};
-    },
+    beginDrag: Cmd.item,
     endDrag: (props, monitor) => {
         const dropResult = monitor.getDropResult();
         if (dropResult) {
@@ -22,7 +16,24 @@ const sourceSpec = {
     }
 };
 const targetSpec = {
-    drop: (props) => {
+    drop: (props, monitor, component) => {
+        const sourceItem = monitor.getItem();
+        const targetItem = Cmd.item(props);
+        if (sourceItem && targetItem) {
+            Ux.fn(component).rxCellWrap(sourceItem, targetItem);
+            // 关闭覆盖效果
+            const {reference} = props;
+            Cmd.dropColor(reference, monitor.isOver());
+        }
+    },
+    /* 浮游在 Target 之上 */
+    hover: (props, monitor) => {
+        const sourceItem = monitor.getItem();
+        const targetItem = Cmd.item(props);
+        if (!Cmd.itemCellSame(sourceItem, targetItem)) {
+            const {reference} = props;
+            Cmd.dropColor(reference, monitor.isOver());
+        }
     }
 };
 const targetConnect = (connect, monitor) => {
@@ -30,7 +41,8 @@ const targetConnect = (connect, monitor) => {
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
         dropResult: monitor.getDropResult(),
-        connectDropTarget: connect.dropTarget()
+        connectDropTarget: connect.dropTarget(),
+        dragItem: monitor.getItem(),
     };
 };
 export default {

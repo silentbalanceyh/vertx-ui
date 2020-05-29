@@ -23,11 +23,14 @@ export default {
             }
         }
     },
-    itemRow: (props) => {
+    item: (props) => {
         const item = {};
         const {config = {}} = props;
         item.rowIndex = config.rowIndex;
         item.key = config.key;
+        if (config.hasOwnProperty('cellIndex')) {
+            item.cellIndex = config.cellIndex;
+        }
         return item;
     },
     itemRowSame: (left, right) => {
@@ -35,4 +38,10 @@ export default {
             return left.rowIndex === right.rowIndex;
         } else return true;
     },
+    itemCellSame: (left, right) => {
+        if (left && right) {
+            return (left.rowIndex === right.rowIndex
+                && left.cellIndex === right.cellIndex)
+        } else return true;
+    }
 }
