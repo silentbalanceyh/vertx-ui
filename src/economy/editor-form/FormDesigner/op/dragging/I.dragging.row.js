@@ -1,10 +1,5 @@
-const item = (props) => {
-    const item = {};
-    const {config = {}} = props;
-    item.rowIndex = config.rowIndex;
-    item.key = config.key;
-    return item;
-}
+import Cmd from './I.common';
+
 const sourceConnect = (connect, monitor) => {
     return {
         isDragging: monitor.isDragging(),
@@ -13,7 +8,7 @@ const sourceConnect = (connect, monitor) => {
 };
 const sourceSpec = {
     /* 返回需要使用的数据结构，item */
-    beginDrag: item,
+    beginDrag: Cmd.itemRow,
     endDrag: (props, monitor) => {
         const dropResult = monitor.getDropResult();
         if (dropResult) {
@@ -25,7 +20,11 @@ const targetSpec = {
     drop: (props) => {
     },
     hover: (props, monitor, component) => {
-
+        const sourceItem = monitor.getItem();
+        const targetItem = Cmd.itemRow(props);
+        if (!Cmd.itemRowSame(sourceItem, targetItem)) {
+            Cmd.dropColor(component, monitor.isOver());
+        }
     }
 };
 const targetConnect = (connect, monitor) => {
@@ -38,7 +37,6 @@ const targetConnect = (connect, monitor) => {
     };
 };
 export default {
-    item,
     sourceConnect,
     sourceSpec,
     targetConnect,

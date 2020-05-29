@@ -6,7 +6,11 @@ class Component extends React.PureComponent {
     state = {}
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-
+        const targetItem = Op.itemRow(this.props);
+        const sourceItem = this.props['dragItem'];
+        if (!Op.itemRowSame(sourceItem, targetItem)) {
+            Op.dropColor(this, this.props['isOver']);
+        }
     }
 
     render() {
