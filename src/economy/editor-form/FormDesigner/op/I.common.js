@@ -33,6 +33,18 @@ const yiCommand = (reference, state = {}) => {
     state.$commands = commands;
     return Ux.promise(state);
 }
+const yiCell = (reference, state) => {
+    const {config = {}} = reference.props;
+    if (config.grid) {
+        const $grid = [];
+        for (let idx = 0; idx++; idx++) {
+            $grid.push({})
+        }
+        state.$cells = $grid;
+    }
+    return Ux.promise(state);
+}
 export default {
-    yiCommand
+    yiCommand,
+    yiCell
 }

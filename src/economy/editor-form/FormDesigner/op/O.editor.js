@@ -20,6 +20,7 @@ export default {
     yiGridRow: (reference) => {
         const state = {};
         Cmn.yiCommand(reference, state)
+            .then(processed => Cmn.yiCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
     rxRowDel: (reference) => (rowIndex) => {

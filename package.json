@@ -3,7 +3,7 @@
     "version": "0.1.0",
     "dependencies": {
         "@antv/data-set": "^0.11.4",
-        "@antv/g2": "^4.0.8",
+        "@antv/g2": "^4.0.9",
         "@antv/g6": "3.2.10",
         "@antv/g6-editor": "^1.2.0",
         "@antv/g6-plugins": "^1.0.9",
@@ -16,7 +16,7 @@
         "ant-design-pro": "^2.3.2",
         "antd": "3.26.12",
         "autoprefixer": "9.8.0",
-        "bizcharts": "^4.0.3",
+        "bizcharts": "^4.0.4",
         "braft-convert": "^2.3.0",
         "braft-editor": "^2.3.9",
         "case-sensitive-paths-webpack-plugin": "2.3.0",
