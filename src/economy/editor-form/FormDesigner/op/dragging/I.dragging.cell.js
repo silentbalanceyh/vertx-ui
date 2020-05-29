@@ -12,11 +12,6 @@ const sourceSpec = {
         const item = Cmd.item(props);
         item.source = component;
         return item;
-    },
-    endDrag: (props, monitor) => {
-        const dropResult = monitor.getDropResult();
-        if (dropResult) {
-        }
     }
 };
 const targetSpec = {

@@ -17,9 +17,7 @@ class Component extends React.PureComponent {
         const {connectDropTarget} = this.props;
         const {$hover = false} = this.state;
         return connectDropTarget(
-            <div className={`canvas-row-drop ${$hover ? "canvas-row-drop-hover" : ""}`}>
-
-            </div>
+            <div className={`canvas-row-drop ${$hover ? "canvas-row-drop-hover" : ""}`}/>
         )
     }
 }

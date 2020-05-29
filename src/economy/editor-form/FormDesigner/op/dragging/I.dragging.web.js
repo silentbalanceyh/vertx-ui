@@ -1,28 +1,24 @@
+import Cmd from "./I.common";
+
 const sourceConnect = (connect, monitor) => {
     return {
         isDragging: monitor.isDragging(),
         connectDragSource: connect.dragSource(),
     };
 };
-const _updateState = (pointer = {}) => {
-    if (pointer.state) {
-        const {targetType, targetKey} = pointer.state;
-        if (targetType && targetKey) {
-        }
-    }
-};
 const sourceSpec = {
     beginDrag: (props) => {
         return {};
-    },
-    endDrag: (props, monitor) => {
-        const dropResult = monitor.getDropResult();
-        if (dropResult) {
-        }
     }
 };
 const targetSpec = {
-    drop: (props) => {
+    drop: (props, monitor, component) => {
+        // 关闭覆盖效果
+        Cmd.dropColor(component, false);
+    },
+    /* 浮游在 Target 之上 */
+    hover: (props, monitor, component) => {
+        Cmd.dropColor(component, monitor.isOver());
     }
 };
 const targetConnect = (connect, monitor) => {

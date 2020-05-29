@@ -6,6 +6,7 @@ import Rdr from "../component";
 import Ux from 'ux';
 import {DragSource} from "react-dnd";
 import CellDrop from './UI.Cell.Drop';
+import CellDropWeb from './UI.Cell.Drop.Web';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -27,9 +28,7 @@ class Component extends React.PureComponent {
                         {connectDragSource(
                             <div className={"content"}>
                                 <CellDrop {...this.props} reference={this}/>
-                                <div className={"content-drop"}>
-                                    {config.key}
-                                </div>
+                                <CellDropWeb {...this.props} reference={this}/>
                                 <div className={"t-command"}>
                                     {(() => {
                                         const {$merge} = this.state;
