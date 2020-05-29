@@ -1,9 +1,9 @@
-import dragging from './O.dragging';
+import dragging from './dragging/O.dragging';
 import event from './O.event';
 import yiPage from './O.yi.page';
-import editor from './O.editor';
+import editor from './editor/O.editor';
 
-export default {
+const exported = {
     /* yi 系列方法 */
     yiPage,
 
@@ -16,3 +16,5 @@ export default {
         CellDesigner: "CellDesigner"
     }
 }
+console.info(exported);
+export default exported;

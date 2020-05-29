@@ -1,3 +1,10 @@
+const item = (props) => {
+    const item = {};
+    const {config = {}} = props;
+    item.rowIndex = config.rowIndex;
+    item.key = config.key;
+    return item;
+}
 const sourceConnect = (connect, monitor) => {
     return {
         isDragging: monitor.isDragging(),
@@ -5,13 +12,12 @@ const sourceConnect = (connect, monitor) => {
     };
 };
 const sourceSpec = {
-    beginDrag: (props) => {
-        return {};
-    },
+    /* 返回需要使用的数据结构，item */
+    beginDrag: item,
     endDrag: (props, monitor) => {
         const dropResult = monitor.getDropResult();
         if (dropResult) {
-            console.info(dropResult);
+            console.info("endDrag", props);
         }
     }
 };
@@ -19,7 +25,7 @@ const targetSpec = {
     drop: (props) => {
     },
     hover: (props, monitor, component) => {
-        hoverSwitch(component, () => monitor.isOver());
+
     }
 };
 const targetConnect = (connect, monitor) => {
@@ -27,23 +33,12 @@ const targetConnect = (connect, monitor) => {
         isOver: monitor.isOver(),
         canDrop: monitor.canDrop(),
         dropResult: monitor.getDropResult(),
-        connectDropTarget: connect.dropTarget()
+        connectDropTarget: connect.dropTarget(),
+        dragItem: monitor.getItem(),
     };
 };
-const hoverSwitch = (reference, predicate) => {
-    const {$hover} = reference.state;
-    if (predicate()) {
-        if (!$hover) {
-            reference.setState({$hover: true});
-        }
-    } else {
-        if ($hover) {
-            reference.setState({$hover: false});
-        }
-    }
-}
 export default {
-    hoverSwitch,
+    item,
     sourceConnect,
     sourceSpec,
     targetConnect,

@@ -6,9 +6,7 @@ class Component extends React.PureComponent {
     state = {}
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        /* 离开事件 */
-        const {isOver} = this.props;
-        Op.Row.hoverSwitch(this, () => isOver);
+
     }
 
     render() {

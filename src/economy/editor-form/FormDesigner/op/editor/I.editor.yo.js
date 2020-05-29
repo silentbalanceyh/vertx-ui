@@ -14,9 +14,10 @@ export default {
         // 行对应元数据
         rowConfig = Ux.clone(rowConfig);
         rowConfig.rowIndex = index;
+        rowConfig.key = row.key;
         return {
             config: rowConfig,
-            data: row,
+            data: {},   // 后期要使用
             key: row.key
         };
     },
@@ -30,6 +31,11 @@ export default {
         const $status = {};
         $status.used = spans;
         $status.cells = $cells.length;
-        return {config: cell, key: cell.key, $status};
+        return {
+            config: {
+                ...cell,
+                ...config,
+            }, key: cell.key, $status
+        };
     }
 }

@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
                             {Rdr.renderCmds(this)}
                         </Col>
                     </Row>
-                    <Spin spinning={$forbidden} indicator={null} onClick={Op.onSpin(this)}>
+                    <Spin spinning={$forbidden} indicator={null} onClick={Op.rxSpinOff(this)}>
                         <DndProvider backend={HTML5Backend}>
                             <Row>
                                 <Col span={4} className={"content-left"}>

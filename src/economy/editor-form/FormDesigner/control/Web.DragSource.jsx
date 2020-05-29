@@ -3,6 +3,7 @@ import React from "react";
 import Img from "../images";
 import Op from '../op';
 import {DragSource} from 'react-dnd';
+import Ux from 'ux';
 
 class Component extends React.Component {
     render() {
@@ -12,7 +13,8 @@ class Component extends React.Component {
             <div key={item.key}>
                 <Menu.Item key={item.key}
                            className={"ant-menu-item draggable-item"}
-                           {...Op.sourceFix}>
+                           onItemHover={event => Ux.prevent(event)}
+                           onClick={event => Ux.prevent(event)}>
                     <img alt={item.text} src={image}/>
                     &nbsp;&nbsp;
                     {item.text}

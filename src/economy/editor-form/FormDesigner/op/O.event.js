@@ -1,6 +1,6 @@
 import Ux from 'ux';
 
-const onSpin = (reference) => (event) => {
+const rxSpinOff = (reference) => (event) => {
     Ux.prevent(event);
     reference.setState({
         $forbidden: false,     // 可执行主屏幕操作
@@ -85,7 +85,7 @@ const onCallback = (reference) => ($raft) => {
     });
 }
 export default {
-    onSpin,
+    rxSpinOff,
     raft: (reference) => ({
         onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params))
             .then(onCallback(reference)),
