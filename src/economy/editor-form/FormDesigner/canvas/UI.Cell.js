@@ -1,17 +1,11 @@
 import React from 'react';
-import {Col, Input} from 'antd';
+import {Col} from 'antd';
 import {component} from "../../../_internal";
 import Op from "../op";
 import Rdr from "../component";
 import Ux from 'ux';
 import {DragSource} from "react-dnd";
-
-const configCellCmd = {
-    // 最外层 Css
-    className: "c-command",
-    // Tooltip
-    placement: "top",
-}
+import CellDrop from './UI.Cell.Drop';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -26,33 +20,29 @@ class Component extends React.PureComponent {
         const {config = {}, connectDragSource} = this.props;
         const {span} = config;
         if (span) {
-            return (
-                <Col span={span} className={"canvas-cell"}>
-                    {connectDragSource(
-                        <div className={"content"}>
-                            <div className={"content-tool"}>
-                                <Input placeholder={(() => Ux.fromHoc(this, "label"))()}/>
-                                {Rdr.renderCmds(this, {
-                                    ...config,
-                                    ...configCellCmd,
-                                })}
+            return Ux.xtReady(this, () => {
+                return (
+                    <Col span={span} className={"canvas-cell"}>
+                        {connectDragSource(
+                            <div className={"content"}>
+                                <CellDrop {...this.props} reference={this}/>
+                                <div className={"content-drop"}>
+                                    {config.key}
+                                </div>
+                                <div className={"t-command"}>
+                                    {(() => {
+                                        const {$merge} = this.state;
+                                        if ($merge) {
+                                            return Rdr.renderCmd(this, $merge, config)
+                                        } else return false;
+                                    })()}
+                                </div>
                             </div>
-                            <div className={"content-drop"}>
-                                {config.key}
-                            </div>
-                            <div className={"t-command"}>
-                                {(() => {
-                                    const {$merge} = this.state;
-                                    if ($merge) {
-                                        return Rdr.renderCmd(this, $merge, config)
-                                    } else return false;
-                                })()}
-                            </div>
-                        </div>
-                    )}
-                    {Rdr.renderDrawer(this)}
-                </Col>
-            )
+                        )}
+                        {Rdr.renderDrawer(this)}
+                    </Col>
+                )
+            })
         } else return false;
     }
 }
