@@ -8,17 +8,19 @@ const sourceConnect = (connect, monitor) => {
 };
 const sourceSpec = {
     /* 返回需要使用的数据结构，item */
-    beginDrag: Cmd.itemRow,
-    endDrag: (props, monitor) => {
-        const dropResult = monitor.getDropResult();
-        if (dropResult) {
-            console.info("endDrag", props);
-        }
-    }
+    beginDrag: Cmd.itemRow
 };
 const targetSpec = {
-    drop: (props) => {
+    drop: (props, monitor) => {
+        const sourceItem = monitor.getItem();
+        const targetItem = Cmd.itemRow(props);
+        if (sourceItem && targetItem) {
+            const fromIndex = sourceItem.rowIndex;
+            const toIndex = targetItem.rowIndex;
+            console.info(fromIndex, toIndex);
+        }
     },
+    /* 浮游在 Target 之上 */
     hover: (props, monitor, component) => {
         const sourceItem = monitor.getItem();
         const targetItem = Cmd.itemRow(props);

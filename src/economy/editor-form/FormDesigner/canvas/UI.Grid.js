@@ -21,8 +21,9 @@ class Component extends React.PureComponent {
                 return (
                     <div key={key}>
                         <RowEditor {...rest}
-                                   rxRowAdd={Op.rxRowAdd(this)}/* 添加行 */
-                                   rxRowDel={Op.rxRowDel(this)}/* 删除行 */
+                                   rxRowAdd={Op.rxRowAdd(this)}     /* 添加行 */
+                                   rxRowDel={Op.rxRowDel(this)}     /* 删除行 */
+                                   rxRowWrap={Op.rxRowWrap(this)}   /* 交换行 */
                         />
                         <RowDrop {...rest}/>
                     </div>

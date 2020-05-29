@@ -3,6 +3,9 @@ import CellEvent from './I.editor.event.cell';
 
 export default {
     ...CellEvent,
+    rxRowWrap: (reference) => (fromIndex, toIndex) => {
+
+    },
     rxRowDel: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
         $rows = Ux.clone($rows);
