@@ -29,6 +29,16 @@ export default {
                 state.$extra = processed.$commands;
                 return Ux.promise(state);
             })
+            .then(processed => {
+                const {$inited = {}} = reference.state;
+                const {config = {}} = reference.props;
+                if (!$inited.hasOwnProperty("columns")
+                    && config.hasOwnProperty("grid")) {
+                    $inited.columns = `${config.grid}`;
+                }
+                processed.$inited = $inited;
+                return Ux.promise(processed);
+            })
             .then(processed => Cmn.yiCommand(reference, processed))
             .then(processed => Cmn.yiRowCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
