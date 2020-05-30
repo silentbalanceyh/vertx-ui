@@ -59,10 +59,7 @@ export default (reference) => {
                 <label>{status.window}</label>
                 &nbsp;&nbsp;
                 <Tag color={"red"} style={{fontSize: 14}}>
-                    {(() => {
-                        const columns = form.columns ? form.columns : 3;
-                        return Ux.formatExpr(expr, {columns})
-                    })()}
+                    {Ux.formatExpr(expr, {columns:form.columns})}
                 </Tag>
             </Col>
         </Row>
