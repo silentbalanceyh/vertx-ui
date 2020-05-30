@@ -4,6 +4,11 @@
         "minus-circle,,删除,,如果删除该行，所有配置也将会被清除，确认？",
         "plus-circle,,插入行"
     ],
+    "_extra": [
+        "plus-square,,添加单元格",
+        "right-square,,整行扩展",
+        "left-square,,整行压缩"
+    ],
     "_form": {
         "window": 0.16,
         "columns": 1,

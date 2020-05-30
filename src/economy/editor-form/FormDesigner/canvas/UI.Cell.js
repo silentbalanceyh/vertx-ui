@@ -6,7 +6,7 @@ import Rdr from "../component";
 import Ux from 'ux';
 import {DragSource} from "react-dnd";
 import CellDrop from './UI.Cell.Drop';
-import CellDropWeb from './UI.Cell.Drop.Web';
+import CellDropWeb from './UI.Control.Drop';
 
 @component({
     "i18n.cab": require('../Cab.json'),

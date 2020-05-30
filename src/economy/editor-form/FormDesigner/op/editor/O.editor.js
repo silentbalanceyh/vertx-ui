@@ -24,7 +24,12 @@ export default {
     },
     yiRow: (reference) => {
         const state = {};
-        Cmn.yiCommand(reference, state)
+        Cmn.yiCommand(reference, {}, "extra")
+            .then(processed => {
+                state.$extra = processed.$commands;
+                return Ux.promise(state);
+            })
+            .then(processed => Cmn.yiCommand(reference, processed))
             .then(processed => Cmn.yiRowCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
@@ -35,11 +40,9 @@ export default {
         const state = {};
         Cmn.yiCommand(reference, {}, "merge")
             .then(processed => {
-                if (Ux.isArray(processed.$commands)) {
-                    const $merge = processed.$commands[0];
-                    if ($merge) {
-                        state.$merge = $merge;
-                    }
+                const $merge = processed.$commands[0];
+                if ($merge) {
+                    state.$merge = $merge;
                 }
                 return Ux.promise(state);
             })

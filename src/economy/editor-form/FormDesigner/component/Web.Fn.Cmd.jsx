@@ -84,21 +84,36 @@ const renderCmd = (reference, command, config = {}) => {
         return renderLink(reference, command, config);
     }
 }
+const _renderCmds = (reference, commands = [], config = {}) => {
+    const {className = "designer-tool"} = config;
+    return (
+        <div className={className}>
+            {commands.map((command, index) => {
+                if ("divider" === command) {
+                    return (
+                        <Divider type={"vertical"} key={`divider${index}`}/>
+                    );
+                } else return renderCmd(reference, command, config);
+            })}
+        </div>
+    );
+}
+
+function renderCmds() {
+    if (3 === arguments.length) {
+        const reference = arguments[0];
+        const commands = arguments[1];
+        const config = arguments[2];
+        return _renderCmds(reference, commands, config);
+    } else {
+        const reference = arguments[0];
+        const config = arguments[1];
+        const {$commands = []} = reference.state;
+        return _renderCmds(reference, $commands, config);
+    }
+}
+
 export default {
     renderCmd,
-    renderCmds: (reference, config = {}) => {
-        const {$commands = []} = reference.state;
-        const {className = "designer-tool"} = config;
-        return (
-            <div className={className}>
-                {$commands.map((command, index) => {
-                    if ("divider" === command) {
-                        return (
-                            <Divider type={"vertical"} key={`divider${index}`}/>
-                        );
-                    } else return renderCmd(reference, command, config);
-                })}
-            </div>
-        );
-    }
+    renderCmds,
 }

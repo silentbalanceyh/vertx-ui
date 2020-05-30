@@ -34,7 +34,7 @@ class Component extends React.PureComponent {
         return Ux.xtReady(this, () => {
             const {config = {}, connectDragSource} = this.props;
             const {$drawer} = this.state;
-            const active = $drawer ? "right-active" : "";
+            const active = $drawer ? "middle-active" : "";
             return connectDragSource(
                 <div className={"canvas-row"}>
                     <div className={"left"}>
@@ -43,7 +43,7 @@ class Component extends React.PureComponent {
                             ...configRowCmd,
                         })}
                     </div>
-                    <Row className={`right ${active}`}>
+                    <Row className={`middle ${active}`}>
                         {(() => {
                             const {$cells = []} = this.state;
                             return $cells.map(cell => {
@@ -59,6 +59,15 @@ class Component extends React.PureComponent {
                                     />
                                 )
                             })
+                        })()}
+                        {(() => {
+                            const extraAttrs = Op.yoExtra(this);
+                            const {$extra = []} = this.state;
+                            return (
+                                <div {...extraAttrs}>
+                                    {Rdr.renderCmds(this, $extra, {className: "e-command"})}
+                                </div>
+                            )
                         })()}
                     </Row>
                     {Rdr.renderDrawer(this)}

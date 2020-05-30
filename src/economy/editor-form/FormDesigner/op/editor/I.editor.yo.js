@@ -41,5 +41,15 @@ export default {
                 ...cell,
             }, key: cell.key, $status
         };
+    },
+    yoExtra: (reference) => {
+        const {$cells = []} = reference.state;
+        const spans = $cells.map(cell => cell.span)
+            .reduce((left, right) => left + right, 0);
+        if (24 === spans) {
+            return {style: {display: "none"}};
+        } else {
+            return {style: {display: "inline-block"}};
+        }
     }
 }

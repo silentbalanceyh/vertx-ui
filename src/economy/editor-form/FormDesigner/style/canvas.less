@@ -1,4 +1,5 @@
 @import "./common";
+@import "./canvas.command.less";
 
 .canvas {
     padding-top: 4px;
@@ -32,39 +33,11 @@
             .flex-display;
 
             .v-command {
-                padding-top: 2px;
-
-                .op-link {
-                    background-color: white;
-
-                    padding-top: 2px;
-                    display: inline-block;
-                    text-align: center;
-
-                    &:hover {
-                        border-radius: 3px;
-                    }
-
-                    .ix-box.square(24px);
-
-                    .ix-text.hover-invert(#eb2f95);
-
-                    &:first-child {
-                        .ix-text.hover-invert(#00b9f0)
-                    }
-
-                    &:last-child {
-                        .ix-text.hover-invert(#5dcd52)
-                    }
-
-                    i, svg {
-                        .ix-box.square(18px);
-                    }
-                }
+                .v-command;
             }
         }
 
-        .right {
+        .middle {
             flex: 30;
             flex-wrap: wrap;
             margin: 2px 0;
@@ -78,6 +51,10 @@
 
             &-active {
                 background-color: #B0E2FF;
+            }
+
+            .e-command {
+                .e-command;
             }
         }
     }
@@ -96,32 +73,7 @@
         }
 
         .t-command {
-            .op-link {
-                position: absolute;
-                top: 0;
-                left: -14px;
-
-                padding: 2px 2px 0 2px;
-                border: solid 1px white;
-                display: inline-block;
-                text-align: center;
-
-                background-color: #ECECEC;
-                background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
-                linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
-                linear-gradient(0deg, white 2px, transparent 0),
-                linear-gradient(90deg, white 2px, transparent 0);
-                background-size: 5px 5px;
-
-                &:hover {
-                    border-radius: 3px;
-                    border: solid 1px #8C8C8C;
-                }
-
-                svg {
-                    .ix-box.square(22px);
-                }
-            }
+            .t-command;
         }
 
         .content {
@@ -144,37 +96,7 @@
                 }
 
                 .c-command {
-                    float: right;
-
-                    .op-link[aria-disabled=true] {
-                        color: #d9d9d9;
-
-                        &:hover {
-                            cursor: not-allowed;
-                            border: none;
-                        }
-                    }
-
-                    .op-link {
-                        display: inline-block;
-                        text-align: center;
-
-                        &:hover {
-                            border-radius: 3px;
-                        }
-
-                        .ix-box.square(22px);
-
-                        .ix-text.hover-border(#1874CD);
-
-                        &:first-child {
-                            .ix-text.hover-border(#00b9f0);
-                        }
-
-                        i, svg {
-                            .ix-box.square(18px);
-                        }
-                    }
+                    .c-command;
                 }
             }
 
