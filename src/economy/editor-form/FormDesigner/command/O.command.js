@@ -28,12 +28,20 @@ const showCellDrawer = (reference, item, config = {}) => {
  * 绘图过程中添加行操作
  */
 const rowAdd = (reference, item, config) => {
-    let {rowIndex} = config;
+    const {rowIndex} = config;
     Ux.fn(reference).rxRowAdd(rowIndex);
 }
 const rowDel = (reference, item, config) => {
-    let {rowIndex} = config;
+    const {rowIndex} = config;
     Ux.fn(reference).rxRowDel(rowIndex);
+}
+const rowFill = (reference, item, config) => {
+    const {rowIndex} = config;
+    Ux.fn(reference).rxRowFill(rowIndex);
+}
+const rowCompress = (reference, item, config) => {
+    const {rowIndex} = config;
+    Ux.fn(reference).rxRowCompress(rowIndex);
 }
 const cellMerge = (reference, item, config) => {
     const {cellIndex} = config;
@@ -51,9 +59,8 @@ const cellFill = (reference, item, config) => {
     const {cellIndex} = config;
     Ux.fn(reference).rxCellFill(cellIndex);
 }
-const cellAdd = (reference, item, config) => {
-    const {cellIndex} = config;
-    Op.rxCellAdd(reference)(cellIndex);
+const cellAdd = (reference) => {
+    Op.rxCellAdd(reference)();
 }
 export default {
     layout: showPopover,
@@ -67,10 +74,16 @@ export default {
     "plus-circle": rowAdd,
     // 删除行
     "minus-circle": rowDel,
+    // 扩展行
+    "right-square": rowFill,
+    // 压缩行
+    "left-square": rowCompress,
+
     // 行配置
     setting: showRowDrawer,
     // 单元格配置
     control: showCellDrawer,
+
     // 合并单元格
     "merge-cell": cellMerge,
     // 删除单元格

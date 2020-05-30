@@ -34,5 +34,5 @@ export default {
             key: `row-${Ux.randomString(8)}`
         });
         reference.setState({$rows});
-    },
+    }
 }
