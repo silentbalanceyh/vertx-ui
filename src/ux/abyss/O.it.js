@@ -416,7 +416,27 @@ const itAmb = (input, consumer) => {
         }
     } else return input;
 }
+/**
+ *
+ * ## 标准函数
+ *
+ * 重复执行多次的专用函数
+ *
+ * @param {Number} loop 循环的次数
+ * @param {Function} consumer 每次循环执行的函数
+ * @returns {Array} 返回每一次的返回值
+ */
+const itRepeat = (loop = 0, consumer) => {
+    const rets = [];
+    if (Is.isFunction(consumer)) {
+        for (let idx = 0; idx < loop; idx++) {
+            rets.push(consumer(idx));
+        }
+    }
+    return rets;
+}
 export default {
+    itRepeat,
     itAmb,
     itMatrix,
     itObject,

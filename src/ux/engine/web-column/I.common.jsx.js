@@ -1,19 +1,37 @@
-import {Divider, Icon, Popconfirm} from "antd";
+import {Divider, Popconfirm} from "antd";
 import Abs from "../../abyss";
 import React from "react";
+import Unit from '../web-unit';
 import {Link} from 'react-router-dom';
 import T from "../../unity";
 
 const jsxSpan = (attrs = {}, children) =>
     // 解决 React 无法渲染 Object的 BUG
     (<span {...attrs}>{Abs.isObject(children) ? false : children}</span>);
-const jsxIcon = (attrs = {}, children, icon) => (
-    <span>
-        {icon && icon.icon ? (<Icon type={icon.icon} style={icon.iconStyle}/>) : false}
-        {icon && icon.icon ? (<span>&nbsp;&nbsp;</span>) : false}
-        {jsxSpan(attrs, children)}
-    </span>
-);
+const jsxIcon = (attrs = {}, children, iconData) => {
+    if (iconData) {
+        const {icon, iconStyle = {}} = iconData;
+        const addOn = {};
+        addOn.style = iconStyle;
+        if (iconStyle.color) {
+            addOn['data-color'] = iconStyle.color;
+            addOn['data-size'] = iconStyle.fontSize;
+        }
+        return (
+            <span>
+                {Unit.aiIcon(icon, addOn)}
+                &nbsp;&nbsp;
+                {jsxSpan(attrs, children)}
+            </span>
+        )
+    } else {
+        return (
+            <span>
+                {jsxSpan(attrs, children)}
+            </span>
+        )
+    }
+};
 const queryStored = (reference = {}) => {
     /* query 专用 */
     const {$query} = reference.props;

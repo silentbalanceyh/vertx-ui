@@ -1,0 +1,33 @@
+@import "style/common";
+@import "style/designer";
+@import "style/canvas";
+@import "style/popover";
+@import "style/drawer";
+
+.web-form-designer {
+
+    .content {
+        &-left {
+            padding-right: 6px;
+        }
+
+        &-status {
+            label {
+                font-weight: 900;
+            }
+
+            border-bottom: dashed 1px #Ececec;
+            line-height: 28px;
+
+            .window-default {
+                text-align: right;
+            }
+        }
+    }
+
+    .web-form-designer-popover; // 浮游窗口
+    .web-form-designer-drawer; // 抽屉
+
+    .canvas; // 画布
+    .designer; // 设计器
+}

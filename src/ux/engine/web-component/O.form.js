@@ -113,10 +113,6 @@ const aiForm = (reference, values, config = {}) => {
      * 日志记录
      */
     const {form} = reference.props;
-    const touched = form.isFieldsTouched();
-    if (!touched) {
-        Dev.dgDebug(initials, "初始化表单数据：", "#faad14");
-    }
     // form 专用属性
     const {raft = {}} = reference.state;
     let attrs = Abs.clone(raft.form);
@@ -127,6 +123,12 @@ const aiForm = (reference, values, config = {}) => {
     // form 中的 className
     if (config.className) {
         attrs.className = config.className;
+    }
+
+    const touched = form.isFieldsTouched();
+    if (!touched) {
+        const options = raft.options ? raft.options : {};
+        Dev.dgDebug(initials, "初始化表单数据：" + options.id, "#8B5A00");
     }
     return (
         <Form {...attrs}>

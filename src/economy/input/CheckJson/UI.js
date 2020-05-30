@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from 'ux';
-import Op from './op';
+import Op from './Op';
 import {Checkbox, Input} from 'antd';
 
 class Component extends React.PureComponent {
@@ -10,7 +10,7 @@ class Component extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.yuPage(this, {state: prevState, props: prevProps});
+        Ux.xtRevert(this, {state: prevState, props: prevProps}, {});
     }
 
     render() {

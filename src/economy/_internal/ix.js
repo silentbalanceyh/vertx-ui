@@ -1,4 +1,4 @@
-import Control from './ix.fn.inherit';
+import Control from './ix.constant';
 
 export default {
     Limit: Control,

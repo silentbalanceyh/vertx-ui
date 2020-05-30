@@ -1,0 +1,132 @@
+@import "./common";
+@import "./canvas.command.less";
+
+.canvas {
+    padding-top: 4px;
+
+    &-row {
+        &-drop {
+            margin-bottom: 4px;
+            background-color: #e9e9e9;
+            min-height: 8px;
+
+            &-hover {
+                background-color: #00b9f0;
+                background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                linear-gradient(0deg, white 2px, transparent 0),
+                linear-gradient(90deg, white 2px, transparent 0);
+                background-size: 5px 5px;
+                min-height: 32px;
+            }
+        }
+
+        &:hover {
+            cursor: move;
+        }
+
+        .flex-display;
+
+        .left {
+            flex: 1;
+            flex-direction: column;
+            .flex-display;
+
+            .v-command {
+                .v-command;
+            }
+        }
+
+        .middle {
+            flex: 30;
+            flex-wrap: wrap;
+            margin: 2px 0;
+            background-color: #ECECEC;
+            min-height: 72px;
+            background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+            linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+            linear-gradient(0deg, white 2px, transparent 0),
+            linear-gradient(90deg, white 2px, transparent 0);
+            background-size: 5px 5px;
+
+            &-active {
+                background-color: #B0E2FF;
+            }
+
+            .e-command {
+                .e-command;
+            }
+        }
+    }
+
+    &-cell {
+        border: solid 1px white;
+
+        &-hover {
+            border: solid 1px #00b9f0;
+        }
+
+        &:first-child {
+            .t-command {
+                display: none;
+            }
+        }
+
+        .t-command {
+            .t-command;
+        }
+
+        .content {
+            background-color: white;
+            margin: 4px;
+            min-height: 63px;
+
+            &-tool {
+                padding-left: 5%;
+                padding-right: 5%;
+
+                .ant-input {
+                    padding: 0 !important;
+                    height: 21px !important;
+                    line-height: 21px !important;
+                    width: 50%;
+                    border-radius: 0;
+                    border: none;
+                    border-bottom: solid 1px #d9d9d9;
+                }
+
+                .c-command {
+                    .c-command;
+                }
+            }
+
+            &-drop {
+                margin: 3px 3%;
+                border-radius: 5px;
+                border-left: solid 3px #ececec;
+                min-height: 36px;
+
+                &-hover {
+                    background-color: #00b9f0;
+                    background-image: linear-gradient(0deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                    linear-gradient(90deg, hsla(0, 0%, 100%, .3) 1px, transparent 0),
+                    linear-gradient(0deg, white 2px, transparent 0),
+                    linear-gradient(90deg, white 2px, transparent 0);
+                    background-size: 4px 4px;
+                }
+            }
+        }
+
+        &:first-child {
+            .content {
+                margin-left: 8px;
+            }
+        }
+
+        &:last-child {
+            .content {
+                margin-right: 8px;
+            }
+        }
+    }
+}

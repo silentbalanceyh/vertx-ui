@@ -147,8 +147,9 @@ const writeReadOnly = (jsx = {}, reference) => {
  * @memberOf module:_ant
  * @param {Object} formValues Form中初始的 linker 相关数据值。
  * @param {Object} depend 反向依赖专用配置。
+ * @param {any} value 输入的值。
  */
-const writeImpact = (formValues = {}, depend = {}) => {
+const writeImpact = (formValues = {}, depend = {}, value) => {
     const {impact = {}} = depend;
     if (Abs.isObject(impact) && !Abs.isEmpty(impact)) {
         /*

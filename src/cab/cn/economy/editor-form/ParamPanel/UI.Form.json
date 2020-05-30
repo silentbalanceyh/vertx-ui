@@ -1,0 +1,95 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 4,
+        "ui": [
+            [
+                "title=添加参数详细信息"
+            ],
+            [
+                {
+                    "metadata": "name,参数名称,12,,,placeholder=（输入您要设置的参数名）",
+                    "optionConfig.rules": [
+                        "required,请填写参数名称，参数名称不可为空"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,参数类型,24,,aiRadio",
+                    "optionItem.className": "web-radio-two",
+                    "optionJsx.config.items": [
+                        "BOOL,逻辑值",
+                        "FIX,固定值",
+                        "ENUM,枚举值",
+                        "UNIQUE,字典值",
+                        "USER,当前登录用户",
+                        "FORM,表单值",
+                        "ROUTE,路由值",
+                        "PROP,属性值（React组件）",
+                        "STATE,状态值（React组件）"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "value,参数值,24",
+                    "optionJsx.config": {
+                        "empty": "（请先选择参数类型，再设置参数值！）"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveParam,追加参数,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    },
+    "_expression": {
+        "FIX": {
+            "placeholder": "（您可以直接输入固定值）"
+        },
+        "STATE": {
+            "placeholder": "（您可以输入React状态字段名）"
+        },
+        "ROUTE": {
+            "placeholder": "（您可以输入浏览器查询路由参数）"
+        },
+        "PROP": {
+            "placeholder": "（您可以输入React属性字段名）"
+        },
+        "USER": {
+            "placeholder": "（您可以输入登录用户的某个属性名，SessionStorage中存储）"
+        },
+        "FORM": {
+            "placeholder": "（您可以输入表单字段名）"
+        },
+        "ENUM": {
+            "config": {
+                "limit": 8
+            },
+            "styleInput": {
+                "width": "23%",
+                "marginRight": "1%"
+            }
+        },
+        "DATUM": {
+            "config": {
+                "unique": true
+            }
+        },
+        "BOOL": {
+            "config": {
+                "items": [
+                    "true,逻辑真值（true）",
+                    "false,逻辑假值（false）"
+                ]
+            }
+        }
+    }
+}

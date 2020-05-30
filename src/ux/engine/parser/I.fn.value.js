@@ -1,5 +1,6 @@
 import Pr from './I.parser';
 import U from 'underscore';
+import Ele from '../../element';
 
 /**
  * ## 引擎函数
@@ -55,10 +56,7 @@ export default (valueOrExpr, reference) => {
         /*
          * 解析最终结果
          */
-        const firstIndex = valueOrExpr.indexOf(":");
-        const parsed = {};
-        parsed.type = valueOrExpr.substring(0, firstIndex);
-        parsed.expression = valueOrExpr.substring(firstIndex + 1, valueOrExpr.length);
+        const parsed = Ele.valueParse(valueOrExpr);
         /*
          * 去掉 parser 流程，直接执行，以后都不采用 parser 流程处理
          */

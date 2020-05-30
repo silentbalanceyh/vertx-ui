@@ -21,25 +21,27 @@ export default (rest = {}, fnChange, jsx = {}) => {
              * 使用二义性函数处理值
              */
             const value = Ele.ambEvent(event, {prevent});
-            /*
-             * linker 专用处理，配置项
-             * optionJsx.config.linker
-             * optionJsx.config.linkerField
-             */
-            const formValues = {};
-            Ut.writeLinker(formValues, config,
-                (field) => Ele.elementUnique(options, field, value));
-            /*
-             * depend 专用处理
-             * optionJsx.depend.impact
-             */
-            Ut.writeImpact(formValues, depend, value);
-            /*
-             * 不为空就设值
-             */
-            if (!Abs.isEmpty(formValues)) {
-                Dev.dgDebug(formValues, "[ Ux ] depend.impact / linker 结果！");
-                Ut.formHits(reference, formValues);
+            if (config.linker) {
+                /*
+                 * linker 专用处理，配置项
+                 * optionJsx.config.linker
+                 * optionJsx.config.linkerField
+                 */
+                const formValues = {};
+                Ut.writeLinker(formValues, config,
+                    (field) => Ele.elementUnique(options, field, value));
+                /*
+                 * depend 专用处理
+                 * optionJsx.depend.impact
+                 */
+                Ut.writeImpact(formValues, depend, value);
+                /*
+                 * 不为空就设值
+                 */
+                if (!Abs.isEmpty(formValues)) {
+                    Dev.dgDebug(formValues, "[ Ux ] depend.impact / linker 结果！");
+                    Ut.formHits(reference, formValues);
+                }
             }
             /*
              * 最后调用 fnChange

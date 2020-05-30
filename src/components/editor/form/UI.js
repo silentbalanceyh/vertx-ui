@@ -15,26 +15,30 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        return Ex.ylCard(this, () => {
-            const {$data = {}, $model = {}} = this.state;
-            return (
-                <FormDesigner config={$data}
-                              rxType={input => {
-                                  Ux.dgDebug({
-                                      input,
-                                  }, "数据源参数：", "red")
-                                  const data = Mock.Editor.dict[input.type];
-                                  return Ux.promise(data ? data : [])
-                              }}
-                              rxApi={input => {
-                                  Ux.dgDebug({
-                                      input,
-                                  }, "搜索参数：", "red")
-                                  const response = Mock.Editor.assist;
-                                  return Ux.promise(response.list)
-                              }} $models={$model}/>
-            );
-        }, Ex.parserOfColor("PxFormEditor").page())
+        return (
+            <div className={"page-form-designer"}>
+                {Ex.ylCard(this, () => {
+                    const {$data = {}, $model = {}} = this.state;
+                    return (
+                        <FormDesigner config={$data}
+                                      rxType={input => {
+                                          Ux.dgDebug({
+                                              input,
+                                          }, "数据源参数：", "red")
+                                          const data = Mock.Editor.dict[input.type];
+                                          return Ux.promise(data ? data : [])
+                                      }}
+                                      rxApi={input => {
+                                          Ux.dgDebug({
+                                              input,
+                                          }, "搜索参数：", "red")
+                                          const response = Mock.Editor.assist;
+                                          return Ux.promise(response.list)
+                                      }} $models={$model}/>
+                    );
+                }, Ex.parserOfColor("PxFormEditor").page())}
+            </div>
+        )
     }
 }
 

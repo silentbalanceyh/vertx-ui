@@ -1,0 +1,42 @@
+@import "../../../../global";
+
+.web-form-designer-drawer {
+    .ant-drawer-body {
+        padding: 0 16px 16px 0;
+
+        #content-labels {
+            width: 20px !important;
+        }
+
+        .setting-form {
+
+            .ant-col {
+                padding-left: 8px;
+            }
+        }
+    }
+
+    .ant-radio-wrapper {
+        width: 80%;
+        line-height: 36px;
+        height: 36px;
+    }
+
+    .ant-drawer-content-wrapper {
+        width: 30% !important;
+    }
+
+    .ant-drawer-close {
+        .ix-box.square(36px);
+        color: #0d152a;
+        background-color: #fafafa;
+        border: solid 1px #d8d8d8;
+        border-radius: 2px;
+
+        &:hover {
+            background-color: @button-spec;
+            border: solid 1px @button-spec;
+            color: white;
+        }
+    }
+}
