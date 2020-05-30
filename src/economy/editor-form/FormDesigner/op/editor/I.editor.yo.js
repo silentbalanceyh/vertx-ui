@@ -1,4 +1,5 @@
 import Ux from "ux";
+import Cmn from '../I.common';
 
 export default {
 
@@ -27,8 +28,7 @@ export default {
          * 占用行计算
          */
         const {$cells = []} = reference.state;
-        const spans = $cells.map(cell => cell.span)
-            .reduce((left, right) => left + right, 0);
+        const spans = Cmn.calcCell($cells);
         const $status = {};
         $status.used = spans;
         $status.cells = $cells.length;
@@ -44,12 +44,11 @@ export default {
     },
     yoExtra: (reference) => {
         const {$cells = []} = reference.state;
-        const spans = $cells.map(cell => cell.span)
-            .reduce((left, right) => left + right, 0);
+        const spans = Cmn.calcCell($cells);
         if (24 === spans) {
-            return {style: {display: "none"}};
+            return {commandStyle: {display: "none"}, className: "e-command"};
         } else {
-            return {style: {display: "inline-block"}};
+            return {commandStyle: {display: "inline-block"}, className: "e-command"};
         }
     }
 }

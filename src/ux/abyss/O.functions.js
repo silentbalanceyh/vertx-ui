@@ -34,7 +34,10 @@ export default (reference) => generator(reference, [
     /* Designer 系列 */
     "rxRowAdd",     // 添加行
     "rxRowDel",     // 删除行
+    "rxRowFill",    // 行扩展
+    "rxRowCompress",// 行压缩
     "rxRowWrap",    // 交换行
+    "rxCellAdd",    // 添加单元格
     "rxCellMerge",  // 合并单元格
     "rxCellDel",    // 删除单元格
     "rxCellSplit",  // 拆分单元格

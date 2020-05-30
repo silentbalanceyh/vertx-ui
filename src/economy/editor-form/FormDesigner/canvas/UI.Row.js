@@ -63,11 +63,7 @@ class Component extends React.PureComponent {
                         {(() => {
                             const extraAttrs = Op.yoExtra(this);
                             const {$extra = []} = this.state;
-                            return (
-                                <div {...extraAttrs}>
-                                    {Rdr.renderCmds(this, $extra, {className: "e-command"})}
-                                </div>
-                            )
+                            return Rdr.renderCmds(this, $extra, extraAttrs)
                         })()}
                     </Row>
                     {Rdr.renderDrawer(this)}

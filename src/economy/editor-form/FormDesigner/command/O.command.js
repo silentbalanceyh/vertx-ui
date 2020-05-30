@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import Op from '../op';
 
 const showPopover = (reference, item) => {
     // 屏蔽主操作
@@ -35,20 +36,24 @@ const rowDel = (reference, item, config) => {
     Ux.fn(reference).rxRowDel(rowIndex);
 }
 const cellMerge = (reference, item, config) => {
-    let {cellIndex} = config;
+    const {cellIndex} = config;
     Ux.fn(reference).rxCellMerge(cellIndex);
 }
 const cellDel = (reference, item, config) => {
-    let {cellIndex} = config;
+    const {cellIndex} = config;
     Ux.fn(reference).rxCellDel(cellIndex);
 }
 const cellSplit = (reference, item, config) => {
-    let {cellIndex} = config;
+    const {cellIndex} = config;
     Ux.fn(reference).rxCellSplit(cellIndex);
 }
 const cellFill = (reference, item, config) => {
-    let {cellIndex} = config;
+    const {cellIndex} = config;
     Ux.fn(reference).rxCellFill(cellIndex);
+}
+const cellAdd = (reference, item, config) => {
+    const {cellIndex} = config;
+    Op.rxCellAdd(reference)(cellIndex);
 }
 export default {
     layout: showPopover,
@@ -74,4 +79,6 @@ export default {
     scissor: cellSplit,
     // 填充单元格
     fullscreen: cellFill,
+    // 添加单元格
+    "plus-square": cellAdd,
 }

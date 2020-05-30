@@ -1,4 +1,5 @@
 import Ux from "ux";
+import Cmn from '../I.common'
 import rxCellWrap from './I.editor.event.cell.wrap';
 
 export default {
@@ -39,8 +40,7 @@ export default {
     rxCellWrap,
     rxCellFill: (reference) => (cellIndex) => {
         let {$cells = []} = reference.state;
-        const spans = $cells.map(cell => cell.span)
-            .reduce((left, right) => left + right, 0);
+        const spans = Cmn.calcCell($cells);
         const added = 24 - spans;
         if (0 < added) {
             $cells = Ux.clone($cells);
@@ -68,4 +68,7 @@ export default {
         added.forEach((item, index) => item.cellIndex = index);
         reference.setState({$cells: added});
     },
+    rxCellAdd: (reference) => (cellIndex) => {
+
+    }
 }

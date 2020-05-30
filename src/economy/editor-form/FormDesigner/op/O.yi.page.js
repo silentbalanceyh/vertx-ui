@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import yiData from './O.yi.data';
-import Cmn from './I.common.yi';
+import Cmn from './I.common';
 
 const yiPalette = (reference, state) => {
     /* 执行单处理 */

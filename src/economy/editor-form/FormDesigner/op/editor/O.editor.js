@@ -1,4 +1,4 @@
-import Cmn from "../I.common.yi";
+import Cmn from "../I.common";
 import Ux from 'ux';
 import event from './I.editor.event';
 import yo from './I.editor.yo';

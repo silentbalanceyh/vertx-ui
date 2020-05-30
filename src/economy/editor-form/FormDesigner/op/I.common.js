@@ -34,6 +34,8 @@ const yiCommand = (reference, state = {}, key = "commands") => {
     return Ux.promise(state);
 }
 export default {
+    calcCell: ($cells = []) => $cells.map(cell => cell.span)
+        .reduce((left, right) => left + right, 0),
     yiCommand,
     yiRowCell: (reference, state) => {
         const {config = {}} = reference.props;

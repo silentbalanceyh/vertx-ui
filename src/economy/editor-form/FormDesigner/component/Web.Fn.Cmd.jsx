@@ -85,9 +85,9 @@ const renderCmd = (reference, command, config = {}) => {
     }
 }
 const _renderCmds = (reference, commands = [], config = {}) => {
-    const {className = "designer-tool"} = config;
+    const {className = "designer-tool", commandStyle = {}} = config;
     return (
-        <div className={className}>
+        <div className={className} style={commandStyle}>
             {commands.map((command, index) => {
                 if ("divider" === command) {
                     return (
