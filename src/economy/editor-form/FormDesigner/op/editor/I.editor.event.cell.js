@@ -40,7 +40,7 @@ export default {
     rxCellWrap,
     rxCellFill: (reference) => (cellIndex) => {
         let {$cells = []} = reference.state;
-        const spans = Cmn.calcCell($cells);
+        const spans = Cmn.cellSpans($cells);
         const added = 24 - spans;
         if (0 < added) {
             $cells = Ux.clone($cells);
@@ -68,7 +68,14 @@ export default {
         added.forEach((item, index) => item.cellIndex = index);
         reference.setState({$cells: added});
     },
-    rxCellAdd: (reference) => (cellIndex) => {
-
+    /* 注意这里的 reference 是行引用 */
+    rxCellAdd: (reference) => () => {
+        const cell = Cmn.cellNew(reference);
+        /* 直接添加一个新的 */
+        let {$cells = []} = reference.state;
+        $cells = Ux.clone($cells);
+        // 行操作，直接追加
+        $cells.push(cell);
+        reference.setState({$cells});
     }
 }
