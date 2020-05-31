@@ -37,11 +37,11 @@ const rowDel = (reference, item, config) => {
 }
 const rowFill = (reference, item, config) => {
     const {rowIndex} = config;
-    Ux.fn(reference).rxRowFill(rowIndex);
+    Op.rxRowFill(reference)(rowIndex);
 }
 const rowCompress = (reference, item, config) => {
     const {rowIndex} = config;
-    Ux.fn(reference).rxRowCompress(rowIndex);
+    Op.rxRowCompress(reference)(rowIndex);
 }
 const cellMerge = (reference, item, config) => {
     const {cellIndex} = config;

@@ -77,5 +77,5 @@ export default {
         // 行操作，直接追加
         $cells.push(cell);
         reference.setState({$cells});
-    }
+    },
 }
