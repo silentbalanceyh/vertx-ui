@@ -1,12 +1,28 @@
 import Ux from 'ux';
 
+const mountTitle = (reference, item = {}) => {
+    const raft = Ux.fromPath(reference, "message", "raft");
+    item.title = raft.title;
+}
+
+const mountLabel = (reference, item = {}) => {
+    const raft = Ux.fromPath(reference, "message", "raft");
+    item.optionItem = {label: raft.label};
+}
+
+const toInput = (props, component) => {
+    const item = {};
+    mountLabel(component, item);
+    return item;
+}
+
 const executor = {
     "aiTitle": (props, component) => {
-        const raft = Ux.fromPath(component, "message", "raft");
         const init = {};
-        init.title = raft.title;
+        mountTitle(component, init);
         return init;
-    }
+    },
+    "aiInput": toInput,
 }
 export default (reference, type) => {
     const fnInit = executor[type];

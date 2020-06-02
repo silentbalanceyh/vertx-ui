@@ -10,10 +10,23 @@ export default (reference) => (params = {}) => {
     const normalized = Ux.clone(config);
     // 执行 configField 配置 raft 标准化处理
     const {$raft} = reference.props;
-    const combine = Ux.configField($raft, raft);
+    const combine = Ux.configField($raft, raft, {
+        ...config,
+        length: (() => {
+            // 修正长度处理
+            const {data = []} = reference.props;
+            const $data = data.filter(item => item.key === config.key);
+            if (0 < $data.length) {
+                return data.length;
+            } else {
+                return data.length + 1;
+            }
+        })()
+    });
 
-    normalized.raft = raft;
+    normalized.raft = combine;
     normalized.render = type;
+
     // 更新单元格渲染配置（核心配置）
     const {data = []} = reference.props;
     const $data = Dsl.getArray(data);

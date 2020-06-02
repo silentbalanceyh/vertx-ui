@@ -2,6 +2,37 @@ import React from "react";
 import {DropTarget} from "react-dnd";
 import Op from "../op";
 import Ux from 'ux';
+import {LoadingAlert} from 'web';
+import {Form} from 'antd';
+
+const renderJsx = (reference, type, cell = {}) => {
+    // 标题行
+    if ("aiTitle" === type) {
+        const {title, config = {}, ...cellRest} = cell;
+        if (!cellRest.key) cellRest.key = Ux.randomUUID();
+        // 第二种格式
+        if (config.description) {
+            return (
+                <LoadingAlert $alert={config}/>
+            )
+        } else {
+            cellRest.className = `ux-title ux-title-pure`;
+            return (
+                <div className={cellRest.className}>
+                    {title}
+                </div>
+            )
+        }
+    } else {
+        const {optionItem = {}, optionJsx = {}} = cell;
+        const fnRender = Ux[type];
+        return (
+            <Form.Item {...optionItem}>
+                {fnRender(reference, optionJsx)}
+            </Form.Item>
+        );
+    }
+}
 
 class Component extends React.PureComponent {
     state = {}
@@ -26,7 +57,7 @@ class Component extends React.PureComponent {
                         const fnRender = Ux[render];
                         if (Ux.isFunction(fnRender)) {
                             const {raft = {}} = data;
-                            return fnRender(this, raft);
+                            return renderJsx(this, render, raft);
                         } else {
                             return (
                                 <div className={"drop-error"}>
