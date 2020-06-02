@@ -1,4 +1,4 @@
-import Cmn from "../I.common";
+import Cmn from "../library";
 import Ux from 'ux';
 import event from './I.editor.event';
 import yo from './I.editor.yo';
@@ -28,6 +28,17 @@ export default {
             .then(processed => {
                 state.$extra = processed.$commands;
                 return Ux.promise(state);
+            })
+            .then(processed => {
+                const {$inited = {}} = reference.state;
+                const {config = {}} = reference.props;
+                if (!$inited.hasOwnProperty("columns")
+                    && config.hasOwnProperty("grid")) {
+                    $inited.columns = `${config.grid}`;
+                }
+                $inited.type = "WEB";
+                processed.$inited = $inited;
+                return Ux.promise(processed);
             })
             .then(processed => Cmn.yiCommand(reference, processed))
             .then(processed => Cmn.yiRowCell(reference, processed))

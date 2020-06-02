@@ -1,5 +1,5 @@
 import Ux from "ux";
-import Cmn from '../I.common';
+import Cmn from '../library';
 
 export default {
 
@@ -28,7 +28,7 @@ export default {
          * 占用行计算
          */
         const {$cells = []} = reference.state;
-        const spans = Cmn.calcCell($cells);
+        const spans = Cmn.cellSpans($cells);
         const $status = {};
         $status.used = spans;
         $status.cells = $cells.length;
@@ -44,7 +44,7 @@ export default {
     },
     yoExtra: (reference) => {
         const {$cells = []} = reference.state;
-        const spans = Cmn.calcCell($cells);
+        const spans = Cmn.cellSpans($cells);
         if (24 === spans) {
             return {commandStyle: {display: "none"}, className: "e-command"};
         } else {

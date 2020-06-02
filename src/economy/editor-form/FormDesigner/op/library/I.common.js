@@ -1,4 +1,6 @@
 import Ux from "ux";
+import CmnCell from './I.common.cell';
+import CmnRow from './I.common.row';
 
 const yiCommand = (reference, state = {}, key = "commands") => {
     const commandArr = Ux.fromHoc(reference, key);
@@ -33,27 +35,15 @@ const yiCommand = (reference, state = {}, key = "commands") => {
     state.$commands = commands;
     return Ux.promise(state);
 }
+
 export default {
-    calcCell: ($cells = []) => $cells.map(cell => cell.span)
-        .reduce((left, right) => left + right, 0),
+    ...CmnCell,
+    ...CmnRow,
     yiCommand,
     yiRowCell: (reference, state) => {
-        const {config = {}} = reference.props;
-        if (config.grid) {
-            const $grid = [];
-            const span = 24 / config.grid;
-            Ux.itRepeat(config.grid, (idx) => {
-                // 提供一个默认的 key 格式
-                const key = `cell-${Ux.randomString(8)}`;
-                $grid.push({
-                    key,                        // 默认的 key
-                    span,                       // 默认宽度
-                    cellIndex: idx,             // 列索引
-                    rowIndex: config.rowIndex,  // 行索引
-                })
-            })
-            state.$cells = $grid;
-        }
+        const $cells = [];
+        $cells.push(CmnCell.cellNew(reference));
+        state.$cells = $cells;
         return Ux.promise(state);
     }
 }

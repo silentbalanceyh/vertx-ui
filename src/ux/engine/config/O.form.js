@@ -298,6 +298,7 @@ const configForm = (form, addOn = {}) => {
                     throw new Error("[ Ux ] 容器模式没有生成正确的 render ")
                 }
             } else {
+                column.__render = column.render;    // 拷贝原始值
                 column.render = Raft.raftRender(cell, Abs.clone(params));
             }
             /*

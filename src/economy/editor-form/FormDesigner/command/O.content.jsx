@@ -59,8 +59,11 @@ export default {
     /* 行操作 */
     setting: (reference) => {
         const {config = {}} = reference.props;
+        const {$inited} = reference.state;
         return (
-            <UiSettingRow reference={reference} config={config}/>
+            <UiSettingRow reference={reference}
+                          $inited={$inited}
+                          config={config}/>
         )
     }
 }
