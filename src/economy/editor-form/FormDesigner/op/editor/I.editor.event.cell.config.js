@@ -8,6 +8,10 @@ export default (reference) => (params = {}) => {
         raft = {}
     } = params;
     const normalized = Ux.clone(config);
+    // 执行 configField 配置 raft 标准化处理
+    const {$raft} = reference.props;
+    const combine = Ux.configField($raft, raft);
+
     normalized.raft = raft;
     normalized.render = type;
     // 更新单元格渲染配置（核心配置）

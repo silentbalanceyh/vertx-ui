@@ -20,6 +20,10 @@
     },
     "_message": {
         "empty": "等待……",
-        "error": "渲染控件无法找到，类型:render。"
+        "error": "渲染控件无法找到，类型:render。",
+        "raft": {
+            "title": "<标题>",
+            "label": "<标签文字>"
+        }
     }
 }

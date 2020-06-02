@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Cmd from "../library";
-import forbidden from './I.drop.forbidden';
+import fnForbidden from './I.drop.forbidden';
+import fnRaft from './I.drop.raft'
 
 const sourceConnect = (connect, monitor) => {
     return {
@@ -20,14 +21,14 @@ const targetSpec = {
         Cmd.dropColor(component, false);
         // 判断是否可以放入
         const {type} = monitor.getItem();
-        forbidden(component, type, () => {
+        fnForbidden(component, type, () => {
             const ref = Ux.onReference(component, 1);
             const {config = {}} = props;
             // 特殊的单元格参数信息
             const rowData = {};
             rowData.type = type;
             rowData.config = Ux.clone(config);
-            rowData.raft = {};
+            rowData.raft = fnRaft(component, type);
             Ux.fn(ref).rxCellConfig(rowData);
         })
     },

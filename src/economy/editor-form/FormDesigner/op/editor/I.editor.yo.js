@@ -10,11 +10,13 @@ export default {
         const {data = {}} = reference.props;
         rowConfig.span = 24 / data.columns;     // 计算列宽度
         rowConfig.columns = data.columns;          // 网格数据
+        // 表单配置传入
         return {
             reference,          /* 顶层引用 */
             config: rowConfig,
             data: row.data,     // 后期要使用
-            key: row.key
+            key: row.key,
+            $raft: data,        // 表单配置
         };
     },
     yoCell: (reference, cell, config = {}) => {
