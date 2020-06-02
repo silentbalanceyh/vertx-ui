@@ -17,5 +17,9 @@ export default {
             const max = Op.cellSpanMax(data);
             return (6 >= max);
         }
+    },
+    "right-square": (reference, item, config = {}) => {
+        const {data = []} = reference.props;
+        return 0 === data.length;
     }
 }

@@ -7,9 +7,12 @@ export default (reference, state = {}) => {
     const $config = Ux.clone(config);
     {
         // 默认3列给定值
-        if ($config.form && !$config.form.hasOwnProperty('columns')) {
-            $config.form.columns = 3;
+        if ($config.form) {
+            if (!$config.form.hasOwnProperty('columns')) {
+                $config.form.columns = 3;
+            }
         }
+        // 默认 window 处理
     }
     state.raft = $config;
     reference.setState(state);

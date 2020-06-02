@@ -36,6 +36,10 @@ const configField = (raft, cell = {}, config = {}) => {
         }
 
         const calculated = Raft.raftLayout(raft, {form: raft, addOn})
+        /* 修正计算宽度 */
+        if (config.span) {
+            calculated.span = config.span;
+        }
         /* 构造专用参数 */
         const params = {
             cell: $cell, index: config.cellIndex,
@@ -43,7 +47,7 @@ const configField = (raft, cell = {}, config = {}) => {
             row: {length: config.length, index: config.rowIndex},
             addOn,
         }
-        $cell = Raft.raftColumn({form: raft}, Abs.clone(params));
+        $cell = Raft.raftColumn(raft, Abs.clone(params));
     }
     {
         /* 特殊操作 */

@@ -24,6 +24,7 @@ const renderJsx = (reference, type, cell = {}) => {
             )
         }
     } else {
+        console.info(cell);
         const {optionItem = {}, optionJsx = {}} = cell;
         const fnRender = Ux[type];
         return (

@@ -23,7 +23,7 @@ export default {
         /*
          * 占用行计算
          */
-        const {data = [], rxCellWrap} = reference.props;
+        const {data = []} = reference.props;
         const spans = Cmn.cellSpans(data);
         const $status = {};
         $status.used = spans;
@@ -31,7 +31,6 @@ export default {
         /* 单元格交换函数 */
         const {raft = {}, render, ...rest} = cell;
         return {
-            rxCellWrap, /* 继承的单元格交换函数 */
             config: {
                 rowKey: config.key,
                 ...config,
