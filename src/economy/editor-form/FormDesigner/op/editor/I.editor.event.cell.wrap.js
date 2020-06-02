@@ -4,6 +4,7 @@ import Cmn from "../library";
 const toSource = (fromItem, toItem) => {
     const sourceItem = Ux.clone(toItem);
     sourceItem.rowIndex = fromItem.rowIndex;
+    sourceItem.rowKey = fromItem.rowKey;
     sourceItem.cellIndex = fromItem.cellIndex;
     sourceItem.span = fromItem.span;
     return sourceItem;
@@ -11,9 +12,24 @@ const toSource = (fromItem, toItem) => {
 const toTarget = (fromItem, toItem) => {
     const targetItem = Ux.clone(fromItem);
     targetItem.rowIndex = toItem.rowIndex;
+    targetItem.rowKey = toItem.rowKey;
     targetItem.cellIndex = toItem.cellIndex;
     targetItem.span = toItem.span;
     return targetItem;
+}
+
+const toRow = (cells = []) => {
+    const rowData = {};
+    const keys = new Set();
+    cells.filter(cell => !!cell.rowKey).forEach(cell => keys.add(cell.rowKey));
+    const $rowKeys = Array.from(keys);
+    if (1 === $rowKeys.length) {
+        rowData.key = $rowKeys[0];
+        rowData.data = cells;
+        return rowData;
+    } else {
+        throw new Error("列索引出错，请检查！")
+    }
 }
 
 export default (targetRef) => (fromItem, toItem) => {
@@ -24,9 +40,9 @@ export default (targetRef) => (fromItem, toItem) => {
     * 2. 读取目标 $rows
     * */
     if (sourceRef && targetRef) {
-        let sourceCells = sourceRef.state.$cells;
+        let sourceCells = sourceRef.props.data;
         sourceCells = Ux.clone(sourceCells);
-        let targetCells = targetRef.state.$cells;
+        let targetCells = targetRef.props.data;
         targetCells = Ux.clone(targetCells);
         /*
          * 源
@@ -46,8 +62,18 @@ export default (targetRef) => (fromItem, toItem) => {
              */
             const targetItem = toTarget(fromItem, toItem);
             targetCells[targetItem.cellIndex] = targetItem;
-            sourceRef.setState({$cells: sourceCells});
-            Cmn.rowRefresh(targetRef, targetCells);
+            /*
+             * {
+             *      config: {
+             *          key: "xxx"
+             *      },
+             *      data: []
+             * }
+             */
+            const processed = [];
+            processed.push(toRow(sourceCells));
+            processed.push(toRow(targetCells));
+            Ux.fn(sourceRef).rxRowConfig(processed);
         }
     }
 }

@@ -24,21 +24,18 @@ export default {
         }
         reference.setState({$rows});
     },
-    rxRowConfig: (reference) => (rowData = {}) => {
-        const {$rows = []} = reference.state;
-        const {config = {}, data = []} = rowData;
-        const $updated = [];
-        $rows.forEach(row => {
-            if (config.key === row.key) {
-                const rowItem = {};
-                rowItem.key = row.key;
-                rowItem.data = data;
-                $updated.push(rowItem);
-            } else {
-                $updated.push(Ux.clone(row));
-            }
-        });
-        reference.setState({$rows: $updated});
+    rxRowConfig: (reference) => (rows = []) => {
+        let {$rows = []} = reference.state;
+        /*
+         * 同构
+         * {
+         *      "key": "xxx",
+         *      "data": []
+         * }
+         */
+        $rows = Ux.clone($rows);
+        $rows = Ux.elementJoin($rows, rows);
+        reference.setState({$rows: $rows});
     },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
@@ -48,16 +45,17 @@ export default {
             rowIndex = $rows.length - 1;
         }
         $rows.splice(rowIndex + 1, 0, {
-            key: `row-${Ux.randomString(8)}`
+            key: `row-${Ux.randomString(8)}`,
+            data: []
         });
         reference.setState({$rows});
     },
     rxRowFill: (reference) => (rowIndex) => {
-        const $cells = Cmn.cellWidth(reference, false);
-        Cmn.rowRefresh(reference, $cells);
+        const data = Cmn.cellWidth(reference, false);
+        Cmn.rowRefresh(reference, data);
     },
     rxRowCompress: (reference) => (rowIndex) => {
-        const $cells = Cmn.cellWidth(reference, true);
-        Cmn.rowRefresh(reference, $cells);
+        const data = Cmn.cellWidth(reference, true);
+        Cmn.rowRefresh(reference, data);
     }
 }

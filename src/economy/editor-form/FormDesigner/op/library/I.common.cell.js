@@ -23,12 +23,13 @@ const cellSpanDim = (data = []) => {
     data.forEach(cell => spans.add(cell.span));
     return Array.from(spans);
 }
-const cellNew = (span, rowIndex = 0) => {
+const cellNew = (span, row = {}) => {
     return {
         key: `cell-${Ux.randomString(8)}`,       // 默认的 key
         span,                                           // 默认宽度
         cellIndex: 0,                                   // 列索引
-        rowIndex,                                       // 行索引
+        rowIndex: row.rowIndex,                         // 行索引
+        rowKey: row.key,                                // 行主键
     }
 }
 const MAP = {
@@ -48,7 +49,7 @@ const MAP = {
     }
 }
 const cellWidth = (reference, compress = false) => {
-    const {data = []} = reference.state;
+    const {data = []} = reference.props;
     const dim = cellSpanDim(data);
     const processed = [];
     if (1 === dim.length) {
@@ -75,9 +76,9 @@ const cellWidth = (reference, compress = false) => {
             target = cellSpanMax(data);
         }
         data.forEach(cell => {
-            const $cell = Ux.clone(cell);
-            $cell.span = target;
-            processed.push($cell);
+            const cellItem = Ux.clone(cell);
+            cellItem.span = target;
+            processed.push(cellItem);
         })
     }
     return processed;

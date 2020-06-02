@@ -29,9 +29,12 @@ export default {
         return {
             rxCellWrap, /* 继承的单元格交换函数 */
             config: {
+                rowKey: config.key,
                 ...config,
                 ...cell,
-            }, key: cell.key, $status
+            },
+            key: cell.key,
+            $status
         };
     },
     yoExtra: (reference) => {

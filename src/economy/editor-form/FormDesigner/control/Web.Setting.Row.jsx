@@ -46,16 +46,15 @@ const yiInternal = (reference) => {
         state.raft = raft;
         state.$op = {
             $opSaveRow: (reference, jsx = {}) => (params = {}) => {
-                // 行属性直接更改系统中的 $cells 变量
                 const ref = Ux.onReference(reference, 1);
-                const {$cells = []} = ref.state;
-                if (0 < $cells.length) {
+                const {data = []} = ref.props;
+                if (0 < data.length) {
                     // 只保留第一个 $cells
                     const columns = Ux.valueInt(params.columns, 3);
                     const span = 24 / columns;
-                    const newCells = Ux.clone($cells);
+                    const newCells = Ux.clone(data);
                     newCells.forEach(item => item.span = span);
-                    ref.setState({$cells: newCells, $drawer: undefined});
+                    ref.setState({$drawer: undefined});
                 }
                 reference.setState({
                     $loading: false,

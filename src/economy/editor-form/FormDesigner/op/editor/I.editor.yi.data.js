@@ -10,7 +10,10 @@ export default (reference, state = {}) => {
     state.$rows = [{
         key,
         /* 修改节点 */
-        data: [Cmn.cellNew(span, 0)]
+        data: [Cmn.cellNew(span, {
+            rowIndex: 0,
+            key,
+        })]
     }];
     return Ux.promise(state);
 }

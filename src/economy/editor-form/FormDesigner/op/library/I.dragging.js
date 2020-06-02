@@ -27,6 +27,9 @@ export default {
         const item = {};
         const {config = {}} = props;
         item.rowIndex = config.rowIndex;
+        if (config.rowKey) {
+            item.rowKey = config.rowKey;
+        }
         item.key = config.key;
         if (config.hasOwnProperty('cellIndex')) {
             item.cellIndex = config.cellIndex;

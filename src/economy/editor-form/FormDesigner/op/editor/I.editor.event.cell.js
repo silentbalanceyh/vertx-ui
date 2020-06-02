@@ -73,7 +73,7 @@ export default {
     /* 注意这里的 reference 是行引用 */
     rxCellAdd: (reference) => () => {
         const {config = {}, data = []} = reference.props;
-        const cell = Cmn.cellNew(config.span, config.rowIndex);
+        const cell = Cmn.cellNew(config.span, config);
         /* 直接添加一个新的单元格 */
         const $data = Ux.clone(data);
         // 行操作，直接追加
