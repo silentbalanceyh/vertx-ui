@@ -24,6 +24,10 @@ export default {
         }
         reference.setState({$rows});
     },
+    rxRowConfig: (reference) => (rowData = {}) => {
+        const {$rows = []} = reference.state;
+
+    },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
         $rows = Ux.clone($rows);

@@ -23,6 +23,7 @@ class Component extends React.PureComponent {
                         <RowEditor {...rest}
                                    rxRowAdd={Op.rxRowAdd(this)}         /* 添加行 */
                                    rxRowDel={Op.rxRowDel(this)}         /* 删除行 */
+                                   rxRowConfig={Op.rxRowConfig(this)}   /* 配置行 */
                         />
                         <RowDrop {...rest}
                                  rxRowWrap={Op.rxRowWrap(this)}     /* 交换行，目标对象触发 */
