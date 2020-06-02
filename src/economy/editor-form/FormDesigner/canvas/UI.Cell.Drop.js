@@ -33,6 +33,7 @@ class Component extends React.PureComponent {
                 {Rdr.renderCmds(reference, {
                     ...config,
                     ...configCellCmd,
+                    placement: "bottom"
                 })}
             </div>
         )

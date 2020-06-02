@@ -74,7 +74,7 @@ const renderCmd = (reference, command, config = {}) => {
     const {placement = "top"} = config;
     if (tooltip) {
         const disabled = isDisabled(reference, command);
-        return disabled ? renderLink(reference, command, config) : (
+        return (
             <Tooltip title={tooltip} key={command.key}
                      placement={placement}>
                 {renderLink(reference, command, config)}

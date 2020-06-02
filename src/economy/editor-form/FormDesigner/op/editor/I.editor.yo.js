@@ -41,9 +41,17 @@ export default {
         const {data = []} = reference.props;
         const spans = Cmn.cellSpans(data);
         if (24 === spans) {
-            return {commandStyle: {display: "none"}, className: "e-command"};
+            return {
+                commandStyle: {display: "none"},
+                className: "e-command",
+                placement: "left",
+            };
         } else {
-            return {commandStyle: {display: "inline-block"}, className: "e-command"};
+            return {
+                commandStyle: {display: "inline-block"},
+                className: "e-command",
+                placement: "left"
+            };
         }
     }
 }
