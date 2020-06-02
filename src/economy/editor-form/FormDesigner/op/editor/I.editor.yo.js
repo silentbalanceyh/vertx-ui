@@ -9,6 +9,7 @@ export default {
         rowConfig.key = row.key;
         const {data = {}} = reference.props;
         rowConfig.span = 24 / data.columns;     // 计算列宽度
+        rowConfig.columns = data.columns;          // 网格数据
         return {
             reference,          /* 顶层引用 */
             config: rowConfig,

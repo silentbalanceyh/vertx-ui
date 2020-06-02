@@ -20,9 +20,9 @@ const yiInternal = (reference) => {
             columns: (reference, jsx) => {
                 const {config = {}} = reference.props;
                 const {items = {}} = jsx;
-                const {grid} = config;
+                const {columns} = config;
                 const options = [];
-                for (let idx = 1; idx <= grid; idx++) {
+                for (let idx = 1; idx <= columns; idx++) {
                     const option = {};
                     option.value = `${idx}`;
                     option.key = `${idx}`;
@@ -47,19 +47,27 @@ const yiInternal = (reference) => {
         state.$op = {
             $opSaveRow: (reference, jsx = {}) => (params = {}) => {
                 const ref = Ux.onReference(reference, 1);
-                const {data = []} = ref.props;
+                const {data = [], config = {}} = ref.props;
+                // 当前表单处理
+                reference.setState({
+                    $loading: false,
+                    $submitting: false
+                });
                 if (0 < data.length) {
                     // 只保留第一个 $cells
                     const columns = Ux.valueInt(params.columns, 3);
                     const span = 24 / columns;
                     const newCells = Ux.clone(data);
                     newCells.forEach(item => item.span = span);
+                    // 行处理
                     ref.setState({$drawer: undefined});
+                    // 行数据
+                    const rowData = {};
+                    rowData.key = config.key;
+                    rowData.data = newCells;
+                    // 调用顶层
+                    Ux.fn(ref).rxRowConfig([rowData]);
                 }
-                reference.setState({
-                    $loading: false,
-                    $submitting: false
-                });
             }
 
         }

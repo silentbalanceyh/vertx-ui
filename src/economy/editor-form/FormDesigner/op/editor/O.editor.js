@@ -29,8 +29,8 @@ export default {
                 const {$inited = {}} = reference.state;
                 const {config = {}} = reference.props;
                 if (!$inited.hasOwnProperty("columns")
-                    && config.hasOwnProperty("grid")) {
-                    $inited.columns = `${config.grid}`;
+                    && config.hasOwnProperty("columns")) {
+                    $inited.columns = `${config.columns}`;
                 }
                 $inited.type = "WEB";
                 processed.$inited = $inited;
