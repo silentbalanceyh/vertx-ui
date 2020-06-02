@@ -1,5 +1,28 @@
 import Ux from "ux";
 
+const cellSpans = ($cells = []) => $cells.map(cell => cell.span)
+    .reduce((left, right) => left + right, 0);
+const cellSpanMin = ($cells = []) => $cells.map(cell => cell.span)
+    .reduce((left, right) => {
+        if (left < right) {
+            return left;
+        } else {
+            return right;
+        }
+    }, 24);
+const cellSpanMax = ($cells = []) => $cells.map(cell => cell.span)
+    .reduce((left, right) => {
+        if (left < right) {
+            return right;
+        } else {
+            return left;
+        }
+    }, 0);
+const cellSpanDim = ($cells = []) => {
+    const spans = new Set();
+    $cells.forEach(cell => spans.add(cell.span));
+    return Array.from(spans);
+}
 const cellNew = (reference) => {
     const {config = {}} = reference.props;
     if (config.grid) {
@@ -32,29 +55,45 @@ const MAP = {
     }
 }
 const cellWidth = (reference, compress = false) => {
-    let {$cells = []} = reference.state;
+    const {$cells = []} = reference.state;
+    const dim = cellSpanDim($cells);
     const processed = [];
-    $cells = Ux.clone($cells);
-    // 查找鉴别值
-    $cells.forEach(item => {
-        const $item = Ux.clone(item);
-        const key = item.span;
+    if (1 === dim.length) {
+        // 阶段2，所有的 span 对齐了
+        $cells.forEach(cell => {
+            const $cell = Ux.clone(cell);
+            if (compress) {
+                $cell.span = MAP.COMPRESS[cell.span];
+            } else {
+                $cell.span = MAP.EXPAND[cell.span];
+            }
+            processed.push($cell);
+        })
+    } else {
+        /*
+         * 阶段1，先对齐
+         * 1）最大值扩展
+         * 2）最小值压缩
+         */
+        let target;
         if (compress) {
-            if (MAP.COMPRESS[key]) {
-                $item.span = MAP.COMPRESS[key];
-            }
+            target = cellSpanMin($cells);
         } else {
-            if (MAP.EXPAND[key]) {
-                $item.span = MAP.EXPAND[key];
-            }
+            target = cellSpanMax($cells);
         }
-        processed.push($item);
-    });
+        $cells.forEach(cell => {
+            const $cell = Ux.clone(cell);
+            $cell.span = target;
+            processed.push($cell);
+        })
+    }
     return processed;
 }
 export default {
-    cellSpans: ($cells = []) => $cells.map(cell => cell.span)
-        .reduce((left, right) => left + right, 0),
+    cellSpans,
+    cellSpanMin,
+    cellSpanMax,
+    cellSpanDim,
     cellNew,
     cellWidth,
 }
