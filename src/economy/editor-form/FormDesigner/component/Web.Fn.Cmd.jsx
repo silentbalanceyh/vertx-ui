@@ -73,7 +73,7 @@ const renderCmd = (reference, command, config = {}) => {
     const tooltip = command.tooltip;
     const {placement = "top"} = config;
     if (tooltip) {
-        const disabled = isDisabled(reference, command);
+        // const disabled = isDisabled(reference, command);
         return (
             <Tooltip title={tooltip} key={command.key}
                      placement={placement}>

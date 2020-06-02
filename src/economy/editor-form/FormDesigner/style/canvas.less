@@ -101,10 +101,22 @@
             }
 
             &-drop {
-                margin: 3px 3% 3px 12px;
+                margin: 6px 6px 6px 12px;
                 border-radius: 5px;
                 border-left: solid 3px #ececec;
                 min-height: 36px;
+
+                .drop-pending {
+                    color: #c8c8c8;
+                    padding-top: 8px;
+                    padding-left: 8px;
+                }
+
+                .drop-error {
+                    padding-top: 8px;
+                    padding-left: 8px;
+                    color: @button-failure;
+                }
 
                 &-hover {
                     background-color: #00b9f0;
