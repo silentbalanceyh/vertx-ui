@@ -8,7 +8,7 @@ import DragItem from '../control/Web.DragSource';
 
 export default (reference) => {
     const {$palette = []} = reference.state;
-    const {$height = 132} = reference.props;
+    const {$height = 124} = reference.props;
     return (
         <Collapse activeKey={["pageBasic", "pageAdv"]}
                   className={"designer-control"}>
