@@ -36,6 +36,7 @@ export default {
                     && config.hasOwnProperty("grid")) {
                     $inited.columns = `${config.grid}`;
                 }
+                $inited.type = "WEB";
                 processed.$inited = $inited;
                 return Ux.promise(processed);
             })
