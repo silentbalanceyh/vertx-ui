@@ -1,5 +1,5 @@
 import Ux from "ux";
-import Cmn from '../I.common'
+import Cmn from '../library'
 import rxCellWrap from './I.editor.event.cell.wrap';
 
 export default {

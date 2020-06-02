@@ -1,5 +1,5 @@
 import Ux from "ux";
-import Cmn from '../I.common';
+import Cmn from '../library';
 
 export default {
 
