@@ -51,6 +51,7 @@ class Component extends React.PureComponent {
                                 return (
                                     <CellEditor {...cellAttrs}
                                                 reference={this}
+                                                rxCellRefresh={Op.rxCellRefresh(this)}/* 单元格刷新 */
                                                 rxCellFill={Op.rxCellFill(this)}    /* 单元格填充 */
                                                 rxCellSplit={Op.rxCellSplit(this)}  /* 单元格拆分 */
                                                 rxCellMerge={Op.rxCellMerge(this)}  /* 单元格合并 */

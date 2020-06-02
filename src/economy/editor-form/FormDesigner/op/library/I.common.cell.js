@@ -35,6 +35,7 @@ const cellWidth = (reference, compress = false) => {
     let {$cells = []} = reference.state;
     const processed = [];
     $cells = Ux.clone($cells);
+    // 查找鉴别值
     $cells.forEach(item => {
         const $item = Ux.clone(item);
         const key = item.span;

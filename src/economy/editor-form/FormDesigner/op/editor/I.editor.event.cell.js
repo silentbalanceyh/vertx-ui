@@ -3,6 +3,8 @@ import Cmn from '../library'
 import rxCellWrap from './I.editor.event.cell.wrap';
 
 export default {
+    rxCellRefresh: (reference) => ($cells = []) =>
+        Cmn.rowRefresh(reference, $cells),
     rxCellMerge: (reference) => (cellIndex) => {
         const {$cells = []} = reference.state;
         // 当前索引：cellIndex
@@ -28,14 +30,14 @@ export default {
          */
         const revered = replaced.reverse();
         revered.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells: revered});
+        Cmn.rowRefresh(reference, revered);
     },
     rxCellDel: (reference) => (cellIndex) => {
         const {$cells = []} = reference.state;
         let replaced = $cells.filter((item, index) => index !== cellIndex);
         replaced.forEach((item, index) => item.cellIndex = index);
         replaced = Ux.clone(replaced);
-        reference.setState({$cells: replaced});
+        Cmn.rowRefresh(reference, replaced);
     },
     rxCellWrap,
     rxCellFill: (reference) => (cellIndex) => {
@@ -48,7 +50,7 @@ export default {
                 .forEach(item => {
                     item.span += added;
                 });
-            reference.setState({$cells});
+            Cmn.rowRefresh(reference, $cells);
         }
     },
     rxCellSplit: (reference) => (cellIndex) => {
@@ -66,7 +68,7 @@ export default {
             }
         });
         added.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells: added});
+        Cmn.rowRefresh(reference, added);
     },
     /* 注意这里的 reference 是行引用 */
     rxCellAdd: (reference) => () => {
@@ -77,6 +79,6 @@ export default {
         // 行操作，直接追加
         $cells.push(cell);
         $cells.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells});
+        Cmn.rowRefresh(reference, $cells);
     },
 }

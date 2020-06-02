@@ -38,10 +38,10 @@ export default {
     },
     rxRowFill: (reference) => (rowIndex) => {
         const $cells = Cmn.cellWidth(reference, false);
-        reference.setState({$cells});
+        Cmn.rowRefresh(reference, $cells);
     },
     rxRowCompress: (reference) => (rowIndex) => {
         const $cells = Cmn.cellWidth(reference, true);
-        reference.setState({$cells});
+        Cmn.rowRefresh(reference, $cells);
     }
 }

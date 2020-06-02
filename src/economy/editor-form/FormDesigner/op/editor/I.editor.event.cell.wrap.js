@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import Cmn from "../library";
 
 const toSource = (fromItem, toItem) => {
     const sourceItem = Ux.clone(toItem);
@@ -38,7 +39,7 @@ export default (targetRef) => (fromItem, toItem) => {
              */
             const targetItem = toTarget(fromItem, toItem);
             sourceCells[targetItem.cellIndex] = targetItem;
-            sourceRef.setState({$cells: sourceCells});
+            Cmn.rowRefresh(sourceRef, sourceCells);
         } else {
             /*
              * 不同行交换
@@ -46,7 +47,7 @@ export default (targetRef) => (fromItem, toItem) => {
             const targetItem = toTarget(fromItem, toItem);
             targetCells[targetItem.cellIndex] = targetItem;
             sourceRef.setState({$cells: sourceCells});
-            targetRef.setState({$cells: targetCells});
+            Cmn.rowRefresh(targetRef, targetCells);
         }
     }
 }
