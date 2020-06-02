@@ -1,8 +1,10 @@
 import Ux from "ux";
 import Cmn from '../library'
 import rxCellWrap from './I.editor.event.cell.wrap';
+import rxCellConfig from './I.editor.event.cell.config';
 
 export default {
+    rxCellConfig,
     rxCellRefresh: (reference) => (data = []) =>
         Cmn.rowRefresh(reference, data),
     rxCellMerge: (reference) => (cellIndex) => {

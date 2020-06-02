@@ -27,12 +27,17 @@ export default {
         $status.used = spans;
         $status.cells = data.length;
         /* 单元格交换函数 */
+        const {raft = {}, render, ...rest} = cell;
         return {
             rxCellWrap, /* 继承的单元格交换函数 */
             config: {
                 rowKey: config.key,
                 ...config,
-                ...cell,
+                ...rest,
+            },
+            data: {
+                raft,
+                render,
             },
             key: cell.key,
             $status

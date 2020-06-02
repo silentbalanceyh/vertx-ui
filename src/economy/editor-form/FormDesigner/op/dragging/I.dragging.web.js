@@ -20,18 +20,16 @@ const targetSpec = {
         Cmd.dropColor(component, false);
         // 判断是否可以放入
         const {type} = monitor.getItem();
-        const fnDrop = forbidden[type];
-        // 是否可放入
-        Ux.dgDebug({type}, "放置组件", "#458B00")
-        let okForDrop = true;
-        if (Ux.isFunction(fnDrop)) {
+        forbidden(component, type, () => {
             const ref = Ux.onReference(component, 1);
-            okForDrop = fnDrop(props, ref);
-        }
-        // 可以放入时才执行
-        if (okForDrop) {
-
-        }
+            const {config = {}} = props;
+            // 特殊的单元格参数信息
+            const rowData = {};
+            rowData.type = type;
+            rowData.config = Ux.clone(config);
+            rowData.raft = {};
+            Ux.fn(ref).rxCellConfig(rowData);
+        })
     },
     /* 浮游在 Target 之上 */
     hover: (props, monitor, component) => {

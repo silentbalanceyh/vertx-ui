@@ -10,11 +10,11 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {connectDropTarget, config = {}} = this.props;
+        const {connectDropTarget, data = {}} = this.props;
         const {$hover = false} = this.state;
         return connectDropTarget(
             <div className={`content-drop ${$hover ? "content-drop-hover" : ""}`}>
-                {config.key}
+                Hello
             </div>
         )
     }
