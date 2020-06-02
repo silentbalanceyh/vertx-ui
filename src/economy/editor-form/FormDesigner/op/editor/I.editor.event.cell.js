@@ -76,6 +76,7 @@ export default {
         $cells = Ux.clone($cells);
         // 行操作，直接追加
         $cells.push(cell);
+        $cells.forEach((item, index) => item.cellIndex = index);
         reference.setState({$cells});
     },
 }

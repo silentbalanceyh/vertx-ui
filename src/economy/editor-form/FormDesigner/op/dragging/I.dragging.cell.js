@@ -1,4 +1,4 @@
-import Cmd from "./I.common";
+import Cmd from "../library";
 import Ux from "ux";
 
 const sourceConnect = (connect, monitor) => {

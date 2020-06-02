@@ -1,4 +1,4 @@
-import Cmd from "./I.common";
+import Cmd from "../library";
 
 const sourceConnect = (connect, monitor) => {
     return {

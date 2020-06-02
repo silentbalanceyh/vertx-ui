@@ -1,4 +1,5 @@
 import Ux from "ux";
+import Cmn from '../library';
 
 export default {
 
@@ -36,10 +37,11 @@ export default {
         reference.setState({$rows});
     },
     rxRowFill: (reference) => (rowIndex) => {
-        const {$cells = []} = reference.state;
-
+        const $cells = Cmn.cellWidth(reference, false);
+        reference.setState({$cells});
     },
     rxRowCompress: (reference) => (rowIndex) => {
-
+        const $cells = Cmn.cellWidth(reference, true);
+        reference.setState({$cells});
     }
 }
