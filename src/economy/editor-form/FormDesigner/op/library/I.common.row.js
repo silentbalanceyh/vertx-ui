@@ -1,12 +1,12 @@
 import Ux from 'ux';
 
 export default {
-    rowRefresh: (reference, $cells = []) => {
-        reference.setState({$cells});
+    rowRefresh: (reference, data = []) => {
+        // reference.setState({$cells});
         const {config = {}} = reference.props;
         const rowConfig = {};
-        rowConfig.key = config;
-        rowConfig.data = $cells;
+        rowConfig.config = config;
+        rowConfig.data = data;
         Ux.fn(reference).rxRowConfig(rowConfig);
     }
 }

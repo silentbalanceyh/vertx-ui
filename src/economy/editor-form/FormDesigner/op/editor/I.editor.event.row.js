@@ -26,7 +26,19 @@ export default {
     },
     rxRowConfig: (reference) => (rowData = {}) => {
         const {$rows = []} = reference.state;
-
+        const {config = {}, data = []} = rowData;
+        const $updated = [];
+        $rows.forEach(row => {
+            if (config.key === row.key) {
+                const rowItem = {};
+                rowItem.key = row.key;
+                rowItem.data = data;
+                $updated.push(rowItem);
+            } else {
+                $updated.push(Ux.clone(row));
+            }
+        });
+        reference.setState({$rows: $updated});
     },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;

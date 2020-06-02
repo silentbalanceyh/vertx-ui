@@ -2,6 +2,7 @@ import Cmn from "../library";
 import Ux from 'ux';
 import event from './I.editor.event';
 import yo from './I.editor.yo';
+import yiData from './I.editor.yi.data';
 
 export default {
     /*
@@ -15,12 +16,7 @@ export default {
         /* _commands 命令工具栏 */
         state.$ready = true;
 
-        /* 初始化行专用操作 */
-        const key = `row-${Ux.randomString(8)}`;
-        state.$rows = [{
-            key,
-        }];
-        reference.setState(state);
+        yiData(reference, state).then(Ux.pipe(reference));
     },
     yiRow: (reference) => {
         const state = {};
@@ -41,7 +37,7 @@ export default {
                 return Ux.promise(processed);
             })
             .then(processed => Cmn.yiCommand(reference, processed))
-            .then(processed => Cmn.yiRowCell(reference, processed))
+            // .then(processed => Cmn.yiRowCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
     yiCell: (reference) => {

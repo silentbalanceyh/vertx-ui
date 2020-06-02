@@ -45,8 +45,8 @@ class Component extends React.PureComponent {
                     </div>
                     <Row className={`middle ${active}`}>
                         {(() => {
-                            const {$cells = []} = this.state;
-                            return $cells.map(cell => {
+                            const {data = []} = this.props;
+                            return data.map(cell => {
                                 const cellAttrs = Op.yoCell(this, cell, config);
                                 return (
                                     <CellEditor {...cellAttrs}
