@@ -11,6 +11,6 @@ export default (reference) => (params = {}) => {
         row: rowData,
         cell: params,
         cellData: cellData
-    }, "放置组件配置", "#458B00");
+    }, "组件最终配置", "#458B00");
     Ux.fn(reference).rxRowConfig([rowData]);
 }

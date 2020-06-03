@@ -12,6 +12,21 @@ const configCellCmd = {
     placement: "top",
 }
 
+const renderLabel = (ref) => {
+    const inputAttrs = {};
+    const {reference, data = {}} = ref.props;
+    const message = Ux.fromHoc(reference, "message");
+    if (data.render) {
+        inputAttrs.onBlur = Op.rxCellLabel(ref, message.label);
+        inputAttrs.placeholder = message.label;
+    } else {
+        inputAttrs.disabled = true;
+    }
+    return (
+        <Input {...inputAttrs}/>
+    )
+}
+
 class Component extends React.PureComponent {
     state = {}
 
@@ -29,7 +44,7 @@ class Component extends React.PureComponent {
         const {$hover = false} = this.state;
         return connectDropTarget(
             <div className={`content-tool ${$hover ? "content-tool-hover" : ""}`}>
-                <Input placeholder={(() => Ux.fromHoc(reference, "label"))()}/>
+                {renderLabel(this)}
                 {Rdr.renderCmds(reference, {
                     ...config,
                     ...configCellCmd,

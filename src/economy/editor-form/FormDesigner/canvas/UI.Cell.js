@@ -18,13 +18,20 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, connectDragSource} = this.props;
+        const {config = {}, data = {}, connectDragSource} = this.props;
         const {span} = config;
         if (span) {
             return Ux.xtReady(this, () => {
-                const {$hover = false} = this.state;
+                const {$hover = false, $drawer} = this.state;
+                const colAttrs = {};
+                colAttrs.span = span;
+                colAttrs.className = "canvas-cell " + ($hover ? "canvas-cell-hover" : "");
+                if (!$drawer && data.render) {
+                    /* 双击打开 */
+                    colAttrs.onDoubleClick = Op.rxCellSelect(this);
+                }
                 return (
-                    <Col span={span} className={`canvas-cell ${$hover ? "canvas-cell-hover" : ""}`}>
+                    <Col {...colAttrs}>
                         {connectDragSource(
                             <div className={"content"}>
                                 <CellDrop {...this.props} reference={this}/>
