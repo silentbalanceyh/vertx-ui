@@ -195,6 +195,7 @@ const raftRender = (cell = {}, config = {}) => {
             /*
              * 解决某些场景无法赋值的忧伤
              */
+            optionJsx['data-field'] = cell.field;
             if (optionJsx && values[cell.field]) {
                 optionJsx['data-initial'] = values[cell.field];
             }

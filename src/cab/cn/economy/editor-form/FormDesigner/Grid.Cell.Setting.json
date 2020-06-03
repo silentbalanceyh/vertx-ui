@@ -19,7 +19,7 @@
                 "addonAfter,组件后缀,,,,addonAfter=T",
                 "addonBefore,组件前缀,,,,addonBefore=T",
                 {
-                    "metadata": "allowClear,允许清空,,,aiCheckbox",
+                    "metadata": "allowClear,清空输入,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }

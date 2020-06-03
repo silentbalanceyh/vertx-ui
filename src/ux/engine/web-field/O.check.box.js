@@ -53,13 +53,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
         const $rest = Abs.clone(rest);
         const {onChange, ...left} = $rest;
         return (
-            <Checkbox {...left} onChange={event => {
-                // 解决特殊的 BUG，主要是单处理
-                const value = event.target.checked;
-                if (U.isFunction(onChange)) {
-                    onChange(value);
-                }
-            }}/>
+            <Checkbox {...left} onChange={onChange}/>
         )
     }
 };
