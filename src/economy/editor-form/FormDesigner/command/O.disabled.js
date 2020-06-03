@@ -21,5 +21,9 @@ export default {
     "right-square": (reference, item, config = {}) => {
         const {data = []} = reference.props;
         return 0 === data.length;
+    },
+    "control": (reference, item, config = {}) => {
+        const {data = {}} = reference.props;
+        return !data.render;
     }
 }

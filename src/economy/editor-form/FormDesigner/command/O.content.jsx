@@ -8,6 +8,7 @@ import UiModel from '../control/Web.Model';
 import UiLayout from '../control/Web.Layout';
 import UiHidden from '../control/Web.Hidden';
 import UiSettingRow from '../control/Web.Setting.Row';
+import UiSettingCell from '../control/Web.Setting.Cell';
 
 export default {
     layout: (reference) => {
@@ -64,6 +65,13 @@ export default {
             <UiSettingRow reference={reference}
                           $inited={$inited}
                           config={config}/>
+        )
+    },
+    /* 列操作 */
+    control: (reference) => {
+
+        return (
+            <UiSettingCell/>
         )
     }
 }

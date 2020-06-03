@@ -15,7 +15,7 @@ export default (reference) => {
     const {className = ""} = $setting;
     return (
         <Drawer {...attrs} className={className}>
-            {Ux.isFunction(fnContent) ? fnContent(reference) : false}
+            {Ux.isFunction(fnContent) ? fnContent(reference) : `Not Ready ${$drawer}`}
         </Drawer>
     )
 }
