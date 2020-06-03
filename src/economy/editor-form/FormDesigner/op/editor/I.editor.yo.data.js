@@ -17,11 +17,7 @@ export default {
                 $inited.label = optionItem.label;
             }
             // 当前层的 render
-            const item = Ux.elementUniqueDatum(reference,
-                "model.components", "key", $data.render);
-            if (item) {
-                $inited.render = item;
-            }
+            $inited.render = $data.render;
         }
         return $inited;
     },

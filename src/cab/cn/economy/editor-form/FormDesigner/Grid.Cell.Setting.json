@@ -15,6 +15,9 @@
                     "optionJsx.config.datum": "source=model.fields,key=key,label=display"
                 }
             ]
+        ],
+        "hidden": [
+            "render"
         ]
     }
 }

@@ -9,7 +9,6 @@ import Op from '../op';
 const yiInternal = (reference) => {
     const state = {};
     const {$inited = {}} = reference.props;
-    const {render = {}} = $inited;
     Ux.raftForm(reference, {
         id: "SubForm-Cell-Setting",
         renders: {
@@ -18,12 +17,14 @@ const yiInternal = (reference) => {
                 return Ux.aiSelect(reference, jsx);
             },
             render: (reference, jsx) => {
-                const img = Image[render.key];
+                const item = Ux.elementUniqueDatum(reference,
+                    "model.components", "key", $inited.render)
+                const img = Image[item.key];
                 return (
                     <span className={"render"}>
-                        <img src={img} alt={render.key}/>
+                        <img src={img} alt={item.key}/>
                         <label>
-                            {render.text}
+                            {item.text}
                         </label>
                     </span>
                 )
