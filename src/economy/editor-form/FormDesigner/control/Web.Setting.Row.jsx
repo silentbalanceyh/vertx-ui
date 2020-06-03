@@ -77,7 +77,7 @@ const yiInternal = (reference) => {
 
 @component({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "Grid.Row",
+    "i18n.name": "Grid.Row.Setting",
 })
 class Component extends React.PureComponent {
     componentDidMount() {
