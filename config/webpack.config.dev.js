@@ -358,6 +358,7 @@ module.exports = {
         new BundleAnalyzerPlugin({
             analyzerPort: 5888
         }),
+        new CaseSensitivePathsPlugin(),
         new CheckerPlugin(),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
