@@ -20,6 +20,7 @@
                 "addonBefore,组件前缀,,,,addonBefore=T",
                 {
                     "metadata": "allowClear,清空输入,,,aiCheckbox",
+                    "optionJsx.mode": "SWITCH",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -33,6 +34,13 @@
                 {
                     "metadata": "suffix,文字后缀",
                     "optionJsx.suffix": "T"
+                },
+                {
+                    "metadata": "readOnly,只读,,,aiCheckbox",
+                    "optionJsx.mode": "SWITCH",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
                 }
             ]
         ],

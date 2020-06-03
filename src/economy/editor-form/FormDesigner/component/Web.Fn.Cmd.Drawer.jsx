@@ -10,6 +10,8 @@ export default (reference) => {
     attrs.visible = !!$drawer;
     attrs.onClose = Op.rxSettingClose(reference);
     attrs.maskClosable = false;
+    attrs.destroyOnClose = true;
+    attrs.key = $drawer;
 
     const fnContent = Cmd.Command[$drawer];
     const {className = ""} = $setting;

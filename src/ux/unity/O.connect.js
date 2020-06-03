@@ -72,6 +72,7 @@ const connectValidator = (cell = {}) => {
             optionConfig.validateTrigger = "onChange";
         }
     }
+    // 特殊绑定
     return optionConfig;
 };
 export default {
