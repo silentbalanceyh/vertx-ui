@@ -7,12 +7,12 @@
                 "title=字段基本属性"
             ],
             [
+                "render,组件类型",
                 "label,标签/标题,,,,placeholder=<标签>",
                 {
                     "metadata": "field,字段名,,,aiSelect",
                     "optionJsx.config.datum": "source=model.fields,key=key,label=display"
-                },
-                "placeholder,水印文字"
+                }
             ]
         ]
     }

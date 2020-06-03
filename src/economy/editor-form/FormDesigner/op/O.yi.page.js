@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import yiData from './O.yi.data';
 import Cmn from './library';
+import {Dsl} from 'entity';
 
 const yiPalette = (reference, state) => {
     /* 执行单处理 */
@@ -22,7 +23,15 @@ const yiPalette = (reference, state) => {
             .forEach(item => basicTool.items.push(item));
         palette.push(basicTool);
     }
+    /* 转换 palette 为 Assist */
     state.$palette = palette;
+    {
+        // 特殊数据源
+        const components = palette[0];
+        if (components) {
+            state.$a_model_components = Dsl.getArray(components.items);
+        }
+    }
     return Ux.promise(state);
 }
 export default (reference) => {

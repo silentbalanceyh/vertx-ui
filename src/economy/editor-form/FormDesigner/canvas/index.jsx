@@ -6,13 +6,16 @@ import Ux from 'ux';
 export default (reference) => {
     const {raft = {}} = reference.state;
     const form = Ux.clone(raft.form)
-    if (!form.hasOwnProperty("window")) {
-        form.window = 1;
+    {
+        // 布局修正处理
+        if (!form.hasOwnProperty("window")) {
+            form.window = 1;
+        }
+        if (!form.options) {
+            form.options = {};
+        }
+        form.options.window = form.window;
     }
-    if (!form.options) {
-        form.options = {};
-    }
-    form.options.window = form.window;
     return (
         <div className={"canvas"}>
             <GridEditor {...Ux.onUniform(reference.state)} data={form}/>
