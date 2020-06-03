@@ -20,7 +20,11 @@
                 "addonBefore,组件前缀,,,,addonBefore=T",
                 {
                     "metadata": "allowClear,清空输入,,,aiCheckbox",
-                    "optionJsx.mode": "SWITCH",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "启用",
+                        "unCheckedChildren": "启用"
+                    },
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -37,7 +41,11 @@
                 },
                 {
                     "metadata": "readOnly,只读,,,aiCheckbox",
-                    "optionJsx.mode": "SWITCH",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "只读",
+                        "unCheckedChildren": "可编辑"
+                    },
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
