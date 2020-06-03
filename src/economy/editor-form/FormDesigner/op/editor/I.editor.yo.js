@@ -32,7 +32,7 @@ export default {
         /* 状态计算 */
         const $status = toStatus(reference);
         /* 单元格交换函数 */
-        const {data = {}, render, ...rest} = cell;
+        const {raft = {}, render, ...rest} = cell;
         return {
             config: {
                 rowKey: config.key,
@@ -40,7 +40,7 @@ export default {
                 ...rest,
             },
             data: {
-                ...data,
+                ...raft,
                 render,
             },
             key: cell.key,

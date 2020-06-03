@@ -101,7 +101,7 @@ const cellConfig = (reference, cellData = {}) => {
         })()
     });
     // 替换 data 节点
-    readyData.data = normalized;
+    readyData.raft = normalized;
     // 返回处理好的单元格
     return readyData;
 }
