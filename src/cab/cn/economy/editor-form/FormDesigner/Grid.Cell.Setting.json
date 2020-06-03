@@ -23,7 +23,7 @@
                     "optionJsx": {
                         "mode": "SWITCH",
                         "checkedChildren": "启用",
-                        "unCheckedChildren": "启用"
+                        "unCheckedChildren": "禁用"
                     },
                     "optionConfig": {
                         "valuePropName": "checked"
