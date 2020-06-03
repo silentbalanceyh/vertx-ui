@@ -24,7 +24,6 @@ const renderJsx = (reference, type, cell = {}) => {
             )
         }
     } else {
-        console.info(cell);
         const {optionItem = {}, optionJsx = {}} = cell;
         const fnRender = Ux[type];
         return (
@@ -53,12 +52,11 @@ class Component extends React.PureComponent {
             <div className={`content-drop ${$hover ? "content-drop-hover" : ""}`}>
                 {(() => {
                     const {data = {}} = this.props;
-                    const {render} = data;
+                    const {render, ...rest} = data;
                     if (render) {
                         const fnRender = Ux[render];
                         if (Ux.isFunction(fnRender)) {
-                            const {raft = {}} = data;
-                            return renderJsx(this, render, raft);
+                            return renderJsx(this, render, rest);
                         } else {
                             return (
                                 <div className={"drop-error"}>

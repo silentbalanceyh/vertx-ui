@@ -1,33 +1,16 @@
 import Ux from 'ux';
-import {Dsl} from 'entity';
+import Op from '../library';
 
 export default (reference) => (params = {}) => {
-    const {
-        type,
-        config,
-        raft = {}
-    } = params;
-    const normalized = Ux.clone(config);
-    // 执行 configField 配置 raft 标准化处理
-    const {$raft} = reference.props;
-
-    normalized.raft = raft;
-    normalized.render = type;
-
-    // 更新单元格渲染配置（核心配置）
-    const {data = []} = reference.props;
-    const $data = Dsl.getArray(data);
-    $data.saveElement(normalized);
-
-    // 更新 row 处理
-    const rowData = {};
-    rowData.key = config.rowKey;
-    rowData.data = $data.to();
-
+    // 添加一个处理过的单元格
+    const cellData = Op.cellConfig(reference, params);
+    // 返回一个新的 rowData
+    const rowData = Op.rowSave(reference, cellData);
+    // 打印相关信息
     Ux.dgDebug({
         row: rowData,
-        cell: params
+        cell: params,
+        cellData: cellData
     }, "放置组件配置", "#458B00");
-
     Ux.fn(reference).rxRowConfig([rowData]);
 }

@@ -1,5 +1,14 @@
 import Cmn from '../library';
 
+const toStatus = (reference) => {
+    const {data = []} = reference.props;
+    const spans = Cmn.cellSpans(data);
+    const $status = {};
+    $status.used = spans;
+    $status.cells = data.length;
+    return $status;
+}
+
 export default {
 
     yoRow: (reference, row, index) => {
@@ -16,20 +25,14 @@ export default {
             config: rowConfig,
             data: row.data,     // 后期要使用
             key: row.key,
-            $raft: data,        // 表单配置
+            $form: data,        // 表单配置
         };
     },
     yoCell: (reference, cell, config = {}) => {
-        /*
-         * 占用行计算
-         */
-        const {data = []} = reference.props;
-        const spans = Cmn.cellSpans(data);
-        const $status = {};
-        $status.used = spans;
-        $status.cells = data.length;
+        /* 状态计算 */
+        const $status = toStatus(reference);
         /* 单元格交换函数 */
-        const {raft = {}, render, ...rest} = cell;
+        const {data = {}, render, ...rest} = cell;
         return {
             config: {
                 rowKey: config.key,
@@ -37,7 +40,7 @@ export default {
                 ...rest,
             },
             data: {
-                raft,
+                ...data,
                 render,
             },
             key: cell.key,

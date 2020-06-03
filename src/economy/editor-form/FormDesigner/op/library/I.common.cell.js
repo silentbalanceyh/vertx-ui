@@ -83,6 +83,28 @@ const cellWidth = (reference, compress = false) => {
     }
     return processed;
 }
+const cellConfig = (reference, cellData = {}) => {
+    const readyData = Ux.clone(cellData);
+    // 执行 configField 配置 raft 标准化处理
+    const {$form, data = []} = reference.props;
+    // 已经 ready，则执行 data 节点的处理
+    const normalized = Ux.configField($form, readyData.data, {
+        ...readyData,
+        // 布局需要使用的专用节点
+        length: (() => {
+            const $data = data.filter(item => item.key === readyData.key);
+            if (0 < $data.length) {
+                return data.length;
+            } else {
+                return data.length + 1;
+            }
+        })()
+    });
+    // 替换 data 节点
+    readyData.data = normalized;
+    // 返回处理好的单元格
+    return readyData;
+}
 export default {
     cellSpans,
     cellSpanMin,
@@ -90,4 +112,5 @@ export default {
     cellSpanDim,
     cellNew,
     cellWidth,
+    cellConfig,
 }
