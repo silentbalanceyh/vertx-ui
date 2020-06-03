@@ -16,8 +16,8 @@ export default {
                 message.label !== optionItem.label) {
                 $inited.label = optionItem.label;
             }
-            // 当前层的 render
-            $inited.render = $data.render;
+            $inited.render = $data.render;  // 当前 render
+            $inited.allowClear = false;     // 不允许清空
         }
         return $inited;
     },
