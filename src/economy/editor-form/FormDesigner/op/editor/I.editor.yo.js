@@ -1,4 +1,6 @@
 import Cmn from '../library';
+import Ux from 'ux';
+import yo from './I.editor.yo.data';
 
 const toStatus = (reference) => {
     const {data = []} = reference.props;
@@ -10,7 +12,7 @@ const toStatus = (reference) => {
 }
 
 export default {
-
+    ...yo,
     yoRow: (reference, row, index) => {
         // 行对应元数据
         const rowConfig = {};
@@ -21,6 +23,7 @@ export default {
         rowConfig.columns = data.columns;          // 网格数据
         // 表单配置传入
         return {
+            ...Ux.onUniform(reference.props),
             reference,          /* 顶层引用 */
             config: rowConfig,
             data: row.data,     // 后期要使用
@@ -34,6 +37,7 @@ export default {
         /* 单元格交换函数 */
         const {raft = {}, render, ...rest} = cell;
         return {
+            ...Ux.onUniform(reference.props),
             config: {
                 rowKey: config.key,
                 ...config,

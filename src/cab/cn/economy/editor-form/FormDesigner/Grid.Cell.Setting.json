@@ -1,9 +1,18 @@
 {
     "_form": {
-        "columns": 4,
+        "window": 1.1,
+        "columns": 3,
         "ui": [
             [
                 "title=字段基本属性"
+            ],
+            [
+                "label,标签/标题,,,,placeholder=<标签>",
+                {
+                    "metadata": "field,字段名,,,aiSelect",
+                    "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                },
+                "placeholder,水印文字"
             ]
         ]
     }

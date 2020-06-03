@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import {Dsl} from 'entity';
 
 export default (reference, state = {}) => {
     const {$models = {}, config = {}} = reference.props;
@@ -12,7 +13,18 @@ export default (reference, state = {}) => {
                 $config.form.columns = 3;
             }
         }
-        // 默认 window 处理
+    }
+    {
+        const fields = [];
+        const {attributes = []} = $models;
+        attributes.forEach(attribute => {
+            const item = {};
+            item.key = attribute.name;
+            item.display = attribute.alias;
+            item.data = Ux.clone(attribute);
+            fields.push(item);
+        });
+        state.$a_model_fields = Dsl.getArray(fields);
     }
     state.raft = $config;
     reference.setState(state);

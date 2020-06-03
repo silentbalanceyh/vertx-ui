@@ -15,7 +15,7 @@ export default (reference) => {
     form.options.window = form.window;
     return (
         <div className={"canvas"}>
-            <GridEditor data={form}/>
+            <GridEditor {...Ux.onUniform(reference.state)} data={form}/>
         </div>
     )
 }

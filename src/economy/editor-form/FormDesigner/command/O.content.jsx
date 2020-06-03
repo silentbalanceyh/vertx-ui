@@ -69,9 +69,13 @@ export default {
     },
     /* 列操作 */
     control: (reference) => {
-
+        const {config = {}} = reference.props;
+        const {data = {}, ...rest} = config;
+        const $inited = Op.yoDataIn(data, reference);
         return (
-            <UiSettingCell/>
+            <UiSettingCell {...Ux.onUniform(reference.props)}
+                           config={rest}
+                           $inited={$inited}/>
         )
     }
 }
