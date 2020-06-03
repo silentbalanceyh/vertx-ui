@@ -2,7 +2,7 @@
     "_form": {
         "window": 0.16,
         "columns": 1,
-        "className": "setting-form",
+        "className": "setting-form-row",
         "ui": [
             [
                 "title=行基本属性"

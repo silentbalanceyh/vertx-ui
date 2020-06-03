@@ -7,7 +7,7 @@ import {Form} from "antd";
 const yiInternal = (reference) => {
     const state = {};
     Ux.raftForm(reference, {
-        id: "SubForm-GridRow",
+        id: "SubForm-Row-Setting",
         renders: {
             type: (reference, jsx) => {
                 return Ux.aiRadio(reference, jsx, item => {

@@ -5,7 +5,6 @@ export default {
      * 配置数据专用
      */
     yoDataIn: (data = {}, reference) => {
-        const {config = {}} = reference.props;
         const $data = reference.props.data;
         const message = Ux.fromHoc(reference, "message");
         const {optionItem = {}} = data;

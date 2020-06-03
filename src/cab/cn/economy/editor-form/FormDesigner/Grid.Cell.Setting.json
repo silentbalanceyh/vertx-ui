@@ -2,6 +2,7 @@
     "_form": {
         "window": 1.1,
         "columns": 3,
+        "className": "setting-form-cell",
         "ui": [
             [
                 "title=字段基本属性"
