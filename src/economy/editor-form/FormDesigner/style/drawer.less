@@ -2,7 +2,6 @@
 
 .web-form-designer-drawer {
     .ant-drawer-body {
-        padding: 0 16px 16px 0;
 
         #content-labels {
             width: 20px !important;
@@ -18,6 +17,14 @@
             }
 
             &-cell {
+                .ant-form-item {
+                    margin-right: 0px !important;
+                }
+
+                .ant-col {
+                    margin-bottom: 3px;
+                }
+
                 z-index: 10 !important;
 
                 .render {
@@ -51,6 +58,10 @@
 }
 
 .web-form-row-drawer {
+    .ant-drawer-body {
+        padding: 0 16px 16px 0;
+    }
+
     .web-form-designer-drawer;
 
     .ant-radio-wrapper {
@@ -65,22 +76,52 @@
 }
 
 .web-form-cell-drawer {
+    .ant-drawer-body {
+        padding: 0 0 16px 0;
+    }
+
     .web-form-designer-drawer;
 
     .ant-drawer-content-wrapper {
-        width: 75% !important;
+        width: 56% !important;
     }
 
     .tool-setting {
         .ant-alert {
             margin: 6px;
         }
+
+        .ant-tabs-tab {
+            &:hover {
+                background-color: @primary-color !important;
+                color: yellow !important;
+            }
+
+            &-active {
+                background-color: @primary-color !important;
+                color: white !important;
+
+                &:hover {
+                    color: yellow !important;
+                }
+            }
+
+        }
     }
 
+
     .radio {
+        &-input-3 {
+            .ant-radio-wrapper {
+                width: 30%;
+                line-height: 28px;
+                height: 28px;
+            }
+        }
+
         &-tree-selection {
             .ant-radio-wrapper {
-                width: 23%;
+                width: 30%;
                 line-height: 28px;
                 height: 28px;
             }

@@ -1,0 +1,156 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=属性设置"
+            ],
+            [
+                {
+                    "metadata": "render,组件类型,24",
+                    "optionItem": {
+                        "style": {
+                            "width": "83%"
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "fieldBasic",
+                    "config": {
+                        "activeKey": "tabSetting",
+                        "defaultActiveKey": "tabSetting",
+                        "className": "tool-setting",
+                        "tabPosition": "right",
+                        "items": "基础属性,tabSetting;验证规则,tabValidation",
+                        "pages": {
+                            "tabSetting": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "label,标签/标题,,,,placeholder=<标签>",
+                                        {
+                                            "metadata": "field,字段名,,,aiSelect",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "required,是否必填,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "必填",
+                                                "unCheckedChildren": "可选"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "requiredMessage,必填提示,16,,,placeholder=如果用户未填写时的提示文字！",
+                                            "optionJsx.depend.enabled": {
+                                                "required": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "readOnly,只读,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "只读",
+                                                "unCheckedChildren": "可编辑"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "inscribe,只读文本,16,,,placeholder=只读模式下的呈现文本",
+                                            "optionJsx.depend.enabled": {
+                                                "readOnly": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "allowClear,允许清空,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "maxLength,最大长度,16,100%,aiInputNumber,placeholder=默认256,min=1,max=4096"
+                                    ],
+                                    [
+                                        "addonBefore,组件前缀,,,,addonBefore=…",
+                                        "addonAfter,组件后缀,,,,addonAfter=…"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "prefix,文字前缀",
+                                            "optionJsx.prefix": "…"
+                                        },
+                                        {
+                                            "metadata": "suffix,文字后缀",
+                                            "optionJsx.suffix": "…"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "normalize,输入限制,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.config.items": [
+                                                "unlimited,不限制",
+                                                "decimal,仅浮点数",
+                                                "number,仅数值",
+                                                "integer,仅正整数",
+                                                "upper,仅大写",
+                                                "id,仅标识符"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "normalizeLength,限制长度,,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "normalize": [
+                                                    "decimal",
+                                                    "number"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "normalizePrecision,限制精度,,100%,aiInputNumber,min=1",
+                                            "optionJsx.depend.enabled": {
+                                                "normalize": [
+                                                    "decimal"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

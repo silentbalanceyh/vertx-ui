@@ -49,18 +49,18 @@
                         "activeKey": "tabIntro",
                         "defaultActiveKey": "tabIntro",
                         "className": "tool-setting",
-                        "items": "属性配置说明,tabIntro;文本属性,tabText;特殊组件属性,tabSepc;选项属性,tabSelector;级联/多选属性,tabCascade;其他验证规则,tabValidate;窗口/表格属性,tabWindow;远程属性,tabRemote;",
+                        "items": "属性配置说明,tabIntro;基础属性,tabText;特殊属性,tabSepc;选项属性,tabSelector;级联/多选属性,tabCascade;验证规则,tabValidate;窗口/表格属性,tabWindow;远程属性,tabRemote;显示属性,tabView",
                         "pages": {
                             "tabText": {
                                 "window": 1,
-                                "columns": 3,
+                                "columns": 2,
                                 "ui": [
                                     [
                                         "title=文本属性"
                                     ],
                                     [
-                                        "maxLength,最大长度,,68%,aiInputNumber,placeholder=默认256,min=1,max=4096",
-                                        "rows,最大行数,,68%,aiInputNumber,placeholder=多行文本专用,min=2,max=10"
+                                        "maxLength,最大长度,,100%,aiInputNumber,placeholder=默认256,min=1,max=4096",
+                                        "rows,最大行数,,100%,aiInputNumber,placeholder=多行文本专用,min=2,max=10"
                                     ],
                                     [
                                         "addonBefore,组件前缀,,,,addonBefore=…",
@@ -119,7 +119,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "normalize,输入限制,16,,aiRadio",
+                                            "metadata": "normalize,输入限制,24,,aiRadio",
                                             "optionJsx.config.items": [
                                                 "decimal,仅浮点数",
                                                 "number,仅数值",
@@ -130,12 +130,14 @@
                                         }
                                     ],
                                     [
-                                        "min,最小值,,68%,aiInputNumber",
-                                        "precision,精度,,68%,aiInputNumber,min=1",
-                                        "step,步进系数,,68%,aiInputNumber,placeholder=默认为1"
+                                        "min,最小值,,100%,aiInputNumber",
+                                        "max,最大值,,100%,aiInputNumber"
                                     ],
                                     [
-                                        "max,最大值,,68%,aiInputNumber",
+                                        "precision,精度,,100%,aiInputNumber,min=1",
+                                        "step,步进系数,,100%,aiInputNumber,placeholder=默认为1"
+                                    ],
+                                    [
                                         {
                                             "metadata": "iNumberFormat,特殊格式,,,aiRadio",
                                             "optionJsx.config.items": [
@@ -691,10 +693,10 @@
                                                 "PARENT_ALL_INCLUDE,含当前所有父节点",
                                                 "PARENT_ALL,所有父节点",
                                                 "PARENT,直接父节点",
-                                                "CURRENT,当前节点",
                                                 "CHILDREN_ALL_INCLUDE,含当前所有子节点",
                                                 "CHILDREN_ALL,所有子节点",
-                                                "CHILDREN,直接子节点"
+                                                "CHILDREN,直接子节点",
+                                                "CURRENT,当前节点"
                                             ]
                                         }
                                     ]

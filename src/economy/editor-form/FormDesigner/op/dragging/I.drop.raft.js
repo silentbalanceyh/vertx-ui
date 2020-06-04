@@ -10,7 +10,7 @@ const mountLabel = (reference, item = {}) => {
     item.optionItem = {label: raft.label};
 }
 
-const toInput = (props, component) => {
+const mountInput = (props, component) => {
     const item = {};
     mountLabel(component, item);
     return item;
@@ -22,7 +22,7 @@ const executor = {
         mountTitle(component, init);
         return init;
     },
-    "aiInput": toInput,
+    "aiInput": mountInput,
 }
 export default (reference, type) => {
     const fnInit = executor[type];

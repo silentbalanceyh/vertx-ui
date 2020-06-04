@@ -8,7 +8,8 @@ import UiModel from '../control/Web.Model';
 import UiLayout from '../control/Web.Layout';
 import UiHidden from '../control/Web.Hidden';
 import UiSettingRow from '../control/Web.Setting.Row';
-import UiSettingCell from '../control/Web.Setting.Cell';
+
+import UiElement from '../element';
 
 export default {
     layout: (reference) => {
@@ -72,10 +73,27 @@ export default {
         const {config = {}, rxApi} = reference.props;
         const {data = {}, ...rest} = config;
         const $inited = Op.yoDataIn(data, reference);
-        return (
-            <UiSettingCell {...Ux.onUniform(reference.props)}
-                           config={rest} rxApi={rxApi}
-                           $inited={$inited}/>
-        )
+        if ($inited.render) {
+            const Component = UiElement[$inited.render];
+            if (Component) {
+                return (
+                    <Component {...Ux.onUniform(reference.props)}
+                               config={rest} rxApi={rxApi}
+                               $inited={$inited}/>
+                )
+            } else {
+                return (
+                    <div className={"ux-error"}>
+                        Setting form could not be found by "{data.render}"
+                    </div>
+                )
+            }
+        } else {
+            return (
+                <div className={"ux-error"}>
+                    The render value missing "{data.render}"
+                </div>
+            )
+        }
     }
 }
