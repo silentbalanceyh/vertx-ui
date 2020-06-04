@@ -23,6 +23,25 @@ const executor = {
         return init;
     },
     "aiInput": mountInput,
+    "aiPassword": mountInput,
+    "aiInputNumber": mountInput,
+    "aiTextArea": mountInput,
+    "aiSelect": mountInput,
+    "aiTreeSelect": mountInput,
+    "aiCheckbox": mountInput,
+    "aiRadio": mountInput,
+    "aiDatePicker": mountInput,
+    "aiTimePicker": mountInput,
+    "aiFileUpload": mountInput,
+    "aiTransfer": mountInput,
+    "aiBraftEditor": mountInput,
+    "aiAddressSelector": mountInput,
+    "aiDatumCascade": mountInput,
+    "aiCheckJson": mountInput,
+    "aiListSelector": mountInput,
+    "aiTreeSelector": mountInput,
+    "aiTableEditor": mountInput,
+    "aiDialogEditor": mountInput,
 }
 export default (reference, type) => {
     const fnInit = executor[type];
