@@ -247,9 +247,39 @@
                                     ],
                                     [
                                         {
+                                            "metadata": "ruleReg,正则规则,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleRegValid,正则表达式,16,100%",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleReg": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleRegMessage,提示信息,24,,,,inscribe=正则规则验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleReg": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
                                             "metadata": "ruleEnumValid,合法枚举,24,100%,aiInputMulti",
                                             "optionJsx.styleInput": {
                                                 "width": "30%"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "ruleEnum": true
                                             }
                                         }
                                     ],

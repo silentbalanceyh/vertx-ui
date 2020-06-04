@@ -59,12 +59,11 @@ const rxChange = (reference, index) => (event) => {
 }
 const isDisabled = (reference) => {
     const {
-        config = {}, disabled = false
+        config = {}
     } = reference.props;
     const {$holder = 0} = reference.state;
     const {limit = -1} = config;
     /* 如果 > 0 就检查 */
-    console.info(disabled);
     if (0 < limit) {
         return ($holder >= limit);
     } else return false;
