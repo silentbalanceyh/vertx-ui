@@ -117,23 +117,35 @@
                             },
                             "tabCascade": {
                                 "window": 1,
-                                "columns": 4,
+                                "columns": 2,
                                 "ui": [
                                     [
-                                        "title=级联属性"
+                                        "title=级联/多选属性"
                                     ],
                                     [
                                         {
-                                            "metadata": "multiple,启用多选,,,aiCheckbox",
+                                            "metadata": "multiple,启用多选,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
-                                                "checkedChildren": "启用过滤",
-                                                "unCheckedChildren": "不启用过滤"
+                                                "checkedChildren": "启用多选",
+                                                "unCheckedChildren": "只选择单项"
                                             },
                                             "optionConfig": {
                                                 "valuePropName": "checked"
                                             }
-                                        }
+                                        },
+                                        {
+                                            "metadata": "multipleTag,标签呈现,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用标签呈现",
+                                                "unCheckedChildren": "使用文字呈现"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "maxCount,多选限制,8,100%,aiInputNumber,placeholder=最多显示项,min=2"
                                     ],
                                     [
                                         "dependImpact,触发重置,24,,aiTextArea,placeholder=填写多个字段名，字段名之间使用英文逗号隔开。,rows=3"
@@ -167,7 +179,14 @@
                                         }
                                     ],
                                     [
-                                        "title=穿梭框属性"
+                                        "title=穿梭框多选属性"
+                                    ],
+                                    [
+                                        "transferLeft,选择源标题",
+                                        "transferRight,被选标题"
+                                    ],
+                                    [
+                                        "transferKey,选择源主键名,,,,placeholder=和选项绑定时的主键字段名"
                                     ]
                                 ]
                             },
