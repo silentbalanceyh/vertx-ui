@@ -1,11 +1,11 @@
 {
     "_form": {
-        "window": 1.1,
+        "window": 1,
         "columns": 3,
         "className": "setting-form-cell",
         "ui": [
             [
-                "title=字段基本属性"
+                "title=字段基础属性"
             ],
             [
                 "render,组件类型",
@@ -16,10 +16,23 @@
                 }
             ],
             [
-                "addonAfter,组件后缀,,,,addonAfter=T",
-                "addonBefore,组件前缀,,,,addonBefore=T",
                 {
-                    "metadata": "allowClear,清空输入,,,aiCheckbox",
+                    "metadata": "readOnly,只读,,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "只读",
+                        "unCheckedChildren": "可编辑"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                "addonBefore,组件前缀,,,,addonBefore=…",
+                "addonAfter,组件后缀,,,,addonAfter=…"
+            ],
+            [
+                {
+                    "metadata": "allowClear,允许清空,,,aiCheckbox",
                     "optionJsx": {
                         "mode": "SWITCH",
                         "checkedChildren": "启用",
@@ -28,23 +41,95 @@
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
+                },
+                {
+                    "metadata": "prefix,文字前缀",
+                    "optionJsx.prefix": "…"
+                },
+                {
+                    "metadata": "suffix,文字后缀",
+                    "optionJsx.suffix": "…"
+                }
+            ],
+            [
+                "maxLength,最大长度,,68%,aiInputNumber,placeholder=默认256,min=1,max=4096",
+                "rows,最大行数,,68%,aiInputNumber,placeholder=多行文本专用,min=2,max=10",
+                {
+                    "metadata": "visibilityToggle,显示密码,,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "可显示",
+                        "unCheckedChildren": "不可显示（密码框专用）"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                "title=数值属性"
+            ],
+            [
+                "min,最小值,,68%,aiInputNumber",
+                "precision,精度,,68%,aiInputNumber,min=1",
+                "step,步进系数,,68%,aiInputNumber,placeholder=默认为1"
+            ],
+            [
+                "max,最大值,,68%,aiInputNumber",
+                {
+                    "metadata": "iNumberFormat,特殊格式,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "PERCENT,百分比",
+                        "CURRENCY,货币格式"
+                    ]
+                },
+                "iNumberUnit,货币单位,,,,placeholder=如￥，$等"
+            ],
+            [
+                "title=日期/时间属性"
+            ],
+            [
+                "format,格式,,,,placeholder=如：YYYY-MM-DD",
+                {
+                    "metadata": "mode,时间模式,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "full,标准格式",
+                        "time,仅时间",
+                        "date,仅日期",
+                        "month,仅月份",
+                        "year,仅年"
+                    ]
                 }
             ],
             [
                 {
-                    "metadata": "prefix,文字前缀",
-                    "optionJsx.prefix": "T"
-                },
-                {
-                    "metadata": "suffix,文字后缀",
-                    "optionJsx.suffix": "T"
-                },
-                {
-                    "metadata": "readOnly,只读,,,aiCheckbox",
+                    "metadata": "disabledDate,只选未来,,,aiCheckbox",
                     "optionJsx": {
                         "mode": "SWITCH",
-                        "checkedChildren": "只读",
-                        "unCheckedChildren": "可编辑"
+                        "checkedChildren": "只能选未来时间",
+                        "unCheckedChildren": "所有时间可选"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "showTime,显示时间,,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "不显示时间信息",
+                        "unCheckedChildren": "（标准格式）显示"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "showToday,显示今天,,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "不显示`今天`按钮",
+                        "unCheckedChildren": "（标准格式）显示"
                     },
                     "optionConfig": {
                         "valuePropName": "checked"
