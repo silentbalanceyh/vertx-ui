@@ -5,7 +5,8 @@ import Ux from 'ux';
 import {Form} from "antd";
 import Op from '../op';
 import '../Cab.less';
-import ValueSource from './Web.Source';
+
+import ValueSource from '../../ValueSource/UI';
 
 const yiInternal = (reference) => {
     const state = {};
@@ -14,8 +15,6 @@ const yiInternal = (reference) => {
         id: "SubForm-Parameter",
         renders: {
             value: (reference, jsx = {}) => {
-                const {$expression = {}} = reference.state;
-                jsx.$expression = $expression;
                 return (
                     <ValueSource {...jsx} reference={reference}/>
                 )
@@ -24,11 +23,6 @@ const yiInternal = (reference) => {
     }).then(raft => {
         state.raft = raft;
         state.$op = Op.actions;
-        {
-            // _expr 专用字段
-            const expression = Ux.fromHoc(reference, "expression");
-            state.$expression = Ux.clone(expression);
-        }
         return Ux.promise(state);
     }).then(Ux.ready).then(Ux.pipe(reference));
 }

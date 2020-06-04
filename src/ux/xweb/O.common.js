@@ -35,13 +35,13 @@ const xtValue = (reference, consumer) => {
     }
     // Dev.dgDebug({format: hitFormat}, "自定义组件选择数据格式")
     if (Cv.XT_FORMAT.OBJECT === hitFormat) {
-        if (Abs.isArray(data)) {
+        if (Abs.isArray(data) || undefined === data) {
             throw new Error("格式和数据异常，状态格式：Array，定义格式：Object。");
         } else {
             return consumer.object(data);
         }
     } else if (Cv.XT_FORMAT.ARRAY === hitFormat) {
-        if (Abs.isArray(data)) {
+        if (Abs.isArray(data) || undefined === data) {
             return consumer.array(data);
         } else {
             throw new Error("格式和数据异常，状态格式：Object，定义格式：Array。");

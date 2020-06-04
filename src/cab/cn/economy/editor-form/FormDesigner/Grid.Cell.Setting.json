@@ -83,13 +83,119 @@
                 {
                     "complex": true,
                     "name": "FieldContainer",
-                    "key": "additionalSetting",
+                    "key": "advancedSetting",
                     "config": {
-                        "activeKey": "tabAdvanced",
-                        "defaultActiveKey": "tabAdvanced",
-                        "items": "高级属性,tabAdvanced;数据属性,tabDatum",
+                        "activeKey": "tabSepc",
+                        "defaultActiveKey": "tabSepc",
+                        "items": "特殊组件属性,tabSepc;选项属性,tabSelector;级联属性,tabCascade;远程属性,tabRemote;",
                         "pages": {
-                            "tabAdvanced": {
+                            "tabRemote": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                ]
+                            },
+                            "tabCascade": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                    [
+                                        "title=级联/依赖属性"
+                                    ],
+                                    [
+                                        "dependImpact,触发重置,24,,aiTextArea,placeholder=填写多个字段名，字段名之间使用英文逗号隔开。,rows=3"
+                                    ]
+                                ]
+                            },
+                            "tabSelector": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                    [
+                                        "title=选项属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dataSource,数据源,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "items,静态数据源",
+                                                "datum,动态数据源"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumSource,数据标识,,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name"
+                                        },
+                                        "datumKey,值字段名",
+                                        "datumLabel,显示字段名"
+                                    ],
+                                    [
+                                        "expr,格式化表达式,24,,,placeholder=显示格式可使用格式化表达式进行格式化操作！"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeEnabled,启用过滤,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用过滤",
+                                                "unCheckedChildren": "不启用过滤"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "cascadeSource,过滤字段名,16,,,placeholder=请填写使用的动态数据源中过滤条件字段"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeTarget,过滤参数类型,24,,aiRadio",
+                                            "optionItem.className": "radio-param-selection",
+                                            "optionJsx.config.items": [
+                                                "BOOL,逻辑值",
+                                                "FIX,固定值",
+                                                "ENUM,枚举值",
+                                                "UNIQUE,字典值",
+                                                "USER,当前登录用户",
+                                                "FORM,表单值",
+                                                "ROUTE,路由值",
+                                                "PROP,属性值（React组件）",
+                                                "STATE,状态值（React组件）"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "cascadeValue,过滤参数值,24"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "items,选项表,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "name",
+                                                            "title": "固定值",
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "label",
+                                                            "title": "显示字段",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabSepc": {
                                 "window": 1,
                                 "columns": 3,
                                 "ui": [
@@ -192,7 +298,32 @@
                                         "accept,支持格式,16,,,placeholder=使用MIME，用逗号隔开"
                                     ],
                                     [
-                                        "title=选择器属性"
+                                        "title=树相关属性"
+                                    ],
+                                    [
+                                        "treeKey,树主键",
+                                        "treeParent,父主键,,,,placeholder=树的构造依赖主键和父主键",
+                                        "treeLeaf,叶节点字段"
+                                    ],
+                                    [
+                                        "treeValue,值字段",
+                                        "treeText,显示字段",
+                                        "treeSort,排序字段"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "treeSelection,树选择模式,24,,aiRadio",
+                                            "optionJsx.className": "radio-tree-selection",
+                                            "optionJsx.config.items": [
+                                                "PARENT_ALL_INCLUDE,含当前所有父节点",
+                                                "PARENT_ALL,所有父节点",
+                                                "PARENT,直接父节点",
+                                                "CURRENT,当前节点",
+                                                "CHILDREN_ALL_INCLUDE,含当前所有子节点",
+                                                "CHILDREN_ALL,所有子节点",
+                                                "CHILDREN,直接子节点"
+                                            ]
+                                        }
                                     ]
                                 ]
                             }
