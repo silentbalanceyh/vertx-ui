@@ -3,6 +3,8 @@ import Ux from "ux";
 import Image from "../images";
 import React from "react";
 import ValueSource from '../../ValueSource/UI';
+import RestfulApi from "../../RestfulApi/UI";
+import ParamInput from "../../ParamInput/UI";
 
 export default {
     field: (reference, jsx) => {
@@ -27,5 +29,18 @@ export default {
         return (
             <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
         )
+    },
+    ajaxSource: (reference, jsx) => {
+        const {rxApi} = reference.props;
+        return (
+            <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                if (value) {
+
+                }
+            }}/>
+        )
+    },
+    ajaxMagic: (reference, jsx) => {
+        return (<ParamInput reference={reference} {...jsx}/>)
     }
 }

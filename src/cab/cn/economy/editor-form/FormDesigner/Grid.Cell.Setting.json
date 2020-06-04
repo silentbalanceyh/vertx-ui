@@ -17,6 +17,22 @@
             ],
             [
                 {
+                    "metadata": "required,是否必填,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "必填",
+                        "unCheckedChildren": "可选"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "requiredMessage,必填提示,16,,,placeholder=如果用户未填写时的提示文字！"
+                }
+            ],
+            [
+                {
                     "metadata": "visibilityToggle,显示密码,,,aiCheckbox",
                     "optionJsx": {
                         "mode": "SWITCH",
@@ -88,8 +104,266 @@
                         "activeKey": "tabIntro",
                         "defaultActiveKey": "tabIntro",
                         "className": "tool-setting",
-                        "items": "属性配置说明,tabIntro;特殊组件属性,tabSepc;选项属性,tabSelector;级联/多选属性,tabCascade;远程属性,tabRemote;",
+                        "items": "属性配置说明,tabIntro;特殊组件属性,tabSepc;选项属性,tabSelector;级联/多选属性,tabCascade;其他验证规则,tabValidate;窗口/表格属性,tabWindow;远程属性,tabRemote;",
                         "pages": {
+                            "tabWindow": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=弹出窗口规则"
+                                    ],
+                                    [
+                                        "windowTitle,窗口标题,12",
+                                        "windowWidth,窗口宽度,12,,,placeholder=默认宽度800像素"
+                                    ],
+                                    [
+                                        "windowOk,确认,12,,,placeholder=确认按钮文字",
+                                        "windowCancel,取消,12,,,placeholder=取消按钮文字"
+                                    ],
+                                    [
+                                        "windowValidation,验证消息,24,,,placeholder=执行窗口操作时的验证消息，主要用于选项验证！"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "windowSearch,启用搜索,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "windowSearchField,搜索字段,16,,aiInputMulti",
+                                            "optionJsx": {
+                                                "config.limit": 3,
+                                                "styleInput": {
+                                                    "width": "25%"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=表格列设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "table,,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "高级配置（表达式录入）",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabRemote": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=远程接口配置"
+                                    ],
+                                    [
+                                        "ajaxUri,远程路径,18,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                        "ajaxSource,,6"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ajaxMethod,HTTP方法,12,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "GET,GET方法",
+                                                "POST,POST方法"
+                                            ]
+                                        },
+                                        "ajaxPageSize,每页数量,12,72%,aiInputNumber"
+                                    ],
+                                    [
+                                        "ajaxMagic,查询参数,18"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ajaxSort,排序参数,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "field",
+                                                            "title": "字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "isAsc",
+                                                            "title": "升序降序",
+                                                            "$render": "EDITOR",
+                                                            "config": {
+                                                                "render": "aiRadio",
+                                                                "optionJsx.config.items": [
+                                                                    "ASC,升序",
+                                                                    "DESC,降序"
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=表单字段链接（Linker配置）"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "linker,链接配置,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataFrom",
+                                                            "title": "源字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "dataTo",
+                                                            "title": "表单字段名",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabValidate": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=验证规则表"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMax,最大值,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleMaxValid,最大值,,80%,aiInputNumber",
+                                        "ruleMaxMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMin,最小值,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleMinValid,最小值,,80%,aiInputNumber",
+                                        "ruleMinMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleLen,固定长度,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleLenValid,固定值,,80%,aiInputNumber",
+                                        "ruleLenMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnum,枚举验证,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleEnumMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnumValid,合法枚举值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "23%"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleReg,正则表达式,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleRegMessage,提示消息,12"
+                                    ],
+                                    [
+                                        "ruleRegValid,合法表达式,24"
+                                    ]
+                                ]
+                            },
                             "tabIntro": {
                                 "window": 1,
                                 "ui": [
@@ -107,12 +381,6 @@
                                             }
                                         }
                                     ]
-                                ]
-                            },
-                            "tabRemote": {
-                                "window": 1,
-                                "columns": 3,
-                                "ui": [
                                 ]
                             },
                             "tabCascade": {

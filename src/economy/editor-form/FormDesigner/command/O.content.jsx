@@ -69,12 +69,12 @@ export default {
     },
     /* 列操作 */
     control: (reference) => {
-        const {config = {}} = reference.props;
+        const {config = {}, rxApi} = reference.props;
         const {data = {}, ...rest} = config;
         const $inited = Op.yoDataIn(data, reference);
         return (
             <UiSettingCell {...Ux.onUniform(reference.props)}
-                           config={rest}
+                           config={rest} rxApi={rxApi}
                            $inited={$inited}/>
         )
     }

@@ -55,6 +55,9 @@ export default (reference) => {
     const attrs = Ux.onUniform(reference.state);
     attrs.data = form;
     mountSource(attrs, form);
+    // rxSource
+    const {rxApi} = reference.props;
+    attrs.rxApi = rxApi;
     return (
         <div className={"canvas"}>
             <GridEditor {...attrs}/>
