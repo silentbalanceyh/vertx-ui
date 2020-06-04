@@ -9,10 +9,10 @@
             ],
             [
                 {
-                    "metadata": "render,组件类型,24",
+                    "metadata": "render,组件类型,20",
                     "optionItem": {
                         "style": {
-                            "width": "83%"
+                            "width": "100%"
                         },
                         "labelCol": {
                             "span": 4
@@ -21,6 +21,18 @@
                             "span": 20
                         }
                     }
+                },
+                {
+                    "metadata": "$button",
+                    "optionItem": {
+                        "style": {
+                            "float": "right"
+                        }
+                    },
+                    "optionJsx.extension": [
+                        "$opSaveSetting,保存,SUBMIT,,ux-success-setting,save"
+                    ],
+                    "span": 4
                 }
             ],
             [

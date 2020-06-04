@@ -65,6 +65,7 @@ const buttonDefinition = {
         "event",
         "type",
         "className",
+        "icon",
         "$KV$"
     ],
     /*
