@@ -30,7 +30,7 @@ class Component extends React.PureComponent {
                 <div className={"web-param-parser"}>
                     <Button.Group>
                         <Tooltip title={$op.edit}>
-                            <Button icon={"edit"} onClick={(event) => {
+                            <Button icon={"edit"} className={"ux-brown"} onClick={(event) => {
                                 Ux.prevent(event);
                                 this.setState({$visible: true})
                             }}/>
