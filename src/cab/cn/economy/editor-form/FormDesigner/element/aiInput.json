@@ -40,18 +40,18 @@
                                 "columns": 2,
                                 "ui": [
                                     [
-                                        "title=`禁用/启用`属性依赖设置"
-                                    ],
-                                    [
                                         {
                                             "title": "说明",
                                             "config": {
                                                 "description": [
-                                                    "该设置可配置当前字段的`启用/禁用`状态的依赖字段信息。",
-                                                    "如果依赖字段设置不同的取值，可根据不同值分别`启用/禁用`当前字段。"
+                                                    "该设置可配置当前字段的`启用/禁用`状态依赖其他字段的取值（被影响）。",
+                                                    "触发设置用于设置当前字段值变化过后对其他字段的影响（影响其他字段）。"
                                                 ]
                                             }
                                         }
+                                    ],
+                                    [
+                                        "title=`禁用/启用`属性依赖设置"
                                     ],
                                     [
                                         {
@@ -104,7 +104,7 @@
                                         {
                                             "metadata": "dependEnum,合法枚举值,24,,aiInputMulti",
                                             "optionJsx.styleInput": {
-                                                "width": "23%"
+                                                "width": "30%"
                                             },
                                             "optionJsx.depend.enabled": {
                                                 "dependType": [
@@ -136,7 +136,7 @@
                                         {
                                             "metadata": "dependValue,条件字段值,24,,aiInputMulti",
                                             "optionJsx.styleInput": {
-                                                "width": "23%"
+                                                "width": "30%"
                                             },
                                             "optionJsx.depend.enabled": {
                                                 "dependType": [
@@ -147,6 +147,14 @@
                                     ],
                                     [
                                         "title=触发操作设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "impactFields,条件字段值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "30%"
+                                            }
+                                        }
                                     ]
                                 ]
                             },
