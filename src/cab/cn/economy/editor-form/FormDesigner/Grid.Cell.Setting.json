@@ -97,6 +97,15 @@
             ],
             [
                 {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveField,保存配置,SUBMIT,,ux-success"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                {
                     "complex": true,
                     "name": "FieldContainer",
                     "key": "advancedSetting",

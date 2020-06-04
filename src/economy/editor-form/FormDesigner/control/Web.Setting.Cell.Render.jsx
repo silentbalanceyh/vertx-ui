@@ -41,6 +41,6 @@ export default {
         )
     },
     ajaxMagic: (reference, jsx) => {
-        return (<ParamInput reference={reference} {...jsx}/>)
+        return (<ParamInput reference={reference} {...jsx} $query/>)
     }
 }
