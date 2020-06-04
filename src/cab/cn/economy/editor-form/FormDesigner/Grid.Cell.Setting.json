@@ -67,72 +67,135 @@
                 }
             ],
             [
-                "title=数值属性"
-            ],
-            [
-                "min,最小值,,68%,aiInputNumber",
-                "precision,精度,,68%,aiInputNumber,min=1",
-                "step,步进系数,,68%,aiInputNumber,placeholder=默认为1"
-            ],
-            [
-                "max,最大值,,68%,aiInputNumber",
                 {
-                    "metadata": "iNumberFormat,特殊格式,,,aiRadio",
+                    "metadata": "normalize,输入限制,24,,aiRadio",
                     "optionJsx.config.items": [
-                        "PERCENT,百分比",
-                        "CURRENCY,货币格式"
-                    ]
-                },
-                "iNumberUnit,货币单位,,,,placeholder=如￥，$等"
-            ],
-            [
-                "title=日期/时间属性"
-            ],
-            [
-                "format,格式,,,,placeholder=如：YYYY-MM-DD",
-                {
-                    "metadata": "mode,时间模式,16,,aiRadio",
-                    "optionJsx.config.items": [
-                        "full,标准格式",
-                        "time,仅时间",
-                        "date,仅日期",
-                        "month,仅月份",
-                        "year,仅年"
+                        "decimal,仅浮点数",
+                        "number,仅数值",
+                        "integer,仅正整数",
+                        "upper,仅大写",
+                        "id,仅标识符"
                     ]
                 }
             ],
             [
                 {
-                    "metadata": "disabledDate,只选未来,,,aiCheckbox",
-                    "optionJsx": {
-                        "mode": "SWITCH",
-                        "checkedChildren": "只能选未来时间",
-                        "unCheckedChildren": "所有时间可选"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    }
-                },
-                {
-                    "metadata": "showTime,显示时间,,,aiCheckbox",
-                    "optionJsx": {
-                        "mode": "SWITCH",
-                        "checkedChildren": "不显示时间信息",
-                        "unCheckedChildren": "（标准格式）显示"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
-                    }
-                },
-                {
-                    "metadata": "showToday,显示今天,,,aiCheckbox",
-                    "optionJsx": {
-                        "mode": "SWITCH",
-                        "checkedChildren": "不显示`今天`按钮",
-                        "unCheckedChildren": "（标准格式）显示"
-                    },
-                    "optionConfig": {
-                        "valuePropName": "checked"
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "additionalSetting",
+                    "config": {
+                        "activeKey": "tabAdvanced",
+                        "defaultActiveKey": "tabAdvanced",
+                        "items": "高级属性,tabAdvanced;数据属性,tabDatum",
+                        "pages": {
+                            "tabAdvanced": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                    [
+                                        "title=数值属性"
+                                    ],
+                                    [
+                                        "min,最小值,,68%,aiInputNumber",
+                                        "precision,精度,,68%,aiInputNumber,min=1",
+                                        "step,步进系数,,68%,aiInputNumber,placeholder=默认为1"
+                                    ],
+                                    [
+                                        "max,最大值,,68%,aiInputNumber",
+                                        {
+                                            "metadata": "iNumberFormat,特殊格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "PERCENT,百分比",
+                                                "CURRENCY,货币格式"
+                                            ]
+                                        },
+                                        "iNumberUnit,货币单位,,,,placeholder=如￥，$等"
+                                    ],
+                                    [
+                                        "title=日期/时间属性"
+                                    ],
+                                    [
+                                        "format,格式,,,,placeholder=如：YYYY-MM-DD",
+                                        {
+                                            "metadata": "dateMode,时间模式,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "full,标准格式",
+                                                "time,仅时间",
+                                                "date,仅日期",
+                                                "month,仅月份",
+                                                "year,仅年"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "disabledDate,只选未来,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "只能选未来时间",
+                                                "unCheckedChildren": "所有时间可选"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "showTime,显示时间,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "不显示时间信息",
+                                                "unCheckedChildren": "（标准格式）显示"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "showToday,显示今天,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "不显示`今天`按钮",
+                                                "unCheckedChildren": "（标准格式）显示"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=上传/下载属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "listType,上传模式,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "text,文件模式",
+                                                "picture,图片模式",
+                                                "picture-card,卡片图模式"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "withCredentials,携带Cookie？,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "携带Cookie上传",
+                                                "unCheckedChildren": "不携带Cookie上传"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "fileText,显示文字",
+                                        "accept,支持格式,16,,,placeholder=使用MIME，用逗号隔开"
+                                    ],
+                                    [
+                                        "title=选择器属性"
+                                    ]
+                                ]
+                            }
+                        }
                     }
                 }
             ]
