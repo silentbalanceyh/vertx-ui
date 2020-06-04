@@ -85,10 +85,30 @@
                     "name": "FieldContainer",
                     "key": "advancedSetting",
                     "config": {
-                        "activeKey": "tabSepc",
-                        "defaultActiveKey": "tabSepc",
-                        "items": "特殊组件属性,tabSepc;选项属性,tabSelector;级联属性,tabCascade;远程属性,tabRemote;",
+                        "activeKey": "tabIntro",
+                        "defaultActiveKey": "tabIntro",
+                        "className": "tool-setting",
+                        "items": "属性配置说明,tabIntro;特殊组件属性,tabSepc;选项属性,tabSelector;级联属性,tabCascade;远程属性,tabRemote;",
                         "pages": {
+                            "tabIntro": {
+                                "window": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "说明文档",
+                                            "config": {
+                                                "message": "属性配置说明",
+                                                "description": [
+                                                    "不同组件使用的配置会有所有区别，选择不同组件时不可配置的组件会被禁用！",
+                                                    "对于特殊组件的配置请在`专家`指导下完成。",
+                                                    "设置过程中，可点击组件类型后边的预览按钮查看最终生成的JSON配置。"
+                                                ],
+                                                "type": "info"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
                             "tabRemote": {
                                 "window": 1,
                                 "columns": 3,
@@ -97,13 +117,40 @@
                             },
                             "tabCascade": {
                                 "window": 1,
-                                "columns": 3,
+                                "columns": 4,
                                 "ui": [
                                     [
                                         "title=级联/依赖属性"
                                     ],
                                     [
                                         "dependImpact,触发重置,24,,aiTextArea,placeholder=填写多个字段名，字段名之间使用英文逗号隔开。,rows=3"
+                                    ],
+                                    [
+                                        "dependEnable,依赖字段,16,,,placeholder=当前字段在依赖字段取值时启用/禁用"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependType,依赖字段类型,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "PURE,纯值",
+                                                "DATUM,动态数据源"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependSource,数据源标识,12,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name"
+                                        },
+                                        "dependField,条件字段,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependValue,条件字段值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "23%"
+                                            }
+                                        }
                                     ]
                                 ]
                             },
