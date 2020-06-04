@@ -29,6 +29,7 @@ const yiPalette = (reference, state) => {
         // 特殊数据源
         const components = palette[0];
         if (components) {
+            // ASSIST: 组件类型
             state.$a_model_components = Dsl.getArray(components.items);
         }
     }

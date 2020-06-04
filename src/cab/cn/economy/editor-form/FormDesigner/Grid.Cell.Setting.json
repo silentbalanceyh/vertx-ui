@@ -17,11 +17,11 @@
             ],
             [
                 {
-                    "metadata": "readOnly,只读,,,aiCheckbox",
+                    "metadata": "visibilityToggle,显示密码,,,aiCheckbox",
                     "optionJsx": {
                         "mode": "SWITCH",
-                        "checkedChildren": "只读",
-                        "unCheckedChildren": "可编辑"
+                        "checkedChildren": "可显示",
+                        "unCheckedChildren": "不可显示（密码框专用）"
                     },
                     "optionConfig": {
                         "valuePropName": "checked"
@@ -55,11 +55,11 @@
                 "maxLength,最大长度,,68%,aiInputNumber,placeholder=默认256,min=1,max=4096",
                 "rows,最大行数,,68%,aiInputNumber,placeholder=多行文本专用,min=2,max=10",
                 {
-                    "metadata": "visibilityToggle,显示密码,,,aiCheckbox",
+                    "metadata": "readOnly,只读,,,aiCheckbox",
                     "optionJsx": {
                         "mode": "SWITCH",
-                        "checkedChildren": "可显示",
-                        "unCheckedChildren": "不可显示（密码框专用）"
+                        "checkedChildren": "只读",
+                        "unCheckedChildren": "可编辑"
                     },
                     "optionConfig": {
                         "valuePropName": "checked"
@@ -68,7 +68,7 @@
             ],
             [
                 {
-                    "metadata": "normalize,输入限制,24,,aiRadio",
+                    "metadata": "normalize,输入限制,16,,aiRadio",
                     "optionJsx.config.items": [
                         "decimal,仅浮点数",
                         "number,仅数值",
@@ -76,7 +76,8 @@
                         "upper,仅大写",
                         "id,仅标识符"
                     ]
-                }
+                },
+                "inscribe,只读文本,,,,placeholder=只读模式下的呈现文本"
             ],
             [
                 {

@@ -24,6 +24,7 @@ export default (reference, state = {}) => {
             item.data = Ux.clone(attribute);
             fields.push(item);
         });
+        // ASSIST: 字段列表
         state.$a_model_fields = Dsl.getArray(fields);
     }
     state.raft = $config;
