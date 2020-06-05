@@ -19,6 +19,14 @@ function connectId(id) {
     }
 }
 
+const connected = () => Abs.immutable([
+    "aiRadio",
+    "aiCheckbox",
+    "aiSelect",
+    "aiListSelector",
+    "aiTreeSelect",
+    "aiDialogEditor"
+])
 /**
  * ## 特殊函数「Zero」
  *
@@ -41,12 +49,7 @@ const connectValidator = (cell = {}) => {
     /*
      * 需要自动切换配置的地方，从 onBlur 切换到 onChange
      */
-    const onValidate = Abs.immutable([
-        "aiSelect",
-        "aiListSelector",
-        "aiTreeSelect",
-        "aiDialogEditor"
-    ]);
+    const onValidate = connected();
     const optionConfig = Abs.clone(cell.optionConfig ? cell.optionConfig : {});
     const {optionJsx = {}} = cell;
     /*
@@ -76,6 +79,7 @@ const connectValidator = (cell = {}) => {
     return optionConfig;
 };
 export default {
+    connected,
     connectId,
     connectValidator,
 };

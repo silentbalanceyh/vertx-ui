@@ -2,7 +2,7 @@
     "_form": {
         "window": 1,
         "columns": 2,
-        "className": "web-form setting-form-cell",
+        "className": "setting-form-cell",
         "ui": [
             [
                 "title=属性设置器"
@@ -420,7 +420,16 @@
                                             "optionJsx.config.datum": "source=model.fields,key=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleEqual": true
-                                            }
+                                            },
+                                            "optionConfig.rules": [
+                                                {
+                                                    "validator": "diff",
+                                                    "message": "对不起，比对字段不可和原字段相等！",
+                                                    "config": {
+                                                        "to": "field"
+                                                    }
+                                                }
+                                            ]
                                         }
                                     ],
                                     [

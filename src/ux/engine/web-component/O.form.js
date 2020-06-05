@@ -48,8 +48,18 @@ const _aiInput = (reference, values) => (cell = {}) => {
         // 其他项
         const {col = {}, optionItem = {}, optionConfig = {}} = cell;
         const attached = {};
+        // 如果有 rules 则带上 hasFeedback
         if (optionConfig.rules && 0 < optionConfig.rules.length) {
             attached.hasFeedback = true;
+        }
+        // 检测 __render 值
+        const item = Ut.connected();
+        if (item.contains(cell.__render)) {
+            if (!col.className) col.className = "";
+            // 只添加一次
+            if (0 >= col.className.indexOf("web-form-item")) {
+                col.className = `web-form-item ${col.className}`
+            }
         }
         return (
             <Col {...col}>

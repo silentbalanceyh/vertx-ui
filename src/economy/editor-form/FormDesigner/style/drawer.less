@@ -7,23 +7,27 @@
             width: 20px !important;
         }
 
-        .hk-error {
-            position: absolute;
-            background-color: @color-error;
-            color: white;
-            border-radius: 3px;
-            border: 1px solid @color-error;
-            padding: 2px 5px;
-            z-index: 100;
-            /** From Animate.css **/
-            animation-duration: 1s;
-            animation-fill-mode: both;
-            animation-name: bounceIn;
+        .form-validation {
+            .ant-form-item-with-help {
+                margin-bottom: 0px;
+            }
+
+            .has-error, .has-success {
+                width: 100%;
+            }
+
+            .has-error .ant-form-explain {
+                .ux-error-input;
+                width: 100%;
+                top: -27px;
+                display: none;
+            }
         }
 
         .setting-form {
             &-row {
                 z-index: 10 !important;
+                .form-validation;
 
                 .ant-col {
                     padding-left: 8px;
@@ -31,6 +35,7 @@
             }
 
             &-cell {
+                .form-validation;
 
                 .ant-switch {
                     background-color: #a8a8a8;
