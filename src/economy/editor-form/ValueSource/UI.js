@@ -34,7 +34,8 @@ const renderByType = (reference, jsx = {}) => {
     const ref = Ux.onReference(reference, 1);
     const {field = "type"} = jsx;
     const type = Ux.formHit(ref, field);
-    if (type) {
+    const {disabled = false} = reference.props;
+    if (type && !disabled) {
         const $expression = Ux.fromHoc(reference, "expression");
         const config = $expression[type];
         const executor = _EXECUTOR[type];
@@ -53,12 +54,12 @@ const renderByType = (reference, jsx = {}) => {
 })
 class Component extends React.PureComponent {
     render() {
-        const {value, field = "type"} = this.props;
+        const {value, field = "type", disabled = false} = this.props;
         return (
             <div>
                 <Row>
                     <Col span={24}>
-                        {value ? (
+                        {(value && !disabled) ? (
                             <Tag color={"purple"}>
                                 {value}
                             </Tag>

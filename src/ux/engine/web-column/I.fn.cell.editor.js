@@ -16,6 +16,7 @@ export default (reference, column = {}) => {
         cell.optionConfig = {};
     }
     return (text, record, index) => {
+        const {disabled = false} = reference.props;
         /*
          * 处理专用
          */
@@ -31,6 +32,7 @@ export default (reference, column = {}) => {
             Abs.fn(reference).onChange(Xt.xtFormat(data, config.format));
         }
         rowCell.optionJsx.value = record[rowCell.field];
+        rowCell.optionJsx.disabled = disabled;      // 禁用处理
         const render = Ft.onRender(reference, rowCell);
         return render(record);
     }

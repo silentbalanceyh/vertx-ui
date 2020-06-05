@@ -100,7 +100,11 @@ const writeDisabled = (jsx = {}, reference) => {
     const {depend = {}} = jsx;
     const {mode = "DISABLED"} = Abs.clone(depend);
     if ("DISABLED" === mode) {
-        jsx.disabled = isDepend(depend, reference);
+        // Ant Design Form 模式才计算 disabled，否则属于普通模式
+        const {form} = reference.props;
+        if (form) {
+            jsx.disabled = isDepend(depend, reference);
+        }
     }
 };
 /**
