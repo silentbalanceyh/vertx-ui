@@ -16,6 +16,14 @@ const mountInput = (props, component) => {
     return item;
 }
 
+const mountOption = (props, component) => {
+    const item = {};
+    mountLabel(component, item);
+    const raft = Ux.fromPath(component, "message", "raft");
+    item.optionJsx = {config: {items: [Ux.randomUUID() + "," + raft.option]}}
+    return item;
+}
+
 const executor = {
     "aiTitle": (props, component) => {
         const init = {};
@@ -28,8 +36,8 @@ const executor = {
     "aiTextArea": mountInput,
     "aiSelect": mountInput,
     "aiTreeSelect": mountInput,
-    "aiCheckbox": mountInput,
-    "aiRadio": mountInput,
+    "aiCheckbox": mountOption,
+    "aiRadio": mountOption,
     "aiDatePicker": mountInput,
     "aiTimePicker": mountInput,
     "aiFileUpload": mountInput,
