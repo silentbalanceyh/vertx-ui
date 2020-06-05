@@ -18,11 +18,11 @@ const render = (reference, jsx) => {
     const img = Image[item.key];
     return (
         <span className={"render"}>
-                        <img src={img} alt={item.key}/>
-                        <label>
-                            {item.text}
-                        </label>
-                    </span>
+            <img src={img} alt={item.key}/>
+            <label>
+                {item.text}
+            </label>
+        </span>
     )
 }
 export default {
