@@ -537,7 +537,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "readOnly,只读,8,,aiCheckbox",
+                                            "metadata": "readOnly,只读,,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "只读",
@@ -546,27 +546,7 @@
                                             "optionConfig": {
                                                 "valuePropName": "checked"
                                             }
-                                        },
-                                        {
-                                            "metadata": "inscribe,只读文本,16,,,inscribe=只读模式下的呈现文本",
-                                            "optionJsx.depend.enabled": {
-                                                "readOnly": true
-                                            }
                                         }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "allowClear,允许清空,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        "maxLength,最大长度,16,100%,aiInputNumber,placeholder=默认256,min=1,max=4096"
                                     ],
                                     [
                                         "min,最小值,,100%,aiInputNumber",
@@ -575,6 +555,38 @@
                                     [
                                         "step,步进系数,,100%,aiInputNumber,min=1",
                                         "precision,精度,,100%,aiInputNumber,min=1"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "numberMode,常用格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "PERCENT,百分比",
+                                                "CURRENCY,货币"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "numberUnit,货币单位",
+                                            "optionJsx.depend.enabled": {
+                                                "numberMode": [
+                                                    "CURRENCY"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "numberUnitPosition,单位位置,,,aiCheckbox,valuePropName=checked",
+                                            "optionJsx.depend.enabled": {
+                                                "numberMode": [
+                                                    "CURRENCY"
+                                                ]
+                                            },
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "右侧",
+                                                "unCheckedChildren": "左侧（默认）"
+                                            }
+                                        }
                                     ]
                                 ]
                             }

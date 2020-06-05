@@ -85,11 +85,24 @@
                 padding-left: 12px;
                 padding-right: 8px;
 
+                .dropped {
+                    width: 20%;
+                    display: inline-block;
+                    text-align: left;
+                    position: absolute;
+                    top: 3px;
+
+                    img {
+                        height: 24px;
+                        width: auto;
+                    }
+                }
+
                 .ant-input {
                     padding: 0 !important;
                     height: 21px !important;
                     line-height: 21px !important;
-                    width: 48%;
+                    width: 36%;
                     border-radius: 0;
                     border: none;
                     border-bottom: solid 1px #d9d9d9;
@@ -101,13 +114,21 @@
             }
 
             &-drop {
-                margin: 6px 3px;
-                padding-top: 2px;
+                margin: 1px 3px;
+                padding-top: 1px;
                 border-radius: 5px;
                 border-left: solid 3px #ececec;
                 min-height: 36px;
 
                 .ant-form-item {
+                    &-label {
+                        line-height: 36px;
+                    }
+
+                    &-control {
+                        line-height: 36px;
+                    }
+
                     margin-bottom: 0px;
                 }
 

@@ -4,6 +4,7 @@ import Ux from "ux";
 import Rdr from "../component";
 import {DropTarget} from "react-dnd";
 import Op from "../op";
+import Image from "../images";
 
 const configCellCmd = {
     // 最外层 Css
@@ -40,11 +41,19 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, connectDropTarget, reference} = this.props;
+        const {
+            config = {}, data = {},
+            connectDropTarget, reference
+        } = this.props;
         const {$hover = false} = this.state;
         return connectDropTarget(
             <div className={`content-tool ${$hover ? "content-tool-hover" : ""}`}>
                 {renderLabel(this)}
+                <div className={"dropped"}>
+                    {data.render ? (
+                        <img src={Image[data.render]} alt={data.render}/>
+                    ) : false}
+                </div>
                 {Rdr.renderCmds(reference, {
                     ...config,
                     ...configCellCmd,
