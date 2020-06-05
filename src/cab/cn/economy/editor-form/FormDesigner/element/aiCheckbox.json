@@ -45,8 +45,112 @@
                         "defaultActiveKey": "tabSetting",
                         "className": "tool-setting",
                         "tabPosition": "right",
-                        "items": "属性配置表,tabSetting;联动规则,tabDepend;选项属性,tabOptions",
+                        "items": "属性配置表,tabSetting;联动规则,tabDepend;验证规则,tabValidation;选项属性,tabOptions",
                         "pages": {
+                            "tabValidation": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "说明",
+                                            "config": {
+                                                "description": [
+                                                    "可用的验证规则只有在启用了`多选`模式的时候生效，系统并没有禁止输入。",
+                                                    "如果不是使用多选模式，那么该验证规则会直接被系统忽略。"
+                                                ],
+                                                "type": "warning"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMax,最大选项数,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleMaxValid,允许上限,16,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMax": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大选项数验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMax": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMin,最少选项数,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleMinValid,允许下限,16,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMin": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小选项数验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMin": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnum,枚举规则,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnumValid,合法枚举,24,100%,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "30%"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "ruleEnum": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnumMessage,提示信息,24,,,,inscribe=枚举规则验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleEnum": true
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
                             "tabDepend": {
                                 "window": 0.51,
                                 "columns": 2,

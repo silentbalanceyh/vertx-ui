@@ -176,7 +176,7 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "ruleMax,最大长度,8,,aiCheckbox",
+                                            "metadata": "ruleMax,最大位数,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -195,7 +195,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大长度验证失败时的提示信息",
+                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大位数验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMax": true
                                             }
@@ -203,7 +203,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMin,最小长度,8,,aiCheckbox",
+                                            "metadata": "ruleMin,最小位数,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -222,7 +222,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小长度验证失败时的提示信息",
+                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小位数验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMin": true
                                             }
@@ -230,7 +230,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleLen,定长规则,8,,aiCheckbox,readOnly=true",
+                                            "metadata": "ruleLen,固定位数,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -241,7 +241,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "ruleLenValid,固定长度,16,100%,aiInputNumber",
+                                            "metadata": "ruleLenValid,设置位数,16,100%,aiInputNumber",
                                             "optionJsx.depend.enabled": {
                                                 "ruleLen": true
                                             }
@@ -249,68 +249,9 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleLenMessage,提示信息,24,,,,inscribe=定长规则验证失败时的提示信息",
+                                            "metadata": "ruleLenMessage,提示信息,24,,,,inscribe=固定位数规则验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleLen": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleReg,正则规则,8,,aiCheckbox,readOnly=true",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleRegValid,正则表达式,16,100%",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleReg": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleRegMessage,提示信息,24,,,,inscribe=正则规则验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleReg": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEnum,枚举规则,,,aiCheckbox,readOnly=true",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEnumValid,合法枚举,24,100%,aiInputMulti",
-                                            "optionJsx.styleInput": {
-                                                "width": "30%"
-                                            },
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEnum": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEnumMessage,提示信息,24,,,,inscribe=枚举规则验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEnum": true
                                             }
                                         }
                                     ],
@@ -386,7 +327,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
+                                            "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=不等于规则验证失败时的显示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleDiff": true
                                             }
