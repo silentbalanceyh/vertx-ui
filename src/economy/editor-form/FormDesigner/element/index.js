@@ -8,6 +8,7 @@ import aiCheckbox from "./aiCheckbox";
 import aiRadio from "./aiRadio";
 import aiDatePicker from "./aiDatePicker";
 import aiTimePicker from "./aiTimePicker";
+import aiFileUpload from "./aiFileUpload";
 
 export default {
     aiInput,
@@ -19,5 +20,6 @@ export default {
     aiCheckbox,
     aiRadio,
     aiDatePicker,
-    aiTimePicker
+    aiTimePicker,
+    aiFileUpload
 }

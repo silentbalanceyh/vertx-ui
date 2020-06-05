@@ -47,7 +47,7 @@
             "aiListSelector,列表选择器",
             "aiTreeSelector,树选择器",
             "aiTableEditor,表格编辑器",
-            "aiDialogEditor,子表单编辑器"
+            "aiDialogEditor,窗口编辑器"
         ]
     },
     "_status": {
