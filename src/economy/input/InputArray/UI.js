@@ -16,7 +16,7 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtReady(this, () => {
             const {$holder = 0, data = []} = this.state;
-            const {id = "", styleInput = {}} = this.props;
+            const {id = "", styleInput = {}, disabled = false} = this.props;
             /* 构造特殊数组 */
             const input = [];
             for (let idx = 0; idx < $holder; idx++) {
@@ -28,13 +28,17 @@ class Component extends React.PureComponent {
                         const key = `${id}-${each}`;
                         const value = data[each];
                         return (
-                            <Input key={key} className={"input-segment"} addonAfter={
-                                <Icon type={"delete"} onClick={Op.onRemove(this, each)}/>
-                            } style={styleInput} onChange={Op.rxChange(this, each)} value={value}/>
+                            <Input key={key} className={"input-segment"}
+                                   addonAfter={
+                                       <Icon type={"delete"}
+                                             disabled={disabled}
+                                             onClick={Op.onRemove(this, each)}/>
+                                   } style={styleInput} onChange={Op.rxChange(this, each)}
+                                   value={value} disabled={disabled}/>
                         )
                     })}
                     <Button icon={"plus"} size={"small"}
-                            disabled={Op.isDisabled(this)}
+                            disabled={Op.isDisabled(this) || disabled}
                             onClick={Op.onAdd(this)}/>
                 </div>
             )

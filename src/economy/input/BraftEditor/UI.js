@@ -18,9 +18,17 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, content} = this.state;
+        const {height} = config;
+        const style = {};
+        if (height) {
+            style.height = height;
+        } else {
+            style.height = 240;
+        }
         return (
             <Input.Group className={"web-braft-editor"}>
                 <BraftEditor {...config}
+                             style={style}
                              value={content}
                              onChange={Op.on2Change(this)}/>
             </Input.Group>

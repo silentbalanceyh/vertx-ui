@@ -77,6 +77,13 @@ const raftLayout = (raft = {}, params = {}) => {
     return calculated;
 };
 export default {
+    raftRule: (reference, item = {}) => {
+        const ruleItem = Abs.clone(item);
+        aiErrorFocus(reference, ruleItem);
+        aiValidator(reference, ruleItem);
+        aiNormalizer(reference, ruleItem);
+        return ruleItem;
+    },
     raftAttribute,
     raftUi,
     raftLayout

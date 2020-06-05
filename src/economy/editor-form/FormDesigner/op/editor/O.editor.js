@@ -3,6 +3,23 @@ import Ux from 'ux';
 import event from './I.editor.event';
 import yo from './I.editor.yo';
 
+const yiData = (reference, state = {}) => {
+    /* 初始化行专用操作 */
+    const key = `row-${Ux.randomString(8)}`;
+    const {data = {}} = reference.props;
+    const span = 24 / data.columns;     // 计算列宽度
+    state.$config = Ux.clone(data);     // 原始配置
+    state.$rows = [{
+        key,
+        /* 修改节点 */
+        data: [Cmn.cellNew(span, {
+            rowIndex: 0,
+            key,
+        })]
+    }];
+    return Ux.promise(state);
+}
+
 export default {
     /*
      * 网格初始化
@@ -15,12 +32,7 @@ export default {
         /* _commands 命令工具栏 */
         state.$ready = true;
 
-        /* 初始化行专用操作 */
-        const key = `row-${Ux.randomString(8)}`;
-        state.$rows = [{
-            key,
-        }];
-        reference.setState(state);
+        yiData(reference, state).then(Ux.pipe(reference));
     },
     yiRow: (reference) => {
         const state = {};
@@ -33,15 +45,15 @@ export default {
                 const {$inited = {}} = reference.state;
                 const {config = {}} = reference.props;
                 if (!$inited.hasOwnProperty("columns")
-                    && config.hasOwnProperty("grid")) {
-                    $inited.columns = `${config.grid}`;
+                    && config.hasOwnProperty("columns")) {
+                    $inited.columns = `${config.columns}`;
                 }
                 $inited.type = "WEB";
                 processed.$inited = $inited;
                 return Ux.promise(processed);
             })
             .then(processed => Cmn.yiCommand(reference, processed))
-            .then(processed => Cmn.yiRowCell(reference, processed))
+            // .then(processed => Cmn.yiRowCell(reference, processed))
             .then(Ux.ready).then(Ux.pipe(reference))
     },
     yiCell: (reference) => {

@@ -382,7 +382,35 @@ const elementGroup = (array = [], field) => {
     }
     return result;
 };
+/**
+ *
+ * ## 标准函数
+ *
+ * @param {Array} target 被合并的数组
+ * @param {Array} source 将被合并的数组
+ * @param {String} field 合并字段
+ * @returns {Array} 返回最终数据
+ */
+const elementJoin = (target = [], source = [], field = "key") => {
+    const $target = Abs.clone(target);
+    // 更新
+    $target.forEach(merged => {
+        const found = elementUnique(source, field, merged[field]);
+        if (found) {
+            Object.assign(merged, found);
+        }
+    });
+    // 增加
+    source.forEach(added => {
+        const found = elementUnique(target, field, added[field]);
+        if (!found) {
+            $target.push(Abs.clone(added));
+        }
+    })
+    return $target;
+}
 export default {
+    elementJoin,
     elementFlat,
     elementWrap,
     elementIndex,

@@ -19,13 +19,17 @@ const plxTreeOptions = (reference, config = {}) => {
      */
     let tree = Ut.toTreeConfig(config.tree);
 
-    const id = Ut.formGet(reference, tree.key);
-    if (id) {
-        /*
-         * 1.1 必须过滤当前节点，即主键和当前节点不等
-         */
-        options = options.filter(option => option[tree.key] !== id);
+    const {form} = reference.props;
+    if (form) {
+        const id = Ut.formGet(reference, tree.key);
+        if (id) {
+            /*
+             * 1.1 必须过滤当前节点，即主键和当前节点不等
+             */
+            options = options.filter(option => option[tree.key] !== id);
+        }
     }
+
     /*
      * 构造 Uarr 引用
      */

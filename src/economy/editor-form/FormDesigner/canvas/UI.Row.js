@@ -45,12 +45,14 @@ class Component extends React.PureComponent {
                     </div>
                     <Row className={`middle ${active}`}>
                         {(() => {
-                            const {$cells = []} = this.state;
-                            return $cells.map(cell => {
+                            const {data = []} = this.props;
+                            return data.map(cell => {
                                 const cellAttrs = Op.yoCell(this, cell, config);
                                 return (
                                     <CellEditor {...cellAttrs}
                                                 reference={this}
+                                                rxCellConfig={Op.rxCellConfig(this)}
+                                                rxCellRefresh={Op.rxCellRefresh(this)}/* 单元格刷新 */
                                                 rxCellFill={Op.rxCellFill(this)}    /* 单元格填充 */
                                                 rxCellSplit={Op.rxCellSplit(this)}  /* 单元格拆分 */
                                                 rxCellMerge={Op.rxCellMerge(this)}  /* 单元格合并 */

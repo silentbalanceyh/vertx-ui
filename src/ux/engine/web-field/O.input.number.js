@@ -5,6 +5,8 @@ import R from '../expression';
 const aiInputNumber = (reference, jsx = {}, onChange) => {
     // onChange处理
     R.Ant.onChange(jsx, onChange);
+    // ReadOnly处理
+    R.Ant.onReadOnly(jsx, false, reference);
     return (<InputNumber {...jsx}/>);
 };
 

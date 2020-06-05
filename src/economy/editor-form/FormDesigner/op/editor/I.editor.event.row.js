@@ -24,6 +24,19 @@ export default {
         }
         reference.setState({$rows});
     },
+    rxRowConfig: (reference) => (rows = []) => {
+        let {$rows = []} = reference.state;
+        /*
+         * 同构
+         * {
+         *      "key": "xxx",
+         *      "data": []
+         * }
+         */
+        $rows = Ux.clone($rows);
+        $rows = Ux.elementJoin($rows, rows);
+        reference.setState({$rows: $rows});
+    },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
         $rows = Ux.clone($rows);
@@ -32,16 +45,17 @@ export default {
             rowIndex = $rows.length - 1;
         }
         $rows.splice(rowIndex + 1, 0, {
-            key: `row-${Ux.randomString(8)}`
+            key: `row-${Ux.randomString(8)}`,
+            data: []
         });
         reference.setState({$rows});
     },
     rxRowFill: (reference) => (rowIndex) => {
-        const $cells = Cmn.cellWidth(reference, false);
-        reference.setState({$cells});
+        const data = Cmn.cellWidth(reference, false);
+        Cmn.rowRefresh(reference, data);
     },
     rxRowCompress: (reference) => (rowIndex) => {
-        const $cells = Cmn.cellWidth(reference, true);
-        reference.setState({$cells});
+        const data = Cmn.cellWidth(reference, true);
+        Cmn.rowRefresh(reference, data);
     }
 }

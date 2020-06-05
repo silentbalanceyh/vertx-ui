@@ -1,4 +1,4 @@
-import {Checkbox} from "antd";
+import {Checkbox, Switch} from "antd";
 import React from "react";
 import R from '../expression';
 import normalizeAttribute from './I.fn.uniform';
@@ -51,16 +51,12 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
         )
     } else {
         const $rest = Abs.clone(rest);
-        const {onChange, ...left} = $rest;
-        return (
-            <Checkbox {...left} onChange={event => {
-                // 解决特殊的 BUG，主要是单处理
-                const value = event.target.checked;
-                if (U.isFunction(onChange)) {
-                    onChange(value);
-                }
-            }}/>
-        )
+        const {onChange, mode, ...left} = $rest;
+        if ("SWITCH" === mode) {
+            return (<Switch {...left} onChange={onChange}/>)
+        } else {
+            return (<Checkbox {...left} onChange={onChange}/>)
+        }
     }
 };
 

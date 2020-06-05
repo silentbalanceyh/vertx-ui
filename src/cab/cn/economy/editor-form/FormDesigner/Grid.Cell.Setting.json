@@ -1,0 +1,714 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=字段基础属性"
+            ],
+            [
+                "render,组件类型",
+                "label,标签/标题,,,,placeholder=<标签>",
+                {
+                    "metadata": "field,字段名,,,aiSelect",
+                    "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                }
+            ],
+            [
+                {
+                    "metadata": "required,是否必填,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "必填",
+                        "unCheckedChildren": "可选"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "requiredMessage,必填提示,16,,,placeholder=如果用户未填写时的提示文字！"
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveField,保存配置,SUBMIT,,ux-success"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "advancedSetting",
+                    "config": {
+                        "activeKey": "tabIntro",
+                        "defaultActiveKey": "tabIntro",
+                        "className": "tool-setting",
+                        "items": "属性配置说明,tabIntro;基础属性,tabText;特殊属性,tabSepc;选项属性,tabSelector;级联/多选属性,tabCascade;验证规则,tabValidate;窗口/表格属性,tabWindow;远程属性,tabRemote;显示属性,tabView",
+                        "pages": {
+                            "tabText": {
+                                "window": 1,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "title=文本属性"
+                                    ],
+                                    [
+                                        "maxLength,最大长度,,100%,aiInputNumber,placeholder=默认256,min=1,max=4096",
+                                        "rows,最大行数,,100%,aiInputNumber,placeholder=多行文本专用,min=2,max=10"
+                                    ],
+                                    [
+                                        "addonBefore,组件前缀,,,,addonBefore=…",
+                                        "addonAfter,组件后缀,,,,addonAfter=…"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "prefix,文字前缀",
+                                            "optionJsx.prefix": "…"
+                                        },
+                                        {
+                                            "metadata": "suffix,文字后缀",
+                                            "optionJsx.suffix": "…"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "readOnly,只读,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "只读",
+                                                "unCheckedChildren": "可编辑"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "inscribe,只读文本,,,,placeholder=只读模式下的呈现文本"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "allowClear,允许清空,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "visibilityToggle,显示密码,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "可显示",
+                                                "unCheckedChildren": "不可显示（密码框专用）"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=数值属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "normalize,输入限制,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "decimal,仅浮点数",
+                                                "number,仅数值",
+                                                "integer,仅正整数",
+                                                "upper,仅大写",
+                                                "id,仅标识符"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "min,最小值,,100%,aiInputNumber",
+                                        "max,最大值,,100%,aiInputNumber"
+                                    ],
+                                    [
+                                        "precision,精度,,100%,aiInputNumber,min=1",
+                                        "step,步进系数,,100%,aiInputNumber,placeholder=默认为1"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "iNumberFormat,特殊格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "PERCENT,百分比",
+                                                "CURRENCY,货币格式"
+                                            ]
+                                        },
+                                        "iNumberUnit,货币单位,,,,placeholder=如￥，$等"
+                                    ]
+                                ]
+                            },
+                            "tabWindow": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=弹出窗口规则"
+                                    ],
+                                    [
+                                        "windowTitle,窗口标题,12",
+                                        "windowWidth,窗口宽度,12,,,placeholder=默认宽度800像素"
+                                    ],
+                                    [
+                                        "windowOk,确认,12,,,placeholder=确认按钮文字",
+                                        "windowCancel,取消,12,,,placeholder=取消按钮文字"
+                                    ],
+                                    [
+                                        "windowValidation,验证消息,24,,,placeholder=执行窗口操作时的验证消息，主要用于选项验证！"
+                                    ],
+                                    [
+                                        "title=表格列设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "table,,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "高级配置（表达式录入）",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabRemote": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=远程接口配置"
+                                    ],
+                                    [
+                                        "ajaxUri,远程路径,18,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                        "ajaxSource,,6"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ajaxMethod,HTTP方法,12,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "GET,GET方法",
+                                                "POST,POST方法"
+                                            ]
+                                        },
+                                        "ajaxPageSize,每页数量,12,72%,aiInputNumber"
+                                    ],
+                                    [
+                                        "ajaxMagic,查询参数,18"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "windowSearch,启用搜索,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "windowSearchField,搜索字段,16,,aiInputMulti",
+                                            "optionJsx": {
+                                                "config.limit": 3,
+                                                "styleInput": {
+                                                    "width": "25%"
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ajaxSort,排序参数,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "field",
+                                                            "title": "字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "isAsc",
+                                                            "title": "升序降序",
+                                                            "$render": "EDITOR",
+                                                            "config": {
+                                                                "render": "aiRadio",
+                                                                "optionJsx.config.items": [
+                                                                    "ASC,升序",
+                                                                    "DESC,降序"
+                                                                ]
+                                                            }
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=表单字段链接（Linker配置）"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "linker,链接配置,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataFrom",
+                                                            "title": "源字段名",
+                                                            "width": 180,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "dataTo",
+                                                            "title": "表单字段名",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabValidate": {
+                                "window": 1,
+                                "columns": 4,
+                                "ui": [
+                                    [
+                                        "title=验证规则表"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMax,最大值,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleMaxValid,最大值,,80%,aiInputNumber",
+                                        "ruleMaxMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMin,最小值,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleMinValid,最小值,,80%,aiInputNumber",
+                                        "ruleMinMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleLen,固定长度,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleLenValid,固定值,,80%,aiInputNumber",
+                                        "ruleLenMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnum,枚举验证,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleEnumMessage,提示消息,12"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEnumValid,合法枚举值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "23%"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleReg,正则表达式,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "ruleRegMessage,提示消息,12"
+                                    ],
+                                    [
+                                        "ruleRegValid,合法表达式,24"
+                                    ]
+                                ]
+                            },
+                            "tabIntro": {
+                                "window": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "说明文档",
+                                            "config": {
+                                                "message": "属性配置说明",
+                                                "description": [
+                                                    "不同组件使用的配置会有所有区别，选择不同组件时不可配置的组件会被禁用！",
+                                                    "对于特殊组件的配置请在`专家`指导下完成。",
+                                                    "设置过程中，可点击组件类型后边的预览按钮查看最终生成的JSON配置。"
+                                                ],
+                                                "type": "info"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabCascade": {
+                                "window": 1,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "title=级联/多选属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "multiple,启用多选,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用多选",
+                                                "unCheckedChildren": "只选择单项"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "multipleTag,标签呈现,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用标签呈现",
+                                                "unCheckedChildren": "使用文字呈现"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "maxCount,多选限制,8,100%,aiInputNumber,placeholder=最多显示项,min=2"
+                                    ],
+                                    [
+                                        "dependImpact,触发重置,24,,aiTextArea,placeholder=填写多个字段名，字段名之间使用英文逗号隔开。,rows=3"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependEnable,依赖字段,12,,aiSelect,placeholder=当前字段在依赖字段取值时启用/禁用",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                        },
+                                        {
+                                            "metadata": "dependType,字段类型,12,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "PURE,纯值",
+                                                "DATUM,动态数据源"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependSource,数据源标识,12,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name"
+                                        },
+                                        "dependField,条件字段,12,,,placeholder=以数据源中哪个字段为条件"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependValue,条件字段值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "23%"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=穿梭框多选属性"
+                                    ],
+                                    [
+                                        "transferLeft,选择源标题",
+                                        "transferRight,被选标题"
+                                    ],
+                                    [
+                                        "transferKey,选择源主键名,,,,placeholder=和选项绑定时的主键字段名"
+                                    ]
+                                ]
+                            },
+                            "tabSelector": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                    [
+                                        "title=选项属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dataSource,数据源,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "items,静态数据源",
+                                                "datum,动态数据源"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumSource,数据标识,,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name"
+                                        },
+                                        "datumKey,值字段名",
+                                        "datumLabel,显示字段名"
+                                    ],
+                                    [
+                                        "expr,格式化表达式,24,,,placeholder=显示格式可使用格式化表达式进行格式化操作！"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeEnabled,启用过滤,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用过滤",
+                                                "unCheckedChildren": "不启用过滤"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        "cascadeSource,过滤字段名,16,,,placeholder=请填写使用的动态数据源中过滤条件字段"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeTarget,过滤参数类型,24,,aiRadio",
+                                            "optionItem.className": "radio-param-selection",
+                                            "optionJsx.config.items": [
+                                                "BOOL,逻辑值",
+                                                "FIX,固定值",
+                                                "ENUM,枚举值",
+                                                "UNIQUE,字典值",
+                                                "USER,当前登录用户",
+                                                "FORM,表单值",
+                                                "ROUTE,路由值",
+                                                "PROP,属性值（React组件）",
+                                                "STATE,状态值（React组件）"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "cascadeValue,过滤参数值,24"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "items,选项表,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "name",
+                                                            "title": "固定值",
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "label",
+                                                            "title": "显示字段",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabSepc": {
+                                "window": 1,
+                                "columns": 3,
+                                "ui": [
+                                    [
+                                        "title=日期/时间属性"
+                                    ],
+                                    [
+                                        "format,格式,,,,placeholder=如：YYYY-MM-DD",
+                                        {
+                                            "metadata": "dateMode,时间模式,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "full,标准格式",
+                                                "time,仅时间",
+                                                "date,仅日期",
+                                                "month,仅月份",
+                                                "year,仅年"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "disabledDate,只选未来,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "只能选未来时间",
+                                                "unCheckedChildren": "所有时间可选"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "showTime,显示时间,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "不显示时间信息",
+                                                "unCheckedChildren": "（标准格式）显示"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "showToday,显示今天,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "不显示`今天`按钮",
+                                                "unCheckedChildren": "（标准格式）显示"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=上传/下载属性"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "listType,上传模式,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "text,文件模式",
+                                                "picture,图片模式",
+                                                "picture-card,卡片图模式"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "withCredentials,携带Cookie？,,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "携带Cookie上传",
+                                                "unCheckedChildren": "不携带Cookie上传"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "fileText,显示文字",
+                                        "accept,支持格式,16,,,placeholder=使用MIME，用逗号隔开"
+                                    ],
+                                    [
+                                        "title=树相关属性"
+                                    ],
+                                    [
+                                        "treeKey,树主键",
+                                        "treeParent,父主键,,,,placeholder=树的构造依赖主键和父主键",
+                                        "treeLeaf,叶节点字段"
+                                    ],
+                                    [
+                                        "treeValue,值字段",
+                                        "treeText,显示字段",
+                                        "treeSort,排序字段"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "treeSelection,树选择模式,24,,aiRadio",
+                                            "optionJsx.className": "radio-tree-selection",
+                                            "optionJsx.config.items": [
+                                                "PARENT_ALL_INCLUDE,含当前所有父节点",
+                                                "PARENT_ALL,所有父节点",
+                                                "PARENT,直接父节点",
+                                                "CHILDREN_ALL_INCLUDE,含当前所有子节点",
+                                                "CHILDREN_ALL,所有子节点",
+                                                "CHILDREN,直接子节点",
+                                                "CURRENT,当前节点"
+                                            ]
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "render"
+        ]
+    }
+}

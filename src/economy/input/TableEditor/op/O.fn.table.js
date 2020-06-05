@@ -8,14 +8,18 @@ const yiColumn = (reference) => {
     const {config = {}, ...rest} = column;
     rest.width = 96;
     rest.render = (text, record, index) => {
+        const {disabled = false} = reference.props;
         const {add = {}, remove = {}} = config;
         return (
             <Button.Group>
                 <Tooltip title={add.tooltip}>
-                    <Button icon={add.icon} onClick={Ux.xtRowAdd(reference, record, index)}/>
+                    <Button icon={add.icon}
+                            disabled={disabled}
+                            onClick={Ux.xtRowAdd(reference, record, index)}/>
                 </Tooltip>
                 <Tooltip title={remove.tooltip}>
                     <Button icon={remove.icon}
+                            disabled={disabled}
                             onClick={event => Ux.xtRowDel(reference, record, index)(event).then(merged => {
                                 if (merged) {
                                     const {config = {}} = reference.props;

@@ -48,8 +48,25 @@ const _aiInput = (reference, values) => (cell = {}) => {
         // 其他项
         const {col = {}, optionItem = {}, optionConfig = {}} = cell;
         const attached = {};
+        /*
+         * 如果有 rules 则带上 hasFeedback
+         * 有 rules 表示有验证规则，则需要设置验证过后的效果
+         */
         if (optionConfig.rules && 0 < optionConfig.rules.length) {
             attached.hasFeedback = true;
+        }
+        /*
+         * 检测 __render 值，特殊的验证效果处理
+         * 设置特殊的验证效果，主要是非输入型组件的验证效果专用处理
+         * 追加 web-form-has-error 类名，保证验证时的提示处理
+         * */
+        const item = Ut.connected();
+        if (item.contains(cell.__render)) {
+            if (!col.className) col.className = "";
+            // 只添加一次
+            if (0 >= col.className.indexOf("web-form-has-error")) {
+                col.className = `web-form-has-error ${col.className}`
+            }
         }
         return (
             <Col {...col}>

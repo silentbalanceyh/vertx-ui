@@ -103,14 +103,18 @@ const ambKv = (input, fnKv) => {
 const ambEvent = (event, config = {}, defaultValue) => {
     let value;
     if (event && U.isFunction(event.preventDefault)) {
-        const {prevent = true} = config;
+        const {prevent = true, checked = false} = config;
         if (prevent) {
             /*
              * 特殊情况才关闭默认的 preventDefault
              */
             event.preventDefault();
         }
-        value = event.target.value;
+        if (checked) {
+            value = event.target.checked;
+        } else {
+            value = event.target.value;
+        }
     } else {
         value = event;
     }

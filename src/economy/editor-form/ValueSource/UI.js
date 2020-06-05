@@ -1,7 +1,8 @@
 import React from 'react';
 import {Col, Row, Tag} from "antd";
 import Ux from "ux";
-import DatumUnique from '../../DatumUnique/UI';
+import DatumUnique from '../DatumUnique/UI';
+import {component} from "../../_internal";
 
 const onInput = (type, reference) => (value) => {
     let expr = type + ":";
@@ -31,9 +32,11 @@ const _EXECUTOR = {
 
 const renderByType = (reference, jsx = {}) => {
     const ref = Ux.onReference(reference, 1);
-    const type = Ux.formHit(ref, "type");
-    if (type) {
-        const {$expression = {}} = reference.props;
+    const {field = "type"} = jsx;
+    const type = Ux.formHit(ref, field);
+    const {disabled = false} = reference.props;
+    if (type && !disabled) {
+        const $expression = Ux.fromHoc(reference, "expression");
         const config = $expression[type];
         const executor = _EXECUTOR[type];
         if (Ux.isFunction(executor)) {
@@ -45,14 +48,18 @@ const renderByType = (reference, jsx = {}) => {
     } else return false;
 }
 
+@component({
+    "i18n.cab": require('./Cab.json'),
+    "i18n.name": "UI",
+})
 class Component extends React.PureComponent {
     render() {
-        const {value} = this.props;
+        const {value, field = "type", disabled = false} = this.props;
         return (
             <div>
                 <Row>
                     <Col span={24}>
-                        {value ? (
+                        {(value && !disabled) ? (
                             <Tag color={"purple"}>
                                 {value}
                             </Tag>
@@ -63,7 +70,7 @@ class Component extends React.PureComponent {
                 </Row>
                 <Row>
                     <Col span={24}>
-                        {renderByType(this)}
+                        {renderByType(this, {field})}
                     </Col>
                 </Row>
             </div>

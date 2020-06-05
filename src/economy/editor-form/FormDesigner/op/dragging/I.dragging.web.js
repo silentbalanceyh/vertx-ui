@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import Cmd from "../library";
-import forbidden from './I.drop.forbidden';
+import fnForbidden from './I.drop.forbidden';
+import fnRaft from './I.drop.raft'
 
 const sourceConnect = (connect, monitor) => {
     return {
@@ -11,7 +12,9 @@ const sourceConnect = (connect, monitor) => {
 const sourceSpec = {
     beginDrag: (props) => {
         const {item = {}} = props;
-        return {type: item.key};
+        return {
+            render: item.key,   // 渲染类型，和菜单中的类型匹配
+        };
     }
 };
 const targetSpec = {
@@ -19,19 +22,22 @@ const targetSpec = {
         // 关闭覆盖效果
         Cmd.dropColor(component, false);
         // 判断是否可以放入
-        const {type} = monitor.getItem();
-        const fnDrop = forbidden[type];
-        // 是否可放入
-        Ux.dgDebug({type}, "放置组件", "#458B00")
-        let okForDrop = true;
-        if (Ux.isFunction(fnDrop)) {
+        const {render} = monitor.getItem();
+        fnForbidden(component, render, () => {
             const ref = Ux.onReference(component, 1);
-            okForDrop = fnDrop(props, ref);
-        }
-        // 可以放入时才执行
-        if (okForDrop) {
-
-        }
+            const {config = {}} = props;
+            /*
+             * 特殊的单元格参数信息
+             * 1. 使用同结构操作，原生的 config 中追加三个属性
+             * - render
+             * - data（最终的数据配置）
+             * - ready（是否已经拖入了控件）
+             */
+            const cellData = Ux.clone(config);
+            cellData.data = fnRaft(component, render);
+            cellData.render = render;
+            Ux.fn(ref).rxCellConfig(cellData);
+        })
     },
     /* 浮游在 Target 之上 */
     hover: (props, monitor, component) => {

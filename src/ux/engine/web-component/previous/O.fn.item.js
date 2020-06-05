@@ -28,7 +28,6 @@ export default (reference, item = {}, render) => {
             //item.optionItem.wrapperCol = {span: 24};
         }
     }
-    console.info(item);
     return item.optionItem ? (
         <Form.Item {...item.optionItem}>
             {jsxRender(item)}

@@ -19,10 +19,11 @@ const targetSpec = {
         const sourceItem = monitor.getItem();
         const targetItem = Cmd.item(props);
         if (sourceItem && targetItem) {
-            Ux.fn(component).rxCellWrap(sourceItem, targetItem);
             // 关闭覆盖效果
             const {reference} = component.props;
             Cmd.dropColor(reference, false);
+
+            Ux.fn(component).rxCellWrap(sourceItem, targetItem);
         }
     },
     /* 浮游在 Target 之上 */

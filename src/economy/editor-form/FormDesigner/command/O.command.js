@@ -14,7 +14,7 @@ const showRowDrawer = (reference, item, config = {}) => {
         $drawer: item.key,      // 打开 Popover
         $setting: {
             type: "row",
-            className: "web-form-designer-drawer",
+            className: "web-form-row-drawer",
             rowIndex,
         }
     })
@@ -22,6 +22,12 @@ const showRowDrawer = (reference, item, config = {}) => {
 const showCellDrawer = (reference, item, config = {}) => {
     reference.setState({
         $drawer: item.key,      // 打开 Popover
+        $setting: {
+            type: "cell",
+            className: "web-form-cell-drawer",
+            rowIndex: config.rowIndex,
+            cellIndex: config.cellIndex,
+        }
     });
 }
 /*

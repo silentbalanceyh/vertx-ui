@@ -12,54 +12,56 @@ export default (rest = {}, fnChange, jsx = {}) => {
         depend,
         prevent = true
     } = jsx;
-    if (reference) {
+    /*
+     * 一定会包含 onChange 参数，信任内部的 native code 的相关处理
+     * 1）fnChange：通过编程写的外部传入的 change 函数
+     * 2）onChange：默认的，zero ui 中的特殊 onChange
+     * -- 处理 linker
+     * -- 处理 impact 两个节点
+     * 3）是否包含了 reference 引用信息
+     * -- 自定义的一定包含 reference
+     * -- 非自定义的一定不包含 reference
+     */
+    rest.onChange = (event) => {
         /*
-         * 只有 reference 存在的时候才考虑配置
+         * 二义性函数处理值信息，直接带 prevent 读取
+         * 带 prevent 是防止一些特殊的 prevent 被取消
          */
-        rest.onChange = (event) => {
+        const value = Ele.ambEvent(event, {prevent});
+        const formValues = {};
+        if (config.linker) {
             /*
-             * 使用二义性函数处理值
+             * linker 专用处理，配置项
+             * optionJsx.config.linker
+             * optionJsx.config.linkerField
              */
-            const value = Ele.ambEvent(event, {prevent});
-            if (config.linker) {
-                /*
-                 * linker 专用处理，配置项
-                 * optionJsx.config.linker
-                 * optionJsx.config.linkerField
-                 */
-                const formValues = {};
-                Ut.writeLinker(formValues, config,
-                    (field) => Ele.elementUnique(options, field, value));
+            Ut.writeLinker(formValues, config,
+                (field) => Ele.elementUnique(options, field, value));
+        }
+        if (depend) {
+            const {impact = {}} = depend;
+            if (Abs.isObject(impact) && !Abs.isEmpty(impact)) {
                 /*
                  * depend 专用处理
                  * optionJsx.depend.impact
                  */
                 Ut.writeImpact(formValues, depend, value);
-                /*
-                 * 不为空就设值
-                 */
-                if (!Abs.isEmpty(formValues)) {
-                    Dev.dgDebug(formValues, "[ Ux ] depend.impact / linker 结果！");
-                    Ut.formHits(reference, formValues);
-                }
             }
-            /*
-             * 最后调用 fnChange
-             */
-            if (U.isFunction(fnChange)) {
-                fnChange(event);
-            }
-        }
-    } else {
-        if (U.isFunction(fnChange)) {
-            /*
-             * 直接传递：直接将 fnChange 传入给 onChange
-             */
-            rest.onChange = fnChange;
         }
         /*
-         * 另外的一个分支下 onChange 属性不存在，这里不注入任何和 onChange 相关的内容
-         * *：后期可以考虑从这里扩展处理相关内容，保证
+         * reference 存在才执行 form 逻辑
          */
+        if (reference) {
+            /*
+             * 不为空就设值
+             */
+            if (!Abs.isEmpty(formValues)) {
+                Dev.dgDebug(formValues, "[ Ux ] depend.impact / linker 结果！");
+                Ut.formHits(reference, formValues);
+            }
+        }
+        if (U.isFunction(fnChange)) {
+            fnChange(event, value, reference);
+        }
     }
 }

@@ -35,10 +35,18 @@
                 height: 32px;
                 line-height: 32px;
                 padding: 0 8px;
-            }
 
-            .draggable-item:hover {
-                cursor: move;
+                &:hover {
+                    cursor: move;
+                }
+
+                &-disabled {
+                    color: @font-disabled;
+
+                    &:hover {
+                        cursor: not-allowed;
+                    }
+                }
             }
         }
     }

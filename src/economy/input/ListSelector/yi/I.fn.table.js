@@ -3,7 +3,8 @@ import U from 'underscore';
 
 export default (reference, config = {}) => {
     const ref = Ux.onReference(reference, 1);
-    const columns = Ux.configColumn(ref, config.table.columns);
+    const {table = {}} = config;
+    const columns = Ux.configColumn(ref, table.columns ? table.columns : []);
     const rowSelection = {
         type: 'radio',
         onSelect: keys => {

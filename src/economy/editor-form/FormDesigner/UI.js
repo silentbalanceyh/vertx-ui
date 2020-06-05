@@ -46,7 +46,11 @@ class Component extends React.PureComponent {
                     </Spin>
                 </div>
             )
-        }, {component: LoadingContent})
+        }, {
+            component: LoadingContent,
+            name: "FormDesigner",
+            logger: true,
+        })
     }
 }
 

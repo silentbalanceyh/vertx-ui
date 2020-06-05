@@ -1,7 +1,6 @@
 import React from "react";
 
 const aiDatumCascade = (reference, jsx = {}) => {
-
     return (<span>H</span>);
 };
 const ai2DatumCascade = (onChange) => (reference, jsx = {}) => {

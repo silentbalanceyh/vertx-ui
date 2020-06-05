@@ -1,54 +1,76 @@
-import Ux from "ux";
 import Cmn from '../library';
+import Ux from 'ux';
+import yo from './I.editor.yo.data';
+
+const toStatus = (reference) => {
+    const {data = []} = reference.props;
+    const spans = Cmn.cellSpans(data);
+    const $status = {};
+    $status.used = spans;
+    $status.cells = data.length;
+    return $status;
+}
 
 export default {
-
+    ...yo,
     yoRow: (reference, row, index) => {
-        /* 处理 columns 列信息 */
-        const {data = {}} = reference.props;
-        let rowConfig = {};
-        {
-            // 列类型
-            if (!data.columns) data.columns = 3;
-            rowConfig.grid = data.columns;
-        }
         // 行对应元数据
-        rowConfig = Ux.clone(rowConfig);
+        const rowConfig = {};
         rowConfig.rowIndex = index;
         rowConfig.key = row.key;
+        const {data = {}} = reference.props;
+        rowConfig.span = 24 / data.columns;     // 计算列宽度
+        rowConfig.columns = data.columns;          // 网格数据
+        // 表单配置传入
+        const {rxApi} = reference.props;
         return {
-            reference,      /* 顶层引用 */
+            ...Ux.onUniform(reference.props),
+            reference,          /* 顶层引用 */
             config: rowConfig,
-            data: {},   // 后期要使用
-            key: row.key
+            data: row.data,     // 后期要使用
+            key: row.key,
+            $form: data,        // 表单配置
+            rxApi,              // Api 读取器
         };
     },
     yoCell: (reference, cell, config = {}) => {
-        /*
-         * 占用行计算
-         */
-        const {$cells = []} = reference.state;
-        const spans = Cmn.cellSpans($cells);
-        const $status = {};
-        $status.used = spans;
-        $status.cells = $cells.length;
+        /* 状态计算 */
+        const $status = toStatus(reference);
         /* 单元格交换函数 */
-        const {rxCellWrap} = reference.props;
+        const {raft = {}, render, ...rest} = cell;
+
+        const {rxApi} = reference.props;
         return {
-            rxCellWrap, /* 继承的单元格交换函数 */
+            ...Ux.onUniform(reference.props),
             config: {
+                rowKey: config.key,
                 ...config,
-                ...cell,
-            }, key: cell.key, $status
+                ...rest,
+            },
+            data: {
+                ...raft,
+                render,
+            },
+            key: cell.key,
+            $status,
+            rxApi,
         };
     },
     yoExtra: (reference) => {
-        const {$cells = []} = reference.state;
-        const spans = Cmn.cellSpans($cells);
+        const {data = []} = reference.props;
+        const spans = Cmn.cellSpans(data);
         if (24 === spans) {
-            return {commandStyle: {display: "none"}, className: "e-command"};
+            return {
+                commandStyle: {display: "none"},
+                className: "e-command",
+                placement: "left",
+            };
         } else {
-            return {commandStyle: {display: "inline-block"}, className: "e-command"};
+            return {
+                commandStyle: {display: "inline-block"},
+                className: "e-command",
+                placement: "left"
+            };
         }
     }
 }

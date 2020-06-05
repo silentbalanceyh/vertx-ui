@@ -8,6 +8,7 @@ const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
+const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 
 const paths = require("./paths");
 // 自定义模块
@@ -374,6 +375,7 @@ module.exports = {
                         }
                     },
                 }),*/
+        new CaseSensitivePathsPlugin(),
         // Generates an `index.html` file with the <script> injected.
         new HtmlWebpackPlugin({
             inject: true,

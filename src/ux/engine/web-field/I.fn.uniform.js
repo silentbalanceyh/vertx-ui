@@ -15,9 +15,10 @@ export default (reference, jsx, onChange) => {
         "options",   // 后入参数
     ]);
     // 解决 rest 为 {} 时引起的 Bug
-    const rest = {};
+    let rest = {};
     Object.keys(jsx).filter(key => !exclude.contains(key))
         .forEach(key => rest[key] = jsx[key]);
+    rest = Abs.clone(rest); // 拷贝防止二次
     /*
      * 1）onChange 事件的处理（先构造配置项）
      */

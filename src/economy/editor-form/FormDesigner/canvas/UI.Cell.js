@@ -6,7 +6,7 @@ import Rdr from "../component";
 import Ux from 'ux';
 import {DragSource} from "react-dnd";
 import CellDrop from './UI.Cell.Drop';
-import CellDropWeb from './UI.Control.Drop';
+import CellDropWeb from './UI.Cell.DropContent.js';
 
 @component({
     "i18n.cab": require('../Cab.json'),
@@ -18,13 +18,20 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, connectDragSource} = this.props;
+        const {config = {}, data = {}, connectDragSource} = this.props;
         const {span} = config;
         if (span) {
             return Ux.xtReady(this, () => {
-                const {$hover = false} = this.state;
+                const {$hover = false, $drawer} = this.state;
+                const colAttrs = {};
+                colAttrs.span = span;
+                colAttrs.className = "canvas-cell " + ($hover ? "canvas-cell-hover" : "");
+                if (!$drawer && data.render) {
+                    /* 双击打开 */
+                    colAttrs.onDoubleClick = Op.rxCellSelect(this);
+                }
                 return (
-                    <Col span={span} className={`canvas-cell ${$hover ? "canvas-cell-hover" : ""}`}>
+                    <Col {...colAttrs}>
                         {connectDragSource(
                             <div className={"content"}>
                                 <CellDrop {...this.props} reference={this}/>
@@ -33,7 +40,10 @@ class Component extends React.PureComponent {
                                     {(() => {
                                         const {$merge} = this.state;
                                         if ($merge) {
-                                            return Rdr.renderCmd(this, $merge, config)
+                                            return Rdr.renderCmd(this, $merge, {
+                                                ...config,
+                                                placement: "bottom"
+                                            })
                                         } else return false;
                                     })()}
                                 </div>

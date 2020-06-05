@@ -7,7 +7,7 @@ import {Form} from "antd";
 const yiInternal = (reference) => {
     const state = {};
     Ux.raftForm(reference, {
-        id: "SubForm-GridRow",
+        id: "SubForm-Row-Setting",
         renders: {
             type: (reference, jsx) => {
                 return Ux.aiRadio(reference, jsx, item => {
@@ -20,9 +20,9 @@ const yiInternal = (reference) => {
             columns: (reference, jsx) => {
                 const {config = {}} = reference.props;
                 const {items = {}} = jsx;
-                const {grid} = config;
+                const {columns} = config;
                 const options = [];
-                for (let idx = 1; idx <= grid; idx++) {
+                for (let idx = 1; idx <= columns; idx++) {
                     const option = {};
                     option.value = `${idx}`;
                     option.key = `${idx}`;
@@ -46,21 +46,28 @@ const yiInternal = (reference) => {
         state.raft = raft;
         state.$op = {
             $opSaveRow: (reference, jsx = {}) => (params = {}) => {
-                // 行属性直接更改系统中的 $cells 变量
                 const ref = Ux.onReference(reference, 1);
-                const {$cells = []} = ref.state;
-                if (0 < $cells.length) {
-                    // 只保留第一个 $cells
-                    const columns = Ux.valueInt(params.columns, 3);
-                    const span = 24 / columns;
-                    const newCells = Ux.clone($cells);
-                    newCells.forEach(item => item.span = span);
-                    ref.setState({$cells: newCells, $drawer: undefined});
-                }
+                const {data = [], config = {}} = ref.props;
+                // 当前表单处理
                 reference.setState({
                     $loading: false,
                     $submitting: false
                 });
+                if (0 < data.length) {
+                    // 只保留第一个 $cells
+                    const columns = Ux.valueInt(params.columns, 3);
+                    const span = 24 / columns;
+                    const newCells = Ux.clone(data);
+                    newCells.forEach(item => item.span = span);
+                    // 行处理
+                    ref.setState({$drawer: undefined});
+                    // 行数据
+                    const rowData = {};
+                    rowData.key = config.key;
+                    rowData.data = newCells;
+                    // 调用顶层
+                    Ux.fn(ref).rxRowConfig([rowData]);
+                }
             }
 
         }
@@ -70,7 +77,7 @@ const yiInternal = (reference) => {
 
 @component({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "Grid.Row",
+    "i18n.name": "Grid.Row.Setting",
 })
 class Component extends React.PureComponent {
     componentDidMount() {

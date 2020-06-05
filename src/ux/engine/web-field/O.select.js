@@ -38,6 +38,10 @@ const aiSelect = (reference, jsx = {}, onChange) => {
     if (!rest.disabled && !rest.readOnly) {
         rest.filterOption = filterOption
     }
+    // 没有任何内容时候的 100% 宽度处理
+    if (!rest.style) {
+        rest.style = {width: "100%"};
+    }
     return (
         <Select {...rest}>
             {options.map(item => (

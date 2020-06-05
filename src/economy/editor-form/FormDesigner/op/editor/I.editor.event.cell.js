@@ -1,22 +1,26 @@
 import Ux from "ux";
 import Cmn from '../library'
 import rxCellWrap from './I.editor.event.cell.wrap';
+import rxCellConfig from './I.editor.event.cell.config';
 
 export default {
+    rxCellConfig,
+    rxCellRefresh: (reference) => (data = []) =>
+        Cmn.rowRefresh(reference, data),
     rxCellMerge: (reference) => (cellIndex) => {
-        const {$cells = []} = reference.state;
+        const {data = []} = reference.props;
         // 当前索引：cellIndex
         // 前一个索引：cellIndex - 1
         const preIndex = cellIndex - 1;
         const curIndex = cellIndex;
         const replaced = [];
         let appendSpan = 0;
-        for (let idx = $cells.length - 1; idx >= 0; idx--) {
+        for (let idx = data.length - 1; idx >= 0; idx--) {
             if (curIndex === idx) {
-                appendSpan = $cells[idx].span;
+                appendSpan = data[idx].span;
                 continue;
             }
-            const append = Ux.clone($cells[idx]);
+            const append = Ux.clone(data[idx]);
             if (preIndex === idx) {
                 append.span += appendSpan;
             }
@@ -28,33 +32,33 @@ export default {
          */
         const revered = replaced.reverse();
         revered.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells: revered});
+        Cmn.rowRefresh(reference, revered);
     },
     rxCellDel: (reference) => (cellIndex) => {
-        const {$cells = []} = reference.state;
-        let replaced = $cells.filter((item, index) => index !== cellIndex);
+        const {data = []} = reference.props;
+        let replaced = data.filter((item, index) => index !== cellIndex);
         replaced.forEach((item, index) => item.cellIndex = index);
         replaced = Ux.clone(replaced);
-        reference.setState({$cells: replaced});
+        Cmn.rowRefresh(reference, replaced);
     },
     rxCellWrap,
     rxCellFill: (reference) => (cellIndex) => {
-        let {$cells = []} = reference.state;
-        const spans = Cmn.cellSpans($cells);
+        let {data = []} = reference.props;
+        const spans = Cmn.cellSpans(data);
         const added = 24 - spans;
         if (0 < added) {
-            $cells = Ux.clone($cells);
-            $cells.filter((item, index) => cellIndex === index)
+            data = Ux.clone(data);
+            data.filter((item, index) => cellIndex === index)
                 .forEach(item => {
                     item.span += added;
                 });
-            reference.setState({$cells});
+            Cmn.rowRefresh(reference, data);
         }
     },
     rxCellSplit: (reference) => (cellIndex) => {
-        const {$cells = []} = reference.state;
+        const {data = []} = reference.props;
         let added = [];
-        $cells.forEach((cell, index) => {
+        data.forEach((cell, index) => {
             if (cellIndex === index) {
                 const calculated = cell.span / 2;
                 cell.span = calculated;
@@ -66,17 +70,40 @@ export default {
             }
         });
         added.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells: added});
+        Cmn.rowRefresh(reference, added);
     },
     /* 注意这里的 reference 是行引用 */
     rxCellAdd: (reference) => () => {
-        const cell = Cmn.cellNew(reference);
-        /* 直接添加一个新的 */
-        let {$cells = []} = reference.state;
-        $cells = Ux.clone($cells);
+        const {config = {}, data = []} = reference.props;
+        const cell = Cmn.cellNew(config.span, config);
+        /* 直接添加一个新的单元格 */
+        const $data = Ux.clone(data);
         // 行操作，直接追加
-        $cells.push(cell);
-        $cells.forEach((item, index) => item.cellIndex = index);
-        reference.setState({$cells});
+
+        $data.push(cell);
+        $data.forEach((item, index) => item.cellIndex = index);
+        Cmn.rowRefresh(reference, $data);
     },
+    rxCellLabel: (reference, defaultLabel) => (event) => {
+        let value = Ux.ambEvent(event);
+        if (!value) value = defaultLabel;
+        const {config = {}} = reference.props;
+        const params = Ux.clone(config);
+        if (params.data && params.data.optionItem) {
+            params.data.optionItem.label = value;
+            Ux.fn(reference).rxCellConfig(params);
+        }
+    },
+    rxCellSelect: (reference) => (event) => {
+        const {config = {}} = reference.props;
+        const state = {};
+        state.$drawer = "control";
+        state.$setting = {
+            type: "cell",
+            className: "web-form-cell-drawer",
+            rowIndex: config.rowIndex,
+            cellIndex: config.cellIndex,
+        };
+        reference.setState(state);
+    }
 }

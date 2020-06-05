@@ -20,7 +20,7 @@ const applyField = (item = {}) => {
         item.optionConfig.rules = Apply.applyRules(item.optionConfig.rules);
     }
     // Filter专用字段语法，防止逗号冲突
-    if (0 < item.field.indexOf('`')) {
+    if (item.field && 0 < item.field.indexOf('`')) {
         // Filter专用语法解析
         item.field = item.field.replace('`', ',');
     }
@@ -66,6 +66,10 @@ const aiExprTitle = (item) => {
             }
         }
         item = result;
+    }
+    if (Abs.isObject(item) && item.title && !item.field) {
+        // title 行的特殊设置
+        item.field = v4();
     }
     return item;
 };

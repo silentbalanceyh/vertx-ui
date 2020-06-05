@@ -100,7 +100,11 @@ const writeDisabled = (jsx = {}, reference) => {
     const {depend = {}} = jsx;
     const {mode = "DISABLED"} = Abs.clone(depend);
     if ("DISABLED" === mode) {
-        jsx.disabled = isDepend(depend, reference);
+        // Ant Design Form 模式才计算 disabled，否则属于普通模式
+        const {form} = reference.props;
+        if (form) {
+            jsx.disabled = isDepend(depend, reference);
+        }
     }
 };
 /**
@@ -151,17 +155,15 @@ const writeReadOnly = (jsx = {}, reference) => {
  */
 const writeImpact = (formValues = {}, depend = {}, value) => {
     const {impact = {}} = depend;
-    if (Abs.isObject(impact) && !Abs.isEmpty(impact)) {
+    /*
+     * 读取 impact
+     */
+    const {reset = []} = impact;
+    if (0 < reset.length) {
         /*
-         * 读取 impact
+         * 将要 reset 部分的内容
          */
-        const {reset = []} = impact;
-        if (0 < reset.length) {
-            /*
-             * 将要 reset 部分的内容
-             */
-            reset.forEach(field => formValues[field] = undefined);
-        }
+        reset.forEach(field => formValues[field] = undefined);
     }
 };
 /**

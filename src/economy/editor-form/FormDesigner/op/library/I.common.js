@@ -39,11 +39,5 @@ const yiCommand = (reference, state = {}, key = "commands") => {
 export default {
     ...CmnCell,
     ...CmnRow,
-    yiCommand,
-    yiRowCell: (reference, state) => {
-        const $cells = [];
-        $cells.push(CmnCell.cellNew(reference));
-        state.$cells = $cells;
-        return Ux.promise(state);
-    }
+    yiCommand
 }

@@ -1,22 +1,29 @@
+import Op from '../op';
+
 export default {
     scissor: (reference, item, config = {}) => {
         const {span} = config;
         return !(undefined !== span && span >= 10 && 0 === span % 2);
     },
     "left-square": (reference, item, config = {}) => {
-        const {$cells = []} = reference.state;
-        const min = $cells.map(cell => cell.span)
-            .reduce((left, right) => {
-                if (left < right) {
-                    return left;
-                } else {
-                    return right;
-                }
-            }, 24);
-        if (6 >= min) {
-            return true;
+        const {data = []} = reference.props;
+        const dim = Op.cellSpanDim(data);
+        if (1 === dim.length) {
+            // 已经对齐了
+            const min = Op.cellSpanMin(data);
+            return (6 >= min);
         } else {
-            return false;
+            // 未对齐
+            const max = Op.cellSpanMax(data);
+            return (6 >= max);
         }
+    },
+    "right-square": (reference, item, config = {}) => {
+        const {data = []} = reference.props;
+        return 0 === data.length;
+    },
+    "control": (reference, item, config = {}) => {
+        const {data = {}} = reference.props;
+        return !data.render;
     }
 }
