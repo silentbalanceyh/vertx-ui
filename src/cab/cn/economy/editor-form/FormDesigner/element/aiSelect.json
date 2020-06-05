@@ -45,7 +45,7 @@
                         "defaultActiveKey": "tabSetting",
                         "className": "tool-setting",
                         "tabPosition": "right",
-                        "items": "属性配置表,tabSetting;联动规则,tabDepend;",
+                        "items": "属性配置表,tabSetting;联动规则,tabDepend;选项属性,tabOptions",
                         "pages": {
                             "tabDepend": {
                                 "window": 0.51,
@@ -230,6 +230,32 @@
                                     ],
                                     [
                                         {
+                                            "metadata": "multiple,启用多选,8,,aiCheckbox,valuePropName=checked,mode=SWITCH",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "multipleMode",
+                                                    "maxTagCount"
+                                                ]
+                                            },
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "多选",
+                                                "unCheckedChildren": "单选"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "multipleMode,多选呈现,16,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "multiple": true
+                                            },
+                                            "optionJsx.config.items": [
+                                                "multiple,文字呈现模式",
+                                                "tags,标签呈现模式"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
                                             "metadata": "allowClear,允许清空,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
@@ -240,52 +266,156 @@
                                                 "valuePropName": "checked"
                                             }
                                         },
-                                        "maxLength,最大长度,16,100%,aiInputNumber,placeholder=默认256,min=1,max=4096"
-                                    ],
+                                        {
+                                            "metadata": "maxTagCount,最大显示数,16,100%,aiInputNumber,min=2",
+                                            "optionJsx.depend.enabled": {
+                                                "multipleMode": [
+                                                    "tags"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabOptions": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
                                     [
-                                        "addonBefore,组件前缀,,,,addonBefore=…",
-                                        "addonAfter,组件后缀,,,,addonAfter=…"
+                                        "title=选项属性"
                                     ],
                                     [
                                         {
-                                            "metadata": "prefix,文字前缀",
-                                            "optionJsx.prefix": "…"
-                                        },
-                                        {
-                                            "metadata": "suffix,文字后缀",
-                                            "optionJsx.suffix": "…"
+                                            "metadata": "dataSource,数据源,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "items,静态数据源",
+                                                "datum,动态数据源"
+                                            ],
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "cascadeEnabled"
+                                                ]
+                                            }
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "normalize,输入限制,24,,aiRadio",
-                                            "optionJsx.className": "radio-input-3",
+                                            "metadata": "datumSource,数据标识,12,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumKey,值字段名",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "datumLabel,显示字段名",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "expr,显示格式,24,,,placeholder=显示格式可使用表达式执行解析！",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeEnabled,启用过滤,,,aiCheckbox",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            },
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用过滤",
+                                                "unCheckedChildren": "不启用过滤"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "cascadeSource,过滤字段名,16,,,placeholder=请填写使用的动态数据源中过滤条件字段",
+                                            "optionJsx.depend.enabled": {
+                                                "cascadeEnabled": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cascadeTarget,过滤参数类型,24,,aiRadio",
+                                            "optionItem.className": "radio-input-3",
+                                            "optionJsx.depend.enabled": {
+                                                "cascadeEnabled": true
+                                            },
                                             "optionJsx.config.items": [
-                                                "unlimited,不限制",
-                                                "decimal,仅浮点数",
-                                                "number,仅数值",
-                                                "integer,仅正整数",
-                                                "upper,仅大写",
-                                                "id,仅标识符"
+                                                "BOOL,逻辑值",
+                                                "FIX,固定值",
+                                                "ENUM,枚举值",
+                                                "UNIQUE,字典值",
+                                                "USER,当前登录用户",
+                                                "FORM,表单值",
+                                                "ROUTE,路由值",
+                                                "PROP,属性值（React组件）",
+                                                "STATE,状态值（React组件）"
                                             ]
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "normalizeLength,限制长度,,100%,aiInputNumber",
+                                            "metadata": "cascadeValue,过滤参数值,24",
                                             "optionJsx.depend.enabled": {
-                                                "normalize": [
-                                                    "decimal",
-                                                    "number"
-                                                ]
+                                                "cascadeEnabled": true
                                             }
-                                        },
+                                        }
+                                    ],
+                                    [
                                         {
-                                            "metadata": "normalizePrecision,限制精度,,100%,aiInputNumber,min=1",
+                                            "metadata": "items,选项表,24,,aiTableEditor",
                                             "optionJsx.depend.enabled": {
-                                                "normalize": [
-                                                    "decimal"
+                                                "dataSource": [
+                                                    "items"
                                                 ]
+                                            },
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "name",
+                                                            "title": "固定值",
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "label",
+                                                            "title": "显示字段",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
                                             }
                                         }
                                     ]

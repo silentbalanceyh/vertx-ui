@@ -48,24 +48,24 @@ export default {
             </div>
         )
     },
-    field,
-    render,
-    cascadeValue: (reference, jsx) => {
-        return (
-            <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
-        )
-    },
-    ajaxSource: (reference, jsx) => {
-        const {rxApi} = reference.props;
-        return (
-            <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                if (value) {
+    yoRenders: {
+        cascadeValue: (reference, jsx) => {
+            return (
+                <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
+            )
+        },
+        ajaxSource: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
 
-                }
-            }}/>
-        )
-    },
-    ajaxMagic: (reference, jsx) => {
-        return (<ParamInput reference={reference} {...jsx} $query/>)
+                    }
+                }}/>
+            )
+        },
+        ajaxMagic: (reference, jsx) => {
+            return (<ParamInput reference={reference} {...jsx} $query/>)
+        }
     }
 }

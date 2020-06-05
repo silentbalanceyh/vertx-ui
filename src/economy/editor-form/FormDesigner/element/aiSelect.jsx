@@ -10,7 +10,10 @@ import Sd from './aiShared';
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiSelect"
+            id: "SubForm-Setting-aiSelect",
+            renders: {
+                cascadeValue: Sd.yoRenders.cascadeValue
+            }
         });
     }
 

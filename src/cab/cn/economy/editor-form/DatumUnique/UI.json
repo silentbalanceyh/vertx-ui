@@ -7,7 +7,7 @@
             }
         },
         "output": {
-            "label": "输出字段名",
+            "label": "输出字段",
             "optionJsx": {
                 "placeholder": "默认输入`主键`（key）。"
             }
