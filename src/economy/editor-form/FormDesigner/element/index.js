@@ -11,6 +11,7 @@ import aiTimePicker from "./aiTimePicker";
 import aiFileUpload from "./aiFileUpload";
 import aiTransfer from "./aiTransfer";
 import aiBraftEditor from "./aiBraftEditor";
+import aiAddressSelector from "./aiAddressSelector";
 
 export default {
     aiInput,
@@ -25,5 +26,6 @@ export default {
     aiTimePicker,
     aiFileUpload,
     aiTransfer,
-    aiBraftEditor
+    aiBraftEditor,
+    aiAddressSelector
 }

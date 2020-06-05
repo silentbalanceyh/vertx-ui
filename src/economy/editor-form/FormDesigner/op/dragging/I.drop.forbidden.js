@@ -34,6 +34,14 @@ const executor = {
         } else {
             return fnForbidden(component, 'aiBraftEditor');
         }
+    },
+    "aiAddressSelector": (props, component) => {
+        const {config = {}} = props;
+        if (12 <= config.span) {
+            return true;
+        } else {
+            return fnForbidden(component, 'aiAddressSelector');
+        }
     }
 }
 export default (reference, type, consumer) => {

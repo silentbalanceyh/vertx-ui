@@ -49,11 +49,13 @@ export default {
         )
     },
     yoRenders: {
+        // 级联选择 API
         cascadeValue: (reference, jsx) => {
             return (
                 <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
             )
         },
+        // 上传部分 API
         uploadUpApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
@@ -68,6 +70,57 @@ export default {
             return (<ParamInput reference={reference} {...jsx} $query/>)
         },
         uploadDownApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        // 地址选择 API
+        addrCountryApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        addrStateApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        addrCityApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        addrRegionApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        addrInitApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
                 <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
