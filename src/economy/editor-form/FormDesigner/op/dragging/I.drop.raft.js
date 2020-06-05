@@ -24,6 +24,14 @@ const mountOption = (props, component) => {
     return item;
 }
 
+const mountAttr = (props, component) => {
+    const item = {};
+    mountLabel(component, item);
+    const raft = Ux.fromPath(component, "message", "raft");
+    item.optionJsx = {config: {items: [Ux.randomUUID() + "," + raft.attribute]}}
+    return item;
+}
+
 const executor = {
     "aiTitle": (props, component) => {
         const init = {};
@@ -45,7 +53,7 @@ const executor = {
     "aiBraftEditor": mountInput,
     "aiAddressSelector": mountInput,
     "aiDatumCascade": mountInput,
-    "aiCheckJson": mountInput,
+    "aiCheckJson": mountAttr,
     "aiListSelector": mountInput,
     "aiTreeSelector": mountInput,
     "aiTableEditor": mountInput,

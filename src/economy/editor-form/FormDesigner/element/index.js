@@ -12,6 +12,8 @@ import aiFileUpload from "./aiFileUpload";
 import aiTransfer from "./aiTransfer";
 import aiBraftEditor from "./aiBraftEditor";
 import aiAddressSelector from "./aiAddressSelector";
+import aiCheckJson from './aiCheckJson';
+import aiJsonEditor from "./aiJsonEditor";
 
 export default {
     aiInput,
@@ -27,5 +29,7 @@ export default {
     aiFileUpload,
     aiTransfer,
     aiBraftEditor,
-    aiAddressSelector
+    aiAddressSelector,
+    aiCheckJson,
+    aiJsonEditor
 }

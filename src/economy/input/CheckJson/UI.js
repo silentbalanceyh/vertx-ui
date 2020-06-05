@@ -2,6 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Op from './Op';
 import {Checkbox, Input} from 'antd';
+import './Cab.less';
 
 class Component extends React.PureComponent {
 
@@ -18,7 +19,7 @@ class Component extends React.PureComponent {
             const {$source = []} = this.props;
             const attrs = Ux.valueLimit(this.props);
             return (
-                <Input.Group {...attrs}>
+                <Input.Group {...attrs} className={"web-check-json"}>
                     <Checkbox.Group options={$source}
                                     value={attrs.value ? Object.keys(attrs.value)
                                             .filter(item => attrs.value[item])

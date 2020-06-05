@@ -28,7 +28,8 @@
         "raft": {
             "title": "<标题>",
             "label": "<标签>",
-            "option": "<选项>"
+            "option": "<选项>",
+            "attribute": "<属性名>"
         }
     }
 }
