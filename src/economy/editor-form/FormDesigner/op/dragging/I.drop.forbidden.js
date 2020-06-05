@@ -42,6 +42,14 @@ const executor = {
         } else {
             return fnForbidden(component, 'aiAddressSelector');
         }
+    },
+    "aiTableEditor": (props, component) => {
+        const {config = {}} = props;
+        if (24 === config.span) {
+            return true;
+        } else {
+            return fnForbidden(component, 'aiTableEditor');
+        }
     }
 }
 export default (reference, type, consumer) => {

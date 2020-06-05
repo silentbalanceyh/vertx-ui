@@ -16,6 +16,7 @@ import aiCheckJson from './aiCheckJson';
 import aiJsonEditor from "./aiJsonEditor";
 import aiListSelector from "./aiListSelector";
 import aiTreeSelector from "./aiTreeSelector";
+import aiTableEditor from "./aiTableEditor";
 
 export default {
     aiInput,
@@ -35,5 +36,6 @@ export default {
     aiCheckJson,
     aiJsonEditor,
     aiListSelector,
-    aiTreeSelector
+    aiTreeSelector,
+    aiTableEditor
 }

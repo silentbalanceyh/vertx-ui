@@ -31,7 +31,12 @@ const mountAttr = (props, component) => {
     item.optionJsx = {config: {items: [Ux.randomUUID() + "," + raft.attribute]}}
     return item;
 }
-
+const mountArray = (props, component) => {
+    const item = {};
+    mountLabel(component, item);
+    item.optionJsx = {config: {format: {type: "ARRAY"}}}
+    return item;
+}
 const executor = {
     "aiTitle": (props, component) => {
         const init = {};
@@ -56,7 +61,7 @@ const executor = {
     "aiCheckJson": mountAttr,
     "aiListSelector": mountInput,
     "aiTreeSelector": mountInput,
-    "aiTableEditor": mountInput,
+    "aiTableEditor": mountArray,
     "aiDialogEditor": mountInput,
 }
 export default (reference, type) => {
