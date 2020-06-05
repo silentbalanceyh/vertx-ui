@@ -6,7 +6,7 @@ import {DragSource} from 'react-dnd';
 import Ux from 'ux';
 
 const future = () => {
-    return Ux.immutable(["aiDatumCascade"])
+    return Ux.immutable(["aiDatumCascade", "aiDialogEditor"])
 }
 
 class Component extends React.Component {
