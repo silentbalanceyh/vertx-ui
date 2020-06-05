@@ -45,7 +45,7 @@
                         "defaultActiveKey": "tabSetting",
                         "className": "tool-setting",
                         "tabPosition": "right",
-                        "items": "属性配置表,tabSetting;联动规则,tabDepend;验证规则,tabValidation",
+                        "items": "属性配置表,tabSetting;联动规则,tabDepend;",
                         "pages": {
                             "tabDepend": {
                                 "window": 0.51,
@@ -170,198 +170,6 @@
                                     ]
                                 ]
                             },
-                            "tabValidation": {
-                                "window": 0.51,
-                                "columns": 2,
-                                "ui": [
-                                    [
-                                        {
-                                            "metadata": "ruleMax,最大长度,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleMaxValid,允许上限,16,100%,aiInputNumber",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleMax": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大长度验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleMax": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleMin,最小长度,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleMinValid,允许下限,16,100%,aiInputNumber",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleMin": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小长度验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleMin": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleLen,定长规则,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleLenValid,固定长度,16,100%,aiInputNumber",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleLen": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleLenMessage,提示信息,24,,,,inscribe=定长规则验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleLen": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleReg,正则规则,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleRegValid,正则表达式,16,100%",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleReg": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleRegMessage,提示信息,24,,,,inscribe=正则规则验证失败时的提示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleReg": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "ruleEqualTo"
-                                                ]
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleEqualTo,= 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEqual": true
-                                            },
-                                            "optionConfig.rules": [
-                                                {
-                                                    "validator": "diff",
-                                                    "message": "对不起，目标字段必须和目标字段不同！",
-                                                    "config": {
-                                                        "to": "field"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEqualMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEqual": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleDiff,不等于规则,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "ruleDiffTo"
-                                                ]
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleDiffTo,<> 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleDiff": true
-                                            },
-                                            "optionConfig.rules": [
-                                                {
-                                                    "validator": "diff",
-                                                    "message": "对不起，目标字段必须和目标字段不同！",
-                                                    "config": {
-                                                        "to": "field"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=不等于规则验证失败时的显示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleDiff": true
-                                            }
-                                        }
-                                    ]
-                                ]
-                            },
                             "tabSetting": {
                                 "window": 0.51,
                                 "columns": 2,
@@ -399,14 +207,14 @@
                                         "width,字段宽度,24,,,placeholder=输入区域宽度，默认100%（支持单位：%，px，rm，pt，...etc）"
                                     ],
                                     [
-                                        "placeholder,水印文字,24,,,placeholder=没有输入时的水印效果文字设置"
+                                        "fileText,显示文字,24,,,placeholder=上传时显示的文字信息"
                                     ],
                                     [
                                         "title=基础属性"
                                     ],
                                     [
                                         {
-                                            "metadata": "readOnly,只读,8,,aiCheckbox",
+                                            "metadata": "readOnly,只读,,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "只读",
@@ -415,74 +223,73 @@
                                             "optionConfig": {
                                                 "valuePropName": "checked"
                                             }
-                                        },
-                                        {
-                                            "metadata": "inscribe,只读文本,16,,,inscribe=只读模式下的呈现文本",
-                                            "optionJsx.depend.enabled": {
-                                                "readOnly": true
-                                            }
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "allowClear,允许清空,8,,aiCheckbox",
+                                            "metadata": "uploadSingle,多文件上传,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
+                                                "checkedChildren": "多文件",
+                                                "unCheckedChildren": "单文件"
                                             },
                                             "optionConfig": {
                                                 "valuePropName": "checked"
                                             }
                                         },
-                                        "maxLength,最大长度,16,100%,aiInputNumber,placeholder=默认256,min=1,max=4096"
-                                    ],
-                                    [
-                                        "addonBefore,组件前缀,,,,addonBefore=…",
-                                        "addonAfter,组件后缀,,,,addonAfter=…"
-                                    ],
-                                    [
                                         {
-                                            "metadata": "prefix,文字前缀",
-                                            "optionJsx.prefix": "…"
-                                        },
-                                        {
-                                            "metadata": "suffix,文字后缀",
-                                            "optionJsx.suffix": "…"
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "normalize,输入限制,24,,aiRadio",
-                                            "optionJsx.className": "radio-input-3",
+                                            "metadata": "listType,上传模式,16,,aiRadio",
                                             "optionJsx.config.items": [
-                                                "unlimited,不限制",
-                                                "decimal,仅浮点数",
-                                                "number,仅数值",
-                                                "integer,仅正整数",
-                                                "upper,仅大写",
-                                                "id,仅标识符"
+                                                "text,文件模式",
+                                                "picture,图片模式",
+                                                "picture-card,卡片图模式"
                                             ]
                                         }
                                     ],
                                     [
+                                        "accept,支持格式,24,,aiInputMulti,"
+                                    ],
+                                    [
                                         {
-                                            "metadata": "normalizeLength,限制长度,,100%,aiInputNumber",
-                                            "optionJsx.depend.enabled": {
-                                                "normalize": [
-                                                    "decimal",
-                                                    "number"
-                                                ]
+                                            "metadata": "withCredentials,带Cookie,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "携带Cookie",
+                                                "unCheckedChildren": "不携带Cookie"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
                                             }
                                         },
+                                        "uploadLimit,大小限制,16,,,normalize=number:10,placeholder=（设置文件大小）,addonAfter=MB"
+                                    ],
+                                    [
+                                        "title=远程接口设置"
+                                    ],
+                                    [
                                         {
-                                            "metadata": "normalizePrecision,限制精度,,100%,aiInputNumber,min=1",
-                                            "optionJsx.depend.enabled": {
-                                                "normalize": [
-                                                    "decimal"
+                                            "title": "说明",
+                                            "config": {
+                                                "description": [
+                                                    "上传的方法必须是 POST，而下载方法必须是 GET。",
+                                                    "下载链接可以使用 `fileKey` 文件主键进行文件链接的替换。"
                                                 ]
                                             }
                                         }
+                                    ],
+                                    [
+                                        "uploadDownUri,下载地址,16,,,placeholder=设置文件下载地址",
+                                        "uploadDownApi,,8"
+                                    ],
+                                    [
+                                        "uploadDownFile,文件主键,24,,,placeholder=下载文件时替换链接参数专用文件主键！"
+                                    ],
+                                    [
+                                        "uploadUpUri,上传地址,16,,,placeholder=设置文件上传地址",
+                                        "uploadUpApi,,8"
+                                    ],
+                                    [
+                                        "uploadUpParam,上传参数,24"
                                     ]
                                 ]
                             }

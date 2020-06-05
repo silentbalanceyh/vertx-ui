@@ -54,6 +54,29 @@ export default {
                 <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
             )
         },
+        uploadUpApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        uploadUpParam: (reference, jsx) => {
+            return (<ParamInput reference={reference} {...jsx} $query/>)
+        },
+        uploadDownApi: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
         ajaxSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (

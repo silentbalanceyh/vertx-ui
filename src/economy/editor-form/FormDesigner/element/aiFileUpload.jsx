@@ -10,7 +10,12 @@ import Sd from './aiShared';
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiFileUpload"
+            id: "SubForm-Setting-aiFileUpload",
+            renders: {
+                uploadUpApi: Sd.yoRenders.uploadUpApi,
+                uploadDownApi: Sd.yoRenders.uploadDownApi,
+                uploadUpParam: Sd.yoRenders.uploadUpParam,
+            }
         });
     }
 
