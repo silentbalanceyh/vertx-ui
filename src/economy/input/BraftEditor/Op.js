@@ -3,7 +3,7 @@ import Ux from 'ux';
 
 const initValue = (props) => {
     // Fix：解决切换问题
-    const value = props['data-__meta'].initialValue;
+    const {value} = props;
     if (value) {
         return BraftEditor.createEditorState(value);
     } else {

@@ -26,6 +26,14 @@ const executor = {
         } else {
             return fnForbidden(component, 'aiTransfer');
         }
+    },
+    "aiBraftEditor": (props, component) => {
+        const {config = {}} = props;
+        if (24 === config.span) {
+            return true;
+        } else {
+            return fnForbidden(component, 'aiBraftEditor');
+        }
     }
 }
 export default (reference, type, consumer) => {

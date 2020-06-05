@@ -10,6 +10,7 @@ import aiDatePicker from "./aiDatePicker";
 import aiTimePicker from "./aiTimePicker";
 import aiFileUpload from "./aiFileUpload";
 import aiTransfer from "./aiTransfer";
+import aiBraftEditor from "./aiBraftEditor";
 
 export default {
     aiInput,
@@ -23,5 +24,6 @@ export default {
     aiDatePicker,
     aiTimePicker,
     aiFileUpload,
-    aiTransfer
+    aiTransfer,
+    aiBraftEditor
 }
