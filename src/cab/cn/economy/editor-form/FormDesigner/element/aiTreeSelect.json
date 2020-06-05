@@ -277,6 +277,36 @@
                                                 ]
                                             }
                                         }
+                                    ],
+                                    [
+                                        "title=树相关属性"
+                                    ],
+                                    [
+                                        "treeKey,树主键",
+                                        "treeParent,父主键,,,,placeholder=树的构造依赖主键和父主键"
+                                    ],
+                                    [
+                                        "treeValue,值字段",
+                                        "treeText,显示字段"
+                                    ],
+                                    [
+                                        "treeSort,排序字段",
+                                        "treeLeaf,叶节点字段"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "treeSelection,树选择模式,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.config.items": [
+                                                "PARENT_ALL_INCLUDE,含当前所有父节点",
+                                                "PARENT_ALL,所有父节点",
+                                                "PARENT,直接父节点",
+                                                "CHILDREN_ALL_INCLUDE,含当前所有子节点",
+                                                "CHILDREN_ALL,所有子节点",
+                                                "CHILDREN,直接子节点",
+                                                "CURRENT,当前节点"
+                                            ]
+                                        }
                                     ]
                                 ]
                             },
@@ -289,14 +319,11 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "dataSource,数据源,24,,aiRadio",
-                                            "optionJsx.config.items": [
-                                                "items,静态数据源",
-                                                "datum,动态数据源"
-                                            ],
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "cascadeEnabled"
+                                            "title": "说明",
+                                            "config": {
+                                                "description": [
+                                                    "如果是静态数据源则可以直接使用原生态的Ant Design来执行。",
+                                                    "框架中的 TreeSelect 组件只支持动态数据源模式。"
                                                 ]
                                             }
                                         }
@@ -304,48 +331,30 @@
                                     [
                                         {
                                             "metadata": "datumSource,数据标识,12,,aiSelect,placeholder=辅助数据源中配置",
-                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "datum"
-                                                ]
-                                            }
+                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name"
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "datumKey,值字段名",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "datum"
-                                                ]
-                                            }
+                                            "metadata": "datumKey,值字段名"
                                         },
                                         {
-                                            "metadata": "datumLabel,显示字段名",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "datum"
-                                                ]
-                                            }
+                                            "metadata": "datumLabel,显示字段名"
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "expr,显示格式,24,,,placeholder=显示格式可使用表达式执行解析！",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "datum"
-                                                ]
-                                            }
+                                            "metadata": "expr,显示格式,24,,,placeholder=显示格式可使用表达式执行解析！"
                                         }
                                     ],
                                     [
                                         {
                                             "metadata": "cascadeEnabled,启用过滤,,,aiCheckbox",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "datum"
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "cascadeSource",
+                                                    "cascadeTarget",
+                                                    "cascadeValue"
                                                 ]
                                             },
                                             "optionJsx": {
@@ -389,36 +398,6 @@
                                             "metadata": "cascadeValue,过滤参数值,24",
                                             "optionJsx.depend.enabled": {
                                                 "cascadeEnabled": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "items,选项表,24,,aiTableEditor",
-                                            "optionJsx.depend.enabled": {
-                                                "dataSource": [
-                                                    "items"
-                                                ]
-                                            },
-                                            "optionJsx.config": {
-                                                "format": {
-                                                    "type": "ARRAY",
-                                                    "keyField": "name"
-                                                },
-                                                "table": {
-                                                    "columns": [
-                                                        {
-                                                            "dataIndex": "name",
-                                                            "title": "固定值",
-                                                            "$render": "EDITOR"
-                                                        },
-                                                        {
-                                                            "dataIndex": "label",
-                                                            "title": "显示字段",
-                                                            "$render": "EDITOR"
-                                                        }
-                                                    ]
-                                                }
                                             }
                                         }
                                     ]

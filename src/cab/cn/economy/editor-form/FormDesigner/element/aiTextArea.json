@@ -431,6 +431,9 @@
                                         "width,字段宽度,24,,,placeholder=输入区域宽度，默认100%（支持单位：%，px，rm，pt，...etc）"
                                     ],
                                     [
+                                        "placeholder,水印文字,24,,,placeholder=没有输入时的水印效果文字设置"
+                                    ],
+                                    [
                                         "title=基础属性"
                                     ],
                                     [

@@ -3,6 +3,7 @@ import aiInputNumber from "./aiInputNumber";
 import aiPassword from "./aiPassword";
 import aiTextArea from "./aiTextArea";
 import aiSelect from './aiSelect';
+import aiTreeSelect from "./aiTreeSelect";
 
 export default {
     aiInput,
@@ -10,4 +11,5 @@ export default {
     aiInputNumber,
     aiTextArea,
     aiSelect,
+    aiTreeSelect
 }

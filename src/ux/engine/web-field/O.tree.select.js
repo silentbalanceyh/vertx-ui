@@ -25,6 +25,10 @@ const aiTreeSelect = (reference, jsx = {}, onChange) => {
     // 处理TreeSelect
     const {config = {}} = jsx;
     const data = R.Ant.toTreeOptions(reference, config);
+    // 没有任何内容时候的 100% 宽度处理
+    if (!rest.style) {
+        rest.style = {width: "100%"};
+    }
     return (<TreeSelect treeData={data} {...rest}/>);
 };
 
