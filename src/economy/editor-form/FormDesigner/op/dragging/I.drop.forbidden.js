@@ -1,18 +1,30 @@
 import Ux from 'ux';
 
+const fnForbidden = (component, key) => {
+    /* 不可执行 */
+    const forbidden = Ux.fromHoc(component, "forbidden");
+    const message = forbidden[key];
+    if (message) {
+        Ux.messageFailure(message);
+    }
+    return false;
+}
+
 const executor = {
     "aiTitle": (props, component) => {
         const {config = {}} = props;
         if (24 === config.span) {
             return true;
         } else {
-            /* 不可执行 */
-            const forbidden = Ux.fromHoc(component, "forbidden");
-            const message = forbidden.aiTitle;
-            if (message) {
-                Ux.messageFailure(message);
-            }
-            return false;
+            return fnForbidden(component, 'aiTitle');
+        }
+    },
+    "aiTransfer": (props, component) => {
+        const {config = {}} = props;
+        if (18 < config.span) {
+            return true;
+        } else {
+            return fnForbidden(component, 'aiTransfer');
         }
     }
 }

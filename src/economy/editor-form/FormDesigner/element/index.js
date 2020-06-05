@@ -9,6 +9,7 @@ import aiRadio from "./aiRadio";
 import aiDatePicker from "./aiDatePicker";
 import aiTimePicker from "./aiTimePicker";
 import aiFileUpload from "./aiFileUpload";
+import aiTransfer from "./aiTransfer";
 
 export default {
     aiInput,
@@ -21,5 +22,6 @@ export default {
     aiRadio,
     aiDatePicker,
     aiTimePicker,
-    aiFileUpload
+    aiFileUpload,
+    aiTransfer
 }
