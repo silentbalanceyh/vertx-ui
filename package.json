@@ -159,7 +159,7 @@
         "fork-ts-checker-webpack-plugin": "^4.1.6",
         "html-webpack-plugin": "^4.3.0",
         "jest-cli": "^26.0.1",
-        "less": "^3.11.2",
+        "less": "^3.11.3",
         "less-loader": "^6.1.0",
         "mkdirp": "^1.0.4",
         "node-sass": "^4.14.1",
