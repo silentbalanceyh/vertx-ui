@@ -296,7 +296,7 @@
                                 "columns": 2,
                                 "ui": [
                                     [
-                                        "title=其他验证规则"
+                                        "title=基础验证（Ant Design标准）"
                                     ],
                                     [
                                         {
@@ -408,45 +408,6 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "ruleEqualTo"
-                                                ]
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleEqualTo,目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEqual": true
-                                            },
-                                            "optionConfig.rules": [
-                                                {
-                                                    "validator": "diff",
-                                                    "message": "对不起，比对字段不可和原字段相等！",
-                                                    "config": {
-                                                        "to": "field"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleEqualMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleEqual": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
                                             "metadata": "ruleEnum,枚举规则,,,aiCheckbox,readOnly=true",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
@@ -474,6 +435,87 @@
                                             "metadata": "ruleEnumMessage,提示信息,24,,,,inscribe=枚举规则验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleEnum": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=自定义规则"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "ruleEqualTo"
+                                                ]
+                                            },
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleEqualTo,= 目标字段,16,,aiSelect",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleEqual": true
+                                            },
+                                            "optionConfig.rules": [
+                                                {
+                                                    "validator": "diff",
+                                                    "message": "对不起，目标字段必须和目标字段不同！",
+                                                    "config": {
+                                                        "to": "field"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEqualMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleEqual": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleDiff,不等于规则,8,,aiCheckbox,valuePropName=checked",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "ruleDiffTo"
+                                                ]
+                                            },
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleDiffTo,<> 目标字段,16,,aiSelect",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleDiff": true
+                                            },
+                                            "optionConfig.rules": [
+                                                {
+                                                    "validator": "diff",
+                                                    "message": "对不起，目标字段必须和目标字段不同！",
+                                                    "config": {
+                                                        "to": "field"
+                                                    }
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleDiff": true
                                             }
                                         }
                                     ]
