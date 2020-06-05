@@ -409,6 +409,11 @@
                                     [
                                         {
                                             "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "ruleEqualTo"
+                                                ]
+                                            },
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -436,7 +441,7 @@
                                         {
                                             "metadata": "ruleEqualMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
                                             "optionJsx.depend.enabled": {
-                                                "ruleEnum": true
+                                                "ruleEqual": true
                                             }
                                         }
                                     ],

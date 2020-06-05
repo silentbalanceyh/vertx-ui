@@ -208,6 +208,7 @@ const raftRender = (cell = {}, config = {}) => {
                 /*
                  * Ant-Design 表单化处理
                  */
+                optionJsx.reference = reference;    // 特殊引用，触发 depend / linker
                 const {getFieldDecorator} = form;
                 return getFieldDecorator(cell.field, optionConfig)(
                     render(reference, optionJsx)
