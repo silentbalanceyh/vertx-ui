@@ -10,10 +10,7 @@ import Sd from './aiShared';
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiBraftEditor",
-            renders: {
-                cascadeValue: Sd.yoRenders.cascadeValue
-            }
+            id: "SubForm-Setting-aiBraftEditor"
         });
     }
 

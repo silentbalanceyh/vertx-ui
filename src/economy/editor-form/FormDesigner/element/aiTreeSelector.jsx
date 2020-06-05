@@ -5,12 +5,16 @@ import Sd from './aiShared';
 
 @component({
     "i18n.cab": require('./Cab.json'),
-    "i18n.name": "aiJsonEditor",
+    "i18n.name": "aiTreeSelector",
 })
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiJsonEditor"
+            id: "SubForm-Setting-aiTreeSelector",
+            renders: {
+                ajaxMagic: Sd.yoRenders.ajaxMagic,
+                ajaxSource: Sd.yoRenders.ajaxSource
+            }
         });
     }
 

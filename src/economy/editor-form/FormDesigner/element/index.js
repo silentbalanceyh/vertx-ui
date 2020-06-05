@@ -14,6 +14,8 @@ import aiBraftEditor from "./aiBraftEditor";
 import aiAddressSelector from "./aiAddressSelector";
 import aiCheckJson from './aiCheckJson';
 import aiJsonEditor from "./aiJsonEditor";
+import aiListSelector from "./aiListSelector";
+import aiTreeSelector from "./aiTreeSelector";
 
 export default {
     aiInput,
@@ -31,5 +33,7 @@ export default {
     aiBraftEditor,
     aiAddressSelector,
     aiCheckJson,
-    aiJsonEditor
+    aiJsonEditor,
+    aiListSelector,
+    aiTreeSelector
 }
