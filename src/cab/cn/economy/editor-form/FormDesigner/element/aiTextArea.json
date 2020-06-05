@@ -316,7 +316,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
+                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,readOnly=true,valuePropName=checked",
                                             "optionJsx.depend.impact": {
                                                 "reset": [
                                                     "ruleEqualTo"
@@ -355,7 +355,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleDiff,不等于规则,8,,aiCheckbox,valuePropName=checked",
+                                            "metadata": "ruleDiff,不等于规则,8,,aiCheckbox,readOnly=true,valuePropName=checked",
                                             "optionJsx.depend.impact": {
                                                 "reset": [
                                                     "ruleDiffTo"
@@ -389,108 +389,6 @@
                                             "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleDiff": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleLess,小于规则,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "ruleLessTo",
-                                                    "ruleLessMode"
-                                                ]
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleLessTo,目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleLess": true
-                                            },
-                                            "optionConfig.rules": [
-                                                {
-                                                    "validator": "diff",
-                                                    "message": "对不起，目标字段必须和目标字段不同！",
-                                                    "config": {
-                                                        "to": "field"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleLessMode,包含边界,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleLess": true
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "包含",
-                                                "unCheckedChildren": "不包含"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleLessMessage,提示信息,16,,,,inscribe=小于规则验证失败时的显示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleLess": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleGreat,大于规则,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.impact": {
-                                                "reset": [
-                                                    "ruleGreatTo",
-                                                    "ruleGreatMode"
-                                                ]
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleGreatTo,目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleGreat": true
-                                            },
-                                            "optionConfig.rules": [
-                                                {
-                                                    "validator": "diff",
-                                                    "message": "对不起，目标字段必须和目标字段不同！",
-                                                    "config": {
-                                                        "to": "field"
-                                                    }
-                                                }
-                                            ]
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "ruleGreatMode,包含边界,8,,aiCheckbox,valuePropName=checked",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleGreat": true
-                                            },
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "包含",
-                                                "unCheckedChildren": "不包含"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "ruleGreatMessage,提示信息,16,,,,inscribe=大于规则验证失败时的显示信息",
-                                            "optionJsx.depend.enabled": {
-                                                "ruleGreat": true
                                             }
                                         }
                                     ]
@@ -569,12 +467,30 @@
                                         "maxLength,最大长度,16,100%,aiInputNumber,placeholder=默认256,min=1,max=4096"
                                     ],
                                     [
-                                        "min,最小值,,100%,aiInputNumber",
-                                        "max,最大值,,100%,aiInputNumber"
+                                        "rows,默认行数,24,100%,aiInputNumber"
                                     ],
                                     [
-                                        "step,步进系数,,100%,aiInputNumber,min=1",
-                                        "precision,精度,,100%,aiInputNumber,min=1"
+                                        {
+                                            "metadata": "autoSize,自动缩放,,,aiCheckbox,valuePropName=checked,mode=SWITCH",
+                                            "optionJsx": {
+                                                "checkedChildren": "允许",
+                                                "unCheckedChildren": "不允许"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "autoSizeMin,缩放最小行,,100%,aiInputNumber,inscribe=自动缩放时允许的最小行",
+                                            "optionJsx.depend.enabled": {
+                                                "autoSize": true
+                                            }
+                                        },
+                                        {
+                                            "metadata": "autoSizeMax,缩放最大行,,100%,aiInputNumber,inscribe=自动缩放时允许的最大行",
+                                            "optionJsx.depend.enabled": {
+                                                "autoSize": true
+                                            }
+                                        }
                                     ]
                                 ]
                             }

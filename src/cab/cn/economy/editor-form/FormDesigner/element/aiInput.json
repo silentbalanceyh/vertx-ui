@@ -197,7 +197,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "requiredMessage,必填提示,16,,,placeholder=如果用户未填写时的提示文字！",
+                                            "metadata": "requiredMessage,必填提示,16,,,inscribe=如果用户未填写时的提示文字！",
                                             "optionJsx.depend.enabled": {
                                                 "required": true
                                             }
@@ -222,7 +222,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "inscribe,只读文本,16,,,placeholder=只读模式下的呈现文本",
+                                            "metadata": "inscribe,只读文本,16,,,inscribe=只读模式下的呈现文本",
                                             "optionJsx.depend.enabled": {
                                                 "readOnly": true
                                             }
@@ -296,11 +296,8 @@
                                 "columns": 2,
                                 "ui": [
                                     [
-                                        "title=基础验证（Ant Design标准）"
-                                    ],
-                                    [
                                         {
-                                            "metadata": "ruleMax,最大值规则,8,,aiCheckbox",
+                                            "metadata": "ruleMax,最大长度,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -311,7 +308,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "ruleMaxValid,允许最大值,16,100%,aiInputNumber",
+                                            "metadata": "ruleMaxValid,允许上限,16,100%,aiInputNumber",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMax": true
                                             }
@@ -319,7 +316,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大值验证失败时的提示信息",
+                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大长度验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMax": true
                                             }
@@ -327,7 +324,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMin,最小值规则,8,,aiCheckbox",
+                                            "metadata": "ruleMin,最小长度,8,,aiCheckbox",
                                             "optionJsx": {
                                                 "mode": "SWITCH",
                                                 "checkedChildren": "启用",
@@ -338,7 +335,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "ruleMinValid,允许最小值,16,100%,aiInputNumber",
+                                            "metadata": "ruleMinValid,允许下限,16,100%,aiInputNumber",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMin": true
                                             }
@@ -346,7 +343,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小值验证失败时的提示信息",
+                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小长度验证失败时的提示信息",
                                             "optionJsx.depend.enabled": {
                                                 "ruleMin": true
                                             }
@@ -437,9 +434,6 @@
                                                 "ruleEnum": true
                                             }
                                         }
-                                    ],
-                                    [
-                                        "title=自定义规则"
                                     ],
                                     [
                                         {
