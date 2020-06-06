@@ -27,6 +27,7 @@
         "items": [
             "aiTitle,行标题",
             "aiMagic,数据显示器",
+            "aiAction,提交按钮",
             "aiInput,单行文本",
             "aiPassword,密码录入",
             "aiInputNumber,数字录入",
@@ -41,7 +42,6 @@
             "aiTransfer,穿梭框",
             "aiBraftEditor,富文本编辑器",
             "aiAddressSelector,地址选择器",
-            "aiDatumCascade,级联下拉框",
             "aiCheckJson,属性编辑器",
             "aiJsonEditor,Json编辑器",
             "aiListSelector,列表选择器",

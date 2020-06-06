@@ -43,6 +43,8 @@ const executor = {
         mountTitle(component, init);
         return init;
     },
+    "aiMagic": mountInput,
+    "aiAction": mountInput,
     "aiInput": mountInput,
     "aiPassword": mountInput,
     "aiInputNumber": mountInput,

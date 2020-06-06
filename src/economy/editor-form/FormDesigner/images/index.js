@@ -21,8 +21,10 @@ import aiTreeSelect from './aiTreeSelect.png';
 import aiTreeSelector from './aiTreeSelector.png';
 import aiTitle from './aiTitle.png';
 import aiMagic from './aiMagic.png';
+import aiAction from './aiAction.png';
 
 export default {
+    aiAction,
     aiTitle,
     aiMagic,
     aiAddressSelector,
