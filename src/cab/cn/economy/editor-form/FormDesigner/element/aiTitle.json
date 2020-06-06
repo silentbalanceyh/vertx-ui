@@ -1,0 +1,120 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=属性设置器"
+            ],
+            [
+                {
+                    "metadata": "render,组件类型,20",
+                    "optionItem": {
+                        "style": {
+                            "width": "100%"
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    }
+                },
+                {
+                    "metadata": "$button",
+                    "optionItem": {
+                        "style": {
+                            "float": "right"
+                        }
+                    },
+                    "optionJsx.extension": [
+                        "$opSaveSetting,保存,SUBMIT,,ux-success-setting,save"
+                    ],
+                    "span": 4
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "fieldBasic",
+                    "config": {
+                        "activeKey": "tabSetting",
+                        "defaultActiveKey": "tabSetting",
+                        "className": "tool-setting",
+                        "tabPosition": "right",
+                        "items": "属性配置表,tabSetting",
+                        "pages": {
+                            "tabSetting": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "title=常用属性"
+                                    ],
+                                    [
+                                        "label,标签/标题,,,,placeholder=<标题>",
+                                        {
+                                            "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=（系统自动分配）",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "titleMode,标题模式,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "TITLE,行标题（默认）",
+                                                "COMMENT,说明文字"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "commentTitle,说明标题",
+                                            "optionJsx.depend.enabled": {
+                                                "titleMode": [
+                                                    "COMMENT"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "commentType,说明颜色,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "info,蓝色（默认）",
+                                                "warning,黄色",
+                                                "success,绿色",
+                                                "error,红色"
+                                            ],
+                                            "optionJsx.depend.enabled": {
+                                                "titleMode": [
+                                                    "COMMENT"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "commentDescription,说明文字,24,,aiInputMulti",
+                                            "optionJsx.depend.enabled": {
+                                                "titleMode": [
+                                                    "COMMENT"
+                                                ]
+                                            },
+                                            "optionJsx.styleInput": {
+                                                "width": "100%"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}
