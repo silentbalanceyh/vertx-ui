@@ -41,3 +41,28 @@
 .ux-column-auto {
     .ix-text.overflow();
 }
+
+// 窗口风格改动
+.ant {
+    &-modal-footer {
+        text-align: center;
+        background-color: @primary-color;
+
+        button {
+            min-width: 90px;
+            border-radius: 16px;
+        }
+
+        .ant-btn-primary {
+            border: solid 1px white;
+        }
+    }
+
+    &-modal-header {
+        background-color: #c9c9c9;
+    }
+
+    &-modal-close-x:hover {
+        color: @button-spec;
+    }
+}

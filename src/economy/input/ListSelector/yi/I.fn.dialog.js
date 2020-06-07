@@ -54,14 +54,10 @@ export default (reference, config = {}) => {
     const dialog = Ux.aiExprWindow(config.window);
     // Footer关闭
     dialog.footer = (
-        <Button.Group>
-            <Button icon="check"
-                    className="ux-success"
+        <div>
+            <Button icon="check" type={"primary"}
                     onClick={onConfirm(reference, config)}>{dialog.okText}</Button>
-            <Button icon="close"
-                    type="danger"
-                    onClick={onClose(reference, false)}>{dialog.cancelText}</Button>
-        </Button.Group>
+        </div>
     );
     dialog.onCancel = onClose(reference, false);
     return dialog;
