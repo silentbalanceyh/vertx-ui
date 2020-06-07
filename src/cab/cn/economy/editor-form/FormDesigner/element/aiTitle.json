@@ -3,6 +3,9 @@
         "window": 1,
         "columns": 2,
         "className": "setting-form-cell",
+        "initial": {
+            "titleMode": "FIX:TITLE"
+        },
         "ui": [
             [
                 "title=属性设置器"
