@@ -85,6 +85,19 @@
                                         }
                                     ],
                                     [
+                                        {
+                                            "metadata": "clientReset,开启重置,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "显示重置",
+                                                "unCheckedChildren": "隐藏重置"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
                                         "title=静态配置（纯前端）"
                                     ],
                                     [
@@ -107,6 +120,25 @@
                                     ],
                                     [
                                         {
+                                            "metadata": "clientEvent,事件类型,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "SUBMIT,提交",
+                                                "RESET,重置",
+                                                "KEY,主键提交",
+                                                "SUBMIT_REDUX,外置提交",
+                                                "SUBMIT_DIALOG,窗口提交",
+                                                "SAVE_ROW,行保存"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
                                             "metadata": "clientType,按钮类型,24,,aiRadio",
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
@@ -122,7 +154,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "clientColor,按钮风格,16,,aiRadio",
+                                            "metadata": "clientColor,按钮风格,24,,aiRadio",
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
                                                     "CLIENT"
@@ -136,41 +168,6 @@
                                                 "GREEN,绿",
                                                 "SPEC,桃红",
                                                 "BROWN,棕色"
-                                            ]
-                                        },
-                                        {
-                                            "metadata": "clientReset,开启重置,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "显示重置",
-                                                "unCheckedChildren": "隐藏重置"
-                                            },
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "clientEvent,事件类型,24,,aiRadio",
-                                            "optionJsx.className": "radio-input-3",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
-                                            "optionJsx.config.items": [
-                                                "SUBMIT,提交",
-                                                "RESET,重置",
-                                                "KEY,主键提交",
-                                                "SUBMIT_REDUX,外置提交",
-                                                "SUBMIT_DIALOG,窗口提交",
-                                                "SAVE_ROW,行保存"
                                             ]
                                         }
                                     ],
@@ -197,7 +194,13 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "serverCode,权限码",
+                                            "metadata": "serverEvent,事件类型,,,aiSelect",
+                                            "optionJsx.config.items": [
+                                                "event.add,添加",
+                                                "event.save,保存",
+                                                "event.delete,删除",
+                                                "event.filter,过滤"
+                                            ],
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
                                                     "SERVER"
@@ -205,7 +208,7 @@
                                             }
                                         },
                                         {
-                                            "metadata": "serverKey,操作码",
+                                            "metadata": "serverCode,权限码",
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
                                                     "SERVER"
@@ -225,6 +228,58 @@
                                         {
                                             "metadata": "serverSource,,8",
                                             "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=回调专用配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackUi,回调组件,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "DIALOG,窗口回调",
+                                                "MESSAGE,消息回调"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "callbackType,回调类型,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "success,成功回调",
+                                                "failure,失败回调"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackContent,提示消息,24",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackTitle,窗口标题",
+                                            "optionJsx.depend.enabled": {
+                                                "callbackUi": [
+                                                    "DIALOG"
+                                                ],
                                                 "actionMode": [
                                                     "SERVER"
                                                 ]
