@@ -50,6 +50,9 @@
                             "tabSetting": {
                                 "window": 0.51,
                                 "columns": 2,
+                                "initial": {
+                                    "field": "FIX:$button"
+                                },
                                 "ui": [
                                     [
                                         "title=常用属性"
@@ -57,55 +60,98 @@
                                     [
                                         "label,标签/标题,,,,placeholder=<标题>",
                                         {
-                                            "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=（系统自动分配）",
+                                            "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=$button",
                                             "optionJsx.config.datum": "source=model.fields,key=key,label=display"
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "titleMode,标题模式,24,,aiRadio",
+                                            "metadata": "isHidden,是否隐藏,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "隐藏按钮",
+                                                "unCheckedChildren": "显示按钮"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "actionMode,提交模式,16,,aiRadio",
                                             "optionJsx.config.items": [
-                                                "TITLE,行标题（默认）",
-                                                "COMMENT,说明文字"
+                                                "CLIENT,客户端模式",
+                                                "SERVER,服务端模式"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "title=纯前端配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientId,按钮ID,,,,addonBefore=$",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "clientText,按钮文字",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientType,按钮类型,24,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "DEFAULT,默认按钮",
+                                                "PRIMARY,标准按钮",
+                                                "DANGER,提醒按钮"
                                             ]
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "commentTitle,说明标题",
+                                            "metadata": "clientColor,按钮风格,16,,aiRadio",
                                             "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
-                                                ]
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "commentType,说明颜色,24,,aiRadio",
-                                            "optionJsx.config.items": [
-                                                "info,蓝色（默认）",
-                                                "warning,黄色",
-                                                "success,绿色",
-                                                "error,红色"
-                                            ],
-                                            "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
-                                                ]
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "commentDescription,说明文字,24,,aiInputMulti",
-                                            "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ],
+                                                "clientType": [
+                                                    "DEFAULT"
                                                 ]
                                             },
-                                            "optionJsx.styleInput": {
-                                                "width": "100%"
+                                            "optionJsx.config.items": [
+                                                "RED,红",
+                                                "GREEN,绿",
+                                                "SPEC,桃红",
+                                                "BROWN,棕色"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "isReset,开启重置,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "显示重置",
+                                                "unCheckedChildren": "隐藏重置"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "CLIENT"
+                                                ]
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
                                             }
                                         }
                                     ]
