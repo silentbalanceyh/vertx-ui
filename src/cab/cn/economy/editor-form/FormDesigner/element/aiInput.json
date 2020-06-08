@@ -455,6 +455,12 @@
                                         {
                                             "metadata": "normalize,输入限制,24,,aiRadio",
                                             "optionJsx.className": "radio-input-3",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "normalizeLength",
+                                                    "normalizePrecision"
+                                                ]
+                                            },
                                             "optionJsx.config.items": [
                                                 "unlimited,不限制",
                                                 "decimal,仅浮点数",
@@ -468,15 +474,24 @@
                                     [
                                         {
                                             "metadata": "normalizeLength,限制长度,,100%,aiInputNumber",
+                                            "optionConfig.rules": [
+                                                "required,如果使用了输入限制，必须填写长度！"
+                                            ],
                                             "optionJsx.depend.enabled": {
                                                 "normalize": [
                                                     "decimal",
-                                                    "number"
+                                                    "number",
+                                                    "integer",
+                                                    "upper",
+                                                    "id"
                                                 ]
                                             }
                                         },
                                         {
                                             "metadata": "normalizePrecision,限制精度,,100%,aiInputNumber,min=1",
+                                            "optionConfig.rules": [
+                                                "required,对不起，精度数据必须填写！"
+                                            ],
                                             "optionJsx.depend.enabled": {
                                                 "normalize": [
                                                     "decimal"

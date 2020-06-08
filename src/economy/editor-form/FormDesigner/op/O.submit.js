@@ -35,11 +35,59 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     St.dataInit(normalized, data);
     /*
      * 基础配置
-     * - field: 字段名
-     * - label: 标签值
-     * - optionItem.style: 宽度解析处理
+     * {
+     *      "field": "field",
+     *      "label": "optionItem.label",
+     *      "width": "optionItem.style.width",
+     *      "placeholder": "optionJsx.placeholder"
+     * }
      */
     St.dataField(normalized, data);
+    /*
+     * 基础属性配置
+     * {
+     *      "readOnly": "optionJsx.readOnly",
+     *      "inscribe": "optionJsx.inscribe",
+     *      "allowClear": "optionJsx.allowClear",
+     *      "maxLength": "optionJsx.maxLength"
+     * }
+     */
+    St.dataBasic(normalized, data);
+    /*
+     * 修饰专用属性
+     * {
+     *      "suffix": "optionJsx.suffix",
+     *      "prefix": "optionJsx.prefix",
+     *      "addonBefore": "optionJsx.addonBefore",
+     *      "addonAfter": "optionJsx.addonAfter"
+     * }
+     */
+    St.dataAdorn(normalized, data);
+    /*
+     * 限制输入处理
+     * {
+     *      "normalize": "xxx",
+     *      "normalizeLength": "xxx",
+     *      "normalizePrecision": "xxx"
+     * }
+     * // 处理最终结果
+     * optionConfig.normalize = <normalize>,<length>,<precision>
+     */
+    St.dataNorm(normalized, data);
+    /*
+     * 触发项处理
+     * {
+     *      "impactReset": "optionJsx.depend.impact.reset"
+     * }
+     */
+    St.dataImpact(normalized, data);
+    /*
+     * 联动规则
+     * {
+     *
+     * }
+     */
+    St.dataEnabled(normalized, data);
     return normalized;
 }
 export default {
@@ -49,6 +97,6 @@ export default {
         /* 输出数据信息 */
         const normalized = {};
         const parameters = $opDataOut(normalized, params, reference);
-        console.info(parameters);
+        console.info(params, parameters);
     }
 }
