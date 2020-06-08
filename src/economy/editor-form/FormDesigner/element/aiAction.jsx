@@ -12,7 +12,8 @@ class Component extends React.PureComponent {
         Sd.yiComponent(this, {
             id: "SubForm-Setting-aiAction",
             renders: {
-                serverSource: Sd.yoRenders.serverSource
+                serverSource: Sd.yoRenders.serverSource,
+                server1Source: Sd.yoRenders.server1Source,
             }
         });
     }
