@@ -131,6 +131,9 @@
                                         },
                                         {
                                             "metadata": "remoteSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "remoteUri"
+                                            },
                                             "optionJsx.depend.enabled": {
                                                 "dataType": [
                                                     "REMOTE"

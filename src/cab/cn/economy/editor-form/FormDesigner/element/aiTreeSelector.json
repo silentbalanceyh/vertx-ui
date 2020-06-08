@@ -332,7 +332,12 @@
                                     ],
                                     [
                                         "ajaxUri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
-                                        "ajaxSource,,8"
+                                        {
+                                            "metadata": "ajaxSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "ajaxUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         {

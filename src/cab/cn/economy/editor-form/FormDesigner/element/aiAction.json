@@ -227,6 +227,9 @@
                                         },
                                         {
                                             "metadata": "serverSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "serverUri"
+                                            },
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
                                                     "SERVER"
@@ -434,6 +437,9 @@
                                         },
                                         {
                                             "metadata": "server2Source,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "server2Uri"
+                                            },
                                             "optionJsx.depend.enabled": {
                                                 "actionMode": [
                                                     "SERVER"

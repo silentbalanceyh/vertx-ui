@@ -231,14 +231,24 @@
                                     ],
                                     [
                                         "addrCountryUri,读取国家,16,,,placeholder=国家读取地址",
-                                        "addrCountryApi,,8"
+                                        {
+                                            "metadata": "addrCountryApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "addrCountryUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "addrCountryField,显示字段,12,,,placeholder=国家显示字段"
                                     ],
                                     [
                                         "addrStateUri,读取省会,16,,,placeholder=省会读取地址",
-                                        "addrStateApi,,8"
+                                        {
+                                            "metadata": "addrStateApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "addrStateUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "addrStateField,显示字段,12,,,placeholder=省会显示字段",
@@ -246,7 +256,12 @@
                                     ],
                                     [
                                         "addrCityUri,读取城市,16,,,placeholder=城市读取地址",
-                                        "addrCityApi,,8"
+                                        {
+                                            "metadata": "addrCityApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "addrCityUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "addrCityField,显示字段,12,,,placeholder=城市显示字段",
@@ -254,7 +269,12 @@
                                     ],
                                     [
                                         "addrRegionUri,读取二级县,16,,,placeholder=县级市读取地址",
-                                        "addrRegionApi,,8"
+                                        {
+                                            "metadata": "addrRegionApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "addrRegionUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "addrRegionField,显示字段,12,,,placeholder=县级市显示字段",
@@ -262,7 +282,12 @@
                                     ],
                                     [
                                         "addrInitUri,初始化地址,16,,,placeholder=初始化数据专用",
-                                        "addrInitApi,,8"
+                                        {
+                                            "metadata": "addrInitApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "addrInitUri"
+                                            }
+                                        }
                                     ]
                                 ]
                             }

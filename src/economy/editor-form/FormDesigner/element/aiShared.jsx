@@ -56,7 +56,9 @@ export default {
         // 级联选择 API
         cascadeValue: (reference, jsx) => {
             return (
-                <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
+                <ValueSource {...jsx}
+                             reference={reference}
+                             field={"cascadeTarget"}/>
             )
         },
         // 上传部分 API
@@ -74,72 +76,58 @@ export default {
         uploadDownApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         // 地址选择 API
         addrCountryApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrStateApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrCityApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrRegionApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrInitApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         ajaxSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         ajaxMagic: (reference, jsx) => {
@@ -148,31 +136,25 @@ export default {
         remoteSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         serverSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
-        server1Source: (reference, jsx) => {
+        server2Source: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         datumInput: (reference, jsx) => {
