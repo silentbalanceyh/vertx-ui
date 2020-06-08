@@ -47,6 +47,23 @@ const dataNumber = (normalized = {}, params = {}) => {
         }
     }
 }
+const dataTextArea = (normalized = {}, params = {}) => {
+    // 默认行数
+    dataJsx(normalized, params, 'rows');
+    // 是否开启自动缩放功能
+    if (params.autoSize) {
+        if (params.autoSizeMin || params.autoSizeMax) {
+            // minRows, maxRows
+            normalized.optionJsx.autoSize = {};
+            if (0 < params.autoSizeMin) {
+                normalized.optionJsx.autoSize.minRows = params.autoSizeMin;
+            }
+            if (0 < params.autoSizeMax) {
+                normalized.optionJsx.autoSize.maxRows = params.autoSizeMax;
+            }
+        }
+    }
+}
 export default {
     dataInit: (normalized = {}, params = {}) => {
         /*
@@ -102,6 +119,8 @@ export default {
         dataPassword(normalized, params);
         // 数值框
         dataNumber(normalized, params);
+        // 多文本框
+        dataTextArea(normalized, params);
     },
     /*
      * normalize 设置专用
