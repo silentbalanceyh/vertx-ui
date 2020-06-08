@@ -72,8 +72,32 @@ const dataCheckbox = (normalized = {}, params = {}) => {
 
 const dataFileUpload = (normalized = {}, params = {}) => {
     if (params.uploadSingle) {
-
+        normalized.optionJsx.single = params.uploadSingle;
     }
+    dataJsx(normalized, params, 'listType');
+    dataJsx(normalized, params, 'text');
+    if (params.accept) {
+        const acceptString = params.accept.join(',');
+        normalized.optionJsx.accept = acceptString;
+    }
+    dataJsx(normalized, params, 'withCredentials');
+    if (params.uploadLimit) {
+        normalized.optionJsx.config.limit = params.uploadLimit;
+    }
+    if (params.uploadDownFile) {
+        normalized.optionJsx.config.filekey = params.uploadDownFile;
+    }
+    const ajax = {};
+    if (params.uploadDownUri) {
+        ajax.download = params.uploadDownUri;
+    }
+    if (params.uploadUpUri) {
+        ajax.uri = params.uploadUpUri;
+    }
+    if (params.uploadUpParam) {
+        ajax.params = params.uploadUpParam;
+    }
+    normalized.optionJsx.ajax = ajax;
 }
 
 const dataRadio = (normalized = {}, params = {}) => {
