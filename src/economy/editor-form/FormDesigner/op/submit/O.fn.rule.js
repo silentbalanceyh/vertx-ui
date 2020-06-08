@@ -63,6 +63,14 @@ export default (normalized = {}, params = {}) => {
             rules.push(rule);
         }
     }
+    if (ruleData.ruleEnum) {
+        if (ruleData.ruleEnumMessage && ruleData.ruleEnumValid) {
+            const rule = {};
+            rule.enum = ruleData.ruleEnumValid;
+            rule.message = ruleData.ruleEnumMessage;
+            rules.push(rule);
+        }
+    }
     /*
      *  Diff / Equal 两个基本规则
      * */

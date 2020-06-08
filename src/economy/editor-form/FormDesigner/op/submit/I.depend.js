@@ -1,7 +1,6 @@
 import Ux from "ux";
 
 export default {
-
     /*
      * normalize 设置专用
      */

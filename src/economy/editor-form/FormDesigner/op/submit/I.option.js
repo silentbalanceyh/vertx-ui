@@ -39,6 +39,20 @@ const dataDatum = (normalized = {}, params = {}) => {
     }
 }
 export default {
+    dataMultiple: (normalized = {}, params = {}) => {
+        // 多选启用
+        if (params.multiple) {
+            // 多选模式
+            if (params.multipleMode) {
+                // 多选 / 标签两种模式
+                normalized.optionJsx.mode = params.multipleMode;
+                if (1 < params.maxTagCount) {
+                    // 多选 Tags 处理
+                    normalized.optionJsx.maxTagCount = params.maxTagCount;
+                }
+            }
+        }
+    },
     dataOption: (normalized = {}, params = {}) => {
         if (params.dataSource) {
             // 数据源选项配置（静态和动态）
@@ -63,4 +77,31 @@ export default {
         }
     },
     dataDatum,
+    dataTree: (normalized = {}, params = {}) => {
+        const tree = {};
+        if (params.treeKey) {
+            tree.key = params.treeKey;
+        }
+        if (params.treeParent) {
+            tree.parent = params.treeParent;
+        }
+        if (params.treeText) {
+            tree.text = params.treeText;
+        }
+        if (params.treeValue) {
+            tree.value = params.treeValue;
+        }
+        if (params.treeSort) {
+            tree.sort = params.treeSort;
+        }
+        if (params.treeLeaf) {
+            tree.leaf = params.treeLeaf;
+        }
+        normalized.optionJsx.config.tree = tree;
+        if (params.treeSelection) {
+            normalized.optionJsx.config.selection = params.treeSelection;
+        } else {
+            normalized.optionJsx.config.selection = "CURRENT";
+        }
+    },
 }

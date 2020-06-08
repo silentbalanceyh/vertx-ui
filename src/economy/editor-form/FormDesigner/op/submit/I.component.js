@@ -1,4 +1,5 @@
 import dataJsx from './I.fn.jsx.js';
+import Opt from './I.option';
 
 const dataPassword = (normalized = {}, params = {}) => {
     // 密码框才有的属性
@@ -50,25 +51,69 @@ const dataTextArea = (normalized = {}, params = {}) => {
 }
 const dataSelect = (normalized = {}, params = {}) => {
     // 多选启用
-    if (params.multiple) {
-        // 多选模式
-        if (params.multipleMode) {
-            // 多选 / 标签两种模式
-            normalized.optionJsx.mode = params.multipleMode;
-            if (1 < params.maxTagCount) {
-                // 多选 Tags 处理
-                normalized.optionJsx.maxTagCount = params.maxTagCount;
-            }
-        }
+    Opt.dataMultiple(normalized, params);
+}
+const dataTreeSelect = (normalized = {}, params = {}) => {
+    // 多选启用
+    Opt.dataMultiple(normalized, params);
+    // Option 专用（单独读取动态数据源）
+    Opt.dataOption(normalized, params);
+    // Tree
+    Opt.dataTree(normalized, params);
+}
+const dataCheckbox = (normalized = {}, params = {}) => {
+    // 模式
+    dataJsx(normalized, params, 'mode');
+    if ("SWITCH" === params.mode) {
+        dataJsx(normalized, params, 'checkedChildren');
+        dataJsx(normalized, params, 'unCheckedChildren');
     }
 }
+
+const dataRadio = (normalized = {}, params = {}) => {
+    // 模式
+    dataJsx(normalized, params, 'mode');
+    // 宽度处理
+    if (params.radioCount) {
+        const style = {};
+        if (1 === params.radioCount) {
+            style.width = "100%";
+        } else if (2 === params.radioCount) {
+            style.width = "48%";
+        } else if (3 === params.radioCount) {
+            style.width = "32%";
+        } else if (4 === params.radioCount) {
+            style.width = "24%";
+        }
+        normalized.optionJsx.style = style;
+    }
+}
+
 export default {
-    // 密码框
-    dataPassword,
-    // 输入数值
-    dataNumber,
-    // 多文本
-    dataTextArea,
-    // 下拉框
-    dataSelect,
+    // 专用
+    dataComponent: (normalized = {}, params = {}) => {
+        const render = params.render;
+        if ("aiPassword" === render) {
+            // 密码框
+            dataPassword(normalized, params);
+        } else if ("aiInputNumber" === render) {
+            // 数值框
+            dataNumber(normalized, params);
+        } else if ("aiTextArea" === render) {
+            // 多文本框
+            dataTextArea(normalized, params);
+        } else if ("aiSelect" === render) {
+            // 下拉框
+            dataSelect(normalized, params);
+        } else if ("aiTreeSelect" === render) {
+            // 树状下拉
+            dataTreeSelect(normalized, params);
+        } else if ("aiCheckbox" === render) {
+            // 多选框
+            dataCheckbox(normalized, params);
+        } else if ("aiRadio" === render) {
+            // 单选框
+            dataRadio(normalized, params);
+        }
+    },
 }

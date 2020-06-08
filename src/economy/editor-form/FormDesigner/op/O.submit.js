@@ -133,7 +133,8 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     /*
      * 特殊属性
      * 1）密码框
-     * optionJsx.visibilityToggle:
+     * optionJsx.visibilityToggle
+     *
      * 2）数值输入
      * optionJsx.min
      * optionJsx.max
@@ -141,13 +142,20 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.precision
      * optionJsx.formatter
      * optionJsx.parser
+     *
      * 3）多行文本
      * optionJsx.rows
      * optionJsx.autoSize.minRows
      * optionJsx.autoSize.maxRows
+     *
      * 4）下拉框
      * optionJsx.mode
      * optionJsx.maxTagCount
+     *
+     * 5）多选框
+     * optionJsx.mode
+     * optionJsx.checkedChildren
+     * optionJsx.unCheckedChildren
      */
     St.dataComponent(normalized, data);
     /*
@@ -155,8 +163,33 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * 1）静态和动态数据源
      * optionJsx.config.items
      * optionJsx.config.datum
+     * optionJsx.config.datum.source
+     * optionJsx.config.datum.value
+     * optionJsx.config.datum.label
+     *
+     * 2）表达式处理
+     * optionJsx.config.expr
+     *
+     * 3）级联
+     * optionJsx.config.cascade
+     * optionJsx.config.cascade.source
+     * optionJsx.config.cascade.target
      */
     St.dataOption(normalized, data);
+    /*
+     * 1）树专用处理
+     * optionJsx.config.tree
+     * optionJsx.config.tree.key
+     * optionJsx.config.tree.parent
+     * optionJsx.config.tree.text
+     * optionJsx.config.tree.value
+     * optionJsx.config.tree.sort
+     * optionJsx.config.tree.leaf
+     * optionJsx.config.selection
+     */
+    // 组件内部调用该方法
+    // 只有树组件可用
+    // St.dataTree(normalized, data);
     return normalized;
 }
 export default {
