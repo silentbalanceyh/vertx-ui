@@ -61,7 +61,7 @@
                                         "label,标签/标题,,,,placeholder=<标题>",
                                         {
                                             "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=$button",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display"
                                         }
                                     ],
                                     [

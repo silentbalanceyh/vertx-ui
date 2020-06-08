@@ -79,7 +79,7 @@
                                         },
                                         {
                                             "metadata": "dependField,依赖字段,16,,aiSelect,placeholder=（不可设置为当前字段）",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "dependEnabled": true
                                             }
@@ -128,7 +128,7 @@
                                     [
                                         {
                                             "metadata": "dependSource,数据源标识,,,aiSelect,placeholder=辅助数据源中配置",
-                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name",
+                                            "optionJsx.config.datum": "source=model.sources,value=key,label=name",
                                             "optionJsx.depend.enabled": {
                                                 "dependType": [
                                                     "DATUM"
@@ -271,7 +271,7 @@
                                         },
                                         {
                                             "metadata": "ruleEqualTo,= 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleEqual": true
                                             },
@@ -310,7 +310,7 @@
                                         },
                                         {
                                             "metadata": "ruleDiffTo,<> 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleDiff": true
                                             },
@@ -350,7 +350,7 @@
                                         },
                                         {
                                             "metadata": "ruleLessTo,目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleLess": true
                                             },
@@ -401,7 +401,7 @@
                                         },
                                         {
                                             "metadata": "ruleGreatTo,目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleGreat": true
                                             },
@@ -448,7 +448,7 @@
                                         "label,标签/标题,,,,placeholder=<标签>",
                                         {
                                             "metadata": "field,字段名,,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display"
                                         }
                                     ],
                                     [

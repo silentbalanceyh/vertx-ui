@@ -2,11 +2,12 @@ import submit from './I.attribute';
 import depend from './I.depend';
 import Ct from "./I.component";
 import dataRules from './O.fn.rule';
-import dataOption from './O.fn.option';
+import option from './O.fn.option';
 
 export default {
     ...submit,
     ...depend,
+    ...option,
     dataInit: (normalized = {}, params = {}) => {
         /*
          * normalized.field 可不设置
@@ -20,7 +21,6 @@ export default {
     },
     /* rules, option 处理 */
     dataRules,
-    dataOption,
     dataComponent: (normalized = {}, params = {}) => {
         const render = params.render;
         if ("aiPassword" === render) {

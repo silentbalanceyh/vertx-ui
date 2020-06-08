@@ -30,6 +30,10 @@ export default {
         dataJsx(normalized, params, 'allowClear');
         // 最大长度
         dataJsx(normalized, params, 'maxLength');
+        // 特殊属性 config.expr
+        if (params.expr) {
+            normalized.optionJsx.config.expr = params.expr;
+        }
     },
     dataAdorn: (normalized = {}, params = {}) => {
         // 文字前后缀

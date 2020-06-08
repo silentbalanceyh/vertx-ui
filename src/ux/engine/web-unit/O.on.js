@@ -36,7 +36,7 @@ const _mountEvent = (reference, cell = {}, render, name) => {
                 reference.setState({data: merged});
                 /* 读取更新值 */
                 const updated = Xt.xtFormat(merged, column.format);
-                Abs.fn(reference)[name](Xt.xtFormat(merged, column.format));
+                Abs.fn(reference)[name](updated);
             }
         }
     }
