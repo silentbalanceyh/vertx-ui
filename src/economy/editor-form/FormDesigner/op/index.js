@@ -18,6 +18,8 @@ const exported = {
     },
     /* 开放的函数区域 */
     ...Cmn,
+    /* 特殊方法 */
+    dataIn: event.actions.$opDataIn,
 }
 console.info(exported);
 export default exported;

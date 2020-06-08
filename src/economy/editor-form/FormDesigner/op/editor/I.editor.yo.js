@@ -1,6 +1,5 @@
 import Cmn from '../library';
 import Ux from 'ux';
-import yo from './I.editor.yo.data';
 
 const toStatus = (reference) => {
     const {data = []} = reference.props;
@@ -12,7 +11,6 @@ const toStatus = (reference) => {
 }
 
 export default {
-    ...yo,
     yoRow: (reference, row, index) => {
         // 行对应元数据
         const rowConfig = {};
