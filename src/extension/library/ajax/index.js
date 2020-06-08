@@ -8,6 +8,7 @@ import _todo from './todo';
 import _job from './job';
 import _relation from './relation';
 import _model from './model';
+import _api from './api';
 
 /**
  * ## 接口专用类
@@ -576,6 +577,36 @@ class I {
      */
     static relationDelete(keys = []) {
         return _relation.relationDelete(keys);
+    }
+
+    /**
+     * ## 接口函数
+     *
+     * * 接口：`/api/x-api/search`（POST）
+     * * 安全：是
+     *
+     * 读取当前系统中所有的接口信息。
+     *
+     * @async
+     * @returns {Promise<T>} 返回Promise
+     */
+    static apis(params) {
+        return _api.apis(params)
+    }
+    /**
+     * ## 接口函数
+     *
+     * * 接口：`/api/x-api/:key`（GET）
+     * * 安全：是
+     *
+     * 读取具体 uri 配置。
+     *
+     * @async
+     * @param {String} key 当前任务的`key`主键
+     * @returns {Promise<T>} 返回Promise
+     */
+    static uri(key) {
+        return _api.uri(key);
     }
 }
 
