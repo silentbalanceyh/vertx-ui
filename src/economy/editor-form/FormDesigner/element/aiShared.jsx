@@ -38,6 +38,8 @@ export default {
             renders,
         }).then(raft => {
             state.raft = raft;
+            // Action 提交专用配置
+            state.$op = Op.actions;
             return Ux.promise(state);
         }).then(Ux.ready).then(Ux.pipe(reference));
     },

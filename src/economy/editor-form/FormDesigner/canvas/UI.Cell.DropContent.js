@@ -3,7 +3,7 @@ import {DropTarget} from "react-dnd";
 import Op from "../op";
 import Ux from 'ux';
 import {LoadingAlert} from 'web';
-import {Form} from 'antd';
+import {Button, Form} from 'antd';
 
 const renderJsx = (reference, type, cell = {}) => {
     // 标题行
@@ -23,6 +23,20 @@ const renderJsx = (reference, type, cell = {}) => {
                 </div>
             )
         }
+    } else if ("aiAction" === type) {
+        const {optionItem = {}, optionJsx = {}} = cell;
+        const {extension = []} = optionJsx;
+        return (
+            <Form.Item {...optionItem} colon={false}>
+                {extension.map(item => {
+                    return (
+                        <Button key={item.key} type={item.type ? item.type : "default"}>
+                            {item.text}
+                        </Button>
+                    )
+                })}
+            </Form.Item>
+        );
     } else {
         const {optionItem = {}, optionJsx = {}} = cell;
         const fnRender = Ux[type];

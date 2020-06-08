@@ -31,7 +31,11 @@
             "title": "<标题>",
             "label": "<标签>",
             "option": "<选项>",
-            "attribute": "<属性名>"
+            "attribute": "<属性名>",
+            "action": {
+                "submit": "主提交",
+                "submit1": "第二提交"
+            }
         }
     }
 }
