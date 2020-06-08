@@ -38,6 +38,7 @@ const configDialog = (reference, config = {}) => {
      * onOk按钮
      */
     if ("string" === typeof $config.onOk) {
+        $dialog.__onOk = $config.onOk;
         $dialog.onOk = () => Ut.connectId($config.onOk);
     }
     /*

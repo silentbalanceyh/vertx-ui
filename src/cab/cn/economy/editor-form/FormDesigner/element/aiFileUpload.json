@@ -279,7 +279,12 @@
                                     ],
                                     [
                                         "uploadDownUri,下载地址,16,,,placeholder=设置文件下载地址",
-                                        "uploadDownApi,,8"
+                                        {
+                                            "metadata": "uploadDownApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "uploadDownUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "uploadDownFile,文件主键,24,,,placeholder=下载文件时替换链接参数专用文件主键！"

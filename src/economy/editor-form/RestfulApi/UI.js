@@ -30,11 +30,10 @@ class Component extends React.PureComponent {
                     <Dialog className={"web-dialog"}
                             size={"small"}
                             $visible={$visible}
-                            $dialog={$dialog}>
+                            $dialog={$dialog}
+                            rxOk={Op.onSubmit(this)}>
                         {$visible ? renderContent(this) : false}
                     </Dialog>
-                    <Button className={"ux-hidden"} id={"$opSaveApi"}
-                            onClick={Op.onSubmit(this)}/>
                 </div>
             )
         });
