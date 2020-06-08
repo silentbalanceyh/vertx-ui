@@ -13,7 +13,7 @@ const _initParams = (reference) => {
 };
 const _ajaxUniform = (ajax, params) =>
     Ux.ajaxGet(ajax.uri, params)
-    // 这里需要转config
+        // 这里需要转config
         .then(data => Ux.promise({data, config: ajax}));
 const loadCountry = (reference) => {
     const ajax = I.parseAjax(reference, "country");

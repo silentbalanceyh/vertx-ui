@@ -266,6 +266,41 @@
                                                 "valuePropName": "checked"
                                             }
                                         }
+                                    ],
+                                    [
+                                        "title=表格列设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "table,,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "表达式录入",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
                                     ]
                                 ]
                             },
@@ -278,7 +313,12 @@
                                     ],
                                     [
                                         "ajaxUri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
-                                        "ajaxSource,,8"
+                                        {
+                                            "metadata": "ajaxSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "ajaxUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         {
@@ -364,41 +404,6 @@
                                     ],
                                     [
                                         "windowValidation,验证消息,24,,,placeholder=执行窗口操作时的验证消息，主要用于选项验证！"
-                                    ],
-                                    [
-                                        "title=表格列设置"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "table,,24,,aiTableEditor",
-                                            "optionJsx.config": {
-                                                "format": {
-                                                    "type": "ARRAY",
-                                                    "keyField": "name"
-                                                },
-                                                "table": {
-                                                    "columns": [
-                                                        {
-                                                            "dataIndex": "dataIndex",
-                                                            "title": "字段名",
-                                                            "width": 140,
-                                                            "$render": "EDITOR"
-                                                        },
-                                                        {
-                                                            "dataIndex": "title",
-                                                            "title": "字段标题",
-                                                            "width": 140,
-                                                            "$render": "EDITOR"
-                                                        },
-                                                        {
-                                                            "dataIndex": "expression",
-                                                            "title": "表达式录入",
-                                                            "$render": "EDITOR"
-                                                        }
-                                                    ]
-                                                }
-                                            }
-                                        }
                                     ]
                                 ]
                             }

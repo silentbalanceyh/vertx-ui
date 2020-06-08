@@ -5,6 +5,8 @@ import React from "react";
 import ValueSource from '../../ValueSource/UI';
 import RestfulApi from "../../RestfulApi/UI";
 import ParamInput from "../../ParamInput/UI";
+import DatumUnique from '../../DatumUnique/UI';
+
 import LoadingContent from "../../../loading/LoadingContent/UI";
 
 const field = (reference, jsx) => {
@@ -36,6 +38,8 @@ export default {
             renders,
         }).then(raft => {
             state.raft = raft;
+            // Action 提交专用配置
+            state.$op = Op.actions;
             return Ux.promise(state);
         }).then(Ux.ready).then(Ux.pipe(reference));
     },
@@ -52,96 +56,111 @@ export default {
         // 级联选择 API
         cascadeValue: (reference, jsx) => {
             return (
-                <ValueSource {...jsx} reference={reference} field={"cascadeTarget"}/>
+                <ValueSource {...jsx}
+                             reference={reference}
+                             field={"cascadeTarget"}/>
             )
         },
         // 上传部分 API
         uploadUpApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         uploadUpParam: (reference, jsx) => {
-            return (<ParamInput reference={reference} {...jsx} $query/>)
+            return (<ParamInput {...jsx} reference={reference} $query/>)
         },
         uploadDownApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         // 地址选择 API
         addrCountryApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrStateApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrCityApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrRegionApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         addrInitApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         ajaxSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         ajaxMagic: (reference, jsx) => {
             return (<ParamInput reference={reference} {...jsx} $query/>)
-        }
+        },
+        remoteSource: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
+            )
+        },
+        serverSource: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
+            )
+        },
+        server2Source: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
+            )
+        },
+        datumInput: (reference, jsx) => {
+            return (
+                <DatumUnique {...jsx} reference={reference}/>
+            )
+        },
     }
 }

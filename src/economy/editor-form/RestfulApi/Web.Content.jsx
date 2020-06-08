@@ -1,5 +1,6 @@
 import React from 'react';
 import {Col, Input, Row, Table} from 'antd';
+import Op from './op';
 
 export default (reference) => {
     const {
@@ -16,8 +17,10 @@ export default (reference) => {
             </Row>
             <Row>
                 <Col span={24}>
-                    <Table {...$table} loading={$loading}
-                           dataSource={$data}/>
+                    <Table {...$table}
+                           loading={$loading}
+                           dataSource={$data}
+                           rowSelection={Op.onRowSelect(reference)}/>
                 </Col>
             </Row>
         </div>

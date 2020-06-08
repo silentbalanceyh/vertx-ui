@@ -17,6 +17,13 @@ const sourceSpec = {
         };
     }
 };
+const dropExecute = (reference, config, render) => {
+    const ref = Ux.onReference(reference, 1);
+    const cellData = Ux.clone(config);
+    cellData.data = fnRaft(reference, render);
+    cellData.render = render;
+    Ux.fn(ref).rxCellConfig(cellData);
+}
 const targetSpec = {
     drop: (props, monitor, component) => {
         // 关闭覆盖效果
@@ -24,19 +31,27 @@ const targetSpec = {
         // 判断是否可以放入
         const {render} = monitor.getItem();
         fnForbidden(component, render, () => {
-            const ref = Ux.onReference(component, 1);
-            const {config = {}} = props;
+            const {config = {}, data = {}} = props;
             /*
              * 特殊的单元格参数信息
              * 1. 使用同结构操作，原生的 config 中追加三个属性
              * - render
              * - data（最终的数据配置）
              * - ready（是否已经拖入了控件）
+             *
+             * 2. 注意
+             * - render 中是新值
+             * - data.render 中是旧值
              */
-            const cellData = Ux.clone(config);
-            cellData.data = fnRaft(component, render);
-            cellData.render = render;
-            Ux.fn(ref).rxCellConfig(cellData);
+            if (data.render) {
+                const ref = Ux.onReference(component, 1);
+                Ux.sexDialog(ref, "dropped", () =>
+                    // 执行拖拽处理
+                    dropExecute(component, config, render))
+            } else {
+                // 执行拖拽处理
+                dropExecute(component, config, render);
+            }
         })
     },
     /* 浮游在 Target 之上 */

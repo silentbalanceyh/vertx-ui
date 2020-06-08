@@ -37,12 +37,29 @@ const mountArray = (props, component) => {
     item.optionJsx = {config: {format: {type: "ARRAY"}}}
     return item;
 }
+const mountAction = (props, component) => {
+    const item = {};
+    const raft = Ux.fromPath(component, "message", "raft");
+    item.optionItem = {label: " "};
+    item.optionJsx = {
+        extension: [
+            {
+                key: "$opEmpty",
+                text: raft.action.submit,
+                type: "primary"
+            }
+        ]
+    };
+    return item;
+}
 const executor = {
     "aiTitle": (props, component) => {
         const init = {};
         mountTitle(component, init);
         return init;
     },
+    "aiMagic": mountInput,
+    "aiAction": mountAction,
     "aiInput": mountInput,
     "aiPassword": mountInput,
     "aiInputNumber": mountInput,

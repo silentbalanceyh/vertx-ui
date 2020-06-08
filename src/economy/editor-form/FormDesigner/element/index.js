@@ -17,6 +17,9 @@ import aiJsonEditor from "./aiJsonEditor";
 import aiListSelector from "./aiListSelector";
 import aiTreeSelector from "./aiTreeSelector";
 import aiTableEditor from "./aiTableEditor";
+import aiTitle from './aiTitle';
+import aiMagic from "./aiMagic";
+import aiAction from './aiAction';
 
 export default {
     aiInput,
@@ -37,5 +40,8 @@ export default {
     aiJsonEditor,
     aiListSelector,
     aiTreeSelector,
-    aiTableEditor
+    aiTableEditor,
+    aiTitle,
+    aiMagic,
+    aiAction,
 }

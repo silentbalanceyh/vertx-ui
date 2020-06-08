@@ -1,0 +1,221 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=属性设置器"
+            ],
+            [
+                {
+                    "metadata": "render,组件类型,20",
+                    "optionItem": {
+                        "style": {
+                            "width": "100%"
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    }
+                },
+                {
+                    "metadata": "$button",
+                    "optionItem": {
+                        "style": {
+                            "float": "right"
+                        }
+                    },
+                    "optionJsx.extension": [
+                        "$opSaveSetting,保存,SUBMIT,,ux-success-setting,save"
+                    ],
+                    "span": 4
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "fieldBasic",
+                    "config": {
+                        "activeKey": "tabSetting",
+                        "defaultActiveKey": "tabSetting",
+                        "className": "tool-setting",
+                        "tabPosition": "right",
+                        "items": "属性配置表,tabSetting",
+                        "pages": {
+                            "tabSetting": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "title=常用属性"
+                                    ],
+                                    [
+                                        "label,标签/标题,,,,placeholder=<标题>",
+                                        {
+                                            "metadata": "field,字段名,,,aiSelect,placeholder=（系统自动分配）",
+                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dataType,数据类型,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.config.items": [
+                                                "TEXT,文本值",
+                                                "BOOLEAN,布尔值",
+                                                "DATE,时间值",
+                                                "TABLE,表格值",
+                                                "REMOTE,远程加载",
+                                                "DATUM,字典关联",
+                                                "RECORD,记录解析（特殊）"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "dataEmpty,空值显示,24"
+                                    ],
+                                    [
+                                        "title=各数据类型显示配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "textExpr,文本表达式,24",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "TEXT"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "booleanTrue,真值显示",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "BOOLEAN"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "booleanFalse,假值显示",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "BOOLEAN"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dateFormat,时间格式,24",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "DATE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "remoteUri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "remoteSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "remoteUri"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "remoteMethod,HTTP方法,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "GET,GET",
+                                                "POST,POST"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "remoteField,字段信息",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumInput,,24",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "DATUM"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "tableColumns,表格列,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "表达式录入",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "TABLE"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

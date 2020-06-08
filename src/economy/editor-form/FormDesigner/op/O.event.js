@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import actions from './O.fn.submit';
 
 const rxSpinOff = (reference) => (event) => {
     Ux.prevent(event);
@@ -85,6 +86,7 @@ const onCallback = (reference) => ($raft) => {
     });
 }
 export default {
+    actions,
     rxSpinOff,
     raft: (reference) => ({
         onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params))

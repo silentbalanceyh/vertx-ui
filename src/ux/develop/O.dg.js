@@ -73,7 +73,7 @@ const dgAjax = (data, prefix) => {
  * @param {String} ext 扩展名，不设置则使用 `.json`。
  * @param {String} filename 下载的文件名，如果不设置则使用 `<uuid>.<ext>` 的格式。
  */
-const dgFileJson = (data, ext = "json", filename) => {
+const dgFileJson = (data, filename, ext = "json") => {
     let finalData = data;
     if (!Blob.prototype.isPrototypeOf(data)) {
         finalData = new Blob([JSON.stringify(data, null, 2)], {

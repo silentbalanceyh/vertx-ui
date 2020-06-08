@@ -193,7 +193,7 @@ export default ($table = {}, data = [], reference) => {
         /*
          * 报表用于计算最终的列宽
          */
-        report[rdTitle] = column.width;
+        report[rdTitle] = width + `,` + column.width + "," + adjust; // column.width;
     });
     /*
      * 可支持的最大宽度

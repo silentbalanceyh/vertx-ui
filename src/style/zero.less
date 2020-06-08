@@ -1,5 +1,24 @@
 @import "colorful.less";
 @import "infix/index.less";
+// ----------------------- 特殊色彩 --------------------------
+// Card 专用
+@card-action-design: #00a4c2;
+@card-action-edit: #0199e1;
+@card-action-delete: #ed6795;
+@card-action-disabled: #ACA899;
+// Success成功
+@button-success: #48a55d;
+@button-success-hover: #87d068;
+// Failure红色
+@button-failure: #f50;
+@button-failure-hover: #f99;
+// Spec特殊
+@button-spec: #eb2f96;
+@button-spec-hover: #FF6EB4;
+// 特殊酱色
+@button-brown: #8B4726;
+@button-brown-hover: #DEB887;
+// ----------------------- 消费特殊色彩部分 --------------------------
 // 绿按钮
 .ix-button(success, @button-success, @button-success-hover);
 // 红按钮
@@ -21,4 +40,29 @@
 
 .ux-column-auto {
     .ix-text.overflow();
+}
+
+// 窗口风格改动
+.ant {
+    &-modal-footer {
+        text-align: center;
+        background-color: @primary-color;
+
+        button {
+            min-width: 90px;
+            border-radius: 16px;
+        }
+
+        .ant-btn-primary {
+            border: solid 1px white;
+        }
+    }
+
+    &-modal-header {
+        background-color: #c9c9c9;
+    }
+
+    &-modal-close-x:hover {
+        color: @button-spec;
+    }
 }

@@ -19,22 +19,21 @@ class Component extends React.PureComponent {
     render() {
         return Ux.xtReady(this, () => {
             const {$button = {}, $dialog = {}, $visible = false} = this.state;
-            const {$disabled = false} = this.props;
+            const {disabled = false} = this.props;
             return (
                 <div className={"web-restful"}>
                     <Button icon={"api"} className={"ux-spec"}
-                            disabled={$disabled}
+                            disabled={disabled}
                             onClick={Op.onClick(this)}>
                         {$button.text}
                     </Button>
                     <Dialog className={"web-dialog"}
                             size={"small"}
                             $visible={$visible}
-                            $dialog={$dialog}>
-                        {renderContent(this)}
+                            $dialog={$dialog}
+                            rxOk={Op.onSubmit(this)}>
+                        {$visible ? renderContent(this) : false}
                     </Dialog>
-                    <Button className={"ux-hidden"} id={"$opSaveApi"}
-                            onClick={Op.onSubmit(this)}/>
                 </div>
             )
         });
