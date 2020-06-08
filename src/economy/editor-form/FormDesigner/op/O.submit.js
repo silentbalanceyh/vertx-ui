@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import St from './O.submit.data';
 /*
  * 基础字段
  * - aiAction
@@ -22,14 +23,32 @@ const $opDataIn = (data = {}, reference) => {
     }
     return $inited;
 }
-const $opDataOut = (data = {}, reference) => {
-
+/*
+ *
+ * field,           // 字段名
+ * optionJsx,       // 配置项
+ * optionConfig,    // 验证规则
+ * optionItem,      // 基础选项
+ * span,            // 自动处理
+ */
+const $opDataOut = (normalized = {}, data = {}, reference) => {
+    St.dataInit(normalized, data);
+    /*
+     * 基础配置
+     * - field: 字段名
+     * - label: 标签值
+     * - optionItem.style: 宽度解析处理
+     */
+    St.dataField(normalized, data);
+    return normalized;
 }
 export default {
     $opDataIn,
     $opSaveSetting: (reference) => (params = {}) => {
-        Ux.dgFileJson(params, params.render);
+        reference.setState({$loading: false, $submitting: false});
         /* 输出数据信息 */
-        const parameters = $opDataOut(params, reference);
+        const normalized = {};
+        const parameters = $opDataOut(normalized, params, reference);
+        console.info(parameters);
     }
 }

@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import actions from './O.fn.submit';
+import actions from './O.submit';
 
 const rxSpinOff = (reference) => (event) => {
     Ux.prevent(event);
