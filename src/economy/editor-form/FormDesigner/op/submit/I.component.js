@@ -88,7 +88,6 @@ const dataRadio = (normalized = {}, params = {}) => {
         normalized.optionJsx.style = style;
     }
 }
-
 export default {
     // 专用
     dataComponent: (normalized = {}, params = {}) => {
@@ -114,6 +113,12 @@ export default {
         } else if ("aiRadio" === render) {
             // 单选框
             dataRadio(normalized, params);
+        } else if ("aiDatePicker" === render) {
+            // 时间选择器
+            Opt.dataDate(normalized, params);
+        } else if ("aiTimePicker" === render) {
+            // 时间选择器
+            Opt.dataDate(normalized, params);
         }
     },
 }

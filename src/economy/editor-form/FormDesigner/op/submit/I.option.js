@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import dataJsx from './I.fn.jsx';
 
 const dataDatum = (normalized = {}, params = {}) => {
     // 动态数据源
@@ -39,6 +40,29 @@ const dataDatum = (normalized = {}, params = {}) => {
     }
 }
 export default {
+    dataDate: (normalized = {}, params = {}) => {
+        // disabledDate 处理
+        if (params.disabledDate) {
+            normalized.optionJsx.disabledDate = "propFromNow";
+        }
+        // 时间模式
+        dataJsx(normalized, params, 'format');
+        dataJsx(normalized, params, 'showToday');
+        dataJsx(normalized, params, 'showTime');
+        // 模式选择
+        if (params.dateMode) {
+            if ("full" === params.dateMode) {
+                normalized.optionJsx.mode = "date"; // 默认值
+            } else {
+                normalized.optionJsx.mode = params.dateMode;
+            }
+        }
+        // 模式处理
+        dataJsx(normalized, params, 'use12Hours');
+        dataJsx(normalized, params, 'hourStep');
+        dataJsx(normalized, params, 'minuteStep');
+        dataJsx(normalized, params, 'secondStep');
+    },
     dataMultiple: (normalized = {}, params = {}) => {
         // 多选启用
         if (params.multiple) {

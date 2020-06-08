@@ -42,5 +42,5 @@ export default {
         // addon 前后缀
         dataJsx(normalized, params, "addonAfter");
         dataJsx(normalized, params, "addonBefore");
-    },
+    }
 }

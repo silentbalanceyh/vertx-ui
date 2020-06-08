@@ -187,9 +187,10 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.config.tree.leaf
      * optionJsx.config.selection
      */
-    // 组件内部调用该方法
-    // 只有树组件可用
+    // 组件内部调用该方法，只有树组件可用
+    // 由于所有树的配置都带了默认值，所以此处必须内部执行
     // St.dataTree(normalized, data);
+    // St.dataDate(normalized, data);
     return normalized;
 }
 export default {

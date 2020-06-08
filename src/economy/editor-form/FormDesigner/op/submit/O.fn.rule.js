@@ -77,6 +77,11 @@ export default (normalized = {}, params = {}) => {
     dataRuleTo(rules, ruleData, 'Equal');
     dataRuleTo(rules, ruleData, 'Diff');
     /*
+     *  Before / After 两个时间基本规则
+     */
+    dataRuleTo(rules, ruleData, "Before");
+    dataRuleTo(rules, ruleData, "After")
+    /*
      * 大于 / 小于
      */
     if (ruleData.ruleLess) {
