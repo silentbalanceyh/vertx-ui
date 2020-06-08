@@ -84,10 +84,43 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     /*
      * 联动规则
      * {
-     *
+     *      "dependField": "x",
+     *      "dependType": "x",
+     *      "dependBoolean": "x",
+     *      "dependEnum": [],
+     *      "dependSource": "",
+     *      "dependCondition": "",
+     *      "dependValue": []
+     * }
+     * 最终合并三种结果
+     * {
+     *      "optionJsx.depend.enabled":{
+     *          "field": true | false
+     *      },
+     *      "optionJsx.depend.enabled":{
+     *          "field": [
+     *              "value1",
+     *              "value2"
+     *          ]
+     *      },
+     *      "optionJsx.depend.enabled":{
+     *          "field": {
+     *              "source": "sourceId",
+     *              "field": "condition",
+     *              "value": [
+     *                  "fieldValue1",
+     *                  "fieldValue2"
+     *              ]
+     *          }
+     *      }
      * }
      */
     St.dataEnabled(normalized, data);
+    /*
+     * 1）必填规则
+     * 2）其他规则
+     */
+    St.dataRules(normalized, data);
     return normalized;
 }
 export default {

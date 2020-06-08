@@ -91,12 +91,49 @@ export default {
         if (params.dependEnabled) {
             /* 开启依赖项 */
             normalized.optionJsx.depend.enabled = {};
+            /*
+             * dependField,
+             * dependType
+             */
+            if (params.dependField && params.dependType &&
+                (normalized.field !== params.dependField)) {
+                /*
+                 * 根据取值信息提取
+                 */
+                if ("BOOLEAN" === params.dependType) {
+                    if (params.hasOwnProperty('dependBoolean')) {
+                        normalized.optionJsx.depend.enabled[params.dependField] = params.dependBoolean;
+                    }
+                } else if ("ENUM" === params.dependType) {
+                    if (params.hasOwnProperty('dependEnum')) {
+                        const value = params.dependEnum;
+                        if (Ux.isArray(value) && 0 < value.length) {
+                            normalized.optionJsx.depend.enabled[params.dependField] = value;
+                        }
+                    }
+                } else if ("DATUM" === params.dependType) {
+                    if (params.dependSource &&
+                        params.dependCondition &&
+                        Ux.isArray(params.dependValue)
+                        && 0 < params.dependValue.length) {
+                        const value = {};
+                        value.source = params.dependSource;
+                        value.field = params.dependCondition;
+                        value.value = params.dependValue;
+                        normalized.optionJsx.depend.enabled[params.dependField] = value;
+                    }
+                }
+            }
         }
     },
     /*
-     * 必填专用
+     * 验证规则专用
      */
-    dataRequired: (normalized = {}, params = {}) => {
+    dataRules: (normalized = {}, params = {}) => {
+        const rules = {};
+        /*
+         * 必填规则
+         */
 
     }
 }
