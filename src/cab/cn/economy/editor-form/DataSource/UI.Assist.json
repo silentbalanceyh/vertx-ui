@@ -37,7 +37,14 @@
             ],
             [
                 "uri,远程访问路径,18,,,placeholder=（可手工录入，或使用API选择器选择）",
-                "source,,6"
+                {
+                    "metadata": "source,,6",
+                    "optionJsx.config.linker": {
+                        "uri": "uri",
+                        "method": "method",
+                        "name": "comment"
+                    }
+                }
             ],
             [
                 "magic,参数设置表,18"

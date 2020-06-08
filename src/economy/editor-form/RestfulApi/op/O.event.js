@@ -7,17 +7,22 @@ export default {
     },
     onSubmit: (reference) => (event) => {
         Ux.prevent(event);
-        const {$selected} = reference.state;
+        const {$selected, $data = []} = reference.state;
         if ($selected) {
-            const {rxSubmit} = reference.props;
+            const unique = Ux.elementUnique($data, 'key', $selected);
+            const {rxSubmit, config = {}} = reference.props;
+            /*
+             * optionJsx.config.linker 操作
+             */
+            const formValues = {};
+            Ux.writeLinker(formValues, config, () => unique);
+            const ref = Ux.onReference(reference, 1);
+            Ux.formHits(ref, formValues);
+
             if (Ux.isFunction(rxSubmit)) {
-                const {$data = []} = reference.state;
-                const unique = Ux.elementUnique($data, 'key', $selected);
                 rxSubmit(unique);
-                reference.setState({$visible: false});
-            } else {
-                console.error("核心函数 rxSubmit 丢失！");
             }
+            reference.setState({$visible: false});
         } else {
             const {$op = {}} = reference.state;
             if ($op.submit) {
