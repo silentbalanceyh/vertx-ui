@@ -155,6 +155,16 @@ export default {
                 }}/>
             )
         },
+        serverSource: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
         datumInput: (reference, jsx) => {
             return (
                 <DatumUnique {...jsx} reference={reference}/>

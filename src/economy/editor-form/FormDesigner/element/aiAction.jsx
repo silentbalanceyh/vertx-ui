@@ -10,7 +10,10 @@ import Sd from './aiShared';
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiAction"
+            id: "SubForm-Setting-aiAction",
+            renders: {
+                serverSource: Sd.yoRenders.serverSource
+            }
         });
     }
 
