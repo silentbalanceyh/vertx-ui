@@ -147,7 +147,7 @@
         "eslint-config-standard": "^14.1.1",
         "eslint-loader": "4.0.2",
         "eslint-plugin-flowtype": "5.1.3",
-        "eslint-plugin-import": "^2.20.2",
+        "eslint-plugin-import": "^2.21.0",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-node": "^11.1.0",
         "eslint-plugin-promise": "^4.2.1",
@@ -181,6 +181,7 @@
         "webpack-dev-server": "^3.11.0",
         "webpack-manifest-plugin": "2.2.0",
         "webpack-parallel-uglify-plugin": "^1.1.2",
+        "websocket-extensions": "^0.1.4",
         "whatwg-fetch": "3.0.0"
     },
     "jest": {

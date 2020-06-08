@@ -10,7 +10,11 @@ import Sd from './aiShared';
 class Component extends React.PureComponent {
     componentDidMount() {
         Sd.yiComponent(this, {
-            id: "SubForm-Setting-aiMagic"
+            id: "SubForm-Setting-aiMagic",
+            renders: {
+                remoteSource: Sd.yoRenders.remoteSource,
+                datumInput: Sd.yoRenders.datumInput,
+            }
         });
     }
 

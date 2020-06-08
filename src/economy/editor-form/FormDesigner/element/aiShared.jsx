@@ -5,6 +5,8 @@ import React from "react";
 import ValueSource from '../../ValueSource/UI';
 import RestfulApi from "../../RestfulApi/UI";
 import ParamInput from "../../ParamInput/UI";
+import DatumUnique from '../../DatumUnique/UI';
+
 import LoadingContent from "../../../loading/LoadingContent/UI";
 
 const field = (reference, jsx) => {
@@ -59,7 +61,7 @@ export default {
         uploadUpApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -67,12 +69,12 @@ export default {
             )
         },
         uploadUpParam: (reference, jsx) => {
-            return (<ParamInput reference={reference} {...jsx} $query/>)
+            return (<ParamInput {...jsx} reference={reference} $query/>)
         },
         uploadDownApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -83,7 +85,7 @@ export default {
         addrCountryApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -93,7 +95,7 @@ export default {
         addrStateApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -103,7 +105,7 @@ export default {
         addrCityApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -113,7 +115,7 @@ export default {
         addrRegionApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -123,7 +125,7 @@ export default {
         addrInitApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -133,7 +135,7 @@ export default {
         ajaxSource: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi rxSource={rxApi} rxSubmit={(value) => {
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
                     if (value) {
 
                     }
@@ -142,6 +144,21 @@ export default {
         },
         ajaxMagic: (reference, jsx) => {
             return (<ParamInput reference={reference} {...jsx} $query/>)
-        }
+        },
+        remoteSource: (reference, jsx) => {
+            const {rxApi} = reference.props;
+            return (
+                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
+                    if (value) {
+
+                    }
+                }}/>
+            )
+        },
+        datumInput: (reference, jsx) => {
+            return (
+                <DatumUnique {...jsx} reference={reference}/>
+            )
+        },
     }
 }

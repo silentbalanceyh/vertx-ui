@@ -57,55 +57,153 @@
                                     [
                                         "label,标签/标题,,,,placeholder=<标题>",
                                         {
-                                            "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=（系统自动分配）",
+                                            "metadata": "field,字段名,,,aiSelect,placeholder=（系统自动分配）",
                                             "optionJsx.config.datum": "source=model.fields,key=key,label=display"
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "titleMode,标题模式,24,,aiRadio",
+                                            "metadata": "dataType,数据类型,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
                                             "optionJsx.config.items": [
-                                                "TITLE,行标题（默认）",
-                                                "COMMENT,说明文字"
+                                                "TEXT,文本值",
+                                                "BOOLEAN,布尔值",
+                                                "DATE,时间值",
+                                                "TABLE,表格值",
+                                                "REMOTE,远程加载",
+                                                "DATUM,字典关联",
+                                                "RECORD,记录解析（特殊）"
                                             ]
                                         }
                                     ],
                                     [
+                                        "dataEmpty,空值显示,24"
+                                    ],
+                                    [
+                                        "title=各数据类型显示配置"
+                                    ],
+                                    [
                                         {
-                                            "metadata": "commentTitle,说明标题",
+                                            "metadata": "textExpr,文本表达式,24",
                                             "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
+                                                "dataType": [
+                                                    "TEXT"
                                                 ]
                                             }
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "commentType,说明颜色,24,,aiRadio",
-                                            "optionJsx.config.items": [
-                                                "info,蓝色（默认）",
-                                                "warning,黄色",
-                                                "success,绿色",
-                                                "error,红色"
-                                            ],
+                                            "metadata": "booleanTrue,真值显示",
                                             "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
+                                                "dataType": [
+                                                    "BOOLEAN"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "booleanFalse,假值显示",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "BOOLEAN"
                                                 ]
                                             }
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "commentDescription,说明文字,24,,aiInputMulti",
+                                            "metadata": "dateFormat,时间格式,24",
                                             "optionJsx.depend.enabled": {
-                                                "titleMode": [
-                                                    "COMMENT"
+                                                "dataType": [
+                                                    "DATE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "remoteUri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "remoteSource,,8",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "remoteMethod,HTTP方法,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
                                                 ]
                                             },
-                                            "optionJsx.styleInput": {
-                                                "width": "100%"
+                                            "optionJsx.config.items": [
+                                                "GET,GET",
+                                                "POST,POST"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "remoteField,字段信息",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "REMOTE"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumInput,,24",
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "DATUM"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "tableColumns,表格列,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "表达式录入",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "TABLE"
+                                                ]
                                             }
                                         }
                                     ]
