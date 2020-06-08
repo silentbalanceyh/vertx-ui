@@ -27,6 +27,25 @@ const dataNumber = (normalized = {}, params = {}) => {
     // 步进系数 / 精度
     dataJsx(normalized, params, 'step');
     dataJsx(normalized, params, "precision");
+    // 常用格式
+    if ("PERCENT" === params.numberMode) {
+        /* 百分比 */
+        normalized.optionJsx.formatter = value => `${value}%`;
+        normalized.optionJsx.parser = value => value.replace(`%`, '');
+    } else {
+        /* 货币处理，必须输入货币单位 */
+        if (params.numberUnit) {
+            /* 左右区别 */
+            if (params.numberUnitPosition) {
+                /* 右侧 */
+                normalized.optionJsx.formatter = value => `${value} ${params.numberUnit}`;
+            } else {
+                /* 左侧 */
+                normalized.optionJsx.formatter = value => `${params.numberUnit} ${value}`;
+            }
+            normalized.optionJsx.parser = value => value.replace(params.numberUnit, "");
+        }
+    }
 }
 export default {
     dataInit: (normalized = {}, params = {}) => {
@@ -216,5 +235,42 @@ export default {
          * */
         dataRuleTo(rules, ruleData, 'Equal');
         dataRuleTo(rules, ruleData, 'Diff');
+        /*
+         * 大于 / 小于
+         */
+        if (ruleData.ruleLess) {
+            if (ruleData.ruleLessMessage && undefined !== ruleData.ruleLessTo) {
+                const rule = {};
+                if (ruleData.ruleLessMode) {
+                    /* 包含边界 */
+                    rule.validator = "lessOr";
+                } else {
+                    /* 不包含边界 */
+                    rule.validator = "less";
+                }
+                rule.message = ruleData.ruleLessMessage;
+                rule.config = {to: ruleData.ruleLessTo};
+                rules.push(rule);
+            }
+        }
+        if (ruleData.ruleGreat) {
+            if (ruleData.ruleGreatMessage && undefined !== ruleData.ruleGreatTo) {
+                const rule = {};
+                if (ruleData.ruleGreatMode) {
+                    /* 包含边界 */
+                    rule.validator = "greatOr";
+                } else {
+                    /* 不包含边界 */
+                    rule.validator = "great";
+                }
+                rule.message = ruleData.ruleGreatMessage;
+                rule.config = {to: ruleData.ruleGreatTo};
+                rules.push(rule);
+            }
+        }
+        if (0 < rules.length) {
+            /* 规则处理 */
+            normalized.optionConfig.rules = rules;
+        }
     }
 }

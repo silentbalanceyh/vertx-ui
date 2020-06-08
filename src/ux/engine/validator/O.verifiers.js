@@ -34,9 +34,9 @@ const less = (reference = {}) => Ready.isReadyWithCond(reference, Rule.less);
 
 const lessOr = (reference = {}) => Ready.isReadyWithCond(reference, Rule.lessOr);
 
-const greater = (reference = {}) => Ready.isReadyWithCond(reference, Rule.greater);
+const great = (reference = {}) => Ready.isReadyWithCond(reference, Rule.great);
 
-const greaterOr = (reference = {}) => Ready.isReadyWithCond(reference, Rule.greaterOr);
+const greatOr = (reference = {}) => Ready.isReadyWithCond(reference, Rule.greatOr);
 
 const equal = (reference = {}) => Ready.isReadyWithCond(reference, Rule.equal);
 
@@ -53,9 +53,9 @@ export default {
     // <= 小于等于目标字段
     lessOr,
     // > 大于目标字段
-    greater,
+    great,
     // >= 大于等于目标字段
-    greaterOr,
+    greatOr,
     // == 等于
     equal,
     // 不等检查
