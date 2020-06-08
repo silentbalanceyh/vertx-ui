@@ -5,6 +5,29 @@ const dataJsx = (to = {}, from = {}, field) => {
         to.optionJsx[field] = from[field];
     }
 }
+const dataRuleTo = (rules = [], ruleData = {}, key = "") => {
+    if (ruleData[`rule${key}`]) {
+        if (ruleData[`rule${key}Message`] && undefined !== ruleData[`rule${key}To`]) {
+            const rule = {};
+            rule.validator = key.toLocaleLowerCase();
+            rule.message = ruleData[`rule${key}Message`];
+            rule.config = {to: ruleData[`rule${key}To`]};
+            rules.push(rule);
+        }
+    }
+}
+const dataPassword = (normalized = {}, params = {}) => {
+    // 密码框才有的属性
+    dataJsx(normalized, params, 'visibilityToggle');
+}
+const dataNumber = (normalized = {}, params = {}) => {
+    // 最小值 / 最大值
+    dataJsx(normalized, params, 'min');
+    dataJsx(normalized, params, 'max');
+    // 步进系数 / 精度
+    dataJsx(normalized, params, 'step');
+    dataJsx(normalized, params, "precision");
+}
 export default {
     dataInit: (normalized = {}, params = {}) => {
         /*
@@ -55,6 +78,12 @@ export default {
         dataJsx(normalized, params, "addonAfter");
         dataJsx(normalized, params, "addonBefore");
     },
+    dataSpec: (normalized = {}, params = {}) => {
+        // 密码框
+        dataPassword(normalized, params);
+        // 数值框
+        dataNumber(normalized, params);
+    },
     /*
      * normalize 设置专用
      */
@@ -66,17 +95,17 @@ export default {
                  */
                 const fnName = params.normalize;
                 let literal = fnName;
-                fnName += `,${Ux.valueInt(params.normalizeLength, 10)}`;
+                literal += `,${Ux.valueInt(params.normalizeLength, 10)}`;
                 /*
                  * 如果是 decimal，必须是浮点数
                  */
                 if ("decimal" === params.normalizePrecision) {
-                    fnName += `,${Ux.valueInt(params.normalizePrecision, 10)}`
+                    literal += `,${Ux.valueInt(params.normalizePrecision, 10)}`
                 }
                 /*
                  * 特殊填写
                  */
-                normalized.optionConfig.normalize = fnName;
+                normalized.optionConfig.normalize = literal;
             }
         }
     },
@@ -130,10 +159,62 @@ export default {
      * 验证规则专用
      */
     dataRules: (normalized = {}, params = {}) => {
-        const rules = {};
+        const rules = [];
         /*
          * 必填规则
          */
-
+        if (params.required && params.requiredMessage) {
+            const rule = {};
+            rule.required = true;
+            rule.message = params.requiredMessage;
+            rules.push(rule);
+        }
+        /*
+         * rule 专用处理
+         */
+        const ruleData = {};
+        Object.keys(params).filter(rule => rule.startsWith("rule"))
+            .forEach(ruleKey => ruleData[ruleKey] = params[ruleKey]);
+        /*
+        * min，max, len
+        * 最小值，最大值，长度
+        */
+        if (ruleData.ruleMin) {
+            if (ruleData.ruleMinMessage && undefined !== ruleData.ruleMinValid) {
+                const rule = {};
+                rule.min = ruleData.ruleMinValid;
+                rule.message = ruleData.ruleMinMessage;
+                rules.push(rule);
+            }
+        }
+        if (ruleData.ruleMax) {
+            if (ruleData.ruleMaxMessage && undefined !== ruleData.ruleMaxValid) {
+                const rule = {};
+                rule.max = ruleData.ruleMaxValid;
+                rule.message = ruleData.ruleMaxMessage;
+                rules.push(rule);
+            }
+        }
+        if (ruleData.ruleLen) {
+            if (ruleData.ruleLenMessage && undefined !== ruleData.ruleLenValid) {
+                const rule = {};
+                rule.len = ruleData.ruleLenValid;
+                rule.message = ruleData.ruleLenMessage;
+                rules.push(rule);
+            }
+        }
+        if (ruleData.ruleReg) {
+            if (ruleData.ruleRegMessage && undefined !== ruleData.ruleRegValid) {
+                const rule = {};
+                rule.pattern = ruleData.ruleRegValid;
+                rule.message = ruleData.ruleRegMessage;
+                rules.push(rule);
+            }
+        }
+        /*
+         *  Diff / Equal 两个基本规则
+         * */
+        dataRuleTo(rules, ruleData, 'Equal');
+        dataRuleTo(rules, ruleData, 'Diff');
     }
 }

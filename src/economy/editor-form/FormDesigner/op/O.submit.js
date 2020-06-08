@@ -118,9 +118,25 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     St.dataEnabled(normalized, data);
     /*
      * 1）必填规则
+     * required,
+     * requiredMessage,
      * 2）其他规则
+     * 2.1）Diff
+     * 2.2）Equal
+     *
+     * 3）设置统一规则
+     * ruleX
+     * ruleXMessage
+     * ruleXTo
      */
     St.dataRules(normalized, data);
+    /*
+     * 特殊属性
+     * 1）密码框
+     * visibilityToggle:
+     * 2）数值输入
+     */
+    St.dataSpec(normalized, data);
     return normalized;
 }
 export default {
