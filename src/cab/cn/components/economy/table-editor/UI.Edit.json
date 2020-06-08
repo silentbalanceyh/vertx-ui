@@ -5,7 +5,7 @@
         "ui": [
             [
                 {
-                    "metadata": "data,测试组件,,,aiTableEditor",
+                    "metadata": "fieldData,测试组件,,,aiTableEditor",
                     "optionJsx.config": {
                         "format": {
                             "type": "ARRAY",

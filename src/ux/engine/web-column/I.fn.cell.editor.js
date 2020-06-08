@@ -1,6 +1,4 @@
 import Ft from '../functions';
-import Ele from '../../element';
-import Xt from '../../xweb';
 import Abs from '../../abyss';
 
 export default (reference, column = {}) => {
@@ -16,23 +14,26 @@ export default (reference, column = {}) => {
         cell.optionConfig = {};
     }
     return (text, record, index) => {
-        const {disabled = false} = reference.props;
+        const {disabled = false, config = {}} = reference.props;
         /*
          * 处理专用
          */
         const rowCell = Abs.clone(cell);
+        // rowCell.field = [cell.field, index];
+        /*
         rowCell.optionJsx.onChange = (event) => {
-            /* 得到值 */
             const value = Ele.ambEvent(event);
             const data = Xt.xtSet(reference, [rowCell.field, index], value);
-            /* 当前值更新 */
             reference.setState({data});
-            /* 调用上层 onChange */
             const {config = {}} = reference.props;
             Abs.fn(reference).onChange(Xt.xtFormat(data, config.format));
-        }
+        }*/
         rowCell.optionJsx.value = record[rowCell.field];
         rowCell.optionJsx.disabled = disabled;      // 禁用处理
+        rowCell.column = {
+            index,                      // 列变更时的索引
+            format: config.format,      // 格式信息
+        }
         const render = Ft.onRender(reference, rowCell);
         return render(record);
     }
