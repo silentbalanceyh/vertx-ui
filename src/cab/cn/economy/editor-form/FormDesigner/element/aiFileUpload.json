@@ -286,7 +286,12 @@
                                     ],
                                     [
                                         "uploadUpUri,上传地址,16,,,placeholder=设置文件上传地址",
-                                        "uploadUpApi,,8"
+                                        {
+                                            "metadata": "uploadUpApi,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "uploadUpUri"
+                                            }
+                                        }
                                     ],
                                     [
                                         "uploadUpParam,上传参数,24"

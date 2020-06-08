@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
                             size={"small"}
                             $visible={$visible}
                             $dialog={$dialog}>
-                        {renderContent(this)}
+                        {$visible ? renderContent(this) : false}
                     </Dialog>
                     <Button className={"ux-hidden"} id={"$opSaveApi"}
                             onClick={Op.onSubmit(this)}/>

@@ -63,11 +63,9 @@ export default {
         uploadUpApi: (reference, jsx) => {
             const {rxApi} = reference.props;
             return (
-                <RestfulApi {...jsx} rxSource={rxApi} rxSubmit={(value) => {
-                    if (value) {
-
-                    }
-                }}/>
+                <RestfulApi rxSource={rxApi}
+                            reference={reference}
+                            {...jsx} />
             )
         },
         uploadUpParam: (reference, jsx) => {

@@ -17,12 +17,19 @@ export default {
             const formValues = {};
             Ux.writeLinker(formValues, config, () => unique);
             const ref = Ux.onReference(reference, 1);
-            Ux.formHits(ref, formValues);
+            if (!Ux.isEmpty(formValues)) {
+                Ux.formHits(ref, formValues);
+            }
 
             if (Ux.isFunction(rxSubmit)) {
                 rxSubmit(unique);
             }
-            reference.setState({$visible: false});
+            reference.setState({
+                $visible: false,        // 显示窗口
+                $selected: undefined,    // 选中清除
+                $loading: false,         // 加载专用
+                $data: []                // 数据处理
+            });
         } else {
             const {$op = {}} = reference.state;
             if ($op.submit) {
