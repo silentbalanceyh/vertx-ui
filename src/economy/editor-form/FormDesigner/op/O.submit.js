@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import St from './O.submit.data';
+import St from './submit';
 /*
  * 基础字段
  * - aiAction
