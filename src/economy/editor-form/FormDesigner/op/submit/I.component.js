@@ -70,6 +70,12 @@ const dataCheckbox = (normalized = {}, params = {}) => {
     }
 }
 
+const dataFileUpload = (normalized = {}, params = {}) => {
+    if (params.uploadSingle) {
+
+    }
+}
+
 const dataRadio = (normalized = {}, params = {}) => {
     // 模式
     dataJsx(normalized, params, 'mode');
@@ -114,11 +120,14 @@ export default {
             // 单选框
             dataRadio(normalized, params);
         } else if ("aiDatePicker" === render) {
-            // 时间选择器
+            // 日期选择器
             Opt.dataDate(normalized, params);
         } else if ("aiTimePicker" === render) {
             // 时间选择器
             Opt.dataDate(normalized, params);
+        } else if ("aiFileUpload" === render) {
+            // 上传
+            dataFileUpload(normalized, params);
         }
     },
 }

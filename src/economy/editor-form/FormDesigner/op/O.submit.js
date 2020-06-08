@@ -156,6 +156,20 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.mode
      * optionJsx.checkedChildren
      * optionJsx.unCheckedChildren
+     *
+     * 6）日期 / 时间
+     * optionJsx.disabledDate
+     * optionJsx.format
+     * optionJsx.showToday
+     * optionJsx.showTime
+     *
+     * optionJsx.mode
+     * optionJsx.use12Hours
+     * optionJsx.hourStep
+     * optionJsx.minuteStep
+     * optionJsx.secondStep
+     *
+     * 7）上传组件
      */
     St.dataComponent(normalized, data);
     /*
