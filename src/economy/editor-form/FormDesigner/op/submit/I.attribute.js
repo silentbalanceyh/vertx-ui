@@ -1,18 +1,6 @@
-import dataJsx from './I.fn.option.jsx';
-import dataRules from './I.fn.rule';
+import dataJsx from './I.fn.jsx.js';
 
 export default {
-    dataInit: (normalized = {}, params = {}) => {
-        /*
-         * normalized.field 可不设置
-         * normalized.optionJsx 初始化
-         * normalized.optionItem 初始化
-         * normalized.optionConfig 初始化
-         */
-        normalized.optionJsx = {config: {}, depend: {}};
-        normalized.optionItem = {};
-        normalized.optionConfig = {};
-    },
     /*
      * 基础数据部分
      */
@@ -51,8 +39,4 @@ export default {
         dataJsx(normalized, params, "addonAfter");
         dataJsx(normalized, params, "addonBefore");
     },
-    /*
-     * 验证规则专用
-     */
-    dataRules
 }

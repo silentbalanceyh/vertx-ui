@@ -1,4 +1,4 @@
-import dataJsx from './I.fn.option.jsx';
+import dataJsx from './I.fn.jsx.js';
 
 const dataPassword = (normalized = {}, params = {}) => {
     // 密码框才有的属性
@@ -48,6 +48,20 @@ const dataTextArea = (normalized = {}, params = {}) => {
         }
     }
 }
+const dataSelect = (normalized = {}, params = {}) => {
+    // 多选启用
+    if (params.multiple) {
+        // 多选模式
+        if (params.multipleMode) {
+            // 多选 / 标签两种模式
+            normalized.optionJsx.mode = params.multipleMode;
+            if (1 < params.maxTagCount) {
+                // 多选 Tags 处理
+                normalized.optionJsx.maxTagCount = params.maxTagCount;
+            }
+        }
+    }
+}
 export default {
     // 密码框
     dataPassword,
@@ -55,4 +69,6 @@ export default {
     dataNumber,
     // 多文本
     dataTextArea,
+    // 下拉框
+    dataSelect,
 }

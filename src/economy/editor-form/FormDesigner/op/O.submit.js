@@ -133,10 +133,30 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     /*
      * 特殊属性
      * 1）密码框
-     * visibilityToggle:
+     * optionJsx.visibilityToggle:
      * 2）数值输入
+     * optionJsx.min
+     * optionJsx.max
+     * optionJsx.step
+     * optionJsx.precision
+     * optionJsx.formatter
+     * optionJsx.parser
+     * 3）多行文本
+     * optionJsx.rows
+     * optionJsx.autoSize.minRows
+     * optionJsx.autoSize.maxRows
+     * 4）下拉框
+     * optionJsx.mode
+     * optionJsx.maxTagCount
      */
-    St.dataSpec(normalized, data);
+    St.dataComponent(normalized, data);
+    /*
+     * 选项属性
+     * 1）静态和动态数据源
+     * optionJsx.config.items
+     * optionJsx.config.datum
+     */
+    St.dataOption(normalized, data);
     return normalized;
 }
 export default {
