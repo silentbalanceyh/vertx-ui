@@ -1,11 +1,12 @@
 import dataJsx from './I.fn.jsx.js';
 import Opt from './I.option';
+import Ux from 'ux';
 
 const dataPassword = (normalized = {}, params = {}) => {
     // 密码框才有的属性
     dataJsx(normalized, params, 'visibilityToggle');
 }
-const dataNumber = (normalized = {}, params = {}) => {
+const dataInputNumber = (normalized = {}, params = {}) => {
     // 最小值 / 最大值
     dataJsx(normalized, params, 'min');
     dataJsx(normalized, params, 'max');
@@ -72,7 +73,7 @@ const dataCheckbox = (normalized = {}, params = {}) => {
 
 const dataFileUpload = (normalized = {}, params = {}) => {
     if (params.uploadSingle) {
-        normalized.optionJsx.single = params.uploadSingle;
+        normalized.optionJsx.config.single = params.uploadSingle;
     }
     dataJsx(normalized, params, 'listType');
     dataJsx(normalized, params, 'text');
@@ -118,40 +119,90 @@ const dataRadio = (normalized = {}, params = {}) => {
         normalized.optionJsx.style = style;
     }
 }
+const dataTransfer = (normalized = {}, params = {}) => {
+    if (params.transferField) {
+        normalized.optionJsx.config.valueKey = params.transferField;
+    }
+    if (params.transferLeft && params.transferRight) {
+        const titles = [params.transferLeft, params.transferRight];
+        normalized.optionJsx.config.titles = titles;
+    }
+}
+const dataBraftEditor = (normalized = {}, params = {}) => {
+    if (params.braftHeight) {
+        normalized.optionJsx.config.height = params.braftHeight;
+    }
+}
+const dataJsonEditor = (normalized = {}, params = {}) => {
+    if (params.jsonHeight) {
+        normalized.optionJsx.config.height = params.jsonHeight;
+    }
+}
+const dataAddressSelector = (normalized = {}, params = {}) => {
+    if (params.addressMode) {
+        normalized.optionJsx.config.ajax = params.addressMode;
+    }
+    if (params.addrCountryUri &&
+        params.addrCountryField) {
+        const country = {};
+        country.uri = params.addrCountryUri;
+        country.display = params.addrCountryField;
+        normalized.optionJsx.config.country = country;
+    }
+    if (params.addrStateUri &&
+        params.addrStateField && params.addrStateParent) {
+        const state = {};
+        state.uri = params.addrStateUri;
+        state.display = params.addrStateField;
+        state.parent = params.addrStateParent;
+        state.field = params.addrStateParent;
+        normalized.optionJsx.config.state = state;
+    }
+    if (params.addrCityUri &&
+        params.addrCityField && params.addrCityParent) {
+        const city = {};
+        city.uri = params.addrCityUri;
+        city.display = params.addrCityField;
+        city.parent = params.addrCityParent;
+        city.field = params.addrCityParent;
+        normalized.optionJsx.config.city = city;
+    }
+    if (params.addrRegionUri &&
+        params.addrRegionField && params.addrRegionParent) {
+        const region = {};
+        region.uri = params.addrRegionUri;
+        region.display = params.addrRegionField;
+        region.parent = params.addrRegionParent;
+        region.field = params.addrRegionParent;
+        normalized.optionJsx.config.region = region;
+    }
+    if (params.addrInitUri) {
+        normalized.optionJsx.config.init = params.addrInitUri;
+    }
+}
+const DATA_EXECUTOR = {
+    aiPassword: dataPassword,                       // 密码框
+    aiInputNumber: dataInputNumber,                 // 数值框
+    aiTextArea: dataTextArea,                       // 多文本框
+    aiSelect: dataSelect,                           // 下拉框
+    aiTreeSelect: dataTreeSelect,                   // 树型下拉
+    aiCheckbox: dataCheckbox,                       // 多选框
+    aiRadio: dataRadio,                             // 单选框
+    aiDatePicker: Opt.dataDate,                     // 日期选择
+    aiTimePicker: Opt.dataDate,                     // 时间选择
+    aiFileUpload: dataFileUpload,                   // 上传组件
+    aiTransfer: dataTransfer,                       // 穿梭框
+    aiBraftEditor: dataBraftEditor,                 // 富文本
+    aiAddressSelector: dataAddressSelector,         // 地址选择器
+    aiJsonEditor: dataJsonEditor,                   // Json编辑器
+}
 export default {
     // 专用
     dataComponent: (normalized = {}, params = {}) => {
         const render = params.render;
-        if ("aiPassword" === render) {
-            // 密码框
-            dataPassword(normalized, params);
-        } else if ("aiInputNumber" === render) {
-            // 数值框
-            dataNumber(normalized, params);
-        } else if ("aiTextArea" === render) {
-            // 多文本框
-            dataTextArea(normalized, params);
-        } else if ("aiSelect" === render) {
-            // 下拉框
-            dataSelect(normalized, params);
-        } else if ("aiTreeSelect" === render) {
-            // 树状下拉
-            dataTreeSelect(normalized, params);
-        } else if ("aiCheckbox" === render) {
-            // 多选框
-            dataCheckbox(normalized, params);
-        } else if ("aiRadio" === render) {
-            // 单选框
-            dataRadio(normalized, params);
-        } else if ("aiDatePicker" === render) {
-            // 日期选择器
-            Opt.dataDate(normalized, params);
-        } else if ("aiTimePicker" === render) {
-            // 时间选择器
-            Opt.dataDate(normalized, params);
-        } else if ("aiFileUpload" === render) {
-            // 上传
-            dataFileUpload(normalized, params);
+        const executor = DATA_EXECUTOR[render];
+        if (Ux.isFunction(executor)) {
+            executor(normalized, params);
         }
     },
 }

@@ -223,7 +223,7 @@
                                         }
                                     ],
                                     [
-                                        "braftHeight,初始高度,24,100%,,normalize=integer:10,placeholder=编辑区域初始高度,addonAfter=像素"
+                                        "jsonHeight,初始高度,24,100%,,normalize=integer:10,placeholder=编辑区域初始高度,addonAfter=像素"
                                     ]
                                 ]
                             }

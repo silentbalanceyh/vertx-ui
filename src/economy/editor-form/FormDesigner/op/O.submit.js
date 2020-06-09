@@ -43,6 +43,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * }
      */
     St.dataField(normalized, data);
+
     /*
      * 基础属性配置
      * {
@@ -53,6 +54,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * }
      */
     St.dataBasic(normalized, data);
+
     /*
      * 修饰专用属性
      * {
@@ -63,6 +65,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * }
      */
     St.dataAdorn(normalized, data);
+
     /*
      * 限制输入处理
      * {
@@ -74,13 +77,24 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionConfig.normalize = <normalize>,<length>,<precision>
      */
     St.dataNorm(normalized, data);
+
     /*
      * 触发项处理
      * {
      *      "impactReset": "optionJsx.depend.impact.reset"
      * }
+     * // 最终处理结果
+     * {
+     *      "optionJsx.depend.impact":{
+     *          "reset": [
+     *              "aField",
+     *              "bField"
+     *          ]
+     *      }
+     * }
      */
     St.dataImpact(normalized, data);
+
     /*
      * 联动规则
      * {
@@ -116,6 +130,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * }
      */
     St.dataEnabled(normalized, data);
+
     /*
      * 1）必填规则
      * required,
@@ -128,8 +143,26 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * ruleX
      * ruleXMessage
      * ruleXTo
+     *
+     * 最终效果
+     * {
+     *      "optionConfig.rules":[
+     *          {
+     *              "required": true,
+     *              "message": "xxx"
+     *          },
+     *          {
+     *              "validator": "diff",
+     *              "message": "xxx",
+     *              "config":{
+     *                  "to": "xxxField"
+     *              }
+     *          }
+     *      ]
+     * }
      */
     St.dataRules(normalized, data);
+
     /*
      * 特殊属性
      * 1）密码框
@@ -170,8 +203,23 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.secondStep
      *
      * 7）上传组件
+     * optionJsx.config.single
+     * optionJsx.config.limit
+     * optionJsx.config.filekey
+     *
+     * optionJsx.listType
+     * optionJsx.text
+     *
+     * optionJsx.ajax.uri
+     * optionJsx.ajax.download
+     * optionJsx.ajax.params
+     *
+     * 8）穿梭框
+     * optionJsx.config.valueKey
+     * optionJsx.config.titles
      */
     St.dataComponent(normalized, data);
+
     /*
      * 选项属性
      * 1）静态和动态数据源
