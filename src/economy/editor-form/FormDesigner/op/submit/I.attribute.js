@@ -5,17 +5,17 @@ export default {
      * 基础数据部分
      */
     dataField: (normalized = {}, params = {}) => {
-        normalized.optionItem.label = params.label;
         // 是否设置了宽度
         if (params.width) {
             normalized.optionItem.style = {width: params.width};
         }
         // 字段信息设置
         if ("aiTitle" === params.render) {
-            normalized.title = params.field;
+            normalized.title = params.label ? params.label : "";
         } else if ("aiAction" === params.render) {
             normalized.field = "$button";
         } else {
+            normalized.optionItem.label = params.label;
             normalized.field = params.field;
         }
         // 水印文字处理

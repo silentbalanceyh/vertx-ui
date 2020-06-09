@@ -211,6 +211,30 @@ const dataTableEditor = (normalized = {}, params = {}) => {
     }
     normalized.optionJsx.config.format = format;
 }
+const dataTitle = (normalized = {}, params = {}) => {
+    if ("COMMENT" === params.titleMode) {
+        const config = {};
+        config.message = params.commentTitle;
+        if (params.commentType) {
+            config.type = params.commentType;
+        } else {
+            config.type = "info";
+        }
+        if (params.commentDescription) {
+            const description = [];
+            params.commentDescription.forEach(item => {
+                description.push(item);
+            });
+            config.description = description;
+        }
+        normalized.optionJsx.config = config;
+    }
+}
+const dataMagic = (normalized = {}, params = {}) => {
+    /*
+     * 特殊处理（只识别需要用的属性）
+     */
+}
 const DATA_EXECUTOR = {
     aiPassword: dataPassword,                       // 密码框
     aiInputNumber: dataInputNumber,                 // 数值框
@@ -228,6 +252,8 @@ const DATA_EXECUTOR = {
     aiJsonEditor: dataJsonEditor,                   // Json编辑器
     aiTreeSelector: dataTreeSelector,               // 树选择器
     aiTableEditor: dataTableEditor,                 // format 专用处理
+    aiTitle: dataTitle,                             // 标题处理
+    aiMagic: dataMagic,                             // 数据呈现专用
 }
 export default {
     // 专用

@@ -20,25 +20,25 @@ export default (normalized = {}, params = {}) => {
      * 窗口基础配置
      */
     if (params.windowValidation) {
+        /* 窗口配置必须带选择验证 */
         normalized.optionJsx.config.validation = params.windowValidation;
+        const window = {};
+        if (params.windowTitle) {
+            window.title = params.windowTitle;
+        }
+        if (params.windowWidth) {
+            window.width = Ux.valueInt(params.windowWidth, 640);
+        } else {
+            window.width = 640;
+        }
+        window.okText = params.windowOk ? params.windowOk : "Yes";
+        window.cancelText = params.windowCancel ? params.windowCancel : "No";
+        window.maskClosable = false;
+        const $window = Ux.valueValid(window);
+        if (!Ux.isEmpty($window)) {
+            normalized.optionJsx.config.window = $window;
+        }
     }
-    const window = {};
-    if (params.windowTitle) {
-        window.title = params.windowTitle;
-    }
-    if (params.windowWidth) {
-        window.width = Ux.valueInt(params.windowWidth, 640);
-    } else {
-        window.width = 640;
-    }
-    window.okText = params.windowOk ? params.windowOk : "Yes";
-    window.cancelText = params.windowCancel ? params.windowCancel : "No";
-    window.maskClosable = false;
-    const $window = Ux.valueValid(window);
-    if (!Ux.isEmpty($window)) {
-        normalized.optionJsx.config.window = $window;
-    }
-
     /*
      * 搜索专用配置
      */
