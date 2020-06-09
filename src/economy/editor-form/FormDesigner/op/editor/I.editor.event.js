@@ -17,12 +17,11 @@ export default {
      */
     rxRequest: (reference) => {
         /* 旧数据 */
-        const {raft = {}, child} = reference.state;
-        if (child && child.state) {
-            const updated = child.state.$rows;
+        const {raft = {}, $ui} = reference.state;
+        if ($ui && Ux.isArray($ui)) {
             /* 新旧数据合并 */
             const uiGrid = [];
-            updated.forEach((row, rowIndex) => {
+            $ui.forEach((row, rowIndex) => {
                 const uiRow = [];
                 row.data.forEach((cell, cellIndex) => {
                     /* 双层检查 */

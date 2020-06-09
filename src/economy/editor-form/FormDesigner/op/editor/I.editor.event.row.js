@@ -36,6 +36,13 @@ export default {
         $rows = Ux.clone($rows);
         $rows = Ux.elementJoin($rows, rows);
         reference.setState({$rows: $rows});
+        /*
+         * 在父类中创建 $rows 变量
+         */
+        const ref = Ux.onReference(reference, 1);
+        if (ref) {
+            ref.setState({$ui: $rows});
+        }
     },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;

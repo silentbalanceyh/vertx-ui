@@ -16,8 +16,9 @@ import UiPreview from '../control/Web.Final.Preview';
 
 export default {
     preview: (reference) => {
+        const data = Op.rxRequest(reference);
         return (
-            <UiPreview reference={reference}/>
+            <UiPreview reference={reference} data={data}/>
         )
     },
     export: (reference) => {
