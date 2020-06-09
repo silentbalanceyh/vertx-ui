@@ -7,11 +7,21 @@ import Op from '../op';
 import UiModel from '../control/Web.Model';
 import UiLayout from '../control/Web.Layout';
 import UiHidden from '../control/Web.Hidden';
+import UiExport from '../control/Web.Export';
 import UiSettingRow from '../control/Web.Setting.Row';
 
 import UiElement from '../element';
 
 export default {
+    export: (reference) => {
+        return (<UiExport reference={reference} rxClose={event => {
+            reference.setState({
+                $window: undefined,      // 关联窗口 id
+                $visible: false,         // 打开 窗口
+                $forbidden: false,       // 禁止屏幕主操作
+            })
+        }}/>)
+    },
     layout: (reference) => {
         return (<UiLayout reference={reference}/>)
     },

@@ -60,7 +60,8 @@ export default (reference) => {
     attrs.rxApi = rxApi;
     return (
         <div className={"canvas"}>
-            <GridEditor {...attrs}/>
+            <GridEditor {...attrs}
+                        rxChild={ref => reference.setState({child: ref})}/>
         </div>
     )
 }

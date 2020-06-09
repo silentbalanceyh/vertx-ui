@@ -1,25 +1,31 @@
+import Ux from 'ux';
 import Cmd from "../command";
-import {Popover} from "antd";
-import Ux from "ux";
-import React from "react";
+import {Modal} from "antd";
+import React from 'react';
 
-export default (reference, inputConfig = {}, children) => {
-    const {item = {}, config = {}} = inputConfig;
-    const {$popover} = reference.state;
-    /* 二选一的处理 */
-    const visible = $popover ? $popover === item.key : false;
-    const fnContent = Cmd.Command[item.key];
-    const popoverStyle = Cmd.CommandStyle[item.key];
-    /* 窗口分离 */
-    const {popover = {}} = config;
-    const popoverAttrs = popover[item.key] ? popover[item.key] : {};
-    return (
-        <Popover visible={visible} trigger={"click"} key={item.key}
-                 overlayClassName={"web-form-designer-popover"}
-                 overlayStyle={popoverStyle ? popoverStyle : {}}
-                 content={Ux.isFunction(fnContent) ? fnContent(reference) : false}
-                 placement={"bottomLeft"} {...popoverAttrs}>
-            {children}
-        </Popover>
-    )
+export default (reference, item = {}) => {
+    if (item.window) {
+        const {$window, $visible = false} = reference.state;
+        if ($window) {
+            const window = Ux.fromHoc(reference, "window");
+            let dialog = window[$window];
+            if (dialog) {
+                const modelConfig = Ux.configDialog(reference, dialog);
+                const fnContent = Cmd.Command[$window];
+                modelConfig.onCancel = (event) => {
+                    reference.setState({
+                        $visible: false,
+                        $window: undefined,
+                        $forbidden: false,
+                    });
+                }
+                return (
+                    <Modal key={item.key} {...modelConfig} visible={$visible}>
+                        {Ux.isFunction(fnContent) ? fnContent(reference) :
+                            `Dialog child miss ${item.key}`}
+                    </Modal>
+                )
+            } else return false;
+        } else return false;
+    } else return false;
 }

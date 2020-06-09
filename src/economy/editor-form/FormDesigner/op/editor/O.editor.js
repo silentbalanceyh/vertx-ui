@@ -33,6 +33,8 @@ export default {
         state.$ready = true;
 
         yiData(reference, state).then(Ux.pipe(reference));
+        /* $pointer 绑定专用 */
+        Ux.fn(reference).rxChild(reference);
     },
     yiRow: (reference) => {
         const state = {};

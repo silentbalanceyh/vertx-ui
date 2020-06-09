@@ -5,7 +5,8 @@ import React from "react";
 import {Divider, Popconfirm, Tooltip} from 'antd';
 import Ux from 'ux';
 import Cmd from '../command';
-import renderContent from './Web.Fn.Cmd.Dialog';
+import renderContent from './Web.Fn.Cmd.Popover';
+import renderDialog from "./Web.Fn.Cmd.Dialog";
 
 const isDisabled = (reference, item, config) => {
     const fnDisabled = Cmd.CommandDisabled[item.key];
@@ -95,6 +96,7 @@ const _renderCmds = (reference, commands = [], config = {}) => {
                     );
                 } else return renderCmd(reference, command, config);
             })}
+            {commands.map((command) => renderDialog(reference, command))}
         </div>
     );
 }

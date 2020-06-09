@@ -68,7 +68,17 @@ const cellFill = (reference, item, config) => {
 const cellAdd = (reference) => {
     Op.rxCellAdd(reference)();
 }
+const submitExport = (reference, item, config) => {
+    reference.setState({
+        $window: item.key,      // 关联窗口 id
+        $visible: true,         // 打开 窗口
+        $forbidden: true,       // 禁止屏幕主操作
+    });
+}
 export default {
+    // 主操作
+    export: submitExport,
+
     layout: showPopover,
     "deployment-unit": showPopover,
     "eye-invisible": showPopover,
