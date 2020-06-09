@@ -1,11 +1,10 @@
 {
     "_commands": [
         "save,,保存,op-primary",
-        "redo,,重置,op-cancel",
         "divider",
         "eye-invisible,,隐藏字段,op-field",
         "code,,设定初始值,op-field",
-        "database,,辅助数据源,op-source",
+        "database,,辅助数据源,op-field",
         "divider",
         {
             "key": "layout",
@@ -13,12 +12,20 @@
             "tooltip": "选择布局"
         },
         "deployment-unit,,查看模型,op-release",
+        "divider",
         {
             "key": "export",
             "icon": "export",
             "window": true,
             "tooltip": "导出配置",
-            "className": "op-release"
+            "className": "op-source"
+        },
+        {
+            "key": "import",
+            "icon": "import",
+            "window": true,
+            "tooltip": "导入",
+            "className": "op-source"
         },
         {
             "key": "preview",

@@ -16,7 +16,7 @@ const yiInternal = (reference) => {
                 if (ref) {
                     const data = Op.rxRequest(ref);
                     const {filename} = params;
-                    Ux.dgFileJson({}, filename);
+                    Ux.dgFileJson(data, filename);
                     /* 关闭窗口 */
                     Ux.fn(reference).rxClose();
                 }
