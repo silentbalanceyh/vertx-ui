@@ -19,10 +19,13 @@ const yiInternal = (reference) => {
                     /* 表单数据 */
                     const exportJson = {_form: data.form};
                     Ux.dgFileJson(exportJson, filename);
+
+                    /* 防重复提交 */
+                    reference.setState({$submitting: false, $loading: false});
+
                     /* 关闭窗口 */
                     Ux.fn(reference).rxClose();
                 }
-                reference.setState({$submitting: false, $loading: false});
             }
         }
         return Ux.promise(state);
