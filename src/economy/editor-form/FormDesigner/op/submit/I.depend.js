@@ -32,6 +32,14 @@ export default {
             const filtered = params.impactReset.filter(item => !!item);
             normalized.optionJsx.depend.impact.reset = filtered;
         }
+        /*
+         * linker触发器
+         */
+        if (Ux.isArray(params.linker) && 0 < params.linker.length) {
+            const linker = {};
+            params.linker.forEach(kv => linker[kv.dataFrom] = kv.dataTo);
+            normalized.optionJsx.config.linker = linker;
+        }
     },
     dataEnabled: (normalized = {}, params = {}) => {
         if (params.dependEnabled) {

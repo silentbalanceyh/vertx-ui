@@ -344,16 +344,18 @@
                                             "optionConfig": {
                                                 "valuePropName": "checked"
                                             }
-                                        },
+                                        }
+                                    ],
+                                    [
                                         {
-                                            "metadata": "windowSearchField,搜索字段,16,,aiInputMulti",
+                                            "metadata": "windowSearchField,搜索字段,24,,aiInputMulti",
                                             "optionJsx.depend.enabled": {
                                                 "windowSearch": true
                                             },
                                             "optionJsx": {
                                                 "config.limit": 3,
                                                 "styleInput": {
-                                                    "width": "25%"
+                                                    "width": "30%"
                                                 }
                                             }
                                         }

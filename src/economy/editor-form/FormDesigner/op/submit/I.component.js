@@ -180,6 +180,37 @@ const dataAddressSelector = (normalized = {}, params = {}) => {
         normalized.optionJsx.config.init = params.addrInitUri;
     }
 }
+const dataTreeSelector = (normalized = {}, params = {}) => {
+    // Tree
+    Opt.dataTree(normalized, params);
+    // 特殊选项
+    const selection = {};
+    if (params.treeMulti) {
+        selection.multiple = params.treeMulti;
+    } else {
+        selection.multiple = false;
+    }
+    if (params.checkStrictly) {
+        selection.checkStrictly = params.checkStrictly;
+    } else {
+        selection.checkStrictly = false;
+    }
+    normalized.optionJsx.config.selection = selection;
+}
+const dataTableEditor = (normalized = {}, params = {}) => {
+    const format = {};
+    if (params.tableFormat) {
+        format.type = params.tableFormat;
+    } else {
+        format.type = "ARRAY";
+    }
+    if (params.tableKeyField) {
+        format.keyField = params.tableKeyField;
+    } else {
+        format.keyField = "key";
+    }
+    normalized.optionJsx.config.format = format;
+}
 const DATA_EXECUTOR = {
     aiPassword: dataPassword,                       // 密码框
     aiInputNumber: dataInputNumber,                 // 数值框
@@ -195,6 +226,8 @@ const DATA_EXECUTOR = {
     aiBraftEditor: dataBraftEditor,                 // 富文本
     aiAddressSelector: dataAddressSelector,         // 地址选择器
     aiJsonEditor: dataJsonEditor,                   // Json编辑器
+    aiTreeSelector: dataTreeSelector,               // 树选择器
+    aiTableEditor: dataTableEditor,                 // format 专用处理
 }
 export default {
     // 专用

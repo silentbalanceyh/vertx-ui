@@ -185,12 +185,22 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.mode
      * optionJsx.maxTagCount
      *
-     * 5）多选框
+     * 5）树型下拉
+     * optionJsx.config.tree
+     * optionJsx.config.tree.key
+     * optionJsx.config.tree.parent
+     * optionJsx.config.tree.text
+     * optionJsx.config.tree.value
+     * optionJsx.config.tree.sort
+     * optionJsx.config.tree.leaf
+     * optionJsx.config.selection
+     *
+     * 6）多选框
      * optionJsx.mode
      * optionJsx.checkedChildren
      * optionJsx.unCheckedChildren
      *
-     * 6）日期 / 时间
+     * 7）日期 / 时间
      * optionJsx.disabledDate
      * optionJsx.format
      * optionJsx.showToday
@@ -202,7 +212,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.minuteStep
      * optionJsx.secondStep
      *
-     * 7）上传组件
+     * 8）上传组件
      * optionJsx.config.single
      * optionJsx.config.limit
      * optionJsx.config.filekey
@@ -214,9 +224,52 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * optionJsx.ajax.download
      * optionJsx.ajax.params
      *
-     * 8）穿梭框
+     * 9）穿梭框
      * optionJsx.config.valueKey
      * optionJsx.config.titles
+     *
+     * 10）富文本 / JsonEditor
+     * {
+     *      "braftHeight": "optionJsx.config.height",
+     *      "jsonHeight": "optionJsx.config.height"
+     * }
+     *
+     * 11）地址选择器
+     * optionJsx.config.ajax
+     * optionJsx.config.country = {
+     *      uri: "xxx",
+     *      display: "xxx",
+     * }
+     * optionJsx.config.state = {
+     *      uri: "xxx",
+     *      display: "xxx",
+     *      parent: "xxx"
+     * }
+     * optionJsx.config.city = {
+     *      uri: "xxx",
+     *      display: "xxx",
+     *      parent: "xxx"
+     * }
+     * optionJsx.config.region = {
+     *      uri: "xxx",
+     *      display: "xxx",
+     *      parent: "xxx"
+     * }
+     * optionJsx.config.init
+     *
+     * 12）树选择器
+     * optionJsx.config.tree
+     * optionJsx.config.tree.key
+     * optionJsx.config.tree.parent
+     * optionJsx.config.tree.text
+     * optionJsx.config.tree.value
+     * optionJsx.config.tree.sort
+     * optionJsx.config.tree.leaf
+     *
+     * optionJsx.config.selection = {
+     *      multiple: true | false
+     *      checkStrictly: true | false
+     * }
      */
     St.dataComponent(normalized, data);
 
@@ -239,20 +292,53 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      */
     St.dataOption(normalized, data);
     /*
-     * 1）树专用处理
-     * optionJsx.config.tree
-     * optionJsx.config.tree.key
-     * optionJsx.config.tree.parent
-     * optionJsx.config.tree.text
-     * optionJsx.config.tree.value
-     * optionJsx.config.tree.sort
-     * optionJsx.config.tree.leaf
-     * optionJsx.config.selection
+     * Selector 系列
+     * 1）表格配置
+     * optionJsx.config.table = {
+     *      columns: []
+     * }
+     *
+     * 2）ajax 配置
+     * optionJsx.config.ajax = {
+     *      uri: "xxx",
+     *      method: "method",
+     *      params:{
+     *          criteria: {
+     *              cond1: value1,
+     *              cond2: value2
+     *          },
+     *          pager:{
+     *              page: x,
+     *              size: y
+     *          },
+     *          sorter: [
+     *              "field1,ASC",
+     *              "field2,DESC"
+     *          ]
+     *      }
+     *      magic:{
+     *          cond1: value1,
+     *          cond2: value2
+     *      }
+     * }
+     *
+     * 3）窗口配置
+     * optionJsx.config.window = {
+     *      title: "title",
+     *      okText: "Ok文字",
+     *      cancelText: "Cancel文字",
+     *      maskClosable: false,
+     *      width: 640
+     * }
+     * optionJsx.config.validation = "xxx"
+     *
+     * 4）搜索配置
+     * optionJsx.config.search = {
+     *      field1,c: field1,
+     *      field2,c: field2
+     * }
      */
-    // 组件内部调用该方法，只有树组件可用
-    // 由于所有树的配置都带了默认值，所以此处必须内部执行
-    // St.dataTree(normalized, data);
-    // St.dataDate(normalized, data);
+    St.dataSelector(normalized, data);
     return normalized;
 }
 export default {

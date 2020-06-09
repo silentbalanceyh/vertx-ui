@@ -1,8 +1,10 @@
 import submit from './I.attribute';
 import depend from './I.depend';
-import dataRules from './O.fn.rule';
 import option from './I.option';
 import component from './I.component';
+
+import dataRules from './O.fn.rule';
+import dataSelector from './O.fn.selector';
 
 export default {
     ...submit,
@@ -22,5 +24,6 @@ export default {
         normalized.optionConfig = {};
     },
     /* rules, option 处理 */
-    dataRules
+    dataRules,
+    dataSelector
 }

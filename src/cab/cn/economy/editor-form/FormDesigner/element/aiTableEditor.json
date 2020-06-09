@@ -223,6 +223,16 @@
                                         "title=表格列设置"
                                     ],
                                     [
+                                        "tableKeyField,主键字段名",
+                                        {
+                                            "metadata": "tableFormat,默认格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "ARRAY,数组",
+                                                "OBJECT,记录"
+                                            ]
+                                        }
+                                    ],
+                                    [
                                         {
                                             "metadata": "table,,24,,aiTableEditor",
                                             "optionJsx.config": {
