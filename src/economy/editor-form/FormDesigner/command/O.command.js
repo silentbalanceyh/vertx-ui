@@ -75,7 +75,14 @@ const cellFill = (reference, item, config) => {
 const cellAdd = (reference) => {
     Op.rxCellAdd(reference)();
 }
+const rxSubmit = (reference) => {
+    /* 调用上层提交函数 */
+    const request = Op.rxDataRequest(reference);
+    Ux.fn(reference).rxSubmit(request);
+}
 export default {
+    // 提交函数
+    save: rxSubmit,
     // 主操作
     export: showWindow,
     import: showWindow,
