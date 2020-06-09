@@ -16,7 +16,9 @@ const yiInternal = (reference) => {
                 if (ref) {
                     const data = Op.rxRequest(ref);
                     const {filename} = params;
-                    Ux.dgFileJson(data, filename);
+                    /* 表单数据 */
+                    const exportJson = {_form: data.form};
+                    Ux.dgFileJson(exportJson, filename);
                     /* 关闭窗口 */
                     Ux.fn(reference).rxClose();
                 }

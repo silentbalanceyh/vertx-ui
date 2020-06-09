@@ -1,14 +1,21 @@
 import React from 'react';
 import {component} from "../../../_internal";
 import {Form, Tabs} from "antd";
+import ReactJson from 'react-json-view';
 import Ux from 'ux';
+import '../Cab.less';
 
 const Page = {
     "tabPreview": (reference) => {
         return Ux.aiForm(reference);
     },
     "tabConfig": (reference) => {
-        return false;
+        const {data = {}} = reference.props;
+        return (
+            <div className={"content-json"}>
+                <ReactJson src={data.form}/>
+            </div>
+        )
     }
 }
 
@@ -41,7 +48,7 @@ class Component extends React.PureComponent {
             const tabConfig = Ux.configTab(this, tabs);
             const {items = [], ...rest} = tabConfig;
             return (
-                <Tabs {...rest}>
+                <Tabs {...rest} className={"web-form-designer-preview"}>
                     {items.map(item => (
                         <Tabs.TabPane {...item}>
                             {(() => {
