@@ -7,12 +7,19 @@ import Op from '../op';
 import UiModel from '../control/Web.Model';
 import UiLayout from '../control/Web.Layout';
 import UiHidden from '../control/Web.Hidden';
-import UiExport from '../control/Web.Export';
 import UiSettingRow from '../control/Web.Setting.Row';
 
 import UiElement from '../element';
 
+import UiExport from '../control/Web.Final.Export';
+import UiPreview from '../control/Web.Final.Preview';
+
 export default {
+    preview: (reference) => {
+        return (
+            <UiPreview reference={reference}/>
+        )
+    },
     export: (reference) => {
         return (<UiExport reference={reference} rxClose={event => {
             reference.setState({

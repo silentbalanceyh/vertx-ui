@@ -6,7 +6,7 @@ import React from 'react';
 export default (reference, item = {}) => {
     if (item.window) {
         const {$window, $visible = false} = reference.state;
-        if ($window) {
+        if ($window && $window === item.key) {
             const window = Ux.fromHoc(reference, "window");
             let dialog = window[$window];
             if (dialog) {
@@ -21,11 +21,17 @@ export default (reference, item = {}) => {
                 }
                 return (
                     <Modal key={item.key} {...modelConfig} visible={$visible}>
-                        {Ux.isFunction(fnContent) ? fnContent(reference) :
-                            `Dialog child miss ${item.key}`}
+                        {$visible ? (
+                            Ux.isFunction(fnContent) ?
+                                fnContent(reference) :
+                                `窗口子组件丢失 ${item.key}`
+                        ) : false}
                     </Modal>
                 )
-            } else return false;
+            } else {
+                console.error(`窗口配置丢失：${$window}`)
+                return false;
+            }
         } else return false;
     } else return false;
 }

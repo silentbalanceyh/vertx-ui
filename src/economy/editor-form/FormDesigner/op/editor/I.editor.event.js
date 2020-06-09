@@ -18,12 +18,30 @@ export default {
     rxRequest: (reference) => {
         /* 旧数据 */
         const {raft = {}, child} = reference.state;
-        if (child) {
+        if (child && child.state) {
             const updated = child.state.$rows;
             /* 新旧数据合并 */
-            console.info(raft, updated);
-        } else {
-            throw new Error("绑定出错，无法加载子组件数据！");
+            const uiGrid = [];
+            updated.forEach((row, rowIndex) => {
+                const uiRow = [];
+                row.data.forEach((cell, cellIndex) => {
+                    /* 双层检查 */
+                    if (rowIndex === cell.rowIndex
+                        && cellIndex === cell.cellIndex) {
+                        /* 数据转换 */
+                        const normalized = Ux.clone(cell.data);
+                        normalized.span = cell.span;
+                        uiRow.push(normalized);
+                    }
+                });
+                uiGrid.push(uiRow);
+            });
+            const $raft = Ux.clone(raft);
+            if ($raft.form) {
+                $raft.form.ui = uiGrid;
+            }
+            return $raft;
         }
+        return {};
     }
 }
