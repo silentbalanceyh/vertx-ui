@@ -58,6 +58,7 @@ export default (reference) => {
     // rxSource
     const {rxApi} = reference.props;
     attrs.rxApi = rxApi;
+    console.error(raft);
     return (
         <div className={"canvas"}>
             <GridEditor {...attrs} reference={reference}/>

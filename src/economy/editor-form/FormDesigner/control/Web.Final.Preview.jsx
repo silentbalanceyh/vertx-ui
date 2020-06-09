@@ -1,6 +1,6 @@
 import React from 'react';
 import {component} from "../../../_internal";
-import {Form, Tabs} from "antd";
+import {Button, Form, Tabs} from "antd";
 import ReactJson from 'react-json-view';
 import Ux from 'ux';
 import '../Cab.less';
@@ -48,16 +48,24 @@ class Component extends React.PureComponent {
             const tabConfig = Ux.configTab(this, tabs);
             const {items = [], ...rest} = tabConfig;
             return (
-                <Tabs {...rest} className={"web-form-designer-preview"}>
-                    {items.map(item => (
-                        <Tabs.TabPane {...item}>
-                            {(() => {
-                                const executor = Page[item.key];
-                                return executor(this);
-                            })()}
-                        </Tabs.TabPane>
-                    ))}
-                </Tabs>
+                <div>
+                    <Tabs {...rest} className={"web-form-designer-preview"}>
+                        {items.map(item => (
+                            <Tabs.TabPane {...item}>
+                                {(() => {
+                                    const executor = Page[item.key];
+                                    return executor(this);
+                                })()}
+                            </Tabs.TabPane>
+                        ))}
+                    </Tabs>
+                    <Button id={"$opSavePreview"} className={"ux-hidden"}
+                            onClick={event => {
+                                const {data = {}} = this.props;
+                                const raft = Ux.clone(data);
+                                Ux.fn(this).rxSubmit(raft);
+                            }}/>
+                </div>
             );
         }, {
             name: "FormPreview",

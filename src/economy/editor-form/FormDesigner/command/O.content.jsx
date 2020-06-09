@@ -18,23 +18,20 @@ import UiPreview from '../control/Web.Final.Preview';
 export default {
     import: (reference) => {
         return (
-            <UiImport reference={reference}/>
+            <UiImport reference={reference}
+                      rxSubmit={Op.rxDataSave(reference)}/>
         )
     },
     preview: (reference) => {
-        const data = Op.rxRequest(reference);
+        const data = Op.rxDataRequest(reference);
         return (
-            <UiPreview reference={reference} data={data}/>
+            <UiPreview reference={reference} data={data}
+                       rxSubmit={Op.rxDataSave(reference)}/>
         )
     },
     export: (reference) => {
-        return (<UiExport reference={reference} rxClose={event => {
-            reference.setState({
-                $window: undefined,      // 关联窗口 id
-                $visible: false,         // 打开 窗口
-                $forbidden: false,       // 禁止屏幕主操作
-            })
-        }}/>)
+        return (<UiExport reference={reference}
+                          rxClose={Op.rxWindowClose(reference)}/>)
     },
     layout: (reference) => {
         return (<UiLayout reference={reference}/>)

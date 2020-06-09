@@ -14,7 +14,7 @@ const yiInternal = (reference) => {
                 /* 读取数据信息 */
                 const ref = Ux.onReference(reference, 1);
                 if (ref) {
-                    const data = Op.rxRequest(ref);
+                    const data = Op.rxDataRequest(ref);
                     const {filename} = params;
                     /* 表单数据 */
                     const exportJson = {_form: data.form};

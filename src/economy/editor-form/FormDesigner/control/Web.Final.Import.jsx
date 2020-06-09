@@ -50,7 +50,14 @@ const yiInternal = (reference) => {
                         const content = reader.result;
                         try {
                             const parsed = JSON.parse(content);
-                            console.error(parsed);
+                            if (parsed._form) {
+                                /* raft */
+                                const raft = parsed._form;
+                                Ux.fn(reference).rxSubmit(raft);
+                            } else {
+                                Ux.sexMessage(reference, "form");
+                                reference.setState({$submitting: false, $loading: false});
+                            }
                         } catch (error) {
                             Ux.sexMessage(reference, "format");
                             reference.setState({$submitting: false, $loading: false});

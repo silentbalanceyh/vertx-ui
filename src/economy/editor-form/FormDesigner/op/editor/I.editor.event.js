@@ -12,10 +12,25 @@ export default {
             $setting: undefined
         })
     },
+    rxWindowClose: (reference) => (event) => {
+        reference.setState({
+            $window: undefined,      // 关联窗口 id
+            $visible: false,         // 打开 窗口
+            $forbidden: false,       // 禁止屏幕主操作
+        })
+    },
+    rxDataSave: (reference) => (raft) => {
+        reference.setState({
+            raft,                    // 相关配置信息
+            $window: undefined,      // 关联窗口 id
+            $visible: false,         // 打开 窗口
+            $forbidden: false,       // 禁止屏幕主操作
+        })
+    },
     /*
-     * 专用合并函数
+     * 数据合并专用函数
      */
-    rxRequest: (reference) => {
+    rxDataRequest: (reference) => {
         /* 旧数据 */
         const {raft = {}, $ui} = reference.state;
         if ($ui && Ux.isArray($ui)) {
