@@ -351,6 +351,11 @@ export default {
         /* 输出数据信息 */
         const normalized = {};
         const parameters = $opDataOut(normalized, params, reference);
-        console.info(params, parameters);
+        /* 读取行/列 */
+        const {config = {}} = reference.props;
+        /* 更新 Raft 中的值 */
+        const cell = Ux.clone(config);
+        config.data = parameters;
+        Ux.fn(reference).rxCellConfig(config, true);
     }
 }

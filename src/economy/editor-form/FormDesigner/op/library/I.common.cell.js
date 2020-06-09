@@ -100,7 +100,10 @@ const cellConfig = (reference, cellData = {}) => {
             }
         })()
     });
-    // 替换 data 节点
+    /*
+     * normalized 是核心结构，用于渲染
+     * data 是原始结构，用于存储
+     */
     readyData.raft = normalized;
     // 返回处理好的单元格
     return readyData;

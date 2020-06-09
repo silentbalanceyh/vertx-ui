@@ -78,7 +78,16 @@ export default {
             if (Component) {
                 return (
                     <Component {...Ux.onUniform(reference.props)}
-                               config={rest} rxApi={rxApi}
+                               config={rest}
+                               rxApi={rxApi}
+                               rxCellConfig={params => {
+                                   /* 当前层数据处理 */
+                                   reference.setState({
+                                       $drawer: undefined,
+                                       $setting: undefined
+                                   });
+                                   Ux.fn(reference).rxCellConfig(params);
+                               }}
                                $inited={$inited}/>
                 )
             } else {
