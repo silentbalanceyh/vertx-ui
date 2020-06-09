@@ -90,7 +90,7 @@
             ]
         ],
         "hidden": [
-            "name"
+            "username"
         ],
         "op": {
             "$opAdd": "act.category.add"

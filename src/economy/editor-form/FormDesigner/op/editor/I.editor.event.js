@@ -25,12 +25,17 @@ export default {
                 const uiRow = [];
                 row.data.forEach((cell, cellIndex) => {
                     /* 双层检查 */
-                    if (rowIndex === cell.rowIndex
-                        && cellIndex === cell.cellIndex) {
-                        /* 数据转换 */
-                        const normalized = Ux.clone(cell.data);
-                        normalized.span = cell.span;
-                        uiRow.push(normalized);
+                    if (rowIndex === cell.rowIndex && cellIndex === cell.cellIndex) {
+                        /* 已配置了数据 */
+                        if (cell.data) {
+                            /* 数据转换 */
+                            const normalized = Ux.clone(cell.data);
+                            normalized.span = cell.span;
+                            /* 必须包含 field */
+                            if (normalized.field) {
+                                uiRow.push(normalized);
+                            }
+                        }
                     }
                 });
                 uiGrid.push(uiRow);
