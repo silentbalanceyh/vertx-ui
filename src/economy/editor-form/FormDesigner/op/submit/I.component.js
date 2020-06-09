@@ -298,11 +298,11 @@ const DATA_EXECUTOR = {
 }
 export default {
     // 专用
-    dataComponent: (normalized = {}, params = {}) => {
+    dataComponent: (normalized = {}, params = {}, reference) => {
         const render = params.render;
         const executor = DATA_EXECUTOR[render];
         if (Ux.isFunction(executor)) {
-            executor(normalized, params);
+            executor(normalized, params, reference);
         }
     },
 }

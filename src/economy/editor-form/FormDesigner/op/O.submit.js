@@ -271,8 +271,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      *      checkStrictly: true | false
      * }
      */
-    St.dataComponent(normalized, data);
-
+    St.dataComponent(normalized, data, reference);
     /*
      * 选项属性
      * 1）静态和动态数据源
