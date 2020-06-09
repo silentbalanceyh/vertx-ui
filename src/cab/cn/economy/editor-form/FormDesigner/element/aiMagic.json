@@ -57,7 +57,7 @@
                                     [
                                         "label,标签/标题,,,,placeholder=<标题>",
                                         {
-                                            "metadata": "field,字段名,,,aiSelect,placeholder=（系统自动分配）",
+                                            "metadata": "field,字段名,,,aiSelect,placeholder=（选择要呈现的字段）",
                                             "optionJsx.config.datum": "source=model.fields,value=key,label=display"
                                         }
                                     ],
@@ -132,7 +132,8 @@
                                         {
                                             "metadata": "remoteSource,,8",
                                             "optionJsx.config.linker": {
-                                                "uri": "remoteUri"
+                                                "uri": "remoteUri",
+                                                "method": "remoteMethod"
                                             },
                                             "optionJsx.depend.enabled": {
                                                 "dataType": [
@@ -159,16 +160,6 @@
                                             "optionJsx.depend.enabled": {
                                                 "dataType": [
                                                     "REMOTE"
-                                                ]
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "datumInput,,24",
-                                            "optionJsx.depend.enabled": {
-                                                "dataType": [
-                                                    "DATUM"
                                                 ]
                                             }
                                         }
@@ -207,6 +198,84 @@
                                                 "dataType": [
                                                     "TABLE"
                                                 ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dataSource,数据源,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "items,静态数据源",
+                                                "datum,动态数据源"
+                                            ],
+                                            "optionJsx.depend.enabled": {
+                                                "dataType": [
+                                                    "DATUM"
+                                                ]
+                                            },
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "cascadeEnabled"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumSource,数据标识,12,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,value=key,label=name",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "datumKey,值字段名",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "datumLabel,显示字段名",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "datum"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "items,选项表,24,,aiTableEditor",
+                                            "optionJsx.depend.enabled": {
+                                                "dataSource": [
+                                                    "items"
+                                                ]
+                                            },
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "name",
+                                                            "title": "固定值",
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "label",
+                                                            "title": "显示字段",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
                                             }
                                         }
                                     ]

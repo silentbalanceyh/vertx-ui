@@ -40,6 +40,18 @@ const dataDatum = (normalized = {}, params = {}) => {
     }
 }
 export default {
+    dataTable: (normalized = {}, tableInput = []) => {
+        const table = {columns: []};
+        if (Ux.isArray(tableInput) && 0 < tableInput.length) {
+            tableInput.table.forEach(row => {
+                const col = {};
+                col.title = row.title;
+                col.dataIndex = row.dataIndex;
+                table.columns.push(col);
+            });
+            normalized.optionJsx.config.table = table;
+        }
+    },
     dataDate: (normalized = {}, params = {}) => {
         // disabledDate 处理
         if (params.disabledDate) {
@@ -62,6 +74,7 @@ export default {
         dataJsx(normalized, params, 'hourStep');
         dataJsx(normalized, params, 'minuteStep');
         dataJsx(normalized, params, 'secondStep');
+        normalized.moment = true;   // 时间格式必须
     },
     dataMultiple: (normalized = {}, params = {}) => {
         // 多选启用

@@ -1,20 +1,12 @@
 import Ux from 'ux';
 import dataAjax from './O.fn.ajax';
+import Opt from './I.option';
 
 export default (normalized = {}, params = {}) => {
     /*
      * 表格配置
      */
-    if (Ux.isArray(params.table)) {
-        const table = {columns: []};
-        params.table.forEach(row => {
-            const col = {};
-            col.title = row.title;
-            col.dataIndex = row.dataIndex;
-            table.columns.push(col);
-        });
-        normalized.optionJsx.config.table = table;
-    }
+    Opt.dataTable(normalized, params.table);
 
     /*
      * 窗口基础配置

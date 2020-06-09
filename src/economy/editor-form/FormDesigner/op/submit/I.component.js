@@ -1,4 +1,5 @@
 import dataJsx from './I.fn.jsx.js';
+import dataAction from './I.fn.submit';
 import Opt from './I.option';
 import Ux from 'ux';
 
@@ -231,9 +232,48 @@ const dataTitle = (normalized = {}, params = {}) => {
     }
 }
 const dataMagic = (normalized = {}, params = {}) => {
-    /*
-     * 特殊处理（只识别需要用的属性）
-     */
+    // 所有类型合适的空值处理
+    if (params.dataEmpty) {
+        normalized.optionJsx.config.$empty = params.dataEmpty;
+    }
+    if ("TEXT" === params.dataType) {
+        // 文本类型
+        if (params.textExpr) {
+            // 文本表达式
+            normalized.optionJsx.config.expr = params.textExpr;
+        }
+    } else if ("BOOLEAN" === params.dataType) {
+        // 布尔型
+        if (params.booleanTrue && params.booleanFalse) {
+            normalized.optionJsx.config.boolean = true;
+            const items = [];
+            items.push({key: true, value: true, label: params.booleanTrue});
+            items.push({key: false, value: false, label: params.booleanFalse});
+            normalized.optionJsx.config.items = items;
+        }
+    } else if ("DATE" === params.dataType) {
+        if (params.dateFormat) {
+            normalized.moment = true;
+            normalized.optionJsx.config.format = params.dateFormat;
+        }
+    } else if ("REMOTE" === params.dataType) {
+        if (params.remoteUri && params.remoteField) {
+            const user = {};
+            user.uri = params.remoteUri;
+            user.method = params.remoteMethod ? params.remoteMethod : "GET";
+            user.field = params.remoteField;
+            normalized.optionJsx.config.user = user;
+        }
+    } else if ("RECORD" === params.dataType) {
+        // 记录解析
+        normalized.optionJsx.config.record = true;
+    } else if ("TABLE" === params.dataType) {
+        // 表格列处理
+        if (params.tableColumns) {
+            Opt.dataTable(normalized, params.tableColumns);
+        }
+    }
+    // DATUM 会被解析，所以这里不用处理
 }
 const DATA_EXECUTOR = {
     aiPassword: dataPassword,                       // 密码框
@@ -254,6 +294,7 @@ const DATA_EXECUTOR = {
     aiTableEditor: dataTableEditor,                 // format 专用处理
     aiTitle: dataTitle,                             // 标题处理
     aiMagic: dataMagic,                             // 数据呈现专用
+    aiAction: dataAction,                           // 按钮专用
 }
 export default {
     // 专用

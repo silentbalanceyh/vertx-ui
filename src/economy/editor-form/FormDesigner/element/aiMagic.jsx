@@ -12,8 +12,7 @@ class Component extends React.PureComponent {
         Sd.yiComponent(this, {
             id: "SubForm-Setting-aiMagic",
             renders: {
-                remoteSource: Sd.yoRenders.remoteSource,
-                datumInput: Sd.yoRenders.datumInput,
+                remoteSource: Sd.yoRenders.remoteSource
             }
         });
     }

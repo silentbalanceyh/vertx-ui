@@ -1,4 +1,5 @@
 import dataJsx from './I.fn.jsx.js';
+import Ux from 'ux';
 
 export default {
     /*
@@ -42,5 +43,26 @@ export default {
         // addon 前后缀
         dataJsx(normalized, params, "addonAfter");
         dataJsx(normalized, params, "addonBefore");
+    },
+    dataFinished: (normalized = {}) => {
+        const {optionItem, optionJsx} = normalized;
+        // 去掉标签
+        if (optionItem.hasOwnProperty("label") &&
+            undefined === optionItem.label) {
+            delete normalized.optionItem.label;
+        }
+        // 去掉空配置
+        if (optionJsx.config && Ux.isEmpty(optionJsx.config)) {
+            delete normalized.optionJsx.config;
+        }
+        // 去掉特殊节点 impact
+        if (optionJsx.depend && optionJsx.depend.impact) {
+            if (Ux.isEmpty(optionJsx.depend.impact)) {
+                delete normalized.optionJsx.depend.impact;
+                if (Ux.isEmpty(optionJsx.depend)) {
+                    delete normalized.optionJsx.depend;
+                }
+            }
+        }
     }
 }

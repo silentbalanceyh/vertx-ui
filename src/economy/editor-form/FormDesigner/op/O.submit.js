@@ -339,6 +339,10 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
      * }
      */
     St.dataSelector(normalized, data);
+    /*
+     * 最终删除特殊无效节点
+     */
+    St.dataFinished(normalized);
     return normalized;
 }
 export default {
