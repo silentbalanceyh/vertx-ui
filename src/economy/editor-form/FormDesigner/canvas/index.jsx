@@ -35,22 +35,9 @@ const mountSource = (attrs = {}, form = {}) => {
         attrs.$a_model_sources = Dsl.getArray(source);
     }
 }
-const mountForm = (form = {}) => {
-    {
-        // 布局修正处理
-        if (!form.hasOwnProperty("window")) {
-            form.window = 1;
-        }
-        if (!form.options) {
-            form.options = {};
-        }
-        form.options.window = form.window;
-    }
-}
 export default (reference) => {
     const {raft = {}} = reference.state;
-    const form = Ux.clone(raft.form)
-    mountForm(form, reference);
+    const form = Ux.clone(raft.form);
 
     const attrs = Ux.onUniform(reference.state);
     attrs.data = form;

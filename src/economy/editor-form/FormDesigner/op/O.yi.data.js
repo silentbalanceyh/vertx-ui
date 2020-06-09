@@ -1,19 +1,12 @@
 import Ux from 'ux';
 import {Dsl} from 'entity';
+import dataInit from './O.fn.data.init';
 
 export default (reference, state = {}) => {
     const {$models = {}, config = {}} = reference.props;
     state.$models = $models;
     state.$modelsAttrs = {};
-    const $config = Ux.clone(config);
-    {
-        // 默认3列给定值
-        if ($config.form) {
-            if (!$config.form.hasOwnProperty('columns')) {
-                $config.form.columns = 3;
-            }
-        }
-    }
+    const $config = dataInit(config);
     {
         const fields = [];
         const {attributes = []} = $models;

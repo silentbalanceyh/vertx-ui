@@ -39,7 +39,10 @@ export default {
         }).then(raft => {
             state.raft = raft;
             // Action 提交专用配置
-            state.$op = Op.actions;
+            state.$op = {
+                // 保存配置专用
+                $opSaveSetting: Op.dataOut,
+            };
             return Ux.promise(state);
         }).then(Ux.ready).then(Ux.pipe(reference));
     },

@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import $opSaveSetting from './O.data.output';
 
 const rxSpinOff = (reference) => (event) => {
     Ux.prevent(event);
@@ -86,9 +85,6 @@ const onCallback = (reference) => ($raft) => {
     });
 }
 export default {
-    actions: {
-        $opSaveSetting,
-    },
     rxSpinOff,
     raft: (reference) => ({
         onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params))
