@@ -1,5 +1,4 @@
 import Ux from "ux";
-import {LoadingAlert} from "web";
 import {Col, Row, Table} from "antd";
 import React from "react";
 import renderTool from "./page.main.tool";
@@ -11,7 +10,7 @@ export default (reference) => {
         $pagination = {}, $data = []
     } = reference.state;
 
-    const alert = Ux.fromHoc(reference, "alert");
+    // const alert = Ux.fromHoc(reference, "alert");
 
     const configTable = Ux.clone($table);
     Ux.configScroll(configTable, $data, reference);
@@ -26,7 +25,7 @@ export default (reference) => {
                         overflow: "auto",
                         paddingRight: 6
                     }}>
-                    {renderMenu(reference)}
+                        {renderMenu(reference)}
                     </div>
                 </Col>
                 <Col span={20} className={"job-table"}>

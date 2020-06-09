@@ -25,5 +25,5 @@ export default {
     },
     /* rules, option 处理 */
     dataRules,
-    dataSelector
+    dataSelector,
 }

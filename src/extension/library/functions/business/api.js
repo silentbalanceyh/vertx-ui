@@ -1,5 +1,3 @@
-import Ux from "ux";
-
 /**
  * ## 扩展函数
  *

@@ -1,29 +1,6 @@
 import Ux from 'ux';
 import St from './submit';
 /*
- * 基础字段
- * - aiAction
- * - aiTitle
- * - aiX
- */
-const $opDataIn = (data = {}, reference) => {
-    const $data = reference.props.data;
-    const message = Ux.fromHoc(reference, "message");
-    const {optionItem = {}} = data;
-    /* 初始化 */
-    const $inited = {};
-    {
-        // 外层输入的标签信息
-        if (optionItem.label &&
-            message.label !== optionItem.label) {
-            $inited.label = optionItem.label;
-        }
-        $inited.render = $data.render;  // 当前 render
-        $inited.allowClear = false;     // 不允许清空
-    }
-    return $inited;
-}
-/*
  *
  * field,           // 字段名
  * optionJsx,       // 配置项
@@ -344,18 +321,15 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     St.dataFinished(normalized);
     return normalized;
 }
-export default {
-    $opDataIn,
-    $opSaveSetting: (reference) => (params = {}) => {
-        reference.setState({$loading: false, $submitting: false});
-        /* 输出数据信息 */
-        const normalized = {};
-        const parameters = $opDataOut(normalized, params, reference);
-        /* 读取行/列 */
-        const {config = {}} = reference.props;
-        /* 更新 Raft 中的值 */
-        const cell = Ux.clone(config);
-        config.data = parameters;
-        Ux.fn(reference).rxCellConfig(config, true);
-    }
+export default (reference) => (params = {}) => {
+    reference.setState({$loading: false, $submitting: false});
+    /* 输出数据信息 */
+    const normalized = {};
+    const parameters = $opDataOut(normalized, params, reference);
+    /* 读取行/列 */
+    const {config = {}} = reference.props;
+    /* 更新 Raft 中的值 */
+    const cell = Ux.clone(config);
+    cell.data = parameters;
+    Ux.fn(reference).rxCellConfig(cell, true);
 }
