@@ -22,6 +22,7 @@ const yiInternal = (reference) => {
                     /* 关闭窗口 */
                     Ux.fn(reference).rxClose();
                 }
+                reference.setState({$submitting: false, $loading: false});
             }
         }
         return Ux.promise(state);

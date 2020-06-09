@@ -14,17 +14,17 @@
         "deployment-unit,,查看模型,op-release",
         "divider",
         {
-            "key": "export",
-            "icon": "export",
-            "window": true,
-            "tooltip": "导出配置",
-            "className": "op-source"
-        },
-        {
             "key": "import",
             "icon": "import",
             "window": true,
             "tooltip": "导入",
+            "className": "op-source"
+        },
+        {
+            "key": "export",
+            "icon": "export",
+            "window": true,
+            "tooltip": "导出配置",
             "className": "op-source"
         },
         {
@@ -38,6 +38,7 @@
     ],
     "_window": {
         "export": "填写导出文件名,导出,关闭,false,640,true,$opSaveExport",
+        "import": "请选择上传文件,导入,关闭,false,640,true,$opSaveImport",
         "preview": "预览表单,保存,关闭,false,1024,true,$opSavePreview"
     },
     "_palette": {

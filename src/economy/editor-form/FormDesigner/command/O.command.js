@@ -78,6 +78,7 @@ const cellAdd = (reference) => {
 export default {
     // 主操作
     export: showWindow,
+    import: showWindow,
     preview: showWindow,
 
     layout: showPopover,

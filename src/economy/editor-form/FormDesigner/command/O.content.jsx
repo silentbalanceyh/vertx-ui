@@ -12,9 +12,15 @@ import UiSettingRow from '../control/Web.Setting.Row';
 import UiElement from '../element';
 
 import UiExport from '../control/Web.Final.Export';
+import UiImport from '../control/Web.Final.Import';
 import UiPreview from '../control/Web.Final.Preview';
 
 export default {
+    import: (reference) => {
+        return (
+            <UiImport reference={reference}/>
+        )
+    },
     preview: (reference) => {
         const data = Op.rxRequest(reference);
         return (
