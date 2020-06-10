@@ -12,7 +12,11 @@ const yiRows = (reference, data) => {
             const rowKeySet = new Set();
             row.forEach(config => rowKeySet.add(config.rowKey));
             const rowKeys = Array.from(rowKeySet);
-            const rowKey = rowKeys[0];
+            let rowKey = rowKeys[0];
+            /* 如果该行属于新的一行，则需要重设 rowKey */
+            if (!rowKey) {
+                rowKey = `row-${Ux.randomString(8)}`;
+            }
             /* 行初始化 */
             const rowReady = {};
             rowReady.key = rowKey;

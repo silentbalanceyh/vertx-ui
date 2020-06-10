@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import {Dsl} from 'entity';
 import Cl from './I.common.cell';
+import Rft from "../O.raft.event";
 /*
  * reference 引用的是 Row
  */
@@ -33,6 +34,15 @@ export default {
         rowConfig.key = config.key;
         rowConfig.data = normalized;
         Ux.fn(reference).rxRowConfig([rowConfig]);
+    },
+    rowsRefresh: (reference, $rows = []) => {
+        /*
+         * 在父类中创建 $rows 变量
+         */
+        const ref = Ux.onReference(reference, 1);
+        if (ref) {
+            Rft.raft(ref).onUi($rows);
+        }
     },
     rowSave
 }

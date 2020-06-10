@@ -87,21 +87,27 @@ const cellConfig = (reference, cellData = {}) => {
     // 执行 configField 配置 raft 标准化处理
     const {$form, data = []} = reference.props;
     // 已经 ready，则执行 data 节点的处理
-    const normalized = cellResume(readyData.data, $form, {
+    if (readyData.raft) {
+        // TODO: 暂时什么都不做
+    } else {
+        const length = cellLength(data, readyData);
+        const normalized = cellResume(readyData.data, $form, {
+            /*
+             * rowKey:       行主键
+             * rowIndex:     行索引
+             * cellIndex:    单元格索引
+             * columns:      表单默认列数量
+             */
+            ...readyData,
+            length,        // 当前行的列数量
+        });
         /*
-         * rowKey:       行主键
-         * rowIndex:     行索引
-         * cellIndex:    单元格索引
-         * columns:      表单默认列数量
+         * normalized 是核心结构，用于渲染
+         * data 是原始结构，用于存储
          */
-        ...readyData,
-        length: cellLength(data, readyData),        // 当前行的列数量
-    });
-    /*
-     * normalized 是核心结构，用于渲染
-     * data 是原始结构，用于存储
-     */
-    readyData.raft = normalized.raft;
+        readyData.raft = normalized;
+        // readyData.span = normalized.span;
+    }
     // 返回处理好的单元格
     return readyData;
 }
@@ -126,10 +132,9 @@ const cellResume = (cell = {}, raft = {}, matrix = {}) => {
 
     /* 搭配设计专用信息 */
     const $cell = Ux.configField(raft, cell, config);
-
     cellData.raft = $cell;
-    /* span 连接 */
     cellData.span = $cell.span;
+    /* 仅此时需要 */
     cellData.render = $cell.render;     // 渲染基础
     return cellData;
 }
