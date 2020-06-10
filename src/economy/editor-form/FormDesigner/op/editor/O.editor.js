@@ -17,8 +17,7 @@ const yiData = (reference, state = {}) => {
             data.ui.forEach(row => {
                 /* 行专用 key 提取 */
                 const rowKeySet = new Set();
-                row.map(cell => cell.config)
-                    .forEach(config => rowKeySet.add(config.rowKey));
+                row.forEach(config => rowKeySet.add(config.rowKey));
                 const rowKeys = Array.from(rowKeySet);
                 const rowKey = rowKeys[0];
                 /* 行初始化 */

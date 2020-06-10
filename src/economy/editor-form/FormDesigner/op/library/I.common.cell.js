@@ -101,7 +101,7 @@ const cellConfig = (reference, cellData = {}) => {
      * normalized 是核心结构，用于渲染
      * data 是原始结构，用于存储
      */
-    readyData.raft = normalized;
+    readyData.raft = normalized.raft;
     // 返回处理好的单元格
     return readyData;
 }
@@ -116,13 +116,21 @@ const cellNew = (span, row = {}) => {
     }
 }
 const cellResume = (cell = {}, raft = {}, matrix = {}) => {
+    /* 单元格专用处理 */
     const key = `cell-${Ux.randomString(8)}`;
     const config = Ux.clone(matrix);
     config.key = key;
+
+    const cellData = Ux.clone(config);
+    cellData.data = cell;
+
     /* 搭配设计专用信息 */
     const $cell = Ux.configField(raft, cell, config);
-    $cell.config = config;
-    return $cell;
+    cellData.raft = $cell;
+    /* span 连接 */
+    cellData.span = $cell.span;
+
+    return cellData;
 }
 export default {
     cellNew,        // 创建新的单元格
