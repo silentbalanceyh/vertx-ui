@@ -26,8 +26,9 @@ export default (config) => {
                 const $uiRow = [];
                 const rowKey = `row-${Ux.randomString(8)}`
                 uiRow.forEach((uiCell, cellIndex) => {
-                    const $uiCell = Ld.cellResume(uiCell, formRef,
+                    const $uiCell = Ld.cellConfig(formRef, uiCell,
                         {
+                            key: `cell-${Ux.randomString(8)}`,
                             rowKey,                     // 行主键
                             rowIndex,                   // 行索引
                             cellIndex,                  // 单元格索引

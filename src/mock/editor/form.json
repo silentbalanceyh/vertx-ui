@@ -7,7 +7,8 @@
                     "optionConfig.rules": [
                         "required,请输入名称，名称不可为空！"
                     ]
-                }
+                },
+                "code,编码"
             ]
         ],
         "hidden": [

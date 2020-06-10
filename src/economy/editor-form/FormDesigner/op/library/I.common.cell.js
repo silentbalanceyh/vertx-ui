@@ -1,4 +1,5 @@
 import Ux from "ux";
+import cellConfig from './I.common.cell.config';
 
 const cellSpans = (data = []) => data.map(cell => cell.span)
     .reduce((left, right) => left + right, 0);
@@ -74,43 +75,6 @@ const cellWidth = (reference, compress = false) => {
     }
     return processed;
 }
-const cellLength = (data = [], readyData = {}) => {
-    const $data = data.filter(item => item.key === readyData.key);
-    if (0 < $data.length) {
-        return data.length;
-    } else {
-        return data.length + 1;
-    }
-}
-const cellConfig = (reference, cellData = {}) => {
-    const readyData = Ux.clone(cellData);
-    // 执行 configField 配置 raft 标准化处理
-    const {$form, data = []} = reference.props;
-    // 已经 ready，则执行 data 节点的处理
-    if (readyData.raft) {
-        // TODO: 暂时什么都不做
-    } else {
-        const length = cellLength(data, readyData);
-        const normalized = cellResume(readyData.data, $form, {
-            /*
-             * rowKey:       行主键
-             * rowIndex:     行索引
-             * cellIndex:    单元格索引
-             * columns:      表单默认列数量
-             */
-            ...readyData,
-            length,        // 当前行的列数量
-        });
-        /*
-         * normalized 是核心结构，用于渲染
-         * data 是原始结构，用于存储
-         */
-        readyData.raft = normalized;
-        // readyData.span = normalized.span;
-    }
-    // 返回处理好的单元格
-    return readyData;
-}
 
 const cellNew = (span, row = {}) => {
     return {
@@ -121,26 +85,8 @@ const cellNew = (span, row = {}) => {
         rowKey: row.key,                                // 行主键
     }
 }
-const cellResume = (cell = {}, raft = {}, matrix = {}) => {
-    /* 单元格专用处理 */
-    const key = `cell-${Ux.randomString(8)}`;
-    const config = Ux.clone(matrix);
-    config.key = key;
-
-    const cellData = Ux.clone(config);
-    // cellData.data = cell;    去掉原始节点，只保留 raft 节点
-
-    /* 搭配设计专用信息 */
-    const $cell = Ux.configField(raft, cell, config);
-    cellData.raft = $cell;
-    cellData.span = $cell.span;
-    /* 仅此时需要 */
-    cellData.render = $cell.render;     // 渲染基础
-    return cellData;
-}
 export default {
     cellNew,        // 创建新的单元格
-    cellResume,     // 恢复旧的单元格
 
     cellSpans,
     cellSpanMin,
