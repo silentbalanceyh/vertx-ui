@@ -37,6 +37,12 @@ export default {
         if (config.hasOwnProperty("span")) {
             item.span = config.span;
         }
+        if (config.render) {
+            item.render = config.render;
+        }
+        if (props.data) {
+            item.raft = props.data;
+        }
         return item;
     },
     itemRowSame: (left, right) => {

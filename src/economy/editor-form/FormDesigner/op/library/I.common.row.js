@@ -26,7 +26,10 @@ export default {
         const normalized = [];
         data.forEach(each => {
             const changed = Ux.clone(each);
-            const cellData = Cl.cellConfig(reference, changed);
+            const cellData = Cl.cellConfig(reference, {
+                ...changed,
+                length: data.length,        // 长度处理
+            });
             normalized.push(cellData);
         });
         const {config = {}} = reference.props;

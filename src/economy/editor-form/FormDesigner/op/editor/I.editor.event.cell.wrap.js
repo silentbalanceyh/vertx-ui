@@ -1,22 +1,5 @@
 import Ux from 'ux';
-import Cmn from "../library";
-
-const toSource = (fromItem, toItem) => {
-    const sourceItem = Ux.clone(toItem);
-    sourceItem.rowIndex = fromItem.rowIndex;
-    sourceItem.rowKey = fromItem.rowKey;
-    sourceItem.cellIndex = fromItem.cellIndex;
-    sourceItem.span = fromItem.span;
-    return sourceItem;
-}
-const toTarget = (fromItem, toItem) => {
-    const targetItem = Ux.clone(fromItem);
-    targetItem.rowIndex = toItem.rowIndex;
-    targetItem.rowKey = toItem.rowKey;
-    targetItem.cellIndex = toItem.cellIndex;
-    targetItem.span = toItem.span;
-    return targetItem;
-}
+import Cmn from '../library';
 
 const toRow = (cells = []) => {
     const rowData = {};
@@ -45,35 +28,56 @@ export default (targetRef) => (fromItem, toItem) => {
         let targetCells = targetRef.props.data;
         targetCells = Ux.clone(targetCells);
         /*
-         * 源
+         * fromItem 拖拽到 toItem
          */
-        const sourceItem = toSource(fromItem, toItem);
-        sourceCells[sourceItem.cellIndex] = sourceItem;
         if (fromItem.rowIndex === toItem.rowIndex) {
             /*
              * 同行交换
+             * 1）交换坐标
+             * 2）交换 span
              */
-            const targetItem = toTarget(fromItem, toItem);
+            const sourceItem = Ux.clone(fromItem);
+            sourceItem.cellIndex = toItem.cellIndex;
+            sourceItem.span = toItem.span;
+
+            const targetItem = Ux.clone(toItem);
+            targetItem.cellIndex = fromItem.cellIndex;
+            targetItem.span = fromItem.span;
+
+            /*
+             * 更新对应的列坐标
+             */
+            sourceCells[sourceItem.cellIndex] = sourceItem;
             sourceCells[targetItem.cellIndex] = targetItem;
             Cmn.rowRefresh(sourceRef, sourceCells);
         } else {
             /*
              * 不同行交换
+             * 1）交换坐标
+             * 2）交换 span
              */
-            const targetItem = toTarget(fromItem, toItem);
-            targetCells[targetItem.cellIndex] = targetItem;
+            const sourceItem = Ux.clone(fromItem);
+            sourceItem.cellIndex = toItem.cellIndex;
+            sourceItem.rowIndex = toItem.rowIndex;
+            sourceItem.rowKey = toItem.rowKey;
+            sourceItem.span = toItem.span;
+
+            const targetItem = Ux.clone(toItem);
+            targetItem.cellIndex = fromItem.cellIndex;
+            targetItem.rowIndex = fromItem.rowIndex;
+            targetItem.rowKey = fromItem.rowKey;
+            targetItem.span = fromItem.span;
+
             /*
-             * {
-             *      config: {
-             *          key: "xxx"
-             *      },
-             *      data: []
-             * }
+             * 修改 sourceCells / targetCells
              */
-            const processed = [];
-            processed.push(toRow(sourceCells));
-            processed.push(toRow(targetCells));
-            Ux.fn(sourceRef).rxRowConfig(processed);
+            sourceCells[fromItem.cellIndex] = targetItem;
+            targetCells[toItem.cellIndex] = sourceItem;
+
+            const results = [];
+            results.push(toRow(sourceCells));
+            results.push(toRow(targetCells));
+            Ux.fn(sourceRef).rxRowConfig(results);
         }
     }
 }
