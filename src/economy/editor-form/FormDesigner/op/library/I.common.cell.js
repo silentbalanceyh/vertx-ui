@@ -23,15 +23,6 @@ const cellSpanDim = (data = []) => {
     data.forEach(cell => spans.add(cell.span));
     return Array.from(spans);
 }
-const cellNew = (span, row = {}) => {
-    return {
-        key: `cell-${Ux.randomString(8)}`,       // 默认的 key
-        span,                                           // 默认宽度
-        cellIndex: 0,                                   // 列索引
-        rowIndex: row.rowIndex,                         // 行索引
-        rowKey: row.key,                                // 行主键
-    }
-}
 const MAP = {
     COMPRESS: {
         24: 18,
@@ -83,22 +74,28 @@ const cellWidth = (reference, compress = false) => {
     }
     return processed;
 }
+const cellLength = (data = [], readyData = {}) => {
+    const $data = data.filter(item => item.key === readyData.key);
+    if (0 < $data.length) {
+        return data.length;
+    } else {
+        return data.length + 1;
+    }
+}
 const cellConfig = (reference, cellData = {}) => {
     const readyData = Ux.clone(cellData);
     // 执行 configField 配置 raft 标准化处理
     const {$form, data = []} = reference.props;
     // 已经 ready，则执行 data 节点的处理
-    const normalized = Ux.configField($form, readyData.data, {
+    const normalized = cellResume(readyData.data, $form, {
+        /*
+         * rowKey:       行主键
+         * rowIndex:     行索引
+         * cellIndex:    单元格索引
+         * columns:      表单默认列数量
+         */
         ...readyData,
-        // 布局需要使用的专用节点
-        length: (() => {
-            const $data = data.filter(item => item.key === readyData.key);
-            if (0 < $data.length) {
-                return data.length;
-            } else {
-                return data.length + 1;
-            }
-        })()
+        length: cellLength(data, readyData),        // 当前行的列数量
     });
     /*
      * normalized 是核心结构，用于渲染
@@ -108,12 +105,30 @@ const cellConfig = (reference, cellData = {}) => {
     // 返回处理好的单元格
     return readyData;
 }
+
+const cellNew = (span, row = {}) => {
+    return {
+        key: `cell-${Ux.randomString(8)}`,       // 默认的 key
+        span,                                           // 默认宽度
+        cellIndex: 0,                                   // 列索引
+        rowIndex: row.rowIndex,                         // 行索引
+        rowKey: row.key,                                // 行主键
+    }
+}
+const cellResume = (cell = {}, raft = {}, matrix = {}) => {
+    const key = `cell-${Ux.randomString(8)}`;
+    const config = Ux.clone(matrix);
+    config.key = key;
+    return Ux.configField(raft, cell, config);
+}
 export default {
+    cellNew,        // 创建新的单元格
+    cellResume,     // 恢复旧的单元格
+
     cellSpans,
     cellSpanMin,
     cellSpanMax,
     cellSpanDim,
-    cellNew,
     cellWidth,
     cellConfig,
 }

@@ -1,6 +1,8 @@
-import Parser from "./I.parser.up";
 import Value from "../../element";
 import Abs from "../../abyss";
+import Expr from '../expression';
+
+import Parser from "./I.parser.up";
 import {v4} from "uuid";
 import Apply from "./O.apply";
 
@@ -107,6 +109,21 @@ const aiExprFieldEx = (item = {}) => {
         const result = Value.valueLadder(item);
         applyField(result);
         item = result;
+    }
+    /*
+     * 特殊解析
+     * 解析 optionJsx.extension 节点
+     */
+    if (item.optionJsx && item.optionJsx.extension) {
+        if (Abs.isArray(item.optionJsx.extension)) {
+            const parsed = [];
+            item.optionJsx.extension
+                .map(each => Expr.aiExprOp(each))
+                .filter(each => undefined !== each)
+                .forEach(each => parsed.push(each));
+            // 解析替换处理
+            item.optionJsx.extension = parsed;
+        }
     }
     return item;
 };

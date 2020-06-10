@@ -1,4 +1,5 @@
 import Ux from 'ux';
+import Ld from './library';
 
 export default (config) => {
     const $config = Ux.clone(config);
@@ -15,6 +16,27 @@ export default (config) => {
         // options处理
         if (!formRef.options) {
             formRef.options = {window: formRef.window};
+        }
+    }
+    {
+        // 默认数据处理
+        if (Ux.isArray(formRef.ui) && 0 < formRef.ui.length) {
+            const $ui = [];
+            formRef.ui.forEach((uiRow, rowIndex) => {
+                const $uiRow = [];
+                uiRow.forEach((uiCell, cellIndex) => {
+                    const rowKey = `row-${Ux.randomString(8)}`
+                    const $uiCell = Ld.cellResume(uiCell, formRef,
+                        {
+                            rowKey,                     // 行主键
+                            rowIndex,                   // 行索引
+                            cellIndex,                  // 单元格索引
+                            columns: formRef.columns,   // 表单默认列数量
+                            length: uiRow.length        // 当前行的列数量
+                        });
+                    console.error($uiCell);
+                });
+            })
         }
     }
     return $config;

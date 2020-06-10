@@ -17,12 +17,13 @@ const configDesiger = (reference, config = {}) => {
  * @return {Object} 配置规范化完成后的Form数据。
  */
 const configField = (raft, cell = {}, config = {}) => {
-    let $cell = Abs.clone(cell);
+    /* 先解析 String */
+    let $cell;
     {
         /* 基础解析，解析 title 和 field */
         $cell = Expr.aiExprTitle(cell);
-        $cell = Expr.aiExprField(cell);
-        $cell = Expr.aiExprFieldEx(cell);
+        $cell = Expr.aiExprField($cell);
+        $cell = Expr.aiExprFieldEx($cell);
     }
     {
         /* 验证一条线 */
