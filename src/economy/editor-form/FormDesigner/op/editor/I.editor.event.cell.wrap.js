@@ -15,6 +15,18 @@ const toRow = (cells = []) => {
     }
 }
 
+const toRaft = (item = {}, columns) => {
+    const {raft, ...rest} = item;
+    if (raft.span !== item.span) {
+        raft.span = item.span;
+    }
+    Cmn.cellGrid(raft, {
+        ...rest,
+        columns, // : targetCells.length,
+    });
+    item.raft = raft;
+}
+
 export default (targetRef) => (fromItem, toItem) => {
     const {source} = fromItem;
     const sourceRef = Ux.onReference(source, 1);
@@ -71,6 +83,8 @@ export default (targetRef) => (fromItem, toItem) => {
             /*
              * 修改 sourceCells / targetCells
              */
+            toRaft(targetItem, sourceCells.length);
+            toRaft(sourceItem, targetCells.length);
             sourceCells[fromItem.cellIndex] = targetItem;
             targetCells[toItem.cellIndex] = sourceItem;
 

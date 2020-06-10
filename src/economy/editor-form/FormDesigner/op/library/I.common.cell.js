@@ -1,5 +1,5 @@
 import Ux from "ux";
-import cellConfig from './I.common.cell.config';
+import config from './I.common.cell.config';
 
 const cellSpans = (data = []) => data.map(cell => cell.span)
     .reduce((left, right) => left + right, 0);
@@ -93,5 +93,9 @@ export default {
     cellSpanMax,
     cellSpanDim,
     cellWidth,
-    cellConfig,
+
+    // 两个核心方法
+    // 1）cellGrid
+    // 2）cellConfig
+    ...config,
 }
