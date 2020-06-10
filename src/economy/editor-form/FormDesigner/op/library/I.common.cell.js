@@ -119,7 +119,10 @@ const cellResume = (cell = {}, raft = {}, matrix = {}) => {
     const key = `cell-${Ux.randomString(8)}`;
     const config = Ux.clone(matrix);
     config.key = key;
-    return Ux.configField(raft, cell, config);
+    /* 搭配设计专用信息 */
+    const $cell = Ux.configField(raft, cell, config);
+    $cell.config = config;
+    return $cell;
 }
 export default {
     cellNew,        // 创建新的单元格

@@ -9,16 +9,38 @@ const yiData = (reference, state = {}) => {
     const {data = {}} = reference.props;
     const span = 24 / data.columns;     // 计算列宽度
     state.$config = Ux.clone(data);     // 原始配置
-    
+
+    const $rows = [];
+    {
+        /* 处理 $rows */
+        if (data.ui && 0 < data.ui.length) {
+            data.ui.forEach(row => {
+                /* 行专用 key 提取 */
+                const rowKeySet = new Set();
+                row.map(cell => cell.config)
+                    .forEach(config => rowKeySet.add(config.rowKey));
+                const rowKeys = Array.from(rowKeySet);
+                const rowKey = rowKeys[0];
+                /* 行初始化 */
+                const rowReady = {};
+                rowReady.key = rowKey;
+                rowReady.data = Ux.clone(row);
+                $rows.push(rowReady);
+            });
+        } else {
+            $rows.push({
+                key,
+                /* 修改节点 */
+                data: [Cmn.cellNew(span, {
+                    rowIndex: 0,
+                    key,
+                })]
+            })
+        }
+    }
+
     /* 原始配置 */
-    state.$rows = [{
-        key,
-        /* 修改节点 */
-        data: [Cmn.cellNew(span, {
-            rowIndex: 0,
-            key,
-        })]
-    }];
+    state.$rows = $rows;
     return Ux.promise(state);
 }
 

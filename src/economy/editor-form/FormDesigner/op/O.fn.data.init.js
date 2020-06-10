@@ -24,8 +24,8 @@ export default (config) => {
             const $ui = [];
             formRef.ui.forEach((uiRow, rowIndex) => {
                 const $uiRow = [];
+                const rowKey = `row-${Ux.randomString(8)}`
                 uiRow.forEach((uiCell, cellIndex) => {
-                    const rowKey = `row-${Ux.randomString(8)}`
                     const $uiCell = Ld.cellResume(uiCell, formRef,
                         {
                             rowKey,                     // 行主键
@@ -34,9 +34,11 @@ export default (config) => {
                             columns: formRef.columns,   // 表单默认列数量
                             length: uiRow.length        // 当前行的列数量
                         });
-                    console.error($uiCell);
+                    $uiRow.push($uiCell);
                 });
-            })
+                $ui.push($uiRow);
+            });
+            formRef.ui = $ui;                           // 行替换
         }
     }
     return $config;
