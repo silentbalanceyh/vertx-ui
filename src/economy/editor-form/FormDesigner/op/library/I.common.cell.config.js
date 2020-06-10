@@ -82,7 +82,7 @@ export default {
                 ...matrix,
                 columns: matrix.length,
             })
-            
+
             if (!matrix.hasOwnProperty('span')) {
                 if (cell.span) {
                     matrix.span = cell.span;
@@ -112,14 +112,17 @@ export default {
                         ...rest,
                         columns: rest.length
                     })
-
                     readyData.raft = cell;
+                    readyData.render = render;
                 }
                 return readyData;
             } else {
                 /* 添加 */
                 const {data, render, ...rest} = cellData;
                 cell = _parseField(data, rest);
+                if (render && cell.render !== render) {
+                    cell.render = render;
+                }
                 if (render) {
                     const {data = []} = reference.props;
                     const length = _parseLen(data, cellData)
@@ -134,9 +137,6 @@ export default {
                     if (cellData.span) {
                         readyData.span = cellData.span;
                     }
-                    /*
-                     * 有 render 才证明组件已经拖拽到位置
-                     */
                     readyData.render = cell.render;
                 }
                 return readyData;

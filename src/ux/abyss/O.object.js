@@ -130,7 +130,13 @@ const merge = (original, newValue, field = "key") => {
         return merged;
     }
 }
+const denull = (data = {}) => {
+    const nullKeys = Object.keys(data).filter(key => null === data[key]);
+    nullKeys.forEach(nullKey => delete data[nullKey]);
+    return data;
+}
 export default {
+    denull,
     slice,
     sequence,
     merge,
