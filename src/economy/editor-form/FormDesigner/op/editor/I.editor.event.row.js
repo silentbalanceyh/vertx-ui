@@ -36,7 +36,11 @@ export default {
          */
         $rows = Ux.clone($rows);
         $rows = Ux.elementJoin($rows, rows);
-        reference.setState({$rows: $rows});
+        /*
+         * 旧代码：reference.setState({$rows: $rows});
+         * 由于此处调用 onUi 会直接更新父类，所以不用子类单独更新
+         * 直接使用父类驱动子类的更新流程更合适
+         */
         /*
          * 在父类中创建 $rows 变量
          */

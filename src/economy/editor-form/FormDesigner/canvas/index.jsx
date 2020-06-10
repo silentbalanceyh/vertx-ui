@@ -46,7 +46,6 @@ export default (reference) => {
     const {rxApi} = reference.props;
     attrs.rxApi = rxApi;
 
-    console.error(form.ui[0][0]);
     return (
         <div className={"canvas"}>
             <GridEditor {...attrs} reference={reference}/>
