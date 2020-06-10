@@ -126,10 +126,11 @@ const cellResume = (cell = {}, raft = {}, matrix = {}) => {
 
     /* 搭配设计专用信息 */
     const $cell = Ux.configField(raft, cell, config);
+
     cellData.raft = $cell;
     /* span 连接 */
     cellData.span = $cell.span;
-
+    cellData.render = $cell.render;     // 渲染基础
     return cellData;
 }
 export default {

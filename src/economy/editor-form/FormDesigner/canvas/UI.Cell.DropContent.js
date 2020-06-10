@@ -61,7 +61,6 @@ class Component extends React.PureComponent {
 
         const ref = Ux.onReference(this, 1);
         const message = Ux.fromHoc(ref, "message");
-
         return connectDropTarget(
             <div className={`content-drop ${$hover ? "content-drop-hover" : ""}`}>
                 {(() => {

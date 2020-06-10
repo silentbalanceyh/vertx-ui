@@ -2,9 +2,6 @@ import Abs from '../../abyss';
 import Expr from '../expression';
 import Raft from '../raft';
 
-const configDesiger = (reference, config = {}) => {
-
-}
 /**
  * ## 引擎函数
  *
@@ -49,14 +46,17 @@ const configField = (raft, cell = {}, config = {}) => {
             addOn,
         }
         $cell = Raft.raftColumn(raft, Abs.clone(params));
+        /* 补充 render 数据信息 */
     }
     {
         /* 特殊操作 */
         Raft.raftSpecial($cell);
     }
+    if (!$cell.render) {
+        $cell.render = "aiInput";
+    }
     return $cell;
 }
 export default {
-    configDesiger,
     configField,
 }
