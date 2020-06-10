@@ -31,9 +31,6 @@ export default {
      * 数据合并专用函数
      */
     rxDataRequest: (reference) => {
-        /* 旧数据 */
-        const {raft = {}, $ui} = reference.state;
 
-        return {};
     }
 }

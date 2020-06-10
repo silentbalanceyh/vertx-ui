@@ -1,5 +1,6 @@
 import Ux from "ux";
 import Cmn from '../library';
+import Rft from '../O.raft.event';
 
 export default {
 
@@ -41,7 +42,7 @@ export default {
          */
         const ref = Ux.onReference(reference, 1);
         if (ref) {
-            ref.setState({$ui: $rows});
+            Rft.raft(ref).onUi($rows);
         }
     },
     rxRowAdd: (reference) => (rowIndex) => {

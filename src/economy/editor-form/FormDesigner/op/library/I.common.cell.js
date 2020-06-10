@@ -122,7 +122,7 @@ const cellResume = (cell = {}, raft = {}, matrix = {}) => {
     config.key = key;
 
     const cellData = Ux.clone(config);
-    cellData.data = cell;
+    // cellData.data = cell;    去掉原始节点，只保留 raft 节点
 
     /* 搭配设计专用信息 */
     const $cell = Ux.configField(raft, cell, config);
