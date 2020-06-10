@@ -93,7 +93,7 @@ export default {
     control: (reference) => {
         const {config = {}, rxApi} = reference.props;
         const {data = {}, ...rest} = config;
-        const $inited = Op.dataIn(data, reference);
+        const $inited = Op.dataIn(reference)(config);
         if ($inited.render) {
             const Component = UiElement[$inited.render];
             if (Component) {

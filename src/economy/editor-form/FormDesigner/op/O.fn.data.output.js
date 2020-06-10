@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import St from './submit';
+import St from './out';
 /*
  *
  * field,           // 字段名

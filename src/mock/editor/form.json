@@ -16,7 +16,7 @@
             ]
         ],
         "hidden": [
-            "username"
+            "username1"
         ],
         "op": {
             "$opAdd": "act.category.add"

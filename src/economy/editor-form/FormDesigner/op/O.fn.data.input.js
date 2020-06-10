@@ -1,19 +1,23 @@
-import Ux from "ux";
+import St from './in';
 
-export default (data = {}, reference) => {
-    const $data = reference.props.data;
-    const message = Ux.fromHoc(reference, "message");
-    const {optionItem = {}} = data;
+const $opDataIn = (normalized = {}, params, reference) => {
+    /*
+     * field                        -> field
+     * optionItem.label             -> label
+     * optionItem.style.width       -> width
+     * optionJsx.placeholder        -> placeholder
+     */
+    St.dataField(normalized, params);
+    return normalized;
+}
+
+export default (reference) => (config = {}) => {
     /* 初始化 */
     const $inited = {};
-    {
-        // 外层输入的标签信息
-        if (optionItem.label &&
-            message.label !== optionItem.label) {
-            $inited.label = optionItem.label;
-        }
-        $inited.render = $data.render;  // 当前 render
-        $inited.allowClear = false;     // 不允许清空
-    }
-    return $inited;
+    const {data = {}} = reference.props;
+    /* 最终值 */
+    const response = $opDataIn($inited, data, reference);
+    /* render 必须值 */
+    response.render = config.render;
+    return response;
 }
