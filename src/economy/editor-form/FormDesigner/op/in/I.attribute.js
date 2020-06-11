@@ -13,5 +13,19 @@ export default {
         } else {
             normalized.field = Ux.valuePath(data, "field");
         }
+    },
+    dataBasic: (normalized = {}, data = {}) => {
+        /* */
+        normalized.readOnly = Ux.valuePath(data, "optionJsx.readOnly");
+        normalized.inscribe = Ux.valuePath(data, "optionJsx.inscribe");
+        normalized.allowClear = Ux.valuePath(data, "optionJsx.allowClear");
+        normalized.maxLength = Ux.valuePath(data, "optionJsx.maxLength");
+        normalized.expr = Ux.valuePath(data, "optionJsx.config.expr");
+    },
+    dataAdorn: (normalized = {}, data = {}) => {
+        normalized.suffix = Ux.valuePath(data, "optionJsx.suffix");
+        normalized.prefix = Ux.valuePath(data, "optionJsx.prefix");
+        normalized.addonBefore = Ux.valuePath(data, "optionJsx.addonBefore");
+        normalized.addonAfter = Ux.valuePath(data, "optionJsx.addonAfter");
     }
 }

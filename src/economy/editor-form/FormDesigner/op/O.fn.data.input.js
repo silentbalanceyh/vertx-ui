@@ -9,6 +9,25 @@ const $opDataIn = (normalized = {}, params, reference) => {
      * optionJsx.placeholder        -> placeholder
      */
     St.dataField(normalized, params);
+    /*
+     * optionJsx.readOnly           -> readOnly
+     * optionJsx.inscribe           -> inscribe
+     * optionJsx.allowClear         -> allowClear
+     * optionJsx.maxLength          -> maxLength
+     * optionJsx.config.expr        -> expr
+     */
+    St.dataBasic(normalized, params);
+    /*
+     * optionJsx.suffix             -> suffix
+     * optionJsx.prefix             -> prefix
+     * optionJsx.addonBefore        -> addonBefore
+     * optionJsx.addonAfter         -> addonAfter
+     */
+    St.dataAdorn(normalized, params);
+    /*
+     *
+     */
+    St.dataNorm(normalized, params);
     /* 去空操作 */
     Ux.denull(normalized);
     return normalized;

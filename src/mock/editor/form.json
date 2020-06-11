@@ -3,12 +3,12 @@
         "ui": [
             [
                 {
-                    "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=text:40",
+                    "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=integer:10",
                     "optionConfig.rules": [
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
-                "password,密码"
+                "password,密码,,,,readOnly=true"
             ],
             [
                 "username1,用户名A",
