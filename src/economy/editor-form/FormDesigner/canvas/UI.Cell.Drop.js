@@ -1,31 +1,15 @@
 import React from "react";
-import {Input} from "antd";
-import Ux from "ux";
 import Rdr from "../component";
 import {DropTarget} from "react-dnd";
 import Op from "../op";
 import Image from "../images";
+import {Tag} from 'antd';
 
 const configCellCmd = {
     // 最外层 Css
     className: "c-command",
     // Tooltip
     placement: "top",
-}
-
-const renderLabel = (ref) => {
-    const inputAttrs = {};
-    const {reference, data = {}} = ref.props;
-    const message = Ux.fromHoc(reference, "message");
-    if (data.render) {
-        inputAttrs.onBlur = Op.rxCellLabel(ref, message.label);
-        inputAttrs.placeholder = message.label;
-    } else {
-        inputAttrs.disabled = true;
-    }
-    return (
-        <Input {...inputAttrs}/>
-    )
 }
 
 class Component extends React.PureComponent {
@@ -48,10 +32,20 @@ class Component extends React.PureComponent {
         const {$hover = false} = this.state;
         return connectDropTarget(
             <div className={`content-tool ${$hover ? "content-tool-hover" : ""}`}>
-                {renderLabel(this)}
-                <div className={"dropped"}>
+                <div className={"ant-input dropped"}>
                     {data.render ? (
-                        <img src={Image[data.render]} alt={data.render}/>
+                        <div>
+                            {(() => {
+                                const {$palette = {}} = this.props;
+                                const text = $palette[data.render];
+                                return (
+                                    <Tag>
+                                        {text}
+                                    </Tag>
+                                );
+                            })()}
+                            <img src={Image[data.render]} alt={data.render}/>
+                        </div>
                     ) : false}
                 </div>
                 {Rdr.renderCmds(reference, {

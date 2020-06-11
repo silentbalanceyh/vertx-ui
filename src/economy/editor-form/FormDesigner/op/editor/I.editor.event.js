@@ -1,6 +1,8 @@
 import Ux from "ux";
 import CellEvent from './I.editor.event.cell';
 import RowEvent from './I.editor.event.row';
+import {Dsl} from 'entity';
+import Ld from '../library';
 
 export default {
     ...RowEvent,
@@ -18,6 +20,20 @@ export default {
             $visible: false,         // 打开 窗口
             $forbidden: false,       // 禁止屏幕主操作
         })
+    },
+    rxModelSave: (reference) => (attribute = {}) => {
+        let {$models = {}} = reference.state;
+        if (!Ux.isArray($models.attributes)) {
+            $models.attributes = [];
+        }
+        /* 数据处理 */
+        const attr = Dsl.getArray($models.attributes);
+        attr.saveElement(attribute);
+        $models = Ux.clone($models);
+        $models.attributes = attr.to();
+        /* 处理 $models 更新 */
+        const state = Ux.clone(reference.state);
+        Ld.yiModel(state, $models).then(processed => reference.setState(processed));
     },
     rxDataSave: (reference) => (updated = {}) => {
         let {raft} = reference.state;

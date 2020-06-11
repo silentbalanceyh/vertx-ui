@@ -20,7 +20,7 @@ export default {
         rowConfig.span = 24 / data.columns;     // 计算列宽度
         rowConfig.columns = data.columns;          // 网格数据
         // 表单配置传入
-        const {rxApi} = reference.props;
+        const {rxApi, rxModelSave, $palette = {}} = reference.props;
         return {
             ...Ux.onUniform(reference.props),
             reference,          /* 顶层引用 */
@@ -28,7 +28,9 @@ export default {
             data: row.data,     // 后期要使用
             key: row.key,
             $form: data,        // 表单配置
+            $palette,           // 类型信息
             rxApi,              // Api 读取器
+            rxModelSave,        // 模型更新
         };
     },
     yoCell: (reference, cell, config = {}) => {
@@ -37,7 +39,7 @@ export default {
         /* 单元格交换函数 */
         const {raft = {}, render, ...rest} = cell;
 
-        const {rxApi} = reference.props;
+        const {rxApi, rxModelSave, $palette = {}} = reference.props;
         return {
             ...Ux.onUniform(reference.props),
             config: {
@@ -52,7 +54,9 @@ export default {
             },
             key: cell.key,
             $status,
+            $palette,
             rxApi,
+            rxModelSave,
         };
     },
     yoExtra: (reference) => {

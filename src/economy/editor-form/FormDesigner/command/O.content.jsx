@@ -91,7 +91,7 @@ export default {
     },
     /* 列操作 */
     control: (reference) => {
-        const {config = {}, rxApi} = reference.props;
+        const {config = {}, rxApi, rxModelSave} = reference.props;
         const {data = {}, ...rest} = config;
         const $inited = Op.dataIn(reference)(config);
         if ($inited.render) {
@@ -102,6 +102,7 @@ export default {
                     <Component {...Ux.onUniform(reference.props)}
                                config={rest}
                                rxApi={rxApi}
+                               rxModelSave={rxModelSave}
                                rxCellConfig={params => {
                                    /* 当前层数据处理 */
                                    reference.setState({
