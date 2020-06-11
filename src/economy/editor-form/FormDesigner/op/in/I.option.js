@@ -35,13 +35,11 @@ export default {
                     })
                 }
                 normalized.items = options;
-
             }
             // 动态数据源
             else {
                 dataDatum(normalized, data);
             }
-
         }
     },
     dataDatum,
