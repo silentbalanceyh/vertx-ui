@@ -75,6 +75,7 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
     /*
      * 联动规则
      * {
+     *      "dependEnabled": true | false,
      *      "dependField": "x",
      *      "dependType": "x",
      *      "dependBoolean": "x",

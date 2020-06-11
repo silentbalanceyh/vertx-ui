@@ -34,6 +34,17 @@ const $opDataIn = (normalized = {}, params, reference) => {
      * optionJsx.depend.impact.reset      -> impactReset
      */
     St.dataImpact(normalized, params);
+    /*
+     * optionJsx.depend.enabled         -> dependEnabled
+     *                                  -> dependField
+     *                                  -> dependType
+     *                                  -> dependBoolean
+     *                                  -> dependEnum
+     *                                  -> dependSource
+     *                                  -> dependCondition
+     *                                  -> dependValue
+     */
+    St.dataEnabled(normalized, params);
     /* 去空操作 */
     Ux.denull(normalized);
     return normalized;
