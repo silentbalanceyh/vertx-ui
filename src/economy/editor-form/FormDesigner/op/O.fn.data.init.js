@@ -41,6 +41,5 @@ export default (config) => {
             formRef.ui = $ui;                           // 行替换
         }
     }
-    console.info(formRef);
     return {form: formRef};
 }

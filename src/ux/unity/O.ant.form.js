@@ -71,7 +71,7 @@ const formRead = (reference, data = {}) => {
  */
 const formGet = (reference, key) => {
     const {form} = reference.props;
-    E.fxTerminal(!form, 10020, form);
+    // E.fxTerminal(!form, 10020, form);
     if (form) {
         let data = form.getFieldsValue();
         data = Abs.clone(data);

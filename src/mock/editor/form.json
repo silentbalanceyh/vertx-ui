@@ -164,6 +164,36 @@
                     "span": 8,
                     "render": "aiSelect"
                 }
+            ],
+            [
+                {
+                    "optionJsx": {
+                        "config": {
+                            "linker": {
+                                "name1": "username1",
+                                "name2": "username2"
+                            }
+                        }
+                    },
+                    "optionItem": {
+                        "label": "标签信息",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 9
+                        },
+                        "wrapperCol": {
+                            "span": 15
+                        }
+                    },
+                    "optionConfig": {},
+                    "field": "environment",
+                    "render": "aiListSelector",
+                    "span": 8
+                }
             ]
         ],
         "hidden": [

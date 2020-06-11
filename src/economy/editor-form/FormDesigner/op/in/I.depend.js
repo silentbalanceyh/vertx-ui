@@ -21,8 +21,16 @@ export default {
          * linker触发器
          */
         const linker = Ux.valuePath(data, "optionJsx.config.linker");
-        if (Ux.isObject(linker)) {
-
+        if (!Ux.isEmpty(linker)) {
+            const linkerData = [];
+            Object.keys(linker).forEach(key => {
+                const itemData = {};
+                itemData.key = Ux.randomUUID();
+                itemData.dataFrom = key;
+                itemData.dataTo = linker[key];
+                linkerData.push(itemData);
+            });
+            normalized.linker = linkerData;
         }
     }
 }
