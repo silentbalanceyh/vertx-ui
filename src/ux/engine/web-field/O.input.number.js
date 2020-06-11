@@ -7,7 +7,25 @@ const aiInputNumber = (reference, jsx = {}, onChange) => {
     R.Ant.onChange(jsx, onChange);
     // ReadOnly处理
     R.Ant.onReadOnly(jsx, false, reference);
-    return (<InputNumber {...jsx}/>);
+    // numeric 配置
+    const {numeric = {}, ...rest} = jsx;
+    if (numeric.percent) {
+        rest.formatter = value => `${value}%`;
+        rest.parser = value => value.replace(`%`, '');
+    } else {
+        // 输入单位
+        if (numeric.unit) {
+            if (numeric.unitPosition) {
+                // 右侧
+                rest.formatter = value => `${value} ${numeric.unit}`;
+            } else {
+                // 左侧
+                rest.formatter = value => `${numeric.unit} ${value}`;
+            }
+            rest.parser = value => value.replace(numeric.unit, "");
+        }
+    }
+    return (<InputNumber {...rest}/>);
 };
 
 const ai2InputNumber = (onChange) => (reference, jsx = {}) => {

@@ -14,24 +14,17 @@ const dataInputNumber = (normalized = {}, params = {}) => {
     // 步进系数 / 精度
     dataJsx(normalized, params, 'step');
     dataJsx(normalized, params, "precision");
-    // 常用格式
-    if ("PERCENT" === params.numberMode) {
-        /* 百分比 */
-        normalized.optionJsx.formatter = value => `${value}%`;
-        normalized.optionJsx.parser = value => value.replace(`%`, '');
-    } else {
-        /* 货币处理，必须输入货币单位 */
-        if (params.numberUnit) {
-            /* 左右区别 */
-            if (params.numberUnitPosition) {
-                /* 右侧 */
-                normalized.optionJsx.formatter = value => `${value} ${params.numberUnit}`;
-            } else {
-                /* 左侧 */
-                normalized.optionJsx.formatter = value => `${params.numberUnit} ${value}`;
-            }
-            normalized.optionJsx.parser = value => value.replace(params.numberUnit, "");
+    if (params.hasOwnProperty("numberMode")) {
+        // 常用格式
+        const numeric = {};
+        if ("PERCENT" === params.numberMode) {
+            numeric.percent = true;
+        } else {
+            numeric.percent = false;
+            numeric.unit = params.numberMode;
+            numeric.unitPosition = params.numberUnitPosition;
         }
+        normalized.optionJsx.numeric = numeric;
     }
 }
 const dataTextArea = (normalized = {}, params = {}) => {

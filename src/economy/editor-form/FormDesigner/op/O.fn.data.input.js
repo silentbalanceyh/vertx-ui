@@ -52,6 +52,12 @@ const $opDataIn = (normalized = {}, params, reference) => {
      * 2）其他规则
      */
     St.dataRules(normalized, params);
+    /*
+     * 特殊属性
+     * 1）密码框
+     * optionJsx.visibilityToggle         -> visibilityToggle
+     */
+    St.dataComponent(normalized, params);
     /* 去空操作 */
     Ux.denull(normalized);
     return normalized;
