@@ -79,7 +79,7 @@
                                         },
                                         {
                                             "metadata": "dependField,依赖字段,16,,aiSelect,placeholder=（不可设置为当前字段）",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "dependEnabled": true
                                             }
@@ -128,7 +128,7 @@
                                     [
                                         {
                                             "metadata": "dependSource,数据源标识,,,aiSelect,placeholder=辅助数据源中配置",
-                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name",
+                                            "optionJsx.config.datum": "source=model.sources,value=key,label=name",
                                             "optionJsx.depend.enabled": {
                                                 "dependType": [
                                                     "DATUM"
@@ -181,7 +181,10 @@
                                         "label,标签/标题,,,,placeholder=<标签>",
                                         {
                                             "metadata": "field,字段名,,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
+                                            "optionConfig.rules": [
+                                                "required,字段名不可为空，请选择！"
+                                            ]
                                         }
                                     ],
                                     [
@@ -221,6 +224,16 @@
                                     ],
                                     [
                                         "title=表格列设置"
+                                    ],
+                                    [
+                                        "tableKeyField,主键字段名",
+                                        {
+                                            "metadata": "tableFormat,默认格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "ARRAY,数组",
+                                                "OBJECT,记录"
+                                            ]
+                                        }
                                     ],
                                     [
                                         {

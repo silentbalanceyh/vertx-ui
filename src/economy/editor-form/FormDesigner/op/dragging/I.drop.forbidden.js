@@ -13,7 +13,7 @@ const fnForbidden = (component, key) => {
 const executor = {
     "aiAction": (props, component) => {
         const {config = {}} = props;
-        if (24 === config.span) {
+        if (12 < config.span) {
             return true;
         } else {
             return fnForbidden(component, 'aiAction');

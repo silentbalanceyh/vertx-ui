@@ -8,9 +8,32 @@ import ParamInput from "../../ParamInput/UI";
 import DatumUnique from '../../DatumUnique/UI';
 
 import LoadingContent from "../../../loading/LoadingContent/UI";
+import {Divider, Icon} from "antd";
+
+const jsxFieldDialog = (reference) => {
+    const {$dialogField} = reference.state;
+    console.info($dialogField);
+    return false;
+}
 
 const field = (reference, jsx) => {
     Op.Setting.field(reference, jsx);
+    const {$itemAdd = {}} = reference.props;
+    jsx.dropdownClassName = "web-form-designer-dropdown";
+    jsx.dropdownRender = menu => (
+        <div>
+            <div className={"item-select"}>
+                {menu}
+            </div>
+            <Divider style={{margin: '2px 0'}}/>
+            <div className={"item-add"}
+                 onMouseDown={event => event.preventDefault()}
+                 onClick={Op.rxCellField(reference)}>
+                <Icon type={"plus"}/>&nbsp;&nbsp;{$itemAdd.text}
+            </div>
+            {jsxFieldDialog(reference)}
+        </div>
+    )
     return Ux.aiSelect(reference, jsx);
 };
 const render = (reference, jsx) => {
@@ -39,7 +62,16 @@ export default {
         }).then(raft => {
             state.raft = raft;
             // Action 提交专用配置
-            state.$op = Op.actions;
+            state.$op = {
+                // 保存配置专用
+                $opSaveSetting: Op.dataOut,
+            };
+            // 字段专用窗口
+            const {$itemAdd} = reference.props;
+            if ($itemAdd && $itemAdd.window) {
+                // const $config = Ux.configDialog(reference, $itemAdd.window);
+                state.$dialogField = Ux.configDialog(reference, $itemAdd.window)
+            }
             return Ux.promise(state);
         }).then(Ux.ready).then(Ux.pipe(reference));
     },

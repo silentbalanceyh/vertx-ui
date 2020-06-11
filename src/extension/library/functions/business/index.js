@@ -4,6 +4,7 @@ import init from './init';
 import bind from './bind';
 import relation from './relation';
 import Job from './job';
+import Api from './api';
 
 export default {
     /*
@@ -13,6 +14,7 @@ export default {
     dialog,
     init,
     ...Job,
+    ...Api,
 
     ...relation,
     ...bind,

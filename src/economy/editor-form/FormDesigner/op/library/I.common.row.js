@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import {Dsl} from 'entity';
 import Cl from './I.common.cell';
+import Rft from "../O.raft.event";
 /*
  * reference 引用的是 Row
  */
@@ -25,7 +26,10 @@ export default {
         const normalized = [];
         data.forEach(each => {
             const changed = Ux.clone(each);
-            const cellData = Cl.cellConfig(reference, changed);
+            const cellData = Cl.cellConfig(reference, {
+                ...changed,
+                length: data.length,        // 长度处理
+            });
             normalized.push(cellData);
         });
         const {config = {}} = reference.props;
@@ -33,6 +37,15 @@ export default {
         rowConfig.key = config.key;
         rowConfig.data = normalized;
         Ux.fn(reference).rxRowConfig([rowConfig]);
+    },
+    rowsRefresh: (reference, $rows = []) => {
+        /*
+         * 在父类中创建 $rows 变量
+         */
+        const ref = Ux.onReference(reference, 1);
+        if (ref) {
+            Rft.raft(ref).onUi($rows);
+        }
     },
     rowSave
 }

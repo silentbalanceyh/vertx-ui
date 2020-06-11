@@ -1,0 +1,46 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "className": "web-form-designer-import",
+        "ui": [
+            [
+                {
+                    "title": "导入说明",
+                    "config": {
+                        "message": "关于`导入`",
+                        "description": [
+                            "导入主要用于加载外部Json进行纯客户端表单编辑！",
+                            "导入过后的表单调整可直接通过`导出`生成新的Json文件！"
+                        ],
+                        "type": "success"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "upload,,24",
+                    "optionJsx.config": {
+                        "button": "上传配置文件"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveImport,保存,SUBMIT,primary"
+                    ],
+                    "hidden": true
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "empty": "请上传配置文件，再导入该配置！",
+            "format": "文件格式非法，不符合 JSON 配置格式！",
+            "form": "上传基础格式错误，请传入带 `_form` 节点的表单配置！"
+        }
+    }
+}

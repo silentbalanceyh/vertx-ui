@@ -11,6 +11,10 @@ class Component extends React.PureComponent {
         Op.yiGrid(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Op.yuGrid(this, {props: prevProps, state: prevState});
+    }
+
     render() {
         return Ux.xtReady(this, () => {
             /* 行处理，每一行会包含 一个 RowEditor */

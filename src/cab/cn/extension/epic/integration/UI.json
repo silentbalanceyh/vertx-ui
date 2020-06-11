@@ -1,17 +1,64 @@
 {
-    "_page": {
-        "title": "集成管理",
-        "back": {
-            "state": {
-                "status.submitting": null
+    "_tabs": {
+        "activeKey": "tabAPI",
+        "type": "card",
+        "items": [
+            {
+                "tab": "接口列表",
+                "key": "tabAPI",
+                "closable": false
             }
+        ],
+        "dynamic": {
+            "tab": "编辑接口",
+            "key": "tabAPIEdit"
         }
     },
-    "_tabs": {
-        "className": "ex-tabs-tab-block",
-        "size": "small",
-        "tabPosition": "left",
-        "defaultActiveKey": "tabApi",
-        "items": "接口管理,tabApi,api;服务管理,tabService,setting"
+    "_extra": [
+        "opSave,保存,$opSave,primary,save",
+        "opReset,重置,$opReset,,redo"
+    ],
+    "_assert": {
+    },
+    "_alert": {
+        "message": "接口管理",
+        "description": [
+            "您可以按模型来过过滤您要管理的接口。",
+            "请在管理员的协同下编辑具体接口的详细配置。"
+        ]
+    },
+    "_pagination": {
+        "pager": {
+            "page": 1,
+            "size": 10
+        },
+        "total": "当前记录总数:count"
+    },
+    "_toolbar": {
+        "edit": {
+            "text": "编辑",
+            "icon": "edit",
+            "type": "primary"
+        }
+    },
+    "_tool": {
+        "search": {
+            "placeholder": "URI"
+        }
+    },
+    "_table": {
+        "columns": [
+            "name,接口名称",
+            {
+                "metadata": "method,HTTP方法,MAPPING",
+                "$mapping": {
+                    "GET": "GET,calendar,,#228B22",
+                    "PUT": "PUT,calendar,,#228B22",
+                    "POST": "POST,calendar,,#228B22",
+                    "DELETE": "DELETE,thunderbolt,,#D02090"
+                }
+            },
+            "uri,URI"
+        ]
     }
 }

@@ -1,0 +1,43 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "fieldData,测试组件,,,aiTableEditor",
+                    "optionJsx.config": {
+                        "format": {
+                            "type": "ARRAY",
+                            "keyField": "name"
+                        },
+                        "table": {
+                            "columns": [
+                                {
+                                    "dataIndex": "name",
+                                    "title": "固定值",
+                                    "$render": "EDITOR"
+                                },
+                                {
+                                    "dataIndex": "label",
+                                    "title": "显示字段",
+                                    "$render": "EDITOR"
+                                }
+                            ]
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    }
+}

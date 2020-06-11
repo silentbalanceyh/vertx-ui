@@ -11,7 +11,28 @@ import UiSettingRow from '../control/Web.Setting.Row';
 
 import UiElement from '../element';
 
+import UiExport from '../control/Web.Final.Export';
+import UiImport from '../control/Web.Final.Import';
+import UiPreview from '../control/Web.Final.Preview';
+
 export default {
+    import: (reference) => {
+        return (
+            <UiImport reference={reference}
+                      rxSubmit={Op.rxDataSave(reference)}/>
+        )
+    },
+    preview: (reference) => {
+        const data = Op.rxDataRequest(reference);
+        return (
+            <UiPreview reference={reference} data={data}
+                       rxSubmit={Op.rxDataSave(reference)}/>
+        )
+    },
+    export: (reference) => {
+        return (<UiExport reference={reference}
+                          rxClose={Op.rxWindowClose(reference)}/>)
+    },
     layout: (reference) => {
         return (<UiLayout reference={reference}/>)
     },
@@ -72,13 +93,24 @@ export default {
     control: (reference) => {
         const {config = {}, rxApi} = reference.props;
         const {data = {}, ...rest} = config;
-        const $inited = Op.dataIn(data, reference);
+        const $inited = Op.dataIn(reference)(config);
         if ($inited.render) {
             const Component = UiElement[$inited.render];
+            const selection = Ux.fromHoc(reference, "selection");
             if (Component) {
                 return (
                     <Component {...Ux.onUniform(reference.props)}
-                               config={rest} rxApi={rxApi}
+                               config={rest}
+                               rxApi={rxApi}
+                               rxCellConfig={params => {
+                                   /* 当前层数据处理 */
+                                   reference.setState({
+                                       $drawer: undefined,
+                                       $setting: undefined
+                                   });
+                                   Ux.fn(reference).rxCellConfig(params);
+                               }}
+                               $itemAdd={selection}
                                $inited={$inited}/>
                 )
             } else {

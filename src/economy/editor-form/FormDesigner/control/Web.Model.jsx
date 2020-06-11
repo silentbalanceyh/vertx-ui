@@ -15,6 +15,10 @@ class Component extends React.PureComponent {
         const {table = {}} = config;
         const $table = Ux.clone(table);
         $table.columns = Ux.configColumn(this, $table.columns);
+        $table.pagination = {
+            size: "small",
+            pageSize: 10,
+        }
         return (
             <div className={"viewer-model"}>
                 <Row className={"row"}>

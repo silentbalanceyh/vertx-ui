@@ -22,7 +22,6 @@ const targetSpec = {
             // 关闭覆盖效果
             const {reference} = component.props;
             Cmd.dropColor(reference, false);
-
             Ux.fn(component).rxCellWrap(sourceItem, targetItem);
         }
     },

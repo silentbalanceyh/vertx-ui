@@ -3,24 +3,60 @@ import Ux from 'ux';
 import event from './I.editor.event';
 import yo from './I.editor.yo';
 
+const yiRows = (reference, data) => {
+    const $rows = [];
+    /* 处理 $rows */
+    if (data.ui && 0 < data.ui.length) {
+        data.ui.forEach(row => {
+            /* 行专用 key 提取 */
+            const rowKeySet = new Set();
+            row.forEach(config => rowKeySet.add(config.rowKey));
+            const rowKeys = Array.from(rowKeySet);
+            let rowKey = rowKeys[0];
+            /* 如果该行属于新的一行，则需要重设 rowKey */
+            if (!rowKey) {
+                rowKey = `row-${Ux.randomString(8)}`;
+            }
+            /* 行初始化 */
+            const rowReady = {};
+            rowReady.key = rowKey;
+            rowReady.data = Ux.clone(row);
+            $rows.push(rowReady);
+        });
+    } else {
+        const key = `row-${Ux.randomString(8)}`;
+        const span = 24 / data.columns;     // 计算列宽度
+        $rows.push({
+            key,
+            /* 修改节点 */
+            data: [Cmn.cellNew(span, {
+                rowIndex: 0,
+                key,
+            })]
+        })
+    }
+    return $rows;
+}
+
 const yiData = (reference, state = {}) => {
     /* 初始化行专用操作 */
-    const key = `row-${Ux.randomString(8)}`;
     const {data = {}} = reference.props;
-    const span = 24 / data.columns;     // 计算列宽度
     state.$config = Ux.clone(data);     // 原始配置
-    state.$rows = [{
-        key,
-        /* 修改节点 */
-        data: [Cmn.cellNew(span, {
-            rowIndex: 0,
-            key,
-        })]
-    }];
+    /* 原始配置 */
+    state.$rows = yiRows(reference, data);
     return Ux.promise(state);
 }
 
 export default {
+    yuGrid: (reference, virtualRef) => {
+        const current = reference.props.data;
+        const previous = virtualRef.props.data;
+        if (Ux.isDiff(current, previous)) {
+            // 父类更新
+            const $rows = yiRows(reference, current);
+            reference.setState({$rows});
+        }
+    },
     /*
      * 网格初始化
      */

@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import actions from './O.fn.submit';
 
 const rxSpinOff = (reference) => (event) => {
     Ux.prevent(event);
@@ -85,8 +84,19 @@ const onCallback = (reference) => ($raft) => {
         $popover: undefined,   // 将所有的 popover 全部关闭
     });
 }
+const onUi = (raft = {}, params) => {
+    if (Ux.isArray(params)) {
+        const {form} = raft;
+        /* 计算 rowKey */
+        if (form.ui) {
+            form.ui = params
+                .map(item => item.data)
+                .filter(Ux.isArray);
+        }
+    }
+    return raft;
+}
 export default {
-    actions,
     rxSpinOff,
     raft: (reference) => ({
         onLayout: (params) => onRaft(reference, (raft) => onLayout(raft, params))
@@ -96,6 +106,8 @@ export default {
         onAssist: (params) => onRaft(reference, (raft) => onAssist(raft, params))
             .then(raft => reference.setState({raft})),
         onInit: (params) => onRaft(reference, (raft) => onInit(raft, params))
+            .then(raft => reference.setState({raft})),
+        onUi: (params) => onRaft(reference, (raft) => onUi(raft, params))
             .then(raft => reference.setState({raft}))
     })
 }

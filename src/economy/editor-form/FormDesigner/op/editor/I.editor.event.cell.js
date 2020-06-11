@@ -79,7 +79,6 @@ export default {
         /* 直接添加一个新的单元格 */
         const $data = Ux.clone(data);
         // 行操作，直接追加
-
         $data.push(cell);
         $data.forEach((item, index) => item.cellIndex = index);
         Cmn.rowRefresh(reference, $data);
@@ -105,5 +104,8 @@ export default {
             cellIndex: config.cellIndex,
         };
         reference.setState(state);
+    },
+    rxCellField: (reference) => (event) => {
+        reference.setState({$visible: true});
     }
 }

@@ -8,6 +8,13 @@ const showPopover = (reference, item) => {
         $popover: item.key,  // 打开 Popover
     });
 }
+const showWindow = (reference, item) => {
+    reference.setState({
+        $window: item.key,      // 关联窗口 id
+        $visible: true,         // 打开 窗口
+        $forbidden: true,       // 禁止屏幕主操作
+    });
+}
 const showRowDrawer = (reference, item, config = {}) => {
     let {rowIndex} = config;
     reference.setState({
@@ -68,7 +75,19 @@ const cellFill = (reference, item, config) => {
 const cellAdd = (reference) => {
     Op.rxCellAdd(reference)();
 }
+const rxSubmit = (reference) => {
+    /* 调用上层提交函数 */
+    const request = Op.rxDataRequest(reference);
+    Ux.fn(reference).rxSubmit(request);
+}
 export default {
+    // 提交函数
+    save: rxSubmit,
+    // 主操作
+    export: showWindow,
+    import: showWindow,
+    preview: showWindow,
+
     layout: showPopover,
     "deployment-unit": showPopover,
     "eye-invisible": showPopover,

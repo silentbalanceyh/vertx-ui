@@ -58,10 +58,10 @@
                                         "title=常用属性"
                                     ],
                                     [
-                                        "label,标签/标题,,,,placeholder=<标题>",
+                                        "label,标签/标题,,,,placeholder=<标题>,readOnly=true",
                                         {
                                             "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=$button",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display"
                                         }
                                     ],
                                     [
@@ -164,10 +164,10 @@
                                                 ]
                                             },
                                             "optionJsx.config.items": [
-                                                "RED,红",
-                                                "GREEN,绿",
-                                                "SPEC,桃红",
-                                                "BROWN,棕色"
+                                                "ux-red,红",
+                                                "ux-success,绿",
+                                                "ux-spec,桃红",
+                                                "ux-brown,棕色"
                                             ]
                                         }
                                     ],
@@ -374,10 +374,10 @@
                                                 ]
                                             },
                                             "optionJsx.config.items": [
-                                                "RED,红",
-                                                "GREEN,绿",
-                                                "SPEC,桃红",
-                                                "BROWN,棕色"
+                                                "ux-red,红",
+                                                "ux-success,绿",
+                                                "ux-spec,桃红",
+                                                "ux-brown,棕色"
                                             ]
                                         }
                                     ],

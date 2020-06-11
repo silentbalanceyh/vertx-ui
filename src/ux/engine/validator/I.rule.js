@@ -13,8 +13,8 @@ const before = (value, to) => {
 };
 const less = (value, to) => value < to;
 const lessOr = (value, to) => value <= to;
-const greater = (value, to) => value > to;
-const greaterOr = (value, to) => value >= to;
+const great = (value, to) => value > to;
+const greatOr = (value, to) => value >= to;
 const equal = (value, to) => value === to;
 const diff = (value, to) => value !== to;
 
@@ -23,8 +23,8 @@ export default {
     before,
     less,
     lessOr,
-    greater,
-    greaterOr,
+    great,
+    greatOr,
     equal,
     same: equal,
     diff,

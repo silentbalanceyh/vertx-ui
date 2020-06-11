@@ -1,8 +1,10 @@
 import dragging from './dragging/O.dragging';
-import event from './O.event';
-import yiPage from './O.yi.page';
 import editor from './editor/O.editor';
+import yiPage from './O.yi.page';
 import Cmn from './library';
+import event from './O.raft.event';
+import dataIn from './O.fn.data.input';
+import dataOut from './O.fn.data.output';
 
 const exported = {
     /* yi 系列方法 */
@@ -19,7 +21,8 @@ const exported = {
     /* 开放的函数区域 */
     ...Cmn,
     /* 特殊方法 */
-    dataIn: event.actions.$opDataIn,
+    dataIn,
+    dataOut,
 }
 console.info(exported);
 export default exported;

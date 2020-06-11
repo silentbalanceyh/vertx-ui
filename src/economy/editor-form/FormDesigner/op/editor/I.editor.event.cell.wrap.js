@@ -1,22 +1,5 @@
 import Ux from 'ux';
-import Cmn from "../library";
-
-const toSource = (fromItem, toItem) => {
-    const sourceItem = Ux.clone(toItem);
-    sourceItem.rowIndex = fromItem.rowIndex;
-    sourceItem.rowKey = fromItem.rowKey;
-    sourceItem.cellIndex = fromItem.cellIndex;
-    sourceItem.span = fromItem.span;
-    return sourceItem;
-}
-const toTarget = (fromItem, toItem) => {
-    const targetItem = Ux.clone(fromItem);
-    targetItem.rowIndex = toItem.rowIndex;
-    targetItem.rowKey = toItem.rowKey;
-    targetItem.cellIndex = toItem.cellIndex;
-    targetItem.span = toItem.span;
-    return targetItem;
-}
+import Cmn from '../library';
 
 const toRow = (cells = []) => {
     const rowData = {};
@@ -32,8 +15,22 @@ const toRow = (cells = []) => {
     }
 }
 
+const toRaft = (item = {}, columns) => {
+    const {raft, ...rest} = item;
+    if (raft.span !== item.span) {
+        raft.span = item.span;
+    }
+    Cmn.cellGrid(raft, {
+        ...rest,
+        columns, // : targetCells.length,
+    });
+    item.raft = raft;
+    // 处理数据基础信息
+    item.length = columns;
+}
+
 export default (targetRef) => (fromItem, toItem) => {
-    const {source} = fromItem;
+    const {source, ...fromData} = fromItem;
     const sourceRef = Ux.onReference(source, 1);
     /*
     * 1. 读取源 $rows
@@ -45,35 +42,58 @@ export default (targetRef) => (fromItem, toItem) => {
         let targetCells = targetRef.props.data;
         targetCells = Ux.clone(targetCells);
         /*
-         * 源
+         * fromItem 拖拽到 toItem
          */
-        const sourceItem = toSource(fromItem, toItem);
-        sourceCells[sourceItem.cellIndex] = sourceItem;
-        if (fromItem.rowIndex === toItem.rowIndex) {
+        if (fromData.rowIndex === toItem.rowIndex) {
             /*
              * 同行交换
+             * 1）交换坐标
+             * 2）交换 span
              */
-            const targetItem = toTarget(fromItem, toItem);
+            const sourceItem = Ux.clone(fromData);
+            sourceItem.cellIndex = toItem.cellIndex;
+            sourceItem.span = toItem.span;
+
+            const targetItem = Ux.clone(toItem);
+            targetItem.cellIndex = fromData.cellIndex;
+            targetItem.span = fromData.span;
+
+            /*
+             * 更新对应的列坐标
+             */
+            sourceCells[sourceItem.cellIndex] = sourceItem;
             sourceCells[targetItem.cellIndex] = targetItem;
             Cmn.rowRefresh(sourceRef, sourceCells);
         } else {
             /*
              * 不同行交换
+             * 1）交换坐标
+             * 2）交换 span
              */
-            const targetItem = toTarget(fromItem, toItem);
-            targetCells[targetItem.cellIndex] = targetItem;
+            const sourceItem = Ux.clone(fromData);
+            sourceItem.cellIndex = toItem.cellIndex;
+            sourceItem.rowIndex = toItem.rowIndex;
+            sourceItem.rowKey = toItem.rowKey;
+            sourceItem.span = toItem.span;
+
+            const targetItem = Ux.clone(toItem);
+            targetItem.cellIndex = fromData.cellIndex;
+            targetItem.rowIndex = fromData.rowIndex;
+            targetItem.rowKey = fromData.rowKey;
+            targetItem.span = fromData.span;
+
             /*
-             * {
-             *      config: {
-             *          key: "xxx"
-             *      },
-             *      data: []
-             * }
+             * 修改 sourceCells / targetCells
              */
-            const processed = [];
-            processed.push(toRow(sourceCells));
-            processed.push(toRow(targetCells));
-            Ux.fn(sourceRef).rxRowConfig(processed);
+            toRaft(targetItem, sourceCells.length);
+            toRaft(sourceItem, targetCells.length);
+            sourceCells[fromData.cellIndex] = targetItem;
+            targetCells[toItem.cellIndex] = sourceItem;
+
+            const results = [];
+            results.push(toRow(sourceCells));
+            results.push(toRow(targetCells));
+            Ux.fn(sourceRef).rxRowConfig(results);
         }
     }
 }

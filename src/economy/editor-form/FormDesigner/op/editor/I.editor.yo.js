@@ -44,6 +44,7 @@ export default {
                 rowKey: config.key,
                 ...config,
                 ...rest,
+                render,             // 带上 render 用于配置处理
             },
             data: {
                 ...raft,

@@ -10,7 +10,7 @@ export default {
         const targetRow = Ux.clone($rows[toIndex]);
         $rows[toIndex] = Ux.clone($rows[fromIndex]);
         $rows[fromIndex] = targetRow;
-        reference.setState({$rows});
+        Cmn.rowsRefresh(reference, $rows);
     },
     rxRowDel: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
@@ -22,7 +22,7 @@ export default {
             /* 清空当前行数据 */
             $rows[0] = {};
         }
-        reference.setState({$rows});
+        Cmn.rowsRefresh(reference, $rows);
     },
     rxRowConfig: (reference) => (rows = []) => {
         let {$rows = []} = reference.state;
@@ -35,7 +35,12 @@ export default {
          */
         $rows = Ux.clone($rows);
         $rows = Ux.elementJoin($rows, rows);
-        reference.setState({$rows: $rows});
+        /*
+         * 旧代码：reference.setState({$rows: $rows});
+         * 由于此处调用 onUi 会直接更新父类，所以不用子类单独更新
+         * 直接使用父类驱动子类的更新流程更合适
+         */
+        Cmn.rowsRefresh(reference, $rows);
     },
     rxRowAdd: (reference) => (rowIndex) => {
         let {$rows = []} = reference.state;
@@ -48,7 +53,7 @@ export default {
             key: `row-${Ux.randomString(8)}`,
             data: []
         });
-        reference.setState({$rows});
+        Cmn.rowsRefresh(reference, $rows);
     },
     rxRowFill: (reference) => (rowIndex) => {
         const data = Cmn.cellWidth(reference, false);

@@ -14,7 +14,10 @@ const raftValue = (cell = {}, values = {}, reference) => {
     if (values.hasOwnProperty(cell.field)) {
         literal = values[cell.field];
     } else {
-        if (0 < cell.field.indexOf('.')) {
+        /*
+         * 必须包含了 field
+         */
+        if (cell.field && 0 < cell.field.indexOf('.')) {
             const path = cell.field.split('.');
             literal = Abs.immutable(values).getIn(path);
         }

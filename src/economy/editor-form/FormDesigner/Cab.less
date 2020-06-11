@@ -5,6 +5,41 @@
 @import "style/drawer";
 
 .web-form-designer {
+    &-preview {
+        .content-json {
+            max-height: 560px;
+            overflow-y: auto;
+        }
+    }
+
+    &-dropdown {
+        .item-select {
+            max-height: 168px;
+            overflow-y: auto;
+        }
+
+        .item-add {
+            padding: 6px 12px;
+
+            &:hover {
+                cursor: pointer;
+                color: @primary-color;
+            }
+        }
+    }
+
+    &-import {
+        .ant-form-item-control {
+            text-align: center;
+
+            .ant-upload-list {
+                text-align: left;
+                display: block;
+                margin-left: 30%;
+                width: 40%;
+            }
+        }
+    }
 
     .content {
         &-left {

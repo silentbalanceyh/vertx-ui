@@ -31,6 +31,9 @@ export default (reference) => generator(reference, [
     /* Rx 系列 */
     "rxSource",
     "rxSubmit",
+    "rxClose",
+
+    "rxChild",       // 绑定子组件专用方法
     /* Designer 系列 */
     "rxRowAdd",     // 添加行
     "rxRowDel",     // 删除行

@@ -19,6 +19,7 @@ const sourceSpec = {
 };
 const dropExecute = (reference, config, render) => {
     const ref = Ux.onReference(reference, 1);
+    // 拖拽进来的 cellData 需要重新设置
     const cellData = Ux.clone(config);
     cellData.data = fnRaft(reference, render);
     cellData.render = render;

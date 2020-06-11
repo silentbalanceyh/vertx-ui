@@ -79,7 +79,7 @@
                                         },
                                         {
                                             "metadata": "dependField,依赖字段,16,,aiSelect,placeholder=（不可设置为当前字段）",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "dependEnabled": true
                                             }
@@ -128,7 +128,7 @@
                                     [
                                         {
                                             "metadata": "dependSource,数据源标识,,,aiSelect,placeholder=辅助数据源中配置",
-                                            "optionJsx.config.datum": "source=model.sources,key=key,label=name",
+                                            "optionJsx.config.datum": "source=model.sources,value=key,label=name",
                                             "optionJsx.depend.enabled": {
                                                 "dependType": [
                                                     "DATUM"
@@ -298,7 +298,7 @@
                                         },
                                         {
                                             "metadata": "ruleEqualTo,= 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleEqual": true
                                             },
@@ -337,7 +337,7 @@
                                         },
                                         {
                                             "metadata": "ruleDiffTo,<> 目标字段,16,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
                                                 "ruleDiff": true
                                             },
@@ -373,7 +373,10 @@
                                         "label,标签/标题,,,,placeholder=<标签>",
                                         {
                                             "metadata": "field,字段名,,,aiSelect",
-                                            "optionJsx.config.datum": "source=model.fields,key=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
+                                            "optionConfig.rules": [
+                                                "required,字段名不可为空，请选择！"
+                                            ]
                                         }
                                     ],
                                     [
@@ -455,6 +458,12 @@
                                         {
                                             "metadata": "normalize,输入限制,24,,aiRadio",
                                             "optionJsx.className": "radio-input-3",
+                                            "optionJsx.depend.impact": {
+                                                "reset": [
+                                                    "normalizeLength",
+                                                    "normalizePrecision"
+                                                ]
+                                            },
                                             "optionJsx.config.items": [
                                                 "unlimited,不限制",
                                                 "decimal,仅浮点数",
@@ -468,15 +477,24 @@
                                     [
                                         {
                                             "metadata": "normalizeLength,限制长度,,100%,aiInputNumber",
+                                            "optionConfig.rules": [
+                                                "required,如果使用了输入限制，必须填写长度！"
+                                            ],
                                             "optionJsx.depend.enabled": {
                                                 "normalize": [
                                                     "decimal",
-                                                    "number"
+                                                    "number",
+                                                    "integer",
+                                                    "upper",
+                                                    "id"
                                                 ]
                                             }
                                         },
                                         {
                                             "metadata": "normalizePrecision,限制精度,,100%,aiInputNumber,min=1",
+                                            "optionConfig.rules": [
+                                                "required,对不起，精度数据必须填写！"
+                                            ],
                                             "optionJsx.depend.enabled": {
                                                 "normalize": [
                                                     "decimal"
