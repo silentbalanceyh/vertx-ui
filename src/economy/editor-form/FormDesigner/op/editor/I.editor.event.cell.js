@@ -104,5 +104,8 @@ export default {
             cellIndex: config.cellIndex,
         };
         reference.setState(state);
+    },
+    rxCellField: (reference) => (event) => {
+        reference.setState({$visible: true});
     }
 }

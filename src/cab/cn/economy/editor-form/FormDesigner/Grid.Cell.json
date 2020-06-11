@@ -27,6 +27,10 @@
             "dropped": "您的目标位置已经存在组件信息，如果执行该操作会替换原始组件，确认替换？"
         }
     },
+    "_selection": {
+        "text": "添加新字段",
+        "window": "填写字段名,添加,关闭,false,640,true,$opAddField"
+    },
     "_message": {
         "label": "<标签>",
         "field": "字段",

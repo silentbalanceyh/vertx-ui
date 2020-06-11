@@ -96,6 +96,7 @@ export default {
         const $inited = Op.dataIn(reference)(config);
         if ($inited.render) {
             const Component = UiElement[$inited.render];
+            const selection = Ux.fromHoc(reference, "selection");
             if (Component) {
                 return (
                     <Component {...Ux.onUniform(reference.props)}
@@ -109,6 +110,7 @@ export default {
                                    });
                                    Ux.fn(reference).rxCellConfig(params);
                                }}
+                               $itemAdd={selection}
                                $inited={$inited}/>
                 )
             } else {
