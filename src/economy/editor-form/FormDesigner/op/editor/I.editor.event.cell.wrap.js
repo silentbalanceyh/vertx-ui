@@ -25,10 +25,12 @@ const toRaft = (item = {}, columns) => {
         columns, // : targetCells.length,
     });
     item.raft = raft;
+    // 处理数据基础信息
+    item.length = columns;
 }
 
 export default (targetRef) => (fromItem, toItem) => {
-    const {source} = fromItem;
+    const {source, ...fromData} = fromItem;
     const sourceRef = Ux.onReference(source, 1);
     /*
     * 1. 读取源 $rows
@@ -42,19 +44,19 @@ export default (targetRef) => (fromItem, toItem) => {
         /*
          * fromItem 拖拽到 toItem
          */
-        if (fromItem.rowIndex === toItem.rowIndex) {
+        if (fromData.rowIndex === toItem.rowIndex) {
             /*
              * 同行交换
              * 1）交换坐标
              * 2）交换 span
              */
-            const sourceItem = Ux.clone(fromItem);
+            const sourceItem = Ux.clone(fromData);
             sourceItem.cellIndex = toItem.cellIndex;
             sourceItem.span = toItem.span;
 
             const targetItem = Ux.clone(toItem);
-            targetItem.cellIndex = fromItem.cellIndex;
-            targetItem.span = fromItem.span;
+            targetItem.cellIndex = fromData.cellIndex;
+            targetItem.span = fromData.span;
 
             /*
              * 更新对应的列坐标
@@ -68,24 +70,24 @@ export default (targetRef) => (fromItem, toItem) => {
              * 1）交换坐标
              * 2）交换 span
              */
-            const sourceItem = Ux.clone(fromItem);
+            const sourceItem = Ux.clone(fromData);
             sourceItem.cellIndex = toItem.cellIndex;
             sourceItem.rowIndex = toItem.rowIndex;
             sourceItem.rowKey = toItem.rowKey;
             sourceItem.span = toItem.span;
 
             const targetItem = Ux.clone(toItem);
-            targetItem.cellIndex = fromItem.cellIndex;
-            targetItem.rowIndex = fromItem.rowIndex;
-            targetItem.rowKey = fromItem.rowKey;
-            targetItem.span = fromItem.span;
+            targetItem.cellIndex = fromData.cellIndex;
+            targetItem.rowIndex = fromData.rowIndex;
+            targetItem.rowKey = fromData.rowKey;
+            targetItem.span = fromData.span;
 
             /*
              * 修改 sourceCells / targetCells
              */
             toRaft(targetItem, sourceCells.length);
             toRaft(sourceItem, targetCells.length);
-            sourceCells[fromItem.cellIndex] = targetItem;
+            sourceCells[fromData.cellIndex] = targetItem;
             targetCells[toItem.cellIndex] = sourceItem;
 
             const results = [];

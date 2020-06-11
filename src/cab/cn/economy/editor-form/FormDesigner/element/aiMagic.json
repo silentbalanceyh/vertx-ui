@@ -58,7 +58,10 @@
                                         "label,标签/标题,,,,placeholder=<标题>",
                                         {
                                             "metadata": "field,字段名,,,aiSelect,placeholder=（选择要呈现的字段）",
-                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display"
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
+                                            "optionConfig.rules": [
+                                                "required,字段名不可为空，请选择！"
+                                            ]
                                         }
                                     ],
                                     [

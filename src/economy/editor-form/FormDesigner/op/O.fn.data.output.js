@@ -331,5 +331,5 @@ export default (reference) => (params = {}) => {
     /* 更新 Raft 中的值 */
     const cell = Ux.clone(config);
     cell.raft = parameters;
-    Ux.fn(reference).rxCellConfig(cell, true);
+    Ux.fn(reference).rxCellConfig(cell);
 }
