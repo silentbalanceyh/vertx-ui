@@ -61,10 +61,10 @@ export default {
         let cell = {};
         if ("string" === typeof cellData) {
             cell = _parseField(cellData, matrix, reference);
+        } else if (cellData.metadata) {
+            cell = _parseField(cellData, matrix, reference);
         } else {
-            if (cellData.metadata) {
-                cell = _parseField(cellData, matrix, reference);
-            }
+            cell = Ux.clone(cellData);
         }
         /*
          * 计算当前的 matrix 详细数据
@@ -95,6 +95,9 @@ export default {
             readyData.raft = cell;
             readyData.render = cell.render;
             readyData.span = cell.span;
+            /*
+             *
+             */
             return readyData;
         } else {
             const readyData = Ux.clone(cellData);
