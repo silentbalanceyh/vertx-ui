@@ -40,6 +40,36 @@
                             {
                                 "required": true,
                                 "message": "请输入名称，名称不可为空！"
+                            },
+                            {
+                                "min": 12,
+                                "message": "Min"
+                            },
+                            {
+                                "max": 14,
+                                "message": "Max"
+                            },
+                            {
+                                "len": 12,
+                                "message": "Len"
+                            },
+                            {
+                                "pattern": "xxxx",
+                                "message": "Pattern"
+                            },
+                            {
+                                "validator": "equal",
+                                "message": "Equal",
+                                "config": {
+                                    "to": "status"
+                                }
+                            },
+                            {
+                                "validator": "diff",
+                                "message": "Diff",
+                                "config": {
+                                    "to": "status"
+                                }
                             }
                         ]
                     },

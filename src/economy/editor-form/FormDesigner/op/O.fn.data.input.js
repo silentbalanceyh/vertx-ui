@@ -45,6 +45,13 @@ const $opDataIn = (normalized = {}, params, reference) => {
      *                                  -> dependValue
      */
     St.dataEnabled(normalized, params);
+    /*
+     * 1）必填规则
+     * required,
+     * requiredMessage,
+     * 2）其他规则
+     */
+    St.dataRules(normalized, params);
     /* 去空操作 */
     Ux.denull(normalized);
     return normalized;
