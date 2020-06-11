@@ -8,7 +8,15 @@
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
-                "password,密码,,,,readOnly=true"
+                {
+                    "metadata": "password,密码,,,,readOnly=true",
+                    "optionJsx.depend.impact": {
+                        "reset": [
+                            "name1",
+                            "name2"
+                        ]
+                    }
+                }
             ],
             [
                 "username1,用户名A",

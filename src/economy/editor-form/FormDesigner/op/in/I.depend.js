@@ -13,6 +13,7 @@ export default {
     },
     dataImpact: (normalized = {}, data = {}) => {
         const impact = Ux.valuePath(data, "optionJsx.depend.impact");
+        console.info(data);
         if (impact) {
             const {reset = []} = impact;
             normalized.impactReset = reset;
