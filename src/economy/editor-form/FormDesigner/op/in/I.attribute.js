@@ -13,6 +13,5 @@ export default {
         } else {
             normalized.field = Ux.valuePath(data, "field");
         }
-        Ux.denull(normalized);
     }
 }

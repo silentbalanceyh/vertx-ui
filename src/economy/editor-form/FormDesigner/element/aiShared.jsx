@@ -6,14 +6,20 @@ import ValueSource from '../../ValueSource/UI';
 import RestfulApi from "../../RestfulApi/UI";
 import ParamInput from "../../ParamInput/UI";
 import DatumUnique from '../../DatumUnique/UI';
+import FieldAddition from '../control/Web.Field.Addition';
 
 import LoadingContent from "../../../loading/LoadingContent/UI";
-import {Divider, Icon} from "antd";
+import {Divider, Icon, Modal} from "antd";
 
 const jsxFieldDialog = (reference) => {
-    const {$dialogField} = reference.state;
-    console.info($dialogField);
-    return false;
+    const {$dialogField, $visible} = reference.state;
+    const {rxModelSave} = reference.props;
+    return $dialogField ? (
+        <Modal {...$dialogField} visible={$visible}>
+            <FieldAddition rxModelSave={rxModelSave}
+                           rxClose={$dialogField.onCancel}/>
+        </Modal>
+    ) : false
 }
 
 const field = (reference, jsx) => {
@@ -22,16 +28,13 @@ const field = (reference, jsx) => {
     jsx.dropdownClassName = "web-form-designer-dropdown";
     jsx.dropdownRender = menu => (
         <div>
-            <div className={"item-select"}>
-                {menu}
-            </div>
+            {menu}
             <Divider style={{margin: '2px 0'}}/>
             <div className={"item-add"}
                  onMouseDown={event => event.preventDefault()}
                  onClick={Op.rxCellField(reference)}>
                 <Icon type={"plus"}/>&nbsp;&nbsp;{$itemAdd.text}
             </div>
-            {jsxFieldDialog(reference)}
         </div>
     )
     return Ux.aiSelect(reference, jsx);
@@ -81,6 +84,7 @@ export default {
                 {Ux.xtReady(reference, () => Ux.aiForm(reference, $inited),
                     {component: LoadingContent}
                 )}
+                {jsxFieldDialog(reference)}
             </div>
         )
     },

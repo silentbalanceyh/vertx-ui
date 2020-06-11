@@ -213,9 +213,11 @@ const raftRender = (cell = {}, config = {}) => {
                  */
                 optionJsx.reference = reference;    // 特殊引用，触发 depend / linker
                 const {getFieldDecorator} = form;
-                return getFieldDecorator(cell.field, optionConfig)(
-                    render(reference, optionJsx)
-                );
+                if (cell.field) {
+                    return getFieldDecorator(cell.field, optionConfig)(
+                        render(reference, optionJsx)
+                    );
+                } else return render(reference, optionJsx);
             } else {
                 if (reference.props.hasOwnProperty('data-__field')) {
                     /* 自定义组件专用 */

@@ -83,16 +83,6 @@ export default {
         $data.forEach((item, index) => item.cellIndex = index);
         Cmn.rowRefresh(reference, $data);
     },
-    rxCellLabel: (reference, defaultLabel) => (event) => {
-        let value = Ux.ambEvent(event);
-        if (!value) value = defaultLabel;
-        const {config = {}} = reference.props;
-        const params = Ux.clone(config);
-        if (params.data && params.data.optionItem) {
-            params.data.optionItem.label = value;
-            Ux.fn(reference).rxCellConfig(params);
-        }
-    },
     rxCellSelect: (reference) => (event) => {
         const {config = {}} = reference.props;
         const state = {};
