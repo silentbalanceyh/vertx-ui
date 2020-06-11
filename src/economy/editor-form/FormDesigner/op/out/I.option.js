@@ -63,11 +63,7 @@ export default {
         dataJsx(normalized, params, 'showTime');
         // 模式选择
         if (params.dateMode) {
-            if ("full" === params.dateMode) {
-                normalized.optionJsx.mode = "date"; // 默认值
-            } else {
-                normalized.optionJsx.mode = params.dateMode;
-            }
+            normalized.optionJsx.mode = params.dateMode;
         }
         // 模式处理
         dataJsx(normalized, params, 'use12Hours');

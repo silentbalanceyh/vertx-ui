@@ -52,7 +52,7 @@ const dataTreeSelect = (normalized = {}, params = {}) => {
     // 多选启用
     Opt.dataMultiple(normalized, params);
     // Option 专用（单独读取动态数据源）
-    Opt.dataOption(normalized, params);
+    Opt.dataDatum(normalized, params);
     // Tree
     Opt.dataTree(normalized, params);
 }
@@ -62,6 +62,26 @@ const dataCheckbox = (normalized = {}, params = {}) => {
     if ("SWITCH" === params.mode) {
         dataJsx(normalized, params, 'checkedChildren');
         dataJsx(normalized, params, 'unCheckedChildren');
+    }
+}
+
+
+const dataRadio = (normalized = {}, params = {}) => {
+    // 模式
+    dataJsx(normalized, params, 'mode');
+    // 宽度处理
+    if (params.radioCount) {
+        const style = {};
+        if (1 === params.radioCount) {
+            style.width = "100%";
+        } else if (2 === params.radioCount) {
+            style.width = "48%";
+        } else if (3 === params.radioCount) {
+            style.width = "32%";
+        } else if (4 === params.radioCount) {
+            style.width = "24%";
+        }
+        normalized.optionJsx.style = style;
     }
 }
 
@@ -95,24 +115,6 @@ const dataFileUpload = (normalized = {}, params = {}) => {
     normalized.optionJsx.ajax = ajax;
 }
 
-const dataRadio = (normalized = {}, params = {}) => {
-    // 模式
-    dataJsx(normalized, params, 'mode');
-    // 宽度处理
-    if (params.radioCount) {
-        const style = {};
-        if (1 === params.radioCount) {
-            style.width = "100%";
-        } else if (2 === params.radioCount) {
-            style.width = "48%";
-        } else if (3 === params.radioCount) {
-            style.width = "32%";
-        } else if (4 === params.radioCount) {
-            style.width = "24%";
-        }
-        normalized.optionJsx.style = style;
-    }
-}
 const dataTransfer = (normalized = {}, params = {}) => {
     if (params.transferField) {
         normalized.optionJsx.config.valueKey = params.transferField;
@@ -125,11 +127,6 @@ const dataTransfer = (normalized = {}, params = {}) => {
 const dataBraftEditor = (normalized = {}, params = {}) => {
     if (params.braftHeight) {
         normalized.optionJsx.config.height = params.braftHeight;
-    }
-}
-const dataJsonEditor = (normalized = {}, params = {}) => {
-    if (params.jsonHeight) {
-        normalized.optionJsx.config.height = params.jsonHeight;
     }
 }
 const dataAddressSelector = (normalized = {}, params = {}) => {
@@ -174,6 +171,11 @@ const dataAddressSelector = (normalized = {}, params = {}) => {
         normalized.optionJsx.config.init = params.addrInitUri;
     }
 }
+const dataJsonEditor = (normalized = {}, params = {}) => {
+    if (params.jsonHeight) {
+        normalized.optionJsx.config.height = params.jsonHeight;
+    }
+}
 const dataTreeSelector = (normalized = {}, params = {}) => {
     // Tree
     Opt.dataTree(normalized, params);
@@ -215,11 +217,7 @@ const dataTitle = (normalized = {}, params = {}) => {
             config.type = "info";
         }
         if (params.commentDescription) {
-            const description = [];
-            params.commentDescription.forEach(item => {
-                description.push(item);
-            });
-            config.description = description;
+            config.description = Ux.clone(params.commentDescription);
         }
         normalized.optionJsx.config = config;
     }

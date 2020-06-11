@@ -13,11 +13,36 @@ const dataDatum = (normalized = {}, data = {}) => {
         normalized.cascadeSource = normalizeValue.cascade.source;
         normalized.cascadeValue = normalizeValue.cascade.target;
     }
-    if (normalizeValue.hasOwnProperty("expr")) {
-        normalized.expr = normalizeValue.expr;
-    }
 }
 export default {
+    dataTable: (data = {}) => {
+        const table = Ux.valuePath(data, "optionJsx.config.table");
+        if (!Ux.isEmpty(table)) {
+            return table;
+        } else return null;
+    },
+    dataDate: (normalized = {}, data = {}) => {
+        // disabledDate 处理
+        const disabledDate = Ux.valuePath(data, "optionJsx.disabledDate");
+        if (disabledDate) {
+            normalized.disabledDate = true;
+        }
+        // 时间模式
+        normalized.format = Ux.valuePath(data, "optionJsx.format");
+        normalized.showToday = Ux.valuePath(data, "optionJsx.showToday");
+        normalized.showTime = Ux.valuePath(data, "optionJsx.showTime");
+        // 模式选择
+        normalized.dateMode = Ux.valuePath(data, "optionJsx.mode");
+        normalized.use12Hours = Ux.valuePath(data, "optionJsx.use12Hours");
+        normalized.hourStep = Ux.valuePath(data, "optionJsx.hourStep");
+        normalized.minuteStep = Ux.valuePath(data, "optionJsx.minuteStep");
+        normalized.secondStep = Ux.valuePath(data, "optionJsx.secondStep");
+    },
+    dataMultiple: (normalized = {}, data = {}) => {
+        // 多选读取
+        normalized.multipleMode = Ux.valuePath(data, "optionJsx.mode");
+        normalized.maxTagCount = Ux.valuePath(data, "optionJsx.maxTagCount");
+    },
     dataOption: (normalized = {}, data = {}) => {
         const normalizeValue = Ux.valuePath(data, "optionJsx.config");
         if (!Ux.isEmpty(normalizeValue)) {
@@ -43,4 +68,17 @@ export default {
         }
     },
     dataDatum,
+    dataTree: (normalized = {}, data = {}) => {
+        const tree = Ux.valuePath(data, "optionJsx.config.tree");
+        if (!Ux.isEmpty(tree)) {
+            // 树型读取
+            normalized.treeSelection = Ux.valuePath(data, "optionJsx.config.selection");
+            normalized.treeKey = Ux.valuePath(tree, "key");
+            normalized.treeParent = Ux.valuePath(tree, "parent");
+            normalized.treeText = Ux.valuePath(tree, "text");
+            normalized.treeValue = Ux.valuePath(tree, "value");
+            normalized.treeSort = Ux.valuePath(tree, "sort");
+            normalized.treeLeaf = Ux.valuePath(tree, "leaf");
+        }
+    }
 }

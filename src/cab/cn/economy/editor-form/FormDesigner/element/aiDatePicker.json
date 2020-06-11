@@ -349,8 +349,7 @@
                                         {
                                             "metadata": "dateMode,时间模式,24,,aiRadio",
                                             "optionJsx.config.items": [
-                                                "full,日期/时间",
-                                                "date,日期选择",
+                                                "date,日期/时间",
                                                 "month,月份选择",
                                                 "year,年份选择"
                                             ]
@@ -369,7 +368,7 @@
                                             },
                                             "optionJsx.depend.enabled": {
                                                 "dateMode": [
-                                                    "full"
+                                                    "date"
                                                 ]
                                             }
                                         },
@@ -385,7 +384,6 @@
                                             },
                                             "optionJsx.depend.enabled": {
                                                 "dateMode": [
-                                                    "full",
                                                     "date"
                                                 ]
                                             }
