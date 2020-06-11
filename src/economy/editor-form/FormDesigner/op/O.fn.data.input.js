@@ -1,4 +1,5 @@
 import St from './in';
+import Ux from "ux";
 
 const $opDataIn = (normalized = {}, params, reference) => {
     /*
@@ -8,6 +9,8 @@ const $opDataIn = (normalized = {}, params, reference) => {
      * optionJsx.placeholder        -> placeholder
      */
     St.dataField(normalized, params);
+    /* 去空操作 */
+    Ux.denull(normalized);
     return normalized;
 }
 
