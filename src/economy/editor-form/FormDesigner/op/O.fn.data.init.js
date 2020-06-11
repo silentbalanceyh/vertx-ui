@@ -2,8 +2,7 @@ import Ux from 'ux';
 import Ld from './library';
 
 export default (config) => {
-    const $config = Ux.clone(config);
-    const formRef = $config.form;
+    const formRef = Ux.clone(config);
     {
         // 默认3列给定值
         if (formRef && !formRef.hasOwnProperty('columns')) {
@@ -42,5 +41,5 @@ export default (config) => {
             formRef.ui = $ui;                           // 行替换
         }
     }
-    return $config;
+    return {form: formRef};
 }

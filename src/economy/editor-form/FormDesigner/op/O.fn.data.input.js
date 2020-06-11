@@ -25,9 +25,15 @@ const $opDataIn = (normalized = {}, params, reference) => {
      */
     St.dataAdorn(normalized, params);
     /*
-     *
+     * optionConfig.normalize       -> normalize
+     *                              -> normalizeLength
+     *                              -> normalizePrecision
      */
     St.dataNorm(normalized, params);
+    /*
+     * optionJsx.depend.impact.reset      -> impactReset
+     */
+    St.dataImpact(normalized, params);
     /* 去空操作 */
     Ux.denull(normalized);
     return normalized;
