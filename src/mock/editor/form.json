@@ -3,24 +3,167 @@
         "ui": [
             [
                 {
-                    "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=integer:10",
-                    "optionConfig.rules": [
-                        "required,请输入名称，名称不可为空！"
-                    ]
+                    "field": "name",
+                    "optionItem": {
+                        "label": "名称",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 9
+                        },
+                        "wrapperCol": {
+                            "span": 15
+                        }
+                    },
+                    "span": 8,
+                    "optionJsx": {
+                        "placeholder": "请输入名称"
+                    },
+                    "optionConfig": {
+                        "normalize": "text,40",
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入名称，名称不可为空！"
+                            }
+                        ]
+                    },
+                    "render": "aiInput"
                 },
                 {
-                    "metadata": "password,密码,,,,readOnly=true",
-                    "optionJsx.depend.impact": {
-                        "reset": [
-                            "name1",
-                            "name2"
-                        ]
-                    }
+                    "field": "password",
+                    "optionItem": {
+                        "label": "密码",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 8
+                        },
+                        "wrapperCol": {
+                            "span": 16
+                        }
+                    },
+                    "render": "aiInput",
+                    "span": 8
                 }
             ],
             [
-                "username1,用户名A",
-                "username2,用户名B,16"
+                {
+                    "field": "username1",
+                    "optionItem": {
+                        "label": "用户名A",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 9
+                        },
+                        "wrapperCol": {
+                            "span": 15
+                        }
+                    },
+                    "render": "aiInput",
+                    "span": 8
+                },
+                {
+                    "span": 16,
+                    "field": "username2",
+                    "optionItem": {
+                        "label": "用户名B",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    },
+                    "render": "aiInput"
+                }
+            ],
+            [
+                {
+                    "optionJsx": {
+                        "config": {
+                            "items": [
+                                {
+                                    "key": "fixedvalue1",
+                                    "value": "fixedvalue1",
+                                    "label": "display1"
+                                },
+                                {
+                                    "key": "fixedvalue2",
+                                    "value": "fixedvalue2",
+                                    "label": "display2"
+                                }
+                            ]
+                        }
+                    },
+                    "optionItem": {
+                        "label": "下拉",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 9
+                        },
+                        "wrapperCol": {
+                            "span": 15
+                        }
+                    },
+                    "optionConfig": {},
+                    "field": "status",
+                    "span": 8,
+                    "render": "aiSelect"
+                },
+                {
+                    "optionJsx": {
+                        "config": {
+                            "expr": "expr",
+                            "datum": {
+                                "source": "ci.environment",
+                                "value": "value",
+                                "label": "display"
+                            },
+                            "cascade": {
+                                "source": "filter",
+                                "target": "BOOL:true"
+                            }
+                        }
+                    },
+                    "optionItem": {
+                        "label": "下拉2",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 8
+                        },
+                        "wrapperCol": {
+                            "span": 16
+                        }
+                    },
+                    "optionConfig": {},
+                    "field": "environment",
+                    "span": 8,
+                    "render": "aiSelect"
+                }
             ]
         ],
         "hidden": [
@@ -34,14 +177,29 @@
             "active": "BOOL:true"
         },
         "assist": {
-            "category": {
-                "uri": "/api/types/categories",
-                "method": "POST",
+            "resource.departments": {
+                "uri": "/api/dept/by/sigma"
+            },
+            "data.category": {
+                "uri": "/api/type/categories/:type",
                 "magic": {
-                    "$body": [
-                    ]
-                },
-                "group": "type"
+                    "type": "FIX:ci.type"
+                }
+            },
+            "model.identifiers": {
+                "uri": "/api/model"
+            },
+            "resource.employees": {
+                "uri": "/api/employee/by/sigma"
+            },
+            "resource.customers": {
+                "uri": "/api/customer/by/sigma"
+            },
+            "resource.teams": {
+                "uri": "/api/team/by/sigma"
+            },
+            "security.users": {
+                "uri": "/api/user/by/sigma"
             },
             "tabular": {
                 "uri": "/api/types/tabulars",
@@ -54,30 +212,19 @@
                 },
                 "group": "type"
             },
-            "data.category": {
-                "uri": "/api/type/categories/:type",
+            "category": {
+                "uri": "/api/types/categories",
+                "method": "POST",
                 "magic": {
-                    "type": "FIX:ci.type"
-                }
-            },
-            "resource.customers": {
-                "uri": "/api/customer/by/sigma"
-            },
-            "resource.departments": {
-                "uri": "/api/dept/by/sigma"
-            },
-            "resource.teams": {
-                "uri": "/api/team/by/sigma"
-            },
-            "resource.employees": {
-                "uri": "/api/employee/by/sigma"
-            },
-            "security.users": {
-                "uri": "/api/user/by/sigma"
-            },
-            "model.identifiers": {
-                "uri": "/api/model"
+                    "$body": []
+                },
+                "group": "type"
             }
+        },
+        "columns": 3,
+        "window": 1,
+        "options": {
+            "window": 1
         }
     },
     "modal": {
