@@ -323,13 +323,17 @@ const $opDataOut = (normalized = {}, data = {}, reference) => {
 }
 export default (reference) => (params = {}) => {
     reference.setState({$loading: false, $submitting: false});
-    /* 输出数据信息 */
-    const normalized = {};
-    const parameters = $opDataOut(normalized, params, reference);
     /* 读取行/列 */
     const {config = {}} = reference.props;
     /* 更新 Raft 中的值 */
     const cell = Ux.clone(config);
+
+    /* 输出数据信息 */
+    const normalized = {};
+    const parameters = $opDataOut(normalized, params, reference);
+    if (!parameters.render) {
+        parameters.render = config.render;
+    }
     cell.raft = parameters;
     Ux.fn(reference).rxCellConfig(cell);
 }
