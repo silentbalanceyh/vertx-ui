@@ -1,13 +1,13 @@
 import React from 'react';
-import Yo from './yo';
+import Yo from '../yo';
 import Ex from 'ex';
 import Ux from 'ux';
 import {List, Spin} from "antd";
 
-import renderTool from './Web.Fn.Form.Tool';
-import renderItem from './Web.Fn.Form.Item';
+import renderTool from './Web.Main.Form.Tool';
+import renderItem from './Web.Main.Form.Item';
 
-@Ux.zero(Ux.rxEtat(require('./Cab.json'))
+@Ux.zero(Ux.rxEtat(require('../Cab.json'))
     .cab("UI.FormList")
     .to()
 )

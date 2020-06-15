@@ -37,15 +37,17 @@
         "question,,帮助"
     ],
     "_window": {
-        "export": "填写导出文件名,导出,关闭,false,640,true,$opSaveExport",
-        "import": "请选择上传文件,导入,关闭,false,640,true,$opSaveImport",
-        "preview": "预览表单,保存,关闭,false,1024,true,$opSavePreview"
+        "export": "填写导出文件名,导出配置,关闭,false,640,true,$opSaveExport",
+        "import": "请选择上传文件,导入配置,关闭,false,640,true,$opSaveImport",
+        "preview": "预览表单,保存配置,关闭,false,1024,true,$opSavePreview"
     },
     "_palette": {
         "title": "控件列表",
         "items": [
             "aiTitle,行标题",
             "aiMagic,数据显示器",
+            "aiSearchInput,搜索匹配框",
+            "aiSearchRangeDate,搜索范围框",
             "aiAction,提交按钮",
             "aiInput,单行文本",
             "aiPassword,密码录入",

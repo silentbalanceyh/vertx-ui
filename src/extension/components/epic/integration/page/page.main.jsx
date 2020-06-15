@@ -10,8 +10,6 @@ export default (reference) => {
         $pagination = {}, $data = []
     } = reference.state;
 
-    // const alert = Ux.fromHoc(reference, "alert");
-
     const configTable = Ux.clone($table);
     Ux.configScroll(configTable, $data, reference);
     configTable.pagination = $pagination;
@@ -25,7 +23,7 @@ export default (reference) => {
                         overflow: "auto",
                         paddingRight: 6
                     }}>
-                        {renderMenu(reference)}
+                    {renderMenu(reference)}
                     </div>
                 </Col>
                 <Col span={20} className={"job-table"}>

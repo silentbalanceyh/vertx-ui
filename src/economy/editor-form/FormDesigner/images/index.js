@@ -23,6 +23,9 @@ import aiTitle from './aiTitle.png';
 import aiMagic from './aiMagic.png';
 import aiAction from './aiAction.png';
 
+import aiSearchInput from './aiSearchInput.png';
+import aiSearchRangeDate from './aiSearchRangeDate.png';
+
 export default {
     aiAction,
     aiTitle,
@@ -48,4 +51,7 @@ export default {
     aiTransfer,
     aiTreeSelect,
     aiTreeSelector,
+
+    aiSearchInput,
+    aiSearchRangeDate
 }

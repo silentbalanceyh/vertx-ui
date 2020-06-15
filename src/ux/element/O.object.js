@@ -103,9 +103,18 @@ const valuePath = (data = {}, path) => {
              * 拿到对象信息
              */
             if (U.isFunction(calculated.toJS)) {
-                return calculated.toJS();
+                const value = calculated.toJS();
+                if (undefined === value) {
+                    return null;
+                } else {
+                    return value;
+                }
             } else {
-                return calculated;
+                if (undefined === calculated) {
+                    return null;
+                } else {
+                    return calculated;
+                }
             }
         } else {
             /*
@@ -117,7 +126,12 @@ const valuePath = (data = {}, path) => {
         /*
          * 读取不带表达式字段的值
          */
-        return data[path];
+        const value = data[path];
+        if (undefined === value) {
+            return null;
+        } else {
+            return value;
+        }
     }
 };
 export default {

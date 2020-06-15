@@ -26,17 +26,9 @@ const _parseField = (cellData = {}, matrix = {}, formRef = {}) => {
     /*
      * 基础解析
      */
-    {
-        $cell = Ux.aiExprTitle(cellData);
-        $cell = Ux.aiExprField($cell);
-        $cell = Ux.aiExprFieldEx($cell);
-    }
-    if (!$cell.render) {
-        /*
-         * render 流程
-         */
-        $cell.render = "aiInput";
-    }
+    $cell = Ux.aiExprTitle(cellData);
+    $cell = Ux.aiExprField($cell);
+    $cell = Ux.aiExprFieldEx($cell);
     if (!$cell.hasOwnProperty("span")) {
         const {columns} = formRef;
         if (columns) {
@@ -44,6 +36,32 @@ const _parseField = (cellData = {}, matrix = {}, formRef = {}) => {
         }
     }
     return $cell;
+}
+
+const _parseRender = (cell = {}) => {
+    /* 其他所有的信息都是完整的，仅非 input 类型必定带 render */
+    if (!cell.render) {
+        /*
+         * 有三种
+         * 1. 默认的 aiInput
+         * 2. $button 是专用的 button 类型
+         * 3. title 字段的特殊处理
+         */
+        if (cell.title) {
+            cell.render = "aiTitle";
+            cell.span = 24;
+        } else if ("$button" === cell.field) {
+            cell.render = "aiAction";
+            /* 处理 optionItem label */
+            if (!cell.optionItem) {
+                cell.optionItem = {};
+            }
+            /* 加入特殊的 class 类 */
+            cell.optionItem.label = " ";
+        } else {
+            cell.render = "aiInput";
+        }
+    }
 }
 /*
  * 二义性函数，处理单元格
@@ -67,6 +85,10 @@ export default {
             cell = Ux.clone(cellData);
         }
         /*
+         * 执行解析
+         */
+        _parseRender(cell);
+        /*
          * 计算当前的 matrix 详细数据
          * rowKey,
          * rowIndex,
@@ -74,6 +96,7 @@ export default {
          * columns,
          * length,
          */
+        let normalizedResult;
         if (matrix) {
             /*
              * 配置初始化流程
@@ -95,10 +118,7 @@ export default {
             readyData.raft = cell;
             readyData.render = cell.render;
             readyData.span = cell.span;
-            /*
-             *
-             */
-            return readyData;
+            normalizedResult = readyData;
         } else {
             const readyData = Ux.clone(cellData);
             if (readyData.raft) {
@@ -118,7 +138,7 @@ export default {
                     readyData.raft = cell;
                     readyData.render = render;
                 }
-                return readyData;
+                normalizedResult = readyData;
             } else {
                 /* 添加 */
                 const {data, render, ...rest} = cellData;
@@ -142,8 +162,9 @@ export default {
                     }
                     readyData.render = cell.render;
                 }
-                return readyData;
+                normalizedResult = readyData;
             }
         }
+        return normalizedResult;
     }
 }

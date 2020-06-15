@@ -3,12 +3,11 @@
  */
 import React from 'react';
 import {Collapse, Menu} from "antd";
-import Ux from 'ux';
 import DragItem from '../control/Web.DragSource';
 
 export default (reference) => {
     const {$palette = []} = reference.state;
-    const {$height = 124} = reference.props;
+    // const {$height = 124} = reference.props;
     return (
         <Collapse activeKey={["pageBasic", "pageAdv"]}
                   className={"designer-control"}>
@@ -16,10 +15,7 @@ export default (reference) => {
                 <Collapse.Panel key={palette.key}
                                 showArrow={false}
                                 header={palette.title}>
-                    <Menu className={"web-items"}
-                          style={{
-                              height: Ux.toHeight($height)
-                          }}>
+                    <Menu className={"web-items"}>
                         {palette.items.map(item => (
                             <DragItem item={item} key={item.key}/>
                         ))}

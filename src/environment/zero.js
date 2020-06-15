@@ -103,6 +103,16 @@ export default (options = {}) => {
                     const {$hoc} = this.state;
                     const fatal = $hoc ? $hoc._("_fatal") : {};
                     console.error(error);
+                    /*
+                     * 连接错误信息
+                     */
+                    if(fatal.run){
+                        if(U.isArray(error)){
+                            fatal.run.description = error;
+                        }else {
+                            fatal.run.description = [error];
+                        }
+                    }
                     return (
                         <div style={{
                             paddingTop: "10%",
@@ -110,6 +120,7 @@ export default (options = {}) => {
                             paddingRight: "20%"
                         }}>
                             <LoadingAlert $alert={fatal.run}
+                                          className={"web-error-alert"}
                                           $icon={"stop"} $type={"error"}/>
                         </div>
                     )

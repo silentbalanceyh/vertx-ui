@@ -1,7 +1,7 @@
 import Ux from 'ux';
 import {Button, Col, Input, Row, Tag} from 'antd';
 import React from "react";
-import Event from './event';
+import Event from '../event';
 
 export default (reference, toolbar = {}) => {
     const {buttons = []} = toolbar;

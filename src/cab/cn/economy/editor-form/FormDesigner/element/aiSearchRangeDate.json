@@ -3,6 +3,9 @@
         "window": 1,
         "columns": 2,
         "className": "setting-form-cell",
+        "hidden": [
+            "__condition"
+        ],
         "ui": [
             [
                 "title=属性设置器"
@@ -176,10 +179,118 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "ruleBefore,历史规则,8,,aiCheckbox,valuePropName=checked",
+                                            "metadata": "ruleMax,最大长度,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleMaxValid,允许上限,16,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMax": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMaxMessage,提示信息,24,,,,inscribe=最大长度验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMax": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMin,最小长度,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleMinValid,允许下限,16,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMin": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleMinMessage,提示信息,24,,,,inscribe=最小长度验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleMin": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleLen,定长规则,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleLenValid,固定长度,16,100%,aiInputNumber",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleLen": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleLenMessage,提示信息,24,,,,inscribe=定长规则验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleLen": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleReg,正则规则,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "ruleRegValid,正则表达式,16,100%",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleReg": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleRegMessage,提示信息,24,,,,inscribe=正则规则验证失败时的提示信息",
+                                            "optionJsx.depend.enabled": {
+                                                "ruleReg": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ruleEqual,等于规则,8,,aiCheckbox,valuePropName=checked",
                                             "optionJsx.depend.impact": {
                                                 "reset": [
-                                                    "ruleBeforeTo"
+                                                    "ruleEqualTo"
                                                 ]
                                             },
                                             "optionJsx": {
@@ -189,10 +300,10 @@
                                             }
                                         },
                                         {
-                                            "metadata": "ruleBeforeTo,在之前,16,,aiSelect",
+                                            "metadata": "ruleEqualTo,= 目标字段,16,,aiSelect",
                                             "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
-                                                "ruleBefore": true
+                                                "ruleEqual": true
                                             },
                                             "optionConfig.rules": [
                                                 {
@@ -207,18 +318,18 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleBeforeMessage,提示信息,24,,,,inscribe=所选时间必须在目标时间之前",
+                                            "metadata": "ruleEqualMessage,提示信息,24,,,,inscribe=等于规则验证失败时的显示信息",
                                             "optionJsx.depend.enabled": {
-                                                "ruleBefore": true
+                                                "ruleEqual": true
                                             }
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleAfter,未来规则,8,,aiCheckbox,valuePropName=checked",
+                                            "metadata": "ruleDiff,不等于规则,8,,aiCheckbox,valuePropName=checked",
                                             "optionJsx.depend.impact": {
                                                 "reset": [
-                                                    "ruleAfterTo"
+                                                    "ruleDiffTo"
                                                 ]
                                             },
                                             "optionJsx": {
@@ -228,10 +339,10 @@
                                             }
                                         },
                                         {
-                                            "metadata": "ruleAfterTo,在之后,16,,aiSelect",
+                                            "metadata": "ruleDiffTo,<> 目标字段,16,,aiSelect",
                                             "optionJsx.config.datum": "source=model.fields,value=key,label=display",
                                             "optionJsx.depend.enabled": {
-                                                "ruleAfter": true
+                                                "ruleDiff": true
                                             },
                                             "optionConfig.rules": [
                                                 {
@@ -246,9 +357,9 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "ruleAfterMessage,提示信息,24,,,,inscribe=所选时间必须在目标时间之后",
+                                            "metadata": "ruleDiffMessage,提示信息,24,,,,inscribe=不等于规则验证失败时的显示信息",
                                             "optionJsx.depend.enabled": {
-                                                "ruleAfter": true
+                                                "ruleDiff": true
                                             }
                                         }
                                     ]
@@ -272,122 +383,28 @@
                                         }
                                     ],
                                     [
-                                        {
-                                            "metadata": "required,是否必填,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "必填",
-                                                "unCheckedChildren": "可选"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "requiredMessage,必填提示,16,,,inscribe=如果用户未填写时的提示文字！",
-                                            "optionJsx.depend.enabled": {
-                                                "required": true
-                                            }
-                                        }
-                                    ],
-                                    [
                                         "width,字段宽度,24,,,placeholder=输入区域宽度，默认100%（支持单位：%，px，rm，pt，...etc）"
-                                    ],
-                                    [
-                                        "placeholder,水印文字,24,,,placeholder=没有输入时的水印效果文字设置"
                                     ],
                                     [
                                         "title=基础属性"
                                     ],
                                     [
                                         {
-                                            "metadata": "readOnly,只读,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "只读",
-                                                "unCheckedChildren": "可编辑"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        {
-                                            "metadata": "inscribe,只读文本,16,,,inscribe=只读模式下的呈现文本",
-                                            "optionJsx.depend.enabled": {
-                                                "readOnly": true
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "allowClear,允许清空,,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "启用",
-                                                "unCheckedChildren": "禁用"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        }
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "disabledDate,只选未来,8,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "只能选未来",
-                                                "unCheckedChildren": "所有时间"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            }
-                                        },
-                                        "format,格式,16,,,placeholder=如：YYYY-MM-DD"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "dateMode,时间模式,24,,aiRadio",
+                                            "metadata": "rangeMode,时间模式,24,,aiRadio",
                                             "optionJsx.config.items": [
-                                                "date,日期/时间",
-                                                "month,月份选择",
-                                                "year,年份选择"
+                                                "FULL,日期/时间",
+                                                "DATE,日期选择",
+                                                "MONTH,月份选择",
+                                                "TIME,时间选择"
                                             ]
                                         }
                                     ],
                                     [
-                                        {
-                                            "metadata": "showTime,显示时间,,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "显示时间",
-                                                "unCheckedChildren": "不显示"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            },
-                                            "optionJsx.depend.enabled": {
-                                                "dateMode": [
-                                                    "date"
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "metadata": "showToday,快速选当天,,,aiCheckbox",
-                                            "optionJsx": {
-                                                "mode": "SWITCH",
-                                                "checkedChildren": "不显示",
-                                                "unCheckedChildren": "显示"
-                                            },
-                                            "optionConfig": {
-                                                "valuePropName": "checked"
-                                            },
-                                            "optionJsx.depend.enabled": {
-                                                "dateMode": [
-                                                    "date"
-                                                ]
-                                            }
-                                        }
+                                        "format,格式,24,,,placeholder=如：YYYY-MM-DD"
+                                    ],
+                                    [
+                                        "placeholderLeft,开始水印,,,,placeholder=开始时间",
+                                        "placeholderRight,结束水印,,,,placeholder=结束时间"
                                     ]
                                 ]
                             }

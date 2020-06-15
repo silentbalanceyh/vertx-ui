@@ -21,8 +21,49 @@ export default {
          * linker触发器
          */
         const linker = Ux.valuePath(data, "optionJsx.config.linker");
-        if (Ux.isObject(linker)) {
-
+        if (!Ux.isEmpty(linker)) {
+            const linkerData = [];
+            Object.keys(linker).forEach(key => {
+                const itemData = {};
+                itemData.key = Ux.randomUUID();
+                itemData.dataFrom = key;
+                itemData.dataTo = linker[key];
+                linkerData.push(itemData);
+            });
+            normalized.linker = linkerData;
+        }
+    },
+    dataEnabled: (normalized = {}, data = {}) => {
+        const enabled = Ux.valuePath(data, "optionJsx.depend.enabled");
+        if (!Ux.isEmpty(enabled)) {
+            /* 启用规则 */
+            normalized.dependEnabled = true;
+            /* 遍历字段信息（目前配置层只处理一个字段）*/
+            const keys = Object.keys(enabled);
+            if (1 === keys.length) {
+                /* 字段名 */
+                const field = keys[0];
+                normalized.dependField = field;
+                /* 字段值 */
+                const value = enabled[field];
+                if (value) {
+                    if ("boolean" === typeof value) {
+                        /* 布尔值 */
+                        normalized.dependType = "BOOLEAN";
+                        normalized.dependBoolean = value;
+                    } else if (Ux.isArray(value)) {
+                        /* 数组值 */
+                        normalized.dependType = "ENUM";
+                        normalized.dependEnum = value;
+                    } else {
+                        /* 动态值 */
+                        normalized.dependType = "DATUM";
+                        normalized.dependSource = value.source;
+                        normalized.dependCondition = value.field;
+                        normalized.dependValue = value.value;
+                    }
+                }
+            }
         }
     }
 }

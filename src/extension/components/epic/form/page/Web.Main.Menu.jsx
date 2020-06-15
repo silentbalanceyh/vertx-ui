@@ -1,6 +1,6 @@
 import React from 'react';
 import {Menu} from 'antd';
-import Event from './event';
+import Event from '../event';
 
 export default (reference) => {
     const {

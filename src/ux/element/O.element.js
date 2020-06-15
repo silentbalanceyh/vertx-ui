@@ -133,9 +133,10 @@ const elementFlat = (array = [], field = "", parent = false) => {
  * @param {Array} array 输入的数组信息。
  * @param {String} field 查找的字段名。
  * @param {any} value 作为条件的字段值。
+ * @param {String} targetField 目标字段。
  * @returns {Object} 返回最终查找到的唯一元素Object。
  */
-const elementUnique = (array = [], field = "", value) => {
+const elementUnique = (array = [], field = "", value, targetField) => {
     E.fxTerminal(!U.isArray(array), 10071, array, "Array");
     let reference = [];
     if (U.isObject(field)) {
@@ -145,7 +146,14 @@ const elementUnique = (array = [], field = "", value) => {
         reference = array.filter(item => value === item[field]);
     }
     E.fxTerminal(1 < reference.length, 10069, reference, 1);
-    return 0 === reference.length ? undefined : reference[0];
+    const found = 0 === reference.length ? undefined : reference[0];
+    if (found) {
+        if (targetField) {
+            return found[targetField] ? found[targetField] : null;
+        } else {
+            return found;
+        }
+    }
 };
 /**
  * ## 标准函数

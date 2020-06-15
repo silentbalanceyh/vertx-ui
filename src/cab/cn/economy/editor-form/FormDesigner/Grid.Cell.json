@@ -36,6 +36,7 @@
         "field": "字段",
         "empty": "等待……",
         "error": "渲染控件无法找到，类型:render。",
+        "hidden": "隐藏按钮，外层调用！",
         "raft": {
             "title": "<标题>",
             "label": "<标签>",

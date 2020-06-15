@@ -4,6 +4,7 @@ import {DropTarget} from "react-dnd";
 import Op from "../op";
 import Image from "../images";
 import {Tag} from 'antd';
+import Ux from 'ux';
 
 const configCellCmd = {
     // 最外层 Css
@@ -30,6 +31,7 @@ class Component extends React.PureComponent {
             connectDropTarget, reference
         } = this.props;
         const {$hover = false} = this.state;
+
         return connectDropTarget(
             <div className={`content-tool ${$hover ? "content-tool-hover" : ""}`}>
                 <div className={"ant-input dropped"}>
@@ -45,6 +47,16 @@ class Component extends React.PureComponent {
                                 );
                             })()}
                             <img src={Image[data.render]} alt={data.render}/>
+                            {(() => {
+                                if (data.hidden) {
+                                    const raft = Ux.fromHoc(reference, "message");
+                                    return (
+                                        <Tag color={"red"}>
+                                            {raft.hidden}
+                                        </Tag>
+                                    )
+                                } else return false;
+                            })()}
                         </div>
                     ) : false}
                 </div>

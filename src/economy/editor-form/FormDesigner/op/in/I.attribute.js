@@ -7,11 +7,26 @@ export default {
     dataField: (normalized = {}, data = {}) => {
         normalized.width = Ux.valuePath(data, "optionItem.style.width");
         normalized.label = Ux.valuePath(data, "optionItem.label");
-        normalized.placeholder = Ux.valuePath(data, "optionJsx.placeholder");
+        const placeholder = Ux.valuePath(data, "optionJsx.placeholder");
+        if (Ux.isArray(placeholder)) {
+            const [placeholderLeft, placeholderRight] = placeholder;
+            normalized.placeholderLeft = placeholderLeft;
+            normalized.placeholderRight = placeholderRight;
+        } else {
+            normalized.placeholder = placeholder;
+        }
         if ("aiTitle" === normalized) {
             normalized.field = Ux.valuePath(data, "title");
         } else {
-            normalized.field = Ux.valuePath(data, "field");
+            const fieldStr = Ux.valuePath(data, "field");
+            if (0 < fieldStr.indexOf(',')) {
+                const fields = fieldStr.split(',');
+                const [field, __condition] = fields;
+                normalized.field = field;
+                normalized.__condition = __condition;
+            } else {
+                normalized.field = fieldStr;
+            }
         }
     },
     dataBasic: (normalized = {}, data = {}) => {

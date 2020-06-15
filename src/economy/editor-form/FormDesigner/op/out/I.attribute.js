@@ -17,7 +17,14 @@ export default {
             normalized.field = "$button";
         } else {
             normalized.optionItem.label = params.label;
-            normalized.field = params.field;
+            /*
+             * 是否带条件
+             */
+            if (params.__condition) {
+                normalized.field = `${params.field},${params.__condition}`;
+            } else {
+                normalized.field = params.field;
+            }
         }
         // 水印文字处理
         dataJsx(normalized, params, 'placeholder');

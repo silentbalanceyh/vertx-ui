@@ -20,14 +20,56 @@
                     },
                     "span": 8,
                     "optionJsx": {
-                        "placeholder": "请输入名称"
+                        "placeholder": "请输入名称",
+                        "depend": {
+                            "enabled": {
+                                "desc": {
+                                    "source": "security.users",
+                                    "field": "abc",
+                                    "value": [
+                                        "TEST",
+                                        "ABC"
+                                    ]
+                                }
+                            }
+                        }
                     },
                     "optionConfig": {
-                        "normalize": "text,40",
+                        "normalize": "integer,40",
                         "rules": [
                             {
                                 "required": true,
                                 "message": "请输入名称，名称不可为空！"
+                            },
+                            {
+                                "min": 12,
+                                "message": "Min"
+                            },
+                            {
+                                "max": 14,
+                                "message": "Max"
+                            },
+                            {
+                                "len": 12,
+                                "message": "Len"
+                            },
+                            {
+                                "pattern": "xxxx",
+                                "message": "Pattern"
+                            },
+                            {
+                                "validator": "equal",
+                                "message": "Equal",
+                                "config": {
+                                    "to": "status"
+                                }
+                            },
+                            {
+                                "validator": "diff",
+                                "message": "Diff",
+                                "config": {
+                                    "to": "status"
+                                }
                             }
                         ]
                     },
@@ -164,6 +206,36 @@
                     "span": 8,
                     "render": "aiSelect"
                 }
+            ],
+            [
+                {
+                    "optionJsx": {
+                        "config": {
+                            "linker": {
+                                "name1": "username1",
+                                "name2": "username2"
+                            }
+                        }
+                    },
+                    "optionItem": {
+                        "label": "标签信息",
+                        "style": {
+                            "width": "100%",
+                            "marginLeft": 0,
+                            "paddingLeft": 0
+                        },
+                        "labelCol": {
+                            "span": 9
+                        },
+                        "wrapperCol": {
+                            "span": 15
+                        }
+                    },
+                    "optionConfig": {},
+                    "field": "environment",
+                    "render": "aiListSelector",
+                    "span": 8
+                }
             ]
         ],
         "hidden": [
@@ -225,11 +297,6 @@
         "window": 1,
         "options": {
             "window": 1
-        }
-    },
-    "modal": {
-        "success": {
-            "added": "您好，您的信息添加成功！"
         }
     }
 }
