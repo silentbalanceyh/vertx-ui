@@ -98,6 +98,7 @@ export default {
             const Component = UiElement[$inited.render];
             const selection = Ux.fromHoc(reference, "selection");
             if (Component) {
+                /* aiAction 专有操作 */
                 return (
                     <Component {...Ux.onUniform(reference.props)}
                                config={rest}

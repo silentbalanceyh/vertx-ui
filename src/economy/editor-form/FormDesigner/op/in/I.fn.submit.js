@@ -2,8 +2,9 @@ import Ux from 'ux';
 /*
  * 反向赋值
  */
-const dataSubmit = (normalized = {}, extension = {}, flag) => {
-    if ("SERVER" === extension.mode) {
+const dataSubmit = (normalized = {}, extension = {}, actions = {}, flag) => {
+    // console.info(extension, actions);
+    if (actions.hasOwnProperty(extension.key)) {
         /*
          * 服务端模式
          */
@@ -14,11 +15,15 @@ const dataSubmit = (normalized = {}, extension = {}, flag) => {
          */
         normalized.actionMode = "CLIENT";
     }
+    /* 使用客户端和服务端双模式计算最终核心信息 */
+    console.info(normalized, extension, actions);
 }
 
 export default (normalized = {}, data = {}, reference) => {
     /* 是否隐藏 */
     normalized.isHidden = Ux.valuePath(data, "hidden");
+    const {$form = {}} = reference.props;
+    const {actions = {}} = $form;
     /* Extension */
     const extension = Ux.valuePath(data, "optionJsx.extension");
     if (Ux.isArray(extension)) {
@@ -35,14 +40,14 @@ export default (normalized = {}, data = {}, reference) => {
          */
         const submit = filtered[0];
         if (submit) {
-            dataSubmit(normalized, submit);
+            dataSubmit(normalized, submit, actions);
         }
         /*
          * 辅助提交
          */
         const secondary = filtered[1];
         if (secondary) {
-            dataSubmit(normalized, submit, "2");
+            dataSubmit(normalized, submit, actions, "2");
         }
     }
 }

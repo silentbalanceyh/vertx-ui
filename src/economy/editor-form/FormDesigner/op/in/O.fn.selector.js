@@ -14,7 +14,10 @@ export default (normalized = {}, data = {}) => {
          * 窗口基础配置
          */
         normalized.windowValidation = Ux.valuePath(config, "validation");
-        const window = Ux.valuePath(config, "window");
+        let window = Ux.valuePath(config, "window");
+        if (window && "string" === typeof window) {
+            window = Ux.aiExprWindow(window);
+        }
         if (!Ux.isEmpty(window)) {
             normalized.windowTitle = Ux.valuePath(window, "title");
             normalized.windowWidth = Ux.valuePath(window, "width");

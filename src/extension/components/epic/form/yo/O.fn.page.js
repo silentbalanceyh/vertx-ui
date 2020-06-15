@@ -1,7 +1,6 @@
 import Ex from "ex";
 import Ux from "ux";
-
-import tabForm from '../Web.Fn.Page.Main';
+import page from '../page';
 
 export default (reference) => {
     Ex.yiStandard(reference)
@@ -14,11 +13,10 @@ export default (reference) => {
         })
         .then(state => Ux.promise(Ex.uiTab(reference)
             .children({
-                tabForm: tabForm(reference),
-                tabDesign: () => {
-
-                    return false;
-                },
+                /* 表单管理主界面，Tab页面一 */
+                tabForm: page.pageMain(reference),
+                /* 表单管理设计界面，Tab页面二 */
+                tabDesign: page.pageDesigner(reference),
             }).onMount(state))
         )
         .then(Ux.pipe(reference));

@@ -24,13 +24,23 @@ const renderJsx = (reference, type, cell = {}) => {
             )
         }
     } else if ("aiAction" === type) {
-        const {optionItem = {}, optionJsx = {}} = cell;
+        const {optionItem = {}, optionJsx = {}, hidden = false} = cell;
         const {extension = []} = optionJsx;
         return (
-            <Form.Item {...optionItem} colon={false}>
+            <Form.Item {...optionItem} colon={false} className={"web-form-designer-actions"}>
                 {extension.map(item => {
+                    const buttonAttrs = {};
+                    buttonAttrs.type = "default";
+                    if (hidden) {
+                        /* 幽灵按钮 */
+                        buttonAttrs.ghost = true;
+                    } else {
+                        if (item.type) {
+                            buttonAttrs.type = item.type;
+                        }
+                    }
                     return (
-                        <Button key={item.key} type={item.type ? item.type : "default"}>
+                        <Button key={item.key} {...buttonAttrs}>
                             {item.text}
                         </Button>
                     )

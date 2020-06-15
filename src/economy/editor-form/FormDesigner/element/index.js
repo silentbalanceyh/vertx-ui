@@ -20,6 +20,9 @@ import aiTableEditor from "./aiTableEditor";
 import aiTitle from './aiTitle';
 import aiMagic from "./aiMagic";
 import aiAction from './aiAction';
+// 搜索部分
+import aiSearchInput from './aiSearchInput';
+import aiSearchRangeDate from "./aiSearchRangeDate";
 
 export default {
     aiInput,
@@ -44,4 +47,7 @@ export default {
     aiTitle,
     aiMagic,
     aiAction,
+
+    aiSearchInput,
+    aiSearchRangeDate,
 }

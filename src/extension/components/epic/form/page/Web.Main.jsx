@@ -1,7 +1,7 @@
 import {Col, Row} from "antd";
 import Ux from "ux";
-import renderMenu from "./Web.Fn.Menu";
-import Form from "./Web.Form";
+import renderMenu from "./Web.Main.Menu";
+import Form from "./Web.Main.Form";
 import Ex from "ex";
 import {ModelingPpt} from "app";
 import React from "react";

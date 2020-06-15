@@ -51,7 +51,8 @@ export default {
                 normalized.dataSource = "items";
                 const options = [];
                 if (Ux.isArray(normalizeValue.items)) {
-                    normalizeValue.items.forEach(item => {
+                    const $items = Ux.aiExprOption(normalizeValue.items);
+                    $items.forEach(item => {
                         const option = {};
                         option.key = item.key;
                         option.label = item.label;

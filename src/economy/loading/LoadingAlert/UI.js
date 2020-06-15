@@ -6,18 +6,23 @@ import U from 'underscore';
 class Component extends React.PureComponent {
     render() {
         const {$alert = {}, $type, $icon, $size = 28} = this.props;
+        let { className } = this.props;
         const {message, description, type = "info"} = $alert;
 
         let descJsx = false;
         if ("string" === typeof description) {
             descJsx = description;
         } else if (U.isArray(description)) {
-            descJsx = (
-                <ul>
-                    {description.map((item, index) => <li
-                        key={item}>{index + 1}.{item}</li>)}
-                </ul>
-            );
+            if(1 === description.length){
+                descJsx = description[0];
+            }else {
+                descJsx = (
+                    <ul>
+                        {description.map((item, index) => <li
+                            key={item}>{index + 1}.{item}</li>)}
+                    </ul>
+                );
+            }
         }
         const attrs = {};
         if (message) {
@@ -33,19 +38,23 @@ class Component extends React.PureComponent {
         } else {
             attrs.type = type;
         }
-        attrs.showIcon = !$alert.hideIcon;
-        let className;
+        attrs.showIcon = !$alert['hideIcon'];       // 由于系统中有个地方使用了这种属性，属于遗留代码
+        if(!className){
+            className = "";
+        }else{
+            className += " ";
+        }
         if (attrs.showIcon) {
             if ($icon) {
                 attrs.icon = (<Icon type={$icon} style={{
                     fontSize: $size
                 }}/>);
-                className = "web-alert-iconlist";
+                className += "web-alert-iconlist";
             } else {
-                className = "web-alert-list";
+                className += "web-alert-list";
             }
         } else {
-            className = "web-alert-text";
+            className += "web-alert-text";
         }
         return (
             <div className={className}>

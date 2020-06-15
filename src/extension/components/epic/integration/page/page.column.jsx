@@ -36,23 +36,22 @@ export default (reference) => {
         width: 72,
         className: "job-op",
         render: (text, record = {}) => {
-            // const status = record.status;
-            const cab = Ux.sexCab(reference, "toolbar");
-            let items = Ux.clone(OP['NORMAL']);
-            return (
-                <Button.Group className={"ux-group"} key={text}>
-                    {items.map(item => {
-                        let onClick = FUNS.op[item];
-                        if (Ux.isFunction(onClick)) {
-                            onClick = onClick(reference, record);
-                        }
-                        if (Ux.isFunction(onClick)) {
-                            const config = cab[item];
-                            return renderBar(reference, config, item, onClick);
-                        } else return false;
-                    })}
-                </Button.Group>
-            )
+                const cab = Ux.sexCab(reference, "toolbar");
+                let items = Ux.clone(OP['NORMAL']);
+                return (
+                    <Button.Group className={"ux-group"} key={text}>
+                        {items.map(item => {
+                            let onClick = FUNS.op[item];
+                            if (Ux.isFunction(onClick)) {
+                                onClick = onClick(reference, record);
+                            }
+                            if (Ux.isFunction(onClick)) {
+                                const config = cab[item];
+                                return renderBar(reference, config, item, onClick);
+                            } else return false;
+                        })}
+                    </Button.Group>
+                )
         }
     })
 }

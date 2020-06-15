@@ -202,6 +202,22 @@ const dataMagic = (normalized = {}, data = {}) => {
         }
     }
 }
+const dataSearchInput = (normalized = {}, data = {}) => {
+    const layout = Ux.valuePath(data, "optionJsx.layout");
+    if (layout) {
+        const {left, right} = layout;
+        normalized.layoutLeft = left;
+        normalized.layoutRight = right;
+    } else {
+        /* 默认 */
+        normalized.layoutLeft = 16;
+        normalized.layoutRight = 8;
+    }
+}
+const dataSearchRangeDate = (normalized = {}, data = {}) => {
+    normalized.rangeMode = Ux.valuePath(data, "optionJsx.mode");
+    normalized.format = Ux.valuePath(data, "optionJsx.format");
+}
 const DATA_EXECUTOR = {
     aiPassword: dataPassword,                       // 密码框
     aiInputNumber: dataInputNumber,                 // 数值输入框
@@ -222,6 +238,8 @@ const DATA_EXECUTOR = {
     aiTitle: dataTitle,                             // 标题处理
     aiMagic: dataMagic,                             // 数据呈现专用
     aiAction: dataAction,                           // 按钮专用
+    aiSearchInput: dataSearchInput,                 // 搜索匹配框
+    aiSearchRangeDate: dataSearchRangeDate,         // 搜索范围框
 }
 export default {
     // 专用

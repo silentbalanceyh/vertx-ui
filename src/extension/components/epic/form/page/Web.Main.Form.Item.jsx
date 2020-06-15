@@ -1,8 +1,8 @@
 import React from 'react';
 import {Card, Icon, Popconfirm, Tooltip} from 'antd';
-import Img from './images/form.jpg';
+import Img from '../images/form.jpg';
 import Ux from 'ux';
-import Event from './event';
+import Event from '../event';
 
 export default (reference, data = {}) => {
     const card = Ux.fromHoc(reference, "card");

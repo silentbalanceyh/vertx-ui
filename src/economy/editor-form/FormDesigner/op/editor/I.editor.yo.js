@@ -39,7 +39,7 @@ export default {
         /* 单元格交换函数 */
         const {raft = {}, render, ...rest} = cell;
 
-        const {rxApi, rxModelSave, $palette = {}} = reference.props;
+        const {rxApi, rxModelSave, $palette = {}, $form} = reference.props;
         return {
             ...Ux.onUniform(reference.props),
             config: {
@@ -55,6 +55,7 @@ export default {
             key: cell.key,
             $status,
             $palette,
+            $form,                  // 表单原始配置
             rxApi,
             rxModelSave,
         };

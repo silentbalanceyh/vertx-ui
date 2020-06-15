@@ -160,7 +160,7 @@ const $opDataIn = (normalized = {}, params, reference) => {
      *      checkStrictly: true | false
      * }
      */
-    St.dataComponent(normalized, params);
+    St.dataComponent(normalized, params, reference);
     /*
      * 选项属性
      * 1）静态和动态数据源

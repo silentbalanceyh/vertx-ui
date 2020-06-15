@@ -120,8 +120,7 @@ const dataTransfer = (normalized = {}, params = {}) => {
         normalized.optionJsx.config.valueKey = params.transferField;
     }
     if (params.transferLeft && params.transferRight) {
-        const titles = [params.transferLeft, params.transferRight];
-        normalized.optionJsx.config.titles = titles;
+        normalized.optionJsx.config.titles = [params.transferLeft, params.transferRight];
     }
 }
 const dataBraftEditor = (normalized = {}, params = {}) => {
@@ -266,6 +265,42 @@ const dataMagic = (normalized = {}, params = {}) => {
     }
     // DATUM 会被解析，所以这里不用处理
 }
+const dataSearchInput = (normalized = {}, params = {}) => {
+    if (params.layoutLeft || params.layoutRight) {
+        let layoutLeft = params.layoutLeft;
+        let layoutRight = params.layoutRight;
+        if (layoutLeft && !layoutRight) {
+            layoutRight = 24 - layoutLeft;
+        } else if (layoutRight && !layoutLeft) {
+            layoutLeft = 24 - layoutRight;
+        } else {
+            const sum = layoutLeft + layoutRight;
+            if (sum < 24) {
+                layoutRight = 24 - layoutLeft;
+            }
+        }
+        const layout = {};
+        layout.left = layoutLeft;
+        layout.right = layoutRight;
+        normalized.optionJsx.layout = layout;
+    }
+}
+const dataSearchRangeDate = (normalized = {}, params = {}) => {
+    normalized.optionJsx.mode = params.rangeMode;
+    normalized.optionJsx.format = params.format;
+    const placeholder = [];
+    if (params.placeholderLeft) {
+        placeholder.push(params.placeholderLeft);
+    } else {
+        placeholder.push("");
+    }
+    if (params.placeholderRight) {
+        placeholder.push(params.placeholderRight);
+    } else {
+        placeholder.push("");
+    }
+    normalized.optionJsx.placeholder = placeholder;
+}
 const DATA_EXECUTOR = {
     aiPassword: dataPassword,                       // 密码框
     aiInputNumber: dataInputNumber,                 // 数值框
@@ -286,6 +321,8 @@ const DATA_EXECUTOR = {
     aiTitle: dataTitle,                             // 标题处理
     aiMagic: dataMagic,                             // 数据呈现专用
     aiAction: dataAction,                           // 按钮专用
+    aiSearchInput: dataSearchInput,                 // 搜索框处理
+    aiSearchRangeDate: dataSearchRangeDate,         // 搜索范围框
 }
 export default {
     // 专用
