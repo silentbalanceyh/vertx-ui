@@ -63,6 +63,7 @@ const dataCheckbox = (normalized = {}, params = {}) => {
         dataJsx(normalized, params, 'checkedChildren');
         dataJsx(normalized, params, 'unCheckedChildren');
     }
+    normalized.optionConfig.valuePropName = "checked";
 }
 
 
@@ -83,6 +84,8 @@ const dataRadio = (normalized = {}, params = {}) => {
         }
         normalized.optionJsx.style = style;
     }
+    // 特殊处理
+    normalized.optionConfig.valuePropName = "checked";
 }
 
 const dataFileUpload = (normalized = {}, params = {}) => {

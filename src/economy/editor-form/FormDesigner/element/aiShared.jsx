@@ -6,7 +6,8 @@ import ValueSource from '../../ValueSource/UI';
 import RestfulApi from "../../RestfulApi/UI";
 import ParamInput from "../../ParamInput/UI";
 import DatumUnique from '../../DatumUnique/UI';
-import FieldAddition from '../control/Web.Field.Addition';
+
+import FieldAddition from '../control/Web.Sub.Field';
 
 import LoadingContent from "../../../loading/LoadingContent/UI";
 import {Divider, Icon, Modal} from "antd";

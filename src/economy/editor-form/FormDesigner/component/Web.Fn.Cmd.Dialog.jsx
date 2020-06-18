@@ -19,6 +19,10 @@ export default (reference, item = {}) => {
                         $forbidden: false,
                     });
                 }
+                const fnFooter = Cmd.CommandFooter[item.key];
+                if (Ux.isFunction(fnFooter)) {
+                    modelConfig.footer = fnFooter(reference, item, modelConfig);
+                }
                 return (
                     <Modal key={item.key} {...modelConfig} visible={$visible}>
                         {$visible ? (

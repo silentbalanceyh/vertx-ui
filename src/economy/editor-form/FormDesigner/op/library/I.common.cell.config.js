@@ -9,6 +9,10 @@ const cellGrid = (cell = {}, matrix = {}) => {
         cell.optionItem = updatedItem;
     }
     Ux.aiLayout(cell, matrix);
+    /* 特殊处理 */
+    if ("aiAction" === cell.render) {
+        cell.optionItem.label = " ";
+    }
 }
 const _parseLen = (data = [], readyData = {}) => {
     const $data = data.filter(item => item.key === readyData.key);
@@ -52,12 +56,6 @@ const _parseRender = (cell = {}) => {
             cell.span = 24;
         } else if ("$button" === cell.field) {
             cell.render = "aiAction";
-            /* 处理 optionItem label */
-            if (!cell.optionItem) {
-                cell.optionItem = {};
-            }
-            /* 加入特殊的 class 类 */
-            cell.optionItem.label = " ";
         } else {
             cell.render = "aiInput";
         }
@@ -115,6 +113,7 @@ export default {
              * 处理单元格
              */
             const readyData = Ux.clone(matrix);
+
             readyData.raft = cell;
             readyData.render = cell.render;
             readyData.span = cell.span;
@@ -135,6 +134,7 @@ export default {
                         ...rest,
                         columns: rest.length
                     })
+
                     readyData.raft = cell;
                     readyData.render = render;
                 }

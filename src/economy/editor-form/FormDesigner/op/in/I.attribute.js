@@ -19,13 +19,15 @@ export default {
             normalized.field = Ux.valuePath(data, "title");
         } else {
             const fieldStr = Ux.valuePath(data, "field");
-            if (0 < fieldStr.indexOf(',')) {
-                const fields = fieldStr.split(',');
-                const [field, __condition] = fields;
-                normalized.field = field;
-                normalized.__condition = __condition;
-            } else {
-                normalized.field = fieldStr;
+            if (fieldStr) {
+                if (0 < fieldStr.indexOf(',')) {
+                    const fields = fieldStr.split(',');
+                    const [field, __condition] = fields;
+                    normalized.field = field;
+                    normalized.__condition = __condition;
+                } else {
+                    normalized.field = fieldStr;
+                }
             }
         }
     },

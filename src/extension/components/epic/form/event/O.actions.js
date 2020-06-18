@@ -63,9 +63,16 @@ const onDesign = (reference, $inited) => (event) => {
         __tabs => __tabs.onOpen('tabDesign', $inited)
     );
 };
+const onClose = (reference) => (event) => {
+    Ux.prevent(event);
+    Ex.uiTab(reference,
+        __tabs => __tabs.onClose('tabDesign')
+    );
+}
 export default {
     onAdd,
     onEdit,
     onDelete,
-    onDesign
+    onDesign,
+    onClose
 }

@@ -35,7 +35,7 @@ const yiInternal = (reference) => {
 
 @component({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "UI.Preview",
+    "i18n.name": "UI.Sub.Preview",
 })
 class Component extends React.PureComponent {
     componentDidMount() {
