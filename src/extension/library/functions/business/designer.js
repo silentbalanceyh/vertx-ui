@@ -146,13 +146,17 @@ const submit = (reference) => (params, fnCallback) => {
                     // 字段处理
                     field.rowType = "FIELD";
                     field.render = cell.render; // 该值在这里必须存在
-                    field.name = cell.field;    // 该值在这里必须存在
+                    if (0 < cell.field.indexOf(',')) {
+                        field.name = cell.field.replace(',', '`');    // 该值在这里必须存在
+                    } else {
+                        field.name = cell.field;    // 该值在这里必须存在
+                    }
                     if (cell.hidden) {
                         field.hidden = cell.hidden;
                     } else {
                         field.hidden = false;
                     }
-                    field.field = cell.field;
+                    // field.field = cell.field;
                     // optionItem
                     const $optionItem = Ux.clone(cell.optionItem);
                     const {label, ...rest} = $optionItem;

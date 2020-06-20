@@ -1,32 +1,34 @@
 import Ux from 'ux';
 
 export default (reference) => (key) => {
-    reference.setState({$ready: false});
-    Ux.ajaxGet("/api/graphic/:key", {key}).then(response => {
-        const state = {};
-        state.$tplKey = key;
+    reference.setState({$ready: false, $tplKey: key});
+    Ux.ajaxGet('/api/graphic/:key', {key}).then(response => {
+        /* 读取原始数据 */
         const {$tplData = {}} = reference.state;
-        const dataNodes = $tplData.nodes;
-        const {nodes = [], edges = []} = response;
 
-        nodes.forEach(node => {
-            const category = node.id;
-            const counter = dataNodes
-                .filter(node => !!node)
-                .map(node => node.data)
-                .filter(each => !!each)
-                .filter(item => {
-                    if (category === item.categoryThird) {
-                        return true;
-                    } else {
-                        return category === item.categorySecond;
-                    }
-                }).length;
-            node._counter = `（${counter}）`;
-            node.shape = "exBaseNode";  /* 改成基础图形 */
+        /* 直接根据类型过节点 */
+        const keys = response.nodes ? response.nodes
+            .map(node => node.id).filter(item => !!item) : [];
+        const $keys = Ux.immutable(keys);
+
+        /* 直接过滤 nodes */
+        let $nodes = $tplData.nodes;
+        $nodes = $nodes.filter(item => {
+            if (item.data) {
+                const {categoryThird, categorySecond} = item.data;
+                return (
+                    $keys.contains(categoryThird) ||
+                    $keys.contains(categorySecond)
+                );
+            } else {
+                // 不渲染无数据节点
+                return false;
+            }
         });
-        state.$data = {graphic: {nodes, edges}};
-        state.$ready = true;
-        reference.setState(state);
-    });
+
+        /* 新图新数据 */
+        const $data = Ux.clone($tplData);
+        $data.nodes = $nodes;
+        reference.setState({$ready: true, $data});
+    })
 }
