@@ -34,24 +34,24 @@ export default (reference) => {
         dataIndex: "key",
         fixed: "left",
         width: 72,
-        className: "job-op",
+        className: "api-op",
         render: (text, record = {}) => {
-                const cab = Ux.sexCab(reference, "toolbar");
-                let items = Ux.clone(OP['NORMAL']);
-                return (
-                    <Button.Group className={"ux-group"} key={text}>
-                        {items.map(item => {
-                            let onClick = FUNS.op[item];
-                            if (Ux.isFunction(onClick)) {
-                                onClick = onClick(reference, record);
-                            }
-                            if (Ux.isFunction(onClick)) {
-                                const config = cab[item];
-                                return renderBar(reference, config, item, onClick);
-                            } else return false;
-                        })}
-                    </Button.Group>
-                )
+            const cab = Ux.sexCab(reference, "toolbar");
+            let items = Ux.clone(OP['NORMAL']);
+            return (
+                <Button.Group className={"ux-group"} key={text}>
+                    {items.map(item => {
+                        let onClick = FUNS.op[item];
+                        if (Ux.isFunction(onClick)) {
+                            onClick = onClick(reference, record);
+                        }
+                        if (Ux.isFunction(onClick)) {
+                            const config = cab[item];
+                            return renderBar(reference, config, item, onClick);
+                        } else return false;
+                    })}
+                </Button.Group>
+            )
         }
     })
 }

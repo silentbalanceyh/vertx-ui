@@ -187,8 +187,37 @@ const xtInitArray = (props = {}, empty = false) => {
     // 初始化处理
     const value = props.value;
     if (value) {
-        values.data = U.isArray(value) && value.length > 0 ? value : (U.isArray(value.data) ? value.data :
-            ((empty) ? [] : [{key: Ut.randomUUID()}]));
+        // 如果是 String，是否可以直接转换
+        let literial = value;
+        if ("string" === typeof value) {
+            try {
+                literial = JSON.parse(value);
+            } catch (e) {
+            }
+        } else if (U.isArray(value)) {
+            if (0 < value.length) {
+                literial = value;
+            } else {
+                literial = [];
+            }
+        } else if (value.data && U.isArray(value.data)) {
+            if (0 < value.data.length) {
+                literial = value.data;
+            } else {
+                literial = [];
+            }
+        }
+        // Empty 处理
+        if (0 === literial.length) {
+            if (empty) {
+                literial = [];
+            } else {
+                literial = [{key: Ut.randomUUID()}];
+            }
+        }
+        if (U.isArray(literial)) {
+            values.data = literial;
+        }
     } else {
         values.data = ((empty) ? [] : [{key: Ut.randomUUID()}]);
     }

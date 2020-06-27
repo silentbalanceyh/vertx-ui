@@ -1,7 +1,8 @@
-import form from './form';
-import dialog from './dialog';
-import init from './init';
-import designer from './designer';
+import form from './object.form';
+import dialog from './object.dialog';
+import init from './object.init';
+import designer from './object.designer';
+
 import bind from './bind';
 import relation from './relation';
 import Job from './job';

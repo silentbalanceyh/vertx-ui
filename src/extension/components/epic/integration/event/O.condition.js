@@ -9,7 +9,30 @@ const onSearch = (reference) => (searchText) => {
     }
     reference.setState({$query, $condText: searchText, $loading: true});
 }
+const onRefresh = (reference) => () =>
+    reference.setState({$loading: true});
 
+const onClean = (reference) => (event) => {
+    Ux.prevent(event);
+    const {$query = {}} = reference.state;
+    $query.criteria = {};
+    reference.setState({
+        $query,
+        /* 选中控制专用 */
+        $condMenu: [], $condText: "", $condChecked: [],
+        $loading: true
+    });
+}
+const onChecked = (reference) => (checked) => {
+    const {$query = {}} = reference.state;
+    if (0 === checked.length) {
+        // 所有
+        delete $query.criteria['method,i'];
+    } else {
+        $query.criteria['method,i'] = checked;
+    }
+    reference.setState({$query, $condChecked: checked, $loading: true});
+}
 const onSelected = (reference) => (item) => {
     const {$query = {}} = reference.state;
     const {criteria = {}} = $query;
@@ -30,5 +53,8 @@ const onSearchChange = (reference) => (event) => {
 export default {
     onSearch,
     onSearchChange,
+    onRefresh,
+    onClean,
+    onChecked,
     onSelected,
 }

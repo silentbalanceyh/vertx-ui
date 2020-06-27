@@ -44,6 +44,16 @@
     "_tool": {
         "search": {
             "placeholder": "URI"
+        },
+        "button": {
+            "refresh": "刷新",
+            "clean": "清除"
+        },
+        "checked": {
+            "GET": "GET",
+            "PUT": "PUT",
+            "POST": "POST",
+            "DELETE": "DELETE"
         }
     },
     "_table": {

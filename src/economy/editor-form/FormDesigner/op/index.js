@@ -24,5 +24,4 @@ const exported = {
     dataIn,
     dataOut,
 }
-console.info(exported);
 export default exported;

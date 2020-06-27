@@ -1,0 +1,10 @@
+{
+    "_page": {
+        "title": "资源管理"
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabResource",
+        "tabPosition": "right",
+        "items": "资源定义,tabResource;权限定义,tabPermission"
+    }
+}

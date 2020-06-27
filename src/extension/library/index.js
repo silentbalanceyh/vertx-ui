@@ -137,4 +137,5 @@ const exported = {
  * 如果您有什么疑问，请联系：[silentbalanceyh@126.com](mailto:silentbalanceyh@126.com)，整体框架相关链接参考左侧菜单。
  * @author 戒子猪
  */
+console.info(exported);
 export default exported;

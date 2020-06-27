@@ -1,0 +1,118 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "ui": [
+            [
+                "title=资源信息"
+            ],
+            [
+                "name,资源名称",
+                "code,资源编码,,,,placeholder=推荐使用 res. 开头"
+            ],
+            [
+                {
+                    "metadata": "type,资源分类,,,aiSelect",
+                    "optionJsx.config.datum": "source=resource.type,value=code,label=name",
+                    "optionJsx.depend.impact": {
+                        "reset": [
+                            "identifier"
+                        ]
+                    }
+                },
+                "identifier,关联模型"
+            ],
+            [
+                {
+                    "metadata": "level,操作级别,,,aiSelect",
+                    "optionJsx.config.items": [
+                        "0,只读",
+                        "1,数据读取",
+                        "4,添加",
+                        "8,部分更新",
+                        "9,更新/批量更新",
+                        "12,删除/批量删除",
+                        "2,集成读取",
+                        "6,集成添加",
+                        "10,集成更新",
+                        "3,导出数据",
+                        "5,导入数据",
+                        "7,元数据添加",
+                        "11,元数据更新",
+                        "14,元数据删除",
+                        "13,清空",
+                        "15,所有权限"
+                    ]
+                },
+                {
+                    "metadata": "modeRole,用户角色,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "UNION,所有角色",
+                        "INTERSECT,角色交集",
+                        "EAGER,高优先角色",
+                        "LAZY,低优先角色"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "isGroup,用户组,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "启用",
+                        "unCheckedChildren": "禁用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "modeGroup,用户组,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "HORIZON,所有组",
+                        "CRITICAL,高优先组",
+                        "OVERLOOK,低优先组"
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "isGroup": true
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "isInherit,组继承,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "启用",
+                        "unCheckedChildren": "禁用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "modeTree,组继承模式,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "PARENT,取父组权限",
+                        "CHILD,取子组权限",
+                        "INHERIT,继承父组权限",
+                        "EXTEND,扩展子组权限"
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "isInherit": true
+                    }
+                }
+            ],
+            [
+                "comment,资源备注,24"
+            ],
+            [
+                "title=操作要求"
+            ],
+            [
+                "actionName,操作名称",
+                "actionCode,操作编码,,,,placeholder=推荐使用 act. 开头"
+            ]
+        ]
+    }
+}

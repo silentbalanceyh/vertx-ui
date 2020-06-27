@@ -101,7 +101,7 @@ class QQuery {
          */
         if (1 === arguments.length) {
             if (Array.isArray(field)) {
-                queryRef.sorter = [];
+                queryRef.sorter = field;
             }
         } else {
             if ("string" === typeof field) {
