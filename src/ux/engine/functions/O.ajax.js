@@ -25,8 +25,10 @@ const asyncMagic = (config = {}, reference) => {
     }
     const {method = "GET", uri} = config;
     if (uri) {
+        const {dataKey} = config;
+        let promise;
         if ("GET" === method) {
-            return Ajax.ajaxGet(uri, parsed);
+            promise = Ajax.ajaxGet(uri, parsed);
         } else {
             /*
              * POST 的时候需要处理
@@ -37,8 +39,12 @@ const asyncMagic = (config = {}, reference) => {
             } else {
                 Object.assign(params, parsed);
             }
-
-            return Ajax.ajaxPost(uri, params);
+            promise = Ajax.ajaxPost(uri, params);
+        }
+        if (dataKey) {
+            return promise.then(response => Abs.promise(response[dataKey]));
+        } else {
+            return promise;
         }
     } else {
         return Promise.reject({error: "[ Ox ] ajax 配置中丢失了`uri`参数！"});

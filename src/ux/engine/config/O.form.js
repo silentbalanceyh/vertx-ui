@@ -337,6 +337,12 @@ const configForm = (form, addOn = {}) => {
     if (form.initial) {
         raft.initial = Abs.clone(form.initial);
     }
+    /*
+     * assist 专用
+     */
+    if (form.assist) {
+        raft.assist = Abs.clone(form.assist);
+    }
     Logger.render(3);
     return raft;
 };
@@ -372,9 +378,16 @@ function raftForm() {
                 state.$op = $op;
                 return Abs.promise(state);
             }).then(processed => {
-                const assist = Datum.fromHoc(reference, "assist");
-                if (assist) {
-                    return Fn.asyncAssist(assist, reference, processed);
+                const {raft = {}} = processed;
+                let configAssist = Datum.fromHoc(reference, "assist");
+                if (!configAssist) {
+                    configAssist = {};
+                }
+                if (raft.assist) {
+                    Object.assign(configAssist, raft.assist);
+                }
+                if (!Abs.isEmpty(configAssist)) {
+                    return Fn.asyncAssist(configAssist, reference, processed);
                 } else {
                     return Abs.promise(processed);
                 }

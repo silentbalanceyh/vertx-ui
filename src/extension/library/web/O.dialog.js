@@ -17,6 +17,14 @@ class Component {
         return this;
     }
 
+    footer(fnRender) {
+        // 改变成函数
+        if (Ux.isFunction(fnRender)) {
+            this.$footer = fnRender;
+        }
+        return this;
+    }
+
     onMount(state) {
         state.__dialog = this;
         state.$visible = false;
@@ -49,14 +57,24 @@ class Component {
     }
 
     render() {
-        const config = this.$dialog;
+        const config = Ux.clone(this.$dialog);
         const {$visible = false, $submitting = false} = this.reference.state;
+        const dialogAttrs = {};
+        if (this.footer) {
+            const props = this.reference.props;
+            dialogAttrs.$footer = this.$footer({
+                ...props,
+                $visible,
+                $submitting,
+            });
+        }
+        dialogAttrs.$visible = $visible;
+        dialogAttrs.$submitting = $submitting;
+        dialogAttrs.$dialog = config;
         return (
             <Dialog className={"web-dialog"}
                     size={"small"}
-                    $visible={$visible}
-                    $loading={$submitting}
-                    $dialog={config}>
+                    {...dialogAttrs}>
                 {Ux.isFunction(this.$ui) ? this.$ui() : false}
             </Dialog>
         )
