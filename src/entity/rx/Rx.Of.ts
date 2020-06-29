@@ -1,3 +1,4 @@
+// @ts-ignore
 import Ux from 'ux';
 
 /*
@@ -88,7 +89,10 @@ class Of {
                 .then(response => {
                     if (Ux.isFunction(callback.success)) {
                         /* 回调处理 ！*/
-                        reference.setState({$loading: false});
+                        reference.setState({
+                            $loading: false,
+                            $submitting: false
+                        });
                         return callback.success(response, values);
                     } else {
                         throw new Error("Sorry, you must set `success` Function！");
@@ -96,6 +100,10 @@ class Of {
                 })
                 .catch(error => {
                     let returned;
+                    reference.setState({
+                        $loading: false,
+                        $submitting: false
+                    });
                     if (Ux.isFunction(callback.failure)) {
                         returned = callback.failure(error, values);
                         if (returned instanceof Promise) {

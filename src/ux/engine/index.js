@@ -14,6 +14,7 @@ import webNavigation from './web-navigation';
 import webField from './web-field';
 import webColumn from './web-column';
 import webUnit from './web-unit';
+import webOp from './web-op';
 // 特殊函数
 import functions from './functions';
 // 特殊方法处理布局
@@ -33,5 +34,6 @@ export default {
     ...webUnit,
     ...webField,
     ...webColumn,
+    ...webOp,
     aiLayout: Lt.aiLayout
 }

@@ -57,6 +57,18 @@ class Component extends React.PureComponent {
         Ux.raftForm(this).then(Ux.ready).then(Ux.pipe(this));
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        const $checked = Ex.upValue(this.props, prevProps, "$refresh");
+        if ($checked) {
+            const {$inited = {}} = this.props;
+            if (Ux.isEmpty($inited)) {
+                Ux.formClear(this, $inited);
+            } else {
+                Ux.formHits(this, $inited);
+            }
+        }
+    }
+
     render() {
         return Ex.yoRender(this, () =>
                 Ux.aiForm(this),

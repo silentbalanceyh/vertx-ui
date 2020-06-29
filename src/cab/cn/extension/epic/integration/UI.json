@@ -62,10 +62,10 @@
             {
                 "metadata": "method,HTTP方法,MAPPING",
                 "$mapping": {
-                    "GET": "GET,calendar,,#228B22",
-                    "PUT": "PUT,calendar,,#228B22",
-                    "POST": "POST,calendar,,#228B22",
-                    "DELETE": "DELETE,thunderbolt,,#D02090"
+                    "GET": "GET,download,,#268941",
+                    "PUT": "PUT,edit,,#0a7bed",
+                    "POST": "POST,plus,,#f6af03",
+                    "DELETE": "DELETE,delete,,#e22015"
                 }
             },
             "uri,URI"

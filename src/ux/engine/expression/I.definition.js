@@ -78,6 +78,19 @@ const buttonDefinition = {
         "icon",
         "confirm",
         "$KV$"
+    ],
+    /*
+     * command 专用
+     */
+    command: [
+        "key",              // 事件专用 key，依靠这个绑定
+        "text",             // 显示文字
+        "className",        // 风格处理
+        "confirm",          // confirm 窗口
+        "confirmPosition",  // confirm 位置
+        "icon",             // 图标信息
+        "tooltip",          // tooltip 打开（打开过后文字放到 tooltip中）
+        "$KV$"
     ]
 };
 const columnDefinition = {

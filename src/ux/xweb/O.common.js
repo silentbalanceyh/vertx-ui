@@ -215,6 +215,7 @@ const xtInitArray = (props = {}, empty = false) => {
                 literial = [{key: Ut.randomUUID()}];
             }
         }
+        
         if (U.isArray(literial)) {
             values.data = literial;
         }

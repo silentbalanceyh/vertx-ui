@@ -23,7 +23,7 @@ const formClear = (reference, data) => {
     // 记录切换：从更新某条记录 -> 更新另外一条记录
     const fields = Object.keys(form.getFieldsValue());
     fields.forEach(key => Value.valueAppend(data, key, undefined));
-    return data;
+    form.setFieldsValue(data);
 };
 /**
  *
@@ -153,7 +153,10 @@ const formHits = (reference, values = {}) => {
     const {form} = reference.props;
     E.fxTerminal(!form, 10020, form);
     if (form) {
-        form.setFieldsValue(values);
+        const formValues = {};
+        const fields = Object.keys(form.getFieldsValue());
+        fields.forEach(field => formValues[field] = values[field]);
+        form.setFieldsValue(formValues);
     }
 };
 /**

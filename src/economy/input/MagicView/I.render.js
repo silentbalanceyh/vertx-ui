@@ -11,7 +11,10 @@ const jsxMoment = (reference, value, config = {}) => {
     return jsxLabel(reference, formatted, config);
 };
 const jsxItems = (reference, value, config = {}) => {
-    const item = Ux.elementUnique(config.items, "key", String(value));
+    let item = Ux.elementUnique(config.items, "key", value);
+    if (!item) {
+        item = Ux.elementUnique(config.items, "key", String(value));
+    }
     if (item) {
         const label = item.label;
         if (label) {

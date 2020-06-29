@@ -73,8 +73,30 @@ const aiExprOp = (button = "") => {
  * @returns {Object} 解析成标准的 action。
  */
 const aiExprAction = (popover = "") => Parser.parseItem(popover, "action");
-
+/**
+ * ## 标准函数
+ *
+ * 针对 command 的按钮专用解析器。
+ *
+ * @memberOf module:_aiExpr
+ * @param {String|Object} command 需要解析的 command 专用配置。
+ * @returns {Object} 解析成标准的 command。
+ */
+const aiExprCommand = (command = "") => Parser.parseItem(command, "command");
+/**
+ * ## 标准函数
+ *
+ * 针对 commands 的按钮专用解析器。
+ *
+ * @memberOf module:_aiExpr
+ * @param {Array} commands 命令配置数组
+ * @return {Array} 解析过后的 commands
+ */
+const aiExprCommands = (commands = []) =>
+    mapIterator(commands, aiExprCommand)
 export default {
+    aiExprCommands,
+    aiExprCommand,
     aiExprButtons,
     aiExprButton,
     aiExprOp,

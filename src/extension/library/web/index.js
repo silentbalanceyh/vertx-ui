@@ -11,7 +11,9 @@ function wrapper(reference, clazz, name, callback) {
                 const $state = reference.state ? reference.state : {};
                 executor = $state[name];
             }
-            callback(executor);
+            if (executor) {
+                callback(executor);
+            }
         } else {
             console.error("传入回调函数不对！")
         }
