@@ -58,13 +58,17 @@ class Component extends React.PureComponent {
     }
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        const $checked = Ex.upValue(this.props, prevProps, "$refresh");
-        if ($checked) {
-            const {$inited = {}} = this.props;
-            if (Ux.isEmpty($inited)) {
-                Ux.formClear(this, $inited);
-            } else {
-                Ux.formHits(this, $inited);
+        /*
+         * 必须要传入了 $refresh 的时候才会生效
+         * 如果没有传入 $refresh 时，这个过程不生效
+         */
+        if (this.props.hasOwnProperty("$refresh")) {
+            const $checked = Ex.upValue(this.props, prevProps, "$refresh");
+            if ($checked) {
+                /*
+                 * 如果检测到变更，则需要按照 $inited 中的值重新刷新表单数据
+                 * 并且在刷新的时提供 undefined 值
+                 */
             }
         }
     }

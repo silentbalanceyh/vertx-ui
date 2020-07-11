@@ -1,11 +1,10 @@
 import Ux from 'ux';
-import React from 'react';
 import Event from './Op.Event';
+import yiForm from './Op.Form';
 
 const yiEdition = (reference, config = {}) => {
     const {
         table = {}, dialog = "", op,
-        form = "",
         /*
          * 提交过后是否关闭窗口
          * = false: 如果 false 则继续添加，只重置
@@ -51,31 +50,8 @@ const yiEdition = (reference, config = {}) => {
     if (Ux.isArray(value)) {
         state.initialValue = value;
     }
-    const {$form = {}} = ref.props;
-    const Component = $form[form];
-    if (Component) {
-        state.fnComponent = ($inited = {}, $mode) => {
-            /*
-             * 传入的是值
-             */
-            const inherit = Event.yoInherit(reference);
-            inherit.$inited = $inited;
-            inherit.$mode = $mode;
-            const {value} = reference.props;
-            if (value) {
-                inherit.value = value;
-            }
-            return (
-                <Component {...inherit}/>
-            );
-        };
-        state.$ready = true;
-        reference.setState(state);
-    } else {
-        console.error($form, form);
-        state.error = `Component in dialog has been missed. key = ${form}`;
-        reference.setState(state);
-    }
+    yiForm(reference, config, state)
+        .then(Ux.ready).then(Ux.pipe(reference));
 };
 
 const yiView = (reference, config) => {

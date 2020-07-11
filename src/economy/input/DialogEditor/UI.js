@@ -4,6 +4,7 @@ import Op from './Op';
 import {Input, Table} from 'antd';
 import {Dialog} from 'web';
 import U from 'underscore';
+import './Cab.less';
 
 class Component extends React.PureComponent {
     constructor(props) {
@@ -43,7 +44,7 @@ class Component extends React.PureComponent {
                     <Input.Group {...attrs}>
                         {Ux.aiFloatError(this, !$visible)}
                         <Table {...$table} dataSource={data}
-                               className={"web-table"}
+                               className={"web-table web-dialogeditor-table"}
                                loading={$submitting}/>
                     </Input.Group>
                 )
@@ -52,7 +53,7 @@ class Component extends React.PureComponent {
                     <Input.Group {...attrs}>
                         {Ux.aiFloatError(this, !$visible)}
                         <Table {...$table} dataSource={data}
-                               className={"web-table"}
+                               className={"web-table web-dialogeditor-table"}
                                loading={$submitting}/>
                         <Dialog className={"web-dialog"}
                                 size={"small"}

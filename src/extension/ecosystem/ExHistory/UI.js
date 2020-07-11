@@ -22,14 +22,12 @@ class Component extends React.PureComponent {
                 return false;
             } else {
                 const {$table = {}} = this.state;
-                const {$loading = false} = this.props;
                 /*
                  * 默认不用 $loading
                  */
                 const dataSource = Op.yoAdjust(this);
                 return (
-                    <Table {...$table} dataSource={dataSource}
-                           $loading={$loading}/>
+                    <Table {...$table} dataSource={dataSource}/>
                 )
             }
         }, Ex.parserOfColor("ExHistory").component())

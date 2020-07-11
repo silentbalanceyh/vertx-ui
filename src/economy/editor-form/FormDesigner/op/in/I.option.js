@@ -2,16 +2,18 @@ import Ux from 'ux';
 
 const dataDatum = (normalized = {}, data = {}) => {
     const normalizeValue = Ux.valuePath(data, "optionJsx.config");
-    if (normalizeValue.hasOwnProperty("datum")) {
-        normalized.dataSource = "datum";
-        normalized.datumSource = normalizeValue.datum.source;
-        normalized.datumKey = normalizeValue.datum.value;
-        normalized.datumLabel = normalizeValue.datum.label;
-    }
-    if (normalizeValue.hasOwnProperty("cascade")) {
-        normalized.cascadeEnabled = true;
-        normalized.cascadeSource = normalizeValue.cascade.source;
-        normalized.cascadeValue = normalizeValue.cascade.target;
+    if (normalizeValue) {
+        if (normalizeValue.hasOwnProperty("datum")) {
+            normalized.dataSource = "datum";
+            normalized.datumSource = normalizeValue.datum.source;
+            normalized.datumKey = normalizeValue.datum.value;
+            normalized.datumLabel = normalizeValue.datum.label;
+        }
+        if (normalizeValue.hasOwnProperty("cascade")) {
+            normalized.cascadeEnabled = true;
+            normalized.cascadeSource = normalizeValue.cascade.source;
+            normalized.cascadeValue = normalizeValue.cascade.target;
+        }
     }
 }
 export default {

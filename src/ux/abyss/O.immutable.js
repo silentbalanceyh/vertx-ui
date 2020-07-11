@@ -38,6 +38,8 @@ const clone = (input) => {
                 return Immutable.fromJS([]).toJS();
             }
         }
+    } else if (U.isFunction(input)) {
+        return input;
     } else {
         if (input) {
             // Object.freeze(input);

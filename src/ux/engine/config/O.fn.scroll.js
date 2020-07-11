@@ -16,8 +16,10 @@ const widthString = (input) => {
     for (let idx = 0; idx < input.length; idx++) {
         const str = String(input.charAt(idx));
         if (Abs.isCn(str)) {
+            // 中文字符长度
             length += (2 * px);
         } else {
+            // 英文字符长度
             length += px;
         }
     }
@@ -48,7 +50,7 @@ const widthData = (data = [], field = "") => {
 const widthTitle = (title = "", column = {}) => {
     let titleWidth = widthString(title);
     if (column.sorter) {
-        titleWidth += (px / 3);
+        titleWidth += (px * 2);
     }
     if (column.hasOwnProperty("$filter")) {
         titleWidth += (px * 2);
@@ -179,13 +181,16 @@ export default ($table = {}, data = [], reference) => {
                         column.width = calculated;
                         adjust = calculated;
                     } else {
-                        if (200 < calculated) {
-                            column.width = calculated;
-                        }
+                        column.width = calculated;
                     }
                     if (0 < data.length) {
                         /* （有数据）*/
                         width += calculated;
+                    }
+
+                    /* 基础修正 */
+                    if (undefined !== column.width && column.width < 84) {
+                        delete column.width;
                     }
                 }
             }
@@ -193,33 +198,28 @@ export default ($table = {}, data = [], reference) => {
         /*
          * 报表用于计算最终的列宽
          */
-        report[rdTitle] = width + `,` + column.width + "," + adjust; // column.width;
+        report[rdTitle] = rdType + "," + width + `,` + column.width + "," + adjust; // column.width;
     });
     /*
      * 可支持的最大宽度
      * 未配置 scroll 的时候计算，配置了就不用计算了
      */
-    if (!$table.scroll) {
-        /*
-        Dev.dgDebug({
-            width, adjust, report, columns: $table.columns.length
-        }, "[ Ux ] Scroll滚动条宽度计算结果：", "#436EEE");
-        */
+    if (!$table.scroll || !$table.scroll.x) {
         /*
          * 基础计算：必须是超过6列才执行
          */
-        if (5 <= $table.columns.length) {
+        if (!$table.scroll) {
             $table.scroll = {};
-            $table.scroll.x = 'max-content';  //width + adjust * 2;
-            /*
-             * className 计算
-             */
-            let className = $table.className;
-            if (!className) {
-                className = "";
-            }
-            className = `${className} web-table-adjust`;
-            $table.className = className;
         }
+        $table.scroll.x = 'max-content';  //width + adjust * 2;
+        /*
+         * className 计算
+         */
+        let className = $table.className;
+        if (!className) {
+            className = "";
+        }
+        className = `${className} web-table-adjust`;
+        $table.className = className;
     }
 }

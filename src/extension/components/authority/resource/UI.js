@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
             return (
                 <ExTab {...Ex.yoAmbient(this)} config={tabs}>
                     {render.tabResource(this)}
-                    {render.tabPermission()}
+                    {render.tabPermission(this)}
                 </ExTab>
             )
         }, Ex.parserOfColor("PxAuthority-Resource").page({

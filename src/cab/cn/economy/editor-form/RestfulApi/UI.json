@@ -22,8 +22,10 @@
             {
                 "metadata": "method,HTTP方法,MAPPING",
                 "$mapping": {
-                    "GET": "GET,download,16,#278741",
-                    "POST": "POST,cloud-download,16,#ffb400"
+                    "GET": "GET,download,,#268941",
+                    "PUT": "PUT,edit,,#0a7bed",
+                    "POST": "POST,plus,,#f6af03",
+                    "DELETE": "DELETE,delete,,#e22015"
                 }
             }
         ]

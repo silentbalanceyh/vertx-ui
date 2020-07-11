@@ -11,13 +11,18 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                 // 有值才验证
                 const parameters = Parser.parseAjax(rule.config.params, refereuce);
                 // 基本条件
-                const field = rule.field;
+                const {alias} = rule.config;
+                const field = alias && alias.field ? alias.field : rule.field;
+
+                // 让级别条件支持别名，重新抽取字段
                 parameters[field] = value;
                 const {$inited} = refereuce.props;
-                if ($inited && $inited.key) {
+
+                const key = alias && alias.key ? alias.key : "key";
+                if ($inited && $inited[key]) {
                     // 更新Mode
                     const updateKey = `key,<>`;
-                    parameters[updateKey] = $inited.key;
+                    parameters[updateKey] = $inited[key];
                 }
                 // existing 时，参数间关系默认为 AND（更新专用）
                 if (Object.keys(parameters).length > 1) {

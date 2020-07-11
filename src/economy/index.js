@@ -30,12 +30,13 @@ export {default as FileUpload} from './input/FileUpload/UI';            // 上�
 export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
 export {default as CheckJson} from './input/CheckJson/UI';              // CheckBox多项属性Json格式
 export {default as InputArray} from './input/InputArray/UI';            // 多值输入，值结构为 Array
-// export {default as Checkbox} from './input/Checkbox/UI';                // 单选框，解决无法选中和反选的问题
-// 复杂搜索组件
+
+// ------------------------------- 复杂搜索组件
 export {default as SearchInput} from './input/SearchInput/UI';
 export {default as SearchRangeDate} from './input/SearchRangeDate/UI';
 // -------------------------------  表格列专用
 export {default as ColumnUser} from './action/ColumnUser/UI';
+export {default as RestfulApi} from './editor-form/RestfulApi/UI';
 // -------------------------------  重新命名过的组件
 /*
  * 新：Dialog

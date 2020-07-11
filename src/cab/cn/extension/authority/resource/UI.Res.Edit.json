@@ -1,0 +1,249 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "ui": [
+            [
+                {
+                    "title": "操作说明",
+                    "config": {
+                        "message": "关于`操作`和`资源`",
+                        "description": [
+                            "资源和操作是 1对1 的关系，每一个资源和一个`安全操作`绑定。",
+                            "`安全`操作可以从系统的集成接口中选择，关于接口管理科参考`集成管理`菜单。",
+                            "资源编码和操作编码在同一个应用中必须唯一，并且根据RESTful规范，RESTful地址和HTTP方法也会构成唯一键。"
+                        ],
+                        "type": "warning"
+                    }
+                }
+            ],
+            [
+                "title=资源信息"
+            ],
+            [
+                {
+                    "metadata": "name,资源名称",
+                    "optionConfig.rules": [
+                        "required,资源名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,资源编码,,,,placeholder=推荐使用 res. 开头",
+                    "optionConfig.rules": [
+                        "required,资源编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，资源编码重复！",
+                            "config": {
+                                "uri": "/api/resource/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,资源分类,,,aiSelect,placeholder=选择资源类型",
+                    "optionJsx.config.datum": "source=resource.type,value=code,label=name",
+                    "optionJsx.depend.impact": {
+                        "reset": [
+                            "identifier",
+                            "modelKey"
+                        ]
+                    }
+                },
+                "modelKey,关联模型",
+                "identifier,模型ID,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "level,资源等级,,,aiSelect,placeholder=括号中为权值",
+                    "optionJsx.config.dataType": "NUMBER",
+                    "optionJsx.config.items": [
+                        "0,只读（0）",
+                        "1,数据读取（1）",
+                        "4,添加（4）",
+                        "8,部分更新（8）",
+                        "9,更新/批量更新（9）",
+                        "12,删除/批量删除（12）",
+                        "2,集成读取（2）",
+                        "6,集成添加（6）",
+                        "10,集成更新（10）",
+                        "3,导出数据（3）",
+                        "5,导入数据（5）",
+                        "7,元数据添加（7）",
+                        "11,元数据更新（11）",
+                        "14,元数据删除（14）",
+                        "13,清空（13）",
+                        "15,所有权限（15）"
+                    ]
+                },
+                {
+                    "metadata": "modeRole,用户角色,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "UNION,所有角色",
+                        "INTERSECT,角色交集",
+                        "EAGER,高优先角色",
+                        "LAZY,低优先角色"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "isGroup,用户组,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "启用",
+                        "unCheckedChildren": "禁用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "modeGroup,用户组,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "HORIZON,所有组",
+                        "CRITICAL,高优先组",
+                        "OVERLOOK,低优先组"
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "isGroup": true
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "isInherit,组继承,8,,aiCheckbox",
+                    "optionJsx": {
+                        "mode": "SWITCH",
+                        "checkedChildren": "启用",
+                        "unCheckedChildren": "禁用"
+                    },
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "modeTree,组继承模式,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "PARENT,取父组权限",
+                        "CHILD,取子组权限",
+                        "INHERIT,继承父组权限",
+                        "EXTEND,扩展子组权限"
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "isInherit": true
+                    }
+                }
+            ],
+            [
+                "comment,资源备注,24"
+            ],
+            [
+                "title=操作要求"
+            ],
+            [
+                {
+                    "metadata": "actionName,操作名称",
+                    "optionConfig.rules": [
+                        "required,操作名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "actionCode,操作编码,,,,placeholder=推荐使用 act. 开头",
+                    "optionConfig.rules": [
+                        "required,操作编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，操作编码重复！",
+                            "config": {
+                                "uri": "/api/action/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                },
+                                "alias": {
+                                    "field": "code",
+                                    "key": "actionKey"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "actionUri,RESTful地址,16,97%",
+                    "optionConfig.rules": [
+                        "required,RESTful地址不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，选择的操作违背了RESTful规范！",
+                            "config": {
+                                "uri": "/api/action/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma",
+                                    "method": "FORM:actionMethod"
+                                },
+                                "alias": {
+                                    "field": "uri",
+                                    "key": "actionKey"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "metadata": "restful,,8",
+                    "optionJsx.config.linker": {
+                        "uri": "actionUri",
+                        "method": "actionMethod",
+                        "key": "actionKey"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "actionMethod,HTTP方法,16,,aiRadio",
+                    "optionConfig.rules": [
+                        "required,HTTP方法不可为空！"
+                    ],
+                    "optionJsx.config.items": [
+                        "GET,GET",
+                        "POST,POST",
+                        "PUT,PUT",
+                        "DELETE,DELETE"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "actionKey"
+        ]
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，您的资源定义信息已经成功更新！",
+            "removed": "您的资源定义记录删除成功！"
+        }
+    }
+}

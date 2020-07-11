@@ -83,7 +83,7 @@ class Component {
         const config = Ux.clone(this.$dialog);
         const {$visible = false, $submitting = false} = this.reference.state;
         const dialogAttrs = {};
-        if (this.footer) {
+        if (Ux.isFunction(this.$footer)) {
             const props = this.reference.props;
             dialogAttrs.$footer = this.$footer({
                 ...props,

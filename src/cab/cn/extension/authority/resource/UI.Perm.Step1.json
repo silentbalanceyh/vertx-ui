@@ -1,0 +1,165 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "ui": [
+            [
+                {
+                    "metadata": "group,权限组,19",
+                    "optionConfig.rules": [
+                        "required,请填写权限组名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "config": {
+                        "activeKey": "tabStep1",
+                        "items": "权限列表,tabStep1",
+                        "tabBarExtraContent": {
+                            "tabStep1": [
+                                "$opAddPerm,添加权限,$opShowPerm,primary,plus"
+                            ]
+                        },
+                        "pages": {
+                            "tabStep1": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "permissions,,24,,aiDialogEditor",
+                                            "optionJsx.config": {
+                                                "form": {
+                                                    "window": 0.15,
+                                                    "columns": 2,
+                                                    "ui": [
+                                                        [
+                                                            {
+                                                                "metadata": "name,权限名称,19",
+                                                                "optionConfig.rules": [
+                                                                    "required,请填写权限名称！"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "code,权限编码,19,,,placeholder=推荐以 perm 开头的系统助记码",
+                                                                "optionConfig.rules": [
+                                                                    "required,请填写权限编码！",
+                                                                    {
+                                                                        "validator": "existing",
+                                                                        "message": "对不起，权限编码重复！",
+                                                                        "config": {
+                                                                            "uri": "/api/permission/existing",
+                                                                            "method": "POST",
+                                                                            "params": {
+                                                                                "sigma": "PROP:app.sigma"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "type,资源分类,19,,aiSelect,placeholder=选择资源类型",
+                                                                "optionJsx.config.datum": "source=resource.type,value=code,label=name",
+                                                                "optionJsx.depend.impact": {
+                                                                    "reset": [
+                                                                        "identifier",
+                                                                        "modelKey"
+                                                                    ]
+                                                                },
+                                                                "optionConfig.rules": [
+                                                                    "required,请选择资源分类！"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "modelKey,关联模型,19",
+                                                                "optionConfig.rules": [
+                                                                    "required,请选择该分类下的关联模型！"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            "identifier,模型ID,19,,,readOnly=true"
+                                                        ],
+                                                        [
+                                                            "comment,权限备注,19,,aiTextArea,rows=5"
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "$button",
+                                                                "hidden": true,
+                                                                "optionJsx.extension": [
+                                                                    "$opSavePerm,保存,SAVE_ROW,primary",
+                                                                    "$opReset,重置,RESET"
+                                                                ],
+                                                                "span": 24
+                                                            }
+                                                        ]
+                                                    ],
+                                                    "hidden": [
+                                                        "key"
+                                                    ]
+                                                },
+                                                "dialog": "权限设置,保存,关闭,false,800,true,$opSavePerm",
+                                                "op": {
+                                                    "add": "$opShowPerm"
+                                                },
+                                                "table": {
+                                                    "limitation": 12,
+                                                    "columns": [
+                                                        {
+                                                            "title": "操作",
+                                                            "dataIndex": "key",
+                                                            "fixed": "left",
+                                                            "$render": "EXECUTOR",
+                                                            "$option": [
+                                                                {
+                                                                    "text": "编辑",
+                                                                    "executor": "fnEdit"
+                                                                },
+                                                                "divider",
+                                                                {
+                                                                    "text": "删除",
+                                                                    "executor": "fnDelete",
+                                                                    "confirm": "确认删除选择的实体记录？"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "name,权限名称",
+                                                        "code,权限编码",
+                                                        "identifier,模型标识"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opStep1,下一步,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "empty": "对不起，请在权限组中添加权限信息！"
+        }
+    }
+}

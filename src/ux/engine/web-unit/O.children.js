@@ -2,6 +2,7 @@ import U from 'underscore';
 import React from 'react';
 import Abs from '../../abyss';
 import Dev from '../../develop';
+import {Col, Row} from 'antd';
 
 function aiChild() {
     /*
@@ -80,7 +81,29 @@ const aiChildren = (reference, additional = {}) => {
         return false;
     }
 };
+const aiGridLR = (reference, fnLeft = () => false, fnRight = () => false, config = {}) => {
+    const {
+        left = 5,
+        right = 19,
+        leftCls = "",
+        rightCls = "",
+        rowCls = ""
+    } = config;
+    const {$opened = false} = reference.state ? reference.state : {};
+    const span = $opened ? {left: 0, right: 24} : {left, right};
+    return (
+        <Row className={rowCls}>
+            <Col span={span.left} className={leftCls}>
+                {Abs.isFunction(fnLeft) ? fnLeft() : false}
+            </Col>
+            <Col span={span.right} className={rightCls}>
+                {Abs.isFunction(fnRight) ? fnRight() : false}
+            </Col>
+        </Row>
+    )
+}
 export default {
     aiChildren,
     aiChild,
+    aiGridLR,
 }

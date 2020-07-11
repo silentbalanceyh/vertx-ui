@@ -33,6 +33,15 @@ export default (reference) => generator(reference, [
     "rxSubmit",
     "rxClose",
 
+    /* rx特殊模式 */
+    "rxNext",        // 下一步
+    "rxPrev",        // 上一步
+    "rxAdd",         // 添加
+    "rxEdit",        // 编辑
+    "rxDelete",      // 删除
+    "rxRefresh",     // 刷新
+    "rxBack",        // 返回
+
     "rxChild",       // 绑定子组件专用方法
     /* Designer 系列 */
     "rxRowAdd",     // 添加行

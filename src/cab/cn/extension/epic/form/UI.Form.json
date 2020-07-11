@@ -4,9 +4,6 @@
         "columns": 2,
         "ui": [
             [
-                "title=基本信息"
-            ],
-            [
                 "category,模型分类,24,,,readOnly=true"
             ],
             [

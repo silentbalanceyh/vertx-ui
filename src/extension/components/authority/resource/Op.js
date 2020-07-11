@@ -1,9 +1,13 @@
 import Ex from 'ex';
 import React from "react";
-import UIResource from './UI.Resource';
 import Ux from "ux";
 import {Dsl} from 'entity';
+
 import opRes from './Op.Resource';
+import opPerm from './Op.Permission';
+
+import UIResource from './UI.Resource';
+import UIPermission from './UI.Permission';
 
 const yiPage = (reference) => {
     const state = {};
@@ -23,6 +27,7 @@ const yiPage = (reference) => {
 }
 export default {
     ...opRes,
+    ...opPerm,
     yiPage,
     renderJsx: () => ({
         tabResource: (reference) => {
@@ -31,10 +36,10 @@ export default {
                                $treeData={$treeData}
                                $tree={$tree}/>
         },
-        tabPermission: () => {
-            return (
-                <div>Permission</div>
-            )
+        tabPermission: (reference) => {
+            const {$treeData = []} = reference.state;
+            return <UIPermission {...Ex.yoAmbient(reference)}
+                                 $category={$treeData}/>
         }
     })
 }

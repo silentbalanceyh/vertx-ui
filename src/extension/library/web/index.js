@@ -25,6 +25,6 @@ function wrapper(reference, clazz, name, callback) {
 export default {
     /* 专用 ExTab 对象 */
     uiTab: (reference, consumer) => wrapper(reference, Tab, "__tabs", consumer),
-    /* 专用 Dialog 对象 */
+    /* 专用 ExDialog 对象 */
     uiDialog: (reference, consumer) => wrapper(reference, Dialog, "__dialog", consumer),
 }

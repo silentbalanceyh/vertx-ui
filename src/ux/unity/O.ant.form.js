@@ -17,10 +17,10 @@ const formClear = (reference, data) => {
     const {$clear, form} = reference.props;
     // 记录切换：从更新表单 -> 添加表单切换
     if ($clear && $clear.is()) {
+        // 记录切换：从更新某条记录 -> 更新另外一条记录
         const keys = $clear.to();
         keys.forEach(key => Value.valueAppend(data, key, undefined));
     }
-    // 记录切换：从更新某条记录 -> 更新另外一条记录
     const fields = Object.keys(form.getFieldsValue());
     fields.forEach(key => Value.valueAppend(data, key, undefined));
     form.setFieldsValue(data);
@@ -153,10 +153,14 @@ const formHits = (reference, values = {}) => {
     const {form} = reference.props;
     E.fxTerminal(!form, 10020, form);
     if (form) {
-        const formValues = {};
-        const fields = Object.keys(form.getFieldsValue());
-        fields.forEach(field => formValues[field] = values[field]);
-        form.setFieldsValue(formValues);
+        /*
+         * 旧代码会引起重设时出现清空的问题，所以不可以使用
+         * 旧代码
+        // const formValues = {};
+        // const fields = Object.keys(form.getFieldsValue());
+        // fields.forEach(field => formValues[field] = values[field]);
+         */
+        form.setFieldsValue(values);
     }
 };
 /**

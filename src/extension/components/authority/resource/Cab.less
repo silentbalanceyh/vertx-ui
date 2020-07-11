@@ -4,6 +4,37 @@
         padding-left: 3px;
     }
 
+    .wizard {
+        .web-help {
+            padding: 6px 16px;
+            width: 100%;
+        }
+
+        .web-action {
+            text-align: center;
+            padding: 3px 16px;
+            width: 100%;
+        }
+
+        .web-form {
+            padding: 3px 3px;
+        }
+
+        .web-op {
+            padding: 8px 4px;
+
+            &-link {
+                .left {
+                    float: left;
+                }
+
+                .right {
+                    float: right
+                }
+            }
+        }
+    }
+
     .tree {
         &-search {
             margin-bottom: 3px;
@@ -11,6 +42,23 @@
 
         &-resource {
             overflow-y: auto;
+        }
+
+        &-permission {
+            overflow-y: auto;
+
+            &-close {
+                min-height: 28px;
+                line-height: 24px;
+            }
+
+            .ant-collapse-header {
+                padding: 6px 8px 6px 40px;
+            }
+
+            .ant-collapse-content-box {
+                padding: 0;
+            }
         }
     }
 }

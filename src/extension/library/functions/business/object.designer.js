@@ -49,9 +49,9 @@ const type = (reference) => (params, define = false) => {
         throw new Error("请检查参数信息！")
     }
 }
-const api = (reference) => (keyword) => {
+const api = (reference, uri) => (keyword) => {
     if (keyword) {
-        return Ux.ajaxPost('/api/action/seek', {keyword});
+        return Ux.ajaxPost(uri, {keyword});
     } else return Ux.promise([]);
 }
 const submit = (reference) => (params, fnCallback) => {
@@ -198,6 +198,7 @@ const submit = (reference) => (params, fnCallback) => {
 }
 export default (reference) => ({
     rxType: type(reference),
-    rxApi: api(reference),
+    rxApi: api(reference, '/api/action/seek'),
+    rxUri: api(reference, '/api/action/ready'),
     rxSubmit: submit(reference)
 })

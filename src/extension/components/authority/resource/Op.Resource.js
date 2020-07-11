@@ -1,6 +1,7 @@
 import Ex from "ex";
 import Ux from "ux";
 import FormAdd from './form/UI.Res.Add';
+import FormEdit from './form/UI.Res.Edit';
 
 const yoResList = (reference) => {
     const listAttrs = Ex.yoAmbient(reference);
@@ -14,6 +15,7 @@ const yoResList = (reference) => {
     }
     listAttrs.$form = {
         FormAdd,
+        FormEdit
     }
     /*
      * 父类引用处理 open / close

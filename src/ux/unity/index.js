@@ -11,7 +11,10 @@ import math from './O.math';
 import dsl from './O.dsl';
 
 import tree from './O.tree';
+import treeTo from './O.tree.to';
 import treeSelect from './O.tree.select';
+
+import table from './O.table';
 
 import antForm from './O.ant.form';
 import antSubmit from './O.ant.submit';
@@ -36,7 +39,9 @@ export default {
     ...math,
     ...dsl,
 
-    ...tree,
+    ...table,   // 表格处理
+    tree,       // 特殊对象，树的数据结构（支持各种变幻）
+    ...treeTo,
     ...treeSelect,
 
     ...antSubmit,

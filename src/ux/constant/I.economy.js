@@ -2,6 +2,20 @@ export default {
     /**
      * ## 常量
      *
+     * 常用 Web 菜单的类型
+     *
+     * @memberOf module:_constant
+     *
+     */
+    MENU_TYPE: {
+        SIDE: "SIDE-MENU",      // 左边菜单
+        APP: "APP-MENU",        // 主界面 Dashboard 专用菜单
+        NAV: "NAV-MENU",        // 导航栏专用（包含 SIDE-MENU 和 NAV-MENU
+        TOP: "TOP-MENU",        // 顶部右上角菜单信息
+    },
+    /**
+     * ## 常量
+     *
      * 常用 Web 组件的 className 的 css 相关信息
      *
      * @memberOf module:_constant

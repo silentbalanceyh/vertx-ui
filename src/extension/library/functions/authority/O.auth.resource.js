@@ -2,6 +2,76 @@ import Ajx from '../../ajax';
 import Ux from 'ux';
 
 /**
+ * ## 扩展函数
+ *
+ * 1. 根据传入的 treeData 提取 resource.tree 构造分类
+ * 2. 读取远程的权限组，权限组挂在分类下边
+ */
+const authGroups = (state = {}, treeData = []) => {
+    /* 权限组读取 */
+    return Ux.ajaxGet("/api/permission/groups/by/sigma", {}).then(groups => {
+        /*
+         * 根节点，先针对分组
+         * 组名称 -> identifier 集合
+         */
+        const groupMap = {};
+        const groupVector = {};
+        groups.forEach(group => {
+            const groupRef = groupMap[group.group];
+            if (groupRef) {
+                groupRef.total += group.count;
+            } else {
+                const $group = Ux.clone(group);
+                $group.total = $group.count;
+                groupMap[group.group] = $group;
+            }
+            groupVector[group.identifier] = group.group;
+        });
+        /*
+         * 构造树
+         */
+        const tree = Ux.tree().build(treeData);
+        /*
+         * 读取拉平的树
+         */
+        const treeRoot = tree.getRoots(true, true);
+        /*
+         * children 节点引入替换机制
+         */
+        const processed = [];
+        const childMap = {};
+        treeRoot.forEach(root => {
+            const childArr = [];
+            const $root = Ux.clone(root);
+            if ($root.children) {
+                $root.children.forEach(child => {
+                    /*
+                     * 直接从 groupMap 中查找
+                     */
+                    const groupName = groupVector[child.identifier];
+                    if (groupName) {
+                        const groupData = groupMap[groupName];
+                        if (groupData) {
+                            if (!childMap.hasOwnProperty(groupData.group)) {
+                                child.name = `${groupData.group}（${groupData.total}）`;
+                                child.__group = Ux.clone(groupData);
+                                child.__parent = Ux.clone($root.data);
+                                childArr.push(child);
+                                childMap[groupData.group] = true;
+                            }
+                        }
+                    }
+                });
+                $root.children = Ux.toTreeArray(childArr, {title: "name"});
+            }
+            processed.push($root);
+        })
+        state.$groups = Ux.clone(groups);
+        state.$tree = processed;
+        return Ux.promise(state);
+    })
+}
+/**
  *
  * ## 扩展函数
  *
@@ -51,4 +121,5 @@ const authTreeRes = (state = {}) => {
 }
 export default {
     authTreeRes,
+    authGroups,
 }

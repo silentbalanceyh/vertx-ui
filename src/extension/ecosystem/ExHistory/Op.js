@@ -4,6 +4,7 @@ import Ux from 'ux';
 const yiPage = (reference) => {
     const state = {};
     const {data} = reference.props;
+    console.info(data);
     if (data) {
         state.$multi = U.isArray(data);
         state.$ready = true;
