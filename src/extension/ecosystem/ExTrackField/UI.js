@@ -4,7 +4,7 @@ import Ux from 'ux';
 import './Cab.less';
 import {Col, Row, Select, Spin} from 'antd';
 import Op from './Op';
-import ExHistory from "../ExHistory/UI";
+import History from "./UI.Each";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExTrackField")
@@ -44,8 +44,8 @@ class Component extends React.PureComponent {
                                 const {$dict = {}} = this.props;
                                 return (
                                     <Spin spinning={$loading}>
-                                        <ExHistory {...Ex.yoAmbient(this)}
-                                                   data={$data} $dict={$dict}/>
+                                        <History {...Ex.yoAmbient(this)}
+                                                 data={$data} $dict={$dict}/>
                                     </Spin>
                                 )
                             })()}

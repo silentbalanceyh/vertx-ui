@@ -11,12 +11,6 @@
         "size": "small",
         "columns": [
             {
-                "metadata": "fieldAlias,属性名",
-                "style": {
-                    "color": "#27408B"
-                }
-            },
-            {
                 "metadata": "type,变更类型,MAPPING",
                 "$mapping": {
                     "ADD": "添加,plus-circle,,#228B22",
@@ -79,9 +73,18 @@
             "$empty": "（系统）"
         }
     ],
-    "_adjust": {
-        "code": {
-            "DELETE": "REVERT"
+    "_codex": [
+        {
+            "type": "UPDATE",
+            "where": {
+                "field": "fieldName",
+                "value": "code"
+            },
+            "done": {
+                "field": "type",
+                "fromValue": "DELETE",
+                "toValue": "REVERT"
+            }
         }
-    }
+    ]
 }

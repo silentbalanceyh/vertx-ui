@@ -1,3 +1,5 @@
+@import "../../../global";
+
 .ex-track-field {
     .select-prefix {
         text-align: right;
@@ -7,5 +9,27 @@
     .select-input {
         width: 100%;
         min-width: 100%;
+    }
+
+    .ex-field-history {
+        .ant-table-content {
+            table {
+
+                .ant-table-thead {
+                    th {
+                        background-color: @primary-color !important;
+                        color: white;
+                    }
+                }
+
+                td {
+                    background: white;
+                }
+
+                td[colspan="3"] {
+                    padding: 0 !important;
+                }
+            }
+        }
     }
 }
