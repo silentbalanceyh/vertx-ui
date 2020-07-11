@@ -17,7 +17,15 @@ const yiInternal = (reference) => {
                     const data = Op.rxDataRequest(ref);
                     const {filename} = params;
                     /* 表单数据 */
-                    const exportJson = {_form: data.form};
+                    const formData = Ux.clone(data.form);
+                    if (formData.actions) {
+                        delete formData.actions;
+                    }
+                    if (formData.options) {
+                        delete formData.options;
+                    }
+                    const exportJson = {_form: formData};
+
                     Ux.dgFileJson(exportJson, filename);
 
                     /* 防重复提交 */

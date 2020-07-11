@@ -12,6 +12,7 @@ const showWindow = (reference, item) => {
     reference.setState({
         $window: item.key,      // 关联窗口 id
         $visible: true,         // 打开 窗口
+        $popover: undefined,    // 关闭浮游面板（必须的操作，否则会冲突）
         $forbidden: true,       // 禁止屏幕主操作
     });
 }
@@ -77,8 +78,20 @@ const cellAdd = (reference) => {
 }
 const rxSubmit = (reference) => {
     /* 调用上层提交函数 */
-    const request = Op.rxDataRequest(reference);
-    Ux.fn(reference).rxSubmit(request);
+    let request = Op.rxDataRequest(reference);
+    if (request && request.form) {
+        request = Ux.clone(request.form);
+        // 全局禁用
+        reference.setState({
+            $forbidden: true,        // 全局限制
+            $window: undefined,     // 所有窗口确认
+            $popover: undefined,    // 所有浮游窗口确认
+            $visible: false,        // 所有窗口隐藏
+            $drawer: undefined      // 所有抽屉确认
+        });
+        const fnReset = () => reference.setState({$forbidden: false});
+        return Ux.fn(reference).rxSubmit(request, fnReset);
+    }
 }
 export default {
     // 提交函数
@@ -87,6 +100,7 @@ export default {
     export: showWindow,
     import: showWindow,
     preview: showWindow,
+    question: showWindow,
 
     layout: showPopover,
     "deployment-unit": showPopover,

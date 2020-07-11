@@ -2,8 +2,8 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
 import Op from './Op';
-import {Table} from 'antd';
 import './Cab.less';
+import Rdr from './Web';
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExHistory")
@@ -19,10 +19,12 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
-            const {$data = [], $table = {}} = this.state;
-            return (
-                <Table {...$table} dataSource={$data}/>
-            );
+            return Ux.callTab(this, {
+                // 按时间
+                tabTime: Rdr.pageTime(this),
+                // 按字段
+                tabField: Rdr.pageField(this)
+            })
         }, Ex.parserOfColor("OxHistory").component())
     }
 }

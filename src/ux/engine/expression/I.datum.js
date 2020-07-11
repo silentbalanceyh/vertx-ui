@@ -166,6 +166,10 @@ const getSource = (reference, config, filter = {}) => {
          * 不能启用 filter / cascade
          */
         options = Expr.aiExprOption(config.items);
+        if ("NUMBER" === config.dataType) {
+            // 数值化
+            options.forEach(option => option.value = Number(option.value));
+        }
     } else if (config.datum) {
         /*
          * 如果存在datum节点，则从assist/tabular数据源中读取

@@ -1,0 +1,26 @@
+{
+    "": [
+        "rule.md", 
+        "component.md", 
+        "source.md", 
+        "layout.md", 
+        "intro.md", 
+        "images"
+    ], 
+    "__positions": {
+        "component.md": 2, 
+        "source.md": 3, 
+        "layout.md": 4, 
+        "rule.md": 1, 
+        "intro.md": 5, 
+        "images": 6
+    }, 
+    "__raw_positions": {
+        "component.md": 2, 
+        "source.md": 3, 
+        "layout.md": 4, 
+        "rule.md": 1, 
+        "intro.md": 5, 
+        "images": 6
+    }
+}

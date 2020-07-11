@@ -25,8 +25,8 @@ const configColumn = (reference, columns = [], ops = {}) => {
     columns.forEach(column => {
         // $render处理
         Column.columnRender(reference, column, ops);
-        // fixed固定值处理
-        // Column.columnFixed(column, $op);
+        // $render处理完成过后，可考虑包装
+        Column.columnWrapper(reference, column);
         // $filter过滤处理
         Column.columnFilter(reference, column);
         // sorter = true 是否开启可控模式
@@ -52,8 +52,22 @@ const configTable = (reference, table = {}, ops = {}) => {
      * 1）无分页
      * 2）计算了 scroll
      */
-    const $table = Abs.clone(table);
-    $table.pagination = false;
+    const $tableInput = Abs.clone(table);
+    const {limitation, ...$table} = $tableInput;
+    if (!table.hasOwnProperty('pagination')) {
+        $table.pagination = false;
+    }
+    /*
+     * 不包含 scroll 属性
+     */
+    if (!table.hasOwnProperty("scroll")) {
+        if (undefined !== limitation && 0 < limitation) {
+            const y = 38 * limitation;
+            $table.scroll = {
+                y
+            }
+        }
+    }
     $table.columns = configColumn(reference, table.columns, ops);
     return $table;
 };

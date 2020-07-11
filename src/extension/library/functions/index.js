@@ -1,5 +1,6 @@
 import global from './global';
 import business from './business';
+import authority from './authority';
 // ------------- 上边是全局处理 -------------
 import E from './debug/error';
 // ------------- 上边是调试专用 -------------
@@ -71,6 +72,13 @@ import control from './control';
  *
  * @module _to
  */
+/**
+ * 内部模块
+ *
+ * 转换模块
+ *
+ * @module _authority
+ */
 export default {
     /*
      * mapMeta
@@ -103,5 +111,6 @@ export default {
      */
     ...business,
 
-    ...parser
+    ...parser,
+    ...authority
 }

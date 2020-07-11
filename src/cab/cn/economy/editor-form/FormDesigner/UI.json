@@ -34,12 +34,18 @@
             "tooltip": "预览",
             "className": "op-release"
         },
-        "question,,帮助"
+        {
+            "key": "question",
+            "icon": "question",
+            "window": true,
+            "tooltip": "帮助"
+        }
     ],
     "_window": {
         "export": "填写导出文件名,导出配置,关闭,false,640,true,$opSaveExport",
         "import": "请选择上传文件,导入配置,关闭,false,640,true,$opSaveImport",
-        "preview": "预览表单,保存配置,关闭,false,1024,true,$opSavePreview"
+        "preview": "预览表单,关闭,关闭,false,1024,true",
+        "question": "关于帮助,关闭,关闭,false,1024,true"
     },
     "_palette": {
         "title": "控件列表",

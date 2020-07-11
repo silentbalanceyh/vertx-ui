@@ -1,0 +1,7 @@
+{
+    "_tabs": {
+        "tabPosition": "left",
+        "defaultActiveKey": "tabIntro",
+        "items": "基本说明,tabIntro;布局设置,tabLayout;辅助功能,tabSource;关于组件,tabComponent;关于规则,tabRule;"
+    }
+}

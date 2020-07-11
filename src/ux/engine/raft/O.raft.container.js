@@ -2,6 +2,19 @@ import {Container} from 'web';
 import React from 'react';
 import Datum from '../datum';
 
+const raftChildrenRenders = (reference, addOn = {}) => {
+    const {$renders = {}} = reference.props;
+    const renderSource = $renders;
+    const combineRenders = {};
+    if (renderSource && renderSource.__children) {
+        Object.assign(combineRenders, renderSource.__children);
+    }
+    if (addOn.renders) {
+        Object.assign(combineRenders, addOn.renders);
+    }
+    return combineRenders;
+}
+
 const raftContainer = (cell = {}, config = {}) => {
     const {
         addOn = {}
@@ -23,11 +36,12 @@ const raftContainer = (cell = {}, config = {}) => {
             /*
              * 子组件调用父组件对应的 renders，生成 $renders 变量
              */
-            const {renders = {}} = addOn;
+            const $renders = raftChildrenRenders(reference, addOn);
+
             return (
                 <Component {...Datum.onUniform(reference.props)}
                            config={config} $inited={values}
-                           $renders={renders}
+                           $renders={$renders}
                            reference={reference}/>
             )
         }

@@ -6,7 +6,7 @@ import U from "underscore";
 import Ele from '../../element';
 import './Cab.less';
 import Abs from '../../abyss';
-import aiIcon from './O.fn.atom.icon';
+import aiIcon from './O.fn.icon';
 /*
  * 基本输入
  * {

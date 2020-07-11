@@ -14,9 +14,18 @@ const yiInternal = (reference) => {
     }).then(raft => {
         state.raft = raft;
         state.$op = Op.actions;
-        return Ux.fn(reference).rxSource({type: "CATEGORY"}).then(response => {
-            /* 读取数据 */
-            state.$a_define_types = Dsl.getArray(response);
+        return Ux.parallel([
+            Ux.fn(reference).rxSource({type: "CATEGORY"}, true),
+            Ux.fn(reference).rxSource({type: "CATEGORY"})
+        ], "define", "data").then((response = {}) => {
+            const {define = {}, data = []} = response;
+            state.$define = define;
+            state.$a_define_types = Dsl.getArray(data);
+            return Ux.promise(state);
+        }).catch(error => {
+            console.error(error);
+            state.$define = {};
+            state.$a_define_types = Dsl.getArray([]);
             return Ux.promise(state);
         })
     }).then(Ux.ready).then(Ux.pipe(reference));
@@ -36,9 +45,14 @@ class Component extends React.PureComponent {
          * 配置处理
          */
         const {$inited = {}} = this.props;
+
+        const {$define = {}} = this.state;
+        const processed = Ux.clone($define);
+        Object.assign(processed, $inited);      // 默认值被输入值覆盖
+
         return (
             <div className={"category-form"}>
-                {Ux.xtReady(this, () => Ux.aiForm(this, $inited),
+                {Ux.xtReady(this, () => Ux.aiForm(this, processed),
                     {component: LoadingContent}
                 )}
             </div>

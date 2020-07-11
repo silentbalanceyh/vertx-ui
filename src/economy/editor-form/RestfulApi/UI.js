@@ -16,6 +16,10 @@ class Component extends React.PureComponent {
         Op.yiPage(this);
     }
 
+    componentDidUpdate(prevProps, prevState, snapshot) {
+
+    }
+
     render() {
         return Ux.xtReady(this, () => {
             const {$button = {}, $dialog = {}, $visible = false} = this.state;

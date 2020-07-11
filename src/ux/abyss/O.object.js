@@ -1,6 +1,8 @@
 import U from 'underscore';
-import Abs from "./index";
 import Ele from "../element";
+import It from './O.it';
+import Imt from './O.immutable';
+import Is from './O.is';
 
 /**
  * ## 标准函数
@@ -99,7 +101,7 @@ const sequence = (input, mode = "DIGEST") => {
  * @returns {Array|Object} 返回合并后的值
  */
 const merge = (original, newValue, field = "key") => {
-    if (Abs.isArray(newValue)) {
+    if (Is.isArray(newValue)) {
         /*
          * 数组更新
          */
@@ -115,7 +117,7 @@ const merge = (original, newValue, field = "key") => {
                 if (hit) {
                     merged.push(Object.assign({}, each, hit));
                 } else {
-                    merged.push(Abs.clone(each));
+                    merged.push(Imt.clone(each));
                 }
             });
         }
@@ -125,7 +127,7 @@ const merge = (original, newValue, field = "key") => {
         if (original) {
             merged = Object.assign({}, original, newValue);
         } else {
-            merged = Abs.clone(newValue);
+            merged = Imt.clone(newValue);
         }
         return merged;
     }
@@ -135,7 +137,35 @@ const denull = (data = {}) => {
     nullKeys.forEach(nullKey => delete data[nullKey]);
     return data;
 }
+const input = (params = {}, mapping = {}) => {
+    if (Is.isEmpty(mapping)) {
+        return params;
+    } else {
+        const normalized = {};
+        Object.keys(mapping).forEach((input) => {
+            const output = mapping[input];
+            if (input && output &&
+                "string" === typeof input && "string" === typeof output) {
+                normalized[output] = params[input];
+            }
+        });
+        // 补充没转换的
+        Object.keys(params)
+            .filter(field => !mapping.hasOwnProperty(field))
+            .forEach(left => normalized[left] = params[left]);
+        return normalized;
+    }
+}
+const output = (params = {}, mapping = {}) => {
+    const revert = {};
+    It.itObject(mapping, (field, value) => {
+        revert[value] = field;
+    });
+    return input(params, revert);
+}
 export default {
+    input,
+    output,
     denull,
     slice,
     sequence,

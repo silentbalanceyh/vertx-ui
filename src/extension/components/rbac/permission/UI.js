@@ -1,14 +1,54 @@
 import React from 'react'
-import {ExGraphicSpider} from "ei";
+import Ux from 'ux';
+import Ex from 'ex';
+import Op from './Op';
+import {LoadingAlert} from 'web';
+import {List} from 'antd';
+import "./Cab.less";
+import Image from './images';
 
+@Ux.zero(Ux.rxEtat(require("./Cab.json"))
+    .cab("UI")
+    .to()
+)
 class Component extends React.PureComponent {
+    componentDidMount() {
+        Op.yiPage(this);
+    }
+
     render() {
-        return (
-            <ExGraphicSpider $items={[]} $context={{
-                "node-delete": "删除节点",
-                "edge-delete": "删除连接"
-            }}/>
-        )
+        return Ex.ylCard(this, () => {
+            const {$alert = {}} = this.state;
+            return (
+                <div className={"web-authority"}>
+                    <LoadingAlert $alert={$alert}/>
+                    {(() => {
+                        const {$apps = []} = this.state;
+                        return (
+                            <List className={"app-list"} dataSource={$apps} renderItem={item => {
+                                const src = Image[item.key];
+                                const attrs = {};
+                                if (item.disabled) {
+                                    attrs.className = "item item-disabled";
+                                } else {
+                                    attrs.className = "item";
+                                    attrs.onClick = event => {
+                                        Ux.prevent(event);
+                                        Ux.toRoute(this, item.uri);
+                                    }
+                                }
+                                return (
+                                    <a key={item.key} {...attrs}>
+                                        <img alt={item.key} src={src}/>
+                                        <label>{item.text}</label>
+                                    </a>
+                                )
+                            }}/>
+                        )
+                    })()}
+                </div>
+            )
+        }, Ex.parserOfColor("RxRBAC-Authority").page())
     }
 }
 

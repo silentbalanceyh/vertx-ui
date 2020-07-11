@@ -10,25 +10,12 @@
                 }
             },
             {
-                "metadata": "fieldType,类型,MAPPING",
-                "$mapping": {
-                    "java`lang`String": "字符串,,,,#1E90FF",
-                    "java`lang`Integer": "整数,,,,#EE4000",
-                    "java`lang`Long": "长整数,,,,#EE1289",
-                    "java`lang`Boolean": "布尔值,,,,#1874CD",
-                    "java`math`BigDecimal": "浮点数,,,,#218868",
-                    "java`time`LocalTime": "时间格式,,,,#7D26CD",
-                    "java`time`LocalDate": "时间格式,,,,#7D26CD",
-                    "java`time`LocalDateTime": "时间格式,,,,#7D26CD"
-                }
-            },
-            {
                 "metadata": "type,变更类型,MAPPING",
                 "$mapping": {
-                    "ADD": "添加属性,plus-circle,,#228B22",
-                    "UPDATE": "更新属性,edit,,#3A5FCD",
-                    "DELETE": "移除属性,delete,,#CD2626",
-                    "REVERT": "确认后回写,upload,,#228B22"
+                    "ADD": "添加,plus-circle,,#228B22",
+                    "UPDATE": "更新,edit,,#3A5FCD",
+                    "DELETE": "移除,delete,,#CD2626",
+                    "REVERT": "回写,upload,,#228B22"
                 }
             },
             {
@@ -54,6 +41,7 @@
                 "metadata": "createdAt,创建时间,DATE",
                 "$format": "YYYY年MM月DD日 HH点mm分"
             },
+            "serial,事件编号",
             {
                 "metadata": "updatedBy,创建人,USER",
                 "$config": {
@@ -94,5 +82,13 @@
         "code": {
             "DELETE": "REVERT"
         }
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabTime",
+        "type": "card",
+        "items": "按时间（默认）,tabTime;按字段,tabField"
+    },
+    "_info": {
+        "loading": "变更历史加载中，请等待……"
     }
 }

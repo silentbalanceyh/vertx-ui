@@ -27,9 +27,8 @@ const yiMenu = (reference) => {
             /*
              * $aggregation 读取
              */
-            const {$counter = {}, $aggregation = {}} = reference.state;
-            return ($aggregation[item.code] ? $aggregation[item.code] : 0) + "/" +
-                ($counter[item.code] ? $counter[item.code] : 0);
+            const {$aggregation = {}} = reference.state;
+            return ($aggregation[item.code] ? $aggregation[item.code] : 0);
         }
         menus.push(menu);
     });

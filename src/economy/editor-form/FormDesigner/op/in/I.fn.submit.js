@@ -3,20 +3,69 @@ import Ux from 'ux';
  * 反向赋值
  */
 const dataSubmit = (normalized = {}, extension = {}, actions = {}, flag) => {
-    // console.info(extension, actions);
+    /* 第一提交，第二提交 */
+    const v = flag ? flag : "";
+
+    /*
+     * 客户端部分
+     */
+    let id;
+    if (extension.id) {
+        id = extension.id.replace('$', '');
+    }
+    normalized[`client${v}Id`] = id;
+
+    normalized[`client${v}Text`] = extension.text;
+    normalized[`client${v}Event`] = extension.event;
+    const type = extension.type;
+    if (type) {
+        normalized[`client${v}Type`] = type.toLocaleUpperCase();
+        if ("default" === type) {
+            if (extension.className) {
+                normalized[`client${v}Color`] = extension.className;
+            }
+        }
+    }
+
     if (actions.hasOwnProperty(extension.key)) {
         /*
          * 服务端模式
          */
         normalized.actionMode = "SERVER";
+        /*
+         * 服务端模式的特殊配置
+         */
+        const serverConfig = actions[extension.key];
+        if (serverConfig) {
+            /*
+             * 权限码和服务端事件
+             */
+            normalized.serverEvent = serverConfig.event;
+            normalized.serverCode = serverConfig.action;
+            /*
+             * 读取配置
+             */
+            const {config = {}} = serverConfig;
+            const {uri, dialog = {}} = config;
+            normalized.serverUri = uri;
+            /*
+             * 窗口配置
+             */
+            if ("MESSAGE" === dialog.component) {
+                normalized.callbackUi = "MESSAGE";
+            } else {
+                normalized.callbackUi = "DIALOG";
+            }
+            normalized.callbackType = dialog.mode;
+            normalized.callbackContent = dialog.content;
+            normalized.callbackTitle = dialog.title;
+        }
     } else {
         /*
          * 客户端模式
          */
         normalized.actionMode = "CLIENT";
     }
-    /* 使用客户端和服务端双模式计算最终核心信息 */
-    console.info(normalized, extension, actions);
 }
 
 export default (normalized = {}, data = {}, reference) => {
@@ -29,7 +78,7 @@ export default (normalized = {}, data = {}, reference) => {
     if (Ux.isArray(extension)) {
         const resetFound = Ux.elementUnique(extension, "event", "RESET");
         if (resetFound) {
-            normalized.reset = resetFound.text;
+            normalized.clientReset = true;
         }
         /*
          * 直接过滤掉 RESET
@@ -47,7 +96,7 @@ export default (normalized = {}, data = {}, reference) => {
          */
         const secondary = filtered[1];
         if (secondary) {
-            dataSubmit(normalized, submit, actions, "2");
+            dataSubmit(normalized, secondary, actions, "2");
         }
     }
 }

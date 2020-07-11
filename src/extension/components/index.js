@@ -6,6 +6,11 @@ import _ambient_customer from './ambient/customer/UI';
 import _ambient_employee from './ambient/employee/UI';
 import _ambient_identity from './ambient/identity/UI';
 import _ambient_tabular from './ambient/tabular/UI';
+import _authority_graphic from './authority/graphic/UI';
+import _authority_research from './authority/research/UI';
+import _authority_resource from './authority/resource/UI';
+import _authority_role from './authority/role/UI';
+import _authority_user from './authority/user/UI';
 import _epic_form from './epic/form/UI';
 import _epic_integration from './epic/integration/UI';
 import _epic_modeling from './epic/modeling/UI';
@@ -36,6 +41,11 @@ export default {
 	_ambient_employee,
 	_ambient_identity,
 	_ambient_tabular,
+	_authority_graphic,
+	_authority_research,
+	_authority_resource,
+	_authority_role,
+	_authority_user,
 	_epic_form,
 	_epic_integration,
 	_epic_modeling,

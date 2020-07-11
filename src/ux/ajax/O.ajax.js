@@ -99,7 +99,7 @@ const ajaxResource = (uri) => {
     const request = new Request(uri, {
         method: "get"
     });
-    return fetch(request).then(data => Abs.promise(data.text()));
+    return fetch(request).then(data => data.text());
 };
 /**
  * ## 标准函数

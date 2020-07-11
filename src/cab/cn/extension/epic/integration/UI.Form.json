@@ -43,9 +43,9 @@
                 {
                     "metadata": "type,通信类型,16,,aiRadio",
                     "optionJsx.config.items": [
-                        "ONE_WAY,ONE-WAY",
-                        "REQUEST_RESPONSE,REQUEST-RESPONSE",
-                        "PUBLISH_SUBSCRIBE,PUBLISH-SUBSCRIBE"
+                        "ONE_WAY,单路模式",
+                        "REQUEST_RESPONSE,请求响应模式",
+                        "PUBLISH_SUBSCRIBE,发布订阅模式"
                     ]
                 }
             ],
@@ -58,23 +58,29 @@
                     "name": "FieldContainer",
                     "key": "apiContainer",
                     "config": {
-                        "activeKey": "tabMIME",
-                        "items":"MIME配置,tabMIME;Worker配置,tabWorker;IN/OUT配置,tabInOut;参数配置,tabParam",
+                        "activeKey": "tabWorker",
+                        "items": "Worker配置,tabWorker;客户端偏好,tabClient;服务端偏好,tabServer;规则配置,tabInOut;参数配置,tabParam",
                         "pages": {
-                            "tabMIME": {
+                            "tabClient": {
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "consumes,客户端MIME,12,,aiTransfer",
+                                            "metadata": "consumes,客户端MIME,24,,aiTransfer",
                                             "optionJsx.config.datum": "source=mime.type,value=name,label=name",
                                             "optionJsx.config.valueKey": "name",
                                             "optionJsx.config.titles": [
                                                 "待选择",
                                                 "已选择"
                                             ]
-                                        },
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabServer": {
+                                "ui": [
+                                    [
                                         {
-                                            "metadata": "produces,服务端MIME,12,,aiTransfer",
+                                            "metadata": "produces,服务端MIME,24,,aiTransfer",
                                             "optionJsx.config.datum": "source=mime.type,value=name,label=name",
                                             "optionJsx.config.valueKey": "name",
                                             "optionJsx.config.titles": [
@@ -89,16 +95,16 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "workerType,worker类型,16,,aiRadio",
+                                            "metadata": "workerType,worker类型,16,,aiRadio,readOnly=true",
                                             "optionJsx.config.items": [
-                                                "JS,JS",
-                                                "PLUG,PLUG",
-                                                "STD,STD"
+                                                "JS,JavaScript类型",
+                                                "PLUG,插件类型",
+                                                "STD,标准类型"
                                             ]
                                         }
                                     ],
                                     [
-                                        "workerAddress,请求发送地址,16,,,"
+                                        "workerAddress,请求发送地址,16,,,readOnly=true"
                                     ],
                                     [
                                         "workerConsumer,消费专用组件,16,,,addonBefore=Java,readOnly=true"
@@ -136,19 +142,18 @@
                                         {
                                             "metadata": "paramMode,参数来源,16,,aiRadio",
                                             "optionJsx.config.items": [
-                                                "QUERY,QUERY",
-                                                "BODY,BODY",
-                                                "PATH,PATH",
-                                                "DEFINE,DEFINE"
-
+                                                "QUERY,查询字符串",
+                                                "BODY,方法体",
+                                                "PATH,路径参数",
+                                                "DEFINE,自定义参数"
                                             ]
                                         }
                                     ],
                                     [
-                                        "paramRequired,必须参数列表,16,,,addonBefore=List"
+                                        "paramRequired,必须参数（GET）,16,,,addonBefore=List"
                                     ],
                                     [
-                                        "paramContained,包含参数列表,16,,,addonBefore=List"
+                                        "paramContained,必填参数（POST）,16,,,addonBefore=List"
                                     ]
                                 ]
                             }

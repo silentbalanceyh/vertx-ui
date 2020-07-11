@@ -5,7 +5,7 @@ import {Col, Row, Table, Tag} from 'antd';
 
 @component({
     "i18n.cab": require('../Cab.json'),
-    "i18n.name": "UI.Model",
+    "i18n.name": "UI.Sub.Model",
 })
 class Component extends React.PureComponent {
     render() {

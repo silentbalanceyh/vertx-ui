@@ -8,7 +8,7 @@ const yoSider = (reference = {}) => {
      */
     const {$menus} = reference.props;
     attrs.data = Ex.array($menus)        // X_MENU 菜单信息
-        .filter(menu => "SIDE-MENU" === menu.type)
+        .filter(menu => Ux.Env.MENU_TYPE.SIDE === menu.type)
         .sort((left, right) => left.order - right.order);
     /*
      * 配置
@@ -33,8 +33,22 @@ const yoNavigation = (reference = {}, {
     const {$menus, $router} = reference.props;
     const source = Ex.array($menus);
     attrs.data = source      // X_MENU 菜单信息// 特殊类型（导航栏）
-        .filter(menu => "SIDE-MENU" === menu.type)
-        .filter(menu => menu.uri && 0 < $router.path().indexOf(menu.uri));
+        .filter(menu =>
+            Ux.Env.MENU_TYPE.SIDE === menu.type ||
+            Ux.Env.MENU_TYPE.NAV === menu.type
+        )
+        .filter(menu => {
+            // calculate path
+            if (menu.uri) {
+                let path;
+                if (0 <= menu.uri.indexOf("?")) {
+                    path = menu.uri.split("?")[0];
+                } else {
+                    path = menu.uri;
+                }
+                return 0 < $router.path().indexOf(path);
+            } else return false;
+        });
     /*
      * 配置
      */
@@ -75,7 +89,7 @@ const yoAccount = (reference = {}, {
      */
     const {$menus} = reference.props;
     attrs.data = Ex.array($menus)        // X_MENU 菜单信息
-        .filter(menu => "TOP-MENU" === menu.type)
+        .filter(menu => Ux.Env.MENU_TYPE.TOP === menu.type)
         .sort((left, right) => left.order - right.order);
     /*
      * 配置

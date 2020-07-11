@@ -166,7 +166,11 @@ function parallel(promises = [], ...keys) {
             const result = {};
             response.forEach((item, index) => {
                 const key = args[index] ? args[index] : index;
-                result[key] = V.clone(item);
+                if (Is.isObject(item) || Is.isArray(item)) {
+                    result[key] = V.clone(item);
+                } else {
+                    result[key] = item;
+                }
             });
             return promise(result);
         });

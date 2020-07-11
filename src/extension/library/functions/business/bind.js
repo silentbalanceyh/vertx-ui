@@ -1,4 +1,4 @@
-import form from './form';
+import form from './object.form';
 import U from 'underscore';
 /*
  * 注意这里全部要使用三阶函数

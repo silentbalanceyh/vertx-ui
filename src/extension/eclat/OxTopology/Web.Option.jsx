@@ -18,12 +18,12 @@ export default (reference) => {
     const tips = Ux.fromHoc(reference, "tips");
     return (
         <Row style={{marginBottom: 8}}>
-            <Col span={6}>
+            <Col span={16}>
                 {"ALL" !== $tplKey ? (
                     <Tag color={"geekblue"}>{tips.tag}</Tag>
                 ) : false}
             </Col>
-            <Col span={2} offset={10} className={"drawer-selected"}>
+            <Col span={2} className={"drawer-selected"}>
                 <label>{selected.prefix}</label>
             </Col>
             <Col span={6}>

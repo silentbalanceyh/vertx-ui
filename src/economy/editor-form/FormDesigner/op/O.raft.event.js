@@ -87,11 +87,33 @@ const onCallback = (reference) => ($raft) => {
 const onUi = (raft = {}, params) => {
     if (Ux.isArray(params)) {
         const {form} = raft;
-        /* 计算 rowKey */
+        /* 更新基本字段 */
         if (form.ui) {
             form.ui = params
                 .map(item => item.data)
                 .filter(Ux.isArray);
+        }
+        const {actions} = form;
+        /* 针对 actions 执行特殊处理 */
+        if (actions) {
+            params.map(item => item.data)
+                .flatMap(item => Ux.isArray(item) ? item : [])
+                .filter(item => "aiAction" === item.render)
+                .map(item => Ux.valuePath(item, "raft.optionJsx.extension"))
+                .flatMap(item => Ux.isArray(item) ? item : [])
+                .filter(item => item.hasOwnProperty('server'))
+                .filter(item => !!item)
+                .forEach(item => {
+                    let original = actions[item.key];
+                    if (original) {
+                        original = Ux.clone(original);
+                        const updated = item.server;
+                        if (updated) {
+                            Object.assign(original, updated);
+                            actions[item.key] = original;
+                        }
+                    }
+                });
         }
     }
     return raft;

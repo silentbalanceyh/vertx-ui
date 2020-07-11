@@ -22,9 +22,5 @@ export default (reference) => {
             .then($menus => Ux.promise(processed, "$menus", $menus))
         )
         .then(processed => Data.yiData(reference, processed))
-        .then(state => {
-            state.$counter = state.$aggregation;
-            return Ux.promise(state);
-        })
         .then(Ux.pipe(reference))
 };

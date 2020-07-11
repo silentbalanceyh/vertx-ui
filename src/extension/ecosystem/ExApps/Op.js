@@ -10,7 +10,7 @@ const yiPage = (reference) => {
      * 过滤菜单
      */
     let filtered = Ux.clone($source)
-        .filter(item => "APP-MENU" === item.type)
+        .filter(item => Ux.Env.MENU_TYPE.APP === item.type)
         .sort((left, right) => left.sort - right.sort);
     state.$data = Ux.toLink(filtered, $app);
     reference.setState(state);

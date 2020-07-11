@@ -109,7 +109,7 @@ export default (options = {}) => {
                     if(fatal.run){
                         if(U.isArray(error)){
                             fatal.run.description = error;
-                        }else {
+                        }else if("string" === typeof error){
                             fatal.run.description = [error];
                         }
                     }

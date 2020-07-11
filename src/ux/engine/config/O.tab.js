@@ -7,6 +7,8 @@ import Abs from '../../abyss';
 import webUnit from '../web-unit';
 import webField from '../web-field';
 
+import callTab from './O.tab.jsx';
+
 /**
  * ## 引擎函数
  *
@@ -111,7 +113,43 @@ const configTab = (reference, config = {}) => {
     }
     return tabs;
 };
-
+/**
+ * ## 引擎函数
+ *
+ * （同步）Tabs 页签专用函数，用于处理页签级别的配置信息，通常是 _tabs 节点
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String} key 表单配置读取必须的键。
+ * @return {any}
+ */
+const cabTab = (reference = {}, key = "tabs") => {
+    const {$hoc} = reference.state;
+    if ($hoc) {
+        const tabs = $hoc._(key);
+        if (!Abs.isEmpty(tabs)) {
+            return configTab(reference, Abs.clone(tabs));
+        } else return {};
+    } else return {};
+}
+/**
+ * ## 引擎函数
+ *
+ * （异步）Tabs 页签专用函数，用于处理页签级别的配置信息，通常是 _tabs 节点
+ *
+ * @memberOf module:_config
+ * @param {ReactComponent} reference React对应组件引用。
+ * @param {String} key 表单配置读取必须的键。
+ * @param {Object} state 专用的状态，会被直接更改，追加 $tabs 变量。
+ * @return {any}
+ */
+const capTab = (reference = {}, key = "tabs", state = {}) => {
+    state.$tabs = cabTab(reference, key);
+    return Abs.promise(state);
+}
 export default {
+    // cabTab,
+    capTab,
+    callTab,
     configTab
 }

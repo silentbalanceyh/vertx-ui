@@ -63,7 +63,14 @@ export default (reference) => (pagination, filters, sorter) => {
      * 执行排序操作
      */
     if (!sorter.hasOwnProperty('order')) {
-        queryRef.sort([]);
+        /*
+         * 原始的排序信息
+         */
+        if (Ux.isArray($query.sorter) && 0 < $query.sorter.length) {
+            queryRef.sort($query.sorter);
+        } else {
+            queryRef.sort([]);
+        }
     } else {
         const {field = "", order = "ascend"} = sorter;
         const isAsc = "ascend" === order;

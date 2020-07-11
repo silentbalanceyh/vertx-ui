@@ -101,37 +101,18 @@
                                         "title=静态配置（纯前端）"
                                     ],
                                     [
-                                        {
-                                            "metadata": "clientId,按钮ID,,,,addonBefore=$",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "metadata": "clientText,按钮文字",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            }
-                                        }
+                                        "clientId,按钮ID,,,,addonBefore=$",
+                                        "clientText,按钮文字"
                                     ],
                                     [
                                         {
-                                            "metadata": "clientEvent,事件类型,24,,aiRadio",
+                                            "metadata": "clientEvent,提交模式,24,,aiRadio",
                                             "optionJsx.className": "radio-input-3",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
                                             "optionJsx.config.items": [
                                                 "SUBMIT,提交",
                                                 "RESET,重置",
                                                 "KEY,主键提交",
-                                                "SUBMIT_REDUX,外置提交",
+                                                "SUBMIT_REDUX,外置提交（Redux）",
                                                 "SUBMIT_DIALOG,窗口提交",
                                                 "SAVE_ROW,行保存"
                                             ]
@@ -140,11 +121,6 @@
                                     [
                                         {
                                             "metadata": "clientType,按钮类型,24,,aiRadio",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
                                             "optionJsx.config.items": [
                                                 "DEFAULT,默认按钮",
                                                 "PRIMARY,标准按钮",
@@ -156,9 +132,6 @@
                                         {
                                             "metadata": "clientColor,按钮风格,24,,aiRadio",
                                             "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ],
                                                 "clientType": [
                                                     "DEFAULT"
                                                 ]
@@ -173,24 +146,6 @@
                                     ],
                                     [
                                         "title=主提交配置"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "serverId,按钮ID,,,,addonBefore=$",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "SERVER"
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "metadata": "serverText,按钮文字",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "SERVER"
-                                                ]
-                                            }
-                                        }
                                     ],
                                     [
                                         {
@@ -312,36 +267,21 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "client2Id,按钮ID,,,,addonBefore=$",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            }
+                                            "metadata": "client2Id,按钮ID,,,,addonBefore=$"
                                         },
                                         {
-                                            "metadata": "client2Text,按钮文字",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            }
+                                            "metadata": "client2Text,按钮文字"
                                         }
                                     ],
                                     [
                                         {
-                                            "metadata": "client2Event,事件类型,24,,aiRadio",
+                                            "metadata": "client2Event,提交模式,24,,aiRadio",
                                             "optionJsx.className": "radio-input-3",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
                                             "optionJsx.config.items": [
                                                 "SUBMIT,提交",
                                                 "RESET,重置",
                                                 "KEY,主键提交",
-                                                "SUBMIT_REDUX,外置提交",
+                                                "SUBMIT_REDUX,外置提交（Redux）",
                                                 "SUBMIT_DIALOG,窗口提交",
                                                 "SAVE_ROW,行保存"
                                             ]
@@ -350,11 +290,6 @@
                                     [
                                         {
                                             "metadata": "client2Type,按钮类型,24,,aiRadio",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ]
-                                            },
                                             "optionJsx.config.items": [
                                                 "DEFAULT,默认按钮",
                                                 "PRIMARY,标准按钮",
@@ -366,9 +301,6 @@
                                         {
                                             "metadata": "client2Color,按钮风格,24,,aiRadio",
                                             "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "CLIENT"
-                                                ],
                                                 "clientType": [
                                                     "DEFAULT"
                                                 ]
@@ -383,24 +315,6 @@
                                     ],
                                     [
                                         "title=第二提交项配置"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "server2Id,按钮ID,,,,addonBefore=$",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "SERVER"
-                                                ]
-                                            }
-                                        },
-                                        {
-                                            "metadata": "server2Text,按钮文字",
-                                            "optionJsx.depend.enabled": {
-                                                "actionMode": [
-                                                    "SERVER"
-                                                ]
-                                            }
-                                        }
                                     ],
                                     [
                                         {

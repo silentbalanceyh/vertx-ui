@@ -14,22 +14,29 @@ export default (reference) => {
     Ux.configScroll(configTable, $data, reference);
     configTable.pagination = $pagination;
     return (
-        <div>
-            {renderTool(reference)}
-            <Row>
-                <Col span={4}>
-                    <div style={{
-                        maxHeight: Ux.toHeight(106),
-                        overflow: "auto",
-                        paddingRight: 6
-                    }}>
+        <Row>
+            <Col span={4}>
+                <div style={{
+                    maxHeight: Ux.toHeight(106),
+                    overflow: "auto",
+                    paddingRight: 6
+                }}>
                     {renderMenu(reference)}
-                    </div>
-                </Col>
-                <Col span={20} className={"job-table"}>
-                    <Table {...configTable} dataSource={$data} loading={$loading}/>
-                </Col>
-            </Row>
-        </div>
+                </div>
+            </Col>
+            <Col span={20}>
+                <Row>
+                    <Col span={24}>
+                        {renderTool(reference)}
+                    </Col>
+                </Row>
+                <Row>
+                    <Col span={24} className={"api-table"}>
+                        <Table {...configTable}
+                               dataSource={$data} loading={$loading}/>
+                    </Col>
+                </Row>
+            </Col>
+        </Row>
     )
 }

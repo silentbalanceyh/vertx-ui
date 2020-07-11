@@ -268,6 +268,13 @@ const exported = {
     /**
      * # 内部模块
      *
+     * 表格专用模块
+     *
+     * @module _table
+     */
+    /**
+     * # 内部模块
+     *
      * 插件专用模块
      *
      * @module _plugin
