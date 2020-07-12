@@ -161,7 +161,20 @@ const dgDiff = (left, right) => {
         }
     }
 };
+/**
+ * ## 调试专用函数
+ *
+ * 打印任务标签
+ *
+ * @memberOf module:_debug
+ * @param {any} input 输入的数据对象
+ * @param {String} message 输入信息
+ */
+const dgTodo = (input, message) => {
+    dgDebug(input, `TODO: ${message}`, "#CD0200")
+}
 export default {
+    dgTodo,
     dgRouter,
     dgDiff,
     dgDebug,
