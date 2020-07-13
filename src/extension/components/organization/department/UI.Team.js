@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 import FormAdd from './team/UI.Add';
 import FormEdit from './team/UI.Edit';
 import FormFilter from './team/UI.Filter';
@@ -27,7 +27,7 @@ class Component extends React.PureComponent {
                 FormFilter,
             };
             return (
-                <ExComplexList {...Ex.yoAmbient(this)}
+                <ExListComplex {...Ex.yoAmbient(this)}
                                rxPostDelete={Op.rxPostDelete(this)}
                                rxAssist={Op.rxAssist(this)}
                                config={config} $form={form}/>

@@ -2,7 +2,7 @@ import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
 import Op from './Op';
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 
 import {EntityAdd as FormAdd, EntityEdit as FormEdit, EntityFilter as FormFilter,} from "./form";
 
@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
                 FormFilter,     // 过滤单
             };
             return (
-                <ExComplexList {...Ex.yoAmbient(this)}
+                <ExListComplex {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             );
         }, Ex.parserOfColor("PxEntity").control())

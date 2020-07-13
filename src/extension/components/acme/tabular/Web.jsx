@@ -1,6 +1,6 @@
 import {Col, Row} from "antd";
 import Ux from "ux";
-import {ExComplexList, ExTabular} from "ei";
+import {ExListComplex, ExTabular} from "ei";
 import {LoadingAlert, PageCard} from "web";
 import React from "react";
 
@@ -26,7 +26,7 @@ export default (reference, {
             </Col>
             <Col span={span.right}>
                 {selected ? (
-                    <ExComplexList {...listAttrs}/>
+                    <ExListComplex {...listAttrs}/>
                 ) : (
                     <LoadingAlert $alert={alert}/>
                 )}

@@ -7,7 +7,7 @@ export default (reference, config = {}, state = {}) => Ux.parallel([
         columns: config.table ? config.table.columns : []
     })(),
     Ex.rxColumnMy(reference, config)()
-], "columns", "filters")
+], "columns", "projections")
     .then(response => {
         /*
          * 启用表达式模式的列处理

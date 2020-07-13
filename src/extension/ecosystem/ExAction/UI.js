@@ -28,7 +28,7 @@ class Component extends React.PureComponent {
             /* 解析配置信息 */
             const attributes = Ex.yoAmbient(this);
             /*
-             * Disabled-002：ExComplexList 传入 ExAction
+             * Disabled-002：ExListComplex 传入 ExAction
              * 1）ExAction -> ExDialog
              * 2）ExAction -> ExButton
              */

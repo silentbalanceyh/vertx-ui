@@ -5,7 +5,7 @@ const tab = (object, isOuter = true) => {
     Ux.dgDebug(object, label, "#369")
 };
 const list = (object, isOuter = true) => {
-    const label = isOuter ? "[ExComplexList] 传入信息 -->" : "[ExComplexList] --> 传入信息";
+    const label = isOuter ? "[ExListComplex] 传入信息 -->" : "[ExListComplex] --> 传入信息";
     Ux.dgDebug(object, label);
 };
 export default {

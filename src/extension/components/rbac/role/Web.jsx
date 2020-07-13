@@ -1,4 +1,4 @@
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 import {PageCard} from "web";
 import React from "react";
 import Ex from 'ex';
@@ -8,7 +8,7 @@ export default (reference, {
     form = {}
 }) => (
     <PageCard reference={reference}>
-        <ExComplexList {...Ex.yoAmbient(reference)}
+        <ExListComplex {...Ex.yoAmbient(reference)}
                        config={config} $form={form}/>
     </PageCard>
 )
