@@ -3,7 +3,7 @@ import Ux from 'ux';
 import Ex from 'ex';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 import Op from './Op';
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
@@ -29,7 +29,7 @@ class Component extends React.PureComponent {
             const config = Ux.fromHoc(this, "grid");
             const {$query = {}} = this.state;
             return (
-                <ExComplexList {...Ex.yoAmbient(this)}
+                <ExListComplex {...Ex.yoAmbient(this)}
                                config={config} $form={form} $query={$query}/>
             )
         }, Ex.parserOfColor("PxLog").page())

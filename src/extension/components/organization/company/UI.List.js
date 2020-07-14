@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
@@ -29,7 +29,7 @@ class Component extends React.PureComponent {
             const {$inited = {}} = this.props;
             const {$query = {}} = this.state;
             return (
-                <ExComplexList {...Ex.yoAmbient(this)}
+                <ExListComplex {...Ex.yoAmbient(this)}
                                $query={$query}
                                $record={$inited}    // 特殊变量，form 中需要穿透传递
                                config={config} $form={form}/>

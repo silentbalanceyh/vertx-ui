@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from "ex";
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 import Op from './Op';
 import jsx from "./Web.Tree";
 
@@ -23,7 +23,7 @@ class Component extends React.PureComponent {
                 },
                 () => {
                     const listAttrs = Op.yoResList(this);
-                    return (<ExComplexList {...listAttrs}/>)
+                    return (<ExListComplex {...listAttrs}/>)
                 },
                 {
                     rowCls: "web-authority-resource",

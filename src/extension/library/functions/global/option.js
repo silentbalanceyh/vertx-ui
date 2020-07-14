@@ -30,7 +30,7 @@ export default {
     AJAX_COLUMN_MY: 'ajax.column.my',                   /* （动态可用）我的列读取 */
     AJAX_COLUMN_SAVE: 'ajax.column.save',               /* （动态可用）列保存 */
     // 删除 / 编辑
-    AJAX_DELETE_URI: 'ajax.delete.uri',                 /* 行删除，由ExComplexList传入，第二个界面需要重用 */
+    AJAX_DELETE_URI: 'ajax.delete.uri',                 /* 行删除，由ExListComplex传入，第二个界面需要重用 */
     AJAX_GET_URI: 'ajax.get.uri',                       /* 行编程方法 */
     AJAX_BATCH_DELETE_URI: 'ajax.batch.delete.uri',     /* 批量删除 */
     AJAX_BATCH_UPDATE_URI: 'ajax.batch.update.uri',     /* 批量编辑 */

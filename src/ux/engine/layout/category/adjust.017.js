@@ -1,9 +1,7 @@
 const layout = {
-    1024: "3,21",    // ---- ---- ---- ---- ---- ----
+    1024: "4,20"
 };
-const adjust = {
-    1024: "2%",      //        -- ---- ---- ---- ----
-};
+const adjust = {};
 export default {
     layout,
     adjust

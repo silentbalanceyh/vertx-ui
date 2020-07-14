@@ -27,6 +27,7 @@ import _rbac_group from './rbac/group/UI';
 import _rbac_permission from './rbac/permission/UI';
 import _rbac_role from './rbac/role/UI';
 import _rbac_user from './rbac/user/UI';
+import _system_history from './system/history/UI';
 import _system_job from './system/job/UI';
 import _system_log from './system/log/UI';
 import _system_start from './system/start/UI';
@@ -62,6 +63,7 @@ export default {
 	_rbac_permission,
 	_rbac_role,
 	_rbac_user,
+	_system_history,
 	_system_job,
 	_system_log,
 	_system_start,

@@ -72,10 +72,10 @@ class Component extends React.PureComponent {
             /*
              * 当前组件不调用 ExTab 来处理 Tab
              * 页签行为，而是直接使用 antd 中的 Tabs，主要是防止和原始的
-             * ComplexList / ExComplexList 产生冲突
+             * ComplexList / ExListComplex 产生冲突
              */
             return renderJsx(this, tabs);
-        }, Ex.parserOfColor("ExComplexList").list())
+        }, Ex.parserOfColor("ExListComplex").list())
     }
 }
 

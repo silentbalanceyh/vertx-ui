@@ -39,7 +39,11 @@ const rxSave = (reference) => (event) => {
         const {$columns = []} = config;
         const fullColumns = Ux.clone($columns)
             .map(column => column.dataIndex);
-        const params = fullColumns.filter(item => !keys.contains(item));
+        /*
+         * 正向语义
+         * fullColumns 中被包含了的就是 item
+         */
+        const params = fullColumns.filter(item => keys.contains(item));
 
         if (U.isFunction(rxColumnSave)) {
             rxColumnSave(params)
@@ -49,7 +53,7 @@ const rxSave = (reference) => (event) => {
                      */
                     const $response = Ux.immutable(response);
                     const $columnsMy = fullColumns
-                        .filter(item => !$response.contains(item));
+                        .filter(item => $response.contains(item));
                     /*
                      * 防重复提交关闭
                      * （本层处理）

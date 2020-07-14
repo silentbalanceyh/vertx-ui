@@ -11,6 +11,7 @@ import StateOut from "./state/StateOut";
 import RxEtat from './rx/Rx.Etat';
 import RxFlow from './rx/Rx.Flow';
 import RxOf from './rx/Rx.Of';
+import RxCodex from './rx/Rx.Codex';
 import QQuery from "./query/QQuery";
 
 /**
@@ -33,6 +34,10 @@ class Dsl {
      */
     static of(reference: any): RxOf {
         return RxOf.from(reference);
+    }
+
+    static codex(reference: any): RxCodex {
+        return RxCodex.from(reference);
     }
 
     /*

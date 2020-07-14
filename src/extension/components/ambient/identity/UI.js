@@ -4,7 +4,7 @@ import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
 import Ex from "ex";
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
@@ -35,7 +35,7 @@ class Component extends React.PureComponent {
                 }
             });
             return (
-                <ExComplexList {...attrs}/>
+                <ExListComplex {...attrs}/>
             );
         }, Ex.parserOfColor("PxIdentityType").type())
     }

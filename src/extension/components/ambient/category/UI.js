@@ -6,7 +6,7 @@ import FormAdd from "./form/UI.Add";
 import FormEdit from "./form/UI.Edit";
 import FormFilter from "./form/UI.Filter";
 
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 
 class Component extends React.PureComponent {
     state = {
@@ -33,7 +33,7 @@ class Component extends React.PureComponent {
                 }
             });
             return (
-                <ExComplexList {...attrs}/>
+                <ExListComplex {...attrs}/>
             );
         }, Ex.parserOfColor("PxCategoryType").type())
     }

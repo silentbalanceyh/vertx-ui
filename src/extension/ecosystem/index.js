@@ -3,7 +3,8 @@
  */
 // ------------- 可重用组件
 /* （常用完整列表组件）*/
-export {default as ExComplexList} from './ExComplexList/UI';
+export {default as ExListComplex} from './ExListComplex/UI';        // 复杂列表
+export {default as ExListQuery} from './ExListQuery/UI';              // 简单结果呈现列表
 /* （通用表单）*/
 export {default as ExForm} from './ExForm/UI';
 /* （通用页签）原始版本的 auiTab */

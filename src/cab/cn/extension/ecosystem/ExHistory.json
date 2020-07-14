@@ -78,11 +78,20 @@
             "$empty": "（系统）"
         }
     ],
-    "_adjust": {
-        "code": {
-            "DELETE": "REVERT"
+    "_codex": [
+        {
+            "type": "UPDATE",
+            "where": {
+                "field": "fieldName",
+                "value": "code"
+            },
+            "done": {
+                "field": "type",
+                "fromValue": "DELETE",
+                "toValue": "REVERT"
+            }
         }
-    },
+    ],
     "_tabs": {
         "defaultActiveKey": "tabTime",
         "type": "card",

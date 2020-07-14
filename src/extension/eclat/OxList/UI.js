@@ -1,7 +1,7 @@
 import React from 'react';
 import Ex from 'ex';
 import Op from './Op';
-import {ExComplexList} from 'ei';
+import {ExListComplex} from 'ei';
 import Ux from 'ux';
 import Plugin from 'plugin';
 
@@ -29,10 +29,10 @@ class Component extends React.PureComponent {
              */
             $config = Op.yoQuery(this, $config);
             /*
-             * pluginField 转入 ExComplexList
+             * pluginField 转入 ExListComplex
              */
             return (
-                <ExComplexList {...inherit}
+                <ExListComplex {...inherit}
                                config={$config}
                                $form={$form}            // 增删改专用Form注入
                                $record={$record}        // 复杂表单专用的记录，替换 $inited 的第二原始数据

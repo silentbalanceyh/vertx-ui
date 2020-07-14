@@ -36,7 +36,7 @@ export default {
     OxAdmin: ExAdmin,
     // OxCard -> PageCard 连接
     OxCard,
-    // OxList 中包含了 ExComplexList
+    // OxList 中包含了 ExListComplex
     OxList,
     // OxCategory
     OxCategory,

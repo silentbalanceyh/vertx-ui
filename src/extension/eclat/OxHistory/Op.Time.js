@@ -91,7 +91,9 @@ const yiTimePage = (reference, state = {}) => {
         ], "dict", "data").then(response => {
             state.$dict = response['dict'];
             if (Ux.isArray(response.data)) {
-                state.$data = response.data.sort(Ux.sorterDescDFn('createdAt'));
+                const $data = Ux.clone(response.data);
+                $data.sort(Ux.sorterDescDFn('createdAt'));
+                state.$data = $data;
             }
             /*
              * 添加 lazy 流程

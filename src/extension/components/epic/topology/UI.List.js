@@ -2,7 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
 
-import {ExComplexList} from "ei";
+import {ExListComplex} from "ei";
 
 import FormAdd from "./form/UI.Add";
 import FormEdit from "./designer/UI.Edit";
@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
                 FormFilter,
             };
             return (
-                <ExComplexList {...Ex.yoAmbient(this)}
+                <ExListComplex {...Ex.yoAmbient(this)}
                                config={config} $form={form}/>
             )
         }, Ex.parserOfColor("PxTopologyList").list())
