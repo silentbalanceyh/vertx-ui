@@ -1,5 +1,69 @@
 {
     "_page": {
         "title": "通用权限（角色）"
+    },
+    "_info": {
+        "system": "系统权限",
+        "business": "业务权限"
+    },
+    "_action": [
+        {
+            "key": "$opClean",
+            "text": "清除",
+            "icon": "filter"
+        },
+        {
+            "key": "$opSave",
+            "text": "保存",
+            "type": "primary",
+            "icon": "save"
+        },
+        {
+            "key": "$opNav",
+            "text": "定制",
+            "className": "ux-spec",
+            "icon": "safety-certificate"
+        }
+    ],
+    "_search": {
+        "label": "选择角色",
+        "jsx": {
+            "allowClear": true,
+            "placeholder": "（请选择）",
+            "config": {
+                "linker": {
+                    "key": "roleId",
+                    "name": "roleName"
+                },
+                "ajax": {
+                    "method": "POST",
+                    "uri": "/api/role/search",
+                    "params": {
+                        "pager": {
+                            "page": 1,
+                            "size": 6
+                        },
+                        "sorter": [
+                            "updatedAt,DESC"
+                        ],
+                        "criteria": {
+                            "sigma": "PROP:app.sigma"
+                        }
+                    }
+                },
+                "table": {
+                    "columns": [
+                        "name,角色名称",
+                        "code,角色编码"
+                    ]
+                },
+                "validation": "请选择您要设置权限的角色！",
+                "window": "请选择角色信息,选择,关闭,false,800,false",
+                "search": {
+                    "name,c": "角色名",
+                    "code,c": "角色编号"
+                }
+            }
+        }
     }
 }

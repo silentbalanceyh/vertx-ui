@@ -72,7 +72,7 @@ const rxFilter = (reference) =>
         if ($filtersRaw) {
             state['$filtersRaw'] = $filtersRaw;
         }
-        state.$filters = $filters;
+        state.$filters = Ux.clone($filters);
         reference.setState(state);
     };
 export default {

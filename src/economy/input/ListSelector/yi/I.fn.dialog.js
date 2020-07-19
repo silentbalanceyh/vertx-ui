@@ -15,17 +15,24 @@ const onConfirm = (reference = {}, config = {}) => (event) => {
         const values = Ux.writeLinker({}, config, () => $select);
         if (!Ux.isEmpty(values)) {
             // 调用Form数据处理Linker
-            Ux.formHits(ref, values);
-            // 执行Linker过后的回调
-            const {fnCallback} = config;
-            if (U.isFunction(fnCallback)) {
-                fnCallback($select);
-            }
-            // onChange 保证表单的 isTouched
-            const {onChange, id} = reference.props;
-            if (U.isFunction(onChange)) {
-                const changeValue = values[id];
-                onChange(changeValue);
+            const {form} = ref.props;
+            if (form) {
+                // 表单用法，用于在表单中处理值信息
+                Ux.formHits(ref, values);
+                // 执行Linker过后的回调
+                const {fnCallback} = config;
+                if (U.isFunction(fnCallback)) {
+                    fnCallback($select);
+                }
+                // onChange 保证表单的 isTouched
+                const {onChange, id} = reference.props;
+                if (U.isFunction(onChange)) {
+                    const changeValue = values[id];
+                    onChange(changeValue);
+                }
+            } else {
+                // 非表单用法
+                Ux.fn(reference).onChange(values);
             }
         }
         // 关闭窗口

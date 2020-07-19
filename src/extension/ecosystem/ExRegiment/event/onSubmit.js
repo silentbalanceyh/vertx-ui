@@ -13,6 +13,8 @@ export default (reference, config = {}) => (event) => {
         const {rxSubmit} = reference.props;
         if (U.isFunction(rxSubmit)) {
             rxSubmit($selected, reference);
+        } else {
+            console.error("缺乏核心函数：rxSubmit", rxSubmit);
         }
     }
 }

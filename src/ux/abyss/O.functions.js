@@ -32,6 +32,7 @@ export default (reference) => generator(reference, [
     "rxSource",
     "rxSubmit",
     "rxClose",
+    "rxFilter",
 
     /* rx特殊模式 */
     "rxNext",        // 下一步

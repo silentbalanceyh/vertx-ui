@@ -95,38 +95,67 @@ const ajaxEager = (reference, columns = [], data = []) => {
     columns.forEach(column => {
         const config = column.$config;
         if (Abs.isObject(config)) {
-            const {uri, field, expr} = config;
-            /*
-             * 将 data 按 column 分组
-             */
-            const dataMap = Ele.elementGroup(data, column.dataIndex);
-            const vertical = [];
-            const verticalKeys = Object.keys(dataMap);
-            verticalKeys.forEach(key => {
-                if ("undefined" === key) {
-                    vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
-                } else {
-                    vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
+            const {uri, field, expr, batch = false} = config;
+            if (batch) {
+                /*
+                 * 批量处理只能使用查询引擎
+                 */
+                const dataKeys = data.map(item => item[column.dataIndex]);
+                const criteria = {};
+                criteria[`key,i`] = dataKeys;
+                lazyAsync.push(Ajax.ajaxPost(uri, {criteria}).then((response = {}) => {
+                    const {list = []} = response;
+                    /*
+                     * 批量连接，直接构造
+                     */
+                    const result = {};
+                    list.forEach(item => {
                         let value;
                         if (expr) {
-                            value = T.formatExpr(expr, result, true);
+                            value = T.formatExpr(expr, item, true);
                         } else {
-                            value = result[field];
+                            value = item[field];
                         }
-                        return Abs.promise(value);
-                    }));
-                }
-            });
-            /*
-             * vertical 结果
-             */
-            lazyAsync.push(Abs.parallel(vertical).then(response => {
-                const result = {};
-                response.forEach((each, keyIndex) => {
-                    result[verticalKeys[keyIndex]] = each;
+                        result[item.key] = value;
+                    });
+                    if (column["$empty"]) {
+                        result['undefined'] = column["$empty"];
+                    }
+                    return Abs.promise(result);
+                }));
+            } else {
+                /*
+                 * 将 data 按 column 分组，原始模式
+                 */
+                const dataMap = Ele.elementGroup(data, column.dataIndex);
+                const vertical = [];
+                const verticalKeys = Object.keys(dataMap);
+                verticalKeys.forEach(key => {
+                    if ("undefined" === key) {
+                        vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
+                    } else {
+                        vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
+                            let value;
+                            if (expr) {
+                                value = T.formatExpr(expr, result, true);
+                            } else {
+                                value = result[field];
+                            }
+                            return Abs.promise(value);
+                        }));
+                    }
                 });
-                return Abs.promise(result);
-            }));
+                /*
+                 * vertical 结果
+                 */
+                lazyAsync.push(Abs.parallel(vertical).then(response => {
+                    const result = {};
+                    response.forEach((each, keyIndex) => {
+                        result[verticalKeys[keyIndex]] = each;
+                    });
+                    return Abs.promise(result);
+                }));
+            }
         }
     });
     return Abs.parallel(lazyAsync)

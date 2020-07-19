@@ -29,7 +29,7 @@ export default (reference, {
                 {!Ux.isEmpty(search) ? (<ExSearch {...search}/>) : false}
             </Col>
             <Col span={3} xl={3} xxl={2} className={"ex-extra"}>
-                {!Ux.isEmpty(extra) ? (<ExAction {...extra}/>) : false}
+                {0 < extra.config.length ? (<ExAction {...extra}/>) : false}
             </Col>
         </Row>
         <Row>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Ex from 'ex';
+import Ux from 'ux';
 import Rdr from './Web.jsx';
 
 /*
@@ -32,7 +33,7 @@ class Component extends React.PureComponent {
              * 1）ExAction -> ExDialog
              * 2）ExAction -> ExButton
              */
-            if (0 === config.length) {
+            if (Ux.isEmpty(config)) {
                 /* 无配置，不渲染任何内容 */
                 return false;
             } else {

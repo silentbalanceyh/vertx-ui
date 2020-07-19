@@ -13,12 +13,8 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "username,realname,alias,mobile,email,active"
         },
         "options": {
             "search.cond": [

@@ -31,10 +31,10 @@ class Component extends React.PureComponent {
          * mode 选择
          */
         const {mode = "FULL"} = config;
-        const {$data = {}} = this.state;
+        const {value = {}} = this.props;
         return (
-            <Input.Group {...rest}>
-                {renderJsx(this, mode, $data)}
+            <Input.Group {...rest} className={"web-range-date"}>
+                {renderJsx(this, mode, value)}
             </Input.Group>
         );
     }

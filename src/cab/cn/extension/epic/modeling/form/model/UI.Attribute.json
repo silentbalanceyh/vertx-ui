@@ -52,13 +52,13 @@
             ],
             [
                 {
-                    "metadata": "isSyncIn,同步入,,,aiCheckbox",
+                    "metadata": "isSyncIn,集成拉取,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
                 },
                 {
-                    "metadata": "isSyncOut,同步出,,,aiCheckbox",
+                    "metadata": "isSyncOut,集成推送,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -66,7 +66,13 @@
             ],
             [
                 {
-                    "metadata": "isTrack,生成变更历史,,,aiCheckbox",
+                    "metadata": "isTrack,变更历史,,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                },
+                {
+                    "metadata": "isConfirm,生成待确认,,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }
@@ -93,8 +99,8 @@
             "entityId",
             "selectedEntityIds"
         ],
-        "initial":{
-            "type":"FIX:INTERNAL"
+        "initial": {
+            "type": "FIX:INTERNAL"
         },
         "op": {
             "$opSaveAttribute": "$CLIENT$"

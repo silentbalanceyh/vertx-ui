@@ -6,10 +6,6 @@
             "sorter": "updatedAt=DESC",
             "criteria": {}
         },
-        "mock": {
-            "enabled": true,
-            "keys": "code,name,description,manager,active"
-        },
         "options": {
             "search.cond": [
                 "identifier,c",

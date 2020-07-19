@@ -136,6 +136,8 @@ const toTreeArray = (data = [], config = {}) => {
             "title",
             "isLeaf",
             "selectable",
+            "checkable",
+            "disableCheckbox",
         ].filter(field => each.hasOwnProperty(field))
             .forEach(field => processed[field] = each[field]);
         // 必须包含主键（不包含主键的行不需要）

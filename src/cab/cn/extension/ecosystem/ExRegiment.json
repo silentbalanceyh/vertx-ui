@@ -39,7 +39,8 @@
             "columns": [
                 {
                     "dataIndex": "code",
-                    "title": "配置项编号"
+                    "title": "配置项编号",
+                    "width": 220
                 },
                 {
                     "dataIndex": "name",
@@ -48,18 +49,21 @@
                 {
                     "dataIndex": "categoryFirst",
                     "title": "一级分类",
+                    "width": 120,
                     "$render": "DATUM",
                     "$datum": "source=data.category,value=key,display=name"
                 },
                 {
                     "dataIndex": "categorySecond",
                     "title": "二级分类",
+                    "width": 120,
                     "$render": "DATUM",
                     "$datum": "source=data.category,value=key,display=name"
                 },
                 {
                     "dataIndex": "categoryThird",
                     "title": "三级分类",
+                    "width": 120,
                     "$render": "DATUM",
                     "$datum": "source=data.category,value=key,display=name"
                 },

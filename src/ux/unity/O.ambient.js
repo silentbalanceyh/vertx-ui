@@ -199,16 +199,19 @@ const toOriginal = (reference = {}, switched) => {
  * @param {ReactComponent} reference React组件引用。
  */
 const isAuthorized = (reference) => {
-    const {$router} = reference.props;
     if (0 === Object.keys(isLogged()).length) {
-        const path = $router.path();
-        if (path) {
-            $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
-        } else {
-            $router.to(Cv.ENTRY_LOGIN);
-        }
+        toUnauthorized(reference);
     }
 };
+const toUnauthorized = (reference) => {
+    const {$router} = reference.props;
+    const path = $router.path();
+    if (path) {
+        $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
+    } else {
+        $router.to(Cv.ENTRY_LOGIN);
+    }
+}
 /**
  * ## 标准函数
  *

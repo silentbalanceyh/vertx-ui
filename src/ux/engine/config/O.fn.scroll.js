@@ -7,7 +7,6 @@ import Rx from '../expression';
 /*
  * 像素转换：12px
  */
-const px = 12;
 const widthString = (input) => {
     let length = 0;
     if ("string" !== typeof input) {
@@ -17,10 +16,10 @@ const widthString = (input) => {
         const str = String(input.charAt(idx));
         if (Abs.isCn(str)) {
             // 中文字符长度
-            length += (2 * px);
+            length += 28;
         } else {
             // 英文字符长度
-            length += px;
+            length += 13;
         }
     }
     return length;
@@ -50,10 +49,10 @@ const widthData = (data = [], field = "") => {
 const widthTitle = (title = "", column = {}) => {
     let titleWidth = widthString(title);
     if (column.sorter) {
-        titleWidth += (px * 2);
+        titleWidth += 32;
     }
     if (column.hasOwnProperty("$filter")) {
-        titleWidth += (px * 2);
+        titleWidth += 32;
     }
     return titleWidth;
 };
@@ -83,7 +82,7 @@ const widthLogical = (titleWidth = 0, column = {}, data = []) => {
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthUser = (titleWidth = 0, column = {}, data = []) => {
-    const textWidth = 12 * px;      // 创建人默认（一个图标 + 4个字）
+    const textWidth = 144;      // 创建人默认（一个图标 + 4个字）
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthDate = (titleWidth = 0, column = {}, data = []) => {

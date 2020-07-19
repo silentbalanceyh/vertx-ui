@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import Jsx from './I.common';
 import U from 'underscore';
 import Ut from '../../unity';
+import Abs from '../../abyss';
 
 const _setExecutor = (option = {}, item, metadata = {}) => {
     const {
@@ -34,7 +35,7 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
     }
 };
 
-const _setEnabled = (calculated, item = {}, reference) => {
+const _setEnabled = (calculated, item = {}, executor = {}) => {
     if (calculated.edition && "fnEdit" === item.executor) {
         /*
          * 编辑按钮
@@ -47,9 +48,13 @@ const _setEnabled = (calculated, item = {}, reference) => {
         return true;
     } else {
         /*
-         * 后期扩展
+         * 后期扩展，扩展额外的 options
          */
-        return false;
+        if (Abs.isEmpty(executor)) {
+            return false;
+        } else {
+            return executor.hasOwnProperty(item.executor);
+        }
     }
 };
 
@@ -87,7 +92,10 @@ export default (reference, config, executor = {}) => (text, record) => {
             option.key = `link-${rowKey}`;
             option.text = Ut.formatExpr(item.text, record);
             // Executor 处理
-            option.enabled = _setEnabled(calculated, item, reference);
+            option.enabled = _setEnabled(
+                calculated, item,
+                executor
+            );
             if (option.enabled) {
                 _setExecutor(option, item, {
                     text, record,

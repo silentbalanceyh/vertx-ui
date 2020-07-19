@@ -23,7 +23,7 @@ class Rule {
                     return (record && value === record[field]);
                 } else {
                     // 满足条件
-                    return true;
+                    return false;
                 }
             }
             // 执行函数
@@ -49,7 +49,7 @@ class Rule {
     }
 
     condition(record: any): any {
-        return Ux.isFunction(this._fnCond) ? this._fnCond(record) : true;
+        return Ux.isFunction(this._fnCond) ? this._fnCond(record) : false;
     }
 
     done(record: any): any {
@@ -98,7 +98,7 @@ class Codex {
     done(input: any = []): any {
         const $input = Ux.clone(input);
         this._rules.forEach(eachRule => {
-            $input.filter(eachRule.condition).forEach(record => {
+            $input.filter(record => eachRule.condition(record)).forEach(record => {
                 eachRule.done(record);
             });
         });
