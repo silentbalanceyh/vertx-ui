@@ -69,9 +69,9 @@ const toHeight = (adjust = 0) => {
         // 直接计算（郑州项目）
         maxHeight = height - 48 - adjust;
     } else if (1400 < width && width < 1900) {
-        maxHeight = height - 48 - adjust;
+        maxHeight = height - 72 - adjust;
     } else if (1900 < width) {
-        maxHeight = height - 56 - adjust;
+        maxHeight = height - 96 - adjust;
     }
     return maxHeight;
 };

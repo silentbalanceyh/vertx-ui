@@ -1,4 +1,5 @@
 import g6 from './editor';
+import g6Graph from './drawer';
 
 export default {
     // drawTree,       // g6 树图
@@ -9,4 +10,5 @@ export default {
     // drawRadial,     // g2 雷达图
     // drawPie,        // g2 饼状图
     ...g6,
+    ...g6Graph,
 }

@@ -32,20 +32,24 @@
     }
 
     .action {
-        padding-top: 3px;
-        text-align: center;
+        padding-top: 2px;
+        text-align: right;
         line-height: 36px;
     }
 
     .op-system {
         margin-bottom: 6px;
-        max-height: 268px;
-        overflow-y: auto;
+
+        .op-transfer {
+            width: 100%;
+        }
 
         .card {
-            float: left;
-            width: 19%;
-            margin-right: 1%;
+            padding-right: 3px;
+
+            .card-content {
+                overflow-y: scroll;
+            }
 
             .head {
                 height: 36px !important;
@@ -69,24 +73,14 @@
             .ant-card-body {
                 padding: 0 !important;
 
-                .ant-tree-child-tree {
-                    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
-                        padding: 0 0 0 8px;
-                    }
-
-                    @media (min-width: @screen-xxl) {
-                        padding: 0 0 0 18px;
-                    }
-                }
-
                 .ant-tree-title {
                     display: inline-block;
                     @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
-                        max-width: 120px;
+                        max-width: 150px;
                     }
 
                     @media (min-width: @screen-xxl) {
-                        max-width: 200px;
+                        max-width: 240px;
                     }
                     overflow-x: hidden;
 

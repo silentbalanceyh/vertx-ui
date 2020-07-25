@@ -1,0 +1,39 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "ui": [
+            [
+                {
+                    "title": "导出说明",
+                    "config": {
+                        "message": "导出说明",
+                        "description": [
+                            "导出功能主要开放给开发人员使用，用于辅助实施填写Excel模板。",
+                            "导出的文件格式为 .csv 的文件后缀，可直接复制到Excel中执行填充。",
+                            "导出数据为 roleId 和 permId 两列，数据格式为UUID。"
+                        ],
+                        "type": "warning"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "filename,文件名,19,,,placeholder=如果不填写则系统随机生成！",
+                    "optionConfig.rules": [
+                        "required,请填写导出文件名，该文件不可为空！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSelect,保存,SUBMIT,primary"
+                    ],
+                    "hidden": true
+                }
+            ]
+        ]
+    }
+}

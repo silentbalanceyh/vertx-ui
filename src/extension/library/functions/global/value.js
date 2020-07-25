@@ -11,5 +11,17 @@ export default {
         "resource.engine",
         "resource.organization"
     ],
-    PERM_INTEGRATION: "resource.integration"
+    PERM_INTEGRATION: "resource.integration",
+    PERM_PAGE: {
+        DEV: [
+            "resource.ui",
+            "resource.engine",
+            "resource.integration",
+        ],
+        SYS: [
+            "resource.ambient",
+            "resource.security",
+            "resource.organization"
+        ]
+    }
 }

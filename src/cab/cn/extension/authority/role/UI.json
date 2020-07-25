@@ -3,18 +3,33 @@
         "title": "通用权限（角色）"
     },
     "_info": {
-        "system": "系统权限",
-        "business": "业务权限"
+        "system": "平台权限",
+        "business": "业务权限",
+        "submitting": "正在提交您设置的权限信息，请等待结果……"
     },
+    "_clean": {
+        "key": "$opClean",
+        "tooltip": "清除所选",
+        "icon": "filter"
+    },
+    "_checked": {
+        "login": "允许登录平台"
+    },
+    "_window": "导入/导出,确认,关闭,false,720,true,$opSelect",
     "_action": [
         {
-            "key": "$opClean",
-            "text": "清除",
-            "icon": "filter"
+            "key": "$opExport",
+            "tooltip": "导出",
+            "icon": "export"
+        },
+        {
+            "key": "$opImport",
+            "tooltip": "导入",
+            "icon": "import"
         },
         {
             "key": "$opSave",
-            "text": "保存",
+            "tooltip": "保存",
             "type": "primary",
             "icon": "save"
         },
@@ -64,6 +79,19 @@
                     "code,c": "角色编号"
                 }
             }
+        }
+    },
+    "_tabs": {
+        "defaultActiveKey": "SYS",
+        "type": "card",
+        "items": "系统权限,SYS;开发权限,DEV"
+    },
+    "_modal": {
+        "success": {
+            "updated": "恭喜，您所选择的角色权限已经成功更新！"
+        },
+        "error": {
+            "filename": "对不起，文件名不可为空，请输入导出文件名！"
         }
     }
 }

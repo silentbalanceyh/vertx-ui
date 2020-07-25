@@ -11,6 +11,7 @@ import _authority_research from './authority/research/UI';
 import _authority_resource from './authority/resource/UI';
 import _authority_role from './authority/role/UI';
 import _authority_user from './authority/user/UI';
+import _authority_view from './authority/view/UI';
 import _epic_form from './epic/form/UI';
 import _epic_integration from './epic/integration/UI';
 import _epic_modeling from './epic/modeling/UI';
@@ -46,6 +47,7 @@ export default {
 	_authority_resource,
 	_authority_role,
 	_authority_user,
+	_authority_view,
 	_epic_form,
 	_epic_integration,
 	_epic_modeling,

@@ -15,8 +15,7 @@ const yiPage = (reference) => {
     Ex.authTreeRes(state)
         .then(state => {
             /* resource.type */
-            state.$a_resource_type =
-                Dsl.getArray(Ux.clone(state.$tree.map(item => item.data)));
+            state.$a_resource_type = Dsl.getArray(Ux.clone(state.$tree.map(item => item.data)));
             /* resource.models */
             const models = Ux.clone(state.$treeData);
             state.$a_resource_models = Dsl.getArray(models);

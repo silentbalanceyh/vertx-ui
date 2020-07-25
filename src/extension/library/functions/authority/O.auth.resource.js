@@ -1,5 +1,7 @@
-import Ajx from '../../ajax';
 import Ux from 'ux';
+// 跳级处理
+import Ajx from '../../ajax';
+import Cv from '../../functions/global';
 
 /**
  * ## 扩展函数
@@ -11,12 +13,33 @@ const authGroups = (state = {}, treeData = []) => {
     /* 权限组读取 */
     return Ux.ajaxGet("/api/permission/groups/by/sigma", {}).then(groups => {
         /*
+         * 构造树
+         */
+        const tree = Ux.tree().build(treeData);
+        /*
+         * 读取拉平的树
+         */
+        const treeRoot = tree.getRoots(true, true);
+
+        /*
+         * 集成节点处理
+         */
+        const itemRef = Ux.elementUnique(treeData, 'code', Cv.V.PERM_INTEGRATION);
+        const exclude = [];
+        if (itemRef) {
+            const {group = []} = itemRef.metadata ? itemRef.metadata : {};
+            if (Ux.isArray(group)) {
+                group.forEach(each => exclude.push(each));
+            }
+        }
+        const $integration = Ux.immutable(exclude);
+        /*
          * 根节点，先针对分组
          * 组名称 -> identifier 集合
          */
         const groupMap = {};
         const groupVector = {};
-        groups.forEach(group => {
+        groups.filter(each => !$integration.contains(each.group)).forEach(group => {
             const groupRef = groupMap[group.group];
             if (groupRef) {
                 groupRef.total += group.count;
@@ -27,44 +50,69 @@ const authGroups = (state = {}, treeData = []) => {
             }
             groupVector[group.identifier] = group.group;
         });
-        /*
-         * 构造树
-         */
-        const tree = Ux.tree().build(treeData);
-        /*
-         * 读取拉平的树
-         */
-        const treeRoot = tree.getRoots(true, true);
+
         /*
          * children 节点引入替换机制
          */
         const processed = [];
         const childMap = {};
         treeRoot.forEach(root => {
-            const childArr = [];
             const $root = Ux.clone(root);
-            if ($root.children) {
-                $root.children.forEach(child => {
-                    /*
-                     * 直接从 groupMap 中查找
-                     */
-                    const groupName = groupVector[child.identifier];
-                    if (groupName) {
-                        const groupData = groupMap[groupName];
-                        if (groupData) {
-                            if (!childMap.hasOwnProperty(groupData.group)) {
-                                child.name = `${groupData.group}（${groupData.total}）`;
-                                child.__group = Ux.clone(groupData);
-                                child.__parent = Ux.clone($root.data);
-                                childArr.push(child);
-                                childMap[groupData.group] = true;
-                            }
-                        }
+            const {data = {}} = root;
+            if (data.code === Cv.V.PERM_INTEGRATION) {
+                // 集成专用
+                let integrated = groups.filter(each => $integration.contains(each.group));
+                integrated = Ux.elementGroup(integrated, 'group');
+                // 集成中的组信息
+                const childArr = [];
+                Object.keys(integrated).forEach(groupName => {
+                    // 节点数据
+                    const child = {};
+                    let count = 0;
+                    const groupEach = integrated[groupName];
+                    const identifiers = [];
+                    if (Ux.isArray(groupEach)) {
+                        groupEach.forEach(groupItem => {
+                            count += Ux.valueInt(groupItem.count);
+                            identifiers.push(groupItem.identifier);
+                        })
                     }
+                    child.name = `${groupName}（${count}）`;
+                    child.parentId = root.key;
+                    child.key = Ux.randomUUID();
+                    child.identifier = identifiers;
+                    child.__group = {group: groupName};
+                    child.__parent = Ux.clone($root.data);
+                    childArr.push(child);
                 });
                 $root.children = Ux.toTreeArray(childArr, {title: "name"});
+                processed.push($root);
+            } else {
+                // 非集成处理
+                const childArr = [];
+                if ($root.children) {
+                    $root.children.forEach(child => {
+                        /*
+                         * 直接从 groupMap 中查找
+                         */
+                        const groupName = groupVector[child.identifier];
+                        if (groupName) {
+                            const groupData = groupMap[groupName];
+                            if (groupData) {
+                                if (!childMap.hasOwnProperty(groupData.group)) {
+                                    child.name = `${groupData.group}（${groupData.total}）`;
+                                    child.__group = Ux.clone(groupData);
+                                    child.__parent = Ux.clone($root.data);
+                                    childArr.push(child);
+                                    childMap[groupData.group] = true;
+                                }
+                            }
+                        }
+                    });
+                    $root.children = Ux.toTreeArray(childArr, {title: "name"});
+                }
+                processed.push($root);
             }
-            processed.push($root);
         })
         state.$groups = Ux.clone(groups);
         state.$tree = processed;
@@ -81,42 +129,12 @@ const authGroups = (state = {}, treeData = []) => {
  */
 const authTreeRes = (state = {}) => {
     /* resource.tree */
-    return Ajx.category({type: "resource.tree"}).then(categories => {
-        /*
-        * 资源基本信息
-        * - 处理资源分类表
-        * 1）以 resource 开头作为基本分类数据
-        * 2）分类之下的子数据作为 identifier 的过滤信息
-        * */
-        const treeData = Ux.clone(categories);
-        const children = [];        // 子节点 promise
-        categories.filter(category => "ID:X_CATEGORY" === category.identifier).forEach(category => {
-            /*
-             * 查询子节点
-             */
-            children.push(Ajx.category({type: category.code})
-                .then(childData => {
-                    childData.filter(child => !child.parentId)
-                        .forEach(item => item.parentId = category.parentId)
-                    return Ux.promise(childData);
-                })
-            );
+    return Ajx.forest("resource.tree").then(response => {
+        state.$treeData = response;
+        state.$tree = Ux.toTree(response, {
+            title: "name"
         });
-        return Ux.parallel(children).then((matrix = []) => {
-            matrix.forEach(eachArray => eachArray.forEach(item => treeData.push(item)));
-            /*
-             * $treeData: 原始数组
-             * $tree：构造过后的树
-             */
-            const $treeData = treeData
-                // 去掉已经替换的节点信息
-                .filter(category => "ID:X_CATEGORY" !== category.identifier)
-            state.$treeData = $treeData;
-            state.$tree = Ux.toTree($treeData, {
-                title: "name"
-            });
-            return Ux.promise(state);
-        });
+        return Ux.promise(state);
     })
 }
 export default {
