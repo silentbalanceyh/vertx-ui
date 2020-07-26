@@ -36,7 +36,13 @@ export default (reference) => generator(reference, [
 
     /* rx特殊模式 */
     "rxNext",        // 下一步
+    "rxNextPage",    // 下一页
     "rxPrev",        // 上一步
+    "rxPrevPage",    // 上一页
+    "rxFirst",       // 第一步
+    "rxFirstPage",   // 第一页
+    "rxLast",        // 最后一步
+    "rxLastPage",    // 最后一页
     "rxAdd",         // 添加
     "rxEdit",        // 编辑
     "rxDelete",      // 删除
