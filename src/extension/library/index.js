@@ -11,8 +11,10 @@ import Sex from './romantic';
 import Jsx from './jsx';
 /* 新的扩展包，直接和资源*/
 import Web from './web';
+import Acl from './secure';
 
 const exported = {
+    ...Acl,
     ...Web,
     Jsx,
     ...Sex,

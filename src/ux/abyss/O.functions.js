@@ -33,6 +33,7 @@ export default (reference) => generator(reference, [
     "rxSubmit",
     "rxClose",
     "rxFilter",
+    "rxTree",
 
     /* rx特殊模式 */
     "rxNext",        // 下一步

@@ -55,6 +55,34 @@ const toGrid = (config = {}) => {
 /**
  * ## 标准函数
  *
+ * 根据列计算 span / offset 等相关信息，用于对
+ *
+ * @memberOf module:_to
+ * @param {Number} columns 列信息
+ * @param {Number} index 是否纳入 index 执行计算
+ * @return {Object} 返回可用于 Col 的属性
+ */
+const toGridSpan = (columns = 4, index = 0) => {
+    const attrs = {};
+    if (1 === columns) {
+        attrs.span = 24;
+    } else if (2 === columns) {
+        attrs.span = 12;
+    } else if (3 === columns) {
+        attrs.span = 8;
+    } else if (4 === columns) {
+        attrs.span = 6;
+    } else if (5 === columns) {
+        attrs.span = 4;
+        if (0 < index) {
+            attrs.offset = 1;
+        }
+    }
+    return attrs;
+}
+/**
+ * ## 标准函数
+ *
  * 根据修正宽度计算组件最大高度信息，按分辨率智能切换。
  *
  * @memberOf module:_to
@@ -248,6 +276,7 @@ const toPagination = (data = {}, query = {}, config = {}) => {
 export default {
     toHeight,
     toGrid,
+    toGridSpan,
     toMessage,
 
     toCss,  // /* 根据 CSS_PREFIX 前缀计算的 Class */

@@ -72,12 +72,6 @@ class Uarr {
         return this;
     }
 
-    flat(field = "children", current = true) {
-        const reference = this.data;
-        this.data = Ele.elementFlat(reference, field, current);
-        return this;
-    }
-
     filter(func) {
         if (U.isFunction(func)) this.data = this.data.filter(func);
         return this;

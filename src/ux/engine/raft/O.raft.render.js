@@ -7,6 +7,7 @@ import Value from "../../element";
 import parser from '../parser';
 import Ut from '../../unity';
 import Unit from '../web-unit';
+import Cv from '../../constant';
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -49,7 +50,15 @@ const raftValue = (cell = {}, values = {}, reference) => {
                     literal.forEach(item => newArray.push(Value.valueTime(item)));
                     literal = newArray;
                 } else {
-                    literal = Value.valueTime(literal);
+                    /*
+                     * ACL 控制，维持原值，保证更新
+                     */
+                    if (Cv.FORBIDDEN === literal) {
+                        literal = Value.valueTime("9999-01-01");
+                    } else {
+
+                        literal = Value.valueTime(literal);
+                    }
                 }
             }
         }

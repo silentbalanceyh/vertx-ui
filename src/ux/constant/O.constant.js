@@ -273,4 +273,5 @@ export default {
         "WWW_AUTHENTICATE": "WWW-Authenticate",
         "XSRF_TOKEN": "X-XSRF-TOKEN"
     },
+    FORBIDDEN: "********"
 };

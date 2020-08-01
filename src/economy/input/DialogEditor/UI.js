@@ -48,7 +48,6 @@ class Component extends React.PureComponent {
                 try {
                     $value = JSON.parse(value);
                 } catch (error) {
-                    console.error(error);
                 }
             }
             Ux.configScroll($table, $value, ref);

@@ -7,7 +7,11 @@ export default {
         password: Ux.encryptMD5(request.password)    // MD5加密
     }),
     /* /api/oauth/logout */
-    logout: () => Ux.ajaxPost('/api/user/logout', {}),
+    logout: () => Ux.ajaxPost('/api/user/logout', {})
+        .catch(error => {
+            console.error(error);
+            return Ux.promise({unauthorized: true})
+        }),
     /* /oauth/authorize */
     authorize: (request = {}) => Ux.ajaxPush('/oauth/authorize', request)
         .then(authorized => {

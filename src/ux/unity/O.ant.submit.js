@@ -4,6 +4,7 @@ import Dev from '../develop'
 import Cv from "../constant";
 import Ele from '../element';
 import Amt from "./O.ambient";
+import moment from 'moment';
 
 /**
  * ## 特殊函数「Zero」
@@ -33,7 +34,20 @@ const formSubmit = (reference, redux = false) => {
             // 拷贝参数
             const data = Abs.clone(params);
             Object.keys(data)
-                .filter(key => key.startsWith("$"))
+                .filter(key => {
+                    if (key.startsWith("$")) {
+                        // $button 移除
+                        return true;
+                    }
+                    if (Cv.FORBIDDEN === data[key]) {
+                        // 移除
+                        return true;
+                    }
+                    if (moment.isMoment(data[key])) {
+                        const year = data[key].year();
+                        return 9999 === year;
+                    } else return false;
+                })
                 .forEach(key => delete data[key])
             /*
              * 成功处理

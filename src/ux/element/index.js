@@ -9,6 +9,7 @@ import element from './O.element';
 
 import event from './O.event';
 import to from './O.to';
+import pinyin from './O.pinyin';
 
 export default {
     ...arg,
@@ -21,4 +22,5 @@ export default {
 
     ...event,
     ...to,
+    ...pinyin,
 }

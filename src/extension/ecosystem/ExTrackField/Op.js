@@ -5,9 +5,12 @@ import {Dsl} from 'entity';
 const yiPage = (reference) => {
     const state = {};
     state.$ready = true;
-    /*
-     * 选项
-     */
+    const table = Ux.fromHoc(reference, "table");
+    const $table = Ux.clone(table);
+    $table.columns = Ux.configColumn(reference, table.columns);
+    $table.pagination = false;
+    $table.className = "ex-history ex-field-history";
+    state.$table = $table;
     reference.setState(state);
 }
 const rxSelect = (reference) => (event) => {
@@ -26,7 +29,16 @@ const rxSelect = (reference) => (event) => {
             // 按时间排序
             const items = Ux.clone(original);
             items.sort(Ux.sorterDescDFn('createdAt'));
-            reference.setState({$data: {items}, $loading: false});
+            // 数据信息
+            const {$table = {}} = reference.state;
+            const lazyColumns = $table.columns.filter(item => "USER" === item['$render']);
+            if (0 < lazyColumns.length) {
+                Ux.ajaxEager(reference, lazyColumns, items).then($lazy => {
+                    reference.setState({$data: {items}, $loading: false, $lazy});
+                })
+            } else {
+                reference.setState({$data: {items}, $loading: false});
+            }
         })
     } else {
         /*
@@ -37,12 +49,6 @@ const rxSelect = (reference) => (event) => {
 }
 const yiFieldPage = (reference) => {
     const state = {};
-    const table = Ux.fromHoc(reference, "table");
-    const $table = Ux.clone(table);
-    $table.columns = Ux.configColumn(reference, table.columns);
-    $table.pagination = false;
-    $table.className = "ex-history ex-field-history";
-    state.$table = $table;
     state.$ready = true;
     reference.setState(state);
 }

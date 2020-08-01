@@ -303,6 +303,13 @@ const _edition = (reference, optionJsx = {}, field) => {
             }
         }
     }
+    /* 权限控制，field 为 undefined 是 $button 按钮专用 */
+    if ($edition && $edition.__acl) {
+        if (!optionJsx.readOnly && field) {
+            // 非只读的情况，才考虑 __acl
+            $edition[field] = $edition.__acl[field];
+        }
+    }
     return $edition;
 };
 /**

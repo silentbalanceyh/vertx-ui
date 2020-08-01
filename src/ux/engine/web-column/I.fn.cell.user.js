@@ -10,7 +10,7 @@ export default (reference, column) => {
      * -2. 配置处理
      */
     const {$config = {}} = column;
-    return (text) => {
+    return (text, record) => {
         attrs = Abs.clone(attrs);
         /*
          * 设置 icon Style
@@ -20,6 +20,9 @@ export default (reference, column) => {
         let children;
         if (columnValue) {
             children = columnValue[text];
+            if (!children) {
+                children = columnValue['undefined']
+            }
         }
         /*
          * icon 专用

@@ -25,6 +25,18 @@ const calcIntegration = (item = {}, permissions = []) => {
         groupNode.children = leafNodes;
         children.push(groupNode);
     });
+    /* 读取原来的 children 信息，挂载第一颗树下边 */
+    const original = Ux.clone(item.children);
+    if (0 < original.length) {
+        const parent = children[0];
+        if (parent) {
+            original.forEach(item => {
+                // 提取 item.children
+                item.parent = parent.key;
+                parent.children.push(item);
+            });
+        }
+    }
     item.children = children;
     item.checkable = false;
 }
@@ -60,6 +72,7 @@ const calcCommon = (item = {}, permissions = {}) => {
             if (Ux.isArray(children)) {
                 // 对接过的节点都在后期删除
                 calcIntegration(node, children);
+                // 原始的 node 中可能包含 children;
                 node.__delete = true;
             }
         }
@@ -122,7 +135,7 @@ const yiPage = (reference) => Ex.yiStandard(reference).then(state => {
             // 针对 permissions 执行分组
             const permission = calcPermissions(root, permissions);
             root.forEach(resource => {
-                resource.checkbale = false; // 资源组不可被选中
+                resource.checkable = false; // 资源组不可被选中
                 const {data = {}} = resource;
                 if (data.code === Ex.V.PERM_INTEGRATION) {
                     // 集成组计算

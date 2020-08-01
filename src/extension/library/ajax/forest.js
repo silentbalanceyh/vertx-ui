@@ -1,62 +1,14 @@
 import datum from './datum';
 import Ux from 'ux';
 
-const isExpr = (expr) => expr && "string" === typeof expr
-    && (0 < expr.indexOf(',') || 0 < expr.indexOf('='))
-/*
- * 条件 identifier
- *
- * tree -> 分组
- * code = xxx（条件）
- *
- * 最终返回数据结构
- * {
- *      "group1": [],
- *      "group2": []
- * }
- */
-const calcGroup = (categories = [], inputGroup = {}) => {
-    /*
-     * 先提取所有组的参数
-     */
-    const groupName = new Set();
-    /*
-     * 提取不抓取的所有数据
-     */
-    const $types = Ux.immutable(categories.map(category => category.type));
-
-    categories.forEach(category => {
-        // 判断 identifier 的值
-        if (isExpr(category.identifier)) {
-            // 转换参数组
-            const parsed = Ux.Ant.toParsed(category.identifier);
-            if (parsed && !$types.contains(parsed.tree)) {
-                groupName.add(parsed.tree);             // type 参数
-                category.__connect = Ux.clone(parsed);
-            }
-        }
-    })
-    /*
-     * 根据参数组执行分组
-     */
-    const types = Array.from(groupName);
-    if (0 < types.length) {
-        return datum.category(types).then(next => {
-            /*
-             * 计算 inputGroup 部分
-             */
-            const groupMap = Ux.elementGroup(next, 'type');
-            if (groupMap) {
-                Object.assign(inputGroup, groupMap);
-            }
-            return calcGroup(next, inputGroup).then(() => Ux.promise(inputGroup));
-        })
-    } else return Ux.promise(inputGroup);
-}
 const calcAddon = (item = {}) => {
     const {metadata = {}, ...rest} = item;
     const {selectable = true, checkable = true} = metadata;
-    return {...rest, checkable, selectable};
+    const result = {...rest, checkable, selectable};
+    if (!selectable) {
+        result.className = "ux-unselect"
+    }
+    return result;
 }
 const calcTree = (categories = [], group = {}, mode) => {
     const normalized = [];
@@ -113,11 +65,11 @@ export default (type, mode) => {
             /*
              * 特殊数据结构
              */
-            return calcGroup(categories, {}).then(grouped => {
+            return Ux.forestGroup(categories, {}, datum.category).then(grouped => {
                 /*
                  * 根据最终的 grouped 计算 最终的 normalized
                  */
-                return calcTree(categories, grouped, mode);
+                return Ux.promise(calcTree(categories, grouped, mode));
             });
         })
     } else return Ux.promise([])

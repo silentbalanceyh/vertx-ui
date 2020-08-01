@@ -4,16 +4,28 @@ const authRow = (datum = [], original = {}, config = {}) => {
     if ("SINGLE" === config.type) {
         // 单行过滤处理
         const field = config.field;
+        const {mapping = {}} = config;
+        let $source = Ux.clone(datum);
+        if (!Ux.isEmpty(mapping)) {
+            $source.forEach(record => Ux.itObject(mapping, (from, to) => {
+                if (record[from]) {
+                    record[to] = record[from];
+                }
+            }))
+        }
+
         const originalRows = original[field];
         if (originalRows) {
             // 计算原始选择行和 selectedKeys
             const $keys = Ux.immutable(originalRows);
-            const rows = datum.filter(item => $keys.contains(item[field]));
+            const rows = $source.filter(item => $keys.contains(item[field]));
             return {
                 keys: rows.map(row => row.key),
                 rows,
             }
         }
+    } else {
+        // 非 SINGLE 部分的配置信息
     }
 }
 const authCriteria = (datum = [], config = {}, grouped) => {

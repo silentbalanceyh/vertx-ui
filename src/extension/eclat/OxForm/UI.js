@@ -23,9 +23,11 @@ class Component extends React.PureComponent {
              * -- 不存在 $addKey 则不需要考虑模式，直接处理
              */
             const $edition = Ux.pluginForm(this);
+            const {$inited = {}} = this.props;
+            const attrs = Ex.aclData($inited, $edition);
             return (
                 <ExForm {...this.props} $height={"300px"}
-                        $op={$op} $edition={$edition}/>
+                        $op={$op} {...attrs}/>
             );
         }, Ex.parserOfColor("OxForm").form())
     }

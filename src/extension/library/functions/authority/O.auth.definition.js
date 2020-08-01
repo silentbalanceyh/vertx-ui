@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import authExtract from './I.fn.auth.extract';
+import authKeySet from './I.fn.auth.extract';
 
 const authRule = () => Ux.ajaxGet("/api/rules").then(rules => {
     /*
@@ -8,11 +8,30 @@ const authRule = () => Ux.ajaxGet("/api/rules").then(rules => {
     const normalized = [];
     if (Ux.isArray(rules)) {
         rules.forEach(rule => {
+            const {
+                uiConfig,
+                uiCondition,
+                groupConfig,
+                groupCondition,
+            } = rule;
             const ruleItem = {};
             ruleItem.name = rule.name;
             ruleItem.code = rule.code;
             ruleItem.key = rule.key;
-            ruleItem.ui = rule.ui;
+            {
+                const $uiConfig = {}
+                if (rule.ui) ruleItem.ui = rule.ui;
+                if (uiConfig) $uiConfig.config = Ux.clone(uiConfig);
+                if (uiCondition) $uiConfig.condition = Ux.clone(uiCondition);
+                ruleItem.uiConfig = $uiConfig;
+            }
+            {
+                const $groupConfig = {};
+                if (rule.group) ruleItem.group = rule.group;    // 分组配置
+                if (groupConfig) $groupConfig.config = Ux.clone(groupConfig);
+                if (groupCondition) $groupConfig.condition = Ux.clone(groupCondition);
+                ruleItem.groupConfig = $groupConfig;
+            }
             normalized.push(ruleItem);
         })
     }
@@ -79,14 +98,12 @@ const authData = (configuration = {}, items = [], views = []) => {
             if (rowField) rows.field = rowField;
             if (rowTpl) rows.tpl = rowTpl;
             if (rowTplMapping) rows.mapping = rowTplMapping;
-            if (1 === Object.keys(rows).length) {
-                rows = {};
-            }
         }
         const criteria = {};
         {
-            const {condTpl, condTplMapping} = item;
+            const {condTpl, condConfig, condTplMapping} = item;
             if (condTpl) criteria.tpl = condTpl;
+            if (condConfig) criteria.config = condConfig;
             if (condTplMapping) criteria.mapping = condTplMapping;
         }
         let projection = {};
@@ -94,9 +111,6 @@ const authData = (configuration = {}, items = [], views = []) => {
             const {colType, colConfig} = item;
             if (colType) projection.type = colType;
             if (colConfig) projection.config = colConfig;
-            if (1 === Object.keys(projection).length) {
-                projection = {};
-            }
         }
         if (viewMap[resourceId]) {
             const original = viewMap[resourceId];
@@ -111,20 +125,20 @@ const authData = (configuration = {}, items = [], views = []) => {
         };
     });
     const segment = {};
-    const selected = {};
+    const selected = new Set();
     Object.keys(config).forEach(resourceId => {
-        const calculated = authExtract(datum, config[resourceId]);
+        const calculated = authKeySet(datum, config[resourceId]);
         if (calculated.keys) {
-            selected.keys = calculated.keys;
-            selected.resourceId = resourceId;
+            calculated.keys.forEach(key => selected.add(key));
         }
         segment[resourceId] = calculated;
     });
     /* 计算 keys */
-    return {config, data: {segment, selected}};
+    return {config, data: {segment}, selected};
 }
 export default {
     authRule,
     authTpl,
     authData,
+    authKeySet,
 }

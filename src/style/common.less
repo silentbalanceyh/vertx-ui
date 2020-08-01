@@ -14,6 +14,22 @@
     display: none;
 }
 
+.ux-unselect {
+    > .ant-tree-node-content-wrapper {
+
+        &:hover {
+            background-color: white !important;
+        }
+
+        .ant-tree-title {
+            &:hover {
+                background-color: white !important;
+                cursor: not-allowed;
+            }
+        }
+    }
+}
+
 // 基础标题效果
 .ux-title {
     width: 100%;

@@ -7,6 +7,7 @@ import anchor from './O.anchor';
 import form from './O.ant.form';
 import element from './O.element';
 import redux from './O.redux';
+import tree from './O.tree';
 
 export default {
     ...redux,
@@ -18,4 +19,5 @@ export default {
     ...anchor,
     ...form,
     ...element,
+    ...tree,
 }

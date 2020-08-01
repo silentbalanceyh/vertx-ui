@@ -19,7 +19,7 @@ const widthString = (input) => {
             length += 28;
         } else {
             // 英文字符长度
-            length += 13;
+            length += 14;
         }
     }
     return length;

@@ -103,7 +103,7 @@ const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
         checkedKeys.forEach(key => keySet.add(key));
         {
             // 根据当前节点联动
-            const flatted = Ele.elementFlat(input, "children", true);
+            const flatted = Ele.elementFlat(input);
             const {node} = item;
             if (node) {
                 const {data = {}} = node.props;
@@ -118,6 +118,37 @@ const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
                     // 当前节点被反选
                     const children = Ele.elementChildren(flatted, data);
                     children.forEach(each => keySet.delete(each.key));
+                    /*
+                     * 反选需要检查父节点的兄弟节点
+                     * 兼容性读取：parent / parentId
+                     */
+                    const parents = [];
+                    {
+                        // parentId 的分树
+                        const branchId = Ele.elementParent(flatted, data.key);
+                        // parent标准分树
+                        const branch = Ele.elementParent(flatted, data.key, "parentId");
+                        branchId.concat(branch).forEach(parent => parents.push(parent));
+                    }
+                    /*
+                     * 构造函数，针对当前父类的每个类执行递归检查
+                     * 逆序检查，先检查父类，然后父类被移除过后，再检查当前类
+                     * 这样才会导致最终的递归效果。
+                     */
+                    parents.reverse().forEach(parent => {
+                        /*
+                         * 查找同层兄弟节点
+                         */
+                        const children = Ele.elementChildren(flatted, parent);
+                        const selected = children.filter(item => keySet.has(item.key));
+
+                        if (0 === selected.length) {
+                            /*
+                             * 无子节点选中，则直接取消父节点
+                             */
+                            keySet.delete(parent.key);
+                        }
+                    })
                 }
             }
         }

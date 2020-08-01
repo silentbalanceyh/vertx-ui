@@ -38,7 +38,7 @@
                 "$format": "YYYY年MM月DD日 HH点mm分"
             },
             {
-                "metadata": "updatedBy,变更人,USER",
+                "metadata": "createdBy,变更人,USER",
                 "$config": {
                     "uri": "/api/user/:key",
                     "field": "realname"
