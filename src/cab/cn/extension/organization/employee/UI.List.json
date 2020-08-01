@@ -7,7 +7,7 @@
             "uri": "/api/dept/by/sigma"
         },
         "resource.teams": {
-             "uri": "/api/team/by/sigma"
+            "uri": "/api/team/by/sigma"
         },
         "employee.type": {
             "uri": "/api/type/tabulars/:type",
@@ -22,12 +22,8 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "workNumber,workTitle,workEmail,deptId,companyId,identityId,workLocation,workPhone,type,active"
         },
         "options": {
             "search.cond": [

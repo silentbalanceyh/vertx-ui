@@ -72,18 +72,21 @@ const isRoute = (props, prevProps) => {
  * 登录注销专用函数，配合当前系统中的信息实现用户**注销**功能。
  *
  * @memberOf module:_app
+ * @param {Boolean} cleanApp 是否清除应用信息（登录时不清除）
  * @return {any} 返回注销结果。
  */
-const toLogout = () => {
+const toLogout = (cleanApp = true) => {
     /* 注销用户 */
     const key = Cv.KEY_USER;
     const result = Store.Session.remove(key);
-    /* 删除 appKey */
-    Store.Storage.remove(Cv.X_APP_KEY);
-    const app = Store.Session.get(Cv.KEY_APP);
-    if (app && app.appKey) {
-        delete app.appKey;
-        Store.Storage.put(Cv.KEY_APP, app);
+    if (cleanApp) {
+        /* 删除 appKey */
+        Store.Storage.remove(Cv.X_APP_KEY);
+        const app = Store.Session.get(Cv.KEY_APP);
+        if (app && app.appKey) {
+            delete app.appKey;
+            Store.Storage.put(Cv.KEY_APP, app);
+        }
     }
     return result;
 };
@@ -199,16 +202,19 @@ const toOriginal = (reference = {}, switched) => {
  * @param {ReactComponent} reference React组件引用。
  */
 const isAuthorized = (reference) => {
-    const {$router} = reference.props;
     if (0 === Object.keys(isLogged()).length) {
-        const path = $router.path();
-        if (path) {
-            $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
-        } else {
-            $router.to(Cv.ENTRY_LOGIN);
-        }
+        toUnauthorized(reference);
     }
 };
+const toUnauthorized = (reference) => {
+    const {$router} = reference.props;
+    const path = $router.path();
+    if (path) {
+        $router.to(Cv.ENTRY_LOGIN + `?target=${path}`);
+    } else {
+        $router.to(Cv.ENTRY_LOGIN);
+    }
+}
 /**
  * ## 标准函数
  *

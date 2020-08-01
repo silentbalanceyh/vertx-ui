@@ -4,6 +4,8 @@ import Fn from "../functions";
 
 const _assist = (uris = {}) => (params) => {
     if (params) {
+        /* 如果 params 为 string，则读取树信息 */
+
         if (U.isArray(params)) {
             return Ux.ajaxPost(uris.types, params);
         } else {
@@ -20,13 +22,13 @@ const _assist = (uris = {}) => (params) => {
                         code: params.identifier
                     })
                 } else {
-                    return Fn.error009();
+                    return Fn.E.error009();
                 }
             }
         }
     } else {
         /* 拒绝调用，参数不全 */
-        return Fn.error009();
+        return Fn.E.error009();
     }
 };
 

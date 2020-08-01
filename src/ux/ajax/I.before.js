@@ -309,7 +309,25 @@ const ajaxParams = (params = {}, options = {}) => {
  * @return {Object|Array} 解析过后的格式，`body.data`的数据信息
  */
 const ajaxAdapter = (body = {}) => {
-    return body.data ? body.data : body;
+    /*
+     * body 中的数据结构用于处理直接 body 的内容
+     * 带有 data，zero 规范中的内容
+     */
+    if (body.data) {
+        const {
+            data,        // 数据部分
+            acl,         // ACL 权限控制
+            meta,        // 元数据配置
+            extension,   // 扩展配置
+            plugin,      // 插件配置
+        } = body;
+        // 将响应数据通过 __ 注入到数据内部
+        if (acl) data.__acl = acl;
+        if (meta) data.__meta = meta;
+        if (extension) data.__extension = extension;
+        if (plugin) data.__plugin = plugin;
+        return data;
+    } else return body;
 };
 /**
  * ## 私有函数

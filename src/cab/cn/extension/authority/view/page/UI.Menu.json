@@ -1,0 +1,23 @@
+{
+    "_op": [
+        {
+            "key": "$opSave",
+            "text": "保存",
+            "icon": "save",
+            "type": "primary"
+        }
+    ],
+    "_group": {
+        "TOP-MENU": "顶部菜单",
+        "SIDE-MENU": "标准菜单"
+    },
+    "_modal": {
+        "error": {
+            "empty": "对不起，您没有给该角色设置任何菜单！",
+            "server": "服务端有错，请联系管理员！"
+        },
+        "success": {
+            "saved": "恭喜，您的定制权限已经成功保存！"
+        }
+    }
+}

@@ -1,0 +1,48 @@
+{
+    "_tabs": {
+        "tabPosition": "left",
+        "defaultActiveKey": "tabIntro",
+        "items": [
+            "定制说明,tabIntro",
+            "菜单权限,rule.menu.definition",
+            "界面权限,tabUi"
+        ]
+    },
+    "_subtabs": {
+        "type": "card",
+        "defaultActiveKey": "rule.category.definition",
+        "items": [
+            "分类权限,rule.category.definition",
+            "列表权限,rule.list.column.definition",
+            "表单权限,rule.form.field.definition",
+            "操作权限,rule.op.definition"
+        ]
+    },
+    "_page": {
+        "title": "权限定制"
+    },
+    "_info": {
+        "entity": "选择信息",
+        "type": "类型",
+        "name": "名称",
+        "owner": {
+            "ROLE": "角色",
+            "USER": "用户"
+        }
+    },
+    "_alert": {
+        "message": "定制说明",
+        "description": [
+            "权限定制主要针对目前系统中存在的`角色`和`用户`两种实体，角色定制的是通用权限，用户定制的是特殊权限。",
+            "用户的定制权限的优先级高于角色的定制权限，当用户权限存在时，角色的权限将会失效。",
+            "`菜单权限`：设置`用户/角色`可访问的菜单集合。",
+            "`分类权限`：设置`用户/角色`可访问的特殊分类信息。",
+            "`列表权限`：设置`用户/角色`在访问不同列表时对应列表的列集合。",
+            "`表单权限`：设置`用户/角色`在访问不同模型的表单时的字段集合。",
+            "`操作权限`：设置`用户/角色`在访问不同页面的操作按钮的集合。",
+            "用户可以在权限定制中设置某个模型可访问数据的`资源窗口`，资源窗口定制过程中可以对最终数据集执行行列过滤。",
+            "对于权限定制有疑问的地方，请在专业人员和系统管理员的指导下执行。"
+        ],
+        "icon": "safety-certificate"
+    }
+}

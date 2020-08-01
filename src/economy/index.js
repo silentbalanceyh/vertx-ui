@@ -45,6 +45,8 @@ export {default as RestfulApi} from './editor-form/RestfulApi/UI';
 export {default as Dialog} from './container/Dialog/UI';
 export {default as Navigation} from './container/Navigation/UI';
 export {default as Rectangle} from './container/Rectangle/UI';
+
+export {default as NavSwallow} from './container/NavSwallow/UI';
 /*
  * 旧：PagerHeader
  * 旧：DynamicDialog

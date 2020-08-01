@@ -1,4 +1,5 @@
 import Abs from '../../abyss';
+import Ele from '../../element';
 import Dev from '../../develop';
 import Cfg from '../config';
 import Ut from '../../unity';
@@ -30,6 +31,18 @@ const _aiTitle = (reference, cell = {}) => {
         return (
             <Col {...cellRest} span={24} className={"ux-comment"}>
                 <LoadingAlert $alert={config}/>
+            </Col>
+        )
+    } else if (config.tips) {
+        const offset = Ele.valueInt(config.offset, 0);
+        const span = 24 - offset;
+        const attrs = {offset, span};
+        if (config.style) {
+            attrs.style = config.style;
+        }
+        return (
+            <Col {...attrs} key={cellRest['key']} className={"ux-tips"}>
+                {title}
             </Col>
         )
     } else {

@@ -1,3 +1,4 @@
+// @ts-ignore
 import * as cloneDeep from 'lodash/cloneDeep';
 import {getGraphState} from '../../utils';
 import {EditorEvent} from '../constants';

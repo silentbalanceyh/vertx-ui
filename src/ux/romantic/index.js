@@ -6,6 +6,7 @@ import sexBatch from './O.fn.batch';
 import sexDialog from './O.fn.dialog';
 import sexMessage from './O.fn.message';
 import sexIdentifier from './O.fn.identifier';
+import sexOp from './O.fn.op';
 
 export default {
     /*
@@ -16,6 +17,7 @@ export default {
      * 4. key = undefined，不传，返回 props 的 config
      */
     sexCab,// (reference, key)
+    sexOp,
     /*
      * {
      *     "dialog": "",

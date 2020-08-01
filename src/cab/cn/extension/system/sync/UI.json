@@ -2,15 +2,11 @@
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
+            "pager": "1,14",
             "sorter": "createdAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "type,level,infoAt,logUser,logAgent,logIp,infoStack,infoSystem,infoReadable"
         },
         "options": {
             "search.cond": [

@@ -9,29 +9,33 @@ const renderFull = (reference, value, jsx = {}) => {
         placeholder = placeholder.split(',')
     }
     const [startHint, endHint] = placeholder;
+    const {grid = [11, 2, 11], style = {}} = config;
+    const [left, middle, right] = grid;
+    const leftStyle = style.left ? style.left : {};
+    const rightStyle = style.right ? style.right : {}
     return (
         <Row>
-            <Col span={11}>
+            <Col span={left}>
                 <DatePicker className={"ux-readonly"}
                             placeholder={startHint}
                             value={value.start}
                             format={config.format}
                             onChange={Op.onStart(reference)}
-                            style={{width: "100%"}}
+                            style={leftStyle}
                             {...jsx}/>
             </Col>
-            <Col span={2} style={{
+            <Col span={middle} style={{
                 paddingTop: 4
             }}>
                 &nbsp;&nbsp;～&nbsp;&nbsp;
             </Col>
-            <Col span={11}>
+            <Col span={right}>
                 <DatePicker className={"ux-readonly"}
                             placeholder={endHint}
                             value={value.end}
                             format={config.format}
                             onChange={Op.onEnd(reference)}
-                            style={{width: "100%"}}
+                            style={rightStyle}
                             {...jsx}/>
             </Col>
         </Row>

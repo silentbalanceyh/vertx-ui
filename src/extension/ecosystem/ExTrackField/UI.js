@@ -40,11 +40,16 @@ class Component extends React.PureComponent {
                     <Row>
                         <Col span={24}>
                             {(() => {
-                                const {$loading = false, $data = {items: []}} = this.state;
+                                const {
+                                    $loading = false,
+                                    $data = {items: []},
+                                    $table = {}
+                                } = this.state;
                                 const {$dict = {}} = this.props;
                                 return (
                                     <Spin spinning={$loading}>
                                         <History {...Ex.yoAmbient(this)}
+                                                 $table={$table}
                                                  data={$data} $dict={$dict}/>
                                     </Spin>
                                 )

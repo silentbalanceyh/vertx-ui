@@ -2,6 +2,7 @@ import React, {Fragment} from "react";
 import Jsx from './I.common';
 import U from 'underscore';
 import Ut from '../../unity';
+import Abs from '../../abyss';
 
 const _setExecutor = (option = {}, item, metadata = {}) => {
     const {
@@ -34,22 +35,32 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
     }
 };
 
-const _setEnabled = (calculated, item = {}, reference) => {
-    if (calculated.edition && "fnEdit" === item.executor) {
+const _setEnabled = (calculated, item = {}, executor = {}) => {
+    if (Abs.isEmpty(executor)) {
         /*
-         * 编辑按钮
-         */
-        return true;
-    } else if (calculated.deletion && "fnDelete" === item.executor) {
-        /*
-         * 删除按钮
-         */
-        return true;
-    } else {
-        /*
-         * 后期扩展
+         * 直接禁用
          */
         return false;
+    } else {
+        /*
+         * 基础检查（先检查 executor 中是否包含了 item
+         */
+        if (executor.hasOwnProperty(item.executor)) {
+            /*
+             * 包含了，则执行 calculated 的判断
+             */
+            if ("fnEdit" === item.executor || "fnDelete" === item.executor) {
+                if (calculated.edition && "fnEdit" === item.executor) {
+                    /*
+                     * 编辑按钮
+                     */
+                    return true;
+                } else return calculated.deletion && "fnDelete" === item.executor;
+            } else return true;
+        } else {
+            // 不包含的情况，直接 false
+            return false;
+        }
     }
 };
 
@@ -87,7 +98,10 @@ export default (reference, config, executor = {}) => (text, record) => {
             option.key = `link-${rowKey}`;
             option.text = Ut.formatExpr(item.text, record);
             // Executor 处理
-            option.enabled = _setEnabled(calculated, item, reference);
+            option.enabled = _setEnabled(
+                calculated, item,
+                executor
+            );
             if (option.enabled) {
                 _setExecutor(option, item, {
                     text, record,
@@ -101,13 +115,13 @@ export default (reference, config, executor = {}) => (text, record) => {
     });
     return (
         <Fragment>
-            {options.map(item => item.divider ?
+            {0 < options.filter(item => !item.divider).length ? options.map(item => item.divider ?
                 Jsx.jsxDivider(item.key) :     // Divider 渲染
                 (item.confirm ?
                         Jsx.jsxConfirm(item) : // Confirm 窗口处理
                         Jsx.jsxLink(item)      // 链接专用处理
                 )
-            )}
+            ) : false}
         </Fragment>
     );
 }

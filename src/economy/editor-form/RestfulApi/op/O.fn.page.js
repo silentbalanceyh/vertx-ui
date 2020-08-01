@@ -19,7 +19,6 @@ export default (reference) => {
     const table = Ux.fromHoc(reference, "table");
     const $table = Ux.clone(table);
     $table.columns = Ux.configColumn(reference, $table.columns);
-    // $table.rowSelection = Event.onRowSelect(reference);
     state.$table = $table;
     state.$data = [];
     reference.setState(state);

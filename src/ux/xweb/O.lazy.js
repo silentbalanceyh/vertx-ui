@@ -196,48 +196,50 @@ const xtLazyUp = (reference, virtualRef) => {
          */
         const ref = Eng.onReference(reference, 1);
         const {form} = ref.props;
-        const {value, config = {}} = reference.props;
-        /*
-         * 是否操作过（未操作就是重置状态）
-         */
-        const isTouched = form.isFieldsTouched();
-        if (isTouched) {
+        if (form) {
+            const {value, config = {}} = reference.props;
             /*
-             * 非重置
+             * 是否操作过（未操作就是重置状态）
              */
-            if (value) {
-            } else {
+            const isTouched = form.isFieldsTouched();
+            if (isTouched) {
                 /*
-                 * 添加：重置
+                 * 非重置
                  */
-                const formValues = {};
-                T.writeLinker(formValues, config, () => ({}));
-                if (!Abs.isEmpty(formValues)) {
-                    T.formHits(ref, formValues);
-                }
-            }
-        } else {
-            /*
-             * 重置表单
-             */
-            const {initialValue = {}} = reference.state;
-            if (Abs.isEmpty(initialValue)) {
-                /*
-                 * 添加：重置
-                 */
-                const formValues = {};
-                T.writeLinker(formValues, config, () => ({}));
-                if (!Abs.isEmpty(formValues)) {
-                    T.formHits(ref, formValues);
+                if (value) {
+                } else {
+                    /*
+                     * 添加：重置
+                     */
+                    const formValues = {};
+                    T.writeLinker(formValues, config, () => ({}));
+                    if (!Abs.isEmpty(formValues)) {
+                        T.formHits(ref, formValues);
+                    }
                 }
             } else {
                 /*
-                 * 编辑：重置
+                 * 重置表单
                  */
-                const fields = Object.keys(initialValue);
-                const current = T.formGet(ref, fields);
-                if (Abs.isDiff(current, initialValue)) {
-                    T.formHits(ref, initialValue);
+                const {initialValue = {}} = reference.state;
+                if (Abs.isEmpty(initialValue)) {
+                    /*
+                     * 添加：重置
+                     */
+                    const formValues = {};
+                    T.writeLinker(formValues, config, () => ({}));
+                    if (!Abs.isEmpty(formValues)) {
+                        T.formHits(ref, formValues);
+                    }
+                } else {
+                    /*
+                     * 编辑：重置
+                     */
+                    const fields = Object.keys(initialValue);
+                    const current = T.formGet(ref, fields);
+                    if (Abs.isDiff(current, initialValue)) {
+                        T.formHits(ref, initialValue);
+                    }
                 }
             }
         }

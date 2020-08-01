@@ -8,7 +8,7 @@ const _ajaxExtract = (request, params, body, response) => {
     Dev.Logger.response(body, params, request);
     // 最终的返回处理
     if (response.ok) {
-        return body;
+        return Promise.resolve(body, "config");
     } else {
         Dev.dgAjax(body, "Remote Error:");
         return Promise.reject({data: body});

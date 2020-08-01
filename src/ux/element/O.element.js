@@ -1,6 +1,7 @@
 import Abs from '../abyss';
 import E from '../error';
 import U from 'underscore';
+import Sg from './O.single';
 
 /**
  * ## 标准函数
@@ -64,53 +65,18 @@ const elementWrap = (array = [], fromIndex, toIndex) => {
  *
  * 数组元素拉平函数，将一个完整的树拉平成不带树结构的数据。
  *
- * @deprecated 由于目前只在 Uarr 中使用，所以将来可能被废弃。
  * @memberOf module:_element
  * @param {Array} array 输入的数组信息。
- * @param {String} field 需要拉平的字段信息
- * @param {boolean} parent 是否包含父数组
  * @return {Array} 返回拉平后的数组
  */
-const elementFlat = (array = [], field = "", parent = false) => {
-    const result = parent ? Abs.clone(array) : [];
+const elementFlat = (array = []) => {
+    const result = [];
     array.forEach(item => {
-        /*
-         * 查找子节点、并且将子节点拉平到当前节点，执行合并
-         * 1. 移除原始的 field。
-         * 2. 创建 _parent 和 key 之间的关系。
-         */
-        const fnChildren = (children = []) => U.isArray(children) ?
-            children.forEach(child => {
-                let target = Abs.immutable(item);
-                target = target.mergeDeep(child);
-                target = target.remove(field);
-                const $target = target.toJS();
-                if (item.key) $target._parent = item.key;
-                result.push($target);
-            }) : {};
-        /*
-         * 如果属性是 Array，则直接处理
-         */
-        if (item[field] && Array.prototype.isPrototypeOf(item[field])) {
-            const children = item[field];
-            fnChildren(children);
-        } else if (0 <= field.indexOf('.')) {
-            const splitted = field.split('.');
-            // 只支持一级跳跃处理数组
-            if (2 === splitted.length) {
-                const hitted = item[splitted[0]];
-                if (U.isArray(hitted)) {
-                    // 如果是数组
-                    hitted.forEach(hit => {
-                        const children = hit[splitted[1]];
-                        fnChildren(children);
-                    });
-                } else if (U.isObject(hitted)) {
-                    // 如果是对象
-                    const children = hitted[splitted[1]];
-                    fnChildren(children);
-                }
-            }
+        const {children, ...rest} = item;
+        result.push(Abs.clone(rest));
+        if (children && Abs.isArray(children)) {
+            const flatted = elementFlat(children);
+            flatted.forEach(pending => result.push(pending));
         }
     });
     return result;
@@ -237,6 +203,44 @@ const elementVertical = (array = [], field = "") => {
     });
     return result;
 };
+
+/**
+ * ## 标准函数
+ *
+ * 针对数组执行映射拉平操作。
+ *
+ * ```js
+ * const user = [
+ *     {name:"lang1", email":"silentbalanceyh@126.com"},
+ *     {name:"lang2", type:"employee"},
+ *     {name:"lang3", type:"user"},
+ *     {name:"lang4", type:"user"}
+ * ]
+ * const mapped = Ux.elementMap(user, "name");
+ * // 最终计算的值
+ * // mapped = {
+ * //     "lang1": {},
+ * //     "lang2": {},
+ * //     ...
+ * // }
+ * // 映射最终结果是一个 Array（无重复记录）
+ * ```
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息
+ * @param {String} field 执行映射的字段名
+ * @return {Object} 返回Map过后的最终数据
+ */
+const elementMap = (array = [], field = "") => {
+    E.fxTerminal(!U.isArray(array), 10071, array, "Array");
+    let resultMap = {};
+    array.forEach(item => {
+        if (item[field]) {
+            resultMap[item[field]] = Abs.clone(item);
+        }
+    });
+    return resultMap;
+}
 /**
  * ## 标准函数「Zero」
  *
@@ -266,6 +270,25 @@ const elementBranch = (array = [], leafValue, parentField = "parent") => {
     // console.info(found.map(item => elementUnique(array, "key", item)));
     return branch;
 };
+/**
+ * ## 标准函数「Zero」
+ *
+ * 在 elementBranch 基础之上删除掉当前节点的运算
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {any} leafValue 被检索的子节点的值。
+ * @param {String} parentField 检索树的父字段信息。
+ * @return {Array} 返回分支的数组。
+ */
+const elementParent = (array = [], leafValue, parentField = "parent") => {
+    const normalized = elementBranch(array, leafValue, parentField);
+    if (Abs.isArray(normalized)) {
+        return normalized.filter(item => item.key !== leafValue);
+    } else {
+        return [];
+    }
+}
 /**
  * ## 标准函数「Zero」
  *
@@ -394,6 +417,7 @@ const elementGroup = (array = [], field) => {
  *
  * ## 标准函数
  *
+ * @memberOf module:_element
  * @param {Array} target 被合并的数组
  * @param {Array} source 将被合并的数组
  * @param {String} field 合并字段
@@ -417,6 +441,34 @@ const elementJoin = (target = [], source = [], field = "key") => {
     })
     return $target;
 }
+/**
+ * ## 标准函数
+ *
+ * 直接将 Array 拆分成一个 Grid 结构
+ *
+ * @memberOf module:_element
+ * @param {Array} source 原始数组
+ * @param {Number} columns 拆分成多少列
+ */
+const elementGrid = (source = [], columns) => {
+    columns = Sg.valueInt(columns, 0);
+    if (columns) {
+        const grid = [];
+        let index;
+        let row = [];
+        for (index = 1; index <= source.length; index++) {
+            row.push(source[index - 1]);
+            if (0 === index % columns) {
+                grid.push(Abs.clone(row));
+                row = [];
+            }
+        }
+        if (0 < row.length) {
+            grid.push(Abs.clone(row));
+        }
+        return grid;
+    } else return Abs.clone(source);
+}
 export default {
     elementJoin,
     elementFlat,
@@ -425,9 +477,12 @@ export default {
     elementUnique,
     elementFind,
     elementVertical,
+    elementMap,
     elementGroup,
+    elementGrid,
     // 树操作
     elementBranch,
+    elementParent,
     elementChildTree,
     elementChildren
 }

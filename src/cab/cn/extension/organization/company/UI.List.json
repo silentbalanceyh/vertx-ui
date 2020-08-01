@@ -16,12 +16,8 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "code,name,description,manager,active"
         },
         "options": {
             "search.cond": [

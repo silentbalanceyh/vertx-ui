@@ -1,5 +1,97 @@
 {
     "_page": {
         "title": "通用权限（角色）"
+    },
+    "_info": {
+        "system": "平台权限",
+        "business": "业务权限",
+        "submitting": "正在提交您设置的权限信息，请等待结果……"
+    },
+    "_clean": {
+        "key": "$opClean",
+        "tooltip": "清除所选",
+        "icon": "filter"
+    },
+    "_checked": {
+        "login": "允许登录平台"
+    },
+    "_window": "导入/导出,确认,关闭,false,720,true,$opSelect",
+    "_action": [
+        {
+            "key": "$opExport",
+            "tooltip": "导出",
+            "icon": "export"
+        },
+        {
+            "key": "$opImport",
+            "tooltip": "导入",
+            "icon": "import"
+        },
+        {
+            "key": "$opSave",
+            "tooltip": "保存",
+            "type": "primary",
+            "icon": "save"
+        },
+        {
+            "key": "$opNav",
+            "text": "定制",
+            "className": "ux-spec",
+            "icon": "safety-certificate"
+        }
+    ],
+    "_search": {
+        "label": "选择角色",
+        "jsx": {
+            "allowClear": true,
+            "placeholder": "（请选择）",
+            "config": {
+                "linker": {
+                    "key": "roleId",
+                    "name": "roleName"
+                },
+                "ajax": {
+                    "method": "POST",
+                    "uri": "/api/role/search",
+                    "params": {
+                        "pager": {
+                            "page": 1,
+                            "size": 6
+                        },
+                        "sorter": [
+                            "updatedAt,DESC"
+                        ],
+                        "criteria": {
+                            "sigma": "PROP:app.sigma"
+                        }
+                    }
+                },
+                "table": {
+                    "columns": [
+                        "name,角色名称",
+                        "code,角色编码"
+                    ]
+                },
+                "validation": "请选择您要设置权限的角色！",
+                "window": "请选择角色信息,选择,关闭,false,800,false",
+                "search": {
+                    "name,c": "角色名",
+                    "code,c": "角色编号"
+                }
+            }
+        }
+    },
+    "_tabs": {
+        "defaultActiveKey": "SYS",
+        "type": "card",
+        "items": "系统权限,SYS;开发权限,DEV"
+    },
+    "_modal": {
+        "success": {
+            "updated": "恭喜，您所选择的角色权限已经成功更新！"
+        },
+        "error": {
+            "filename": "对不起，文件名不可为空，请输入导出文件名！"
+        }
     }
 }

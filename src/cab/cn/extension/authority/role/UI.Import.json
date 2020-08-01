@@ -1,0 +1,44 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "className": "web-form-designer-import",
+        "ui": [
+            [
+                {
+                    "title": "导入说明",
+                    "config": {
+                        "message": "导入说明",
+                        "description": [
+                            "导入权限时，只能执行 .csv 文件的导入，导入文件格式参考导出格式。",
+                            "导入的数据只能在界面呈现，不会自动保存到系统中，如果要保存请点击`保存`按钮。"
+                        ],
+                        "type": "success"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "upload,,24",
+                    "optionJsx.config": {
+                        "button": "上传权限文件"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSelect,保存,SUBMIT,primary"
+                    ],
+                    "hidden": true
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "empty": "请上传需要导入的文件，导入文件不可为空！"
+        }
+    }
+}

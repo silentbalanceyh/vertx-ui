@@ -53,6 +53,31 @@ const isEmpty = (input) => {
 /**
  * ## 标准函数
  *
+ * 检查两个节点是否有父子关系，不传入 field 时，直接检查两个核心字段
+ *
+ * 1. 标准树专用字段：parent
+ * 2. 非标准树的专用字段：parentId
+ *
+ * @memberOf module:_is
+ * @param {Object} input 输入节点
+ * @param {Object} parent 父节点
+ * @param {String} field 固定字段检查
+ * @return {boolean} 如果 input 的 parent 是 parent，那么为 true
+ */
+const isParent = (parent = {}, input, field) => {
+    if (field) {
+        return input[field] === parent.key;
+    } else {
+        if (input.parent) {
+            return parent.key === input.parent;
+        } else {
+            return parent.key === input.parentId;
+        }
+    }
+}
+/**
+ * ## 标准函数
+ *
  * 是否合法对象，合法对象的满足条件
  *
  * 1. 如果是 undefined 则不是合法对象。
@@ -179,6 +204,7 @@ export default {
     isEmpty,    /* Object 是否 Empty，支持数组 */
     isDiff,     /* 两个 Object 是否不同 */
     isIn,       /* input 是否存在于 Array 中 */
+    isParent,   /* 判断输入节点是否当前节点父节点 */
     /* underscore 连接 */
     isFunction,
     isArray,

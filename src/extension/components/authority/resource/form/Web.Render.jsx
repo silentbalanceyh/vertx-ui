@@ -1,6 +1,7 @@
 import Ux from "ux";
 import {TreeSelect} from "antd";
 import React from "react";
+import Ex from 'ex';
 
 export default {
     modelKey: (reference, jsx) => {
@@ -10,7 +11,7 @@ export default {
         if (type) {
             const tree = Ux.toTree(models, {title: "name"});
             /* 集成的树结构不同 */
-            if ("resource.integration" === type) {
+            if (type && type.startsWith(Ex.V.PERM_INTEGRATION)) {
                 /*
                  * 集成单独运算
                  */

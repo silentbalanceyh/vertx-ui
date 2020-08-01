@@ -38,6 +38,7 @@ class QTreeBranch implements QTreeNode {
                  * 解析每一个节点
                  */
                 const value = input[field];
+                // @ts-ignore
                 if (U.isObject(value) && !U.isArray(value)) {
                     /*
                      * 只能是 JsonObject

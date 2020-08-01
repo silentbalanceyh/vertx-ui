@@ -205,12 +205,18 @@ const formLinker = (data, config = {}, linkerField) => {
         }
     }
 };
+const formRedo = (reference) => {
+    reference.setState({
+        $submitting: false, $loading: false
+    });
+}
 export default {
     // Form数据处理
     formClear,
     formRead,
     formGet,
     formReset,
+    formRedo,
     // Hit
     formHit,
     formHits,

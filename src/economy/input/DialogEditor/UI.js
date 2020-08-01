@@ -30,20 +30,33 @@ class Component extends React.PureComponent {
                 $inited = {},           // 初始化的值
                 $mode,                  // Form的模式（同时添加和编辑）
                 $submitting = false,    // 是否在提交状态
-                data = [],              // 数据源
+                // data = [],              // 数据源
             } = this.state;
             const attrs = Ux.valueLimit(this.props);
+            const {value = []} = attrs;
             /*
              * 按钮专用处理（$dialog完善）
              */
             const ref = Ux.onReference(this, 1);
-            Ux.configScroll($table, data, ref);
+            /*
+             * 强制转换
+             */
+            let $value;
+            if (Ux.isArray(value)) {
+                $value = Ux.clone(value);
+            } else {
+                try {
+                    $value = JSON.parse(value);
+                } catch (error) {
+                }
+            }
+            Ux.configScroll($table, $value, ref);
             const {readOnly = false} = this.props;
             if (readOnly) {
                 return (
                     <Input.Group {...attrs}>
                         {Ux.aiFloatError(this, !$visible)}
-                        <Table {...$table} dataSource={data}
+                        <Table {...$table} dataSource={$value}
                                className={"web-table web-dialogeditor-table"}
                                loading={$submitting}/>
                     </Input.Group>
@@ -52,7 +65,7 @@ class Component extends React.PureComponent {
                 return (
                     <Input.Group {...attrs}>
                         {Ux.aiFloatError(this, !$visible)}
-                        <Table {...$table} dataSource={data}
+                        <Table {...$table} dataSource={$value}
                                className={"web-table web-dialogeditor-table"}
                                loading={$submitting}/>
                         <Dialog className={"web-dialog"}

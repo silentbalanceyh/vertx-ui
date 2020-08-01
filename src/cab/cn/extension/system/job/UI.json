@@ -117,7 +117,7 @@
             {
                 "metadata": "duration,间隔时间",
                 "$expr": ":value秒",
-                "$empty": "（未使用）"
+                "$empty": "禁用"
             },
             {
                 "metadata": "threshold,超时时间",

@@ -25,10 +25,10 @@ const yiData = (data, reference, state = {}) => {
                 $permissions.forEach(permission => {
                     permission.type = __parent.code;
                     // modelKey 的计算
-                    const model = Ux.elementUniqueDatum(reference,
-                        'resource.models', 'identifier', permission.identifier);
-                    if (model) {
-                        permission.modelKey = model.key;
+                    const source = Ux.onDatum(reference, "resource.models");
+                    const found = Ux.elementFind(source, {identifier: permission.identifier});
+                    if (found[0]) {
+                        permission.modelKey = found[0].key;
                     }
                 })
             }

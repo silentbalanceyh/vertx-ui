@@ -113,7 +113,7 @@
                     "optionConfig.rules": [
                         "requiredTrue,请输入长度！",
                         {
-                            "validator": "greater",
+                            "validator": "great",
                             "message": "对不起，您输入的长度必须大于精度",
                             "config": {
                                 "to": "precision"

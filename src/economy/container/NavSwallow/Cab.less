@@ -1,0 +1,87 @@
+@import '../../../global';
+
+.web-nav-swallow {
+    float: left;
+    width: 100%;
+    display: flex;
+    overflow: hidden;
+    align-items: center;
+
+    div {
+        line-height: 32px;
+        text-align: center;
+        color: #4a4a4a;
+        text-indent: 16px;
+        font-size: 13px;
+    }
+
+    // 两种不同的 start 节点
+    .start-common:before {
+        content: '';
+        position: absolute;
+        left: -16px;
+        background: white;
+        width: 32px;
+        height: 32px;
+        transform: rotate(-45deg);
+        z-index: 1;
+        box-shadow: 3px 3px 0 0 white;
+    }
+
+    .step {
+        position: relative;
+        display: inline-block;
+        flex-basis: 150px;
+        height: 32px;
+        background: #e9e9e9;
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: -16px;
+            width: 32px;
+            height: 32px;
+            transform: rotate(-45deg);
+            z-index: 1;
+            box-shadow: 3px 3px 0 0 white;
+            background: #e9e9e9;
+        }
+    }
+
+    .step-middle {
+        background-color: #e9e9e9;
+        position: relative;
+        display: inline-block;
+        flex-basis: 150px;
+        height: 32px;
+
+        &:after {
+            content: '';
+            position: absolute;
+            right: -16px;
+            width: 32px;
+            height: 32px;
+            transform: rotate(-45deg);
+            z-index: 1;
+            box-shadow: 3px 3px 0 0 white;
+            background: #e9e9e9;
+        }
+    }
+
+    .start-end {
+        position: relative;
+        display: inline-block;
+        flex-basis: 160px;
+        height: 32px;
+        background: #e9e9e9;
+    }
+
+    .step-active {
+        background: @primary-color;
+        color: white;
+
+        &:after {
+            background: @primary-color;
+        }
+    }
+}

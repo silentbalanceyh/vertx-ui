@@ -16,7 +16,8 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
-            const {$table = {}, $loading = false} = this.state;
+            const {$table = {}} = this.props;
+            const {$loading = false} = this.state;
             const dataSource = Op.yoFieldAdjust(this);
             return (
                 <Table {...$table} loading={$loading} dataSource={dataSource}/>

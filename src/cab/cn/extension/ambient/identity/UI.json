@@ -21,12 +21,8 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
-        },
-        "mock": {
-            "enabled": true,
-            "keys": "realname,code,gender,country,nation,marital,nativePlace,birthday,type,contactMobile,contactPhone,contactEmail,ecQq,ecWechat,urgentName,active"
         },
         "options": {
             "search.cond": [

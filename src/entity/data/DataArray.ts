@@ -121,6 +121,7 @@ class DataArray implements DataContainer {
         if (this.data && key) {
             // 处理更新功能
             const dataArray = JSON.parse(this.data).filter(item => item[idField] === key);
+            // @ts-ignore
             if (U.isArray(dataArray) && 1 === dataArray.length) {
                 result = dataArray[0];
             }

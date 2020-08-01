@@ -9,6 +9,7 @@ import _job from './job';
 import _relation from './relation';
 import _model from './model';
 import _api from './api';
+import _forest from './forest';
 
 /**
  * ## 接口专用类
@@ -370,6 +371,32 @@ class I {
     /**
      * ## 接口函数
      *
+     * * 接口:
+     *      * 读取某一类：`/api/type/categories/:type`（GET）
+     *      * 判断节点
+     *
+     * 节点主要包含两种：
+     *
+     * * 整棵树：tree =
+     * * 树中某个分支：tree = xxx, <condition>
+     *
+     * 连接模式
+     *
+     * 1. mode = "REPLACE": 抓取的树直接替换当前节点
+     * 2. mode = "CONNECT": 抓取的树作为当前节点的子节点
+     *
+     * @async
+     * @param {String} type 读取某一类 X_CATEGORY 构造森林
+     * @param {String} mode 连接模式
+     * @returns {Promise<T>} 返回Promise。
+     */
+    static forest(type, mode = "REPLACE") {
+        return _forest(type, mode);
+    }
+
+    /**
+     * ## 接口函数
+     *
      * * 接口：
      *      * 读唯一：`/api/:type/category/:code`（GET）
      *      * 读某一类：`/api/type/categories/:type`（GET）
@@ -593,6 +620,7 @@ class I {
     static apis(params) {
         return _api.apis(params)
     }
+
     /**
      * ## 接口函数
      *

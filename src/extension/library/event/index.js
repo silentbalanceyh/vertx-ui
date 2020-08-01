@@ -1,6 +1,6 @@
 import upstream from './upstream';
 import fabric from './fabric';
-
+import arithmetic from './arithmetic';
 /**
  * 内部模块
  *
@@ -18,4 +18,5 @@ import fabric from './fabric';
 export default {
     ...upstream,
     ...fabric,
+    ...arithmetic,
 }
