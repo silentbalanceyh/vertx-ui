@@ -42,8 +42,14 @@ const clone = (input) => {
         return input;
     } else {
         if (input) {
-            // Object.freeze(input);
-            return Immutable.fromJS(input).toJS();
+            /*
+             * __acl copay for Array
+             */
+            const normalized = Immutable.fromJS(input).toJS();
+            if (Is.isArray(input) && input.__acl) {
+                normalized.__acl = input.__acl;
+            }
+            return normalized;
         } else {
             return input;
         }

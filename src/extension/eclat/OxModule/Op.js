@@ -48,13 +48,12 @@ const yiModule = (reference) => asyncControl(reference).then((combine = {}) => {
         const {$metadata = {}} = reference.props;
         const type = $metadata.componentType;
         if (type) {
-            return Ex.yiControl($control, type)
-                .then($config => {
-                    state.$ready = true;
-                    state.$config = $config;
-                    state.$identifier = $identifier;
-                    reference.setState(state);
-                });
+            return Ex.yiControl($control, type).then($config => {
+                state.$ready = true;
+                state.$config = $config;
+                state.$identifier = $identifier;
+                reference.setState(state);
+            });
         } else {
             console.error("[ Ox ] 该组件要求的 componentType 无值。", type);
         }
@@ -73,7 +72,7 @@ const yuModule = (reference, previous = {}) => {
     const prev = previous.props.$identifier;
     if (current !== prev) {
         yiModule(reference)
-            .then(state => Ux.dgDebug("[ Ox ] 最终状态", state));
+            .then(state => Ux.dgDebug(state, "[ Ox ] 最终状态"));
     }
 };
 export default {

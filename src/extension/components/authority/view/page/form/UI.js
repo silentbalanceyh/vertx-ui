@@ -35,8 +35,8 @@ class Component extends React.PureComponent {
             } = this.state;
             const alert = Ux.fromHoc(this, "alert");
             return (
-                <div className={"page-column"}>
-                    {Sd.renderButtons(this, !$resources)}
+                <div className={"page-form"}>
+                    {Sd.renderButtons(this, !$resources, true)}
                     <Spin spinning={$submitting || $loading}>
                         <Row>
                             <Col span={6}>
@@ -55,7 +55,7 @@ class Component extends React.PureComponent {
                     </Spin>
                 </div>
             )
-        }, Ex.parserOfColor("Rule-Column").define())
+        }, Ex.parserOfColor("Rule-Form").define())
     }
 }
 

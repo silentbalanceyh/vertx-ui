@@ -34,7 +34,7 @@
 
             .content-page {
                 margin: 8px 0;
-                padding: 8px 3px 16px 3px;
+                padding: 8px 3px 0 3px;
                 border: dashed 1px #e9e9e9;
                 border-radius: 6px;
 
@@ -45,7 +45,6 @@
                 .row-content {
                     margin-bottom: 12px;
                     box-shadow: 0 3px 2px #E9e9e9;
-                    padding-bottom: 6px;
                 }
 
                 .ant-col {
@@ -69,6 +68,27 @@
                         }
                     }
                 }
+
+                .op {
+                    &-system {
+                        .ant-checkbox-group {
+                            max-height: 84px;
+                            min-height: 84px;
+                            overflow-y: auto !important;
+                        }
+                    }
+
+                    &-business {
+                        .ant-list {
+
+                            overflow-y: auto !important;
+                        }
+
+                        .ant-checkbox-group {
+                            overflow-y: auto !important;
+                        }
+                    }
+                }
             }
         }
 
@@ -79,6 +99,28 @@
             .title {
                 font-weight: bold;
                 color: black;
+                text-align: right;
+            }
+        }
+    }
+
+    .page-form {
+        .page-column;
+
+        .row-action {
+            height: 36px;
+            line-height: 32px;
+
+            i {
+                margin-left: 6px;
+            }
+        }
+
+        .row-item {
+            height: 28px;
+            line-height: 28px;
+
+            &-radio {
                 text-align: right;
             }
         }

@@ -5,9 +5,9 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma",
-                "master":"BOOL:false",
-                "":"OPERATOR:AND"
+                "sigma": "PROP:app.sigma",
+                "master": "BOOL:false",
+                "": "OPERATOR:AND"
             }
         },
         "options": {
@@ -33,8 +33,8 @@
             "tabs.list": "图列表",
             "tabs.add": "绘制新图",
             "tabs.edit": "编辑图",
-            "identifier": "g.graphic",
-            "dynamic.op": false,
+            "identifier": "def.graphic",
+            "dynamic.op": true,
             "dynamic.column": true,
             "dynamic.switch": true,
             "op.open.add": "绘制新图",
@@ -42,6 +42,7 @@
             "op.extra.column": "修改显示列",
             "op.row.edit": true,
             "op.row.delete": true,
+            "op.row.view": "查看",
             "op.submit.add": "添加",
             "op.submit.reset": "重置",
             "window.batch.editor": "选择批量更新的字段,更新,关闭,false,640,true,btnBatchEdit",

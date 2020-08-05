@@ -33,10 +33,16 @@ function yiControl() {
          * 合并处理，得到最终的 control 级别的配置
          */
         const ajaxControl = Ajax.control({type, control});
-        const ajaxOp = Ajax.ops({control});
+        const ajaxOp = Ajax.ops({control, type: "OP"});
         const parser = Fn.parserOfButton(null);     // 这个操作可以 null 的引用
         return Ux.parallel([ajaxControl, ajaxOp], "config", "ops").then(response => {
             const {config = {}, ops = []} = response;
+            /*
+             * 操作专用 __acl 处理
+             */
+            if ("LIST" === type) {
+                Ux.aclOp(config.options, ops);
+            }
             return parser.parseOps(config, {type, ops}, true);
         }).catch(console.error);
     }

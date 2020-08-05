@@ -10,7 +10,7 @@ export default (reference) => {
         $source,
         $heightStyle = {},
         $role,
-        $op = {}
+        $treeBusiness = {}
     } = reference.state;
     const data = $source.business ? $source.business : [];
     const $style = Ux.clone($heightStyle);
@@ -25,11 +25,9 @@ export default (reference) => {
     return (
         <Row className={"op-system"}>
             <div className={"card"}>
-                <Tree treeData={data} checkable
-                      checkedKeys={checkedKeys}
-                      defaultExpandAll
+                <Tree checkedKeys={checkedKeys}
                       disabled={!$role}
-                      onCheck={$op.$opChecked(data)}
+                      {...$treeBusiness}
                       {...$style} className={"card-content"}/>
             </div>
         </Row>

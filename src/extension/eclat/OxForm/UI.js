@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
              */
             const $edition = Ux.pluginForm(this);
             const {$inited = {}} = this.props;
-            const attrs = Ex.aclData($inited, $edition);
+            const attrs = Ux.aclData($inited, this, $edition);
             return (
                 <ExForm {...this.props} $height={"300px"}
                         $op={$op} {...attrs}/>

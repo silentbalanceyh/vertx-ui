@@ -78,6 +78,10 @@ export default (reference, selected = [], fnEvent = event => event) => {
             record.resourceId = resourceId;
             record.owner = $owner.ownerId;
             record.ownerType = $owner.ownerType;
+            if (item.visitantData) {
+                record.visitant = true;
+                record.visitantData = item.visitantData;
+            }
             /*
              * rows 计算
              */

@@ -10,8 +10,8 @@
     "_assist": {
         "data.category": {
             "uri": "/api/type/categories/:type",
-            "magic":{
-                "type":"STATE:$type"
+            "magic": {
+                "type": "STATE:$type"
             }
         }
     },
@@ -28,7 +28,7 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
         },
         "options": {
@@ -55,7 +55,7 @@
             "tabs.add": "添加分类",
             "tabs.edit": "编辑分类",
             "identifier": "x-category",
-            "dynamic.op": false,
+            "dynamic.op": true,
             "dynamic.column": true,
             "dynamic.switch": false,
             "op.open.add": "添加",
@@ -66,6 +66,7 @@
             "op.extra.import": "导入",
             "op.row.edit": true,
             "op.row.delete": true,
+            "op.row.view": "查看",
             "op.submit.add": "添加",
             "op.submit.save": "保存",
             "op.submit.delete": "删除",

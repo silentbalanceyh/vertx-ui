@@ -18,6 +18,20 @@
             "操作权限,rule.op.definition"
         ]
     },
+    "_subtabsExtra": {
+        "rule.category.definition": [
+            "$opSaveCat,保存分类权限,$opSaveCat,primary,cluster"
+        ],
+        "rule.list.column.definition": [
+            "$opSaveColumn,保存列权限,$opSaveColumn,primary,table"
+        ],
+        "rule.form.field.definition": [
+            "$opSaveForm,保存字段权限,$opSaveForm,primary,form"
+        ],
+        "rule.op.definition": [
+            "$opSaveOp,保存操作权限,$opSaveOp,primary,api"
+        ]
+    },
     "_page": {
         "title": "权限定制"
     },

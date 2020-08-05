@@ -17,7 +17,7 @@ class Component extends React.PureComponent {
         return Ex.yoRender(this, () => {
             return (
                 <div className={"page-category"}>
-                    {Sd.renderButtons(this)}
+                    {Sd.renderButtons(this, false, true)}
                     {Sd.renderGrid(this, 5)}
                 </div>
             )

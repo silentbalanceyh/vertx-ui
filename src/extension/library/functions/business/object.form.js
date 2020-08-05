@@ -13,18 +13,7 @@ const add = (reference) => (params = {}, config = {}) => {
         .catch(error => Ux.ajaxError(reference, error));
 };
 const save = (reference) => (params = {}, config = {}) => {
-    const normalized = {};
-    /*
-     * 将 undefined 转换成 null
-     */
-    Object.keys(params).forEach(field => {
-        if (undefined === params[field]) {
-            normalized[field] = null;
-        } else {
-            normalized[field] = params[field];
-        }
-    });
-    let request = Ux.valueRequest(normalized);
+    let request = Ux.valueRequest(params);
     request = Ux.valueValid(request);
     return Ux.ajaxPut(config.uri, request)
         .then(Ux.ajax2Dialog(reference, config.dialog))

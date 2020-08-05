@@ -3,6 +3,7 @@ import {Col, Row, Tabs} from 'antd';
 import React from 'react';
 import {LoadingAlert} from 'web';
 import renderJsx from './page';
+import renderExtra from './Web.Extra';
 
 const fnJsx = {
     tabIntro: (reference) => {
@@ -15,8 +16,13 @@ const fnJsx = {
         const tabs = Ux.fromHoc(reference, "subtabs");
         const $tabs = Ux.configTab(reference, tabs);
         const {items = [], ...rest} = $tabs;
+        /* 处理激活 activeKey */
+        const {$activePage} = reference.state;
         return (
-            <Tabs {...rest} className={"ex-tabs"}>
+            <Tabs {...rest} className={"ex-tabs"}
+                  activeKey={$activePage}
+                  tabBarExtraContent={renderExtra(reference)}
+                  onTabClick={$activePage => reference.setState({$activePage})}>
                 {items.map(item => (
                     <Tabs.TabPane {...item}>
                         {(() => {

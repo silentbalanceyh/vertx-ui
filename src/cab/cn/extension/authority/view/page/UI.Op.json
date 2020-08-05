@@ -1,0 +1,250 @@
+{
+    "_op": [
+        {
+            "key": "$opSave",
+            "text": "保存",
+            "icon": "save",
+            "type": "primary",
+            "id": "$opSaveOp"
+        }
+    ],
+    "_modal": {
+        "error": {
+            "empty": "对不起，您没有给该角色分配任何可保存的操作权限！",
+            "server": "服务端有错，请联系管理员！"
+        },
+        "success": {
+            "saved": "恭喜，您的定制权限已经成功保存！"
+        }
+    },
+    "_alert": {
+        "message": "操作管理说明",
+        "description": [
+            "左边的资源树`可选择`节点分别对应一个模型，只有选择过后可管理该模型的模块操作内容。",
+            "如果右侧没显示属性，可能是选择的模型并`未开通`该权限或您还`没选择`相对应的资源信息。",
+            "选择的模型使用字典序排列，并根据属性特性进行一定的分组。",
+            "所有模块目前的操作都是固定的，只能在固定操作中选择！",
+            "如果该模块不支持该操作，即使设置了该操作权限也不会生效！"
+        ],
+        "type": "warning",
+        "icon": "api"
+    },
+    "_info": {
+        "title": "模块操作设置",
+        "name": "模型名称：",
+        "identifier": "模型标识：",
+        "unselected": "（未选择）",
+        "empty": "您选择的模型`未开通`模块操作权限功能，如果业务有需要，请联系开发人员开通！",
+        "business": "支持的操作：",
+        "system": "默认操作：",
+        "tips": "默认权限属于自带权限，所有账号都拥有，不可管理。",
+        "all": "全选"
+    },
+    "_options": {
+        "group": [
+            {
+                "key": "groupBasic",
+                "name": "基础操作",
+                "value": [
+                    "op.open.add",
+                    "op.row.edit",
+                    "op.row.delete"
+                ]
+            },
+            {
+                "key": "groupSearch",
+                "name": "搜索",
+                "value": [
+                    "search.enabled",
+                    "search.advanced"
+                ]
+            },
+            {
+                "key": "groupBatch",
+                "name": "批量操作",
+                "value": [
+                    "op.batch.edit",
+                    "op.batch.delete"
+                ]
+            },
+            {
+                "key": "groupView",
+                "name": "视图操作",
+                "value": [
+                    "op.extra.column"
+                ]
+            },
+            {
+                "key": "groupFile",
+                "name": "文件操作",
+                "value": [
+                    "op.extra.import",
+                    "op.extra.export"
+                ]
+            }
+        ],
+        "items": [
+            {
+                "name": "op.row.view",
+                "alias": "查看",
+                "icon": {
+                    "type": "search",
+                    "style": {
+                        "fontSize": 18,
+                        "color": "#00BFFF"
+                    }
+                },
+                "data": [
+                    "op.row.view"
+                ]
+            },
+            {
+                "name": "op.open.add",
+                "alias": "添加",
+                "icon": {
+                    "type": "plus",
+                    "style": {
+                        "color": "#458B00",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.open.add",
+                    "op.submit.add",
+                    "op.submit.reset"
+                ]
+            },
+            {
+                "name": "op.row.edit",
+                "alias": "编辑",
+                "icon": {
+                    "type": "edit",
+                    "style": {
+                        "color": "#1C86EE",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.row.edit",
+                    "op.submit.edit",
+                    "op.submit.reset"
+                ]
+            },
+            {
+                "name": "op.row.delete",
+                "alias": "删除",
+                "icon": {
+                    "type": "delete",
+                    "style": {
+                        "color": "#CD0000",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.submit.delete",
+                    "op.row.delete"
+                ]
+            },
+            {
+                "name": "op.batch.edit",
+                "alias": "批量更新",
+                "data": [
+                    "op.batch.edit"
+                ],
+                "icon": {
+                    "type": "save",
+                    "style": {
+                        "color": "#1C86EE",
+                        "fontSize": 18
+                    }
+                }
+            },
+            {
+                "name": "op.batch.delete",
+                "alias": "批量删除",
+                "data": [
+                    "op.batch.delete"
+                ],
+                "icon": {
+                    "type": "tags",
+                    "style": {
+                        "color": "#CD0000",
+                        "fontSize": 18
+                    }
+                }
+            },
+            {
+                "name": "op.extra.column",
+                "alias": "显示列修改",
+                "data": [
+                    "op.extra.column"
+                ],
+                "icon": {
+                    "type": "eye",
+                    "style": {
+                        "color": "#CD1076",
+                        "fontSize": 18
+                    }
+                }
+            },
+            {
+                "name": "op.extra.import",
+                "alias": "导入",
+                "icon": {
+                    "type": "import",
+                    "style": {
+                        "color": "#551A8B",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.extra.import"
+                ]
+            },
+            {
+                "name": "op.extra.export",
+                "alias": "导出",
+                "icon": {
+                    "type": "export",
+                    "style": {
+                        "color": "#551A8B",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.extra.export"
+                ]
+            },
+            {
+                "name": "search.enabled",
+                "alias": "基础搜索",
+                "icon": {
+                    "type": "search",
+                    "style": {
+                        "color": "#2E8B57",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.open.filter",
+                    "search.enabled"
+                ]
+            },
+            {
+                "name": "search.advanced",
+                "alias": "高级搜索",
+                "icon": {
+                    "type": "file-search",
+                    "style": {
+                        "color": "#2E8B57",
+                        "fontSize": 18
+                    }
+                },
+                "data": [
+                    "op.open.filter",
+                    "search.advanced"
+                ]
+            }
+        ]
+    }
+}

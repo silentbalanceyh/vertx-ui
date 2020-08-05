@@ -62,7 +62,7 @@ export default (reference, config = {}) => {
     // Footer关闭
     dialog.footer = (
         <div>
-            <Button icon="check" type={"primary"}
+            <Button icon="check" type={"primary"} shape={"circle"}
                     onClick={onConfirm(reference, config)}>{dialog.okText}</Button>
         </div>
     );

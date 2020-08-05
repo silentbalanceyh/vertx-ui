@@ -103,6 +103,8 @@ export default (reference, additional = {}, data = {}) => {
     if ($identifier) {
         attrs.$identifier = $identifier;
     }
-    /* 外置Form */
+    /* 表单控制专用（将控制写入到 attrs 中 */
+    const acl = Ux.aclData(data, reference, {});
+    Object.assign(attrs, acl);
     return attrs;
 };

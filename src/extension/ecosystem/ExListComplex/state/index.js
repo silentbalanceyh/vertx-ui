@@ -39,7 +39,6 @@ const sync = (reference, config = {}) => {
      * 2. options拷贝一份，会被 rxInject 处理
      */
     state.options = stateOption(reference, config);
-    Object.freeze(state.options);
     /*
      * query 状态保存，根容器中保存了 query 的相关状态
      * 1. 如果外置 $query 传入，那么也会更新 query
@@ -77,7 +76,7 @@ const sync = (reference, config = {}) => {
 };
 const async = (reference, config = {}, state = {}) =>
     /* 动态OP */
-    asyncOp(reference, config)
+    asyncOp(reference, config, state)
         .then(op => Ux.promise(state, 'op', op))
         /* 动态列 */
         .then(() => asyncTable(reference, config, state))

@@ -3,6 +3,7 @@ import {Checkbox, Col, Empty, Row, Tag} from "antd";
 import React from "react";
 import Ux from "ux";
 import Op from './Op';
+import renderItem from './Web.Item';
 
 export default (reference) => {
     const {$source, $keySet} = reference.state;
@@ -32,13 +33,13 @@ export default (reference) => {
                                         {info.system}
                                     </Col>
                                     <Col span={20}>
-                                        <Tag color={"geekblue"}>
+                                        <Tag color={"magenta"}>
                                             {info.tips}
                                         </Tag>
                                     </Col>
                                 </Row>
                                 <Row className={"row-content"}>
-                                    <Col span={20} offset={4}>
+                                    <Col span={20} offset={4} className={"op-system"}>
                                         <Checkbox.Group options={system} value={systemValues}/>
                                     </Col>
                                 </Row>
@@ -52,9 +53,9 @@ export default (reference) => {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col span={20} offset={4}>
-                                        <Checkbox.Group options={business} value={businessValues}
-                                                        onChange={Op.rxCheck(reference)}/>
+                                    <Col span={20} offset={4}
+                                         className={"op-business"}>
+                                        {renderItem(reference, business, businessValues)}
                                     </Col>
                                 </Row>
                             </div>

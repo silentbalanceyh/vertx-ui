@@ -4,7 +4,8 @@
             "key": "$opSave",
             "text": "保存",
             "icon": "save",
-            "type": "primary"
+            "type": "primary",
+            "id": "$opSaveCat"
         }
     ],
     "_modal": {

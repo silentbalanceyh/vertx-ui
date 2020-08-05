@@ -8,7 +8,7 @@ import parserOfEvent from './I.state.async.parser';
 import Plugin from 'plugin';
 
 const {Op} = Opt;
-export default (reference, config = {}) => {
+export default (reference, config = {}, state) => {
     const {options = {}, component = {}} = config;
     const eventParser = parserOfEvent(reference);
     const buttonParser = Ex.parserOfButton(reference);
@@ -21,12 +21,16 @@ export default (reference, config = {}) => {
     return new Promise((resolve) => {
         if (options[Ex.Opt.DYNAMIC_OP]) {
             /* 动态 Op */
-            const {$opKey} = reference.props;
-            if ($opKey) {
+            const identifier = options.identifier;
+            if (identifier) {
                 /*
                  * 特殊权限
                  */
-                Ex.I.ops({control: $opKey}).then(response => {
+                Ex.I.ops({identifier, type: "OP"}).then(response => {
+                    /*
+                     * 处理核心 List 问题
+                     */
+                    Ux.aclOp(state.options, response);
                     const result = {};
                     response.forEach(item => result[item['clientKey']] = result[item.text]);
                     resolve(result);
@@ -35,6 +39,7 @@ export default (reference, config = {}) => {
                 /*
                  * 什么权限都没有
                  */
+                console.error("对不起，没有 identifier，无法读取权限！");
                 resolve({});
             }
         } else {

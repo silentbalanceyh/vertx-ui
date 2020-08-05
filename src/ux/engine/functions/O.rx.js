@@ -80,7 +80,17 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
  */
 const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
     let current = [];
-    Abs.itTree(input, item => current.push(item.key));
+    const exclude = []
+    Abs.itTree(input, item => {
+        current.push(item.key);
+        /*
+         * 必须是 false 的情况，否则会将 undefined 的情况也统计在
+         * exclude 过程中导致选择失效
+         */
+        if (false === item.checkable) {
+            exclude.push(item.key);
+        }
+    });
     // 先找到当前 checkedKeys 所在的组
     let {$keySet} = reference.state;
     const keySet = new Set();
@@ -153,6 +163,8 @@ const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
             }
         }
     }
+    // 移除不可选的
+    Array.from(exclude).forEach(key => keySet.delete(key))
     reference.setState({$keySet: keySet});
 }
 export default {

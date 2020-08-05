@@ -17,6 +17,7 @@ const yiPage = (reference) => {
              */
             state.$config = Ux.elementMap(response, 'code');
             state.$ready = true;
+            state.$activePage = "rule.category.definition";     // 子界面专用
             reference.setState(state);
         })
     }

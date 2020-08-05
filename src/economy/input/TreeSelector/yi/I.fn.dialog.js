@@ -5,27 +5,43 @@ import React from "react";
 
 const onConfirm = (reference = {}, config = {}) => (event) => {
     Ux.prevent(event);
-    const {$select} = reference.state;
+    const {$keySet} = reference.state;
     const ref = Ux.onReference(reference, 1);
     // 判断ListSelector中的选中项，状态中的$select是否存在
-    if ($select) {
+    if ($keySet) {
         /*
-         * Linker取值
+         * 注意单记录选择和多记录
+         * 单记录支持 linker 功能
+         * 多记录不支持 linker 功能
          */
-        const values = Ux.writeLinker({}, config, () => $select);
-        if (!Ux.isEmpty(values)) {
-            // 调用Form数据处理Linker
-            Ux.formHits(ref, values);
-            // 执行Linker过后的回调
-            const {fnCallback} = config;
-            if (U.isFunction(fnCallback)) {
-                fnCallback($select);
+        if (Set.prototype.isPrototypeOf($keySet)) {
+            const $selected = Array.from($keySet);
+            if (0 < $selected.length) {
+                Ux.fn(reference).onChange($selected);
+            } else {
+                if (config.validation) {
+                    Ux.messageFailure(config.validation);
+                }
             }
-            // onChange 保证表单的 isTouched
-            const {onChange, id} = reference.props;
-            if (U.isFunction(onChange)) {
-                const changeValue = values[id];
-                onChange(changeValue);
+        } else {
+            /*
+             * Linker取值
+             */
+            const values = Ux.writeLinker({}, config, () => $keySet);
+            if (!Ux.isEmpty(values)) {
+                // 调用Form数据处理Linker
+                Ux.formHits(ref, values);
+                // 执行Linker过后的回调
+                const {fnCallback} = config;
+                if (U.isFunction(fnCallback)) {
+                    fnCallback($keySet);
+                }
+                // onChange 保证表单的 isTouched
+                const {onChange, id} = reference.props;
+                if (U.isFunction(onChange)) {
+                    const changeValue = values[id];
+                    onChange(changeValue);
+                }
             }
         }
         // 关闭窗口
@@ -34,7 +50,6 @@ const onConfirm = (reference = {}, config = {}) => (event) => {
         // 未选中时若包含了验证，则提示验证信息
         Ux.E.fxTerminal(!config.validation, 10080, config.validation);
         if (config.validation) {
-            // TODO: showError 后期重写
             Ux.messageFailure(config.validation);
             // Dialog.showError(ref, config.validation);
         }
@@ -54,14 +69,12 @@ export default (reference, config = {}) => {
     const dialog = Ux.aiExprWindow(config.window);
     // Footer关闭
     dialog.footer = (
-        <Button.Group>
-            <Button icon="check"
-                    className="ux-success"
-                    onClick={onConfirm(reference, config)}>{dialog.okText}</Button>
-            <Button icon="close"
-                    type="danger"
+        <div>
+            <Button icon="close" shape={"circle"}
                     onClick={onClose(reference, false)}>{dialog.cancelText}</Button>
-        </Button.Group>
+            <Button icon="check" shape={"circle"} type={"primary"}
+                    onClick={onConfirm(reference, config)}>{dialog.okText}</Button>
+        </div>
     );
     dialog.onCancel = onClose(reference, false);
     return dialog;

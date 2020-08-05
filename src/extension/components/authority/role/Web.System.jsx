@@ -23,7 +23,8 @@ const renderCard = (reference, data = []) => {
                                   onCheck={$op.$opChecked(grouped.children)}
                                   defaultExpandAll
                                   {...$heightStyle} className={"card-content"}
-                                  checkable/>
+                                  checkable             // checkable = !selectable
+                                  selectable={false}/>
                         </Card>
                     </Col>
                 )

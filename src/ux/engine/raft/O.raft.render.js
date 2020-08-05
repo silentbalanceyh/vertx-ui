@@ -157,7 +157,7 @@ const raftRender = (cell = {}, config = {}) => {
         console.error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
     };
     /*
-     * 是 Action 就不需要 getFieldDecorator 修饰
+     * 是 Action 就不需要 Ant Form 中的修饰
      */
     // Object.freeze(cell.optionJsx);
     // Object.freeze(cell.optionConfig);
@@ -186,6 +186,7 @@ const raftRender = (cell = {}, config = {}) => {
              * 执行初始值，包含 $delay 模式
              */
             raftValue(cell, values, reference);
+
             /*
              * depend 计算
              * 1）impact
@@ -193,8 +194,15 @@ const raftRender = (cell = {}, config = {}) => {
              */
             let optionJsx = Abs.clone(cell.optionJsx);
             if (!optionJsx) optionJsx = {};      // 防止 undefined 出现
-            Ut.writeDisabled(optionJsx, reference);
-            // const optionJsx = raftDepend(reference, Abs.clone(cell.optionJsx));
+
+
+            /*
+             * 插件专用处理，该插件在 connectValidator 之前触发
+             * 否则 disabled / readOnly 部分会出问题
+             */
+            Ut.writeSegment(reference, optionJsx, cell.field);
+
+
             /*
              * 1）rules 和 validateTrigger 计算，特殊连接
              * 2）optionJsx 必须经过计算来执行 rules 的筛选，计算过后才会出现 disabled 属性
@@ -204,6 +212,8 @@ const raftRender = (cell = {}, config = {}) => {
                 optionConfig: cell.optionConfig,
                 render: cell.render,
             });
+
+
             /*
              * 解决某些场景无法赋值的忧伤
              */
@@ -211,14 +221,13 @@ const raftRender = (cell = {}, config = {}) => {
             if (optionJsx && values[cell.field]) {
                 optionJsx['data-initial'] = values[cell.field];
             }
-            /*
-             * 插件专用处理
-             */
-            Ut.writeSegment(reference, optionJsx, cell.field);
+
+
             /*
              * 子表单 renders 继承
              */
             if (renders && renders.hasOwnProperty(cell.field)) {
+
                 /*
                  * 将 renders 注入到 optionJsx 中
                  * 底层 DialogEditor 自动读取
@@ -230,12 +239,24 @@ const raftRender = (cell = {}, config = {}) => {
             }
             const {form} = reference.props;
             if (form) {
+
                 /*
                  * Ant-Design 表单化处理
                  */
                 optionJsx.reference = reference;    // 特殊引用，触发 depend / linker
                 const {getFieldDecorator} = form;
                 if (cell.field) {
+
+                    /*
+                     * 只有这个位置需要代码支撑
+                     * 增加一种情况，如果当前字段 disabled 的时候，
+                     * 1) Checkbox 的 value 必须 undefined，同样是修改 optionConfig
+                     */
+                    Ut.writeInitial(optionConfig, optionJsx, cell);
+
+                    /*
+                     * 装饰之前执行一次
+                     */
                     return getFieldDecorator(cell.field, optionConfig)(
                         render(reference, optionJsx)
                     );
@@ -265,6 +286,9 @@ const raftHidden = (raft = {}, $form, reference) => {
             const hidden = {};
             const {form} = reference.props;
             if (form) {
+                /*
+                 * Hidden 无所谓，不可能会触发相关操作
+                 */
                 const {getFieldDecorator} = form;
                 hidden.render = (values = {}) => {
                     const initialValue = values[field];

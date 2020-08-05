@@ -7,7 +7,14 @@ const ai2TreeSelector = (mockData = {}) => (reference, jsx = {}) =>
 const aiTreeSelector = (reference, jsx = {}) => {
     const {$options = {}} = reference.props;
     if ($options.selectable && jsx.config) {
-        jsx.config.$selectable = $options.selectable;
+        /*
+         * 这里的 selectable 是字段级的
+         * {
+         *     "field": {
+         *     }
+         * }
+         */
+        jsx.config.selectable = $options.selectable;
     }
     return (<TreeSelector {...jsx} reference={reference}/>);
 };

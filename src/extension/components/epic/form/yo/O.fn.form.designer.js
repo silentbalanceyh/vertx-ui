@@ -29,7 +29,7 @@ export default (reference) => {
             Ux.ajaxPost("/api/ui/control",
                 {control: key, type: "FORM"}),        // 读取表单
             Ux.ajaxPost("/api/ui/ops",
-                {control: key}),                      // 读取操作
+                {control: key, type: "FORM"}),                      // 读取操作
         ], "models", "raft", "op").then((response = {}) => {
             const {models, raft = {}, op = []} = response;
             state.$models = models;

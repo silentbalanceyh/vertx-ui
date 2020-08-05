@@ -36,7 +36,7 @@ class Component extends React.PureComponent {
             const alert = Ux.fromHoc(this, "alert");
             return (
                 <div className={"page-column"}>
-                    {Sd.renderButtons(this, !$resources)}
+                    {Sd.renderButtons(this, !$resources, true)}
                     <Spin spinning={$submitting || $loading}>
                         <Row>
                             <Col span={6}>

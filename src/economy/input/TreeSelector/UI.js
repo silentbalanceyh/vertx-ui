@@ -24,24 +24,17 @@ class Component extends React.PureComponent {
         const {onClick, dialog, $data = [], tree = {}} = this.state ? this.state : {};
         jsx.onClick = onClick;
         const inputAttrs = Op.yiValue(this, jsx);
-        /*
-         * treeData
-         */
-        const {$selectable = {}} = config;
         const treeData = Ux.toTree($data, config.tree);
         /*
          * selectable
          */
-        const selectable = $selectable[jsx.id];
-        Ux.itTree(treeData, (item) => {
-            if (item.hasOwnProperty("_level")) {
-                item.selectable = item._level <= selectable;
-            }
-        });
+        Op.yoTree(this, treeData);
 
         const treeAttrs = Ux.clone(tree);
-        treeAttrs.showLine = true;
         treeAttrs.treeData = treeData;
+        if (treeAttrs.checkable) {
+            treeAttrs.onCheck = Ux.rxCheckedTree(this, treeData);
+        }
         return (
             <div>
                 <Input className="ux-readonly"

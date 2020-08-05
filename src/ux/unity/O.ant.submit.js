@@ -4,7 +4,7 @@ import Dev from '../develop'
 import Cv from "../constant";
 import Ele from '../element';
 import Amt from "./O.ambient";
-import moment from 'moment';
+import Acl from './O.secure';
 
 /**
  * ## 特殊函数「Zero」
@@ -32,28 +32,12 @@ const formSubmit = (reference, redux = false) => {
             resolve(values);
         })).then((params) => {
             // 拷贝参数
-            const data = Abs.clone(params);
-            Object.keys(data)
-                .filter(key => {
-                    if (key.startsWith("$")) {
-                        // $button 移除
-                        return true;
-                    }
-                    if (Cv.FORBIDDEN === data[key]) {
-                        // 移除
-                        return true;
-                    }
-                    if (moment.isMoment(data[key])) {
-                        const year = data[key].year();
-                        return 9999 === year;
-                    } else return false;
-                })
-                .forEach(key => delete data[key])
+            const request = Acl.aclSubmit(params, reference);
             /*
              * 成功处理
              */
-            Dev.dgDebug(data, "[ Ux ] 表单提交数据：", "#228B22");
-            return Abs.promise(data);
+            Dev.dgDebug(request, "[ Ux ] 表单提交数据：", "#228B22");
+            return Abs.promise(request);
         });
     } else {
         return E.fxReject(10020);
