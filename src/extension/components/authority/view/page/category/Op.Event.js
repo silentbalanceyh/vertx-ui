@@ -10,7 +10,26 @@ export default {
             /*
              * 计算 selected
              */
-            return Ex.authRequest(reference, Array.from(selected));
+            const request = Ex.authRequest(reference, Array.from(selected));
+            /*
+             * $body 修正
+             */
+            if (Ux.isArray(request.$body)) {
+                request.$body.filter(item => item.hasOwnProperty('rows'))
+                    .forEach(item => {
+                        const originalRow = item.rows;
+                        try {
+                            const row = JSON.parse(originalRow);
+                            // 权限管理必备
+                            row.type = [
+                                "resource.tree"
+                            ]
+                            item.rows = JSON.stringify(row);
+                        } catch (error) {
+                        }
+                    })
+            }
+            return request;
         });
 
         const {$keySet} = reference.state;

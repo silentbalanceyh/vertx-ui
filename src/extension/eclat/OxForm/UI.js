@@ -24,6 +24,9 @@ class Component extends React.PureComponent {
              */
             const $edition = Ux.pluginForm(this);
             const {$inited = {}} = this.props;
+            /*
+             * 只有编辑模式开 acl
+             */
             const attrs = Ux.aclData($inited, this, $edition);
             return (
                 <ExForm {...this.props} $height={"300px"}

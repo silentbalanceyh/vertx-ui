@@ -2,6 +2,7 @@ import Abs from '../abyss';
 import E from '../error';
 import U from 'underscore';
 import Sg from './O.single';
+import St from '../unity/O.sorter';
 
 /**
  * ## 标准函数
@@ -313,7 +314,7 @@ const elementChildTree = (array = [], current = {}, parentField = "parent") => {
     }
     let children = array
         .filter(each => each[parentField] === parentKey)
-        .sort((left, right) => left.sort - right.sort);
+        .sort(St.sorterAscTFn('sort'));
     if (0 < children.length) {
         children.forEach(child => {
             child._level = current._level + 1;

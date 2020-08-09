@@ -80,7 +80,8 @@ export default {
      */
     FORM_MODE: {
         ADD: "ADD",
-        EDIT: "EDIT"
+        EDIT: "EDIT",
+        SEARCH: "SEARCH"
     },
     /**
      * ## 常量

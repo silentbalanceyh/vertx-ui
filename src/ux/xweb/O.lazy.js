@@ -162,7 +162,9 @@ const xtLazyInit = (reference) => {
                  */
                 Dev.dgDebug(params, "[ Xt ] engine = false 的最终查询条件", "#8B3A62");
                 Ajx.asyncData(config.ajax, params, (sourceArray) => {
-                    const unique = Ele.elementFind(sourceArray, values);
+                    let source = Abs.isArray(sourceArray) ? sourceArray : sourceArray.list;
+                    if (!Abs.isArray(source)) source = [];
+                    const unique = Ele.elementFind(source, values);
                     if (1 === unique.length) {
                         fnCallback(unique[0]);
                     } else if (0 === unique.length) {

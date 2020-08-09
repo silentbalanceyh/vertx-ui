@@ -126,7 +126,7 @@
                 },
                 "data": [
                     "op.row.edit",
-                    "op.submit.edit",
+                    "op.submit.save",
                     "op.submit.reset"
                 ]
             },

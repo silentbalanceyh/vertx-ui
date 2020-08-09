@@ -28,8 +28,10 @@ const _renderTooltip = (title, fnRender) => {
 const _renderRedo = (reference) => {
     const {config = {}, $disableClear = false} = reference.props;
     const title = config[Ex.Opt.SEARCH_OP_REDO];
+    const advanced = Op.isAdvanced(reference);
     return _renderTooltip(title, () => (
         <Button icon={"redo"} htmlType={"button"}
+                className={advanced ? "search-right" : "search-clean"}
                 disabled={$disableClear}
                 onClick={Op.onClear(reference)}/>
     ));
@@ -45,7 +47,7 @@ const _renderAdvanced = (reference) => {
 };
 
 const _renderButtons = (reference) => (
-    <Button.Group className={"ux-group"}>
+    <Button.Group className={"ex-search"}>
         {_renderAdvanced(reference)}
         {_renderRedo(reference)}
         {Ux.anchorSearch(reference)}

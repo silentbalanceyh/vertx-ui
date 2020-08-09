@@ -1,8 +1,9 @@
 import React from 'react';
 import Op from "./Op";
 import Ux from 'ux';
-import {Icon, Input, Tree} from "antd";
+import {Icon, Input, Spin, Tree} from "antd";
 import {Dialog} from "web";
+import renderClear from "../ListSelector/UI.Clear";
 
 class Component extends React.PureComponent {
 
@@ -21,7 +22,11 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, ...jsx} = this.props;
-        const {onClick, dialog, $data = [], tree = {}} = this.state ? this.state : {};
+        const {
+            onClick, dialog,
+            $data = [], tree = {},
+            $loading = false,
+        } = this.state ? this.state : {};
         jsx.onClick = onClick;
         const inputAttrs = Op.yiValue(this, jsx);
         const treeData = Ux.toTree($data, config.tree);
@@ -35,21 +40,35 @@ class Component extends React.PureComponent {
         if (treeAttrs.checkable) {
             treeAttrs.onCheck = Ux.rxCheckedTree(this, treeData);
         }
+        /*
+         * 处理输入框属性
+         */
+        const inputCombine = {};
+        inputCombine.suffix = (<Icon type="search" onClick={onClick}/>);
+        inputCombine.readOnly = true;
+        Object.assign(inputCombine, inputAttrs);
+        if (inputCombine.allowClear) {
+            inputCombine.addonAfter = renderClear(this);
+            inputCombine.className = "ux-readonly ux-addon-after";
+        } else {
+            inputCombine.className = "ux-readonly";
+        }
         return (
             <div>
-                <Input className="ux-readonly"
-                       readOnly {...inputAttrs}
-                       suffix={<Icon type="search" onClick={onClick}/>}/>
+                <Input {...inputCombine}/>
                 <Dialog className="web-dialog"
                         size={"small"}
                         $visible={this.state['$visible']}   // 窗口是否开启
                         $dialog={dialog}>
-                    <div style={{
-                        overflow: "auto",
-                        maxHeight: 450
-                    }}>
-                        <Tree {...treeAttrs}/>
-                    </div>
+                    <Spin spinning={$loading}>
+                        <div style={{
+                            overflow: "auto",
+                            minHeight: 300,
+                            maxHeight: 450
+                        }}>
+                            <Tree {...treeAttrs}/>
+                        </div>
+                    </Spin>
                 </Dialog>
             </div>
         );

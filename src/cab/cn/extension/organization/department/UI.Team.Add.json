@@ -8,7 +8,7 @@
             [
                 {
                     "metadata": "name,名称,12,,,placeholder=必填,normalize=text:128",
-                    "optionConfig.rules":[
+                    "optionConfig.rules": [
                         "required,请输入名称，名称不可为空！"
                     ]
                 },
@@ -53,29 +53,64 @@
                             "username,c": "账号",
                             "realname,c": "名称"
                         }
-                    }
+                    },
+                    "optionJsx.allowClear": true
                 }
             ],
             [
                 {
-                    "metadata": "deptId,所属部门,12,,aiTreeSelect,placeholder=（请选择所属部门）",
-                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
-                    "optionJsx.config.tree":"text=name,parent=deptId",
-                    "optionJsx.config.selection":"mode=FULL",
-                    "optionConfig.rules":[
-                        "required,请选择组所挂靠的部门！"
-                    ]
+                    "metadata": "deptName,所属部门,12,,aiTreeSelector,placeholder=（请选择所属部门）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/dept/search",
+                            "method": "POST",
+                            "params.criteria": {
+                                "companyId": "USER:companyId"
+                            }
+                        },
+                        "linker": {
+                            "name": "deptName",
+                            "key": "deptId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "deptId",
+                            "pinyin": true
+                        },
+                        "validation": "请选择所属部门！",
+                        "window": "请选择所属部门,选择,关闭,false,400,false"
+                    },
+                    "optionJsx.allowClear": true
                 },
                 {
-                    "metadata": "teamId,上级组,12,,aiTreeSelect,placeholder=（不选择则无上级组）",
-                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
-                    "optionJsx.config.tree":"text=name,parent=teamId",
-                    "optionJsx.config.selection":"mode=FULL",
-                    "optionJsx.config.cascade": {
-                        "source": "deptId",
-                        "target": "FORM:deptId"
+                    "metadata": "teamName,上级组,12,,aiTreeSelector,placeholder=（不选择则无上级组）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/team/search",
+                            "method": "POST"
+                        },
+                        "linker": {
+                            "name": "teamName",
+                            "key": "teamId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "teamId",
+                            "pinyin": true
+                        },
+                        "validation": "请选择上级组！",
+                        "window": "请选择上级组,选择,关闭,false,400,false",
+                        "exclude": "FORM:key"
                     },
-                    "optionJsx.allowClear":true
+                    "optionJsx.allowClear": true
                 }
             ],
             [
@@ -104,11 +139,13 @@
                 }
             ]
         ],
-        "initial":{
-            "active":"BOOL:true"
+        "initial": {
+            "active": "BOOL:true"
         },
         "hidden": [
-            "leaderId"
+            "leaderId",
+            "deptId",
+            "teamId"
         ],
         "op": {
             "$opAdd": "act.team.add"

@@ -17,6 +17,7 @@
  */
 import Abs from "../abyss";
 import Ele from '../element';
+import St from './O.sorter';
 
 /**
  * ## 标准函数
@@ -141,6 +142,9 @@ const toTreeArray = (data = [], config = {}) => {
         ].filter(field => each.hasOwnProperty(field))
             .forEach(field => processed[field] = each[field]);
         // 必须包含主键（不包含主键的行不需要）
+        if (config['pinyin']) {
+            processed[config.sort] = Ele.valuePinyin(processed.title);
+        }
         normalized.push(processed);
     });
     return normalized;
@@ -172,8 +176,8 @@ const toTree = (data = [], config = {}) => {
      * 3）父节点ID为 parent
      */
     const root = normalized
-        .filter(item => !item.parent)   // 过滤（只查找主节点）
-        .sort((left, right) => left.sort - right.sort); // 排序
+        .filter(item => !item.parent)           // 过滤// （只查找主节点）
+        .sort(St.sorterAscTFn($config.sort));    // 排序
     root.forEach(item => {
         /*
          * 针对每一个 root 节点查找子节点

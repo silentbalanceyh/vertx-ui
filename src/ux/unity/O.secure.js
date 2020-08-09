@@ -34,6 +34,7 @@ export default {
          * __acl 字段提取执行最终的
          * $inited 的处理在任何场景下都生效，所以在外层处理
          */
+        const {$options = {}, $mode} = reference.props;
         const {__acl = {}} = $inited;
         const {access = [], fields = [], edition = []} = __acl;
         {
@@ -64,12 +65,17 @@ export default {
              * 2. 操作模式第二优先级
              * 3. ACL第三优先级
              */
-            const {$options = {}} = reference.props;
             if (false === $options['op.row.edit']) {
                 /*
-                 * 操作模式下的控制
+                 * 操作模式下的控制，如果禁用了编辑
+                 * 那么直接表单不可编辑，但需要排除一种情况
+                 *
                  */
-                acl.$edition = false;
+                if (Cv.FORM_MODE.EDIT === $mode) {
+                    acl.$edition = false;
+                } else {
+                    acl.$edition = {};
+                }
             } else {
                 /*
                  * ACL第三优先级

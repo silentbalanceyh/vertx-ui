@@ -53,10 +53,11 @@ const connectValidator = (cell = {}) => {
     const optionConfig = Abs.clone(cell.optionConfig ? cell.optionConfig : {});
     const {optionJsx = {}} = cell;
     /*
-     * 是否禁用
+     * 禁用和只读两种情况都禁用验证规则
      */
     const disabled = optionJsx.disabled;
-    if (disabled) {
+    const readOnly = optionJsx.readOnly;
+    if (disabled || readOnly) {
         /*
          * 禁用时删除所有验证
          */

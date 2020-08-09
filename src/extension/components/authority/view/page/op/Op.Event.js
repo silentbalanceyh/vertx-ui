@@ -47,7 +47,23 @@ export default {
         });
     },
     isCheckedAll: Sd.isCheckedAll,
-    rxCheckAll: Sd.rxCheckAll,
+    rxCheckAll: (reference) => (event) => {
+        const checked = event.target.checked;
+        const {$source = []} = reference.state;
+        if (checked) {
+            // 全部选中
+            const $keySet = new Set($source.map(item => item.key));
+            reference.setState({$keySet});
+        } else {
+            // 全部取消选中
+            const checked = $source
+                .filter(item => "SYSTEM" === item._type)
+                .map(item => item.key);
+            const $keySet = new Set(checked);
+            const $keyView = new Set();
+            reference.setState({$keySet, $keyView});
+        }
+    },
     rxCheck: (reference, item) => (checked) => {
         let {$keySet} = reference.state;
         const isChecked = checked.target.checked;
