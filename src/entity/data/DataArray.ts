@@ -52,12 +52,15 @@ class DataArray implements DataContainer {
 
     filter(fnFilter: Function) {
         const data = JSON.parse(this.data);
+        // @ts-ignore
         if (U.isFunction(fnFilter)) {
             const result = data.filter(fnFilter);
             this.data = JSON.stringify(result);
-        } else if (U.isObject(fnFilter)) {
-            const result = Ux.elementFind(data, fnFilter);
-            this.data = JSON.stringify(result);
+        } else { // @ts-ignore
+            if (U.isObject(fnFilter)) {
+                const result = Ux.elementFind(data, fnFilter);
+                this.data = JSON.stringify(result);
+            }
         }
         return this;
     }
@@ -137,6 +140,7 @@ class DataArray implements DataContainer {
         if (key) {
             // 处理删除功能
             const dataArray = JSON.parse(this.data).filter(item => item[idField] !== key);
+            // @ts-ignore
             if (U.isArray(dataArray)) {
                 this.setValue(dataArray);
             }

@@ -23,7 +23,8 @@
         },
         {
             "text": "特定权限（用户）",
-            "key": "user"
+            "key": "user",
+            "disabled": true
         },
         {
             "text": "高级定制",

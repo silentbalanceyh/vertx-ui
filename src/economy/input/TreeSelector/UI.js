@@ -1,9 +1,8 @@
 import React from 'react';
 import Op from "./Op";
 import Ux from 'ux';
-import {Icon, Input, Spin, Tree} from "antd";
+import {Input, Spin, Tree} from "antd";
 import {Dialog} from "web";
-import renderClear from "../ListSelector/UI.Clear";
 
 class Component extends React.PureComponent {
 
@@ -43,16 +42,7 @@ class Component extends React.PureComponent {
         /*
          * 处理输入框属性
          */
-        const inputCombine = {};
-        inputCombine.suffix = (<Icon type="search" onClick={onClick}/>);
-        inputCombine.readOnly = true;
-        Object.assign(inputCombine, inputAttrs);
-        if (inputCombine.allowClear) {
-            inputCombine.addonAfter = renderClear(this);
-            inputCombine.className = "ux-readonly ux-addon-after";
-        } else {
-            inputCombine.className = "ux-readonly";
-        }
+        const inputCombine = Op.yoCombine(this, inputAttrs);
         return (
             <div>
                 <Input {...inputCombine}/>

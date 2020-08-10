@@ -470,6 +470,29 @@ const elementGrid = (source = [], columns) => {
         return grid;
     } else return Abs.clone(source);
 }
+/**
+ * ## 标准函数
+ *
+ * 不重复添加
+ *
+ * @memberOf module:_element
+ * @param {Array} data 数组输入源头
+ * @param {Object} item 被输入的记录集
+ * @param {String} idField 主键字段
+ * @return {Array} 返回合并后的数组
+ */
+const elementSave = (data = [], item, idField = "key") => {
+    if (Abs.isArray(data) && item) {
+        // 元素信息处理
+        const found = elementUnique(data, idField, item[idField]);
+        if (found) {
+            Object.assign(found, item);
+        } else {
+            data.push(item);
+        }
+    }
+    return data;
+}
 export default {
     elementJoin,
     elementFlat,
@@ -485,5 +508,7 @@ export default {
     elementBranch,
     elementParent,
     elementChildTree,
-    elementChildren
+    elementChildren,
+    // 增删改
+    elementSave
 }

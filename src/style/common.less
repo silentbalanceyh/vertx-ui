@@ -187,12 +187,30 @@ textarea {
     }
 }
 
-.ux-addon-after {
-    .ant-input-group-addon {
-        &:hover {
-            border-color: @primary-color;
-            color: white;
-            background-color: @primary-color;
+.ux-addon {
+    &-after {
+        .ant-input-group-addon {
+            &:hover {
+                border-color: @primary-color;
+                color: white;
+                background-color: @primary-color;
+            }
+        }
+    }
+
+    &-disabled {
+        .ant-input-group-addon {
+            i {
+                color: @disabled-color;
+            }
+
+            &:hover {
+                cursor: not-allowed;
+
+                i:hover {
+                    cursor: not-allowed;
+                }
+            }
         }
     }
 }

@@ -76,9 +76,10 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用。
  * @param {Array} input 当前组中数组，本身为一棵树
+ * @param {Function} callback 回调函数
  * @returns {Function} 选中函数。
  */
-const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
+const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => {
     let current = [];
     const exclude = []
     Abs.itTree(input, item => {
@@ -164,8 +165,16 @@ const rxCheckedTree = (reference, input = []) => (keys = [], item) => {
         }
     }
     // 移除不可选的
-    Array.from(exclude).forEach(key => keySet.delete(key))
-    reference.setState({$keySet: keySet});
+    Array.from(exclude).forEach(key => keySet.delete(key));
+    const state = {};
+    state.$keySet = keySet;
+    if (Abs.isFunction(callback)) {
+        const append = callback(keySet);
+        if (append) {
+            Object.assign(state, append);
+        }
+    }
+    reference.setState(state);
 }
 export default {
     rxResize,

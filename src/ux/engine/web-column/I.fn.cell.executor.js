@@ -55,18 +55,25 @@ const _setEnabled = (calculated, item = {}, executor = {}, options = {}) => {
                      * 编辑按钮
                      */
                     const option = options['op.row.edit'];
-                    return !!option;
+                    if (undefined === option) {
+                        return true;
+                    } else {
+                        return !!option;
+                    }
                 } else if (calculated.deletion && "fnDelete" === item.executor) {
                     /*
                      * 删除按钮
                      */
                     const option = options['op.row.delete'];
-                    return !!option;
+                    if (undefined === option) {
+                        return true;
+                    } else {
+                        return !!option;
+                    }
                 } else return false;
             } else {
                 return true;
             }
-            ;
         } else {
             // 不包含的情况，直接 false
             return false;
@@ -169,7 +176,8 @@ export default (reference, config, executor = {}) => (text, record) => {
     return (
         <div style={{
             width: "100%",
-            textAlign: "center"
+            textAlign: "center",
+            ...config.style ? config.style : {}
         }}>
             {0 < options.filter(item => !item.divider).length ?
                 normalized.map(item => item.divider ?
