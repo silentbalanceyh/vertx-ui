@@ -226,9 +226,10 @@ const toUnauthorized = (reference) => {
  */
 const toLoading = (consumer, seed) => {
     /*
-     * 改成 10 ms 毫秒级
+     * 改成 1 ms 毫秒级（略微加载效果）
+     * 5 倍距离
      */
-    const ms = Value.valueInt(Cv['LOADING'], 10);
+    const ms = Value.valueInt(Cv['LOADING'], 5);
     const loadingMs = seed ? seed : ms;
     setTimeout(consumer, ms * loadingMs);
 };

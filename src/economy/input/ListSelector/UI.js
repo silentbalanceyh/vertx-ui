@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from 'ux';
-import {Col, Icon, Input, Row, Table} from "antd";
+import {Col, Input, Row, Table} from "antd";
 import Op from './Op';
 
 import {Dialog} from 'web'; // 直接读取 Dialog 专用
@@ -40,11 +40,13 @@ class Component extends React.PureComponent {
         const ref = Ux.onReference(this, 1);
         let $table = Ux.clone(table);
         Ux.configScroll($table, $data.list, ref);
+        /*
+         * 处理输入框属性
+         */
+        const inputCombine = Op.yoCombine(this, inputAttrs);
         return (
             <span>
-                <Input className="ux-readonly"
-                       readOnly {...inputAttrs}
-                       suffix={<Icon type="search" onClick={onClick}/>}/>
+                <Input {...inputCombine}/>
                 <Dialog className="web-dialog"
                         size={"small"}
                         $visible={this.state['$visible']}   // 窗口是否开启

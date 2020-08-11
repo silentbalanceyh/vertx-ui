@@ -32,13 +32,13 @@ export default (reference) => {
                                         {info.system}
                                     </Col>
                                     <Col span={20}>
-                                        <Tag color={"geekblue"}>
+                                        <Tag color={"magenta"}>
                                             {info.tips}
                                         </Tag>
                                     </Col>
                                 </Row>
                                 <Row className={"row-content"}>
-                                    <Col span={20} offset={4}>
+                                    <Col span={20} offset={4} className={"op-system"}>
                                         <Checkbox.Group options={system} value={systemValues}/>
                                     </Col>
                                 </Row>
@@ -52,10 +52,19 @@ export default (reference) => {
                                     </Col>
                                 </Row>
                                 <Row>
-                                    <Col span={20} offset={4}>
-                                        <Checkbox.Group options={business} value={businessValues}
-                                                        onChange={Op.rxCheck(reference)}/>
-                                    </Col>
+                                    {(() => {
+                                        const {$heightStyle = {}} = reference.state;
+                                        const style = $heightStyle.style ? Ux.clone($heightStyle.style) : {};
+                                        style.maxHeight = $heightStyle.style.maxHeight - 258;
+                                        return (
+                                            <Col span={20} offset={4}
+                                                 className={"op-business"}>
+                                                <Checkbox.Group options={business}
+                                                                style={style} value={businessValues}
+                                                                onChange={Op.rxCheck(reference)}/>
+                                            </Col>
+                                        )
+                                    })()}
                                 </Row>
                             </div>
                         )

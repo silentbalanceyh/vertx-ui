@@ -30,6 +30,7 @@ const yiPage = (reference) => {
     state.$button = Ux.sexOp(reference, Event);
     state.$ready = true;
     state.$views = $views;
+    state.$module = "rule.list.column.definition";
     const maxHeight = Ux.toHeight(ADJUST);
     state.$heightStyle = {style: {maxHeight}};
     yiTree(reference, state)
@@ -42,7 +43,7 @@ const yuPage = (reference, virtualRef) => {
             .then(Ux.ready).then(Ux.pipe(reference));
     }
 };
-const ADJUST = 216;
+const ADJUST = 180;
 export default {
     ...Event,
     ADJUST,

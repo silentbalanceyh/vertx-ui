@@ -7,6 +7,7 @@ import renderSelected from './O.fn.selected';
  * 统一提交函数
  */
 import doRequest from './O.fn.request';
+import event from './O.event';
 
 export default {
     renderButtons,
@@ -14,4 +15,5 @@ export default {
     renderGroup,
     renderSelected,
     doRequest,
+    ...event,
 }

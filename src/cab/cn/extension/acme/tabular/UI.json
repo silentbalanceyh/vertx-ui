@@ -20,7 +20,7 @@
             "pager": "1,10",
             "sorter": "updatedAt=DESC",
             "criteria": {
-                "sigma":"PROP:app.sigma"
+                "sigma": "PROP:app.sigma"
             }
         },
         "options": {
@@ -46,8 +46,8 @@
             "tabs.list": "字典列表",
             "tabs.add": "添加字典",
             "tabs.edit": "编辑字典",
-            "identifier": "group",
-            "dynamic.op": false,
+            "identifier": "x-tabular",
+            "dynamic.op": true,
             "dynamic.column": true,
             "dynamic.switch": false,
             "op.open.add": "添加",
@@ -58,6 +58,7 @@
             "op.extra.import": "导入",
             "op.row.edit": true,
             "op.row.delete": true,
+            "op.row.view": "查看",
             "op.submit.add": "添加",
             "op.submit.save": "保存",
             "op.submit.delete": "删除",

@@ -24,7 +24,7 @@ export default (reference) => {
                 {info.name}：
             </Col>
             <Col span={4}>
-                <Tag color={"red"} style={{fontSize: 13}}>
+                <Tag color={"orange"} style={{fontSize: 13}}>
                     {$owner.name}
                 </Tag>
             </Col>

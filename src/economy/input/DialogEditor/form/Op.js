@@ -1,13 +1,13 @@
 import Ux from 'ux';
 
-const fnSaveRow = (reference) => (params) => {
+const fnSaveRow = (reference) => (params, config = {}) => {
     const request = Ux.valueRequest(params);
     /*
      * 提取 doRow 函数（必须包含）
      */
     const {doRow, $mode} = reference.props;
     if (Ux.isFunction(doRow)) {
-        if (Ux.Env.FORM_MODE.ADD === $mode) {
+        if (Ux.Env.FORM_MODE.ADD === $mode && !config.close) {
             /*
              * 添加过后（重置当前表单）
              */

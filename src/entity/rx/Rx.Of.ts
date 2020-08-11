@@ -89,11 +89,22 @@ class Of {
                 .then(response => {
                     if (Ux.isFunction(callback.success)) {
                         /* 回调处理 ！*/
-                        reference.setState({
-                            $loading: false,
-                            $submitting: false
-                        });
-                        return callback.success(response, values);
+                        const returned = callback.success(response, values);
+                        if (Promise.prototype.isPrototypeOf(returned)) {
+                            return returned.then(updated => {
+                                reference.setState({
+                                    ...updated,
+                                    $loading: false,
+                                    $submitting: false
+                                });
+                            });
+                        } else {
+                            reference.setState({
+                                $loading: false,
+                                $submitting: false
+                            });
+                            return callback.success(response, values);
+                        }
                     } else {
                         throw new Error("Sorry, you must set `success` Function！");
                     }

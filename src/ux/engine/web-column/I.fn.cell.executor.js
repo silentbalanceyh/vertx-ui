@@ -1,4 +1,4 @@
-import React, {Fragment} from "react";
+import React from "react";
 import Jsx from './I.common';
 import U from 'underscore';
 import Ut from '../../unity';
@@ -35,7 +35,7 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
     }
 };
 
-const _setEnabled = (calculated, item = {}, executor = {}) => {
+const _setEnabled = (calculated, item = {}, executor = {}, options = {}) => {
     if (Abs.isEmpty(executor)) {
         /*
          * 直接禁用
@@ -54,9 +54,26 @@ const _setEnabled = (calculated, item = {}, executor = {}) => {
                     /*
                      * 编辑按钮
                      */
-                    return true;
-                } else return calculated.deletion && "fnDelete" === item.executor;
-            } else return true;
+                    const option = options['op.row.edit'];
+                    if (undefined === option) {
+                        return true;
+                    } else {
+                        return !!option;
+                    }
+                } else if (calculated.deletion && "fnDelete" === item.executor) {
+                    /*
+                     * 删除按钮
+                     */
+                    const option = options['op.row.delete'];
+                    if (undefined === option) {
+                        return true;
+                    } else {
+                        return !!option;
+                    }
+                } else return false;
+            } else {
+                return true;
+            }
         } else {
             // 不包含的情况，直接 false
             return false;
@@ -64,7 +81,24 @@ const _setEnabled = (calculated, item = {}, executor = {}) => {
     }
 };
 
+const _setRule = (option, item = {}, record = {}) => {
+    if (item.rule) {
+        try {
+            const rule = item.rule;
+            const field = rule.field;
+            const value = record[field];
+            const replaced = rule.value[value];
+            if (replaced) {
+                Object.assign(option, replaced);
+            }
+        } catch (error) {
+        }
+    }
+}
+
 export default (reference, config, executor = {}) => (text, record) => {
+    // Executor 处理
+    const {$options = {}} = reference.props;
     const {$option = []} = config;
     const options = [];
     /*
@@ -87,6 +121,7 @@ export default (reference, config, executor = {}) => (text, record) => {
                 const option = {};
                 option[item] = true;
                 option.key = `link-vertical-${rowKey}`;
+                _setRule(option, item, record);
                 options.push(option);
             }
         }
@@ -97,10 +132,9 @@ export default (reference, config, executor = {}) => (text, record) => {
             const option = {};
             option.key = `link-${rowKey}`;
             option.text = Ut.formatExpr(item.text, record);
-            // Executor 处理
             option.enabled = _setEnabled(
                 calculated, item,
-                executor
+                executor, $options
             );
             if (option.enabled) {
                 _setExecutor(option, item, {
@@ -109,19 +143,48 @@ export default (reference, config, executor = {}) => (text, record) => {
                     executor,
                     reference,
                 });
+                _setRule(option, item, record);
                 options.push(option);
+            } else {
+                // fnEdit 切换，编辑被关闭
+                const viewText = $options['op.row.view'];
+                if ("fnEdit" === item.executor && viewText) {
+                    /*
+                     * 打开 fnEdit
+                     */
+                    option.enabled = true;
+                    option.icon = "search";
+                    option.text = viewText;
+                    _setExecutor(option, item, {
+                        text, record,
+                        config,
+                        executor,
+                        reference,
+                    });
+                    options.push(option);
+                }
             }
         }
     });
+    // 是否包含了 op.row.view 处理，先判断
+    let normalized = [];
+    if (2 === options.length) {
+        normalized = options.filter(item => !item.divider);
+    } else {
+        normalized = Abs.clone(options);
+    }
     return (
-        <Fragment>
-            {0 < options.filter(item => !item.divider).length ? options.map(item => item.divider ?
-                Jsx.jsxDivider(item.key) :     // Divider 渲染
-                (item.confirm ?
-                        Jsx.jsxConfirm(item) : // Confirm 窗口处理
-                        Jsx.jsxLink(item)      // 链接专用处理
-                )
-            ) : false}
-        </Fragment>
+        <div style={{
+            width: "100%",
+            textAlign: "center",
+            ...config.style ? config.style : {}
+        }}>
+            {0 < options.filter(item => !item.divider).length ?
+                normalized.map(item => item.divider ?
+                    Jsx.jsxDivider(item.key) :     // Divider 渲染
+                    // Confirm 窗口处理，链接专用处理
+                    (item.confirm ? Jsx.jsxConfirm(item) : Jsx.jsxLink(item))
+                ) : false}
+        </div>
     );
 }

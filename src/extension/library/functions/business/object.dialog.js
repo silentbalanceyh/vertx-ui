@@ -29,7 +29,7 @@ const saveRow = (reference) => (params = {}, config = {}) => {
     const {doRow} = reference.props;
     if (U.isFunction(doRow)) {
         const {$mode = ""} = reference.props;
-        if (Ux.Env.FORM_MODE.ADD === $mode) {
+        if (Ux.Env.FORM_MODE.ADD === $mode && !config.close) {
             /*
              * 重置当前表单
              */

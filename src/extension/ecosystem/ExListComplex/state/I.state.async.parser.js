@@ -12,6 +12,7 @@ const parseAuthorized = (reference, buttons = {}, options = {}) => {
      * Extra区域
      * Row区域
      */
+    // console.error(buttons, options);
     return Ux.promise(buttons);
 };
 /*

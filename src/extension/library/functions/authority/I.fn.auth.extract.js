@@ -13,7 +13,6 @@ const authRow = (datum = [], original = {}, config = {}) => {
                 }
             }))
         }
-
         const originalRows = original[field];
         if (originalRows) {
             // 计算原始选择行和 selectedKeys

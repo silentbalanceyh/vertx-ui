@@ -25,6 +25,7 @@ import plugins from './O.plugin.dynamic';
 
 import connect from './O.connect';
 import depend from './O.depend';
+import acl from './O.secure';
 
 export default {
     ...random,
@@ -52,5 +53,6 @@ export default {
     ...plugins,
 
     ...connect,
-    ...depend
+    ...depend,
+    ...acl
 }

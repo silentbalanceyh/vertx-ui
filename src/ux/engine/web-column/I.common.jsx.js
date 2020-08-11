@@ -1,4 +1,4 @@
-import {Divider, Popconfirm} from "antd";
+import {Divider, Icon, Popconfirm} from "antd";
 import Abs from "../../abyss";
 import React from "react";
 import Unit from '../web-unit';
@@ -46,7 +46,13 @@ export default {
     /* 分割线 */
     jsxDivider: (key) => (<Divider type={"vertical"} key={key}/>),
     /* onClick 专用链接 */
-    jsxLink: (item = {}) => item.enabled ? (<a key={item.key} onClick={item.onClick}>{item.text}</a>) : false,
+    jsxLink: (item = {}) => item.enabled ? (
+        <a key={item.key} onClick={item.onClick}
+           className={item.icon ? "ux-link-icon" : ""}>
+            {item.icon ? <Icon type={item.icon}/> : false}
+            {item.text}
+        </a>
+    ) : false,
     /* onConfirm 专用 */
     jsxConfirm: (item = {}) => item.enabled ? (
         <Popconfirm key={item.key} title={item.confirm}

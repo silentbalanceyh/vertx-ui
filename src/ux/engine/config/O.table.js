@@ -117,8 +117,21 @@ const configExecutor = (reference, executors) => {
     }
     return executor;
 };
+const configExecutors = (reference, executors) => {
+    const events = {};
+    Object.keys(executors)
+        .filter(key => U.isFunction(executors[key]))
+        .forEach(key => {
+            const target = executors[key](reference);
+            if (U.isFunction(target)) {
+                events[key] = target;
+            }
+        });
+    return events;
+}
 export default {
     configColumn,
     configTable,
-    configExecutor
+    configExecutor,
+    configExecutors,
 }

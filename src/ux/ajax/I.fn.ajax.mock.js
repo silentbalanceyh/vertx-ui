@@ -6,8 +6,18 @@ import U from 'underscore';
 import Log from "../develop/logger";
 import Ut from "../unity";
 
-const calculateKey = (request) => {
-    const api = request.url;
+const calculateKey = (request, params) => {
+    let api = request.url;
+    {
+        Abs.itObject(params, (k, v) => {
+            // 还原将 key / id 全部处理掉，处理路径参数
+            if ("key" === k || "id" === k) {
+                if (0 < api.indexOf(v)) {
+                    api = api.replace(v, `:${k}`);
+                }
+            }
+        })
+    }
     const method = request.method;
     const regex = new RegExp(Cv['ENDPOINT'], "g");
     let path = api.replace(regex, "").replace(/\//g, '_');
@@ -73,7 +83,7 @@ export default async (request = {}, params = {}, executor = {}) => {
         return await executor();
     };
     if (Cv.MOCK && Cv.DEBUG) {
-        const mockKey = calculateKey(request);
+        const mockKey = calculateKey(request, params);
         /*
          * 检查是否开启了mock
          */

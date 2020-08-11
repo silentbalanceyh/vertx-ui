@@ -4,7 +4,8 @@
             "key": "$opSave",
             "text": "保存",
             "icon": "save",
-            "type": "primary"
+            "type": "primary",
+            "id": "$opSaveForm"
         }
     ],
     "_modal": {
@@ -38,5 +39,23 @@
         "business": "业务属性：",
         "tips": "系统属性不可见，所以不可设置`字段控制`。",
         "all": "全选"
+    },
+    "_page": {
+        "access": {
+            "checkedChildren": "可访问",
+            "unCheckedChildren": "不可访问"
+        },
+        "radio": [
+            {
+                "key": "optEdit",
+                "label": "可编辑",
+                "value": true
+            },
+            {
+                "key": "optView",
+                "label": "只读",
+                "value": false
+            }
+        ]
     }
 }

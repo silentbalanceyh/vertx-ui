@@ -151,6 +151,15 @@ const yiPage = (reference) => Ex.yiStandard(reference).then(state => {
                 }
             })
             middle.$source = $source;
+            {
+                const $treeBusiness = {};
+                $treeBusiness.checkable = true;
+                $treeBusiness.selectable = false;
+                $treeBusiness.onCheck = Ux.rxCheckedTree(reference, $source.business);
+                $treeBusiness.treeData = $source.business;
+                $treeBusiness.defaultExpandAll = true;
+                middle.$treeBusiness = $treeBusiness;
+            }
             return Ux.promise(middle);
         }).then(processed => {
             const maxHeight = Ux.toHeight(ADJUST);

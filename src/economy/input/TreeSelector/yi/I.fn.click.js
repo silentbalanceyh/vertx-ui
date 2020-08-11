@@ -14,7 +14,6 @@ export default (reference, config = {}) => event => {
      * 解析Ajax参数信息
      */
     const params = Ux.xtLazyAjax(reference, config);
-    const {engine = true} = config.ajax;
     Ux.asyncData(config.ajax, params,
         ($data) => {
             $data = Ux.clone($data);
@@ -22,7 +21,13 @@ export default (reference, config = {}) => event => {
              * 未使用查询引擎的情况，判断 config.exclude
              * 执行客户端过滤，一般选择父节点时候不允许选择当前节点
              */
-            if (!engine && config.exclude) {
+            if (Ux.isObject($data) && Ux.isArray($data.list)) {
+                $data = $data.list;
+            }
+            /*
+             * 去掉 config.exclude 模式
+             */
+            if (config.exclude) {
                 const ref = Ux.onReference(reference, 1);
                 const except = Ux.parseAjax({key: config.exclude}, ref);
                 $data = $data.filter(item => except.key !== item.key);

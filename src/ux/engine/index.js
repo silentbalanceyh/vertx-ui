@@ -19,6 +19,7 @@ import webOp from './web-op';
 import functions from './functions';
 // 特殊方法处理布局
 import Lt from './layout';
+import Rft from './raft';
 
 export default {
     ...datum,
@@ -35,5 +36,6 @@ export default {
     ...webField,
     ...webColumn,
     ...webOp,
-    aiLayout: Lt.aiLayout
+    aiLayout: Lt.aiLayout,
+    Nr: Rft.Normalizer,
 }

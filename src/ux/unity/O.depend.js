@@ -96,7 +96,7 @@ const isDepend = (depend = {}, reference) => {
  * @param {Object} jsx 对应表单配置 optionJsx。
  * @param {ReactComponent} reference React组件引用。
  */
-const writeDisabled = (jsx = {}, reference) => {
+const writeDisabled = (reference, jsx = {}) => {
     const {depend = {}} = jsx;
     const {mode = "DISABLED"} = Abs.clone(depend);
     if ("DISABLED" === mode) {
@@ -354,6 +354,10 @@ const _edition = (reference, optionJsx = {}, field) => {
  */
 const writeSegment = (reference, optionJsx = {}, field) => {
     /*
+     * 先计算 disabled，外层就只调用一次
+     */
+    writeDisabled(reference, optionJsx);
+    /*
      * 默认值为 true
      */
     const $edition = _edition(reference, optionJsx, field);
@@ -373,10 +377,41 @@ const writeSegment = (reference, optionJsx = {}, field) => {
         optionJsx.readOnly = true;
     }
 };
+/**
+ * ## 标准函数
+ *
+ * @memberOf module:_ant
+ * @param {Object} optionConfig 生效配置
+ * @param {Object} optionJsx 生效配置
+ * @param {Object} cell 当前单元格的专用配置（原始配置）
+ */
+const writeInitial = (optionConfig = {}, optionJsx = {}, cell = {}) => {
+
+    if (optionJsx['disabled']) {
+        if ("aiCheckbox" === cell.render) {
+            /*
+             * aiCheckbox
+             */
+            /*
+             * 修正两个值
+             * optionConfig.initialValue
+             * optionJsx['data-initial']
+             */
+            optionConfig.initialValue = undefined;
+            optionJsx['data-initial'] = undefined;
+        } else if ("aiSelect" === cell.render) {
+            /*
+             * aiSelect
+             * 因为不会呈现值，所以只能使用 placeholder 代替
+             */
+            optionJsx.placeholder = optionConfig.initialValue;
+        }
+    }
+}
 export default {
     writeLinker,
     writeImpact,
-    writeDisabled,
     writeReadOnly,
     writeSegment,
+    writeInitial,
 }

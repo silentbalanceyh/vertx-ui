@@ -118,11 +118,16 @@ const authData = (configuration = {}, items = [], views = []) => {
             if (original.projection) projection.datum = original.projection;
             if (original.criteria) criteria.datum = original.criteria;
         }
-        config[resourceId] = {
+        const configItem = {
             rows,
             criteria,
             projection
-        };
+        }
+        // 增加新维度（visitant）
+        if (viewMap[resourceId]) {
+            configItem.visitant = viewMap[resourceId].visitant;
+        }
+        config[resourceId] = configItem;
     });
     const segment = {};
     const selected = new Set();

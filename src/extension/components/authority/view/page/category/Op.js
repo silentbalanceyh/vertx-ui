@@ -20,7 +20,15 @@ const yiPage = (reference) => {
      * 调用顶层方法执行分类
      */
     reference.setState(state);
-    if ($keySet) Ux.fn(reference).rxTree(Array.from($keySet));
+    if ($keySet) {
+        Ux.fn(reference).rxTree(Array.from($keySet), {
+            // 按钮特殊状态
+            $selected: {
+                // 特殊
+                "rule.category.definition": true,
+            }
+        });
+    }
 }
 export default {
     yiPage
