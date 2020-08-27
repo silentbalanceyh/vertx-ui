@@ -103,7 +103,7 @@ class Of {
                                 $loading: false,
                                 $submitting: false
                             });
-                            return callback.success(response, values);
+                            // return callback.success(response, values);
                         }
                     } else {
                         throw new Error("Sorry, you must set `success` Function！");

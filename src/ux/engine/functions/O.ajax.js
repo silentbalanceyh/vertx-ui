@@ -60,6 +60,12 @@ const seekData = (state, key, data = [], clientSort) => {
         dataResult = data;
     } else {
         /*
+         * 另外一种返回 {rows/total} --ops的格式，list/count格式前处理
+         */
+        if (U.isArray(data.rows)) {
+            dataResult = data.rows;
+        }
+        /*
          * 另外一种返回 {list/count}
          */
         if (U.isArray(data.list) && 0 < data.count) {
