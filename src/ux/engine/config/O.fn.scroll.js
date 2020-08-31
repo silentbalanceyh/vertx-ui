@@ -1,85 +1,54 @@
 import U from 'underscore';
 import moment from 'moment';
-import Abs from '../../abyss';
 import Ele from '../../element';
 import Ut from '../../unity';
 import Rx from '../expression';
-/*
- * 像素转换：12px
- */
-const widthString = (input) => {
-    let length = 0;
-    if ("string" !== typeof input) {
-        return 0;
-    }
-    for (let idx = 0; idx < input.length; idx++) {
-        const str = String(input.charAt(idx));
-        if (Abs.isCn(str)) {
-            // 中文字符长度
-            length += 28;
-        } else {
-            // 英文字符长度
-            length += 14;
-        }
-    }
-    return length;
-    /*
-    if (Abs.isCn(input)) {
-        return input.length * px * 2;
-    } else {
-        return input.length * px;
-    }*/
+import Wd from './O.fn.scroll.width';
+
+const widthObject = (titleWidth = 0, column = {}, data = []) => {
+    const textWidth = Wd.widthMax(data, column.dataIndex, Wd.widthObject);
+    return titleWidth > textWidth ? titleWidth : textWidth;
+}
+const widthArray = (titleWidth = 0, column = {}, data = []) => {
+    const textWidth = Wd.widthMax(data, column.dataIndex,
+        Wd.widthArray, column // 传入 column 引用，如果是 Array 可能会被更改
+    );
+    return titleWidth > textWidth ? titleWidth : textWidth;
+}
+const widthText = (titleWidth = 0, column = {}, data = []) => {
+    const textWidth = Wd.widthMax(data, column.dataIndex,
+        Wd.widthMix, column // 传入 column 引用，如果是 Array 可能会被更改
+    );
+    return titleWidth > textWidth ? titleWidth : textWidth;
 };
-const widthData = (data = [], field = "") => {
-    let defaultWidth = 0;
-    data.forEach(record => {
-        const literal = record[field];
-        let calculated = 0;
-        if (literal) {
-            calculated = widthString(literal);
-        } else {
-            calculated = widthString(record);
-        }
-        if (defaultWidth < calculated) {
-            defaultWidth = calculated;
-        }
-    });
-    return defaultWidth;
+const widthMapping = (titleWidth = 0, column = {}, data = []) => {
+    const mapping = Object.keys(column['$mapping'])
+        .map(key => column['$mapping'][key]);
+    const textWidth = Wd.widthOption(mapping);
+    return titleWidth > textWidth ? titleWidth : textWidth;
 };
-const widthTitle = (title = "", column = {}) => {
-    let titleWidth = widthString(title);
-    if (column.sorter) {
-        titleWidth += 32;
-    }
-    if (column.hasOwnProperty("$filter")) {
-        titleWidth += 32;
-    }
-    return titleWidth;
-};
-// --------------- 分界线 ---------------
 const widthExecutor = (titleWidth = 0, column = {}, data = []) => {
     let width = 0;
     if (U.isArray(column['$option'])) {
+        /*
+         * 多个按钮操作
+         */
         column['$option'].forEach(opt => {
             if ("divider" === opt) {
+                /*
+                 * 分隔符操作
+                 */
                 width += 10;
             } else {
-                const single = widthString(opt.text);
+                /*
+                 * 计算每一个的文字，累加
+                 */
+                const single = Wd.widthWord(opt.text);
                 width += single;
             }
         })
     }
     return titleWidth > width ? titleWidth : width;
-};
-const widthText = (titleWidth = 0, column = {}, data = []) => {
-    const textWidth = widthData(data, column.dataIndex);
-    return titleWidth > textWidth ? titleWidth : textWidth;
-};
-const widthLogical = (titleWidth = 0, column = {}, data = []) => {
-    const mapping = Object.keys(column['$mapping'])
-        .map(key => column['$mapping'][key]);
-    const textWidth = widthData(mapping);
-    return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthUser = (titleWidth = 0, column = {}, data = []) => {
     const textWidth = 144;      // 创建人默认（一个图标 + 4个字）
@@ -93,7 +62,7 @@ const widthDate = (titleWidth = 0, column = {}, data = []) => {
         .map(value => Ele.valueTime(value, format))
         .filter(moment.isMoment)
         .map(value => value.format(format))
-        .map(widthString)
+        .map(Wd.widthWord)
         .forEach(current => {
             if (textWidth < current) {
                 textWidth = current;
@@ -111,7 +80,7 @@ const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {
         .map(text => Ele.elementUnique(source, value, text))
         .filter(found => !!found)
         .map(found => Ut.valueExpr(display, found, true))
-        .map(found => widthString(found))
+        .map(Wd.widthWord)
         .forEach(current => {
             if (textWidth < current) {
                 textWidth = current; // 暂时使用固定值，防止越界
@@ -123,10 +92,13 @@ const FUNS = {
     "EXECUTOR": widthExecutor,
     "TEXT": widthText,
     "INPUT": widthText,
-    "LOGICAL": widthLogical,
+    "LOGICAL": widthMapping,
+    "MAPPING": widthMapping,
     "USER": widthUser,
     "DATE": widthDate,
     "DATUM": widthDatum,
+    "OBJECT": widthObject,
+    "ARRAY": widthArray,
 };
 /**
  * ## 引擎函数
@@ -170,7 +142,7 @@ export default ($table = {}, data = [], reference) => {
         } else {
             const executor = FUNS[rdType];
             if (U.isFunction(executor)) {
-                const titleWidth = widthTitle(rdTitle, column);
+                const titleWidth = Wd.widthTitle(rdTitle, column);
                 const calculated = executor(titleWidth, column, data, reference);
                 if (0 < calculated) {
                     /*
@@ -199,6 +171,7 @@ export default ($table = {}, data = [], reference) => {
          */
         report[rdTitle] = rdType + "," + width + `,` + column.width + "," + adjust; // column.width;
     });
+    // console.error(report);
     /*
      * 可支持的最大宽度
      * 未配置 scroll 的时候计算，配置了就不用计算了

@@ -78,6 +78,7 @@ const messageFailure = (content = "", duration = 1.628) => {
  */
 const messageCatch = (error = {}, callback) => {
     const {data = {}} = error;
+    console.error(error);   // 调试专用
     if (data.info) {
         messageFailure(data.info, 2);
     } else {

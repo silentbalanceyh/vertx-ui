@@ -4,7 +4,6 @@ import React from "react";
 
 import ExNavigation from '../ExNavigation/UI';
 import ExSider from '../ExSider/UI';
-
 import './Cab.less';
 
 const {Content} = Layout;

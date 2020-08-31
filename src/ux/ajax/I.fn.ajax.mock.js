@@ -8,7 +8,8 @@ import Ut from "../unity";
 
 const calculateKey = (request, params) => {
     let api = request.url;
-    {
+    // 去掉 FormData 类型的数据
+    if (!FormData.prototype.isPrototypeOf(params)) {
         Abs.itObject(params, (k, v) => {
             // 还原将 key / id 全部处理掉，处理路径参数
             if ("key" === k || "id" === k) {

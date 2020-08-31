@@ -187,6 +187,29 @@ textarea {
     }
 }
 
+.ux-ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.ux-table {
+    &-nested {
+        border-collapse: collapse !important;
+        border: dotted 1px @theme-main;
+
+        th, td {
+            padding: 0 12px !important;
+            border-left: dotted 1px @theme-main;
+            border-right: dotted 1px @theme-main;
+        }
+
+        th {
+            border-bottom: dotted 1px @theme-main;
+        }
+    }
+}
+
 .ux-addon {
     &-after {
         .ant-input-group-addon {
