@@ -25,7 +25,9 @@ const asyncMagic = (config = {}, reference) => {
     }
     const {method = "GET", uri} = config;
     if (uri) {
-        const {dataKey} = config;
+        const {
+            response, // 提取数据专用的字段对应的值
+        } = config;
         let promise;
         if ("GET" === method) {
             promise = Ajax.ajaxGet(uri, parsed);
@@ -41,8 +43,23 @@ const asyncMagic = (config = {}, reference) => {
             }
             promise = Ajax.ajaxPost(uri, params);
         }
-        if (dataKey) {
-            return promise.then(response => Abs.promise(response[dataKey]));
+        if (response) {
+            const {key, data} = response;
+            /*
+             * 提取数据
+             */
+            return promise.then(ajaxResult => {
+                let dataArray = [];
+                dataArray = data ? ajaxResult[data] : ajaxResult;
+                if (key && Abs.isArray(dataArray)) {
+                    dataArray.forEach(item => {
+                        if (!item.key) {
+                            item.key = item[key];
+                        }
+                    });
+                }
+                return Abs.promise(dataArray);
+            })
         } else {
             return promise;
         }

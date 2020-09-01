@@ -88,7 +88,11 @@ class Of {
             return promise(values)
                 .then(response => {
                     if (Ux.isFunction(callback.success)) {
-                        /* 回调处理 ！*/
+                        /*
+                         * 回调处理
+                         * 1）第一种回调是 success 是一个 promise，执行完成过后，调用 then 方法来执行后续操作
+                         * 2）第二种回调是 success 是一个纯函数 Function，执行完成后返回 {}，就触发 setState 操作
+                         **/
                         const returned = callback.success(response, values);
                         if (Promise.prototype.isPrototypeOf(returned)) {
                             return returned.then(updated => {
@@ -99,11 +103,15 @@ class Of {
                                 });
                             });
                         } else {
-                            reference.setState({
-                                $loading: false,
-                                $submitting: false
-                            });
-                            return callback.success(response, values);
+                            const merged = Ux.isObject(returned) ? returned : {};
+                            if (Ux.isObject(returned)) {
+                                reference.setState({
+                                    ...merged,
+                                    $loading: false,
+                                    $submitting: false
+                                });
+                            }
+                            // return callback.success(response, values);
                         }
                     } else {
                         throw new Error("Sorry, you must set `success` Function！");

@@ -344,7 +344,8 @@ module.exports = {
                                 javascriptEnabled: true,
                                 modifyVars: {
                                     "@primary-color": process.env.Z_CSS_COLOR,
-                                    "@app": process.env.Z_CSS_PREFIX
+                                    "@app": process.env.Z_CSS_PREFIX,
+                                    "@font-size-base": process.env.Z_CSS_FONT ? process.env.Z_CSS_FONT : "14px"
                                 }
                             }
                         }
