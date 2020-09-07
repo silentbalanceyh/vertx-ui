@@ -21,17 +21,14 @@ function rxResize(reference) {
     if (2 === arguments.length) {
         // 第二种用法
         return () => {
-            const maxHeight = T.toHeight("number" === typeof arguments[1] ? arguments[1] : 0);
-            let $heightStyle = {style: {maxHeight}};
-            reference.setState({$heightStyle});
+            const state = T.toHeightState(arguments[1]);
+            reference.setState(state);
         }
     } else {
         // 目前存在的用法
         return (adjust = 0) => {
-            const maxHeight = T.toHeight("number" === typeof adjust ?
-                adjust : 0);
-            let $heightStyle = {style: {maxHeight}};
-            reference.setState({$heightStyle});
+            const state = T.toHeightState(adjust);
+            reference.setState(state);
         };
     }
 }

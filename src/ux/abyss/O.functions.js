@@ -27,30 +27,43 @@ const generator = (reference, names = []) => {
 }
 export default (reference) => generator(reference, [
     /* Ant 系列 */
-    "onChange",
+    "onChange",      // 变更
+    "onSelect",      // 选择
+
     /* Rx 系列 */
-    "rxSource",
-    "rxSubmit",
-    "rxClose",
-    "rxFilter",
-    "rxTree",
+    "rxSource",      // 读取数据源
+    "rxSubmit",      // 提交
+    "rxClose",       // 关闭
+    "rxFilter",      // 过滤
+    "rxSelect",      // 选择
+    "rxTree",        // 树操作
+    "rxChild",       // 绑定子组件专用方法
+    /* Drop 和 Drag */
+    "rxDropOver",    // 拖拽时放在上方
 
     /* rx特殊模式 */
+    /* 页码处理专用 */
+    "rxBack",        // 返回
+    "rxJumpPage",    // 跳页
     "rxNext",        // 下一步
     "rxNextPage",    // 下一页
     "rxPrev",        // 上一步
     "rxPrevPage",    // 上一页
     "rxFirst",       // 第一步
-    "rxFirstPage",   // 第一页
     "rxLast",        // 最后一步
+    "rxFirstPage",   // 第一页
     "rxLastPage",    // 最后一页
+
+    /* 增删改 */
     "rxAdd",         // 添加
     "rxEdit",        // 编辑
     "rxDelete",      // 删除
     "rxRefresh",     // 刷新
-    "rxBack",        // 返回
+    "rxItemEdit",    // 子项编辑
+    "rxItemAdd",     // 子项添加
+    "rxItemDelete",  // 子项删除
 
-    "rxChild",       // 绑定子组件专用方法
+
     /* Designer 系列 */
     "rxRowAdd",     // 添加行
     "rxRowDel",     // 删除行
@@ -58,6 +71,7 @@ export default (reference) => generator(reference, [
     "rxRowCompress",// 行压缩
     "rxRowWrap",    // 交换行
     "rxRowConfig",  // 行配置，写入顶层的 raft
+
     /* 单元格系列 */
     "rxCellAdd",    // 添加单元格
     "rxCellMerge",  // 合并单元格

@@ -57,17 +57,22 @@ const widthUser = (titleWidth = 0, column = {}, data = []) => {
 const widthDate = (titleWidth = 0, column = {}, data = []) => {
     let textWidth = 0;
     const format = column['$format'];
-    data.map(record => record[column.dataIndex])
-        .filter(value => !!value)
-        .map(value => Ele.valueTime(value, format))
-        .filter(moment.isMoment)
-        .map(value => value.format(format))
-        .map(Wd.widthWord)
-        .forEach(current => {
-            if (textWidth < current) {
-                textWidth = current;
-            }
-        });
+    if (0 < data.length) {
+        data.map(record => record[column.dataIndex])
+            .filter(value => !!value)
+            .map(value => Ele.valueTime(value, format))
+            .filter(moment.isMoment)
+            .map(value => value.format(format))
+            .map(Wd.widthWord)
+            .forEach(current => {
+                if (textWidth < current) {
+                    textWidth = current;
+                }
+            });
+    } else {
+        // 修正无数据的最小日期格式
+        textWidth = Wd.widthWord(format);
+    }
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {

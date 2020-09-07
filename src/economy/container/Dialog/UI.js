@@ -1,6 +1,6 @@
 import React from 'react';
 import './Cab.less';
-import {Modal} from 'antd';
+import {Button, Modal} from 'antd';
 import Ux from 'ux';
 import U from 'underscore';
 
@@ -80,6 +80,21 @@ class Component extends React.PureComponent {
             if ($footer) {
                 // 可定制页脚
                 config.footer = $footer;
+            } else {
+                /*
+                 * 不定制按钮界面，如果配置为 null，则只显示 type = primary 的关闭按钮
+                 * 第二个配置
+                 * "订单详细信息,,关闭,false,960,true,$opClose"
+                 * 整个数组中的第二个按钮为 null 时就只保留单个按钮
+                 */
+                if (!config.okText) {
+                    config.footer = (
+                        <Button type={"primary"} onClick={config.onCancel}
+                                loading={$loading}>
+                            {config.cancelText}
+                        </Button>
+                    )
+                }
             }
             return (
                 <Modal {...config} visible={$visible} className={className}>

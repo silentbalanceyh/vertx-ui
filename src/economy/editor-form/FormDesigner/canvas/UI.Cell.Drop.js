@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
         const sourceItem = this.props['dragItem'];
         if (!Op.itemCellSame(sourceItem, targetItem)) {
             const {reference} = this.props;
-            Op.dropColor(reference, this.props['isOver']);
+            Ux.dndDropColor(reference, this.props['isOver']);
         }
     }
 

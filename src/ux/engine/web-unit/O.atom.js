@@ -153,6 +153,7 @@ const aiEmpty = (size = 30) => (
         <Empty/>
     </div>
 );
+
 export default {
     aiIcon,     // 图标解析
     aiUrl,      // 路由表地址解析

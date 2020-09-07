@@ -103,5 +103,13 @@ export default {
         ARRAY_MAP: "ARRAY_MAP",
         ARRAY_PURE: "ARRAY_PURE",
         ARRAY_GROUP: "ARRAY_GROUP"
-    }
+    },
+    /**
+     * ## 常量
+     *
+     * 元素处理专用
+     *
+     * 特殊元素
+     */
+    ELE: {}
 };

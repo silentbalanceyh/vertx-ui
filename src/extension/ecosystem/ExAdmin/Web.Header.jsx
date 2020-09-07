@@ -9,7 +9,7 @@ export default (ref, {
     icon,
     fnCollapse
 }) => (
-    <Header className="ux-header">
+    <Header className="ux-header" id={"__ELE_HEADER"}>
         <Icon className="trigger"
               type={icon}
               onClick={fnCollapse}

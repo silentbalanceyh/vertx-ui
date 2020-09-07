@@ -38,9 +38,26 @@ const rxExpr = (reference, value, config) => {
     let formatted;
     const fnExpr = (input) => {
         let literal = input;
-        if (config.expr && !config.table) {
-            // 只有配置了格式化的才可以如此，并且不能是表格模式
-            literal = Ux.formatExpr(config.expr, {value: input}, true);
+        if (!config.table) {
+            if (config.expr) {
+                // 只有配置了格式化的才可以如此，并且不能是表格模式
+                literal = Ux.formatExpr(config.expr, {value: input}, true);
+            } else if (config.currency) {
+                // 判断 currency 配置
+                if ("string" === typeof config.currency) {
+                    // 默认左单位
+                    literal = `${config.currency}${Ux.formatCurrency(literal)}`;
+                } else if (Ux.isObject(config.currency)) {
+                    const {unit = "￥", right = false} = config.currency;
+                    if (right) {
+                        // 右边单位
+                        literal = `${Ux.formatCurrency(literal)}${unit}`;
+                    } else {
+                        // 左边单位
+                        literal = `${unit}${Ux.formatCurrency(literal)}`;
+                    }
+                }
+            }
         }
         return literal;
     }

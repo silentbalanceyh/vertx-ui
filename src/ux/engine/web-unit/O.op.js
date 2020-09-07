@@ -22,13 +22,18 @@ const aiOpLeft = (reference, buttons = [], disabled = {}) => {
                         $item.loading = $submitting;
                     }
                 }
-                /*
-                 * 按钮处理
-                 */
-                const {text, ...rest} = $item;
-                if (disabled && disabled.hasOwnProperty($item.key)) {
-                    $item.disabled = disabled[$item.key];
+                if (disabled) {
+                    if (Abs.isObject(disabled)) {
+                        if (disabled.hasOwnProperty($item.key)) {
+                            $item.disabled = disabled[$item.key];
+                        }
+                    } else if (true === disabled) {
+                        $item.disabled = disabled;
+                    }
+                } else {
+                    $item.disabled = false;
                 }
+                const {text, ...rest} = $item;
                 return (
                     <Button {...rest}>{text}</Button>
                 )

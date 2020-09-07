@@ -8,6 +8,7 @@ import form from './O.ant.form';
 import element from './O.element';
 import redux from './O.redux';
 import tree from './O.tree';
+import listener from './O.listener'
 
 export default {
     ...redux,
@@ -20,4 +21,5 @@ export default {
     ...form,
     ...element,
     ...tree,
+    ...listener
 }

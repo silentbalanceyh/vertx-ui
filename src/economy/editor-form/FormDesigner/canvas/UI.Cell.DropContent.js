@@ -62,7 +62,7 @@ class Component extends React.PureComponent {
     state = {}
 
     componentDidUpdate(prevProps, prevState, snapshot) {
-        Op.dropColor(this, this.props['isOver']);
+        Ux.dndDropColor(this, this.props['isOver']);
     }
 
     render() {

@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Cmd from "../library";
 import fnForbidden from './I.drop.forbidden';
 import fnRaft from './I.drop.raft'
 
@@ -28,7 +27,7 @@ const dropExecute = (reference, config, render) => {
 const targetSpec = {
     drop: (props, monitor, component) => {
         // 关闭覆盖效果
-        Cmd.dropColor(component, false);
+        Ux.dndDropColor(component, false);
         // 判断是否可以放入
         const {render} = monitor.getItem();
         fnForbidden(component, render, () => {
@@ -57,7 +56,7 @@ const targetSpec = {
     },
     /* 浮游在 Target 之上 */
     hover: (props, monitor, component) => {
-        Cmd.dropColor(component, monitor.isOver());
+        Ux.dndDropColor(component, monitor.isOver());
     }
 };
 const targetConnect = (connect, monitor) => {

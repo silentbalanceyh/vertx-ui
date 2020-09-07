@@ -125,6 +125,25 @@ const elementUnique = (array = [], field = "", value, targetField) => {
 /**
  * ## 标准函数
  *
+ * 防御式读取数组的第一个元素，可读取某个字段值
+ *
+ * @param {Array} array 输入的数组信息
+ * @param {String} field 读取的字段名
+ * @returns {any} 返回任意值
+ */
+const elementFirst = (array = [], field) => {
+    const target = array[0];
+    if (target) {
+        if (Abs.isObject(target)) {
+            return field ? target[field] : undefined;
+        } else {
+            return target;
+        }
+    }
+}
+/**
+ * ## 标准函数
+ *
  * 针对数组的查找操作，查找符合 filters 条件的数组，内部使用该函数的代码
  *
  * ```js
@@ -499,6 +518,7 @@ export default {
     elementWrap,
     elementIndex,
     elementUnique,
+    elementFirst,
     elementFind,
     elementVertical,
     elementMap,

@@ -27,6 +27,8 @@ import connect from './O.connect';
 import depend from './O.depend';
 import acl from './O.secure';
 
+import dragDrop from './O.drag.and.drop';
+
 export default {
     ...random,
     ...html,
@@ -54,5 +56,7 @@ export default {
 
     ...connect,
     ...depend,
-    ...acl
+    ...acl,
+
+    ...dragDrop
 }

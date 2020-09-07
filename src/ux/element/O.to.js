@@ -101,13 +101,12 @@ const toJson = (input) => {
  *
  * 设置 moment 对象中的固定时间信息（设置时、分、秒），根据 `timeStr` 进行日期格式解析。
  *
- * @deprecated
  * @memberOf module:_to
  * @param {Moment} momentValue 被转换的合法的 moment 对象。
  * @param {String} timeStr 传入的合法日期时间格式。
  * @return {Moment} 返回一个合法的 moment 对象。
  */
-const toTimeFixed = (momentValue, timeStr) => {
+const toTime = (momentValue, timeStr) => {
     if (moment.isMoment(momentValue) && "string" === typeof timeStr) {
         /*
          * Time
@@ -126,7 +125,7 @@ const toTimeFixed = (momentValue, timeStr) => {
 };
 export default {
     toJson,
-    toTimeFixed,
+    toTime,
     Moment: (input = {}, config = {}) => ({
         to: (...fields) => Moment.to.apply(null, [input, config].concat(fields)),
         from: (...fields) => Moment.from.apply(null, [input, config].concat(fields))

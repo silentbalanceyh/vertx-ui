@@ -35,7 +35,7 @@ const configDialog = (reference, config = {}) => {
      */
     const $config = Abs.clone($dialog);
     /*
-     * onOk按钮
+     * onOk按钮（可以不包含 onOk）
      */
     if ("string" === typeof $config.onOk) {
         $dialog.__onOk = $config.onOk;

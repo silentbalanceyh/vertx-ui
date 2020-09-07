@@ -1,6 +1,7 @@
 import Cv from "../../constant";
 import Ele from '../../element';
 import Abs from "../../abyss";
+import toHeight from './O.to.fn.height';
 
 /**
  * ## 标准函数
@@ -80,29 +81,6 @@ const toGridSpan = (columns = 4, index = 0) => {
     }
     return attrs;
 }
-/**
- * ## 标准函数
- *
- * 根据修正宽度计算组件最大高度信息，按分辨率智能切换。
- *
- * @memberOf module:_to
- * @param {Number} adjust 修正高度值。
- * @returns {number} 返回最终计算的页面高度值。
- */
-const toHeight = (adjust = 0) => {
-    const height = document.body.clientHeight;
-    const width = document.body.clientWidth;
-    let maxHeight = height;
-    if (1024 < width && width <= 1400) {
-        // 直接计算（郑州项目）
-        maxHeight = height - 48 - adjust;
-    } else if (1400 < width && width < 1900) {
-        maxHeight = height - 72 - adjust;
-    } else if (1900 < width) {
-        maxHeight = height - 96 - adjust;
-    }
-    return maxHeight;
-};
 /**
  * ## 标准函数
  *
@@ -273,8 +251,40 @@ const toPagination = (data = {}, query = {}, config = {}) => {
     Object.assign(pagination, config);
     return pagination;
 }
+/**
+ * ## 标准函数
+ *
+ * 高度修正专用的状态生成器：
+ *
+ * ```json
+ * {
+ *     $heightStyle: {
+ *          style: {
+ *              maxHeight
+ *          }
+ *     },
+ *     $heightValue: number
+ * }
+ * ```
+ *
+ * @memberOf module:_to
+ * @param {Number} adjust 修正高度值。
+ * @returns {Object} 返回最终状态的数据结构
+ */
+const toHeightState = (adjust) => {
+    const maxHeight = toHeight("number" === typeof adjust ? adjust : 0);
+    const state = {};
+    state.$heightStyle = {
+        style: {
+            maxHeight
+        }
+    }
+    state.$heightValue = maxHeight;
+    return state;
+}
 export default {
     toHeight,
+    toHeightState,
     toGrid,
     toGridSpan,
     toMessage,
