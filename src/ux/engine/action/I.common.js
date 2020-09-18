@@ -68,5 +68,5 @@ export default {
     exprReset,
     exprSubmit,
     exprUniform,
-    performFn,
+    performFn
 }

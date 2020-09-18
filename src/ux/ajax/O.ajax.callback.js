@@ -20,7 +20,10 @@ import Msg from './O.ajax.message';
  * @param {boolean} redux 是否开启了 redux 数据流
  */
 const ajaxEnd = (reference, redux) => () => {
-    reference.setState({$loading: false});
+    reference.setState({
+        $loading: false,
+        $submitting: false
+    });
     /*
      * 专用处理
      */

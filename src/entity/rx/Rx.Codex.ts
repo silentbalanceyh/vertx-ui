@@ -1,6 +1,76 @@
 // @ts-ignore
 import Ux from 'ux';
 
+const toReplace = (record = {}, input: any = {}) => {
+    const {config = {}, field} = input;
+    const {fromValue, toValue} = config;
+    // 每一个
+    if (fromValue && toValue) {
+        const pendingValue = record[field];
+        if (pendingValue && pendingValue === fromValue) {
+            record[field] = toValue;
+        }
+    }
+    return record;
+}
+const toArray = (record = {}, input: any = {}) => {
+    const {field, config = {}} = input;
+    let fields = [];
+    if (!Ux.isArray(field)) {
+        fields.push(field);
+    } else {
+        fields = fields.concat(field);
+    }
+    fields.forEach(field => {
+        if (record[field]) {
+            let normalized = [];
+            if ("string" === typeof record[field]) {
+                try {
+                    normalized = JSON.parse(record[field])
+                } catch (error) {
+                }
+            } else {
+                normalized = record[field];
+            }
+            const {valueField = [], valueMap = {}} = config;
+            // 过滤
+            const filtered = [];
+            normalized.forEach(each => {
+                const filteredItem = {};
+                valueField.forEach(field => {
+                    const fieldUi = valueMap[field];
+                    if (fieldUi) {
+                        filteredItem[fieldUi] = each[field]
+                    } else {
+                        filteredItem[field] = each[field];
+                    }
+                });
+                filtered.push(filteredItem);
+            });
+            record[field] = filtered;
+        }
+    })
+    return record;
+}
+
+const EXECUTOR = {
+    "REPLACE": toReplace,
+    "ARRAY": toArray,
+}
+
+const toUniform = (record, done: any = {}) => {
+    if (done.type && done.field) {
+        const {config} = done;
+        const executor = EXECUTOR[done.type];
+        if (Ux.isFunction(executor)) {
+            return executor(record, {
+                config,
+                field: done.field,
+            });
+        }
+    }
+}
+
 class Rule {
     private _type;
     private _fnCond: Function;
@@ -8,7 +78,7 @@ class Rule {
 
     constructor(input: any) {
         if (input) {
-            const {type, where, done} = input;
+            const {type, where} = input;
             if (type) {
                 this._type = type;
             }
@@ -28,18 +98,9 @@ class Rule {
             }
             // 执行函数
             this._fnDone = (record = {}) => {
-                if (done && record) {
-                    let replaced = record;
-                    const {field, fromValue, toValue} = done;
-                    if (field) {
-                        const pendingValue = record[field];
-                        if (pendingValue && fromValue && toValue) {
-                            if (pendingValue === fromValue) {
-                                replaced[field] = toValue;
-                            }
-                        }
-                    }
-                    return replaced;
+                if (record && input.done) {
+                    // 第一种规则
+                    return toUniform(record, input.done);
                 } else {
                     // 什么都不做
                     return record;

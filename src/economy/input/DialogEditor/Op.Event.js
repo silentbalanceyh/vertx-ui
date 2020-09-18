@@ -45,19 +45,13 @@ const onRow = (reference) => (row = {}, additional = {}) => {
     /*
      * 更新相关数据
      */
-    state.data = saveData(reference, row);
-    /*
-     * 自定义组件变更
-     */
-    const {onChange} = reference.props;
-    if (U.isFunction(onChange)) {
-        onChange(state.data);
-    }
+    const request = saveData(reference, row);
+    state.data = doChange(reference, request);
     reference.setState(state);
     /*
      * rxPostRow 调用
      */
-    callbackRow(reference, row);
+    callbackRow(reference, state.data);
 };
 const onRows = (reference) => (rows = [], additional = {}) => {
     const state = Ux.clone(additional);
@@ -65,17 +59,27 @@ const onRows = (reference) => (rows = [], additional = {}) => {
     const dataArray = Dsl.getArray(data);
     rows.forEach(row => dataArray.saveElement(row));
     const request = dataArray.to();
-    state.data = Ux.clone(request);
-    const {onChange} = reference.props;
-    if (U.isFunction(onChange)) {
-        onChange(state.data);
-    }
+    state.data = doChange(reference, request);
     reference.setState(state);
     /*
      * doRow 调用
      */
-    callbackRow(reference, rows);
+    callbackRow(reference, state.data);
 };
+const doChange = (reference, request = []) => {
+    request = Ux.clone(request);
+    /*
+     * 最终处理，解决 ERROR 类似的字段
+     */
+    const {$keyField} = reference.state;
+    request.forEach(record => {
+        if (record.key && record.key.startsWith("ERROR")) {
+            record.key = record[$keyField];
+        }
+    });
+    Ux.fn(reference).onChange(request);
+    return request;
+}
 const fnDelete = (reference) => (id, record) => {
     /*
      * 提交处理
@@ -93,6 +97,15 @@ const fnEdit = (reference) => (id, record) => {
     const ref = Ux.onReference(reference, 1);
     const data = Ux.clone(record);
     const {$inited = {}} = ref.props;
+
+    const {$keyField = "key"} = reference.state;
+    if (record[$keyField]) {
+        /*
+         * 保证更新
+         */
+        data.key = record[$keyField];
+    }
+
     if ($inited.key) {
         // 父表单字段
         data.parentId = $inited.key;
@@ -115,7 +128,9 @@ const onOpen = (reference) => () => {
     const ref = Ux.onReference(reference, 1);
 
     const data = {};
+    // 专用处理
     data.key = Ux.randomUUID();
+
     const {$inited = {}} = ref.props;
     if ($inited.key) {
         // 父表单字段

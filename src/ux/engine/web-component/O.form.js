@@ -5,7 +5,7 @@ import Cfg from '../config';
 import Ut from '../../unity';
 import React from 'react';
 import U from 'underscore';
-import {Col, Form, Row} from 'antd';
+import {Col, Form, Row, Spin} from 'antd';
 import {LoadingAlert} from 'web';
 
 const aiHidden = (reference, values = {}, raft = {}) => {
@@ -160,14 +160,17 @@ const aiForm = (reference, values, config = {}) => {
         const options = raft.options ? raft.options : {};
         Dev.dgDebug(initials, "初始化表单数据：" + options.id, "#8B5A00");
     }
+    const {$loading = false} = reference.state;
     return (
-        <Form {...attrs}>
-            {/** 隐藏组件 hidden **/}
-            {aiHidden(reference, initials, raft)}
-            {/** 字段渲染 **/}
-            {aiField(reference, initials, raft)}
-        </Form>
-    );
+        <Spin spinning={$loading}>
+            <Form {...attrs}>
+                {/** 隐藏组件 hidden **/}
+                {aiHidden(reference, initials, raft)}
+                {/** 字段渲染 **/}
+                {aiField(reference, initials, raft)}
+            </Form>
+        </Spin>
+    )
 };
 const aiFormInput = (reference, values, raft = {}) => {
     /*

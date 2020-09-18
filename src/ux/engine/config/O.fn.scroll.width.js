@@ -78,7 +78,7 @@ const widthArray = (input, config = {}) => {
                     const titleWidth = widthWord(field);
                     const valueWidth = widthWord(value ? value : "");
                     const current = Math.max(titleWidth, valueWidth);
-                    calculated += current;
+                    calculated += current;        // 修正8像素
                     /*
                      * 计算每列最大值
                      */

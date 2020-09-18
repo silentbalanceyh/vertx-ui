@@ -41,15 +41,7 @@ class Component extends React.PureComponent {
             /*
              * 强制转换
              */
-            let $value;
-            if (Ux.isArray(value)) {
-                $value = Ux.clone(value);
-            } else {
-                try {
-                    $value = JSON.parse(value);
-                } catch (error) {
-                }
-            }
+            const $value = Op.yoValue(value, $table);
             Ux.configScroll($table, $value, ref);
             const {readOnly = false} = this.props;
             if (readOnly) {

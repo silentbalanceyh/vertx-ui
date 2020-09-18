@@ -30,6 +30,7 @@ import acl from './O.secure';
 import dragDrop from './O.drag.and.drop';
 
 export default {
+
     ...random,
     ...html,
     ...expression,

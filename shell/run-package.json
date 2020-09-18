@@ -1,5 +1,7 @@
 {
     "antd": "3.26.12",
     "@antv/g6": "3.2.10",
-    "css-loader": "3.6.0"
+    "css-loader": "3.6.0",
+    "postcss-loader": "3.0.0",
+    "autoprefixer": "9.8.6"
 }

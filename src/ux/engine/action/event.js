@@ -10,10 +10,19 @@ const _submit = (reference, config, redux = false) => {
     reference.setState({$loading: true});
     return Ut.formSubmit(reference, redux)
         /* Performer */
-        .then(data => Cmn.performFn(reference, config)
+        .then(data => Cmn.performFn(reference, config).then(perform => {
             /* 记得拷贝数据传入 perform，否则 data 无法被扩展 */
-            .then(perform => perform(data))
-        )
+            const response = perform(data);
+            if (Promise.prototype.isPrototypeOf(response)) {
+                return response.then(respData => {
+                    Ut.formEnd(reference);
+                    return Abs.promise(respData);
+                })
+            } else {
+                Ut.formEnd(reference);
+                return Abs.promise(response);
+            }
+        }))
 };
 const RESET = (reference, config = {}) => (event) => {
     Abs.prevent(event);

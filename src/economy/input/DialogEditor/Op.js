@@ -33,7 +33,14 @@ const yiEdition = (reference, config = {}) => {
             }
         }
     });
-    state.$table = Ux.configTable(ref, table, normalized);
+    const tableRef = Ux.configTable(ref, table, normalized);
+    state.$table = tableRef;
+    if (tableRef.rowKey) {
+        /*
+         * 方便后期编辑、添加、删除
+         */
+        state.$keyField = tableRef.rowKey;
+    }
     /*
      * 按钮处理
      */
@@ -47,12 +54,43 @@ const yiEdition = (reference, config = {}) => {
      * initialValue
      */
     const {value = []} = reference.props;
-    if (Ux.isArray(value)) {
-        state.initialValue = value;
-    }
+    const $data = yoValue(value, tableRef);
+    state.initialValue = $data;
+    state.data = $data;
+
     yiForm(reference, config, state)
         .then(Ux.ready).then(Ux.pipe(reference));
 };
+
+const yoValue = (value = [], tableRef = {}) => {
+    let normalized = [];
+    if (Ux.isArray(value)) {
+        normalized = Ux.clone(value);
+    } else {
+        try {
+            normalized = JSON.parse(value);
+        } catch (error) {
+        }
+    }
+    if (Ux.isArray(normalized)) {
+        /*
+         * key 专用执行
+         */
+        normalized.forEach((record, index) => {
+            if (undefined !== tableRef.rowKey) {
+                if (!record.hasOwnProperty(tableRef.rowKey)) {
+                    record[tableRef.rowKey] = `ERROR-${index}`;
+                }
+                if (!record.key) {
+                    record.key = record[tableRef.rowKey];
+                }
+            } else if (record.hasOwnProperty('key')) {
+                record.key = `ERROR-${index}`;
+            }
+        });
+    }
+    return normalized;
+}
 
 const yiView = (reference, config) => {
     const {
@@ -139,6 +177,7 @@ const yuPage = (reference, virtualRef) => {
     }
 };
 export default {
+    yoValue,
     yiPage,
     yuPage,
 }
