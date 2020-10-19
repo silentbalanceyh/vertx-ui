@@ -23,7 +23,7 @@ import Op from './Op';
  */
 class Component extends React.PureComponent {
     state = {
-        $ready: true
+        $ready: false
     };
 
     componentDidMount() {
@@ -31,7 +31,7 @@ class Component extends React.PureComponent {
         /*
          * 第一次初始化
          */
-        Ux.rxResize(this)();
+        Op.yiMenu(this);
     }
 
     componentWillUnmount() {

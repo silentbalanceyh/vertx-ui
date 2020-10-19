@@ -18,6 +18,9 @@ export default (reference, {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;
     }
+    const {$keySet = {}} = reference.state;
+    const attrs = {};
+    Object.assign(attrs, $keySet, $attrsMenu);
     return (
         <Sider {...$attrsSider}>
             {/* 菜单顶部Logo */}
@@ -28,7 +31,7 @@ export default (reference, {
                 </Link>
             </div>
             {/** 左边 **/}
-            {Ux.aiSider(dataArray, $attrsMenu)}
+            {Ux.aiSider(dataArray, attrs)}
         </Sider>
     )
 }

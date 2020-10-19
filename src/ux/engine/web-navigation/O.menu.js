@@ -88,12 +88,18 @@ const aiSider = (items = [], rest = {}, addOn = {}) => {
         rest.className = "";
     }
     rest.className = `ux-menu ${rest.className}`;
+    const {
+        defaultOpenKeys = [],
+        defaultSelectedKeys = []
+    } = rest;
     return (
         <Menu {...rest}>
             {items.map(item => {
                 return aiMenuBranch({
                     ...item,
-                    className: _toBranchClass(item)
+                    className: _toBranchClass(item),
+                    defaultOpenKeys,
+                    defaultSelectedKeys,
                 }, rest, addOn);
             })}
         </Menu>

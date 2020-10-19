@@ -51,7 +51,9 @@ const $opNav = (reference) => (event) => {
         params.ownerId = $role.roleId;
         params.name = $role['roleName'];
         const targetKey = Ux.encryptBase64(JSON.stringify(params));
-        Ux.toRoute(reference, `/authority/view?target=${target}&targetKey=${targetKey}`);
+        Ux.toRoute(reference, `/authority/view`, {
+            target, targetKey,
+        });
     }
 }
 const $opExport = (reference) => (event) => {

@@ -16,9 +16,25 @@ const onClick = (reference, uris = {}) => ({item, key, keyPath}) => {
             path = `/${path}`;
         }
         path = `${path}${uris[key]}`;
+        // page 核心参数，处理 page
+        if (0 > path.indexOf("pid=")) {
+            if (0 <= path.indexOf("?")) {
+                path += `&pid=${key}`;
+            } else {
+                path += `?pid=${key}`;
+            }
+        }
         $router.to(path);
     }
 };
+const yiMenu = (reference) => {
+    const state = Ux.toHeightState(0);
+    const {data = []} = reference.props;
+    Ux.toPid(reference, data, state);
+    state.$ready = true;
+    reference.setState(state);
+}
 export default {
-    onClick
+    onClick,
+    yiMenu,
 }
