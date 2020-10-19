@@ -7,6 +7,7 @@ import Ele from '../../element';
 import './Cab.less';
 import Abs from '../../abyss';
 import aiIcon from './O.fn.icon';
+import T from '../../unity';
 /*
  * 基本输入
  * {
@@ -18,10 +19,11 @@ import aiIcon from './O.fn.icon';
  */
 const aiUrl = (item = {}, addOn = {}) => {
     const {$router} = addOn;
+    let baseUri;
     if ("$MAIN$" === item.uri) {
-        return Cv.ENTRY_ADMIN
+        baseUri = Cv.ENTRY_ADMIN
     } else if ("$SELF$" === item.uri) {
-        return $router ? $router.uri() : "";
+        baseUri = $router ? $router.uri() : "";
     } else {
         let uri;
         if (item.uri.startsWith("/")) {
@@ -32,8 +34,27 @@ const aiUrl = (item = {}, addOn = {}) => {
         if (!uri.startsWith(`/${Cv['ROUTE']}/`)) {
             uri = `/${Cv['ROUTE']}${uri}`
         }
-        return $router ? $router.uri(uri) : uri;
+        baseUri = $router ? $router.uri(uri) : uri;
     }
+    /*
+     * pid / mid
+     */
+    if (!baseUri.endsWith("?")) {
+        baseUri += "?";
+    }
+    const parameters = [];
+    const mid = T.toQuery("mid");
+    if (mid) {
+        parameters.push(`mid=${mid}`);
+    }
+    const pid = T.toQuery("pid");
+    if (mid) {
+        parameters.push(`pid=${pid}`);
+    }
+    if (0 < parameters.length) {
+        baseUri += parameters.join("&");
+    }
+    return baseUri;
 };
 /*
  * 基本输入

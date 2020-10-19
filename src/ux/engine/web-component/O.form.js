@@ -7,6 +7,7 @@ import React from 'react';
 import U from 'underscore';
 import {Col, Form, Row} from 'antd';
 import {LoadingAlert} from 'web';
+import WebField from '../web-field';
 
 const aiHidden = (reference, values = {}, raft = {}) => {
     if (raft.hidden) {
@@ -184,9 +185,39 @@ const aiFormInput = (reference, values, raft = {}) => {
         </div>
     )
 };
+const aiFormField = (reference, fieldConfig = {}, fnJsx) => {
+    const {form} = reference.props;
+    if (fieldConfig) {
+        let fnRender;
+        if (Abs.isFunction(fnJsx)) {
+            fnRender = fnJsx;
+        } else {
+            if (fieldConfig.render) {
+                fnRender = WebField[fieldConfig.render];
+            } else {
+                fnRender = WebField.aiInput;
+            }
+        }
+        const {
+            optionItem,
+            optionConfig,
+            optionJsx,
+            field,
+        } = fieldConfig;
+        const {getFieldDecorator} = form;
+        return (
+            <Form.Item {...optionItem}>
+                {getFieldDecorator(field, optionConfig)(fnRender(reference, optionJsx))}
+            </Form.Item>
+        )
+    } else {
+        return false;
+    }
+}
 export default {
     aiForm,
     aiInit, // 统一处理
     aiField,
-    aiFormInput
+    aiFormInput,
+    aiFormField,
 }

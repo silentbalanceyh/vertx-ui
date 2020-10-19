@@ -58,7 +58,7 @@ const toRouteParameters = (name = "", params = {}) => {
                 // params中的 params[name] = null（清空模式）
             } else {
                 const queryValue = toQuery(name);
-                if (queryValue) {
+                if (queryValue && "undefined" !== queryValue) {
                     /*
                      * 从 Uri 路径中读取到了参数信息 name = ?
                      */
@@ -68,7 +68,7 @@ const toRouteParameters = (name = "", params = {}) => {
         }
     } else {
         const queryValue = toQuery(name);
-        if (queryValue) {
+        if (queryValue && "undefined" !== queryValue) {
             /*
              * 从 Uri 路径中读取到了参数信息 name = ?
              */
@@ -177,6 +177,12 @@ const toRoute = (reference = {}, uri = "", params) => {
         calculated += "?";
         const paramQueue = [];
         Object.keys($parameters)
+            /*
+             * 所有不合法的值中，只过滤 null 和 undefined
+             * 保留值：false, "", 0
+             */
+            .filter(field => null !== $parameters[field])
+            .filter(field => undefined !== $parameters[field])
             .forEach(paramName => paramQueue.push(`${paramName}=${$parameters[paramName]}`));
         calculated += paramQueue.join('&');
     }
