@@ -43,7 +43,11 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
         const initial = jsx['data-initial'];
         if (initial) {
             if (U.isArray(initial)) {
-                rest.defaultValue = initial;
+                const {form} = reference.props;
+                // form 变量专用处理
+                if (!form) {
+                    rest.defaultValue = initial;
+                }
             }
         }
         return (

@@ -245,7 +245,7 @@ const ajaxHeader = (headers = {}, secure = false) => {
  * @memberOf module:__private
  * @param {Object} params 参数相关信息
  * @param {Object} options 参数配置（主要是查看 application/x-www-form-urlencoded）
- * @return {String} 核心数据内容，以字符串的方式存储
+ * @return {FormData} 核心数据内容，以字符串的方式存储
  */
 const ajaxParams = (params = {}, options = {}) => {
     let isForm = false;

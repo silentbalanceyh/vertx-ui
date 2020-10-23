@@ -386,7 +386,6 @@ const writeSegment = (reference, optionJsx = {}, field) => {
  * @param {Object} cell 当前单元格的专用配置（原始配置）
  */
 const writeInitial = (optionConfig = {}, optionJsx = {}, cell = {}) => {
-
     if (optionJsx['disabled']) {
         if ("aiCheckbox" === cell.render) {
             /*

@@ -100,6 +100,7 @@ export default {
      * @memberOf module:_rx
      * @method rxFlow
      * @returns {rxFlow} 返回最终 @zero 注解中的Stream模式的 redux处理器。
+     * @deprecated 后期更改掉，取代 rxFlow
      */
     rxFlow: actions => Dsl.rxFlow(actions),
 }

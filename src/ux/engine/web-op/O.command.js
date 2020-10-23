@@ -19,7 +19,7 @@ import React from "react";
 
 function opCmdPopover() {
     const reference = arguments[0];
-    if (3 === arguments.length) {
+    if (3 <= arguments.length) {
         const events = arguments[1];
         /*
          * 第一种用法：
@@ -63,6 +63,23 @@ function opCmdPopover() {
                         // 执行按钮本身
                         const fnButton = (item) => {
                             const {text, component, ...restIn} = item;
+                            const $restIn = Abs.clone(restIn);
+                            /*
+                             * 第四参处理状态
+                             * 该状态用于判断 Command 对应的按钮启用还是禁用
+                             */
+                            const commandState = arguments[3];
+                            if (commandState) {
+                                const ret = commandState[item.key];
+                                if (Abs.isFunction(ret)) {
+                                    const restState = ret(reference, item);
+                                    if (restState) {
+                                        Object.assign($restIn, restState);
+                                    }
+                                } else if (Abs.isObject(ret)) {
+                                    Object.assign($restIn, ret);
+                                }
+                            }
                             if (component) {
                                 // 存在 component
                                 const components = arguments[2];
@@ -79,19 +96,19 @@ function opCmdPopover() {
                                                  padding: 8,
                                              }}
                                              content={Abs.isFunction(fnComponent) ? fnComponent(reference, item) : false}>
-                                        {fnButton({...restIn, text})}
+                                        {fnButton({...$restIn, text})}
                                     </Popover>
                                 );
                             } else {
                                 // 提取子组件 Popover
                                 if (text) {
                                     return (
-                                        <Button {...restIn}>
+                                        <Button {...$restIn}>
                                             {text}
                                         </Button>
                                     )
                                 } else {
-                                    return (<Button {...restIn}/>)
+                                    return (<Button {...$restIn}/>)
                                 }
                             }
                         }
