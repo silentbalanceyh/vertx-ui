@@ -119,7 +119,7 @@ const yoValue = (reference, $config) => {
 class Component extends React.PureComponent {
 
     render() {
-        const {value, config, format, ...jsx} = this.props;
+        const {value, config, format, className, ...jsx} = this.props;
         // 是否一个Radio
         const $config = Ux.clone(config);
         if (format) {
@@ -129,7 +129,7 @@ class Component extends React.PureComponent {
         // 时间格式
         const $value = yoValue(this, $config);
         return (
-            <Input.Group {...jsx} className={"magic-view-item"}>
+            <Input.Group {...jsx} className={`magic-view-item ${className ? className : ""}`}>
                 {rxValue(this, $value, $config)}
             </Input.Group>
         );

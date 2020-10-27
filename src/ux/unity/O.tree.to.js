@@ -120,7 +120,7 @@ const toTreeConfig = (config = {}) => {
 const toTreeArray = (data = [], config = {}) => {
     config = toTreeConfig(config);
     const normalized = [];
-    data.filter(item => !!item.key).forEach(each => {
+    data.filter(item => !!item[config.key]).forEach(each => {
         const processed = {};
         processed.data = Abs.clone(each);   // 数据节点
         Abs.itObject(config, (to, from) => {
@@ -169,6 +169,7 @@ const toTree = (data = [], config = {}) => {
      * TreeSelect / TreeMenu 专用
      */
     const normalized = toTreeArray(data, $config);
+
     /*
      * 第二次变化，展开成树
      * 1）子节点名称为 children

@@ -37,6 +37,10 @@ export {default as SearchRangeDate} from './input/SearchRangeDate/UI';
 // -------------------------------  表格列专用
 export {default as ColumnUser} from './action/ColumnUser/UI';
 export {default as RestfulApi} from './editor-form/RestfulApi/UI';
+
+// -------------------------------  G2图引擎调用
+export {default as Graphic2} from './graphic/G2/UI';
+
 // -------------------------------  重新命名过的组件
 /*
  * 新：Dialog
