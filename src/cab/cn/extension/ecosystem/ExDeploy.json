@@ -1,0 +1,98 @@
+{
+    "_header": {
+        "prefix": "开发工具项：Development Tailoring Toolbox",
+        "title": {
+            "1": {
+                "value": "建模管理",
+                "icon": "code-sandbox"
+            },
+            "2": {
+                "value": "表单管理",
+                "icon": "form"
+            },
+            "3": {
+                "value": "接口管理",
+                "icon": "api"
+            },
+            "4": {
+                "value": "任务管理",
+                "icon": "code"
+            },
+            "5": {
+                "value": "权限管理",
+                "icon": "safety-certificat"
+            }
+        }
+    },
+    "_graphic": {
+        "data": {
+            "nodes": [
+                {
+                    "id": "keyStart",
+                    "label": "开始",
+                    "type": "START"
+                },
+                {
+                    "id": "keyModel",
+                    "label": "建模管理",
+                    "step": 1
+                },
+                {
+                    "id": "keyForm",
+                    "label": "表单管理",
+                    "step": 2
+                },
+                {
+                    "id": "keyApi",
+                    "label": "接口管理",
+                    "step": 3
+                },
+                {
+                    "id": "keyJob",
+                    "label": "任务管理",
+                    "step": 4
+                },
+                {
+                    "id": "keySecurity",
+                    "label": "安全管理",
+                    "step": 5
+                },
+                {
+                    "id": "keyEnd",
+                    "label": "结束",
+                    "type": "END"
+                }
+            ],
+            "edges": [
+                {
+                    "source": "keyStart",
+                    "target": "keyModel"
+                },
+                {
+                    "source": "keyModel",
+                    "target": "keyForm"
+                },
+                {
+                    "source": "keyForm",
+                    "target": "keyApi"
+                },
+                {
+                    "source": "keyForm",
+                    "target": "keyJob"
+                },
+                {
+                    "source": "keyApi",
+                    "target": "keySecurity"
+                },
+                {
+                    "source": "keyJob",
+                    "target": "keySecurity"
+                },
+                {
+                    "source": "keySecurity",
+                    "target": "keyEnd"
+                }
+            ]
+        }
+    }
+}

@@ -1,8 +1,7 @@
 import React from 'react';
-import {ExGraphicSpider} from "ei";
+import {ExDeploy, ExGraphicSpider} from "ei";
 import {Col, Row, Tag} from 'antd';
 import Ex from 'ex';
-import {ModelingPpt} from 'app';
 
 export default (reference, title = {}) => {
     const {$selected} = reference.state;
@@ -36,6 +35,6 @@ export default (reference, title = {}) => {
             </div>
         );
     } else {
-        return (<ModelingPpt alert={title.right} adjust={460} step={1}/>)
+        return (<ExDeploy alert={title.right} $width={820} step={1}/>)
     }
 }

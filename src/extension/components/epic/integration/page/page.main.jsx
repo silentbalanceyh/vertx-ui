@@ -3,6 +3,7 @@ import {Col, Row, Table} from "antd";
 import React from "react";
 import renderTool from "./page.main.tool";
 import renderMenu from './page.main.menu';
+import {ExDeploy} from "ei";
 
 export default (reference) => {
     const {
@@ -24,7 +25,10 @@ export default (reference) => {
                     {renderMenu(reference)}
                 </div>
             </Col>
-            <Col span={20}>
+            <Col span={20} className={"api-content"}>
+                <Row>
+                    <ExDeploy $width={880} step={3}/>
+                </Row>
                 <Row>
                     <Col span={24}>
                         {renderTool(reference)}

@@ -32,6 +32,7 @@ export {default as ExRelation} from './ExRelation/UI';
  * SubForm 专用组件（子表单，本身不带表单结构）
  */
 export {default as ExService} from './ExService/UI';
+export {default as ExDeploy} from './ExDeploy/UI';
 /*
  * 【不可重用】业务类型控件
  */

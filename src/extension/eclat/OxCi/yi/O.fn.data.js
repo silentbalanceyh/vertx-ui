@@ -48,7 +48,10 @@ const yiData = (reference, state = {}) => {
              */
             const category = Ux.elementUniqueDatum(reference, "data.category",
                 'key', response.categoryThird);
-            state.$identifier = category.identifier;
+            // Fix: Unhandled Rejection (TypeError): Cannot read property 'identifier' of undefined
+            if (category) {
+                state.$identifier = category.identifier;
+            }
             return Ux.promise(state);
         })
     }

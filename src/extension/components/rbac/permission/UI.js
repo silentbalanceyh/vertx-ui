@@ -2,10 +2,10 @@ import React from 'react'
 import Ux from 'ux';
 import Ex from 'ex';
 import Op from './Op';
-import {LoadingAlert} from 'web';
 import {List} from 'antd';
 import "./Cab.less";
 import Image from './images';
+import {ExDeploy} from "ei";
 
 @Ux.zero(Ux.rxEtat(require("./Cab.json"))
     .cab("UI")
@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
             const {$alert = {}} = this.state;
             return (
                 <div className={"web-authority"}>
-                    <LoadingAlert $alert={$alert}/>
+                    <ExDeploy alert={$alert} $width={1050} step={5}/>
                     {(() => {
                         const {$apps = []} = this.state;
                         return (
