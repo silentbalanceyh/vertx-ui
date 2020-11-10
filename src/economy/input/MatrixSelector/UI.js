@@ -34,9 +34,12 @@ class Component extends React.PureComponent {
          * 属性拉平处理
          * 表格处理
          */
-        const inputAttrs = Op.yoValue(this, jsx);
+        const tableValue = Op.yoValue(this, jsx);
         const ref = Ux.onReference(this, 1);
-        const $table = Ux.clone(table);
+
+        let $table = Ux.clone(table);
+        $table = Op.yoSelected(this, $table);
+
         Ux.configScroll($table, $data.list, ref);
         /*
          * 处理输入框属性
@@ -44,7 +47,7 @@ class Component extends React.PureComponent {
         const $tableTarget = Op.yoTarget(this, table);
         return (
             <span>
-                <Table {...$tableTarget} className={"web-table web-matrixselector-table"}/>
+                <Table {...$tableTarget} className={"web-table web-matrixselector-table"} {...tableValue}/>
                 <Dialog className="web-dialog"
                         size={"small"}
                         $visible={this.state['$visible']}   // 窗口是否开启

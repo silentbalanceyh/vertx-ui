@@ -50,7 +50,20 @@ const outResource = (params = {}, reference, isAdd = true) => {
 }
 export default {
     Free: {
-        actions: {}
+        actions: {
+            $opAdd: (reference) => params => Ex.form(reference).add(params, {
+                uri: "/api/permission",
+                dialog: "added"
+            }),
+            $opSave: (reference) => params => Ex.form(reference).save(params, {
+                uri: "/api/permission/:key",
+                dialog: "saved"
+            }),
+            $opDelete: (reference) => params => Ex.form(reference).remove(params, {
+                uri: "/api/permission/:key",
+                dialog: "removed"
+            })
+        }
     },
     ResAdd: {
         actions: {

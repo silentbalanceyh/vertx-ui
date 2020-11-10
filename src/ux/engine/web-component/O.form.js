@@ -74,15 +74,7 @@ const _aiInput = (reference, values) => (cell = {}) => {
          * 设置特殊的验证效果，主要是非输入型组件的验证效果专用处理
          * 追加 web-form-has-error 类名，保证验证时的提示处理
          * */
-        const item = Ut.connected();
-        const colAttrs = Abs.clone(col);
-        if (item.contains(cell.__render)) {
-            if (!colAttrs.className) colAttrs.className = "";
-            // 只添加一次
-            if (0 > colAttrs.className.indexOf("web-form-has-error")) {
-                colAttrs.className = `web-form-has-error ${colAttrs.className}`
-            }
-        }
+        const colAttrs = Ut.connectItem(cell);
         return (
             <Col {...colAttrs}>
                 <Form.Item {...optionItem} {...attached}>

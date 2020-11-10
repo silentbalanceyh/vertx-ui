@@ -113,7 +113,10 @@ const xtLazyInit = (reference) => {
                 const formValues = {};
                 T.writeLinker(formValues, config, () => unique);
                 if (formValues.hasOwnProperty(id)) {
-                    reference.setState({initialValue: formValues});
+                    /*
+                     * 双记录数据
+                     */
+                    reference.setState({initialValue: formValues, initialRecord: unique});
                     T.formHits(ref, formValues);
                 } else {
                     console.warn(`${id} 字段并没配置在 linker 中，请检查：`, unique);
@@ -132,7 +135,8 @@ const xtLazyInit = (reference) => {
                                 formValues[toField] = values[toField];
                             }
                         });
-                    reference.setState({initialValue: formValues});
+                    // 辅助表单专用 linker 数据
+                    reference.setState({initialValue: formValues, initialRecord: values});
                 }
             }
             /*

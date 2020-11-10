@@ -65,7 +65,13 @@
 
         &-has-error {
             .has-error .ant-form-explain {
-                display: block !important;
+                display: block;
+            }
+
+            &-defined {
+                .has-error .ant-form-explain {
+                    display: none;
+                }
             }
         }
 

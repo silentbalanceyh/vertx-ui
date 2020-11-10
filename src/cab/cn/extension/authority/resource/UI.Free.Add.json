@@ -61,11 +61,14 @@
                 }
             ],
             [
-                "title=关联资源"
-            ],
-            [
                 {
                     "metadata": "actions,关联操作,24,,aiMatrixSelector",
+                    "optionConfig.rules": [
+                        {
+                            "validator": "required",
+                            "message": "对不起，关联操作不可为空，请添加关联操作！"
+                        }
+                    ],
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/action/search,1,10,sorter=updatedAt`DESC",
@@ -78,16 +81,38 @@
                                 "name,操作名称",
                                 "code,操作编码",
                                 {
-                                    "dataIndex": "level",
-                                    "title": "操作级别"
+                                    "metadata": "level,操作级别,MAPPING",
+                                    "$mapping": {
+                                        "0": "只读（0）",
+                                        "1": "数据读取（1）",
+                                        "4": "添加（4）",
+                                        "8": "部分更新（8）",
+                                        "9": "更新/批量更新（9）",
+                                        "12": "删除/批量删除（12）",
+                                        "2": "集成读取（2）",
+                                        "6": "集成添加（6）",
+                                        "10": "集成更新（10）",
+                                        "3": "导出数据（3）",
+                                        "5": "导入数据（5）",
+                                        "7": "元数据添加（7）",
+                                        "11": "元数据更新（11）",
+                                        "14": "元数据删除（14）",
+                                        "13": "清空（13）",
+                                        "15": "所有权限（15）"
+                                    }
                                 },
                                 {
                                     "dataIndex": "uri",
                                     "title": "请求路径"
                                 },
                                 {
-                                    "dataIndex": "method",
-                                    "title": "HTTP方法"
+                                    "metadata": "method,HTTP方法,MAPPING",
+                                    "$mapping": {
+                                        "GET": "GET,download,,#268941",
+                                        "PUT": "PUT,edit,,#0a7bed",
+                                        "POST": "POST,plus,,#f6af03",
+                                        "DELETE": "DELETE,delete,,#e22015"
+                                    }
                                 }
                             ]
                         },
@@ -97,11 +122,29 @@
                             "name,c": "名称",
                             "code,c": "编码"
                         },
+                        "selection": {
+                            "multiple": true
+                        },
                         "dynamic": {
                             "dataIndex": "key",
-                            "title": "添加"
+                            "title": "添加",
+                            "config": {
+                                "text": "移除",
+                                "confirm": "该操作会从当前权限中移除选中操作，确认？"
+                            }
                         }
                     }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
                 }
             ]
         ]

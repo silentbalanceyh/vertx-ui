@@ -13,7 +13,8 @@ class Component extends React.PureComponent {
         /*
          * 配置处理
          */
-        const form = Ex.yoForm(this, null);
+        const {$inited = {}} = this.props;
+        const form = Ex.yoForm(this, null, $inited);
         return (
             <ExForm {...form} $height={"300px"}
                     $op={Op.Free.actions}/>

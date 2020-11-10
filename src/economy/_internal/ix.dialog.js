@@ -78,12 +78,23 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
          * -- 单记录选择支持 linker 功能
          * -- 多记录选择不支持 linker 功能
          */
-        if (Set.prototype.isPrototypeOf($keySet)) {
+        if (Set.prototype.isPrototypeOf($keySet) || Ux.isArray($keySet)) {
 
             /*
              * 多选最终结果，$keySet 为多选的 key 集合
              */
-            const $selectedKeys = Array.from($keySet);
+            let $selectedKeys = [];
+            if (Set.prototype.isPrototypeOf($keySet)) {
+                /*
+                 * Tree 专用
+                 */
+                $selectedKeys = Array.from($keySet);
+            } else {
+                /*
+                 * Array 专用
+                 */
+                $selectedKeys = $keySet;
+            }
             if (0 < $selectedKeys.length) {
                 Ux.fn(reference).onChange($selectedKeys);
             } else {
@@ -170,7 +181,90 @@ const dialogConfig = (reference, config = {}) => {
     dialog.onCancel = _onClose(reference, false);
     return dialog;
 }
+const dialogClick = (reference, config = {}) => (event) => {
+    // 常用的事件处理
+    Ux.prevent(event);
+
+    // 初始化数据
+    reference.setState({
+        $loading: true,             // 是否在加载
+        $visible: true,             // 窗口是否显示
+        $data: [],                  // 当前窗口的数据信息
+        $tableKey: Ux.randomUUID(), // 专用的表格绑定的key信息
+        $keySet: undefined,         // 在窗口中的选中项
+    });
+
+    /*
+     * 解析 ajax 参数信息
+     */
+    let params = Ux.xtLazyAjax(reference, config);
+
+    const {$filters = {}} = reference.state;
+    if (!Ux.isEmpty($filters)) {
+        params = Ux.qrCombine(params, reference, $filters);
+    }
+    /*
+     * 加载表格数据
+     */
+    Ux.asyncData(config.ajax, params, ($data) => {
+        const state = {$data, $loading: false};
+
+        const {table} = reference.state;
+        if (table && table.columns) {
+            return new Promise((resolve) => {
+
+                /*
+                 * lazyColumn 执行
+                 */
+                const lazyColumn = table.columns
+                    .filter(item => "USER" === item['$render']);
+                if (0 < lazyColumn.length) {
+
+                    /*
+                     * 加载更多的 lazyColumn 部分
+                     */
+                    Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
+                        .then($lazy => Ux.promise(state, "$lazy", $lazy))
+                        .then(done => resolve(done));
+                } else {
+                    /*
+                     * 不带任何 lazyColumn
+                     */
+                    resolve(state)
+                }
+            }).then(state => {
+                /*
+                 * selected 专用
+                 */
+                const {config = {}} = reference.props;
+                let $keySet;
+                if (config.selection && config.selection.multiple) {
+                    /*
+                     * 多选处理
+                     */
+                    const {value} = reference.props;
+                    if (Ux.isArray(value)) {
+                        $keySet = value;
+                    }
+                } else {
+                    /*
+                     * 单选
+                     */
+                    const {initialRecord} = reference.state;
+                    if (initialRecord) {
+                        $keySet = initialRecord;
+                    }
+                }
+                state.$keySet = $keySet;
+                reference.setState(state);
+            })
+        } else {
+            console.error("表格配置异常: ", table);
+        }
+    });
+}
 export default {
     dialogCombine,
     dialogConfig,
+    dialogClick
 };
