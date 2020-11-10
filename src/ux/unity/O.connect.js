@@ -19,13 +19,18 @@ function connectId(id) {
     }
 }
 
-const connected = () => Abs.immutable([
+const cssOnChange = () => Abs.immutable([
     "aiRadio",
     "aiCheckbox",
     "aiSelect",
     "aiListSelector",
     "aiTreeSelect",
-    "aiDialogEditor"
+    "aiDialogEditor",
+    "aiMatrixSelector"
+])
+const cssDefined = () => Abs.immutable([
+    "aiDialogEditor",
+    "aiMatrixSelector"
 ])
 /**
  * ## 特殊函数「Zero」
@@ -49,7 +54,7 @@ const connectValidator = (cell = {}) => {
     /*
      * 需要自动切换配置的地方，从 onBlur 切换到 onChange
      */
-    const onValidate = connected();
+    const onValidate = cssOnChange();
     const optionConfig = Abs.clone(cell.optionConfig ? cell.optionConfig : {});
     const {optionJsx = {}} = cell;
     /*
@@ -79,8 +84,32 @@ const connectValidator = (cell = {}) => {
     // 特殊绑定
     return optionConfig;
 };
+const connectItem = (cell = {}) => {
+    const {col = {}} = cell;
+    const itemAttrs = Abs.clone(col);
+    if (!itemAttrs.className) itemAttrs.className = "";
+
+    const itemOnChange = cssOnChange();
+
+    if (itemOnChange.contains(cell.__render)) {
+        // 只添加一次
+        if (0 > itemAttrs.className.indexOf("web-form-has-error")) {
+            if ("" === itemAttrs.className) {
+                itemAttrs.className = `web-form-has-error`;
+            } else {
+                itemAttrs.className = `web-form-has-error ${itemAttrs.className}`;
+            }
+        }
+        // 追加 itemDefined
+        const itemDefined = cssDefined();
+        if (itemDefined.contains(cell.__render)) {
+            itemAttrs.className = `${itemAttrs.className} web-form-has-error-defined`;
+        }
+    }
+    return itemAttrs;
+};
 export default {
-    connected,
     connectId,
+    connectItem,
     connectValidator,
 };

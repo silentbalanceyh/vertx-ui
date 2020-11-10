@@ -9,7 +9,7 @@ import init from './O.init';
 /*
  * 特殊运算，专用于新版的列宽度自适应运算
  */
-import configScroll from './O.fn.scroll';
+import configScroll from './O.scroll';
 
 const exported = {
     ...form,
