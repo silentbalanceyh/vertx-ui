@@ -1,7 +1,6 @@
 import {Button, Icon} from "antd";
 import React from "react";
 import Ux from "ux";
-import U from "underscore";
 
 const _renderClean = (reference) => {
     const {value} = reference.props;
@@ -91,9 +90,29 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
                 $selectedKeys = Array.from($keySet);
             } else {
                 /*
-                 * Array 专用
+                 * Array 专用，Array需要 mode 支撑
                  */
-                $selectedKeys = $keySet;
+                const {selection = {}} = config;
+                const {multipleMode = {}} = selection;
+                const {replace = true} = multipleMode;
+                if (replace) {
+                    /*
+                     * 直接选择时替换
+                     */
+                    $selectedKeys = $keySet;
+                } else {
+                    /*
+                     * 合并选择专用
+                     */
+                    const {field = "key"} = multipleMode;
+                    const {value = []} = reference.props;
+                    /*
+                     * 合并模式
+                     */
+                    const dataArray = Ux.clone(value);
+                    $keySet.forEach(element => Ux.elementSave(dataArray, element, field));
+                    $selectedKeys = dataArray;
+                }
             }
             if (0 < $selectedKeys.length) {
                 Ux.fn(reference).onChange($selectedKeys);
@@ -127,13 +146,13 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
 
                     // 执行Linker过后的回调
                     const {fnCallback} = config;
-                    if (U.isFunction(fnCallback)) {
+                    if (Ux.isFunction(fnCallback)) {
                         fnCallback($keySet);
                     }
 
                     // onChange 保证表单的 isTouched
                     const {onChange, id} = reference.props;
-                    if (U.isFunction(onChange)) {
+                    if (Ux.isFunction(onChange)) {
                         const changeValue = values[id];
                         onChange(changeValue);
                     }

@@ -37,6 +37,12 @@
                                     [
                                         {
                                             "metadata": "permissions,,24,,aiDialogEditor",
+                                            "optionConfig.rules": [
+                                                {
+                                                    "validator": "required",
+                                                    "message": "对不起，权限集中包含的权限不可为空！"
+                                                }
+                                            ],
                                             "optionJsx.config": {
                                                 "form": {
                                                     "window": 0.16,

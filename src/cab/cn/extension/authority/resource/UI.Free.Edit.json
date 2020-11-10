@@ -123,7 +123,10 @@
                             "code,c": "编码"
                         },
                         "selection": {
-                            "multiple": true
+                            "multiple": true,
+                            "multipleMode": {
+                                "replace": false
+                            }
                         },
                         "dynamic": {
                             "dataIndex": "key",

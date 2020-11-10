@@ -48,7 +48,7 @@ class Component extends React.PureComponent {
          */
         const inputCombine = Op.yoCombine(this, inputAttrs);
         return (
-            <span>
+            <Input.Group>
                 <Input {...inputCombine}/>
                 <Dialog className="web-dialog"
                         size={"small"}
@@ -76,7 +76,7 @@ class Component extends React.PureComponent {
                         </Col>
                     </Row>
                 </Dialog>
-            </span>
+            </Input.Group>
         );
     }
 }

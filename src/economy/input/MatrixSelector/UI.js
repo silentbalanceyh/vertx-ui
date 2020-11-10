@@ -23,8 +23,8 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, ...jsx} = this.props;
-        const {$data = {}, $tableKey} = this.state;
+        const {config = {}, value = [], ...jsx} = this.props;
+        const {$data = {}, $tableKey, $visible = false} = this.state;
         const {dialog, table = {}, search} = this.state ? this.state : {};
         /*
          * 分页计算
@@ -34,7 +34,6 @@ class Component extends React.PureComponent {
          * 属性拉平处理
          * 表格处理
          */
-        const tableValue = Op.yoValue(this, jsx);
         const ref = Ux.onReference(this, 1);
 
         let $table = Ux.clone(table);
@@ -45,9 +44,12 @@ class Component extends React.PureComponent {
          * 处理输入框属性
          */
         const $tableTarget = Op.yoTarget(this, table);
+        Ux.configScroll($tableTarget, value, ref);
         return (
-            <span>
-                <Table {...$tableTarget} className={"web-table web-matrixselector-table"} {...tableValue}/>
+            <Input.Group>
+                {Ux.aiFloatError(this, !$visible)}
+                <Table {...$tableTarget} className={"web-table web-matrixselector-table"}
+                       dataSource={value}/>
                 <Dialog className="web-dialog"
                         size={"small"}
                         $visible={this.state['$visible']}   // 窗口是否开启
@@ -74,7 +76,7 @@ class Component extends React.PureComponent {
                         </Col>
                     </Row>
                 </Dialog>
-            </span>
+            </Input.Group>
         );
     }
 }

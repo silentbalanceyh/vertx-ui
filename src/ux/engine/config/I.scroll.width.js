@@ -1,41 +1,6 @@
 import Abs from "../../abyss";
+import widthWord from './I.scroll.fn.word';
 
-const widthWord = (input) => {
-    let length = 0;
-    if ("string" !== typeof input) {
-        return 0;
-    } else {
-        for (let idx = 0; idx < input.length; idx++) {
-            const code = input.charCodeAt(idx);
-            const str = String(input.charAt(idx));
-            if (Abs.isCn(str)) {
-                /*
-                 * 中文字符长度
-                 * 中文是方块字，宽度完全统一
-                 */
-                length += 24;
-            } else {
-                if (65 <= code && code <= 90) {
-                    /*
-                     * 大写字母
-                     */
-                    length += 14;
-                } else if (97 <= code && code <= 122) {
-                    /*
-                     * 小写字母
-                     */
-                    length += 11;
-                } else {
-                    /*
-                     * 特殊字符
-                     */
-                    length += 13;
-                }
-            }
-        }
-        return length;
-    }
-}
 const widthObject = (input = {}) => {
     if (input) {
         let defaultWidth = 0;
@@ -146,10 +111,10 @@ const widthMax = (data = [], field = "", fnWidth = () => 0, column) => {
 const widthTitle = (title = "", column = {}) => {
     let titleWidth = widthWord(title);
     if (column.sorter) {
-        titleWidth += 32;
+        titleWidth += 24;
     }
     if (column.hasOwnProperty("$filter")) {
-        titleWidth += 32;
+        titleWidth += 28;
     }
     return titleWidth;
 };

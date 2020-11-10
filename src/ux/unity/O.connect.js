@@ -26,11 +26,11 @@ const cssOnChange = () => Abs.immutable([
     "aiListSelector",
     "aiTreeSelect",
     "aiDialogEditor",
-    "aiMatrixEditor"
+    "aiMatrixSelector"
 ])
 const cssDefined = () => Abs.immutable([
     "aiDialogEditor",
-    "aiMatrixEditor"
+    "aiMatrixSelector"
 ])
 /**
  * ## 特殊函数「Zero」

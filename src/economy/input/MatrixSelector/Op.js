@@ -29,12 +29,6 @@ export default {
             $keySet: undefined,
         }
     },
-    yoValue: (reference, jsx = {}) => {
-        const table = {};
-        const {value = []} = reference.props;
-        table.dataSource = value;
-        return table;
-    },
     yoTarget: (reference, table = {}) => {
         const $tableTarget = Ux.clone(table);
         delete $tableTarget.rowSelection;
@@ -52,6 +46,8 @@ export default {
         const action = {
             dataIndex: dynamic.dataIndex,
             className: "web-table-title-op",
+            width: 100,
+            fixed: "left",
             title: (
                 <Button icon={"plus"} className={"ux-spec"}
                         onClick={onClick}>
@@ -61,7 +57,7 @@ export default {
             render: (text, record) => {
                 const {config = {}} = dynamic;
                 return (
-                    <div>
+                    <div style={{textAlign: "center"}}>
                         <Popconfirm title={config.confirm} onConfirm={event => {
                             Ux.prevent(event);
                             // 读取原始数据

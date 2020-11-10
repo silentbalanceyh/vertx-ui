@@ -3,7 +3,7 @@ import moment from 'moment';
 import Ele from '../../element';
 import Ut from '../../unity';
 import Rx from '../expression';
-import Wd from './O.fn.scroll.width';
+import Wd from './I.scroll.width';
 
 const widthObject = (titleWidth = 0, column = {}, data = []) => {
     const textWidth = Wd.widthMax(data, column.dataIndex, Wd.widthObject);
@@ -38,15 +38,16 @@ const widthExecutor = (titleWidth = 0, column = {}, data = []) => {
                 /*
                  * 分隔符操作
                  */
-                width += 10;
+                width += 12;
             } else {
                 /*
                  * 计算每一个的文字，累加
                  */
-                const single = Wd.widthWord(opt.text);
+                const single = Wd.widthWord(opt.text, false);
                 width += single;
             }
-        })
+        });
+        width += 32;
     }
     return titleWidth > width ? titleWidth : width;
 };
@@ -153,20 +154,16 @@ export default ($table = {}, data = [], reference) => {
                     /*
                      * 只有 fixed 的时候才能设置 width
                      */
+                    const calculatedInt = parseInt(calculated);
                     if (column.fixed) {
-                        column.width = calculated;
+                        column.width = calculatedInt;
                         adjust = calculated;
                     } else {
-                        column.width = calculated;
+                        column.width = calculatedInt;
                     }
                     if (0 < data.length) {
                         /* （有数据）*/
-                        width += calculated;
-                    }
-
-                    /* 基础修正 */
-                    if (undefined !== column.width && column.width < 84) {
-                        delete column.width;
+                        width += calculatedInt;
                     }
                 }
             }
@@ -188,7 +185,7 @@ export default ($table = {}, data = [], reference) => {
         if (!$table.scroll) {
             $table.scroll = {};
         }
-        $table.scroll.x = 'max-content';  //width + adjust * 2;
+        $table.scroll.x = 'fill-available';  //width + adjust * 2;
         /*
          * className 计算
          */

@@ -60,7 +60,7 @@ const _aiInput = (reference, values) => (cell = {}) => {
         return _aiTitle(reference, cell);
     } else {
         // 其他项
-        const {col = {}, optionItem = {}, optionConfig = {}} = cell;
+        const {optionItem = {}, optionConfig = {}} = cell;
         const attached = {};
         /*
          * 如果有 rules 则带上 hasFeedback
