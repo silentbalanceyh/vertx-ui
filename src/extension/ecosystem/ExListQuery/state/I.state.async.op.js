@@ -30,11 +30,7 @@ export default (reference, config = {}, state = {}) => {
                     /*
                      * 处理核心 List 问题
                      */
-                    console.error(state);
-                    Ux.aclOp(state.options, response);
-                    const result = {};
-                    response.forEach(item => result[item['clientKey']] = result[item.text]);
-                    resolve(result);
+                    resolve(Ux.aclOp(state.options, response));
                 });
             } else {
                 /*

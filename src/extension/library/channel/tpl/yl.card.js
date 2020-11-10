@@ -52,6 +52,8 @@ export default (reference, fnRender, config = {}) => {
          * 1）切换显示按钮专用
          * 2）处理 $activeKey 的状态
          */
+        const {$disabled = false} = reference.state;
+        attrs.$disabled = $disabled;
         return (
             <PageCard reference={reference} {...attrs}>
                 {

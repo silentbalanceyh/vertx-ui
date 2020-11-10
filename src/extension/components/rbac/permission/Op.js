@@ -10,7 +10,9 @@ const yiPage = (reference) => {
     if (Ux.isArray(apps)) {
         apps.forEach(app => {
             // 构造链接信息
-            app.uri = `/authority/${app.key}?target=/rbac/permission`;
+            app.uri = `/authority/${app.key}?`
+                // 目标页面
+                + `target=${Ux.encryptBase64("/rbac/permission")}`;
         });
         state.$apps = apps;
     }

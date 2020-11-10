@@ -3,7 +3,7 @@ import Ux from 'ux';
 const isAuthorized = (reference) => {
     const fnBack = () => {
         const uri = Ux.toQuery("target");
-        Ux.toRoute(reference, `${uri}?target=/rbac/permission`);
+        Ux.toRoute(reference, uri, {target: uri});
     }
     /*
      * 检查 targetKey

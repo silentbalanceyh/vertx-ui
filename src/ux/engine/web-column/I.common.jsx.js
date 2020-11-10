@@ -5,9 +5,70 @@ import Unit from '../web-unit';
 import {Link} from 'react-router-dom';
 import T from "../../unity";
 
-const jsxSpan = (attrs = {}, children) =>
-    // 解决 React 无法渲染 Object的 BUG
-    (<span {...attrs}>{Abs.isObject(children) ? false : children}</span>);
+const _jsxObject = (children = {}) => {
+    const keys = Object.keys(children);
+    return (
+        <ul className={"ux-ul"}>
+            {keys.map(key => (<li key={key}>{key} = {children[key]}</li>))}
+        </ul>
+    );
+}
+const _jsxArray = (children = [], config = {}) => {
+    // 计算列宽度
+    const {__array = {}} = config;
+    // 基础表格渲染
+    let fields = [];
+    if (Abs.isArray(__array.fields)) {
+        fields = __array.fields;
+    } else {
+        children.forEach(child => {
+            const keys = Object.keys(child);
+            if (fields.length < keys.length) {
+                fields = keys;
+            }
+        });
+    }
+    const widthMap = __array.width ? __array.width : {};
+    return (
+        <table className={"ux-table-nested"}>
+            <thead>
+            <tr>
+                {fields.map(field => {
+                    const style = {};
+                    if (widthMap.hasOwnProperty(field)) {
+                        // 各自16的边距
+                        style.width = widthMap[field] + 32;
+                    }
+                    return (
+                        <th key={field} style={style}>{field}</th>
+                    )
+                })}
+            </tr>
+            </thead>
+            <tbody>
+            {children.map((child, childIdx) => (
+                <tr key={`row${childIdx}`}>
+                    {fields.map(field => (
+                        <td key={`${field}${childIdx}`}>{child[field]}</td>
+                    ))}
+                </tr>
+            ))}
+            </tbody>
+        </table>
+    );
+}
+
+const jsxSpan = (attrs = {}, children, config = {}) => (
+    <span {...attrs}>
+            {(() => {
+                if (Abs.isObject(children)) {
+                    return _jsxObject(children);
+                } else if (Abs.isArray(children)) {
+                    return _jsxArray(children, config);
+                } else return children;
+            })()}
+    </span>
+)
 const jsxIcon = (attrs = {}, children, iconData) => {
     if (iconData) {
         const {icon, iconStyle = {}} = iconData;

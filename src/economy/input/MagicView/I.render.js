@@ -56,7 +56,9 @@ const jsxRecord = (reference, value, config = {}) => {
         </span>
     );
 };
-const jsxLabel = (reference, value, config = {}) => (<span>{value}</span>);
+const jsxLabel = (reference, value, config = {}) => {
+    return (<span>{Ux.isObject(value) ? JSON.stringify(value) : value}</span>);
+}
 const jsxIcon = (reference, icon, style = {}) => (<Icon type={icon} style={style}/>);
 const jsxUser = (reference, value, config = {}) => {
     const {user = {}, $empty = ""} = config;

@@ -1,4 +1,5 @@
 import R from '../../engine/expression';
+import T from '../../engine/datum';
 import {MagicView} from "web";
 import React from "react";
 
@@ -18,7 +19,12 @@ const aiMagic = (reference, jsx = {}) => {
     if (config.record) {
         config.rxRecord = R.Ant.toRecord(reference, config);
     }
-    return (<MagicView {...rest} config={config} reference={reference}/>);
+    /*
+     * 绑定 $a_ 和 $t_
+     */
+    const inherit = T.onUniform(reference.props);
+    return (<MagicView {...rest} config={config}
+                       reference={reference} {...inherit}/>);
 };
 
 export default {

@@ -2,31 +2,43 @@ import Abs from '../abyss';
 import Cv from '../constant';
 import moment from "moment";
 
-const optFalse = (options, accessSet, key) => {
-    if (!accessSet.has(key)) {
-        options[key] = false;
-    }
-}
-
 export default {
+    /*
+     * 返回值在非动态处理时新增 options 的限制性操作
+     */
     aclOp: (options = {}, ops) => {
         /*
-     * 操作专用 __acl 处理
-     */
+         * 操作专用 __acl 处理
+         */
         if (ops['__acl']) {
             const {__acl = {}} = ops;
             const {access = []} = __acl;
             if (0 < access.length) {
+                /*
+                 * filter 函数
+                 */
+                const fnFalse = (options, accessSet, key) => {
+                    if (!accessSet.has(key)) {
+                        options[key] = false;
+                    }
+                }
                 const accessSet = new Set(access);
                 [
                     "search.enabled",
                     "search.advanced",
                     "op.row.edit",
                     "op.row.delete"
-                ].forEach(key => optFalse(options, accessSet, key))
+                ].forEach(key => fnFalse(options, accessSet, key))
             }
             delete ops['__acl'];
         }
+        /*
+         * 限制性功能开放
+         */
+        const parsed = {};
+        ops.filter(item => options.hasOwnProperty(item.clientKey))
+            .forEach(item => parsed[item.clientKey] = item.text);
+        return parsed;
     },
     aclData: ($inited = {}, reference, $edition) => {
         const acl = {};

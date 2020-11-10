@@ -12,7 +12,16 @@ const yiEdition = (reference, config = {}) => {
          */
     } = config;
     const state = {};
-    const executors = Ux.configExecutor(reference, Event.EVENTS);
+    const {$rows = {}} = reference.props;
+    /*
+     * EVENTS中的默认函数
+     * fnEdit
+     * fnDelete
+     * 上层传入 $rows 对象，同样包含了其他函数
+     */
+    const events = Ux.clone(Event.EVENTS);
+    Object.assign(events, $rows);
+    const executors = Ux.configExecutor(reference, events);
     /*
      * 窗口
      */
@@ -33,7 +42,14 @@ const yiEdition = (reference, config = {}) => {
             }
         }
     });
-    state.$table = Ux.configTable(ref, table, normalized);
+    const tableRef = Ux.configTable(ref, table, normalized);
+    state.$table = tableRef;
+    if (tableRef.rowKey) {
+        /*
+         * 方便后期编辑、添加、删除
+         */
+        state.$keyField = tableRef.rowKey;
+    }
     /*
      * 按钮处理
      */
@@ -47,12 +63,54 @@ const yiEdition = (reference, config = {}) => {
      * initialValue
      */
     const {value = []} = reference.props;
-    if (Ux.isArray(value)) {
-        state.initialValue = value;
-    }
+    const $data = yoValue(value, tableRef);
+    state.initialValue = $data;
+    state.data = $data;
+
     yiForm(reference, config, state)
         .then(Ux.ready).then(Ux.pipe(reference));
 };
+
+const yoValue = (value = [], tableRef = {}) => {
+    let normalized = [];
+    if (Ux.isArray(value)) {
+        normalized = Ux.clone(value);
+    } else {
+        try {
+            normalized = JSON.parse(value);
+        } catch (error) {
+        }
+    }
+    if (Ux.isArray(normalized)) {
+        /*
+         * key 专用执行
+         */
+        normalized.forEach((record, index) => {
+            if (undefined !== tableRef.rowKey) {
+                /*
+                 * 定义了 rowKey 字段信息
+                 */
+                if (!record.hasOwnProperty(tableRef.rowKey)) {
+                    record[tableRef.rowKey] = `ERROR-${index}`;
+                }
+                /*
+                 * 不包含 key 时，将 rowKey 的值赋值给 key
+                 */
+                if (!record.key) {
+                    record.key = record[tableRef.rowKey];
+                }
+            } else {
+                /*
+                 * 如果没定义 rowKey，不包含 key 则标识为错误
+                 */
+                if (!record.hasOwnProperty('key')) {
+                    record.key = `ERROR-${index}`;
+                }
+            }
+        });
+    }
+    return normalized;
+}
 
 const yiView = (reference, config) => {
     const {
@@ -139,6 +197,7 @@ const yuPage = (reference, virtualRef) => {
     }
 };
 export default {
+    yoValue,
     yiPage,
     yuPage,
 }

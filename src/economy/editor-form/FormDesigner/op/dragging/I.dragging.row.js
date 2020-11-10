@@ -20,7 +20,7 @@ const targetSpec = {
             const toIndex = targetItem.rowIndex;
             Ux.fn(component).rxRowWrap(fromIndex, toIndex);
             // 关闭覆盖效果
-            Cmd.dropColor(component, false);
+            Ux.dndDropColor(component, false);
         }
     },
     /* 浮游在 Target 之上 */
@@ -28,7 +28,7 @@ const targetSpec = {
         const sourceItem = monitor.getItem();
         const targetItem = Cmd.item(props);
         if (!Cmd.itemRowSame(sourceItem, targetItem)) {
-            Cmd.dropColor(component, monitor.isOver());
+            Ux.dndDropColor(component, monitor.isOver());
         }
     }
 };

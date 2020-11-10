@@ -57,7 +57,7 @@ export default (reference) => {
                     items = items.filter(item => "edit" !== item);
                 }
                 return (
-                    <Button.Group className={"ux-group"} key={text}>
+                    <Button.Group key={text}>
                         {items.map(item => {
                             let onClick = FUNS.op[item];
                             if (Ux.isFunction(onClick)) {

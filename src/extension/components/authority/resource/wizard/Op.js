@@ -5,35 +5,59 @@ import Op from './Op.Step';
 const yiData = (data, reference, state = {}) => {
     if (data) {
         // 状态数据（更新）
-        const {__group, __parent = {}} = data;
+        const {dataCode = [], dataName, dataType} = data;
         // group 条件处理权限读取
         return Ux.ajaxPost('/api/permission/search', {
             criteria: {
-                group: __group.group,
+                "code,i": dataCode
             },
             sorter: [
                 "name,ASC"
             ]
         }).then((permissions = {}) => {
-            const data = {};
+            const inited = {};
             // 表单核心数据
-            data.group = __group.group;
-            const {list = []} = permissions;
-            // 需要给每个 permissions 追加 type 信息
-            const $permissions = Ux.isArray(list) ? Ux.clone(list) : [];
+            const $permissions = Ux.isArray(permissions.list) ? permissions.list : [];
             if (0 < $permissions.length) {
+                const source = Ux.onDatum(reference, "resource.models");
+                const root = source.filter(item => !item.parentId);
+                /*
+                 * 此处由于读取到的权限信息，则需要执行两个字段的计算
+                 * resourceType 和 modelKey
+                 * 这两个字段的目的只是为了计算 identifier
+                 */
                 $permissions.forEach(permission => {
-                    permission.type = __parent.code;
-                    // modelKey 的计算
-                    const source = Ux.onDatum(reference, "resource.models");
                     const found = Ux.elementFind(source, {identifier: permission.identifier});
                     if (found[0]) {
-                        permission.modelKey = found[0].key;
+                        const record = found[0];
+                        permission.modelKey = record.key;
+                        /*
+                         * 计算资源类型
+                         */
+                        const branch = Ux.elementBranch(source, record.key, "parentId");
+                        const resourceKey = branch[0] ? branch[0].key : undefined;
+                        if (resourceKey) {
+                            const resource = Ux.elementUnique(root, 'key', resourceKey);
+                            if (resource) {
+                                /*
+                                 * 资源类型计算
+                                 */
+                                permission.resourceType = resource.code;
+                            }
+                        }
                     }
+                    // type，资源类型计算
                 })
             }
-            data.permissions = $permissions;
-            state.$data = Ux.clone(data);
+
+            /*
+             * 初始化核心字段
+             */
+            inited.permissions = $permissions;
+            inited.type = dataType;
+            inited.group = dataName;
+
+            state.$data = Ux.clone(inited);
             state.$readyPart = true;
 
             return Ux.promise(state);
@@ -88,17 +112,15 @@ const yuWizard = (reference, virtualRef) => {
          */
     } else {
         const {data} = reference.props;
-        if (data) {
-            const {$readyPart = true} = reference.state;
-            if (!$readyPart) {
-                reference.setState({
-                    $wizard: undefined, // $wizard 专用数据
-                    $removed: undefined, // 移除部分
-                    $step: 0,
-                });
-                Ux.toLoading(() => yiData(data, reference)
-                    .then(Ux.ready).then(Ux.pipe(reference)), 32.8)
-            }
+        const {$readyPart = true} = reference.state;
+        if (!$readyPart) {
+            reference.setState({
+                $wizard: undefined, // $wizard 专用数据
+                $removed: undefined, // 移除部分
+                $step: 0,
+            });
+            Ux.toLoading(() => yiData(data, reference)
+                .then(Ux.ready).then(Ux.pipe(reference)), 32.8)
         }
     }
 }

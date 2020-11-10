@@ -5,17 +5,21 @@
         "code": "编号",
         "name": "名称"
     },
-    "_empty":{
-        "up":{
-            "type":"warning",
+    "_empty": {
+        "edit": {
+            "view": "（当前页面不支持关系管理功能）",
+            "data": "（对不起，您的配置项数据不满足关系管理条件）"
+        },
+        "up": {
+            "type": "warning",
             "message": "无上游关系定义",
             "description": [
                 "当前选择类型没有上游关系定义。",
                 "您可以在建模管理中重新定义该配置项分类的上游关联关系。"
             ]
         },
-        "down":{
-            "type":"warning",
+        "down": {
+            "type": "warning",
             "message": "无下游关系定义",
             "description": [
                 "当前选择类型没有下游关系定义。",
@@ -28,25 +32,25 @@
             "title": "所有配置项",
             "key": "__DELETE__",
             "up": {
-                "dataIndex":"sourceCategory",
-                "title":"配置项类型",
-                "$field":"sourceIdentifier"
+                "dataIndex": "sourceCategory",
+                "title": "配置项类型",
+                "$field": "sourceIdentifier"
             },
-            "down":{
-                "dataIndex":"targetCategory",
-                "title":"配置项类型",
-                "$field":"targetIdentifier"
+            "down": {
+                "dataIndex": "targetCategory",
+                "title": "配置项类型",
+                "$field": "targetIdentifier"
             }
         },
-        "up":{
-            "table":{
+        "up": {
+            "table": {
                 "rowKey": "key",
                 "columns": [
                     {
-                        "metadata":"sourceCode,配置项编号,RENDERS",
-                        "config":{
+                        "metadata": "sourceCode,配置项编号,RENDERS",
+                        "config": {
                             "value": "code",
-                            "mapping":{
+                            "mapping": {
                                 "globalId": "sourceGlobalId",
                                 "name": "sourceName",
                                 "identifier": "sourceIdentifier"
@@ -56,20 +60,20 @@
                     "sourceName,配置项名称"
                 ]
             },
-            "tips":{
-                "title":"上游配置项",
-                "color":"green"
+            "tips": {
+                "title": "上游配置项",
+                "color": "green"
             }
         },
-        "down":{
-            "table":{
+        "down": {
+            "table": {
                 "rowKey": "key",
                 "columns": [
                     {
                         "metadata": "targetCode,配置项编号,RENDERS",
-                        "config":{
+                        "config": {
                             "value": "code",
-                            "mapping":{
+                            "mapping": {
                                 "globalId": "targetGlobalId",
                                 "name": "targetName",
                                 "identifier": "targetIdentifier"
@@ -79,9 +83,9 @@
                     "targetName,配置项名称"
                 ]
             },
-            "tips":{
-                "title":"下游配置项",
-                "color":"magenta"
+            "tips": {
+                "title": "下游配置项",
+                "color": "magenta"
             }
         }
     },
@@ -93,8 +97,8 @@
         "dialog": "添加下游关系,添加,关闭,false,960,true,$opSaveCi",
         "button": "opShowRel,添加下游关系,,plus,,className=ux-red"
     },
-    "_batch":{
-        "text":"删除所选",
-        "confirm":"是否删除所选择的记录？"
+    "_batch": {
+        "text": "删除所选",
+        "confirm": "是否删除所选择的记录？"
     }
 }

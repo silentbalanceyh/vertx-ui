@@ -33,11 +33,30 @@ const _renderPage = (reference, data, key, combine) => {
             $table.scroll = {};
             $table.scroll.y = 240;
         }
+        const editable = Op.isEditable(reference);  // 是否开启编辑视图
         return (
             <div className={"ex-relation-body"}>
                 <Row className={"row"}>
-                    {renderTool(reference, data, key)}
-                    {renderBatch(reference, data, key)}
+                    {editable ? (
+                        <Col span={20} className={"row-op"}>
+                            {renderTool(reference, data, key)}
+                            &nbsp;&nbsp;&nbsp;&nbsp;
+                            {renderBatch(reference, data, key)}
+                        </Col>
+                    ) : (
+                        <Col span={20} className={"row-empty"}>
+                            {(() => {
+                                const empty = Ux.fromHoc(reference, "empty");
+                                const {edit = {}} = empty;
+                                const {config = {}} = reference.props;
+                                if (config.editable) {
+                                    return edit.data;
+                                } else {
+                                    return edit.view;
+                                }
+                            })()}
+                        </Col>
+                    )}
                     {renderTag(reference, tips)}
                 </Row>
                 <Row>

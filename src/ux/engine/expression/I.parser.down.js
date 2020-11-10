@@ -73,6 +73,8 @@ const PARSER = {
     normalize,
     sorter,                                       // 带参数的排序字段
     inscribe: jsxKv("inscribe"),            // readOnly = true 只读状态下需要显示文字为黑色
+    size: itemValue("size"),                    // Button，尺寸
+    shape: itemValue("shape"),                  // Button, 属性处理
     _submit: itemValue("submit"),           // 按钮提交专用（旧版）
     fixed: itemValue("fixed"),              // 布局专用（旧版）
     group: itemValue("group"),              // 分组专用

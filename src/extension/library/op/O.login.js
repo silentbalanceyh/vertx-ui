@@ -17,7 +17,7 @@ const $opLogout = (reference) => Api.logout().then(result => {
     // 清除Session
     Ux.toLogout();
     // 路由处理
-    Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN);
+    Ux.toRoute(reference, Ux.Env.ENTRY_LOGIN, {mid: null, pid: null});
     // 清除State上的数据
     Ux.writeClean(reference, ['user']);
 }).catch(error => Ux.ajaxError(reference, error));

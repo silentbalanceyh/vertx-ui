@@ -2,7 +2,7 @@ import React from 'react'
 import Ux from "ux";
 import Ex from 'ex';
 import {ExTab} from 'ei';
-import Op from './Op';
+import Op from './op/Op';
 import './Cab.less';
 
 @Ux.zero(Ux.rxEtat(require("./Cab.json"))
@@ -22,6 +22,7 @@ class Component extends React.PureComponent {
                 <ExTab {...Ex.yoAmbient(this)} config={tabs}>
                     {render.tabResource(this)}
                     {render.tabPermission(this)}
+                    {render.tabFree(this)}
                 </ExTab>
             )
         }, Ex.parserOfColor("PxAuthority-Resource").page({

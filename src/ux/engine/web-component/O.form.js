@@ -7,6 +7,7 @@ import React from 'react';
 import U from 'underscore';
 import {Col, Form, Row} from 'antd';
 import {LoadingAlert} from 'web';
+import WebField from '../web-field';
 
 const aiHidden = (reference, values = {}, raft = {}) => {
     if (raft.hidden) {
@@ -74,15 +75,16 @@ const _aiInput = (reference, values) => (cell = {}) => {
          * 追加 web-form-has-error 类名，保证验证时的提示处理
          * */
         const item = Ut.connected();
+        const colAttrs = Abs.clone(col);
         if (item.contains(cell.__render)) {
-            if (!col.className) col.className = "";
+            if (!colAttrs.className) colAttrs.className = "";
             // 只添加一次
-            if (0 >= col.className.indexOf("web-form-has-error")) {
-                col.className = `web-form-has-error ${col.className}`
+            if (0 > colAttrs.className.indexOf("web-form-has-error")) {
+                colAttrs.className = `web-form-has-error ${colAttrs.className}`
             }
         }
         return (
-            <Col {...col}>
+            <Col {...colAttrs}>
                 <Form.Item {...optionItem} {...attached}>
                     {cell.render ? cell.render(values) : false}
                 </Form.Item>
@@ -104,7 +106,7 @@ const aiInit = (reference, values) => {
     /*
      * 基础初始化
      */
-    const {$inited = {}, $record = {}} = reference.props;
+    const {$inited = {}, $record = {}, rxInited = record => record} = reference.props;
     let initials = {};
     if (values && !Abs.isEmpty(values)) {
         initials = Abs.clone(values);
@@ -126,6 +128,12 @@ const aiInit = (reference, values) => {
      * initials 的优先级高于 detect
      */
     Object.assign(detect, initials);
+    /*
+     * 外置注入修改初始值专用
+     */
+    if (Abs.isFunction(rxInited)) {
+        detect = rxInited(detect);
+    }
     return Abs.clone(detect);   // 拷贝最终的值
 };
 /*
@@ -167,7 +175,7 @@ const aiForm = (reference, values, config = {}) => {
             {/** 字段渲染 **/}
             {aiField(reference, initials, raft)}
         </Form>
-    );
+    )
 };
 const aiFormInput = (reference, values, raft = {}) => {
     /*
@@ -184,9 +192,39 @@ const aiFormInput = (reference, values, raft = {}) => {
         </div>
     )
 };
+const aiFormField = (reference, fieldConfig = {}, fnJsx) => {
+    const {form} = reference.props;
+    if (fieldConfig) {
+        let fnRender;
+        if (Abs.isFunction(fnJsx)) {
+            fnRender = fnJsx;
+        } else {
+            if (fieldConfig.render) {
+                fnRender = WebField[fieldConfig.render];
+            } else {
+                fnRender = WebField.aiInput;
+            }
+        }
+        const {
+            optionItem,
+            optionConfig,
+            optionJsx,
+            field,
+        } = fieldConfig;
+        const {getFieldDecorator} = form;
+        return (
+            <Form.Item {...optionItem}>
+                {getFieldDecorator(field, optionConfig)(fnRender(reference, optionJsx))}
+            </Form.Item>
+        )
+    } else {
+        return false;
+    }
+}
 export default {
     aiForm,
     aiInit, // 统一处理
     aiField,
-    aiFormInput
+    aiFormInput,
+    aiFormField,
 }

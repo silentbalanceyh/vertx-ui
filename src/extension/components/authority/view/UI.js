@@ -33,7 +33,7 @@ class Component extends React.PureComponent {
                                 icon={"close"}
                                 onClick={event => {
                                     Ux.prevent(event);
-                                    Ux.toRoute(reference, `/authority/role?target=/rbac/permission`);
+                                    Ux.toRoute(reference, `/authority/role`, {target: "/rbac/permission"});
                                 }}
                         />
                     )

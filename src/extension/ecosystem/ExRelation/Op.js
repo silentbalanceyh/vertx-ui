@@ -40,7 +40,25 @@ const yiPage = (reference) => {
     }
     reference.setState(state);
 };
+const isEditable = (reference) => {
+    const {config = {}, current = {}} = reference.props;
+    const {editRule = {}} = config;
+    // 是否满足编辑规则
+    let isEdit;
+    if (config.editable) {
+        if (Ux.isEmpty(editRule)) {
+            // 没有规则
+            isEdit = true;
+        } else {
+            isEdit = Ux.isRule(current, editRule); // 可编辑
+        }
+    } else {
+        isEdit = false; // 不可编辑
+    }
+    return isEdit;
+}
 export default {
     ...Yo,
-    yiPage
+    yiPage,
+    isEditable, // 是否可编辑
 }

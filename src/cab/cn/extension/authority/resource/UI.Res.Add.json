@@ -9,8 +9,7 @@
                     "config": {
                         "message": "关于`操作`和`资源`",
                         "description": [
-                            "资源和操作是 1对1 的关系，每一个资源和一个`安全操作`绑定。",
-                            "`安全`操作可以从系统的集成接口中选择，关于接口管理科参考`集成管理`菜单。",
+                            "资源和操作是 1对1 的关系，每一个资源和一个`安全操作`绑定，`安全`操作可以从系统的集成接口中选择。",
                             "资源编码和操作编码在同一个应用中必须唯一，并且根据RESTful规范，RESTful地址和HTTP方法也会构成唯一键。"
                         ],
                         "type": "warning"
@@ -47,7 +46,7 @@
             ],
             [
                 {
-                    "metadata": "type,资源分类,,,aiSelect,placeholder=选择资源类型",
+                    "metadata": "resourceType,资源分类,,,aiSelect,placeholder=选择资源类型",
                     "optionJsx.config.datum": "source=resource.type,value=code,label=name",
                     "optionJsx.depend.impact": {
                         "reset": [
@@ -145,7 +144,7 @@
                 "comment,资源备注,24"
             ],
             [
-                "title=操作要求"
+                "title=安全操作配置"
             ],
             [
                 {

@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from "ux";
 import {Button, Result} from 'antd';
-import Op from './Op';
+import Op from './op/Op';
 
 @Ux.zero(Ux.rxEtat(require("../Cab.json"))
     .cab("UI.Perm.Done")

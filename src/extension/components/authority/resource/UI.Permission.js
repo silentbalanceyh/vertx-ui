@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from 'ux';
-import Op from './Op';
+import Op from './op/Op';
 import Ex from "ex";
 import jsx from './Web.Tree';
 import Wizard from './wizard/UI';
@@ -37,7 +37,7 @@ class Component extends React.PureComponent {
                     rowCls: "web-authority-resource",
                     rightCls: "content"
                 })
-        }, Ex.parserOfColor("PxPermissions").control());
+        }, Ex.parserOfColor("PxPermissionList").control());
     }
 }
 

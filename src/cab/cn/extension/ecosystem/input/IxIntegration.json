@@ -25,26 +25,24 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "hostname,主机地址",
-                                            "optionJsx.placeholder": "IP地址 / 域名"
-                                        },
-                                        "port,端口号,,40%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "username,登录账号",
-                                            "optionJsx.autoComplete": "new-username"
-                                        },
-                                        "password,登录密码,,,aiPassword"
-                                    ],
-                                    [
-                                        {
-                                            "metadata": "protocol,协议类型,16,,aiRadio",
+                                            "metadata": "protocol,协议类型,8,,aiRadio",
                                             "optionJsx.config.items": [
                                                 "http,HTTP",
                                                 "https,HTTPS"
                                             ]
-                                        }
+                                        },
+                                        {
+                                            "metadata": "hostname,主机地址,8",
+                                            "optionJsx.placeholder": "IP地址 / 域名"
+                                        },
+                                        "port,端口号,8,50%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "username,登录账号,8",
+                                            "optionJsx.autoComplete": "new-username"
+                                        },
+                                        "password,登录密码,16,95%,aiPassword"
                                     ],
                                     [
                                         {
@@ -95,7 +93,7 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "options,,24,,aiJsonEditor",
+                                            "metadata": "options,配置数据,24,,aiJsonEditor",
                                             "optionJsx.height": 220
                                         }
                                     ]

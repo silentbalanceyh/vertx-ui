@@ -19,6 +19,8 @@ import Button from './O.button';
 import ListSelector from './O.selector.list';
 import TreeSelector from './O.selector.tree';
 import AddressSelector from './O.selector.address';
+import MatrixSelector from './O.selector.matrix';
+
 import DatumCascade from './O.cascade.datum';
 import FileUpload from './O.file.upload';
 import TableEditor from './O.editor.table';
@@ -51,9 +53,11 @@ const exported = {
     ...Radio,
     ...Transfer,
 
+    ...MatrixSelector,
     ...ListSelector,
     ...TreeSelector,
     ...AddressSelector,
+
     ...DatumCascade,
     ...FileUpload,
     ...TableEditor,

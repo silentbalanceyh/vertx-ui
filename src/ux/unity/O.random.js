@@ -14,6 +14,10 @@ const randomString = (length) => {
 const randomInteger = (min = 0, max = 100) => {
     return Math.floor(Math.random() * (max + 1)) + min;
 };
+const randomArray = (array = []) => {
+    const index = randomInteger(0, array.length - 1);
+    return array[index];
+}
 export default {
     /**
      * ## 集成函数
@@ -34,6 +38,13 @@ export default {
      * @param {Number} length 输入需要生成随机字符串的长度。
      */
     randomString,
+    /**
+     * ## 集成函数
+     *
+     * @memberOf module:_random
+     * @method randomArray
+     */
+    randomArray,
     /**
      * ## 标准函数
      *

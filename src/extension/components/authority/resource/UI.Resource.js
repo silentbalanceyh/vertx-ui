@@ -2,7 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from "ex";
 import {ExListComplex} from "ei";
-import Op from './Op';
+import Op from './op/Op';
 import jsx from "./Web.Tree";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))

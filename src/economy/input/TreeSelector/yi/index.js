@@ -1,14 +1,16 @@
 import yiClick from './I.fn.click';
-import yiDialog from './I.fn.dialog';
-import yiTree from './I.fn.tree';
-import yoTree from './I.fn.yo.tree';
+import Tree from './I.fn.tree';
+import Ix from '../../../_internal/ix'
 import Ux from "ux";
 
 const yiDefault = (reference = {}) => {
     const {config = {}} = reference.props;
+    /*
+     * 各部分组件配置处理
+     */
+    const dialog = Ix.dialogConfig(reference, config);
     const onClick = yiClick(reference, config);
-    const dialog = yiDialog(reference, config);
-    const tree = yiTree(reference, config);
+    const tree = Tree.yiTree(reference, config);
     return {
         onClick,
         dialog,
@@ -49,5 +51,12 @@ const yiValue = (reference, jsx = {}) => {
 export default {
     yiDefault,
     yiValue,
-    yoTree,
+    /*
+     * Tree 操作中的三个核心方法
+     * 1) - yiTree
+     * 2) - yoTree
+     * 3) - yoTreeData
+     */
+    yoTree: Tree.yoTree,
+    yoTreeData: Tree.yoTreeData,
 }

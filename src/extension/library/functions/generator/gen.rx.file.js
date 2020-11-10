@@ -38,6 +38,8 @@ const rxImport = (reference) => (file) => {
         const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_IMPORT_URI];
         return Ux.ajaxUpload(uri, file);
+    } else {
+        console.error("上传文件有问题，请检查！", file);
     }
 };
 export default {

@@ -25,7 +25,6 @@ const tabDetail = reference => () => {
     inherit.config = {form: raft};
     inherit.$edition = $edition;
     inherit.$inited = $inited;
-
     return (
         <div style={_toHeight()}>
             <ExForm {...inherit}/>

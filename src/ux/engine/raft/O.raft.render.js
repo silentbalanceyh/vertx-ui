@@ -67,9 +67,7 @@ const raftValue = (cell = {}, values = {}, reference) => {
         /*
          * 布尔值初始化
          */
-        if (false === literal) {
-            cell.optionConfig.initialValue = false;
-        }
+        cell.optionConfig.initialValue = literal;
     }
 };
 /*
@@ -222,7 +220,6 @@ const raftRender = (cell = {}, config = {}) => {
                 optionJsx['data-initial'] = values[cell.field];
             }
 
-
             /*
              * 子表单 renders 继承
              */
@@ -246,14 +243,12 @@ const raftRender = (cell = {}, config = {}) => {
                 optionJsx.reference = reference;    // 特殊引用，触发 depend / linker
                 const {getFieldDecorator} = form;
                 if (cell.field) {
-
                     /*
                      * 只有这个位置需要代码支撑
                      * 增加一种情况，如果当前字段 disabled 的时候，
                      * 1) Checkbox 的 value 必须 undefined，同样是修改 optionConfig
                      */
                     Ut.writeInitial(optionConfig, optionJsx, cell);
-
                     /*
                      * 装饰之前执行一次
                      */

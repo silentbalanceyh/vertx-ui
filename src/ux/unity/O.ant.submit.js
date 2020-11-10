@@ -79,5 +79,9 @@ const valueRequest = (params = {}) => {
 };
 export default {
     formSubmit,
+    formEnd: (reference) => reference.setState({
+        $submitting: false,
+        $loading: false
+    }),
     valueRequest,
 }

@@ -67,7 +67,7 @@ const rxSearch = (reference) => (event) => {
     /*
      * 新资源，没有关联任何权限
      */
-    
+
     criteria['permissionId,n'] = "";
     criteria['key,i'] = $removed;
 
@@ -104,4 +104,5 @@ export default {
     rxAdd,
     rxSearch,
     rxSelect,
+
 }

@@ -48,13 +48,7 @@ const onNext = (reference) => (event) => {
             } else {
                 params.removed = [];
             }
-
-            Ux.ajaxPut("/api/permission/definition/saving", params).then(nil => {
-                // 调用删除关联的专用方法（批量删除）
-                reference.setState({$step: 2, $submitting: false});
-                // 刷新
-                Ux.fn(reference).rxRefresh();
-            })
+            console.error(params);
         })
     }
 }

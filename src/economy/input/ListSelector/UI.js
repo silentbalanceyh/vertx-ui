@@ -38,7 +38,7 @@ class Component extends React.PureComponent {
          */
         const inputAttrs = Op.yoValue(this, jsx);
         const ref = Ux.onReference(this, 1);
-        let $table = Ux.clone(table);
+        const $table = Ux.clone(table);
         Ux.configScroll($table, $data.list, ref);
         /*
          * 处理输入框属性

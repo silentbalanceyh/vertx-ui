@@ -16,13 +16,35 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
 
                 // 让级别条件支持别名，重新抽取字段
                 parameters[field] = value;
-                const {$inited} = refereuce.props;
 
-                const key = alias && alias.key ? alias.key : "key";
-                if ($inited && $inited[key]) {
-                    // 更新Mode
-                    const updateKey = `key,<>`;
-                    parameters[updateKey] = $inited[key];
+                /*
+                 * 关于 key 的计算
+                 * 1）$inited 为初始 key
+                 * 2）form 中还会包含最新的 key（如果这个过程中会出现变更）
+                 */
+                {
+                    const {$inited} = refereuce.props;
+                    const hitField = alias && alias.key ? alias.key : "key";
+
+                    let hitValue = $inited ? $inited[hitField] : undefined;
+
+                    /*
+                     * 追加流程，如果 form 的某些操作更改了当前 form 中存在的 key，则需要
+                     * 将 hitValue 重新设值成新的 key 而不是旧的
+                     */
+                    const {form} = refereuce.props;
+                    if (form) {
+                        const changed = form.getFieldsValue();
+                        if (!!changed[hitField] && hitValue !== changed[hitField]) {
+                            hitValue = changed[hitField];
+                        }
+                    }
+
+                    if (hitValue) {
+                        // 更新Mode
+                        const updateKey = `key,<>`;
+                        parameters[updateKey] = hitValue;
+                    }
                 }
                 // existing 时，参数间关系默认为 AND（更新专用）
                 if (Object.keys(parameters).length > 1) {

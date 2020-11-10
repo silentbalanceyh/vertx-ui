@@ -3,7 +3,7 @@ import Ux from "ux";
 import renderMenu from "./Web.Main.Menu";
 import Form from "./Web.Main.Form";
 import Ex from "ex";
-import {ModelingPpt} from "app";
+import {ExDeploy} from "ei";
 import React from "react";
 
 export default (reference) => () => {
@@ -26,7 +26,7 @@ export default (reference) => () => {
                           $model={$model}/>
                 ) : (() => {
                     const alert = Ux.fromHoc(reference, "alert");
-                    return (<ModelingPpt alert={alert} adjust={380} step={2}/>)
+                    return (<ExDeploy alert={alert} $width={880} step={2}/>)
                 })()}
             </Col>
         </Row>

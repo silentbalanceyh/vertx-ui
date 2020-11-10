@@ -12,12 +12,14 @@ export default (reference, config = {}) => {
             const applyKey = (item) => {
                 if (item.key) item._key = item.key;
             };
+
+            // 根据数据类型选择
             if (U.isArray(keys)) {
                 keys.forEach(item => applyKey(item));
             } else if (U.isObject(keys)) {
                 applyKey(keys);
             }
-            reference.setState({$select: keys});
+            reference.setState({$keySet: keys});
         }
     };
     return {columns, rowSelection}

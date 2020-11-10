@@ -1,7 +1,7 @@
 import Ex from "ex";
 import Ux from "ux";
-import FormAdd from './form/UI.Res.Add';
-import FormEdit from './form/UI.Res.Edit';
+import FormAdd from '../form/UI.Res.Add';
+import FormEdit from '../form/UI.Res.Edit';
 
 const yoResList = (reference) => {
     const listAttrs = Ex.yoAmbient(reference);

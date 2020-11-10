@@ -2,7 +2,7 @@
 import {Collapse, Spin, Tag, Tree} from 'antd';
 import React from 'react';
 import Ux from "ux";
-import Op from './Op';
+import Op from './op/Op';
 
 export default {
     treeResource: (reference, $tree = []) => {
@@ -38,7 +38,7 @@ export default {
                                 fontSize: 14
                             }
                             attrs.closable = true;
-                            attrs.onClose = Op.yoPermClose(reference);
+                            attrs.onClose = Op.rxClosePerm(reference);
                             return (
                                 <Tag {...attrs}>
                                     {selected}
@@ -61,6 +61,7 @@ export default {
                             const treeAttrs = {};
                             treeAttrs.treeData = root.children;
                             treeAttrs.selectedKeys = $selectedKeys;
+                            treeAttrs.defaultExpandAll = true;
                             treeAttrs.onSelect = Op.yoPermCriteria(reference);
                             return (root.children && 0 < root.children.length) ? (
                                 <Collapse.Panel key={root.key} header={root.title}>

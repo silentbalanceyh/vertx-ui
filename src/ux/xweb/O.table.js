@@ -36,5 +36,5 @@ const xtRowDel = (reference, record, index) => (event) => {
 }
 export default {
     xtRowAdd,
-    xtRowDel,
+    xtRowDel
 }

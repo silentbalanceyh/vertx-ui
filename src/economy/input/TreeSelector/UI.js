@@ -29,16 +29,18 @@ class Component extends React.PureComponent {
         jsx.onClick = onClick;
         const inputAttrs = Op.yiValue(this, jsx);
         const treeData = Ux.toTree($data, config.tree);
+
         /*
          * selectable
          */
-        Op.yoTree(this, treeData);
+        Op.yoTreeData(this, treeData);
+        /*
+         * 根据
+         * tree
+         * treeData
+         */
+        const treeAttrs = Op.yoTree(this, tree, treeData);
 
-        const treeAttrs = Ux.clone(tree);
-        treeAttrs.treeData = treeData;
-        if (treeAttrs.checkable) {
-            treeAttrs.onCheck = Ux.rxCheckedTree(this, treeData);
-        }
         /*
          * 处理输入框属性
          */

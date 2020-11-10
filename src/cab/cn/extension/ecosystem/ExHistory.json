@@ -86,9 +86,60 @@
                 "value": "code"
             },
             "done": {
+                "type": "REPLACE",
                 "field": "type",
-                "fromValue": "DELETE",
-                "toValue": "REVERT"
+                "config": {
+                    "fromValue": "DELETE",
+                    "toValue": "REVERT"
+                }
+            }
+        },
+        {
+            "type": "ALL",
+            "where": {
+                "field": "fieldName",
+                "value": "up"
+            },
+            "done": {
+                "type": "ARRAY",
+                "field": [
+                    "valueNew",
+                    "valueOld"
+                ],
+                "config": {
+                    "valueField": [
+                        "sourceName",
+                        "sourceCode"
+                    ],
+                    "valueMap": {
+                        "sourceName": "上游配置项",
+                        "sourceCode": "配置项编号"
+                    }
+                }
+            }
+        },
+        {
+            "type": "ALL",
+            "where": {
+                "field": "fieldName",
+                "value": "down"
+            },
+            "done": {
+                "type": "ARRAY",
+                "field": [
+                    "valueNew",
+                    "valueOld"
+                ],
+                "config": {
+                    "valueField": [
+                        "targetName",
+                        "targetCode"
+                    ],
+                    "valueMap": {
+                        "targetName": "下游配置项",
+                        "targetCode": "配置项编号"
+                    }
+                }
             }
         }
     ],

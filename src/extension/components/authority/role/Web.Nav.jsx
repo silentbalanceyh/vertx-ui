@@ -9,7 +9,7 @@ export default (reference) => {
     const clean = Ux.fromHoc(reference, "clean");
     return (
         <Row className={"op-column"}>
-            <Col span={7}>
+            <Col span={7} className={"op-search"}>
                 <Form.Item label={search.label}
                            labelCol={{span: 8}}
                            wrapperCol={{span: 16}}>
@@ -29,7 +29,7 @@ export default (reference) => {
             <Col span={4} className={"action"}>
                 {Rdr.renderLogin(reference)}
             </Col>
-            <Col span={12} className={"action"}>
+            <Col span={12} className={"action op-extra"}>
                 {(() => {
                     return (
                         <Button.Group>

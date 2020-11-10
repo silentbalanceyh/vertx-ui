@@ -19,17 +19,18 @@ export {default as Container} from './input/_container';        // 容器型字�
 // -------------------------------  表单专用
 
 // 重写过的可用的自定义组件
-export {default as TableEditor} from './input/TableEditor/UI';
+export {default as TableEditor} from './input/TableEditor/UI';          // 表格编辑器
 export {default as CheckTransfer} from './input/CheckTransfer/UI';      // 多选列表型穿梭框
 export {default as DialogEditor} from './input/DialogEditor/UI';        // 表格 + 弹框（子表单），支持增删改
 export {default as MagicView} from './input/MagicView/UI';              // 各种视图专用
-export {default as ListSelector} from './input/ListSelector/UI';        // 列表选择器
-export {default as TreeSelector} from './input/TreeSelector/UI';        // 树选择器
-export {default as AddressSelector} from './input/AddressSelector/UI';  // 地址选择器
 export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
 export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
 export {default as CheckJson} from './input/CheckJson/UI';              // CheckBox多项属性Json格式
 export {default as InputArray} from './input/InputArray/UI';            // 多值输入，值结构为 Array
+export {default as MatrixSelector} from './input/MatrixSelector/UI';      // 数组选择器，选择结果是多个
+export {default as ListSelector} from './input/ListSelector/UI';        // 列表选择器
+export {default as TreeSelector} from './input/TreeSelector/UI';        // 树选择器
+export {default as AddressSelector} from './input/AddressSelector/UI';  // 地址选择器
 
 // ------------------------------- 复杂搜索组件
 export {default as SearchInput} from './input/SearchInput/UI';
@@ -37,22 +38,9 @@ export {default as SearchRangeDate} from './input/SearchRangeDate/UI';
 // -------------------------------  表格列专用
 export {default as ColumnUser} from './action/ColumnUser/UI';
 export {default as RestfulApi} from './editor-form/RestfulApi/UI';
-// -------------------------------  重新命名过的组件
-/*
- * 新：Dialog
- * 新：Navigation
- */
-export {default as Dialog} from './container/Dialog/UI';
-export {default as Navigation} from './container/Navigation/UI';
-export {default as Rectangle} from './container/Rectangle/UI';
 
-export {default as NavSwallow} from './container/NavSwallow/UI';
-/*
- * 旧：PagerHeader
- * 旧：DynamicDialog
- */
-export {default as DynamicDialog} from './container/Dialog/UI';
-export {default as PagerHeader} from './container/Navigation/UI';
+// -------------------------------  G2图引擎调用
+export {default as Graphic2} from './graphic/G2/UI';
 /*
  * 编辑器
  */
@@ -63,3 +51,22 @@ export {default as FormDesigner} from './editor-form/FormDesigner/UI';
  * 自定义组件专用
  */
 export {component} from './_internal'
+
+// -------------------------------  重新命名过的组件
+/*
+ * 新：Dialog
+ * 新：Navigation
+ */
+export {default as Dialog} from './container/Dialog/UI';
+export {default as Navigation} from './container/Navigation/UI';
+export {default as Rectangle} from './container/Rectangle/UI';
+export {default as NavSwallow} from './container/NavSwallow/UI';
+
+
+// -------------------------------  就变对应
+/*
+ * 旧：PagerHeader
+ * 旧：DynamicDialog
+ */
+export {default as DynamicDialog} from './container/Dialog/UI';
+export {default as PagerHeader} from './container/Navigation/UI';

@@ -60,6 +60,27 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
     return form;
 };
 
+/**
+ * ## 标准函数「Zero」
+ *
+ * 功能和 `valueLimit`相同，同样的执行操作，用于不同的场景。
+ *
+ * * `valueLimit` 属于标准函数。
+ * * `toLimit` 在自定义组件中调用。
+ *
+ * @memberOf module:_to
+ * @param {Props} props React组件的属性值。
+ * @param {Array} limits 需要限制的 keys 的值。
+ * @return {Object} 返回限制过后的属性值。
+ */
+const toLimit = (props = {}, limits = []) => {
+    const inherits = {};
+    const $limitKeys = Abs.immutable(limits);
+    Object.keys(props).filter(key => !$limitKeys.contains(key))
+        .forEach(key => inherits[key] = props[key]);
+    return inherits;
+};
 export default {
     toForm,
+    toLimit,
 }

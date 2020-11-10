@@ -34,7 +34,7 @@ export default (reference, config = {}) => {
                 />
             );
         } else {
-            return Cmn.jsxSpan(attrs, normalizedText);
+            return Cmn.jsxSpan(attrs, normalizedText, config);
         }
     }
 }

@@ -91,7 +91,21 @@ const getDatum = (reference, config = {}, filter = () => true) => {
                 0 < Object.keys(filterData).length ? filterData : {});
         }
         // 将data赋值给options
-        options = data;
+        const {datumSort} = config;
+        if (datumSort) {
+            const {asc = false, field} = datumSort;
+            if (field) {
+                if (asc) {
+                    options = data.sort(Ut.sorterAscFn(field));
+                } else {
+                    options = data.sort(Ut.sorterDescFn(field));
+                }
+            } else {
+                options = data;
+            }
+        } else {
+            options = data;
+        }
     } else {
         E.fxTerminal(true, 10044, source);
     }

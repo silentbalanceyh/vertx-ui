@@ -1,6 +1,7 @@
 import React from 'react';
 import {DropTarget} from "react-dnd";
 import Op from "../op";
+import Ux from "ux";
 
 class Component extends React.PureComponent {
     state = {}
@@ -9,7 +10,7 @@ class Component extends React.PureComponent {
         const targetItem = Op.item(this.props);
         const sourceItem = this.props['dragItem'];
         if (!Op.itemRowSame(sourceItem, targetItem)) {
-            Op.dropColor(this, this.props['isOver']);
+            Ux.dndDropColor(this, this.props['isOver']);
         }
     }
 

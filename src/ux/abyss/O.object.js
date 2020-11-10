@@ -163,6 +163,20 @@ const output = (params = {}, mapping = {}) => {
     });
     return input(params, revert);
 }
+const getV = (reference, key) => {
+    if (reference) {
+        let found;
+        if (reference.state) {
+            found = reference.state[key];
+        }
+        if (!found) {
+            if (reference.props) {
+                found = reference.props[key];
+            }
+        }
+        return found;
+    }
+}
 export default {
     input,
     output,
@@ -170,4 +184,5 @@ export default {
     slice,
     sequence,
     merge,
+    getV,
 }

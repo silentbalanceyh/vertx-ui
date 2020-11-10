@@ -2,6 +2,7 @@ import {DataArray, DataObject} from "entity";
 import Immutable from "immutable";
 import U from "underscore";
 import Reg from './O.is.regexp';
+import rule from './O.is.rule';
 
 /**
  * ## 标准函数
@@ -209,5 +210,6 @@ export default {
     isFunction,
     isArray,
     isQr,       /* 配置是否查询引擎配置 */
+    ...rule,     /* 检查记录是否符合 Rule 中的定义 */
     ...Reg,     /* 正则表达式验证专用库 */
 }

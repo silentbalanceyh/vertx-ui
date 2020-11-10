@@ -41,6 +41,7 @@ const SUBMIT_REDUX = (reference, config = {}) => (event) => {
         .catch(error => Ajax.ajaxError(reference, error, true))
 };
 const SUBMIT_DIALOG = (reference, config = {}) => (event) => {
+    Abs.prevent(event);
     // 外置的 $submitting = true
     const {doSubmitting} = reference.props;
     if (U.isFunction(doSubmitting)) {
@@ -64,6 +65,7 @@ const KEY = (reference, config = {}) => (event) => {
         /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error))
 };
+
 const SAVE_ROW = (reference, config = {}) => (event) => {
     Abs.prevent(event);
     // 外置的 $submitting = true

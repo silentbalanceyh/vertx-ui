@@ -6,9 +6,7 @@ import {ExForm} from "ei";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
-    .state({
-        $ready: true,
-    })
+    .ready(true)
     .to()
 )
 class Component extends React.PureComponent {

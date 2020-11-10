@@ -21,7 +21,7 @@ const targetSpec = {
         if (sourceItem && targetItem) {
             // 关闭覆盖效果
             const {reference} = component.props;
-            Cmd.dropColor(reference, false);
+            Ux.dndDropColor(reference, false);
             Ux.fn(component).rxCellWrap(sourceItem, targetItem);
         }
     },
@@ -31,7 +31,7 @@ const targetSpec = {
         const targetItem = Cmd.item(props);
         if (!Cmd.itemCellSame(sourceItem, targetItem)) {
             const {reference} = component.props;
-            Cmd.dropColor(reference, monitor.isOver());
+            Ux.dndDropColor(reference, monitor.isOver());
         }
     }
 };
