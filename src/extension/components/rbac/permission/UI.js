@@ -34,7 +34,8 @@ class Component extends React.PureComponent {
                                     attrs.className = "item";
                                     attrs.onClick = event => {
                                         Ux.prevent(event);
-                                        Ux.toRoute(this, item.uri);
+                                        const {$router} = this.props;
+                                        Ux.toRoute(this, item.uri, {target: $router.path()});
                                     }
                                 }
                                 return (

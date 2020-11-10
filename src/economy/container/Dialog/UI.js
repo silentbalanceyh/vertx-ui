@@ -98,7 +98,7 @@ class Component extends React.PureComponent {
             }
             return (
                 <Modal {...config} visible={$visible} className={className}>
-                    {Ux.isFunction(children) ? children() : children}
+                    {children}
                 </Modal>
             );
         });

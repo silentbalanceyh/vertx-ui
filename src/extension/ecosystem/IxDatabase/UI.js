@@ -14,7 +14,7 @@ import Op from './op';
 class Component extends React.PureComponent {
     constructor(props) {
         super(props);
-        this.state = Ux.xtInitFormat(props);
+        this.state = Ux.xtInitObject(props);
     }
 
     componentDidMount() {

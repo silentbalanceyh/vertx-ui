@@ -4,8 +4,8 @@ import Ux from 'ux';
 const yiPermPage = (reference) => {
     const state = {};
     // 读取权限组信息
-    const {$category = {}} = reference.props;
-    Ex.authGroups(state, $category)
+    const types = Ux.onDatum(reference, "permission.type");
+    Ex.authGroups(state, types)
         .then(processed => {
             /*
              * 构造翻译 permissions 的 DATUM
@@ -31,7 +31,7 @@ const yoPermCriteria = (reference) => ($selectedKeys = [], item = {}) => {
         reference.setState(state);
     }
 }
-const yoPermClose = (reference) => (event) => {
+const rxClosePerm = (reference) => (event) => {
     Ux.prevent(event);
     reference.setState({$selectedKeys: [], $selectedData: undefined});
 }
@@ -40,8 +40,8 @@ const yuPermPage = (reference) => {
     if ($loading) {
         const state = {};
         // 读取权限组信息
-        const {$category = {}} = reference.props;
-        Ux.toLoading(() => Ex.authGroups(state, $category)
+        const types = Ux.onDatum(reference, "permission.type");
+        Ux.toLoading(() => Ex.authGroups(state, types)
             .then(processed => {
                 // 更新成 false，加载成功的处理
                 processed.$loading = false;
@@ -54,5 +54,6 @@ export default {
     yiPermPage,
     yuPermPage,
     yoPermCriteria,
-    yoPermClose
+    // Close 关闭按钮
+    rxClosePerm
 }

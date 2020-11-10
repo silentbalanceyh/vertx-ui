@@ -1,121 +1,107 @@
 import Ux from 'ux';
 // 跳级处理
 import Ajx from '../../ajax';
-import Cv from '../../functions/global';
 
+const treeSlash = (permissions = [], type = {}) => {
+    /*
+     * name = x/y/z
+     * 转换成树 x - y - z
+     */
+    let normalized = [];
+
+    const unslashed = permissions.filter(each => 0 > each.name.indexOf('/'));
+    if (0 < unslashed.length) {
+        const grouped = Ux.elementGroup(unslashed, "name");
+        Object.keys(grouped).forEach(name => {
+            const dataItem = {};
+            dataItem.key = Ux.encryptMD5(name);
+
+            const dataPart = grouped[name];
+            const counter = dataPart.length;
+            dataItem.text = `${name} （${counter}）`;
+            dataItem.dataType = type.key;
+            dataItem.dataCode = dataPart.map(item => item.code);
+            dataItem.dataName = name;
+            dataItem.name = name;
+            normalized.push(dataItem);
+        })
+    }
+
+    const slashed = permissions.filter(each => 0 <= each.name.indexOf('/'));
+    if (0 < slashed.length) {
+        /*
+         * 先执行 compress 压缩
+         */
+        const grouped = Ux.elementGroup(slashed, "name");
+        /*
+         * 补充、扩展、排序
+         */
+        const treeArray = Ux.toTreeTextArray(Object.keys(grouped));
+        /*
+         * 填充数据信息
+         */
+        treeArray.forEach(item => {
+            const data = grouped[item.dataKey];
+            const counter = data ? data.length : 0;
+            const append = {};
+            if (data && 0 < data.length) {
+                /*
+                 * 追加数据节点
+                 */
+                append.dataType = type.key;
+                append.dataCode = data.map(item => item.code);
+                append.dataName = item.dataKey;
+                append.text = `${item.name} （${counter}）`;
+            } else {
+                /*
+                 * append.selectable = false
+                 */
+                append.text = item.name;
+                append.selectable = false;
+            }
+            Object.assign(item, append);
+        });
+        normalized = normalized.concat(treeArray);
+    }
+    return Ux.toTree(normalized, {title: 'text'});
+}
 /**
  * ## 扩展函数
  *
  * 1. 根据传入的 treeData 提取 resource.tree 构造分类
  * 2. 读取远程的权限组，权限组挂在分类下边
  */
-const authGroups = (state = {}, treeData = []) => {
+const authGroups = (state = {}, types = []) => {
     /* 权限组读取 */
     return Ux.ajaxGet("/api/permission/groups/by/sigma", {}).then(groups => {
         /*
-         * 构造树
+         * 新版直接走 S_PERM_SET 的树形结构
+         * 一级：module
+         * 二级：name，带权限数量处理
          */
-        const tree = Ux.tree().build(treeData);
+        const groupType = Ux.elementGroup(groups, "type");
         /*
-         * 读取拉平的树
+         * 一级树处理
          */
-        const treeRoot = tree.getRoots(true, true);
-
-        /*
-         * 集成节点处理
-         */
-        const itemRef = Ux.elementUnique(treeData, 'code', Cv.V.PERM_INTEGRATION);
-        const exclude = [];
-        if (itemRef) {
-            const {group = []} = itemRef.metadata ? itemRef.metadata : {};
-            if (Ux.isArray(group)) {
-                group.forEach(each => exclude.push(each));
+        const treeData = [];
+        types.forEach(type => {
+            /*
+             * 一级构造
+             */
+            const treeItem = {};
+            treeItem.key = type.key;
+            treeItem.title = type.name;
+            const permissions = groupType[type.key];
+            if (Ux.isArray(permissions)) {
+                /*
+                 * 构造二级以下的树结构
+                 */
+                treeItem.children = treeSlash(permissions, type);
             }
-        }
-        const $integration = Ux.immutable(exclude);
-        /*
-         * 根节点，先针对分组
-         * 组名称 -> identifier 集合
-         */
-        const groupMap = {};
-        const groupVector = {};
-        groups.filter(each => !$integration.contains(each.group)).forEach(group => {
-            const groupRef = groupMap[group.group];
-            if (groupRef) {
-                groupRef.total += group.count;
-            } else {
-                const $group = Ux.clone(group);
-                $group.total = $group.count;
-                groupMap[group.group] = $group;
-            }
-            groupVector[group.identifier] = group.group;
-        });
-
-        /*
-         * children 节点引入替换机制
-         */
-        const processed = [];
-        const childMap = {};
-        treeRoot.forEach(root => {
-            const $root = Ux.clone(root);
-            const {data = {}} = root;
-            if (data.code === Cv.V.PERM_INTEGRATION) {
-                // 集成专用
-                let integrated = groups.filter(each => $integration.contains(each.group));
-                integrated = Ux.elementGroup(integrated, 'group');
-                // 集成中的组信息
-                const childArr = [];
-                Object.keys(integrated).forEach(groupName => {
-                    // 节点数据
-                    const child = {};
-                    let count = 0;
-                    const groupEach = integrated[groupName];
-                    const identifiers = [];
-                    if (Ux.isArray(groupEach)) {
-                        groupEach.forEach(groupItem => {
-                            count += Ux.valueInt(groupItem.count);
-                            identifiers.push(groupItem.identifier);
-                        })
-                    }
-                    child.name = `${groupName}（${count}）`;
-                    child.parentId = root.key;
-                    child.key = Ux.randomUUID();
-                    child.identifier = identifiers;
-                    child.__group = {group: groupName};
-                    child.__parent = Ux.clone($root.data);
-                    childArr.push(child);
-                });
-                $root.children = Ux.toTreeArray(childArr, {title: "name"});
-                processed.push($root);
-            } else {
-                // 非集成处理
-                const childArr = [];
-                if ($root.children) {
-                    $root.children.forEach(child => {
-                        /*
-                         * 直接从 groupMap 中查找
-                         */
-                        const groupName = groupVector[child.identifier];
-                        if (groupName) {
-                            const groupData = groupMap[groupName];
-                            if (groupData) {
-                                if (!childMap.hasOwnProperty(groupData.group)) {
-                                    child.name = `${groupData.group}（${groupData.total}）`;
-                                    child.__group = Ux.clone(groupData);
-                                    child.__parent = Ux.clone($root.data);
-                                    childArr.push(child);
-                                    childMap[groupData.group] = true;
-                                }
-                            }
-                        }
-                    });
-                    $root.children = Ux.toTreeArray(childArr, {title: "name"});
-                }
-                processed.push($root);
-            }
+            treeData.push(treeItem);
         })
-        state.$groups = Ux.clone(groups);
-        state.$tree = processed;
+        state.$tree = treeData.sort(Ux.sorterAscFn("title"));     // 左树处理
+
         return Ux.promise(state);
     })
 }

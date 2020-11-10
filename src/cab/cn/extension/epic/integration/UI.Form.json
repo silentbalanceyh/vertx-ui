@@ -23,29 +23,27 @@
             ],
             [
                 {
-                    "metadata": "method,HTTP方法,,,aiMagic",
+                    "metadata": "secure,安全通道,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "true,是",
+                        "false,否"
+                    ]
+                },
+                {
+                    "metadata": "type,通信类型,12,,aiRadio",
+                    "optionJsx.config.items": [
+                        "ONE_WAY,单路",
+                        "REQUEST_RESPONSE,请求/响应",
+                        "PUBLISH_SUBSCRIBE,发布/订阅"
+                    ]
+                },
+                {
+                    "metadata": "method,HTTP方法,4,,aiMagic",
                     "optionJsx.config.items": [
                         "GET,GET:calendar,16:#228B22",
                         "PUT,PUT:calendar,16:#228B22",
                         "POST,POST:calendar,16:#228B22",
                         "DELETE,DELETE:thunderbolt,16:#D02090"
-                    ]
-                },
-                {
-                    "metadata": "secure,安全通道,16,,aiRadio",
-                    "optionJsx.config.items": [
-                        "true,是",
-                        "false,否"
-                    ]
-                }
-            ],
-            [
-                {
-                    "metadata": "type,通信类型,16,,aiRadio",
-                    "optionJsx.config.items": [
-                        "ONE_WAY,单路模式",
-                        "REQUEST_RESPONSE,请求响应模式",
-                        "PUBLISH_SUBSCRIBE,发布订阅模式"
                     ]
                 }
             ],
@@ -129,7 +127,7 @@
                                         "inMapping,映射规则,16,,,,readOnly=true"
                                     ],
                                     [
-                                        "inScript,脚本,16,,aiTextArea,rows=3,readOnly=true"
+                                        "inScript,脚本,16,,aiTextArea,rows=2,readOnly=true"
                                     ],
                                     [
                                         "outWriter,响应格式处理器,16,,,addonBefore=Java"

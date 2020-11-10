@@ -1,13 +1,21 @@
 {
     "_form": {
-        "window": 0.15,
-        "columns": 1,
+        "window": 1.1,
+        "columns": 2,
         "ui": [
             [
                 {
-                    "metadata": "group,权限组,19",
+                    "metadata": "type,类型,,,aiSelect",
+                    "optionJsx.config.datum": "source=permission.type,value=key,label=name",
+                    "optionJsx.config.datumSort": {
+                        "field": "name",
+                        "asc": true
+                    }
+                },
+                {
+                    "metadata": "group,名称",
                     "optionConfig.rules": [
-                        "required,请填写权限组名称！"
+                        "required,请填写权限集名称！"
                     ]
                 }
             ],
@@ -31,39 +39,12 @@
                                             "metadata": "permissions,,24,,aiDialogEditor",
                                             "optionJsx.config": {
                                                 "form": {
-                                                    "window": 0.15,
+                                                    "window": 0.16,
                                                     "columns": 2,
                                                     "ui": [
                                                         [
                                                             {
-                                                                "metadata": "name,权限名称,19",
-                                                                "optionConfig.rules": [
-                                                                    "required,请填写权限名称！"
-                                                                ]
-                                                            }
-                                                        ],
-                                                        [
-                                                            {
-                                                                "metadata": "code,权限编码,19,,,placeholder=推荐以 perm 开头的系统助记码",
-                                                                "optionConfig.rules": [
-                                                                    "required,请填写权限编码！",
-                                                                    {
-                                                                        "validator": "existing",
-                                                                        "message": "对不起，权限编码重复！",
-                                                                        "config": {
-                                                                            "uri": "/api/permission/existing",
-                                                                            "method": "POST",
-                                                                            "params": {
-                                                                                "sigma": "PROP:app.sigma"
-                                                                            }
-                                                                        }
-                                                                    }
-                                                                ]
-                                                            }
-                                                        ],
-                                                        [
-                                                            {
-                                                                "metadata": "type,资源分类,19,,aiSelect,placeholder=选择资源类型",
+                                                                "metadata": "resourceType,资源分类,14,,aiSelect,placeholder=选择资源类型",
                                                                 "optionJsx.config.datum": "source=resource.type,value=code,label=name",
                                                                 "optionJsx.depend.impact": {
                                                                     "reset": [
@@ -74,21 +55,61 @@
                                                                 "optionConfig.rules": [
                                                                     "required,请选择资源分类！"
                                                                 ]
-                                                            }
-                                                        ],
-                                                        [
+                                                            },
                                                             {
-                                                                "metadata": "modelKey,关联模型,19",
+                                                                "metadata": "modelKey,关联模型,10",
                                                                 "optionConfig.rules": [
                                                                     "required,请选择该分类下的关联模型！"
                                                                 ]
                                                             }
                                                         ],
                                                         [
-                                                            "identifier,模型ID,19,,,readOnly=true"
+                                                            "identifier,模型ID,18,,,readOnly=true"
                                                         ],
                                                         [
-                                                            "comment,权限备注,19,,aiTextArea,rows=5"
+                                                            {
+                                                                "metadata": "sourcePermission,选择现有权限,24",
+                                                                "optionJsx.config": {
+                                                                    "titles": [
+                                                                        "可选择的权限列表",
+                                                                        "引用权限详情"
+                                                                    ],
+                                                                    "record": {
+                                                                        "title": "（未选择引用权限）",
+                                                                        "selected": "已选择",
+                                                                        "data": {
+                                                                            "name": "权限名称",
+                                                                            "code": "权限代码",
+                                                                            "identifier": "所属模型"
+                                                                        }
+                                                                    },
+                                                                    "table": {
+                                                                        "columns": [
+                                                                            {
+                                                                                "dataIndex": "name",
+                                                                                "title": "权限名称"
+                                                                            }
+                                                                        ]
+                                                                    }
+                                                                }
+                                                            }
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "name,权限名称,14",
+                                                                "optionConfig.rules": [
+                                                                    "required,请填写权限名称！"
+                                                                ]
+                                                            },
+                                                            {
+                                                                "metadata": "code,权限编码,10,,,placeholder=推荐以 perm 开头的系统助记码",
+                                                                "optionConfig.rules": [
+                                                                    "required,请填写权限编码！"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            "comment,权限备注,18,,aiTextArea,rows=5"
                                                         ],
                                                         [
                                                             {
@@ -106,7 +127,7 @@
                                                         "key"
                                                     ]
                                                 },
-                                                "dialog": "权限设置,保存,关闭,false,800,true,$opSavePerm",
+                                                "dialog": "权限设置,保存,关闭,false,1150,true,$opSavePerm",
                                                 "op": {
                                                     "add": "$opShowPerm"
                                                 },
@@ -125,9 +146,9 @@
                                                                 },
                                                                 "divider",
                                                                 {
-                                                                    "text": "删除",
+                                                                    "text": "移除",
                                                                     "executor": "fnDelete",
-                                                                    "confirm": "确认删除选择的实体记录？"
+                                                                    "confirm": "该操作会从此权限集中移除权限信息，将权限转换成`自由权限`，确认移除？"
                                                                 }
                                                             ]
                                                         },
@@ -160,6 +181,10 @@
     "_modal": {
         "error": {
             "empty": "对不起，请在权限组中添加权限信息！"
+        },
+        "success": {
+            "added": "恭喜，您已经成功添加了一条权限到当前权限集，您可以继续添加权限或关闭当前窗口！",
+            "saved": "恭喜，您已经成功更新了所选择的权限信息！"
         }
     }
 }

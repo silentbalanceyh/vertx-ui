@@ -67,9 +67,7 @@ const raftValue = (cell = {}, values = {}, reference) => {
         /*
          * 布尔值初始化
          */
-        if (false === literal) {
-            cell.optionConfig.initialValue = false;
-        }
+        cell.optionConfig.initialValue = literal;
     }
 };
 /*

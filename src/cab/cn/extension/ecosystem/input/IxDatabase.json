@@ -19,10 +19,11 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "hostname,主机地址",
+                                            "metadata": "hostname,主机地址,8",
                                             "optionJsx.placeholder": "IP地址 / 域名"
                                         },
-                                        "port,端口号,,40%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
+                                        "port,端口号,8,75%,aiInputNumber,placeholder=最大65535,min=1,max=65535",
+                                        "instance,实例名称,8,,,placeholder=数据库实例名称"
                                     ],
                                     [
                                         {
@@ -32,7 +33,6 @@
                                         "password,登录密码,,,aiPassword"
                                     ],
                                     [
-                                        "instance,实例名称,,,,placeholder=数据库实例名称",
                                         {
                                             "metadata": "category,数据库类型,,,aiSelect,placeholder=（选择支持的数据库类型）",
                                             "optionJsx.config.items": [
@@ -66,11 +66,9 @@
                                                     "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
                                                 }
                                             }
-                                        }
-                                    ],
-                                    [
+                                        },
                                         {
-                                            "metadata": "driverClassName,JDBC驱动,16,,,placeholder=JDBC驱动程序",
+                                            "metadata": "driverClassName,JDBC驱动,,,,placeholder=JDBC驱动程序",
                                             "optionJsx.config.items": [
                                                 "com.mysql.jdbc.Driver,com.mysql.jdbc.Driver",
                                                 "com.mysql.cj.jdbc.Driver,com.mysql.cj.jdbc.Driver"
@@ -88,7 +86,7 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "options,,24,,aiJsonEditor",
+                                            "metadata": "options,配置数据,24,,aiJsonEditor",
                                             "optionJsx.height": 200
                                         }
                                     ]

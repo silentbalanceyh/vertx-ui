@@ -9,6 +9,13 @@ export default (reference, jsx) => {
         });
     } else {
         jsx.readOnly = true;
-        return Ux.aiInput(reference, jsx);
+        /*
+         * 删除 $renders
+         */
+        const jsxAttrs = Ux.clone(jsx);
+        if (jsxAttrs.$renders) {
+            delete jsxAttrs.$renders;
+        }
+        return Ux.aiInput(reference, jsxAttrs);
     }
 }

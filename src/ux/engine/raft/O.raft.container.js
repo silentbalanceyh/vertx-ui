@@ -1,7 +1,16 @@
 import {Container} from 'web';
 import React from 'react';
 import Datum from '../datum';
-
+/*
+ * 可以直接从下边配置属性中处理子表单渲染器
+ * {
+ *      __children:{
+ *          permissions:() => {
+ *          }
+ *      }
+ * }
+ * 上述值赋值给 renders 执行 Form 渲染
+ */
 const raftChildrenRenders = (reference, addOn = {}) => {
     const {$renders = {}} = reference.props;
     const renderSource = $renders;

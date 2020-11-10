@@ -1,7 +1,7 @@
-import U from 'underscore';
 import Ux from 'ux';
+import U from "underscore";
 
-export default (reference, config = {}) => {
+const searchConfig = (reference, config = {}) => {
     if (config.search) {
         const {search} = config;
         const placeholder = [];
@@ -30,4 +30,7 @@ export default (reference, config = {}) => {
         attrs.placeholder = placeholder.join('/');
         return attrs;
     }
+}
+export default {
+    searchConfig
 }

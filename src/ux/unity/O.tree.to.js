@@ -18,6 +18,7 @@
 import Abs from "../abyss";
 import Ele from '../element';
 import St from './O.sorter';
+import Encrypt from './O.encrypt';
 
 /**
  * ## 标准函数
@@ -188,8 +189,53 @@ const toTree = (data = [], config = {}) => {
     });
     return root;
 };
+/**
+ * ## 特殊函数「Zero」
+ *
+ * @memberOf module:_tree
+ * @param {Array} textArr 传入的文本数组
+ * @return {Array} 返回构造好的树形数组
+ */
+const toTreeTextArray = (textArr = []) => {
+    const textArray = [];
+    textArr.forEach(literal => {
+        const joinSet = _toTreeText(literal.split('/'));
+        Array.from(joinSet).forEach(each => {
+            const existing = textArray.filter(item => item.key === each.key).length;
+            if (0 === existing) {
+                textArray.push(each);
+            }
+        })
+    });
+    return textArray.sort(St.sorterAscFn("dataKey"));
+}
+const _toTreeText = (sourceArr = []) => {
+    const keySet = new Set();
+    const item = {};
+    const dataKey = sourceArr.join('/');
+    item.key = Encrypt.encryptMD5(dataKey);
+    item.dataKey = dataKey;
+    item.name = sourceArr[sourceArr.length - 1];
+    if (0 <= (sourceArr.length - 1)) {
+        /*
+         * 子数组
+         */
+        const sliced = sourceArr.slice(0, sourceArr.length - 1);
+        if (0 < sliced.length) {
+            item.parentId = Encrypt.encryptMD5(sliced.join('/'));
+            /*
+             * 子项
+             */
+            const childSet = _toTreeText(sliced);
+            Array.from(childSet).forEach(child => keySet.add(child));
+        }
+        keySet.add(item);
+    }
+    return keySet;
+}
 export default {
     toTree,
     toTreeConfig,
-    toTreeArray
+    toTreeArray,
+    toTreeTextArray,
 }

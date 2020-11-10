@@ -75,15 +75,16 @@ const _aiInput = (reference, values) => (cell = {}) => {
          * 追加 web-form-has-error 类名，保证验证时的提示处理
          * */
         const item = Ut.connected();
+        const colAttrs = Abs.clone(col);
         if (item.contains(cell.__render)) {
-            if (!col.className) col.className = "";
+            if (!colAttrs.className) colAttrs.className = "";
             // 只添加一次
-            if (0 >= col.className.indexOf("web-form-has-error")) {
-                col.className = `web-form-has-error ${col.className}`
+            if (0 > colAttrs.className.indexOf("web-form-has-error")) {
+                colAttrs.className = `web-form-has-error ${colAttrs.className}`
             }
         }
         return (
-            <Col {...col}>
+            <Col {...colAttrs}>
                 <Form.Item {...optionItem} {...attached}>
                     {cell.render ? cell.render(values) : false}
                 </Form.Item>
@@ -105,7 +106,7 @@ const aiInit = (reference, values) => {
     /*
      * 基础初始化
      */
-    const {$inited = {}, $record = {}} = reference.props;
+    const {$inited = {}, $record = {}, rxInited = record => record} = reference.props;
     let initials = {};
     if (values && !Abs.isEmpty(values)) {
         initials = Abs.clone(values);
@@ -127,6 +128,12 @@ const aiInit = (reference, values) => {
      * initials 的优先级高于 detect
      */
     Object.assign(detect, initials);
+    /*
+     * 外置注入修改初始值专用
+     */
+    if (Abs.isFunction(rxInited)) {
+        detect = rxInited(detect);
+    }
     return Abs.clone(detect);   // 拷贝最终的值
 };
 /*

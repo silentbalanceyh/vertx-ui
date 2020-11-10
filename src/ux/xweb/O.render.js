@@ -116,14 +116,23 @@ const xtReset = (reference, virtualRef = {}, callback) => {
      */
     const current = reference.props.value;
     const original = virtualRef.props.value;
-    /*
-     * 这是标准自定义控件中会存在的内容
-     */
-    if (reference.props.hasOwnProperty("data-__meta")) {
-        const metadata = reference.props['data-__meta'];
-        const initial = metadata.initialValue;
-        if (isDiff(current, original) && !isDiff(current, initial)) {
-            callback(initial);
+    let isTouch;
+    const {form} = reference.props;
+    if (form) {
+        isTouch = form.isFieldsTouched();
+    } else {
+        isTouch = false;
+    }
+    if (!isTouch) {
+        /*
+         * 这是标准自定义控件中会存在的内容
+         */
+        if (reference.props.hasOwnProperty("data-__meta")) {
+            const metadata = reference.props['data-__meta'];
+            const initial = metadata.initialValue;
+            if (isDiff(current, original) && !isDiff(current, initial)) {
+                callback(initial);
+            }
         }
     }
 };

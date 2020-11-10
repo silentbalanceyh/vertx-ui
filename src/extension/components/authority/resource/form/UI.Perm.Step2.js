@@ -1,6 +1,6 @@
 import Ux from "ux";
 import React from "react";
-import Op from './Op';
+import Op from './op/Op';
 import Ex from 'ex';
 import {Table} from 'antd';
 

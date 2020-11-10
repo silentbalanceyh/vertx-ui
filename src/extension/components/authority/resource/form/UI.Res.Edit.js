@@ -2,7 +2,7 @@ import React from 'react';
 import Ux from 'ux';
 import Ex from "ex";
 import {ExForm} from "ei";
-import Op from "./Op";
+import Op from "./op/Op";
 import {RestfulApi} from "web";
 import Rdr from "./Web.Render";
 

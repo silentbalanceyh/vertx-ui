@@ -3,7 +3,7 @@ import React from 'react';
 import {Button, Popconfirm} from 'antd';
 import Event from './Op.Event';
 import Ex from "ex";
-import Form from "./UI.Perm.Select";
+import Form from "../UI.Perm.Select";
 
 const _mountRender = ($columns = [], reference) => {
     /*

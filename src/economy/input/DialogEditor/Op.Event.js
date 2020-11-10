@@ -149,6 +149,17 @@ const yoUniform = (uniform = {}, reference) => {
     const {$record, $options} = reference.props;
     uniform.$record = $record;
     uniform.$options = $options;
+    /*
+     * 上层的 $op 属性引入到下层中执行处理
+     * 传入下层，可替换二次属性
+     */
+    const {$op = {}} = reference.props;
+    if (!Ux.isEmpty($op)) {
+        /*
+         * 执行二阶函数的专用位置，绑定二级 form
+         */
+        uniform.$op = $op;
+    }
 };
 const yoInherit = (reference) => {
     const ref = Ux.onReference(reference, 1);

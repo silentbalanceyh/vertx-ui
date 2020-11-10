@@ -58,9 +58,9 @@
                 }
             ]
         ],
-        "initial":{
-            "active":"BOOL:true",
-            "appId":"PROP:app.key"
+        "initial": {
+            "active": "BOOL:true",
+            "appId": "PROP:app.key"
         },
         "hidden": [
             "type",

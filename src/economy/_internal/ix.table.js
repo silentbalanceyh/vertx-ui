@@ -1,6 +1,6 @@
 import Ux from "ux";
 
-export default (reference, config = {}) => {
+const tablePager = (reference, config = {}) => {
     const pager = {};
     if ("client" !== config.pagination) {
         pager.onChange = (pagination, filters, sorter) => {
@@ -37,3 +37,6 @@ export default (reference, config = {}) => {
     }
     return pager;
 };
+export default {
+    tablePager
+}

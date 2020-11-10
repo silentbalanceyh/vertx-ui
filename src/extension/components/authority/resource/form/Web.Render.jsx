@@ -2,12 +2,13 @@ import Ux from "ux";
 import {TreeSelect} from "antd";
 import React from "react";
 import Ex from 'ex';
+import WebSource from './Web.Source';
 
 export default {
     modelKey: (reference, jsx) => {
         const models = Ux.onDatum(reference, "resource.models");
         /* 读取 */
-        const type = Ux.formHit(reference, "type");
+        const type = Ux.formHit(reference, "resourceType");
         if (type) {
             const tree = Ux.toTree(models, {title: "name"});
             /* 集成的树结构不同 */
@@ -45,5 +46,6 @@ export default {
                 }
             }}/>
         )
-    }
+    },
+    sourcePermission: (reference, jsx) => (<WebSource {...jsx} reference={reference}/>)
 }
