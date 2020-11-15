@@ -1,12 +1,12 @@
 import Abs from "../../abyss";
-import widthWord from './I.scroll.fn.word';
+import Wd from './I.scroll.word';
 
 const widthObject = (input = {}) => {
     if (input) {
         let defaultWidth = 0;
         Object.keys(input).forEach(field => {
             const value = input[field];
-            const calculated = widthWord(field) + widthWord(value) + 12; // ( " = " )
+            const calculated = Wd.widthWord(field) + Wd.widthWord(value) + 12; // ( " = " )
             if (defaultWidth < calculated) {
                 defaultWidth = calculated;
             }
@@ -14,69 +14,132 @@ const widthObject = (input = {}) => {
         return defaultWidth;
     } else return 0;
 }
+const _widthFields = (input = []) => {
+    let fields = [];
+    input.forEach(child => {
+        const keys = Object.keys(child);
+        if (fields.length < keys.length) {
+            fields = keys;
+        }
+    });
+    return fields;
+}
+/*
+ * Mount `__array` variable to column
+ */
+const _widthFieldsSub = (column = {}, fields = [], widthMap = {}) => {
+    /*
+     * 构造 `__array` 每一列的元数据，由于是数组列
+     * 1）fields：当前表格存在的所有字段
+     * 2）width：构造 `field = number`
+     */
+    const array = {};
+    array.fields = fields;
+    array.width = widthMap;
+
+    /*
+     * 计算 __array
+     * {
+     *     "fields": [],
+     *     "width": {
+     *         "field1": xxx,
+     *         "field2": yyy
+     *     }
+     * }
+     */
+    const originalRef = column.__array;
+    if (originalRef) {
+        /*
+         * 旧版本执行
+         * 1. - fields 变化：直接替换
+         * 2. - fields 不变化：计算最大的 width（单字段执行）
+         */
+        let fieldsPrev = originalRef.fields;
+        if (!Abs.isArray(fieldsPrev)) {
+            fieldsPrev = [];
+        }
+        if (fields.length > fieldsPrev.length) {
+            /*
+             * 「直接替换」字段发生变化
+             */
+            originalRef.fields = fields;  // 单独替换 fields
+        }
+        /*
+         * `width` 计算
+         */
+        if (!originalRef.width) {
+            originalRef.width = {};
+        }
+        /*
+         * fields 计算
+         */
+        fields.forEach(field => {
+            let fieldOld = originalRef.width[field];
+            if (!fieldOld) {
+                fieldOld = 0;
+            }
+            let fieldNew = widthMap[field];
+            if (!fieldNew) {
+                fieldNew = 0;
+            }
+            /*
+             * 计算结果
+             */
+            if (fieldNew >= fieldOld) {
+                originalRef.width[field] = widthMap[field];
+            }
+        });
+    } else {
+        /*
+         * 「直接替换」第一次执行宽度设置
+         */
+        column.__array = array;
+    }
+}
 const widthArray = (input, config = {}) => {
     if (input) {
         // 计算基础表渲染数据，当前列
-        const {column = {}} = config;
-        let fields = [];
-        input.forEach(child => {
-            const keys = Object.keys(child);
-            if (fields.length < keys.length) {
-                fields = keys;
-            }
-        });
-        const array = {};
-        array.fields = fields;
-        // 计算当前列的最大宽度
+        const fields = _widthFields(input);
+
+        // 计算当前列的最大宽度，特殊变量
         let defaultWidth = 0;
         const widthMap = {};
-        input.forEach(each => {
-            let calculated = 0;
-            if ("string" === typeof each) {
-                calculated = widthWord(each);
-            } else {
-                /*
-                 * Title 和 Value 同时计算
-                 */
-                Object.keys(each).forEach(field => {
-                    const value = each[field];
-                    const titleWidth = widthWord(field);
-                    const valueWidth = widthWord(value ? value : "");
-                    const current = Math.max(titleWidth, valueWidth);
-                    calculated += current;        // 修正8像素
-                    /*
-                     * 计算每列最大值
-                     */
-                    if (widthMap.hasOwnProperty(field)) {
-                        if (widthMap[field] < current) {
-                            // 修正12的长度
-                            widthMap[field] = current;
-                        }
-                    } else {
-                        widthMap[field] = current;
-                    }
-                })
-            }
-            if (defaultWidth < calculated) {
-                defaultWidth = calculated;
-            }
-        });
-        array.width = widthMap;
         /*
-         * 合并 __array
+         * 计算当前列的最大宽度
+         * 1）先遍历列，计算每一列的最大宽度
+         * 2）再遍历数据，不考虑 ["","",""] 的数据格式
          */
-        const arrayOriginal = column.__array;
-        if (arrayOriginal) {
+        fields.forEach(field => {
             /*
-             * 原始处理专用
+             * 当前列标题宽度
              */
-            if (array.fields.length > arrayOriginal.fields.length) {
-                column.__array = array;
-            }
-        } else {
-            column.__array = array;
-        }
-        return defaultWidth;
+            const widthTitle = Wd.widthWord(field, false);
+            /*
+             * 计算数据中的最大宽度
+             */
+            let widthColumn = 0;
+            input.forEach(each => {
+                const value = each[field];
+                const widthRow = Wd.widthWord(value ? value : "", false);
+                if (widthColumn < widthRow) {
+                    widthColumn = widthRow;
+                }
+            });
+            /*
+             * 计算每列最大值
+             */
+            const current = Math.max(widthTitle, widthColumn);
+            widthMap[field] = current + 12;
+        });
+        const {column = {}} = config;
+
+        _widthFieldsSub(column, fields, widthMap);
+
+        defaultWidth = Object.keys(column.__array.width)
+            .map(key => column.__array.width[key])
+            .reduce((left, right) => left + right, 0);
+
+        return defaultWidth + 32;
     } else return 0;
 }
 const widthMix = (input, data = []) => {
@@ -85,7 +148,7 @@ const widthMix = (input, data = []) => {
     } else if (Abs.isObject(input)) {
         return widthObject(input);
     } else {
-        return widthWord(input);
+        return Wd.widthWord(input);
     }
 }
 const widthMax = (data = [], field = "", fnWidth = () => 0, column) => {
@@ -109,7 +172,7 @@ const widthMax = (data = [], field = "", fnWidth = () => 0, column) => {
 }
 
 const widthTitle = (title = "", column = {}) => {
-    let titleWidth = widthWord(title);
+    let titleWidth = Wd.widthWord(title);
     if (column.sorter) {
         titleWidth += 24;
     }
@@ -124,10 +187,10 @@ const widthOption = (mapping = []) => {
         if ("string" === typeof each) {
             let calculated;
             if (0 < each.indexOf(',')) {
-                calculated = widthWord(each.split(',')[0]);
+                calculated = Wd.widthWord(each.split(',')[0]);
                 calculated += 8;
             } else {
-                calculated = widthWord(each);
+                calculated = Wd.widthWord(each);
             }
             if (defaultWidth < calculated) {
                 defaultWidth = calculated;
@@ -144,7 +207,7 @@ export default {
     // 混合模式
     widthMix,
     // String
-    widthWord,
+    widthWord: Wd.widthWord,
     // Row Data
     widthMax,
     // Object

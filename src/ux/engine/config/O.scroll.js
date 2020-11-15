@@ -154,7 +154,7 @@ export default ($table = {}, data = [], reference) => {
                     /*
                      * 只有 fixed 的时候才能设置 width
                      */
-                    const calculatedInt = parseInt(calculated);
+                    const calculatedInt = calculated;
                     if (column.fixed) {
                         column.width = calculatedInt;
                         adjust = calculated;

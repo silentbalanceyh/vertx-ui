@@ -42,11 +42,11 @@ export default {
         } else return false;
     },
     2: (reference) => {
-        const {data = {}} = reference.props;
+        const {$group} = reference.state;
         return (
             <UIDone {...Ex.yoAmbient(reference)}
                 // 组信息
-                    data={data.__group}
+                    data={{group: $group}}
                     rxBack={() => reference.setState({$readyPart: false})}/>
         )
     }

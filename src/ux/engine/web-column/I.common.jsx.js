@@ -37,7 +37,7 @@ const _jsxArray = (children = [], config = {}) => {
                     const style = {};
                     if (widthMap.hasOwnProperty(field)) {
                         // 各自16的边距
-                        style.width = widthMap[field] + 32;
+                        style.width = widthMap[field];
                     }
                     return (
                         <th key={field} style={style}>{field}</th>

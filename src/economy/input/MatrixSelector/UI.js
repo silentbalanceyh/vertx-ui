@@ -23,7 +23,7 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, value = [], ...jsx} = this.props;
+        const {config = {}, value = []} = this.props;
         const {$data = {}, $tableKey, $visible = false} = this.state;
         const {dialog, table = {}, search} = this.state ? this.state : {};
         /*
