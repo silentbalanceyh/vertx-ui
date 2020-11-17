@@ -1,5 +1,5 @@
-import Ux from "ux";
 import moment from "moment";
+import Abs from '../abyss';
 
 /**
  * ## 时间转换器
@@ -49,7 +49,7 @@ class Moment {
      * @return {any} 返回转换过后的数据信息
      */
     static to(input, config, ...fields) {
-        const $data = Ux.clone(input);
+        const $data = Abs.clone(input);
         const format = config.format ? config.format : "YYYY-MM-DDTHH:mm:ss";
         fields.filter(field => !!input[field])
             .filter(field => moment.isMoment(input[field]))
@@ -68,7 +68,7 @@ class Moment {
      * @return {any} 返回转换过后的数据信息
      */
     static from(input, config, ...fields) {
-        const $data = Ux.clone(input);
+        const $data = Abs.clone(input);
         const format = config.format ? config.format : "YYYY-MM-DDTHH:mm:ss";
         fields.filter(field => !!input[field])
             .filter(field => "string" === typeof input[field])
@@ -123,7 +123,25 @@ const toTime = (momentValue, timeStr) => {
         } else return momentValue;
     } else return momentValue;
 };
+/**
+ * ## 标准函数
+ *
+ * @param {any} input
+ * @return {Array}
+ */
+const toArray = (input) => {
+    let resultArr = [];
+    if (Set.prototype.isPrototypeOf(input)) {
+        resultArr = Array.from(input);
+    } else if (Abs.isArray(input)) {
+        resultArr = Abs.clone(input);
+    } else {
+        resultArr = [input];
+    }
+    return resultArr;
+}
 export default {
+    toArray,
     toJson,
     toTime,
     Moment: (input = {}, config = {}) => ({

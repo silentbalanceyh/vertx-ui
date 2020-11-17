@@ -2,8 +2,9 @@
 
 .web-authority-role {
     .op-column {
-        height: 45px;
-        line-height: 45px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0 6px;
 
         .op-search {
             padding-top: 3px;
@@ -102,5 +103,89 @@
                 }
             }
         }
+    }
+}
+
+.web-authority-page {
+
+    .ant-tabs-content {
+        padding-left: 6px !important;
+    }
+}
+
+.web-authority-control {
+    .perm-row {
+        margin-top: 3px;
+
+        .ant-empty {
+            padding: 16px;
+        }
+
+        .data {
+            &-tree {
+                overflow-y: auto;
+            }
+
+            &-list {
+                overflow-y: auto;
+
+                .active {
+                    .ant-card-head-title {
+                        color: black !important;
+                    }
+                }
+
+                .inactive {
+                    .ant-card-head-title {
+                        color: @font-disabled !important;
+                    }
+
+                    .ant-card-body {
+                        filter: alpha(opacity=40);
+                        -moz-opacity: 0.4;
+                        opacity: 0.4;
+                    }
+                }
+
+                .data-card {
+                    padding: 3px;
+
+                    .ant-card-body {
+                        padding: 12px 12px 16px 12px !important;
+                        max-height: 69px;
+
+                        .ant-card-meta-avatar {
+                            margin-top: 6px;
+                            margin-left: 6px;
+                        }
+
+                        .ant-card-meta-description {
+                            overflow-y: hidden;
+                            height: 20px;
+                        }
+                    }
+
+                    .ant-card-head {
+                        height: 32px !important;
+                        min-height: 32px;
+
+                        .ant-card-head-wrapper {
+                            height: 32px !important;
+                            min-height: 32px;
+
+                            .ant-card-head-title {
+                                padding: 2px 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    .ux-title-fix {
+        color: white;
+        font-size: 14px;
+        line-height: 32px;
     }
 }

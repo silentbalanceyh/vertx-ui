@@ -38,6 +38,8 @@ export default (reference) => generator(reference, [
     "rxSelect",      // 选择
     "rxTree",        // 树操作
     "rxChild",       // 绑定子组件专用方法
+    "rxCheck",       // 选中专用
+    "rxClean",       // 清除专用
     /* Drop 和 Drag */
     "rxDropOver",    // 拖拽时放在上方
 

@@ -3,34 +3,20 @@ import React from "react";
 import Ux from "ux";
 
 const _renderClean = (reference) => {
-    const {value} = reference.props;
+    const {value, allowClear} = reference.props;
     const attrs = {};
     attrs.type = "delete";
     attrs.style = {
         fontSize: 14
     };
-    if (undefined !== value) {
+    if (undefined !== value && allowClear) {
         attrs.onClick = event => {
             Ux.prevent(event);
-            const {config = {}, id} = reference.props;
             // 有值才清空
-            if (value) {
-                const values = Ux.writeLinker({}, config);
-                // 表单专用处理
-                const ref = Ux.onReference(reference, 1);
-                const {form} = ref.props;
-                if (form) {
-                    if (Ux.isEmpty(values) && id) {
-                        values[id] = undefined;
-                    }
-                    Ux.formHits(ref, values);
-                }
-            }
+            Ux.fn(reference).onChange(undefined);
         }
     }
-    return (
-        <Icon {...attrs}/>
-    )
+    return (<Icon {...attrs}/>)
 }
 
 const dialogCombine = (reference, inputAttrs = {}) => {
@@ -63,7 +49,6 @@ const dialogCombine = (reference, inputAttrs = {}) => {
 
 const _onConfirm = (reference = {}, config = {}) => (event) => {
     Ux.prevent(event);
-    const {config = {}} = reference.props;
     /*
      * 全部统一成 $keySet，修正 ListSelector 中的选择内容
      */
@@ -71,65 +56,42 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
     const ref = Ux.onReference(reference, 1);
     // 判断ListSelector中的选中项，状态中的$select是否存在
     if ($keySet) {
+        const callback = (result) => {
+            // 执行Linker过后的回调
+            const {fnCallback} = config;
+            if (Ux.isFunction(fnCallback)) {
+                fnCallback(result);
+            }
+        }
         /*
          * Linker取值
          * 单记录选择和多记录选择的不同
          * -- 单记录选择支持 linker 功能
          * -- 多记录选择不支持 linker 功能
          */
-        if (Set.prototype.isPrototypeOf($keySet) || Ux.isArray($keySet)) {
+        if (Ux.isCollection($keySet)) {
+            // 计算多选结果
+            let $selectedKeys = Ux.xtChecked($keySet, reference);
 
-            /*
-             * 多选最终结果，$keySet 为多选的 key 集合
-             */
-            let $selectedKeys = [];
-            if (Set.prototype.isPrototypeOf($keySet)) {
-                /*
-                 * Tree 专用
-                 */
-                $selectedKeys = Array.from($keySet);
-            } else {
-                /*
-                 * Array 专用，Array需要 mode 支撑
-                 */
-                const {selection = {}} = config;
-                const {multipleMode = {}} = selection;
-                const {replace = true} = multipleMode;
-                if (replace) {
-                    /*
-                     * 直接选择时替换
-                     */
-                    $selectedKeys = $keySet;
-                } else {
-                    /*
-                     * 合并选择专用
-                     */
-                    const {field = "key"} = multipleMode;
-                    const {value = []} = reference.props;
-                    /*
-                     * 合并模式
-                     */
-                    const dataArray = Ux.clone(value);
-                    $keySet.forEach(element => Ux.elementSave(dataArray, element, field));
-                    $selectedKeys = dataArray;
-                }
-            }
             if (0 < $selectedKeys.length) {
+                /* 多选后直接执行结果 */
                 Ux.fn(reference).onChange($selectedKeys);
+
+                /* 回调 */
+                callback($selectedKeys);
+
+                // 关闭窗口
+                reference.setState({$visible: false});
             } else {
 
-                /*
-                 * 多选过程中的无选项验证
-                 */
+                // 触发选择验证，多选过程中的无选项验证
                 const validatedMessage = config.validation;
                 if (validatedMessage) {
                     Ux.messageFailure(validatedMessage);
                 }
             }
         } else {
-            /*
-             * 单选支持 Linker 操作
-             */
+            // 计算最终值
             const values = Ux.writeLinker({}, config, () => $keySet);
             /*
              * 无值不触发
@@ -138,41 +100,26 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
                 // 调用Form执行数据处理 Linker
                 const {form} = ref.props;
                 if (form) {
-                    /*
-                     * Ant Form 专用流程
-                     * 表单用法，用于在表单中处理值信息
-                     */
+
+                    // Ant Form 专用流程表单用法，用于在表单中处理值信息
                     Ux.formHits(ref, values);
 
-                    // 执行Linker过后的回调
-                    const {fnCallback} = config;
-                    if (Ux.isFunction(fnCallback)) {
-                        fnCallback($keySet);
-                    }
+                    // 回调
+                    callback($keySet);
 
                     // onChange 保证表单的 isTouched
-                    const {onChange, id} = reference.props;
-                    if (Ux.isFunction(onChange)) {
-                        const changeValue = values[id];
-                        onChange(changeValue);
-                    }
+                    const {id} = reference.props;
+                    Ux.fn(reference).onChange(values[id]);
                 } else {
-                    /*
-                     * 非表单专用流程
-                     */
+                    // 非表单专用流程
                     Ux.fn(reference).onChange(values);
                 }
             }
+            reference.setState({$visible: false});
         }
-        // 关闭窗口
-        reference.setState({$visible: false});
     } else {
-        // 未选中时若包含了验证，则提示验证信息
-        Ux.E.fxTerminal(!config.validation, 10080, config.validation);
         if (config.validation) {
-            // TODO: showError 后期重写
             Ux.messageFailure(config.validation);
-            // Dialog.showError(ref, config.validation);
         }
     }
 };
@@ -210,7 +157,6 @@ const dialogClick = (reference, config = {}) => (event) => {
         $visible: true,             // 窗口是否显示
         $data: [],                  // 当前窗口的数据信息
         $tableKey: Ux.randomUUID(), // 专用的表格绑定的key信息
-        $keySet: undefined,         // 在窗口中的选中项
     });
 
     /*
@@ -231,7 +177,6 @@ const dialogClick = (reference, config = {}) => (event) => {
         const {table} = reference.state;
         if (table && table.columns) {
             return new Promise((resolve) => {
-
                 /*
                  * lazyColumn 执行
                  */
@@ -255,26 +200,35 @@ const dialogClick = (reference, config = {}) => (event) => {
                 /*
                  * selected 专用
                  */
-                const {config = {}} = reference.props;
-                let $keySet;
+                const {config = {}, value} = reference.props;
+                let $selected;
                 if (config.selection && config.selection.multiple) {
                     /*
                      * 多选处理
                      */
-                    const {value} = reference.props;
                     if (Ux.isArray(value)) {
-                        $keySet = value;
+                        $selected = value;
                     }
                 } else {
                     /*
-                     * 单选
+                     * 单选处理
                      */
-                    const {initialRecord} = reference.state;
-                    if (initialRecord) {
-                        $keySet = initialRecord;
+                    if (value) {
+                        /*
+                         * 有值
+                         */
+                        const {$keySet} = reference.state;
+                        if ($keySet) {
+                            $selected = $keySet;
+                        }
+                    } else {
+                        /*
+                         * 单选无值
+                         */
+                        $selected = undefined;
                     }
                 }
-                state.$keySet = $keySet;
+                state.$keySet = $selected;
                 reference.setState(state);
             })
         } else {

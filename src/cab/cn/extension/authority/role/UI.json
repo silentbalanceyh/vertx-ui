@@ -2,18 +2,25 @@
     "_page": {
         "title": "通用权限（角色）"
     },
+    "_assist": {
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "permission.type"
+                ]
+            },
+            "group": "type"
+        }
+    },
     "_info": {
-        "system": "平台权限",
-        "business": "业务权限",
         "submitting": "正在提交您设置的权限信息，请等待结果……"
     },
     "_clean": {
         "key": "$opClean",
         "tooltip": "清除所选",
         "icon": "filter"
-    },
-    "_checked": {
-        "login": "允许登录平台"
     },
     "_window": "导入/导出,确认,关闭,false,720,true,$opSelect",
     "_action": [
@@ -80,11 +87,6 @@
                 }
             }
         }
-    },
-    "_tabs": {
-        "defaultActiveKey": "SYS",
-        "type": "card",
-        "items": "系统权限,SYS;开发权限,DEV"
     },
     "_modal": {
         "success": {

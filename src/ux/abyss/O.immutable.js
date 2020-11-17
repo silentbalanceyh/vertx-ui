@@ -42,14 +42,20 @@ const clone = (input) => {
         return input;
     } else {
         if (input) {
-            /*
-             * __acl copay for Array
-             */
-            const normalized = Immutable.fromJS(input).toJS();
-            if (Is.isArray(input) && input.__acl) {
-                normalized.__acl = input.__acl;
+            if (Set.prototype.isPrototypeOf(input)) {
+                const set = new Set();
+                Array.from(input).forEach(item => set.add(item));
+                return set;
+            } else {
+                /*
+                 * __acl copay for Array
+                 */
+                const normalized = Immutable.fromJS(input).toJS();
+                if (Is.isArray(input) && input.__acl) {
+                    normalized.__acl = input.__acl;
+                }
+                return normalized;
             }
-            return normalized;
         } else {
             return input;
         }

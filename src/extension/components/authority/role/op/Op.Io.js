@@ -57,58 +57,31 @@ const rxImport = (reference) => (params) => {
         reference.setState({$submitting: false, $loading: false});
     }
 }
-const toPermKeys = (reference) => {
-    const result = {
-        length: 0,
-        data: []
-    };
-    const dashboard = Ux.fromHoc(reference, "dashboard");
-    if (dashboard) {
-        const {permissions = []} = dashboard;
-        // 先提取权限信息
-        const $codes = Ux.immutable(permissions);
-        const {$permissions = []} = reference.state;
-        result.data = $permissions
-            .filter(item => $codes.contains(item.code))
-            .map(item => item.key);
-        result.length = result.data.length;
-    }
-    return result;
-}
-const rxLogin = (reference) => (event) => {
-    const enabled = event.target.checked;
-    const {$keySet} = reference.state;
-    const perm = toPermKeys(reference);
-    const keySet = new Set()
+const rxPageChecked = (reference) => (addedKeys = [], removedKeys = []) => {
+    let {$keySet} = reference.state;
     if ($keySet) {
-        Array.from($keySet).forEach(key => keySet.add(key));
+        $keySet = Ux.clone($keySet);
+        addedKeys.forEach(key => $keySet.add(key));
+        removedKeys.forEach(key => $keySet.delete(key));
+        reference.setState({$keySet});
     }
-    if (enabled) {
-        // 允许登录
-        perm.data.forEach(added => keySet.add(added));
-    } else {
-        // 不允许登录
-        perm.data.forEach(removed => keySet.delete(removed));
-    }
-    reference.setState({$keySet: keySet});
 }
-const isLogin = (reference) => {
-    const {$role} = reference.state;
-    if ($role) {
-        const perm = toPermKeys(reference);
-        if (perm.length) {
-            const $expected = Ux.immutable(perm.data);
-            // 期望信息
-            const {$keySet} = reference.state;
-            const $keys = $keySet ? Array.from($keySet) : [];
-            const filtered = $keys.filter(key => $expected.contains(key));
-            return perm.length === filtered.length;
-        } else return false;
-    }
+const rxPageSelect = (reference) => (key, $selectedData = []) => {
+    const state = {};
+    state.$selectedKeys = key ? [key] : [];
+    state.$selectedData = $selectedData;
+    reference.setState(state);
+}
+const rxPageMove = (reference) => (key) => {
+    reference.setState({
+        $selectedKeys: [],
+        $selectedData: []
+    });
 }
 export default {
     rxExport,
     rxImport,
-    rxLogin,
-    isLogin,
+    rxPageChecked,
+    rxPageSelect,
+    rxPageMove
 }

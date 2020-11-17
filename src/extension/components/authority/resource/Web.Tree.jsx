@@ -1,5 +1,5 @@
 /* 左边树形结构（直接使用Tree）*/
-import {Collapse, Spin, Tag, Tree} from 'antd';
+import {Button, Collapse, Popconfirm, Spin, Tag, Tree} from 'antd';
 import React from 'react';
 import Ux from "ux";
 import Op from './op/Op';
@@ -28,31 +28,40 @@ export default {
         const closable = Ux.fromHoc(reference, "closable");
         return (
             <div className={"tree-left"}>
-                <div className={"tree-permission-close"}>
-                    {(() => {
-                        const selected = $selectedData ? $selectedData.name : closable.empty;
-                        const attrs = {};
-                        if ($selectedData) {
-                            attrs.color = "blue";
-                            attrs.style = {
-                                fontSize: 14
-                            }
-                            attrs.closable = true;
-                            attrs.onClose = Op.rxClosePerm(reference);
-                            return (
+                {(() => {
+                    const selected = $selectedData ? $selectedData.name : closable.empty;
+                    const attrs = {};
+                    if ($selectedData) {
+                        attrs.color = "blue";
+                        attrs.style = {
+                            fontSize: 14
+                        }
+                        attrs.closable = true;
+                        attrs.onClose = Op.rxClosePerm(reference);
+                        // confirm 执行
+                        let action = Ux.fromHoc(reference, "action");
+                        if (!action) action = {};
+                        return (
+                            <div className={"tree-permission-close"}>
+                                <Popconfirm title={action.confirm} onConfirm={Op.rxDeletePerm(reference)}>
+                                    <Button icon={"delete"} type={"danger"}/>
+                                </Popconfirm>
+                                &nbsp;&nbsp;
                                 <Tag {...attrs}>
                                     {selected}
                                 </Tag>
-                            )
-                        } else {
-                            return (
+                            </div>
+                        )
+                    } else {
+                        return (
+                            <div className={"tree-permission-close"}>
                                 <Tag style={{
                                     fontSize: 14
                                 }}>{selected}</Tag>
-                            );
-                        }
-                    })()}
-                </div>
+                            </div>
+                        );
+                    }
+                })()}
                 <Spin spinning={$loading}>
                     <Collapse className={"tree-permission"} style={{
                         maxHeight: Ux.toHeight(144)

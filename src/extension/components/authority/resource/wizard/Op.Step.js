@@ -25,13 +25,14 @@ const onNext = (reference) => (event) => {
             reference.setState({$submitting: true});
             // 读取所有数据
             const {$wizard, $removed} = reference.state;
-            const {permissions = [], group} = $wizard;
+            const {permissions = [], group, type} = $wizard;
 
             // 参数构造
             const params = {
                 data: [],        // 权限信息（Save）
                 relation: {},    // 关系信息 actionId = permissionId
-                group: group,    // 编辑的权限组信息（中文可靠）
+                group,           // 编辑的权限组信息（中文可靠）
+                type,            // 权限的类型，该类型影响类型树
             };
             permissions.forEach(permission => {
                 const {actions = [], ...rest} = permission;

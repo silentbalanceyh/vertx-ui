@@ -225,6 +225,7 @@ const ambValue = (reference = {}, name) => {
         return state[name];
     }
 };
+
 export default {
     /*
      * 二义性处理，最终转换成数组

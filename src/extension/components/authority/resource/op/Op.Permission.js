@@ -5,17 +5,13 @@ const yiPermPage = (reference) => {
     const state = {};
     // 读取权限组信息
     const types = Ux.onDatum(reference, "permission.type");
-    Ex.authGroups(state, types)
-        .then(processed => {
-            /*
-             * 构造翻译 permissions 的 DATUM
-             * 二义性的 DATUM
-             * 1）modelKey -> identifier
-             * 2）直接的 identifier
-             */
-            return Ux.promise(processed);
-        })
-        .then(Ux.ready).then(Ux.pipe(reference));
+    /*
+         * 构造翻译 permissions 的 DATUM
+         * 二义性的 DATUM
+         * 1）modelKey -> identifier
+         * 2）直接的 identifier
+         */
+    Ex.authGroups(state, types).then(Ux.ready).then(Ux.pipe(reference));
 }
 const yoPermCriteria = (reference) => ($selectedKeys = [], item = {}) => {
     if (0 < $selectedKeys.length) {
@@ -32,6 +28,10 @@ const yoPermCriteria = (reference) => ($selectedKeys = [], item = {}) => {
     }
 }
 const rxClosePerm = (reference) => (event) => {
+    Ux.prevent(event);
+    reference.setState({$selectedKeys: [], $selectedData: undefined});
+}
+const rxDeletePerm = (reference) => (event) => {
     Ux.prevent(event);
     reference.setState({$selectedKeys: [], $selectedData: undefined});
 }
@@ -55,5 +55,7 @@ export default {
     yuPermPage,
     yoPermCriteria,
     // Close 关闭按钮
-    rxClosePerm
+    rxClosePerm,
+    // 删除权限集
+    rxDeletePerm
 }

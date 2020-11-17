@@ -64,6 +64,7 @@ const tableConfig = (reference, config = {}) => {
     const columns = Ux.configColumn(ref, table.columns ? table.columns : []);
     const rowSelection = {}
     const {selection} = config;
+    const tableAttrs = {};
     if (selection && selection.multiple) {
         /*
          * 多选
@@ -89,11 +90,18 @@ const tableConfig = (reference, config = {}) => {
         rowSelection.type = 'radio';
         rowSelection.onSelect = ($keySet) => {
             mountKey($keySet);
-            // 更新
             reference.setState({$keySet});
         }
+        tableAttrs.onRow = ($keySet = {}) => {
+            return {
+                onClick: event => {
+                    Ux.prevent(event);
+                    mountKey($keySet);
+                    reference.setState({$keySet});
+                }
+            }
+        }
     }
-    const tableAttrs = {};
     tableAttrs.columns = columns;
     tableAttrs.rowSelection = rowSelection;
     return tableAttrs;

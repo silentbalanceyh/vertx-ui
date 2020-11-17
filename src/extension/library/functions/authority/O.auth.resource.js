@@ -58,6 +58,7 @@ const treeSlash = (permissions = [], type = {}) => {
                  */
                 append.text = item.name;
                 append.selectable = false;
+                append.checkable = false;
             }
             Object.assign(item, append);
         });
@@ -101,6 +102,7 @@ const authGroups = (state = {}, types = []) => {
             treeData.push(treeItem);
         })
         state.$tree = treeData.sort(Ux.sorterAscFn("title"));     // 左树处理
+        state.$treeData = groups;
 
         return Ux.promise(state);
     })

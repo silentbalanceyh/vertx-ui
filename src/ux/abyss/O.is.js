@@ -200,15 +200,26 @@ const isQr = (config = {}) => {
         throw new Error("[ Ux ] 查询引擎方法不可调用于不带 ajax 配置的输入");
     }
 };
+/**
+ * ## 标准函数
+ *
+ * @memberOf module:_is
+ * @param {any} input 传入部分的数据
+ * @returns {boolean}
+ */
+const isCollection = (input) => (Set.prototype.isPrototypeOf(input) || isArray(input))
 export default {
     isObject,   /* 验证合法的对象 */
     isEmpty,    /* Object 是否 Empty，支持数组 */
+    isNotEmpty: (input) => !isEmpty(input), /* */
     isDiff,     /* 两个 Object 是否不同 */
+    isSame: (left, right) => !isDiff(left, right),
     isIn,       /* input 是否存在于 Array 中 */
     isParent,   /* 判断输入节点是否当前节点父节点 */
     /* underscore 连接 */
     isFunction,
     isArray,
+    isCollection,
     isQr,       /* 配置是否查询引擎配置 */
     ...rule,     /* 检查记录是否符合 Rule 中的定义 */
     ...Reg,     /* 正则表达式验证专用库 */
