@@ -18,7 +18,6 @@ module.exports = {
     ex: path.resolve(__dirname, "../src", "extension/library"),     // Ex 库
     ei: path.resolve(__dirname, "../src", "extension/ecosystem"),   // Ex 专用组件
     oi: path.resolve(__dirname, "../src", "extension/eclat"),       // Ox 专用组件
-    editor: path.resolve(__dirname, "../src", "editor"),            //
     plugin: path.resolve(__dirname, "../src", "plugin"),            // 插件
 
     // Mock 专用

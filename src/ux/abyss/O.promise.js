@@ -376,6 +376,7 @@ const ready = (state = {}) => {
 /**
  * ## 包装过的 Promise，解决内存Bug，中途 Cancel
  *
+ * @memberOf module:_async
  * @param promise
  */
 const packet = (promise) => {
@@ -393,6 +394,33 @@ const packet = (promise) => {
         }
     }
 }
+/**
+ * ## 特殊函数
+ *
+ * Monad 生成器，用于生成多维函数链，它的执行流程如下：
+ *
+ * 1. input输入
+ * 2. funArray[0]执行：input -> ret0
+ * 3. funArray[1]执行：ret0 ( input1 ) -> ret1
+ * 4. funArray[2]执行：ret1 ( input2 ) -> ret2
+ * .....
+ *
+ * @memberOf module:_async
+ * @param {Array} funArray 传入的可绑定函数数组，每个元素都是一个 Function
+ * @returns {Function}
+ */
+const monad = (funArray = []) => {
+    return (input = {}) => {
+        let ret = V.clone(input);
+        for (let idx = 0; idx < funArray.length; idx++) {
+            const fun = funArray[idx];
+            if (Is.isFunction(fun)) {
+                ret = fun(ret);
+            }
+        }
+        return ret;
+    }
+}
 export default {
     promise,
     parallel,
@@ -401,4 +429,5 @@ export default {
     pipe,
     ready,
     debug,
+    monad,
 }

@@ -1,5 +1,5 @@
 import Ex from "ex";
-import {GraphicViewer} from 'web';
+import {G6Viewer} from 'web';
 import React from 'react';
 import './Cab.less';
 import Op from './op';
@@ -10,7 +10,7 @@ export default (reference, data = {}) => {
     $event.onEvent(Op.event);
     return (
         <div className={"drawer-background"}>
-            <GraphicViewer {...inherit} data={data} {...$event.attributes()}/>
+            <G6Viewer {...inherit} data={data} {...$event.attributes()}/>
         </div>
     );
 }

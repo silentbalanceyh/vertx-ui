@@ -3,7 +3,7 @@ import Ux from 'ux';
 import Ex from "ex";
 import Op from './op';
 import './Cab.less';
-import {GraphicEditor} from "web";
+import {G6Editor} from "web";
 import renderForm from "../ExGraphicSpider/Web.Form";
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
@@ -24,7 +24,7 @@ class Component extends React.PureComponent {
             $event.onEvent(Op.event);
             return (
                 <div className={"drawer-background"}>
-                    <GraphicEditor {...$event.attributes()}/>
+                    <G6Editor {...$event.attributes()}/>
                     {renderForm(this, $event)}
                 </div>
             );

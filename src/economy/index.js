@@ -44,8 +44,8 @@ export {default as Graphic2} from './graphic/G2/UI';
 /*
  * 编辑器
  */
-export {default as GraphicEditor} from './editor-graphic/GraphicEditor/UI';
-export {default as GraphicViewer} from './editor-graphic/GraphicViewer/UI';
+export {default as G6Editor} from './graphic/G6Editor/UI';
+export {default as G6Viewer} from './graphic/G6Viewer/UI';
 export {default as FormDesigner} from './editor-form/FormDesigner/UI';
 /*
  * 自定义组件专用

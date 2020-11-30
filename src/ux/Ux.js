@@ -6,9 +6,12 @@ import element from './element';
 import engine from './engine';
 import entity from './entity';
 import unity from './unity';
-import graphic from './graphic';
 import xweb from './xweb';
 import romantic from './romantic';
+
+// 图相关
+import g6 from './g6';
+import g2 from './g2';
 
 import E from './error';
 
@@ -307,7 +310,9 @@ const exported = {
      * @module _dsl
      */
     ...unity,
-    ...graphic,
+
+    ...g6,
+    ...g2,
     /**
      * # 内部模块
      *

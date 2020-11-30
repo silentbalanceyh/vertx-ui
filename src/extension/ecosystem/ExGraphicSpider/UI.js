@@ -3,9 +3,7 @@ import Op from './op';
 import Ex from 'ex';
 import Ux from "ux";
 import './Cab.less';
-import {GraphicEditor} from 'web';
-
-import renderForm from './Web.Form';
+import {G6Editor} from 'web';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("ExGraphicSpider")
@@ -27,12 +25,16 @@ class Component extends React.PureComponent {
             /*
              * 构造图形相关事件对象
              */
-            const {$event} = this.state;
-            $event.onEvent(Op.event);
+            const {$gEvent, $data = {}} = this.state;
+            /*
+             * 构造分组信息
+             */
+            const inherit = Ex.yoAmbient(this);
+            inherit.$gEvent = $gEvent;
+            inherit.data = $data;
             return (
                 <div className={"drawer-background"}>
-                    <GraphicEditor {...$event.attributes()}/>
-                    {renderForm(this, $event)}
+                    <G6Editor {...inherit}/>
                 </div>
             );
         }, Ex.parserOfColor("ExGraphicSpider").component());

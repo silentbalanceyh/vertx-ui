@@ -513,6 +513,7 @@ const elementSave = (data = [], item, idField = "key") => {
     return data;
 }
 export default {
+    element: (id) => document.getElementById(id),
     elementJoin,
     elementFlat,
     elementWrap,

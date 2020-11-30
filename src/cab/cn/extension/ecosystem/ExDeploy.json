@@ -30,7 +30,7 @@
                 {
                     "id": "keyStart",
                     "label": "开始",
-                    "type": "START"
+                    "category": "START"
                 },
                 {
                     "id": "keyModel",
@@ -60,7 +60,7 @@
                 {
                     "id": "keyEnd",
                     "label": "结束",
-                    "type": "END"
+                    "category": "END"
                 }
             ],
             "edges": [

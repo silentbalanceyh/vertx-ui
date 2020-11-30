@@ -142,7 +142,7 @@ const dgQuery = (reference = {}, name) => {
  * @param {String} message 打印的消息信息，会追加 GEvent 日志前缀。
  * @param {WebColor} color 色差专用字符串，Web色彩。
  */
-const dgGraphic = (input, message, color = "#556B2F") => {
+const dgGraphic = (input, message, color = "#1A91FF") => {
     dgDebug(input, `[ GEvent ] ${message}`, color);
 };
 /**
