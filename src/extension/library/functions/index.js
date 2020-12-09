@@ -8,6 +8,8 @@ import func from './func';
 import parser from './parser';
 import generator from './generator';
 import control from './control';
+// ------------- X6 -----------------------
+import graphic from './graphic';
 
 /**
  * 内部模块
@@ -96,6 +98,7 @@ export default {
      *
      */
     ...generator,
+    ...graphic,
     // ...funcGenerate,
     // ...funcBind,
     /*

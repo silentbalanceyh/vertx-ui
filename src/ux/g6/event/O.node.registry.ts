@@ -1,6 +1,6 @@
 import GGraph from "./O.graph";
 import {GLife} from "./I.contract";
-import {GStore} from "./O.event";
+import {GStore} from "./O.g";
 import {Abs} from './I.common';
 import Ld from '../library';
 

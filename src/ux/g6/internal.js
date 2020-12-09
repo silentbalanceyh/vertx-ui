@@ -3,7 +3,7 @@ import Abs from '../abyss';
 import Ele from '../element';
 import T from '../unity';
 import Dev from '../develop';
-import {FunctionExt as Fn} from '@antv/x6';
+import {FunctionExt as F} from '@antv/x6';
 
 export {
     Eng,    // 引擎专用函数
@@ -11,5 +11,5 @@ export {
     Ele,    // 集合运算专用函数
     T,      // 工具类
     Dev,    // 开发工具专用
-    Fn,     // Fn
+    F,     // F
 };

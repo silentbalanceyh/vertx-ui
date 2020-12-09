@@ -1,9 +1,10 @@
 import {GLife, GView} from "./I.contract";
-import GEvent, {GStore} from "./O.event";
+import GEvent, {GStore} from "./O.g";
 import Kt, {Abs, Dev, Ele} from "./I.common";
 import Ld from '../library';
 import GPos from "./O.graph.pos";
 import {Graph} from "@antv/x6";
+import GLayout from "./O.graph.layout";
 
 class GGraph implements GLife, GView {
     private readonly _gEvent: GEvent = null;
@@ -12,6 +13,8 @@ class GGraph implements GLife, GView {
     private _css: any = {};
     private _config: any = {};
     private _pos: GPos = null;
+
+    private _layout: GLayout = null;            // 布局引用
 
     // g6 对应的方法
     private g6Graph: Graph = null;
@@ -22,12 +25,16 @@ class GGraph implements GLife, GView {
 
     configure(store: GStore): GGraph {
         const config = store.inGraph();
-        const {position, css, ...graphConfig} = config;
+        const {position, css, layout, ...graphConfig} = config;
 
         // ID计算，计算当前图对应的 container，HTML ID
         const reference = this._gEvent.reference();
         const {$container} = reference.props;
-        this._id = $container ? $container : graphConfig.container;
+        if ($container) {
+            // 多图专用配置
+            graphConfig.container = $container;
+        }
+        this._id = graphConfig.container;
 
         // CSS计算，风格数据
         if (css) Object.assign(this._css, css);
@@ -38,8 +45,10 @@ class GGraph implements GLife, GView {
         // 位置数据
         const pos = new GPos(position);
 
-        // 带有工具栏的计算，工具栏本身不计算
+        // 布局构造
+        this._layout = new GLayout(layout);
 
+        // 带有工具栏的计算，工具栏本身不计算
         const toolbarCfg = store.inToolbar();
         if (toolbarCfg.container) {
             Kt.posCompressH(pos, toolbarCfg);
@@ -67,12 +76,21 @@ class GGraph implements GLife, GView {
     }
 
     graph = (): Graph => this.g6Graph;
+    container = () => Ele.element(this._id);
+    reference = () => this._gEvent.reference();
 
     id = (): string => this._id;
     css = (): any => this._css;
 
     // GPos引用处理
     pos = (): GPos => this._pos;
+
+    layoutOn = (data, config = {}) => {
+        const layoutRef = this._layout.instance(this._pos, config);
+        if (layoutRef) {
+            layoutRef.layout(data);
+        }
+    }
 }
 
 export default GGraph;

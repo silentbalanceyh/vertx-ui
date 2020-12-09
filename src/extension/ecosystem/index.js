@@ -60,9 +60,8 @@ export {default as ExCategory} from './ExCategory/UI';
 export {default as ExApps} from './ExApps/UI';
 
 // ------------- 拓扑图定义
-export {default as ExGraphicSpider} from './ExGraphicSpider/UI';
+export {default as ExGraphicEditor} from './ExGraphicEditor/UI';
 export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
-export {default as ExGraphicPlotter} from './ExGraphicPlotter/UI';
 /*
  * 日志颜色分类
  * 私有：

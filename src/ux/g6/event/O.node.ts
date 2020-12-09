@@ -1,5 +1,5 @@
-import GEvent, {GStore} from "./O.event";
-import {GLife, ModeGroup, ModeItem, OptionKey} from "./I.contract";
+import GEvent, {GStore} from "./O.g";
+import {GLife, ModeGroup, OptionKey} from "./I.contract";
 import GGraph from "./O.graph";
 import GRegistry from "./O.node.registry";
 import Kt, {Abs, Eng} from './I.common';
@@ -13,7 +13,6 @@ class GNode implements GLife {
     private _options: any = {};
     // 两个特殊变量
     private _modeGroup: ModeGroup = ModeGroup.None;
-    private _modeItem: ModeItem = ModeItem.Standard;
     /**
      * 数据本体，两种格式
      * 1. Array：不分组的时候的格式
@@ -37,7 +36,6 @@ class GNode implements GLife {
         if (options) {
             Object.assign(this._options, options);
             if (options[OptionKey.MODE_GROUP]) this._modeGroup = options[OptionKey.MODE_GROUP];
-            if (options[OptionKey.MODE_ITEM]) this._modeItem = options[OptionKey.MODE_ITEM];
         }
 
         // CSS计算
@@ -51,6 +49,8 @@ class GNode implements GLife {
 
         return this;
     }
+
+    options = () => this._options;
 
     initialize(gEvent: GEvent): GNode {
         // 注册器初始化
@@ -71,6 +71,9 @@ class GNode implements GLife {
                 options.css = this._css;
                 this._data = Kt.onDataGroup(sourceData, options, gEvent);
             }
+        } else {
+            // 解决：Cannot convert undefined or null to object
+            this._data = {};
         }
 
         return this;

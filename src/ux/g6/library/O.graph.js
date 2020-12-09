@@ -1,5 +1,5 @@
-import elementDefault from './element-default';
-import pluginDefault from './plugin-default';
+import elementGraph from './element-graph';
+import pluginDefault from './element-addon';
 import {Abs, Dev} from '../internal';
 
 const combineConfig = (container, inputConfig = {}, CFG, type) => {
@@ -25,7 +25,12 @@ const combineConfig = (container, inputConfig = {}, CFG, type) => {
             return inputConfig;
         }
     } else {
-        console.error("对不起，container 传入错误，清空所有配置！");
+        if ("Graph" === type) {
+            /**
+             * AddOn 是可选的，Graph 是必须的
+             */
+            console.error(`对不起，container 传入错误，清空所有配置！类型 = ${type}`);
+        }
         return {};
     }
 }
@@ -45,9 +50,13 @@ export default {
      *
      * UI库中提供默认图配置信息，并且写入到默认图库中，提供图配置的 overwrite 选项，一旦开启了
      * overwrite 功能，则默认的图配置失效，该操作的目的是为了简化配置信息
+     *
+     * 新版本的统一改动：
+     * 1. 导入部分的内容直接使用函数模式，可传入 reference 绑定的外层引用
+     * 2. 该引用中的部分事件需要注入到系统中实现事件的拦截功能
      */
     g6DefaultGraph: (container, config = {}) =>
-        combineConfig(container, config, elementDefault, "Graph"),
+        combineConfig(container, config, elementGraph, "Graph"),
     g6DefaultAddOn: (container, config = {}) =>
         combineConfig(container, config, pluginDefault, "AddOn"),
 }

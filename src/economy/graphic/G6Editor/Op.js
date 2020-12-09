@@ -6,7 +6,9 @@ import Ux from "ux";
 const yiPage = (reference) => {
     const state = {};
     return Ux.promise(state).then(processed => {
-        const graph = Ux.g6UiEditor(reference, "web-g6-editor");
+        const {$gEvent} = reference.props;
+        $gEvent.initialize();
+        const graph = $gEvent.g6Graph();
 
         const {
             data = {
@@ -16,6 +18,11 @@ const yiPage = (reference) => {
         } = reference.props;
 
         graph.fromJSON(data);
+        // 初始化侧边栏
+        $gEvent.stencilOn();
+        // 开启重置
+        $gEvent.resizeOn();
+
         processed.$ready = true;
         reference.setState(state);
     })

@@ -29,8 +29,7 @@ export default {
      * }
      */
     onProbe,
-    onVisit: (reference) => (dataEvent) => {
-        const model = dataEvent.getPrev();
+    onVisit: (reference) => (model = {}) => {
         const {$identifier} = reference.props;
         if ($identifier) {
             const data = Ux.clone(model);

@@ -97,12 +97,28 @@ const g6Image = (fieldImage = 'image') => {
     }
 }
 
-
+const x6FromTo = (edge, field) => {
+    const source = edge.getSourceNode().getData();
+    const target = edge.getTargetNode().getData();
+    if (source && target) {
+        if (field) {
+            // 有字段名，则提取字段名处理
+            return [source[field], target[field]];
+        } else {
+            // 无字段名，直接提取节点信息
+            return [source, target];
+        }
+    } else {
+        // 返回两个 undefined
+        return [undefined, undefined];
+    }
+}
 export default {
-    /*
-     * 数据部分
-     */
+    // 数据部分
     g6DataTree,
+
+    // 读取 source 和 target
+    x6FromTo,
 
     // 节点执行
     g6Image,

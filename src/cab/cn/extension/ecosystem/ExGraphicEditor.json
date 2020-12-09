@@ -1,0 +1,124 @@
+{
+    "_modal": {
+        "error": {
+            "free": "对不起，当前管理的图中存在`孤立点`，请检查后再保存！",
+            "model": "对不起，选择模型出错，请联系管理员先检查配置！"
+        },
+        "confirm": {
+            "reset": "该操作会将当前已经编辑过的图恢复到最初状态，确认重置？"
+        }
+    },
+    "_info": {
+        "loading": "正在保存您的图信息……"
+    },
+    "_graphic": {
+        "registry": [
+            "node-ci",
+            "edge-ci"
+        ],
+        "graph": {
+            "layout": {
+                "type": "radial",
+                "nodeSize": 74
+            },
+            "position": {
+                "start": {
+                    "x": 540,
+                    "y": 188
+                }
+            },
+            "container": "web-g6-editor"
+        },
+        "node": {
+            "source": "graphic.nodes",
+            "options": {
+                "mode.group": "Tree",
+                "group.field.root": "parentId",
+                "group.field": "name",
+                "sort.field": "identifier",
+                "data.id": "identifier",
+                "data.fields": [
+                    "identifier"
+                ],
+                "data.text": {
+                    "field": "name"
+                },
+                "data.image": {
+                    "field": "image"
+                },
+                "relation.mapping": {
+                    "source": "upstream",
+                    "target": "downstream",
+                    "label": "name"
+                },
+                "message.confirm": {
+                    "node": "该操作将删除该节点，以及和节点相关的所有边信息，确认？",
+                    "edge": "该操作将删除此边，确认？",
+                    "okText": "确认",
+                    "cancelText": "取消"
+                }
+            },
+            "css": {
+                "columns": 2,
+                "width": 192,
+                "rowHeight": 84
+            }
+        },
+        "addon": {
+            "window": {
+                "WIN_REL": "设置关系属性,保存,撤销,false,720,true,$opEdgeSave"
+            },
+            "stencil": {
+                "registry": {
+                    "node": "node-ci",
+                    "edge": "edge-ci"
+                },
+                "title": "元素面板",
+                "container": "web-g6-stencil",
+                "css": {
+                    "width": 220
+                },
+                "criteria": [
+                    "name",
+                    "identifier"
+                ]
+            },
+            "toolbar": {
+                "container": "web-g6-editor-toolbar",
+                "commands": {
+                    "view": [
+                        [
+                            "保存 ( Cmd + S )",
+                            "重置 ( Cmd + Z )",
+                            "打印 ( Cmd + P )",
+                            "放大 ( Cmd + + )",
+                            "缩小 ( Cmd + - )"
+                        ],
+                        [
+                            "拷贝 ( Cmd + C )",
+                            "剪切 ( Cmd + X )",
+                            "粘贴 ( Cmd + V )"
+                        ],
+                        [
+                            "撤销 ( Cmd + Z )",
+                            "重做 ( Cmd + Y )",
+                            "删除 ( Cmd + D )"
+                        ]
+                    ],
+                    "disabled": [
+                        "print",
+                        "copy",
+                        "cut",
+                        "parse",
+                        "undo",
+                        "redo",
+                        "delete"
+                    ]
+                },
+                "css": {
+                    "height": 32
+                }
+            }
+        }
+    }
+}

@@ -69,8 +69,11 @@ export default (reference) => {
             const {nodes = []} = response;
             nodes.forEach(node => {
                 if (key === node.key) {
-                    node.data.contentStyle = {
-                        fill: "#FFEC8B"
+                    node.attrs = {
+                        // 新版数据结构
+                        body: {
+                            fill: "#FFEC8B"
+                        }
                     }
                 }
             });
@@ -83,7 +86,7 @@ export default (reference) => {
             * $tplData - 原始数据信息（包含了当前节点对应的所有数据）
             * $data - 运行时可改变的数据信息
             * */
-            processed.$tplData = response;
+            // processed.$tplData = response;
             processed.$data = response;
             return Ux.promise(processed);
         }).then(processed => Ux.ajaxPost('/api/graphic/search', {

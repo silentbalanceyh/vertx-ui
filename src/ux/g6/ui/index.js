@@ -1,5 +1,7 @@
-import g6UiEditor from './O.fn.editor';
+import x6UiToolbar from './ui.toolbar';
+import x6UiDialog from './ui.dialog';
 
 export default {
-    g6UiEditor
+    x6UiToolbar,
+    x6UiDialog,
 }

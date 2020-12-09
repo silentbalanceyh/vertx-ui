@@ -1,4 +1,4 @@
-import GEvent from "./O.event";
+import GEvent from "./O.g";
 
 export {
     GEvent,

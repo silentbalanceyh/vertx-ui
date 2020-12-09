@@ -1,6 +1,11 @@
 import Library from './O.registry';
 import g6Default from './O.graph';
 import Abs from '../../abyss';
+// 核心数据
+import V from './element-style';
+import L from './element-layout';
+import C from './element-command';
+// G6 内部
 
 const _registryRun = (name, type) => {
     /*
@@ -57,4 +62,7 @@ export default {
         }
     },
     ...g6Default,       // 默认
+    L,          // 布局
+    V,          // 值，风格
+    C,          // 命令
 }

@@ -1,6 +1,6 @@
 import GGraph from "./O.graph";
-import {GLife, GView, ModeItem, ModeLayout} from "./I.contract";
-import {GStore} from "./O.event";
+import {GLife, GView, ModeLayout} from "./I.contract";
+import {GStore} from "./O.g";
 import Ld from '../library';
 import Kt, {Abs, Dev} from './I.common';
 import GNode from "./O.node";
@@ -10,10 +10,9 @@ import GPos from "./O.graph.pos";
 class GStencil implements GLife, GView {
     private readonly _gGraph: GGraph = null;
 
-    private _mode: ModeItem = ModeItem.Standard;
     private _id: string = null;
     private _config: any = {};
-    private _registry: string;
+    private _registry: any = {};
     private _css: any = {};
     // UI组件
     private _gStencil: Addon.Stencil = null;
@@ -29,21 +28,22 @@ class GStencil implements GLife, GView {
         const {
             container,                      // 容器
             css,                            // CSS风格
-            mode = ModeItem.Standard,       // 选择模式
             registry,                       // 注册节点名称
+            criteria,                       // 搜索字段配置
             ...stencilConfig
         } = config;
 
         // CSS计算
         if (css) Object.assign(this._css, css);
 
-        // Mode 选择构造
-        this._mode = mode;
-
         // ID计算
         this._id = container ? container : null;
-        this._config = Ld.g6DefaultAddOn(this._id, stencilConfig);
-
+        const options = Ld.g6DefaultAddOn(this._id, stencilConfig);
+        {
+            options.search = Kt.onNodeSearch(criteria);
+            // FnAttr：设置 search 属性
+        }
+        this._config = options;
         // 注册节点名称
         this._registry = registry;
 
@@ -92,7 +92,8 @@ class GStencil implements GLife, GView {
                     // 构造
                     this._gStencil = stencilUi;
                 } else {
-                    console.error("未找到侧边栏专用容器：", id);
+                    // 未配置侧边栏容器
+                    // console.error("未找到侧边栏专用容器：", id);
                 }
             } else {
                 console.error("图初始化失败，g6Graph 引用为空！");
@@ -101,23 +102,24 @@ class GStencil implements GLife, GView {
         return this;
     }
 
-    initializeData(): GStencil {
-        if (this._gStencil && this._gNode) {
-            const groupNodes = this._gNode.groupNodes(this._registry);
-            if (groupNodes) {
-                Object.keys(groupNodes).forEach(name => {
-                    const items = groupNodes[name];
-                    // 加载数据
-                    this._gStencil.load(items, name);
-                });
-            }
-        } else {
-            console.error("当前组件未初始化成功！！")
+    initializeData(filterFn: Function = () => true) {
+        const groupedData = this.getData();
+        Object.keys(groupedData).forEach(group => {
+            const nodes = groupedData[group].filter(filterFn);
+            this._gStencil.load(nodes, group);
+        })
+    }
+
+    reloadGroup(name: string, filterFn: Function = () => true) {
+        const groupedData = this.getData();
+        if (groupedData[name]) {
+            const nodes = groupedData[name].filter(filterFn);
+            this._gStencil.load(nodes, name);
         }
-        return this;
     }
 
     id = (): string => this._id;
+
     css = (): any => {
         const css: any = this._css;
         const pos: GPos = this._gGraph.pos();
@@ -126,6 +128,16 @@ class GStencil implements GLife, GView {
         }
         return css;
     };
+
+    private getData(): any {
+        if (this._gStencil && this._gNode) {
+            const {node} = this._registry;
+            return this._gNode.groupNodes(node);
+        } else {
+            console.error("当前组件未初始化成功！！")
+            return {};
+        }
+    }
 }
 
 export default GStencil;

@@ -1,8 +1,8 @@
 import React from 'react';
 import './Cab.less';
 import Op from './Op';
-import renderTool from './Web.Toolbar';
 import {Spin} from 'antd';
+import Ux from 'ux';
 
 class Component extends React.PureComponent {
     graph = null;
@@ -15,6 +15,10 @@ class Component extends React.PureComponent {
     }
 
     componentWillUnmount() {
+        const {$gEvent} = this.props;
+        if ($gEvent) {
+            $gEvent.resizeOn(true)
+        }
     }
 
     render() {
@@ -33,7 +37,7 @@ class Component extends React.PureComponent {
                         <div id={container.stencil} className={"sider"} style={style.stencil}/>
                         <div className={"panel"}>
                             <div id={container.toolbar} className={"toolbar"} style={style.toolbar}>
-                                {$ready ? renderTool(this) : false}
+                                {$ready ? Ux.x6UiToolbar(this, $gEvent) : false}
                             </div>
                             <div id={container.graph} className={"x6-graph"}/>
                         </div>

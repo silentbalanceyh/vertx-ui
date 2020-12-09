@@ -40,24 +40,34 @@ class GGroup {
             const {
                 columns,
                 width,
-                heightRow = 60
+                rowHeight = 80,
             } = this._css;
             // 宽度
             groupData.graphWidth = width ? width : 200;
 
-            // 网格配置，构造 layoutOptions
+            /**
+             * 网格配置，构造 layoutOptions
+             * 默认值：
+             * columns = 2, 两列
+             * rowHeight = 80，每一行行高80
+             * width = 192, 当前工具宽192
+             */
             const layoutOptions: any = {};
             layoutOptions.columns = columns ? columns : 1;
+            layoutOptions.rowHeight = rowHeight;
+            layoutOptions.dy = 6;
+            layoutOptions.dx = 6;
+
             groupData.layoutOptions = layoutOptions;
             groupData.collapsed = true;
 
             // 高度计算
             const length = this._children.length;
-            let seed = 0;
+            let seed;
             if (0 < length % columns) {
-                seed = ((length / columns) + 1) * heightRow;
+                seed = ((length / columns) + 1) * (rowHeight + 6);
             } else {
-                seed = (length / columns) * heightRow;
+                seed = (length / columns) * (rowHeight + 6);
             }
             groupData.graphHeight = seed;
         }

@@ -1,11 +1,8 @@
 {
-    "_form":{
-        "window":0.15,
-        "columns":1,
-        "ui":[
-            [
-                "title=关系属性"
-            ],
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "ui": [
             [
                 "upstreamName,上游配置项,14,,,readOnly=true"
             ],
@@ -14,9 +11,9 @@
             ],
             [
                 {
-                    "metadata":"type,关系类型,14,,aiSelect",
+                    "metadata": "type,关系类型,14,,aiSelect",
                     "optionJsx.config.datum": "source=relation.type,value=code,label=name",
-                    "optionConfig.rules":[
+                    "optionConfig.rules": [
                         "required,添加关系时必须选择关系类型"
                     ]
                 }
@@ -29,19 +26,20 @@
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opSaveEdge,保存,SUBMIT,primary"
+                        "$opEdgeSave,保存,SUBMIT,primary"
                     ]
                 }
             ]
         ],
-        "hidden":[
+        "hidden": [
             "key",
             "active",
             "upstream",
-            "downstream"
+            "downstream",
+            "sigma"
         ],
-        "initial":{
-            "active":"BOOL:true"
+        "initial": {
+            "active": "BOOL:true"
         }
     }
 }

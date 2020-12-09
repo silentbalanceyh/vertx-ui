@@ -1,4 +1,4 @@
-import {GStore} from "./O.event";
+import {GStore} from "./O.g";
 
 /*
  * 生命周期专用接口，用于处理不同的生命周期的方法，生命周期完成：
@@ -46,23 +46,23 @@ export enum ModeGroup {
     None = 'None',          // 不分组
 }
 
-export enum ModeItem {
-    Standard = 'Standard',  // 标准模式，每个 item 可以多次选择
-    Once = 'Once',          // 特殊模式，每个 item 只能在图中选择一次
-}
-
 export enum OptionKey {
     MODE_GROUP = 'mode.group',                  // 分组模式
-    MODE_ITEM = 'mode.item',                    // 选择模式
 
     DATA_TEXT = "data.text",                    // 对应 text 属性
     DATA_IMAGE = "data.image",                  // 对应 image 属性
     DATA_TITLE = "data.title",                  // 对应 title 属性
     DATA_FIELDS = "data.fields",                // 数据字段信息
+    DATA_ID = 'data.id',                        // 主键专用字段
+    DATA_CONDITION = 'data.condition',          // 条件专用字段配置
+
+    RELATION_MAPPING = 'relation.mapping',      // 关联关系映射信息
 
     SORT_FIELD = 'sort.field',                  // 排序字段
     SORT_MODE = 'sort.mode',                    // 排序模式：升序还是降序
 
     GROUP_FIELD = "group.field",                // 对应分组字段
     GROUP_FIELD_ROOT = "group.field.root",      // 对应分组根节点字段
+
+    MESSAGE_CONFIRM = 'message.confirm'
 }
