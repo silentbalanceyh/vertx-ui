@@ -35,6 +35,8 @@ export default (reference, data = {}) => {
         ],
 
         size: "small",
+        // 解决多个列表切换的问题
+        current: pager.page,
         pageSize: pager.size,
 
         total: data.count,

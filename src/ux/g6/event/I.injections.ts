@@ -54,7 +54,11 @@ const DiActions = {}
  * }
  */
 DiActions[DiMap.onSubmit] = internalRequestFn;
-DiActions[DiMap.onReset] = internalRequestFn;
+DiActions[DiMap.onReset] = (input, gEvent) => {
+    const graph = gEvent.g6Graph();
+    graph.zoomTo(1);
+    return new GRequest(graph);
+};
 DiActions[DiMap.onTpl] = internalRequestFn;
 DiActions[DiMap.onZoomIn] = (input, gEvent) => {
     const graph = gEvent.g6Graph();

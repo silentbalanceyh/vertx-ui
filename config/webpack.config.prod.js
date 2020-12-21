@@ -3,7 +3,8 @@ const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
-const ManifestPlugin = require("webpack-manifest-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const {WebpackManifestPlugin} = require("webpack-manifest-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const SWPrecacheWebpackPlugin = require("sw-precache-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
@@ -281,37 +282,29 @@ module.exports = {
             // in the main CSS file.
             {
                 test: /\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    Object.assign(
-                        {
-                            fallback: require.resolve("style-loader"),
-                            use: [
-                                {
-                                    loader: require.resolve("css-loader"),
-                                    options: {
-                                        importLoaders: 1,
-                                        sourceMap: true
-                                    }
-                                },
-                                {
-                                    loader: require.resolve("postcss-loader"),
-                                    options: {
-                                        postcssOptions: {
-                                            ident: "postcss", // https://webpack.js.org/guides/migrating/#complex-options
-                                            plugins: [
-                                                require("postcss-flexbugs-fixes"),
-                                                autoprefixer({
-                                                    flexbox: "no-2009"
-                                                })
-                                            ]
-                                        }
-                                    }
-                                }
-                            ]
-                        },
-                        extractTextPluginOptions
-                    )
-                )
+                use: [
+                    {
+                        loader: require.resolve("css-loader"),
+                        options: {
+                            importLoaders: 1,
+                            sourceMap: true
+                        }
+                    },
+                    {
+                        loader: require.resolve("postcss-loader"),
+                        options: {
+                            postcssOptions: {
+                                ident: "postcss", // https://webpack.js.org/guides/migrating/#complex-options
+                                plugins: [
+                                    require("postcss-flexbugs-fixes"),
+                                    autoprefixer({
+                                        flexbox: "no-2009"
+                                    })
+                                ]
+                            }
+                        }
+                    }
+                ]
                 // Note: this won't work without `new ExtractTextPlugin()` in `plugins`.
             },
             // ** STOP ** Are you adding a new loader?
@@ -437,7 +430,7 @@ module.exports = {
         // Generate a manifest file which contains a mapping of all asset filenames
         // to their corresponding output file so that tools can pick it up without
         // having to parse `index.html`.
-        new ManifestPlugin({
+        new WebpackManifestPlugin({
             fileName: "asset-manifest.json"
         }),
         // Generate a service worker script that will precache, and keep up to date,
