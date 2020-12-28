@@ -27,6 +27,10 @@ export default (reference = {}, column = {}, ops) => {
                     }
                 }
             } else {
+                /*
+                 * 列过滤设置过程中，如果出现了不支持列过滤的类型
+                 * 则直接删除列过滤配置 $filter
+                 */
                 delete column['$filter'];
             }
         }

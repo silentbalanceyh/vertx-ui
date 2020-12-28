@@ -1,6 +1,5 @@
 import React from 'react';
 import {Toolbar} from '@antv/x6-react-components';
-import '@antv/x6-react-components/es/toolbar/style/index.css';
 import {Icon} from 'antd';
 
 export default (reference, $gEvent) => {

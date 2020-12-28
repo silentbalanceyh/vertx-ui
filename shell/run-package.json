@@ -1,4 +1,6 @@
 {
     "antd": "3.26.12",
-    "webpack": "4.44.2"
+    "webpack": "4.44.2",
+    "less": "3.13.0",
+    "source-map-loader": "1.1.3"
 }

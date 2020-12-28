@@ -112,11 +112,16 @@ const getDatum = (reference, config = {}, filter = () => true) => {
     /*
      * 解决 value / label 无法解析的问题
      */
-    const {value, label} = $config;
-    if (value && label) {
+    const {value, label, display} = $config;
+    if (value) {
         options.forEach(option => {
             option.value = option[value];
-            option.label = option[label];
+            // label 处理
+            let labelStr = option[label];
+            if (!labelStr) {
+                labelStr = option[display];
+            }
+            option.label = labelStr;
         })
     }
     return options;

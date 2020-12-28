@@ -10,6 +10,7 @@ import init from './O.init';
  * 特殊运算，专用于新版的列宽度自适应运算
  */
 import configScroll from './O.scroll';
+import Wd from './I.scroll.word';
 
 const exported = {
     ...form,
@@ -19,5 +20,6 @@ const exported = {
     ...dialog,
     ...init,
     configScroll,
+    widthWord: Wd.widthWord
 };
 export default exported;

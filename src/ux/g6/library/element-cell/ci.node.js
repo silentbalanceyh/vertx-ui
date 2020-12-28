@@ -2,7 +2,7 @@ import {Graph} from "@antv/x6";
 import V from '../element-style';
 
 export default (name) => Graph.registerNode(name, {
-    inherit: 'image',
+    inherit: 'rect',
     width: 74,
     height: 72,
     attrs: {

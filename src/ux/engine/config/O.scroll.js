@@ -21,6 +21,10 @@ const widthText = (titleWidth = 0, column = {}, data = []) => {
     );
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
+const widthCurrency = (titleWidth = 0, column = {}, data = []) => {
+    const textWidth = Wd.widthMax(data, column.dataIndex, (input) => Wd.widthWord(Ut.formatCurrency(input)));
+    return titleWidth > textWidth ? titleWidth : textWidth;
+}
 const widthMapping = (titleWidth = 0, column = {}, data = []) => {
     const mapping = Object.keys(column['$mapping'])
         .map(key => column['$mapping'][key]);
@@ -97,6 +101,7 @@ const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {
 const FUNS = {
     "EXECUTOR": widthExecutor,
     "TEXT": widthText,
+    "CURRENCY": widthCurrency,
     "INPUT": widthText,
     "LOGICAL": widthMapping,
     "MAPPING": widthMapping,

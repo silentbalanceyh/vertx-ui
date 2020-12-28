@@ -56,11 +56,13 @@ export default {
     USER,
     ARRAY,
     RENDERS,
+    // 打开列过滤专用代码
     supports: [
         "TEXT",
         "PURE",
         "LOGICAL",
         "MAPPING",
-        "ARRAY"
+        "ARRAY",
+        "DATUM"
     ]
 };

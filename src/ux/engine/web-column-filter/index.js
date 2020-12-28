@@ -1,5 +1,6 @@
-import renderSearch from './I.fn.filter.search';
-import renderDirect from './I.fn.filter.direct';
+import renderSearch from './O.fn.filter.search';
+import renderDirect from './O.fn.filter.direct';
+import renderDatum from './O.fn.filter.datum';
 
 export default {
     /*
@@ -33,4 +34,16 @@ export default {
      * }
      */
     SEARCH: renderSearch,
+    /*
+     * {
+     *      "$filter.type": "DATUM",
+            "$filter.config.button": {
+                "yes": "确认",
+                "reset": "重置"
+            },
+            "$datum": "必须"
+     *
+     * }
+     */
+    DATUM: renderDatum
 }
