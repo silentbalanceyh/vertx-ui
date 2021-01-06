@@ -394,6 +394,21 @@ const packet = (promise) => {
         }
     }
 }
+const pass = (reference, field) => {
+    if (field) {
+        const stateRef = reference.state ? reference.state : {};
+        const stateData = stateRef[field] ? stateRef[field] : {};
+
+        const propRef = reference.props ? reference.props : {};
+        const propData = propRef[field] ? propRef[field] : {};
+        const combine = {};
+        // 属性覆盖状态，属性优先级更高
+        Object.assign(combine, stateData, propData);
+        return combine;
+    } else {
+        return {};
+    }
+}
 /**
  * ## 特殊函数
  *
@@ -422,6 +437,7 @@ const monad = (funArray = []) => {
     }
 }
 export default {
+    pass,
     promise,
     parallel,
     passion,

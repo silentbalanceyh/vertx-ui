@@ -93,8 +93,8 @@ export default {
             Cm.seek(reference, 'rxView')([id]),
         // ------------ 打开 -----------------
         /* 打开新窗口 */
-        open: (id, data) =>
-            Cm.seek(reference, 'rxOpen')([id, data]),
+        open: (id, data, record) =>
+            Cm.seek(reference, 'rxOpen')([id, data, record]),
         /* 窗口记录 关闭方法调用 */
         close: (data = {}, addOn) =>
             Cm.seek(reference, 'rxClose', {

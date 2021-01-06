@@ -223,17 +223,8 @@ const raftRender = (cell = {}, config = {}) => {
             /*
              * 子表单 renders 继承
              */
-            if (renders && renders.hasOwnProperty(cell.field)) {
-
-                /*
-                 * 将 renders 注入到 optionJsx 中
-                 * 底层 DialogEditor 自动读取
-                 */
-                const $renders = renders[cell.field];
-                if (Abs.isObject($renders)) {
-                    optionJsx.$renders = $renders;
-                }
-            }
+            Ut.connectRenders(optionJsx, cell, renders);
+            
             const {form} = reference.props;
             if (form) {
 

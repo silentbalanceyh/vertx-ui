@@ -42,5 +42,12 @@ export default (reference) => {
      * 列过滤信息
      */
     inherit.$terms = $terms;
+    /*
+     * 上层 $executor 继承
+     */
+    const {$executor} = reference.props;
+    if ($executor) {
+        inherit.$executor = $executor;
+    }
     return inherit;
 }

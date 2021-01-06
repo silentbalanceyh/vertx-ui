@@ -74,7 +74,14 @@ const isDepend = (depend = {}, reference) => {
                      */
                     return undefined === actual || false === actual;
                 } else {
-                    return actual === expected;
+                    if ("VALUE" === expected) {
+                        /*
+                         * 有值处理
+                         */
+                        return undefined !== actual;
+                    } else {
+                        return actual === expected;
+                    }
                 }
             }
         }).filter(checked => false === checked).length;

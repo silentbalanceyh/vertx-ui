@@ -32,6 +32,9 @@ const cssDefined = () => Abs.immutable([
     "aiDialogEditor",
     "aiMatrixSelector"
 ])
+const onRenders = () => Abs.immutable([
+    "aiDialogEditor"
+])
 /**
  * ## 特殊函数「Zero」
  *
@@ -108,7 +111,27 @@ const connectItem = (cell = {}) => {
     }
     return itemAttrs;
 };
+const connectRenders = (optionJsx = {}, cell = {}, renders = {}) => {
+    const renderData = onRenders();
+    // 多增加一个条件，目前只针对 DialogEditor 执行下边流程
+    if (renderData.hasOwnProperty(cell.render)) {
+        /*
+         * 子表单 renders 继承
+         */
+        if (renders && renders.hasOwnProperty(cell.field)) {
+            /*
+             * 将 renders 注入到 optionJsx 中
+             * 底层 DialogEditor 自动读取
+             */
+            const $renders = renders[cell.field];
+            if (Abs.isObject($renders)) {
+                optionJsx.$renders = $renders;
+            }
+        }
+    }
+}
 export default {
+    connectRenders,
     connectId,
     connectItem,
     connectValidator,

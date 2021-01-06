@@ -221,6 +221,7 @@ export default (reference = {}, config = {}) => {
      * 所以引入外层变量 $record 来存储
      * 1）外层变量是单变量，主要用于记录拷贝
      * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
+     * 3）外层变量同样会在 config 这个过程中引入特殊属性：rowData 用来设置选中记录
      */
     if ($record) {
         uniform.$record = $record;

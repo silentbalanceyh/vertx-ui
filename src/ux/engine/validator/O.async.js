@@ -65,6 +65,43 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         }
     }
 };
+const uri = (refereuce = {}) => (rule = {}, value, callback) => {
+    E.fxTerminal(!rule.config, 10022, rule.config);
+    if (rule.config) {
+        if (value) {
+            try {
+                // 有值才验证
+                const parameters = Parser.parseAjax(rule.config.params, refereuce);
+                // 基本条件
+                const {alias} = rule.config;
+                const field = alias && alias.field ? alias.field : rule.field;
+
+                // 让级别条件支持别名，重新抽取字段
+                parameters[field] = value;
+
+                // existing 时，参数间关系默认为 AND（更新专用）
+                if (Object.keys(parameters).length > 1) {
+                    const andKey = "";
+                    parameters[andKey] = true;
+                }
+                Ajax.asyncTrue(rule.config, parameters, {
+                    // 存在即返回message
+                    success: () => callback(rule.message),
+                    failure: () => callback()
+                });
+            } catch (error) {
+                console.error(error);
+            }
+        } else {
+            callback();
+        }
+    }
+};
 export default {
-    existing
+    /*
+     * 返回为 true 的时候，是提示验证信息
+     * 返回为 false 的时候，是验证通过
+     */
+    existing,
+    uri,
 };

@@ -14,7 +14,13 @@ const parseExpression = (reference, expr = "") => {
             if (value) {
                 returnValue = value;
             } else {
-                returnValue = expr;
+                /*
+                 * 参数设置的 BUG
+                 * 如果设置表达式，当表达式的数据本身不合法时
+                 * 直接将参数置空，保证不多出类似 FORM:xxx 的值
+                 * 解析不了走原始值的参数。
+                 */
+                returnValue = null; // expr;
             }
         } else {
             returnValue = expr;

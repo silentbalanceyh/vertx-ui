@@ -1,6 +1,7 @@
 import E from '../../error';
 import U from 'underscore';
 import VALIDATORS from '../validator';
+import Abs from '../../abyss';
 
 export default (reference = {}, item = {}) => {
     if (item.optionConfig) {
@@ -12,10 +13,16 @@ export default (reference = {}, item = {}) => {
         if (rules && Array.prototype.isPrototypeOf(rules)) {
             rules.forEach(rule => {
                 if (rule.validator && !U.isFunction(rule.validator)) {
+
+                    // 合并处理（可覆盖）
+                    const inputValidator = Abs.pass(reference, '$validator');
+                    const validators = Abs.clone(VALIDATORS);
+                    Object.assign(validators, inputValidator);
+
                     // 处理条件
-                    const executeFun = VALIDATORS[rule.validator];
+                    const executeFun = validators[rule.validator];
                     // 10023
-                    E.fxTerminal(!U.isFunction(executeFun), 10023, rule.validator, Object.keys(VALIDATORS));
+                    E.fxTerminal(!U.isFunction(executeFun), 10023, rule.validator, Object.keys(validators));
                     if (U.isFunction(executeFun)) {
                         // supplier 处理
                         const validatorFun = executeFun(reference);

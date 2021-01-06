@@ -25,7 +25,7 @@ export default (reference, item = {}) => {
     /*
      * 设置表单初始值
      */
-    const {$inited = {}} = reference.state;
+    const {$inited = {}, $rowData} = reference.state;
     formAttrs.$inited = $inited;
     /*
      * 表单编辑的优雅转换
@@ -46,5 +46,13 @@ export default (reference, item = {}) => {
      */
     const {$query = {}} = reference.props;
     formAttrs.$query = $query;
+    /*
+     * 合并执行
+     * 1. 从 formAttrs 中提取 $record 专用上层变量
+     * 2. 在 $record 变量中挂载 rowData 属性
+     * 3. 将 $record 直接传入到底层数据中
+     */
+    if (!formAttrs.$record) formAttrs.$record = {};
+    if ($rowData) formAttrs.$record.rowData = $rowData;
     return formAttrs;
 }
