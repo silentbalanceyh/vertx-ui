@@ -1,26 +1,26 @@
-import Ex from "ex";
-import Op from "../Op.Event";
 import Ux from "ux";
+import {Fn, rxClose} from './I.list.options';
+import yoAmbient from '../yo.ambient';
 
 export default (reference, item = {}) => {
-    const formAttrs = Ex.yoAmbient(reference);
+    const formAttrs = yoAmbient(reference);
     /*
      * 关闭函数
      */
-    formAttrs.rxClose = Op.rxClose(reference, item, false);
-    formAttrs.rxView = Ex.rxView(reference);
+    formAttrs.rxClose = rxClose(reference, item, false);
+    formAttrs.rxView = Fn.rxView(reference);
     /*
      * 设置 state -> $dirty
      */
-    formAttrs.doDirty = Ex.rxDirty(reference);
-    formAttrs.doSubmitting = Ex.rxSubmitting(reference);
+    formAttrs.doDirty = Fn.rxDirty(reference);
+    formAttrs.doSubmitting = Fn.rxSubmitting(reference);
     formAttrs.$mode = Ux.Env.FORM_MODE.EDIT;
     /*
      * 读取 $identifier（动态表单必须）
      */
     const {options = {}, plugins = {}} = reference.state;
-    if (options[Ex.Opt.IDENTIFIER]) {
-        formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
+    if (options[Fn.Opt.IDENTIFIER]) {
+        formAttrs.$identifier = options[Fn.Opt.IDENTIFIER];
     }
     /*
      * 设置表单初始值

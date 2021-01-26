@@ -1,3 +1,6 @@
+/*
+ * op.extension 部分的执行
+ */
 export default (reference, prefix) => {
     const {op = {}} = reference.state;
     const extension = Object.keys(op)

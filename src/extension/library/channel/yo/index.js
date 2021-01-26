@@ -71,15 +71,20 @@ import yoControl from './yo.control';
  * 3）Search区
  * 4）Extra区
  * 5）Row区
- * 扩展区域
- * 1）op.extension.open
- * 2）op.extension.batch
- * 3）op.extension.search
- * 4）op.extension.extra
  */
 import yoAction from './yo.action';
+/*
+ * 几个特定函数
+ * -- yoList -> 列表区域
+ * -- yoTab -> Tab页
+ * -- yoForm -> 表单区域
+ * -- yoTable -> 列表区域
+ */
+import yo from './component';
 
 export default {
+    ...yo,
+
     yoAmbient,              // 环境数据（统一处理）
     yoDynamic,
     yoPolymorphism,

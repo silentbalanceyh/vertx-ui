@@ -1,7 +1,8 @@
-import Ex from 'ex';
+import yoDynamic from '../yo.dynamic';
+import {Fn} from './I.list.options';
 
 export default (reference) => {
-    const attrs = Ex.yoDynamic(reference);
+    const attrs = yoDynamic(reference);
     /*
      * 提取选项
      */
@@ -41,6 +42,6 @@ export default (reference) => {
     // attrs.rxCondition = Ex.rxCondition(reference);
     // attrs.rxQuery = Ex.rxQuery(reference);
     // attrs.rxClean = Ex.rxClean(reference);
-    attrs.rxFilter = Ex.rxFilter(reference);
+    attrs.rxFilter = Fn.rxFilter(reference);
     return attrs;
 }

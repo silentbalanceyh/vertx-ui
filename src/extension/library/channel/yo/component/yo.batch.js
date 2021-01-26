@@ -1,20 +1,22 @@
-import Ex from "ex";
 import Ux from 'ux';
-import Opt from '../options';
 import yoBatchEditor from './yo.batch.editor';
-import yoPhantom from "./yo.phantom";
-
-const {Order = {}} = Opt;
+import yoExtension from "./yo.extension";
+import yoAction from '../yo.action';
+/*
+ * Order 内置
+ * Ex 转换成 functions 函数
+ */
+import {Fn, Order} from './I.list.options';
 
 export default (reference) => {
-    let batch = Ex.yoAction(reference, 'op.batch', Order);
+    let batch = yoAction(reference, 'op.batch', Order);
     /*
      * batch是数组，则处理 disabled 状态
      */
     const {$selected = [], $submitting = false} = reference.state;
     batch.$category = "LINK";
-    batch.doSubmitting = Ex.rxSubmitting(reference);
-    batch.doDirty = Ex.rxDirty(reference);
+    batch.doSubmitting = Fn.rxSubmitting(reference);
+    batch.doDirty = Fn.rxDirty(reference);
     /*
      * ExBatchEditor 列专用处理
      */
@@ -22,7 +24,7 @@ export default (reference) => {
     /*
      * ExBatchEditor 中需要的外层函数
      */
-    batch.rxBatchEdit = Ex.rxBatchEdit(reference);
+    batch.rxBatchEdit = Fn.rxBatchEdit(reference);
     /*
      * 选中项
      */
@@ -31,7 +33,7 @@ export default (reference) => {
     /*
      * 挂载 extension 部分
      */
-    const extension = yoPhantom(reference, "op.batch");
+    const extension = yoExtension(reference, "op.batch");
     batch.config = [].concat(batch.config).concat(extension);
     /*
      * Disabled-001：初始化

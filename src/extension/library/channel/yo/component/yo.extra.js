@@ -1,11 +1,13 @@
-import Ex from "ex";
 import Ux from 'ux';
-import Opt from '../options';
-
-const {Order = {}} = Opt;
+import yoAction from '../yo.action';
+/*
+ * Order 内置
+ * Ex 转换成 functions 函数
+ */
+import {Fn, Order} from './I.list.options';
 
 export default (reference) => {
-    const editorRef = Ex.yoAction(reference, "op.extra", Order);
+    const editorRef = yoAction(reference, "op.extra", Order);
     /*
      * $columns：全列
      * $columnsMy：我选择的列
@@ -33,21 +35,21 @@ export default (reference) => {
      * rxExport
      * 直接的 Ajax方法处理
      */
-    editorRef.rxColumnSave = Ex.rxColumnSave(reference);
-    editorRef.rxExport = Ex.rxExport(reference);
-    editorRef.rxImport = Ex.rxImport(reference);
+    editorRef.rxColumnSave = Fn.rxColumnSave(reference);
+    editorRef.rxExport = Fn.rxExport(reference);
+    editorRef.rxImport = Fn.rxImport(reference);
     /*
      * 不带 Ajax 的专用回调函数，用于 rxColumnSave 的回调
      * 主要是参数需要计算，所以这里只能使用双阶段来处理列保存
      * 1）调用 rxColumnSave 方法
      * 2）执行 rxProjection 的回调（目前支持Table，后期可以考虑支持其他）
      */
-    editorRef.rxProjection = Ex.rxProjection(reference);
-    editorRef.rxDirty = Ex.rsDirty(reference);
+    editorRef.rxProjection = Fn.rxProjection(reference);
+    editorRef.rxDirty = Fn.rsDirty(reference);
     /*
      * 提交专用函数
      */
-    editorRef.doSubmitting = Ex.rxSubmitting(reference);
+    editorRef.doSubmitting = Fn.rxSubmitting(reference);
     /*
      * 计算最新配置
      * ExEditorColumn

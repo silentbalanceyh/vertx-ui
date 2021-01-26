@@ -2,7 +2,7 @@ import Abs from "../../abyss";
 import Cv from "../../constant";
 
 const widthSeed = () => {
-    const fontSize = Cv.CSS_FONT;       // 默认的字体值
+    const fontSize = Cv['CSS_FONT'];       // 默认的字体值
     if (fontSize) {
         if (0 <= fontSize.indexOf("12")) {
             return 12;          // 12px;

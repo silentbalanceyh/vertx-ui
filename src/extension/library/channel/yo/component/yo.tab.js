@@ -1,5 +1,5 @@
 import Ux from 'ux';
-import Ex from 'ex';
+import {Fn} from './I.list.options';
 /*
  * 启用 / 禁用状态处理
  */
@@ -12,8 +12,8 @@ export default (reference, {
         const {options = {}} = reference.state;
         /* 打开Tab页的限制，默认是1 */
         let counter = 1;
-        if (options.hasOwnProperty(Ex.Opt.TABS_COUNT)) {
-            counter = Ux.valueInt(options[Ex.Opt.TABS_COUNT], 1);
+        if (options.hasOwnProperty(Fn.Opt.TABS_COUNT)) {
+            counter = Ux.valueInt(options[Fn.Opt.TABS_COUNT], 1);
         }
         /*
         * 如果 length = ( counter + 1 )

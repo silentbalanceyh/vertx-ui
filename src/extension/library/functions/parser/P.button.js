@@ -1,8 +1,18 @@
 import Ux from "ux";
+import Gb from '../global';
+import tplOp from './I.list.options';
+
+import Ajx from '../../ajax';
 
 const toAsync = (result, async = true) => {
     if (async) {
-        return Ux.promise(result);
+        if (Promise.prototype.isPrototypeOf(result)) {
+            /* 本身异步 */
+            return result.then(response => Ux.promise(response))
+        } else {
+            /* 本身同步 */
+            return Ux.promise(result);
+        }
     } else {
         return result;
     }
@@ -84,7 +94,7 @@ const parseComponent = (buttons = {}, options = {}, components = {}) => {
     }, 'component');
     return buttons;
 };
-const parseOps = (config = [], options = {}) => {
+const parseControl = (config = [], options = {}) => {
     const {type} = options;
     if ("LIST" === type) {
         const {ops = []} = options;
@@ -117,6 +127,76 @@ const parseOps = (config = [], options = {}) => {
     }
     return config;
 };
+/*
+ * 这里的 options 执行合并
+ * options + state.options 构造新的 options实现
+ */
+const parseOp = (config = [], options = {}, reference) => new Promise((resolve) => {
+    if (options[Gb.Opt.DYNAMIC_OP]) {
+        /*
+         * 动态 Op
+         */
+        const identifier = options.identifier;
+        if (identifier) {
+            /*
+             * 特殊权限
+             */
+            Ajx.ops({identifier, type: "OP"})
+                /*
+                 * 处理核心 List 问题
+                 */
+                .then(response => resolve(Ux.aclOp(options, response)))
+        } else {
+            /*
+             * 无权限配置
+             */
+            console.error("对不起，没有合法的 identifier，无法读取权限！");
+            resolve({});
+        }
+    } else {
+        /* 静态 Op */
+        const opts = Ux.clone(options);
+        /* `op.` 打头的操作直接过滤 */
+        const ops = {}
+        Object.keys(opts)
+            .filter(opKey => opKey.startsWith('op.'))
+            .forEach(opKey => ops[opKey] = opts[opKey]);
+        resolve(ops);
+    }
+}).then((ops = {}) => {
+    /*
+     * 基础按钮转换处理
+     */
+    const buttons = {};
+    Object.keys(ops)
+        .filter(opKey => !!opKey)
+        .filter(opKey => "string" === typeof opKey)
+        .filter(opKey => tplOp.hasOwnProperty(opKey))
+        .forEach(opKey => {
+            const button = Ux.clone(tplOp[opKey]);
+            button.id = button.key;                     // 前后端主键同步
+            button.text = ops[opKey];
+            if (!button.plugin) button.plugin = {};      // 插件
+            button.category = opKey;
+            buttons[opKey] = button;
+        });
+
+
+    /*
+     * 扩展OP专用：op.extension
+     */
+    const {$op = {}} = reference.props;
+    if (Ux.isNotEmpty($op)) {
+        Object.keys(ops)
+            .filter(opKey => !!opKey)
+            .filter(opKey => "string" === typeof opKey)
+            .filter(opKey => opKey.startsWith('op.extension'))
+            .forEach(opKey => {
+
+            });
+    }
+    return Ux.promise(buttons);
+})
 /**
  * ## 扩展函数
  *
@@ -126,7 +206,7 @@ const parseOps = (config = [], options = {}) => {
  * {
  *     parsePlugin: () => "按钮插件解析函数",
  *     parseComponent: () => "组件解析函数",
- *     parseOps: () => "按钮本身解析函数"
+ *     parseControl: () => "按钮本身解析函数，解析不同组件专用，LIST, FORM 不同"
  * }
  * ```
  *
@@ -138,5 +218,7 @@ const parseOps = (config = [], options = {}) => {
 export default (reference) => ({
     parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
     parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
-    parseOps: (config = [], options = {}, async = true) => toAsync(parseOps(config, options), async),
+    parseControl: (config = [], options = {}, async = true) => toAsync(parseControl(config, options), async),
+    /* 异步解析 */
+    parseOp: (config = [], options = {}) => parseOp(config, options, reference)
 })

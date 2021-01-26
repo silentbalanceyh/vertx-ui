@@ -1,5 +1,5 @@
 /*
- * ExBatchEditor处理
+ * List 组件中的 ExBatchEditor 处理
  */
 export default (batch, reference) => {
     const {config = []} = batch;
@@ -9,11 +9,13 @@ export default (batch, reference) => {
          * 抽取列信息
          */
         const {$columns = [], $columnsMy = []} = reference.state;
+
         /*
          * 抽取配置信息，直接从引用入手，需要修改引用
          */
         const {component = {}} = buttonRef;
         const editorRef = component.config;
+
         /*
          * 计算最新的配置
          * ExBatchEditor 中的配置必须存在于 columns 中

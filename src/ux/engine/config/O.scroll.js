@@ -93,9 +93,13 @@ const widthDatum = (titleWidth = 0, column = {}, data = [], reference) => {
         .map(Wd.widthWord)
         .forEach(current => {
             if (textWidth < current) {
-                textWidth = current; // 暂时使用固定值，防止越界
+                /*
+                 * 暂时使用固定值，防止越界
+                 */
+                textWidth = current;
             }
         });
+    textWidth += 24;        // 引入24的修正值
     return titleWidth > textWidth ? titleWidth : textWidth;
 };
 const FUNS = {
@@ -128,10 +132,6 @@ export default ($table = {}, data = [], reference) => {
      * 计算当前列的最大长度
      */
     // eslint-disable-next-line
-    let width = 0;
-    // eslint-disable-next-line
-    let adjust = 0;
-    const report = {};
     $columns.forEach(column => {
         /*
          * 当前列的数据信息
@@ -143,42 +143,24 @@ export default ($table = {}, data = [], reference) => {
         const rdType = column['$render'] ? column['$render'] : "INPUT";
         const rdTitle = column.title;
         const rdWidth = column.width;
-        if (rdWidth) {
-            /*
-             * 有宽度的情况，直接叠加（有数据）
-             */
-            if (0 < data.length) {
-                width += column.width;
-            }
-        } else {
-            const executor = FUNS[rdType];
-            if (U.isFunction(executor)) {
-                const titleWidth = Wd.widthTitle(rdTitle, column);
-                const calculated = executor(titleWidth, column, data, reference);
-                if (0 < calculated) {
-                    /*
-                     * 只有 fixed 的时候才能设置 width
-                     */
-                    const calculatedInt = calculated;
-                    if (column.fixed) {
-                        column.width = calculatedInt;
-                        adjust = calculated;
-                    } else {
-                        column.width = calculatedInt;
-                    }
-                    if (0 < data.length) {
-                        /* （有数据）*/
-                        width += calculatedInt;
-                    }
-                }
+
+        /*
+         * 计算 width 的新算法
+         * 1）先根据 render 计算 width
+         * 2）如果 width > rdWidth，那么修改原始的 width
+         */
+        const executor = FUNS[rdType];
+        if (U.isFunction(executor)) {
+            const titleWidth = Wd.widthTitle(rdTitle, column);
+            const calculated = executor(titleWidth, column, data, reference);
+            if (rdWidth && rdWidth < calculated) {
+                // 只有这种时候重算
+                column.width = calculated;
+            } else {
+                column.width = calculated;
             }
         }
-        /*
-         * 报表用于计算最终的列宽
-         */
-        report[rdTitle] = rdType + "," + width + `,` + column.width + "," + adjust; // column.width;
     });
-    // console.error(report);
     /*
      * 可支持的最大宽度
      * 未配置 scroll 的时候计算，配置了就不用计算了

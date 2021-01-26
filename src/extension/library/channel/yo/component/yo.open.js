@@ -1,11 +1,10 @@
-import Ex from "ex";
-import yoPhantom from './yo.phantom';
-import Opt from '../options';
+import yoExtension from './yo.extension';
+import yoAction from '../yo.action';
 
-const {Order = {}} = Opt;
+import {Order} from './I.list.options';
 
 export default (reference) => {
-    const attrs = Ex.yoAction(reference, "op.open", Order);
+    const attrs = yoAction(reference, "op.open", Order);
     /*
      * 清空按钮专用，设置
      * disabled / enabled状态
@@ -38,7 +37,7 @@ export default (reference) => {
     /*
      * 挂载 extension 部分
      */
-    const extension = yoPhantom(reference, "op.open");
+    const extension = yoExtension(reference, "op.open");
     attrs.config = [].concat(extension).concat(attrs.config);
     return attrs;
 }

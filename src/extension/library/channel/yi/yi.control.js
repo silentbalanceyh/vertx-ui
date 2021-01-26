@@ -43,7 +43,7 @@ function yiControl() {
             if ("LIST" === type) {
                 Ux.aclOp(config.options, ops);
             }
-            return parser.parseOps(config, {type, ops}, true);
+            return parser.parseControl(config, {type, ops}, true);
         }).catch(console.error);
     }
 }

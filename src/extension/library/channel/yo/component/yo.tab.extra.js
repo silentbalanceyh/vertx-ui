@@ -1,29 +1,29 @@
-import Ex from 'ex';
 import Ux from 'ux';
-import Opt from '../options';
+import {Fn, Order} from './I.list.options';
+import yoAction from '../yo.action';
 
-const {Order} = Opt;
-
-const isSatisfy = (reference, view = Ex.Mode.LIST) => {
+const isSatisfy = (reference, view = Fn.Mode.LIST) => {
     const {options = {}} = reference.state;
-    if (Ex.Mode.LIST !== view) {
+    if (Fn.Mode.LIST !== view) {
         /*
          * 如果是添加
          */
-        if (Ex.Mode.ADD === view) {
-            if (options.hasOwnProperty(Ex.Opt.TABS_EXTRA_ADD)) {
-                return !!options[Ex.Opt.TABS_EXTRA_ADD];
+        if (Fn.Mode.ADD === view) {
+            if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_ADD)) {
+                return !!options[Fn.Opt.TABS_EXTRA_ADD];
             } else return true;  // 不设置直接 true
-        } else if (Ex.Mode.EDIT === view) {
-            if (options.hasOwnProperty(Ex.Opt.TABS_EXTRA_EDIT)) {
-                return !!options[Ex.Opt.TABS_EXTRA_EDIT];
+        } else if (Fn.Mode.EDIT === view) {
+            if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_EDIT)) {
+                return !!options[Fn.Opt.TABS_EXTRA_EDIT];
             } else return true;  // 不设置直接 true
         } else return false; // 否则 false
     } else return false; // 否则 false
 };
 const isOk = (item = {}) => {
     const $category = Ux.immutable([
-        "op.submit.save", "op.submit.delete", "op.submit.reset"
+        "op.submit.save",
+        "op.submit.delete",
+        "op.submit.reset"
     ]);
     return $category.contains(item.category)
 };
@@ -58,29 +58,34 @@ export default (reference, tabs = {}) => {
      * state -> $submitting
      * state -> view
      */
-    const {$submitting = false, $view = Ex.Mode.LIST} = reference.state;
+    const {$submitting = false, $view = Fn.Mode.LIST} = reference.state;
     if (isSatisfy(reference, $view)) {
         /*
          * 1.添加流程
          * 2.编辑流程
          * 双流程单独处理
          */
-        const prefix = Ex.Mode.ADD === $view ? "op.add" : "op.edit";
+        const prefix = Fn.Mode.ADD === $view ? "op.add" : "op.edit";
         /*
          * 特殊配置
          * 1）tab.extra.add
          * 2）tab.extra.edit
          */
-        const attrs = Ex.yoAction(reference, prefix, Order);
+        const attrs = yoAction(reference, prefix, Order);
         /*
          * 编辑界面核心操作
          */
-        if (Ex.Mode.EDIT === $view) {
+        if (Fn.Mode.EDIT === $view) {
+            /*
+             * 设置可编辑的基础关系
+             */
             setEdition(attrs, reference);
-
             /* 处理 config */
             if (attrs.config && 1 === attrs.config.length) {
-                /* 单 reset 不呈现 */
+                /*
+                 * 单 reset 不呈现
+                 * 此种情况只有一个 RESET 按钮，直接过滤掉
+                 ***/
                 attrs.config = attrs.config
                     .filter(item => "op.submit.reset" !== item.category);
             }
@@ -89,8 +94,8 @@ export default (reference, tabs = {}) => {
         attrs.$activeKey = tabs.activeKey;
         attrs.$view = $view;
         /* 核心参数传入 ExAction */
-        attrs.doSubmitting = Ex.rxSubmitting(reference);
-        // attrs.fnSubmitting = Ex.generate(reference).submitting;
+        attrs.doSubmitting = Fn.rxSubmitting(reference);
+        // attrs.fnSubmitting = Fn.generate(reference).submitting;
         return Ux.sorterObject(attrs);
     }
 }

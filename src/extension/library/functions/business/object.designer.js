@@ -167,7 +167,6 @@ const submit = (reference) => (params, fnCallback) => {
                     if (rest.wrapperCol) delete rest.wrapperCol;
 
                     field.optionItem = rest;
-
                     // optionConfig
                     if (cell.optionConfig) {
                         const $optionConfig = Ux.clone(cell.optionConfig);

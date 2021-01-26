@@ -1,18 +1,18 @@
-import Ex from "ex";
 import Ux from 'ux';
-import Op from "../Op.Event";
+import yoAmbient from '../yo.ambient';
+import {Fn, rxClose} from './I.list.options';
 
 export default (reference, item = {}) => {
-    const formAttrs = Ex.yoAmbient(reference);
+    const formAttrs = yoAmbient(reference);
     /*
      * 关闭函数
      */
-    formAttrs.rxClose = Op.rxClose(reference, item);
+    formAttrs.rxClose = rxClose(reference, item);
     /*
      * 设置 state -> $dirty 的函数
      */
-    formAttrs.doDirty = Ex.rxDirty(reference);
-    formAttrs.doSubmitting = Ex.rxSubmitting(reference);
+    formAttrs.doDirty = Fn.rxDirty(reference);
+    formAttrs.doSubmitting = Fn.rxSubmitting(reference);
     /*
      * 设置唯一的 $addKey
      * 这个值就是 Tab 中的 activeKey
@@ -23,8 +23,8 @@ export default (reference, item = {}) => {
      * 读取 $identifier（动态表单必须）
      */
     const {options = {}, plugins = {}} = reference.state;
-    if (options[Ex.Opt.IDENTIFIER]) {
-        formAttrs.$identifier = options[Ex.Opt.IDENTIFIER];
+    if (options[Fn.Opt.IDENTIFIER]) {
+        formAttrs.$identifier = options[Fn.Opt.IDENTIFIER];
     }
     /*
      * 提供 $query 用于处理特殊条件

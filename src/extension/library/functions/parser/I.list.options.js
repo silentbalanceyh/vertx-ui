@@ -110,4 +110,4 @@ export default {
             connect: 'id.submit.reset'
         }
     }
-};
+}
