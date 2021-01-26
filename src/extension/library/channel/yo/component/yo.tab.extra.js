@@ -9,10 +9,22 @@ const isSatisfy = (reference, view = Fn.Mode.LIST) => {
          * 如果是添加
          */
         if (Fn.Mode.ADD === view) {
+            /*
+             *  ADD 添加视图
+             *  tabs.extra.add 键值
+             *  1）如果没有该值，则显示
+             *  2）如果有该值，那么该值必须存在
+             */
             if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_ADD)) {
                 return !!options[Fn.Opt.TABS_EXTRA_ADD];
             } else return true;  // 不设置直接 true
         } else if (Fn.Mode.EDIT === view) {
+            /*
+             *  EDIT 编辑视图
+             *  tabs.extra.edit 键值
+             *  1）如果没有该值，则显示
+             *  2）如果有该值，那么该值必须存在
+             */
             if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_EDIT)) {
                 return !!options[Fn.Opt.TABS_EXTRA_EDIT];
             } else return true;  // 不设置直接 true
@@ -86,8 +98,7 @@ export default (reference, tabs = {}) => {
                  * 单 reset 不呈现
                  * 此种情况只有一个 RESET 按钮，直接过滤掉
                  ***/
-                attrs.config = attrs.config
-                    .filter(item => "op.submit.reset" !== item.category);
+                attrs.config = attrs.config.filter(item => "op.submit.reset" !== item.category);
             }
         }
         attrs.$submitting = $submitting;

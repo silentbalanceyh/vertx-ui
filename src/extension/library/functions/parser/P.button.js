@@ -192,7 +192,29 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
             .filter(opKey => "string" === typeof opKey)
             .filter(opKey => opKey.startsWith('op.extension'))
             .forEach(opKey => {
-
+                /*
+                 * 抽取 region 值以及绑定对应的 onClick 事件
+                 */
+                const op = Ux.clone(ops[opKey]);
+                const {config = {}} = op;
+                if (config.executor || config.connectId) {
+                    /*
+                     * 执行 onClick 函数级别的操作
+                     */
+                    let onClick;
+                    if (config.executor) {
+                        const onClickFn = $op[config.executor];
+                        if (Ux.isFunction(onClickFn)) {
+                            onClick = onClickFn(reference, Ux.clone(config))
+                        }
+                    } else if (config.connectId) {
+                        onClick = () => Ux.connectId(config.connectId);
+                    }
+                    if (Ux.isFunction(onClick)) {
+                        op.onClick = onClick;
+                        buttons[opKey] = op;
+                    }
+                }
             });
     }
     return Ux.promise(buttons);
