@@ -1,6 +1,7 @@
 import Ux from 'ux';
 import {Fn, Order} from './I.list.options';
 import yoAction from '../yo.action';
+import yoExtension from "./yo.extension";
 
 const isSatisfy = (reference, view = Fn.Mode.LIST) => {
     const {options = {}} = reference.state;
@@ -84,6 +85,10 @@ export default (reference, tabs = {}) => {
          * 2）tab.extra.edit
          */
         const attrs = yoAction(reference, prefix, Order);
+        /*
+         * 扩展执行
+         */
+        attrs.config = yoExtension(reference, "op.tab", attrs.config);
         /*
          * 编辑界面核心操作
          */

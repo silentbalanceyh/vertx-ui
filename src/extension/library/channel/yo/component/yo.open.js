@@ -37,7 +37,8 @@ export default (reference) => {
     /*
      * 挂载 extension 部分
      */
-    const extension = yoExtension(reference, "op.open");
-    attrs.config = [].concat(extension).concat(attrs.config);
+    // const extension = yoExtension(reference, "op.open");
+    // attrs.config = [].concat(extension).concat(attrs.config);
+    attrs.config = yoExtension(reference, "op.open", attrs.config);
     return attrs;
 }

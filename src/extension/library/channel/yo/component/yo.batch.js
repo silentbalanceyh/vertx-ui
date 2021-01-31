@@ -33,8 +33,9 @@ export default (reference) => {
     /*
      * 挂载 extension 部分
      */
-    const extension = yoExtension(reference, "op.batch");
-    batch.config = [].concat(batch.config).concat(extension);
+    // const extension = yoExtension(reference, "op.batch", batch.config);
+    // batch.config = [].concat(batch.config).concat(extension);
+    batch.config = yoExtension(reference, "op.batch", batch.config);
     /*
      * Disabled-001：初始化
      */
