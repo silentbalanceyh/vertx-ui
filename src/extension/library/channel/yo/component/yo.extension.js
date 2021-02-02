@@ -15,11 +15,14 @@ import Ux from 'ux';
 export default (reference, prefix, actions = []) => {
     const source = Ux.clone(actions);
     const {op = {}} = reference.state;
+    const {rxExtension = () => true} = reference.props;
     const targets = Object.keys(op)
         .filter(key => key.startsWith("op.extension"))
         .filter(key => !!op[key])
         .filter(key => !!op[key].region)
         .filter(key => op[key].region.startsWith(prefix))
+        /* 默认直接返回 true，表示所有的条件都符合 */
+        .filter(key => rxExtension(op[key], reference))
         .map(key => {
             const normalized = op[key];
             normalized.key = op[key].region;
@@ -36,12 +39,13 @@ export default (reference, prefix, actions = []) => {
         const {config} = item;
         return config && config.hasOwnProperty('index')
     }
-    const tail = targets.filter(item => !fnIndex(item));
+    const tail = targets
+        .filter(item => !fnIndex(item));
     const inserted = targets
         .filter(item => fnIndex(item))
         .sort((left, right) => left.config.index - right.config.index);
-
     let append = [];
+
     if (0 < inserted.length) {
         const found = inserted[inserted.length - 1];
         const maxIndex = found.config.index;

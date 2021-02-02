@@ -191,13 +191,18 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
         .filter(opKey => opKey.startsWith('op.extension'))
         .forEach(opKey => {
             /*
-             * 抽取 region 值以及绑定对应的 onClick 事件
+             * 执行区域专用
+             * 1. 带有 connectId
+             * 2. 带有 executor
+             * 这里只需要执行 onClick 注入就可以
              */
             const op = Ux.clone(ops[opKey]);
             const {config = {}} = op;
             if (config.executor || config.connectId) {
                 /*
                  * 执行 onClick 函数级别的操作
+                 * 1. 第一种是直接构造 executor 级别
+                 * 2. 第二种是 connectId 注入
                  */
                 let onClick;
                 if (config.executor) {
@@ -210,9 +215,9 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
                 }
                 if (Ux.isFunction(onClick)) {
                     op.onClick = onClick;
-                    buttons[opKey] = op;
                 }
             }
+            buttons[opKey] = op;
         });
     return Ux.promise(buttons);
 })
