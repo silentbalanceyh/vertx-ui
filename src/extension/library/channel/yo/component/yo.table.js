@@ -32,6 +32,13 @@ export default (reference) => {
     inherit.$batch = isBatchEnabled(reference);
     inherit.$plugins = plugins;
     /*
+     * $executor 函数专用（不能漏掉该函数）
+     */
+    const {$executor} = reference.props;
+    if ($executor) {
+        inherit.$executor = $executor;
+    }
+    /*
      * 是否 dirty
      */
     const {$dirty = false, $loading = false, $dirtyAsync = false} = state;

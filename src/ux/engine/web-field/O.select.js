@@ -9,14 +9,15 @@ import filterOption from './I.fn.filter.option';
     // 处理onChange，解决rest为 {}时引起的参数Bug
     // const rest = Aid.fixAttrs(jsx);
  */
-const aiSelect = (reference, jsx = {}, onChange) => {
+const aiSelect = (reference, input = {}, onChange) => {
+    const {fnFilter = () => true, ...jsx} = input;
     /*
      * filters 计算
      * 1）$filters 就是一个 Object
      * 2）$filters 是一个函数
      */
     const {config = {}, depend} = jsx;
-    const options = R.Ant.toOptions(reference, config);
+    const options = R.Ant.toOptions(reference, config, fnFilter);
     /*
      * 1）onChange
      * 2）readOnly

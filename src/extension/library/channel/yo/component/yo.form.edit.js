@@ -29,6 +29,7 @@ export default (reference, item = {}) => {
     formAttrs.$inited = $inited;
     /*
      * 表单编辑的优雅转换
+     *
      */
     const $plugins = {};
     if (Ux.isFunction(plugins.pluginRow)) {

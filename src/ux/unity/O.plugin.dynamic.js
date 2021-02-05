@@ -95,7 +95,6 @@ const pluginEdition = (reference) => {
              */
             return true;
         }
-        ;
     }
 };
 /**

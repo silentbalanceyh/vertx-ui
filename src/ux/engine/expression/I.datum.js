@@ -172,7 +172,7 @@ const getFilter = (reference, config = {}) => {
     return fnCascade; // 双函数合并 && fnFilter(item)
 };
 
-const getSource = (reference, config, filter = {}) => {
+const getSource = (reference, config, fnFilter = () => true) => {
     let options = [];
     if (config.items) {
         /*
@@ -205,7 +205,7 @@ const getSource = (reference, config, filter = {}) => {
     // 执行value的处理：value = key：如果key存在而value不存在
     T.applyValue(options);
     // 统一抽取expr表达式
-    return options;
+    return options.filter(item => fnFilter(item));
 };
 const parseOrigin = (items = [], config = {}) => {
     const {expr, ...rest} = config;
