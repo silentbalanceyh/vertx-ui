@@ -1,4 +1,4 @@
-import {Empty, Icon} from "antd";
+import {Button, Empty, Icon, Popconfirm} from "antd";
 import React from "react";
 import {Link} from "react-router-dom";
 import Cv from '../../constant';
@@ -174,7 +174,60 @@ const aiEmpty = (size = 30) => (
         <Empty/>
     </div>
 );
+/*
+ * 按钮连接的双执行处理，并且携带 confirm 配置
+ * 1. 带有 confirm，则执行 Popconfirm 处理，onClick = onConfirm
+ * 2. 不带有 confirm，则执行不带 Popconfirm 的，onClick 就是本身函数
+ */
+const _aiAnchor = (item = {}, onClick, defaultType = "BUTTON") => {
+    const {text, category = defaultType, ...rest} = item;
+    if (onClick) rest.onClick = onClick
+    if ("BUTTON" === category) {
 
+        if (text) {
+            // 有文字按钮
+            return (
+                <Button {...rest}>{text}</Button>
+            )
+        } else {
+            // 无文字按钮
+            return (
+                <Button {...rest}/>
+            )
+        }
+    } else {
+        // 链接执行
+        return (
+            <a href={""} key={rest.key} onClick={rest.onClick}>{text}</a>
+        )
+    }
+}
+const aiAnchor = (item = {}, onClick, defaultType = "BUTTON") => {
+    if (Abs.isFunction(onClick)) {
+        const fnClick = event => {
+            Abs.prevent(event);
+            onClick(event);
+        }
+        const {confirm, category, ...rest} = item;
+        let addOn = {};
+        if (confirm) {
+            addOn = Abs.clone(rest);
+            addOn.category = category ? category : defaultType;
+            return (
+                <Popconfirm title={confirm} onConfirm={fnClick} key={item.key}>
+                    {_aiAnchor(addOn, null)}
+                </Popconfirm>
+            )
+        } else {
+            addOn = Abs.clone(item);
+            addOn.category = category ? category : defaultType;
+            return _aiAnchor(addOn, fnClick);
+        }
+    } else {
+        console.log(`对不起，传入的\`onClick\`不合法，不渲染任何内容。`, item);
+        return false;
+    }
+}
 export default {
     aiIcon,     // 图标解析
     aiUrl,      // 路由表地址解析
@@ -183,4 +236,5 @@ export default {
     aiCell,     // 单元格解析
     aiBlock,    // 上边文字 / 下边图标
     aiEmpty,    // 空处理
+    aiAnchor,   // 连接 / 按钮 双执行处理
 }

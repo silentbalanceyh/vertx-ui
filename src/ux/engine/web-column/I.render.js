@@ -15,8 +15,11 @@ import ARRAY from './I.fn.cell.array';
 import RENDERS from './I.fn.cell.renders';
 /* 特殊类型 EDITOR */
 import EDITOR from './I.fn.cell.editor';
+/* 特殊类型 CONNECT */
+import CONNECT from './I.fn.cell.connect';
 
 export default {
+    CONNECT,
     EDITOR,
     CURRENCY,
     DATE,

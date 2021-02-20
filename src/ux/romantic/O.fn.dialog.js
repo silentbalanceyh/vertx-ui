@@ -1,6 +1,7 @@
 import Abs from '../abyss';
 import {Modal} from 'antd';
 import Cmn from './I.common';
+import T from '../unity';
 
 /**
  * ## 特殊函数「Zero」
@@ -46,8 +47,22 @@ export default (reference, key = "", callback) => {
     const seek = Cmn.cabModal(reference, key);
     if (Abs.isObject(seek)) {
         const {type, ...config} = seek;
+        /*
+         * 二义性执行
+         * 1. callback = Function，回调执行
+         * 2. callback = Object，非回调执行，第二种回调
+         * -- ok: onOk 回调函数
+         * -- 直接执行参数处理
+         */
         if (Abs.isFunction(callback)) {
             config.onOk = callback;
+        } else if (Abs.isObject(callback)) {
+            if (callback) {
+                config.content = T.formatExpr(config.content, callback);
+                if (Abs.isFunction(callback['ok'])) {
+                    config.onOk = callback['ok'];
+                }
+            }
         }
         if ("error" === type) {
             Modal.error(config);
@@ -56,9 +71,13 @@ export default (reference, key = "", callback) => {
         } else if ("confirm" === type) {
             config.onCancel = () => {
                 /*
-                 * $loading: SUBMIT 专用状态
+                 * $loading: 加载专用状态
+                 * $submitting：提交专用状态
                  */
-                reference.setState({$loading: false});
+                reference.setState({
+                    $loading: false,
+                    $submitting: false,
+                });
             };
             Modal.confirm(config);
         }
