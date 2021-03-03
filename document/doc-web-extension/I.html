@@ -304,6 +304,118 @@ Ex.I.application().then(response => {
 <td>是</td>
 <td style="text-align:left">读取任务的详细信息（包括任务状态、运行状态等）。</td>
 </tr>
+<tr>
+<td style="text-align:left">module</td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/module?entry={entry}</code></td>
+<td>是</td>
+<td style="text-align:left">根据入口信息读取模块配置数据，对应后端<code>X_MODULE</code>表。</td>
+</tr>
+<tr>
+<td style="text-align:left">ops</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/ui/ops</code></td>
+<td>是</td>
+<td style="text-align:left">读取<code>UI_OP</code>配置信息，可动态读取，也可静态读取。</td>
+</tr>
+<tr>
+<td style="text-align:left">page</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/ui/page</code></td>
+<td>是</td>
+<td style="text-align:left">读取当前页面配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">password</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/user/password</code></td>
+<td>是</td>
+<td style="text-align:left">更新登录账号密码专用接口。</td>
+</tr>
+<tr>
+<td style="text-align:left">profile</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/user/profile</code></td>
+<td>是</td>
+<td style="text-align:left">更新当前登录账号的Profile信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">relation</td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/relation</code></td>
+<td>是</td>
+<td style="text-align:left">读取关系定义专用接口。</td>
+</tr>
+<tr>
+<td style="text-align:left">relationDelete</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/ox/relation/delete</code></td>
+<td>是</td>
+<td style="text-align:left">删除关系专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">relationSave</td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/ox/relation/save</code></td>
+<td>是</td>
+<td style="text-align:left">保存关系专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">tabular</td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/:type/tabular/:code</code></td>
+<td>是</td>
+<td style="text-align:left">读取唯一字典记录。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/type/tabulars/:type</code></td>
+<td>是</td>
+<td style="text-align:left">读取某一类字典记录。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>POST</td>
+<td style="text-align:left"><code>/api/types/tabulars</code></td>
+<td>是</td>
+<td style="text-align:left">读取多类字典数据记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">todo</td>
+<td>PUT</td>
+<td style="text-align:left"><code>/api/todo/confirm/:key</code></td>
+<td>是</td>
+<td style="text-align:left">确认待办。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td>PUT</td>
+<td style="text-align:left"><code>/api/todo/reject/:key</code></td>
+<td>是</td>
+<td style="text-align:left">拒绝待办。</td>
+</tr>
+<tr>
+<td style="text-align:left">token</td>
+<td>POST</td>
+<td style="text-align:left"><code>/oauth/token</code></td>
+<td>否</td>
+<td style="text-align:left">使用授权码交换令牌专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">uri</td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/x-api/:key</code></td>
+<td>是</td>
+<td style="text-align:left">读取Uri配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">user</td>
+<td>GET</td>
+<td style="text-align:left"><code>/api/user</code></td>
+<td>是</td>
+<td style="text-align:left">读取当前登录用户基本信息。</td>
+</tr>
 </tbody>
 </table>
 </div>
@@ -3722,7 +3834,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.module</code></h2>
 <ul>
 <li>接口：<code>/api/module?entry={entry}</code>（GET）</li>
 <li>安全：是</li>
@@ -3881,12 +3993,41 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.ops</code></h2>
 <ul>
 <li>接口：<code>/api/ui/ops</code>（POST）</li>
 <li>安全：是</li>
 </ul>
-<p>读取操作专用配置<code>UI_OP</code>。</p>
+<p>读取操作专用配置<code>UI_OP</code>，入参为：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;control&quot;: &quot;控件ID&quot;,
+    &quot;identifier&quot;: &quot;模型标识符&quot;,
+    &quot;type&quot;: &quot;OP&quot;
+}
+</code></pre>
+<h3>内部参数</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">type</td>
+<td style="text-align:left">固定值OP，暂定为只读取OP相关信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">control</td>
+<td style="text-align:left">（动态读取专用）传入需要读取控件的ID值，读取和<code>UI_CONTROL</code>相关的数据库记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">identifier</td>
+<td style="text-align:left">（静态读取专用）传入模型标识符，读取静态配置，配置文件在<code>plugin/ui/ops.json</code>中。</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -4039,12 +4180,16 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.page</code></h2>
 <ul>
 <li>接口：<code>/api/ui/page</code>（POST）</li>
 <li>安全：是</li>
 </ul>
-<p>读取页面配置<code>UI_PAGE</code>。</p>
+<ol>
+<li>先读取<code>UI_PAGE</code>中的页面配置信息。</li>
+<li>然后读取<code>UI_LAYOUT</code>中的模板配置信息。</li>
+<li>最后根据<code>pageId</code>读取<code>UI_CONTROL</code>中的控件配置信息。</li>
+</ol>
 </div>
 
 
@@ -4197,12 +4342,12 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.password</code></h2>
 <ul>
 <li>接口：<code>/api/user/password</code>（POST）</li>
 <li>安全：是</li>
 </ul>
-<p>更新用户登录密码。</p>
+<p>更新用户登录密码专用接口</p>
 </div>
 
 
@@ -4355,12 +4500,12 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.profile</code></h2>
 <ul>
 <li>接口：<code>/api/user/profile</code>（POST）</li>
 <li>安全：是</li>
 </ul>
-<p>更新用户信息。</p>
+<p>更新登录用户的Profile详细信息。</p>
 </div>
 
 
@@ -4513,12 +4658,12 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.relation</code></h2>
 <ul>
 <li>接口：<code>/api/relation</code>（GET）</li>
 <li>安全：是</li>
 </ul>
-<p>读取关系定义专用</p>
+<p>读取关系定义专用接口</p>
 </div>
 
 
@@ -4622,12 +4767,12 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.relationDelete</code></h2>
 <ul>
 <li>接口：<code>/api/ox/relation/remove</code>（POST）</li>
 <li>安全：是</li>
 </ul>
-<p>删除关系专用</p>
+<p>删除关系专用接口</p>
 </div>
 
 
@@ -4780,7 +4925,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.relationSave</code></h2>
 <ul>
 <li>接口：<code>/api/ox/relation/save</code>（POST）</li>
 <li>安全：是</li>
@@ -5121,7 +5266,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.token</code></h2>
 <ul>
 <li>接口：
 <ul>
@@ -5319,7 +5464,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.token</code></h2>
 <ul>
 <li>接口：<code>/oauth/token</code>（POST）</li>
 <li>安全：否</li>
@@ -5330,6 +5475,7 @@ Ex.I.application().then(response => {
     &quot;code&quot;: &quot;临时验证码&quot;
 }
 </code></pre>
+<p>使用临时授权码交换令牌专用方法。</p>
 </div>
 
 
@@ -5482,7 +5628,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.uri</code></h2>
 <ul>
 <li>接口：<code>/api/x-api/:key</code>（GET）</li>
 <li>安全：是</li>
@@ -5640,7 +5786,7 @@ Ex.I.application().then(response => {
 
 
 <div class="description usertext">
-    <h2>接口函数</h2>
+    <h2>「接口」<code>Ex.I.user</code></h2>
 <ul>
 <li>接口：<code>/api/user</code>（GET）</li>
 <li>安全：是</li>
@@ -5717,7 +5863,7 @@ Ex.I.application().then(response => {
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 19:32:46 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 22:26:35 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

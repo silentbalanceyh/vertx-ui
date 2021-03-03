@@ -61,221 +61,6 @@ const calcTree = (categories = [], group = {}, mode) => {
     });
     return normalized;
 }
-const ajaxTree = {
-    forest: (type, mode) => {
-        if (type) {
-            return _category({type}).then(categories => {
-                /*
-                 * 特殊数据结构
-                 */
-                return Ux.forestGroup(categories, {}, _category).then(grouped => {
-                    /*
-                     * 根据最终的 grouped 计算 最终的 normalized
-                     */
-                    return Ux.promise(calcTree(categories, grouped, mode));
-                });
-            })
-        } else return Ux.promise([])
-    }
-}
-// =====================================================
-// 表单专用接口
-// =====================================================
-const ajaxForm = {
-    /*
-     * 读取模型下所有表单配置
-     */
-    forms: (identifier) => Ux.ajaxGet(`/api/ui/forms/:identifier`, {identifier})
-        .then(response => {
-            response.forEach(item => {
-                if (item.metadata) {
-                    /* 没有设计 */
-                    if (!item.metadata.hasOwnProperty('design')) {
-                        item.metadata.design = true;
-                    }
-                }
-            })
-            return Ux.promise(response);
-        }),
-    /*
-     * 读取模型下所有列表配置
-     */
-    lists: (identifier) => Ux.ajaxGet(`/api/ui/lists/:identifier`, {identifier}),
-    /*
-     * 读取表单配置
-     */
-    form: (params) => Ux.ajaxGet(`/api/ui/form/:code`, params),
-    /*
-     * 读取表单中的 actions
-     * {
-     *      "control": <control>
-     *      "name": <name>
-            "op": []
-     * }
-     */
-    action: (params = {}) => {
-        if (params.remote) {
-            return Ux.ajaxPost(`/api/form/actions`, params);
-        } else {
-            /* 无权限 */
-            const permit = {};
-            const {op = {}} = params;
-            Object.keys(op).forEach(field => permit[field] = !!op[field]);
-            return Ux.promise(permit);
-        }
-    }
-}
-
-
-// =====================================================
-// UI界面配置接口
-// =====================================================
-const ajaxUi = {
-    page: params => Ux.ajaxPost('/api/ui/page', params),
-
-    control: params => Ux.ajaxPost('/api/ui/control', params),
-
-    ops: params => Ux.ajaxPost('/api/ui/ops', params),
-}
-
-
-// =====================================================
-// Job任务接口
-// =====================================================
-const ajaxJob = {
-    mission: (key) => Ux.ajaxGet("/api/job/info/mission/:key", {key})
-        .then((mission = {}) => Ux.promise(Fn.inJob(mission))),
-    jobs: (params = {}) => {
-        const $request = Ux.clone(params);
-        $request.criteria[""] = true;
-        return Ux.ajaxPost("/api/job/info/by/sigma?group=true", $request).then((response = []) => {
-            const {list = [], count, aggregation = {}} = response;
-            const jobs = [];
-            list.forEach((mission = {}) => {
-                const processed = Fn.inJob(mission);
-                /*
-                 * 不为空的时候执行 push 将 job 压入
-                 */
-                if (!Ux.isEmpty(processed)) {
-                    jobs.push(processed);
-                }
-            });
-            return Ux.promise({list: jobs, count, aggregation});
-        })
-    },
-    jobStart: (key) => Ux.ajaxPut("/api/job/start/:key", {key}),
-    jobStop: (key) => Ux.ajaxPut("/api/job/stop/:key", {key}),
-    jobResume: (key) => Ux.ajaxPut("/api/job/resume/:key", {key})
-}
-
-
-// =====================================================
-// Employee员工相关接口
-// =====================================================
-const ajaxEmployee = {
-    /*
-     * 读取用户基本信息
-     */
-    user: () => Ux.ajaxGet(`/api/user`),
-    /*
-     * 企业信息读取
-     */
-    company: () => {
-        const user = Ux.isLogged();
-        if (user['employeeId']) {
-            return Ux.ajaxGet(`/api/company/employee/:eid`, {
-                eid: user['employeeId']
-            });
-        } else {
-            return Ux.promise({});
-        }
-    },
-    /*
-     * 更新当前用户密码
-     */
-    password: (params) => Ux.ajaxPost(`/api/user/password`, {
-        /*
-         * Token中已经包含了用户的 id
-         * 所以此处只需要 password 就可以了
-         */
-        password: Ux.encryptMD5(params.password)
-    }),
-    profile: (params) => Ux.ajaxPost(`/api/user/profile`, params)
-}
-
-
-// =====================================================
-// 关系运算
-// =====================================================
-const ajaxRelation = {
-
-    /*
-    * /api/relation
-    * 读取所有的关系定义
-    * */
-    relation: () => Ux.ajaxGet("/api/relation", {}),
-
-    relationSave: (relations = []) => Ux.ajaxPost("/api/ox/relation/save", {
-        $body: relations,
-    }),
-
-    relationDelete: (keys = []) => Ux.ajaxPost("/api/ox/relation/remove", {
-        $body: keys,
-    }),
-}
-
-
-// =====================================================
-// 模型接口
-// =====================================================
-const ajaxModel = {
-    attributes: (identifier) => Ux.ajaxGet(`/api/model/identifier/:identifier`, {
-        identifier,
-    }).then((response = {}) => {
-        const {attributes = []} = response;
-        const processed = [];
-        attributes.forEach(attribute => {
-            const each = {};
-            each.key = attribute.name;
-            each.name = attribute.alias + "（" + attribute.name + "）";
-            each.data = Ux.clone(attribute);
-            processed.push(each);
-        });
-        return Ux.promise(processed);
-    })
-}
-
-
-// =====================================================
-// Todo待办专用接口
-// =====================================================
-const ajaxTodo = {
-    todo: (params = {}, confirmed = true) => {
-        const request = {key: params.key, data: params.data};
-        if (confirmed) {
-            return Ux.ajaxPut('/api/todo/confirm/:key', request);
-        } else {
-            return Ux.ajaxPut('/api/todo/reject/:key', request);
-        }
-    }
-}
-
-
-// =====================================================
-// Api专用接口
-// =====================================================
-const ajaxApi = {
-    uri: (key) => Ux.ajaxGet("/api/x-api/:key", {key})
-        .then((uri = {}) => Ux.promise(Fn.inApi(uri))),
-    apis: (params = {}) => {
-        const $request = Ux.clone(params);
-        $request.criteria[""] = true;
-        return Ux.ajaxPost("/api/x-api/search", $request).then((response = []) => {
-            return Ux.promise(response);
-        })
-    }
-}
-
 
 // =====================================================
 // Datum字典接口
@@ -322,52 +107,6 @@ const _category = _assist({
     types: "/api/types/categories",
     category: Fn.V.TYPE_CATEGORY
 });
-const ajaxDatum = {
-    /*
-     * GET /api/:type/tabular/:code
-     * GET /api/type/tabulars/:type
-     * POST /api/type/tabulars
-     * */
-    tabular: _tabular,
-    /*
-     * GET /api/:type/category/:code
-     * GET /api/type/categories/:type
-     * POST /api/type/categories
-     */
-    category: _category,
-}
-
-
-// =====================================================
-// oauth 安全接口
-// =====================================================
-const ajaxAuth = {
-    /* /oauth/login */
-    login: (request = {}) => Ux.ajaxPush('/oauth/login', {
-        ...request,
-        password: Ux.encryptMD5(request.password)    // MD5加密
-    }),
-    /* /api/oauth/logout */
-    logout: () => Ux.ajaxPost('/api/user/logout', {})
-        .catch(error => {
-            console.error(error);
-            return Ux.promise({unauthorized: true})
-        }),
-    /* /oauth/authorize */
-    authorize: (request = {}) => Ux.ajaxPush('/oauth/authorize', request)
-        .then(authorized => {
-            /* 追加 authorized 中的 client_id */
-            authorized.client_id = request.client_id;
-            return Ux.promise(authorized);
-        }),
-    /* /oauth/token */
-    token: (request = {}) => Ux.ajaxPush('/oauth/token', request)
-        .then(token => {
-            token.key = request.client_id;
-            return Ux.promise(token);
-        })
-}
-
 
 // =====================================================
 // application 应用接口
@@ -399,34 +138,6 @@ const _menus = () => {
         return Fn.E.error001();
     }
 };
-
-const _module = (uri = "") => {
-    /*
-     * encodeURI 方法执行 encoding URI的编码动作
-     */
-    const entry = encodeURI(uri);
-    return Ux.ajaxGet('/api/module', {entry});
-};
-
-const ajaxApplication = {
-    app: (failure) => Ux.ajaxFetch("/app/name/:name", {name: Ux['Env']['APP']})
-        .catch(error => Ux.isFunction(failure) ? failure(error) : false),
-    /* /api/app */
-    application: _application,
-    /* /api/menus */
-    menus: _menus,
-    /* /api/module?entry={entry} */
-    module: _module,
-    /*
-     * 首页初始化
-     * /api/app
-     * /api/menus
-     * */
-    inited: () => Ux.parallel([
-        _application(), // 应用程序
-        _menus()        // 菜单
-    ])
-}
 
 /**
  * ## Ajax接口类
@@ -471,6 +182,22 @@ const ajaxApplication = {
  * |logout|POST|`/api/user/logout`|是|注销专用接口。|
  * |menus|GET|`/api/menus`|是|读取应用相关的配置信息。|
  * |mission|GET|`/api/job/info/mission/:key`|是|读取任务的详细信息（包括任务状态、运行状态等）。|
+ * |module|GET|`/api/module?entry={entry}`|是|根据入口信息读取模块配置数据，对应后端`X_MODULE`表。|
+ * |ops|POST|`/api/ui/ops`|是|读取`UI_OP`配置信息，可动态读取，也可静态读取。|
+ * |page|POST|`/api/ui/page`|是|读取当前页面配置信息。|
+ * |password|POST|`/api/user/password`|是|更新登录账号密码专用接口。|
+ * |profile|POST|`/api/user/profile`|是|更新当前登录账号的Profile信息。|
+ * |relation|GET|`/api/relation`|是|读取关系定义专用接口。|
+ * |relationDelete|POST|`/api/ox/relation/delete`|是|删除关系专用方法。|
+ * |relationSave|POST|`/api/ox/relation/save`|是|保存关系专用方法。|
+ * |tabular|GET|`/api/:type/tabular/:code`|是|读取唯一字典记录。|
+ * ||GET|`/api/type/tabulars/:type`|是|读取某一类字典记录。|
+ * ||POST|`/api/types/tabulars`|是|读取多类字典数据记录。|
+ * |todo|PUT|`/api/todo/confirm/:key`|是|确认待办。|
+ * ||PUT|`/api/todo/reject/:key`|是|拒绝待办。|
+ * |token|POST|`/oauth/token`|否|使用授权码交换令牌专用方法。|
+ * |uri|GET|`/api/x-api/:key`|是|读取Uri配置信息。|
+ * |user|GET|`/api/user`|是|读取当前登录用户基本信息。|
  *
  * @class I
  */
@@ -564,7 +291,7 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.module`
      *
      * * 接口：`/api/module?entry={entry}`（GET）
      * * 安全：是
@@ -577,7 +304,11 @@ class I {
      * @returns {Promise<T>} 返回Promise。
      */
     static module(uri = "") {
-        return ajaxApplication.module(uri);
+        /*
+         * encodeURI 方法执行 encoding URI的编码动作
+         */
+        const entry = encodeURI(uri);
+        return Ux.ajaxGet('/api/module', {entry});
     }
 
     /**
@@ -669,7 +400,7 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.token`
      *
      * * 接口：`/oauth/token`（POST）
      * * 安全：否
@@ -683,12 +414,17 @@ class I {
      * }
      * ```
      *
+     * 使用临时授权码交换令牌专用方法。
+     *
      * @async
      * @param {Object} request 交换令牌专用请求。
      * @returns {Promise<T>} 返回Promise。
      */
     static token(request = {}) {
-        return ajaxAuth.token(request);
+        return Ux.ajaxPush('/oauth/token', request).then(token => {
+            token.key = request.client_id;
+            return Ux.promise(token);
+        });
     }
 
     /**
@@ -792,11 +528,19 @@ class I {
      * @returns {Promise<T>} 返回Promise。
      */
     static action(params = {}) {
-        return ajaxForm.action(params);
+        if (params.remote) {
+            return Ux.ajaxPost(`/api/form/actions`, params);
+        } else {
+            /* 无权限 */
+            const permit = {};
+            const {op = {}} = params;
+            Object.keys(op).forEach(field => permit[field] = !!op[field]);
+            return Ux.promise(permit);
+        }
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.user`
      *
      * * 接口：`/api/user`（GET）
      * * 安全：是
@@ -807,7 +551,7 @@ class I {
      * @returns {Promise<T>} 返回Promise。
      */
     static user() {
-        return ajaxEmployee.user();
+        return Ux.ajaxGet(`/api/user`);
     }
 
     /**
@@ -833,35 +577,41 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.password`
      *
      * * 接口：`/api/user/password`（POST）
      * * 安全：是
      *
-     * 更新用户登录密码。
+     * 更新用户登录密码专用接口
      *
      * @async
      * @param {Object} params 更新密码所用的请求。
      * @returns {Promise<T>} 返回Promise。
      */
     static password(params = {}) {
-        return ajaxEmployee.password(params);
+        return Ux.ajaxPost(`/api/user/password`, {
+            /*
+             * Token中已经包含了用户的 id
+             * 所以此处只需要 password 就可以了
+             */
+            password: Ux.encryptMD5(params.password)
+        });
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.profile`
      *
      * * 接口：`/api/user/profile`（POST）
      * * 安全：是
      *
-     * 更新用户信息。
+     * 更新登录用户的Profile详细信息。
      *
      * @async
      * @param {Object} params 更新账号专用请求。
      * @returns {Promise<T>} 返回Promise。
      */
     static profile(params = {}) {
-        return ajaxEmployee.profile(params);
+        return Ux.ajaxPost(`/api/user/profile`, params);
     }
 
     /**
@@ -956,19 +706,21 @@ class I {
 
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.page`
      *
      * * 接口：`/api/ui/page`（POST）
      * * 安全：是
      *
-     * 读取页面配置`UI_PAGE`。
+     * 1. 先读取`UI_PAGE`中的页面配置信息。
+     * 2. 然后读取`UI_LAYOUT`中的模板配置信息。
+     * 3. 最后根据`pageId`读取`UI_CONTROL`中的控件配置信息。
      *
      * @async
      * @param {Object} params 页面专用请求
      * @returns {Promise<T>} 返回Promise。
      */
     static page(params = {}) {
-        return ajaxUi.page(params);
+        return Ux.ajaxPost('/api/ui/page', params);
     }
 
     /**
@@ -1005,23 +757,39 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.ops`
      *
      * * 接口：`/api/ui/ops`（POST）
      * * 安全：是
      *
-     * 读取操作专用配置`UI_OP`。
+     * 读取操作专用配置`UI_OP`，入参为：
+     *
+     * ```json
+     * {
+     *     "control": "控件ID",
+     *     "identifier": "模型标识符",
+     *     "type": "OP"
+     * }
+     * ```
+     *
+     * ### 内部参数
+     *
+     * |参数名|含义|
+     * |:---|:---|
+     * |type|固定值OP，暂定为只读取OP相关信息。|
+     * |control|（动态读取专用）传入需要读取控件的ID值，读取和`UI_CONTROL`相关的数据库记录。|
+     * |identifier|（静态读取专用）传入模型标识符，读取静态配置，配置文件在`plugin/ui/ops.json`中。|
      *
      * @async
      * @param {Object} params 控件专用请求
      * @returns {Promise<T>} 返回Promise
      */
     static ops(params = {}) {
-        return ajaxUi.ops(params);
+        return Ux.ajaxPost('/api/ui/ops', params);
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.token`
      *
      * * 接口：
      *      * 确认：`/api/todo/confirm/:key`（PUT）
@@ -1036,7 +804,12 @@ class I {
      * @returns {Promise<T>} 返回Promise
      */
     static todo(params = {}, confirmed = true) {
-        return ajaxTodo.todo(params, confirmed);
+        const request = {key: params.key, data: params.data};
+        if (confirmed) {
+            return Ux.ajaxPut('/api/todo/confirm/:key', request);
+        } else {
+            return Ux.ajaxPut('/api/todo/reject/:key', request);
+        }
     }
 
     /**
@@ -1135,22 +908,22 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.relation`
      *
      * * 接口：`/api/relation`（GET）
      * * 安全：是
      *
-     * 读取关系定义专用
+     * 读取关系定义专用接口
      *
      * @async
      * @returns {Promise<T>} 返回Promise。
      */
     static relation() {
-        return ajaxRelation.relation();
+        return Ux.ajaxGet("/api/relation", {});
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.relationSave`
      *
      * * 接口：`/api/ox/relation/save`（POST）
      * * 安全：是
@@ -1162,23 +935,27 @@ class I {
      * @returns {Promise<T>} 返回Promise。
      */
     static relationSave(relations = []) {
-        return ajaxRelation.relationSave(relations);
+        return Ux.ajaxPost("/api/ox/relation/save", {
+            $body: relations,
+        });
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.relationDelete`
      *
      * * 接口：`/api/ox/relation/remove`（POST）
      * * 安全：是
      *
-     * 删除关系专用
+     * 删除关系专用接口
      *
      * @async
      * @param {Array} keys 将要被删除的关系的 key 集合
      * @returns {Promise<T>} 返回Promise。
      */
     static relationDelete(keys = []) {
-        return ajaxRelation.relationDelete(keys);
+        return Ux.ajaxPost("/api/ox/relation/remove", {
+            $body: keys,
+        });
     }
 
     /**
@@ -1211,7 +988,7 @@ class I {
     }
 
     /**
-     * ## 接口函数
+     * ## 「接口」`Ex.I.uri`
      *
      * * 接口：`/api/x-api/:key`（GET）
      * * 安全：是
@@ -1223,7 +1000,8 @@ class I {
      * @returns {Promise<T>} 返回Promise
      */
     static uri(key) {
-        return ajaxApi.uri(key);
+        return Ux.ajaxGet("/api/x-api/:key", {key})
+            .then((uri = {}) => Ux.promise(Fn.inApi(uri)));
     }
 }
 
