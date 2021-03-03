@@ -4,7 +4,7 @@ import Random from './O.random';
 import Abs from '../abyss';
 import Ele from '../element';
 
-const _formatArray = (input = "", args = []) => {
+const _unityArray = (input = "", args = []) => {
     if (Array.prototype.isPrototypeOf(args) && 0 < args.length) {
         args.forEach((item, index) => {
             // 表达式开始带冒号:
@@ -17,7 +17,7 @@ const _formatArray = (input = "", args = []) => {
     return input;
 };
 
-const _formatNamed = (input = "", params = {}, keep = false) => {
+const _unityNamed = (input = "", params = {}, keep = false) => {
     if (
         !Array.prototype.isPrototypeOf(params) &&
         0 < Object.keys(params).length
@@ -41,13 +41,15 @@ const _formatNamed = (input = "", params = {}, keep = false) => {
     }
     return input;
 };
+
+
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.formatExpr`
  *
  * 格式化字符串，将:x，:y使用params进行参数替换
  * 比如：/api/test/:name和{name:"lang"}两个合并成 => /api/test/lang
  *
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {String} input 原始字符串。
  * @param {Object} params 传入参数。
  * @param {Boolean} keep 是否保持原始key。
@@ -58,19 +60,20 @@ const formatExpr = (input = "", params, keep = false) => {
     if (params) {
         // 如果是数组，则直接使用{0}，{1}这种格式进行格式化
         if (Array.prototype.isPrototypeOf(params)) {
-            input = _formatArray(input, params, keep);
+            input = _unityArray(input, params, keep);
         } else {
-            input = _formatNamed(input, params, keep);
+            input = _unityNamed(input, params, keep);
         }
     }
     return input;
 };
+
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.formatQuery`
  *
  * 将参数追加到Query String中生成完整的uri链接。
  *
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {String} uri 被格式化编码的Uri
  * @param {Object} params 将要追加的Query参数值
  * @param {Boolean} encode 是否针对参数进行uri encode编码，默认是需编码的
@@ -104,11 +107,11 @@ const formatQuery = (uri = "", params = {}, encode = true) => {
 };
 
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.formatObject`
  *
  * 将表达式`k1=value1,k2=value2,k3=value3`解析成对象。
  *
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {String} expr 表达式相关信息。
  * @param {boolean} appendKey 解析过程中是否追加`key`，该参数为true则表示没有`key`时追加。
  * @return {Object} 解析好的对象信息。
@@ -131,11 +134,11 @@ const formatObject = (expr = "", appendKey = false) => {
 };
 
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.formatCurrency`
  *
  * 将传入值格式化成货币格式，该方法不带货币符号。
  *
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {Number|String} value 输入的数值。
  * @return {String} 返回最终格式化过后的货币格式，可以和货币单位连用，取2位小数。
  */
@@ -144,11 +147,11 @@ const formatCurrency = (value) => {
     return numeral(value).format();
 };
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.formatPercent`
  *
  * 将传入值格式化成带百分比的字符串，该方法返回结果带百分号。
  *
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {Number|String} value 输入的将要被格式化的值。
  * @return {String} 返回最终格式化的结果（百分比）。
  */
@@ -157,7 +160,7 @@ const formatPercent = (value) => {
     return numeral(value).format();
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.formatTpl`
  *
  * 使用数据填充模板生成最终带数据的合并格式。
  *
@@ -178,7 +181,7 @@ const formatPercent = (value) => {
  * reference.setState(state);
  *
  * ```
- * @memberOf module:_format
+ * @memberOf module:_unity
  * @param {Object} data 数据基础信息。
  * @param {Object} tpl 模板信息。
  * @return {any|*} 返回最终生成结果。
@@ -203,11 +206,11 @@ export default {
     formatExpr,
     formatQuery,
     /**
-     * ## 标准函数
+     * ## 「标准」`Ux.formatDate`
      *
      * 格式化时间字符串或时间值。
      *
-     * @memberOf module:_format
+     * @memberOf module:_unity
      * @param {Moment|String} value 被格式化的字符串或Moment对象。
      * @param {String} pattern 时间使用的模式如：`YYYY-MM-DD`，必须是Moment支持格式。
      * @return {string} 返回格式化过后的标准时间格式。
@@ -215,11 +218,11 @@ export default {
     formatDate: (value, pattern = "YYYY-MM-DD") => moment(value).format(pattern),
     /**
      *
-     * ## 标准函数
+     * ## 「标准」`Ux.formatNow`
      *
      * 按模式格式化当前时间。
      *
-     * @memberOf module:_format
+     * @memberOf module:_unity
      * @param {String} pattern 时间使用的模式如：`YYYY-MM-DD`，必须是Moment支持格式。
      * @return {string} 返回格式化过后的标准时间格式。
      */

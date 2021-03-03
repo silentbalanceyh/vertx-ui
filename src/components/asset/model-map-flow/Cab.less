@@ -1,0 +1,183 @@
+@import '../../../global';
+
+.ops-model {
+    &-step1 {
+        list-style: none;
+        padding: 20px 8px 6px 16px;
+        width: 100%;
+        border-top: solid 1px #f2f2f2;
+
+        li {
+            line-height: 24px;
+            font-size: 13px;
+        }
+    }
+
+    &-help {
+        padding-top: 12px;
+        padding-left: 12px;
+    }
+
+    &-op {
+        padding: 6px 8px 8px 0;
+
+        button {
+            margin-right: 8px
+        }
+    }
+
+    &-done {
+        border-top: solid 1px #f2f2f2;
+        padding: 32px 8px 32px 8px;
+
+        .content-form {
+            padding-left: 6px;
+        }
+
+        .ops-card {
+            .ant-card-head-title {
+                color: @primary-color;
+            }
+
+            .ant-card-body {
+                padding-left: 6px;
+                padding-right: 6px;
+            }
+        }
+    }
+
+    &-page {
+        border-top: solid 1px #f2f2f2;
+        min-height: 300px;
+
+        .ant-row {
+            border: none !important;
+        }
+
+        .form-step1 {
+            padding-top: 32px;
+            width: 45%;
+            padding-bottom: 32px;
+
+            .step1-form {
+
+            }
+        }
+
+        .form-step2 {
+            padding-top: 16px;
+            width: 83%;
+            padding-bottom: 32px;
+
+            .ant-row {
+                min-height: 32px;
+                line-height: 32px;
+            }
+
+            .title {
+                text-align: right;
+            }
+
+            .selected {
+                max-height: 100px;
+                min-height: 100px;
+                overflow-y: auto;
+
+                .ant-tag {
+                    color: #8d8d8d;
+                    font-size: 13px;
+                    width: 16%;
+                    line-height: 22px;
+                    height: 24px;
+                    border-radius: 1px;
+                    margin-right: 4px;
+                }
+            }
+
+            .content {
+                max-height: 200px;
+                overflow-y: auto;
+
+                .ant-checkbox-group-item {
+                    width: 19%;
+                    overflow-x: hidden;
+                    overflow-y: hidden;
+                    line-height: 24px;
+                    height: 24px;
+                }
+            }
+        }
+
+        .form-step3 {
+            padding-top: 32px;
+            width: 80%;
+            padding-bottom: 32px;
+
+            .step1-form {
+
+            }
+        }
+
+        .form-table {
+            width: 84%;
+            padding-left: 12px;
+            margin-top: 16px;
+            margin-bottom: 16px;
+
+            .ant-table {
+
+                .ant-table-placeholder {
+                    border: none;
+                    border-radius: 0;
+                }
+            }
+
+            .empty-text {
+                width: 100%;
+                padding-top: 20px;
+                padding-bottom: 16px;
+
+                img {
+                    width: 145px;
+                    height: 100px;
+                }
+
+                div {
+                    margin-bottom: 8px;
+                    color: #4A4A4A;
+                }
+            }
+        }
+    }
+
+    &-summary {
+        width: 160px;
+        box-shadow: -3px -3px 3px #d7d7d7;
+
+        .ant-card {
+            .ant-card-head-title {
+                font-size: 13px;
+                color: #6d6d6d;
+            }
+
+            .ant-card-head {
+                padding: 4px;
+                height: 28px !important;
+                min-height: 28px !important;
+            }
+
+            .ant-card-body {
+                ul {
+                    margin-top: 6px;
+                    margin-bottom: 12px;
+                    padding-left: 12px;
+                    list-style: none;
+
+                    li {
+                        padding-left: 10px;
+                    }
+                }
+            }
+        }
+    }
+}

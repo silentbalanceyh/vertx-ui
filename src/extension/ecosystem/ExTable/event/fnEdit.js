@@ -7,7 +7,7 @@ export default (id, record, metadata = {}) => {
     /* 读取数据 */
     Ex.rx(reference).view(id).then(data => {
         /* 打开新页 */
-        Ex.rx(reference).open(id, data);
+        Ex.rx(reference).open(id, data, record);
         /* 关闭 Loading 用*/
         Ex.rsLoading(reference, false)({});
     });

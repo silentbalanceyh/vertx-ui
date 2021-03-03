@@ -4,11 +4,9 @@ import Ex from "ex";
 import Op from './op';
 
 import renderNav from './Web.Nav';
-import renderSystem from './Web.System';
-import renderBusiness from './Web.Business';
 
 import './Cab.less';
-import {Col, Row, Spin} from "antd";
+import {Col, Row, Spin, Tabs} from "antd";
 
 @Ux.zero(Ux.rxEtat(require("./Cab.json"))
     .cab("UI")
@@ -34,21 +32,28 @@ class Component extends React.PureComponent {
                     <Spin spinning={$submitting} tip={info.submitting}>
                         {renderNav(this)}
                         <Row>
-                            <Col span={7}>
-                                <Row className={"op-title"}>
-                                    <Col span={24}>
-                                        {info.business}
-                                    </Col>
-                                </Row>
-                                {renderBusiness(this)}
-                            </Col>
-                            <Col span={17}>
-                                <Row className={"op-title"}>
-                                    <Col span={24}>
-                                        {info.system}
-                                    </Col>
-                                </Row>
-                                {renderSystem(this)}
+                            <Col span={24}>
+                                {(() => {
+                                    const {$tabs = {}, $tree = []} = this.state;
+                                    const {items = [], ...tabAttrs} = $tabs;
+                                    return (
+                                        <Tabs {...tabAttrs} onTabClick={Op.rxPageMove(this)}>
+                                            {items.map(item => {
+                                                const {render, ...rest} = item;
+                                                /*
+                                                 * 构造相关数据
+                                                 */
+                                                const data = Ux.elementUnique($tree, 'key', item.key);
+                                                const children = Ux.isArray(data.children) ? data.children : []
+                                                return (
+                                                    <Tabs.TabPane {...rest}>
+                                                        {Ux.isFunction(render) ? render(children, item) : false}
+                                                    </Tabs.TabPane>
+                                                )
+                                            })}
+                                        </Tabs>
+                                    );
+                                })()}
                             </Col>
                         </Row>
                     </Spin>

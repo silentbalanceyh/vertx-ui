@@ -1,9 +1,113 @@
 import Ux from 'ux';
-import Callback from './Op.Callback';
+import {saveAs} from "file-saver";
 import {message} from 'antd';
-import Verify from './Op.Verify';
-import U from 'underscore';
 
+const _setImage = (reference, file) => {
+    const reader = new FileReader();
+    reader.addEventListener('load', () => reference.setState({
+        $loading: false,    // 加载完成
+        $imageUrl: reader.result,   // 图片URL地址
+    }));
+    if (file) reader.readAsDataURL(file);
+};
+const _doDone = (reference, info = {}) => {
+    // 上传完成
+    if ("done" === info.file.status) {
+        // 如果listType为picture-card
+        const {listType} = reference.props;
+        if ("picture-card" === listType) {
+            // 图片模式
+            _setImage(reference, info.file.originFileObj);
+        } else {
+            // 其他格式
+            reference.setState({$loading: false});
+        }
+    }
+};
+const _doLoading = (reference, info = {}) => {
+    if ("uploading" === info.file.status) {
+        reference.setState({
+            $loading: true,
+        });
+    }
+};
+const _onChange = (reference, fileList = []) => {
+    const {config = {}} = reference.props;
+    const field = config['filekey'] ? config['filekey'] : "key";
+    // eslint-disable-next-line no-unused-vars
+    const files = fileList.filter(file => file.hasOwnProperty('response'))
+        .map(item => {
+            const each = {};
+            each.uid = item.uid;
+            each.name = item.name;
+            each.key = item.response[field];
+            each.type = item.type;  // 数据类型
+            return each;
+        });
+};
+const on2Change = (reference) => (info = {}) => {
+    // 正在上传
+    _doLoading(reference, info);
+    // 上传完成
+    _doDone(reference, info);
+    // 始终更新fileList（onChange触发两次，防止beforeUpload问题）
+    reference.setState({
+        fileList: info.fileList,    // 已上传文件列表
+        $counter: info.fileList.length // 已上传文件数量
+    });
+    // 设置更新过后的基础数据
+    _onChange(reference, info.fileList);
+};
+
+const on2Preview = (reference) => (file) => {
+    const {listType} = reference.props;
+    if ("picture-card" === listType) {
+        // 1.picture-card / picture才会直接preview
+        reference.setState({
+            $current_url: file.thumbUrl,
+            $current_name: file.name,
+            $visible: true
+        });
+    } else {
+        // 2.其他模式直接下载该文件
+        // 刚刚上传过的处理
+        if (file.hasOwnProperty('originFileObj')) {
+            saveAs(file.originFileObj, file.name);
+        } else {
+            const {ajax = {}} = reference.props;
+            Ux.ajaxDownload(ajax.download, Ux.clone(file))
+                .then(data => saveAs(data, file.name));
+        }
+    }
+};
+const on2Before = (reference) => (file) => {
+    // 如果通过的情况
+    const {config = {}} = reference.props;
+    const error = Ux.fromHoc(reference, "error");
+    // 1.单文件限制上传
+    let verified = true;
+    if (config.single) {
+        const {$counter = 0} = reference.state;
+        if (0 < $counter) {
+            message.destroy();
+            message.error(error.single);
+            verified = false;
+        }
+    }
+    // 2.文件大小限制
+    if (verified && config.limit) {
+        const current = file.size / 1024;
+        if (current > config.limit) {
+            message.destroy();
+            message.error(Ux.formatExpr(error.limit, {
+                size: config.limit,
+                current: current.toFixed(2)
+            }));
+            verified = false;
+        }
+    }
+    return verified ? Promise.resolve(file) : Promise.reject();
+};
 const on2CustomRequest = (reference) => (details = {}) => {
     const {ajax = {}} = reference.props;
     if (!Ux.isEmpty(ajax)) {
@@ -25,64 +129,16 @@ const on2CustomRequest = (reference) => (details = {}) => {
     }
 };
 
-const getHandler = (reference) => {
+const onHandler = (reference) => {
     const handler = {};
     // 前置验证处理
-    handler.beforeUpload = Verify.on2Before(reference);
+    handler.beforeUpload = on2Before(reference);
     // 上传改变处理
-    handler.onChange = Callback.on2Change(reference);    // 变更专用方法
-    handler.onPreview = Callback.on2Preview(reference);
+    handler.onChange = on2Change(reference);    // 变更专用方法
+    handler.onPreview = on2Preview(reference);
     handler.customRequest = on2CustomRequest(reference);
     return handler;
 };
-const _asyncToUrl = (each = {}, blob) => new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(blob);
-    reader.addEventListener("load", () => {
-        const type = each.type ? each.type : "image/jpeg";
-        const blob = new Blob([reader.result], {type});
-        // Secondary
-        const innerRder = new FileReader();
-        innerRder.readAsDataURL(blob);
-        innerRder.addEventListener("load", () => {
-            each.thumbUrl = innerRder.result;
-            resolve(each);
-        });
-    });
-});
-const _asyncDownload = (reference, value = []) =>
-    Ux.parallel(value.map(file => {
-        const {ajax = {}} = reference.props;
-        return Ux.ajaxDownload(ajax.download, Ux.clone(file));
-    }));
-const _asyncPreview = (reference, value = []) => (downloaded = []) => {
-    // 遍历
-    const promises = [];
-    value.forEach((each, index) => {
-        const promise = _asyncToUrl(each, downloaded[index]);
-        promises.push(promise);
-    });
-    return Ux.parallel(promises);
-};
-const initState = (reference) => {
-    const handler = getHandler(reference);
-    const callback = (fileList) =>
-        reference.setState({
-            handler, // 构造的Handler
-            fileList, // 已上传文件内容
-            $counter: fileList.length // 已上传文件数量
-        });
-    const {value = [], listType} = reference.props;
-    if ("picture-card" === listType) {
-        if (U.isArray(value)) {
-            _asyncDownload(reference, value) // 并行下载
-                .then(_asyncPreview(reference, value)) // 并行转换URL
-                .then(item => callback(item)); // 设置FileList
-        }
-    } else {
-        callback(value);
-    }
-};
 export default {
-    initState
+    onHandler
 };

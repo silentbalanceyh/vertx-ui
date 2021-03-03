@@ -4,7 +4,7 @@ import Ux from 'ux';
 import {Button} from 'antd';
 import './Cab.less';
 import Op from './op';
-import Dialog from '../../container/Dialog/UI';
+import Dialog from '../../web/Dialog/UI';
 import renderContent from './Web.Content';
 
 @component({

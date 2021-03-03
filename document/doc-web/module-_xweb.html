@@ -1,0 +1,4115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>_xweb - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/index.html" class="menu-item" id="website_link" >Zero Api</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web-extension/index.html" class="menu-item" id="website_link" >Zero Extension</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Epic Fabric</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >Origin X Engine</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toParsed">toParsed</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-_ajax.html">_ajax</a><ul class='methods'><li data-type='method'><a href="module-_ajax.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxFetch">ajaxFetch</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPush">ajaxPush</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxResource">ajaxResource</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-_ajax.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-_ajax.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-_ajax.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-_ajax.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-_ajax.html#.asyncTrue">asyncTrue</a></li><li data-type='method'><a href="module-_ajax.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-_ajax.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-_ajax.html#.messageSuccess">messageSuccess</a></li><li data-type='method'><a href="module-_ajax.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-_ajax.html#.microFetch">microFetch</a></li><li data-type='method'><a href="module-_ajax.html#.microGet">microGet</a></li><li data-type='method'><a href="module-_ajax.html#.microPost">microPost</a></li><li data-type='method'><a href="module-_ajax.html#.microPush">microPush</a></li><li data-type='method'><a href="module-_ajax.html#.microPut">microPut</a></li><li data-type='method'><a href="module-_ajax.html#.rxEdict">rxEdict</a></li></ul></li><li><a href="module-_constant.html">_constant</a><ul class='members'><li data-type='member'><a href="module-_constant.html#.(%25E7%258E%25AF%25E5%25A2%2583%25E5%258F%2598%25E9%2587%258F)">(环境变量)</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-_constant.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-_constant.html#.FORBIDDEN">FORBIDDEN</a></li><li data-type='member'><a href="module-_constant.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-_constant.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-_constant.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-_constant.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-_constant.html#.KEY_POINTER">KEY_POINTER</a></li><li data-type='member'><a href="module-_constant.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-_constant.html#.MENU_TYPE">MENU_TYPE</a></li><li data-type='member'><a href="module-_constant.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-_constant.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-_constant.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-_constant.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-_constant.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-_constant.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-_constant.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-_constant.html#.X_LANG">X_LANG</a></li><li data-type='member'><a href="module-_constant.html#.X_SIGMA">X_SIGMA</a></li><li data-type='member'><a href="module-_constant.html#.XT_FORMAT">XT_FORMAT</a></li></ul></li><li><a href="module-_develop.html">_develop</a><ul class='methods'><li data-type='method'><a href="module-_develop.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-_develop.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-_develop.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-_develop.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-_develop.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-_develop.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-_develop.html#.dgRouter">dgRouter</a></li><li data-type='method'><a href="module-_develop.html#.dgTodo">dgTodo</a></li><li data-type='method'><a href="module-_develop.html#.fxError">fxError</a></li><li data-type='method'><a href="module-_develop.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-_develop.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-_develop.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-_develop.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-_develop.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-_develop.html#.fxReport">fxReport</a></li><li data-type='method'><a href="module-_develop.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-_develop.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-_element.html">_element</a><ul class='methods'><li data-type='method'><a href="module-_element.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-_element.html#.elementChildren">elementChildren</a></li><li data-type='method'><a href="module-_element.html#.elementChildTree">elementChildTree</a></li><li data-type='method'><a href="module-_element.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-_element.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-_element.html#.elementFirst">elementFirst</a></li><li data-type='method'><a href="module-_element.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-_element.html#.elementGrid">elementGrid</a></li><li data-type='method'><a href="module-_element.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-_element.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-_element.html#.elementIndex">elementIndex</a></li><li data-type='method'><a href="module-_element.html#.elementJoin">elementJoin</a></li><li data-type='method'><a href="module-_element.html#.elementMap">elementMap</a></li><li data-type='method'><a href="module-_element.html#.elementParent">elementParent</a></li><li data-type='method'><a href="module-_element.html#.elementSave">elementSave</a></li><li data-type='method'><a href="module-_element.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-_element.html#.elementUniqueDatum">elementUniqueDatum</a></li><li data-type='method'><a href="module-_element.html#.elementVertical">elementVertical</a></li><li data-type='method'><a href="module-_element.html#.elementWrap">elementWrap</a></li></ul></li><li><a href="module-_engine.html">_engine</a><ul class='methods'><li data-type='method'><a href="module-_engine.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-_engine.html#.capForm">capForm</a></li><li data-type='method'><a href="module-_engine.html#.capTab">capTab</a></li><li data-type='method'><a href="module-_engine.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-_engine.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-_engine.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-_engine.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-_engine.html#.configExecutors">configExecutors</a></li><li data-type='method'><a href="module-_engine.html#.configForm">configForm</a></li><li data-type='method'><a href="module-_engine.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-_engine.html#.configTab">configTab</a></li><li data-type='method'><a href="module-_engine.html#.configTable">configTable</a></li><li data-type='method'><a href="module-_engine.html#.createAction">createAction</a></li><li data-type='method'><a href="module-_engine.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-_engine.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-_engine.html#.fnOut">fnOut</a></li><li data-type='method'><a href="module-_engine.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-_engine.html#.fromPath">fromPath</a></li><li data-type='method'><a href="module-_engine.html#.raftForm">raftForm</a></li><li data-type='method'><a href="module-_engine.html#.rjAssist">rjAssist</a></li><li data-type='method'><a href="module-_engine.html#.rjTabular">rjTabular</a></li><li data-type='method'><a href="module-_engine.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedRow">rxCheckedRow</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedTree">rxCheckedTree</a></li><li data-type='method'><a href="module-_engine.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-_engine.html#.rxEtat">rxEtat</a></li><li data-type='method'><a href="module-_engine.html#.rxFlow">rxFlow</a></li><li data-type='method'><a href="module-_engine.html#.rxInit">rxInit</a></li><li data-type='method'><a href="module-_engine.html#.rxResize">rxResize</a></li><li data-type='method'><a href="module-_engine.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-_engine.html#.storeUser">storeUser</a></li><li data-type='method'><a href="module-_engine.html#.writeAssist">writeAssist</a></li><li data-type='method'><a href="module-_engine.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-_engine.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-_engine.html#.writeTree">writeTree</a></li></ul></li><li><a href="module-_is.html">_is</a><ul class='methods'><li data-type='method'><a href="module-_is.html#.isArray">isArray</a></li><li data-type='method'><a href="module-_is.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-_is.html#.isCn">isCn</a></li><li data-type='method'><a href="module-_is.html#.isCollection">isCollection</a></li><li data-type='method'><a href="module-_is.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-_is.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-_is.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-_is.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-_is.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-_is.html#.isIn">isIn</a></li><li data-type='method'><a href="module-_is.html#.isInit">isInit</a></li><li data-type='method'><a href="module-_is.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-_is.html#.isNotEmpty">isNotEmpty</a></li><li data-type='method'><a href="module-_is.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-_is.html#.isObject">isObject</a></li><li data-type='method'><a href="module-_is.html#.isParent">isParent</a></li><li data-type='method'><a href="module-_is.html#.isQr">isQr</a></li><li data-type='method'><a href="module-_is.html#.isRoute">isRoute</a></li><li data-type='method'><a href="module-_is.html#.isRule">isRule</a></li><li data-type='method'><a href="module-_is.html#.isRuleAll">isRuleAll</a></li><li data-type='method'><a href="module-_is.html#.isRuleAny">isRuleAny</a></li><li data-type='method'><a href="module-_is.html#.isSame">isSame</a></li></ul></li><li><a href="module-_it.html">_it</a><ul class='methods'><li data-type='method'><a href="module-_it.html#.itAmb">itAmb</a></li><li data-type='method'><a href="module-_it.html#.itElement">itElement</a></li><li data-type='method'><a href="module-_it.html#.itFull">itFull</a></li><li data-type='method'><a href="module-_it.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-_it.html#.itObject">itObject</a></li><li data-type='method'><a href="module-_it.html#.itRepeat">itRepeat</a></li><li data-type='method'><a href="module-_it.html#.itRow">itRow</a></li><li data-type='method'><a href="module-_it.html#.itTree">itTree</a></li><li data-type='method'><a href="module-_it.html#.itUi">itUi</a></li><li data-type='method'><a href="module-_it.html#.itValue">itValue</a></li></ul></li><li><a href="module-_parser.html">_parser</a><ul class='methods'><li data-type='method'><a href="module-_parser.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-_parser.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-_parser.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommand">aiExprCommand</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommands">aiExprCommands</a></li><li data-type='method'><a href="module-_parser.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-_parser.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-_parser.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-_parser.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-_parser.html#.aiExprWindow">aiExprWindow</a></li><li data-type='method'><a href="module-_parser.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-_parser.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-_parser.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-_parser.html#.applyItem">applyItem</a></li><li data-type='method'><a href="module-_parser.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-_parser.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-_parser.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-_parser.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-_parser.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-_parser.html#.applyValue">applyValue</a></li><li data-type='method'><a href="module-_parser.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-_parser.html#.parseField">parseField</a></li><li data-type='method'><a href="module-_parser.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-_parser.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-_parser.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-_plugin.html">_plugin</a><ul class='methods'><li data-type='method'><a href="module-_plugin.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-_plugin.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-_plugin.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-_plugin.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-_plugin.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-_plugin.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-_primary.html">_primary</a><ul class='methods'><li data-type='method'><a href="module-_primary.html#.assign">assign</a></li><li data-type='method'><a href="module-_primary.html#.clone">clone</a></li><li data-type='method'><a href="module-_primary.html#.debug">debug</a></li><li data-type='method'><a href="module-_primary.html#.denull">denull</a></li><li data-type='method'><a href="module-_primary.html#.element">element</a></li><li data-type='method'><a href="module-_primary.html#.fn">fn</a></li><li data-type='method'><a href="module-_primary.html#.getV">getV</a></li><li data-type='method'><a href="module-_primary.html#.immutable">immutable</a></li><li data-type='method'><a href="module-_primary.html#.initial">initial</a></li><li data-type='method'><a href="module-_primary.html#.input">input</a></li><li data-type='method'><a href="module-_primary.html#.merge">merge</a></li><li data-type='method'><a href="module-_primary.html#.monad">monad</a></li><li data-type='method'><a href="module-_primary.html#.output">output</a></li><li data-type='method'><a href="module-_primary.html#.packet">packet</a></li><li data-type='method'><a href="module-_primary.html#.parallel">parallel</a></li><li data-type='method'><a href="module-_primary.html#.pass">pass</a></li><li data-type='method'><a href="module-_primary.html#.passion">passion</a></li><li data-type='method'><a href="module-_primary.html#.pipe">pipe</a></li><li data-type='method'><a href="module-_primary.html#.prevent">prevent</a></li><li data-type='method'><a href="module-_primary.html#.promise">promise</a></li><li data-type='method'><a href="module-_primary.html#.ready">ready</a></li><li data-type='method'><a href="module-_primary.html#.sequence">sequence</a></li><li data-type='method'><a href="module-_primary.html#.signature">signature</a></li><li data-type='method'><a href="module-_primary.html#.slice">slice</a></li><li data-type='method'><a href="module-_primary.html#.token">token</a></li></ul></li><li><a href="module-_qr.html">_qr</a><ul class='methods'><li data-type='method'><a href="module-_qr.html#.qrClear">qrClear</a></li><li data-type='method'><a href="module-_qr.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-_qr.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-_qr.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-_qr.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-_qr.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-_qr.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-_qr.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-_romantic.html">_romantic</a><ul class='methods'><li data-type='method'><a href="module-_romantic.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-_romantic.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-_romantic.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-_romantic.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-_romantic.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-_romantic.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-_romantic.html#.sexOp">sexOp</a></li><li data-type='method'><a href="module-_romantic.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-_to.html">_to</a><ul class='methods'><li data-type='method'><a href="module-_to.html#.toArray">toArray</a></li><li data-type='method'><a href="module-_to.html#.toCss">toCss</a></li><li data-type='method'><a href="module-_to.html#.toForm">toForm</a></li><li data-type='method'><a href="module-_to.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-_to.html#.toGridSpan">toGridSpan</a></li><li data-type='method'><a href="module-_to.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-_to.html#.toHeightState">toHeightState</a></li><li data-type='method'><a href="module-_to.html#.toJson">toJson</a></li><li data-type='method'><a href="module-_to.html#.toKey">toKey</a></li><li data-type='method'><a href="module-_to.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-_to.html#.toLink">toLink</a></li><li data-type='method'><a href="module-_to.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-_to.html#.toLogout">toLogout</a></li><li data-type='method'><a href="module-_to.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-_to.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-_to.html#.toPagination">toPagination</a></li><li data-type='method'><a href="module-_to.html#.toPid">toPid</a></li><li data-type='method'><a href="module-_to.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-_to.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-_to.html#.toTime">toTime</a></li><li data-type='method'><a href="module-_to.html#.toTree">toTree</a></li><li data-type='method'><a href="module-_to.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-_to.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-_to.html#.toWidth">toWidth</a></li><li data-type='method'><a href="module-_to.html#.toX">toX</a></li></ul></li><li><a href="module-_ui.html">_ui</a><ul class='methods'><li data-type='method'><a href="module-_ui.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-_ui.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-_ui.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-_ui.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-_ui.html#.anchorTree">anchorTree</a></li><li data-type='method'><a href="module-_ui.html#.columnWrapper">columnWrapper</a></li><li data-type='method'><a href="module-_ui.html#.formAdvReset">formAdvReset</a></li><li data-type='method'><a href="module-_ui.html#.formClear">formClear</a></li><li data-type='method'><a href="module-_ui.html#.formGet">formGet</a></li><li data-type='method'><a href="module-_ui.html#.formHit">formHit</a></li><li data-type='method'><a href="module-_ui.html#.formHits">formHits</a></li><li data-type='method'><a href="module-_ui.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-_ui.html#.formRead">formRead</a></li><li data-type='method'><a href="module-_ui.html#.formRedo">formRedo</a></li><li data-type='method'><a href="module-_ui.html#.formReset">formReset</a></li><li data-type='method'><a href="module-_ui.html#.formSubmit">formSubmit</a></li><li data-type='method'><a href="module-_ui.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-_ui.html#.htmlReadOnly">htmlReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.onConfirm">onConfirm</a></li><li data-type='method'><a href="module-_ui.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-_ui.html#.onLinker">onLinker</a></li><li data-type='method'><a href="module-_ui.html#.onReference">onReference</a></li><li data-type='method'><a href="module-_ui.html#.onRouter">onRouter</a></li><li data-type='method'><a href="module-_ui.html#.onSave">onSave</a></li><li data-type='method'><a href="module-_ui.html#.onUniform">onUniform</a></li><li data-type='method'><a href="module-_ui.html#.writeDisabled">writeDisabled</a></li><li data-type='method'><a href="module-_ui.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-_ui.html#.writeInitial">writeInitial</a></li><li data-type='method'><a href="module-_ui.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-_ui.html#.writeReadOnly">writeReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.writeSegment">writeSegment</a></li></ul></li><li><a href="module-_unity.html">_unity</a><ul class='methods'><li data-type='method'><a href="module-_unity.html#.ambArray">ambArray</a></li><li data-type='method'><a href="module-_unity.html#.ambEvent">ambEvent</a></li><li data-type='method'><a href="module-_unity.html#.ambFind">ambFind</a></li><li data-type='method'><a href="module-_unity.html#.ambKv">ambKv</a></li><li data-type='method'><a href="module-_unity.html#.ambObject">ambObject</a></li><li data-type='method'><a href="module-_unity.html#.ambValue">ambValue</a></li><li data-type='method'><a href="module-_unity.html#.connectId">connectId</a></li><li data-type='method'><a href="module-_unity.html#.connectItem">connectItem</a></li><li data-type='method'><a href="module-_unity.html#.connectRenders">connectRenders</a></li><li data-type='method'><a href="module-_unity.html#.connectValidator">connectValidator</a></li><li data-type='method'><a href="module-_unity.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.dslArray">dslArray</a></li><li data-type='method'><a href="module-_unity.html#.encryptAES">encryptAES</a></li><li data-type='method'><a href="module-_unity.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-_unity.html#.encryptMD5">encryptMD5</a></li><li data-type='method'><a href="module-_unity.html#.forest">forest</a></li><li data-type='method'><a href="module-_unity.html#.forestGroup">forestGroup</a></li><li data-type='method'><a href="module-_unity.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-_unity.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-_unity.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-_unity.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-_unity.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-_unity.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-_unity.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-_unity.html#.formatTpl">formatTpl</a></li><li data-type='method'><a href="module-_unity.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-_unity.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-_unity.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-_unity.html#.mathSum">mathSum</a></li><li data-type='method'><a href="module-_unity.html#.randomArray">randomArray</a></li><li data-type='method'><a href="module-_unity.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-_unity.html#.randomString">randomString</a></li><li data-type='method'><a href="module-_unity.html#.randomUUID">randomUUID</a></li><li data-type='method'><a href="module-_unity.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterObject">sorterObject</a></li><li data-type='method'><a href="module-_unity.html#.tree">tree</a></li><li data-type='method'><a href="module-_unity.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-_unity.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-_value.html">_value</a><ul class='methods'><li data-type='method'><a href="module-_value.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-_value.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-_value.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-_value.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-_value.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-_value.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-_value.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-_value.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-_value.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-_value.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-_value.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-_value.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-_value.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-_value.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-_value.html#.valueOnChange">valueOnChange</a></li><li data-type='method'><a href="module-_value.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-_value.html#.valueParse">valueParse</a></li><li data-type='method'><a href="module-_value.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-_value.html#.valuePinyin">valuePinyin</a></li><li data-type='method'><a href="module-_value.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-_value.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-_value.html#.valueTime">valueTime</a></li><li data-type='method'><a href="module-_value.html#.valueTimes">valueTimes</a></li><li data-type='method'><a href="module-_value.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-_xweb.html">_xweb</a><ul class='methods'><li data-type='method'><a href="module-_xweb.html#.xtChecked">xtChecked</a></li><li data-type='method'><a href="module-_xweb.html#.xtExprFlat">xtExprFlat</a></li><li data-type='method'><a href="module-_xweb.html#.xtFormat">xtFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArrayMap">xtInitArrayMap</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitFormat">xtInitFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyData">xtLazyData</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-_xweb.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-_xweb.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-_xweb.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-_xweb.html#.xtRevert">xtRevert</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowAdd">xtRowAdd</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowChange">xtRowChange</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowDel">xtRowDel</a></li><li data-type='method'><a href="module-_xweb.html#.xtSet">xtSet</a></li><li data-type='method'><a href="module-_xweb.html#.xtUnsafe">xtUnsafe</a></li></ul></li><li><a href="module-web-ai.html">web-ai</a><ul class='methods'><li data-type='method'><a href="module-web-ai.html#.aiBreadcrumb">aiBreadcrumb</a></li><li data-type='method'><a href="module-web-ai.html#.aiLink">aiLink</a></li><li data-type='method'><a href="module-web-ai.html#.aiUrl">aiUrl</a></li></ul></li><li><a href="module-web-component.html">web-component</a><ul class='methods'><li data-type='method'><a href="module-web-component.html#.*Dialog">* Dialog</a></li><li data-type='method'><a href="module-web-component.html#.*DialogButton">* DialogButton</a></li><li data-type='method'><a href="module-web-component.html#.*DialogMenu">* DialogMenu</a></li><li data-type='method'><a href="module-web-component.html#.*PageCard">* PageCard</a></li><li data-type='method'><a href="module-web-component.html#.*Rectangle">* Rectangle</a></li><li data-type='method'><a href="module-web-component.html#.ColumnUser">ColumnUser</a></li><li data-type='method'><a href="module-web-component.html#.G6Editor">G6Editor</a></li><li data-type='method'><a href="module-web-component.html#.G6Viewer">G6Viewer</a></li><li data-type='method'><a href="module-web-component.html#.Graphic2">Graphic2</a></li><li data-type='method'><a href="module-web-component.html#.LoadingAlert">LoadingAlert</a></li><li data-type='method'><a href="module-web-component.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-web-component.html#.Navigation">Navigation</a></li><li data-type='method'><a href="module-web-component.html#.NavSwallow">NavSwallow</a></li></ul></li><li><a href="module-web-input.html">web-input</a><ul class='methods'><li data-type='method'><a href="module-web-input.html#.AddressSelector">AddressSelector</a></li><li data-type='method'><a href="module-web-input.html#.BraftEditor">BraftEditor</a></li><li data-type='method'><a href="module-web-input.html#.CheckJson">CheckJson</a></li><li data-type='method'><a href="module-web-input.html#.CheckTransfer">CheckTransfer</a></li><li data-type='method'><a href="module-web-input.html#.DialogEditor">DialogEditor</a></li><li data-type='method'><a href="module-web-input.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-web-input.html#.InputArray">InputArray</a></li><li data-type='method'><a href="module-web-input.html#.JsonEditor">JsonEditor</a></li><li data-type='method'><a href="module-web-input.html#.ListSelector">ListSelector</a></li><li data-type='method'><a href="module-web-input.html#.MagicView">MagicView</a></li><li data-type='method'><a href="module-web-input.html#.MatrixSelector">MatrixSelector</a></li><li data-type='method'><a href="module-web-input.html#.SearchInput">SearchInput</a></li><li data-type='method'><a href="module-web-input.html#.SearchRangeDate">SearchRangeDate</a></li><li data-type='method'><a href="module-web-input.html#.TableEditor">TableEditor</a></li><li data-type='method'><a href="module-web-input.html#.TreeSelector">TreeSelector</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">_xweb</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h1>自定义Web组件模块</h1>
+<p>该部分的所有API为自定义Web组件模块专用，自定义组件位于<code>economy</code>目录中。</p>
+<h2>1. 函数列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">xtChecked</td>
+<td style="text-align:left">可选择组件的多选专用计算。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtExprFlat</td>
+<td style="text-align:left">（内部）构造表达式数据，传入Object，针对Object中所有配置执行解析，得到最终的定义型Array。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtFormat</td>
+<td style="text-align:left">多格式计算，<strong>二维编辑器</strong>（如TableEditor）专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtGet</td>
+<td style="text-align:left">根据配置信息读取自定义组件中的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtInitArray</td>
+<td style="text-align:left">多义处理Array类型，任何输入转换成数组。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtInitArrayMap</td>
+<td style="text-align:left">多义处理Array类型，生成Map类型（分组，每组一条）。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtInitFormat</td>
+<td style="text-align:left">广义初始化（根据format判断，多格式处理）。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtInitObject</td>
+<td style="text-align:left">多义处理Object类型，任何输入转换成对象。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtLazyAjax</td>
+<td style="text-align:left">带ajax配置（config.ajax）的延迟加载Ajax配置型组件，支持Qr模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtLazyData</td>
+<td style="text-align:left">带ajax配置的组件的Promise回调的执行函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtLazyUp</td>
+<td style="text-align:left">「生命周期」带ajax配置型的组件componentDidUpdate方法专用更新方法，若包含form则拥有form级的判断。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtLazyInit</td>
+<td style="text-align:left">「生命周期」带ajax配置型的组件componentDidMount方法专用初始化方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtReady</td>
+<td style="text-align:left">（带Loading）判断<code>$ready</code>专用的render准备方法，Ex中使用<code>yoRender</code>，而自定义组件中使用<code>xtReady</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtRender</td>
+<td style="text-align:left">（不带Loading），和xtReady对应，带error渲染。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtReset</td>
+<td style="text-align:left">Ant Design中的Form的RESET方法专用操作，可重置上层表单，主要应用于allowClear属性。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtRevert</td>
+<td style="text-align:left">注意区分xtReset，xtRevert是恢复默认过程中使用，xtReset是提交完成后执行。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtRowAdd</td>
+<td style="text-align:left">「事件函数」表格行添加事件函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtRowChange</td>
+<td style="text-align:left">「事件函数」注入行onChange方法专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtRowDel</td>
+<td style="text-align:left">「事件函数」表格行删除事件函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtSet</td>
+<td style="text-align:left">xtGet的逆方法，用于设置值。</td>
+</tr>
+<tr>
+<td style="text-align:left">xtUnsafe</td>
+<td style="text-align:left">「生命周期」UNSAFE_componentWillReceiveProps专用自定义钩子方法。</td>
+</tr>
+</tbody>
+</table>
+<h2>2. 格式配置表</h2>
+<h3>2.1. optionJsx中的配置数据：</h3>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;optionJsx&quot;:{
+        &quot;format&quot;: {
+            &quot;type&quot;: &quot;可支持的类型&quot;,
+            &quot;keyField&quot;: &quot;主键字段&quot;
+        }
+    }
+}
+</code></pre>
+<h3>2.2. format中的type</h3>
+<table>
+<thead>
+<tr>
+<th>type值</th>
+<th style="text-align:left">说明</th>
+<th>抛异常</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OBJECT</td>
+<td style="text-align:left">只支持Object类型。</td>
+<td>Array和undefined抛异常</td>
+</tr>
+<tr>
+<td>ARRAY</td>
+<td style="text-align:left">Array和undefined类型。</td>
+<td>其他类型</td>
+</tr>
+<tr>
+<td>ARRAY_MAP</td>
+<td style="text-align:left">使用单字段分组执行（元素为Object）。</td>
+<td>x</td>
+</tr>
+<tr>
+<td>ARRAY_PURE</td>
+<td style="text-align:left">使用索引执行内置数据。</td>
+<td>x</td>
+</tr>
+<tr>
+<td>ARRAY_GROUP</td>
+<td style="text-align:left">使用单字段分组执行（元素为Array）。</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h2>3. 自定义模块</h2>
+<p><code>_xweb</code>模块的所有API只在自定义组件中使用，使用过程可调用底层的Ux函数，有了这些函数的帮助，可顺利完成很多复杂自定义组件
+所需的任务。</p>
+<ul>
+<li>多格式支持</li>
+<li>二维表编辑</li>
+<li>事件生成函数</li>
+<li>Form表单绑定执行</li>
+<li>初始化/更新生命周期执行</li>
+<li>带Ajax的远程延迟加载</li>
+</ul></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtChecked"><span class="type-signature">(static) </span>xtChecked<span class="signature">($keySet, reference)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtChecked</code></h2>
+<p>该函数主要用于<code>&lt;Select/&gt;</code>多选和<code>&lt;Tree/&gt;</code>的onSelect中，通过配置实现多种模式的选择。</p>
+<ul>
+<li>替换模式：直接使用键值集合替换原始选择。</li>
+<li>合并模式：执行Save操作选择追加和替换两种。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>$keySet</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Set</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>已经选择的主键集合</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终选择键值集合</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtExprFlat"><span class="type-signature">(static) </span>xtExprFlat<span class="signature">(value)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtExprFlat</code></h2>
+<p>Object转换成Array专用，如传入：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;field&quot;: &quot;expr1&quot;,
+    &quot;field&quot;: &quot;expr2&quot;
+}
+</code></pre>
+<p>构造带expression表达式的配置数据信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>传入Object数据</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>执行完成后的数组</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtFormat"><span class="type-signature">(static) </span>xtFormat<span class="signature">(internal, format)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtFormat</code></h2>
+<p>TableEditor等专用格式方法，可支持多种不同格式。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>internal</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>二维数据</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>format</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>格式配置数据</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回初始化后的数据</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtGet"><span class="type-signature">(static) </span>xtGet<span class="signature">(reference, field)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtGet</code></h2>
+<p>广义读取当前组件消费的数据信息，外层表单中会用props.value传入设置的值。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>读取字段的数据（只适用于OBJECT类型）。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终状态信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtInitArray"><span class="type-signature">(static) </span>xtInitArray<span class="signature">(props, empty)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtInitArray</code></h2>
+<ul>
+<li>如果属性 props 中存在 <code>value</code> 变量
+<ul>
+<li>value本身是一个 Array，直接使用该 Array 初始化（步骤2）。</li>
+<li>value本身是一个 Object，则使用 <code>value.data</code> 执行初始化（步骤2）。</li>
+</ul>
+</li>
+<li>如果属性 props 中不存在 <code>value</code> 变量。
+<ul>
+<li>如果允许空数组，则使用<code>{data:[]}</code>。</li>
+<li>如果不允许空数组，则使用<code>{data:[{key:&quot;uuid&quot;}]}</code>。</li>
+</ul>
+</li>
+</ul>
+<p>返回结构：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;empty模式&quot;: {
+        data: []
+    },
+    &quot;非empty模式&quot;: {
+        data: [
+            {
+                key: &quot;ef78bf10-4db7-49d1-910d-96bc7eaad3c3&quot;
+            }
+        ]
+    }
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React属性信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>empty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否使用空数组作为初始值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtInitArrayMap"><span class="type-signature">(static) </span>xtInitArrayMap<span class="signature">(props, empty)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtInitArrayMap</code></h2>
+<p>（略），直接将Array类型转换成Map类型（Object），字段值为Object的键值。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React属性信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>empty</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否使用空数组作为初始值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtInitFormat"><span class="type-signature">(static) </span>xtInitFormat<span class="signature">(props)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtInitFormat</code></h2>
+<p>双格式处理</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;Array直接格式&quot;:[],
+    &quot;Json格式&quot;:{}
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React属性信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtInitObject"><span class="type-signature">(static) </span>xtInitObject<span class="signature">(props)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtInitObject</code></h2>
+<ul>
+<li>如果属性 props 中存在 <code>value</code> 变量，则返回该值。</li>
+<li>如果属性 props 中不存在 <code>value</code> 变量，则返回 <code>{}</code>。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React属性信息。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回初始值。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtLazyAjax"><span class="type-signature">(static) </span>xtLazyAjax<span class="signature">(reference, config)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtLazyAjax</code></h2>
+<p>根据 config 中的 ajax 配置，来执行参数解析，主要用于可执行 Ajax的延迟请求控件，如：</p>
+<ul>
+<li>ListSelector</li>
+<li>AddressSelector</li>
+<li>TreeSelector</li>
+</ul>
+<p>上述控件都是复杂的自定义控件，必须解析 ajax 配置执行延迟远程调用。</p>
+<h3>1. 配置解析流程</h3>
+<p>config的ajax包含了远程处理的配置信息，分成两种读取数据的模式：</p>
+<ol>
+<li>Qr模式：启用查询引擎：<code>ajax.params.criteria</code></li>
+<li>非Qr模式：直接查询数据：<code>ajax.magic</code></li>
+</ol>
+<h3>2. 执行输入解析</h3>
+<p>调用<code>Ux.parseInput</code>方法解析每个参数的参数来源信息，最终生成不同来源下的数据构造请求参数。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ajax配置专用配置信息。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回参数信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtLazyData"><span class="type-signature">(static) </span>xtLazyData<span class="signature">(reference, request, fnCallback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtLazyData</code></h2>
+<p>该方法用于在按钮中执行重新加载和刷新时专用，可手动编程的方式触发Ajax操作。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>请求数据</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fnCallback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Ajax调用的回调函数</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtLazyInit"><span class="type-signature">(static) </span>xtLazyInit<span class="signature">(reference)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtLazyInit</code></h2>
+<p>延迟初始化，统一处理，在 <code>componentDidMount</code> 中调用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtLazyUp"><span class="type-signature">(static) </span>xtLazyUp<span class="signature">(reference, virtualRef)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtLazyUp</code></h2>
+<p>延迟初始化，统一处理，在 <code>componentDidUpdate</code> 中调用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>virtualRef</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>包含了<code>props</code>和<code>state</code>的前一个状态的引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtReady"><span class="type-signature">(static) </span>xtReady<span class="signature">(reference, render, LOG)</span><span class="type-signature"> &rarr; {JSX.Element}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtReady</code></h2>
+<p>由于 Zero 框架无法调用 Extension 中的<code>yoRender</code>，所以可直接使用<code>xtReady</code> 实现和 <code>yoRender</code>中
+同样的逻辑</p>
+<ol>
+<li>检查配置是否准备完成，如果准备完成：<code>$ready = true</code>，否则为false。</li>
+<li>准备没有完成时，则不渲染。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>render</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>执行 render 的函数。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>LOG</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>日志配置。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>直接渲染。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">JSX.Element</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtRender"><span class="type-signature">(static) </span>xtRender<span class="signature">(reference, render)</span><span class="type-signature"> &rarr; {Jsx|boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtRender</code></h2>
+<p>检查系统状态内部是否存在<code>error</code>节点，如果存在<code>error</code>节点，则直接渲染错误信息，配置出错的统一调用流程。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>render</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>执行 render 的函数。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>直接渲染。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Jsx</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtReset"><span class="type-signature">(static) </span>xtReset<span class="signature">(reference, virtualRef, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtReset</code></h2>
+<p>重置专用函数，内部关联 Ant Design 的 Form信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>virtualRef</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>带有state和props的前一次状态信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>回调函数处理。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtRevert"><span class="type-signature">(static) </span>xtRevert<span class="signature">(reference, virtualRef, callback)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtRevert</code></h2>
+<p>自定义组件的新重置处理，用于设置表单的重置相关信息</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>virtualRef</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>带有state和props的前一次状态信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>callback</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>回调函数处理。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtRowAdd"><span class="type-signature">(static) </span>xtRowAdd<span class="signature">(reference, record, index)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>「标准」<code>Ux.xtRowAdd</code></p>
+<p>表格中的添加行函数（二维表结构）</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>record</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>记录专用数据</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>记录索引</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>行添加事件函数</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtRowChange"><span class="type-signature">(static) </span>xtRowChange<span class="signature">(reference, rowKey, field)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtRowChange</code></h2>
+<p>构造当前行的<code>onChange</code>专用函数，该API应用于column的render注入事件流程，可实现行数据变动操作，支持多字段数据。</p>
+<ol>
+<li>先使用二义性<code>ambEvent</code>读取数据信息。</li>
+<li>再触发上层的<code>onChange</code>方法，自定义组件中的上层方法会直接被Ant Design注入。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件应用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rowKey</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>行记录主键</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>被操作的字段</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回事件函数</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtRowDel"><span class="type-signature">(static) </span>xtRowDel<span class="signature">(reference, record, index)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>「标准」<code>Ux.xtRowDel</code></p>
+<p>表格中的删除行函数（二维表结构）</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>record</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>记录专用数据</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>index</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>记录索引</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>行删除事件函数</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtSet"><span class="type-signature">(static) </span>xtSet<span class="signature">(reference, name, value)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtSet</code></h2>
+<p>（略）</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>读取字段的数据（只适用于OBJECT类型）。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>设置的任何值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终状态信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".xtUnsafe"><span class="type-signature">(static) </span>xtUnsafe<span class="signature">(reference, nextProps)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.xtUnsafe</code></h2>
+<p>新版中的<code>UNSAFE_componentWillReceiveProps(nextProps,context)</code>的内部调用，虽然不提倡使用，
+但在自定义组件中，该函数依然会控制内部状态变更，所以依旧采用该方法。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>nextProps</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>下一个属性。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 15:08:53 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

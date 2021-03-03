@@ -10,11 +10,11 @@ echo -e "    \033[33mdoc\033[0m = \"\033[34mGenerate document of Zero Ui & Zero 
 echo -e "    \033[33mzero\033[0m = \"\033[34mRun Zero Ui on server ${PORT}\033[0m\""
 echo -e "    \033[33mextension\033[0m = \"\033[34mRun Zero Extension on server ${PORT_EXTENSION}\033[0m\""
 if [ "doc" == "$1" ]; then
-  ./shell/run-doc-generate.sh
+  ./scripts/zrun-doc-generate.sh
 elif [ "extension" == "$1" ]; then
-  ./shell/run-doc-server.sh ${PORT_EXTENSION} doc-web-extension
+  ./scripts/zrun-doc-server.sh ${PORT_EXTENSION} doc-web-extension
 elif [ "zero" == "$1" ]; then
-  ./shell/run-doc-server.sh ${PORT} doc-web
+  ./scripts/zrun-doc-server.sh ${PORT} doc-web
 else
   echo "Invalid input command of $1"
 fi

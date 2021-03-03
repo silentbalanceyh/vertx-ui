@@ -3,13 +3,89 @@ import Expr from '../expression';
 // 导入外层
 import Abs from '../../abyss';
 import Grid from '../layout';
-import Log from '../../develop/logger';
+import Develop from '../../develop';
+import Ut from "../../unity";
+import VALIDATORS from "../validator";
+import E from "../../error";
+import Normalizer from "./O.raft.normalizer";
+
+const {Logger: Log} = Develop;
 /*
  * 表单内部
  */
-import aiErrorFocus from './I.fn.html';
-import aiValidator from './I.fn.validator';
-import aiNormalizer from './I.fn.normalizer';
+const aiErrorFocus = (reference, item) => {
+    if (item.field) {
+        if (item.optionConfig && item.optionConfig.hasOwnProperty("rules")) {
+            if (!item.optionJsx) item.optionJsx = {};
+            // onFocus
+            item.optionJsx.onFocus = Ut.htmlErrorFocus(item);
+            // onBlur
+            item.optionJsx.onBlur = Ut.htmlErrorBlur(item);
+        }
+    }
+}
+const aiValidator = (reference = {}, item = {}) => {
+    if (item.optionConfig) {
+        const rules = item.optionConfig.rules;
+        // 触发条件设置，默认onBlur，符合大多数习惯
+        if (!item.optionConfig.hasOwnProperty("validateTrigger")) {
+            item.optionConfig.validateTrigger = "onBlur";
+        }
+        if (rules && Array.prototype.isPrototypeOf(rules)) {
+            rules.forEach(rule => {
+                if (rule.validator && !Abs.isFunction(rule.validator)) {
+
+                    // 合并处理（可覆盖）
+                    const inputValidator = Abs.pass(reference, '$validator');
+                    const validators = Abs.clone(VALIDATORS);
+                    Object.assign(validators, inputValidator);
+
+                    // 处理条件
+                    const executeFun = validators[rule.validator];
+                    // 10023
+                    E.fxTerminal(!Abs.isFunction(executeFun), 10023, rule.validator, Object.keys(validators));
+                    if (Abs.isFunction(executeFun)) {
+                        // supplier 处理
+                        const validatorFun = executeFun(reference);
+                        // 10024
+                        E.fxTerminal(!Abs.isFunction(validatorFun), 10024, Abs.isFunction(validatorFun));
+                        if (Abs.isFunction(validatorFun)) {
+                            rule.validator = validatorFun;
+                        }
+                    }
+                }
+            });
+        }
+    }
+};
+const aiNormalizer = (reference, item = {}) => {
+    if (item.optionConfig && item.optionConfig.normalize) {
+        const expr = item.optionConfig.normalize;
+        if (expr) {
+            const segments = expr.toString().split(",");
+            if (1 <= segments.length) {
+                // 读取类型
+                const type = segments[0];
+                const executor = Normalizer[type];
+                if (executor) {
+                    // 参数准备
+                    const args = [];
+                    for (let idx = 1; idx < segments.length; idx++) {
+                        args.push(segments[idx]);
+                    }
+                    // 函数调用
+                    const jFun = executor.apply(null, args);
+                    if (jFun) {
+                        item.optionConfig.normalize = jFun;
+                    }
+                } else {
+                    console.error("[ Ux ] normalize 属性解析失败：", expr, item);
+                }
+            }
+        }
+    }
+}
+
 
 const raftUi = (reference = {}, ui = []) => {
     // 解析 Title
@@ -76,6 +152,7 @@ const raftLayout = (raft = {}, params = {}) => {
     calculated.entity = addOn.entity;
     return calculated;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftRule: (reference, item = {}) => {
         const ruleItem = Abs.clone(item);

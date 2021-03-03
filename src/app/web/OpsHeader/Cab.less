@@ -1,0 +1,88 @@
+@import '../../../global';
+
+.login {
+
+    &-header {
+        height: 46px !important;
+        line-height: 46px !important;
+        background-color: rgba(0, 0, 0, 0.6);
+        padding-right: 0 !important;
+        padding-left: 0 !important;
+
+        .op-logo {
+            padding-top: 8px;
+            padding-left: 8px;
+
+            img {
+                width: 28px;
+                height: 28px;
+                float: left;
+                margin-right: 8px;
+            }
+
+            .text {
+                padding-top: 2px;
+                display: inline-block;
+                float: left;
+                color: @color-logo-text;
+                font-style: italic;
+                font-size: 20px;
+                font-weight: bolder;
+                line-height: 24px;
+            }
+        }
+
+        .op-bar {
+            text-align: right;
+
+            .op-link {
+                color: white;
+                font-size: 14px;
+                margin-right: 8px;
+
+                i {
+                    color: white;
+                    margin-right: 6px;
+                }
+            }
+        }
+    }
+
+    &-home {
+        background-color: @color-login-bar;
+
+        .op-menu {
+
+            .ant-menu {
+                background-color: @color-login-bar;
+            }
+
+            .ant-menu-item {
+                color: white;
+
+                span {
+                    float: left;
+                    height: 40px;
+                    padding-bottom: 3px;
+                    margin-bottom: 6px !important;
+                }
+            }
+
+            .ant-menu-item-selected {
+                background-color: @color-login-bar;
+
+                span {
+                    line-height: 40px;
+                    height: 40px;
+                    border-bottom: solid 4px transparent;
+                    border-image: linear-gradient(to left, #1582ff, #23Daff) 1 10;
+                }
+            }
+
+            .ant-menu-item:hover {
+                background-color: rgba(62, 183, 255, 0.7);
+            }
+
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+    "_card": {
+        "text": "基础信息",
+        "extra": [
+            "lnkSync,同步物理表,ops-link-extra,该操作将同步当前物理表的所有信息，您确认？,left",
+            "lnkEdit,编辑物理表,ops-link-extra",
+            "lnkDel,删除物理表,ops-link-extra,该操作将删除当前物理表的所有信息，您确认？,left"
+        ]
+    },
+    "_window": "编辑物理表,保存,关闭,false,720,true,$opSaveSource",
+    "_form": {
+        "window": 0.17,
+        "columns": 1,
+        "ui": [
+            [
+                "tableName,表名称,,,aiMagic"
+            ],
+            [
+                "tableCode,表编码,,,aiMagic"
+            ],
+            [
+                "dataSource,数据源名称,,,aiMagic"
+            ],
+            [
+                "dataSourceCode,数据库,,,aiMagic"
+            ]
+        ]
+    }
+}

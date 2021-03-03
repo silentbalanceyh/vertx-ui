@@ -64,6 +64,7 @@ const raftSpecial = (cell = {}) => {
     Adjust.adjustTitle(cell);
     cell.key = cell.field;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftColumn,
     raftSpecial,

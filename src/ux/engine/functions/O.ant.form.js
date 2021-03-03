@@ -2,7 +2,7 @@ import Dt from '../datum';
 import U from "underscore";
 
 /**
- * ## 引擎函数
+ * ## 「引擎」`Ux.formAdvReset`
  *
  * `formReset`的强化版本，内部可调用`doReset`方法，核心功能如下：
  *
@@ -13,7 +13,7 @@ import U from "underscore";
  *      * 带字段重置（传入字段信息实现带字段的重置）
  * 4. 如果系统内部带有`doReset`方法，则执行该函数
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {ReactComponent} reference React对应组件引用。
  * @param {Object} response 响应最终信息数据。
  * @param {String[]} keys 被重设的表单字段。

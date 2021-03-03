@@ -98,6 +98,7 @@ const applyRender = (renders = {}, code) => {
         return renders;
     }
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // 读取表单默认值
     applyInited,

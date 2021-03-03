@@ -1,0 +1,36 @@
+@import (reference) '../../global';
+
+.ex-block {
+  margin-bottom: 4px !important;
+
+  dd {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 0 !important;
+  }
+
+  dt {
+    padding-left: 8px !important;
+    display: inline-block;
+    width: 100% !important;
+    text-align: center;
+  }
+}
+
+.web-error {
+  position: absolute;
+  background-color: @color-error;
+  color: white;
+  border-radius: 3px;
+  border: 1px solid @color-error;
+  padding: 3px 6px;
+  z-index: 100;
+  /** From Animate.css **/
+  animation-duration: 1s;
+  animation-fill-mode: both;
+  animation-name: bounceIn;
+  min-width: 320px;
+  line-height: 27px;
+  top: -32px;
+  left: 15%;
+}

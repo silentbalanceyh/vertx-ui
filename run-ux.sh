@@ -6,19 +6,19 @@ rm -rf ${TARGET_FOLDER}/src/economy/*
 rm -rf ${TARGET_FOLDER}/src/entity/*
 rm -rf ${TARGET_FOLDER}/src/ux/*
 rm -rf ${TARGET_FOLDER}/src/extension/*
-rm -rf ${TARGET_FOLDER}/src/editor/*
+# rm -rf ${TARGET_FOLDER}/src/editor/*
 echo "[ Proc ] 目标代码删除完成！"
 # 拷贝
 mkdir -p ${TARGET_FOLDER}/src/economy/
 mkdir -p ${TARGET_FOLDER}/src/entity/
 mkdir -p ${TARGET_FOLDER}/src/ux/
 mkdir -p ${TARGET_FOLDER}/src/extension/
-mkdir -p ${TARGET_FOLDER}/src/editor/
+# mkdir -p ${TARGET_FOLDER}/src/editor/
 cp -rf src/economy/* ${TARGET_FOLDER}/src/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/src/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/src/ux/
 cp -rf src/extension/* ${TARGET_FOLDER}/src/extension/
-cp -rf src/editor/* ${TARGET_FOLDER}/src/editor/
+# cp -rf src/editor/* ${TARGET_FOLDER}/src/editor/
 echo "[ Proc ] 代码拷贝完成！"
 
 # 固定文件

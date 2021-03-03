@@ -1,0 +1,57 @@
+{
+    "_title": {
+        "permSet": "权限集列表",
+        "permission": "权限列表",
+        "permEmpty": "您还没有选择任何想要查看的权限集，请选择权限集，才可查看系统中对应的权限。"
+    },
+    "_icon": {
+        "add": {
+            "type": "plus",
+            "style": {
+                "color": "#458B00",
+                "fontSize": 38
+            }
+        },
+        "edit": {
+            "type": "edit",
+            "style": {
+                "color": "#1C86EE",
+                "fontSize": 38
+            }
+        },
+        "read": {
+            "type": "search",
+            "style": {
+                "color": "#1874CD",
+                "fontSize": 38
+            }
+        },
+        "delete": {
+            "type": "delete",
+            "style": {
+                "color": "#CD0000",
+                "fontSize": 38
+            }
+        },
+        "imp.exp": {
+            "type": "import",
+            "style": {
+                "color": "#551A8B",
+                "fontSize": 38
+            }
+        },
+        "column": {
+            "type": "eye",
+            "style": {
+                "color": "#CD1076",
+                "fontSize": 38
+            }
+        },
+        "common": {
+            "type": "safety",
+            "style": {
+                "fontSize": 38
+            }
+        }
+    }
+}

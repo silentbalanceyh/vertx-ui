@@ -18,11 +18,10 @@ class Component extends React.PureComponent {
         return Ex.ylCard(this, () => {
             const inherit = Ex.yoAmbient(this);
             const tabs = Ux.fromHoc(this, "tabs");
-            const master = Ux.fromHoc(this, "graphic");
             return (
                 <ExTab config={tabs}>
                     <List {...inherit}/>
-                    <Master {...inherit} config={master}/>
+                    <Master {...inherit} />
                 </ExTab>
             );
         }, Ex.parserOfColor("PxTopology").page())

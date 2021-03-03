@@ -16,11 +16,6 @@ import yoAmbient from './yo.ambient';
  *
  * 扩展区域
  *
- * 1. op.extension.open
- * 2. op.extension.batch
- * 3. op.extension.search
- * 4. op.extension.extra
- *
  * @memberOf module:_channel
  * @method yoAction
  * @param {ReactComponent} reference React对应组件引用

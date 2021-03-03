@@ -1,13 +1,14 @@
 import Ele from '../element';
 import Abs from '../abyss';
+import T from './O.plugin.element';
 
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeParentAllIn`
  *
  * 选择当前节点（多个）和这个节点所有父节点。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -17,13 +18,15 @@ const treeParentAllIn = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => Ele.elementBranch(data, key, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
+
+
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeParentAll`
  *
  * 选择当前节点的所有父节点（不包含当前）。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -34,13 +37,15 @@ const treeParentAll = (keys = [], data = [], parentField = "parent") =>
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
         .filter(item => !Abs.immutable(keys).contains(item));
+
+
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeParent`
  *
  * 选择当前节点的直接父节点。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -50,13 +55,15 @@ const treeParent = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item[parentField]);
+
+
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeChildren`
  *
  * 选择当前节点的直接子节点。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -68,13 +75,15 @@ const treeChildren = (keys = [], data = [], parentField = "parent") =>
         .map(item => data.filter(each => each[parentField] === item.key))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
+
+
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeChildrenAll`
  *
  * 选择当前节点的所有子节点（不包含当前）。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -83,16 +92,18 @@ const treeChildren = (keys = [], data = [], parentField = "parent") =>
 const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChildren(data, item, parentField))
+        .map(item => T.elementChildren(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key);
+
+
 /**
  *
- * ## 标准函数
+ * ## 「标准」`Ux.treeChildrenAllIn`
  *
  * 选择当前节点（多个）和这个节点所有子节点。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} keys 被选择的节点的id集合
  * @param {Array} data 将选择的数据源。
  * @param {String} parentField 父字段专用字段名。
@@ -101,16 +112,18 @@ const treeChildrenAll = (keys = [], data = [], parentField = "parent") =>
 const treeChildrenAllIn = (keys = [], data = [], parentField = "parent") =>
     keys.concat(keys.map(key => data.filter(each => key === each.key))
         .reduce((previous, current) => previous.concat(current), [])
-        .map(item => Ele.elementChildren(data, item, parentField))
+        .map(item => T.elementChildren(data, item, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
     );
+
+
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.treeFlip`
  *
  * 拉平属性配置专用函数，构造树级别的显示信息。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} data 将选择的数据源。
  * @param {Object} config 树配置。
  * @return {Object}　返回对象信息。
@@ -137,12 +150,14 @@ const treeFlip = (data = [], config = {}) => {
     }
     return $path;
 };
+
+
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.treeShared`
  *
  * 求选中节点的最大公约子树相关信息。
  *
- * @memberOf module:_tree
+ * @memberOf module:_unity
  * @param {Array} selected 被选中的节点值。
  * @param {Array} treeArray 树状数据源的最原始信息。
  * @param {Object} config 树相关配置，主要包含树字段 parent 和目标字段 target。

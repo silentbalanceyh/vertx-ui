@@ -1,6 +1,6 @@
 import React from 'react';
 import {component} from "../../../_internal";
-import LoadingContent from '../../../loading/LoadingContent/UI';
+import LoadingContent from '../../../web/LoadingContent/UI';
 import Ux from 'ux';
 import {Form} from "antd";
 import Rdr from './Web.Field';

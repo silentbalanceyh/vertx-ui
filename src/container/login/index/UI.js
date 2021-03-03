@@ -2,27 +2,16 @@ import React from 'react'
 import './Cab.less';
 import Bg from './image/bg.jpg';
 import {Col, Layout, Row} from 'antd'
-import Ux from "ux";
-import Ex from "ex";
+import Ux from 'ux';
+import {OpsHeader} from 'app';
 
-const {Header, Content} = Layout;
+const {Content} = Layout;
 
-@Ux.zero(Ux.rxEtat(require('./Cab.json'))
+@Ux.zero(Ux.rxEtat(require("./Cab.json"))
     .cab("UI")
-    .loading("app")
-    .connect(state => Ux.dataIn(state)
-        .revamp(["app"])
-        .to()
-    )
-    .connect({
-        fnApp: Ex.epicApp
-    }, true)
     .to()
 )
 class Component extends React.PureComponent {
-    componentDidMount() {
-        this.props.fnApp(error => this.setState({error}));
-    }
 
     render() {
         const {component: Component} = this.props;
@@ -30,14 +19,14 @@ class Component extends React.PureComponent {
             <Layout className={"login"} style={{
                 backgroundImage: `url(${Bg})`
             }}>
-                <Header className={"login-header"}/>
+                <OpsHeader {...this.props} />
                 <Content className={"login-content"}>
                     <Row>
-                        <Col xxl={8} xl={7} span={8}/>
-                        <Col xxl={8} xl={10} span={8}>
+                        <Col xxl={2} span={3}/>
+                        <Col xxl={10} span={10} className={"range"}>
                             <Component {...this.props}/>
                         </Col>
-                        <Col xxl={8} xl={7} span={8}/>
+                        <Col xxl={12} span={11}/>
                     </Row>
                 </Content>
             </Layout>

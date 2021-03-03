@@ -2,13 +2,12 @@ import {Tabs} from "antd";
 import U from "underscore";
 import React from "react";
 import Page from './page';
-
-import Yo from './yo';
+import Ex from 'ex';
 import ExAction from '../ExAction/UI';
 
 export default (reference, config = {}) => {
     const {items = [], ...rest} = config;
-    const extraAttrs = Yo.yoExtraContent(reference, rest);
+    const extraAttrs = Ex.yoTabExtra(reference, rest);
     return (
         <Tabs {...rest} tabBarExtraContent={
             (<ExAction {...extraAttrs}/>)
@@ -18,7 +17,7 @@ export default (reference, config = {}) => {
                 /*
                  * 禁用第一项处理
                  */
-                const $item = Yo.yoTab(reference, {
+                const $item = Ex.yoTab(reference, {
                     items, index, item,
                 });
                 const fnRender = Page[type];

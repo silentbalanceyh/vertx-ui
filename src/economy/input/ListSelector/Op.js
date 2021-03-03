@@ -44,10 +44,11 @@ export default {
     yoCombine: Ix.dialogCombine,
     yoSelected: (reference, table = {}) => {
         const {$keySet} = reference.state;
-        if ($keySet) {
-            const selectedRowKeys = [$keySet.key];
-            if (table.rowSelection) {
-                table.rowSelection.selectedRowKeys = selectedRowKeys;
+        if (table.rowSelection) {
+            if ($keySet) {
+                table.rowSelection.selectedRowKeys = [$keySet.key];
+            } else {
+                table.rowSelection.selectedRowKeys = [];
             }
         }
         return table;

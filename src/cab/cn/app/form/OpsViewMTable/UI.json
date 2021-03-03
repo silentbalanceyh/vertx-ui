@@ -1,0 +1,22 @@
+{
+    "_card": {
+        "text": "选择类型："
+    },
+    "_title": {
+        "MODEL": "模型",
+        "ATTRIBUTE": "关联属性",
+        "ACTION": "关联行为"
+    },
+    "_form": {
+        "window": 0.17,
+        "columns": 1,
+        "ui": [
+            [
+                "name,物理表名称,,,aiMagic"
+            ],
+            [
+                "code,物理表编码,,,aiMagic"
+            ]
+        ]
+    }
+}

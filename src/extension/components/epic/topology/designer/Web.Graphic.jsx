@@ -1,26 +1,20 @@
 import Ex from "ex";
 import Ux from 'ux';
 import React from "react";
-import {ExGraphicPlotter} from "ei";
+import {ExGraphicEditor} from "ei";
 import Op from './op';
 
 export default (reference) => {
     const inherit = Ex.yoAmbient(reference);
     const {
-        $data = {},
-        $auto = false, $autoLink = [],
-        $current
+        $current = {}
     } = reference.state;
-    const config = Ux.fromHoc(reference, "graphic");
-    inherit.$auto = $auto;
-    inherit.$graphic = config;
-    if ($auto) {
-        inherit.$autoLink = $autoLink;
-    }
-    if ($current) {
-        inherit.$current = $current;
-    }
+    // 基本配置
+    inherit.config = Ux.fromHoc(reference, "graphic");
+    inherit.data = $current;        // 模型基础信息
+    // 配置程序
+    const gxFun = Op.rxCommand(reference);
     return (
-        <ExGraphicPlotter {...inherit} data={$data} $action={Op.onSubmit(reference)}/>
+        <ExGraphicEditor {...inherit} {...gxFun}/>
     );
 }

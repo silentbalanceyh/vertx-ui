@@ -16,26 +16,45 @@
             }
         }
     },
-    "_selected": {
-        "prefix": "选择模板",
-        "option": [
-            {
-                "key": "ALL",
-                "name": "使用数据动态生成",
-                "value": "ALL"
-            }
-        ]
-    },
     "_alert": {
-        "message": "数据量过大",
+        "message": "无相关数据",
         "description": [
-            "对不起，当前节点检索数据量过大，目前的版本最多支持60个节点的拓扑图，请选择合适的数据模板呈现。",
-            "您可以在`我的拓扑图`中管理自己能使用的图模版。",
-            "您也可以选择管理员创建的图模板来呈现当前的数据。。"
+            "对不起，系统无法读取和当前记录相关的`关系数据`和`拓扑图`，请联系管理员。",
+            "您也可以在关系管理中手动维护相关关系，并构造新的`拓扑图`。",
+            "如果数据有误，您可以联系管理员去后台查看。"
         ],
         "type": "warning"
     },
-    "_tips": {
-        "tag": "目前的版本只支持绘制子图，没有定义关系的图不可呈现！"
+    "_graphic": {
+        "node": {
+            "options": {
+                "data.id": "globalId",
+                "data.fields": [
+                    "globalId",
+                    "identifier"
+                ],
+                "data.text": {
+                    "field": "code"
+                },
+                "data.image": {
+                    "field": "image"
+                },
+                "relation.mapping": {
+                    "label": "name"
+                }
+            }
+        },
+        "addon": {
+            "window": {
+                "WIN_TPL": "模板选择,选择,取消,false,640,true,$opTpl",
+                "WIN_CI": "配置项详情,关闭,取消,false,1150,true,$opCi"
+            }
+        }
+    },
+    "_modal": {
+        "error": {
+            "no-tpl": "所选记录没有多余相关联的模板，若要选择`模板`方式呈现，请在图管理中先创建模板信息！",
+            "same": "当前配置项已经打开，不可重复打开！"
+        }
     }
 }

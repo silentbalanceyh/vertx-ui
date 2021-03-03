@@ -7,7 +7,7 @@ import Ux from 'ux';
 import {DndProvider} from 'react-dnd';
 import {HTML5Backend} from 'react-dnd-html5-backend';
 
-import LoadingContent from '../../loading/LoadingContent/UI';
+import LoadingContent from '../../web/LoadingContent/UI';
 
 import Rdr from './component'
 import renderCanvas from './canvas';

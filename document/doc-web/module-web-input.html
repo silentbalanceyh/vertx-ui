@@ -1,0 +1,3921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>web-input - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/index.html" class="menu-item" id="website_link" >Zero Api</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web-extension/index.html" class="menu-item" id="website_link" >Zero Extension</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Epic Fabric</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >Origin X Engine</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toParsed">toParsed</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-_ajax.html">_ajax</a><ul class='methods'><li data-type='method'><a href="module-_ajax.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxFetch">ajaxFetch</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPush">ajaxPush</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxResource">ajaxResource</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-_ajax.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-_ajax.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-_ajax.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-_ajax.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-_ajax.html#.asyncTrue">asyncTrue</a></li><li data-type='method'><a href="module-_ajax.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-_ajax.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-_ajax.html#.messageSuccess">messageSuccess</a></li><li data-type='method'><a href="module-_ajax.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-_ajax.html#.microFetch">microFetch</a></li><li data-type='method'><a href="module-_ajax.html#.microGet">microGet</a></li><li data-type='method'><a href="module-_ajax.html#.microPost">microPost</a></li><li data-type='method'><a href="module-_ajax.html#.microPush">microPush</a></li><li data-type='method'><a href="module-_ajax.html#.microPut">microPut</a></li><li data-type='method'><a href="module-_ajax.html#.rxEdict">rxEdict</a></li></ul></li><li><a href="module-_constant.html">_constant</a><ul class='members'><li data-type='member'><a href="module-_constant.html#.(%25E7%258E%25AF%25E5%25A2%2583%25E5%258F%2598%25E9%2587%258F)">(环境变量)</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-_constant.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-_constant.html#.FORBIDDEN">FORBIDDEN</a></li><li data-type='member'><a href="module-_constant.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-_constant.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-_constant.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-_constant.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-_constant.html#.KEY_POINTER">KEY_POINTER</a></li><li data-type='member'><a href="module-_constant.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-_constant.html#.MENU_TYPE">MENU_TYPE</a></li><li data-type='member'><a href="module-_constant.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-_constant.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-_constant.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-_constant.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-_constant.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-_constant.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-_constant.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-_constant.html#.X_LANG">X_LANG</a></li><li data-type='member'><a href="module-_constant.html#.X_SIGMA">X_SIGMA</a></li><li data-type='member'><a href="module-_constant.html#.XT_FORMAT">XT_FORMAT</a></li></ul></li><li><a href="module-_develop.html">_develop</a><ul class='methods'><li data-type='method'><a href="module-_develop.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-_develop.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-_develop.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-_develop.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-_develop.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-_develop.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-_develop.html#.dgRouter">dgRouter</a></li><li data-type='method'><a href="module-_develop.html#.dgTodo">dgTodo</a></li><li data-type='method'><a href="module-_develop.html#.fxError">fxError</a></li><li data-type='method'><a href="module-_develop.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-_develop.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-_develop.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-_develop.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-_develop.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-_develop.html#.fxReport">fxReport</a></li><li data-type='method'><a href="module-_develop.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-_develop.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-_element.html">_element</a><ul class='methods'><li data-type='method'><a href="module-_element.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-_element.html#.elementChildren">elementChildren</a></li><li data-type='method'><a href="module-_element.html#.elementChildTree">elementChildTree</a></li><li data-type='method'><a href="module-_element.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-_element.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-_element.html#.elementFirst">elementFirst</a></li><li data-type='method'><a href="module-_element.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-_element.html#.elementGrid">elementGrid</a></li><li data-type='method'><a href="module-_element.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-_element.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-_element.html#.elementIndex">elementIndex</a></li><li data-type='method'><a href="module-_element.html#.elementJoin">elementJoin</a></li><li data-type='method'><a href="module-_element.html#.elementMap">elementMap</a></li><li data-type='method'><a href="module-_element.html#.elementParent">elementParent</a></li><li data-type='method'><a href="module-_element.html#.elementSave">elementSave</a></li><li data-type='method'><a href="module-_element.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-_element.html#.elementUniqueDatum">elementUniqueDatum</a></li><li data-type='method'><a href="module-_element.html#.elementVertical">elementVertical</a></li><li data-type='method'><a href="module-_element.html#.elementWrap">elementWrap</a></li></ul></li><li><a href="module-_engine.html">_engine</a><ul class='methods'><li data-type='method'><a href="module-_engine.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-_engine.html#.capForm">capForm</a></li><li data-type='method'><a href="module-_engine.html#.capTab">capTab</a></li><li data-type='method'><a href="module-_engine.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-_engine.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-_engine.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-_engine.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-_engine.html#.configExecutors">configExecutors</a></li><li data-type='method'><a href="module-_engine.html#.configForm">configForm</a></li><li data-type='method'><a href="module-_engine.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-_engine.html#.configTab">configTab</a></li><li data-type='method'><a href="module-_engine.html#.configTable">configTable</a></li><li data-type='method'><a href="module-_engine.html#.createAction">createAction</a></li><li data-type='method'><a href="module-_engine.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-_engine.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-_engine.html#.fnOut">fnOut</a></li><li data-type='method'><a href="module-_engine.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-_engine.html#.fromPath">fromPath</a></li><li data-type='method'><a href="module-_engine.html#.raftForm">raftForm</a></li><li data-type='method'><a href="module-_engine.html#.rjAssist">rjAssist</a></li><li data-type='method'><a href="module-_engine.html#.rjTabular">rjTabular</a></li><li data-type='method'><a href="module-_engine.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedRow">rxCheckedRow</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedTree">rxCheckedTree</a></li><li data-type='method'><a href="module-_engine.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-_engine.html#.rxEtat">rxEtat</a></li><li data-type='method'><a href="module-_engine.html#.rxFlow">rxFlow</a></li><li data-type='method'><a href="module-_engine.html#.rxInit">rxInit</a></li><li data-type='method'><a href="module-_engine.html#.rxResize">rxResize</a></li><li data-type='method'><a href="module-_engine.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-_engine.html#.storeUser">storeUser</a></li><li data-type='method'><a href="module-_engine.html#.writeAssist">writeAssist</a></li><li data-type='method'><a href="module-_engine.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-_engine.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-_engine.html#.writeTree">writeTree</a></li></ul></li><li><a href="module-_is.html">_is</a><ul class='methods'><li data-type='method'><a href="module-_is.html#.isArray">isArray</a></li><li data-type='method'><a href="module-_is.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-_is.html#.isCn">isCn</a></li><li data-type='method'><a href="module-_is.html#.isCollection">isCollection</a></li><li data-type='method'><a href="module-_is.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-_is.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-_is.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-_is.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-_is.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-_is.html#.isIn">isIn</a></li><li data-type='method'><a href="module-_is.html#.isInit">isInit</a></li><li data-type='method'><a href="module-_is.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-_is.html#.isNotEmpty">isNotEmpty</a></li><li data-type='method'><a href="module-_is.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-_is.html#.isObject">isObject</a></li><li data-type='method'><a href="module-_is.html#.isParent">isParent</a></li><li data-type='method'><a href="module-_is.html#.isQr">isQr</a></li><li data-type='method'><a href="module-_is.html#.isRoute">isRoute</a></li><li data-type='method'><a href="module-_is.html#.isRule">isRule</a></li><li data-type='method'><a href="module-_is.html#.isRuleAll">isRuleAll</a></li><li data-type='method'><a href="module-_is.html#.isRuleAny">isRuleAny</a></li><li data-type='method'><a href="module-_is.html#.isSame">isSame</a></li></ul></li><li><a href="module-_it.html">_it</a><ul class='methods'><li data-type='method'><a href="module-_it.html#.itAmb">itAmb</a></li><li data-type='method'><a href="module-_it.html#.itElement">itElement</a></li><li data-type='method'><a href="module-_it.html#.itFull">itFull</a></li><li data-type='method'><a href="module-_it.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-_it.html#.itObject">itObject</a></li><li data-type='method'><a href="module-_it.html#.itRepeat">itRepeat</a></li><li data-type='method'><a href="module-_it.html#.itRow">itRow</a></li><li data-type='method'><a href="module-_it.html#.itTree">itTree</a></li><li data-type='method'><a href="module-_it.html#.itUi">itUi</a></li><li data-type='method'><a href="module-_it.html#.itValue">itValue</a></li></ul></li><li><a href="module-_parser.html">_parser</a><ul class='methods'><li data-type='method'><a href="module-_parser.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-_parser.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-_parser.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommand">aiExprCommand</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommands">aiExprCommands</a></li><li data-type='method'><a href="module-_parser.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-_parser.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-_parser.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-_parser.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-_parser.html#.aiExprWindow">aiExprWindow</a></li><li data-type='method'><a href="module-_parser.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-_parser.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-_parser.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-_parser.html#.applyItem">applyItem</a></li><li data-type='method'><a href="module-_parser.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-_parser.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-_parser.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-_parser.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-_parser.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-_parser.html#.applyValue">applyValue</a></li><li data-type='method'><a href="module-_parser.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-_parser.html#.parseField">parseField</a></li><li data-type='method'><a href="module-_parser.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-_parser.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-_parser.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-_plugin.html">_plugin</a><ul class='methods'><li data-type='method'><a href="module-_plugin.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-_plugin.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-_plugin.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-_plugin.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-_plugin.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-_plugin.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-_primary.html">_primary</a><ul class='methods'><li data-type='method'><a href="module-_primary.html#.assign">assign</a></li><li data-type='method'><a href="module-_primary.html#.clone">clone</a></li><li data-type='method'><a href="module-_primary.html#.debug">debug</a></li><li data-type='method'><a href="module-_primary.html#.denull">denull</a></li><li data-type='method'><a href="module-_primary.html#.element">element</a></li><li data-type='method'><a href="module-_primary.html#.fn">fn</a></li><li data-type='method'><a href="module-_primary.html#.getV">getV</a></li><li data-type='method'><a href="module-_primary.html#.immutable">immutable</a></li><li data-type='method'><a href="module-_primary.html#.initial">initial</a></li><li data-type='method'><a href="module-_primary.html#.input">input</a></li><li data-type='method'><a href="module-_primary.html#.merge">merge</a></li><li data-type='method'><a href="module-_primary.html#.monad">monad</a></li><li data-type='method'><a href="module-_primary.html#.output">output</a></li><li data-type='method'><a href="module-_primary.html#.packet">packet</a></li><li data-type='method'><a href="module-_primary.html#.parallel">parallel</a></li><li data-type='method'><a href="module-_primary.html#.pass">pass</a></li><li data-type='method'><a href="module-_primary.html#.passion">passion</a></li><li data-type='method'><a href="module-_primary.html#.pipe">pipe</a></li><li data-type='method'><a href="module-_primary.html#.prevent">prevent</a></li><li data-type='method'><a href="module-_primary.html#.promise">promise</a></li><li data-type='method'><a href="module-_primary.html#.ready">ready</a></li><li data-type='method'><a href="module-_primary.html#.sequence">sequence</a></li><li data-type='method'><a href="module-_primary.html#.signature">signature</a></li><li data-type='method'><a href="module-_primary.html#.slice">slice</a></li><li data-type='method'><a href="module-_primary.html#.token">token</a></li></ul></li><li><a href="module-_qr.html">_qr</a><ul class='methods'><li data-type='method'><a href="module-_qr.html#.qrClear">qrClear</a></li><li data-type='method'><a href="module-_qr.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-_qr.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-_qr.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-_qr.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-_qr.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-_qr.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-_qr.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-_romantic.html">_romantic</a><ul class='methods'><li data-type='method'><a href="module-_romantic.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-_romantic.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-_romantic.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-_romantic.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-_romantic.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-_romantic.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-_romantic.html#.sexOp">sexOp</a></li><li data-type='method'><a href="module-_romantic.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-_to.html">_to</a><ul class='methods'><li data-type='method'><a href="module-_to.html#.toArray">toArray</a></li><li data-type='method'><a href="module-_to.html#.toCss">toCss</a></li><li data-type='method'><a href="module-_to.html#.toForm">toForm</a></li><li data-type='method'><a href="module-_to.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-_to.html#.toGridSpan">toGridSpan</a></li><li data-type='method'><a href="module-_to.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-_to.html#.toHeightState">toHeightState</a></li><li data-type='method'><a href="module-_to.html#.toJson">toJson</a></li><li data-type='method'><a href="module-_to.html#.toKey">toKey</a></li><li data-type='method'><a href="module-_to.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-_to.html#.toLink">toLink</a></li><li data-type='method'><a href="module-_to.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-_to.html#.toLogout">toLogout</a></li><li data-type='method'><a href="module-_to.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-_to.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-_to.html#.toPagination">toPagination</a></li><li data-type='method'><a href="module-_to.html#.toPid">toPid</a></li><li data-type='method'><a href="module-_to.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-_to.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-_to.html#.toTime">toTime</a></li><li data-type='method'><a href="module-_to.html#.toTree">toTree</a></li><li data-type='method'><a href="module-_to.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-_to.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-_to.html#.toWidth">toWidth</a></li><li data-type='method'><a href="module-_to.html#.toX">toX</a></li></ul></li><li><a href="module-_ui.html">_ui</a><ul class='methods'><li data-type='method'><a href="module-_ui.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-_ui.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-_ui.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-_ui.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-_ui.html#.anchorTree">anchorTree</a></li><li data-type='method'><a href="module-_ui.html#.columnWrapper">columnWrapper</a></li><li data-type='method'><a href="module-_ui.html#.formAdvReset">formAdvReset</a></li><li data-type='method'><a href="module-_ui.html#.formClear">formClear</a></li><li data-type='method'><a href="module-_ui.html#.formGet">formGet</a></li><li data-type='method'><a href="module-_ui.html#.formHit">formHit</a></li><li data-type='method'><a href="module-_ui.html#.formHits">formHits</a></li><li data-type='method'><a href="module-_ui.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-_ui.html#.formRead">formRead</a></li><li data-type='method'><a href="module-_ui.html#.formRedo">formRedo</a></li><li data-type='method'><a href="module-_ui.html#.formReset">formReset</a></li><li data-type='method'><a href="module-_ui.html#.formSubmit">formSubmit</a></li><li data-type='method'><a href="module-_ui.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-_ui.html#.htmlReadOnly">htmlReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.onConfirm">onConfirm</a></li><li data-type='method'><a href="module-_ui.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-_ui.html#.onLinker">onLinker</a></li><li data-type='method'><a href="module-_ui.html#.onReference">onReference</a></li><li data-type='method'><a href="module-_ui.html#.onRouter">onRouter</a></li><li data-type='method'><a href="module-_ui.html#.onSave">onSave</a></li><li data-type='method'><a href="module-_ui.html#.onUniform">onUniform</a></li><li data-type='method'><a href="module-_ui.html#.writeDisabled">writeDisabled</a></li><li data-type='method'><a href="module-_ui.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-_ui.html#.writeInitial">writeInitial</a></li><li data-type='method'><a href="module-_ui.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-_ui.html#.writeReadOnly">writeReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.writeSegment">writeSegment</a></li></ul></li><li><a href="module-_unity.html">_unity</a><ul class='methods'><li data-type='method'><a href="module-_unity.html#.ambArray">ambArray</a></li><li data-type='method'><a href="module-_unity.html#.ambEvent">ambEvent</a></li><li data-type='method'><a href="module-_unity.html#.ambFind">ambFind</a></li><li data-type='method'><a href="module-_unity.html#.ambKv">ambKv</a></li><li data-type='method'><a href="module-_unity.html#.ambObject">ambObject</a></li><li data-type='method'><a href="module-_unity.html#.ambValue">ambValue</a></li><li data-type='method'><a href="module-_unity.html#.connectId">connectId</a></li><li data-type='method'><a href="module-_unity.html#.connectItem">connectItem</a></li><li data-type='method'><a href="module-_unity.html#.connectRenders">connectRenders</a></li><li data-type='method'><a href="module-_unity.html#.connectValidator">connectValidator</a></li><li data-type='method'><a href="module-_unity.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.dslArray">dslArray</a></li><li data-type='method'><a href="module-_unity.html#.encryptAES">encryptAES</a></li><li data-type='method'><a href="module-_unity.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-_unity.html#.encryptMD5">encryptMD5</a></li><li data-type='method'><a href="module-_unity.html#.forest">forest</a></li><li data-type='method'><a href="module-_unity.html#.forestGroup">forestGroup</a></li><li data-type='method'><a href="module-_unity.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-_unity.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-_unity.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-_unity.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-_unity.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-_unity.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-_unity.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-_unity.html#.formatTpl">formatTpl</a></li><li data-type='method'><a href="module-_unity.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-_unity.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-_unity.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-_unity.html#.mathSum">mathSum</a></li><li data-type='method'><a href="module-_unity.html#.randomArray">randomArray</a></li><li data-type='method'><a href="module-_unity.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-_unity.html#.randomString">randomString</a></li><li data-type='method'><a href="module-_unity.html#.randomUUID">randomUUID</a></li><li data-type='method'><a href="module-_unity.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterObject">sorterObject</a></li><li data-type='method'><a href="module-_unity.html#.tree">tree</a></li><li data-type='method'><a href="module-_unity.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-_unity.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-_value.html">_value</a><ul class='methods'><li data-type='method'><a href="module-_value.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-_value.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-_value.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-_value.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-_value.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-_value.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-_value.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-_value.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-_value.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-_value.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-_value.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-_value.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-_value.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-_value.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-_value.html#.valueOnChange">valueOnChange</a></li><li data-type='method'><a href="module-_value.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-_value.html#.valueParse">valueParse</a></li><li data-type='method'><a href="module-_value.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-_value.html#.valuePinyin">valuePinyin</a></li><li data-type='method'><a href="module-_value.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-_value.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-_value.html#.valueTime">valueTime</a></li><li data-type='method'><a href="module-_value.html#.valueTimes">valueTimes</a></li><li data-type='method'><a href="module-_value.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-_xweb.html">_xweb</a><ul class='methods'><li data-type='method'><a href="module-_xweb.html#.xtChecked">xtChecked</a></li><li data-type='method'><a href="module-_xweb.html#.xtExprFlat">xtExprFlat</a></li><li data-type='method'><a href="module-_xweb.html#.xtFormat">xtFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArrayMap">xtInitArrayMap</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitFormat">xtInitFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyData">xtLazyData</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-_xweb.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-_xweb.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-_xweb.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-_xweb.html#.xtRevert">xtRevert</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowAdd">xtRowAdd</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowChange">xtRowChange</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowDel">xtRowDel</a></li><li data-type='method'><a href="module-_xweb.html#.xtSet">xtSet</a></li><li data-type='method'><a href="module-_xweb.html#.xtUnsafe">xtUnsafe</a></li></ul></li><li><a href="module-web-ai.html">web-ai</a><ul class='methods'><li data-type='method'><a href="module-web-ai.html#.aiBreadcrumb">aiBreadcrumb</a></li><li data-type='method'><a href="module-web-ai.html#.aiLink">aiLink</a></li><li data-type='method'><a href="module-web-ai.html#.aiUrl">aiUrl</a></li></ul></li><li><a href="module-web-component.html">web-component</a><ul class='methods'><li data-type='method'><a href="module-web-component.html#.*Dialog">* Dialog</a></li><li data-type='method'><a href="module-web-component.html#.*DialogButton">* DialogButton</a></li><li data-type='method'><a href="module-web-component.html#.*DialogMenu">* DialogMenu</a></li><li data-type='method'><a href="module-web-component.html#.*PageCard">* PageCard</a></li><li data-type='method'><a href="module-web-component.html#.*Rectangle">* Rectangle</a></li><li data-type='method'><a href="module-web-component.html#.ColumnUser">ColumnUser</a></li><li data-type='method'><a href="module-web-component.html#.G6Editor">G6Editor</a></li><li data-type='method'><a href="module-web-component.html#.G6Viewer">G6Viewer</a></li><li data-type='method'><a href="module-web-component.html#.Graphic2">Graphic2</a></li><li data-type='method'><a href="module-web-component.html#.LoadingAlert">LoadingAlert</a></li><li data-type='method'><a href="module-web-component.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-web-component.html#.Navigation">Navigation</a></li><li data-type='method'><a href="module-web-component.html#.NavSwallow">NavSwallow</a></li></ul></li><li><a href="module-web-input.html">web-input</a><ul class='methods'><li data-type='method'><a href="module-web-input.html#.AddressSelector">AddressSelector</a></li><li data-type='method'><a href="module-web-input.html#.BraftEditor">BraftEditor</a></li><li data-type='method'><a href="module-web-input.html#.CheckJson">CheckJson</a></li><li data-type='method'><a href="module-web-input.html#.CheckTransfer">CheckTransfer</a></li><li data-type='method'><a href="module-web-input.html#.DialogEditor">DialogEditor</a></li><li data-type='method'><a href="module-web-input.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-web-input.html#.InputArray">InputArray</a></li><li data-type='method'><a href="module-web-input.html#.JsonEditor">JsonEditor</a></li><li data-type='method'><a href="module-web-input.html#.ListSelector">ListSelector</a></li><li data-type='method'><a href="module-web-input.html#.MagicView">MagicView</a></li><li data-type='method'><a href="module-web-input.html#.MatrixSelector">MatrixSelector</a></li><li data-type='method'><a href="module-web-input.html#.SearchInput">SearchInput</a></li><li data-type='method'><a href="module-web-input.html#.SearchRangeDate">SearchRangeDate</a></li><li data-type='method'><a href="module-web-input.html#.TableEditor">TableEditor</a></li><li data-type='method'><a href="module-web-input.html#.TreeSelector">TreeSelector</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">web-input</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h1>Zero Ui 中的Form组件</h1>
+<p>（略）基本信息参考<code>web-component</code>部分。</p>
+<h2>1.组件列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件名</th>
+<th>生命周期</th>
+<th style="text-align:left">className</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AddressSelector</td>
+<td>x o o</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">地址选择器。</td>
+</tr>
+<tr>
+<td style="text-align:left">BraftEditor</td>
+<td>x x o</td>
+<td style="text-align:left">web-braft-editor</td>
+<td style="text-align:left">富文本编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">CheckJson</td>
+<td>x o o</td>
+<td style="text-align:left">web-check-json</td>
+<td style="text-align:left">多选框生成Json数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">CheckTransfer</td>
+<td>x o o</td>
+<td style="text-align:left">web-transfer</td>
+<td style="text-align:left">带选择的穿梭框。</td>
+</tr>
+<tr>
+<td style="text-align:left">DialogEditor</td>
+<td>x o o</td>
+<td style="text-align:left">web-table <br> web-dialogeditor-table <br> web-dialog</td>
+<td style="text-align:left">弹出框表格编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">FileUpload</td>
+<td>o o o</td>
+<td style="text-align:left">web-file-upload</td>
+<td style="text-align:left">上传专用组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">InputArray</td>
+<td>x o o</td>
+<td style="text-align:left">web-input-array</td>
+<td style="text-align:left">数组元素录入组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">JsonEditor</td>
+<td>x x x</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">JSON编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">ListSelector</td>
+<td>x o o</td>
+<td style="text-align:left">web-dialog</td>
+<td style="text-align:left">列表选择器。</td>
+</tr>
+<tr>
+<td style="text-align:left">MagicView</td>
+<td>x x x</td>
+<td style="text-align:left">web-magic-view <br> web-table</td>
+<td style="text-align:left">显示数据信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">MatrixSelector</td>
+<td>x o o</td>
+<td style="text-align:left">web-table <br> web-matrixselector-table <br> web-dialog</td>
+<td style="text-align:left">弹出框多选器。</td>
+</tr>
+<tr>
+<td style="text-align:left">SearchInput</td>
+<td>o o o</td>
+<td style="text-align:left">无</td>
+<td style="text-align:left">「搜索」增强版查询条件输入。</td>
+</tr>
+<tr>
+<td style="text-align:left">SearchRangeDate</td>
+<td>o o o</td>
+<td style="text-align:left">web-range-date</td>
+<td style="text-align:left">「搜索」时间条件输入。</td>
+</tr>
+<tr>
+<td style="text-align:left">TableEditor</td>
+<td>o o x</td>
+<td style="text-align:left">web-table-editor</td>
+<td style="text-align:left">表格编辑器。</td>
+</tr>
+<tr>
+<td style="text-align:left">TreeSelector</td>
+<td>x o o</td>
+<td style="text-align:left">web-dialog</td>
+<td style="text-align:left">树选择器。</td>
+</tr>
+</tbody>
+</table>
+<h2>2.组件配置矩阵</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">组件名</th>
+<th style="text-align:left">配置render</th>
+<th style="text-align:left">2阶render</th>
+<th style="text-align:left">相关Ant组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">AddressSelector</td>
+<td style="text-align:left">aiAddressSelector</td>
+<td style="text-align:left">Ok</td>
+<td style="text-align:left"><code>&lt;Cascader/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">BraftEditor</td>
+<td style="text-align:left">aiBraftEditor</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;BraftEditor/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">CheckJson</td>
+<td style="text-align:left">aiCheckJson</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Checkbox/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">CheckTransfer</td>
+<td style="text-align:left">aiTransfer</td>
+<td style="text-align:left">ai2Transfer</td>
+<td style="text-align:left"><code>&lt;Transfer/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">DialogEditor</td>
+<td style="text-align:left">aiDialogEditor</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Table/&gt;</code><br><code>&lt;Dialog/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">FileUpload</td>
+<td style="text-align:left">aiFileUpload</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Upload/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">InputArray</td>
+<td style="text-align:left">aiInputMulti</td>
+<td style="text-align:left">ai2InputMulti</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code> <br> <code>&lt;Button/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">JsonEditor</td>
+<td style="text-align:left">aiJsonEditor</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;JSONInput/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">ListSelector</td>
+<td style="text-align:left">aiListSelector</td>
+<td style="text-align:left">ai2ListSelector</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code> <br> <code>&lt;Dialog/&gt;</code> <br> <code>&lt;Table/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">MagicView</td>
+<td style="text-align:left">aiMagic</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Table/&gt;</code> <br> <code>&lt;ColumnUser/&gt;</code> <br> <code>&lt;span/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">MatrixSelector</td>
+<td style="text-align:left">aiMatrixSelector</td>
+<td style="text-align:left">ai2MatrixSelector</td>
+<td style="text-align:left"><code>&lt;Table/&gt;</code><br><code>&lt;Dialog/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SearchInput</td>
+<td style="text-align:left">aiSearchInput</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code> <br> <code>&lt;Checkbox/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">SearchRangeDate</td>
+<td style="text-align:left">aiSearchRangeDate</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;DatePicker/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">TableEditor</td>
+<td style="text-align:left">aiTableEditor</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Table/&gt;</code> <br> <code>&lt;Button/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left">TreeSelector</td>
+<td style="text-align:left">aiTreeSelector</td>
+<td style="text-align:left">ai2TreeSelector</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code> <br> <code>&lt;Dialog/&gt;</code> <br/> <code>&lt;Tree/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiInput</td>
+<td style="text-align:left">ai2Input</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiPassword</td>
+<td style="text-align:left">ai2Password</td>
+<td style="text-align:left"><code>&lt;Input.Password/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiInputNumber</td>
+<td style="text-align:left">ai2InputNumber</td>
+<td style="text-align:left"><code>&lt;InputNumber/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiCheckbox</td>
+<td style="text-align:left">ai2Checkbox</td>
+<td style="text-align:left"><code>&lt;Checkbox/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiSubmit</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Button/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiAction</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Button/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiHidden</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Input/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiSelect</td>
+<td style="text-align:left">ai2Select</td>
+<td style="text-align:left"><code>&lt;Select/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiTextArea</td>
+<td style="text-align:left">ai2TextArea</td>
+<td style="text-align:left"><code>&lt;Input.TextArea/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiDatePicker</td>
+<td style="text-align:left">ai2DatePicker</td>
+<td style="text-align:left"><code>&lt;DatePicker/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiTimePicker</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;TimePicker/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiTreeSelect</td>
+<td style="text-align:left">ai2TreeSelect</td>
+<td style="text-align:left"><code>&lt;TreeSelect/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiRadio</td>
+<td style="text-align:left">ai2Radio</td>
+<td style="text-align:left"><code>&lt;Radio/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiButton</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Button/&gt;</code></td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td style="text-align:left">aiButtonGroup</td>
+<td style="text-align:left">x</td>
+<td style="text-align:left"><code>&lt;Button/&gt;</code></td>
+</tr>
+</tbody>
+</table></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".AddressSelector"><span class="type-signature">(static) </span>AddressSelector<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>AddressSelector</code></h2>
+<p>地址选择器</p>
+<pre class="prettyprint source lang-js"><code>import { AddressSelector } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<h4>0.1. Json配置</h4>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;regionId,选择地址,12,,,placeholder=选择地址&quot;,
+     &quot;optionJsx.config.ajax&quot;: &quot;DIRECT&quot;,
+     &quot;optionJsx.config.country&quot;: &quot;/api/countries,name&quot;,
+     &quot;optionJsx.config.state&quot;: &quot;/api/states/query/:key,name,countryId&quot;,
+     &quot;optionJsx.config.city&quot;: &quot;/api/cities/query/:key,name,stateId&quot;,
+     &quot;optionJsx.config.region&quot;: &quot;/api/regions/query/:key,name,cityId&quot;,
+     &quot;optionJsx.config.init&quot;: &quot;/api/regions/meta/:key&quot;
+}
+</code></pre>
+<h3>0.2. Js注入</h3>
+<pre class="prettyprint source lang-js"><code>// 调用2阶函数执行渲染，最终传入`ExForm`组件。
+const jsx = {
+     regionId: Ux.ai2AddressSelector(Op.onChange)
+};
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">reference</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">React</td>
+<td style="text-align:left">父引用，遵循Zero Ui的规范，该变量为固定变量，引用父组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>ajax</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">地址选择器的Ajax类型设置，目前支持两种<code>DIRECT | QR</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>country</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">读取国家数据专用Ajax配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>state</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">读取省会数据专用Ajax配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>city</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">读取城市数据专用Ajax配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>region</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">读取区域数据专用Ajax配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>init</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">初始化数据专用Ajax配置。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. 关于流程</h4>
+<ul>
+<li>如果value无值，则只读取国家数据，执行country加载。</li>
+<li>如果value有值，则执行初始化数据，走完加载全流程。</li>
+</ul>
+<h4>3.2. 关于请求初始参数</h4>
+<p>初始参数表格如下</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">language</td>
+<td style="text-align:left">环境变量中配置<code>Z_LANGUAGE</code>，当前应用运行的语言信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">sigma</td>
+<td style="text-align:left">从<code>$app</code>变量（应用配置）中读取<code>sigma</code>变量，可租户，可应用分割。</td>
+</tr>
+<tr>
+<td style="text-align:left">key</td>
+<td style="text-align:left">直接读取<code>props</code>中的value（Ant Form自定义组件专用字段）。</td>
+</tr>
+</tbody>
+</table>
+<h3>4. 配置详解</h3>
+<blockquote>
+<p>整个加载流程全部走GET方法，而不走POST方法，这是组件限制，底层调用<code>Ux.ajaxGet</code>实现。</p>
+</blockquote>
+<h4>4.1. init节点</h4>
+<p>该节点只有一个路径信息，没有其他信息。</p>
+<pre class="prettyprint source lang-js"><code>/api/regions/meta/:key
+</code></pre>
+<h4>4.2. state,city,region节点</h4>
+<p>中间节点有三个，对应省会、城市、区域三个维度，格式都如：</p>
+<pre class="prettyprint source"><code>&lt;uri>,&lt;responseField>,&lt;requestField>
+</code></pre>
+<h4>4.3. country节点</h4>
+<p>顶层节点主要针对国家，格式如：</p>
+<pre class="prettyprint source"><code>&lt;uri>,&lt;responseField>
+</code></pre>
+<h4>4.4. 节点语法</h4>
+<p>上述表达式是这三种节点的专用表达式</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">uri</td>
+<td style="text-align:left">读取当前数据的Ajax路径。</td>
+</tr>
+<tr>
+<td style="text-align:left">responseField</td>
+<td style="text-align:left">读取的Array数据中需要显示的字段信息，如使用name则响应数据中使用name作为显示字段。</td>
+</tr>
+<tr>
+<td style="text-align:left">requestField</td>
+<td style="text-align:left">上层请求数据，最终会转换成key信息，（顶层国家不需要该配置）。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".BraftEditor"><span class="type-signature">(static) </span>BraftEditor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>BraftEditor</code></h2>
+<p>富文本编辑器</p>
+<pre class="prettyprint source lang-js"><code>import { BraftEditor } from 'web';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前编辑器的配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>controls</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">打开或禁用编辑器的工具栏选项。</td>
+</tr>
+<tr>
+<td style="text-align:left">content</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">EditorState</td>
+<td style="text-align:left">当前编辑器的内容。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<blockquote>
+<p>目前富文本编辑器还未执行重置以及content部分的上层onChange方法调用，后续需要补充开发。</p>
+</blockquote>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".CheckJson"><span class="type-signature">(static) </span>CheckJson<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>CheckJson</code></h2>
+<p>多选框生成Json格式数据</p>
+<pre class="prettyprint source lang-js"><code>import { CheckJson } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;metadata,基本配置,24,,aiCheckJson&quot;,
+     &quot;optionJsx.config.items&quot;: [
+         &quot;design,可设计&quot;,
+         &quot;deletion,可删除&quot;
+     ]
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">$source</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">多选框专用的选项信息，构造Options。</td>
+</tr>
+<tr>
+<td style="text-align:left">selected</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">当前组件选中的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. Option数据结构</h4>
+<p><code>$source</code>会生成选项数据</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;label&quot;: &quot;选项显示文本&quot;,
+    &quot;value&quot;: &quot;选项值&quot;,
+    &quot;disabled&quot;: &quot;是否禁用&quot;
+}
+</code></pre>
+<h4>3.2. 值结构</h4>
+<p>selected中保存的是<code>value</code>的集合，而组件调用上层<code>onChange</code>时传入的值结构为：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;field1&quot;: true,
+    &quot;field2&quot;: true,
+    &quot;...&quot;: true
+}
+</code></pre>
+<p>之中的<code>field1, field2，...</code>等构造的是每个Checkbox的字段的名称，最终生成的是Json结构的数据。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".CheckTransfer"><span class="type-signature">(static) </span>CheckTransfer<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>CheckTransfer</code></h2>
+<p>Transfer穿梭框</p>
+<pre class="prettyprint source lang-js"><code>import { CheckTransfer } from 'web';
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">Ant Form给当前组件传入的值，表示选中的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>valueKey</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">取值的字段信息，默认为<code>key</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>limit</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">选择项限制信息，用于验证，如果选择项目过多会提示错误信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$source</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">穿梭框中可选择的数据源信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$transfer</td>
+<td>onChange</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">改变值时的操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">$transfer</td>
+<td>onSelectChange</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">选中选项时的回调函数，执行选择。</td>
+</tr>
+<tr>
+<td style="text-align:left">$transfer</td>
+<td>render</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left"><code>&lt;Transfer/&gt;</code>中的render渲染函数设置。</td>
+</tr>
+<tr>
+<td style="text-align:left">$sourceKeys</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">选择过程中的源选择值。</td>
+</tr>
+<tr>
+<td style="text-align:left">$targetKeys</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">选择过程中的目标选择值。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 选项设置</h3>
+<h4>3.1. dataSource数据格式如：</h4>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;key&quot;: &quot;数据记录键&quot;,
+    &quot;title&quot;: &quot;标题&quot;,
+    &quot;description&quot;: &quot;描述信息&quot;,
+    &quot;disabled&quot;: &quot;禁用/启用&quot;
+}
+</code></pre>
+<h4>3.2. limit数据结构</h4>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;max&quot;: &quot;最大选项数&quot;，
+    &quot;message&quot;: &quot;验证错误信息&quot;
+}
+</code></pre>
+<p>如果选项超过了<code>max</code>的限制，则显示错误消息，调用<code>Ux.messageFailure</code>函数显示错误信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".DialogEditor"><span class="type-signature">(static) </span>DialogEditor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>DialogEditor</code></h2>
+<p>弹出框表格编辑器</p>
+<pre class="prettyprint source lang-js"><code>import { DialogEditor } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;subTasks,,24,,aiDialogEditor&quot;,
+     &quot;optionJsx.config&quot;: {
+         &quot;form&quot;: &quot;FormSub&quot;,
+         &quot;dialog&quot;: &quot;新增数据导入子任务,保存,关闭,false,1024,true,$opSaveTask&quot;,
+         &quot;op&quot;: {
+             &quot;add&quot;: &quot;$opShowSub&quot;
+         },
+         &quot;table&quot;: {
+             &quot;columns&quot;: [
+                 &quot;source,导入表&quot;,
+                 &quot;target,目标表&quot;,
+                 &quot;runAt,上次导入时间&quot;,
+                 &quot;runCount,上次导入条数&quot;,
+                 &quot;nextAt,下次导入时间&quot;,
+                 &quot;isRun,是否执行&quot;,
+                 {
+                     &quot;title&quot;: &quot;操作&quot;,
+                     &quot;dataIndex&quot;: &quot;key&quot;,
+                     &quot;fixed&quot;: &quot;right&quot;,
+                     &quot;$render&quot;: &quot;EXECUTOR&quot;,
+                     &quot;$option&quot;: [
+                         {
+                             &quot;text&quot;: &quot;编辑&quot;,
+                             &quot;executor&quot;: &quot;fnEdit&quot;
+                         },
+                         &quot;divider&quot;,
+                         {
+                             &quot;text&quot;: &quot;删除&quot;,
+                             &quot;executor&quot;: &quot;fnDelete&quot;,
+                             &quot;confirm&quot;: &quot;确认删除选择的实体记录？&quot;
+                         }
+                     ]
+                 }
+             ]
+         }
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">reference</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">React</td>
+<td style="text-align:left">父引用，遵循Zero Ui的规范，该变量为固定变量，引用父组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">readOnly</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">当前字段是否只读，可编辑走yiEdition，只读走yiView。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>table</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">表格基本配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>dialog</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">弹出框的专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>form</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前DialogEditor所需的表单数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>op</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">按钮链接，可触发对应按钮执行窗口操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">$rows</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">构造行操作符，用于增加更多的操作，<code>fnEdit/fnDelete</code>是默认值。</td>
+</tr>
+<tr>
+<td style="text-align:left">$forms</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">传入的表单哈希表<code>name = Jsx</code>格式。</td>
+</tr>
+<tr>
+<td style="text-align:left">$executor</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">行操作的执行函数哈希表<code>name = Function</code>格式。</td>
+</tr>
+<tr>
+<td style="text-align:left">$op</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">执行二阶段专用操作，可绑定到二级form中。</td>
+</tr>
+<tr>
+<td style="text-align:left">$record</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「数据」执行可传的数据记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">$options</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「配置」执行科传的配置记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">$table</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">表格配置<code>&lt;Table/&gt;</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">$dialog</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">窗口配置<code>&lt;Dialog/&gt;</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">$button</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">按钮配置<code>&lt;Button/&gt;</code>，右上角点击的按钮。</td>
+</tr>
+<tr>
+<td style="text-align:left">$visible</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">窗口显示/隐藏。</td>
+</tr>
+<tr>
+<td style="text-align:left">$inited</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">表单初始化数据，点击按钮时会生效。</td>
+</tr>
+<tr>
+<td style="text-align:left">$mode</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">表单支持的模式，ADD/EDIT，添加和编辑。</td>
+</tr>
+<tr>
+<td style="text-align:left">$submitting</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">表单是否在提交（防重复提交专用）。</td>
+</tr>
+<tr>
+<td style="text-align:left">$keyField</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">主键字段名，<code>&lt;Table/&gt;</code>使用该字段作为主键，计算时读取<code>config.table.rowKey</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+<tr>
+<td style="text-align:left">fnComponent</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">渲染窗口内组件的专用函数。</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>$rows和$executor可能重复了，因为该组件位于两个不同阶段的开发周期，最早使用过$rows，后续改成了$executor，文档之后来更新。</p>
+</blockquote>
+<h3>3. 组件核心点</h3>
+<h4>3.1. 表单配置的模式</h4>
+<p>DialogEditor表单来源分成三种模式：</p>
+<p><strong>1）编程模式</strong></p>
+<p>编程模式中的<code>config.form</code>是一个字符串，它的计算流程如下：</p>
+<ol>
+<li>读取父引用<code>reference</code>（该引用绑定了Ant Form，带有form引用）。</li>
+<li>从props中读取<code>$form</code>对象（<code>name = Jsx</code>），并且使用<code>$form[form]</code>去读取子组件。</li>
+<li>用该子组件构造<code>fnComponent</code>渲染外层表单。</li>
+</ol>
+<p><strong>2）直接配置模式</strong></p>
+<ol>
+<li>直接构造<code>fnComponent</code>方法，此时使用组件为<code>UI.Form.js</code>中的组件</li>
+<li>构造<code>fnComponent</code>渲染新表单</li>
+</ol>
+<p><strong>3）动态模式</strong></p>
+<p>（保留模式，只有一个form的<code>code</code>，用于远程读取表单配置。）</p>
+<h4>3.2. 子组件继承项</h4>
+<p>在渲染表单过程中，继承项主要用于往Form中传入数据，传如的数据如</p>
+<p><strong>1）上层属性</strong></p>
+<p>直接调用<code>Ux.onUniform</code>构造的继承属性。</p>
+<p><strong>2）本层属性</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">reference</td>
+<td>React引用</td>
+<td style="text-align:left">将DialogEditor的React组件引用赋值给下层成为下层表单<code>父引用</code>标准。</td>
+</tr>
+<tr>
+<td style="text-align:left">doSubmitting</td>
+<td>Function</td>
+<td style="text-align:left">执行提交时防重复提交操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">doRow</td>
+<td>Function</td>
+<td style="text-align:left">「单记录」行保存专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">doRows</td>
+<td>Function</td>
+<td style="text-align:left">「批量」行保存专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">$record</td>
+<td>Any</td>
+<td style="text-align:left">直接传入$record。</td>
+</tr>
+<tr>
+<td style="text-align:left">$options</td>
+<td>Any</td>
+<td style="text-align:left">直接传入$options。</td>
+</tr>
+<tr>
+<td style="text-align:left">$op</td>
+<td>Any</td>
+<td style="text-align:left">直接传入$op。</td>
+</tr>
+<tr>
+<td style="text-align:left">$a_form_xxx</td>
+<td>Any</td>
+<td style="text-align:left">将上层表单中的数据存储到这里执行<code>name=value</code>的传入（一般用于配置型）。</td>
+</tr>
+</tbody>
+</table>
+<h4>3.3. fnEdit/fnOpen更改状态</h4>
+<p><strong>1）打开新窗口生成状态</strong></p>
+<pre class="prettyprint source lang-js"><code>{
+    $inited: {
+        key: &quot;随机UUID（新记录主键）&quot;,
+        parentId: &quot;读取$inited的key（父记录主键）&quot;
+    },
+    $mode: &quot;ADD&quot;,
+    $visible: true
+}
+</code></pre>
+<p><strong>2）选中记录打开窗口</strong></p>
+<pre class="prettyprint source lang-js"><code>{
+    $inited: {
+        key: &quot;根据$keyField计算，从记录中读取主键。&quot;,
+        parentId: &quot;读取$inited的key（父记录主键）&quot;
+    },
+    $mode: &quot;EDIT&quot;,
+    $visible: true
+}
+</code></pre>
+<h3>4. 子组件Form核心点</h3>
+<p>只有<strong>配置型</strong>（非编程模式）才会启用<code>UI.Form.js</code>中的表单。</p>
+<h4>4.1. 数据传入</h4>
+<ul>
+<li>$op：直接传入。</li>
+<li>$options：配置选项，在<code>ExListComplex</code>等类型组件传入的配置信息。</li>
+<li>$record：数据传入，可自定义，也可传入数据。</li>
+</ul>
+<h4>4.2. 关于$op的使用</h4>
+<p>按钮绑定在执行的时候可以直接往下传递，在特别复杂或者层级比较多的场景中非常使用，此处后续使用时来补充教程文档。</p>
+<h4>4.3. 关于$executor</h4>
+<p>$executor主要用于构造表格中的操作列，默认有</p>
+<ul>
+<li>fnEdit：编辑链接</li>
+<li>fnDelete：删除连接</li>
+</ul>
+<p>$executor配合列中的<code>CONNECT</code>渲染可执行动态注入流程，最新的<code>ExListOpen</code>组件中有使用，可参考。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".FileUpload"><span class="type-signature">(static) </span>FileUpload<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>FileUpload</code></h2>
+<p>上传专用组件</p>
+<pre class="prettyprint source lang-js"><code>import { FileUpload } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<h4>0.1. Json配置</h4>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;logo,应用Logo,18,,aiFileUpload,listType=picture-card,text=上传&quot;,
+     &quot;optionJsx.accept&quot;: &quot;image/*&quot;,
+     &quot;optionJsx.config.filekey&quot;: &quot;key&quot;,
+     &quot;optionJsx.config.limit&quot;: 10240,
+     &quot;optionJsx.config.single&quot;: true,
+     &quot;optionJsx.ajax.uri&quot;: &quot;/api/file/upload/:category&quot;,
+     &quot;optionJsx.ajax.download&quot;: &quot;/api/file/download/:key&quot;,
+     &quot;optionJsx.ajax.params&quot;: {
+         &quot;category&quot;: &quot;FIX:logo-item&quot;
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">reference</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">React</td>
+<td style="text-align:left">父引用，遵循Zero Ui的规范，该变量为固定变量，引用父组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>filekey</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">下载文件的文件主键（fileKey）。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>limit</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">上传文件的大小限制。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>single</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">单文件上传还是多文件上传。</td>
+</tr>
+<tr>
+<td style="text-align:left">ajax</td>
+<td>uri</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">上传专用Ajax基础配置，POST。</td>
+</tr>
+<tr>
+<td style="text-align:left">ajax</td>
+<td>download</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">生成的文件下载链接，GET。</td>
+</tr>
+<tr>
+<td style="text-align:left">ajax</td>
+<td>params</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">上传专用Ajax中的参数信息，支持标准解析，parser的应用。</td>
+</tr>
+<tr>
+<td style="text-align:left">fileList</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">当前组件中已经上传的文件列表。</td>
+</tr>
+<tr>
+<td style="text-align:left">handler</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前组件构造的<code>handler</code>信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$counter</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">已上传的文件数量。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<p>（略）后续补充</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".InputArray"><span class="type-signature">(static) </span>InputArray<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>InputArray</code></h2>
+<p>数组录入组件</p>
+<pre class="prettyprint source lang-js"><code>import { InputArray } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;dependValue,条件字段值,24,,aiInputMulti&quot;,
+     &quot;optionJsx.styleInput&quot;: {
+         &quot;width&quot;: &quot;30%&quot;
+     },
+     &quot;optionJsx.depend.enabled&quot;: {
+         &quot;dependType&quot;: [
+             &quot;DATUM&quot;
+         ]
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>limit</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前组件录入数组的长度限制。</td>
+</tr>
+<tr>
+<td style="text-align:left">disabled</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否禁用当前组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">styleInput</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前组件中输入框风格。</td>
+</tr>
+<tr>
+<td style="text-align:left">$holder</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">当前数据的长度信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. 关于限制处理</h4>
+<p>这个组件的限制处理并不是弹出错误信息，而是直接禁用添加按钮，当选项数量<code>$holder</code>大于了限制数量，
+则会禁用添加按钮。</p>
+<h4>3.2. 禁用</h4>
+<p>如果传入了<code>disabled=true</code>则会禁用当前组件的所有操作。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".JsonEditor"><span class="type-signature">(static) </span>JsonEditor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>JsonEditor</code></h2>
+<p>数组录入组件</p>
+<pre class="prettyprint source lang-js"><code>import { JsonEditor } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;options,配置数据,24,,aiJsonEditor&quot;,
+     &quot;optionJsx.height&quot;: 220
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">height</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Number</td>
+<td style="text-align:left">当前Json编辑器的高度。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<p>（略）</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".ListSelector"><span class="type-signature">(static) </span>ListSelector<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>ListSelector</code></h2>
+<p>列表选择器</p>
+<pre class="prettyprint source lang-js"><code>import { ListSelector } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;username,关联账号,8,,aiListSelector,placeholder=（请选择账号）&quot;,
+     &quot;optionJsx.config&quot;: {
+         &quot;ajax&quot;: {
+             &quot;metadata&quot;: &quot;POST,/api/user/search,1,10,sorter=updatedAt`DESC&quot;,
+             &quot;params.criteria&quot;: {
+                 &quot;modelId&quot;: &quot;FIX:employee&quot;,
+                 &quot;&quot;: &quot;OPERATOR:AND&quot;
+             }
+         },
+         &quot;linker&quot;: {
+             &quot;key&quot;: &quot;userId&quot;,
+             &quot;username&quot;: &quot;username&quot;,
+             &quot;realname&quot;: &quot;viceName&quot;,
+             &quot;email&quot;: &quot;viceEmail&quot;,
+             &quot;mobile&quot;: &quot;viceMobile&quot;
+         },
+         &quot;table&quot;: {
+             &quot;columns&quot;: [
+                 &quot;username,用户账号&quot;,
+                 &quot;realname,用户名称&quot;,
+                 &quot;mobile,手机号&quot;,
+                 &quot;email,邮箱&quot;
+             ]
+         },
+         &quot;validation&quot;: &quot;请选择关联账号！&quot;,
+         &quot;window&quot;: &quot;关联账号,选择,关闭,false,800,false&quot;,
+         &quot;search&quot;: {
+             &quot;username,c&quot;: &quot;账号&quot;,
+             &quot;realname,c&quot;: &quot;姓名&quot;
+         }
+     },
+     &quot;optionJsx.allowClear&quot;: true
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>ajax</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">带表达式的Ajax请求专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>linker</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前选择数据和表单之间的链接配置（linker）。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>table</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前列表选择器中表格<code>&lt;Table/&gt;</code>的配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>validation</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">选择验证器，验证是否选择了记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>window</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">弹出窗口专用配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>search</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">是否启用搜索项相关信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>selection</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">多选还是单选的控制。</td>
+</tr>
+<tr>
+<td style="text-align:left">dialog</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的窗口配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">table</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的表格配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">search</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」开启搜索框操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">$visible</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否显示弹出框。</td>
+</tr>
+<tr>
+<td style="text-align:left">$loading</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否执行提交操作，造成加载效果。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">当前组件中拥有的表格数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">$keySet</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">选中数据的组件集合。</td>
+</tr>
+<tr>
+<td style="text-align:left">$filters</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">搜索产生的搜索条件信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$tableKey</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">专用的表格绑定的key信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+<tr>
+<td style="text-align:left">onClick</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">点击函数构造。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. Ajax解析</h4>
+<p>该解析可参考<code>xtLazyAjax</code>的详细说明。</p>
+<h4>3.2. 双选择配置</h4>
+<p>「只支持单选」选择配置位于<code>config.selection</code>，如果<code>selection.multiple</code>为true，则选择的时候直接执行
+多选操作，而不使用单选，表格之前的类型是<code>checkbox</code>，而单选则使用<code>radio</code>，这个组件通常不使用该配置。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".MagicView"><span class="type-signature">(static) </span>MagicView<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>MagicView</code></h2>
+<p>数组录入组件</p>
+<pre class="prettyprint source lang-js"><code>import { MagicView } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<h4>0.1. 时间</h4>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;infoAt,记录时间,10,,aiMagic&quot;,
+     &quot;optionJsx.config.format&quot;: &quot;YYYY年MM月DD日 HH:mm&quot;,
+     &quot;moment&quot;: true
+}
+</code></pre>
+<h4>0.2. Ajax加载</h4>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;logUser,记录人,14,,aiMagic&quot;,
+     &quot;optionJsx.config.user&quot;: {
+         &quot;uri&quot;: &quot;/api/user/:key&quot;,
+         &quot;field&quot;: &quot;realname&quot;
+     },
+     &quot;optionJsx.$empty&quot;: &quot;（系统）&quot;
+}
+</code></pre>
+<h4>0.3. 带图标选项</h4>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;level,级别,10,,aiMagic&quot;,
+     &quot;optionJsx.config.items&quot;: [
+         &quot;INFO,信息:info-circle,16:#6495ED&quot;,
+         &quot;WARN,警告:warning,16:#EEB422&quot;,
+         &quot;ERROR,错误:issues-close,16:#EE2C2C&quot;
+     ]
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>x</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">format</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">时间格式专用格式化的Pattern（开发模式）。</td>
+</tr>
+<tr>
+<td style="text-align:left">$empty</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">如果数据为空则使用空的字符串呈现。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>items</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">静态选项。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>datum</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">动态选项。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>moment</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否时间格式。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>boolean</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否Boolean类型。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>table</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">表格渲染专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>expr</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">「特定配置」table不存在时，使用表达式模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>currency</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">「特定配置」table不存在，并且不带expr，则直接使用currency。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>format</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">时间格式专用格式化的Pattern（配置模式）。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>user</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ajax配置，原生配置是为创建人、更新人量身打造，所以该配置目前使用<code>user</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>record</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否执行记录解析，使用Json模式呈现。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>rxRecord</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">记录解析函数，配合record配置使用。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. 货币双格式</h4>
+<p>currency有两种格式，默认是字符串，还有下边格式：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;unit&quot;: &quot;货币单位&quot;,
+    &quot;right&quot;: &quot;是否位于右侧&quot;
+}
+</code></pre>
+<ul>
+<li>默认格式：<code>String</code>也是这个格式，<code>&lt;单位&gt;&lt;值&gt;</code>。</li>
+<li>right = true：<code>&lt;值&gt;&lt;单位&gt;</code>。</li>
+</ul>
+<h4>3.2. Icon格式</h4>
+<p>示例格式：</p>
+<p><code>INFO,信息:info-circle,16:#6495ED</code></p>
+<p>上述格式转换成：</p>
+<p><code>&lt;值&gt;,&lt;显示文字:图标类型&gt;,&lt;图标尺寸:图标颜色&gt;</code></p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".MatrixSelector"><span class="type-signature">(static) </span>MatrixSelector<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>MatrixSelector</code></h2>
+<p>列表选择器</p>
+<pre class="prettyprint source lang-js"><code>import { MatrixSelector } from 'web';
+</code></pre>
+<h3>0.示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;actions,关联操作,24,,aiMatrixSelector&quot;,
+     &quot;optionConfig.rules&quot;: [
+         {
+             &quot;validator&quot;: &quot;required&quot;,
+             &quot;message&quot;: &quot;对不起，关联操作不可为空，请添加关联操作！&quot;
+         }
+     ],
+     &quot;optionJsx.config&quot;: {
+         &quot;ajax&quot;: {
+             &quot;metadata&quot;: &quot;POST,/api/action/search,1,10,sorter=updatedAt`DESC&quot;,
+             &quot;params.criteria&quot;: {
+                 &quot;permissionId,n&quot;: true
+             }
+         },
+         &quot;table&quot;: {
+             &quot;columns&quot;: [
+                 &quot;name,操作名称&quot;,
+                 &quot;code,操作编码&quot;,
+                 {
+                     &quot;metadata&quot;: &quot;method,HTTP方法,MAPPING&quot;,
+                     &quot;$mapping&quot;: {
+                         &quot;GET&quot;: &quot;GET,download,,#268941&quot;,
+                         &quot;PUT&quot;: &quot;PUT,edit,,#0a7bed&quot;,
+                         &quot;POST&quot;: &quot;POST,plus,,#f6af03&quot;,
+                         &quot;DELETE&quot;: &quot;DELETE,delete,,#e22015&quot;
+                     }
+                 },
+                 {
+                     &quot;dataIndex&quot;: &quot;uri&quot;,
+                     &quot;title&quot;: &quot;请求路径&quot;
+                 }
+             ]
+         },
+         &quot;validation&quot;: &quot;请选择关联操作！&quot;,
+         &quot;window&quot;: &quot;关联操作,选择,关闭,false,980,false&quot;,
+         &quot;search&quot;: {
+             &quot;name,c&quot;: &quot;名称&quot;,
+             &quot;code,c&quot;: &quot;编码&quot;
+         },
+         &quot;selection&quot;: {
+             &quot;multiple&quot;: true,
+             &quot;multipleMode&quot;: {
+                 &quot;replace&quot;: false
+             }
+         },
+         &quot;dynamic&quot;: {
+             &quot;dataIndex&quot;: &quot;key&quot;,
+             &quot;title&quot;: &quot;添加&quot;,
+             &quot;config&quot;: {
+                 &quot;text&quot;: &quot;移除&quot;,
+                 &quot;confirm&quot;: &quot;该操作会从当前权限中移除选中操作，确认？&quot;
+             }
+         }
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>ajax</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">带表达式的Ajax请求专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>linker</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前选择数据和表单之间的链接配置（linker）。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>table</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前列表选择器中表格<code>&lt;Table/&gt;</code>的配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>validation</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">选择验证器，验证是否选择了记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>window</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">弹出窗口专用配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>search</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">是否启用搜索项相关信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>selection</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">多选还是单选的控制。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>dynamic</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">动态操作列（添加、删除）。</td>
+</tr>
+<tr>
+<td style="text-align:left">dialog</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的窗口配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">table</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的表格配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">search</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」开启搜索框操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">$visible</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否显示弹出框。</td>
+</tr>
+<tr>
+<td style="text-align:left">$loading</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否执行提交操作，造成加载效果。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">当前组件中拥有的表格数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">$keySet</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">选中数据的组件集合。</td>
+</tr>
+<tr>
+<td style="text-align:left">$filters</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">搜索产生的搜索条件信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$tableKey</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">专用的表格绑定的key信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+<tr>
+<td style="text-align:left">onClick</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">点击函数构造。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<h4>3.1. 多选专用配置</h4>
+<p>「只支持多选」选择配置位于<code>config.selection</code>，如果<code>selection.multiple</code>为true，则选择的时候直接执行
+多选操作，多选操作中会包含额外的模式信息。</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;multiple&quot;: true,
+    &quot;multipleMode&quot;:{
+        &quot;replace&quot;: true
+    }
+}
+</code></pre>
+<p>replace设置的模式</p>
+<ul>
+<li>true：替换模式，每次选择的时候直接替换原始内容。</li>
+<li>false：追加模式，每次选择的时候直接追加新的（如果有旧的直接合并）。</li>
+</ul>
+<h4>3.2. 动态列操作</h4>
+<p>动态列操作提供<code>添加，删除</code>两个选项，这两个选项负责针对数据执行增删的细节操作，以完善对应的选择信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".SearchInput"><span class="type-signature">(static) </span>SearchInput<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>SearchInput</code></h2>
+<p>搜索专用输入</p>
+<pre class="prettyprint source lang-js"><code>import { SearchInput } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;:&quot;contactName,联系人,12,,aiSearchInput&quot;,
+     &quot;optionJsx.layout&quot;:{
+         &quot;left&quot;: 14,
+         &quot;right&quot;: 10
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>layout</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">左右布局信息，左边输入框，右边Checkbox。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">构造的查询条件信息。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<p>查询条件支持两种：</p>
+<ul>
+<li>模糊匹配：<code>op值c</code>。</li>
+<li>精确匹配：<code>op值=</code>。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".SearchRangeDate"><span class="type-signature">(static) </span>SearchRangeDate<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>SearchRangeDate</code></h2>
+<p>搜索专用输入</p>
+<pre class="prettyprint source lang-js"><code>import { SearchRangeDate } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;:&quot;infoAt,日志记录时间,24,,aiSearchRangeDate&quot;,
+     &quot;optionJsx.config&quot;:{
+         &quot;mode&quot;:&quot;FULL&quot;,
+         &quot;format&quot;:&quot;YYYY-MM-DD HH:mm&quot;,
+         &quot;placeholder&quot;:[&quot;开始时间&quot;,&quot;结束时间&quot;]
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>format</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">时间格式专用数据信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>mode</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">查询条件的模式。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>placeholder</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">水印效果，左水印和右水印，长度为2的数组。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>grid</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">左中右的<code>span</code>值，默认<code>11,2,11</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>style</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">左风格left，右风格right。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td>start</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Moment</td>
+<td style="text-align:left">开始时间。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td>end</td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Moment</td>
+<td style="text-align:left">结束时间。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点。</h3>
+<h4>3.1. 关于模式</h4>
+<p>mode的值如下：</p>
+<ul>
+<li>FULL：全模式，设置showTime = true。</li>
+<li>DATE：日期模式，关闭showTime = false。</li>
+<li>MONTH：月份模式，设置只选择月份。</li>
+<li>TIME：时间模式（开发中）。</li>
+</ul>
+<h4>3.2. 日期时间</h4>
+<p>日期和时间格式全部使用Moment类型。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".TableEditor"><span class="type-signature">(static) </span>TableEditor<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>TableEditor</code></h2>
+<p>列表选择器</p>
+<pre class="prettyprint source lang-js"><code>import { TableEditor } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;items,选项表,24,,aiTableEditor&quot;,
+     &quot;optionJsx.depend.enabled&quot;: {
+         &quot;dataSource&quot;: [
+             &quot;items&quot;
+         ]
+     },
+     &quot;optionJsx.config&quot;: {
+         &quot;format&quot;: {
+             &quot;type&quot;: &quot;ARRAY&quot;,
+             &quot;keyField&quot;: &quot;name&quot;
+         },
+         &quot;table&quot;: {
+             &quot;columns&quot;: [
+                 {
+                     &quot;dataIndex&quot;: &quot;name&quot;,
+                     &quot;title&quot;: &quot;固定值&quot;,
+                     &quot;$render&quot;: &quot;EDITOR&quot;
+                 },
+                 {
+                     &quot;dataIndex&quot;: &quot;label&quot;,
+                     &quot;title&quot;: &quot;显示字段&quot;,
+                     &quot;$render&quot;: &quot;EDITOR&quot;
+                 }
+             ]
+         }
+     }
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ok</td>
+<td>Ok</td>
+<td>x</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>format</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">多格式表格编辑。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>table</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">表格专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">data</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">根据格式计算的最终数据信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$table</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">处理过的表格配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<p>包含了添加、删除两个操作，新增和删除按钮会在执行过程中被禁用或启用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".TreeSelector"><span class="type-signature">(static) </span>TreeSelector<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「组件」<code>TreeSelector</code></h2>
+<p>树选择器</p>
+<pre class="prettyprint source lang-js"><code>import { TreeSelector } from 'web';
+</code></pre>
+<h3>0. 示例</h3>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;source,导入数据源,10,,aiTreeSelector,placeholder=（选择数据源）&quot;,
+     &quot;optionJsx.config&quot;: {
+         &quot;ajax&quot;: {
+             &quot;uri&quot;: &quot;/api/search/data-source&quot;
+         },
+         &quot;selection&quot;: {
+             &quot;checkStrictly&quot;: true,
+             &quot;multiple&quot;: true,
+             &quot;showLine&quot;: false,
+             &quot;display&quot;: &quot;name&quot;,
+             &quot;limitOp&quot;: &quot;LE&quot;,
+             &quot;limitConfig&quot;: {
+                 &quot;_level&quot;: 1
+             }
+         },
+         &quot;tree&quot;: {
+             &quot;title&quot;: &quot;name&quot;
+         },
+         &quot;validation&quot;: &quot;请选择数据源！&quot;,
+         &quot;window&quot;: &quot;选择导入数据源,选择,取消,false,400,false&quot;
+     },
+     &quot;optionJsx.allowClear&quot;: true,
+     &quot;optionConfig.rules&quot;: [
+         &quot;required,请选择导入数据源&quot;
+     ]
+}
+</code></pre>
+<h3>1. 生命周期</h3>
+<table>
+<thead>
+<tr>
+<th>Hoc高阶周期</th>
+<th>Mount初始化</th>
+<th>Update更新</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>x</td>
+<td>Ok</td>
+<td>Ok</td>
+</tr>
+</tbody>
+</table>
+<h3>2. 属性说明</h3>
+<p>该属性说明位于<code>optionJsx.config</code>节点中，即<code>jsx</code>中的<code>config</code>对象信息。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th>二级属性</th>
+<th style="text-align:left">源</th>
+<th style="text-align:left">类型</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">value</td>
+<td></td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">Ant Form给当前组件传入的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>ajax</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">带表达式的Ajax请求专用配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>linker</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前选择数据和表单之间的链接配置（linker）。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>tree</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">当前列表选择器中表格<code>&lt;Tree/&gt;</code>的配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>validation</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String</td>
+<td style="text-align:left">选择验证器，验证是否选择了记录。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>window</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">String/Object</td>
+<td style="text-align:left">弹出窗口专用配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">config</td>
+<td>selection</td>
+<td style="text-align:left">props</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">多选还是单选的控制。</td>
+</tr>
+<tr>
+<td style="text-align:left">dialog</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的窗口配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">tree</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」处理过的树配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">search</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Object</td>
+<td style="text-align:left">「直接使用」开启搜索框操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">$visible</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否显示弹出框。</td>
+</tr>
+<tr>
+<td style="text-align:left">$loading</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">是否执行提交操作，造成加载效果。</td>
+</tr>
+<tr>
+<td style="text-align:left">$data</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Array</td>
+<td style="text-align:left">当前组件中拥有的表格数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">$keySet</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Any</td>
+<td style="text-align:left">选中数据的组件集合。</td>
+</tr>
+<tr>
+<td style="text-align:left">$ready</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Boolean</td>
+<td style="text-align:left">标识当前组件已经加载完成。</td>
+</tr>
+<tr>
+<td style="text-align:left">onClick</td>
+<td></td>
+<td style="text-align:left">state</td>
+<td style="text-align:left">Function</td>
+<td style="text-align:left">点击函数构造。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 组件核心点</h3>
+<p>（略）</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 15:08:53 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

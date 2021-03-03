@@ -1,29 +1,23 @@
 {
     "_modal": {
-        "success": {
-            "submitted": "您的图模板保存成功！"
-        }
-    },
-    "_graphic":{
-        "css": {
-            "maxHeight": 200,
-            "canvasHeight": 210,
-            "className": "web-editor-2",
-            "center": {
-                "x": 300,
-                "y": 300
-            }
+        "error": {
+            "duplicated": "对不起，添加的新关系重复了，两个模型之间只能定义唯一一条合法关系！"
         },
-        "source": {
-            "type": "ONCE",
-            "data": {
-                "models": "resource.models",
-                "nodes": "graphic.nodes",
-                "types": "relation.type"
+        "success": {
+            "submitted": "恭喜，您的图模板定义已经成功保存！"
+        }
+    },
+    "_graphic": {
+        "graph": {
+            "position": {
+                "start": {
+                    "x": 500,
+                    "y": 198
+                }
             }
         }
     },
-    "_toolbar":{
-        "tips":"系统自动绘制关系"
+    "_toolbar": {
+        "tips": "系统自动绘制关系"
     }
 }

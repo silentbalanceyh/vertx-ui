@@ -19,9 +19,10 @@ import Abs from "../abyss";
 import Ele from '../element';
 import St from './O.sorter';
 import Encrypt from './O.encrypt';
+import T from './O.plugin.element';
 
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.toTreeConfig`
  *
  * 针对树形配置执行规范化处理，处理过后的数据结构如：
  *
@@ -83,8 +84,10 @@ const toTreeConfig = (config = {}) => {
         return $config;
     }
 };
+
+
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.toTreeArray`
  *
  * 构造树形数组，每个元素都是一个平行节点，核心结构：
  *
@@ -134,6 +137,7 @@ const toTreeArray = (data = [], config = {}) => {
             "disabled",
             "className",
             "icon",
+            "image",            // icon 是旧版本，image 是新版本，二者都保留
             // TreeData 专用属性
             "title",
             "isLeaf",
@@ -150,8 +154,10 @@ const toTreeArray = (data = [], config = {}) => {
     });
     return normalized;
 };
+
+
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.toTree`
  *
  * 整个树的每一个节点会包含 `children` 的叶节点信息，一个节点可能包含多个叶节点，顶层数组只包括顶层父类数组。
  *
@@ -185,17 +191,10 @@ const toTree = (data = [], config = {}) => {
          * 针对每一个 root 节点查找子节点
          * 不拷贝，直接追加 children 方法
          */
-        item.children = Ele.elementChildTree(normalized, item);
+        item.children = T.elementChildTree(normalized, item);
     });
     return root;
 };
-/**
- * ## 特殊函数「Zero」
- *
- * @memberOf module:_tree
- * @param {Array} textArr 传入的文本数组
- * @return {Array} 返回构造好的树形数组
- */
 const toTreeTextArray = (textArr = []) => {
     const textArray = [];
     textArr.forEach(literal => {
@@ -233,6 +232,7 @@ const _toTreeText = (sourceArr = []) => {
     }
     return keySet;
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     toTree,
     toTreeConfig,

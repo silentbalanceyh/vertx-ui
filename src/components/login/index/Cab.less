@@ -1,31 +1,21 @@
-@import '~antd/lib/style/themes/default.less';
 @import "../../../global";
 
-@login-prefix: login;
-.@{login-prefix}-form {
-    background-color: rgba(256, 256, 256, 0.3);
+.ux-login-form {
+    .ix-border.radius(10, rgba(256, 256, 256, 0.3));
     padding: 25px 20px 100px 20px;
-    border-radius: 10px;
 
     .notice {
         color: white;
         text-align: left;
-
-        li {
-            list-style: none;
-        }
     }
 
     .title {
-        color: white;
-        font-weight: 100;
-        font-size: 24px;
+        .ix-font.thin(24, white);
         text-align: left;
     }
 
-    .web-form {
-        background-color: transparent !important;
-        
+    form {
+        background-color: transparent;
         padding: 10px;
 
         .ant-row {
@@ -33,58 +23,41 @@
         }
 
         input {
-            height: 40px;
-            padding-left: 40px;
-            background-color: transparent;
+            height: 40px !important;
+            padding-left: 40px !important;
+            background-color: transparent !important;
         }
 
         i {
             font-size: 16px;
         }
 
-        button[type="submit"] {
-            background-color: @color-login-button;
-            border: 0;
-            width: 100%;
-            height: 40px;
-            font-size: 16px;
-            font-weight: 400;
-            border-radius: 24px;
-
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-
         .has-error .ant-form-explain {
+            .error-message(@color-error);
             top: -27px;
         }
     }
 
     header {
-        width: 100% !important;
-        padding: 5px;
-        height: 120px;
         float: left;
         display: block;
+        .ix-box.rect(120px, 100%);
+        padding: 5px;
         margin-bottom: 20px;
 
         span {
-            font-size: @font-size-title;
-            height: 80px;
-            line-height: 80px;
-            color: @color-title-font;
-            display: block;
             float: left;
-            margin-top: 10px;
+            display: block;
             opacity: 0.8;
+            .ix-font.normal(@font-size-title, @color-title-font);
+            .ix-font.line(80);
+            margin-top: 10px;
         }
 
         img {
             float: left;
             opacity: 0.8;
-            width: 100px;
-            height: 100px;
+            .ix-box.rect(100px, 100px);
         }
     }
 }

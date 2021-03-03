@@ -2,7 +2,7 @@ import React from 'react';
 import Op from '../op';
 import Ux from 'ux';
 
-import LoadingContent from "../../../loading/LoadingContent/UI";
+import LoadingContent from "../../../web/LoadingContent/UI";
 import RowEditor from './UI.Row';
 import RowDrop from './UI.Row.Drop';
 

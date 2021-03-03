@@ -2,22 +2,32 @@ import Ux from 'ux';
 import Ex from 'ex';
 
 const $opSelect = (reference) => (data = {}) => {
-    const $role = Ux.clone(data);
-    /*
-     * 选择 $role
-     */
-    const state = {};
-    return Ux.ajaxGet("/api/permission/role/:roleId", $role).then(relations => {
-        const $keySet = new Set();
-        if (Ux.isArray(relations)) {
-            relations.map(item => item['permId'])
-                .filter(permId => !!permId)
-                .forEach(permId => $keySet.add(permId))
-        }
-        state.$keySet = $keySet;
-        state.$role = $role;
-        reference.setState(state);
-    })
+    if (Ux.isEmpty(data)) {
+        reference.setState({
+            $role: undefined,
+            $keySet: undefined,       // Checked 专用
+            $selectedKeys: [],
+            $selectedData: []
+        });
+    } else {
+        const $role = Ux.clone(data);
+        /*
+         * 选择 $role，构造 $role 的权限集
+         * 并且根据权限构造 code = key 的倒排表
+         */
+        const state = {};
+        return Ux.ajaxGet("/api/permission/role/:roleId", $role).then(relations => {
+            const $keySet = new Set();
+            if (Ux.isArray(relations)) {
+                relations.map(item => item['permId'])
+                    .filter(permId => !!permId)
+                    .forEach(permId => $keySet.add(permId))
+            }
+            state.$keySet = $keySet;
+            state.$role = $role;
+            reference.setState(state);
+        })
+    }
 }
 const $opSave = (reference) => (event) => {
     Ux.prevent(event);
@@ -33,12 +43,6 @@ const $opSave = (reference) => (event) => {
             reference.setState({$submitting: false});
         }))
     }
-}
-const $opClean = (reference) => (event) => {
-    Ux.prevent(event);
-    reference.setState({
-        $role: undefined, $keySet: undefined
-    });
 }
 const $opNav = (reference) => (event) => {
     Ux.prevent(event);
@@ -73,6 +77,5 @@ export default {
     $opImport,
     $opSelect,
     $opNav,
-    $opClean,
     $opSave,
 }

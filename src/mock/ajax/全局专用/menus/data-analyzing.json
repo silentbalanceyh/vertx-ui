@@ -1,0 +1,82 @@
+{
+    "menu": [
+        {
+            "code": "3001",
+            "name": "数据管理",
+            "parentCode": "3",
+            "levelNum": 2,
+            "icon": "hdd",
+            "url": "/analysis/data-management",
+            "lastYn": "Y",
+            "order": 1
+        },
+        {
+            "code": "3002",
+            "name": "数据统计",
+            "parentCode": "3",
+            "levelNum": 2,
+            "icon": "area-chart",
+            "url": "/analysis/data-statistics",
+            "lastYn": "Y",
+            "order": 2
+        },
+        {
+            "code": "3003",
+            "name": "常规模型",
+            "parentCode": "3",
+            "levelNum": 2,
+            "icon": "code-sandbox",
+            "url": "/analysis/data-model",
+            "lastYn": "Y",
+            "order": 3
+        },
+        {
+            "code": "3004",
+            "name": "业务模型",
+            "parentCode": "3",
+            "levelNum": 2,
+            "icon": "control",
+            "url": "EXPAND",
+            "lastYn": "N",
+            "order": 4,
+            "childMenus": [
+                {
+                    "code": "3004001",
+                    "name": "群列分析",
+                    "parentCode": "3004",
+                    "levelNum": 3,
+                    "url": "/analysis/business-cohort",
+                    "lastYn": "Y",
+                    "order": 1
+                },
+                {
+                    "code": "3004002",
+                    "name": "客户价值模型",
+                    "parentCode": "3004",
+                    "levelNum": 3,
+                    "url": "/analysis/business-clv",
+                    "lastYn": "Y",
+                    "order": 2
+                },
+                {
+                    "code": "3004003",
+                    "name": "推荐模型",
+                    "parentCode": "3004",
+                    "levelNum": 3,
+                    "url": "/analysis/business-recommend",
+                    "lastYn": "Y",
+                    "order": 3
+                },
+                {
+                    "code": "3004004",
+                    "name": "归因分析",
+                    "parentCode": "3004",
+                    "levelNum": 3,
+                    "url": "/analysis/business-attribution",
+                    "lastYn": "Y",
+                    "order": 4
+                }
+            ]
+        }
+    ]
+}

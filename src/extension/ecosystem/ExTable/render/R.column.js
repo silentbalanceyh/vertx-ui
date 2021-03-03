@@ -23,7 +23,6 @@ export default (reference, columns = []) => {
      * 核心处理 Action 节点
      */
     const executor = Ux.configExecutor(reference, STD_ACTION);
-
     resultColumns = Ux.configColumn(reference, resultColumns, executor);
     return resultColumns;
 };

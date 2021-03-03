@@ -1,0 +1,3370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>_develop - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/index.html" class="menu-item" id="website_link" >Zero Api</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web-extension/index.html" class="menu-item" id="website_link" >Zero Extension</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Epic Fabric</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >Origin X Engine</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toParsed">toParsed</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-_ajax.html">_ajax</a><ul class='methods'><li data-type='method'><a href="module-_ajax.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxFetch">ajaxFetch</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPush">ajaxPush</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxResource">ajaxResource</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-_ajax.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-_ajax.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-_ajax.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-_ajax.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-_ajax.html#.asyncTrue">asyncTrue</a></li><li data-type='method'><a href="module-_ajax.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-_ajax.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-_ajax.html#.messageSuccess">messageSuccess</a></li><li data-type='method'><a href="module-_ajax.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-_ajax.html#.microFetch">microFetch</a></li><li data-type='method'><a href="module-_ajax.html#.microGet">microGet</a></li><li data-type='method'><a href="module-_ajax.html#.microPost">microPost</a></li><li data-type='method'><a href="module-_ajax.html#.microPush">microPush</a></li><li data-type='method'><a href="module-_ajax.html#.microPut">microPut</a></li><li data-type='method'><a href="module-_ajax.html#.rxEdict">rxEdict</a></li></ul></li><li><a href="module-_constant.html">_constant</a><ul class='members'><li data-type='member'><a href="module-_constant.html#.(%25E7%258E%25AF%25E5%25A2%2583%25E5%258F%2598%25E9%2587%258F)">(环境变量)</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-_constant.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-_constant.html#.FORBIDDEN">FORBIDDEN</a></li><li data-type='member'><a href="module-_constant.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-_constant.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-_constant.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-_constant.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-_constant.html#.KEY_POINTER">KEY_POINTER</a></li><li data-type='member'><a href="module-_constant.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-_constant.html#.MENU_TYPE">MENU_TYPE</a></li><li data-type='member'><a href="module-_constant.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-_constant.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-_constant.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-_constant.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-_constant.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-_constant.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-_constant.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-_constant.html#.X_LANG">X_LANG</a></li><li data-type='member'><a href="module-_constant.html#.X_SIGMA">X_SIGMA</a></li><li data-type='member'><a href="module-_constant.html#.XT_FORMAT">XT_FORMAT</a></li></ul></li><li><a href="module-_develop.html">_develop</a><ul class='methods'><li data-type='method'><a href="module-_develop.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-_develop.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-_develop.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-_develop.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-_develop.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-_develop.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-_develop.html#.dgRouter">dgRouter</a></li><li data-type='method'><a href="module-_develop.html#.dgTodo">dgTodo</a></li><li data-type='method'><a href="module-_develop.html#.fxError">fxError</a></li><li data-type='method'><a href="module-_develop.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-_develop.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-_develop.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-_develop.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-_develop.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-_develop.html#.fxReport">fxReport</a></li><li data-type='method'><a href="module-_develop.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-_develop.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-_element.html">_element</a><ul class='methods'><li data-type='method'><a href="module-_element.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-_element.html#.elementChildren">elementChildren</a></li><li data-type='method'><a href="module-_element.html#.elementChildTree">elementChildTree</a></li><li data-type='method'><a href="module-_element.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-_element.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-_element.html#.elementFirst">elementFirst</a></li><li data-type='method'><a href="module-_element.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-_element.html#.elementGrid">elementGrid</a></li><li data-type='method'><a href="module-_element.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-_element.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-_element.html#.elementIndex">elementIndex</a></li><li data-type='method'><a href="module-_element.html#.elementJoin">elementJoin</a></li><li data-type='method'><a href="module-_element.html#.elementMap">elementMap</a></li><li data-type='method'><a href="module-_element.html#.elementParent">elementParent</a></li><li data-type='method'><a href="module-_element.html#.elementSave">elementSave</a></li><li data-type='method'><a href="module-_element.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-_element.html#.elementUniqueDatum">elementUniqueDatum</a></li><li data-type='method'><a href="module-_element.html#.elementVertical">elementVertical</a></li><li data-type='method'><a href="module-_element.html#.elementWrap">elementWrap</a></li></ul></li><li><a href="module-_engine.html">_engine</a><ul class='methods'><li data-type='method'><a href="module-_engine.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-_engine.html#.capForm">capForm</a></li><li data-type='method'><a href="module-_engine.html#.capTab">capTab</a></li><li data-type='method'><a href="module-_engine.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-_engine.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-_engine.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-_engine.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-_engine.html#.configExecutors">configExecutors</a></li><li data-type='method'><a href="module-_engine.html#.configForm">configForm</a></li><li data-type='method'><a href="module-_engine.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-_engine.html#.configTab">configTab</a></li><li data-type='method'><a href="module-_engine.html#.configTable">configTable</a></li><li data-type='method'><a href="module-_engine.html#.createAction">createAction</a></li><li data-type='method'><a href="module-_engine.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-_engine.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-_engine.html#.fnOut">fnOut</a></li><li data-type='method'><a href="module-_engine.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-_engine.html#.fromPath">fromPath</a></li><li data-type='method'><a href="module-_engine.html#.raftForm">raftForm</a></li><li data-type='method'><a href="module-_engine.html#.rjAssist">rjAssist</a></li><li data-type='method'><a href="module-_engine.html#.rjTabular">rjTabular</a></li><li data-type='method'><a href="module-_engine.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedRow">rxCheckedRow</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedTree">rxCheckedTree</a></li><li data-type='method'><a href="module-_engine.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-_engine.html#.rxEtat">rxEtat</a></li><li data-type='method'><a href="module-_engine.html#.rxFlow">rxFlow</a></li><li data-type='method'><a href="module-_engine.html#.rxInit">rxInit</a></li><li data-type='method'><a href="module-_engine.html#.rxResize">rxResize</a></li><li data-type='method'><a href="module-_engine.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-_engine.html#.storeUser">storeUser</a></li><li data-type='method'><a href="module-_engine.html#.writeAssist">writeAssist</a></li><li data-type='method'><a href="module-_engine.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-_engine.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-_engine.html#.writeTree">writeTree</a></li></ul></li><li><a href="module-_is.html">_is</a><ul class='methods'><li data-type='method'><a href="module-_is.html#.isArray">isArray</a></li><li data-type='method'><a href="module-_is.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-_is.html#.isCn">isCn</a></li><li data-type='method'><a href="module-_is.html#.isCollection">isCollection</a></li><li data-type='method'><a href="module-_is.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-_is.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-_is.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-_is.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-_is.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-_is.html#.isIn">isIn</a></li><li data-type='method'><a href="module-_is.html#.isInit">isInit</a></li><li data-type='method'><a href="module-_is.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-_is.html#.isNotEmpty">isNotEmpty</a></li><li data-type='method'><a href="module-_is.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-_is.html#.isObject">isObject</a></li><li data-type='method'><a href="module-_is.html#.isParent">isParent</a></li><li data-type='method'><a href="module-_is.html#.isQr">isQr</a></li><li data-type='method'><a href="module-_is.html#.isRoute">isRoute</a></li><li data-type='method'><a href="module-_is.html#.isRule">isRule</a></li><li data-type='method'><a href="module-_is.html#.isRuleAll">isRuleAll</a></li><li data-type='method'><a href="module-_is.html#.isRuleAny">isRuleAny</a></li><li data-type='method'><a href="module-_is.html#.isSame">isSame</a></li></ul></li><li><a href="module-_it.html">_it</a><ul class='methods'><li data-type='method'><a href="module-_it.html#.itAmb">itAmb</a></li><li data-type='method'><a href="module-_it.html#.itElement">itElement</a></li><li data-type='method'><a href="module-_it.html#.itFull">itFull</a></li><li data-type='method'><a href="module-_it.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-_it.html#.itObject">itObject</a></li><li data-type='method'><a href="module-_it.html#.itRepeat">itRepeat</a></li><li data-type='method'><a href="module-_it.html#.itRow">itRow</a></li><li data-type='method'><a href="module-_it.html#.itTree">itTree</a></li><li data-type='method'><a href="module-_it.html#.itUi">itUi</a></li><li data-type='method'><a href="module-_it.html#.itValue">itValue</a></li></ul></li><li><a href="module-_parser.html">_parser</a><ul class='methods'><li data-type='method'><a href="module-_parser.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-_parser.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-_parser.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommand">aiExprCommand</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommands">aiExprCommands</a></li><li data-type='method'><a href="module-_parser.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-_parser.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-_parser.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-_parser.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-_parser.html#.aiExprWindow">aiExprWindow</a></li><li data-type='method'><a href="module-_parser.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-_parser.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-_parser.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-_parser.html#.applyItem">applyItem</a></li><li data-type='method'><a href="module-_parser.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-_parser.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-_parser.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-_parser.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-_parser.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-_parser.html#.applyValue">applyValue</a></li><li data-type='method'><a href="module-_parser.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-_parser.html#.parseField">parseField</a></li><li data-type='method'><a href="module-_parser.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-_parser.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-_parser.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-_plugin.html">_plugin</a><ul class='methods'><li data-type='method'><a href="module-_plugin.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-_plugin.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-_plugin.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-_plugin.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-_plugin.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-_plugin.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-_primary.html">_primary</a><ul class='methods'><li data-type='method'><a href="module-_primary.html#.assign">assign</a></li><li data-type='method'><a href="module-_primary.html#.clone">clone</a></li><li data-type='method'><a href="module-_primary.html#.debug">debug</a></li><li data-type='method'><a href="module-_primary.html#.denull">denull</a></li><li data-type='method'><a href="module-_primary.html#.element">element</a></li><li data-type='method'><a href="module-_primary.html#.fn">fn</a></li><li data-type='method'><a href="module-_primary.html#.getV">getV</a></li><li data-type='method'><a href="module-_primary.html#.immutable">immutable</a></li><li data-type='method'><a href="module-_primary.html#.initial">initial</a></li><li data-type='method'><a href="module-_primary.html#.input">input</a></li><li data-type='method'><a href="module-_primary.html#.merge">merge</a></li><li data-type='method'><a href="module-_primary.html#.monad">monad</a></li><li data-type='method'><a href="module-_primary.html#.output">output</a></li><li data-type='method'><a href="module-_primary.html#.packet">packet</a></li><li data-type='method'><a href="module-_primary.html#.parallel">parallel</a></li><li data-type='method'><a href="module-_primary.html#.pass">pass</a></li><li data-type='method'><a href="module-_primary.html#.passion">passion</a></li><li data-type='method'><a href="module-_primary.html#.pipe">pipe</a></li><li data-type='method'><a href="module-_primary.html#.prevent">prevent</a></li><li data-type='method'><a href="module-_primary.html#.promise">promise</a></li><li data-type='method'><a href="module-_primary.html#.ready">ready</a></li><li data-type='method'><a href="module-_primary.html#.sequence">sequence</a></li><li data-type='method'><a href="module-_primary.html#.signature">signature</a></li><li data-type='method'><a href="module-_primary.html#.slice">slice</a></li><li data-type='method'><a href="module-_primary.html#.token">token</a></li></ul></li><li><a href="module-_qr.html">_qr</a><ul class='methods'><li data-type='method'><a href="module-_qr.html#.qrClear">qrClear</a></li><li data-type='method'><a href="module-_qr.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-_qr.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-_qr.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-_qr.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-_qr.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-_qr.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-_qr.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-_romantic.html">_romantic</a><ul class='methods'><li data-type='method'><a href="module-_romantic.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-_romantic.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-_romantic.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-_romantic.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-_romantic.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-_romantic.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-_romantic.html#.sexOp">sexOp</a></li><li data-type='method'><a href="module-_romantic.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-_to.html">_to</a><ul class='methods'><li data-type='method'><a href="module-_to.html#.toArray">toArray</a></li><li data-type='method'><a href="module-_to.html#.toCss">toCss</a></li><li data-type='method'><a href="module-_to.html#.toForm">toForm</a></li><li data-type='method'><a href="module-_to.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-_to.html#.toGridSpan">toGridSpan</a></li><li data-type='method'><a href="module-_to.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-_to.html#.toHeightState">toHeightState</a></li><li data-type='method'><a href="module-_to.html#.toJson">toJson</a></li><li data-type='method'><a href="module-_to.html#.toKey">toKey</a></li><li data-type='method'><a href="module-_to.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-_to.html#.toLink">toLink</a></li><li data-type='method'><a href="module-_to.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-_to.html#.toLogout">toLogout</a></li><li data-type='method'><a href="module-_to.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-_to.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-_to.html#.toPagination">toPagination</a></li><li data-type='method'><a href="module-_to.html#.toPid">toPid</a></li><li data-type='method'><a href="module-_to.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-_to.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-_to.html#.toTime">toTime</a></li><li data-type='method'><a href="module-_to.html#.toTree">toTree</a></li><li data-type='method'><a href="module-_to.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-_to.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-_to.html#.toWidth">toWidth</a></li><li data-type='method'><a href="module-_to.html#.toX">toX</a></li></ul></li><li><a href="module-_ui.html">_ui</a><ul class='methods'><li data-type='method'><a href="module-_ui.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-_ui.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-_ui.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-_ui.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-_ui.html#.anchorTree">anchorTree</a></li><li data-type='method'><a href="module-_ui.html#.columnWrapper">columnWrapper</a></li><li data-type='method'><a href="module-_ui.html#.formAdvReset">formAdvReset</a></li><li data-type='method'><a href="module-_ui.html#.formClear">formClear</a></li><li data-type='method'><a href="module-_ui.html#.formGet">formGet</a></li><li data-type='method'><a href="module-_ui.html#.formHit">formHit</a></li><li data-type='method'><a href="module-_ui.html#.formHits">formHits</a></li><li data-type='method'><a href="module-_ui.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-_ui.html#.formRead">formRead</a></li><li data-type='method'><a href="module-_ui.html#.formRedo">formRedo</a></li><li data-type='method'><a href="module-_ui.html#.formReset">formReset</a></li><li data-type='method'><a href="module-_ui.html#.formSubmit">formSubmit</a></li><li data-type='method'><a href="module-_ui.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-_ui.html#.htmlReadOnly">htmlReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.onConfirm">onConfirm</a></li><li data-type='method'><a href="module-_ui.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-_ui.html#.onLinker">onLinker</a></li><li data-type='method'><a href="module-_ui.html#.onReference">onReference</a></li><li data-type='method'><a href="module-_ui.html#.onRouter">onRouter</a></li><li data-type='method'><a href="module-_ui.html#.onSave">onSave</a></li><li data-type='method'><a href="module-_ui.html#.onUniform">onUniform</a></li><li data-type='method'><a href="module-_ui.html#.writeDisabled">writeDisabled</a></li><li data-type='method'><a href="module-_ui.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-_ui.html#.writeInitial">writeInitial</a></li><li data-type='method'><a href="module-_ui.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-_ui.html#.writeReadOnly">writeReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.writeSegment">writeSegment</a></li></ul></li><li><a href="module-_unity.html">_unity</a><ul class='methods'><li data-type='method'><a href="module-_unity.html#.ambArray">ambArray</a></li><li data-type='method'><a href="module-_unity.html#.ambEvent">ambEvent</a></li><li data-type='method'><a href="module-_unity.html#.ambFind">ambFind</a></li><li data-type='method'><a href="module-_unity.html#.ambKv">ambKv</a></li><li data-type='method'><a href="module-_unity.html#.ambObject">ambObject</a></li><li data-type='method'><a href="module-_unity.html#.ambValue">ambValue</a></li><li data-type='method'><a href="module-_unity.html#.connectId">connectId</a></li><li data-type='method'><a href="module-_unity.html#.connectItem">connectItem</a></li><li data-type='method'><a href="module-_unity.html#.connectRenders">connectRenders</a></li><li data-type='method'><a href="module-_unity.html#.connectValidator">connectValidator</a></li><li data-type='method'><a href="module-_unity.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.dslArray">dslArray</a></li><li data-type='method'><a href="module-_unity.html#.encryptAES">encryptAES</a></li><li data-type='method'><a href="module-_unity.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-_unity.html#.encryptMD5">encryptMD5</a></li><li data-type='method'><a href="module-_unity.html#.forest">forest</a></li><li data-type='method'><a href="module-_unity.html#.forestGroup">forestGroup</a></li><li data-type='method'><a href="module-_unity.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-_unity.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-_unity.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-_unity.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-_unity.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-_unity.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-_unity.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-_unity.html#.formatTpl">formatTpl</a></li><li data-type='method'><a href="module-_unity.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-_unity.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-_unity.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-_unity.html#.mathSum">mathSum</a></li><li data-type='method'><a href="module-_unity.html#.randomArray">randomArray</a></li><li data-type='method'><a href="module-_unity.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-_unity.html#.randomString">randomString</a></li><li data-type='method'><a href="module-_unity.html#.randomUUID">randomUUID</a></li><li data-type='method'><a href="module-_unity.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterObject">sorterObject</a></li><li data-type='method'><a href="module-_unity.html#.tree">tree</a></li><li data-type='method'><a href="module-_unity.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-_unity.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-_value.html">_value</a><ul class='methods'><li data-type='method'><a href="module-_value.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-_value.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-_value.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-_value.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-_value.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-_value.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-_value.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-_value.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-_value.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-_value.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-_value.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-_value.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-_value.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-_value.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-_value.html#.valueOnChange">valueOnChange</a></li><li data-type='method'><a href="module-_value.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-_value.html#.valueParse">valueParse</a></li><li data-type='method'><a href="module-_value.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-_value.html#.valuePinyin">valuePinyin</a></li><li data-type='method'><a href="module-_value.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-_value.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-_value.html#.valueTime">valueTime</a></li><li data-type='method'><a href="module-_value.html#.valueTimes">valueTimes</a></li><li data-type='method'><a href="module-_value.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-_xweb.html">_xweb</a><ul class='methods'><li data-type='method'><a href="module-_xweb.html#.xtChecked">xtChecked</a></li><li data-type='method'><a href="module-_xweb.html#.xtExprFlat">xtExprFlat</a></li><li data-type='method'><a href="module-_xweb.html#.xtFormat">xtFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArrayMap">xtInitArrayMap</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitFormat">xtInitFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyData">xtLazyData</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-_xweb.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-_xweb.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-_xweb.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-_xweb.html#.xtRevert">xtRevert</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowAdd">xtRowAdd</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowChange">xtRowChange</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowDel">xtRowDel</a></li><li data-type='method'><a href="module-_xweb.html#.xtSet">xtSet</a></li><li data-type='method'><a href="module-_xweb.html#.xtUnsafe">xtUnsafe</a></li></ul></li><li><a href="module-web-ai.html">web-ai</a><ul class='methods'><li data-type='method'><a href="module-web-ai.html#.aiBreadcrumb">aiBreadcrumb</a></li><li data-type='method'><a href="module-web-ai.html#.aiLink">aiLink</a></li><li data-type='method'><a href="module-web-ai.html#.aiUrl">aiUrl</a></li></ul></li><li><a href="module-web-component.html">web-component</a><ul class='methods'><li data-type='method'><a href="module-web-component.html#.*Dialog">* Dialog</a></li><li data-type='method'><a href="module-web-component.html#.*DialogButton">* DialogButton</a></li><li data-type='method'><a href="module-web-component.html#.*DialogMenu">* DialogMenu</a></li><li data-type='method'><a href="module-web-component.html#.*PageCard">* PageCard</a></li><li data-type='method'><a href="module-web-component.html#.*Rectangle">* Rectangle</a></li><li data-type='method'><a href="module-web-component.html#.ColumnUser">ColumnUser</a></li><li data-type='method'><a href="module-web-component.html#.G6Editor">G6Editor</a></li><li data-type='method'><a href="module-web-component.html#.G6Viewer">G6Viewer</a></li><li data-type='method'><a href="module-web-component.html#.Graphic2">Graphic2</a></li><li data-type='method'><a href="module-web-component.html#.LoadingAlert">LoadingAlert</a></li><li data-type='method'><a href="module-web-component.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-web-component.html#.Navigation">Navigation</a></li><li data-type='method'><a href="module-web-component.html#.NavSwallow">NavSwallow</a></li></ul></li><li><a href="module-web-input.html">web-input</a><ul class='methods'><li data-type='method'><a href="module-web-input.html#.AddressSelector">AddressSelector</a></li><li data-type='method'><a href="module-web-input.html#.BraftEditor">BraftEditor</a></li><li data-type='method'><a href="module-web-input.html#.CheckJson">CheckJson</a></li><li data-type='method'><a href="module-web-input.html#.CheckTransfer">CheckTransfer</a></li><li data-type='method'><a href="module-web-input.html#.DialogEditor">DialogEditor</a></li><li data-type='method'><a href="module-web-input.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-web-input.html#.InputArray">InputArray</a></li><li data-type='method'><a href="module-web-input.html#.JsonEditor">JsonEditor</a></li><li data-type='method'><a href="module-web-input.html#.ListSelector">ListSelector</a></li><li data-type='method'><a href="module-web-input.html#.MagicView">MagicView</a></li><li data-type='method'><a href="module-web-input.html#.MatrixSelector">MatrixSelector</a></li><li data-type='method'><a href="module-web-input.html#.SearchInput">SearchInput</a></li><li data-type='method'><a href="module-web-input.html#.SearchRangeDate">SearchRangeDate</a></li><li data-type='method'><a href="module-web-input.html#.TableEditor">TableEditor</a></li><li data-type='method'><a href="module-web-input.html#.TreeSelector">TreeSelector</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">_develop</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h1>开发调试模块</h1>
+<p>开发和调试专用模块，主要帮助开发生成不同日志。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">dgAjax</td>
+<td style="text-align:left">Ajax远程数据调试。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgDebug</td>
+<td style="text-align:left">（高频）常用调试函数打印调试日志。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgDiff</td>
+<td style="text-align:left">打印两个对象的比对差异结果。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgFileJson</td>
+<td style="text-align:left">（高频）将数据对象存储成文件保存并下载。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgGraphic</td>
+<td style="text-align:left">图引擎日志函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgQuery</td>
+<td style="text-align:left">查询引擎日志函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgRouter</td>
+<td style="text-align:left">路由日志函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">dgTodo</td>
+<td style="text-align:left">待办标签函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxError</td>
+<td style="text-align:left">构造错误对象专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxFailure</td>
+<td style="text-align:left">Jsx输出型界面函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxFatal</td>
+<td style="text-align:left">「中断」带中断错误抛出的中断执行函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxMessage</td>
+<td style="text-align:left">构造错误消息专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxRedux</td>
+<td style="text-align:left">Redux专用错误信息输出。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxReject</td>
+<td style="text-align:left">「异步」异步专用错误信息输出函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxReport</td>
+<td style="text-align:left">（废弃）直接打印彩色日志。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxTerminal</td>
+<td style="text-align:left">console.error打印错误信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">fxWarning</td>
+<td style="text-align:left">console.warn动因警告信息。</td>
+</tr>
+</tbody>
+</table></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgAjax"><span class="type-signature">(static) </span>dgAjax<span class="signature">(data, prefix)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgAjax</code></h2>
+<p>（高频函数）通用 DEBUG 调试函数，主要调试 Ajax 请求响应专用，在开发模式以及<code>Z_DEV_MOCK</code>打开时候使用
+主要用于监控Ajax远程请求的数据信息，此处<code>prefix</code>为标识，主要用于鉴别在什么位置执行ajax调试专用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入的需要调试的数据信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>消息的前缀。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>输入什么内容就返回什么内容（方便Fluent调用）。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgDebug"><span class="type-signature">(static) </span>dgDebug<span class="signature">(data, prefix, color)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgDebug</code></h2>
+<p>（高频函数）通用 DEBUG 调试函数，直接调用即可，用于打印特定数据，第三参数可设置日志的颜色，
+如果不设置则使用<code>#eb2f96</code>作为默认色彩。</p>
+<pre class="prettyprint source lang-js"><code>import Ux from 'ux';
+const user = { username:&quot;Lang Yu&quot; };
+Ux.dgDebug(user, &quot;用户信息&quot;);  // 使用默认色彩
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>推荐使用输入的 Object。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>prefix</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>消息前缀。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WebColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>色彩值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>传入什么内容就打印什么内容（方便Fluent调用）。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgDiff"><span class="type-signature">(static) </span>dgDiff<span class="signature">(left, right)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgDiff</code></h2>
+<p>打印两个对象的深度比对结果，打印差异性（比较两个对象专用）。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>left</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>对比左值</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>right</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>对比右值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgFileJson"><span class="type-signature">(static) </span>dgFileJson<span class="signature">(data, ext, filename)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgFileJson</code></h2>
+<p>（高频函数）通用 DEBUG 抓取数据格式的专用函数，该函数会抓取数据并且生成 Json 文件存储起来</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>输入的需要调试的数据信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>ext</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>json</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>扩展名，不设置则使用 <code>.json</code>。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>filename</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>下载的文件名，如果不设置则使用 <code>&lt;uuid&gt;.&lt;ext&gt;</code> 的格式。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgGraphic"><span class="type-signature">(static) </span>dgGraphic<span class="signature">(input, message, color)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgGraphic</code></h2>
+<p>打印图相关配置和数据信息，内部调用 <code>dgDebug</code> 函数，该函数目前只在 GEvent 内部使用，主要用于打印图专用的数据结构，
+和 dgDebug 不同的是颜色上会有区别，图日志的默认颜色为<code>#1A91FF</code>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>输入的核心数据信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>打印的消息信息，会追加 GEvent 日志前缀。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>color</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">WebColor</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>#1A91FF</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>色差专用字符串，Web色彩。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgQuery"><span class="type-signature">(static) </span>dgQuery<span class="signature">(reference, name)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgQuery</code></h2>
+<p>打印 React 组件中的特殊查询条件信息，从 <code>reference.state</code> 中提取</p>
+<ul>
+<li>$terms：列过滤配置，用于存储列过滤的字段和类型。</li>
+<li>$filters：表单提交的查询条件配置，主要用于 ExForm 中的过滤提交设置。</li>
+<li>$condition：列过滤最终生成的条件信息。</li>
+<li>$query：状态中合并的起点查询条件，标配的 Query 结构。</li>
+</ul>
+<p>下边是示例结构：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;pager&quot;: {
+        &quot;page&quot;: 1,
+        &quot;size&quot;: 10
+    },
+    &quot;sorter&quot;: [
+        &quot;field,DESC&quot;
+    ],
+    &quot;criteria&quot;: {
+    },
+    &quot;projection&quot;: []
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">React.Component</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用专用信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>name</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前条件分析器日志名称</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgRouter"><span class="type-signature">(static) </span>dgRouter<span class="signature">(Ux, container, component)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgRouter</code></h2>
+<p>UI组件的日志记录器，记录所有的UI组件，打印当前系统中所有存在的路由组件
+该方法通常只在react-router的入口文件中使用，开发模式可知道生成代码生成的路由组件做统计。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>Ux</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type"><a href="global.html#Ux">Ux</a></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Utility X工具包。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>container</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>布局容器组件。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>component</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>页面核心组件。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".dgTodo"><span class="type-signature">(static) </span>dgTodo<span class="signature">(input, message)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「开发专用」<code>Ux.dgTodo</code></h2>
+<p>打印任务标签，颜色会有区别，内部调用dgDebug。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>input</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入的数据对象</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>message</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxError"><span class="type-signature">(static) </span>fxError<span class="signature">(code, args)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxError</code></h2>
+<p>容错专用函数，消息处理函数，生成最终的 error 的状态信息，多用于 React 中的错误 state，生成的对象结构如：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;code&quot;: &quot;错误代码&quot;,
+    &quot;error&quot;: &quot;错误信息（可根据参数执行消息）&quot;
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的错误状态，组件可消费。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxFailure"><span class="type-signature">(static) </span>fxFailure<span class="signature">(code, args)</span><span class="type-signature"> &rarr; {Jsx}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxFailure</code></h2>
+<p>容错专用函数，渲染错误界面（渲染内部带有错误编码的错误界面）, 该操作作用于jsx，目的是输出错误信息到界面，
+在很多地方可直接使用该方法实现容错界面呈现。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+|
+
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Jsx</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxFatal"><span class="type-signature">(static) </span>fxFatal<span class="signature">(code, args)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxFatal</code></h2>
+<p>容错专用函数，终止函数，一旦出错不打印任何信息，直接抛出 Error，最终会 throw Error 导致系统中断，
+注意该函数会引起错误终端导致程序无法运行，一般是严重错误才使用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc usertext">
+    
+        <p>错误信息异常会被抛出</p>
+    
+    </div>
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxMessage"><span class="type-signature">(static) </span>fxMessage<span class="signature">(code, args)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxMessage</code></h2>
+<p>容错专用函数，生成<code>fxError</code>中需要使用的<code>error</code>节点的信息，支持表达式替换，会将数据输入到表达式中。</p>
+<p>容错专用函数，消息处理函数，生成最终合并的 Message 相关信息</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的字符串信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxRedux"><span class="type-signature">(static) </span>fxRedux<span class="signature">(object, original)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxRedux</code></h2>
+<p>只会使用在 Redux 环境中的响应处理器，目前是框架内部使用，带监控流程生成日志。</p>
+<p>内部调用代码如下：</p>
+<pre class="prettyprint source lang-js"><code>const actionType = $action.ofType(type.getType());
+const source = from(actionType);
+return source.pipe(
+     map(action => action.payload),
+     map(promise),
+     switchMap(promise => from(promise).pipe(
+         map(responser),
+         map(E.fxRedux),
+         map(data => Rdx.dataOut(data))
+     ))
+);
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>object</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>传入的数据信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>original</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>原始数据问题。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>传入什么返回什么，使用函数链操作。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxReject"><span class="type-signature">(async, static) </span>fxReject<span class="signature">(code)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxReject</code></h2>
+<p>容错专用函数，直接通过 code 来抓取内部定义错误信息的 Promise.reject 处理，主要用于执行
+异步模式下的 reject 操作，和Promise中的 reject 操作来绑定。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误编号，内部定义。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回拒绝过后的内容。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxReport"><span class="type-signature">(static) </span>fxReport<span class="signature">(data, config)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <dt class="important tag-deprecated">Deprecated:</dt><dd class="yes-def tag-deprecated"><ul class="dummy"><li>Yes</li></ul></dd>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxReport</code></h2>
+<p>该函数直接生成框架报表（新版已去掉彩色报表，没有必要存在），在最早的 console 中打印，内部调用代码如：</p>
+<pre class="prettyprint source lang-js"><code>const input = {
+     E,
+     develop,
+     abs,
+     element,
+     entity,
+     graphic,
+     unity,
+     ajax,
+     engine,
+};
+export default () => E.fxReport(input, config);
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>需要生成报表的数据</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>是需要解析的</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回生成的报表数据</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxTerminal"><span class="type-signature">(static) </span>fxTerminal<span class="signature">(fnCond, code, args)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxTerminal</code></h2>
+<p>（高频）带条件的错误消息，构造内部消息专用，高频使用函数，和内部错误代码绑定。</p>
+<p>调用代码如下：</p>
+<pre class="prettyprint source lang-js"><code>     // ns 属性检查
+     Ux.E.fxTerminal(!Cab || !Cab.hasOwnProperty(&quot;ns&quot;), 10050, Cab);
+     // 参数名称检查
+     Ux.E.fxTerminal(!Name, 10051, Name);
+</code></pre>
+<p>注意首参可以是一个直接条件，也可以是一个Function，最终执行的结果进行JavaScript级别的判断，判断条件成功
+则打印错误信息，如果判断条件失败则不打印错误信息，并且这个函数不会中断执行，也就是不抛出任何异常信息。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fnCond</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>条件值或条件函数，满足时执行。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>使用 error 打印警告信息，并且生成最终的警告信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".fxWarning"><span class="type-signature">(static) </span>fxWarning<span class="signature">(fnCond, code, args)</span><span class="type-signature"> &rarr; {String}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.fxWarning</code></h2>
+<p>（略）用法同<code>fxTerminal</code>，只是这个函数使用的输出管道为<code>console.warn</code>，而<code>fxTerminal</code>的输出管道为<code>console.error</code>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fnCond</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>条件值或条件函数，满足时执行。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>code</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>内部错误编码。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>args</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;any></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>错误信息中所需的参数（可变）。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>使用 warn 打印警告信息，并且生成最终的警告信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">String</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 15:08:53 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

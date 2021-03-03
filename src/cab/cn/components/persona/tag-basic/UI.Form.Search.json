@@ -1,0 +1,71 @@
+{
+    "_form": {
+        "window": -0.5,
+        "columns": 4,
+        "className": "web-form form-search",
+        "ui": [
+            [
+                "name,标签名称,6,,,placeholder=请输入标签",
+                {
+                    "metadata": "categoryId,标签类别,6,,aiSelect,placeholder=选择标签",
+                    "optionJsx.config.datum": "source=tag.type,key=code,label=name"
+                },
+                {
+                    "metadata": "dataModal,数据模型,6,,aiSelect,placeholder=选择模型",
+                    "optionJsx.config.datum": "source=tag.models,key=code,label=name"
+                },
+                "creator,创建者,6,,,placeholder=请输入创建者"
+            ],
+            [
+                {
+                    "metadata": "status,标签状态,6,,,placeholder=选择标签",
+                    "optionJsx.config.items": [
+                        "SUCCESS,成功",
+                        "FAILURE,失败"
+                    ]
+                },
+                {
+                    "metadata": "createTime,创建时间,9",
+                    "optionJsx": {
+                        "showTime": {
+                            "format": "HH:mm"
+                        },
+                        "format": "YYYY年MM月DD日 HH:mm",
+                        "placeholder": [
+                            "开始时间",
+                            "结束时间"
+                        ]
+                    }
+                },
+                {
+                    "metadata": "updateTime,更新时间,9",
+                    "optionJsx": {
+                        "showTime": {
+                            "format": "HH:mm"
+                        },
+                        "format": "YYYY年MM月DD日 HH:mm",
+                        "placeholder": [
+                            "开始时间",
+                            "结束时间"
+                        ]
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "span": 24,
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSearch,搜索,SUBMIT",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ]
+    },
+    "_button": {
+        "submit": "搜索",
+        "reset": "重置"
+    }
+}

@@ -1,4 +1,3 @@
-import Log from '../../develop/logger';
 import U from 'underscore';
 import Field from '../web-field';
 import Abs from '../../abyss';
@@ -8,6 +7,10 @@ import parser from '../parser';
 import Ut from '../../unity';
 import Unit from '../web-unit';
 import Cv from '../../constant';
+
+import Develop from '../../develop';
+
+const {Logger: Log} = Develop;
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -223,17 +226,8 @@ const raftRender = (cell = {}, config = {}) => {
             /*
              * 子表单 renders 继承
              */
-            if (renders && renders.hasOwnProperty(cell.field)) {
+            Ut.connectRenders(optionJsx, cell, renders);
 
-                /*
-                 * 将 renders 注入到 optionJsx 中
-                 * 底层 DialogEditor 自动读取
-                 */
-                const $renders = renders[cell.field];
-                if (Abs.isObject($renders)) {
-                    optionJsx.$renders = $renders;
-                }
-            }
             const {form} = reference.props;
             if (form) {
 
@@ -298,7 +292,7 @@ const raftHidden = (raft = {}, $form, reference) => {
         })
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftRender,
     raftHidden,

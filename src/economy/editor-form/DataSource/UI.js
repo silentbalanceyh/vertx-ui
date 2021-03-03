@@ -6,7 +6,7 @@ import './Cab.less';
 import Op from './op';
 
 import renderRadio from './Web.Selection';
-import LoadingAlert from '../../loading/LoadingAlert/UI';
+import LoadingAlert from '../../web/LoadingAlert/UI';
 
 import AssistForm from './forms/Web.Assist';
 import TabularForm from './forms/Web.Tabular';

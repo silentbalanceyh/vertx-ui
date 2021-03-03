@@ -1,0 +1,104 @@
+{
+    "_modal": {
+        "success": {
+            "generated": "您的密码已经重设完成，新密码：:password。"
+        }
+    },
+    "_grid": {
+        "query": {
+            "pager": {
+                "page": 1,
+                "size": 14
+            }
+        },
+        "options": {
+            "css": {
+                "content": "ops-ex-list",
+                "toolbar": "row-op",
+                "table": "row-table",
+                "row": "row-black",
+                "extra": {
+                    "offset": 21,
+                    "span": 3,
+                    "className": "op-extra"
+                }
+            }
+        },
+        "connect": [
+            {
+                "text": "添加用户",
+                "type": "primary",
+                "icon": "plus",
+                "config": {
+                    "window": "添加用户,添加,关闭,false,720,true,$opAdd,FormAdd",
+                    "pos": "EXTRA"
+                }
+            },
+            {
+                "text": "授权",
+                "config": {
+                    "window": "为用户授权,授权,关闭,false,720,true,$opAuthorized,FormAuth",
+                    "pos": "role"
+                }
+            },
+            {
+                "text": "编辑",
+                "config": {
+                    "window": "编辑用户信息,保存,关闭,false,720,true,$opSave,FormEdit",
+                    "pos": "key"
+                }
+            },
+            {
+                "text": "密码重设",
+                "config": {
+                    "executor": "fnGenerate",
+                    "pos": "key"
+                }
+            },
+            {
+                "text": "删除",
+                "config": {
+                    "confirm": "确认删除该用户？",
+                    "executor": "fnDelete",
+                    "pos": "key"
+                }
+            }
+        ],
+        "table": {
+            "pagination": "（总共:total条数据）",
+            "columns": [
+                "name,账号",
+                "company,公司",
+                "dept,部门",
+                {
+                    "metadata": "createdAt,创建时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                },
+                {
+                    "metadata": "updatedAt,更新时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                },
+                {
+                    "title": "角色",
+                    "dataIndex": "role",
+                    "width": 100,
+                    "$render": "CONNECT",
+                    "$option": [
+                        "授权"
+                    ]
+                },
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "width": 160,
+                    "$render": "CONNECT",
+                    "$option": [
+                        "编辑",
+                        "密码重设",
+                        "删除"
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -3,7 +3,7 @@ import {Button, Popover, Tag, Tooltip} from 'antd';
 import {component} from "../../_internal";
 import Ux from 'ux';
 import Op from './op';
-import Dialog from "../../container/Dialog/UI";
+import Dialog from "../../web/Dialog/UI";
 import './Cab.less';
 
 import renderContent from "./Web.Content";

@@ -1,0 +1,34 @@
+{
+    "_config": {
+        "login": [
+            {
+                "key": "lnkInfo",
+                "icon": "profile",
+                "text": "简介",
+                "uri": "/login/index"
+            },
+            {
+                "key": "lnkLogin",
+                "icon": "user",
+                "text": "登录",
+                "uri": "/login/form"
+            }
+        ],
+        "logged": [
+            {
+                "key": "lnkHome",
+                "icon": "home",
+                "text": "系统首页"
+            },
+            {
+                "key": "lnkLogout",
+                "icon": "logout",
+                "text": "注销",
+                "metadata": {
+                    "function": "fnLogout"
+                }
+            }
+        ],
+        "title": "OriginPlus"
+    }
+}

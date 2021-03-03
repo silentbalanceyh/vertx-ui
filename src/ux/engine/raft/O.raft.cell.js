@@ -53,6 +53,7 @@ const raftCell = (cell = {}, config = {}, raft) => {
     column.render = Rdr.raftRender(raft, Abs.clone(params));
     return column;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftCell,
     raftItem,

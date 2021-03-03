@@ -1,5 +1,5 @@
 import renderJsx from './P.web.list.jsx';
-import Yo from '../yo';
+import Ex from "ex";
 
 export default (reference, item = {}) => {
     const {
@@ -8,12 +8,12 @@ export default (reference, item = {}) => {
     /*
      * 处理 op 相关信息
      */
-    const opens = Yo.yoOpen(reference);
-    const extra = Yo.yoExtra(reference);
+    const opens = Ex.yoListOpen(reference);
+    const extra = Ex.yoListExtra(reference);
     /*
      * 处理 table 相关信息
      */
-    const table = Yo.yoTable(reference);
+    const table = Ex.yoTable(reference);
     /*
      * 处理 plugins
      */

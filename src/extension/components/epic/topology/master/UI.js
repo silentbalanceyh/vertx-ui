@@ -1,21 +1,27 @@
 import React from 'react';
-import Op from './Op';
+import Op from './op';
 import Ex from 'ex';
-import {ExGraphicPlotter} from 'ei';
+import {ExGraphicEditor} from 'ei';
+import Ux from "ux";
 
+@Ux.zero(Ux.rxEtat(require('../Cab.json'))
+    .cab("UI.Master")
+    .to()
+)
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiPage(this)
+        Op.yiGraphic(this)
     }
 
     render() {
         return Ex.yoRender(this, () => {
             const inherit = Ex.yoAmbient(this);
-            const {$data = {}} = this.state;
-            const {config = {}} = this.props;
+
+            inherit.config = Ux.fromHoc(this, 'graphic');
+
+            const gxFun = Op.rxCommand(this);
             return (
-                <ExGraphicPlotter {...inherit} data={$data}
-                                  $graphic={config}/>
+                <ExGraphicEditor {...inherit} {...gxFun}/>
             );
         }, Ex.parserOfColor("PxTopologyMaster").page())
     }

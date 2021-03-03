@@ -1,6 +1,6 @@
 import React from 'react';
 import {component} from "../../../_internal";
-import LoadingContent from "../../../loading/LoadingContent/UI";
+import LoadingContent from "../../../web/LoadingContent/UI";
 import Ux from 'ux';
 import {Button, Form, Icon, Upload} from "antd";
 

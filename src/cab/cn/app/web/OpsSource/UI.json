@@ -1,0 +1,10 @@
+{
+    "_card": {
+        "text": "数据源",
+        "icon": "plus"
+    },
+    "_search": {
+        "placeholder": "输入关键字"
+    },
+    "_window": "数据源添加,保存,关闭,false,720,true,$opSaveSource"
+}

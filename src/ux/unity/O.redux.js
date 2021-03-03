@@ -4,11 +4,11 @@ import U from 'underscore';
 import E from '../error';
 
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeTree`
  *
  * Zero UI中和 redux 连接到一起的状态统一修改函数，主要修改节点为 `out` 根节点下的数据。
  *
- * @memberOf module:_redux
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React组件。
  * @param {Object} state 被修改的状态信息。
  * @param {any} dft 状态默认值
@@ -36,7 +36,7 @@ const writeTree = (reference, state, dft = null) => {
     }
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeClean`
  *
  * Zero UI 中的 redux 树的清除方法，用于清除该节点上的数据，该清除会清掉默认信息。
  *
@@ -46,7 +46,7 @@ const writeTree = (reference, state, dft = null) => {
  * * `assist`。
  * * `state.submitting`.
  *
- * @memberOf module:_redux
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React组件。
  * @param {Array} keys 被清除的所有节点信息。
  */
@@ -63,11 +63,11 @@ const writeClean = (reference, keys = []) => {
     writeTree(reference, state, undefined);
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeSubmit`
  *
  * Zero UI 中的 redux 树的防重复提交专用方法，用于检查 redux 引擎下的防重复提交。
  *
- * @memberOf module:_redux
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React组件。
  * @param {boolean} loading 防重复提交专用状态值。
  */

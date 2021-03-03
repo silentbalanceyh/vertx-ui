@@ -1,6 +1,0 @@
-export default {
-    mock: true,
-    data: {
-        access_token: "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyIjoiMmIyYjY2ZTItYTMyMy00MzgyLTljZTQtZjQ5YjQyOWU3NTc5IiwiaGFiaXR1cyI6InVqWVBTa0JWSzljZmpCaG1pYUpjR0ZqcllQM0Y3d09oTGxxeHBCblhwWERVYmRPQ3pyZklwSE8wdDVNNTFRZ3JONXZWbFJsZjRkeFVhYlRoZXJFcDBadEFibkJoeW1Ta2o0R3FkWE9OY0drZjFkaGppdGpselVwMG50YTl3VjAwIiwiaWF0IjoxNTkwMDI4NjkwfQ.iuHNjs5lrYkAnGG1_lS0Kmm71OKED2RZdgOw3ryb8Tc"
-    }
-}

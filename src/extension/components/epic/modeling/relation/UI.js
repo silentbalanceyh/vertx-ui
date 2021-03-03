@@ -2,12 +2,11 @@ import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
 import {Button, Col, Row, Switch, Tooltip} from "antd";
-import Yo from './yo';
 import './Cab.less';
 
 import renderMenu from './Web.Menu';
 import renderPage from './Web.Page';
-import Op from "./event";
+import Op from "./op";
 
 @Ux.zero(Ux.rxEtat(require('../Cab.json'))
     .cab("UI.Relation")
@@ -15,7 +14,7 @@ import Op from "./event";
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Yo.yiPage(this);
+        Op.yiPage(this);
     }
 
     render() {
@@ -24,9 +23,9 @@ class Component extends React.PureComponent {
              * models / category 计算最终的模型列表
              */
             const title = Ux.fromHoc(this, "title");
-            const attrSwitch = Yo.yoSwitch(this);
-            const attrLeft = Yo.yoLeft(this);
-            const attrRight = Yo.yoRight(this);
+            const attrSwitch = Op.yoSwitch(this);
+            const attrLeft = Op.yoLeft(this);
+            const attrRight = Op.yoRight(this);
             /*
              * 切换
              */

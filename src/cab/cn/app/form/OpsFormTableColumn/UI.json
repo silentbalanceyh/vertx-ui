@@ -1,0 +1,61 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "hidden": [
+            "id",
+            "tableCode",
+            "tableId",
+            "tenantId",
+            "status"
+        ],
+        "ui": [
+            [
+                {
+                    "metadata": "name,字段名称,14",
+                    "optionConfig.rules": [
+                        "required,请填写字段名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "code,字段编码,14,,,readOnly=true",
+                    "optionConfig.rules": [
+                        "required,请填写字段编码！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "type,字段类型,14,,,readOnly=true",
+                    "optionConfig.rules": [
+                        "required,请填写字段类型！"
+                    ]
+                }
+            ],
+            [
+                "description,描述信息,,,aiTextArea,rows=3"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "span": 24,
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSaveTaleColumn,保存物理表字段,SUBMIT"
+                    ]
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "invalid": "对不起，您输入的数据非法，请输入合法数据！"
+        },
+        "success": {
+            "created": "恭喜，您的物理表字段创建成功！",
+            "updated": "您的物理表字段信息已经更新成功！"
+        }
+    }
+}

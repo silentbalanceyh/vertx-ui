@@ -1,1 +1,1 @@
-npm run startwin
+yarn startwin

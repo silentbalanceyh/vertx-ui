@@ -69,9 +69,14 @@ const rxTabEdit = (reference) => (key, data = {}, item = {}, callbackState = {})
  * @param {ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
-const rxTabOpen = (reference) => (key, data = {}) => {
+const rxTabOpen = (reference) => (key, data = {}, record) => {
     const view = _Tab.View.switch(reference, Mode.EDIT, key);
     const tabs = _Tab.Tab.edit(reference, data);
+    // 注入上层变量
+    if (record) {
+        // rowData 专用注入
+        view.$rowData = Ux.clone(record);
+    }
     reference.setState({tabs, ...view, $inited: data});
     Rt.rx(reference).openPost(data);
 };

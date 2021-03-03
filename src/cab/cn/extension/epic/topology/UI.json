@@ -8,17 +8,6 @@
     "_page": {
         "title": "拓扑图管理"
     },
-    "_graphic": {
-        "css": {
-            "maxHeight": 136,
-            "canvasHeight": 172,
-            "className": "web-editor-2",
-            "center": {
-                "x": 300,
-                "y": 300
-            }
-        }
-    },
     "_assist": {
         "resource.models": {
             "uri": "/api/model/by/sigma"

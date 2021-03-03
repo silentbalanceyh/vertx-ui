@@ -1,0 +1,97 @@
+{
+    "_op": [
+        {
+            "key": "$opAdd",
+            "text": "基础标签",
+            "icon": "plus",
+            "type": "primary"
+        }
+    ],
+    "_assist": {
+        "tag.type": {
+            "uri": "/api/tag/data-types"
+        },
+        "tag.models": {
+            "uri": "/api/tag/data-modals"
+        }
+    },
+    "_query": {
+        "pager": {
+            "page": 1,
+            "size": 14
+        }
+    },
+    "_search": {
+        "input": {
+            "placeholder": "请输入关键字",
+            "enterButton": "搜索"
+        },
+        "condition": "搜索条件",
+        "tag": "关键字：:keyword"
+    },
+    "_table": {
+        "pagination": "总共:total条记录",
+        "rowKey": "id",
+        "className": "ops-table-small",
+        "size": "small",
+        "columns": [
+            "name,标签名称",
+            "categoryName,标签类型",
+            "dataModal,数据模型",
+            {
+                "metadata": "status,标签状态,MAPPING",
+                "$mapping": {
+                    "SUCCESS": "成功,,,,#00D1E5",
+                    "FAILURE": "失败,,,,#E96A69"
+                }
+            },
+            "creator,创建人",
+            {
+                "metadata": "createTime,创建时间,DATE",
+                "$format": "YYYY-MM-DD HH:mm"
+            },
+            {
+                "metadata": "updateTime,更新时间,DATE",
+                "$format": "YYYY-MM-DD HH:mm"
+            },
+            {
+                "metadata": "id,操作",
+                "style": {
+                    "textAlign": "left"
+                },
+                "$render": "EXECUTOR",
+                "$option": [
+                    {
+                        "text": "查看",
+                        "executor": "$opView"
+                    },
+                    {
+                        "text": "编辑",
+                        "executor": "$opEdit"
+                    },
+                    {
+                        "text": "删除",
+                        "executor": "$opDelete",
+                        "confirm": "确认删除选择的标签？",
+                        "rule": {
+                            "field": "status",
+                            "value": {
+                                "SUCCESS": {
+                                    "enabled": false
+                                },
+                                "FAILURE": {
+                                    "enabled": true
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "_modal": {
+        "success": {
+            "deleted": "您选择的标签已成功删除！"
+        }
+    }
+}

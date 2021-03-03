@@ -30,13 +30,12 @@ const yuList = (reference, previous = {}) => {
          * 默认的 配置处理
          */
         reference.setState({$ready: false});
-        Ux.toLoading(() => yiList(reference)
-            .then(state => {
-                /*
-                 * 更新状态
-                 */
-                reference.setState(Ux.clone(state));
-            }))
+        Ux.toLoading(() => yiList(reference).then(state => {
+            /*
+             * 更新状态
+             */
+            reference.setState(Ux.clone(state));
+        }))
     } else {
         const $queryChecked = Ex.upQuery(props, prevProps);
         if ($queryChecked) {

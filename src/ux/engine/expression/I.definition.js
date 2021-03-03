@@ -6,7 +6,8 @@ const windowDefinition = {
         "visible",
         "width",
         "maskClosable",
-        "onOk"
+        "onOk",
+        "component"
     ],
     drawer: [
         "title",

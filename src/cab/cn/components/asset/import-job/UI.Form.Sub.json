@@ -1,0 +1,26 @@
+{
+    "_info": {
+        "source": "导入数据源",
+        "sourceField": "导入字段",
+        "target": "目标数据库",
+        "targetField": "目标字段",
+        "empty": "您还没有选择任何目标数据库",
+        "unselected": "请先选择您的数据源相关信息",
+        "script": "填写导入脚本"
+    },
+    "_select": {
+        "placeholder": "（请选择目标数据库）"
+    },
+    "_selectField": {
+        "placeholder": "（请选择字段信息）"
+    },
+    "_modal": {
+        "error": {
+            "source": "请选择您的数据源信息！",
+            "field": "对不起，请设置您的导入字段信息！"
+        },
+        "confirm": {
+            "save": "未选择完成的字段将会被忽略，请仔细检查，确认提交？"
+        }
+    }
+}

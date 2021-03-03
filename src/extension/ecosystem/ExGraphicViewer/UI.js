@@ -1,9 +1,9 @@
 import React from 'react';
 import Ex from 'ex';
 import Ux from 'ux';
-import Op from './op';
-import renderEmpty from './Web.Empty';
-import renderJsx from './Web.Graphic';
+import Op from "./op";
+import {G6Viewer} from "web";
+import {Spin} from 'antd';
 
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("ExGraphicViewer")
@@ -11,18 +11,35 @@ import renderJsx from './Web.Graphic';
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Ux.g6ViewInit(this, Op.onInit)
+        Ux.g6PageInit(this, Op.yiGraphic);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Ux.g6PageUp(this,
+            {props: prevProps, state: prevState}, Op.yiGraphic);
     }
 
     render() {
         return Ex.yoRender(this, () => {
-            const {$data = {}} = this.state;
-            const {nodes = []} = $data;
-            return 0 === nodes.length ?
-                /* 无数据渲染 */
-                renderEmpty(this) :
-                /* 带数据渲染 */
-                renderJsx(this, $data);
+            const {
+                $gEvent, $data = {},
+                $submitting = false,
+            } = this.state;
+            const inherit = Ex.yoAmbient(this);
+            inherit.$gEvent = $gEvent;
+            inherit.data = $data;
+
+            const info = Ux.fromHoc(this, "info");
+            return (
+                <div className={"drawer-background"}>
+                    <Spin spinning={$submitting} tip={info.loading}>
+                        <G6Viewer {...inherit}/>
+                        {Ux.x6UiDialog(this, {
+                            supplier: Ex.yoDynamic
+                        })}
+                    </Spin>
+                </div>
+            )
         }, Ex.parserOfColor("ExGraphicViewer").component())
     }
 }

@@ -1,7 +1,8 @@
 import React from 'react';
-import {ExDeploy, ExGraphicSpider} from "ei";
+import {ExDeploy, ExGraphicEditor} from "ei";
 import {Col, Row, Tag} from 'antd';
 import Ex from 'ex';
+import Op from './op';
 
 export default (reference, title = {}) => {
     const {$selected} = reference.state;
@@ -9,6 +10,11 @@ export default (reference, title = {}) => {
         const header = title.header;
         const data = $selected.data ? $selected.data : {};
         const inherit = Ex.yoAmbient(reference);
+        inherit.data = data;
+        /*
+         * 图区域的专用计算，将传入宽高数据
+         */
+        const gxFun = Op.rxCommand(reference);
         return (
             <div>
                 <Row className={"header"}>
@@ -29,7 +35,9 @@ export default (reference, title = {}) => {
                 </Row>
                 <Row>
                     <Col span={24}>
-                        <ExGraphicSpider {...inherit} $current={data}/>
+                        {/* 节点专用函数处理和执行 */}
+                        <ExGraphicEditor {...inherit}
+                                         {...gxFun}/>
                     </Col>
                 </Row>
             </div>

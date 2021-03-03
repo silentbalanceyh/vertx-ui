@@ -1,0 +1,10 @@
+{
+    "_assist": {
+        "source.types": {
+            "uri": "/Console/dictionary/name/DATA_SOURCE_TYPE",
+            "response": {
+                "data": "DATA_SOURCE_TYPE"
+            }
+        }
+    }
+}

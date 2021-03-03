@@ -9,7 +9,7 @@ import DatumUnique from '../../DatumUnique/UI';
 
 import FieldAddition from '../control/Web.Sub.Field';
 
-import LoadingContent from "../../../loading/LoadingContent/UI";
+import LoadingContent from "../../../web/LoadingContent/UI";
 import {Divider, Icon, Modal} from "antd";
 
 const jsxFieldDialog = (reference) => {

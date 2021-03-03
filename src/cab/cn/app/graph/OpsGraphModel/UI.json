@@ -1,0 +1,14 @@
+{
+    "_card": {
+        "text": "数据模型关系图",
+        "extra": [
+            "lnkAdd,数据模型,ops-link-extra,,,plus"
+        ]
+    },
+    "_info": {
+        "tips": "数据模型不存在，请",
+        "link": "新增数据模型"
+    },
+    "_graph": {
+    }
+}

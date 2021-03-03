@@ -1,74 +1,200 @@
-import Ux from 'ux';
-import Event from './Op.Event';
-import yiForm from './Op.Form';
+import Ux from "ux";
+import {Dsl} from "entity";
 
-const yiEdition = (reference, config = {}) => {
-    const {
-        table = {}, dialog = "", op,
-        /*
-         * 提交过后是否关闭窗口
-         * = false: 如果 false 则继续添加，只重置
-         * = true：如果 true 则添加完后关闭窗口
-         */
-    } = config;
-    const state = {};
-    const {$rows = {}} = reference.props;
+const callbackRow = (reference, input) => {
     /*
-     * EVENTS中的默认函数
-     * fnEdit
-     * fnDelete
-     * 上层传入 $rows 对象，同样包含了其他函数
-     */
-    const events = Ux.clone(Event.EVENTS);
-    Object.assign(events, $rows);
-    const executors = Ux.configExecutor(reference, events);
-    /*
-     * 窗口
-     */
-    state.$dialog = Ux.configDialog(reference, dialog);
-    /*
-     * 提取当前 Dialog 需要使用的 Form
+     * rxPostRow
      */
     const ref = Ux.onReference(reference, 1);
+    const {doRow} = ref.props;
+    const {id = ""} = reference.props;
+    if (Ux.isFunction(doRow)) {
+        /*
+         * 1）input：添加、删除、编辑都好，最终处理的内容为 {} 或 key
+         * 2）form：当前组件需要使用的上层 form 引用（Ant Form）
+         * 3）reference：表单引用
+         */
+        const value = Ux.formHit(ref, id);
+        const field = id;
+        const current = input;
+        doRow({field, value, current}, reference);
+    }
+};
+const saveData = (reference, record) => {
+    const {data = []} = reference.state;
+    if ("string" === typeof record) {
+        let $data = Ux.clone(data);
+        $data = $data.filter(each => record !== each.key);
+        return $data;
+    } else {
+        /*
+         * 保存 / 新增
+         */
+        const dataArray = Dsl.getArray(data);
+        dataArray.saveElement(record);
+        return dataArray.to();
+    }
+};
+
+const onRow = (reference) => (row = {}, additional = {}) => {
     /*
-     * executors 格式化，DialogEditor 专用
+     * 按照 row 保存数据
      */
-    const normalized = {};
-    Object.keys(executors).forEach(key => {
-        if (Ux.isFunction(executors[key])) {
-            const normalizeFn = executors[key](reference);
-            if (Ux.isFunction(normalizeFn)) {
-                normalized[key] = normalizeFn;
-            }
+    const state = Ux.clone(additional);
+    /*
+     * 更新相关数据
+     */
+    const request = saveData(reference, row);
+    state.data = doChange(reference, request);
+    reference.setState(state);
+    /*
+     * rxPostRow 调用
+     */
+    callbackRow(reference, state.data);
+};
+const onRows = (reference) => (rows = [], additional = {}) => {
+    const state = Ux.clone(additional);
+    const {data = []} = reference.state;
+    const dataArray = Dsl.getArray(data);
+    rows.forEach(row => dataArray.saveElement(row));
+    const request = dataArray.to();
+    state.data = doChange(reference, request);
+    reference.setState(state);
+    /*
+     * doRow 调用
+     */
+    callbackRow(reference, state.data);
+};
+const doChange = (reference, request = []) => {
+    request = Ux.clone(request);
+    /*
+     * 最终处理，解决 ERROR 类似的字段
+     */
+    const {$keyField} = reference.state;
+    request.forEach(record => {
+        if (record.key && record.key.startsWith("ERROR")) {
+            record.key = record[$keyField];
         }
     });
-    const tableRef = Ux.configTable(ref, table, normalized);
-    state.$table = tableRef;
-    if (tableRef.rowKey) {
+    Ux.fn(reference).onChange(request);
+    return request;
+}
+const fnDelete = (reference) => (id, record) => {
+    /*
+     * 提交处理
+     */
+    reference.setState({$submitting: true});
+    Ux.toLoading(() => {
         /*
-         * 方便后期编辑、添加、删除
+         * 更新 row
          */
-        state.$keyField = tableRef.rowKey;
+        const rxRow = onRow(reference);
+        rxRow(id, {$submitting: false});
+    })
+};
+const fnEdit = (reference) => (id, record) => {
+    const ref = Ux.onReference(reference, 1);
+    const data = Ux.clone(record);
+    const {$inited = {}} = ref.props;
+
+    const {$keyField = "key"} = reference.state;
+    if (record[$keyField]) {
+        /*
+         * 保证更新
+         */
+        data.key = record[$keyField];
+    }
+
+    if ($inited.key) {
+        // 父表单字段
+        data.parentId = $inited.key;
     }
     /*
-     * 按钮处理
+     * 状态重新设置
      */
-    state.$button = Ux.configAnchor(reference, op, {
-        /*
-         * 添加的回调函数，主要用于生成状态
-         */
-        add: Event.onOpen(reference)
-    });
+    const state = {};
     /*
-     * initialValue
+     * data 中的日期格式需要解析
+     * The value/defaultValue of DatePicker or MonthPicker must be a moment object after `antd@2.0`
+     * 防止上述错误，执行表单的初始值
      */
-    const {value = []} = reference.props;
-    const $data = yoValue(value, tableRef);
-    state.initialValue = $data;
-    state.data = $data;
+    state.$inited = data;
+    state.$mode = Ux.Env.FORM_MODE.EDIT;
+    state.$visible = true;
+    reference.setState(state);
+};
+const onOpen = (reference) => () => {
+    const ref = Ux.onReference(reference, 1);
 
-    yiForm(reference, config, state)
-        .then(Ux.ready).then(Ux.pipe(reference));
+    const data = {};
+    // 专用处理
+    data.key = Ux.randomUUID();
+
+    const {$inited = {}} = ref.props;
+    if ($inited.key) {
+        // 父表单字段
+        data.parentId = $inited.key;
+    }
+    // 后期是合并，所以这里需要提供 $inited 键
+    return Ux.promise({
+        $inited: data,
+        $mode: Ux.Env.FORM_MODE.ADD
+    });
+};
+const yoUniform = (uniform = {}, reference) => {
+    /*
+     * $record 主记录处理
+     */
+    const {$record, $options} = reference.props;
+    uniform.$record = $record;
+    uniform.$options = $options;
+    /*
+     * 上层的 $op 属性引入到下层中执行处理
+     * 传入下层，可替换二次属性
+     */
+    const {$op = {}} = reference.props;
+    if (!Ux.isEmpty($op)) {
+        /*
+         * 执行二阶函数的专用位置，绑定二级 form
+         */
+        uniform.$op = $op;
+    }
+};
+const yoInherit = (reference) => {
+    const ref = Ux.onReference(reference, 1);
+    const inherit = Ux.onUniform(ref.props);
+
+    inherit.reference = reference;
+    /*
+     * 传入 submit 专用函数
+     */
+    inherit.doSubmitting = ($submitting = true) =>
+        reference.setState({$submitting});
+    /*
+     * 自定义组件，这里要调用外围方法
+     */
+    inherit.doRow = onRow(reference);
+    inherit.doRows = onRows(reference);
+    /*
+     * 构造 Form 类的 Assist
+     * 这个属于特殊规则，主要针对 form 中 Array 类型的提供数据源
+     */
+    const {form} = ref.props;
+    /*
+     * 特殊统一处理
+     */
+    yoUniform(inherit, ref);
+    if (form) {
+        const values = form.getFieldsValue();
+        Object.keys(values)
+            .filter(field => Ux.isArray(values[field]))
+            .forEach(field => {
+                const key = Ux.toKey(`form.${field}`);
+                const value = values[field];
+                inherit[key] = Dsl.getArray(value);
+            })
+    }
+    return inherit;
 };
 
 const yoValue = (value = [], tableRef = {}) => {
@@ -111,93 +237,27 @@ const yoValue = (value = [], tableRef = {}) => {
     }
     return normalized;
 }
-
-const yiView = (reference, config) => {
-    const {
-        table = {},
-        /*
-         * 提交过后是否关闭窗口
-         * = false: 如果 false 则继续添加，只重置
-         * = true：如果 true 则添加完后关闭窗口
-         */
-    } = config;
-    const state = {};
-    /*
-     * 提取当前 Dialog 需要使用的 Form
-     */
-    const ref = Ux.onReference(reference, 1);
-    /*
-     * executors 格式化，DialogEditor 专用
-     */
-    const $table = Ux.clone(table);
-    $table.columns = table.columns.filter(item => "EXECUTOR" !== item['$render']);
-    state.$table = Ux.configTable(ref, $table, {});
-    state.$ready = true;
-    reference.setState(state);
-};
-
-const yiPage = (reference) => {
-    const {config = {}, readOnly = false} = reference.props;
-    /*
-     * 表格
-     */
-    if (readOnly) {
-        yiView(reference, config);
-    } else {
-        yiEdition(reference, config);
+const yoInheritForm = (reference, $inited, $mode) => {
+    const inherit = yoInherit(reference);
+    inherit.$inited = $inited;
+    inherit.$mode = $mode;
+    const {value} = reference.props;
+    if (value) {
+        inherit.value = value;
     }
-};
-const yuPage = (reference, virtualRef) => {
-    const {readOnly = false} = reference.props;
-    if (!readOnly) {
-        const prevValue = virtualRef.props.value;
-        const curValue = reference.props.value;
-        /*
-         * 发生改变的时候操作
-         */
-        if (prevValue !== curValue) {
-            /*
-             * Form 处理
-             */
-            const ref = Ux.onReference(reference, 1);
-            const {form} = ref.props;
-            /*
-             * 是否操作过（未操作就是重置状态）
-             */
-            const isTouched = form.isFieldsTouched();
-            if (isTouched) {
-
-            } else {
-                /*
-                 * 重置表单
-                 */
-                const {initialValue = []} = reference.state;
-                const {onChange, id} = reference.props;
-                if (Ux.isFunction(onChange)) {
-                    /*
-                     * 初始化表单
-                     */
-                    reference.setState({data: initialValue});
-                    if (0 < initialValue.length) {
-                        /*
-                         * 编辑重置
-                         */
-                        const state = {};
-                        state[id] = initialValue;
-                        Ux.formHits(ref, state);
-                    } else {
-                        /*
-                         * 添加重置
-                         */
-                        Ux.formReset(ref, [id])
-                    }
-                }
-            }
-        }
+    const {$renders} = reference.props;
+    if ($renders) {
+        inherit.$renders = $renders;
     }
-};
+    return inherit;
+}
 export default {
+    EVENTS: {
+        fnDelete,
+        fnEdit,
+    },
+    onOpen,
     yoValue,
-    yiPage,
-    yuPage,
+    yoInherit,
+    yoInheritForm,
 }

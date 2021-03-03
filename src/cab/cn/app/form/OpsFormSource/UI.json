@@ -1,0 +1,103 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "hidden": [
+            "id"
+        ],
+        "ui": [
+            [
+                {
+                    "metadata": "sourceCode,数据源代码,14",
+                    "optionConfig.rules": [
+                        "required,请填写数据源代码！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "sourceName,数据源名称,14",
+                    "optionConfig.rules": [
+                        "required,请填写数据源名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "sourceType,数据源类型,14,,aiSelect",
+                    "optionJsx.config.datum": "source=source.types,key=id,label=dicItemValue",
+                    "optionConfig.rules": [
+                        "required,请选择数据源类型！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "jdbcUrl,JDBC URL",
+                    "optionConfig.rules": [
+                        "required,请填写JDBC的URL地址！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "jdbcDriver,JDBC Driver,19,,aiSelect",
+                    "optionJsx.config.items": [
+                        "com.mysql.jdbc.Driver,MySQL 5.x（com.mysql.jdbc.Driver）",
+                        "com.mysql.cj.jdbc.Driver,MySQL 5.x+（com.mysql.cj.jdbc.Driver）"
+                    ],
+                    "optionConfig.rules": [
+                        "required,请选择JDBC驱动类名！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "username,登录用户,14",
+                    "optionConfig.rules": [
+                        "required,请填写数据库用户名！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "password,登录密码,14,,aiPassword",
+                    "optionConfig.rules": [
+                        "required,请填写登录密码！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "instance,数据库名,14",
+                    "optionConfig.rules": [
+                        "required,请填写数据库名称！"
+                    ]
+                }
+            ],
+            [
+                "description,描述信息,,,aiTextArea,rows=3"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "span": 24,
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSaveSource,保存数据源,SUBMIT",
+                        "$opCheckSource,校验数据源,SUBMIT"
+                    ]
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "invalid": "对不起，您输入的数据源非法，请输入合法数据源！"
+        },
+        "success": {
+            "created": "恭喜，您的数据源创建成功！",
+            "updated": "您的数据源信息已经更新成功！"
+        }
+    }
+}

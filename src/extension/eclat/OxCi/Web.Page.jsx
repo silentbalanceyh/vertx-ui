@@ -71,12 +71,18 @@ const tabTopology = reference => () => {
     inherit.$inited = $inited;
     inherit.$identifier = $identifier;
     /* 处理 $event 配置信息，到 topology 中去合并 */
-
+    inherit.$container = 'web-g6-viewer-dialog';        // 切换图
+    // 窗口固定宽度：1150
+    inherit.$position = {
+        start: {
+            x: 152,
+            y: 350
+        },
+        resize: false,    // 固定（一般用于窗口，不执行 resize
+    }
     return (
         <div style={_toHeight()}>
-            <OxTopology {...inherit} $event={{
-                onNodeDoubleClick: Event.onVisit(reference)
-            }}/>
+            <OxTopology {...inherit} onNodeDoubleClick={Event.onVisit(reference)}/>
         </div>
     )
 };

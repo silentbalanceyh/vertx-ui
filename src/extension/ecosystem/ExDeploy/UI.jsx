@@ -3,7 +3,7 @@ import {LoadingAlert} from "web";
 import Ux from 'ux';
 import {Col, Icon, Row, Statistic} from 'antd';
 import './Cab.less';
-import renderGraph from './UI.Graph';
+import renderGraph from './GI.graph';
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExDeploy")

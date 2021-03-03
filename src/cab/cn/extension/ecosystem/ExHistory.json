@@ -43,7 +43,7 @@
             },
             "serial,事件编号",
             {
-                "metadata": "updatedBy,创建人,USER",
+                "metadata": "createdBy,创建人,USER",
                 "$config": {
                     "uri": "/api/user/:key",
                     "field": "realname"

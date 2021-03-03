@@ -2,7 +2,7 @@ import {Col, Row} from "antd";
 import React from "react";
 import './Cab.less';
 import Ux from "ux";
-import Op from '../yo';
+import Ex from 'ex';
 
 import ExAction from '../../ExAction/UI';
 import ExTable from '../../ExTable/UI';
@@ -11,7 +11,7 @@ const renderSearch = (reference) => {
     const {$form = {}} = reference.props;
     const Component = $form.FormSearch;
     if (Component) {
-        const attrs = Op.yoSearch(reference);
+        const attrs = Ex.yoListSearch(reference);
         return (
             <Component {...attrs}/>
         )

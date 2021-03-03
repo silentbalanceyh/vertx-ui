@@ -1,0 +1,14 @@
+{
+    "_op": [
+        {
+            "text": "保存",
+            "icon": "check",
+            "key": "$opSaveSource"
+        },
+        {
+            "text": "取消",
+            "icon": "undo",
+            "key": "$opCancel"
+        }
+    ]
+}

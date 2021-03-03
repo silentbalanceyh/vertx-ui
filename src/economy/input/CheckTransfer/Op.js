@@ -1,41 +1,57 @@
 import Ux from 'ux';
-import Event from './event';
 
-const yiPage = (reference) => {
-    const state = {};
-    const {config = {}} = reference.props;
-    // state.$source = $source;
+const onChangeSelect = (reference) => (sourceKeys, targetKeys) => {
     /*
-     * 抽取 jsx 数据（除开 onChange）
+     * 暂时不考虑右边的选中
      */
-    const {...rest} = config;
-    const $transfer = Ux.clone(rest);
-
-    $transfer.onChange = Event.onChange(reference, config);
-    $transfer.onSelectChange = Event.onSelectChange(reference, config);
-    /*
-     * 处理可选择的 key
-     */
-    // $transfer.targetKeys = $source.map(item => item.key);
-    $transfer.render = (item) => item.label;
-    // $transfer.dataSource = $source;
-    state.$transfer = $transfer;
-    state.$ready = true;
-    // state.$sourceKeys = $source.map(item => item.key);
-    reference.setState(state);
-};
-const yuPage = (reference, {prevState, prevProps}) => {
-    /*
-     * 判断重置专用方法
-     */
-    Ux.xtReset(reference, {props: prevProps, state: prevState}, ($targetKeys) => {
+    if (0 === targetKeys.length) {
         /*
-         * values 是初始值
+         * 选中时回调
          */
-        reference.setState({$targetKeys});
-    })
+        const {config = {}} = reference.props;
+        if (config.hasOwnProperty("limit")) {
+            /*
+             * 选中时的限制
+             */
+            const {max, message} = config.limit;
+            const $sourceKeys = [...sourceKeys, ...targetKeys];
+            /*
+             * 判断条件
+             */
+            const {$targetKeys = []} = reference.state;
+            if (max >= ($sourceKeys.length + $targetKeys.length)) {
+                reference.setState({$sourceKeys});
+            } else {
+                Ux.messageFailure(message);
+            }
+        } else {
+            const $sourceKeys = [...sourceKeys, ...targetKeys];
+            reference.setState({$sourceKeys});
+        }
+    } else {
+        const $sourceKeys = [...sourceKeys, ...targetKeys];
+        reference.setState({$sourceKeys});
+    }
+};
+const onChange = (reference, config = {}) => ($targetKeys) => {
+    reference.setState({$targetKeys});
+    const {valueKey = "key"} = config;
+    const {onChange, $source = []} = reference.props;
+    if (Ux.isFunction(onChange)) {
+        /*
+         * $targetKeys，native （Ant Design模式。）
+         */
+        const $keys = Ux.immutable($targetKeys);
+        const items = $source
+            .filter(item => $keys.contains(item.key))
+            .map(item => item[valueKey]);
+        /*
+         * items 处理
+         */
+        onChange(items);
+    }
 };
 export default {
-    yiPage,
-    yuPage,
+    onChange,
+    onChangeSelect
 }

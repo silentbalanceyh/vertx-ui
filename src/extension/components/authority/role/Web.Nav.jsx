@@ -1,15 +1,14 @@
 import Ux from 'ux';
 import {Button, Col, Form, Row} from 'antd';
 import React from 'react';
-import Rdr from './Web.Child.Op';
+import Rdr from './Web.Render';
 
 export default (reference) => {
     const search = Ux.fromHoc(reference, "search");
     const actions = Ux.fromHoc(reference, "action");
-    const clean = Ux.fromHoc(reference, "clean");
     return (
         <Row className={"op-column"}>
-            <Col span={7} className={"op-search"}>
+            <Col span={9} className={"op-search"}>
                 <Form.Item label={search.label}
                            labelCol={{span: 8}}
                            wrapperCol={{span: 16}}>
@@ -23,12 +22,7 @@ export default (reference) => {
                     })()}
                 </Form.Item>
             </Col>
-            <Col span={1} className={"action"}>
-                {Rdr.renderOp(reference, clean)}
-            </Col>
-            <Col span={4} className={"action"}>
-                {Rdr.renderLogin(reference)}
-            </Col>
+            <Col span={3}/>
             <Col span={12} className={"action op-extra"}>
                 {(() => {
                     return (

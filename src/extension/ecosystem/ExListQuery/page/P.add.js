@@ -1,5 +1,5 @@
 import React from 'react';
-import Yo from '../yo';
+import Ex from 'ex';
 
 export default (reference, item = {}) => {
     const {$form = {}} = reference.props;
@@ -11,7 +11,7 @@ export default (reference, item = {}) => {
         /*
          * 添加表单处理，设置添加表单相关信息
          */
-        const formAttrs = Yo.yoFormAdd(reference, item);
+        const formAttrs = Ex.yoFormAdd(reference, item);
 
         return (<FormAdd {...formAttrs}/>)
     } else {
