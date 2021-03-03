@@ -40,10 +40,10 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
     ```
 
 2. 下载了该项目过后，直接进入该项目，安装依赖包
-    
+
     ```shell
     cd vertx-ui
-    npm install
+    yarn install
     ```
 
 3. 安装完成过后执行脚本：`run-zero.sh / run-zero.bat` 启动前端框架。
