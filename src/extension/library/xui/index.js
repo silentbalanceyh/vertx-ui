@@ -3,9 +3,13 @@ import xuiContainer from './xui.fn.container';
 import xuiDecorator from './xui.fn.decorator';
 
 /**
- * 内部模块
+ * ## xui动态渲染模块
  *
- * 高阶动态渲染组件
+ * 动态渲染高阶组件专用模块
+ *
+ * |函数名|说明|
+ * |:---|:---|
+ *
  *
  * @module _xui
  */

@@ -18,11 +18,6 @@ const error008 = _generate(-200008, "对不起，搜索方法参数不可为空�
 const error009 = _generate(-200009, "对不起，Promise构造的前置条件不满足。",
     "The pre-condition is invalid to build promise");
 
-/**
- * Extension 内部的专用错
- *
- * @class E
- */
 class E {
     /**
      * -200001, 应用程序初始化读取失败

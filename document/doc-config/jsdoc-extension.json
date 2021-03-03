@@ -8,12 +8,12 @@
     },
     "source": {
         "include": [
-            "src/extension/library"
+            "src/extension/eclat",
+            "src/extension/library",
+            "src/extension/ecosystem"
         ],
         "exclude": [
-            "src/extension/eclat",
-            "src/extension/components",
-            "src/extension/ecosystem"
+            "src/extension/components"
         ],
         "includePattern": "\\.(js|jsx|css)$",
         "excludePattern": "(node_modules/|docs)"

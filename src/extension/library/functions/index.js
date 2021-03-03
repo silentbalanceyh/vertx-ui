@@ -2,7 +2,7 @@ import global from './global';
 import business from './business';
 import authority from './authority';
 // ------------- 上边是全局处理 -------------
-import E from './debug/error';
+import E from './error';
 // ------------- 上边是调试专用 -------------
 import func from './func';
 import parser from './parser';
