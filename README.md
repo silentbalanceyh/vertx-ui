@@ -26,8 +26,8 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 ### 1.2. 在线文档
 
-* [Ux专用API](/document/doc-web/index.html)
-* [Ex专用API](/document/doc-web-extension/index.html)
+* [Ux基础层专用教程（包含API）](/document/doc-web/index.html)
+* [Ex扩展层专用教程（包含API）](/document/doc-web-extension/index.html)
 
 ## 2. 开始
 
