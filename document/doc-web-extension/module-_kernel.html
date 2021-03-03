@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>_io - Zero Extension框架专用前端文档</title>
+    <title>_kernel - Zero Extension框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -41,7 +41,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">_io</h1>
+    <h1 class="page-title">_kernel</h1>
     
 
     
@@ -64,8 +64,27 @@
         <div class="container-overview">
         
             
-                <div class="description usertext"><p>内部模块</p>
-<p>数据输入输出</p></div>
+                <div class="description usertext"><h1>Extension内核模块</h1>
+<p>扩展内核的核心模块</p>
+<h2>操作列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">sexExAction</td>
+<td style="text-align:left">扩展操作专用函数，处理特定配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">sexExPlugin</td>
+<td style="text-align:left">插件接入专用函数，处理和插件相关的部分。</td>
+</tr>
+</tbody>
+</table></div>
             
 
             
@@ -167,7 +186,7 @@
 
     
 
-    <h4 class="name" id=".inApi"><span class="type-signature">(static) </span>inApi<span class="signature">(uri)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".sexExAction"><span class="type-signature">(static) </span>sexExAction<span class="signature">(reference, key, Component)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -214,8 +233,17 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <h2>「快速」<code>Ex.sexExAction</code></h2>
+<p>统一处理特殊带窗口操作按钮：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;button&quot;: {
+
+    },
+    &quot;dialog&quot;:{
+
+    }
+}
+</code></pre>
 </div>
 
 
@@ -253,13 +281,13 @@
 
         <tr>
             
-                <td class="name"><code>uri</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -269,7 +297,53 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>被读取的配置键值。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>Component</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>组件类型。</p></td>
         </tr>
 
     
@@ -295,7 +369,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>处理过后的 Action 相关配置。</p>
 </div>
 
 
@@ -321,7 +395,7 @@
 
     
 
-    <h4 class="name" id=".inJob"><span class="type-signature">(static) </span>inJob<span class="signature">(mission)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".sexExPlugin"><span class="type-signature">(static) </span>sexExPlugin<span class="signature">(reference, options, key)</span><span class="type-signature"> &rarr; {function}</span></h4>
 
     
 
@@ -368,8 +442,18 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <h2>「快速」<code>Ex.sexExPlugin</code></h2>
+<p>如果出现了 pluginKey，则从 Plugin.Function 中读取函数
+该函数返回三种信息：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;selection&quot;: 自动计算，edition = true 并且 deletion = true 时可选择
+    &quot;edition&quot;: 默认 true（可编辑）
+    &quot;deletion&quot;: 默认 true（可删除）
+}
+</code></pre>
+<blockquote>
+<p>限制，批量编辑和批量删除只能针对 edition / deletion 同时为true的时候，否则这种记录都不可能被批量操作选中</p>
+</blockquote>
 </div>
 
 
@@ -407,7 +491,30 @@
 
         <tr>
             
-                <td class="name"><code>mission</code></td>
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>options</code></td>
             
 
             <td class="type">
@@ -423,7 +530,30 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>插件配置选项。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>读取配置的键。</p></td>
         </tr>
 
     
@@ -449,7 +579,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>返回插件专用处理函数。</p>
 </div>
 
 
@@ -460,7 +590,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">function</span>
 
 
     </dd>
@@ -475,7 +605,7 @@
 
     
 
-    <h4 class="name" id=".outApi"><span class="type-signature">(static) </span>outApi<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".uiDialog"><span class="type-signature">(static) </span>uiDialog<span class="signature">(reference, consumer)</span><span class="type-signature"> &rarr; {<a href="Dialog.html">Dialog</a>}</span></h4>
 
     
 
@@ -522,8 +652,8 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
+    <p>##「组件」<code>Ux.uiDialog</code></p>
+<p>构造Dialog引用组件快速开发窗口，为状态注入<code>__dialog</code>变量（内置）</p>
 </div>
 
 
@@ -561,13 +691,13 @@
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -577,7 +707,30 @@
 
             
 
-            <td class="description last"><p>提交之前原始任务数据</p></td>
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>consumer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>构造Tab的回调函数。</p></td>
         </tr>
 
     
@@ -603,7 +756,7 @@
 
         
 <div class="param-desc">
-    <p>任务输出数据</p>
+    <p>窗口引用</p>
 </div>
 
 
@@ -614,7 +767,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type"><a href="Dialog.html">Dialog</a></span>
 
 
     </dd>
@@ -629,7 +782,7 @@
 
     
 
-    <h4 class="name" id=".outJob"><span class="type-signature">(static) </span>outJob<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".uiTab"><span class="type-signature">(static) </span>uiTab<span class="signature">(reference, consumer)</span><span class="type-signature"> &rarr; {<a href="Tab.html">Tab</a>}</span></h4>
 
     
 
@@ -676,8 +829,8 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
+    <p>##「组件」<code>Ux.uiTab</code></p>
+<p>构造Tab应用组件快速开发页签，为状态注入<code>__tabs</code>变量（内置）</p>
 </div>
 
 
@@ -715,13 +868,13 @@
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -731,7 +884,30 @@
 
             
 
-            <td class="description last"><p>提交之前原始任务数据</p></td>
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>consumer</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>构造Tab的回调函数。</p></td>
         </tr>
 
     
@@ -757,7 +933,7 @@
 
         
 <div class="param-desc">
-    <p>任务输出数据</p>
+    <p>窗口引用</p>
 </div>
 
 
@@ -768,7 +944,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type"><a href="Tab.html">Tab</a></span>
 
 
     </dd>
@@ -781,6 +957,64 @@
         
     
 
+    
+        <h3 class="subsection-title">Type Definitions</h3>
+
+        
+                
+<h4 class="name" id="~Ex">Ex</h4>
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+            
     
 
     

@@ -199,6 +199,11 @@ const _menus = () => {
  * |uri|GET|`/api/x-api/:key`|是|读取Uri配置信息。|
  * |user|GET|`/api/user`|是|读取当前登录用户基本信息。|
  *
+ * ### 2. 特定说明
+ *
+ * * `/api/ox/relation/save`：保存关系专用方法（CMDB专用）。
+ * * `/api/ox/relation/delete`：删除关系专用方法（CMDB专用）。
+ *
  * @class I
  */
 class I {

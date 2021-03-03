@@ -1,12 +1,16 @@
 import Ux from "ux";
 
 /**
+ * ## 登录专用类
+ *
+ * ### 1. 基本说明
+ *
  * 登录专用类，用于渲染 username / password，注入键盘事件
  *
  * * 给 `username` 和 `password` 设置键盘事件。
  * * 在输入过程中，使用回车触发提交操作。
  *
- * 调用方法
+ * ### 2. 调用代码示例
  *
  * ```js
  * // 非法处理
@@ -23,6 +27,10 @@ import Ux from "ux";
  *      .to()
  * )
  * ```
+ *
+ * ### 3. 特殊说明
+ *
+ * * 触发按钮的ID为`$opLogin`，该ID为特定ID。
  *
  * @class Login
  */

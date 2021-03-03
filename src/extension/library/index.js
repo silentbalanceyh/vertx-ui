@@ -12,6 +12,23 @@ import Jsx from './jsx';
 /* 新的扩展包，直接和资源*/
 import Web from './web';
 
+/**
+ * # Extension内核模块
+ *
+ * 扩展内核的核心模块
+ *
+ * ## 操作列表
+ *
+ * |函数|说明|
+ * |:---|:---|
+ * |sexExAction|扩展操作专用函数，处理特定配置。|
+ * |sexExPlugin|插件接入专用函数，处理和插件相关的部分。|
+ * |uiDialog|「组件」构造Dialog快速开发组件。|
+ * |uiTab|「组件」构造Tab快速开发组件。|
+ *
+ *
+ * @module _kernel
+ */
 const exported = {
     ...Web,
     Jsx,

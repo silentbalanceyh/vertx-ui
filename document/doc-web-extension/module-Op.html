@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>_io - Zero Extension框架专用前端文档</title>
+    <title>Op - Zero Extension框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -41,7 +41,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">_io</h1>
+    <h1 class="page-title">Op</h1>
     
 
     
@@ -64,8 +64,27 @@
         <div class="container-overview">
         
             
-                <div class="description usertext"><p>内部模块</p>
-<p>数据输入输出</p></div>
+                <div class="description usertext"><h1>业务操作对象</h1>
+<p>带各种业务操作的专用模块，该模块内的函数全部使用Zero Ui基础规范<code>$op</code>前缀的Promise函数。</p>
+<h2>操作列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$opLogin</td>
+<td style="text-align:left">OAuth登录专用Promise。</td>
+</tr>
+<tr>
+<td style="text-align:left">$opLogout</td>
+<td style="text-align:left">OAuth注销专用Promise。</td>
+</tr>
+</tbody>
+</table></div>
             
 
             
@@ -167,7 +186,7 @@
 
     
 
-    <h4 class="name" id=".inApi"><span class="type-signature">(static) </span>inApi<span class="signature">(uri)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".$opLogin"><span class="type-signature">(async, static) </span>$opLogin<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
 
     
 
@@ -214,8 +233,8 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <h2>「操作」<code>Ex.Op.$opLogin</code></h2>
+<p>登录专用操作。</p>
 </div>
 
 
@@ -253,13 +272,13 @@
 
         <tr>
             
-                <td class="name"><code>uri</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -269,7 +288,7 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>React对应组件引用。</p></td>
         </tr>
 
     
@@ -295,7 +314,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>返回最终Promise</p>
 </div>
 
 
@@ -306,7 +325,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
+<span class="param-type">Promise.&lt;T></span>
 
 
     </dd>
@@ -321,7 +340,7 @@
 
     
 
-    <h4 class="name" id=".inJob"><span class="type-signature">(static) </span>inJob<span class="signature">(mission)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".$opLogout"><span class="type-signature">(async, static) </span>$opLogout<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
 
     
 
@@ -368,8 +387,8 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <h2>「操作」<code>Ex.Op.$opLogout</code></h2>
+<p>注销专用操作。</p>
 </div>
 
 
@@ -407,13 +426,13 @@
 
         <tr>
             
-                <td class="name"><code>mission</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -423,7 +442,7 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>React对应组件引用。</p></td>
         </tr>
 
     
@@ -449,7 +468,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>返回最终Promise</p>
 </div>
 
 
@@ -460,315 +479,7 @@
     </dt>
     <dd>
         
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".outApi"><span class="type-signature">(static) </span>outApi<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>提交之前原始任务数据</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>任务输出数据</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
-
-
-    </dd>
-</dl>
-
-    
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id=".outJob"><span class="type-signature">(static) </span>outJob<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>params</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>提交之前原始任务数据</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>任务输出数据</p>
-</div>
-
-
-
-<dl class="param-type">
-    <dt>
-        Type
-    </dt>
-    <dd>
-        
-<span class="param-type">Object</span>
+<span class="param-type">Promise.&lt;T></span>
 
 
     </dd>

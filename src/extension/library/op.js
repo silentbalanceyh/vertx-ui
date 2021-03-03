@@ -1,4 +1,4 @@
-import I from "../ajax";
+import I from "./ajax";
 import Ux from "ux";
 
 /**
@@ -6,7 +6,7 @@ import Ux from "ux";
  *
  * 注销专用操作。
  *
- * @memberOf module:_business
+ * @memberOf module:Op
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
@@ -20,12 +20,13 @@ const $opLogout = (reference) => I.logout().then(result => {
     // 清除State上的数据
     Ux.writeClean(reference, ['user']);
 }).catch(error => Ux.ajaxError(reference, error));
-/*
+
+/**
  * ## 「操作」`Ex.Op.$opLogin`
  *
  * 登录专用操作。
  *
- * @memberOf module:_business
+ * @memberOf module:Op
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
@@ -87,11 +88,18 @@ const $opLogin = (reference) => (params) => I.login(params)
         Ux.toOriginal(reference);
     });
 /**
- * ## 业务模块
+ * # 业务操作对象
  *
- * 带各种业务操作的专用模块
+ * 带各种业务操作的专用模块，该模块内的函数全部使用Zero Ui基础规范`$op`前缀的Promise函数。
  *
- * @module _business
+ * ## 操作列表
+ *
+ * |函数|说明|
+ * |:---|:---|
+ * |$opLogin|OAuth登录专用Promise。|
+ * |$opLogout|OAuth注销专用Promise。|
+ *
+ * @module Op
  */
 export default {
     $opLogin,

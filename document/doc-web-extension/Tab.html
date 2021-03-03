@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>_io - Zero Extension框架专用前端文档</title>
+    <title>Tab - Zero Extension框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -41,7 +41,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">_io</h1>
+    <h1 class="page-title">Tab</h1>
     
 
     
@@ -53,8 +53,9 @@
 
 <header>
     
-        
-            
+        <h2>
+        Tab
+        </h2>
         
     
 </header>
@@ -64,12 +65,12 @@
         <div class="container-overview">
         
             
-                <div class="description usertext"><p>内部模块</p>
-<p>数据输入输出</p></div>
-            
 
-            
-                
+    
+
+    <h4 class="name" id="Tab"><span class="type-signature"></span>new Tab<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
 
 
 
@@ -113,6 +114,9 @@
 
 
 
+<div class="description usertext">
+    <h2>页签专用类</h2>
+</div>
 
 
 
@@ -140,7 +144,7 @@
 
 
 
-            
+
         
         </div>
     
@@ -167,7 +171,7 @@
 
     
 
-    <h4 class="name" id=".inApi"><span class="type-signature">(static) </span>inApi<span class="signature">(uri)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".add"><span class="type-signature">(static) </span>add<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -214,8 +218,7 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <p>添加Tab页</p>
 </div>
 
 
@@ -253,13 +256,13 @@
 
         <tr>
             
-                <td class="name"><code>uri</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -269,7 +272,7 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>React对应组件引用</p></td>
         </tr>
 
     
@@ -295,7 +298,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>返回最终状态</p>
 </div>
 
 
@@ -321,7 +324,7 @@
 
     
 
-    <h4 class="name" id=".inJob"><span class="type-signature">(static) </span>inJob<span class="signature">(mission)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".click"><span class="type-signature">(static) </span>click<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -368,8 +371,7 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输入</p>
+    <p>点击Tab页</p>
 </div>
 
 
@@ -407,13 +409,13 @@
 
         <tr>
             
-                <td class="name"><code>mission</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -423,7 +425,30 @@
 
             
 
-            <td class="description last"><p>任务配置</p></td>
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前 active 的键值</p></td>
         </tr>
 
     
@@ -449,7 +474,7 @@
 
         
 <div class="param-desc">
-    <p>处理过的任务数据</p>
+    <p>返回最终状态</p>
 </div>
 
 
@@ -475,7 +500,7 @@
 
     
 
-    <h4 class="name" id=".outApi"><span class="type-signature">(static) </span>outApi<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".close"><span class="type-signature">(static) </span>close<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -522,8 +547,7 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
+    <p>关闭Tab页</p>
 </div>
 
 
@@ -561,13 +585,13 @@
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>reference</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Object</span>
+<span class="param-type">ReactComponent</span>
 
 
             
@@ -577,7 +601,30 @@
 
             
 
-            <td class="description last"><p>提交之前原始任务数据</p></td>
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前 active 的键值</p></td>
         </tr>
 
     
@@ -603,7 +650,7 @@
 
         
 <div class="param-desc">
-    <p>任务输出数据</p>
+    <p>返回最终状态</p>
 </div>
 
 
@@ -629,7 +676,7 @@
 
     
 
-    <h4 class="name" id=".outJob"><span class="type-signature">(static) </span>outJob<span class="signature">(params)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    <h4 class="name" id=".edit"><span class="type-signature">(static) </span>edit<span class="signature">(reference, data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -676,8 +723,7 @@
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<p>任务处理输出</p>
+    <p>编辑Tab页</p>
 </div>
 
 
@@ -715,7 +761,30 @@
 
         <tr>
             
-                <td class="name"><code>params</code></td>
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
             
 
             <td class="type">
@@ -731,7 +800,7 @@
 
             
 
-            <td class="description last"><p>提交之前原始任务数据</p></td>
+            <td class="description last"><p>当前数据记录</p></td>
         </tr>
 
     
@@ -757,7 +826,382 @@
 
         
 <div class="param-desc">
-    <p>任务输出数据</p>
+    <p>返回最终状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".remove"><span class="type-signature">(static) </span>remove<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>移除Tab页</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前 active 的键值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终状态</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".save"><span class="type-signature">(static) </span>save<span class="signature">(reference, data, item)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <p>保存Tab页</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前数据记录</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>设置页面配置信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终状态</p>
 </div>
 
 
