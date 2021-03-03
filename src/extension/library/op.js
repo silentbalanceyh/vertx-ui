@@ -1,18 +1,17 @@
-import Api from "../ajax";
+import I from "../ajax";
 import Ux from "ux";
-import U from "underscore";
 
 /**
- * ## 扩展函数
+ * ## 「操作」`Ex.Op.$opLogout`
  *
  * 注销专用操作。
  *
- * @memberOf module:_op
+ * @memberOf module:_business
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
  */
-const $opLogout = (reference) => Api.logout().then(result => {
+const $opLogout = (reference) => I.logout().then(result => {
     console.info("登出系统！", result);
     // 清除Session
     Ux.toLogout();
@@ -22,16 +21,16 @@ const $opLogout = (reference) => Api.logout().then(result => {
     Ux.writeClean(reference, ['user']);
 }).catch(error => Ux.ajaxError(reference, error));
 /*
- * ## 扩展函数
+ * ## 「操作」`Ex.Op.$opLogin`
  *
  * 登录专用操作。
  *
- * @memberOf module:_op
+ * @memberOf module:_business
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
  */
-const $opLogin = (reference) => (params) => Api.login(params)
+const $opLogin = (reference) => (params) => I.login(params)
     .then((data = {}) => {
         // 交换授权码专用请求
         const request = {};
@@ -39,14 +38,14 @@ const $opLogin = (reference) => (params) => Api.login(params)
         request.client_secret = data['clientSecret'];
         request.scope = data['scope'];
         // 授权码处理
-        return Api.authorize(request);
+        return I.authorize(request);
     })
     .then((data = {}) => {
         // 交换令牌专用请求
         const token = {};
         token.code = data['code'];
         token.client_id = data['client_id'];
-        return Api.token(token);
+        return I.token(token);
     })
     .then((response = {}) => {
         // 读取Token信息
@@ -64,7 +63,7 @@ const $opLogin = (reference) => (params) => Api.login(params)
         return Ux.promise(user);
     })
     /* 直接读取员工信息 */
-    .then(() => Api.user())
+    .then(() => I.user())
     .then(employee => {
         const user = Ux.isLogged();
         const logged = Object.assign(Ux.clone(user), employee);
@@ -73,7 +72,7 @@ const $opLogin = (reference) => (params) => Api.login(params)
     .then(logged => {
         // 读取 rxLogin ：外层传入
         const {rxLogin} = reference.props;
-        if (U.isFunction(rxLogin)) {
+        if (Ux.isFunction(rxLogin)) {
             return rxLogin(logged);
         } else {
             return Ux.promise(logged);
@@ -87,7 +86,14 @@ const $opLogin = (reference) => (params) => Api.login(params)
         /* 重定向 */
         Ux.toOriginal(reference);
     });
+/**
+ * ## 业务模块
+ *
+ * 带各种业务操作的专用模块
+ *
+ * @module _business
+ */
 export default {
-    $opLogout,
     $opLogin,
+    $opLogout,
 }

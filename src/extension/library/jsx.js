@@ -59,6 +59,5 @@ class Login {
 }
 
 export default {
-    username: Login.username,
-    password: Login.password
-};
+    Login,
+}
