@@ -20,36 +20,37 @@ const randomArray = (array = []) => {
 }
 export default {
     /**
-     * ## 集成函数
+     * ## 「标准」`Ux.randomUUID`
      *
      * 随机生成UUID，内部调用 uuid 库函数。
      *
-     * @memberOf module:_random
+     * @memberOf module:_unity
      * @method randomUUID
      */
     randomUUID: v4,
     /**
-     * ## 集成函数
+     * ## 「标准」`Ux.randomString`
      *
      * 随机生成字符串，内部调用 random-js。
      *
-     * @memberOf module:_random
+     * @memberOf module:_unity
      * @method randomString
      * @param {Number} length 输入需要生成随机字符串的长度。
      */
     randomString,
     /**
-     * ## 集成函数
+     * ## 「标准」`Ux.randomArray`
      *
-     * @memberOf module:_random
+     * @memberOf module:_unity
      * @method randomArray
      */
     randomArray,
     /**
-     * ## 标准函数
+     * ## 「标准」`Ux.randomInteger`
      *
      * 随机生成数值。
-     * @memberOf module:_random
+     *
+     * @memberOf module:_unity
      * @method randomInteger
      * @param {Number} min 生成数值区域的最小值。
      * @param {Number} max 生成数值区域的最大值。

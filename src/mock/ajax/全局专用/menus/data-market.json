@@ -1,0 +1,44 @@
+{
+    "menu": [
+        {
+            "code": "4001",
+            "name": "服务管理",
+            "parentCode": "4",
+            "levelNum": 2,
+            "icon": "apartment",
+            "url": "/market/service-management",
+            "lastYn": "Y",
+            "order": 1
+        },
+        {
+            "code": "4002",
+            "name": "配额管理",
+            "parentCode": "4",
+            "levelNum": 2,
+            "icon": "percentage",
+            "url": "/market/quota-management",
+            "lastYn": "Y",
+            "order": 2
+        },
+        {
+            "code": "4003",
+            "name": "数据产品",
+            "parentCode": "4",
+            "levelNum": 2,
+            "icon": "solution",
+            "url": "/market/data-product",
+            "lastYn": "Y",
+            "order": 3
+        },
+        {
+            "code": "4004",
+            "name": "我的数据",
+            "parentCode": "4",
+            "levelNum": 2,
+            "icon": "profile",
+            "url": "/market/data-product-my",
+            "lastYn": "Y",
+            "order": 4
+        }
+    ]
+}

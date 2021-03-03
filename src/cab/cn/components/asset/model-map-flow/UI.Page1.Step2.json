@@ -1,0 +1,14 @@
+{
+    "_info": {
+        "pending": "可选属性",
+        "selected": "已选属性",
+        "checked": "全选",
+        "empty": "（您还没有选择任何属性）",
+        "counter": "（已选择:count项）"
+    },
+    "_modal": {
+        "error": {
+            "empty": "对不起，您没有选择任何属性信息！"
+        }
+    }
+}

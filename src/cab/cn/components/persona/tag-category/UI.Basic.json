@@ -1,0 +1,37 @@
+{
+    "_form": {
+        "window": 0.101,
+        "columns": 1,
+        "className": "ops-form-small",
+        "ui": [
+            [
+                {
+                    "metadata": "name,分类选择,,,aiMagic",
+                    "optionJsx.className": "ops-primary"
+                }
+            ],
+            [
+                {
+                    "metadata": "countCat,子分类数量,,,aiMagic",
+                    "optionJsx.className": "ops-primary"
+                }
+            ],
+            [
+                {
+                    "metadata": "countTag,标签数量,,,aiMagic",
+                    "optionJsx.className": "ops-primary"
+                }
+            ],
+            [
+                "createBy,创建人,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "createTime,创建时间,,,aiMagic",
+                    "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                    "moment": true
+                }
+            ]
+        ]
+    }
+}

@@ -30,7 +30,7 @@ const parseExpression = (reference, expr = "") => {
     return returnValue;
 };
 /**
- * ## 引擎函数
+ * ## 「引擎」`Ux.parseAjax`
  *
  * 标准的ajax配置解析函数，针对Ajax的专用参数解析器，这种Ajax参数解析一般用于异步验证、交互过程中的异步请求处理
  *
@@ -77,9 +77,9 @@ const initCond = (reference = {}) => {
     return $metadata.cond ? $metadata.cond : {};
 };
 /**
- * ## 引擎函数
+ * ## 「引擎」`Ux.parseQuery`
  *
- * 针对Query的专用参数解析器
+ * 针对Query的专用参数解析器。
  *
  * @memberOf module:_parser
  * @param {ReactComponent} reference React对应组件引用。

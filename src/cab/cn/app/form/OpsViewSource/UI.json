@@ -1,0 +1,38 @@
+{
+    "_card": {
+        "text": "基础信息",
+        "extra": [
+            "lnkEdit,编辑数据源,ops-link-extra",
+            "lnkSync,同步数据源,ops-link-extra",
+            "lnkDel,删除数据源,ops-link-extra,该操作将删除当前数据源的所有信息，您确认？,left"
+        ]
+    },
+    "_window": "数据源管理,保存,关闭,false,720,true,$opSaveSource",
+    "_form": {
+        "window": 0.17,
+        "columns": 1,
+        "ui": [
+            [
+                "sourceName,数据源名称,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "sourceType,数据源类型,,,aiMagic",
+                    "optionJsx.config.datum": "source=source.types,key=id,label=dicItemValue"
+                }
+            ],
+            [
+                "jdbcUrl,JDBC URL,,,aiMagic"
+            ],
+            [
+                "jdbcDriver,JDBC驱动,,,aiMagic"
+            ],
+            [
+                "username,数据库用户名,,,aiMagic"
+            ],
+            [
+                "instance,数据库,,,aiMagic"
+            ]
+        ]
+    }
+}

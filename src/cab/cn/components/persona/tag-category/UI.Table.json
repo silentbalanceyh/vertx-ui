@@ -1,0 +1,51 @@
+{
+    "_table": {
+        "pagination": "总共:total条记录",
+        "rowKey": "id",
+        "className": "ops-table-small",
+        "size": "small",
+        "columns": [
+            "name,标签名称",
+            "categoryName,标签分类",
+            "typeName,标签类别",
+            {
+                "metadata": "status,标签状态,MAPPING",
+                "$mapping": {
+                    "SUCCESS": "成功,,,,#00D1E5",
+                    "FAILURE": "失败,,,,#E96A69"
+                }
+            },
+            "creator,创建者",
+            {
+                "metadata": "createTime,创建时间,DATE",
+                "$format": "YYYY-MM-DD HH:mm"
+            },
+            {
+                "metadata": "updateTime,更新时间,DATE",
+                "$format": "YYYY-MM-DD HH:mm"
+            },
+            {
+                "metadata": "statusRun,运行状态,MAPPING",
+                "$mapping": {
+                    "SUCCESS": "成功,,,,#00D1E5",
+                    "FAILURE": "失败,,,,#E96A69"
+                }
+            }
+        ]
+    },
+    "_search": {
+        "input": {
+            "placeholder": "请输入关键字",
+            "enterButton": "搜索"
+        }
+    },
+    "_query": {
+        "pager": {
+            "page": 1,
+            "size": 9
+        }
+    },
+    "_empty": {
+        "message": "请选择您的分类后查看该类型下的标签数据！"
+    }
+}

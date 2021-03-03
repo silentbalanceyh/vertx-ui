@@ -3,6 +3,7 @@ import library from './library'
 import ui from './ui';
 import {DiMap as G6On} from './event/I.injections'
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     ...func,
     ...library,

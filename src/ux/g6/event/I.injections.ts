@@ -150,9 +150,6 @@ class GInject {
     onTpl = selfFn;
     onZoomIn = selfFn;
     onZoomOut = selfFn;
-
-    constructor(reference: any) {
-    }
 }
 
 export {

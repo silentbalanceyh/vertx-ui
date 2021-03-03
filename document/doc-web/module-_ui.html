@@ -1,0 +1,6302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    
+    <meta charset="utf-8">
+    <title>_ui - Zero UI框架专用前端文档</title>
+    
+    <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
+    
+        <meta name="keywords" content="zero,zero-ui,vert.x" />
+        <meta name="keyword" content="zero,zero-ui,vert.x" />
+    
+    
+    
+    <script src="scripts/prettify/prettify.js"></script>
+    <script src="scripts/prettify/lang-css.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc.css">
+    <link type="text/css" rel="stylesheet" href="styles/zero.css">
+    <script src="scripts/nav.js" defer></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+
+<input type="checkbox" id="nav-trigger" class="nav-trigger" />
+<label for="nav-trigger" class="navicon-button x">
+  <div class="navicon"></div>
+</label>
+
+<label for="nav-trigger" class="overlay"></label>
+
+<nav >
+    
+    <input type="text" id="nav-search" placeholder="Search" />
+    
+    <h2><a href="index.html">Home</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web/index.html" class="menu-item" id="website_link" >Zero Api</a></h2><h2><a href="http://www.vertxui.cn/document/doc-web-extension/index.html" class="menu-item" id="website_link" >Zero Extension</a></h2><h2><a href="http://www.vertxui.cn" target="_blank" class="menu-item" id="website_link" >Zero UI</a></h2><h2><a href="http://www.vertxup.cn" target="_blank" class="menu-item" id="website_link" >Zero Epic Fabric</a></h2><h2><a href="http://www.origin-x.cn" target="_blank" class="menu-item" id="website_link" >Origin X Engine</a></h2><h3>Classes</h3><ul><li><a href="Ant.html">Ant</a><ul class='methods'><li data-type='method'><a href="Ant.html#.onAddonAfter">onAddonAfter</a></li><li data-type='method'><a href="Ant.html#.onChange">onChange</a></li><li data-type='method'><a href="Ant.html#.onDisabledDate">onDisabledDate</a></li><li data-type='method'><a href="Ant.html#.onFromTo">onFromTo</a></li><li data-type='method'><a href="Ant.html#.onMultiple">onMultiple</a></li><li data-type='method'><a href="Ant.html#.onPlaceHolder">onPlaceHolder</a></li><li data-type='method'><a href="Ant.html#.onPrefix">onPrefix</a></li><li data-type='method'><a href="Ant.html#.onReadOnly">onReadOnly</a></li><li data-type='method'><a href="Ant.html#.onSelect">onSelect</a></li><li data-type='method'><a href="Ant.html#.toConfig">toConfig</a></li><li data-type='method'><a href="Ant.html#.toDatum">toDatum</a></li><li data-type='method'><a href="Ant.html#.toDialogConfig">toDialogConfig</a></li><li data-type='method'><a href="Ant.html#.toMock">toMock</a></li><li data-type='method'><a href="Ant.html#.toOptions">toOptions</a></li><li data-type='method'><a href="Ant.html#.toOrigin">toOrigin</a></li><li data-type='method'><a href="Ant.html#.toParsed">toParsed</a></li><li data-type='method'><a href="Ant.html#.toRecord">toRecord</a></li><li data-type='method'><a href="Ant.html#.toTreeOptions">toTreeOptions</a></li><li data-type='method'><a href="Ant.html#.toUnique">toUnique</a></li></ul></li><li><a href="Cookie.html">Cookie</a><ul class='methods'><li data-type='method'><a href="Cookie.html#.get">get</a></li></ul></li><li><a href="Logger.html">Logger</a><ul class='methods'><li data-type='method'><a href="Logger.html#.filters">filters</a></li><li data-type='method'><a href="Logger.html#.layout">layout</a></li><li data-type='method'><a href="Logger.html#.mock">mock</a></li><li data-type='method'><a href="Logger.html#.render">render</a></li><li data-type='method'><a href="Logger.html#.request">request</a></li><li data-type='method'><a href="Logger.html#.response">response</a></li><li data-type='method'><a href="Logger.html#.sign">sign</a></li></ul></li><li><a href="Session.html">Session</a><ul class='methods'><li data-type='method'><a href="Session.html#.clear">clear</a></li><li data-type='method'><a href="Session.html#.get">get</a></li><li data-type='method'><a href="Session.html#.put">put</a></li><li data-type='method'><a href="Session.html#.remove">remove</a></li></ul></li><li><a href="Storage.html">Storage</a><ul class='methods'><li data-type='method'><a href="Storage.html#.clear">clear</a></li><li data-type='method'><a href="Storage.html#.get">get</a></li><li data-type='method'><a href="Storage.html#.getDirect">getDirect</a></li><li data-type='method'><a href="Storage.html#.put">put</a></li><li data-type='method'><a href="Storage.html#.remove">remove</a></li></ul></li><li><a href="Tree.html">Tree</a><ul class='methods'><li data-type='method'><a href="Tree.html#.CHILDREN">CHILDREN</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL">CHILDREN_ALL</a></li><li data-type='method'><a href="Tree.html#.CHILDREN_ALL_INCLUDE">CHILDREN_ALL_INCLUDE</a></li><li data-type='method'><a href="Tree.html#.PARENT">PARENT</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL">PARENT_ALL</a></li><li data-type='method'><a href="Tree.html#.PARENT_ALL_INCLUDE">PARENT_ALL_INCLUDE</a></li></ul></li></ul><h3>Modules</h3><ul><li><a href="module-_ajax.html">_ajax</a><ul class='methods'><li data-type='method'><a href="module-_ajax.html#.ajax2Dialog">ajax2Dialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2Message">ajax2Message</a></li><li data-type='method'><a href="module-_ajax.html#.ajax2True">ajax2True</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDelete">ajaxDelete</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDialog">ajaxDialog</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxDownload">ajaxDownload</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxEager">ajaxEager</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxError">ajaxError</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxFetch">ajaxFetch</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxGet">ajaxGet</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxMessage">ajaxMessage</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPost">ajaxPost</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPull">ajaxPull</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPush">ajaxPush</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxPut">ajaxPut</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxResource">ajaxResource</a></li><li data-type='method'><a href="module-_ajax.html#.ajaxUpload">ajaxUpload</a></li><li data-type='method'><a href="module-_ajax.html#.asyncAssist">asyncAssist</a></li><li data-type='method'><a href="module-_ajax.html#.asyncData">asyncData</a></li><li data-type='method'><a href="module-_ajax.html#.asyncMagic">asyncMagic</a></li><li data-type='method'><a href="module-_ajax.html#.asyncPromise">asyncPromise</a></li><li data-type='method'><a href="module-_ajax.html#.asyncTrue">asyncTrue</a></li><li data-type='method'><a href="module-_ajax.html#.messageCatch">messageCatch</a></li><li data-type='method'><a href="module-_ajax.html#.messageFailure">messageFailure</a></li><li data-type='method'><a href="module-_ajax.html#.messageSuccess">messageSuccess</a></li><li data-type='method'><a href="module-_ajax.html#.microDelete">microDelete</a></li><li data-type='method'><a href="module-_ajax.html#.microFetch">microFetch</a></li><li data-type='method'><a href="module-_ajax.html#.microGet">microGet</a></li><li data-type='method'><a href="module-_ajax.html#.microPost">microPost</a></li><li data-type='method'><a href="module-_ajax.html#.microPush">microPush</a></li><li data-type='method'><a href="module-_ajax.html#.microPut">microPut</a></li><li data-type='method'><a href="module-_ajax.html#.rxEdict">rxEdict</a></li></ul></li><li><a href="module-_constant.html">_constant</a><ul class='members'><li data-type='member'><a href="module-_constant.html#.(%25E7%258E%25AF%25E5%25A2%2583%25E5%258F%2598%25E9%2587%258F)">(环境变量)</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG">DEBUG</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_AJAX">DEBUG_AJAX</a></li><li data-type='member'><a href="module-_constant.html#.DEBUG_FORM">DEBUG_FORM</a></li><li data-type='member'><a href="module-_constant.html#.ECONOMY">ECONOMY</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_ADMIN">ENTRY_ADMIN</a></li><li data-type='member'><a href="module-_constant.html#.ENTRY_LOGIN">ENTRY_LOGIN</a></li><li data-type='member'><a href="module-_constant.html#.FORBIDDEN">FORBIDDEN</a></li><li data-type='member'><a href="module-_constant.html#.FORM_MODE">FORM_MODE</a></li><li data-type='member'><a href="module-_constant.html#.HTTP11">HTTP11</a></li><li data-type='member'><a href="module-_constant.html#.HTTP_METHOD">HTTP_METHOD</a></li><li data-type='member'><a href="module-_constant.html#.KEY_EVENT">KEY_EVENT</a></li><li data-type='member'><a href="module-_constant.html#.KEY_POINTER">KEY_POINTER</a></li><li data-type='member'><a href="module-_constant.html#.KEY_USER">KEY_USER</a></li><li data-type='member'><a href="module-_constant.html#.MENU_TYPE">MENU_TYPE</a></li><li data-type='member'><a href="module-_constant.html#.MIMES">MIMES</a></li><li data-type='member'><a href="module-_constant.html#.MOCK">MOCK</a></li><li data-type='member'><a href="module-_constant.html#.MONITOR">MONITOR</a></li><li data-type='member'><a href="module-_constant.html#.RX_SOURCE">RX_SOURCE</a></li><li data-type='member'><a href="module-_constant.html#.SELECTION">SELECTION</a></li><li data-type='member'><a href="module-_constant.html#.SIGN">SIGN</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_ID">X_APP_ID</a></li><li data-type='member'><a href="module-_constant.html#.X_APP_KEY">X_APP_KEY</a></li><li data-type='member'><a href="module-_constant.html#.X_HEADER">X_HEADER</a></li><li data-type='member'><a href="module-_constant.html#.X_LANG">X_LANG</a></li><li data-type='member'><a href="module-_constant.html#.X_SIGMA">X_SIGMA</a></li><li data-type='member'><a href="module-_constant.html#.XT_FORMAT">XT_FORMAT</a></li></ul></li><li><a href="module-_develop.html">_develop</a><ul class='methods'><li data-type='method'><a href="module-_develop.html#.dgAjax">dgAjax</a></li><li data-type='method'><a href="module-_develop.html#.dgDebug">dgDebug</a></li><li data-type='method'><a href="module-_develop.html#.dgDiff">dgDiff</a></li><li data-type='method'><a href="module-_develop.html#.dgFileJson">dgFileJson</a></li><li data-type='method'><a href="module-_develop.html#.dgGraphic">dgGraphic</a></li><li data-type='method'><a href="module-_develop.html#.dgQuery">dgQuery</a></li><li data-type='method'><a href="module-_develop.html#.dgRouter">dgRouter</a></li><li data-type='method'><a href="module-_develop.html#.dgTodo">dgTodo</a></li><li data-type='method'><a href="module-_develop.html#.fxError">fxError</a></li><li data-type='method'><a href="module-_develop.html#.fxFailure">fxFailure</a></li><li data-type='method'><a href="module-_develop.html#.fxFatal">fxFatal</a></li><li data-type='method'><a href="module-_develop.html#.fxMessage">fxMessage</a></li><li data-type='method'><a href="module-_develop.html#.fxRedux">fxRedux</a></li><li data-type='method'><a href="module-_develop.html#.fxReject">fxReject</a></li><li data-type='method'><a href="module-_develop.html#.fxReport">fxReport</a></li><li data-type='method'><a href="module-_develop.html#.fxTerminal">fxTerminal</a></li><li data-type='method'><a href="module-_develop.html#.fxWarning">fxWarning</a></li></ul></li><li><a href="module-_element.html">_element</a><ul class='methods'><li data-type='method'><a href="module-_element.html#.elementBranch">elementBranch</a></li><li data-type='method'><a href="module-_element.html#.elementChildren">elementChildren</a></li><li data-type='method'><a href="module-_element.html#.elementChildTree">elementChildTree</a></li><li data-type='method'><a href="module-_element.html#.elementFind">elementFind</a></li><li data-type='method'><a href="module-_element.html#.elementFindDatum">elementFindDatum</a></li><li data-type='method'><a href="module-_element.html#.elementFirst">elementFirst</a></li><li data-type='method'><a href="module-_element.html#.elementFlat">elementFlat</a></li><li data-type='method'><a href="module-_element.html#.elementGrid">elementGrid</a></li><li data-type='method'><a href="module-_element.html#.elementGroup">elementGroup</a></li><li data-type='method'><a href="module-_element.html#.elementGroupDatum">elementGroupDatum</a></li><li data-type='method'><a href="module-_element.html#.elementIndex">elementIndex</a></li><li data-type='method'><a href="module-_element.html#.elementJoin">elementJoin</a></li><li data-type='method'><a href="module-_element.html#.elementMap">elementMap</a></li><li data-type='method'><a href="module-_element.html#.elementParent">elementParent</a></li><li data-type='method'><a href="module-_element.html#.elementSave">elementSave</a></li><li data-type='method'><a href="module-_element.html#.elementUnique">elementUnique</a></li><li data-type='method'><a href="module-_element.html#.elementUniqueDatum">elementUniqueDatum</a></li><li data-type='method'><a href="module-_element.html#.elementVertical">elementVertical</a></li><li data-type='method'><a href="module-_element.html#.elementWrap">elementWrap</a></li></ul></li><li><a href="module-_engine.html">_engine</a><ul class='methods'><li data-type='method'><a href="module-_engine.html#.cabQuery">cabQuery</a></li><li data-type='method'><a href="module-_engine.html#.capForm">capForm</a></li><li data-type='method'><a href="module-_engine.html#.capTab">capTab</a></li><li data-type='method'><a href="module-_engine.html#.configAnchor">configAnchor</a></li><li data-type='method'><a href="module-_engine.html#.configColumn">configColumn</a></li><li data-type='method'><a href="module-_engine.html#.configDialog">configDialog</a></li><li data-type='method'><a href="module-_engine.html#.configExecutor">configExecutor</a></li><li data-type='method'><a href="module-_engine.html#.configExecutors">configExecutors</a></li><li data-type='method'><a href="module-_engine.html#.configForm">configForm</a></li><li data-type='method'><a href="module-_engine.html#.configScroll">configScroll</a></li><li data-type='method'><a href="module-_engine.html#.configTab">configTab</a></li><li data-type='method'><a href="module-_engine.html#.configTable">configTable</a></li><li data-type='method'><a href="module-_engine.html#.createAction">createAction</a></li><li data-type='method'><a href="module-_engine.html#.dataIn">dataIn</a></li><li data-type='method'><a href="module-_engine.html#.dataOut">dataOut</a></li><li data-type='method'><a href="module-_engine.html#.fnOut">fnOut</a></li><li data-type='method'><a href="module-_engine.html#.fromHoc">fromHoc</a></li><li data-type='method'><a href="module-_engine.html#.fromPath">fromPath</a></li><li data-type='method'><a href="module-_engine.html#.raftForm">raftForm</a></li><li data-type='method'><a href="module-_engine.html#.rjAssist">rjAssist</a></li><li data-type='method'><a href="module-_engine.html#.rjTabular">rjTabular</a></li><li data-type='method'><a href="module-_engine.html#.rxAssist">rxAssist</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedRow">rxCheckedRow</a></li><li data-type='method'><a href="module-_engine.html#.rxCheckedTree">rxCheckedTree</a></li><li data-type='method'><a href="module-_engine.html#.rxDatum">rxDatum</a></li><li data-type='method'><a href="module-_engine.html#.rxEtat">rxEtat</a></li><li data-type='method'><a href="module-_engine.html#.rxFlow">rxFlow</a></li><li data-type='method'><a href="module-_engine.html#.rxInit">rxInit</a></li><li data-type='method'><a href="module-_engine.html#.rxResize">rxResize</a></li><li data-type='method'><a href="module-_engine.html#.storeApp">storeApp</a></li><li data-type='method'><a href="module-_engine.html#.storeUser">storeUser</a></li><li data-type='method'><a href="module-_engine.html#.writeAssist">writeAssist</a></li><li data-type='method'><a href="module-_engine.html#.writeClean">writeClean</a></li><li data-type='method'><a href="module-_engine.html#.writeSubmit">writeSubmit</a></li><li data-type='method'><a href="module-_engine.html#.writeTree">writeTree</a></li></ul></li><li><a href="module-_is.html">_is</a><ul class='methods'><li data-type='method'><a href="module-_is.html#.isArray">isArray</a></li><li data-type='method'><a href="module-_is.html#.isAuthorized">isAuthorized</a></li><li data-type='method'><a href="module-_is.html#.isCn">isCn</a></li><li data-type='method'><a href="module-_is.html#.isCollection">isCollection</a></li><li data-type='method'><a href="module-_is.html#.isCurrency">isCurrency</a></li><li data-type='method'><a href="module-_is.html#.isDecimal">isDecimal</a></li><li data-type='method'><a href="module-_is.html#.isDiff">isDiff</a></li><li data-type='method'><a href="module-_is.html#.isEmpty">isEmpty</a></li><li data-type='method'><a href="module-_is.html#.isFunction">isFunction</a></li><li data-type='method'><a href="module-_is.html#.isIn">isIn</a></li><li data-type='method'><a href="module-_is.html#.isInit">isInit</a></li><li data-type='method'><a href="module-_is.html#.isLogged">isLogged</a></li><li data-type='method'><a href="module-_is.html#.isNotEmpty">isNotEmpty</a></li><li data-type='method'><a href="module-_is.html#.isNumber">isNumber</a></li><li data-type='method'><a href="module-_is.html#.isObject">isObject</a></li><li data-type='method'><a href="module-_is.html#.isParent">isParent</a></li><li data-type='method'><a href="module-_is.html#.isQr">isQr</a></li><li data-type='method'><a href="module-_is.html#.isRoute">isRoute</a></li><li data-type='method'><a href="module-_is.html#.isRule">isRule</a></li><li data-type='method'><a href="module-_is.html#.isRuleAll">isRuleAll</a></li><li data-type='method'><a href="module-_is.html#.isRuleAny">isRuleAny</a></li><li data-type='method'><a href="module-_is.html#.isSame">isSame</a></li></ul></li><li><a href="module-_it.html">_it</a><ul class='methods'><li data-type='method'><a href="module-_it.html#.itAmb">itAmb</a></li><li data-type='method'><a href="module-_it.html#.itElement">itElement</a></li><li data-type='method'><a href="module-_it.html#.itFull">itFull</a></li><li data-type='method'><a href="module-_it.html#.itMatrix">itMatrix</a></li><li data-type='method'><a href="module-_it.html#.itObject">itObject</a></li><li data-type='method'><a href="module-_it.html#.itRepeat">itRepeat</a></li><li data-type='method'><a href="module-_it.html#.itRow">itRow</a></li><li data-type='method'><a href="module-_it.html#.itTree">itTree</a></li><li data-type='method'><a href="module-_it.html#.itUi">itUi</a></li><li data-type='method'><a href="module-_it.html#.itValue">itValue</a></li></ul></li><li><a href="module-_parser.html">_parser</a><ul class='methods'><li data-type='method'><a href="module-_parser.html#.aiExprAction">aiExprAction</a></li><li data-type='method'><a href="module-_parser.html#.aiExprAjax">aiExprAjax</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButton">aiExprButton</a></li><li data-type='method'><a href="module-_parser.html#.aiExprButtons">aiExprButtons</a></li><li data-type='method'><a href="module-_parser.html#.aiExprColumn">aiExprColumn</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommand">aiExprCommand</a></li><li data-type='method'><a href="module-_parser.html#.aiExprCommands">aiExprCommands</a></li><li data-type='method'><a href="module-_parser.html#.aiExprDrawer">aiExprDrawer</a></li><li data-type='method'><a href="module-_parser.html#.aiExprField">aiExprField</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFieldEx">aiExprFieldEx</a></li><li data-type='method'><a href="module-_parser.html#.aiExprFilter">aiExprFilter</a></li><li data-type='method'><a href="module-_parser.html#.aiExprIcon">aiExprIcon</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOp">aiExprOp</a></li><li data-type='method'><a href="module-_parser.html#.aiExprOption">aiExprOption</a></li><li data-type='method'><a href="module-_parser.html#.aiExprPopover">aiExprPopover</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTabs">aiExprTabs</a></li><li data-type='method'><a href="module-_parser.html#.aiExprTitle">aiExprTitle</a></li><li data-type='method'><a href="module-_parser.html#.aiExprWindow">aiExprWindow</a></li><li data-type='method'><a href="module-_parser.html#.applyArray">applyArray</a></li><li data-type='method'><a href="module-_parser.html#.applyColumn">applyColumn</a></li><li data-type='method'><a href="module-_parser.html#.applyConnect">applyConnect</a></li><li data-type='method'><a href="module-_parser.html#.applyItem">applyItem</a></li><li data-type='method'><a href="module-_parser.html#.applyKey">applyKey</a></li><li data-type='method'><a href="module-_parser.html#.applyKv">applyKv</a></li><li data-type='method'><a href="module-_parser.html#.applyLoading">applyLoading</a></li><li data-type='method'><a href="module-_parser.html#.applyRules">applyRules</a></li><li data-type='method'><a href="module-_parser.html#.applyStyle">applyStyle</a></li><li data-type='method'><a href="module-_parser.html#.applyValue">applyValue</a></li><li data-type='method'><a href="module-_parser.html#.parseAjax">parseAjax</a></li><li data-type='method'><a href="module-_parser.html#.parseField">parseField</a></li><li data-type='method'><a href="module-_parser.html#.parseInput">parseInput</a></li><li data-type='method'><a href="module-_parser.html#.parseQuery">parseQuery</a></li><li data-type='method'><a href="module-_parser.html#.parseValue">parseValue</a></li></ul></li><li><a href="module-_plugin.html">_plugin</a><ul class='methods'><li data-type='method'><a href="module-_plugin.html#.pluginEdition">pluginEdition</a></li><li data-type='method'><a href="module-_plugin.html#.pluginField">pluginField</a></li><li data-type='method'><a href="module-_plugin.html#.pluginForm">pluginForm</a></li><li data-type='method'><a href="module-_plugin.html#.pluginMetadata">pluginMetadata</a></li><li data-type='method'><a href="module-_plugin.html#.pluginOp">pluginOp</a></li><li data-type='method'><a href="module-_plugin.html#.pluginSelection">pluginSelection</a></li></ul></li><li><a href="module-_primary.html">_primary</a><ul class='methods'><li data-type='method'><a href="module-_primary.html#.assign">assign</a></li><li data-type='method'><a href="module-_primary.html#.clone">clone</a></li><li data-type='method'><a href="module-_primary.html#.debug">debug</a></li><li data-type='method'><a href="module-_primary.html#.denull">denull</a></li><li data-type='method'><a href="module-_primary.html#.element">element</a></li><li data-type='method'><a href="module-_primary.html#.fn">fn</a></li><li data-type='method'><a href="module-_primary.html#.getV">getV</a></li><li data-type='method'><a href="module-_primary.html#.immutable">immutable</a></li><li data-type='method'><a href="module-_primary.html#.initial">initial</a></li><li data-type='method'><a href="module-_primary.html#.input">input</a></li><li data-type='method'><a href="module-_primary.html#.merge">merge</a></li><li data-type='method'><a href="module-_primary.html#.monad">monad</a></li><li data-type='method'><a href="module-_primary.html#.output">output</a></li><li data-type='method'><a href="module-_primary.html#.packet">packet</a></li><li data-type='method'><a href="module-_primary.html#.parallel">parallel</a></li><li data-type='method'><a href="module-_primary.html#.pass">pass</a></li><li data-type='method'><a href="module-_primary.html#.passion">passion</a></li><li data-type='method'><a href="module-_primary.html#.pipe">pipe</a></li><li data-type='method'><a href="module-_primary.html#.prevent">prevent</a></li><li data-type='method'><a href="module-_primary.html#.promise">promise</a></li><li data-type='method'><a href="module-_primary.html#.ready">ready</a></li><li data-type='method'><a href="module-_primary.html#.sequence">sequence</a></li><li data-type='method'><a href="module-_primary.html#.signature">signature</a></li><li data-type='method'><a href="module-_primary.html#.slice">slice</a></li><li data-type='method'><a href="module-_primary.html#.token">token</a></li></ul></li><li><a href="module-_qr.html">_qr</a><ul class='methods'><li data-type='method'><a href="module-_qr.html#.qrClear">qrClear</a></li><li data-type='method'><a href="module-_qr.html#.qrCombine">qrCombine</a></li><li data-type='method'><a href="module-_qr.html#.qrCommon">qrCommon</a></li><li data-type='method'><a href="module-_qr.html#.qrComplex">qrComplex</a></li><li data-type='method'><a href="module-_qr.html#.qrForm">qrForm</a></li><li data-type='method'><a href="module-_qr.html#.qrInherit">qrInherit</a></li><li data-type='method'><a href="module-_qr.html#.qrInput">qrInput</a></li><li data-type='method'><a href="module-_qr.html#.qrTerms">qrTerms</a></li></ul></li><li><a href="module-_romantic.html">_romantic</a><ul class='methods'><li data-type='method'><a href="module-_romantic.html#.sexBatch">sexBatch</a></li><li data-type='method'><a href="module-_romantic.html#.sexCab">sexCab</a></li><li data-type='method'><a href="module-_romantic.html#.sexDialog">sexDialog</a></li><li data-type='method'><a href="module-_romantic.html#.sexIdentifier">sexIdentifier</a></li><li data-type='method'><a href="module-_romantic.html#.sexMessage">sexMessage</a></li><li data-type='method'><a href="module-_romantic.html#.sexModal">sexModal</a></li><li data-type='method'><a href="module-_romantic.html#.sexOp">sexOp</a></li><li data-type='method'><a href="module-_romantic.html#.sexTable">sexTable</a></li></ul></li><li><a href="module-_to.html">_to</a><ul class='methods'><li data-type='method'><a href="module-_to.html#.toArray">toArray</a></li><li data-type='method'><a href="module-_to.html#.toCss">toCss</a></li><li data-type='method'><a href="module-_to.html#.toForm">toForm</a></li><li data-type='method'><a href="module-_to.html#.toGrid">toGrid</a></li><li data-type='method'><a href="module-_to.html#.toGridSpan">toGridSpan</a></li><li data-type='method'><a href="module-_to.html#.toHeight">toHeight</a></li><li data-type='method'><a href="module-_to.html#.toHeightState">toHeightState</a></li><li data-type='method'><a href="module-_to.html#.toJson">toJson</a></li><li data-type='method'><a href="module-_to.html#.toKey">toKey</a></li><li data-type='method'><a href="module-_to.html#.toLimit">toLimit</a></li><li data-type='method'><a href="module-_to.html#.toLink">toLink</a></li><li data-type='method'><a href="module-_to.html#.toLoading">toLoading</a></li><li data-type='method'><a href="module-_to.html#.toLogout">toLogout</a></li><li data-type='method'><a href="module-_to.html#.toMessage">toMessage</a></li><li data-type='method'><a href="module-_to.html#.toOriginal">toOriginal</a></li><li data-type='method'><a href="module-_to.html#.toPagination">toPagination</a></li><li data-type='method'><a href="module-_to.html#.toPid">toPid</a></li><li data-type='method'><a href="module-_to.html#.toQuery">toQuery</a></li><li data-type='method'><a href="module-_to.html#.toRoute">toRoute</a></li><li data-type='method'><a href="module-_to.html#.toTime">toTime</a></li><li data-type='method'><a href="module-_to.html#.toTree">toTree</a></li><li data-type='method'><a href="module-_to.html#.toTreeArray">toTreeArray</a></li><li data-type='method'><a href="module-_to.html#.toTreeConfig">toTreeConfig</a></li><li data-type='method'><a href="module-_to.html#.toWidth">toWidth</a></li><li data-type='method'><a href="module-_to.html#.toX">toX</a></li></ul></li><li><a href="module-_ui.html">_ui</a><ul class='methods'><li data-type='method'><a href="module-_ui.html#.activeColumn">activeColumn</a></li><li data-type='method'><a href="module-_ui.html#.activeSearch">activeSearch</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOff">activeTreeOff</a></li><li data-type='method'><a href="module-_ui.html#.activeTreeOn">activeTreeOn</a></li><li data-type='method'><a href="module-_ui.html#.anchorColumn">anchorColumn</a></li><li data-type='method'><a href="module-_ui.html#.anchorSearch">anchorSearch</a></li><li data-type='method'><a href="module-_ui.html#.anchorTree">anchorTree</a></li><li data-type='method'><a href="module-_ui.html#.columnWrapper">columnWrapper</a></li><li data-type='method'><a href="module-_ui.html#.formAdvReset">formAdvReset</a></li><li data-type='method'><a href="module-_ui.html#.formClear">formClear</a></li><li data-type='method'><a href="module-_ui.html#.formGet">formGet</a></li><li data-type='method'><a href="module-_ui.html#.formHit">formHit</a></li><li data-type='method'><a href="module-_ui.html#.formHits">formHits</a></li><li data-type='method'><a href="module-_ui.html#.formLinker">formLinker</a></li><li data-type='method'><a href="module-_ui.html#.formRead">formRead</a></li><li data-type='method'><a href="module-_ui.html#.formRedo">formRedo</a></li><li data-type='method'><a href="module-_ui.html#.formReset">formReset</a></li><li data-type='method'><a href="module-_ui.html#.formSubmit">formSubmit</a></li><li data-type='method'><a href="module-_ui.html#.htmlDisabled">htmlDisabled</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorBlur">htmlErrorBlur</a></li><li data-type='method'><a href="module-_ui.html#.htmlErrorFocus">htmlErrorFocus</a></li><li data-type='method'><a href="module-_ui.html#.htmlReadOnly">htmlReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.onConfirm">onConfirm</a></li><li data-type='method'><a href="module-_ui.html#.onDatum">onDatum</a></li><li data-type='method'><a href="module-_ui.html#.onLinker">onLinker</a></li><li data-type='method'><a href="module-_ui.html#.onReference">onReference</a></li><li data-type='method'><a href="module-_ui.html#.onRouter">onRouter</a></li><li data-type='method'><a href="module-_ui.html#.onSave">onSave</a></li><li data-type='method'><a href="module-_ui.html#.onUniform">onUniform</a></li><li data-type='method'><a href="module-_ui.html#.writeDisabled">writeDisabled</a></li><li data-type='method'><a href="module-_ui.html#.writeImpact">writeImpact</a></li><li data-type='method'><a href="module-_ui.html#.writeInitial">writeInitial</a></li><li data-type='method'><a href="module-_ui.html#.writeLinker">writeLinker</a></li><li data-type='method'><a href="module-_ui.html#.writeReadOnly">writeReadOnly</a></li><li data-type='method'><a href="module-_ui.html#.writeSegment">writeSegment</a></li></ul></li><li><a href="module-_unity.html">_unity</a><ul class='methods'><li data-type='method'><a href="module-_unity.html#.ambArray">ambArray</a></li><li data-type='method'><a href="module-_unity.html#.ambEvent">ambEvent</a></li><li data-type='method'><a href="module-_unity.html#.ambFind">ambFind</a></li><li data-type='method'><a href="module-_unity.html#.ambKv">ambKv</a></li><li data-type='method'><a href="module-_unity.html#.ambObject">ambObject</a></li><li data-type='method'><a href="module-_unity.html#.ambValue">ambValue</a></li><li data-type='method'><a href="module-_unity.html#.connectId">connectId</a></li><li data-type='method'><a href="module-_unity.html#.connectItem">connectItem</a></li><li data-type='method'><a href="module-_unity.html#.connectRenders">connectRenders</a></li><li data-type='method'><a href="module-_unity.html#.connectValidator">connectValidator</a></li><li data-type='method'><a href="module-_unity.html#.decryptBase64">decryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.dslArray">dslArray</a></li><li data-type='method'><a href="module-_unity.html#.encryptAES">encryptAES</a></li><li data-type='method'><a href="module-_unity.html#.encryptBase64">encryptBase64</a></li><li data-type='method'><a href="module-_unity.html#.encryptHmac512">encryptHmac512</a></li><li data-type='method'><a href="module-_unity.html#.encryptMD5">encryptMD5</a></li><li data-type='method'><a href="module-_unity.html#.forest">forest</a></li><li data-type='method'><a href="module-_unity.html#.forestGroup">forestGroup</a></li><li data-type='method'><a href="module-_unity.html#.formatCurrency">formatCurrency</a></li><li data-type='method'><a href="module-_unity.html#.formatDate">formatDate</a></li><li data-type='method'><a href="module-_unity.html#.formatExpr">formatExpr</a></li><li data-type='method'><a href="module-_unity.html#.formatNow">formatNow</a></li><li data-type='method'><a href="module-_unity.html#.formatObject">formatObject</a></li><li data-type='method'><a href="module-_unity.html#.formatPercent">formatPercent</a></li><li data-type='method'><a href="module-_unity.html#.formatQuery">formatQuery</a></li><li data-type='method'><a href="module-_unity.html#.formatTpl">formatTpl</a></li><li data-type='method'><a href="module-_unity.html#.mathDiscount">mathDiscount</a></li><li data-type='method'><a href="module-_unity.html#.mathDivision">mathDivision</a></li><li data-type='method'><a href="module-_unity.html#.mathMultiplication">mathMultiplication</a></li><li data-type='method'><a href="module-_unity.html#.mathSum">mathSum</a></li><li data-type='method'><a href="module-_unity.html#.randomArray">randomArray</a></li><li data-type='method'><a href="module-_unity.html#.randomInteger">randomInteger</a></li><li data-type='method'><a href="module-_unity.html#.randomString">randomString</a></li><li data-type='method'><a href="module-_unity.html#.randomUUID">randomUUID</a></li><li data-type='method'><a href="module-_unity.html#.sorterAsc">sorterAsc</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscD">sorterAscD</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscDFn">sorterAscDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscFn">sorterAscFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscT">sorterAscT</a></li><li data-type='method'><a href="module-_unity.html#.sorterAscTFn">sorterAscTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDesc">sorterDesc</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescD">sorterDescD</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescDFn">sorterDescDFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescFn">sorterDescFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescT">sorterDescT</a></li><li data-type='method'><a href="module-_unity.html#.sorterDescTFn">sorterDescTFn</a></li><li data-type='method'><a href="module-_unity.html#.sorterObject">sorterObject</a></li><li data-type='method'><a href="module-_unity.html#.tree">tree</a></li><li data-type='method'><a href="module-_unity.html#.treeChildren">treeChildren</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAll">treeChildrenAll</a></li><li data-type='method'><a href="module-_unity.html#.treeChildrenAllIn">treeChildrenAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeFlip">treeFlip</a></li><li data-type='method'><a href="module-_unity.html#.treeParent">treeParent</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAll">treeParentAll</a></li><li data-type='method'><a href="module-_unity.html#.treeParentAllIn">treeParentAllIn</a></li><li data-type='method'><a href="module-_unity.html#.treeShared">treeShared</a></li></ul></li><li><a href="module-_value.html">_value</a><ul class='methods'><li data-type='method'><a href="module-_value.html#.valueAppend">valueAppend</a></li><li data-type='method'><a href="module-_value.html#.valueCopy">valueCopy</a></li><li data-type='method'><a href="module-_value.html#.valueDuration">valueDuration</a></li><li data-type='method'><a href="module-_value.html#.valueEndTime">valueEndTime</a></li><li data-type='method'><a href="module-_value.html#.valueExpr">valueExpr</a></li><li data-type='method'><a href="module-_value.html#.valueFabric">valueFabric</a></li><li data-type='method'><a href="module-_value.html#.valueFabrics">valueFabrics</a></li><li data-type='method'><a href="module-_value.html#.valueFactor">valueFactor</a></li><li data-type='method'><a href="module-_value.html#.valueFind">valueFind</a></li><li data-type='method'><a href="module-_value.html#.valueFloat">valueFloat</a></li><li data-type='method'><a href="module-_value.html#.valueInt">valueInt</a></li><li data-type='method'><a href="module-_value.html#.valueLadder">valueLadder</a></li><li data-type='method'><a href="module-_value.html#.valueLimit">valueLimit</a></li><li data-type='method'><a href="module-_value.html#.valueNow">valueNow</a></li><li data-type='method'><a href="module-_value.html#.valueOnChange">valueOnChange</a></li><li data-type='method'><a href="module-_value.html#.valuePair">valuePair</a></li><li data-type='method'><a href="module-_value.html#.valueParse">valueParse</a></li><li data-type='method'><a href="module-_value.html#.valuePath">valuePath</a></li><li data-type='method'><a href="module-_value.html#.valuePinyin">valuePinyin</a></li><li data-type='method'><a href="module-_value.html#.valueRequest">valueRequest</a></li><li data-type='method'><a href="module-_value.html#.valueStartTime">valueStartTime</a></li><li data-type='method'><a href="module-_value.html#.valueTime">valueTime</a></li><li data-type='method'><a href="module-_value.html#.valueTimes">valueTimes</a></li><li data-type='method'><a href="module-_value.html#.valueValid">valueValid</a></li></ul></li><li><a href="module-_xweb.html">_xweb</a><ul class='methods'><li data-type='method'><a href="module-_xweb.html#.xtChecked">xtChecked</a></li><li data-type='method'><a href="module-_xweb.html#.xtExprFlat">xtExprFlat</a></li><li data-type='method'><a href="module-_xweb.html#.xtFormat">xtFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtGet">xtGet</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArray">xtInitArray</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitArrayMap">xtInitArrayMap</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitFormat">xtInitFormat</a></li><li data-type='method'><a href="module-_xweb.html#.xtInitObject">xtInitObject</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyAjax">xtLazyAjax</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyData">xtLazyData</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyInit">xtLazyInit</a></li><li data-type='method'><a href="module-_xweb.html#.xtLazyUp">xtLazyUp</a></li><li data-type='method'><a href="module-_xweb.html#.xtReady">xtReady</a></li><li data-type='method'><a href="module-_xweb.html#.xtRender">xtRender</a></li><li data-type='method'><a href="module-_xweb.html#.xtReset">xtReset</a></li><li data-type='method'><a href="module-_xweb.html#.xtRevert">xtRevert</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowAdd">xtRowAdd</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowChange">xtRowChange</a></li><li data-type='method'><a href="module-_xweb.html#.xtRowDel">xtRowDel</a></li><li data-type='method'><a href="module-_xweb.html#.xtSet">xtSet</a></li><li data-type='method'><a href="module-_xweb.html#.xtUnsafe">xtUnsafe</a></li></ul></li><li><a href="module-web-ai.html">web-ai</a><ul class='methods'><li data-type='method'><a href="module-web-ai.html#.aiBreadcrumb">aiBreadcrumb</a></li><li data-type='method'><a href="module-web-ai.html#.aiLink">aiLink</a></li><li data-type='method'><a href="module-web-ai.html#.aiUrl">aiUrl</a></li></ul></li><li><a href="module-web-component.html">web-component</a><ul class='methods'><li data-type='method'><a href="module-web-component.html#.*Dialog">* Dialog</a></li><li data-type='method'><a href="module-web-component.html#.*DialogButton">* DialogButton</a></li><li data-type='method'><a href="module-web-component.html#.*DialogMenu">* DialogMenu</a></li><li data-type='method'><a href="module-web-component.html#.*PageCard">* PageCard</a></li><li data-type='method'><a href="module-web-component.html#.*Rectangle">* Rectangle</a></li><li data-type='method'><a href="module-web-component.html#.ColumnUser">ColumnUser</a></li><li data-type='method'><a href="module-web-component.html#.G6Editor">G6Editor</a></li><li data-type='method'><a href="module-web-component.html#.G6Viewer">G6Viewer</a></li><li data-type='method'><a href="module-web-component.html#.Graphic2">Graphic2</a></li><li data-type='method'><a href="module-web-component.html#.LoadingAlert">LoadingAlert</a></li><li data-type='method'><a href="module-web-component.html#.LoadingContent">LoadingContent</a></li><li data-type='method'><a href="module-web-component.html#.Navigation">Navigation</a></li><li data-type='method'><a href="module-web-component.html#.NavSwallow">NavSwallow</a></li></ul></li><li><a href="module-web-input.html">web-input</a><ul class='methods'><li data-type='method'><a href="module-web-input.html#.AddressSelector">AddressSelector</a></li><li data-type='method'><a href="module-web-input.html#.BraftEditor">BraftEditor</a></li><li data-type='method'><a href="module-web-input.html#.CheckJson">CheckJson</a></li><li data-type='method'><a href="module-web-input.html#.CheckTransfer">CheckTransfer</a></li><li data-type='method'><a href="module-web-input.html#.DialogEditor">DialogEditor</a></li><li data-type='method'><a href="module-web-input.html#.FileUpload">FileUpload</a></li><li data-type='method'><a href="module-web-input.html#.InputArray">InputArray</a></li><li data-type='method'><a href="module-web-input.html#.JsonEditor">JsonEditor</a></li><li data-type='method'><a href="module-web-input.html#.ListSelector">ListSelector</a></li><li data-type='method'><a href="module-web-input.html#.MagicView">MagicView</a></li><li data-type='method'><a href="module-web-input.html#.MatrixSelector">MatrixSelector</a></li><li data-type='method'><a href="module-web-input.html#.SearchInput">SearchInput</a></li><li data-type='method'><a href="module-web-input.html#.SearchRangeDate">SearchRangeDate</a></li><li data-type='method'><a href="module-web-input.html#.TableEditor">TableEditor</a></li><li data-type='method'><a href="module-web-input.html#.TreeSelector">TreeSelector</a></li></ul></li></ul><h3>Global</h3><ul><li><a href="global.html#@zero">@zero</a></li></ul>
+</nav>
+
+<div id="main">
+    
+    <h1 class="page-title">_ui</h1>
+    
+
+    
+
+
+
+
+<section>
+
+<header>
+    
+        
+            
+        
+    
+</header>
+
+<article>
+    
+        <div class="container-overview">
+        
+            
+                <div class="description usertext"><h1>界面模块</h1>
+<h2>1. 函数列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th style="text-align:left">特征</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">activeColumn</td>
+<td style="text-align:left">Trigger</td>
+<td style="text-align:left">触发<code>__BTN_CLEAR_&lt;X&gt;</code>元素的onClick事件。</td>
+</tr>
+<tr>
+<td style="text-align:left">activeSearch</td>
+<td style="text-align:left">Trigger</td>
+<td style="text-align:left">触发<code>__BTN_CLEAR_SEARCH</code>元素的onClick事件。</td>
+</tr>
+<tr>
+<td style="text-align:left">activeTreeOff</td>
+<td style="text-align:left">Trigger</td>
+<td style="text-align:left">触发<code>__BTN_TREE_OFF</code>元素的onClick事件。</td>
+</tr>
+<tr>
+<td style="text-align:left">activeTreeOn</td>
+<td style="text-align:left">Trigger</td>
+<td style="text-align:left">触发<code>__BTN_TREE_ON</code>元素的onClick事件。</td>
+</tr>
+<tr>
+<td style="text-align:left">anchorColumn</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">生成<code>__BTN_CLEAR_&lt;X&gt;</code>模式的隐藏按钮，被外围按钮调<code>connectId</code>链接。</td>
+</tr>
+<tr>
+<td style="text-align:left">anchorSearch</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">生成<code>__BTN_CLEAR_SEARCH</code>用于清除搜索条件专用隐藏条件。</td>
+</tr>
+<tr>
+<td style="text-align:left">anchorTree</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">生成<code>__BTN_TREE_OFF</code>和<code>__BTN_TREE_ON</code>树启用禁用菜单。</td>
+</tr>
+<tr>
+<td style="text-align:left">columnWrapper</td>
+<td style="text-align:left">Column</td>
+<td style="text-align:left">生成render专用函数<code>(text,record,index) =&gt; ...</code>，结合上层配置生成可执行render。</td>
+</tr>
+<tr>
+<td style="text-align:left">formAdvReset</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「引擎」formReset的增强版。</td>
+</tr>
+<tr>
+<td style="text-align:left">formClear</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">清空表单专用，配合<code>$clear</code>配置执行清空操作，该变量提供了需要清空的字段配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">formGet</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「读多值」根据提供的<code>key</code>值读取表单中的数据，如果是多个<code>key</code>则读取Object，如果单个则读取单个字段数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">formHit</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「读写单值」二义性函数，读取某个字段或设置某个字段的值。</td>
+</tr>
+<tr>
+<td style="text-align:left">formHits</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「写多值」批量设置值操作，将一个Object的值设置到表单中。</td>
+</tr>
+<tr>
+<td style="text-align:left">formLinker</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left"><code>ListSelector,TreeSelector</code>中专用处理<code>linker</code>的特殊方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">formRead</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">（主要用于父表单数据读取）如果包含了<code>$record</code>则从中读取数据，否则直接读取完整的表单数据。</td>
+</tr>
+<tr>
+<td style="text-align:left">formRedo</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">防重复加载重置。</td>
+</tr>
+<tr>
+<td style="text-align:left">formReset</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「重置」表单标准的重置操作，触发reset按钮。</td>
+</tr>
+<tr>
+<td style="text-align:left">formSubmit</td>
+<td style="text-align:left">Form</td>
+<td style="text-align:left">「提交」异步提交表单专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">htmlDisabled</td>
+<td style="text-align:left">Html</td>
+<td style="text-align:left">读取HTML元素的disabled属性。</td>
+</tr>
+<tr>
+<td style="text-align:left">htmlErrorBlur</td>
+<td style="text-align:left">Html</td>
+<td style="text-align:left">触发onBlur的错误信息专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">htmlErrorFocus</td>
+<td style="text-align:left">Html</td>
+<td style="text-align:left">触发onFocus的错误信息专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">htmlReadOnly</td>
+<td style="text-align:left">Html</td>
+<td style="text-align:left">读取HTML元素的readOnly属性。</td>
+</tr>
+<tr>
+<td style="text-align:left">onConfirm</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">封装Confirm弹出框的<code>确认/取消</code>的onClick事件操作。</td>
+</tr>
+<tr>
+<td style="text-align:left">onDatum</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">「继承」非事件，属性继承专用，处理Assist/Tabular类型的属性集。</td>
+</tr>
+<tr>
+<td style="text-align:left">onLinker</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">linker配置数据的专用处理方法，ListSelector/TreeSelector都可能用到。</td>
+</tr>
+<tr>
+<td style="text-align:left">onReference</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">「引擎」（高频）向上递归读取props中的<code>reference</code>引用（父组件引用）。</td>
+</tr>
+<tr>
+<td style="text-align:left">onRouter</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">「引擎」从React Router中读取路由参数（包括QueryString中的参数）。</td>
+</tr>
+<tr>
+<td style="text-align:left">onSave</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">DATUM相关字典数据的合并专用操作，应用于很多带有字典类型的表单提交中。</td>
+</tr>
+<tr>
+<td style="text-align:left">onUniform</td>
+<td style="text-align:left">On</td>
+<td style="text-align:left">「继承」非事件，属性继承专用，读取<code>$app, $user, $profile, $router, $parent, $submitting</code>等统一属性。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeDisabled</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">表单字段的disabled全计算（依赖、Acl、其他等）。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeImpact</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">表单中的impact配置影响全计算，计算被影响字段状态。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeInitial</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">当disabled为true时，书写特定初始值到jsx属性中（data-initial）。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeLinker</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">linker计算过程，用于读取初始化加载过的linker数据，完成引用渲染。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeReadOnly</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">表单字段的readOnly权计算（依赖、Acl、其他等）。</td>
+</tr>
+<tr>
+<td style="text-align:left">writeSegment</td>
+<td style="text-align:left">Jsx</td>
+<td style="text-align:left">「总控」表单计算的特殊方法。</td>
+</tr>
+</tbody>
+</table></div>
+            
+
+            
+                
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            
+        
+        </div>
+    
+
+    
+
+    
+
+    
+    
+    
+
+     
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    <h4 class="name" id=".activeColumn"><span class="type-signature">(static) </span>activeColumn<span class="signature">($terms)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.activeColumn</code></h2>
+<p>点击查询条件的清除专用激活按钮。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>$terms</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>查询条件专用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".activeSearch"><span class="type-signature">(static) </span>activeSearch<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.activeSearch</code></h2>
+<p>点击清除搜索框的按钮专用触发函数。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".activeTreeOff"><span class="type-signature">(static) </span>activeTreeOff<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.activeTreeOff</code></h2>
+<p>点击树桩菜单禁用按钮</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".activeTreeOn"><span class="type-signature">(static) </span>activeTreeOn<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.activeTreeOn</code></h2>
+<p>点击树桩菜单激活按钮</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".anchorColumn"><span class="type-signature">(static) </span>anchorColumn<span class="signature">(field, onClick)</span><span class="type-signature"> &rarr; {Jsx}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.anchorColumn</code></h2>
+<p>渲染列清除锚点，ID格式：<code>__BTN_CLEAR_&lt;column&gt;</code>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>列名。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>onClick</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>点击专用回调。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Jsx</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".anchorSearch"><span class="type-signature">(static) </span>anchorSearch<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Jsx}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.anchorSearch</code></h2>
+<p>搜索条件清除专用锚点，清除所有搜索条件，ID格式：<code>__BTN_CLEAR_SEARCH</code>。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Jsx</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".anchorTree"><span class="type-signature">(static) </span>anchorTree<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Jsx}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.anchorTree</code></h2>
+<p>树专用的状态锚点设置</p>
+<ul>
+<li><code>__BTN_TREE_OFF</code>：禁用树菜单。</li>
+<li><code>__BTN_TREE_ON</code>：启用树菜单。</li>
+</ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Jsx</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".columnWrapper"><span class="type-signature">(static) </span>columnWrapper<span class="signature">(column, fnRender)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.columnWrapper</code></h2>
+<ol>
+<li>fnRender 为特殊函数（原始的 render，去除 $render 配置后）</li>
+<li>column 为列配置</li>
+</ol>
+<p>列配置的数据结构如：</p>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;field&quot;: &quot;_children&quot;
+}
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>column</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入列配置相关信息</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>fnRender</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+|
+
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>原始函数信息</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formAdvReset"><span class="type-signature">(static) </span>formAdvReset<span class="signature">(reference, response, keys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ux.formAdvReset</code></h2>
+<p><code>formReset</code>的强化版本，内部可调用<code>doReset</code>方法，核心功能如下：</p>
+<ol>
+<li>当前 <code>reference</code> 中绑定了 Ant Design 的 form，执行当前表单的重置。</li>
+<li>如果当前 <code>reference</code> 中没有父项，则递归往上执行，一直调用父类表单重置。</li>
+<li>在重置时有两种支持模式
+<ul>
+<li>直接重置（不选择任何字段直接重置）</li>
+<li>带字段重置（传入字段信息实现带字段的重置）</li>
+</ul>
+</li>
+<li>如果系统内部带有<code>doReset</code>方法，则执行该函数</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>响应最终信息数据。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>被重设的表单字段。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formClear"><span class="type-signature">(static) </span>formClear<span class="signature">(reference, data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formClear</code></h2>
+<p>Ant Design中的表单清空专用方法，用于清空当前 Ant Design表单。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>需要清空的对象值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>处理被清空的所有方法。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formGet"><span class="type-signature">(static) </span>formGet<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {Object|any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formGet</code></h2>
+<p>直接从 form 中按 <code>key</code> 读取表单数据值。</p>
+<ol>
+<li>如果传入了 Array 类型的 key，则读取包含了 key 中所有元素的表单对象值。</li>
+<li>如果传入了 String 类型的 key，则直接读取表单字段为 <code>key</code> 的字段值。</li>
+<li>如果什么都没传入，则直接返回所有表单值。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>字段名称，有可能是字段集合。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回读取的字段值。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+|
+
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formHit"><span class="type-signature">(static) </span>formHit<span class="signature">(reference, key, value)</span><span class="type-signature"> &rarr; {any}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formHit</code></h2>
+<p>「Ambiguity」Ant Design中的Form操作的二义性函数</p>
+<ul>
+<li><code>value</code>有值时直接设置<code>key</code>的表单值；</li>
+<li><code>value</code>为undefined时则直接读取Form中的<code>key</code>对应的值</li>
+</ul>
+<p>这个方法是一个典型的二义性方法，如果有 value 则设置字段<code>key</code>的值，如果没有value则读取<code>value</code>的值，但是它的读取不如 <code>formGet</code>，
+<code>formGet</code>是增强版的表单读取方法，不仅仅可以读单字段的值，还可以读一个子对象（Object）。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>字段名称。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>字段值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>只有在 value 不传入时使用该值。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">any</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formHits"><span class="type-signature">(static) </span>formHits<span class="signature">(reference, values)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formHits</code></h2>
+<p>Ant Design中的Form表单执行值设置，直接使用values执行设置，values中如果有undefined则清空该字段。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>values</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>设置Form表单中的字段值</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formLinker"><span class="type-signature">(static) </span>formLinker<span class="signature">(data, config, linkerField)</span><span class="type-signature"> &rarr; {undefined|*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formLinker</code></h2>
+<blockquote>
+<p>该函数主要使用在<code>ListSelector、TreeSelector</code>这种复杂的自定义组件中。</p>
+</blockquote>
+<p>通过 data 来读取</p>
+<ol>
+<li>data 是 Array，则按长度为 1 来处理。</li>
+<li>data 是 Object，则直接处理。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>linker关联的数据信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>linker关联的配置信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>linkerField</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>linker关联的字段值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回undefined或者最终计算的 linker 数据。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">undefined</span>
+|
+
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formRead"><span class="type-signature">(static) </span>formRead<span class="signature">(reference, data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formRead</code></h2>
+<p>根据数据填充 data 变量。</p>
+<ol>
+<li>如果包含了<code>$record</code>在 props 属性中，则直接使用 $record 数据执行填充，$record 的类型是 DataObject。</li>
+<li>如果不包含<code>$record</code>变量，则直接用 form 的 <code>getFieldsValue</code> 读取当前表单值来填充 data 变量。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>需要填充的对象值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终填充的结果。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formRedo"><span class="type-signature">(static) </span>formRedo<span class="signature">(reference)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formRedo</code></h2>
+<p>重置防重复提交的状态专用方法。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formReset"><span class="type-signature">(static) </span>formReset<span class="signature">(reference, keys)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.formReset</code></h2>
+<p>重设表单值专用方法。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+|
+
+<span class="param-type">Array</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>字段名称，有可能是字段集合。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".formSubmit"><span class="type-signature">(async, static) </span>formSubmit<span class="signature">(reference, redux)</span><span class="type-signature"> &rarr; {Promise.&lt;T>}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ux.formSubmit</code></h2>
+<p>Ant Design中的表单提交函数，返回最终的表单提交数据值。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>redux</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>是否执行 redux 提交。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的表单提交数据值。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Promise.&lt;T></span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".htmlDisabled"><span class="type-signature">(static) </span>htmlDisabled<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.htmlDisabled</code></h2>
+<blockquote>
+<p>必须在<code>componentDidMount</code>之后才能执行。</p>
+</blockquote>
+<p>直接返回<code>id</code>相匹配的 HTML 元素的 <code>disabled</code> 属性，直接判断是否禁用。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Html中的元素ID。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回元素是否禁用。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".htmlErrorBlur"><span class="type-signature">(static) </span>htmlErrorBlur<span class="signature">(item)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.htmlErrorBlur</code></h2>
+<blockquote>
+<p>「2阶」必须在<code>componentDidMount</code>之后才能执行。</p>
+</blockquote>
+<p>当元素离开焦点时执行该函数，用于验证。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>被验证的元素配置</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".htmlErrorFocus"><span class="type-signature">(static) </span>htmlErrorFocus<span class="signature">(item)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.htmlErrorFocus</code></h2>
+<blockquote>
+<p>「2阶」必须在<code>componentDidMount</code>之后才能执行。</p>
+</blockquote>
+<p>当元素聚焦时执行该函数，用于验证。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>item</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>被验证的元素配置</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".htmlReadOnly"><span class="type-signature">(static) </span>htmlReadOnly<span class="signature">(id)</span><span class="type-signature"> &rarr; {boolean}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.htmlReadOnly</code></h2>
+<blockquote>
+<p>必须在<code>componentDidMount</code>之后才能执行。</p>
+</blockquote>
+<p>直接返回<code>id</code>相匹配的 HTML 元素的 <code>readOnly</code> 属性，直接判断是否只读。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Html中的元素ID。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回元素是否只读。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onConfirm"><span class="type-signature">(static) </span>onConfirm<span class="signature">(fnEvent, content)</span><span class="type-signature"> &rarr; {function}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.onConfirm</code></h2>
+<p>基础函数，用于执行 confirm，在按钮中执行提交确认注入。</p>
+<ol>
+<li>如果带 content 则将原始函数处理在 onOk 回调中。</li>
+<li>如果不带 content 则直接执行函数。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>fnEvent</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>原始事件方法。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>content</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>提示框中的内容数据。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回事件函数</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">function</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onDatum"><span class="type-signature">(static) </span>onDatum<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.onDatum</code></h2>
+<p>辅助数据读取专用函数，可根据 key = <code>xxx.yyy</code> 的值处理辅助数据，主要读取：</p>
+<ol>
+<li>读取Tabular专用辅助数据。</li>
+<li>读取Assist专用辅助数据。</li>
+<li>读取Category专用辅助数据。</li>
+</ol>
+<p>根据所需信息读取上述三大类的辅助数据，得到最终的 Array 类型的数组结果。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>需要读取的 Tabular/Assist 的键值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的数组。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onLinker"><span class="type-signature">(static) </span>onLinker<span class="signature">(config, valueSupplier)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.onLinker</code></h2>
+<p>和 linker 配置项目的数据提取。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>linker相关的配置信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>valueSupplier</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+|
+
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>默认值，或值处理函数。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>生成的最终 linker 数据。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onReference"><span class="type-signature">(static) </span>onReference<span class="signature">(reference, current)</span><span class="type-signature"> &rarr; {ReactComponent}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ux.onReference</code></h2>
+<p>直接返回属性中的<code>reference</code>（父类引用），根据<code>current</code>计算将要递归的层级，这里必须是
+按照 Zero UI 中的规范传入了 reference 的组件。</p>
+<pre class="prettyprint source lang-js"><code>// 父类引用
+const ref = Ux.onReference(this, 1);
+
+// 爷类引用
+const ref - Ux.onReference(this, 2);
+
+// 不断往上递归，读取所需要的 n 层引用信息。
+</code></pre>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>current</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Number</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>0</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>处理层级信息。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回组件引用。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">ReactComponent</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onRouter"><span class="type-signature">(static) </span>onRouter<span class="signature">(reference, key)</span><span class="type-signature"> &rarr; {*}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ux.onRouter</code></h2>
+<p>从React Router中读取路由参数的值相关信息，该路由参数包括</p>
+<ol>
+<li>路径参数，在路由中使用<code>/ox/person/:ci</code>类似的<code>ci</code>参数。</li>
+<li>查询请求参数，路由中的<code>/ox/person?a=x&amp;b=y</code>中的<code>a、b</code>参数。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>读取参数的参数名。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">*</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onSave"><span class="type-signature">(static) </span>onSave<span class="signature">(reference, key, data, isDeleted)</span><span class="type-signature"> &rarr; {Array}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.onSave</code></h2>
+<ol>
+<li>数组合并（添加、更新）处理。</li>
+<li>数组删除。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+        <th>Default</th>
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>React对应组件引用。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>key</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>需要读取的 Tabular/Assist 的键值。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                </td>
+            
+
+            <td class="description last"><p>数据处理信息，包含了数据记录集。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>isDeleted</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">boolean</span>
+
+
+            
+            </td>
+
+            
+
+            
+                <td class="default">
+                
+                    <code>false</code>
+                
+                </td>
+            
+
+            <td class="description last"><p>删除还是合并。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回处理完成的数组信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Array</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".onUniform"><span class="type-signature">(static) </span>onUniform<span class="signature">(props, &hellip;keys)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ux.onUniform</code></h2>
+<p>原生 Zero UI中的组件继承属性专用方法，在 Zero Extension 中会调用<code>yoAmbient</code>方法实现属性继承，
+继承过程中包含几个核心数据：</p>
+<ol>
+<li><code>$t_</code> 和 <code>$a_</code> 的辅助数据，Tabular和Assist两种。</li>
+<li><code>app</code>应用程序相关数据。</li>
+<li><code>user, profile</code>用户登录后的数据。</li>
+<li><code>submitting</code>防重复提交状态数据。</li>
+<li><code>router</code>核心路由数据。</li>
+<li>输入的<code>keys</code>对应的键相关数据。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+        <th>Attributes</th>
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>props</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Props</span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>当前React组件的属性信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>keys</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Array.&lt;String></span>
+
+
+            
+            </td>
+
+            
+                <td class="attributes">
+                
+
+                
+
+                
+                    &lt;repeatable><br>
+                
+                </td>
+            
+
+            
+
+            <td class="description last"><p>待提取的属性集合。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终的数据信息。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeDisabled"><span class="type-signature">(static) </span>writeDisabled<span class="signature">(jsx, reference)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeDisabled</code></h2>
+<p>在标准组件类型的依赖设置中，所有的禁用直接绑定 disabled 属性。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>jsx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>对应表单配置 optionJsx。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeImpact"><span class="type-signature">(static) </span>writeImpact<span class="signature">(formValues, depend, value)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeImpact</code></h2>
+<p>用于处理带依赖的数据相关联字段的影响信息，主要用于<code>联动下拉</code>组件，在 reset 触发时调用。</p>
+<p>主要配置如：</p>
+<pre class="prettyprint source lang-json"><code>{
+     &quot;metadata&quot;: &quot;type,测试类型,,,aiSelect&quot;,
+     &quot;optionJsx.config.datum&quot;: &quot;source=ci.type,key=key,label=name&quot;,
+     &quot;optionJsx.depend.impact&quot;: {
+         &quot;reset&quot;: [
+             &quot;surety&quot;
+         ]
+     }
+}
+</code></pre>
+<p>这里的配置会被当前方法解析，含义如：</p>
+<ol>
+<li>当前字段的值在发生改变时影响了其他表单字段。</li>
+<li>影响过程中，如果表单发生了重设，那么会将目标字段调整成最早的状态。</li>
+<li>不同类型的下拉值会出现不同的结果。</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>formValues</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Form中初始的 linker 相关数据值。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>depend</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>反向依赖专用配置。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>value</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">any</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>输入的值。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeInitial"><span class="type-signature">(static) </span>writeInitial<span class="signature">(optionConfig, optionJsx, cell)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeInitial</code></h2>
+<p>追加特殊初始值到Jsx中，等待执行特定流程，初始化数据。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>optionConfig</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>生效配置</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>optionJsx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>生效配置</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>cell</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>当前单元格的专用配置（原始配置）</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeLinker"><span class="type-signature">(static) </span>writeLinker<span class="signature">(formValues, config, rowSupplier)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeLinker</code></h2>
+<p>链接专用处理</p>
+<ul>
+<li>optionJsx.config.linker</li>
+<li>optionJsx.config.linkerField</li>
+</ul>
+<p>（生成 form values）</p>
+<ol>
+<li>config的数据结构<pre class="prettyprint source lang-json"><code>{
+    &quot;linker&quot;: {
+        &quot;row1&quot;: &quot;formField1&quot;,
+        &quot;row2&quot;: &quot;formField2&quot;,
+        &quot;....&quot;: &quot;其他字段&quot;
+    },
+    &quot;linkerField&quot;: &quot;key&quot; // 特殊用法
+}
+</code></pre>
+</li>
+<li>参数说明
+<ul>
+<li>config：带有 linker 的配置</li>
+<li>rowSupplier：执行函数，用于获取单行数据</li>
+</ul>
+</li>
+<li>使用场景：
+<ul>
+<li>ListSelector 的使用</li>
+<li>TreeSelector 的使用</li>
+<li>AddressSelector 的使用</li>
+<li>onChange 字段专用的处理（触发专用）</li>
+</ul>
+</li>
+</ol>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>formValues</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Form中初始的 linker 相关数据值。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>config</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>linker配置信息。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>rowSupplier</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">function</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>读取选中行的数据信息。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>返回最终表单需要设置关联字段的表单值。</p>
+</div>
+
+
+
+<dl class="param-type">
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeReadOnly"><span class="type-signature">(static) </span>writeReadOnly<span class="signature">(jsx, reference)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeReadOnly</code></h2>
+<p>标准的 readOnly 的禁用设置，这种类型仅用于 Select 组件，因为 Select 组件不支持 readonly 属性，仅支持 disabled。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>jsx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>对应表单配置 optionJsx。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    <h4 class="name" id=".writeSegment"><span class="type-signature">(static) </span>writeSegment<span class="signature">(reference, optionJsx, field)</span><span class="type-signature"></span></h4>
+
+    
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+<div class="description usertext">
+    <h2>「标准」<code>Ux.writeSegment</code></h2>
+<p>表单可读写的特殊方法配置，主要包含几个特殊的设置，该设置和表单只读有关。</p>
+<h3>支持模式</h3>
+<ul>
+<li>全表单不可编辑——只读表单。</li>
+<li>部分表单不可编辑——部分只读。</li>
+</ul>
+<blockquote>
+<p>这里计算的不可编辑在表单原生的 readOnly 和 disabled 之下，优先级以原表单为主。</p>
+</blockquote>
+<h3>提取 $edition 流程</h3>
+<ol>
+<li>优先从 props 中读取 <code>$edition</code> 变量，如果不可编辑（直接false），直接返回。</li>
+<li>其次从 state 中读取 <code>$edition</code> 变量，如果不可编辑（直接false），直接返回。</li>
+<li>提取 props 中的 <code>$inited</code> 数据，从数据中提取<code>metadata</code>变量，如果出现了<code>edition</code>属性，则返回可编辑，否则不可编辑。</li>
+</ol>
+<h3>可编辑的判断</h3>
+<ol>
+<li>如果返回值是 false，整个表单不可编辑。</li>
+<li>如果返回值是 <code>{}</code>，则字段名为 true 的情况可编辑，否则不可编辑。</li>
+</ol>
+<p>返回对象格式如：</p>
+<pre class="prettyprint source lang-json"><code>{
+    &quot;username&quot;: true,
+    &quot;email&quot;: false,
+    &quot;age&quot;: false
+}
+</code></pre>
+<p>上述格式中，<code>username</code> 可编辑，其他两个字段不可编辑。</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>reference</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>React组件引用，必须绑定过 Ant 中的 Form。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>optionJsx</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>表单配置中的将要写入数据的 optionJsx 配置。</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>field</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>将会被处理的字段信息。</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+    
+    
+</div>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Wed Mar 03 2021 15:08:53 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+</footer>
+
+<script>prettyPrint();</script>
+<script src="scripts/polyfill.js"></script>
+<script src="scripts/linenumber.js"></script>
+
+<script src="scripts/search.js" defer></script>
+
+
+
+</body>
+</html>

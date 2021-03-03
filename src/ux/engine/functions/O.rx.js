@@ -9,11 +9,11 @@ import {Dsl} from "entity";
 import Ele from '../../element';
 
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.rxResize`
  *
  * 设置窗口 resize 的事件专用。
  *
- * @memberOf module:_rx
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Function} 返回 resize 回调函数。
  */
@@ -34,11 +34,11 @@ function rxResize(reference) {
 }
 
 /**
- * ## 引擎函数
+ * ## 「标准」`Ux.rxCheckedRow`
  *
  * 表格 Table 中的专用 selected 函数生成器。
  *
- * @memberOf module:_rx
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React对应组件引用。
  * @param {String} field 字段名称。
  * @returns {Function} 选中函数。
@@ -66,11 +66,11 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
 };
 /**
  *
- * ## 引擎函数
+ * ## 「标准」`Ux.rxCheckedTree`
  *
  * 树专用组件 Tree 中的专用选择函数，借助 $keySet 集合
  *
- * @memberOf module:_rx
+ * @memberOf module:_engine
  * @param {ReactComponent} reference React对应组件引用。
  * @param {Array} input 当前组中数组，本身为一棵树
  * @param {Function} callback 回调函数
@@ -117,14 +117,14 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
                 const {data = {}} = node.props;
                 if (item.checked) {
                     // 当前节点被选中
-                    const children = Ele.elementChildren(flatted, data);
+                    const children = T.elementChildren(flatted, data);
                     children.forEach(each => keySet.add(each.key));
                     // 选择当前节点的父节点
                     const branch = Ele.elementBranch(flatted, data.key);
                     branch.forEach(each => keySet.add(each.key));
                 } else {
                     // 当前节点被反选
-                    const children = Ele.elementChildren(flatted, data);
+                    const children = T.elementChildren(flatted, data);
                     children.forEach(each => keySet.delete(each.key));
                     /*
                      * 反选需要检查父节点的兄弟节点
@@ -147,7 +147,7 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
                         /*
                          * 查找同层兄弟节点
                          */
-                        const children = Ele.elementChildren(flatted, parent);
+                        const children = T.elementChildren(flatted, parent);
                         const selected = children.filter(item => keySet.has(item.key));
 
                         if (0 === selected.length) {

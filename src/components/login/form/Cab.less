@@ -1,0 +1,181 @@
+@import '~antd/lib/style/themes/default.less';
+@import "../../../global";
+
+@login-prefix: login;
+@logged-prefix: logged;
+.@{login-prefix}-container {
+    padding-left: 15%;
+    text-align: center;
+
+    .form {
+
+        @media (min-width: @screen-xxl) {
+            margin-left: 6rem;
+        }
+        background-color: white;
+        padding: 20px 25px;
+        width: 340px;
+        height: 210px;
+
+        .form-title {
+            font-size: 22px;
+            text-align: left;
+            color: @color-login-title;
+        }
+
+        form {
+            background-color: transparent;
+
+            .ant-row {
+                margin-top: 3px;
+                margin-bottom: 10px;
+
+                .ant-col {
+                    height: 36px;
+                    line-height: 36px;
+                }
+            }
+
+            .ant-form-item-control {
+                height: 36px;
+                line-height: 36px;
+
+                .ant-input-prefix {
+                    left: 6px;
+                }
+            }
+
+            input {
+                height: 40px;
+                padding-left: 42px;
+                font-size: 14px;
+                background-color: transparent;
+            }
+
+            input::placeholder {
+                color: @color-login-i;
+            }
+
+            i {
+                font-size: 16px;
+                color: @color-login-i;
+                float: left;
+            }
+
+            .login-action {
+                margin-top: 12px;
+                font-size: 12px;
+                text-align: left;
+
+                .remember {
+                    color: @color-login-remember;
+                }
+
+                .forget {
+                    a {
+                        text-decoration: underline;
+                    }
+                }
+
+                .button {
+                    float: right;
+                }
+            }
+
+            .ant-btn {
+                background-color: white !important;
+                border: 1px solid @color-login-button !important;
+                color: @color-login-button !important;
+                min-width: 70px;
+                height: 28px;
+
+                &:hover {
+                    opacity: 0.8;
+                }
+            }
+
+            .ant-input {
+                height: 36px;
+                line-height: 20px;
+                padding: 2px 11px 2px 30px;
+                border: none;
+                border-bottom: solid 1px #d9d9d9;
+                border-radius: 0;
+            }
+
+            .has-error .ant-form-explain {
+                top: -30px;
+            }
+
+            .has-error {
+                .ant-input {
+                    border-bottom: solid 1px @color-error !important;
+                }
+
+                .ant-form-item-children {
+                    .ant-form-item-children-icon i {
+                        color: @color-error;
+                    }
+                }
+            }
+
+            .has-success {
+                width: 100%;
+
+                .ant-form-item-children {
+                    .ant-input-suffix {
+                        padding-right: 0px;
+                    }
+
+                    .ant-form-item-children-icon i {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.@{logged-prefix}-container {
+    text-align: left;
+
+    .item {
+        &-content {
+            padding-top: 16px;
+            border: none;
+            width: 49%;
+            float: left;
+            min-height: 110px;
+        }
+
+        &-content:hover {
+            background-color: rgba(256, 256, 256, 0.3);
+            border-radius: 4px;
+            cursor: pointer;
+        }
+    }
+
+    .ant-card {
+        &-body {
+            padding: 0 12px;
+        }
+
+        background-color: transparent;
+
+        .ant-card-meta {
+            &-title {
+                font-size: 16px;
+                color: #e9e9e9;
+            }
+
+            &-description {
+                color: #e9e9e9;
+                font-size: 13px;
+            }
+
+            &-detail {
+                text-align: left;
+            }
+        }
+    }
+}

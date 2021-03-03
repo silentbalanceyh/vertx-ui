@@ -1,0 +1,20 @@
+{
+    "_card": {
+        "text": "数据模型概览"
+    },
+    "_form": {
+        "window": 0.17,
+        "columns": 1,
+        "ui": [
+            [
+                "count,数据模型数量,,,aiMagic"
+            ],
+            [
+                "relations,数据模型关联属性数量,,,aiMagic"
+            ],
+            [
+                "actions,数据模型关联行为数量,,,aiMagic"
+            ]
+        ]
+    }
+}

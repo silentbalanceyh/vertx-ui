@@ -18,30 +18,6 @@ const ensureForm = (target = {}, options = {}) => {
  * 防内存泄漏专用方法
  */
 export default (options = {}) => {
-    /**
-     * zero注解过后执行Hoc高阶封装操作
-     *
-     *
-     * 核心配置类，使用注解语法`@zero`执行资源文件绑定，这个注解在整个框架中为最底层注解，
-     * 定义组件本身的元数据，它所处理的工作如下：
-     *
-     * 1. 和 `cab/<LANGUAGE>/` 链接，读取配置信息，构造`HocI18n`对象。
-     * 2. redux 映射处理，用于处理 StateToProps 和 DispatchToProps 两种映射关系。
-     * 3. 绑定 Ant Design的表单 Form 实现表单的核心绑定。
-     * 4. 操作绑定构造 $op 变量，存储在状态中。
-     *
-     *
-     * ```js
-     * import Ux from 'ux';
-     *
-     * &#64;Ux.zero() -- 注释掉的调用方法，由于包含 @ 符号不可解析
-     * class Component extends React.Component{
-     *
-     * }
-     * ```
-     *
-     * @method @zero
-     */
     return (target, property, descriptor) => {
         // 修改target过后的继承
         let Component = class extends target {
@@ -106,10 +82,10 @@ export default (options = {}) => {
                     /*
                      * 连接错误信息
                      */
-                    if(fatal.run){
-                        if(U.isArray(error)){
+                    if (fatal.run) {
+                        if (U.isArray(error)) {
                             fatal.run.description = error;
-                        }else if("string" === typeof error){
+                        } else if ("string" === typeof error) {
                             fatal.run.description = [error];
                         }
                     }

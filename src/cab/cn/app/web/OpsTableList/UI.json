@@ -1,0 +1,38 @@
+{
+    "_card": {
+        "text": "物理表字段"
+    },
+    "_window": "编辑物理表字段,保存,关闭,false,720,true,$opSaveColumn",
+    "_query": {
+        "pager": {
+            "page": 1,
+            "size": 8
+        }
+    },
+    "_toolbar": {
+        "lnkEdit": {
+            "text": "编辑"
+        }
+    },
+    "_table": {
+        "pagination": {
+            "total": "总共:total条记录"
+        },
+        "className": "ops-table-small",
+        "size": "small",
+        "columns": [
+            {
+                "dataIndex": "name",
+                "title": "字段名称"
+            },
+            {
+                "dataIndex": "code",
+                "title": "字段编码"
+            },
+            {
+                "dataIndex": "type",
+                "title": "字段类型"
+            }
+        ]
+    }
+}

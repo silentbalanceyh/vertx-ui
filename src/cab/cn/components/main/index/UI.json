@@ -1,0 +1,98 @@
+{
+    "_page": {
+        "title": "应用列表"
+    },
+    "_assist": {
+        "my.todo": {
+            "uri": "/api/todo/search",
+            "method": "POST",
+            "magic": {
+                "status,i": "ENUM:PENDING",
+                "sigma": "PROP:app.sigma",
+                "":"OPERATOR:AND"
+            },
+            "qr":true
+        },
+        "my.circle": {
+            "uri": "/api/circle/search",
+            "method": "POST",
+            "magic": {
+                "owner": "USER:key"
+            },
+            "qr":true
+        }
+    },
+    "_dashboard": {
+        "circle": {
+            "source": "my.circle",
+            "title": "我的圈子",
+            "extra": {
+                "text": "更多",
+                "uri": "/person/circle",
+                "icon": "ellipsis"
+            },
+            "table": {
+                "columns": [
+                    {
+                        "dataIndex": "name",
+                        "title": "名称",
+                        "$render": "HYPERLINK",
+                        "$config":{
+                            "url": "/person/circle-view?id=:key"
+                        }
+                    },
+                    {
+                        "dataIndex": "cis",
+                        "title": "配置项数量",
+                        "$expr":":value 个",
+                        "$empty": "0 个"
+                    },
+                    {
+                        "dataIndex": "createdAt",
+                        "title": "创建时间",
+                        "$render": "DATE",
+                        "$format": "YYYY-MM-DD"
+                    }
+                ]
+            }
+        },
+        "todo": {
+            "source": "my.todo",
+            "title": "待确认变更",
+            "extra": {
+                "text": "更多",
+                "uri": "/system/todo",
+                "icon": "ellipsis"
+            },
+            "table": {
+                "columns": [
+                    {
+                        "title": "待办标题",
+                        "dataIndex": "name",
+                        "width": 300,
+                        "$render":"HYPERLINK",
+                        "$config":{
+                            "url": "/system/todo-view?id=:key&status=:status"
+                        }
+                    },
+                    {
+                        "title": "待办状态",
+                        "dataIndex": "status",
+                        "$render": "MAPPING",
+                        "$mapping": {
+                            "PENDING": "待处理,undo,,#EE3B3B",
+                            "FINISHED": "已完成,check-circle,,#698B69",
+                            "REJECTED": "被拒绝,redo,,#CD1076"
+                        }
+                    },
+                    {
+                        "title": "创建时间",
+                        "dataIndex": "createdAt",
+                        "$render": "DATE",
+                        "$format": "YYYY-MM-DD"
+                    }
+                ]
+            }
+        }
+    }
+}

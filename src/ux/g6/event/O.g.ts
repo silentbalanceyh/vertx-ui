@@ -46,8 +46,11 @@ export class GStore {
     inWindow = () => this._ui.window ? this._ui.window : {};
 }
 
-// 子对象
-
+/**
+ * 图引擎专用对象
+ *
+ * @class GEvent
+ */
 class GEvent extends GInject {
     // ---------------- 核心数据结构提取
     private readonly reactRef = null;
@@ -60,6 +63,7 @@ class GEvent extends GInject {
     private _addon: GAddOn = null;
 
     private constructor(reference: any) {
+        // @ts-ignore
         super(reference)
         this.reactRef = reference;
 

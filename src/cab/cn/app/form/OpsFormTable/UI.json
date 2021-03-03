@@ -1,0 +1,67 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "hidden": [
+            "id",
+            "dataSourceId",
+            "status"
+        ],
+        "ui": [
+            [
+                {
+                    "metadata": "tableName,表名称,14",
+                    "optionConfig.rules": [
+                        "required,请填写表名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "tableCode,表编码,14,,,readOnly=true",
+                    "optionConfig.rules": [
+                        "required,请填写表编码！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "dataSource,数据源名称,14,,,readOnly=true",
+                    "optionConfig.rules": [
+                        "required,请填写数据源名称！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "dataSourceCode,数据库,14,,,readOnly=true",
+                    "optionConfig.rules": [
+                        "required,请填写数据库！"
+                    ]
+                }
+            ],
+            [
+                "description,描述信息,,,aiTextArea,rows=3"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "span": 24,
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSaveSource,保存物理表,SUBMIT"
+                    ]
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "error": {
+            "invalid": "对不起，您输入的数据源非法，请输入合法数据源！"
+        },
+        "success": {
+            "created": "恭喜，您的物理表创建成功！",
+            "updated": "您的物理表信息已经更新成功！"
+        }
+    }
+}

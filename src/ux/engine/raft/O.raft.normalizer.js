@@ -113,6 +113,7 @@ const limitDecimal = (length, scale = 2) => value => {
     }
     return value;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     decimal: limitDecimal,
     number: limitNumber,

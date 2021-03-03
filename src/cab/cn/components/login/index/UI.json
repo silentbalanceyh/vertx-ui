@@ -1,19 +1,10 @@
 {
-    "_info": {
-        "title": "ZeroUI开发框架",
-        "links": [
-            {
-                "text": "后端框架",
-                "uri": "http://www.vertxup.cn"
-            },
-            {
-                "text": "前端框架",
-                "uri": "http://www.vertxui.cn"
-            },
-            {
-                "text": "工具箱",
-                "uri": "http://www.vertxai.cn"
-            }
+    "_title": {
+        "banner": "让大数据为企业赋能！",
+        "description": [
+            "用数据为现象诊脉",
+            "用数据为预测求证",
+            "用数据为决策举荐"
         ]
     }
 }

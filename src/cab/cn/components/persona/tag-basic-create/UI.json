@@ -1,0 +1,118 @@
+{
+    "_page": {
+        "basic": "基础标签",
+        "attribute": "标签属性",
+        "action": "标签行为"
+    },
+    "_assist": {
+        "tag.type": {
+            "uri": "/api/tag/data-types"
+        },
+        "tag.models": {
+            "uri": "/api/tag/data-modals"
+        }
+    },
+    "_form": {
+        "tagName": {
+            "field": "tabName",
+            "optionItem": {
+                "label": "标签名称"
+            },
+            "optionJsx": {
+                "placeholder": "请输入标签"
+            },
+            "optionConfig": {
+                "validateTrigger": "onBlur",
+                "rules": [
+                    {
+                        "required": true,
+                        "message": "请输入标签"
+                    }
+                ]
+            }
+        },
+        "type": {
+            "field": "type",
+            "optionItem": {
+                "label": "标签类别"
+            },
+            "optionJsx": {
+                "placeholder": "选择标签类型",
+                "config": {
+                    "datum": "source=tag.type,key=code,label=name"
+                }
+            },
+            "optionConfig": {
+                "validateTrigger": "onBlur",
+                "rules": [
+                    {
+                        "required": true,
+                        "message": "请选择标签类型"
+                    }
+                ]
+            },
+            "render": "aiSelect"
+        },
+        "dataModel": {
+            "field": "dataModel",
+            "optionItem": {
+                "label": "数据模型"
+            },
+            "optionJsx": {
+                "placeholder": "选择数据模型",
+                "config": {
+                    "datum": "source=tag.models,key=code,label=name"
+                }
+            },
+            "optionConfig": {
+                "validateTrigger": "onBlur",
+                "rules": [
+                    {
+                        "required": true,
+                        "message": "请选择数据模型"
+                    }
+                ]
+            },
+            "render": "aiSelect"
+        },
+        "attributes": {
+            "field": "attributes",
+            "optionJsx": {
+                "config": {
+                    "empty": {
+                        "button": "创建属性过滤器",
+                        "comment": "定义标签属性的过滤条件"
+                    },
+                    "action": {
+                        "button": "添加标签"
+                    }
+                }
+            }
+        },
+        "actions": {
+            "field": "actions",
+            "optionJsx": {
+                "config": {
+                    "empty": {
+                        "button": "创建行为过滤器",
+                        "comment": "定义标签行为的过滤条件"
+                    },
+                    "action": {
+                        "button": "添加标签",
+                        "buttonSub": "添加标签行为"
+                    }
+                }
+            }
+        },
+        "submit": {
+            "cancel": "取消",
+            "save": "保存"
+        }
+    },
+    "_modal": {
+        "success": {
+            "created": "您的新标签已经成功创建！",
+            "updated": "恭喜，您的标签信息已经成功保存！"
+        }
+    }
+}

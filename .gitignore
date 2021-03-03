@@ -1,38 +1,15 @@
-# dependencies：npm依赖项
-/node_modules
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
-# testing：测试覆盖率目录
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
 /coverage
 
-# production生产环境
-build
-dist
-/package-lock.json
-
-# WebStorm配置文件
-.idea
-
-# LESS生成的CSS风格文件过滤
-Cab.css
-src/*/*/*.css
-src/*/*.css
-src/*.css
-!src/style/animate.css
-
-# 基本生成文件Ignore
-src/environment/datum.js
-
-# TypeScript编译后JS文件
-/src/c*/*/Act.Event.js
-/src/c*/*/Act.Event.js.map
-/src/entity/**/*.js
-/src/entity/**/*.js.map
-
-# API文档工具
-/docs/api
-
-# TypeScript工具typings专用工具文件
-typings
+# production
+/build
 
 # misc
 .DS_Store
@@ -41,20 +18,20 @@ typings
 .env.test.local
 .env.production.local
 
-# 日志文件
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-
-# 语言Mapping文件
-*.map
-# 忽略脚本
-/run-current-ux.sh
-/src/environment/routes.js
-!/src/style/animate.css
+.idea
+# 生成代码
+src/environment/routes.js
+src/environment/datum.js
+src/components/index.js
+src/container/index.js
+src/extension/components/index.js
 .awcache
 .awcache/*
-document/story-web
 .Archive/
 .markeditor
 .configs/
+backup
+./run-ux-current.sh

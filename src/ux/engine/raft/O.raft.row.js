@@ -45,6 +45,7 @@ const raftRow = (raft = {}, config = {}) => {
     return {rowItem, rowStyle};
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftRow
 }

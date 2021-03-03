@@ -1,0 +1,19 @@
+{
+    "_helps": [
+        {
+            "description": "开始"
+        },
+        {
+            "description": "创建数据模型"
+        },
+        {
+            "description": "创建数据模型关联属性"
+        },
+        {
+            "description": "创建数据模型关联行为"
+        },
+        {
+            "description": "完成"
+        }
+    ]
+}

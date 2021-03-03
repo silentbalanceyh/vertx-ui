@@ -1,4 +1,3 @@
-import Log from '../../develop/logger';
 import U from 'underscore';
 import Field from '../web-field';
 import Abs from '../../abyss';
@@ -8,6 +7,10 @@ import parser from '../parser';
 import Ut from '../../unity';
 import Unit from '../web-unit';
 import Cv from '../../constant';
+
+import Develop from '../../develop';
+
+const {Logger: Log} = Develop;
 
 const raftValue = (cell = {}, values = {}, reference) => {
     // 默认active处理
@@ -224,7 +227,7 @@ const raftRender = (cell = {}, config = {}) => {
              * 子表单 renders 继承
              */
             Ut.connectRenders(optionJsx, cell, renders);
-            
+
             const {form} = reference.props;
             if (form) {
 
@@ -289,7 +292,7 @@ const raftHidden = (raft = {}, $form, reference) => {
         })
     }
 };
-
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     raftRender,
     raftHidden,

@@ -43,7 +43,7 @@ const clear = (reference) => () => {
     reference.clear();
 };
 /**
- * ## 标准函数
+ * ## 「引擎」`Ux.storeApp`
  *
  * 首页一般会读取相关的应用数据，然后将应用存储到 localStorage 中，存储的数值包括：
  *
@@ -52,7 +52,7 @@ const clear = (reference) => () => {
  * * `X-Sigma`的存储。
  * * 如果开启了 isKey = true，则存储`X-App-Key`。
  *
- * @memberOf module:_app
+ * @memberOf module:_engine
  * @param {Object} data 传入的应用数据。
  * @param {boolean} isKey 是否存储 appKey。
  * @return {any} 返回应用数据。
@@ -72,11 +72,11 @@ const storeApp = (data, isKey = false) => {
     return data;
 };
 /**
- * ## 标准函数
+ * ## 「引擎」`Ux.storeUser`
  *
  * 登录过后存储用户的专用方法，存储当前用户数据到 sessionStorage 中。
  *
- * @memberOf module:_app
+ * @memberOf module:_engine
  * @param {Object} data 被存储的用户数据。
  * @return {any} 返回存储好的数据。
  */

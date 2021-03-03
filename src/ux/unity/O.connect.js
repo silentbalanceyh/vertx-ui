@@ -2,13 +2,13 @@ import E from "../error";
 import Abs from '../abyss';
 
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.connectId`
  *
  * > 必须在`componentDidMount`之后才能执行。
  *
  * 使用外围的代码触发`onClick`操作，点击`id`相匹配的元素。
  *
- * @memberOf module:_connect
+ * @memberOf module:_unity
  * @param {String} id 触发id的点击事件。
  */
 function connectId(id) {
@@ -36,20 +36,23 @@ const onRenders = () => Abs.immutable([
     "aiDialogEditor"
 ])
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.connectValidator`
  *
  * 加载特殊属性的实时验证专用函数，解析 optionConfig 中的 rules，并且执行验证。特殊规则如：
  *
  * 修改`validateTrigger`为 onChange的组件：
  *
+ * * aiRadio
+ * * aiCheckbox
  * * aiSelect
  * * aiListSelector
  * * aiTreeSelect
  * * aiDialogEditor
+ * * aiMatrixSelector
  *
  * 禁用组件时删除`rules`属性不执行绑定。
  *
- * @memberOf module:_connect
+ * @memberOf module:_unity
  * @param {Object} cell 当前表单输入字段专用配置。
  * @return {Object} 返回需要配置的`optionConfig`对象。
  */
@@ -87,6 +90,15 @@ const connectValidator = (cell = {}) => {
     // 特殊绑定
     return optionConfig;
 };
+/**
+ * ## 「标准」`Ux.connectItem`
+ *
+ * 为表中的`<Item/>`设置验证修饰效果。
+ *
+ * @memberOf module:_unity
+ * @param {Object} cell 字段配置
+ * @returns {Object} 返回执行过后的结果
+ */
 const connectItem = (cell = {}) => {
     const {col = {}} = cell;
     const itemAttrs = Abs.clone(col);
@@ -111,6 +123,16 @@ const connectItem = (cell = {}) => {
     }
     return itemAttrs;
 };
+/**
+ * ## 「标准」`Ux.connectRenders`
+ *
+ * 计算表单字段中专用的`$renders`属性，构造最终的render函数。
+ *
+ * @memberOf module:_unity
+ * @param {Object} optionJsx 表单配置中的optionJsx属性。
+ * @param {Object} cell 计算过程中的基础配置。
+ * @param {Object} renders 渲染函数Object配置，根据字段传入，编程模式。
+ */
 const connectRenders = (optionJsx = {}, cell = {}, renders = {}) => {
     const renderData = onRenders();
     // 多增加一个条件，目前只针对 DialogEditor 执行下边流程

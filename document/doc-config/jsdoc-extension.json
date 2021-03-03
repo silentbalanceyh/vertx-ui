@@ -15,7 +15,7 @@
             "src/extension/components",
             "src/extension/ecosystem"
         ],
-        "includePattern": "\\.(js)$",
+        "includePattern": "\\.(js|jsx|css)$",
         "excludePattern": "(node_modules/|docs)"
     },
     "plugins": [
@@ -25,7 +25,12 @@
         "cleverLinks": true,
         "monospaceLinks": true,
         "default": {
-            "outputSourceFiles": false
+            "outputSourceFiles": false,
+            "staticFiles": {
+                "include": [
+                    "document/doc-config/tpl"
+                ]
+            }
         }
     },
     "opts": {

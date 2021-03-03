@@ -95,11 +95,11 @@ const isDepend = (depend = {}, reference) => {
     }
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeDisabled`
  *
  * 在标准组件类型的依赖设置中，所有的禁用直接绑定 disabled 属性。
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {Object} jsx 对应表单配置 optionJsx。
  * @param {ReactComponent} reference React组件引用。
  */
@@ -115,11 +115,11 @@ const writeDisabled = (reference, jsx = {}) => {
     }
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeReadOnly`
  *
  * 标准的 readOnly 的禁用设置，这种类型仅用于 Select 组件，因为 Select 组件不支持 readonly 属性，仅支持 disabled。
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {Object} jsx 对应表单配置 optionJsx。
  * @param {ReactComponent} reference React组件引用。
  */
@@ -131,7 +131,7 @@ const writeReadOnly = (jsx = {}, reference) => {
     }
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeImpact`
  *
  * 用于处理带依赖的数据相关联字段的影响信息，主要用于`联动下拉`组件，在 reset 触发时调用。
  *
@@ -155,7 +155,7 @@ const writeReadOnly = (jsx = {}, reference) => {
  * 2. 影响过程中，如果表单发生了重设，那么会将目标字段调整成最早的状态。
  * 3. 不同类型的下拉值会出现不同的结果。
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {Object} formValues Form中初始的 linker 相关数据值。
  * @param {Object} depend 反向依赖专用配置。
  * @param {any} value 输入的值。
@@ -174,7 +174,7 @@ const writeImpact = (formValues = {}, depend = {}, value) => {
     }
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeLinker`
  *
  * 链接专用处理
  *
@@ -203,7 +203,7 @@ const writeImpact = (formValues = {}, depend = {}, value) => {
  *      * AddressSelector 的使用
  *      * onChange 字段专用的处理（触发专用）
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {Object} formValues Form中初始的 linker 相关数据值。
  * @param {Object} config linker配置信息。
  * @param {Function} rowSupplier 读取选中行的数据信息。
@@ -320,7 +320,7 @@ const _edition = (reference, optionJsx = {}, field) => {
     return $edition;
 };
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.writeSegment`
  *
  * 表单可读写的特殊方法配置，主要包含几个特殊的设置，该设置和表单只读有关。
  *
@@ -354,7 +354,7 @@ const _edition = (reference, optionJsx = {}, field) => {
  *
  * 上述格式中，`username` 可编辑，其他两个字段不可编辑。
  *
- * @memberOf module:_ant
+ * @memberOf module:_ui
  * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {Object} optionJsx 表单配置中的将要写入数据的 optionJsx 配置。
  * @param {String} field 将会被处理的字段信息。
@@ -385,9 +385,11 @@ const writeSegment = (reference, optionJsx = {}, field) => {
     }
 };
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.writeInitial`
  *
- * @memberOf module:_ant
+ * 追加特殊初始值到Jsx中，等待执行特定流程，初始化数据。
+ *
+ * @memberOf module:_ui
  * @param {Object} optionConfig 生效配置
  * @param {Object} optionJsx 生效配置
  * @param {Object} cell 当前单元格的专用配置（原始配置）

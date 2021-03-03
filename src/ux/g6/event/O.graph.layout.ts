@@ -1,8 +1,7 @@
 import Ld from '../library';
-import {Abs} from '../internal';
+import {Abs, Dev} from '../internal';
 import GPos from "./O.graph.pos";
 import * as G6 from '@antv/g6';
-import {Dev} from "./I.common";
 
 const mountFn = {
     "radial": (config: any = {}, pos: GPos) => {

@@ -6,6 +6,7 @@ import render from './O.raft.render';
 import container from './O.raft.container';
 import Normalizer from './O.raft.normalizer';
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     ...form,
     ...row,

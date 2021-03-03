@@ -1,10 +1,12 @@
 import Expr from "./O.format";
 import Ele from "../element";
+import St from "./O.sorter";
+import Abs from "../abyss";
 
 /**
- * ## 特殊函数「Zero」
+ * ## 「引擎」`Ux.valueExpr`
  *
- * 解析表达式强化方法，主要用于解析Zero中带`:`的自定义表达式相关信息。
+ * （通常内部）解析表达式强化方法，主要用于解析Zero中带`:`的自定义表达式相关信息。
  *
  * ```js
  * const user = {
@@ -20,6 +22,10 @@ import Ele from "../element";
  * // 输出：你的名字Lang。
  * // 之后后 user 的值：{ age:12 }; 原始的 username 已经从输入Object中移除。
  * ```
+ *
+ * 注意第三参数，第三参数会对传入参数执行保留或不保留的两种方案，如果 keep = false（默认），那么在执行过后，原始入参中
+ * 被替换的参数属性会被移除掉，而 keep = true 时则不会移除，会保留其数据信息，并且注意该方法和`Ux.formatExpr`的区别，
+ * 通常`valueExpr`是直接使用，建议在内部调用，而`formatExpr`会有更多操作，所以提供给用户调用。
  *
  * @memberOf module:_value
  * @param {String} expr 传入的表达式或字段名。
@@ -37,13 +43,24 @@ const valueExpr = (expr = "", data = {}, keep = false) => {
     }
     return display;
 };
+
+
 /**
- * ## 特殊函数「Zero」
+ * ## 「引擎」`Ux.valueFind`
  *
- * 配置解析统一调用函数
+ * 配置解析统一调用函数（特殊应用）
  *
  * 1. 如果 attrPath 长度为1，则直接提取 target 中的：`target[attrPath[0]]`。
  * 2. 如果长度大于2，则先提取`target[attrPath[0]]`，其次提取第二阶段名称，暂时只支持长度为2的模式。
+ *
+ * 内部执行函数代码示例。
+ *
+ * ```js
+ PROP: (expression, {props}) => fnPredicate("PROP", expression, () => {
+     const path = expression.split('.'); // 路径解析
+     return T.valueFind(props, path);
+ }),
+ * ```
  *
  * @memberOf module:_value
  * @param {any} target 被查找的引用信息。
@@ -71,7 +88,172 @@ const valueFind = (target = {}, attrPath = []) => {
         }
     }
 };
+
+/**
+ * ## 「标准」`Ux.elementChildTree`
+ *
+ * Zero UI中的树函数，在数组中查找当前节点的所有子节点信息，并且构成子树，`elementBranch` 和 `elementChildren` 为互逆函数。
+ *
+ * 1. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ * 2. 每个节点中有两个固定值
+ *      1. key 表示每个节点的主键。
+ *      2. children 表示每个节点中的子节点信息`[]`。
+ * 3. 在每个节点中计算出 `_level` 参数表示生成树中每个节点所在树的`层级`。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} current 目标节点。
+ * @param {String} parentField 执行树搜索中的父字段。
+ * @return {Array} 返回子节点数组
+ */
+const elementChildTree = (array = [], current = {}, parentField = "parent") => {
+    const parentKey = current.key;
+    if (!current._level) {
+        current._level = 1;
+    }
+    let children = array
+        .filter(each => each[parentField] === parentKey)
+        .sort(St.sorterAscTFn('sort'));
+    if (0 < children.length) {
+        children.forEach(child => {
+            child._level = current._level + 1;
+            child.children = elementChildTree(array, child, parentField)
+        });
+    }
+    return children;
+};
+/**
+ * ## 「标准」`Ux.elementChildren`
+ *
+ * Zero UI中的树函数，在数组中查找当前节点的所有子节点，构成子列表（不是子树）。
+ *
+ * 1. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ * 2. 每个节点中有两个固定值
+ *      1. key 表示每个节点的主键。
+ *      2. children 表示每个节点中的子节点信息`[]`。
+ * 3. 在每个节点中计算出 `_level` 参数表示生成树中每个节点所在树的`层级`。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} current 目标节点。
+ * @param {String} parentField 执行树搜索中的父字段。
+ * @return {Array} 返回子节点数组
+ */
+const elementChildren = (array = [], current = {}, parentField = "parent") => {
+    /*
+     * 构造 Children 的树
+     */
+    const childrenTree = elementChildTree(array, current, parentField);
+    /*
+     * 只查找 children，不包含当前节点
+     */
+    const fnChildren = (item = {}) => {
+        let children = [];
+        if (item.children && 0 < item.children.length) {
+            children = children.concat(item.children);
+            item.children.forEach(each => {
+                const found = fnChildren(each);
+                children = children.concat(found);
+            });
+        }
+        return children;
+    }
+    const result = [];
+    childrenTree.forEach(child => {
+        result.push(child);
+        const foundArray = fnChildren(child);
+        if (foundArray && 0 < foundArray.length) {
+            foundArray.forEach(eachFound => result.push(eachFound));
+        }
+    });
+    return result;
+}
+
+/**
+ * ## 「引擎」`Ux.toForm`
+ *
+ * 将两个form的配置进行合并的专用操作，主要合并项：
+ *
+ * 1. ui：两个表单直接连接。
+ * 2. hidden：两个表单的隐藏字段连接。
+ * 3. initial：初始值二者合并。
+ * 4. mapping：映射值二者合并。
+ *
+ * @memberOf module:_to
+ * @param {Object} staticForm 静态表单配置。
+ * @param {Object} dynamicForm 动态表单配置。
+ * @return {Object} 返回最终的表单配置。
+ */
+const toForm = (staticForm = {}, dynamicForm = {}) => {
+    /*
+     * form：输入的 form
+     * dynamicForm：动态输入的 form
+     * 1）执行 ui 的合并
+     * 2）执行 hidden 的合并
+     * 3）执行 initial 的合并
+     * 4）执行 op 的合并
+     * 5）执行 mapping 的合并
+     */
+    // 先执行拷贝
+    const form = staticForm ? Abs.clone(staticForm) : {};
+    /*
+     * 动态中的属性优先
+     */
+    const {ui = [], hidden = [], initial = {}, mapping = {}, ...rest} = dynamicForm;
+    if (!Abs.isEmpty(rest)) {
+        Object.assign(form, rest);
+    }
+    /*
+     * 合并 ui 项
+     */
+    if (Abs.isArray(ui) && 0 < ui.length) {
+        if (!form.ui) form.ui = [];
+        form.ui = [].concat(form.ui, ui);
+    }
+    if (Abs.isArray(hidden) && 0 < hidden.length) {
+        if (!form.hidden) form.hidden = [];      // 防止原生未配置
+        form.hidden = [].concat(form.hidden, hidden);
+    }
+    /*
+     * mapping 和 initial
+     */
+    if (!Abs.isEmpty(initial)) {
+        if (!form.initial) form.initial = {};
+        Object.assign(form.initial, initial);
+    }
+    if (!Abs.isEmpty(mapping)) {
+        if (!form.mapping) form.mapping = {};
+        Object.assign(form.mapping, mapping);
+    }
+    return form;
+};
+
+/**
+ * ## 「引擎」`Ux.toLimit`
+ *
+ * 功能和 `valueLimit`相同，同样的执行操作，用于不同的场景。
+ *
+ * * `valueLimit` 属于标准函数。
+ * * `toLimit` 在自定义组件中调用。
+ *
+ * @memberOf module:_to
+ * @param {Props} props React组件的属性值。
+ * @param {Array} limits 需要限制的 keys 的值。
+ * @return {Object} 返回限制过后的属性值。
+ */
+const toLimit = (props = {}, limits = []) => {
+    const inherits = {};
+    const $limitKeys = Abs.immutable(limits);
+    Object.keys(props).filter(key => !$limitKeys.contains(key))
+        .forEach(key => inherits[key] = props[key]);
+    return inherits;
+};
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    toForm,
+    toLimit,
     valueExpr,
-    valueFind
+    valueFind,
+    elementChildren,
+    elementChildTree
 }

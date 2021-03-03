@@ -1,0 +1,63 @@
+{
+  "menu": [
+    {
+      "code": "4",
+      "name": "BI 报表",
+      "levelNum": 1,
+      "url": "Report",
+      "lastYn": "N",
+      "order": 4,
+      "childMenus": [
+        {
+          "code": "4001",
+          "name": "常用报表",
+          "parentCode": "4",
+          "levelNum": 2,
+          "url": "General",
+          "lastYn": "N",
+          "order": 0,
+          "childMenus": [
+            {
+              "code": "4001001",
+              "name": "投放活动",
+              "parentCode": "4001",
+              "levelNum": 3,
+              "url": "Campaign",
+              "lastYn": "Y",
+              "order": 0
+            },
+            {
+              "code": "4001002",
+              "name": "用户分布",
+              "parentCode": "4001",
+              "levelNum": 3,
+              "url": "Persona",
+              "lastYn": "Y",
+              "order": 1
+            }
+          ]
+        },
+        {
+          "code": "4002",
+          "name": "案例",
+          "parentCode": "4",
+          "levelNum": 2,
+          "url": "CaseStudy",
+          "lastYn": "N",
+          "order": 1,
+          "childMenus": [
+            {
+              "code": "4002001",
+              "name": "NBA",
+              "parentCode": "4002",
+              "levelNum": 3,
+              "url": "NBA",
+              "lastYn": "Y",
+              "order": 0
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

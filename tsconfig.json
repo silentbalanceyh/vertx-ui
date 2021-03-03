@@ -46,9 +46,6 @@
             "oi": [
                 "src/extension/eclat/"
             ],
-            "editor": [
-                "src/editor/"
-            ],
             "mock": [
                 "src/mock/"
             ],

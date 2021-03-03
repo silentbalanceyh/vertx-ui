@@ -1,7 +1,7 @@
 import React from 'react';
 import {component} from "../../../_internal";
 import Ux from "ux";
-import LoadingContent from "../../../loading/LoadingContent/UI";
+import LoadingContent from "../../../web/LoadingContent/UI";
 import {Form} from "antd";
 
 const yiInternal = (reference) => {

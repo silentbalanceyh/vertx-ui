@@ -2,7 +2,7 @@ import Abs from "../abyss";
 import {Dsl} from 'entity';
 
 /**
- * ## 特殊函数「Zero」
+ * ## 「标准」`Ux.dslArray`
  *
  * Zero UI 中存储 Array 的专用数据，配置数据格式
  *
@@ -13,7 +13,7 @@ import {Dsl} from 'entity';
  * }
  * ```
  *
- * @memberOf module:_dsl
+ * @memberOf module:_unity
  * @param {ReactComponent} reference React组件。
  * @param {String} key 写内容所需的 key
  * @param {Array} data 合并到 reference state 中的数据本身

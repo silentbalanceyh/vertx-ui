@@ -2,7 +2,7 @@ import Abs from '../abyss';
 import Ele from "../element";
 
 /**
- * ## 标准函数
+ * ## 「标准」`Ux.columnWrapper`
  *
  * 1. fnRender 为特殊函数（原始的 render，去除 $render 配置后）
  * 2. column 为列配置
@@ -15,11 +15,11 @@ import Ele from "../element";
  * }
  * ```
  *
- * @memberOf module:_table
+ * @memberOf module:_ui
  * @param {Object} column 输入列配置相关信息
  * @param {any|Function} fnRender 原始函数信息
  */
-const cellWrapper = (column = {}, fnRender) => {
+const columnWrapper = (column = {}, fnRender) => {
     return (text, record = {}, index) => {
         const {key} = record;
         const jsx = {};
@@ -49,5 +49,5 @@ const cellWrapper = (column = {}, fnRender) => {
     }
 }
 export default {
-    cellWrapper
+    columnWrapper
 }

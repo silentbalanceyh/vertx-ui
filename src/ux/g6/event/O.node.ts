@@ -100,7 +100,7 @@ class GNode implements GLife {
                 const groupName = group.name();
                 groupMap[groupName] = group.children()
                     .map(registryFn)
-                    .filter(item => undefined != item);
+                    .filter(item => undefined !== item);
             });
             return groupMap;
         }

@@ -4,11 +4,11 @@ import Ele from "../../element";
 import Ut from '../../unity';
 
 /**
- * ## 引擎函数
+ * ## 「引擎」`Ux.forestGroup`
  *
  * 转换成树组（启动连接功能）
  *
- * @memberOf module:_to
+ * @memberOf module:_unity
  * @param {Array} input 输入的完整节点信息
  * @param {Object} group 最终换的组信息
  * @param {Promise<T>} supplier 构造子组数据专用的函数
@@ -93,7 +93,7 @@ const forestSync = (inputData = [], config = {}, group = {}) => {
                         // 连接节点信息
                         normalized.push(calcAddon(node));
                         // 连接子树节点
-                        const children = Ele.elementChildren(groupData, node, treeConfig.parent);
+                        const children = Ut.elementChildren(groupData, node, treeConfig.parent);
                         if (Abs.isArray(children) && 0 < children.length) {
                             children.forEach(child => normalized.push(calcAddon(child)));
                         }
@@ -110,11 +110,11 @@ const forestSync = (inputData = [], config = {}, group = {}) => {
     return normalized;
 }
 /**
- * ## 引擎函数
+ * ## 「引擎」`Ux.forest`
  *
- * 转换成森林数组，将所有的数组全部连接起来
+ * 转换成森林数组，将所有的数组全部连接起来形成多叉树结构。
  *
- * @memberOf module:_to
+ * @memberOf module:_unity
  * @param {Array} input 输入的完整节点信息
  * @param {Object} config 基本配置信息
  * @param {Object} group 组相关信息

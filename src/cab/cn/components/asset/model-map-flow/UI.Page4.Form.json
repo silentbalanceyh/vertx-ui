@@ -1,0 +1,17 @@
+{
+    "_card": {
+        "text": "用户基本信息"
+    },
+    "_form": {
+        "window": 0.17,
+        "columns": 1,
+        "ui": [
+            [
+                "tableName,物理表名称,,,aiMagic"
+            ],
+            [
+                "modelName,物理表编码,,,aiMagic"
+            ]
+        ]
+    }
+}

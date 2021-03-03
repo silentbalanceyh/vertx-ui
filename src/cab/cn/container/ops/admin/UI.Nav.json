@@ -1,0 +1,21 @@
+{
+    "_nav": {
+        "key": "ima",
+        "uri": "$MAIN$",
+        "text": "主页"
+    },
+    "_pages": [
+        {
+            "key": "200100101",
+            "text": "新增基础标签",
+            "uri": "/persona/tag-basic-create",
+            "parentId": "2001001"
+        },
+        {
+            "key": "200100201",
+            "text": "新增系统标签",
+            "uri": "/persona/tag-system-create",
+            "parentId": "2001002"
+        }
+    ]
+}

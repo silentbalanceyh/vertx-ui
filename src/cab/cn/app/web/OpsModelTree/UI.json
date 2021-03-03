@@ -1,0 +1,14 @@
+{
+    "_info": {
+        "search": "输入关键字",
+        "link": "数据模型"
+    },
+    "_assist": {
+        "model.information": {
+            "uri": "/api/model/full/read",
+            "response": {
+                "key": "id"
+            }
+        }
+    }
+}
