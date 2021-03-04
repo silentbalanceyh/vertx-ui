@@ -196,12 +196,61 @@ const yiPartForm = (ref, config = {}, inherit = true) => {
     return Ux.promise(state);
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiColumn`
+ *
+ * ### 1. 基本介绍
  *
  * 列渲染专用处理函数，用于处理`USER`特殊类型的`$render`执行数据预处理
  *
  * 1. 提取所有`USER`列相关信息。
  * 2. 根据传入数据执行`$lazy`的计算（预处理Ajax，系统中唯一调用`Ux.ajaxEager`的位置。
+ *
+ * 这种类型的代码流程如下：
+ *
+ * |步骤|含义|
+ * |---:|:---|
+ * |1|扫描表格配置`table`中的`columns`节点。|
+ * |2|从`columns`节点中抽取`$render = USER`的列类型。|
+ * |3|收集所有这种类型，执行单独的参数合并，数据条目的读取和辅助数据读取请求不对等，可能10条数据由于某个字段值一样只读取四次。|
+ * |4|构造state中的`$lazy`变量：一个Object类型。|
+ *
+ * ### 2. 关于`$lazy`的结构
+ *
+ * #### 2.1. 数据
+ *
+ * ```json
+ * [
+ *      { "type": "type1", "name": "记录1" },
+ *      { "type": "type1", "name": "记录2" },
+ *      { "type": "type1", "name": "记录3" },
+ *      { "type": "type2", "name": "记录4" },
+ *      { "type": "type2", "name": "记录5" },
+ *      { "type": "type2", "name": "记录6" }
+ * ]
+ * ```
+ *
+ * #### 2.2. 辅助数据
+ *
+ * ```json
+ * [
+ *      { "key": "type1", "name": "类型1" },
+ *      { "key": "type2", "name": "类型2" }
+ * ]
+ * ```
+ *
+ * #### 2.3. 最终生成的变量
+ *
+ * ```json
+ * {
+ *     "type":{
+ *          "type1": "类型1",
+ *          "type2": "类型2"
+ *     }
+ * }
+ * ```
+ *
+ * * 上述结构中`type`是数据记录中的属性。
+ * * 而`Object`中的数据就是`type`对应的：`值 = 显示文字`的Map字典。
  *
  * @memberOf module:_channel
  * @method yiColumn
