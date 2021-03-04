@@ -348,15 +348,58 @@ export default {
     /**
      * ## 「解析」`Ex.parserOfButton`
      *
+     * ### 1. 基本介绍
+     *
      * 生成按钮专用解析器，返回对象结构如（每个键都是函数）：
      *
      * ```js
      * {
      *     parsePlugin: () => "按钮插件解析函数",
      *     parseComponent: () => "组件解析函数",
-     *     parseControl: () => "按钮本身解析函数，解析不同组件专用，LIST, FORM 不同"
+     *     parseControl: () => "按钮本身解析函数，解析不同组件专用，LIST, FORM 不同",
+     *     parseOp: () => "解析按钮本身专用方法",
      * }
      * ```
+     *
+     * |函数名|异步|同步|含义|
+     * |:---|---|---|:---|
+     * |parsePlugin|o|o|插件解析专用。|
+     * |parseComponent|o|o|组件解析专用。|
+     * |parseControl|o|o|控件解析专用。|
+     * |parseOp|o|x|操作按钮解析专用。|
+     *
+     * ### 2. 子函数解析
+     *
+     * #### 2.1. parsePlugin
+     *
+     * 插件解析主要处理`Object`的按钮专用，处理每个元素（Object类型）的配置信息，它用来处理按钮的某些功能。
+     * button元素中有关此函数的数据结构如下：
+     *
+     * ```js
+     * {
+     *     plugin:{
+     *         tooltip: "...",
+     *         confirm: "...",
+     *         prompt: "...",
+     *         connect: "...",
+     *         message: "..."
+     *     }
+     * }
+     * ```
+     *
+     * 上述配置含义如：
+     *
+     * |配置项|类型|表达式|含义|
+     * |:---|---|:---|:---|
+     * |tooltip|Boolean||启用tooltip功能，直接设置`tooltip=true`来打开`<Tooltip/>`，按钮外围浮游提示信息。|
+     * |confirm|String|options[confirm]|执行`Modal.confirm`功能，弹出提示框确认/取消。|
+     * |prompt|String|options[prompt]|实现浮游提示确认/取消框。|
+     * |connect|String|options[connect]|配置被链接的操作元素ID，最终会调用`Ux.connectId`触发该元素的onClick事件。|
+     * |message|String|options[message]|需要使用的文本信息。|
+     *
+     * #### 2.2. parseComponent
+     *
+     *
      *
      * @memberOf module:_kernel
      * @method parserOfButton
@@ -367,7 +410,6 @@ export default {
         parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
         parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
         parseControl: (config = [], options = {}, async = true) => toAsync(parseControl(config, options), async),
-        /* 异步解析 */
         parseOp: (config = [], options = {}) => parseOp(config, options, reference)
     }),
 

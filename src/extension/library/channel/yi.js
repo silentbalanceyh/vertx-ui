@@ -34,12 +34,16 @@ const yiRouterType = (reference, state = {}) => {
  * 3）webId，如果是 FORM 则是 formId，如果是 LIST 则是 listId
  */
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiControl`
+ *
+ * ### 1. 基本介绍
  *
  * 控件专用处理，从后端读取配置：UI_CONTROL / UI_FORM / UI_LIST
  *
- * 1. 单参，直接提取控件配置。
- * 2. 多参，根据`control`和类型`type`执行控件配置提取（包括Form和List）。
+ * 1. 单参，直接提取控件配置
+ * 2. 双参，根据`control`和类型`type`执行控件配置提取（包括Form和List）。
+ *
+ *
  *
  * @memberOf module:_channel
  * @method yiControl
@@ -106,7 +110,7 @@ const yiStandard = (reference, inputState) => {
         .then(Ux.ready)
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiCompany`
  *
  * 带有企业信息页面的专用处理流程，主要用于查询条件设置。
  *
@@ -115,7 +119,15 @@ const yiStandard = (reference, inputState) => {
  * 3. 组页面
  * 4. 分公司页面
  *
- * 为这些页面注入 `companyId` 的查询条件。
+ * 为这些页面注入 `companyId` 的查询条件，直接根据 $query 的查询条件注入特定条件：
+ *
+ * ```
+ * companyId,=<公司ID值>
+ * ```
+ *
+ * 这里的companyId的数据源来自于props中的`$inited.key`变量，最终会生成特定的$query存储在
+ * reference的state状态信息中，构造特定查询条件，不仅如此，`companyId,=`的条件会注入到Qr流程，挂载到
+ * `$query`的`criteria`节点中。
  *
  * @memberOf module:_channel
  * @method yiCompany

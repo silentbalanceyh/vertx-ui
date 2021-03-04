@@ -699,13 +699,108 @@ const yoPolymorphism = (reference = {}, {form}) => {
     return attrs;
 }
 /**
- * ## 扩展函数
+ * ## `Ex.yoControl`
+ *
+ * ### 1. 基本介绍
  *
  * 输入配置的基本信息如（四大基本组件）：
  *
  * ```
  * {
- *     "type": "COMPONENT / LIST / FORM / CONTAINER"
+ *     "type": "COMPONENT / LIST / FORM / CONTAINER",
+ *     "sign": "64位随机加密字符串，组件创建时生成，后期可验证属性的版本。"
+ * }
+ * ```
+ *
+ * 代码执行流程如下
+ *
+ * 1. `type = CONTAINER`：调用`_seekContainer`处理容器配置。
+ * 2. `type <> CONTAINER`的类型：
+ *      1. 先调用`_seekContainer`处理容器配置。
+ *      2. 再调用`_seekComponent`处理组件配置。
+ *
+ * ### 2. 核心流程解析
+ *
+ * #### 2.1. `_seekContainer`
+ *
+ * > componentName存在时才能构造容器配置，否则传入的`attrs`为空对象。
+ *
+ * 函数签名：
+ *
+ * ```js
+ * const _seekContainer = (attrs = {}, control = {}, componentType)
+ * ```
+ *
+ * 主要是构造`attrs.container`对象，输入的control数据结构如下：
+ *
+ * ```js
+ * {
+ *      containerConfig: "容器基础配置信息",
+ *      containerName: "「Required」容器名称，必须包含该配置"
+ * }
+ * ```
+ *
+ * 构造的`container`的数据结构如下：
+ *
+ * ```js
+ * {
+ *     key: "设置成控件主键 control.key",
+ *     pageId: "读取控件中关联页面ID control.pageId",
+ *     name: "设置成containerName的值",
+ *     config: "读取containerConfig，否则就直接置空 {}",
+ *     componentType: "函数中的第三参"
+ * }
+ * ```
+ *
+ * #### 2.2. `_seekComponent`
+ *
+ * 函数签名：
+ *
+ * ```js
+ * const _seekComponent = (attrs = {}, control = {}) => {
+ * ```
+ *
+ * 直接构造组件配置，输入的control数据结构如下：
+ *
+ * ```js
+ * {
+ *     componentConfig: "组件基础配置信息",
+ *     componentData: "当前组件依赖的数据信息",
+ *     componentName: "当前组件名称"
+ * }
+ * ```
+ *
+ * 构造的最终`attrs`数据结构如下：
+ *
+ * ```js
+ * {
+ *     key: "设置成控件主键 control.key",
+ *     pageId: "读取控件中关联页面ID control.pageId",
+ *     name: "设置成componentName的值",
+ *     config: "设置成componentConfig，否则直接置空",
+ *     source: "设置成componentData，作为当前组件专用数据源"
+ * }
+ * ```
+ *
+ * ### 3. 容器/组件
+ *
+ * 动态渲染过程中，最终形成的jsx的数据结构如：
+ *
+ * ```jsx
+ * <!-- 容器层 -->
+ * <Container>
+ *     <!-- 组件层 -->
+ *     <Component/>
+ * </Container>
+ * ```
+ *
+ * ### 4. 后端动态输入
+ *
+ * 后端动态输入的结构来自于`UI_CONTROL, UI_LIST, UI_FORM`几张表，完整数据结构如下：
+ *
+ * ```json
+ * {
+ *     
  * }
  * ```
  *
