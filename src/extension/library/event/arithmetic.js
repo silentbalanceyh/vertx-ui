@@ -1,6 +1,6 @@
-import Ux from 'ux';
+import Ux from "ux";
 
-export default (data = {}, config = {}) => {
+const SPLASH_FOREST = (data = {}, config = {}) => {
     /*
      * 根据 data 和 config 处理配置信息
      */
@@ -49,4 +49,13 @@ export default (data = {}, config = {}) => {
     });
     criteria[""] = true;        // 由于是做限制，所以只提供 AND 限制
     return JSON.stringify(criteria);
+}
+const Arithmetic = {
+    SPLASH_FOREST,
+}
+export default {
+    /*
+     *
+     */
+    acCriteria: (algorithm) => Arithmetic[algorithm],
 }
