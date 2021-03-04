@@ -495,6 +495,64 @@ export default {
      *
      * **入参表**
      *
+     * |参数名|类型|含义|
+     * |:---|---|:---|
+     * |config|Array|控件配置队列。|
+     * |options|Object|解析控件时的辅助配置信息。|
+     * |async|Boolean|是否执行异步模式。|
+     *
+     * 该方法主要用于控件的动态配置，从远程读取`UI_CONTROL`表中的配置数据，再配合控件类型以及操作列表组合成最终用于
+     * Jsx元素的控件属性相关信息。直接从第二参中读取`type`配置参数，该参数目前版本支持（`LIST`-列表配置，`FORM`-表单配置）。
+     *
+     * 第一个参数为`config`对象：
+     *
+     * 1. 「LIST」如果存在`config.options`，则可以为该对象注入`clientKey`的客户端配置。
+     * 2. 「FORM」如果存在`config.form`，则重新构造`config.form.op`（该配置会影响表单中的操作，包括ACL信息），构造操作信息的同时，系统会构造`event`事件信息，并且注入到`config.event`中，该值会被`Fabric`引擎使用。
+     *
+     * #### 2.4. parseOp（解析Array）
+     *
+     * > 该方法不带异步参数，不支持同步模式。
+     *
+     * **入参表**
+     *
+     * |参数名|类型|含义|
+     * |:---|---|:---|
+     * |config|Array|按钮配置队列。|
+     * |options|Object|解析操作时的辅助配置信息。|
+     *
+     * 该方法主要用于`ExListXX`组件解析组件操作用，目前执该流程的组件主要是：`ExListOpen / ExListComplex / ExListQuery`。
+     *
+     * 1. 先根据options中的配置`dynamic.op`进行分流操作，如果为true则直接远程读取按钮配置信息，如果为false则直接使用资源文件中的配置。
+     * 2. 先执行基础按钮的规范化操作，包括带plugin的按钮配置解析操作。
+     * 3. 执行完成后，追加`op.extension`的扩展按钮操作（options中以`op.extension`为前缀的选项）：
+     *      1. 如果`op.config`中包含`executor`，则执行直接按钮扩展，从props的`$op`对象中构造（纯开发）。
+     *      2. 如果`op.config`中只包含`connectId`属性，则该按钮操作直接绑定onClick生成`Ux.connectId`的锚点。
+     *
+     * `op.extension`扩展配置片段如：
+     *
+     * ```json
+     *      "op.extension.confirm": {
+     *          "text": "确认单据",
+     *          "icon": "checked",
+     *          "className": "ux-spec",
+     *          "region": "op.tab.confirm",
+     *          "plugin": {
+     *              "tooltip": true
+     *          },
+     *          "config": {
+     *              "connectId": "$opFinish",
+     *              "index": 1
+     *          }
+     *      },
+     * ```
+     *
+     * 关于扩展按钮的解析最终会调用`yoExtension`内置函数（不开放）执行解析，该函数的逻辑会在`yo`方法中说明，
+     * 上述规范化操作完成后，整个按钮部分的配置程序就执行完成，规范化的结果会存储在state中。
+     *
+     * ### 3. 总结
+     *
+     * `parserOfButton`方法执行后，会生成一个带四个子函数的核心对象，这四个子函数主要做按钮级别的配置规范化操作。
+     *
      * @memberOf module:_kernel
      * @method parserOfButton
      * @param {ReactComponent} reference React对应组件引用
@@ -510,6 +568,8 @@ export default {
 
     /**
      * ## 「解析」`Ex.parserOfColor`
+     *
+     * ### 1. 基本介绍
      *
      * 生产日志器专用解析器，返回不同日志器记录日志（每个键都是函数）：
      *
@@ -530,6 +590,24 @@ export default {
      *     define: () => "定义组件"
      * }
      * ```
+     *
+     * ### 2. 日志函数作用规范
+     *
+     * |函数名|日志组件|
+     * |:---|:---|
+     * |private|私有组件。|
+     * |form|表单组件专用`<Form/>`。|
+     * |list|列表组件专用`<ExListXXX/>`。|
+     * |action|操作按钮专用，通常在列表操作组件中使用。|
+     * |tpl|模板组件专用。|
+     * |component|公有组件专用。|
+     * |container|容器组件专用。|
+     * |page|页面组件专用。|
+     * |type|「保留」分类组件专用。|
+     * |control|自定义控件专用。|
+     * |dynamic|动态组件专用。|
+     * |view|视图组件专用。|
+     * |define|自定义组件专用。|
      *
      * @memberOf module:_kernel
      * @method parserOfColor

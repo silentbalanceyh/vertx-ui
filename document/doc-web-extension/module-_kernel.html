@@ -3609,7 +3609,7 @@ const $opAdd = (reference) => params => Ex.form(reference).add(params, {
 </table>
 <h3>2. 子函数解析</h3>
 <h4>2.1. parsePlugin（解析Object）</h4>
-<p><font style="color:red"><strong>入参表</strong></font></p>
+<p><strong>入参表</strong></p>
 <table>
 <thead>
 <tr>
@@ -3828,6 +3828,95 @@ const config = components.config;
 </code></pre>
 <h4>2.3. parseControl（解析Array）</h4>
 <p><strong>入参表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">config</td>
+<td>Array</td>
+<td style="text-align:left">控件配置队列。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>Object</td>
+<td style="text-align:left">解析控件时的辅助配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">async</td>
+<td>Boolean</td>
+<td style="text-align:left">是否执行异步模式。</td>
+</tr>
+</tbody>
+</table>
+<p>该方法主要用于控件的动态配置，从远程读取<code>UI_CONTROL</code>表中的配置数据，再配合控件类型以及操作列表组合成最终用于
+Jsx元素的控件属性相关信息。直接从第二参中读取<code>type</code>配置参数，该参数目前版本支持（<code>LIST</code>-列表配置，<code>FORM</code>-表单配置）。</p>
+<p>第一个参数为<code>config</code>对象：</p>
+<ol>
+<li>「LIST」如果存在<code>config.options</code>，则可以为该对象注入<code>clientKey</code>的客户端配置。</li>
+<li>「FORM」如果存在<code>config.form</code>，则重新构造<code>config.form.op</code>（该配置会影响表单中的操作，包括ACL信息），构造操作信息的同时，系统会构造<code>event</code>事件信息，并且注入到<code>config.event</code>中，该值会被<code>Fabric</code>引擎使用。</li>
+</ol>
+<h4>2.4. parseOp（解析Array）</h4>
+<blockquote>
+<p>该方法不带异步参数，不支持同步模式。</p>
+</blockquote>
+<p><strong>入参表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">config</td>
+<td>Array</td>
+<td style="text-align:left">按钮配置队列。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>Object</td>
+<td style="text-align:left">解析操作时的辅助配置信息。</td>
+</tr>
+</tbody>
+</table>
+<p>该方法主要用于<code>ExListXX</code>组件解析组件操作用，目前执该流程的组件主要是：<code>ExListOpen / ExListComplex / ExListQuery</code>。</p>
+<ol>
+<li>先根据options中的配置<code>dynamic.op</code>进行分流操作，如果为true则直接远程读取按钮配置信息，如果为false则直接使用资源文件中的配置。</li>
+<li>先执行基础按钮的规范化操作，包括带plugin的按钮配置解析操作。</li>
+<li>执行完成后，追加<code>op.extension</code>的扩展按钮操作（options中以<code>op.extension</code>为前缀的选项）：
+<ol>
+<li>如果<code>op.config</code>中包含<code>executor</code>，则执行直接按钮扩展，从props的<code>$op</code>对象中构造（纯开发）。</li>
+<li>如果<code>op.config</code>中只包含<code>connectId</code>属性，则该按钮操作直接绑定onClick生成<code>Ux.connectId</code>的锚点。</li>
+</ol>
+</li>
+</ol>
+<p><code>op.extension</code>扩展配置片段如：</p>
+<pre class="prettyprint source lang-json"><code>     &quot;op.extension.confirm&quot;: {
+         &quot;text&quot;: &quot;确认单据&quot;,
+         &quot;icon&quot;: &quot;checked&quot;,
+         &quot;className&quot;: &quot;ux-spec&quot;,
+         &quot;region&quot;: &quot;op.tab.confirm&quot;,
+         &quot;plugin&quot;: {
+             &quot;tooltip&quot;: true
+         },
+         &quot;config&quot;: {
+             &quot;connectId&quot;: &quot;$opFinish&quot;,
+             &quot;index&quot;: 1
+         }
+     },
+</code></pre>
+<p>关于扩展按钮的解析最终会调用<code>yoExtension</code>内置函数（不开放）执行解析，该函数的逻辑会在<code>yo</code>方法中说明，
+上述规范化操作完成后，整个按钮部分的配置程序就执行完成，规范化的结果会存储在state中。</p>
+<h3>3. 总结</h3>
+<p><code>parserOfButton</code>方法执行后，会生成一个带四个子函数的核心对象，这四个子函数主要做按钮级别的配置规范化操作。</p>
 </div>
 
 
@@ -3977,6 +4066,7 @@ const config = components.config;
 
 <div class="description usertext">
     <h2>「解析」<code>Ex.parserOfColor</code></h2>
+<h3>1. 基本介绍</h3>
 <p>生产日志器专用解析器，返回不同日志器记录日志（每个键都是函数）：</p>
 <pre class="prettyprint source lang-js"><code>{
     private: () => &quot;私有组件&quot;,
@@ -3994,6 +4084,69 @@ const config = components.config;
     define: () => &quot;定义组件&quot;
 }
 </code></pre>
+<h3>2. 日志函数作用规范</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数名</th>
+<th style="text-align:left">日志组件</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">private</td>
+<td style="text-align:left">私有组件。</td>
+</tr>
+<tr>
+<td style="text-align:left">form</td>
+<td style="text-align:left">表单组件专用<code>&lt;Form/&gt;</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">list</td>
+<td style="text-align:left">列表组件专用<code>&lt;ExListXXX/&gt;</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">action</td>
+<td style="text-align:left">操作按钮专用，通常在列表操作组件中使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">tpl</td>
+<td style="text-align:left">模板组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">component</td>
+<td style="text-align:left">公有组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">container</td>
+<td style="text-align:left">容器组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">page</td>
+<td style="text-align:left">页面组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">type</td>
+<td style="text-align:left">「保留」分类组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">control</td>
+<td style="text-align:left">自定义控件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">dynamic</td>
+<td style="text-align:left">动态组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">view</td>
+<td style="text-align:left">视图组件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">define</td>
+<td style="text-align:left">自定义组件专用。</td>
+</tr>
+</tbody>
+</table>
 </div>
 
 
@@ -5598,7 +5751,7 @@ const config = components.config;
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 20:33:35 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 21:51:33 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
