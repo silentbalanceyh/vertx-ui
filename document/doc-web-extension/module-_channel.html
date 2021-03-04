@@ -110,6 +110,30 @@
 <td style="text-align:left">yiAssist</td>
 <td style="text-align:left">在state中注入Assist辅助数据节点<code>$t_</code>和<code>$a_</code>前缀。</td>
 </tr>
+<tr>
+<td style="text-align:left">yiColumn</td>
+<td style="text-align:left">表格组件的列配置信息中，预处理<code>$render = USER</code>的Ajax辅助数据列（性能提升版本，预读取）。</td>
+</tr>
+<tr>
+<td style="text-align:left">yiCompany</td>
+<td style="text-align:left">为查询引擎追加<code>companyId,=</code>的公司条件。</td>
+</tr>
+<tr>
+<td style="text-align:left">yiControl</td>
+<td style="text-align:left">「页面+控件」单个控件专用的控件配置初始化函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">yiLayout</td>
+<td style="text-align:left">「容器+控件」单个页面初始化配置的专用函数，包括计算布局相关信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">yiModule</td>
+<td style="text-align:left">读取模块配置，静态存储于后端的某个JSON文件，动态则存储于<code>X_MODULE</code>表中。</td>
+</tr>
+<tr>
+<td style="text-align:left">yiPartForm</td>
+<td style="text-align:left">区域表单初始化，等价于原始的<code>yiForm</code>，但由于配置数据来源于不同存储位置，所以重命名为yiPartForm替代。</td>
+</tr>
 </tbody>
 </table></div>
             
@@ -1041,9 +1065,19 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 <h3>1. 基本介绍</h3>
 <p>控件专用处理，从后端读取配置：UI_CONTROL / UI_FORM / UI_LIST</p>
 <ol>
-<li>单参，直接提取控件配置</li>
-<li>双参，根据<code>control</code>和类型<code>type</code>执行控件配置提取（包括Form和List）。</li>
+<li>单参，直接提取控件配置，调用<code>yoControl</code>执行容器和组件的配置规范化（container/component）。</li>
+<li>双参，根据<code>control</code>和类型<code>type</code>执行控件配置提取（包括Form和List）
+<ol>
+<li>根据控件ID（<code>control</code>）和类型（<code>type</code>）读取基本配置和操作配置。</li>
+<li>在响应信息中为操作注入ACL安全配置信息<code>__acl</code>。</li>
+<li>再执行<code>parseControl</code>方法执行控件配置规范化（主要针对操作）</li>
 </ol>
+</li>
+</ol>
+<h3>2. 使用场景</h3>
+<blockquote>
+<p>该函数仅位于控件配置预初始化专用流程。</p>
+</blockquote>
 </div>
 
 
@@ -1208,28 +1242,99 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
-<h3>模板专用处理器</h3>
+    <h2>「通道」<code>Ex.yiLayout</code></h2>
+<h3>1. 基本介绍</h3>
+<h4>模板处理种类</h4>
 <ol>
 <li>静态模板</li>
 <li>动态模板</li>
 </ol>
-<h3>动态模板判断</h3>
+<h4>动态模板判断</h4>
 <ol>
 <li>$router 中的 path 路径以：/ui/ 开头</li>
 <li>$router 中的参数同时包含：module / page</li>
 </ol>
-<p>最终返回 <code>{ app, module, page }</code></p>
+<p>最终返回</p>
+<pre class="prettyprint source lang-json"><code>{
+    app: &quot;应用名&quot;,
+    module: &quot;模块名&quot;,
+    page: &quot;页面名&quot;
+}
+</code></pre>
 <ul>
 <li>$container：容器配置</li>
 <li>$component：内部组件配置</li>
 </ul>
-<h3>渲染计算</h3>
+<h4>渲染计算</h4>
 <p>$dynamic：</p>
 <ul>
 <li>= true：动态渲染，Ox Engine</li>
 <li>= false：静态渲染，Zero UI</li>
 </ul>
+<h3>2. 动态执行逻辑</h3>
+<p>这是Extension扩展中动态渲染模板的基础，最终都是为了改变当前组件中的state结构。</p>
+<h4>2.1. 异步初始化</h4>
+<p>调用<code>startAsync</code>函数，初始化状态信息，完成后结构如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    $tpl: {},
+    $container: {},
+    $grid: {},
+    $assist: {},
+    $controls: {}
+}
+</code></pre>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$tpl</td>
+<td style="text-align:left">模板详细数据信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$container</td>
+<td style="text-align:left">容器配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$grid</td>
+<td style="text-align:left">生成的网格布局基础配置。</td>
+</tr>
+<tr>
+<td style="text-align:left">$assist</td>
+<td style="text-align:left">需使用的辅助数据定义。</td>
+</tr>
+<tr>
+<td style="text-align:left">$controls</td>
+<td style="text-align:left">所有当前页面需要的控件配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$secure</td>
+<td style="text-align:left">后期追加，页面是否执行鉴权。</td>
+</tr>
+</tbody>
+</table>
+<h4>2.2. 模块配置</h4>
+<p>调用<code>yiModule</code>函数执行模块初始化（略）。</p>
+<h4>2.3. 页面配置</h4>
+<p>使用模块中存在的<code>data.$input</code>作为入参，读取页面配置信息，页面配置包括容器/组件双配置。</p>
+<h4>2.4. 页面规范化</h4>
+<p>调用<code>_seekPage</code>函数执行页面配置初始化，从<code>$output</code>对象中抽取数据信息：</p>
+<ol>
+<li>根据<code>$output.layout</code>重写状态中的<code>state.$tpl</code>模板信息。</li>
+<li>若包含<code>$output.containerName</code>则重写状态中<code>state.$container</code>容器信息。</li>
+<li>页面组件解析：
+<ol>
+<li>解析<code>$output.secure</code>属性，追加<code>state.$secure</code>属性。</li>
+<li>读取<code>$output.grid</code>网格布局属性，重写<code>state.$grid</code>属性。</li>
+<li>读取<code>$output.assist</code>辅助数据定义，重写<code>state.$assist</code>属性。</li>
+<li>读取<code>$output.controls</code>配置数据，重写<code>state.$controls</code>属性。</li>
+</ol>
+</li>
+</ol>
 </div>
 
 
@@ -1382,7 +1487,8 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
 
 <div class="description usertext">
-    <h2>扩展函数</h2>
+    <h2>「通道」<code>Ex.yiModule</code></h2>
+<h3>1. 基本介绍</h3>
 <p>一个 module 的配置信息来源于三部分：</p>
 <ol>
 <li><code>UI.json</code>：静态配置，会在 reference 中生成 $hoc 变量</li>
@@ -1404,6 +1510,31 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 </ul>
 </li>
 </ol>
+<h3>2. 模块读取</h3>
+<p>根据路径直接读取，路径中包含三部分，如：</p>
+<pre class="prettyprint source lang-shell"><code>/ox/ci/search
+{
+    app: &quot;ox&quot;,
+    module: &quot;ci&quot;,
+    page: &quot;search&quot;
+}
+</code></pre>
+<p><code>src/components/ci/search</code>代码目录中。</p>
+<p>Zero Ui中定义的应用维度主要分三层</p>
+<ol>
+<li>app：应用层，依靠<code>Z_APP</code>的环境变量规划不同的应用，多应用区分。</li>
+<li>module：模块，<code>src/components</code>目录下的第一层目录，上述的<code>ci</code>目录。</li>
+<li>page：页面，<code>src/components</code>目录下的第二层目录，上述的<code>search</code>目录。</li>
+</ol>
+<h3>3. 配置对象</h3>
+<p>Zero Ui中的配置对象有两种类型：<code>HocI18n</code>和<code>HocI18r</code>两种，这两种数据对象的函数是一样的，但类型不同，也就是说
+这两个对象在调用配置读取的API如<code>Ux.fromHoc</code>和<code>Ux.fromPath</code>时会维持一致。</p>
+<p>当前函数会读取<code>X_MODULE</code>的配置数据信息，如果存在，则和<code>Cab.json</code>的资源文件中的配置进行合并，生成最终的配置对象。</p>
+<ul>
+<li>远程数据存储于<code>HocI18r</code>。</li>
+<li>本地资源配置存储于<code>HocI18n</code>。</li>
+<li>本地和远程同时执行时候，直接读取metadata构造附加的<code>hoc</code>配置数据。</li>
+</ul>
 </div>
 
 
@@ -1601,6 +1732,11 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yiPartForm</code></h2>
+<h3>1. 基本介绍</h3>
+</div>
+
 
 
 
@@ -1643,6 +1779,11 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
@@ -1653,7 +1794,7 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
                 </td>
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用</p></td>
         </tr>
 
     
@@ -1665,6 +1806,11 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
@@ -1675,7 +1821,7 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
                 </td>
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>和表单相关的基本配置</p></td>
         </tr>
 
     
@@ -1686,6 +1832,11 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
             
 
             <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
             
             </td>
 
@@ -1699,7 +1850,7 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
                 </td>
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>将要继承到表单中的属性信息</p></td>
         </tr>
 
     
@@ -5071,7 +5222,7 @@ $addKey：添加表单的组件</li>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 21:51:33 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 22:28:35 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

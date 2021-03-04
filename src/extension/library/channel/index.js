@@ -20,6 +20,12 @@ import Yo from './yo';
  * |函数名|含义|
  * |:---|:---|
  * |yiAssist|在state中注入Assist辅助数据节点`$t_`和`$a_`前缀。|
+ * |yiColumn|表格组件的列配置信息中，预处理`$render = USER`的Ajax辅助数据列（性能提升版本，预读取）。|
+ * |yiCompany|为查询引擎追加`companyId,=`的公司条件。|
+ * |yiControl|「页面+控件」单个控件专用的控件配置初始化函数。|
+ * |yiLayout|「容器+控件」单个页面初始化配置的专用函数，包括计算布局相关信息。|
+ * |yiModule|读取模块配置，静态存储于后端的某个JSON文件，动态则存储于`X_MODULE`表中。|
+ * |yiPartForm|区域表单初始化，等价于原始的`yiForm`，但由于配置数据来源于不同存储位置，所以重命名为yiPartForm替代。|
  *
  * @module _channel
  */

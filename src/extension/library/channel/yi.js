@@ -28,11 +28,6 @@ const yiRouterType = (reference, state = {}) => {
     return Ux.promise(state);
 }
 
-/*
- * 1）controlId，UI_CONTROL 的 Id信息
- * 2）type，类型，LIST / FORM / COMPONENT
- * 3）webId，如果是 FORM 则是 formId，如果是 LIST 则是 listId
- */
 /**
  * ## 「通道」`Ex.yiControl`
  *
@@ -40,10 +35,15 @@ const yiRouterType = (reference, state = {}) => {
  *
  * 控件专用处理，从后端读取配置：UI_CONTROL / UI_FORM / UI_LIST
  *
- * 1. 单参，直接提取控件配置
- * 2. 双参，根据`control`和类型`type`执行控件配置提取（包括Form和List）。
+ * 1. 单参，直接提取控件配置，调用`yoControl`执行容器和组件的配置规范化（container/component）。
+ * 2. 双参，根据`control`和类型`type`执行控件配置提取（包括Form和List）
+ *      1. 根据控件ID（`control`）和类型（`type`）读取基本配置和操作配置。
+ *      2. 在响应信息中为操作注入ACL安全配置信息`__acl`。
+ *      3. 再执行`parseControl`方法执行控件配置规范化（主要针对操作）
  *
+ * ### 2. 使用场景
  *
+ * > 该函数仅位于控件配置预初始化专用流程。
  *
  * @memberOf module:_channel
  * @method yiControl
@@ -159,11 +159,14 @@ const yiCompany = (reference) => {
         .then(Ux.ready)
 }
 /**
+ * ## 「通道」`Ex.yiPartForm`
+ *
+ * ### 1. 基本介绍
  *
  * @memberOf module:_channel
- * @param ref
- * @param config
- * @param inherit
+ * @param {ReactComponent} ref React组件引用
+ * @param {Object} config 和表单相关的基本配置
+ * @param {Object} inherit 将要继承到表单中的属性信息
  * @returns {Object}
  */
 const yiPartForm = (ref, config = {}, inherit = true) => {
@@ -438,7 +441,9 @@ const yiAssist = (reference, state = {}) => {
 // X_MODULE
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiModule`
+ *
+ * ### 1. 基本介绍
  *
  * 一个 module 的配置信息来源于三部分：
  *
@@ -451,6 +456,38 @@ const yiAssist = (reference, state = {}) => {
  * 4. 如果 `standard = true` 那么有两种可能
  *      * 已经绑定过 UI.json，则使用混合模式（远程优先）
  *      * 未绑定过 UI.json，则直接使用远程模式
+ *
+ * ### 2. 模块读取
+ *
+ * 根据路径直接读取，路径中包含三部分，如：
+ *
+ * ```shell
+ * /ox/ci/search
+ * {
+ *     app: "ox",
+ *     module: "ci",
+ *     page: "search"
+ * }
+ * ```
+ *
+ * `src/components/ci/search`代码目录中。
+ *
+ * Zero Ui中定义的应用维度主要分三层
+ *
+ * 1. app：应用层，依靠`Z_APP`的环境变量规划不同的应用，多应用区分。
+ * 2. module：模块，`src/components`目录下的第一层目录，上述的`ci`目录。
+ * 3. page：页面，`src/components`目录下的第二层目录，上述的`search`目录。
+ *
+ * ### 3. 配置对象
+ *
+ * Zero Ui中的配置对象有两种类型：`HocI18n`和`HocI18r`两种，这两种数据对象的函数是一样的，但类型不同，也就是说
+ * 这两个对象在调用配置读取的API如`Ux.fromHoc`和`Ux.fromPath`时会维持一致。
+ *
+ * 当前函数会读取`X_MODULE`的配置数据信息，如果存在，则和`Cab.json`的资源文件中的配置进行合并，生成最终的配置对象。
+ *
+ * * 远程数据存储于`HocI18r`。
+ * * 本地资源配置存储于`HocI18n`。
+ * * 本地和远程同时执行时候，直接读取metadata构造附加的`hoc`配置数据。
  *
  * @memberOf module:_channel
  * @method yiModule
@@ -604,29 +641,86 @@ const startAsync = (state) => {
     return Ux.promise(state);
 };
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiLayout`
  *
- * ### 模板专用处理器
+ * ### 1. 基本介绍
+ *
+ * #### 模板处理种类
  *
  * 1. 静态模板
  * 2. 动态模板
  *
- * ### 动态模板判断
+ * #### 动态模板判断
  *
  * 1. $router 中的 path 路径以：/ui/ 开头
  * 2. $router 中的参数同时包含：module / page
  *
- * 最终返回 `{ app, module, page }`
+ * 最终返回
+ *
+ * ```json
+ * {
+ *     app: "应用名",
+ *     module: "模块名",
+ *     page: "页面名"
+ * }
+ * ```
  *
  * * $container：容器配置
  * * $component：内部组件配置
  *
- * ### 渲染计算
+ * #### 渲染计算
  *
  * $dynamic：
  *
  * * = true：动态渲染，Ox Engine
  * * = false：静态渲染，Zero UI
+ *
+ * ### 2. 动态执行逻辑
+ *
+ * 这是Extension扩展中动态渲染模板的基础，最终都是为了改变当前组件中的state结构。
+ *
+ * #### 2.1. 异步初始化
+ *
+ * 调用`startAsync`函数，初始化状态信息，完成后结构如下：
+ *
+ * ```js
+ * {
+ *     $tpl: {},
+ *     $container: {},
+ *     $grid: {},
+ *     $assist: {},
+ *     $controls: {}
+ * }
+ * ```
+ *
+ * |属性名|含义|
+ * |:---|:---|
+ * |$tpl|模板详细数据信息。|
+ * |$container|容器配置信息。|
+ * |$grid|生成的网格布局基础配置。|
+ * |$assist|需使用的辅助数据定义。|
+ * |$controls|所有当前页面需要的控件配置信息。|
+ * |$secure|后期追加，页面是否执行鉴权。|
+ *
+ * #### 2.2. 模块配置
+ *
+ * 调用`yiModule`函数执行模块初始化（略）。
+ *
+ * #### 2.3. 页面配置
+ *
+ * 使用模块中存在的`data.$input`作为入参，读取页面配置信息，页面配置包括容器/组件双配置。
+ *
+ * #### 2.4. 页面规范化
+ *
+ * 调用`_seekPage`函数执行页面配置初始化，从`$output`对象中抽取数据信息：
+ *
+ * 1. 根据`$output.layout`重写状态中的`state.$tpl`模板信息。
+ * 2. 若包含`$output.containerName`则重写状态中`state.$container`容器信息。
+ * 3. 页面组件解析：
+ *      1. 解析`$output.secure`属性，追加`state.$secure`属性。
+ *      2. 读取`$output.grid`网格布局属性，重写`state.$grid`属性。
+ *      3. 读取`$output.assist`辅助数据定义，重写`state.$assist`属性。
+ *      4. 读取`$output.controls`配置数据，重写`state.$controls`属性。
  *
  * @memberOf module:_channel
  * @method yiLayout
