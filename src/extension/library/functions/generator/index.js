@@ -1,4 +1,4 @@
-import boolean from './gen.runtime';
+import runtime from './gen.runtime';
 import status from './gen.runtime.status';
 
 import batch from './gen.rx.batch';
@@ -12,7 +12,7 @@ export default {
     ...tab,
     ...search,
     ...row,
-    ...boolean,
+    ...runtime,
     ...status,
     ...batch,
     ...column,
