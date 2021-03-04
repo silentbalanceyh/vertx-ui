@@ -7,7 +7,7 @@ import business from './business';
 import func from './func';
 import parser from './parser';
 import generator from './generator';
-import control from './control';
+import config from './config';
 // ------------- X6 -----------------------
 import X6 from './x6';
 
@@ -25,46 +25,15 @@ import X6 from './x6';
  *
  * @module _constant
  */
-/**
- * 内部模块
- *
- * 配置模块
- *
- * @module _config
- */
 export default {
-    /*
-     * mapMeta
-     * mapUri
-     * toUri
-     * toDialog
-     */
     ...func,
-    /*
-     * xtParam
-     * xtOp
-     */
-    ...control,
-    /*
-     *
-     */
+    ...config,
     ...generator,
-    // ...funcGenerate,
-    // ...funcBind,
-    /*
-     * 全局处理
-     */
     ...global,
-    /*
-     * 所有合法选项
-     */
+    ...business,
+    ...authority,
     E,
     X6,
-    /*
-     * 业务方法
-     */
-    ...business,
 
     ...parser,
-    ...authority
 }
