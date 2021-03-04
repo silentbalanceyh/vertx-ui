@@ -9,15 +9,8 @@ import parser from './parser';
 import generator from './generator';
 import control from './control';
 // ------------- X6 -----------------------
-import graphic from './graphic';
+import X6 from './x6';
 
-/**
- * 内部模块
- *
- * 解析器模块
- *
- * @module _parser
- */
 /**
  * 内部模块
  *
@@ -98,7 +91,6 @@ export default {
      *
      */
     ...generator,
-    ...graphic,
     // ...funcGenerate,
     // ...funcBind,
     /*
@@ -109,6 +101,7 @@ export default {
      * 所有合法选项
      */
     E,
+    X6,
     /*
      * 业务方法
      */

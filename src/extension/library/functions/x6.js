@@ -1,7 +1,69 @@
 import Ux from "ux";
-import Is from './g.x6.is';
-import rx from './g.x6.rx';
-
+import Is from "./graphic/g.x6.is";
+/*
+ * 判断自我关系的合法性
+ * 1）如果是自引用只可当前节点
+ * 2）其他节点不可创建自引用
+ */
+const isLoopOk = (edge, managed = {}) => {
+    const [source, target] = Ux.x6FromTo(edge, 'identifier')
+    if (source === target) {
+        return (source !== managed.identifier)
+    } else return false;
+}
+/*
+ * 其他节点不可创建关系
+ */
+const isUnmanaged = (edge, managed = {}) => {
+    const [source, target] = Ux.x6FromTo(edge, 'identifier');
+    const identifier = managed.identifier;
+    return (source !== identifier && target !== identifier);
+}
+const rxEdgeInit = (edge, reference) => {
+    const $inited = {};
+    $inited.key = Ux.randomUUID();
+    {
+        const [upstream, downstream] = Ux.x6FromTo(edge, 'identifier');
+        $inited.upstream = upstream;
+        $inited.downstream = downstream;
+        // 读取 upstreamName / downstreamName
+        const up = Ux.elementUniqueDatum(reference,
+            'resource.models', 'identifier', upstream);
+        if (up) {
+            $inited.upstreamName = up.alias;
+        }
+        const down = Ux.elementUniqueDatum(reference,
+            'resource.models', 'identifier', downstream);
+        if (down) {
+            $inited.downstreamName = down.alias;
+        }
+        $inited.active = true;
+        const source = edge.getSourceNode().getData();
+        if (source) {
+            // sigma / language 环境信息处理
+            $inited.sigma = source.sigma;
+            $inited.language = Ux.Env['LANGUAGE'];
+        }
+    }
+    return $inited;
+};
+const rxEdgeInitType = (reference) => (edge = []) => {
+    const typeObj = Ux.elementUniqueDatum(reference, "relation.type", 'code', edge.type);
+    if (typeObj) {
+        edge.name = typeObj.name;
+    }
+    return edge;
+};
+const rxNodeFilter = (reference) => (node, gEvent) => {
+    const data = node.getData();
+    if (data) {
+        const itemKo = gEvent.nodeData("identifier");
+        return !itemKo.has(data.identifier);
+    } else return true;
+}
+// =====================================================
+// on 前缀
+// =====================================================
 const onWindowClose = () => (edge = {}, gEvent) => {
     const graph = gEvent.g6Graph();
     graph.removeCell(edge.id);
@@ -92,7 +154,11 @@ export default {
     onEdgeConnectedBefore,
     // 重置专用函数
     onReset,
-    // x6 系列函数
-    ...rx,
-    ...Is,
+    // rx 系列,
+    rxEdgeInit,
+    rxEdgeInitType,
+    rxNodeFilter,
+    // is 系列
+    isLoopOk,
+    isUnmanaged,
 }

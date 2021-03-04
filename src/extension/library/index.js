@@ -22,6 +22,8 @@ import Web from './web';
  *
  * |函数|说明|
  * |:---|:---|
+ * |parserOfButton|「解析」生成操作专用解析器。|
+ * |parserOfColor|「解析」生成彩色日志解析器。|
  * |sexExAction|扩展操作专用函数，处理特定配置。|
  * |sexExPlugin|插件接入专用函数，处理和插件相关的部分。|
  * |uiDialog|「组件」构造Dialog快速开发组件。|
