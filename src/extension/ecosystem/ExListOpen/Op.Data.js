@@ -1,9 +1,6 @@
 import Ux from 'ux';
 import {Dsl} from 'entity';
 
-/**
- * 打开窗口
- */
 const rxWinOpen = (reference) => (config = {}, data = {}) => () => {
     // 打开窗口
     const state = {};
