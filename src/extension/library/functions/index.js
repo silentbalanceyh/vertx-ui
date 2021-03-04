@@ -12,16 +12,13 @@ import config from './config';
 import X6 from './x6';
 
 /**
- * 内部模块
- *
- * 原子操作
+ * # 核心工具函数
  *
  * @module _function
  */
 /**
- * 内部模块
  *
- * 常量模块
+ * # 常量定义模块
  *
  * @module _constant
  */

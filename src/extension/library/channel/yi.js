@@ -224,24 +224,132 @@ const yiColumn = (reference, initState = {}, $data = []) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiAssist`
  *
- * 注入 Assist 专用数据辅助信息，读取资源文件中的配置：
+ * ### 1. 输入来源
+ *
+ * |来源|含义|
+ * |:---|:---|
+ * |`cab/<LANG>`|资源目录`cab/<LANG>/`中绑定的资源文件的_assist节点，使用`@zero`绑定。|
+ * |config|直接从props中读取配置，消费assist节点，这种通常是配置型。|
+ *
+ * ### 2. 辅助数据种类
+ *
+ * 示例中的数据结构直接从`_assist`开始，或`config.assist`开始，它包含了多个键值配置，每个配置如下：
+ *
+ * |节点|含义|
+ * |:---|:---|
+ * |uri|Ajax远程方法的Uri地址。|
+ * |method|默认`GET`，可修改成其他方法来读取。|
+ * |magic|新版查询模式，非查询引擎，直接将magic节点佐为查询条件。|
+ * |params.criteria|这种通常是`qr=true`，设置查询引擎。|
+ * |qr|（Boolean）是否强制性使用查询引擎，强制使用则会触发后端查询引擎。|
+ * |response|配置响应数据的特殊属性，主要用来配置记录主键。|
+ * |group|这个配置目前仅用于`X_TABULAR`读取，根据某个字段进行分组，然后使用值构造变量。|
+ *
+ * #### 2.1. 非`X_TABULAR`类型
+ *
+ * > 这种类型比较自由，读取任意接口或任意表都可以。
  *
  * ```json
  * {
- *     "_assist": {
- *     }
+ *      "model.information": {
+ *          "uri": "/api/model/full/read",
+ *          "response": {
+ *              "key": "id"
+ *          }
+ *      },
+ *      "model.resource":{
+ *          "uri": /api/model/resource"
+ *      }
  * }
  * ```
  *
- * 读取辅助数据专用清单。
+ * 上边的配置信息会在state中生成两个变量，这种模式的变量名直接根据配置中的Object属性字段来定义。
+ *
+ * * `$a_model_information`
+ * * `$a_model_resource`
+ *
+ * #### 2.2. `X_TABULAR`类型
+ *
+ * > 这种类型只读取`X_TABULAR`的数据类型，而且会提供`group`方法执行分组，通常是`TYPE`字段。
+ *
+ * ```json
+ * {
+ *      "tabular": {
+ *          "uri": "/api/types/tabulars",
+ *          "method": "POST",
+ *          "magic": {
+ *              "$body": [
+ *                  "permission.type",
+ *                  "member.card"
+ *              ]
+ *          },
+ *          "group": "type"
+ *      }
+ * }
+ * ```
+ *
+ * 上边配置生成的变量为：
+ *
+ * * `$t_permission_type`
+ * * `$t_member_card`
+ *
+ * ### 3. Js脚本
+ *
+ * #### 3.1. 调用代码
+ *
+ * 框架内部的调用代码如下：
+ *
+ * ```js
+ * import Ex from 'ex';
+ *
+ * const state = {};
+ * Ex.yiAssist(reference, state).then(response => {
+ *     // response 变量中会包含执行 assist 辅助数据流程后的变量
+ *     // 假设使用了 2.1 和 2.2 的综合配置
+ *     // 则会生成下边四个属性
+ *     // - $a_model_information，数据类型是 DataArray
+ *     // - $a_model_resource，数据类型是 DataArray
+ *     // - $t_permission_type，数据类型是 DataArray
+ *     // - $t_member_card，数据类型是 DataArray
+ * })
+ * ```
+ *
+ * #### 3.2. 提取数据代码
+ *
+ * ```js
+ * import Ux from 'ux';
+ *
+ * // 直接传入原始key，会直接做转换
+ * // member.card，系统会检索读取上述列表中的 $t_member_card 变量的值
+ * // 返回值为 Array 类型。
+ * const memberCard = Ux.onDatum(reference, "member.card");
+ * ```
+ *
+ * #### 3.3. Datum函数
+ *
+ * 除开直接读取的`onDatum`以外，还可以使用一些带有`Datum`关键字的函数，例如：
+ *
+ * |Datum函数|纯函数|
+ * |:---|:---|
+ * |elementFindDatum|elementFind|
+ * |elementUniqueDatum|elementUnique|
+ * |elementGroupDatum|elementGroup|
+ *
+ * 带`Datum`的函数会比纯函数多两个参数，前两个参数就是`onDatum`的两个参数，简单说是`Datum`遵循如下代码执行流程：
+ *
+ * |步骤|执行代码|
+ * |---:|:---|
+ * |1|输入`reference`和`sourceKey`（上述调用代码第二参）。|
+ * |2|调用onDatum抽取函数，生成数据（Array类型）。|
+ * |3|执行主方法，纯函数中的方法，以Array数据为基础。|
  *
  * @memberOf module:_channel
  * @method yiAssist
  * @param {ReactComponent} reference React对应组件引用
- * @param {State} state 返回当前组件状态
- * @returns {Promise<T>} 执行更新过后的状态
+ * @param {State} state 输入状态，计算之前的
+ * @returns {Promise<T>} 执行更新过后的状态，计算之后的
  */
 const yiAssist = (reference, state = {}) => {
     /*
