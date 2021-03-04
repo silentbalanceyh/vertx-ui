@@ -54,6 +54,7 @@ const isReady = (rule = {}, reference, currentValue) => {
             const cond = rule.condition[idx];
             const expr = T.formatExpr(cond, params);
             try {
+                // eslint-disable-next-line
                 checked = eval(expr);
             } catch (e) {
                 console.error(e);

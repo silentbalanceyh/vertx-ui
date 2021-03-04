@@ -39,10 +39,10 @@ class GStencil implements GLife, GView {
         // ID计算
         this._id = container ? container : null;
         const options = Ld.g6DefaultAddOn(this._id, stencilConfig);
-        {
-            options.search = Kt.onNodeSearch(criteria);
-            // FnAttr：设置 search 属性
-        }
+
+        options.search = Kt.onNodeSearch(criteria);
+        // FnAttr：设置 search 属性
+        
         this._config = options;
         // 注册节点名称
         this._registry = registry;

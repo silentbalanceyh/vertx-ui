@@ -59,17 +59,20 @@ const inApi = (uri = {}) => {
         processed.method = api.method;
         processed.secure = api.secure;
         // MIME
+        // eslint-disable-next-line
         {
             processed.consumes = api.consumes;
             processed.produces = api.produces;
         }
         // param
+        // eslint-disable-next-line
         {
             processed.paramMode = api.paramMode;
             processed.paramRequired = api.paramRequired;
             processed.paramContained = api.paramContained;
         }
         // Worker
+        // eslint-disable-next-line
         {
             processed.workerType = api.workerType;
             processed.workerAddress = api.workerAddress;
@@ -78,6 +81,7 @@ const inApi = (uri = {}) => {
             processed.workerJs = api.workerJs;
         }
         // IN/OUT
+        // eslint-disable-next-line
         {
             processed.inRule = api.inRule;
             processed.inMapping = api.inMapping;
@@ -224,6 +228,7 @@ const inJob = (mission = {}) => {
         /*
          * 特殊任务
          */
+        // eslint-disable-next-line
         {
             processed.comment = job.comment;
             processed.proxy = job.proxy;

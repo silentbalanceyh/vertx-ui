@@ -181,24 +181,24 @@ const configColumn = (original = [], config = {}) => {
      */
     const normalized = Ux.clone(original).concat(columns);
     const resultColumns = [];
-    {
-        normalized
-            .map(column => Ux.valueLadder(column))
-            /*
-             * 按照 $projections 计算，包含了的放到 MyColumns 中
-             */
-            .filter(column => {
-                if (0 === projections.length) {
-                    // 为 0 不过滤
-                    return true;
-                } else {
-                    // 不为 0 的时候过滤
-                    const $projections = Ux.immutable(projections);
-                    return $projections.contains(column.dataIndex)
-                }
-            })
-            .forEach(column => resultColumns.push(column));
-    }
+
+    normalized
+        .map(column => Ux.valueLadder(column))
+        /*
+         * 按照 $projections 计算，包含了的放到 MyColumns 中
+         */
+        .filter(column => {
+            if (0 === projections.length) {
+                // 为 0 不过滤
+                return true;
+            } else {
+                // 不为 0 的时候过滤
+                const $projections = Ux.immutable(projections);
+                return $projections.contains(column.dataIndex)
+            }
+        })
+        .forEach(column => resultColumns.push(column));
+
     return resultColumns;
 };
 /**

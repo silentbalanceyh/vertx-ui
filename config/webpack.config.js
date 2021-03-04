@@ -760,7 +760,7 @@ module.exports = function (webpackEnv) {
                     ],
                     rules: {
                         // pure
-                        "no-eval":"off",
+                        "no-eval": "off",
                         "no-lone-blocks": "off",
                         // jsx-a11y
                         "jsx-a11y/href-no-hash": "off",

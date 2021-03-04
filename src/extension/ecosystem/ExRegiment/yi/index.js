@@ -41,22 +41,22 @@ const yiPage = (reference) => {
         $table.columns = Ux.configColumn(reference, columns);
         $table.className = "regiment-table";
         $table.pagination = {simple: true, size: "small", pageSize: 6};
-        {
-            /*
-             * 选择项
-             */
-            Object.assign($tabulation, Ux.clone($table));
-            /*
-             * $tabulation 需要追加: 删除选项额按钮
-             */
-            if (configuration.remove) {
-                $tabulation.columns = [renderOp(reference, configuration.remove)]
-                    .concat($tabulation.columns);
-            }
-            if (!Ux.isEmpty(divider)) {
-                Object.assign($divider, divider);
-            }
+        /*
+         * 选择项
+         */
+        Object.assign($tabulation, Ux.clone($table));
+        /*
+         * $tabulation 需要追加: 删除选项额按钮
+         */
+        if (configuration.remove) {
+            $tabulation.columns = [renderOp(reference, configuration.remove)]
+                .concat($tabulation.columns);
         }
+        if (!Ux.isEmpty(divider)) {
+            Object.assign($divider, divider);
+        }
+
+
         $table.rowSelection = Event.onSelection(reference);
     }
     const $submit = {};

@@ -52,15 +52,13 @@ const sync = (reference, config = {}) => {
      * 2. 关闭 Tab
      */
     state.tabs = stateTab(reference, config);
-    {
-        /*
-        *  activeKey 中的值拷贝到 $key 中，构造核心视图数据
-        * 1) 列表：view = list, key = activeKey
-        * 2) 添加页：view = add, key = ( new Key )
-        * 3) 编辑页：view = edit, key = activeKey
-        * */
-        state.$key = state.tabs.activeKey;
-    }
+    /*
+     *  activeKey 中的值拷贝到 $key 中，构造核心视图数据
+     * 1) 列表：view = list, key = activeKey
+     * 2) 添加页：view = add, key = ( new Key )
+     * 3) 编辑页：view = edit, key = activeKey
+     * */
+    state.$key = state.tabs.activeKey;
     /*
      * 准备 Table 表格专用状态
      * 1. 解析核心状态

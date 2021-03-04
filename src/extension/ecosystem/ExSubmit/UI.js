@@ -15,6 +15,7 @@ const jsx = {
                 </span>
                 <span className={"forget"}>
                     &nbsp;&nbsp;
+                    {/* eslint-disable-next-line */}
                     <a>{forgotPassword.text}</a>
                 </span>
                 <span className={"button"}>

@@ -481,6 +481,7 @@ const yoAmbient = (reference = {}, config = {}) => {
         /* 只接收 $disabled = true */
         uniform.$disabled = $disabled;
     }
+    // eslint-disable-next-line
     {
         /*
          * 状态检索：
@@ -526,6 +527,7 @@ const yoAmbient = (reference = {}, config = {}) => {
             uniform.$plugins = $plugins;
         }
     }
+    // eslint-disable-next-line
     {
         /*
          * $options 选择

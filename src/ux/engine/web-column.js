@@ -121,6 +121,7 @@ const Cmn = {
     jsxDivider: (key) => (<Divider type={"vertical"} key={key}/>),
     /* onClick 专用链接 */
     jsxLink: (item = {}) => item.enabled ? (
+        // eslint-disable-next-line
         <a key={item.key} onClick={item.onClick}
            className={item.icon ? "ux-link-icon" : ""}>
             {item.icon ? <Icon type={item.icon}/> : false}
@@ -131,6 +132,7 @@ const Cmn = {
     jsxConfirm: (item = {}) => item.enabled ? (
         <Popconfirm key={item.key} title={item.confirm}
                     onConfirm={item.onConfirm}>
+            {/* eslint-disable-next-line*/}
             <a>{item.text}</a>
         </Popconfirm>
     ) : false,
@@ -633,20 +635,21 @@ const RENDERS = {
              * 行专用的 key
              */
             const rowKey = `${text}-${index}`;
+
             /*
             * 追加 string 类型的 options
             * 扩展：如果 item 是 string，那么表示直接设置该属性为 true
             * _setDivider(options, item, rowKey);
             */
-            {
-                if (rowKey && "string" === typeof item) {
-                    const option = {};
-                    option[item] = true;
-                    option.key = `link-vertical-${rowKey}`;
-                    _setRule(option, item, record);
-                    options.push(option);
-                }
+            if (rowKey && "string" === typeof item) {
+                const option = {};
+                option[item] = true;
+                option.key = `link-vertical-${rowKey}`;
+                _setRule(option, item, record);
+                options.push(option);
             }
+
+
             /*
              * 追加 object 类型的 options
              */

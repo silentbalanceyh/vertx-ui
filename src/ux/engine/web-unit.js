@@ -415,6 +415,7 @@ const aiLink = (item = {}, addOn = {}) => {
         } else {
             if (Abs.isFunction(item.__uri)) {
                 return (
+                    // eslint-disable-next-line
                     <a href={""} onClick={item.__uri} className={item.className ? item.className : ""}>
                         {item.text}
                     </a>
@@ -539,6 +540,7 @@ const _aiAnchor = (item = {}, onClick, defaultType = "BUTTON") => {
     } else {
         // 链接执行
         return (
+            // eslint-disable-next-line
             <a href={""} key={rest.key} onClick={rest.onClick}>{text}</a>
         )
     }

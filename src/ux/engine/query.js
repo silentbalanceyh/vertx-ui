@@ -10,6 +10,7 @@ const analyzeBool = (value) => {
         if (Abs.isArray(value)) {
             return value
                 .filter(item => "string" === typeof item)
+                // eslint-disable-next-line
                 .map(item => analyzeBool(item))
         } else {
             if ("true" === value) {

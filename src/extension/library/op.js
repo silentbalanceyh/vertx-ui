@@ -6,7 +6,6 @@ import Ux from "ux";
  *
  * 注销专用操作。
  *
- * @memberOf module:Op
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
@@ -26,7 +25,6 @@ const $opLogout = (reference) => I.logout().then(result => {
  *
  * 登录专用操作。
  *
- * @memberOf module:Op
  * @async
  * @param {ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回最终Promise
