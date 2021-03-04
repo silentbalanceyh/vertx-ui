@@ -7,7 +7,7 @@ const yoSider = (reference = {}) => {
      * 数据
      */
     const {$menus} = reference.props;
-    attrs.data = Ex.array($menus)        // X_MENU 菜单信息
+    attrs.data = Ex.toArray($menus)        // X_MENU 菜单信息
         .filter(menu => Ux.Env.MENU_TYPE.SIDE === menu.type)
         .sort((left, right) => left.order - right.order);
     /*
@@ -31,7 +31,7 @@ const yoNavigation = (reference = {}, {
      * 数据
      */
     const {$menus, $router} = reference.props;
-    const source = Ex.array($menus);
+    const source = Ex.toArray($menus);
     attrs.data = source      // X_MENU 菜单信息// 特殊类型（导航栏）
         .filter(menu =>
             Ux.Env.MENU_TYPE.SIDE === menu.type ||
@@ -88,7 +88,7 @@ const yoAccount = (reference = {}, {
      * 数据
      */
     const {$menus} = reference.props;
-    attrs.data = Ex.array($menus)        // X_MENU 菜单信息
+    attrs.data = Ex.toArray($menus)        // X_MENU 菜单信息
         .filter(menu => Ux.Env.MENU_TYPE.TOP === menu.type)
         .sort((left, right) => left.order - right.order);
     /*

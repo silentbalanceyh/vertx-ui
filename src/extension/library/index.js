@@ -1,11 +1,12 @@
 import Types from './Types';
+// 直接函数和类定义
+import I from './ajax';
+import ox from './ox';
 
 import Op from './op';
 import Fun from './functions';
 import Channel from './channel';
-import I from './ajax';
 import Xui from './xui';
-import ox from './annotation/ox';
 import Evt from './event';
 import Sex from './romantic';
 import Jsx from './jsx';
@@ -25,6 +26,9 @@ import Web from './web';
  * |sexExPlugin|插件接入专用函数，处理和插件相关的部分。|
  * |uiDialog|「组件」构造Dialog快速开发组件。|
  * |uiTab|「组件」构造Tab快速开发组件。|
+ * |xuiContainer|动态渲染容器组件（模板）。|
+ * |xuiDecorator|动态渲染修饰模块（容器+组件）。|
+ * |xuiGrid|动态渲染Grid组件（页面+组件）。|
  *
  *
  * @module _kernel
@@ -34,23 +38,17 @@ const exported = {
     Jsx,
     ...Sex,
     ...Evt,
-    /*d
-     * Redux 部分专用
-     * 1) Types - `epicXxx`
-     * 2) Epic - `epicXxx`
-     * 3) Processor - `procXxx`
-     */
-    ...Types,
 
     Op,
 
     ...Channel,
 
     ...Fun,
-    I,
 
     ...Xui,
     // 高阶组件专用
+    ...Types,
+    I,
     ox,
 };
 /**
