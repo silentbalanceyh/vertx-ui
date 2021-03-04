@@ -163,6 +163,8 @@ const yiCompany = (reference) => {
  *
  * ### 1. 基本介绍
  *
+ *
+ *
  * @memberOf module:_channel
  * @param {ReactComponent} ref React组件引用
  * @param {Object} config 和表单相关的基本配置
@@ -474,7 +476,7 @@ const yiAssist = (reference, state = {}) => {
  *
  * Zero Ui中定义的应用维度主要分三层
  *
- * 1. app：应用层，依靠`Z_APP`的环境变量规划不同的应用，多应用区分。
+ * 1. app：应用层，依靠`Z_ROUTE`的环境变量规划不同的应用，多应用区分。
  * 2. module：模块，`src/components`目录下的第一层目录，上述的`ci`目录。
  * 3. page：页面，`src/components`目录下的第二层目录，上述的`search`目录。
  *
@@ -652,6 +654,8 @@ const startAsync = (state) => {
  *
  * #### 动态模板判断
  *
+ * 判断`$dynamic`的依据和条件：
+ *
  * 1. $router 中的 path 路径以：/ui/ 开头
  * 2. $router 中的参数同时包含：module / page
  *
@@ -679,7 +683,30 @@ const startAsync = (state) => {
  *
  * 这是Extension扩展中动态渲染模板的基础，最终都是为了改变当前组件中的state结构。
  *
- * #### 2.1. 异步初始化
+ * #### 2.1. 路由解析
+ *
+ * 调用`_seekRoute`解析`react-router`相关信息，构造完成后状态如下：
+ *
+ * ```js
+ * {
+ *     $input: {
+ *         app,
+ *         module,
+ *         page
+ *     },
+ *     $dynamic: "（Boolean）是否执行动态渲染",
+ *     $secure: "（Boolean）是否安全页面（鉴权）"
+ * }
+ * ```
+ *
+ * 如果是动态页面，参数`$input`直接来自于路由和环境变量的计算：
+ *
+ * |参数|来源|含义|
+ * |app|环境变量`Z_ROUTE`|当前应用的专用路由（标识应用程序）。|
+ * |module|$router变量|当前页面所属模块。|
+ * |page|$router变量|当前页面名称。|
+ *
+ * #### 2.2. 异步初始化
  *
  * 调用`startAsync`函数，初始化状态信息，完成后结构如下：
  *
@@ -721,6 +748,30 @@ const startAsync = (state) => {
  *      2. 读取`$output.grid`网格布局属性，重写`state.$grid`属性。
  *      3. 读取`$output.assist`辅助数据定义，重写`state.$assist`属性。
  *      4. 读取`$output.controls`配置数据，重写`state.$controls`属性。
+ *
+ * ### 3. 最终状态
+ *
+ * 执行完上述方法后的最终状态如（示例模板）：
+ *
+ * ```js
+ * {
+ *     $input:{
+ *         app: "所属应用",
+ *         module: "所属模块",
+ *         page: "所属页面"
+ *     },
+ *     $output: "（输出）远程读取配置的基础数据",
+ *     $dynamic: "（Boolean）是否动态渲染",
+ *     $secure: "（Boolean）是否安全页面",
+ *     $tpl: "使用模板的详细配置",
+ *     $container: "容器相关配置",
+ *     $grid: "网格布局基础信息",
+ *     $assist: "辅助数据定义信息",
+ *     $controls: "当前控件的所有配置信息"
+ * }
+ * ```
+ *
+ * > 状态中的数据存储是定义好的元数据信息，包括配置数据，其目的是为了让真正执行过程中的方法可根据这些数据对页面渲染进行计算。
  *
  * @memberOf module:_channel
  * @method yiLayout
