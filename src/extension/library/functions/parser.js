@@ -1,8 +1,127 @@
 import Ux from "ux";
-import Gb from '../global';
-import tplOp from './I.list.options';
+import Gb from "./global";
+import I from "../ajax";
 
-import Ajx from '../../ajax';
+// =====================================================
+// 常量定义信息
+// =====================================================
+const vOp = {
+    /*
+     * 关于 plugin 的说明
+     * 1）tooltip：启用 <Tooltip/> 的外围功能
+     * 2）confirm：点击按钮会有 弹出框提示 Modal.confirm
+     * 3）「中间行为」window：直接使用弹出框 Modal，打开一个窗口
+     * 4）「中间行为」popover：直接使用 <Popover/>，打开一个浮游面板
+     * 5）「中间行为」drawer：直接使用 <Drawer/>，打开一个抽屉
+     * 6）「中间行为」connect：直接调 Ux.connectId 连接点击
+     * 7）submit：是否启用防重复提交
+     */
+    "op.open.add": {
+        icon: 'plus',
+        type: 'primary',
+        key: 'opAdd'
+    },
+    "op.open.filter": {
+        icon: 'delete',
+        type: 'default',
+        key: 'opFilter',
+        plugin: {
+            tooltip: true,
+            confirm: "confirm.clean.filter"
+        }
+    },
+    "op.batch.edit": {
+        icon: 'edit',
+        type: 'default',
+        key: 'opBatchEdit',
+        plugin: {
+            window: 'window.batch.editor',    // Window专用
+            componentType: 'ExEditorBatch',     // 组件类型
+            component: `batch.editor`,   // 配置专用Key
+        }
+    },
+    "op.batch.delete": {
+        icon: 'remove',
+        type: 'default',
+        key: 'opBatchDelete',
+        plugin: {
+            prompt: 'confirm.batch.delete',    // 配置confirm
+        }
+    },
+    "op.extra.column": {
+        icon: 'caret-down',
+        type: 'primary',
+        key: 'opColumn',
+        plugin: {
+            tooltip: true,
+            popover: 'window.extra.column',     // Popover 专用
+            componentType: 'ExEditorColumn',        // 组件类型
+            component: 'extra.column'
+        }
+    },
+    'op.extra.export': {
+        icon: 'export',
+        key: 'opExport',
+        plugin: {
+            tooltip: true,
+            window: 'window.extra.export',      // Window专用
+            componentType: 'ExEditorExport',
+            component: 'extra.export'
+        }
+    },
+    'op.extra.import': {
+        icon: 'import',
+        key: 'opImport',
+        plugin: {
+            tooltip: true,
+            window: 'window.extra.import',      // Window专用
+            componentType: 'ExEditorImport',
+            component: 'extra.import'
+        }
+    },
+    'op.submit.add': {
+        icon: 'plus',
+        key: 'opFormAdd',
+        type: 'primary',
+        plugin: {
+            submit: true,
+            connect: 'id.submit.add'
+        }
+    },
+    'op.submit.save': {
+        icon: 'save',
+        key: 'opFormSave',
+        type: 'primary',
+        plugin: {
+            submit: true,
+            connect: 'id.submit.save'
+        }
+    },
+    'op.submit.delete': {
+        icon: 'delete',
+        key: 'opFormDelete',
+        type: 'danger',
+        plugin: {
+            submit: true,
+            tooltip: true,
+            prompt: 'confirm.delete',
+            connect: 'id.submit.delete'
+        }
+    },
+    'op.submit.reset': {
+        icon: 'redo',
+        key: 'opFormReset',
+        type: 'default',
+        plugin: {
+            tooltip: true,
+            connect: 'id.submit.reset'
+        }
+    }
+}
+
+// =====================================================
+// parserOfButton
+// =====================================================
 
 const toAsync = (result, async = true) => {
     if (async) {
@@ -141,7 +260,7 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
             /*
              * 特殊权限
              */
-            Ajx.ops({identifier, type: "OP"})
+            I.ops({identifier, type: "OP"})
                 /*
                  * 处理核心 List 问题
                  */
@@ -171,9 +290,9 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
     Object.keys(ops)
         .filter(opKey => !!opKey)
         .filter(opKey => "string" === typeof opKey)
-        .filter(opKey => tplOp.hasOwnProperty(opKey))
+        .filter(opKey => vOp.hasOwnProperty(opKey))
         .forEach(opKey => {
-            const button = Ux.clone(tplOp[opKey]);
+            const button = Ux.clone(vOp[opKey]);
             button.id = button.key;                     // 前后端主键同步
             button.text = ops[opKey];
             if (!button.plugin) button.plugin = {};      // 插件
@@ -221,28 +340,81 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
         });
     return Ux.promise(buttons);
 })
-/**
- * ## 扩展函数
- *
- * 生成按钮专用解析器，返回对象结构如（每个键都是函数）：
- *
- * ```js
- * {
- *     parsePlugin: () => "按钮插件解析函数",
- *     parseComponent: () => "组件解析函数",
- *     parseControl: () => "按钮本身解析函数，解析不同组件专用，LIST, FORM 不同"
- * }
- * ```
- *
- * @memberOf module:_parser
- * @method parserOfButton
- * @param {ReactComponent} reference React对应组件引用
- * @returns {Object}
+/*
+ * 统一配置解析器
  */
-export default (reference) => ({
-    parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
-    parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
-    parseControl: (config = [], options = {}, async = true) => toAsync(parseControl(config, options), async),
-    /* 异步解析 */
-    parseOp: (config = [], options = {}) => parseOp(config, options, reference)
-})
+export default {
+
+    /**
+     * ## 「解析」`Ex.parserOfButton`
+     *
+     * 生成按钮专用解析器，返回对象结构如（每个键都是函数）：
+     *
+     * ```js
+     * {
+     *     parsePlugin: () => "按钮插件解析函数",
+     *     parseComponent: () => "组件解析函数",
+     *     parseControl: () => "按钮本身解析函数，解析不同组件专用，LIST, FORM 不同"
+     * }
+     * ```
+     *
+     * @memberOf module:_kernel
+     * @method parserOfButton
+     * @param {ReactComponent} reference React对应组件引用
+     * @returns {Object}
+     */
+    parserOfButton: (reference) => ({
+        parsePlugin: (buttons = {}, options = {}, async = true) => toAsync(parsePlugin(buttons, options), async),
+        parseComponent: (buttons = {}, options = {}, component = {}, async = true) => toAsync(parseComponent(buttons, options, component), async),
+        parseControl: (config = [], options = {}, async = true) => toAsync(parseControl(config, options), async),
+        /* 异步解析 */
+        parseOp: (config = [], options = {}) => parseOp(config, options, reference)
+    }),
+
+
+    /**
+     * ## 「解析」`Ex.parserOfColor`
+     *
+     * 生产日志器专用解析器，返回不同日志器记录日志（每个键都是函数）：
+     *
+     * ```js
+     * {
+     *     private: () => "私有组件",
+     *     form: () => "表单组件",
+     *     list: () => "列表专用",
+     *     action: () => "操作组件",
+     *     tpl: () => "模板",
+     *     component: () => "通用组件",
+     *     container: () => "容器组件",
+     *     page: () => "页面组件",
+     *     type: () => "分类处理",
+     *     control: () => "控件",
+     *     dynamic: () => "动态组件",
+     *     view: () => "视图组件",
+     *     define: () => "定义组件"
+     * }
+     * ```
+     *
+     * @memberOf module:_kernel
+     * @method parserOfColor
+     * @param {String} name 组件名称
+     * @returns {Object}
+     * */
+    parserOfColor: (name = "") => ({
+        private: (state = {}) => ({name, color: "#CD9B1D", ...state}), // 私有组件
+        // extension 部分
+        form: (state = {}) => ({name, color: "#6959CD", ...state}),    // 表单
+        list: (state = {}) => ({name, color: "#104E8B", ...state}),    // 列表
+        action: (state = {}) => ({name, color: "#009ACD", ...state}),  // 操作（按钮类）
+        tpl: (state = {}) => ({name, color: "#93c", ...state}),     // 模板
+        component: (state = {}) => ({name, color: "#228B22", ...state}),     // 公有组件
+        // 非 extension 部分
+        container: (state = {}) => ({name, color: "#1C86EE", ...state}),    // 容器
+        page: (state = {}) => ({name, color: "#1874CD", ...state}),         // 页面
+        type: (state = {}) => ({name, color: "#4F94CD", ...state}),
+        control: (state = {}) => ({name, color: "#2E8B57", ...state}),          // 自定义组件
+        dynamic: (state = {}) => ({name, color: "#8B6914", ...state}),          // 动态
+        view: (state = {}) => ({name, color: "#CDAD00", ...state}),          // 动态
+        define: (state = {}) => ({name, color: "#7CCD7C", ...state}),               // 用户自定义
+    })
+}
