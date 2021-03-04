@@ -370,7 +370,15 @@ export default {
      *
      * ### 2. 子函数解析
      *
-     * #### 2.1. parsePlugin
+     * #### 2.1. parsePlugin（解析Object）
+     *
+     * **入参表**
+     *
+     * |参数名|类型|含义|
+     * |:---|---|:---|
+     * |buttons|Object|全按钮配置，`key = Object`结构。|
+     * |options|Object|列表/组件的专用配置`options`结构。|
+     * |async|Boolean|是否执行异步模式。|
      *
      * 插件解析主要处理`Object`的按钮专用，处理每个元素（Object类型）的配置信息，它用来处理按钮的某些功能。
      * button元素中有关此函数的数据结构如下：
@@ -387,7 +395,7 @@ export default {
      * }
      * ```
      *
-     * 上述配置含义如：
+     * **配置项**
      *
      * |配置项|类型|表达式|含义|
      * |:---|---|:---|:---|
@@ -397,9 +405,95 @@ export default {
      * |connect|String|options[connect]|配置被链接的操作元素ID，最终会调用`Ux.connectId`触发该元素的onClick事件。|
      * |message|String|options[message]|需要使用的文本信息。|
      *
-     * #### 2.2. parseComponent
+     * #### 2.2. parseComponent（解析Object）
      *
+     * **入参表**
      *
+     * |参数名|类型|含义|
+     * |:---|---|:---|
+     * |buttons|Object|全按钮配置，`key = Object`结构。|
+     * |options|Object|列表/组件的专用配置`options`结构。|
+     * |component|Object|动态组件配置信息。|
+     * |async|Boolean|是否执行异步模式。|
+     *
+     * 组件解析主要处理`Object`中按钮配置专用，`component`（第三参）中的结构如：
+     *
+     * ```js
+     * {
+     *     plugin: "Jsx元素集合，里面包含了所有可读取的组件信息。",
+     *     config: "Jsx元素所需的配置数据。"
+     * }
+     *
+     * // 抽取配置代码如下
+     * const Jsx = components.plugin;
+     * const config = components.config;
+     * ```
+     *
+     * > 只有`plugin`和`config`有值或存在时才执行解析流程！！
+     *
+     * 按钮配置中会存在如下数据结构：
+     *
+     * ```js
+     * {
+     *     plugin: {
+     *         componentType: "",
+     *         component: ""
+     *     }
+     * }
+     * ```
+     *
+     * **配置项**
+     *
+     * |配置项|类型|表达式|含义|
+     * |:---|---|:---|:---|
+     * |componentType|String|Jsx[componentType]|用于读取Jsx元素|
+     * |component|String|config|component]|用于读取配置数据|
+     *
+     * 注入完成了组件的Jsx元素和配置数据过后，就会调用`_parseContainer`方法执行外层容器元素信息，容器元素
+     * 主要由按钮元素的plugin决定：
+     *
+     * ```js
+     * {
+     *     plugin:{
+     *         window: "弹出窗口",
+     *         popover: "浮游窗口",
+     *         drawer: "抽屉窗口"
+     *     }
+     * }
+     * ```
+     *
+     * 构造的配置数据结构如下：
+     *
+     * ```js
+     * {
+     *     type: "窗口类型",
+     *     dialog: "解析的窗口配置"
+     * }
+     * ```
+     *
+     * 完整配置表格如下：
+     *
+     * |待解析节点|生成type|调用函数生成dialog|
+     * |:---|---|:---|
+     * |window|WINDOW|Ux.aiExprWindow|
+     * |popover|POPOVER|Ux.aiExprPopover|
+     * |drawer|DRAWER|Ux.aiExprDrawer|
+     * |三者都无|NONE|`<无dialog节点>`|
+     *
+     * 该函数最终生成的完整配置表如下：
+     *
+     * ```js
+     * {
+     *     component: "Jsx元素"，
+     *     config: "组件配置数据",
+     *     type: "「容器」窗口类型",
+     *     dialog: "「容器」窗口配置"
+     * }
+     * ```
+     *
+     * #### 2.3. parseControl（解析Array）
+     *
+     * **入参表**
      *
      * @memberOf module:_kernel
      * @method parserOfButton

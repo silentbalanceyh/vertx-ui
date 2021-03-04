@@ -3608,7 +3608,34 @@ const $opAdd = (reference) => params => Ex.form(reference).add(params, {
 </tbody>
 </table>
 <h3>2. 子函数解析</h3>
-<h4>2.1. parsePlugin</h4>
+<h4>2.1. parsePlugin（解析Object）</h4>
+<p><font style="color:red"><strong>入参表</strong></font></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">buttons</td>
+<td>Object</td>
+<td style="text-align:left">全按钮配置，<code>key = Object</code>结构。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>Object</td>
+<td style="text-align:left">列表/组件的专用配置<code>options</code>结构。</td>
+</tr>
+<tr>
+<td style="text-align:left">async</td>
+<td>Boolean</td>
+<td style="text-align:left">是否执行异步模式。</td>
+</tr>
+</tbody>
+</table>
 <p>插件解析主要处理<code>Object</code>的按钮专用，处理每个元素（Object类型）的配置信息，它用来处理按钮的某些功能。
 button元素中有关此函数的数据结构如下：</p>
 <pre class="prettyprint source lang-js"><code>{
@@ -3621,7 +3648,7 @@ button元素中有关此函数的数据结构如下：</p>
     }
 }
 </code></pre>
-<p>上述配置含义如：</p>
+<p><strong>配置项</strong></p>
 <table>
 <thead>
 <tr>
@@ -3641,29 +3668,166 @@ button元素中有关此函数的数据结构如下：</p>
 <tr>
 <td style="text-align:left">confirm</td>
 <td>String</td>
-<td style="text-align:left"><code>options[confirm]</code></td>
+<td style="text-align:left">options[confirm]</td>
 <td style="text-align:left">执行<code>Modal.confirm</code>功能，弹出提示框确认/取消。</td>
 </tr>
 <tr>
 <td style="text-align:left">prompt</td>
 <td>String</td>
-<td style="text-align:left"><code>options[prompt]</code></td>
+<td style="text-align:left">options[prompt]</td>
 <td style="text-align:left">实现浮游提示确认/取消框。</td>
 </tr>
 <tr>
 <td style="text-align:left">connect</td>
 <td>String</td>
-<td style="text-align:left"><code>options[connect]</code></td>
+<td style="text-align:left">options[connect]</td>
 <td style="text-align:left">配置被链接的操作元素ID，最终会调用<code>Ux.connectId</code>触发该元素的onClick事件。</td>
 </tr>
 <tr>
 <td style="text-align:left">message</td>
 <td>String</td>
-<td style="text-align:left"><code>options[message]</code></td>
+<td style="text-align:left">options[message]</td>
 <td style="text-align:left">需要使用的文本信息。</td>
 </tr>
 </tbody>
 </table>
+<h4>2.2. parseComponent（解析Object）</h4>
+<p><strong>入参表</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">参数名</th>
+<th>类型</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">buttons</td>
+<td>Object</td>
+<td style="text-align:left">全按钮配置，<code>key = Object</code>结构。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>Object</td>
+<td style="text-align:left">列表/组件的专用配置<code>options</code>结构。</td>
+</tr>
+<tr>
+<td style="text-align:left">component</td>
+<td>Object</td>
+<td style="text-align:left">动态组件配置信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">async</td>
+<td>Boolean</td>
+<td style="text-align:left">是否执行异步模式。</td>
+</tr>
+</tbody>
+</table>
+<p>组件解析主要处理<code>Object</code>中按钮配置专用，<code>component</code>（第三参）中的结构如：</p>
+<pre class="prettyprint source lang-js"><code>{
+    plugin: &quot;Jsx元素集合，里面包含了所有可读取的组件信息。&quot;,
+    config: &quot;Jsx元素所需的配置数据。&quot;
+}
+
+// 抽取配置代码如下
+const Jsx = components.plugin;
+const config = components.config;
+</code></pre>
+<blockquote>
+<p>只有<code>plugin</code>和<code>config</code>有值或存在时才执行解析流程！！</p>
+</blockquote>
+<p>按钮配置中会存在如下数据结构：</p>
+<pre class="prettyprint source lang-js"><code>{
+    plugin: {
+        componentType: &quot;&quot;,
+        component: &quot;&quot;
+    }
+}
+</code></pre>
+<p><strong>配置项</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">配置项</th>
+<th>类型</th>
+<th style="text-align:left">表达式</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">componentType</td>
+<td>String</td>
+<td style="text-align:left">Jsx[componentType]</td>
+<td style="text-align:left">用于读取Jsx元素</td>
+</tr>
+<tr>
+<td style="text-align:left">component</td>
+<td>String</td>
+<td style="text-align:left">config</td>
+<td style="text-align:left">component]</td>
+</tr>
+</tbody>
+</table>
+<p>注入完成了组件的Jsx元素和配置数据过后，就会调用<code>_parseContainer</code>方法执行外层容器元素信息，容器元素
+主要由按钮元素的plugin决定：</p>
+<pre class="prettyprint source lang-js"><code>{
+    plugin:{
+        window: &quot;弹出窗口&quot;,
+        popover: &quot;浮游窗口&quot;,
+        drawer: &quot;抽屉窗口&quot;
+    }
+}
+</code></pre>
+<p>构造的配置数据结构如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    type: &quot;窗口类型&quot;,
+    dialog: &quot;解析的窗口配置&quot;
+}
+</code></pre>
+<p>完整配置表格如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">待解析节点</th>
+<th>生成type</th>
+<th style="text-align:left">调用函数生成dialog</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">window</td>
+<td>WINDOW</td>
+<td style="text-align:left">Ux.aiExprWindow</td>
+</tr>
+<tr>
+<td style="text-align:left">popover</td>
+<td>POPOVER</td>
+<td style="text-align:left">Ux.aiExprPopover</td>
+</tr>
+<tr>
+<td style="text-align:left">drawer</td>
+<td>DRAWER</td>
+<td style="text-align:left">Ux.aiExprDrawer</td>
+</tr>
+<tr>
+<td style="text-align:left">三者都无</td>
+<td>NONE</td>
+<td style="text-align:left"><code>&lt;无dialog节点&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>该函数最终生成的完整配置表如下：</p>
+<pre class="prettyprint source lang-js"><code>{
+    component: &quot;Jsx元素&quot;，
+    config: &quot;组件配置数据&quot;,
+    type: &quot;「容器」窗口类型&quot;,
+    dialog: &quot;「容器」窗口配置&quot;
+}
+</code></pre>
+<h4>2.3. parseControl（解析Array）</h4>
+<p><strong>入参表</strong></p>
 </div>
 
 
@@ -5434,7 +5598,7 @@ button元素中有关此函数的数据结构如下：</p>
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 17:58:34 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Thu Mar 04 2021 20:33:35 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
