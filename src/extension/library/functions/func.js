@@ -2,7 +2,6 @@ import Ux from "ux";
 import O from "../op";
 import moment from "moment";
 import B from "./business";
-import U from "underscore";
 
 const groupData = (identifier, up = [], down = []) => {
     up = Ux.clone(up);
@@ -829,7 +828,7 @@ const FUNS = {
 const onOp = (reference, metadata = {}) => {
     const {event = "", config = {}} = metadata;
     const executor = FUNS[event];
-    if (U.isFunction(executor)) {
+    if (Ux.isFunction(executor)) {
         return executor(config);
     } else {
         console.error("[ Ex ] 对不起，事件无法绑定！", event);
