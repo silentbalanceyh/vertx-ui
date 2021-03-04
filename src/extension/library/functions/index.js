@@ -1,9 +1,9 @@
 import global from './global';
-import business from './business';
 import authority from './authority';
 // ------------- 上边是全局处理 -------------
 import E from './error';
 // ------------- 上边是调试专用 -------------
+import business from './business';
 import func from './func';
 import parser from './parser';
 import generator from './generator';
@@ -11,27 +11,6 @@ import control from './control';
 // ------------- X6 -----------------------
 import X6 from './x6';
 
-/**
- * 内部模块
- *
- * 挂载模块
- *
- * @module _on
- */
-/**
- * 内部模块
- *
- * 数据输入输出
- *
- * @module _io
- */
-/**
- * 内部模块
- *
- * 业务专用
- *
- * @module _business
- */
 /**
  * 内部模块
  *
@@ -52,27 +31,6 @@ import X6 from './x6';
  * 配置模块
  *
  * @module _config
- */
-/**
- * 内部模块
- *
- * 更新判断
- *
- * @module _up
- */
-/**
- * 内部模块
- *
- * 转换模块
- *
- * @module _to
- */
-/**
- * 内部模块
- *
- * 转换模块
- *
- * @module _authority
  */
 export default {
     /*

@@ -1,10 +1,231 @@
 import Ux from "ux";
 import O from "../op";
 import moment from "moment";
+import B from "./business";
+import U from "underscore";
 
+const groupData = (identifier, up = [], down = []) => {
+    up = Ux.clone(up);
+    down = Ux.clone(down);
+    const upGroup = Ux.elementGroup(up.filter(item => identifier === item['targetIdentifier']), "sourceIdentifier");
+    const downGroup = Ux.elementGroup(down.filter(item => identifier === item['sourceIdentifier']), "targetIdentifier");
+    const groupData = {};
+    Object.keys(upGroup).forEach(identifier => {
+        if (!groupData[identifier]) {
+            groupData[identifier] = {};
+        }
+        groupData[identifier].up = upGroup[identifier];
+    });
+    Object.keys(downGroup).forEach(identifier => {
+        if (!groupData[identifier]) {
+            groupData[identifier] = {};
+        }
+        groupData[identifier].down = downGroup[identifier];
+    });
+    return groupData;
+};
+const groupDefine = (identifier, up = [], down = [], idMap = []) => {
+    const groupedData = groupData(identifier, up, down);
+    const groupedDefine = {};
+    idMap.forEach(identifier => groupedDefine[identifier] = {up: [], down: []});
+    Object.assign(groupedDefine, groupedData);
+    return groupedDefine;
+};
+
+const findFDefine = (reference, identifier, field = "upstream") => {
+    const {$definition = []} = reference.props;
+    return $definition.filter(item => item[field] === identifier);
+};
+
+const findParent = (identifier, category = []) => {
+    let current = category.filter(item => identifier === item.identifier);
+    if (0 < current.length) {
+        /*
+         * 丢弃后边的，只保留一个
+         */
+        current = current[0];
+        if (current) {
+            const parent = Ux.elementUnique(category, "key", current.parentId);
+            if (parent) {
+                return parent.identifier;
+            }
+        }
+    }
+};
+
+const findFDefinition = (reference, identifier, category = []) => {
+    /*
+     * 1. 判断 $definition 中是否包含了 fromId
+     * upstream = fromId
+     */
+    const found = findFDefine(reference, identifier);
+    if (0 < found.length) {
+        /*
+         * 找到上级
+         */
+        return found;
+    } else {
+        /*
+         * 未找到上级，动用父类
+         */
+        const parentId = findParent(identifier, category);
+        if (parentId) {
+            return findFDefinition(reference, parentId, category);
+        }
+    }
+};
+
+const findTUnique = (fromRet, identifier, categories = []) => {
+    const filtered = fromRet.filter(item => identifier === item['downstream']);
+    if (0 < filtered.length) {
+        const relation = filtered[0];
+        if (relation) {
+            return relation.type;
+        }
+    } else {
+        const parentId = findParent(identifier, categories);
+        if (parentId) {
+            return findTUnique(fromRet, parentId, categories);
+        }
+    }
+};
 // =====================================================
 // on 前缀
 // =====================================================
+
+/**
+ *
+ * ## 扩展函数
+ *
+ * 计算关系的 identifier 专用函数，返回的数据结构如：
+ *
+ * ```json
+ * {
+ *     "up": [],
+ *     "down": []
+ * }
+ * ```
+ *
+ * * up: 上游关系数据。
+ * * down: 下游关系数据。
+ *
+ * @memberOf module:_function
+ * @method onRelationIdentifiers
+ * @param {String} identifier 统一标识符
+ * @param {Array} source 关系数据源
+ * @param {Array} definition 关系定义数据源
+ * @returns {Object} 返回关系数据对象
+ */
+const onRelationIdentifiers = (identifier, source = [], definition = []) => {
+    /*
+     * 读取传入的 identifier 的 category key
+     */
+    const category = source.filter(item => identifier === item.identifier);
+    /*
+     * 读取 category 对应的所有类、父类、根类信息
+     */
+    const keys = Ux.treeParentAllIn(category.map(item => item.key), source, "parentId");
+    /*
+     * [key1, key2, key3] 再次读取所有的 category 对应的 identifier 集合
+     */
+    const $keys = Ux.immutable(keys);
+    const ids = source.filter(item => $keys.contains(item.key)).map(item => item.identifier);
+    /*
+     * 计算 upIds / downIds
+     */
+    const $ids = Ux.immutable(ids);
+    const upIds = definition.filter(item => $ids.contains(item['downstream'])).map(item => item["upstream"]);
+    const downIds = definition.filter(item => $ids.contains(item['upstream'])).map(item => item["downstream"]);
+    /*
+     * 读取 upKeys / downKeys
+     */
+    const $upIds = Ux.immutable(upIds);
+    const $downIds = Ux.immutable(downIds);
+    const upKeys = source.filter(item => $upIds.contains(item.identifier)).map(item => item.key);
+    const downKeys = source.filter(item => $downIds.contains(item.identifier)).map(item => item.key);
+    /*
+     * 读取当前所有keys以及它的子类
+     */
+    const upAllKeys = Ux.treeChildrenAllIn(upKeys, source, "parentId");
+    const downAllKeys = Ux.treeChildrenAllIn(downKeys, source, "parentId");
+
+    const $upAllKeys = Ux.immutable(upAllKeys);
+    const $downAllKeys = Ux.immutable(downAllKeys);
+    /*
+     * 最终计算出来的 identifier
+     */
+    const identifiers = {up: [], down: []};
+    source.filter(item => $upAllKeys.contains(item.key))
+        .filter(item => item.leaf).map(item => item.identifier)
+        .forEach(identifier => identifiers.up.push(identifier));
+    source.filter(item => $downAllKeys.contains(item.key))
+        .filter(item => item.leaf).map(item => item.identifier)
+        .forEach(identifier => identifiers.down.push(identifier));
+    return identifiers;
+};
+/**
+ *
+ * ## 扩展函数
+ *
+ * 计算关系类型专用函数，计算唯一关系信息。
+ *
+ * @memberOf module:_function
+ * @method onRelationType
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} record 当前数据记录
+ * @returns {undefined|Object} 返回唯一关系值
+ */
+const onRelationType = (reference, record = {}) => {
+    /*
+     * 定义
+     */
+    const fromId = record.sourceIdentifier;
+    const toId = record.targetIdentifier;
+    /*
+     * category 读取
+     */
+    const {config = {}} = reference.props;
+    if (config.relation) {
+        const {source} = config.relation;
+        if (source) {
+            const categories = Ux.onDatum(reference, source);
+            if (0 < categories.length) {
+                /*
+                 * 使用 fromId 查找
+                 */
+                const fromRet = findFDefinition(reference, fromId, categories);
+                if (fromRet && 0 < fromRet.length) {
+                    return findTUnique(fromRet, toId, categories);
+                }
+            }
+        }
+    }
+}
+/**
+ * ## 扩展函数
+ *
+ * 计算关系专用函数。
+ *
+ * @memberOf module:_function
+ * @param {Object} current 当前节点的关系处理
+ * @param {Object} config 上下游专用配置处理
+ * @param {Object} $defineMap 定义的关系关联数据
+ * @returns {Object} 分组过后的关系信息
+ */
+const onRelation = (current = {}, config = {}, $defineMap) => {
+    const {up = [], down = []} = config;
+    if ($defineMap) {
+        /*
+         * 定义分组
+         */
+        return groupDefine(current.identifier, up, down, $defineMap);
+    } else {
+        /*
+         * 数据分组
+         */
+        return groupData(current.identifier, up, down);
+    }
+};
 /**
  * ## 扩展函数
  *
@@ -582,6 +803,38 @@ const toArray = (data) => {
         }
     }
 };
+/*
+ * 注意这里全部要使用三阶函数
+ */
+const FUNS = {
+    "event.filter": () => reference => params =>
+        B.form(reference).filter(params),
+    "event.add": (config = {}) => reference => params =>
+        B.form(reference).add(params, config),
+    "event.save": (config = {}) => reference => params =>
+        B.form(reference).save(params, config),
+    "event.delete": (config = {}) => reference => params =>
+        B.form(reference).remove(params, config)
+};
+/**
+ * ## 扩展函数
+ *
+ * 生成操作类专用函数执行器执行绑定。
+ *
+ * @memberOf module:_function
+ * @param {ReactComponent} reference React对应组件引用
+ * @param {Object} metadata 元数据配置信息
+ * @returns {Function} 返回事件函数
+ */
+const onOp = (reference, metadata = {}) => {
+    const {event = "", config = {}} = metadata;
+    const executor = FUNS[event];
+    if (U.isFunction(executor)) {
+        return executor(config);
+    } else {
+        console.error("[ Ex ] 对不起，事件无法绑定！", event);
+    }
+};
 export default {
     // to 处理
     toArray,
@@ -606,4 +859,8 @@ export default {
     // on 前缀
     onApp,
     onTree,
+    onRelation,
+    onRelationIdentifiers,
+    onRelationType,
+    onOp,
 }

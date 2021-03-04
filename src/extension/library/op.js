@@ -99,7 +99,7 @@ const $opLogin = (reference) => (params) => I.login(params)
  * |$opLogin|OAuth登录专用Promise。|
  * |$opLogout|OAuth注销专用Promise。|
  *
- * @module Op
+ * @class Op
  */
 export default {
     $opLogin,

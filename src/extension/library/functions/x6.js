@@ -141,6 +141,10 @@ const onReset = (reference, dataDefault = {}) => (request, gEvent) => {
         graph.fromJSON(dataDefault);
     })
 }
+/**
+ *
+ * @class X6
+ */
 export default {
     // 窗口关闭专用函数
     onWindowClose,

@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Global - Zero Extension框架专用前端文档</title>
+    <title>Op - Zero Extension框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -41,7 +41,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">Op</h1>
     
 
     
@@ -54,7 +54,7 @@
 <header>
     
         <h2>
-        
+        Op
         </h2>
         
     
@@ -65,6 +65,15 @@
         <div class="container-overview">
         
             
+
+    
+
+    <h4 class="name" id="Op"><span class="type-signature"></span>new Op<span class="signature">()</span><span class="type-signature"></span></h4>
+
+    
+
+
+
 
 <dl class="details">
 
@@ -104,9 +113,58 @@
 
 
 
-            
 
-            
+<div class="description usertext">
+    <h1>业务操作对象</h1>
+<p>带各种业务操作的专用模块，该模块内的函数全部使用Zero Ui基础规范<code>$op</code>前缀的Promise函数。</p>
+<h2>操作列表</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">$opLogin</td>
+<td style="text-align:left">OAuth登录专用Promise。</td>
+</tr>
+<tr>
+<td style="text-align:left">$opLogout</td>
+<td style="text-align:left">OAuth注销专用Promise。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         
         </div>
     
@@ -125,425 +183,6 @@
 
     
 
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="@ox"><span class="type-signature"></span>@ox<span class="signature">(options)</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>Origin X注解</h2>
-<p>使用方法：</p>
-<pre class="prettyprint source lang-js"><code>import Ex from 'ex';
-
-&#64;Ex.ox() -- 注释掉的调用方法，由于包含 @ 符号不可解析
-class Component extends React.Component{
-
-}
-</code></pre>
-<p>该注解用于高阶组件，使用Hoc方式对定义的React组件执行注解操作，采用ES7中的修饰语法</p>
-<h3>参数</h3>
-<p><code>options</code>中目前包括两个核心值：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">值</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Page</td>
-<td style="text-align:left">页面动态渲染。</td>
-</tr>
-<tr>
-<td style="text-align:left">Control</td>
-<td style="text-align:left">控件动态渲染。</td>
-</tr>
-</tbody>
-</table>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>配置项信息</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="authGroups"><span class="type-signature"></span>authGroups<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>扩展函数</h2>
-<ol>
-<li>根据传入的 treeData 提取 resource.tree 构造分类</li>
-<li>读取远程的权限组，权限组挂在分类下边</li>
-</ol>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="authTreeRes"><span class="type-signature"></span>authTreeRes<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <h2>扩展函数</h2>
-<ol>
-<li>直接读取 resource.tree 中的内容</li>
-<li>遇到 ID:XXX 需要执行判断，进行深度树的二次读取</li>
-<li>最终构造完成的树形数组（parentId一致）</li>
-</ol>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    <h4 class="name" id="rxWinOpen"><span class="type-signature"></span>rxWinOpen<span class="signature">()</span><span class="type-signature"></span></h4>
-
-    
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-<div class="description usertext">
-    <p>打开窗口</p>
-</div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     
