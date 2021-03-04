@@ -1,5 +1,4 @@
 import Ux from "ux";
-import Is from "./graphic/g.x6.is";
 /*
  * 判断自我关系的合法性
  * 1）如果是自引用只可当前节点
@@ -119,13 +118,13 @@ const onEdgeConnectedBefore = (reference, managed = {}) => (edge = {}, gEvent) =
         return false;
     }
     // 2. 验证环形，edge 的 source 和 target 相等时需要比较 reference
-    const loop = Is.isLoopOk(edge, managed);
+    const loop = isLoopOk(edge, managed);
     if (loop) {
         Ux.sexMessage(reference, 'loop', 2);
         return false;
     }
     // 3. 验证其他关系
-    const unmanaged = Is.isUnmanaged(edge, managed);
+    const unmanaged = isUnmanaged(edge, managed);
     if (unmanaged) {
         Ux.sexMessage(reference, 'unmanaged', 2);
         return false;

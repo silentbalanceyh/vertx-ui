@@ -2,6 +2,7 @@ import Chn from './channel';
 import Ux from "ux";
 import Event from "./event";
 import Fn from "./functions";
+import {HocI18r} from 'entity';
 
 const hocPage = async (reference) => {
     /*
