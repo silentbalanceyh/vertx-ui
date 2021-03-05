@@ -498,13 +498,27 @@ const _parseAuthorized = (action = {}, reference) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.mapFn`
+ *
+ * ### 1.基本介绍
  *
  * 判断哪些函数需要继承：
  *
  * * `rx`前缀函数
  * * `fn`前缀函数
  * * `do`前缀函数
+ *
+ * ### 2.函数规范
+ *
+ * 函数名过滤专用函数，Zero Ui中定义了组件函数的基础规范如下：
+ *
+ * |函数前缀|含义|
+ * |---|:--|
+ * |rx|触发型继承函数，对上层组件而言通常是「2阶」，可生成下层调用的「1阶」函数，父子通讯的专用函数。|
+ * |fn|普通函数，自由设计。|
+ * |on|事件函数，通常提供给HTML元素或Ant的元素专用事件。|
+ * |do|状态标记专用函数，如doDirty, doSubmitting, doLoading等。|
+ * |ix|内部专用函数，不开放。|
  *
  * @memberOf module:_function
  * @param {String} fnName 函数名称
@@ -516,11 +530,19 @@ const mapFun = (fnName) => "string" === typeof fnName && (
     fnName.startsWith('do')  // 状态函数
 );
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.mapButtons`
  *
- * 按钮专用处理，用于处理：`optionJsx.extension` 配置的专用扩展函数。
+ * ### 1.基本说明
+ *
+ * 按钮专用处理，用于处理：`optionJsx.extension` 配置的专用扩展函数，该函数执行两个步骤：
+ *
+ * 1. `_parseAction`解析标准按钮元素String或Object。
+ * 2. `_parseAuthorized`解析按钮中的基础权限，配合props中的`$action`进行计算，执行ACL控制。
+ *
+ * > 该函数是一个旧函数，目前没有地方在使用它，但暂时保留。
  *
  * @memberOf module:_function
+ * @deprecated
  * @method mapButtons
  * @param {Array} extension 扩展按钮配置
  * @param {ReactComponent} reference React对应组件引用
@@ -569,12 +591,23 @@ const mapUri = (item = {}, $app) => {
     return item;
 };
 /**
- * ## 扩展配置
+ * ## 「标准」`Ex.mapAsyncDatum`
+ *
+ * ### 1.基本介绍
  *
  * 处理 ASSIST 专用配置数据：
  *
  * * DATUM：`$render`专用处理。
  * * DATE：`$render`专用处理。
+ *
+ * 特定原则下的表单渲染专用，主要用于渲染历史记录数据，出现了非表格类型的二维数据渲染。
+ *
+ * ### 2.特定场景
+ *
+ *目前这个方法只在`OxHistory`组件中使用，主要是收集所有的字典和时间格式信息，生成最终的哈希表，这个哈希表用于填充数据，
+ *通常表格中的字典数据是直接渲染，而`OxHistory`是新旧值的纵向比对，所以这种情况下，直接使用DATUM渲染会不生效，而且在
+ *渲染过程中，保存的值可能不是主键，而是其他值，所以提供这种配置来完成逆向操作，这种特殊场景有可能会在后期还会用到，于是
+ *提供特定方法`mapAsyncDatum`来实现其渲染功能。
  *
  * @memberOf module:_function
  * @param {Array} columns 基本类配置信息
