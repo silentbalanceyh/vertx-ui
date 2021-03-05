@@ -4731,8 +4731,7 @@ addon.form
 <div class="description usertext">
     <h2>「通道」<code>Ex.yoFormAdd</code></h2>
 <blockquote>
-<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。
-当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
 </blockquote>
 <h3>1. 基本介绍</h3>
 <p>该方法近似于<code>yoList</code>，但该属性集是传递给表单，附带了表单属性集。</p>
@@ -4948,7 +4947,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoFormEdit"><span class="type-signature">(static) </span>yoFormEdit<span class="signature">(reference, item)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoFormEdit"><span class="type-signature">(static) </span>yoFormEdit<span class="signature">(reference, item)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -4997,8 +4996,7 @@ addon.form
 <div class="description usertext">
     <h2>「通道」<code>Ex.yoFormEdit</code></h2>
 <blockquote>
-<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。
-当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
 </blockquote>
 <h3>1. 基本介绍</h3>
 <p>该方法近似于<code>yoList</code>，但该属性集是传递给表单，附带了表单属性集。</p>
@@ -5141,13 +5139,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -5159,13 +5162,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>当前打开以前配置，页签<code>key</code>就是记录主键。</p></td>
         </tr>
 
     
@@ -5190,6 +5198,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>传入编辑子表单的属性集</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -5198,7 +5210,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -5512,7 +5524,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoListBatch"><span class="type-signature">(static) </span>yoListBatch<span class="signature">(reference)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoListBatch"><span class="type-signature">(static) </span>yoListBatch<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -5558,6 +5570,104 @@ addon.form
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoListBatch</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<p>统一处理Batch区域按钮操作，所有的<code>ExListXxx</code>组件共享，主要包含：基础配置：<code>op.batch</code> + 扩展配置：+ <code>op.extension</code>，其中 op.extension 中的配置如：</p>
+<pre class="prettyprint source"><code>{
+    region: &quot;op.batch.xxx&quot;
+}
+</code></pre>
+<h3>2. 构造属性表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">源属性名</th>
+<th>源</th>
+<th>类型</th>
+<th style="text-align:left">目标属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"></td>
+<td></td>
+<td>String</td>
+<td style="text-align:left">$category</td>
+<td style="text-align:left">固定值，按钮类型，<code>LINK | BUTTON</code>两种，此处为<code>LINK</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doSubmitting</td>
+<td style="text-align:left">表单防重复加载设置提交状态专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doDirty</td>
+<td style="text-align:left">设置当前列表的<code>$dirty = true</code>，通常在配置中才使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxBatchEdit</td>
+<td style="text-align:left">批量编辑所需的外层函数，设置选中状态专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$columns</td>
+<td>state</td>
+<td>Array</td>
+<td style="text-align:left">（内嵌）</td>
+<td style="text-align:left">「动态」批量编辑<code>op.batch.edit</code>专用配置，编辑表单读取属性用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$columnsMy</td>
+<td>state</td>
+<td>Array</td>
+<td style="text-align:left">（内嵌）</td>
+<td style="text-align:left">「动态」批量编辑<code>op.batch.edit</code>专用配置，编辑表单读取属性配置用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$selected</td>
+<td>state</td>
+<td>Array</td>
+<td style="text-align:left">$selected</td>
+<td style="text-align:left">已选中的项数据列表。</td>
+</tr>
+<tr>
+<td style="text-align:left">$submitting</td>
+<td>state</td>
+<td>Boolean</td>
+<td style="text-align:left">$submitting</td>
+<td style="text-align:left">防重复提交的基础提交状态。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Array</td>
+<td style="text-align:left">config</td>
+<td style="text-align:left">按钮专用配置构造函数，构造两部分：基础 + 扩展，包括选择未选中的状态计算。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 核心</h3>
+<h4>3.1. 关于选中</h4>
+<p>批量操作启用时，<code>&lt;Table/&gt;</code>中会根据批量操作种类设置多选框，一旦有一个操作合法则会提供多选框，
+多选框操作变量为<code>$selected</code>，它为批量操作提供了数据选中依据，为了防止用户选错，当任何选项都未选中时，
+批量操作会被禁用。</p>
+<h4>3.2. 关于编辑</h4>
+<p>批量编辑是Zero Ui提供的固定功能，<code>op.batch.edit</code>，该功能会根据当前记录的列信息和视图信息（<code>columnFull/columnMy</code>）来计算
+最终可编辑的属性表，属性信息支持不同种类，其控件内容也不同。</p>
+</div>
+
 
 
 
@@ -5598,13 +5708,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -5629,6 +5744,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>button.config中保存了所有按钮信息</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -5637,7 +5756,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -5652,7 +5771,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoListExtra"><span class="type-signature">(static) </span>yoListExtra<span class="signature">(reference)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoListExtra"><span class="type-signature">(static) </span>yoListExtra<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -5698,6 +5817,143 @@ addon.form
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoListExtra</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<p>统一处理Extra区域按钮操作，所有的<code>ExListXxx</code>组件共享，主要包含：基础配置：<code>op.extra</code> + 扩展配置：+ <code>op.extension</code>，其中 op.extension 中的配置如：</p>
+<pre class="prettyprint source"><code>{
+    region: &quot;op.extra.xxx&quot;
+}
+</code></pre>
+<blockquote>
+<p>关于 <code>$columns/$columnsMy</code> 的注入，这个区域也会需要，但由于数据结构不同，而一直没有出问题，这部分暂时不执行代码合并。重复代码部分如：</p>
+</blockquote>
+<pre class="prettyprint source lang-js"><code>     editorRef.config.forEach((config = {}) => {
+
+         const {component = {}} = config;
+         const editorRef = component.config;
+
+         editorRef.$columns = $columns;
+         editorRef.$columnsMy = $columnsMy;
+     });
+</code></pre>
+<h3>2. 构造属性表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">源属性名</th>
+<th>源</th>
+<th>类型</th>
+<th style="text-align:left">目标属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doSubmitting</td>
+<td style="text-align:left">表单防重复加载设置提交状态专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doDirty</td>
+<td style="text-align:left">设置当前列表的<code>$dirty = true</code>，通常在配置中才使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxColumnSave</td>
+<td style="text-align:left">保存我的视图专用方法，可创建我的<code>列视图</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxExport</td>
+<td style="text-align:left">导出数据按钮专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxImport</td>
+<td style="text-align:left">导入数据专用按钮。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxProjection</td>
+<td style="text-align:left">设置<code>projection</code>列视图专用方法，选择了列视图过后，可设置当前列表显示那些列信息。</td>
+</tr>
+<tr>
+<td style="text-align:left">$columns</td>
+<td>state</td>
+<td>Array</td>
+<td style="text-align:left">（内嵌）</td>
+<td style="text-align:left">我的视图列。</td>
+</tr>
+<tr>
+<td style="text-align:left">$columnsMy</td>
+<td>state</td>
+<td>Array</td>
+<td style="text-align:left">（内嵌）</td>
+<td style="text-align:left">模型全列。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 核心</h3>
+<h4>3.1. 关于列视图</h4>
+<p>列视图在构造过程中层次如下：</p>
+<pre class="prettyprint source"><code>|-------------------------------------------- 全列 |
+|--------------------------------------     业务列 |
+|------------------------------ ACL控制      可见列 |
+|------------------------ 保存               视图列 |
+</code></pre>
+<p>最终关系：</p>
+<ol>
+<li>全列 = 系统列（不可见） + 业务列（可见）</li>
+<li>业务列 = ACL可见（$columns） + ACL不可见（权限控制列）</li>
+<li>ACL可见列 = 我的视图列（$columnsMy） + 视图未选中列</li>
+</ol>
+<h4>3.2. 三个基础函数</h4>
+<p>该函数会构造三个核心函数，对应三个系统按钮</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">按钮代码</th>
+<th style="text-align:left">函数</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">op.extra.column</td>
+<td style="text-align:left">rxProjection</td>
+<td style="text-align:left">设置选中列，未保存之前刷新后失效，如果保存了下一次生效。</td>
+</tr>
+<tr>
+<td style="text-align:left">op.extra.export</td>
+<td style="text-align:left">rxExport</td>
+<td style="text-align:left">导出数据专用按钮。</td>
+</tr>
+<tr>
+<td style="text-align:left">op.extra.import</td>
+<td style="text-align:left">rxImport</td>
+<td style="text-align:left">导入数据专用按钮。</td>
+</tr>
+</tbody>
+</table>
+</div>
+
 
 
 
@@ -5738,13 +5994,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -5769,6 +6030,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>button.config中保存了所有按钮信息</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -5777,7 +6042,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -5792,7 +6057,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoListOpen"><span class="type-signature">(static) </span>yoListOpen<span class="signature">(reference)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoListOpen"><span class="type-signature">(static) </span>yoListOpen<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -5838,6 +6103,24 @@ addon.form
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoListOpen</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<p>统一处理Open区域按钮操作，所有的<code>ExListXxx</code>组件共享，主要包含：基础配置：<code>op.open</code> + 扩展配置：+ <code>op.extension</code>，其中 op.extension 中的配置如：</p>
+<pre class="prettyprint source"><code>{
+    region: &quot;op.open.xxx&quot;
+}
+</code></pre>
+<h3>2. 构造属性表</h3>
+<p>（无）</p>
+<h3>3. 核心</h3>
+<h4>3.1. 清除</h4>
+<p>针对<code>op.open.filter</code>执行查询条件清除按钮的禁用和启用提示，如果执行了列过滤，则启用该按钮，如果未执行，则不启用该按钮，根据<code>$condition</code>来。</p>
+</div>
+
 
 
 
@@ -5878,13 +6161,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -5909,6 +6197,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>button.config中保存了所有按钮信息</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -5917,7 +6209,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -5932,7 +6224,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoListSearch"><span class="type-signature">(static) </span>yoListSearch<span class="signature">(reference)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoListSearch"><span class="type-signature">(static) </span>yoListSearch<span class="signature">(reference)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -5978,6 +6270,19 @@ addon.form
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoListSearch</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集，当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<blockquote>
+<p>*: 这个函数和其他<code>yoList</code>有一定区别，主要在属性构造上。</p>
+</blockquote>
+<p>基础搜索/高级搜索工具栏专用，基本逻辑类似于<code>yoFormAdd/yoFormEdit</code>，提供给查询表单用的属性集。</p>
+<h3>2. 构造属性表</h3>
+</div>
+
 
 
 
@@ -6018,13 +6323,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -6049,6 +6359,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>工具栏消费专用的属性集。</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -6057,7 +6371,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -7769,7 +8083,7 @@ addon.form
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Mar 05 2021 11:54:57 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Mar 05 2021 12:26:20 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

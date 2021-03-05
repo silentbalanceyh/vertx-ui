@@ -1691,8 +1691,7 @@ const yoTabExtra = (reference, tabs = {}) => {
 /**
  * ## 「通道」`Ex.yoFormAdd`
  *
- * > 优先读取`Ex.yoAmbient`构造继承属性集。
- * > 当前版本提供给`ExListXxx`组件内部专用。
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
  *
  * ### 1. 基本介绍
  *
@@ -1782,8 +1781,7 @@ const yoFormAdd = (reference, item = {}) => {
 /**
  * ## 「通道」`Ex.yoFormEdit`
  *
- * > 优先读取`Ex.yoAmbient`构造继承属性集。
- * > 当前版本提供给`ExListXxx`组件内部专用。
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
  *
  * ### 1. 基本介绍
  *
@@ -1823,9 +1821,9 @@ const yoFormAdd = (reference, item = {}) => {
  * > 编辑/删除两种操作在列表和表单中维持一致性。
  *
  * @memberOf module:_channel
- * @param reference
- * @param item
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object} item 当前打开以前配置，页签`key`就是记录主键。
+ * @returns {Object} 传入编辑子表单的属性集
  */
 const yoFormEdit = (reference, item = {}) => {
     const formAttrs = yoAmbient(reference);
@@ -1884,10 +1882,21 @@ const yoFormEdit = (reference, item = {}) => {
 }
 
 /**
+ * ## 「通道」`Ex.yoListSearch`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * > *: 这个函数和其他`yoList`有一定区别，主要在属性构造上。
+ *
+ * 基础搜索/高级搜索工具栏专用，基本逻辑类似于`yoFormAdd/yoFormEdit`，提供给查询表单用的属性集。
+ *
+ * ### 2. 构造属性表
  *
  * @memberOf module:_channel
- * @param reference
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @returns {Object} 工具栏消费专用的属性集。
  */
 const yoListSearch = (reference) => {
     const attrs = yoDynamic(reference);
@@ -1934,10 +1943,33 @@ const yoListSearch = (reference) => {
     return attrs;
 }
 /**
+ * ## 「通道」`Ex.yoListOpen`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 统一处理Open区域按钮操作，所有的`ExListXxx`组件共享，主要包含：基础配置：`op.open` + 扩展配置：+ `op.extension`，其中 op.extension 中的配置如：
+ *
+ * ```
+ * {
+ *     region: "op.open.xxx"
+ * }
+ * ```
+ *
+ * ### 2. 构造属性表
+ *
+ * （无）
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 清除
+ *
+ * 针对`op.open.filter`执行查询条件清除按钮的禁用和启用提示，如果执行了列过滤，则启用该按钮，如果未执行，则不启用该按钮，根据`$condition`来。
  *
  * @memberOf module:_channel
- * @param reference
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListOpen = (reference) => {
     const attrs = yoAction(reference, "op.open", Order);
@@ -1970,19 +2002,55 @@ const yoListOpen = (reference) => {
             }
         }
     }
-    /*
-     * 挂载 extension 部分
-     */
-    // const extension = yoExtension(reference, "op.open");
-    // attrs.config = [].concat(extension).concat(attrs.config);
     attrs.config = yoExtension(reference, "op.open", attrs.config);
     return attrs;
 }
 /**
+ * ## 「通道」`Ex.yoListBatch`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 统一处理Batch区域按钮操作，所有的`ExListXxx`组件共享，主要包含：基础配置：`op.batch` + 扩展配置：+ `op.extension`，其中 op.extension 中的配置如：
+ *
+ * ```
+ * {
+ *     region: "op.batch.xxx"
+ * }
+ * ```
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |||String|$category|固定值，按钮类型，`LINK | BUTTON`两种，此处为`LINK`。|
+ * |构造||Function|doSubmitting|表单防重复加载设置提交状态专用方法。|
+ * |构造||Function|doDirty|设置当前列表的`$dirty = true`，通常在配置中才使用。|
+ * |构造||Function|rxBatchEdit|批量编辑所需的外层函数，设置选中状态专用。|
+ * |$columns|state|Array|（内嵌）|「动态」批量编辑`op.batch.edit`专用配置，编辑表单读取属性用。|
+ * |$columnsMy|state|Array|（内嵌）|「动态」批量编辑`op.batch.edit`专用配置，编辑表单读取属性配置用。|
+ * |$selected|state|Array|$selected|已选中的项数据列表。|
+ * |$submitting|state|Boolean|$submitting|防重复提交的基础提交状态。|
+ * |构造||Array|config|按钮专用配置构造函数，构造两部分：基础 + 扩展，包括选择未选中的状态计算。|
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 关于选中
+ *
+ * 批量操作启用时，`<Table/>`中会根据批量操作种类设置多选框，一旦有一个操作合法则会提供多选框，
+ * 多选框操作变量为`$selected`，它为批量操作提供了数据选中依据，为了防止用户选错，当任何选项都未选中时，
+ * 批量操作会被禁用。
+ *
+ * #### 3.2. 关于编辑
+ *
+ * 批量编辑是Zero Ui提供的固定功能，`op.batch.edit`，该功能会根据当前记录的列信息和视图信息（`columnFull/columnMy`）来计算
+ * 最终可编辑的属性表，属性信息支持不同种类，其控件内容也不同。
+ *
  *
  * @memberOf module:_channel
- * @param reference
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListBatch = (reference) => {
     let batch = yoAction(reference, 'op.batch', Order);
@@ -2021,10 +2089,79 @@ const yoListBatch = (reference) => {
     return Ux.sorterObject(batch);
 }
 /**
+ * ## 「通道」`Ex.yoListExtra`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 统一处理Extra区域按钮操作，所有的`ExListXxx`组件共享，主要包含：基础配置：`op.extra` + 扩展配置：+ `op.extension`，其中 op.extension 中的配置如：
+ *
+ * ```
+ * {
+ *     region: "op.extra.xxx"
+ * }
+ * ```
+ *
+ * > 关于 `$columns/$columnsMy` 的注入，这个区域也会需要，但由于数据结构不同，而一直没有出问题，这部分暂时不执行代码合并。重复代码部分如：
+ *
+ * ```js
+ *      editorRef.config.forEach((config = {}) => {
+ *
+ *          const {component = {}} = config;
+ *          const editorRef = component.config;
+ *
+ *          editorRef.$columns = $columns;
+ *          editorRef.$columnsMy = $columnsMy;
+ *      });
+ * ```
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |构造||Function|doSubmitting|表单防重复加载设置提交状态专用方法。|
+ * |构造||Function|doDirty|设置当前列表的`$dirty = true`，通常在配置中才使用。|
+ * |构造||Function|rxColumnSave|保存我的视图专用方法，可创建我的`列视图`。|
+ * |构造||Function|rxExport|导出数据按钮专用。|
+ * |构造||Function|rxImport|导入数据专用按钮。|
+ * |构造||Function|rxProjection|设置`projection`列视图专用方法，选择了列视图过后，可设置当前列表显示那些列信息。|
+ * |$columns|state|Array|（内嵌）|我的视图列。|
+ * |$columnsMy|state|Array|（内嵌）|模型全列。|
+ *
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 关于列视图
+ *
+ * 列视图在构造过程中层次如下：
+ *
+ * ```
+ * |-------------------------------------------- 全列 |
+ * |--------------------------------------     业务列 |
+ * |------------------------------ ACL控制      可见列 |
+ * |------------------------ 保存               视图列 |
+ * ```
+ *
+ * 最终关系：
+ *
+ * 1. 全列 = 系统列（不可见） + 业务列（可见）
+ * 2. 业务列 = ACL可见（$columns） + ACL不可见（权限控制列）
+ * 3. ACL可见列 = 我的视图列（$columnsMy） + 视图未选中列
+ *
+ * #### 3.2. 三个基础函数
+ *
+ * 该函数会构造三个核心函数，对应三个系统按钮
+ *
+ * |按钮代码|函数|含义|
+ * |:---|:---|:---|
+ * |op.extra.column|rxProjection|设置选中列，未保存之前刷新后失效，如果保存了下一次生效。|
+ * |op.extra.export|rxExport|导出数据专用按钮。|
+ * |op.extra.import|rxImport|导入数据专用按钮。|*
  *
  * @memberOf module:_channel
- * @param reference
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListExtra = (reference) => {
     const editorRef = yoAction(reference, "op.extra", Order);
