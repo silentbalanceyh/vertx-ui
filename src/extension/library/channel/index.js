@@ -45,7 +45,7 @@ import Yo from './yo';
  * |yoListSearch|「ExListXxx」Search区域基础搜索和高级搜索工具栏属性继承函数。|
  * |yoRender|组件专用检查是否加载完成的函数，`$ready`标记检查。|
  * |yoTabExtra|`<Tabs/>`中附加区域属性继承函数，通常在添加表单/编辑表单页签。|
- * |yoTable|`<Table/>`表格组件专用属性继承函数。|
+ * |yoTable|`<Table/>`表格组件专用属性继承函数，ExListXxx共享。|
  * |yoTabPage|`<Tabs.Pane/>`页签中每一页的属性继承函数。|
  * |yuCondition|`$condition`查询条件更新检查函数。|
  * |yuDirty|`$dirty`组件脏状态更新检查函数。|
