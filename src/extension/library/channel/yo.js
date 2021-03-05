@@ -758,15 +758,48 @@ const yoDynamic = (reference = {}) => {
 }
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoPolymorphism`
+ *
+ * ### 1. 基本介绍
  *
  * 动态扩展配置，前置调用`yoAmbient`方法处理统一配置，之后追加：
  *
- * 1. 直接读取 fromHoc 中的 grid 配置
- * 2. 如果传入了专用表单配置，则处理 form 表单配置，填充 $form 变量
- * 3. state 中的 $query 读取
- * 4. state 中的 config.options 中读取 $identifier
- * 5. 构造 $inited 中的 $identifier
+ * 1. 直接读取fromHoc中的grid配置
+ * 2. 如果传入了专用表单配置，则处理form表单配置，填充$form变量
+ * 3. state中的$query读取
+ * 4. state中的config.options中读取$identifier
+ * 5. 构造$inited中的$identifier
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |config|state|Object|config|直接从 grid 中读取核心配置，Ox组件动态渲染专用。|
+ * |$query|state|Object|$query|构造子组件所需的查询条件。|
+ * |form|第二参|Object|$form|表单配置，使用拷贝config改变原始配置。|
+ * |$identifier|props|String|$identifier|统一模型标识符。|
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 特定场景
+ *
+ * 对应特定界面处理，目前常用于`X_CATEGORY`和`X_TABULAR`的管理。
+ *
+ * ```
+ * |--------------------------------------------------|
+ * |  Menu  |  Content ( List )                       |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |--------------------------------------------------|
+ * ```
+ *
+ * * 左边部分是选择。
+ * * 右边部分是一个完整带有List界面的主界面（`ExListXxx`页）。
+ *
  *
  * @memberOf module:_channel
  * @method yoPolymorphism
@@ -1893,6 +1926,33 @@ const yoFormEdit = (reference, item = {}) => {
  * 基础搜索/高级搜索工具栏专用，基本逻辑类似于`yoFormAdd/yoFormEdit`，提供给查询表单用的属性集。
  *
  * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |options|state|Object|$options|当前组件构造的options选项信息，直接继承。|
+ * |$filters|state|Object|$inited|「主条件」根据条件数据构造高级搜索表单的初始化数据。|
+ * |$filtersRaw|state|Object|$inited|「辅助条件」根据条件数据构造高级搜索表单的初始化数据，配置化特殊情况专用。|
+ * |构造||Object|config|从options中直接抽取`search`打头的选项。|
+ * |构造||Boolean|$disableClear|是否禁止清空按钮，如果没有条件则禁用该按钮。|
+ * |构造||Function|rxFilter|构造查询条件，双参，同时修改主条件和辅助条件，查询表单提交用。|
+ * |$form|props|Object|$form|传入基础配置`key = Jsx`的表单元素哈希表，后期根据键值抽取表单。|
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 关于搜索模式
+ *
+ * 搜索模式可以通过`search.enabled`和`search.advanced`两个选项来执行开启和禁用：
+ *
+ * 1. `search.enabled`：启用基础搜索（搜索框）。
+ * 2. `search.advanced`：启用高级搜索（搜索表单）。
+ *
+ * #### 3.2. 查询条件
+ *
+ * 影响`ExListXxx`的条件有三个状态值：`$filters, $condition, $query`：
+ *
+ * * $query：主条件，包括从外置传入的条件
+ * * $condition：列过滤专用条件
+ * * $filters：当前组件操作的条件（基础搜索和高级搜索）
  *
  * @memberOf module:_channel
  * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
