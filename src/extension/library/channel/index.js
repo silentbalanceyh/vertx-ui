@@ -26,6 +26,7 @@ import Yo from './yo';
  * |yiLayout|「容器+控件」单个页面初始化配置的专用函数，包括计算布局相关信息。|
  * |yiModule|读取模块配置，静态存储于后端的某个JSON文件，动态则存储于`X_MODULE`表中。|
  * |yiPartForm|区域表单初始化，等价于原始的`yiForm`，但由于配置数据来源于不同存储位置，所以重命名为yiPartForm替代。|
+ * |yiStandard|标准页面渲染专用（静态开发模式）。|
  *
  * @module _channel
  */
