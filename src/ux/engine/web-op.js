@@ -14,6 +14,7 @@ const opLink = (config = {}, action) => {
         if (tooltip) {
             return (
                 <Tooltip key={linkConfig.key} title={text}>
+                    {/* eslint-disable-next-line */}
                     <a href={""} {...other}>
                         {<Icon type={icon}/>}
                     </a>
@@ -25,6 +26,7 @@ const opLink = (config = {}, action) => {
                 ...other
             } = linkConfig;
             return (
+                // eslint-disable-next-line
                 <a href={""} {...other}>
                     {icon ? <Icon type={icon}/> : false}
                     {text}

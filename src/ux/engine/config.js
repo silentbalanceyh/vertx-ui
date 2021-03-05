@@ -181,6 +181,7 @@ const _widthFieldsSub = (column = {}, fields = [], widthMap = {}) => {
         if (!originalRef.width) {
             originalRef.width = {};
         }
+
         /*
          * fields 计算
          */

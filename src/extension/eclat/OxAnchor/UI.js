@@ -20,6 +20,7 @@ class Component extends React.PureComponent {
             const {data = {}} = this.props;
             return (
                 <span>
+                    {/* eslint-disable-next-line */}
                     <a href={"#"} onClick={Event.onClick(this)}>
                         {data.code}&nbsp;&nbsp;<Icon type={"search"}/>
                     </a>

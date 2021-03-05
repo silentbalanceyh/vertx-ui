@@ -28,12 +28,12 @@ const onNode = (item: any = {}, options = {}, gEvent: any) => {
 
     const fieldSet = new Set();
     const dataField = options[OptionKey.DATA_FIELDS] ? options[OptionKey.DATA_FIELDS] : [];
-    {
-        fieldSet.add('key');
-        fieldSet.add('name');
-        fieldSet.add('code');
-        dataField.forEach(field => fieldSet.add(field));
-    }
+
+    fieldSet.add('key');
+    fieldSet.add('name');
+    fieldSet.add('code');
+    dataField.forEach(field => fieldSet.add(field));
+
     const element: any = {};
     Array.from(fieldSet).forEach((field) => {
         const hitField = field as string;

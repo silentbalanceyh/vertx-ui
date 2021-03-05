@@ -15,6 +15,7 @@ const _findRef = (nodes: Array<QTreeNode>, hit: QTreeLeaf, isFull: Boolean = fal
             }
         } else {
             const branch = node as QTreeBranch;
+            // eslint-disable-next-line
             reference = _findRef(branch.getNodes(), hit, isFull);
         }
     });

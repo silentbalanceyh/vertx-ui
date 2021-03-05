@@ -27,6 +27,7 @@ class GLayout {
     }
 
     instance(pos: GPos, additional) {
+        // eslint-disable-next-line new-parens
         const layout = new G6.Layout[this._type];
         const mounter = mountFn[this._type];
         const layoutCfg = Abs.clone(this._config);

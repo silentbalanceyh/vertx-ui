@@ -14,7 +14,7 @@ class DataAssist implements DataContainer {
             if ("tabular" === key) {
                 continue;
             }
-            const value = (<any>data)[key];
+            const value = data[key];
             this.data[key] = new DataArray(value);
             ready = ready && this.data[key].is();
         }
@@ -40,7 +40,7 @@ class DataAssist implements DataContainer {
         const data = this.data;
         const size = this.size;
         const ready = this.ready;
-        return { data, size, ready };
+        return {data, size, ready};
     }
 
     _(key: string): DataArray {

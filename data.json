@@ -1,27 +1,24 @@
 {
-    "metadata": "source,导入数据源,10,,aiTreeSelector,placeholder=（选择数据源）",
-    "optionJsx.config": {
-        "ajax": {
-            "uri": "/api/search/data-source"
-        },
-        "selection": {
-            "checkStrictly": true,
-            "multiple": true,
-            "showLine": false,
-            "display": "name",
-            "limitOp": "LE",
-            "limitConfig": {
-                "_level": 1
-            }
-        },
-        "tree": {
-            "title": "name"
-        },
-        "validation": "请选择数据源！",
-        "window": "选择导入数据源,选择,取消,false,400,false"
-    },
-    "optionJsx.allowClear": true,
-    "optionConfig.rules": [
-        "required,请选择导入数据源"
+    "op.open": [
+        "op.open.add",
+        "op.open.filter"
+    ],
+    "op.batch": [
+        "op.batch.edit",
+        "op.batch.delete"
+    ],
+    "op.extra": [
+        "op.extra.column",
+        "op.extra.export",
+        "op.extra.import"
+    ],
+    "op.add": [
+        "op.submit.add",
+        "op.submit.reset"
+    ],
+    "op.edit": [
+        "op.submit.save",
+        "op.submit.delete",
+        "op.submit.reset"
     ]
 }

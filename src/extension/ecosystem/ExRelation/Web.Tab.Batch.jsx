@@ -32,6 +32,7 @@ export default (reference, data = [], key) => {
             attrs.onClick = Ux.prevent;
             return (
                 <Popconfirm {...confirmAttrs}>
+                    {/* eslint-disable-next-line */}
                     <a href={"#"} {...attrs}>
                         {batch.text}
                     </a>
@@ -45,6 +46,7 @@ export default (reference, data = [], key) => {
                 }
             }
             return (
+                // eslint-disable-next-line
                 <a href={"#"} {...attrs}>
                     {batch.text}
                 </a>
