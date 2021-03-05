@@ -6,7 +6,7 @@ import {HocI18r} from 'entity';
 import Yo from "./yo";
 import Fn from "../functions";
 
-const yiRouterType = (reference, state = {}) => {
+const yiParameters = (reference, state = {}) => {
     const $query = Ux.cabQuery(reference);
     if ($query) {
         const {$router} = reference.props;
@@ -79,13 +79,32 @@ function yiControl() {
 
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yiStandard`
+ *
+ * ### 1. 基本介绍
  *
  * 标准核心模块专用方法，内部调用函数
  *
  * 1. yiModule
- * 2. 路由信息：/xxx/yyy/:type --> type,= <value>
- * 3. yiAssist
+ * 2. yiAssist
+ * 3. yiParameters
+ *
+ * ### 2. yiParameters
+ *
+ * `yiModule`和`yiAssist`可直接参考文档中的做法，yiParameters用于处理路由中的参数，
+ * 构造`reference.state`中特定的`$query`变量。
+ *
+ * 1. 从`$router`中读取核心参数`type`和`status`。
+ * 2. 如果构造的条件超过1个，使用`AND`连接符。
+ *
+ * |参数|含义|
+ * |---|:---|
+ * |type|广义的类型参数。|
+ * |status|广义的状态参数。|
+ *
+ * 上述读取参数可位于路径中，也可位于查询字符串中，如`/uri/xxx/:p1?p2=v2`，`p1`和`p2`都是合法参数。
+ *
+ *
  *
  * @memberOf module:_channel
  * @method yiStandard
@@ -105,7 +124,7 @@ const yiStandard = (reference, inputState) => {
         /* 第一种用法 */
         .then(Ux.pipe(reference))
         .then(data => yiAssist(reference, data))
-        .then(data => yiRouterType(reference, data))
+        .then(data => yiParameters(reference, data))
         /* 第二种用法 */
         .then(Ux.ready)
 }
@@ -163,7 +182,36 @@ const yiCompany = (reference) => {
  *
  * ### 1. 基本介绍
  *
+ * 初始化表单配置的专用方法，等价于`yiForm`，旧版本有一个`yiForm`方法，为了兼容原始方法，所以独立了
+ * 另外一个方法`yiPartForm`来实现表单初始化。
  *
+ * 该方法执行流程如下：
+ *
+ * 1. 先从绑定的资源文件`cab/<LANG>/`中读取`_form`节点中的配置信息。
+ * 2. `inherit`用于判断React引用是使用传入引用，还是传入引用的父引用。
+ *
+ * ### 2. 标准化配置
+ *
+ * 调用`Ux.configForm`对表单数据进行配置（同步流程），这个步骤需要完成以下几点：
+ *
+ * * 从配置中读取`renders`对象用于配置`key = Jsx`的表单字段（开发用来渲染表单字段专用）
+ * * 构造状态`state`中的`$onChange`函数
+ * * 将`config`中的变量`state`作为附加值合并到reference的状态中
+ *
+ * ### 3. `config`参数
+ *
+ * config参数中的核心结构如下：
+ *
+ * ```js
+ * {
+ *     renders: {},
+ *     onChange: {}
+ * }
+ * ```
+ *
+ * |变量|类型|含义|
+ * |renders|Object|`field = Jsx`结构，渲染表单时对应的字段渲染函数。|
+ * |onChange|Object|`field = Function`结构，对象中的每个函数可以注入到字段的`onChange`外置函数中。|
  *
  * @memberOf module:_channel
  * @param {ReactComponent} ref React组件引用
