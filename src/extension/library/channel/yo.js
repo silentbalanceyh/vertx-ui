@@ -1459,16 +1459,29 @@ const _outReady = (form, message, debug = {}) => {
     }
 };
 
-const _outLoading = (name, message) => {
-    Ux.dgDebug(message, `............ [ ${name} ] `, "#9E9E9E");
-};
+
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoRender`
+ *
+ * ### 1. 基本介绍
  *
  * （高频函数）执行渲染拦截的专用函数：
  *
  * 1. `$ready = true`，执行渲染。
  * 2. `$ready = false`，不执行渲染，只 Loading。
+ *
+ * ### 2. 核心
+ *
+ * #### 2.1. 加载
+ *
+ * 该函数不提供属性集，主要用于加载，它和`xtReady`的区别点在于：
+ *
+ * * xtReady：自定义组件专用`economy`目录下的所有组件。
+ * * yoRender：Extension组件专用`extension/ecosystem`目录下的扩展组件。
+ *
+ * #### 2.2. 过渡
+ *
+ * 这个函数主要为过渡效果量身打造。
  *
  * @memberOf module:_channel
  * @method yoRender
@@ -1498,7 +1511,7 @@ const yoRender = (reference = {}, fnJsx, debug = {}) => {
             _outReady(form, {props, state}, debug);
             return Ux.isFunction(fnJsx) ? fnJsx() : fnJsx;
         } else {
-            _outLoading(name, {props, state});
+            Ux.dgDebug({props, state}, `............ [ ${name} ] `, "#9E9E9E");
             return (<LoadingContent $height={$height}/>);
         }
     }
