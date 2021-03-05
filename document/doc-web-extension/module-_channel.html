@@ -2686,6 +2686,9 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
 <div class="description usertext">
     <h2>「通道」<code>Ex.yoAction</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。</p>
+</blockquote>
 <h3>1. 基本介绍</h3>
 <p>按钮和操作专用，<code>ExAction/ExButton</code> 专用的处理。</p>
 <p>按钮专用过滤函数，主要过滤几个区域的核心按钮：</p>
@@ -3704,7 +3707,7 @@ reference的state状态信息中，构造特定查询条件，不仅如此，<co
 
 
 <div class="description usertext">
-    <h2><code>Ex.yoControl</code></h2>
+    <h2>「通道」<code>Ex.yoControl</code></h2>
 <blockquote>
 <p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。</p>
 </blockquote>
@@ -4679,7 +4682,7 @@ addon.form
 
     
 
-    <h4 class="name" id=".yoFormAdd"><span class="type-signature">(static) </span>yoFormAdd<span class="signature">(reference, item)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".yoFormAdd"><span class="type-signature">(static) </span>yoFormAdd<span class="signature">(reference, item)</span><span class="type-signature"> &rarr; {Object}</span></h4>
 
     
 
@@ -4725,6 +4728,100 @@ addon.form
 
 
 
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoFormAdd</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。
+当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<p>该方法近似于<code>yoList</code>，但该属性集是传递给表单，附带了表单属性集。</p>
+<h3>2. 构造属性表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">源属性名</th>
+<th>源</th>
+<th>类型</th>
+<th style="text-align:left">目标属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxClose</td>
+<td style="text-align:left">关闭表单容器专用回调方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doSubmitting</td>
+<td style="text-align:left">表单防重复加载设置提交状态专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doDirty</td>
+<td style="text-align:left">设置当前列表的<code>$dirty = true</code>，通常在配置中才使用。</td>
+</tr>
+<tr>
+<td style="text-align:left">key</td>
+<td>页签</td>
+<td>Any</td>
+<td style="text-align:left">$addKey</td>
+<td style="text-align:left">添加表单主记录主键。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td></td>
+<td>String</td>
+<td style="text-align:left">$mode</td>
+<td style="text-align:left">固定值&quot;ADD&quot;。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$identifier</td>
+<td style="text-align:left">当前列表的配置数据，从配置数据中抽取配置项：<code>identifier</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">plugins</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$plugins</td>
+<td style="text-align:left">为子表单计算<code>pluginField</code>字段控制专用函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">$query</td>
+<td>props</td>
+<td>Object</td>
+<td style="text-align:left">$query</td>
+<td style="text-align:left">当前列表的查询条件，处理特殊条件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$rowData</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$record.rowData</td>
+<td style="text-align:left">子表单中DialogEditor专用行选中记录信息。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 核心</h3>
+<h4>3.1. 关于模型标识符</h4>
+<p>该方法在内部使用，为静态标识符，所以只支持静态模式下的identifier模型标识符读取，不从远程获取，
+远程获取会在<code>OxList</code>组件中完成，而不是<code>ExListXxx</code>组件中。</p>
+<h4>3.2. rxClose</h4>
+<p>关闭回调函数可以被子表单使用，子表单提交完成后通常会调用<code>rxClose</code>函数关闭表单返回到列表界面，
+返回时还会重新加载列表。</p>
+</div>
+
 
 
 
@@ -4765,13 +4862,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用，此处一般表示当前<code>ExListXXX</code>组件。</p></td>
         </tr>
 
     
@@ -4783,13 +4885,18 @@ addon.form
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>页签配置</p></td>
         </tr>
 
     
@@ -4814,6 +4921,10 @@ addon.form
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>传入添加子表单的属性集</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -4822,7 +4933,7 @@ addon.form
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Object</span>
 
 
     </dd>
@@ -4882,6 +4993,113 @@ addon.form
 
 
 
+
+<div class="description usertext">
+    <h2>「通道」<code>Ex.yoFormEdit</code></h2>
+<blockquote>
+<p>优先读取<code>Ex.yoAmbient</code>构造继承属性集。
+当前版本提供给<code>ExListXxx</code>组件内部专用。</p>
+</blockquote>
+<h3>1. 基本介绍</h3>
+<p>该方法近似于<code>yoList</code>，但该属性集是传递给表单，附带了表单属性集。</p>
+<h3>2. 构造属性表</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">源属性名</th>
+<th>源</th>
+<th>类型</th>
+<th style="text-align:left">目标属性名</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxClose</td>
+<td style="text-align:left">关闭表单容器专用回调方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">rxView</td>
+<td style="text-align:left">读取数据记录专用回调方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doSubmitting</td>
+<td style="text-align:left">表单防重复加载设置提交状态专用方法。</td>
+</tr>
+<tr>
+<td style="text-align:left">构造</td>
+<td></td>
+<td>Function</td>
+<td style="text-align:left">doDirty</td>
+<td style="text-align:left">设置当前列表的<code>$dirty = true</code>，通常在配置中才使用。</td>
+</tr>
+<tr>
+<td style="text-align:left"></td>
+<td></td>
+<td>String</td>
+<td style="text-align:left">$mode</td>
+<td style="text-align:left">固定值&quot;EDIT&quot;。</td>
+</tr>
+<tr>
+<td style="text-align:left">options</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$identifier</td>
+<td style="text-align:left">当前列表的配置数据，从配置数据中抽取配置项：<code>identifier</code>。</td>
+</tr>
+<tr>
+<td style="text-align:left">plugins</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$plugins</td>
+<td style="text-align:left">为子表单计算<code>pluginField</code>字段控制专用函数，并且计算<code>pluginRow</code>（转换成<code>pluginForm</code>）控制函数。</td>
+</tr>
+<tr>
+<td style="text-align:left">$query</td>
+<td>props</td>
+<td>Object</td>
+<td style="text-align:left">$query</td>
+<td style="text-align:left">当前列表的查询条件，处理特殊条件专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$inited</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$inited</td>
+<td style="text-align:left">编辑表单初始化数据专用。</td>
+</tr>
+<tr>
+<td style="text-align:left">$rowData</td>
+<td>state</td>
+<td>Object</td>
+<td style="text-align:left">$record.rowData</td>
+<td style="text-align:left">子表单中DialogEditor专用行选中记录信息。</td>
+</tr>
+</tbody>
+</table>
+<h3>3. 核心</h3>
+<h4>3.1. 关于模型标识符</h4>
+<p>该方法在内部使用，为静态标识符，所以只支持静态模式下的identifier模型标识符读取，不从远程获取，
+远程获取会在<code>OxList</code>组件中完成，而不是<code>ExListXxx</code>组件中。</p>
+<h4>3.2. 关于插件</h4>
+<p><code>pluginRow</code>插件在表单中本身作为了行控制，所以内置子表单的字段控制直接设置成该函数</p>
+<ul>
+<li>如果列表中数据不可编辑，那么表单中的数据不可编辑（只读）。</li>
+<li>如果列表中数据不可删除，那么表单中的数据不可删除。</li>
+</ul>
+<blockquote>
+<p>编辑/删除两种操作在列表和表单中维持一致性。</p>
+</blockquote>
+</div>
 
 
 
@@ -7551,7 +7769,7 @@ addon.form
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Mar 05 2021 11:37:05 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Fri Mar 05 2021 11:54:57 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>

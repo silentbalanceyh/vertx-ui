@@ -1265,6 +1265,8 @@ const yoForm = (reference, additional = {}, data = {}) => {
 /**
  * ## 「通道」`Ex.yoAction`
  *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
+ *
  * ### 1. 基本介绍
  *
  * 按钮和操作专用，`ExAction/ExButton` 专用的处理。
@@ -1687,11 +1689,47 @@ const yoTabExtra = (reference, tabs = {}) => {
     }
 }
 /**
+ * ## 「通道」`Ex.yoFormAdd`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
+ * > 当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 该方法近似于`yoList`，但该属性集是传递给表单，附带了表单属性集。
+ *
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |构造||Function|rxClose|关闭表单容器专用回调方法。|
+ * |构造||Function|doSubmitting|表单防重复加载设置提交状态专用方法。|
+ * |构造||Function|doDirty|设置当前列表的`$dirty = true`，通常在配置中才使用。|
+ * |key|页签|Any|$addKey|添加表单主记录主键。|
+ * |||String|$mode|固定值"ADD"。|
+ * |options|state|Object|$identifier|当前列表的配置数据，从配置数据中抽取配置项：`identifier`。|
+ * |plugins|state|Object|$plugins|为子表单计算`pluginField`字段控制专用函数。|
+ * |$query|props|Object|$query|当前列表的查询条件，处理特殊条件专用。|
+ * |$rowData|state|Object|$record.rowData|子表单中DialogEditor专用行选中记录信息。|
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 关于模型标识符
+ *
+ * 该方法在内部使用，为静态标识符，所以只支持静态模式下的identifier模型标识符读取，不从远程获取，
+ * 远程获取会在`OxList`组件中完成，而不是`ExListXxx`组件中。
+ *
+ * #### 3.2. rxClose
+ *
+ * 关闭回调函数可以被子表单使用，子表单提交完成后通常会调用`rxClose`函数关闭表单返回到列表界面，
+ * 返回时还会重新加载列表。
+ *
  *
  * @memberOf module:_channel
- * @param reference
- * @param item
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object} item 页签配置
+ * @returns {Object} 传入添加子表单的属性集
  */
 const yoFormAdd = (reference, item = {}) => {
     const formAttrs = yoAmbient(reference);
@@ -1713,7 +1751,7 @@ const yoFormAdd = (reference, item = {}) => {
     /*
      * 读取 $identifier（动态表单必须）
      */
-    const {options = {}, plugins = {}} = reference.state;
+    const {options = {}, plugins = {}, $rowData} = reference.state;
     if (options[Fn.Opt.IDENTIFIER]) {
         formAttrs.$identifier = options[Fn.Opt.IDENTIFIER];
     }
@@ -1731,9 +1769,58 @@ const yoFormAdd = (reference, item = {}) => {
         $plugins.pluginField = plugins.pluginField;
     }
     formAttrs.$plugins = $plugins;
+    /*
+     * 合并执行
+     * 1. 从 formAttrs 中提取 $record 专用上层变量
+     * 2. 在 $record 变量中挂载 rowData 属性
+     * 3. 将 $record 直接传入到底层数据中
+     */
+    if (!formAttrs.$record) formAttrs.$record = {};
+    if ($rowData) formAttrs.$record.rowData = $rowData;
     return formAttrs;
 }
 /**
+ * ## 「通道」`Ex.yoFormEdit`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
+ * > 当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 该方法近似于`yoList`，但该属性集是传递给表单，附带了表单属性集。
+ *
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |构造||Function|rxClose|关闭表单容器专用回调方法。|
+ * |构造||Function|rxView|读取数据记录专用回调方法。|
+ * |构造||Function|doSubmitting|表单防重复加载设置提交状态专用方法。|
+ * |构造||Function|doDirty|设置当前列表的`$dirty = true`，通常在配置中才使用。|
+ * |||String|$mode|固定值"EDIT"。|
+ * |options|state|Object|$identifier|当前列表的配置数据，从配置数据中抽取配置项：`identifier`。|
+ * |plugins|state|Object|$plugins|为子表单计算`pluginField`字段控制专用函数，并且计算`pluginRow`（转换成`pluginForm`）控制函数。|
+ * |$query|props|Object|$query|当前列表的查询条件，处理特殊条件专用。|
+ * |$inited|state|Object|$inited|编辑表单初始化数据专用。|
+ * |$rowData|state|Object|$record.rowData|子表单中DialogEditor专用行选中记录信息。|
+ *
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 关于模型标识符
+ *
+ * 该方法在内部使用，为静态标识符，所以只支持静态模式下的identifier模型标识符读取，不从远程获取，
+ * 远程获取会在`OxList`组件中完成，而不是`ExListXxx`组件中。
+ *
+ * #### 3.2. 关于插件
+ *
+ * `pluginRow`插件在表单中本身作为了行控制，所以内置子表单的字段控制直接设置成该函数
+ *
+ * * 如果列表中数据不可编辑，那么表单中的数据不可编辑（只读）。
+ * * 如果列表中数据不可删除，那么表单中的数据不可删除。
+ *
+ * > 编辑/删除两种操作在列表和表单中维持一致性。
  *
  * @memberOf module:_channel
  * @param reference
