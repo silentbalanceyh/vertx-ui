@@ -27,6 +27,8 @@ import Yo from './yo';
  * |yiModule|读取模块配置，静态存储于后端的某个JSON文件，动态则存储于`X_MODULE`表中。|
  * |yiPartForm|区域表单初始化，等价于原始的`yiForm`，但由于配置数据来源于不同存储位置，所以重命名为yiPartForm替代。|
  * |yiStandard|标准页面渲染专用（静态开发模式）。|
+ * |ylCard|带$ready的PageCard简化版。|
+ * |ylDynamic|带$ready的PageCard（支持远程读取配置）简化版。|
  *
  * @module _channel
  */

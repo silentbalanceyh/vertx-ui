@@ -112,19 +112,6 @@ const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) 
     return Ux.promise(data);
 };
 
-const yoOption = (reference) => {
-    const {options = {}} = reference.state ? reference.state : {};
-    let stateOpt = Ux.clone(options);
-    const {$options = {}} = reference.props ? reference.props : {};
-    if (!Ux.isEmpty($options)) {
-        /*
-         * 如果 $options 中存在 identifier
-         * 那么该操作会覆盖掉 identifier
-         */
-        Object.assign(stateOpt, $options);
-    }
-    return Ux.sorterObject(stateOpt);
-}
 const yoBatchEditor = (batch, reference) => {
     const {config = []} = batch;
     const buttonRef = config.filter(item => "op.batch.edit" === item.category)[0];
@@ -356,7 +343,22 @@ const _seekAssist = (uniform = {}, input = {}) => {
     }
 };
 
+const _seedOptionPre = (reference) => {
+    const {options = {}} = reference.state ? reference.state : {};
+    let stateOpt = Ux.clone(options);
+    const {$options = {}} = reference.props ? reference.props : {};
+    if (!Ux.isEmpty($options)) {
+        /*
+         * 如果 $options 中存在 identifier
+         * 那么该操作会覆盖掉 identifier
+         */
+        Object.assign(stateOpt, $options);
+    }
+    return Ux.sorterObject(stateOpt);
+}
+
 const _seekOption = (uniform = {}, reference) => {
+
     /*
     * 选项合并处理
     * reference.props -> $options
@@ -378,7 +380,7 @@ const _seekOption = (uniform = {}, reference) => {
             Object.assign(optionData, module.$options);
         }
     }
-    uniform.$options = optionData;
+    uniform.$options = Ux.sorterObject(optionData);
 };
 const _seekComponent = (attrs = {}, control = {}) => {
     const {
@@ -408,7 +410,13 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoAmbient`
+ *
+ * ### 1. 基本介绍
+ *
+ * 该方法为高频使用方法，几乎所有的组件需要继承属性时调用该方法生成`inherit`属性集。
+ *
+ * ### 2. 核心属性
  *
  * 计算继承属性（统一继承属性专用处理），统一继承的属性：
  *
@@ -418,32 +426,108 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
  *      * $router：路由数据，DataRouter
  *      * $menus：菜单专用数据，DataObject
  *      * $profile: 登录用户Profile信息
+ *      * $parent: 父记录专用数据
  *      * $submitting：redux防重复提交专用
+ *      * **$hotel**：旧系统专用
  * 2. 标识符专用属性，读取属性中的 $identifier 模型标识符。
- * 3. options 配置数据读取：
- *      * 状态 state 中的 `options` 读取
- *      * 属性 props 中的 `$options` 读取
- *      * 最终排序，优先使用 props 中的 $options
- * 4. 特殊禁用变量：$disabled 属性。
- * 5. 提交状态变量
+ * 3. 特殊禁用变量：$disabled 属性。
+ * 4. 提交状态变量
  *      * $submitting：正在提交
  *      * $loading：正在加载
  *      * $dirty：脏数据
- * 6. 选中项：$selected
- * 7. 函数处理，继承函数前缀：`rx, do, fn`。
- * 8. 特殊引用
+ *      * $collapsed：菜单开合处理
+ * 5. 选中项：$selected
+ * 6. 函数处理，继承函数前缀：`rx, do, fn`。
+ * 7. 特殊引用
  *      * reference：父引用
  *      * react：根引用
- * 9. 插件配置
+ * 8. 插件配置
  *      * $plugins：插件继承
- * 10. 选项`$options`处理
- * 11. 编程配置 config 合并到 `uniform.config`中形成最终配置。
- * 12. Assist数据提取，从 props 和 state 中提取，之后处理 rxAssist 中部函数。
- * 13. 动态操作符：`$opKey` 注入
- * 14. 附加配置：`$record` 专用处理
+ * 9. 选项`$options`处理，执行`_seekOption`方法：
+ *
+ * 10. 编程配置 config 合并到 `uniform.config`中形成最终配置。
+ * 11. Assist数据提取，从 props 和 state 中提取，之后处理 rxAssist 中部函数。
+ * 12. 动态操作符：`$opKey` 注入
+ * 13. 附加配置：`$record` 专用处理
  *      * 外层变量是单变量，用于记录拷贝
  *      * 如果是数组，必定会在 Form 中选择方式，那可直接走 Assist
- * 15. 配置处理完过后冻结，调用：`freeze`
+ *      * 外层变量会在config过程中引入特殊属性`rowData`用于记录外层选中记录
+ * 14. 配置处理完过后冻结，调用：`freeze`
+ *
+ * ### 3. 属性继承表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |$app|props|DataObject|$app|应用程序配置数据，也可以直接调用`Ux.isInited()`读取。|
+ * |$user|props|Object|$user|登录用户基础数据，也可以直接调用`Ux.isLogged()`读取。|
+ * |$profile|props|DataObject|$profile|（保留属性）|
+ * |$router|props|DataRouter|$router|react-router路由器专用对象。|
+ * |$menus|props|Array|$menus|当前应用程序所需的所有菜单信息。|
+ * |$parent|props|Object|$parent|父记录数据（直接引用父记录），一般存储顶层记录数据。|
+ * |$identifier|props|String|$identifier|统一模型标识符。|
+ * |$disabled|props|Boolean|$disabled|是否禁用组件。|
+ * |$submitting|props|Boolean/DataObject|$submitting|如果是redux则是DataObject对象，如果是state中读取，则是Boolean类型。|
+ * |$selected|props|Any|$selected|从属性中直接继承`$selected`变量（选中项）。|
+ * |函数|props|Function|rx/fn/do|从属性中继承所有函数属性，rx，fn，do三种。|
+ * |this|无|React|reference|构造当前引用，该引用会输入成为组件消费的父引用（Zero Ui基础规范）。|
+ * |react|无|React|react|顶层引用。|
+ * |$collapsed|props|Boolean|$collapsed|当前应用的菜单打开/关闭状态。|
+ * |$plugins|props|Object|$plugins|需要继承的插件属性信息。|
+ * |$options|props|Object|$options|「低优先级」（从属性继承）选项数据。|
+ * |$options|state|Object|$options|「中优先级」（从当前组件状态中构造）选项数据。|
+ * |module.options|state|Object|$options|「高优先级」（从当前组件$hoc中读取，远程加本地）选项数据。|
+ * |辅助数据|props|DataArray|`$t_/$a_`|读取属性直接继承的辅助数据。|
+ * |辅助数据|state|DataArray|`$t_/$a_`|读取当前组件状态中构造的辅助数据（优先级更高）。|
+ * |$opKey|props|String|$opKey|动态配置时使用的操作主键`$opKey`。|
+ * |$record|props|Any|$record|记录专用数据，结构很多，在DialogEditor中还包含了专用rowData数据。|
+ * |config|计算|Object|config|计算最终的组件配置信息。|
+ *
+ * ### 4. 函数核心
+ *
+ * #### 4.1. _seekOption
+ *
+ * 在`$options`属性构造过程中，原始的`uniform.$options = yoOption(reference);`已经被废弃，采用新的
+ * `_seekOption/_seekOptionPre`方法执行计算
+ *
+ * 1. 先调用`_seekOptionPre`方法
+ * 2. 再调用`_seekOption`方法
+ *
+ * 配置源头来自于几处：
+ *
+ * 1. props属性中的`$options`变量存储的配置信息。
+ * 2. state状态中`$options/options`两个变量，options是旧系统专用变量（暂时不废弃），$options是统一过后的新变量。
+ * 3. 如果存在`$hoc`（执行过资源绑定），那么读取`_module`节点（远程加本地），使用`module.options`执行再合并。
+ *
+ * #### 4.2. $record/$parent
+ *
+ * 这两个变量都用于存储父记录数据
+ *
+ * * $parent：父记录专用数据（旧系统模式），标准格式Object
+ * * $record：扩展模块才出现的专用数据，附加额外的父类数据结构
+ *      * rowData：DialogEditor中用来存储选中行的数据信息。
+ *
+ * 类似下边布局
+ *
+ * ```
+ * |--------------------------------------------------|
+ * |  Form (Grid)                                     |
+ * |                                                  |
+ * |                                                  |
+ * |                                                  |
+ * |--------------------------------------------------|
+ * |  Row                                             |
+ * |  Row                                             |
+ * |  Row                                             |
+ * |--------------------------------------------------|
+ * ```
+ *
+ * * `$parent`存储的是`Form(Grid)`表单的完整数据。
+ * * `$record.rowData`存储的是字段中某一行的数据（子表单增删改）。
+ *
+ * #### 4.3. $record/$options
+ *
+ * * $options用于继承配置内容，元数据继承。
+ * * $record用于继承数据内容，数据继承。
  *
  * @memberOf module:_channel
  * @method yoAmbient
@@ -471,7 +555,7 @@ const yoAmbient = (reference = {}, config = {}) => {
             uniform.$identifier = $identifier;
         }
     }
-    uniform.$options = yoOption(reference);
+    uniform.$options = _seedOptionPre(reference);
     /*
      * 特殊变量
      * $disabled
@@ -508,7 +592,7 @@ const yoAmbient = (reference = {}, config = {}) => {
     /*
      * 特殊引用
      * reference：父引用
-     * referenceRoot: 根引用
+     * react: 根引用
      */
     uniform.reference = reference;
     if (props.reference) {
@@ -577,14 +661,47 @@ const yoAmbient = (reference = {}, config = {}) => {
 
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoDynamic`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
+ *
+ * ### 1. 基本介绍
  *
  * 动态扩展配置，前置调用`yoAmbient`方法处理统一配置，然后追加配置：
  *
- * 1. 追加 $identifier 统一标识符（这里是计算过后的标识符）
- * 2. 追加 $controls 控件配置信息
- * 3. 初始化数据 $inited 专用
- * 4. 专用配置 $mode 模式处理
+ * > （新版移除了$identifier，挪动到yoAmbient中，静态动态都会使用）
+ *
+ * 1. 追加$controls控件配置信息，直接继承`$controls`配置数据
+ * 2. 初始化数据 $inited，直接继承初始化表单数据（表单专用）
+ * 3. $mode，表单模式，`ADD | EDIT`传入
+ * 4. $fabric，Ox的`Fabric`引擎专用变量，存储了fabric相关配置信息
+ *
+ * ### 2. 属性继承表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |$controls|props|Any|$controls|控件配置数据。|
+ * |$inited|props|Object|$inited|专用表单初始化数据。|
+ * |$mode|props|String|$mode|表单模式，ADD = 添加模式，EDIT = 编辑模式。|
+ * |$fabric|props|Object|$fabric|Fabric引擎专用定义数据（执行Ox逻辑专用）。|
+ *
+ * ### 3. 关于$inited
+ *
+ * 1. 默认读取props中的`$inited`变量作为继承的表单初始化数据
+ * 2. 如果当前组件的状态state中生成了新的`$inited`数据
+ *      * 子表单专用，使用state中的`$inited`数据构造子表单初始化数据
+ *      * 构造rxView函数用于更改当前状态中的表单初始化数据
+ *
+ * ```
+ *     $inited
+ * ---------------> props（低优先级）
+ *                                  $inited, rxView
+ *           ------ state（高优先级）------------------> 子组件
+ *           |        |
+ *        $inited     |
+ *           |        |
+ *           ---------|
+ * ```
  *
  * @memberOf module:_channel
  * @method yoDynamic
@@ -594,15 +711,9 @@ const yoAmbient = (reference = {}, config = {}) => {
 const yoDynamic = (reference = {}) => {
     const attrs = yoAmbient(reference);
     const {
-        $identifier, $controls = {}, $inited,
+        $controls = {}, $inited,
         $mode, $fabric = {}
     } = reference.props;
-    if ($identifier) {
-        /*
-         * 动态选择模型专用标识符
-         */
-        attrs.$identifier = $identifier;
-    }
     if (!Ux.isEmpty($controls)) {
         /*
          * 动态控件专用配置信息
@@ -699,7 +810,9 @@ const yoPolymorphism = (reference = {}, {form}) => {
     return attrs;
 }
 /**
- * ## `Ex.yoControl`
+ * ## 「通道」`Ex.yoControl`
+ *
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
  *
  * ### 1. 基本介绍
  *
@@ -847,13 +960,61 @@ const yoControl = (control = {}) => {
 }
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoList`
  *
- * List 必须传入的配置
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
  *
- * 1. 外置：state -> query, 内置：props -> $query
- * 2. 这个会作为默认的 query 值传入，并且会和对应的判断形成呼应
+ * ### 1. 基本介绍
  *
+ * `ExListXX`组件专用方法，为列表构造所有对应的属性。
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |$query|props|Object|$query|构造默认查询条件，该条件每次执行远程调用后会被重置。|
+ * |$selected|state|Array|$selected|当前列表选中的行。|
+ * |$options|state|Object|$options|当前列表的所有配置选项，options节点，属性名中带`.`操作符。|
+ * |$condition|state|Object|$condition|列过滤专用条件。|
+ * |构造||Function|rxSearch|加载列表数据专用方法，排序、服务端分页。|
+ * |构造||Function|rxCondition|设置列过滤条件，点击列过滤时专用函数。|
+ * |构造||Function|rxOpen|打开新的Tab页专用函数。|
+ * |构造||Function|rxSelected|选择行数据时专用函数，用于恢复状态专用。|
+ * |构造||Function|rxDelete|删除行记录专用函数。|
+ * |构造||Function|rxView|查看行记录数据专用函数。|
+ * |构造||Function|doLoading|设置加载状态。|
+ * |构造||Function|doDirty|（脏数据标记）更改数据状态为脏数据，然后触发列表的自动加载。|
+ * |rxPostDelete|props|Function|rxPostDelete|行删除专用回调函数。|
+ * |rxPostView|props|Function|rxPostView|读取行记录专用回调函数。|
+ *
+ * ### 3. 关于$query
+ *
+ * `$query`是整个List组件中最复杂的部分，它包含两部分内容。
+ *
+ * #### 3.1. 构造默认条件
+ *
+ * 调用`Ux.qrInherit`函数构造默认查询条件：
+ *
+ * 1. 基础查询条件
+ *      1. 如果props中传入了`$query`了，则以此为默认的基础查询条件。
+ *      2. props中未传入，则以state中的`query`为默认基础条件。
+ * 2. 然后结合状态中的更改条件执行计算（配合QQuery对象）
+ *      1. $condition：列过滤导致的查询条件更改。
+ *      2. $filters：表单查询（基础/高级）导致的查询条件的更累。
+ * 3. 合并到一起后执行最终的运算，如果要移除，则使用`__DELETE__`值。
+ * 4. 计算时键值使用`field,op`，如`name,=`和`name,>`虽然是同一个字段，表示两个不同的条件。
+ *
+ * #### 3.2. 关于Dirty
+ *
+ * `doDirty`只在动态渲染界面中使用，当系统检测当前List出现了`dirty = true`的状态时，系统会自动
+ * 刷新当前列表数据（调用rxSearch和默认查询条件）。
+ *
+ * #### 3.3. Post系列
+ *
+ * Post系列用于行操作时的回调，目前只提供两种：
+ *
+ * * rxPostDelete：删除行时的回调函数。
+ * * rxPostView：读取行记录时的回调函数。
  *
  * @memberOf module:_channel
  * @method yoList
@@ -906,24 +1067,32 @@ const yoList = (reference) => {
     inherit.doLoading = Fn.rxLoading(reference);
     inherit.doDirty = Fn.rxDirty(reference);
     /*
-     * rxPostDelete处理
+     * rxPost系列
      */
-    const {rxPostDelete} = reference.props;
+    const {rxPostDelete, rxPostView} = reference.props;
     if (Ux.isFunction(rxPostDelete)) {
         inherit.rxPostDelete = rxPostDelete;
     }
-    /*
-     * rxPost系列
-     */
+    if (Ux.isFunction(rxPostView)) {
+        inherit.rxPostView = rxPostView;
+    }
     return inherit;
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoFilter`
+ *
+ * > 优先读取`Ex.yoDynamic`构造继承属性集。
+ *
+ * ### 1. 基本介绍
  *
  * 查询表单专用，构造查询信息，内置先调用`yoDynamic`处理。
  *
  * 1. 初始化表单值`$inited`，赋予`connector`的连接符。
- * 2. rxClose 的专用处理。
+ * 2. rxClose构造，可关闭子表单。
+ *
+ * ### 2. $inited
+ *
+ * 该方法会为表单数据追加`connector`字段（搜索条件表单专用）。
  *
  * @memberOf module:_channel
  * @method yoFilter
@@ -955,9 +1124,13 @@ const yoFilter = (reference) => {
 }
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoForm`
  *
- * 表单专用处理函数，前置调用 `yoAmbient`，处理内容：
+ * > 优先读取`Ex.yoAmbient`构造继承属性集。
+ *
+ * ### 1. 基本介绍
+ *
+ * 该函数的处理内容：
  *
  * 1. form 基本配置处理
  * 2. assist 赋值数据处理
@@ -972,6 +1145,66 @@ const yoFilter = (reference) => {
  *      $identifier：统一标识符
  *      $mode：表单模式，ADD/EDIT
  *      $addKey：添加表单的组件
+ *
+ * ### 2. 属性继承表
+ *
+ * #### 2.1. 构造`config`属性
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |form|addOn|Object|config.form|编程模式下的表单配置。|
+ * |_form|cab|Object|config.form|前端静态配置（主配置）。|
+ * |_formUp|cab|Object|config.form|前端静态上表单配置（辅助配置）。|
+ * |_formDown|cab|Object|config.form|前端静态下表单配置（辅助配置）。|
+ * |_form|ajax|Object|config.form|后端动态配置（主配置）。|
+ * |_formUp|ajax|Object|config.form|后端动态上表单配置（辅助配置）。|
+ * |_formDown|ajax|Object|config.form|后端动态下表单配置（辅助配置）。|
+ * |assist|addOn|Object|assist|表单中的辅助数据定义。|
+ * |magic|addOn|Object|magic|数据远程加载专用配置。|
+ * |addon|addOn|Object|addon|附加组件专用配置。|
+ * |control|addOn|Object|control|读取`UI_FORM`专用远程配置。|
+ * |dialog|addOn|Object|dialog|（标题）构造窗口配置。|
+ * |modal|addOn|Object|modal|（配置）构造窗口配置。|
+ *
+ * #### 2.2. 特殊继承属性
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |data|入参|Object|$inited|构造表单专用数据。|
+ * |$mode|props|String|$mode|表单模式：ADD,EDIT。|
+ * |$addKey|props|Any|$addKey|添加生成的UUID，作为子表单专用主键。|
+ * |$identifier|props|String|$identifier|统一模型标识符。|
+ * ||计算|Object|__acl|表单权限基础数据。|
+ *
+ * ### 3. 表单布局计算
+ *
+ * #### 3.1. 配置数据源
+ *
+ * 1. addOn.form：通过编程部分拿到的 form 信息
+ * 2. S0（前端静态文件）_form：前端静态配置（主配置）——通常静态form使用此配置
+ * 3. S1（前端上表单）_formUp：前端静态配置（辅助配置）
+ * 4. S2（前端下表单）_formDown：前端静态配置（辅助配置）
+ * 5. D0（后端动态文件）form：后端主配置
+ * 6. D1（后端上表单）formUp：后端主配置
+ * 7. D2（后端下表单）formDown：后端主配置
+ * 布局最终顺序：
+ *
+ * ```js
+ * 表单布局顺序       模式1     模式2     模式3
+ * addon.form
+ *         S1                           o
+ *         D1
+ *         S0        o         o        o
+ *         D0                  o        o
+ *         S2                           o
+ *         D2
+ * ```
+ *
+ * > 有了上述结构后，可根据资源文件和远程配置构造不同的表单布局字段数据（2 x 3合计六个维度）。
+ *
+ * #### 3.2. 关于表单的权限说明
+ *
+ * （略）后期补充
  *
  * @memberOf module:_channel
  * @method yoForm
@@ -988,16 +1221,6 @@ const yoForm = (reference, additional = {}, data = {}) => {
     if (addOn.assist) {
         config.assist = addOn.assist;
     }
-    /*
-    if (Ux.isObject(addOn.form)) {
-        let form = addOn.form;
-        const {$options} = reference.props;
-        if ($options && $options.form) {
-            form = Ux.toForm(form, $options.form);
-        }
-        config.form = form;
-    }
-    */
     /*
      * `magic`：特殊参数
      * `addon`：特殊配置
@@ -1040,19 +1263,111 @@ const yoForm = (reference, additional = {}, data = {}) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yoAction`
+ *
+ * ### 1. 基本介绍
  *
  * 按钮和操作专用，`ExAction/ExButton` 专用的处理。
  *
- * 按钮专用过滤函数，主要过滤几种：
+ * 按钮专用过滤函数，主要过滤几个区域的核心按钮：
  *
  * 1. Open区
  * 2. Batch区
  * 3. Search区
  * 4. Extra区
  * 5. Row区
+ * 6. Extension扩展（全区域）
  *
- * 扩展区域
+ * ### 2. 核心执行逻辑
+ *
+ * 该函数的核心执行逻辑如：
+ *
+ * 1. 调用`yoAmbient`初始化继承属性。
+ * 2. 顺序计算/无序计算（针对state中的`op`变量定义）。
+ * 3. 执行前缀过滤。
+ *
+ * ### 3. 默认值
+ *
+ * #### 3.1. 默认的顺序配置：
+ *
+ * ```json
+ * {
+ *      "op.open": [
+ *          "op.open.add",
+ *          "op.open.filter"
+ *      ],
+ *      "op.batch": [
+ *          "op.batch.edit",
+ *          "op.batch.delete"
+ *      ],
+ *      "op.extra": [
+ *          "op.extra.column",
+ *          "op.extra.export",
+ *          "op.extra.import"
+ *      ],
+ *      "op.add": [
+ *          "op.submit.add",
+ *          "op.submit.reset"
+ *      ],
+ *      "op.edit": [
+ *          "op.submit.save",
+ *          "op.submit.delete",
+ *          "op.submit.reset"
+ *      ]
+ * }
+ * ```
+ *
+ * #### 3.2. 列表区域图示
+ *
+ * > 带`*`的是存在配置的区域。
+ *
+ * **列表页**
+ *
+ * ```
+ * |--------------------------------------------------|
+ * | *Open    *Batch               Search      *Extra |
+ * |--------------------------------------------------|
+ * |  Row                                             |
+ * |  Row                                             |
+ * |  Row                                             |
+ * |  Row                                             |
+ * |  Row                                             |
+ * |--------------------------------------------------|
+ * ```
+ *
+ * **表单页**
+ *
+ * ```
+ * |--------------------------------------------------|
+ * |                                     *Add / *Edit |
+ * |--------------------------------------------------|
+ * |  Form (Grid)                                     |
+ * |                                                  |
+ * |                                                  |
+ * |                                                  |
+ * |                                                  |
+ * |--------------------------------------------------|
+ * ```
+ *
+ * #### 3.3. 各项详解
+ *
+ * |页面|区域前缀|区域代码|值|含义|
+ * |---|:---|:---|:---|:---|
+ * |列表页|op.open|Open区域|op.open.add|添加新记录|
+ * ||||op.open.filter|清空列过滤条件（每一列的列过滤条件清除按钮）|
+ * ||op.batch|Batch区域|op.batch.edit|批量编辑|
+ * ||||op.batch.delete|批量删除|
+ * ||op.extra|Extra区域|op.extra.column|列更改区域|
+ * ||||op.extra.export|导出按钮|
+ * ||||op.extra.import|导入按钮|
+ * |表单页|op.add|Add提交区|op.submit.add|添加按钮|
+ * ||||op.submit.reset|重置按钮|
+ * ||op.edit|Edit提交区|op.submit.save|保存按钮|
+ * ||||op.submit.delete|删除按钮|
+ * ||||op.submit.reset|重置按钮|
+ *
+ * 后边两个区域`Add提交区/Edit提交区`主要位于内置的表单页，除开上边的五个核心区域以外，还会根据
+ * `op.extension`前缀对应的配置来追加自定义按钮，以完成按钮的配置流程。
  *
  * @memberOf module:_channel
  * @method yoAction
@@ -1170,7 +1485,13 @@ const isBatchEnabled = (reference) => {
     });
     return 0 < counter;
 };
-
+/**
+ * ## 「通道」`Ex.yoTable`
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @returns {*}
+ */
 const yoTable = (reference) => {
     const inherit = yoList(reference);
     /*
@@ -1205,8 +1526,14 @@ const yoTable = (reference) => {
     inherit.$terms = $terms;
     return inherit;
 }
-/*
- * 启用 / 禁用状态处理
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @param items
+ * @param index
+ * @param item
+ * @returns {*}
  */
 const yoTab = (reference, {
     items = [], // 总的 items
@@ -1301,6 +1628,13 @@ const setEdition = (attrs = {}, reference) => {
         })
     }
 };
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @param tabs
+ * @returns {*}
+ */
 const yoTabExtra = (reference, tabs = {}) => {
 
     /*
@@ -1352,7 +1686,13 @@ const yoTabExtra = (reference, tabs = {}) => {
         return Ux.sorterObject(attrs);
     }
 }
-
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @param item
+ * @returns {*}
+ */
 const yoFormAdd = (reference, item = {}) => {
     const formAttrs = yoAmbient(reference);
     /*
@@ -1393,7 +1733,13 @@ const yoFormAdd = (reference, item = {}) => {
     formAttrs.$plugins = $plugins;
     return formAttrs;
 }
-
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @param item
+ * @returns {*}
+ */
 const yoFormEdit = (reference, item = {}) => {
     const formAttrs = yoAmbient(reference);
     /*
@@ -1450,7 +1796,12 @@ const yoFormEdit = (reference, item = {}) => {
     return formAttrs;
 }
 
-
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @returns {*}
+ */
 const yoListSearch = (reference) => {
     const attrs = yoDynamic(reference);
     /*
@@ -1495,7 +1846,12 @@ const yoListSearch = (reference) => {
     attrs.rxFilter = Fn.rxFilter(reference);
     return attrs;
 }
-
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @returns {*}
+ */
 const yoListOpen = (reference) => {
     const attrs = yoAction(reference, "op.open", Order);
     /*
@@ -1535,6 +1891,12 @@ const yoListOpen = (reference) => {
     attrs.config = yoExtension(reference, "op.open", attrs.config);
     return attrs;
 }
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @returns {*}
+ */
 const yoListBatch = (reference) => {
     let batch = yoAction(reference, 'op.batch', Order);
     /*
@@ -1571,7 +1933,12 @@ const yoListBatch = (reference) => {
     }
     return Ux.sorterObject(batch);
 }
-
+/**
+ *
+ * @memberOf module:_channel
+ * @param reference
+ * @returns {*}
+ */
 const yoListExtra = (reference) => {
     const editorRef = yoAction(reference, "op.extra", Order);
     /*
@@ -1624,9 +1991,9 @@ const yoListExtra = (reference) => {
 }
 export default {
     /**
-     * ## 扩展函数
+     * ## 「通道」`Ex.yoComponent`
      *
-     * 同`yoAmbient`，重名函数，赋予语义的函数名。
+     * `yoAmbient`函数对应的别名函数，代码逻辑一模一样，`yoAmbient`等价函数。
      *
      * @memberOf module:_channel
      * @method yoComponent
