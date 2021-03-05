@@ -17,7 +17,7 @@ export default (reference, config = {}) => {
                 /*
                  * 禁用第一项处理
                  */
-                const $item = Ex.yoTab(reference, {
+                const $item = Ex.yoTabPage(reference, {
                     items, index, item,
                 });
                 const fnRender = Page[type];

@@ -29,6 +29,31 @@ import Yo from './yo';
  * |yiStandard|标准页面渲染专用（静态开发模式）。|
  * |ylCard|带$ready的PageCard简化版。|
  * |ylDynamic|带$ready的PageCard（支持远程读取配置）简化版。|
+ * |yoAction|五个按钮区域的属性继承函数。|
+ * |yoAmbient|「高频」统一调用的属性继承函数，几乎每个组件都会使用。|
+ * |yoComponent|yoAmbient的别名函数。|
+ * |yoControl|动态渲染中的每个控件专用的属性继承函数。|
+ * |yoDynamic|表单的`$inited`专用处理二义性属性继承函数。|
+ * |yoFilter|查询表单专用属性继承函数。|
+ * |yoForm|标准表单专用继承函数。|
+ * |yoFormAdd|「ExListXxx」列表内部专用添加表单属性继承函数。|
+ * |yoFormEdit|「ExListXxx」列表内部专用编辑表单属性继承函数。|
+ * |yoList|「ExListXxx」列表组件属性继承函数。|
+ * |yoListBatch|「ExListXxx」Batch批量区域操作属性继承函数。|
+ * |yoListExtra|「ExListXxx」Extra附加区域操作属性继承函数。|
+ * |yoListOpen|「ExListXxx」Open添加区域操作属性继承函数。|
+ * |yoListSearch|「ExListXxx」Search区域基础搜索和高级搜索工具栏属性继承函数。|
+ * |yoRender|组件专用检查是否加载完成的函数，`$ready`标记检查。|
+ * |yoTabExtra|`<Tabs/>`中附加区域属性继承函数，通常在添加表单/编辑表单页签。|
+ * |yoTable|`<Table/>`表格组件专用属性继承函数。|
+ * |yoTabPage|`<Tabs.Pane/>`页签中每一页的属性继承函数。|
+ * |yuCondition|`$condition`查询条件更新检查函数。|
+ * |yuDirty|`$dirty`组件脏状态更新检查函数。|
+ * |yuLoading|`$loading`父组件驱动子组件更新检查函数。|
+ * |yuQuery|`$query`查询条件更新检查函数。|
+ * |yuRouter|`$router`中的路由参数更新检查函数。|
+ *
+ * ## 2. 通道核心点
  *
  * @module _channel
  */

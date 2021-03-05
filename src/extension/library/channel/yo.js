@@ -1536,9 +1536,34 @@ const isBatchEnabled = (reference) => {
 /**
  * ## 「通道」`Ex.yoTable`
  *
+ * > 优先读取`Ex.yoList`构造继承属性集，当前版本提供给`ExListOpen`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * `ExListOpen`是新组件，在`ExListComplex`基础上去掉复杂的列过滤、查询等相关功能，只保留：
+ *
+ * 1. 行操作扩展，除开编辑、删除，还可定制其他行扩展按钮。
+ * 2. 添加区域操作扩展，除开添加按钮，还可定制其他区域按钮。
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |table|state|Object|config|表格的基础配置，对应`<Table/>`的配置。|
+ * |op|state|Object|$batch|计算是否支持批量操作，如果不支持批量则批量区域不显示内容。|
+ * |$plugins|state|Object|$plugins|可定制插件提供给表格列使用。|
+ * |$executor|props|Object|$executor|提供`key = Function`的哈希表，用于执行直接的行操作回调。|
+ * |$dirty|state|Boolean|$dirty|脏数据检查。|
+ * |$loading|state|Boolean|$loading|当前表格是否处于加载状态，提交/加载过程都有可能。|
+ * |$dirtyAsync|state|Boolean|$dirtyAsync|异步脏数据检查，对于某些特定场景下Ajax操作导致的脏数据检查。|
+ *
+ * ### 3. 核心
+ *
+ * 该操作核心内容在`yoList`中，附加内容只是追加过程，所以列表支持的功能，纯表格也同样支持。
+ *
  * @memberOf module:_channel
- * @param reference
- * @returns {*}
+ * @param {React} reference React组件引用
+ * @returns {Object} 表格专用配置
  */
 const yoTable = (reference) => {
     const inherit = yoList(reference);
@@ -1575,18 +1600,28 @@ const yoTable = (reference) => {
     return inherit;
 }
 /**
+ * ## 「通道」`Ex.yoTabPage`
+ *
+ * ### 1. 基本介绍
+ *
+ * 该函数用于构造`<Tabs/>`中每一页专用的配置，该值最终会构造`<Tabs.TabPane/>`元素。
+ *
+ * 核心逻辑
+ *
+ * 1. 根据`tabs.count`运算可打开的页签数，超过限制不再打开。
+ * 2. 如果打开了新的页签，旧页签是否处于禁用状态（防止不专注工作副总用）。
  *
  * @memberOf module:_channel
- * @param reference
- * @param items
- * @param index
- * @param item
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用
+ * @param {Array} items 每一个页签的配置，构成完整数组
+ * @param {Number} index 当前页签的索引信息
+ * @param {Object} item 每一个页签的配置信息
+ * @returns {Object}
  */
-const yoTab = (reference, {
-    items = [], // 总的 items
-    index = 0,  // 当前 item的索引
-    item,       // 当前 item
+const yoTabPage = (reference, {
+    items = [],           // 总的 items
+    index = 0,          // 当前 item的索引
+    item,                // 当前 item
 }) => {
     if (item) {
         const {options = {}} = reference.state;
@@ -1677,11 +1712,65 @@ const setEdition = (attrs = {}, reference) => {
     }
 };
 /**
+ * ## 「通道」`Ex.yoTabExtra`
+ *
+ * > 优先读取`Ex.yoAction`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
+ *
+ * ### 1. 基本介绍
+ *
+ * 统一处理表单内部的按钮区域，它包含两种状态。
+ *
+ * |视图模式|按钮|含义|
+ * |---|---|:---|
+ * |add|`添加，重置`|添加表单界面专用按钮。|
+ * |edit|`编辑，删除，重置`|编辑表单界面专用按钮。|
+ *
+ * 如果配置了`op.extension`那么扩展按钮会根据其`index`的配置插入到对应位置，并且这些按钮的显示还被下边两个因素影响：
+ *
+ * 1. 操作用户是否具有这些操作按钮的ACL权限。
+ * 2. 这个列表中是否已经配置了这些按钮。
+ *
+ * ### 2. 构造属性表
+ *
+ * |源属性名|源|类型|目标属性名|含义|
+ * |:---|---|---|:---|:---|
+ * |构造||state|config|计算当前Extra区域按钮的基本配置。|
+ * |$submitting|state|Boolean|$submitting|是否处于提交状态（防重复提交专用属性）。|
+ * |activeKey|第二参数|String|$activeKey|被激活的页签主键。|
+ * |$view|state|String|$view|视图模式读取，三种：`list, add, edit`。|
+ * |构造||Function|doSubmitting|防重复提交专用函数。|
+ *
+ * ### 3. 核心
+ *
+ * #### 3.1. 满足构造条件
+ *
+ * 1. 视图模式必须是`add`或`edit`。
+ * 2. 如果是`add`，必须配置了`tabs.extra.add`项。
+ * 3. 如果是`edit`，必须配置了`tabs.extra.edit`项。
+ *
+ * > 如果构造条件不满足，那么extra部分不显示任何东西。
+ *
+ * #### 3.2. RESET
+ *
+ * 重置按钮是一个特殊的存在，必须是可操作按钮存在的情况才执行重置，如果不存在可操作按钮，那么重置会无效。
+ *
+ * 检测代码：
+ *
+ * ```js
+ * // 检查是否计算结果是单独的重置按钮RESET
+ * if (attrs.config && 1 === attrs.config.length) {
+ *      attrs.config = attrs.config.filter(item => "op.submit.reset" !== item.category);
+ * }
+ * ```
+ *
+ * #### 3.3. 权限控制
+ *
+ * 调用`setEdition`内部私有方法计算可编辑的相关关系，实现对某个表单的ACL权限控制，直到可控制表单三态。
  *
  * @memberOf module:_channel
- * @param reference
- * @param tabs
- * @returns {*}
+ * @param {ReactComponent} reference React组件引用
+ * @param {Object} tabs `<Tabs/>`的基本配置
+ * @returns {Object}
  */
 const yoTabExtra = (reference, tabs = {}) => {
 
@@ -2311,7 +2400,7 @@ export default {
 
     yoTable,            // 表格
 
-    yoTab,              // Tab页签
+    yoTabPage,              // Tab页签
     yoTabExtra,         // Tab页 Extra 区域
 
     yoFormAdd,          // 添加表单

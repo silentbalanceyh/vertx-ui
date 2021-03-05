@@ -32,9 +32,30 @@ const updateInternal = (reference, prevState, consumer) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yuQuery`
  *
- * 检查 $query 是否执行了变化，如果变化则重新加载。
+ * ### 1.基础介绍
+ *
+ * 依次检查React属性（props）和状态（state）中的$query是否发生了改变，如果发生了改变，则需要重新加载当前列表，
+ * 这种加载通常是和Qr查询引擎相关。
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.重刷界面
+ *
+ * 重新刷新当前列表的条件有两个：
+ *
+ * 1. $loading = true：开启了组件加载生命周期。
+ * 2. 检查的`$query`发生了变化。
+ *
+ * 上边条件同时满足时才会触发界面刷新。
+ *
+ * #### 2.2.界面刷新内容
+ *
+ * 界面刷新内容也分为两部分：
+ *
+ * 1. 列刷新（如果有列过滤，那么列刷新也是必须的）
+ * 2. 数据刷新（调用`rxSearch`标准方法执行刷新）
  *
  * @memberOf module:_channel
  * @method yuQuery
@@ -101,9 +122,28 @@ const yuQuery = (reference, virtualRef) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yuDirty`
  *
- * 检查 $dirty 标记执行是否脏数据变化，如果变化则重新加载。
+ * ### 1.基本介绍
+ *
+ * 检查 $dirty 标记执行是否脏数据变化，如果变化则重新加载，主要检查系统中的`$dirty`标记，这个检查不做比，
+ * 直接一次检查属性和状态中的基础信息。
+ *
+ * ### 2.核心
+ *
+ * ### 2.1. 检查步骤
+ *
+ * 1. 先检查props中的`$dirty`变量，如果已经出现脏数据，则同时设置`$dirty = true, $loading = true`。
+ * 2. 第一步如果执行，则触发内部更新函数`updateInternal`
+ *
+ * ### 2.2. 内部函数触发条件
+ *
+ * 1. 当前检测变量`$dirty`发生了改变。
+ * 2. 当前组件的`$loading`的值为true。
+ *
+ * ### 2.3. 回调
+ *
+ * > 该操作完成后的回调中，必须充值`$loading`为false导致不会出现死循环。
  *
  * @memberOf module:_channel
  * @method yuDirty
@@ -138,9 +178,31 @@ const yuDirty = (reference, virtualRef) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yuCondition`
  *
- * 检查 $condition 是否执行了变化，如果变化则重新加载。
+ * ### 1. 基础介绍
+ *
+ * 分别检查props，state属性中的`$condition`变量是否发生过更改，如果更改则触发componentDidUpdate流程。
+ *
+ * 检查结果的数据结构：
+ *
+ * ```json
+ * {
+ *     original: "原始状态",
+ *     current: "新状态"
+ * }
+ * ```
+ *
+ * 如果没有更新，则直接返回undefined。
+ *
+ * ### 2. 核心
+ *
+ * 扩展版本中引入了state内部的检查，最终会导致双检查流程：
+ *
+ * 1. 如果props中的`$condition`发生过改变，则执行`$condition`重设重设条件。
+ * 2. 如果state中的`$condition`发生过改变，则调用`rxCondition`函数重设条件。
+ *
+ * > 目前流程使用的场景只有上边两种，可能存在考虑不周的情况。
  *
  * @memberOf module:_channel
  * @method yuCondition
@@ -184,12 +246,27 @@ const yuCondition = (reference, virtualRef) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yuLoading`
+ *
+ * ### 1.基本介绍
  *
  * 直接执行纯的 $loading，检查当前属性 props 和 state 中的 loading 是否变化。
  *
  * 1. props 中的 $loading：外置传入
  * 2. state 中的 $loading：内置传入
+ *
+ * ### 2.核心
+ *
+ * React包含了两个核心对象
+ *
+ * |对象名|含义|
+ * |:---|:---|
+ * |props|React组件属性（全部只读）|
+ * |state|React组件状态（可写）|
+ *
+ * 这个方法检查这两个对象之间是否维持了一致，当一个组件被外部直接设置了`$loading = true`，那么表示父组件驱动子组件执行强制加载，
+ * 这个时候会触发**开始加载**的动作。加载完成后，父组件会传第二次`$loading = false`到子组件，那么此时子组件也会完成自我更新
+ * 以及自我驱动。
  *
  * @memberOf module:_channel
  * @method yuLoading
@@ -209,9 +286,37 @@ const yuLoading = (reference, virtualRef) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「通道」`Ex.yuRouter`
  *
- * 路由路径是否发生了变化。
+ * ### 1. 基本介绍
+ *
+ * 特殊方法，该方法在`Ux.isRoute`之前，需要和它做出对比：
+ *
+ * * `Ux.isRoute`是检查路由的路径是否发生更改（无关参数），返回true/false值。
+ * * `Ex.yuRouter`是检查路由路径中的参数是否发生了更改，直接执行回调。
+ *
+ * ### 2. 代码示例
+ *
+ * ```js
+ * const reference = this;
+ * Ex.yuRouter(reference, {props, state}, () =>
+ *      Ex.yiStandard(reference).then(Ux.pipe(reference)));
+ * ```
+ *
+ * 操作界面同样是如下，左边点击菜单时只会发生参数更改，路由路径不变化。
+ *
+ * ```
+ * |--------------------------------------------------|
+ * |  Menu  |  Content ( List )                       |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |        |  Row                                    |
+ * |--------------------------------------------------|
+ * ```
+ *
  *
  * @memberOf module:_channel
  * @method yuRouter
