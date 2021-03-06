@@ -210,6 +210,7 @@ const yiCompany = (reference) => {
  * ```
  *
  * |变量|类型|含义|
+ * |:---|---|:---|
  * |renders|Object|`field = Jsx`结构，渲染表单时对应的字段渲染函数。|
  * |onChange|Object|`field = Function`结构，对象中的每个函数可以注入到字段的`onChange`外置函数中。|
  *
@@ -750,6 +751,7 @@ const startAsync = (state) => {
  * 如果是动态页面，参数`$input`直接来自于路由和环境变量的计算：
  *
  * |参数|来源|含义|
+ * |---|:---|:---|
  * |app|环境变量`Z_ROUTE`|当前应用的专用路由（标识应用程序）。|
  * |module|$router变量|当前页面所属模块。|
  * |page|$router变量|当前页面名称。|
