@@ -25,16 +25,11 @@
         "cleverLinks": true,
         "monospaceLinks": true,
         "default": {
-            "outputSourceFiles": false,
-            "staticFiles": {
-                "include": [
-                    "document/doc-config/tpl"
-                ]
-            }
+            "outputSourceFiles": false
         }
     },
     "opts": {
-        "template": "node_modules/docdash",
+        "template": "document/doc-config/tpl",
         "encoding": "utf8",
         "destination": "document/doc-web-extension",
         "recurse": true

@@ -502,7 +502,7 @@ const _parseAuthorized = (action = {}, reference) => {
  *
  * ### 1.基本介绍
  *
- * 判断哪些函数需要继承：
+ * 判断哪些函数需要继承（此处只继承三类）：
  *
  * * `rx`前缀函数
  * * `fn`前缀函数
@@ -556,9 +556,9 @@ const mapButtons = (extension = [], reference) => {
 }
 
 /**
- * ## 扩展配置
+ * ## 「标准」`Ex.mapMeta`
  *
- * 处理 `data` 中的 metadata 字段，强制转换成 Json 格式的数据。
+ * 处理 `data` 中的 metadata 字段，强制转换成 Json 格式的数据，在Zero Ui的框架规范中，
  *
  * @memberOf module:_function
  * @param {Object} data 待处理的输入
