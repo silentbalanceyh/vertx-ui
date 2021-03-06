@@ -19,7 +19,7 @@
 }
 
 #main h3 {
-    color: #0093ed;
+    color: #1874CD;
     font-size: 20px !important;
     font-weight: bold !important;
 }
@@ -43,4 +43,8 @@
 
 #main blockquote {
     color: #1464b4;
+}
+
+table td {
+    line-height: 1.8em;
 }
