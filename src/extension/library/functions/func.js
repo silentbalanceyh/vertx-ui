@@ -94,7 +94,9 @@ const findTUnique = (fromRet, identifier, categories = []) => {
 
 /**
  *
- * ## 扩展函数
+ * ## 「标准」`Ex.onRelationIdentifiers`
+ *
+ * ### 1.基本介绍
  *
  * 计算关系的 identifier 专用函数，返回的数据结构如：
  *
@@ -107,6 +109,37 @@ const findTUnique = (fromRet, identifier, categories = []) => {
  *
  * * up: 上游关系数据。
  * * down: 下游关系数据。
+ *
+ * ### 2.函数代码流程
+ *
+ * 1. 先从`X_CATEGORY`分类表中（每一个分类对应一个identifier）提取和传入模型标识符匹配的分类数据。
+ * 2. 读取当前模型标识符的所有父类（包括祖辈）直到根节点。
+ * 3. 在`展开树`中检索和当前模型标识符匹配的节点（二次计算）。
+ * 4. 计算相关的所有上游下游数据信息。
+ *
+ * ### 3.关系结构
+ *
+ * 整体的关系结构如：
+ *
+ * ```
+ *     A     -------   B
+ *    / \             / \
+ *   A1  A2          B1  B2
+ * ```
+ *
+ * 如上图结构中
+ *
+ * 1. 若计算`A2`到`B`
+ *      1. A2到B
+ *      2. A到B
+ * 2. 若计算`A2`到`B1`
+ *      1. A2到B
+ *      2. A2到B1
+ *      3. A到B1
+ *      4. A到B
+ *
+ * 计算两个节点之间关系时，实际上是两颗树之间任意节点的关联计算（两两计算，只要有定义就计算）。
+ *
  *
  * @memberOf module:_function
  * @method onRelationIdentifiers
@@ -164,9 +197,22 @@ const onRelationIdentifiers = (identifier, source = [], definition = []) => {
 };
 /**
  *
- * ## 扩展函数
+ * ## 「标准」`Ex.onRelationType`
  *
- * 计算关系类型专用函数，计算唯一关系信息。
+ * ### 1.基本介绍
+ *
+ * 计算关系类型专用函数，根据关系定义计算当前关系的类型。
+ *
+ * ### 2.类型表
+ *
+ * CMDB系统定义的关系类型如：
+ *
+ * |类型值|类型名|
+ * |:---|:---|
+ * |containment|包含|
+ * |deployed|运行于|
+ * |connection|连接|
+ * |dependency|依赖|
  *
  * @memberOf module:_function
  * @method onRelationType
@@ -201,9 +247,23 @@ const onRelationType = (reference, record = {}) => {
     }
 }
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.onRelation`
  *
- * 计算关系专用函数。
+ * ### 1.基本介绍
+ *
+ * 计算关系专用函数，该函数可计算两种关系：
+ *
+ * * 传入`$defineMap`：执行关系定义的计算，对应`M_RELATION`表。
+ * * 未传入`$defineMap`：执行关系数据的计算（实际关系），在目前CMDB中则是`RL_DEVICE_RELATION`表。
+ *
+ * ### 2.字段说明
+ *
+ * 在CMDB的关系计算中，关系主要分为两部分（上游和下游）
+ *
+ * * `up`：上游关系
+ * * `down`：下游关系
+ *
+ * 此处的`config`中的`up`和`down`存储了上下游关系计算时的基础配置数据（元数据）。
  *
  * @memberOf module:_function
  * @param {Object} current 当前节点的关系处理
@@ -226,7 +286,9 @@ const onRelation = (current = {}, config = {}, $defineMap) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.onApp`
+ *
+ * ### 1.基本介绍
  *
  * 使用应用数据初始化，自动加载应用配置数据
  *
@@ -235,6 +297,20 @@ const onRelation = (current = {}, config = {}, $defineMap) => {
  *      $inited.type = "ENTITY";
  *      const form = Ex.yoForm(this, null, Ex.onApp($inited));
  * ```
+ *
+ * 本函数追加的核心字段
+ *
+ * |字段名|含义|
+ * |:---|:---|
+ * |appName|应用程序名称，直接从`Ux.isInit()`获取的数据中读取。|
+ * |namespace|当前应用名空间，暂时使用`cn.originx.`前缀，调用`toNamespace`方法（后期会修正和更改）。|
+ * |active|是否激活当前记录，如果不包含`active`则默认为true。|
+ *
+ * ### 2.核心点
+ *
+ * 此处最重要的一点就是`namespace`的计算，该名空间的计算目前使用固定值`cn.originx.`前缀，后期考虑使用环境变量或者其他手段进行计算和配置。
+ *
+ * > 在Ox平台开第二个应用时候，名空间的计算会纳入到开发计划中，主要牵涉`I_API/I_JOB/I_SERVICE`三张表的数据读取。
  *
  * @memberOf module:_function
  * @param {Object} $inited 初始化应用数据
@@ -255,7 +331,9 @@ const onApp = ($inited = {}) => {
     return inited;
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.onTree`
+ *
+ * ### 1.基本介绍
  *
  * 树形菜单专用处理函数
  *
@@ -265,6 +343,16 @@ const onApp = ($inited = {}) => {
  *          tree: config.tree,
  *      });
  * ```
+ *
+ * ### 2.基础结构
+ *
+ * #### 2.1.树结构
+ *
+ * 参考`Ux.toTreeArray`文档。
+ *
+ * #### 2.2.树选择
+ *
+ * 选择模式参考`Ux.Tree`文档。
  *
  * @memberOf module:_function
  * @param {Array} keys 配置数据信息
@@ -290,7 +378,7 @@ const onTree = (keys = [], data = [], config = {}) => {
 // =====================================================
 
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.upValue`
  *
  * 检查输入的 `key` 状态信息，计算最终状态值：
  *
@@ -318,7 +406,7 @@ const _up = (state = {}, prevState = {}, key = "") => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.upCondition`
  *
  * 检查 `$condition` 状态信息，计算最终状态值：
  *
@@ -337,7 +425,7 @@ const _up = (state = {}, prevState = {}, key = "") => {
 const upCondition = (state = {}, prevState = {}) => _up(state, prevState, "$condition");
 /**
  *
- * ## 扩展函数
+ * ## 「标准」`Ex.upQuery`
  *
  * 检查 `$query` 状态信息，计算最终状态值：
  *
@@ -356,7 +444,7 @@ const upCondition = (state = {}, prevState = {}) => _up(state, prevState, "$cond
 const upQuery = (state = {}, prevState = {}) => _up(state, prevState, '$query');
 /**
  *
- * ## 扩展函数
+ * ## 「标准」`Ex.upLoading`
  *
  * 检查 `$loading` 状态信息，计算最终状态值：
  *
@@ -375,7 +463,7 @@ const upQuery = (state = {}, prevState = {}) => _up(state, prevState, '$query');
 const upLoading = (state = {}, prevState = {}) => _up(state, prevState, '$loading');
 /**
  *
- * ## 扩展函数
+ * ## 「标准」`Ex.upList`
  *
  * 检查 `$options, $identifier` 状态信息，计算最终状态值：
  *
@@ -578,9 +666,25 @@ const mapMeta = (data = {}) => {
     return data;
 };
 /**
- * ## 扩展配置
+ * ## 「标准」`Ex.mapUri`
  *
- * 处理 `item` 中的 `uri` 地址，主要用于处理 `EXPAND` 类型的菜单路径专用。
+ * ### 1.基本介绍
+ *
+ * 处理 `item` 中的 `uri` 地址，主要用于处理 `EXPAND` 类型的菜单路径专用，链接地址会有两种：
+ *
+ * * 基础链接：uri地址 = `Z_ROUTE` + item.uri。
+ * * 展开菜单：uri地址 = `EXPAND`（特殊值）。
+ *
+ * ### 2.核心
+ *
+ * 系统链接地址主要分为下边几种：
+ *
+ * |值|含义|
+ * |:---|:---|
+ * |$MAIN$|当前链接的主页地址，对应`Z_ENTRY_ADMIN`配置的路径。|
+ * |$SELF$|当前链接地址，`$router`中读取。|
+ * |EXPAND|展开菜单，通常是带有子菜单的上级菜单，可展开，不触发`react-router`。|
+ * |`/xxx/yyy`|「标准」普通地址，标准的路径地址，会执行`Z_ROUTE` + item.uri运算。|
  *
  * @memberOf module:_function
  * @param {Object} item 配置对象信息
@@ -664,9 +768,12 @@ const mapAsyncDatum = (columns = [], reference) => {
 // to前缀
 // =====================================================
 /**
- * ## 扩展配置
+ * ## 「标准」`Ex.toUri`
  *
- * Uri专用配置处理，构造路径信息。
+ * ### 1.基本介绍
+ *
+ * 1. Uri专用配置处理，构造路径信息，根据`Z_ROUTE`来计算最终的路径信息。
+ * 2. 计算过程中，还根据路径前缀，执行去`/`符号的特殊操作（规范化）。
  *
  * @memberOf module:_function
  * @param {String} uri 原始路径信息
@@ -687,9 +794,17 @@ const toUri = (uri = "", $app) => {
     return relatedPath;
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toDialog`
  *
- * 窗口配置生成函数
+ * ### 1.基本介绍
+ *
+ * 直接执行dialog参数的合并，用来生成`<Modal/>`的基础配置
+ *
+ * ```json
+ * {
+ *     content: "传入配置效果"
+ * }
+ * ```
  *
  * @memberOf module:_function
  * @param {Object} dialog 窗口专用配置
@@ -707,12 +822,22 @@ const toDialog = (dialog) => {
     return config;
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toNamespace`
+ *
+ * ### 1.基本介绍
  *
  * 名空间计算
  *
  * 1. 传入是 string， 直接来
  * 2. 传入是 非 string，走 React
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.关于多租户
+ *
+ * 1. 一个应用只有一个名空间，所以这个维度和租户维度有些区别。
+ * 2. 租户维度依靠sigma执行，应用维度依靠`appId`。
+ * 3. 名空间和`appId`执行绑定，一个应用只能有一个名空间。
  *
  * @memberOf module:_function
  * @param {ReactComponent} reference React对应组件引用
@@ -747,7 +872,11 @@ const COLORS = [
     "#7077eb"
 ];
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toColor`
+ *
+ * ### 1.基本介绍
+ *
+ * 随机读取一个颜色信息，这个方法主要用在Dashboard上。
  *
  * 1. 如果传入 current，则读取 current 上的颜色信息。
  * 2. 如果不传入 current，则随机读取颜色信息。
@@ -766,9 +895,22 @@ const toColor = (current) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toModelId`
+ *
+ * ### 1.基本介绍
  *
  * 从 `module` 中提取配置信息，并执行 identifier 的计算。
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.内部调用
+ *
+ * 内部调用了`toIdentifier`执行最终操作。
+ *
+ * #### 2.2.数据源
+ *
+ * * 配置数据：`X_MODULE`中定义了提取数据的字段信息以及配置信息。
+ * * 配置抽取：直接从`$inited`数据中提取`modelId`作为模型标识符的提取基础。
  *
  * @memberOf module:_function
  * @param {ReactComponent} reference React对应组件引用
@@ -784,16 +926,42 @@ const toModelId = (reference, field) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toIdentifier`
+ *
+ * ### 1.基本介绍
  *
  * 根据传入配置计算统一标识符
  *
  * 1. `__DEFAULT__`：默认的统一标识符，如果不存在则使用该值。
  * 2. `__PATTERN__`：执行 format 专用表达式解析转换。
  *
+ * > 如果传入配置解析不了`modelId`
+ *
+ * ### 2.核心点
+ *
+ * 这个方法主要用于读取不同模型标识符对应的配置，通常格式如：
+ *
+ * ```json
+ * {
+ *      "__DEFAULT__": "120a1719-ba5b-4b45-9768-dddf7048b186",
+ *      "ci.device": "120a1719-ba5b-4b45-9768-dddf7048b186",
+ *      "ci.server": "38ba3c92-0fa7-4df0-9c6c-2a9b33822107",
+ *      "ci.application": "fc452465-3735-4227-a911-b2080b18ce10",
+ *      "ci.business": "3168a6ea-9c4d-40ed-8c6c-ec3122da0ee4",
+ *      "ci.database": "35303c14-de93-4978-a29b-b523fb0aefcb",
+ *      "ci.middleware": "8b4c140c-9fa5-4d5d-8254-ea868d3e72ad",
+ *      "...":"..."
+ * }
+ * ```
+ *
+ * 上述转换内容如：
+ *
+ * 1. 读取的都是配置的核心主键，如`UI_CONTROL`中的主键。
+ * 2. 读取的表单唯一值，如`UI_FORM`中的code（借用`__PATTERN__`配置）。
+ *
  * @memberOf module:_function
  * @param {Object} config 基本配置信息
- * @param {Object} program 编程专用配置信息
+ * @param {String} program 编程专用配置信息，传入的identifier
  * @returns {String} 返回最终的统一标识符
  */
 const toIdentifier = (config = {}, program) => {
@@ -812,9 +980,19 @@ const toIdentifier = (config = {}, program) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.toArray`
  *
- * DataArray和Array的统一数据处理，返回最终的 Array 数组。
+ * ### 1.基本介绍
+ *
+ * DataArray和Array的统一数据处理，返回最终的 Array 数组，该方法类似于
+ * `Ux.ambArray`方法，但判断条件不同。
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.判断条件
+ *
+ * 1. Ux.ambArray中判断使用了`data instanceof DataArray`。
+ * 2. Ex.toArray中判断则使用了`Ux.isFunction(data.to)`，因为它包含了`to()`方法。
  *
  * @memberOf module:_function
  * @param {any} data 输入数据
@@ -856,9 +1034,42 @@ const FUNS = {
         B.form(reference).remove(params, config)
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.onOp`
  *
- * 生成操作类专用函数执行器执行绑定。
+ * ### 1.基本介绍
+ *
+ * 动态渲染流程中，执行按钮事件绑定的专用函数，用来绑定按钮触发的事件信息。
+ *
+ * ```js
+ * const $op = {};
+ * Object.keys(event)
+ *      .forEach(opKey => $op[opKey] = Ex.onOp(reference, event[opKey]));
+ * state.$op = $op;
+ * ```
+ *
+ * ### 2.数据结构
+ *
+ * #### 2.1.配置信息
+ *
+ * 传入的第二参数`metadata`结构如下：
+ *
+ * ```json
+ * {
+ *     "event": "事件名称",
+ *     "config": {
+ *
+ *     }
+ * }
+ * ```
+ *
+ * #### 2.2. 事件表
+ *
+ * |事件名|说明|
+ * |:---|:---|
+ * |event.filter|搜索表单专用函数，触发查询条件的更新。|
+ * |event.add|添加表单提交函数。|
+ * |event.save|更新表单提交函数。|
+ * |event.delete|删除表单提交函数。|
  *
  * @memberOf module:_function
  * @param {ReactComponent} reference React对应组件引用

@@ -458,7 +458,7 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
  *
  * |源属性名|源|类型|目标属性名|含义|
  * |:---|---|---|:---|:---|
- * |$app|props|DataObject|$app|应用程序配置数据，也可以直接调用`Ux.isInited()`读取。|
+ * |$app|props|DataObject|$app|应用程序配置数据，也可以直接调用`Ux.isInit()`读取。|
  * |$user|props|Object|$user|登录用户基础数据，也可以直接调用`Ux.isLogged()`读取。|
  * |$profile|props|DataObject|$profile|（保留属性）|
  * |$router|props|DataRouter|$router|react-router路由器专用对象。|
