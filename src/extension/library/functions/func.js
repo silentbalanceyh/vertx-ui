@@ -532,14 +532,14 @@ const mapFun = (fnName) => "string" === typeof fnName && (
 /**
  * ## 「标准」`Ex.mapButtons`
  *
- * ### 1.基本说明
+ * ### 1.基本介绍
  *
  * 按钮专用处理，用于处理：`optionJsx.extension` 配置的专用扩展函数，该函数执行两个步骤：
  *
  * 1. `_parseAction`解析标准按钮元素String或Object。
  * 2. `_parseAuthorized`解析按钮中的基础权限，配合props中的`$action`进行计算，执行ACL控制。
  *
- * > 该函数是一个旧函数，目前没有地方在使用它，但暂时保留。
+ * > 该函数是一个旧函数，目前没有地方在使用它，但暂时保留，所以不删除。
  *
  * @memberOf module:_function
  * @deprecated
@@ -558,7 +558,14 @@ const mapButtons = (extension = [], reference) => {
 /**
  * ## 「标准」`Ex.mapMeta`
  *
- * 处理 `data` 中的 metadata 字段，强制转换成 Json 格式的数据，在Zero Ui的框架规范中，
+ * ### 1.基本介绍
+ *
+ * 处理 `data` 中的 metadata 字段，强制转换成 Json 格式的数据，在Zero Ui的框架规范中，数据记录参考最初的扩展模块中的规范。
+ *
+ * ### 2.核心
+ *
+ * 正常流程中，后端会直接将`metadata`字段执行JSON序列化，当前函数则是前端的一个「补充」函数。
+ *
  *
  * @memberOf module:_function
  * @param {Object} data 待处理的输入
