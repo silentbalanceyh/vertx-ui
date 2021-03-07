@@ -51,12 +51,17 @@ const authBind = (input, grouped, executor) => {
     }
 }
 /**
+ * ## 「引擎」`Ex.authKeySet`
+ *
+ * ### 1.基本介绍
+ *
+ * 根据datum的字典数据以及动态执行器，生成不同权限管理的基础配置（主视图）。
  *
  * @memberOf module:_kernel
- * @param source
- * @param config
- * @param grouped
- * @returns {{}}
+ * @param {Array} source 资源记录过滤源
+ * @param {Object} config 行过滤、列过滤、查询条件基础配置
+ * @param {Object} grouped 权限分组哈希表
+ * @returns {Object} 最终的权限定义主键集
  */
 const authKeySet = (source = [], config = {}, grouped = {}) => {
     const {rows, projection, criteria} = config;
@@ -70,6 +75,11 @@ const authKeySet = (source = [], config = {}, grouped = {}) => {
     return data;
 }
 /**
+ * ## 「引擎」`Ex.authRule`
+ *
+ * ### 1.基本介绍
+ *
+ * 读取当前界面相关的所有权限管理规则定义，这个方法用来完成界面生成（动态专用）。
  *
  * @memberOf module:_kernel
  */
@@ -110,10 +120,16 @@ const authRule = () => Ux.ajaxGet("/api/rules").then(rules => {
     return Ux.promise(normalized);
 })
 /**
+ * ## 「引擎」`Ex.authTpl`
  *
+ * ### 1.基本介绍
+ *
+ * 生成界面模板，根据界面模板来处理ACL管理。
+ *
+ * @async
  * @memberOf module:_kernel
- * @param params
- * @returns {*}
+ * @param {Object} params 当前请求的参数信息
+ * @returns {Promise<*>}
  */
 const authTpl = (params = {}) => {
     return Ux.ajaxGet("/api/rule-items/rule/:key", {key: params.key}).then(result => {
@@ -148,12 +164,23 @@ const authTpl = (params = {}) => {
     })
 }
 /**
+ * ## 「引擎」`Ex.authData`
+ *
+ * ### 1.基本介绍
+ *
+ * 复杂配置，用于生成数据域的元数据定义信息，主要包含：
+ *
+ * 1. 行定义信息（rows），执行行过滤专用。
+ * 2. 查询条件信息（criteria），执行数据过滤专用（预处理）。
+ * 3. 列定义信息（projection），执行列过滤专用。
+ * 4. 资源视图信息（view），执行资源视图筛选（主视图）。
+ * 5. 资源访问者信息（visitant），新维度，执行复杂的资源访问逻辑。
  *
  * @memberOf module:_kernel
- * @param configuration
- * @param items
- * @param views
- * @returns {{data: {segment: {}}, config: {}, selected: Set<any>}}
+ * @param {Object} configuration 传入的核心ACL配置数据
+ * @param {Array} items 和ACL配置相关的资源组项目信息
+ * @param {Array} views 视图信息
+ * @returns {Object}
  */
 const authData = (configuration = {}, items = [], views = []) => {
     /*
@@ -278,11 +305,16 @@ const outCriteria = (selectedData, criteria, source) => {
     }
 }
 /**
+ * ## 「引擎」`Ex.authRequest`
+ *
+ * ### 1.基本介绍
+ *
+ * 生成ACL管理请求专用函数，针对不同类型的权限管理生成统一的ACL管理请求。
  *
  * @memberOf module:_kernel
- * @param reference
- * @param selected
- * @param fnEvent
+ * @param {ReactComponent} reference React组件引用
+ * @param {Array} selected 权限管理过程中已经选择的项
+ * @param {Function} fnEvent 专用事件执行函数（生成数据专用）
  * @returns {Object}
  */
 const authRequest = (reference, selected = [], fnEvent = event => event) => {
@@ -404,19 +436,22 @@ const treeSlash = (permissions = [], type = {}) => {
     }
     return Ux.toTree(normalized, {title: 'text'});
 }
-/*
- * ## 扩展函数
+
+/**
+ * ## 「引擎」`Ex.authGroups`
+ *
+ * ### 1.基本介绍
  *
  * 1. 根据传入的 treeData 提取 resource.tree 构造分类
  * 2. 读取远程的权限组，权限组挂在分类下边
- */
-
-/**
+ *
+ * > 该方法用于在管理过程中将资源和权限进行树形分组，生成引导菜单。
  *
  * @memberOf module:_kernel
- * @param state
- * @param types
- * @returns {*}
+ * @async
+ * @param {State} state 当前组件状态信息
+ * @param {Array} types 资源树类型定义信息
+ * @returns {Promise<*>}
  */
 const authGroups = (state = {}, types = []) => {
     /* 权限组读取 */
@@ -453,17 +488,18 @@ const authGroups = (state = {}, types = []) => {
         return Ux.promise(state);
     })
 }
-/*
+/**
+ * ## 「引擎」`Ex.authTreeRes`
  *
- * ## 扩展函数
+ * ### 1.基本介绍
  *
  * 1. 直接读取 resource.tree 中的内容
  * 2. 遇到 ID:XXX 需要执行判断，进行深度树的二次读取
  * 3. 最终构造完成的树形数组（parentId一致）
- */
-/**
+ *
  * @memberOf module:_kernel
- * @param state
+ * @async
+ * @param {State} state React组件状态
  * @returns {Promise<*>}
  */
 const authTreeRes = (state = {}) => {

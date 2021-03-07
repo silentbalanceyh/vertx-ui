@@ -260,6 +260,19 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authData</code></h2>
+<h3>1.基本介绍</h3>
+<p>复杂配置，用于生成数据域的元数据定义信息，主要包含：</p>
+<ol>
+<li>行定义信息（rows），执行行过滤专用。</li>
+<li>查询条件信息（criteria），执行数据过滤专用（预处理）。</li>
+<li>列定义信息（projection），执行列过滤专用。</li>
+<li>资源视图信息（view），执行资源视图筛选（主视图）。</li>
+<li>资源访问者信息（visitant），新维度，执行复杂的资源访问逻辑。</li>
+</ol>
+</div>
+
 
 
 
@@ -300,13 +313,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>传入的核心ACL配置数据</p></td>
         </tr>
 
     
@@ -318,13 +336,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>和ACL配置相关的资源组项目信息</p></td>
         </tr>
 
     
@@ -336,13 +359,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>视图信息</p></td>
         </tr>
 
     
@@ -390,7 +418,7 @@
 
     
 
-    <h4 class="name" id=".authGroups"><span class="type-signature">(static) </span>authGroups<span class="signature">(state, types)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".authGroups"><span class="type-signature">(async, static) </span>authGroups<span class="signature">(state, types)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span></h4>
 
     
 
@@ -436,6 +464,18 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authGroups</code></h2>
+<h3>1.基本介绍</h3>
+<ol>
+<li>根据传入的 treeData 提取 resource.tree 构造分类</li>
+<li>读取远程的权限组，权限组挂在分类下边</li>
+</ol>
+<blockquote>
+<p>该方法用于在管理过程中将资源和权限进行树形分组，生成引导菜单。</p>
+</blockquote>
+</div>
+
 
 
 
@@ -476,13 +516,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">State</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>当前组件状态信息</p></td>
         </tr>
 
     
@@ -494,13 +539,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>资源树类型定义信息</p></td>
         </tr>
 
     
@@ -533,7 +583,7 @@
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Promise.&lt;*></span>
 
 
     </dd>
@@ -594,6 +644,12 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authKeySet</code></h2>
+<h3>1.基本介绍</h3>
+<p>根据datum的字典数据以及动态执行器，生成不同权限管理的基础配置（主视图）。</p>
+</div>
+
 
 
 
@@ -634,13 +690,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>资源记录过滤源</p></td>
         </tr>
 
     
@@ -652,13 +713,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>行过滤、列过滤、查询条件基础配置</p></td>
         </tr>
 
     
@@ -670,13 +736,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>权限分组哈希表</p></td>
         </tr>
 
     
@@ -701,6 +772,10 @@
 <h5>Returns:</h5>
 
         
+<div class="param-desc">
+    <p>最终的权限定义主键集</p>
+</div>
+
 
 
 <dl class="param-type">
@@ -770,6 +845,12 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authRequest</code></h2>
+<h3>1.基本介绍</h3>
+<p>生成ACL管理请求专用函数，针对不同类型的权限管理生成统一的ACL管理请求。</p>
+</div>
+
 
 
 
@@ -810,13 +891,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">ReactComponent</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件引用</p></td>
         </tr>
 
     
@@ -828,13 +914,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Array</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>权限管理过程中已经选择的项</p></td>
         </tr>
 
     
@@ -846,13 +937,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">function</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>专用事件执行函数（生成数据专用）</p></td>
         </tr>
 
     
@@ -946,6 +1042,12 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authRule</code></h2>
+<h3>1.基本介绍</h3>
+<p>读取当前界面相关的所有权限管理规则定义，这个方法用来完成界面生成（动态专用）。</p>
+</div>
+
 
 
 
@@ -978,7 +1080,7 @@
 
     
 
-    <h4 class="name" id=".authTpl"><span class="type-signature">(static) </span>authTpl<span class="signature">(params)</span><span class="type-signature"> &rarr; {*}</span></h4>
+    <h4 class="name" id=".authTpl"><span class="type-signature">(async, static) </span>authTpl<span class="signature">(params)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span></h4>
 
     
 
@@ -1023,6 +1125,12 @@
 
 
 
+
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authTpl</code></h2>
+<h3>1.基本介绍</h3>
+<p>生成界面模板，根据界面模板来处理ACL管理。</p>
+</div>
 
 
 
@@ -1064,13 +1172,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">Object</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>当前请求的参数信息</p></td>
         </tr>
 
     
@@ -1103,7 +1216,7 @@
     </dt>
     <dd>
         
-<span class="param-type">*</span>
+<span class="param-type">Promise.&lt;*></span>
 
 
     </dd>
@@ -1118,7 +1231,7 @@
 
     
 
-    <h4 class="name" id=".authTreeRes"><span class="type-signature">(static) </span>authTreeRes<span class="signature">(state)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span></h4>
+    <h4 class="name" id=".authTreeRes"><span class="type-signature">(async, static) </span>authTreeRes<span class="signature">(state)</span><span class="type-signature"> &rarr; {Promise.&lt;*>}</span></h4>
 
     
 
@@ -1164,6 +1277,16 @@
 
 
 
+<div class="description usertext">
+    <h2>「引擎」<code>Ex.authTreeRes</code></h2>
+<h3>1.基本介绍</h3>
+<ol>
+<li>直接读取 resource.tree 中的内容</li>
+<li>遇到 ID:XXX 需要执行判断，进行深度树的二次读取</li>
+<li>最终构造完成的树形数组（parentId一致）</li>
+</ol>
+</div>
+
 
 
 
@@ -1204,13 +1327,18 @@
 
             <td class="type">
             
+                
+<span class="param-type">State</span>
+
+
+            
             </td>
 
             
 
             
 
-            <td class="description last"></td>
+            <td class="description last"><p>React组件状态</p></td>
         </tr>
 
     
@@ -5751,7 +5879,7 @@ Jsx元素的控件属性相关信息。直接从第二参中读取<code>type</co
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sun Mar 07 2021 22:38:54 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.6.6</a> on Sun Mar 07 2021 22:58:18 GMT+0800 (China Standard Time) using the <a href="https://github.com/clenemt/docdash">docdash</a> theme.
 </footer>
 
 <script>prettyPrint();</script>
