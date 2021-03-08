@@ -1,4 +1,5 @@
-import Ux from 'ux';
+import Ux from "ux";
+import {Modal} from "antd";
 /*
  * 生成初始数据结构
  */
@@ -62,10 +63,45 @@ const ciMoveData = (reference, data) => {
     });
     return ciMove(reference, item);
 };
+const onProbe = (reference, data = {}) => {
+    const existing = ciExisting(reference, data);
+    if (existing) {
+        const modal = Ux.fromHoc(reference, "modal");
+        modal.content = Ux.formatExpr(modal.content, data, true);
+        Modal.confirm({
+            ...modal,
+            onOk: () => {
+                const state = ciMoveData(reference, data);
+                reference.setState(state);
+            }
+        })
+    } else {
+        const state = ciOpen(reference, data);
+        reference.setState(state);
+    }
+};
 export default {
-    ciStart,
-    ciOpen,
-    ciMove,
-    ciMoveData,
-    ciExisting,
+    /*
+     * onProbe 中的 data 的特别的数据结构：
+     * {
+     *      "globalId": "必须数据，UCMDB ID"，
+     *      "name": "当前数据中的 name 节点",
+     *      "identifier": "标识符相关信息"
+     * }
+     */
+    onProbe,
+    onVisit: (reference) => (model = {}) => {
+        const {$identifier} = reference.props;
+        if ($identifier) {
+            const data = Ux.clone(model);
+            data.identifier = $identifier;
+            onProbe(reference, data);
+        }
+    },
+    onSelected: (reference, item = {}) => (event) => {
+        Ux.prevent(event);
+        const state = ciMove(reference, item);
+        reference.setState(state);
+    },
+    onStart: ciStart,
 }

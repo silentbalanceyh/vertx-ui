@@ -82,7 +82,10 @@ export {default as ExWizard} from './ExWizard/UI';                      /* 双�
  *
  * |组件名|生命周期|表单组件|含义|
  * |:---|---|---|:---|
+ * |OxAnchor|o o x|否|链接专用锚点，带Dialog模式的按钮或链接，窗口打开是配置项详情。|
  * |OxCard|x o x|否|PageCard专用的封装型组件，为了可直接在系统中配置界面。|
+ * |OxCategory|o x x|否|带`Collapse`面板的配置项，等价于`ExArbor`，但是配置型，所以使用了高阶注解。|
+ * |OxCi|o o o|否|显示配置项信息专用表单，弹出框或者其他容器都可呈现。|
  *
  * ### 3.Ix组件
  *

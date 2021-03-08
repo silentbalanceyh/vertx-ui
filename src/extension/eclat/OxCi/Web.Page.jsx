@@ -4,9 +4,30 @@ import Ex from 'ex';
 import Ux from 'ux';
 import OxHistory from '../OxHistory/UI';
 import OxTopology from '../OxTopology/UI';
-import Event from './event';
-import fnLink from './web/UI';
+import Op from './Op';
+import {Icon} from "antd";
 
+class Component extends React.PureComponent {
+    render() {
+        const {data = {}, onClick} = this.props;
+        return (
+            <span>
+                {/* eslint-disable-next-line */}
+                <a href={"#"} onClick={onClick}>
+                    {data.code}&nbsp;&nbsp;<Icon type={"search"}/>
+                </a>
+            </span>
+        );
+    }
+}
+
+const fnLink = (reference) => (props) => {
+    props.onClick = (event) => {
+        Ux.prevent(event);
+        Op.onProbe(reference, props.data);
+    };
+    return (<Component {...props}/>);
+}
 const _toHeight = () => {
     const height = document.body.clientHeight;
     const maxHeight = height * 0.618;
@@ -82,7 +103,7 @@ const tabTopology = reference => () => {
     }
     return (
         <div style={_toHeight()}>
-            <OxTopology {...inherit} onNodeDoubleClick={Event.onVisit(reference)}/>
+            <OxTopology {...inherit} onNodeDoubleClick={Op.onVisit(reference)}/>
         </div>
     )
 };

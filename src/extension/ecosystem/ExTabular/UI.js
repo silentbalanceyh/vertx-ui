@@ -3,6 +3,7 @@ import Op from './Op';
 import Ex from 'ex';
 import {Menu} from 'antd';
 import './Cab.less';
+import Ux from 'ux';
 
 /**
  * ## 「组件」`ExTabular`
