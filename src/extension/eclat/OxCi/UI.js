@@ -4,7 +4,6 @@ import Ex from 'ex';
 import './Cab.less';
 import {Col, Row, Tag} from 'antd';
 import Jsx from './Web';
-import JsxPage from "./Web.Page";
 import Op from "./Op";
 
 /**
@@ -91,7 +90,7 @@ const yiTab = (reference, state = {}) => {
     const $tabs = Ux.configTab(reference, config);
     if (Ux.isArray($tabs.items)) {
         $tabs.items.forEach(item => {
-            let fnRender = JsxPage[item.key];
+            let fnRender = Jsx.Page[item.key];
             if (Ux.isFunction(fnRender)) {
                 fnRender = fnRender(reference);
             }
