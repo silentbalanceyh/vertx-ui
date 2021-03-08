@@ -63,10 +63,16 @@ export {default as ExApps} from './ExApps/UI';
 // ------------- 拓扑图定义
 export {default as ExGraphicEditor} from './ExGraphicEditor/UI';
 export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
-/*
- * 日志颜色分类
- * 私有：
- * 公有组件：#
- * 公有表单：#C03
- * 公有列表：#09C
- */
+/**
+ * # 扩展组件`Ex/Ix/Ox`
+ *
+ * ## 1.组件分组
+ *
+ * |组件前缀|含义|
+ * |:---|:---|
+ * |Ix|内置专用组件，Internal Extension X。|
+ * |Ex|扩展组件，Extension Component X。|
+ * |Ox|配置组件，Origin Extension X。|
+ *
+ * @module web-component
+ **/
