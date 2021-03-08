@@ -1,63 +1,68 @@
+import Ex from 'ex';
+import {saveAs} from "file-saver";
 import Ux from 'ux';
-import Event from './Op.Event';
+import Plugin from 'plugin';
 
-const yiEditor = (reference) => {
+const rxExport = (reference) => (event) => {
+    Ux.prevent(event);
+    Ex.rx(reference).submitting();
+    const {$selected = []} = reference.state;
     const {config = {}} = reference.props;
-    const state = {};
-    /*
-     * notice 专用
-     */
-    const {notice = {}} = config;
-    state.$notice = Ux.clone(notice);
-    /*
-     * 选项处理，默认全选
-     */
-    const {$columns = [], button = ""} = config;
-    const $options = $columns.map(column => {
-        const option = {};
-        option.key = column.dataIndex;
-        option.label = column.title;
-        option.value = column.dataIndex;
-        return option;
-    }).filter(column => "key" !== column.key);
-    state.$options = $options;
-    /*
-     * 默认全选
-     */
-    const selected = $options.map(item => item.key);
-    state.$selected = selected;
-    /*
-     * Group专用
-     */
-    const group = {};
-    group.onChange = (selected = []) => {
+    if (0 === $selected
+        .filter(item => "key" !== item).length) {
         /*
-         * 设置选中项
-         * 按照列呈现的本身顺序进行排序
+         * 错误信息
          */
-        const $selectedKeys = Ux.immutable(selected);
-        const $selected = [];
-        $options
-            .filter(item => $selectedKeys.contains(item.key))
-            .forEach(item => $selected.push(item.key));
-        reference.setState({$selected});
-    };
-    group.className = "group";
-    group.defaultValue = selected;
-    state.$group = group;
-    /*
-     * 按钮专用选项
-     */
-    if ("string" === typeof button) {
-        const $button = {};
-        $button.id = button;
-        $button.className = "ux-hidden";
-        $button.onClick = Event.rxExport(reference);
-        state.$button = $button;
+        Ux.messageFailure(config);
+        /*
+         * rxSubmitting提交
+         */
+        Ex.rx(reference).submitting(false);
+    } else {
+        const {rxExport} = reference.props;
+        if (Ux.isFunction(rxExport)) {
+            /*
+             * 按钮专用提交函数
+             */
+            const params = {
+                columns: $selected,
+                format: 'xlsx',     // 暂时的默认格式
+            };
+            rxExport(params).then(response => {
+                /*
+                 * 下载保存文件
+                 */
+                let baseFile = `${Ux.valueNow('YYYY-MM-DD-HHmmss')}.${params.format}`
+                if (Plugin.Function && Ux.isFunction(Plugin.Function.yiPluginExport)) {
+                    baseFile = Plugin.Function.yiPluginExport(reference, {
+                        filename: baseFile
+                    })
+                }
+                saveAs(response, baseFile);
+                Ux.toLoading(() => {
+                    /*
+                     * rxSubmitting提交修正
+                     */
+                    Ex.rx(reference).submitting(false);
+                    /*
+                     * 关闭窗口，并且设置 $columnsMy
+                     * （窗口引用处理）
+                     */
+                    Ex.rx(reference).close();
+                    /*
+                     * 消息提示
+                     */
+                    const {config = {}} = reference.props;
+                    Ux.messageSuccess(config);
+                })
+            }).catch(error => {
+                console.error(error);
+            })
+        } else {
+            throw new Error("[ Ex ] 核心函数丢失：rxExport ");
+        }
     }
-    state.$ready = true;
-    reference.setState(state);
 };
 export default {
-    yiEditor,
+    rxExport
 }

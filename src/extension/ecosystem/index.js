@@ -79,9 +79,17 @@ export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
  * |组件名|生命周期|私有|表单组件|含义|
  * |:---|---|---|---|:---|
  * |ExAccount|o o x|否|否|显示用户账号信息专用数据呈现组件，目前用于用户的Profile页面。|
- * |ExAction|x x x|是|否|按钮和链接专用封装组件。|
+ * |ExAction|x x x|v|否|「外层」按钮和链接专用封装组件。|
  * |ExAdmin|x o x|否|否|渲染模板专用（整个站点的模板页，动态模板）。|
  * |ExApps|x o x|否|否|渲染Dashboard专用的界面，主页的图标链接看板。|
+ * |ExArbor|x x x|否|否|渲染左边选择树，带`Collapse`折叠板，折叠根面板。|
+ * |ExButton|x x x|v|否|「内层」按钮和连接专用封装组件。|
+ * |ExCategory|x o x|否|否|使用`X_CATEGORY`构造标准的树形菜单。|
+ * |ExDeploy|o o x|否|否|PPT引导专用，Ox专用展示流程模板，G6实现。|
+ * |ExDialog|x o x|v|否|弹出框专用组件。|
+ * |ExEditorBatch|x o x|v|否|批量编辑器。|
+ * |ExEditorColumn|x o x|v|否|模型列选择器。|
+ * |ExEditorExport|x o x|v|否|导出数据编辑器。|
  *
  * ### 2.Ox组件
  *

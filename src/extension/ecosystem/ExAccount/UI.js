@@ -18,6 +18,23 @@ import ImgPhoto from "./image/user.png";
  * |---|---|---|
  * |Ok|Ok|x|
  *
+ * #### 1.1. 布局
+ *
+ * ```shell
+ * |-----------------|
+ * |      name       |
+ * | |-------------| |
+ * | |             | |
+ * | |     icon    | |
+ * | |             | |
+ * | |-------------| |
+ * |                 |
+ * | workNumber      |
+ * | workTitle       |
+ * | workLocation    |
+ * |-----------------|
+ * ```
+ *
  * @memberOf module:web-component
  * @method ExAccount
  */

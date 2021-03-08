@@ -17,6 +17,20 @@ import Jsx from './Web.jsx';
  * |---|---|---|
  * |x|Ok|x|
  *
+ * #### 1.1. 布局
+ *
+ * ```shell
+ * |------------------------------------------------|
+ * |   Sider   |  Header                     Notify |
+ * |  Menu     |------------------------------------|
+ * |  Menu     |                                    |
+ * |  Menu     |                                    |
+ * |  Menu     |                                    |
+ * |  Menu     |                                    |
+ * |  Menu     |                                    |
+ * |------------------------------------------------|
+ * ```
+ *
  * @memberOf module:web-component
  * @method ExAdmin
  */

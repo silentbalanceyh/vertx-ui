@@ -1,11 +1,48 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import U from 'underscore';
 import {Collapse} from "antd";
 
 const {Panel} = Collapse;
 
+/**
+ * ## 「组件」`ExArbor`
+ *
+ * ```js
+ * import { ExArbor } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|x|x|
+ *
+ * #### 1.1. 布局
+ *
+ * ```shell
+ * | Collapse -------|
+ * |  Menu           |
+ * |    |-- Menu     |
+ * |    |-- Menu     |
+ * |                 |
+ * | Collapse -------|
+ * | Collapse -------|
+ * |  Menu           |
+ * |    |-- Menu     |
+ * |                 |
+ * | Collapse -------|
+ * |  Menu           |
+ * |    |-- Menu     |
+ * |    |-- Menu     |
+ * |                 |
+ * |-----------------|
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method ExArbor
+ *
+ */
 class Component extends React.PureComponent {
     state = {
         $ready: true
@@ -27,7 +64,7 @@ class Component extends React.PureComponent {
              * Tree专用属性
              */
             const attrsTree = {};
-            if (U.isFunction(fnSelect)) {
+            if (Ux.isFunction(fnSelect)) {
                 attrsTree.onSelect = fnSelect;
             }
             return (
