@@ -6,10 +6,6 @@ import Rdr from './Web.jsx';
 /**
  * ## 「组件」`ExAction`
  *
- * ```js
- * import { ExAction } from 'ei';
- * ```
- *
  * ### 1. 生命周期
  *
  * |Hoc高阶周期|Mount初始化|Update更新|

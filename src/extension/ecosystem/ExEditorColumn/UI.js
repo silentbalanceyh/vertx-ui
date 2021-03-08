@@ -7,10 +7,6 @@ import renderJsx from './Web.jsx';
 /**
  * ## 「组件」`ExEditorColumn`
  *
- * ```js
- * import { ExEditorColumn } from 'ei';
- * ```
- *
  * ### 1. 生命周期
  *
  * |Hoc高阶周期|Mount初始化|Update更新|

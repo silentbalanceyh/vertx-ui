@@ -1,9 +1,9 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
-import {ExForm} from 'ei';
+import ExForm from '../ExForm/UI';
 
-@Ux.zero(Ux.rxEtat(require('../Cab'))
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExFormLink")
     .to()
 )

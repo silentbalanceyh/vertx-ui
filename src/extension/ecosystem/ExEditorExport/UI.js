@@ -6,12 +6,7 @@ import Event from "./Op";
 
 
 /**
- * ## 「组件」`ExEditorColumn`
- *
- *
- * ```js
- * import { ExEditorColumn } from 'ei';
- * ```
+ * ## 「组件」`ExEditorExport`
  *
  * ### 1. 生命周期
  *
@@ -33,7 +28,7 @@ import Event from "./Op";
  *
  *
  * @memberOf module:web-component
- * @method ExEditorColumn
+ * @method ExEditorExport
  **/
 // =====================================================
 // componentInit/componentUp

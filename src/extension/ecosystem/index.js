@@ -90,6 +90,12 @@ export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
  * |ExEditorBatch|x o x|v|否|批量编辑器。|
  * |ExEditorColumn|x o x|v|否|模型列选择器。|
  * |ExEditorExport|x o x|v|否|导出数据编辑器。|
+ * |ExEditorImport|x o x|v|否|导入数据编辑器。|
+ * |ExEntry|o x x|否|否|「登录」登录框组件。|
+ * |ExForm|x o o|否|否|标准表单。|
+ * |ExGraphicEditor|o o o|否|否|基于X6的拓扑图编辑器。|
+ * |ExGraphicViewer|o o o|否|否|基于X6的拓扑图查看器。|
+ * |ExHistory|o o x|否|否|历史记录专用查看组件。|
  *
  * ### 2.Ox组件
  *

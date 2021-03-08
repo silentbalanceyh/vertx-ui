@@ -7,11 +7,6 @@ import Op from "./Op";
 /**
  * ## 「组件」`ExEditorBatch`
  *
- *
- * ```js
- * import { ExEditorBatch } from 'ei';
- * ```
- *
  * ### 1. 生命周期
  *
  * |Hoc高阶周期|Mount初始化|Update更新|
