@@ -87,6 +87,11 @@ export {default as ExWizard} from './ExWizard/UI';                      /* 双�
  * |OxCategory|o x x|否|带`Collapse`面板的配置项，等价于`ExArbor`，但是配置型，所以使用了高阶注解。|
  * |OxCi|o o o|否|显示配置项信息专用表单，弹出框或者其他容器都可呈现。|
  * |OxForm|x o x|否|配置型表单，等价于`ExForm`。|
+ * |OxHistory|o o x|否|配置型历史记录，等价于`ExHistory`。|
+ * |OxModule|x o o|否|配置型模块容器，无等价组件。|
+ * |OxRelation|x o x|否|配置型关系信息，等价于`ExRelation`。|
+ * |OxTab|x o x|否|配置型页签容器，等价于`ExTab`。|
+ * |OxTopology|o o o|否|配置型拓扑图，呈现CMDB关系拓扑图。|
  *
  * ### 3.Ix组件
  *

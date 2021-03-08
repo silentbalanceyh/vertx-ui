@@ -2,11 +2,51 @@ import React from 'react';
 import Ex from 'ex';
 import {ExRelation} from "ei";
 import OxAnchor from '../OxAnchor/UI';
-import Op from './Op';
+import Ux from "ux";
+
+/**
+ * ## 「组件」`OxRelation`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method OxRelation
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const toConfig = (reference, rest = {}) => {
+    const config = Ux.clone(rest);
+    /*
+     * 设置 config.editable（配合 pluginRow）
+     */
+    config.editable = Ux.pluginEdition(reference);
+    return config;
+}
+const componentInit = (reference) => {
+    const {config = {}} = reference.props;
+    const {relation = {}} = config;
+    const state = {};
+    if (relation.definition) {
+        Ex.I.relation().then(definitions => {
+            state.$definition = definitions;
+            state.$ready = true;
+            reference.setState(state);
+        })
+    } else {
+        state.$ready = true;
+        state.$definition = false;
+        reference.setState(state);
+    }
+}
 
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiRelation(this);
+        componentInit(this);
     }
 
     render() {
@@ -18,7 +58,7 @@ class Component extends React.PureComponent {
              */
             const {$definition = false} = this.state;
             const attrs = Ex.configRelation($inited, {category}, this);
-            attrs.config = Op.yoConfig(this, rest);
+            attrs.config = toConfig(this, rest);
             /*
              * 继承属性
              */

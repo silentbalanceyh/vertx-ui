@@ -1,7 +1,14 @@
-import Ux from 'ux';
-import Ui from '../component';
+import Ux from "ux";
+import Ex from "ex";
+import TplComponent from "./UI.Tpl";
+import CiComponent from "./UI.Ci";
 
-export default {
+const Ui = {
+    TplComponent,
+    CiComponent,
+}
+
+const graphic = {
     onTpl: (reference) => (gRequest, gEvent) => {
         const {$tpl = []} = reference.state;
         if (0 < $tpl.length) {
@@ -76,5 +83,34 @@ export default {
         } else {
             Ux.sexMessage(reference, 'same');
         }
+    }
+}
+const yoGraphic = (inherit, reference) => {
+    const graphic = Ux.fromHoc(reference, 'graphic');
+    const {$position} = reference.props;
+    if ($position) {
+        if (!graphic.graph) graphic.graph = {position: {}};
+        Object.assign(graphic.graph.position, $position);
+    }
+    inherit.config = graphic;
+    /*
+     * 动图切换
+     */
+    const {$container} = reference.props;
+    if ($container) {
+        inherit.$container = $container;
+    }
+}
+export default {
+    yoGraphic,
+    rxCommand: (reference) => {
+        const gxFun = {};
+
+        gxFun.onNodeInitBefore = Ux.g6Image();
+        gxFun.onEdgeInitBefore = Ex.X6.rxEdgeInitType(reference);
+        gxFun.onNodeClickDouble = graphic.onNodeDoubleClick(reference);
+        gxFun.onTpl = graphic.onTpl(reference);                     // 选择模板专用
+        gxFun.rxGraphInit = graphic.onGraphInit(reference);         //
+        return gxFun;
     }
 }

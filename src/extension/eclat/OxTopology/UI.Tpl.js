@@ -4,7 +4,7 @@ import {LoadingAlert} from 'web';
 import {Col, List, Radio, Row} from 'antd';
 import './Cab.less';
 
-@Ux.zero(Ux.rxEtat(require('../Cab.json'))
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExTpl")
     .to()
 )
