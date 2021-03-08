@@ -66,6 +66,7 @@ export default {
                             $values = $values.filter(item => record.key !== item.key);
                             Ux.fn(reference).onChange($values);
                         }}>
+                            {/* eslint-disable-next-line */}
                             <a href={""}>
                                 {config.text}
                             </a>
