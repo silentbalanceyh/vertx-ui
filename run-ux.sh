@@ -25,8 +25,8 @@ echo "[ Proc ] 代码拷贝完成！"
 cp -rf src/cab/cn/shared.json ${TARGET_FOLDER}/src/cab/cn/shared.json
 cp -rf src/environment/zero.js ${TARGET_FOLDER}/src/environment/zero.js
 cp -rf src/environment/zero.fn.js ${TARGET_FOLDER}/src/environment/zero.fn.js
-cp -rf shell/tpl/route/routes.zt ${TARGET_FOLDER}/shell/tpl/route/routes.zt
-cp -rf shell/run-package.json ${TARGET_FOLDER}/shell/run-package.json
+cp -rf scripts/zrun-route.zt ${TARGET_FOLDER}/scripts/zrun-route.zt
+cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
 cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
 cp -rf src/style/common.less ${TARGET_FOLDER}/src/style/common.less
@@ -40,8 +40,7 @@ cp -rf scripts/start.js ${TARGET_FOLDER}/scripts/start.js
 cp -rf scripts/build.js ${TARGET_FOLDER}/scripts/build.js
 cp -rf scripts/test.js ${TARGET_FOLDER}/scripts/test.js
 cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
-cp -rf config/webpack.config.dev.js ${TARGET_FOLDER}/config/webpack.config.dev.js
-cp -rf config/webpack.config.prod.js ${TARGET_FOLDER}/config/webpack.config.prod.js
+cp -rf config/webpack.config.js ${TARGET_FOLDER}/config/webpack.config.js
 cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf config/env.js ${TARGET_FOLDER}/config/env.js
 
