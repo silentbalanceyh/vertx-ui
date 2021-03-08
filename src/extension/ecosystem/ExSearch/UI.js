@@ -7,10 +7,6 @@ import Op from "./Op";
 /**
  * ## 「组件」`ExSearch`
  *
- * ```js
- * import { ExSearch } from 'ei';
- * ```
- *
  * ### 1. 生命周期
  *
  * |Hoc高阶周期|Mount初始化|Update更新|
@@ -18,7 +14,7 @@ import Op from "./Op";
  * |x|Ok|x|
  *
  * @memberOf module:web-component
- * @method ExSearch
+ * @method *ExSearch
  */
 // =====================================================
 // componentInit/componentUp

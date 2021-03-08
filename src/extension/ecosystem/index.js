@@ -17,13 +17,13 @@ export {default as ExLogin} from './ExLogin/UI';                        /* （�
 export {default as ExRecord} from './ExRecord/UI';                      /*  UI_FORM / Record 合并到一起（动态表单） */
 export {default as ExRegiment} from './ExRegiment/UI';                  /* （通用选择器）搜索、选择、多选、反选专用面板 */
 export {default as ExRelation} from './ExRelation/UI';
-
-export {default as ExTab} from './ExTab/UI';                            /* （通用页签）原始版本的 auiTab */
-export {default as ExTrackField} from './ExTrackField/UI';
-export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
 export {default as ExService} from './ExService/UI';                    /* SubForm 专用组件（子表单，本身不带表单结构） */
 export {default as ExSubmit} from './ExSubmit/UI';
+export {default as ExTab} from './ExTab/UI';                            /* （通用页签）原始版本的 auiTab */
 export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
+export {default as ExTrackField} from './ExTrackField/UI';
+export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
+
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *
@@ -50,6 +50,8 @@ export {default as ExTabular} from './ExTabular/UI';                    /* （Ta
  * |* ExEditorImport|x o x|v|否|导入数据编辑器。|
  * |* ExNavigation|x x x|v|否|导航栏专用扩展组件。|
  * |* ExSearch|x o x|v|否|搜索栏专用。|
+ * |* ExSider|x o x|v|否|侧边栏专用菜单组件。|
+ * |* ExTable|x o o|v|否|表格专用内部渲染组件。|
  * |ExAccount|o o x|否|否|显示用户账号信息专用数据呈现组件，目前用于用户的Profile页面。|
  * |ExAdmin|x o x|否|否|渲染模板专用（整个站点的模板页，动态模板）。|
  * |ExApps|x o x|否|否|渲染Dashboard专用的界面，主页的图标链接看板。|
@@ -69,10 +71,26 @@ export {default as ExTabular} from './ExTabular/UI';                    /* （Ta
  * |ExRecord|x o o|否|否|记录呈现专用。|
  * |ExRegiment|o o o|否|否|专用配置项选择器，搜索、选择、多选、反选。|
  * |ExRelation|o o x|否|否|关系呈现专用。|
+ * |ExService|o o x|否|否|服务页编辑器，`I_API/I_JOB`专用编辑控件。|
+ * |ExSubmit|o o x|否|否|「登录」登录框组件（带有记忆功能）。|
+ * |ExTab|x o x|否|否|页签容器专用扩展组件。|
+ * |ExTabular|x o x|否|否|使用`X_TABULAR`构造标准的树形菜单。|
+ * |ExTrackField|o o x|否|否|字段对比专用呈现组件。|
+ * |ExWizard|x o x|否|否|双表单依赖搜索专用组件。|
  *
  * ### 2.Ox组件
  *
  * ### 3.Ix组件
+ *
+ * |组件名|生命周期|私有|表单组件|含义|
+ * |:---|---|---|---|:---|
+ * |* IxChannel|x x x|v|是|通道配置自定义组件。|
+ * |* IxDatabase|o o x|v|是|数据库配置自定义组件。|
+ * |* IxDict|x x x|v|是|字典配置自定义组件。|
+ * |* IxIntegration|o o x|v|是|集成配置自定义组件。|
+ * |* IxMapping|o o x|v|是|映射配置自定义组件。|
+ * |* IxRule|o o x|v|是|标识规则编辑器。|
+ * |* IxService|x x x|v|是|服务组件编辑器。|
  *
  * @module web-component
  **/

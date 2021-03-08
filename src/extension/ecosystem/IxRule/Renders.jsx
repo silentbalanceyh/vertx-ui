@@ -1,13 +1,58 @@
 import React from 'react';
 import {component} from "web";
-import Op from './op';
 import Ux from 'ux';
 import {Button, Col, Row} from 'antd';
-import Event from './event';
-
-import renderSelection from './Web.Select';
-import renderSelected from './Web.Selected';
+import Op from './Op';
 import Ex from "ex";
+import Jsx from "./Web";
+
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const state = {};
+    state.$ready = true;
+    /* 表格 */
+    const pending = Ux.fromHoc(reference, "pending");
+    const {target = {}} = pending;
+    const {table = {}} = target;
+    const $table = Ux.clone(table);
+    $table.title = Jsx.renderTitle(reference, target);
+    $table.size = "small";
+    $table.pagination = false;
+    $table.rowSelection = {
+        type: "radio",
+        columnWidth: 40,
+        onChange: Op.onRowSelected(reference)
+    }
+    $table.columns = Jsx.renderColumn(reference, $table.columns, target);
+    state.$table = $table;
+    /* 值格式 */
+    const {value} = reference.props;
+    {
+        const data = [];
+        if (value) {
+            /* 字符串数组 */
+            value.forEach((item) => {
+                const each = {};
+                each.key = Ux.randomUUID();
+                if ("string" === typeof item) {
+                    each.rules = [item];
+                } else {
+                    each.rules = item;
+                }
+                data.push(each);
+            });
+        } else {
+            data.push({
+                key: Ux.randomUUID(),
+                rules: []
+            })
+        }
+        state.data = data;
+    }
+    reference.setState(state);
+}
 
 @component({
     "i18n.cab": require("./Cab.json"),
@@ -15,7 +60,7 @@ import Ex from "ex";
 })
 class RuleTerm extends React.PureComponent {
     componentDidMount() {
-        Op.yiPageTerm(this);
+        componentInit(this);
     }
 
     render() {
@@ -23,15 +68,15 @@ class RuleTerm extends React.PureComponent {
             return (
                 <Row className={"ix-rule-term"}>
                     <Col span={15}>
-                        {renderSelected(this)}
+                        {Jsx.renderTable(this)}
                     </Col>
                     <Col span={1} className={"operation"}>
                         <Button icon={"double-left"} className={"ux-red"}
-                                onClick={Event.onYes(this)}
-                                disabled={Event.isDisabled(this)}/>
+                                onClick={Op.onYes(this)}
+                                disabled={Op.isDisabled(this)}/>
                     </Col>
                     <Col span={8}>
-                        {renderSelection(this)}
+                        {Jsx.renderSelection(this)}
                     </Col>
                 </Row>
             )
@@ -46,7 +91,7 @@ const renderField = (field, filter = () => true) => (reference, jsx) => {
     options = options.filter(item => filter(item, reference));
     return (<RuleTerm reference={reference} {...jsx}
                       $source={options.sort(Ux.sorterAscFn('key'))}
-                      onChange={Event.onRule(reference, field)}
+                      onChange={Op.onRule(reference, field)}
                       config={config}
                       value={value[field]}/>);
 }

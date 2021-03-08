@@ -1,5 +1,5 @@
-import Ux from 'ux';
-import Ex from 'ex';
+import Ux from "ux";
+import Ex from "ex";
 
 const _modelInit = (state = {}, identifier) => {
     /*

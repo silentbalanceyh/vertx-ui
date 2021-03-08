@@ -1,45 +1,79 @@
 import Ux from 'ux';
-import Event from './Op.Event';
 
-const yiPage = (reference) => {
-    const state = {};
-    state.$ready = true;
-    /*
-     * tabs 动态专用处理
-     */
+const openTab = (reference, state = {}) => {
+    const {$tabs = {}, $page} = reference.state;
+    const $state = Ux.clone(state);
+    if ($tabs.items) {
+        $tabs.items.forEach(item => item.disabled = true);
+        $tabs.items.push($page);
+        $tabs.activeKey = $page.key;
+        $state.$tabs = $tabs;
+        reference.setState($state);
+    }
+};
+
+const rxEditTab = (reference) => (key, action) => {
+    if ("remove" === action) {
+        rxClose(reference, key)();
+    }
+};
+
+const rxClose = (reference, key) => () => {
+    let {$tabs = {}} = reference.state;
+    const items = $tabs.items.filter(item => key !== item.key);
+    $tabs = Ux.clone($tabs);
+    $tabs.items = items;
+    $tabs.items.forEach(item => item.disabled = false);
+    $tabs.activeKey = $tabs.items[0].key;       // 切换激活 tab
+    reference.setState({$tabs, $inited: undefined});
+};
+
+const rxSubmit = (reference) => ($data) => {
+    if (1 < $data.length) {
+        /*
+         * 窗口流程
+         */
+        reference.setState({$visible: true, $inited: undefined, $data});
+    } else {
+        /*
+         * 开Tab流程
+         */
+        openTab(reference, {$inited: $data[0]});
+    }
+};
+const rxFailure = (reference) => (callback, pre = true) => {
     const {config = {}} = reference.props;
-    const {tabs = {}, page = {}, window, table = {}} = config;
-    const $tabs = Ux.configTab(reference, tabs);
-    if (Ux.isObject($tabs.items[0])) {
-        $tabs.items[0].closable = false;
+    const {modal = {}} = config;
+    const message = pre ? modal.empty : modal['no'];
+    Ux.messageFailure(message);
+    if (Ux.isFunction(callback)) {
+        return callback();
     }
-    $tabs.hideAdd = true;
-    $tabs.type = "editable-card";
-    $tabs.onEdit = Event.rxEditTab(reference);
-    state.$tabs = $tabs;
-    state.$page = page;
-    /*
-     * alert 配置
-     */
-    const dialogRaw = Ux.aiExprWindow(window);
-    state.$op = dialogRaw.onOk;
-
-    state.$dialog = Ux.configDialog(reference, window);
-    const $table = Ux.clone(table);
-    $table.columns = Ux.configColumn(reference, table.columns);
-    $table.className = "web-table";
-    $table.rowSelection = {
-        type: "radio",
-        onChange: ($selected = []) => reference.setState({$selected})
-    };
-    state.$table = $table;
-    const {alert} = config;
-    if (alert) {
-        state.$alert = Ux.clone(alert);
+};
+const rxClick = (reference) => () => {
+    const {$selected = []} = reference.state;
+    if (0 < $selected.length) {
+        /*
+         * 关闭窗口，打开新页
+         */
+        const {$data = []} = reference.state;
+        const $inited = Ux.elementUnique($data, "key", $selected[0]);
+        if ($inited) {
+            openTab(reference, {$visible: false, $inited});
+        }
+    } else {
+        const {config = {}} = reference.props;
+        const {modal = {}} = config;
+        const message = modal.selected;
+        if (message) {
+            Ux.messageFailure(message);
+        }
     }
-    reference.setState(state);
 };
 export default {
-    yiPage,
-    ...Event
+    rxFailure,
+    rxSubmit,
+    rxClick,
+    rxClose,
+    rxEditTab
 }

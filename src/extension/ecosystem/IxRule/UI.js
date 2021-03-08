@@ -2,11 +2,46 @@ import React from 'react';
 import {component} from "web";
 import Ux from "ux";
 import Ex from 'ex';
-import Op from './op';
+import renders from "./Renders";
+import {Dsl} from 'entity';
 
-/*
- * 自定义组件，编辑数据库Json
+/**
+ * ## 「组件」`IxRule`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method *IxRule
  */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const {$source} = reference.props;
+    const state = {};
+    if (Ux.isArray($source)) {
+        state.$a_internal_models = Dsl.getArray($source);
+        return Ex.yiPartForm(reference, {
+            id: "formRule",
+            renders,
+            state,
+        }, false).then(Ux.ready).then(Ux.pipe(reference));
+    } else {
+        return Ex.I.attributes($source).then((processed = []) => {
+            state.$a_model_attributes = Dsl.getArray(processed);
+            return Ex.yiPartForm(reference, {
+                id: "formRule",
+                renders,
+                state,
+            }, false).then(Ux.ready).then(Ux.pipe(reference));
+        });
+    }
+}
+
 @component({
     "i18n.cab": require("./Cab.json"),
     "i18n.name": "IxRule"
@@ -18,7 +53,7 @@ class Component extends React.PureComponent {
     }
 
     componentDidMount() {
-        Op.yiPage(this);
+        componentInit(this);
     }
 
     render() {

@@ -1,13 +1,27 @@
 import React from 'react';
 import Ex from 'ex';
-import Op from './Op';
 import {Tabs} from 'antd';
 import Ux from 'ux';
 import './Cab.less';
-import U from 'underscore';
 
-/*
+/**
+ * ## 「组件」`ExTab`
+ *
+ * ```js
+ * import { ExTab } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * ### 2. 核心
+ *
  * React属性props:
+ *
+ * ```js
  * {
  *      $app: DataObject - X_APP 应用程序数据,
  *      $router: DataRouter - （react-router）构造对象,
@@ -23,14 +37,39 @@ import U from 'underscore';
  *          所有目前打开的 tabs 页的数量
  *      ]
  * }
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method ExTab
  */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const {config = {}} = reference.props;
+    const state = {};
+    const tabs = Ux.configTab(reference, config);
+    const {forceRender = [], ...rest} = tabs;
+    if (0 < forceRender.length) {
+        const $force = Ux.immutable(forceRender);
+        tabs.items.forEach(item => {
+            if ($force.contains(item.key)) {
+                item.forceRender = true;
+            }
+        })
+    }
+    state.$tabs = rest;
+    state.$ready = true;
+    reference.setState(state);
+};
+
 class Component extends React.PureComponent {
     state = {
         $ready: false
     };
 
     componentDidMount() {
-        Op.yiTab(this)
+        componentInit(this)
     }
 
     render() {
@@ -49,7 +88,7 @@ class Component extends React.PureComponent {
             } else {
                 rest.className = `ex-tabs`;
             }
-            if (U.isFunction(fnExtra)) {
+            if (Ux.isFunction(fnExtra)) {
                 rest.tabBarExtraContent = fnExtra();
             }
             /*

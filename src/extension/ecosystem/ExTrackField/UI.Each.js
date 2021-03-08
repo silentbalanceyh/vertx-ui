@@ -5,13 +5,19 @@ import Op from './Op';
 import {Table} from 'antd';
 import './Cab.less';
 
+const componentInit = (reference) => {
+    const state = {};
+    state.$ready = true;
+    reference.setState(state);
+}
+
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExTrackField")
     .to()
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiFieldPage(this);
+        componentInit(this);
     }
 
     render() {
