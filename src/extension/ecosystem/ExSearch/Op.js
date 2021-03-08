@@ -1,50 +1,76 @@
 import Ex from 'ex';
-import Event from './event';
+import Ux from "ux";
 
-const _yiSearch = (reference, config = {}) => {
-    const $search = {};
-    $search.style = {width: "72%"};
-    $search.placeholder = config[Ex.Opt.SEARCH_PLACEHOLDER];
-    $search.onSearch = Event.onSearch(reference);
-    $search.onChange = Event.onChange(reference);
-    return $search;
-};
+import {Modal} from "antd";
 
-const _yiAdvanced = (reference, config = {}) => {
-    const $advanced = {};
-    $advanced.title = config[Ex.Opt.SEARCH_ADVANCED_TITLE];
-    $advanced.width = config[Ex.Opt.SEARCH_ADVANCED_WIDTH];
-    $advanced.maskClosable = false;
-    $advanced.destroyOnClose = true; // 必须有
-    $advanced.onClose = Ex.rsVisible(reference, false);
-    // $advanced.onClose = // Ex.rx(reference).close;
-    return $advanced;
-};
-
-const yiSearch = (reference) => {
-    /*
-     * 搜索配置项解析
-     */
+const _nextConfirm = (reference) => {
     const {config = {}} = reference.props;
-    /*
-     * 状态初始化
-     */
-    const state = {};
-    if (config[Ex.Opt.SEARCH_ENABLED]) {
-        /* 1. 搜索框 */
-        state.$search = _yiSearch(reference, config);
-        /* 2. 条件 */
-        // state.cond = _yiCond(config);
-        if (config[Ex.Opt.SEARCH_ADVANCED]) {
-            /* 3. 高级搜索 */
-            state.$advanced = _yiAdvanced(reference, config);
-            /* 4. 高级搜索提示 */
-            state.$notice = config[Ex.Opt.SEARCH_ADVANCED_NOTICE];
-        }
+    const content = config[Ex.Opt.SEARCH_CONFIRM_CLEAR];
+    if (content) {
+        return new Promise((resolve) => {
+            Modal.confirm({
+                content,
+                onOk: () => resolve(true)
+            })
+        })
+    } else {
+        return Ux.promise(true);
     }
-    state.$ready = true;
-    reference.setState(state);
 };
+
+const Event = {
+    onSearch: (reference) => (searchText) => {
+        const {config = {}} = reference.props;
+        const cond = config[Ex.Opt.SEARCH_COND];
+        if (Ux.isArray(cond)) {
+
+            /*
+             * 构造新的查询条件
+             */
+            let $filters = {};
+            if (searchText) {
+                $filters = Ux.qrInput(cond, searchText);
+            }
+            /*
+             * 基础搜索
+             */
+            Ex.rx(reference).filter($filters);
+        }
+    },
+    onChange: (reference) => (event) => {
+        Ux.prevent(event);
+        const searchText = event.target.value;
+        reference.setState({searchText});
+    },
+    onClear: (reference) => (event) => {
+        Ux.prevent(event);
+        /*
+         * 提示信息处理，清除操作
+         */
+        return _nextConfirm(reference)
+            /*
+             * 确认后的操作
+             */
+            .then(Ux.ajax2True(() => {
+                /*
+                 * 清除专用操作
+                 * reference 为当前引用
+                 */
+                reference.setState({
+                    searchText: ""
+                });
+                /*
+                 * 清除两个变量
+                 * 1）$filters（条件）
+                 * 2）$filtersRaw（表单）
+                 */
+                Ex.rx(reference).filter({}, {});
+            }))
+        // onSearch(reference)("");    // onSearch 处理事件
+        // reference.setState({searchText: ""});
+    }
+}
+
 const isSearch = (reference) => {
     const {config = {}} = reference.props;
     const {$search} = reference.state;
@@ -56,9 +82,8 @@ const isAdvanced = (reference) => {
     return !!config[Ex.Opt.SEARCH_ADVANCED] && !!$advanced;
 };
 export default {
-    yiSearch,
     isSearch,
     isAdvanced,
     // 穿透
-    onClear: Event.onClear,
+    ...Event,
 }

@@ -16,11 +16,11 @@ export {default as ExLogged} from './ExLogged/UI';
 export {default as ExLogin} from './ExLogin/UI';                        /* （管理员入口） ----- ExLogin 后台登录专用界面 */
 export {default as ExRecord} from './ExRecord/UI';                      /*  UI_FORM / Record 合并到一起（动态表单） */
 export {default as ExRegiment} from './ExRegiment/UI';                  /* （通用选择器）搜索、选择、多选、反选专用面板 */
+export {default as ExRelation} from './ExRelation/UI';
 
 export {default as ExTab} from './ExTab/UI';                            /* （通用页签）原始版本的 auiTab */
 export {default as ExTrackField} from './ExTrackField/UI';
 export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
-export {default as ExRelation} from './ExRelation/UI';
 export {default as ExService} from './ExService/UI';                    /* SubForm 专用组件（子表单，本身不带表单结构） */
 export {default as ExSubmit} from './ExSubmit/UI';
 export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
@@ -49,6 +49,7 @@ export {default as ExTabular} from './ExTabular/UI';                    /* （Ta
  * |* ExEditorExport|x o x|v|否|导出数据编辑器。|
  * |* ExEditorImport|x o x|v|否|导入数据编辑器。|
  * |* ExNavigation|x x x|v|否|导航栏专用扩展组件。|
+ * |* ExSearch|x o x|v|否|搜索栏专用。|
  * |ExAccount|o o x|否|否|显示用户账号信息专用数据呈现组件，目前用于用户的Profile页面。|
  * |ExAdmin|x o x|否|否|渲染模板专用（整个站点的模板页，动态模板）。|
  * |ExApps|x o x|否|否|渲染Dashboard专用的界面，主页的图标链接看板。|
@@ -67,6 +68,7 @@ export {default as ExTabular} from './ExTabular/UI';                    /* （Ta
  * |ExLogin|x x x|否|否|「登录」登录框组件（标准版）。|
  * |ExRecord|x o o|否|否|记录呈现专用。|
  * |ExRegiment|o o o|否|否|专用配置项选择器，搜索、选择、多选、反选。|
+ * |ExRelation|o o x|否|否|关系呈现专用。|
  *
  * ### 2.Ox组件
  *
