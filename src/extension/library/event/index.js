@@ -38,7 +38,94 @@ const fabricPassion = async (generator = [], dataEvent) => {
         console.error(error);
     }
 };
-
+/**
+ * ## 「私有」`fabricAnalyzer`
+ *
+ * ### 1.基础介绍
+ *
+ * Fabric核心分析函数，整个事件引擎最核心的函数，最终生成：
+ *
+ * ```js
+ * // 生成二阶函数
+ * (dataEvent) => async () => {
+ *     // 该二阶函数是 async 的 Promise<*> 返回
+ *     // dataEvent的类型就是核心数据结构 DataEvent
+ * }
+ * ```
+ *
+ * ### 2.函数链
+ *
+ * 整个Fabric引擎都是`DataEvent -> DataEvent -> DataEvent -> ...`的异步Monad结构，函数链分两层
+ *
+ * 1. behavior：触发行为
+ * 2. processor：执行细节
+ *
+ * #### 2.1.behavior输入
+ *
+ * |名称|构造变量|含义|
+ * |:---|:---|:---|
+ * |IDENTIFIER|$identifier|使用模型统一标识符identifier构造初始状态。|
+ * |QUERY|$filters|使用condition构造初始状态。|
+ * |RECORD|$record|使用normalized构造初始状态，构造记录信息。|
+ * |DIALOG|$dialog|使用配置构造弹出框的初始状态。|
+ *
+ * #### 2.2.processor位置
+ *
+ * |节点位置|输入|输出|
+ * |:---|:---|:---|
+ * |开始节点|任意（Any）|DataEvent|
+ * |中间节点|DataEvent|DataEvent|
+ * |结束节点|DataEvent|state|
+ *
+ * processor都是「2阶」函数，它用于构造不同的「1阶」（DataEvent -> DataEvent），所有一阶函数都是DataEvent作为输入和输出。
+ *
+ * #### 2.3.processor执行
+ *
+ * |主名称|二级|节点位置|含义|
+ * |:---|:---|:---|:---|
+ * |INPUT|PROP|开始|根据参数查找属性中的某个变量信息，可支持`field.field1`的字段结构。|
+ * |TREE_SELECT|PARENT_ALL_INCLUDE|「祖+父+自」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|PARENT_ALL|「祖+父」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|PARENT|「祖」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|CURRENT|「自」（默认）根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|CHILDREN|「子」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|CHILDREN_ALL|「子+孙」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |TREE_SELECT|CHILDREN_ALL_INCLUDE|「子+孙+自」根据传入主键，选中对应的树节点构造新的选中集。|
+ * |UNIQUE|LITERAL|读取Array数据，将Array转换成唯一数据，直接读取数组中的第一个元素。|
+ * |UNIQUE|`__DEFAULT__`|（默认值），读取唯一数据信息。|
+ * |FILTER|EQ|过滤专用，构造等于过滤，返回boolean。|
+ * |FILTER|IN|过滤条件，构造包含过滤，返回boolean。|
+ * |CRITERIA|IN|构造包含条件，`field,i`的包含Qr条件。|
+ * |MAP|`__DEFAULT__`|将一个Array拉平，针对拉平结果从元素中提取字段信息，支持`field.field1`的字段结构。|
+ * |ZIP|INDEX_TO|根据表达式计算表达式中的索引处理，数组协变步骤。|
+ * |FIELD|`__DEFAULT__`|字段名称提取，根据值提取字段。|
+ * |DATUM|`__DEFAULT__`|内部调用`Ux.elementUniqueDatum`查找字典中的唯一数据集。|
+ * |DIALOG|VISIBLE|设置当前状态`$visible`为true，并设置当前窗口配置存储到$current中。|
+ *
+ * ### 3.特殊行为
+ *
+ * #### 3.1.`INDEX_TO`的特殊结构说明：
+ *
+ * ```shell
+ * // 如下边表达：
+ * ZIP,INDEX_TO,0=categoryFirst`1=categorySecond`2=categoryThird
+ *
+ * // 输入：
+ * ["A","B","C"]
+ *
+ * // 输出：
+ * {
+ *     "categoryFirst": "A",
+ *     "categorySecond": "B",
+ *     "categoryThird": "C"
+ * }
+ * ```
+ *
+ * @method *fabricAnalyzer
+ * @memberOf module:_event
+ * @param fabric
+ * @returns {Function}
+ */
 const fabricAnalyzer = (fabric = []) => {
     const generator = fabric.map(each => {
         const expr = each.replace(/ /g, "");
@@ -385,7 +472,53 @@ const rxChannel = (reference) => (state = {}) => {
 /**
  * ## Fabric引擎
  *
- * 前端事件生成和调度专用，文档后期补。
+ * 前端事件生成和调度专用。
+ *
+ * ### 1. DataEvent核心数据结构
+ *
+ * Fabric引擎中的核心数据结构是DataEvent，结构参考代码。
+ *
+ * ### 2. 事件配置案例
+ *
+ * ```json
+ * {
+ *      "event": {
+ *          "onSelect": {
+ *              "IDENTIFIER": {
+ *                  "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+ *                  "fabric": [
+ *                      "TREE_SELECT,CURRENT",
+ *                      "UNIQUE,LITERAL",
+ *                      "FILTER,EQ,key",
+ *                      "UNIQUE,data.identifier"
+ *                  ]
+ *              },
+ *              "RECORD": {
+ *                  "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+ *                  "fabric": [
+ *                      "TREE_SELECT,PARENT_ALL_INCLUDE",
+ *                      "ZIP,INDEX_TO,0=categoryFirst`1=categorySecond`2=categoryThird"
+ *                  ]
+ *              },
+ *              "QUERY": {
+ *                  "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+ *                  "fabric": [
+ *                      "TREE_SELECT,PARENT_ALL_INCLUDE",
+ *                      "ZIP,INDEX_TO,0=categoryFirst`1=categorySecond`2=categoryThird"
+ *                  ]
+ *              }
+ *          }
+ *      }
+ * }
+ * ```
+ *
+ * 上述配置中，会生成`onSelect`事件函数，且这个时间函数会触发三个Fabric
+ *
+ * 1. IDENTIFIER
+ * 2. RECORD
+ * 3. QUERY
+ *
+ * 这三个Fabric的作用组件都为`73ac2517-15f9-42be-b187-e571af54ede9`，这是一个并行事件触发。
  *
  * @module _event
  */
