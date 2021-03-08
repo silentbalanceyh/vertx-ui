@@ -86,6 +86,7 @@ export {default as ExWizard} from './ExWizard/UI';                      /* 双�
  * |OxCard|x o x|否|PageCard专用的封装型组件，为了可直接在系统中配置界面。|
  * |OxCategory|o x x|否|带`Collapse`面板的配置项，等价于`ExArbor`，但是配置型，所以使用了高阶注解。|
  * |OxCi|o o o|否|显示配置项信息专用表单，弹出框或者其他容器都可呈现。|
+ * |OxForm|x o x|否|配置型表单，等价于`ExForm`。|
  *
  * ### 3.Ix组件
  *
