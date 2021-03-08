@@ -148,7 +148,7 @@ const fabricBehavior = (reference) => (fabricResult = []) => {
 
 /**
  *
- * ## 扩展函数「Monad」
+ * ## 「Monad」`Ex.etPure`
  *
  * 生成带`DataEvent`参数的专用函数，事件处理专用，处理纯事件执行，使用内置事件名称：
  *
@@ -178,7 +178,7 @@ const etPure = (reference, fabric = []) => {
 }
 
 /**
- * ## 扩展函数「Monad」
+ * ## 「Monad」`Ex.etParallel`
  *
  * 传入`event`是并行事件队列，每个队列中包含不同的 fabric 以及对应被影响的 target 组件信息，每个
  * 处理都是执行的 `DataEvent`。
@@ -230,7 +230,7 @@ const etParallel = (reference, event = {}) => {
 }
 
 /**
- * ## 扩展函数「Monad」
+ * ## 「Monad」`Ex.etSequence`
  *
  * 传入`event`中的事件队列配置，事件队列中的每一个元素可以生成对应的`DataEvent`，而且按
  * 顺序执行：
@@ -277,7 +277,7 @@ const etSequence = (reference, event = []) => {
 }
 
 /**
- * ## 扩展函数「Monad」
+ * ## 「Monad」`Ex.etUniform`
  *
  * event的触发流程：
  *
