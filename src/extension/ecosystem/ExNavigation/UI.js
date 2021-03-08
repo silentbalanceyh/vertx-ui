@@ -1,24 +1,88 @@
 import React from 'react';
-import Op from './Op';
-import renderJsx from './Web.jsx';
 import Ex from "ex";
+import Ux from "ux";
 
-/*
+/**
+ * ## 「组件」`ExNavigation`
+ *
+ *
+ * ```js
+ * import { ExNavigation } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|x|x|
+ *
+ * ### 2. 核心
+ *
  * React属性props:
- * 1) 全局：$router, $menus, $app, $user
- * 2) 统一：config, data
- * 3) 函数：fnApp, fnOut
- * 4) 风格：css
+ *
+ * 1. 全局：$router, $menus, $app, $user
+ * 2. 统一：config, data
+ * 3. 函数：fnApp, fnOut
+ * 4. 风格：css
+ *
  * css =
+ *
+ * ```js
  * {
  *      clsNav,
  *      clsBreadcrumb
  * }
+ * ```
+ *
  * config =
+ *
+ * ```js
  * {
  *      homepage
  * }
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method ExNavigation
  */
+const yoNavigation = (reference = {}) => {
+    const {data = [], source = [], config: {homepage}} = reference.props;
+    // 配置中读取主页
+    let $nav = [];
+    if (homepage) {
+        $nav.push(homepage);
+    }
+    let current = (data[0]) ? data[0].key : undefined;
+    // 构造导航栏
+    let navigator = Ux.elementBranch(source, current, "parentId");
+    if (navigator) {
+        navigator = navigator.sort((left, right) => left.level - right.level);
+        navigator.forEach(item => $nav.push({
+            key: item.name ? item.name : Ux.randomUUID(),
+            text: item.text,
+            // 必须添加"/"前缀，否则会生成错误路由
+            uri: (item.uri && "EXPAND" !== item.uri) ? "/" + Ux.Env['ROUTE'] + item.uri : undefined
+        }));
+    }
+    return $nav;
+};
+const renderJsx = (reference, {
+    $navs = [],
+    $router,
+    css: {
+        clsNav = "ux-navigation",
+        clsBreadcrumb = "breadcrumb"
+    }
+}) => (
+    <div className={clsNav}>
+        {Ux.aiBreadcrumb($navs, {
+            className: clsBreadcrumb
+        }, {
+            $router,
+        })}
+    </div>
+)
+
 class Component extends React.PureComponent {
     state = {$ready: true};
 
@@ -28,7 +92,7 @@ class Component extends React.PureComponent {
             return renderJsx(this, {
                 css,
                 $router,
-                $navs: Op._1normalizeNavs(this)
+                $navs: yoNavigation(this)
             });
         }, Ex.parserOfColor("ExNavigation").private());
 

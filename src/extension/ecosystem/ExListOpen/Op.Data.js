@@ -16,7 +16,6 @@ const rxExecutor = (reference) => (item = {}, data = {}) => () => {
     const {config = {}} = item;
     const key = config.executor;
     const {$executor = {}} = reference.props;
-    console.log(reference);
     if ($executor.hasOwnProperty(key)) {
         const fnExecutor = $executor[key];
         if (Ux.isFunction(fnExecutor)) {

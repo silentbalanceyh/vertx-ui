@@ -91,11 +91,17 @@ export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
  * |ExEditorColumn|x o x|v|否|模型列选择器。|
  * |ExEditorExport|x o x|v|否|导出数据编辑器。|
  * |ExEditorImport|x o x|v|否|导入数据编辑器。|
- * |ExEntry|o x x|否|否|「登录」登录框组件。|
+ * |ExEntry|o x x|否|否|「登录」登录框组件（上下排版）。|
  * |ExForm|x o o|否|否|标准表单。|
  * |ExGraphicEditor|o o o|否|否|基于X6的拓扑图编辑器。|
  * |ExGraphicViewer|o o o|否|否|基于X6的拓扑图查看器。|
  * |ExHistory|o o x|否|否|历史记录专用查看组件。|
+ * |ExListComplex|x o o|否|否|「高频」复杂列表组件。|
+ * |ExListOpen|x o o|否|否|「高频」动态行操作列表组件。|
+ * |ExListQuery|x o o|否|否|「高频」查询列表组件（无增删改）。|
+ * |ExLogged|x x x|否|否|已经登录的用户状态组件。|
+ * |ExLogin|x x x|否|否|「登录」登录框组件（标准版）。|
+ * |ExNavigation|x x x|v|否|导航栏专用扩展组件。|
  *
  * ### 2.Ox组件
  *
