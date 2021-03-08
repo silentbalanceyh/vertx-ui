@@ -10,7 +10,7 @@
 
 # production
 /build
-
+backup
 # misc
 .DS_Store
 .env.local
@@ -22,6 +22,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 .idea
+yarn.lock
 # 生成代码
 src/environment/routes.js
 src/environment/datum.js
@@ -33,5 +34,4 @@ src/extension/components/index.js
 .Archive/
 .markeditor
 .configs/
-backup
 ./run-ux-current.sh
