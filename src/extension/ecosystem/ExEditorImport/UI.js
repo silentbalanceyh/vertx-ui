@@ -5,6 +5,71 @@ import Ux from 'ux';
 
 import renderJsx from './Web.jsx';
 
+/**
+ * ## 「组件」`ExEditorImport`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * #### 1.1. 布局
+ *
+ * ```shell
+ * |-------------------------------|
+ * |         |------------|        |
+ * |         |    File    |        |
+ * |         |------------|        |
+ * |                               |
+ * |          Save  Cancel         |
+ * |-------------------------------|
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method *ExEditorImport
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const {config = {}} = reference.props;
+    const state = {};
+    /*
+     * notice 专用
+     */
+    const {notice = {}, upload = {}, button = ""} = config;
+    state.$notice = Ux.clone(notice);
+    /*
+     * 上传配置处理
+     */
+    state.$upload = {
+        control: {
+            listType: "picture-card",
+            accept: ".xls,.xlsx",   // Excel
+            beforeUpload: Op.rxBeforeUpload(reference),    // 禁用
+            onChange: Op.rxChange(reference),
+            onRemove: Op.rxRemove(reference),
+            // customRequest: Op.rxCustomRequest(reference)
+        },
+        imageAlt: "Template File",
+        textClass: "ant-upload-text",
+        text: upload
+    };
+    /*
+     * 按钮配置
+     */
+    if ("string" === typeof button) {
+        const $button = {};
+        $button.id = button;
+        $button.className = "ux-hidden";
+        $button.onClick = Op.rxImport(reference);
+        state.$button = $button;
+    }
+    state.$ready = true;
+    reference.setState(state);
+};
+
 class Component extends React.PureComponent {
     state = {
         $ready: false,
@@ -12,7 +77,7 @@ class Component extends React.PureComponent {
     };
 
     componentDidMount() {
-        Op.yiEditor(this);
+        componentInit(this);
     }
 
     render() {

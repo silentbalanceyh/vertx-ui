@@ -27,14 +27,6 @@ const onClick = (reference, uris = {}) => ({item, key, keyPath}) => {
         $router.to(path);
     }
 };
-const yiMenu = (reference) => {
-    const state = Ux.toHeightState(0);
-    const {data = []} = reference.props;
-    Ux.toPid(reference, data, state);
-    state.$ready = true;
-    reference.setState(state);
-}
 export default {
     onClick,
-    yiMenu,
 }

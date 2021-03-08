@@ -1,18 +1,6 @@
 import Ux from 'ux';
-import U from "underscore";
 import {Dsl} from 'entity';
 
-const yiPage = (reference) => {
-    const state = {};
-    state.$ready = true;
-    const table = Ux.fromHoc(reference, "table");
-    const $table = Ux.clone(table);
-    $table.columns = Ux.configColumn(reference, table.columns);
-    $table.pagination = false;
-    $table.className = "ex-history ex-field-history";
-    state.$table = $table;
-    reference.setState(state);
-}
 const rxSelect = (reference) => (event) => {
     const value = Ux.ambEvent(event);
     if (value) {
@@ -47,20 +35,13 @@ const rxSelect = (reference) => (event) => {
         reference.setState({$data: {items: []}});
     }
 }
-const yiFieldPage = (reference) => {
-    const state = {};
-    state.$ready = true;
-    reference.setState(state);
-}
 const yoFieldAdjust = (reference) => {
     const {data = {}} = reference.props;
-    const changes = U.isArray(data.items) ? data.items : [];
+    const changes = Ux.isArray(data.items) ? data.items : [];
     return Dsl.codex(reference).bind().done(changes);
 }
 export default {
-    yiPage,
     rxSelect,
     // Field
-    yiFieldPage,
     yoFieldAdjust
 }

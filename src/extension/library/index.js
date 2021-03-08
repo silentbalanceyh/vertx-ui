@@ -22,6 +22,26 @@ import Web from './web';
  *
  * |函数|说明|
  * |:---|:---|
+ * |authData|ACL管理中生成定义数据专用函数。|
+ * |authGroups|ACL权限分组专用函数。|
+ * |authKeySet|ACL操作过程中已选择值专用函数。|
+ * |authRequest|ACL请求构造专用函数。|
+ * |authRule|ACL资源访问者规则定义读取专用函数。|
+ * |authTpl|ACL界面模板生成专用函数。|
+ * |authTreeRes|ACL资源树数据构造函数。|
+ * |configClick|按钮扩展配置。|
+ * |configColumn|表格列扩展配置。|
+ * |configDialog|窗口扩展配置。|
+ * |configGrid|Grid布局扩展配置。|
+ * |configRelation|关系运算扩展配置。|
+ * |designer|「内部类」图编辑器。|
+ * |dialog|「内部类」窗口。|
+ * |form|「内部类」表单。|
+ * |inApi|接口管理输入。|
+ * |init|「内部类」初始化数据（环境信息）。|
+ * |inJob|任务管理输入。|
+ * |outApi|接口管理输出。|
+ * |outJob|任务管理输出。|
  * |parserOfButton|「解析」生成操作专用解析器。|
  * |parserOfColor|「解析」生成彩色日志解析器。|
  * |sexExAction|扩展操作专用函数，处理特定配置。|
@@ -180,7 +200,9 @@ const exported = {
  * * 参数函数：在调用的API中有特殊的`Function`类型的函数参数说明。
  * * 技巧：演示新旧函数调用的核心技巧，带上【巧】备注。
  *
- * ## 5. 错误表
+ * ## 5. 规范
+ *
+ * ### 5.1.错误代码
  *
  * |错误代码|说明|
  * |---:|:---|
@@ -193,6 +215,26 @@ const exported = {
  * |-200007|`fnEvent`函数必须是一个合法函数，否则不可执行该包装。|
  * |-200008|`fnSearch`函数是Qr函数，执行时传入的`$query`参数格式非法。|
  * |-200009|构造Promise的前置条件不满足（Pre-Condition）。|
+ *
+ * ### 5.2.数据规范
+ *
+ * > Zero Extension模块是整个框架设计的基础数据规范，数据记录规范如：
+ *
+ * |属性|类型|含义|
+ * |:---|---|:---|
+ * |key|Any|数据记录主键类型。|
+ * |name|String|「可重复」名称信息，如姓名、标题等。|
+ * |code|String|「不可重复」编码信息，系统编码。|
+ * |active|Boolean|当前数据是否合法，可表示启用，禁用该记录。|
+ * |language|String|语言信息，默认使用`cn`。|
+ * |sigma|String|多租户使用的租户标识符，用于辨别不同租户专用字段。|
+ * |createdAt|Date|创建时间。|
+ * |createdBy|String|创建人ID。|
+ * |updatedAt|Date|最后更新时间。|
+ * |updatedBy|String|更新人ID。|
+ * |appKey|String|「可选」多应用中的应用标识。|
+ * |appId|String|「可选」多应用中的应用ID。|
+ *
  *
  * ## 6. 总结
  *

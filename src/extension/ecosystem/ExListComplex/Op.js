@@ -1,57 +1,85 @@
-import Ensurer from './ensurer';
-import Init from './state';
-import Ex from 'ex';
 import Ux from 'ux';
-
-const yiList = (reference) => {
-    const {config = {}, /* 基本配置 */} = reference.props;
-    const error = Ensurer.verify(reference, config);    /* W01: 验证生成 error */
-    if (error) {
-        return Ux.promise({error});                     /* ERROR: 有错误的页面 */
-    } else {
-        return Init
-            .sync(reference, config)                                /* W02: 静态状态，来源 config */
-            .then(state => Init.async(reference, config, state))    /* W03: 动态状态，来源 远程或其他 */
-            .then(state => Init.ready(reference, state));           /* W04: 处理准备状态 */
-    }
-};
-const yuList = (reference, previous = {}) => {
-    /*
-     * 默认 $query 变量的修改（外置传入）
-     */
-    const prevProps = previous.prevProps;
-    const props = reference.props;
-    /*
-     * 配置优先考虑
-     */
-    const $configChecked = Ex.upList(props, prevProps);
-    if ($configChecked) {
+import Op from './Op.State';
+/*
+ * 基本配置解析
+ * 1. query：（静态默认的query）；
+ * 2. options：（选项处理）；
+ * 3. mock：模拟数据；
+ * 4. component：子组件；
+ * 5. table：列表表格配置；
+ */
+const sync = (reference, config = {}) => {
+    const state = {};
+    {
         /*
-         * 默认的 配置处理
+         * 禁止选项专用，禁止掉 config 中的多余选项，保证最终信息
          */
-        reference.setState({$ready: false});
-        Ux.toLoading(() => yiList(reference).then(state => {
+        const {$forbidden = {}} = reference.props;
+        if (!Ux.isEmpty($forbidden) && config.options) {
             /*
-             * 更新状态
+             * 旧代码：config = Ux.clone(config)
+             * *：不可以拷贝，需要删除原始配置中的 options
              */
-            reference.setState(Ux.clone(state));
-        }))
-    } else {
-        const $queryChecked = Ex.upQuery(props, prevProps);
-        if ($queryChecked) {
-            /*
-             * 修改当前记录中的 query
-             * 由于 $query 变量发生了改变，所以
-             * 1）$selected 变量清空
-             */
-            const updatedState = {};
-            updatedState.query = Ux.clone($queryChecked.current);
-            updatedState.$selected = [];
-            reference.setState(updatedState);
+            Object.keys($forbidden).forEach(optKey => {
+                if (!$forbidden[optKey] && config.options.hasOwnProperty(optKey)) {
+                    delete config.options[optKey];
+                }
+            })
         }
     }
+    /*
+     * 存储 options 到状态中（以后每次从 options 中读取）
+     * 1. options中的配置比较多，需要单独提取
+     * 2. options拷贝一份，会被 rxInject 处理
+     */
+    state.options = Op.stateOption(reference, config);
+    /*
+     * query 状态保存，根容器中保存了 query 的相关状态
+     * 1. 如果外置 $query 传入，那么也会更新 query
+     * 2. query 合并过后执行 update 方法，然后将 query 最终传入 Table 组件
+     * 3. 当前组件：state -> query 会转换成 props -> $query 转换最终查询条件给 Table 组件
+     */
+    state.query = Op.stateQuery(reference, config);
+    /*
+     * 准备 Tabs 的初始化状态
+     * 1. 打开 Tab
+     * 2. 关闭 Tab
+     */
+    state.tabs = Op.stateTab(reference, config);
+    /*
+     *  activeKey 中的值拷贝到 $key 中，构造核心视图数据
+     * 1) 列表：view = list, key = activeKey
+     * 2) 添加页：view = add, key = ( new Key )
+     * 3) 编辑页：view = edit, key = activeKey
+     * */
+    state.$key = state.tabs.activeKey;
+    /*
+     * 准备 Table 表格专用状态
+     * 1. 解析核心状态
+     * 2. 静态或动态解析 列专用
+     * 由于包含了列信息，所以改成异步
+     */
+    // state.table = stateTable(reference, config);
+    state.plugins = Op.statePlugin(reference, config);
+    /*
+     * 提交和加载
+     */
+    return Ux.promise(state);
+};
+const async = (reference, config = {}, state = {}) =>
+    /* 动态OP */
+    Op.asyncOp(reference, config, state)
+        .then(op => Ux.promise(state, 'op', op))
+        /* 动态列 */
+        .then(() => Op.asyncTable(reference, config, state))
+        .then(table => Ux.promise(state, 'table', table));
+
+const ready = (reference = {}, state = {}) => {
+    state.$ready = true;    // 只有 $ready 是单独控制
+    return Ux.promise(state);
 };
 export default {
-    yiList,
-    yuList,
+    sync,
+    async,
+    ready,
 }

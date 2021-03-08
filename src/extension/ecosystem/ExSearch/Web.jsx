@@ -1,10 +1,37 @@
 import Op from './Op';
 import React from 'react';
 import Ex from 'ex';
-import {Button, Input, Tooltip} from 'antd';
-import renderDrawer from './Web.Filter';
-import './Cab.less';
+import {Button, Drawer, Input, Tooltip} from 'antd';
 import Ux from "ux";
+import {LoadingAlert} from "web";
+import './Cab.less';
+
+const _renderNotice = (reference) => {
+    const {$notice} = reference.state;
+    return $notice ? (
+        <LoadingAlert $alert={$notice} $type={"warning"}/>
+    ) : false;
+};
+
+const renderDrawer = (reference) => {
+    const {
+        $advanced,
+        $visible = false
+    } = reference.state;
+    $advanced.visible = $visible;
+    const {$form = {}} = reference.props;
+    const {FormFilter} = $form;
+    if (FormFilter) {
+        const filterAttrs = Ex.yoFilter(reference);
+        return (
+            <Drawer {...$advanced} className={"ex-drawer"}>
+                {/* Drawer issue: https://github.com/ant-design/ant-design/issues/20175 */}
+                {_renderNotice(reference)}
+                <FormFilter {...filterAttrs}/>
+            </Drawer>
+        );
+    } else return false;
+}
 
 const _renderInput = (reference) => {
     const {$search, searchText} = reference.state;

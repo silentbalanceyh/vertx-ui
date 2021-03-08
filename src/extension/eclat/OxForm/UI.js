@@ -1,14 +1,43 @@
 import React from 'react';
 import Ex from 'ex';
-import Op from './Op';
 import {ExForm} from 'ei';
 import Ux from 'ux';
+
+/**
+ * ## 「组件」`OxForm`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method OxForm
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const state = {};
+    const {config = {}} = reference.props;
+    const {event = {}} = config;
+    const $op = {};
+    Object.keys(event)
+        .forEach(opKey => $op[opKey] = Ex.onOp(reference, event[opKey]));
+    state.$op = $op;
+    state.$ready = true;
+    /*
+     * initial 初始值解析专用（OxForm才有，ExForm无）
+     */
+    reference.setState(state);
+}
 
 class Component extends React.PureComponent {
     state = {};
 
     componentDidMount() {
-        Op.yiForm(this);
+        componentInit(this);
     }
 
     render() {

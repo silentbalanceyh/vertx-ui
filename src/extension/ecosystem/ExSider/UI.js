@@ -4,23 +4,55 @@ import Ex from 'ex';
 import renderJsx from './Web.jsx';
 import Op from './Op';
 
-/*
+/**
+ * ## 「组件」`ExSider`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * ### 2. 核心
+ *
  * React属性props:
- * 1) 全局：$router, $menus, $app, $user
- * 2) 统一：config, data
- * 3) 函数：fnApp, fnOut
- * 4) 风格：css
+ * 1. 全局：$router, $menus, $app, $user
+ * 2. 统一：config, data
+ * 3. 函数：fnApp, fnOut
+ * 4. 风格：css
+ *
  * css =
+ *
+ * ```json
  * {
  *      clsSider: "",
  *      clsSiderExpand: ""
  * }
+ * ```
+ *
  * config =
+ *
+ * ```js
  * {
  *      $collapsed,
  *      $theme
  * }
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method *ExSider
  */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const state = Ux.toHeightState(0);
+    const {data = []} = reference.props;
+    Ux.toPid(reference, data, state);
+    state.$ready = true;
+    reference.setState(state);
+}
+
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -31,7 +63,7 @@ class Component extends React.PureComponent {
         /*
          * 第一次初始化
          */
-        Op.yiMenu(this);
+        componentInit(this);
     }
 
     componentWillUnmount() {

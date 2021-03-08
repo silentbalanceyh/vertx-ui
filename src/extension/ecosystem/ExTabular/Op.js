@@ -1,26 +1,5 @@
-import Ex from 'ex';
-import U from 'underscore';
 import Ux from 'ux';
 
-const yiSider = (reference) => {
-    /*
-     * 读取根路径上的 tabular
-     */
-    Ex.I.tabular({type: Ex.V.TYPE_TABULAR})
-        .then(response => {
-            /*
-             * 设置当前组件的基本状态
-             */
-            const state = {};
-            if (U.isArray(response)) {
-                state.$data = response
-                /* 基础排序 */
-                    .sort((left, right) => left.sort - right.sort);
-            }
-            state.$ready = true;
-            reference.setState(state);
-        })
-};
 const yoMenu = (reference) => {
     const {$data = []} = reference.state;
     const menu = [];
@@ -37,7 +16,7 @@ const rxSelect = (reference) => (selected = {}) => {
     const {item: {props: {data}}} = selected;
     if (data) {
         const {rxSelect} = reference.props;
-        if (U.isFunction(rxSelect)) {
+        if (Ux.isFunction(rxSelect)) {
             rxSelect(data);
         }
     } else {
@@ -45,7 +24,6 @@ const rxSelect = (reference) => (selected = {}) => {
     }
 };
 export default {
-    yiSider,
     yoMenu,
     rxSelect
 }

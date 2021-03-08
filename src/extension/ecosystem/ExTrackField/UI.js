@@ -6,6 +6,37 @@ import {Col, Row, Select, Spin} from 'antd';
 import Op from './Op';
 import History from "./UI.Each";
 
+/**
+ * ## 「组件」`ExTrackField`
+ *
+ * ```js
+ * import { ExTrackField } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method ExTrackField
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const state = {};
+    state.$ready = true;
+    const table = Ux.fromHoc(reference, "table");
+    const $table = Ux.clone(table);
+    $table.columns = Ux.configColumn(reference, table.columns);
+    $table.pagination = false;
+    $table.className = "ex-history ex-field-history";
+    state.$table = $table;
+    reference.setState(state);
+}
+
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExTrackField")
     .to()
@@ -13,7 +44,7 @@ import History from "./UI.Each";
 class Component extends React.PureComponent {
 
     componentDidMount() {
-        Op.yiPage(this);
+        componentInit(this);
     }
 
     render() {

@@ -1,55 +1,95 @@
 import Ux from 'ux';
-import Event from './Op.Event';
-import U from 'underscore';
+import Ex from "ex";
 
-const yiEditor = (reference) => {
+const rxSave = (reference) => (event) => {
+    Ux.prevent(event);
+    Ex.rsSubmitting(reference)();
+    /*
+     * 列信息处理
+     */
+    const {$selected = []} = reference.state;
     const {config = {}} = reference.props;
     /*
-     * 动态还是静态
+     * 提取 rxColumnSave 函数
      */
-    const state = {};
-    const {$columns = [], $columnsMy = []} = config;
-    state.$options = $columns.map(column => {
-        const option = {};
-        option.key = column.dataIndex;
-        option.label = column.title;
-        option.value = column.dataIndex;
-        return option;
-    }).filter(column => "key" !== column.key);
-    /*
-     * 选择项
-     */
-    state.$selected = Ux.clone($columnsMy);
-    /*
-     * 按钮专用处理
-     */
-    state.$buttons = Ux.clone(config.buttons).map(button => {
-        if ("string" === typeof button.event) {
-            let onClick = Event[button.event];
-            if (U.isFunction(onClick)) {
-                onClick = onClick(reference);
-                if (U.isFunction(onClick)) {
-                    button.onClick = onClick;
-                }
-            }
-        }
-        return button;
-    });
-    state.$ready = true;
-    /*
-     * Group专用
-     */
-    const group = {};
-    group.onChange = ($selected = []) => {
+    if (0 === $selected
+        .filter(item => "key" !== item).length) {
         /*
-         * 设置选中项
+         * 错误信息
          */
-        reference.setState({$selected});
-    };
-    group.className = "group";
-    state.$group = group;
-    reference.setState(state);
+        Ux.messageFailure(config);
+        /*
+         * 防重复提交
+         */
+        Ex.rsSubmitting(reference, false)();
+    } else {
+        /**
+         * key为查询时必得的值
+         */
+        if (!$selected.includes("key")) {
+            $selected.unshift("key");
+        }
+        const keys = Ux.immutable($selected);
+        /*
+         * 计算参数：projection = []
+         * projection 是被过滤的不显示的列信息，这里属于反向运算
+         */
+        const {rxColumnSave} = reference.props;
+        const {$columns = []} = config;
+        const fullColumns = Ux.clone($columns)
+            .map(column => column.dataIndex);
+        /*
+         * 正向语义
+         * fullColumns 中被包含了的就是 item
+         */
+        const params = fullColumns.filter(item => keys.contains(item));
+
+        if (Ux.isFunction(rxColumnSave)) {
+            rxColumnSave(params)
+                .then(response => {
+                    /*
+                     * $columnsMy 更新
+                     */
+                    const $response = Ux.immutable(response);
+                    const $columnsMy = fullColumns
+                        .filter(item => $response.contains(item));
+                    /*
+                     * 防重复提交关闭
+                     * （本层处理）
+                     */
+                    Ex.rsSubmitting(reference, false)();
+                    /*
+                     * 关闭窗口，并且设置 $columnsMy
+                     * （窗口引用处理）
+                     */
+                    Ex.rx(reference).close();
+                    /*
+                     * 更新 $columnsMy，顶层引用
+                     */
+                    Ex.rx(reference).projection($columnsMy, {
+                        $dirty: true,
+                    });
+                    /*
+                     * 消息提示
+                     */
+                    const {config = {}} = reference.props;
+                    Ux.messageSuccess(config);
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+        } else {
+            throw new Error("[ Ex ] 核心函数丢失：rxColumnSave ");
+        }
+    }
+};
+const rxReset = (reference) => (event) => {
+    Ux.prevent(event);
+    const {config = {}} = reference.props;
+    const $selected = Ux.clone(config.$columnsMy);
+    reference.setState({$selected});
 };
 export default {
-    yiEditor
+    rxReset,
+    rxSave,
 }

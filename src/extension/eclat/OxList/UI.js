@@ -4,12 +4,51 @@ import Op from './Op';
 import {ExListComplex} from 'ei';
 import Ux from 'ux';
 import Plugin from 'plugin';
+import UI from "oi";
+
+/**
+ * ## 「组件」`OxList`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method OxList
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const {$form, $controls = {}} = reference.props;
+    if ($form) {
+        const {FormAdd, FormEdit, FormFilter} = $form;
+        /*
+         * 提取 三个核心的 control 数据
+         */
+        return Ux.promise({
+            FormAdd: $controls[FormAdd],
+            FormEdit: $controls[FormEdit],
+            FormFilter: $controls[FormFilter]
+        }).then(response => {
+            const $form = {};
+            Object.keys(response).forEach(field => $form[field] =
+                (props) => Ex.xuiDecorator(response[field], UI, props));
+            const state = {};
+            state.$ready = true;
+            state.$form = $form;
+            reference.setState(state);
+        });
+    }
+};
 
 class Component extends React.PureComponent {
     state = {};
 
     componentDidMount() {
-        Op.yiModule(this);
+        componentInit(this);
     }
 
     render() {

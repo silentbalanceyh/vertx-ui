@@ -40,7 +40,7 @@ const category = (reference, define = false) => {
 // io 专用，in / out前缀
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「输入」`Ex.inApi`
  *
  * 任务处理输入
  *
@@ -139,7 +139,7 @@ const inApiService = (processed = {}, service = {}) => {
 };
 /**
  *
- * ## 扩展函数
+ * ## 「输出」`Ex.outApi`
  *
  * 任务处理输出
  *
@@ -193,7 +193,7 @@ const outApi = (params = {}) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「输入」`Ex.inJob`
  *
  * 任务处理输入
  *
@@ -289,7 +289,7 @@ const inJobService = (processed = {}, service = {}) => {
 };
 /**
  *
- * ## 扩展函数
+ * ## 「输出」`Ex.outJob`
  *
  * 任务处理输出
  *
@@ -343,7 +343,7 @@ const outJob = (params = {}) => {
 };
 export default {
     /**
-     * ## 扩展函数
+     * ## 「内部类」`Ex.form`
      *
      * 根据 `reference` 执行表单操作
      *
@@ -498,7 +498,7 @@ export default {
     }),
 
     /**
-     * ## 扩展函数
+     * ## 「内部类」`Ex.dialog`
      *
      * 根据 `reference` 执行窗口操作
      *
@@ -607,7 +607,7 @@ export default {
 
 
     /**
-     * ## 扩展函数
+     * ## 「内部类」`Ex.init`
      *
      * 根据 `reference` 执行初始化
      *
@@ -643,7 +643,9 @@ export default {
     }),
 
     /**
-     * ##
+     * ## 「内部类」`Ex.designer`
+     *
+     * 图编辑器专用（文档暂时不提供）
      *
      * @memberOf module:_kernel
      * @param reference

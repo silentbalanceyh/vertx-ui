@@ -3,9 +3,21 @@ import {component} from "web";
 import Ux from "ux";
 import Ex from "ex";
 
-/*
- * 自定义组件，编辑数据库Json
+/**
+ * ## 「组件」`IxIntegration`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method *IxIntegration
  */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
 @component({
     "i18n.cab": require("./Cab.json"),
     "i18n.name": "IxIntegration"

@@ -1,24 +1,29 @@
 {
-    "op.open": [
-        "op.open.add",
-        "op.open.filter"
-    ],
-    "op.batch": [
-        "op.batch.edit",
-        "op.batch.delete"
-    ],
-    "op.extra": [
-        "op.extra.column",
-        "op.extra.export",
-        "op.extra.import"
-    ],
-    "op.add": [
-        "op.submit.add",
-        "op.submit.reset"
-    ],
-    "op.edit": [
-        "op.submit.save",
-        "op.submit.delete",
-        "op.submit.reset"
-    ]
+    "event": {
+        "onSelect": {
+            "IDENTIFIER": {
+                "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+                "fabric": [
+                    "TREE_SELECT,CURRENT",
+                    "UNIQUE,LITERAL",
+                    "FILTER,EQ,key",
+                    "UNIQUE,data.identifier"
+                ]
+            },
+            "RECORD": {
+                "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+                "fabric": [
+                    "TREE_SELECT,PARENT_ALL_INCLUDE",
+                    "ZIP,INDEX_TO,0=categoryFirst`1=categorySecond`2=categoryThird"
+                ]
+            },
+            "QUERY": {
+                "target": "73ac2517-15f9-42be-b187-e571af54ede9",
+                "fabric": [
+                    "TREE_SELECT,PARENT_ALL_INCLUDE",
+                    "ZIP,INDEX_TO,0=categoryFirst`1=categorySecond`2=categoryThird"
+                ]
+            }
+        }
+    }
 }

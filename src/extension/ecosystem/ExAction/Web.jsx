@@ -1,8 +1,34 @@
 import React from 'react';
 import './Cab.less';
-import renderItem from "./Web.Each";
 import Ux from "ux";
 import {Button} from "antd";
+import ExButton from "../ExButton/UI";
+import ExDialog from "../ExDialog/UI";
+import Ex from "ex";
+
+const getType = (item = {}) => {
+    let dialogType = "NONE";
+    if (item.component) {
+        const {type = "NONE"} = item.component;
+        dialogType = type;
+    }
+    return dialogType;
+};
+
+const renderItem = (reference, config = {}, attributes = {}) => {
+    const type = getType(config);
+    config = Ux.clone(config);  // 拷贝以保证 ExAction 和 ExDialog 每次都刷新
+    attributes = Ux.sorterObject(attributes);   // 按顺序打印属性信息
+    const {visible = true} = config;
+    return visible ? (
+        "NONE" === type ?
+            (<ExButton {...attributes} key={config.key}
+                       config={config}/>) :
+            (<ExDialog {...attributes} key={config.key}
+                // 第二参 reference 需要传入，负责隐藏界面
+                       config={Ex.configDialog(config)}/>)
+    ) : false
+};
 
 export default {
     "BUTTON": (reference, config = [], attributes = {}) =>

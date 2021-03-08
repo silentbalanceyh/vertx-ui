@@ -2,11 +2,23 @@ import React from 'react';
 import Ux from 'ux';
 import {component} from 'web';
 import Ex from 'ex';
-import Op from './op';
+import Op from './Op';
 
-/*
- * 自定义组件，编辑数据库Json
+/**
+ * ## 「组件」`IxDatabase`
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method *IxDatabase
  */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
 @component({
     "i18n.cab": require("./Cab.json"),
     "i18n.name": "IxDatabase"

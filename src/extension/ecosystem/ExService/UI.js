@@ -1,8 +1,27 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
-import renders from './UI.renders';
+import renders from './Renders';
 
+/**
+ * ## 「组件」`ExService`
+ *
+ * ```js
+ * import { ExService } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method ExService
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
 @Ux.zero(Ux.rxEtat(require('./Cab'))
     .cab("ExService")
     .to()

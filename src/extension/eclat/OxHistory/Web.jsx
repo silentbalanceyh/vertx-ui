@@ -5,7 +5,7 @@ import Ex from 'ex';
 import Ux from 'ux';
 
 export default {
-    pageTime: (reference) => () => {
+    renderTime: (reference) => () => {
         const {$data = [], $table = {}, $loading = false} = reference.state;
         const info = Ux.fromHoc(reference, "info");
         return (
@@ -16,7 +16,7 @@ export default {
             }}/>
         )
     },
-    pageField: (reference) => () => {
+    renderField: (reference) => () => {
         const columns = Ux.onDatum(reference, "model.columns");
         const options = [];
         columns.forEach(column => {

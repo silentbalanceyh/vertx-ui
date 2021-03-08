@@ -2,8 +2,33 @@ import React from 'react';
 import Ux from "ux";
 import Ex from 'ex';
 import {Checkbox} from 'antd';
-import Op from './Op';
 
+/**
+ * ## 「组件」`ExSubmit`
+ *
+ * ```js
+ * import { ExSubmit } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |Ok|Ok|x|
+ *
+ * @memberOf module:web-component
+ * @method ExSubmit
+ */
+// =====================================================
+// componentInit/componentUp
+// =====================================================
+const componentInit = (reference) => {
+    const state = {};
+    state.$ready = true;
+    const {$op = {}} = reference.props;
+    state.$op = $op;
+    reference.setState(state);
+}
 const jsx = {
     $button: (reference, jsx) => {
         const {config = {}} = jsx;
@@ -36,7 +61,7 @@ const jsx = {
 )
 class Component extends React.PureComponent {
     componentDidMount() {
-        Op.yiComponent(this)
+        componentInit(this)
     }
 
     render() {

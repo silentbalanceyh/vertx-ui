@@ -3,8 +3,24 @@ import {Form} from 'antd';
 import Ex from "ex";
 import Ux from 'ux';
 
-/*
+/**
+ * ## 「组件」`ExForm`
+ *
+ * ```js
+ * import { ExForm } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|Ok|Ok|
+ *
+ * ### 2. 核心
+ *
  * React属性props：
+ *
+ * ```js
  * {
  *      $app: DataObject - X_APP 应用程序数据,
  *      $router: DataRouter - （react-router）构造对象,
@@ -28,7 +44,11 @@ import Ux from 'ux';
  *          初始值
  *      }
  * }
+ * ```
+ *
  * React属性state:
+ *
+ * ```js
  * {
  *      $ready: "当前组件是否可渲染？配置处理完成",
  *      $loading: "当前表单提交状态（防重复提交）",
@@ -46,8 +66,11 @@ import Ux from 'ux';
  *          ]
  *      }
  * }
+ * ```
+ *
+ * @memberOf module:web-component
+ * @method ExForm
  */
-
 class Component extends React.PureComponent {
     state = {
         $ready: false
