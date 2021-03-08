@@ -4,7 +4,7 @@ import Ux from 'ux';
 import Ex from 'ex';
 
 export default {
-    jsxExtra: (reference) => {
+    renderExtra: (reference) => {
         const {$extra = []} = reference.state;
         return $extra.map(button => {
             const {onClick, ...rest} = button;
@@ -18,7 +18,7 @@ export default {
             }
         })
     },
-    jsxWindow: (reference) => {
+    renderWindow: (reference) => {
         const {$dialog, $inited, $visible = false} = reference.state;
         if ($dialog) {
             const {component = "", ...dialogConfig} = $dialog;

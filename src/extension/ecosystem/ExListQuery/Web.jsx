@@ -1,7 +1,6 @@
 import {Tabs} from "antd";
-import U from "underscore";
 import React from "react";
-import Page from './page';
+import Page from './Web.Page';
 import Ex from 'ex';
 import ExAction from '../ExAction/UI';
 
@@ -23,7 +22,7 @@ export default (reference, config = {}) => {
                 const fnRender = Page[type];
                 return $item ? (
                     <Tabs.TabPane {...item}>
-                        {U.isFunction(fnRender) ? fnRender(reference, rest) : (
+                        {Ux.isFunction(fnRender) ? fnRender(reference, rest) : (
                             <span className={"ex-error"}>`fnRender` Function not Found</span>
                         )}
                     </Tabs.TabPane>
