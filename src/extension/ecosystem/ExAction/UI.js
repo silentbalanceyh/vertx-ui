@@ -3,20 +3,46 @@ import Ex from 'ex';
 import Ux from 'ux';
 import Rdr from './Web.jsx';
 
-/*
- * Action分流，包含几种：
- * 1）普通的 Button
- * -- 1.1. 带有 tooltip 的专用 button
- * -- 1.2. 不带 tooltip 的专用 button
- * 直接使用：<div><ExButton/></div>
+/**
+ * ## 「组件」`ExAction`
  *
- * 2）带有窗口的 Button
- * -- 2.1. 带有 Modal 的 Button
- * -- 2.2. 带有 Drawer 的 Button
- * -- 2.3. 带有 Popover 的 Button
- * 直接使用：<div><ExButton/><ExDialog></ExDialog></div>
+ * ```js
+ * import { ExAction } from 'ei';
+ * ```
+ *
+ * ### 1. 生命周期
+ *
+ * |Hoc高阶周期|Mount初始化|Update更新|
+ * |---|---|---|
+ * |x|x|x|
+ *
+ * ### 2. 核心点
+ *
+ * #### 2.1. 按钮分流操作
+ *
+ * Action分流，包含几种：
+ *
+ * 1. 普通的Button
+ *      1. 带有tooltip的专用按钮。
+ *      2. 不带tooltip的专用按钮。
+ * 2. 带有窗口的Button
+ *      1. 带有Modal弹出窗口按钮。
+ *      2. 带有Drawer抽屉窗口按钮。
+ *      3. 带有Popover浮游窗口按钮。
+ *
+ * #### 2.2. 配置数据
+ *
+ * $category默认为BUTTON类型，渲染`<Button/>`，如果为`LINK`则直接渲染链接，如果是BUTTON类型，系统根据长度计算是否包含`<Button.Group/>`。
+ *
+ * #### 2.3. 内置渲染
+ *
+ * * `ExButton`
+ * * `ExDialog`：根据类型计算，type值不为`NONE`
+ *
+ * @memberOf module:web-component
+ * @method ExAction
+ *
  */
-
 class Component extends React.PureComponent {
     state = {
         $ready: true,   // 容器，无状态，直接干

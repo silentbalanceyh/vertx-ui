@@ -1,6 +1,6 @@
 import React from 'react'
 import Ux from "ux";
-import renderJsx from './Web.Header.jsx';
+import Jsx from './Web';
 import Op from './Op';
 import Ex from 'ex';
 
@@ -33,7 +33,7 @@ class Component extends React.PureComponent {
             const accounts = Op.yoAccount(this, {
                 window
             });
-            return renderJsx(this, {
+            return Jsx.renderHeader(this, {
                 accounts,
                 icon: config.icon,
                 fnCollapse

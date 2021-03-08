@@ -74,5 +74,18 @@ export {default as ExGraphicViewer} from './ExGraphicViewer/UI';
  * |Ex|扩展组件，Extension Component X。|
  * |Ox|配置组件，Origin Extension X。|
  *
+ * ### 1.Ex组件
+ *
+ * |组件名|生命周期|私有|表单组件|含义|
+ * |:---|---|---|---|:---|
+ * |ExAccount|o o x|否|否|显示用户账号信息专用数据呈现组件，目前用于用户的Profile页面。|
+ * |ExAction|x x x|是|否|按钮和链接专用封装组件。|
+ * |ExAdmin|x o x|否|否|渲染模板专用（整个站点的模板页，动态模板）。|
+ * |ExApps|x o x|否|否|渲染Dashboard专用的界面，主页的图标链接看板。|
+ *
+ * ### 2.Ox组件
+ *
+ * ### 3.Ix组件
+ *
  * @module web-component
  **/
