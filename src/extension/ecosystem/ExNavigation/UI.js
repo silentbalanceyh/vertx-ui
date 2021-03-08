@@ -5,11 +5,6 @@ import Ux from "ux";
 /**
  * ## 「组件」`ExNavigation`
  *
- *
- * ```js
- * import { ExNavigation } from 'ei';
- * ```
- *
  * ### 1. 生命周期
  *
  * |Hoc高阶周期|Mount初始化|Update更新|
@@ -43,7 +38,7 @@ import Ux from "ux";
  * ```
  *
  * @memberOf module:web-component
- * @method ExNavigation
+ * @method *ExNavigation
  */
 const yoNavigation = (reference = {}) => {
     const {data = [], source = [], config: {homepage}} = reference.props;

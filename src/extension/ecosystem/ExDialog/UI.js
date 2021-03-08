@@ -49,7 +49,7 @@ import renderJsx from './Web.jsx'
  *
  *
  * @memberOf module:web-component
- * @method ExDialog
+ * @method *ExDialog
  */
 // =====================================================
 // componentInit/componentUp

@@ -14,7 +14,7 @@ import renderJsx from './Web.jsx';
  * |x|Ok|x|
  *
  * @memberOf module:web-component
- * @method ExEditorColumn
+ * @method *ExEditorColumn
  **/
 // =====================================================
 // componentInit/componentUp

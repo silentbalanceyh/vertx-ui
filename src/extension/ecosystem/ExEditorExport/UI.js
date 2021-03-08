@@ -28,7 +28,7 @@ import Event from "./Op";
  *
  *
  * @memberOf module:web-component
- * @method ExEditorExport
+ * @method *ExEditorExport
  **/
 // =====================================================
 // componentInit/componentUp

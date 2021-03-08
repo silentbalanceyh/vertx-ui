@@ -36,7 +36,7 @@ import Rdr from './Web.jsx';
  * * `ExDialog`：根据类型计算，type值不为`NONE`
  *
  * @memberOf module:web-component
- * @method ExAction
+ * @method *ExAction
  *
  */
 class Component extends React.PureComponent {

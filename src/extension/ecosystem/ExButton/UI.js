@@ -21,7 +21,7 @@ import Ux from 'ux';
  * 2. 链接形态：`<Link/>`。
  *
  * @memberOf module:web-component
- * @method ExButton
+ * @method *ExButton
  */
 // =====================================================
 // componentInit/componentUp

@@ -27,7 +27,7 @@ import renderJsx from './Web.jsx';
  * ```
  *
  * @memberOf module:web-component
- * @method ExEditorImport
+ * @method *ExEditorImport
  */
 // =====================================================
 // componentInit/componentUp

@@ -25,7 +25,7 @@ import Op from "./Op";
  *
  *
  * @memberOf module:web-component
- * @method ExEditorBatch
+ * @method *ExEditorBatch
  **/
 // =====================================================
 // componentInit/componentUp
