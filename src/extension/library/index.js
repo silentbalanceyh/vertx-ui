@@ -22,6 +22,26 @@ import Web from './web';
  *
  * |函数|说明|
  * |:---|:---|
+ * |authData|ACL管理中生成定义数据专用函数。|
+ * |authGroups|ACL权限分组专用函数。|
+ * |authKeySet|ACL操作过程中已选择值专用函数。|
+ * |authRequest|ACL请求构造专用函数。|
+ * |authRule|ACL资源访问者规则定义读取专用函数。|
+ * |authTpl|ACL界面模板生成专用函数。|
+ * |authTreeRes|ACL资源树数据构造函数。|
+ * |configClick|按钮扩展配置。|
+ * |configColumn|表格列扩展配置。|
+ * |configDialog|窗口扩展配置。|
+ * |configGrid|Grid布局扩展配置。|
+ * |configRelation|关系运算扩展配置。|
+ * |designer|「内部类」图编辑器。|
+ * |dialog|「内部类」窗口。|
+ * |form|「内部类」表单。|
+ * |inApi|接口管理输入。|
+ * |init|「内部类」初始化数据（环境信息）。|
+ * |inJob|任务管理输入。|
+ * |outApi|接口管理输出。|
+ * |outJob|任务管理输出。|
  * |parserOfButton|「解析」生成操作专用解析器。|
  * |parserOfColor|「解析」生成彩色日志解析器。|
  * |sexExAction|扩展操作专用函数，处理特定配置。|

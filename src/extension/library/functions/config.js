@@ -164,7 +164,7 @@ const toRowItem = (item, prefix, control) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「配置」`Ex.configColumn`
  *
  * 表格列扩展配置。
  *
@@ -202,7 +202,7 @@ const configColumn = (original = [], config = {}) => {
     return resultColumns;
 };
 /**
- * ## 扩展函数
+ * ## 「配置」`Ex.configGrid`
  *
  * Grid布局扩展配置。
  *
@@ -219,7 +219,7 @@ const configGrid = (grid = [], control = {}, prefix) => {
     return rows;
 };
 /**
- * ## 扩展函数
+ * ## 「配置」`Ex.configRelation`
  *
  * 关系扩展配置，data 中的数据结构：
  *
@@ -326,7 +326,7 @@ const configRelation = (data = {}, config = {}, reference) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「配置」`Ex.configClick`
  *
  * 按钮扩展配置。
  *
@@ -373,7 +373,7 @@ const configClick = (config = {}, reference) => {
 };
 
 /**
- * ## 扩展函数
+ * ## 「配置」`Ex.configDialog`
  *
  * 窗口扩展配置
  *

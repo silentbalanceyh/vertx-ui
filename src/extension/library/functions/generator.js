@@ -296,7 +296,7 @@ class Tab {
 // =====================================================
 
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxTabAdd`
  *
  * 新增 Tab 页专用函数
  *
@@ -315,7 +315,7 @@ const rxTabAdd = (reference) => event => {
     rx(reference).openPost({});
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxTabClose`
  *
  * 关闭 Tab 页专用函数
  *
@@ -333,7 +333,7 @@ const rxTabClose = (reference) => (key, callbackState = {}) => {
     rx(reference).closePost(key);
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxTabEdit`
  *
  * 编辑 Tab 页专用函数
  *
@@ -353,7 +353,7 @@ const rxTabEdit = (reference) => (key, data = {}, item = {}, callbackState = {})
     rx(reference).openPost(data);
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxTabOpen`
  *
  * 打开 Tab 页专用函数
  *
@@ -376,9 +376,29 @@ const rxTabOpen = (reference) => (key, data = {}, record) => {
 // 搜索
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxSearch`
  *
- * 搜索专用函数
+ * ### 1.基本介绍
+ *
+ * 搜索专用函数（列表组件主函数），它根据`ajax.search.uri`执行搜索，参数格式如：
+ *
+ * ```json
+ * {
+ *     "criteria": {},
+ *     "sorter": [],
+ *     "pager":{
+ *         "page": 1,
+ *         "size": 10
+ *     },
+ *     "projection": []
+ * }
+ * ```
+ *
+ * 参数格式参考Qr的格式语法。
+ *
+ * ### 2.核心
+ *
+ * 内置调用了`switcher`执行从状态state到属性props中的函数检索，检索合法时调用该函数，无法找到函数则抛出异常。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -394,9 +414,14 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
         return Ux.ajaxPost(uri, params);
     });
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxCondition`
  *
- * 条件专用函数：清空设置双用
+ * ### 1.基本介绍
+ *
+ * 条件专用函数：清空设置双用，该函数主要针对列过滤条件执行操作
+ *
+ * 1. 设置流程：更新$condition
+ * 2. 清空流程：执行`Ux.qrClear`清空操作（`__DELETE__`条件会被清除）
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -431,9 +456,24 @@ const rxCondition = (reference, isClear = false) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxFilter`
  *
- * 基础搜索 / 高级搜索
+ * ### 1.基本介绍
+ *
+ * 基础搜索 / 高级搜索专用函数，该函数会包含两部分输入：
+ *
+ * 1. 执行过查询条件处理过后的过滤条件`$filters`。
+ * 2. 原始查询条件（规范化之前）`$filtersRaw`（可选）。
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.$filtersRaw
+ *
+ * 在某些特定场景中，原始查询条件可追踪当前组件专用查询条件集合，所以除了规范化过后的查询条件以外，该函数提供了二义性输入。
+ *
+ * #### 2.2.$filters
+ *
+ * $filters状态变量在列表组件中只存在于基础搜索（搜索框）和高级搜索（查询表单），列过滤的搜索条件有另外的变量来完成。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -452,9 +492,22 @@ const rxFilter = (reference) =>
 // 批量
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxBatchDelete`
  *
- * 批量删除函数
+ * ### 1.基本介绍
+ *
+ * 批量删除函数专用，根据options中的批量删除配置`ajax.batch.delete.uri`执行批量删除函数，该函数会触发批量操作。
+ *
+ * ### 2.使用场景
+ *
+ * #### 2.1.调用代码
+ *
+ * （无）
+ *
+ * #### 2.2.操作执行
+ *
+ * 1. 调用`Ux.sexBatch`从批量选择数据中读取被选择的主键集。
+ * 2. 使用被选中的主键集调用批量删除接口执行批量删除。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -469,9 +522,20 @@ const rxBatchDelete = (reference) => (event) => {
     }, {name: "rxBatchDelete", message: G.Opt.MESSAGE_BATCH_DELETE});
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxBatchEdit`
  *
- * 批量更新函数
+ * ### 1.基本介绍
+ *
+ * 批量更新函数专用，根据options中批量更新配置`ajax.batch.update.uri`执行批量更新函数，该函数会触发批量操作。
+ *
+ * ### 2.下层调用
+ *
+ * #### 2.1.调用代码
+ *
+ * ```js
+ * // 调用 rxBatchEdit 方法
+ * Ex.rx(reference).batchEdit(...);
+ * ```
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -486,9 +550,24 @@ const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($sel
 // 列操作
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxColumn`
  *
- * 全列读取专用
+ * ### 1.基本介绍
+ *
+ * 全列视图函数专用，直接根据`options`中的配置`ajax.column.full`执行模型下的全列读取，读取模式分：
+ *
+ * 1. 静态列`dynamic.column = false`（默认值），直接返回配置列信息，前端静态列配置。
+ * 2. 动态列`dynamic.column = true`，直接返回动态配置列信息，动态列配置。
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.增强列表
+ *
+ * 增强视图主要包含三个核心功能：
+ *
+ * 1. 读取模型关联视图全列。
+ * 2. 读取定义好的我的视图列。
+ * 3. 针对2中读取的我的试图列进行保存，创建新视图（目前版本只支持单视图）。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -513,9 +592,14 @@ const rxColumn = (reference, config = {}) => Cm.switcher(reference, 'rxColumn',
         }
     });
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxColumnMy`
  *
- * 读取我的列
+ * ### 1.基本介绍
+ *
+ * 我的视图函数专用，直接根据`options`中的配置`ajax.column.my`执行模型下的我的视图列读取。
+ *
+ * 1. 我的视图列不执行双模式，所有模式都可支持我的视图保存。
+ * 2. 目前只有每个列表单视图操作，后期扩展多视图模式。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -535,9 +619,11 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
         }
     });
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxColumnSave`
  *
- * 视图保存函数
+ * ### 1.基本介绍
+ *
+ * 该函数为`rxColumnMy`的逆函数，此处不做多余说明，根据`options`中的`ajax.column.save`执行我的视图保存。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -553,9 +639,11 @@ const rxColumnSave = (reference, consumer = {}) => Cm.switcher(reference, 'rxCol
     }
 );
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxProjection`
  *
- * 列过滤专用执行函数
+ * ### 1.基本介绍
+ *
+ * 根据系统中存储的`$columns/$columnsMy`执行视图层的列过滤专用函数，该函数内部存储了**全列**，根据传入的试图列构造新的查询视图。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -609,9 +697,34 @@ const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
 // 行操作
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxDelete`
  *
- * 删除专用函数
+ * ### 1.基本介绍
+ *
+ * 执行`options`配置中的`ajax.delete.uri`专用函数，从后端执行删除。
+ *
+ * ### 2.下层调用
+ *
+ * #### 2.1.调用代码
+ *
+ * ```js
+ * Ex.rx(reference).delete(...);
+ * ```
+ *
+ * #### 2.2.删除模式
+ *
+ * 删除模式主要在服务端实现而不是客户端
+ *
+ * 1. 物理删除：SQL语句执行DELETE语句真实删除数据（可以删除同时做备份和变更历史）。
+ * 2. 逻辑删除：仅仅执行UPDATE语句更新某个标记位数据。
+ *
+ * #### 2.3.删除的影响
+ *
+ * 对列表而言，如果删除了某条记录而这条记录又在选择项中，则需要将`$selected`变量中选中项移除。
+ *
+ * #### 2.4.删除回调
+ *
+ * 系统提供了`rxPostDelete`函数用于执行删除回调操作，该操作位于删除之后执行（编程回调）。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -649,9 +762,11 @@ const rxDelete = (reference) => (key, callback) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxView`
  *
- * 查询记录专用函数
+ * ### 1.基本介绍
+ *
+ * 查询记录专用函数，用于查询当前系统中的记录（双击选中），直接执行`options`中的`ajax.get.uri`数据读取。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -665,9 +780,11 @@ const rxView = (reference) => (key) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxSelected`
  *
- * 多选专用函数
+ * ### 1.基本介绍
+ *
+ * 多选专用函数，该函数的基础封装仅执行一个操作，调用上层的`rxPostSelected`回调函数。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -684,9 +801,14 @@ const rxSelected = (reference) => ($selected = [], $data = []) => {
 // 导入导出专用
 // =====================================================
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxExport`
  *
- * 导出专用函数
+ * ### 1.基本介绍
+ *
+ * 导出函数专用，根据`options`中的`ajax.export.uri`执行导出操作。
+ *
+ * 1. 导出函数必须传入基础参数集：标识应用、模型、查询条件。
+ * 2. 查询条件直接走查询引擎，内置调用`Ux.ajaxPull`的下载函数（带权限）。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -707,9 +829,14 @@ const rxExport = (reference) => (params = {}) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「2阶」`Ex.rxImport`
  *
- * 导入专用函数
+ * ### 1.基本介绍
+ *
+ * 导入专用函数，根据`options`中的`ajax.import.uri`执行导入操作。
+ *
+ * 1. 导入函数必须传入`File`参数（上传文件）
+ * 2. 内置调用`Ux.ajaxUpload`的上传函数（带权限）。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -725,7 +852,9 @@ const rxImport = (reference) => (file) => {
     }
 };
 /**
- * ## 扩展函数
+ * ## 「标准」`Ex.rx`
+ *
+ * ### 1.基本介绍
  *
  * 主要用于调用上层函数
  *
@@ -741,28 +870,41 @@ const rxImport = (reference) => (file) => {
  *              .then(response => Ex.rx(reference).close(response));
  * ```
  *
- * 返回的数据结构如下：
+ * ### 2.函数列表
  *
  * | 函数名 | 调用函数 | 说明 |
  * |:---|:---|:---|
- * | openPost | rxPostOpen | 打开Tab页后的执行函数 |
- * | closePost | rxPostClose | 关闭Tab页后的执行函数 |
  * | assistIn | rxAssist | 辅助数据输入函数 |
  * | assistOut | rxAssist | 辅助数据输出函数 |
- * | search | rxSearch | 搜索专用函数 |
- * | condition | rxCondition | 条件处理专用函数 |
- * | filter | rxFilter | 查询条件专用函数 |
- * | projection | rxProjection | 列过滤专用函数 |
- * | selected | rxSelected | 多选专用函数 |
- * | delete | rxDelete | 单行删除专用函数 |
+ * | 无 | rxBatchDelete | （批删）无主动调用接口 |
  * | batchEdit | rxBatchEdit | 批量更新专用函数 |
- * | view | rxView | 单行查看专用函数 |
- * | open | rxOpen | 打开页面专用函数 |
- * | close | rxClose | 关闭页面专用函数 |
- * | loading | doLoading | 加载状态处理函数 |
+ * | 无 | rxChannel | 直接调用顶层通道方法，触发Fabric事件引擎 |
+ * | 无 | rxColumn | 读取当前模型相关的所有列集（全视图）|
+ * | 无 | rxColumnMy | 读取当前模型我的视图列（子视图）|
+ * | 无 | rxColumnSave | 保存我的视图列 |
+ * | condition | rxCondition | 条件处理专用函数 |
+ * | delete | rxDelete | 单行删除专用函数 |
  * | dirty | doDirty | 脏状态处理函数 |
+ * | 无 | rxDirty | 等价于 $dirty = true，doDirty的一半 |
+ * | 无 | rxExport | 导出函数专用 |
+ * | filter | rxFilter | 查询条件专用函数 |
+ * | 无 | rxImport | 导入函数专用 |
+ * | loading | doLoading | 加载状态处理函数 |
+ * | 无 | rxLoading | 等价于 $loading = true, doLoading的一半 |
+ * | closePost | rxPostClose |「外围生成」关闭Tab页后的执行函数。 |
+ * | openPost | rxPostOpen |「外围生成」 打开Tab页后的执行函数。 |
+ * | projection | rxProjection | 列过滤专用函数 |
+ * | search | rxSearch | 搜索专用函数 |
+ * | selected | rxSelected | 多选专用函数 |
  * | submitting | doSubmitting | 提交状态专用函数 |
  * | submittingStrict | doSubmitting | 提交状态专用函数（带错误信息） |
+ * | 无 | rxTabAdd | 添加Tab页 |
+ * | 无 | rxTabClose | 关闭Tab页 |
+ * | 无 | rxTabEdit | 编辑Tab页 |
+ * | 无 | rxTabOpen | 打开Tab页 |
+ * | open | rxOpen |「外围生成」 打开页面专用函数 |
+ * | close | rxClose |「外围生成」 关闭页面专用函数 |
+ * | view | rxView | 单行查看专用函数 |
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -837,9 +979,30 @@ const rx = (reference, off = false) => ({
 // 扩展专用函数
 // =====================================================
 /**
- * ## 扩展函数「2阶」
+ * ## 「2阶」`Ex.rsVisible`
  *
- * $visible 生成函数
+ * ### 1.基本介绍
+ *
+ * $visible 生成函数，根据传入的`visible`生成不同函数，等价于生成：
+ *
+ * ```js
+ * // 修改组件为显示
+ * () => reference.setState({$visible: true});
+ *
+ * // 修改组件为隐藏
+ * () => reference.setState({$visible: false});
+ * ```
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.常用组件
+ *
+ * 该状态为窗口专用状态，通常应用于：
+ *
+ * * `<Modal/>`：弹出窗口
+ * * `<Drawer/>`：抽屉窗口
+ * * `<Popover/>`：浮游窗口
+ *
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -849,9 +1012,29 @@ const rx = (reference, off = false) => ({
 const rsVisible = (reference, visible = true) =>
     Cm.boolean(reference, "$visible", visible);
 /**
- * ## 扩展函数「2阶」
+ * ## 「2阶」`Ex.rsLoading`
  *
- * $loading 生成函数
+ * ### 1.基本介绍
+ *
+ * $loading 生成函数，根据传入的`loading`生成不同函数，等价于生成：
+ *
+ * ```js
+ * // 修改组件加载状态
+ * () => reference.setState({$loading: true});
+ *
+ * // 修改组件加载完成状态
+ * () => reference.setState({$loading: false});
+ * ```
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.手动回调
+ *
+ * 当一个组件处于加载状态，它并不会自动执行加载，和`$dirty`有本质上的区别，但是开发人员可在某些特定的操作中执行特定加载回调手动改变状态。
+ *
+ * #### 2.2.高频函数
+ *
+ * 通常在修改`$loading`时会调用内部规范的`doLoading`专用函数，用于修改加载以及加载完成的状态。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -861,9 +1044,29 @@ const rsVisible = (reference, visible = true) =>
 const rsLoading = (reference, loading = true) =>
     Cm.boolean(reference, "$loading", loading);
 /**
- * ## 扩展函数「2阶」
+ * ## 「2阶」`Ex.rsSubmitting`
  *
- * $submitting 生成函数
+ * ### 1.基本介绍
+ *
+ * $submitting 生成函数，根据传入的`submitting`生成不同函数，等价于生成：
+ *
+ * ```js
+ * // 修改组件提交状态
+ * () => reference.setState({$submitting: true});
+ *
+ * // 修改组件提交完成状态
+ * () => reference.setState({$submitting: false});
+ * ```
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.回调
+ *
+ * 提交状态的切换主要应用于防重复提交，为表单重复提交提供一个过渡功能。
+ *
+ * #### 2.2.高频函数
+ *
+ * 通常在修改`$submitting`时会调用内部规范的`doSubmitting`专用函数，用于修改加载以及加载完成的状态。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -873,9 +1076,25 @@ const rsLoading = (reference, loading = true) =>
 const rsSubmitting = (reference, submitting = true) =>
     Cm.boolean(reference, "$submitting", submitting);
 /**
- * ## 扩展函数「2阶」
+ * ## 「2阶」`Ex.rsDirty`
  *
- * $dirty 生成函数
+ * ### 1.基本介绍
+ *
+ * $dirty 生成函数，最终会根据传入的`dirty`生成不同函数，等价于生成：
+ *
+ * ```js
+ * // 修改组件脏状态
+ * () => reference.setState({$dirty: true});
+ *
+ * // 修改组件非脏状态
+ * () => reference.setState({$dirty: false});
+ * ```
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.脏状态
+ *
+ * **脏状态**表示当前列表会等待自动刷新，直到列表状态为非脏的状态。
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
@@ -885,7 +1104,28 @@ const rsSubmitting = (reference, submitting = true) =>
 const rsDirty = (reference, dirty = true) =>
     Cm.boolean(reference, "$dirty", dirty);
 /**
- * ## 扩展函数「2阶」
+ * ## 「2阶」`Ex.rsOpened`
+ *
+ * ### 1.基本介绍
+ *
+ * $opened 生成函数，根据最终传入的`opened`生成不同函数，等价于生成:
+ *
+ *
+ * ```js
+ * // 修改组件打开状态
+ * () => reference.setState({$opened: true});
+ *
+ * // 修改组件关闭状态
+ * () => reference.setState({$opened: false});
+ * ```
+ *
+ * ### 2.核心
+ *
+ * #### 2.1.使用场景
+ *
+ * 这个函数通常只在`<Tabs/>`组件中使用，修改了`$opened=true`时，可直接打开页签，而点击关闭后，则直接将页签关掉。
+ *
+ * `$opened`和`$visible`为最初设计的不同场景的打开和关闭状态，而后续很多组件直接使用了`$visible`而忽略掉`$opened`。
  *
  * @memberOf module:_rx
  * @param reference
@@ -900,9 +1140,11 @@ export default {
     rsSubmitting,
     rsDirty,
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxPostClose`
      *
-     * 打开Tab页后置回调函数
+     * ### 1.基本介绍
+     *
+     * 打开Tab页后置回调函数，设置 $opened = true。
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -910,9 +1152,11 @@ export default {
      */
     rxPostClose: (reference) => (key) => rsOpened(reference, false)(key),
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxPostClose`
      *
-     * 关闭Tab页后置回调函数
+     * ### 1.基本介绍
+     *
+     * 关闭Tab页后置回调函数，设置 $opened = false。
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -921,9 +1165,16 @@ export default {
     rxPostOpen: (reference) => (data) => rsOpened(reference, true)(data),
 
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxLoading`
      *
-     * 加载状态切换函数
+     * ### 1.基本介绍
+     *
+     * 加载状态切换函数，设置当前组件中`$loading = true`，该函数和`rsLoading`对应：
+     *
+     * 1. rsLoading负责生成可改变加载状态的二阶函数。
+     * 2. rxLoading则直接生成`$loading = true`的一阶函数操作。
+     *
+     * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -931,9 +1182,16 @@ export default {
      */
     rxLoading: (reference) => (loading, addOn = {}) => rsLoading(reference, loading)(addOn),
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxSubmitting`
      *
-     * 提交状态切换函数
+     * ### 1.基本介绍
+     *
+     * 加载状态切换函数，设置当前组件中`$submitting = true`，该函数和`rsSubmitting`对应：
+     *
+     * 1. rsSubmitting负责生成可改变提交状态的二阶函数。
+     * 2. rxSubmitting则直接生成`$submitting = true`的一阶函数操作。
+     *
+     * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -941,9 +1199,16 @@ export default {
      */
     rxSubmitting: (reference) => (submitting, addOn = {}) => rsSubmitting(reference, submitting)(addOn),
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxDirty`
      *
-     * 脏状态切换函数
+     * ### 1.基本介绍
+     *
+     * 脏状态切换函数，设置当前组件的`$dirty = true`，该函数和`rsDirty`对应：
+     *
+     * 1. rsDirty负责生成可改变脏状态的二阶函数。
+     * 2. rxDirty则直接执行`$dirty = true`的一阶函数操作。
+     *
+     * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -951,9 +1216,29 @@ export default {
      */
     rxDirty: (reference) => (dirty, addOn = {}) => rsDirty(reference, dirty)(addOn),
     /**
-     * ## 扩展函数
+     * ## 「1阶」`Ex.rxAssist`
      *
-     * 辅助数据专用函数
+     * ### 1.基本介绍
+     *
+     * rxAssist用于更改组件状态state中的专用辅助数据，它支持两种模式：
+     *
+     * 1. 添加/更新：使用添加更新模式`deleted=false`（默认），直接追加和更新辅助数据信息。
+     * 2. 删除：使用删除模式`deleted=true`（传入），直接删除输入记录及。
+     *
+     * ### 2.下层调用
+     *
+     * #### 2.1.调用代码
+     *
+     * ```js
+     * // 执行 deleted = false 添加更新辅助数据
+     * Ex.rx(reference).assistIn(...);
+     *
+     * // 执行 deleted = true 删除更新辅助数据
+     * Ex.rx(reference).assistOut(...);
+     * ```
+     *
+     * > rx系列方法和rs系列方法并不对等，因为rs是为了生成函数专用方法，有可能一个方法生成两个函数。
+     *
      *
      * @memberOf module:_rx
      * @param {ReactComponent} reference React对应组件引用
@@ -971,6 +1256,9 @@ export default {
             reference.setState(state);
         }
     },
+
+    rxBatchDelete,
+    rxBatchEdit,
 
     rx,
     rxTabAdd,    // 打开一个新的 Tab 页
@@ -996,9 +1284,6 @@ export default {
      */
     rxFilter,
 
-    rxBatchDelete,
-    rxBatchEdit,
-
     // 列操作
     /* 可外置传入 */ rxColumn,
     /* 可外置传入 */ rxColumnMy,
@@ -1014,22 +1299,37 @@ export default {
     rxExport,
     rxImport,
 }
-/*
- * 函数基础规范
- * 1）从组件最外层传入的函数（无关组件的使用 fn，相关的还是要使用 rx）：
- * -- 1.1. fn 开头，Function 缩写
- * ---- fnApp（读取应用程序数据）
- * ---- fnOut（Redux写入树）
- * 2）组件内部从上层往下继承的函数
- * 为了兼容原生态的 Ux 使得输入统一，外层函数全部遵循
- * -- 2.1. rx 开头，Runtime Executor缩写
- * ---- (1) 这种函数直接调用 Ex.rx(reference).<name> 执行注入
- * ---- (2) 调用父类传入：const fun = Ex.rx(reference).do<Name>()
- * -- 2.2. 状态函数比较特殊主要包括，Runtime State缩写
- * ---- (1) 绑定：const fun = Ex.rs(reference).<name> / 这种直接调用 fun()
- * ---- (2) 调用父类传入：const fun = Ex.rs(reference).do<Name>()
- * ---- (3) 暂时开放的状态函数：
- * -------- $visible
- * -------- $submitting
- * -------- $loading
+
+/**
+ * # 函数模块
+ *
+ * ## 1.函数列表
+ *
+ * （略）参考`_rx`处文档。
+ *
+ * ## 2.基本介绍
+ *
+ * ### 2.1.函数子规范
+ *
+ * 1. rs全称是：Runtime State，为状态函数生成器。
+ * 2. rx全称是：Runtime Executor，是执行函数生成器。
+ * 3. `Ex.rx(reference)`调用后则可直接通过内置API调用上层的`rx/rs`函数，它不管生成，主管调用。
+ * 4. 上层函数：先从状态中读取函数，若无法读取，则从属性中读取，状态中优先级更高。
+ *
+ * ### 2.2.回调函数表
+ *
+ * 回调函数是Extension扩展模块提供给开发人员专用的回调扩展接口，常用回调如下：
+ *
+ * |函数名|触发时间和含义|
+ * |:---|:---|
+ * |rxPostOpen|打开Tab页之后的回调|
+ * |rxPostClose|关闭Tab页之后的回调|
+ * |rxPostSelected|选中记录后的回调|
+ * |rxPostDelete|删除数据之后的回调|
+ * |rxPostEdit|编辑数据之后的回调|
+ * |rxViewSwitch|视图改变之后的回调（主要针对页签状态变更）|
+ *
+ * > 其他回调后续补充……
+ *
+ * @module _rx
  */
