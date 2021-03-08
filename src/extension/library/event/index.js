@@ -383,9 +383,9 @@ const rxChannel = (reference) => (state = {}) => {
     reference.setState({$fabric: fabricNew});
 };
 /**
- * 内部模块
+ * ## Fabric引擎
  *
- * 事件调度方法
+ * 前端事件生成和调度专用，文档后期补。
  *
  * @module _event
  */
