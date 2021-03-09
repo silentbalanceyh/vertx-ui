@@ -1,13 +1,14 @@
 import Ux from 'ux';
 import React from "react";
 import {Tabs} from "antd";
+import {Dialog} from 'web';
 
 /**
  * ## 弹出窗口专用类
  *
- * @class Dialog
+ * @class IxDialog
  */
-class Dialog {
+class IxDialog {
     constructor(reference, key = "window") {
         this.reference = reference;
         /* 窗口配置 */
@@ -112,9 +113,9 @@ class Dialog {
 /**
  * ## 页签专用类
  *
- * @class Tab
+ * @class IxTab
  */
-class Tab {
+class IxTab {
     /*
      * 资源文件的具体结构
             "_tabs": {
@@ -243,7 +244,7 @@ export default {
      * @param {Function} consumer 构造Tab的回调函数。
      * @returns {Tab} 窗口引用
      */
-    uiTab: (reference, consumer) => wrapper(reference, Tab, "__tabs", consumer),
+    uiTab: (reference, consumer) => wrapper(reference, IxTab, "__tabs", consumer),
     /**
      * ##「组件」`Ux.uiDialog`
      *
@@ -254,5 +255,5 @@ export default {
      * @param {Function} consumer 构造Tab的回调函数。
      * @returns {Dialog} 窗口引用
      */
-    uiDialog: (reference, consumer) => wrapper(reference, Dialog, "__dialog", consumer),
+    uiDialog: (reference, consumer) => wrapper(reference, IxDialog, "__dialog", consumer),
 }
