@@ -107,4 +107,7 @@ class Op {
     }
 }
 
-export default Op
+export default {
+    $opLogin: Op.$opLogin,
+    $opLogout: Op.$opLogout,
+}

@@ -1,4 +1,3 @@
-import U from "underscore";
 // 文件导入
 import Ele from '../../element';
 import E from "../../error";
@@ -27,7 +26,7 @@ const _parseData = (reference, config = {}) => {
 
 const parseFilter = (reference, filter = () => true) => {
     let filters;
-    if (U.isFunction(filter)) {
+    if (Abs.isFunction(filter)) {
         // 直接返回过滤函数
         filters = filter;
     } else if ("string" === typeof filter) {
@@ -77,8 +76,8 @@ const getDatum = (reference, config = {}, filter = () => true) => {
     if (source && "string" === typeof source) {
         let data = [];
         const processed = parseFilter(reference, filter);
-        E.fxTerminal(!U.isArray(data), 10043, source);
-        if (U.isFunction(processed)) {
+        E.fxTerminal(!Abs.isArray(data), 10043, source);
+        if (Abs.isFunction(processed)) {
             data = Datum.elementFindDatum(reference, source, {});
             data = data.filter(processed);
         } else {
@@ -147,7 +146,7 @@ const getFilter = (reference, config = {}) => {
                  * 有值的时候很好处理，直接针对值进行 cascade 的过滤
                  * 多选和单选的处理方法不同
                  * */
-                if (U.isArray(value)) {
+                if (Abs.isArray(value)) {
                     const $value = Abs.immutable(value);
                     return $value.contains(item[cascade.source]);
                 } else {

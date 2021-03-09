@@ -6,6 +6,7 @@ import Ut from "../../unity";
 import Abs from "../../abyss";
 import Dev from "../../develop";
 import Expr from "./O.ai";
+import Eng from '../datum';
 // I.unique.js
 /*
  * 统一处理
@@ -35,7 +36,7 @@ const plxUnique = (reference, config = {}) => {
              * 计算 list
              */
             if (config) {
-                source.data = Datum.onDatum(reference, config.source);
+                source.data = Eng.onDatum(reference, config.source);
             } else {
                 source.data = [];
             }

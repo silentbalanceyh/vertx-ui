@@ -25,9 +25,12 @@ echo "[ Proc ] 代码拷贝完成！"
 cp -rf src/cab/cn/shared.json ${TARGET_FOLDER}/src/cab/cn/shared.json
 cp -rf src/environment/zero.js ${TARGET_FOLDER}/src/environment/zero.js
 cp -rf src/environment/zero.fn.js ${TARGET_FOLDER}/src/environment/zero.fn.js
+# 脚本
 cp -rf scripts/zrun-route.zt ${TARGET_FOLDER}/scripts/zrun-route.zt
+cp -rf scripts/zrun-route.js ${TARGET_FOLDER}/scripts/zrun-route.js
+cp -rf scripts/zrun-route-ready.js ${TARGET_FOLDER}/scripts/zrun-route-ready.js
 cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
-cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
+# 其他
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
 cp -rf src/style/common.less ${TARGET_FOLDER}/src/style/common.less
 cp -rf src/style/zero.less ${TARGET_FOLDER}/src/style/zero.less
@@ -39,10 +42,13 @@ echo "[ Proc ] 框架核心文件！"
 cp -rf scripts/start.js ${TARGET_FOLDER}/scripts/start.js
 cp -rf scripts/build.js ${TARGET_FOLDER}/scripts/build.js
 cp -rf scripts/test.js ${TARGET_FOLDER}/scripts/test.js
-cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
-cp -rf config/webpack.config.js ${TARGET_FOLDER}/config/webpack.config.js
-cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf config/env.js ${TARGET_FOLDER}/config/env.js
+cp -rf config/getHttpsConfig.js ${TARGET_FOLDER}/config/getHttpsConfig.js
+cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
+cp -rf config/paths.js ${TARGET_FOLDER}/config/paths.js
+cp -rf config/pnpTs.js ${TARGET_FOLDER}/config/pnpTs.js
+cp -rf config/webpack.config.js ${TARGET_FOLDER}/config/webpack.config.js
+cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
 
 rm -rf ${TARGET_FOLDER}/src/cab/cn/economy/*
 rm -rf ${TARGET_FOLDER}/src/cab/cn/extension/*
