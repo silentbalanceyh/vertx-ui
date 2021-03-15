@@ -49,29 +49,34 @@
         "search": true,
         "private": true,
         "menu": {
-            "Zero Api": {
+            "「Api」Zero Ai": {
+                "href": "http://www.vertxai.cn/document/doc-web/index.html",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "「Api」Zero Ui": {
                 "href": "http://www.vertxui.cn/document/doc-web/index.html",
                 "class": "menu-item",
                 "id": "website_link"
             },
-            "Zero Extension": {
+            "「Api」Zero Ui Extension": {
                 "href": "http://www.vertxui.cn/document/doc-web-extension/index.html",
                 "class": "menu-item",
                 "id": "website_link"
             },
-            "Zero UI": {
+            "「Home」Zero UI": {
                 "href": "http://www.vertxui.cn",
                 "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
-            "Zero Epic Fabric": {
+            "「Home」Zero Epic Fabric": {
                 "href": "http://www.vertxup.cn",
                 "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
-            "Origin X Engine": {
+            "「Home」Origin X Engine": {
                 "href": "http://www.origin-x.cn",
                 "target": "_blank",
                 "class": "menu-item",
