@@ -47,16 +47,19 @@
         "menu": {
             "「Api」Zero Ai": {
                 "href": "http://www.vertxai.cn/document/doc-web/index.html",
+                "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
             "「Api」Zero Ui": {
                 "href": "http://www.vertxui.cn/document/doc-web/index.html",
+                "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
             "「Api」Zero Ui Extension": {
                 "href": "http://www.vertxui.cn/document/doc-web-extension/index.html",
+                "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
@@ -68,6 +71,7 @@
             },
             "「Home」Zero Ai": {
                 "href": "http://www.vertxai.cn",
+                "target": "_blank",
                 "class": "menu-item",
                 "id": "website_link"
             },
