@@ -70,7 +70,12 @@
                 "class": "menu-item",
                 "id": "website_link"
             },
-            "「Home」Zero Epic Fabric": {
+            "「Home」Zero Ai": {
+                "href": "http://www.vertxai.cn",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "「Home」Zero Framework": {
                 "href": "http://www.vertxup.cn",
                 "target": "_blank",
                 "class": "menu-item",
