@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Global - Zero Extension框架专用前端文档</title>
+    <title>IxDialog - Zero Extension框架专用前端文档</title>
     
     <meta name="description" content="前端开发框架，官方地址：http://www.vertx-ui.cn" />
     
@@ -41,7 +41,7 @@
 
 <div id="main">
     
-    <h1 class="page-title">Global</h1>
+    <h1 class="page-title">IxDialog</h1>
     
 
     
@@ -54,7 +54,7 @@
 <header>
     
         <h2>
-        
+        IxDialog
         </h2>
         
     
@@ -66,74 +66,9 @@
         
             
 
-<dl class="details">
-
     
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-            
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-        <h3 class="subsection-title">Methods</h3>
-
-        
-            
-
-    
-
-    <h4 class="name" id="@ox"><span class="type-signature"></span>@ox<span class="signature">(options)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="IxDialog"><span class="type-signature"></span>new IxDialog<span class="signature">()</span><span class="type-signature"></span></h4>
 
     
 
@@ -180,137 +115,7 @@
 
 
 <div class="description usertext">
-    <h1>Origin X专用注解</h1>
-<h2>1.基本使用</h2>
-<p>使用方法：</p>
-<pre class="prettyprint source lang-js"><code>import Ex from 'ex';
-
-&#64;Ex.ox() -- 注释掉的调用方法，由于包含 @ 符号不可解析
-class Component extends React.Component{
-
-}
-</code></pre>
-<p>该注解用于高阶组件，使用Hoc方式对定义的React组件执行注解操作，采用ES7中的修饰语法</p>
-<h3>1.1.参数</h3>
-<p><code>options</code>中目前包括两个核心值：</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">值</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Page</td>
-<td style="text-align:left">页面动态渲染。</td>
-</tr>
-<tr>
-<td style="text-align:left">Control</td>
-<td style="text-align:left">控件动态渲染。</td>
-</tr>
-</tbody>
-</table>
-<h3>1.2.加载</h3>
-<p>组件执行后会检查<code>$ready</code>的值：</p>
-<ol>
-<li><code>$ready=true</code>：表示当前组件的配置已经加载完成。</li>
-<li>该组件没有<code>componentDidUpdate</code>的生命周期，仅处理componentDidMount。</li>
-</ol>
-<p>由于<code>@ox</code>注解主要是针对不同组件执行配置加载，一旦加载不可更改，所以只有<code>componentDidMount</code>的生命周期，而没有更新周期。</p>
-<h2>2.<code>hocFn</code>核心函数</h2>
-<blockquote>
-<p>输入数据全部来自于<code>props</code>属性集。</p>
-</blockquote>
-<p><code>options</code>参数结构：</p>
-<pre class="prettyprint source lang-js"><code>const hoc = {
-     &quot;Page&quot;: hocPage,
-     &quot;Control&quot;: hocControl
-};
-</code></pre>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">类型</th>
-<th style="text-align:left">函数</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">Page</td>
-<td style="text-align:left">hocPage执行页面渲染。</td>
-</tr>
-<tr>
-<td style="text-align:left">Control</td>
-<td style="text-align:left">hocControl执行组件渲染。</td>
-</tr>
-</tbody>
-</table>
-<h3>2.1.hocPage</h3>
-<h4>2.1.1.输入处理</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量名</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">$assist</td>
-<td style="text-align:left">辅助数据专用定义，定义了所有当前系统中要使用的辅助数据信息。</td>
-</tr>
-<tr>
-<td style="text-align:left">$grid</td>
-<td style="text-align:left">根据当前页面<code>app,module,page</code>读取的<code>UI_LAYOUT, UI_PAGE</code>中的布局信息（全部使用Grid布局）。</td>
-</tr>
-<tr>
-<td style="text-align:left">$container</td>
-<td style="text-align:left">容器信息，包含容器组件和容器配置两部分。</td>
-</tr>
-<tr>
-<td style="text-align:left">$controls</td>
-<td style="text-align:left">页面信息，包含页面组件和组件配置两部分。</td>
-</tr>
-</tbody>
-</table>
-<h4>2.1.2.构造内容</h4>
-<ol>
-<li>构造内部专用<code>HocI18r</code>对象，资源配置对象。</li>
-<li>传入<code>$router</code>中的基础数据，根据<code>$controls</code>组件配置计算完整布局配置，生成<code>$grid</code>变量。</li>
-<li>根据<code>$container</code>计算容器组件和容器配置。</li>
-<li>根据<code>$assist</code>计算当前页面需要使用的所有辅助数据信息信息（远程调用读取数据），统一结构。</li>
-<li>注入顶层<code>rxChannel</code>专用通道函数。</li>
-</ol>
-<h3>2.2.hocControl</h3>
-<h4>2.2.1.输入数据</h4>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">变量名</th>
-<th style="text-align:left">含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">rxChannel</td>
-<td style="text-align:left">「Fabric引擎」上层注入的通道函数。</td>
-</tr>
-<tr>
-<td style="text-align:left">event</td>
-<td style="text-align:left">当前组件对应的事件配置信息。</td>
-</tr>
-</tbody>
-</table>
-<h4>2.2.2.构造内容</h4>
-<p>在当前组件状态中，调用<code>Ex.etUniform</code>构造事件链结构</p>
-<ol>
-<li>并行构造：<code>etParallel</code>，传入的<code>event[eventName]</code>是Object结构。</li>
-<li>串行构造：<code>etSequence</code>，传入的<code>event[eventName]</code>是Array结构。</li>
-</ol>
-<blockquote>
-<p>根据<code>event</code>结构构造同样的事件信息，并注入到state状态中。</p>
-</blockquote>
+    <h2>弹出窗口专用类</h2>
 </div>
 
 
@@ -323,73 +128,41 @@ class Component extends React.Component{
 
 
 
-    <h5>Parameters:</h5>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+        </div>
     
 
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
     
 
-        <tr>
-            
-                <td class="name"><code>options</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>配置项信息</p></td>
-        </tr>
+    
 
     
-    </tbody>
-</table>
+    
+    
 
+     
 
+    
 
+    
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
     
 
     

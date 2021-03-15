@@ -72,6 +72,9 @@ const shared = process.env.UX_SHARED;
 if (shared) {
     epics['shareEpics'] = `../${shared}/action/Epic`;
     handlers['shareTypes'] = `../${shared}/action/Types`;
+
+    epics['extensionEpics'] = `../extension/library/Epic`;
+    handlers['extensionTypes'] = `../extension/library/Types`;
 }
 // 写入文件
 let line = [];

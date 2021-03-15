@@ -22,6 +22,7 @@ const isVisible = (reference, item, config) => {
 }
 
 const renderIcon = (attrs, item) => (
+    // eslint-disable-next-line
     <a href={""} {...attrs} key={item.key}>
         {Ux.aiIcon(item.icon, {
             "data-color": attrs.disabled ? "#ececec" : (item['svgColor'] ? item['svgColor'] : "#595959")

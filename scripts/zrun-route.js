@@ -64,16 +64,25 @@ const generateRoute = (Component = [], Config) => {
  * 3）/ambient/category -> 分类 Category 管理页
  * 4）其他页面
  */
+
+/*
+ * 可支持 `/:type`的链接
+ */
+const $typePages = Immutable.fromJS([
+    "/ambient/tabular",  // 字典
+    "/ambient/category", // 类别
+    "/ambient/employee", // 员工
+    "/ambient/customer", // 客户
+    "/ambient/company",  // 企业
+    "/ambient/identity", // 档案（详细记录）
+]);
 const generateTpl = (lines = [], route = {}) => {
     if ("/module/page" === route.uri) {
         /*
          * 特殊页面，动态加载用，Origin X专用页
          */
         lines.push(`{connect("/ui/:module/:page",Container["${route.layout}"],Component["${route.page}"])}`);
-    } else if (
-        "/ambient/tabular" === route.uri     // Tabular处理
-        || "/ambient/category" === route.uri // Category 处理
-    ) {
+    } else if ($typePages.contains(route.uri)) {
         /*
          * 字典页面
          */

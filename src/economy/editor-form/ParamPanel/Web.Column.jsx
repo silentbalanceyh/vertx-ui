@@ -6,6 +6,7 @@ export default (reference, op = {}) => {
     return {
         dataIndex: "key",
         render: (text) => (
+            // eslint-disable-next-line
             <a href={""} onClick={Op.onRowRemove(reference, text)}>
                 <Icon type={"delete"}/>
                 &nbsp;&nbsp;

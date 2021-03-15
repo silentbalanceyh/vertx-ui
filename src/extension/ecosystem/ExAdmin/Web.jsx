@@ -1,13 +1,13 @@
 import {Badge, Icon, Layout, Popover} from "antd";
-import Header from "./UI.Header";
 import React from "react";
 
 import ExNavigation from '../ExNavigation/UI';
 import ExSider from '../ExSider/UI';
 import ExLogged from "../ExLogged/UI";
+import ExHeader from "./UI.Header";
 import './Cab.less';
 
-const {Content} = Layout;
+const {Content, Header} = Layout;
 
 export default {
     renderTpl: (ref, {
@@ -26,7 +26,7 @@ export default {
                 }
             } {...siders}/>
             <Layout>
-                <Header {...headers}/>
+                <ExHeader {...headers}/>
                 <Content className={"ux-content"}>
                     <ExNavigation {...navigations} css={
                         {

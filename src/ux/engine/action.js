@@ -5,7 +5,6 @@ import Ajax from "../ajax";
 import Dev from '../develop';
 // Engine 内部
 import Expr from "./expression";
-import U from "underscore";
 
 const _submit = (reference, config, redux = false) => {
     // $loading设置
@@ -166,7 +165,7 @@ const _raftButtons = (reference, jsx) => {
 const _raftExtensions = (reference, jsx) => {
     const extension = jsx.extension;
     const normalized = [];
-    if (U.isArray(extension)) {
+    if (Abs.isArray(extension)) {
         extension.map(each => exprUniform(reference, each))
             .filter(each => undefined !== each)
             .forEach(each => normalized.push(each));
