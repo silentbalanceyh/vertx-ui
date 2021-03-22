@@ -1,5 +1,6 @@
 import Ux from 'ux';
 import Op from './Op.State';
+import Ex from "ex";
 /*
  * 基本配置解析
  * 1. query：（静态默认的query）；
@@ -32,20 +33,20 @@ const sync = (reference, config = {}) => {
      * 1. options中的配置比较多，需要单独提取
      * 2. options拷贝一份，会被 rxInject 处理
      */
-    state.options = Op.stateOption(reference, config);
+    state.options = Ex.yiListOptions(reference, config);
     /*
      * query 状态保存，根容器中保存了 query 的相关状态
      * 1. 如果外置 $query 传入，那么也会更新 query
      * 2. query 合并过后执行 update 方法，然后将 query 最终传入 Table 组件
      * 3. 当前组件：state -> query 会转换成 props -> $query 转换最终查询条件给 Table 组件
      */
-    state.query = Op.stateQuery(reference, config);
+    state.query = Ex.yiListQuery(reference, config.query);
     /*
      * 准备 Tabs 的初始化状态
      * 1. 打开 Tab
      * 2. 关闭 Tab
      */
-    state.tabs = Op.stateTab(reference, config);
+    state.tabs = Ex.yiListTab(reference, config);
     /*
      *  activeKey 中的值拷贝到 $key 中，构造核心视图数据
      * 1) 列表：view = list, key = activeKey
@@ -60,7 +61,7 @@ const sync = (reference, config = {}) => {
      * 由于包含了列信息，所以改成异步
      */
     // state.table = stateTable(reference, config);
-    state.plugins = Op.statePlugin(reference, config);
+    state.plugins = Ex.yiListPlugin(reference, config);
     /*
      * 提交和加载
      */

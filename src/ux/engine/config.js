@@ -463,10 +463,8 @@ const configScroll = ($table = {}, data = [], reference) => {
         if (Abs.isFunction(executor)) {
             const titleWidth = _widthTitle(rdTitle, column);
             const calculated = executor(titleWidth, column, data, reference);
-            if (rdWidth && rdWidth < calculated) {
+            if (!rdWidth) {
                 // 只有这种时候重算
-                column.width = calculated;
-            } else {
                 column.width = calculated;
             }
         }

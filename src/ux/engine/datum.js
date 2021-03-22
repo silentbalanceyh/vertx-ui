@@ -1,6 +1,7 @@
 import E from '../error';
 import Abs from '../abyss';
 import Ele from '../element';
+import T from '../unity';
 import {Dsl} from "entity";
 
 const yoDatum = (props = {}, keys = []) => {
@@ -313,7 +314,40 @@ const onSave = (reference, key, data, isDeleted = false) => {
         }
     }
 };
+/**
+ * ## 「标准」`Ux.assistIn`
+ *
+ * @memberOf module:_engine
+ * @param {ReactComponent} reference React组件。
+ * @param {String} key 需要读取的 Assist 的键值。
+ * @param {Object} data 需要执行数据处理的信息
+ */
+const assistIn = (reference, key, data) => {
+    const combine = onSave(reference, key, data);
+    if (combine) {
+        const state = {};
+        state[`assist.${key}`] = combine;
+        T.writeTree(reference, state);
+    }
+}
+/**
+ * ## 「标准」`Ux.assistOut`
+ *
+ * @param {ReactComponent} reference React组件。
+ * @param {String} key 需要读取的 Assist 的键值。
+ * @param {Object} data 需要执行数据处理的信息
+ */
+const assistOut = (reference, key, data) => {
+    const combine = onSave(reference, key, data, true);
+    if (combine) {
+        const state = {};
+        state[`assist.${key}`] = combine;
+        T.writeTree(reference, state);
+    }
+}
 export default {
+    assistIn,
+    assistOut,
     onUniform,
     onSave,         // 处理 Assist / Tabular 的合并
     onDatum,        // 读取 Tabular 或 Assist
