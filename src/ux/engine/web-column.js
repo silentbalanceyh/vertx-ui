@@ -70,8 +70,10 @@ const _jsxArray = (children = [], config = {}) => {
     );
 }
 
-const jsxSpan = (attrs = {}, children, config = {}) => (
-    <span {...attrs}>
+const jsxSpan = (attrs = {}, children, config = {}) => {
+    const {jsxIcon} = config;
+    return (
+        <span {...attrs}>
             {(() => {
                 if (Abs.isObject(children)) {
                     return _jsxObject(children);
@@ -79,8 +81,10 @@ const jsxSpan = (attrs = {}, children, config = {}) => (
                     return _jsxArray(children, config);
                 } else return children;
             })()}
-    </span>
-)
+            {Abs.isFunction(jsxIcon) ? jsxIcon() : false}
+        </span>
+    )
+}
 const jsxIcon = (attrs = {}, children, iconData) => {
     if (iconData) {
         const {icon, iconStyle = {}} = iconData;
@@ -136,6 +140,7 @@ const Cmn = {
             <a>{item.text}</a>
         </Popconfirm>
     ) : false,
+    /* */
     /* jsxSpan */
     jsxSpan,
     /* jsxIcon */
@@ -369,6 +374,29 @@ const _aiDownload = (reference, config, text) => {
     }}>{downloadConfig.flag ? downloadConfig.flag : value.name}</a>);
 };
 
+const _aiAdorn = (config = {}, record = {}, reference) => {
+    const {adorn} = config;
+    if (adorn) {
+        const {field, items = {}} = adorn;
+        if (field) {
+            const iconExpr = items[record[field]];
+            if (iconExpr) {
+                const parsed = iconExpr.split(',');
+                if (3 === parsed.length) {
+                    const iconData = {};
+                    iconData.icon = parsed[0];
+                    iconData.iconStyle = {};
+                    iconData.iconStyle.fontSize = parsed[1] ? parsed[1] : 14;
+                    if (parsed[2]) {
+                        iconData.iconStyle.color = parsed[2];
+                    }
+                    return iconData;
+                }
+            }
+        }
+    }
+}
+
 const RENDERS = {
     CONNECT: (reference, column) => {
 
@@ -541,6 +569,7 @@ const RENDERS = {
              * 1. 解析 display, value
              */
             let normalizedText;
+            let iconData;
             if (Abs.isArray(text)) {
                 /*
                  * 多值
@@ -555,6 +584,14 @@ const RENDERS = {
                  */
                 const item = Ele.elementUnique(data, value, text);
                 if (item) {
+                    {
+                        /*
+                         * 只有查找对了单值的时候才执行该操作
+                         * 解析 adorn 执行图标处理
+                         */
+                        const adornCfg = columnConfig.$config ? columnConfig.$config : {};
+                        iconData = _aiAdorn(adornCfg, item);
+                    }
                     normalizedText = T.valueExpr(display, item, true);
                 } else {
                     const {$empty} = columnConfig;
@@ -565,7 +602,7 @@ const RENDERS = {
                     }
                 }
             }
-            return Cmn.jsxSpan(attrs, normalizedText);
+            return Cmn.jsxIcon(attrs, normalizedText, iconData);
         }
     },
     DICT: (reference, config = {}) => (text, record = {}) => {
@@ -625,9 +662,7 @@ const RENDERS = {
         const {$options = {}} = reference.props;
         const {$option = []} = config;
         const options = [];
-        /*
-         * 执行 pluginRow
-         */
+        // 增加过滤函数
         $option.forEach((item, index) => {
             // 函数过滤
             const calculated = T.pluginOp(reference, record);

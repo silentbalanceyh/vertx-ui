@@ -31,7 +31,7 @@ const fnEdit = (id, record, metadata = {}) => {
     /* Loading 效果 */
     Ex.rsLoading(reference)();
     /* 读取数据 */
-    Ex.rx(reference).view(id).then(data => {
+    Ex.rx(reference).view(id, record).then(data => {
         /* 打开新页 */
         Ex.rx(reference).open(id, data, record);
         /* 关闭 Loading 用*/

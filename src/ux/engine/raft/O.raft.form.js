@@ -116,7 +116,24 @@ const raftAttribute = (raft = {}, params = {}) => {
      * ！！！raft 中必须包含 form 的 key
      */
     raft.form.layout = form.layout ? form.layout : "inline";
-    raft.form.className = form.className ? form.className : "web-form";
+
+
+    /*
+     * ！！！计算表单中的 className 属性
+     * 两种模式只能二选一，不可合并
+     */
+    const {reference} = addOn;
+    let {className} = reference ? reference.props : "";
+    if (className) {
+        // 编程模式优先
+        className = `web-form ${className}`;
+    } else {
+        // 其次是配置模式
+        className = form.className ? form.className : 'web-form';
+    }
+    raft.form.className = className;
+    
+
     raft.options = config;
     Object.freeze(raft.options);    // 只读
     Log.render(1, config, addOn.id);

@@ -768,15 +768,23 @@ const rxDelete = (reference) => (key, callback) => {
  *
  * 查询记录专用函数，用于查询当前系统中的记录（双击选中），直接执行`options`中的`ajax.get.uri`数据读取。
  *
+ * ### 版本更新
+ *
+ * 1. 版本1：只能使用`:key`参数读取数据记录。
+ * 2. 版本2：新增了可使用其他字段（唯一字段）来读取数据记录。
+ *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
-const rxView = (reference) => (key) => {
+const rxView = (reference) => (key, record = {}) => {
     if (key) {
         const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_GET_URI];
-        return Ux.ajaxGet(uri, {key});
+        return Ux.ajaxGet(uri, {
+            ...record,
+            key,            // key 优先
+        });
     }
 };
 /**
@@ -951,8 +959,8 @@ const rx = (reference, off = false) => ({
     batchEdit: (params = []) =>
         Cm.seek(reference, 'rxBatchEdit')([params]),
     /* Ajax 单行查看 */
-    view: (id) =>
-        Cm.seek(reference, 'rxView')([id]),
+    view: (id, record) =>
+        Cm.seek(reference, 'rxView')([id, record]),
     // ------------ 打开 -----------------
     /* 打开新窗口 */
     open: (id, data, record) =>
