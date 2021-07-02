@@ -33,7 +33,7 @@
     "_pagination": {
         "pager": {
             "page": 1,
-            "size": 7
+            "size": 10
         },
         "total": "当前记录总数:count"
     },
@@ -70,7 +70,7 @@
             "unit": "秒"
         },
         "search": {
-            "placeholder": "任务名称"
+            "placeholder": "任务名称/任务备注"
         },
         "switcher": {
             "children": "关闭任务轮询"

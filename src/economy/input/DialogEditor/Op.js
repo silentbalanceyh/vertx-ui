@@ -21,6 +21,12 @@ const callbackRow = (reference, input) => {
     }
 };
 const saveData = (reference, record) => {
+    /*
+     * data为null时,设置默认值[]
+     */
+    if (reference.state.data == null) {
+        reference.state.data = [];
+    }
     const {data = []} = reference.state;
     if ("string" === typeof record) {
         let $data = Ux.clone(data);

@@ -3,7 +3,6 @@ import {LoadingAlert} from "web";
 import Ux from 'ux';
 import {Col, Icon, Row, Statistic} from 'antd';
 import './Cab.less';
-import G6 from "@antv/g6";
 
 Ux.g6Registry([
     'edge-ppt',
@@ -43,7 +42,7 @@ Ux.g6Registry([
 // =====================================================
 // componentInit/componentUp
 // =====================================================
-const componentInit = (reference) => {
+/*const componentInit = (reference) => {
     const {$width = 800, step} = reference.props;
     const graph = new G6.Graph({
         container: "divPpt",
@@ -90,16 +89,13 @@ const componentInit = (reference) => {
     }
     graph.data(data);
     graph.render();
-}
+}*/
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExDeploy")
     .to()
 )
 class Component extends React.PureComponent {
-    componentDidMount() {
-        componentInit(this);
-    }
 
     render() {
         const {alert, step = 1} = this.props;
@@ -121,7 +117,6 @@ class Component extends React.PureComponent {
                     } else return false;
                 })()}
                 {alert ? (<LoadingAlert $alert={alert}/>) : false}
-                <div id={"divPpt"}/>
             </div>
         )
     }

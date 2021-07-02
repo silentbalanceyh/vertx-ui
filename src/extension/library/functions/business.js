@@ -397,7 +397,10 @@ export default {
                 .catch(error => Ux.ajaxError(reference, error));
         },
         save: (params = {}, config = {}) => {
-            let request = Ux.valueRequest(params);
+            const {$inited = {}} = reference['props'];
+            // 先将表单有的值合并到初始值
+            const input = Object.assign({}, $inited, params);
+            let request = Ux.valueRequest(input);
             request = Ux.valueValid(request);
             return Ux.ajaxPut(config.uri, request)
                 .then(Ux.ajax2Dialog(reference, config.dialog))

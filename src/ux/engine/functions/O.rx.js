@@ -117,14 +117,14 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
                 const {data = {}} = node.props;
                 if (item.checked) {
                     // 当前节点被选中
-                    const children = T.elementChildren(flatted, data);
+                    const children = Ele.elementChildren(flatted, data);
                     children.forEach(each => keySet.add(each.key));
                     // 选择当前节点的父节点
                     const branch = Ele.elementBranch(flatted, data.key);
                     branch.forEach(each => keySet.add(each.key));
                 } else {
                     // 当前节点被反选
-                    const children = T.elementChildren(flatted, data);
+                    const children = Ele.elementChildren(flatted, data);
                     children.forEach(each => keySet.delete(each.key));
                     /*
                      * 反选需要检查父节点的兄弟节点
@@ -147,7 +147,7 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
                         /*
                          * 查找同层兄弟节点
                          */
-                        const children = T.elementChildren(flatted, parent);
+                        const children = Ele.elementChildren(flatted, parent);
                         const selected = children.filter(item => keySet.has(item.key));
 
                         if (0 === selected.length) {

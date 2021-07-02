@@ -128,9 +128,11 @@ const _widthObject = (input = {}) => {
 const _widthFields = (input = []) => {
     let fields = [];
     input.forEach(child => {
-        const keys = Object.keys(child);
-        if (fields.length < keys.length) {
-            fields = keys;
+        if (Abs.isObject(child)) {
+            const keys = Object.keys(child);
+            if (fields.length < keys.length) {
+                fields = keys;
+            }
         }
     });
     return fields;
@@ -147,7 +149,6 @@ const _widthFieldsSub = (column = {}, fields = [], widthMap = {}) => {
     const array = {};
     array.fields = fields;
     array.width = widthMap;
-
     /*
      * 计算 __array
      * {
@@ -212,7 +213,6 @@ const _widthArray = (input, config = {}) => {
     if (input) {
         // 计算基础表渲染数据，当前列
         const fields = _widthFields(input);
-
         // 计算当前列的最大宽度，特殊变量
         let defaultWidth = 0;
         const widthMap = {};
@@ -265,6 +265,11 @@ const _widthMix = (input, data = []) => {
 }
 const _widthMax = (data = [], field = "", fnWidth = () => 0, column) => {
     let defaultWidth = 0;
+    /*
+     * 解决BUG：
+     * Unhandled Rejection (TypeError): Cannot read property 'forEach' of null
+     */
+    data = Abs.isArray(data) ? data : [];
     data.forEach(record => {
         const literal = record[field];
         let calculated;

@@ -50,7 +50,7 @@ export default {
         } else {
 
             let registryItems = [];
-            if (Set.prototype.isPrototypeOf(name)) {
+            if (Abs.isSet(name)) {
                 Array.from(name).forEach(each => registryItems.push(each))
             } else if (Abs.isArray(name)) {
                 name.forEach(each => registryItems.push(each));

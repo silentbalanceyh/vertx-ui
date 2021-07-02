@@ -3,9 +3,12 @@ import Ux from 'ux';
 const onSearch = (reference) => (searchText) => {
     const {$query = {}} = reference.state;
     if (searchText) {
-        $query.criteria["name,c"] = searchText;
+        $query.criteria["$1"] = {
+            "name,c": searchText,
+            "comment,c": searchText
+        };
     } else {
-        delete $query.criteria["name,c"];
+        delete $query.criteria["$1"];
     }
     reference.setState({$query, $condText: searchText, $loading: true});
 }
@@ -13,8 +16,9 @@ const onRefresh = (reference) => () =>
     reference.setState({$loading: true});
 const onClean = (reference) => (event) => {
     Ux.prevent(event);
-    const {$query = {}} = reference.state;
+    const {$query = {}, $pagination = {}} = reference.state;
     $query.criteria = {};
+    $pagination.current = 1;
     reference.setState({
         $query,
         /* 选中控制专用 */
@@ -33,10 +37,19 @@ const onChecked = (reference) => (checked) => {
     reference.setState({$query, $condChecked: checked, $loading: true});
 }
 const onSelected = (reference) => (item) => {
-    const {$query = {}} = reference.state;
+    const {$query = {}, $pagination = {}} = reference.state;
     const {criteria = {}} = $query;
     criteria.group = item.key;
-    reference.setState({$query, $condMenu: [item.key], $loading: true});
+    {
+        $pagination.current = 1;
+        if ($query.pager) {
+            $query.pager.page = 1;
+        }
+    }
+    reference.setState({
+        $query, $condMenu: [item.key], $loading: true,
+        $pagination,
+    });
 }
 const onSearchChange = (reference) => (event) => {
     Ux.prevent(event);

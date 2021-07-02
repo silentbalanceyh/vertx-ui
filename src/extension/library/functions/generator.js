@@ -782,7 +782,6 @@ const rxView = (reference) => (key, record = {}) => {
         const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_GET_URI];
         return Ux.ajaxGet(uri, {
-            ...record,
             key,            // key 优先
         });
     }

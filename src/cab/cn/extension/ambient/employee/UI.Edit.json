@@ -129,7 +129,10 @@
                     "optionJsx.config": {
                         "ajax": {
                             "uri": "/api/team/search",
-                            "method": "POST"
+                            "method": "POST",
+                            "params.criteria": {
+                                "deptId": "FORM:deptId"
+                            }
                         },
                         "linker": {
                             "name": "teamName",

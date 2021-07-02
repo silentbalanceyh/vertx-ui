@@ -5,12 +5,11 @@ import Pr from './parser';
 import Fn from './functions';
 import {Dsl} from 'entity';
 
-const analyzeBool = (value) => {
+/*const analyzeBool = (value) => {
     if (value) {
         if (Abs.isArray(value)) {
             return value
                 .filter(item => "string" === typeof item)
-                // eslint-disable-next-line
                 .map(item => analyzeBool(item))
         } else {
             if ("true" === value) {
@@ -18,14 +17,11 @@ const analyzeBool = (value) => {
             } else if ("false" === value) {
                 return false;
             } else {
-                /*
-                 * 返回该值本身
-                 */
                 return value;
             }
         }
     }
-};
+};*/
 const analyzePair = (condition = {}, field, value) => {
     if (value) {
         if (Abs.isArray(value)) {

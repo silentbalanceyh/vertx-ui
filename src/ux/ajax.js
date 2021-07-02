@@ -1251,8 +1251,10 @@ const ajaxEager = (reference, columns = [], data = []) => {
                 const vertical = [];
                 const verticalKeys = Object.keys(dataMap);
                 verticalKeys.forEach(key => {
-                    if ("undefined" === key) {
+                    if ("undefined" === key){
                         vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
+                    }else if (key.length!==36) {
+                        vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : key));
                     } else {
                         vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
                             let value;

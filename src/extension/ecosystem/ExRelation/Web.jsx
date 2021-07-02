@@ -5,6 +5,7 @@ import {LoadingAlert} from "web";
 import React from "react";
 import Ex from "ex";
 import ExRegiment from '../ExRegiment/UI';
+import './Cab.less';
 
 const renderTool = (reference, data, key) => Ux.sexModal(reference, `${key}Op`, () => {
     /*

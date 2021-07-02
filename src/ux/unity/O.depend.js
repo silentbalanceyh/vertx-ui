@@ -304,7 +304,12 @@ const _edition = (reference, optionJsx = {}, field) => {
         const {config = {}} = optionJsx;
         if (config.once) {
             const value = $inited[field];
-            if (undefined !== value) {
+            /*
+             * 不可编辑的判断
+             * 1. undefined 的时候不可编辑
+             * 2. "" 空字符串的时候也不可编辑
+             **/
+            if (Abs.isValid(value)) {
                 /* 不可编辑 */
                 $edition[field] = false;
             }

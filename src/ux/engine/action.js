@@ -131,7 +131,7 @@ const exprReset = (reference, expr = "") => {
     reset.type = "default";
     reset.event = "RESET";
     mountEvent(reset, reference);
-    Object.freeze(reset);
+    // Object.freeze(reset);
     return reset;
 };
 const exprSubmit = (reference, expr = "") => {
@@ -139,13 +139,13 @@ const exprSubmit = (reference, expr = "") => {
     item.type = "primary";
     item.event = "SUBMIT";
     mountEvent(item, reference);
-    Object.freeze(item);
+    // Object.freeze(item);
     return item;
 };
 const exprUniform = (reference, expr = "") => {
     const item = Expr.aiExprOp(expr);
     mountEvent(item, reference);
-    Object.freeze(item);
+    // Object.freeze(item);
     return item;
 };
 const _raftButtons = (reference, jsx) => {

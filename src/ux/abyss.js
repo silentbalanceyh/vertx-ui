@@ -748,8 +748,23 @@ const monad = (funArray = []) => {
 const isCn = (literal) =>
     /.*[\u4e00-\u9fa5]+.*$/
         .test(literal);
-
-
+/**
+ * ## 「标准」`Ux.isValid`
+ *
+ * 判断当前值是否可用，可用条件：
+ *
+ * 1. undefined 不可用
+ * 2. "" 不可用（空字符串）
+ * 3. null 不可用
+ *
+ * @memberOf module:_is
+ * @param input
+ * @returns {boolean}
+ */
+const isValid = (input) =>
+    undefined !== input &&
+    "" !== input &&
+    null !== input
 /**
  * ## 「标准」`Ux.isNumber`
  *
@@ -1145,7 +1160,18 @@ const isFunction = (input) => U.isFunction(input);
  * @returns {boolean} 是数组则返回true，不是则返回false
  */
 const isArray = (input) => U.isArray(input);
-
+/**
+ * ## 「标准」`Ux.isSet`
+ *
+ * 判断输入的值是否是一个合法的Set类型对象。
+ *
+ * 内部调用`underscore`，判断输入是否合法的 Set 的函数。
+ *
+ * @memberOf module:_is
+ * @param {any} input 输入值
+ * @returns {boolean} 是Set则返回true，不是则返回false
+ */
+const isSet = (input) => U.isSet(input);
 
 /**
  * ## 「引擎」`Ux.isQr`
@@ -1236,7 +1262,7 @@ const isQr = (config = {}) => {
  * @param {any} input 传入部分的数据
  * @returns {boolean}
  */
-const isCollection = (input) => (Set.prototype.isPrototypeOf(input) || isArray(input));
+const isCollection = (input) => (isSet(input) || isArray(input));
 // ------------------------------- immutable.js -----------------------------
 
 /**
@@ -1289,7 +1315,7 @@ const clone = (input) => {
         return input;
     } else {
         if (input) {
-            if (Set.prototype.isPrototypeOf(input)) {
+            if (isSet(input)) {
                 const set = new Set();
                 Array.from(input).forEach(item => set.add(item));
                 return set;
@@ -1638,7 +1664,7 @@ const itElement = (data = [], field = "", itemFun = () => {
     data.forEach(item => {
         if (item) {
             if (isArray(item[field])) {
-                item[field] = itElement(item[field], field, itemFun);
+                itElement(item[field], field, itemFun);
             } else {
                 item[field] = itemFun(item[field], item);
             }
@@ -2110,6 +2136,7 @@ export default {
 
     /* 复杂判断 */
     isObject,   /* 验证合法的对象 */
+    isSet,
 
     isEmpty,
     /**
@@ -2136,7 +2163,7 @@ export default {
      */
     isSame: (left, right) => !isDiff(left, right),
 
-
+    isValid,
     isIn,       /* input 是否存在于 Array 中 */
     isParent,   /* 判断输入节点是否当前节点父节点 */
 
@@ -2144,7 +2171,8 @@ export default {
     isFunction,
     isArray,
     isCollection,
-    isQr,       /* 配置是否查询引擎配置 */
+    /* 配置是否查询引擎配置 */
+    isQr,
 
     /* 遍历专用 */
     itRepeat,

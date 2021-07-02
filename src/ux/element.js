@@ -3,6 +3,8 @@ import E from './error';
 import Py from 'js-pinyin';
 import moment from "moment";
 import {DataObject} from 'entity';
+// 特殊排序法则
+import St from "./unity/O.sorter";
 
 Py.setOptions({checkPolyphone: false, charCase: 0})
 /**
@@ -768,7 +770,7 @@ const toTime = (momentValue, timeStr) => {
  */
 const toArray = (input) => {
     let resultArr = [];
-    if (Set.prototype.isPrototypeOf(input)) {
+    if (Abs.isSet(input)) {
         resultArr = Array.from(input);
     } else if (Abs.isArray(input)) {
         resultArr = Abs.clone(input);
@@ -1543,7 +1545,91 @@ const merge = (original, newValue, field = "key") => {
         return merged;
     }
 }
+
+/**
+ * ## 「标准」`Ux.elementChildTree`
+ *
+ * Zero UI中的树函数，在数组中查找当前节点的所有子节点信息，并且构成子树，`elementBranch` 和 `elementChildren` 为互逆函数。
+ *
+ * 1. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ * 2. 每个节点中有两个固定值
+ *      1. key 表示每个节点的主键。
+ *      2. children 表示每个节点中的子节点信息`[]`。
+ * 3. 在每个节点中计算出 `_level` 参数表示生成树中每个节点所在树的`层级`。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} current 目标节点。
+ * @param {String} parentField 执行树搜索中的父字段。
+ * @return {Array} 返回子节点数组
+ */
+const elementChildTree = (array = [], current = {}, parentField = "parent") => {
+    const parentKey = current.key;
+    if (!current._level) {
+        current._level = 1;
+    }
+    let children = array
+        .filter(each => each[parentField] === parentKey)
+        .sort(St.sorterAscTFn('sort'));
+    if (0 < children.length) {
+        children.forEach(child => {
+            child._level = current._level + 1;
+            child.children = elementChildTree(array, child, parentField)
+        });
+    }
+    return children;
+};
+/**
+ * ## 「标准」`Ux.elementChildren`
+ *
+ * Zero UI中的树函数，在数组中查找当前节点的所有子节点，构成子列表（不是子树）。
+ *
+ * 1. 计算父节点可透过`parentField`传入，传入的`parentField`表示父节点字段。
+ * 2. 每个节点中有两个固定值
+ *      1. key 表示每个节点的主键。
+ *      2. children 表示每个节点中的子节点信息`[]`。
+ * 3. 在每个节点中计算出 `_level` 参数表示生成树中每个节点所在树的`层级`。
+ *
+ * @memberOf module:_element
+ * @param {Array} array 输入的数组信息。
+ * @param {Object} current 目标节点。
+ * @param {String} parentField 执行树搜索中的父字段。
+ * @return {Array} 返回子节点数组
+ */
+const elementChildren = (array = [], current = {}, parentField = "parent") => {
+    /*
+     * 构造 Children 的树
+     */
+    const childrenTree = elementChildTree(array, current, parentField);
+    /*
+     * 只查找 children，不包含当前节点
+     */
+    const fnChildren = (item = {}) => {
+        let children = [];
+        if (item.children && 0 < item.children.length) {
+            children = children.concat(item.children);
+            item.children.forEach(each => {
+                const found = fnChildren(each);
+                children = children.concat(found);
+            });
+        }
+        return children;
+    }
+    const result = [];
+    childrenTree.forEach(child => {
+        result.push(child);
+        const foundArray = fnChildren(child);
+        if (foundArray && 0 < foundArray.length) {
+            foundArray.forEach(eachFound => result.push(eachFound));
+        }
+    });
+    return result;
+}
 // eslint-disable-next-line import/no-anonymous-default-export
+/*
+ * 变量名与element方法冲突
+ */
+//let document;
 export default {
     // O.object.js
     valueAppend,
@@ -1654,6 +1740,8 @@ export default {
     elementParent,
     // 增删改
     elementSave,
+    elementChildTree,
+    elementChildren,
     // 下层升级函数
     merge
 }

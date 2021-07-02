@@ -40,29 +40,35 @@ const _jsxArray = (children = [], config = {}) => {
             }
         });
     }
+    // 修改 Array 类型的呈现
     const widthMap = __array.width ? __array.width : {};
+    const isPure = 0 === fields.length;
     return (
-        <table className={"ux-table-nested"}>
-            <thead>
-            <tr>
-                {fields.map(field => {
-                    const style = {};
-                    if (widthMap.hasOwnProperty(field)) {
-                        // 各自16的边距
-                        style.width = widthMap[field];
-                    }
-                    return (
-                        <th key={field} style={style}>{field}</th>
-                    )
-                })}
-            </tr>
-            </thead>
+        <table className={`${isPure ? "ux-table-nested-pure" : "ux-table-nested"}`}>
+            {0 < fields.length ? (
+                <thead>
+                <tr>
+                    {fields.map(field => {
+                        const style = {};
+                        if (widthMap.hasOwnProperty(field)) {
+                            // 各自16的边距
+                            style.width = widthMap[field];
+                        }
+                        return (
+                            <th key={field} style={style}>{field}</th>
+                        )
+                    })}
+                </tr>
+                </thead>
+            ) : false}
             <tbody>
             {children.map((child, childIdx) => (
                 <tr key={`row${childIdx}`}>
-                    {fields.map(field => (
+                    {isPure ? (
+                        <td key={`${childIdx}`}>{child}</td>
+                    ) : (fields.map(field => (
                         <td key={`${field}${childIdx}`}>{child[field]}</td>
-                    ))}
+                    )))}
                 </tr>
             ))}
             </tbody>

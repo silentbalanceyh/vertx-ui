@@ -89,6 +89,24 @@ const isReadyWithCond = (reference, fnCompare = () => true) => (rule = {}, value
         callback();
     }
 };
+const isMaximum = (reference, fnCompare = () => true) => (rule = {}, value, callback) => {
+    if (isReady(rule, reference, value)) {
+        // 处理required
+        if (value && rule.config) {
+            const to = rule.config.to;
+            // 如果目标值为 undefined 时,大概率情况为不满足对比的先决条件,直接返回
+            if (fnCompare(value, to)) {
+                callback();
+            } else {
+                callback(rule.message);
+            }
+        } else {
+            callback();
+        }
+    } else {
+        callback();
+    }
+};
 
 const _after = (value, to) => {
     const fromValue = Ele.valueTime(value);
@@ -107,6 +125,7 @@ const _great = (value, to) => value > to;
 const _greatOr = (value, to) => value >= to;
 const _equal = (value, to) => value === to;
 const _diff = (value, to) => value !== to;
+const _maximum = (value, to) => value <= to;
 // ---------------------- O.verifiers.js
 
 const required = (reference = {}) => (rule = {}, value, callback) => {
@@ -149,6 +168,7 @@ const equal = (reference = {}) => isReadyWithCond(reference, _equal);
 
 const diff = (reference = {}) => isReadyWithCond(reference, _diff);
 
+const maximum = (reference = {}) => isMaximum(reference, _maximum);
 
 const existing = (refereuce = {}) => (rule = {}, value, callback) => {
     E.fxTerminal(!rule.config, 10022, rule.config);
@@ -308,4 +328,6 @@ export default {
      * 特殊规则
      */
     duplicatedDatum,
+    // 浮点类型字段整数位最大长度
+    maximum,
 };

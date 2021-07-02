@@ -220,7 +220,7 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
                 callback($selectedKeys);
 
                 // 关闭窗口
-                reference.setState({$visible: false});
+                reference.setState({$visible: false, $filters: undefined});
             } else {
 
                 // 触发选择验证，多选过程中的无选项验证
@@ -254,7 +254,7 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
                     Ux.fn(reference).onChange(values);
                 }
             }
-            reference.setState({$visible: false});
+            reference.setState({$visible: false, $filters: undefined});
         }
     } else {
         if (config.validation) {
@@ -269,6 +269,7 @@ const _onClose = (reference = {}, show = false) => (event) => {
     state.$visible = show;
     // 重置页面数据
     state.$page = 1;
+    state.$filters = undefined;
     state = Ux.clone(state);
     reference.setState(state);
 };
