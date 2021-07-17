@@ -34,7 +34,7 @@
                                 "method": "POST",
                                 "params": {
                                     "type": "FORM:type",
-                                    "sigma":"PROP:app.sigma"
+                                    "sigma": "PROP:app.sigma"
                                 }
                             }
                         }
@@ -44,41 +44,41 @@
             [
                 {
                     "metadata": "parentName,父类型,8,,aiTreeSelector,placeholder=（请选择）",
-                    "optionJsx.config":{
-                        "ajax":{
-                            "uri":"/api/type/categories/:type",
-                            "magic":{
-                                "type":"ROUTE:type"
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/type/categories/:type",
+                            "magic": {
+                                "type": "ROUTE:type"
                             }
                         },
                         "linker": {
                             "name": "parentName",
-                            "key":"parentId"
+                            "key": "parentId"
                         },
-                        "selection":{
+                        "selection": {
                             "multiple": false,
-                            "checkStrictly":true
+                            "checkStrictly": true
                         },
-                        "tree":{
-                            "title":"name"
+                        "tree": {
+                            "title": "name"
                         },
                         "validation": "请选择父类！",
                         "window": "选择父类型,选择,关闭,false,400,false"
                     },
-                    "optionJsx.allowClear":true
+                    "optionJsx.allowClear": true
                 }
             ],
             [
                 {
                     "metadata": "leaf,叶节点,8,,aiCheckbox",
-                    "optionConfig":{
-                        "valuePropName":"checked"
+                    "optionConfig": {
+                        "valuePropName": "checked"
                     }
                 },
                 {
                     "metadata": "active,是否启用,8,,aiCheckbox",
-                    "optionConfig":{
-                        "valuePropName":"checked"
+                    "optionConfig": {
+                        "valuePropName": "checked"
                     }
                 }
             ],
@@ -92,14 +92,16 @@
         "hidden": [
             "type",
             "identifier",
-            "parentId"
+            "parentId",
+            "appId"
         ],
         "op": {
             "$opAdd": "act.category.add"
         },
-        "initial":{
-            "identifier":"PROP:$identifier",
-            "active":"BOOL:true"
+        "initial": {
+            "identifier": "PROP:$identifier",
+            "active": "BOOL:true",
+            "appId": "PROP:app.key"
         }
     },
     "_modal": {

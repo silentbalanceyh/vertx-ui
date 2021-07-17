@@ -130,8 +130,8 @@ const seekData = (state, key, data = [], clientSort) => {
      */
     if (clientSort) {
         const sortField = clientSort; // assist[key]['clientSort'];
-        let isAsc = true;
-        let field = "";
+        let isAsc;
+        let field;
         if (0 < sortField.indexOf(",")) {
             const splitted = sortField.split(',');
             field = splitted[0];
@@ -141,9 +141,9 @@ const seekData = (state, key, data = [], clientSort) => {
             isAsc = true;
         }
         if (isAsc) {
-            dataResult = dataResult.sort(Ut.sorterAscFn(field));
+            dataResult = dataResult.sort(Ut.sorterAscTFn(field));
         } else {
-            dataResult = dataResult.sort(Ut.sorterDescFn(field));
+            dataResult = dataResult.sort(Ut.sorterDescTFn(field));
         }
     }
     state[stateKey] = Dsl.getArray(dataResult);

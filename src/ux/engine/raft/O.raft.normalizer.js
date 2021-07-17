@@ -109,7 +109,18 @@ const limitDecimal = (length, scale = 2) => value => {
             value = value.substring(0, length);
         }
         // 4.最终数据成型
-        value = Abs.isDecimal(value) ? parseFloat(value) : value;
+        /*
+         * 保证在小数输入过程中可支持 12.05 这种类型的输入
+         * Issue：https://github.com/silentbalanceyh/hotel/issues/206
+         */
+        let scaleType = 0;
+        if (0 < value.indexOf('.')) {
+            const scaleStr = value.substring(value.indexOf(".") + 1);
+            if (scaleStr) {
+                scaleType = scaleStr.length;
+            }
+        }
+        value = Abs.isDecimal(value) ? parseFloat(value).toFixed(scaleType) : value;
     }
     return value;
 };

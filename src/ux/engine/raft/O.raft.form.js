@@ -46,7 +46,7 @@ const aiValidator = (reference = {}, item = {}) => {
                     E.fxTerminal(!Abs.isFunction(executeFun), 10023, rule.validator, Object.keys(validators));
                     if (Abs.isFunction(executeFun)) {
                         // supplier 处理
-                        const validatorFun = executeFun(reference);
+                        const validatorFun = executeFun(reference, item.optionJsx);
                         // 10024
                         E.fxTerminal(!Abs.isFunction(validatorFun), 10024, Abs.isFunction(validatorFun));
                         if (Abs.isFunction(validatorFun)) {
@@ -132,7 +132,7 @@ const raftAttribute = (raft = {}, params = {}) => {
         className = form.className ? form.className : 'web-form';
     }
     raft.form.className = className;
-    
+
 
     raft.options = config;
     Object.freeze(raft.options);    // 只读

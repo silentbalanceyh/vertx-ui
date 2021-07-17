@@ -1143,11 +1143,7 @@ const yoFilter = (reference) => {
             connector: "AND"
         };
     } else {
-        const data = Ux.clone($inited);
-        const connector = data[""] ? "AND" : "OR";
-        delete data[""];
-        data.connector = connector;
-        attrs.$inited = data;
+        attrs.$inited = Ux.clone($inited);
     }
     /*
      * 关闭专用函数

@@ -170,19 +170,53 @@ const diff = (reference = {}) => isReadyWithCond(reference, _diff);
 
 const maximum = (reference = {}) => isMaximum(reference, _maximum);
 
-const existing = (refereuce = {}) => (rule = {}, value, callback) => {
+const _asyncPre = (reference, jsx, rule, value) => {
+    // 有值才验证
+    const parameters = Rx.parseAjax(rule.config.params, reference);
+    // 基本条件
+    const {alias} = rule.config;
+    const field = alias && alias.field ? alias.field : rule.field;
+
+    // 让级别条件支持别名，重新抽取字段
+    if (
+        jsx.hasOwnProperty("precision") ||
+        jsx.hasOwnProperty('min') ||
+        jsx.hasOwnProperty('max')
+    ) {
+        if (jsx.precision) {
+            parameters[field] = parseFloat(value);
+        } else {
+            parameters[field] = parseInt(value, 10);
+        }
+    } else {
+        if (Abs.isFunction(jsx.normalize)) {
+            parameters[field] = jsx.normalize(value);
+        } else {
+            parameters[field] = value;
+        }
+    }
+    return parameters;
+}
+const _asyncBack = (parameters = {}, rule = {}, callback) => {
+    // existing 时，参数间关系默认为 AND（更新专用）
+    if (Object.keys(parameters).length > 1) {
+        const andKey = "";
+        parameters[andKey] = true;
+    }
+    // 远程调用
+    Ajax.asyncTrue(rule.config, parameters, {
+        // 存在即返回message
+        success: () => callback(rule.message),
+        failure: () => callback()
+    });
+}
+const existing = (reference = {}, jsx = {}) => (rule = {}, value, callback) => {
     E.fxTerminal(!rule.config, 10022, rule.config);
     if (rule.config) {
         if (value) {
             try {
                 // 有值才验证
-                const parameters = Rx.parseAjax(rule.config.params, refereuce);
-                // 基本条件
-                const {alias} = rule.config;
-                const field = alias && alias.field ? alias.field : rule.field;
-
-                // 让级别条件支持别名，重新抽取字段
-                parameters[field] = value;
+                const parameters = _asyncPre(reference, jsx, rule, value);
 
                 /*
                  * 关于 key 的计算
@@ -190,7 +224,8 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                  * 2）form 中还会包含最新的 key（如果这个过程中会出现变更）
                  */
                 {
-                    const {$inited} = refereuce.props;
+                    const {$inited} = reference.props;
+                    const {alias} = rule.config;
                     const hitField = alias && alias.key ? alias.key : "key";
 
                     let hitValue = $inited ? $inited[hitField] : undefined;
@@ -199,7 +234,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                      * 追加流程，如果 form 的某些操作更改了当前 form 中存在的 key，则需要
                      * 将 hitValue 重新设值成新的 key 而不是旧的
                      */
-                    const {form} = refereuce.props;
+                    const {form} = reference.props;
                     if (form) {
                         const changed = form.getFieldsValue();
                         if (!!changed[hitField] && hitValue !== changed[hitField]) {
@@ -213,17 +248,7 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
                         parameters[updateKey] = hitValue;
                     }
                 }
-                // existing 时，参数间关系默认为 AND（更新专用）
-                if (Object.keys(parameters).length > 1) {
-                    const andKey = "";
-                    parameters[andKey] = true;
-                }
-                // 远程调用
-                Ajax.asyncTrue(rule.config, parameters, {
-                    // 存在即返回message
-                    success: () => callback(rule.message),
-                    failure: () => callback()
-                });
+                _asyncBack(parameters, rule, callback);
             } catch (error) {
                 console.error(error);
             }
@@ -232,30 +257,15 @@ const existing = (refereuce = {}) => (rule = {}, value, callback) => {
         }
     }
 };
-const uri = (refereuce = {}) => (rule = {}, value, callback) => {
+const uri = (reference = {}, jsx = {}) => (rule = {}, value, callback) => {
     E.fxTerminal(!rule.config, 10022, rule.config);
     if (rule.config) {
         if (value) {
             try {
                 // 有值才验证
-                const parameters = Rx.parseAjax(rule.config.params, refereuce);
-                // 基本条件
-                const {alias} = rule.config;
-                const field = alias && alias.field ? alias.field : rule.field;
+                const parameters = _asyncPre(reference, jsx, rule, value);
 
-                // 让级别条件支持别名，重新抽取字段
-                parameters[field] = value;
-
-                // existing 时，参数间关系默认为 AND（更新专用）
-                if (Object.keys(parameters).length > 1) {
-                    const andKey = "";
-                    parameters[andKey] = true;
-                }
-                Ajax.asyncTrue(rule.config, parameters, {
-                    // 存在即返回message
-                    success: () => callback(rule.message),
-                    failure: () => callback()
-                });
+                _asyncBack(parameters, rule, callback);
             } catch (error) {
                 console.error(error);
             }
