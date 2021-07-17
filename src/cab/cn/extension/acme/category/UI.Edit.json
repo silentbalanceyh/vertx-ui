@@ -69,14 +69,20 @@
                         "exclude":"FORM:key"
                     },
                     "optionJsx.allowClear":true
-                }
-            ],
-            [
+                },
                 {
                     "metadata": "leaf,叶节点,8,,aiCheckbox",
                     "optionConfig":{
                         "valuePropName":"checked"
                     }
+                }
+            ],
+            [
+                {
+                    "metadata": "sort,排序,8,,,placeholder=请填写序号,number=3",
+                    "optionConfig.rules": [
+                        "required,请输入序号"
+                    ]
                 },
                 {
                     "metadata": "active,是否启用,8,,aiCheckbox",

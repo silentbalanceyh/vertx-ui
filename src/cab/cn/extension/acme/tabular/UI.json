@@ -157,6 +157,7 @@
                     "items": [
                         "code,字典编号",
                         "name,字典名称",
+                        "sort,排序",
                         "active,是否启用",
                         "createdBy,创建人",
                         "createdAt,创建时间"
