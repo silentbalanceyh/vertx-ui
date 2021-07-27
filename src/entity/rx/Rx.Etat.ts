@@ -96,11 +96,11 @@ class Etat {
              */
             if (input) {
                 // null 也是 Object
-                const {dynamic, ...jsx} = input;
+                const {dynamic, ...renders} = input;
                 if (dynamic) {
                     raftRef.dynamic = dynamic;
                 }
-                raftRef.jsx = jsx;
+                raftRef.renders = renders;
             }
         }
         return this;

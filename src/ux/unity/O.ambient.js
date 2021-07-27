@@ -372,6 +372,22 @@ const toOriginal = (reference = {}, switched) => {
         toRoute(reference, uri);
     }
 };
+/**
+ * ## 「引擎」`Ux.toPassword`
+ *
+ * 直接重定向到密码更改页，带参数控制
+ * limitation=true
+ *
+ * @memberOf module:_to
+ * @param {ReactComponent} reference React组件引用。
+ */
+const toPassword = (reference = {}) => {
+    /*
+     * uri 地址构造
+     */
+    const uri = "/personal/secure"
+    toRoute(reference, uri);
+}
 const toUnauthorized = (reference) => {
     const {$router} = reference.props;
     const path = $router.path();
@@ -415,6 +431,8 @@ export default {
     toLogout,
     // 到原来地址
     toOriginal,
+    // 密码修改页
+    toPassword,
     // 统一加载设置加载时间
     toLoading,
     // Query String 参数读取

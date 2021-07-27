@@ -226,6 +226,9 @@ const aiPassword = (reference, jsx = {}, onChange) => {
     R.Ant.onReadOnly(jsx, false, reference);
     // 处理PlaceHolder，先处理readOnly
     R.Ant.onPlaceHolder(jsx);
+    if (jsx.readOnly) {
+        jsx.visibilityToggle = false;   // 关闭切换按钮
+    }
     return (<Input.Password {...jsx} autoComplete={"new-password"}/>);
 };
 

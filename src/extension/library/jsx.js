@@ -32,40 +32,40 @@ import Ux from "ux";
  *
  * * 触发按钮的ID为`$opLogin`，该ID为特定ID。
  *
- * @class Login
  */
-class Login {
-    /**
-     * 渲染用户名，在Jsx中注入`onPressEnter`事件
-     *
-     * @param {ReactComponent} reference React对应组件引用。
-     * @param {optionJsx} jsx 输入的jsx配置。
-     * @returns {Jsx}
-     */
-    static username(reference, jsx) {
-        jsx.onPressEnter = (event) => {
-            Ux.prevent(event);
-            Ux.connectId("$opLogin");
-        };
-        return Ux.aiInput(reference, jsx);
-    }
-
-    /**
-     * 渲染密码，在Jsx中注入`onPressEnter`事件
-     *
-     * @param {ReactComponent} reference React对应组件引用。
-     * @param {optionJsx} jsx 输入的jsx配置。
-     * @returns {Jsx}
-     */
-    static password(reference, jsx) {
-        jsx.onPressEnter = (event) => {
-            Ux.prevent(event);
-            Ux.connectId("$opLogin");
-        };
-        return Ux.aiInput(reference, jsx);
-    }
-}
 
 export default {
-    Login,
+    /**
+     * @class Login
+     */
+    Login: {
+        /**
+         * 渲染用户名，在Jsx中注入`onPressEnter`事件
+         *
+         * @param {ReactComponent} reference React对应组件引用。
+         * @param {Object} jsx 输入的jsx配置。
+         * @returns {Jsx}
+         */
+        username: (reference, jsx) => {
+            jsx.onPressEnter = (event) => {
+                Ux.prevent(event);
+                Ux.connectId("$opLogin");
+            };
+            return Ux.aiInput(reference, jsx);
+        },
+        /**
+         * 渲染密码，在Jsx中注入`onPressEnter`事件
+         *
+         * @param {ReactComponent} reference React对应组件引用。
+         * @param {Object} jsx 输入的jsx配置。
+         * @returns {Jsx}
+         */
+        password: (reference, jsx) => {
+            jsx.onPressEnter = (event) => {
+                Ux.prevent(event);
+                Ux.connectId("$opLogin");
+            };
+            return Ux.aiInput(reference, jsx);
+        }
+    },
 }

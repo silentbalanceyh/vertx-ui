@@ -34,14 +34,14 @@ const applyItem = (each = {}, config = {}, configExpr) => {
     // 将key进行配置转换
     if (each[key]) each['key'] = each[key];
     // 将label进行配置转换
-    let expr = null;
+    let expr;
     if (configExpr) {
         expr = configExpr;
     } else {
         expr = label;
     }
-    // 构造label专用
-    each['label'] = Ut.valueExpr(expr, each);
+    // 构造label专用（构造不删除原始字段）
+    each['label'] = Ut.valueExpr(expr, each, true);
     // 是否追加style，children：已经存在了
     return each;
 };

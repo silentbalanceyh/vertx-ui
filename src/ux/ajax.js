@@ -757,7 +757,7 @@ const messageFailure = (content = "", duration = 1.628) => {
  */
 const messageCatch = (error = {}, callback) => {
     const {data = {}} = error;
-    console.error(error);   // 调试专用
+    // console.error(error);   // 调试专用
     if (data.info) {
         messageFailure(data.info, 2);
     } else {
@@ -1251,9 +1251,9 @@ const ajaxEager = (reference, columns = [], data = []) => {
                 const vertical = [];
                 const verticalKeys = Object.keys(dataMap);
                 verticalKeys.forEach(key => {
-                    if ("undefined" === key){
+                    if ("undefined" === key) {
                         vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
-                    }else if (key.length!==36) {
+                    } else if (key.length !== 36) {
                         vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : key));
                     } else {
                         vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {

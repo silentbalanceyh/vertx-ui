@@ -21,17 +21,25 @@ export default (reference, {
     const {$keySet = {}} = reference.state;
     const attrs = {};
     Object.assign(attrs, $keySet, $attrsMenu);
+    // 限制登陆
+    const user = Ux.isLogged();
+    const isFull = !user.limitation;
     return (
         <Sider {...$attrsSider}>
             {/* 菜单顶部Logo */}
             <div className={`logo`}>
-                <Link to={Ux.Env.ENTRY_ADMIN}>
+                {isFull ? (
+                    <Link to={Ux.Env.ENTRY_ADMIN}>
+                        <img src={logo}
+                             alt={'Logo'}/>
+                    </Link>
+                ) : (
                     <img src={logo}
                          alt={'Logo'}/>
-                </Link>
+                )}
             </div>
             {/** 左边 **/}
-            {Ux.aiSider(dataArray, attrs)}
+            {isFull ? Ux.aiSider(dataArray, attrs) : false}
         </Sider>
     )
 }

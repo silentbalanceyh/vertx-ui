@@ -1,0 +1,96 @@
+{
+    "_page": {
+        "title": "密码初始化"
+    },
+    "_alert": {
+        "message": "初始化密码",
+        "description": [
+            "您的登陆密码是系统设置的初始密码，为了安全性，请修改该密码。",
+            "您有可能是第一次登陆该系统，如果不修改该密码，功能会受到限制，无法呈现所有菜单项。",
+            "如果您不是首次登陆系统，请联系管理员检查账号问题。",
+            "密码修改过后，系统会重新设置您的账号，请退出系统重新登录。"
+        ]
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                {
+                    "metadata": "username,登录账号,14,,,readOnly=true"
+                }
+            ],
+            [
+                {
+                    "metadata": "opassword,旧密码,14,,aiPassword,readOnly=true"
+                }
+            ],
+            [
+                {
+                    "metadata": "npassword,新密码,14,,aiPassword",
+                    "optionConfig.rules": [
+                        "required,请输入新密码",
+                        {
+                            "min": 8,
+                            "message": "密码长度必须大于8个字符！"
+                        },
+                        {
+                            "validator": "diff",
+                            "message": "新密码不能和旧密码相同！",
+                            "config": {
+                                "to": "opassword"
+                            },
+                            "condition": [
+                                "value.length >= 8"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "cpassword,确认密码,14,,,type=password",
+                    "optionConfig.rules": [
+                        "required,请输入新密码",
+                        {
+                            "min": 8,
+                            "message": "密码长度必须大于等于8个字符！"
+                        },
+                        {
+                            "validator": "same",
+                            "message": "两次输入密码不一致！",
+                            "config": {
+                                "to": "npassword"
+                            },
+                            "condition": [
+                                "to.length >= 8"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button,,14",
+                    "optionJsx.extension": [
+                        "$opPassword,更改密码,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ],
+        "hidden": [
+            "key"
+        ],
+        "op": {
+            "$opPassword": "act.user.password"
+        }
+    },
+    "_modal": {
+        "success": {
+            "password": "您好，:realname！您的密码已修改完成，请确认后重新登录系统！"
+        },
+        "error": {
+            "passwordError": "旧密码错误，请输入正确的旧密码！"
+        }
+    }
+}
