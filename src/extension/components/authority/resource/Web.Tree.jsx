@@ -66,7 +66,7 @@ export default {
                     <Collapse className={"tree-permission"} style={{
                         maxHeight: Ux.toHeight(144)
                     }}>
-                        {$tree.map(root => {
+                        {$treeData.map(root => {
                             const treeAttrs = {};
                             treeAttrs.treeData = root.children;
                             treeAttrs.selectedKeys = $selectedKeys;

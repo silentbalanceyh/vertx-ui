@@ -6,7 +6,7 @@ const yiPage = (reference) => {
     const {config = {}, $keySet} = reference.props;
     state.$button = Ux.sexOp(reference, Event);
 
-    const {datum = {}} = config;
+    const {datum = []} = config;
     const source = Ux.clone(datum);
 
     state.$validation = source.map(item => item.key);
