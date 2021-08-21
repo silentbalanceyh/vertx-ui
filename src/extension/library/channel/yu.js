@@ -118,7 +118,6 @@ const yuQuery = (reference, virtualRef) => {
             }
         } else {
             Ux.dgDebug(state.$query, "[ ExU ] $query 未改变，不刷新！", "#6E8B3D");
-            Fn.rsLoading(reference, false)();
         }
     }
 }
