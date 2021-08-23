@@ -1,0 +1,89 @@
+@import "~antd/lib/style/themes/default.less";
+
+.ex-editor {
+    &-table {
+        .ant-table-thead {
+            height: 39px !important;
+            min-height: 39px !important;
+        }
+    }
+
+    &-center {
+        text-align: center !important;
+
+        .ant-upload-picture-card-wrapper {
+            max-width: 110px !important;
+        }
+    }
+
+    &-dialog {
+
+        .group {
+            width: 100%;
+
+            .item {
+                float: left;
+                padding: 3px;
+            }
+        }
+
+        .all {
+            padding: 8px 3px;
+            width: 100%;
+            border-top: dashed 1px @primary-color;
+            margin: 3px 0;
+        }
+
+        .checked-content {
+            padding: 6px;
+        }
+
+        .button {
+            width: 100%;
+            text-align: center;
+        }
+
+        .button-active {
+            padding: 6px;
+            width: 100%;
+            text-align: center;
+            background-color: @primary-color;
+
+            button {
+                min-width: 90px;
+                border-radius: 16px;
+            }
+
+            .ant-btn-primary {
+                border: solid 1px white;
+                margin-left: 8px;
+            }
+        }
+    }
+}
+
+.ex-container-popover {
+
+    .ant-popover-title {
+        height: 47px;
+        padding: 12px 18px;
+        background-color: #C9C9C9;
+
+        .ant-col {
+            padding-top: 0 !important;
+        }
+    }
+
+    .ant-popover-content {
+        .ant-popover-arrow {
+            background-color: #C9C9C9;
+            border-color: #C9C9C9;
+        }
+
+        .ant-popover-inner {
+            .ant-popover-inner-content {
+                padding: 0;
+            }
+        }
+    }
+}

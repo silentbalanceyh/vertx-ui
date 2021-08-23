@@ -24,6 +24,9 @@ const rxExport = (reference) => (event) => {
             /*
              * 按钮专用提交函数
              */
+            if (!$selected.includes("key")) {
+                $selected.unshift("key");
+            }
             const params = {
                 columns: $selected,
                 format: 'xlsx',     // 暂时的默认格式

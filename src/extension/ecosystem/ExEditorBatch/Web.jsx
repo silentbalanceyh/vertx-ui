@@ -8,7 +8,7 @@ export default {
         tables = {},
         buttons = {},
     }) => (
-        <div>
+        <div className={"ex-editor-table"}>
             <Table {...tables}/>
             {Ux.aiButton(reference, buttons)}
         </div>

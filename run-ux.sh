@@ -34,6 +34,7 @@ cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
 cp -rf src/style/common.less ${TARGET_FOLDER}/src/style/common.less
 cp -rf src/style/zero.less ${TARGET_FOLDER}/src/style/zero.less
+cp -rf src/style/zero-extension.less ${TARGET_FOLDER}/src/style/zero-extension.less
 cp -rf run-update.sh ${TARGET_FOLDER}/run-update.sh
 cp -rf run-ux.sh ${TARGET_FOLDER}/run-ux.sh
 echo "[ Proc ] 框架核心文件！"

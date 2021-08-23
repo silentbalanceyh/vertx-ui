@@ -1,9 +1,9 @@
 import React from 'react';
 import Ex from 'ex';
 import Ux from 'ux';
-import renderJsx from './Web.jsx';
 import Event from "./Op";
-
+import {Button, Checkbox, Col, Row} from "antd";
+import {LoadingAlert} from "web";
 
 /**
  * ## 「组件」`ExEditorExport`
@@ -35,16 +35,20 @@ import Event from "./Op";
 // =====================================================
 const componentInit = (reference) => {
     const {config = {}} = reference.props;
-    const state = {};
+    const state = {};/*
+     * 动态还是静态
+     */
+    const $combine = Ex.yiCombine(reference, config);
     /*
      * notice 专用
      */
-    const {notice = {}} = config;
+    const {notice = {}} = $combine;
+    state.$combine = $combine;
     state.$notice = Ux.clone(notice);
     /*
      * 选项处理，默认全选
      */
-    const {$columns = [], button = ""} = config;
+    const {$columns = [], button = "", $columnsMy = []} = $combine;
     const $options = $columns.map(column => {
         const option = {};
         option.key = column.dataIndex;
@@ -56,7 +60,7 @@ const componentInit = (reference) => {
     /*
      * 默认全选
      */
-    const selected = $options.map(item => item.key);
+    const selected = $columnsMy.filter(item => "key" !== item);
     state.$selected = selected;
     /*
      * Group专用
@@ -91,6 +95,10 @@ const componentInit = (reference) => {
     reference.setState(state);
 };
 
+@Ux.zero(Ux.rxEtat(require("./Cab"))
+    .cab("ExEditorExport")
+    .to()
+)
 class Component extends React.PureComponent {
     state = {
         $ready: false
@@ -109,11 +117,13 @@ class Component extends React.PureComponent {
                 $button = {}, $options = [],
                 $submitting = false,
                 $group = {}, $notice = {},
+                $combine = {}, $selected,
             } = this.state;
             /*
              * 选项处理
              */
             const group = Ux.clone($group);
+            group.value = $selected;
             const button = Ux.clone($button);
             if (!Ux.isEmpty(button)) {
                 button.loading = $submitting;
@@ -121,12 +131,47 @@ class Component extends React.PureComponent {
             /*
              * 受控选项处理，默认权限
              */
-            return renderJsx(this, {
-                button,
-                options: Ux.clone($options),
-                notice: Ux.clone($notice),
-                group,
-            });
+            const style = Ux.toGrid($combine);
+            const {all} = $combine;
+            return (
+                <div>
+                    <Row>
+                        <Col span={24}>
+                            <LoadingAlert $alert={$notice}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24} className={"ex-editor-dialog"}>
+                            <Checkbox.Group {...group}>
+                                {$options.map(item => {
+                                    return (
+                                        <div style={style} key={item.key} className={"item"}>
+                                            <Checkbox key={item.key} value={item.key}>
+                                                {item.label}
+                                            </Checkbox>
+                                        </div>
+                                    );
+                                })}
+                            </Checkbox.Group>
+                            {all ? (
+                                <div className={"all"}>
+                                    <Checkbox onChange={() => {
+                                        if ($selected.length < $options.length) {
+                                            const $values = $options.map(item => item.value);
+                                            this.setState({$selected: $values})
+                                        } else {
+                                            this.setState({$selected: []});
+                                        }
+                                    }} checked={$selected.length === $options.length}>{all}</Checkbox>
+                                </div>
+                            ) : false}
+                            <div className={"button"}>
+                                <Button {...button}/>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            );
         }, Ex.parserOfColor("ExEditorExport").private());
     }
 }

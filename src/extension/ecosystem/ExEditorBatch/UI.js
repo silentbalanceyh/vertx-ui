@@ -142,16 +142,21 @@ const yiField = (reference, config = {}) => {
 }
 const componentInit = (reference) => {
     const {config = {}} = reference.props;
+    const $combine = Ex.yiCombine(reference, config);
     /* 列处理 */
     let $columns = [];
-    $columns.push(yiOp(reference, config));
-    $columns.push(yiField(reference, config));
-    $columns.push(yiValue(reference, config));
+    $columns.push(yiOp(reference, $combine));
+    $columns.push(yiField(reference, $combine));
+    $columns.push(yiValue(reference, $combine));
     // 初始化数据
     const $data = [{key: Ux.randomUUID()}];
-    reference.setState({$columns, $data, $ready: true})
+    reference.setState({$columns, $data, $combine, $ready: true})
 };
 
+@Ux.zero(Ux.rxEtat(require("./Cab"))
+    .cab("ExEditorBatch")
+    .to()
+)
 class Component extends React.PureComponent {
     state = {
         $ready: false

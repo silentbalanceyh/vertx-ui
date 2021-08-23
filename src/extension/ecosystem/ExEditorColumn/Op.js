@@ -85,11 +85,22 @@ const rxSave = (reference) => (event) => {
 };
 const rxReset = (reference) => (event) => {
     Ux.prevent(event);
-    const {config = {}} = reference.props;
-    const $selected = Ux.clone(config.$columnsMy);
+    const {$combine = {}} = reference.state;
+    const $selected = valueDefault($combine);
     reference.setState({$selected});
 };
+const valueDefault = ($combine = {}) => {
+    const {$columnsMy} = $combine;
+    if ($columnsMy) {
+        return $columnsMy.filter(item => "key" !== item);
+    } else {
+        return [];
+    }
+}
 export default {
-    rxReset,
-    rxSave,
+    valueDefault,
+    action: {
+        rxReset,
+        rxSave,
+    }
 }

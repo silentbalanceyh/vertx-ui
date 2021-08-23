@@ -1,0 +1,35 @@
+{
+    "_combine": {
+        "notice": {
+            "message": "请选择视图中包含的字段！",
+            "description": [
+                "您保存的字段只针对当前视图生效，若没有开启视图功能则使用默认视图DEFAULT。",
+                "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。"
+            ]
+        },
+        "grid": 3,
+        "buttons": [
+            {
+                "key": "keyReset",
+                "text": "重置",
+                "event": "rxReset"
+            },
+            {
+                "key": "keySave",
+                "text": "保存",
+                "icon": "save",
+                "type": "primary",
+                "event": "rxSave"
+            }
+        ],
+        "all": "所有属性",
+        "modal": {
+            "success": {
+                "content": "您的个人视图字段已经成功保存！"
+            },
+            "error": {
+                "content": "对不起，请选择您要设置的列信息，列不可为空！"
+            }
+        }
+    }
+}

@@ -2,8 +2,8 @@ import React from 'react';
 import Ex from 'ex';
 import Op from './Op';
 import Ux from 'ux';
-
-import renderJsx from './Web.jsx';
+import {Button, Col, Icon, Row, Upload} from "antd";
+import {LoadingAlert} from "web";
 
 /**
  * ## 「组件」`ExEditorImport`
@@ -34,11 +34,12 @@ import renderJsx from './Web.jsx';
 // =====================================================
 const componentInit = (reference) => {
     const {config = {}} = reference.props;
+    const $combine = Ex.yiCombine(reference, config);
     const state = {};
     /*
      * notice 专用
      */
-    const {notice = {}, upload = {}, button = ""} = config;
+    const {notice = {}, upload = {}, button = ""} = $combine;
     state.$notice = Ux.clone(notice);
     /*
      * 上传配置处理
@@ -70,6 +71,10 @@ const componentInit = (reference) => {
     reference.setState(state);
 };
 
+@Ux.zero(Ux.rxEtat(require("./Cab"))
+    .cab("ExEditorImport")
+    .to()
+)
 class Component extends React.PureComponent {
     state = {
         $ready: false,
@@ -85,19 +90,40 @@ class Component extends React.PureComponent {
             const {
                 $notice = {}, $upload = {}, $image,
                 $button = {},
-                $loading = false
+                $loading = false,
+                $fileList = []
             } = this.state;
             /*
              * 是否在加载，以及更改过的 $image 图片路径
              */
             $upload.loading = !!$loading;
             $upload.image = $image;
-            return renderJsx(this, {
-                notice: Ux.clone($notice),
-                upload: Ux.clone($upload),
-                // image: $image,
-                button: $button,
-            });
+            $button.loading = $loading;
+            return (
+                <div>
+                    <Row>
+                        <Col span={24}>
+                            <LoadingAlert $alert={$notice}/>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col span={24} className={"ex-editor-center"}>
+                            <Upload {...$upload.control} fileList={$fileList}>
+                                {0 === $fileList.length ? (
+                                    <div>
+                                        <Icon type={$upload.loading ? 'loading' : 'plus'}/>
+                                        <div className={$upload.textClass}>{$upload.text}</div>
+                                    </div>
+                                ) : false}
+                            </Upload>
+                            <div className={"button"}>
+                                <Button {...$button}/>
+                            </div>
+                        </Col>
+                    </Row>
+                </div>
+            );
+            ;
         }, Ex.parserOfColor("ExEditorImport").private());
     }
 }

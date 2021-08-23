@@ -940,6 +940,12 @@ const yiListPlugin = (reference, config = {}) => {
     }
     return plugins;
 }
+const yiCombine = (reference) => {
+    const {config = {}} = reference.props;
+    const defaultConfig = Ux.fromHoc(reference, "combine");
+    const $combine = Ux.clone(config);
+    return Ux.assign($combine, defaultConfig, 2);
+}
 export default {
     yiListQuery,
     yiListTab,
@@ -954,4 +960,5 @@ export default {
     yiAssist,
     yiControl,
     yiCompany,
+    yiCombine,
 }

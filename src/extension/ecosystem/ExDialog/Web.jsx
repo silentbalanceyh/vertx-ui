@@ -32,7 +32,9 @@ const renderPopover = (reference, jsxChildren, config = {}) => {
      * overlayStyle 计算，主要针对 width
      */
     config.overlayStyle = {width: config.width};
-    config.content = Ux.isFunction(jsxChildren) ? jsxChildren() : false;
+    config.overlayClassName = "ex-container-popover";
+    const jsx = Ux.isFunction(jsxChildren) ? jsxChildren() : false;
+    config.content = React.cloneElement(jsx, {$visible: config.visible});
     /*
      * 关闭按钮属性专用
      */
@@ -79,7 +81,7 @@ const _jsxChildren = (reference, component = {}, attributes = {}) => {
 const _jsxDialog = (reference, dialog = {}, attributes = {}) => {
     const {config = {}, component = {}} = dialog;
     const {type = "WINDOW", ...rest} = config;
-    let fnRender = null;
+    let fnRender;
     if ("WINDOW" === type) {
         fnRender = renderWindow;
     } else {
