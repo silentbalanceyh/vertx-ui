@@ -538,6 +538,9 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
  */
 const yoAmbient = (reference = {}, config = {}) => {
     const props = reference.props;
+
+
+    // ----------------------- 全局专用信息 -----------------
     /*
      * $app
      * $user
@@ -550,24 +553,33 @@ const yoAmbient = (reference = {}, config = {}) => {
         "menus",
         "hotel",     // 旧系统专用
     );
+
+
+    // ----------------------- 模型标识符 -----------------
     {
         const {$identifier} = reference.props;
         if ($identifier) {
             uniform.$identifier = $identifier;
         }
     }
+
+
+    // ----------------------- 选项预处理 -----------------
     uniform.$options = _seedOptionPre(reference);
-    /*
-     * 特殊变量
-     * $disabled
-     */
-    const {$disabled = false} = props;
-    if ($disabled) {
-        /* 只接收 $disabled = true */
-        uniform.$disabled = $disabled;
-    }
+
+
+    // ----------------------- 禁用专用（特殊变量） -----------------
     // eslint-disable-next-line
     {
+        /*
+         * 特殊变量
+         * $disabled
+         */
+        const {$disabled = false} = props;
+        if ($disabled) {
+            /* 只接收 $disabled = true */
+            uniform.$disabled = $disabled;
+        }
         /*
          * 状态检索：
          * $submitting：正在提交
@@ -582,14 +594,23 @@ const yoAmbient = (reference = {}, config = {}) => {
          */
         _seekSelected(uniform, reference, "$selected");
     }
-    /*
-     * 函数处理
-     */
-    Object.keys(props)
-        .filter(propKey => !!propKey)
-        .filter(propKey => Ux.isFunction(props[propKey]))
-        .filter(Fn.mapFun)
-        .forEach(propKey => uniform[propKey] = props[propKey]);
+
+
+    // ----------------------- 函数继承 -----------------
+    // eslint-disable-next-line
+    {
+        /*
+         * 函数处理
+         */
+        Object.keys(props)
+            .filter(propKey => !!propKey)
+            .filter(propKey => Ux.isFunction(props[propKey]))
+            .filter(Fn.mapFun)
+            .forEach(propKey => uniform[propKey] = props[propKey]);
+    }
+
+
+    // ----------------------- 特殊引用 -----------------
     /*
      * 特殊引用
      * reference：父引用
@@ -602,6 +623,10 @@ const yoAmbient = (reference = {}, config = {}) => {
         uniform.react = reference;
     }
     if (!uniform.config) uniform.config = {};
+
+
+    // ----------------------- 插件模式 -----------------
+    // eslint-disable-next-line
     {
         /*
          * 开合状态处理
@@ -612,6 +637,9 @@ const yoAmbient = (reference = {}, config = {}) => {
             uniform.$plugins = $plugins;
         }
     }
+
+
+    // ----------------------- 选项处理 -----------------
     // eslint-disable-next-line
     {
         /*
@@ -620,41 +648,80 @@ const yoAmbient = (reference = {}, config = {}) => {
         _seekOption(uniform, reference);
     }
     Object.assign(uniform.config, config);
-    /*
-     * Assist数据专用
-     */
-    _seekAssist(uniform, reference.props);
-    _seekAssist(uniform, reference.state);
-    const {rxAssist} = reference.props;
-    if (Ux.isFunction(rxAssist)) {
-        uniform.rxAssist = rxAssist;
-    }
-    /*
-     * 动态 $opKey
-     */
-    let {$opKey, $record} = reference.props;
-    if ($opKey) {
-        uniform.$opKey = $opKey;
-    } else {
+
+
+    // ----------------------- 辅助数据专用处理 -----------------
+    // eslint-disable-next-line
+    {
         /*
-         * 有状态才做二次读取
+         * Assist数据专用
          */
-        if (reference.state) {
-            $opKey = reference.state.$opKey;
-            if ($opKey) {
-                uniform.$opKey = $opKey;
-            }
+        _seekAssist(uniform, reference.props);
+        _seekAssist(uniform, reference.state);
+        const {rxAssist} = reference.props;
+        if (Ux.isFunction(rxAssist)) {
+            uniform.rxAssist = rxAssist;
         }
     }
-    /*
-     * 添加的时候需要使用初始化的默认值
-     * 所以引入外层变量 $record 来存储
-     * 1）外层变量是单变量，主要用于记录拷贝
-     * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
-     * 3）外层变量同样会在 config 这个过程中引入特殊属性：rowData 用来设置选中记录
-     */
-    if ($record) {
-        uniform.$record = $record;
+
+
+    // ----------------------- 动态Key处理 -----------------
+    // eslint-disable-next-line
+    {
+        /*
+         * 动态 $opKey
+         */
+        let {$opKey, $record} = reference.props;
+        if ($opKey) {
+            uniform.$opKey = $opKey;
+        } else {
+            /*
+             * 有状态才做二次读取
+             */
+            if (reference.state) {
+                $opKey = reference.state.$opKey;
+                if ($opKey) {
+                    uniform.$opKey = $opKey;
+                }
+            }
+        }
+        /*
+         * 添加的时候需要使用初始化的默认值
+         * 所以引入外层变量 $record 来存储
+         * 1）外层变量是单变量，主要用于记录拷贝
+         * 2）如果是一个数组，必定会在Form中使用选择的方式，那么可以直接走 Assist
+         * 3）外层变量同样会在 config 这个过程中引入特殊属性：rowData 用来设置选中记录
+         */
+        if ($record) {
+            uniform.$record = $record;
+        }
+    }
+
+
+    // ----------------------- 视图功能 -----------------
+    // eslint-disable-next-line
+    {
+        const {$myDefault} = reference.props;
+        if ($myDefault) {
+            uniform.$myDefault = $myDefault;
+        } else {
+            const $myDefault = Ux.fromHoc(reference, "myDefault");
+            if ($myDefault) {
+                Object.freeze($myDefault);
+                uniform.$myDefault = $myDefault;
+            }
+        }
+        _seekState(uniform, reference, "$myView");
+        /*
+         * 个人视图专用功能，视图包含
+         * {
+         *     "name": "DEFAULT",
+         *     "title": "默认视图（显示文字专用）"
+         * }
+         */
+        uniform.rxViewMy = ($myView = {}) => {
+            reference.setState({$myView})
+        }
     }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;

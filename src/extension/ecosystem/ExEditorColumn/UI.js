@@ -1,9 +1,10 @@
 import React from 'react';
-import Event from './Op';
 import Ex from 'ex';
 import Ux from 'ux';
-import {Checkbox, Tabs, Transfer} from "antd";
+import {Tabs} from "antd";
 import {LoadingAlert} from "web";
+import Event from './Op';
+import Jsx from './Web';
 
 /**
  * ## 「组件」`ExEditorColumn`
@@ -98,63 +99,6 @@ const componentUp = (reference, virtualRef) => {
     }
 }
 
-const renderComplex = (reference, config = {}) => {
-    const {
-        $options = [], $selected = [],
-    } = reference.state;
-    return (
-        <div key={"complex"} className={"transfer"}>
-            <Transfer {...config}
-                      targetKeys={$selected}
-                      dataSource={$options}/>
-        </div>
-    )
-}
-
-const renderSimple = (reference, config = {}) => {
-    const {
-        $options = [], $selected = [], $combine = {}, $group = {},
-    } = reference.state;
-
-    /*
-     * 选项处理
-     */
-    const group = Ux.clone($group);
-    group.value = $selected;
-    const style = Ux.toGrid($combine);
-    const {all} = config;
-    return (
-        <div key={"simple"}>
-            <Checkbox.Group {...group}>
-                {$options.map(item => (
-                    <div style={style} key={item.key} className={"item"}>
-                        <Checkbox key={item.key} value={item.key}>
-                            {item.label}
-                        </Checkbox>
-                    </div>
-                ))}
-            </Checkbox.Group>
-            {all ? (
-                <div className={"all"}>
-                    <Checkbox onChange={() => {
-                        if ($selected.length < $options.length) {
-                            const $values = $options.map(item => item.value);
-                            reference.setState({$selected: $values})
-                        } else {
-                            reference.setState({$selected: []});
-                        }
-                    }} checked={$selected.length === $options.length}>{all}</Checkbox>
-                </div>
-            ) : false}
-        </div>
-    )
-}
-
-const RENDER = {
-    simple: renderSimple,
-    complex: renderComplex
-}
-
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("ExEditorColumn")
     .to()
@@ -184,7 +128,8 @@ class Component extends React.PureComponent {
                 $buttons = [],
                 $submitting = false, $notice,
                 $tab = {}, $page = {},
-                $activeKey = "simple"
+                $activeKey = "simple",
+                $combine = {}
             } = this.state;
 
             const buttons = Ux.clone($buttons);
@@ -195,11 +140,12 @@ class Component extends React.PureComponent {
                 <div className={"ex-editor-dialog"}>
                     <div className={"checked-content"}>
                         <LoadingAlert $alert={$notice}/>
+                        {Ex.jsxMyView(this, $combine.view)}
                         <Tabs {...rest} activeKey={$activeKey}>
                             {items.map(item => (
                                 <Tabs.TabPane {...item}>
-                                    {Ux.isFunction(RENDER[item.key])
-                                        ? RENDER[item.key](this, $page[item.key]) : false}
+                                    {Ux.isFunction(Jsx[item.key])
+                                        ? Jsx[item.key](this, $page[item.key]) : false}
                                 </Tabs.TabPane>
                             ))}
                         </Tabs>

@@ -38,6 +38,9 @@
                 ]
             }
         },
+        "view": {
+            "selected": "当前视图："
+        },
         "modal": {
             "success": {
                 "content": "您的个人视图字段已经成功保存！"

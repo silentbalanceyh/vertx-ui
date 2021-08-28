@@ -3,11 +3,10 @@ import React from "react";
 
 import ExNavigation from '../ExNavigation/UI';
 import ExSider from '../ExSider/UI';
-import ExLogged from "../ExLogged/UI";
 import ExHeader from "./UI.Header";
 import './Cab.less';
 
-const {Content, Header} = Layout;
+const {Content} = Layout;
 
 export default {
     renderTpl: (ref, {
@@ -39,38 +38,15 @@ export default {
             </Layout>
         </Layout>
     ),
-    renderHeader: (ref, {
-        accounts,
-        icon,
-        fnCollapse
-    }) => (
-        <Header className="ux-header" id={"__ELE_HEADER"}>
-            <Icon className="trigger"
-                  type={icon}
-                  onClick={fnCollapse}
-            />
-            <div className="right">
-                {/** 用户信息 **/}
-                <ExLogged {...accounts} css={
-                    {
-                        clsDropdown: "menu-item",
-                        clsAccount: "action account",
-                        clsAvatar: "avatar",
-                        clsUser: "name"
-                    }
-                }/>
-            </div>
-        </Header>
-    ),
     renderNotify: (ref) => (
         <Popover placement="bottomRight" trigger="click" popupClassName="notify-popover"
                  allowPointAtCenter>
             {/** 提醒菜单专用 **/}
             <span className="action notify-notice-button">
-            <Badge count={10}>
-                <Icon type="bell" className="notify-icon"/>
-            </Badge>
-        </span>
+                <Badge count={10}>
+                    <Icon type="bell" className="notify-icon"/>
+                </Badge>
+            </span>
         </Popover>
     )
 }

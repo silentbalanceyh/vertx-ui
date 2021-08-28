@@ -1,6 +1,7 @@
 import React from 'react';
 import Ux from "ux";
 import Ex from "ex";
+import Jsx from './Web';
 
 // =====================================================
 // componentInit/componentUp
@@ -10,8 +11,19 @@ const componentInit = (reference) => {
     const $combine = Ex.yiCombine(reference, config);
     const state = {};
     state.$combine = $combine;
-    state.$ready = true;
-    reference.setState(state);
+    /*
+     * View Reading
+     * uri, method as method
+     */
+    const {$options = {}} = reference.props;
+    const params = {};
+    params.method = "POST";
+    params.uri = $options[Ex.Opt.AJAX_SEARCH_URI];
+    Ux.ajaxPost("/api/view-p/fetch", params).then(response => {
+        console.log(response);
+        state.$ready = true;
+        reference.setState(state);
+    })
 }
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
@@ -29,9 +41,11 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
+            const {$combine = {}} = this.state;
             return (
-                <div>
-                    Tpl Hello World
+                <div className={"ex-editor-dialog"}>
+                    {Ex.jsxMyView(this, $combine.view)}
+                    {Jsx.renderBar(this)}
                 </div>
             )
         }, Ex.parserOfColor("ExEditorView").private())

@@ -50,6 +50,7 @@ const renderDrawer = (reference, jsxChildren, config = {}) => {
     $config.destroyOnClose = true;
     $config.closable = true;
     $config.maskClosable = false;
+    $config.className = "ex-container-drawer"
     if (Ux.isFunction(config.onCancel)) {
         delete $config.onCancel;
         $config.onClose = config.onCancel;

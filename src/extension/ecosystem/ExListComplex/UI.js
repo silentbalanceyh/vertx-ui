@@ -164,6 +164,9 @@ class Component extends React.PureComponent {
         /*
          * 当前组件需要生成的 fn函数集
          */
+        $myView: {
+            name: "DEFAULT"
+        }                       // 视图信息 —— 个人视图
     };
 
     componentDidMount() {

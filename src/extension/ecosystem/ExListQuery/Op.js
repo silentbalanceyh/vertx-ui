@@ -1,6 +1,19 @@
 import Ux from 'ux';
-import Op from './Op.State';
 import Ex from "ex";
+import ExEditorExport from "../ExEditorExport/UI";
+import ExEditorBatch from "../ExEditorBatch/UI";
+import ExEditorColumn from "../ExEditorColumn/UI";
+import ExEditorImport from "../ExEditorImport/UI";
+import ExEditorView from "../ExEditorView/UI";
+import pluginExtension from "plugin";
+
+const pluginComponent = {
+    ExEditorExport,
+    ExEditorBatch,
+    ExEditorColumn,
+    ExEditorImport,
+    ExEditorView
+}
 /*
  * 基本配置解析
  * 1. query：（静态默认的query）；
@@ -69,10 +82,14 @@ const sync = (reference, config = {}) => {
 };
 const async = (reference, config = {}, state = {}) =>
     /* 动态OP */
-    Op.asyncOp(reference, config, state)
+    Ex.yiListOp(reference, {
+        ...config,
+        pluginExtension,
+        pluginComponent
+    }, state)
         .then(op => Ux.promise(state, 'op', op))
         /* 动态列 */
-        .then(() => Op.asyncTable(reference, config, state))
+        .then(() => Ex.yiListTable(reference, config, state))
         .then(table => Ux.promise(state, 'table', table));
 
 const ready = (reference = {}, state = {}) => {

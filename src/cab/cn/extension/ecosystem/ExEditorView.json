@@ -1,7 +1,17 @@
 {
     "_combine": {
         "view": {
-            "defaultText": "默认视图"
+            "selected": "当前视图："
+        },
+        "toolbar": {
+            "plus": {
+                "icon": "plus",
+                "type": "primary",
+                "tooltip": "添加视图"
+            },
+            "batch": {
+                "text": "批量删除"
+            }
         }
     }
 }

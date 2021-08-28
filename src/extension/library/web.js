@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import React from "react";
-import {Button, Tabs} from "antd";
+import {Button, Col, Row, Tabs, Tag} from "antd";
 import {Dialog} from 'web';
 
 /**
@@ -307,6 +307,42 @@ export default {
             )
         } else {
             return item.label + `（${item.key}）`
+        }
+    },
+    /**
+     * ##「组件」`Ex.jsxMyView`
+     *
+     * 所选视图专用
+     *
+     * @memberOf module:_kernel
+     * @param {ReactComponent} reference React组件引用。
+     * @param {Object} config 基础配置信息
+     * @returns {Function} 返回Item
+     */
+    jsxMyView: (reference, config = {}) => {
+        const {$myDefault, $myView} = reference.props;
+        if ($myDefault && $myView) {
+            const {grid = {}} = config;
+            const left = grid.left ? grid.left : 6;
+            const right = grid.right ? grid.right : 18;
+            let display = $myView.title ? $myView.title : $myDefault.title;
+            if ($myDefault.name === $myView.name) {
+                display = $myDefault.title;
+            }
+            return (
+                <Row className={"ex-my-view"}>
+                    <Col span={left} className={"label"}>
+                        {config.selected}
+                    </Col>
+                    <Col span={right} className={"content"}>
+                        {<Tag color={"magenta"} style={{
+                            fontSize: 14
+                        }}>{display}（{$myView.name}）</Tag>}
+                    </Col>
+                </Row>
+            );
+        } else {
+            return false;
         }
     }
 }

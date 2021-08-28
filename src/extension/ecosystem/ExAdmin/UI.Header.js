@@ -1,8 +1,11 @@
 import React from 'react'
 import Ux from "ux";
-import Jsx from './Web';
 import Op from './Op';
 import Ex from 'ex';
+import {Icon, Layout} from "antd";
+import ExLogged from "../ExLogged/UI";
+
+const {Header} = Layout;
 
 /*
  * React属性props:
@@ -33,11 +36,27 @@ class Component extends React.PureComponent {
             const accounts = Op.yoAccount(this, {
                 window
             });
-            return Jsx.renderHeader(this, {
-                accounts,
-                icon: config.icon,
-                fnCollapse
-            })
+            const icon = config.icon;
+
+            return (
+                <Header className="ux-header" id={"__ELE_HEADER"}>
+                    <Icon className="trigger"
+                          type={icon}
+                          onClick={fnCollapse}
+                    />
+                    <div className="right">
+                        {/** 用户信息 **/}
+                        <ExLogged {...accounts} css={
+                            {
+                                clsDropdown: "menu-item",
+                                clsAccount: "action account",
+                                clsAvatar: "avatar",
+                                clsUser: "name"
+                            }
+                        }/>
+                    </div>
+                </Header>
+            )
         }, Ex.parserOfColor("ExHeader").private())
     }
 }

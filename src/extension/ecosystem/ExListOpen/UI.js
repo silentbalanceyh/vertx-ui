@@ -1,8 +1,7 @@
 import React from 'react';
-import Op from './Op';
 import Ex from "ex";
 import Ux from 'ux';
-import {Col, Row, Table} from 'antd';
+import {Col, Row, Table, Tag} from 'antd';
 import Jsx from './Web';
 import {Dsl} from 'entity';
 
@@ -125,6 +124,22 @@ const yiWindow = (reference, configData = {}) => {
     });
     return $window;
 }
+const yoPagination = (reference, $table = {}) => {
+    const {$data = {}, $query = {}} = reference.state;
+    const {pagination} = $table;
+    const {pager = {}} = $query;
+    $table.pagination = {
+        size: "small",
+        pageSize: pager.size,
+        showQuickJumper: true,
+        total: $data.count,
+        showTotal: (total) => (
+            <Tag color={"magenta"} style={{fontSize: 14}}>
+                {Ux.formatExpr(pagination, {total, page: pager.page})}
+            </Tag>
+        )
+    }
+}
 const componentInit = (reference) => {
     const {config = {}, /* 基本配置 */} = reference.props;
     const {
@@ -194,7 +209,7 @@ class Component extends React.PureComponent {
             const {css = {}} = $options;
 
             const $tableConfig = Ux.clone($table);
-            Op.yoPagination(this, $tableConfig);
+            yoPagination(this, $tableConfig);
             const {list = []} = $data;
             return (
                 <div className={css.content}>
