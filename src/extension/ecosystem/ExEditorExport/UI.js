@@ -2,7 +2,7 @@ import React from 'react';
 import Ex from 'ex';
 import Ux from 'ux';
 import Event from "./Op";
-import {Button, Checkbox, Col, Row} from "antd";
+import {Button, Col, Input, Row, Transfer} from "antd";
 import {LoadingAlert} from "web";
 
 /**
@@ -42,7 +42,7 @@ const componentInit = (reference) => {
     /*
      * notice 专用
      */
-    const {notice = {}} = $combine;
+    const {notice = {}, transfer = {}, input = {}} = $combine;
     state.$combine = $combine;
     state.$notice = Ux.clone(notice);
     /*
@@ -56,31 +56,11 @@ const componentInit = (reference) => {
         option.value = column.dataIndex;
         return option;
     }).filter(column => "key" !== column.key);
-    state.$options = $options;
     /*
      * 默认全选
      */
-    const selected = $columnsMy.filter(item => "key" !== item);
-    state.$selected = selected;
-    /*
-     * Group专用
-     */
-    const group = {};
-    group.onChange = (selected = []) => {
-        /*
-         * 设置选中项
-         * 按照列呈现的本身顺序进行排序
-         */
-        const $selectedKeys = Ux.immutable(selected);
-        const $selected = [];
-        $options
-            .filter(item => $selectedKeys.contains(item.key))
-            .forEach(item => $selected.push(item.key));
-        reference.setState({$selected});
-    };
-    group.className = "group";
-    group.defaultValue = selected;
-    state.$group = group;
+    state.$selected = $columnsMy.filter(item => "key" !== item);
+    state.$options = $options;
     /*
      * 按钮专用选项
      */
@@ -91,6 +71,20 @@ const componentInit = (reference) => {
         $button.onClick = Event.rxExport(reference);
         state.$button = $button;
     }
+    /*
+     * 穿梭框
+     */
+    transfer.render = Ex.jsxItemTransfer(reference)
+    transfer.onChange = Event.rxChange(reference);
+    state.$transfer = transfer;
+    /*
+     * 文件名设置
+     */
+    const $input = Ux.clone(input);
+    if (!$input.text) $input.text = {};
+    $input.text.onChange = Event.rxInput(reference);
+    state.$input = $input;
+
     state.$ready = true;
     reference.setState(state);
 };
@@ -114,16 +108,16 @@ class Component extends React.PureComponent {
              * 根据核心状态处理
              */
             const {
-                $button = {}, $options = [],
-                $submitting = false,
-                $group = {}, $notice = {},
-                $combine = {}, $selected,
+                $button = {},                       // 隐藏按钮
+                $options = [], $selected = [],     // 数据源和选中项
+                $submitting = false,                // 提交状态
+                $notice = {},                       // 提示
+                $transfer = {},                     // 穿梭框
+                $filename, $input = {}                     // 文件名
             } = this.state;
             /*
              * 选项处理
              */
-            const group = Ux.clone($group);
-            group.value = $selected;
             const button = Ux.clone($button);
             if (!Ux.isEmpty(button)) {
                 button.loading = $submitting;
@@ -131,40 +125,31 @@ class Component extends React.PureComponent {
             /*
              * 受控选项处理，默认权限
              */
-            const style = Ux.toGrid($combine);
-            const {all} = $combine;
             return (
                 <div>
                     <Row>
-                        <Col span={24}>
-                            <LoadingAlert $alert={$notice}/>
-                        </Col>
-                    </Row>
-                    <Row>
                         <Col span={24} className={"ex-editor-dialog"}>
-                            <Checkbox.Group {...group}>
-                                {$options.map(item => {
+                            <LoadingAlert $alert={$notice}/>
+                            <div className={"input"}>
+                                {(() => {
+                                    const {text = {}, label} = $input;
                                     return (
-                                        <div style={style} key={item.key} className={"item"}>
-                                            <Checkbox key={item.key} value={item.key}>
-                                                {item.label}
-                                            </Checkbox>
-                                        </div>
-                                    );
-                                })}
-                            </Checkbox.Group>
-                            {all ? (
-                                <div className={"all"}>
-                                    <Checkbox onChange={() => {
-                                        if ($selected.length < $options.length) {
-                                            const $values = $options.map(item => item.value);
-                                            this.setState({$selected: $values})
-                                        } else {
-                                            this.setState({$selected: []});
-                                        }
-                                    }} checked={$selected.length === $options.length}>{all}</Checkbox>
-                                </div>
-                            ) : false}
+                                        <Row>
+                                            <Col span={6} className={"input-label"}>
+                                                {label}
+                                            </Col>
+                                            <Col span={12}>
+                                                <Input {...text} value={$filename}/>
+                                            </Col>
+                                        </Row>
+                                    )
+                                })()}
+                            </div>
+                            <div className={"transfer"}>
+                                <Transfer {...$transfer}
+                                          targetKeys={$selected}
+                                          dataSource={$options}/>
+                            </div>
                             <div className={"button"}>
                                 <Button {...button}/>
                             </div>

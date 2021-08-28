@@ -4,6 +4,7 @@ import ExButton from '../ExButton/UI';
 import Ux from "ux";
 import Ex from "ex";
 import {Button, Col, Modal, Popover, Row} from "antd";
+import {Drawer} from "antd/es";
 
 
 const jsxTitle = (reference, config = {}) =>
@@ -44,6 +45,22 @@ const renderPopover = (reference, jsxChildren, config = {}) => {
     );
 }
 
+const renderDrawer = (reference, jsxChildren, config = {}) => {
+    const $config = Ux.clone(config);
+    $config.destroyOnClose = true;
+    $config.closable = true;
+    $config.maskClosable = false;
+    if (Ux.isFunction(config.onCancel)) {
+        delete $config.onCancel;
+        $config.onClose = config.onCancel;
+    }
+    return (
+        <Drawer {...$config}>
+            {Ux.isFunction(jsxChildren) ? jsxChildren() : false}
+        </Drawer>
+    );
+}
+
 const renderWindow = (reference, jsxChildren, config = {}) => {
     const {$submitting = false} = reference.props;
     config = Ux.clone(config);
@@ -77,18 +94,21 @@ const _jsxChildren = (reference, component = {}, attributes = {}) => {
         return false;
     }
 };
-
+const RENDERS = {
+    "WINDOW": renderWindow,
+    "DRAWER": renderDrawer,
+    "POPOVER": renderPopover
+}
 const _jsxDialog = (reference, dialog = {}, attributes = {}) => {
     const {config = {}, component = {}} = dialog;
     const {type = "WINDOW", ...rest} = config;
-    let fnRender;
-    if ("WINDOW" === type) {
-        fnRender = renderWindow;
+    const fnRender = RENDERS[type];
+    if (Ux.isFunction(fnRender)) {
+        return fnRender(reference, () =>
+            _jsxChildren(reference, component, attributes), rest);
     } else {
-        fnRender = renderPopover;
+        console.error("无法解析类型 type = ", type);
     }
-    return fnRender(reference, () =>
-        _jsxChildren(reference, component, attributes), rest);
 };
 export default (reference, {
     button = {},

@@ -12,7 +12,7 @@ const yiPage = (reference) => Ex.yiStandard(reference).then(state => {
      * 读取权限组完整树，PERM_SET 信息
      * 读取所有的权限信息
      */
-    const types = Ux.onDatum({state}, "permission.type");
+    const types = Ux.onDatum({state}, "zero.authority");
     return Ex.authGroups(state, types).then(processed => {
         /*
          * 窗口专用绑定相关信息

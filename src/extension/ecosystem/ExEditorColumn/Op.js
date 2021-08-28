@@ -7,8 +7,7 @@ const rxSave = (reference) => (event) => {
     /*
      * 列信息处理
      */
-    const {$selected = []} = reference.state;
-    const {config = {}} = reference.props;
+    const {$selected = [], $combine = {}} = reference.state;
     /*
      * 提取 rxColumnSave 函数
      */
@@ -17,7 +16,7 @@ const rxSave = (reference) => (event) => {
         /*
          * 错误信息
          */
-        Ux.messageFailure(config);
+        Ux.messageFailure($combine);
         /*
          * 防重复提交
          */
@@ -35,14 +34,13 @@ const rxSave = (reference) => (event) => {
          * projection 是被过滤的不显示的列信息，这里属于反向运算
          */
         const {rxColumnSave} = reference.props;
-        const {$columns = []} = config;
-        const fullColumns = Ux.clone($columns)
-            .map(column => column.dataIndex);
+        const {$columns = []} = $combine;
+        const fullColumns = Ux.immutable($columns.map(column => column.dataIndex))
         /*
          * 正向语义
          * fullColumns 中被包含了的就是 item
          */
-        const params = fullColumns.filter(item => keys.contains(item));
+        const params = keys.filter(item => fullColumns.contains(item));
 
         if (Ux.isFunction(rxColumnSave)) {
             rxColumnSave(params)
@@ -51,8 +49,7 @@ const rxSave = (reference) => (event) => {
                      * $columnsMy 更新
                      */
                     const $response = Ux.immutable(response);
-                    const $columnsMy = fullColumns
-                        .filter(item => $response.contains(item));
+                    const $columnsMy = $response.filter(item => fullColumns.contains(item))
                     /*
                      * 防重复提交关闭
                      * （本层处理）
@@ -72,8 +69,7 @@ const rxSave = (reference) => (event) => {
                     /*
                      * 消息提示
                      */
-                    const {config = {}} = reference.props;
-                    Ux.messageSuccess(config);
+                    Ux.messageSuccess($combine);
                 })
                 .catch(error => {
                     console.error(error);
@@ -97,10 +93,33 @@ const valueDefault = ($combine = {}) => {
         return [];
     }
 }
+const rxChange = (reference) => (targetKeys, direction, moveKeys = []) => {
+    const {$selected = []} = reference.state;
+    let selected = [];
+    if ("right" === direction) {
+        // 往右，直接追加，注意顺序
+        selected = Ux.clone($selected);
+        moveKeys.forEach(moveKey => selected.push(moveKey));
+    } else {
+        // 往左
+        const $moved = Ux.immutable(moveKeys);
+        $selected.forEach(each => {
+            if (!$moved.contains(each)) {
+                selected.push(each);
+            }
+        })
+    }
+    reference.setState({$selected: selected})
+}
+const rxActive = (reference) => ($activeKey) => {
+    reference.setState({$activeKey})
+}
 export default {
     valueDefault,
+    rxActive,
     action: {
         rxReset,
         rxSave,
+        rxChange,
     }
 }

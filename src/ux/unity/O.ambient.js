@@ -133,25 +133,7 @@ const toRoute = (reference = {}, uri = "", params) => {
     /*
      * 2. 将 queryPart 解析成 queryMap, queryMap 和 params 作为输入参数合并后的结果 inputParams
      */
-    const queryMap = {};
-    if (queryPart) {
-        /*
-         * queryPart格式：p1=v1&&p2=v2
-         */
-        const queryArr = queryPart.split("&");
-        queryArr.map(literal => literal.replace(/ /g, ''))
-            .filter(literal => "" !== literal)
-            .forEach(literal => {
-                const kv = literal.split('=');
-                if (2 === kv.length) {
-                    const key = kv[0];
-                    const value = kv[1];
-                    if (key && value) {
-                        queryMap[key] = value;
-                    }
-                }
-            });
-    }
+    const queryMap = _toQPart(queryPart);
     Object.assign($parameters, queryMap, params ? params : {});
     /*
      * 3. 计算 inputParams 中的内部逻辑（mid, pid, target）
@@ -175,6 +157,33 @@ const toRoute = (reference = {}, uri = "", params) => {
     /*
      * 5. 构造最终的路由地址，并执行跳转
      */
+    const normalized = _toQNormalize(normalizedUri, $parameters);
+    const {$router} = reference.props;
+    $router.to(normalized);
+};
+const _toQPart = (queryPart) => {
+    const queryMap = {};
+    if (queryPart) {
+        /*
+         * queryPart格式：p1=v1&&p2=v2
+         */
+        const queryArr = queryPart.split("&");
+        queryArr.map(literal => literal.replace(/ /g, ''))
+            .filter(literal => "" !== literal)
+            .forEach(literal => {
+                const kv = literal.split('=');
+                if (2 === kv.length) {
+                    const key = kv[0];
+                    const value = kv[1];
+                    if (key && value) {
+                        queryMap[key] = value;
+                    }
+                }
+            });
+    }
+    return queryMap;
+}
+const _toQNormalize = (normalizedUri, $parameters = {}) => {
     let calculated = "";
     if (0 <= Object.keys($parameters).length) {
         calculated += "?";
@@ -189,11 +198,29 @@ const toRoute = (reference = {}, uri = "", params) => {
             .forEach(paramName => paramQueue.push(`${paramName}=${$parameters[paramName]}`));
         calculated += paramQueue.join('&');
     }
-    const normalized = normalizedUri + calculated;
-    const {$router} = reference.props;
-    $router.to(normalized);
-};
-
+    return normalizedUri + calculated;
+}
+const toUrl = (uri = "", key, value) => {
+    /*
+     * 1. uri 核心判断
+     *      - basePart：路径中 ? 之前的部分
+     *      - queryPart：路径中 ? 之后的部分
+     */
+    let basePart;
+    let queryPart;
+    if (0 <= uri.indexOf("?")) {
+        basePart = uri.split("?")[0];
+        queryPart = uri.split("?")[1];
+    } else {
+        basePart = uri;
+        queryPart = null;
+    }
+    const queryMap = _toQPart(queryPart);
+    if (key && value) {
+        queryMap[key] = value;
+    }
+    return _toQNormalize(basePart, queryMap);
+}
 /**
  * ## 「引擎」`Ux.isRoute`
  *
@@ -441,6 +468,8 @@ export default {
     toRoute,
     // pid = ???, 挂载 pid 部分
     toPid,
+    //
+    toUrl,
     // 路由是否变化
     isRoute,
 };

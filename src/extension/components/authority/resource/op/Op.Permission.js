@@ -4,7 +4,7 @@ import Ux from 'ux';
 const yiPermPage = (reference) => {
     const state = {};
     // 读取权限组信息
-    const types = Ux.onDatum(reference, "permission.type");
+    const types = Ux.onDatum(reference, "zero.authority");
     /*
          * 构造翻译 permissions 的 DATUM
          * 二义性的 DATUM
@@ -40,7 +40,7 @@ const yuPermPage = (reference) => {
     if ($loading) {
         const state = {};
         // 读取权限组信息
-        const types = Ux.onDatum(reference, "permission.type");
+        const types = Ux.onDatum(reference, "zero.authority");
         Ux.toLoading(() => Ex.authGroups(state, types)
             .then(processed => {
                 // 更新成 false，加载成功的处理

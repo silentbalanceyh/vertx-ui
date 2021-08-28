@@ -22,7 +22,22 @@
                 "event": "rxSave"
             }
         ],
-        "all": "所有属性",
+        "tab": {
+            "type": "card",
+            "defaultActiveKey": "simple",
+            "items": "列选择,simple;列排序,complex"
+        },
+        "page": {
+            "simple": {
+                "all": "所有属性"
+            },
+            "complex": {
+                "titles": [
+                    "备选列",
+                    "已选列"
+                ]
+            }
+        },
         "modal": {
             "success": {
                 "content": "您的个人视图字段已经成功保存！"

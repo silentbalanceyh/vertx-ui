@@ -410,7 +410,11 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
          * 必须配置 ajax.search.uri
          */
         const {options = {}} = reference.state;
-        const uri = options[G.Opt.AJAX_SEARCH_URI];
+        let uri = options[G.Opt.AJAX_SEARCH_URI];
+        const module = options[G.Opt.AJAX_MODULE];
+        if (module) {
+            uri = Ux.toUrl(uri, "module", options.identifier)
+        }
         return Ux.ajaxPost(uri, params);
     });
 /**
@@ -543,7 +547,11 @@ const rxBatchDelete = (reference) => (event) => {
  */
 const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($selected = []) => {
     const {options = {}} = reference.state;
-    const uri = options[G.Opt.AJAX_BATCH_UPDATE_URI];
+    let uri = options[G.Opt.AJAX_BATCH_UPDATE_URI];
+    const module = options[G.Opt.AJAX_MODULE];
+    if (module) {
+        uri = Ux.toUrl(uri, "module", options[G.Opt.IDENTIFIER])
+    }
     return Ux.ajaxPut(uri, params);
 }, {name: "rxBatchEdit", reset: true, message: G.Opt.MESSAGE_BATCH_UPDATE});
 // =====================================================
@@ -582,7 +590,10 @@ const rxColumn = (reference, config = {}) => Cm.switcher(reference, 'rxColumn',
              * 动态配置
              */
             const uri = options[G.Opt.AJAX_COLUMN_FULL];
-            params.module = options[G.Opt.IDENTIFIER];
+            // MODULE
+            if (options[G.Opt.AJAX_MODULE]) {
+                params.module = options[G.Opt.IDENTIFIER];
+            }
             return Ux.ajaxGet(uri, params);
         } else {
             /*
@@ -614,7 +625,10 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
              * 动态配置
              */
             const uri = options[G.Opt.AJAX_COLUMN_MY];
-            params.module = options[G.Opt.IDENTIFIER];
+            // MODULE
+            if (options[G.Opt.AJAX_MODULE]) {
+                params.module = options[G.Opt.IDENTIFIER];
+            }
             return Ux.ajaxGet(uri, params);
         }
     });
@@ -631,11 +645,14 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
  * @returns {Function} 生成函数
  */
 const rxColumnSave = (reference, consumer = {}) => Cm.switcher(reference, 'rxColumnSave',
-    (params = []) => {
+    (projection = []) => {
         const {options = {}} = reference.state;
         /* 当前组件中的状态定义 */
         const uri = options[G.Opt.AJAX_COLUMN_SAVE];
-        return Ux.ajaxPut(uri, params);
+        return Ux.ajaxPut(uri, {
+            // 此处只更新projection
+            projection
+        }).then(data => Ux.promise(data.projection));
     }
 );
 /**
@@ -674,9 +691,14 @@ const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
          * 本次更新列为 $columnsMy
          * $calculated 为计算的保留列信息，该列在 table 中会用来更新 table.columns 的信息
          */
-        const $columnsOfMy = Ux.immutable($columnsMy);
-        const $calculated = $columns
-            .filter(column => $columnsOfMy.contains(column.dataIndex));
+        const $calculated = [];
+
+        $columnsMy.forEach(field => {
+            const column = Ux.elementUnique($columns, 'dataIndex', field);
+            if (column) {
+                $calculated.push(column);
+            }
+        })
         table = Ux.clone(table);
         table.columns = $calculated;
         state.table = table;// 修改 table 中专用的 table.
@@ -824,13 +846,17 @@ const rxSelected = (reference) => ($selected = [], $data = []) => {
 const rxExport = (reference) => (params = {}) => {
     if (!Ux.isEmpty(params)) {
         const {options = {}} = reference.state;
-        const uri = options[G.Opt.AJAX_EXPORT_URI];
+        let uri = options[G.Opt.AJAX_EXPORT_URI];
         const query = Ux.qrInherit(reference);
         /*
          * 带搜索条件导出
          */
         if (query.criteria) {
             params.criteria = Ux.clone(query.criteria);
+        }
+        const module = options[G.Opt.AJAX_MODULE];
+        if (module) {
+            uri = Ux.toUrl(uri, "module", options[G.Opt.IDENTIFIER])
         }
         return Ux.ajaxPull(uri, params);
     }
@@ -852,7 +878,11 @@ const rxExport = (reference) => (params = {}) => {
 const rxImport = (reference) => (file) => {
     if (file) {
         const {options = {}} = reference.state;
-        const uri = options[G.Opt.AJAX_IMPORT_URI];
+        let uri = options[G.Opt.AJAX_IMPORT_URI];
+        const module = options[G.Opt.AJAX_MODULE];
+        if (module) {
+            uri = Ux.toUrl(uri, "module", options[G.Opt.IDENTIFIER])
+        }
         return Ux.ajaxUpload(uri, file);
     } else {
         console.error("上传文件有问题，请检查！", file);

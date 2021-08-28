@@ -59,6 +59,18 @@ const vOp = {
             component: 'extra.column'
         }
     },
+    "op.extra.view": {
+        key: 'opView',
+        type: 'default',
+        icon: 'double-left',
+        className: 'ux-spec',
+        plugin: {
+            tooltip: true,
+            drawer: 'window.extra.view',     // Popover 专用
+            componentType: 'ExEditorView',        // 组件类型
+            component: 'extra.view'
+        }
+    },
     'op.extra.export': {
         icon: 'export',
         key: 'opExport',

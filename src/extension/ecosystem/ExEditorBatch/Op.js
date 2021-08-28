@@ -3,8 +3,8 @@ import Ex from "ex";
 
 const rxSubmit = (reference) => (event) => {
     Ux.prevent(event);
-    const {$data = []} = reference.state;
-    const {$selected = [], config = {}} = reference.props;
+    const {$data = [], $combine = {}} = reference.state;
+    const {$selected = []} = reference.props;
     /*
      * 验证是否完整
      */
@@ -35,7 +35,7 @@ const rxSubmit = (reference) => (event) => {
                     /*
                      * 成功消息
                      */
-                    Ux.messageSuccess(config);
+                    Ux.messageSuccess($combine);
                     /*
                      * 关闭窗口
                      */
@@ -46,7 +46,7 @@ const rxSubmit = (reference) => (event) => {
             console.error("[ Ex ] 运行时错误，$selected 为空！");
         }
     } else {
-        Ux.messageFailure(config);
+        Ux.messageFailure($combine);
     }
 }
 const rxAdd = (reference) => (event) => {
@@ -92,8 +92,8 @@ const yoTable = (reference) => {
 }
 const yoButton = (reference) => {
     const buttons = {};
-    const {config = {}} = reference.props;
-    buttons.id = config.button;
+    const {$combine = {}} = reference.state;
+    buttons.id = $combine.button;
     buttons.className = "ux-hidden";
     buttons.onClick = rxSubmit(reference);
     return buttons;

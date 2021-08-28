@@ -8,7 +8,7 @@
             "method": "POST",
             "magic": {
                 "$body": [
-                    "permission.type"
+                    "zero.authority"
                 ]
             },
             "group": "type"

@@ -1072,7 +1072,42 @@ const elementWrap = (array = [], fromIndex, toIndex) => {
     }
     return array;
 }
-
+/**
+ * ## 「标准」`Ux.elementUp`
+ *
+ * 在排序中上移
+ *
+ * @memberOf module:_element
+ * @param {Array} array 被查找的数组
+ * @param {String} field 字段名
+ * @param {any} value 字段值
+ * @returns {Number} 找到的索引
+ */
+const elementUp = (array = [], value, field) => {
+    const result = Abs.clone(array);
+    const index2 = elementIndex(array, value, field);
+    const index1 = index2 - 1;
+    result[index1] = result.splice(index2, 1, result[index1])[0];
+    return result;
+}
+/**
+ * ## 「标准」`Ux.elementUp`
+ *
+ * 在排序中下移
+ *
+ * @memberOf module:_element
+ * @param {Array} array 被查找的数组
+ * @param {String} field 字段名
+ * @param {any} value 字段值
+ * @returns {Number} 找到的索引
+ */
+const elementDown = (array = [], value, field) => {
+    const result = Abs.clone(array);
+    const index1 = elementIndex(array, value, field);
+    const index2 = index1 + 1;
+    result[index1] = result.splice(index2, 1, result[index1])[0];
+    return result;
+}
 
 /**
  * ## 「标准」`Ux.elementFlat`
@@ -1735,6 +1770,8 @@ export default {
     elementMap,
     elementGroup,
     elementGrid,
+    elementUp,
+    elementDown,
     // 树操作
     elementBranch,
     elementParent,

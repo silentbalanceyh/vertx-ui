@@ -6,7 +6,7 @@
             [
                 {
                     "metadata": "type,类型,,,aiSelect",
-                    "optionJsx.config.datum": "source=permission.type,value=key,label=name",
+                    "optionJsx.config.datum": "source=zero.authority,value=key,label=name",
                     "optionJsx.config.datumSort": {
                         "field": "name",
                         "asc": true

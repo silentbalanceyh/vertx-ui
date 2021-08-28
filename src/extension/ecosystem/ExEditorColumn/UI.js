@@ -2,7 +2,7 @@ import React from 'react';
 import Event from './Op';
 import Ex from 'ex';
 import Ux from 'ux';
-import {Checkbox} from "antd";
+import {Checkbox, Tabs, Transfer} from "antd";
 import {LoadingAlert} from "web";
 
 /**
@@ -28,7 +28,7 @@ const componentInit = (reference) => {
     const $combine = Ex.yiCombine(reference, config);
     const state = {};
     state.$combine = $combine;
-    const {notice} = $combine;
+    const {notice, tab = {}, page = {}} = $combine;
     state.$notice = Ux.clone(notice);
     const {$columns = []} = $combine;
     state.$options = $columns.map(column => {
@@ -57,7 +57,6 @@ const componentInit = (reference) => {
         }
         return button;
     });
-    state.$ready = true;
     /*
      * Group专用
      */
@@ -70,6 +69,18 @@ const componentInit = (reference) => {
     };
     group.className = "group";
     state.$group = group;
+    /*
+     * Tab
+     */
+    const $tab = Ux.configTab(reference, tab);
+    $tab.onTabClick = Event.rxActive(reference)
+    state.$tab = $tab;
+    if (page.complex) {
+        page.complex.render = Ex.jsxItemTransfer(reference);
+        page.complex.onChange = Event.action.rxChange(reference);
+    }
+    state.$page = page;
+    state.$ready = true;
     reference.setState(state);
 };
 const componentUp = (reference, virtualRef) => {
@@ -83,8 +94,65 @@ const componentUp = (reference, virtualRef) => {
     }
     if (!$visible && $visiblePre) {
         // 关闭
-        reference.setState({$selected: []});
+        reference.setState({$selected: [], $activeKey: "simple"});
     }
+}
+
+const renderComplex = (reference, config = {}) => {
+    const {
+        $options = [], $selected = [],
+    } = reference.state;
+    return (
+        <div key={"complex"} className={"transfer"}>
+            <Transfer {...config}
+                      targetKeys={$selected}
+                      dataSource={$options}/>
+        </div>
+    )
+}
+
+const renderSimple = (reference, config = {}) => {
+    const {
+        $options = [], $selected = [], $combine = {}, $group = {},
+    } = reference.state;
+
+    /*
+     * 选项处理
+     */
+    const group = Ux.clone($group);
+    group.value = $selected;
+    const style = Ux.toGrid($combine);
+    const {all} = config;
+    return (
+        <div key={"simple"}>
+            <Checkbox.Group {...group}>
+                {$options.map(item => (
+                    <div style={style} key={item.key} className={"item"}>
+                        <Checkbox key={item.key} value={item.key}>
+                            {item.label}
+                        </Checkbox>
+                    </div>
+                ))}
+            </Checkbox.Group>
+            {all ? (
+                <div className={"all"}>
+                    <Checkbox onChange={() => {
+                        if ($selected.length < $options.length) {
+                            const $values = $options.map(item => item.value);
+                            reference.setState({$selected: $values})
+                        } else {
+                            reference.setState({$selected: []});
+                        }
+                    }} checked={$selected.length === $options.length}>{all}</Checkbox>
+                </div>
+            ) : false}
+        </div>
+    )
+}
+
+const RENDER = {
+    simple: renderSimple,
+    complex: renderComplex
 }
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
@@ -113,46 +181,28 @@ class Component extends React.PureComponent {
              * 根据核心状态处理
              */
             const {
-                $buttons = [], $options = [],
-                $submitting = false,
-                $group = {}, $selected = [],
-                $combine = {}, $notice
+                $buttons = [],
+                $submitting = false, $notice,
+                $tab = {}, $page = {},
+                $activeKey = "simple"
             } = this.state;
 
             const buttons = Ux.clone($buttons);
             buttons.forEach(button => button.loading = $submitting);
-            /*
-             * 选项处理
-             */
-            const group = Ux.clone($group);
-            group.value = $selected;
-            const style = Ux.toGrid($combine);
-            const {all} = $combine;
+
+            const {items = [], ...rest} = $tab;
             return (
                 <div className={"ex-editor-dialog"}>
                     <div className={"checked-content"}>
                         <LoadingAlert $alert={$notice}/>
-                        <Checkbox.Group {...group}>
-                            {$options.map(item => (
-                                <div style={style} key={item.key} className={"item"}>
-                                    <Checkbox key={item.key} value={item.key}>
-                                        {item.label}
-                                    </Checkbox>
-                                </div>
+                        <Tabs {...rest} activeKey={$activeKey}>
+                            {items.map(item => (
+                                <Tabs.TabPane {...item}>
+                                    {Ux.isFunction(RENDER[item.key])
+                                        ? RENDER[item.key](this, $page[item.key]) : false}
+                                </Tabs.TabPane>
                             ))}
-                        </Checkbox.Group>
-                        {all ? (
-                            <div className={"all"}>
-                                <Checkbox onChange={() => {
-                                    if ($selected.length < $options.length) {
-                                        const $values = $options.map(item => item.value);
-                                        this.setState({$selected: $values})
-                                    } else {
-                                        this.setState({$selected: []});
-                                    }
-                                }} checked={$selected.length === $options.length}>{all}</Checkbox>
-                            </div>
-                        ) : false}
+                        </Tabs>
                     </div>
                     <div className={"button-active"}>
                         {/* 特殊按钮操作 */}

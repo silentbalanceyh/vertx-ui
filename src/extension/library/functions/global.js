@@ -76,6 +76,7 @@ export default {
         SEARCH_OP_ADVANCED: 'search.op.advanced',           /* 提示文字：高级搜索 */
         SEARCH_CONFIRM_CLEAR: 'search.confirm.clear',       /* 清除专用消息提示 */
 
+        AJAX_MODULE: 'ajax.module',                         /* 是否启用 module 参数 */
         // 主函数
         AJAX_SEARCH_URI: 'ajax.search.uri',                 /* 查询引擎，必须Post */
         AJAX_COLUMN_FULL: 'ajax.column.full',               /* 全列读取 */

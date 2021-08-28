@@ -17,6 +17,31 @@
     }
 
     &-dialog {
+        .transfer {
+            width: 100%;
+            padding-top: 6px;
+            padding-bottom: 6px;
+
+            .ant-transfer {
+
+                &-list {
+                    width: 46%;
+                }
+
+                &-operation {
+                    min-width: 24px;
+                    width: 24px;
+                }
+            }
+
+            .left {
+                overflow: hidden;
+            }
+
+            .right {
+                float: right;
+            }
+        }
 
         .group {
             width: 100%;
@@ -41,6 +66,15 @@
         .button {
             width: 100%;
             text-align: center;
+        }
+
+        .input {
+            margin: 6px;
+
+            .input-label {
+                text-align: right;
+                line-height: 32px;
+            }
         }
 
         .button-active {

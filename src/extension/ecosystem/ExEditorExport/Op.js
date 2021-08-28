@@ -6,14 +6,13 @@ import Plugin from 'plugin';
 const rxExport = (reference) => (event) => {
     Ux.prevent(event);
     Ex.rx(reference).submitting();
-    const {$selected = []} = reference.state;
-    const {config = {}} = reference.props;
+    const {$selected = [], $combine, $filename} = reference.state;
     if (0 === $selected
         .filter(item => "key" !== item).length) {
         /*
          * 错误信息
          */
-        Ux.messageFailure(config);
+        Ux.messageFailure($combine);
         /*
          * rxSubmitting提交
          */
@@ -24,9 +23,6 @@ const rxExport = (reference) => (event) => {
             /*
              * 按钮专用提交函数
              */
-            if (!$selected.includes("key")) {
-                $selected.unshift("key");
-            }
             const params = {
                 columns: $selected,
                 format: 'xlsx',     // 暂时的默认格式
@@ -35,11 +31,15 @@ const rxExport = (reference) => (event) => {
                 /*
                  * 下载保存文件
                  */
-                let baseFile = `${Ux.valueNow('YYYY-MM-DD-HHmmss')}.${params.format}`
-                if (Plugin.Function && Ux.isFunction(Plugin.Function.yiPluginExport)) {
-                    baseFile = Plugin.Function.yiPluginExport(reference, {
+                let baseFile = `${Ux.valueNow('YYYY-MM-DD-HHmmss')}.${params.format}`;
+                if (Plugin.Function && Ux.isFunction(Plugin.Function['yiPluginExport'])) {
+                    baseFile = Plugin.Function['yiPluginExport'](reference, {
                         filename: baseFile
                     })
+                } else {
+                    if ($filename) {
+                        baseFile = `${$filename}.${params.format}`;
+                    }
                 }
                 saveAs(response, baseFile);
                 Ux.toLoading(() => {
@@ -55,8 +55,7 @@ const rxExport = (reference) => (event) => {
                     /*
                      * 消息提示
                      */
-                    const {config = {}} = reference.props;
-                    Ux.messageSuccess(config);
+                    Ux.messageSuccess($combine);
                 })
             }).catch(error => {
                 console.error(error);
@@ -66,6 +65,31 @@ const rxExport = (reference) => (event) => {
         }
     }
 };
+const rxChange = (reference) => (targetKeys, direction, moveKeys = []) => {
+    const {$selected = []} = reference.state;
+    let selected = [];
+    if ("right" === direction) {
+        // 往右，直接追加，注意顺序
+        selected = Ux.clone($selected);
+        moveKeys.forEach(moveKey => selected.push(moveKey));
+    } else {
+        // 往左
+        const $moved = Ux.immutable(moveKeys);
+        $selected.forEach(each => {
+            if (!$moved.contains(each)) {
+                selected.push(each);
+            }
+        })
+    }
+    reference.setState({$selected: selected})
+}
+const rxInput = (reference) => (event) => {
+    const value = Ux.ambEvent(event);
+    reference.setState({$filename: value});
+}
 export default {
-    rxExport
+    rxExport,
+
+    rxChange,
+    rxInput
 }

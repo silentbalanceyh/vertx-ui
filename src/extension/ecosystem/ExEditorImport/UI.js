@@ -123,7 +123,6 @@ class Component extends React.PureComponent {
                     </Row>
                 </div>
             );
-            ;
         }, Ex.parserOfColor("ExEditorImport").private());
     }
 }

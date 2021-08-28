@@ -397,7 +397,7 @@ const yiColumn = (reference, initState = {}, $data = []) => {
  *          "method": "POST",
  *          "magic": {
  *              "$body": [
- *                  "permission.type",
+ *                  "zero.authority",
  *                  "member.card"
  *              ]
  *          },

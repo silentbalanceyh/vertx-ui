@@ -181,25 +181,17 @@ const configColumn = (original = [], config = {}) => {
      */
     const normalized = Ux.clone(original).concat(columns);
     const resultColumns = [];
-
-    normalized
-        .map(column => Ux.valueLadder(column))
-        /*
-         * 按照 $projections 计算，包含了的放到 MyColumns 中
-         */
-        .filter(column => {
-            if (0 === projections.length) {
-                // 为 0 不过滤
-                return true;
-            } else {
-                // 不为 0 的时候过滤
-                const $projections = Ux.immutable(projections);
-                return $projections.contains(column.dataIndex)
+    if (0 === projections.length) {
+        return normalized;
+    } else {
+        projections.forEach(key => {
+            const column = Ux.elementUnique(normalized, 'dataIndex', key);
+            if (column) {
+                resultColumns.push(column);
             }
         })
-        .forEach(column => resultColumns.push(column));
-
-    return resultColumns;
+        return resultColumns;
+    }
 };
 /**
  * ## 「配置」`Ex.configGrid`

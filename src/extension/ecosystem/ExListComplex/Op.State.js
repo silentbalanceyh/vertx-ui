@@ -5,6 +5,7 @@ import ExEditorExport from "../ExEditorExport/UI";
 import ExEditorBatch from "../ExEditorBatch/UI";
 import ExEditorColumn from "../ExEditorColumn/UI";
 import ExEditorImport from "../ExEditorImport/UI";
+import ExEditorView from '../ExEditorView/UI';
 /*
  * 权限控制专用解析
  */
@@ -49,7 +50,8 @@ const PluginStd = {
     ExEditorExport,
     ExEditorBatch,
     ExEditorColumn,
-    ExEditorImport
+    ExEditorImport,
+    ExEditorView
 }
 const asyncOp = (reference, config = {}, state) => {
     const {options = {}, component = {}} = config;

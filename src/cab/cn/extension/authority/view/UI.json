@@ -12,10 +12,10 @@
         "type": "card",
         "defaultActiveKey": "rule.category.definition",
         "items": [
-            "分类权限,rule.category.definition",
             "列表权限,rule.list.column.definition",
             "表单权限,rule.form.field.definition",
-            "操作权限,rule.op.definition"
+            "操作权限,rule.op.definition",
+            "分类权限,rule.category.definition"
         ]
     },
     "_subtabsExtra": {

@@ -79,6 +79,7 @@ const Order = {
     ],
     "op.extra": [
         "op.extra.column",
+        "op.extra.view",
         "op.extra.export",
         "op.extra.import"
     ],
