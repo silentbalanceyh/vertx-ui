@@ -4,12 +4,12 @@ import React from "react";
 
 const renderComplex = (reference, config = {}) => {
     const {
-        $options = [], $selected = [],
+        $options = [], $selectedKeys = [],
     } = reference.state;
     return (
-        <div key={"complex"} className={"transfer"}>
+        <div key={"complex"} className={"ux-transfer"}>
             <Transfer {...config}
-                      targetKeys={$selected}
+                      targetKeys={$selectedKeys}
                       dataSource={$options}/>
         </div>
     )
@@ -17,14 +17,14 @@ const renderComplex = (reference, config = {}) => {
 
 const renderSimple = (reference, config = {}) => {
     const {
-        $options = [], $selected = [], $combine = {}, $group = {},
+        $options = [], $selectedKeys = [], $combine = {}, $group = {},
     } = reference.state;
 
     /*
      * 选项处理
      */
     const group = Ux.clone($group);
-    group.value = $selected;
+    group.value = $selectedKeys;
     const style = Ux.toGrid($combine);
     const {all} = config;
     return (
@@ -41,13 +41,13 @@ const renderSimple = (reference, config = {}) => {
             {all ? (
                 <div className={"all"}>
                     <Checkbox onChange={() => {
-                        if ($selected.length < $options.length) {
+                        if ($selectedKeys.length < $options.length) {
                             const $values = $options.map(item => item.value);
-                            reference.setState({$selected: $values})
+                            reference.setState({$selectedKeys: $values})
                         } else {
-                            reference.setState({$selected: []});
+                            reference.setState({$selectedKeys: []});
                         }
-                    }} checked={$selected.length === $options.length}>{all}</Checkbox>
+                    }} checked={$selectedKeys.length === $options.length}>{all}</Checkbox>
                 </div>
             ) : false}
         </div>

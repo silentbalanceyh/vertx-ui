@@ -1,5 +1,6 @@
 import React from 'react';
 import Ex from 'ex';
+import Ux from 'ux';
 
 import renderJsx from './Web';
 import Op from "./Op";
@@ -43,7 +44,7 @@ const componentInit = (reference) => {
     /*
      * 搜索配置项解析
      */
-    const {config = {}} = reference.props;
+    const {config = {}, $options = {}} = reference.props;
     /*
      * 状态初始化
      */
@@ -59,6 +60,12 @@ const componentInit = (reference) => {
             /* 4. 高级搜索提示 */
             state.$notice = config[Ex.Opt.SEARCH_ADVANCED_NOTICE];
         }
+    }
+    /*
+     * 窗口
+     */
+    if (config[Ex.Opt.SEARCH_OP_VIEW]) {
+        state.$dialog = Ux.configDialog(reference, $options[Ex.Opt.SEARCH_CRITERIA_WINDOW]);
     }
     state.$ready = true;
     reference.setState(state);

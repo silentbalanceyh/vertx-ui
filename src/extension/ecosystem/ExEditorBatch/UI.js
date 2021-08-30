@@ -3,6 +3,7 @@ import Ex from 'ex';
 import Jsx from './Web';
 import Ux from "ux";
 import Op from "./Op";
+import Rdr from './Web.R';
 
 /**
  * ## 「组件」`ExEditorBatch`
@@ -52,7 +53,6 @@ const yiValue = (reference, config) => {
             // 选中行
             let row = options.filter(option => option.value === record.name);
             // 操作对象
-            const Rdr = Jsx.RENDERS;
 
             if (1 === row.length) {
                 row = row[0];
@@ -92,19 +92,10 @@ const yiOp = (reference, config = {}) => {
         const $columns = Ux.immutable(columns);
         options = options.filter(item => $columns.contains(item.key));
         // ------------- 属性构造 --------------
-        /* 添加 */
-        const left = {};
-        left.icon = 'plus';
-        left.disabled = (index === (options.length - 1));
-        left.onClick = Op.rxAdd(reference);
-        /* 删除 */
-        const right = {};
-        right.icon = 'minus';
-        right.disabled = (0 === index);
-        right.onClick = Op.rxRemove(reference, text);
-        return Jsx.renderOp(reference, {
-            left,
-            right,
+        return Ux.aiRowAR(reference, {
+            indexMax: options.length - 1,
+            dataMax: options.length,
+            index,
         })
     };
     return column;

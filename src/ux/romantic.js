@@ -538,6 +538,8 @@ const sexMessage = (reference, key = "", duration = 1.2) => {
         console.error("[ Ox ] 缺少窗口配置：_modal 或者配置解析出错！")
     }
 }
+const turnOn = () => ({$loading: true, $submitting: true});
+const turnOff = () => ({$loading: false, $submitting: false});
 export default {
     /*
      * 读取配置骚操作
@@ -563,4 +565,9 @@ export default {
 
     sexBatch,
     sexMessage,
+    /*
+     * 开关专用
+     */
+    turnOn,
+    turnOff,
 }

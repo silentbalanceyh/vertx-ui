@@ -847,11 +847,15 @@ const yiLayout = (reference) => {
             startAsync(state)
     ).then(Ux.ready);
 }
-const yiCombine = (reference) => {
+const yiCombine = (reference, extension = {}) => {
     const {config = {}} = reference.props;
     const defaultConfig = Ux.fromHoc(reference, "combine");
-    const $combine = Ux.clone(config);
-    return Ux.assign($combine, defaultConfig, 2);
+    let $combine = Ux.clone(config);
+    $combine = Ux.assign($combine, defaultConfig, 2);
+    if (extension['_combine']) {
+        $combine = Ux.assign($combine, extension['_combine'], 2);
+    }
+    return $combine;
 }
 // List部分的常用两个解析
 

@@ -1526,6 +1526,28 @@ const elementSave = (data = [], item, idField = "key") => {
     }
     return data;
 }
+/**
+ * ## 「标准」`Ux.elementConcat`
+ *
+ * 不重复添加某个元素，按field的执行唯一元素的判定，默认使用`key`字段。
+ *
+ * @memberOf module:_element
+ * @param {Array} original 数组输入源头
+ * @param {Array} current 被输入的记录集
+ * @param {String} field 主键字段
+ * @return {Array} 返回合并后的数组
+ */
+const elementConcat = (original = [], current = [], field) => {
+    if (field) {
+        const exist = original.map(item => item[field]).filter(item => !!item)
+        const start = Abs.clone(original);
+        current.filter(item => !exist.includes(item[field]))
+            .forEach(item => start.push(item));
+        return start;
+    } else {
+        return original.concat(current);
+    }
+}
 // 上层
 
 /**
@@ -1772,6 +1794,7 @@ export default {
     elementGrid,
     elementUp,
     elementDown,
+    elementConcat,
     // 树操作
     elementBranch,
     elementParent,

@@ -74,7 +74,11 @@ export default {
         SEARCH_ADVANCED_NOTICE: 'search.advanced.notice',   /* 高级搜索提示 */
         SEARCH_OP_REDO: 'search.op.redo',                   /* 提示文字：清空 */
         SEARCH_OP_ADVANCED: 'search.op.advanced',           /* 提示文字：高级搜索 */
+        SEARCH_OP_VIEW: 'search.op.view',                   /* 提示文字：查询条件 */
         SEARCH_CONFIRM_CLEAR: 'search.confirm.clear',       /* 清除专用消息提示 */
+        SEARCH_CRITERIA_NOTICE: "search.criteria.notice",   /* 搜索提示 */
+        SEARCH_CRITERIA_WINDOW: "search.criteria.window",   /* 搜索提示窗口 */
+        SEARCH_CRITERIA_VIEW: "search.criteria.view",       /* 查询条件视图 */
 
         AJAX_MODULE: 'ajax.module',                         /* 是否启用 module 参数 */
         // 主函数

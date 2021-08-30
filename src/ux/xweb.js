@@ -998,6 +998,26 @@ const xtRowDel = (reference, record, index) => (event) => {
         return Abs.promise(null);
     }
 }
+const xtTransfer = (reference, callback) => (targetKeys, direction, moveKeys = []) => {
+    const {$selectedKeys = []} = reference.state;
+    let $selected = [];
+    if ("right" === direction) {
+        // 往右，直接追加，注意顺序
+        $selected = Abs.clone($selectedKeys);
+        moveKeys.forEach(moveKey => $selected.push(moveKey));
+    } else {
+        // 往左
+        const $moved = Abs.immutable(moveKeys);
+        $selectedKeys.forEach(each => {
+            if (!$moved.contains(each)) {
+                $selected.push(each);
+            }
+        })
+    }
+    if (Abs.isFunction(callback)) {
+        callback($selected);
+    }
+}
 export default {
     /* Ajax 部分 */
     xtLazyInit,
@@ -1006,6 +1026,7 @@ export default {
 
     xtLazyData,
 
+    xtTransfer,         // Transfer自定义组件专用
     xtChecked,          // 多选专用
 
     // 同一个界面几次挂载

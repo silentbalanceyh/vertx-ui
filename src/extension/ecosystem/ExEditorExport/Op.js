@@ -6,8 +6,8 @@ import Plugin from 'plugin';
 const rxExport = (reference) => (event) => {
     Ux.prevent(event);
     Ex.rx(reference).submitting();
-    const {$selected = [], $combine, $filename} = reference.state;
-    if (0 === $selected
+    const {$selectedKeys = [], $combine, $filename} = reference.state;
+    if (0 === $selectedKeys
         .filter(item => "key" !== item).length) {
         /*
          * 错误信息
@@ -24,7 +24,7 @@ const rxExport = (reference) => (event) => {
              * 按钮专用提交函数
              */
             const params = {
-                columns: $selected,
+                columns: $selectedKeys,
                 format: 'xlsx',     // 暂时的默认格式
             };
             rxExport(params).then(response => {
@@ -65,31 +65,11 @@ const rxExport = (reference) => (event) => {
         }
     }
 };
-const rxChange = (reference) => (targetKeys, direction, moveKeys = []) => {
-    const {$selected = []} = reference.state;
-    let selected = [];
-    if ("right" === direction) {
-        // 往右，直接追加，注意顺序
-        selected = Ux.clone($selected);
-        moveKeys.forEach(moveKey => selected.push(moveKey));
-    } else {
-        // 往左
-        const $moved = Ux.immutable(moveKeys);
-        $selected.forEach(each => {
-            if (!$moved.contains(each)) {
-                selected.push(each);
-            }
-        })
-    }
-    reference.setState({$selected: selected})
-}
 const rxInput = (reference) => (event) => {
     const value = Ux.ambEvent(event);
     reference.setState({$filename: value});
 }
 export default {
     rxExport,
-
-    rxChange,
     rxInput
 }

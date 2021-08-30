@@ -87,6 +87,8 @@ const _jsxChildren = (reference, component = {}, attributes = {}) => {
     if (Component) {
         const inherit = Ux.clone(attributes);
         inherit.rxClose = Ex.rsVisible(reference, false);
+        const {$visible = false} = reference.state;
+        inherit.$opened = $visible;
         return (
             <Component {...Ux.sorterObject(inherit)} config={config}/>
         );

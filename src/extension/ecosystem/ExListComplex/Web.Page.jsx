@@ -23,8 +23,8 @@ const renderJsx = (reference, {
         exchange.search = {span: 9, xl: 9, xxl: 7, className: "ex-extra"};
         exchange.extra = {span: 0, xl: 0, xxl: 0};
     } else {
-        exchange.batch = {span: 10, xl: 10, xxl: 13}
-        exchange.search = {span: 7, xl: 7, xxl: 8};
+        exchange.batch = {span: 9, xl: 9, xxl: 12}
+        exchange.search = {span: 8, xl: 8, xxl: 9};
         exchange.extra = {span: 4, xl: 4, xxl: 3, className: "ex-extra"};
     }
     return (
@@ -40,7 +40,8 @@ const renderJsx = (reference, {
                     {!Ux.isEmpty(search) ? (<ExSearch {...search}/>) : false}
                 </Col>
                 <Col {...exchange.extra}>
-                    {0 < extra.config.length ? (<ExAction {...extra}/>) : false}
+                    {0 < extra.config.length ? (<ExAction {...extra} // 只有 Extra 部分会调用 rxViewMy 函数
+                                                          rxViewMy={($myView) => reference.setState({$myView})}/>) : false}
                 </Col>
             </Row>
             <Row>

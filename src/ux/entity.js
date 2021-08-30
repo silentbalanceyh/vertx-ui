@@ -7,7 +7,7 @@ import Cv from './constant';
 
 import moment from "moment";
 import {createAction} from 'redux-act';
-import {Taper, zero} from "environment";
+import {Langue, Taper, zero} from "environment";
 import {Dsl} from "entity";
 
 const _element = (input, fnExecute) => {
@@ -606,6 +606,12 @@ export default {
      * @returns {StateOut} 返回状态数据。
      */
     dataIn: (state) => Dsl.createOut(state),
+    dataCab: (cab = {}, filename) => {
+        if (cab.ns && filename) {
+            const fullname = cab.ns + "/" + filename;
+            return Langue(fullname);
+        } else return {};
+    },
     /**
      * ## 「标准」`Ux.rxEtat`
      *

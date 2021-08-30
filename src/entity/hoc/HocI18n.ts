@@ -1,5 +1,4 @@
 import {Langue} from "environment";
-import * as U from 'underscore';
 import * as Immutable from 'immutable';
 import Ux from "ux";
 import HocContainer from "./HocContainer";
@@ -34,7 +33,7 @@ class HocI18n implements HocContainer {
     }
 
     mergeVector(path, key, value) {
-        if (this.ready && U.isArray(path) && value) {
+        if (this.ready && Ux.isArray(path) && value) {
             let $hoc = Immutable.fromJS(this.lg);
             // 修正第一路径
             if (path[0] && !path[0].startsWith("_")) {
@@ -44,7 +43,7 @@ class HocI18n implements HocContainer {
             let $target = $hoc.getIn(path);
             if ($target && $target.toJS) {
                 $target = $target.toJS();
-                if (U.isObject(value)) {
+                if (Ux.isObject(value)) {
                     // 遍历value
                     for (const field in value) {
                         if (value.hasOwnProperty(field) &&

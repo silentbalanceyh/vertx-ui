@@ -19,6 +19,43 @@ const _nextConfirm = (reference) => {
 };
 
 const Event = {
+    onViewPre: (reference) => (updated = {}) => {
+        const $filters = Ux.clone(updated);
+        reference.setState({$filters});
+    },
+    opViewSave: (reference) => (event) => {
+        Ux.prevent(event);
+        const {config = {}} = reference.props;
+        const fnExecutor = () => {
+            const {rxFilterSave} = reference.props;
+            if (Ux.isFunction(rxFilterSave)) {
+                let {$filters} = reference.state;
+                $filters = Ux.clone($filters);          // 强制刷新
+                rxFilterSave($filters).then(updated => {
+                    const {rxFilter} = reference.props;
+                    if (Ux.isFunction(rxFilter)) {
+                        rxFilter(updated, {});
+                    }
+                    // 关闭当前窗口
+                    reference.setState({$visibleQ: false});
+                });
+            }
+        }
+        const view = config[Ex.Opt.SEARCH_CRITERIA_VIEW];
+        if (view.confirm) {
+            Modal.confirm({
+                content: view.confirm,
+                onOk: fnExecutor
+            })
+        } else {
+            fnExecutor()
+        }
+    },
+    onShow: (reference) => (event) => {
+        Ux.prevent(event);
+        const {rxFilterData = () => ({})} = reference.props;
+        reference.setState({$visibleQ: true, $filters: rxFilterData()});
+    },
     onSearch: (reference) => (searchText) => {
         const {config = {}} = reference.props;
         const cond = config[Ex.Opt.SEARCH_COND];

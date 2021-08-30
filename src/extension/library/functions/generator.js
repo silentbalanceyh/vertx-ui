@@ -52,6 +52,7 @@ const seek = (reference, fnName, config = {}) => (args) => {
                     /* 没找到的情况，直接从 state 中读取 */
                     fun = reference.state[fnName];
                     if (Ux.isFunction(fun)) {
+                        /* 补充当前状态改变 */
                         return fun.apply(this, [].concat(args));
                     } else {
                         const message = `[ Ex ] ${fnName} 函数出错！`;
@@ -372,51 +373,7 @@ const rxTabOpen = (reference) => (key, data = {}, record) => {
     reference.setState({tabs, ...view, $inited: data});
     rx(reference).openPost(data);
 };
-// =====================================================
-// 搜索
-// =====================================================
-/**
- * ## 「2阶」`Ex.rxSearch`
- *
- * ### 1.基本介绍
- *
- * 搜索专用函数（列表组件主函数），它根据`ajax.search.uri`执行搜索，参数格式如：
- *
- * ```json
- * {
- *     "criteria": {},
- *     "sorter": [],
- *     "pager":{
- *         "page": 1,
- *         "size": 10
- *     },
- *     "projection": []
- * }
- * ```
- *
- * 参数格式参考Qr的格式语法。
- *
- * ### 2.核心
- *
- * 内置调用了`switcher`执行从状态state到属性props中的函数检索，检索合法时调用该函数，无法找到函数则抛出异常。
- *
- * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
- * @returns {Function} 生成函数
- */
-const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
-    (params) => {
-        /*
-         * 必须配置 ajax.search.uri
-         */
-        const {options = {}} = reference.state;
-        let uri = options[G.Opt.AJAX_SEARCH_URI];
-        const module = options[G.Opt.AJAX_MODULE];
-        if (module) {
-            uri = Ux.toUrl(uri, "module", options.identifier)
-        }
-        return Ux.ajaxPost(uri, params);
-    });
+
 /**
  * ## 「2阶」`Ex.rxCondition`
  *
@@ -625,9 +582,14 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
              * 动态配置
              */
             const uri = options[G.Opt.AJAX_COLUMN_MY];
-            // MODULE
+            // module 参数
             if (options[G.Opt.AJAX_MODULE]) {
                 params.module = options[G.Opt.IDENTIFIER];
+            }
+            // view 参数
+            const {$myView = {}} = reference.state;
+            if ("DEFAULT" !== $myView.name) {
+                params.view = $myView.name;
             }
             return Ux.ajaxGet(uri, params);
         }
@@ -641,20 +603,91 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
  *
  * @memberOf module:_rx
  * @param {ReactComponent} reference React对应组件引用
- * @param {Object} consumer 后置函数，用于执行保存过后的回调
  * @returns {Function} 生成函数
  */
-const rxColumnSave = (reference, consumer = {}) => Cm.switcher(reference, 'rxColumnSave',
+const rxColumnSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
     (projection = []) => {
         const {options = {}} = reference.state;
         /* 当前组件中的状态定义 */
-        const uri = options[G.Opt.AJAX_COLUMN_SAVE];
+        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
+        // view 参数
+        const {$myView = {}} = reference.state;
+        if ("DEFAULT" !== $myView.name) {
+            uri = Ux.toUrl(uri, 'view', $myView.name);
+        }
         return Ux.ajaxPut(uri, {
             // 此处只更新projection
             projection
-        }).then(data => Ux.promise(data.projection));
+        }).then(data => Ux.promise(data['projection']));
     }
 );
+const rxFilterSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
+    (criteria = {}) => {
+        const {options = {}} = reference.state;
+        /* 当前组件中的状态定义 */
+        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
+        // view 参数
+        const {$myView = {}} = reference.state;
+        if ("DEFAULT" !== $myView.name) {
+            uri = Ux.toUrl(uri, 'view', $myView.name);
+        }
+        return Ux.ajaxPut(uri, {
+            // 此处只更新projection
+            criteria
+        }).then(data => Ux.promise(data['criteria']));
+    }
+);
+// =====================================================
+// 搜索
+// =====================================================
+/**
+ * ## 「2阶」`Ex.rxSearch`
+ *
+ * ### 1.基本介绍
+ *
+ * 搜索专用函数（列表组件主函数），它根据`ajax.search.uri`执行搜索，参数格式如：
+ *
+ * ```json
+ * {
+ *     "criteria": {},
+ *     "sorter": [],
+ *     "pager":{
+ *         "page": 1,
+ *         "size": 10
+ *     },
+ *     "projection": []
+ * }
+ * ```
+ *
+ * 参数格式参考Qr的格式语法。
+ *
+ * ### 2.核心
+ *
+ * 内置调用了`switcher`执行从状态state到属性props中的函数检索，检索合法时调用该函数，无法找到函数则抛出异常。
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
+const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
+    (params) => {
+        /*
+         * 必须配置 ajax.search.uri
+         */
+        const {options = {}} = reference.state;
+        let uri = options[G.Opt.AJAX_SEARCH_URI];
+        const module = options[G.Opt.AJAX_MODULE];
+        if (module) {
+            uri = Ux.toUrl(uri, "module", options.identifier)
+        }
+        // view 参数
+        const {$myView = {}} = reference.state;
+        if ("DEFAULT" !== $myView.name) {
+            uri = Ux.toUrl(uri, 'view', $myView.name);
+        }
+
+        return Ux.ajaxPost(uri, params);
+    });
 /**
  * ## 「2阶」`Ex.rxProjection`
  *
@@ -1011,6 +1044,7 @@ const rx = (reference, off = false) => ({
         Cm.seek(reference, 'doSubmitting', ARGS)([submitting, addOn]),
     submittingStrict: (submitting = true, addOn = {}) =>
         Cm.seek(reference, 'doSubmitting')([submitting, addOn]),
+    // ------------- 新方（双提交）-------------
 });
 // =====================================================
 // 扩展专用函数
@@ -1325,6 +1359,7 @@ export default {
     /* 可外置传入 */ rxColumn,
     /* 可外置传入 */ rxColumnMy,
     /* 可外置传入 */ rxColumnSave,
+    /* 可外置传入 */ rxFilterSave,
     /* 回调修改状态专用 */ rxProjection,
 
 
@@ -1334,7 +1369,7 @@ export default {
     rxView,
     // 文件导入导出
     rxExport,
-    rxImport,
+    rxImport
 }
 
 /**

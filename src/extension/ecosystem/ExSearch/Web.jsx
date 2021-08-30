@@ -1,10 +1,11 @@
 import Op from './Op';
 import React from 'react';
 import Ex from 'ex';
-import {Button, Drawer, Input, Tooltip} from 'antd';
+import {Button, Drawer, Input, Modal, Tooltip} from 'antd';
 import Ux from "ux";
 import {LoadingAlert} from "web";
 import './Cab.less';
+import QxCriteria from "../QxCriteria/UI";
 
 const _renderNotice = (reference) => {
     const {$notice} = reference.state;
@@ -33,6 +34,35 @@ const renderDrawer = (reference) => {
     } else return false;
 }
 
+const renderCriteria = (reference) => {
+    const {
+        config = {}
+    } = reference.props;
+    /*
+     * 查询条件
+     */
+    const {$dialog = {}, $visibleQ = false} = reference.state;
+    $dialog.visible = $visibleQ;
+    $dialog.onCancel = () => reference.setState({$visibleQ: false});
+    /*
+     * 查询提示
+     */
+    const view = config[Ex.Opt.SEARCH_CRITERIA_VIEW];
+    const {$filters = {}} = reference.state;
+    return (
+        <Modal {...$dialog}>
+            {Ux.aiViewMy(view, reference)}
+            <div>
+                <QxCriteria reference={reference} config={{
+                    field: config.field,
+                }} value={$filters} onChange={Op.onViewPre(reference)}/>
+            </div>
+            <Button className={"ux-hidden"} id={$dialog.__onOk}
+                    onClick={Op.opViewSave(reference)}/>
+        </Modal>
+    );
+}
+
 const _renderInput = (reference) => {
     const {$search, searchText} = reference.state;
     return (
@@ -55,44 +85,47 @@ const _renderTooltip = (title, fnRender) => {
 const _renderRedo = (reference) => {
     const {config = {}, $disableClear = false} = reference.props;
     const title = config[Ex.Opt.SEARCH_OP_REDO];
-    const advanced = Op.isAdvanced(reference);
     return _renderTooltip(title, () => (
         <Button icon={"redo"} htmlType={"button"}
-                className={advanced ? "search-right" : "search-clean"}
                 disabled={$disableClear}
                 onClick={Op.onClear(reference)}/>
     ));
 };
-
+const _renderView = (reference) => {
+    const {config = {}} = reference.props;
+    const view = config[Ex.Opt.SEARCH_OP_VIEW];
+    if (view) {
+        const attrs = {}
+        attrs.className = "ux-spec";
+        return _renderTooltip(view, () => (
+            <Button icon={"fullscreen"} {...attrs}
+                    onClick={Op.onShow(reference)}/>
+        ))
+    } else return false;
+}
 const _renderAdvanced = (reference) => {
     const {config = {}} = reference.props;
     const title = config[Ex.Opt.SEARCH_OP_ADVANCED];
+    const advanced = Op.isAdvanced(reference);
     return _renderTooltip(title, () => (
         <Button icon={"filter"} htmlType={"button"}
+                className={advanced ? "search-right" : "search-clean"}
                 onClick={Ex.rsVisible(reference)}/>
     ))
 };
-
-const _renderButtons = (reference) => (
-    <Button.Group className={"ex-search"}>
-        {_renderAdvanced(reference)}
-        {_renderRedo(reference)}
-        {Ux.anchorSearch(reference)}
-    </Button.Group>
-);
 
 export default (reference) =>
     Op.isSearch(reference) ? (
         <span>
             {_renderInput(reference)}
             &nbsp;&nbsp;
-            {Op.isAdvanced(reference) ?
-                _renderButtons(reference) :
-                false
-            }
-            {Op.isAdvanced(reference) ?
-                renderDrawer(reference) :
-                false
-            }
+            <Button.Group className={"ex-search"}>
+                {_renderView(reference)}
+                {Op.isAdvanced(reference) ? _renderRedo(reference) : false}
+                {Op.isAdvanced(reference) ? _renderAdvanced(reference) : false}
+                {Op.isAdvanced(reference) ? Ux.anchorSearch(reference) : false}
+            </Button.Group>
+            {renderCriteria(reference)}
+            {Op.isAdvanced(reference) ? renderDrawer(reference) : false}
         </span>
     ) : false;

@@ -109,6 +109,23 @@ const componentInit = (reference) => {
             .then(state => Op.ready(reference, state));           /* W04: 处理准备状态 */
     }
 };
+const componentView = (reference, previous) => {
+    const state = reference.state;
+    const prevState = previous.prevState;
+    const $viewChecked = Ex.upValue(state, prevState, "$myView");
+    if ($viewChecked) {
+        /*
+         * 列发生修改，则更新列信息
+         */
+        const {options, table} = reference.state;
+        Ex.yiListView(reference, {options, table}, state)
+            .then(table => Ux.promise(state, 'table', table))
+            .then(state => {
+                state.$dirty = true;
+                reference.setState(Ux.clone(state));
+            });
+    }
+}
 const componentUp = (reference, previous = {}) => {
     /*
      * 默认 $query 变量的修改（外置传入）
@@ -143,6 +160,7 @@ const componentUp = (reference, previous = {}) => {
             updatedState.$selected = [];
             reference.setState(updatedState);
         }
+        componentView(reference, previous);
     }
 };
 

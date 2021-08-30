@@ -59,7 +59,7 @@ const componentInit = (reference) => {
     /*
      * 默认全选
      */
-    state.$selected = $columnsMy.filter(item => "key" !== item);
+    state.$selectedKeys = $columnsMy.filter(item => "key" !== item);
     state.$options = $options;
     /*
      * 按钮专用选项
@@ -74,8 +74,9 @@ const componentInit = (reference) => {
     /*
      * 穿梭框
      */
-    transfer.render = Ex.jsxItemTransfer(reference)
-    transfer.onChange = Event.rxChange(reference);
+    transfer.render = (item) => Ux.aiItemTransfer(item, reference);
+    transfer.onChange = Ux.xtTransfer(reference,
+        ($selectedKeys = []) => reference.setState({$selectedKeys}));
     state.$transfer = transfer;
     /*
      * 文件名设置
@@ -109,7 +110,7 @@ class Component extends React.PureComponent {
              */
             const {
                 $button = {},                       // 隐藏按钮
-                $options = [], $selected = [],     // 数据源和选中项
+                $options = [], $selectedKeys = [],     // 数据源和选中项
                 $submitting = false,                // 提交状态
                 $notice = {},                       // 提示
                 $transfer = {},                     // 穿梭框
@@ -145,9 +146,9 @@ class Component extends React.PureComponent {
                                     )
                                 })()}
                             </div>
-                            <div className={"transfer"}>
+                            <div className={"ux-transfer"}>
                                 <Transfer {...$transfer}
-                                          targetKeys={$selected}
+                                          targetKeys={$selectedKeys}
                                           dataSource={$options}/>
                             </div>
                             <div className={"button"}>

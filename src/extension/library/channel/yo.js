@@ -539,7 +539,6 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
 const yoAmbient = (reference = {}, config = {}) => {
     const props = reference.props;
 
-
     // ----------------------- 全局专用信息 -----------------
     /*
      * $app
@@ -712,16 +711,6 @@ const yoAmbient = (reference = {}, config = {}) => {
             }
         }
         _seekState(uniform, reference, "$myView");
-        /*
-         * 个人视图专用功能，视图包含
-         * {
-         *     "name": "DEFAULT",
-         *     "title": "默认视图（显示文字专用）"
-         * }
-         */
-        uniform.rxViewMy = ($myView = {}) => {
-            reference.setState({$myView})
-        }
     }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
@@ -2129,12 +2118,13 @@ const yoListSearch = (reference) => {
     /*
      * 提取选项
      */
-    const {options = {}} = reference.state;
+    const {options = {}, $columns = []} = reference.state;
     const config = {};
     attrs.$options = options;
     Object.keys(options)
         .filter(optKey => optKey.startsWith('search'))
         .forEach(optKey => config[optKey] = options[optKey]);
+    config.field = $columns;        // 连接配置
     attrs.config = config;
     /*
      * 表单组件下放
@@ -2166,6 +2156,8 @@ const yoListSearch = (reference) => {
     // attrs.rxQuery = Ex.rxQuery(reference);
     // attrs.rxClean = Ex.rxClean(reference);
     attrs.rxFilter = Fn.rxFilter(reference);
+    attrs.rxFilterData = () => $filters;
+    attrs.rxFilterSave = Fn.rxFilterSave(reference);
     return attrs;
 }
 /**
@@ -2439,6 +2431,31 @@ const yoListExtra = (reference) => {
      */
     return Ux.sorterObject(editorRef);
 }
+const yoDialog = (reference, dialog = {}) => {
+    const {
+        $visible = false,
+        $submitting = false,
+    } = reference.state;
+    dialog.visible = $visible;
+    dialog.confirmLoading = $submitting;
+    dialog.cancelButtonProps = {
+        loading: $submitting
+    };
+    // 内容修正
+    const child = yoAmbient(reference);
+    /*
+     * 这两个连接函数防止内层调用引起连接问题
+     */
+    child.doSubmitting = Fn.rsSubmitting(reference);
+    child.rxClose = (event) => {
+        Ux.prevent(event);
+        reference.setState({
+            $visible: false,
+            ...Ux.turnOff()
+        });
+    };
+    return child;
+}
 export default {
     /**
      * ## 「通道」`Ex.yoComponent`
@@ -2474,4 +2491,5 @@ export default {
     yoListOpen,         // 打开区域
     yoListBatch,        // 批量区域
     yoListExtra,        // 额外区域
+    yoDialog,           // 窗口专用修正方法
 }

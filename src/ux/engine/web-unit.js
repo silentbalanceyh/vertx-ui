@@ -1,4 +1,4 @@
-import {Button, Col, Empty, Icon, Popconfirm, Row} from "antd";
+import {Button, Col, Empty, Icon, Popconfirm, Row, Tag} from "antd";
 import React from "react";
 import Ele from '../element';
 import Cv from '../constant';
@@ -607,6 +607,124 @@ const aiCardLeft = (reference, buttons = [], disabled = {}) => {
         </Button.Group>
     )
 }
+const aiItemTransfer = (item, reference) => {
+    const {$selectedKeys = []} = reference.state;
+    const keys = Abs.immutable($selectedKeys);
+    if (keys.contains(item.key)) {
+        // 已选择专用
+        let isFirst = false;
+        let isLast = false;
+        $selectedKeys.forEach((each, index) => {
+            if (0 === index && each === item.key) {
+                isFirst = true;
+            }
+            if (($selectedKeys.length) - 1 === index && each === item.key) {
+                isLast = true;
+            }
+        })
+        return (
+            <span>
+                    <span className={"left"}>
+                        {item.label + `（${item.key}）`}
+                    </span>
+                    <span className={"right"}>
+                        <Button icon={"up"} size={"small"} type={"primary"}
+                                disabled={isFirst}
+                                onClick={event => {
+                                    event.stopPropagation();
+                                    const $element = Ele.elementUp($selectedKeys, item.key);
+                                    reference.setState({$selectedKeys: $element});
+                                }}/>
+                        &nbsp;
+                        <Button icon={"down"} size={"small"}
+                                disabled={isLast}
+                                onClick={event => {
+                                    event.stopPropagation();
+                                    const $element = Ele.elementDown($selectedKeys, item.key);
+                                    reference.setState({$selectedKeys: $element});
+                                }}/>
+                    </span>
+                </span>
+        )
+    } else {
+        return item.label + `（${item.key}）`
+    }
+}
+const aiViewMy = (config = {}, reference) => {
+    const {$myDefault, $myView} = reference.props;
+    if ($myDefault && $myView) {
+        const {grid = {}} = config;
+        const left = grid.left ? grid.left : 6;
+        const right = grid.right ? grid.right : 18;
+        let display = $myView.title ? $myView.title : $myDefault.title;
+        if ($myDefault.name === $myView.name) {
+            display = $myDefault.title;
+        }
+        return (
+            <Row className={"ux-view-my"}>
+                <Col span={left} className={"label"}>
+                    {config.selected}
+                </Col>
+                <Col span={right} className={"content"}>
+                    {<Tag color={"magenta"} style={{
+                        fontSize: 14
+                    }}>{display}（{$myView.name}）</Tag>}
+                </Col>
+            </Row>
+        );
+    } else {
+        return false;
+    }
+}
+const aiRowAR = (reference, config = {}) => {
+    const {
+        dataKey = "$data",
+        dataMax,           // 最大数据量，达到后直接禁用添加
+        indexMax,          // 添加删除的最大索引值
+        index = 0          // 当前索引值
+    } = config;
+    if (indexMax) {
+        // $indexMax must be required
+        const left = {};
+        left.icon = 'plus';
+
+        let data = reference.state[dataKey];
+        data = Abs.clone(data);
+
+        let disabled = (index === indexMax);
+        if (dataMax && !disabled) {
+            disabled = data.length === dataMax;
+        }
+        left.disabled = disabled;
+
+        left.onClick = (event) => {
+            Abs.prevent(event);
+            data.push({key: T.randomUUID()});
+            const state = {};
+            state[dataKey] = data;
+            reference.setState(state);
+        }
+        const right = {};
+        right.icon = 'minus';
+        right.disabled = (0 === index);
+        right.onClick = (event) => {
+            Abs.prevent(event);
+
+            data = data.filter((item, idx) => index !== idx);
+            const state = {};
+            state[dataKey] = data;
+            reference.setState(state);
+        }
+        return (
+            <Button.Group>
+                <Button {...left}/>
+                <Button {...right}/>
+            </Button.Group>
+        )
+    } else {
+        return false;
+    }
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     aiFloatError,
@@ -628,4 +746,7 @@ export default {
     aiAnchor,   // 连接 / 按钮 双执行处理
 
     aiCardLeft, // PageCard左侧专用
+    aiItemTransfer, // Transfer Item 专用
+    aiViewMy,
+    aiRowAR,    // Remove / Add Button
 }

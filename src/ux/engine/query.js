@@ -4,6 +4,7 @@ import Dev from '../develop';
 import Pr from './parser';
 import Fn from './functions';
 import {Dsl} from 'entity';
+import T from '../unity';
 
 /*const analyzeBool = (value) => {
     if (value) {
@@ -552,6 +553,43 @@ const qrInherit = (reference) => {
     Dev.dgQuery(reference, " qrInherit 继承参数");
     return qrComplex(defaultQuery, reference);
 }
+const qrMessage = (data = {}, config = {}) => {
+    const {
+        messageConnect = {},
+        pattern = {}
+    } = config;
+    const connector = data[""] ? "AND" : "OR";
+    const message = [];
+    message.push({
+        text: messageConnect[connector]
+    })
+    Object.keys(data).filter(key => "" !== key).forEach(key => {
+        const kv = key.split(',');
+        const tpl = pattern[kv[1]];
+        const field = kv[0];
+        const params = {
+            name: field,
+            value: data[key]
+        };
+        message.push({
+            text: T.formatExpr(tpl, params, true),
+            field,
+            fieldCond: key,
+        });
+    })
+
+    if (Abs.isEmpty(data)) {
+        return {
+            connector,
+            message,
+        }
+    } else {
+        return {
+            connector,
+            message,
+        }
+    }
+}
 export default {
     qrComplex,
     qrCombine,
@@ -575,4 +613,5 @@ export default {
      */
     qrInput,
     qrForm,
+    qrMessage,
 }

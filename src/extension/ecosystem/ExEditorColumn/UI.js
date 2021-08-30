@@ -42,7 +42,7 @@ const componentInit = (reference) => {
     /*
      * 选择项
      */
-    state.$selected = Event.valueDefault($combine);
+    state.$selectedKeys = Event.valueDefault($combine);
     /*
      * 按钮专用处理
      */
@@ -62,12 +62,9 @@ const componentInit = (reference) => {
      * Group专用
      */
     const group = {};
-    group.onChange = ($selected = []) => {
-        /*
-         * 设置选中项
-         */
-        reference.setState({$selected});
-    };
+    const callback = ($selectedKeys = []) =>
+        reference.setState({$selectedKeys});
+    group.onChange = callback;
     group.className = "group";
     state.$group = group;
     /*
@@ -77,8 +74,8 @@ const componentInit = (reference) => {
     $tab.onTabClick = Event.rxActive(reference)
     state.$tab = $tab;
     if (page.complex) {
-        page.complex.render = Ex.jsxItemTransfer(reference);
-        page.complex.onChange = Event.action.rxChange(reference);
+        page.complex.render = (item) => Ux.aiItemTransfer(item, reference);
+        page.complex.onChange = Ux.xtTransfer(reference, callback);
     }
     state.$page = page;
     state.$ready = true;
@@ -90,12 +87,12 @@ const componentUp = (reference, virtualRef) => {
     if ($visible && !$visiblePre) {
         // 打开
         const {$combine = {}} = reference.state;
-        const $selected = Event.valueDefault($combine);
-        reference.setState({$selected});
+        const $selectedKeys = Event.valueDefault($combine);
+        reference.setState({$selectedKeys});
     }
     if (!$visible && $visiblePre) {
         // 关闭
-        reference.setState({$selected: [], $activeKey: "simple"});
+        reference.setState({$selectedKeys: [], $activeKey: "simple"});
     }
 }
 
@@ -107,7 +104,7 @@ class Component extends React.PureComponent {
     state = {
         $buttons: [],   // 按钮初始化
         $options: [],   // 全列初始化
-        $selected: [],  // 选择项初始化
+        $selectedKeys: [],  // 选择项初始化
         $submitting: false,
     };
 
@@ -140,7 +137,7 @@ class Component extends React.PureComponent {
                 <div className={"ex-editor-dialog"}>
                     <div className={"checked-content"}>
                         <LoadingAlert $alert={$notice}/>
-                        {Ex.jsxMyView(this, $combine.view)}
+                        {Ux.aiViewMy($combine.view, this)}
                         <Tabs {...rest} activeKey={$activeKey}>
                             {items.map(item => (
                                 <Tabs.TabPane {...item}>

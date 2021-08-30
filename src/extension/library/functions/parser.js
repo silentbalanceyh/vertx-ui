@@ -41,7 +41,7 @@ const vOp = {
         }
     },
     "op.batch.delete": {
-        icon: 'remove',
+        icon: 'delete',
         type: 'default',
         key: 'opBatchDelete',
         plugin: {

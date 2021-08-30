@@ -7,11 +7,11 @@ const rxSave = (reference) => (event) => {
     /*
      * 列信息处理
      */
-    const {$selected = [], $combine = {}} = reference.state;
+    const {$selectedKeys = [], $combine = {}} = reference.state;
     /*
      * 提取 rxColumnSave 函数
      */
-    if (0 === $selected
+    if (0 === $selectedKeys
         .filter(item => "key" !== item).length) {
         /*
          * 错误信息
@@ -25,10 +25,10 @@ const rxSave = (reference) => (event) => {
         /**
          * key为查询时必得的值
          */
-        if (!$selected.includes("key")) {
-            $selected.unshift("key");
+        if (!$selectedKeys.includes("key")) {
+            $selectedKeys.unshift("key");
         }
-        const keys = Ux.immutable($selected);
+        const keys = Ux.immutable($selectedKeys);
         /*
          * 计算参数：projection = []
          * projection 是被过滤的不显示的列信息，这里属于反向运算
@@ -82,8 +82,8 @@ const rxSave = (reference) => (event) => {
 const rxReset = (reference) => (event) => {
     Ux.prevent(event);
     const {$combine = {}} = reference.state;
-    const $selected = valueDefault($combine);
-    reference.setState({$selected});
+    const $selectedKeys = valueDefault($combine);
+    reference.setState({$selectedKeys});
 };
 const valueDefault = ($combine = {}) => {
     const {$columnsMy} = $combine;
@@ -92,24 +92,6 @@ const valueDefault = ($combine = {}) => {
     } else {
         return [];
     }
-}
-const rxChange = (reference) => (targetKeys, direction, moveKeys = []) => {
-    const {$selected = []} = reference.state;
-    let selected = [];
-    if ("right" === direction) {
-        // 往右，直接追加，注意顺序
-        selected = Ux.clone($selected);
-        moveKeys.forEach(moveKey => selected.push(moveKey));
-    } else {
-        // 往左
-        const $moved = Ux.immutable(moveKeys);
-        $selected.forEach(each => {
-            if (!$moved.contains(each)) {
-                selected.push(each);
-            }
-        })
-    }
-    reference.setState({$selected: selected})
 }
 const rxActive = (reference) => ($activeKey) => {
     reference.setState({$activeKey})
@@ -120,6 +102,5 @@ export default {
     action: {
         rxReset,
         rxSave,
-        rxChange,
     }
 }

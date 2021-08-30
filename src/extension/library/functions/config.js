@@ -179,7 +179,7 @@ const configColumn = (original = [], config = {}) => {
      * 合并过后的列存储在当前 $table 变量中
      * Full模式不改变，只做一次初始化
      */
-    const normalized = Ux.clone(original).concat(columns);
+    const normalized = Ux.elementConcat(original, columns, 'dataIndex');
     const resultColumns = [];
     if (0 === projections.length) {
         return normalized;

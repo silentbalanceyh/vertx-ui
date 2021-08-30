@@ -1,6 +1,6 @@
 import Ux from 'ux';
 import React from "react";
-import {Button, Col, Row, Tabs, Tag} from "antd";
+import {Tabs} from "antd";
 import {Dialog} from 'web';
 
 /**
@@ -256,93 +256,4 @@ export default {
      * @returns {Dialog} 窗口引用
      */
     uiDialog: (reference, consumer) => wrapper(reference, IxDialog, "__dialog", consumer),
-    /**
-     * ##「组件」`Ex.jsxItemTransfer`
-     *
-     * 构造Dialog引用组件快速开发窗口，为状态注入`__dialog`变量（内置）
-     *
-     * @memberOf module:_kernel
-     * @param {ReactComponent} reference React组件引用。
-     * @returns {Function} 返回Item
-     */
-    jsxItemTransfer: (reference) => (item) => {
-        const {$selected = []} = reference.state;
-        const keys = Ux.immutable($selected);
-        if (keys.contains(item.key)) {
-            // 已选择专用
-            let isFirst = false;
-            let isLast = false;
-            $selected.forEach((each, index) => {
-                if (0 === index && each === item.key) {
-                    isFirst = true;
-                }
-                if (($selected.length) - 1 === index && each === item.key) {
-                    isLast = true;
-                }
-            })
-            return (
-                <span>
-                    <span className={"left"}>
-                        {item.label + `（${item.key}）`}
-                    </span>
-                    <span className={"right"}>
-                        <Button icon={"up"} size={"small"} type={"primary"}
-                                disabled={isFirst}
-                                onClick={event => {
-                                    event.stopPropagation();
-                                    const $element = Ux.elementUp($selected, item.key);
-                                    reference.setState({$selected: $element});
-                                }}/>
-                        &nbsp;
-                        <Button icon={"down"} size={"small"}
-                                disabled={isLast}
-                                onClick={event => {
-                                    event.stopPropagation();
-                                    const $element = Ux.elementDown($selected, item.key);
-                                    // 两个元素交换
-                                    reference.setState({$selected: $element});
-                                }}/>
-                    </span>
-                </span>
-            )
-        } else {
-            return item.label + `（${item.key}）`
-        }
-    },
-    /**
-     * ##「组件」`Ex.jsxMyView`
-     *
-     * 所选视图专用
-     *
-     * @memberOf module:_kernel
-     * @param {ReactComponent} reference React组件引用。
-     * @param {Object} config 基础配置信息
-     * @returns {Function} 返回Item
-     */
-    jsxMyView: (reference, config = {}) => {
-        const {$myDefault, $myView} = reference.props;
-        if ($myDefault && $myView) {
-            const {grid = {}} = config;
-            const left = grid.left ? grid.left : 6;
-            const right = grid.right ? grid.right : 18;
-            let display = $myView.title ? $myView.title : $myDefault.title;
-            if ($myDefault.name === $myView.name) {
-                display = $myDefault.title;
-            }
-            return (
-                <Row className={"ex-my-view"}>
-                    <Col span={left} className={"label"}>
-                        {config.selected}
-                    </Col>
-                    <Col span={right} className={"content"}>
-                        {<Tag color={"magenta"} style={{
-                            fontSize: 14
-                        }}>{display}（{$myView.name}）</Tag>}
-                    </Col>
-                </Row>
-            );
-        } else {
-            return false;
-        }
-    }
 }
