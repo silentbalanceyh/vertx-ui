@@ -160,37 +160,30 @@ const onRelationIdentifiers = (identifier, source = [], definition = []) => {
     /*
      * [key1, key2, key3] 再次读取所有的 category 对应的 identifier 集合
      */
-    const $keys = Ux.immutable(keys);
-    const ids = source.filter(item => $keys.contains(item.key)).map(item => item.identifier);
+    const ids = source.filter(item => keys.includes(item.key)).map(item => item.identifier);
     /*
      * 计算 upIds / downIds
      */
-    const $ids = Ux.immutable(ids);
-    const upIds = definition.filter(item => $ids.contains(item['downstream'])).map(item => item["upstream"]);
-    const downIds = definition.filter(item => $ids.contains(item['upstream'])).map(item => item["downstream"]);
+    const upIds = definition.filter(item => ids.includes(item['downstream'])).map(item => item["upstream"]);
+    const downIds = definition.filter(item => ids.includes(item['upstream'])).map(item => item["downstream"]);
     /*
      * 读取 upKeys / downKeys
      */
-    const $upIds = Ux.immutable(upIds);
-    const $downIds = Ux.immutable(downIds);
-    const upKeys = source.filter(item => $upIds.contains(item.identifier)).map(item => item.key);
-    const downKeys = source.filter(item => $downIds.contains(item.identifier)).map(item => item.key);
+    const upKeys = source.filter(item => upIds.includes(item.identifier)).map(item => item.key);
+    const downKeys = source.filter(item => downIds.includes(item.identifier)).map(item => item.key);
     /*
      * 读取当前所有keys以及它的子类
      */
     const upAllKeys = Ux.treeChildrenAllIn(upKeys, source, "parentId");
     const downAllKeys = Ux.treeChildrenAllIn(downKeys, source, "parentId");
-
-    const $upAllKeys = Ux.immutable(upAllKeys);
-    const $downAllKeys = Ux.immutable(downAllKeys);
     /*
      * 最终计算出来的 identifier
      */
     const identifiers = {up: [], down: []};
-    source.filter(item => $upAllKeys.contains(item.key))
+    source.filter(item => upAllKeys.includes(item.key))
         .filter(item => item.leaf).map(item => item.identifier)
         .forEach(identifier => identifiers.up.push(identifier));
-    source.filter(item => $downAllKeys.contains(item.key))
+    source.filter(item => downAllKeys.includes(item.key))
         .filter(item => item.leaf).map(item => item.identifier)
         .forEach(identifier => identifiers.down.push(identifier));
     return identifiers;
@@ -367,8 +360,7 @@ const onTree = (keys = [], data = [], config = {}) => {
         const fun = Ux.Tree[config.mode];
         if (Ux.isFunction(fun)) {
             const result = fun(keys, source);
-            const $result = Ux.immutable(result);
-            treeArray = data.filter(each => $result.contains(each.key));
+            treeArray = data.filter(each => result.includes(each.key));
         }
     }
     return treeArray;

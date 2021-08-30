@@ -19,8 +19,7 @@ const authRow = (datum = [], original = {}, config = {}) => {
         const originalRows = original[field];
         if (originalRows) {
             // 计算原始选择行和 selectedKeys
-            const $keys = Ux.immutable(originalRows);
-            const rows = $source.filter(item => $keys.contains(item[field]));
+            const rows = $source.filter(item => originalRows.includes(item[field]));
             return {
                 keys: rows.map(row => row.key),
                 rows,
@@ -324,8 +323,7 @@ const authRequest = (reference, selected = [], fnEvent = event => event) => {
     const {config = {}, $owner = {}} = reference.props;
     const {$datum = []} = reference.state;
     const {event = {}} = config;
-    const $selected = Ux.immutable(selected);
-    const selectedData = $datum.filter(item => $selected.contains(item.key));
+    const selectedData = $datum.filter(item => selected.includes(item.key));
     const request = {
         $body: []
     };

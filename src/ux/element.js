@@ -474,13 +474,11 @@ const valuePair = (expr) => {
  */
 const valueLimit = (jsx = {}) => {
     const processed = {};
-    const flips = Abs.immutable([
+    Object.keys(jsx).filter(key => ![
         "fnOut",
         "reference",
         "config"
-    ]);
-    Object.keys(jsx).filter(key => !flips.contains(key))
-        .forEach((field) => processed[field] = jsx[field]);
+    ].includes(key)).forEach((field) => processed[field] = jsx[field]);
     return processed;
 };
 /**
@@ -909,48 +907,6 @@ const ambEvent = (event, config = {}, defaultValue) => {
 
 
 /**
- * ## 「标准」`Ux.ambFind`
- *
- * 二义性数据提取专用函数
- *
- * 1. 传入`key`和`name`，提取属性或状态之下的"对象包含的属性"值。
- * 2. 一级提取：可能返回Object，也可能返回DataObject。
- * 3. 二级提取：任意值。
- *
- * 框架内的使用代码如：
- *
- * ```js
- * const targetKey = attrPath[0];
- * const name = attrPath[1];
- * if (targetKey && name) {
- *     return Ele.ambFind(target, `$${targetKey}`, attrPath[1]);
- * } else {
- *     console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
- * }
- * ```
- *
- * @memberOf module:_unity
- * @param {Props|State} props 传入的React组件的状态或属性对象
- * @param {String} key 待提取的属性名或状态名称，提取内容必须是一个`Object`或者`DataObject`。
- * @param {String} name 待提取的二级属性名
- * @return {any} 返回最终提取的值。
- */
-const ambFind = (props = {}, key, name) => {
-    const dataObj = props[key];
-    let value;
-    if (dataObj instanceof DataObject) {
-        if (dataObj && dataObj.is()) {
-            value = dataObj._(name);
-        }
-    } else if (Abs.isObject(dataObj)) {
-        if (dataObj && !Abs.isArray(dataObj)) {
-            value = dataObj[name];
-        }
-    }
-    return value;
-};
-
-/**
  * ## 「标准」`Ux.ambObject`
  *
  * 二义性合并专用函数
@@ -981,6 +937,47 @@ const ambObject = (reference = {}, name) => {
         Object.assign(values, extracted);
     }
     return values;
+};
+/**
+ * ## 「标准」`Ux.ambFind`
+ *
+ * 二义性数据提取专用函数
+ *
+ * 1. 传入`key`和`name`，提取属性或状态之下的"对象包含的属性"值。
+ * 2. 一级提取：可能返回Object，也可能返回DataObject。
+ * 3. 二级提取：任意值。
+ *
+ * 框架内的使用代码如：
+ *
+ * ```js
+ * const targetKey = attrPath[0];
+ * const name = attrPath[1];
+ * if (targetKey && name) {
+ *     return Ele.ambFind(target, `$${targetKey}`, attrPath[1]);
+ * } else {
+ *     console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
+ * }
+ * ```
+ *
+ * @memberOf module:_unity
+ * @param {Props|State} props 传入的React组件的状态或属性对象
+ * @param {String} key 待提取的属性名或状态名称，提取内容必须是一个`Object`或者`DataObject`。
+ * @param {Array|String} name 待提取的二级属性名
+ * @return {any} 返回最终提取的值。
+ */
+const ambFind = (props = {}, key, name) => {
+    const dataObj = props[key];
+    let value;
+    if (dataObj instanceof DataObject) {
+        if (dataObj && dataObj.is()) {
+            value = dataObj.find(name);
+        }
+    } else if (Abs.isObject(dataObj)) {
+        if (dataObj && !Abs.isArray(dataObj)) {
+            value = elementGet(dataObj, name);
+        }
+    }
+    return value;
 };
 /**
  *
@@ -1045,7 +1042,18 @@ const elementIndex = (array = [], value, field) => {
     return foundIndex;
 }
 
-
+const elementGet = (data = {}, path) => {
+    if ("string" === typeof path) {
+        if (0 <= path.indexOf('.')) {
+            return elementGet(data, path.split('.'));
+        } else {
+            return data[path];
+        }
+    } else {
+        const item = Abs.immutable(data);
+        return item.getIn(path);
+    }
+}
 /**
  * ## 「标准」`Ux.elementWrap`
  *
@@ -1238,8 +1246,7 @@ const elementFind = (array = [], filters) => {
                 reference = reference.filter(item => {
                     const value = filters[field];
                     if (Abs.isArray(value)) {
-                        const $value = Abs.immutable(value);
-                        return $value.contains(item[field]);
+                        return value.includes(item[field]);
                     } else {
                         return item[field] === value;
                     }
@@ -1277,8 +1284,7 @@ const elementVertical = (array = [], field = "") => {
     let result = [];
     array.forEach(item => {
         if (item[field]) {
-            const $result = Abs.immutable(result);
-            if (!$result.contains(item[field])) {
+            if (!result.includes(item[field])) {
                 result.push(item[field]);
             }
         }
@@ -1795,6 +1801,7 @@ export default {
     elementUp,
     elementDown,
     elementConcat,
+    elementGet,
     // 树操作
     elementBranch,
     elementParent,

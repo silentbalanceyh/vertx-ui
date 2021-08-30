@@ -49,8 +49,7 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
     const {$data = []} = state;
     const $selected = state[field] ? state[field] : [];
     if (0 < $data.length) {
-        const $keys = Abs.immutable(keys);
-        const selected = $data.filter(item => $keys.contains(item.key));
+        const selected = $data.filter(item => keys.includes(item.key));
         /*
          * DataArray
          */

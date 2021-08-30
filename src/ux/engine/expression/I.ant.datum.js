@@ -147,8 +147,7 @@ const getFilter = (reference, config = {}) => {
                  * 多选和单选的处理方法不同
                  * */
                 if (Abs.isArray(value)) {
-                    const $value = Abs.immutable(value);
-                    return $value.contains(item[cascade.source]);
+                    return value.includes(item[cascade.source]);
                 } else {
                     return value === item[cascade.source];
                 }
@@ -200,6 +199,16 @@ const getSource = (reference, config, fnFilter = () => true) => {
         const datum = parseDatum(config);
         // 处理config中核心的expr节点
         options.forEach(each => T.applyItem(each, datum, config.expr));
+    } else if (config.mapping) {
+        /*
+         * 第三种形态，主要用于执行 $mapping 转换专用处理
+         */
+        Object.keys(config.mapping).forEach(key => {
+            const option = {};
+            option.key = key;
+            option.label = config.mapping[key];
+            options.push(option)
+        })
     }
     // 执行value的处理：value = key：如果key存在而value不存在
     T.applyValue(options);

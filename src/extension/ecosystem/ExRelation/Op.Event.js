@@ -9,14 +9,13 @@ const fnRemoveReady = (reference, keys = [], key) => {
      */
     let relations = [];
     if (Ux.isArray(data.up) && Ux.isArray(data.down)) {
-        const $keys = Ux.immutable(keys);
         /*
          * 上下互斥
          */
         if ("up" === key) {
-            relations = data.up.filter(item => $keys.contains(item.key));
+            relations = data.up.filter(item => keys.includes(item.key));
         } else {
-            relations = data.down.filter(item => $keys.contains(item.key));
+            relations = data.down.filter(item => keys.includes(item.key));
         }
     }
     return relations.map(item => item.key);
@@ -150,7 +149,6 @@ export default {
         }
         Ux.toLoading(() => Ex.I.relationDelete(removedKeys).then(data => {
             if (data) {
-                const $keys = Ux.immutable(removedKeys);
                 /*
                  * 从 $data 的 up 和 down 中移除数据
                  */
@@ -158,10 +156,10 @@ export default {
                 $data = Ux.clone($data);
                 if ("up" === key) {
                     const array = Ux.isArray($data.up) ? $data.up : [];
-                    $data.up = array.filter(item => !$keys.contains(item.key));
+                    $data.up = array.filter(item => !removedKeys.includes(item.key));
                 } else {
                     const array = Ux.isArray($data.down) ? $data.down : [];
-                    $data.down = array.filter(item => !$keys.contains(item.key));
+                    $data.down = array.filter(item => !removedKeys.includes(item.key));
                 }
                 fnRefresh(reference).then(nil => reference.setState({
                     $data,
@@ -240,10 +238,10 @@ export default {
              * 状态处理
              */
             if (status.source && Ux.isArray(status.code)) {
-                const $codes = Ux.immutable(status.code);
+                const $codes = status.code;
                 const condStatus = Ux.onDatum(reference, status.source);
                 if (0 < condStatus.length) {
-                    const keys = condStatus.filter(item => $codes.contains(item.code))
+                    const keys = condStatus.filter(item => $codes.includes(item.code))
                         .map(item => item.key);
                     if (0 < keys.length) {
                         criteria['status,i'] = keys;
@@ -265,19 +263,17 @@ export default {
                     } else {
                         ids = $defineMap.down;
                     }
-                    const $ids = Ux.immutable(ids);
                     /*
                      * 过滤
                      */
                     const {$selectedCategory = []} = reference.state;
                     let keys = [];
                     if (0 < $selectedCategory.length) {
-                        const $category = Ux.immutable($selectedCategory);
-                        keys = source.filter(cat => $ids.contains(cat.identifier))
-                            .filter(cat => $category.contains(cat.identifier))
+                        keys = source.filter(cat => ids.includes(cat.identifier))
+                            .filter(cat => $selectedCategory.includes(cat.identifier))
                             .map(cat => cat.key);
                     } else {
-                        keys = source.filter(cat => $ids.contains(cat.identifier))
+                        keys = source.filter(cat => ids.includes(cat.identifier))
                             .map(cat => cat.key);
                     }
                     const {categoryField = []} = editConfig;

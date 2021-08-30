@@ -700,9 +700,8 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
  * @returns {Function} 生成函数
  */
 const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
-    const $my = Ux.immutable($columnsMy);
     $columnsMy = Ux.clone($columnsMy);
-    if (!$my.contains('key')) {
+    if (!$columnsMy.includes('key')) {
         $columnsMy = ['key'].concat($columnsMy);
     }
     /*
@@ -836,9 +835,16 @@ const rxView = (reference) => (key, record = {}) => {
     if (key) {
         const {options = {}} = reference.state;
         const uri = options[G.Opt.AJAX_GET_URI];
-        return Ux.ajaxGet(uri, {
-            key,            // key 优先
-        });
+        /*
+         * operation for uri
+         */
+        const params = {};
+        Object.keys(record).forEach(key => {
+            if (!Ux.isObject(record[key]) && !Ux.isArray(record[key])) {
+                params[key] = record[key];
+            }
+        })
+        return Ux.ajaxGet(uri, params);
     }
 };
 /**

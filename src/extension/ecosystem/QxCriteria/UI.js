@@ -27,26 +27,13 @@ const componentInit = (reference) => {
     $metadata.mapping = {};
     $metadata.messageConnect = info.connector;
     const options = [];
-    field.filter(each => "key" !== each.dataIndex).forEach(each => {
-        // 基础列构造
-        $metadata.mapping[each.dataIndex] = each.title
-        // 选项处理（组件配置）
-        const item = {};
-        item.value = each.dataIndex;
-        item.key = each.dataIndex;
-        item.label = each.title;
-        item.control = each['$render'] ? each['$render'] : "TEXT";
-        // 配置专用
-        const config = {};
-        if (each['$format']) {
-            config.format = each['$format'];
-        }
-        if (each['$mapping']) {
-            config.mapping = each['$mapping'];
-        }
-        item.config = config;
-        options.push(item);
-    });
+    const normalized = Ux.parseColumn(field, reference);
+    normalized.forEach(each => {
+        // Label
+        $metadata.mapping[each.dataIndex] = each.label;
+        // The Whole
+        options.push(each);
+    })
     state.$metadata = $metadata;
     /*
      * 基础表单信息

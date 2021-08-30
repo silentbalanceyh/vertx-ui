@@ -1007,9 +1007,8 @@ const xtTransfer = (reference, callback) => (targetKeys, direction, moveKeys = [
         moveKeys.forEach(moveKey => $selected.push(moveKey));
     } else {
         // 往左
-        const $moved = Abs.immutable(moveKeys);
         $selectedKeys.forEach(each => {
-            if (!$moved.contains(each)) {
+            if (!moveKeys.includes(each)) {
                 $selected.push(each);
             }
         })

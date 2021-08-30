@@ -447,6 +447,34 @@ const toLoading = (consumer, seed) => {
     const loadingMs = seed ? seed : ms;
     setTimeout(consumer, ms * loadingMs);
 };
+/**
+ * ## 「引擎」`Ux.toAssist`
+ *
+ * 辅助数据专用函数
+ *
+ * @memberOf module:_to
+ * @param {Object} inherit 修改对象
+ * @param {ReactComponent} reference React组件引用信息。
+ * @return {Object} 返回 $a_ 打头以及 __ 打头的辅助函数
+ */
+const toAssist = (reference, inherit = {}) => {
+    const _seekAssist = (uniform = {}, input = {}) => {
+        /*
+         * props
+         */
+        if (input) {
+            Object.keys(input)
+                .filter(field =>
+                    field.startsWith(`$a_`) ||  // 旧辅助数据
+                    field.startsWith(`__`) ||   // 新组件继承
+                    field.startsWith(`$t_`))    // 古老字典数据
+                .forEach(key => uniform[key] = input[key]);
+        }
+    };
+    _seekAssist(inherit, reference.props);
+    _seekAssist(inherit, reference.state ? reference.state : {});
+    return inherit;
+}
 export default {
     // 是否登录
     isLogged,
@@ -468,8 +496,10 @@ export default {
     toRoute,
     // pid = ???, 挂载 pid 部分
     toPid,
-    //
+    // Url参数追加
     toUrl,
+    // Assist专用数据
+    toAssist,
     // 路由是否变化
     isRoute,
 };

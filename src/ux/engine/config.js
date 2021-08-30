@@ -52,29 +52,13 @@ const widthWord = (input, isPadding = true) => {
             /*
              * 特殊字符
              */
-            const widthEn = Abs.immutable([
-                "@",    // 邮件格式
-                "-",    // 时间中线
-                "/",    // 路径
-                " ",    // 空白
-                ";",    // 分号
-                ",",    // 逗号
-                "_",    // 下划线
-                "=",    // 等号
-            ])
-            const width1Px = Abs.immutable([
-                ".",    // 点符号
-                ":",    // 冒号
-            ])
 
-            const widthCn = Abs.immutable([
+            if (Abs.isCn(str) || [
                 "：",    // 中文冒号
                 "，",    // 中文逗号
                 "。",    // 中文句号
                 "；",    // 中文分号
-            ])
-
-            if (Abs.isCn(str) || widthCn.contains(str)) {
+            ].includes(str)) {
                 /*
                  * 中文字符长度
                  * 中文是方块字，宽度完全统一
@@ -97,9 +81,21 @@ const widthWord = (input, isPadding = true) => {
                      */
                     length += (seed / 3 * 2);
                 } else {
-                    if (width1Px.contains(str)) {
+                    if ([
+                        ".",    // 点符号
+                        ":",    // 冒号
+                    ].includes(str)) {
                         length += 1;
-                    } else if (widthEn.contains(str)) {
+                    } else if ([
+                        "@",    // 邮件格式
+                        "-",    // 时间中线
+                        "/",    // 路径
+                        " ",    // 空白
+                        ";",    // 分号
+                        ",",    // 逗号
+                        "_",    // 下划线
+                        "=",    // 等号
+                    ].includes(str)) {
                         length += (seed / 2);
                     } else {
                         // length += seed;

@@ -1110,8 +1110,7 @@ const exported = {
              * 过滤掉不支持过滤的情况
              */
             if (column.hasOwnProperty("$filter")) {
-                const $supported = Abs.immutable(RENDERS.supports);
-                if ($supported.contains($render)) {
+                if (RENDERS.supports.includes($render)) {
                     /*
                      * 支持
                      */

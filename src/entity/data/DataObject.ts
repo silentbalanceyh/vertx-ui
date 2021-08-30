@@ -26,7 +26,7 @@ const extractData = (original: any, key: any) => {
 
 class DataObject implements DataContainer {
     ready: boolean = false;
-    private readonly data: any = {};
+    private data: any = {};
 
     constructor(data: Object) {
         this.data = data;
@@ -90,15 +90,29 @@ class DataObject implements DataContainer {
         }
     }
 
+    find(key: any): any {
+        return Ux.elementGet(this.data, key);
+    }
+
     /**
      * 设置对象中对应键的值
      * @param key
      * @param value
      */
-    set(key: string, value: any): any {
-        if (this.ready && value) {
-            // 数据有更新
-            this.data[key] = value;
+    set(key: any, value: any): any {
+        if (Ux.isObject(key) && undefined === value) {
+            if (!this.data) {
+                this.data = {};
+            }
+            if (key) {
+                Object.assign(this.data, key);
+                this.ready = !!key;
+            }
+        } else if ("string" === typeof key) {
+            if (this.ready && value) {
+                // 数据有更新
+                this.data[key] = value;
+            }
         }
     }
 }

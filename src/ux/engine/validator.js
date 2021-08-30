@@ -70,7 +70,7 @@ const isReady = (rule = {}, reference, currentValue) => {
 };
 const isReadyWithCond = (reference, fnCompare = () => true) => (rule = {}, value, callback) => {
     if (isReady(rule, reference, value)) {
-        // 处理required
+        // 处理requiredconfig
         if (value && rule.config) {
             const to = T.formHit(reference, rule.config.to);
             // 如果目标值为 undefined 时,大概率情况为不满足对比的先决条件,直接返回
@@ -169,6 +169,51 @@ const equal = (reference = {}) => isReadyWithCond(reference, _equal);
 const diff = (reference = {}) => isReadyWithCond(reference, _diff);
 
 const maximum = (reference = {}) => isMaximum(reference, _maximum);
+
+
+const range = (isMin = true, isMax = true) => (rule = {}, value, callback) => {
+    const {config = {}, message} = rule;
+    const number = Number(value);
+    if (isNaN(number)) {
+        callback("VF: " + message);
+    } else {
+        const {min, max} = config;
+        let minOk = true;
+        let maxOk = true;
+        // isMin
+        if (isMin) {
+            if (isNaN(min)) {
+                console.warn("CMin: ", message);
+                minOk = false;
+            } else {
+                minOk = (min <= number);
+            }
+        }
+        // isMax
+        if (isMax) {
+            if (isNaN(max)) {
+                console.warn("CMax: ", message);
+                maxOk = false;
+            } else {
+                maxOk = (number <= max);
+            }
+        }
+        if (maxOk && minOk) {
+            callback()
+        } else {
+            callback(message);
+        }
+    }
+}
+const min = () => range(true, false);
+const max = () => range(false, true);
+const currency = () => (rule = {}, value, callback) => {
+    const config = {min: 0}
+    return range(true, false)({
+        ...rule,
+        config,
+    }, value, callback);
+}
 
 const _asyncPre = (reference, jsx, rule, value) => {
     // 有值才验证
@@ -340,4 +385,9 @@ export default {
     duplicatedDatum,
     // 浮点类型字段整数位最大长度
     maximum,
+    // 数值
+    min,
+    max,
+    range,
+    currency,
 };

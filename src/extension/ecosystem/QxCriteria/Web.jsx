@@ -28,6 +28,7 @@ const renderInput = (reference, configuration = {}) => {
                     return fnRender(reference, configuration);
                 }
             } else {
+                console.warn("无法解析类型：" + found.control);
                 return false;
             }
         } else {

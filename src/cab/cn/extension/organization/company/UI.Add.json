@@ -1,8 +1,7 @@
 {
-
     "_form": {
         "window": 1,
-        "columns":3,
+        "columns": 3,
         "ui": [
             [
                 "title=基本信息"
@@ -10,19 +9,19 @@
             [
                 "title,标题,,,,placeholder=格式如：***公司,normalize=text:128",
                 {
-                    "metadata":"name,名称,,,,placeholder=名称唯一,normalize=text:128",
-                    "optionConfig.rules":[
+                    "metadata": "name,名称,,,,placeholder=名称唯一,normalize=text:128",
+                    "optionConfig.rules": [
                         "required,请输入公司名称",
                         {
-                            "validator":"existing",
-                            "message":"对不起，该公司名称已经在系统中存在！",
-                            "config":{
-                                "uri":"/api/company/existing",
-                                "method":"POST",
-                                "params":{
-                                    "sigma":"PROP:app.sigma",
-                                    "companyId":"FORM:companyId",
-                                    "":"OPERATOR:AND"
+                            "validator": "existing",
+                            "message": "对不起，该公司名称已经在系统中存在！",
+                            "config": {
+                                "uri": "/api/company/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma",
+                                    "companyId": "FORM:companyId",
+                                    "": "OPERATOR:AND"
                                 }
                             }
                         }
@@ -34,9 +33,9 @@
                 {
                     "metadata": "companyId,所属公司,,,aiTreeSelect,placeholder=（请选择所属公司）,readOnly=true",
                     "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
-                    "optionJsx.config.tree":"text=name,parent=companyId",
-                    "optionJsx.config.selection":"mode=FULL",
-                    "optionJsx.className":"ux-readonly-select"
+                    "optionJsx.config.tree": "text=name,parent=companyId",
+                    "optionJsx.config.selection": "mode=FULL",
+                    "optionJsx.className": "ux-readonly-select"
                 },
                 {
                     "metadata": "type,性质,,,aiSelect,placeholder=（请选择公司性质）",
@@ -49,8 +48,8 @@
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/customer/search,1,10,sorter=updatedAt`DESC",
-                            "params.criteria":{
-                                "type":"FIX:director"
+                            "params.criteria": {
+                                "type": "FIX:director"
                             }
                         },
                         "linker": {
@@ -78,7 +77,7 @@
             ],
             [
                 {
-                    "metadata":"phone,座机,,,,placeholder=格式：000-00000000,maxLength=20",
+                    "metadata": "phone,座机,,,,placeholder=格式：000-00000000,maxLength=20",
                     "optionConfig.rules": [
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
@@ -87,7 +86,7 @@
                     ]
                 },
                 {
-                    "metadata":"email,邮箱,,,,placeholder=格式：xxx@xxx.xx,maxLength=255",
+                    "metadata": "email,邮箱,,,,placeholder=格式：xxx@xxx.xx,maxLength=255",
                     "optionConfig.rules": [
                         {
                             "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
@@ -96,7 +95,7 @@
                     ]
                 },
                 {
-                    "metadata":"fax,传真,,,,placeholder=格式：000-00000000,maxLength=20",
+                    "metadata": "fax,传真,,,,placeholder=格式：000-00000000,maxLength=20",
                     "optionConfig.rules": [
                         {
                             "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
@@ -114,12 +113,23 @@
             [
                 "taxTitle,发票抬头,,,,maxLength=32",
                 {
-                    "metadata":"taxCode,税号,,,,placeholder=由15/18/20位字符组成,maxLength=32",
+                    "metadata": "taxCode,税号,,,,placeholder=由15/18/20位字符组成,maxLength=32",
                     "optionConfig.rules": [
                         {
                             "min": 15,
                             "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
                             "message": "格式错误,请正确输入税号！"
+                        },
+                        {
+                            "validator": "existing",
+                            "message": "对不起，税号不允许重复！",
+                            "config": {
+                                "uri": "/api/company/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
                         }
                     ]
                 }
@@ -127,7 +137,7 @@
             [
                 "corporationName,法人,,,,placeholder=请输入真实姓名,normalize=text:40",
                 {
-                    "metadata":"corporationPhone,法人手机,,,,placeholder=请输入法人手机,maxLength=20",
+                    "metadata": "corporationPhone,法人手机,,,,placeholder=请输入法人手机,maxLength=20",
                     "optionConfig.rules": [
                         {
                             "max": 11,
@@ -140,7 +150,7 @@
             [
                 "contactName,联系人姓名,,,,placeholder=请输入真实姓名,normalize=text:40",
                 {
-                    "metadata":"contactPhone,联系人手机,,,,placeholder=请输入联系人手机,maxLength=20",
+                    "metadata": "contactPhone,联系人手机,,,,placeholder=请输入联系人手机,maxLength=20",
                     "optionConfig.rules": [
                         {
                             "max": 11,
@@ -156,7 +166,7 @@
             [
                 {
                     "metadata": "$button",
-                    "hidden":true,
+                    "hidden": true,
                     "optionJsx.extension": [
                         "$opAdd,添加,SUBMIT,primary",
                         "$opReset,重置,RESET"

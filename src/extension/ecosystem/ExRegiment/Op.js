@@ -3,9 +3,9 @@ import Ux from "ux";
 const yoUnSelected = (reference) => {
     const {$data = [], $selected = []} =
         reference.state ? reference.state : {};
-    const $keys = Ux.immutable($selected.map(each => each.key));
+    const $keys = $selected.map(each => each.key);
     const {rxFilter} = reference.props;
-    let result = $data.filter(each => !$keys.contains(each.key));
+    let result = $data.filter(each => !$keys.includes(each.key));
     if (Ux.isFunction(rxFilter)) {
         result = result.filter(rxFilter);
     }

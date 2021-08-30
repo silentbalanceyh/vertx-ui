@@ -22,6 +22,7 @@ import Op from './Op';
             const {field = []} = config;
             const jsxConfig = jsx.config ? jsx.config : {};
             return (<QxCriteria reference={reference} {...jsx}
+                                {...Ux.toAssist(reference)}
                                 config={{
                                     ...jsxConfig,
                                     field

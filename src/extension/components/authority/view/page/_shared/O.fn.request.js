@@ -46,8 +46,7 @@ export default (reference, doSelected) => {
         /*
          * 区分了业务和系统的情况
          */
-        const validationKeys = Ux.immutable($validation);
-        const validation = Array.from(selected).filter(key => validationKeys.contains(key));
+        const validation = Array.from(selected).filter(key => $validation.includes(key));
         if (0 === validation.length) {
             Ux.sexMessage(reference, "empty")
         } else {

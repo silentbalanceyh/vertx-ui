@@ -23,6 +23,7 @@
             "search.confirm.clear": "该操作会清空所有的查询条件，确认清空？",
             "search.op.redo": "清除条件",
             "search.op.advanced": "高级搜索",
+            "search.op.view": "查询条件",
             "search.placeholder": "名称/编号",
             "search.advanced": true,
             "search.advanced.width": "40%",
@@ -34,6 +35,11 @@
                     "高级搜索表单中的搜索条件会被保存，再次打开时会重置到上次的搜索状态。"
                 ]
             },
+            "search.criteria.window": "当前查询条件,保存,关闭,false,900,true,btnCriteria",
+            "search.criteria.view": {
+                "selected": "当前视图：",
+                "confirm": "您正在更改当前视图的查询条件，一旦更改后查询数据会有变化，确认？"
+            },
             "tabs.list": "组列表",
             "tabs.add": "添加组",
             "tabs.edit": "编辑组",
@@ -44,9 +50,11 @@
             "op.open.add": "添加",
             "op.open.filter": "清除筛选",
             "op.batch.delete": "批量删除",
+            "op.batch.edit": "批量更新",
             "op.extra.column": "修改显示列",
             "op.extra.export": "导出",
             "op.extra.import": "导入",
+            "op.extra.view": "视图管理",
             "op.row.edit": true,
             "op.row.delete": true,
             "op.row.view": "查看",
@@ -58,6 +66,7 @@
             "window.extra.column": "请选择您要显示的列,leftTop,640,true",
             "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
             "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
+            "window.extra.view": "视图管理,right,400,true,btnView",
             "id.submit.add": "$opAdd",
             "id.submit.save": "$opSave",
             "id.submit.reset": "$opReset",
@@ -82,36 +91,18 @@
                 "fieldColumn": {
                     "title": "选择属性",
                     "items": [
-                        "leaderId,组长",
-                        "leaderName,组长名称",
-                        "deptId,所属部门",
-                        "teamId,上级组",
-                        "comment,组备注",
-                        "metadata,附加配置",
-                        "active,是否启用",
-                        "language,使用的语言",
-                        "createdBy,创建人",
-                        "createdAt,创建时间",
-                        "updatedBy,更新人",
-                        "updatedAt,更新时间"
+                        "leaderName",
+                        "deptId",
+                        "teamId",
+                        "active,是否启用"
                     ]
                 },
                 "valueColumn": {
                     "title": "设置值",
                     "render": {
-                        "active": {
-                            "type": "RADIO",
-                            "config": [
-                                "true,启用",
-                                "false,禁用"
-                            ]
-                        },
-                        "createdAt": {
-                            "type": "DATE",
-                            "config": {
-                                "format": "YYYY-MM-DD"
-                            }
-                        }
+                        "active": "RADIO",
+                        "detpId": "DATUM",
+                        "teamId": "DATUM"
                     }
                 }
             }

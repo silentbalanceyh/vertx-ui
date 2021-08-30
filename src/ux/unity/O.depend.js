@@ -42,7 +42,7 @@ const isDepend = (depend = {}, reference) => {
                  * 固定值配置
                  * field = []
                  */
-                return Abs.isIn(actual, expected);
+                return expected.includes(actual);
             } else if (U.isObject(expected)) {
                 /*
                  * 特殊配置，用于处理 DATUM 这种下拉
@@ -57,13 +57,12 @@ const isDepend = (depend = {}, reference) => {
                      * 读取数据
                      */
                     const dataArray = G.onDatum(reference, expected.source);
-                    const $values = Abs.immutable(Ele.ambArray(expected.value));
-                    let compared = Abs.immutable(dataArray
+                    const $values = Ele.ambArray(expected.value);
+                    let compared = dataArray
                         .filter(each => undefined !== each[expected.field])
-                        .filter(each => $values.contains(each[expected.field]))
-                        .map(each => each.key)
-                    );
-                    return compared.contains(actual);
+                        .filter(each => $values.includes(each[expected.field]))
+                        .map(each => each.key);
+                    return compared.includes(actual);
                 } else {
                     return false;
                 }

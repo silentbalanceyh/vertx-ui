@@ -35,12 +35,12 @@ const rxSave = (reference) => (event) => {
          */
         const {rxColumnSave} = reference.props;
         const {$columns = []} = $combine;
-        const fullColumns = Ux.immutable($columns.map(column => column.dataIndex))
+        const fullColumns = $columns.map(column => column.dataIndex);
         /*
          * 正向语义
          * fullColumns 中被包含了的就是 item
          */
-        const params = keys.filter(item => fullColumns.contains(item));
+        const params = keys.filter(item => fullColumns.includes(item));
 
         if (Ux.isFunction(rxColumnSave)) {
             rxColumnSave(params)
@@ -49,7 +49,7 @@ const rxSave = (reference) => (event) => {
                      * $columnsMy 更新
                      */
                     const $response = Ux.immutable(response);
-                    const $columnsMy = $response.filter(item => fullColumns.contains(item))
+                    const $columnsMy = $response.filter(item => fullColumns.includes(item))
                     /*
                      * 防重复提交关闭
                      * （本层处理）

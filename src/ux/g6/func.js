@@ -118,10 +118,10 @@ const g6DataTree = (reference, config = {}) => {
     /*
      * 模型列表处理
      */
-    const $identifiers = Abs.immutable(models
+    const $identifiers = models
         .filter(item => !!item.metadata)
         .filter(item => item.metadata.relation)
-        .map(item => item.identifier));
+        .map(item => item.identifier);
     /*
      * 先转换数据源
      */
@@ -162,7 +162,7 @@ const g6DataTree = (reference, config = {}) => {
      */
     return treeArray
         .sort((left, right) => left.sequence - right.sequence)
-        .filter(each => $identifiers.contains(each.data.identifier));
+        .filter(each => $identifiers.includes(each.data.identifier));
 };
 const g6Image = (fieldImage = 'image') => {
     return (item = {}) => {

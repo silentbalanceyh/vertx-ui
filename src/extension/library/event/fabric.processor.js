@@ -58,8 +58,7 @@ export default {
             const input = dataEvent.getPrev();
             const data = dataEvent.getData();
             let field = params[0] ? params[0] : "key";
-            const $input = Ux.immutable(input);
-            return data.filter(item => $input.contains(item[field]));
+            return data.filter(item => input.includes(item[field]));
         }
     },
     CRITERIA: {

@@ -51,9 +51,8 @@ const componentInit = (reference) => {
     const tabs = Ux.configTab(reference, config);
     const {forceRender = [], ...rest} = tabs;
     if (0 < forceRender.length) {
-        const $force = Ux.immutable(forceRender);
         tabs.items.forEach(item => {
-            if ($force.contains(item.key)) {
+            if (forceRender.includes(item.key)) {
                 item.forceRender = true;
             }
         })

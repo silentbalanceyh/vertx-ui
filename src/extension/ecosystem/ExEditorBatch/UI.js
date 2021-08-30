@@ -31,20 +31,41 @@ import Rdr from './Web.R';
 // =====================================================
 // componentInit/componentUp
 // =====================================================
-const yiValue = (reference, config) => {
+const yiOption = (reference, fieldColumn = {}, control = {}) => {
+    let options = [];
+    if (fieldColumn.items) {
+        const items = []
+        fieldColumn.items.forEach(item => {
+            if ("string" === typeof item) {
+                if (0 < item.indexOf(",")) {
+                    items.push(item);
+                } else {
+                    const label = control[item] ? control[item].label : undefined;
+                    if (label) {
+                        items.push(item + "," + label);
+                    }
+                }
+            }
+        });
+        options = Ux.Ant.toOptions(reference, {items});
+    }
+    return options;
+}
+const yiValue = (reference, config, $control = {}) => {
     const {valueColumn = {}, fieldColumn = {}} = config;
+    // 新版 items 处理
+
     const column = {};
     column.dataIndex = "value";
     column.className = "ux-column-300 ux-left-text";
     column.title = valueColumn.title;
     column.render = (text, record) => {
         const columns = config.$columnsMy;
-        let options = Ux.Ant.toOptions(reference, fieldColumn);
+        let options = yiOption(reference, fieldColumn, $control);
         /*
         * 过滤
         */
-        const $columns = Ux.immutable(columns);
-        options = options.filter(item => $columns.contains(item.key));
+        options = options.filter(item => columns.includes(item.key));
         /*
          * 是否不执行 Render
          */
@@ -53,19 +74,16 @@ const yiValue = (reference, config) => {
             // 选中行
             let row = options.filter(option => option.value === record.name);
             // 操作对象
-
             if (1 === row.length) {
                 row = row[0];
                 const {render = {}} = valueColumn;
                 let raw = render[row.key];
                 // 修正专用
+                const configuration = $control[row.key];
                 if (undefined === raw) {
-                    fnRender = Rdr['TEXT'](reference);
+                    fnRender = Rdr[configuration.control](reference, configuration);
                 } else if ("string" === typeof raw) {
-                    fnRender = Rdr[raw](reference);
-                } else {
-                    const {type, config} = raw;
-                    fnRender = Rdr[type](reference, config);
+                    fnRender = Rdr[raw](reference, configuration);
                 }
             } else {
                 fnRender = Rdr['TEXT'](reference, row);
@@ -75,7 +93,7 @@ const yiValue = (reference, config) => {
     };
     return column;
 }
-const yiOp = (reference, config = {}) => {
+const yiOp = (reference, config = {}, $control = {}) => {
     /*
      * 左边按钮处理
      */
@@ -85,12 +103,11 @@ const yiOp = (reference, config = {}) => {
     column.render = (text, record, index) => {
         const {fieldColumn = {}} = config;
         const columns = config.$columnsMy;
-        let options = Ux.Ant.toOptions(reference, fieldColumn);
+        let options = yiOption(reference, fieldColumn, $control);
         /*
          * 过滤
          */
-        const $columns = Ux.immutable(columns);
-        options = options.filter(item => $columns.contains(item.key));
+        options = options.filter(item => columns.includes(item.key));
         // ------------- 属性构造 --------------
         return Ux.aiRowAR(reference, {
             indexMax: options.length - 1,
@@ -100,7 +117,7 @@ const yiOp = (reference, config = {}) => {
     };
     return column;
 };
-const yiField = (reference, config = {}) => {
+const yiField = (reference, config = {}, $control = {}) => {
     const {fieldColumn = {}} = config;
     const column = {};
     column.dataIndex = "name";
@@ -108,21 +125,20 @@ const yiField = (reference, config = {}) => {
     column.title = fieldColumn.title;
     column.render = (text, record, index) => {
         const columns = config.$columnsMy; // （读取我可操作的列）
-        let options = Ux.Ant.toOptions(reference, fieldColumn);
+        let options = yiOption(reference, fieldColumn, $control);
         /*
         * 过滤
         */
-        const $columns = Ux.immutable(columns);
-        options = options.filter(item => $columns.contains(item.key));
+        options = options.filter(item => columns.includes(item.key));
         /*
          * 第二过滤
          * 1. 条件1，$existing中包含的不显示
          * 2. 条件2，当前记录依旧显示
          */
         const {$data = []} = reference.state;
-        const $existing = Ux.immutable($data.map(each => each.name)
-            .filter(item => undefined !== item));
-        options = options.filter(option => !$existing.contains(option.value) || option.value === text);
+        const $existing = $data.map(each => each.name)
+            .filter(item => undefined !== item);
+        options = options.filter(option => !$existing.includes(option.value) || option.value === text);
         // ------------- 属性构造 --------------
         const select = {};
         select.style = {minWidth: 200};
@@ -135,13 +151,17 @@ const componentInit = (reference) => {
     const {config = {}} = reference.props;
     const $combine = Ex.yiCombine(reference, config);
     /* 列处理 */
+    const field = config.$columns ? $combine.$columns : [];
+    let $control = Ux.parseColumn(field, reference);
+    $control = Ux.elementMap($control, 'key');
     let $columns = [];
-    $columns.push(yiOp(reference, $combine));
-    $columns.push(yiField(reference, $combine));
-    $columns.push(yiValue(reference, $combine));
+    $columns.push(yiOp(reference, $combine, $control));
+    $columns.push(yiField(reference, $combine, $control));
+    $columns.push(yiValue(reference, $combine, $control));
     // 初始化数据
     const $data = [{key: Ux.randomUUID()}];
-    reference.setState({$columns, $data, $combine, $ready: true})
+    // 列处理
+    reference.setState({$columns, $control, $data, $combine, $ready: true})
 };
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))

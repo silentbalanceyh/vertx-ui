@@ -69,9 +69,10 @@ const valueExpr = (expr = "", data = {}, keep = false) => {
 const valueFind = (target = {}, attrPath = []) => {
     if (2 <= attrPath.length) {
         const targetKey = attrPath[0];
-        const name = attrPath[1];
-        if (targetKey && name) {
-            return Ele.ambFind(target, `$${targetKey}`, attrPath[1]);
+        const path = Abs.clone(attrPath);
+        const name = path.splice(0, 1);
+        if (targetKey && 0 < path.length) {
+            return Ele.ambFind(target, `$${targetKey}`, path);
         } else {
             console.error(`[ Ux ] 解析的配置不对，key = $${targetKey}, name = ${name}`);
         }
@@ -162,8 +163,7 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
  */
 const toLimit = (props = {}, limits = []) => {
     const inherits = {};
-    const $limitKeys = Abs.immutable(limits);
-    Object.keys(props).filter(key => !$limitKeys.contains(key))
+    Object.keys(props).filter(key => !limits.includes(key))
         .forEach(key => inherits[key] = props[key]);
     return inherits;
 };

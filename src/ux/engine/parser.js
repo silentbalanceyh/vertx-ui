@@ -4,6 +4,7 @@ import T from '../unity';
 import Datum from './datum';
 import Abs from '../abyss';
 import Ele from '../element';
+import R from './expression';
 
 const fnPredicate = (type, expression, supplier) => {
     if (expression && "string" === typeof expression) {
@@ -13,6 +14,7 @@ const fnPredicate = (type, expression, supplier) => {
     }
 };
 const Pr = {
+    NUMBER: (expression) => Ele.valueInt(expression, 0),
     /*
      * BOOL 处理信息
      * 1）前置，（无）
@@ -366,9 +368,53 @@ const parseInput = (input = {}, {props, state}) => {
     Dev.dgDebug(parsed, "[ Ux ] 参数分析最终结果：", "black");
     return parsed;
 };
+const parseColumn = (columns = [], reference) => {
+    const normalized = [];
+    columns.filter(each => "key" !== each.dataIndex).forEach(each => {
+        // 选项处理（组件配置）
+        const item = {};
+        item.value = each.dataIndex;
+        item.key = each.dataIndex;
+        item.label = each.title;
+        item.control = each['$render'] ? each['$render'] : "TEXT";
+        // 配置专用
+        const config = {};
+        if (each['$format']) {
+            config.format = each['$format'];
+        }
+        if (each['$mapping']) {
+            config.mapping = each['$mapping'];
+        }
+        if (each['$expr']) {
+            const expr = each["$expr"];
+            const expression = {}
+            if (expr.startsWith(":value")) {
+                // 带后缀
+                expression.after = expr.replace(/:value/g, "");
+            } else if (expr.endsWith(":value")) {
+                // 带前缀
+                expression.before = expr.replace(/:value/g, "");
+            } else {
+                // 前后缀都带
+                const kv = expr.split(':value');
+                expression.before = kv[0];
+                expression.after = kv[1];
+            }
+            config.expression = expression;
+        }
+        if (each["$datum"]) {
+            const datum = each.$datum;
+            config.options = R.Ant.toOptions(reference, {datum});
+        }
+        item.config = config;
+        normalized.push(item);
+    });
+    return normalized;
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     parseField,
     parseInput,
     parseValue,
+    parseColumn,
 }

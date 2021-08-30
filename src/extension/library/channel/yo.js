@@ -332,18 +332,6 @@ const _seekSelected = (uniform = {}, reference, key) => {
     }
 };
 
-const _seekAssist = (uniform = {}, input = {}) => {
-    /*
-     * props
-     */
-    if (input) {
-        Object.keys(input)
-            .filter(field => field.startsWith(`$a_`) ||
-                field.startsWith(`__`)) // 新组件继承
-            .forEach(key => uniform[key] = input[key]);
-    }
-};
-
 const _seedOptionPre = (reference) => {
     const {options = {}} = reference.state ? reference.state : {};
     let stateOpt = Ux.clone(options);
@@ -552,7 +540,15 @@ const yoAmbient = (reference = {}, config = {}) => {
         "menus",
         "hotel",     // 旧系统专用
     );
-
+    {
+        const user = uniform.$user;
+        if (user && !user.is()) {
+            const userData = Ux.isLogged();
+            if (userData) {
+                user.set(userData);
+            }
+        }
+    }
 
     // ----------------------- 模型标识符 -----------------
     {
@@ -655,8 +651,7 @@ const yoAmbient = (reference = {}, config = {}) => {
         /*
          * Assist数据专用
          */
-        _seekAssist(uniform, reference.props);
-        _seekAssist(uniform, reference.state);
+        Ux.toAssist(reference, uniform);
         const {rxAssist} = reference.props;
         if (Ux.isFunction(rxAssist)) {
             uniform.rxAssist = rxAssist;
@@ -1021,7 +1016,6 @@ const yoControl = (control = {}) => {
     /*
      * 第一层解析，解析 component，这是必须的
      */
-    const $component = Ux.immutable(["LIST", "FORM", "COMPONENT"]);
     if ("CONTAINER" === type) {
         /*
          * 容器配置，这种情况下，只有 container 节点，没有其他节点
@@ -1033,7 +1027,7 @@ const yoControl = (control = {}) => {
         }
         /* 表示只有 container 容器，不包含 component */
         attrs.isContainer = true;
-    } else if ($component.contains(type)) {
+    } else if (["LIST", "FORM", "COMPONENT"].includes(type)) {
         /*
          * LIST / COMPONENT / FORM
          * 容器（可选）
@@ -1733,12 +1727,11 @@ const isSatisfy = (reference, view = Fn.Mode.LIST) => {
     } else return false; // 否则 false
 };
 const isOk = (item = {}) => {
-    const $category = Ux.immutable([
+    return [
         "op.submit.save",
         "op.submit.delete",
         "op.submit.reset"
-    ]);
-    return $category.contains(item.category)
+    ].includes(item.category)
 };
 const setEdition = (attrs = {}, reference) => {
     const {$inited = {}} = reference.state;

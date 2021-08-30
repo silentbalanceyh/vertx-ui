@@ -19,13 +19,13 @@ const forestGroup = (input = [], group = {}, supplier) => {
      * 先提取所有组的参数
      */
     const groupName = new Set();
-    const $types = Abs.immutable(input.map(item => item.type));
+    const $types = input.map(item => item.type);
     // 表达式函数
     const isExpr = (expr) => expr && "string" === typeof expr
         && (0 < expr.indexOf(',') || 0 < expr.indexOf('='));
     input.filter(item => isExpr(item.identifier)).forEach(item => {
         const parsed = R.Ant.toParsed(item.identifier);
-        if (parsed && !$types.contains(parsed.tree)) {
+        if (parsed && !$types.includes(parsed.tree)) {
             groupName.add(parsed.tree);         // type 参数
             item.__connect = Abs.clone(parsed);
         }

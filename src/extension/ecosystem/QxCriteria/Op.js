@@ -25,8 +25,7 @@ const yoOp = (op = [], configuration, reference) => {
     const {ignores = {}} = config;
     const ignore = ignores[item.control] ?
         ignores[item.control] : ignores['TEXT'];
-    const $ignore = Ux.immutable(ignore);
-    op = op.filter(item => !$ignore.contains(item.key));
+    op = op.filter(item => !ignore.includes(item.key));
     return op;
 }
 export default {
@@ -42,8 +41,7 @@ export default {
             return;
         }
         // 二元操作符
-        const $op = Ux.immutable(["n", "!n"]);
-        if (!$op.contains($waiting.op)) {
+        if (!["n", "!n"].includes($waiting.op)) {
             if (!$waiting.value) {
                 Ux.messageFailure(failure.value);
                 return;

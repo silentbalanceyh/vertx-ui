@@ -36,10 +36,9 @@ const filterOption = (inputText, option) => {
     }
 }
 const normalizeAttribute = (reference, jsx, onChange) => {
-    /*
-     * 修复 jsx 构造最新的 rest
-     */
-    const exclude = Abs.immutable([
+    // 解决 rest 为 {} 时引起的 Bug
+    let rest = {};
+    Object.keys(jsx).filter(key => ![
         "config",   // optionJsx.config
         "depend",  // optionJsx.depend
         "filter",    // optionJsx.filter
@@ -47,10 +46,7 @@ const normalizeAttribute = (reference, jsx, onChange) => {
         "eventPrevent",
         "eventDisabled",
         "options",   // 后入参数
-    ]);
-    // 解决 rest 为 {} 时引起的 Bug
-    let rest = {};
-    Object.keys(jsx).filter(key => !exclude.contains(key))
+    ].includes(key))
         .forEach(key => rest[key] = jsx[key]);
     rest = Abs.clone(rest); // 拷贝防止二次
     /*

@@ -53,7 +53,10 @@ const getClearAttrs = (reference, field, {
     if (0 === selectedKeys.length) {
         clearAttrs.disabled = true;
     } else {
-        clearAttrs.onClick = onClear(reference, field, clearFilters);
+        clearAttrs.onClick = (event) => {
+            Abs.prevent(event);
+            onClear(reference, field, clearFilters);
+        };
     }
     return clearAttrs;
 };
@@ -66,7 +69,7 @@ const _filterDropdownCommon = (field, config = {}, reference = {}) => (filterCon
     const {setSelectedKeys, selectedKeys = [], confirm, clearFilters} = filterConfig;
     const clearAttrs = getClearAttrs(reference, field, {
         selectedKeys, clearFilters, onClear: (event) => {
-            event.preventDefault();
+            Abs.prevent(event);
             clearFilters();
             const $condition = getCondition(reference, field, []);
             reference.setState({
@@ -102,7 +105,7 @@ const _filterDropdownCommon = (field, config = {}, reference = {}) => (filterCon
             </Checkbox.Group>
             <div style={{textAlign: "center", width: "100%"}}>
                 <Button onClick={(event) => {
-                    event.preventDefault();
+                    Abs.prevent(event);
                     confirm();
                     const $condition = getCondition(reference, field, selectedKeys);
                     reference.setState({
@@ -158,9 +161,7 @@ const _getSearchKeyWord = (reference, field, keyword = "") => {
 };
 
 const onSearchClear = (reference, field, clearFilters) => (event) => {
-    if (event && Abs.isFunction(event.preventDefault)) {
-        event.preventDefault();
-    }
+    Abs.prevent(event);
     clearFilters();// 设置高亮
     const $keyword = _getSearchKeyWord(reference, field, "");
     const $condition = getCondition(reference, field, []);

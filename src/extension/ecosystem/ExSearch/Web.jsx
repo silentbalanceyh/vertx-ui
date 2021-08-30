@@ -53,9 +53,12 @@ const renderCriteria = (reference) => {
         <Modal {...$dialog}>
             {Ux.aiViewMy(view, reference)}
             <div>
-                <QxCriteria reference={reference} config={{
-                    field: config.field,
-                }} value={$filters} onChange={Op.onViewPre(reference)}/>
+                <QxCriteria reference={reference}
+                            config={{
+                                field: config.field,
+                            }} value={$filters}
+                            onChange={Op.onViewPre(reference)}
+                            {...Ux.toAssist(reference)}/>
             </div>
             <Button className={"ux-hidden"} id={$dialog.__onOk}
                     onClick={Op.opViewSave(reference)}/>

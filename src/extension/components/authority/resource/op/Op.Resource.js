@@ -34,8 +34,7 @@ const yoResCriteria = (reference) => (keys = []) => {
     /*
      * 直接过滤
      */
-    const $keys = Ux.immutable(keys);
-    $treeData.filter(item => $keys.contains(item.key)).forEach(item => {
+    $treeData.filter(item => keys.includes(item.key)).forEach(item => {
         if (item.identifier) {
             identifiers.push(item.identifier);
         } else {

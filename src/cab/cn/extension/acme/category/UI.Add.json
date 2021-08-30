@@ -91,7 +91,10 @@
             [
                 {
                     "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
-                    "optionJsx.rows": 3
+                    "optionJsx.rows": 3,
+                    "optionItem.style": {
+                        "width": "99%"
+                    }
                 }
             ]
         ],

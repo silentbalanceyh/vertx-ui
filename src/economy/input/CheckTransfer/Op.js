@@ -41,9 +41,8 @@ const onChange = (reference, config = {}) => ($targetKeys) => {
         /*
          * $targetKeys，native （Ant Design模式。）
          */
-        const $keys = Ux.immutable($targetKeys);
         const items = $source
-            .filter(item => $keys.contains(item.key))
+            .filter(item => $targetKeys.includes(item.key))
             .map(item => item[valueKey]);
         /*
          * items 处理

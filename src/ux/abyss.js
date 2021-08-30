@@ -1110,30 +1110,6 @@ const isObject = (input) => {
 
 
 /**
- * ## 「标准」`Ux.isIn`
- *
- * 判断当前元素是否存在于 Array 集合中，该API不支持对象数组，只支持纯值对应的数组，类似于集合中包含的数据检查。
- * 实际检查过程中类似调用了下边的两个API：
- *
- * 1. Ux.immutable：执行Immutable转换，调用内部API逻辑。
- * 2. contains：调用ImmutableJs中的原生API执行检查。
- *
- * > 该API仅针对Array的数据类型有效。
- *
- * @memberOf module:_is
- * @param {any} input 任意输入值
- * @param {Array} array 一个合法数组
- * @returns {boolean} 如果包含该元素返回true，否则返回false
- */
-const isIn = (input, array = []) => {
-    if (U.isArray(array)) {
-        const $array = Immutable.fromJS(array);
-        return $array.contains(input);
-    } else return false;
-};
-
-
-/**
  * ## 「标准」`Ux.isFunction`
  *
  * 内部调用`underscore`，判断输入值是否是一个合法的 JavaScript 函数，原生调用为
@@ -2164,7 +2140,6 @@ export default {
     isSame: (left, right) => !isDiff(left, right),
 
     isValid,
-    isIn,       /* input 是否存在于 Array 中 */
     isParent,   /* 判断输入节点是否当前节点父节点 */
 
     /* underscore 连接 */

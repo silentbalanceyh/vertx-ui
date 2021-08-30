@@ -36,7 +36,7 @@ const treeParentAll = (keys = [], data = [], parentField = "parent") =>
     keys.map(key => Ele.elementBranch(data, key, parentField))
         .reduce((previous, current) => previous.concat(current), [])
         .map(item => item.key)
-        .filter(item => !Abs.immutable(keys).contains(item));
+        .filter(item => !keys.includes(item));
 
 
 /**

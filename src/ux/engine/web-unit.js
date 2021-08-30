@@ -609,8 +609,7 @@ const aiCardLeft = (reference, buttons = [], disabled = {}) => {
 }
 const aiItemTransfer = (item, reference) => {
     const {$selectedKeys = []} = reference.state;
-    const keys = Abs.immutable($selectedKeys);
-    if (keys.contains(item.key)) {
+    if ($selectedKeys.includes(item.key)) {
         // 已选择专用
         let isFirst = false;
         let isLast = false;

@@ -222,9 +222,8 @@ const _yiColumn = (parameters = {}) => {
                 /*
                  * 计数器
                  */
-                const $cond = Ux.immutable(fields);
                 prefixes.forEach(prefix => {
-                    if ($cond.contains(prefix)) {
+                    if (fields.includes(prefix)) {
                         console.error("[ Ex ] 配置 search.cond 和列过滤冲突！");
                         console.error(" --> search.cond = ", fields, "field = ", prefix);
                     }
