@@ -48,7 +48,7 @@ class Component extends React.PureComponent {
             } else {
                 return renderJsx(this, config);
             }
-        }, Ex.parserOfColor("ExButton").action());
+        }, Ex.parserOfColor("ExButton").action({off: true}));
     }
 }
 

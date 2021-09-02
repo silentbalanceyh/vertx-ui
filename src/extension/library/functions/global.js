@@ -80,6 +80,7 @@ export default {
         SEARCH_CRITERIA_WINDOW: "search.criteria.window",   /* 搜索提示窗口 */
         SEARCH_CRITERIA_VIEW: "search.criteria.view",       /* 查询条件视图 */
 
+        AJAX_POSITION: 'ajax.position',                     /* 视图专用参数 */
         AJAX_MODULE: 'ajax.module',                         /* 是否启用 module 参数 */
         // 主函数
         AJAX_SEARCH_URI: 'ajax.search.uri',                 /* 查询引擎，必须Post */

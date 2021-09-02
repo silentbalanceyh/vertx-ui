@@ -64,7 +64,7 @@ class Component extends React.PureComponent {
                 attributes.$category = $category;
                 return renderJsx(this, config, attributes);
             }
-        }, Ex.parserOfColor("ExAction").action());
+        }, Ex.parserOfColor("ExAction").action({off: true}));
     }
 }
 

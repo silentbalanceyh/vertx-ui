@@ -531,14 +531,13 @@ const yoAmbient = (reference = {}, config = {}) => {
     /*
      * $app
      * $user
-     * $profile：保留属性
      * $router
      * $menus
+     * $query
      * */
     const uniform = Ux.onUniform(props,
         "app", "user", "router",
-        "menus",
-        "hotel",     // 旧系统专用
+        "menus", "query"
     );
     {
         const user = uniform.$user;

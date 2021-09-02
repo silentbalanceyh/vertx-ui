@@ -36,7 +36,8 @@ const renderDrawer = (reference) => {
 
 const renderCriteria = (reference) => {
     const {
-        config = {}
+        config = {},
+        $query,
     } = reference.props;
     /*
      * 查询条件
@@ -56,6 +57,7 @@ const renderCriteria = (reference) => {
                 <QxCriteria reference={reference}
                             config={{
                                 field: config.field,
+                                query: $query
                             }} value={$filters}
                             onChange={Op.onViewPre(reference)}
                             {...Ux.toAssist(reference)}/>

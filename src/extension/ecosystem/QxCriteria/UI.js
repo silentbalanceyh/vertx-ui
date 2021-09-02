@@ -20,20 +20,29 @@ const componentInit = (reference) => {
     const {
         pattern = {}, field = [],
         label = {},
-        op = [], info = {}, ignores = {}
+        op = [], info = {}, ignores = {},
+        query = {}
     } = combine;
     const $metadata = {};
     $metadata.pattern = pattern;
     $metadata.mapping = {};
     $metadata.messageConnect = info.connector;
     const options = [];
+    /* 锁定条件相关信息 */
+    const locked = Ux.qrMessage(query.criteria, $metadata);
+    const lockedFields = locked.message
+        .map(item => item.field)
+        .filter(item => !!item);
     const normalized = Ux.parseColumn(field, reference);
-    normalized.forEach(each => {
-        // Label
-        $metadata.mapping[each.dataIndex] = each.label;
-        // The Whole
-        options.push(each);
-    })
+    normalized
+        .filter(each => !lockedFields.includes(each.dataIndex))
+        .forEach(each => {
+            // Label
+            $metadata.mapping[each.dataIndex] = each.label;
+            // The Whole
+            options.push(each);
+        })
+    state.$locked = locked;
     state.$metadata = $metadata;
     /*
      * 基础表单信息
@@ -54,6 +63,7 @@ const componentInit = (reference) => {
         options,
         ignores,
     };
+    state.$combine = combine;
     if (!value) {
         Ux.fn(reference).onChange({});
     }

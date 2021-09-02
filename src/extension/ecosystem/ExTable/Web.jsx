@@ -54,11 +54,8 @@ const renderColumn = (reference, columns = []) => {
     /*
      * 先使用 projection 过滤
      */
-    const {$projection = []} = reference.state;
-    if (0 < $projection.length) {
-        const filtered = Ux.immutable($projection);
-        resultColumns = resultColumns.filter(column => !filtered.contains(column.dataIndex));
-    }
+    // const {$projection = []} = reference.state;
+    // resultColumns = resultColumns.filter(column => !$projection.includes(column.dataIndex));
     /*
      * 核心处理 Action 节点
      */

@@ -110,21 +110,47 @@ const componentInit = (reference) => {
     }
 };
 const componentView = (reference, previous) => {
-    const state = reference.state;
-    const prevState = previous.prevState;
-    const $viewChecked = Ex.upValue(state, prevState, "$myView");
-    if ($viewChecked) {
-        /*
-         * 列发生修改，则更新列信息
-         */
-        const {options, table} = reference.state;
-        Ex.yiListView(reference, {options, table}, state)
+    // position + view，两个变化引起最终变化（先检查position变化）
+    const dirty = _viewDirty(reference, previous);
+    if (dirty) {
+        const state = reference.state;
+        const {config = {}, /* 基本配置 */} = reference.props;
+        Ex.yiListView(reference, config, state)
             .then(table => Ux.promise(state, 'table', table))
             .then(state => {
                 state.$dirty = true;
                 reference.setState(Ux.clone(state));
             });
     }
+}
+const _viewDirty = (reference, previous) => {
+    const {options = {}} = reference.state;
+    let isRefresh;
+    if (options[Ex.Opt.AJAX_POSITION]) {
+        const literal = options[Ex.Opt.AJAX_POSITION];
+        const prevPos = Ux.parsePosition(literal, {
+            props: previous.prevProps,
+            state: previous.prevState,
+        });
+        const nowPos = Ux.parsePosition(literal, reference);
+        if (prevPos !== nowPos) {
+            // Position changed.
+            isRefresh = true;
+        } else {
+            // View Checking
+            isRefresh = _viewOnly(reference, previous);
+        }
+    } else {
+        // View Checking
+        isRefresh = _viewOnly(reference, previous);
+    }
+    return isRefresh;
+}
+const _viewOnly = (reference, previous) => {
+    const state = reference.state;
+    const prevState = previous.prevState;
+    const $viewChecked = Ex.upValue(state, prevState, "$myView");
+    return !!$viewChecked;
 }
 const componentUp = (reference, previous = {}) => {
     /*

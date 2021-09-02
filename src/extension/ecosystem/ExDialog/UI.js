@@ -97,7 +97,7 @@ class Component extends React.PureComponent {
                 dialog,
                 attributes
             });
-        }, Ex.parserOfColor("ExDialog").private());
+        }, Ex.parserOfColor("ExDialog").type());
     }
 }
 

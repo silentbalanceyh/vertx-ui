@@ -411,10 +411,25 @@ const parseColumn = (columns = [], reference) => {
     });
     return normalized;
 }
+/*
+ * The `ajax.position` to configure the view position here:
+ *
+ */
+const parsePosition = (positionExpr, reference) => {
+    const parsed = Ele.ambArray(positionExpr);
+    const seed = [];
+    parsed.forEach(eachExpr => {
+        seed.push(parseValue(eachExpr, reference));
+    })
+    // Join后的结果
+    const literal = seed.join(":");
+    return T.encryptMD5(literal);
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     parseField,
     parseInput,
     parseValue,
     parseColumn,
+    parsePosition,
 }

@@ -80,9 +80,9 @@ const sync = (reference, config = {}) => {
      */
     return Ux.promise(state);
 };
-const async = (reference, config = {}, state = {}) =>
+const async = (reference, config = {}, state = {}) => {
     /* 动态OP */
-    Ex.yiListOp(reference, {
+    return Ex.yiListOp(reference, {
         ...config,
         pluginComponent,
         pluginExtension
@@ -91,6 +91,7 @@ const async = (reference, config = {}, state = {}) =>
         /* 动态列 */
         .then(() => Ex.yiListTable(reference, config, state))
         .then(table => Ux.promise(state, 'table', table));
+}
 
 const ready = (reference = {}, state = {}) => {
     state.$ready = true;    // 只有 $ready 是单独控制

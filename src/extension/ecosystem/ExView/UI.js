@@ -18,14 +18,15 @@ import Op from './Op';
             return (<QxProjection reference={reference} {...jsx}/>);
         },
         criteria: (reference, jsx = {}) => {
-            const {config = {}} = reference.props;
+            const {config = {}, $query} = reference.props;
             const {field = []} = config;
             const jsxConfig = jsx.config ? jsx.config : {};
             return (<QxCriteria reference={reference} {...jsx}
                                 {...Ux.toAssist(reference)}
                                 config={{
                                     ...jsxConfig,
-                                    field
+                                    field,
+                                    query: $query,
                                 }}/>)
         }
     })

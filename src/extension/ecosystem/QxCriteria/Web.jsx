@@ -1,5 +1,5 @@
 import React from 'react';
-import {Alert, Button, Col, Radio, Row, Select, Tag} from "antd";
+import {Alert, Button, Col, Icon, Radio, Row, Select, Tabs, Tag} from "antd";
 import Op from './Op';
 import Ux from 'ux';
 import Rdr from './Web.R'
@@ -55,21 +55,52 @@ const renderInput = (reference, configuration = {}) => {
 export default {
     renderNotice: (reference, qrMessage = {}) => {
         const {message = []} = qrMessage;
+        const {$locked = {}, $combine = {}} = reference.state;
+        const {tab = {}} = $combine.info ? $combine.info : {};
         return (
             <div className={"notice"}>
-                {message.map(each => {
-                    if (each.field) {
-                        return (
-                            <Alert key={each.field} message={each.text} closable
-                                   onClose={Op.rxDelete(reference, each)}/>
-                        )
-                    } else {
-                        return (
-                            <Alert key={"CONNECTOR"} type={"warning"}
-                                   message={each.text}/>
-                        )
-                    }
-                })}
+                <Tabs defaultActiveKey={"tabOk"} size={"small"}>
+                    <Tabs.TabPane key={"tabOk"} tab={(
+                        <span>
+                            <Icon type={"unlock"}/>
+                            {tab.ok}
+                        </span>
+                    )}>
+                        {message.map(each => {
+                            if (each.field) {
+                                return (
+                                    <Alert key={each.field} message={each.text} closable
+                                           onClose={Op.rxDelete(reference, each)}/>
+                                )
+                            } else {
+                                return (
+                                    <Alert key={"CONNECTOR"} type={"warning"}
+                                           message={each.text}/>
+                                )
+                            }
+                        })}
+                    </Tabs.TabPane>
+                    <Tabs.TabPane key={"tabLocked"} tab={(
+                        <span>
+                            <Icon type={"lock"}/>
+                            {tab.locked}
+                        </span>
+                    )}
+                                  disabled={1 === $locked.message.length}>
+                        {$locked.message.map(each => {
+                            if (each.field) {
+                                return (
+                                    <Alert key={each.field} message={each.text}/>
+                                )
+                            } else {
+                                return (
+                                    <Alert key={"CONNECTOR"} type={"success"}
+                                           message={each.text}/>
+                                )
+                            }
+                        })}
+                    </Tabs.TabPane>
+                </Tabs>
             </div>
         );
     },

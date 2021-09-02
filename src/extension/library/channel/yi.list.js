@@ -186,7 +186,7 @@ const _yiColumn = (parameters = {}) => {
             /*
              * 配置 columns
              */
-            table.columns = Fn.configColumn(table.columns, response);
+            table.columns = Fn.configColumn(staticColumns, response);
             /*
              * 在 state 中引入 全量 / 我的 概念
              * 全列 = 静态列 + 动态列

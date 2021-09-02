@@ -27,8 +27,10 @@ const updateInternal = (reference, prevState, consumer) => {
                     .then($data => Yi.yiColumn(reference, reference.state, $data))
                     .then(done => consumer(done)))
             }
+            return false;   // Change
         }
     }
+    return true;   // Same
 };
 
 /**
@@ -88,6 +90,7 @@ const yuQuery = (reference, virtualRef) => {
          * Q 为 4 态对象
          */
         Fn.rsLoading(reference)({$query});
+        return false;   // Change
     } else {
         /*
          * 状态变更
@@ -116,8 +119,10 @@ const yuQuery = (reference, virtualRef) => {
                     })
                 );
             }
+            return false;   // Change
         } else {
             Ux.dgDebug(state.$query, "[ ExU ] $query 未改变，不刷新！", "#6E8B3D");
+            return true;   // Same
         }
     }
 }
@@ -165,8 +170,9 @@ const yuDirty = (reference, virtualRef) => {
          * $loading = true （效果）
          */
         Fn.rsLoading(reference)({$dirty: true});
+        return false;   // Change
     } else {
-        updateInternal(reference, prevState, ((state = {}) => {
+        return updateInternal(reference, prevState, ((state = {}) => {
             const {$data, $lazy} = state;
             /*
              * 修改内部状态双变量
@@ -225,6 +231,7 @@ const yuCondition = (reference, virtualRef) => {
          */
         const $condition = $defaultCond.current;
         reference.setState({$condition});
+        return false;   // Change
     } else {
         const prevState = virtualRef.state;
         const state = reference.state;
@@ -242,7 +249,9 @@ const yuCondition = (reference, virtualRef) => {
              * 读取 condition 专用配置，列变更时会使用的配置，直接从 state 中读取
              */
             Fn.rx(reference).condition(current);
+            return false;   // Change
         }
+        return true;   // Same
     }
 }
 /**
@@ -283,7 +292,9 @@ const yuLoading = (reference, virtualRef) => {
     const current = props.$loading;
     if (current && !original) {
         Fn.rsLoading(reference, true)({});
+        return false;   // Change
     }
+    return true;        // Same
 }
 /**
  * ## 「通道」`Ex.yuRouter`

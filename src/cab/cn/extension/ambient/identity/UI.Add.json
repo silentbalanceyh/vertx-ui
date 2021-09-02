@@ -1,8 +1,7 @@
 {
-
     "_form": {
         "window": 1,
-        "columns":3,
+        "columns": 3,
         "ui": [
             [
                 "title=基本信息"
@@ -32,13 +31,13 @@
             [
                 "nativePlace,籍贯",
                 {
-                    "metadata":"birthday,出生日期,,,aiDatePicker",
+                    "metadata": "birthday,出生日期,,,aiDatePicker",
                     "optionJsx.format": "YYYY-MM-DD",
                     "moment": true
                 },
                 {
                     "metadata": "type,类型,,,aiSelect,placeholder=（请选择类型）",
-                    "optionJsx.config.datum": "source=identity.type,value=key,label=name"
+                    "optionJsx.config.datum": "source=identity.type,value=code,label=name"
                 }
             ],
             [
@@ -67,7 +66,7 @@
             ],
             [
                 {
-                    "metadata":"contactMobile,手机号,,,,placeholder=请输入手机号",
+                    "metadata": "contactMobile,手机号,,,,placeholder=请输入手机号",
                     "optionConfig.rules": [
                         "required,请输入手机号，手机号不能为空",
                         {
@@ -78,7 +77,7 @@
                     ]
                 },
                 {
-                    "metadata":"contactPhone,座机,,,,placeholder=（XXX-XXXXXXXX格式）",
+                    "metadata": "contactPhone,座机,,,,placeholder=（XXX-XXXXXXXX格式）",
                     "optionConfig.rules": [
                         "required,请输入座机号，座机号不能为空",
                         {
@@ -88,7 +87,7 @@
                     ]
                 },
                 {
-                    "metadata":"contactEmail,邮箱,,,,placeholder=（XXX@XXX格式）",
+                    "metadata": "contactEmail,邮箱,,,,placeholder=（XXX@XXX格式）",
                     "optionConfig.rules": [
                         "required,请输入电子邮箱",
                         {
@@ -106,7 +105,7 @@
             [
                 "urgentName,紧急联系人,,,,placeholder=（如：张**、王**等）",
                 {
-                    "metadata":"urgentPhone,紧急联系电话,,,,placeholder=请输入紧急联系电话",
+                    "metadata": "urgentPhone,紧急联系电话,,,,placeholder=请输入紧急联系电话",
                     "optionConfig.rules": [
                         "required,请输入紧急联系电话，紧急联系电话不能为空",
                         {

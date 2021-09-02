@@ -482,35 +482,7 @@ const rxBatchDelete = (reference) => (event) => {
         return Ux.ajaxDelete(uri, $selected);
     }, {name: "rxBatchDelete", message: G.Opt.MESSAGE_BATCH_DELETE});
 };
-/**
- * ## 「2阶」`Ex.rxBatchEdit`
- *
- * ### 1.基本介绍
- *
- * 批量更新函数专用，根据options中批量更新配置`ajax.batch.update.uri`执行批量更新函数，该函数会触发批量操作。
- *
- * ### 2.下层调用
- *
- * #### 2.1.调用代码
- *
- * ```js
- * // 调用 rxBatchEdit 方法
- * Ex.rx(reference).batchEdit(...);
- * ```
- *
- * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
- * @returns {Function} 生成函数
- */
-const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($selected = []) => {
-    const {options = {}} = reference.state;
-    let uri = options[G.Opt.AJAX_BATCH_UPDATE_URI];
-    const module = options[G.Opt.AJAX_MODULE];
-    if (module) {
-        uri = Ux.toUrl(uri, "module", options[G.Opt.IDENTIFIER])
-    }
-    return Ux.ajaxPut(uri, params);
-}, {name: "rxBatchEdit", reset: true, message: G.Opt.MESSAGE_BATCH_UPDATE});
+
 // =====================================================
 // 列操作
 // =====================================================
@@ -581,62 +553,22 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
             /*
              * 动态配置
              */
-            const uri = options[G.Opt.AJAX_COLUMN_MY];
+            let uri = options[G.Opt.AJAX_COLUMN_MY];
             // module 参数
             if (options[G.Opt.AJAX_MODULE]) {
                 params.module = options[G.Opt.IDENTIFIER];
             }
             // view 参数
-            const {$myView = {}} = reference.state;
-            if ("DEFAULT" !== $myView.name) {
-                params.view = $myView.name;
-            }
+            // 「Vis」视图修改
+            const {$myView} = reference.state;
+            uri = _uriView(uri, {
+                view: $myView,
+                options
+            }, reference);
             return Ux.ajaxGet(uri, params);
         }
     });
-/**
- * ## 「2阶」`Ex.rxColumnSave`
- *
- * ### 1.基本介绍
- *
- * 该函数为`rxColumnMy`的逆函数，此处不做多余说明，根据`options`中的`ajax.column.save`执行我的视图保存。
- *
- * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
- * @returns {Function} 生成函数
- */
-const rxColumnSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
-    (projection = []) => {
-        const {options = {}} = reference.state;
-        /* 当前组件中的状态定义 */
-        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
-        // view 参数
-        const {$myView = {}} = reference.state;
-        if ("DEFAULT" !== $myView.name) {
-            uri = Ux.toUrl(uri, 'view', $myView.name);
-        }
-        return Ux.ajaxPut(uri, {
-            // 此处只更新projection
-            projection
-        }).then(data => Ux.promise(data['projection']));
-    }
-);
-const rxFilterSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
-    (criteria = {}) => {
-        const {options = {}} = reference.state;
-        /* 当前组件中的状态定义 */
-        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
-        // view 参数
-        const {$myView = {}} = reference.state;
-        if ("DEFAULT" !== $myView.name) {
-            uri = Ux.toUrl(uri, 'view', $myView.name);
-        }
-        return Ux.ajaxPut(uri, {
-            // 此处只更新projection
-            criteria
-        }).then(data => Ux.promise(data['criteria']));
-    }
-);
+
 // =====================================================
 // 搜索
 // =====================================================
@@ -674,20 +606,88 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
         /*
          * 必须配置 ajax.search.uri
          */
-        const {options = {}} = reference.state;
+        const {options = {}, $myView} = reference.state;
         let uri = options[G.Opt.AJAX_SEARCH_URI];
         const module = options[G.Opt.AJAX_MODULE];
         if (module) {
             uri = Ux.toUrl(uri, "module", options.identifier)
         }
         // view 参数
-        const {$myView = {}} = reference.state;
-        if ("DEFAULT" !== $myView.name) {
-            uri = Ux.toUrl(uri, 'view', $myView.name);
-        }
-
+        // 「Vis」视图修改
+        uri = _uriView(uri, {
+            view: $myView,
+            options
+        }, reference);
         return Ux.ajaxPost(uri, params);
     });
+/**
+ * ## 「2阶」`Ex.rxColumnSave`
+ *
+ * ### 1.基本介绍
+ *
+ * 该函数为`rxColumnMy`的逆函数，此处不做多余说明，根据`options`中的`ajax.column.save`执行我的视图保存。
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
+const rxColumnSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
+    (projection = []) => {
+        const {options = {}, $myView} = reference.state;
+        /* 当前组件中的状态定义 */
+        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
+        // view 参数
+        // 「Vis」视图修改
+        uri = _uriView(uri, {
+            view: $myView,
+            options
+        }, reference);
+        return Ux.ajaxPut(uri, {
+            // 此处只更新projection
+            projection
+        }).then(data => Ux.promise(data['projection']));
+    }
+);
+const rxFilterSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
+    (criteria = {}) => {
+        const {options = {}, $myView} = reference.state;
+        /* 当前组件中的状态定义 */
+        let uri = options[G.Opt.AJAX_COLUMN_SAVE];
+        // view 参数
+        // 「Vis」视图修改
+        uri = _uriView(uri, {
+            view: $myView,
+            options
+        }, reference);
+        return Ux.ajaxPut(uri, {
+            // 此处只更新projection
+            criteria
+        }).then(data => Ux.promise(data['criteria']));
+    }
+);
+const _uriView = (uri, {
+    view = {}, options = {}
+}, reference) => {
+    let viewName = view.name;
+    let position = options[G.Opt.AJAX_POSITION];
+    if (position) {
+        /*
+         * 加密后处理
+         */
+        const positionValue = Ux.parsePosition(position, reference);
+        return Ux.toUrl(uri, "view",
+            encodeURIComponent(`[${viewName},${positionValue}]`));
+    } else {
+        if ("DEFAULT" !== viewName) {
+            // view = [view];
+            return Ux.toUrl(uri, "view",
+                encodeURIComponent(`[${viewName}]`))
+        } else {
+            // view = DEFAULT
+            return uri;
+        }
+    }
+}
 /**
  * ## 「2阶」`Ex.rxProjection`
  *
@@ -927,6 +927,35 @@ const rxImport = (reference) => (file) => {
         console.error("上传文件有问题，请检查！", file);
     }
 };
+/**
+ * ## 「2阶」`Ex.rxBatchEdit`
+ *
+ * ### 1.基本介绍
+ *
+ * 批量更新函数专用，根据options中批量更新配置`ajax.batch.update.uri`执行批量更新函数，该函数会触发批量操作。
+ *
+ * ### 2.下层调用
+ *
+ * #### 2.1.调用代码
+ *
+ * ```js
+ * // 调用 rxBatchEdit 方法
+ * Ex.rx(reference).batchEdit(...);
+ * ```
+ *
+ * @memberOf module:_rx
+ * @param {ReactComponent} reference React对应组件引用
+ * @returns {Function} 生成函数
+ */
+const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($selected = []) => {
+    const {options = {}} = reference.state;
+    let uri = options[G.Opt.AJAX_BATCH_UPDATE_URI];
+    const module = options[G.Opt.AJAX_MODULE];
+    if (module) {
+        uri = Ux.toUrl(uri, "module", options[G.Opt.IDENTIFIER])
+    }
+    return Ux.ajaxPut(uri, params);
+}, {name: "rxBatchEdit", reset: true, message: G.Opt.MESSAGE_BATCH_UPDATE});
 /**
  * ## 「标准」`Ex.rx`
  *

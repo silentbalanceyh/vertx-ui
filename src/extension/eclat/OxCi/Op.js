@@ -5,12 +5,13 @@ import {Modal} from "antd";
  */
 const _ciItem = (data = {}) => {
     const item = {};
-    if (data.globalId) {
-        /* 优先考债 id，ucmdb id 读取，在关系计算中必须 */
-        item.key = data.globalId; // 使用 id 替换掉 key
-    } else {
-        item.key = data.key; // 搜索中的 key
-    }
+    // if (data.globalId) {
+    //     /* 优先考债 id，ucmdb id 读取，在关系计算中必须 */
+    //     item.key = data.globalId; // 使用 id 替换掉 key
+    // } else {
+    //     item.key = data.key; // 搜索中的 key
+    // }
+    item.key = data.key; // 搜索中的 key
     item.name = data.name;
     item.identifier = data.identifier;
     return item;

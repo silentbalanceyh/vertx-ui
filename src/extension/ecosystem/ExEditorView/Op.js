@@ -9,6 +9,10 @@ const rxRefresh = (reference, state = {}) => {
     const params = {};
     params.method = "POST";
     params.uri = $options[Ex.Opt.AJAX_SEARCH_URI];
+    const position = $options[Ex.Opt.AJAX_POSITION];
+    if (position) {
+        params.position = Ux.parsePosition(position, reference);
+    }
     return Ux.ajaxPost("/api/view-p/fetch", params).then(response => {
         /*
          * 基础数据

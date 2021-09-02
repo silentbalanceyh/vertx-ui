@@ -75,6 +75,10 @@
             "id.submit.save": "$opSave",
             "id.submit.reset": "$opReset",
             "id.submit.delete": "$opDelete",
+            "ajax.position": [
+                "ROUTE:type",
+                "ROUTE:status"
+            ],
             "ajax.search.uri": "/api/identity/search",
             "ajax.get.uri": "/api/identity/:key",
             "ajax.delete.uri": "/api/identity/:key",
