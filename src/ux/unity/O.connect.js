@@ -35,6 +35,9 @@ const cssDefined = () => ([
 const onRenders = () => ([
     "aiDialogEditor"
 ])
+const cssRelative = () => ([
+    "aiRadio",
+])
 /**
  * ## 「标准」`Ux.connectValidator`
  *
@@ -119,6 +122,11 @@ const connectItem = (cell = {}) => {
         const itemDefined = cssDefined();
         if (itemDefined.includes(cell.__render)) {
             itemAttrs.className = `${itemAttrs.className} web-form-has-error-defined`;
+        }
+        // 追加 itemRelative
+        const itemRelative = cssRelative()
+        if (itemRelative.includes(cell.__render)) {
+            itemAttrs.className = `${itemAttrs.className} web-form-has-error-relative`;
         }
     }
     return itemAttrs;

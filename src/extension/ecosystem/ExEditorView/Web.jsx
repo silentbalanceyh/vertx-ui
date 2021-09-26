@@ -27,6 +27,11 @@ const renderDialog = (reference) => {
     $parameters.method = "POST";    // 固定值
 
     const child = Ex.yoDialog(reference, configDialog);
+    child.rxClose = (event, state) => {
+        state.$dirty = true
+        state.$visible = false
+        reference.setState(state);
+    }
     return (
         <Modal {...configDialog}>
             <ExView {...child}

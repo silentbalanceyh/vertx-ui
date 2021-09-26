@@ -99,7 +99,7 @@ const componentUp = (reference, previous = {}) => {
      * 更新条件:
      * -- 1）state 中的 $condition 发生改变时候
      */
-    let same = Ex.yuCondition(reference, {state, props});
+    Ex.yuCondition(reference, {state, props});
     /*
      * 使用场景：
      * => 分页、排序、搜索，改变查询条件
@@ -108,9 +108,7 @@ const componentUp = (reference, previous = {}) => {
      * -- 1）属性中的 $query 发生变化，外层传入了最新的 $query（直接更新状态中的 $query 进入2）
      * -- 2）state 中的 $query 发生了改变, 直接刷新界面
      */
-    if (same) {
-        same = Ex.yuQuery(reference, {state, props});
-    }
+    Ex.yuQuery(reference, {state, props});
     /*
      * 使用场景：（内部刷新）
      * 控制位置：
@@ -122,15 +120,11 @@ const componentUp = (reference, previous = {}) => {
      * -- 1）外层传入了 $dirty，即 $dirty 为 true，更新内部的 $dirty（进入2）
      * -- 2）state 中的 $dirty 发生了变化，并且是 true，直接刷新界面
      */
-    if (same) {
-        same = Ex.yuDirty(reference, {state, props});
-    }
+    Ex.yuDirty(reference, {state, props});
     /*
      * $loading 专用
      */
-    if (same) {
-        Ex.yuLoading(reference, {state, props});
-    }
+    Ex.yuLoading(reference, {state, props});
 };
 
 class Component extends React.PureComponent {

@@ -23,12 +23,14 @@
                                 "params": {
                                     "sigma": "PROP:app.sigma",
                                     "uri": "PROP:parameters.uri",
-                                    "method": "PROP:parameters.method"
+                                    "method": "PROP:parameters.method",
+                                    "position": "PROP:myView.position"
                                 }
                             }
                         }
                     ]
-                }
+                },
+                "position,位置参数,,,,readOnly=true"
             ],
             [
                 {
@@ -69,7 +71,10 @@
             "active",
             "owner",
             "ownerType"
-        ]
+        ],
+        "initial": {
+            "position": "PROP:myView.position"
+        }
     },
     "_modal": {
         "success": {

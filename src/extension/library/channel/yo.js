@@ -863,7 +863,7 @@ const yoPolymorphism = (reference = {}, {form}) => {
     /*
      * 配置 config 相关信息构成多态，直接从 grid 中读
      */
-    const config = Ux.fromHoc(reference, "grid");
+    let config = Ux.fromHoc(reference, "grid");
     if (config) {
         /*
          * 通过拷贝检查最终的 config 发生改变
@@ -871,6 +871,8 @@ const yoPolymorphism = (reference = {}, {form}) => {
          * 界面不刷新（动态切换必须在这里处理）
          */
         attrs.config = Ux.clone(config);
+    } else {
+        config = {};
     }
     /*
      * 专用组件信息
@@ -2397,6 +2399,25 @@ const yoListExtra = (reference) => {
         editorRef.$columns = $columns;
         editorRef.$columnsMy = $columnsMy;
     });
+    if (editorRef.$myView) {
+        /*
+         * position 处理
+         */
+        const viewRef = editorRef.$myView;
+        if (!viewRef.position) {
+            const {$options = {}} = editorRef;
+            const position = $options[Fn.Opt.AJAX_POSITION];
+            if (position) {
+                const pValue = Ux.parsePosition(position, reference);
+                if (pValue) {
+                    viewRef.position = pValue;
+                }
+            }
+            if (!viewRef.position) {
+                viewRef.position = "DEFAULT"
+            }
+        }
+    }
     /*
      * rxColumnSave
      * rxExport

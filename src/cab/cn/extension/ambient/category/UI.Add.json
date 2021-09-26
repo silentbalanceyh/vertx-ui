@@ -66,9 +66,7 @@
                         "window": "选择父类型,选择,关闭,false,400,false"
                     },
                     "optionJsx.allowClear": true
-                }
-            ],
-            [
+                },
                 {
                     "metadata": "leaf,叶节点,8,,aiCheckbox",
                     "optionConfig": {

@@ -145,29 +145,33 @@ const removeTab = (reference, key) => {
     tabs = Ux.clone(tabs);
     let view = {};
     let item = tabs.items.filter(item => key === item.key)[0];
-    const index = item.index - 1;
-    if (2 < tabs.items.length) {
-        const activeItem = tabs.items.filter(item => item.index === index)[0];
-        tabs.activeKey = activeItem.key;
-        tabs.items = tabs.items.filter(item => key !== item.key);
-        if (0 === activeItem.index) {
-            view = viewSwitch(reference, Mode.LIST, undefined);
+    if (item) {
+        const index = item.index - 1;
+        if (2 < tabs.items.length) {
+            const activeItem = tabs.items.filter(item => item.index === index)[0];
+            tabs.activeKey = activeItem.key;
+            tabs.items = tabs.items.filter(item => key !== item.key);
+            if (0 === activeItem.index) {
+                view = viewSwitch(reference, Mode.LIST, undefined);
+            } else {
+                view = viewSwitch(reference, Mode.EDIT, activeItem.key);
+            }
         } else {
-            view = viewSwitch(reference, Mode.EDIT, activeItem.key);
+            tabs.activeKey = tabs.items[0].key;
+            tabs.items = [tabs.items[0]];
+            view = viewSwitch(reference, Mode.LIST, undefined);
         }
+        tabs.items.forEach((item, index) => {
+            item.index = index;
+        });
+        /*
+         * 关闭窗口时需设置
+         * $inited = {}（防止编辑表单混用）
+         */
+        return {tabs, ...view, $inited: {}};
     } else {
-        tabs.activeKey = tabs.items[0].key;
-        tabs.items = [tabs.items[0]];
-        view = viewSwitch(reference, Mode.LIST, undefined);
+        console.error("请检查响应数据，key 值不对应：", key, tabs.items)
     }
-    tabs.items.forEach((item, index) => {
-        item.index = index;
-    });
-    /*
-     * 关闭窗口时需设置
-     * $inited = {}（防止编辑表单混用）
-     */
-    return {tabs, ...view, $inited: {}};
 };
 const saveTab = (reference, data, item) => {
     // 删除
@@ -675,13 +679,11 @@ const _uriView = (uri, {
          * 加密后处理
          */
         const positionValue = Ux.parsePosition(position, reference);
-        return Ux.toUrl(uri, "view",
-            encodeURIComponent(`[${viewName},${positionValue}]`));
+        return Ux.toUrl(uri, "view", encodeURIComponent(`[${viewName},${positionValue}]`));
     } else {
         if ("DEFAULT" !== viewName) {
             // view = [view];
-            return Ux.toUrl(uri, "view",
-                encodeURIComponent(`[${viewName}]`))
+            return Ux.toUrl(uri, "view", encodeURIComponent(`[${viewName}]`))
         } else {
             // view = DEFAULT
             return uri;

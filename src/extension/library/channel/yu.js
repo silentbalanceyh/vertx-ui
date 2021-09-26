@@ -121,8 +121,29 @@ const yuQuery = (reference, virtualRef) => {
             }
             return false;   // Change
         } else {
-            Ux.dgDebug(state.$query, "[ ExU ] $query 未改变，不刷新！", "#6E8B3D");
-            return true;   // Same
+            const sortChecked = Fn.upValue(state, prevState, "$sorter");
+            if (sortChecked) {
+                /*
+                 * 只有 $loading = true 的时候执行
+                 */
+                if (state.$loading) {
+                    const {$query} = state;
+                    Ux.toLoading(() => Fn.rx(reference).search($query)
+                        .then($data => Yi.yiColumn(reference, state, $data))
+                        .then(state => {
+                            const {$data, $lazy} = state;
+                            /*
+                             * 设置当前组件的加载
+                             * ( ExTable )
+                             */
+                            Fn.rsLoading(reference, false)({$data, $lazy});
+                        })
+                    );
+                }
+            } else {
+                Ux.dgDebug(state.$query, "[ ExU ] $query 未改变，不刷新！", "#6E8B3D");
+                return true;   // Same
+            }
         }
     }
 }

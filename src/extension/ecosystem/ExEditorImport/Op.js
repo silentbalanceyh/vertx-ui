@@ -19,13 +19,12 @@ const rxImport = (reference) => (event) => {
      * 提交专用处理
      */
     Ex.rx(reference).submitting();
-    const {$fileList = []} = reference.state;
-    const {config = {}} = reference.props;
+    const {$fileList = [], $combine = {}} = reference.state;
     if (0 === $fileList.length) {
         /*
          * 错误信息
          */
-        Ux.messageFailure(config);
+        Ux.messageFailure($combine);
         /*
          * rxSubmitting提交
          */
@@ -59,8 +58,8 @@ const rxImport = (reference) => (event) => {
                             /*
                              * 消息提示
                              */
-                            const {config = {}} = reference.props;
-                            Ux.messageSuccess(config);
+                            console.log($combine);
+                            Ux.messageSuccess($combine);
                         });
                     } else {
                         console.error("[ Ex ] 导入出错！！！")

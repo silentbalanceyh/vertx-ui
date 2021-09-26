@@ -447,12 +447,16 @@ const _ajaxExtract = (request, params, body, response) => {
 const ajaxResponse = async (request, params) => mockAjax(request, params,
     async () => {
         const response = await fetch(request);
-
         let body = {};
         if (response.ok) {
-            body = await response.json();
-            // 任何时候都需要调用适配器，包括errors
-            body = ajaxAdapter(body);
+            if (200 === response.status) {
+                body = await response.json();
+                // 任何时候都需要调用适配器，包括errors
+                body = ajaxAdapter(body);
+            } else if (204 === response.status) {
+                // null
+                body = {};
+            }
         } else {
             let json = null;
             try {
@@ -725,10 +729,11 @@ const messageFailure = (content = "", duration = 1.628) => {
         message.config({maxCount: 1});
         message.error(content, duration);
     } else if (Abs.isObject(content)) {
-        const {modal: {error = {}}} = content;
+        const {modal} = content;
         /*
          * 递归调用
          */
+        const {error = {}} = modal ? modal : {};
         if ("string" === typeof error.content) {
             messageFailure(error.content);
         }
@@ -1258,10 +1263,14 @@ const ajaxEager = (reference, columns = [], data = []) => {
                     } else {
                         vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
                             let value;
-                            if (expr) {
-                                value = T.formatExpr(expr, result, true);
+                            if (Abs.isEmpty(result)) {
+                                value = undefined;
                             } else {
-                                value = result[field];
+                                if (expr) {
+                                    value = T.formatExpr(expr, result, true);
+                                } else {
+                                    value = result[field];
+                                }
                             }
                             return Abs.promise(value);
                         }));

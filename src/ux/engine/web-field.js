@@ -406,6 +406,10 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     // Radio的另外一种模式开启
     const {type = "RADIO"} = config;
     const Component = "RADIO" === type ? Radio : Radio.Button;
+    // Radio选中问题，默认选中项设置
+    if (!rest.defaultValue && rest.hasOwnProperty("data-initial")) {
+        rest.defaultValue = rest['data-initial']
+    }
     return (
         <Radio.Group {...rest}>
             {options.map(item => (

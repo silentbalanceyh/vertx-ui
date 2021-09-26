@@ -19,11 +19,11 @@ const renderJsx = (reference, {
 }) => {
     const exchange = {};
     if (0 === extra.config.length) {
-        exchange.batch = {span: 13, xl: 13, xxl: 14}
-        exchange.search = {span: 9, xl: 9, xxl: 7, className: "ex-extra"};
+        exchange.batch = {span: 12, xl: 12, xxl: 14}
+        exchange.search = {span: 9, xl: 9, xxl: 8, className: "ex-extra"};
         exchange.extra = {span: 0, xl: 0, xxl: 0};
     } else {
-        exchange.batch = {span: 9, xl: 9, xxl: 12}
+        exchange.batch = {span: 9, xl: 9, xxl: 10}
         exchange.search = {span: 8, xl: 8, xxl: 9};
         exchange.extra = {span: 4, xl: 4, xxl: 3, className: "ex-extra"};
     }

@@ -521,29 +521,28 @@ const initial = (reference, form, program = {}) => {
      */
     const {$mode = "ADD"} = reference.props;
     let initial = {};
-    if ("ADD" === $mode) {
-        if (form && form.initial) {
-            /*
-             * 解析表达式
-             */
-            let definition = {};
-            Object.keys(form.initial)
-                /* 直接过滤得到最终的表达式 */
-                .filter(key => "string" === typeof form.initial[key])
-                .forEach(key => {
-                    const value = Pr.parseValue(form.initial[key], reference);
-                    if (undefined !== value) {      // undefined !== value
-                        definition[key] = value;
-                    }
-                });
-            initial = definition;
-        }
-    } else {
+    if (form && form.initial) {
         /*
-         * EDIT 编辑模式
+         * 解析表达式
+         */
+        let definition = {};
+        Object.keys(form.initial)
+            /* 直接过滤得到最终的表达式 */
+            .filter(key => "string" === typeof form.initial[key])
+            .forEach(key => {
+                const value = Pr.parseValue(form.initial[key], reference);
+                if (undefined !== value) {      // undefined !== value
+                    definition[key] = value;
+                }
+            });
+        initial = definition;
+    }
+    if ("EDIT" === $mode) {
+        /*
+         * EDIT 编辑模式，只追加补充数据
          */
         const {$inited = {}} = reference.props;
-        initial = Abs.clone($inited);
+        initial = Abs.assign($inited, initial, 2)
     }
     if (!Abs.isEmpty(program)) {
         Object.assign(initial, program);

@@ -36,6 +36,7 @@ const componentInit = (reference) => {
     const {config = {}} = reference.props;
     const $combine = Ex.yiCombine(reference, config);
     const state = {};
+    state.$combine = $combine;
     /*
      * notice 专用
      */
