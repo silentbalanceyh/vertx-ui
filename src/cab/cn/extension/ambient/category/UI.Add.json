@@ -23,7 +23,7 @@
                     ]
                 },
                 {
-                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,maxLength=40",
+                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,normalize=upper:40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -43,7 +43,7 @@
             ],
             [
                 {
-                    "metadata": "parentName,父类型,8,,aiTreeSelector,placeholder=（请选择）",
+                    "metadata": "parentName,上级（父节点）,8,,aiTreeSelector,placeholder=（请选择）",
                     "optionJsx.config": {
                         "ajax": {
                             "uri": "/api/type/categories/:type",
@@ -68,7 +68,7 @@
                     "optionJsx.allowClear": true
                 },
                 {
-                    "metadata": "leaf,叶节点,8,,aiCheckbox",
+                    "metadata": "leaf,明细（叶节点）,8,,aiCheckbox",
                     "optionConfig": {
                         "valuePropName": "checked"
                     }

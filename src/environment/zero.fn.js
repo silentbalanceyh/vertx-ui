@@ -181,7 +181,6 @@ const fnRender = (props = {}, options = {}) => {
                     if (Ux.Env.DEBUG) {
                         console.debug(`[ERR]加载的数据问题（Tabular / Assist）：key = ${key}`);
                     }
-                    return;
                 }
             } else {
                 const targetKey = `$${key}`;
@@ -191,7 +190,6 @@ const fnRender = (props = {}, options = {}) => {
                     if (Ux.Env.DEBUG) {
                         console.warn(`[ERR]加载纯数据问题：key = ${key}`);
                     }
-                    return;
                 }
             }
         });

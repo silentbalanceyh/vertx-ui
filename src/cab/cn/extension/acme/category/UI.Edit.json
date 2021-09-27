@@ -24,7 +24,7 @@
                     ]
                 },
                 {
-                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,maxLength=40",
+                    "metadata": "code,编码,8,,,placeholder=请输入唯一编码,normalize=upper:40",
                     "optionConfig.rules": [
                         "required,请输入编码，编码不可为空！",
                         {
@@ -35,7 +35,7 @@
                                 "method": "POST",
                                 "params": {
                                     "type": "FORM:type",
-                                    "sigma":"PROP:app.sigma"
+                                    "sigma": "PROP:app.sigma"
                                 }
                             }
                         }
@@ -44,36 +44,36 @@
             ],
             [
                 {
-                    "metadata": "parentName,父类型,8,,aiTreeSelector,placeholder=（请选择）",
-                    "optionJsx.config":{
-                        "ajax":{
-                            "uri":"/api/type/categories/:type",
-                            "magic":{
-                                "type":"FORM:type"
+                    "metadata": "parentName,上级（父节点）,8,,aiTreeSelector,placeholder=（请选择）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/type/categories/:type",
+                            "magic": {
+                                "type": "FORM:type"
                             },
-                            "engine":false
+                            "engine": false
                         },
                         "linker": {
                             "name": "parentName",
-                            "key":"parentId"
+                            "key": "parentId"
                         },
-                        "selection":{
+                        "selection": {
                             "multiple": false,
-                            "checkStrictly":true
+                            "checkStrictly": true
                         },
-                        "tree":{
-                            "title":"name"
+                        "tree": {
+                            "title": "name"
                         },
                         "validation": "请选择父类！",
                         "window": "选择父类型,选择,关闭,false,400,false",
-                        "exclude":"FORM:key"
+                        "exclude": "FORM:key"
                     },
-                    "optionJsx.allowClear":true
+                    "optionJsx.allowClear": true
                 },
                 {
-                    "metadata": "leaf,叶节点,8,,aiCheckbox",
-                    "optionConfig":{
-                        "valuePropName":"checked"
+                    "metadata": "leaf,明细（叶节点）,8,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
                     }
                 }
             ],
@@ -86,8 +86,8 @@
                 },
                 {
                     "metadata": "active,是否启用,8,,aiCheckbox",
-                    "optionConfig":{
-                        "valuePropName":"checked"
+                    "optionConfig": {
+                        "valuePropName": "checked"
                     }
                 }
             ],

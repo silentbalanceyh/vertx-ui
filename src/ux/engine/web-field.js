@@ -83,6 +83,18 @@ const normalizeAttribute = (reference, jsx, onChange) => {
     R.Ant.onReadOnly(rest, eventDisabled, reference);
     return rest;    // 返回构造好的 rest
 }
+const _aiInitial = (rest, source = {}, reference) => {
+    const initial = source['data-initial'];
+    if (initial) {
+        if (Abs.isArray(initial)) {
+            const {form} = reference.props;
+            // form 变量专用处理
+            if (!form) {
+                rest.defaultValue = initial;
+            }
+        }
+    }
+}
 // =====================================================
 // 按钮
 // =====================================================
@@ -307,7 +319,6 @@ const aiTimePicker = (reference, jsx = {}, onChange) => {
     return (<TimePicker {...jsx}/>);
 }
 
-
 // import Checkbox from './O.check.box';
 const aiCheckbox = (reference, jsx = {}, onChange) => {
     /*
@@ -328,19 +339,7 @@ const aiCheckbox = (reference, jsx = {}, onChange) => {
     const {config} = jsx;
     if (config) {
         const options = R.Ant.toOptions(reference, config);
-        /*
-         * 特殊初始值，暂时不取消这里的处理
-         */
-        const initial = jsx['data-initial'];
-        if (initial) {
-            if (Abs.isArray(initial)) {
-                const {form} = reference.props;
-                // form 变量专用处理
-                if (!form) {
-                    rest.defaultValue = initial;
-                }
-            }
-        }
+        _aiInitial(rest, jsx, reference)
         return (
             <Checkbox.Group {...rest} options={options}/>
         )
@@ -406,10 +405,7 @@ const aiRadio = (reference, jsx = {}, onChange) => {
     // Radio的另外一种模式开启
     const {type = "RADIO"} = config;
     const Component = "RADIO" === type ? Radio : Radio.Button;
-    // Radio选中问题，默认选中项设置
-    if (!rest.defaultValue && rest.hasOwnProperty("data-initial")) {
-        rest.defaultValue = rest['data-initial']
-    }
+    _aiInitial(rest, jsx, reference)
     return (
         <Radio.Group {...rest}>
             {options.map(item => (

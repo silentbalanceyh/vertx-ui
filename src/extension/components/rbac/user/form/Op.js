@@ -8,11 +8,12 @@ const $opAdd = (reference) => params => {
         dialog: "added",
     });
 };
-const $opSave = (reference) =>
-    params => Ex.form(reference).save(params, {
+const $opSave = (reference) => params => {
+    Ex.form(reference).save(params, {
         uri: "/api/user/:key",
         dialog: "saved"
-    });
+    })
+};
 const $opDelete = (reference) =>
     params => Ex.form(reference).remove(params, {
         uri: "/api/user/:key",

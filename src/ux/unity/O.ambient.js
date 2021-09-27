@@ -6,6 +6,7 @@ import Cv from '../constant';
 import Ele from "../element";
 import Abs from '../abyss';
 import E from "../error";
+import Ux from "ux";
 
 /**
  * ## 「标准」`Ux.toQuery`
@@ -246,18 +247,24 @@ const toUrl = (uri = "", key, value) => {
  * > 该函数通常用于静态和动态模板中实现顶层的state状态变更。
  *
  * @memberOf module:_is
- * @param {Props} props React组件当前属性 props。
- * @param {Props} prevProps React组件的前一个属性 props。
+ * @param {Object} props React组件当前属性 props。
+ * @param {Object} prevProps React组件的前一个属性 props。
  * @return {boolean} 返回是否发生路由变化的检查值。
  */
 const isRoute = (props, prevProps) => {
-    const $router = props['$router'];
-    const $prevRouter = prevProps['$router'];
-    if ($router && $prevRouter) {
-        return $router.path() !== $prevRouter.path();
-    } else return false;     // 防止没有调用 Ex.yoAmbient 检查的情况
+    /*
+     * 检查 $router 中的数据（特殊点在于 $router 不是 Object类型）
+     */
+    const $prevRouter = prevProps.$router;
+    const $router = props.$router;
+    if ($router.path() !== $prevRouter.path()) {
+        return true;
+    }
+    const current = $router.params();
+    const original = $prevRouter.params();
+    return Ux.isDiff(current, original);
 };
-
+const isLoaded = (props, prevProps) => !isRoute(props, prevProps)
 /**
  * ## 「引擎」`Ux.toPid`
  *
@@ -443,8 +450,8 @@ const toLoading = (consumer, seed) => {
      * 改成 1 ms 毫秒级（略微加载效果）
      * 5 倍距离
      */
-    const ms = Ele.valueInt(Cv['LOADING'], 5);
-    const loadingMs = seed ? seed : ms;
+    const ms = Ele.valueInt(Cv['LOADING'], 1);
+    const loadingMs = seed ? seed : 50;
     setTimeout(consumer, ms * loadingMs);
 };
 /**
@@ -501,5 +508,6 @@ export default {
     // Assist专用数据
     toAssist,
     // 路由是否变化
-    isRoute,
+    isRoute,    // 路由正在变化
+    isLoaded,   // 路由未变化的更新流程
 };

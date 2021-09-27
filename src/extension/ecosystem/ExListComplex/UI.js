@@ -109,20 +109,6 @@ const componentInit = (reference) => {
             .then(state => Op.ready(reference, state));           /* W04: 处理准备状态 */
     }
 };
-const componentView = (reference, previous) => {
-    // position + view，两个变化引起最终变化（先检查position变化）
-    const dirty = _viewDirty(reference, previous);
-    if (dirty) {
-        const state = reference.state;
-        const {config = {}, /* 基本配置 */} = reference.props;
-        Ex.yiListView(reference, config, state)
-            .then(table => Ux.promise(state, 'table', table))
-            .then(state => {
-                state.$dirty = true;
-                reference.setState(Ux.clone(state));
-            });
-    }
-}
 const _viewDirty = (reference, previous) => {
     const {options = {}} = reference.state;
     let isRefresh;
@@ -158,35 +144,61 @@ const componentUp = (reference, previous = {}) => {
      */
     const prevProps = previous.prevProps;
     const props = reference.props;
-    /*
-     * 配置优先考虑
-     */
-    const $configChecked = Ex.upList(props, prevProps);
-    if ($configChecked) {
+    if (Ux.isLoaded(props, prevProps)) {
         /*
-         * 默认的 配置处理
-         */
-        reference.setState({$ready: false});
-        Ux.toLoading(() => componentInit(reference).then(state => {
+        * 配置优先考虑
+        */
+        const $configChecked = Ex.upList(props, prevProps);
+        if ($configChecked) {
             /*
-             * 更新状态
+             * 默认的 配置处理
              */
-            reference.setState(Ux.clone(state));
-        }))
-    } else {
-        const $queryChecked = Ex.upQuery(props, prevProps);
-        if ($queryChecked) {
-            /*
-             * 修改当前记录中的 query
-             * 由于 $query 变量发生了改变，所以
-             * 1）$selected 变量清空
-             */
+            Ux.dgDebug($configChecked, "[ ExU ] 配置检查结果", "#ca3d3e")
+            reference.setState({$ready: false});
+            Ux.toLoading(() => componentInit(reference).then(state => {
+                /*
+                 * 更新状态
+                 */
+                reference.setState(Ux.clone(state));
+            }))
+        } else {
+            const $queryChecked = Ex.upQuery(props, prevProps);
             const updatedState = {};
-            updatedState.query = Ux.clone($queryChecked.current);
-            updatedState.$selected = [];
-            reference.setState(updatedState);
+            if ($queryChecked) {
+                /*
+                 * 修改当前记录中的 query
+                 * 由于 $query 变量发生了改变，所以
+                 * 1）$selected 变量清空
+                 */
+                updatedState.query = Ux.clone($queryChecked.current);
+                updatedState.$selected = [];
+            }
+            // position + view，两个变化引起最终变化（先检查position变化）
+            const dirty = _viewDirty(reference, previous);
+            if (dirty) {
+                Ux.dgDebug(updatedState, "[ ExU ] 列表脏更新", "#ca3d3e")
+                const state = reference.state;
+                const {config = {}, /* 基本配置 */} = reference.props;
+                Ex.yiListView(reference, config, state)
+                    .then(table => Ux.promise(state, 'table', table))
+                    .then(state => {
+                        state.$dirty = true;
+                        const newState = Ux.clone(state);
+                        Object.assign(newState, updatedState)
+                        reference.setState(newState);
+                    });
+            } else {
+                /*
+                 * 直接更新
+                 */
+                reference.setState(updatedState);
+            }
         }
-        componentView(reference, previous);
+    } else {
+        /*
+         * 路由改变
+         */
+        reference.setState({$ready: false})
     }
 };
 
