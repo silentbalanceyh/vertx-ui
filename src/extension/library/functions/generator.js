@@ -1354,6 +1354,7 @@ export default {
      */
     rxAssist: (reference) => (key, data, deleted = false) => {
         const saved = Ux.onSave(reference, key, data, deleted);
+        console.log(saved)
         if (saved && Ux.isArray(saved)) {
             /*
              * 写 $a_<key> 专用

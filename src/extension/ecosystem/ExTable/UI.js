@@ -129,6 +129,73 @@ const componentInit = (reference) => {
  */
 // Ex.yuLoading(reference, {state, props});
 // ----------------------- 旧代码
+/*
+ * 内置比较
+ */
+const diffInternal = (state, prevState) => {
+    const checkICond = Ex.upCondition(state, prevState);
+    const checkIQr = Ex.upQuery(state, prevState);
+    const checkISorter = Ex.upValue(state, prevState, "$sorter");
+    const newState = {}
+    if (checkICond || checkIQr || checkISorter) {
+        if (checkICond) {
+            newState.$condition = checkICond.current;
+        }
+        if (checkISorter) {
+            newState.$sorter = checkISorter.current;
+        }
+        if (checkIQr) {
+            newState.$query = checkIQr.current;
+        }
+    }
+    const {$dirty = false} = state;
+    if ($dirty) {
+        newState.$dirty = true;
+    }
+    if (Ux.isNotEmpty(newState)) {
+        Ux.dgDebug(newState, "[ ExTable ] 内循环检查结果", "#ca3d3e")
+        return newState;
+    }
+}
+const diffExternal = (props, prevProps) => {
+    const checkCond = Ex.upCondition(props, prevProps);
+    const checkQr = Ex.upQuery(props, prevProps);
+    const {$dirty = false} = props;
+    // 三个条件任意一个条件满足，则执行
+    const newState = {}
+    if (checkCond || checkQr || $dirty) {
+        if (checkCond) {
+            // $condition
+            newState.$condition = checkCond.current;
+        }
+
+        if (checkQr) {
+            // $query
+            newState.$query = checkQr.current;
+        }
+    }
+    // $dirty
+    newState.$dirty = $dirty;
+    /**
+     * 外更新条件
+     * 1. 如果只有一个 $dirty = false 则不更新
+     * 2. 如果 $dirty = true 则单独刷新
+     */
+    if (1 === Object.keys(newState).length) {
+        // 1. undefined,长度1，证明会有其他检查结果
+        // 2. 如果 $dirty = true,长度1，则是强制刷新
+        if (undefined === newState.$dirty || newState.$dirty) {
+            Ux.dgDebug(newState, "[ ExTable ] 外循环检查结果", "#ca3d3e")
+            return newState
+        }
+    } else {
+        // 长度为0则返回undefined
+        if (Ux.isNotEmpty(newState)) {
+            Ux.dgDebug(newState, "[ ExTable ] 外循环检查结果", "#ca3d3e")
+            return newState;
+        }
+    }
+}
 const componentUp = (reference, previous = {}) => {
     const prevState = previous.prevState;
     const prevProps = previous.prevProps;
@@ -148,94 +215,75 @@ const componentUp = (reference, previous = {}) => {
      *    $condition
      *    -- 外层传入，内循环
      * 3. $loading：外层单独控制内层的 $loading 效果
-     *
      */
-    // 优先检查
-    // props / state 中的 $loading
-    const outLoading = props.$loading;
-    const inLoading = state.$loading;
-
-    const updatedState = {}
-    if (outLoading && !inLoading) {
-        updatedState.$loading = true;
-        // 外组件为true，内组件为 false，则执行
-    }
-    const checkCond = Ex.upCondition(props, prevProps);
-    const checkQr = Ex.upQuery(props, prevProps);
-    const {$dirty = false} = reference.props;
-    // 三个条件任意一个条件满足，则执行
-    if (checkCond || checkQr || $dirty) {
-
-        if (checkCond) {
-            // $condition
-            updatedState.$condition = checkCond.current;
-        }
-
-        if (checkQr) {
-            // $query
-            updatedState.$query = checkQr.current;
-        }
-
-        if ($dirty) {
-            // $dirty
-            updatedState.$dirty = true;
-        }
-        updatedState.$loading = true;
-        Ux.dgDebug(updatedState, "[ ExU ] 外循环检查结果", "#ca3d3e")
-    }
-    // 只要 updateState不为空，则执行更新
-    if (Ux.isEmpty(updatedState)) {
-        // 开始执行内循环，此时 updatedState为空
-        // 此时 $loading = true
-        // 最终想办法将 $loading 改成 false
-        const innerState = {}
-        const checkICond = Ex.upCondition(state, prevState);
-        const checkIQr = Ex.upQuery(state, prevState);
-        const checkISorter = Ex.upValue(state, prevState, "$sorter");
-        if (checkICond || checkIQr || checkISorter) {
-            if (checkICond) {
-                innerState.$condition = checkICond.current;
-            }
-            if (checkISorter) {
-                innerState.$sorter = checkISorter.current;
-            }
-            if (checkIQr) {
-                innerState.$query = checkIQr.current;
-            }
-            Ux.dgDebug(innerState, "[ ExU ] 内循环检查结果", "#ca3d3e")
-        }
-        if (Ux.isEmpty(innerState)) {
-            Ux.dgDebug(state.$query, "[ ExU ] $query 没有任何改变，不刷新！", "#6E8B3D");
+    const checkExternal = diffExternal(props, prevProps);
+    const checkInternal = diffInternal(state, prevState);
+    if (checkExternal && !checkInternal) {
+        // 外驱动
+        const $query = checkExternal.$query;
+        const $dirty = checkExternal.$dirty;
+        // $dirty = true
+        // -- 有 $query 用新 $query
+        // -- 无 $query 用旧 $query
+        // $dirty = false
+        // -- 有 $query 用新 $query刷新
+        // -- 无 $query 则不刷新
+        const params = {}
+        if ($query) {
+            params.$query = $query;
+            // $query发生改变（直接外驱动）
+            Ux.dgDebug(params, "[ ExTable ] 触发内循环！", "#1874CD");
+            reference.setState(params);
         } else {
-            const condition = innerState.$condition
-            if (condition) {
-                Ux.dgDebug(condition, "[ ExU ] 更新外层条件")
-                Ex.rx(reference).condition(condition);
-            } else {
-                // 直接加载（然后执行下一步）
+            if ($dirty) {
+                // $query发生改变（直接外驱动）
+                Ux.dgDebug(params, "[ ExTable ] （脏）触发内循环！", "#1874CD");
+                params.$loading = true;
+                params.$dirty = true;
+                reference.setState(params);
+                /*
+                 * 这种方式必须 setTimeout
+                 * 只有在 timeout 有值的时候会保证上层更新已经全部完成
+                 * 而新的更新可以导致上层更新成功进入下一次操作
+                 */
+                Ux.toLoading(() => Ex.rx(reference).dirty(false))
+            }
+        }
+    } else if (!checkExternal && checkInternal) {
+        // 内驱动
+        const $condition = checkInternal.$condition
+        if ($condition) {
+            // $condition被修改 --------> 触发外驱动
+            Ux.dgDebug(checkInternal, "[ ExTable ] 触发外循环！", "#1874CD");
+            Ex.rx(reference).condition(checkInternal.$condition)
+        } else {
+            const $query = checkInternal.$query;
+            if ($query) {
                 reference.setState({$loading: true});
-                // 执行数据加载
-                const params = innerState.$query;
-                Ux.toLoading(() => Ex.rx(reference).search(params)
-                    .then($data => Ex.yiColumn(reference, state, $data))
-                    .then(processed => {
-                        const {$data, $lazy} = processed;
-                        innerState.$data = $data
-                        innerState.$lazy = $lazy
-                        Ex.rsLoading(reference, false)(innerState);
-                    })
-                )
+                // $query被修改（直接内驱动）
+                Event.onFresh(reference, {$query});
+            } else {
+                const isDirty = checkInternal.$dirty;
+                if (isDirty) {
+                    const {$query} = state;
+                    reference.setState({$loading: true});
+                    // $query被修改（直接内驱动）
+                    Event.onFresh(reference, {$query});
+                }
             }
         }
+    } else if (checkExternal && checkInternal) {
+        /*
+         * 内外交互只会出现一种情况，即外循环第一次还没执行完，依旧是：
+         * {$dirty:true}
+         * 而此处不能哪种检查，只需要做一件事，就是检查 checkInternal
+         */
     } else {
-        // 如果 $dirty = true，则需要关闭外层
-        if ($dirty) {
-            Ux.dgDebug({$dirty: false}, "[ ExU ] 更新外层脏状态")
-            Ex.rx(reference).dirty(false);
-        } else {
-            // 执行内层状态更新
-            reference.setState(updatedState);
-        }
+        // 不刷新
+        Ux.dgDebug({
+            checkExternal,
+            checkInternal
+        }, "[ ExTable ] 界面已经全部同步完成！", "#33af43");
     }
 };
 

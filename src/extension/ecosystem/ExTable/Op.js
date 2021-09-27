@@ -149,4 +149,22 @@ export default {
         });
         return result;
     },
+    onFresh: (reference, innerState, callback) => {
+        // 执行数据加载
+        innerState = Ux.clone(innerState);
+        const params = innerState.$query;
+        Ux.toLoading(() => Ex.rx(reference).search(params)
+            .then($data => Ex.yiColumn(reference, reference.state, $data))
+            .then(processed => {
+                const {$data, $lazy} = processed;
+                innerState.$data = $data
+                innerState.$lazy = $lazy
+                innerState.$dirty = false
+                Ex.rsLoading(reference, false)(innerState);
+                if (Ux.isFunction(callback)) {
+                    callback()
+                }
+            })
+        )
+    }
 }

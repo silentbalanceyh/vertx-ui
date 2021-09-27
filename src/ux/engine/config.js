@@ -464,9 +464,10 @@ const configScroll = ($table = {}, data = [], reference) => {
         if (Abs.isFunction(executor)) {
             const titleWidth = _widthTitle(rdTitle, column);
             const calculated = executor(titleWidth, column, data, reference);
-            if (!rdWidth) {
-                // 只有这种时候重算
-                column.width = calculated;
+            if (rdWidth) {
+                column.width = Math.max(titleWidth, calculated, rdWidth);
+            } else {
+                column.width = Math.max(titleWidth, calculated);
             }
         }
     });
@@ -1106,16 +1107,16 @@ const configForm = (form, addOn = {}) => {
      * 2）构造Raft基本配置
      */
     const raft = {form: {}};
-    const params = {form, addOn};
+    const paramsOut = {form, addOn};
     // Render-1: <Form/> 配置构造
-    Raft.raftAttribute(raft, params);
+    Raft.raftAttribute(raft, paramsOut);
     const {reference} = addOn;
     // Render-2: <Input type="hidden"/>
     Raft.raftHidden(raft, form, reference);
     // Render-3：计算 form.ui
-    const normalized = Raft.raftUi(reference, form.ui);
+    const normalized = Raft.raftUi(reference, form.ui, form.rule);
     // Render-4：计算布局相关信息
-    const calculated = Raft.raftLayout(raft, params);
+    const calculated = Raft.raftLayout(raft, paramsOut);
     raft.rows = [];
     /*
      * 行遍历

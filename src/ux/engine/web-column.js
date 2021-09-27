@@ -141,6 +141,8 @@ const Cmn = {
     /* onConfirm 专用 */
     jsxConfirm: (item = {}) => item.enabled ? (
         <Popconfirm key={item.key} title={item.confirm}
+                    overlayClassName={"ux-confirm-op"}
+                    icon={<Icon type="exclamation-circle" theme="filled"/>}
                     onConfirm={item.onConfirm}>
             {/* eslint-disable-next-line*/}
             <a>{item.text}</a>

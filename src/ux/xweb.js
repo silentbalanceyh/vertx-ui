@@ -10,6 +10,7 @@ import Ajx from './ajax';
 import {Progress} from "antd";
 import React from "react";
 import './xweb.less';
+import Ux from "ux";
 
 /**
  * ## 「标准」`Ux.xtLazyAjax`
@@ -186,14 +187,17 @@ const xtLazyInit = (reference) => {
              */
             let request;
             if (Abs.isQr(config)) {
+                // Qr 必须是 POST 方法
                 const inputCond = Abs.clone(values);
                 inputCond[""] = true;
                 request = Eng.qrCombine(initParams, ref, inputCond);
                 Dev.dgDebug(request, "[ Xt ] engine = true 的最终查询条件", "#8B3A62");
             } else {
+                // 非 Qr 不可以这么玩，而是拉平参数
+                // request[""] = true;
+                // request["$I"] = initParams;
                 request = Abs.clone(values);
-                request[""] = true;
-                request["$I"] = initParams;
+                Object.assign(request, initParams);
                 Dev.dgDebug(request, "[ Xt ] engine = false 的最终查询条件", "#8B3A62");
             }
             xtLazyData(reference, request, source => xtLazyUnique(reference, source))
@@ -247,6 +251,54 @@ const xtLazyUnique = (reference, source = []) => {
         } else {
             console.warn(`${id} 字段并没配置在 linker 中，请检查：`, $keySet);
         }
+    } else {
+        /**
+         * 此种情况只适合非 Engine 接口
+         */
+        const $keySet = T.formGet(ref);
+        const {linker = {}} = config;
+        if (Abs.isNotEmpty($keySet)) {
+            const filterValue = {};
+            Object.keys(linker).forEach(fieldFrom => {
+                const fieldTo = linker[fieldFrom]
+                const fieldV = $keySet[fieldTo];
+                if (undefined !== fieldV) {
+                    filterValue[fieldFrom] = fieldV;
+                }
+            })
+            const found = Ux.elementFind(source, filterValue, true);
+            /*
+             * 反向查找完成，重新设置 initialValue
+             */
+            if (0 < found.length) {
+                const $keySetValue = found[0] ? found[0] : {};
+                let initialValue = {};
+                T.writeLinker(initialValue, config, () => $keySetValue);
+                /*
+                 * 谁有值修改谁
+                 * initialValue -> $keySet
+                 * $keySet -> initialValue
+                 */
+                Object.keys($keySet)
+                    .filter(field => initialValue.hasOwnProperty(field))
+                    .filter(field => $keySet.hasOwnProperty(field)).forEach(field => {
+                    const iValue = initialValue[field];
+                    const fValue = $keySet[field];
+                    if (iValue && !fValue) {
+                        $keySet[field] = iValue;
+                    }
+                    if (fValue && !iValue) {
+                        initialValue[field] = fValue;
+                    }
+                })
+                if (initialValue.hasOwnProperty(id)) {
+                    reference.setState({initialValue, $keySet});
+                    T.formHits(ref, initialValue);
+                } else {
+                    console.warn(`${id} （多）字段并没配置在 linker 中，请检查：`, $keySet);
+                }
+            }
+        }
     }
 }
 
@@ -274,6 +326,7 @@ const xtLazyUp = (reference, virtualRef) => {
         const isTouched = form.isFieldsTouched();
         if (prevValue !== curValue) {
             const {value, config = {}} = reference.props;
+            Ux.dgDebug({id}, "[ xtLazyUp ] 操作字段：", "#7CCD7C");
             if (isTouched) {
                 // 非重置
                 if (value) {
@@ -282,6 +335,7 @@ const xtLazyUp = (reference, virtualRef) => {
                     // 添加：重置
                     const formValues = {};
                     T.writeLinker(formValues, config, () => ({}));
+                    Ux.dgDebug(formValues, "[ xtLazyUp ] isTouched = true, 触发添加重置", "#7CCD7C");
                     if (Abs.isNotEmpty(formValues)) {
                         T.formHits(ref, formValues);
 
@@ -295,6 +349,7 @@ const xtLazyUp = (reference, virtualRef) => {
                     // 添加：重置
                     const formValues = {};
                     T.writeLinker(formValues, config, () => ({}));
+                    Ux.dgDebug(formValues, "[ xtLazyUp ] isTouched = false, 无 initialValues", "#7CCD7C");
                     if (Abs.isNotEmpty(formValues)) {
                         T.formHits(ref, formValues);
 
@@ -304,6 +359,7 @@ const xtLazyUp = (reference, virtualRef) => {
                     // 编辑：重置
                     const fields = Object.keys(initialValue);
                     const current = T.formGet(ref, fields);
+                    Ux.dgDebug(current, "[ xtLazyUp ] isTouched = false, 编辑重置", "#7CCD7C");
                     if (Abs.isDiff(current, initialValue)) {
 
                         T.formHits(ref, initialValue);

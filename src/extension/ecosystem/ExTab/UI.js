@@ -45,40 +45,28 @@ import './Cab.less';
 // =====================================================
 // componentInit/componentUp
 // =====================================================
-const componentInit = (reference) => {
-    const {config = {}} = reference.props;
-    const state = {};
-    const tabs = Ux.configTab(reference, config);
-    const {forceRender = [], ...rest} = tabs;
-    if (0 < forceRender.length) {
-        tabs.items.forEach(item => {
-            if (forceRender.includes(item.key)) {
-                item.forceRender = true;
-            }
-        })
-    }
-    state.$tabs = rest;
-    state.$ready = true;
-    reference.setState(state);
-};
 
 class Component extends React.PureComponent {
     state = {
-        $ready: false
+        $ready: true
     };
-
-    componentDidMount() {
-        componentInit(this)
-    }
 
     render() {
         return Ex.yoRender(this, () => {
-            const {$tabs = {}} = this.state;
             const {config = {}} = this.props;
+            const tabs = Ux.configTab(this, config);
+            const {forceRender = []} = tabs;
+            if (0 < forceRender.length) {
+                tabs.items.forEach(item => {
+                    if (forceRender.includes(item.key)) {
+                        item.forceRender = true;
+                    }
+                })
+            }
             /*
              * items 抽取
              */
-            const {items = [], fnExtra, ...rest} = $tabs;
+            const {items = [], fnExtra, ...rest} = tabs;
             /*
              * className
              */
@@ -102,8 +90,8 @@ class Component extends React.PureComponent {
                 /*
                  * 里层提供了 activeKey（受控模式）
                  */
-                if ($tabs.activeKey) {
-                    rest.activeKey = $tabs.activeKey;
+                if (tabs.activeKey) {
+                    rest.activeKey = tabs.activeKey;
                 }
                 /*
                  * 其余情况为不受控模式

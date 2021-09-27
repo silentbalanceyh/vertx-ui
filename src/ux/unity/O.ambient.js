@@ -257,12 +257,14 @@ const isRoute = (props, prevProps) => {
      */
     const $prevRouter = prevProps.$router;
     const $router = props.$router;
-    if ($router.path() !== $prevRouter.path()) {
-        return true;
-    }
-    const current = $router.params();
-    const original = $prevRouter.params();
-    return Ux.isDiff(current, original);
+    if ($router && $prevRouter) {
+        if ($router.path() !== $prevRouter.path()) {
+            return true;
+        }
+        const current = $router.params();
+        const original = $prevRouter.params();
+        return Ux.isDiff(current, original);
+    } else return false;
 };
 const isLoaded = (props, prevProps) => !isRoute(props, prevProps)
 /**

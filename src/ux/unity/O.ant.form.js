@@ -146,7 +146,7 @@ const formRead = (reference, data = {}) => {
  * @param {String|Array} key 字段名称，有可能是字段集合。
  * @return {Object|any} 返回读取的字段值。
  */
-const formGet = (reference, key) => {
+const formGet = (reference, key = undefined) => {
     const {form} = reference.props;
     // E.fxTerminal(!form, 10020, form);
     if (form) {

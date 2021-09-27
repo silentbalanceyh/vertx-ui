@@ -79,7 +79,7 @@ const raftValue = (cell = {}, values = {}, reference) => {
 const raftRender = (cell = {}, config = {}) => {
     const {
         calculated = {},
-        addOn = {}
+        addOn = {},
     } = config;
     const {
         entity

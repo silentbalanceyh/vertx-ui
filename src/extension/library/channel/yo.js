@@ -1559,7 +1559,9 @@ const yoRender = (reference = {}, fnJsx, debug = {}) => {
             _outReady(form, {props, state}, debug);
             return Ux.isFunction(fnJsx) ? fnJsx() : fnJsx;
         } else {
-            Ux.dgDebug({props, state}, `............ [ ${name} ] `, "#9E9E9E");
+            if (!debug.off) {
+                Ux.dgDebug({props, state}, `............ [ ${name} ] `, "#9E9E9E");
+            }
             return (<LoadingContent $height={$height}/>);
         }
     }
@@ -1610,7 +1612,7 @@ const isBatchEnabled = (reference) => {
  * 该操作核心内容在`yoList`中，附加内容只是追加过程，所以列表支持的功能，纯表格也同样支持。
  *
  * @memberOf module:_channel
- * @param {React} reference React组件引用
+ * @param {Object} reference React组件引用
  * @returns {Object} 表格专用配置
  */
 const yoTable = (reference) => {

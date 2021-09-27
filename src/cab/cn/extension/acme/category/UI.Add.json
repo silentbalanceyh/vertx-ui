@@ -19,7 +19,19 @@
                 {
                     "metadata": "name,名称,8,,,placeholder=请输入名称,normalize=text:40",
                     "optionConfig.rules": [
-                        "required,请输入名称，名称不可为空！"
+                        "required,请输入名称，名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，名称重复！",
+                            "config": {
+                                "uri": "/api/x-category/existing",
+                                "method": "POST",
+                                "params": {
+                                    "type": "FORM:type",
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
                     ]
                 },
                 {
@@ -48,7 +60,8 @@
                         "ajax": {
                             "uri": "/api/type/categories/:type",
                             "magic": {
-                                "type": "FORM:type"
+                                "type": "FORM:type",
+                                "leaf": "BOOL:false"
                             }
                         },
                         "linker": {

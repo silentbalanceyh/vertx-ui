@@ -42,7 +42,9 @@ const renderLink = (reference, config = {}) => {
              * 只有不禁用的时候使用下边这种格式
              */
             return (
-                <Popconfirm title={plugin.prompt} placement={"top"} onConfirm={onClick}>
+                <Popconfirm title={plugin.prompt} placement={"top"}
+                            overlayClassName={"ux-confirm-op"}
+                            onConfirm={onClick}>
                     {_renderLink(reference, rest)}
                 </Popconfirm>
             )

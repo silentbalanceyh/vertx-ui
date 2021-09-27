@@ -185,7 +185,17 @@ const dialogCombine = (reference, inputAttrs = {}) => {
  * TreeSelector
  * 三组件合并专用统一方法，用于设定 Dialog 的配置信息（全程统一）
  */
-
+const _onSeeking = (reference, config = {}, record, callback) => {
+    if (config.seeking) {
+        const seeking = config.seeking
+        Ux.dgDebug(seeking, "[ Ux ] 触发二次查询", "#93c")
+        const params = Ux.parseAjax(seeking.magic, reference)
+        const parameters = Object.assign(params, record);
+        Ux.asyncData(seeking, parameters, callback)
+    } else {
+        callback(record)
+    }
+}
 const _onConfirm = (reference = {}, config = {}) => (event) => {
     Ux.prevent(event);
     /*
@@ -230,31 +240,39 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
                 }
             }
         } else {
-            // 计算最终值
-            const values = Ux.writeLinker({}, config, () => $keySet);
-            /*
-             * 无值不触发
-             */
-            if (!Ux.isEmpty(values)) {
-                // 调用Form执行数据处理 Linker
-                const {form} = ref.props;
-                if (form) {
+            // 单选新增linker的seeking功能，用于读写 linker 更动态
+            _onSeeking(reference, config, $keySet, (record) => {
+                // 计算最终值
+                const values = Ux.writeLinker({}, config, () => record);
+                /*
+                 * 无值不触发
+                 */
+                if (!Ux.isEmpty(values)) {
+                    // 调用Form执行数据处理 Linker
+                    const {form} = ref.props;
+                    if (form) {
 
-                    // Ant Form 专用流程表单用法，用于在表单中处理值信息
-                    Ux.formHits(ref, values);
+                        // 回调
+                        callback($keySet);
 
-                    // 回调
-                    callback($keySet);
+                        // onChange 保证表单的 isTouched
+                        const {id} = reference.props;
+                        // 修改 initialValue
+                        const {initialValue = {}} = reference.state;
+                        Object.assign(initialValue, values);
+                        reference.setState({initialValue});
 
-                    // onChange 保证表单的 isTouched
-                    const {id} = reference.props;
-                    Ux.fn(reference).onChange(values[id]);
-                } else {
-                    // 非表单专用流程
-                    Ux.fn(reference).onChange(values);
+                        Ux.fn(reference).onChange(values[id]);
+
+                        // Ant Form 专用流程表单用法，用于在表单中处理值信息
+                        Ux.formHits(ref, values);
+                    } else {
+                        // 非表单专用流程
+                        Ux.fn(reference).onChange(values);
+                    }
                 }
-            }
-            reference.setState({$visible: false, $filters: undefined});
+                reference.setState({$visible: false, $filters: undefined});
+            })
         }
     } else {
         if (config.validation) {

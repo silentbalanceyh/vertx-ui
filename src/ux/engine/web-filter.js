@@ -55,7 +55,7 @@ const getClearAttrs = (reference, field, {
     } else {
         clearAttrs.onClick = (event) => {
             Abs.prevent(event);
-            onClear(reference, field, clearFilters);
+            onClear(reference, field, clearFilters)(event);
         };
     }
     return clearAttrs;
@@ -64,19 +64,20 @@ const getClearAttrs = (reference, field, {
 // =====================================================
 // 通用下拉
 // =====================================================
+const onCheckedClear = (reference, field, clearFilters) => (event) => {
+    Abs.prevent(event);
+    clearFilters();
+    const $condition = getCondition(reference, field, []);
+    reference.setState({
+        $condition,
+        $resetCond: Ut.randomString(8),
+    });
+}
 const _filterDropdownCommon = (field, config = {}, reference = {}) => (filterConfig = {}) => {
     const {button = {}, options = [], width = {}} = config;
     const {setSelectedKeys, selectedKeys = [], confirm, clearFilters} = filterConfig;
     const clearAttrs = getClearAttrs(reference, field, {
-        selectedKeys, clearFilters, onClear: (event) => {
-            Abs.prevent(event);
-            clearFilters();
-            const $condition = getCondition(reference, field, []);
-            reference.setState({
-                $condition,
-                $resetCond: Ut.randomString(8),
-            });
-        },
+        selectedKeys, clearFilters, onClear: onCheckedClear,
     });
     // width 执行
     let styleWidth = 0;
@@ -119,7 +120,7 @@ const _filterDropdownCommon = (field, config = {}, reference = {}) => (filterCon
                 <Button {...clearAttrs}>
                     {button.reset ? button.reset : false}
                 </Button>
-                {Fn.anchorColumn(field, clearFilters)}
+                {Fn.anchorColumn(field, clearAttrs.onClick)}
             </div>
         </div>
     );

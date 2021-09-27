@@ -2,6 +2,7 @@ import Abs from '../abyss';
 import {Dsl} from "entity";
 import U from 'underscore';
 import E from '../error';
+import Dev from '../develop';
 
 /**
  * ## 「标准」`Ux.writeTree`
@@ -30,6 +31,7 @@ const writeTree = (reference, state, dft = null) => {
             /* Tabular 节点专用改动 */
             _fnModify("tabular")(field, value);
         }, true);
+        Dev.dgDebug($state, "触发 Redux 更新！");
         fnOut(Dsl.createIn($state, dft));
     } else {
         E.fxFatal(10003, reference);

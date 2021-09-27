@@ -1233,9 +1233,10 @@ const elementFirst = (array = [], field) => {
  * @memberOf module:_element
  * @param {Array} array 输入的数组信息。
  * @param {Object} filters 过滤专用键值对。
+ * @param {Boolean} fuzzy 是否开启模糊查找
  * @return {Array} 返回查找到的数组信息，最终结果也是一个`[]`。
  */
-const elementFind = (array = [], filters) => {
+const elementFind = (array = [], filters, fuzzy = false) => {
     E.fxTerminal(!Abs.isArray(array), 10071, array, "Array");
     let reference = array;
     if (filters) {
@@ -1248,7 +1249,16 @@ const elementFind = (array = [], filters) => {
                     if (Abs.isArray(value)) {
                         return value.includes(item[field]);
                     } else {
-                        return item[field] === value;
+                        if (fuzzy) {
+                            if (item.hasOwnProperty(field)) {
+                                return item[field] === value;
+                            } else {
+                                // 直接过滤掉
+                                return true;
+                            }
+                        } else {
+                            return item[field] === value;
+                        }
                     }
                 });
             }

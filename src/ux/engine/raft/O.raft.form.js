@@ -86,8 +86,35 @@ const aiNormalizer = (reference, item = {}) => {
     }
 }
 
+const aiRule = (rule, item) => {
+    if (Abs.isNotEmpty(rule)) {
+        if (item.optionJsx && rule.hasOwnProperty(item.field)) {
+            // 构造 config
+            if (!item.optionJsx.config) {
+                item.optionJsx.config = {}
+            }
+            // 合并 linker，追加 seeking
+            const configRef = item.optionJsx.config;
+            const ruleConfig = rule[item.field]
+            if (ruleConfig.linker) {
+                if (!configRef.linker) {
+                    configRef.linker = {}
+                }
+                Object.assign(configRef.linker, ruleConfig.linker);
+            }
 
-const raftUi = (reference = {}, ui = []) => {
+            // 合并 seeking
+            if (ruleConfig.seeking) {
+                configRef.seeking = ruleConfig.seeking;
+            }
+            // TODO:
+            // 合并 optionJsx.depend
+            // 合并 optionJsx.impact
+        }
+    }
+}
+
+const raftUi = (reference = {}, ui = [], rule = {}) => {
     // 解析 Title
     ui = Abs.itUi(ui, Expr.aiExprTitle);
     // 解析 field
@@ -98,6 +125,8 @@ const raftUi = (reference = {}, ui = []) => {
     ui = Abs.itMatrix(ui, item => aiValidator(reference, item));
     // 挂载 normalizer
     ui = Abs.itMatrix(ui, item => aiNormalizer(reference, item));
+    // 挂载 rule
+    Abs.itMatrix(ui, item => aiRule(rule, item))
     return ui;
 };
 /*

@@ -1,8 +1,10 @@
 import React from 'react';
 import Ex from 'ex';
-import renderJsx from './Web.jsx';
 import Ux from "ux";
 import Op from "./Op";
+import {Tabs} from "antd";
+import ExAction from "../ExAction/UI";
+import Page from "./Web";
 
 /**
  * ## 「组件」`ExListComplex`
@@ -153,7 +155,7 @@ const componentUp = (reference, previous = {}) => {
             /*
              * 默认的 配置处理
              */
-            Ux.dgDebug($configChecked, "[ ExU ] 配置检查结果", "#ca3d3e")
+            Ux.dgDebug($configChecked, "[ ExComplexList ] 配置检查结果", "#ca3d3e")
             reference.setState({$ready: false});
             Ux.toLoading(() => componentInit(reference).then(state => {
                 /*
@@ -174,9 +176,9 @@ const componentUp = (reference, previous = {}) => {
                 updatedState.$selected = [];
             }
             // position + view，两个变化引起最终变化（先检查position变化）
-            const dirty = _viewDirty(reference, previous);
-            if (dirty) {
-                Ux.dgDebug(updatedState, "[ ExU ] 列表脏更新", "#ca3d3e")
+            const viewDirty = _viewDirty(reference, previous);
+            if (viewDirty) {
+                Ux.dgDebug(updatedState, "[ ExComplexList ] 列表脏更新", "#ca3d3e")
                 const state = reference.state;
                 const {config = {}, /* 基本配置 */} = reference.props;
                 Ex.yiListView(reference, config, state)
@@ -188,9 +190,8 @@ const componentUp = (reference, previous = {}) => {
                         reference.setState(newState);
                     });
             } else {
-                /*
-                 * 直接更新
-                 */
+                const state = reference.state;
+                updatedState.$dirty = state.$dirty;
                 reference.setState(updatedState);
             }
         }
@@ -242,7 +243,31 @@ class Component extends React.PureComponent {
              * 页签行为，而是直接使用 antd 中的 Tabs，主要是防止和原始的
              * ComplexList / ExListComplex 产生冲突
              */
-            return renderJsx(this, tabs);
+            const {items = [], ...rest} = tabs;
+            const extraAttrs = Ex.yoTabExtra(this, rest);
+            return (
+                <Tabs {...rest} tabBarExtraContent={
+                    (<ExAction {...extraAttrs}/>)
+                }>
+                    {items.map((item, index) => {
+                        const {type, ...rest} = item;
+                        /*
+                         * 禁用第一项处理
+                         */
+                        const $item = Ex.yoTabPage(this, {
+                            items, index, item,
+                        });
+                        const fnRender = Page[type];
+                        return $item ? (
+                            <Tabs.TabPane {...item}>
+                                {Ux.isFunction(fnRender) ? fnRender(this, rest) : (
+                                    <span className={"ex-error"}>`fnRender` Function not Found</span>
+                                )}
+                            </Tabs.TabPane>
+                        ) : false
+                    })}
+                </Tabs>
+            )
         }, Ex.parserOfColor("ExListComplex").list())
     }
 }
