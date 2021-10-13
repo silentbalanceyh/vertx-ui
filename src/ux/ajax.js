@@ -649,15 +649,30 @@ const ajaxAdapter = (body = {}) => {
         const {
             data,        // 数据部分
             acl,         // ACL 权限控制
+            qr,          // 查询条件节点
             meta,        // 元数据配置
             extension,   // 扩展配置
             plugin,      // 插件配置
         } = body;
-        // 将响应数据通过 __ 注入到数据内部
-        if (acl) data.__acl = acl;
-        if (meta) data.__meta = meta;
-        if (extension) data.__extension = extension;
-        if (plugin) data.__plugin = plugin;
+        /*
+         * 将响应数据通过 __ 注入到数据内部
+         * 因为JS是弱类型语言，所以不论是 Array / Object 都可以直接挂载 __ 属性，所以附加属性
+         * 全部都挂载在 data 节点中，其中这些节点包含：
+         * 1. data部分：{}, [] 相关结构
+         * 2. 扩展节点用途
+         * - acl：「已启用」权限控制专用节点，提供ACL附加信息
+         * - qr：「已启动」后台视图view对应的查询条件节点
+         * - meta：元数据相关节点
+         * - extension：后端扩展节点
+         * - plugin：前端插件扩展节点
+         */
+        Object.assign(data, Ele.valueValid({
+            __acl: acl,
+            __qr: qr,
+            __meta: meta,
+            __extension: extension,
+            __plugin: plugin
+        }))
         return data;
     } else return body;
 };

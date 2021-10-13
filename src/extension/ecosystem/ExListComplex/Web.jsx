@@ -23,8 +23,8 @@ const renderJsx = (reference, {
         exchange.search = {span: 9, xl: 9, xxl: 8, className: "ex-extra"};
         exchange.extra = {span: 0, xl: 0, xxl: 0};
     } else {
-        exchange.batch = {span: 9, xl: 9, xxl: 10}
-        exchange.search = {span: 8, xl: 8, xxl: 9};
+        exchange.batch = {span: 8, xl: 8, xxl: 10}
+        exchange.search = {span: 9, xl: 9, xxl: 9};
         exchange.extra = {span: 4, xl: 4, xxl: 3, className: "ex-extra"};
     }
     return (

@@ -34,7 +34,7 @@
             "female": "女"
         }
     },
-    "_loading": "程序加载中……",
+    "_loading": "程序加载中，请耐心等待……",
     "_placeholder": "必填",
     "_fatal": {
         "download": {

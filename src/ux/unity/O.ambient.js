@@ -453,7 +453,7 @@ const toLoading = (consumer, seed) => {
      * 5 倍距离
      */
     const ms = Ele.valueInt(Cv['LOADING'], 1);
-    const loadingMs = seed ? seed : 50;
+    const loadingMs = seed ? seed : 0;
     setTimeout(consumer, ms * loadingMs);
 };
 /**

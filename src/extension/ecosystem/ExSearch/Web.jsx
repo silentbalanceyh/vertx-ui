@@ -38,6 +38,7 @@ const renderCriteria = (reference) => {
     const {
         config = {},
         $query,
+        $myQr,
     } = reference.props;
     /*
      * 查询条件
@@ -50,6 +51,11 @@ const renderCriteria = (reference) => {
      */
     const view = config[Ex.Opt.SEARCH_CRITERIA_VIEW];
     const {$filters = {}} = reference.state;
+    // Fix: $myQr
+    const value = Ux.clone($filters);
+    if ($myQr) {
+        Object.assign(value, $myQr);
+    }
     return (
         <Modal {...$dialog}>
             {Ux.aiViewMy(view, reference)}
@@ -58,7 +64,7 @@ const renderCriteria = (reference) => {
                             config={{
                                 field: config.field,
                                 query: $query
-                            }} value={$filters}
+                            }} value={value}
                             onChange={Op.onViewPre(reference)}
                             {...Ux.toAssist(reference)}/>
             </div>

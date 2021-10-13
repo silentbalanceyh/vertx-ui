@@ -459,7 +459,6 @@ const authGroups = (state = {}, types = []) => {
          * 一级：module
          * 二级：name，带权限数量处理
          */
-        console.log(groups);
         const groupType = Ux.elementGroup(groups, "type");
         /*
          * 一级树处理

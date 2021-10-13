@@ -704,7 +704,9 @@ const yoAmbient = (reference = {}, config = {}) => {
                 uniform.$myDefault = $myDefault;
             }
         }
-        _seekState(uniform, reference, "$myView");
+        // Fix: $myQr
+        _seekState(uniform, reference, "$myView");  // 视图专用
+        _seekState(uniform, reference, "$myQr");    // 查询条件专用
     }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;
@@ -2130,7 +2132,8 @@ const yoListSearch = (reference) => {
     /*
      * 查询条件专用处理
      */
-    const {$filters = {}, $filtersRaw = {}} = reference.state;
+    const {$filters = {}, $filtersRaw = {}, $myQr} = reference.state;
+    attrs.$myQr = $myQr;
     if ($filtersRaw) {
         /*
          * 引入组件过后的操作

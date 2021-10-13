@@ -512,7 +512,7 @@ const RENDERS = {
             /*
              * 2.设置单位信息
              */
-            if (normalizedText) {
+            if (undefined !== normalizedText) {
                 const $config = config["$config"] ? config["$config"] : {};
                 const unit = $config.unit ? $config.unit : "￥";
                 const after = !!$config.after;
@@ -972,15 +972,17 @@ const RENDERS = {
             const iconAttrs = {};
             if (icon || !$config.hasOwnProperty("icon")) {
                 if (text) {
-                    iconAttrs.icon = "user";
+                    const segments = icon ? icon.split(',') : [];
+                    iconAttrs.icon = segments[0] ? segments[0] : "user";
                     iconAttrs.iconStyle = {
-                        color: "#CD2990",
+                        color: segments[1] ? segments[1] : "#CD2990",
                         fontSize: 16
                     }
                 } else {
-                    iconAttrs.icon = "setting";
+                    const segments = icon ? icon.split(',') : [];
+                    iconAttrs.icon = segments[0] ? segments[0] : "setting";
                     iconAttrs.iconStyle = {
-                        color: "#7D7D7D",
+                        color: segments[1] ? segments[1] : "#7D7D7D",
                         fontSize: 16
                     }
                 }

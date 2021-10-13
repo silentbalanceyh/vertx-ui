@@ -465,7 +465,10 @@ const configScroll = ($table = {}, data = [], reference) => {
             const titleWidth = _widthTitle(rdTitle, column);
             const calculated = executor(titleWidth, column, data, reference);
             if (rdWidth) {
-                column.width = Math.max(titleWidth, calculated, rdWidth);
+                if (!column.fixed) {
+                    // 左右工具栏不参与运算，要固定宽度
+                    column.width = Math.max(titleWidth, calculated, rdWidth);
+                }
             } else {
                 column.width = Math.max(titleWidth, calculated);
             }

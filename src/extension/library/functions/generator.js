@@ -622,7 +622,12 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
             view: $myView,
             options
         }, reference);
-        return Ux.ajaxPost(uri, params);
+        return Ux.ajaxPost(uri, params).then(response => {
+            if (response.__qr) {
+                reference.setState({$myQr: response.__qr});
+            }
+            return Ux.promise(response);
+        });
     });
 /**
  * ## 「2阶」`Ex.rxColumnSave`
@@ -647,8 +652,11 @@ const rxColumnSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
             options
         }, reference);
         return Ux.ajaxPut(uri, {
-            // 此处只更新projection
-            projection
+            // 此处只更新projection，新版多加一层 viewData
+            // 防止和查询引擎参数格式冲突，后端自动检测会失败
+            viewData: {
+                projection
+            }
         }).then(data => Ux.promise(data['projection']));
     }
 );
@@ -664,9 +672,17 @@ const rxFilterSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
             options
         }, reference);
         return Ux.ajaxPut(uri, {
-            // 此处只更新projection
-            criteria
-        }).then(data => Ux.promise(data['criteria']));
+            // 此处只更新criteria，新版多加一层 viewData
+            // 防止和查询引擎参数格式冲突，后端自动检测会失败
+            viewData: {
+                criteria
+            }
+        }).then(data => {
+            // Fix: $myQr
+            const $myQr = data.criteria;
+            reference.setState({$myQr});
+            return Ux.promise($myQr);
+        });
     }
 );
 const _uriView = (uri, {
