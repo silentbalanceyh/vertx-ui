@@ -1,47 +1,47 @@
-import {Modal} from 'antd';
 import Ux from 'ux';
+import {Modal} from "antd";
 
-const onConfirm = (reference, item) => {
-    const {$functions = {}, $inited = {}} = reference.props;
-    Modal.confirm({
-        ...item.confirm,
-        onOk: () => {
-            const callback = $functions[item.function];
-            if (Ux.isFunction(callback)) {
-                callback($inited, item);
-            }
-        }
-    })
-};
-const onDialog = (reference, item) => {
-    let {visible = {}} = reference.state;
-    visible = Ux.clone(visible);
-    visible[item.key] = true;
-    reference.setState({visible});
-};
-const onDirect = (reference, item) => {
-
-};
-const EVENTS = {
-    CONFIRM: onConfirm,
-    DIALOG: onDialog,
-    DIRECT: onDirect
-};
-const onClick = (reference) => (event) => {
-    const {items = []} = reference.state;
-    const item = items.filter(each => each.key === event.key);
-    if (1 === item.length) {
-        const configuration = item[0];
-        const executor = EVENTS[configuration.type];
-        if (Ux.isFunction(executor)) {
-            executor(reference, configuration);
-        } else {
-            console.warn(`[ Zero ] Could not find event of type = ${configuration.type}`)
-        }
+const _runFn = (reference, item) => {
+    const {executor} = item;
+    const {$executor = {}} = reference.props;
+    const fnExecute = $executor[executor];
+    if (Ux.isFunction(fnExecute)) {
+        fnExecute(item, reference);
     } else {
-        console.warn(`[ Zero ] Could not find event of key = ${event.key}`)
+        console.error(`函数${executor}不存在于$executor中。`, $executor);
     }
+}
+
+const _runExecute = (reference, item) => {
+    // 函数执行和窗口执行
+    if (item.component) {
+        const state = {};
+        state.$visible = item.key;
+        reference.setState(state);
+    } else {
+        // 函数执行
+        const {button = {}} = item;
+        if (button.confirm) {
+            // 弹出窗口专用
+            Modal.confirm({
+                content: button.confirm,
+                onOk: () => _runFn(reference, item)
+            })
+        } else {
+            // 直接执行
+            _runFn(reference, item);
+        }
+    }
+}
+const rxClick = (reference, item) => (event) => {
+    Ux.prevent(event);
+    _runExecute(reference, item);
 };
+const rxMenu = (reference) => (menuitem) => {
+    const {data = {}} = menuitem.item.props;
+    _runExecute(reference, data);
+}
 export default {
-    onClick
+    rxClick,
+    rxMenu
 }

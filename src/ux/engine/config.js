@@ -1389,16 +1389,20 @@ const configTab = (reference, config = {}) => {
         /*
          * 计算有状态的 fnExtra
          */
-        const normalized = {};
-        Abs.itObject(tabs.tabBarExtraContent, (field, value) =>
-            normalized[field] = Rx.aiExprButtons(value, reference.props));
-        tabs.fnExtra = () => {
-            /*
-             * render部分
-             */
-            const {$activeKey} = reference.state ? reference.state : {};
-            const content = normalized[$activeKey];
-            return WebField.aiButtonGroup(reference, content);
+        if (Abs.isFunction(tabs.tabBarExtraContent)) {
+            tabs.fnExtra = tabs.tabBarExtraContent;
+        } else {
+            const normalized = {};
+            Abs.itObject(tabs.tabBarExtraContent, (field, value) =>
+                normalized[field] = Rx.aiExprButtons(value, reference.props));
+            tabs.fnExtra = () => {
+                /*
+                 * render部分
+                 */
+                const {$activeKey} = reference.state ? reference.state : {};
+                const content = normalized[$activeKey];
+                return WebField.aiButtonGroup(reference, content);
+            }
         }
     }
     if (!tabs.onTabClick) {

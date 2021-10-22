@@ -283,6 +283,10 @@ const aiSelect = (reference, input = {}, onChange) => {
     if (!rest.style) {
         rest.style = {width: "100%"};
     }
+    R.Ant.onReadOnly(rest, true, reference);
+    if (rest.readOnly) {
+        rest.className = `${rest.className} ux-readonly-select`
+    }
     return (
         <Select {...rest}>
             {options.map(item => (
@@ -372,6 +376,10 @@ const aiTreeSelect = (reference, jsx = {}, onChange) => {
     // 没有任何内容时候的 100% 宽度处理
     if (!rest.style) {
         rest.style = {width: "100%"};
+    }
+    R.Ant.onReadOnly(rest, true, reference);
+    if (rest.readOnly) {
+        rest.className = `${rest.className} ux-readonly-select`
     }
     return (<TreeSelect treeData={data} {...rest}/>);
 };

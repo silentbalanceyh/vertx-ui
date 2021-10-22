@@ -78,6 +78,7 @@ const readOnly = (jsx = {}, disabled = false, reference) => {
             if ("multiple" !== jsx.mode) {
                 /*
                  * 多选不禁用
+                 * 单选禁用
                  */
                 jsx.disabled = disabled;
             }

@@ -857,11 +857,15 @@ const rxView = (reference) => (key, record = {}) => {
          * operation for uri
          */
         const params = {};
-        Object.keys(record).forEach(key => {
-            if (!Ux.isObject(record[key]) && !Ux.isArray(record[key])) {
-                params[key] = record[key];
-            }
-        })
+        if (Ux.isEmpty(record)){
+            params['key'] = key;
+        }else{
+            Object.keys(record).forEach(key => {
+                if (!Ux.isObject(record[key]) && !Ux.isArray(record[key])) {
+                    params[key] = record[key];
+                }
+            })
+        }
         return Ux.ajaxGet(uri, params);
     }
 };

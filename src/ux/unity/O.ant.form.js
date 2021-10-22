@@ -295,6 +295,14 @@ const formRedo = (reference) => {
         $submitting: false, $loading: false
     });
 }
+const valueMap = (target, source, config = {}) => {
+    Abs.itObject(config, (from, to) => {
+        if (!target[from]) {
+            target[from] = source[to];
+        }
+    });
+    return target;
+}
 export default {
     // Form数据处理
     formClear,
@@ -313,4 +321,5 @@ export default {
         $loading: false
     }),
     valueRequest,
+    valueMap,
 };

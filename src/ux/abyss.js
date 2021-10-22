@@ -1936,6 +1936,19 @@ const _generatorFn = (reference, names = []) => {
  */
 const immutable = (input) => Immutable.fromJS(input);
 // eslint-disable-next-line
+const isTimeSame = (leftMom, rightMom) => {
+    if (undefined === leftMom || undefined === rightMom) {
+        return false;
+    }
+    const leftValue = moment.isMoment(leftMom) ? leftMom : moment(leftMom, "HH:mm:ss");
+    const rightValue = moment.isMoment(rightMom) ? rightMom : moment(rightMom, "HH:mm:ss");
+    if (!leftValue.isValid() || !rightValue.isValid()) {
+        return false;
+    }
+    return leftValue.hour() === rightValue.hour()
+        && leftValue.minute() === rightValue.minute()
+        && leftValue.second() === rightValue.second()
+}
 export default {
     /* 对象执行 */
     input,
@@ -2138,7 +2151,7 @@ export default {
      * @returns {boolean} 不同返回 false，相同则返回 true
      */
     isSame: (left, right) => !isDiff(left, right),
-
+    isTimeSame,
     isValid,
     isParent,   /* 判断输入节点是否当前节点父节点 */
 

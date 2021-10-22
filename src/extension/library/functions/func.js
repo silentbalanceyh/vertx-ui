@@ -497,7 +497,6 @@ const upList = (props = {}, prevProps = {}) => {
 
     if (current.component) delete current.component;
     if (original.component) delete original.component;
-
     if (Ux.isDiff(original, current)) {
         return {original, current};
     }

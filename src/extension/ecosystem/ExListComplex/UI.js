@@ -178,7 +178,7 @@ const componentUp = (reference, previous = {}) => {
             // position + view，两个变化引起最终变化（先检查position变化）
             const viewDirty = _viewDirty(reference, previous);
             if (viewDirty) {
-                Ux.dgDebug(updatedState, "[ ExComplexList ] 列表脏更新", "#ca3d3e")
+                Ux.dgDebug(updatedState, "[ ExComplexList ] 视图改变更新", "#ca3d3e")
                 const state = reference.state;
                 const {config = {}, /* 基本配置 */} = reference.props;
                 Ex.yiListView(reference, config, state)
@@ -190,8 +190,10 @@ const componentUp = (reference, previous = {}) => {
                         reference.setState(newState);
                     });
             } else {
+                // 已加载完成时
                 const state = reference.state;
                 updatedState.$dirty = state.$dirty;
+                Ux.dgDebug(updatedState, "[ ExComplexList ] （完成）列表脏更新", "#ca3d3e");
                 reference.setState(updatedState);
             }
         }
@@ -199,7 +201,8 @@ const componentUp = (reference, previous = {}) => {
         /*
          * 路由改变
          */
-        reference.setState({$ready: false})
+        Ux.dgDebug({}, "[ ExComplexList ] 路由未改变", "#ca3d3e")
+        reference.setState({$ready: true})
     }
 };
 

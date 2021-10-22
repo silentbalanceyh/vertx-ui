@@ -547,14 +547,10 @@ export default {
         },
         DialogMenu: {
             Filter: [
+                "$executor",
+                "$component",
                 "$disabled",
-                "$disabledItems",
-                "$inited",
-                "$items",
-                "$button",
-                "$functions",
-                "$content",
-                "$mode"
+                "config"
             ]
         },
         DialogButton: {

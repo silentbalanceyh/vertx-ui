@@ -1,8 +1,8 @@
 import React from 'react';
 import Ux from 'ux';
-import {Button, Dropdown, Icon, Menu} from 'antd';
-import Op from "./Op";
-import Jsx from "./Web";
+import Op from './Op';
+import {Button} from "antd";
+import Rdr from './Web';
 
 /**
  * ## 「组件」`DialogMenu`
@@ -83,20 +83,12 @@ import Jsx from "./Web";
 // =====================================================
 // componentInit/componentUp
 // =====================================================
-const parseButton = (reference) => {
-    const {$button = {}} = reference.props;
-    const config = Ux.aiExprAction($button);
-    config.onClick = Op.onClick(reference);
-    return config;
-};
 const parseDialog = (reference, item = {}) => {
     let config = Ux.aiExprWindow(item.dialog);
     config = Ux.clone(config);
     config.onCancel = (event) => {
         event.preventDefault();
-        let state = Ux.clone(reference.state);
-        state.visible[item.key] = false;
-        reference.setState(state);
+        reference.setState({$visible: undefined});
     };
     const id = config.onOk;
     if (!Ux.isFunction(id)) {
@@ -108,115 +100,94 @@ const parseDrawer = (reference, item) => {
     let config = Ux.aiExprDrawer(item.dialog);
     config.onClose = (event) => {
         event.preventDefault();
-        let state = Ux.clone(reference.state);
-        state.visible[item.key] = false;
-        reference.setState(state);
+        reference.setState({$visible: undefined});
     };
     return config;
 };
-const configuration = {
-    // 菜单由于Popover的冲突，不提供Popover的模式
-    DIALOG: parseDialog,
-    DRAWER: parseDrawer
-};
-const componentInit = (reference) => {
-    // 1.判断当前组件是哪种Button，使用了哪种Dialog
-    const {$mode, $items = []} = reference.props;
-    let itemsConfig = Ux.clone($items);
-    // 2.按钮处理
-    const button = parseButton(reference);
-    // 3.Window的解析函数不一致
-    if (0 < $items.length && ("DIALOG" === $mode || "DRAWER" === $mode)) {
-        const items = [];
-        const renders = {};
-        const windows = {};
-        const visible = {};
-        itemsConfig.forEach(item => {
-            // 解析对应的菜单项
-            item.button = Ux.aiExprAction(item.button);
-            // item中button的key赋值
-            item.key = item.button.key;
-            if (item.hasOwnProperty("dialog")) {
-                // 使用executor解析窗口
-                const executor = configuration[$mode];
-                item.dialog = executor(reference, item);
-                item.type = "DIALOG";
-                renders[item.key] = Jsx.renderItem(reference, item);
-                windows[item.key] = Jsx[$mode](reference, item);
-                visible[item.key] = false;
-            } else if (item.hasOwnProperty("confirm")) {
-                // 删除专用模式
-                item.type = "CONFIRM";
-                if ("string" === typeof item.confirm) {
-                    const formatted = item.confirm.split(",");
-                    const confirm = {};
-                    confirm.content = formatted[0];
-                    if (formatted[1]) confirm.okText = formatted[1];
-                    if (formatted[2]) confirm.cancelText = formatted[2];
-                    item.confirm = confirm;
-                }
-                renders[item.key] = Jsx.renderItem(reference, item);
-            } else {
-                item.type = "DIRECT";
-            }
-            items.push(item);
+const parseItem = (item = {}, reference, configMap = {}) => {
+    const itemConfig = {};
+    // button
+    const button = Ux.aiExprAction(item.button);
+    if (item.children) {
+        // Children Loop
+        const children = [];
+        item.children.forEach(child => {
+            const parsed = parseItem(child, reference, configMap);
+            children.push(parsed);
         });
-        return {
-            button, items,
-            // 渲染
-            renders,
-            // 呈现，DIALOG专用
-            visible, windows
-        }
-    } else {
-        // Error
-        if (0 === $items.length) {
-            return {error: Ux.E.fxError(10094, $items.length)};
-        }
-        return {error: Ux.E.fxError(10093, $mode)};
+        itemConfig.children = children;
     }
+    itemConfig.button = button;
+    itemConfig.key = item.key ? item.key : item.component;
+    if (item.component) {
+        itemConfig.component = item.component;
+    }
+    // dialog
+    if ("DRAWER" === item.mode) {
+        const dialogConfig = parseDrawer(reference, item);
+        dialogConfig.mode = "DRAWER";
+        itemConfig.dialog = dialogConfig;
+    } else {
+        const dialogConfig = parseDialog(reference, item);
+        if (item.executor) {
+            itemConfig.executor = item.executor;
+        } else {
+            dialogConfig.mode = "DIALOG";
+        }
+        itemConfig.dialog = dialogConfig;
+    }
+    // Item Prepared
+    if (item.children) {
+        itemConfig.button.onClick = Op.rxMenu(reference, itemConfig);
+    } else {
+        itemConfig.button.onClick = Op.rxClick(reference, itemConfig);
+    }
+    configMap[itemConfig.key] = itemConfig;
+    return itemConfig;
+}
+const componentInit = (reference) => {
+    const {config = []} = reference.props;
+    const normalized = [];
+    const configMap = {};
+    config.forEach(each => {
+        const parsed = parseItem(each, reference, configMap);
+        if (parsed) {
+            normalized.push(parsed)
+        }
+    });
+    const state = {};
+    state.$config = normalized;
+    state.$configMap = configMap;
+    state.$ready = true;
+    reference.setState(state);
 };
 
 class Component extends React.PureComponent {
-    render() {
-        const reference = this;
-        return Ux.xtRender(this, () => {
-            const {
-                button = {}, items = [],
-                renders = {}, windows = {},
-            } = reference.state;
-            button.icon = "down";
-            const {text, icon, onClick, ...rest} = button;
-            // 是否禁用
-            const {$disabled = false, $disabledItems = {}} = this.props;
-            const attrs = {disabled: $disabled};
-            return (
-                <span>
-                    <Dropdown overlay={
-                        <Menu onClick={onClick} key={Ux.randomUUID()}>
-                            {items.filter(item => Ux.isFunction(renders[item.key]))
-                                .map(item => (
-                                    <Menu.Item key={item.key}
-                                               disabled={$disabledItems[item.key]}>
-                                        {renders[item.key]()}
-                                    </Menu.Item>
-                                ))}
-                        </Menu>
-                    } {...attrs}>
-                        <Button {...rest}>
-                            {text ? text : ""}&nbsp;<Icon type={icon}/>
-                        </Button>
-                    </Dropdown>
-                    {items.filter(item => windows.hasOwnProperty(item.key))
-                        .filter(item => Ux.isFunction(windows[item.key]))
-                        .map(item => windows[item.key]())}
-                </span>
-            );
-        });
-    };
-
     componentDidMount() {
         componentInit(this);
+    }
+
+    render() {
+        return Ux.xtRender(this, () => {
+            const {$config = {}} = this.state;
+            const {$disabled = []} = this.props;
+            return (
+                <Button.Group>
+                    {$config.map(item => {
+                        const $item = Ux.clone(item);
+                        if ($disabled.includes(item.key)) {
+                            $item.button.disabled = true;
+                        }
+                        if ($item.children) {
+                            return Rdr.renderMenu(this, $item);
+                        } else {
+                            return Rdr.renderButton(this, $item);
+                        }
+                    })}
+                    {Rdr.renderWindow(this)}
+                </Button.Group>
+            );
+        });
     }
 }
 
