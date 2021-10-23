@@ -10,7 +10,13 @@ const getChildren = (reference, item = {}) => {
     const Component = $component[item.key]
     if (Component) {
         // 「LIMIT」限制继承
-        const inherits = Ux.toLimit(reference.props, Fn.Limit.DialogMenu.Filter);
+        const inherits =
+            Ux.toLimit(reference.props, Fn.Limit.DialogMenu.Filter);
+        // doSubmitting
+        inherits.doSubmitting = ($submitting = true) => {
+            // 防提交专用函数
+            reference.setState({$submitting});
+        }
         return (
             <Component {...inherits}/>
         );
@@ -36,8 +42,10 @@ const renderWindow = (reference) => {
                 </Drawer>
             )
         } else {
+            const {$submitting = false} = reference.state;
             return (
                 <Dialog key={config.key}
+                        $loading={$submitting}
                         $dialog={dialog}
                         $visible>
                     {jsx}

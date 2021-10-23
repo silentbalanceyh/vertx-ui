@@ -30,16 +30,16 @@ const collect = dirPath => {
     return results;
 };
 
-const generateRoute = (Component = [], Config) => {
+const generateRoute = (Component = [], Config, pageTpl = {}) => {
     const routes = [];
     Component.forEach(item => {
         // 计算该页面的模板
-        const special = Config.special;
-        const tpl = !special ? Config.defined : (() => {
-            let pageTpl = Config.defined;
-            for (const specTpl in Config.special) {
-                if (Config.special.hasOwnProperty(specTpl)) {
-                    const pages = Config.special[specTpl];
+        const special = Config['special'];
+        const tpl = !special ? Config['defined'] : (() => {
+            let pageTpl = Config['defined'];
+            for (const specTpl in Config['special']) {
+                if (Config['special'].hasOwnProperty(specTpl)) {
+                    const pages = Config['special'][specTpl];
                     const $pages = Immutable.fromJS(pages);
                     if ($pages.contains(item)) {
                         pageTpl = specTpl;
@@ -50,7 +50,11 @@ const generateRoute = (Component = [], Config) => {
             return pageTpl;
         })();
         const route = {};
-        route.layout = tpl;
+        if (pageTpl.hasOwnProperty(item)) {
+            route.layout = pageTpl[item];
+        } else {
+            route.layout = tpl;
+        }
         route.page = item;
         route.uri = item.replace(/_/g, "/").replace(/\$/g, '-');
         routes.push(route);
@@ -120,9 +124,18 @@ fs.writeFile("src/container/index.js", content, () => {
 const pageDir = collect('./src/components');
 line = [];
 const variables = [];
+const pageTpl = {};
 pageDir.forEach(layout => {
     const key = layout.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
     line.push(`import ${key} from '${layout}/UI';`);
+    // tpl计算
+    const tpl = `src/components` + layout.substring(1) + "/Cab.json";
+    if (fs.existsSync(tpl)) {
+        const json = JSON.parse(fs.readFileSync(tpl).toString());
+        if (json.tpl) {
+            pageTpl[key] = json.tpl;
+        }
+    }
     variables.push(key);
 });
 
@@ -155,9 +168,9 @@ fs.writeFileSync("src/extension/components/index.js", extensionLine.join("\n"));
 fs.writeFile("src/components/index.js", content, () => {
     console.log("[SUC] Successfully to write data to src/components/index.js");
     // 1.读取路由模板，生成静态路由
-    const routeConfig = JSON.parse(fs.readFileSync("src/route.json"));
+    const routeConfig = JSON.parse(fs.readFileSync("src/route.json").toString());
     // 2.计算路由关联关系
-    const routes = generateRoute(variables.concat(extensionVariables), routeConfig);
+    const routes = generateRoute(variables.concat(extensionVariables), routeConfig, pageTpl);
     // 3.根据路由规则计算生成片段
     const lines = [];
     routes.forEach(route => generateTpl(lines, route));
