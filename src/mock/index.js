@@ -10,9 +10,13 @@ import post_api_user_logout from './zero-ui/login/post_api_user_logout';
 import get_api_module from "./zero-ui/ui/get_api_module";
 import get_api_group_by_sigma from "./zero-ui/rbac/get_api_group_by_sigma";
 import post_api_ui_ops from "./zero-ui/ui/post_api_ui_ops";
+
 import get_api_columns_group_full from "./zero-ui/ui/get_api_columns_group_full";
 import get_api_columns_group_my from "./zero-ui/ui/get_api_columns_group_my";
-import post_api_group_search from "./zero-ui/qr/post_api_group_search"
+import post_api_group_search from "./zero-ui/rbac/post_api_group_search"
+import post_api_group_existing from "./zero-ui/rbac/post_api_group_existing";
+import post_api_group from "./zero-ui/rbac/post_api_group";
+import get_api_user_$key from './zero-ui/rbac/get_api_user_$key';
 
 export default {
     // 登录到主界面
@@ -31,5 +35,9 @@ export default {
     get_api_group_by_sigma,
     get_api_columns_group_full,
     get_api_columns_group_my,
-    post_api_group_search
+    post_api_group_search,
+    post_api_group_existing,
+    post_api_group,
+    // 用户
+    get_api_user_$key
 }

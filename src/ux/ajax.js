@@ -392,15 +392,15 @@ const mockAjax = async (request = {}, params = {}, executor = {}) => {
                     const source = Abs.clone(mockData.data);
                     let called = mockData.processor(source, Abs.clone(params));
                     if (called instanceof Promise) {
-                        const [error, data] = await Abs.promise(called);
-                        called = {}
-                        if (data) {
-                            called = data;
-                        } else {
+                        let ok = await called;
+                        if (ok['_error']) {
+                            ok = Abs.clone(ok);
                             called = {
-                                data: error,
-                                _error: true
+                                data: ok,
+                                _error: ok['_error']
                             }
+                        } else {
+                            called = ok;
                         }
                     }
                     await Dev.Logger.response(called, params, request, true);

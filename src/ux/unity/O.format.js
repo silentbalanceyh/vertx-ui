@@ -90,7 +90,9 @@ const formatQuery = (uri = "", params = {}, encode = true) => {
     for (const key in params) {
         if (params.hasOwnProperty(key)) {
             const value = params[key];
-            if (undefined !== value && value.toString().length <= 40) {
+            if (undefined !== value
+                && null !== value
+                && value.toString().length <= 40) {
                 const kv = encode ? `${key}=${encodeURIComponent(value)}` : `${key}=${value}`;
                 if (start) {
                     // 直接追加
