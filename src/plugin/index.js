@@ -6,7 +6,5 @@ export default {
     Extension,
 
     pluginField: (ref) => (record, reference) => {
-        const $edition = {};
-        return $edition;
     }
 }
