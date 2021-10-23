@@ -43,37 +43,35 @@ const rxSave = (reference) => (event) => {
         const params = keys.filter(item => fullColumns.includes(item));
 
         if (Ux.isFunction(rxColumnSave)) {
-            rxColumnSave(params)
-                .then(response => {
-                    /*
-                     * $columnsMy 更新
-                     */
-                    const $response = Ux.immutable(response);
-                    const $columnsMy = $response.filter(item => fullColumns.includes(item))
-                    /*
-                     * 防重复提交关闭
-                     * （本层处理）
-                     */
-                    Ex.rsSubmitting(reference, false)();
-                    /*
-                     * 关闭窗口，并且设置 $columnsMy
-                     * （窗口引用处理）
-                     */
-                    Ex.rx(reference).close();
-                    /*
-                     * 更新 $columnsMy，顶层引用
-                     */
-                    Ex.rx(reference).projection($columnsMy, {
-                        $dirty: true,
-                    });
-                    /*
-                     * 消息提示
-                     */
-                    Ux.messageSuccess($combine);
-                })
-                .catch(error => {
-                    console.error(error);
+            rxColumnSave(params).then(response => {
+                /*
+                 * $columnsMy 更新
+                 */
+                const $response = Ux.immutable(response);
+                const $columnsMy = $response.filter(item => fullColumns.includes(item))
+                /*
+                 * 防重复提交关闭
+                 * （本层处理）
+                 */
+                Ex.rsSubmitting(reference, false)();
+                /*
+                 * 关闭窗口，并且设置 $columnsMy
+                 * （窗口引用处理）
+                 */
+                Ex.rx(reference).close();
+                /*
+                 * 更新 $columnsMy，顶层引用
+                 */
+                Ex.rx(reference).projection($columnsMy, {
+                    $dirty: true,
                 });
+                /*
+                 * 消息提示
+                 */
+                Ux.messageSuccess($combine);
+            }).catch(error => {
+                console.error(error);
+            });
         } else {
             throw new Error("[ Ex ] 核心函数丢失：rxColumnSave ");
         }

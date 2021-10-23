@@ -21,5 +21,6 @@ export default {
         .then(() => db.update(TABLE, params.key, params)),
     all: () => db.init(DDL)
         .then(() => db.all(TABLE)),
-    viewSave: (params) => db.viewSave(TABLE, params)
+    viewSave: (params) => db.viewSave(TABLE, params),
+    viewMy: (params) => db.viewMy(TABLE, params)
 }
