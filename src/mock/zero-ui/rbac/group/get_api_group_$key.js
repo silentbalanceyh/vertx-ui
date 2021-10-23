@@ -1,7 +1,7 @@
-import R from '../../rule';
+import group from "./db.group";
 
 export default {
     mock: true,
     processor: (response, request) =>
-        R.group.create(request)
+        group.byId(request)
 }

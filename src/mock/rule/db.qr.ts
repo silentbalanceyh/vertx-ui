@@ -38,6 +38,9 @@ class QValue implements QNode {
         if ("=" === this.op) {
             // 等于
             return `${this.field} = '${this.value}'`
+        } else if ("<>" === this.op) {
+            // 不等于
+            return `${this.field} <> '${this.value}'`
         }
     }
 }

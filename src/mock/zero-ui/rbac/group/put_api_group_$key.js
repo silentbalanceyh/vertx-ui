@@ -1,7 +1,7 @@
-import R from '../../rule';
+import group from "./db.group";
 
 export default {
     mock: true,
     processor: (response, request) =>
-        R.group.existing(request)
+        group.update(request)
 }
