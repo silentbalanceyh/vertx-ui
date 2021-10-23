@@ -1,3 +1,4 @@
 {
-    "ns": "components/login/index"
+    "ns": "components/login/index",
+    "tpl": "_login_index"
 }

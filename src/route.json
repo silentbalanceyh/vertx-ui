@@ -1,9 +1,3 @@
 {
-    "defined": "_ops_admin",
-    "special": {
-        "_login_index": [
-            "_login_index",
-            "_login_form"
-        ]
-    }
+    "defined": "_zui_admin"
 }

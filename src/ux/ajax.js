@@ -351,10 +351,8 @@ const calculateKey = (request, params) => {
     if (!FormData.prototype.isPrototypeOf(params)) {
         Abs.itObject(params, (k, v) => {
             // 还原将 key / id 全部处理掉，处理路径参数
-            if ("key" === k || "id" === k) {
-                if (0 < api.indexOf(v)) {
-                    api = api.replace(v, `:${k}`);
-                }
+            if (0 < api.indexOf(v)) {
+                api = api.replace(v, `$${k}`);
             }
         })
     }
