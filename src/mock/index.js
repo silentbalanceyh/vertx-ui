@@ -20,6 +20,7 @@ import get_api_user_$key from './zero-ui/rbac/get_api_user_$key';
 import get_api_group_$key from "./zero-ui/rbac/group/get_api_group_$key";
 import delete_api_group_$key from "./zero-ui/rbac/group/delete_api_group_$key";
 import put_api_group_$key from "./zero-ui/rbac/group/put_api_group_$key";
+import put_api_columns_group_my from "./zero-ui/rbac/group/put_api_columns_group_my";
 
 export default {
     // 登录到主界面
@@ -44,6 +45,7 @@ export default {
     get_api_group_$key,
     delete_api_group_$key,
     put_api_group_$key,
+    put_api_columns_group_my,
     // 用户
     get_api_user_$key
 }

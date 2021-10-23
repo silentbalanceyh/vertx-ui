@@ -13,12 +13,13 @@ export default {
         .then(() => db.create(TABLE, params)),
     search: (params) => db.init(DDL)
         .then(() => db.search(TABLE, params)),
-    byId: (params) => db.init(DDL)
+    get: (params) => db.init(DDL)
         .then(() => db.get(TABLE, params.key)),
     remove: (params) => db.init(DDL)
         .then(() => db.remove(TABLE, params.key)),
     update: (params) => db.init(DDL)
         .then(() => db.update(TABLE, params.key, params)),
     all: () => db.init(DDL)
-        .then(() => db.all(TABLE))
+        .then(() => db.all(TABLE)),
+    viewSave: (params) => db.viewSave(TABLE, params)
 }

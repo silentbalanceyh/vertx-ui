@@ -3,7 +3,10 @@ import Ux from 'ux';
 import moment from 'moment';
 
 const db = openDatabase('DB_ZERO_UI', '1.0', 'UI_MOCK', 2 * 1024 * 1024)
-
+const DDL_VIEW = `CREATE TABLE IF NOT EXISTS VIEW_DATA (
+    key, userId,tableName,criteria,projection,
+    sigma, language, active, metadata, 
+    createdAt, createdBy, updatedAt, updatedBy)`;
 const executeError = (tx, err) => {
     console.error(err)
 }
@@ -82,6 +85,23 @@ const queryAsync = (table, criteria) => new Promise((resolve, reject) => {
         executeError)
     )
 })
+const createAsync = (table, params) => new Promise((resolve, reject) => {
+    const data = executeData(params);
+    const stmtField = [];
+    const stmtValue = [];
+    const args = [];
+    Object.keys(data).forEach(key => {
+        stmtField.push(key);
+        stmtValue.push("?");
+        args.push(data[key])
+    });
+    const sql = `INSERT INTO ${table} (${stmtField.join(",")}) VALUES (${stmtValue.join(",")})`;
+    Ux.dgDebug(sql, "「Mock」Sql", "#52c419")
+    db.transaction((tx) => tx.executeSql(sql, args,
+        (tx, rs) => resolve(data),
+        executeError)
+    )
+})
 const queryList = (table, params) => new Promise((resolve, reject) => {
     const qr = new Qr(params);
     const sql = `SELECT * FROM ${table} WHERE ${qr.sql()}`;
@@ -138,23 +158,28 @@ export default {
         const user = Ux.isLogged();
         return queryList(table, {sigma: user.sigma});
     },
-    create: (table, params) => new Promise((resolve, reject) => {
-        const data = executeData(params);
-        const stmtField = [];
-        const stmtValue = [];
-        const args = [];
-        Object.keys(data).forEach(key => {
-            stmtField.push(key);
-            stmtValue.push("?");
-            args.push(data[key])
-        });
-        const sql = `INSERT INTO ${table} (${stmtField.join(",")}) VALUES (${stmtValue.join(",")})`;
-        Ux.dgDebug(sql, "「Mock」Sql", "#52c419")
-        db.transaction((tx) => tx.executeSql(sql, args,
-            (tx, rs) => resolve(data),
-            executeError)
-        )
+    viewSave: (table, params) => new Promise((resolve, reject) => {
+        const user = Ux.isLogged();
+        const where = `SELECT * FROM VIEW_DATA WHERE tableName='${table}' AND userId='${user.key}'`;
+        db.transaction((tx) => tx.executeSql(DDL_VIEW, [], (itx, view) => {
+            itx.executeSql(where, [], (iitx, res) => {
+                const item = res.rows[0];
+                if (item) {
+                    console.log(item);
+                } else {
+                    const record = {};
+                    record.userId = user.key;
+                    record.tableName = table;
+                    const {viewData = {}} = params;
+                    if (viewData.projection) {
+                        record.projection = JSON.stringify(viewData.projection);
+                    }
+                    createAsync("VIEW_DATA", record).then(res => resolve(res));
+                }
+            }, executeError)
+        }, executeError))
     }),
+    create: (table, params) => createAsync(table, params),
     update: (table, key, params) => new Promise((resolve, reject) => {
         const data = executeData(params);
         const stmtField = [];
