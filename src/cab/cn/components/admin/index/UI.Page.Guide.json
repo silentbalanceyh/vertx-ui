@@ -1,0 +1,174 @@
+{
+    "_treedata": [
+        {
+            "title": "UC - 自定义组件",
+            "icon": {
+                "type": "deployment-unit",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#9c0"
+                }
+            },
+            "children": [
+                "卡片类「Hoc容器」：PageCard,/control/page-card,true",
+                "卡片类「Hoc容器」：HelpCard,/control/help-card,true",
+                "卡片类「Hoc容器」：TreeContainer,/control/tree-container",
+                "列表类「Hoc组件」：ComplexList,/control/complex-list,true",
+                "列表类「Hoc组件」：DialogList,/control/dialog-list,true",
+                "列表类「Hoc组件」：TreeList,/control/tree-list,true",
+                "列表类「Hoc组件」：TabList,/control/tab-list,true",
+                "列表类「Full组件」：TreeTable,/control/tree-table,true",
+                "辅助类「Pure组件」：LoadingContent,/control/loading-content,true",
+                "辅助类「Pure容器」：DialogMenu,/control/dialog-menu,true",
+                "辅助类「Pure容器」：DialogButton,/control/dialog-button,true",
+                "辅助类「Pure容器」：DynamicDialog,/control/dynamic-dialog,true",
+                "交互类：ListSelector,/input/list-selector,true",
+                "交互类：TeamSelector,/input/team-selector,true",
+                "交互类：TableEditor,/input/table-editor,true",
+                "交互类：TableTransfer,/input/table-transfer,true",
+                "交互类：AddressSelector,/control/address-selector",
+                "交互类：MultiCheckBox,/input/multi-check-box,true",
+                "交互类：ChangeEditor,/input/change-editor,true",
+                "交互类：DateVersion,/input/data-version,true",
+                "交互类：CheckedDate,/input/checked-date,true",
+                "交互类：CheckInput,/input/checked-input,true",
+                "交互类：TimeRanger,/input/time-ranger,true",
+                "交互类：BraftEditor,/input/braft-editor",
+                "交互类：FileUpload,/input/file-upload",
+                "交互类：MatrixEditor,/input/matrix-editor,true",
+                "函数类「Pure容器」：Ux.auiTable,/control/aui-table",
+                "函数类「Pure容器」：Ux.auiTab,/control/aui-tab",
+                "函数类「Pure容器」：Ux.aiCollapse,/control/ai-collapse",
+                "函数类「Pure容器」：Ux.aiTabs,/control/ai-tabs",
+                "函数类「Pure组件」：Ux.aiInputRadio,/input/input-radio",
+                "函数类「Pure组件」：Ux.aiInputSelect,/input/input-select",
+                "函数类「Pure组件」：Ux.aiInputCheckboxes,/input/input-checkboxes",
+                "函数类「Pure组件」：Ux.aiMenuContext（右键菜单）,/input/ai-menu-context",
+                "函数类「Pure组件」：Ux.aiBreadcrumb（面包屑）,/input/ai-breadcrumb",
+                "函数类「Pure组件」：Ux.aiSteps（帮助）,/input/ai-steps"
+            ]
+        },
+        {
+            "title": "UI - 开发教程",
+            "icon": {
+                "type": "code",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#639"
+                }
+            },
+            "children": [
+                "项目初始化,/guide/init",
+                "开发教程,/guide/tutorial",
+                "脚手架说明,/system/scaffold",
+                "环境变量说明,/system/env",
+                "路由测试,/system/route",
+                "第一个模板,/system/container",
+                "第一个页面,/system/component",
+                "表单Raft模式,/system/form-raft",
+                "字段渲染：Full模式,/system/field-full",
+                "字段渲染：Expr模式,/system/field-expr",
+                "交互类：aiTreeSelect,/input/tree-select,true",
+                "列渲染：Cell静态呈现列,/system/column-cell",
+                "列渲染：Dynamic动态列,/system/column-dynamic",
+                "列渲染：表格编辑器Unit列,/system/column-unit",
+                "列渲染：状态State列,/system/column-state",
+                "调试工具：DebugMonitor,/system/monitor",
+                "日志器,/system/logs",
+                "Reactive行为：Ux.ai2Event,/system/ai-2event",
+                "Reactive行为：Ux.rxOp,/system/rx-op",
+                "Reactive行为：Ux.rxAct,/system/rx-act",
+                "Reactive行为：Ux.rxEtat,/system/rx-etat",
+                "Reactive行为：Ux.rxFlow,/system/rx-flow"
+            ]
+        },
+        {
+            "title": "UE - 解析语法专用教程",
+            "icon": {
+                "type": "box-plot",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#666"
+                }
+            },
+            "children": [
+                "查询条件：Criteria,/expr/criteria",
+                "属性表达式：Ai Expr,/expr/ai-expr",
+                "字段解析：Field,/expr/form",
+                "表格列解析：Column,/expr/column",
+                "异步验证解析：Async,/expr/async",
+                "Ajax参数解析：Ajax,/expr/ajax",
+                "「$KV$」解析之ajax,/expr/expr-ajax",
+                "「$KV$」解析之button,/expr/expr-button",
+                "「$KV$」解析之field,/expr/expr-field",
+                "「$KV$」解析之bind,/expr/expr-bind",
+                "解析之direct,/expr/expr-direct",
+                "解析之tabs,/expr/expr-tabs",
+                "解析之window,/expr/expr-window",
+                "解析之steps,/expr/expr-steps",
+                "解析之option,/expr/expr-option",
+                "解析之column,/expr/expr-column",
+                "解析之icon,/expr/expr-icon",
+                "解析之flag,/expr/expr-flag",
+                "解析之filter,/expr/expr-filter"
+            ]
+        },
+        {
+            "title": "UL - 表单布局开发",
+            "icon": {
+                "type": "layout",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#d94795"
+                }
+            },
+            "children": [
+                "「主表单」（1）标准布局,/layout/standard,true",
+                "「主表单」（0.15）9:15布局,/layout/adjust015,true",
+                "「主表单」（0.16）9:15宽标签布局,/layout/adjust016",
+                "「子表单」（0.17）9:15宽标签布局,/layout/adjust017",
+                "「特殊」（0.5）两列专用布局,/layout/half05",
+                "「特殊」（0.21）仿Word布局,/layout/adjust021",
+                "「过滤表单」（-0.3）抽屉搜索表单布局,/layout/filter-03",
+                "「过滤表单」（-0.5）普通搜索表单布局,/layout/filter-05"
+            ]
+        },
+        {
+            "title": "AI - 工具教程",
+            "icon": {
+                "type": "thunderbolt",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#bc0981"
+                }
+            },
+            "children": [
+                "默认属性表,/ai/attribute",
+                "$KV$解析原理,/ai/parser",
+                "一阶Render组件配置,/ai/render",
+                "二阶Render组件配置,/ai/h-render"
+            ]
+        },
+        {
+            "title": "UT - 研发教程",
+            "icon": {
+                "type": "experiment",
+                "style": {
+                    "fontSize": 24,
+                    "color": "#6cf"
+                }
+            },
+            "children": [
+                "「StateIn」封装的Redux,/research/redux",
+                "「@zero」装饰器模式,/research/zero",
+                "「@zero」rxEtat写法,/research/zero-etat",
+                "「@zero」rxFlow模式,/research/zero-flow",
+                "「TypeScript」数据模型,/research/ts",
+                "「Stream」Uson,/research/json",
+                "「Stream」Uarr,/research/jarr",
+                "「Stream」RxOp / RxAct,/research/op",
+                "「Ant」开发自定义组件"
+            ]
+        }
+    ]
+}
