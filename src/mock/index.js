@@ -11,7 +11,7 @@ import get_api_module from "./zero-ui/ui/get_api_module";
 import get_api_group_by_sigma from "./zero-ui/rbac/group/get_api_group_by_sigma";
 import post_api_ui_ops from "./zero-ui/ui/post_api_ui_ops";
 
-import get_api_columns_group_full from "./zero-ui/ui/get_api_columns_group_full";
+import get_api_columns_group_full from "./zero-ui/rbac/group/get_api_columns_group_full";
 import get_api_columns_group_my from "./zero-ui/rbac/group/get_api_columns_group_my";
 import post_api_group_search from "./zero-ui/rbac/group/post_api_group_search"
 import post_api_group_existing from "./zero-ui/rbac/group/post_api_group_existing";
