@@ -17,6 +17,15 @@ const getChildren = (reference, item = {}) => {
             // 防提交专用函数
             reference.setState({$submitting});
         }
+        inherits.rxClose = (event) => {
+            Ux.prevent(event);
+            reference.setState({$submitting: false, $visible: undefined});
+            // 上层
+            const {rxClose} = reference.props;
+            if (Ux.isFunction(rxClose)) {
+                rxClose()
+            }
+        }
         return (
             <Component {...inherits}/>
         );

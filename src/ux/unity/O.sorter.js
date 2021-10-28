@@ -37,6 +37,8 @@ const sortT = (left, right, asc = true) => {
         } else {
             return right - left;
         }
+    } else if ("boolean" === typeof left && "boolean" === typeof right) {
+        return sortT(left.toString(), right.toString(), asc);
     }
 };
 

@@ -7,6 +7,7 @@ import {Link} from "react-router-dom";
 // 引擎内
 import WebFilter from "./web-filter";
 import WebUnit from "./web-unit";
+import WebField from './web-field';
 import Rft from "./raft";
 import R from "./expression";
 import Datum from "./datum";
@@ -404,8 +405,60 @@ const _aiAdorn = (config = {}, record = {}, reference) => {
         }
     }
 }
-
+const _aiSum = (config = {}, record = {}) => {
+    const {field = [], op = "P"} = config;
+    const defaultValue = op === "M" ? 1 : 0;
+    let sum = defaultValue;
+    field.forEach(each => {
+        const value = Ele.valueFloat(record[each], defaultValue);
+        if ("M" === op) {
+            sum *= value;
+        } else {
+            sum += value;
+        }
+    });
+    return sum;
+}
 const RENDERS = {
+    TOTAL: (reference, column = {}) => {
+        let attrs = Cmn.normalizeInit(column);
+        return (text, record = {}) => {
+            const {$config = {}} = column;
+            let sum = _aiSum($config, record);
+            record[column.dataIndex] = sum;
+            const {currency} = $config;
+            if (currency) {
+                sum = `${currency}${T.formatCurrency(sum)}`;
+            }
+            return Cmn.jsxSpan(attrs, sum, column);
+        }
+    },
+    ROW: (reference, column = {}) => {
+        const {value = []} = reference.props;
+        return (text, record = {}) => {
+            const {$config = {}} = column;
+            const {field, jsx = {}} = $config;
+            const executor = WebField[field]
+            if (Abs.isFunction(executor)) {
+                if (text) {
+                    jsx.value = text;
+                }
+                return executor(reference, jsx, (data) => {
+                    record[column.dataIndex] = data;
+                    const $value = Abs.clone(value);
+                    let foundIndex = Ele.elementIndex(value, 'key', record.key);
+                    if (0 <= foundIndex) {
+                        $value[foundIndex] = Abs.clone(record);
+                    }
+                    Abs.fn(reference).onChange($value);
+                })
+            } else {
+                return (
+                    <span>{field} is invalid</span>
+                )
+            }
+        }
+    },
     CONNECT: (reference, column) => {
 
         let attrs = Cmn.normalizeInit(column);

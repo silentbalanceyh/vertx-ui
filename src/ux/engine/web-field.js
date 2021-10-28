@@ -13,7 +13,8 @@ import {
     SearchInput,
     SearchRangeDate,
     TableEditor,
-    TreeSelector
+    TableTransfer,
+    TreeSelector,
 } from "web";
 import {Button, Checkbox, DatePicker, Input, InputNumber, Radio, Select, Switch, TimePicker, TreeSelect} from "antd";
 // 内部要用的接口函数
@@ -373,6 +374,12 @@ const aiTreeSelect = (reference, jsx = {}, onChange) => {
     // 处理TreeSelect
     const {config = {}} = jsx;
     const data = R.Ant.toTreeOptions(reference, config);
+    // onChange处理
+    const options = R.Ant.toOptions(reference, config);
+    R.Ant.onChange(rest, onChange, {
+        ...jsx,
+        options
+    });
     // 没有任何内容时候的 100% 宽度处理
     if (!rest.style) {
         rest.style = {width: "100%"};
@@ -628,6 +635,40 @@ const aiBraftEditor = (reference, jsx = {}, onChange) => {
     R.Ant.onChange(jsx, onChange);
     return (<BraftEditor {...jsx} reference={reference}/>);
 };
+// import aiTableTransfer from './O.tree.select';
+const aiTableTransfer = (reference, jsx = {}, onChange) => {
+    /*
+     * 1）onChange
+     * 2）readOnly
+     * 3）disabled
+     */
+    const rest = normalizeAttribute(reference, {
+        ...jsx,
+        eventDisabled: true,        // 只读时候需要禁用
+    }, onChange);
+    // 处理TreeSelect
+    const {config = {}} = jsx;
+    // onChange处理
+    const options = R.Ant.toOptions(reference, config);
+    R.Ant.onChange(rest, onChange, {
+        ...jsx,
+        options
+    });
+    // 没有任何内容时候的 100% 宽度处理
+    if (!rest.style) {
+        rest.style = {width: "100%"};
+    }
+    R.Ant.onReadOnly(rest, true, reference);
+    if (rest.readOnly) {
+        rest.className = `${rest.className} ux-readonly-select`
+    }
+    const assistData = Ut.toAssist(reference);
+    return (<TableTransfer {...rest}
+                           {...assistData}
+                           config={config}
+                           data={options}
+                           reference={reference}/>);
+};
 const exported = {
     // 常规录入
     aiInput,
@@ -787,5 +828,8 @@ const exported = {
 
     // 时间搜索专用
     aiSearchRangeDate,
+
+    // 树 + 表格编辑穿梭
+    aiTableTransfer,
 };
 export default exported;

@@ -494,6 +494,7 @@ const valueLimit = (jsx = {}) => {
  * @param {Object} target 拷贝目标对象
  * @param {Object} source 拷贝源对象
  * @param {String |Array} field 需要拷贝的字段信息
+ * @return Object 最终拷贝过的属性
  */
 const valueCopy = (target = {}, source = {}, field) => {
     if (field) {
@@ -511,7 +512,50 @@ const valueCopy = (target = {}, source = {}, field) => {
             field.forEach(eachField => valueCopy(target, source, eachField));
         }
     }
+    return target;
 };
+/**
+ * ## 「标准」`Ux.valueOk`
+ *
+ * 该函数负责将 `field` 字段中的信息从 source 拷贝到 target 中。
+ *
+ * 1. field 为 String：拷贝单个字段数据
+ * 2. field 为 Array：拷贝多个字段数据
+ * 3. 如果读取的数据为 Array 则采用深度拷贝
+ *
+ * @memberOf module:_value
+ * @param {Object} input 拷贝源对象
+ * @param {Array} config 需要拷贝的字段信息
+ * @param {Object} output 拷贝目标对象
+ * @return Object 最终拷贝过的属性
+ */
+const valueOk = (input = {}, config = [], output) => {
+    const values = {};
+    config.forEach(field => {
+        if (0 < field.indexOf(',')) {
+            // field,to
+            const kv = field.split(',');
+            values[kv[0]] = input[kv[1]];
+        } else if (0 < field.indexOf("=")) {
+            // field=to
+            const kv = field.split('=');
+            if ("false" === kv[1]) {
+                values[kv[0]] = false;
+            } else if ("true" === kv[1]) {
+                values[kv[0]] = true;
+            } else {
+                values[kv[0]] = kv[1];
+            }
+        } else {
+            // field
+            values[field] = input[field];
+        }
+    });
+    if (output) {
+        Object.assign(output, values);
+    }
+    return values;
+}
 
 const _valueFlat = (field, item = {}) => {
     const result = {};
@@ -1731,7 +1775,7 @@ export default {
     valuePair,
     valueLimit,
     valueCopy,
-
+    valueOk,
     // O.tree
     valueLadder,
 

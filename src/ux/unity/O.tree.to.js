@@ -17,6 +17,7 @@
  */
 import Abs from "../abyss";
 import Ele from '../element';
+import Ut from '../unity';
 import St from './O.sorter';
 import Encrypt from './O.encrypt';
 import T from './O.plugin.element';
@@ -130,8 +131,16 @@ const toTreeArray = (data = [], config = {}) => {
         Abs.itObject(config, (to, from) => {
             if (undefined !== each[from]) {
                 processed[to] = each[from]; // 只取合法值
+            } else {
+                // If expr
+                if (0 <= from.indexOf(":")) {
+                    processed[to] = Ut.formatExpr(from, each, true);
+                }
             }
         });
+        if (processed.text && !processed.title) {
+            processed.title = processed.text;
+        }
         /* 保留特殊值，用于UI渲染 */
         [
             "disabled",

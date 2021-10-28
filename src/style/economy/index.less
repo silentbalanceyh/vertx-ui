@@ -38,6 +38,33 @@
             .web-table-adjust-fit;
             background: @component-background;
         }
+
+        &-tree {
+            .web-table-fit;
+            background: @component-background;
+
+            &-adjust {
+                .web-table-adjust-fit;
+                background: @component-background;
+            }
+
+            .ant-table-expanded-row {
+
+                .ant-table-thead {
+                    th {
+                        background-color: @primary-color !important;
+                        color: white;
+                    }
+                }
+
+                td[colspan] {
+                    padding: 16px !important;
+                    min-height: 80px !important;
+                    max-height: 200px;
+                    overflow-y: auto;
+                }
+            }
+        }
     }
 
 

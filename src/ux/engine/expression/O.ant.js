@@ -119,8 +119,10 @@ const onChange = (rest = {}, fnChange, jsx = {}) => {
              * optionJsx.config.linker
              * optionJsx.config.linkerField
              */
-            Ut.writeLinker(formValues, config,
-                (field) => Ele.elementUnique(options, field, value));
+            Ut.writeLinker(formValues, config, (field) => {
+                console.log(options, field, value)
+                return Ele.elementUnique(options, field, value);
+            });
         }
         if (depend) {
             const {impact = {}} = depend;

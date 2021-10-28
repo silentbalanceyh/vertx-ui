@@ -551,9 +551,12 @@ const yoAmbient = (reference = {}, config = {}) => {
 
     // ----------------------- 模型标识符 -----------------
     {
-        const {$identifier} = reference.props;
+        const {$identifier, $refresh} = reference.props;
         if ($identifier) {
             uniform.$identifier = $identifier;
+        }
+        if ($refresh) {
+            uniform.$refresh = $refresh;
         }
     }
 
