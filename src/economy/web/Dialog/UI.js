@@ -144,8 +144,19 @@ class Component extends React.PureComponent {
                     )
                 }
             }
+            const style = {};
+            if (!config.style) {
+                config.style = {};
+            }
+            const {top} = config;
+            if (top) {
+                style.top = top;
+            } else {
+                style.top = 56;      // Adjust
+            }
             return (
-                <Modal {...config} visible={$visible} className={className}>
+                <Modal {...config} visible={$visible} className={className}
+                       style={style}>
                     {children}
                 </Modal>
             );

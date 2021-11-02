@@ -75,7 +75,7 @@ const rxValue = (reference, value, config) => {
             return rxContent(reference, false, config);
         }
     } else {
-        if (value) {
+        if (undefined !== value) {
             // 有值
             const formatted = rxExpr(reference, value, config);
             if (config.table) {

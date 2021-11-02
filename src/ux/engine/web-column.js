@@ -435,15 +435,17 @@ const RENDERS = {
     },
     ROW: (reference, column = {}) => {
         const {value = []} = reference.props;
+        const {$config = {}} = column;
+        const {field, jsx = {}} = $config;
+        const executor = WebField[field];
+        // jsx processing
         return (text, record = {}) => {
-            const {$config = {}} = column;
-            const {field, jsx = {}} = $config;
-            const executor = WebField[field]
+            const $jsx = Abs.clone(jsx);
             if (Abs.isFunction(executor)) {
                 if (text) {
-                    jsx.value = text;
+                    $jsx.value = text;
                 }
-                return executor(reference, jsx, (data) => {
+                return executor(reference, $jsx, (data) => {
                     record[column.dataIndex] = data;
                     const $value = Abs.clone(value);
                     let foundIndex = Ele.elementIndex(value, 'key', record.key);

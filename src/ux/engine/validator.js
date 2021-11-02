@@ -119,10 +119,10 @@ const _before = (value, to) => {
     to = Ele.valueTime(to);
     return to.isAfter(fromValue);
 };
-const _less = (value, to) => value < to;
-const _lessOr = (value, to) => value <= to;
-const _great = (value, to) => value > to;
-const _greatOr = (value, to) => value >= to;
+const _less = (value, to) => Ele.valueFloat(value, 0.00) < Ele.valueFloat(to, 0.00);
+const _lessOr = (value, to) => Ele.valueFloat(value, 0.00) <= Ele.valueFloat(to, 0.00);
+const _great = (value, to) => Ele.valueFloat(value, 0.00) > Ele.valueFloat(to, 0.00);
+const _greatOr = (value, to) => Ele.valueFloat(value, 0.00) >= Ele.valueFloat(to, 0.00);
 const _equal = (value, to) => value === to;
 const _diff = (value, to) => value !== to;
 const _maximum = (value, to) => value <= to;

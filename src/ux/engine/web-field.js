@@ -455,7 +455,8 @@ const aiTreeSelector = (reference, jsx = {}) => {
 const aiTableEditor = (reference, jsx = {}, onChange) => {
     // onChange处理
     R.Ant.onChange(jsx, onChange);
-    return (<TableEditor {...jsx} reference={reference}/>);
+    const assistData = Ut.toAssist(reference);
+    return (<TableEditor {...jsx} {...assistData} reference={reference}/>);
 };
 
 

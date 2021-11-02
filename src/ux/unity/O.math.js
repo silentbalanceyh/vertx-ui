@@ -53,17 +53,24 @@ const mathDivision = (dividend, divisor) => {
 /**
  * ## 「标准」`Ux.mathSum`
  *
- * 双值求和：数学计算中的双值求和，当前版本仅支持整数。
+ * 双值求和：数学计算中的双值求和。
  *
  * @memberOf module:_unity
  * @param {String|Number} left 加数。
  * @param {String|Number} right 另外一个加数。
+ * @param {Boolean} isFloat 是否执行浮点运算
  * @return {number} 和。
  */
-const mathSum = (left, right) => {
-    const leftValue = Ele.valueInt(left);
-    const rightValue = Ele.valueInt(right);
-    return leftValue + rightValue;
+const mathSum = (left, right, isFloat = false) => {
+    if (isFloat) {
+        const leftValue = Ele.valueFloat(left);
+        const rightValue = Ele.valueFloat(right);
+        return leftValue + rightValue;
+    } else {
+        const leftValue = Ele.valueInt(left);
+        const rightValue = Ele.valueInt(right);
+        return leftValue + rightValue;
+    }
 };
 /**
  * ## 「标准」`Ux.mathDiscount`
@@ -86,9 +93,32 @@ const mathDiscount = (up, down) => {
         return Ele.valueFloat(divided.toFixed(1));
     }
 };
+/**
+ * ## 「标准」`Ux.mathSubtract`
+ *
+ * 双值求差：数学计算中的双值求差。
+ *
+ * @memberOf module:_unity
+ * @param {String|Number} left 加数。
+ * @param {String|Number} right 另外一个加数。
+ * @param {Boolean} isFloat 是否执行浮点运算
+ * @return {number} 和。
+ */
+const mathSubtract = (left, right, isFloat = false) => {
+    if (isFloat) {
+        const leftValue = Ele.valueFloat(left);
+        const rightValue = Ele.valueFloat(right);
+        return leftValue - rightValue;
+    } else {
+        const leftValue = Ele.valueInt(left);
+        const rightValue = Ele.valueInt(right);
+        return leftValue - rightValue;
+    }
+};
 export default {
     mathDivision,
     mathMultiplication,
     mathSum,
+    mathSubtract,
     mathDiscount,
 };
