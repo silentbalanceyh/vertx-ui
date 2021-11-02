@@ -35,3 +35,4 @@ src/extension/components/index.js
 .markeditor
 .configs/
 ./run-ux-current.sh
+./run-update.sh
