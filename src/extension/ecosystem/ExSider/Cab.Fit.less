@@ -74,13 +74,18 @@
 
 .ux-sider-fit {
     // 1280 x 1024
-    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    @media (min-width: @screen-xl) and (max-width: 1400px) {
         .ux-sider.menu(28px, 44px, 60px, 72px);
         .ux-sider.tpl(72, 48, 190, 28);
+    }
+    // 1400 < x < 1600
+    @media (min-width: 1400px) and (max-width: @screen-xxl) {
+        .ux-sider.menu(28px, 44px, 60px, 72px);
+        .ux-sider.tpl(72, 48, 200, 28);
     }
     // > 1600
     @media (min-width: @screen-xxl) {
         .ux-sider.menu(28px, 52px, 76px, 80px);
-        .ux-sider.tpl(80, 56, 230, 32);
+        .ux-sider.tpl(80, 56, 240, 32);
     }
 }

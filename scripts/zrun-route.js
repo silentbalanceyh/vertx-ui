@@ -79,6 +79,7 @@ const $typePages = Immutable.fromJS([
     "/ambient/customer", // 客户
     "/ambient/company",  // 企业
     "/ambient/identity", // 档案（详细记录）
+    "/ambient/invoice",  // 发票管理
 ]);
 const generateTpl = (lines = [], route = {}) => {
     if ("/module/page" === route.uri) {
