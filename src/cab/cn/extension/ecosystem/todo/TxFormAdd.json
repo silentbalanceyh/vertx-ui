@@ -1,0 +1,12 @@
+{
+    "_form": {
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "processName,流程名称,8,,aiMagic"
+            ]
+        ]
+    }
+}

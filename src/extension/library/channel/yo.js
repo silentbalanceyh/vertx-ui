@@ -140,6 +140,20 @@ const yoBatchEditor = (batch, reference) => {
     }
     return batch;
 }
+/*
+ * configuration 中的结构
+ * {
+ *      "program": "编程模式专用的表单配置",
+ *      "form": "后端表单配置"
+ * }
+ * rules, 编排规则
+ */
+const yoForms = (addOn = {}, reference) => {
+    const {
+        program = {},   // 编程专用单
+        form = {}       // 后端远程加载单
+    } = addOn;
+}
 const yoFormPlugin = (addOn = {}, reference) => {
     /*
      * addOn.form 基本内容
@@ -667,7 +681,7 @@ const yoAmbient = (reference = {}, config = {}) => {
         /*
          * 动态 $opKey
          */
-        let {$opKey, $record} = reference.props;
+        let {$opKey, $record, $workflow} = reference.props;
         if ($opKey) {
             uniform.$opKey = $opKey;
         } else {
@@ -690,6 +704,12 @@ const yoAmbient = (reference = {}, config = {}) => {
          */
         if ($record) {
             uniform.$record = $record;
+        }
+        /*
+         * 工作流专用处理
+         */
+        if ($workflow) {
+            uniform.$workflow = $workflow;
         }
     }
 

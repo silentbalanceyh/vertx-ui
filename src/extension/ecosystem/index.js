@@ -23,6 +23,10 @@ export {default as ExTab} from './ExTab/UI';                            /* （�
 export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
 export {default as ExTrackField} from './ExTrackField/UI';
 export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
+/*
+ * 我的待办（处理待办系统，集成工作流）
+ */
+export {default as TxQueue} from './TxQueue/UI';                      /* 待办队列 */
 
 /**
  * # 扩展组件`Ex/Ix/Ox`

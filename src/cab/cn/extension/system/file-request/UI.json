@@ -1,0 +1,28 @@
+{
+    "_page": {
+        "title": "文件申请/审批",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabBefore",
+        "items": "我的申请,tabBefore,edit;已审批,tabApproved,history"
+    },
+    "_workflow": {
+        "parameter": {
+            "code": "process.file.management"
+        },
+        "canvas": {
+            "height": 240
+        },
+        "options": {
+            "tabs.list": "文件申请列表",
+            "op.open.add": "申请"
+        }
+    }
+}

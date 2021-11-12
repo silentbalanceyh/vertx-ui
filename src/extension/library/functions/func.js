@@ -482,8 +482,8 @@ const upLoading = (state = {}, prevState = {}) => _up(state, prevState, '$loadin
  * @returns {Object} 返回计算后的状态信息
  */
 const upList = (props = {}, prevProps = {}) => {
-    const config = props.config;
-    const previous = prevProps.config;
+    const config = props.config ? props.config : {};
+    const previous = prevProps.config ? prevProps.config : {};
     /*
      * 移除 component 相关配置信息
      * 1）解决第一次多选闪屏的问题

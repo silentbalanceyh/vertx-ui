@@ -273,10 +273,18 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
              * 特殊权限
              */
             I.ops({identifier, type: "OP"})
-                /*
-                 * 处理核心 List 问题
-                 */
-                .then(response => resolve(Ux.aclOp(options, response)))
+                /* 处理核心 List 问题 */
+                .then(response => Ux.promise(Ux.aclOp(options, response)))
+                /* op.extension */
+                .then(processed => {
+                    /* 静态 Op */
+                    const opts = Ux.clone(options);
+                    /* `op.` 打头的操作直接过滤 */
+                    Object.keys(opts)
+                        .filter(opKey => opKey.startsWith('op.extension'))
+                        .forEach(opKey => processed[opKey] = opts[opKey]);
+                    resolve(processed)
+                })
         } else {
             /*
              * 无权限配置
@@ -306,8 +314,18 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
         .forEach(opKey => {
             const button = Ux.clone(vOp[opKey]);
             button.id = button.key;                     // 前后端主键同步
-            button.text = ops[opKey];
+            const inputText = options[opKey];
+            if (inputText !== ops[opKey]) {
+                button.text = inputText;
+            } else {
+                button.text = ops[opKey];
+            }
+            // 扩展配置
+            const plugin = options[`${opKey}.plugin`];
             if (!button.plugin) button.plugin = {};      // 插件
+            if (plugin) {
+                Object.assign(button.plugin, plugin);
+            }
             button.category = opKey;
             buttons[opKey] = button;
         });

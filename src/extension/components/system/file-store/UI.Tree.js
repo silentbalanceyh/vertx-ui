@@ -1,0 +1,35 @@
+import React from 'react';
+import Ux from 'ux';
+import Ex from 'ex';
+import {ExListComplex} from "ei";
+import FormAdd from './tree/UI.Add';
+import FormEdit from './tree/UI.Edit';
+import FormFilter from './tree/UI.Filter';
+
+@Ux.zero(Ux.rxEtat(require('./Cab'))
+    .cab("UI.Tree")
+    .ready(true)
+    .to()
+)
+class Component extends React.PureComponent {
+    componentDidMount() {
+        Ex.yiCompany(this).then(Ux.pipe(this));
+    }
+
+    render() {
+        return Ex.yoRender(this, () => {
+            const config = Ux.fromHoc(this, "grid");
+            const form = {
+                FormAdd,
+                FormEdit,
+                FormFilter,
+            };
+            return (
+                <ExListComplex {...Ex.yoAmbient(this)}
+                               config={config} $form={form}/>
+            )
+        }, Ex.parserOfColor("PxFileTree").control());
+    }
+}
+
+export default Component;

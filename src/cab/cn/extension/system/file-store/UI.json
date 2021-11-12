@@ -1,0 +1,16 @@
+{
+    "_page": {
+        "title": "设置存储源",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_tabs": {
+        "className": "ex-tabs-tab-block",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabTree",
+        "items": "默认存储,tabTree,share-alt;FTP配置,tabFTP,cloud-sync"
+    }
+}

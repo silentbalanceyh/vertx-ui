@@ -115,10 +115,26 @@ const parseAuthorized = (reference, buttons = {}, options = {}) => {
  * 事件处理专用解析
  */
 const parseEvent = (reference, buttons = {}) => {
+    const {$op = {}} = reference.props;
+    const combineFn = (config = {}, inputFn) => {
+        const {plugin} = config;
+        if (plugin['beforeFn'] && Ux.isFunction($op[plugin['beforeFn']])) {
+            const executor = $op[plugin['beforeFn']](reference);
+            if (Ux.isFunction(executor)) {
+                return event => {
+                    return executor(event).then(() => inputFn())
+                };
+            } else {
+                return inputFn;
+            }
+        } else {
+            return inputFn;
+        }
+    }
     /* 添加页签 */
     if (buttons.hasOwnProperty('op.open.add')) {
         const configRef = buttons['op.open.add'];
-        configRef.onClick = Fn.rxTabAdd(reference);
+        configRef.onClick = combineFn(configRef, Fn.rxTabAdd(reference));
     }
     /* 清除 $condition */
     if (buttons.hasOwnProperty('op.open.filter')) {

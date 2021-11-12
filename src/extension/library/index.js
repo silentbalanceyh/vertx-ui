@@ -2,6 +2,7 @@ import Types from './Types';
 // 直接函数和类定义
 import I from './ajax';
 import ox from './ox';
+import wf from './workflow';
 
 import Op from './op';
 import Fun from './functions';
@@ -72,6 +73,7 @@ const exported = {
     ...Types,
     I,
     ox,
+    wf,
 };
 /**
  * @typedef JObject 从Json文件中读取的JsonObject

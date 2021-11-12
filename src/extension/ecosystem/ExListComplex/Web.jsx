@@ -19,18 +19,18 @@ const renderJsx = (reference, {
 }) => {
     const exchange = {};
     if (0 === extra.config.length) {
-        exchange.batch = {span: 12, xl: 12, xxl: 14}
-        exchange.search = {span: 9, xl: 9, xxl: 8, className: "ex-extra"};
+        exchange.batch = {span: 11, xl: 12, xxl: 14}
+        exchange.search = {span: 8, xl: 8, xxl: 8, className: "ex-extra"};
         exchange.extra = {span: 0, xl: 0, xxl: 0};
     } else {
-        exchange.batch = {span: 8, xl: 8, xxl: 10}
-        exchange.search = {span: 9, xl: 9, xxl: 9};
+        exchange.batch = {span: 7, xl: 8, xxl: 10}
+        exchange.search = {span: 8, xl: 8, xxl: 9};
         exchange.extra = {span: 4, xl: 4, xxl: 3, className: "ex-extra"};
     }
     return (
         <Row>
             <Row className={clsRow}>
-                <Col span={3} xl={3} xxl={2}>
+                <Col span={5} xl={4} xxl={2} className={"ex-open"}>
                     {0 < opens.config.length ? (<ExAction {...opens}/>) : false}
                 </Col>
                 <Col {...exchange.batch}>
