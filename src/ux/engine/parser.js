@@ -1,5 +1,4 @@
 // 导入外层执行
-import Dev from '../develop';
 import T from '../unity';
 import Datum from './datum';
 import Abs from '../abyss';
@@ -360,12 +359,15 @@ const parseInput = (input = {}, {props, state}) => {
     Object.keys(input)
         .filter(field => undefined !== input[field])
         .forEach(field => {
-            const value = parseValue(input[field], {state, props});
-            if (undefined !== value) {        // value 不为 undefined 就处理
-                parsed[field] = value;
+            if (Abs.isObject(input[field])) {
+                parsed[field] = parseInput(input[field], {state, props});
+            } else {
+                const value = parseValue(input[field], {state, props});
+                if (undefined !== value) {        // value 不为 undefined 就处理
+                    parsed[field] = value;
+                }
             }
         });
-    Dev.dgDebug(parsed, "[ Ux ] 参数分析最终结果：", "black");
     return parsed;
 };
 const parseColumn = (columns = [], reference) => {

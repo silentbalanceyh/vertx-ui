@@ -1418,6 +1418,13 @@ const prevent = (event) => {
         } else return {};
     }
 };
+const remove = (item, ...keys) => {
+    keys.forEach(key => {
+        if (item.hasOwnProperty(key)) {
+            delete item[key];
+        }
+    })
+}
 // ------------------------------- it.js -----------------------------
 
 /**
@@ -1971,6 +1978,7 @@ export default {
     prevent,
     // 拷贝对象
     clone,
+    remove,
     immutable,
     // 合并对象
     assign,

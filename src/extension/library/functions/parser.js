@@ -360,7 +360,10 @@ const parseOp = (config = [], options = {}, reference) => new Promise((resolve) 
                         onClick = onClickFn(reference, Ux.clone(config))
                     }
                 } else if (config.connectId) {
-                    onClick = () => Ux.connectId(config.connectId);
+                    onClick = () => {
+                        reference.setState({$submitting: true});
+                        Ux.connectId(config.connectId);
+                    };
                 }
                 if (Ux.isFunction(onClick)) {
                     op.onClick = onClick;

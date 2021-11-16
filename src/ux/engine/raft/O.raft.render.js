@@ -154,9 +154,10 @@ const raftRender = (cell = {}, config = {}) => {
     /*
      * 打印错误信息专用
      */
-    const render = fnRender ? fnRender : () => {
-        console.error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
-    };
+    if (!fnRender) {
+        throw Error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
+    }
+    const render = fnRender;
     /*
      * 是 Action 就不需要 Ant Form 中的修饰
      */

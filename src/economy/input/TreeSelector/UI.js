@@ -120,7 +120,6 @@ class Component extends React.PureComponent {
          * treeData
          */
         const treeAttrs = Op.yoTree(this, tree, treeData);
-
         /*
          * 处理输入框属性
          */

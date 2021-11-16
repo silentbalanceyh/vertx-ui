@@ -7,9 +7,11 @@ import ExFormTitle from '../ExFormTitle/UI';
 import './Cab.less';
 
 const componentInit = (reference) => {
-    const {$workflow = {}} = reference.props;
+    const {$inited = {}} = reference.props;
     const state = {};
-    Ux.ajaxPost("/api/up/flow-form/true", $workflow).then(response => {
+    Ux.ajaxPost("/api/up/flow-form/false", {
+        instanceId: $inited['traceId']
+    }).then(response => {
         state.$ready = true;
         state.$formW = response.form;
         state.$workflow = response['workflow'];
@@ -18,7 +20,7 @@ const componentInit = (reference) => {
 }
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
-    .cab("TxFormAdd")
+    .cab("TxFormEdit")
     .to()
 )
 class Component extends React.PureComponent {
@@ -29,8 +31,7 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             const {$workflow = {}} = this.state;
-            const $inited = {};
-            $inited.status = "DRAFT";
+            const $inited = Ex.wf(this).inited();
             const form = Ex.yoForm(this, null, $inited);
             // 读取
             const title = Ux.fromHoc(this, "title");
@@ -40,7 +41,8 @@ class Component extends React.PureComponent {
                     <ExForm {...form} $height={"300px"}
                             $op={Ex.wf(this).Act}/>
                     <ExFormTitle value={title['workflow']}/>
-                    <ExBpmn config={$workflow['bpmn']} task={$workflow.task}/>
+                    <ExBpmn config={$workflow['bpmn']}
+                            task={$workflow.task} history={$workflow.history}/>
                 </div>
             )
         }, Ex.parserOfColor("TxForm").form());

@@ -42,8 +42,21 @@ const _onChange = (reference, fileList = []) => {
             each.name = item.name;
             each.key = item.response[field];
             each.type = item.type;  // 数据类型
+            // linker process
+            each.size = item.size;
+            each.sizeUi = Ux.toFileSize(item.size);
+            const {response = {}} = item;
+            each.extension = response.extension;
             return each;
         });
+    const ref = Ux.onReference(reference, 1);
+    if (config.single && ref) {
+        const file = files[0] ? files[0] : {};
+        const formValues = {};
+        Ux.writeLinker(formValues, config, () => file);
+        Ux.formHits(ref, formValues);
+    }
+    Ux.fn(reference).onChange(files);
 };
 const on2Change = (reference) => (info = {}) => {
     // 正在上传

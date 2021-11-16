@@ -83,20 +83,6 @@ const _asyncToUrl = (each = {}, blob) => new Promise((resolve) => {
         });
     });
 });
-const _asyncDownload = (reference, value = []) =>
-    Ux.parallel(value.map(file => {
-        const {ajax = {}} = reference.props;
-        return Ux.ajaxDownload(ajax.download, Ux.clone(file));
-    }));
-const _asyncPreview = (reference, value = []) => (downloaded = []) => {
-    // 遍历
-    const promises = [];
-    value.forEach((each, index) => {
-        const promise = _asyncToUrl(each, downloaded[index]);
-        promises.push(promise);
-    });
-    return Ux.parallel(promises);
-};
 const componentInit = (reference) => {
     const handler = Op.onHandler(reference);
     const callback = (fileList) =>
@@ -108,11 +94,24 @@ const componentInit = (reference) => {
     const {value = [], listType} = reference.props;
     if ("picture-card" === listType) {
         if (Ux.isArray(value)) {
-            _asyncDownload(reference, value) // 并行下载
-                .then(_asyncPreview(reference, value)) // 并行转换URL
-                .then(item => callback(item)); // 设置FileList
+            Ux.parallel(value.map(file => {
+                const {ajax = {}} = reference.props;
+                return Ux.ajaxDownload(ajax.download, Ux.clone(file));
+            })).then(downloaded => {
+                const promises = [];
+                value.forEach((each, index) => {
+                    const promise = _asyncToUrl(each, downloaded[index]);
+                    promises.push(promise);
+                });
+                return Ux.parallel(promises)
+            }).then(item => callback(item)); // 设置FileList
+
         }
     } else {
+        const {ajax = {}} = reference.props;
+        if (Ux.isArray(value)) {
+            value.forEach(each => each.url = Ux.formatExpr(ajax.download, each, true))
+        }
         callback(value);
     }
 };

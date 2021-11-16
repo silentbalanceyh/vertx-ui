@@ -1,6 +1,7 @@
 import Cv from "../../constant";
 import Ele from '../../element';
 import Abs from "../../abyss";
+import filesize from 'file-size';
 
 /**
  * ## 「标准」`Ux.toHeight`
@@ -371,12 +372,40 @@ const toHeightState = (adjust) => {
     state.$heightValue = maxHeight;
     return state;
 }
+/**
+ * ## 「标准」`Ux.toFileSize`
+ *
+ * 读取文件大小专用方法，解析成合适方法
+ *
+ * @memberOf module:_to
+ * @param {Number} value 修正高度值。
+ * @param {String} unit 单位信息
+ * @returns {Object} 返回最终状态的数据结构
+ */
+const toFileSize = (value, unit) => {
+    const normalize = Ele.valueFloat(value, 0.0);
+    const size = filesize(normalize);
+    if (unit) {
+        return `${size.to(unit)}${unit}`;
+    } else {
+        const units = ['B', 'KB', 'MB', 'GB', 'TB']
+        let result = normalize;
+        units.forEach((unit, index) => {
+            if (Math.pow(1024, index) < normalize
+                && normalize < Math.pow(1024, index + 1)) {
+                result = toFileSize(normalize, unit);
+            }
+        })
+        return result;
+    }
+}
 export default {
     toHeight,
     toHeightState,
     toGrid,
     toGridSpan,
     toMessage,
+    toFileSize,
 
     toCss,  // /* 根据 CSS_PREFIX 前缀计算的 Class */
     toKey,  // 生成 assist / tabular 相关 key

@@ -152,7 +152,7 @@ class Component extends React.PureComponent {
                         <Row style={{
                             marginBottom: 8
                         }}>
-                            <Col span={6}>
+                            <Col span={10}>
                                 <Input.Search {...search}/>
                             </Col>
                         </Row>

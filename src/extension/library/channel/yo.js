@@ -141,81 +141,6 @@ const yoBatchEditor = (batch, reference) => {
     return batch;
 }
 /*
- * configuration 中的结构
- * {
- *      "program": "编程模式专用的表单配置",
- *      "form": "后端表单配置"
- * }
- * rules, 编排规则
- */
-const yoForms = (addOn = {}, reference) => {
-    const {
-        program = {},   // 编程专用单
-        form = {}       // 后端远程加载单
-    } = addOn;
-}
-const yoFormPlugin = (addOn = {}, reference) => {
-    /*
-     * addOn.form 基本内容
-     * 编程传入专用
-     */
-    const program = Ux.clone(addOn.form);
-    /*
-     * 输入专用处理：
-     * 1）addOn.form：通过编程部分拿到的 form 信息
-     * 2）S0（前端静态文件）_form：前端静态配置（主配置）——通常静态form使用此配置
-     * 3）S1（前端静态文件）_formUp：前端静态配置（辅助配置）
-     * 4）S2（前端静态文件）_formDown：前端静态配置（辅助配置）
-     * 5）D0（后端处理）form：后端主配置
-     * 6）D1（后端处理）formDown：后端主配置
-     * 7）D2（后端处理）formUp：后端主配置
-     * 布局专用处理
-     * 1）（S0）标准前端静态
-     * 2）（S0 + D0）：前端静态 + 后端主配置
-     * 3）（S1 + S0/D0 + S2）：静态 + 动/静 + 静态
-     */
-    const sForm = Ux.fromHoc(reference, "form");
-    const sFormUp = Ux.fromHoc(reference, "formUp");
-    const sFormDown = Ux.fromHoc(reference, "formDown");
-    /*
-     * 合并处理函数，主要处理合并
-     */
-    const {$options = {}} = reference.props;
-    let form = {}, formUp = {}, formDown = {};
-    if (!Ux.isEmpty($options)) {
-        /*
-         * 抽取 $options 中的后端配置
-         */
-        form = $options.form;
-        formUp = $options['formUp'];
-        formDown = $options['formDown'];
-    }
-    /*
-     * 最终合并
-     * 按顺序合并表单处理
-     * [
-     *     program,
-     *     sFormUp, formUp,
-     *     sForm, form,         // 主单据（常用）
-     *     sFormDown, formDown
-     * ]
-     */
-    let normalized = {};
-    [
-        program,
-        sFormUp, formUp,
-        sForm, form,
-        sFormDown, formDown
-    ]
-        .filter(item => !!item)
-        .filter(Ux.isObject)
-        .forEach(form => normalized = Ux.toForm(normalized, form));
-    /*
-     * normalized 的最终处理
-     */
-    return normalized;
-}
-/*
  * op.extension 部分的执行
  *
  * 区域执行
@@ -261,7 +186,6 @@ const yoExtension = (reference, prefix, actions = []) => {
         .filter(item => fnIndex(item))
         .sort((left, right) => left.config.index - right.config.index);
     let append = [];
-
     if (0 < inserted.length) {
         const found = inserted[inserted.length - 1];
         const maxIndex = found.config.index;
@@ -304,23 +228,6 @@ const yoExtension = (reference, prefix, actions = []) => {
     }
     return append;
 }
-
-const _seekForm = (reference, addOn = {}) => {
-    if (!addOn) addOn = {};
-    let {dialog, modal, form} = addOn;
-    if (!dialog) {
-        dialog = Ux.fromHoc(reference, "dialog");
-    }
-    if (!modal) {
-        modal = Ux.fromHoc(reference, "modal");
-    }
-    const assist = Ux.fromHoc(reference, "assist");
-    const state = {dialog, modal, form};
-    if (assist) {
-        state.assist = Ux.clone(assist);
-    }
-    return state;
-};
 const _seekState = (uniform = {}, reference, key) => {
     /*
      * 先在属性中查询（属性优先）
@@ -1312,6 +1219,10 @@ const yoFilter = (reference) => {
  *
  * （略）后期补充
  *
+ * #### 3.3. 专用配置的格式
+ *
+ * > 主要是补充 additional 的格式信息
+ *
  * @memberOf module:_channel
  * @method yoForm
  * @param {ReactComponent} reference React对应组件引用
@@ -1320,54 +1231,160 @@ const yoFilter = (reference) => {
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
 const yoForm = (reference, additional = {}, data = {}) => {
-    const addOn = _seekForm(reference, additional);
-    const attrs = yoAmbient(reference);
-    const config = {};
-    config.form = yoFormPlugin(addOn, reference);
-    if (addOn.assist) {
-        config.assist = addOn.assist;
-    }
+    if (!additional) additional = {};
+    const configuration = {};
     /*
+     * 动态表单特殊配置
      * `magic`：特殊参数
      * `addon`：特殊配置
      * `control`：和后端的 UI_CONTROL 对应
      */
-    if (addOn.hasOwnProperty('control')) {
-        config.magic = Ux.clone(addOn.magic);
-        config.control = addOn.control;
-        config.addon = Ux.clone(addOn.addon);
+    if (additional.control) {
+        configuration.magic = Ux.clone(additional.magic);
+        configuration.addon = Ux.clone(additional.addon);
+        configuration.control = additional.control;
     }
+    const form = _yoForm(additional, reference);
+    configuration.form = form;
     /*
-     * Dialog 窗口配置
+     * {
+     *     dialog: 窗口配置,
+     *     modal：窗口回调信息,
+     *     form：表单回调（开发型）
+     * }
+     * 上述配置只能二选一，原来 _seekForm 方法的内容
+     * {
+     *     "_dialog": "窗口数据",
+     *     "_modal": "窗口回调消息",
+     *     "_assist": "辅助数据",
+     * }
      */
-    if (addOn.dialog) {
-        config.dialog = {
-            title: Ux.clone(addOn.dialog),
-            modal: addOn.modal,
+    const {dialog, model} = additional;
+    {
+        // 窗口专用配置「复制副本」
+        const dialogConfig = {};
+        if (dialog) {
+            dialogConfig.dialog = Ux.clone(dialog);
+        } else {
+            const hocDialog = Ux.fromHoc(reference, "dialog");
+            if (hocDialog) {
+                dialogConfig.dialog = Ux.clone(hocDialog);
+            }
+        }
+        // 回调消息专用配置
+        if (model) {
+            dialogConfig.modal = Ux.clone(model);
+        } else {
+            const hocModal = Ux.fromHoc(reference, "modal");
+            if (hocModal) {
+                dialogConfig.modal = Ux.clone(hocModal);
+            }
+        }
+        // dialogConfig.modal 从 Form中读取配置
+        if (!dialogConfig.modal && form.modal) {
+            dialogConfig.modal = form.modal;
+        }
+        // 窗口处理后的配置
+        if (dialogConfig.dialog) {
+            configuration.dialog = {
+                title: Ux.clone(dialogConfig.dialog),
+                modal: dialogConfig.modal
+            }
+        }
+        // 辅助数据专用
+        const assist = Ux.fromHoc(reference, "assist");
+        if (assist) {
+            configuration.assist = Ux.clone(assist);
         }
     }
-    attrs.config = Ux.clone(config);
-    /* Form 特殊配置 */
-    attrs.$inited = Ux.clone(data);
-    /* Add表单专用 */
-    const {$addKey, $mode, $identifier} = reference.props;
-    if ($addKey) {
-        /* 客户端提供主键 */
-        attrs.$addKey = $addKey;
+    const attrs = yoAmbient(reference);
+    // 表单主配置
+    attrs.config = Ux.clone(configuration);
+    {
+        attrs.$inited = Ux.clone(data);         /* Form 初始化数据 */
+        const {$addKey, $mode, $identifier} = reference.props;
+        if ($addKey) {
+            attrs.$addKey = $addKey;            /* 客户端提供主键 */
+        }
+        if ($mode) {
+            attrs.$mode = $mode;                /* 表单模式 */
+        }
+        if ($identifier) {
+            attrs.$identifier = $identifier;    /* 挂载 identifier 专用 */
+        }
+        const acl = Ux.aclData(data, reference, {});
+        Object.assign(attrs, acl);              /* 表单控制专用（将控制写入到 attrs 中 */
     }
-    if ($mode) {
-        attrs.$mode = $mode;
-    }
-    /* 挂载 identifier 专用 */
-    if ($identifier) {
-        attrs.$identifier = $identifier;
-    }
-    /* 表单控制专用（将控制写入到 attrs 中 */
-    const acl = Ux.aclData(data, reference, {});
-    Object.assign(attrs, acl);
     return attrs;
 };
-
+const _yoForm = (additional = {}, reference) => {
+    // 编程专用配置
+    const program = Ux.clone(additional.form);
+    /*
+     * 输入专用处理：
+     * 1）addOn.form：通过编程部分拿到的 form 信息
+     * 2）S0（前端静态文件）_form：前端静态配置（主配置）——通常静态form使用此配置
+     * 3）S1（前端静态文件）_formUp：前端静态配置（辅助配置）
+     * 4）S2（前端静态文件）_formDown：前端静态配置（辅助配置）
+     * 5）D0（后端处理）form：后端主配置
+     * 6）D1（后端处理）formDown：后端主配置
+     * 7）D2（后端处理）formUp：后端主配置
+     * 布局专用处理
+     * 1）（S0）标准前端静态
+     * 2）（S0 + D0）：前端静态 + 后端主配置
+     * 3）（S1 + S0/D0 + S2）：静态 + 动/静 + 静态
+     */
+    const formObj = {};
+    formObj['FP'] = program;
+    formObj['FF'] = Ux.fromHoc(reference, "form");
+    formObj['FU'] = Ux.fromHoc(reference, "formUp");
+    formObj['FD'] = Ux.fromHoc(reference, "formDown");
+    /*
+    * $options 是 yoAmbient 中会专用的，所以此处会使用三个核心值
+    * {
+    *     "form", "formUp", "formDown"
+    * }
+    * */
+    const {$options = {}} = reference.props;
+    if ($options.form) formObj['PFF'] = $options.form;
+    if ($options['formUp']) formObj['PFU'] = $options['formUp'];
+    if ($options['formDown']) formObj['PFD'] = $options['formDown'];
+    /*
+     * 读取 reference.state 中的表单信息
+     */
+    const {$formS = {}, $formW} = reference.state;
+    if ($formW) formObj['WFF'] = $formW;
+    if ($formS.form) formObj['SFF'] = $formS.form;
+    if ($formS['formUp']) formObj['SFU'] = $formS['formUp'];
+    if ($formS['formDown']) formObj['SFD'] = $formS['formDown'];
+    /*
+     * 编排规则
+     */
+    const {
+        formRules = [
+            // -- 上半部分表单（编程的默认放在最前边）
+            "FP",       // additional.form，编程模式表单
+            "FU",       // hoc, _formUp, 配置模式表单
+            "PFU",      // props, $options.formUp，属性传入表单
+            "SFU",      // state, $formS.formUp, 状态传入表单
+            // -- 主表单
+            "FF",       // hoc, _form, （主表单）
+            "PFF",      // props, $options.form, 属性传入表单
+            "SFF",      // state, $formS.form, 状态传入表单
+            "WFF",      // state, $formW ->, 工作流主表单（前后可动态）
+            // -- 下半部分表单
+            "FD",       // hoc, _formDown，配置模式表单下半部分
+            "PFD",      // props, $options.formDown, 属性传入表单
+            "SFD",      // state, $formS.formDown, 状态传入表单
+        ]
+    } = additional;
+    let combine = {}
+    formRules.map(formKey => formObj[formKey])
+        .filter(formConfig => !!formConfig)
+        .filter(Ux.isObject)
+        .forEach(form => combine = Ux.toForm(combine, form));
+    return combine;
+}
 /**
  * ## 「通道」`Ex.yoAction`
  *
@@ -1602,7 +1619,14 @@ const isBatchEnabled = (reference) => {
             const button = op[opKey];
             const region = button.region ? button.region : "";
             if (region.startsWith("op.batch")) {
-                counter += 1;
+                // Skip the config component
+                if (button.component) {
+                    if (!["RADIO"].includes(button.component)) {
+                        counter += 1;
+                    }
+                } else {
+                    counter += 1;
+                }
             }
         }
     });
@@ -1870,7 +1894,7 @@ const yoTabExtra = (reference, tabs = {}) => {
         /*
          * 扩展执行
          */
-        attrs.config = yoExtension(reference, "op.tab", attrs.config);
+        attrs.config = yoExtension(reference, `op.submit.${$view}`, attrs.config);
         /*
          * 编辑界面核心操作
          */

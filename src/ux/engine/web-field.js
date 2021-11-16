@@ -123,6 +123,7 @@ const aiAction = (reference, jsx = {}) =>
     _jsxUniform(jsx, (config = {}) => {
         const {actions = [], loading = false} = jsx;
         return actions.map(item => {
+            item = Abs.clone(item);
             const {text, ...rest} = item;
             rest.loading = loading;
             /*
@@ -132,6 +133,7 @@ const aiAction = (reference, jsx = {}) =>
                 const {disabled = false} = jsx;
                 rest.disabled = disabled;
             }
+            Abs.remove(rest, "optionJsx")
             return (
                 <Button {...rest} style={config.style}>{text}</Button>
             );

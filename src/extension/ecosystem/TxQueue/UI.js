@@ -3,6 +3,8 @@ import Ux from "ux";
 import Ex from "ex";
 import ExListComplex from '../ExListComplex/UI';
 import FormAdd from '../TxFormAdd/UI';
+import FormEdit from '../TxFormEdit/UI';
+
 import Op from './Op';
 import {Button, Modal} from 'antd';
 import ExForm from '../ExForm/UI';
@@ -51,10 +53,12 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             const hocConfig = Ux.fromHoc(this, "grid");
-            const $config = Ux.clone(hocConfig);
+            let $config = Ux.clone(hocConfig);
             const form = {
                 FormAdd,    // Start
+                FormEdit,
             };
+            // Workflow Processing
             const {config = {}} = this.props;
             if (config.options) {
                 Object.assign($config.options, config.options);
@@ -64,6 +68,9 @@ class Component extends React.PureComponent {
                     {renderHelp(this)}
                     <ExListComplex {...Op.yoConfiguration(this, config)}
                                    $op={Op.yoOp(this)}
+                                   $executor={Op.yoExecutor(this)}
+                                   rxPluginExecutor={Op.rxPluginExecutor(this)}
+                                   rxPluginChecked={Op.rxPluginChecked(this)}
                                    config={$config} $form={form}/>
                 </div>
             )

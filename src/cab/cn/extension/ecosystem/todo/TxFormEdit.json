@@ -1,17 +1,12 @@
 {
     "_form": {
-        "modal": {
-            "success": {
-                "requested": "您好，您的文件申请已成功提交！申请单号 :serial。"
-            }
-        },
         "ui": [
             [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opDraft,存草稿,SUBMIT,primary,,,closable=true,callback=requested",
+                        "$opDraft,存草稿,SUBMIT_FULL,primary,,,closable=true,modal=requested",
                         "$opMove,流程操作,SUBMIT,primary",
                         "$opReset,重置,RESET"
                     ],

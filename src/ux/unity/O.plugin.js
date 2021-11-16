@@ -148,6 +148,13 @@ const pluginSelection = (reference, record = {}) => {
          */
         props.disabled = false;
     }
+    const {rxPluginChecked} = reference.props;
+    if (Abs.isFunction(rxPluginChecked)) {
+        if (!props.disabled) {
+            // 第二层计算
+            props.disabled = rxPluginChecked(record);
+        }
+    }
     return props;
 };
 /**

@@ -2,8 +2,10 @@ import Ix from '../../_internal/ix'
 import Ux from "ux";
 
 const EXECUTOR = {
-    // 只能选择
-    LE: (item, config = {}) => item[config.field] <= config.value
+    // 只能选择Level小的
+    LE: (item, config = {}) => item[config.field] <= config.value,
+    // 只能选择子节点
+    EQ: (item, config = {}) => item[config.field] === config.value
 }
 
 const _execRule = (field) => (item = {}, limitation = {}, tree = {}) => {
@@ -14,8 +16,13 @@ const _execRule = (field) => (item = {}, limitation = {}, tree = {}) => {
     const $config = {};
     $config.field = field;
     $config.value = config[field];
+    // 构造新的值处理
     if (Ux.isFunction(executor)) {
         if (item.hasOwnProperty(field)) {
+            /*
+             * limitOp = 操作符
+             * limitConfig = 操作配置，存在字段值
+             */
             item.checkable = executor(item, $config); // (item._level <= $selectable);
             if (tree.checkable) {
                 // 强制性

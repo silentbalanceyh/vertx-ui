@@ -34,11 +34,21 @@ const formSubmit = (reference, redux = false) => {
         })).then((params) => {
             // 拷贝参数
             const request = Acl.aclSubmit(params, reference);
-            /*
-             * 成功处理
-             */
-            Dev.dgDebug(request, "[ Ux ] 表单提交数据：", "#228B22");
-            return Abs.promise(request);
+            // 执行规则字段@的操作
+            const formData = {};
+            Object.keys(request).forEach(field => {
+                if (0 <= field.indexOf("@")) {
+                    const kv = field.split("@");
+                    if (!formData[kv[0]]) {
+                        formData[kv[0]] = {};
+                    }
+                    formData[kv[0]][kv[1]] = request[field];
+                } else {
+                    formData[field] = request[field];
+                }
+            })
+            Dev.dgDebug(formData, "[ Ux ] 表单提交数据：", "#228B22");
+            return Abs.promise(formData);
         });
     } else {
         return E.fxReject(10020);

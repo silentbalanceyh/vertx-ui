@@ -726,32 +726,17 @@ const RENDERS = {
         const {$option = []} = config;
         const options = [];
         // 增加过滤函数
-        $option.forEach((item, index) => {
+        const {rxPluginExecutor} = reference.props;
+        let fnReduce = () => true;
+        if (rxPluginExecutor) fnReduce = (config) => rxPluginExecutor(record, config);
+        $option.filter(item => "string" !== typeof item).filter(fnReduce).forEach((item, index) => {
             // 函数过滤
             const calculated = T.pluginOp(reference, record);
             /*
              * 行专用的 key
              */
             const rowKey = `${text}-${index}`;
-
-            /*
-            * 追加 string 类型的 options
-            * 扩展：如果 item 是 string，那么表示直接设置该属性为 true
-            * _setDivider(options, item, rowKey);
-            */
-            if (rowKey && "string" === typeof item) {
-                const option = {};
-                option[item] = true;
-                option.key = `link-vertical-${rowKey}`;
-                _setRule(option, item, record);
-                options.push(option);
-            }
-
-
-            /*
-             * 追加 object 类型的 options
-             */
-            if (rowKey && "string" !== typeof item) {
+            if (rowKey) {
                 const option = {};
                 option.key = `link-${rowKey}`;
                 option.text = T.formatExpr(item.text, record);
@@ -789,12 +774,17 @@ const RENDERS = {
                 }
             }
         });
-        // 是否包含了 op.row.view 处理，先判断
+        // 在每一个Link中追加divider
         let normalized = [];
-        if (2 === options.length) {
-            normalized = options.filter(item => !item.divider);
-        } else {
-            normalized = Abs.clone(options);
+        for (let idx = 0; idx < options.length; idx++) {
+            const option = options[idx];
+            normalized.push(option);
+            if (idx < options.length - 1) {
+                const item = {};
+                item.divider = true;
+                item.key = `link-devider-${text}-${idx}`;
+                normalized.push(item);
+            }
         }
         return (
             <div style={{

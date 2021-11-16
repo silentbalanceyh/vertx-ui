@@ -1,7 +1,6 @@
 import React from 'react';
 import Ex from 'ex';
-import renderJsx from './Web.jsx';
-import Op from './Op';
+import Rdr from './Web.jsx';
 import Ux from 'ux';
 
 /**
@@ -26,6 +25,27 @@ import Ux from 'ux';
 // =====================================================
 // componentInit/componentUp
 // =====================================================
+const yoButton = (reference) => {
+    const {config = {}, $category = "BUTTON"} = reference.props;
+    /*
+     * 拆开
+     */
+    const $config = Ux.clone(config);
+    if (!$config.type) {
+        $config.type = "default";
+    }
+    if (!$config.plugin) {
+        $config.plugin = {};
+    }
+    const {component} = $config;
+    $config.onClick = Ex.configClick($config, reference);
+    if (component) {
+        $config.userDefined = true;
+    } else {
+        $config.component = $category;
+    }
+    return $config;
+};
 
 class Component extends React.PureComponent {
     state = {
@@ -38,15 +58,18 @@ class Component extends React.PureComponent {
              * 处理核心配置
              *
              **/
-            const config = Op.yoButton(this);
+            const config = yoButton(this);
             /*
              * onClick 专用检查
              */
-            if (!Ux.isFunction(config.onClick)) {
-                console.error("[ ExButton ] 无法绑定 onClick，onClick不是一个合法函数！", config);
-                return false;
+            if (config.userDefined) {
+                return Rdr.renderDefined(this, config);
             } else {
-                return renderJsx(this, config);
+                if ("LINK" === config.component) {
+                    return Rdr.renderLink(this, config);
+                } else {
+                    return Rdr.renderButton(this, config);
+                }
             }
         }, Ex.parserOfColor("ExButton").action({off: true}));
     }

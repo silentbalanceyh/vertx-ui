@@ -125,6 +125,11 @@ const PARSER = {
     readOnly: jsxBoolean("readOnly"),
     disabled: jsxBoolean("disabled"),
     status: jsxItem("status"),
+    /*
+     * 状态解析
+     */
+    closable: jsxBoolean("closable"),
+    callback: jsxValue("callback"),
 };
 const parseTo = (item = {}, literal = "") => {
     literal = literal.replace(/ /g, '');
@@ -134,6 +139,8 @@ const parseTo = (item = {}, literal = "") => {
         if (PARSER[name]) {
             const fun = PARSER[name];
             fun(item, value);
+        } else {
+            console.error(`无法识别${name}=${value}，请提供解析器！`);
         }
     }
     return item;

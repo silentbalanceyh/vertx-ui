@@ -16,6 +16,27 @@ const _submit = (reference, config, redux = false) => {
             .then(perform => perform(data))
         )
 };
+const _callback = (reference, config, response) => {
+    const {optionJsx} = config;
+    if (optionJsx && optionJsx.callback) {
+        return Ajax.ajaxDialog(reference, {data: response, key: optionJsx.callback}).then(() => {
+            if (optionJsx.closable) {
+                /*
+                 * BUG：请检查响应数据，key 值不对应
+                 */
+                const {$addKey} = reference.props;
+                const closeData = Abs.clone(response);
+                if ($addKey && $addKey !== closeData.key) {
+                    closeData.key = $addKey;
+                }
+                Abs.fn(reference).rxClose(closeData);
+            }
+            return Abs.promise(response);
+        })
+    } else {
+        return Abs.promise(response);
+    }
+}
 const RESET = (reference, config = {}) => (event) => {
     Abs.prevent(event);
     T.formReset(reference);
@@ -26,6 +47,7 @@ const RESET = (reference, config = {}) => (event) => {
 const SUBMIT = (reference, config = {}) => (event) => {
     Abs.prevent(event);
     return _submit(reference, config)
+        .then(response => _callback(reference, config, response))
         /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error))
 };
@@ -38,6 +60,7 @@ const SUBMIT_REDUX = (reference, config = {}) => (event) => {
     T.writeSubmit(reference);
 
     return _submit(reference, config, true)
+        .then(response => _callback(reference, config, response))
         /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error, true))
 };

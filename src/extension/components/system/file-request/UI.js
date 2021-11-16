@@ -18,7 +18,19 @@ class Component extends React.PureComponent {
         const inherit = Ex.yoAmbient(this);
         return Ex.ylCard(this, () => (
             <ExTab {...inherit} config={tabs}>
-                <TxQueue {...inherit} config={workflow}/>
+                <TxQueue {...inherit} config={workflow} rxAttachment={record => {
+                    if (record.size) {
+                        record.sizeUi = Ux.toFileSize(record.size)
+                    }
+                    record.file = [];
+                    record.file.push({
+                        key: record.key,
+                        uid: record.key,
+                        name: record.name,
+                        status: "done"
+                    });
+                    return record;
+                }}/>
                 <span>2</span>
             </ExTab>
         ), Ex.parserOfColor("PxFileRequest").page())

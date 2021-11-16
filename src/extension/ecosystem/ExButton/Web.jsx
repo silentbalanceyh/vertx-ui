@@ -1,5 +1,5 @@
 import React from 'react';
-import {Button, Icon, Popconfirm, Tooltip} from 'antd';
+import {Button, Icon, Popconfirm, Radio, Select, Tooltip} from 'antd';
 import Ux from 'ux';
 
 const _renderLink = (reference, config = {}) => {
@@ -25,12 +25,12 @@ const _renderLink = (reference, config = {}) => {
     )
 };
 
-const renderLink = (reference, config = {}) => {
+const renderLink = (reference, configuration = {}) => {
     const {
         plugin = {},
         onClick,
         ...rest
-    } = config;
+    } = configuration;
     if (plugin.prompt) {
         if (rest.disabled) {
             /*
@@ -87,8 +87,8 @@ const _renderPrompt = (reference, config = {}) => {
         return _renderButton(reference, {onClick, ...rest})
     }
 };
-const _renderTooltip = (reference, config = {}) => {
-    const {plugin = {}, text, ...rest} = config;
+const renderButton = (reference, configuration = {}) => {
+    const {plugin = {}, text, ...rest} = configuration;
     if (plugin.tooltip) {
         return (
             <Tooltip title={text}>
@@ -99,16 +99,45 @@ const _renderTooltip = (reference, config = {}) => {
         return _renderPrompt(reference, {plugin, text, ...rest});
     }
 };
-/*
- * 默认层，先分类
- * 1）LINK 直接渲染
- * 2）BUTTON 有后续效果
- */
-export default (reference, config = {}) => {
-    const {$category = "BUTTON"} = reference.props;
-    if ("BUTTON" === $category) {
-        return _renderTooltip(reference, config);
+const renderDefined = (reference, configuration) => {
+    const {component, config = {}, onClick} = configuration;
+    const {items = [], executor, ...rest} = config;
+    const options = [];
+    items.forEach(item => {
+        const kv = item.split(',');
+        options.push({
+            value: kv[0],
+            label: kv[1]
+        })
+    })
+    if ("RADIO" === component) {
+        return (
+            <Radio.Group style={{
+                marginTop: 4
+            }} options={options} {...rest} onChange={event => {
+                const value = event.target.value;
+                if (Ux.isFunction(onClick)) {
+                    onClick(value);
+                }
+            }}/>
+        )
+    } else if ("SELECT" === component) {
+        return (
+            <Select style={{width: "120px"}} {...rest} onChange={value => {
+                if (Ux.isFunction(onClick)) {
+                    onClick(value);
+                }
+            }}>
+                {options.map(item => (
+                    <Select.Option key={item.value} value={item.value}>{item.label}</Select.Option>))}
+            </Select>
+        )
     } else {
-        return renderLink(reference, config);
+        return false;
     }
-};
+}
+export default {
+    renderButton,
+    renderLink,
+    renderDefined
+}

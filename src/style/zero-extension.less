@@ -167,3 +167,34 @@
         }
     }
 }
+
+
+.ex-bpmn-end {
+    &:not(.djs-connection) .djs-visual > :nth-child(1) {
+        fill: #f6ffed !important; /* color elements as green */
+        stroke: #58c623 !important;
+    }
+
+    .djs-label {
+        fill: #58c623 !important;
+    }
+
+    &-label .djs-label {
+        fill: #58c623 !important;
+    }
+}
+
+.ex-bpmn-active {
+    &:not(.djs-connection) .djs-visual > :nth-child(1) {
+        fill: #f0f5ff !important; /* color elements as green */
+        stroke: #2f54eb !important;
+    }
+
+    .djs-label {
+        fill: #2f54eb !important;
+    }
+
+    &-label .djs-label {
+        fill: #2f54eb !important;
+    }
+}

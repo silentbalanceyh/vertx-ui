@@ -99,11 +99,11 @@ const _ajaxDown = (uri, params, options = {}, method = "GET") => {
     headers.append(Cv.HTTP11.ACCEPT, "application/octet-stream");
     headers.append(Cv.HTTP11.CONTENT_TYPE, "application/octet-stream");
     // Download专用
-    const request = new Request(api, {
-        ...ajaxOptions(method, headers, options),
-        // 解决无法传参的问题
-        body: JSON.stringify(params)
-    });
+    const download = ajaxOptions(method, headers, options);
+    if ("POST" === method) {
+        download.body = JSON.stringify(params)
+    }
+    const request = new Request(api, download);
     return ajaxBlob(request, params);
 };
 
