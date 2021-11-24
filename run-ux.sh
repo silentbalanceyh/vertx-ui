@@ -19,7 +19,7 @@ mkdir -p ${TARGET_FOLDER}/src/extension/
 cp -rf src/economy/* ${TARGET_FOLDER}/src/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/src/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/src/ux/
-cp -rf src/ux/* ${TARGET_FOLDER}/src/ui/
+cp -rf src/ui/* ${TARGET_FOLDER}/src/ui/
 cp -rf src/extension/* ${TARGET_FOLDER}/src/extension/
 # cp -rf src/editor/* ${TARGET_FOLDER}/src/editor/
 echo "[ Proc ] 代码拷贝完成！"

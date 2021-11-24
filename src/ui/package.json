@@ -1,6 +1,0 @@
-{
-    "name": "ux",
-    "private": true,
-    "main": "ux.js",
-    "types": "index.d.ts"
-}
