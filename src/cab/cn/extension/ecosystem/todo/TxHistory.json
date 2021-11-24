@@ -1,0 +1,32 @@
+{
+    "_table": {
+        "columns": [
+            {
+                "metadata": "opType,操作类型,MAPPING",
+                "$mapping": {
+                    "REQUESTED": "申请,edit,,#8FBC8F",
+                    "FINISHED": "已完成,check-circle,,#698B69",
+                    "REJECTED": "被拒绝,redo,,#CD1076",
+                    "CANCELED": "已撤销,stop,,#CD1076"
+                },
+                "width": 100
+            },
+            {
+                "metadata": "opBy,操作人,USER",
+                "$config": {
+                    "uri": "/api/user/:key",
+                    "field": "realname",
+                    "icon": "safety-certificate,#4169E1"
+                },
+                "$empty": "（系统）",
+                "width": 100
+            },
+            {
+                "metadata": "opAt,操作时间,DATE",
+                "$format": "YYYY年MM月DD日 HH:mm",
+                "width": 120
+            },
+            "comment,备注"
+        ]
+    }
+}

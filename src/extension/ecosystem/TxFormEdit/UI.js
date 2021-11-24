@@ -2,8 +2,7 @@ import React from 'react';
 import Ex from "ex";
 import Ux from 'ux';
 import ExForm from '../ExForm/UI';
-import ExBpmn from '../ExBpmn/UI';
-import ExFormTitle from '../ExFormTitle/UI';
+import TxMonitor from '../TxMonitor/UI';
 import './Cab.less';
 
 const componentInit = (reference) => {
@@ -34,15 +33,13 @@ class Component extends React.PureComponent {
             const $inited = Ex.wf(this).inited();
             const form = Ex.yoForm(this, null, $inited);
             // 读取
-            const title = Ux.fromHoc(this, "title");
+            form.$edition = Ex.wf(this).acl(form.config);
+            const data = Ex.wf(this).monitor($workflow);
             return (
                 <div className={"ex-form-flow"}>
-                    <ExFormTitle value={$workflow.name}/>
                     <ExForm {...form} $height={"300px"}
-                            $op={Ex.wf(this).Act}/>
-                    <ExFormTitle value={title['workflow']}/>
-                    <ExBpmn config={$workflow['bpmn']}
-                            task={$workflow.task} history={$workflow.history}/>
+                            $op={Ex.wf(this, $workflow.task).Act}/>
+                    <TxMonitor data={data}/>
                 </div>
             )
         }, Ex.parserOfColor("TxForm").form());

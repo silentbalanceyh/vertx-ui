@@ -121,7 +121,8 @@ export default {
     Mode: {
         ADD: "add",
         EDIT: "edit",
-        LIST: "list"
+        LIST: "list",
+        FILTER: "filter"
     },
     /**
      * ## `Ex.V`
@@ -190,4 +191,11 @@ export default {
             ]
         }
     },
+    PLUGIN: {
+        LEGACY: [
+            'pluginField',
+            'pluginRow',
+            'pluginForm'
+        ]
+    }
 }

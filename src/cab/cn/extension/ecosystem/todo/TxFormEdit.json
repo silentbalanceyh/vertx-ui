@@ -1,13 +1,25 @@
 {
     "_form": {
+        "modal": {
+            "success": {
+                "saving": "您好，您已成功保存草稿！申请单号 :serial。",
+                "start": "您好，您的流程申请已成功提交，申请单号 :serial，请等待审批。",
+                "approve": "您好，该申请已成功审批通过！！",
+                "reject": "您好，您已拒绝该申请！",
+                "cancel": "您好，您已拒成功取消了该申请！"
+            }
+        },
         "ui": [
             [
                 {
                     "metadata": "$button",
                     "hidden": true,
                     "optionJsx.extension": [
-                        "$opDraft,存草稿,SUBMIT_FULL,primary,,,closable=true,modal=requested",
-                        "$opMove,流程操作,SUBMIT,primary",
+                        "$opSaving,存草稿,SUBMIT,primary,,,closable=true,callback=saving",
+                        "$opStart,提交申请,SUBMIT,primary,,,closable=true,callback=start",
+                        "$opApprove,审批,SUBMIT,primary,,,closable=true,callback=approve",
+                        "$opReject,拒绝,SUBMIT,primary,,,closable=true,callback=reject",
+                        "$opCancel,取消,SUBMIT,primary,,,closable=true,callback=cancel",
                         "$opReset,重置,RESET"
                     ],
                     "span": 24
@@ -17,7 +29,7 @@
                 "title=业务信息"
             ],
             [
-                "serial,单号,8,,,readOnly=true,inscribe=系统自动生成",
+                "serial,待办编号,8,,,readOnly=true,inscribe=系统自动生成",
                 {
                     "metadata": "typeName,服务目录,8,,aiTreeSelector,placeholder=（选填，统计用）",
                     "optionJsx.config": {
@@ -52,8 +64,8 @@
                     "optionJsx.config.items": [
                         "DRAFT,草稿:form,16:#EE3B3B",
                         "PENDING,等待处理:undo,16:#EE3B3B",
-                        "FINISHED,已完成:check-circle,16:#698B69",
-                        "ACCEPTED,已接受:info-circle,16:#698B69",
+                        "FINISHED,已完成:check-circle,16:#58c623",
+                        "ACCEPTED,已接受:info-circle,16:#58c623",
                         "REJECTED,已拒绝:redo,16:#CD1076",
                         "CANCELED,已撤销:stop,16:#CD1076",
                         "EXPIRED,已超时:clock-circle,16:#CD1076"
@@ -66,10 +78,45 @@
                     "optionConfig.rules": [
                         "required,请填写申请标题，标题不可为空！"
                     ]
+                },
+                {
+                    "metadata": "userName,指定用户,8,,aiListSelector,placeholder=（选择用户）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                            "params.criteria.sigma": "PROP:app.sigma"
+                        },
+                        "linker": {
+                            "realname": "userName",
+                            "key": "toUser"
+                        },
+                        "table": {
+                            "columns": [
+                                {
+                                    "title": "部门",
+                                    "dataIndex": "deptId",
+                                    "$render": "USER",
+                                    "$config": {
+                                        "uri": "/api/dept/:key",
+                                        "field": "name",
+                                        "icon": false
+                                    },
+                                    "$empty": "（无）"
+                                },
+                                "workNumber,员工号",
+                                "username,登录账号",
+                                "realname,姓名",
+                                "workPhone,工作电话"
+                            ]
+                        },
+                        "validation": "请选择用户！",
+                        "window": "选择用户,选择,关闭,false,800,false"
+                    },
+                    "optionJsx.allowClear": true
                 }
             ],
             [
-                "comment,备注,24,,aiTextArea,rows=3"
+                "comment,描述信息,24,,aiTextArea,rows=3"
             ]
         ],
         "hidden": [
@@ -78,7 +125,10 @@
             "teamId",
             "toGroup",
             "toRole",
-            "toUser"
+            "toUser",
+            "key",
+            "traceId",
+            "traceTaskId"
         ]
     },
     "_formDown": {
@@ -246,40 +296,6 @@
                     },
                     "optionJsx.depend.enabled": {
                         "toGroupMode": "ROLE"
-                    }
-                },
-                {
-                    "metadata": "userName,指定用户,8,,aiListSelector,placeholder=（选择用户）",
-                    "optionJsx.config": {
-                        "ajax": {
-                            "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
-                            "params.criteria.sigma": "PROP:app.sigma"
-                        },
-                        "linker": {
-                            "realname": "userName",
-                            "key": "toUser"
-                        },
-                        "table": {
-                            "columns": [
-                                {
-                                    "title": "部门",
-                                    "dataIndex": "deptId",
-                                    "$render": "USER",
-                                    "$config": {
-                                        "uri": "/api/dept/:key",
-                                        "field": "name",
-                                        "icon": false
-                                    },
-                                    "$empty": "（无）"
-                                },
-                                "workNumber,员工号",
-                                "username,登录账号",
-                                "realname,姓名",
-                                "workPhone,工作电话"
-                            ]
-                        },
-                        "validation": "请选择用户！",
-                        "window": "选择用户,选择,关闭,false,800,false"
                     }
                 }
             ]

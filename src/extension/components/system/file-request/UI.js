@@ -1,7 +1,7 @@
 import React from 'react'
 import Ux from "ux";
 import Ex from "ex";
-import {ExTab, TxQueue} from "ei";
+import {ExTab, TxQDone, TxQRun} from "ei";
 
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("UI")
@@ -16,9 +16,12 @@ class Component extends React.PureComponent {
          * Ex部分的状态处理
          */
         const inherit = Ex.yoAmbient(this);
+        const {$forceUpdate} = this.state;
         return Ex.ylCard(this, () => (
-            <ExTab {...inherit} config={tabs}>
-                <TxQueue {...inherit} config={workflow} rxAttachment={record => {
+            <ExTab {...inherit} config={tabs} on2TabClick={Ex.wf(this, [
+                "tabApproved"
+            ]).tab}>
+                <TxQRun {...inherit} config={workflow} rxAttachment={record => {
                     if (record.size) {
                         record.sizeUi = Ux.toFileSize(record.size)
                     }
@@ -31,7 +34,7 @@ class Component extends React.PureComponent {
                     });
                     return record;
                 }}/>
-                <span>2</span>
+                <TxQDone {...inherit} $forceUpdate={$forceUpdate}/>
             </ExTab>
         ), Ex.parserOfColor("PxFileRequest").page())
     }

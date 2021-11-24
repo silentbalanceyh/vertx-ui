@@ -69,5 +69,6 @@
     "webpack-manifest-plugin": "2.2.0",
     "workbox-webpack-plugin": "5.1.4",
     "rxjs": "^6.6.7",
-    "redux-observable": "^1.2.0"
+    "redux-observable": "^1.2.0",
+    "react-router-dom": "^5.3.0"
 }

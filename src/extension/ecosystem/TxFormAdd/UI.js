@@ -2,9 +2,8 @@ import React from 'react';
 import Ex from "ex";
 import Ux from 'ux';
 import ExForm from '../ExForm/UI';
-import ExBpmn from '../ExBpmn/UI';
-import ExFormTitle from '../ExFormTitle/UI';
 import './Cab.less';
+import TxMonitor from "../TxMonitor/UI";
 
 const componentInit = (reference) => {
     const {$workflow = {}} = reference.props;
@@ -31,16 +30,15 @@ class Component extends React.PureComponent {
             const {$workflow = {}} = this.state;
             const $inited = {};
             $inited.status = "DRAFT";
+            $inited.toGroupMode = "NONE";
             const form = Ex.yoForm(this, null, $inited);
             // 读取
-            const title = Ux.fromHoc(this, "title");
+            const data = Ex.wf(this).monitor($workflow);
             return (
                 <div className={"ex-form-flow"}>
-                    <ExFormTitle value={$workflow.name}/>
                     <ExForm {...form} $height={"300px"}
-                            $op={Ex.wf(this).Act}/>
-                    <ExFormTitle value={title['workflow']}/>
-                    <ExBpmn config={$workflow['bpmn']} task={$workflow.task}/>
+                            $op={Ex.wf(this, $workflow.task).Act}/>
+                    <TxMonitor data={data}/>
                 </div>
             )
         }, Ex.parserOfColor("TxForm").form());

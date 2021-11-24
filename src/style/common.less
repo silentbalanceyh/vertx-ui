@@ -302,3 +302,92 @@ textarea {
         }
     }
 }
+
+// 只读 / 禁用 / 不可编辑专用
+.ux {
+    // selector
+    .ro-selector {
+        .ant-input-group {
+            input {
+                background-color: #Eff0f0;
+            }
+
+            .ant-input-group-addon:hover {
+                color: #c7c7c7;
+                background-color: #FAFAFA;
+                cursor: not-allowed;
+            }
+
+            .icon-ro {
+                color: #c7c7c7;
+
+                &:hover {
+                    color: #c7c7c7;
+                    background-color: #FAFAFA;
+                    cursor: not-allowed;
+                }
+            }
+        }
+    }
+
+    // 只读
+    &-ro {
+        &-textarea {
+            background-color: #Eff0f0;
+        }
+
+
+        &-selector {
+            &-list {
+                .ro-selector;
+            }
+
+            &-tree {
+                .ro-selector;
+            }
+        }
+
+        &-file {
+            &-upload {
+                .ant-upload-list-item-card-actions {
+                    display: none;
+                }
+            }
+        }
+
+        &-radio {
+            span {
+                color: black;
+            }
+        }
+    }
+
+    // 禁用
+    &-dis {
+        &-textarea {
+            background-color: #Eff0f0;
+        }
+
+        &-selector {
+            &-list {
+                .ro-selector;
+            }
+
+            &-tree {
+                .ro-selector;
+            }
+        }
+
+        &-file {
+            &-upload {
+                .ant-upload-list-item-card-actions {
+                    display: none;
+                }
+            }
+        }
+
+        &-radio {
+
+        }
+    }
+}

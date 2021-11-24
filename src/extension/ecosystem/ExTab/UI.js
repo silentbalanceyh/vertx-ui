@@ -97,6 +97,9 @@ class Component extends React.PureComponent {
                  * 其余情况为不受控模式
                  */
             }
+            Ux.on(this, rest, [
+                "TabClick"
+            ])
             return (
                 <Tabs {...rest}>
                     {items.map(item => Ux.aiChild(item))}

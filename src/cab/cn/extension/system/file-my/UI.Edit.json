@@ -1,0 +1,85 @@
+{
+    "_form": {
+        "window": 0.16,
+        "columns": 1,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                "fileName,文件名,,,aiMagic"
+            ],
+            [
+                "type,MIME类型,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "status,文件状态,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "DONE,正常:check-circle,16:#58c623",
+                        "PROGRESS,未完成:undo,16:#EE3B3B",
+                        "TERMINAL,异常:stop,16:#CD1076"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "storeWay,存储方式,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "FILE,文件模式:file",
+                        "BLOB,二进制:database",
+                        "REMOTE,远程介质:upload"
+                    ]
+                }
+            ],
+            [
+                "extension,扩展名,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "size,文件尺寸,,,aiMagic",
+                    "optionJsx.config.smartFile": true
+                }
+            ],
+            [
+                "title=文件内容"
+            ],
+            [
+                {
+                    "metadata": "updatedBy,更新人,,,aiMagic",
+                    "optionJsx.config.user": {
+                        "uri": "/api/user/:key",
+                        "field": "realname"
+                    },
+                    "optionJsx.$empty": "（系统）"
+                }
+            ],
+            [
+                {
+                    "metadata": "updatedAt,更新时间,,,aiMagic",
+                    "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                    "moment": true
+                }
+            ],
+            [
+                "fileKey,加密键值,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "fileUrl,链接地址,24,,aiMagic",
+                    "optionJsx.config.download": {
+                        "text": "下载文件",
+                        "filename": "name"
+                    },
+                    "optionJsx.config.preview": {
+                        "type": "type",
+                        "empty": "（该版本暂不提供预览功能）"
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "name"
+        ]
+    }
+}

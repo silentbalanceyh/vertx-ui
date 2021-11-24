@@ -4,10 +4,18 @@ import './Cab.less';
 import {Col, Row} from 'antd';
 import Ux from 'ux';
 
-const drawTask = (task, canvas) => {
-    canvas['addMarker'](task, 'ex-bpmn-active');
+const drawTask = (task, canvas, phase) => {
+    let classPrefix;
+    if ("CANCELED" === phase) {
+        classPrefix = 'ex-bpmn-error'
+    } else if ("FINISHED" === phase) {
+        classPrefix = 'ex-bpmn-end'
+    } else {
+        classPrefix = 'ex-bpmn-active'
+    }
+    canvas['addMarker'](task, classPrefix);
     try {
-        canvas['addMarker'](`${task}_label`, 'ex-bpmn-active-label')
+        canvas['addMarker'](`${task}_label`, classPrefix + "-label")
     } catch (ex) {
     }
 }
@@ -31,18 +39,18 @@ const componentBpmn = () => new BpmnJs({
 })
 
 const componentInit = (reference) => {
-    const {config = {}, task, history = []} = reference.props;
+    const {data = {}, task, trace = [], phase} = reference.props;
     const viewer = componentBpmn();
-    viewer.importXML(config).then(response => {
+    viewer.importXML(data).then(response => {
         const {warnings = []} = response;
         if (0 === warnings.length) {
             const canvas = viewer.get('canvas');
             canvas.zoom('fit-viewport');
             if (task && "string" === typeof task) {
-                drawTask(task, canvas);
+                drawTask(task, canvas, phase);
             }
-            if (Ux.isArray(history)) {
-                drawHistory(history, canvas);
+            if (Ux.isArray(trace)) {
+                drawHistory(trace, canvas);
             }
         }
     });

@@ -1,10 +1,11 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from 'ex';
-import renderJsx from './Web.jsx';
 import FormAdd from './form/UI.Add';
 import FormEdit from './form/UI.Edit';
 import FormFilter from './form/UI.Filter';
+import {ExListComplex} from "ei";
+import {PageCard} from "web";
 
 @Ux.zero(Ux.rxEtat(require("./Cab"))
     .cab("UI")
@@ -21,10 +22,12 @@ class Component extends React.PureComponent {
                 FormEdit,   // 更新表单
                 FormFilter  // 搜索表单
             };
-            return renderJsx(this, {
-                config,
-                form
-            })
+            return (
+                <PageCard reference={this}>
+                    <ExListComplex {...Ex.yoAmbient(this)}
+                                   config={config} $form={form}/>
+                </PageCard>
+            )
         }, Ex.parserOfColor("PxRBACRole").page());
     }
 }

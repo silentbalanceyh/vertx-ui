@@ -146,65 +146,72 @@ const componentUp = (reference, previous = {}) => {
      */
     const prevProps = previous.prevProps;
     const props = reference.props;
-    if (Ux.isLoaded(props, prevProps)) {
-        /*
-        * 配置优先考虑
-        */
-        const $configChecked = Ex.upList(props, prevProps);
-        if ($configChecked) {
-            /*
-             * 默认的 配置处理
-             */
-            Ux.dgDebug($configChecked, "[ ExComplexList ] 配置检查结果", "#ca3d3e")
-            reference.setState({$ready: false});
-            Ux.toLoading(() => componentInit(reference).then(state => {
-                /*
-                 * 更新状态
-                 */
-                reference.setState(Ux.clone(state));
-            }))
-        } else {
-            const $queryChecked = Ex.upQuery(props, prevProps);
-            const updatedState = {};
-            if ($queryChecked) {
-                /*
-                 * 修改当前记录中的 query
-                 * 由于 $query 变量发生了改变，所以
-                 * 1）$selected 变量清空
-                 */
-                updatedState.query = Ux.clone($queryChecked.current);
-                updatedState.$selected = [];
-            }
-            // position + view，两个变化引起最终变化（先检查position变化）
-            const viewDirty = _viewDirty(reference, previous);
-            if (viewDirty) {
-                Ux.dgDebug(updatedState, "[ ExComplexList ] 视图改变更新", "#ca3d3e")
-                const state = reference.state;
-                const {config = {}, /* 基本配置 */} = reference.props;
-                Ex.yiListView(reference, config, state)
-                    .then(table => Ux.promise(state, 'table', table))
-                    .then(state => {
-                        state.$dirty = true;
-                        const newState = Ux.clone(state);
-                        Object.assign(newState, updatedState)
-                        reference.setState(newState);
-                    });
-            } else {
-                // 已加载完成时
-                const state = reference.state;
-                updatedState.$dirty = state.$dirty;
-                Ux.dgDebug(updatedState, "[ ExComplexList ] （完成）列表脏更新", "#ca3d3e");
-                reference.setState(updatedState);
-            }
-        }
+    // 强制更新
+    const prevUp = prevProps.$forceUpdate;
+    const curUp = props.$forceUpdate;
+    if (prevUp !== curUp) {
+        reference.setState({$dirty: true})
     } else {
-        /*
-         * 路由改变
-         */
-        Ux.dgDebug({}, "[ ExComplexList ] 路由未改变", "#ca3d3e")
-        reference.setState({$ready: true})
+        if (Ux.isLoaded(props, prevProps)) {
+            /*
+            * 配置优先考虑
+            */
+            const $configChecked = Ex.upList(props, prevProps);
+            if ($configChecked) {
+                /*
+                 * 默认的 配置处理
+                 */
+                Ux.dgDebug($configChecked, "[ ExComplexList ] 配置检查结果", "#ca3d3e")
+                reference.setState({$ready: false});
+                Ux.toLoading(() => componentInit(reference).then(state => {
+                    /*
+                     * 更新状态
+                     */
+                    reference.setState(Ux.clone(state));
+                }))
+            } else {
+                const $queryChecked = Ex.upQuery(props, prevProps);
+                const updatedState = {};
+                if ($queryChecked) {
+                    /*
+                     * 修改当前记录中的 query
+                     * 由于 $query 变量发生了改变，所以
+                     * 1）$selected 变量清空
+                     */
+                    updatedState.query = Ux.clone($queryChecked.current);
+                    updatedState.$selected = [];
+                }
+                // position + view，两个变化引起最终变化（先检查position变化）
+                const viewDirty = _viewDirty(reference, previous);
+                if (viewDirty) {
+                    Ux.dgDebug(updatedState, "[ ExComplexList ] 视图改变更新", "#ca3d3e")
+                    const state = reference.state;
+                    const {config = {}, /* 基本配置 */} = reference.props;
+                    Ex.yiListView(reference, config, state)
+                        .then(table => Ux.promise(state, 'table', table))
+                        .then(state => {
+                            state.$dirty = true;
+                            const newState = Ux.clone(state);
+                            Object.assign(newState, updatedState)
+                            reference.setState(newState);
+                        });
+                } else {
+                    // 已加载完成时
+                    const state = reference.state;
+                    updatedState.$dirty = state.$dirty;
+                    Ux.dgDebug(updatedState, "[ ExComplexList ] （完成）列表脏更新", "#ca3d3e");
+                    reference.setState(updatedState);
+                }
+            }
+        } else {
+            /*
+             * 路由改变
+             */
+            Ux.dgDebug({}, "[ ExComplexList ] 路由未改变", "#ca3d3e");
+            reference.setState({$ready: true})
+        }
     }
-};
+}
 
 class Component extends React.PureComponent {
     state = {

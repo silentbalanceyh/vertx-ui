@@ -4,6 +4,7 @@ import JsonView from 'react-json-view';
 import Ux from 'ux';
 import U from 'underscore';
 import {ColumnUser} from "web";
+import {saveAs} from 'file-saver';
 
 const jsxMoment = (reference, value, config = {}) => {
     // 时间信息处理
@@ -57,7 +58,18 @@ const jsxRecord = (reference, value, config = {}) => {
     );
 };
 const jsxLabel = (reference, value, config = {}) => {
-    return (<span>{Ux.isObject(value) ? JSON.stringify(value) : value}</span>);
+    const {smartFile = false} = config;
+    let children;
+    if (Ux.isObject(value)) {
+        children = JSON.stringify(value)
+    } else {
+        if (smartFile && Ux.isNumber(value)) {
+            children = Ux.toFileSize(value);
+        } else {
+            children = value;
+        }
+    }
+    return (<span>{children}</span>);
 }
 const jsxIcon = (reference, icon, style = {}) => (<Icon type={icon} style={style}/>);
 const jsxUser = (reference, value, config = {}) => {
@@ -80,7 +92,35 @@ const jsxTable = (reference, value = [], config = {}) => {
         <Table {...tableAttrs} dataSource={value}/>
     )
 };
+const jsxDownload = (reference, value, config = {}) => {
+    const {download = {}, preview = {}} = config;
+    let display;
+    if (download.text) {
+        display = download.text;
+    } else {
+        display = value;
+    }
+
+    return (
+        <span>
+            {/* eslint-disable-next-line */}
+            <a href={""} onClick={event => {
+                Ux.prevent(event);
+                Ux.ajaxDownload(value).then(data => {
+                    const ref = Ux.onReference(reference, 1);
+                    if (ref) {
+                        const value = Ux.formGet(ref, download.filename);
+                        saveAs(data, value);
+                    }
+                })
+            }}>{display}</a>
+            &nbsp;&nbsp;
+            {preview.empty}
+        </span>
+    )
+}
 export default {
+    jsxDownload,
     /* 普通标签 */
     jsxMoment,
     jsxLabel,

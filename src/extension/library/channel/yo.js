@@ -90,6 +90,7 @@ const Order = {
     "op.edit": [
         "op.submit.save",
         "op.submit.delete",
+        "op.submit.close",
         "op.submit.reset"
     ]
 }
@@ -1782,7 +1783,8 @@ const isOk = (item = {}) => {
     return [
         "op.submit.save",
         "op.submit.delete",
-        "op.submit.reset"
+        "op.submit.reset",
+        "op.submit.close"
     ].includes(item.category)
 };
 const setEdition = (attrs = {}, reference) => {
@@ -1877,7 +1879,7 @@ const yoTabExtra = (reference, tabs = {}) => {
      * state -> $submitting
      * state -> view
      */
-    const {$submitting = false, $view = Fn.Mode.LIST} = reference.state;
+    const {$submitting = false, $view = Fn.Mode.LIST, $inited = {}} = reference.state;
     if (isSatisfy(reference, $view)) {
         /*
          * 1.添加流程
@@ -1903,6 +1905,7 @@ const yoTabExtra = (reference, tabs = {}) => {
              * 设置可编辑的基础关系
              */
             setEdition(attrs, reference);
+            attrs.config = Ux.pluginSeeEdit(reference, $inited, attrs.config);
             /* 处理 config */
             if (attrs.config && 1 === attrs.config.length) {
                 /*
@@ -1910,6 +1913,35 @@ const yoTabExtra = (reference, tabs = {}) => {
                  * 此种情况只有一个 RESET 按钮，直接过滤掉
                  ***/
                 attrs.config = attrs.config.filter(item => "op.submit.reset" !== item.category);
+            }
+
+        } else {
+            attrs.config = Ux.pluginSeeAdd(reference, $inited, attrs.config);
+        }
+        /*
+         * 显示删除按钮
+         */
+        if (0 === attrs.config.length) {
+            const {options = {}} = reference.state;
+            /*
+             * op.submit.close 只有在没有任何按钮存在时才会出现
+             * 且除了文字可以更改，其他内容目前版本全程固定
+             */
+            if (options['op.submit.close']) {
+                const button = {
+                    icon: 'close-circle',
+                    className: "ux-spec",
+                    key: "opFormClose",
+                    text: options['op.submit.close']
+                }
+                button.onClick = (event) => {
+                    Ux.prevent(event);
+                    Fn.rxTabClose(reference)($inited.key, {
+                        $dirty: true,
+                        $submitting: false
+                    })
+                }
+                attrs.config.push(button);
             }
         }
         attrs.$submitting = $submitting;
@@ -2451,6 +2483,7 @@ const yoListExtra = (reference) => {
         editorRef.$columns = $columns;
         editorRef.$columnsMy = $columnsMy;
     });
+    editorRef.config = Ux.pluginSeeBatch(reference, editorRef.config);
     if (editorRef.$myView) {
         /*
          * position 处理

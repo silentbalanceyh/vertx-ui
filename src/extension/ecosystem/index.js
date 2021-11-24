@@ -26,8 +26,8 @@ export {default as ExWizard} from './ExWizard/UI';                      /* 双�
 /*
  * 我的待办（处理待办系统，集成工作流）
  */
-export {default as TxQueue} from './TxQueue/UI';                      /* 待办队列 */
-
+export {default as TxQRun} from './TxQRun/UI';                      /* 待办队列 */
+export {default as TxQDone} from './TxQDone/UI';                      /* 待办队列 */
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

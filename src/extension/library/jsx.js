@@ -67,5 +67,5 @@ export default {
             };
             return Ux.aiInput(reference, jsx);
         }
-    }
+    },
 }

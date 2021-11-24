@@ -78,6 +78,8 @@ function getWebpackAliases(options = {}) {
             app: path.resolve(__dirname, "../src", "app"),
             // 新统一工具包
             ux: path.resolve(__dirname, "../src", "ux"),
+            // Ui 新工具
+            ui: path.resolve(__dirname, "../src", "ui"),
             // Fix moment issu
             moment$: "moment/moment.js",
             // Zero Extension

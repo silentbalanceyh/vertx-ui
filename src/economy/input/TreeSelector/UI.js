@@ -125,7 +125,7 @@ class Component extends React.PureComponent {
          */
         const inputCombine = Op.yoCombine(this, inputAttrs);
         return (
-            <div>
+            <div className={jsx.className ? jsx.className : ""}>
                 <Input {...inputCombine}/>
                 <Dialog className="web-dialog"
                         size={"small"}

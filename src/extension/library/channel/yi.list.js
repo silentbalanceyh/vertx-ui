@@ -86,13 +86,18 @@ const yiListPlugin = (reference, config = {}) => {
     /*
      * 表单字段专用
      */
-    const {pluginField} = reference.props;
-    if (Ux.isFunction(pluginField)) {
-        const pluginFieldFn = pluginField(reference);
-        if (Ux.isFunction(pluginFieldFn)) {
-            plugins.pluginField = pluginFieldFn;
+    const {$plugins = {}} = reference.props;
+    if (Ux.isFunction($plugins.pluginFieldFn)) {
+        const pluginField = $plugins.pluginFieldFn(reference);
+        if (Ux.isFunction(pluginField)) {
+            plugins.pluginField = pluginField;
         }
     }
+    /*
+     * 过滤常用函数
+     */
+    Object.keys($plugins).filter(key => !Fn.PLUGIN.LEGACY.includes(key))
+        .forEach(key => plugins[key] = $plugins[key])
     return plugins;
 }
 // ======================= Op, Table ===================

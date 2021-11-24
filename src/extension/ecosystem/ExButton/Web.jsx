@@ -65,7 +65,11 @@ const _renderButton = (reference, config = {}) => {
         $submitting = false
     } = reference.props;
     config.loading = $submitting;
-    const {text, ...rest} = config;
+    const {text, visible = true, ...rest} = config;
+    if (!visible) {
+        // Fix Bug: Received `true` for a non-boolean attribute `visible`.
+        return false;
+    }
     if (text) {
         /* 标准按钮 */
         return (<Button {...rest}>{text}</Button>);

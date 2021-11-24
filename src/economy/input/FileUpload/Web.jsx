@@ -28,13 +28,19 @@ const renderFile = (reference) => {
             ) : (
                 $imageUrl ? (
                     <img src={$imageUrl} alt={"avatar"}/>
-                ) : (
-                    <Button disabled={meta.disabled}>
-                        <Icon type={"upload"}/>
-                        {text ?
-                            <span className={"ant-upload-text"}>{text}</span> : false}
-                    </Button>
-                )
+                ) : (() => {
+                    if (meta.disabled || meta.readOnly) {
+                        return false;
+                    } else {
+                        return (
+                            <Button disabled={meta.disabled}>
+                                <Icon type={"upload"}/>
+                                {text ?
+                                    <span className={"ant-upload-text"}>{text}</span> : false}
+                            </Button>
+                        )
+                    }
+                })()
             )}
         </Upload>
     );

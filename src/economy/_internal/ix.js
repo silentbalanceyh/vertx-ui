@@ -142,7 +142,11 @@ const tableConfig = (reference, config = {}) => {
 // 弹框配置
 
 const _renderClean = (reference) => {
-    const {value, allowClear} = reference.props;
+    const {
+        value, allowClear,
+        disabled = false,
+        readOnly = false
+    } = reference.props;
     const attrs = {};
     attrs.type = "delete";
     attrs.style = {
@@ -155,6 +159,12 @@ const _renderClean = (reference) => {
             Ux.fn(reference).onChange(undefined);
         }
     }
+    if (disabled || readOnly) {
+        if (attrs.onClick) {
+            delete attrs.onClick;
+        }
+        attrs.className = "icon-ro"
+    }
     return (<Icon {...attrs}/>)
 }
 
@@ -162,11 +172,20 @@ const dialogCombine = (reference, inputAttrs = {}) => {
     const {
         onClick
     } = reference.state ? reference.state : {};
-    const {value} = reference.props;
+    const {
+        value,
+        readOnly = false,
+        disabled = false
+    } = reference.props;
     const inputCombine = {};
-    inputCombine.suffix = (<Icon type="search" onClick={onClick}/>);
-    inputCombine.readOnly = true;
     Object.assign(inputCombine, inputAttrs);
+    if (readOnly || disabled) {
+        delete inputCombine.onClick;
+        inputCombine.suffix = (<Icon type="search"/>);
+    } else {
+        inputCombine.suffix = (<Icon type="search" onClick={onClick}/>);
+    }
+    inputCombine.readOnly = true;
     if (inputCombine.allowClear) {
         inputCombine.addonAfter = _renderClean(reference);
         if (undefined !== value) {

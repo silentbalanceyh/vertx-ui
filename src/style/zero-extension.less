@@ -170,31 +170,76 @@
 
 
 .ex-bpmn-end {
+    // 节点中间内容填充成完成专用颜色
+    &:not(.djs-connection) .djs-visual {
+        path {
+            fill: @flow-end !important;
+        }
+    }
+
+    // 激活时专用颜色
     &:not(.djs-connection) .djs-visual > :nth-child(1) {
         fill: #f6ffed !important; /* color elements as green */
-        stroke: #58c623 !important;
+        stroke: @flow-end !important;
+    }
+
+    // 文字颜色
+    .djs-label {
+        fill: @flow-end !important;
+    }
+
+    // 激活专用色
+    .djs-visual {
+        path {
+            stroke: @flow-end !important;
+        }
+    }
+
+    // 文件起点颜色
+    &-label .djs-label {
+        fill: @flow-end !important;
+    }
+}
+
+
+.ex-bpmn-error {
+    &:not(.djs-connection) .djs-visual > :nth-child(1) {
+        fill: #FFF0F5 !important; /* color elements as green */
+        stroke: @flow-error !important;
     }
 
     .djs-label {
-        fill: #58c623 !important;
+        fill: @flow-error !important;
+    }
+
+    .djs-visual {
+        path {
+            stroke: @flow-error !important;
+        }
     }
 
     &-label .djs-label {
-        fill: #58c623 !important;
+        fill: @flow-error !important;
     }
 }
 
 .ex-bpmn-active {
     &:not(.djs-connection) .djs-visual > :nth-child(1) {
         fill: #f0f5ff !important; /* color elements as green */
-        stroke: #2f54eb !important;
+        stroke: @flow-active !important;
     }
 
     .djs-label {
-        fill: #2f54eb !important;
+        fill: @flow-active !important;
+    }
+
+    .djs-visual {
+        path {
+            stroke: @flow-active !important;
+        }
     }
 
     &-label .djs-label {
-        fill: #2f54eb !important;
+        fill: @flow-active !important;
     }
 }

@@ -70,6 +70,10 @@ class Component extends React.PureComponent {
             /*
              * pluginField 转入 ExListComplex
              */
+            if (!inherit.$plugins) {
+                inherit.$plugins = {};
+            }
+            inherit.$plugins.pluginFieldFn = Plugin.pluginField;
             return (
                 <ExListComplex {...inherit}
                                config={$config}
@@ -78,7 +82,6 @@ class Component extends React.PureComponent {
                                $forbidden={$config.$forbidden} // 关闭 options 专用
                                $query={$config.query}   // 外置专用的 query 读取
                                $tree={$tree}
-                               pluginField={Plugin.pluginField}
                                rxPostSelected={Op.rxPostSelected(this)}
                                rxPostOpen={() => Ux.activeTreeOff()}
                                rxPostClose={() => Ux.activeTreeOn()}

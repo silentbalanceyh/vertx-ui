@@ -28,6 +28,8 @@ const rxContent = (reference, value, config) => {
             return Rdr.jsxRecord(reference, value, config);
         } else if (config.user) {
             return Rdr.jsxUser(reference, value, config);
+        } else if (config.download) {
+            return Rdr.jsxDownload(reference, value, config);
         }
         return Rdr.jsxLabel(reference, value, config);
     }

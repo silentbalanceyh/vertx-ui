@@ -5,6 +5,7 @@ echo "[ Start ] 拷贝代码到：${TARGET_FOLDER}"
 rm -rf ${TARGET_FOLDER}/src/economy/*
 rm -rf ${TARGET_FOLDER}/src/entity/*
 rm -rf ${TARGET_FOLDER}/src/ux/*
+rm -rf ${TARGET_FOLDER}/src/ui/*
 rm -rf ${TARGET_FOLDER}/src/extension/*
 # rm -rf ${TARGET_FOLDER}/src/editor/*
 echo "[ Proc ] 目标代码删除完成！"
@@ -12,11 +13,13 @@ echo "[ Proc ] 目标代码删除完成！"
 mkdir -p ${TARGET_FOLDER}/src/economy/
 mkdir -p ${TARGET_FOLDER}/src/entity/
 mkdir -p ${TARGET_FOLDER}/src/ux/
+mkdir -p ${TARGET_FOLDER}/src/ui/
 mkdir -p ${TARGET_FOLDER}/src/extension/
 # mkdir -p ${TARGET_FOLDER}/src/editor/
 cp -rf src/economy/* ${TARGET_FOLDER}/src/economy/
 cp -rf src/entity/* ${TARGET_FOLDER}/src/entity/
 cp -rf src/ux/* ${TARGET_FOLDER}/src/ux/
+cp -rf src/ux/* ${TARGET_FOLDER}/src/ui/
 cp -rf src/extension/* ${TARGET_FOLDER}/src/extension/
 # cp -rf src/editor/* ${TARGET_FOLDER}/src/editor/
 echo "[ Proc ] 代码拷贝完成！"
