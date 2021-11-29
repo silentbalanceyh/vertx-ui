@@ -1,0 +1,158 @@
+{
+    "_form": {
+        "modal": {
+            "success": {
+                "saved": "您好，您的开户行信息更新成功！",
+                "removed": "当前开户行信息已经删除成功！"
+            }
+        },
+        "op": {
+            "$opSave": "act.bank.save",
+            "$opDelete": "act.bank.delete"
+        },
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary,,,closable=true,callback=saved",
+                        "$opDelete,删除,KEY,,,,closable=true,callback=removed",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,银行名称,16,,,placeholder=请输入名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "code,银行编号,8,,,placeholder=请输入唯一编号,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入银行编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/bank/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "alias,银行别称,8"
+            ],
+            [
+                "website,银行主页,16,,,placeholder=http://domain.name/"
+            ],
+            [
+                {
+                    "metadata": "branch,是否支行,8,,aiCheckbox,valuePropName=true",
+                    "optionJsx.depend.impact": {
+                        "reset": [
+                            "branchName",
+                            "branchCode",
+                            "bankName",
+                            "bankId"
+                        ]
+                    }
+                },
+                "active,是否启用,8,,aiCheckbox,valuePropName=checked"
+            ],
+            [
+                "title=分支行"
+            ],
+            [
+                {
+                    "metadata": "branchName,支行名称,16,,,placeholder=请输入名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入支行名称，名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，支行名称重复！",
+                            "config": {
+                                "uri": "/api/bank/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "branch": true
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "branchCode,支行编号,8,,,placeholder=请输入唯一编号,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入支行编号，编号不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，支行编号重复！",
+                            "config": {
+                                "uri": "/api/bank/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ],
+                    "optionJsx.depend.enabled": {
+                        "branch": true
+                    }
+                },
+                {
+                    "metadata": "bankName,上级银行（父行）,8,,aiTreeSelector,placeholder=（请选择）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/bank/by/sigma",
+                            "magic": {
+                            }
+                        },
+                        "linker": {
+                            "name": "bankName",
+                            "key": "bankId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "bankId"
+                        },
+                        "validation": "请选择父行！",
+                        "window": "选择父银行,选择,关闭,false,400,false"
+                    },
+                    "optionJsx.allowClear": true,
+                    "optionJsx.depend.enabled": {
+                        "branch": true
+                    }
+                }
+            ],
+            [
+                "comment,备注信息,24,,aiTextArea,rows=3"
+            ]
+        ],
+        "hidden": [
+            "bankId",
+            "key"
+        ]
+    }
+}

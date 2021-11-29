@@ -1,0 +1,96 @@
+{
+    "_form": {
+        "modal": {
+            "success": {
+                "saved": "您好，您的币种信息更新成功！",
+                "removed": "当前币种信息已经删除成功！"
+            }
+        },
+        "window": 0.15,
+        "op": {
+            "$opSave": "act.currency.save",
+            "$opDelete": "act.currency.delete"
+        },
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary,,,closable=true,callback=saved",
+                        "$opDelete,删除,KEY,,,,closable=true,callback=removed",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,币种名称,14,,,placeholder=请输入名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，名称重复！",
+                            "config": {
+                                "uri": "/api/currency/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "code,币种符号,14,,,placeholder=请输入唯一符号,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入币种符号，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，符号重复！",
+                            "config": {
+                                "uri": "/api/currency/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                "digitAmount,小数位数（金额）,14,,aiInputNumber"
+            ],
+            [
+                "digitPrice,小数位数（单价）,14,,aiInputNumber"
+            ],
+            [
+                {
+                    "metadata": "active,是否启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3,
+                    "optionItem.style": {
+                        "width": "99%"
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "key"
+        ]
+    }
+}

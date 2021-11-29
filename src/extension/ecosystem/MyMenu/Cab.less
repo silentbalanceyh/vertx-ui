@@ -1,0 +1,155 @@
+@import '../../../global';
+
+.ux-my-menu {
+    .app(@range, @width,@margin,@icon, @iconPadding, @iconRadius) {
+
+        .range {
+            width: @range;
+
+            .icon {
+                .ix-box.rect(@icon, @icon);
+                padding: @iconPadding;
+                border-radius: @iconRadius;
+            }
+
+            .link {
+                max-width: @width;
+                margin: @margin;
+                text-align: center;
+                display: inline-block;
+            }
+        }
+    }
+}
+
+.ux-my-menu-fit {
+    // 1280 x 1024
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+        .ux-my-menu.app(88px, 80px, 10px, 60px, 10px, 10px);
+        .ant-empty {
+            height: 99px;
+
+            &-image {
+                height: 72px;
+                margin-bottom: 4px;
+            }
+        }
+    }
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ux-my-menu.app(104px, 96px, 12px, 80px, 16px, 16px);
+        .ant-empty {
+            height: 123px;
+
+            &-image {
+                height: 92px;
+                margin-bottom: 4px;
+            }
+        }
+
+    }
+}
+
+.ux-my-menu-dialog {
+    .ant-transfer {
+
+        &-list {
+            width: 45%
+        }
+
+        &-operation {
+            text-align: center !important;
+            width: 7%;
+            padding-left: 2%;
+        }
+
+        .source {
+            max-height: 550px;
+            overflow-y: auto;
+        }
+
+        .target {
+            max-height: 550px;
+            overflow-y: auto;
+
+            &-item {
+                width: 100%;
+                line-height: 32px;
+                display: block;
+                float: left;
+
+                .left {
+                    float: left;
+                }
+
+                .right {
+                    float: right;
+                }
+            }
+        }
+    }
+}
+
+.ux-my-menu {
+    .content {
+
+        .ux-my-menu-fit;
+
+        .range {
+            float: left;
+            text-align: center;
+
+            .icon {
+                display: block !important;
+                font-size: 40px !important;
+
+                &-view {
+
+                    &:hover {
+                        color: @primary-color;
+                        background-color: @color-flag-bg !important;
+                    }
+                }
+
+                &-admin {
+                    cursor: not-allowed;
+                }
+
+                &-add {
+                    &:hover {
+                        background-color: @color-ant-menu-hover !important;
+                    }
+                }
+            }
+
+            .link {
+                color: black !important;
+                float: left;
+                display: block;
+
+                span {
+                    display: block !important;
+                    width: 100%;
+                    color: black;
+                    text-align: center !important;
+                }
+
+                &-admin {
+                    &:hover {
+                        cursor: not-allowed;
+                    }
+                }
+            }
+
+            .link-op {
+                width: 100%;
+            }
+        }
+    }
+
+    .admin-button {
+        border-radius: 16px;
+        min-width: 88px;
+        margin-right: 12px;
+    }
+}

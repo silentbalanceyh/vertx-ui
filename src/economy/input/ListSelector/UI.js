@@ -126,6 +126,7 @@ class Component extends React.PureComponent {
          * 分页计算
          */
         const pageAndChange = Op.yoPager(this, config);
+
         /*
          * 属性拉平处理
          * 表格处理
@@ -134,6 +135,7 @@ class Component extends React.PureComponent {
         const ref = Ux.onReference(this, 1);
 
         let $table = Ux.clone(table);
+        $table.columns = Ux.configColumn(this, $table.columns);
         $table = Op.yoSelected(this, $table);
 
         Ux.configScroll($table, $data.list, ref);

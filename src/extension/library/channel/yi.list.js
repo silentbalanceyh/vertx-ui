@@ -202,7 +202,7 @@ const _yiColumn = (parameters = {}) => {
              */
             let staticColumns = [];
             if (table.columns) {
-                staticColumns = Ux.clone(table.columns)
+                staticColumns = Ux.configColumn(reference, table.columns);
             }
             /*
              * 配置 columns

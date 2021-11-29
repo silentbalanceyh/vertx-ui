@@ -143,6 +143,7 @@ const toTreeArray = (data = [], config = {}) => {
         }
         /* 保留特殊值，用于UI渲染 */
         [
+            config.sort,        // 保留排序字段
             "disabled",
             "className",
             "icon",

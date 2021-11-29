@@ -1230,15 +1230,21 @@ const ajax2True = (consumer, content) => (result) => {
 const ajaxEager = (reference, columns = [], data = []) => {
     // console.info(columns);
     const lazyAsync = [];
+    // Cached
+    const {$lazy = {}} = reference.state;
     columns.forEach(column => {
         const config = column.$config;
+        let lazyData = $lazy[column.dataIndex];
+        if (!lazyData) lazyData = {};
         if (Abs.isObject(config)) {
             const {uri, field, expr, batch = false} = config;
             if (batch) {
                 /*
                  * 批量处理只能使用查询引擎
                  */
-                const dataKeys = data.map(item => item[column.dataIndex]);
+                const dataKeys = data
+                    .filter(item => !lazyData[item[column.dataIndex]])
+                    .map(item => item[column.dataIndex]);
                 const criteria = {};
                 criteria[`key,i`] = dataKeys;
                 lazyAsync.push(Ajax.ajaxPost(uri, {criteria}).then((response = {}) => {
@@ -1267,7 +1273,7 @@ const ajaxEager = (reference, columns = [], data = []) => {
                  */
                 const dataMap = Ele.elementGroup(data, column.dataIndex);
                 const vertical = [];
-                const verticalKeys = Object.keys(dataMap);
+                const verticalKeys = Object.keys(dataMap).filter(key => !lazyData[key]);
                 verticalKeys.forEach(key => {
                     if ("undefined" === key) {
                         vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
@@ -1297,20 +1303,18 @@ const ajaxEager = (reference, columns = [], data = []) => {
                     response.forEach((each, keyIndex) => {
                         result[verticalKeys[keyIndex]] = each;
                     });
+                    Object.assign(result, lazyData);
                     return Abs.promise(result);
                 }));
             }
         }
     });
-    return Abs.parallel(lazyAsync)
-        .then(response => {
-            const lazyKeys = columns.map(column => column.dataIndex);
-            const lazy = {};
-            response.forEach((each, index) => {
-                lazy[lazyKeys[index]] = each;
-            });
-            return Abs.promise(lazy);
-        })
+    return Abs.parallel(lazyAsync).then(response => {
+        const lazyKeys = columns.map(column => column.dataIndex);
+        const lazy = {};
+        response.forEach((each, index) => lazy[lazyKeys[index]] = each);
+        return Abs.promise(lazy);
+    })
 };
 
 const ajaxFun = {

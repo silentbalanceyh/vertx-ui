@@ -857,9 +857,9 @@ const rxView = (reference) => (key, record = {}) => {
          * operation for uri
          */
         const params = {};
-        if (Ux.isEmpty(record)){
+        if (Ux.isEmpty(record)) {
             params['key'] = key;
-        }else{
+        } else {
             Object.keys(record).forEach(key => {
                 if (!Ux.isObject(record[key]) && !Ux.isArray(record[key])) {
                     params[key] = record[key];

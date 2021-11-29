@@ -1,0 +1,45 @@
+{
+    "_page": {
+        "title": "我的快捷方式"
+    },
+    "_switcher": {
+        "unCheckedChildren": "进入管理模式",
+        "checkedChildren": "管理视图"
+    },
+    "_link": [
+        {
+            "key": "rxLeft",
+            "icon": "left",
+            "tooltip": "左移"
+        },
+        {
+            "key": "rxRight",
+            "icon": "right",
+            "tooltip": "右移"
+        },
+        {
+            "key": "rxDelete",
+            "icon": "delete",
+            "className": "ux-red",
+            "tooltip": "删除"
+        }
+    ],
+    "_info": {
+        "admin": "对不起，管理模式下不可以点击链接，请切换到`普通模式`，然后点击链接！",
+        "add": "菜单设置",
+        "loading": "正在提交您的定制数据……",
+        "notice": "注意，您正在调整个人的快捷方式，该设置目前尚未保存，您需要点击右上的`保存`按钮保存该设置，否则您的设置不会生效！",
+        "empty": "您目前没有定制任何快捷方式，请点击右上角`进入管理模式`定制您的个人快捷方式面板！"
+    },
+    "_modal": {
+        "success": {
+            "saved": "您的个人快捷方式菜单已设置成功！"
+        },
+        "confirm": {
+            "unsave": "您的设置尚未保存，如果切换回普通视图，所以设置将会丢失，确认此操作？"
+        }
+    },
+    "_dialog": {
+        "window": "请选择您想要设置的快捷方式,确认,关闭,false,900,true,$opProcess"
+    }
+}

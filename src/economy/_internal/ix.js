@@ -32,6 +32,24 @@ const searchConfig = (reference, config = {}) => {
         return attrs;
     }
 }
+const tableLazy = (reference, state, $data = {}) => new Promise((resolve) => {
+    const {table = {}} = reference.state;
+    if (table && table.columns) {
+        const lazyColumn = table.columns
+            .filter(item => "USER" === item['$render']);
+        if (0 < lazyColumn.length) {
+            // 加载更多的 lazyColumn 部分
+            Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
+                .then($lazy => Ux.promise(state, "$lazy", $lazy))
+                .then(done => resolve(done));
+        } else {
+            // 不带任何 lazyColumn
+            resolve(state)
+        }
+    } else {
+        resolve(state);
+    }
+})
 // 表格配置
 const tablePager = (reference, config = {}) => {
     const pager = {};
@@ -44,9 +62,14 @@ const tablePager = (reference, config = {}) => {
                 params.pager.size = pagination.pageSize;
                 params.pager.page = pagination.current;
                 // 补充设置$page页面值
-                Ux.asyncData(config.ajax, params, ($data) => reference.setState({
-                    $loading: false, $data, $page: pagination.current
-                }), mock);
+                Ux.asyncData(config.ajax, params, ($data) => {
+                    const state = {};
+                    state.$loading = false;
+                    state.$data = $data;
+                    state.$page = pagination.current;
+                    return tableLazy(reference, state, $data)
+                        .then(processed => reference.setState(processed))
+                }, mock);
             }
         };
         const {$data = {}, $page} = reference.state;
@@ -71,7 +94,7 @@ const tablePager = (reference, config = {}) => {
     return pager;
 };
 const tableConfig = (reference, config = {}) => {
-    const ref = Ux.onReference(reference, 1);
+    // const ref = Ux.onReference(reference, 1);
     const {table = {}} = config;
     /*
      * mountKey 针对所有记录
@@ -94,7 +117,7 @@ const tableConfig = (reference, config = {}) => {
     /*
      * table 中的 columns 注入
      */
-    const columns = Ux.configColumn(ref, table.columns ? table.columns : []);
+    // const columns = Ux.configColumn(ref, table.columns ? table.columns : []);
     const rowSelection = {}
     const {selection} = config;
     const tableAttrs = {};
@@ -135,7 +158,7 @@ const tableConfig = (reference, config = {}) => {
             }
         }
     }
-    tableAttrs.columns = columns;
+    tableAttrs.columns = table.columns;
     tableAttrs.rowSelection = rowSelection;
     return tableAttrs;
 }
@@ -345,72 +368,36 @@ const dialogClick = (reference, config = {}) => (event) => {
     if (!Ux.isEmpty($filters)) {
         params = Ux.qrCombine(params, reference, $filters);
     }
+    const {value} = reference.props;
     /*
      * 加载表格数据
      */
     Ux.asyncData(config.ajax, params, ($data) => {
         const state = {$data, $loading: false};
-
-        const {table} = reference.state;
-        if (table && table.columns) {
-            return new Promise((resolve) => {
-                /*
-                 * lazyColumn 执行
-                 */
-                const lazyColumn = table.columns
-                    .filter(item => "USER" === item['$render']);
-                if (0 < lazyColumn.length) {
-
-                    /*
-                     * 加载更多的 lazyColumn 部分
-                     */
-                    Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
-                        .then($lazy => Ux.promise(state, "$lazy", $lazy))
-                        .then(done => resolve(done));
-                } else {
-                    /*
-                     * 不带任何 lazyColumn
-                     */
-                    resolve(state)
+        return tableLazy(reference, state, $data).then(state => {
+            // selected 专用
+            let $selected;
+            if (config.selection && config.selection.multiple) {
+                // 多选
+                if (Ux.isArray(value)) {
+                    $selected = value;
                 }
-            }).then(state => {
-                /*
-                 * selected 专用
-                 */
-                const {config = {}, value} = reference.props;
-                let $selected;
-                if (config.selection && config.selection.multiple) {
-                    /*
-                     * 多选处理
-                     */
-                    if (Ux.isArray(value)) {
-                        $selected = value;
+            } else {
+                // 单选
+                if (value) {
+                    // 有值
+                    const {$keySet} = reference.state;
+                    if ($keySet) {
+                        $selected = $keySet;
                     }
                 } else {
-                    /*
-                     * 单选处理
-                     */
-                    if (value) {
-                        /*
-                         * 有值
-                         */
-                        const {$keySet} = reference.state;
-                        if ($keySet) {
-                            $selected = $keySet;
-                        }
-                    } else {
-                        /*
-                         * 单选无值
-                         */
-                        $selected = undefined;
-                    }
+                    // 无值
+                    $selected = undefined;
                 }
-                state.$keySet = $selected;
-                reference.setState(state);
-            })
-        } else {
-            console.error("表格配置异常: ", table);
-        }
+            }
+            state.$keySet = $selected;
+            reference.setState(state);
+        })
     });
 }
 export default {

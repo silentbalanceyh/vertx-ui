@@ -84,7 +84,11 @@
                     "optionJsx.config": {
                         "ajax": {
                             "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
-                            "params.criteria.sigma": "PROP:app.sigma"
+                            "params.criteria": {
+                                "sigma": "PROP:app.sigma",
+                                "key,<>": "USER:key",
+                                "": true
+                            }
                         },
                         "linker": {
                             "realname": "userName",
@@ -110,7 +114,11 @@
                             ]
                         },
                         "validation": "请选择用户！",
-                        "window": "选择用户,选择,关闭,false,800,false"
+                        "window": "选择用户,选择,关闭,false,800,false",
+                        "search": {
+                            "username,c": "账号",
+                            "realname,c": "姓名"
+                        }
                     },
                     "optionJsx.allowClear": true
                 }

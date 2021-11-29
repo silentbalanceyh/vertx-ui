@@ -96,6 +96,8 @@ const KEY = (reference, config = {}) => (event) => {
         .then(data => performFn(reference, config)
             /* 记得拷贝数据传入 perform，否则 data 无法被扩展 */
             .then(perform => perform(data))
+            /* 删除窗口专用 */
+            .then(() => _callback(reference, config, data))
         )
         /* 统一 Error 处理 */
         .catch(error => Ajax.ajaxError(reference, error))

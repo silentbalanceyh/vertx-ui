@@ -28,6 +28,10 @@ export {default as ExWizard} from './ExWizard/UI';                      /* 双�
  */
 export {default as TxQRun} from './TxQRun/UI';                      /* 待办队列 */
 export {default as TxQDone} from './TxQDone/UI';                      /* 待办队列 */
+/*
+ * 个人界面
+ */
+export {default as MyMenu} from './MyMenu/UI';
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

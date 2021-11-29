@@ -1161,6 +1161,17 @@ const elementDown = (array = [], value, field) => {
     return result;
 }
 
+const elementOrder = (data = [], keys = [], keyField = "key") => {
+    const ordered = [];
+    keys.forEach(key => {
+        const found = elementUnique(data, keyField, key);
+        if (found) {
+            ordered.push(found);
+        }
+    });
+    return Abs.clone(ordered);
+}
+
 /**
  * ## 「标准」`Ux.elementFlat`
  *
@@ -1854,6 +1865,7 @@ export default {
     elementGrid,
     elementUp,
     elementDown,
+    elementOrder,
     elementConcat,
     elementGet,
     // 树操作

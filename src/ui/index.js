@@ -5,6 +5,12 @@ import Lg from "lang";
 import {PageCard} from "web";
 import {ExForm, ExListComplex} from "ei";
 
+const smartOp = (reference, config = {}) => ({
+    $opAdd: (formRef) => Ex.form(formRef).addFn(config.A),
+    $opSave: (formRef) => Ex.form(formRef).saveFn(config.S),
+    $opDelete: (formRef) => Ex.form(formRef).removeFn(config.D)
+})
+
 const smartForm = (configurationForm = {}, mode) => {
     const {
         ns,
@@ -82,6 +88,8 @@ const smartForm = (configurationForm = {}, mode) => {
                     // --- $op / $renders
                     if (Ux.isFunction(yoOp)) {
                         form.$op = yoOp(this);
+                    } else if (Ux.isObject(yoOp)) {
+                        form.$op = smartOp(this, yoOp)
                     }
                     if (Ux.isFunction(yoJsx)) {
                         form.$renders = yoJsx(this);

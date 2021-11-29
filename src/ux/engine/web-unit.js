@@ -623,27 +623,27 @@ const aiItemTransfer = (item, reference) => {
         })
         return (
             <span>
-                    <span className={"left"}>
-                        {item.label + `（${item.key}）`}
-                    </span>
-                    <span className={"right"}>
-                        <Button icon={"up"} size={"small"} type={"primary"}
-                                disabled={isFirst}
-                                onClick={event => {
-                                    event.stopPropagation();
-                                    const $element = Ele.elementUp($selectedKeys, item.key);
-                                    reference.setState({$selectedKeys: $element});
-                                }}/>
-                        &nbsp;
-                        <Button icon={"down"} size={"small"}
-                                disabled={isLast}
-                                onClick={event => {
-                                    event.stopPropagation();
-                                    const $element = Ele.elementDown($selectedKeys, item.key);
-                                    reference.setState({$selectedKeys: $element});
-                                }}/>
-                    </span>
+                <span className={"left"}>
+                    {item.label + `（${item.key}）`}
                 </span>
+                <span className={"right"}>
+                    <Button icon={"up"} size={"small"} type={"primary"}
+                            disabled={isFirst}
+                            onClick={event => {
+                                event.stopPropagation();
+                                const $element = Ele.elementUp($selectedKeys, item.key);
+                                reference.setState({$selectedKeys: $element});
+                            }}/>
+                    &nbsp;
+                    <Button icon={"down"} size={"small"}
+                            disabled={isLast}
+                            onClick={event => {
+                                event.stopPropagation();
+                                const $element = Ele.elementDown($selectedKeys, item.key);
+                                reference.setState({$selectedKeys: $element});
+                            }}/>
+                </span>
+            </span>
         )
     } else {
         return item.label + `（${item.key}）`

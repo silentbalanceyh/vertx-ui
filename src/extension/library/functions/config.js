@@ -162,7 +162,6 @@ const toRowItem = (item, prefix, control) => {
     }
     return row;
 };
-
 /**
  * ## 「配置」`Ex.configColumn`
  *

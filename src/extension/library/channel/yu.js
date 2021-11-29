@@ -61,6 +61,7 @@ const yuRouter = (reference, virtualRef, callback) => {
             /*
              * 执行 callback
              */
+            reference.setState({$ready: false});
             callback();
         }
     } else {

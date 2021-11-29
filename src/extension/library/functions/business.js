@@ -386,6 +386,25 @@ export default {
      * @returns {Object} 返回对象信息
      * */
     form: (reference) => ({
+        addFn: (uri) => (params) => {
+            let request = Ux.valueRequest(params);
+            const {$addKey} = reference.props;
+            request.key = $addKey;
+            request = Ux.valueValid(request);
+            return Ux.ajaxPost(uri, request);
+        },
+        saveFn: (uri) => (params) => {
+            const {$inited = {}} = reference.props;
+            // 先将表单有的值合并到初始值
+            const input = Object.assign({}, $inited, params);
+            let request = Ux.valueRequest(input);
+            request = Ux.valueValid(request);
+            return Ux.ajaxPut(uri, request);
+        },
+        removeFn: (uri) => (params) => {
+            const input = {key: params.key};
+            return Ux.ajaxDelete(uri, input)
+        },
         add: (params = {}, config = {}) => {
             let request = Ux.valueRequest(params);
             const {$addKey} = reference.props;
