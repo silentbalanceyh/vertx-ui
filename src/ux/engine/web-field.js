@@ -660,8 +660,8 @@ const aiCheckJson = (reference, jsx = {}, onChange) => {
 
 
 // import AddressSelector from './O.selector.address';
-const aiAddressSelector = (reference, jsx = {}) =>
-    (<AddressSelector {...jsx} reference={reference}/>);
+const aiAddressSelector = (reference, jsx = {}, onChange) =>
+    (<AddressSelector {...jsx} reference={reference} rxSelect={onChange}/>);
 
 
 // import RichEditor from './O.editor.rich';

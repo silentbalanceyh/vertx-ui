@@ -1,13 +1,28 @@
 import React from 'react';
+import Ui from "ui";
+import Ex from 'ex';
 
-class Component extends React.PureComponent {
-    render() {
-        return (
-            <div>
-                「Zero Extension」库存管理 -> 仓库管理
-            </div>
-        );
+export default Ui.smartList({
+    ns: require("./Cab.json"),
+    name: "PxWh",
+    Options: {
+        rm: [
+            "form.filter",      // 关闭高级搜索表单
+            "op.batch.edit",    // 按钮：批量编辑
+        ]
+    },
+    Form: {
+        name: "FormWh",
+        yoOp: {
+            A: "/api/wh",
+            S: "/api/wh/:key",
+            D: "/api/wh/:key",
+            APre: (request, formRef) => {
+                console.log(request);
+            }
+        },
+        yoJsx: {
+            regionId: Ex.Jsx.Address.regionId
+        }
     }
-}
-
-export default Component;
+})

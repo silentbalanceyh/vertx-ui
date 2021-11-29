@@ -5,11 +5,17 @@ import Lg from "lang";
 import {PageCard} from "web";
 import {ExForm, ExListComplex} from "ei";
 
-const smartOp = (reference, config = {}) => ({
-    $opAdd: (formRef) => Ex.form(formRef).addFn(config.A),
-    $opSave: (formRef) => Ex.form(formRef).saveFn(config.S),
-    $opDelete: (formRef) => Ex.form(formRef).removeFn(config.D)
-})
+const smartOp = (reference, config = {}) => {
+    const {
+        APre = data => data,
+        SPre = data => data,
+    } = config;
+    return ({
+        $opAdd: (formRef) => Ex.form(formRef).addFn(config.A, APre),
+        $opSave: (formRef) => Ex.form(formRef).saveFn(config.S, SPre),
+        $opDelete: (formRef) => Ex.form(formRef).removeFn(config.D)
+    })
+}
 
 const smartForm = (configurationForm = {}, mode) => {
     const {
@@ -93,6 +99,8 @@ const smartForm = (configurationForm = {}, mode) => {
                     }
                     if (Ux.isFunction(yoJsx)) {
                         form.$renders = yoJsx(this);
+                    } else if (Ux.isObject(yoJsx)) {
+                        form.$renders = yoJsx;
                     }
                     if (Ux.isFunction(yoAcl)) {
                         form.$edition = yoAcl(this, normalized);

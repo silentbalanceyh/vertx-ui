@@ -386,20 +386,34 @@ export default {
      * @returns {Object} 返回对象信息
      * */
     form: (reference) => ({
-        addFn: (uri) => (params) => {
+        addFn: (uri, preAdd) => (params) => {
             let request = Ux.valueRequest(params);
             const {$addKey} = reference.props;
             request.key = $addKey;
             request = Ux.valueValid(request);
-            return Ux.ajaxPost(uri, request);
+            if (Ux.isFunction(preAdd)) {
+                request = preAdd(request, reference);
+            }
+            if (request) {
+                return Ux.ajaxPost(uri, request);
+            } else {
+                console.error("不触发后端请求开发调试！！Add")
+            }
         },
-        saveFn: (uri) => (params) => {
+        saveFn: (uri, preEdit) => (params) => {
             const {$inited = {}} = reference.props;
             // 先将表单有的值合并到初始值
             const input = Object.assign({}, $inited, params);
             let request = Ux.valueRequest(input);
             request = Ux.valueValid(request);
-            return Ux.ajaxPut(uri, request);
+            if (Ux.isFunction(preEdit)) {
+                request = preEdit(request, reference);
+            }
+            if (request) {
+                return Ux.ajaxPut(uri, request);
+            } else {
+                console.error("不触发后端请求开发调试！！Edit")
+            }
         },
         removeFn: (uri) => (params) => {
             const input = {key: params.key};
