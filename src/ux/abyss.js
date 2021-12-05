@@ -1821,7 +1821,13 @@ const itValue = (object = {}, transformer, key) => {
  */
 const itTree = (treeArray = [], executor) => {
     if (isFunction(executor)) {
-        treeArray.forEach(item => {
+        let $tree;
+        if (!isArray(treeArray)) {
+            $tree = [treeArray]
+        } else {
+            $tree = treeArray;
+        }
+        $tree.forEach(item => {
             executor(item);
             if (item.children && 0 < item.children.length) {
                 itTree(item.children, executor);

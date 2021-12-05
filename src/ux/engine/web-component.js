@@ -135,7 +135,7 @@ const aiInit = (reference, values) => {
     /*
      * 基础初始化
      */
-    const {$inited = {}, $record = {}, rxInited = record => record} = reference.props;
+    const {$inited = {}, $record = {}} = reference.props;
     let initials = {};
     if (values && !Abs.isEmpty(values)) {
         initials = Abs.clone(values);
@@ -157,12 +157,6 @@ const aiInit = (reference, values) => {
      * initials 的优先级高于 detect
      */
     Object.assign(detect, initials);
-    /*
-     * 外置注入修改初始值专用
-     */
-    if (Abs.isFunction(rxInited)) {
-        detect = rxInited(detect);
-    }
     return Abs.clone(detect);   // 拷贝最终的值
 };
 /*
@@ -195,7 +189,9 @@ const aiForm = (reference, values, config = {}) => {
     const touched = form.isFieldsTouched();
     if (!touched) {
         const options = raft.options ? raft.options : {};
-        Dev.dgDebug(initials, "初始化表单数据：" + options.id, "#8B5A00");
+        if (Abs.isNotEmpty(initials)) {
+            Dev.dgDebug(initials, "初始化表单数据：" + options.id, "#8B5A00");
+        }
     }
     return (
         <Form {...attrs}>

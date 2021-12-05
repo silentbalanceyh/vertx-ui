@@ -329,7 +329,7 @@ class Uson {
  * @param {ReactComponent} reference React组件引用。
  * @param {Object} params 参数信息
  */
-const rxInit = (reference, params = {}) => {
+/*const rxInit = (reference, params = {}) => {
     const props = reference.props;
     E.fxTerminal(!Abs.isFunction(props.zxInit), 10019, props.zxInit);
     if (Abs.isFunction(props.zxInit)) {
@@ -339,11 +339,10 @@ const rxInit = (reference, params = {}) => {
             Object.assign(paramData, $router.params());
         }
         Object.assign(paramData, params);
-        // 特殊引入的注入
         paramData.reference = reference;
         props.zxInit(paramData);
     }
-};
+};*/
 const rxPrefix = (data = {}, prefix = "", order = "sort") => {
     if (prefix && !Abs.isEmpty(data)) {
         const normalized = {};
@@ -455,21 +454,21 @@ const rxAssist = (input, key, order = 'sort') => {
  * @param {boolean} merged 是否执行合并，或者直接返回当前结果。
  * @returns {Object} 返回最终结果。
  */
-const rjAssist = (key, ajax, sortField = null, merged = true) => {
+/*const rjAssist = (key, ajax, sortField = null, merged = true) => {
     const result = {
         ajax,
         processor: data => rxAssist(data, key, sortField)
     };
     if (merged) {
-        /* 用于格式：...处理 */
+        /!* 用于格式：...处理 *!/
         const response = {};
         response[key] = result;
         return response;
     } else {
-        /* 直接返回某个键的结果 */
+        /!* 直接返回某个键的结果 *!/
         return result;
     }
-}
+}*/
 /**
  * ## 「特殊」`Ux.rjTabular`
  *
@@ -490,7 +489,7 @@ const rjAssist = (key, ajax, sortField = null, merged = true) => {
  * @param {boolean} merged 是否执行合并，或者直接返回当前结果。
  * @returns {Object} 返回最终结果。
  */
-const rjTabular = (ajax, merged = true) => {
+/*const rjTabular = (ajax, merged = true) => {
     const result = {
         ajax,
         processor: rxDatum,
@@ -502,7 +501,7 @@ const rjTabular = (ajax, merged = true) => {
     } else {
         return result;
     }
-}
+}*/
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     /**
@@ -660,15 +659,14 @@ export default {
      * @returns {rxFlow} 返回最终 @zero 注解中的Stream模式的 redux处理器。
      * @deprecated 后期更改掉，取代 rxFlow
      */
-    rxFlow: actions => Dsl.rxFlow(actions),
+    // rxFlow: actions => Dsl.rxFlow(actions),
 
     /*
      * rx / rj
      */
-    rxInit,
     rxDatum,
     rxAssist,
     /* Ajax 专用方法用于生成 ajax / processor 结构 */
-    rjTabular,
-    rjAssist
+    // rjTabular,
+    // rjAssist
 }

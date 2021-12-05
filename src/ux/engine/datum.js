@@ -397,5 +397,19 @@ export default {
      * @return {Object} 分组过后的数据。
      */
     elementGroupDatum: (reference, source, field) =>
-        Ele.elementGroup(onDatum(reference, source), field)
+        Ele.elementGroup(onDatum(reference, source), field),
+    /**
+     * ## 「引擎」`Ux.elementMapDatum`
+     *
+     * 带辅助数据的强化班`elementMap`方法。
+     *
+     * @memberOf module:_element
+     * @param {ReactComponent} reference React对应组件引用。
+     * @param {String} source 需要读取的 Tabular/Assist 的键值。
+     * @param {String} from 构造Map键。
+     * @param {String} to 构造Map值。
+     * @return {Object} 分组过后的数据。
+     */
+    elementMapDatum: (reference, source, from, to) =>
+        Ele.elementMap(onDatum(reference, source), from, to)
 }

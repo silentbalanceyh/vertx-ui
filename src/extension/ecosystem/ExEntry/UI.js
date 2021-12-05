@@ -89,7 +89,7 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () =>
                 Ux.aiForm(this),
-            Ex.parserOfColor("ExEntry").form())
+            Ex.parserOfColor("ExEntry").form({monitor: false}))
     }
 }
 

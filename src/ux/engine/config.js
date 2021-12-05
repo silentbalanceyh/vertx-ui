@@ -300,8 +300,13 @@ const _widthOption = (mapping = []) => {
         if ("string" === typeof each) {
             let calculated;
             if (0 < each.indexOf(',')) {
-                calculated = widthWord(each.split(',')[0]);
+                const segments = each.split(',');
+                calculated = widthWord(segments[0]);
                 calculated += 8;
+                const size = Ele.valueInt(segments[2], 0);
+                if (36 < size) {
+                    calculated += (size - widthSeed());
+                }
             } else {
                 calculated = widthWord(each);
             }

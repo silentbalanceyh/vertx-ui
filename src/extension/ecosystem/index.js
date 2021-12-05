@@ -32,6 +32,12 @@ export {default as TxQDone} from './TxQDone/UI';                      /* 待办�
  * 个人界面
  */
 export {default as MyMenu} from './MyMenu/UI';
+/*
+ * G2
+ */
+export {default as G2Bar} from './G2Bar/UI';
+export {default as G2Pie} from './G2Pie/UI';
+export {default as G2Line} from './G2Line/UI';
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

@@ -1,7 +1,283 @@
 {
     "_form": {
+        "assist": {
+            "tabular": {
+                "uri": "/api/types/tabulars",
+                "method": "POST",
+                "magic": {
+                    "$body": [
+                        "zero.wh"
+                    ]
+                },
+                "group": "type"
+            }
+        },
+        "columns": 3,
+        "modal": {
+            "success": {
+                "saved": "您好，您的仓库信息更新成功！",
+                "removed": "当前仓库信息已经删除成功！"
+            }
+        },
+        "op": {
+            "$opSave": "act.wh.save",
+            "$opDelete": "act.wh.delete"
+        },
         "ui": [
-            []
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary,,,closable=true,callback=saved",
+                        "$opDelete,删除,KEY,,,,closable=true,callback=removed",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,仓库名,,,,placeholder=请输入名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入仓库名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,仓库编码,,,,placeholder=请输入唯一编码,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入仓库编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，仓库编码重复！",
+                            "config": {
+                                "uri": "/api/wh/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                {
+                    "metadata": "type,仓库类型,,,aiSelect",
+                    "optionJsx.config.datum": "source=zero.wh,key=code,label=name"
+                }
+            ],
+            [
+                {
+                    "metadata": "managerName,仓库管理员,,,aiListSelector,placeholder=（选择仓库管理员）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/user/search,1,10,sorter=updatedAt`DESC",
+                            "params.criteria": {
+                                "modelId": "FIX:employee"
+                            }
+                        },
+                        "linker": {
+                            "key": "managerId",
+                            "realname": "managerName",
+                            "workPhone": "managerPhone",
+                            "mobile": "managerMobile"
+                        },
+                        "table": {
+                            "columns": [
+                                "username,用户账号",
+                                "realname,用户名称",
+                                "mobile,手机号",
+                                "email,邮箱"
+                            ]
+                        },
+                        "validation": "请选择仓库管理员！",
+                        "window": "请选择仓库管理员,选择,关闭,false,800,false",
+                        "search": {
+                            "username,c": "账号",
+                            "realname,c": "名称"
+                        }
+                    },
+                    "optionJsx.allowClear": true
+                },
+                "managerMobile,管理员手机,,,,readOnly=true",
+                "managerPhone,管理员座机,,,,readOnly=true"
+            ],
+            [
+                "negative,允许负库存,,,aiCheckbox,valuePropName=checked",
+                "space,开启仓位,,,aiCheckbox,valuePropName=checked",
+                "active,启用,,,aiCheckbox,valuePropName=checked"
+            ],
+            [
+                "comment,仓库备注,24,,aiTextArea,rows=4"
+            ],
+            [
+                "title=区域信息"
+            ],
+            [
+                "areaName,区域备注,16,,,,placeholder=填写该仓库区域相关备注"
+            ],
+            [
+                {
+                    "metadata": "regionId,选择地址,16,,,placeholder=选择地址",
+                    "optionJsx.config.ajax": "DIRECT",
+                    "optionJsx.config.country": "/api/countries,name",
+                    "optionJsx.config.state": "/api/states/query/:key,name,countryId",
+                    "optionJsx.config.city": "/api/cities/query/:key,name,stateId",
+                    "optionJsx.config.region": "/api/regions/query/:key,name,cityId",
+                    "optionJsx.config.init": "/api/regions/meta/:key"
+                }
+            ],
+            [
+                "country,国家,,,,readOnly=true",
+                "state,省会,,,,readOnly=true",
+                "city,城市,,,,readOnly=true"
+            ],
+            [
+                "region,区域,,,,readOnly=true",
+                "locationAddress,详细地址,16"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "config": {
+                        "activeKey": "tabFirst",
+                        "items": [
+                            {
+                                "tab": "仓位列表",
+                                "key": "tabFirst"
+                            }
+                        ],
+                        "tabBarExtraContent": {
+                            "tabFirst": [
+                                "$opAdd,添加仓位,$opShowAdd,primary,plus"
+                            ]
+                        },
+                        "pages": {
+                            "tabFirst": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "positions,,24,,aiDialogEditor",
+                                            "optionJsx.config": {
+                                                "dialog": "添加,保存,关闭,false,1100,true,$opSaveAdd",
+                                                "op": {
+                                                    "add": "$opShowAdd"
+                                                },
+                                                "form": {
+                                                    "columns": 3,
+                                                    "ui": [
+                                                        [
+                                                            {
+                                                                "field": "$button",
+                                                                "hidden": true,
+                                                                "optionJsx.extension": [
+                                                                    "$opSaveAdd,添加,SAVE_ROW"
+                                                                ]
+                                                            }
+                                                        ],
+                                                        [
+                                                            "title=基本信息"
+                                                        ],
+                                                        [
+                                                            {
+                                                                "metadata": "name,名称,,,,placeholder=请输入名称,normalize=text:40",
+                                                                "optionConfig.rules": [
+                                                                    "required,请输入仓位名称，名称不可为空！"
+                                                                ]
+                                                            },
+                                                            {
+                                                                "metadata": "code,仓位编号,,,,placeholder=请输入唯一编号,normalize=upper:40",
+                                                                "optionConfig.rules": [
+                                                                    "required,请输入仓位编号，编号不可为空！",
+                                                                    {
+                                                                        "validator": "existing",
+                                                                        "message": "对不起，编号重复！",
+                                                                        "config": {
+                                                                            "uri": "/api/pos/existing",
+                                                                            "method": "POST",
+                                                                            "params": {
+                                                                                "sigma": "PROP:app.sigma"
+                                                                            }
+                                                                        }
+                                                                    }
+                                                                ]
+                                                            },
+                                                            "active,启用,,,aiCheckbox,valuePropName=checked"
+                                                        ],
+                                                        [
+                                                            "capacity,容量,,,aiInputNumber",
+                                                            "capacityExceed,超容部分,,,aiInputNumber"
+                                                        ],
+                                                        [
+                                                            "posRow,行坐标（x）,,,aiInputNumber",
+                                                            "posColumn,列坐标（y）,,,aiInputNumber",
+                                                            "posHeight,纵坐标（z）,,,aiInputNumber"
+                                                        ],
+                                                        [
+                                                            "posTags,标签,24,,,placeholder=请输入查找仓位专用的标签信息，多个标签用逗号隔开。"
+                                                        ],
+                                                        [
+                                                            "posTrace,仓位描述,24,,aiTextArea,rows=3,placeholder=使用特征语言描述该仓位详细信息。"
+                                                        ],
+                                                        [
+                                                            "comment,仓位备注,24,,aiTextArea,rows=3"
+                                                        ]
+                                                    ],
+                                                    "hidden": [
+                                                        "key",
+                                                        "type",
+                                                        "status"
+                                                    ],
+                                                    "initial": {
+                                                        "active": "BOOL:true"
+                                                    }
+                                                },
+                                                "validation": "DIALOG",
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "操作",
+                                                            "dataIndex": "key",
+                                                            "fixed": "left",
+                                                            "$render": "EXECUTOR",
+                                                            "$option": [
+                                                                {
+                                                                    "text": "编辑",
+                                                                    "executor": "fnEdit"
+                                                                },
+                                                                "divider",
+                                                                {
+                                                                    "text": "删除",
+                                                                    "executor": "fnDelete",
+                                                                    "confirm": "确认删除选择的记录？"
+                                                                }
+                                                            ]
+                                                        },
+                                                        "name,仓位名称",
+                                                        "code,仓位编号",
+                                                        "capacity,容量",
+                                                        "posRow,行坐标（x）",
+                                                        "posColumn,列坐标（y）",
+                                                        "posHeight,纵坐标（z）",
+                                                        "posTrace,仓位描述"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "managerId",
+            "key"
         ]
     }
 }

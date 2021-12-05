@@ -135,7 +135,14 @@ class Component extends React.PureComponent {
         const ref = Ux.onReference(this, 1);
 
         let $table = Ux.clone(table);
-        $table.columns = Ux.configColumn(this, $table.columns);
+        let source;
+        if (this.props['data-__field']) {
+            // Form 模式
+            source = Ux.onReference(this, 1);
+        } else {
+            source = this;
+        }
+        $table.columns = Ux.configColumn(source, $table.columns);
         $table = Op.yoSelected(this, $table);
 
         Ux.configScroll($table, $data.list, ref);

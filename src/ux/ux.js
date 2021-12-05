@@ -8,6 +8,7 @@ import entity from './entity';
 import unity from './unity';
 import xweb from './xweb';
 import romantic from './romantic';
+import aggr from './aggr';
 
 // 图相关
 import g6 from './g6';
@@ -825,6 +826,18 @@ const exported = {
      */
     ...unity,
 
+    /**
+     * # 图专用
+     *
+     * ## 1.函数列表
+     *
+     * ## 2.基础说明
+     *
+     * 1. g6：网络拓扑图
+     * 2. g2：二维图表
+     *
+     * @module _g
+     */
     ...g6,
     ...g2,
 
@@ -903,7 +916,11 @@ const exported = {
      */
     ...xweb,
 
-
+    /**
+     *
+     * @module _aggr
+     */
+    ...aggr,
     /**
      * # 多义性快速模块
      *

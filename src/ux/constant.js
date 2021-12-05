@@ -323,7 +323,6 @@ export default {
      */
     KEY_USER: `${process.env.K_SESSION}SESSION/USER`,
 
-
     /**
      * ## `Ux.Env.KEY_EVENT`
      *
@@ -339,21 +338,6 @@ export default {
      * @type {string}
      */
     KEY_EVENT: process.env.K_EVENT,
-
-
-    /**
-     * ## `Ux.Env.KEY_POINTER`
-     *
-     * SessionStorage 存储的方向引用指针常量，用于存储 $pointer 中的核心引用数据专用，目前的版本中已经弃用，
-     * 将来可直接移除掉该变量。
-     *
-     * @memberOf module:_constant
-     * @deprecated
-     * @constant
-     * @type {string}
-     * @default {K_SESSION}SESSION/POINTER
-     */
-    KEY_POINTER: `${process.env.K_SESSION}SESSION/POINTER`,
 
 
     /**
@@ -721,14 +705,13 @@ export default {
      * * 可用于监控state中的变量变化信息。
      *
      * @memberOf module:_constant
-     * @deprecated
      * @constant
      * @type {boolean}
      * @default false
      */
-    MONITOR: _parseBoolean("DEV_MONITOR"),
-
-
+    MONITOR: _parseBoolean("DEV_DEBUG", "DEV_MONITOR"),
+    // 存储 MONITOR 数据
+    KEY_MDATA: `${process.env.K_SESSION}MONITOR/DATA/`,
     /**
      * ## `Ux.Env.SIGN`
      *

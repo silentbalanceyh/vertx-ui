@@ -2,7 +2,6 @@ import React from "react";
 import Ux from "ux";
 import {LoadingAlert, LoadingContent} from 'web';
 import Fn from './zero.fn';
-import U from 'underscore';
 
 const ensureForm = (target = {}, options = {}) => {
     // target.state必须存在，不存在会导致读取的Error
@@ -43,7 +42,7 @@ export default (options = {}) => {
                     Ux.raftForm(this, options.raft).then(raft => {
                         const state = {};
                         state.raft = raft;
-                        if (U.isFunction(super.componentDidMount)) {
+                        if (Ux.isFunction(super.componentDidMount)) {
                             this.setState(state);
                             super.componentDidMount();
                         } else {
@@ -52,7 +51,7 @@ export default (options = {}) => {
                         }
                     })
                 } else {
-                    if (U.isFunction(super.componentDidMount)) {
+                    if (Ux.isFunction(super.componentDidMount)) {
                         super.componentDidMount();
                     }
                 }
@@ -68,7 +67,7 @@ export default (options = {}) => {
                     state.$op = Fn.fnOp(options);
                     this.setState(state);
                 }
-                if (U.isFunction(super.componentDidUpdate)) {
+                if (Ux.isFunction(super.componentDidUpdate)) {
                     super.componentDidUpdate(prevProps, prevState, snapshot);
                 }
             }
@@ -83,7 +82,7 @@ export default (options = {}) => {
                      * 连接错误信息
                      */
                     if (fatal.run) {
-                        if (U.isArray(error)) {
+                        if (Ux.isArray(error)) {
                             fatal.run.description = error;
                         } else if ("string" === typeof error) {
                             fatal.run.description = [error];

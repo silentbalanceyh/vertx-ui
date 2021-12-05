@@ -133,7 +133,8 @@ const toTreeArray = (data = [], config = {}) => {
                 processed[to] = each[from]; // 只取合法值
             } else {
                 // If expr
-                if (0 <= from.indexOf(":")) {
+                if ("string" === typeof from
+                    && 0 <= from.indexOf(":")) {
                     processed[to] = Ut.formatExpr(from, each, true);
                 }
             }

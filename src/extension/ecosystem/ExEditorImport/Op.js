@@ -58,7 +58,6 @@ const rxImport = (reference) => (event) => {
                             /*
                              * 消息提示
                              */
-                            console.log($combine);
                             Ux.messageSuccess($combine);
                         });
                     } else {

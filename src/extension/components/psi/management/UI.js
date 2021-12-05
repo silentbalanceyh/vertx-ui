@@ -16,10 +16,7 @@ export default Ui.smartList({
         yoOp: {
             A: "/api/wh",
             S: "/api/wh/:key",
-            D: "/api/wh/:key",
-            APre: (request, formRef) => {
-                console.log(request);
-            }
+            D: "/api/wh/:key"
         },
         yoJsx: {
             regionId: Ex.Jsx.Address.regionId

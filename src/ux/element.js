@@ -556,6 +556,67 @@ const valueOk = (input = {}, config = [], output) => {
     }
     return values;
 }
+/**
+ * ## 「标准」`Ux.valueLink`
+ *
+ * ### vConn = true:
+ *
+ * ```js
+ * M1 = {
+ *     "k1": "v1",
+ *     "k2": "v2"
+ * },
+ *
+ * M2 = {
+ *     "v1": "value1",
+ *     "v2": "value2"
+ * }
+ *
+ * R = {
+ *     "k1": "value1",
+ *     "k2": "value2"
+ * }
+ * ```
+ *
+ * ### vConn = false
+ *
+ * ```js
+ * M1 = {
+ *     "k1": "v1",
+ *     "k2": "v2"
+ * },
+ *
+ * M2 = {
+ *     "k1": "value1",
+ *     "k2": "value2"
+ * }
+ *
+ * R = {
+ *     "v1": "value1",
+ *     "v2": "value2"
+ * }
+ * ```
+ *
+ * @memberOf module:_value
+ * @param {Object} from 拷贝源对象
+ * @param {Object} to 拷贝目标对象
+ * @param {Boolean} vConn 选择操作模式
+ * @return Object 最终拷贝过的属性
+ */
+const valueLink = (from = {}, to = {}, vConn = false) => {
+    const result = {};
+    Object.keys(from).forEach(field => {
+        if (vConn) {
+            const fromKey = field;
+            const toKey = from[field];
+            result[fromKey] = to[toKey];
+        } else {
+            const fromKey = from[field];
+            result[fromKey] = to[field];
+        }
+    })
+    return result;
+}
 
 const _valueFlat = (field, item = {}) => {
     const result = {};
@@ -1382,14 +1443,21 @@ const elementVertical = (array = [], field = "") => {
  * @memberOf module:_element
  * @param {Array} array 输入的数组信息
  * @param {String} field 执行映射的字段名
+ * @param {String} fieldTo 执行映射的字段名
  * @return {Object} 返回Map过后的最终数据
  */
-const elementMap = (array = [], field = "") => {
+const elementMap = (array = [], field = "", fieldTo) => {
     E.fxTerminal(!Abs.isArray(array), 10071, array, "Array");
     let resultMap = {};
     array.forEach(item => {
         if (item[field]) {
-            resultMap[item[field]] = Abs.clone(item);
+            const record = Abs.clone(item);
+            if (fieldTo) {
+                resultMap[item[field]] = record[fieldTo];
+            } else {
+                resultMap[item[field]] = record;
+            }
+
         }
     });
     return resultMap;
@@ -1525,7 +1593,6 @@ const elementJoin = (target = [], source = [], field = "key") => {
     })
     return $target;
 }
-
 
 /**
  * ## 「标准」`Ux.elementGrid`
@@ -1763,6 +1830,7 @@ export default {
     valueAppend,
     valueValid,
     valuePath,
+    valueLink,
 
     // O.event.js
     valueOnChange,

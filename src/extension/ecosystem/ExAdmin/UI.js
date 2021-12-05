@@ -1,8 +1,9 @@
 import React from 'react';
 import Op from './Op';
 import Ex from 'ex';
-
+import Ux from 'ux';
 import Jsx from './Web.jsx';
+import ExDevTool from '../ExDevTool/UI';
 
 /**
  * ## 「组件」`ExAdmin`
@@ -52,23 +53,40 @@ class Component extends React.PureComponent {
 
     componentDidMount() {
         componentInit(this);
+        Ux.DevTool(this).on();
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (Ux.isRoute(this.props, prevProps)) {
+            Ux.DevTool(this).clean();
+        }
+    }
+
+    componentWillUnmount() {
+        Ux.DevTool(this).off();
     }
 
     render() {
-        return Ex.yoRender(this, () => {
-            const {config = {}, children} = this.props;
-            const {homepage, banner} = config;
+        return (
+            <div>
+                {Ex.yoRender(this, () => {
+                    const {config = {}, children} = this.props;
+                    const {homepage, banner} = config;
 
-            const siders = Op.yoSider(this);
-            const navigations = Op.yoNavigation(this, {homepage});
-            const headers = Op.yoHeader(this, {banner});
-            return Jsx.renderTpl(this, {
-                children,
-                siders,
-                navigations,
-                headers,
-            })
-        }, Ex.parserOfColor("ExAdmin").tpl());
+                    const siders = Op.yoSider(this);
+                    const navigations = Op.yoNavigation(this, {homepage});
+                    const headers = Op.yoHeader(this, {banner});
+                    return Jsx.renderTpl(this, {
+                        children,
+                        siders,
+                        navigations,
+                        headers,
+                    })
+                }, Ex.parserOfColor("ExAdmin").tpl())}
+                {/* 开发工具专用，DEV_MONITOR 开启时使用 */}
+                {Ux.DevTool(this).render(ExDevTool)}
+            </div>
+        )
     }
 }
 

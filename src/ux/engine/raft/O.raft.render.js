@@ -154,7 +154,7 @@ const raftRender = (cell = {}, config = {}) => {
     /*
      * 打印错误信息专用
      */
-    if (!fnRender) {
+    if (!fnRender && !cell.title) {
         throw Error(`Render未找到，field = ${cell.field}, type = ${cell.render}`);
     }
     const render = fnRender;

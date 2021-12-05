@@ -120,7 +120,6 @@ const onChange = (rest = {}, fnChange, jsx = {}) => {
              * optionJsx.config.linkerField
              */
             Ut.writeLinker(formValues, config, (field) => {
-                console.log(options, field, value)
                 return Ele.elementUnique(options, field, value);
             });
         }

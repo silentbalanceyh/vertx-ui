@@ -1536,21 +1536,6 @@ const yoAction = (reference, prefix = "", ordered) => {
     return attrs;    // 去掉 undefined;
 }
 
-const _outReady = (form, message, debug = {}) => {
-    const {name, color} = debug;
-    if (form) {
-        const isTouched = form.isFieldsTouched();
-        if (!isTouched) {
-            Ux.dgDebug(message, `[ ${name} ] Form Ready `, color);
-        }
-    } else {
-        if (!debug.off) {
-            Ux.dgDebug(message, `[ ${name} ] Ready `, color);
-        }
-    }
-};
-
-
 /**
  * ## 「通道」`Ex.yoRender`
  *
@@ -1594,15 +1579,33 @@ const yoRender = (reference = {}, fnJsx, debug = {}) => {
          * Debug专用
          */
         const props = reference.props;
-        const {name} = debug;
+        const {name, color, monitor = true} = debug;
         const {$ready = false} = state;
 
         const {$height, form} = props;
         if ($ready) {
-            _outReady(form, {props, state}, debug);
+            const message = {props, state};
+            if (form) {
+                const isTouched = form.isFieldsTouched();
+                if (!isTouched) {
+                    // 表单级打印
+                    Ux.dgDebug(message, `[ ${name} ] Form Ready `, color);
+                    if (monitor) {
+                        Ux.DevTool(reference).store(name);      // 加载专用Monitor工具
+                    }
+                }
+            } else {
+                if (!debug.off) {
+                    // 组件级打印
+                    Ux.dgDebug(message, `[ ${name} ] Ready `, color);
+                    if (monitor) {
+                        Ux.DevTool(reference).store(name);      // 加载专用Monitor工具
+                    }
+                }
+            }
             return Ux.isFunction(fnJsx) ? fnJsx() : fnJsx;
         } else {
-            if (!debug.off) {
+            if (!debug.off && debug.loading) {
                 Ux.dgDebug({props, state}, `............ [ ${name} ] `, "#9E9E9E");
             }
             return (<LoadingContent $height={$height}/>);

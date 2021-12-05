@@ -1,7 +1,6 @@
 import Expr from "./O.format";
 import Ele from "../element";
 import Abs from "../abyss";
-import Ux from "ux";
 
 /**
  * ## 「引擎」`Ux.valueExpr`
@@ -151,7 +150,7 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
 
 const toFieldName = (cell) => {
     let field;
-    if (Ux.isObject(cell)) {
+    if (Abs.isObject(cell)) {
         if (cell.metadata) {
             field = cell.metadata.split(',')[0]
         } else {

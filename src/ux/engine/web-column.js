@@ -102,11 +102,19 @@ const jsxIcon = (attrs = {}, children, iconData) => {
             addOn['data-color'] = iconStyle.color;
             addOn['data-size'] = iconStyle.fontSize;
         }
+        const style = {};
+        if (32 < iconStyle.fontSize) {
+            style.lineHeight = `${iconStyle.fontSize}px`
+        }
         return (
-            <span>
+            <span className={"web-icon-label"}>
                 {WebUnit.aiIcon(icon, addOn)}
                 &nbsp;&nbsp;
-                {jsxSpan(attrs, children)}
+                {jsxSpan({
+                    ...attrs,
+                    className: "label",
+                    style
+                }, children)}
             </span>
         )
     } else {
@@ -662,7 +670,7 @@ const RENDERS = {
         return (text, record) => {
             attrs = Abs.clone(attrs);
             let normalizedText = Cmn.normalizeText(text, column, record);       // 1.格式化文字
-            if (undefined !== normalizedText) {                                 // 2.设置单位信息
+            if (undefined === normalizedText) {                                 // 2.设置单位信息
                 normalizedText = 0
             }
             const $config = column["$config"] ? column["$config"] : {};
@@ -773,12 +781,14 @@ const RENDERS = {
             attrs = Abs.clone(attrs);
             let normalizedText;                                                             // 1. 解析 display, value
             let iconData;
-            if (Abs.isArray(text)) {                                                        // 多值
+            if (Abs.isArray(text)) {
+                // 多值
                 const result = text
                     .map(item => Ele.elementUnique(data, value, item))
                     .map(item => T.valueExpr(display, item, true));
                 normalizedText = result.join(',');
             } else {
+                // 单值
                 const item = Ele.elementUnique(data, value, text);                          // 单值
                 if (item) {
                     const adornCfg = column.$config ? column.$config : {};                  // 只有查找对了单值的时候才执行该操作 解析 adorn 执行图标处理
@@ -1127,7 +1137,8 @@ const RENDERS = {
      */
     MAPPING: (reference, column) => {
         let attrs = Cmn.normalizeInit(column);                                          // -1. 风格可静态化
-        const {$mapping = {}} = column;                                                 // -2. 静态部分，先解析 $mapping 并且只解析一次
+        const {$mapping = {}} = column;
+        // -2. 静态部分，先解析 $mapping 并且只解析一次
         const parsed = {};
         Object.keys($mapping)
             .forEach(key => {

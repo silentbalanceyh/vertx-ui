@@ -5,9 +5,14 @@ const put = (reference) => (key, value) => {
     E.fxTerminal(!reference, 10063, reference);
     if (value && key) {
         if (Object.prototype.isPrototypeOf(value)) {
-            value = JSON.stringify(value);
+            try {
+                value = JSON.stringify(value);
+                reference.setItem(key, value);
+            } catch (ex) {
+                console.error(value);
+                console.trace(ex);
+            }
         }
-        reference.setItem(key, value);
     }
 };
 
@@ -18,7 +23,7 @@ const get = (reference) => (key) => {
         try {
             value = JSON.parse(value);
         } catch (error) {
-            E.fxTerminal(true, 10037, error);
+            E.fxTerminal(true, 10037, error, key);
         }
         return value;
     }
