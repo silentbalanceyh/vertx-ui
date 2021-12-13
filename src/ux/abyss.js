@@ -1916,7 +1916,7 @@ const _generatorFn = (reference, names = []) => {
                 if (isFunction(executor)) {
                     return executor.apply(null, arguments);
                 } else {
-                    if (Cv.DEBUG) {
+                    if (Cv.DEBUG && !name.startsWith("do")) {
                         console.warn(`${name} function 不存在！`);
                     }
                 }
@@ -1992,7 +1992,120 @@ const isTimeSame = (leftMom, rightMom) => {
         && leftValue.minute() === rightValue.minute()
         && leftValue.second() === rightValue.second()
 }
+const fn = (reference) => _generatorFn(reference, [
+    /* Ant 系列 */
+    "onChange",      // 变更
+    "onSelect",      // 选择
+
+    /* Rx 系列 */
+    "rxSource",      // 读取数据源
+    "rxSubmit",      // 提交
+    "rxClose",       // 关闭
+    "rxFilter",      // 过滤
+    "rxSelect",      // 选择
+    "rxTree",        // 树操作
+    "rxChild",       // 绑定子组件专用方法
+    "rxCheck",       // 选中专用
+    "rxClean",       // 清除专用
+    "rxAssist",      // 辅助数据专用
+    /* Drop 和 Drag */
+    "rxDropOver",    // 拖拽时放在上方
+
+    /* rx特殊模式 */
+    /* 页码处理专用 */
+    "rxBack",        // 返回
+    "rxJumpPage",    // 跳页
+    "rxNext",        // 下一步
+    "rxNextPage",    // 下一页
+    "rxPrev",        // 上一步
+    "rxPrevPage",    // 上一页
+    "rxFirst",       // 第一步
+    "rxLast",        // 最后一步
+    "rxFirstPage",   // 第一页
+    "rxLastPage",    // 最后一页
+
+    /* 增删改 */
+    "rxAdd",         // 添加
+    "rxEdit",        // 编辑
+    "rxDelete",      // 删除
+    "rxRefresh",     // 刷新
+    "rxItemEdit",    // 子项编辑
+    "rxItemAdd",     // 子项添加
+    "rxItemDelete",  // 子项删除
+
+
+    /* Designer 系列 */
+    "rxRowAdd",     // 添加行
+    "rxRowDel",     // 删除行
+    "rxRowFill",    // 行扩展
+    "rxRowCompress",// 行压缩
+    "rxRowWrap",    // 交换行
+    "rxRowConfig",  // 行配置，写入顶层的 raft
+
+    /* 单元格系列 */
+    "rxCellAdd",    // 添加单元格
+    "rxCellMerge",  // 合并单元格
+    "rxCellDel",    // 删除单元格
+    "rxCellSplit",  // 拆分单元格
+    "rxCellFill",   // 填充单元格
+    "rxCellWrap",   // 交换单元格
+    "rxCellConfig", // 单元格配置
+    "rxCellRefresh",// 单元格刷新，写入到顶层的 raft
+
+    "doSubmitting", // 提交专用函数
+    "doReset",      // 重设专用函数
+]);
+const me = (reference) => {
+    const pointer = {
+        assist: (key, data, deleted = false) => {
+            fn(reference).rxAssist(key, data, deleted);
+            return pointer;
+        },
+        /*
+         * 开始提交
+         */
+        submitting: () => fn(reference).doSubmitting(true),
+        /*
+         * 结束提交
+         */
+        submitted: () => {
+            reference.setState({
+                $submitting: false,
+                $loading: false,
+            })
+            fn(reference).doSubmitting(false);
+            return pointer;
+        },
+        /*
+         * 上层函数继承
+         */
+        submittingFn: ($submitting = true) => reference.setState({$submitting}),
+        close: (callbackData) => {
+            reference.setState({
+                $submitting: false,
+                $loading: false,
+                $visible: false
+            });
+            fn(reference).rxClose(callbackData)
+        },
+
+        // 状态检查函数
+        I: {
+            submitting: () => {
+                const {$submitting = false} = reference.state;
+                return $submitting;
+            },
+            loading: () => {
+                const {$loading = false} = reference.state;
+                return $loading;
+            }
+        }
+    }
+    return pointer
+}
+
 export default {
+    me,
     /* 对象执行 */
     input,
     output,
@@ -2097,65 +2210,7 @@ export default {
      * @param {reference} reference 传入部分的数据
      * @returns {Function} 返回生成的最终函数
      */
-    fn: (reference) => _generatorFn(reference, [
-        /* Ant 系列 */
-        "onChange",      // 变更
-        "onSelect",      // 选择
-
-        /* Rx 系列 */
-        "rxSource",      // 读取数据源
-        "rxSubmit",      // 提交
-        "rxClose",       // 关闭
-        "rxFilter",      // 过滤
-        "rxSelect",      // 选择
-        "rxTree",        // 树操作
-        "rxChild",       // 绑定子组件专用方法
-        "rxCheck",       // 选中专用
-        "rxClean",       // 清除专用
-        /* Drop 和 Drag */
-        "rxDropOver",    // 拖拽时放在上方
-
-        /* rx特殊模式 */
-        /* 页码处理专用 */
-        "rxBack",        // 返回
-        "rxJumpPage",    // 跳页
-        "rxNext",        // 下一步
-        "rxNextPage",    // 下一页
-        "rxPrev",        // 上一步
-        "rxPrevPage",    // 上一页
-        "rxFirst",       // 第一步
-        "rxLast",        // 最后一步
-        "rxFirstPage",   // 第一页
-        "rxLastPage",    // 最后一页
-
-        /* 增删改 */
-        "rxAdd",         // 添加
-        "rxEdit",        // 编辑
-        "rxDelete",      // 删除
-        "rxRefresh",     // 刷新
-        "rxItemEdit",    // 子项编辑
-        "rxItemAdd",     // 子项添加
-        "rxItemDelete",  // 子项删除
-
-
-        /* Designer 系列 */
-        "rxRowAdd",     // 添加行
-        "rxRowDel",     // 删除行
-        "rxRowFill",    // 行扩展
-        "rxRowCompress",// 行压缩
-        "rxRowWrap",    // 交换行
-        "rxRowConfig",  // 行配置，写入顶层的 raft
-
-        /* 单元格系列 */
-        "rxCellAdd",    // 添加单元格
-        "rxCellMerge",  // 合并单元格
-        "rxCellDel",    // 删除单元格
-        "rxCellSplit",  // 拆分单元格
-        "rxCellFill",   // 填充单元格
-        "rxCellWrap",   // 交换单元格
-        "rxCellConfig", // 单元格配置
-        "rxCellRefresh",// 单元格刷新，写入到顶层的 raft
-    ]),
+    fn,
     on: _generateOn,
     /* 规则判断 */
     isRule,

@@ -60,12 +60,10 @@ const dgRouter = (Ux, container, component) => {
  */
 const dgDebug = (data = {}, prefix, color) => {
     if (Boolean("development" === process.env.NODE_ENV && Cv.DEBUG)) {
-        console.debug(`%c [DEBUG] ${prefix ? prefix : ""}`, `color:white;background-color:${color ? color : "#eb2f96"};font-weight:900;`,
-            data);
+        console.log(`%c [DEBUG] ${prefix ? prefix : ""}`, `color:white;background-color:${color ? color : "#eb2f96"};font-weight:900;`, data);
     }
     return data;
 };
-
 
 /**
  * ## 「开发专用」`Ux.dgAjax`

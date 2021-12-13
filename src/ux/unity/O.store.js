@@ -7,12 +7,12 @@ const put = (reference) => (key, value) => {
         if (Object.prototype.isPrototypeOf(value)) {
             try {
                 value = JSON.stringify(value);
-                reference.setItem(key, value);
             } catch (ex) {
                 console.error(value);
                 console.trace(ex);
             }
         }
+        reference.setItem(key, value);
     }
 };
 

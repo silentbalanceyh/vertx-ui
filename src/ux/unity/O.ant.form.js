@@ -6,6 +6,7 @@ import E from "../error";
 import Dev from "../develop";
 import Cv from "../constant";
 import Ele from "../element";
+import Eng from '../engine';
 
 /**
  * ## 「引擎」`Ux.formSubmit`
@@ -157,17 +158,19 @@ const formRead = (reference, data = {}) => {
  * @return {Object|any} 返回读取的字段值。
  */
 const formGet = (reference, key = undefined) => {
-    const {form} = reference.props;
-    // E.fxTerminal(!form, 10020, form);
-    if (form) {
-        let data = form.getFieldsValue();
-        data = Abs.clone(data);
-        if (Abs.isArray(key)) {
-            const result = {};
-            key.forEach(each => result[each] = data[each]);
-            return Ele.valueValid(result);
-        } else {
-            return key ? data[key] : data;
+    if (reference) {
+        const {form} = reference.props;
+        // E.fxTerminal(!form, 10020, form);
+        if (form) {
+            let data = form.getFieldsValue();
+            data = Abs.clone(data);
+            if (Abs.isArray(key)) {
+                const result = {};
+                key.forEach(each => result[each] = data[each]);
+                return Ele.valueValid(result);
+            } else {
+                return key ? data[key] : data;
+            }
         }
     }
 };
@@ -179,21 +182,21 @@ const formGet = (reference, key = undefined) => {
  * @memberOf module:_ui
  * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {String|Array} keys 字段名称，有可能是字段集合。
+ * @param {Object} response 响应最终信息数据。
  */
-const formReset = (reference, keys = []) => {
+const formReset = (reference, keys = [], response = {}) => {
     const {form} = reference.props;
     if (form) {
         if (0 < keys.length) {
             form.resetFields(keys);
         } else {
             form.resetFields();
-            /*
-             * callback，reset回调
-             */
-            const {doReset} = reference.props;
-            if (Abs.isFunction(doReset)) {
-                doReset(keys, reference);
-            }
+        }
+        Abs.fn(reference).doReset(reference, keys, response);
+    } else {
+        const ref = Eng.onReference(reference, 1);
+        if (ref) {
+            formReset(reference, keys, response);
         }
     }
 };
@@ -292,19 +295,6 @@ const formLinker = (data, config = {}, linkerField) => {
         }
     }
 };
-/**
- * ## 「标准」`Ux.formRedo`
- *
- * 重置防重复提交的状态专用方法。
- *
- * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
- */
-const formRedo = (reference) => {
-    reference.setState({
-        $submitting: false, $loading: false
-    });
-}
 const valueMap = (target, source, config = {}) => {
     Abs.itObject(config, (from, to) => {
         if (!target[from]) {
@@ -319,7 +309,6 @@ export default {
     formRead,
     formGet,
     formReset,
-    formRedo,
     // Hit
     formHit,
     formHits,

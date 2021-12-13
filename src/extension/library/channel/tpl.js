@@ -76,9 +76,7 @@ const ylCard = (reference, fnRender, config = {}) => {
                      * 如果包含了 prompt 配置则直接渲染
                      */
                 }
-                {header ? (
-                    <LoadingAlert {...header}/>
-                ) : false}
+                {header ? (<LoadingAlert {...header}/>) : false}
                 {Ux.isFunction(fnRender) ? fnRender() : false}
             </PageCard>
         )
