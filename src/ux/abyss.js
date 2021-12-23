@@ -1923,6 +1923,33 @@ const _generatorFn = (reference, names = []) => {
             }
         }
     });
+    // Reverted on `rx`
+    const dynamic = {};
+    if (reference.state) {
+        Object.keys(reference.state)
+            .filter(name => name.startsWith('rx'))
+            .filter(name => !names.includes(name))
+            .forEach(field => {
+                const fnObj = reference.state[field];
+                if (isFunction(fnObj)) {
+                    dynamic[field] = fnObj;
+                }
+            });
+    }
+    if (reference.props) {
+        Object.keys(reference.props)
+            .filter(name => name.startsWith('rx'))
+            .filter(name => !names.includes(name))
+            .forEach(field => {
+                const fnObj = reference.props[field];
+                if (isFunction(fnObj) && !dynamic.hasOwnProperty(field)) {
+                    dynamic[field] = fnObj;
+                }
+            });
+    }
+    if (!isEmpty(dynamic)) {
+        Object.assign(object, dynamic);
+    }
     return object;
 };
 
