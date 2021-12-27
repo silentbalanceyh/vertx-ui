@@ -19,8 +19,10 @@ const keyCopy = [
     "dependencies",
     "devDependencies"
 ]
-const source = fs.readFileSync(`${args[0]}/package.json`, "utf8");
-const target = fs.readFileSync(`${args[1]}/package.json`, "utf8");
+const sourceStr = fs.readFileSync(`${args[0]}/package.json`, "utf8");
+const source = JSON.parse(sourceStr)
+const targetStr = fs.readFileSync(`${args[1]}/package.json`, "utf8");
+const target = JSON.parse(targetStr)
 keyCopy.forEach(key => {
     if (source.hasOwnProperty(key)) {
         target[key] = source[key]
