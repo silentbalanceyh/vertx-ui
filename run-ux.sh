@@ -31,6 +31,7 @@ cp -rf src/environment/zero.fn.js ${TARGET_FOLDER}/src/environment/zero.fn.js
 # 脚本
 cp -rf scripts/zrun-route.zt ${TARGET_FOLDER}/scripts/zrun-route.zt
 cp -rf scripts/zrun-route.js ${TARGET_FOLDER}/scripts/zrun-route.js
+cp -rf scripts/zrun-update.js ${TARGET_FOLDER}/scripts/zrun-update.js
 cp -rf scripts/zrun-route-ready.js ${TARGET_FOLDER}/scripts/zrun-route-ready.js
 cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
 # 其他
@@ -53,6 +54,8 @@ cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf config/paths.js ${TARGET_FOLDER}/config/paths.js
 cp -rf config/webpack.config.js ${TARGET_FOLDER}/config/webpack.config.js
 cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
+cp -rf config/jest ${TARGET_FOLDER}/config
+cp -rf config/webpack ${TARGET_FOLDER}/config
 
 rm -rf ${TARGET_FOLDER}/src/cab/cn/economy/*
 rm -rf ${TARGET_FOLDER}/src/cab/cn/extension/*
@@ -72,4 +75,7 @@ mkdir -p ${TARGET_FOLDER}/src/style/infix/
 cp -rf src/style/economy/* ${TARGET_FOLDER}/src/style/economy/
 cp -rf src/style/infix/* ${TARGET_FOLDER}/src/style/infix/
 echo "[ Proc ] 风格文件拷贝完成！"
+
+node scripts/zrun-update.js . ${TARGET_FOLDER}
+
 echo "[ End ] ${TARGET_FOLDER}执行完成！"
