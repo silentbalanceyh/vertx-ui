@@ -35,6 +35,7 @@ const moduleFileExtensions = [
     'json',
     'web.jsx',
     'jsx',
+    // ----------------------------
     'less'
 ];
 
@@ -53,6 +54,10 @@ const resolveModule = (resolveFn, filePath) => {
 
 // config after eject: we're in ./config/
 module.exports = {
+    // --------------------------------------
+    // appFix: node_modules/@babel/runtime/helpers/interopRequireDefault.js which falls outside of the project src/ directory. Relative imports outside of src/ are not supported.
+    appFix: resolveApp('node_modules/@babel/runtime/helpers'),
+    // --------------------------------------
     dotenv: resolveApp('.env'),
     appPath: resolveApp('.'),
     appBuild: resolveApp(buildPath),
@@ -67,6 +72,8 @@ module.exports = {
     testsSetup: resolveModule(resolveApp, 'src/setupTests'),
     proxySetup: resolveApp('src/setupProxy.js'),
     appNodeModules: resolveApp('node_modules'),
+    appWebpackCache: resolveApp('node_modules/.cache'),
+    appTsBuildInfoFile: resolveApp('node_modules/.cache/tsconfig.tsbuildinfo'),
     swSrc: resolveModule(resolveApp, 'src/service-worker'),
     publicUrlOrPath,
 };

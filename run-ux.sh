@@ -40,6 +40,7 @@ cp -rf src/style/zero.less ${TARGET_FOLDER}/src/style/zero.less
 cp -rf src/style/zero-extension.less ${TARGET_FOLDER}/src/style/zero-extension.less
 cp -rf run-update.sh ${TARGET_FOLDER}/run-update.sh
 cp -rf run-ux.sh ${TARGET_FOLDER}/run-ux.sh
+cp -rf run-zero-dependency.sh ${TARGET_FOLDER}/run-zero-dependency.sh
 echo "[ Proc ] 框架核心文件！"
 
 # Webpack 4.0
@@ -50,7 +51,6 @@ cp -rf config/env.js ${TARGET_FOLDER}/config/env.js
 cp -rf config/getHttpsConfig.js ${TARGET_FOLDER}/config/getHttpsConfig.js
 cp -rf config/modules.js ${TARGET_FOLDER}/config/modules.js
 cp -rf config/paths.js ${TARGET_FOLDER}/config/paths.js
-cp -rf config/pnpTs.js ${TARGET_FOLDER}/config/pnpTs.js
 cp -rf config/webpack.config.js ${TARGET_FOLDER}/config/webpack.config.js
 cp -rf config/webpackDevServer.config.js ${TARGET_FOLDER}/config/webpackDevServer.config.js
 

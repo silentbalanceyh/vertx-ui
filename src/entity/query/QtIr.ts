@@ -1,4 +1,4 @@
-import * as Immutable from 'immutable';
+const Immutable = require("immutable");
 /*
  * 注意 Ux 防止引起循环引用
  */

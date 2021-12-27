@@ -66,6 +66,7 @@ function getWebpackAliases(options = {}) {
     if (path.relative(paths.appPath, baseUrlResolved) === '') {
         return {
             src: paths.appSrc,
+            // ----------------------------
             // Environment包：统一环境包
             environment: path.resolve(__dirname, "../src", "environment"),
             // Entity包：模型包
@@ -81,7 +82,7 @@ function getWebpackAliases(options = {}) {
             // Ui 新工具
             ui: path.resolve(__dirname, "../src", "ui"),
             // Fix moment issu
-            moment$: "moment/moment.js",
+            // moment$: "moment/moment.js",
             // Zero Extension
             ex: path.resolve(__dirname, "../src", "extension/library"),     // Ex 库
             ei: path.resolve(__dirname, "../src", "extension/ecosystem"),   // Ex 专用组件
@@ -90,6 +91,7 @@ function getWebpackAliases(options = {}) {
 
             // Mock 专用
             mock: path.resolve(__dirname, "../src", "mock"),                // Mock 专用数据
+            // ----------------------------
         };
     }
 }

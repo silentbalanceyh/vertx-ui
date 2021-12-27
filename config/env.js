@@ -61,10 +61,8 @@ process.env.NODE_PATH = (process.env.NODE_PATH || '')
 const REACT_APP = /^REACT_APP_/i;
 
 function getClientEnvironment(publicUrl) {
-    /*
-     * 运行时才操作的环境变量
-     * 自定义环境变量部分
-     */
+    // ----------------------------
+    // Z_ 打头的环境变量注入
     function getEnv() {
         const zEnvs = {};
         for (const eKey in process.env) {
@@ -79,6 +77,7 @@ function getClientEnvironment(publicUrl) {
     }
 
     const envs = getEnv();
+    // ----------------------------
     const raw = Object.keys(process.env)
         .filter(key => REACT_APP.test(key))
         .reduce(
@@ -104,12 +103,11 @@ function getClientEnvironment(publicUrl) {
                 WDS_SOCKET_PATH: process.env.WDS_SOCKET_PATH,
                 WDS_SOCKET_PORT: process.env.WDS_SOCKET_PORT,
                 // Whether or not react-refresh is enabled.
-                // react-refresh is not 100% stable at this time,
-                // which is why it's disabled by default.
                 // It is defined here so it is available in the webpackHotDevClient.
                 FAST_REFRESH: process.env.FAST_REFRESH !== 'false',
-                // 自定义环境变量
-                ...envs
+                // ----------------------------
+                ...envs     // 自定义环境变量
+                //----------------------------
             }
         );
     // Stringify all values so we can feed into webpack DefinePlugin

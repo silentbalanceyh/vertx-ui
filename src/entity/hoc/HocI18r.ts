@@ -1,7 +1,8 @@
 import {Langue} from "environment";
 import HocContainer from "./HocContainer";
-import * as Immutable from 'immutable';
 import Fn from './I.common';
+
+const Immutable = require("immutable");
 
 class HocI18r implements HocContainer {
     private readonly hoc: any = {};

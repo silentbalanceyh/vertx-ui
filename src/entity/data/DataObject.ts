@@ -1,8 +1,9 @@
 import DataContainer from "./DataContainer";
 import DataArray from './DataArray';
-import * as Immutable from 'immutable';
 import * as U from 'underscore';
 import Ux from 'ux';
+
+const Immutable = require("immutable");
 
 const extractData = (original: any, key: any) => {
     let keys: any = [];

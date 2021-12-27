@@ -1,4 +1,3 @@
-import * as Immutable from "immutable";
 import DataAssist from "../data/DataAssist";
 import DataTabular from "../data/DataTabular";
 import DataObject from "../data/DataObject";
@@ -6,6 +5,8 @@ import DataArray from "../data/DataArray";
 import Navigator from "../flow/Navigator";
 import Dsl from "../Dsl";
 import * as U from 'underscore';
+
+const Immutable = require("immutable");
 
 const _isTyped = (reference: any) => {
     return (

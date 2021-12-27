@@ -18,6 +18,7 @@
         "baseUrl": ".",
         "removeComments": true,
         "traceResolution": true,
+        "incremental": true,
         "paths": {
             "environment": [
                 "src/environment/"
