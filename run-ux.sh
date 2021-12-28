@@ -36,6 +36,9 @@ cp -rf scripts/zrun-route-ready.js ${TARGET_FOLDER}/scripts/zrun-route-ready.js
 cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
 # 其他
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
+cp -rf .babelrc ${TARGET_FOLDER}/.babelrc
+cp -rf .eslintignore ${TARGET_FOLDER}/.eslintignore
+cp -rf .gitignore ${TARGET_FOLDER}/.gitignore
 cp -rf src/style/common.less ${TARGET_FOLDER}/src/style/common.less
 cp -rf src/style/zero.less ${TARGET_FOLDER}/src/style/zero.less
 cp -rf src/style/zero-extension.less ${TARGET_FOLDER}/src/style/zero-extension.less
