@@ -10,14 +10,6 @@
     ],
     "plugins": [
         [
-            "import",
-            {
-                "libraryName": "antd",
-                "libraryDirectory": "es",
-                "style": true
-            }
-        ],
-        [
             "@babel/plugin-transform-runtime",
             {
                 "corejs": 2,

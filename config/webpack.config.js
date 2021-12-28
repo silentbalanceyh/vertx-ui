@@ -791,6 +791,7 @@ module.exports = function (webpackEnv) {
                 cwd: paths.appPath,
                 resolvePluginsRelativeTo: __dirname,
                 baseConfig: {
+                    parser: "@babel/eslint-parser",
                     extends: [require.resolve('eslint-config-react-app/base')],
                     rules: {
                         // jsx runtime

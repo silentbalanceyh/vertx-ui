@@ -79,3 +79,9 @@ yarn add react-dnd-html5-backend react-dnd react-render-html
 yarn add react-json-view braft-editor marked highlight.js react-json-editor-ajrm
 # bpmn-js
 yarn add bpmn-js
+# React: 16.14.0
+yarn add react@16.14.0 react-dom@16.14.0
+# core-js new version
+yarn add core-js --dev
+# @babel/eslint-parser instead
+yarn add @babel/eslint-parser --dev
