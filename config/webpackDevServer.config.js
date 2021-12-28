@@ -16,7 +16,7 @@ const sockPort = process.env.WDS_SOCKET_PORT;
 module.exports = function (proxy, allowedHost) {
     const disableFirewall =
         !proxy || process.env.DANGEROUSLY_DISABLE_HOST_CHECK === 'true';
-    return {
+    const server = {
         // WebpackDevServer 2.4.3 introduced a security fix that prevents remote
         // websites from potentially accessing local content through DNS rebinding:
         // https://github.com/webpack/webpack-dev-server/issues/887
@@ -69,20 +69,6 @@ module.exports = function (proxy, allowedHost) {
                 ignored: ignoredFiles(paths.appSrc),
             },
         },
-        client: {
-            webSocketURL: {
-                // Enable custom sockjs pathname for websocket connection to hot reloading server.
-                // Enable custom sockjs hostname, pathname and port for websocket connection
-                // to hot reloading server.
-                hostname: sockHost,
-                pathname: sockPath,
-                port: sockPort,
-            },
-            overlay: {
-                errors: true,
-                warnings: false,
-            },
-        },
         devMiddleware: {
             // It is important to tell WebpackDevServer to use the same "publicPath" path as
             // we specified in the webpack config. When homepage is '.', default to serving
@@ -123,4 +109,22 @@ module.exports = function (proxy, allowedHost) {
             devServer.app.use(noopServiceWorkerMiddleware(paths.publicUrlOrPath));
         },
     };
+    // Enable socket Yes/No status
+    if (process.env.WSD_OK) {
+        server.client = {
+            webSocketURL: {
+                // Enable custom sockjs pathname for websocket connection to hot reloading server.
+                // Enable custom sockjs hostname, pathname and port for websocket connection
+                // to hot reloading server.
+                hostname: sockHost,
+                pathname: sockPath,
+                port: sockPort,
+            },
+            overlay: {
+                errors: true,
+                warnings: false,
+            },
+        };
+    }
+    return server
 };
