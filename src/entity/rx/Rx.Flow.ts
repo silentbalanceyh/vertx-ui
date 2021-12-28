@@ -1,6 +1,7 @@
 import Ux from 'ux';
-import * as Q from 'q';
-import * as Immutable from 'immutable';
+
+const Immutable = require("immutable");
+const Q = require('q');
 
 const rxMetadata = (ref, action, parameters) => {
     // 构造最终处理

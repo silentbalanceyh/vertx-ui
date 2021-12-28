@@ -82,6 +82,6 @@ yarn add bpmn-js
 # React: 16.14.0
 yarn add react@16.14.0 react-dom@16.14.0
 # core-js new version
-yarn add core-js
+yarn add core-js q
 # @babel/eslint-parser instead
 yarn add @babel/eslint-parser --dev

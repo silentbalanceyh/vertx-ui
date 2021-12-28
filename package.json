@@ -99,6 +99,7 @@
         "immutable": "^4.0.0",
         "js-pinyin": "^0.1.9",
         "marked": "^4.0.8",
+        "q": "^1.5.1",
         "random-js": "^2.1.0",
         "react-contextmenu": "^2.14.0",
         "react-dnd": "^14.0.4",
