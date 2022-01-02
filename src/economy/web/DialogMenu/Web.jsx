@@ -18,12 +18,12 @@ const getChildren = (reference, item = {}) => {
             reference.setState({$submitting});
         }
         inherits.rxClose = (event) => {
-            Ux.prevent(event);
+            const data = Ux.ambEvent(event);
             reference.setState({$submitting: false, $visible: undefined});
             // 上层
             const {rxClose} = reference.props;
             if (Ux.isFunction(rxClose)) {
-                rxClose()
+                rxClose(data)
             }
         }
         return (

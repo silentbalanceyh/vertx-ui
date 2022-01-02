@@ -63,4 +63,30 @@ export default {
     X6,
 
     ...parser,
+    Order: {
+        "op.open": [
+            "op.open.add",
+            "op.open.filter"
+        ],
+        "op.batch": [
+            "op.batch.edit",
+            "op.batch.delete"
+        ],
+        "op.extra": [
+            "op.extra.column",
+            "op.extra.view",
+            "op.extra.export",
+            "op.extra.import"
+        ],
+        "op.add": [
+            "op.submit.add",
+            "op.submit.reset"
+        ],
+        "op.edit": [
+            "op.submit.save",
+            "op.submit.delete",
+            "op.submit.close",
+            "op.submit.reset"
+        ]
+    }
 }

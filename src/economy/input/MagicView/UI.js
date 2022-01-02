@@ -72,8 +72,11 @@ const rxExpr = (reference, value, config) => {
 }
 const rxValue = (reference, value, config) => {
     if (config.boolean) {
-        if (!value) {
+        if (value) {
             // 布尔值优先
+            return rxContent(reference, true, config);
+        } else {
+            // 包含了 undefined
             return rxContent(reference, false, config);
         }
     } else {

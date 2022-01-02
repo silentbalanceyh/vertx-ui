@@ -1419,7 +1419,13 @@ const prevent = (event) => {
     }
 };
 const remove = (item, ...keys) => {
-    keys.forEach(key => {
+    let removed = [];
+    if (isArray(keys[0])) {
+        removed = keys[0];
+    } else {
+        keys.forEach(key => removed.push(key))
+    }
+    removed.forEach(key => {
         if (item.hasOwnProperty(key)) {
             delete item[key];
         }

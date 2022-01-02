@@ -1820,6 +1820,17 @@ const elementChildren = (array = [], current = {}, parentField = "parent") => {
     });
     return result;
 }
+const elementIn = (ele = [], source = [], isAnd = true) => {
+    // 拆元素
+    const checked = ele.filter(ele => source.includes(ele));
+    if (isAnd) {
+        // 所有的元素都必须包含
+        return ele.length === checked.length;
+    } else {
+        // 包含一个即可
+        return 0 < checked.length;
+    }
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 /*
  * 变量名与element方法冲突
@@ -1943,6 +1954,9 @@ export default {
     elementSave,
     elementChildTree,
     elementChildren,
+    // 数组判断
+    elementInAll: (ele = [], source = []) => elementIn(ele, source, true),
+    elementInAny: (ele = [], source = []) => elementIn(ele, source, false),
     // 下层升级函数
     merge
 }

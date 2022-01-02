@@ -822,7 +822,7 @@ const rxDelete = (reference) => (key, callback) => {
                     // 删除后续方法
                     const {rxPostDelete} = reference.props;
                     if (Ux.isFunction(rxPostDelete)) {
-                        rxPostDelete({key});
+                        rxPostDelete({key}, reference);
                     }
                     callback(key);
                 }

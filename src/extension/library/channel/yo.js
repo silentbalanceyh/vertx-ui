@@ -68,32 +68,6 @@ import Fn from "../functions";
 import {LoadingContent} from "web";
 import React from "react";
 
-const Order = {
-    "op.open": [
-        "op.open.add",
-        "op.open.filter"
-    ],
-    "op.batch": [
-        "op.batch.edit",
-        "op.batch.delete"
-    ],
-    "op.extra": [
-        "op.extra.column",
-        "op.extra.view",
-        "op.extra.export",
-        "op.extra.import"
-    ],
-    "op.add": [
-        "op.submit.add",
-        "op.submit.reset"
-    ],
-    "op.edit": [
-        "op.submit.save",
-        "op.submit.delete",
-        "op.submit.close",
-        "op.submit.reset"
-    ]
-}
 const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) => {
     const {options = {}} = reference.state;
     if (!data.key) {
@@ -1002,8 +976,11 @@ const yoControl = (control = {}) => {
  * |构造||Function|rxView|查看行记录数据专用函数。|
  * |构造||Function|doLoading|设置加载状态。|
  * |构造||Function|doDirty|（脏数据标记）更改数据状态为脏数据，然后触发列表的自动加载。|
- * |rxPostDelete|props|Function|rxPostDelete|行删除专用回调函数。|
- * |rxPostView|props|Function|rxPostView|读取行记录专用回调函数。|
+ * |rxExtension|props|Function|rxExtension|对`op.extension`类Action执行过滤专用函数。|
+ * |rxPostDelete|props|Function|rxPostDelete|rxDelete内部调用。|
+ * |rxPostSelected|props|Function|rxPostSelected|rxSelected内部调用。|
+ * |rxPostOpen|props|Function|rxPostOpen|rxTabAdd/rxTabEdit/rxTabOpen内部调用。|
+ * |rxPostClose|props|Function|rxPostClose|rxTabClose内部调用。|
  *
  * ### 3. 关于$query
  *
@@ -1032,7 +1009,6 @@ const yoControl = (control = {}) => {
  * Post系列用于行操作时的回调，目前只提供两种：
  *
  * * rxPostDelete：删除行时的回调函数。
- * * rxPostView：读取行记录时的回调函数。
  *
  * @memberOf module:_channel
  * @method yoList
@@ -1087,12 +1063,9 @@ const yoList = (reference) => {
     /*
      * rxPost系列
      */
-    const {rxPostDelete, rxPostView} = reference.props;
+    const {rxPostDelete} = reference.props;
     if (Ux.isFunction(rxPostDelete)) {
         inherit.rxPostDelete = rxPostDelete;
-    }
-    if (Ux.isFunction(rxPostView)) {
-        inherit.rxPostView = rxPostView;
     }
     return inherit;
 }
@@ -1752,210 +1725,6 @@ const yoTabPage = (reference, {
         return item;
     }
 }
-
-const isSatisfy = (reference, view = Fn.Mode.LIST) => {
-    const {options = {}} = reference.state;
-    if (Fn.Mode.LIST !== view) {
-        /*
-         * 如果是添加
-         */
-        if (Fn.Mode.ADD === view) {
-            /*
-             *  ADD 添加视图
-             *  tabs.extra.add 键值
-             *  1）如果没有该值，则显示
-             *  2）如果有该值，那么该值必须存在
-             */
-            if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_ADD)) {
-                return !!options[Fn.Opt.TABS_EXTRA_ADD];
-            } else return true;  // 不设置直接 true
-        } else if (Fn.Mode.EDIT === view) {
-            /*
-             *  EDIT 编辑视图
-             *  tabs.extra.edit 键值
-             *  1）如果没有该值，则显示
-             *  2）如果有该值，那么该值必须存在
-             */
-            if (options.hasOwnProperty(Fn.Opt.TABS_EXTRA_EDIT)) {
-                return !!options[Fn.Opt.TABS_EXTRA_EDIT];
-            } else return true;  // 不设置直接 true
-        } else return false; // 否则 false
-    } else return false; // 否则 false
-};
-const isOk = (item = {}) => {
-    return [
-        "op.submit.save",
-        "op.submit.delete",
-        "op.submit.reset",
-        "op.submit.close"
-    ].includes(item.category)
-};
-const setEdition = (attrs = {}, reference) => {
-    const {$inited = {}} = reference.state;
-    const {metadata} = $inited;
-    if (!Ux.isEmpty(metadata)) {
-        const {plugins} = reference.state;
-        const executor = plugins && Ux.isFunction(plugins.pluginRow) ?
-            plugins.pluginRow : () => null;
-        const result = executor($inited, reference);
-        attrs.config.filter(isOk).forEach(item => {
-            /*
-             * 是否可编辑
-             */
-            if ("op.submit.delete" === item.category) {
-                item.visible = !!result.deletion;
-            }
-            if ("op.submit.save" === item.category) {
-                item.visible = !!result.edition;
-            }
-            if ("op.submit.reset" === item.category) {
-                item.visible = !!result.edition || !!result.deletion;
-            }
-        })
-    }
-};
-/**
- * ## 「通道」`Ex.yoTabExtra`
- *
- * > 优先读取`Ex.yoAction`构造继承属性集，当前版本提供给`ExListXxx`组件内部专用。
- *
- * ### 1. 基本介绍
- *
- * 统一处理表单内部的按钮区域，它包含两种状态。
- *
- * |视图模式|按钮|含义|
- * |---|---|:---|
- * |add|`添加，重置`|添加表单界面专用按钮。|
- * |edit|`编辑，删除，重置`|编辑表单界面专用按钮。|
- *
- * 如果配置了`op.extension`那么扩展按钮会根据其`index`的配置插入到对应位置，并且这些按钮的显示还被下边两个因素影响：
- *
- * 1. 操作用户是否具有这些操作按钮的ACL权限。
- * 2. 这个列表中是否已经配置了这些按钮。
- *
- * ### 2. 构造属性表
- *
- * |源属性名|源|类型|目标属性名|含义|
- * |:---|---|---|:---|:---|
- * |构造||state|config|计算当前Extra区域按钮的基本配置。|
- * |$submitting|state|Boolean|$submitting|是否处于提交状态（防重复提交专用属性）。|
- * |activeKey|第二参数|String|$activeKey|被激活的页签主键。|
- * |$view|state|String|$view|视图模式读取，三种：`list, add, edit`。|
- * |构造||Function|doSubmitting|防重复提交专用函数。|
- *
- * ### 3. 核心
- *
- * #### 3.1. 满足构造条件
- *
- * 1. 视图模式必须是`add`或`edit`。
- * 2. 如果是`add`，必须配置了`tabs.extra.add`项。
- * 3. 如果是`edit`，必须配置了`tabs.extra.edit`项。
- *
- * > 如果构造条件不满足，那么extra部分不显示任何东西。
- *
- * #### 3.2. RESET
- *
- * 重置按钮是一个特殊的存在，必须是可操作按钮存在的情况才执行重置，如果不存在可操作按钮，那么重置会无效。
- *
- * 检测代码：
- *
- * ```js
- * // 检查是否计算结果是单独的重置按钮RESET
- * if (attrs.config && 1 === attrs.config.length) {
- *      attrs.config = attrs.config.filter(item => "op.submit.reset" !== item.category);
- * }
- * ```
- *
- * #### 3.3. 权限控制
- *
- * 调用`setEdition`内部私有方法计算可编辑的相关关系，实现对某个表单的ACL权限控制，直到可控制表单三态。
- *
- * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用
- * @param {Object} tabs `<Tabs/>`的基本配置
- * @returns {Object}
- */
-const yoTabExtra = (reference, tabs = {}) => {
-
-    /*
-     * 提交状态
-     * state -> $submitting
-     * state -> view
-     */
-    const {$submitting = false, $view = Fn.Mode.LIST, $inited = {}} = reference.state;
-    if (isSatisfy(reference, $view)) {
-        /*
-         * 1.添加流程
-         * 2.编辑流程
-         * 双流程单独处理
-         */
-        const prefix = Fn.Mode.ADD === $view ? "op.add" : "op.edit";
-        /*
-         * 特殊配置
-         * 1）tab.extra.add
-         * 2）tab.extra.edit
-         */
-        const attrs = yoAction(reference, prefix, Order);
-        /*
-         * 扩展执行
-         */
-        attrs.config = yoExtension(reference, `op.submit.${$view}`, attrs.config);
-        /*
-         * 编辑界面核心操作
-         */
-        if (Fn.Mode.EDIT === $view) {
-            /*
-             * 设置可编辑的基础关系
-             */
-            setEdition(attrs, reference);
-            attrs.config = Ux.pluginSeeEdit(reference, $inited, attrs.config);
-            /* 处理 config */
-            if (attrs.config && 1 === attrs.config.length) {
-                /*
-                 * 单 reset 不呈现
-                 * 此种情况只有一个 RESET 按钮，直接过滤掉
-                 ***/
-                attrs.config = attrs.config.filter(item => "op.submit.reset" !== item.category);
-            }
-
-        } else {
-            attrs.config = Ux.pluginSeeAdd(reference, $inited, attrs.config);
-        }
-        /*
-         * 显示删除按钮
-         */
-        if (0 === attrs.config.length) {
-            const {options = {}} = reference.state;
-            /*
-             * op.submit.close 只有在没有任何按钮存在时才会出现
-             * 且除了文字可以更改，其他内容目前版本全程固定
-             */
-            if (options['op.submit.close']) {
-                const button = {
-                    icon: 'close-circle',
-                    className: "ux-spec",
-                    key: "opFormClose",
-                    text: options['op.submit.close']
-                }
-                button.onClick = (event) => {
-                    Ux.prevent(event);
-                    Fn.rxTabClose(reference)($inited.key, {
-                        $dirty: true,
-                        $submitting: false
-                    })
-                }
-                attrs.config.push(button);
-            }
-        }
-        attrs.$submitting = $submitting;
-        attrs.$activeKey = tabs.activeKey;
-        attrs.$view = $view;
-        /* 核心参数传入 ExAction */
-        attrs.doSubmitting = Fn.rxSubmitting(reference);
-        // attrs.fnSubmitting = Fn.generate(reference).submitting;
-        return Ux.sorterObject(attrs);
-    }
-}
 /**
  * ## 「通道」`Ex.yoFormAdd`
  *
@@ -2271,7 +2040,7 @@ const yoListSearch = (reference) => {
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListOpen = (reference) => {
-    const attrs = yoAction(reference, "op.open", Order);
+    const attrs = yoAction(reference, "op.open", Fn.Order);
     /*
      * 清空按钮专用，设置
      * disabled / enabled状态
@@ -2352,7 +2121,7 @@ const yoListOpen = (reference) => {
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListBatch = (reference) => {
-    let batch = yoAction(reference, 'op.batch', Order);
+    let batch = yoAction(reference, 'op.batch', Fn.Order);
     /*
      * batch是数组，则处理 disabled 状态
      */
@@ -2463,7 +2232,7 @@ const yoListBatch = (reference) => {
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListExtra = (reference) => {
-    const editorRef = yoAction(reference, "op.extra", Order);
+    const editorRef = yoAction(reference, "op.extra", Fn.Order);
     /*
      * $columns：全列
      * $columnsMy：我选择的列
@@ -2576,14 +2345,15 @@ export default {
     yoControl,
     yoForm,
     yoFilter,
-    yoAction,
     yoList,
     yoRender,           // 普通组件专用渲染
+
+    yoAction,
+    yoExtension,
 
     yoTable,            // 表格
 
     yoTabPage,              // Tab页签
-    yoTabExtra,         // Tab页 Extra 区域
 
     yoFormAdd,          // 添加表单
     yoFormEdit,         // 编辑表单

@@ -7,11 +7,8 @@ import Ux from 'ux';
 
 export default (reference, config = {}) => {
     const {items = [], ...rest} = config;
-    const extraAttrs = Ex.yoTabExtra(reference, rest);
     return (
-        <Tabs {...rest} tabBarExtraContent={
-            (<ExAction {...extraAttrs}/>)
-        }>
+        <Tabs {...rest} tabBarExtraContent={Ex.ylTabExtra(reference, rest, ExAction)}>
             {items.map((item, index) => {
                 const {type, ...rest} = item;
                 /*

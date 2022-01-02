@@ -254,11 +254,8 @@ class Component extends React.PureComponent {
              * ComplexList / ExListComplex 产生冲突
              */
             const {items = [], ...rest} = tabs;
-            const extraAttrs = Ex.yoTabExtra(this, rest);
             return (
-                <Tabs {...rest} tabBarExtraContent={
-                    (<ExAction {...extraAttrs}/>)
-                }>
+                <Tabs {...rest} tabBarExtraContent={Ex.ylTabExtra(this, rest, ExAction)}>
                     {items.map((item, index) => {
                         const {type, ...rest} = item;
                         /*
