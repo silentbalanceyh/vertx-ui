@@ -775,7 +775,8 @@ const configColumn = (reference, columns = [], ops = {}) => {
         WebColumn.columnFilter(reference, column);
         // sorter = true 是否开启可控模式
         WebColumn.columnSorter(reference, column);
-        // 计算当前列的宽度
+        // title替换
+        WebColumn.columnSynonym(reference, column);
     });
     return columns;
 };

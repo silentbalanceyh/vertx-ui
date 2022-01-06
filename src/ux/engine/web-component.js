@@ -112,9 +112,19 @@ const _aiInput = (reference, values) => (cell = {}) => {
          * 追加 web-form-has-error 类名，保证验证时的提示处理
          * */
         const colAttrs = T.connectItem(cell);
+        /*
+         * 追加同义词替换，主要用于替换 label 文字描述信息，方便扩展
+         */
+        const $item = Abs.clone(optionItem);
+        {
+            const {$synonym = {}} = reference.props;
+            if ($synonym.hasOwnProperty(cell.field)) {
+                $item.label = $synonym[cell.field];
+            }
+        }
         return (
             <Col {...colAttrs}>
-                <Form.Item {...optionItem} {...attached}>
+                <Form.Item {...$item} {...attached}>
                     {cell.render ? cell.render(values) : false}
                 </Form.Item>
             </Col>

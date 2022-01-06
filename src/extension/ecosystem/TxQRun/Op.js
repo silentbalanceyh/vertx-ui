@@ -1,18 +1,6 @@
 import Ux from 'ux';
 import Ex from 'ex';
 
-const rxOpen = (id, record, metadata) => {
-    const {reference} = metadata;
-    /* Loading 效果 */
-    Ex.rsLoading(reference)();
-    /* 读取数据 */
-    Ex.rx(reference).view(id, record).then(data => {
-        /* 打开新页 */
-        Ex.rx(reference).open(id, data, record);
-        /* 关闭 Loading 用*/
-        Ex.rsLoading(reference, false)({});
-    });
-}
 const yoAction = ({record, config, reference}, {
     rxPending = () => true,
     rxDraft = () => true,
@@ -33,8 +21,8 @@ const yoAction = ({record, config, reference}, {
         return rxApproval(record, config, reference);
     }
 }
-const rxCallback = (reference, key) =>
-    Ux.sexDialog(reference, key, () => reference.setState({$forceUpdate: Ux.randomString(8)}))
+const rxCallback = (reference, key) => Ux.sexDialog(reference, key,
+    () => reference.setState({$forceUpdate: Ux.randomString(8)}))
 export default {
     yoExecutor: (reference) => ({
         // 审批
@@ -46,9 +34,9 @@ export default {
             .then(request => Ux.ajaxPut("/api/up/flow/complete", request))
             .then(() => rxCallback(reference, "reject")),
         // 编辑草稿
-        fnDraft: (id, record, metadata = {}) => rxOpen(id, record, metadata),
+        fnDraft: Ex.rxRowOpen(reference),
         // 查看
-        fnView: (id, record, metadata = {}) => rxOpen(id, record, metadata),
+        fnView: Ex.rxRowOpen(reference),
         // 撤销
         fnCancel: (id, record, metadata = {}) => Ex.wf(reference).row(record, metadata.reference)
             .then(request => Ux.ajaxPut("/api/up/flow/cancel", request))

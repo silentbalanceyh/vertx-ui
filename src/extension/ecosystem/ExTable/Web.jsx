@@ -56,9 +56,6 @@ const renderColumn = (reference, columns = []) => {
      */
     // const {$projection = []} = reference.state;
     // resultColumns = resultColumns.filter(column => !$projection.includes(column.dataIndex));
-    /*
-     * 核心处理 Action 节点
-     */
     const executor = Ux.configExecutor(reference, Events);
     resultColumns = Ux.configColumn(reference, resultColumns, executor);
     return resultColumns;

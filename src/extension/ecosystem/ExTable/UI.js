@@ -55,6 +55,7 @@ const componentInit = (reference) => {
              */
             if (state.$query) {
                 return Ex.rx(reference).search(state.$query)
+                    .then(data => Event.onDataAsync(data, reference))
                     .then(data => Ex.yiColumn(reference, state, data));
             } else {
                 return Ex.E.error008();
@@ -331,6 +332,9 @@ class Component extends React.PureComponent {
              * 修改 x
              */
             Ux.configScroll($table, data, this);
+            /*
+             * 处理 $synonym
+             */
             return Jsx.renderContent(this, {
                 table: Ux.clone($table),
                 data

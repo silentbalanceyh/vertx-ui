@@ -1,0 +1,34 @@
+{
+    "_assist": {
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "bill.type",
+                    "bill.status",
+                    "bill.category",
+                    "pay.term.type"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_grid": {
+        "module": {
+            "NAME": "结算单",
+            "MODULE": "settlement",
+            "IDENTIFIER": "fm.settlement"
+        },
+        "options": {
+            "search.advanced": false,
+            "op.row.edit": false,
+            "op.row.delete": false,
+            "op.row.view": "查看详情",
+            "tabs.edit": "结算单详情"
+        },
+        "synonym": {
+            "modelKey": "房号"
+        }
+    }
+}

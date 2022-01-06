@@ -39,10 +39,35 @@ const fnEdit = (id, record, metadata = {}) => {
     });
 }
 const Event = {fnDelete, fnEdit};
+const onData = ($data = {}, reference) => {
+    const dataList = $data.list ? $data.list : [];
+    const {rxHoriz} = reference.props;
+    let data = [];
+    if (Ux.isFunction(rxHoriz)) {
+        dataList.forEach(each => {
+            const eachRow = rxHoriz(each, reference);
+            if (eachRow) {
+                data.push(eachRow);
+            } else {
+                data.push(each);
+            }
+        });
+    } else {
+        data = Ux.clone(dataList);
+    }
+    const response = Ux.clone($data);
+    response.list = data;
+    return response;
+}
 export default {
 
     fnDelete,
     fnEdit,
+
+    onDataAsync: (data, reference) => {
+        data = onData(data, reference);
+        return Ux.promise(data);
+    },
 
     onChange: (reference) => (pagination, filters, sorter) => {
         /*
@@ -157,7 +182,7 @@ export default {
             .then($data => Ex.yiColumn(reference, reference.state, $data))
             .then(processed => {
                 const {$data, $lazy} = processed;
-                innerState.$data = $data
+                innerState.$data = onData($data, reference);
                 innerState.$lazy = $lazy
                 innerState.$dirty = false
                 Ex.rsLoading(reference, false)(innerState);

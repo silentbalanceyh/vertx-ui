@@ -1,0 +1,71 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "keyItems",
+        "type": "card",
+        "items": [
+            "结算明细,keyItems",
+            "关联单,keyRelated"
+        ]
+    },
+    "_page": {
+        "Debt": "关联应收单",
+        "Refund": "关联退款单",
+        "Finished": "付款明细"
+    },
+    "_form": {
+        "columns": 3,
+        "ui": [
+            [
+                "serial,结算单号,,,aiMagic",
+                {
+                    "metadata": "amount,结算金额,,,aiMagic",
+                    "optionJsx.config.currency": "￥"
+                },
+                {
+                    "metadata": "linked,是否结算,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "Finished,结算完成:check-circle,16:#268941",
+                        "Debt,含应收:link,16:#ff8626",
+                        "Refund,含退款:link,16:#ff686b"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "cross,结算模式,8,,aiMagic",
+                    "optionJsx.config.items": [
+                        "false,单订单结算:pay-circle,16:#228B22",
+                        "true,跨订单结算:pay-circle,16:#0e8be6"
+                    ],
+                    "optionJsx.config.boolean": true
+                },
+                {
+                    "metadata": "rounded,零头处理,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "HALF,四舍五入",
+                        "FLOOR,零头舍弃",
+                        "CEIL,零头入进"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "updatedBy,结算人,,,aiMagic",
+                    "optionJsx.config.user": {
+                        "uri": "/api/user/:key",
+                        "field": "realname"
+                    },
+                    "optionJsx.$empty": "（系统）"
+                },
+                {
+                    "metadata": "updatedAt,结算时间,,,aiMagic",
+                    "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                    "moment": true
+                }
+            ],
+            [
+                "comment,结算备注,24,,aiMagic"
+            ]
+        ]
+    }
+}

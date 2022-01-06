@@ -278,7 +278,13 @@ const yiListView = (reference, config = {}, state = {}) => {
         reference, config, state,
     }));
 }
+const yiListSynonym = (reference, config = {}, state = {}) => {
+    const {synonym = {}} = config;
+    state.$synonym = synonym;
+    return Ux.promise(state);
+}
 export default {
+    yiListSynonym,
     yiListPlugin,
     yiListOptions,
     yiListTab,

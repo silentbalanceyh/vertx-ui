@@ -204,7 +204,6 @@ const smartList = (configuration = {}) => {
         }
 
         render() {
-
             return Ex.yoRender(this, () => {
                 /*
                  * ---------------- Grid -----------------
@@ -229,27 +228,23 @@ const smartList = (configuration = {}) => {
                 /*
                  * $op, $executor, $plugins
                  */
-                if (Ux.isFunction(yoOp)) configuration.$op = yoOp(this);
-                if (Ux.isFunction(yoExecutor)) configuration.$executor = yoExecutor(this);
-                if (Ux.isFunction(yoPlugins)) configuration.$plugins = yoPlugins(this);
+                let inherit = Ex.yoAmbient(this);
+                if (Ux.isFunction(yoOp)) inherit.$op = yoOp(this);
+                if (Ux.isFunction(yoExecutor)) inherit.$executor = yoExecutor(this);
+                if (Ux.isFunction(yoPlugins)) inherit.$plugins = yoPlugins(this);
                 if (Ux.isFunction(yoRx)) {
                     const rxFn = yoRx(this);
                     Object.keys(rxFn)
-                        .filter(name => name.startsWith('rx'))
-                        .filter(name => name.startsWith('on'))
-                        .filter(name => name.startsWith('fn'))
-                        .filter(name => Ux.isFunction(rxFn[name]))
-                        .forEach(fnKey => configuration[name] = rxFn[fnKey]);
+                        .filter(Ux.isFunctionName)
+                        .filter(fnKey => Ux.isFunction(rxFn[fnKey]))
+                        .forEach(fnKey => inherit[fnKey] = rxFn[fnKey]);
                 }
-                /*
-                 * ---------------- 外置处理 -----------------
-                 */
                 if (Ux.isFunction(componentYo)) {
-                    configuration = componentYo(this, configuration);
+                    inherit = componentYo(this, inherit);
                 }
                 return (
                     <PageCard reference={this}>
-                        <ExListComplex {...Ex.yoAmbient(this)}
+                        <ExListComplex {...inherit}
                                        config={configuration} $form={form}/>
                     </PageCard>
                 )

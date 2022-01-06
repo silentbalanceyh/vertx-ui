@@ -854,6 +854,23 @@ export default {
     // in / out
     inApi,
     inJob,
+    inSettlement: (data = {}) => {
+        if (data['relatedId']) {
+            // 大于36的情况（跨订单）orderId - orderId - etc
+            // 等于36的情况，直接结算
+            data.cross = 36 < data['relatedId'].length
+        }
+        if (0 > data.amount) {
+            data.linked = "Refund"
+        } else {
+            if (data.finished) {
+                data.linked = "Finished"
+            } else {
+                data.linked = "Debt"
+            }
+        }
+        return data;
+    },
     outApi,
     outJob,
 }

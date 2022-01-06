@@ -146,10 +146,11 @@ const extensionVariables = [];
 let extensionLine = [];
 extensionDir.forEach(page => {
     const key = page.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
-    extensionLine.push(`import ${key} from '${page}/UI';`);
-    extensionVariables.push(key);
+    if (!variables.includes(key)) {
+        extensionLine.push(`import ${key} from '${page}/UI';`);
+        extensionVariables.push(key);
+    }
 });
-
 line.push(`import _extension from '../extension/components';`);
 line.push('\nexport default {');
 variables.forEach(variable => {

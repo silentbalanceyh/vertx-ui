@@ -1,0 +1,72 @@
+{
+    "_assist": {
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "bill.type",
+                    "bill.status",
+                    "bill.category",
+                    "pay.term.type"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_grid": {
+        "query": {
+            "criteria": {
+                "sigma": "PROP:app.sigma",
+                "": true,
+                "amount,>": 0
+            }
+        },
+        "module": {
+            "NAME": "应收单",
+            "MODULE": "debt",
+            "IDENTIFIER": "fm.debt"
+        },
+        "options": {
+            "search.advanced": false,
+            "dynamic.column": false,
+            "op.row.edit": true,
+            "op.row.delete": false,
+            "tabs.edit": "应收处理"
+        },
+        "table": {
+            "columns": [
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "fixed": "left",
+                    "width": 80,
+                    "$render": "EXECUTOR",
+                    "$option": [
+                        {
+                            "text": "处理应收",
+                            "executor": "fnEdit"
+                        }
+                    ]
+                },
+                "serial,应收单号",
+                "amount,结算金额,CURRENCY",
+                {
+                    "metadata": "finished,结算完成,LOGICAL",
+                    "$mapping": {
+                        "true": "已处理,check-circle,16,#268941",
+                        "false": "待处理,undo,16,#fe6600"
+                    }
+                },
+                "signName,签单人",
+                "signMobile,联系手机",
+                {
+                    "title": "创建时间",
+                    "dataIndex": "createdAt",
+                    "$render": "DATE",
+                    "$format": "YYYY-MM-DD HH:mm:ss"
+                }
+            ]
+        }
+    }
+}

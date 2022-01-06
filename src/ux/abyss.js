@@ -2290,6 +2290,11 @@ export default {
 
     /* underscore 连接 */
     isFunction,
+    isFunctionName: (name) => name && (
+        name.startsWith('rx') ||
+        name.startsWith('on') ||
+        name.startsWith('fn')
+    ),
     isArray,
     isCollection,
     /* 配置是否查询引擎配置 */

@@ -1,0 +1,25 @@
+{
+    "_form": {
+        "columns": 3,
+        "ui": [
+            [
+                "serial,退款单号,,,aiMagic",
+                {
+                    "metadata": "amount,退款金额,,,aiMagic",
+                    "optionJsx.config.currency": "￥"
+                },
+                {
+                    "metadata": "finished,是否处理,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "true,已处理:check-circle,16:#268941",
+                        "false,未处理:undo,16:#fe6600"
+                    ],
+                    "optionJsx.config.boolean": true
+                }
+            ],
+            [
+                "comment,备注,24,,aiMagic"
+            ]
+        ]
+    }
+}

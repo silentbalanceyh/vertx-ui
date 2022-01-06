@@ -23,21 +23,29 @@ export {default as ExTab} from './ExTab/UI';                            /* （�
 export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
 export {default as ExTrackField} from './ExTrackField/UI';
 export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
-/*
- * 我的待办（处理待办系统，集成工作流）
- */
+
+
+// 我的待办（处理待办系统，集成工作流）
 export {default as TxQRun} from './TxQRun/UI';                      /* 待办队列 */
 export {default as TxQDone} from './TxQDone/UI';                      /* 待办队列 */
-/*
- * 个人界面
- */
+
+
+// 个人界面
 export {default as MyMenu} from './MyMenu/UI';
-/*
- * G2
- */
+
+
+// G2图
 export {default as G2Bar} from './G2Bar/UI';
 export {default as G2Pie} from './G2Pie/UI';
 export {default as G2Line} from './G2Line/UI';
+
+
+// 账务部分
+export {default as FBookView} from './FBookView/UI';                // 账本详情，带账单明细
+export {default as FBookList} from './FBookList/UI';                // 账本列表（订单中查看）
+export {default as FSettleView} from './FSettleView/UI';            // 结算单详情
+export {default as FDebtView} from './FDebtView/UI';                // 应收详情
+export {default as FRefundView} from './FRefundView/UI';                // 退款详情
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

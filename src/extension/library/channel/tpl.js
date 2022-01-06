@@ -279,9 +279,8 @@ const ylTabExtra = (reference, tabs = {}, UI) => {
         $view = Fn.Mode.LIST,
         $inited = {}
     } = reference.state;
-    const {$executor = {}} = reference.props;
     const fnKey = EXECUTOR_EXTRA[$view];
-    const fnJsx = $executor[fnKey];
+    const fnJsx = reference.props[fnKey];
     const fnJsxDefault = () => {
         if (isSatisfy(reference, $view)) {
             /*

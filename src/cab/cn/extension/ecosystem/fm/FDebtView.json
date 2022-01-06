@@ -1,0 +1,37 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "keyPayment",
+        "type": "card",
+        "items": [
+            "明细项,keyItems",
+            "付款明细,keyPayment"
+        ]
+    },
+    "_action": {
+        "text": "创建付款",
+        "icon": "plus"
+    },
+    "_assist": {
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "pay.type"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_window": "创建付款,创建,关闭,false,1000,true,$opSingle",
+    "_synonym": {
+        "name": "付款单标题",
+        "amount": "付款金额",
+        "payMethod": "付款方式",
+        "payId": "付款账号",
+        "payName": "付款人",
+        "payMobile": "联系电话",
+        "comment": "付款备注",
+        "serial": "应收单号"
+    }
+}

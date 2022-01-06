@@ -1,0 +1,37 @@
+{
+    "_form": {
+        "columns": 3,
+        "ui": [
+            [
+                "serial,应收单号,,,aiMagic",
+                {
+                    "metadata": "amount,应收金额,,,aiMagic",
+                    "optionJsx.config.currency": "￥"
+                },
+                {
+                    "metadata": "finished,是否处理,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "true,已处理:check-circle,16:#268941",
+                        "false,未处理:undo,16:#fe6600"
+                    ],
+                    "optionJsx.config.boolean": true
+                }
+            ],
+            [
+                {
+                    "metadata": "customerId,客户名称,,,aiMagic",
+                    "optionJsx.config.user": {
+                        "uri": "/api/customer/:key",
+                        "field": "title"
+                    },
+                    "optionJsx.$empty": "（未填写）"
+                },
+                "signName,签单人,,,aiMagic",
+                "signMobile,联系电话,,,aiMagic"
+            ],
+            [
+                "comment,备注,24,,aiMagic"
+            ]
+        ]
+    }
+}

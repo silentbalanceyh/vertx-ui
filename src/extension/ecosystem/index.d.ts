@@ -10,9 +10,9 @@ declare module "ei" {
     export {default as ExGraphicEditor} from './ExGraphicEditor/UI';        /* 拓扑图编辑器 */
     export {default as ExGraphicViewer} from './ExGraphicViewer/UI';        /* 拓扑图查看器 */
     export {default as ExHistory} from './ExHistory/UI';                    /* （通用历史记录）X_ACTIVITY / X_ACTIVITY_CHANGE */
-    export {default as ExListComplex} from './ExListComplex/UI';          // 复杂列表
-    export {default as ExListOpen} from './ExListOpen/UI';                // 全窗口操作列表
-    export {default as ExListQuery} from './ExListQuery/UI';              // 简单结果呈现列表
+    export {default as ExListComplex} from './ExListComplex/UI';            // 复杂列表
+    export {default as ExListOpen} from './ExListOpen/UI';                  // 全窗口操作列表
+    export {default as ExListQuery} from './ExListQuery/UI';                // 简单结果呈现列表
     export {default as ExLogged} from './ExLogged/UI';
     export {default as ExLogin} from './ExLogin/UI';                        /* （管理员入口） ----- ExLogin 后台登录专用界面 */
     export {default as ExRecord} from './ExRecord/UI';                      /*  UI_FORM / Record 合并到一起（动态表单） */
@@ -24,4 +24,27 @@ declare module "ei" {
     export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
     export {default as ExTrackField} from './ExTrackField/UI';
     export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
+
+
+    // 我的待办
+    export {default as TxQRun} from './TxQRun/UI';                          /* 待办队列 */
+    export {default as TxQDone} from './TxQDone/UI';                        /* 待办队列 */
+
+
+    // 个人界面
+    export {default as MyMenu} from './MyMenu/UI';
+
+
+    // G2图
+    export {default as G2Bar} from './G2Bar/UI';
+    export {default as G2Pie} from './G2Pie/UI';
+    export {default as G2Line} from './G2Line/UI';
+
+
+    // 账务部分
+    export {default as FBookView} from './FBookView/UI';                // 账本详情，带账单明细
+    export {default as FBookList} from './FBookList/UI';                // 账本列表（订单中查看）
+    export {default as FSettleView} from './FSettleView/UI';            // 结算单详情
+    export {default as FDebtView} from './FDebtView/UI';                // 应收详情
+    export {default as FRefundView} from './FRefundView/UI';                // 退款详情
 }

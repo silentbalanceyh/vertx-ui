@@ -430,10 +430,12 @@ const yoAmbient = (reference = {}, config = {}) => {
      * $router
      * $menus
      * $query
+     * $synonym
      * */
     const uniform = Ux.onUniform(props,
         "app", "user", "router",
-        "menus", "query"
+        "menus", "query",
+        "synonym"
     );
     {
         const user = uniform.$user;
@@ -459,7 +461,6 @@ const yoAmbient = (reference = {}, config = {}) => {
 
     // ----------------------- 选项预处理 -----------------
     uniform.$options = _seedOptionPre(reference);
-
 
     // ----------------------- 禁用专用（特殊变量） -----------------
     // eslint-disable-next-line
@@ -612,6 +613,10 @@ const yoAmbient = (reference = {}, config = {}) => {
         // Fix: $myQr
         _seekState(uniform, reference, "$myView");  // 视图专用
         _seekState(uniform, reference, "$myQr");    // 查询条件专用
+        // Fix: $synonym
+        if (!uniform.hasOwnProperty('$synonym')) {
+            _seekState(uniform, reference, '$synonym');  //
+        }
     }
     Object.freeze(uniform.config);          // 锁定配置，不可在子组件中执行变更
     return uniform;

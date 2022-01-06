@@ -849,10 +849,16 @@ const rxDelete = (reference) => (key, callback) => {
  * @param {ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
-const rxView = (reference) => (key, record = {}) => {
+const rxView = (reference) => (key, record = {}, metadata = {}) => {
     if (key) {
         const {options = {}} = reference.state;
-        const uri = options[G.Opt.AJAX_GET_URI];
+        let uri;
+        const {ajax = {}} = metadata;
+        if (ajax.uri) {
+            uri = ajax.uri;
+        } else {
+            uri = options[G.Opt.AJAX_GET_URI];
+        }
         /*
          * operation for uri
          */
@@ -1085,8 +1091,8 @@ const rx = (reference, off = false) => ({
     batchEdit: (params = []) =>
         Cm.seek(reference, 'rxBatchEdit')([params]),
     /* Ajax 单行查看 */
-    view: (id, record) =>
-        Cm.seek(reference, 'rxView')([id, record]),
+    view: (id, record, metadata) =>
+        Cm.seek(reference, 'rxView')([id, record, metadata]),
     // ------------ 打开 -----------------
     /* 打开新窗口 */
     open: (id, data, record) =>
@@ -1269,6 +1275,36 @@ const rsDirty = (reference, dirty = true) =>
  */
 const rsOpened = (reference, opened = true) =>
     Cm.boolean(reference, "$opened", opened);
+
+const rxRowOpen = (reference, config = {}) => (id, record, metadata) => {
+    const {
+        reference,
+    } = metadata;
+    const {
+        rxBefore,
+        rxAfter
+    } = config;
+    /* Loading 效果 */
+    rsLoading(reference)();
+
+    // rxBefore, 打开之前的函数
+    if (Ux.isFunction(rxBefore)) {
+        rxBefore(id, record, metadata);
+    }
+    /* 读取数据 */
+    rx(reference).view(id, record, metadata).then(data => {
+        // rxAfter, 打开后函数
+        // 此处rxAfter一定要在 open 方法之前调用，否则会出现
+        // 状态不同步的问题
+        if (Ux.isFunction(rxAfter)) {
+            rxAfter(id, data, metadata);
+        }
+        /* 打开新页 */
+        rx(reference).open(id, data, record);
+        /* 关闭 Loading 用*/
+        rsLoading(reference, false)({});
+    });
+}
 export default {
     rsVisible,
     rsLoading,
@@ -1433,7 +1469,9 @@ export default {
     rxView,
     // 文件导入导出
     rxExport,
-    rxImport
+    rxImport,
+    // 行打开操作专用
+    rxRowOpen,
 }
 
 /**

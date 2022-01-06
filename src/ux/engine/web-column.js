@@ -292,7 +292,14 @@ const _setExecutor = (option = {}, item, metadata = {}) => {
         if (Abs.isFunction(fun)) {
             const fnExecutor = (event) => {
                 event.preventDefault();
-                fun(text, record, {config, reference});
+                const configuration = {
+                    config,     // 完整配置
+                    reference,  // 引用
+                };
+                if (item.ajax) {
+                    configuration.ajax = item.ajax;
+                }
+                fun(text, record, configuration);
             };
             if (item.confirm) {
                 option.confirm = item.confirm;
@@ -1538,5 +1545,13 @@ const exported = {
         }
         return column;
     },
+    // 同义词处理
+    columnSynonym: (reference, column = {}) => {
+        const {$synonym = {}} = reference.props;
+        if ($synonym.hasOwnProperty(column.dataIndex)) {
+            column.title = $synonym[column.dataIndex]
+        }
+        return column;
+    }
 };
 export default exported;

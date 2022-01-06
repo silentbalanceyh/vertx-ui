@@ -90,7 +90,8 @@ const async = (reference, config = {}, state = {}) => {
         .then(op => Ux.promise(state, 'op', op))
         /* 动态列 */
         .then(() => Ex.yiListTable(reference, config, state))
-        .then(table => Ux.promise(state, 'table', table));
+        .then(table => Ux.promise(state, 'table', table))
+        .then(synonym => Ex.yiListSynonym(reference, config, synonym));
 }
 
 const ready = (reference = {}, state = {}) => {

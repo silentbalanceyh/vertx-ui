@@ -1,0 +1,39 @@
+{
+    "_form": {
+        "columns": 3,
+        "ui": [
+            [
+                "modelKey,房间号,,,aiMagic",
+                "serial,账本编号,,,aiMagic"
+            ],
+            [
+                {
+                    "metadata": "amount,金额,,,aiMagic",
+                    "optionJsx.config.currency": "￥"
+                },
+                {
+                    "metadata": "status,状态,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "Pending,等待处理:exclamation-circle,16:#EE3B3B",
+                        "Finished,已完成:check-circle,16:#58c623"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "updatedBy,更新人,,,aiMagic",
+                    "optionJsx.config.user": {
+                        "uri": "/api/user/:key",
+                        "field": "realname"
+                    },
+                    "optionJsx.$empty": "（系统）"
+                },
+                {
+                    "metadata": "updatedAt,最后更新,,,aiMagic",
+                    "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                    "moment": true
+                }
+            ]
+        ]
+    }
+}

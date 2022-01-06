@@ -1,0 +1,52 @@
+{
+    "_window": "查看数据信息,,关闭,false,1150,true",
+    "_table": {
+        "className": "web-table",
+        "pagination": false,
+        "columns": [
+            {
+                "title": "详情",
+                "dataIndex": "key",
+                "fixed": "left",
+                "width": 60,
+                "config": {
+                    "text": "查看",
+                    "icon": "search"
+                }
+            },
+            {
+                "title": "账本编号",
+                "dataIndex": "serial",
+                "sorter": true
+            },
+            {
+                "title": "主账",
+                "dataIndex": "major",
+                "$render": "LOGICAL",
+                "$mapping": {
+                    "true": "主账",
+                    "false": "房间账"
+                },
+                "sorter": true
+            },
+            "modelKey,房间号,,true",
+            "amount,总金额,CURRENCY",
+            {
+                "title": "是否启用",
+                "dataIndex": "active",
+                "$render": "LOGICAL",
+                "$mapping": {
+                    "true": "启用",
+                    "false": "禁用"
+                }
+            },
+            {
+                "title": "更新时间",
+                "dataIndex": "updatedAt",
+                "sorter": true,
+                "$render": "DATE",
+                "$format": "YYYY-MM-DD HH:mm:ss"
+            }
+        ]
+    }
+}
