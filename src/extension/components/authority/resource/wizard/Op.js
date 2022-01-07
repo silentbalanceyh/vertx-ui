@@ -17,7 +17,7 @@ const yiData = (data, reference, state = {}) => {
         }).then((permissions = {}) => {
             const inited = {};
             // 表单核心数据
-            const $permissions = Ux.isArray(permissions.list) ? permissions.list : [];
+            const $permissions = Ux.valueArray(permissions);
             if (0 < $permissions.length) {
                 const source = Ux.onDatum(reference, "resource.models");
                 const root = source.filter(item => !item.parentId);

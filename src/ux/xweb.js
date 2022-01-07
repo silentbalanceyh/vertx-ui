@@ -1,17 +1,211 @@
 import Abs from "./abyss";
+import Ajx from './ajax';
 import Ele from './element';
-import E from "./error";
 import Dev from './develop';
 import T from './unity';
 import Cv from './constant';
 import Eng from './engine';
-import Ajx from './ajax';
 
 import {Progress} from "antd";
 import React from "react";
 import './xweb.less';
-import Ux from "ux";
+import E from "./error";
+// --------------------- Ajax 部分 -----------------------------------
 
+
+/**
+ * ## 「标准」`Ux.xtLazyInit`
+ *
+ * 延迟初始化，统一处理，在 `componentDidMount` 中调用。
+ *
+ * @memberOf module:_xweb
+ * @param {ReactComponent} reference React组件引用。
+ */
+const xtLazyInit = (reference) => {
+    const {
+        id,                 // 当前字段名称
+        config = {},        // 配置节点
+        value               // Ant Form对应的当前数据
+    } = reference.props;
+    const ref = Eng.onReference(reference, 1);
+    const values = Eng.onLinker(config, (fields) => T.formGet(ref, fields));
+    const {linker = {}} = config;
+
+
+    /* 值检查流程 */
+    if (
+        Abs.isEmpty(values) ||                          // 1. values = {} 则直接中断，无法执行初始化加载流程
+        (undefined !== value && values[linker.key])     // 2. value有值并且主键也有值
+    ) {
+        return;
+    }
+
+
+    /* 包含值，执行 loading 操作，参数构造 */
+    const params = xtLazyAjax(ref, config);
+    let request;
+    if (Abs.isQr(config)) {
+        // 查询引擎参数，Qr 必须是 POST 方法
+        const condition = Abs.clone(values);
+        condition[""] = true;                           // AND 连接符
+        request = Eng.qrCombine(params, ref, condition);
+        Dev.dgDebug(request, "[ Xt ] engine = true 的最终查询条件", "#8B3A62");
+    } else {
+        // 非查询引擎 Qr 参数
+        request = Abs.clone(values);
+        Object.assign(request, params);
+        Dev.dgDebug(request, "[ Xt ] engine = false 的最终查询条件", "#8B3A62");
+    }
+
+
+    Ajx.asyncData(config.ajax, request, response => {
+        // 根据响应数据构造最终执行
+        const source = Ele.valueArray(response);
+        if (0 === source.length) {
+            // 0 初始化
+            const $keySet = T.formGet(ref);
+            if (Abs.isEmpty($keySet) || !!$keySet) {
+                return;                                 // 直接中断
+            }
+            const initialValue = {};
+            Object.keys(linker)
+                .map(from => linker[from])
+                .filter($keySet.hasOwnProperty)
+                .forEach(to => initialValue[to] = $keySet[to]);
+            const state = {initialValue, $keySet}
+            Dev.dgDebug(state, "[ xtLazyUnique ] 0 初始化", "#B8860B");
+            reference.setState(state);
+        } else if (1 === source.length) {
+            // 1 初始化
+            const $keySet = source[0] ? source[0] : {};
+            const initialValue = {};
+            T.writeLinker(initialValue, config, () => $keySet);
+            if (initialValue.hasOwnProperty(id)) {
+                const state = {initialValue, $keySet}
+                Dev.dgDebug(state, "[ xtLazyUnique ] 1 初始化", "#B8860B");
+                reference.setState(state);
+                T.formHits(ref, initialValue);
+            } else {
+                Dev.dgDebug($keySet, `${id} 字段并没配置在 linker 中，请检查：`, "#B8860B");
+            }
+        } else {
+            // N 初始化
+            const $keySet = T.formGet(ref);
+            if (Abs.isEmpty($keySet) || !!$keySet) {
+                return;                                 // 直接中断
+            }
+
+
+            /*
+             * 构造 filters 做反向查找
+             */
+            const filterValues = {};
+            Object.keys(linker).forEach(fieldFrom => {
+                const fieldTo = linker[fieldFrom]
+                const fieldV = $keySet[fieldTo];
+                if (undefined !== fieldV) {
+                    filterValues[fieldFrom] = fieldV;
+                }
+            })
+            const found = Ele.elementFind(source, filterValues, true);
+            if (0 === found.length) {
+                return;                                 // 直接中断
+            }
+
+
+            const sourceValues = found[0] ? found[0] : {};
+            const initialValue = {};
+            T.writeLinker(initialValue, config, () => sourceValues);
+            /*
+             * 谁有值修改谁
+             * initialValue -> $keySet
+             * $keySet -> initialValue
+             */
+            Object.keys($keySet)
+                .filter(initialValue.hasOwnProperty)
+                .filter($keySet.hasOwnProperty)
+                .forEach(field => {
+                    const iValue = initialValue[field];
+                    const fValue = $keySet[field];
+                    if (iValue && !fValue) {
+                        $keySet[field] = iValue;
+                    }
+                    if (fValue && !iValue) {
+                        initialValue[field] = fValue;
+                    }
+                });
+
+
+            if (initialValue.hasOwnProperty(id)) {
+                const state = {initialValue, $keySet};
+                Dev.dgDebug(state, "[ xtLazyUnique ] N 初始化", "#B8860B");
+                reference.setState(state);
+                T.formHits(ref, initialValue);
+            } else {
+                Dev.dgDebug($keySet, `（多）${id} 字段并没配置在 linker 中，请检查：`, "#B8860B");
+            }
+        }
+    })
+};
+
+/**
+ * ## 「标准」`Ux.xtLazyUp`
+ *
+ * 延迟初始化，统一处理，在 `componentDidUpdate` 中调用。
+ *
+ * @memberOf module:_xweb
+ * @param {ReactComponent} reference React组件引用。
+ * @param {Object} virtualRef 包含了`props`和`state`的前一个状态的引用。
+ */
+const xtLazyUp = (reference, virtualRef) => {
+    const prevValue = virtualRef.props.value;
+    const curValue = reference.props.value;
+    const {initialValue = {}} = reference.state;
+    const {
+        id,                 // 当前字段名称
+        config = {},        // 配置节点
+    } = reference.props;
+    const ref = Eng.onReference(reference, 1);
+    const {form} = ref.props;
+    if (form) {
+        const isTouched = form.isFieldsTouched();
+        const valueInit = initialValue[id];
+
+
+        /*
+         * 「清空操作」
+         * 1. 打开表单后直接清空当前表单，isTouched = true
+         * 2. 当前值为 undefined，且新旧值不相等
+         */
+        if (isTouched) {
+            // isTouched = true
+            if (undefined === curValue && curValue !== prevValue) {
+                const formValues = {};
+                T.writeLinker(formValues, config, () => ({}));
+                Dev.dgDebug(formValues, `[ xtLazyUp ] isTouched = ${isTouched}, 点击清空（${id}）`, "#B8860B");
+                T.formHits(ref, formValues);
+                Abs.fn(reference).onChange(curValue);  // 维持 isTouched
+            }
+        } else {
+            // isTouched = false，表示表单中没有任何值的更改
+            if (curValue !== prevValue) {
+                const fields = Object.keys(initialValue);
+                const formValues = T.formGet(ref, fields);
+                if (Abs.isDiff(formValues, initialValue)) {
+                    Dev.dgDebug(initialValue, `[ xtLazyUp ] isTouched = false, 编辑/添加重置（${id}）`, "#B8860B");
+                    T.formHits(ref, initialValue);
+                }
+                return;
+            }
+
+            if (undefined !== valueInit && undefined === curValue) {
+                // 反向重置
+                Dev.dgDebug(initialValue, `[ xtLazyUp ] isTouched = false, 编辑/添加反向重置（${id}）`, "#B8860B");
+                T.formHits(ref, initialValue);
+            }
+        }
+    }
+};
 /**
  * ## 「标准」`Ux.xtLazyAjax`
  *
@@ -41,51 +235,71 @@ import Ux from "ux";
  * @return {Object} 返回参数信息。
  */
 const xtLazyAjax = (reference, config = {}) => {
-    // 必须保证ajax参数信息
-    E.fxTerminal(!config.ajax, 10053, config);              // Error 中断打印
-    config = Abs.clone(config);     // 拷贝防止变更，防止页码记忆
-    if (config.ajax) {
-        /**
-         * 读取上层引用，这里是ListSelector中对应的Form本身
-         * 所以上层引用才会是reference，即调用了当前方法的组件本身必须包含 reference 引用
-         *
-         * 1）Form模式下，reference 引用的 props 中包含 form 变量。
-         * 2）自由模式下，reference 引用中会包含类似 Assist 的数据完成参数整体解析。
-         */
-        const ref = Eng.onReference(reference, 1);
-        E.fxTerminal(!ref, 10079, ref);                     // Error 中断打印
+    /**
+     * 读取上层引用，这里是ListSelector中对应的Form本身
+     * 所以上层引用才会是reference，即调用了当前方法的组件本身必须包含 reference 引用
+     *
+     * 1）Form模式下，reference 引用的 props 中包含 form 变量。
+     * 2）自由模式下，reference 引用中会包含类似 Assist 的数据完成参数整体解析。
+     */
+    const ref = Eng.onReference(reference, 1);
+    E.fxTerminal(!ref, 10079, ref);                                             // Error 中断打印
 
-        if (ref) {
-            const ajaxRef = config.ajax;
-            if (Abs.isQr(config)) {
-                /*
-                 * 查询引擎模式
-                 * {
-                 *      "criteria": {}
-                 * }
-                 */
-                const request = {};
-                if (!ajaxRef.params) ajaxRef.params = {};
-                /*
-                 * 拷贝 sorter / pager
-                 */
-                Object.assign(request, ajaxRef.params);
-                request.criteria = Eng.parseInput(ajaxRef.params.criteria, ref);
-                return request;
-            } else {
-                /*
-                 * 非查询引擎模式
-                 * {
-                 *      "magic": {}
-                 * }
-                 */
-                return Eng.parseInput(ajaxRef.magic, ref);
-            }
+
+    /*
+     * 配置中必须包含 ajax 配置参数，如果没有配置参数则直接报错
+     * {
+     *      "config": {
+     *          "ajax": {
+     *              "uri": ...,
+     *              "method": ...,
+     *              "params":{
+     *                  "criteria"
+     *              },
+     *              "magic":{
+     *              }
+     *          }
+     *      }
+     * }
+     */
+    E.fxTerminal(!config.ajax, 10053, config);                                  // Error 中断打印
+    config = Abs.clone(config);     // 拷贝防止变更，防止页码记忆
+    if (config.ajax && ref) {
+        const ajaxRef = config.ajax;
+        if (Abs.isQr(config)) {
+            if (!ajaxRef.params) ajaxRef.params = {};
+
+
+            /*
+             * 查询引擎模式
+             * {
+             *      "params":{
+             *          "criteria": {}
+             *      }
+             * }
+             * 合并参数时候，查询引擎参数需拷贝 sorter / pager
+             * 1. sorter：排序参数
+             * 2. pager：分页参数
+             * 3. criteria：查询引擎专用参数
+             */
+            const request = {};
+            Object.assign(request, ajaxRef.params);
+            request.criteria = Eng.parseInput(ajaxRef.params.criteria, ref);
+            return request;
+        } else {
+
+
+            /*
+             * 非查询引擎模式
+             * {
+             *      "magic": {}
+             * }
+             */
+            return Eng.parseInput(ajaxRef.magic, ref);
         }
     }
 };
-
-
+// --------------------- 其他部分 -----------------------------------
 /**
  * ## 「标准」`Ux.xtChecked`
  *
@@ -125,223 +339,8 @@ const xtChecked = ($keySet, reference) => {
     }
     return $selectedKeys;
 }
-/**
- * ## 「标准」`Ux.xtLazyInit`
- *
- * 延迟初始化，统一处理，在 `componentDidMount` 中调用。
- *
- * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
- */
-const xtLazyInit = (reference) => {
-    const {config = {}, value} = reference.props;                  // 当前引用
-    const {linker = {}} = config;                                  // linker配置
-    const ref = Eng.onReference(reference, 1);              // 父引用
-    let values = Eng.onLinker(config, (fields) => T.formGet(ref, fields));
-    if (Abs.isEmpty(values)                                 // 1. values = {} 时直接中断，无法执行初始化加载流程
-        || (undefined !== value && values[linker.key])) {   // 2. value有值并且主键也有值，直接中断（值是全的）
-        return;
-    }
-    Dev.dgDebug(values, "[ Xt ] 初始化时的 linker 值", "#8B3A62");
-    /* 有值，执行 loading 操作 */
-    const initParams = xtLazyAjax(ref, config);
-    let request;
-    if (Abs.isQr(config)) {
-        // Qr 必须是 POST 方法
-        const inputCond = Abs.clone(values);
-        inputCond[""] = true;
-        request = Eng.qrCombine(initParams, ref, inputCond);
-        Dev.dgDebug(request, "[ Xt ] engine = true 的最终查询条件", "#8B3A62");
-    } else {
-        // 非 Qr 直接拉平参数
-        request = Abs.clone(values);
-        Object.assign(request, initParams);
-        Dev.dgDebug(request, "[ Xt ] engine = false 的最终查询条件", "#8B3A62");
-    }
-    Ajx.asyncData(config.ajax, request, response => {                   // 异步回调执行
-        let source = [];
-        if (response.list) {
-            source = Abs.isArray(response.list) ? response.list : [];           // 查询引擎
-        } else {
-            source = Abs.isArray(response) ? response : [];                     // 直接返回数组
-        }
-        if (0 === source.length) {
-            // 0 初始化
-            _xtUniqueZero(reference);
-        } else if (1 === source.length) {
-            // 1 初始化
-            const $keySet = source[0] ? source[0] : {};
-            _xtUniqueOne(reference, $keySet);
-        } else {
-            // N 初始化
-            _xtUniqueN(reference, source);
-        }
-    });
-};
-const _xtUniqueZero = (reference) => {
-    const {config = {}} = reference.props;
-    const ref = Eng.onReference(reference, 1);
-    const $keySet = T.formGet(ref);
-    const {linker = {}} = config;
-    if (Abs.isNotEmpty($keySet)) {
-        const initialValue = {};
-        Object.keys(linker).map(fromField => linker[fromField])
-            .filter(toField => $keySet.hasOwnProperty(toField))
-            .forEach(toField => initialValue[toField] = $keySet[toField]);
-        const state = {initialValue, $keySet};
-        Ux.dgDebug(state, "[ xtLazyUnique ] 0 初始化", "#B8860B");
-        reference.setState(state);
-    }
-}
-const _xtUniqueOne = (reference, $keySet) => {
-    const {config = {}, id} = reference.props;
-    const ref = Eng.onReference(reference, 1);
-    const initialValue = {};
-    T.writeLinker(initialValue, config, () => $keySet);
-    if (initialValue.hasOwnProperty(id)) {
-        const state = {initialValue, $keySet};
-        Ux.dgDebug(state, "[ xtLazyUnique ] 1 初始化", "#B8860B");
-        reference.setState(state);
-        T.formHits(ref, initialValue);
-    } else {
-        console.warn(`${id} 字段并没配置在 linker 中，请检查：`, $keySet);
-    }
-}
-const _xtUniqueN = (reference, source) => {
-    const {config = {}, id} = reference.props;
-    const ref = Eng.onReference(reference, 1);
-    /**
-     * 此种情况只适合非 Engine 接口
-     */
-    const $keySet = T.formGet(ref);
-    const {linker = {}} = config;
-    if (Abs.isEmpty($keySet)) {
-        return;
-    }
-    const filterValue = {};
-    Object.keys(linker).forEach(fieldFrom => {
-        const fieldTo = linker[fieldFrom]
-        const fieldV = $keySet[fieldTo];
-        if (undefined !== fieldV) {
-            filterValue[fieldFrom] = fieldV;
-        }
-    })
-    const found = Ux.elementFind(source, filterValue, true);
-    /*
-     * 反向查找完成，重新设置 initialValue
-     */
-    if (0 === found.length) {
-        return;
-    }
-    const $keySetValue = found[0] ? found[0] : {};
-    let initialValue = {};
-    T.writeLinker(initialValue, config, () => $keySetValue);
-    /*
-     * 谁有值修改谁
-     * initialValue -> $keySet
-     * $keySet -> initialValue
-     */
-    Object.keys($keySet)
-        .filter(field => initialValue.hasOwnProperty(field))
-        .filter(field => $keySet.hasOwnProperty(field)).forEach(field => {
-        const iValue = initialValue[field];
-        const fValue = $keySet[field];
-        if (iValue && !fValue) {
-            $keySet[field] = iValue;
-        }
-        if (fValue && !iValue) {
-            initialValue[field] = fValue;
-        }
-    })
-    if (initialValue.hasOwnProperty(id)) {
-        const state = {initialValue, $keySet};
-        Ux.dgDebug(state, "[ xtLazyUnique ] N 初始化", "#B8860B");
-        reference.setState(state);
-        T.formHits(ref, initialValue);
-    } else {
-        console.warn(`${id} （多）字段并没配置在 linker 中，请检查：`, $keySet);
-    }
-}
 
 
-/**
- * ## 「标准」`Ux.xtLazyUp`
- *
- * 延迟初始化，统一处理，在 `componentDidUpdate` 中调用。
- *
- * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
- * @param {Object} virtualRef 包含了`props`和`state`的前一个状态的引用。
- */
-const xtLazyUp = (reference, virtualRef) => {
-    const prevValue = virtualRef.props.value;
-    const curValue = reference.props.value;
-    /*
-     * 发生改变的时候操作
-     */
-    const ref = Eng.onReference(reference, 1);
-    const {form, $mode} = ref.props;
-    // 表单判断专用
-    const {id} = reference.props;
-    if (form) {
-        const isTouched = form.isFieldsTouched();
-        if (prevValue === curValue) {
-            if (Cv.FORM_MODE.EDIT === $mode && undefined === curValue && !isTouched) {
-                const {initialValue} = reference.state;
-                _xLazyReset(reference, initialValue);
-            }
-            return;
-        }
-
-        const {value, config = {}} = reference.props;
-        Ux.dgDebug({id, isTouched, value}, "[ xtLazyUp ] 操作字段：", "#CDBE70");
-        const formValues = {};
-        T.writeLinker(formValues, config, () => ({}));
-        if (isTouched) {
-            // 非重置
-            if (value) {
-
-            } else {
-                // 添加：重置
-                if (Abs.isNotEmpty(formValues)) {
-                    Ux.dgDebug(formValues, "[ xtLazyUp ] isTouched = true, 触发添加重置", "#CDBE70");
-                    _xLazyReset(reference, formValues);
-                }
-            }
-        } else {
-            // 重置
-            const {initialValue = {}} = reference.state;
-            if (Abs.isEmpty(initialValue)) {
-                // 添加：重置
-                if (Abs.isNotEmpty(formValues)) {
-                    Ux.dgDebug(formValues, "[ xtLazyUp ] isTouched = false, 无 initialValues", "#CDBE70");
-                    _xLazyReset(reference, formValues);
-                }
-            } else {
-                // 编辑：重置，$mode 必须是编辑表单，添加类表单中不执行编辑重置
-                // 可解决 ListSelector 中连续添加的问题
-                if (Cv.FORM_MODE.EDIT === $mode) {
-                    const fields = Object.keys(initialValue);
-                    const current = T.formGet(ref, fields);
-                    if (Abs.isDiff(current, initialValue)) {
-                        const formValues = {};
-                        T.writeLinker(formValues, config, () => initialValue);
-                        Ux.dgDebug(formValues, "[ xtLazyUp ] isTouched = false, 编辑重置", "#CDBE70");
-                        _xLazyReset(reference, formValues);
-                    }
-                }
-            }
-        }
-    }
-};
-const _xLazyReset = (reference, values = {}) => {
-    const {id} = reference.props;
-    const ref = Eng.onReference(reference, 1);
-    if (Abs.isNotEmpty(values)) {
-        T.formHits(ref, values);
-        Abs.fn(reference).onChange(values[id]);
-    }
-}
 /**
  * ## 「标准」`Ux.xtRowChange`
  *
@@ -1034,9 +1033,10 @@ const xtTransfer = (reference, callback) => (targetKeys, direction, moveKeys = [
     }
 }
 export default {
-    /* Ajax 部分 */
-    xtLazyInit,
+    /* Ajax 部分由于逻辑复杂，这部分单独拉出来执行处理*/
+
     xtLazyUp,
+    xtLazyInit,
     xtLazyAjax,
 
     // xtLazyData,

@@ -175,7 +175,9 @@ class Component extends React.PureComponent {
         $table.columns = Ux.configColumn(this, $table.columns);
         $table = Op.yoSelected(this, $table);
 
-        Ux.configScroll($table, $data.list, ref);
+        const dataSource = Ux.valueArray($data);
+
+        Ux.configScroll($table, dataSource, ref);
         /*
          * 处理输入框属性
          */
@@ -208,7 +210,7 @@ class Component extends React.PureComponent {
                                    {...pageAndChange} // 处理分页处理
                                    bordered={false}
                                    className={"web-table"}
-                                   dataSource={$data.list}/>
+                                   dataSource={dataSource}/>
                         </Col>
                     </Row>
                 </Dialog>

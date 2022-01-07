@@ -118,69 +118,72 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, ...jsx} = this.props;
-        const {$data = {}, $tableKey} = this.state;
-        const {onClick, dialog, table = {}, search} = this.state ? this.state : {};
-        jsx.onClick = onClick;
-        /*
-         * 分页计算
-         */
-        const pageAndChange = Op.yoPager(this, config);
+        return Ux.xtReady(this, () => {
+            const {config = {}, reference, ...jsx} = this.props;
+            const {$data = {}, $tableKey} = this.state;
+            const {onClick, dialog, table = {}, search} = this.state ? this.state : {};
+            jsx.onClick = onClick;
+            /*
+             * 分页计算
+             */
+            const pageAndChange = Op.yoPager(this, config);
 
-        /*
-         * 属性拉平处理
-         * 表格处理
-         */
-        const inputAttrs = Op.yoValue(this, jsx);
-        const ref = Ux.onReference(this, 1);
+            /*
+             * 属性拉平处理
+             * 表格处理
+             */
+            const inputAttrs = Op.yoValue(this, jsx);
 
-        let $table = Ux.clone(table);
-        let source;
-        if (this.props['data-__field']) {
-            // Form 模式
-            source = Ux.onReference(this, 1);
-        } else {
-            source = this;
-        }
-        $table.columns = Ux.configColumn(source, $table.columns);
-        $table = Op.yoSelected(this, $table);
+            let $table = Ux.clone(table);
+            let source;
+            if (this.props['data-__field']) {
+                // Form 模式
+                source = reference;
+            } else {
+                source = this;
+            }
+            $table.columns = Ux.configColumn(source, $table.columns);
+            $table = Op.yoSelected(this, $table);
 
-        Ux.configScroll($table, $data.list, ref);
-        /*
-         * 处理输入框属性
-         */
-        const inputCombine = Op.yoCombine(this, inputAttrs);
-        return (
-            <Input.Group className={jsx.className ? jsx.className : ""}>
-                <Input {...inputCombine}/>
-                <Dialog className="web-dialog"
-                        size={"small"}
-                        $visible={this.state['$visible']}   // 窗口是否开启
-                        $dialog={dialog}>
-                    {search ? (
-                        <Row style={{
-                            marginBottom: 8
-                        }}>
-                            <Col span={10}>
-                                <Input.Search {...search}/>
+            const dataSource = Ux.valueArray($data);
+
+            Ux.configScroll($table, dataSource, reference);
+            /*
+             * 处理输入框属性
+             */
+            const inputCombine = Op.yoCombine(this, inputAttrs);
+            return (
+                <Input.Group className={jsx.className ? jsx.className : ""}>
+                    <Input {...inputCombine}/>
+                    <Dialog className="web-dialog"
+                            size={"small"}
+                            $visible={this.state['$visible']}   // 窗口是否开启
+                            $dialog={dialog}>
+                        {search ? (
+                            <Row style={{
+                                marginBottom: 8
+                            }}>
+                                <Col span={10}>
+                                    <Input.Search {...search}/>
+                                </Col>
+                            </Row>
+                        ) : false}
+                        <Row>
+                            <Col span={24}>
+                                <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
+                                       loading={this.state['$loading']}
+                                       {...config.table} // 原始配置信息
+                                       {...$table} // 处理过的表格信息
+                                       {...pageAndChange} // 处理分页处理
+                                       bordered={false}
+                                       className={"web-table"}
+                                       dataSource={dataSource}/>
                             </Col>
                         </Row>
-                    ) : false}
-                    <Row>
-                        <Col span={24}>
-                            <Table key={$tableKey ? $tableKey : Ux.randomString(16)}
-                                   loading={this.state['$loading']}
-                                   {...config.table} // 原始配置信息
-                                   {...$table} // 处理过的表格信息
-                                   {...pageAndChange} // 处理分页处理
-                                   bordered={false}
-                                   className={"web-table"}
-                                   dataSource={$data.list}/>
-                        </Col>
-                    </Row>
-                </Dialog>
-            </Input.Group>
-        );
+                    </Dialog>
+                </Input.Group>
+            );
+        }, {name: "ListSelector", logger: true})
     }
 }
 

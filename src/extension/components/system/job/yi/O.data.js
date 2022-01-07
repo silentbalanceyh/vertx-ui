@@ -35,7 +35,7 @@ const yiData = (reference, state = {}) => {
          * $data：       数据
          * $current：    当前页码
          */
-        state.$data = data.list ? data.list : [];
+        state.$data = Ux.valueArray(data);
         state.$pagination = Ux.toPagination(data, query, {
             size: "small",
             showTotal: (count) => {

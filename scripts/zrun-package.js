@@ -12,7 +12,9 @@ const updateVersion = (target = {}) => {
                 target.hasOwnProperty(key)) {
                 const fromVal = target[key];
                 target[key] = keepObj[key];
-                console.info(`[SUC] ${key} ${fromVal} => ${target[key]}`);
+                if (fromVal !== target[key]) {
+                    console.info(`[SUC] ${key} ${fromVal} => ${target[key]}`);
+                }
             }
         }
     }

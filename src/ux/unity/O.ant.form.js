@@ -9,6 +9,29 @@ import Ele from "../element";
 import Eng from '../engine';
 
 /**
+ * ## 「标准」`Ux.formHits`
+ *
+ * Ant Design中的Form表单执行值设置，直接使用values执行设置，values中如果有undefined则清空该字段。
+ *
+ * @memberOf module:_ui
+ * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object} values 设置Form表单中的字段值
+ */
+const formHits = (reference, values = {}) => {
+    const {form} = reference.props;
+    E.fxTerminal(!form, 10020, form);
+    if (form && Abs.isNotEmpty(values)) {
+        /*
+         * 旧代码会引起重设时出现清空的问题，所以不可以使用
+         * 旧代码
+        // const formValues = {};
+        // const fields = Object.keys(form.getFieldsValue());
+        // fields.forEach(field => formValues[field] = values[field]);
+         */
+        form.setFieldsValue(values);
+    }
+};
+/**
  * ## 「引擎」`Ux.formSubmit`
  *
  * Ant Design中的表单提交函数，返回最终的表单提交数据值。
@@ -228,29 +251,6 @@ const formHit = (reference, key, value) => {
         } else {
             return form.getFieldValue(key);
         }
-    }
-};
-/**
- * ## 「标准」`Ux.formHits`
- *
- * Ant Design中的Form表单执行值设置，直接使用values执行设置，values中如果有undefined则清空该字段。
- *
- * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
- * @param {Object} values 设置Form表单中的字段值
- */
-const formHits = (reference, values = {}) => {
-    const {form} = reference.props;
-    E.fxTerminal(!form, 10020, form);
-    if (form) {
-        /*
-         * 旧代码会引起重设时出现清空的问题，所以不可以使用
-         * 旧代码
-        // const formValues = {};
-        // const fields = Object.keys(form.getFieldsValue());
-        // fields.forEach(field => formValues[field] = values[field]);
-         */
-        form.setFieldsValue(values);
     }
 };
 /**

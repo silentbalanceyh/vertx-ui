@@ -9,6 +9,36 @@ import St from "./unity/O.sorter";
 Py.setOptions({checkPolyphone: false, charCase: 0})
 /**
  *
+ * ## 「标准」`Ux.valueArray`
+ *
+ * 对数据进行规范化解析
+ * 1. 如果 input = undefined，返回 []
+ * 2. 如果 input = Array，直接返回
+ * 3. 如果 input = Object，则检查 list 节点（必须是Array）
+ *
+ * @memberOf module:_value
+ * @param {any} input 输入的数据
+ * @returns {Array} 返回转换好的拼音信息
+ */
+const valueArray = (input) => {
+    if (input) {
+        if (Abs.isArray(input)) {
+            return Abs.clone(input);
+        } else {
+            if (Abs.isObject(input)) {
+                if (Abs.isArray(input.list)) {
+                    return Abs.clone(input.list);
+                } else {
+                    return [];
+                }
+            } else {
+                return [input];
+            }
+        }
+    } else return [];
+}
+/**
+ *
  * ## 「标准」`Ux.valuePinyin`
  *
  * 将汉字转换成拼音，在某些场景中，中文字转换成拼音后可根据拼音的字典序进行排列，这是业务场景所必须的，这种转换
@@ -1868,6 +1898,7 @@ export default {
     valueOk,
     // O.tree
     valueLadder,
+    valueArray,
 
     // O.to
     toArray,

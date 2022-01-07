@@ -396,32 +396,6 @@ const rxDatum = (input, orderField = 'sort', groupField = 'type') => {
     return rxPrefix(data, 'tabular', orderField);
 };
 /**
- * ## 「标准」`Ux.rxAssist`
- *
- * Redux 反向处理器，处理 Assist 第三关联表数据。
- *
- * @memberOf module:_engine
- * @param {Array} input 传入的数据源信息。
- * @param {String} key 当前数据绑定的辅助用key。
- * @param {String} order 排序字段。
- * @return {Object} 最终的数据信息，存储在 `assist` 节点中。
- */
-const rxAssist = (input, key, order = 'sort') => {
-    let data;
-    if (Abs.isArray(input)) {
-        data = Abs.clone(input);
-    } else {
-        if (input.list) {
-            data = Abs.clone(input.list);
-        } else {
-            data = [];
-        }
-    }
-    const response = {};
-    response[key] = data;
-    return rxPrefix(response, 'assist', order);
-};
-/**
  * ## 「特殊」`Ux.rjAssist`
  *
  * Redux 响应处理器，针对Assist数据执行响应处理，专用于Assist辅助数据的响应处理器，必须和 Redux 连用，使用代码如：
@@ -665,7 +639,24 @@ export default {
      * rx / rj
      */
     rxDatum,
-    rxAssist,
+
+
+    /**
+     * ## 「标准」`Ux.rxAssist`
+     *
+     * Redux 反向处理器，处理 Assist 第三关联表数据。
+     *
+     * @memberOf module:_engine
+     * @param {Array} input 传入的数据源信息。
+     * @param {String} key 当前数据绑定的辅助用key。
+     * @param {String} order 排序字段。
+     * @return {Object} 最终的数据信息，存储在 `assist` 节点中。
+     */
+    rxAssist: (input, key, order = 'sort') => {
+        const response = {};
+        response[key] = Ele.valueArray(input);
+        return rxPrefix(response, 'assist', order);
+    },
     /* Ajax 专用方法用于生成 ajax / processor 结构 */
     // rjTabular,
     // rjAssist

@@ -88,7 +88,7 @@ const onRefresh = (reference) => {
         return Ux.ajaxPost(ajax.uri, {
             $body: $query
         }).then(data => reference.setState({
-            $data: data.list, $loading: false
+            $data: Ux.valueArray(data), $loading: false
         }));
     }
 }

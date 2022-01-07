@@ -327,7 +327,7 @@ class Component extends React.PureComponent {
              * 加载效果
              */
             $table.loading = $loading;
-            const data = Ux.isArray($data.list) ? $data.list : [];
+            const data = Ux.valueArray($data);
             /*
              * 修改 x
              */

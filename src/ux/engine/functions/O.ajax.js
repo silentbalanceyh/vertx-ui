@@ -120,10 +120,12 @@ const seekData = (state, key, data = [], clientSort) => {
         }
         /*
          * 另外一种返回 {list/count}
-         */
+         * 旧代码：
         if (U.isArray(data.list) && 0 < data.count) {
             dataResult = data.list;
         }
+         */
+        dataResult = Ele.valueArray(data);
     }
     /*
      * 前端排序

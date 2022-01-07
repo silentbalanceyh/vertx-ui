@@ -39,7 +39,7 @@ const tableLazy = (reference, state, $data = {}) => new Promise((resolve) => {
             .filter(item => "USER" === item['$render']);
         if (0 < lazyColumn.length) {
             // 加载更多的 lazyColumn 部分
-            Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
+            Ux.ajaxEager(reference, lazyColumn, Ux.valueArray($data))
                 .then($lazy => Ux.promise(state, "$lazy", $lazy))
                 .then(done => resolve(done));
         } else {
@@ -286,9 +286,7 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
             _onSeeking(reference, config, $keySet, (record) => {
                 // 计算最终值
                 const values = Ux.writeLinker({}, config, () => record);
-                /*
-                 * 无值不触发
-                 */
+                /* 无值不触发 */
                 if (!Ux.isEmpty(values)) {
                     // 调用Form执行数据处理 Linker
                     const {form} = ref.props;
@@ -299,15 +297,23 @@ const _onConfirm = (reference = {}, config = {}) => (event) => {
 
                         // onChange 保证表单的 isTouched
                         const {id} = reference.props;
-                        // 修改 initialValue
-                        const {initialValue = {}} = reference.state;
-                        Object.assign(initialValue, values);
-                        reference.setState({initialValue});
+
+                        // 新版：选择数据时不修改 initialValue，该值只有重置的时候使用
+                        // const {initialValue = {}} = reference.state;
+                        // Object.assign(initialValue, values);
+                        // reference.setState({initialValue});
+
+                        /*
+                         * Ant Form 专用流程表单用法，用于在表单中处理值信息
+                         * 由于 setFieldsValue改变Form的 isTouched = false，所以在执行选择操作时
+                         * 先更改 linker 中的所有值，然后调用 onChange 方法使得 isTouched = true
+                         * 有了该值后才能处理 update 中的判断，所以此处的顺序必须是
+                         * 1. formHits
+                         * 2. onChange
+                         */
+                        Ux.formHits(ref, values);
 
                         Ux.fn(reference).onChange(values[id]);
-
-                        // Ant Form 专用流程表单用法，用于在表单中处理值信息
-                        Ux.formHits(ref, values);
                     } else {
                         // 非表单专用流程
                         Ux.fn(reference).onChange(values);

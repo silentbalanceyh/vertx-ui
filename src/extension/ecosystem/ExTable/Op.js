@@ -40,7 +40,7 @@ const fnEdit = (id, record, metadata = {}) => {
 }
 const Event = {fnDelete, fnEdit};
 const onData = ($data = {}, reference) => {
-    const dataList = $data.list ? $data.list : [];
+    const dataList = Ux.valueArray($data);
     const {rxHoriz} = reference.props;
     let data = [];
     if (Ux.isFunction(rxHoriz)) {

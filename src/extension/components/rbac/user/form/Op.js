@@ -24,7 +24,7 @@ const $opFilter = (reference) =>
 const $opWizard = (reference) => params =>
     Ex.form(reference).wizard(params, (request = {}) =>
         Ux.ajaxPost('/api/user/search', request)
-            .then(result => Ux.promise(result.list))
+            .then(result => Ux.promise(Ux.valueArray(result)))
     );
 const $opPassword = (reference) => params => {
     const request = Ux.valueRequest(params);

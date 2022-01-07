@@ -41,7 +41,7 @@ const yiPage = (reference) => Ex.yiStandard(reference).then(state => {
                 sigma,
             }
         }).then(permissions => {
-            processed.$permissions = Ux.isArray(permissions.list) ? permissions.list : [];
+            processed.$permissions = Ux.valueArray(permissions);
             return Ux.promise(processed);
         })
     }).then(processed => {

@@ -140,15 +140,10 @@ const yiClick = (reference, config = {}) => event => {
      */
     const params = Ux.xtLazyAjax(reference, config);
     Ux.asyncData(config.ajax, params, ($data) => {
-        $data = Ux.clone($data);
+        $data = Ux.valueArray($data);
         /*
          * 未使用查询引擎的情况，判断 config.exclude
          * 执行客户端过滤，一般选择父节点时候不允许选择当前节点
-         */
-        if (Ux.isObject($data) && Ux.isArray($data.list)) {
-            $data = $data.list;
-        }
-        /*
          * 去掉 config.exclude 模式
          */
         if (config.exclude) {

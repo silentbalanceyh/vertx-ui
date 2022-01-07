@@ -332,7 +332,7 @@ const yiColumn = (reference, initState = {}, $data = []) => {
     if ($table.columns) {
         const lazyColumn = $table.columns
             .filter(item => "USER" === item['$render']);
-        return Ux.ajaxEager(reference, lazyColumn, $data ? $data.list : [])
+        return Ux.ajaxEager(reference, lazyColumn, Ux.valueArray($data))
             .then($lazy => Ux.promise(initState, "$lazy", $lazy))
             .then(state => Ux.promise(state, "$data", $data));
     } else {

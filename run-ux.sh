@@ -34,6 +34,7 @@ cp -rf scripts/zrun-route.js ${TARGET_FOLDER}/scripts/zrun-route.js
 cp -rf scripts/zrun-update.js ${TARGET_FOLDER}/scripts/zrun-update.js
 cp -rf scripts/zrun-route-ready.js ${TARGET_FOLDER}/scripts/zrun-route-ready.js
 cp -rf scripts/zrun-package.json ${TARGET_FOLDER}/scripts/zrun-package.json
+cp -rf scripts/zrun-package.js ${TARGET_FOLDER}/scripts/zrun-package.js
 # 其他
 cp -rf tsconfig.json ${TARGET_FOLDER}/tsconfig.json
 cp -rf .babelrc ${TARGET_FOLDER}/.babelrc
