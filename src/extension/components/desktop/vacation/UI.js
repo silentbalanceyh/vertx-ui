@@ -4,7 +4,7 @@ class Component extends React.PureComponent {
     render() {
         return (
             <div>
-                「Zero Extension」个人中心 -> 交班管理
+                「Zero Extension」工作台 -> 休假管理
             </div>
         );
     }
