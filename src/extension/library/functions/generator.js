@@ -699,7 +699,7 @@ const _uriView = (uri, {
     } else {
         if ("DEFAULT" !== viewName) {
             // view = [view];
-            return Ux.toUrl(uri, "view", encodeURIComponent(`[${viewName}]`))
+            return Ux.toUrl(uri, "view", encodeURIComponent(`[${viewName},DEFAULT]`))
         } else {
             // view = DEFAULT
             return uri;

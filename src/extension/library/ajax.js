@@ -762,6 +762,46 @@ class I {
     }
 
     /**
+     ## 「接口」`Ex.I.visitor`
+     *
+     * * 接口：`/ui/visitor/:identifier/:page`（POST）
+     * * 安全：是
+     *
+     * ```json
+     * {
+     *     "identifier": "路径参数，模型标识符",
+     *     "page": "页面ID",
+     *     "view": "「位置1」视图信息",
+     *     "position": "「位置2」位置信息",
+     *     "type": "类型选择，FORM / LIST",
+     *     "alias": "「位置3」别名信息"
+     * }
+     * ```
+     *
+     * 位置信息计算规则：view / position / alias
+     *
+     * - view：视图信息，直接从 $myView 中提取。
+     * - position：位置信息，直接从 $myView 中提取。
+     * - alias：别名处理，同样用来计算 alias。
+     *
+     * ### 内部参数
+     *
+     * |参数名|含义|
+     * |:---|:---|
+     * |type|读取控件的专用类型，主要包含`FORM | LIST`两种。|
+     * |identifier|模型标识符。|
+     * |page|页面专用ID。|
+     * |view/position/alias|专用位置计算信息。|
+     *
+     * @async
+     * @param params {Object} params 参数信息
+     * @returns {Promise<T>} 返回Promise
+     */
+    static visitor(params = {}) {
+        return Ux.ajaxPost('/api/ui/visitor/:identifier/:page', params);
+    }
+
+    /**
      * ## 「接口」`Ex.I.ops`
      *
      * * 接口：`/api/ui/ops`（POST）

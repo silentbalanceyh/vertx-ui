@@ -851,17 +851,6 @@ const toNamespace = (reference) => {
         }
     }
 };
-
-const COLORS = [
-    "#48aaf7",
-    "#d00036",
-    "#44bc78",
-    "#030f1f",
-    "#e79627",
-    "#7d4ab8",
-    "#70d5fe",
-    "#7077eb"
-];
 /**
  * ## 「标准」`Ex.toColor`
  *
@@ -874,15 +863,17 @@ const COLORS = [
  *
  * @memberOf module:_function
  * @param {Number} current 索引数据
+ * @param {String} mode 模式
  * @returns {WebColor} 返回颜色值
  */
-const toColor = (current) => {
+const toColor = (current, mode = "KFC_8") => {
+    const colorArray = Ux.Env.THEME[mode];
     if (undefined === current) {
-        const index = Ux.randomInteger(0, COLORS.length);
-        return COLORS[index];
+        const index = Ux.randomInteger(0, colorArray.length);
+        return colorArray[index];
     } else {
-        const index = current % COLORS.length;
-        return COLORS[index];
+        const index = current % colorArray.length;
+        return colorArray[index];
     }
 };
 /**

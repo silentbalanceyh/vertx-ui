@@ -29,6 +29,7 @@ declare module "ei" {
     // 我的待办
     export {default as TxQRun} from './TxQRun/UI';                          /* 待办队列 */
     export {default as TxQDone} from './TxQDone/UI';                        /* 待办队列 */
+    export {default as TxPortal} from './TxPortal/UI';                      /* 流程入口（服务目录）*/
 
 
     // 个人界面

@@ -41,6 +41,16 @@ const onSelect = (reference) => (input = []) => {
         }
     }
 }
+
+const yoLevel = (treeData = [], rootLevel = 1) => {
+    const treeNew = [];
+    Ux.itTree(treeData, (item) => {
+        if (rootLevel === item._level) {
+            treeNew.push(item);
+        }
+    });
+    return treeNew;
+}
 const configuration = {
     ...Ex.parserOfColor("OxCategory").component(),
     type: "Control"
@@ -57,13 +67,14 @@ class Component extends React.PureComponent {
         return Ex.yoRender(this, () => {
             const {config: {ui = {}}, data = []} = this.props;
             const {$disabled = false} = this.state;
-            const {tree} = ui;
-            const treeData = Ux.toTree(data, tree);
+            const {tree, root = {}} = ui;
+            let treeData = Ux.toTree(data, tree);
             /*
              * 1）顶层是 Collapse Panel
              * 2）从第二层开始是 Menu
              * 3）默认展开第一个
              */
+            treeData = yoLevel(treeData, root.level);
             const defaultActiveKey = treeData
                 .filter((item, index) => 0 === index)
                 .map(item => item.key);

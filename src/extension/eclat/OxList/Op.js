@@ -18,6 +18,7 @@ const yoQuery = (reference, $config = {}) => {
     /*
      * 读取 criteria 引用
      */
+    if (!config.query) config.query = {};
     const criteriaRef = config.query.criteria;
     let query = Ux.toQuery("query");
     if (query && "string" === typeof query) {

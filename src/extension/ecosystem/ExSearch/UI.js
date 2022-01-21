@@ -22,7 +22,6 @@ import Op from "./Op";
 // =====================================================
 const _yiSearch = (reference, config = {}) => {
     const $search = {};
-    $search.style = {width: "72%"};
     $search.placeholder = config[Ex.Opt.SEARCH_PLACEHOLDER];
     $search.onSearch = Op.onSearch(reference);
     $search.onChange = Op.onChange(reference);

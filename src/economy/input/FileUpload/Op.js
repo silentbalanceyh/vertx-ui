@@ -5,7 +5,7 @@ import {message} from 'antd';
 const _setImage = (reference, file) => {
     const reader = new FileReader();
     reader.addEventListener('load', () => reference.setState({
-        $loading: false,    // 加载完成
+        $loading: false,            // 加载完成
         $imageUrl: reader.result,   // 图片URL地址
     }));
     if (file) reader.readAsDataURL(file);

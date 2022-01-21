@@ -8,6 +8,12 @@ const doExecute = (reference, selected, doSelected) => {
          * 修改 selected
          */
         const request = doSelected(selected);
+        /*
+         * 当前列的顺序信息设置默认值 position
+         */
+        request.$body.forEach(data =>
+            data.position='DEFAULT'
+        );
         if (request) {
             // 保存
             Ux.ajaxPut("/api/view/:ownerType/:ownerId", request).then(processed => {

@@ -77,7 +77,7 @@ const renderCriteria = (reference) => {
 const _renderInput = (reference) => {
     const {$search, searchText} = reference.state;
     return (
-        <Input.Search {...$search} value={searchText}/>
+        <Input.Search {...$search} compact value={searchText}/>
     )
 };
 

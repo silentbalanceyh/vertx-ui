@@ -20,16 +20,73 @@ import {Dsl} from "entity";
 // =====================================================
 
 const getControl = (reference, $identifier) => {
-    let $control;
     const {config = {}} = reference.props;
     const {vector = {}} = config;
-    if ($identifier) {
-        $control = vector[$identifier];
+    /*
+     * vector 的两种格式
+     * 1. 直接包含了 $identifier，则直接提取
+     * 2. 无法提取 $identifier 对应的配置时
+     * - 2.1. 查看 __ALIAS__ ：远程读取
+     * - 2.2. 如果没有 __ALIAS__ 配置则直接 __DEFAULT__ 处理
+     */
+    if (vector.hasOwnProperty($identifier)) {
+        /*
+         * 静态 $identifier 提取（Z专用）
+         */
+        const $control = vector[$identifier];
+        const controlData = {$identifier, $control}
+        Ux.dgDebug(controlData, "「直接」选择的：$identifier 和 $control.");
+        return Ux.promise(controlData);
     } else {
-        $control = vector.__DEFAULT__;
+        if (vector['__ALIAS__']) {
+            const {
+                $myView = {},            // 视图
+                $myDefault = {},         // 默认视图
+                $metadata = {},          // 读取类型和页面
+            } = reference.props;
+            /*
+             * 远程读取构造 vector
+             *
+             *      "page": xxx,
+             *      "identifier": xxx,
+             *      "path": based on view/position,
+             *      "type": calculate the parameter from params,
+             *      "alias": The name that you can define here.
+             */
+            const request = {};
+            request.identifier = $identifier ? $identifier : vector.__DEFAULT__;
+
+            // page, componentType
+            const {
+                componentType,
+                page
+            } = $metadata;
+            request.type = componentType;
+            request.page = page;
+
+            let view = $myView.name;
+            if (!view) {
+                view = $myDefault.name ? $myDefault.name : "DEFAULT";
+            }
+            request.view = view;
+            request.position = $myView.position ? $myView.position : "DEFAULT";
+            request.alias = vector['__ALIAS__'];
+            return Ex.I.visitor(request).then(vectorData => {
+                const $control = vectorData['controlId'];
+                const controlData = {$identifier, $control}
+                Ux.dgDebug(controlData, "「远程」选择的：$identifier 和 $control.");
+                return Ux.promise(controlData)
+            })
+        } else {
+            /*
+             * 默认，直接从 __DEFAULT__ 提取
+             */
+            const $control = vector.__DEFAULT__;
+            const controlData = {$identifier, $control}
+            Ux.dgDebug(controlData, "「默认」选择的：$identifier 和 $control.");
+            return Ux.promise(controlData);
+        }
     }
-    Ux.dgDebug({$identifier, $control}, "[ Ox ] 选择的：$identifier 和 $control.");
-    return {$control, $identifier};
 };
 /*
  * 计算 control 的id
@@ -50,11 +107,11 @@ const asyncControl = (reference) => {
         const dataEvent = Dsl.getEvent(null);
         return fabricAsync(dataEvent).then(dataEvent => {
             const $identifier = dataEvent.getPrev();
-            return Ux.promise(getControl(reference, $identifier));
+            return getControl(reference, $identifier);
         });
     } else {
         const {$identifier} = reference.props;
-        return Ux.promise(getControl(reference, $identifier));
+        return getControl(reference, $identifier);
     }
 };
 const componentInit = (reference) => asyncControl(reference).then((combine = {}) => {

@@ -95,14 +95,6 @@ const buttonDefinition = {
     ]
 };
 const columnDefinition = {
-    icon: [
-        "text",
-        "icon",
-        "iconStyle.fontSize",
-        "iconStyle.color",
-        "style.color",
-        "$KV$"
-    ],
     column: [
         "dataIndex",
         "title",
@@ -117,14 +109,22 @@ const optionDefinition = {
         "label",
         "style"
     ],
-};
-export default {
-    "filter": [
+    icon: [
+        "text",
+        "icon",
+        "iconStyle.fontSize",
+        "iconStyle.color",
+        "style.color",
+        "$KV$"
+    ],
+    filter: [
         "source",
         "field",
         "type",
         "cond"
     ],
+};
+export default {
     "tabs": [
         "tab",
         "key",
