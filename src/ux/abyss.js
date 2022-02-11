@@ -213,7 +213,7 @@ const output = (params = {}, mapping = {}) => {
  * > 并不是空穴来风的设计，所以存在这种读取方式，不仅仅是`denull`的API，包括很多读取函数以及后续的API都有该操作流程。
  *
  * @memberOf module:_primary
- * @param {ReactComponent} reference 某个React组件的引用
+ * @param {Object|ReactComponent} reference 某个React组件的引用
  * @param {String} key 读取状态和属性值时传入的属性名
  * @returns {any} 返回最终数据。
  */
@@ -672,7 +672,7 @@ const packet = (promise) => {
  * > 该函数会执行combine的合并操作，合并操作会实现对象的提取，带有子对象处理功能。
  *
  * @memberOf module:_primary
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {String} field 提取数据的属性值
  * @returns {Object} 返回合并过后的对象信息
  */

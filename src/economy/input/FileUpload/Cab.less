@@ -1,9 +1,55 @@
 .web-file-upload {
+    padding-top: 3px;
+
+    &-single {
+        .ant-upload {
+            float: left;
+
+            &-list {
+                float: left;
+            }
+        }
+    }
+
     .ant-upload-list {
-        height: 42px;
+        height: 39px;
+        min-width: 80%;
     }
 
     .ant-upload-list-item {
+        height: 28px;
+        line-height: 28px;
+        margin-top: 3px;
+        margin-left: 6px;
+
+        .range {
+            width: 28px;
+            height: 28px;
+            line-height: 28px;
+        }
+
+        &-card-actions {
+            margin-left: 80px;
+            min-width: 32px;
+            text-align: center;
+
+            a {
+                .range;
+                padding-top: 3px;
+                padding-left: 3px;
+                display: block;
+                text-align: center;
+
+                i {
+                    svg {
+                        width: 21px;
+                        height: 21px;
+                    }
+                }
+
+            }
+        }
+
         &-name {
             height: 28px;
             line-height: 28px;

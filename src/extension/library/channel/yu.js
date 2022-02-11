@@ -36,7 +36,7 @@ import Ux from "ux";
  *
  * @memberOf module:_channel
  * @method yuRouter
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} virtualRef 旧的属性和状态
  * @param {Function} callback 路由变化的回调函数
  */

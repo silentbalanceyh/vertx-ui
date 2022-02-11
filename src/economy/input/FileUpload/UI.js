@@ -135,8 +135,10 @@ class Component extends React.PureComponent {
     }
 
     render() {
+        const {config = {}, readOnly = false} = this.props;
+        const isSingle = config.single && !readOnly;
         return (
-            <Input.Group className={"web-file-upload"}>
+            <Input.Group className={`web-file-upload ${isSingle ? "web-file-upload-single" : ""}`}>
                 {Rdr.renderFile(this)}
                 {Rdr.renderPreview(this)}
             </Input.Group>

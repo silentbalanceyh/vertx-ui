@@ -58,6 +58,7 @@ export default {
         TABS_EDIT: 'tabs.edit',     /* 编辑表单Tab页专用标题 */
         TABS_EXTRA_ADD: "tabs.extra.add", /* 隐藏Extra功能，在表单中提供按钮 */
         TABS_EXTRA_EDIT: "tabs.extra.edit", /* 隐藏Extra功能，在表单中提供按钮 */
+        TABS_DISABLED: 'tabs.disabled',     /* 单列表操作 */
 
         // 动态静态配置
         DYNAMIC_OP: 'dynamic.op',           /* 动态 Op */
@@ -79,6 +80,7 @@ export default {
         SEARCH_CRITERIA_NOTICE: "search.criteria.notice",   /* 搜索提示 */
         SEARCH_CRITERIA_WINDOW: "search.criteria.window",   /* 搜索提示窗口 */
         SEARCH_CRITERIA_VIEW: "search.criteria.view",       /* 查询条件视图 */
+        SEARCH_GRID: "search.grid",                         /* Grid名称 */
 
         AJAX_POSITION: 'ajax.position',                     /* 视图专用参数 */
         AJAX_MODULE: 'ajax.module',                         /* 是否启用 module 参数 */

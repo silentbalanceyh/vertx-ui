@@ -42,7 +42,7 @@ export default {
         /**
          * 渲染用户名，在Jsx中注入`onPressEnter`事件
          *
-         * @param {ReactComponent} reference React对应组件引用。
+         * @param {Object|ReactComponent} reference React对应组件引用。
          * @param {Object} jsx 输入的jsx配置。
          * @returns {Jsx}
          */
@@ -56,7 +56,7 @@ export default {
         /**
          * 渲染密码，在Jsx中注入`onPressEnter`事件
          *
-         * @param {ReactComponent} reference React对应组件引用。
+         * @param {Object|ReactComponent} reference React对应组件引用。
          * @param {Object} jsx 输入的jsx配置。
          * @returns {Jsx}
          */

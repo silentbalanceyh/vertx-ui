@@ -10,7 +10,7 @@ import Dev from '../develop';
  * Zero UI中和 redux 连接到一起的状态统一修改函数，主要修改节点为 `out` 根节点下的数据。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {Object} state 被修改的状态信息。
  * @param {any} dft 状态默认值
  */
@@ -49,7 +49,7 @@ const writeTree = (reference, state, dft = null) => {
  * * `state.submitting`.
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {Array} keys 被清除的所有节点信息。
  */
 const writeClean = (reference, keys = []) => {
@@ -70,7 +70,7 @@ const writeClean = (reference, keys = []) => {
  * Zero UI 中的 redux 树的防重复提交专用方法，用于检查 redux 引擎下的防重复提交。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {boolean} loading 防重复提交专用状态值。
  */
 const writeSubmit = (reference, loading = true) => {

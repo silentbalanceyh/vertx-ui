@@ -23,30 +23,6 @@
         "canvas": {
             "height": 240
         },
-        "decision": {
-            "$opDraft": {
-                "eStart": {
-                    "draft": true,
-                    "status": "DRAFT"
-                }
-            },
-            "$opMove": {
-                "eStart": {
-                    "draft": false,
-                    "status": "PENDING"
-                }
-            },
-            "$opApprove": {
-                "eFileApprove": {
-                    "confirmed": true
-                }
-            },
-            "$opReject": {
-                "eFileApprove": {
-                    "confirmed": false
-                }
-            }
-        },
         "options": {
             "tabs.list": "文件申请列表",
             "op.open.add": "申请"

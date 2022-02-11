@@ -910,6 +910,17 @@ const _showDialog = (reference, dialogConfig = {}, data) => {
             ajaxEnd(reference, dialogConfig.redux)();
             resolve(data)
         };
+        config.onCancel = () => {
+            /*
+             * 执行一次
+             */
+            ajaxEnd(reference, dialogConfig.redux)();
+            const {rxCancel} = reference.props;
+            if (Abs.isFunction(rxCancel)) {
+                rxCancel(data, reference);
+            }
+            resolve(data)
+        }
         fnDialog(config);
     })
 };
@@ -1222,99 +1233,114 @@ const ajax2True = (consumer, content) => (result) => {
  *
  * @async
  * @memberOf module:_ajax
- * @param {ReactComponent} reference 【保留】React组件引用
+ * @param {Object} reference 【保留】React组件引用
  * @param {Array} columns 表格配置中的 `columns` 属性
  * @param {Array} data 表格已经加载好的二维数据信息
  * @return {Promise<T>} 特殊结构处理表格渲染专用
  */
 const ajaxEager = (reference, columns = [], data = []) => {
-    // console.info(columns);
-    const lazyAsync = [];
-    // Cached
-    const {$lazy = {}} = reference.state;
-    columns.forEach(column => {
-        const config = column.$config;
-        let lazyData = $lazy[column.dataIndex];
-        if (!lazyData) lazyData = {};
-        if (Abs.isObject(config)) {
-            const {uri, field, expr, batch = false} = config;
-            if (batch) {
-                /*
-                 * 批量处理只能使用查询引擎
-                 */
-                const dataKeys = data
-                    .filter(item => !lazyData[item[column.dataIndex]])
-                    .map(item => item[column.dataIndex]);
-                const criteria = {};
-                criteria[`key,i`] = dataKeys;
-                lazyAsync.push(Ajax.ajaxPost(uri, {criteria}).then((response = {}) => {
-                    const {list = []} = response;
+    /*
+     *  矩阵型读取（优化版）
+     * 1. 先过滤不同类型的列：["USER", "LAZY"]，目前支持的
+     * 2. 构造新的列
+     */
+    const lazyColumns = columns.filter(item => [
+        "USER",
+        "LAZY"
+    ].includes(item.$render));
+    if (0 < lazyColumns.length) {
+        // Cached（是否已经读取过）
+        const {$lazy = {}} = reference.state;
+        const lazyAsync = [];
+        lazyColumns.forEach(column => {
+            // 拆开执行
+            const config = column.$config;
+            let lazyData = $lazy[column.dataIndex];
+            if (!lazyData) lazyData = {};
+            if (Abs.isObject(config)) {
+                // config 必须存在
+                const {uri, field, expr, batch = false} = config;
+                if (batch) {
                     /*
-                     * 批量连接，直接构造
+                     * 批量处理只能使用查询引擎
                      */
-                    const result = {};
-                    list.forEach(item => {
-                        let value;
-                        if (expr) {
-                            value = T.formatExpr(expr, item, true);
-                        } else {
-                            value = item[field];
-                        }
-                        result[item.key] = value;
-                    });
-                    if (column["$empty"]) {
-                        result['undefined'] = column["$empty"];
-                    }
-                    return Abs.promise(result);
-                }));
-            } else {
-                /*
-                 * 将 data 按 column 分组，原始模式
-                 */
-                const dataMap = Ele.elementGroup(data, column.dataIndex);
-                const vertical = [];
-                const verticalKeys = Object.keys(dataMap).filter(key => !lazyData[key]);
-                verticalKeys.forEach(key => {
-                    if ("undefined" === key) {
-                        vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
-                    } else if (key.length !== 36) {
-                        vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : key));
-                    } else {
-                        vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
+                    const dataKeys = data
+                        .filter(item => !lazyData[item[column.dataIndex]])
+                        .map(item => item[column.dataIndex]);
+                    const criteria = {};
+                    criteria[`key,i`] = dataKeys;
+                    lazyAsync.push(Ajax.ajaxPost(uri, {criteria}).then((response = {}) => {
+                        const {list = []} = response;
+                        /*
+                         * 批量连接，直接构造
+                         */
+                        const result = {};
+                        list.forEach(item => {
                             let value;
-                            if (Abs.isEmpty(result)) {
-                                value = undefined;
+                            if (expr) {
+                                value = T.formatExpr(expr, item, true);
                             } else {
-                                if (expr) {
-                                    value = T.formatExpr(expr, result, true);
-                                } else {
-                                    value = result[field];
-                                }
+                                value = item[field];
                             }
-                            return Abs.promise(value);
-                        }));
-                    }
-                });
-                /*
-                 * vertical 结果
-                 */
-                lazyAsync.push(Abs.parallel(vertical).then(response => {
-                    const result = {};
-                    response.forEach((each, keyIndex) => {
-                        result[verticalKeys[keyIndex]] = each;
+                            result[item.key] = value;
+                        });
+                        if (column["$empty"]) {
+                            result['undefined'] = column["$empty"];
+                        }
+                        return Abs.promise(result);
+                    }));
+                } else {
+                    /*
+                     * 将 data 按 column 分组，原始模式
+                     */
+                    const dataMap = Ele.elementGroup(data, column.dataIndex);
+                    const vertical = [];
+                    const verticalKeys = Object.keys(dataMap).filter(key => !lazyData[key]);
+                    verticalKeys.forEach(key => {
+                        if ("undefined" === key) {
+                            vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : ""));
+                        } else if (key.length !== 36) {
+                            vertical.push(Abs.promise(column["$empty"] ? column['$empty'] : key));
+                        } else {
+                            vertical.push(Ajax.ajaxGet(uri, {key}).then(result => {
+                                let value;
+                                if (Abs.isEmpty(result)) {
+                                    value = undefined;
+                                } else {
+                                    if (expr) {
+                                        value = T.formatExpr(expr, result, true);
+                                    } else {
+                                        value = result[field];
+                                    }
+                                }
+                                return Abs.promise(value);
+                            }));
+                        }
                     });
-                    Object.assign(result, lazyData);
-                    return Abs.promise(result);
-                }));
+                    /*
+                     * vertical 结果
+                     */
+                    lazyAsync.push(Abs.parallel(vertical).then(response => {
+                        const result = {};
+                        response.forEach((each, keyIndex) => {
+                            result[verticalKeys[keyIndex]] = each;
+                        });
+                        Object.assign(result, lazyData);
+                        return Abs.promise(result);
+                    }));
+                }
             }
-        }
-    });
-    return Abs.parallel(lazyAsync).then(response => {
-        const lazyKeys = columns.map(column => column.dataIndex);
-        const lazy = {};
-        response.forEach((each, index) => lazy[lazyKeys[index]] = each);
-        return Abs.promise(lazy);
-    })
+        });
+        return Abs.parallel(lazyAsync).then(response => {
+            const lazyKeys = lazyColumns.map(column => column.dataIndex);
+            const lazy = {};
+            response.forEach((each, index) => lazy[lazyKeys[index]] = each);
+            return Abs.promise(lazy);
+        })
+    } else {
+        // 什么都需要做
+        return Abs.promise({});
+    }
 };
 
 const ajaxFun = {

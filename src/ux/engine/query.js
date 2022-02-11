@@ -231,7 +231,7 @@ const FieldRender = {
  * @method qrForm
  * @param {Object} input 输入的字段信息。
  * @param {String} connector 查询条件。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Object} 返回最终查询条件，写入$filters变量。
  */
 const qrForm = (input, connector = "AND", reference) => {
@@ -326,7 +326,7 @@ const qrTerms = (columns = []) => {
  * ```
  *
  * @memberOf module:_qr
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} state 状态数据
  */
 const qrClear = (reference = {}, state = {}) => {
@@ -374,7 +374,7 @@ const qrInput = (cond = [], value) => {
  * @memberOf module:_qr
  * @method qrCombine
  * @param {Object} query 查询条件。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String[]} condition 查询条件处理。
  * @returns {any} 返回最终的 query 结构。
  */
@@ -409,7 +409,7 @@ const qrCombine = (query = {}, reference, ...condition) => {
  *
  * @memberOf module:_qr
  * @method qrCommon
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} config 查询配置
  * @returns {Object} 返回最终的 query 结构。
  */
@@ -487,7 +487,7 @@ const qrCommon = (reference, config) => {
  * @memberOf module:_qr
  * @method qrComplex
  * @param {Object} query 查询条件专用结构。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Object} 返回最终的 query 结构。
  */
 const qrComplex = (query = {}, reference) => {
@@ -527,7 +527,7 @@ const qrComplex = (query = {}, reference) => {
  *
  * @memberOf module:_qr
  * @method qrInherit
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Object} 返回最终的 query 结构。
  */
 const qrInherit = (reference) => {

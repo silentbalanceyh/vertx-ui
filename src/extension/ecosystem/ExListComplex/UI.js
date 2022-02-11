@@ -247,34 +247,40 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
-            const {tabs = {}} = this.state;
+            const {tabs = {}, options = {}} = this.state;
             /*
              * 当前组件不调用 ExTab 来处理 Tab
              * 页签行为，而是直接使用 antd 中的 Tabs，主要是防止和原始的
              * ComplexList / ExListComplex 产生冲突
              */
-            const {items = [], ...rest} = tabs;
-            return (
-                <Tabs {...rest} tabBarExtraContent={Ex.ylTabExtra(this, rest, ExAction)}>
-                    {items.map((item, index) => {
-                        const {type, ...rest} = item;
-                        /*
-                         * 禁用第一项处理
-                         */
-                        const $item = Ex.yoTabPage(this, {
-                            items, index, item,
-                        });
-                        const fnRender = Page[type];
-                        return $item ? (
-                            <Tabs.TabPane {...item}>
-                                {Ux.isFunction(fnRender) ? fnRender(this, rest) : (
-                                    <span className={"ex-error"}>`fnRender` Function not Found</span>
-                                )}
-                            </Tabs.TabPane>
-                        ) : false
-                    })}
-                </Tabs>
-            )
+            const isSingle = options[Ex.Opt.TABS_DISABLED];
+            if (isSingle) {
+                // 单页面
+                return Page[Ex.Mode.LIST](this, {});
+            } else {
+                const {items = [], ...rest} = tabs;
+                return (
+                    <Tabs {...rest} tabBarExtraContent={Ex.ylTabExtra(this, rest, ExAction)}>
+                        {items.map((item, index) => {
+                            const {type, ...rest} = item;
+                            /*
+                             * 禁用第一项处理
+                             */
+                            const $item = Ex.yoTabPage(this, {
+                                items, index, item,
+                            });
+                            const fnRender = Page[type];
+                            return $item ? (
+                                <Tabs.TabPane {...item}>
+                                    {Ux.isFunction(fnRender) ? fnRender(this, rest) : (
+                                        <span className={"ex-error"}>`fnRender` Function not Found</span>
+                                    )}
+                                </Tabs.TabPane>
+                            ) : false
+                        })}
+                    </Tabs>
+                )
+            }
         }, Ex.parserOfColor("ExListComplex").list())
     }
 }

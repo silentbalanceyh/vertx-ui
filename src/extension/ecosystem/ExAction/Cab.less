@@ -1,6 +1,10 @@
 @import '../../../global';
 
 .ex-link {
+    float: left;
+    list-style: none;
+    padding-left: 0;
+
     li {
         float: left;
         margin-right: 16px;
@@ -15,19 +19,5 @@
 .ex-action-group {
     button[disabled] when (13px = @font-size-base) {
         top: 1px !important;
-    }
-}
-
-// 1280 x 1024
-@media (min-width: @screen-xl) and (max-width: @screen-xxl) {
-    .ant-input-search {
-        width: 72% !important;
-    }
-}
-
-// > 1600
-@media (min-width: @screen-xxl) {
-    .ant-input-search {
-        width: 80% !important;
     }
 }

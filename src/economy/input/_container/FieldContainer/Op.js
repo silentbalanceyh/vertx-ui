@@ -53,6 +53,14 @@ const yiPage = (reference) => {
                 }
             }
             $tabs.type = "card";
+            {
+                /*
+                 * items 过滤，执行上层传入的 koTab 函数
+                 */
+                let $items = Ux.clone($tabs.items);
+                const {koTab = () => true} = reference.props;
+                $tabs.items = $items.filter(koTab);
+            }
             $tabs.items.forEach(item => {
                 const raftItem = raft[item.key];
                 /*
@@ -88,6 +96,7 @@ const yoExtra = ($tabs = {}, reference) => {
     }
     return tabs;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     yiPage,
     yoExtra

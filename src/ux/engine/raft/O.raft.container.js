@@ -1,6 +1,7 @@
 import {Container} from 'web';
 import React from 'react';
 import Datum from '../datum';
+import Abs from '../../abyss';
 /*
  * 可以直接从下边配置属性中处理子表单渲染器
  * {
@@ -22,6 +23,17 @@ const raftChildrenRenders = (reference, addOn = {}) => {
         Object.assign(combineRenders, addOn.renders);
     }
     return combineRenders;
+}
+/*
+ * 此处使用 `key` 的核心原因
+ * 1. name 属性会被 Ant-Form 识别，而这个字段为容器字段，所以不能使用 cell.name 的方式去定位
+ * 2. name 在此处用于识别容器类型，可重复。
+ * 3. 取而代之使用 `key` 来执行相关转换提取配置
+ */
+const raftChildrenComplex = (reference, cell = {}) => {
+    const {$complex = {}} = reference.props;
+    const complex = $complex[cell.key];
+    return Abs.isObject(complex) ? complex : {};
 }
 
 const raftContainer = (cell = {}, config = {}) => {
@@ -46,9 +58,14 @@ const raftContainer = (cell = {}, config = {}) => {
              * 子组件调用父组件对应的 renders，生成 $renders 变量
              */
             const $renders = raftChildrenRenders(reference, addOn);
-
+            /*
+             * 子组件执行 complex 时的额外配置
+             */
+            const inherit = Datum.onUniform(reference.props);
+            const complex = raftChildrenComplex(reference, cell);
             return (
-                <Component {...Datum.onUniform(reference.props)}
+                <Component {...inherit}
+                           {...complex}
                            config={config} $inited={values}
                            $renders={$renders}
                            reference={reference}/>

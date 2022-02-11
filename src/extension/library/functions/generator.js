@@ -204,7 +204,7 @@ const viewSwitch = (reference, $view = Mode.LIST, $key) => {
 class View {
     /**
      * 切换视图专用方法
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {String} $view 视图状态`list, add, edit`
      * @param {String} $key 处理专用key 值
      * @returns {Object} 执行
@@ -232,7 +232,7 @@ class Tab {
     /**
      * 添加Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Object} 返回最终状态
      */
     static add(reference) {
@@ -242,7 +242,7 @@ class Tab {
     /**
      * 编辑Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {Object} data 当前数据记录
      * @returns {Object} 返回最终状态
      */
@@ -253,7 +253,7 @@ class Tab {
     /**
      * 关闭Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {String} key 当前 active 的键值
      * @returns {Object} 返回最终状态
      */
@@ -264,7 +264,7 @@ class Tab {
     /**
      * 点击Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {String} key 当前 active 的键值
      * @returns {Object} 返回最终状态
      */
@@ -275,7 +275,7 @@ class Tab {
     /**
      * 移除Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {String} key 当前 active 的键值
      * @returns {Object} 返回最终状态
      */
@@ -286,7 +286,7 @@ class Tab {
     /**
      * 保存Tab页
      *
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {Object} data 当前数据记录
      * @param {Object} item 设置页面配置信息
      * @returns {Object} 返回最终状态
@@ -306,7 +306,7 @@ class Tab {
  * 新增 Tab 页专用函数
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxTabAdd = (reference) => event => {
@@ -325,7 +325,7 @@ const rxTabAdd = (reference) => event => {
  * 关闭 Tab 页专用函数
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxTabClose = (reference) => (key, callbackState = {}) => {
@@ -343,7 +343,7 @@ const rxTabClose = (reference) => (key, callbackState = {}) => {
  * 编辑 Tab 页专用函数
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxTabEdit = (reference) => (key, data = {}, item = {}, callbackState = {}) => {
@@ -363,7 +363,7 @@ const rxTabEdit = (reference) => (key, data = {}, item = {}, callbackState = {})
  * 打开 Tab 页专用函数
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxTabOpen = (reference) => (key, data = {}, record) => {
@@ -389,7 +389,7 @@ const rxTabOpen = (reference) => (key, data = {}, record) => {
  * 2. 清空流程：执行`Ux.qrClear`清空操作（`__DELETE__`条件会被清除）
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} isClear 是否清除查询条件
  * @returns {Function} 生成函数
  */
@@ -441,7 +441,7 @@ const rxCondition = (reference, isClear = false) => {
  * $filters状态变量在列表组件中只存在于基础搜索（搜索框）和高级搜索（查询表单），列过滤的搜索条件有另外的变量来完成。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxFilter = (reference) =>
@@ -475,7 +475,7 @@ const rxFilter = (reference) =>
  * 2. 使用被选中的主键集调用批量删除接口执行批量删除。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxBatchDelete = (reference) => (event) => {
@@ -511,7 +511,7 @@ const rxBatchDelete = (reference) => (event) => {
  * 3. 针对2中读取的我的试图列进行保存，创建新视图（目前版本只支持单视图）。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} config 列配置
  * @returns {Function} 生成函数
  */
@@ -546,7 +546,7 @@ const rxColumn = (reference, config = {}) => Cm.switcher(reference, 'rxColumn',
  * 2. 目前只有每个列表单视图操作，后期扩展多视图模式。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} config 列配置
  * @returns {Function} 生成函数
  */
@@ -602,7 +602,7 @@ const rxColumnMy = (reference, config = {}) => Cm.switcher(reference, 'rxColumnM
  * 内置调用了`switcher`执行从状态state到属性props中的函数检索，检索合法时调用该函数，无法找到函数则抛出异常。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
@@ -637,7 +637,7 @@ const rxSearch = (reference) => Cm.switcher(reference, 'rxSearch',
  * 该函数为`rxColumnMy`的逆函数，此处不做多余说明，根据`options`中的`ajax.column.save`执行我的视图保存。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxColumnSave = (reference) => Cm.switcher(reference, 'rxColumnSave',
@@ -714,7 +714,7 @@ const _uriView = (uri, {
  * 根据系统中存储的`$columns/$columnsMy`执行视图层的列过滤专用函数，该函数内部存储了**全列**，根据传入的试图列构造新的查询视图。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
@@ -799,7 +799,7 @@ const rxProjection = (reference) => ($columnsMy = [], addOn = {}) => {
  * 系统提供了`rxPostDelete`函数用于执行删除回调操作，该操作位于删除之后执行（编程回调）。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxDelete = (reference) => (key, callback) => {
@@ -846,7 +846,7 @@ const rxDelete = (reference) => (key, callback) => {
  * 2. 版本2：新增了可使用其他字段（唯一字段）来读取数据记录。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxView = (reference) => (key, record = {}, metadata = {}) => {
@@ -883,7 +883,7 @@ const rxView = (reference) => (key, record = {}, metadata = {}) => {
  * 多选专用函数，该函数的基础封装仅执行一个操作，调用上层的`rxPostSelected`回调函数。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxSelected = (reference) => ($selected = [], $data = []) => {
@@ -907,7 +907,7 @@ const rxSelected = (reference) => ($selected = [], $data = []) => {
  * 2. 查询条件直接走查询引擎，内置调用`Ux.ajaxPull`的下载函数（带权限）。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxExport = (reference) => (params = {}) => {
@@ -939,7 +939,7 @@ const rxExport = (reference) => (params = {}) => {
  * 2. 内置调用`Ux.ajaxUpload`的上传函数（带权限）。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxImport = (reference) => (file) => {
@@ -979,7 +979,7 @@ const rxImport = (reference) => (file) => {
  * ```
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 生成函数
  */
 const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($selected = []) => {
@@ -1047,7 +1047,7 @@ const rxBatchEdit = (reference) => (params = []) => Ux.sexBatch(reference, ($sel
  * | view | rxView | 单行查看专用函数 |
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} off 关闭错误信息
  * @returns {Object} 返回最终对象
  **/
@@ -1146,7 +1146,7 @@ const rx = (reference, off = false) => ({
  *
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} visible 打开或关闭
  * @returns {Function} 生成函数
  */
@@ -1178,7 +1178,7 @@ const rsVisible = (reference, visible = true) =>
  * 通常在修改`$loading`时会调用内部规范的`doLoading`专用函数，用于修改加载以及加载完成的状态。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} loading 打开或关闭
  * @returns {Function} 生成函数
  */
@@ -1210,7 +1210,7 @@ const rsLoading = (reference, loading = true) =>
  * 通常在修改`$submitting`时会调用内部规范的`doSubmitting`专用函数，用于修改加载以及加载完成的状态。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} submitting 打开或关闭
  * @returns {Function} 生成函数
  */
@@ -1238,7 +1238,7 @@ const rsSubmitting = (reference, submitting = true) =>
  * **脏状态**表示当前列表会等待自动刷新，直到列表状态为非脏的状态。
  *
  * @memberOf module:_rx
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {boolean} dirty 打开或关闭
  * @returns {Function} 生成函数
  */
@@ -1318,7 +1318,7 @@ export default {
      * 打开Tab页后置回调函数，设置 $opened = true。
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxPostClose: (reference) => (key) => rsOpened(reference, false)(key),
@@ -1330,7 +1330,7 @@ export default {
      * 关闭Tab页后置回调函数，设置 $opened = false。
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxPostOpen: (reference) => (data) => rsOpened(reference, true)(data),
@@ -1348,7 +1348,7 @@ export default {
      * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxLoading: (reference) => (loading, addOn = {}) => rsLoading(reference, loading)(addOn),
@@ -1365,7 +1365,7 @@ export default {
      * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxSubmitting: (reference) => (submitting, addOn = {}) => rsSubmitting(reference, submitting)(addOn),
@@ -1382,7 +1382,7 @@ export default {
      * > 第二参数为可合并的state状态数据，最终会调用`Object.assign`将附加状态合并到组件状态中。
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxDirty: (reference) => (dirty, addOn = {}) => rsDirty(reference, dirty)(addOn),
@@ -1412,7 +1412,7 @@ export default {
      *
      *
      * @memberOf module:_rx
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Function} 生成函数
      */
     rxAssist: (reference) => (key, data, deleted = false) => {

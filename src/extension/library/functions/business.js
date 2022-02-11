@@ -382,7 +382,7 @@ export default {
      *
      * @memberOf module:_kernel
      * @method form
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Object} 返回对象信息
      * */
     form: (reference) => ({
@@ -567,7 +567,7 @@ export default {
      *
      * @memberOf module:_kernel
      * @method dialog
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Object} 返回对象信息
      * */
     dialog: (reference) => ({
@@ -661,7 +661,7 @@ export default {
      *
      * @memberOf module:_kernel
      * @method init
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Object} 返回最终数据
      */
     init: (reference) => ({

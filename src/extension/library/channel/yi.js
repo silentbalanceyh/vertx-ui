@@ -109,7 +109,7 @@ function yiControl() {
  *
  * @memberOf module:_channel
  * @method yiStandard
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {State} inputState 返回当前组件状态
  * @returns {Promise<T>} 执行更新过后的状态
  */
@@ -151,7 +151,7 @@ const yiStandard = (reference, inputState) => {
  *
  * @memberOf module:_channel
  * @method yiCompany
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Promise<T>} 返回Promise。
  */
 const yiCompany = (reference) => {
@@ -216,7 +216,7 @@ const yiCompany = (reference) => {
  * |onChange|Object|`field = Function`结构，对象中的每个函数可以注入到字段的`onChange`外置函数中。|
  *
  * @memberOf module:_channel
- * @param {ReactComponent} ref React组件引用
+ * @param {Object|ReactComponent} ref React组件引用
  * @param {Object} config 和表单相关的基本配置
  * @param {Object} inherit 将要继承到表单中的属性信息
  * @returns {Object}
@@ -321,7 +321,7 @@ const yiPartForm = (ref, config = {}, inherit = true) => {
  *
  * @memberOf module:_channel
  * @method yiColumn
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {State} initState 返回当前组件状态
  * @param {Object} $data 搜索的最终结果，$data.list 中包含数据
  * @returns {Promise<T>} 执行更新过后的状态
@@ -329,10 +329,9 @@ const yiPartForm = (ref, config = {}, inherit = true) => {
 const yiColumn = (reference, initState = {}, $data = []) => {
     initState = Ux.clone(initState);
     const {$table} = initState;
-    if ($table.columns) {
-        const lazyColumn = $table.columns
-            .filter(item => "USER" === item['$render']);
-        return Ux.ajaxEager(reference, lazyColumn, Ux.valueArray($data))
+    const columns = $table['columns'];
+    if (Ux.isArray(columns)) {
+        return Ux.ajaxEager(reference, columns, Ux.valueArray($data))
             .then($lazy => Ux.promise(initState, "$lazy", $lazy))
             .then(state => Ux.promise(state, "$data", $data));
     } else {
@@ -463,7 +462,7 @@ const yiColumn = (reference, initState = {}, $data = []) => {
  *
  * @memberOf module:_channel
  * @method yiAssist
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {State} state 输入状态，计算之前的
  * @returns {Promise<T>} 执行更新过后的状态，计算之后的
  */
@@ -543,7 +542,7 @@ const yiAssist = (reference, state = {}) => {
  *
  * @memberOf module:_channel
  * @method yiModule
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {State} state 返回当前组件状态
  * @param {boolean} standard 是否执行标准化
  * @returns {Promise<T>} 执行更新过后的状态
@@ -826,7 +825,7 @@ const startAsync = (state) => {
  *
  * @memberOf module:_channel
  * @method yiLayout
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Promise<T>} 执行更新过后的状态
  */
 const yiLayout = (reference) => {

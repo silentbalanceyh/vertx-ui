@@ -8,7 +8,7 @@ import Abs from "../../abyss";
  * Zero UI 中的 redux 树的辅助数据 `assist` 节点专用方法，用于写 redux 树
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {String} key redux树上的 Assist 辅助数据所需的键。
  * @param {Object} data 需要保存的记录集。
  * @param {boolean} isDeleted 该操作是删除还是保存。

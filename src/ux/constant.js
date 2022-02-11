@@ -748,6 +748,7 @@ export default {
         KFC_8: ["#32B6E1", "#1AB197", "#288ACC", "#23BA5B", "#F28C49", "#EDAB1A", "#E8628F", "#3D70A6"],
         GBP_6: ["#A067F0", "#4565F1", "#00B461", "#9E70FF", "#39E7CC", "#B5E960"],
         SIX_6: ["#B255EB", "#FF9043", "#00A457", "#FF4F5D", "#FCCD38", "#00AAE4"],
+        SEVEN_7: ["#9E70FF", "#00AAE4", "#00A457", "#FF4F5D", "#FCCD38", "#263B77", "#B1E250"],
         FIVE_5: ["#FF9E6E", "#FFCC21", "#FF5765", "#00DAF5", "#B1E250"],
 
         // BUS 四种：背景色、浅色、中度、深色
@@ -755,5 +756,33 @@ export default {
         BUS_L_6: ["#FACE6C", "#FA7EBC", "#CC47EB", "#816AF7", "#1EB6E1", "#05C7D0"],
         BUS_M_6: ["#FABD35", "#ED54A0", "#BC2BDB", "#6A52E1", "#059BC4", "#04AFB7"],
         BUS_H_6: ["#F7AE0E", "#CB4DA3", "#A71BC4", "#5944C4", "#0681A2", "#0A979E"],
+    },
+    /**
+     * ## `Ux.Env.GRID`
+     *
+     * 布局专用，统一布局 Col 比例（支持自适应效果）
+     *
+     * @memberOf module:_constant
+     * @constant
+     */
+    GRID: {
+        LIST_NE: {
+            open: {span: 5, xl: 4, xxl: 3},
+            batch: {span: 11, xl: 12, xxl: 13},
+            search: {span: 8, xl: 8, xxl: 8, className: "ex-extra"},
+            extra: {span: 0, xl: 0, xxl: 0}
+        },
+        LIST_E: {
+            open: {span: 5, xl: 4, xxl: 3},
+            batch: {span: 7, xl: 8, xxl: 10},
+            search: {span: 8, xl: 8, xxl: 8},
+            extra: {span: 4, xl: 4, xxl: 3, className: "ex-extra"}
+        },
+        LIST_TT: {
+            open: {span: 3, xl: 3, xxl: 3},
+            batch: {span: 10, xl: 10, xxl: 10},
+            search: {span: 9, xl: 9, xxl: 9},
+            extra: {span: 2, xl: 2, xxl: 2, className: "ex-extra"}
+        }
     }
 }

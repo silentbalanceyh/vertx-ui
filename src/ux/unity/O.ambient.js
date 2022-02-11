@@ -108,11 +108,12 @@ const toRouteParameters = (name = "", params = {}) => {
  * 2. 参数对部分，主要考虑前缀信息，如果本身路径带了参数，则前缀使用`&`符号（追加参数模式），如果路径本身不带参数，则前缀使用`?`符号（设置参数模式）
  *
  * @memberOf module:_to
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} uri 跳转路由信息，会追加`CV["ROUTE"]`的前缀执行跳转。
  * @param {Object} params 当前路由所需参数信息
+ *
  */
-const toRoute = (reference = {}, uri = "", params) => {
+const toRoute = (reference = {}, uri = "", params = {}) => {
     E.fxTerminal(!uri, 10072, uri);
     E.fxTerminal(!reference.hasOwnProperty("props") || !reference.props.hasOwnProperty("$router"),
         10004, reference);
@@ -147,6 +148,18 @@ const toRoute = (reference = {}, uri = "", params) => {
         $parameters.target = Encrypt.encryptBase64($parameters.target);
     }
     /*
+     * 内部参数处理
+     */
+    const internal = {};
+    const external = {};
+    Object.keys($parameters).forEach(field => {
+        if (field.startsWith("_")) {
+            internal[field] = $parameters[field];
+        } else {
+            external[field] = $parameters[field];
+        }
+    });
+    /*
      * 4. 计算 basePart
      */
     let normalizedUri;
@@ -158,9 +171,9 @@ const toRoute = (reference = {}, uri = "", params) => {
     /*
      * 5. 构造最终的路由地址，并执行跳转
      */
-    const normalized = _toQNormalize(normalizedUri, $parameters);
+    const normalized = _toQNormalize(normalizedUri, external);
     const {$router} = reference.props;
-    $router.to(normalized);
+    $router.to(normalized, internal);
 };
 const _toQPart = (queryPart) => {
     const queryMap = {};
@@ -273,7 +286,7 @@ const isLoaded = (props, prevProps) => !isRoute(props, prevProps)
  * 根据 pid 的值计算 defaultOpenKeys 和 defaultSelectedKeys 值。
  *
  * @memberOf module:_to
- * @param {ReactComponent} reference React组件引用信息。
+ * @param {Object|ReactComponent} reference React组件引用信息。
  * @param {Array} data 菜单数据信息。
  * @param {Object} state 被修改的状态信息
  */
@@ -346,7 +359,7 @@ const isInit = () => {
  * 登录控制专用跳转方法，如果已登录则不执行任何跳转，如果未登录则跳转到登录界面，并且加上当前页面实现`target`计算。
  *
  * @memberOf module:_is
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @return {any} 跳转专用
  */
 const isAuthorized = (reference) => {
@@ -387,17 +400,23 @@ const toLogout = (cleanApp = true) => {
  * * target：该值为原始的路由路径，如果有值则直接跳转，用于登录控制过后返回原始页面专用。
  *
  * @memberOf module:_to
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} switched 传入内容替换掉 Cv.ENTRY_ADMIN
+ * @param {Array} exclude 移除参数集
  */
-const toOriginal = (reference = {}, switched) => {
+const toOriginal = (reference = {}, switched, exclude = []) => {
     const original = toQuery("target");
     if (original) {
         const {$router} = reference.props;
         const params = Abs.clone($router.params());
-        if (params.key) delete params.key;
-        if (params.id) delete params.id;
-        if (params.target) delete params.target;
+        const $removed = [
+            "key", "id", "target"
+        ].concat(exclude);
+        $removed.forEach(field => {
+            if (params[field]) {
+                delete params[field];
+            }
+        })
         toRoute(reference, original, params);
     } else {
         /*
@@ -415,7 +434,7 @@ const toOriginal = (reference = {}, switched) => {
  * limitation=true
  *
  * @memberOf module:_to
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  */
 const toPassword = (reference = {}) => {
     /*
@@ -463,7 +482,7 @@ const toLoading = (consumer, seed) => {
  *
  * @memberOf module:_to
  * @param {Object} inherit 修改对象
- * @param {ReactComponent} reference React组件引用信息。
+ * @param {Object|ReactComponent} reference React组件引用信息。
  * @return {Object} 返回 $a_ 打头以及 __ 打头的辅助函数
  */
 const toAssist = (reference, inherit = {}) => {
@@ -484,6 +503,7 @@ const toAssist = (reference, inherit = {}) => {
     _seekAssist(inherit, reference.state ? reference.state : {});
     return inherit;
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // 是否登录
     isLogged,

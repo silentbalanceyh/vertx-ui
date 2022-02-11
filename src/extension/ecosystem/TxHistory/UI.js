@@ -18,7 +18,8 @@ const componentInit = (reference) => {
     data.forEach(dataItem => {
         const each = {};
         each.key = dataItem.key;
-        if (dataItem.owner === dataItem['finishedBy']) {
+        each.serial = dataItem.serial;
+        if (dataItem.openBy === dataItem['finishedBy']) {
             // 提交申请类型
             if ("CANCELED" === dataItem.status) {
                 each.opType = "CANCELED";

@@ -67,6 +67,7 @@ import Ux from "ux";
 import Fn from "../functions";
 import {LoadingContent} from "web";
 import React from "react";
+import TRANS from './yo.transformer';
 
 const rxClose = (reference, item = {}, isAdd = true) => (data = {}, addOn = {}) => {
     const {options = {}} = reference.state;
@@ -416,7 +417,7 @@ const _seekContainer = (attrs = {}, control = {}, componentType) => {
  *
  * @memberOf module:_channel
  * @method yoAmbient
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} config 额外的配置数据
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
@@ -668,7 +669,7 @@ const yoAmbient = (reference = {}, config = {}) => {
  *
  * @memberOf module:_channel
  * @method yoDynamic
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
 const yoDynamic = (reference = {}) => {
@@ -766,7 +767,7 @@ const yoDynamic = (reference = {}) => {
  *
  * @memberOf module:_channel
  * @method yoPolymorphism
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} form
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
@@ -1017,7 +1018,7 @@ const yoControl = (control = {}) => {
  *
  * @memberOf module:_channel
  * @method yoList
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
 const yoList = (reference) => {
@@ -1092,7 +1093,7 @@ const yoList = (reference) => {
  *
  * @memberOf module:_channel
  * @method yoFilter
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Object} 计算最终生成的继承属性专用方法
  */
 const yoFilter = (reference) => {
@@ -1114,7 +1115,6 @@ const yoFilter = (reference) => {
     attrs.rxClose = Fn.rsVisible(reference, false);
     return attrs;
 }
-
 /**
  * ## 「通道」`Ex.yoForm`
  *
@@ -1204,7 +1204,7 @@ const yoFilter = (reference) => {
  *
  * @memberOf module:_channel
  * @method yoForm
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} additional 额外配置处理
  * @param {Object} data 数据记录相关信息
  * @returns {Object} 计算最终生成的继承属性专用方法
@@ -1279,21 +1279,34 @@ const yoForm = (reference, additional = {}, data = {}) => {
     const attrs = yoAmbient(reference);
     // 表单主配置
     attrs.config = Ux.clone(configuration);
-    {
-        attrs.$inited = Ux.clone(data);         /* Form 初始化数据 */
-        const {$addKey, $mode, $identifier} = reference.props;
-        if ($addKey) {
-            attrs.$addKey = $addKey;            /* 客户端提供主键 */
-        }
-        if ($mode) {
-            attrs.$mode = $mode;                /* 表单模式 */
-        }
-        if ($identifier) {
-            attrs.$identifier = $identifier;    /* 挂载 identifier 专用 */
-        }
-        const acl = Ux.aclData(data, reference, {});
-        Object.assign(attrs, acl);              /* 表单控制专用（将控制写入到 attrs 中 */
+    // transform 流程
+    const $inited = Ux.clone(data);
+    if(form.transform){
+        const transform = form.transform;
+        Object.keys(transform)
+            .filter(field => Ux.isObject(transform[field]))
+            .forEach(field => {
+                const {type, ...config} = transform[field];
+                if (Ux.isFunction(TRANS[type])) {
+                    const processed = TRANS[type]($inited, config);
+                    if (processed) $inited[field] = processed;
+                }
+            }
+        )
     }
+    const {$addKey, $mode, $identifier} = reference.props;
+    if ($addKey) {
+        attrs.$addKey = $addKey;            /* 客户端提供主键 */
+    }
+    if ($mode) {
+        attrs.$mode = $mode;                /* 表单模式 */
+    }
+    if ($identifier) {
+        attrs.$identifier = $identifier;    /* 挂载 identifier 专用 */
+    }
+    const acl = Ux.aclData($inited, reference, {});
+    Object.assign(attrs, acl);              /* 表单控制专用（将控制写入到 attrs 中 */
+    attrs.$inited = $inited;         /* Form 初始化数据 */
     return attrs;
 };
 const _yoForm = (additional = {}, reference) => {
@@ -1475,7 +1488,7 @@ const _yoForm = (additional = {}, reference) => {
  *
  * @memberOf module:_channel
  * @method yoAction
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {String} prefix 操作前缀
  * @param {Object} ordered 排序专用
  * @returns {Object} 计算最终生成的继承属性专用方法
@@ -1539,7 +1552,7 @@ const yoAction = (reference, prefix = "", ordered) => {
  *
  * @memberOf module:_channel
  * @method yoRender
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Function} fnJsx 执行jsx的Render
  * @param {Object} debug 调试信息
  * @returns {JSX.Element}
@@ -1663,9 +1676,12 @@ const yoTable = (reference) => {
     /*
      * $executor 函数专用（不能漏掉该函数）
      */
-    const {$executor} = reference.props;
+    const {$executor, $renders} = reference.props;
     if ($executor) {
-        inherit.$executor = $executor;
+        inherit.$executor = $executor;          // 操作按钮专用
+    }
+    if ($renders) {
+        inherit.$renders = $renders;            // 列渲染执行专用
     }
     /*
      * 是否 dirty
@@ -1693,7 +1709,7 @@ const yoTable = (reference) => {
  * 2. 如果打开了新的页签，旧页签是否处于禁用状态（防止不专注工作副总用）。
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {Array} items 每一个页签的配置，构成完整数组
  * @param {Number} index 当前页签的索引信息
  * @param {Object} item 每一个页签的配置信息
@@ -1768,7 +1784,7 @@ const yoTabPage = (reference, {
  *
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @param {Object} item 页签配置
  * @returns {Object} 传入添加子表单的属性集
  */
@@ -1863,7 +1879,7 @@ const yoFormAdd = (reference, item = {}) => {
  * > 编辑/删除两种操作在列表和表单中维持一致性。
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @param {Object} item 当前打开以前配置，页签`key`就是记录主键。
  * @returns {Object} 传入编辑子表单的属性集
  */
@@ -1964,7 +1980,7 @@ const yoFormEdit = (reference, item = {}) => {
  * * $filters：当前组件操作的条件（基础搜索和高级搜索）
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @returns {Object} 工具栏消费专用的属性集。
  */
 const yoListSearch = (reference) => {
@@ -2041,7 +2057,7 @@ const yoListSearch = (reference) => {
  * 针对`op.open.filter`执行查询条件清除按钮的禁用和启用提示，如果执行了列过滤，则启用该按钮，如果未执行，则不启用该按钮，根据`$condition`来。
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListOpen = (reference) => {
@@ -2122,7 +2138,7 @@ const yoListOpen = (reference) => {
  *
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListBatch = (reference) => {
@@ -2233,7 +2249,7 @@ const yoListBatch = (reference) => {
  * |op.extra.import|rxImport|导入数据专用按钮。|*
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
+ * @param {Object|ReactComponent} reference React组件引用，此处一般表示当前`ExListXXX`组件。
  * @returns {Object} button.config中保存了所有按钮信息
  */
 const yoListExtra = (reference) => {
@@ -2260,7 +2276,7 @@ const yoListExtra = (reference) => {
         editorRef.$columns = $columns;
         editorRef.$columnsMy = $columnsMy;
     });
-    editorRef.config = Ux.pluginSeeBatch(reference, editorRef.config);
+    editorRef.config = Ux.pluginKoBatch(reference, editorRef.config);
     if (editorRef.$myView) {
         /*
          * position 处理
@@ -2306,6 +2322,20 @@ const yoListExtra = (reference) => {
      */
     return Ux.sorterObject(editorRef);
 }
+const yoListGrid = (reference, config = {}) => {
+    const {options = {}} = reference.state;
+    const gridName = options[Fn.Opt.SEARCH_GRID];
+    if (gridName) {
+        return Ux.Env.GRID[gridName];
+    } else {
+        const {extra = []} = config;
+        if (0 === extra.length) {
+            return Ux.Env.GRID.LIST_NE;
+        } else {
+            return Ux.Env.GRID.LIST_E;
+        }
+    }
+}
 const yoDialog = (reference, dialog = {}) => {
     const {
         $visible = false,
@@ -2339,7 +2369,7 @@ export default {
      *
      * @memberOf module:_channel
      * @method yoComponent
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @param {Object} config 额外的配置数据
      * @returns {Object} 计算最终生成的继承属性专用方法
      */
@@ -2367,5 +2397,6 @@ export default {
     yoListOpen,         // 打开区域
     yoListBatch,        // 批量区域
     yoListExtra,        // 额外区域
+    yoListGrid,         // 区域计算
     yoDialog,           // 窗口专用修正方法
 }

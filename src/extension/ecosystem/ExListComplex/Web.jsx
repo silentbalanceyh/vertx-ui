@@ -7,53 +7,6 @@ import ExSearch from "../ExSearch/UI";
 import ExTable from "../ExTable/UI";
 import './Cab.less';
 
-const renderJsx = (reference, {
-    css: {
-        clsRow = Ux.Env.ECONOMY.ROW_HEAD
-    },
-    opens = {},  // Open区域
-    batch = {},  // Batch区域
-    search = {}, // Search区域
-    extra = {},  // Extra区域
-    table = {},  // Table专用
-}) => {
-    const exchange = {};
-    if (0 === extra.config.length) {
-        exchange.open = {span: 5, xl: 4, xxl: 2};
-        exchange.batch = {span: 11, xl: 12, xxl: 14}
-        exchange.search = {span: 8, xl: 8, xxl: 8, className: "ex-extra"};
-        exchange.extra = {span: 0, xl: 0, xxl: 0};
-    } else {
-        exchange.open = {span: 5, xl: 4, xxl: 2};
-        exchange.batch = {span: 7, xl: 8, xxl: 11}
-        exchange.search = {span: 8, xl: 8, xxl: 8};
-        exchange.extra = {span: 4, xl: 4, xxl: 3, className: "ex-extra"};
-    }
-    return (
-        <Row>
-            <Row className={clsRow}>
-                <Col {...exchange.open} className={"ex-open"}>
-                    {0 < opens.config.length ? (<ExAction {...opens}/>) : false}
-                </Col>
-                <Col {...exchange.batch}>
-                    {0 < batch.config.length ? (<ExAction {...batch}/>) : false}
-                </Col>
-                <Col {...exchange.search}>
-                    {!Ux.isEmpty(search) ? (<ExSearch {...search}/>) : false}
-                </Col>
-                <Col {...exchange.extra}>
-                    {0 < extra.config.length ? (<ExAction {...extra} // 只有 Extra 部分会调用 rxViewMy 函数
-                                                          rxViewMy={($myView) => reference.setState({$myView})}/>) : false}
-                </Col>
-            </Row>
-            <Row>
-                <Col span={24}>
-                    <ExTable {...table}/>
-                </Col>
-            </Row>
-        </Row>
-    )
-}
 const PageList = (reference, item = {}) => {
     const {
         css = {}
@@ -78,14 +31,34 @@ const PageList = (reference, item = {}) => {
     /*
      * 处理 plugins
      */
-    return renderJsx(reference, {
-        css,
-        opens,
-        batch,
-        table,
-        search,
-        extra,
+    const exchange = Ex.yoListGrid(reference, {
+        extra, opens, batch, search
     });
+    const {clsRow = Ux.Env.ECONOMY.ROW_HEAD} = css;
+    return (
+        <div>
+            <Row className={clsRow}>
+                <Col {...exchange.open} className={"ex-open"}>
+                    {0 < opens.config.length ? (<ExAction {...opens}/>) : false}
+                </Col>
+                <Col {...exchange.batch}>
+                    {0 < batch.config.length ? (<ExAction {...batch}/>) : false}
+                </Col>
+                <Col {...exchange.search}>
+                    {!Ux.isEmpty(search) ? (<ExSearch {...search}/>) : false}
+                </Col>
+                <Col {...exchange.extra}>
+                    {0 < extra.config.length ? (<ExAction {...extra} // 只有 Extra 部分会调用 rxViewMy 函数
+                                                          rxViewMy={($myView) => reference.setState({$myView})}/>) : false}
+                </Col>
+            </Row>
+            <Row>
+                <Col span={24}>
+                    <ExTable {...table}/>
+                </Col>
+            </Row>
+        </div>
+    )
 }
 const exported = {};
 exported[Ex.Mode.LIST] = PageList;

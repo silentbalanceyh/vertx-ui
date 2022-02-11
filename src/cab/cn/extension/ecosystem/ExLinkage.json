@@ -1,0 +1,14 @@
+{
+    "_window": ",选择,关闭,false,1280,true,$opSelected",
+    "_action": {
+        "add": {
+            "icon": "link",
+            "type": "primary"
+        },
+        "remove": {
+            "icon": "delete",
+            "className": "ux-red",
+            "text": "取消关联"
+        }
+    }
+}

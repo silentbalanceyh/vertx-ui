@@ -12,9 +12,19 @@ const jsxMoment = (reference, value, config = {}) => {
     return jsxLabel(reference, formatted, config);
 };
 const jsxItems = (reference, value, config = {}) => {
-    let item = Ux.elementUnique(config.items, "key", value);
+    /*
+     * 除了 value = key，可支持 value = code 模式
+     */
+    let keyField = "key";
+    if ("string" === typeof config.datum) {
+        const datum = Ux.Ant.toParsed(config.datum);
+        if (datum.value) {
+            keyField = datum.value;
+        }
+    }
+    let item = Ux.elementUnique(config.items, keyField, value);
     if (!item) {
-        item = Ux.elementUnique(config.items, "key", String(value));
+        item = Ux.elementUnique(config.items, keyField, String(value));
     }
     if (item) {
         const label = item.label;
@@ -37,6 +47,10 @@ const jsxItems = (reference, value, config = {}) => {
         return false;
     } else return false;
 };
+const jsxDatum = (reference, value, config = {}) => {
+    const options = Ux.Ant.toOptions(reference, config);
+    return jsxItems(reference, value, options);
+}
 const jsxRecord = (reference, value, config = {}) => {
     const {rxRecord = data => data} = config;
     const normalized = rxRecord(value);
@@ -125,6 +139,7 @@ export default {
     jsxMoment,
     jsxLabel,
     jsxItems,
+    jsxDatum,
     jsxRecord,
     jsxUser,
     jsxTable

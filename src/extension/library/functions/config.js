@@ -224,7 +224,7 @@ const configGrid = (grid = [], control = {}, prefix) => {
  * @memberOf module:_kernel
  * @param {Object} data 基本数据信息
  * @param {Object} config 关系完整配置
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Object} 最终的关系配置数据信息
  */
 const configRelation = (data = {}, config = {}, reference) => {
@@ -323,7 +323,7 @@ const configRelation = (data = {}, config = {}, reference) => {
  *
  * @memberOf module:_kernel
  * @param {Object} config 按钮完整配置
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Function} 返回需要绑定的执行函数
  */
 const configClick = (config = {}, reference) => {

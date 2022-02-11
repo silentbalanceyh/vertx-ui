@@ -414,6 +414,44 @@ const _aiSum = (config = {}, record = {}) => {
     });
     return sum;
 }
+
+const LAZY_COLUMN = (reference, column) => {
+    let attrs = Cmn.normalizeInit(column, ["$empty"]);                              // -1. 风格可静态化
+    const {$config = {}} = column;                                                       // -2. 配置处理
+    return (text, record) => {
+        attrs = Abs.clone(attrs);
+        const {$lazy = {}} = reference.state ? reference.state : {};                     // 设置 icon Style
+        const columnValue = $lazy[column.dataIndex];
+        let children;
+        if (columnValue) {
+            children = columnValue[text];
+            if (!children) {
+                children = columnValue['undefined']
+            }
+        }
+        const {icon} = $config;
+        const iconAttrs = {};
+        if (icon || !$config.hasOwnProperty("icon")) {
+            if (text) {
+                const segments = icon ? icon.split(',') : [];
+                iconAttrs.icon = segments[0] ? segments[0] : "user";
+                iconAttrs.iconStyle = {
+                    color: segments[1] ? segments[1] : "#CD2990",
+                    fontSize: 16
+                }
+            } else {
+                const segments = icon ? icon.split(',') : [];
+                iconAttrs.icon = segments[0] ? segments[0] : "setting";
+                iconAttrs.iconStyle = {
+                    color: segments[1] ? segments[1] : "#7D7D7D",
+                    fontSize: 16
+                }
+            }
+        }
+        delete attrs['$empty'];
+        return Cmn.jsxIcon(attrs, children, iconAttrs);
+    }
+};
 const RENDERS = {
     // field = 属性信息，对应 dataIndex，title = 标题信息，对应 title
     /*
@@ -967,7 +1005,7 @@ const RENDERS = {
         const {$option = []} = column;
         const options = [];
         // 「显示 / 隐藏」过滤 $plugins.koRow
-        T.pluginSeeOp(reference, record, $option).forEach((item, index) => {
+        T.pluginKoRow(reference, record, $option).forEach((item, index) => {
             // 「启用 / 禁用」过滤 ￥plugins.pluginRow（和表单会绑定，ACL操作）
             const calculated = T.pluginOp(reference, record);
             const rowKey = `${text}-${index}`;                                          // 行专用的 key
@@ -1298,43 +1336,8 @@ const RENDERS = {
      * - 「o」支持 $expr
      * - 「o」支持 $empty
      */
-    USER: (reference, column) => {
-        let attrs = Cmn.normalizeInit(column, ["$empty"]);                              // -1. 风格可静态化
-        const {$config = {}} = column;                                                       // -2. 配置处理
-        return (text, record) => {
-            attrs = Abs.clone(attrs);
-            const {$lazy = {}} = reference.state ? reference.state : {};                     // 设置 icon Style
-            const columnValue = $lazy[column.dataIndex];
-            let children;
-            if (columnValue) {
-                children = columnValue[text];
-                if (!children) {
-                    children = columnValue['undefined']
-                }
-            }
-            const {icon} = $config;
-            const iconAttrs = {};
-            if (icon || !$config.hasOwnProperty("icon")) {
-                if (text) {
-                    const segments = icon ? icon.split(',') : [];
-                    iconAttrs.icon = segments[0] ? segments[0] : "user";
-                    iconAttrs.iconStyle = {
-                        color: segments[1] ? segments[1] : "#CD2990",
-                        fontSize: 16
-                    }
-                } else {
-                    const segments = icon ? icon.split(',') : [];
-                    iconAttrs.icon = segments[0] ? segments[0] : "setting";
-                    iconAttrs.iconStyle = {
-                        color: segments[1] ? segments[1] : "#7D7D7D",
-                        fontSize: 16
-                    }
-                }
-            }
-            delete attrs['$empty'];
-            return Cmn.jsxIcon(attrs, children, iconAttrs);
-        }
-    },
+    USER: LAZY_COLUMN,  // 旧版
+    LAZY: LAZY_COLUMN,  // 新版
     /*
      * 列配置
      * {
@@ -1415,6 +1418,7 @@ const RENDERS = {
                     })
                 }
                 inherit.data = data;
+                inherit.config = config;
                 if (Abs.isFunction(Component)) {
                     return Component(inherit);
                 } else {
@@ -1422,6 +1426,7 @@ const RENDERS = {
                 }
             }
         } else {
+            console.warn("没有找到对应的 $renders, column =", column.dataIndex)
             return TEXT(reference, column);
         }
     },

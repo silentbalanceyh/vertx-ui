@@ -12,14 +12,22 @@ import './xweb.less';
 import E from "./error";
 // --------------------- Ajax 部分 -----------------------------------
 
-
+const xtLazyState = (reference, state = {}) => {
+    const ref = Eng.onReference(reference, 1);
+    if (ref) {
+        T.toAssist(ref, state);
+    }
+    if (Abs.isNotEmpty(state)) {
+        reference.setState(state);
+    }
+}
 /**
  * ## 「标准」`Ux.xtLazyInit`
  *
  * 延迟初始化，统一处理，在 `componentDidMount` 中调用。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  */
 const xtLazyInit = (reference) => {
     const {
@@ -28,19 +36,22 @@ const xtLazyInit = (reference) => {
         value               // Ant Form对应的当前数据
     } = reference.props;
     const ref = Eng.onReference(reference, 1);
+
+    const {linker = {}, intern = false} = config;
+    if (intern) {
+        xtLazyState(reference, {})
+        return;
+    }
+    // ----------------------- 检查 -------------------------
+    /* 值检查流程，是否触发核心流程 */
     const values = Eng.onLinker(config, (fields) => T.formGet(ref, fields));
-    const {linker = {}} = config;
-
-
-    /* 值检查流程 */
-    if (
-        Abs.isEmpty(values) ||                          // 1. values = {} 则直接中断，无法执行初始化加载流程
-        (undefined !== value && values[linker.key])     // 2. value有值并且主键也有值
-    ) {
+    if (Abs.isEmpty(values) ||                          // 1. values = {} 则直接中断，无法执行初始化加载流程
+        (undefined !== value && values[linker.key])) {    // 2. value有值并且主键也有值
+        xtLazyState(reference, {})
         return;
     }
 
-
+    // ----------------------- 主流程 -------------------------
     /* 包含值，执行 loading 操作，参数构造 */
     const params = xtLazyAjax(ref, config);
     let request;
@@ -65,6 +76,7 @@ const xtLazyInit = (reference) => {
             // 0 初始化
             const $keySet = T.formGet(ref);
             if (Abs.isEmpty($keySet) || !!$keySet) {
+                xtLazyState(reference, {})
                 return;                                 // 直接中断
             }
             const initialValue = {};
@@ -74,7 +86,7 @@ const xtLazyInit = (reference) => {
                 .forEach(to => initialValue[to] = $keySet[to]);
             const state = {initialValue, $keySet}
             Dev.dgDebug(state, "[ xtLazyUnique ] 0 初始化", "#B8860B");
-            reference.setState(state);
+            xtLazyState(reference, state);
         } else if (1 === source.length) {
             // 1 初始化
             const $keySet = source[0] ? source[0] : {};
@@ -83,7 +95,7 @@ const xtLazyInit = (reference) => {
             if (initialValue.hasOwnProperty(id)) {
                 const state = {initialValue, $keySet}
                 Dev.dgDebug(state, "[ xtLazyUnique ] 1 初始化", "#B8860B");
-                reference.setState(state);
+                xtLazyState(reference, state);
                 T.formHits(ref, initialValue);
             } else {
                 Dev.dgDebug($keySet, `${id} 字段并没配置在 linker 中，请检查：`, "#B8860B");
@@ -92,6 +104,7 @@ const xtLazyInit = (reference) => {
             // N 初始化
             const $keySet = T.formGet(ref);
             if (Abs.isEmpty($keySet) || !!$keySet) {
+                xtLazyState(reference, {})
                 return;                                 // 直接中断
             }
 
@@ -109,6 +122,7 @@ const xtLazyInit = (reference) => {
             })
             const found = Ele.elementFind(source, filterValues, true);
             if (0 === found.length) {
+                xtLazyState(reference, {})
                 return;                                 // 直接中断
             }
 
@@ -139,7 +153,7 @@ const xtLazyInit = (reference) => {
             if (initialValue.hasOwnProperty(id)) {
                 const state = {initialValue, $keySet};
                 Dev.dgDebug(state, "[ xtLazyUnique ] N 初始化", "#B8860B");
-                reference.setState(state);
+                xtLazyState(reference, state);
                 T.formHits(ref, initialValue);
             } else {
                 Dev.dgDebug($keySet, `（多）${id} 字段并没配置在 linker 中，请检查：`, "#B8860B");
@@ -154,7 +168,7 @@ const xtLazyInit = (reference) => {
  * 延迟初始化，统一处理，在 `componentDidUpdate` 中调用。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} virtualRef 包含了`props`和`state`的前一个状态的引用。
  */
 const xtLazyUp = (reference, virtualRef) => {
@@ -165,12 +179,17 @@ const xtLazyUp = (reference, virtualRef) => {
         id,                 // 当前字段名称
         config = {},        // 配置节点
     } = reference.props;
+
+    const {intern = false} = config;
+    if (intern) {
+        return;
+    }
+
     const ref = Eng.onReference(reference, 1);
     const {form} = ref.props;
     if (form) {
         const isTouched = form.isFieldsTouched();
         const valueInit = initialValue[id];
-
 
         /*
          * 「清空操作」
@@ -230,7 +249,7 @@ const xtLazyUp = (reference, virtualRef) => {
  *
  * @memberOf module:_xweb
  * @method xtLazyAjax
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} config Ajax配置专用配置信息。
  * @return {Object} 返回参数信息。
  */
@@ -310,7 +329,7 @@ const xtLazyAjax = (reference, config = {}) => {
  *
  * @memberOf module:_xweb
  * @param {Set|Array} $keySet 已经选择的主键集合
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @returns {Array} 返回最终选择键值集合
  */
 const xtChecked = ($keySet, reference) => {
@@ -350,7 +369,7 @@ const xtChecked = ($keySet, reference) => {
  * 2. 再触发上层的`onChange`方法，自定义组件中的上层方法会直接被Ant Design注入。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件应用
+ * @param {Object|ReactComponent} reference React组件应用
  * @param {String} rowKey 行记录主键
  * @param {String} field 被操作的字段
  * @returns {Function} 返回事件函数
@@ -416,7 +435,7 @@ const _jsxError = (message) => (
  * 检查系统状态内部是否存在`error`节点，如果存在`error`节点，则直接渲染错误信息，配置出错的统一调用流程。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Function} render 执行 render 的函数。
  * @return {Jsx|boolean} 直接渲染。
  */
@@ -453,7 +472,7 @@ const xtRender = (reference, render) => {
  * 2. 准备没有完成时，则不渲染。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Function} render 执行 render 的函数。
  * @param {Object} LOG 日志配置。
  * @return {JSX.Element} 直接渲染。
@@ -508,7 +527,7 @@ const isDiff = (left, right) => {
  *
  * @memberOf module:_xweb
  * @method xtReset
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} virtualRef 带有state和props的前一次状态信息。
  * @param {Function} callback 回调函数处理。
  */
@@ -589,7 +608,7 @@ const _xtRevert = (reference, callback = {}) => {
  * 自定义组件的新重置处理，用于设置表单的重置相关信息
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} virtualRef 带有state和props的前一次状态信息。
  * @param {Function} callback 回调函数处理。
  */
@@ -624,7 +643,7 @@ const xtRevert = (reference, virtualRef, callback = {}) => {
  * 但在自定义组件中，该函数依然会控制内部状态变更，所以依旧采用该方法。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Props} nextProps 下一个属性。
  */
 const xtUnsafe = (reference, nextProps = {}) => {
@@ -675,7 +694,7 @@ const xtValue = (reference, consumer) => {
  * 广义读取当前组件消费的数据信息，外层表单中会用props.value传入设置的值。
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} field 读取字段的数据（只适用于OBJECT类型）。
  * @return {Object} 返回最终状态信息。
  */
@@ -701,7 +720,7 @@ const xtGet = (reference, field = undefined) => {
  * （略）
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Array} name 读取字段的数据（只适用于OBJECT类型）。
  * @param {any} value 设置的任何值。
  * @return {Object} 返回最终状态信息。
@@ -964,7 +983,7 @@ const xtFormat = (internal = [], format) => {
  * 表格中的添加行函数（二维表结构）
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {Object} record 记录专用数据
  * @param {Number} index 记录索引
  * @returns {Function} 行添加事件函数
@@ -985,7 +1004,7 @@ const xtRowAdd = (reference, record, index) => (event) => {
  * 表格中的删除行函数（二维表结构）
  *
  * @memberOf module:_xweb
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {Object} record 记录专用数据
  * @param {Number} index 记录索引
  * @returns {Function} 行删除事件函数

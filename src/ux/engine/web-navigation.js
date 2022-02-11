@@ -147,7 +147,7 @@ const aiLinkMore = (config = {}, reference) => {
         )
     } else return false;
 };
-const aiLinkBack = (reference) => {
+const aiLinkBack = (reference, attrs = {}) => {
     return (
         <Button shape={"circle"} className={"ux-red"} icon={"close"}
                 onClick={event => {

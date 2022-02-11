@@ -38,9 +38,9 @@ class DataRouter implements BindContainer {
         this.match = match;
     }
 
-    to(uri: string): void {
+    to(uri: string, bg: any = {}): void {
         if (uri) {
-            this.history.push(uri);
+            this.history.push(uri, bg);
         } else {
             console.warn(
                 "[TS-VI] Please provide correct uri for DataRouter. uri = " +
@@ -131,6 +131,11 @@ class DataRouter implements BindContainer {
             if (pathParams.hasOwnProperty(key)) {
                 params[key] = pathParams[key];
             }
+        }
+        // 内部参数读取
+        const internal = this.location.state;
+        if (internal) {
+            Object.keys(internal).forEach(iKey => params[iKey] = internal[iKey]);
         }
         return params;
     }

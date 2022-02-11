@@ -259,7 +259,7 @@ const Pr = {
  * @memberOf module:_parser
  * @method parseValue
  * @param {String} valueOrExpr 值处理专用表达式。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @return {any} 解析过后的值信息。
  */
 const parseValue = (valueOrExpr, reference) => {

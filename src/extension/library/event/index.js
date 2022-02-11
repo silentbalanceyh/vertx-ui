@@ -244,7 +244,7 @@ const fabricBehavior = (reference) => (fabricResult = []) => {
  * @memberOf module:_event
  * @method etPure
  * @async
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array} fabric 处理 fabric 数组配置。
  * @returns {Promise<T>} 返回执行的 Promise
  */
@@ -281,7 +281,7 @@ const etPure = (reference, fabric = []) => {
  * @memberOf module:_event
  * @method etParallel
  * @async
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} event 并行事件配置
  * @returns {Promise<T>} 返回最终的 Promise
  */
@@ -331,7 +331,7 @@ const etParallel = (reference, event = {}) => {
  * @memberOf module:_event
  * @method etSequence
  * @async
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array} event 事件队列
  * @returns {Promise<T>} 返回最终的 Promise
  */
@@ -376,7 +376,7 @@ const etSequence = (reference, event = []) => {
  * @memberOf module:_event
  * @method etUniform
  * @async
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array|Object} event 根据事件传入数据结构判断哪一种执行方式。
  * @returns {Promise<T>} 返回执行的 Promise
  */
@@ -460,7 +460,7 @@ const etUniform = (reference, event = {}) => {
  *
  * @memberOf module:_rx
  * @method rxChannel
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Function} 返回 $fabric 专用函数。
  */
 const rxChannel = (reference) => (state = {}) => {

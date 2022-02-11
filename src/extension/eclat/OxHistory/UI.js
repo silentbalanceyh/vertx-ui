@@ -94,7 +94,7 @@ const yiTimePage = (reference, state = {}) => {
          */
         const params = {identifier: $identifier, key: $inited.key};
         return Ux.parallel([
-            Ux.ajaxGet("/api/ox/columns/:module/full", {module: $identifier})
+            Ux.ajaxGet(`/api/${Ux.Env.ROUTE}/columns/:module/full`, {module: $identifier})
                 .then(columns => {
                     const auditor = Ux.fromHoc(reference, "auditor");
                     let merged = Ux.clone(columns);
@@ -114,14 +114,9 @@ const yiTimePage = (reference, state = {}) => {
                 state.$data = $data;
             }
             /*
-             * 添加 lazy 流程
-             */
-            const lazyColumn = state.$table.columns
-                .filter(item => "USER" === item['$render']);
-            /*
              * 统计属性数量
              */
-            return Ux.ajaxEager(reference, lazyColumn, state.$data)
+            return Ux.ajaxEager(reference, state.$table.columns, state.$data)
                 .then($lazy => Ux.promise(state, "$lazy", $lazy));
         });
     } else {

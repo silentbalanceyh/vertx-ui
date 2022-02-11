@@ -85,15 +85,13 @@ const onUniform = (props, ...keys) => {
         ...common
     };
 };
-
-
 /**
  * ## 「引擎」`Ux.fromHoc`
  *
  * 资源文件数据读取专用方法，从 $hoc 中读取主键值相关信息。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 读取对应属性名。
  * @return {null}
  */
@@ -112,7 +110,7 @@ const fromHoc = (reference = {}, key = "") => {
  * 资源文件数据读取专用方法，从 $hoc 中读取主键值相关信息，可以处理深度路径信息。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String[]} args 读取属性名核心路径。
  * @return {null}
  */
@@ -188,7 +186,7 @@ const fromDatum = (reference, key) => {
  * 根据所需信息读取上述三大类的辅助数据，得到最终的 Array 类型的数组结果。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 需要读取的 Tabular/Assist 的键值。
  * @return {Array} 返回最终的数组。
  */
@@ -219,9 +217,9 @@ const onDatum = (reference, key) => {
  * ```
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Number} current 处理层级信息。
- * @return {ReactComponent} 返回组件引用。
+ * @return {Object|ReactComponent} 返回组件引用。
  */
 const onReference = (reference, current = 0) => {
     let ref = reference;
@@ -246,7 +244,7 @@ const onReference = (reference, current = 0) => {
  * 2. 查询请求参数，路由中的`/ox/person?a=x&b=y`中的`a、b`参数。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 读取参数的参数名。
  * @return {*}
  */
@@ -294,7 +292,7 @@ const onLinker = (config = {}, valueSupplier) => {
  * 2. 数组删除。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 需要读取的 Tabular/Assist 的键值。
  * @param {Object} data 数据处理信息，包含了数据记录集。
  * @param {boolean} isDeleted 删除还是合并。
@@ -318,7 +316,7 @@ const onSave = (reference, key, data, isDeleted = false) => {
  * ## 「标准」`Ux.assistIn`
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {String} key 需要读取的 Assist 的键值。
  * @param {Object} data 需要执行数据处理的信息
  */
@@ -333,7 +331,7 @@ const assistIn = (reference, key, data) => {
 /**
  * ## 「标准」`Ux.assistOut`
  *
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {String} key 需要读取的 Assist 的键值。
  * @param {Object} data 需要执行数据处理的信息
  */
@@ -364,7 +362,7 @@ export default {
      * 带辅助数据的强化版`elementFind`方法。
      *
      * @memberOf module:_element
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {String} source 需要读取的 Tabular/Assist 的键值。
      * @param {Object} filters 查询条件。
      * @return {Array} 返回查找的数组。
@@ -377,7 +375,7 @@ export default {
      * 带辅助数据的强化版`elementUnique`方法。
      *
      * @memberOf module:_element
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {String} source 需要读取的 Tabular/Assist 的键值。
      * @param {String} field 查询专用字段。
      * @param {any} value 查询字段对应的值。
@@ -391,7 +389,7 @@ export default {
      * 带辅助数据的强化班`elementGroup`方法。
      *
      * @memberOf module:_element
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {String} source 需要读取的 Tabular/Assist 的键值。
      * @param {String} field 分组专用的字段名。
      * @return {Object} 分组过后的数据。
@@ -404,7 +402,7 @@ export default {
      * 带辅助数据的强化班`elementMap`方法。
      *
      * @memberOf module:_element
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {String} source 需要读取的 Tabular/Assist 的键值。
      * @param {String} from 构造Map键。
      * @param {String} to 构造Map值。

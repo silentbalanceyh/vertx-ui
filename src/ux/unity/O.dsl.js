@@ -14,7 +14,7 @@ import {Dsl} from 'entity';
  * ```
  *
  * @memberOf module:_unity
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {String} key 写内容所需的 key
  * @param {Array} data 合并到 reference state 中的数据本身
  * @param {Object} config 配置数据

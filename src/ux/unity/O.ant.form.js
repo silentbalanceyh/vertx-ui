@@ -14,7 +14,7 @@ import Eng from '../engine';
  * Ant Design中的Form表单执行值设置，直接使用values执行设置，values中如果有undefined则清空该字段。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {Object} values 设置Form表单中的字段值
  */
 const formHits = (reference, values = {}) => {
@@ -38,7 +38,7 @@ const formHits = (reference, values = {}) => {
  *
  * @memberOf module:_ui
  * @async
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {boolean} redux 是否执行 redux 提交。
  * @return {Promise<T>} 返回最终的表单提交数据值。
  */
@@ -120,7 +120,7 @@ const valueRequest = (params = {}) => {
  * Ant Design中的表单清空专用方法，用于清空当前 Ant Design表单。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {Object} data 需要清空的对象值。
  * @return {Object} 处理被清空的所有方法。
  */
@@ -146,7 +146,7 @@ const formClear = (reference, data) => {
  * 2. 如果不包含`$record`变量，则直接用 form 的 `getFieldsValue` 读取当前表单值来填充 data 变量。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {Object} data 需要填充的对象值。
  * @return {Object} 返回最终填充的结果。
  */
@@ -176,7 +176,7 @@ const formRead = (reference, data = {}) => {
  * 3. 如果什么都没传入，则直接返回所有表单值。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {String|Array} key 字段名称，有可能是字段集合。
  * @return {Object|any} 返回读取的字段值。
  */
@@ -203,7 +203,7 @@ const formGet = (reference, key = undefined) => {
  * 重设表单值专用方法。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {String|Array} keys 字段名称，有可能是字段集合。
  * @param {Object} response 响应最终信息数据。
  */
@@ -235,7 +235,7 @@ const formReset = (reference, keys = [], response = {}) => {
  * `formGet`是增强版的表单读取方法，不仅仅可以读单字段的值，还可以读一个子对象（Object）。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {String} key 字段名称。
  * @param {any} value 字段值
  * @return {any} 只有在 value 不传入时使用该值。

@@ -17,7 +17,7 @@ import Abs from '../abyss';
  *
  * @memberOf module:_plugin
  * @param {Object} record 数据记录信息。
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @return {Object} 返回状态信息。
  */
 const pluginMetadata = (record = {}, reference) => {
@@ -70,7 +70,7 @@ const pluginFn = (reference, name = "", record = {}) => {
  * > 不触发流程时直接为true（可编辑）。
  *
  * @memberOf module:_plugin
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @return {boolean} 返回当前表单是否可编辑的直接状态。
  */
 const pluginEdition = (reference) => {
@@ -102,7 +102,7 @@ const pluginEdition = (reference) => {
  * * deletion：可删除。
  *
  * @memberOf module:_plugin
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @return {{}|boolean} 返回当前字段的状态信息。
  */
 const pluginField = (reference) => {
@@ -127,7 +127,7 @@ const pluginField = (reference) => {
  * 计算表格中多选框的状态信息，只有可编辑可删除不禁用，否则禁用多选框。
  *
  * @memberOf module:_plugin
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} record 数据记录对象。
  * @return {Object} 计算当前记录状态。
  */
@@ -166,7 +166,7 @@ const pluginSelection = (reference, record = {}) => {
  * 2. 可删除，则显示"删除"按钮。
  *
  * @memberOf module:_plugin
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} record 数据记录对象。
  * @return {Object} 状态。
  */
@@ -188,7 +188,7 @@ const pluginOp = (reference, record = {}) => {
  * ```
  *
  * @memberOf module:_plugin
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @return {boolean|{}} 返回当前表单的状态信息（可编辑、只读、部分只读）。
  */
 const pluginForm = (reference) => {
@@ -206,7 +206,7 @@ const pluginForm = (reference) => {
     }
 };
 
-const pluginSeeFn = (reference, record, actions = [], name) => {
+const pluginKoFn = (reference, record, actions = [], name) => {
     const {$plugins = {}} = reference.props;
     let fnFilter = () => true;
     if (Abs.isFunction($plugins[name])) {
@@ -216,20 +216,21 @@ const pluginSeeFn = (reference, record, actions = [], name) => {
         .filter(item => "string" !== typeof item)
         .filter(fnFilter);
 }
-const pluginSeeOp = (reference, record, actions = []) =>
-    pluginSeeFn(reference, record, actions, "koRow")
-const pluginSeeAdd = (reference, record, actions = []) =>
-    pluginSeeFn(reference, record, actions, "koAdd")
-const pluginSeeEdit = (reference, record, actions = []) =>
-    pluginSeeFn(reference, record, actions, "koEdit")
-const pluginSeeBatch = (reference, actions = []) =>
-    pluginSeeFn(reference, {}, actions, "koBatch")
+const pluginKoRow = (reference, record, actions = []) =>
+    pluginKoFn(reference, record, actions, "koRow")
+const pluginKoAdd = (reference, record, actions = []) =>
+    pluginKoFn(reference, record, actions, "koAdd")
+const pluginKoEdit = (reference, record, actions = []) =>
+    pluginKoFn(reference, record, actions, "koEdit")
+const pluginKoBatch = (reference, actions = []) =>
+    pluginKoFn(reference, {}, actions, "koBatch")
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // ----------------------- 「启用/禁用」--------------------------
-    pluginSeeOp,
-    pluginSeeAdd,
-    pluginSeeEdit,
-    pluginSeeBatch,
+    pluginKoRow,
+    pluginKoAdd,
+    pluginKoEdit,
+    pluginKoBatch,
     // ----------------------- 「启用/禁用」--------------------------
     /*
      * 「表格行选择项」（启用/禁用）
@@ -238,6 +239,7 @@ export default {
      * 1. 启用
      * 2. 禁用
      * 该方法不处理显示/隐藏等问题。
+     * 内置包含了 koSelection（启用/禁用）
      *
      * 属性集中的函数处理
      * 1）props属性插件：$plugins.pluginRow

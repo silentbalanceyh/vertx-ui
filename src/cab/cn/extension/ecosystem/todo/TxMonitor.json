@@ -1,7 +1,0 @@
-{
-    "_tabs": {
-        "defaultActiveKey": "$bpmn",
-        "type": "card",
-        "items": "流程图,$bpmn;操作历史,$history"
-    }
-}

@@ -63,13 +63,14 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {$offset = 3, $canvas = {}} = this.props;
-        const $span = 24 - $offset;
-        const {height = 200} = $canvas;
+        const {$canvas = {}} = this.props;
+        const {height = 200, offset = 4} = $canvas;
+        const span = 24 - offset;
+        Ux.dgDebug($canvas, "BPMN图大小", "#0094d1")
         return (
             <div className={"ex-bpmn"}>
                 <Row>
-                    <Col span={$span} offset={$offset}>
+                    <Col span={span} offset={offset}>
                         <div ref={"bpmnContainer"} style={{
                             height
                         }} id={"bpmnContainer"}/>

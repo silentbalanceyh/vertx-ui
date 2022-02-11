@@ -35,8 +35,7 @@ const renderFile = (reference) => {
                         return (
                             <Button disabled={meta.disabled}>
                                 <Icon type={"upload"}/>
-                                {text ?
-                                    <span className={"ant-upload-text"}>{text}</span> : false}
+                                {text ? <span className={"ant-upload-text"}>{text}</span> : false}
                             </Button>
                         )
                     }

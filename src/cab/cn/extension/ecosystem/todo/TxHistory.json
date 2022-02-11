@@ -4,12 +4,16 @@
             {
                 "metadata": "opType,操作类型,MAPPING",
                 "$mapping": {
-                    "REQUESTED": "申请,edit,,#8FBC8F",
+                    "REQUESTED": "已申请,edit,,#8FBC8F",
                     "FINISHED": "已完成,check-circle,,#698B69",
                     "REJECTED": "被拒绝,redo,,#CD1076",
                     "CANCELED": "已撤销,stop,,#CD1076"
                 },
                 "width": 100
+            },
+            {
+                "metadata": "serial,任务号",
+                "width": 220
             },
             {
                 "metadata": "opBy,操作人,USER",

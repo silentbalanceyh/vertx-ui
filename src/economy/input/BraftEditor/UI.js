@@ -2,6 +2,7 @@ import React from 'react';
 import 'braft-editor/dist/index.css';
 import './Cab.less';
 import BraftEditor from 'braft-editor';
+import renderHTML from 'react-render-html';
 import {Input} from 'antd';
 import Ux from "ux";
 
@@ -67,6 +68,22 @@ const componentCt = (props) => {
         config
     };
 }
+const componentCss = (config = {}) => {
+    const {height} = config;
+    const style = {};
+    if (height) {
+        style.maxHeight = height;
+    } else {
+        style.maxHeight = 180;
+    }
+    const cssAttrs = {};
+    cssAttrs.style = style;
+    cssAttrs.contentStyle = {
+        maxHeight: style.maxHeight - 50,
+        fontSize: 14,
+    }
+    return cssAttrs;
+}
 const componentUp = (reference) => {
     const {content} = reference.state;
     const previous = content.toHTML();
@@ -92,27 +109,34 @@ class Component extends React.PureComponent {
 
     render() {
         const {config = {}, content} = this.state;
-        const {height} = config;
-        const style = {};
-        if (height) {
-            style.height = height;
+        const cssStyle = componentCss(config);
+        const {readOnly = false} = this.props;
+        if (readOnly) {
+            return (
+                <Input.Group className={"web-braft-viewer"}>
+                    <div style={cssStyle}>
+                        {renderHTML(content.toHTML())}
+                    </div>
+                </Input.Group>
+            )
         } else {
-            style.height = 240;
+            return (
+                <Input.Group className={"web-braft-editor"}>
+                    <BraftEditor {...config}
+                                 {...cssStyle}
+                                 readOnly={readOnly}
+                                 value={content}
+                                 onChange={(editorState) => {
+                                     if (editorState) {
+                                         this.setState({content: editorState});
+                                         // 调用Ant中的OnChange
+                                         Ux.fn(this).onChange(editorState.toHTML())
+                                         // Ux.xtChange(reference, editorState.toHTML(), true);
+                                     }
+                                 }}/>
+                </Input.Group>
+            );
         }
-        return (
-            <Input.Group className={"web-braft-editor"}>
-                <BraftEditor {...config}
-                             style={style}
-                             value={content}
-                             onChange={(editorState) => {
-                                 if (editorState) {
-                                     this.setState({content: editorState});
-                                     // 调用Ant中的OnChange
-                                     // Ux.xtChange(reference, editorState.toHTML(), true);
-                                 }
-                             }}/>
-            </Input.Group>
-        );
     }
 }
 

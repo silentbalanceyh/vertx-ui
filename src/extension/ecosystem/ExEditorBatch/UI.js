@@ -1,10 +1,23 @@
 import React from 'react';
 import Ex from 'ex';
-import Jsx from './Web';
 import Ux from "ux";
 import Op from "./Op";
-import Rdr from './Web.R';
+import Rdr from './Web';
+import {Select, Table} from "antd";
 
+const renderField = (reference, {
+    select = {},
+    options = []
+}) => (
+    <Select {...select}>
+        {options.map(option => (
+            <Select.Option key={option.key}
+                           value={option.value}>
+                {option.label}
+            </Select.Option>
+        ))}
+    </Select>
+)
 /**
  * ## 「组件」`ExEditorBatch`
  *
@@ -143,7 +156,7 @@ const yiField = (reference, config = {}, $control = {}) => {
         const select = {};
         select.style = {minWidth: 200};
         select.onChange = Op.rxChange(reference, record.key);
-        return Jsx.renderField(reference, {select, options});
+        return renderField(reference, {select, options});
     };
     return column;
 }
@@ -187,10 +200,12 @@ class Component extends React.PureComponent {
              * 按钮
              */
             const buttons = Op.yoButton(this);
-            return Jsx.renderEditor(this, {
-                tables,
-                buttons,
-            });
+            return (
+                <div className={"ex-editor-table"}>
+                    <Table {...tables}/>
+                    {Ux.aiButton(this, buttons)}
+                </div>
+            )
         }, Ex.parserOfColor("ExEditorBatch").private());
     }
 }

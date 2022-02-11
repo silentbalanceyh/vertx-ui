@@ -21,19 +21,7 @@ class Component extends React.PureComponent {
             <ExTab {...inherit} config={tabs} on2TabClick={Ex.wf(this, [
                 "tabApproved"
             ]).tab}>
-                <TxQRun {...inherit} config={workflow} rxAttachment={record => {
-                    if (record.size) {
-                        record.sizeUi = Ux.toFileSize(record.size)
-                    }
-                    record.file = [];
-                    record.file.push({
-                        key: record.key,
-                        uid: record.key,
-                        name: record.name,
-                        status: "done"
-                    });
-                    return record;
-                }}/>
+                <TxQRun {...inherit} config={workflow}/>
                 <TxQDone {...inherit} $forceUpdate={$forceUpdate}/>
             </ExTab>
         ), Ex.parserOfColor("PxFileRequest").page())

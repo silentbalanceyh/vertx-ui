@@ -18,9 +18,9 @@ import Plugin from "plugin";
  * ```
  *
  * @memberOf module:_kernel
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 被读取的配置键值。
- * @param {ReactComponent} Component 组件类型。
+ * @param {Object|ReactComponent} Component 组件类型。
  * @returns {Object} 处理过后的 Action 相关配置。
  */
 const sexExAction = (reference, key, Component) => {
@@ -75,7 +75,7 @@ const sexExAction = (reference, key, Component) => {
  *
  * @memberOf module:_kernel
  * @method sexExPlugin
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} options 插件配置选项。
  * @param {String} key 读取配置的键。
  * @returns {Function} 返回插件专用处理函数。

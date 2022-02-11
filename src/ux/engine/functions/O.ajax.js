@@ -50,7 +50,7 @@ import {Dsl} from "entity";
  * @memberOf module:_ajax
  * @async
  * @param {Object} config 包含了 magic 配置的异步函数。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Promise<T>} 返回Promise。
  */
 const asyncMagic = (config = {}, reference) => {
@@ -95,7 +95,7 @@ const asyncMagic = (config = {}, reference) => {
                     });
                 }
                 return Abs.promise(dataArray);
-            })
+            }).catch(error => console.error(error))
         } else {
             return promise;
         }
@@ -197,7 +197,7 @@ const seekData = (state, key, data = [], clientSort) => {
  * @memberOf module:_ajax
  * @async
  * @param {Object} assist 辅助数据配置信息。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} state 处理的状态数据信息。
  * @returns {Promise<T>} 返回Promise。
  */
@@ -242,7 +242,7 @@ const asyncAssist = (assist = {}, reference, state = {}) => {
             }
         });
         return Abs.promise(stateMap);
-    })
+    }).catch(error => console.error(error));
 };
 export default {
     asyncMagic,

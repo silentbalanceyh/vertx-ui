@@ -34,7 +34,7 @@ import {message, Modal} from "antd";
  * 返回的结果可直接被 antd 中的 `Modal` 组件消费。
  *
  * @memberOf module:__private
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {String} key 将要读取的键值
  * @return {any} 返回最终读取到的数据
  */
@@ -169,7 +169,7 @@ const _sexBatchProp = (reference, callback, config = {}) => {
  *
  * @memberOf module:_romantic
  * @method sexBatch
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Function} callback 回调函数处理。
  * @param {Object} config 传入的配置数据。
  */
@@ -199,7 +199,7 @@ const sexBatch = (reference, callback, config = {}) => {
  * 该方法保证最终得到的值是合法的。
  *
  * @memberOf module:_romantic
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {String} key 将要读取的配置的 key 值信息
  * @return {any} 返回读取到的最终信息
  */
@@ -261,7 +261,7 @@ const sexCab = (reference = {}, key) => {
  *
  * @memberOf module:_romantic
  * @method sexOp
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} key 配置键值。
  * @param {Object} events 绑定的事件信息
  * @return {Array} 生成最终的 操作集合
@@ -304,7 +304,7 @@ const sexOp = (reference, events = {}, key = "op") => {
  *
  * @memberOf module:_romantic
  * @method sexModal
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} key 读取配置专用的 Key，内部调用 `sexCab` 方法确认配置可读取。
  * @param fnRender 渲染函数。
  * @return {Jsx} 返回最终渲染的Jsx。
@@ -361,7 +361,7 @@ const sexModal = (reference, key, fnRender) => {
  *
  * @memberOf module:_romantic
  * @method sexIdentifier
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} config 标识规则选择配置。
  * @return {any} 返回的 identifier。
  */
@@ -395,7 +395,7 @@ const sexIdentifier = (reference, config = {}) => {
  *
  * @memberOf module:_romantic
  * @method sexTable
- * @param {ReactComponent} reference React组件。
+ * @param {Object|ReactComponent} reference React组件。
  * @param {String} key 配置键值。
  * @return {any} 返回表格专用数据。
  */
@@ -448,7 +448,7 @@ const sexTable = (reference, key) => {
  *
  * @memberOf module:_romantic
  * @method sexDialog
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} key 配置键值。
  * @param {Function} callback 当前窗口专用回调函数，用户窗口点击按钮的回调。
  */
@@ -519,7 +519,7 @@ const sexDialog = (reference, key = "", callback) => {
  *
  * @memberOf module:_romantic
  * @method sexMessage
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {String} key 配置键值。
  * @param {Number} duration 消息停留的时间。
  */

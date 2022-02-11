@@ -77,7 +77,7 @@ const renderCriteria = (reference) => {
 const _renderInput = (reference) => {
     const {$search, searchText} = reference.state;
     return (
-        <Input.Search {...$search} compact value={searchText}/>
+        <Input.Search {...$search} value={searchText}/>
     )
 };
 
@@ -127,10 +127,10 @@ const _renderAdvanced = (reference) => {
 
 export default (reference) =>
     Op.isSearch(reference) ? (
-        <span>
+        <span className={"ex-search"}>
             {_renderInput(reference)}
             &nbsp;&nbsp;
-            <Button.Group className={"ex-search"}>
+            <Button.Group>
                 {_renderView(reference)}
                 {Op.isAdvanced(reference) ? _renderRedo(reference) : false}
                 {Op.isAdvanced(reference) ? _renderAdvanced(reference) : false}

@@ -26,10 +26,16 @@ declare module "ei" {
     export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
 
 
-    // 我的待办
-    export {default as TxQRun} from './TxQRun/UI';                          /* 待办队列 */
-    export {default as TxQDone} from './TxQDone/UI';                        /* 待办队列 */
+    // 工作流专用（标准化）
     export {default as TxPortal} from './TxPortal/UI';                      /* 流程入口（服务目录）*/
+    export {default as TxPage} from './TxPage/UI';                          /* 流程专用页面容器 */
+
+    export {default as TxQRun} from './TxQRun/UI';                          /* 待办队列 */
+    export {default as TxQDone} from './TxQDone/UI';                        /* 完成队列 */
+
+    export {default as TxOpen} from './TxOpen/UI';                          /* 开单页面 */
+    export {default as TxObserve} from './TxObserve/UI';                    /* 审批页面 */
+    export {default as TxOverview} from './TxOverview/UI';                  /* 历史页面 */
 
 
     // 个人界面

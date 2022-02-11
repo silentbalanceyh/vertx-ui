@@ -1,0 +1,53 @@
+{
+    "_assist": {
+        "user.groups": {
+            "uri": "/api/group/by/sigma"
+        },
+        "user.roles": {
+            "uri": "/api/role/by/sigma"
+        },
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "resource.teams": {
+            "uri": "/api/team/by/sigma"
+        }
+    },
+    "_toolbar": {
+        "queue": {
+            "title": "视图条件",
+            "items": [
+                "openBy,我是制单人",
+                "closeBy,我是关单人",
+                "owner,我是责任人",
+                "supervisor,我是监督人",
+                "cancelBy,我是撤销人"
+            ],
+            "icon": {
+                "openBy": "#00BF9F",
+                "closeBy": "#00AAE4",
+                "owner": "#6A52E1",
+                "supervisor": "#FF4F5D",
+                "cancelBy": "#EEAD0E"
+            }
+        },
+        "connector": {
+            "items": [
+                "AND,且",
+                "OR,或"
+            ]
+        },
+        "condition": {
+            "label": "筛选条件",
+            "empty": "（您尚未选择任何筛选条件。）",
+            "vector": {
+                "openBy": "制单人",
+                "closeBy": "关单人",
+                "owner": "责任人",
+                "supervisor": "监督人",
+                "cancelBy": "撤销人"
+            },
+            "clear": "清除所有"
+        }
+    }
+}

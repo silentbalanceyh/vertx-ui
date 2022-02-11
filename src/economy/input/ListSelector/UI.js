@@ -135,14 +135,7 @@ class Component extends React.PureComponent {
             const inputAttrs = Op.yoValue(this, jsx);
 
             let $table = Ux.clone(table);
-            let source;
-            if (this.props['data-__field']) {
-                // Form 模式
-                source = reference;
-            } else {
-                source = this;
-            }
-            $table.columns = Ux.configColumn(source, $table.columns);
+            $table.columns = Ux.configColumn(this, $table.columns);
             $table = Op.yoSelected(this, $table);
 
             const dataSource = Ux.valueArray($data);

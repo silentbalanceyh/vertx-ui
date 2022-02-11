@@ -19,14 +19,8 @@ const rxSelect = (reference) => (event) => {
             items.sort(Ux.sorterDescDFn('createdAt'));
             // 数据信息
             const {$table = {}} = reference.state;
-            const lazyColumns = $table.columns.filter(item => "USER" === item['$render']);
-            if (0 < lazyColumns.length) {
-                Ux.ajaxEager(reference, lazyColumns, items).then($lazy => {
-                    reference.setState({$data: {items}, $loading: false, $lazy});
-                })
-            } else {
-                reference.setState({$data: {items}, $loading: false});
-            }
+            Ux.ajaxEager(reference, $table.columns, items)
+                .then($lazy => reference.setState({$data: {items}, $loading: false, $lazy}));
         })
     } else {
         /*

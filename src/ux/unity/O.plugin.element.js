@@ -119,7 +119,14 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
     /*
      * 动态中的属性优先
      */
-    const {ui = [], hidden = [], initial = {}, mapping = {}, ...rest} = dynamicForm;
+    const {
+        ui = [],
+        hidden = [],
+        initial = {},
+        mapping = {},
+        transform = {},
+        ...rest
+    } = dynamicForm;
     if (!Abs.isEmpty(rest)) {
         Object.assign(form, rest);
     }
@@ -135,7 +142,9 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
         form.hidden = [].concat(form.hidden, hidden);
     }
     /*
-     * mapping 和 initial
+     * - mapping
+     * - initial
+     * - transform
      */
     if (!Abs.isEmpty(initial)) {
         if (!form.initial) form.initial = {};
@@ -144,6 +153,10 @@ const toForm = (staticForm = {}, dynamicForm = {}) => {
     if (!Abs.isEmpty(mapping)) {
         if (!form.mapping) form.mapping = {};
         Object.assign(form.mapping, mapping);
+    }
+    if(!Abs.isEmpty(transform)){
+        if(!form.transform) form.transform = {};
+        Object.assign(form.transform, transform);
     }
     return form;
 };

@@ -23,7 +23,7 @@ class Op {
      * 注销专用操作。
      *
      * @async
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @returns {Promise<T>} 返回最终Promise
      */
     static $opLogout(reference) {
@@ -46,7 +46,7 @@ class Op {
      * 登录专用操作。
      *
      * @async
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @returns {function(*=): Promise<T>} 返回最终Promise
      */
     static $opLogin(reference) {

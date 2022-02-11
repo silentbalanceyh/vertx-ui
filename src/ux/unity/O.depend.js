@@ -1,5 +1,4 @@
 import Abs from "../abyss";
-import U from "underscore";
 import Fm from './O.ant.form';
 import G from "../engine/datum";
 import Ele from "../element";
@@ -37,13 +36,17 @@ const isDepend = (depend = {}, reference) => {
         const counter = fields.map(field => {
             const expected = config[field];
             const actual = values[field];
-            if (U.isArray(expected)) {
+            if (Abs.isArray(expected)) {
                 /*
                  * 固定值配置
                  * field = []
                  */
-                return expected.includes(actual);
-            } else if (U.isObject(expected)) {
+                if (Abs.isArray(actual)) {
+                    return Ele.elementInAny(actual, expected);
+                } else {
+                    return expected.includes(actual);
+                }
+            } else if (Abs.isObject(expected)) {
                 /*
                  * 特殊配置，用于处理 DATUM 这种下拉
                  * {
@@ -100,7 +103,7 @@ const isDepend = (depend = {}, reference) => {
  *
  * @memberOf module:_ui
  * @param {Object} jsx 对应表单配置 optionJsx。
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  */
 const writeDisabled = (reference, jsx = {}) => {
     const {depend = {}} = jsx;
@@ -120,7 +123,7 @@ const writeDisabled = (reference, jsx = {}) => {
  *
  * @memberOf module:_ui
  * @param {Object} jsx 对应表单配置 optionJsx。
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  */
 const writeReadOnly = (jsx = {}, reference) => {
     const {depend = {}} = jsx;
@@ -214,7 +217,7 @@ const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
         /*
          * 输入源头读取
          */
-        const linkerSource = U.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
+        const linkerSource = Abs.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
         if (linkerSource) {
             /*
              * 使用Linker设置最终值
@@ -320,6 +323,7 @@ const _edition = (reference, optionJsx = {}, field) => {
             $edition[field] = $edition.__acl[field];
         }
     }
+    /* 追加 optionJsx.config.linker */
     return $edition;
 };
 /**
@@ -358,7 +362,7 @@ const _edition = (reference, optionJsx = {}, field) => {
  * 上述格式中，`username` 可编辑，其他两个字段不可编辑。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
+ * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
  * @param {Object} optionJsx 表单配置中的将要写入数据的 optionJsx 配置。
  * @param {String} field 将会被处理的字段信息。
  */

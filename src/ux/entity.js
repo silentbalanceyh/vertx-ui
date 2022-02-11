@@ -326,7 +326,7 @@ class Uson {
  *
  * @deprecated 有可能将来被废弃，替换的使用 Zero Extension 模块处理。
  * @memberOf module:_engine
- * @param {ReactComponent} reference React组件引用。
+ * @param {Object|ReactComponent} reference React组件引用。
  * @param {Object} params 参数信息
  */
 /*const rxInit = (reference, params = {}) => {

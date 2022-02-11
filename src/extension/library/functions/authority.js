@@ -311,7 +311,7 @@ const outCriteria = (selectedData, criteria, source) => {
  * 生成ACL管理请求专用函数，针对不同类型的权限管理生成统一的ACL管理请求。
  *
  * @memberOf module:_kernel
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {Array} selected 权限管理过程中已经选择的项
  * @param {Function} fnEvent 专用事件执行函数（生成数据专用）
  * @returns {Object}

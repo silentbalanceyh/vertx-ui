@@ -37,7 +37,7 @@ import Fn from "../functions";
  *
  * @memberOf module:_channel
  * @method ylCard
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Function} fnRender 子组件渲染函数
  * @param {Object} config 输入的配置数据
  * @returns {JSX.Element}
@@ -119,7 +119,7 @@ const ylCard = (reference, fnRender, config = {}) => {
  *
  * @memberOf module:_channel
  * @method ylDynamic
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Function} fnRender 渲染函数
  * @param {Object} config 输入的配置数据
  * @returns {JSX.Element}
@@ -263,7 +263,7 @@ EXECUTOR_EXTRA[Fn.Mode.FILTER] = "rxExtraFilter";
  * 调用`setEdition`内部私有方法计算可编辑的相关关系，实现对某个表单的ACL权限控制，直到可控制表单三态。
  *
  * @memberOf module:_channel
- * @param {ReactComponent} reference React组件引用
+ * @param {Object|ReactComponent} reference React组件引用
  * @param {Object} tabs `<Tabs/>`的基本配置
  * @param {Function} UI
  * @returns {Object}
@@ -307,7 +307,7 @@ const ylTabExtra = (reference, tabs = {}, UI) => {
                  * 设置可编辑的基础关系
                  */
                 setEdition(attrs, reference);
-                attrs.config = Ux.pluginSeeEdit(reference, $inited, attrs.config);
+                attrs.config = Ux.pluginKoEdit(reference, $inited, attrs.config);
                 /* 处理 config */
                 if (attrs.config && 1 === attrs.config.length) {
                     /*
@@ -318,13 +318,13 @@ const ylTabExtra = (reference, tabs = {}, UI) => {
                 }
 
             } else {
-                attrs.config = Ux.pluginSeeAdd(reference, $inited, attrs.config);
+                attrs.config = Ux.pluginKoAdd(reference, $inited, attrs.config);
             }
             /*
              * 显示删除按钮
              */
             if (0 === attrs.config.length) {
-                const {options = {}} = reference.state;
+                const {options = {}} = reference['state'];
                 /*
                  * op.submit.close 只有在没有任何按钮存在时才会出现
                  * 且除了文字可以更改，其他内容目前版本全程固定

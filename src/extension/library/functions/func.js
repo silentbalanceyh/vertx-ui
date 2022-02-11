@@ -209,7 +209,7 @@ const onRelationIdentifiers = (identifier, source = [], definition = []) => {
  *
  * @memberOf module:_function
  * @method onRelationType
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} record 当前数据记录
  * @returns {undefined|Object} 返回唯一关系值
  */
@@ -624,7 +624,7 @@ const mapFun = (fnName) => "string" === typeof fnName && (
  * @deprecated
  * @method mapButtons
  * @param {Array} extension 扩展按钮配置
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Array} 返回最终处理配置数据
  */
 const mapButtons = (extension = [], reference) => {
@@ -713,7 +713,7 @@ const mapUri = (item = {}, $app) => {
  *
  * @memberOf module:_function
  * @param {Array} columns 基本类配置信息
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {Promise.<T>} Promise 专用配置处理
  */
 const mapAsyncDatum = (columns = [], reference) => {
@@ -831,7 +831,7 @@ const toDialog = (dialog) => {
  * 3. 名空间和`appId`执行绑定，一个应用只能有一个名空间。
  *
  * @memberOf module:_function
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @returns {string|undefined} 返回合法名空间
  */
 const toNamespace = (reference) => {
@@ -895,7 +895,7 @@ const toColor = (current, mode = "KFC_8") => {
  * * 配置抽取：直接从`$inited`数据中提取`modelId`作为模型标识符的提取基础。
  *
  * @memberOf module:_function
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {String} field 字段信息
  * @returns {String} 返回最终的模型ID（统一标识符计算值）
  */
@@ -1054,7 +1054,7 @@ const FUNS = {
  * |event.delete|删除表单提交函数。|
  *
  * @memberOf module:_function
- * @param {ReactComponent} reference React对应组件引用
+ * @param {Object|ReactComponent} reference React对应组件引用
  * @param {Object} metadata 元数据配置信息
  * @returns {Function} 返回事件函数
  */

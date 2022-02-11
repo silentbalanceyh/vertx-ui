@@ -1061,7 +1061,7 @@ const ambEvent = (event, config = {}, defaultValue) => {
  * ```
  *
  * @memberOf module:_unity
- * @param {ReactComponent} reference React组件引用，通常是reference统一变量名
+ * @param {Object|ReactComponent} reference React组件引用，通常是reference统一变量名
  * @param {String} name 字符串变量名称，读取变量值专用
  * @return {any} 返回最终的值
  */
@@ -1130,7 +1130,7 @@ const ambFind = (props = {}, key, name) => {
  * ```
  *
  * @memberOf module:_unity
- * @param {ReactComponent} reference React组件引用，通常是reference统一变量名
+ * @param {Object|ReactComponent} reference React组件引用，通常是reference统一变量名
  * @param {String} name 字符串变量名称，读取变量值专用
  * @return {any} 返回变量对应的值
  */

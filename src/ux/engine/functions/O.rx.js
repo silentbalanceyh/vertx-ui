@@ -5,7 +5,6 @@
  */
 import T from "./O.to";
 import Abs from '../../abyss';
-import {Dsl} from "entity";
 import Ele from '../../element';
 
 /**
@@ -14,7 +13,7 @@ import Ele from '../../element';
  * 设置窗口 resize 的事件专用。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Function} 返回 resize 回调函数。
  */
 function rxResize(reference) {
@@ -39,7 +38,7 @@ function rxResize(reference) {
  * 表格 Table 中的专用 selected 函数生成器。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} field 字段名称。
  * @returns {Function} 选中函数。
  */
@@ -47,19 +46,14 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
     let state = reference.state ? reference.state : {};
     state = Abs.clone(state);
     const {$data = []} = state;
-    const $selected = state[field] ? state[field] : [];
     if (0 < $data.length) {
         const selected = $data.filter(item => keys.includes(item.key));
-        /*
-         * DataArray
-         */
-        const original = Dsl.getArray($selected);
-        selected.forEach(each => original.saveElement(each));
-        const checked = original.to();
-        /*
-         * Checked item
-         */
-        state[field] = checked ? checked : [];
+        // const original = Dsl.getArray($selected);
+        // selected.forEach(each => original.saveElement(each));
+        // let checked = original.to();
+        // 此处适配多选，所以旧代码不能保留
+
+        state[field] = selected ? selected : [];
         reference.setState(state);
     }
 };
@@ -70,7 +64,7 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
  * 树专用组件 Tree 中的专用选择函数，借助 $keySet 集合
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array} input 当前组中数组，本身为一棵树
  * @param {Function} callback 回调函数
  * @returns {Function} 选中函数。
@@ -172,6 +166,7 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
     }
     reference.setState(state);
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     rxResize,
     rxCheckedRow,

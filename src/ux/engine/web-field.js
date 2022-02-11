@@ -25,6 +25,7 @@ import React from "react";
 import Ut from "../unity";
 import './web-field.less';
 import Act from './action';
+import Cv from './../constant'
 
 const filterOption = (inputText, option) => {
     const {props = {}} = option;
@@ -118,7 +119,7 @@ const _aiCssAdjust = (jsx, type = "") => {
 // =====================================================
 // 按钮
 // =====================================================
-const _jsxUniform = (jsx = {}, fnRender) => {
+const _jsxAction = (jsx = {}, fnRender) => {
     const {grouped = false} = jsx;
     if (grouped) {
         return (
@@ -138,26 +139,42 @@ const _jsxUniform = (jsx = {}, fnRender) => {
         )
     }
 };
-const aiAction = (reference, jsx = {}) =>
-    _jsxUniform(jsx, (config = {}) => {
-        const {actions = [], loading = false} = jsx;
-        return actions.map(item => {
-            item = Abs.clone(item);
-            const {text, ...rest} = item;
-            rest.loading = loading;
-            /*
-             * 禁用处理
-             */
-            if (!rest.hasOwnProperty('disabled')) {
-                const {disabled = false} = jsx;
-                rest.disabled = disabled;
-            }
-            Abs.remove(rest, "optionJsx")
-            return (
-                <Button {...rest} style={config.style}>{text}</Button>
-            );
-        })
-    });
+const aiAction = (reference, jsx = {}) => _jsxAction(jsx, (config = {}) => {
+    const {actions = [], loading = false} = jsx;
+    /*
+     * 表单启用过滤操作，和外层窗口中的操作保持一致
+     * 1）添加类：ADD
+     * -- 这种类型的表单调用 pluginKoAdd 函数执行过滤，内层调用 koAdd
+     * 2）编辑类：EDIT
+     * -- 这种类型的表单调用 pluginKoEdit 函数执行过滤，内层调用 koEdit
+     * 此处两个Zero Framework中使用的特殊变量：
+     * 1. $mode：用于标识表单模式
+     * 2. $inited：表单初始化数据，等价于行操作的 record 变量
+     */
+    const {$mode, $inited = {}} = reference.props;
+    let $actions = Abs.clone(actions);
+    if ($mode === Cv.FORM_MODE.ADD) {
+        $actions = Ut.pluginKoAdd(reference, $inited, $actions);
+    } else if ($mode === Cv.FORM_MODE.EDIT) {
+        $actions = Ut.pluginKoEdit(reference, $inited, $actions);
+    }
+    return $actions.map(item => {
+        item = Abs.clone(item);
+        const {text, ...rest} = item;
+        rest.loading = loading;
+        /*
+         * 禁用处理
+         */
+        if (!rest.hasOwnProperty('disabled')) {
+            const {disabled = false} = jsx;
+            rest.disabled = disabled;
+        }
+        Abs.remove(rest, "optionJsx")
+        return (
+            <Button {...rest} style={config.style}>{text}</Button>
+        );
+    })
+});
 const aiSubmit = (reference, optionJsx = {}) => {
     const cell = {optionJsx};
     Act.raftAction(cell, reference);
@@ -534,7 +551,7 @@ const aiMagic = (reference, jsx = {}) => {
 
 //import ListSelector from './O.selector.list';
 const aiListSelector = (reference, jsx = {}) => {
-    _aiCssAdjust(jsx, "selector-list")
+    _aiCssAdjust(jsx, "selector-list");
     return (<ListSelector {...jsx} reference={reference}/>);
 };
 

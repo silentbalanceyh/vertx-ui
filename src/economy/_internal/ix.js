@@ -35,17 +35,9 @@ const searchConfig = (reference, config = {}) => {
 const tableLazy = (reference, state, $data = {}) => new Promise((resolve) => {
     const {table = {}} = reference.state;
     if (table && table.columns) {
-        const lazyColumn = table.columns
-            .filter(item => "USER" === item['$render']);
-        if (0 < lazyColumn.length) {
-            // 加载更多的 lazyColumn 部分
-            Ux.ajaxEager(reference, lazyColumn, Ux.valueArray($data))
-                .then($lazy => Ux.promise(state, "$lazy", $lazy))
-                .then(done => resolve(done));
-        } else {
-            // 不带任何 lazyColumn
-            resolve(state)
-        }
+        Ux.ajaxEager(reference, table.columns, Ux.valueArray($data))
+            .then($lazy => Ux.promise(state, "$lazy", $lazy))
+            .then(done => resolve(done))
     } else {
         resolve(state);
     }
@@ -406,6 +398,7 @@ const dialogClick = (reference, config = {}) => (event) => {
         })
     });
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     Limit: {
         TreeList: {

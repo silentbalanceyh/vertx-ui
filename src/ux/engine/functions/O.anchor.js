@@ -27,7 +27,7 @@ const anchorColumn = (field, onClick) => {
  * 搜索条件清除专用锚点，清除所有搜索条件，ID格式：`__BTN_CLEAR_SEARCH`。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Jsx}
  */
 const anchorSearch = (reference) => (
@@ -56,7 +56,7 @@ const anchorSearch = (reference) => (
  * * `__BTN_TREE_ON`：启用树菜单。
  *
  * @memberOf module:_ui
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @returns {Jsx}
  */
 const anchorTree = (reference) => (

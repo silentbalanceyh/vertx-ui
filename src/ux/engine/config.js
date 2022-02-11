@@ -440,7 +440,7 @@ const FUNS = {
  * @method configScroll
  * @param {Object} $table 传入的表格配置信息。
  * @param {Array} data 传入的表格数据信息。
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  */
 const configScroll = ($table = {}, data = [], reference) => {
     const $columns = $table.columns;
@@ -516,7 +516,7 @@ const configScroll = ($table = {}, data = [], reference) => {
  * 第三参数`program`主要负责提供编程模式的覆盖参数，它的优先级最高，如果出现了同名属性，直接用`program`中的函数进行覆盖。
  *
  * @memberOf module:_primary
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} form 表单配置。
  * @param {Object} program 编程专用的配置数据传入。
  * @return {Object} 初始化数据（表单初始化数据）。
@@ -584,7 +584,7 @@ const isLoading = (reference) => {
  * 4. 执行防重复提交流程
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} config 窗口配置专用数据。
  * @return {Object} 返回处理好的窗口配置。
  */
@@ -644,7 +644,7 @@ const configDialog = (reference, config = {}) => {
  * ```
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array|Object} op 锚点按钮配置生成器。
  * @param {Function} callback 按钮执行函数，可以从callback中执行该函数。
  * @return {Array} 配置的最终锚点。
@@ -721,7 +721,7 @@ const configAnchor = (reference, op, callback) => {
  * ```
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 表单配置读取必须的键。
  * @return {any}
  */
@@ -753,7 +753,7 @@ const cabQuery = (reference, key = "grid") => {
  * 5. 计算排序配置 sorter = true 时。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Array} columns 当前Table组件的columns配置。
  * @param {Object} ops 当前列是否可操作列：如列中包含了编辑、删除按钮，如果出现扩展则执行扩展替换。
  * @return {Array} 返回处理过后的表格列信息。
@@ -786,7 +786,7 @@ const configColumn = (reference, columns = [], ops = {}) => {
  * 「标准配置」Table 专用的配置信息。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} table 表格配置数据相关信息。
  * @param {Object} ops 外置处理的 executor 专用信息。
  * @return {Object} 返回处理好的配置信息。
@@ -839,7 +839,7 @@ const configTable = (reference, table = {}, ops = {}) => {
  *      * fnDelete：删除一行记录专用
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} executors 待绑定的事件专用信息。
  * @return {Object} 返回处理过后的 executors 信息。
  */
@@ -868,7 +868,7 @@ const configExecutor = (reference, executors) => {
  * 「2阶」（略）该操作主要是编程过程中使用。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} executors 待绑定的事件专用信息。
  * @return {Object} 返回处理过后的 executors 信息。
  */
@@ -893,7 +893,7 @@ const configExecutors = (reference, executors) => {
  * 绑定的资源文件`Cab.json`引用的配置中读取相关配置。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 表单配置读取必须的键。
  * @return {any}
  */
@@ -994,7 +994,7 @@ const cabForm = (reference = {}, key = "form") => {
  * ```
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} config 基本输入的配置信息。
  * @param {Object} program 编程传入的配置信息。
  * @return {Promise<T>} 返回异步的 Promise。
@@ -1322,7 +1322,7 @@ const callTab = (reference, children = {}) => {
  * 「标准配置」Tabs 专用的配置信息。
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} config 传入的配置数据信息。
  * @return {Object} 处理完成的配置数据。
  */
@@ -1438,7 +1438,7 @@ const cabTab = (reference = {}, key = "tabs") => {
  * （异步）Tabs 页签专用函数，用于处理页签级别的配置信息，通常是 _tabs 节点
  *
  * @memberOf module:_engine
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {String} key 表单配置读取必须的键。
  * @param {Object} state 专用的状态，会被直接更改，追加 $tabs 变量。
  * @return {any}

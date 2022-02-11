@@ -2,7 +2,7 @@ import Types from './Types';
 // 直接函数和类定义
 import I from './ajax';
 import ox from './ox';
-import wf from './workflow';
+import wf from './wf';
 
 import Op from './op';
 import Fun from './functions';

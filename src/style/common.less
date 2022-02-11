@@ -130,42 +130,6 @@
     overflow-x: hidden;
 }
 
-.ex-input-complex {
-    // background-color: #f5f5f5; // #fafafa;
-    padding: 8px 5px 12px 0;
-    border-right: 3px;
-    border-radius: 6px;
-
-    .line(@height) {
-        line-height: @height;
-        min-height: @height;
-    }
-
-    .complex-form {
-        padding: 6px 0;
-
-        .ant-col {
-            padding-right: 1%;
-
-            .ant-form-item {
-                width: 100%;
-
-                .ant-form-item-label {
-                    .line(36px)
-                }
-
-                .ant-form-item-control {
-                    .line(36px)
-                }
-
-                .ant-input-password {
-                    display: block;
-                }
-            }
-        }
-    }
-}
-
 textarea {
     resize: none !important;
 }
@@ -388,6 +352,44 @@ textarea {
 
         &-radio {
 
+        }
+    }
+}
+
+
+// Extension 部分，位置不可以变更
+.ex-input-complex {
+    // background-color: #f5f5f5; // #fafafa;
+    padding: 8px 5px 12px 0;
+    border-right: 3px;
+    border-radius: 6px;
+
+    .line(@height) {
+        line-height: @height;
+        min-height: @height;
+    }
+
+    .complex-form {
+        padding: 6px 0;
+
+        .ant-col {
+            padding-right: 1%;
+
+            .ant-form-item {
+                width: 100%;
+
+                .ant-form-item-label {
+                    .line(36px)
+                }
+
+                .ant-form-item-control {
+                    .line(36px)
+                }
+
+                .ant-input-password {
+                    display: block;
+                }
+            }
         }
     }
 }

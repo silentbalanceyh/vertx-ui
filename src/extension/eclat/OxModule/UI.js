@@ -43,6 +43,7 @@ const getControl = (reference, $identifier) => {
                 $myView = {},            // 视图
                 $myDefault = {},         // 默认视图
                 $metadata = {},          // 读取类型和页面
+                $inited = {},
             } = reference.props;
             /*
              * 远程读取构造 vector
@@ -70,7 +71,25 @@ const getControl = (reference, $identifier) => {
             }
             request.view = view;
             request.position = $myView.position ? $myView.position : "DEFAULT";
+
+            // 动态部分 只有动态检索才会使用 data 节点读取基础数据信息
+            request.data = $inited;
+            request.config = vector['__SEEK__'];
             request.alias = vector['__ALIAS__'];
+            /**
+             * {
+             *     alias: "直接配置，通常是：EDIT, ADD, FILTER, LIST",
+             *     data: {
+             *         "用于选择处理时专用的插件参数专用配置。"
+             *     },
+             *     identifier: "原始标识规则选择符",
+             *     language: "语言信息",
+             *     page: "当前页面ID（UI_PAGE专用）",
+             *     type: "当前查找专用类型，如：FORM / LIST",
+             *     position: "当前页面位置，对应 position",
+             *     view: "当前页面专用视图，对应 view"
+             * }
+             */
             return Ex.I.visitor(request).then(vectorData => {
                 const $control = vectorData['controlId'];
                 const controlData = {$identifier, $control}

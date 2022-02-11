@@ -1,12 +1,4 @@
 {
-    "_assist": {
-        "zero.service.catalog": {
-            "uri": "/api/type/categories/:type",
-            "magic": {
-                "type": "FIX:zero.service.catalog"
-            }
-        }
-    },
     "_workflow": {
         "window": "查看流程详情,,关闭,false,1100,true",
         "form": {
@@ -18,9 +10,6 @@
                 [
                     "name,流程名,12,,aiMagic,readOnly=true",
                     "definitionKey,流程系统码,12,,aiMagic,readOnly=true"
-                ],
-                [
-                    "definitionId,流程实例ID,24,,aiMagic,readOnly=true"
                 ]
             ]
         }
@@ -35,19 +24,20 @@
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
-            "sorter": "updatedAt=DESC",
+            "pager": {
+                "page": 1,
+                "size": 10
+            },
+            "sorter": [
+                "updatedAt,DESC"
+            ],
             "criteria": {
                 "sigma": "PROP:app.sigma",
-                "modelId": "FIX:x.attachment",
-                "$U$": {
-                    "owner,=": "USER:key",
-                    "toUser,=": "USER:key"
-                },
                 "": true
             }
         },
         "options": {
+            "search.grid": "LIST_TT",
             "search.cond": [
                 "name,c",
                 "code,c"
@@ -73,12 +63,13 @@
                 "selected": "当前视图：",
                 "confirm": "您正在更改当前视图的查询条件，一旦更改后查询数据会有变化，确认？"
             },
+            "tabs.disabled": true,
             "tabs.list": "文件申请列表",
             "tabs.add": "文件申请",
             "tabs.edit": "文件申请",
             "identifier": "w.todo",
             "dynamic.op": true,
-            "dynamic.column": true,
+            "dynamic.column": false,
             "dynamic.switch": false,
             "op.extension.generate": {
                 "text": "流程详情",
@@ -91,7 +82,6 @@
                     "executor": "rxWorkflow"
                 }
             },
-            "op.open.filter": "清除筛选",
             "op.extra.column": "修改显示列",
             "op.extra.view": "视图管理",
             "op.row.edit": true,
@@ -117,20 +107,6 @@
                 "config": {
                     "index": 1,
                     "executor": "rxBatchReject"
-                }
-            },
-            "op.extension.criteria": {
-                "region": "op.batch.criteria",
-                "component": "SELECT",
-                "config": {
-                    "index": 2,
-                    "executor": "rxStatus",
-                    "items": [
-                        "NONE,所有任务",
-                        "REQUEST,我的申请",
-                        "APPROVAL,我的审批"
-                    ],
-                    "defaultValue": "NONE"
                 }
             },
             "op.extension.add.draft": {
@@ -258,6 +234,9 @@
                 "report": "（总共:page页，:total条数据）",
                 "selected": "勾选了:count条"
             },
+            "row": {
+                "onDoubleClick": "fnView"
+            },
             "columns": [
                 {
                     "title": "操作",
@@ -267,29 +246,107 @@
                     "$render": "EXECUTOR",
                     "$option": [
                         {
+                            "id": "$opView",
                             "text": "查看",
                             "executor": "fnView"
                         },
                         {
+                            "id": "$opApprove",
                             "text": "审批",
                             "executor": "fnApprove",
                             "confirm": "该审批操作不附带任何意见信息，确认审批该记录？"
                         },
                         {
+                            "id": "$opReject",
                             "text": "拒绝",
                             "executor": "fnReject",
                             "confirm": "该拒绝操作不附带任何意见信息，确认拒绝该记录？"
                         },
                         {
+                            "id": "$opSaving",
                             "text": "编辑草稿",
                             "executor": "fnDraft"
                         },
                         {
-                            "text": "取消",
+                            "id": "$opCancel",
+                            "text": "撤销",
                             "executor": "fnCancel",
-                            "confirm": "一旦执行该操作过后，您需要重新提交该文件申请？"
+                            "confirm": "一旦执行该操作过后，您将会中断并关闭此流程，确认取消？"
                         }
                     ]
+                },
+                "title,工单标题",
+                {
+                    "metadata": "phase,工单状态,RENDERS",
+                    "width": 100,
+                    "config": {
+                        "items": [
+                            "INIT,填写申请:edit,16:#3053EB",
+                            "DRAFT,草稿:form,16:#EE3B3B",
+                            "PENDING,等待处理:undo,16:#EE3B3B",
+                            "FINISHED,已完成:check-circle,16:#58c623",
+                            "ACCEPTED,已接受:info-circle,16:#58c623",
+                            "REJECTED,已拒绝:redo,16:#CD1076",
+                            "CANCELED,已撤销:stop,16:#CD1076",
+                            "EXPIRED,已超时:clock-circle,16:#CD1076"
+                        ]
+                    }
+                },
+                {
+                    "metadata": "serial,任务号,RENDERS",
+                    "width": 220,
+                    "config": {
+                        "prefix": "主单号：:traceCode"
+                    }
+                },
+                {
+                    "metadata": "openBy,制单人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00BF9F"
+                    }
+                },
+                {
+                    "metadata": "openAt,制单时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                },
+                {
+                    "metadata": "toUser,审批人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00AAE4"
+                    }
+                },
+                {
+                    "metadata": "status,审批结果,MAPPING",
+                    "$mapping": {
+                        "DRAFT": "未提交,form,,#CDCDB4",
+                        "PENDING": "待审批,undo,,#00AAE4",
+                        "FINISHED": "通过,check-circle,,#698B69",
+                        "REJECTED": "拒绝,redo,,#CD1076",
+                        "ACCEPTED": "已接受,info-circle,,#698B69",
+                        "CANCELED": "已撤销,stop,,#CD1076",
+                        "EXPIRED": "超时,clock-circle,,#CD1076"
+                    }
+                },
+                {
+                    "metadata": "owner,责任人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#6A52E1"
+                    }
+                },
+                {
+                    "metadata": "supervisor,监督人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#FF4F5D"
+                    },
+                    "$empty": "（未设置）"
                 }
             ]
         }

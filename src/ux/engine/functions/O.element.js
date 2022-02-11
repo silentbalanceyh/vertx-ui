@@ -35,7 +35,7 @@ const configFabric = (input = {}) => {
  * 3. 将唯一记录传给 consumer 函数执行筛选过后的回调流程。
  *
  * @memberOf module:_value
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} input 输入数据。
  * @param {Function} consumer 执行函数。
  */
@@ -57,7 +57,7 @@ const valueFabric = (reference, input = {}, consumer) => {
  * （略）增强版的valueFabric函数，带过滤器的版本，可支持过滤操作。
  *
  * @memberOf module:_value
- * @param {ReactComponent} reference React对应组件引用。
+ * @param {Object|ReactComponent} reference React对应组件引用。
  * @param {Object} input 输入数据。
  * @param {Function} consumer 执行函数。
  */

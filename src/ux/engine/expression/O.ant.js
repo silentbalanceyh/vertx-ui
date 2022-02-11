@@ -192,7 +192,7 @@ class Ant {
      *
      * 处理 TreeOptions 信息，配置在 optionJsx 中的 config.tree 节点里。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {Object} config 配置数据结构。
      * @returns {Array} 树形数组，专用 TreeOptions。
      */
@@ -210,7 +210,7 @@ class Ant {
      * * config.datum：辅助数据源。
      * * config.cascade：专用依赖数据，联动下拉。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {Object} config 配置数据结构。
      * @param {Function} filter 过滤专用函数。
      * @returns {Array} 返回解析过后的 options 列表。
@@ -242,7 +242,7 @@ class Ant {
      * }
      * ```
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {optionJsx} jsx 输入的jsx配置。
      * @returns {Function} 返回记录执行专用函数。
      */
@@ -258,7 +258,7 @@ class Ant {
      *
      * 返回最终窗口配置对象。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {String[]} path 路径信息
      * @returns {Object} 返回窗口配置
      */
@@ -273,7 +273,7 @@ class Ant {
      *
      * 根据`config`配置信息，执行 from 和 to 部分的值流程。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {optionJsx} jsx 输入的jsx配置。
      */
     static onFromTo(reference, jsx = {}) {
@@ -289,7 +289,7 @@ class Ant {
      * 2. config.items：辅助数据源，表单解析静态流程。
      * 3. config.$datum：列解析过程中的数据源流程。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {Object} config 基本配置数据信息。
      * @return {Object|any} 返回唯一记录集。
      */
@@ -308,7 +308,7 @@ class Ant {
      * 3. 最终调用 `mock[config.mock]` 来执行模拟数据的调用。
      *
      * @param {optionJsx} jsx 输入的jsx配置。
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      */
     static toMock(jsx = {}, reference) {
         return Data.toMock(jsx, reference);
@@ -333,7 +333,7 @@ class Ant {
      * ```
      *
      * @param {optionJsx} jsx 输入的jsx配置。
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @returns {Object} 返回构造好的配置信息。
      */
     static toConfig(jsx = {}, reference) {
@@ -358,7 +358,7 @@ class Ant {
      *
      * 根据 Datum 配置解析辅助数据，生成最终解析好的 options 数据（Array类型）。
      *
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      * @param {Object} config Datum专用配置信息。
      * @param {Function} filter 过滤函数。
      * @returns {Array} 返回的最终 options。
@@ -396,7 +396,7 @@ class Ant {
      *
      * @param {optionJsx} jsx 输入的jsx配置。
      * @param {boolean} disabled 是否禁用。
-     * @param {ReactComponent} reference React对应组件引用。
+     * @param {Object|ReactComponent} reference React对应组件引用。
      */
 
     static onReadOnly(jsx = {}, disabled = false, reference) {

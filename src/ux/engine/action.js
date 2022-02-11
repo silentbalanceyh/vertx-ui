@@ -26,13 +26,14 @@ const _callback = (reference, config, response) => {
                  */
                 const {$addKey} = reference.props;
                 let key = response.key;
-                if ($addKey) {
-                    if ($addKey !== key) {
-                        key = $addKey
-                    }
+                if ($addKey && $addKey !== key) {
+                    // 添加模式
+                    key = $addKey;
                 } else {
                     const {$inited = {}} = reference.props;
-                    if ($inited.key !== key) {
+                    if ($inited.key && $inited.key !== key) {
+                        // 编辑模式，$inited有值时处理（确认前端key和后端key一致）
+                        // 前提是前端 key 必须存在
                         key = $inited.key;
                     }
                 }

@@ -1,0 +1,474 @@
+{
+    "_form": {
+        "assist": {
+            "resource.departments": {
+                "uri": "/api/dept/by/sigma"
+            },
+            "resource.teams": {
+                "uri": "/api/team/by/sigma"
+            },
+            "zero.close.code": {
+                "uri": "/api/type/tabulars/:type",
+                "magic": {
+                    "type": "FIX:zero.close.code"
+                }
+            }
+        },
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.grouped": true,
+                    "optionJsx.extension": [
+                        "$opBack,关闭,SUBMIT,,ux-spec"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "phase,工单状态,8,,aiMagic",
+                    "optionJsx.config.items": [
+                        "INIT,填写申请:edit,16:#3053EB",
+                        "DRAFT,草稿:form,16:#EE3B3B",
+                        "PENDING,等待处理:undo,16:#EE3B3B",
+                        "FINISHED,已完成:check-circle,16:#58c623",
+                        "ACCEPTED,已接受:info-circle,16:#58c623",
+                        "REJECTED,已拒绝:redo,16:#CD1076",
+                        "CANCELED,已撤销:stop,16:#CD1076",
+                        "EXPIRED,已超时:clock-circle,16:#CD1076"
+                    ]
+                },
+                {
+                    "metadata": "catalog,服务目录,8,,aiMagic",
+                    "optionJsx.config.datum": "source=service.catalog,value=code,label=name"
+                },
+                {
+                    "metadata": "openAt,制单时间,8,,aiMagic",
+                    "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                    "moment": true
+                }
+            ],
+            [
+                {
+                    "metadata": "title,工单标题,16,98%,,placeholder=请填写您的工单标题",
+                    "optionConfig.rules": [
+                        "required,请填写工单标题，标题不可为空！"
+                    ]
+                },
+                "serial,单号,8,,,readOnly=true,inscribe=系统自动生成"
+            ],
+            [
+                "description,详细描述,24,,aiBraftEditor"
+            ]
+        ],
+        "hidden": [
+            "key",
+            "traceKey",
+            "traceId",
+            "type",
+            "owner",
+            "supervise",
+            "openBy",
+            "closeBy",
+            "cancelBy"
+        ]
+    },
+    "_formDown": {
+        "ui": [
+            [
+                "title=分派信息"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "assignContainer",
+                    "config": {
+                        "activeKey": "tabBasic",
+                        "items": "基本分派,tabBasic;责任分派,tabRepo;撤销信息,tabCancel",
+                        "pages": {
+                            "tabCancel": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "cancelByName,撤销人,8,,aiListSelector,placeholder=（谁将会撤销该工单）",
+                                            "optionJsx.config": {
+                                                "ajax": {
+                                                    "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                                                    "params.criteria": {
+                                                        "sigma": "PROP:app.sigma",
+                                                        "": true
+                                                    }
+                                                },
+                                                "linker": {
+                                                    "key": "cancelBy",
+                                                    "workNumber": "cancelByNo",
+                                                    "realname": "cancelByName",
+                                                    "email": "cancelByEmail",
+                                                    "mobile": "cancelByMobile",
+                                                    "deptId": "cancelByDept",
+                                                    "teamId": "cancelByTeam"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "部门",
+                                                            "dataIndex": "deptId",
+                                                            "$render": "USER",
+                                                            "$config": {
+                                                                "uri": "/api/dept/:key",
+                                                                "field": "name",
+                                                                "icon": false
+                                                            },
+                                                            "$empty": "（无）"
+                                                        },
+                                                        "workNumber,员工号",
+                                                        "username,登录账号",
+                                                        "realname,姓名",
+                                                        "workPhone,工作电话"
+                                                    ]
+                                                },
+                                                "validation": "请选择撤销人！",
+                                                "window": "选择撤销人,选择,关闭,false,800,false",
+                                                "search": {
+                                                    "username,c": "账号",
+                                                    "realname,c": "姓名"
+                                                }
+                                            },
+                                            "optionJsx.allowClear": true,
+                                            "optionConfig.rules": [
+                                                "required,请填写撤销人信息！"
+                                            ]
+                                        },
+                                        "cancelByNo,撤销人工号,8,,,readOnly=true",
+                                        "cancelByEmail,撤销人邮箱,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "cancelByDept,撤销人部门,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                                        },
+                                        {
+                                            "metadata": "cancelByTeam,撤销人所属组,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                                        },
+                                        "cancelByMobile,撤销人电话,8,,,readOnly=true"
+                                    ]
+                                ]
+                            },
+                            "tabRepo": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "ownerName,责任人,8,,aiListSelector,placeholder=（谁是工单负责人）",
+                                            "optionJsx.config": {
+                                                "ajax": {
+                                                    "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                                                    "params.criteria": {
+                                                        "sigma": "PROP:app.sigma",
+                                                        "": true
+                                                    }
+                                                },
+                                                "linker": {
+                                                    "key": "owner",
+                                                    "workNumber": "ownerNo",
+                                                    "realname": "ownerName",
+                                                    "email": "ownerEmail",
+                                                    "mobile": "ownerMobile",
+                                                    "deptId": "ownerDept",
+                                                    "teamId": "ownerTeam"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "部门",
+                                                            "dataIndex": "deptId",
+                                                            "$render": "USER",
+                                                            "$config": {
+                                                                "uri": "/api/dept/:key",
+                                                                "field": "name",
+                                                                "icon": false
+                                                            },
+                                                            "$empty": "（无）"
+                                                        },
+                                                        "workNumber,员工号",
+                                                        "username,登录账号",
+                                                        "realname,姓名",
+                                                        "workPhone,工作电话"
+                                                    ]
+                                                },
+                                                "validation": "请选择责任人！",
+                                                "window": "选择责任人,选择,关闭,false,800,false",
+                                                "search": {
+                                                    "username,c": "账号",
+                                                    "realname,c": "姓名"
+                                                }
+                                            },
+                                            "optionJsx.allowClear": true
+                                        },
+                                        "ownerNo,责任人工号,8,,,readOnly=true",
+                                        "ownerEmail,责任人邮箱,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "ownerDept,责任人部门,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                                        },
+                                        {
+                                            "metadata": "ownerTeam,责任人所属组,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                                        },
+                                        "ownerMobile,责任人电话,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "supervisorName,监督人,8,,aiListSelector,placeholder=（谁讲会监督工单执行）",
+                                            "optionJsx.config": {
+                                                "ajax": {
+                                                    "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                                                    "params.criteria": {
+                                                        "sigma": "PROP:app.sigma",
+                                                        "": true
+                                                    }
+                                                },
+                                                "linker": {
+                                                    "key": "supervisor",
+                                                    "workNumber": "supervisorNo",
+                                                    "realname": "supervisorName",
+                                                    "email": "supervisorEmail",
+                                                    "mobile": "supervisorMobile",
+                                                    "deptId": "supervisorDept",
+                                                    "teamId": "supervisorTeam"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "部门",
+                                                            "dataIndex": "deptId",
+                                                            "$render": "USER",
+                                                            "$config": {
+                                                                "uri": "/api/dept/:key",
+                                                                "field": "name",
+                                                                "icon": false
+                                                            },
+                                                            "$empty": "（无）"
+                                                        },
+                                                        "workNumber,员工号",
+                                                        "username,登录账号",
+                                                        "realname,姓名",
+                                                        "workPhone,工作电话"
+                                                    ]
+                                                },
+                                                "validation": "请选择监督人！",
+                                                "window": "选择监督人,选择,关闭,false,800,false",
+                                                "search": {
+                                                    "username,c": "账号",
+                                                    "realname,c": "姓名"
+                                                }
+                                            },
+                                            "optionJsx.allowClear": true
+                                        },
+                                        "supervisorNo,监督人工号,8,,,readOnly=true",
+                                        "supervisorEmail,监督人邮箱,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "supervisorDept,监督人部门,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                                        },
+                                        {
+                                            "metadata": "supervisorTeam,监督人所属组,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                                        },
+                                        "supervisorMobile,监督人电话,8,,,readOnly=true"
+                                    ]
+                                ]
+                            },
+                            "tabBasic": {
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "openByName,制单人,8,,aiListSelector,placeholder=（谁创建了工单）",
+                                            "optionJsx.config": {
+                                                "ajax": {
+                                                    "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                                                    "params.criteria": {
+                                                        "sigma": "PROP:app.sigma",
+                                                        "": true
+                                                    }
+                                                },
+                                                "linker": {
+                                                    "key": "openBy",
+                                                    "workNumber": "openByNo",
+                                                    "realname": "openByName",
+                                                    "email": "openByEmail",
+                                                    "mobile": "openByMobile",
+                                                    "deptId": "openByDept",
+                                                    "teamId": "openByTeam"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "部门",
+                                                            "dataIndex": "deptId",
+                                                            "$render": "USER",
+                                                            "$config": {
+                                                                "uri": "/api/dept/:key",
+                                                                "field": "name",
+                                                                "icon": false
+                                                            },
+                                                            "$empty": "（无）"
+                                                        },
+                                                        "workNumber,员工号",
+                                                        "username,登录账号",
+                                                        "realname,姓名",
+                                                        "workPhone,工作电话"
+                                                    ]
+                                                },
+                                                "validation": "请选择制单人！",
+                                                "window": "选择制单人,选择,关闭,false,800,false",
+                                                "search": {
+                                                    "username,c": "账号",
+                                                    "realname,c": "姓名"
+                                                }
+                                            },
+                                            "optionJsx.allowClear": true,
+                                            "optionConfig.rules": [
+                                                "required,请填写制单人信息！"
+                                            ]
+                                        },
+                                        "openByNo,制单人工号,8,,,readOnly=true",
+                                        "openByEmail,制单人邮箱,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "openByDept,制单人部门,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                                        },
+                                        {
+                                            "metadata": "openByTeam,制单人所属组,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                                        },
+                                        "openByMobile,制单人电话,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "closeByName,关单人,8,,aiListSelector,placeholder=（谁将会关单该工单）",
+                                            "optionJsx.config": {
+                                                "ajax": {
+                                                    "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",
+                                                    "params.criteria": {
+                                                        "sigma": "PROP:app.sigma",
+                                                        "": true
+                                                    }
+                                                },
+                                                "linker": {
+                                                    "key": "closeBy",
+                                                    "workNumber": "closeByNo",
+                                                    "realname": "closeByName",
+                                                    "email": "closeByEmail",
+                                                    "mobile": "closeByMobile",
+                                                    "deptId": "closeByDept",
+                                                    "teamId": "closeByTeam"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "title": "部门",
+                                                            "dataIndex": "deptId",
+                                                            "$render": "USER",
+                                                            "$config": {
+                                                                "uri": "/api/dept/:key",
+                                                                "field": "name",
+                                                                "icon": false
+                                                            },
+                                                            "$empty": "（无）"
+                                                        },
+                                                        "workNumber,员工号",
+                                                        "username,登录账号",
+                                                        "realname,姓名",
+                                                        "workPhone,工作电话"
+                                                    ]
+                                                },
+                                                "validation": "请选择关单人！",
+                                                "window": "选择关单人,选择,关闭,false,800,false",
+                                                "search": {
+                                                    "username,c": "账号",
+                                                    "realname,c": "姓名"
+                                                }
+                                            },
+                                            "optionJsx.allowClear": true,
+                                            "optionConfig.rules": [
+                                                "required,请填写关单人信息！"
+                                            ]
+                                        },
+                                        "closeByNo,关单人工号,8,,,readOnly=true",
+                                        "closeByEmail,关单人邮箱,8,,,readOnly=true"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "closeByDept,关单人部门,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+                                        },
+                                        {
+                                            "metadata": "closeByTeam,关单人所属组,8,,aiSelect,readOnly=true",
+                                            "optionJsx.config.datum": "source=resource.teams,value=key,label=name"
+                                        },
+                                        "closeByMobile,关单人电话,8,,,readOnly=true"
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                "title=意见信息"
+            ],
+            [
+                {
+                    "metadata": "closeCode,关闭代码,8,,aiSelect",
+                    "optionJsx.config.datum": "source=zero.close.code,value=code,label=name"
+                },
+                "closeKb,关联链接,16"
+            ],
+            [
+                "closeSolution,解决方案,24,,aiBraftEditor"
+            ],
+            [
+                "title=流程详情"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "monitorContainer",
+                    "config": {
+                        "activeKey": "tabBpmn",
+                        "items": "流程图,tabBpmn;操作历史,tabHistory",
+                        "pages": {
+                            "tabBpmn": {
+                                "ui": [
+                                    [
+                                        "monitorBpmn,,24"
+                                    ]
+                                ]
+                            },
+                            "tabHistory": {
+                                "ui": [
+                                    [
+                                        "monitorHistory,,24"
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

@@ -588,7 +588,7 @@ export default {
      *
      * @memberOf module:_kernel
      * @method parserOfButton
-     * @param {ReactComponent} reference React对应组件引用
+     * @param {Object|ReactComponent} reference React对应组件引用
      * @returns {Object}
      */
     parserOfButton: (reference) => ({

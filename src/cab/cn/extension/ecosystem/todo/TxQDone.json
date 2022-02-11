@@ -1,12 +1,4 @@
 {
-    "_assist": {
-        "zero.service.catalog": {
-            "uri": "/api/type/categories/:type",
-            "magic": {
-                "type": "FIX:zero.service.catalog"
-            }
-        }
-    },
     "_workflow": {
         "window": "查看流程详情,,关闭,false,1100,true",
         "form": {
@@ -18,9 +10,6 @@
                 [
                     "name,流程名,12,,aiMagic,readOnly=true",
                     "definitionKey,流程系统码,12,,aiMagic,readOnly=true"
-                ],
-                [
-                    "definitionId,流程实例ID,24,,aiMagic,readOnly=true"
                 ]
             ]
         }
@@ -28,19 +17,20 @@
     "_grid": {
         "query": {
             "projection": [],
-            "pager": "1,10",
-            "sorter": "updatedAt=DESC",
+            "pager": {
+                "page": 1,
+                "size": 10
+            },
+            "sorter": [
+                "updatedAt,DESC"
+            ],
             "criteria": {
                 "sigma": "PROP:app.sigma",
-                "modelId": "FIX:x.attachment",
-                "$U$": {
-                    "owner,=": "USER:key",
-                    "toUser,=": "USER:key"
-                },
                 "": true
             }
         },
         "options": {
+            "search.grid": "LIST_TT",
             "search.cond": [
                 "name,c",
                 "code,c"
@@ -66,17 +56,28 @@
                 "selected": "当前视图：",
                 "confirm": "您正在更改当前视图的查询条件，一旦更改后查询数据会有变化，确认？"
             },
+            "tabs.disabled": true,
             "tabs.list": "文件申请列表",
             "tabs.add": "文件申请",
             "tabs.edit": "文件申请",
             "identifier": "w.todo",
             "dynamic.op": true,
-            "dynamic.column": true,
+            "dynamic.column": false,
             "dynamic.switch": false,
-            "op.open.filter": "清除筛选",
+            "op.extension.generate": {
+                "text": "流程详情",
+                "icon": "info",
+                "region": "op.open.workflow",
+                "plugin": {
+                    "tooltip": true
+                },
+                "config": {
+                    "executor": "rxWorkflow"
+                }
+            },
             "op.extra.column": "修改显示列",
             "op.extra.view": "视图管理",
-            "op.row.edit": false,
+            "op.row.edit": true,
             "op.row.delete": false,
             "op.row.view": "查看",
             "op.submit.close": "关闭",
@@ -123,19 +124,77 @@
                 "report": "（总共:page页，:total条数据）",
                 "selected": "勾选了:count条"
             },
+            "row": {
+                "onDoubleClick": "fnView"
+            },
             "columns": [
                 {
                     "title": "操作",
                     "dataIndex": "key",
                     "fixed": "left",
-                    "width": 120,
+                    "width": 80,
                     "$render": "EXECUTOR",
                     "$option": [
                         {
                             "text": "查看",
-                            "executor": "fnEdit"
+                            "executor": "fnView"
                         }
                     ]
+                },
+                "title,工单标题",
+                {
+                    "metadata": "phase,工单状态,RENDERS",
+                    "width": 100,
+                    "config": {
+                        "items": [
+                            "INIT,填写申请:edit,16:#3053EB",
+                            "DRAFT,草稿:form,16:#EE3B3B",
+                            "PENDING,等待处理:undo,16:#EE3B3B",
+                            "FINISHED,已完成:check-circle,16:#58c623",
+                            "ACCEPTED,已接受:info-circle,16:#58c623",
+                            "REJECTED,已拒绝:redo,16:#CD1076",
+                            "CANCELED,已撤销:stop,16:#CD1076",
+                            "EXPIRED,已超时:clock-circle,16:#CD1076"
+                        ]
+                    }
+                },
+                "serial,单号",
+                {
+                    "metadata": "openBy,制单人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00BF9F"
+                    }
+                },
+                {
+                    "metadata": "openAt,制单时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                },
+                {
+                    "metadata": "closeBy,关单人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00AAE4"
+                    }
+                },
+                {
+                    "metadata": "owner,责任人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#6A52E1"
+                    }
+                },
+                {
+                    "metadata": "supervisor,监督人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#FF4F5D"
+                    },
+                    "$empty": "（未设置）"
                 }
             ]
         }

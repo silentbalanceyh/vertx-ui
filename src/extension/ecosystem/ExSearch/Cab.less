@@ -8,6 +8,27 @@
 
 .ex-search {
 
+    // < 1200
+    @media (max-width: 1366px) {
+        .ant-input-search {
+            width: 50% !important;
+        }
+    }
+
+    // 1280 x 1024
+    @media (min-width: 1366px) and (max-width: @screen-xxl) {
+        .ant-input-search {
+            width: 64% !important;
+        }
+    }
+
+    // > 1600
+    @media (min-width: @screen-xxl) {
+        .ant-input-search {
+            width: 72% !important;
+        }
+    }
+
     button[disabled] {
         top: 1px !important;
     }

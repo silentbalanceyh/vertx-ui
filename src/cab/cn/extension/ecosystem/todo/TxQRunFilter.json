@@ -1,0 +1,60 @@
+{
+    "_assist": {
+        "user.groups": {
+            "uri": "/api/group/by/sigma"
+        },
+        "user.roles": {
+            "uri": "/api/role/by/sigma"
+        },
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "resource.teams": {
+            "uri": "/api/team/by/sigma"
+        }
+    },
+    "_toolbar": {
+        "open": "提交流程申请",
+        "dim": {
+            "title": "业务条件",
+            "items": [
+                "toDept,部门审批",
+                "toTeam,业务组审批",
+                "toRole,角色审批",
+                "toGroup,用户组审批"
+            ]
+        },
+        "queue": {
+            "title": "视图条件",
+            "items": [
+                "openBy,我是制单人",
+                "toUser,我是审批人",
+                "owner,我是责任人",
+                "supervisor,我是监督人"
+            ],
+            "icon": {
+                "openBy": "#00BF9F",
+                "toUser": "#00AAE4",
+                "owner": "#6A52E1",
+                "supervisor": "#FF4F5D"
+            }
+        },
+        "connector": {
+            "items": [
+                "AND,且",
+                "OR,或"
+            ]
+        },
+        "condition": {
+            "label": "筛选条件",
+            "empty": "（您尚未选择任何筛选条件。）",
+            "vector": {
+                "openBy": "制单人",
+                "toUser": "审批人",
+                "owner": "责任人",
+                "supervisor": "监督人"
+            },
+            "clear": "清除所有"
+        }
+    }
+}

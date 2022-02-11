@@ -125,6 +125,7 @@ const signature = (uri, method = "GET", params = {}) => {
     params['sig'] = sig;
 };
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // 签名专用函数
     signature,

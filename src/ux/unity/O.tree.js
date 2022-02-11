@@ -72,7 +72,7 @@ class TreeProc {
  *
  * @memberOf module:_unity
  * @method tree
- * @param {ReactComponent} reference React组件
+ * @param {Object|ReactComponent} reference React组件
  * @returns {TreeProc} 返回内置树结构
  */
 export default (reference) => new TreeProc(reference)
