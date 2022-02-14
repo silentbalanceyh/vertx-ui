@@ -797,24 +797,23 @@ const messageCatch = (error = {}, callback) => {
     }
 };
 // O.ajax.callback.js
-
-const ajaxEnd = (reference, redux) => () => {
+const ajaxEnd = (reference, redux, error) => () => {
     reference.setState({
         $loading: false,
         $submitting: false
     });
-    /*
-     * 专用处理
-     */
+    // 1. Redux回调
     if (redux) {
         T.writeSubmit(reference, false);
     }
-    /*
-     * 处理 doSubmitting 函数（Extension中专用）
-     */
+    // 2. 防重复提交回调
     const {doSubmitting} = reference.props;
     if (Abs.isFunction(doSubmitting)) {
         doSubmitting(false);
+    }
+    // 3. error出现时callback回调，只限于error
+    if (error && Abs.isFunction(error.callback)) {
+        error.callback();
     }
 };
 const _fromHoc = (reference = {}, key = "") => {
@@ -864,7 +863,7 @@ const ajaxError = (reference, error = {}, redux = false) => {
             title: dialog.error, content: data.info,
             maskClosable: false,
         };
-        config.onOk = ajaxEnd(reference, redux);
+        config.onOk = ajaxEnd(reference, redux, error);
         Modal.error(config);
         // return Promise.reject(error);
     } else {

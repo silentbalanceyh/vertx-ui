@@ -129,10 +129,12 @@ class Op {
                     }
                 })
                 .catch(error => {
-                    const {data = {}} = error;
-                    if (-80222 === data.code) {
-                        const session = Ux.randomString(48);
-                        Ux.Session.put(Ux.Env.X_SESSION, session);
+                    // 特殊流程（一旦登录失败刷新验证码）
+                    if ($session) {
+                        error.callback = () => {
+                            const session = Ux.randomString(48);
+                            reference.setState({$session: session});
+                        }
                     }
                     return Promise.reject(error);
                 });

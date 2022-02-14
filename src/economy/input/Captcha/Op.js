@@ -17,8 +17,7 @@ const asyncImage = (config = {}, $session) => {
         console.error("暂不支持")
     }
 }
-const rxImage = (reference) => (event) => {
-    Ux.prevent(event);
+const rxRefresh = (reference) => {
     const {config = {}, $session} = reference.props;
     reference.setState({$imageLoading: true});
     return asyncImage(config, $session).then($image => {
@@ -28,8 +27,13 @@ const rxImage = (reference) => (event) => {
         reference.setState(state);
     })
 }
+const rxImage = (reference) => (event) => {
+    Ux.prevent(event);
+    rxRefresh(reference);
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     asyncImage,
     rxImage,
+    rxRefresh,
 }

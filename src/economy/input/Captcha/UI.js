@@ -21,9 +21,21 @@ const componentInit = (reference) => {
     }
 }
 
+const componentUp = (reference, virtual = {}) => {
+    const current = reference.props.$session;
+    const previous = virtual.props.$session;
+    if (previous && current && previous !== current) {
+        Op.rxRefresh(reference);
+    }
+}
+
 class Component extends React.PureComponent {
     componentDidMount() {
         componentInit(this);
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        componentUp(this, {props: prevProps});
     }
 
     render() {
