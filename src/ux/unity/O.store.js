@@ -187,6 +187,10 @@ class Session {
         return get(window.sessionStorage)(key);
     }
 
+    static getDirect(key) {
+        return getDirect(window.sessionStorage)(key);
+    }
+
     /**
      *
      * @param {String} key 将要移除的 session 中键值。

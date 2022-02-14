@@ -58,12 +58,34 @@
             ],
             [
                 {
+                    "field": "captcha",
+                    "$render": "aiCaptcha",
+                    "optionJsx": {
+                        "placeholder": "验证码",
+                        "prefix": {
+                            "type": "code"
+                        },
+                        "config": {
+                            "type": "image",
+                            "ajax": {
+                                "uri": "/captcha/image",
+                                "method": "POST"
+                            }
+                        }
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
                     "metadata": "$button",
                     "optionJsx.align": "center",
                     "optionJsx.buttons": {
                         "submit": "$opLogin,登录"
                     },
-                    "span":24
+                    "span": 24
                 }
             ]
         ]

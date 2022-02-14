@@ -46,9 +46,18 @@ const initConfig = (props) => {
     let {config = {}} = props;
     config = Ux.clone(config);
     config.controls = [
-        'bold', 'italic', 'underline', 'strike-through', 'separator',
-        'text-color', 'font-size', 'text-align', 'separator',
-        'line-height', 'letter-spacing', 'separator'
+        'bold',                 // 粗体
+        'italic',               // 斜体
+        'underline',            // 下划线
+        'strike-through',       // 删除线
+        'separator',
+        'text-color',           // 字体颜色
+        'font-size',            // 字体大小
+        'text-align',           // 字对齐
+        'separator',
+        'line-height',          // 行高
+        'letter-spacing',       // 字间距
+        'separator'
     ];
     return config;
 };

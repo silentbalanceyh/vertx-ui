@@ -576,8 +576,10 @@ const ajaxHeaderJ = (secure = false, options = {}) => {
 const ajaxHeader = (headers = {}, secure = false) => {
     if (secure) {
         const token = T.token();
-        E.fxTerminal(!token, 10065, token);
-        headers.append(Cv.HTTP11.AUTHORIZATION, token);
+        if (token) {
+            // E.fxTerminal(!token, 10065, token);
+            headers.append(Cv.HTTP11.AUTHORIZATION, token);
+        }
     }
     /* 启用了 X_ 的Header发送请求 */
     if (Cv['X_HEADER_SUPPORT']) {
@@ -594,6 +596,7 @@ const ajaxHeader = (headers = {}, secure = false) => {
         const language = Cv['LANGUAGE'] ? Cv['LANGUAGE'] : "cn";
         if (language) headers.append(Cv.X_HEADER.X_LANG, language);
     }
+    /* X_SESSION */
     ajaxXSRF(headers);
 };
 const ajaxParams = (params = {}, options = {}) => {
@@ -674,10 +677,16 @@ const ajaxAdapter = (body = {}) => {
         return data;
     } else return body;
 };
-const ajaxOptions = (method, headers, inputOpts = {}) => {
+const ajaxOptions = (method, headerRef, inputOpts = {}) => {
     const options = {};
     options.method = method;
-    options.headers = headers;
+    // options support headers replaced
+    const {headers = {}, ...inputOptRest} = inputOpts;
+    if (headers) {
+        Object.keys(headers)
+            .forEach(key => headerRef.append(key, headers[key]))
+    }
+    options.headers = headerRef;
     if (Cv.hasOwnProperty('CORS_MODE')) {
         options.mode = Cv['CORS_MODE'];
     } else {
@@ -689,8 +698,8 @@ const ajaxOptions = (method, headers, inputOpts = {}) => {
     /*
      * 合并传入专用
      */
-    if (!Abs.isEmpty(inputOpts)) {
-        Object.assign(options, inputOpts);
+    if (!Abs.isEmpty(inputOptRest)) {
+        Object.assign(options, inputOptRest);
     }
     return options;
 };

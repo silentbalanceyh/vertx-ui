@@ -1,6 +1,7 @@
 import {
     AddressSelector,
     BraftEditor,
+    Captcha,
     CheckJson,
     CheckTransfer,
     DialogEditor,
@@ -232,6 +233,21 @@ const aiInput = (reference, jsx = {}, onChange) => {
     R.Ant.onPlaceHolder(jsx);
     return (<Input {...jsx}/>);
 };
+
+const aiCaptcha = (reference, jsx = {}, onChange) => {
+    jsx = Abs.clone(jsx);
+    // 处理prefix属性
+    R.Ant.onPrefix(jsx);
+    // 处理addonAfter
+    R.Ant.onAddonAfter(jsx);
+    // onChange处理
+    R.Ant.onChange(jsx, onChange);
+    // ReadOnly处理
+    R.Ant.onReadOnly(jsx, false, reference);
+    // 处理PlaceHolder，先处理readOnly
+    R.Ant.onPlaceHolder(jsx);
+    return (<Captcha {...jsx} reference={reference}/>)
+}
 
 // import InputNumber from './O.input.number';
 const aiInputNumber = (reference, jsx = {}, onChange) => {
@@ -882,5 +898,7 @@ const exported = {
 
     // 树 + 表格编辑穿梭
     aiTableTransfer,
+    // 验证码
+    aiCaptcha,
 };
 export default exported;

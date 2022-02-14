@@ -283,7 +283,7 @@
                                     ],
                                     [
                                         {
-                                            "metadata": "supervisorName,监督人,8,,aiListSelector,placeholder=（谁讲会监督工单执行）",
+                                            "metadata": "supervisorName,监督人,8,,aiListSelector,placeholder=（谁将会监督工单执行）",
                                             "optionJsx.config": {
                                                 "ajax": {
                                                     "metadata": "POST,/api/user/search,1,10,sorter=createdAt`ASC",

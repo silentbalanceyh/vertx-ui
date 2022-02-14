@@ -22,7 +22,6 @@ class Component extends React.PureComponent {
             // 表单配置
             const wf = Ex.wf(this, $workflow.task);
             const form = wf.yoFormOpen($workflow);
-
             return (
                 <div className={"ex-flow-page"}>
                     <ExForm {...form} $height={"300px"}

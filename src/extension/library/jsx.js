@@ -42,7 +42,7 @@ export default {
         /**
          * 渲染用户名，在Jsx中注入`onPressEnter`事件
          *
-         * @param {Object|ReactComponent} reference React对应组件引用。
+         * @param {Object} reference React对应组件引用。
          * @param {Object} jsx 输入的jsx配置。
          * @returns {Jsx}
          */
@@ -56,7 +56,7 @@ export default {
         /**
          * 渲染密码，在Jsx中注入`onPressEnter`事件
          *
-         * @param {Object|ReactComponent} reference React对应组件引用。
+         * @param {Object} reference React对应组件引用。
          * @param {Object} jsx 输入的jsx配置。
          * @returns {Jsx}
          */
@@ -66,6 +66,25 @@ export default {
                 Ux.connectId("$opLogin");
             };
             return Ux.aiInput(reference, jsx);
+        },
+        /**
+         * 渲染验证码，在Jsx中注入`onPressEnter`事件
+         *
+         * @param {Object} reference React对应组件引用。
+         * @param {Object} jsx 输入的jsx配置。
+         * @returns {Jsx}
+         */
+        captcha: (reference, jsx) => {
+            jsx.onPressEnter = (event) => {
+                Ux.prevent(event);
+                Ux.connectId("$opLogin");
+            };
+            // $session 处理
+            const {$session} = reference.state ? reference.state : {};
+            if ($session) {
+                jsx.$session = $session;
+            }
+            return Ux.aiCaptcha(reference, jsx);
         }
     },
     Address: {

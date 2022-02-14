@@ -78,6 +78,22 @@ const rxTree = (reference) => (keys = []) => {
     });
     reference.setState({$loading: true, $keySet});
 }
+const rxSubmit = (reference) => (event) => {
+    Ux.prevent(event);
+    const {$selected = []} = reference.state;
+    if (0 === $selected.length) {
+        const {config} = reference.props;
+        Ux.messageFailure(config.validation);
+    } else {
+        const {rxLink} = reference.props;
+        if (Ux.isFunction(rxLink)) {
+            const {$lazy = {}} = reference.state;
+            rxLink($selected, $lazy);
+        } else {
+            console.warn("`rxLink`函数没有设置！！");
+        }
+    }
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
     yiTree,
@@ -88,4 +104,5 @@ export default {
     rxKeyword,
     rxTree,
     rxSearch,
+    rxSubmit,
 }

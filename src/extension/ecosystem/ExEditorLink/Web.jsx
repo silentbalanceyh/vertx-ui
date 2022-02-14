@@ -52,7 +52,7 @@ export default {
                 <Col span={18} className={"tip"}>
                     <Tag style={{
                         fontSize: 14
-                    }} color={"volcano"}>
+                    }} color={"magenta"}>
                         {$tip.message}
                     </Tag>
                 </Col>

@@ -485,12 +485,12 @@ export default (reference, node) => {
                 return Ux.aiMagic(ref, jsx);
             },
             __children: {
-                //
-                monitorTicket: () => {
+                // 关联工单
+                monitorTicket: (ref) => {
                     const $workflow = Ux.ambValue(reference, "$workflow");
-                    const {$inited = {}, $mode} = reference.props;
+                    const {$inited = {}, $mode} = ref.props;
                     const inherit = Ch.yoAmbient(reference);
-                    inherit.data = $inited;
+                    inherit.$inited = $inited;
 
                     const {config = {}} = $workflow;
                     const {ticket = {}} = config.linkage ? config.linkage : {};
@@ -511,13 +511,18 @@ export default (reference, node) => {
                 },
                 // 流程图专用字段
                 monitorBpmn: () => {
-                    const $workflow = Ux.ambValue(reference, "$workflow");
+                    /*
+                     * 只能从状态中拿 $workflow 专用变量
+                     * 旧代码：Ux.ambValue(reference, "$workflow");
+                     * 此处不执行二选一的完结操作
+                     */
+                    const {$workflow = {}} = reference.state;
                     const {$inited = {}} = reference.props;
                     const $bpmn = {
                         data: $workflow['bpmn'],
                         task: $workflow.task,
                         trace: $workflow.history,
-                        phase: $inited.status
+                        phase: $inited.phase
                     };
                     const canvas = configUi($workflow, "canvas");
                     return (

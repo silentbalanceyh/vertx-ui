@@ -23,7 +23,7 @@ class Op {
      * 注销专用操作。
      *
      * @async
-     * @param {Object|ReactComponent} reference React对应组件引用。
+     * @param {Object} reference React对应组件引用。
      * @returns {Promise<T>} 返回最终Promise
      */
     static $opLogout(reference) {
@@ -46,14 +46,20 @@ class Op {
      * 登录专用操作。
      *
      * @async
-     * @param {Object|ReactComponent} reference React对应组件引用。
+     * @param {Object} reference React对应组件引用。
      * @returns {function(*=): Promise<T>} 返回最终Promise
      */
     static $opLogin(reference) {
-        let pwdChange = false
+        let pwdChange = false;
         return (params) => {
             const password = params.password;
-            return I.login(params)
+            // 验证码专用
+            const headers = {};
+            const {$session} = reference.state ? reference.state : {};
+            if ($session) {
+                headers[Ux.Env.X_HEADER.X_SESSION] = $session;
+            }
+            return I.login(params, {headers})
                 .then((data = {}) => {
                     // 交换授权码专用请求
                     const request = {};
@@ -121,11 +127,20 @@ class Op {
                         Ux.storeUser(logged);
                         Ux.toOriginal(reference);
                     }
+                })
+                .catch(error => {
+                    const {data = {}} = error;
+                    if (-80222 === data.code) {
+                        const session = Ux.randomString(48);
+                        Ux.Session.put(Ux.Env.X_SESSION, session);
+                    }
+                    return Promise.reject(error);
                 });
         }
     }
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     $opLogin: Op.$opLogin,
     $opLogout: Op.$opLogout,

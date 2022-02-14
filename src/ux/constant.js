@@ -270,7 +270,7 @@ export default {
      */
     X_SIGMA: `${KEY_APP}/SIGMA`,
 
-
+    X_SESSION: `${KEY_APP}/SESSION_ID`,
     /**
      * ## `Ux.Env.X_HEADER`
      *
@@ -298,7 +298,8 @@ export default {
         X_APP_KEY: "X-App-Key",
         X_APP_ID: "X-App-Id",
         X_SIGMA: "X-Sigma",
-        X_LANG: "X-Lang"
+        X_LANG: "X-Lang",
+        X_SESSION: "X-Session-Id"
     },
 
 

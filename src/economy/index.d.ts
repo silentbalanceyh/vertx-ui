@@ -23,6 +23,7 @@ declare module "web" {
     export {default as MatrixSelector} from './input/MatrixSelector/UI';      // 数组选择器，选择结果是多个
     export {default as SearchInput} from './input/SearchInput/UI';
     export {default as TableTransfer} from './input/TableTransfer/UI';      // 树选择 + 表格编辑
+    export {default as Captcha} from './input/Captcha/UI';                  // 验证码
     // web组件（带children）
     export {default as PageCard} from './web/PageCard/UI';
     export {default as Rectangle} from './web/Rectangle/UI';

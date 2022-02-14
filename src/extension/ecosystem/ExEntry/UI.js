@@ -62,6 +62,11 @@ import Ex from 'ex';
  * 5. 将所有信息合并，然后调用`rxLogin`回调函数，该函数必须返回`Promise`，异步调用。
  * 6. 执行最终三步。
  *
+ * 辅助接口：
+ *
+ * 1. `POST /oauth/image-code`生成验证码
+ * 2. 直接在登录流程中追加验证码功能（后台开启）
+ *
  * #### 3.2.关于密码
  *
  * 在调用`/oauth/login`方法时，密码会执行`MD5`加密，发送密文到后端。
@@ -79,6 +84,13 @@ import Ex from 'ex';
  * @memberOf module:web-component
  * @method ExEntry
  **/
+const componentInit = (reference) => {
+    const state = {};
+    state.$ready = true;
+    state.$session = Ux.randomString(48);
+    reference.setState(state);
+}
+
 @Ux.zero(Ux.rxEtat(require('./Cab.json'))
     .cab("ExEntry")
     .form().raft(1).raft(Ex.Jsx.Login)
@@ -86,6 +98,10 @@ import Ex from 'ex';
     .to()
 )
 class Component extends React.PureComponent {
+    componentDidMount() {
+        componentInit(this);
+    }
+
     render() {
         return Ex.yoRender(this, () =>
                 Ux.aiForm(this),

@@ -356,13 +356,14 @@ class I {
      *
      * @async
      * @param {Object} request 登录专用请求。
+     * @param {Object} options 选项处理
      * @returns {Promise<T>} 返回Promise。
      */
-    static login(request = {}) {
+    static login(request = {}, options = {}) {
         return Ux.ajaxPush('/oauth/login', {
             ...request,
             password: Ux.encryptMD5(request.password)    // MD5加密
-        });
+        }, options);
     }
 
     /**

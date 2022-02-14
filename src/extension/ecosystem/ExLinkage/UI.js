@@ -3,6 +3,7 @@ import {Col, Row} from 'antd';
 import Ux from 'ux';
 import Ex from 'ex';
 import Rdr from './Web';
+import './Cab.less';
 
 const componentInit = (reference) => {
     const {config = {}} = reference.props;
@@ -11,18 +12,19 @@ const componentInit = (reference) => {
         tree = {},
         search = {},
         ajax = {},
-        table = {}
+        table = {},
+        initial = {},
     } = config;
 
     // Action
     const action = Ux.fromHoc(reference, "action");
-    let {add = {}, remove = {}} = action;
+    let {add = {}, remove = {}, save = {}} = action;
     add = Ux.clone(add);
     remove = Ux.clone(remove);
     add.text = message.add;
 
     const state = {};
-    state.$action = {add, remove};
+    state.$action = {add, remove, save};
 
     // Window
     let window = Ux.fromHoc(reference, "window");
@@ -40,12 +42,17 @@ const componentInit = (reference) => {
     editor.tree = Ux.clone(tree);
     editor.ajax = ajax;
     editor.table = table;
+    editor.button = window.__onOk;
+    editor.validation = message.failure;
     // Editor - Tip
     editor.tip = {}
     editor.tip.message = message.tip;
 
     state.$editor = editor;
+    table.columns = Ux.configColumn(reference, table.columns);
     state.$table = table;
+
+    state.$initial = initial; // 初始化 linkage 专用
 
     state.$ready = true;
     reference.setState(state);
@@ -66,20 +73,23 @@ class Component extends React.PureComponent {
     render() {
         return Ex.yoRender(this, () => {
             return (
-                <div>
+                <div className={"ex-linkage"}>
                     <Row>
-                        <Col span={6}>
+                        <Col span={12}>
                             {Rdr.renderLink(this)}
                             &nbsp;
                             {Rdr.renderUnlink(this)}
+                            &nbsp;
+                            {Rdr.renderSave(this)}
                         </Col>
-                        <Col span={18}>
+                        <Col span={12} className={"tip"}>
                             {Rdr.renderWindow(this)}
+                            {Rdr.renderTip(this)}
                         </Col>
                     </Row>
                     <Row>
-                        <Col span={24}>
-
+                        <Col span={24} className={"content"}>
+                            {Rdr.renderTable(this)}
                         </Col>
                     </Row>
                 </div>

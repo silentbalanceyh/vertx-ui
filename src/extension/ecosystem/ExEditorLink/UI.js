@@ -1,6 +1,6 @@
 import React from 'react';
 import Ux from "ux";
-import {Col, Row} from 'antd';
+import {Button, Col, Row} from 'antd';
 import './Cab.less';
 import Op from './Op';
 import Ex from "ex";
@@ -120,6 +120,8 @@ class Component extends React.PureComponent {
                             </div>
                         </Col>
                     </Row>
+                    <Button className={"ux-hidden"} id={config.button}
+                            onClick={Op.rxSubmit(this)}/>
                 </div>
             )
         }, Ex.parserOfColor("ExEditorLink").private())
