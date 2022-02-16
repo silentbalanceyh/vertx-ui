@@ -60,6 +60,14 @@
                 {
                     "field": "captcha",
                     "$render": "aiCaptcha",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入验证码！"
+                            }
+                        ]
+                    },
                     "optionJsx": {
                         "placeholder": "验证码",
                         "prefix": {

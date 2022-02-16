@@ -1,31 +1,83 @@
 import Ux from 'ux';
 
-const elementSave = ($data = [], $added = {}) => {
+// eslint-disable-next-line no-template-curly-in-string
+const KEY_LINK = "`${source.code} - ${target.code}`";
+
+const valueRow = (linkage = {}) => {
     /*
-     * $data 中查找 $added 中匹配的数据
+     * 链接专用记录
+     */
+    if (!linkage.key) {
+        linkage.key = Ux.randomUUID();
+    }
+    const record = {};
+    const {targetData = {}} = linkage;
+    Object.assign(record, targetData);
+    /*
+     * 特殊字段
+     * - key 赋值成 linkage 的 key
+     * - record 赋值成提交请求要使用的 linkage 记录
      */
     const encryptUnique = (item = {}) => {
         const seed = item.targetType + "/" + item.targetKey;
         return Ux.encryptMD5(seed);
     };
-    const keyIn = encryptUnique($added);
-    const $dataArray = Ux.clone($data);
-    const found = $data.filter(item => {
-        const keyOld = encryptUnique(item);
-        return keyIn === keyOld;
-    });
-    if (1 === found.length) {
-        const foundObj = Ux.clone(found[0]);
-        // 合并
-        $dataArray.push(Object.assign(foundObj, $added));
-    } else if (0 === found.length) {
-        // 添加
-        $dataArray.push($added);
-    }
-    return $dataArray;
+    record.key = linkage.key;
+    record.data = linkage;
+    record.unique = encryptUnique(linkage);
+    return record;
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    valueRow,
+    rxUnlink: (reference) => (event) => {
+        Ux.prevent(event);
+        let {$selected = [], $data = []} = reference.state;
+        const keys = $selected.map(item => item.key);
+        $data = Ux.clone($data);
+        $data = $data.filter(item => !keys.includes(item.key));
+
+        const state = {};
+        state.$data = $data;
+        state.$selected = [];
+        {
+            const updated = state.$data.map(item => item.data);
+            Ux.fn(reference).onChange(updated);
+        }
+        state.$keyChange = Ux.randomString(8);
+        reference.setState(state);
+    },
+    rxSave: (reference) => (event) => {
+        Ux.prevent(event);
+        // 发送请求更新
+        const {$save = {}, $data = []} = reference.state;
+        const keys = $data.map(item => item.key);
+        // Removed（移除）
+        const {data = [], message} = $save;
+        // Save（保存）
+        const removed = data.filter(item => !keys.includes(item.key)).map(item => item.key);
+        const request = {};
+        request.removed = removed;
+        request.data = $data.map(item => item.data);
+        Ux.ajaxPost("/api/linkage/sync/b", request).then(response => {
+            if (message) {
+                Ux.messageSuccess(message);
+            }
+            // 回调更新当前数据
+            const state = {};
+            state.$keyChange = undefined;
+
+            const $data = [];
+            response.forEach(row => $data.push(valueRow(row)));
+            state.$data = $data;
+            state.$save = {
+                data: $data
+            }
+            Ux.fn(reference).onChange($data.map(item => item.data));
+            reference.setState(state);
+        })
+    },
     /*
      * rxLink（添加Link时专用）
      */
@@ -91,7 +143,18 @@ export default {
             const $original =
                 // 原始数据
                 reference.state.$data ? reference.state.$data : [];
-            let $dataArray = Ux.clone($original);
+            let $dataArray = [];
+            /*
+             * 根据 unique 保存
+             */
+            const saveRow = (item) => {
+                const found = Ux.elementUnique($original, 'unique', item.unique);
+                if (found) {
+                    $dataArray.push(Object.assign(found, item));
+                } else {
+                    $dataArray.push(item);
+                }
+            }
             if (Ux.Env.FORM_MODE.ADD === $mode) {
                 /*
                  * 添加模式，等待后台赋值字段
@@ -103,10 +166,11 @@ export default {
                 $data.forEach(data => {
                     const dataItem = Ux.clone($initial);
                     // eslint-disable-next-line
-                    dataItem.name = "`${sourceCode} - ${targetCode}`";
+                    dataItem.name = KEY_LINK;
                     dataItem.targetKey = data.key;
                     dataItem.targetData = Ux.clone(data);
-                    $dataArray = elementSave($dataArray, dataItem); // $dataArray.push(dataItem);
+                    const normalized = valueRow(dataItem);
+                    saveRow(normalized);
                 })
             } else {
                 /*
@@ -115,19 +179,25 @@ export default {
                 if ($inited && $inited.code) {
                     $data.forEach(data => {
                         const dataItem = Ux.clone($initial);
-                        dataItem.sourceKey = $inited.key;
+                        // ticket key
+                        dataItem.sourceKey = $inited['traceId'];
                         dataItem.sourceData = Ux.clone($inited);
                         dataItem.name = `${$inited.code} - ${data.code}`;
                         dataItem.targetKey = data.key;
                         dataItem.targetData = Ux.clone(data);
-                        $dataArray = elementSave($dataArray, dataItem);
+                        const normalized = valueRow(dataItem);
+                        saveRow(normalized);
                     })
                 }
             }
             state.$data = $dataArray;
         }
-        console.log(state);
+        {
+            const updated = state.$data.map(item => item.data);
+            Ux.fn(reference).onChange(updated);
+        }
         // Linkage
+        state.$keyChange = Ux.randomString(8);
         reference.setState(state);
     }
 }

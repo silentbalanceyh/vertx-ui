@@ -29,6 +29,8 @@ class Component extends React.PureComponent {
 
                             rxClose={wf.rxClose}                     // 关闭函数
 
+                            $complex={wf.JsxComplex}
+                            
                             $renders={wf.JsxForm}              // 自定义表单字段渲染
 
                             $plugins={wf.yoPlugins($workflow)}

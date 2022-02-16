@@ -486,7 +486,7 @@ export default (reference, node) => {
             },
             __children: {
                 // 关联工单
-                monitorTicket: (ref) => {
+                linkageTicket: (ref) => {
                     const $workflow = Ux.ambValue(reference, "$workflow");
                     const {$inited = {}, $mode} = ref.props;
                     const inherit = Ch.yoAmbient(reference);
@@ -504,9 +504,7 @@ export default (reference, node) => {
                         ].includes(record.phase)
                     }
                     return (
-                        <div>
-                            <ExLinkage {...inherit}/>
-                        </div>
+                        <ExLinkage {...inherit}/>
                     )
                 },
                 // 流程图专用字段
@@ -526,9 +524,7 @@ export default (reference, node) => {
                     };
                     const canvas = configUi($workflow, "canvas");
                     return (
-                        <div>
-                            <ExBpmn {...$bpmn} $canvas={canvas}/>
-                        </div>
+                        <ExBpmn {...$bpmn} $canvas={canvas}/>
                     )
                 },
                 // 操作历史专用字段
@@ -540,9 +536,7 @@ export default (reference, node) => {
                         history.openBy = $inited.openBy;
                     });
                     return (
-                        <div>
-                            <TxHistory data={data}/>
-                        </div>
+                        <TxHistory data={data}/>
                     )
                 }
             }

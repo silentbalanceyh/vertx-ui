@@ -77,4 +77,15 @@ class Component extends React.PureComponent {
     }
 }
 
-export default Component
+// Fix issue of Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+// 如果需要外包装成表单级getFieldDecorator，就必须多加一层
+// 主要是存在 @zero 注解的表单必须如此操作
+class Wrap extends React.PureComponent {
+    render() {
+        return (
+            <Component {...this.props}/>
+        )
+    }
+}
+
+export default Wrap

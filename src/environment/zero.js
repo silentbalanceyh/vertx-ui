@@ -16,6 +16,7 @@ const ensureForm = (target = {}, options = {}) => {
 /*
  * 防内存泄漏专用方法
  */
+// eslint-disable-next-line import/no-anonymous-default-export
 export default (options = {}) => {
     return (target, property, descriptor) => {
         // 修改target过后的继承

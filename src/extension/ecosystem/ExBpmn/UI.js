@@ -66,7 +66,7 @@ class Component extends React.PureComponent {
         const {$canvas = {}} = this.props;
         const {height = 200, offset = 4} = $canvas;
         const span = 24 - offset;
-        Ux.dgDebug($canvas, "BPMN图大小", "#0094d1")
+        // Ux.dgDebug($canvas, "BPMN图大小", "#0094d1")
         return (
             <div className={"ex-bpmn"}>
                 <Row>

@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import U from "underscore";
 
 const yiPage = (reference) => {
     const {config = {}, children} = reference.props;
@@ -90,7 +89,7 @@ const yoExtra = ($tabs = {}, reference) => {
     } else {
         const {fnExtra} = tabs;
         const {$activeKey} = reference.state;
-        if (U.isFunction(fnExtra)) {
+        if (Ux.isFunction(fnExtra)) {
             tabs.tabBarExtraContent = fnExtra($activeKey);
         }
     }

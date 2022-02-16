@@ -4,9 +4,10 @@ import Ux from 'ux';
 import Ex from 'ex';
 import Rdr from './Web';
 import './Cab.less';
+import Op from './Op';
 
 const componentInit = (reference) => {
-    const {config = {}} = reference.props;
+    const {config = {}, value = []} = reference.props;
     const {
         message = {},
         tree = {},
@@ -55,7 +56,22 @@ const componentInit = (reference) => {
     state.$initial = initial; // 初始化 linkage 专用
 
     state.$ready = true;
-    reference.setState(state);
+    // 更新当前属性的默认值
+    const $data = [];
+    value.forEach(row => $data.push(Op.valueRow(row)));
+    state.$data = $data;
+    state.$save = {
+        data: Ux.clone($data),
+        message: message.success
+    }
+    if (0 < $data.length) {
+        Ux.ajaxEager(reference, table.columns, $data).then($lazy => {
+            state.$lazy = $lazy;
+            reference.setState(state);
+        })
+    } else {
+        reference.setState(state);
+    }
 }
 
 /*
@@ -94,8 +110,19 @@ class Component extends React.PureComponent {
                     </Row>
                 </div>
             )
-        }, Ex.parserOfColor("ExLinkage").list())
+        }, Ex.parserOfColor("ExLinkage").list({off: true}))
     }
 }
 
-export default Component
+// Fix issue of Function components cannot be given refs. Attempts to access this ref will fail. Did you mean to use React.forwardRef()?
+// 如果需要外包装成表单级getFieldDecorator，就必须多加一层
+// 主要是存在 @zero 注解的表单必须如此操作
+class Wrap extends React.PureComponent {
+    render() {
+        return (
+            <Component {...this.props}/>
+        )
+    }
+}
+
+export default Wrap

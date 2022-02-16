@@ -23,18 +23,23 @@ export default {
         const {remove = {}} = $action;
         const {text, ...rest} = remove;
         return (
-            <Button {...rest} disabled={0 === $selected.length}>
+            <Button {...rest} disabled={0 === $selected.length}
+                    onClick={Op.rxUnlink(reference)}>
                 {text}
             </Button>
         )
     },
     renderSave: (reference) => {
-        const {$action = {}} = reference.state;
+        const {$action = {}, $keyChange} = reference.state;
         const {save = {}} = $action;
         const {text, ...rest} = save;
         const {$mode} = reference.props;
+        const disabled =
+            (Ux.Env.FORM_MODE.EDIT !== $mode)
+            || !$keyChange
         return (
-            <Button {...rest} disabled={Ux.Env.FORM_MODE.EDIT !== $mode}>
+            <Button {...rest} disabled={disabled}
+                    onClick={Op.rxSave(reference)}>
                 {text}
             </Button>
         )

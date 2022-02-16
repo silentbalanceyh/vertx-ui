@@ -448,17 +448,34 @@
                     "name": "FieldContainer",
                     "key": "monitorContainer",
                     "config": {
-                        "activeKey": "tabBpmn",
-                        "items": "流程图,tabBpmn;操作历史,tabHistory",
+                        "activeKey": "bpmn",
+                        "items": "流程图,bpmn;操作历史,history;关联附件,attachment;关联工单,ticket;关联资产,asset",
                         "pages": {
-                            "tabBpmn": {
+                            "asset": {
+                                "ui": [
+                                    []
+                                ]
+                            },
+                            "attachment": {
+                                "ui": [
+                                    []
+                                ]
+                            },
+                            "ticket": {
+                                "ui": [
+                                    [
+                                        "linkageTicket,,24"
+                                    ]
+                                ]
+                            },
+                            "bpmn": {
                                 "ui": [
                                     [
                                         "monitorBpmn,,24"
                                     ]
                                 ]
                             },
-                            "tabHistory": {
+                            "history": {
                                 "ui": [
                                     [
                                         "monitorHistory,,24"
