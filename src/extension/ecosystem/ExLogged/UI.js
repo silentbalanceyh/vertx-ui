@@ -77,19 +77,27 @@ const renderJsx = (reference, {
         clsUser = "",
         clsMenu = ""
     }
-}) => $user ? (
-    <Dropdown overlay={Ux.aiMenuTop($data, {
-        className: clsDropdown,
-        onClick: onSelect(reference),
-    })} className={clsMenu}>
-        {/** 用户头像和名字，登陆后状态 **/}
-        <span className={clsAccount}>
-            <Avatar size="default" className={clsAvatar}
-                    src={$user['logo'] ? $user['logo'] : "/img/zui/account/default.jpeg"}/>
-            <span className={clsUser}>{$user['realname'] ? $user['realname'] : $user['username']}</span>
-        </span>
-    </Dropdown>
-) : (<Spin size="small" style={{marginLeft: 0}}/>)
+}) => {
+    if ($user) {
+        return (
+            <Dropdown overlay={Ux.aiMenuTop($data, {
+                className: clsDropdown,
+                onClick: onSelect(reference),
+            })} className={clsMenu}>
+                {/** 用户头像和名字，登陆后状态 **/}
+                <span className={clsAccount}>
+                <Avatar size="default" className={clsAvatar}
+                        src={$user['logo'] ? $user['logo'] : "/img/zui/account/default.jpeg"}/>
+                    <span className={clsUser}>{$user['realname'] ? $user['realname'] : $user['username']}</span>
+                </span>
+            </Dropdown>
+        )
+    } else {
+        return (
+            <Spin size="small" style={{marginLeft: 0}}/>
+        )
+    }
+}
 
 class Component extends React.PureComponent {
     state = {$ready: true};

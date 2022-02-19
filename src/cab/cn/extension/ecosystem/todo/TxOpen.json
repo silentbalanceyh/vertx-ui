@@ -477,12 +477,15 @@
                         "pages": {
                             "asset": {
                                 "ui": [
-                                    []
+                                    [
+                                        "linkageAsset,,24"
+                                    ]
                                 ]
                             },
                             "attachment": {
                                 "ui": [
-                                    []
+                                    [
+                                    ]
                                 ]
                             },
                             "ticket": {

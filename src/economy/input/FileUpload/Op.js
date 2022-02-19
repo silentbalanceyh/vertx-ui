@@ -34,10 +34,37 @@ const _doLoading = (reference, info = {}) => {
 const _onChange = (reference, fileList = []) => {
     const {config = {}} = reference.props;
     const field = config['filekey'] ? config['filekey'] : "key";
+    /*
+     * XAttachment + File
+     * 后端标准化 + 前端标准化构成整体数据
+     * 前端字段
+     * - uid
+     * - name
+     * - type
+     * - size
+     * 后端
+     * - key
+     * - fileKey
+     * - fileName
+     * - filePath
+     * - fileUrl
+     * - size
+     * - mime
+     * - status
+     * - storeWay
+     * - modelId
+     * - metadata
+     * - name
+     * - type
+     * - extension
+     * - sizeUi
+     */
+    const fileData = [];
     // eslint-disable-next-line no-unused-vars
-    const files = fileList.filter(file => file.hasOwnProperty('response'))
+    fileList.filter(file => file.hasOwnProperty('response'))
         .map(item => {
-            const each = {};
+            const {response = {}} = item;
+            const each = Ux.clone(response);
             each.uid = item.uid;
             each.name = item.name;
             each.key = item.response[field];
@@ -45,18 +72,17 @@ const _onChange = (reference, fileList = []) => {
             // linker process
             each.size = item.size;
             each.sizeUi = Ux.toFileSize(item.size);
-            const {response = {}} = item;
-            each.extension = response.extension;
             return each;
-        });
+        })
+        .forEach(file => fileData.push(file));
     const ref = Ux.onReference(reference, 1);
     if (config.single && ref) {
-        const file = files[0] ? files[0] : {};
+        const file = fileData[0] ? fileData[0] : {};
         const formValues = {};
         Ux.writeLinker(formValues, config, () => file);
         Ux.formHits(ref, formValues);
     }
-    Ux.fn(reference).onChange(files);
+    Ux.fn(reference).onChange(fileData);
 };
 const on2Change = (reference) => (info = {}) => {
     // 正在上传

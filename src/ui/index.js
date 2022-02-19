@@ -30,6 +30,7 @@ const smartForm = (configurationForm = {}, mode) => {
         yoOp,
         yoJsx,
         yoAcl,
+        yoPlugins,
     } = configurationForm;
     let form;
     const {
@@ -104,6 +105,9 @@ const smartForm = (configurationForm = {}, mode) => {
                     }
                     if (Ux.isFunction(yoAcl)) {
                         form.$edition = yoAcl(this, normalized);
+                    }
+                    if (Ux.isFunction(yoPlugins)) {
+                        form.$plugins = yoPlugins(this);
                     }
                     return (
                         <ExForm {...form} $height={"300px"}/>
@@ -254,6 +258,7 @@ const smartList = (configuration = {}) => {
 
     return UI;
 }
+// smartForm
 export default {
     smartForm,      // 快速开表单
     /**

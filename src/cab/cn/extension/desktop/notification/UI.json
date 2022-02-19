@@ -1,0 +1,16 @@
+{
+    "_grid": {
+        "module": {
+            "NAME": "公告",
+            "MODULE": "x-notice",
+            "IDENTIFIER": "x.notice"
+        },
+        "options": {
+            "search.cond": [
+                "subject,c"
+            ],
+            "search.placeholder": "公告标题",
+            "search.advanced": false
+        }
+    }
+}

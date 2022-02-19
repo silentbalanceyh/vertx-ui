@@ -1281,18 +1281,18 @@ const yoForm = (reference, additional = {}, data = {}) => {
     attrs.config = Ux.clone(configuration);
     // transform 流程
     const $inited = Ux.clone(data);
-    if(form.transform){
+    if (form.transform) {
         const transform = form.transform;
         Object.keys(transform)
             .filter(field => Ux.isObject(transform[field]))
             .forEach(field => {
-                const {type, ...config} = transform[field];
-                if (Ux.isFunction(TRANS[type])) {
-                    const processed = TRANS[type]($inited, config);
-                    if (processed) $inited[field] = processed;
+                    const {type, ...config} = transform[field];
+                    if (Ux.isFunction(TRANS[type])) {
+                        const processed = TRANS[type]($inited, config);
+                        if (processed) $inited[field] = processed;
+                    }
                 }
-            }
-        )
+            )
     }
     const {$addKey, $mode, $identifier} = reference.props;
     if ($addKey) {
@@ -2328,8 +2328,8 @@ const yoListGrid = (reference, config = {}) => {
     if (gridName) {
         return Ux.Env.GRID[gridName];
     } else {
-        const {extra = []} = config;
-        if (0 === extra.length) {
+        const {extra = {}} = config;
+        if (0 === extra.config.length) {
             return Ux.Env.GRID.LIST_NE;
         } else {
             return Ux.Env.GRID.LIST_E;

@@ -113,11 +113,13 @@
                     "$render": "EXECUTOR",
                     "$option": [
                         {
+                            "key": "$opSave",
                             "text": "编辑",
                             "executor": "fnEdit"
                         },
                         "divider",
                         {
+                            "key": "$opDelete",
                             "text": "删除",
                             "executor": "fnDelete",
                             "confirm": "确认删除选择的该行记录？"

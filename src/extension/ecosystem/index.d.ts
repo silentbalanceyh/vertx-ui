@@ -24,6 +24,7 @@ declare module "ei" {
     export {default as ExTabular} from './ExTabular/UI';                    /* （Tabular专用）字典管理 */
     export {default as ExTrackField} from './ExTrackField/UI';
     export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
+    export {default as ExAnnounce} from './ExAnnounce/UI';                  /* 公告 */
 
 
     // 工作流专用（标准化）

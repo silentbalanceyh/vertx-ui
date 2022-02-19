@@ -202,6 +202,42 @@ const jsxListFn = (reference) => ({
         return (<MagicView config={{items}} value={data.phase}/>)
     }
 })
+
+const jsxLinkageFn = (reference, field) => (ref) => {
+    const $workflow = Ux.ambValue(reference, "$workflow");
+    const {$inited = {}, $mode} = ref.props;
+    const inherit = Ch.yoAmbient(reference);
+    inherit.$inited = $inited;
+
+    const {config = {}} = $workflow;
+    const configLinkage = config.linkage ? config.linkage : {};
+    inherit.config = configLinkage[field] ? configLinkage[field] : {};
+    inherit.$mode = $mode
+    inherit.$renders = jsxListFn(reference);
+    // koSelection 构造
+    const {selection = {}} = inherit.config;
+    const $plugins = {};
+    if (Ux.isNotEmpty(selection)) {
+        $plugins.koSelection = (record = {}) => {
+            let allow = true;
+            const keys = Object.keys(selection);
+            for (let idx = 0; idx < keys.length; idx++) {
+                const field = keys[idx];
+                const expected = selection[field];
+                const checked = expected.includes(record[field]);
+                if (!checked) {
+                    allow = false;
+                    break;
+                }
+            }
+            return allow;
+        }
+    }
+    inherit.$plugins = $plugins;
+    return (
+        <ExLinkage {...inherit}/>
+    )
+}
 // eslint-disable-next-line import/no-anonymous-default-export
 export default (reference, node) => {
     /*
@@ -486,27 +522,9 @@ export default (reference, node) => {
             },
             __children: {
                 // 关联工单
-                linkageTicket: (ref) => {
-                    const $workflow = Ux.ambValue(reference, "$workflow");
-                    const {$inited = {}, $mode} = ref.props;
-                    const inherit = Ch.yoAmbient(reference);
-                    inherit.$inited = $inited;
-
-                    const {config = {}} = $workflow;
-                    const {ticket = {}} = config.linkage ? config.linkage : {};
-                    inherit.config = ticket;
-                    inherit.$mode = $mode
-                    inherit.$renders = jsxListFn(reference);
-                    inherit.$plugins = {
-                        koSelection: (record = {}) => [
-                            "FINISHED",     // 已完成
-                            "CANCELED"      // 已撤销
-                        ].includes(record.phase)
-                    }
-                    return (
-                        <ExLinkage {...inherit}/>
-                    )
-                },
+                linkageTicket: jsxLinkageFn(reference, "ticket"),
+                // 关联资产
+                linkageAsset: jsxLinkageFn(reference, "asset"),
                 // 流程图专用字段
                 monitorBpmn: () => {
                     /*
@@ -767,11 +785,20 @@ export default (reference, node) => {
             inherits.$workflow.definitionId = $workflow.definitionId;
             inherits.$workflow.record = record;
 
-
             // refresh current
             const {$query = {}, $forceUpdate} = reference.state;
             inherits.$query = $query;
             inherits.$forceUpdate = $forceUpdate;   // 刷新列表专用
+
+            // 修改显示标签
+            const workflowConfig = reference.props.$workflow;
+            if (workflowConfig) {
+                const synonym = configUi(workflowConfig, "synonym");
+                if (Ux.isNotEmpty(synonym)) {
+                    inherits.$synonym = synonym;
+                }
+            }
+            // 标签s
             return inherits;
         },
 
@@ -823,6 +850,13 @@ export default (reference, node) => {
             // 表单配置
             const form = Ch.yoForm(reference, null, $inited);
             form.$mode = Ux.Env.FORM_MODE.ADD;
+
+
+            // 修改显示标签
+            const synonym = configUi($workflow, "synonym");
+            if (Ux.isNotEmpty(synonym)) {
+                form.$synonym = synonym;
+            }
             return form;
         },
         /*

@@ -36,7 +36,8 @@ import T from './O.plugin.element';
  *     title: "树节点每个节点标题",
  *     sort: "树节点的排序字段",
  *     leaf: "当前树节点是否叶节点的检查字段",
- *     level: "当前节点的level字段，也可以直接计算"
+ *     level: "当前节点的level字段，也可以直接计算",
+ *     root: "根节点从哪一级开始，默认从1",
  * }
  * ```
  *
@@ -66,6 +67,13 @@ const toTreeConfig = (config = {}) => {
         if (!config.value) $config.value = $config.key;
         if (!config.text) $config.text = "text";
         if (!config.title) $config.title = "title";
+
+        // root 处理
+        if (config.root) {
+            $config.root = Ele.valueInt(config.root, 1);
+        } else {
+            $config.root = 1;
+        }
         /*
          * 3. 是否支持表达式
          * 标准化：expr，默认 无
@@ -204,7 +212,22 @@ const toTree = (data = [], config = {}) => {
          */
         item.children = T.elementChildTree(normalized, item);
     });
-    return root;
+
+    /*
+     * 配置中的 root 设置
+     * root = 1, 默认值为1，和 _level 比对
+     */
+    let treeResult = [];
+    if (1 < $config.root) {
+        Abs.itTree(root, (item) => {
+            if ($config.root === item._level) {
+                treeResult.push(item);
+            }
+        });
+    } else {
+        treeResult = Abs.clone(root);
+    }
+    return treeResult;
 };
 const toTreeTextArray = (textArr = []) => {
     const textArray = [];

@@ -4,6 +4,30 @@ import Ux from 'ux';
 import Ex from 'ex';
 import './Cab.less';
 
+const renderChild = (reference, child, source) => {
+    const children = source
+        .filter(item => child.key === item.parentId)
+        .sort(Ux.sorterAscTFn('order'));
+    return children.map((child, index) => (
+        <span key={child.key}>
+            {/* eslint-disable-next-line */}
+            <a href={""} className={"link"} onClick={event => {
+                Ux.prevent(event);
+                // 流程路径需要更改，不使用菜单路径
+                const {$router} = reference.props;
+                Ux.toRoute(reference, child.uri, {target: $router.path()});
+            }}>
+                <Icon type={child.icon}/>
+                &nbsp;
+                {child.text}
+            </a>
+            {index < (children.length - 1) ? (
+                <Divider type="vertical"/>
+            ) : false}
+        </span>
+    ))
+}
+
 class Component extends React.PureComponent {
     render() {
         const {config = {}, source = []} = this.props;
@@ -23,29 +47,7 @@ class Component extends React.PureComponent {
                             {each.text}
                         </Col>
                         <Col span={21} className={"content"}>
-                            {(() => {
-                                const children = source
-                                    .filter(item => each.key === item.parentId)
-                                    .sort(Ux.sorterAscTFn('order'));
-                                return children.map((child, index) => (
-                                    <span key={child.key}>
-                                        {/* eslint-disable-next-line */}
-                                        <a href={""} className={"link"} onClick={event => {
-                                            Ux.prevent(event);
-                                            // 流程路径需要更改，不使用菜单路径
-                                            const {$router} = this.props;
-                                            Ux.toRoute(this, child.uri, {target: $router.path()});
-                                        }}>
-                                            <Icon type={child.icon}/>
-                                            &nbsp;
-                                            {child.text}
-                                        </a>
-                                        {index < (children.length - 1) ? (
-                                            <Divider type="vertical"/>
-                                        ) : false}
-                                    </span>
-                                ))
-                            })()}
+                            {renderChild(this, each, source)}
                         </Col>
                     </Row>
                 ))}
