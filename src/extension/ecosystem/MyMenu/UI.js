@@ -26,8 +26,11 @@ const componentInit = (reference) => {
             state.$tree = source;
             state.$treeConfig = tree;
             state.$ready = true;
-            reference.setState(state);
-        }).catch(error => reference.setState({error}))
+            try {
+                reference.setState(state);
+            } catch (error) {
+            }
+        })
     } else {
         console.error("对不起，配置 config 丢失或路由对象 $router 丢失", config, $router)
     }

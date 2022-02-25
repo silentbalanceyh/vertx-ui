@@ -1,4 +1,5 @@
 import Immutable from "immutable";
+import Image from './images';
 // --------------------------------------------------------
 Object.freeze(process.env);
 /*
@@ -20,6 +21,7 @@ const _parseBoolean = (...keys) => {
 }
 // ------------------ I.economy.js ---------------------
 const ECONOMY = {
+    ...Image,
     /**
      * ## `Ux.Env.MENU_TYPE`
      *

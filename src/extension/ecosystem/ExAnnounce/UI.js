@@ -1,43 +1,32 @@
 import React from 'react';
-import renderHTML from 'react-render-html';
 import './Cab.less';
 import Ux from "ux";
 import Ex from 'ex';
+import Rdr from './Web';
 
-import {Button, Card, Carousel, Empty} from 'antd'
+import {Card, Empty} from 'antd'
 
 const componentInit = (reference) => {
-    Ux.ajaxGet("/api/x-notice/by/sigma", {}).then(response => {
+    const criteria = {};
+    criteria.status = "RUNNING";
+    Ux.ajaxPost("/api/x-notice/search", {criteria}).then(response => {
         const state = {};
         state.$ready = true;
-        state.$data = response;
-        reference.setState(state);
+        state.$data = Ux.valueArray(response);
+        // $dialog
+        const dialog = Ux.fromHoc(reference, "window");
+        state.$dialog = Ux.configDialog(reference, dialog);
+        try {
+            reference.setState(state);
+        } catch (error) {
+        }
     })
 }
 
-const renderNotice = (reference, data = []) => {
-    return (
-        <Carousel>
-            {data.map(item => (
-                <div key={item.key} className={"ex-content"}>
-                    <div className={"action"}>
-                        <Button.Group size={"small"}>
-                            <Button icon={"search"}/>
-                            <Button icon={"link"} className={"ux-spec"}/>
-                        </Button.Group>
-                    </div>
-                    <Card.Meta title={item.name}
-                               description={(
-                                   <div>
-                                       {renderHTML(item.content)}
-                                   </div>
-                               )}/>
-                </div>
-            ))}
-        </Carousel>
-    )
-}
-
+@Ux.zero(Ux.rxEtat(require('./Cab.json'))
+    .cab("ExAnnounce")
+    .to()
+)
 class Component extends React.PureComponent {
     componentDidMount() {
         componentInit(this);
@@ -56,7 +45,7 @@ class Component extends React.PureComponent {
                                 <Empty/>
                             )
                         } else {
-                            return renderNotice(this, $data);
+                            return Rdr.renderNotice(this, $data);
                         }
                     })()}
                 </Card>

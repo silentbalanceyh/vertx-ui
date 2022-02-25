@@ -5,6 +5,7 @@ import {
     CheckJson,
     CheckTransfer,
     DialogEditor,
+    FileBatch,
     FileUpload,
     InputArray,
     JsonEditor,
@@ -602,6 +603,15 @@ const aiFileUpload = (reference, jsx = {}, onChange) => {
     return (<FileUpload {...jsx} reference={reference}/>);
 };
 
+const aiFileBatch = (reference, jsx = {}, onChange) => {
+
+    R.Ant.onChange(jsx, onChange);
+
+    R.Ant.onReadOnly(jsx, false, reference);
+    _aiCssAdjust(jsx, "file-upload")
+    return (<FileBatch {...jsx} reference={reference}/>);
+}
+
 
 // import DialogEditor from './O.editor.dialog';
 const aiDialogEditor = (reference, jsx = {}) => {
@@ -867,6 +877,10 @@ const exported = {
 
     // 上传组件
     aiFileUpload,
+
+
+    // 批量上传组件
+    aiFileBatch,
 
 
     // 表格编辑器

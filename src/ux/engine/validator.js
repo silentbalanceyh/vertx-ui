@@ -352,6 +352,7 @@ const duplicatedDatum = (reference = {}) => (rule = {}, value, callback) => {
         callback();
     }
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // 必填项检查，和Ant Design不同是这里的检查包括一些空值
     required,

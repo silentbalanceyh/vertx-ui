@@ -399,6 +399,7 @@ const toFileSize = (value, unit) => {
         return result;
     }
 }
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     toHeight,
     toHeightState,

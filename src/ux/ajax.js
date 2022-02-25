@@ -855,7 +855,7 @@ const ajaxError = (reference, error = {}, redux = false) => {
     const {data = {}} = error;
     if (data.code < 0 && data.info) {
         /*
-         * 这种情况下，错误信息来自于服务端
+         * Server -- 这种情况下，错误信息来源于服务端
          */
         let dialog = _fromHoc(reference, "dialog");
         if (!dialog) dialog = {};
@@ -868,7 +868,9 @@ const ajaxError = (reference, error = {}, redux = false) => {
         // return Promise.reject(error);
     } else {
         /*
-         * 是否包含了 client
+         * 信息来源于客户端，是否包含了 client
+         * 1. 包含 client 属性（Ox专用）
+         * 2. 直接返回 data 数据，data是一个字符串
          */
         if (data.client) {
             /*
@@ -877,7 +879,13 @@ const ajaxError = (reference, error = {}, redux = false) => {
             ajaxEnd(reference, redux)();
             // return Promise.reject(error);
         } else {
-            console.error("[ Ux ] 核心错误！", error);
+            const {data} = error;
+            if ("string" === typeof data) {
+                message.error(data, 1.5);
+                ajaxEnd(reference, redux)();
+            } else {
+                console.error("[ Ux ] 核心错误！", error);
+            }
         }
     }
 };
@@ -1523,6 +1531,39 @@ const asyncPromise = (config = {}, params = {}, mock = {}) => {
         E.fxTerminal(true, 10034, config, params);
     }
 };
+/**
+ * ## 「标准」`Ux.asyncImage`
+ *
+ * 二进制数据在加载图片时专用方法，构造异步Promise，item 的数据结构：
+ *
+ * ```json
+ * {
+ *     "type": "文件的MIME类型，如image/jpeg",
+ *     "thumbUrl": "被更改的图片专用Url，该方法需修改此内容"
+ * }
+ * ```
+ *
+ * @async
+ * @memberOf module:_ajax
+ * @param item {Object} 图片文件对象
+ * @param blob {Blob} 二进制对象流
+ * @return {Promise<T>} 返回异步构造好的 Promise
+ */
+const asyncImage = (item = {}, blob) => new Promise((resolve) => {
+    const reader = new FileReader();
+    reader.readAsArrayBuffer(blob);
+    reader.addEventListener("load", () => {
+        const type = item.type ? item.type : "image/jpeg";
+        const blob = new Blob([reader.result], {type});
+        // Secondary
+        const innerRder = new FileReader();
+        innerRder.readAsDataURL(blob);
+        innerRder.addEventListener("load", () => {
+            item.thumbUrl = innerRder.result;
+            resolve(item);
+        });
+    });
+});
 
 
 /**
@@ -1570,6 +1611,7 @@ const rxEdict = (type, promise, responser = data => data) => {
         E.fxTerminal(true, 10027, type, promise);
     }
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     rxEdict,
     // 不更改Ajax部分
@@ -1581,6 +1623,7 @@ export default {
     asyncTrue,
     asyncData,
     asyncPromise,
+    asyncImage,
     // 回调
     ajaxError,
     ajaxDialog,

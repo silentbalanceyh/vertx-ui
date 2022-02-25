@@ -13,7 +13,7 @@ import Ele from '../../element';
  * 设置窗口 resize 的事件专用。
  *
  * @memberOf module:_engine
- * @param {Object|ReactComponent} reference React对应组件引用。
+ * @param {Object} reference React对应组件引用。
  * @returns {Function} 返回 resize 回调函数。
  */
 function rxResize(reference) {
@@ -21,13 +21,21 @@ function rxResize(reference) {
         // 第二种用法
         return () => {
             const state = T.toHeightState(arguments[1]);
-            reference.setState(state);
+            try {
+                reference.setState(state);
+            } catch (error) {
+
+            }
         }
     } else {
         // 目前存在的用法
         return (adjust = 0) => {
             const state = T.toHeightState(adjust);
-            reference.setState(state);
+            try {
+                reference.setState(state);
+            } catch (error) {
+
+            }
         };
     }
 }
@@ -38,7 +46,7 @@ function rxResize(reference) {
  * 表格 Table 中的专用 selected 函数生成器。
  *
  * @memberOf module:_engine
- * @param {Object|ReactComponent} reference React对应组件引用。
+ * @param {Object} reference React对应组件引用。
  * @param {String} field 字段名称。
  * @returns {Function} 选中函数。
  */
@@ -64,7 +72,7 @@ const rxCheckedRow = (reference, field = "$selected") => (keys = []) => {
  * 树专用组件 Tree 中的专用选择函数，借助 $keySet 集合
  *
  * @memberOf module:_engine
- * @param {Object|ReactComponent} reference React对应组件引用。
+ * @param {Object} reference React对应组件引用。
  * @param {Array} input 当前组中数组，本身为一棵树
  * @param {Function} callback 回调函数
  * @returns {Function} 选中函数。
@@ -166,8 +174,12 @@ const rxCheckedTree = (reference, input = [], callback) => (keys = [], item) => 
     }
     reference.setState(state);
 }
+
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
+
+    // 函数处理
     rxResize,
     rxCheckedRow,
     rxCheckedTree

@@ -160,14 +160,6 @@
                 },
                 "serial,单号",
                 {
-                    "metadata": "openBy,制单人,USER",
-                    "$config": {
-                        "uri": "/api/user/:key",
-                        "field": "realname",
-                        "icon": "user,#00BF9F"
-                    }
-                },
-                {
                     "metadata": "openAt,制单时间,DATE",
                     "$format": "YYYY-MM-DD HH:mm"
                 },

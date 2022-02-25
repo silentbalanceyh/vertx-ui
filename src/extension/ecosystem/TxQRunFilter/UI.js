@@ -139,7 +139,7 @@ class Component extends React.PureComponent {
                             {wf.Jsx.qrLabel(config)}
                         </Col>
                         <Col span={21}>
-                            {wf.Jsx.qrSelected(config)}
+                            {wf.Jsx.qrSelected(config, doQuery)}
                         </Col>
                     </Row>
                     <Row>

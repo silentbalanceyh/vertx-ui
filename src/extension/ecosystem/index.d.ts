@@ -41,6 +41,7 @@ declare module "ei" {
 
     // 个人界面
     export {default as MyMenu} from './MyMenu/UI';
+    export {default as MyTodo} from './MyTodo/UI';                          /* 首页：我的待办 */
 
 
     // G2图

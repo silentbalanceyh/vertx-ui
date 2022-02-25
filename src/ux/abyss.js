@@ -566,7 +566,10 @@ function pipe() {
         if (input) {
             if (isFunction(input.setState)) {
                 return state => {
-                    input.setState(state);
+                    try {
+                        input.setState(state);
+                    } catch (error) {
+                    }
                     return promise(state);
                 }
             } else {
@@ -2137,6 +2140,7 @@ const me = (reference) => {
     return pointer
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     me,
     /* 对象执行 */

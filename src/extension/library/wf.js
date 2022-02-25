@@ -1,5 +1,4 @@
 import Ux from 'ux';
-import Ch from './channel';
 import React from 'react';
 import {Button, Checkbox, Icon, Modal, Radio, Select, Tag, Tooltip} from "antd";
 import {MagicView} from 'web';
@@ -8,68 +7,9 @@ import ExBpmn from "../ecosystem/ExBpmn/UI";
 import ExLinkage from '../ecosystem/ExLinkage/UI';
 // Workflow 流程引擎专用组件
 import TxHistory from "../ecosystem/TxHistory/UI";
-
-// ======================= 配置部分 =======================
-const configUi = ($workflow = {}, key, array = false) => {
-    const {config = {}} = $workflow;
-    const {ui = {}} = config;
-    const configData = ui[key];
-    if (configData) {
-        return configData;
-    } else {
-        return array ? [] : {};
-    }
-}
-const configPhase = ($workflow = {}, configRef = {}) => {
-    const phase = configUi($workflow, "phase");
-    const {forbidden = []} = phase;
-    /*
-     * items配置：[
-     *      "",
-     *      "",
-     * ]
-     * 字符串模式
-     */
-    let {items = []} = configRef;
-    items = Ux.clone(items);
-    items = items.filter(item => {
-        let key;
-        if ("string" === typeof item) {
-            key = item.split(',')[0];
-        } else {
-            key = item.key;
-        }
-        return !forbidden.includes(key);
-    });
-    return items;
-}
-
-
-// ======================= 数据部分 =======================
-const dataRequest = (params = {}, pWorkflow = {}, pConfig = {}) => {
-    const request = Ux.valueRequest(params);
-    request.workflow = Ux.valueOk(pWorkflow, [
-        "definitionKey",
-        "definitionId",
-        "instanceId",
-        "taskId"
-    ]);
-    const op = configUi(pWorkflow, "op");
-    const {
-        node,
-        nodeOp,
-    } = pConfig;
-    Ux.dgDebug({node, op, nodeOp}, "节点数据：", "#ff8626")
-    if (node && op[nodeOp]) {
-        const taskData = op[nodeOp];
-        const parameters = taskData[node];
-        if (parameters) {
-            Object.assign(request, parameters);
-        }
-    }
-    return request;
-}
-
+// 相对路径
+import Ch from './channel';
+import Do from './wf.submit';
 /*
  * Ko 专用
  * 1. draft（我的草稿）
@@ -197,7 +137,7 @@ const jsxListFn = (reference) => ({
     phase: (inherit = {}) => {
         const {data = {}, config = {}} = inherit;
         const $workflow = Ux.ambValue(reference, "$workflow");
-        let items = configPhase($workflow, config);
+        let items = Do.configPhase($workflow, config);
         items = Ux.Ant.toOptions(reference, {items});
         return (<MagicView config={{items}} value={data.phase}/>)
     }
@@ -215,7 +155,8 @@ const jsxLinkageFn = (reference, field) => (ref) => {
     inherit.$mode = $mode
     inherit.$renders = jsxListFn(reference);
     // koSelection 构造
-    const {selection = {}} = inherit.config;
+    const $config = inherit.config ? inherit.config : {};
+    const {selection = {}} = $config.editor ? $config.editor : {};
     const $plugins = {};
     if (Ux.isNotEmpty(selection)) {
         $plugins.koSelection = (record = {}) => {
@@ -269,7 +210,7 @@ export default (reference, node) => {
                 $workflow.taskKey = record.taskKey;
             }
 
-            const request = dataRequest(record, $workflow, {
+            const request = Do.dataRequest(record, $workflow, {
                 node: workflow.task,
                 nodeOp
             });
@@ -504,7 +445,12 @@ export default (reference, node) => {
                         "bpmn",         // 流程图
                         "history"       // 操作历史
                     ];
-                    Object.keys(linkage).forEach(tab => enabled.push(tab));
+                    Object.keys(linkage).forEach(tab => {
+                        const config = linkage[tab];
+                        if (!config.disabled) {
+                            enabled.push(tab)
+                        }
+                    });
                     return enabled.includes(item.key);
                 }
             }
@@ -517,14 +463,14 @@ export default (reference, node) => {
                 // 根据 $workflow 执行计算
                 if (!jsx.config) jsx.config = {};
                 const $workflow = Ux.ambValue(reference, "$workflow");
-                jsx.config.items = configPhase($workflow, jsx.config);
+                jsx.config.items = Do.configPhase($workflow, jsx.config);
                 return Ux.aiMagic(ref, jsx);
             },
             __children: {
                 // 关联工单
-                linkageTicket: jsxLinkageFn(reference, "ticket"),
+                linkageTicket: jsxLinkageFn(reference, "linkageTicket"),
                 // 关联资产
-                linkageAsset: jsxLinkageFn(reference, "asset"),
+                linkageAsset: jsxLinkageFn(reference, "linkageAsset"),
                 // 流程图专用字段
                 monitorBpmn: () => {
                     /*
@@ -540,7 +486,7 @@ export default (reference, node) => {
                         trace: $workflow.history,
                         phase: $inited.phase
                     };
-                    const canvas = configUi($workflow, "canvas");
+                    const canvas = Do.configUi($workflow, "canvas");
                     return (
                         <ExBpmn {...$bpmn} $canvas={canvas}/>
                     )
@@ -619,7 +565,7 @@ export default (reference, node) => {
                  * 2. 更新/插入Record记录
                  * 3. 流程转移Move
                  */
-                const request = dataRequest(params, ref.props.$workflow, {
+                const request = Do.dataRequest(params, ref.props.$workflow, {
                     node,
                     nodeOp: "$opDraft"
                 });
@@ -627,7 +573,11 @@ export default (reference, node) => {
                 return Ux.ajaxPost("/api/up/flow/start", request);
             },
             $opOpen: (ref) => (params) => {
-                const request = dataRequest(params, ref.props.$workflow, {
+                const validated = Do.dataVerify(params, ref.props.$workflow);
+                if (validated) {
+                    return Promise.reject({data: validated})
+                }
+                const request = Do.dataRequest(params, ref.props.$workflow, {
                     node,
                     nodeOp: "$opOpen"
                 })
@@ -648,11 +598,11 @@ export default (reference, node) => {
              * 2. 更新/插入Record记录
              */
             $opSaving: (ref) => (params) => {
-                const request = dataRequest(params, ref.props.$workflow);
+                const request = Do.dataRequest(params, ref.props.$workflow);
                 return Ux.ajaxPut("/api/up/flow/saving", request);
             },
             $opCancel: (ref) => (params) => {
-                const request = dataRequest(params, ref.props.$workflow, {
+                const request = Do.dataRequest(params, ref.props.$workflow, {
                     node,
                     nodeOp: "$opCancel"
                 });
@@ -660,14 +610,14 @@ export default (reference, node) => {
             },
             $opBack: (ref) => () => Ux.toOriginal(ref, null, ["tid"]),
             $opApprove: (ref) => (params) => {
-                const request = dataRequest(params, ref.props.$workflow, {
+                const request = Do.dataRequest(params, ref.props.$workflow, {
                     node,
                     nodeOp: "$opApprove"
                 })
                 return Ux.ajaxPut("/api/up/flow/complete", request);
             },
             $opReject: (ref) => (params) => {
-                const request = dataRequest(params, ref.props.$workflow, {
+                const request = Do.dataRequest(params, ref.props.$workflow, {
                     node,
                     nodeOp: "$opReject"
                 })
@@ -697,6 +647,18 @@ export default (reference, node) => {
             } else {
                 state.$error = true;
                 return Ux.promise(state);
+            }
+        },
+        yuPage: (virtual = {}, callback = {}) => {
+            const router = reference.props.$router;
+            const prev = virtual.props.$router;
+            if (router && prev) {
+                const cFlow = router._("name");
+                const pFlow = prev._("name");
+                if (cFlow !== pFlow) {
+                    reference.setState({$ready: false});
+                    callback();
+                }
             }
         },
         /*
@@ -786,18 +748,25 @@ export default (reference, node) => {
             inherits.$workflow.record = record;
 
             // refresh current
-            const {$query = {}, $forceUpdate} = reference.state;
-            inherits.$query = $query;
+            let {$query = {}, $forceUpdate} = reference.state;
             inherits.$forceUpdate = $forceUpdate;   // 刷新列表专用
 
             // 修改显示标签
             const workflowConfig = reference.props.$workflow;
             if (workflowConfig) {
-                const synonym = configUi(workflowConfig, "synonym");
+                const synonym = Do.configUi(workflowConfig, "synonym");
                 if (Ux.isNotEmpty(synonym)) {
                     inherits.$synonym = synonym;
                 }
+                // 带 $workflow 参数才执行
+                if ($query.criteria) {
+                    $query.criteria.flowDefinitionKey = workflowConfig.code;
+                } else {
+                    $query.criteria[""] = true;
+                    $query.criteria.flowDefinitionKey = workflowConfig.code;
+                }
             }
+            inherits.$query = $query;
             // 标签s
             return inherits;
         },
@@ -853,7 +822,7 @@ export default (reference, node) => {
 
 
             // 修改显示标签
-            const synonym = configUi($workflow, "synonym");
+            const synonym = Do.configUi($workflow, "synonym");
             if (Ux.isNotEmpty(synonym)) {
                 form.$synonym = synonym;
             }

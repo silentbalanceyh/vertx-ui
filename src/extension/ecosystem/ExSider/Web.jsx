@@ -18,6 +18,7 @@ export default (reference, {
         const {$logo} = reference.props;
         logo = $logo ? $logo : Empty;
     }
+    const {$logoCss = {}} = reference.props;
     const {$keySet = {}} = reference.state;
     const attrs = {};
     Object.assign(attrs, $keySet, $attrsMenu);
@@ -31,6 +32,7 @@ export default (reference, {
                 {isFull ? (
                     <Link to={Ux.Env.ENTRY_ADMIN}>
                         <img src={logo}
+                             style={$logoCss}
                              alt={'Logo'}/>
                     </Link>
                 ) : (

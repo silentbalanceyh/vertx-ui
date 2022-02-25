@@ -6,8 +6,9 @@ import T from './unity';
 import Cv from './constant';
 import Eng from './engine';
 
-import {Progress} from "antd";
+import {message, Progress} from "antd";
 import React from "react";
+import {saveAs} from "file-saver";
 import './xweb.less';
 import E from "./error";
 // --------------------- Ajax 部分 -----------------------------------
@@ -1051,7 +1052,238 @@ const xtTransfer = (reference, callback) => (targetKeys, direction, moveKeys = [
         callback($selected);
     }
 }
+
+// -------------------- 文件上传专用方法（通用） -----------------------
+
+const _rxPreview = (reference) => (file = {}) => {
+    if (file.hasOwnProperty("originFileObj")) {
+        saveAs(file.originFileObj, file.name);
+    } else {
+        const {ajax = {}} = reference.props;
+        Ajx.ajaxDownload(ajax.download, Abs.clone(file), {})
+            .then(data => saveAs(data, file.name));
+    }
+}
+
+const _rxBeforeUpload = (reference, metadata = {}) => (file = {}) => {
+    const {single = true} = metadata;
+    const {config = {}} = reference.props;
+    const error = Eng.fromHoc(reference, "error");
+    // 1. 单多文件上传
+    const {$counter = 0} = reference.state;
+    if (single) {
+        // 单文件验证
+        if (0 < $counter) {
+            message.destroy();
+            message.error(error.single);
+            return Promise.reject({error: error.single});
+        }
+    }
+    // 2. 文件大小限制
+    if (config.limit) {
+        const current = file.size;
+        const limitation = config.limit * 1024;
+        if (limitation < current) {
+            const messageContent = T.formatExpr(error.limit, {
+                size: Eng.toFileSize(limitation, null),
+                current: Eng.toFileSize(current, null)
+            });
+            message.destroy();
+            message.error(messageContent);
+            return Promise.reject({error: messageContent});
+        }
+    }
+    return Abs.promise(file);
+}
+const _rxCustomRequest = (reference) => (params = {}) => {
+    const {ajax = {}} = reference.props;
+    if (Abs.isEmpty(ajax)) {
+        const error = Eng.fromHoc(reference, "error");
+        message.destroy();
+        message.error(error.ajax);
+        return Promise.reject({error: error.ajax});
+    } else {
+        return _rxAction(reference, ajax, params).then(params.onSuccess)
+    }
+}
+const _rxAction = (reference, ajax = {}, params) => {
+    let request = Abs.clone(ajax.params);
+
+    // 提取Form引用（参数核心引用）
+    const ref = Eng.onReference(reference, 1);
+
+    request = Eng.parseInput(request, ref);
+    const uri = T.formatExpr(ajax.uri, request);
+    return Ajx.ajaxUpload(uri, params.file);
+}
+const _rxChange = (reference, metadata) => (params = {}) => {
+    const {file = {}} = params;
+    const state = {
+        fileList: params.fileList,          // 已上传文件列表
+        $counter: params.fileList.length    // 已上传文件数量
+    };
+    if ("uploading" === file.status) {
+        state.$loading = true;
+    } else if ("done" === file.status) {
+        // 如果listType为picture-card
+        const {listType} = reference.props;
+        if ("picture-card" === listType) {
+            // 图片格式处理
+            const {originFileObj} = file;
+            const reader = new FileReader();
+            reader.addEventListener('load', () => reference.setState({
+                $loading: false,            // 加载完成
+                $imageUrl: reader.result,   // 图片URL地址
+            }));
+            if (originFileObj) {
+                reader.readAsDataURL(originFileObj);
+            }
+        }
+        state.$loading = false;
+    }
+    // 始终更新fileList（onChange触发两次，防止beforeUpload问题）
+    reference.setState(state);
+
+    // 设置更新过后的基础数据
+    const {config = {}} = reference.props;
+    const field = config['filekey'] ? config['filekey'] : "key";
+    /*
+     * XAttachment + File
+     * 后端标准化 + 前端标准化构成整体数据
+     * 前端字段
+     * - uid
+     * - name
+     * - type
+     * - size
+     * 后端
+     * - key
+     * - fileKey
+     * - fileName
+     * - filePath
+     * - fileUrl
+     * - size
+     * - mime
+     * - status
+     * - storeWay
+     * - modelId
+     * - metadata
+     * - name
+     * - type
+     * - extension
+     * - sizeUi
+     */
+    const fileData = [];
+    // eslint-disable-next-line no-unused-vars
+    const {fileList = []} = params;
+    fileList.filter(file => file.hasOwnProperty('response')).map(item => {
+        const {response = {}} = item;
+        const each = Abs.clone(response);
+        each.uid = item.uid;
+        each.name = item.name;
+        each.key = item.response[field];
+        each.type = item.type;  // 数据类型
+        // linker process
+        each.size = item.size;
+        each.sizeUi = Eng.toFileSize(item.size);
+        return each;
+    }).forEach(file => fileData.push(file));
+    const ref = Eng.onReference(reference, 1);
+    const {single = true} = metadata;
+    if (ref) {
+        if (single) {
+            // 单文件
+            const file = fileData[0] ? fileData[0] : {};
+            const formValues = {};
+            T.writeLinker(formValues, config, () => file);
+            T.formHits(ref, formValues);
+        }
+        Abs.fn(reference).onChange(fileData);
+    }
+}
+/**
+ *
+ * ## 「标准」`Ux.xtUploadHandler`
+ *
+ * 构造上传组件专用方法（handler对象）。
+ *
+ * * beforeUpload，上传之前的处理方法
+ * * onChange，变更专用方法
+ * * onPreview，预览专用方法
+ * * customRequest，自定义上传方法
+ *
+ * @memberOf module:_xweb
+ * @param {Object} reference React对应组件引用。
+ * @param {Object} metadata 当前组中数组，本身为一棵树
+ * @returns {Object} FileUpload组件专用。
+ */
+const xtUploadHandler = (reference, metadata = {}) => {
+    const handler = {};
+    // 前置验证处理
+    handler.beforeUpload = _rxBeforeUpload(reference, metadata);
+    // 上传改变处理
+    handler.onChange = _rxChange(reference, metadata);
+    handler.onPreview = _rxPreview(reference);
+    handler.customRequest = _rxCustomRequest(reference);
+
+    return handler;
+}
+const xtUploadInit = (reference, ajax = {}, callback) => {
+    const {value = [], listType} = reference.props;
+    if (!callback) {
+        callback = () => false;
+    }
+    if ("picture-card" === listType) {
+        // 图片专用
+        Abs.parallel(value.map(file => {
+            return Ajx.ajaxDownload(ajax.download, Abs.clone(file), {});
+        })).then(downloaded => {
+            const promises = [];
+            value.forEach((each, index) =>
+                promises.push(Ajx.asyncImage(each, downloaded[index])));
+            return Abs.parallel(promises)
+        }).then(item => callback(item))
+    } else {
+        value.forEach(each => each.url = T.formatExpr(ajax.download, each, true));
+        callback(value);
+    }
+}
+const xtUploadMime = (value = []) => {
+    const normalized = [];
+    const fnThumb = (item = {}) => {
+        const name = item.name;
+        const extension = name.substring(name.lastIndexOf(".") + 1).toUpperCase();
+        const type = Cv.FILE_ICON[extension];
+        if (type) {
+            return type;
+        } else {
+            return Cv.FILE_ICON.TXT;
+        }
+    }
+    value.forEach(item => {
+        if (item.hasOwnProperty("originFileObj")) {
+            item.thumbUrl = fnThumb(item);
+            normalized.push(item);
+        } else {
+            const file = {};
+            file.key = item.key;
+            file.uid = item.uid ? item.uid : item['fileKey'];
+            file.type = item.type;
+            file.thumbUrl = fnThumb(item);
+            file.status = "done";
+            file.response = Abs.clone(item);
+            file.percent = 0;
+            file.name = item.name;
+            normalized.push(file);
+        }
+    })
+    return normalized;
+}
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
+    // 下载专用几个方法，合并到一起形成 handler
+    xtUploadHandler,
+    xtUploadInit,
+    xtUploadMime,
     /* Ajax 部分由于逻辑复杂，这部分单独拉出来执行处理*/
 
     xtLazyUp,

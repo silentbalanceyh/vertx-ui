@@ -10,13 +10,14 @@ const componentInit = (reference) => {
     const {config = {}, value = []} = reference.props;
     const {
         message = {},
-        tree = {},
-        search = {},
-        ajax = {},
         table = {},
-        initial = {},
+        editor = {}
     } = config;
-
+    // 新的数据结构处理
+    const {
+        initial = {},
+        search = {},
+    } = editor;
     // Action
     const action = Ux.fromHoc(reference, "action");
     let {add = {}, remove = {}, save = {}} = action;
@@ -34,22 +35,20 @@ const componentInit = (reference) => {
     state.$window = window;
 
     // Editor - Search
-    const editor = {};
+    const $editor = Ux.clone(editor);
     const $search = {};
     Object.assign($search, search);
     $search.label = message.search;
-    editor.search = $search;
+    $editor.search = $search;
     // Editor - Tree
-    editor.tree = Ux.clone(tree);
-    editor.ajax = ajax;
-    editor.table = table;
-    editor.button = window.__onOk;
-    editor.validation = message.failure;
+    $editor.table = table;
+    $editor.button = window.__onOk;
+    $editor.validation = message.failure;
     // Editor - Tip
-    editor.tip = {}
-    editor.tip.message = message.tip;
+    $editor.tip = {}
+    $editor.tip.message = message.tip;
 
-    state.$editor = editor;
+    state.$editor = $editor;
     table.columns = Ux.configColumn(reference, table.columns);
     state.$table = table;
 

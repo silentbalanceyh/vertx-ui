@@ -43,6 +43,14 @@ class Component extends React.PureComponent {
         Ex.wf(this).yiPage().then(Ux.pipe(this));
     }
 
+    // 两个界面之间的切换流程
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        Ex.wf(this).yuPage({
+            props: prevProps,
+            state: prevState,
+        }, () => Ex.wf(this).yiPage().then(Ux.pipe(this)))
+    }
+
     render() {
         const {$error = false} = this.state;
         if ($error) {

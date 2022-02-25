@@ -533,22 +533,34 @@
                     "key": "monitorContainer",
                     "config": {
                         "activeKey": "bpmn",
-                        "items": "流程图,bpmn;操作历史,history;关联附件,attachment;关联工单,ticket;关联资产,asset",
+                        "items": "流程图,bpmn;操作历史,history;关联附件,linkageAttachment;关联工单,linkageTicket;关联资产,linkageAsset",
                         "pages": {
-                            "asset": {
+                            "linkageAsset": {
                                 "ui": [
                                     [
                                         "linkageAsset,,24"
                                     ]
                                 ]
                             },
-                            "attachment": {
+                            "linkageAttachment": {
                                 "ui": [
                                     [
+                                        {
+                                            "metadata": "linkageAttachment,文件上传,18,,aiFileBatch,text=上传",
+                                            "optionJsx.accept": "*/*",
+                                            "optionJsx.config.filekey": "key",
+                                            "optionJsx.config.limit": 10240,
+                                            "optionJsx.ajax.uri": "/api/file/upload/:identifier?category=:category",
+                                            "optionJsx.ajax.download": "/api/file/download/:key",
+                                            "optionJsx.ajax.params": {
+                                                "identifier": "FIX:w.ticket",
+                                                "category": "PROP:workflow.code"
+                                            }
+                                        }
                                     ]
                                 ]
                             },
-                            "ticket": {
+                            "linkageTicket": {
                                 "ui": [
                                     [
                                         "linkageTicket,,24"

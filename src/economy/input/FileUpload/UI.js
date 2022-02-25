@@ -1,6 +1,5 @@
 import React from 'react';
 import './Cab.less';
-import Op from './Op';
 import {component} from "../../_internal";
 import Rdr from './Web';
 import {Input} from 'antd';
@@ -25,7 +24,6 @@ import Ux from "ux";
  *      "optionJsx.accept": "image/*",
  *      "optionJsx.config.filekey": "key",
  *      "optionJsx.config.limit": 10240,
- *      "optionJsx.config.single": true,
  *      "optionJsx.ajax.uri": "/api/file/upload/:category",
  *      "optionJsx.ajax.download": "/api/file/download/:key",
  *      "optionJsx.ajax.params": {
@@ -50,7 +48,6 @@ import Ux from "ux";
  * |reference||props|React|父引用，遵循Zero Ui的规范，该变量为固定变量，引用父组件。|
  * |config|filekey|props|String|下载文件的文件主键（fileKey）。|
  * |config|limit|props|Number|上传文件的大小限制。|
- * |config|single|props|Boolean|单文件上传还是多文件上传。|
  * |ajax|uri|props|String|上传专用Ajax基础配置，POST。|
  * |ajax|download|props|String|生成的文件下载链接，GET。|
  * |ajax|params|props|Object|上传专用Ajax中的参数信息，支持标准解析，parser的应用。|
@@ -68,54 +65,6 @@ import Ux from "ux";
 // =====================================================
 // componentInit/componentUp
 // =====================================================
-const _asyncToUrl = (each = {}, blob) => new Promise((resolve) => {
-    const reader = new FileReader();
-    reader.readAsArrayBuffer(blob);
-    reader.addEventListener("load", () => {
-        const type = each.type ? each.type : "image/jpeg";
-        const blob = new Blob([reader.result], {type});
-        // Secondary
-        const innerRder = new FileReader();
-        innerRder.readAsDataURL(blob);
-        innerRder.addEventListener("load", () => {
-            each.thumbUrl = innerRder.result;
-            resolve(each);
-        });
-    });
-});
-const componentInit = (reference) => {
-    const handler = Op.onHandler(reference);
-    const callback = (fileList) =>
-        reference.setState({
-            handler, // 构造的Handler
-            fileList, // 已上传文件内容
-            $counter: fileList.length // 已上传文件数量
-        });
-    const {value = [], listType} = reference.props;
-    if ("picture-card" === listType) {
-        if (Ux.isArray(value)) {
-            Ux.parallel(value.map(file => {
-                const {ajax = {}} = reference.props;
-                return Ux.ajaxDownload(ajax.download, Ux.clone(file));
-            })).then(downloaded => {
-                const promises = [];
-                value.forEach((each, index) => {
-                    const promise = _asyncToUrl(each, downloaded[index]);
-                    promises.push(promise);
-                });
-                return Ux.parallel(promises)
-            }).then(item => callback(item)); // 设置FileList
-
-        }
-    } else {
-        const {ajax = {}} = reference.props;
-        if (Ux.isArray(value)) {
-            value.forEach(each => each.url = Ux.formatExpr(ajax.download, each, true))
-        }
-        callback(value);
-    }
-};
-
 @component({
     "i18n.cab": require('./Cab.json'),
     "i18n.name": "UI",
@@ -127,7 +76,12 @@ const componentInit = (reference) => {
 class Component extends React.PureComponent {
 
     componentDidMount() {
-        componentInit(this);
+        const {ajax = {}} = this.props;
+        Ux.xtUploadInit(this, ajax, (fileList) => this.setState({
+            handler: Ux.xtUploadHandler(this), // 构造的Handler
+            fileList, // 已上传文件内容
+            $counter: fileList.length // 已上传文件数量
+        }))
     }
 
     UNSAFE_componentWillReceiveProps(nextProps, nextState) {
@@ -135,8 +89,8 @@ class Component extends React.PureComponent {
     }
 
     render() {
-        const {config = {}, readOnly = false} = this.props;
-        const isSingle = config.single && !readOnly;
+        const {readOnly = false} = this.props;
+        const isSingle = !readOnly;
         return (
             <Input.Group className={`web-file-upload ${isSingle ? "web-file-upload-single" : ""}`}>
                 {Rdr.renderFile(this)}

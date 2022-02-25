@@ -1861,11 +1861,11 @@ const elementIn = (ele = [], source = [], isAnd = true) => {
         return 0 < checked.length;
     }
 }
-// eslint-disable-next-line import/no-anonymous-default-export
 /*
  * 变量名与element方法冲突
  */
 //let document;
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     // O.object.js
     valueAppend,

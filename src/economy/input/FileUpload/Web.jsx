@@ -12,7 +12,6 @@ const renderFile = (reference) => {
     };
     // Upload属性集
     const upload = {
-        ...meta,
         ...handler,
         ...attrs
     };
@@ -73,6 +72,8 @@ const renderPreview = (reference) => {
         </Modal>
     );
 };
+
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     renderFile,
     renderPreview
