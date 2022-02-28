@@ -1,68 +1,12 @@
 import Ux from "ux";
-import {Button, Card, Carousel, Col, Modal, Row, Tooltip, Upload} from "antd";
+import {Button, Card, Carousel, Tooltip} from "antd";
 import React from "react";
-import {saveAs} from "file-saver";
 import renderHTML from "react-render-html";
-
-const renderView = (reference) => {
-    const {$dialog = {}, $visible = false, $inited = {}} = reference.state;
-    const dialog = Ux.clone($dialog);
-    dialog.visible = $visible;
-    // 特殊关闭函数
-    dialog.onCancel = (event) => {
-        Ux.prevent(event);
-        reference.setState({$visible: false, $inited: undefined});
-    }
-    dialog.footer = renderFooter(reference, dialog.onCancel);
-    dialog.className = `web-dialog ex-announce-window`;
-    return (
-        <Modal {...dialog}>
-            <Row>
-                <Col span={24} className={"title"}>
-                    <h2>{$inited.name}</h2>
-                </Col>
-            </Row>
-            <hr/>
-            <Row>
-                <Col span={24} className={"content"}>
-                    {$visible ? renderHTML($inited.content) : false}
-                </Col>
-            </Row>
-            <hr/>
-            <Row>
-                <Col span={24} className={"file"}>
-                    {(() => {
-                        const {files = []} = $inited;
-                        const attrs = {};
-                        attrs.showUploadList = {
-                            showPreviewIcon: true,          // 预览专用
-                            showRemoveIcon: false
-                        }
-                        attrs.fileList = Ux.xtUploadMime(files, reference);
-                        attrs.onPreview = (file = {}) => Ux.ajaxDownload("/api/file/download/:key", file, {})
-                            .then(data => saveAs(data, file.name))
-                        return (
-                            <Upload {...attrs}/>
-                        )
-                    })()}
-                </Col>
-            </Row>
-        </Modal>
-    )
-}
-
-const renderFooter = (reference, onCancel) => {
-    const action = Ux.fromHoc(reference, "action");
-    return (
-        <Button icon={"close"} type={"primary"}
-                onClick={onCancel}>
-            {action.close}
-        </Button>
-    )
-}
+import ExAnnounceView from '../ExAnnounceView/UI'
 
 const renderAction = (reference, item = {}) => {
     const action = Ux.fromHoc(reference, "action");
+    const {$visible = false, $inited = {}} = reference.state;
     return (
         <div className={"action"}>
             <Button.Group size={"small"}>
@@ -77,7 +21,10 @@ const renderAction = (reference, item = {}) => {
                     <Button icon={"link"} className={"ux-spec"}/>
                 </Tooltip>
             </Button.Group>
-            {renderView(reference)}
+            <ExAnnounceView data={$inited} visible={$visible} rxClose={(event) => {
+                Ux.prevent(event);
+                reference.setState({$visible: false, $inited: undefined});
+            }}/>
         </div>
     )
 }

@@ -176,7 +176,20 @@ const toGridSpan = (columns = 4, index = 0) => {
  */
 const toCss = (name) => `${Cv['CSS_PREFIX']}-${name}`;
 
-
+const toCssLogo = (reference) => {
+    const {$collapsed = false} = reference.state;
+    if ($collapsed) {
+        return {
+            width: 172,
+            height: 38,
+        }
+    } else {
+        return {
+            width: 172,
+            height: 38,
+        }
+    }
+}
 /**
  * ## 「标准」`Ux.toMessage`
  *
@@ -409,6 +422,7 @@ export default {
     toFileSize,
 
     toCss,  // /* 根据 CSS_PREFIX 前缀计算的 Class */
+    toCssLogo,
     toKey,  // 生成 assist / tabular 相关 key
     toLink,
     toX,    // 表格专用列生成

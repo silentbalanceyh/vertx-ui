@@ -1,7 +1,7 @@
 import React from 'react';
 import Ux from 'ux';
 import Ex from "ex";
-import {Avatar, Dropdown, Modal, Spin} from "antd";
+import {Avatar, Dropdown, Icon, Modal, Spin, Tooltip} from "antd";
 import './Cab.less';
 
 /**
@@ -99,6 +99,47 @@ const renderJsx = (reference, {
     }
 }
 
+const renderCode = (reference, menu = []) => {
+    const menuDev = menu.filter(item => "DEV-MENU" === item.type);
+    if (0 < menuDev.length) {
+        const info = Ux.fromHoc(reference, "info");
+        return (
+            <Tooltip title={info['develop']} placement={"bottom"}>
+                <Icon type={"code"} className={"icon-top"}
+                      onClick={event => {
+                          Ux.prevent(event);
+                          // 进入开发中心
+                          Ux.toRoute(reference, "/development/index");
+                      }}/>
+            </Tooltip>
+        )
+    } else return false;
+}
+
+
+const renderMessage = (reference, menu = []) => {
+    const info = Ux.fromHoc(reference, "info");
+    return (
+        <Tooltip title={info.message} placement={"bottom"}>
+            <Icon type={"message"} className={"icon-top"}/>
+        </Tooltip>
+    )
+}
+
+const renderAction = (reference) => {
+    const {$menus} = reference.props;
+    return (
+        <div className={"action-bar"}>
+            {renderCode(reference, $menus.to())}
+            {renderMessage(reference, $menus.to())}
+        </div>
+    )
+}
+
+@Ux.zero(Ux.rxEtat(require("./Cab"))
+    .cab("ExLogged")
+    .to()
+)
 class Component extends React.PureComponent {
     state = {$ready: true};
 
@@ -109,15 +150,22 @@ class Component extends React.PureComponent {
             /*
              * 菜单操作
              */
-            const {data = [], $app} = this.props;
+            const {
+                data = [], $app,
+            } = this.props;
             const $data = data
                 .map(item => Ex.mapMeta(item))
                 .map(item => Ex.mapUri(item, $app));
-            return renderJsx(this, {
-                $user,
-                $data,
-                css,
-            })
+            return (
+                <div className={"ex-logged"}>
+                    {renderJsx(this, {
+                        $user,
+                        $data,
+                        css,
+                    })}
+                    {renderAction(this)}
+                </div>
+            )
         }, Ex.parserOfColor("ExLogged").component())
     }
 }

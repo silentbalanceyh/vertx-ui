@@ -29,6 +29,7 @@ src/environment/datum.js
 src/components/index.js
 src/container/index.js
 src/extension/components/index.js
+src/extension/cerebration/index.js
 .awcache
 .awcache/*
 .Archive/

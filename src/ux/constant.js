@@ -44,6 +44,8 @@ const ECONOMY = {
         APP: "APP-MENU",        // 主界面 Dashboard 专用菜单
         NAV: "NAV-MENU",        // 导航栏专用（包含 SIDE-MENU 和 NAV-MENU
         TOP: "TOP-MENU",        // 顶部右上角菜单信息
+        DEV: "DEV-MENU",        // 开发中心：开发菜单
+        SYS: "SYS-MENU",        // 开发中心：系统菜单
     },
 
 

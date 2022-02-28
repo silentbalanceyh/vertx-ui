@@ -1,0 +1,75 @@
+{
+    "_page": {
+        "title": "我的待办",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_assist": {
+        "service.catalog": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:zero.service.catalog"
+            }
+        }
+    },
+    "_dim": {
+        "statistic": [
+            "all,总工单数,dashboard,#55537e",
+            "pending,运行工单,solution,#2f54eb",
+            "finished,关闭工单,check,#58c623"
+        ]
+    },
+    "_table": {
+        "columns": [
+            {
+                "metadata": "serial,任务号",
+                "width": 200
+            },
+            "link,标题",
+            {
+                "metadata": "catalog,服务目录,DATUM",
+                "$datum": "source=service.catalog,value=code,display=name",
+                "width": 100
+            },
+            {
+                "metadata": "openBy,制单人,USER",
+                "$config": {
+                    "uri": "/api/user/:key",
+                    "field": "realname",
+                    "icon": "user,#00BF9F"
+                },
+                "width": 80
+            },
+            {
+                "metadata": "openAt,制单时间,DATE",
+                "$format": "YYYY-MM-DD HH:mm",
+                "width": 120
+            },
+            {
+                "metadata": "toUser,审批人,USER",
+                "$config": {
+                    "uri": "/api/user/:key",
+                    "field": "realname",
+                    "icon": "user,#00AAE4"
+                },
+                "width": 80
+            },
+            {
+                "metadata": "status,审批结果,MAPPING",
+                "$mapping": {
+                    "DRAFT": "未提交,form,,#CDCDB4",
+                    "PENDING": "待审批,undo,,#00AAE4",
+                    "FINISHED": "通过,check-circle,,#698B69",
+                    "REJECTED": "拒绝,redo,,#CD1076",
+                    "ACCEPTED": "已接受,info-circle,,#698B69",
+                    "CANCELED": "已撤销,stop,,#CD1076",
+                    "EXPIRED": "超时,clock-circle,,#CD1076"
+                },
+                "width": 100
+            }
+        ]
+    }
+}

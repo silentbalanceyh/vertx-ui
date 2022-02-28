@@ -1,0 +1,60 @@
+@import "../../../global";
+@import "Cab.Fit";
+
+.dx-layout {
+    // 响应式处理
+    .dx-layout-fit;
+
+
+    @keyframes animStar {
+        from {
+            transform: translateY(0px);
+        }
+        to {
+            transform: translateY(-2000px);
+        }
+    }
+
+    .dx-content {
+        padding-bottom: 0;
+    }
+
+    .dx-header {
+        background: @primary-color;
+        box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+        position: relative;
+
+        i.trigger {
+            color: white;
+            vertical-align: 0 !important;
+
+            .ix-font.normal(24);
+            cursor: pointer;
+            transition: all .3s, padding 0s;
+
+            &:hover {
+                background: @primary-1;
+                color: black;
+            }
+        }
+
+        .tips {
+            float: right;
+            line-height: 48px;
+
+            .ant-tag {
+                font-size: 14px;
+                display: inline-block;
+            }
+        }
+
+        .right {
+            float: right;
+            color: white;
+            margin-right: 0;
+            height: 100%;
+            text-align: right;
+        }
+    }
+}
+

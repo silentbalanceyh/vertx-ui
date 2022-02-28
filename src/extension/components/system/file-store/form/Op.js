@@ -1,17 +1,17 @@
 import Ex from 'ex';
 
 const $opAdd = (reference) => (params) => Ex.form(reference).add(params, {
-    uri: "/api/x-integration",
+    uri: "/api/i-integration",
     dialog: "added",
 });
 const $opSave = (reference) =>
     params => Ex.form(reference).save(params, {
-        uri: "/api/x-integration/:key",
+        uri: "/api/i-integration/:key",
         dialog: "saved"
     });
 const $opDelete = (reference) =>
     params => Ex.form(reference).remove(params, {
-        uri: "/api/x-integration/:key",
+        uri: "/api/i-integration/:key",
         dialog: "removed"
     });
 const $opFilter = (reference) =>

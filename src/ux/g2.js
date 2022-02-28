@@ -25,6 +25,7 @@ const g2Chart = (id, config = {}) => {
         tooltip = {},           // Tooltip配置
         interval = {},          // Interval配置
         dim = {},               // 维度配置
+        legend,          // 图例
     } = config;
     Dev.dgDebug(config, "图配置相关信息");
     // 创建 g2 图信息
@@ -33,6 +34,9 @@ const g2Chart = (id, config = {}) => {
         autoFit: true,
         ...chart
     });
+    if (undefined !== legend) {
+        graphic.legend(legend);
+    }
     // 处理 Tooltip
     graphic.tooltip({
         showMarkers: true,

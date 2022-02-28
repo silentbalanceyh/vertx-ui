@@ -1,8 +1,6 @@
 {
     "_action": {
         "search": "查看详情",
-        "link": "下载所有附件",
-        "close": "关闭公告"
-    },
-    "_window": "公告详情,,关闭,false,960,true"
+        "link": "下载所有附件"
+    }
 }

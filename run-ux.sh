@@ -71,6 +71,13 @@ cp -rf src/cab/cn/economy/* ${TARGET_FOLDER}/src/cab/cn/economy/
 cp -rf src/cab/cn/extension/* ${TARGET_FOLDER}/src/cab/cn/extension/
 echo "[ Proc ] 资源拷贝完成！"
 
+# Development 技术平台专用开发
+# 平台层和业务层分离，构造新的 DEV-MENU 专用开发菜单
+rm -rf ${TARGET_FOLDER}/src/cab/cn/cerebration/*
+mkdir -p ${TARGET_FOLDER}/src/cab/cn/cerebration
+cp -rf src/cab/cn/cerebration/* ${TARGET_FOLDER}/src/cab/cn/cerebration/
+echo "[ Proc ] 平台开发资源拷贝完成！"
+
 rm -rf ${TARGET_FOLDER}/src/style/economy/*
 rm -rf ${TARGET_FOLDER}/src/style/infix/*
 echo "[ Proc ] 风格文件删除完成！"

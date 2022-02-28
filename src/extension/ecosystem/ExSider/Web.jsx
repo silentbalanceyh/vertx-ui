@@ -37,6 +37,7 @@ export default (reference, {
                     </Link>
                 ) : (
                     <img src={logo}
+                         style={$logoCss}
                          alt={'Logo'}/>
                 )}
             </div>

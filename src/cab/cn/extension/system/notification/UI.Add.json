@@ -83,7 +83,7 @@
             "type"
         ],
         "initial": {
-            "status": "FIX:RUNNING",
+            "status": "FIX:FINISHED",
             "type": "FIX:HOME",
             "appId": "PROP:app.key"
         }

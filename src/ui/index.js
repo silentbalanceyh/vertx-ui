@@ -136,6 +136,8 @@ const smartList = (configuration = {}) => {
         yoPlugins,
         yoExecutor,
         yoRx,
+
+        renderAddOn,
     } = configuration;
     const {
         rm = []
@@ -250,6 +252,7 @@ const smartList = (configuration = {}) => {
                     <PageCard reference={this}>
                         <ExListComplex {...inherit}
                                        config={configuration} $form={form}/>
+                        {Ux.isFunction(renderAddOn) ? renderAddOn(this) : false}
                     </PageCard>
                 )
             }, logger)

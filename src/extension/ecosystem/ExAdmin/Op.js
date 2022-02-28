@@ -6,9 +6,10 @@ const yoSider = (reference = {}) => {
     /*
      * 数据
      */
+    const {rxMenuFilter = () => true} = reference.props;
     const {$menus} = reference.props;
     attrs.data = Ex.toArray($menus)        // X_MENU 菜单信息
-        .filter(menu => Ux.Env.MENU_TYPE.SIDE === menu.type)
+        .filter(rxMenuFilter)
         .sort((left, right) => left.order - right.order);
     /*
      * 配置
@@ -33,11 +34,9 @@ const yoNavigation = (reference = {}, {
      */
     const {$menus, $router} = reference.props;
     const source = Ex.toArray($menus);
+    const {rxMenuFilter = () => true} = reference.props;
     attrs.data = source      // X_MENU 菜单信息// 特殊类型（导航栏）
-        .filter(menu =>
-            Ux.Env.MENU_TYPE.SIDE === menu.type ||
-            Ux.Env.MENU_TYPE.NAV === menu.type
-        )
+        .filter(rxMenuFilter)
         .filter(menu => {
             // calculate path
             if (menu.uri) {

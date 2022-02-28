@@ -65,17 +65,25 @@ const yoNavigation = (reference = {}) => {
 const renderJsx = (reference, {
     $navs = [],
     $router,
+    extra,
     css: {
         clsNav = "ux-navigation",
         clsBreadcrumb = "breadcrumb"
     }
 }) => (
     <div className={clsNav}>
-        {Ux.aiBreadcrumb($navs, {
-            className: clsBreadcrumb
-        }, {
-            $router,
-        })}
+        <div className={"ux-navigation-menu"}>
+            {Ux.aiBreadcrumb($navs, {
+                className: clsBreadcrumb
+            }, {
+                $router,
+            })}
+        </div>
+        {extra ? (
+            <div className={"ux-navigation-extra"}>
+                {extra}
+            </div>
+        ) : false}
     </div>
 )
 
@@ -84,9 +92,10 @@ class Component extends React.PureComponent {
 
     render() {
         return Ex.yoRender(this, () => {
-            const {$router, css = {}} = this.props;
+            const {$router, css = {}, extra} = this.props;
             return renderJsx(this, {
                 css,
+                extra,
                 $router,
                 $navs: yoNavigation(this)
             });

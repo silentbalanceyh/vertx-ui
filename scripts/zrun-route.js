@@ -137,10 +137,11 @@ pageDir.forEach(layout => {
             pageTpl[key] = json.tpl;
         }
     }
+    // tpl 开发模板
     variables.push(key);
 });
 
-// Extension Dir for Zero Modules
+// ----------------- Extension Dir for Zero Modules
 const extensionDir = collect('./src/extension/components');
 const extensionVariables = [];
 let extensionLine = [];
@@ -152,13 +153,6 @@ extensionDir.forEach(page => {
     }
 });
 line.push(`import _extension from '../extension/components';`);
-line.push('\nexport default {');
-variables.forEach(variable => {
-    line.push(`\t${variable},`)
-});
-line.push(`\t..._extension,`);
-line.push('}\n');
-content = line.join("\n");
 // Extension
 extensionLine.push('\nexport default {');
 extensionVariables.forEach(variable => {
@@ -167,12 +161,49 @@ extensionVariables.forEach(variable => {
 extensionLine.push('}\n');
 fs.writeFileSync("src/extension/components/index.js", extensionLine.join("\n"));
 
+// ----------------- Development For Zero New Version
+const developmentDir = collect('./src/extension/cerebration');
+const developmentVariables = [];
+let developmentLine = [];
+developmentDir.forEach(page => {
+    const key = page.replace(/\./g, '').replace(/-/g, '$').replace(/\//g, '_');
+    if (!variables.includes(key)) {
+        developmentLine.push(`import ${key} from '${page}/UI';`);
+        developmentVariables.push(key);
+        // 强制模板
+        pageTpl[key] = "_development_center";
+    }
+})
+line.push(`import _development from '../extension/cerebration';`);
+// 开发中心设置
+// Extension
+developmentLine.push('\nexport default {');
+developmentVariables.forEach(variable => {
+    developmentLine.push(`\t${variable},`)
+});
+developmentLine.push('}\n');
+fs.writeFileSync("src/extension/cerebration/index.js", developmentLine.join("\n"));
+
+// 导出总接口设置
+line.push('\nexport default {');
+variables.forEach(variable => {
+    line.push(`\t${variable},`)
+});
+line.push(`\t..._extension,`);
+line.push(`\t..._development,`);
+line.push('}\n');
+content = line.join("\n");
+
+
 fs.writeFile("src/components/index.js", content, () => {
     console.log("[SUC] Successfully to write data to src/components/index.js");
     // 1.读取路由模板，生成静态路由
     const routeConfig = JSON.parse(fs.readFileSync("src/route.json").toString());
     // 2.计算路由关联关系
-    const routes = generateRoute(variables.concat(extensionVariables), routeConfig, pageTpl);
+    const routes = generateRoute(variables
+        .concat(extensionVariables)
+        .concat(developmentVariables), routeConfig, pageTpl
+    );
     // 3.根据路由规则计算生成片段
     const lines = [];
     routes.forEach(route => generateTpl(lines, route));

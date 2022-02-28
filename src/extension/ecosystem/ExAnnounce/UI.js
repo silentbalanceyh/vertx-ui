@@ -13,9 +13,6 @@ const componentInit = (reference) => {
         const state = {};
         state.$ready = true;
         state.$data = Ux.valueArray(response);
-        // $dialog
-        const dialog = Ux.fromHoc(reference, "window");
-        state.$dialog = Ux.configDialog(reference, dialog);
         try {
             reference.setState(state);
         } catch (error) {

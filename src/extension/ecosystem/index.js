@@ -24,6 +24,7 @@ export {default as ExTabular} from './ExTabular/UI';                    /* （Ta
 export {default as ExTrackField} from './ExTrackField/UI';
 export {default as ExWizard} from './ExWizard/UI';                      /* 双表单依赖搜索专用 */
 export {default as ExAnnounce} from './ExAnnounce/UI';                  /* 公告 */
+export {default as ExAnnounceView} from './ExAnnounceView/UI';          /* 公告详情 */
 
 
 // 工作流专用（标准化）
@@ -55,6 +56,10 @@ export {default as FBookList} from './FBookList/UI';                // 账本列
 export {default as FSettleView} from './FSettleView/UI';            // 结算单详情
 export {default as FDebtView} from './FDebtView/UI';                // 应收详情
 export {default as FRefundView} from './FRefundView/UI';                // 退款详情
+
+
+// 开发中心
+export {default as DxAdmin} from './DxAdmin/UI';                      // 开发专用模板
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

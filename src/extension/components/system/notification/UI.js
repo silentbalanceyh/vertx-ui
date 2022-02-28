@@ -1,8 +1,10 @@
 import React from 'react';
 import Ui from "ui";
+import Ux from 'ux';
+import {ExAnnounceView} from 'ei';
 
 const koRowFn = (reference) => (record, config, self) => {
-    const op = ["$opSave", "$opReset"];
+    const op = ["$opSave", "$opReset", "$opPreview"];
     if ("FINISHED" === record.status) {
         op.push("$opDelete");
     }
@@ -34,6 +36,24 @@ export default Ui.smartList({
         koRow: koRowFn(reference),
         koEdit: koRowFn(reference)
     }),
+    yoExecutor: (reference) => ({
+        fnPreview: (key) => Ux.ajaxGet("/api/x-notice/:key", {key}).then($announce => {
+            reference.setState({$visible: true, $announce});
+        })
+    }),
+    renderAddOn: (reference) => {
+        const {$visible = false, $announce} = reference.state;
+        const attrs = {};
+        attrs.rxClose = (event) => {
+            Ux.prevent(event);
+            reference.setState({$visible: false, $announce: undefined})
+        }
+        attrs.visible = $visible;
+        attrs.data = $announce;
+        return (
+            <ExAnnounceView {...attrs}/>
+        )
+    },
     Form: {
         name: "FormNotice",
         yoOp: {

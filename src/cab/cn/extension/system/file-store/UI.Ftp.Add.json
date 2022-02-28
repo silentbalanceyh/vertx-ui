@@ -24,7 +24,7 @@
                             "validator": "existing",
                             "message": "对不起，名称重复！",
                             "config": {
-                                "uri": "/api/x-integration/existing",
+                                "uri": "/api/i-integration/existing",
                                 "method": "POST",
                                 "params": {
                                     "type": "FIX:ftp",
