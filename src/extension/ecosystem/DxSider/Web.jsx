@@ -1,7 +1,6 @@
 import {Layout} from "antd";
 import Ux from "ux";
 import React from "react";
-import {Link} from "react-router-dom";
 import Empty from "./image/empty.jpg";
 import './Cab.less';
 
@@ -30,11 +29,15 @@ export default (reference, {
             {/* 菜单顶部Logo */}
             <div className={`logo`}>
                 {isFull ? (
-                    <Link to={Ux.Env.ENTRY_ADMIN}>
+                    // eslint-disable-next-line
+                    <a href={""} onClick={event => {
+                        Ux.prevent(event);
+                        Ux.toRoute(reference, "/development/index")
+                    }}>
                         <img src={logo}
                              style={$logoCss}
                              alt={'Logo'}/>
-                    </Link>
+                    </a>
                 ) : (
                     <img src={logo}
                          alt={'Logo'}/>

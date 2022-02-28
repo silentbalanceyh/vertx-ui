@@ -46,15 +46,18 @@ const xtLazyInit = (reference) => {
     // ----------------------- 检查 -------------------------
     /* 值检查流程，是否触发核心流程 */
     const values = Eng.onLinker(config, (fields) => T.formGet(ref, fields));
-    if (Abs.isEmpty(values) ||                          // 1. values = {} 则直接中断，无法执行初始化加载流程
-        (undefined !== value && values[linker.key])) {    // 2. value有值并且主键也有值
+    if (Abs.isEmpty(values) ||                              // 1. values = {} 则直接中断，无法执行初始化加载流程
+        (undefined !== value && values[linker.key])) {      // 2. value有值并且主键也有值
         xtLazyState(reference, {})
         return;
     }
 
     // ----------------------- 主流程 -------------------------
-    /* 包含值，执行 loading 操作，参数构造 */
-    const params = xtLazyAjax(ref, config);
+    /*
+     * 包含值，执行 loading 操作，参数构造
+     **/
+    const params = xtLazyAjax(reference, config);
+
     let request;
     if (Abs.isQr(config)) {
         // 查询引擎参数，Qr 必须是 POST 方法
@@ -104,7 +107,7 @@ const xtLazyInit = (reference) => {
         } else {
             // N 初始化
             const $keySet = T.formGet(ref);
-            if (Abs.isEmpty($keySet) || !!$keySet) {
+            if (Abs.isEmpty($keySet) || !$keySet) {
                 xtLazyState(reference, {})
                 return;                                 // 直接中断
             }
@@ -137,8 +140,8 @@ const xtLazyInit = (reference) => {
              * $keySet -> initialValue
              */
             Object.keys($keySet)
-                .filter(initialValue.hasOwnProperty)
-                .filter($keySet.hasOwnProperty)
+                .filter(field => initialValue.hasOwnProperty(field))
+                .filter(field => $keySet.hasOwnProperty(field))
                 .forEach(field => {
                     const iValue = initialValue[field];
                     const fValue = $keySet[field];

@@ -75,7 +75,7 @@ const renderBack = (reference) => {
                   onClick={event => {
                       Ux.prevent(event)
                       // 进入应用中心
-                      Ux.toRoute(reference, "/admin/index");
+                      Ux.toRoute(reference, Ux.Env.ENTRY_ADMIN);
                   }}/>
         </Tooltip>
     )

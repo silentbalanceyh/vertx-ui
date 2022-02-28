@@ -448,7 +448,7 @@ class Logger {
                 if (item.optionItem) {
                     const mode = key ? `"Jsx"` : `"Hoc"`;
                     const message = `%c 「Zero」 [Render] (${mode}) name="${item.field}", label="${item.optionItem.label}"`;
-                    console.groupCollapsed(message, `color:#333;font-weight:900`);
+                    console.groupCollapsed(message, `color:white;font-weight:900`);
                     console.log(`%c 「Zero」 Render mode: `, "color:#0c0", mode);
                     console.log(`%c 「Zero」 Field optionItem: `, "color:#06c", item.optionItem);
                     console.log(`%c 「Zero」 Field optionJsx：`, "color:#660", item.optionJsx);
