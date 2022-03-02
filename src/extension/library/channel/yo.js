@@ -1307,6 +1307,10 @@ const yoForm = (reference, additional = {}, data = {}) => {
     const acl = Ux.aclData($inited, reference, {});
     Object.assign(attrs, acl);              /* 表单控制专用（将控制写入到 attrs 中 */
     attrs.$inited = $inited;         /* Form 初始化数据 */
+    if (!Ux.isFunction(attrs.rxClose)) {
+        // [ Ux ] 核心错误！ Error: [ Ex ] rxClose 函数未出现在 props 中！
+        attrs.rxClose = () => false;
+    }
     return attrs;
 };
 const _yoForm = (additional = {}, reference) => {

@@ -56,7 +56,7 @@ const yoNavigation = (reference = {}, {
         homepage
     };
     attrs.source = Ux.clone(source);
-    attrs.extra = "Zero Framework - Development Toolbox";
+    attrs.extra = "Zero Framework - Development Environment 「 Version 1.0.0 」";
     return attrs;
 };
 const yoHeader = (reference = {}, {

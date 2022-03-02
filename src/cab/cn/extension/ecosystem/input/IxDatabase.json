@@ -19,18 +19,20 @@
                                 "ui": [
                                     [
                                         {
-                                            "metadata": "hostname,主机地址,8",
+                                            "metadata": "hostname,主机地址,12",
                                             "optionJsx.placeholder": "IP地址 / 域名"
                                         },
-                                        "port,端口号,8,75%,aiInputNumber,placeholder=最大65535,min=1,max=65535",
-                                        "instance,实例名称,8,,,placeholder=数据库实例名称"
+                                        "port,端口号,12,40%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
                                     ],
                                     [
                                         {
-                                            "metadata": "username,登录账号",
+                                            "metadata": "username,登录账号,,,,placeholder=（若不更改则不填）",
                                             "optionJsx.autoComplete": "new-username"
                                         },
-                                        "password,登录密码,,,aiPassword"
+                                        "password,登录密码,,,aiPassword,placeholder=（若不更改则不填）"
+                                    ],
+                                    [
+                                        "instance,实例名称,12,,,placeholder=数据库实例名称"
                                     ],
                                     [
                                         {
@@ -76,7 +78,7 @@
                                         }
                                     ],
                                     [
-                                        "jdbcUrl,JDBC连接串,24,,,placeholder=JDBC专用连接字符串"
+                                        "jdbcUrl,JDBC连接串,24,,aiTextArea,rows=3,placeholder=JDBC专用连接字符串"
                                     ]
                                 ]
                             },

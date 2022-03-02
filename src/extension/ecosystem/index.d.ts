@@ -58,6 +58,11 @@ declare module "ei" {
     export {default as FDebtView} from './FDebtView/UI';                // 应收详情
     export {default as FRefundView} from './FRefundView/UI';            // 退款详情
 
+
     // 开发中心
     export {default as DxAdmin} from './DxAdmin/UI';                      // 开发专用模板
+
+
+    // 内置交互式开发
+    export {default as IxDatabase} from './IxDatabase/UI';              // 数据库配置
 }

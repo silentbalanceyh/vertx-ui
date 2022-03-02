@@ -17,6 +17,7 @@ declare module "web" {
     export {default as DialogEditor} from './input/DialogEditor/UI';        // 表格 + 弹框（子表单），支持增删改
     export {default as FileUpload} from './input/FileUpload/UI';            // 上传专用控件
     export {default as FileBatch} from './input/FileBatch/UI';              // 多文件上传
+    export {default as FileLogo} from './input/FileLogo/UI';                // Logo上传
     export {default as InputArray} from './input/InputArray/UI';            // 多值输入，值结构为 Array
     export {default as JsonEditor} from './input/JsonEditor/UI';            // Json编辑器
     export {default as ListSelector} from './input/ListSelector/UI';        // 列表选择器

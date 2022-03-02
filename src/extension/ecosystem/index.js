@@ -55,11 +55,13 @@ export {default as FBookView} from './FBookView/UI';                // 账本详
 export {default as FBookList} from './FBookList/UI';                // 账本列表（订单中查看）
 export {default as FSettleView} from './FSettleView/UI';            // 结算单详情
 export {default as FDebtView} from './FDebtView/UI';                // 应收详情
-export {default as FRefundView} from './FRefundView/UI';                // 退款详情
-
+export {default as FRefundView} from './FRefundView/UI';            // 退款详情
 
 // 开发中心
-export {default as DxAdmin} from './DxAdmin/UI';                      // 开发专用模板
+export {default as DxAdmin} from './DxAdmin/UI';                    // 开发专用模板
+
+// 内置交互式组件
+export {default as IxDatabase} from './IxDatabase/UI';              // 数据库配置
 /**
  * # 扩展组件`Ex/Ix/Ox`
  *

@@ -1069,12 +1069,17 @@ const _rxPreview = (reference) => (file = {}) => {
 }
 
 const _rxBeforeUpload = (reference, metadata = {}) => (file = {}) => {
-    const {single = true} = metadata;
+    const {single = true, overwrite = false} = metadata;
     const {config = {}} = reference.props;
     const error = Eng.fromHoc(reference, "error");
     // 1. 单多文件上传
     const {$counter = 0} = reference.state;
-    if (single) {
+    /*
+     * single = true
+     * overwrite = false
+     * 的时候执行单文件验证
+     */
+    if (single && !overwrite) {
         // 单文件验证
         if (0 < $counter) {
             message.destroy();
@@ -1177,6 +1182,10 @@ const _rxChange = (reference, metadata) => (params = {}) => {
      */
     const fileData = [];
     // eslint-disable-next-line no-unused-vars
+    const {
+        single = true,      // 单文件上传
+        overwrite = false,  // 单文件覆盖上传
+    } = metadata;
     const {fileList = []} = params;
     fileList.filter(file => file.hasOwnProperty('response')).map(item => {
         const {response = {}} = item;
@@ -1189,9 +1198,16 @@ const _rxChange = (reference, metadata) => (params = {}) => {
         each.size = item.size;
         each.sizeUi = Eng.toFileSize(item.size);
         return each;
-    }).forEach(file => fileData.push(file));
+    }).forEach(file => {
+        if (single && overwrite) {
+            // 覆盖上传
+            fileData[0] = file;
+        } else {
+            // 正常上传
+            fileData.push(file)
+        }
+    });
     const ref = Eng.onReference(reference, 1);
-    const {single = true} = metadata;
     if (ref) {
         if (single) {
             // 单文件

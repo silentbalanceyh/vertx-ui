@@ -4,6 +4,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import Empty from "./image/empty.jpg";
 import './Cab.less';
+import ExLogo from "../ExLogo/UI";
 
 const {Sider} = Layout;
 
@@ -31,14 +32,12 @@ export default (reference, {
             <div className={`logo`}>
                 {isFull ? (
                     <Link to={Ux.Env.ENTRY_ADMIN}>
-                        <img src={logo}
-                             style={$logoCss}
-                             alt={'Logo'}/>
+                        <ExLogo data={logo}
+                                $logoCss={$logoCss}/>
                     </Link>
                 ) : (
-                    <img src={logo}
-                         style={$logoCss}
-                         alt={'Logo'}/>
+                    <ExLogo data={logo}
+                            $logoCss={$logoCss}/>
                 )}
             </div>
             {/** 左边 **/}

@@ -1,0 +1,46 @@
+{
+    "_page": {
+        "title": "数据源信息"
+    },
+    "_database": {
+        "atom": {
+            "uiTitle": "动态模型库",
+            "uiDesc": "启用了动态建模功能后的数据库，库中数据表由系统生成。"
+        },
+        "database": {
+            "uiTitle": "元数据库",
+            "uiDesc": "（主库）存储了当前系统的所有配置数据以及核心业务数据。"
+        },
+        "history": {
+            "uiTitle": "删除历史备份库",
+            "uiDesc": "（备份库）启用删除备份功能后，删除后的数据可直接在备份库中查询。",
+            "uiAction": "历史库控制台"
+        },
+        "workflow": {
+            "uiTitle": "Camunda工作流库",
+            "uiDesc": "（工作流）Camunda工作流专用数据库。",
+            "uiAction": "Camunda控制台"
+        }
+    },
+    "_choice": {
+        "dbStatus": {
+            "RUNNING": "正在运行",
+            "DISABLED": "未启用"
+        },
+        "dbType": {
+            "MYSQL5": "MySQL 5.0"
+        }
+    },
+    "_info": {
+        "name": "实例名：",
+        "status": "状态：",
+        "hostname": "运行主机：",
+        "category": "类型：",
+        "static": "静态库",
+        "dynamic": "动态库",
+        "action": {
+            "connect": "连接检查",
+            "view": "查看配置"
+        }
+    }
+}

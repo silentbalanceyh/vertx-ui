@@ -3,6 +3,7 @@ import Ux from "ux";
 import React from "react";
 import Empty from "./image/empty.jpg";
 import './Cab.less';
+import ExLogo from '../ExLogo/UI';
 
 const {Sider} = Layout;
 
@@ -34,13 +35,12 @@ export default (reference, {
                         Ux.prevent(event);
                         Ux.toRoute(reference, "/development/index")
                     }}>
-                        <img src={logo}
-                             style={$logoCss}
-                             alt={'Logo'}/>
+                        <ExLogo data={logo}
+                                $logoCss={$logoCss}/>
                     </a>
                 ) : (
-                    <img src={logo}
-                         alt={'Logo'}/>
+                    <ExLogo data={logo}
+                            $logoCss={$logoCss}/>
                 )}
             </div>
             {/** 左边 **/}

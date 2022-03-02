@@ -1,44 +1,35 @@
-import {Button, Icon, Modal, Upload} from "antd";
+import {Icon, Modal, Upload} from "antd";
 import React from "react";
 
 const renderFile = (reference) => {
-    const {listType, text, ...meta} = reference.props;
-    const {handler = {}, $imageUrl, fileList = []} = reference.state;
+    const {text} = reference.props;
+    const {handler = {}, fileList = [], $imageUrl} = reference.state;
     const attrs = {};
     attrs.fileList = fileList;
-    attrs.showUploadList = {
-        showPreviewIcon: true, // 预览专用
-        showRemoveIcon: true
-    };
+    attrs.showUploadList = false;
     // Upload属性集
     const upload = {
         ...handler,
         ...attrs
     };
+    if ($imageUrl) {
+        upload.className = "ant-upload-preview";
+    } else {
+        upload.className = "";
+    }
     return (
-        <Upload listType={listType}
+        <Upload listType={"picture-card"}
                 {...upload}>
-            {"picture-card" === listType ? (
+            {$imageUrl ? (
+                <img src={$imageUrl} alt={text}/>
+            ) : (
                 <span>
-                    <Icon type={"upload"}/>
+                    <Icon type={"upload"} style={{
+                        fontSize: 34
+                    }}/>
                     {text ? <br/> : false}
                     {text ? <span className={"ant-upload-text"}>{text}</span> : false}
                 </span>
-            ) : (
-                $imageUrl ? (
-                    <img src={$imageUrl} alt={"avatar"}/>
-                ) : (() => {
-                    if (meta.disabled || meta.readOnly) {
-                        return false;
-                    } else {
-                        return (
-                            <Button disabled={meta.disabled}>
-                                <Icon type={"upload"}/>
-                                {text ? <span className={"ant-upload-text"}>{text}</span> : false}
-                            </Button>
-                        )
-                    }
-                })()
             )}
         </Upload>
     );

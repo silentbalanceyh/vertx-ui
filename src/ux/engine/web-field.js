@@ -6,6 +6,7 @@ import {
     CheckTransfer,
     DialogEditor,
     FileBatch,
+    FileLogo,
     FileUpload,
     InputArray,
     JsonEditor,
@@ -603,6 +604,15 @@ const aiFileUpload = (reference, jsx = {}, onChange) => {
     return (<FileUpload {...jsx} reference={reference}/>);
 };
 
+const aiFileLogo = (reference, jsx = {}, onChange) => {
+
+    R.Ant.onChange(jsx, onChange);
+
+    R.Ant.onReadOnly(jsx, false, reference);
+    _aiCssAdjust(jsx, "file-upload")
+    return (<FileLogo {...jsx} reference={reference}/>)
+}
+
 const aiFileBatch = (reference, jsx = {}, onChange) => {
 
     R.Ant.onChange(jsx, onChange);
@@ -877,6 +887,10 @@ const exported = {
 
     // 上传组件
     aiFileUpload,
+
+
+    // 图标上传
+    aiFileLogo,
 
 
     // 批量上传组件
