@@ -26,10 +26,12 @@ Zero UI为[Vert.x Zero Up Framework](http://www.vertxup.cn)的前端脚手架，
 
 ### 1.2. 在线文档
 
-* [Ux基础层专用教程（包含API）](/document/doc-web/index.html)
-* [Ex扩展层专用教程（包含API）](/document/doc-web-extension/index.html)
+* [Ux基础层专用教程](/document/doc-web/index.html)
+* [Ex扩展层专用教程（包含Ui部分）](/document/doc-web-extension/index.html)
 
 ## 2. 开始
+
+初始化工程专用命令：`ai init -name <name>`（其中name为项目名称），参考文档：<http://www.vertxai.cn/document/doc-web/module-ai.html#.init>
 
 ### 2.1. 启动前端
 
