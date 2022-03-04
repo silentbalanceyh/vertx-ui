@@ -367,7 +367,18 @@ module.exports = function (webpackEnv) {
                 // Handle node_modules packages that contain sourcemaps
                 shouldUseSourceMap && {
                     enforce: 'pre',
-                    exclude: /(@babel(?:\/|\\{1,2})runtime)|ant-design-pro|@antv|mutationobserver-shim/,
+                    /*
+                     * Exclude（排除 Source Map的库）
+                     * 1. 警告信息：WARNING in ./node_modules/dagre-compound/dist/dagre-compound.es5.js
+                     * 2. 解决该问题可排除库信息
+                     * - @babel ...
+                     * - ant-design-pro
+                     * - @antv
+                     * - mutationobserver-shim
+                     * - dagre-compound（新增，解决该问题）,WARNING in ./node_modules/dagre-compound/dist/dagre-compound.es5.js
+                     * 3. Source Map只会在开发环境中使用而不会在生产环境中使用
+                     */
+                    exclude: /(@babel(?:\/|\\{1,2})runtime)|ant-design-pro|@antv|dagre-compound|mutationobserver-shim/,
                     test: /\.(js|mjs|jsx|ts|tsx|css)$/,
                     loader: require.resolve('source-map-loader'),
                 },

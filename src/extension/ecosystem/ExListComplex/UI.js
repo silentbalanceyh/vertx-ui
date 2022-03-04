@@ -2,7 +2,7 @@ import React from 'react';
 import Ex from 'ex';
 import Ux from "ux";
 import Op from "./Op";
-import {Tabs} from "antd";
+import {Icon, Tabs} from "antd";
 import ExAction from "../ExAction/UI";
 import Page from "./Web";
 
@@ -259,8 +259,23 @@ class Component extends React.PureComponent {
                 return Page[Ex.Mode.LIST](this, {});
             } else {
                 const {items = [], ...rest} = tabs;
+                const tabAttrs = Ux.clone(rest);
                 return (
-                    <Tabs {...rest} tabBarExtraContent={Ex.ylTabExtra(this, rest, ExAction)}>
+                    <Tabs {...tabAttrs} tabBarExtraContent={Ex.ylTabExtra(this, tabAttrs, ExAction)}>
+                        {(() => {
+                            if (options[Ex.Opt.TABS_TITLE]) {
+                                return (
+                                    <Tabs.TabPane tab={
+                                        <div className={"web-tab-title-icon"}>
+                                            <Icon type={"caret-right"}/>
+                                            {options[Ex.Opt.TABS_TITLE]}
+                                        </div>
+                                    }
+                                                  disabled={true}
+                                                  closable={false}/>
+                                )
+                            }
+                        })()}
                         {items.map((item, index) => {
                             const {type, ...rest} = item;
                             /*

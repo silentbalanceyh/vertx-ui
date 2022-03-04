@@ -4,19 +4,8 @@ import Ex from 'ex';
 import {Col, Row} from 'antd';
 import Rdr from './Web';
 
-import workflow from './images/workflow.png';
-import atom from './images/atom.png';
-import history from './images/history.png';
-import database from './images/database.png';
-import databaseNo from './images/database-no.png';
 import './Cab.less';
 
-const IMAGE = {
-    workflow,
-    atom,
-    history,
-    database,
-}
 const componentInit = (reference) => {
     Ux.ajaxGet("/api/database").then(response => {
         const state = {};
@@ -40,12 +29,13 @@ const componentInit = (reference) => {
             Object.assign(config, database[field]);
             if (config.jdbcUrl) {
                 $database[field] = config;
-                $database[field].uiImage = IMAGE[field];
+                const iconKey = field.toUpperCase();
+                $database[field].uiImage = Ux.Env.ICON_DATABASE[iconKey];
                 $database[field].uiStatus = dbStatus["RUNNING"];
                 $database[field].uiClass = "running";
             } else {
                 $database[field] = config;
-                $database[field].uiImage = databaseNo;
+                $database[field].uiImage = Ux.Env.ICON_DATABASE.DISABLED;
                 $database[field].uiStatus = dbStatus["DISABLED"];
                 $database[field].uiClass = "disabled";
                 $database[field].uiKo = true;

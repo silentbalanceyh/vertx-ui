@@ -1271,11 +1271,11 @@ const xtUploadMime = (value = []) => {
     const fnThumb = (item = {}) => {
         const name = item.name;
         const extension = name.substring(name.lastIndexOf(".") + 1).toUpperCase();
-        const type = Cv.FILE_ICON[extension];
+        const type = Cv.ICON_FILE[extension];
         if (type) {
             return type;
         } else {
-            return Cv.FILE_ICON.TXT;
+            return Cv.ICON_FILE.TXT;
         }
     }
     value.forEach(item => {

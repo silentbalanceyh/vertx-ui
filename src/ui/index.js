@@ -124,6 +124,7 @@ const smartList = (configuration = {}) => {
     const {
         ns,
         name,
+        logger = "page",
         Cab = {},
         Options = {},
         Form = {},
@@ -189,10 +190,12 @@ const smartList = (configuration = {}) => {
      * ---------------- 日志部分 -----------------
      */
     const LOG = {}
+    let loggerObj = {};
     if (!name) {
         LOG.off = true;
     }
-    const logger = Ex.parserOfColor(name).page(LOG)
+    loggerObj = Ex.parserOfColor(name);
+    const loggerConfiguration = loggerObj[logger](LOG);
 
     @Ux.zero(zConfig.to())
     class UI extends React.Component {
@@ -248,14 +251,30 @@ const smartList = (configuration = {}) => {
                 if (Ux.isFunction(componentYo)) {
                     inherit = componentYo(this, inherit);
                 }
-                return (
-                    <PageCard reference={this}>
-                        <ExListComplex {...inherit}
-                                       config={configuration} $form={form}/>
-                        {Ux.isFunction(renderAddOn) ? renderAddOn(this) : false}
-                    </PageCard>
-                )
-            }, logger)
+                /*
+                 * 是否内置容器，内置容器会导致无 PageCard
+                 */
+                const isContainer = options[Ex.Opt.TABS_CONTAINER];
+                if (isContainer) {
+                    // tabs.container = true
+                    return (
+                        <div>
+                            <ExListComplex {...inherit}
+                                           config={configuration} $form={form}/>
+                            {Ux.isFunction(renderAddOn) ? renderAddOn(this) : false}
+                        </div>
+                    )
+                } else {
+                    // tabs.container = false
+                    return (
+                        <PageCard reference={this}>
+                            <ExListComplex {...inherit}
+                                           config={configuration} $form={form}/>
+                            {Ux.isFunction(renderAddOn) ? renderAddOn(this) : false}
+                        </PageCard>
+                    )
+                }
+            }, loggerConfiguration)
         }
     }
 
@@ -265,7 +284,7 @@ const smartList = (configuration = {}) => {
 export default {
     smartForm,      // 快速开表单
     /**
-     * ##「组件」`Ex.fastList`
+     * ##「组件」`Ui.smartList`
      *
      * 构造List页专用快速开发接口，配置说明
      *

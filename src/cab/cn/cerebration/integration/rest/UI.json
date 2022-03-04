@@ -1,0 +1,22 @@
+{
+    "_assist": {
+        "zero.integration": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:zero.integration"
+            }
+        }
+    },
+    "_grid": {
+        "module": {
+            "NAME": "REST配置",
+            "MODULE": "i-integration",
+            "IDENTIFIER": "i.integration"
+        },
+        "options": {
+            "tabs.title": "REST配置",
+            "tabs.container": true,
+            "search.advanced": false
+        }
+    }
+}

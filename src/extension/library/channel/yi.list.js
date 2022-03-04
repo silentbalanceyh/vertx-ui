@@ -49,7 +49,12 @@ const yiListTab = (reference, config = {}) => {
     /* Tab 专用初始化 */
     const tabs = {items: [tab]};
     tabs.activeKey = tab.key;
-    tabs.type = "editable-card";
+    // 列表页类型
+    if (options[Fn.Opt.TABS_TYPE]) {
+        tabs.type = options[Fn.Opt.TABS_TYPE];
+    } else {
+        tabs.type = "editable-card";
+    }
     tabs.hideAdd = true;
     /* 统一 */
     tabs.onEdit = (key, action) => {
@@ -65,7 +70,14 @@ const yiListTab = (reference, config = {}) => {
     const {
         clsTab = Ux.Env.ECONOMY.TAB_CONTAINER
     } = css;
-    tabs.className = clsTab;
+    let combineCls = clsTab;
+    if (options[Fn.Opt.TABS_CONTAINER]) {
+        combineCls += ` ${clsTab}-container`
+    }
+    if (options[Fn.Opt.TABS_TITLE]) {
+        combineCls += ` ${clsTab}-title`
+    }
+    tabs.className = combineCls
     /* Tab 函数处理 */
     return tabs;
 }

@@ -1,0 +1,238 @@
+@import "../../../../global";
+
+.dx-module {
+    padding-bottom: 16px;
+
+    .extra-action {
+        float: right;
+        position: relative;
+        top: -2px;
+    }
+
+    .bag-info {
+        min-height: 112px;
+        padding: 3px;
+
+        &-detail {
+            padding: 3px;
+        }
+
+        .bag-icon {
+            text-align: center;
+            padding: 4px;
+        }
+
+        .bag-list {
+            padding: 2px 12px;
+            margin: 0 0 3px 0;
+            list-style: none;
+
+
+            .title {
+                color: black;
+                font-size: 16px;
+                font-weight: bold;
+            }
+
+            .abbr {
+                font-size: 12px;
+                color: #8c8c8c;
+            }
+
+            .action {
+                text-align: left;
+
+                .inactive:hover {
+                    text-decoration: underline;
+                }
+
+                .active {
+                    color: @button-spec;
+                }
+            }
+
+            li {
+                line-height: 24px;
+            }
+        }
+
+        .ant-card {
+
+            img {
+                display: inline-block;
+                width: 64px;
+                height: 64px;
+            }
+
+            .ant-card-meta-description {
+                font-size: 12px;
+                max-height: 18px;
+                overflow: hidden;
+            }
+        }
+    }
+
+    .block {
+        // 内容页
+        &-content {
+            // 头信息
+            .header {
+                line-height: 36px;
+                min-height: 36px;
+
+                .label {
+                    text-align: right;
+                }
+
+                .content {
+                    padding-left: 12px;
+                    line-height: 32px;
+
+                    .content-text {
+                        margin-left: 12px;
+                        padding-top: 3px;
+                        display: inline-block;
+
+                        .title {
+                            font-size: 16px;
+                            color: black;
+                            display: inline-block;
+                            line-height: 32px;
+                            font-weight: bold;
+                            margin-right: 12px;
+                        }
+                    }
+
+                    img {
+                        float: left;
+                        margin-top: 4px;
+                        width: 28px;
+                        height: 28px;
+                    }
+                }
+            }
+
+            .ant-tabs {
+                min-height: 400px;
+
+                .ant-tabs-content {
+                    padding-left: 6px;
+
+                    .ant-table {
+                        .block-name {
+                            img {
+                                width: 48px;
+                                height: 48px;
+                            }
+
+                            label {
+                                color: black;
+                            }
+                        }
+                    }
+
+                    .ant-empty {
+                        min-height: 300px;
+                        padding-top: 60px;
+                    }
+                }
+
+                .ant-tabs-ink-bar {
+                    min-height: 80px;
+                    width: 6px;
+                    border-top-left-radius: 4px;
+                    border-bottom-left-radius: 4px;
+                }
+
+                .ant-tabs-bar {
+                    min-height: 90px;
+
+                    .ant-tabs-tab {
+                        margin-bottom: 2px !important;
+
+                        &-active {
+                            border-top-left-radius: 3px;
+                            border-bottom-left-radius: 3px;
+
+                            &:hover {
+                                color: #FFEC8B;
+                            }
+                        }
+                    }
+                }
+            }
+
+            .tab-title {
+                width: 90px;
+                text-align: center;
+
+                img {
+                    width: 48px;
+                    height: 48px;
+                }
+
+                span {
+                    margin-top: 3px;
+                    display: block;
+                    width: 100%;
+                    color: #595959;
+                }
+            }
+
+            .module-active {
+                border-bottom-left-radius: 12px;
+                border-top-left-radius: 12px;
+
+                img {
+                    opacity: 1;
+                }
+
+                span {
+                    opacity: 1;
+                }
+            }
+
+            .module-common {
+                img {
+                    opacity: 0.5;
+                }
+
+                span {
+                    opacity: 0.5;
+                }
+            }
+
+            .ant-tabs {
+                &-tab {
+                    padding: 8px 12px 8px 12px;
+                    .module-common;
+
+                    &:hover {
+                        .module-active;
+                    }
+
+                    &-active {
+                        .module-active;
+                    }
+                }
+            }
+
+        }
+
+        // 介绍页
+        &-intro {
+            .ant-alert {
+                min-height: 180px;
+
+                svg {
+                    width: 64px;
+                    height: 64px;
+                }
+
+                &-message, &-description {
+                    margin-left: 48px;
+                }
+            }
+        }
+    }
+}

@@ -1,7 +1,6 @@
 import {
     AddressSelector,
     BraftEditor,
-    Captcha,
     CheckJson,
     CheckTransfer,
     DialogEditor,
@@ -9,6 +8,8 @@ import {
     FileLogo,
     FileUpload,
     InputArray,
+    InputCaptcha,
+    InputProtocol,
     JsonEditor,
     ListSelector,
     MagicView,
@@ -220,8 +221,8 @@ const aiButton = (reference, button = {}) => {
 // =====================================================
 // 非操作的交互式组件
 // =====================================================
-// import Input from './O.input';
-const aiInput = (reference, jsx = {}, onChange) => {
+
+const _jsxInput = (reference, jsx, onChange) => {
     jsx = Abs.clone(jsx);
     // 处理prefix属性
     R.Ant.onPrefix(jsx);
@@ -233,22 +234,30 @@ const aiInput = (reference, jsx = {}, onChange) => {
     R.Ant.onReadOnly(jsx, false, reference);
     // 处理PlaceHolder，先处理readOnly
     R.Ant.onPlaceHolder(jsx);
+    return jsx;
+}
+// import Input from './O.input';
+const aiInput = (reference, jsx = {}, onChange) => {
+    jsx = _jsxInput(reference, jsx, onChange);
     return (<Input {...jsx}/>);
 };
 
+// import InputPassword from './O.input.password';
+const aiPassword = (reference, jsx = {}, onChange) => {
+    jsx = _jsxInput(reference, jsx, onChange);
+    if (jsx.readOnly) {
+        jsx.visibilityToggle = false;   // 关闭切换按钮
+    }
+    return (<Input.Password {...jsx} autoComplete={"new-password"}/>);
+};
+
 const aiCaptcha = (reference, jsx = {}, onChange) => {
-    jsx = Abs.clone(jsx);
-    // 处理prefix属性
-    R.Ant.onPrefix(jsx);
-    // 处理addonAfter
-    R.Ant.onAddonAfter(jsx);
-    // onChange处理
-    R.Ant.onChange(jsx, onChange);
-    // ReadOnly处理
-    R.Ant.onReadOnly(jsx, false, reference);
-    // 处理PlaceHolder，先处理readOnly
-    R.Ant.onPlaceHolder(jsx);
-    return (<Captcha {...jsx} reference={reference}/>)
+    jsx = _jsxInput(reference, jsx, onChange);
+    return (<InputCaptcha {...jsx} reference={reference}/>)
+}
+const aiProtocol = (reference, jsx = {}, onChange) => {
+    jsx = _jsxInput(reference, jsx, onChange);
+    return (<InputProtocol {...jsx} reference={reference}/>)
 }
 
 // import InputNumber from './O.input.number';
@@ -276,25 +285,6 @@ const aiInputNumber = (reference, jsx = {}, onChange) => {
         }
     }
     return (<InputNumber {...rest}/>);
-};
-
-
-// import InputPassword from './O.input.password';
-const aiPassword = (reference, jsx = {}, onChange) => {
-    // 处理prefix属性
-    R.Ant.onPrefix(jsx);
-    // 处理addonAfter
-    R.Ant.onAddonAfter(jsx);
-    // onChange处理
-    R.Ant.onChange(jsx, onChange);
-    // ReadOnly处理
-    R.Ant.onReadOnly(jsx, false, reference);
-    // 处理PlaceHolder，先处理readOnly
-    R.Ant.onPlaceHolder(jsx);
-    if (jsx.readOnly) {
-        jsx.visibilityToggle = false;   // 关闭切换按钮
-    }
-    return (<Input.Password {...jsx} autoComplete={"new-password"}/>);
 };
 
 
@@ -757,6 +747,18 @@ const aiTableTransfer = (reference, jsx = {}, onChange) => {
                            reference={reference}/>);
 };
 const exported = {
+    // 验证码
+    aiCaptcha,
+    ai2Captcha: (onChange) => (reference, jsx = {}) => {
+        const fnChange = onChange.apply(null, [reference]);
+        return aiCaptcha(reference, jsx, fnChange);
+    },
+    // 协议专用（多个解析按钮）
+    aiProtocol,
+    ai2Protocol: (onChange) => (reference, jsx = {}) => {
+        const fnChange = onChange.apply(null, [reference]);
+        return aiProtocol(reference, jsx, fnChange);
+    },
     // 常规录入
     aiInput,
     ai2Input: (onChange) => (reference, jsx = {}) => {
@@ -926,7 +928,5 @@ const exported = {
 
     // 树 + 表格编辑穿梭
     aiTableTransfer,
-    // 验证码
-    aiCaptcha,
 };
 export default exported;

@@ -1,11 +1,7 @@
 {
     "_page": {
         "title": "字典管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
+        "icon": true
     },
     "_alert": {
         "message": "字典管理说明",

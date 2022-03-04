@@ -51,19 +51,22 @@ export default {
      * @type {Object}
      */
     Opt: {
-        // Tab页配置
-        TABS_LIST: 'tabs.list',     /* 列表页专用 Tab 页标题 */
-        TABS_COUNT: 'tabs.count',   /* 当前 Tab 页的限制，只能打开的页面数量，打开的新的 Tab 页不能大于该值 */
-        TABS_ADD: 'tabs.add',       /* 添加表单Tab页专用标题 */
-        TABS_EDIT: 'tabs.edit',     /* 编辑表单Tab页专用标题 */
-        TABS_EXTRA_ADD: "tabs.extra.add", /* 隐藏Extra功能，在表单中提供按钮 */
-        TABS_EXTRA_EDIT: "tabs.extra.edit", /* 隐藏Extra功能，在表单中提供按钮 */
-        TABS_DISABLED: 'tabs.disabled',     /* 单列表操作 */
+        // Tab页配置：新增
+        TABS_CONTAINER: 'tabs.container',                   /* 新增 —— 是否默认包含容器，不放在 Page Card 内时使用 */
+        TABS_TITLE: 'tabs.title',                           /* 新增 —— TAB页标题 */
+        TABS_LIST: 'tabs.list',                             /* 列表页专用 Tab 页标题 */
+        TABS_TYPE: 'tabs.type',                             /* Tab页签类型 */
+        TABS_COUNT: 'tabs.count',                           /* 当前 Tab 页的限制，只能打开的页面数量，打开的新的 Tab 页不能大于该值 */
+        TABS_ADD: 'tabs.add',                               /* 添加表单Tab页专用标题 */
+        TABS_EDIT: 'tabs.edit',                             /* 编辑表单Tab页专用标题 */
+        TABS_EXTRA_ADD: "tabs.extra.add",                   /* 隐藏Extra功能，在表单中提供按钮 */
+        TABS_EXTRA_EDIT: "tabs.extra.edit",                 /* 隐藏Extra功能，在表单中提供按钮 */
+        TABS_DISABLED: 'tabs.disabled',                     /* 单列表操作 */
 
         // 动态静态配置
-        DYNAMIC_OP: 'dynamic.op',           /* 动态 Op */
-        DYNAMIC_COLUMN: 'dynamic.column',   /* 动态 Column */
-        DYNAMIC_SWITCH: 'dynamic.switch',   /* 添加过后是否直接到编译页 */
+        DYNAMIC_OP: 'dynamic.op',                           /* 动态 Op */
+        DYNAMIC_COLUMN: 'dynamic.column',                   /* 动态 Column */
+        DYNAMIC_SWITCH: 'dynamic.switch',                   /* 添加过后是否直接到编译页 */
 
         // 搜索专用
         SEARCH_ENABLED: 'search.enabled',                   /* 是否开启搜索 */
@@ -80,7 +83,7 @@ export default {
         SEARCH_CRITERIA_NOTICE: "search.criteria.notice",   /* 搜索提示 */
         SEARCH_CRITERIA_WINDOW: "search.criteria.window",   /* 搜索提示窗口 */
         SEARCH_CRITERIA_VIEW: "search.criteria.view",       /* 查询条件视图 */
-        SEARCH_GRID: "search.grid",                         /* Grid名称 */
+        SEARCH_GRID: "search.grid",                         /* 新增 —— Grid名称：对应不同的顶部菜单信息 */
 
         AJAX_POSITION: 'ajax.position',                     /* 视图专用参数 */
         AJAX_MODULE: 'ajax.module',                         /* 是否启用 module 参数 */

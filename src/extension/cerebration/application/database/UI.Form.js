@@ -13,7 +13,6 @@ class Component extends React.PureComponent {
         // 从 Localhost中提取数据
         const {$inited = {}} = this.props;
         const form = Ex.yoForm(this, null, {configDatabase: $inited});
-        console.log(form);
         return (
             <ExForm {...form} $op={Op.actions} $renders={{
                 configDatabase: (reference, jsx) => {

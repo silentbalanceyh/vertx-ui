@@ -20,12 +20,12 @@ import Ux from "ux";
  * const value1 = Ux.toQuery("name1");
  * // value 的值是 "value";
  * // value1 的值是 "value1";
+ * ```
  *
  * 特殊点需要说明：特殊参数 target 会在读取过程中进行判断：
  *
  * 1. 如果 target = x 的 x 中包含了 '/'，则表示当前的target不需要执行Base64的decoding操作。
  * 2. 在 '/' 之外，target参数会被Base64算法执行解码操作，还原原始的链接信息。
- * ```
  *
  * @memberOf module:_to
  * @param {String} name 需要读取的查询参数名称。
@@ -49,7 +49,6 @@ const toQuery = (name = "") => {
     }
     return result;
 };
-
 const toRouteParameters = (name = "", params = {}) => {
     if (params) {
         if (params[name]) {
@@ -214,6 +213,95 @@ const _toQNormalize = (normalizedUri, $parameters = {}) => {
     }
     return normalizedUri + calculated;
 }
+/**
+ * ## 「标准」`Ux.toProtocol`
+ *
+ * 将一个合法协议地址解析成对象
+ *
+ * * 协议格式如`<protocol>://<username>:<password>@<hostname>:<port>/<path>`
+ * * 账号部分为`<username>:<password>`，是可选的。
+ * * 端口部分可没有`<hostname>:<port>`和`<hostname>`两种格式都是合法的。
+ *
+ * 最终解析的结果如：
+ *
+ * ```json
+ * {
+ *     "protocol": "协议类型",
+ *     "username": "账号",
+ *     "password": "密码",
+ *     "hostname": "主机域名或IP",
+ *     "port": "端口",
+ *     "path": "路径地址"
+ * }
+ * ```
+ *
+ * 系统会自动计算参数中的 key = value 相关信息
+ *
+ * @memberOf module:_to
+ * @param {String} value 需要解析的协议值
+ * @param {Number} port 默认端口号
+ * @return {string|null} 返回读取的参数值。
+ */
+const toProtocol = (value = "", port = 0) => {
+    // <protocol>://<username>:<password>@<hostname>:<port>/<path>
+    const first = value.split('//');
+    const result = {};
+    result.protocol = first[0];
+    // 第一次解析剩余部分
+    let left = first[1];
+    if (left) {
+        // 是否包含 @
+        if (0 < left.indexOf("@")) {
+            const parsed = left.split('@');
+            const account = parsed[0] ? parsed[0].split(":") : [];
+            if (2 === account.length) {
+                result.username = account[0];
+                result.password = account[1];
+            }
+            left = parsed[1] ? parsed[1] : "";
+        }
+        // 不包含的处理和之后的处理
+        {
+            const parsed = left.split("/");
+            // 第一部分
+            left = parsed[0] ? parsed[0] : "";
+            // 最后一部分
+            result.path = `/${parsed[1]}`;
+        }
+        // 第一部分
+        if (0 < left.split(":")) {
+            const parsed = left.split(":");
+            result.hostname = parsed[0];
+            result.port = Ele.valueInt(parsed[1], port);
+        } else {
+            result.hostname = left;
+            result.port = port;
+        }
+    }
+    if (!result.path) {
+        result.path = "/";
+    }
+    return result;
+}
+/**
+ * ## 「标准」`Ux.toUrl`
+ *
+ * 将`key=value`追加到url路径中，如
+ *
+ * ```js
+ * // url = /api/params?name=x
+ * Ux.toUrl(url, "pass", "111")
+ * // url = /api/params?name=x&pass=1111
+ * ```
+ *
+ * 系统会自动计算参数中的 key = value 相关信息
+ *
+ * @memberOf module:_to
+ * @param {String} uri 需要读取的查询参数名称。
+ * @param {String} key 追加的参数名
+ * @param {Any} value 追加的参数值
+ * @return {string|null} 返回读取的参数值。
+ */
 const toUrl = (uri = "", key, value) => {
     /*
      * 1. uri 核心判断
@@ -248,7 +336,7 @@ const toUrl = (uri = "", key, value) => {
  * 代码示例：
  *
  * ```js
- * 主页 / 动态 / 静态页面切换的 BUG
+ * // 主页 / 动态 / 静态页面切换的 BUG
  if (Ux.isRoute(this.props, prevProps)) {
     const state = Ux.clone(this.state);
     state.$hoc = Fn.fnI18n(target, options);
@@ -380,7 +468,7 @@ const isAuthorized = (reference) => {
 const toLogout = (cleanApp = true) => {
     /* 注销用户 */
     const key = Cv.KEY_USER;
-    const result = Store.Session.remove(key);
+    Store.Session.remove(key);
     if (cleanApp) {
         /* 删除 appKey */
         Store.Storage.remove(Cv.X_APP_KEY);
@@ -390,7 +478,7 @@ const toLogout = (cleanApp = true) => {
             Store.Storage.put(Cv.KEY_APP, app);
         }
     }
-    return result;
+    return true;
 };
 /**
  * ## 「引擎」`Ux.toOriginal`
@@ -527,6 +615,8 @@ export default {
     toPid,
     // Url参数追加
     toUrl,
+    // 转换成协议对象
+    toProtocol,
     // Assist专用数据
     toAssist,
     // 路由是否变化

@@ -1,9 +1,10 @@
 import React from 'react';
-import {Button, Card} from 'antd';
+import {Button, Card, Icon} from 'antd';
 import Ux from 'ux';
 import {Dsl} from 'entity';
 import {component} from "../../_internal";
 import Op from './Op';
+import './Cab.less';
 
 /**
  * ## 「组件」`PageCard`
@@ -179,8 +180,11 @@ class Component extends React.PureComponent {
         if (topbar) {
             // 左边按钮
             const titleText = $title ? $title : (topbar ? topbar.title : "");
+            const titleIcon = topbar.icon;
             const title = (
-                <span>{titleText}&nbsp;&nbsp;&nbsp;&nbsp;
+                <span className={"web-card-title"}>
+                    {titleIcon ? (<Icon type={"caret-right"}/>) : false}
+                    {titleText}&nbsp;&nbsp;&nbsp;&nbsp;
                     {$leftVisible ? renderButton(this, topbar, "left", $disabled) : false}
                 </span>
             );

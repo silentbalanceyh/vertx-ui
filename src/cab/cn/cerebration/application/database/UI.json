@@ -1,6 +1,7 @@
 {
     "_page": {
-        "title": "数据源信息"
+        "title": "数据源信息",
+        "icon": true
     },
     "_database": {
         "atom": {

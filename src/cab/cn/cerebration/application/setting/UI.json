@@ -1,6 +1,7 @@
 {
     "_page": {
-        "title": "应用信息管理"
+        "title": "应用信息管理",
+        "icon": true
     },
     "_modal": {
         "success": {

@@ -1,11 +1,7 @@
 {
     "_page": {
         "title": "分类管理",
-        "back": {
-            "state": {
-                "status.submitting": null
-            }
-        }
+        "icon": true
     },
     "_assist": {
         "data.category": {

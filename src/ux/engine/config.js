@@ -799,6 +799,9 @@ const configTable = (reference, table = {}, ops = {}) => {
      */
     const $tableInput = Abs.clone(table);
     const {limitation, ...$table} = $tableInput;
+    if (!table.hasOwnProperty("className")) {
+        table.className = 'web-table';
+    }
     if (!table.hasOwnProperty('pagination')) {
         $table.pagination = false;
     }
@@ -814,6 +817,15 @@ const configTable = (reference, table = {}, ops = {}) => {
         }
     }
     $table.columns = configColumn(reference, table.columns, ops);
+    /*
+     * 从 ops 中提取 $renders
+     */
+    const {$renders = {}} = ops;
+    $table.columns.forEach(each => {
+        if (Abs.isFunction($renders[each.dataIndex])) {
+            each.render = $renders[each.dataIndex];
+        }
+    });
     return $table;
 };
 /**
