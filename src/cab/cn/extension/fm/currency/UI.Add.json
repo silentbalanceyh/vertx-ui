@@ -1,0 +1,96 @@
+{
+    "_form": {
+        "modal": {
+            "success": {
+                "added": "您好，您的币种信息添加成功！"
+            }
+        },
+        "op": {
+            "$opAdd": "act.currency.add"
+        },
+        "window": 0.15,
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary,,,closable=true,callback=added",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,币种名称,14,,,placeholder=请输入名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，名称重复！",
+                            "config": {
+                                "uri": "/api/currency/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "code,币种符号,14,,,placeholder=请输入唯一符号",
+                    "optionJsx.maxLength": 20,
+                    "optionConfig.rules": [
+                        "required,请输入币种符号，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，符号重复！",
+                            "config": {
+                                "uri": "/api/currency/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                "digitAmount,小数位数（金额）,14,,aiInputNumber"
+            ],
+            [
+                "digitPrice,小数位数（单价）,14,,aiInputNumber"
+            ],
+            [
+                {
+                    "metadata": "active,是否启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3,
+                    "optionItem.style": {
+                        "width": "99%"
+                    }
+                }
+            ]
+        ],
+        "initial": {
+            "digitAmount": "FIX:2",
+            "digitPrice": "FIX:2",
+            "active": "BOOL:true"
+        }
+    }
+}

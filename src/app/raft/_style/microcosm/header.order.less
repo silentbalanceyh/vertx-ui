@@ -1,0 +1,156 @@
+@import "../global-connect";
+
+@porder-prefix: porder;
+.@{porder-prefix}-detail {
+  display: flex;
+  padding-top: 5px;
+  padding-left: 2%;
+  padding-right: 2%;
+  height: 32px;
+
+  .row {
+    display: flex;
+  }
+
+  .logo {
+    flex: 0 1 auto;
+    margin-right: 16px;
+    padding-top: 1px;
+
+    > img {
+      width: 28px;
+      height: 28px;
+      border-radius: @border-radius-base;
+      display: block;
+    }
+  }
+
+  .title {
+    font-size: 16px !important;
+    font-weight: 500;
+    color: @heading-color;
+
+    span {
+      margin-left: 10px;
+      font-size: 15px !important;
+      font-weight: normal !important;
+    }
+
+    .amount-total {
+      color: green;
+      float: right;
+      margin-right: 20px;
+    }
+
+    .amount-left {
+      color: red;
+      float: right;
+      margin-right: 20px;
+    }
+  }
+
+  .major-title {
+    font-size: 20px !important;
+  }
+
+  .action {
+    min-width: 266px;
+
+    :global {
+      .ant-btn-group:not(:last-child),
+      .ant-btn:not(:last-child) {
+        margin-right: 16px;
+      }
+
+      .ant-btn-group > .ant-btn {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .title,
+  .action,
+  .content,
+  .extraContent,
+  .main {
+    flex: auto;
+  }
+
+  .title,
+  .action {
+    margin-bottom: 16px;
+  }
+
+  .logo,
+  .content,
+  .extraContent {
+    margin-bottom: 16px;
+  }
+
+  .action,
+  .extraContent {
+    text-align: right;
+  }
+
+  .extraContent {
+    margin-left: 88px;
+    min-width: 242px;
+  }
+}
+
+@media screen and (max-width: @screen-xl) {
+  .@{porder-prefix}-detail {
+    .extraContent {
+      margin-left: 44px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-lg) {
+  .@{porder-prefix}-detail {
+    .extraContent {
+      margin-left: 20px;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-md) {
+  .@{porder-prefix}-detail {
+    .row {
+      display: block;
+    }
+
+    .action,
+    .extraContent {
+      margin-left: 0;
+      text-align: left;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-sm) {
+  .@{porder-prefix}-detail {
+    .detail {
+      display: block;
+    }
+  }
+}
+
+@media screen and (max-width: @screen-xs) {
+  .@{porder-prefix}-detail {
+    .action {
+      :global {
+        .ant-btn-group,
+        .ant-btn {
+          display: block;
+          margin-bottom: 8px;
+        }
+
+        .ant-btn-group > .ant-btn {
+          display: inline-block;
+          margin-bottom: 0;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,45 @@
+.uex {
+  &_ExAuthority {
+
+    .role-header {
+      line-height: $uni_font * 3;
+
+      .role-title {
+        font-weight: bold;
+        text-align: right;
+      }
+    }
+
+    .role-content {
+      padding-left: $uni_font * 0.3;
+      padding-right: $uni_font * 0.3;
+      width: 100%;
+
+      .ant-tabs {
+
+        .ant-tabs-nav {
+          margin-bottom: $uni_font * 0.3;
+        }
+
+        .ant-tabs-left-content {
+          padding-left: 4px;
+        }
+
+        .ant-tabs-right-content {
+          padding-right: 4px;
+        }
+
+        .ant-tabs-bar {
+          margin-bottom: 2px;
+          padding-bottom: 2px;
+
+          .ant-tabs-extra-content {
+            button {
+              margin-left: 6px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,44 @@
+@import "~style/index.scss";
+
+.utx {
+  &_TxPortal {
+    .ux_card {
+      .ant-card-body {
+        padding: 0 $uni_font * 0.5;
+      }
+    }
+
+    .row {
+      margin-top: 8px;
+      min-height: 36px;
+      line-height: 36px;
+      margin-bottom: 8px;
+
+      .title {
+        padding-left: 12px;
+        padding-right: 12px;
+        color: white;
+        border-bottom-left-radius: 6px;
+        border-top-left-radius: 6px;
+      }
+
+      .content {
+        padding-left: $uni_font;
+
+        .link {
+          margin-right: 12px;
+          margin-left: 12px;
+          display: inline-block;
+          min-width: 15%;
+          color: $uni_color;
+
+          &:hover {
+            font-weight: bold;
+            color: $uni_color;
+            opacity: 0.6;
+          }
+        }
+      }
+    }
+  }
+}

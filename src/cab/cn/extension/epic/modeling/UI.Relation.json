@@ -1,0 +1,49 @@
+{
+    "_assist": {
+        "resource.models": {
+            "uri": "/api/model/by/sigma"
+        },
+        "graphic.nodes": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:ci.type"
+            }
+        },
+        "relation.type": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:relation.type"
+            }
+        }
+    },
+    "_title": {
+        "left": "只选二级模型",
+        "expand": "重选模型",
+        "right": {
+            "message": "关系管理",
+            "description": [
+                "请在右边列表中选择您要定义关系的主模型信息！",
+                "关系模型中，红色为二级模型，蓝色为三级模型。",
+                "在绘制关系模型中，两个相同的模型的关系方向只能选择一种：上游、下游。",
+                "关系类型主要分为四种：包含、运行于、连接、依赖，只能选择其中一种。",
+                "在创建关系的过程中，如果模型存在父子级关系，两个节点不可创建关联关系。",
+                "如果模型不存在`图数据`，则系统会自动生成关系图，人工可更改该图并保存。"
+            ],
+            "type": "success"
+        },
+        "header": {
+            "name": "正在管理关系的模型",
+            "identifier": "模型的系统标识"
+        }
+    },
+    "_modal": {
+        "error": {
+            "duplicated": "对不起，添加的新关系重复了，两个模型之间只能定义唯一一条合法关系！",
+            "loop": "对不起，只能在当前选择的主节点上设置自引用关系，其他节点不可执行该操作！",
+            "unmanaged": "对不起，当前管理界面定义关系只能围绕主节点定义，不可创建其他节点之间的关系！"
+        },
+        "success": {
+            "submitted": "您的关系定义已经保存成功！"
+        }
+    }
+}

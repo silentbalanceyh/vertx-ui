@@ -1,0 +1,14 @@
+@mixin uca_card_page($card) {
+  .ant-card-body {
+    padding: $card $card * 2;
+  }
+
+  .ant-card-head {
+    // 头部 1.2 的宽距
+    padding: 0 $uni_font * 1.2;
+
+    &-title {
+      font-size: $uni_font + 2;
+    }
+  }
+}

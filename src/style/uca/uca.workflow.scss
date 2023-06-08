@@ -1,0 +1,26 @@
+@mixin uca_bpmn_node($color, $colorBg) {
+  // 激活时专用颜色
+  &:not(.djs-connection) .djs-visual > :nth-child(1) {
+    fill: $colorBg !important; /* color elements as green */
+    stroke: $color !important;
+  }
+
+  // 文字颜色
+  .djs-label {
+    fill: $color !important;
+  }
+
+  // 激活专用色
+  .djs-visual {
+    path {
+      stroke: $color !important;
+      opacity: 1;
+      stroke-dasharray: 0;
+    }
+  }
+
+  // 文件起点颜色
+  &_label .djs-label {
+    fill: $color !important;
+  }
+}

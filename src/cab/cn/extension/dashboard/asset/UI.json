@@ -1,0 +1,34 @@
+{
+    "_config": {
+        "title": "资产流程"
+    },
+    "_report": {
+        "title": "资产类流程工单统计",
+        "items": [
+            [
+                {
+                    "key": "total",
+                    "text": "工单总数",
+                    "description": "流程工单总数"
+                },
+                {
+                    "key": "run",
+                    "text": "运行工单数",
+                    "description": "正在执行的流程工单数"
+                }
+            ],
+            [
+                {
+                    "key": "done",
+                    "text": "已完成工单数",
+                    "description": "已处理流程工单数"
+                },
+                {
+                    "key": "cancel",
+                    "text": "已取消工单数",
+                    "description": "已取消流程工单数"
+                }
+            ]
+        ]
+    }
+}

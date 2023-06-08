@@ -1,0 +1,90 @@
+@import "~style/macrocosm/index.scss";
+
+.ux {
+  &_bag {
+    min-height: $uni_font * 10;
+    padding-top: $uni_font * 0.4;
+
+    .ux_block {
+      text-align: center;
+      max-height: $uni_font * 5;
+      float: left;
+      padding: 0 $uni_font;
+
+      .icon {
+        img {
+          width: $uni_font * 3;
+        }
+      }
+    }
+
+    &-detail {
+      padding: 3px;
+    }
+
+    .bag_cover {
+      display: flex;
+      padding-left: $uni_font * 0.6;
+
+      .icon {
+        text-align: center;
+        padding: 4px;
+      }
+
+      .list {
+        padding: $uni_font * 0.4 $uni_font * 0.8;
+        list-style: none;
+        margin: 0;
+
+        .title {
+          color: black;
+          font-size: $uni_font + 2;
+          font-weight: bold;
+        }
+
+        .abbr {
+          font-size: $uni_font - 1;
+          color: $color_comment;
+        }
+
+        .action {
+          text-align: left;
+
+          .inactive:hover {
+            text-decoration: underline;
+          }
+
+          .active {
+            color: $color_op_pink;
+          }
+        }
+
+        li {
+          line-height: 24px;
+        }
+      }
+    }
+
+
+    .ant-card {
+
+      img {
+        display: inline-block;
+        width: $uni_font * 3.5;
+        height: $uni_font * 3.5;
+      }
+
+      .ant-card-body {
+        padding: 0 0 $uni_font * 0.6 $uni_font * 0.3;
+      }
+
+      .ant-card-meta-description {
+        font-size: $uni_font - 2;
+        max-height: 18px;
+        overflow: hidden;
+        padding-left: $uni_font * 0.6;
+        color: $uni_color;
+      }
+    }
+  }
+}

@@ -1,0 +1,182 @@
+{
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,名称,12,,,placeholder=必填,normalize=text:128",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/team/existing",
+                                "method": "POST",
+                                "params": {}
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "leaderName,组长,12,,aiUserSelector,placeholder=（请选择组长）",
+                    "optionJsx.config": {
+                        "linker": {
+                            "key": "leaderId",
+                            "realname": "leaderName"
+                        },
+                        "user": "组长"
+                    }
+                },
+                {
+                    "metadata": "bindName,绑定用户组,12,,aiListSelector,placeholder=（请选择用户组）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/group/search,1,10,sorter=category`ASC",
+                            "params.criteria": {
+                                "sigma": "PROP:app.sigma"
+                            }
+                        },
+                        "linker": {
+                            "name": "bindName",
+                            "key": "bindId"
+                        },
+                        "table": {
+                            "columns": [
+                                {
+                                    "metadata": "category,组类型,DATUM",
+                                    "$datum": "source=ajax.groups.type,value=code,display=name"
+                                },
+                                "name,名称",
+                                "code,编码",
+                                {
+                                    "title": "更新时间",
+                                    "dataIndex": "updatedAt",
+                                    "$render": "DATE",
+                                    "$format": "YYYY-MM-DD"
+                                }
+                            ]
+                        },
+                        "validation": "请选择用户组！",
+                        "window": "选择用户组,选择,关闭,false,900,false",
+                        "search": {
+                            "name,c": "名称",
+                            "code,c": "编码"
+                        }
+                    },
+                    "optionJsx.allowClear": true
+                }
+            ],
+            [
+                {
+                    "metadata": "deptName,所属部门,12,,aiTreeSelector,placeholder=（请选择所属部门）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/dept/search",
+                            "method": "POST",
+                            "params.criteria": {
+                                "companyId": "USER:companyId"
+                            }
+                        },
+                        "linker": {
+                            "name": "deptName",
+                            "key": "deptId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "deptId",
+                            "pinyin": true
+                        },
+                        "validation": "请选择所属部门！",
+                        "window": "请选择所属部门,选择,关闭,false,400,false"
+                    },
+                    "optionJsx.allowClear": true
+                },
+                {
+                    "metadata": "teamName,上级组,12,,aiTreeSelector,placeholder=（不选择则无上级组）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/team/search",
+                            "method": "POST"
+                        },
+                        "linker": {
+                            "name": "teamName",
+                            "key": "teamId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "teamId",
+                            "pinyin": true
+                        },
+                        "validation": "请选择上级组！",
+                        "window": "请选择上级组,选择,关闭,false,400,false",
+                        "exclude": "FORM:key"
+                    },
+                    "optionJsx.allowClear": true
+                }
+            ],
+            [
+                {
+                    "metadata": "active,启用,12,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "leaderId",
+            "deptId",
+            "teamId",
+            "bindId"
+        ],
+        "op": {
+            "$opSave": "act.team.save",
+            "$opDelete": "act.team.delete"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，组信息编辑成功！",
+            "removed": "当前组信息已删除成功！"
+        }
+    }
+}

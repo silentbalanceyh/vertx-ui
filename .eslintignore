@@ -1,0 +1,12 @@
+/.awcache
+/.storybook
+/.zero
+/build
+/config
+/node_modules
+/public
+/scripts
+/src/app
+/src/components
+/src/container
+/src/extension/components

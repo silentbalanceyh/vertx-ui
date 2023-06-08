@@ -1,0 +1,32 @@
+.upg {
+  &_todo_pending {
+    :global {
+
+      padding: 2px 0;
+
+      .statistic {
+        padding: 0 $uni_font;
+      }
+
+      .ant-table {
+        thead {
+          th {
+            background-color: $uni_color;
+            color: white;
+          }
+        }
+      }
+
+      .avatar-holder {
+        img {
+          width: 80px;
+          height: 80px;
+        }
+      }
+
+      .g2-bar {
+        padding-top: 16px;
+      }
+    }
+  }
+}

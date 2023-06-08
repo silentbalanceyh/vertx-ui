@@ -1,0 +1,12 @@
+.uqx {
+  &_QxInput {
+    float: left;
+    margin-right: 12px;
+
+    .ant-input-search {
+      margin-right: 6px;
+    }
+
+    line-height: $uni_font * 2.4;
+  }
+}

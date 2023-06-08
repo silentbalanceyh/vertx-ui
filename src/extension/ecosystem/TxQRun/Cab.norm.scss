@@ -1,0 +1,16 @@
+.utx {
+  &_TxQRun {
+    .toolbar {
+      height: 36px;
+      margin-bottom: 2px;
+
+      .open-button {
+        border-radius: 16px;
+      }
+
+      .search {
+        padding-right: 8px;
+      }
+    }
+  }
+}

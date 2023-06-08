@@ -1,0 +1,5 @@
+@mixin attr_shadow_box($pRadial, $pFont: $uni_font * 0.8) {
+  @if true == $uni_shadow {
+    box-shadow: $pRadial $pRadial $pFont rgba(0, 0, 0, 0.2);
+  }
+}

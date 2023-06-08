@@ -1,0 +1,34 @@
+{
+    "_combine": {
+        "notice": {
+            "message": "请选择字段！",
+            "description": [
+                "只有您有权限的字段会列举在列表中，如果您对该字段没有权限，请联系管理员。",
+                "如果您没有找到您想要的字段，也请联系管理员。",
+                "您可以直接调整导出的列顺序，构造最终Excel文件列信息。"
+            ]
+        },
+        "button": "btnExport",
+        "input": {
+            "label": "文件名：",
+            "text": {
+                "placeholder": "您可以根据自己所需变更导出文件名！",
+                "addonAfter": ".xlsx"
+            }
+        },
+        "transfer": {
+            "titles": [
+                "备选列",
+                "已选列"
+            ]
+        },
+        "modal": {
+            "success": {
+                "content": "您选择的字段信息已经成功导出！"
+            },
+            "error": {
+                "content": "对不起，请选择您想要导出的列信息！"
+            }
+        }
+    }
+}

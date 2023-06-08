@@ -1,0 +1,61 @@
+import BLOCK_WF_IN from './BLOCK_WF_IN.png';
+import BLOCK_WF_OUT from './BLOCK_WF_OUT.png';
+import BLOCK_WF_CHECK from './BLOCK_WF_CHECK.png';
+import BLOCK_WF_HOUR from './BLOCK_WF_HOUR.png';
+
+import BLOCK_SSM_PWD from './BLOCK_SSM_PWD.png';
+import BLOCK_SSM_AUTH from './BLOCK_SSM_AUTH.png';
+import BLOCK_SSM_SETTING from './BLOCK_SSM_SETTING.png';
+import BLOCK_SSM_JOB from './BLOCK_SSM_JOB.png';
+
+import BLOCK_BSM_TRIP from './BLOCK_BSM_TRIP.png';
+import BLOCK_BSM_VACATION from './BLOCK_BSM_VACATION.png';
+import BLOCK_BSM_ASSIGNMENT from './BLOCK_BSM_ASSIGNMENT.png';
+import BLOCK_BSM_TRAINING from './BLOCK_BSM_TRAINING.png';
+
+import BLOCK_RSM_ALL from './BLOCK_RSM_ALL.png';
+import BLOCK_RSM_DEPT from './BLOCK_RSM_DEPT.png';
+import BLOCK_RSM_PERSONAL from './BLOCK_RSM_PERONSAL.png';
+
+import BLOCK_AM_COUNT from './BLOCK_AM_COUNT.png';
+import BLOCK_AM_DESTROY from './BLOCK_AM_DISCARD.png';
+import BLOCK_AM_DISCARD from './BLOCK_AM_DISCARD.png';
+import BLOCK_AM_INCOME from './BLOCK_AM_INCOME.png';
+import BLOCK_AM_ISSUED from './BLOCK_AM_ISSUED.png';
+import BLOCK_AM_OUTCOME from './BLOCK_AM_OUTCOME.png';
+import BLOCK_AM_RETURN from './BLOCK_AM_RETURN.png';
+
+import BLOCK_REPO_DOC from './BLOCK_REPO_DOC.png';
+import BLOCK_REPO_ASSET from './BLOCK_REPO_ASSET.png';
+
+export default {
+    BLOCK_REPO_DOC,
+    BLOCK_REPO_ASSET,
+
+    BLOCK_AM_COUNT,
+    BLOCK_AM_DESTROY,
+    BLOCK_AM_DISCARD,
+    BLOCK_AM_INCOME,
+    BLOCK_AM_ISSUED,
+    BLOCK_AM_OUTCOME,
+    BLOCK_AM_RETURN,
+
+    BLOCK_RSM_ALL,
+    BLOCK_RSM_DEPT,
+    BLOCK_RSM_PERSONAL,
+
+    BLOCK_BSM_TRIP,
+    BLOCK_BSM_VACATION,
+    BLOCK_BSM_ASSIGNMENT,
+    BLOCK_BSM_TRAINING,
+
+    BLOCK_SSM_PWD,
+    BLOCK_SSM_AUTH,
+    BLOCK_SSM_SETTING,
+    BLOCK_SSM_JOB,
+
+    BLOCK_WF_IN,
+    BLOCK_WF_OUT,
+    BLOCK_WF_CHECK,
+    BLOCK_WF_HOUR,
+}

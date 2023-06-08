@@ -1,0 +1,36 @@
+{
+    "_config": {
+        "name": "模型名称",
+        "category": "所属分类",
+        "identifier": "模型标识",
+        "table": {
+            "className": "ux_table",
+            "rowKey": "name",
+            "pagination": false,
+            "columns": [
+                {
+                    "metadata": "name,属性名称",
+                    "style": {
+                        "color": "#ef004e"
+                    }
+                },
+                {
+                    "metadata": "alias,属性业务名称"
+                },
+                {
+                    "metadata": "type,类型,MAPPING",
+                    "$mapping": {
+                        "java`lang`String": "字符串,,,,#1E90FF",
+                        "java`lang`Integer": "整数,,,,#EE4000",
+                        "java`lang`Long": "长整数,,,,#EE1289",
+                        "java`lang`Boolean": "布尔值,,,,#1874CD",
+                        "java`math`BigDecimal": "浮点数,,,,#218868",
+                        "java`time`LocalTime": "时间格式,,,,#7D26CD",
+                        "java`time`LocalDate": "时间格式,,,,#7D26CD",
+                        "java`time`LocalDateTime": "时间格式,,,,#7D26CD"
+                    }
+                }
+            ]
+        }
+    }
+}

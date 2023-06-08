@@ -1,0 +1,10 @@
+@import "~style/index.scss";
+
+@mixin screen_umy_MyMenu {
+  @media screen and (min-width: $screen-xl) {
+    @include uca_dash_app(110px, 80px);
+  }
+  @media screen and (min-width: $screen-xxl) {
+    @include uca_dash_app(140px, 96px);
+  }
+}

@@ -1,0 +1,47 @@
+{
+    "mock": false,
+    "data": [
+        {
+            "key": "5774782d-e4a3-4262-b2fa-da4c7d256ce3",
+            "type": "65e7174b-45e9-4626-a716-eff76e8469a9",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "name": "佣金一",
+            "code": "1001",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f",
+            "createTime": "2018-06-23T08:42:34",
+            "basePrice": 0,
+            "limit": 0,
+            "roomTypeId": "eb71112a-98c4-496d-8637-adb380960455"
+        },
+        {
+            "key": "729c90c2-d533-4369-8b76-5dc0e574efcf",
+            "type": "304cbee5-f7af-4418-85a4-5164ad3e0bfa",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "name": "佣金二",
+            "code": "1002",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f",
+            "createTime": "2018-06-23T08:42:34",
+            "basePrice": 0,
+            "limit": 0,
+            "roomTypeId": "1a1e8ea8-e769-42f8-99c9-cf6d36f56e8c"
+        },
+        {
+            "key": "d4de04d0-c705-4165-8e5d-6d3b843698b0",
+            "type": "8f77d0f4-cfa0-4414-86ac-4db5a4c3108a",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "name": "佣金三",
+            "code": "1003",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f",
+            "createTime": "2018-06-23T08:42:34",
+            "basePrice": 0,
+            "limit": 0,
+            "roomTypeId": "141ca4b8-01ad-40c7-8919-d1e18bf078c6"
+        }
+    ]
+}

@@ -1,0 +1,41 @@
+.uhx {
+  &_HxMenu {
+
+    .ant-row {
+      margin-bottom: 6px;
+
+      .hx-col {
+        &-f {
+          padding-right: 3px;
+        }
+
+        &-c {
+          padding-left: 3px;
+          padding-right: 3px;
+        }
+
+        &-l {
+          padding-left: 3px;
+        }
+      }
+
+      .ant-col {
+        .ant-card {
+          .ant-card-body {
+            padding: $uni_font * 0.5;
+            overflow-y: auto;
+
+            .ant-tree-treenode {
+              height: $uni_font * 2.2;
+              line-height: $uni_font * 2.2;
+
+              .ant-tree-checkbox {
+                margin-right: $uni_font * 0.2;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

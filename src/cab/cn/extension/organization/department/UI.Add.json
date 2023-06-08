@@ -1,0 +1,129 @@
+{
+    "_form": {
+        "window": 1,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,名称,12,,,placeholder=必填,normalize=text:128",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,编码,12,,,placeholder=编码规范全大写如：DEPT.IT,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，编码重复！",
+                            "config": {
+                                "uri": "/api/dept/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma",
+                                    "": "OPERATOR:AND"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "managerName,经理,12,,aiUserSelector,placeholder=（请选择部门经理）",
+                    "optionJsx.config": {
+                        "linker": {
+                            "key": "managerId",
+                            "realname": "managerName"
+                        },
+                        "user": "部门经理"
+                    },
+                    "optionJsx.allowClear": true
+                }
+            ],
+            [
+                {
+                    "metadata": "companyId,所属公司,12,,aiTreeSelect,placeholder=（请选择所属公司）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
+                    "optionJsx.config.tree": "text=name,parent=companyId",
+                    "optionJsx.config.selection": "mode=FULL",
+                    "optionConfig.rules": [
+                        "required,请选择部门所挂靠的公司！"
+                    ]
+                },
+                {
+                    "metadata": "deptName,上级部门,12,,aiTreeSelector,placeholder=（不选择则无上级部门）",
+                    "optionJsx.config": {
+                        "ajax": {
+                            "uri": "/api/dept/search",
+                            "method": "POST",
+                            "params.criteria": {
+                                "companyId": "FORM:companyId"
+                            }
+                        },
+                        "linker": {
+                            "name": "deptName",
+                            "key": "deptId"
+                        },
+                        "selection": {
+                            "multiple": false,
+                            "checkStrictly": true
+                        },
+                        "tree": {
+                            "title": "name",
+                            "parent": "deptId",
+                            "pinyin": true
+                        },
+                        "validation": "请选择上级部门！",
+                        "window": "请选择上级部门,选择,关闭,false,400,false",
+                        "exclude": "FORM:key"
+                    },
+                    "optionJsx.allowClear": true
+                }
+            ],
+            [
+                {
+                    "metadata": "active,启用,12,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "initial": {
+            "active": "BOOL:true"
+        },
+        "hidden": [
+            "managerId",
+            "deptId"
+        ],
+        "op": {
+            "$opAdd": "act.dept.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，部门信息添加成功！"
+        }
+    }
+}

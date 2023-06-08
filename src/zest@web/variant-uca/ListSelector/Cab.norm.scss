@@ -1,0 +1,35 @@
+@import "~style/index.scss";
+
+.uca {
+  &_ListSelector {
+    // Fix背景色（不呈现灰色背景色）
+    @include unit_selector_bg();
+
+    &_Dialog {
+      @include screen_uca_dialog(8px, 4px);
+
+      .ant-table-pagination.ant-pagination-mini {
+        margin: $uni_font * 0.6 0;
+      }
+
+      .ant-modal-content {
+        .ant-modal-body {
+          padding: 4px $uni_font * 0.6;
+        }
+      }
+
+      .op_search {
+        .ant-input-wrapper {
+          .ant-input-group-addon {
+            color: white;
+            background-color: $uni_color;
+
+            &:hover {
+              cursor: pointer;
+            }
+          }
+        }
+      }
+    }
+  }
+}

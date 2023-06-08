@@ -1,0 +1,24 @@
+{
+    "_config": {
+        "linker": {
+            "key": "managerId",
+            "realname": "managerName",
+            "workNumber": "workNumber",
+            "mobile": "mobile"
+        },
+        "title": {
+            "managerName": "经理",
+            "workNumber": "工号",
+            "mobile": "手机号"
+        },
+        "qr": {
+            "DEPT": "/api/dept/search",
+            "TEAM": "/api/team/search",
+            "COMPANY": "/api/company/search",
+            "GROUP": "/api/group/search"
+        },
+        "info": {
+            "placeholder": "（选择:managerName）"
+        }
+    }
+}

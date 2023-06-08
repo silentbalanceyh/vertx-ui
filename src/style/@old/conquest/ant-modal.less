@@ -1,0 +1,31 @@
+@import (less) "../macrocosm/index.less";
+
+/*
+ * 特殊弹窗专用色（顶部和底部深色风格）
+ */
+.ant-modal {
+  // 头部
+  &-header {
+    background-color: #d9d9d9;
+  }
+
+  // 底部
+  &-footer {
+    text-align: center;
+    background-color: @primary-color;
+
+    button {
+      min-width: 90px;
+      border-radius: 16px;
+    }
+
+    .ant-btn-primary {
+      border: solid 1px white;
+    }
+  }
+
+  // 特殊关闭按钮
+  &-close-x:hover {
+    color: @color-button-spec;
+  }
+}

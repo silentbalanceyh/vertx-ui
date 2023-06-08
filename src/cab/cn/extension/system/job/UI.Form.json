@@ -1,0 +1,104 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=任务属性"
+            ],
+            [
+                "name,任务名称,,,,readOnly=true",
+                "opKey,任务标识,16,,,readOnly=true"
+            ],
+            [
+                {
+                    "metadata": "status,任务状态,,,aiMagic",
+                    "optionJsx.config.items": [
+                        "STARTING,启动中:rise,16:#CD8500",
+                        "READY,就绪:api,16:#4876FF",
+                        "RUNNING,运行中:loading,16:#228B22",
+                        "ERROR,运行错误:issues-close,16:#EE3B3B",
+                        "STOPPED,已停止:stop,16:#CD0000"
+                    ]
+                },
+                {
+                    "metadata": "type,任务类型,16,,aiRadio",
+                    "optionJsx.config.items": [
+                        "ONCE,一次性任务",
+                        "PLAN,轮询任务",
+                        "FIXED,定时任务"
+                    ]
+                }
+            ],
+            [
+                "threshold,超时时间,,,,normalize=number:6,addonAfter=秒",
+                {
+                    "metadata": "duration,间隔时间,,,,normalize=number:6,addonAfter=秒",
+                    "optionJsx.depend.enabled": {
+                        "type": [
+                            "PLAN",
+                            "FIXED"
+                        ]
+                    }
+                },
+                {
+                    "metadata": "runAt,固定运行时间,,,aiDatePicker",
+                    "optionJsx.config.format": "HH:mm",
+                    "optionJsx.depend.enabled": {
+                        "type": "FIXED"
+                    },
+                    "moment": true
+                }
+            ],
+            [
+                "comment,任务描述",
+                "proxy,任务执行组件,16,,,addonBefore=Java,readOnly=true"
+            ],
+            [
+                "incomeAddress,前置地址,12",
+                "incomeComponent,前置组件,12,,,addonBefore=Java"
+            ],
+            [
+                "outcomeAddress,后置地址,12",
+                "outcomeComponent,后置组件,12,,,addonBefore=Java"
+            ],
+            [
+                "title=业务层配置（*：请在专业人员指导下进行配置）"
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FormContainer",
+                    "key": "serviceForm",
+                    "config": {
+                        "source": "FORM",
+                        "component": "ExService"
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "code"
+        ],
+        "op": {
+            "$opSave": "act.task.save"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，您的任务基本信息已经更新完成！"
+        }
+    }
+}

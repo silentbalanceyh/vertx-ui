@@ -1,0 +1,48 @@
+{
+    "_form": {
+        "window": 0.15,
+        "columns": 1,
+        "modal": {
+            "success": {
+                "saved": "您好，您的文件重命名成功！"
+            }
+        },
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opRenameFile,重命名,SUBMIT,primary,,,closable=true,callback=saved:M"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "storeParent,所属目录,19,,,readOnly=true"
+            ],
+            [
+                "storePath,文件路径,19,,,readOnly=true"
+            ],
+            [
+                {
+                    "metadata": "fileName,文件名称,19,,,placeholder=同一个目录下文件不可重名（包括回收站内文件）",
+                    "optionConfig.rules": [
+                        "required,请输入文件名称，文件名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，文件名称重复或`回收站`中已存在该文件了！",
+                            "config": {
+                                "uri": "/api/x-attachment/existing",
+                                "method": "POST",
+                                "params": {
+                                    "parentId": "FORM:parentId"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        ]
+    }
+}

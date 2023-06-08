@@ -1,0 +1,103 @@
+{
+    "_form": {
+        "className": "ix-form-segment",
+        "ui": [
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "databaseContainer",
+                    "config": {
+                        "activeKey": "tabDatabase",
+                        "tabPosition": "right",
+                        "defaultActiveKey": "tabDatabase",
+                        "items": "基本配置,tabDatabase;附加选项,tabOptions",
+                        "pages": {
+                            "tabDatabase": {
+                                "window": 1.1,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "hostname,主机地址,12",
+                                            "optionJsx.placeholder": "IP地址 / 域名"
+                                        },
+                                        "port,端口号,12,40%,aiInputNumber,placeholder=最大65535,min=1,max=65535"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "username,登录账号,,,,placeholder=（若不更改则不填）",
+                                            "optionJsx.autoComplete": "new-username"
+                                        },
+                                        "password,登录密码,,,aiPassword,placeholder=（若不更改则不填）"
+                                    ],
+                                    [
+                                        "instance,实例名称,12,,,placeholder=数据库实例名称"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "category,数据库类型,,,aiSelect,placeholder=（选择支持的数据库类型）",
+                                            "optionJsx.config.items": [
+                                                "MYSQL5,MySQL（5.x）",
+                                                "MYSQL8,MySQL（8.x）",
+                                                "MYSQL,MySQL（Legacy）"
+                                            ],
+                                            "optionJsx._trigger": {
+                                                "MYSQL": {
+                                                    "hostname": "localhost",
+                                                    "username": "root",
+                                                    "instance": "DB_NAME",
+                                                    "port": 3306,
+                                                    "driverClassName": "com.mysql.jdbc.Driver",
+                                                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                                                },
+                                                "MYSQL8": {
+                                                    "hostname": "localhost",
+                                                    "username": "root",
+                                                    "instance": "DB_NAME",
+                                                    "port": 3306,
+                                                    "driverClassName": "com.mysql.cj.jdbc.Driver",
+                                                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                                                },
+                                                "MYSQL5": {
+                                                    "hostname": "localhost",
+                                                    "username": "root",
+                                                    "instance": "DB_NAME",
+                                                    "port": 3306,
+                                                    "driverClassName": "com.mysql.jdbc.Driver",
+                                                    "jdbcUrl": "jdbc:mysql://:hostname::port/:instance"
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "metadata": "driverClassName,JDBC驱动,,,,placeholder=JDBC驱动程序",
+                                            "optionJsx.config.items": [
+                                                "com.mysql.jdbc.Driver,com.mysql.jdbc.Driver",
+                                                "com.mysql.cj.jdbc.Driver,com.mysql.cj.jdbc.Driver"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "jdbcUrl,JDBC连接串,24,,aiTextArea,rows=3,placeholder=JDBC专用连接字符串"
+                                    ]
+                                ]
+                            },
+                            "tabOptions": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "options,配置数据,24,,aiJsonEditor",
+                                            "optionJsx.height": 200
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

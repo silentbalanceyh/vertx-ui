@@ -1,0 +1,49 @@
+@import "../global-connect";
+
+.ht-order-flag {
+  .tpl(@size, @width, @height) {
+    font-size: @size;
+    width: @width;
+    height: @height;
+  }
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ht-order-flag.tpl(64px, 102px, 96px);
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ht-order-flag.tpl(80px, 128px, 120px);
+  }
+}
+
+.ht-order {
+  &-page {
+    // 重写 Ant 组件
+    .page-card {
+      padding-bottom: 24px !important;
+    }
+
+    // 下边线
+    .order-flag {
+      text-align: center;
+    }
+  }
+}
+
+.@{app}-order {
+  &-flag {
+    .ht-order-flag;
+    text-align: center;
+    font-weight: 800;
+    color: transparent;
+    background-color: @primary-color;
+    text-shadow: rgba(255, 255, 255, 0.5) 0 5px 6px, rgba(255, 255, 255, 0.2) 1px 3px 3px;
+    -webkit-background-clip: text;
+    border-radius: 8px;
+    border-left: solid 1px @primary-color;
+    border-top: solid 1px @primary-color;
+    box-shadow: 5px 5px 3px @primary-color;
+    margin: 5%;
+    display: inline-block;
+  }
+}

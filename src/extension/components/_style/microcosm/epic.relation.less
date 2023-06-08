@@ -1,0 +1,38 @@
+@import "../global-connect";
+
+.ox-rel {
+  &-title {
+    margin-bottom: 8px;
+  }
+
+  &-page {
+    padding-right: 8px;
+
+    .header {
+      min-height: 32px !important;
+      line-height: 32px !important;
+      margin-bottom: 3px !important;
+
+      .title {
+        font-weight: 900;
+        text-align: right;
+      }
+    }
+  }
+
+  &-menu {
+    @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+      .ant-menu-item {
+        padding: 0 8px !important;
+        height: 32px !important;
+        line-height: 32px;
+        margin: 2px 0 4px 0 !important;
+      }
+    }
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}

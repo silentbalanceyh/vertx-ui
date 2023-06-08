@@ -1,0 +1,21 @@
+
+.ux {
+  &_view {
+    &_my {
+      margin-top: 3px;
+      margin-bottom: 3px;
+
+      .label {
+        text-align: right;
+        font-weight: bold;
+        padding-right: 6px;
+        line-height: $uni_font * 2;
+      }
+
+      .content {
+        padding-left: 6px;
+        line-height: $uni_font * 2;
+      }
+    }
+  }
+}

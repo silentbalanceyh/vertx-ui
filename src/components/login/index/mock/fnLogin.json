@@ -1,0 +1,10 @@
+{
+    "mock": false,
+    "data": {
+        "key": "2531c8ac-7c5b-495f-8565-5b897723e0ef",
+        "scope": "PRAYER-SEC",
+        "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+        "clientSecret": "N3nE5NSbcKO4tV0y589sDSVTSxvBj5l2",
+        "grantType": "authorization_code"
+    }
+}

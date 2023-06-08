@@ -1,0 +1,85 @@
+{
+    "_assist": {
+        "user.departments": {
+            "uri": "/api/dept/by/sigma",
+            "inherit": "resource.departments"
+        },
+        "user.teams": {
+            "uri": "/api/team/by/sigma",
+            "inherit": "resource.teams"
+        },
+        "ajax.groups": {
+            "uri": "/api/group/by/sigma",
+            "inherit": true
+        }
+    },
+    "_config": {
+        "ajax": {
+            "metadata": "POST,/api/user/search/employee,1,10,sorter=createdAt`ASC",
+            "params.criteria": {
+                "sigma": "PROP:app.sigma",
+                "": true
+            }
+        },
+        "linker": {
+        },
+        "table": {
+            "columns": [
+                "workNumber,工号",
+                {
+                    "metadata": "deptId,所属部门,DATUM",
+                    "$datum": "source=user.departments,value=key,display=name"
+                },
+                {
+                    "metadata": "teamId,所属业务组,DATUM",
+                    "$datum": "source=user.teams,value=key,display=name"
+                },
+                {
+                    "metadata": "groups,关联工作组,DATUM",
+                    "$datum": "source=ajax.groups,value=key,display=name"
+                },
+                "username,登录账号",
+                "realname,姓名",
+                "mobile,手机"
+            ]
+        },
+        "tree": {
+            "dept": "所有部门/业务组",
+            "group": "工作组"
+        },
+        "validation": "请选择:user！",
+        "window": "选择:user,选择,关闭,false,1280,false",
+        "search": {
+            "username,c": "账号",
+            "realname,c": "姓名",
+            "workNumber,c": "工号"
+        },
+        "user": "职员",
+        "marker": {
+            "DEPT": {
+                "field": "deptId,i",
+                "tips": "部门",
+                "item": {
+                    "icon": "cluster",
+                    "color": "#008B00"
+                }
+            },
+            "TEAM": {
+                "field": "teamId,i",
+                "tips": "业务组",
+                "item": {
+                    "icon": "switcher",
+                    "color": "#9ACD32"
+                }
+            },
+            "GROUP": {
+                "field": "groupId,i",
+                "tips": "工作组",
+                "item": {
+                    "icon": "team",
+                    "color": "#1E90FF"
+                }
+            }
+        }
+    }
+}

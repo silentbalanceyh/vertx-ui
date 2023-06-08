@@ -1,0 +1,22 @@
+@import (less) "../macrocosm/index.less";
+@import (less) "../macross/index.less";
+// ----------------------- 消费特殊色彩部分 --------------------------
+// 绿按钮
+.ix-web.ix-button(success, @color-button-success, @color-button-success-hover);
+// 红按钮
+.ix-web.ix-button(red, @color-button-failure, @color-button-failure-hover);
+// 返回按钮
+.ix-web.ix-button(extra, @color-button-failure, @color-button-failure-hover);
+// 紫红按钮
+.ix-web.ix-button(spec, @color-button-spec, @color-button-spec-hover);
+// 棕色按钮
+.ix-web.ix-button(brown, @color-button-brown, @color-button-brown-hover);
+
+// 列处理，20 - 240
+.ix-web.ix-column.width(400); // 特殊列（直接设置列宽）
+.ix-web.ix-column.min-width(400); // 特殊列（直接设置列最小宽度）
+.ix-web.ix-form.width(100); // 特殊表单
+// 列处理
+.ix-web.ix-op.width(400); // 特殊处理
+// 单据列处理, 20 - 240
+.ix-web.ix-serial.width(400);

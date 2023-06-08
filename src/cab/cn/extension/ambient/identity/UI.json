@@ -1,0 +1,169 @@
+{
+    "_page": {
+        "title": "档案管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_assist": {
+        "identity.type": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:zero.identity"
+            }
+        }
+    },
+    "_grid": {
+        "query": {
+            "projection": [],
+            "pager": "1,10",
+            "sorter": "updatedAt=DESC",
+            "criteria": {
+                "sigma": "PROP:app.sigma"
+            }
+        },
+        "options": {
+            "search.cond": [
+                "realname,c",
+                "code,c"
+            ],
+            "search.enabled": true,
+            "search.confirm.clear": "该操作会清空所有的查询条件，确认清空？",
+            "search.op.redo": "清除条件",
+            "search.op.advanced": "高级搜索",
+            "search.op.view": "查询条件",
+            "search.placeholder": "人员名称/档案编码",
+            "search.advanced": true,
+            "search.advanced.width": "40%",
+            "search.advanced.title": "搜索档案",
+            "search.advanced.notice": {
+                "message": "注意！",
+                "description": [
+                    "高级搜索条件优先级会大于普通搜索，一旦触发，普通搜索条件会被重置。",
+                    "高级搜索表单中的搜索条件会被保存，再次打开时会重置到上次的搜索状态。"
+                ]
+            },
+            "search.criteria.window": "当前查询条件,保存,关闭,false,900,true,btnCriteria",
+            "search.criteria.view": {
+                "selected": "当前视图：",
+                "confirm": "您正在更改当前视图的查询条件，一旦更改后查询数据会有变化，确认？"
+            },
+            "tabs.list": "档案列表",
+            "tabs.add": "添加档案",
+            "tabs.edit": "编辑档案",
+            "identifier": "identity",
+            "dynamic.op": false,
+            "dynamic.column": true,
+            "dynamic.switch": false,
+            "op.open.filter": "清除筛选",
+            "op.extra.column": "修改显示列",
+            "op.extra.export": "导出",
+            "op.extra.import": "导入",
+            "op.extra.view": "视图管理",
+            "op.row.edit": true,
+            "op.submit.add": "添加",
+            "op.submit.save": "保存",
+            "op.submit.reset": "重置",
+            "window.batch.editor": "选择批量更新的字段,更新,关闭,false,720,true,btnBatchEdit",
+            "window.extra.column": "请选择您要显示的列,leftTop,720,true",
+            "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
+            "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
+            "window.extra.view": "视图管理,right,480,true,btnView",
+            "id.submit.add": "$opAdd",
+            "id.submit.save": "$opSave",
+            "id.submit.reset": "$opReset",
+            "id.submit.delete": "$opDelete",
+            "ajax.position": [
+                "ROUTE:type",
+                "ROUTE:status"
+            ],
+            "ajax.search.uri": "/api/identity/search",
+            "ajax.get.uri": "/api/identity/:key",
+            "ajax.delete.uri": "/api/identity/:key",
+            "ajax.batch.delete.uri": "/api/batch/identity/delete",
+            "ajax.batch.update.uri": "/api/batch/identity/update",
+            "ajax.column.full": "/api/columns/identity/full",
+            "ajax.column.my": "/api/columns/identity/my",
+            "ajax.column.save": "/api/columns/identity/my",
+            "ajax.file.export": "/api/identity/export",
+            "ajax.file.import": "/api/identity/import",
+            "confirm.delete": "确认删除当前档案记录？",
+            "confirm.batch.delete": "您确认要删除所有选中的档案记录？",
+            "confirm.clean.filter": "该操作将清空所有的查询条件，确认？",
+            "message.batch.delete": "您所选择的记录已经全部删除成功！"
+        },
+        "component": {
+            "batch.editor": {
+                "fieldColumn": {
+                    "title": "选择属性",
+                    "items": [
+                        "realname,姓名",
+                        "code,档案编号",
+                        "gender,性别",
+                        "country,国籍",
+                        "nation,民族",
+                        "marital,婚姻状况",
+                        "nativePlace,籍贯",
+                        "birthday,出生日期",
+                        "type,类型",
+                        "contactMobile,手机号",
+                        "contactPhone,座机",
+                        "contactEmail,邮箱",
+                        "ecQq,QQ号码",
+                        "ecWechat,微信",
+                        "urgentName,紧急联系人",
+                        "active,是否启用",
+                        "createdBy,创建人",
+                        "createdAt,创建时间",
+                        "updatedBy,更新人",
+                        "updatedAt,更新时间"
+                    ]
+                },
+                "valueColumn": {
+                    "title": "设置值",
+                    "render": {
+                        "name": "TEXT",
+                        "active": {
+                            "type": "RADIO",
+                            "config": [
+                                "true,启用",
+                                "false,禁用"
+                            ]
+                        },
+                        "createdAt": {
+                            "type": "DATE",
+                            "config": {
+                                "format": "YYYY-MM-DD"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "table": {
+            "total": {
+                "report": "（总共:page页，:total条数据）",
+                "selected": "勾选了:count条"
+            },
+            "row": {
+                "onDoubleClick": "fnEdit"
+            },
+            "columns": [
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "fixed": "left",
+                    "$render": "EXECUTOR",
+                    "$option": [
+                        {
+                            "text": "查看档案",
+                            "executor": "fnEdit"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,65 @@
+@use "sass:math";
+@import "element.button.primary";
+@import "uca.form.error";
+
+@mixin uca_form_login($pColor, $pFont) {
+  // 登录窗口专用窗口，$pFont的值来自于环境变量
+  form {
+    font-size: $pFont;
+    background-color: transparent;
+    padding: 10px;
+    // .ant-row processing
+    .ant-row {
+      display: inline-block;
+      height: 66px;
+      width: 100%;
+    }
+
+    input {
+      height: 32px;
+      padding-left: 6px !important; // 此处必须追加 !important才能生效（无影响）
+      font-size: 15px;
+    }
+
+    // 专用按钮处理 .ant-btn-primary
+    @include unit_ant_btn_primary_100($pColor, 40px, $pFont);
+
+    // 错误信息专用
+    @include uca_form_error(-30px);
+  }
+}
+
+@mixin uca_form_main($rowHeight, $rowMargin) {
+  // 主表单专用窗口
+  .ant-row {
+    width: 100%;
+    min-height: $rowHeight;
+    margin-top: $rowMargin;
+    margin-bottom: $rowMargin;
+  }
+  // 表单下边距根据边距计算 * 9
+  // 3 = 36
+  // 6 = 72
+  padding-bottom: $rowMargin * 12;
+}
+
+@mixin uca_form_readonly() {
+  .ant-input[readonly] {
+    background-color: rgba(200, 202, 203, 0.29);
+  }
+  .ant-input-affix-wrapper-readonly:has(.ant-input[readonly]) {
+    background-color: rgba(200, 202, 203, 0.29);
+
+    .ant-input[readonly] {
+      background-color: transparent;
+    }
+  }
+  // 情况2：uca_UserSelector
+  .ux_readonly_select:has(.ant-input[readonly]) {
+    background-color: white;
+
+    .ant-input[readonly] {
+      background-color: transparent;
+    }
+  }
+}

@@ -1,0 +1,11 @@
+.upg {
+  &_rbac_authority {
+    :global {
+      .ux_card {
+        .ant-card-body {
+          padding: $uni_font * 0.2 0;
+        }
+      }
+    }
+  }
+}

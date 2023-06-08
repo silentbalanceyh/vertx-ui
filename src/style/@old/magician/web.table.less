@@ -1,0 +1,19 @@
+@import (less) "../connect/index.less";
+@import (less) "../macross/index.less";
+
+.ux_table-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-tpl.ix-table(
+            8px,
+            24px
+    );
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-tpl.ix-table(
+            12px,
+            32px
+    );
+  }
+}

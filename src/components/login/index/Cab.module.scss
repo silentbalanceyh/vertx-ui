@@ -1,0 +1,23 @@
+@import "~style/index.scss";
+
+.hm_login_form {
+  width: 75%;
+  float: left;
+  background-color: rgba(256, 256, 256, 0.4);
+  padding: 50px 20px 100px 20px;
+  border-radius: 10px;
+
+  :global {
+    /*
+     * 来自环境变量
+     * $color_boot
+     * $font_boot
+     */
+    @include uca_form_login($uni_font, $uni_font);
+
+    .notice {
+      color: white;
+      margin-top: 20px;
+    }
+  }
+}

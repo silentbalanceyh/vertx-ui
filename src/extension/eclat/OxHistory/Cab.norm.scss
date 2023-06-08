@@ -1,0 +1,27 @@
+@import "~style/index.scss";
+
+.uox {
+  &_OxHistory {
+    .ant-table {
+      table {
+        .ant-table-expanded-row {
+
+          .ant-table-thead {
+            th {
+              background-color: $uni_color;
+              color: white;
+            }
+          }
+
+          td {
+            background: white;
+          }
+
+          td[colspan="3"] {
+            padding: 0 !important;
+          }
+        }
+      }
+    }
+  }
+}

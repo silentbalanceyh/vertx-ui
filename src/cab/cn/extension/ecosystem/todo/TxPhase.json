@@ -1,0 +1,19 @@
+{
+    "_config": {
+        "source": [
+            "INIT,填写申请:edit,18:#D20000",
+            "DRAFT,草稿:form,18:#D20000",
+            "PENDING,等待处理:undo,18:#0072c6",
+            "FINISHED,已关闭:check-circle,18:#00b342",
+            "END,已完成:check-circle,18:#00b342",
+            "ADMIT,等待审批:undo,18:#0072c6",
+            "PROCESS,处理中:clock-circle,18:#C39320",
+            "ACCEPTED,已接受:info-circle,18:#C39320",
+            "REJECTED,已拒绝:redo,18:#CD1076",
+            "REDO,已驳回:redo,18:#CD1076",
+            "CANCELED,已撤销:stop,18:#CD1076",
+            "EXPIRED,已超时:clock-circle,18:#CD1076"
+        ],
+        "error": "工单Phase未定义：:value"
+    }
+}

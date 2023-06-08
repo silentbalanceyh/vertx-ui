@@ -1,0 +1,22 @@
+{
+    "_account": {
+        "icon": ":icon",
+        "name": ":realname",
+        "alias": ":alias",
+        "items": [
+            {
+                "icon": "idcard",
+                "value": ":workNumber"
+            },
+            {
+                "icon": "cluster",
+                "value": ":workTitle"
+            },
+            {
+                "icon": "environment",
+                "value": ":workLocation"
+            }
+        ]
+    },
+    "_empty":"（未设置）"
+}

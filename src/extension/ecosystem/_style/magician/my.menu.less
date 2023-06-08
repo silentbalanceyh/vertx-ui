@@ -1,0 +1,53 @@
+@import "../global-connect";
+
+.ix-my-menu {
+  .app(@range, @width,@margin,@icon, @iconPadding, @iconRadius) {
+
+    .range {
+      width: @range;
+
+      .icon {
+        .ix-box.rect(@icon, @icon);
+        padding: @iconPadding;
+        border-radius: @iconRadius;
+      }
+
+      .link {
+        max-width: @width;
+        margin: @margin;
+        text-align: center;
+        display: inline-block;
+      }
+    }
+  }
+}
+
+.ux-my-menu-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-my-menu.app(88px, 80px, 10px, 60px, 10px, 10px);
+    min-height: 110px;
+    .ant-empty {
+      height: 99px;
+
+      &-image {
+        height: 72px;
+        margin-bottom: 4px;
+      }
+    }
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-my-menu.app(104px, 96px, 12px, 80px, 16px, 16px);
+    min-height: 130px;
+    .ant-empty {
+      height: 123px;
+
+      &-image {
+        height: 92px;
+        margin-bottom: 4px;
+      }
+    }
+
+  }
+}

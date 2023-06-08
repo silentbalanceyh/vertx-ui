@@ -1,0 +1,14 @@
+{
+    "_assist": {
+    },
+    "_grid": {
+        "module": {
+            "NAME": "币种",
+            "MODULE": "currency",
+            "IDENTIFIER": "fm.currency"
+        },
+        "options": {
+            "search.advanced": false
+        }
+    }
+}

@@ -1,0 +1,54 @@
+@import "../global-connect";
+
+.web-authority {
+  .app-list {
+    width: 100%;
+    display: block;
+    float: left;
+
+    .item {
+      color: black;
+      padding: 10px;
+      text-align: center;
+      float: left;
+      width: 148px;
+
+      img {
+        display: inline-block;
+        width: 95px;
+        height: 95px;
+        margin-bottom: 6px;
+      }
+
+      label {
+        display: inline-block;
+        font-size: 15px;
+      }
+
+      border: 1px white solid;
+
+      &:hover {
+        cursor: pointer;
+        border: 1px @primary-color solid;
+        border-radius: 12px;
+      }
+
+      &-disabled {
+        img {
+          -webkit-filter: grayscale(100%);
+          -moz-opacity: 0.4;
+          opacity: 0.4;
+        }
+
+        label {
+          color: #8d8d8d;
+        }
+
+        &:hover {
+          cursor: not-allowed;
+          border: 1px white solid;
+        }
+      }
+    }
+  }
+}

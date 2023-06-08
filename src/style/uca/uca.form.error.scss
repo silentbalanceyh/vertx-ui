@@ -1,0 +1,31 @@
+@import "~style/connect/mod.animate.min.css";
+@import "~style/macrocosm/index.scss";
+
+@mixin uca_form_error($pTop, $display: none) {
+  // 全局处理：Ant Design 3.0 -> 4.0/5.0 升级样式
+  .ant-form-item-explain-error {
+    position: absolute;
+    border: solid 1px $color_form_error;
+    border-radius: 3px;
+    background-color: $color_form_error;
+    color: white;
+    padding: 2px 5px;
+    z-index: 100;
+    /** From Animate.css **/
+    animation-duration: 0.628s;
+    animation-fill-mode: both;
+    animation-name: bounceIn;
+    top: $pTop;
+    display: $display;
+  }
+  .ant-form-item-with-help {
+    margin-bottom: 0;
+  }
+  //
+  .ant-input-suffix {
+    width: $uni_font;
+  }
+  .ant-form-item-feedback-icon {
+    display: none;
+  }
+}

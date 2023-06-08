@@ -1,0 +1,57 @@
+// ------------------------------------------------------------------
+/**
+ * SCSS新规范（基于CSS Module）
+ * 1. 基本命名规范
+ *    所有组件部分的SCSS命名采用规范化模式，分别使用前缀标注名空间相关信息，主要分类如下：
+ *    - 全局类名
+ *    - 局部类名（模块化防污染）
+ *    - App级（直接通过 mix 系列API修改样式管理部分）
+ *    - 组件命名
+ * 2. 规范细则
+ * 2.1. 全局类名
+ *      ux_ 为前缀，Uniform Xero
+ * 2.2. 局部类名
+ *      container:      容器
+ *      components:     页面
+ * 2.3. App级命名
+ *      app:            所有第三方组件位置，内置模块全部组件化（不重用）
+ * 2.4. 组件命名
+ *      ux_:            遗留的Class相关设置（web-, ux-），特殊的类型
+ *
+ *      uni_:           标准页面：container / components
+ *      uca_:           标准组件：economy
+ *      uex_:           扩展组件：Ex         Extension
+ *      utx_:           扩展组件：Tx         Task of Workflow
+ *      umy_:           扩展组件：My         My Setting
+ *      uf_ :           扩展组件：F          Finance Module
+ *      ug2_:           扩展组件：G2         G2
+ *      uix_:           扩展组件：Ix         Internal Component
+ *      uqx_:           扩展组件：Qx         Query Engine ( Qr )
+ *      uhx_:           扩展组件：Hx         High Order of Configuration
+ * 3. 关于风格定制
+ *    风格定制执行动态化操作，由于Ant Design使用了token机制，所以结合token执行style注入模式
+ * 以保证整体风格随token中内容发生改动，此种模式下，className禁用 !important 操作符提升优先
+ * 级，尽可能在定义过程中注意。
+ * 4. 关于样式引用的集合处理
+ *     /style/                  整体默认风格包
+ *           /connect           外联CSS连接
+ *           /function          函数:                SCSS函数定义包
+ *           /macrocosm         宏观：               全局变量定义包
+ *           /microcosm         微观：               组件专用SCSS包（前文中的u??_）
+ *           /module            模块：               模块专用SCSS包
+ *           /uca               组件：               组件专用SCSS包（按标签职责，如表单、按钮、列表等）
+ * 5. 版本修订详细说明
+ *    5.1）函数部分
+ *    5.2）全局Class部分
+ */
+// （CSS）animate.css 动画专用Css
+@import "~style/connect/mod.animate.min.css";
+// （SCSS）（变量）屏幕自适应专用，色彩变量
+@import "~style/macrocosm/index.scss";
+// （SCSS）处理原始旧组件：web-和ux-等
+@import "~style/microcosm/index.scss";
+// （SCSS）（函数）自定义组件
+@import "~style/uca/index.scss";
+@import "~style/unstable/index.scss";
+// （SCSS）组件
+@import "~style/ux@legacy/index.scss";

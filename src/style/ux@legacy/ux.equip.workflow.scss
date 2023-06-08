@@ -1,0 +1,46 @@
+@import "~style/macrocosm/index.scss";
+@import "~style/uca/index.scss";
+
+.ux {
+  &_bpmn {
+    // 结束节点
+    &_end {
+      // 节点中间内容填充成完成专用颜色
+      &:not(.djs-connection) .djs-visual {
+        path {
+          fill: $color_flow_end;
+        }
+      }
+
+      @include uca_bpmn_node($color_flow_end, $color_flowbg_end);
+    }
+
+    // 异常节点
+    &_error {
+      @include uca_bpmn_node($color_flow_error, $color_flowbg_error);
+    }
+
+    // 激活节点
+    &_active {
+      @include uca_bpmn_node($color_flow_active, $color_flowbg_active);
+    }
+
+    // 移动
+    &_hover {
+      &:hover {
+        cursor: pointer;
+      }
+
+      @include uca_bpmn_node($color_flow_hover, $color_flowbg_hover);
+    }
+
+    // 选中
+    &_selected {
+      &:hover {
+        cursor: move;
+      }
+
+      @include uca_bpmn_node($uni_color, $color_flowbg_active);
+    }
+  }
+}

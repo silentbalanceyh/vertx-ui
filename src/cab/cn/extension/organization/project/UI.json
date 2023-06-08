@@ -1,0 +1,38 @@
+{
+    "_assist": {
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma"
+        },
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "zero.project",
+                    "zero.project.status",
+                    "zero.project.budget",
+                    "zero.project.level",
+                    "zero.project.priority",
+                    "zero.project.risk"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_grid": {
+        "module": {
+            "NAME": "项目",
+            "MODULE": "project",
+            "IDENTIFIER": "res.project"
+        },
+        "query": {
+            "criteria": {
+                "sigma": "PROP:app.sigma"
+            }
+        },
+        "options": {
+            "tabs.container": true,
+            "search.advanced": false
+        }
+    }
+}

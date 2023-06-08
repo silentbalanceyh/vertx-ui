@@ -1,0 +1,139 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "ui": [
+            [
+                "title=权限基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,权限名称,,,,placeholder=请输入权限名称,normalize=text:40",
+                    "optionConfig.rules": [
+                        "required,请输入权限名称，名称不可为空！"
+                    ]
+                },
+                {
+                    "metadata": "code,权限编码,,,,placeholder=请输入唯一编码,maxLength=40",
+                    "optionConfig.rules": [
+                        "required,请输入权限编码，编码不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，权限编码不可重复！",
+                            "config": {
+                                "uri": "/api/permission/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "resourceType,资源分类,,,aiSelect,placeholder=选择资源类型",
+                    "optionJsx.config.datum": "source=resource.type,value=code,label=name",
+                    "optionJsx.depend.impact": {
+                        "reset": [
+                            "identifier",
+                            "modelKey",
+                            "sourcePermission"
+                        ]
+                    },
+                    "optionConfig.rules": [
+                        "required,请选择资源分类！"
+                    ]
+                },
+                {
+                    "metadata": "modelKey,关联模型",
+                    "optionConfig.rules": [
+                        "required,请选择该分类下的关联模型！"
+                    ]
+                },
+                "identifier,模型ID,,,,readOnly=true"
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3
+                }
+            ],
+            [
+                {
+                    "metadata": "actions,关联操作,24,,aiMatrixSelector",
+                    "optionConfig.rules": [
+                        {
+                            "validator": "required",
+                            "message": "对不起，关联操作不可为空，请添加关联操作！"
+                        }
+                    ],
+                    "optionJsx.config": {
+                        "ajax": {
+                            "metadata": "POST,/api/action/search,1,10,sorter=updatedAt`DESC",
+                            "params.criteria": {
+                                "permissionId,n": true
+                            }
+                        },
+                        "table": {
+                            "columns": [
+                                "name,操作名称",
+                                "code,操作编码",
+                                {
+                                    "metadata": "method,HTTP方法,MAPPING",
+                                    "$mapping": {
+                                        "GET": "GET,download,,#268941",
+                                        "PUT": "PUT,edit,,#0a7bed",
+                                        "POST": "POST,plus,,#f6af03",
+                                        "DELETE": "DELETE,delete,,#e22015"
+                                    }
+                                },
+                                {
+                                    "dataIndex": "uri",
+                                    "title": "请求路径"
+                                }
+                            ]
+                        },
+                        "validation": "请选择关联操作！",
+                        "window": "关联操作,选择,关闭,false,980,false",
+                        "search": {
+                            "name,c": "名称",
+                            "code,c": "编码"
+                        },
+                        "selection": {
+                            "multiple": true,
+                            "multipleMode": {
+                                "replace": false
+                            }
+                        },
+                        "dynamic": {
+                            "dataIndex": "key",
+                            "title": "添加",
+                            "config": {
+                                "text": "移除",
+                                "confirm": "该操作会从当前权限中移除选中操作，确认？"
+                            }
+                        }
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "success": {
+            "added": "恭喜，新的`自由权限`添加成功！"
+        }
+    }
+}

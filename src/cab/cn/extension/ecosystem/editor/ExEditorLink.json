@@ -1,0 +1,19 @@
+{
+    "_query": {
+        "pager": {
+            "page": 1,
+            "size": 15
+        },
+        "sorter": [
+            "updatedAt,DESC"
+        ],
+        "projection": []
+    },
+    "_table": {
+        "total": {
+            "report": "（总共:page页，:total条数据）",
+            "selected": "勾选了:count条"
+        },
+        "className": "ux_table"
+    }
+}

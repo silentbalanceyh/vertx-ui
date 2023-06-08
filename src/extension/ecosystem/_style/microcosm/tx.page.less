@@ -1,0 +1,81 @@
+@import "../global-connect";
+
+
+.tx-page {
+  padding-bottom: 120px;
+
+  .ant-card {
+    .tx-title {
+      height: 36px;
+      line-height: 36px;
+    }
+
+    .tx-title-rect {
+      height: 36px;
+      width: 36px;
+    }
+
+    .ant-card-head {
+      padding: 0 6px !important;
+    }
+
+    .ant-card-head-title {
+      padding: 4px 0;
+
+      .tx-page-title {
+        display: inline-block;
+        border-left: solid 6px @primary-color;
+        border-bottom-left-radius: 4px;
+        border-top-left-radius: 4px;
+        border-bottom: solid 1px @primary-color;
+        padding-left: 8px;
+        min-width: 40%;
+        font-size: 18px;
+        .tx-title;
+
+        .task-name {
+          font-weight: 200;
+          font-size: 14px;
+        }
+      }
+    }
+
+    .ant-card-extra {
+      padding: 8px 0;
+
+      .tx-page-extra {
+        min-width: 200px;
+
+        .tx-catalog {
+          position: relative;
+          color: white;
+
+          padding: 0 16px 0 48px;
+          .tx-title;
+          display: inline-block;
+
+          &:before {
+            position: absolute;
+            left: -18px; /** 平移距离为x/2 **/
+            .tx-title-rect;
+
+            transform: rotate(-45deg); /** 旋转45° **/
+            content: "";
+            background: white;
+          }
+
+          .tx-prefix {
+            font-weight: bold;
+            font-size: 15px;
+          }
+        }
+
+        button {
+          margin-left: 4px;
+          height: 36px;
+          width: 36px;
+        }
+      }
+    }
+  }
+}

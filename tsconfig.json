@@ -1,0 +1,125 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "locale": "zh-CN",
+        "newLine": "lf",
+        "resolveJsonModule": true,
+        "outDir": "build",
+        "experimentalDecorators": true,
+        "noImplicitAny": false,
+        "module": "commonjs",
+        "target": "ESNext",
+        "sourceMap": true,
+        "alwaysStrict": false,
+        "allowJs": true,
+        "checkJs": true,
+        "noImplicitUseStrict": true,
+        "allowSyntheticDefaultImports": true,
+        "skipLibCheck": true,
+        "baseUrl": ".",
+        "removeComments": true,
+        "traceResolution": true,
+        "incremental": true,
+        "paths": {
+            "lang": [
+                "src/cab/"
+            ],
+            "app": [
+                "src/app/"
+            ],
+            "mock": [
+                "src/app@mock/"
+            ],
+            "plugin": [
+                "src/app@plugin/"
+            ],
+            "web": [
+                "src/economy/"
+            ],
+            "entity": [
+                "src/entity@em/"
+            ],
+            "environment": [
+                "src/environment/"
+            ],
+            "oi": [
+                "src/extension/eclat/"
+            ],
+            "ei": [
+                "src/extension/ecosystem/"
+            ],
+            "ex": [
+                "src/extension/library/"
+            ],
+            "ui": [
+                "src/ui/"
+            ],
+            "ux": [
+                "src/ux/"
+            ],
+            "zei": [
+                "src/unfold"
+            ],
+            "zep": [
+                "src/upper"
+            ],
+            "zet": [
+                "src/utter"
+            ],
+            "zero": [
+                "src/zero"
+            ],
+            "zs": [
+                "src/zest@web"
+            ],
+            "zi": [
+                "src/zion"
+            ],
+            "zmr": [
+                "src/zither@em"
+            ],
+            "zo": [
+                "src/zodiac"
+            ],
+            "zme": [
+                "src/zoe@em"
+            ],
+            "zone": [
+                "src/zone"
+            ],
+            "skin": [
+                "src/skin"
+            ],
+            "@": [
+                "src/style"
+            ]
+        }
+    },
+    "exclude": [
+        "node_modules/**/*.js",
+        "node_modules/**/*.ts",
+        "src/**/*.js",
+        "config/**/*.js"
+    ],
+    "include": [
+        "src/app/**/*.ts",
+        "src/c*/**/*.ts",
+        "src/economy/**/*.ts",
+        "src/economy/**/*.tsx",
+        "src/entity@em/**/*.ts",
+        "src/entity@em/**/*.tsx",
+        "src/extension/**/*.ts",
+        "src/extension/**/*.tsx",
+        "src/u*/**/*.ts",
+        "src/u*/**/*.tsx",
+        "src/z*/**/*.ts",
+        "src/z*/**/*.tsx",
+        "src/skin/**/*.ts",
+        "src/skin/**/*.tsx"
+    ],
+    "awesomeTypescriptLoaderOptions": {
+        "forkChecker": true,
+        "resolveGlobs": true,
+        "useCache": false
+    }
+}

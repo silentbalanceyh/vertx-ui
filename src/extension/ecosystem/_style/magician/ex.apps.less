@@ -1,0 +1,30 @@
+@import "../global-connect";
+
+
+.ix-app {
+  .app(@width,@margin,@icon, @iconPadding, @iconRadius) {
+    i {
+      .ix-box.rect(@icon, @icon);
+      padding: @iconPadding;
+      border-radius: @iconRadius;
+    }
+
+    a {
+      max-width: @width;
+      margin: @margin;
+      text-align: center;
+      display: inline-block;
+    }
+  }
+}
+
+.ux-app-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-app.app(80px, 10px, 60px, 10px, 10px)
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-app.app(100px, 12px, 80px, 16px, 16px)
+  }
+}

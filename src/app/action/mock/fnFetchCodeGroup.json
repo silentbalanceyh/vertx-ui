@@ -1,0 +1,44 @@
+{
+    "mock": false,
+    "data": [
+        {
+            "key": "03dd9d48-b4bc-4f7a-92e0-72db84781d9e",
+            "status": "2abb6095-62c0-448f-a4f4-6dbf97728690",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "code": "1001",
+            "createTime": "2018-06-23T08:42:34",
+            "name": "团购一",
+            "partner": "d66c1403-4780-4beb-adfa-9274a3fa826a",
+            "commissionId": "5774782d-e4a3-4262-b2fa-da4c7d256ce3",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f"
+        },
+        {
+            "key": "4ca7808a-2db7-4c75-900e-60bb5c792444",
+            "status": "2abb6095-62c0-448f-a4f4-6dbf97728690",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "code": "1003",
+            "createTime": "2018-06-23T08:42:35",
+            "name": "团购三",
+            "partner": "67fa996e-2da4-4fe4-9615-c578e1954da9",
+            "commissionId": "d4de04d0-c705-4165-8e5d-6d3b843698b0",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f"
+        },
+        {
+            "key": "4f1188f7-bb83-45a6-bd3f-7535af87488a",
+            "status": "2abb6095-62c0-448f-a4f4-6dbf97728690",
+            "active": true,
+            "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+            "language": "cn",
+            "code": "1002",
+            "createTime": "2018-06-23T08:42:35",
+            "name": "团购二",
+            "partner": "78064131-3be5-4969-ae8c-e42418abad9f",
+            "commissionId": "729c90c2-d533-4369-8b76-5dc0e574efcf",
+            "hotelId": "2323dbf4-5e93-4fcb-9684-28511ce5753f"
+        }
+    ]
+}

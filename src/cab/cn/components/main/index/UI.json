@@ -1,0 +1,37 @@
+{
+    "_shortcut": {
+        "parameter": {
+            "type": "APP-MENU",
+            "position": "MAIN"
+        },
+        "tree": {
+            "checkable": "CHILDREN",
+            "selectable": false,
+            "key": "uiMenu",
+            "config": {
+                "sort": "order"
+            }
+        }
+    },
+    "_dashboard": {
+        "todo": {
+            "title": "我的待办",
+            "extra": {
+                "text": "更多",
+                "uri": "/ambient/todo",
+                "icon": "ellipsis"
+            }
+        }
+    },
+    "_page": {
+        "title": "Zero UI / Zero Micro教程"
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabGuide",
+        "items": [
+            "教程目录,tabGuide",
+            "项目结构,tabArch",
+            "框架原理,tabAnalyze"
+        ]
+    }
+}

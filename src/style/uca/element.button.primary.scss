@@ -1,0 +1,42 @@
+@use "sass:math";
+
+@mixin _unit_ant_btn_primary($color, $height, $width, $font) {
+  :global {
+    .ant-btn-primary {
+      border: 0;
+      background-color: $color;
+      height: $height;
+      width: $width;
+      font-size: $font;
+      border-radius: math.div($height, 2);
+
+      &:hover {
+        opacity: 0.9; // 半透明
+      }
+    }
+  }
+}
+
+@mixin unit_ant_btn_primary_100($color, $height, $font) {
+  // 宽度 100%
+  @include _unit_ant_btn_primary($color, $height, 100%, $font);
+}
+
+@mixin unit_ant_button($color, $color-active) {
+  background-color: $color;
+  border: solid 1px $color;
+  color: white;
+  &:not(:disabled):hover, &:not(:disabled):active {
+    opacity: 0.7;
+    border: solid 1px $color-active !important;
+    color: white;
+
+    span {
+      color: white;
+    }
+
+    svg {
+      color: white;
+    }
+  }
+}

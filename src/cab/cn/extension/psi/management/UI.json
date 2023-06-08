@@ -1,0 +1,15 @@
+{
+    "_grid": {
+        "module": {
+            "NAME": "仓库",
+            "MODULE": "wh",
+            "IDENTIFIER": "psi.wh"
+        },
+        "options": {
+            "search.cond": [
+                "name,c"
+            ],
+            "search.advanced": false
+        }
+    }
+}

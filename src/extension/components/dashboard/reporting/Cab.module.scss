@@ -1,0 +1,48 @@
+@import "~style/index.scss";
+
+.upg {
+  &_dashboard_reporting {
+    :global {
+      .report_container {
+        margin-bottom: 12px;
+
+        .report_card {
+          @include attr_shadow_box($uni_font * 0.4);
+
+          &:hover {
+            .report_card_statistic {
+              opacity: 0.7;
+              cursor: pointer;
+              background: $color_readonly;
+              border-radius: 4px;
+            }
+          }
+
+          .ant-pro-card-body {
+            padding-top: $uni_font * 0.6;
+            padding-bottom: $uni_font * 0.6;
+          }
+
+          .ant-statistic-content-value {
+            color: $uni_color;
+            font-weight: 700;
+            font-size: $uni_font * 1.4;
+          }
+
+          .ant-pro-card-statistic-description {
+            color: $color_comment;
+          }
+
+          img {
+            width: $uni_font * 6;
+            height: $uni_font * 6;
+          }
+        }
+      }
+
+      .report_catalog {
+        padding: 4px;
+      }
+    }
+  }
+}

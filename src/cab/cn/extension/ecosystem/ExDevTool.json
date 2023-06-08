@@ -1,0 +1,77 @@
+{
+    "_tabs": {
+        "defaultActiveKey": "keyProp",
+        "items": "属性表,keyProp;状态表,keyState;字典数据,keyAssist;拓扑结构,keyGraph"
+    },
+    "_mask": {
+        "apartment": "该组件包含根组件引用 root！",
+        "share-alt": "该组件包含了父组件引用 reference！",
+        "fire": "该组件绑定了Cab.json资源文件",
+        "sync": "该组件启用了状态功能 state",
+        "tool": "该组件可触发提交！"
+    },
+    "_props": {
+        "rowKey": "name",
+        "pagination": false,
+        "className": "ux_table",
+        "columns": [
+            "name,属性名",
+            "type,类型",
+            "comment,备注",
+            "value,值"
+        ]
+    },
+    "_state": {
+        "rowKey": "name",
+        "pagination": false,
+        "className": "ux_table",
+        "columns": [
+            "name,状态名",
+            "type,类型",
+            "comment,备注",
+            "value,值"
+        ]
+    },
+    "_assist": {
+        "rowKey": "name",
+        "pagination": false,
+        "className": "ux_table",
+        "columns": [
+            "name,名称",
+            "type,类型",
+            {
+                "metadata": "source,来源,MAPPING",
+                "$mapping": {
+                    "prop": "属性数据,download,18,#268941",
+                    "state": "状态数据,edit,18,#0a7bed"
+                }
+            },
+            "comment,备注",
+            "value,值"
+        ]
+    },
+    "_window": "查看数据信息,,关闭,false,900,true",
+    "_spec": {
+        "type": [
+            "DataObject",
+            "DataArray",
+            "DataRouter",
+            "HocI18",
+            "Zero"
+        ],
+        "comment": [
+            "$app,应用程序配置数据专用变量",
+            "$menus,系统菜单数据",
+            "$router,React-Router路由数据",
+            "$user,当前系统登陆用户信息",
+            "$hoc,Zero专用资源文件",
+            "$collapsed,菜单的展开状态",
+            "$ready,该组件配置是否加载完成？",
+            "$options,「可继承配置」组件专用配置",
+            "$record,「可继承数据」组件专用数据",
+            "$myDefault,个人视图专用配置",
+            "config,当前组件专用配置",
+            "data,当前组件专用数据"
+        ]
+    }
+}

@@ -1,0 +1,22 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 4,
+        "className": "web-form-bottom-64",
+        "ui": [
+            [
+                "configDatabase,,24"
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.grouped": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存配置,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ]
+        ]
+    }
+}

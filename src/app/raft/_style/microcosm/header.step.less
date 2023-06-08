@@ -1,0 +1,25 @@
+@import "../global-connect";
+
+.ht-order-monitor {
+  .tpl(@padding) {
+    padding: @padding;
+  }
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ht-order-monitor.tpl(12px);
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ht-order-monitor.tpl(16px);
+  }
+}
+
+.@{app}-order {
+  &-page {
+    // 监控器
+    .monitor {
+      // 帮助自适应
+      .ht-order-monitor;
+    }
+  }
+}

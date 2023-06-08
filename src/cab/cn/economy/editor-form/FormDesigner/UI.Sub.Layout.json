@@ -1,0 +1,76 @@
+{
+    "_form": {
+        "window": 1.1,
+        "columns": 1,
+        "ui": [
+            [
+                {
+                    "title": "`布局`说明",
+                    "config": {
+                        "message": "关于`布局`",
+                        "description": [
+                            "目前的版本支持 3 种不同的表单基础布局，表单本身是以 `网格` 模式实现。",
+                            "设置完成过后记得点击`保存`按钮！"
+                        ]
+                    }
+                }
+            ],
+            [
+                "className,CSS类名,12,,,placeholder=系统默认：web-form",
+                {
+                    "metadata": "cssMode,模式,12,,aiRadio",
+                    "optionJsx.config.items": [
+                        "REPLACE,替换",
+                        "APPEND,追加"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "window,布局种类,,,aiSelect,placeholder=系统默认：标准布局",
+                    "optionJsx.config.items": [
+                        "1,标准布局",
+                        "1.1,常用布局",
+                        "0.16,宽文字布局"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "columns,默认列数,,,aiRadio",
+                    "optionJsx.config.items": [
+                        "1,1列",
+                        "2,2列",
+                        "3,3列",
+                        "4,4列"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opSaveLayout,保存,SUBMIT,primary"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "initial": {
+            "className": "FIX:web-form",
+            "cssMode": "FIX:APPEND",
+            "columns": "FIX:3",
+            "window": "FIX:1"
+        }
+    },
+    "_layout": {
+        "title": "布局指示器",
+        "comment": "（红色为文字位置，文字右对齐，绿色为交互式组件窗口！）",
+        "data": {
+            "1": {
+                "ui": [
+                ]
+            }
+        }
+    }
+}

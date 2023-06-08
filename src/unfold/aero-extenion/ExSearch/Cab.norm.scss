@@ -1,0 +1,9 @@
+@import "~style/index.scss";
+
+.uex {
+  &_ExSearch {
+    &_Drawer {
+      @include uca_drawer($uni_font * 0.25, $uni_font * 0.25);
+    }
+  }
+}

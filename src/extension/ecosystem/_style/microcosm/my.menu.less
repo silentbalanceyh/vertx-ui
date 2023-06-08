@@ -1,0 +1,105 @@
+@import (less) "../magician/index.less";
+
+.ux-my-menu {
+  &-dialog {
+    .ant-transfer {
+
+      &-list {
+        width: 45%
+      }
+
+      &-operation {
+        text-align: center !important;
+        width: 7%;
+        padding-left: 2%;
+      }
+
+      .source {
+        max-height: 550px;
+        overflow-y: auto;
+      }
+
+      .target {
+        max-height: 550px;
+        overflow-y: auto;
+
+        &-item {
+          width: 100%;
+          line-height: 32px;
+          display: block;
+          float: left;
+
+          .left {
+            float: left;
+          }
+
+          .right {
+            float: right;
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+
+    .ux-my-menu-fit;
+
+    .range {
+      float: left;
+      text-align: center;
+
+      .icon {
+        display: block !important;
+        font-size: 40px !important;
+
+        &-view {
+
+          &:hover {
+            color: @primary-color;
+            background-color: @color-flag-bg !important;
+          }
+        }
+
+        &-admin {
+          cursor: not-allowed;
+        }
+
+        &-add {
+          &:hover {
+            background-color: @color-ant-menu-hover !important;
+          }
+        }
+      }
+
+      .link {
+        color: black !important;
+        float: left;
+        display: block;
+
+        span {
+          display: block !important;
+          width: 100%;
+          color: black;
+          text-align: center !important;
+        }
+
+        &-admin {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+
+      .link-op {
+        width: 100%;
+      }
+    }
+  }
+
+  .admin-button {
+    border-radius: 16px;
+    min-width: 88px;
+    margin-right: 12px;
+  }
+}

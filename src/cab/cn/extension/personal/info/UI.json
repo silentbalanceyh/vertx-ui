@@ -1,0 +1,98 @@
+{
+    "_page": {
+        "title": "更新个人信息"
+    },
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=个人信息"
+            ],
+            [
+                "username,登录账号,14,,,readOnly=true"
+            ],
+            [
+                "realname,真实姓名,10",
+                "alias,昵称,14"
+            ],
+            [
+                {
+                    "metadata":"mobile,手机号,10,,,placeholder=（请输入手机号）",
+                    "optionConfig.rules": [
+                        "required,请输入手机号，手机号不能为空",
+                        {
+                            "max": 11,
+                            "pattern": "0?(13|14|15|18|17)[0-9]{9}",
+                            "message": "请正确输入手机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"email,电子邮件,14,,,placeholder=（XXX@XXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入电子邮件，电子邮件不能为空",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "title=办公信息"
+            ],
+            [
+                "workNumber,工号,14,,,readOnly=true"
+            ],
+            [
+                "workTitle,工作头衔,14"
+            ],
+            [
+                {
+                    "metadata":"workPhone,工作电话,10,,,placeholder=格式:(区号-座机号)或(座机号)",
+                    "optionConfig.rules": [
+                        "required,请输入工作电话，工作电话不能为空",
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入工作电话！"
+                        }
+                    ]
+                },
+                {
+                    "metadata":"viceEmail,工作邮件,14,,,placeholder=（XXX@XXX格式）",
+                    "optionConfig.rules": [
+                        "required,请输入工作邮件",
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "workLocation,办公地点,24"
+            ],
+            [
+                {
+                    "metadata": "$button,,14",
+                    "optionJsx.extension": [
+                        "$opProfile,保存,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ]
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "employeeId"
+        ],
+        "op": {
+            "$opProfile": "act.user.profile"
+        }
+    },
+    "_modal": {
+        "success": {
+            "profile": "您好，:realname！您的个人信息更新成功！"
+        }
+    }
+}

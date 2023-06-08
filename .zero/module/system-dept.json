@@ -1,0 +1,23 @@
+{
+    "language": "cn",
+    "path": "/system/dept",
+    "module": {
+        "code": "Department",
+        "name": "部门",
+        "fields": [
+            "name, 部门名称, SFC, sorter=true, filter=c",
+            "code, 部门代码, SFC, sorter=true, filter=c",
+            "active, 是否启用, FC, file=logical, prop=checked, ant=Checkbox",
+            "createTime, 创建时间, C, file=date",
+            "updateTime, 更新时间, C, file=date"
+        ],
+        "rules": {
+            "name": "required",
+            "code": "required"
+        },
+        "data": {
+            "name": "名称",
+            "code": "代码"
+        }
+    }
+}

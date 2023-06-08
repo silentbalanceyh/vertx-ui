@@ -1,0 +1,19 @@
+@import "~style/uca/index.scss";
+
+.ux {
+  &_date_picker {
+    @include unit_date_picker();
+  }
+
+  &_select {
+    @include unit_date_picker();
+  }
+
+  &_select[readonly] {
+    .ant-select-selector {
+      .ant-select-selection-item {
+        color: black;
+      }
+    }
+  }
+}

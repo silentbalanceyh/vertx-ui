@@ -1,0 +1,74 @@
+{
+    "_tabs": {
+        "activeKey": "tabAPI",
+        "type": "card",
+        "items": [
+            {
+                "tab": "接口列表",
+                "key": "tabAPI",
+                "closable": false
+            }
+        ],
+        "dynamic": {
+            "tab": "编辑接口",
+            "key": "tabAPIEdit"
+        }
+    },
+    "_extra": [
+        "opSave,保存,$opSave,primary,save",
+        "opReset,重置,$opReset,,redo"
+    ],
+    "_assert": {
+    },
+    "_alert": {
+        "message": "接口管理",
+        "description": [
+            "您可以按模型来过过滤您要管理的接口。",
+            "请在管理员的协同下编辑具体接口的详细配置。"
+        ]
+    },
+    "_pagination": {
+        "pager": {
+            "page": 1,
+            "size": 9
+        },
+        "total": "当前记录总数:count"
+    },
+    "_toolbar": {
+        "edit": {
+            "text": "编辑",
+            "icon": "edit",
+            "type": "primary"
+        }
+    },
+    "_tool": {
+        "search": {
+            "placeholder": "URI"
+        },
+        "button": {
+            "refresh": "刷新",
+            "clean": "清除"
+        },
+        "checked": {
+            "GET": "GET",
+            "PUT": "PUT",
+            "POST": "POST",
+            "DELETE": "DELETE"
+        }
+    },
+    "_table": {
+        "columns": [
+            "name,接口名称",
+            {
+                "metadata": "method,HTTP方法,MAPPING",
+                "$mapping": {
+                    "GET": "GET,download,,#268941",
+                    "PUT": "PUT,edit,,#0a7bed",
+                    "POST": "POST,plus,,#f6af03",
+                    "DELETE": "DELETE,delete,,#e22015"
+                }
+            },
+            "uri,URI"
+        ]
+    }
+}

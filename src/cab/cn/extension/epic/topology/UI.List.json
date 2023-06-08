@@ -1,0 +1,130 @@
+{
+    "_grid": {
+        "query": {
+            "projection": [],
+            "pager": "1,10",
+            "sorter": "updatedAt=DESC",
+            "criteria": {
+                "sigma": "PROP:app.sigma",
+                "master": "BOOL:false",
+                "": "OPERATOR:AND"
+            }
+        },
+        "options": {
+            "search.cond": [
+                "name,c",
+                "code,c"
+            ],
+            "search.enabled": true,
+            "search.confirm.clear": "该操作会清空所有的查询条件，确认清空？",
+            "search.op.redo": "清除条件",
+            "search.op.advanced": "高级搜索",
+            "search.placeholder": "名称/编码",
+            "search.advanced": false,
+            "search.advanced.width": "40%",
+            "search.advanced.title": "搜索图",
+            "search.advanced.notice": {
+                "message": "注意！",
+                "description": [
+                    "高级搜索条件优先级会大于普通搜索，一旦触发，普通搜索条件会被重置。",
+                    "高级搜索表单中的搜索条件会被保存，再次打开时会重置到上次的搜索状态。"
+                ]
+            },
+            "tabs.list": "图列表",
+            "tabs.add": "绘制新图",
+            "tabs.edit": "编辑图",
+            "identifier": "def.graphic",
+            "dynamic.op": true,
+            "dynamic.column": true,
+            "dynamic.switch": true,
+            "op.open.add": "绘制新图",
+            "op.open.filter": "清除筛选",
+            "op.extra.column": "修改显示列",
+            "op.row.edit": true,
+            "op.row.delete": true,
+            "op.row.view": "查看",
+            "op.submit.add": "添加",
+            "op.submit.reset": "重置",
+            "window.batch.editor": "选择批量更新的字段,更新,关闭,false,720,true,btnBatchEdit",
+            "window.extra.column": "请选择您要显示的列,leftTop,720,true",
+            "window.extra.export": "选择导出字段,导出,关闭,false,720,true,btnExport",
+            "window.extra.import": "请上传导入文件,导入,关闭,false,720,true,btnImport",
+            "id.submit.add": "$opAdd",
+            "id.submit.save": "$opSave",
+            "id.submit.reset": "$opReset",
+            "id.submit.delete": "$opDelete",
+            "ajax.search.uri": "/api/graphic/search",
+            "ajax.get.uri": "/api/graphic/:key",
+            "ajax.delete.uri": "/api/graphic/:key",
+            "ajax.column.full": "/api/columns/graphic/full",
+            "ajax.column.my": "/api/columns/graphic/my",
+            "ajax.column.save": "/api/columns/graphic/my",
+            "confirm.delete": "确认删除当前图记录？",
+            "confirm.batch.delete": "您确认要删除所有选中的图记录？",
+            "confirm.clean.filter": "该操作将清空所有的查询条件，确认？",
+            "message.batch.delete": "您所选择的记录已经全部删除成功！"
+        },
+        "component": {
+            "batch.editor": {
+                "fieldColumn": {
+                    "title": "选择属性",
+                    "items": [
+                        "code,图编号",
+                        "name,图名称",
+                        "active,是否启用",
+                        "createdBy,创建人",
+                        "createdAt,创建时间"
+                    ]
+                },
+                "valueColumn": {
+                    "title": "设置值",
+                    "render": {
+                        "name": "TEXT",
+                        "active": {
+                            "type": "RADIO",
+                            "config": [
+                                "true,启用",
+                                "false,禁用"
+                            ]
+                        },
+                        "createdAt": {
+                            "type": "DATE",
+                            "config": {
+                                "format": "YYYY-MM-DD"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "table": {
+            "total": {
+                "report": "（总共:page页，:total条数据）",
+                "selected": "勾选了:count条"
+            },
+            "row": {
+                "onDoubleClick": "fnEdit"
+            },
+            "columns": [
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "fixed": "left",
+                    "$render": "EXECUTOR",
+                    "$option": [
+                        {
+                            "text": "编辑",
+                            "executor": "fnEdit"
+                        },
+                        "divider",
+                        {
+                            "text": "删除",
+                            "executor": "fnDelete",
+                            "confirm": "确认删除选择的图记录？"
+                        }
+                    ]
+                }
+            ]
+        }
+    }
+}

@@ -1,0 +1,14 @@
+{
+    "_assist": {
+    },
+    "_grid": {
+        "module": {
+            "NAME": "账本",
+            "MODULE": "fm-book",
+            "IDENTIFIER": "fm.bank"
+        },
+        "options": {
+            "search.advanced": false
+        }
+    }
+}

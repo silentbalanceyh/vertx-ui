@@ -1,0 +1,35 @@
+@import "~style/uca/index.scss";
+
+.ux {
+  &_card, &_card_form {
+    // screen 自适应效果处理
+    // FIT: 行高、行下外边距
+    @media screen and (min-width: $screen-xl) {
+      @include uca_card_page(2px)
+    }
+    @media screen and (min-width: $screen-xxl) {
+      @include uca_card_page(4px)
+    }
+
+    .extra {
+      float: right;
+    }
+
+    .title {
+      i {
+        color: $uni_color;
+        font-size: $uni_font + 4;
+        margin-right: 8px;
+      }
+    }
+
+    @include attr_shadow_box($uni_font * 0.4);
+  }
+}
+
+/*
+ * 设置阴影信息且具有局部效果
+ */
+.ux_card:not(.ant-card-bordered), .ux_card_form:not(.ant-card-bordered) {
+  @include attr_shadow_box($uni_font * 0.4);
+}

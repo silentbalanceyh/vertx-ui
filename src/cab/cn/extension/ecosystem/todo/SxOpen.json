@@ -1,0 +1,140 @@
+{
+    "OPEN_USER": [
+        [
+            "title=建单人信息"
+        ],
+        [
+            {
+                "metadata": "openByName,姓名,8,,aiUserSelector,readOnly=true,placeholder=（谁创建了工单）",
+                "optionJsx.config": {
+                    "linker": {
+                        "key": "openBy",
+                        "workNumber": "openByNo",
+                        "realname": "openByName",
+                        "groups": "groupOpen"
+                    },
+                    "user": "制单人制单人"
+                },
+                "optionJsx.allowClear": true,
+                "optionConfig.rules": [
+                    "required,请填写制单人信息！"
+                ]
+            },
+            "openByNo,工号,8,,,readOnly=true",
+            {
+                "metadata": "openGroup,工作组,8,,aiGroupSwitcher",
+                "optionJsx.config.datum": "source=ajax.groups,value=key,label=name",
+                "optionJsx.config.bind": "groupOpen"
+            }
+        ]
+    ],
+    "OPEN_USER_FULL": [
+        [
+            "title=建单人信息"
+        ],
+        [
+            {
+                "metadata": "openByName,姓名,8,,aiUserSelector,readOnly=true,placeholder=（谁创建了工单）",
+                "optionJsx.config": {
+                    "linker": {
+                        "key": "openBy",
+                        "workNumber": "openByNo",
+                        "realname": "openByName",
+                        "email": "openByEmail",
+                        "mobile": "openByMobile",
+                        "deptId": "openByDept",
+                        "groups": "groupOpen"
+                    },
+                    "user": "制单人制单人"
+                },
+                "optionJsx.allowClear": true,
+                "optionConfig.rules": [
+                    "required,请填写制单人信息！"
+                ]
+            },
+            "openByNo,工号,8,,,readOnly=true",
+            "openByMobile,电话,8,,,readOnly=true"
+        ],
+        [
+            {
+                "metadata": "openByDept,所属部门,8,,aiSelect,readOnly=true",
+                "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+            },
+            {
+                "metadata": "openGroup,工作组,8,,aiGroupSwitcher",
+                "optionJsx.config.datum": "source=ajax.groups,value=key,label=name",
+                "optionJsx.config.bind": "groupOpen"
+            },
+            "openByEmail,邮箱,8,,,readOnly=true"
+        ]
+    ],
+    "OPEN_VIEWER": [
+        [
+            "title=建单人信息"
+        ],
+        [
+            {
+                "metadata": "openByName,姓名,8,,aiUserSelector,readOnly=true,placeholder=（谁创建了工单）",
+                "optionJsx.config": {
+                    "linker": {
+                        "key": "openBy",
+                        "workNumber": "openByNo",
+                        "realname": "openByName",
+                        "groups": "groupOpen"
+                    },
+                    "user": "制单人制单人"
+                },
+                "optionJsx.allowClear": true,
+                "optionConfig.rules": [
+                    "required,请填写制单人信息！"
+                ]
+            },
+            "openByNo,工号,8,,,readOnly=true",
+            {
+                "metadata": "openGroup,工作组,8,,aiGroupSwitcher,readOnly=true",
+                "optionJsx.config.datum": "source=ajax.groups,value=key,label=name",
+                "optionJsx.config.bind": "groupOpen"
+            }
+        ]
+    ],
+    "OPEN_VIEWER_FULL": [
+        [
+            "title=建单人信息"
+        ],
+        [
+            {
+                "metadata": "openByName,姓名,8,,aiUserSelector,readOnly=true,placeholder=（谁创建了工单）",
+                "optionJsx.config": {
+                    "linker": {
+                        "key": "openBy",
+                        "workNumber": "openByNo",
+                        "realname": "openByName",
+                        "email": "openByEmail",
+                        "mobile": "openByMobile",
+                        "deptId": "openByDept",
+                        "groups": "groupOpen"
+                    },
+                    "user": "制单人制单人"
+                },
+                "optionJsx.allowClear": true,
+                "optionConfig.rules": [
+                    "required,请填写制单人信息！"
+                ]
+            },
+            "openByNo,工号,8,,,readOnly=true",
+            "openByMobile,电话,8,,,readOnly=true"
+        ],
+        [
+            {
+                "metadata": "openByDept,所属部门,8,,aiSelect,readOnly=true",
+                "optionJsx.config.datum": "source=resource.departments,value=key,label=name"
+            },
+            {
+                "metadata": "openGroup,工作组,8,,aiGroupSwitcher,readOnly=true",
+                "optionJsx.config.datum": "source=ajax.groups,value=key,label=name",
+                "optionJsx.config.bind": "groupOpen"
+            },
+            "openByEmail,邮箱,8,,,readOnly=true"
+        ]
+    ]
+}

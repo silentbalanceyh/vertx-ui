@@ -1,0 +1,96 @@
+@import "../global-connect";
+
+
+.dx-sider {
+
+  .web-sider-fit;
+  min-height: 100vh;
+  box-shadow: 2px 0 6px rgba(27, 29, 28, .35);
+  .ix-pos.relative(10);
+
+  .ant-layout-sider-children {
+    // 风格切换
+    background-color: white;
+  }
+
+  .collapse {
+    a {
+      margin-left: 40px !important;
+    }
+  }
+
+  .icon {
+    img {
+      height: 32px;
+      width: 32px;
+      margin-right: 25px;
+    }
+
+    a {
+      color: white !important;
+    }
+  }
+
+  .ant-menu {
+    padding-top: 4px !important;
+
+    .ant-menu-item, .ant-menu-submenu-title {
+      line-height: 40px;
+      padding-left: 0;
+
+      &:hover {
+        background-color: @primary-color;
+        color: white;
+      }
+
+      span {
+        display: inline-block;
+
+        svg {
+          .ix-box.rect(17px, 17px);
+        }
+      }
+    }
+  }
+
+  .ux-menu {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .menu-icon {
+    a {
+      color: white !important;
+    }
+  }
+
+  .logo {
+    position: relative;
+    padding-left: (@menu-collapsed-width - 72px) / 2;
+    margin-right: 0; // 右边空白距离，新版需要填充满
+    margin-bottom: 0;
+    transition: all .3s;
+    overflow: hidden;
+    text-align: center;
+    background-color: @primary-color;
+
+    h1 {
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 17px;
+      margin: 0 0 0 12px;
+      font-family: 'Myriad Pro', 'Helvetica Neue', Arial, Helvetica, sans-serif;
+      font-weight: 600;
+    }
+  }
+}
+
+.dx-sider-expand {
+  .logo {
+    img {
+      width: 130px;
+      height: 32px;
+      margin-left: 0;
+    }
+  }
+}

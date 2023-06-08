@@ -1,0 +1,92 @@
+@import "~style/macrocosm/index.scss";
+@import "~style/uca/index.scss";
+
+.ux {
+
+  &_block {
+    margin-bottom: $uni_font * 0.4;
+    margin-top: $uni_font * 0.4;
+    display: flex;
+    flex-direction: column;
+
+    dd {
+      width: 100%;
+      display: inline-block;
+      text-align: center;
+      margin-bottom: 0;
+      margin-inline-start: 0;
+    }
+
+    dt {
+      padding-left: 8px;
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+
+      svg {
+        font-size: $uni_font * 2.4;
+        display: inline-block;
+      }
+    }
+  }
+
+  &_hidden {
+    display: none;
+  }
+
+  &_disabled {
+    color: $color_comment;
+
+    &:hover {
+      cursor: not-allowed;
+    }
+  }
+
+  &_readonly {
+    // 特殊的只读
+    @include unit_selector_input();
+
+    input[disabled] {
+      &:hover {
+        cursor: not-allowed;
+      }
+    }
+
+    i:hover {
+      cursor: pointer;
+    }
+
+    &_select {
+      @include unit_selector_input();
+
+      .ant-select-selector {
+        .ant-select-selection-item {
+          color: $color_text;
+        }
+      }
+    }
+
+    &_unselect {
+      @include unit_selector_input();
+
+      .ant-select-selector {
+        .ant-select-selection-item {
+          color: $color_text;
+        }
+      }
+
+      .ant-input-group {
+        .ant-input {
+          &:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+
+  &_extra {
+    text-align: right;
+    padding-right: 0;
+  }
+}

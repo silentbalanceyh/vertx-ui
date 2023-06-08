@@ -1,0 +1,2112 @@
+{
+    "mock": false,
+    "data": {
+        "in.room.type": [
+            {
+                "key": "0191c605-45d4-4605-8a17-df7a6a966af3",
+                "active": true,
+                "name": "特殊房",
+                "code": "Special",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "5ae984ec-18bc-41a6-86ef-bde2782b09d4",
+                "active": true,
+                "name": "普通房",
+                "code": "Common",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "64129157-c004-466f-b068-a4389f00cea4",
+                "active": true,
+                "name": "免费房",
+                "code": "Free",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "9166a162-3d0a-4d86-80ac-9c7d83297137",
+                "active": true,
+                "name": "公寓房",
+                "code": "Apartment",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "b5d53e87-3d84-4360-a118-3d45884f481e",
+                "active": true,
+                "name": "自用房",
+                "code": "Self",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "f9022140-1cd3-4b7d-9542-17bf55a4f3b3",
+                "active": true,
+                "name": "钟点房",
+                "code": "Hourly",
+                "type": "in.room.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "code.source": [
+            {
+                "key": "052fa063-6d71-452e-a3ae-b790b5eba8e8",
+                "active": true,
+                "name": "国外公司",
+                "code": "Overseas",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "33d51074-a6ed-4c92-bc21-656c2b1c9dd6",
+                "active": true,
+                "name": "直接上门",
+                "code": "Direct",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "3bc0572f-90f6-45e3-bf38-ff9d7b89784c",
+                "active": true,
+                "name": "非营利组织",
+                "code": "Non-Profit",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "3d2ef0ed-b49a-4cd7-850b-7b181552b070",
+                "active": true,
+                "name": "事业单位",
+                "code": "Goverment",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "4b33e17a-3d6f-4677-89e6-aa9e1fcea0da",
+                "active": true,
+                "name": "回头客",
+                "code": "Customer",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "60a3907a-5070-41f8-84d3-fbae0de7fbd1",
+                "active": true,
+                "name": "企业单位",
+                "code": "Enterprise",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "965780f1-a051-49c7-b56d-c10fc2d0614b",
+                "active": true,
+                "name": "地区销售",
+                "code": "AreaSale",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "ed64663f-1cea-45cf-be5a-eefc1a37c5e1",
+                "active": true,
+                "name": "订房中心",
+                "code": "Center",
+                "type": "code.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            }
+        ],
+        "gender.type": [
+            {
+                "key": "056b13ee-b533-42fb-86f0-2f08e5643dd6",
+                "active": true,
+                "name": "保密",
+                "code": "Unknown",
+                "type": "gender.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "61cb3c0b-59f4-4bfb-b1d1-0a2370ebab16",
+                "active": true,
+                "name": "男",
+                "code": "Male",
+                "type": "gender.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "d1e8b2ad-cb7a-4cc2-af90-0ba646b9b121",
+                "active": true,
+                "name": "女",
+                "code": "Female",
+                "type": "gender.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "idc.type": [
+            {
+                "key": "0860de5a-85b0-4f80-a9be-e5faa471e00b",
+                "active": true,
+                "name": "港澳通行证",
+                "code": "HK.Macau",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "22067bbc-f431-4542-8606-e30c04400f3d",
+                "active": true,
+                "name": "户口薄",
+                "code": "Household",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 10
+            },
+            {
+                "key": "528837a0-ee78-48a1-ae47-2e9f163ceb9f",
+                "active": true,
+                "name": "护照",
+                "code": "Passport",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "5759a85c-1423-4c85-8d64-8f81a462e7f7",
+                "active": true,
+                "name": "二代身份证",
+                "code": "Second",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "69bf9147-a76a-491e-b07b-212bbef8dcb4",
+                "active": true,
+                "name": "其他",
+                "code": "Other",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 12
+            },
+            {
+                "key": "7cecfa3f-f015-4490-8abc-4db04c5a4ffd",
+                "active": true,
+                "name": "士兵证",
+                "code": "Soldier",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "992ba585-2196-40ba-96bb-4b3f7f569600",
+                "active": true,
+                "name": "回乡证",
+                "code": "Home.Return",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "b8402664-d2a4-4a75-9ab6-3061923acdd2",
+                "active": true,
+                "name": "驾驶证",
+                "code": "Driving.License",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "c77b3e36-0ea2-4cf5-901f-61b4a904c2c8",
+                "active": true,
+                "name": "警官证",
+                "code": "Police",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 11
+            },
+            {
+                "key": "e85e04f5-59ee-4f05-820b-11502874f8f2",
+                "active": true,
+                "name": "军官证",
+                "code": "Osifer",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "ebae97ba-3862-4011-b0d5-eca151f33bc5",
+                "active": true,
+                "name": "临时身份证",
+                "code": "Interim",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 9
+            },
+            {
+                "key": "f79fc15f-6923-4eed-8d03-c1dbd3360b79",
+                "active": true,
+                "name": "一代身份证",
+                "code": "First",
+                "type": "idc.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "contract.type": [
+            {
+                "key": "0a4797b9-115a-435d-bbbb-ff3af598c000",
+                "active": true,
+                "name": "旅行协议",
+                "code": "Travel",
+                "type": "contract.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "4afb4265-a8d1-4703-aff7-dff8637bd5d8",
+                "active": true,
+                "name": "公司协议",
+                "code": "Company",
+                "type": "contract.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "f78502a0-9f27-494f-b6d7-6ef270443ad6",
+                "active": true,
+                "name": "中介协议",
+                "code": "Agent",
+                "type": "contract.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "member.status": [
+            {
+                "key": "0ecbefa4-ddc7-4b28-a416-ecd03416241d",
+                "active": true,
+                "name": "已认证",
+                "code": "Verified",
+                "type": "member.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "4bd99867-50f1-419c-8d81-72bbf7afa440",
+                "active": true,
+                "name": "已锁定",
+                "code": "Locked",
+                "type": "member.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "7db5a2cd-985f-40b7-935d-a0f976a974ca",
+                "active": true,
+                "name": "未激活",
+                "code": "New",
+                "type": "member.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "e65caee3-9fd9-4ca9-8ca3-11655dfe788a",
+                "active": true,
+                "name": "已激活",
+                "code": "Active",
+                "type": "member.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "invoice.type": [
+            {
+                "key": "0f97db9c-5035-4ea0-9923-fbd66008c1bb",
+                "active": true,
+                "name": "充值发票",
+                "code": "Deposit",
+                "type": "invoice.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "dbc88059-5ba2-4997-818d-6a4ea11380de",
+                "active": true,
+                "name": "房费发票",
+                "code": "Room",
+                "type": "invoice.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "ddb45616-411d-4b5e-8f22-9c7f438a6683",
+                "active": true,
+                "name": "订单发票",
+                "code": "Order",
+                "type": "invoice.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "f79570b0-0010-4d3e-a2a4-4e56f6952637",
+                "active": true,
+                "name": "消费发票",
+                "code": "Payment",
+                "type": "invoice.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "room.op.status": [
+            {
+                "key": "103163c7-7daf-4e0c-9002-bd98e05aedb1",
+                "active": true,
+                "name": "预抵房",
+                "code": "Arriving",
+                "type": "room.op.status",
+                "config": "{\"icon\":\"green plane\",\"uniqueId\":\"5ed6a881-95e3-4dcc-a907-d70783979c9d\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "33e9114e-0a63-48b7-b5b2-4146b1f503ce",
+                "active": true,
+                "name": "预离房",
+                "code": "Leaving",
+                "type": "room.op.status",
+                "config": "{\"icon\":\"blue plane\",\"uniqueId\":\"67ea0c97-f1b1-4d6e-b69b-2e6345065f0a\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "9af032f8-b351-485f-b21c-cfc3d3596865",
+                "active": true,
+                "name": "空房间",
+                "code": "Empty",
+                "type": "room.op.status",
+                "config": "{\"icon\":\"green home\",\"uniqueId\":\"4c0461d9-8a2e-4694-aa33-bb3d2b710726\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "a7d8ccaa-2b59-44cf-8c8f-a8d075e0c209",
+                "active": true,
+                "name": "占用房",
+                "code": "Taken",
+                "type": "room.op.status",
+                "config": "{\"icon\":\"blue users\",\"uniqueId\":\"fcbb448b-56ab-41ed-b132-52834699bfdf\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "deposit.source": [
+            {
+                "key": "138b716e-8023-466f-8a84-5afd195561d5",
+                "active": true,
+                "name": "支付宝",
+                "code": "Alipay",
+                "type": "deposit.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "14fe44c8-46d2-478e-8a4a-b9be11b792e5",
+                "active": true,
+                "name": "赠送",
+                "code": "Present",
+                "type": "deposit.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "22026113-369d-4e75-a1e4-226df96c7d6e",
+                "active": true,
+                "name": "微信支付",
+                "code": "WeChat",
+                "type": "deposit.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "2d954a0b-5f8f-4086-bfa9-da6657adfa61",
+                "active": true,
+                "name": "刷卡",
+                "code": "Card",
+                "type": "deposit.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "4ffdc5de-7b66-40ba-97ac-56f12a18c4d6",
+                "active": true,
+                "name": "现金",
+                "code": "Cash",
+                "type": "deposit.source",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "code.market": [
+            {
+                "key": "178c2a88-2c02-4853-beb7-6c9ed72ca211",
+                "active": true,
+                "name": "内招",
+                "code": "Internal",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "358d2c84-f68e-4545-88e3-15e730ccbbbc",
+                "active": true,
+                "name": "携程网",
+                "code": "Ctrip",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "902ba9fe-901d-476a-b1a0-f4f0c18703b3",
+                "active": true,
+                "name": "旅行社",
+                "code": "TravelAgent",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "996eddf8-7ac3-4dee-a872-18cb435b8dbe",
+                "active": true,
+                "name": "前台散客",
+                "code": "Frant",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "a1973a07-bf08-47b6-8183-1d36b5161ef1",
+                "active": true,
+                "name": "去哪儿网",
+                "code": "Qunar",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "a5dc6c88-e316-472b-b929-9907aa496435",
+                "active": true,
+                "name": "自用",
+                "code": "Self",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "b7ec500f-83c0-4b2f-b4f1-816c181ebed5",
+                "active": true,
+                "name": "同程网",
+                "code": "LY",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "f6e3038e-780d-41c1-ac3e-de4f06c820e2",
+                "active": true,
+                "name": "艺龙网",
+                "code": "ELong",
+                "type": "code.market",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            }
+        ],
+        "order.status": [
+            {
+                "key": "18c1d27e-9abd-4dbb-9ffa-c4ad4353af12",
+                "active": true,
+                "name": "入住完成",
+                "code": "Registered",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "23a5ca7f-1d22-4259-a275-7539bcc87e3e",
+                "active": true,
+                "name": "不结账退房",
+                "code": "Pending",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "60081171-a2b0-4dbe-8b31-b831022a3c10",
+                "active": true,
+                "name": "正在排房",
+                "code": "Scheduling",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "705a2653-918d-414c-b3db-d3cd34d76460",
+                "active": true,
+                "name": "已预定",
+                "code": "Ordered",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "75638195-933d-49c1-bcbd-4b5e1528ac5d",
+                "active": true,
+                "name": "已结账退房",
+                "code": "Finished",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "99ed34c1-c362-47ed-b678-191089ccdf04",
+                "active": true,
+                "name": "部分入住",
+                "code": "Inoccuping",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "fd5fe9a4-eb37-45e7-9466-4b43e795dda4",
+                "active": true,
+                "name": "排房完成",
+                "code": "Scheduled",
+                "type": "order.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "code.pricecat": [
+            {
+                "key": "1b48d2ca-5826-4b64-bd1e-21dc1e39b855",
+                "active": true,
+                "name": "钟点房",
+                "code": "HourRoom",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "1c54b428-1b58-4a71-ab77-fc1e262acc35",
+                "active": true,
+                "name": "散客执行价",
+                "code": "Single",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "3b2ffac4-fc76-41d3-935d-ab43fde86061",
+                "active": true,
+                "name": "挂牌价",
+                "code": "Standard",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "5fd56c77-ead4-4899-aa8b-f54ec622588b",
+                "active": true,
+                "name": "协议单位价",
+                "code": "Cooperation",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "70b7c755-1ff5-47eb-bad2-94b98b7be714",
+                "active": true,
+                "name": "内招价",
+                "code": "Internal",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "936052be-7d46-41e8-a0dc-69b2db2fbe30",
+                "active": true,
+                "name": "旅行社协议价",
+                "code": "TravelAgent",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "dcfb3892-ead7-4cc9-9a1c-18f5a9625ca1",
+                "active": true,
+                "name": "会员价",
+                "code": "Member",
+                "type": "code.pricecat",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "employee.type": [
+            {
+                "key": "1bb2e471-3da3-417c-b541-5b4ddd5740c6",
+                "active": true,
+                "name": "试用员工",
+                "code": "CW",
+                "type": "employee.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "af12616c-f482-48d7-bfe0-0c523f89c5fe",
+                "active": true,
+                "name": "正式员工",
+                "code": "Regular",
+                "type": "employee.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "ed0a8a38-b1ff-4871-b5d1-a7faba8996c9",
+                "active": true,
+                "name": "第三方员工",
+                "code": "ThirdPart",
+                "type": "employee.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "bill.type": [
+            {
+                "key": "1ccc4817-dffd-4bc1-949b-896eb39301c6",
+                "active": true,
+                "name": "预授权",
+                "code": "PreAuth",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "3a80adcc-31e8-4dc8-b528-672ca510a200",
+                "active": true,
+                "name": "冲账账单",
+                "code": "Revert",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "49e4f4e4-c186-4325-8927-0f033288c115",
+                "active": true,
+                "name": "账单入账",
+                "code": "In",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "4c4e884d-f8f9-4615-9184-3ec7223c1b4b",
+                "active": true,
+                "name": "手工房费",
+                "code": "Manual",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 10
+            },
+            {
+                "key": "4dd743a3-256d-4715-8cc9-d9607e1b292f",
+                "active": true,
+                "name": "押金",
+                "code": "Pre",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "60d8d925-d36b-437a-9d29-5b6cb6b4490f",
+                "active": true,
+                "name": "商品入账",
+                "code": "GoodIn",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "6ae89c43-8b7e-47cf-85c9-9f4a4c615367",
+                "active": true,
+                "name": "赔偿入账",
+                "code": "PayIn",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "7870817c-60a9-407f-9374-329b52418ea2",
+                "active": true,
+                "name": "哑房账",
+                "code": "Mute",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 12
+            },
+            {
+                "key": "8a362ae3-db27-494d-877a-cca636f23c21",
+                "active": true,
+                "name": "被撤销",
+                "code": "Cancel",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 11
+            },
+            {
+                "key": "a70b2b20-b5a1-40bf-8d81-4a96080f4173",
+                "active": true,
+                "name": "拆账原始单",
+                "code": "DevideFrom",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "c1b900c8-82e6-40bd-8e8e-7f7a877fd005",
+                "active": true,
+                "name": "转账账单",
+                "code": "Transfer",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 9
+            },
+            {
+                "key": "f54c3e32-efa3-40a2-b592-5dec99d41ea0",
+                "active": true,
+                "name": "拆账账单",
+                "code": "DevideTo",
+                "type": "bill.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            }
+        ],
+        "card.type": [
+            {
+                "key": "1ff06ce7-3805-48f9-84a0-1c6886a3a3ed",
+                "active": true,
+                "name": "临时会员卡（未激活）",
+                "code": "Inactive",
+                "type": "card.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "39ba4607-42d4-4edf-b8c3-af53bfaf7978",
+                "active": true,
+                "name": "白金会员卡",
+                "code": "Best",
+                "type": "card.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "7db43b64-3b58-4f24-9f89-c0acfdd6b0e6",
+                "active": true,
+                "name": "正式会员卡（已激活）",
+                "code": "Using",
+                "type": "card.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "marital.type": [
+            {
+                "key": "216d96f5-320e-4525-8dac-59663e85380d",
+                "active": true,
+                "name": "未婚",
+                "code": "Single",
+                "type": "marital.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "d120d24b-9e00-4e3e-b047-4085342dce38",
+                "active": true,
+                "name": "已婚",
+                "code": "Married",
+                "type": "marital.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "code.money.payback": [
+            {
+                "key": "21fa27b2-6f33-436c-a544-1c77efa8aa08",
+                "active": true,
+                "name": "全天返半天返",
+                "code": "WholeAndHalf",
+                "type": "code.money.payback",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "38a1d3fe-fc0b-43eb-b1d2-455b1e1b7946",
+                "active": true,
+                "name": "全天不返半天不返",
+                "code": "BothNot",
+                "type": "code.money.payback",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "a1f3473d-a7e6-402a-a446-10d3d2fbb958",
+                "active": true,
+                "name": "全天返半天不返",
+                "code": "WholeOnly",
+                "type": "code.money.payback",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "c02a197a-f570-43a5-a711-9c3b46d4e284",
+                "active": true,
+                "name": "全天不返半天返",
+                "code": "HalfOnly",
+                "type": "code.money.payback",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "room.status": [
+            {
+                "key": "2628f08b-1fa8-4b2d-b69b-9ec6a57c5916",
+                "active": true,
+                "name": "自用房",
+                "code": "Self",
+                "type": "room.status",
+                "config": "{\"icon\":\"blue recycle\",\"uniqueId\":\"b86fc9dc-f23f-429d-a2d1-f6da6051ad12\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "32914612-a335-41dc-a47c-329f74ee92ad",
+                "active": true,
+                "name": "维修中",
+                "code": "Mind",
+                "type": "room.status",
+                "config": "{\"icon\":\"red configure\",\"uniqueId\":\"38290019-eb25-421e-be41-5475a3fc3e1d\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "33964cda-88fa-4230-9452-663e52849e5d",
+                "active": true,
+                "name": "免费房",
+                "code": "Free",
+                "type": "room.status",
+                "config": "{\"icon\":\"red recycle\",\"uniqueId\":\"84740019-a5b3-4b5a-ba5e-04613a589a27\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "65b64bda-545a-47b0-8566-739d4deb28f6",
+                "active": true,
+                "name": "停用房",
+                "code": "Disabled",
+                "type": "room.status",
+                "config": "{\"icon\":\"red dont circle\",\"uniqueId\":\"04d3a90f-8236-416e-88b6-f42337d21289\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "69be250f-9aa3-46c3-8733-c9b3960cd27a",
+                "active": true,
+                "name": "预留房",
+                "code": "Left",
+                "type": "room.status",
+                "config": "{\"icon\":\"green heart\",\"uniqueId\":\"4e58bb4c-7764-4fa7-8c55-4d6ba08d0a67\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "6b49eedc-a47c-4b0c-b893-f4853ec0333a",
+                "active": true,
+                "name": "长住房",
+                "code": "Dwell",
+                "type": "room.status",
+                "config": "{\"icon\":\"green recycle\",\"uniqueId\":\"cf7dbb5b-4462-4bb5-b68d-6cce7b5947b9\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "a0d10e73-7244-4228-bb95-6f05d798929e",
+                "active": true,
+                "name": "可操作",
+                "code": "Operation",
+                "type": "room.status",
+                "config": "{\"visible\":false,\"uniqueId\":\"46390bb1-f806-4fb9-84ab-381e8d1f1d91\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "code.group.status": [
+            {
+                "key": "2abb6095-62c0-448f-a4f4-6dbf97728690",
+                "active": true,
+                "name": "正在使用",
+                "code": "OnGoing",
+                "type": "code.group.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "37f59e3d-ac75-4dc3-9d1d-5cdf4fdc7a72",
+                "active": true,
+                "name": "新创建",
+                "code": "Created",
+                "type": "code.group.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "42bb97ce-88a7-4c82-9ba2-ab72a6e34375",
+                "active": true,
+                "name": "已过期",
+                "code": "Expired",
+                "type": "code.group.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "bill.status": [
+            {
+                "key": "2cebf6b9-3e10-4b18-b821-19ef2fb7e6da",
+                "active": true,
+                "name": "有效账单",
+                "code": "Valid",
+                "type": "bill.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "3bd12368-0215-43bc-af8e-9de7f50702ee",
+                "active": true,
+                "name": "历史账单",
+                "code": "History",
+                "type": "bill.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "b0ade574-d52c-4ccd-8823-fc8cf1514af6",
+                "active": true,
+                "name": "无效账单",
+                "code": "Invalid",
+                "type": "bill.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "preorder.method": [
+            {
+                "key": "2e1ce4de-5961-4c9b-b88e-7276d3e6d484",
+                "active": true,
+                "name": "APP预定",
+                "code": "App",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "38e00a4c-67e9-4f04-87c9-72c79dcd51e6",
+                "active": true,
+                "name": "OTA预定",
+                "code": "OTA",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "49196c43-83bc-4f97-a4b9-5d24765a42dd",
+                "active": true,
+                "name": "旅行社预定",
+                "code": "TravelAgent",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "583dc148-a4cb-4a0f-87b8-9b21e1641327",
+                "active": true,
+                "name": "网页预定",
+                "code": "Web",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "6cc0eaa8-93fb-4b44-a74a-a9bebd79d6a4",
+                "active": true,
+                "name": "微信预定",
+                "code": "WeChat",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "a0658db3-7af4-49f8-ae73-ceb2ce847695",
+                "active": true,
+                "name": "电话预定",
+                "code": "Phone",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "ee91f878-cc0b-4b7a-9622-05a4882e0b2e",
+                "active": true,
+                "name": "团队预定",
+                "code": "Team",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "f51ff3a4-eee4-4a30-8565-0afe7e693e6d",
+                "active": true,
+                "name": "上门预定",
+                "code": "Visit",
+                "type": "preorder.method",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "accounting.code": [
+            {
+                "key": "2f039cec-dc42-4314-9824-6d2471f6e378",
+                "active": true,
+                "name": "收款项",
+                "code": "Receivables",
+                "type": "accounting.code",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "c2cb0750-d295-456b-ad8c-fc617336029b",
+                "active": true,
+                "name": "费用项",
+                "code": "Expenses",
+                "type": "accounting.code",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "dfe20126-3538-4f54-b36e-f3a5b0f3f933",
+                "active": true,
+                "name": "代收代付",
+                "code": "Collection",
+                "type": "accounting.code",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "ee948d8a-ec4c-42cb-8942-6446db08ee1a",
+                "active": true,
+                "name": "折扣款待",
+                "code": "Discount",
+                "type": "accounting.code",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "code.commission.type": [
+            {
+                "key": "304cbee5-f7af-4418-85a4-5164ad3e0bfa",
+                "active": true,
+                "name": "比例",
+                "code": "Rate",
+                "type": "code.commission.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "65e7174b-45e9-4626-a716-eff76e8469a9",
+                "active": true,
+                "name": "定额",
+                "code": "Fixed",
+                "type": "code.commission.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "8f77d0f4-cfa0-4414-86ac-4db5a4c3108a",
+                "active": true,
+                "name": "底价",
+                "code": "Base",
+                "type": "code.commission.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "bill.category": [
+            {
+                "key": "31fe0219-c39d-4bfd-b0f8-4ad9cbbfe293",
+                "active": true,
+                "name": "结算单",
+                "code": "Settlement",
+                "type": "bill.category",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "81024683-9603-4c8c-94ff-814a6eaa795b",
+                "active": true,
+                "name": "入账单",
+                "code": "Pay",
+                "type": "bill.category",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "949aef70-0580-461f-ad74-d42a52392941",
+                "active": true,
+                "name": " S账单",
+                "code": "Red",
+                "type": "bill.category",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "accounting.type": [
+            {
+                "key": "32399bbe-2498-409f-b328-0586dfa347a6",
+                "active": true,
+                "name": "成本",
+                "code": "Cost",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "3e602849-5a97-460a-9754-e36bc12c39eb",
+                "active": true,
+                "name": "营业成本及税金",
+                "code": "CostTax",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 9
+            },
+            {
+                "key": "566cc2f8-1be8-4726-9059-da4e734d3eb0",
+                "active": true,
+                "name": "所有者权益",
+                "code": "OwnerEquity",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "5da111f0-dc49-4040-bacc-7599d0f05f2e",
+                "active": true,
+                "name": "营业收入",
+                "code": "OprRevenue",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 7
+            },
+            {
+                "key": "7ba27e6c-771b-4624-a4b0-26bf7c3f7a02",
+                "active": true,
+                "name": "非流动负债",
+                "code": "NonLiquidLiabilities",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "819048db-bca5-4b11-aba0-efe3dd81a0fa",
+                "active": true,
+                "name": "非流动资产",
+                "code": "NonLiquidAssets",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "8212d924-a6fe-460f-bead-c75bd29b36b4",
+                "active": true,
+                "name": "流动负债",
+                "code": "LiquidLiabilities",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "8adffadd-0899-47d4-a0a9-2f7770f7609b",
+                "active": true,
+                "name": "其他收益",
+                "code": "OtherEquity",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 8
+            },
+            {
+                "key": "8b056163-c227-4f37-bc58-5b36da97973e",
+                "active": true,
+                "name": "其他损失",
+                "code": "OtherExpense",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 10
+            },
+            {
+                "key": "93e7db01-831b-43b9-9772-ee638578e501",
+                "active": true,
+                "name": "所得税",
+                "code": "IncomeTax",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 12
+            },
+            {
+                "key": "96f00621-3553-43c9-a40e-884aaa98be0e",
+                "active": true,
+                "name": "期间费用",
+                "code": "Expense",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 11
+            },
+            {
+                "key": "ae9356e9-7642-46c2-a7ca-b207198680f8",
+                "active": true,
+                "name": "流动资产",
+                "code": "LiquidAssets",
+                "type": "accounting.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "pay.type": [
+            {
+                "key": "3ab2e771-cb3d-4057-977c-6f28f7d21705",
+                "active": true,
+                "name": "网上支付",
+                "code": "Net",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 6
+            },
+            {
+                "key": "44e9ecad-adb0-4b81-b063-3a909279fd31",
+                "active": true,
+                "name": "现金",
+                "code": "Cash",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "bb2fe284-469c-48e6-ab86-6001959e7cf7",
+                "active": true,
+                "name": "支票",
+                "code": "Cheque",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "d3a4c661-9065-4587-984b-8fc973dbbd5d",
+                "active": true,
+                "name": "借记卡",
+                "code": "Debit",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "d4ae12b3-69e8-4c62-ad9b-79287b6bc56b",
+                "active": true,
+                "name": "银行转账",
+                "code": "Transfer",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "ef69e13b-75f2-44aa-9b1d-0c1baed7c9fb",
+                "active": true,
+                "name": "信用卡",
+                "code": "Credit",
+                "type": "pay.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "shop.type": [
+            {
+                "key": "3e979e9e-6f93-4704-8695-d03bec4ba159",
+                "active": true,
+                "name": "加盟店",
+                "code": "Chain",
+                "type": "shop.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "9e02d691-e29c-4071-ba41-eef4592e5f06",
+                "active": true,
+                "name": "在线",
+                "code": "OnLine",
+                "type": "shop.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "b6ded04c-72b2-4549-a2ab-b5e8e4b4cc7e",
+                "active": true,
+                "name": "直营店",
+                "code": "Regular",
+                "type": "shop.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "partner.type": [
+            {
+                "key": "4b625d14-2a93-40f0-bfea-54467a00c277",
+                "active": true,
+                "name": "协议单位",
+                "code": "Corporation",
+                "type": "partner.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "9f0d8784-1915-4cd0-867d-8a693280643b",
+                "active": true,
+                "name": "挂账单位",
+                "code": "RunUp",
+                "type": "partner.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "bdfaf9ee-7e32-41f9-ad0e-8d0d9e57809f",
+                "active": true,
+                "name": "供应商",
+                "code": "Vendor",
+                "type": "partner.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "c33c5042-646e-4252-8f90-ce52f3e636b5",
+                "active": true,
+                "name": "旅行社",
+                "code": "TravelAgent",
+                "type": "partner.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "room.clean.status": [
+            {
+                "key": "50a7e12c-501b-41cc-8b1e-5d5186d11b85",
+                "active": true,
+                "name": "脏房",
+                "code": "Dirty",
+                "type": "room.clean.status",
+                "config": "{\"icon\":\"violet certificate\",\"uniqueId\":\"804bb6cd-d123-465c-91a4-ccb424e792c2\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "cefa7f2e-601a-42cf-8cb6-60541d2c44fe",
+                "active": true,
+                "name": "清洁未检查",
+                "code": "Unchecked",
+                "type": "room.clean.status",
+                "config": "{\"icon\":\"red toggle off\",\"uniqueId\":\"c1d4ebdc-bf56-4a1c-867d-9dbc4367b2f0\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "e3151eb1-98d4-46d0-9f43-aafe00a0f6b0",
+                "active": true,
+                "name": "清洁已检查",
+                "code": "Checked",
+                "type": "room.clean.status",
+                "config": "{\"icon\":\"green toggle on\",\"uniqueId\":\"44d909a6-1e77-4b6f-92b7-1545fc181115\"}",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "member.type": [
+            {
+                "key": "5226d099-cb68-46a8-a70a-13d404435e70",
+                "active": true,
+                "name": "注册会员",
+                "code": "Registered",
+                "type": "member.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "5abf5a9a-a1b9-402b-9726-a506f0f40f68",
+                "active": true,
+                "name": "钻石会员",
+                "code": "Diamond",
+                "type": "member.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 5
+            },
+            {
+                "key": "780f7a11-94ed-4b5d-b99c-9d7cff13de68",
+                "active": true,
+                "name": "黄金会员",
+                "code": "Gold",
+                "type": "member.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "9106c66a-b7a1-4485-8ffc-d0b978a395e8",
+                "active": true,
+                "name": "白金会员",
+                "code": "Platinum",
+                "type": "member.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 4
+            },
+            {
+                "key": "ec47dae9-9d64-498b-a6a4-ddda0167e451",
+                "active": true,
+                "name": "白银会员",
+                "code": "Silver",
+                "type": "member.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "menu.type": [
+            {
+                "key": "5a4889b2-b567-4040-b218-42b2be11c562",
+                "active": true,
+                "name": "餐厅",
+                "code": "Canteen",
+                "type": "menu.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "cca529de-f843-4a5d-8f6e-531de2d46ddf",
+                "active": true,
+                "name": "茶楼",
+                "code": "Teahouse",
+                "type": "menu.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "preorder.category": [
+            {
+                "key": "5b45b196-1942-4ae5-86e0-f158e71e3514",
+                "active": true,
+                "name": "团队预定",
+                "code": "Company",
+                "type": "preorder.category",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "5d495af1-7718-4a61-889d-6c40494d8fd5",
+                "active": true,
+                "name": "散客预定",
+                "code": "Personal",
+                "type": "preorder.category",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "deposit.type": [
+            {
+                "key": "7638c23b-e9ad-48bb-b229-4f899e6eeeb6",
+                "active": true,
+                "name": "赠送",
+                "code": "Present",
+                "type": "deposit.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "88533a50-4e81-4266-8a98-c6df40006130",
+                "active": true,
+                "name": "充值",
+                "code": "Direct",
+                "type": "deposit.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "pay.term.type": [
+            {
+                "key": "774da64a-ad29-48c7-98c8-c2cefcc6cb17",
+                "active": true,
+                "name": "付款码",
+                "code": "Pay",
+                "type": "pay.term.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "7bb29e91-b057-46c6-b7fc-1d5654e6a458",
+                "active": true,
+                "name": "费用码",
+                "code": "Expense",
+                "type": "pay.term.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "surety.type": [
+            {
+                "key": "7fc89406-c480-4c0f-a6d1-5745cbe036a3",
+                "active": true,
+                "name": "担保到店",
+                "code": "Partial",
+                "type": "surety.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "c6dcc087-2e1a-4d09-ae85-01fade0f4433",
+                "active": true,
+                "name": "全程担保",
+                "code": "All",
+                "type": "surety.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "f5c25a1a-d3f3-46c0-a131-5b4aea1c46f6",
+                "active": true,
+                "name": "无担保",
+                "code": "None",
+                "type": "surety.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "params.paymode": [
+            {
+                "key": "90793f81-49ec-4b85-bdcf-6b1c955df7d4",
+                "active": true,
+                "name": "权责制",
+                "code": "Accrual",
+                "type": "params.paymode",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "d0acebb0-4cc3-4427-bcf4-1591fb232dba",
+                "active": true,
+                "name": "上缴房费制",
+                "code": "TurnIn",
+                "type": "params.paymode",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "f3269e0d-4266-460f-9330-0706482b0d1b",
+                "active": true,
+                "name": "收付制",
+                "code": "ReceiptPay",
+                "type": "params.paymode",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "traveler.status": [
+            {
+                "key": "9ee5520a-27e4-44ea-945e-18cb7227c1b5",
+                "active": true,
+                "name": "在住宾客",
+                "code": "OnGoing",
+                "type": "traveler.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "db13bf61-332a-48dc-a8fc-ec8ab2f8684f",
+                "active": true,
+                "name": "历史宾客",
+                "code": "History",
+                "type": "traveler.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ],
+        "accmgmt.type": [
+            {
+                "key": "a03614de-9f80-4949-adf5-e8a7cd3471bd",
+                "active": true,
+                "name": "供应商账号",
+                "code": "Vendor",
+                "type": "accmgmt.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "be63236c-c517-4ac6-93a4-4529137a5e74",
+                "active": true,
+                "name": "协议单位账号",
+                "code": "Cooperation",
+                "type": "accmgmt.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "d62f7527-4e2a-40a0-b019-e3d1ceba3224",
+                "active": true,
+                "name": "酒店会员账号",
+                "code": "Member",
+                "type": "accmgmt.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            }
+        ],
+        "shift.type": [
+            {
+                "key": "a065c745-c163-487d-a17a-931e189c87a8",
+                "active": true,
+                "name": "餐厅",
+                "code": "Restaurant",
+                "type": "shift.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            },
+            {
+                "key": "c38ce0f0-071f-4656-8f0e-91186cc5c7d7",
+                "active": true,
+                "name": "客房",
+                "code": "Room",
+                "type": "shift.type",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            }
+        ],
+        "inoccup.status": [
+            {
+                "key": "bdddfa55-0673-4a51-a776-24e35f93b546",
+                "active": true,
+                "name": "已登记",
+                "code": "Registered",
+                "type": "inoccup.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 1
+            },
+            {
+                "key": "bf936124-d3cf-431b-896b-781ac40200ec",
+                "active": true,
+                "name": "延迟",
+                "code": "Delay",
+                "type": "inoccup.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 3
+            },
+            {
+                "key": "ff10356e-54e7-4406-8864-6b82718989e6",
+                "active": true,
+                "name": "已完成",
+                "code": "History",
+                "type": "inoccup.status",
+                "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+                "language": "cn",
+                "createTime": "2018-06-23T08:42:25",
+                "order": 2
+            }
+        ]
+    }
+}

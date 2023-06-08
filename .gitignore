@@ -1,0 +1,49 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/node_modules
+/.pnp
+.pnp.js
+
+# testing
+/coverage
+
+# production
+/build
+backup
+# misc
+.DS_Store
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.idea
+yarn.lock
+# 生成代码
+src/environment/routes.js
+src/environment/datum.js
+src/components/index.js
+src/container/index.js
+src/extension/components/index.js
+src/extension/cerebration/index.js
+.awcache
+.awcache/*
+.Archive/
+.markeditor
+.configs/
+document/doc-web-spec
+document/doc-web
+document/doc-web-extension
+# 开发文件
+# mv .env.tpl.development .env.development
+# PORT =
+# Z_ENDPOINT =
+# ignore .env.development
+.env.development
+run-ux-current.sh
+run-ux-all.sh
+dist

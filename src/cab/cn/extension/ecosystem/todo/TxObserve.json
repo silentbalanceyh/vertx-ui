@@ -1,0 +1,249 @@
+{
+    "_form": {
+        "columns": 3,
+        "assist": {
+            "resource.departments": {
+                "uri": "/api/dept/by/sigma",
+                "inherit": "resource.departments"
+            },
+            "resource.teams": {
+                "uri": "/api/team/by/sigma",
+                "inherit": "resource.teams"
+            },
+            "ajax.groups": {
+                "uri": "/api/group/by/sigma",
+                "inherit": true
+            },
+            "zero.close.code": {
+                "uri": "/api/type/tabulars/:type",
+                "magic": {
+                    "type": "FIX:zero.close.code"
+                }
+            }
+        },
+        "modal": {
+            "success": {
+                "saving": "您好，您已成功保存当前工单！申请单号 :serial。",
+                "open": "您好，您的流程处理已成功提交，单号 :serial，请等待。",
+                "cancel": "您好，您已经成功撤销了该申请！",
+                "close": "您好，您已经成功关闭了该工单！",
+                "transfer": "您好，该工单已经成功转发给了指定处理人！"
+            }
+        },
+        "segment": {
+            "TICKET_OPEN": "OPEN_VIEWER"
+        },
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.grouped": true,
+                    "optionItem.label": "流程操作",
+                    "optionJsx.extension": [
+                        "$opOpen,提交,SUBMIT,primary,,upload,closable=true,callback=open",
+                        "$opSaving,暂存,SUBMIT,,uc_pink,,closable=true,callback=saving",
+                        "$opTransfer,转单,SUBMIT,,,,closable=true,callback=transfer",
+                        "$opClose,关闭,SUBMIT,,,,closable=true,callback=close",
+                        "$opCancel,撤销,SUBMIT,,uc_red,,closable=true,callback=cancel",
+                        "$opReset,重置,RESET",
+                        "$opBack,返回,BACK"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "monitorContainer",
+                    "config": {
+                        "activeKey": "ticket",
+                        "size": "small",
+                        "extraConfig": {
+                            "format": "YYYY年MM月DD HH:mm"
+                        },
+                        "extraContent": [
+                            {
+                                "key": "openAppr",
+                                "type": "drawer",
+                                "button": {
+                                    "tooltip": "历史意见",
+                                    "icon": "fork"
+                                },
+                                "window": "历史意见,right,360,true,false",
+                                "componentFn": "monitorAppr"
+                            },
+                            {
+                                "key": "openFile",
+                                "type": "drawer",
+                                "button": {
+                                    "tooltip": "附件信息",
+                                    "icon": "link"
+                                },
+                                "window": "附件信息,right,480,true,false",
+                                "componentFn": "monitorFile"
+                            }
+                        ],
+                        "items": "主单信息,ticket;流程信息,bpmn;关联资产,linkageAsset;关联工单,linkageTicket;关联员工,linkageEmployee;关联合同,linkageContract;关联项目,linkageProject;关联客户,linkageCustomer",
+                        "pages": {
+                            "ticket": {
+                                "ui": [
+                                    [
+                                        "title=基本信息"
+                                    ],
+                                    [
+                                        "serial,单号,8,,,readOnly=true,inscribe=系统自动生成",
+                                        "phase,工单状态,8",
+                                        {
+                                            "metadata": "openAt,制单时间,8,,aiMagic",
+                                            "optionJsx.config.format": "YYYY年MM月DD日 HH:mm",
+                                            "moment": true
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "title,工单标题,24,,,placeholder=请填写您的工单标题",
+                                            "optionConfig.rules": [
+                                                "required,请填写工单标题，标题不可为空！"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "description,详细描述,24,,aiBraftEditor"
+                                    ],
+                                    "TICKET",
+                                    "TICKET_OPEN",
+                                    "ASSIGNMENT_TITLE",
+                                    "ASSIGNMENT",
+                                    "ASSIGNMENT_MORE",
+                                    [
+                                        "title=当前处理人/处理意见"
+                                    ],
+                                    "RUN_USER",
+                                    "RUN_TICKET",
+                                    "END_CLOSE",
+                                    [
+                                        "title=附件信息"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "linkageAttachment,文件上传,18,,aiFileBatch,text=上传",
+                                            "optionJsx.accept": "*/*",
+                                            "optionJsx.config.filekey": "key",
+                                            "optionJsx.config.limit": 10240,
+                                            "optionJsx.config.reduce": true,
+                                            "optionJsx.ajax.uri": "/api/file/upload/:identifier?category=:category&directory=:directory",
+                                            "optionJsx.ajax.download": "/api/file/download/:key",
+                                            "optionJsx.ajax.params": {
+                                                "identifier": "FIX:w.ticket",
+                                                "category": "PROP:workflow.code",
+                                                "directory": "/流程文档",
+                                                "formula": "/${catalogPath}/${serial}"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "bpmn": {
+                                "ui": [
+                                    [
+                                        "title=流程详情"
+                                    ],
+                                    [
+                                        "monitorBpmn,,24"
+                                    ],
+                                    [
+                                        "title=操作历史"
+                                    ],
+                                    [
+                                        "monitorHistory,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageTicket": {
+                                "ui": [
+                                    [
+                                        "title=设置关联工单"
+                                    ],
+                                    [
+                                        "linkageTicket,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageAsset": {
+                                "ui": [
+                                    [
+                                        "title=设置关联资产"
+                                    ],
+                                    [
+                                        "linkageAsset,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageEmployee": {
+                                "ui": [
+                                    [
+                                        "title=设置关联员工"
+                                    ],
+                                    [
+                                        "linkageEmployee,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageContract": {
+                                "ui": [
+                                    [
+                                        "title=设置关联合同"
+                                    ],
+                                    [
+                                        "linkageContract,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageProject": {
+                                "ui": [
+                                    [
+                                        "title=设置关联项目"
+                                    ],
+                                    [
+                                        "linkageProject,,24"
+                                    ]
+                                ]
+                            },
+                            "linkageCustomer": {
+                                "ui": [
+                                    [
+                                        "title=设置关联客户"
+                                    ],
+                                    [
+                                        "linkageCustomer,,24"
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "catalog",
+            "traceKey",
+            "traceId",
+            "type",
+            "owner",
+            "supervise",
+            "openBy",
+            "groupOpen",
+            "groupNext",
+            "closeBy",
+            "cancelBy",
+            "acceptedBy",
+            "toUser",
+            "toDept",
+            "toTeam",
+            "toGroup",
+            "toRole"
+        ]
+    }
+}

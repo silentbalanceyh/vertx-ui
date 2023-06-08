@@ -1,0 +1,31 @@
+@import "~style/uca/index.scss";
+
+.uc {
+  &_green {
+    @include unit_ant_button($color_op_green, $color_op_green_hover);
+  }
+
+  &_green_big {
+    @include unit_ant_button($color_op_green, $color_op_green_hover);
+    height: 36px;
+    width: 100px;
+    border-radius: 18px;
+    font-size: 16px;
+
+    i {
+      font-size: 16px;
+    }
+  }
+
+  &_red {
+    @include unit_ant_button($color_op_red, $color_op_red_hover);
+  }
+
+  &_pink {
+    @include unit_ant_button($color_op_pink, $color_op_pink_hover);
+  }
+
+  &_brown {
+    @include unit_ant_button($color_op_brown, $color_op_brown_hover);
+  }
+}

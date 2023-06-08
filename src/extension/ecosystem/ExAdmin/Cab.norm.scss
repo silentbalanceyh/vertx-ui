@@ -1,0 +1,19 @@
+.uex {
+  &_ExAdmin {
+    // layout = mix
+    .mix_menu {
+      .ant-menu-submenu {
+        .ant-menu-title-content {
+          .ant-pro-base-menu-inline-item-text {
+            margin-inline-start: 10px;
+          }
+        }
+      }
+    }
+
+    // 临时解决方案
+    .ant-pro-layout-apps-popover {
+      left: $uni_font * 0.5 !important;
+    }
+  }
+}

@@ -1,0 +1,88 @@
+{
+    "_form": {
+        "ui": [
+            [
+                {
+                    "metadata": "title,视图标题",
+                    "optionConfig.rules": [
+                        "required,请输入标题，标题不可为空！"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "name,视图名称,,,,normalize=upper:40",
+                    "optionConfig.rules": [
+                        "required,请输入名称，名称不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，名称重复！",
+                            "config": {
+                                "uri": "/api/view-p/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma",
+                                    "uri": "PROP:parameters.uri",
+                                    "method": "PROP:parameters.method",
+                                    "position": "PROP:myView.position"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "position,位置参数,,,,readOnly=true"
+            ],
+            [
+                {
+                    "metadata": "projection,视图包含列",
+                    "optionJsx.config": {
+                        "titles": [
+                            "备选属性",
+                            "已选属性"
+                        ]
+                    },
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "metadata": "criteria,视图查询条件",
+                    "optionJsx.config": {
+                    },
+                    "span": 24
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opViewPAdd,添加视图,SUBMIT,primary",
+                        "$opViewPSave,保存视图,SUBMIT,primary"
+                    ]
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "sigma",
+            "resourceId",
+            "language",
+            "active",
+            "owner",
+            "ownerType"
+        ],
+        "initial": {
+            "position": "PROP:myView.position"
+        }
+    },
+    "_modal": {
+        "success": {
+            "created": "您的个人视图 \":title\" 已经成功创建！",
+            "updated": "您的个人视图 \":title\" 已经更新成功！"
+        },
+        "error": {
+            "projection": "对不起，请选择该视图包含的列！"
+        }
+    }
+}

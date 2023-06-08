@@ -1,0 +1,48 @@
+@mixin unit_date_picker() {
+  .ant-picker-input {
+    // 此处直接限定
+    input {
+      background: white;
+    }
+  }
+}
+
+@mixin unit_tree_selected() {
+  .ant-tree-node-selected {
+    color: white;
+    background-color: $uni_color;
+  }
+}
+
+@mixin unit_selector_bg() {
+  .ux_readonly_select {
+    // 情况1：
+    .ant-input-group {
+      .ant-input-affix-wrapper-readonly:has(.ant-input[readonly]) {
+        background-color: white;
+
+        .ant-input[readonly] {
+          background-color: transparent;
+        }
+      }
+    }
+  }
+  // 情况2：
+  .ant-input-affix-wrapper-readonly:has(.ant-input[readonly]) {
+    background-color: white;
+
+    .ant-input[readonly] {
+      background-color: transparent;
+    }
+  }
+}
+
+@mixin unit_selector_input() {
+  .ant-input[readonly] {
+    background-color: transparent;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+}

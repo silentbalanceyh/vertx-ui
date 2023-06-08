@@ -1,0 +1,29 @@
+{
+    "_assist": {
+        "zero.integration": {
+            "uri": "/api/type/tabulars/:type",
+            "magic": {
+                "type": "FIX:zero.integration"
+            }
+        }
+    },
+    "_grid": {
+        "module": {
+            "NAME": "REST配置",
+            "MODULE": "i-integration",
+            "IDENTIFIER": "i.integration"
+        },
+        "query": {
+            "criteria": {
+                "sigma": "PROP:app.sigma",
+                "type": "restful",
+                "": "OPERATOR:AND"
+            }
+        },
+        "options": {
+            "tabs.title": "REST配置",
+            "tabs.container": true,
+            "search.advanced": false
+        }
+    }
+}

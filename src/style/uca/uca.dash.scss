@@ -1,0 +1,32 @@
+@import "element.empty";
+
+@mixin uca_dash_app($pHeight, $pIcon) {
+  height: $pHeight * 1.2;
+  @include unit_ant_empty($pHeight);
+  // .range 的修订
+  .range {
+    width: $uni_font * 6.5;
+    height: $pHeight;
+
+    .app_link {
+      width: 100%;
+      margin: $uni_font * 0.8;
+      text-align: center;
+      display: inline-block;
+
+      .app_icon {
+        margin: 0;
+        text-align: center;
+        width: $pIcon;
+        height: $pIcon;
+        padding: $uni_font * 0.5 $uni_font;
+        border-radius: $pIcon * 0.05;
+
+        svg {
+          width: $pIcon - $uni_font * 2;
+          height: $pIcon - $uni_font * 2;
+        }
+      }
+    }
+  }
+}

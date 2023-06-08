@@ -1,0 +1,43 @@
+.uqx {
+  &_QxCriteria {
+    min-height: $uni_font * 20;
+
+    .left {
+      padding-right: $uni_font * 0.4;
+    }
+
+    .form {
+      border-right: 1px dashed #8c8c8c;
+      padding: 0 6px;
+
+      .ant-row {
+        height: $uni_font * 3;
+        line-height: $uni_font * 3;
+      }
+
+      .right {
+        text-align: right;
+        font-weight: bold;
+      }
+
+      .dynamic {
+      }
+    }
+
+    .notice {
+      border-radius: $uni_radius;
+      min-height: 64px;
+      padding-right: $uni_font * 0.2;
+
+      .ant-tabs {
+        .ant-tabs-nav {
+          margin-bottom: $uni_font * 0.4;
+        }
+      }
+
+      .ant-alert {
+        margin-bottom: 3px;
+      }
+    }
+  }
+}

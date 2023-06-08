@@ -1,0 +1,16 @@
+.hm_login {
+  :global {
+    .hm_interval {
+      margin-top: 0;
+      margin-bottom: $uni_font * 0.9;
+    }
+    .hm_row_left{
+      margin-bottom: $uni_font * 0.9;
+      padding-right: $uni_font * 0.4;
+    }
+    .hm_row_right{
+      margin-bottom: $uni_font * 0.9;
+      padding-left: $uni_font * 0.4;
+    }
+  }
+}

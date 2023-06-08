@@ -1,0 +1,53 @@
+@import "./common";
+
+.designer {
+    &-tool {
+        width: 100%;
+        display: inline-block;
+        margin-bottom: 3px;
+        padding-bottom: 8px;
+        border-bottom: solid 1px #e8e8e8;
+        .command;
+    }
+
+    &-control {
+        .ant-collapse-header {
+            padding-top: 4px !important;
+            padding-bottom: 4px !important;
+        }
+
+        .ant-collapse-content-box {
+            padding: 0 !important;
+        }
+
+        .web-items {
+            border-right: none;
+            overflow: auto;
+
+            img {
+                width: 28px;
+                height: auto;
+            }
+
+            .draggable-item {
+                margin-top: 0;
+                margin-bottom: 0;
+                height: 32px;
+                line-height: 32px;
+                padding: 0 8px;
+
+                &:hover {
+                    cursor: move;
+                }
+
+                &-disabled {
+                    color: @font-disabled;
+
+                    &:hover {
+                        cursor: not-allowed;
+                    }
+                }
+            }
+        }
+    }
+}

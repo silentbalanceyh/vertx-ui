@@ -1,0 +1,14 @@
+{
+    "_page": {
+        "title": "模块配置",
+        "className": "ux_card_form",
+        "icon": true
+    },
+    "_panel": {
+        "zero": "Zero可配置模块",
+        "extension": "第三方模块"
+    },
+    "_action": {
+        "configure": "配置"
+    }
+}

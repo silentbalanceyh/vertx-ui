@@ -1,0 +1,34 @@
+.uqx {
+  &_QxTag {
+
+    .filter {
+      &-title {
+        text-align: right;
+        font-weight: bold;
+        line-height: 36px;
+      }
+
+      &-label {
+        line-height: 36px;
+      }
+
+      &-extra {
+        line-height: 36px;
+        text-align: right;
+
+        i {
+          font-size: 16px;
+          margin-right: 6px;
+        }
+
+        &-qr {
+          float: right;
+
+          .ant-tag {
+            margin-right: 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+    "mock": false,
+    "data": {
+        "key": "78fce5a2-17f3-4dac-a75c-7e751595015c",
+        "active": true,
+        "auth": "OAuth",
+        "backUp": "app/htl/bak",
+        "contact": "silentbalanceyh@126.com",
+        "currency": "CNY",
+        "dateFormat": "yyyy年MM月dd日 HH:mm",
+        "encoding": "UTF-8",
+        "icp": "ICP19851017",
+        "logo": "/img/hotel/logo/lingdin.png",
+        "owner": "Lang Yu",
+        "path": "htl",
+        "renewal": "k9jXXhy0t5SDDiQ5",
+        "title": "零点酒店智慧管理平台",
+        "version": "0.9.2",
+        "attachSize": 4096,
+        "createTime": "2018-06-23T08:42:24",
+        "sigma": "ENhwBAJPZuSgIAE5EDakR6yrIQbOoOPq",
+        "name": "vie.app.htl",
+        "type": "WEB",
+        "language": "cn"
+    }
+}

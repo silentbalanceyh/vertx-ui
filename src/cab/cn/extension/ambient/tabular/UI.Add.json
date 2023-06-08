@@ -1,0 +1,81 @@
+{
+    "_form": {
+        "window": 0.15,
+        "ui": [
+            [
+                "title=基本信息"
+            ],
+            [
+                {
+                    "metadata": "name,名称,14,,,placeholder=请输入名称,normalize=text:20",
+                    "optionConfig.rules": [
+                        "required,请输入名称"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "code,编码,14,,,placeholder=请填写唯一编码,normalize=upper:20",
+                    "optionConfig.rules": [
+                        "required,请输入编码",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，该编码已在系统中存在！",
+                            "config": {
+                                "uri": "/api/x-tabular/existing",
+                                "method": "POST",
+                                "params": {
+                                    "type": "ROUTE:type"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "active,启用,14,,aiCheckbox",
+                    "optionConfig": {
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 4,
+                    "optionItem.style": {
+                        "width": "99%"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opAdd,添加,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "initial": {
+            "active": "BOOL:true",
+            "appId": "PROP:app.key"
+        },
+        "hidden": [
+            "type",
+            "appId"
+        ],
+        "op": {
+            "$opAdd": "act.tabular.add"
+        }
+    },
+    "_modal": {
+        "success": {
+            "added": "您好，您的信息添加成功！"
+        }
+    }
+}

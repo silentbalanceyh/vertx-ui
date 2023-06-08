@@ -1,0 +1,124 @@
+@import "../global-connect";
+
+.web-file-batch {
+  padding-top: 3px;
+
+  .op-bar {
+    width: 100%;
+    line-height: 36px;
+
+    .action {
+      margin-right: 12px;
+
+      button {
+        width: 35px;
+      }
+
+      button[disabled] {
+        top: 1px; // 修正视觉问题
+      }
+    }
+  }
+
+  .operation {
+    height: 104px;
+    width: 104px;
+
+    display: block;
+    float: left;
+    margin-right: 4px;
+
+    .op {
+      &-icon {
+        font-size: 48px;
+        margin-bottom: 6px;
+        color: @primary-color;
+      }
+
+      &-label {
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+    }
+  }
+
+  .ant-upload-list-item {
+    float: left;
+  }
+
+
+  .ant-upload-list-picture-card {
+    padding-left: 108px; // 修正左边按钮
+  }
+
+  .ant-upload-list-text {
+    padding-left: 108px; // 修正左边按钮位置
+  }
+
+
+  .range {
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+  }
+
+  .ant-upload-list-text {
+
+    .ant-upload-list-item {
+      min-width: 600px;
+      line-height: 24px;
+      min-height: 24px;
+
+      &-card-actions {
+        margin-left: 80px;
+        min-width: 32px;
+        text-align: center;
+
+        a {
+          .range;
+          padding-top: 1px;
+          padding-left: 2px;
+          display: block;
+          text-align: center;
+
+          i {
+            svg {
+              width: 18px;
+              height: 18px;
+            }
+          }
+
+        }
+      }
+
+      &-name {
+        height: 24px;
+        line-height: 22px;
+
+        &:hover {
+          text-decoration: underline;
+          cursor: pointer;
+        }
+      }
+
+      &-info {
+        height: 24px;
+        line-height: 22px;
+      }
+    }
+  }
+
+  &-dialog {
+    .ant-upload-list-text {
+      .ant-upload-list-item {
+        min-width: 480px !important;
+      }
+    }
+  }
+
+  .ant-upload-list-picture-card-container {
+    margin-right: 4px;
+    margin-bottom: 3px;
+  }
+}

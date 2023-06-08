@@ -1,0 +1,6 @@
+@mixin attr_height_title($pHeight, $pUnit) {
+  min-height: $pHeight;
+  line-height: $pHeight;
+  margin-bottom: $pUnit;
+  margin-top: $pUnit;
+}

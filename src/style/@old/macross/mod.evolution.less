@@ -1,0 +1,320 @@
+@import (less) "mod.enhance.less";
+
+.ix-web {
+  // 按钮生成 .ix-web.ix-button
+  .ix-button(@flag, @color, @color-active) {
+    .ux-@{flag} {
+      background-color: @color;
+      border: solid 1px @color;
+      color: white;
+
+      &:hover, &:active, &:focus {
+        border: solid 1px @color-active;
+        background-color: @color-active;
+        color: white;
+      }
+    }
+    .iux-@{flag} {
+      background-color: white;
+      border: solid 1px @color;
+      color: @color;
+
+      &:hover, &:active, &:focus {
+        border: solid 1px @color-active;
+        background-color: @color-active;
+        color: white;
+      }
+    }
+  }
+  // 列生成 .ix-web.ix-column.width / min-width
+  .ix-column {
+    .width(@max, @i: 20) when (@i =< @max) {
+      .ux-column {
+        &-@{i} {
+          text-align: center;
+          padding: 3px 12px !important;
+          width: unit(@i, px) !important;
+        }
+      }
+      .ix-web.ix-column.width(@max, @i + 20)
+    }
+    .min-width(@max, @i:20) when (@i =< @max) {
+      .ux-column-min {
+        &-@{i} {
+          min-width: unit(@i, px) !important;
+        }
+      }
+      .ix-web.ix-column.min-width(@max, @i + 20)
+    }
+  }
+
+  // 操作生成
+  .ix-op {
+    .width(@max, @i: 20) when (@i =< @max) {
+      .ux-op {
+        &-@{i} {
+          text-align: center;
+          padding: 3px 12px !important;
+          width: unit(@i, px) !important;
+        }
+      }
+      .ix-web.ix-op.width(@max, @i + 20)
+    }
+  }
+
+  // 序号生成
+  .ix-serial {
+    .width(@max, @i: 20) when (@i =< @max) {
+      .ux-serial {
+        &-@{i} {
+          text-align: center;
+          padding: 3px 12px !important;
+          width: unit(@i, px) !important;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          max-width: unit(@i, px);
+        }
+      }
+      .ix-web.ix-serial.width(@max, @i + 20)
+    }
+  }
+
+  // 表单生成
+  .ix-form {
+    .width(@max, @i: 20) when (@i =< @max) {
+      .ux-form {
+        &-@{i} {
+          padding-bottom: unit(@i, px) !important;
+        }
+      }
+      .ix-web.ix-form.width(@max, @i + 20)
+    }
+  }
+}
+
+// -------- 组件 -----------------------
+.ix-tpl {
+  // 头部
+  .ix-header(@height,@padding, @action, @notify, @avatar, @sider) {
+    height: unit((@height * 1), px);
+    padding: 0 unit((@height / 4), px) 0 0;
+
+    i.trigger {
+      .ix-font.x-line(@height);
+      .ix-box.in(@padding);
+    }
+
+
+    .tips {
+      float: right;
+      line-height: unit((@height - 2), px);
+    }
+
+    .right {
+      // 右上角图标修正高度
+      line-height: unit(@height, px) !important;
+
+      .anticon {
+        .ix-box.in(@action);
+        float: left;
+      }
+
+      .notify-notice-button {
+        padding: @notify;
+      }
+
+      .account {
+        .ix-font.line(@height);
+
+        .avatar {
+          .ix-box.out(@avatar);
+        }
+      }
+    }
+  }
+  // 侧边栏
+  .ix-sider(@width, @height, @left, @title) {
+
+    // .ix-width.x-fixed(@width);
+    .ix-fixed.x-w(@width);
+    &-expand {
+      // .ix-width.x-fixed(@left);
+      .ix-fixed.x-w(@left);
+    }
+    .ant-menu {
+
+      .ant-menu-submenu-title {
+        // 菜单内边距修改
+        .ix-box.x-in(0 unit(@title, px))
+      }
+    }
+    .logo {
+      .ix-font.line(@height);
+
+      img {
+        height: unit(@height, px);
+      }
+
+      h1 {
+        line-height: unit((@height - 8), px);
+      }
+    }
+  }
+  // 左菜单
+  .ix-menu(@indent, @indent2, @indent3,@width) {
+
+    .ant-menu-inline-collapsed {
+      width: @width !important;
+    }
+
+    .ux-menu {
+      // 叶节点优先
+      .ant-menu-item {
+        padding-left: @indent !important;
+      }
+
+      // 分支节点
+      .ux-submenu1 {
+        .ant-menu-submenu-title {
+          padding-left: @indent !important;
+        }
+
+        .ant-menu-item {
+          padding-left: @indent2 !important;
+        }
+
+        .ant-menu-submenu {
+          .ant-menu-submenu-title {
+            padding-left: @indent2 !important;
+          }
+        }
+      }
+
+      .ux-submenu2 {
+        .ant-menu-submenu-title {
+          padding-left: @indent3 !important;
+        }
+
+        .ant-menu-item {
+          padding-left: @indent3 !important;
+        }
+      }
+
+      .ant-menu-item, .ant-menu-submenu-title {
+        margin: 0 !important;
+      }
+    }
+  }
+  // Card
+  .ix-card(@card,@head,@title,@height) {
+    margin: @card @card 0;
+    .ant-card-body {
+      padding: @card;
+    }
+    .ant-card-head {
+      padding: 0 @head !important;
+      height: @height !important;
+
+      .ant-card-head-wrapper {
+        height: @height !important;
+      }
+
+      .ant-card-head-title {
+        padding: @title 0;
+      }
+    }
+  }
+  // Tab
+  .ix-tab(@bar) {
+    &-container {
+      margin: 0;
+      padding-right: @bar / 2;
+      padding-top: 8px;
+    }
+    .ant-tabs-bar {
+      margin: 0 0 @bar 0 !important;
+    }
+  }
+  // Table
+  .ix-table(@cell, @empty) {
+    // 普通 <Table/>
+    table {
+      thead > tr > th {
+        padding-top: @cell;
+        padding-bottom: @cell;
+      }
+
+      tbody > tr > td {
+        padding-top: @cell;
+        padding-bottom: @cell;
+      }
+    }
+    .ant-empty {
+      // margin: @empty 0 !important;
+    }
+  }
+  // Form
+  .ix-form( @rowHeight, @rowMargin) {
+    // Fix: V4界面异常
+    padding-top: @rowMargin;
+    .ant-row {
+      margin-bottom: @rowMargin;
+      min-height: @rowHeight;
+    }
+    .each-field(@rowHeight, @rowMargin, @max, @i:1) when (@i =< @max) {
+      .ant-col-@{i} {
+
+        .ant-form-item {
+          margin-bottom: 0 !important;
+
+          .has-success, .has-error {
+            width: 100%;
+          }
+
+          .has-success {
+            .ant-form-item-children {
+              .ant-select-arrow {
+                right: 11px;
+              }
+
+              .ant-form-item-children-icon {
+                display: none;
+              }
+            }
+          }
+        }
+      }
+      .each-field(@rowHeight, @rowMargin, @max, @i + 1)
+    }
+    // 每一行
+    .each-field(@rowHeight, @rowMargin, 24);
+  }
+  // Dialog
+  .ix-dialog(@bodyPadding, @headerPadding, @footerPadding, @close) {
+    .ant-modal {
+      &-body {
+        padding: @bodyPadding !important;
+      }
+
+      &-header {
+        padding: @headerPadding !important;
+      }
+
+      &-close {
+        width: @close !important;
+        height: @close !important;
+
+        &-x {
+          width: @close !important;
+          height: @close !important;
+          line-height: @close !important;
+        }
+      }
+
+      &-footer {
+        padding: @footerPadding !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,140 @@
+{
+    "_form": {
+        "className": "ix-form-segment",
+        "ui": [
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "ruleContainer",
+                    "config": {
+                        "activeKey": "tabRecord",
+                        "tabPosition": "right",
+                        "defaultActiveKey": "tabRecord",
+                        "className": "ix-rule",
+                        "items": "推送规则,tabRecord;集成规则,tabIntegration;优先级规则,tabPriority;强连接,tabStrong;弱连接,tabWeak;说明,tabComment;",
+                        "pages": {
+                            "tabRecord": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "record",
+                                            "optionJsx.config": {
+                                                "datum": "source=model.attributes,value=key,label=name",
+                                                "format": "ARRAY"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabIntegration": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "integration",
+                                            "optionJsx.config": {
+                                                "datum": "source=model.attributes,value=key,label=name",
+                                                "format": "ARRAY"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabPriority": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "priority",
+                                            "optionJsx.config": {
+                                                "datum": "source=model.attributes,value=key,label=name",
+                                                "format": "ARRAY",
+                                                "sort": true
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabStrong": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "strong",
+                                            "optionJsx.config": {
+                                                "datum": "source=model.attributes,value=key,label=name",
+                                                "format": "ARRAY",
+                                                "sourceEmpty": {
+                                                    "type": "warning",
+                                                    "message": "强连接",
+                                                    "hideIcon": true,
+                                                    "description": [
+                                                        "请先设置优先级规则！",
+                                                        "强连接规则和弱连接规则互斥！",
+                                                        "请注意多字段格式下的字段选择！"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabWeak": {
+                                "window": 1.1,
+                                "columns": 1,
+                                "ui": [
+                                    [
+                                        {
+                                            "metadata": "weak",
+                                            "optionJsx.config": {
+                                                "datum": "source=model.attributes,value=key,label=name",
+                                                "format": "ARRAY",
+                                                "sourceEmpty": {
+                                                    "type": "warning",
+                                                    "message": "弱连接",
+                                                    "hideIcon": true,
+                                                    "description": [
+                                                        "请先设置优先级规则！",
+                                                        "强连接规则和弱连接规则互斥！",
+                                                        "请注意多字段格式下的字段选择！"
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabComment": {
+                                "window": 1.1,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "标识规则辅助说明",
+                                            "config": {
+                                                "message": "关于标识规则",
+                                                "description": [
+                                                    "`推送规则`（Out）为在数据记录满足时推送到第三方的专用规则。",
+                                                    "`拉取规则`（In）为数据记录从第三方集成读取数据的基本规则。",
+                                                    "`优先级`（Priority）为检查唯一记录的字段顺序。",
+                                                    "`连接规则`（强连接/弱连接）用于标识规则之间执行相互更新。"
+                                                ],
+                                                "type": "info"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

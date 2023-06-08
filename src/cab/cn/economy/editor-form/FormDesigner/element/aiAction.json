@@ -1,0 +1,424 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=属性设置器"
+            ],
+            [
+                {
+                    "metadata": "render,组件类型,20",
+                    "optionItem": {
+                        "style": {
+                            "width": "100%"
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    }
+                },
+                {
+                    "metadata": "$button",
+                    "optionItem": {
+                        "style": {
+                            "float": "right"
+                        }
+                    },
+                    "optionJsx.extension": [
+                        "$opSaveSetting,保存,SUBMIT,,uc_green_big,save"
+                    ],
+                    "span": 4
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "fieldBasic",
+                    "config": {
+                        "activeKey": "tabSetting",
+                        "defaultActiveKey": "tabSetting",
+                        "className": "tool-setting",
+                        "tabPosition": "right",
+                        "items": "属性配置表,tabSetting;第二提交项,tabSecondary;",
+                        "pages": {
+                            "tabSetting": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "initial": {
+                                    "field": "FIX:$button"
+                                },
+                                "ui": [
+                                    [
+                                        "title=常用属性"
+                                    ],
+                                    [
+                                        "label,标签/标题,,,,placeholder=<标题>,readOnly=true",
+                                        {
+                                            "metadata": "field,字段名,,,aiSelect,readOnly=true,placeholder=$button",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "isHidden,是否隐藏,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "隐藏按钮",
+                                                "unCheckedChildren": "显示按钮"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "actionMode,提交模式,16,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "CLIENT,客户端模式",
+                                                "SERVER,服务端模式"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientReset,开启重置,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "显示重置",
+                                                "unCheckedChildren": "隐藏重置"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=静态配置（纯前端）"
+                                    ],
+                                    [
+                                        "clientId,按钮ID,,,,addonBefore=$",
+                                        "clientText,按钮文字"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientEvent,提交模式,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.config.items": [
+                                                "SUBMIT,提交",
+                                                "RESET,重置",
+                                                "KEY,主键提交",
+                                                "SUBMIT_REDUX,外置提交（Redux）",
+                                                "SUBMIT_DIALOG,窗口提交",
+                                                "SAVE_ROW,行保存"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientType,按钮类型,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "DEFAULT,默认按钮",
+                                                "PRIMARY,标准按钮",
+                                                "DANGER,提醒按钮"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "clientColor,按钮风格,24,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "clientType": [
+                                                    "DEFAULT"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "uc_red,红",
+                                                "uc_green,绿",
+                                                "uc_pink,桃红",
+                                                "uc_brown,棕色"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "title=主提交配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "serverEvent,事件类型,,,aiSelect",
+                                            "optionJsx.config.items": [
+                                                "event.add,添加",
+                                                "event.save,保存",
+                                                "event.delete,删除",
+                                                "event.filter,过滤"
+                                            ],
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "serverCode,权限码",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "serverUri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "serverSource,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "serverUri"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=主提交回调配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackUi,回调组件,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "DIALOG,窗口回调",
+                                                "MESSAGE,消息回调"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "callbackType,回调类型,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "success,成功回调",
+                                                "failure,失败回调"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackContent,提示消息,24",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callbackTitle,窗口标题",
+                                            "optionJsx.depend.enabled": {
+                                                "callbackUi": [
+                                                    "DIALOG"
+                                                ],
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabSecondary": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "说明",
+                                            "config": {
+                                                "description": [
+                                                    "目前版本的表单仅支持两个按钮提交（不包含重置）。",
+                                                    "`主提交`一般包含添加、保存等主体操作。",
+                                                    "`第二提交`一般是辅助操作，如检测、审批等。"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=第二提交项静态配置（纯前端）"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "client2Id,按钮ID,,,,addonBefore=$"
+                                        },
+                                        {
+                                            "metadata": "client2Text,按钮文字"
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "client2Event,提交模式,24,,aiRadio",
+                                            "optionJsx.className": "radio-input-3",
+                                            "optionJsx.config.items": [
+                                                "SUBMIT,提交",
+                                                "RESET,重置",
+                                                "KEY,主键提交",
+                                                "SUBMIT_REDUX,外置提交（Redux）",
+                                                "SUBMIT_DIALOG,窗口提交",
+                                                "SAVE_ROW,行保存"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "client2Type,按钮类型,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "DEFAULT,默认按钮",
+                                                "PRIMARY,标准按钮",
+                                                "DANGER,提醒按钮"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "client2Color,按钮风格,24,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "clientType": [
+                                                    "DEFAULT"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "uc_red,红",
+                                                "uc_green,绿",
+                                                "uc_pink,桃红",
+                                                "uc_brown,棕色"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        "title=第二提交项配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "server2Event,事件类型,,,aiSelect",
+                                            "optionJsx.config.items": [
+                                                "event.add,添加",
+                                                "event.save,保存",
+                                                "event.delete,删除",
+                                                "event.filter,过滤"
+                                            ],
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "server2Code,权限码",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "server2Uri,远程路径,16,,,placeholder=（可手工录入，或使用API选择器选择）",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "server2Source,,8",
+                                            "optionJsx.config.linker": {
+                                                "uri": "server2Uri"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=第二提交项回调配置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callback2Ui,回调组件,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "DIALOG,窗口回调",
+                                                "MESSAGE,消息回调"
+                                            ]
+                                        },
+                                        {
+                                            "metadata": "callback2Type,回调类型,12,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            },
+                                            "optionJsx.config.items": [
+                                                "success,成功回调",
+                                                "failure,失败回调"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callback2Content,提示消息,24",
+                                            "optionJsx.depend.enabled": {
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "callback2Title,窗口标题",
+                                            "optionJsx.depend.enabled": {
+                                                "callbackUi": [
+                                                    "DIALOG"
+                                                ],
+                                                "actionMode": [
+                                                    "SERVER"
+                                                ]
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

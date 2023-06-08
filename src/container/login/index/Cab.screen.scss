@@ -1,0 +1,11 @@
+@import "~style/index.scss";
+
+@mixin screen_hm_header {
+  height: 120px;
+  @media screen and (min-width: $screen-xl) {
+    height: 180px;
+  }
+  @media screen and (min-width: $screen-xxl) {
+    height: 230px;
+  }
+}

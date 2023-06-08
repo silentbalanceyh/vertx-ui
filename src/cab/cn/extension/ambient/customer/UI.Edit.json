@@ -1,0 +1,121 @@
+{
+    "_formUp": {
+        "ui": [
+            [
+                {
+                    "metadata": "$button",
+                    "hidden": true,
+                    "optionJsx.extension": [
+                        "$opSave,保存,SUBMIT,primary",
+                        "$opDelete,删除,KEY",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ],
+            [
+                "title=基本信息"
+            ],
+            [
+                "title,标题,16,,,placeholder=如何称呼？,normalize=text:128"
+            ],
+            [
+                {
+                    "metadata": "name,名称,,,,placeholder=请填写名称,normalize=text:128",
+                    "optionConfig.rules": [
+                        "required,请输入客户名称"
+                    ]
+                },
+                "code,编码,,,,readOnly=true,inscribe=（系统自动生成）"
+            ],
+            [
+                {
+                    "metadata": "taxCode,税号,,,,placeholder=由15/18/20位字符组成,maxLength=32",
+                    "optionConfig.rules": [
+                        {
+                            "min": 15,
+                            "pattern": "^[A-Za-z0-9]{15}$|^[A-Za-z0-9]{18}$|^[A-Za-z0-9]{20}$",
+                            "message": "格式错误,请正确输入税号！"
+                        },
+                        {
+                            "validator": "existing",
+                            "message": "对不起，税号重复！",
+                            "config": {
+                                "uri": "/api/customer/existing",
+                                "method": "POST",
+                                "params": {
+                                    "sigma": "PROP:app.sigma"
+                                }
+                            }
+                        }
+                    ]
+                },
+                "taxTitle,开票抬头,,,,placeholder=开发票专用标题,maxLength=32"
+            ]
+        ]
+    },
+    "_form": {
+        "window": 1,
+        "columns": 3,
+        "ui": [
+            [
+                "title=公司信息"
+            ],
+            [
+                {
+                    "metadata": "email,企业信箱,,,,placeholder=格式：xxx@xxx.xx,maxLength=255",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "\\w[-\\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\\.)+[A-Za-z]{2,14}",
+                            "message": "格式错误,请正确输入邮件地址！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "phone,座机,,,,placeholder=格式：000-00000000,maxLength=20",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入座机号！"
+                        }
+                    ]
+                },
+                {
+                    "metadata": "fax,传真,,,,placeholder=格式：000-00000000,maxLength=20",
+                    "optionConfig.rules": [
+                        {
+                            "pattern": "(^(\\d{3,4}-)?\\d{7,8}$)",
+                            "message": "格式错误,请正确输入传真号！"
+                        }
+                    ]
+                }
+            ],
+            [
+                "homepage,客户主页,16,,,addonBefore=http://,placeholder=合法在线地址格式,maxLength=128"
+            ],
+            [
+                "address,地址,16,,,maxLength=512"
+            ],
+            [
+                {
+                    "metadata": "comment,备注,24,,aiTextArea,maxLength=1024",
+                    "optionJsx.rows": 3
+                }
+            ]
+        ],
+        "hidden": [
+            "key",
+            "type"
+        ],
+        "op": {
+            "$opSave": "act.customer.save",
+            "$opDelete": "act.customer.delete"
+        }
+    },
+    "_modal": {
+        "success": {
+            "saved": "您好，客户信息编辑成功！",
+            "removed": "当前客户信息已删除成功！"
+        }
+    }
+}

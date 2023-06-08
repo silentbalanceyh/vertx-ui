@@ -1,0 +1,93 @@
+{
+    "_form": {
+        "columns": 1,
+        "modal": {
+            "success": {
+                "added": "您好，您的公告信息已经发布成功！"
+            }
+        },
+        "op": {
+            "$opSave": "act.notice.add"
+        },
+        "ui": [
+            [
+                "title=公告发布"
+            ],
+            [
+                {
+                    "metadata": "name,公告标题,18,,,placeholder=请输入唯一标题,normalize=text:100",
+                    "optionConfig.rules": [
+                        "required,请输入公告标题，标题不可为空！",
+                        {
+                            "validator": "existing",
+                            "message": "对不起，公告标题重复！",
+                            "config": {
+                                "uri": "/api/x-notice/existing",
+                                "method": "POST",
+                                "params": {
+                                    "appId": "PROP:app.key"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata": "status,状态,9,,aiSelect",
+                    "optionJsx.config.items": [
+                        "RUNNING,发布中",
+                        "FINISHED,已结束"
+                    ],
+                    "optionJsx.readOnly": true
+                },
+                {
+                    "metadata": "expiredAt,截止时间,9,,aiDatePicker",
+                    "optionJsx.format": "YYYY-MM-DD HH:mm",
+                    "optionJsx.disabledDate": "propFromNow",
+                    "optionJsx.showTime": true,
+                    "moment": true
+                }
+            ],
+            [
+                "content,公告内容,18,,aiBraftEditor"
+            ],
+            [
+                {
+                    "metadata": "files,文件上传,18,,aiFileBatch,text=上传",
+                    "optionJsx.accept": "*/*",
+                    "optionJsx.config.filekey": "key",
+                    "optionJsx.config.limit": 10240,
+                    "optionJsx.config.reduce": true,
+                    "optionJsx.ajax.uri": "/api/file/upload/:identifier?directory=:directory",
+                    "optionJsx.ajax.download": "/api/file/download/:key",
+                    "optionJsx.ajax.params": {
+                        "identifier": "FIX:x.notice",
+                        "directory": "/系统文档/公告文档",
+                        "formula": "/${name}"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.grouped": true,
+                    "optionJsx.extension": [
+                        "$opSave,发布,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "hidden": [
+            "appId",
+            "type"
+        ],
+        "initial": {
+            "status": "FIX:RUNNING",
+            "type": "FIX:HOME",
+            "appId": "PROP:app.key"
+        }
+    }
+}

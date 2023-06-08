@@ -1,0 +1,30 @@
+@import "~style/index.scss";
+.uca{
+  &_FileLogo{
+    padding-top: 3px;
+    .anticon{
+      color: $color_comment;
+    }
+
+    .ant-upload-list-item-name:hover {
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    .ant-upload-picture-card-wrapper {
+      height: 100px;
+    }
+
+    .ant-upload-preview {
+      .ant-upload {
+        border: solid 1px white;
+        background-color: $uni_color;
+
+        img {
+          height: 90px;
+          width: 360px;
+        }
+      }
+    }
+  }
+}

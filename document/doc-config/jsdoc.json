@@ -1,0 +1,107 @@
+{
+    "tags": {
+        "allowUnknownTags": true,
+        "dictionaries": [
+            "jsdoc",
+            "closure"
+        ]
+    },
+    "source": {
+        "include": [
+            "src"
+        ],
+        "exclude": [
+            "src/app",
+            "src/app@plugin",
+            "src/app@mock",
+            "src/style",
+            "src/components",
+            "src/container",
+            "src/extension",
+            "src/environment",
+            "src/unfold",
+            "src/upper",
+            "src/utter",
+            "src/skin"
+        ],
+        "includePattern": "\\.(js|jsx|css)$",
+        "excludePattern": "(node_modules/|docs)"
+    },
+    "plugins": [
+        "plugins/markdown"
+    ],
+    "templates": {
+        "cleverLinks": true,
+        "monospaceLinks": true,
+        "default": {
+            "outputSourceFiles": false
+        }
+    },
+    "opts": {
+        "template": "document/doc-config/tpl",
+        "encoding": "utf8",
+        "destination": "document/doc-web/zui",
+        "recurse": true
+    },
+    "docdash": {
+        "static": true,
+        "meta": {
+            "title": "Zero UI框架专用前端文档",
+            "description": "前端开发框架，官方地址：http://www.vertx-ui.cn",
+            "keyword": "zero,zero-ui,vert.x"
+        },
+        "collapse": false,
+        "search": true,
+        "private": true,
+        "menu": {
+            "Zero云平台白皮书": {
+                "href": "http://www.vertx-cloud.cn/document/doc-web/index.html",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero AI 工具箱": {
+                "href": "http://www.vertxai.cn/document/doc-web/index.html",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero UI 标准包API": {
+                "href": "http://www.vertxui.cn/document/doc-web/zui/index.html",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero UI 扩展包API": {
+                "href": "http://www.vertxui.cn/document/doc-web/zextension/index.html",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero UI 官方站点": {
+                "href": "http://www.vertxui.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero AI 官方站点": {
+                "href": "http://www.vertxai.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "Zero Framework 官方站点": {
+                "href": "http://www.vertxup.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            },
+            "我的KB小站": {
+                "href": "http://www.origin-x.cn",
+                "target": "_blank",
+                "class": "menu-item",
+                "id": "website_link"
+            }
+        }
+    }
+}

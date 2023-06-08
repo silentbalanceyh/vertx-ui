@@ -1,0 +1,51 @@
+// 库
+// @import (less) "style/miracle/index.less";
+// @import (less) "style/microcosm/index.less";
+// 连接
+// @import (less) "style/zero.antd.less";
+// @import (less) "style/zero.toolkit.less";
+// 应用
+// @import (less) "app/style/modulat/index.less";
+// ------------------------------------------------------------------
+/**
+ * SCSS新规范（基于CSS Module）
+ * 1. 基本命名规范
+ *    所有组件部分的SCSS命名采用规范化模式，分别使用前缀标注名空间相关信息，主要分类如下：
+ *    - 全局类名
+ *    - 局部类名（模块化防污染）
+ *    - App级（直接通过 mix 系列API修改样式管理部分）
+ *    - 组件命名
+ * 2. 规范细则
+ * 2.1. 全局类名
+ *      ux_ 为前缀，Uniform Xero
+ * 2.2. 局部类名
+ *      container:      容器
+ *      components:     页面
+ * 2.3. App级命名
+ *      app:            所有第三方组件位置，内置模块全部组件化（不重用）
+ * 2.4. 组件命名
+ *      uca_:           标准组件：economy
+ *      uex_:           扩展组件：Ex         Extension
+ *      utx_:           扩展组件：Tx         Task of Workflow
+ *      umy_:           扩展组件：My         My Setting
+ *      uf_ :           扩展组件：F          Finance Module
+ *      ug2_:           扩展组件：G2         G2
+ *      uix_:           扩展组件：Ix         Internal Component
+ *      uqx_:           扩展组件：Qx         Query Engine ( Qr )
+ *      uhx_:           扩展组件：Hx         High Order of Configuration
+ * 3. 关于风格定制
+ *    风格定制执行动态化操作，由于Ant Design使用了token机制，所以结合token执行style注入模式
+ * 以保证整体风格随token中内容发生改动，此种模式下，className禁用 !important 操作符提升优先
+ * 级，尽可能在定义过程中注意。
+ * 4. 关于样式引用的集合处理
+ *     /style/                  整体默认风格包
+ *           /connect           外联CSS连接
+ *           /conquest          Ant Design样式重写
+ *           /macrocosm         宏观：               基础变量定义包
+ *           /macross           超时空要塞：          SCSS函数定义包
+ *           /microcosm         微观：               组件专用SCSS包（u??_）
+ *           /mixer             合并：               自适应专用SCSS定义
+ *           /modernize         现代：               Zero UI专用风格包（ux_）
+ * 5. 写法规范综述
+ */
+@import '~style/index.scss';

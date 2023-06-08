@@ -1,0 +1,6 @@
+{
+    "_info": {
+        "title": "运营日期",
+        "pattern": "YYYY年MM月DD日"
+    }
+}

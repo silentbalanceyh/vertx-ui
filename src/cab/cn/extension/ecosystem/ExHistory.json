@@ -1,0 +1,154 @@
+{
+    "_table": {
+        "rowKey": "key",
+        "size": "small",
+        "columns": [
+            {
+                "metadata": "fieldAlias,属性名",
+                "style": {
+                    "color": "#27408B"
+                }
+            },
+            {
+                "metadata": "type,变更类型,MAPPING",
+                "$mapping": {
+                    "ADD": "添加,plus-circle,,#228B22",
+                    "UPDATE": "更新,edit,,#3A5FCD",
+                    "DELETE": "移除,delete,,#CD2626",
+                    "REVERT": "回写,upload,,#228B22"
+                }
+            },
+            {
+                "metadata": "valueOld,旧值,DICT",
+                "$config": {
+                    "field": "fieldName"
+                },
+                "className": "value-column"
+            },
+            {
+                "metadata": "valueNew,新值,DICT",
+                "$config": {
+                    "field": "fieldName"
+                },
+                "className": "value-column"
+            }
+        ]
+    },
+    "_history": {
+        "rowKey": "key",
+        "columns": [
+            {
+                "metadata": "createdAt,创建时间,DATE",
+                "$format": "YYYY年MM月DD日 HH点mm分"
+            },
+            "serial,事件编号",
+            {
+                "metadata": "updatedBy,创建人,USER",
+                "$config": {
+                    "uri": "/api/user/:key",
+                    "field": "realname"
+                },
+                "$empty": "（系统）"
+            }
+        ]
+    },
+    "_auditor": [
+        {
+            "metadata": "createdAt,创建时间,DATE",
+            "$format": "YYYY年MM月DD日 HH点mm分"
+        },
+        {
+            "metadata": "createdBy,创建人,USER",
+            "$config": {
+                "uri": "/api/user/:key",
+                "field": "realname"
+            },
+            "$empty": "（系统）"
+        },
+        {
+            "metadata": "updatedAt,更新时间,DATE",
+            "$format": "YYYY年MM月DD日 HH点mm分"
+        },
+        {
+            "metadata": "updatedBy,更新人,USER",
+            "$config": {
+                "uri": "/api/user/:key",
+                "field": "realname"
+            },
+            "$empty": "（系统）"
+        }
+    ],
+    "_codex": [
+        {
+            "type": "UPDATE",
+            "where": {
+                "field": "fieldName",
+                "value": "code"
+            },
+            "done": {
+                "type": "REPLACE",
+                "field": "type",
+                "config": {
+                    "fromValue": "DELETE",
+                    "toValue": "REVERT"
+                }
+            }
+        },
+        {
+            "type": "ALL",
+            "where": {
+                "field": "fieldName",
+                "value": "up"
+            },
+            "done": {
+                "type": "ARRAY",
+                "field": [
+                    "valueNew",
+                    "valueOld"
+                ],
+                "config": {
+                    "valueField": [
+                        "sourceName",
+                        "sourceCode"
+                    ],
+                    "valueMap": {
+                        "sourceName": "上游配置项",
+                        "sourceCode": "配置项编号"
+                    }
+                }
+            }
+        },
+        {
+            "type": "ALL",
+            "where": {
+                "field": "fieldName",
+                "value": "down"
+            },
+            "done": {
+                "type": "ARRAY",
+                "field": [
+                    "valueNew",
+                    "valueOld"
+                ],
+                "config": {
+                    "valueField": [
+                        "targetName",
+                        "targetCode"
+                    ],
+                    "valueMap": {
+                        "targetName": "下游配置项",
+                        "targetCode": "配置项编号"
+                    }
+                }
+            }
+        }
+    ],
+    "_tabs": {
+        "defaultActiveKey": "tabTime",
+        "type": "card",
+        "items": "按时间（默认）,tabTime;按字段,tabField"
+    },
+    "_info": {
+        "loading": "变更历史加载中，请等待……"
+    }
+}

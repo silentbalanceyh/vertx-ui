@@ -1,0 +1,35 @@
+@import "~style/macrocosm/index.scss";
+
+.ux {
+  &_addon {
+    &_after {
+      .ant-input-group-addon {
+        border-color: $uni_color;
+        color: white;
+        background-color: $uni_color;
+
+        &:hover {
+          cursor: pointer;
+          opacity: 0.7;
+        }
+      }
+    }
+
+    &_disabled {
+
+      .ant-input-group-addon {
+        .anticon {
+          color: $color_disable_icon;
+        }
+
+        &:hover {
+          cursor: not-allowed;
+
+          i:hover {
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  }
+}

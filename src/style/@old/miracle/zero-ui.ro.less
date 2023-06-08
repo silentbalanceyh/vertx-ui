@@ -1,0 +1,178 @@
+@import (less) "../macrocosm/index.less";
+// 只读 / 禁用 / 不可编辑专用
+.ux {
+  // selector
+  .ro-selector {
+    .ant-input-group {
+      input {
+        background-color: #Eff0f0;
+      }
+
+      .ant-input-group-addon:hover {
+        color: #c7c7c7;
+        background-color: #FAFAFA;
+        cursor: not-allowed;
+      }
+
+      .icon-ro {
+        color: #c7c7c7;
+
+        &:hover {
+          color: #c7c7c7;
+          background-color: #FAFAFA;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  // 只读
+  &-ro {
+    &-textarea {
+      background-color: #Eff0f0;
+    }
+
+
+    &-selector {
+      &-list {
+        .ro-selector;
+      }
+
+      &-tree {
+        .ro-selector;
+      }
+    }
+
+    &-file {
+      &-upload {
+        .ant-upload-list-item-card-actions {
+          display: none;
+        }
+      }
+    }
+
+    &-radio {
+      span {
+        color: black;
+      }
+    }
+  }
+
+  // 禁用
+  &-dis {
+    &-textarea {
+      background-color: #Eff0f0;
+    }
+
+    &-selector {
+      &-list {
+        .ro-selector;
+      }
+
+      &-tree {
+        .ro-selector;
+      }
+    }
+
+    &-file {
+      &-upload {
+        .ant-upload-list-item-card-actions {
+          display: none;
+        }
+      }
+    }
+
+    &-radio {
+
+    }
+  }
+
+  &-bag {
+    min-height: 112px;
+    padding: 3px;
+
+    &-detail {
+      padding: 3px;
+    }
+
+    .bag-icon {
+      text-align: center;
+      padding: 4px;
+    }
+
+    .bag-list {
+      padding: 2px 12px;
+      margin: 0 0 3px 0;
+      list-style: none;
+
+
+      .title {
+        color: black;
+        font-size: 16px;
+        font-weight: bold;
+      }
+
+      .abbr {
+        font-size: 12px;
+        color: #8c8c8c;
+      }
+
+      .action {
+        text-align: left;
+
+        .inactive:hover {
+          text-decoration: underline;
+        }
+
+        .active {
+          color: @color-button-spec;
+        }
+      }
+
+      li {
+        line-height: 24px;
+      }
+    }
+
+    .ant-card {
+
+      img {
+        display: inline-block;
+        width: 64px;
+        height: 64px;
+      }
+
+      .ant-card-body {
+        padding: 6px;
+      }
+
+      .ant-card-meta-description {
+        font-size: 12px;
+        max-height: 18px;
+        overflow: hidden;
+      }
+    }
+  }
+
+  &-block {
+    text-align: center;
+    margin-right: 6px;
+    margin-bottom: 6px;
+    margin-top: 6px;
+
+    width: 102px;
+    height: 116px;
+    float: left;
+
+    img {
+      width: 64px;
+      height: 64px;
+    }
+
+    span, a {
+      width: 100%;
+      line-height: 24px;
+      display: inline-block;
+    }
+  }
+}

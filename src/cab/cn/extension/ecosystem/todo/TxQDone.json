@@ -1,0 +1,122 @@
+{
+    "_assist": {
+        "resource.departments": {
+            "uri": "/api/dept/by/sigma",
+            "inherit": true
+        },
+        "resource.teams": {
+            "uri": "/api/team/by/sigma",
+            "inherit": true
+        }
+    },
+    "_toolkit": {
+        "serial": {
+            "placeholder": "单号 / 标题",
+            "match": {
+                "enabled": true,
+                "label": "精确匹配"
+            },
+            "keyword": [
+                "serial",
+                "title"
+            ]
+        },
+        "range": {
+            "showTime": {
+                "format": "HH:mm"
+            },
+            "format": "YYYY-MM-DD HH:mm",
+            "placeholder": [
+                "关单开始",
+                "关单结束"
+            ],
+            "keyword": "closeAt"
+        },
+        "tag": {
+            "title": "过滤条件：",
+            "clean": "清除筛选",
+            "condition": {
+                "range": "关单时间,magenta",
+                "serial": "单号/标题"
+            }
+        }
+    },
+    "_grid": {
+        "options": {
+            "parameter": {
+                "id": "ROUTE:name",
+                "position": "FIX:done"
+            },
+            "ajax.search.uri": "/api/up/flow-history"
+        },
+        "query": {
+            "projection": [],
+            "pager": {
+                "page": 1,
+                "size": 10
+            },
+            "sorter": [
+                "updatedAt,DESC"
+            ],
+            "criteria": {
+                "sigma": "PROP:app.sigma",
+                "": true
+            }
+        },
+        "table": {
+            "total": {
+                "report": "（总共:page页，:total条数据）",
+                "selected": "勾选了:count条"
+            },
+            "row": {
+                "onDoubleClick": "fnView"
+            },
+            "className": "ux_table",
+            "columns": [
+                {
+                    "title": "操作",
+                    "dataIndex": "key",
+                    "fixed": "left",
+                    "width": 80,
+                    "$render": "EXECUTOR",
+                    "$option": [
+                        {
+                            "text": "查看",
+                            "executor": "fnView"
+                        }
+                    ]
+                },
+                "title,工单标题",
+                {
+                    "metadata": "phase,工单状态,RENDERS",
+                    "className": "ud_column_cn5"
+                },
+                "serial,单号",
+                {
+                    "metadata": "openBy,建单人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00BF9F"
+                    }
+                },
+                {
+                    "metadata": "openAt,建单时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                },
+                {
+                    "metadata": "closeBy,关单人,USER",
+                    "$config": {
+                        "uri": "/api/user/:key",
+                        "field": "realname",
+                        "icon": "user,#00AAE4"
+                    }
+                },
+                {
+                    "metadata": "closeAt,关单时间,DATE",
+                    "$format": "YYYY-MM-DD HH:mm"
+                }
+            ]
+        }
+    }
+}

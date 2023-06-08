@@ -1,0 +1,23 @@
+@import (less) "../connect/index.less";
+@import (less) "../macross/index.less";
+
+.web-card-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-tpl.ix-card(
+            6px,
+            12px,
+            8px,
+            48px
+    );
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-tpl.ix-card(
+            12px,
+            24px,
+            16px,
+            54px
+    );
+  }
+}

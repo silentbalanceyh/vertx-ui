@@ -1,0 +1,111 @@
+{
+    "_form": {
+        "layout": "horizontal",
+        "ui": [
+            [
+                {
+                    "field": "username",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入用户名！"
+                            },
+                            {
+                                "min": 2,
+                                "message": "用户名长度必须大于等于2"
+                            }
+                        ]
+                    },
+                    "optionJsx": {
+                        "placeholder": "用户名",
+                        "prefix": {
+                            "type": "user"
+                        }
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "password",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入登陆密码！"
+                            },
+                            {
+                                "min": 8,
+                                "message": "密码长度必须大于8个字符！"
+                            }
+                        ]
+                    },
+                    "optionJsx": {
+                        "placeholder": "密码",
+                        "prefix": {
+                            "type": "lock"
+                        },
+                        "type": "password"
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
+                    "field": "captcha",
+                    "$render": "aiCaptcha",
+                    "optionConfig": {
+                        "rules": [
+                            {
+                                "required": true,
+                                "message": "请输入验证码！"
+                            }
+                        ]
+                    },
+                    "optionJsx": {
+                        "placeholder": "验证码",
+                        "prefix": {
+                            "type": "code"
+                        },
+                        "config": {
+                            "type": "image",
+                            "ajax": {
+                                "uri": "/captcha/image",
+                                "method": "POST"
+                            },
+                            "error": {
+                                "501": "对不起，您的服务端不支持验证码功能！"
+                            }
+                        }
+                    },
+                    "optionItem": {
+                        "hasFeedback": true
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.align": "center",
+                    "optionJsx.buttons": {
+                        "submit": "$opLogin,登录"
+                    },
+                    "span": 24
+                }
+            ]
+        ]
+    },
+    "_modal": {
+        "success": {
+        },
+        "error": {
+            "user": "账号不存在！",
+            "password": "密码错误，请输入正确密码！"
+        }
+    }
+}

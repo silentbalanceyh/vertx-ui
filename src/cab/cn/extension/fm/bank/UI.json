@@ -1,0 +1,14 @@
+{
+    "_assist": {
+    },
+    "_grid": {
+        "module": {
+            "NAME": "开户行",
+            "MODULE": "bank",
+            "IDENTIFIER": "fm.bank"
+        },
+        "options": {
+            "search.advanced": false
+        }
+    }
+}

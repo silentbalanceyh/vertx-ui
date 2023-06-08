@@ -1,0 +1,44 @@
+@import "../global-connect";
+
+.dx-header {
+  .web-header-fit;
+
+  background: @primary-color;
+  box-shadow: 0 1px 4px rgba(0, 21, 41, .08);
+  position: relative;
+
+  i.trigger {
+    color: white;
+    vertical-align: 0 !important;
+
+    .ix-font.normal(24);
+    cursor: pointer;
+    transition: all .3s, padding 0s;
+
+    &:hover {
+      background: @primary-1;
+      color: black;
+    }
+  }
+
+  .tips {
+    float: right;
+    line-height: 48px;
+    @media (min-width: @screen-xxl) {
+      line-height: 56px;
+    }
+
+    .ant-tag {
+      font-size: 14px;
+      display: inline-block;
+    }
+  }
+
+  .right {
+    float: right;
+    color: white;
+    margin-right: 0;
+    height: 100%;
+    text-align: right;
+  }
+}

@@ -1,0 +1,8 @@
+@mixin uca_table_head($dark) {
+  @if $dark == true {
+    .ant-table-cell {
+      background-color: $uni_color;
+      color: white;
+    }
+  }
+}

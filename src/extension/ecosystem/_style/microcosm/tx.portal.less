@@ -1,0 +1,34 @@
+@import "../global-connect";
+
+
+.ex-portal {
+  .row {
+    margin-top: 8px;
+    height: 36px;
+    line-height: 36px;
+    margin-bottom: 8px;
+
+    .title {
+      padding-left: 12px;
+      padding-right: 12px;
+      color: white;
+      border-bottom-left-radius: 6px;
+      border-top-left-radius: 6px;
+    }
+
+    .content {
+      padding-left: 12px;
+
+      .link {
+        margin-right: 12px;
+        margin-left: 12px;
+        color: @primary-color;
+
+        &:hover {
+          font-weight: 900;
+          color: @color-spec;
+        }
+      }
+    }
+  }
+}

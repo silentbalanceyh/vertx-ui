@@ -1,0 +1,11 @@
+@mixin unit_ant_empty($pHeight, $pImage: $uni_font * 5) {
+  .ant-empty {
+    height: $pHeight;
+
+    &-image {
+      height: $pImage;
+      margin-top: $uni_font;
+      margin-bottom: $uni_font * 0.4;
+    }
+  }
+}

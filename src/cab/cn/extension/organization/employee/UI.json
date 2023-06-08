@@ -1,0 +1,16 @@
+{
+    "_page": {
+        "title": "员工管理",
+        "back": {
+            "state": {
+                "status.submitting": null
+            }
+        }
+    },
+    "_tabs": {
+        "className": "ux_tab_block",
+        "tabPosition": "left",
+        "defaultActiveKey": "tabEmployee",
+        "items": "基本信息,tabEmployee,contacts;档案信息,tabIdentify,idcard"
+    }
+}

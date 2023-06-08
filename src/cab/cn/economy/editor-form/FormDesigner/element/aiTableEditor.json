@@ -1,0 +1,278 @@
+{
+    "_form": {
+        "window": 1,
+        "columns": 2,
+        "className": "setting-form-cell",
+        "ui": [
+            [
+                "title=属性设置器"
+            ],
+            [
+                {
+                    "metadata": "render,组件类型,20",
+                    "optionItem": {
+                        "style": {
+                            "width": "100%"
+                        },
+                        "labelCol": {
+                            "span": 4
+                        },
+                        "wrapperCol": {
+                            "span": 20
+                        }
+                    }
+                },
+                {
+                    "metadata": "$button",
+                    "optionItem": {
+                        "style": {
+                            "float": "right"
+                        }
+                    },
+                    "optionJsx.extension": [
+                        "$opSaveSetting,保存,SUBMIT,,uc_green_big,save"
+                    ],
+                    "span": 4
+                }
+            ],
+            [
+                {
+                    "complex": true,
+                    "name": "FieldContainer",
+                    "key": "fieldBasic",
+                    "config": {
+                        "activeKey": "tabSetting",
+                        "defaultActiveKey": "tabSetting",
+                        "className": "tool-setting",
+                        "tabPosition": "right",
+                        "items": "属性配置表,tabSetting;联动规则,tabDepend",
+                        "pages": {
+                            "tabDepend": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        {
+                                            "title": "说明",
+                                            "config": {
+                                                "description": [
+                                                    "该设置可配置当前字段的`启用/禁用`状态依赖其他字段的取值（被影响）。",
+                                                    "触发设置用于设置当前字段值变化过后对其他字段的影响（影响其他字段）。"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=`禁用/启用`属性依赖设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependEnabled,字段联动,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "启用",
+                                                "unCheckedChildren": "禁用"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "dependField,依赖字段,16,,aiSelect,placeholder=（不可设置为当前字段）",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
+                                            "optionJsx.depend.enabled": {
+                                                "dependEnabled": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependType,取值类型,24,,aiRadio",
+                                            "optionJsx.depend.enabled": {
+                                                "dependEnabled": true
+                                            },
+                                            "optionJsx.config.items": [
+                                                "BOOLEAN,逻辑值",
+                                                "ENUM,枚举值",
+                                                "DATUM,动态数据源"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependBoolean,逻辑值,24,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "true,为真时启用",
+                                                "false,为假时启用"
+                                            ],
+                                            "optionJsx.depend.enabled": {
+                                                "dependType": [
+                                                    "BOOLEAN"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependEnum,合法枚举值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "30%"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "dependType": [
+                                                    "ENUM"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependSource,数据源标识,,,aiSelect,placeholder=辅助数据源中配置",
+                                            "optionJsx.config.datum": "source=model.sources,value=key,label=name",
+                                            "optionJsx.depend.enabled": {
+                                                "dependType": [
+                                                    "DATUM"
+                                                ]
+                                            }
+                                        },
+                                        {
+                                            "metadata": "dependCondition,条件字段,,,,inscribe=以数据源中哪个字段为条件",
+                                            "optionJsx.depend.enabled": {
+                                                "dependType": [
+                                                    "DATUM"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "dependValue,条件字段值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "30%"
+                                            },
+                                            "optionJsx.depend.enabled": {
+                                                "dependType": [
+                                                    "DATUM"
+                                                ]
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=触发操作设置"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "impactReset,重设字段值,24,,aiInputMulti",
+                                            "optionJsx.styleInput": {
+                                                "width": "30%"
+                                            }
+                                        }
+                                    ]
+                                ]
+                            },
+                            "tabSetting": {
+                                "window": 0.51,
+                                "columns": 2,
+                                "ui": [
+                                    [
+                                        "title=常用属性"
+                                    ],
+                                    [
+                                        "label,标签/标题,,,,placeholder=<标签>",
+                                        {
+                                            "metadata": "field,字段名,,,aiSelect",
+                                            "optionJsx.config.datum": "source=model.fields,value=key,label=display",
+                                            "optionConfig.rules": [
+                                                "required,字段名不可为空，请选择！"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "required,是否必填,8,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "必填",
+                                                "unCheckedChildren": "可选"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        },
+                                        {
+                                            "metadata": "requiredMessage,必填提示,16,,,inscribe=如果用户未填写时的提示文字！",
+                                            "optionJsx.depend.enabled": {
+                                                "required": true
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "width,字段宽度,24,,,placeholder=输入区域宽度，默认100%（支持单位：%，px，rm，pt，...etc）"
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "readOnly,只读,12,,aiCheckbox",
+                                            "optionJsx": {
+                                                "mode": "SWITCH",
+                                                "checkedChildren": "只读",
+                                                "unCheckedChildren": "可编辑"
+                                            },
+                                            "optionConfig": {
+                                                "valuePropName": "checked"
+                                            }
+                                        }
+                                    ],
+                                    [
+                                        "title=表格列设置"
+                                    ],
+                                    [
+                                        "tableKeyField,主键字段名",
+                                        {
+                                            "metadata": "tableFormat,默认格式,,,aiRadio",
+                                            "optionJsx.config.items": [
+                                                "ARRAY,数组",
+                                                "OBJECT,记录"
+                                            ]
+                                        }
+                                    ],
+                                    [
+                                        {
+                                            "metadata": "table,,24,,aiTableEditor",
+                                            "optionJsx.config": {
+                                                "format": {
+                                                    "type": "ARRAY",
+                                                    "keyField": "name"
+                                                },
+                                                "table": {
+                                                    "columns": [
+                                                        {
+                                                            "dataIndex": "dataIndex",
+                                                            "title": "字段名",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "title",
+                                                            "title": "字段标题",
+                                                            "width": 140,
+                                                            "$render": "EDITOR"
+                                                        },
+                                                        {
+                                                            "dataIndex": "expression",
+                                                            "title": "表达式录入",
+                                                            "$render": "EDITOR"
+                                                        }
+                                                    ]
+                                                }
+                                            }
+                                        }
+                                    ]
+                                ]
+                            }
+                        }
+                    }
+                }
+            ]
+        ]
+    }
+}

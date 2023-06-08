@@ -1,0 +1,15 @@
+@import (less) "../macrocosm/index.less";
+
+/*
+ * 树型菜单选中后的修正效果
+ * - 白色文字
+ * - 深色底色
+ * - 边框默认（连接 Ant 中专用色）
+ */
+.ant-tree {
+  &-node-selected {
+    color: white;
+    background-color: @primary-color;
+    border-radius: @border-radius-base;
+  }
+}

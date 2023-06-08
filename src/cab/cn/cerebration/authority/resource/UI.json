@@ -1,0 +1,22 @@
+{
+    "_page": {
+        "title": "资源/权限集定义"
+    },
+    "_assist": {
+        "tabular": {
+            "uri": "/api/types/tabulars",
+            "method": "POST",
+            "magic": {
+                "$body": [
+                    "zero.authority"
+                ]
+            },
+            "group": "type"
+        }
+    },
+    "_tabs": {
+        "defaultActiveKey": "tabResource",
+        "tabPosition": "right",
+        "items": "资源定义,tabResource;权限集,tabPermission;自由权限,tabFree"
+    }
+}

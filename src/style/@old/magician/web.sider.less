@@ -1,0 +1,20 @@
+@import (less) "../connect/index.less";
+@import (less) "../macross/index.less";
+
+.web-sider-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: 1400px) {
+    .ix-tpl.ix-menu(28px, 44px, 60px, 72px);
+    .ix-tpl.ix-sider(72, 48, 190, 28);
+  }
+  // 1400 < x < 1600
+  @media (min-width: 1400px) and (max-width: @screen-xxl) {
+    .ix-tpl.ix-menu(28px, 44px, 60px, 72px);
+    .ix-tpl.ix-sider(72, 48, 220, 28);
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-tpl.ix-menu(28px, 52px, 76px, 80px);
+    .ix-tpl.ix-sider(80, 56, 240, 32);
+  }
+}

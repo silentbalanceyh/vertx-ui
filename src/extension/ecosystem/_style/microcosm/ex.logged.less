@@ -1,0 +1,78 @@
+@import "../global-connect";
+
+.ant-dropdown-menu-item > a,
+.ant-dropdown-menu-submenu-title > a {
+  display: inline-block !important;
+}
+
+.ex-logged {
+
+  .action-bar {
+    display: inline-block;
+    transition: all .3s;
+    height: 100%;
+    min-width: 100px;
+    padding-top: 12px;
+    @media (min-width: @screen-xxl) {
+      padding-top: 16px;
+    }
+    padding-right: 16px;
+    float: right;
+
+    .icon-top {
+      font-size: 24px;
+      margin-left: 12px;
+      display: inline-block;
+      float: right !important;
+
+      &:hover {
+        cursor: pointer;
+        color: @primary-color;
+      }
+    }
+  }
+
+  .action {
+    cursor: pointer;
+    display: inline-block;
+    transition: all .3s;
+    height: 100%;
+    min-width: 80px;
+
+    > i {
+      font-size: 16px;
+      vertical-align: middle;
+    }
+
+    &:hover, .ant-popover-open {
+      background: @primary-1;
+    }
+  }
+
+  .notify-notice-button {
+    cursor: pointer;
+    display: inline-block;
+    transition: all .3s;
+    min-width: 60px !important;
+    text-align: center;
+    margin-right: 4px;
+
+    .notify-icon {
+      font-size: 24px;
+      padding: 4px;
+    }
+  }
+
+  .account {
+    float: right;
+
+    .avatar {
+      .ix-bg.color(@primary-color, rgba(188, 188, 188, .85));
+      vertical-align: middle;
+    }
+
+    .name {
+      margin-left: 10px;
+    }
+  }
+}

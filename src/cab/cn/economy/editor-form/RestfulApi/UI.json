@@ -1,0 +1,33 @@
+{
+    "_input": {
+        "text": "API选择器"
+    },
+    "_window": "请选择您要配置的RESTful API信息,选择,关闭,false,800,true,$opSaveApi",
+    "_op": {
+        "search": {
+            "placeholder": "（您可以输入`业务关键字`搜索）"
+        },
+        "submit": {
+            "empty": "对不起，您没有选择任何API，不可提交该数据！"
+        }
+    },
+    "_table": {
+        "className": "ux_table",
+        "pagination": {
+            "size": "small"
+        },
+        "columns": [
+            "name,接口描述",
+            "uri,RESTful路径",
+            {
+                "metadata": "method,HTTP方法,MAPPING",
+                "$mapping": {
+                    "GET": "GET,download,,#268941",
+                    "PUT": "PUT,edit,,#0a7bed",
+                    "POST": "POST,plus,,#f6af03",
+                    "DELETE": "DELETE,delete,,#e22015"
+                }
+            }
+        ]
+    }
+}

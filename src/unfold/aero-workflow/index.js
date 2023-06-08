@@ -1,0 +1,1 @@
+export {default as _wf} from './index.@entry';

@@ -1,0 +1,19 @@
+{
+    "mock": false,
+    "data": [
+        {
+            "key": "ae5f65b2-885f-454c-b17b-24bc04d48fc3",
+            "arriveTime": "2018-06-28T15:59:27.116Z",
+            "serial": "SCH0000001",
+            "oitemId": "c02e7d9e-41f4-428c-b21b-15e793e2e606",
+            "roomNumber": "1105"
+        },
+        {
+            "key": "48863c91-33c0-4410-8ea9-135e20892590",
+            "arriveTime": "2018-06-28T15:59:27.116Z",
+            "serial": "SCH0000002",
+            "oitemId": "7ac8446c-812e-45fe-bc67-f3b4d80c5a6a",
+            "roomNumber": "1128"
+        }
+    ]
+}

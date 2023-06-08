@@ -1,0 +1,13 @@
+.uca {
+  &_FieldContainer {
+    .ant-tabs-nav {
+      margin-bottom: 0
+    }
+
+    &_Drawer {
+      .ant-drawer-body {
+        padding: $uni_font * 0.5 $uni_font;
+      }
+    }
+  }
+}

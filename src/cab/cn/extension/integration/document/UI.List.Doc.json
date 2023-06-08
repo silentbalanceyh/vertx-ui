@@ -1,0 +1,58 @@
+{
+    "_table": {
+        "pagination": false,
+        "className": "ux_table ux_table_doc",
+        "columns": [
+            {
+                "dataIndex": "key",
+                "title": "操作",
+                "config": {
+                    "open": "打开",
+                    "download": "下载",
+                    "rename": "重命名",
+                    "remove": "删除",
+                    "more": "…"
+                },
+                "width": 110
+            },
+            {
+                "metadata": "name,文件/目录名,,true"
+            },
+            {
+                "metadata": "size,大小,,true",
+                "width": 100
+            },
+            {
+                "metadata": "createdBy,创建人",
+                "config": {
+                    "empty": "（系统）"
+                },
+                "width": 100
+            },
+            {
+                "metadata": "updatedAt,修改时间,DATE,true",
+                "$format": "YYYY-MM-DD HH:mm",
+                "width": 180
+            }
+        ]
+    },
+    "_alert": {
+        "message": "文档管理平台",
+        "icon": "container",
+        "description": [
+            "文档管理平台在目前系统中只能操作预设`目录`，不可新增根目录！",
+            "当您使用`关键字`搜索文档时，会搜索所有符合条件的文档，标题包含关键字的文档。",
+            "只读类型的目录中，不能执行`上传`和`创建`功能，只能下载该文件。",
+            "拥有`下载`权限的文档可批量下载，下载过程中检查所有文档看是否符合下载选择。"
+        ]
+    },
+    "_info": {
+        "dir": "删除操作会将目录及目录内所有内容移动到回收站，确认此操作？",
+        "file": "删除操作会将文件移动到回收站，确认此操作？",
+        "finished": "恭喜，您已经将`目录/文件`成功移动到回收站。"
+    },
+    "_window": {
+        "renameDir": "目录重命名,保存,关闭,false,900,true,$opRename",
+        "renameFile": "文件重命名,保存,关闭,false,1024,true,$opRenameFile"
+    }
+}

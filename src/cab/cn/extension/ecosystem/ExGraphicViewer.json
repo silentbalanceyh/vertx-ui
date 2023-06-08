@@ -1,0 +1,64 @@
+{
+    "_modal": {
+        "confirm": {
+            "reset": "该操作将会将`拓扑图`重置到最初状态，确认重置？"
+        }
+    },
+    "_info": {
+        "loading": "正在加载您的拓扑图数据……"
+    },
+    "_graphic": {
+        "registry": [
+            "node-ci-view",
+            "edge-ci-view"
+        ],
+        "graph": {
+            "layout": {
+                "type": "radial",
+                "nodeSize": 74
+            },
+            "position": {
+                "start": {
+                    "x": 390,
+                    "y": 202
+                }
+            },
+            "container": "web-g6-viewer"
+        },
+        "addon": {
+            "toolbar": {
+                "container": "web-g6-viewer-toolbar",
+                "commands": {
+                    "view": [
+                        [
+                            "创建 ( Cmd + N )",
+                            "重置 ( Cmd + R )",
+                            "打印 ( Cmd + P )",
+                            "放大 ( Cmd + + )",
+                            "缩小 ( Cmd + - )"
+                        ],
+                        [
+                            "分组 ( Cmd + G )",
+                            "模板 ( Cmd + T )"
+                        ]
+                    ],
+                    "disabled": [
+                        "plus",
+                        "print",
+                        "group",
+                        "tpl"
+                    ]
+                },
+                "css": {
+                    "height": 32
+                }
+            },
+            "stencil": {
+                "registry": {
+                    "node": "node-ci-view",
+                    "edge": "edge-ci-view"
+                }
+            }
+        }
+    }
+}

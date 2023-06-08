@@ -1,0 +1,44 @@
+@import "Cab.screen.scss";
+
+.hm_login {
+  // 背景CSS设置
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  -moz-background-size: 100% 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  :global {
+    // 内部不考虑CSS名称，但依旧使用hm前缀
+    .hm_header {
+      width: 100%;
+      background: transparent;
+      padding-left: 20px;
+      padding-right: 20px;
+      // 自适应专用
+      @include screen_hm_header;
+
+      header {
+        padding: 10px;
+
+        img {
+          height: 90px;
+          width: 100px;
+          float: left;
+        }
+
+        h2 {
+          margin-top: 32px;
+          font-size: 28px;
+          line-height: 28px;
+          color: white;
+          display: inline-block;
+          float: left;
+        }
+      }
+    }
+  }
+}

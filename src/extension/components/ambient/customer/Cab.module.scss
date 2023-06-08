@@ -1,0 +1,13 @@
+.upg {
+  &_ambient_customer {
+    .ux_table {
+      .ant-table {
+        .ant-table-tbody {
+          .ant-table-cell {
+            padding: 0 $uni_font;
+          }
+        }
+      }
+    }
+  }
+}

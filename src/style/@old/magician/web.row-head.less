@@ -1,0 +1,13 @@
+@import (less) "../connect/index.less";
+@import (less) "../macross/index.less";
+
+.web-row-head-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-row.footer(6px);
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-row.footer(9px);
+  }
+}

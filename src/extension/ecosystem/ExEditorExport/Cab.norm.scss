@@ -1,0 +1,21 @@
+.uex {
+  &_ExEditorExport {
+    .editor_content {
+
+
+      .button {
+        width: 100%;
+        text-align: center;
+      }
+
+      .input {
+        margin: 6px;
+
+        .input-label {
+          text-align: right;
+          line-height: 32px;
+        }
+      }
+    }
+  }
+}

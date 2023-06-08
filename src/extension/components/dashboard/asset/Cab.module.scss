@@ -1,0 +1,79 @@
+@import "~style/index.scss";
+
+.upg {
+  &_dashboard_asset {
+    :global {
+      .report_container {
+        padding-right: $uni_font;
+      }
+
+
+      .asset_app_space {
+        @include attr_shadow_box($uni_font * 0.4);
+
+        .link_repo {
+          padding: 4px;
+          border-radius: 4px;
+          text-align: center;
+
+          img {
+            width: 90%;
+          }
+
+          display: inline-block;
+
+          &:hover {
+            opacity: 0.8;
+            cursor: pointer;
+            background: $color_readonly;
+          }
+        }
+      }
+
+      .asset_app {
+        @include attr_shadow_box($uni_font * 0.4);
+        margin-bottom: 12px;
+
+        .asset_app_row {
+          .ant-pro-card-body {
+            min-height: $uni_font * 9.6;
+          }
+        }
+
+        .link {
+          padding: 0 $uni_font * 0.2;
+          text-align: left;
+
+          .ant-pro-card-body {
+            padding: 8px $uni_font * 0.2;
+          }
+
+          a {
+            color: black;
+            padding: 4px 8px;
+            display: inline-block;
+            border-radius: 4px;
+            width: $uni_font * 7;
+            text-align: center;
+
+            img {
+              width: $uni_font * 5;
+            }
+
+            label {
+              text-align: center;
+              display: inline-block;
+              width: $uni_font * 5;
+            }
+
+            &:hover {
+              opacity: 0.8;
+              cursor: pointer;
+              background: $color_readonly;
+            }
+          }
+        }
+      }
+    }
+  }
+}

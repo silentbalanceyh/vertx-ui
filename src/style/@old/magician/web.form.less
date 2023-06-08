@@ -1,0 +1,13 @@
+@import (less) "../connect/index.less";
+@import (less) "../macross/index.less";
+
+.web-form-fit {
+  // 1280 x 1024
+  @media (min-width: @screen-xl) and (max-width: @screen-xxl) {
+    .ix-tpl.ix-form(28px, 3px);
+  }
+  // > 1600
+  @media (min-width: @screen-xxl) {
+    .ix-tpl.ix-form(32px, 6px);
+  }
+}

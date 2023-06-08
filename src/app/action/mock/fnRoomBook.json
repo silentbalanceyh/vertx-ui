@@ -1,0 +1,39 @@
+{
+    "mock": true,
+    "data": [
+        {
+            "key": "31b31949-e75c-4e74-b997-4f3c025ff875",
+            "serial": "AB0000001",
+            "roomNumber": "1102",
+            "amountRefund": 500,
+            "exceedDesc": "加收半天房费",
+            "exceed": false,
+            "cardCount": 2,
+            "preauth": false,
+            "preauthDesc": "未完成",
+            "checked": false,
+            "checkedDesc": "查房完成",
+            "major": false
+        },
+        {
+            "key": "6d288840-56f6-458a-b985-9f4ebaac8592",
+            "serial": "AB0000002",
+            "roomNumber": "1103",
+            "amountRefund": 180,
+            "exceedDesc": "加收全天房费",
+            "exceed": false,
+            "cardCount": 2,
+            "preauth": false,
+            "preauthDesc": "未完成",
+            "checked": false,
+            "checkedDesc": "已报房，未响应",
+            "major": false
+        },
+        {
+            "key": "e71408d2-b263-4833-929d-98aecfd1e741",
+            "serial": "AB0000003",
+            "amountRefund": 1113,
+            "major": true
+        }
+    ]
+}

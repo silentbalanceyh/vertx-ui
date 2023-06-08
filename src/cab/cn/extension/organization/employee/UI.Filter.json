@@ -1,0 +1,101 @@
+{
+    "_form": {
+        "window": -0.5,
+        "columns":2,
+        "ui": [
+            [
+                {
+                    "metadata": "connector,连接符,24,,aiRadio",
+                    "optionJsx.config.items": [
+                        "OR,或（OR）",
+                        "AND,并（AND）"
+                    ]
+                }
+            ],
+            [
+                {
+                    "metadata":"workNumber,工号,12,,aiSearchInput",
+                    "optionJsx.layout": {
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "viceMobile`c,手机,12"
+            ],
+            [
+                {
+                    "metadata":"viceName,姓名,12,,aiSearchInput",
+                    "optionJsx.layout":{
+                        "left": 14,
+                        "right": 10
+                    }
+                },
+                "viceEmail`c,邮箱,12"
+            ],
+            [
+                {
+                    "metadata": "type,员工分类,24,,aiSelect,placeholder=（请选择员工分类）",
+                    "optionJsx.config.datum": "source=employee.type,value=code,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 4,
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "companyId`i,所属公司,12,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=resource.companys,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 2,
+                    "optionJsx.allowClear":true
+                },
+                {
+                    "metadata": "deptId`i,所属部门,12,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=resource.departments,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 2,
+                    "optionJsx.allowClear":true
+                }
+            ],
+            [
+                {
+                    "metadata": "teamId`i,所属组,12,,aiSelect,placeholder=（多选）",
+                    "optionJsx.config.datum": "source=resource.teams,value=key,label=name",
+                    "optionJsx.mode":"multiple",
+                    "optionJsx.maxTagCount": 2,
+                    "optionJsx.allowClear":true
+                },
+                "workTitle`c,头衔,12"
+            ],
+            [
+                "workPhone`c,工作座机,12",
+                "workExtension`c,分机号,12"
+            ],
+            [
+                {
+                    "metadata":"active`i,启用,24,,aiCheckbox",
+                    "optionJsx.config.items":[
+                        "true,启用",
+                        "false,禁用"
+                    ],
+                    "optionConfig":{
+                        "valuePropName": "checked"
+                    }
+                }
+            ],
+            [
+                {
+                    "metadata": "$button",
+                    "optionJsx.extension": [
+                        "$opFilter,搜索,SUBMIT,primary",
+                        "$opReset,重置,RESET"
+                    ],
+                    "span": 24
+                }
+            ]
+        ],
+        "op": {
+            "$opFilter": "act.employee.filter"
+        }
+    }
+}

@@ -1,0 +1,72 @@
+= Zero UI规范/标准
+:author: 虞浪
+:email: silentbalanceyh@126.com
+:revnumber: v1.0
+:revdate: 05.19.2023
+:doctype: book
+:toc: left
+:toclevels: 2
+:toc-title: 目录
+:sectnums:
+:sectnumlevels: 5
+:description:
+:source-highlighter: highlightjs
+
+== 介绍
+
+=== API文档
+
+- link:./zui/index.html[Zero UI框架,window="_blank"]
+- link:./zextension/index.html[Zero Extension框架,window="_blank"]
+
+[TIP]
+====
+以上API文档使用JsDoc提取代码中语法（Markdown格式）自动生成，规范化代码注释最终生成具有可读性的API文档，执行在线发布。
+====
+
+=== 基础环境
+
+[options="header"]
+|====
+|环境|版本
+|Ruby|3.2+
+|Node|20.1.x+
+|Java|17+
+|====
+
+=== 文档本地化
+
+您可以将本规范文档搭建在本地执行修改和调试，本地执行方法，先在本机 *全局* 安装相关依赖包：
+
+[source,shell]
+----
+npm install -g jsdoc live-server
+npm install docdash taffydb
+brew install asciidoctor            # MacOS
+----
+
+[CAUTION]
+====
+asciidoctor最好参考官方文档安装在操作系统级别，以防止执行命令时引起不必要的路径问题，上述命令是 *MacOS* 中的安装方法，其他安装方法参考 https://docs.asciidoctor.org/asciidoctor/latest/install/[Asciidoctor Install and Update]，且安装之前确认已具备基础环境需求。
+
+- 有一点需说明：`taffydb` 可能需要本地化，直接在您的项目内部安装，全局安全有可能不生效。
+====
+
+安装完成后，执行下边两个核心命令：
+
+[source,shell]
+----
+./run-doc.sh doc        # 1.生成文档
+./run-doc.sh server     # 2.启动文档服务器
+----
+
+[TIP]
+====
+可以在服务器启动状态下直接重新生成文档，生成完成后刷新浏览器即可。
+
+* 本地地址：`<http://127.0.0.1:30211/>`。
+* 远程地址：`<http://www.vertxui.cn/document/doc-web/index.html>`
+====
+
+其他前端教程直接参考云端白皮书中的前端部分，统一处理 https://www.vertx-cloud.cn/document/doc-web/index.html[云端白皮书,window="_blank"] ，本章节中不做特殊说明。
+

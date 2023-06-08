@@ -1,0 +1,11 @@
+{
+    "_assist": {
+        "service.catalog": {
+            "uri": "/api/type/categories/:type",
+            "magic": {
+                "type": "FIX:zero.service.catalog"
+            },
+            "inherit": "service.catalog"
+        }
+    }
+}

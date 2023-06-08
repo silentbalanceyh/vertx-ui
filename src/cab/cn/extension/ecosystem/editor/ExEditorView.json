@@ -1,0 +1,48 @@
+{
+    "_combine": {
+        "view": {
+            "selected": "当前视图：",
+            "admin": "管理视图",
+            "choice": "选择视图"
+        },
+        "toolbar": {
+            "yes": {
+                "icon": "check",
+                "text": "确认",
+                "className": "uc_green"
+            },
+            "plus": {
+                "icon": "plus",
+                "type": "primary",
+                "tooltip": "添加视图"
+            },
+            "batch": {
+                "text": "删除所选",
+                "icon": "delete",
+                "confirm": "您确认要删除选择的所有视图？",
+                "success": "您选择的视图已经成功删除！"
+            },
+            "edit": {
+                "icon": "edit",
+                "text": "编辑"
+            },
+            "remove": {
+                "icon": "delete",
+                "text": "删除",
+                "confirm": "您确认要删除该视图？",
+                "success": "您选择的视图已经成功删除！"
+            }
+        },
+        "list": {
+            "header": "您的视图列表"
+        },
+        "switcher": {
+            "edit": "管理视图界面",
+            "view": "选择您想查看的视图"
+        },
+        "dialog": {
+            "add": "视图管理,添加,关闭,false,1080,true,$opViewPAdd",
+            "edit": "视图管理,更新,关闭,false,1080,true,$opViewPSave"
+        }
+    }
+}

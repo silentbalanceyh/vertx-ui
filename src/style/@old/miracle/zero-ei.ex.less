@@ -1,0 +1,222 @@
+@import (less) "../macrocosm/index.less";
+
+// Extension 部分，位置不可以变更
+.ex-input-complex {
+  // background-color: #f5f5f5; // #fafafa;
+  padding: 8px 5px 12px 0;
+  border-right: 3px;
+  border-radius: 6px;
+
+  .line(@height) {
+    line-height: @height;
+    min-height: @height;
+  }
+
+  .complex-form {
+    padding: 6px 0;
+
+    .ant-col {
+      padding-right: 1%;
+
+      .ant-form-item {
+        width: 100%;
+
+        .ant-form-item-label {
+          .line(36px)
+        }
+
+        .ant-form-item-control {
+          .line(36px)
+        }
+
+        .ant-input-password {
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+.ex-editor {
+  &-list {
+    .content {
+      padding: 3px;
+
+      .v-list {
+        margin-top: 3px;
+
+        .ant-list-header {
+          padding: 8px 12px;
+          font-weight: bold;
+          background-color: @primary-color;
+          color: white;
+          border-top-right-radius: 3px;
+          border-top-left-radius: 3px;
+        }
+
+        .checked-all {
+          .ant-checkbox {
+            border: solid 1px @primary-color !important;
+          }
+
+          .ant-checkbox-checked {
+            border: solid 1px white !important;
+            border-radius: 3px;
+          }
+        }
+      }
+
+      .v-list-item {
+        height: 36px;
+        line-height: 36px;
+        padding-left: 12px;
+      }
+
+      .v-list-item:hover {
+        background-color: #e7e8e8;
+        cursor: pointer;
+      }
+
+      .v-list-right {
+        padding-right: 12px;
+        text-align: right;
+      }
+
+      .v-list-switch {
+        text-align: right;
+        padding-top: 6px;
+
+        .ant-switch {
+          background-color: @color-spec;
+        }
+
+        .ant-switch-checked {
+          background-color: @primary-color;
+        }
+      }
+    }
+  }
+
+  &-table {
+    .ant-table-thead {
+      height: 39px !important;
+      min-height: 39px !important;
+    }
+  }
+
+  &-center {
+    text-align: center !important;
+
+    .ant-upload-picture-card-wrapper {
+      max-width: 110px !important;
+    }
+  }
+
+  &-dialog {
+
+    .group {
+      width: 100%;
+
+      .item {
+        float: left;
+        padding: 3px;
+      }
+    }
+
+    .all {
+      padding: 8px 3px;
+      width: 100%;
+      border-top: dashed 1px @primary-color;
+      margin: 3px 0;
+    }
+
+    .checked-content {
+      padding: 6px;
+    }
+
+    .button {
+      width: 100%;
+      text-align: center;
+    }
+
+    .input {
+      margin: 6px;
+
+      .input-label {
+        text-align: right;
+        line-height: 32px;
+      }
+    }
+
+    .button-active {
+      padding: 6px;
+      width: 100%;
+      text-align: center;
+      background-color: @primary-color;
+
+      button {
+        min-width: 90px;
+        border-radius: 16px;
+      }
+
+      .ant-btn-primary {
+        border: solid 1px white;
+        margin-left: 8px;
+      }
+    }
+  }
+}
+
+.ex-container {
+  &-drawer {
+    z-index: 980;
+
+    .ant-drawer-body {
+      padding: 0 6px !important;
+    }
+  }
+
+  &-popover {
+    z-index: 960;
+
+    .ant-popover-title {
+      height: 47px;
+      padding: 12px 18px;
+      background-color: #C9C9C9;
+
+      .ant-col {
+        padding-top: 0 !important;
+      }
+    }
+
+    .ant-popover-content {
+      .ant-popover-arrow {
+        background-color: #C9C9C9;
+        border-color: #C9C9C9;
+      }
+
+      .ant-popover-inner {
+        .ant-popover-inner-content {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+
+.ex-block {
+  margin-bottom: 4px !important;
+
+  dd {
+    width: 100% !important;
+    text-align: center;
+    margin-bottom: 0 !important;
+  }
+
+  dt {
+    padding-left: 8px !important;
+    display: inline-block;
+    width: 100% !important;
+    text-align: center;
+  }
+}
