@@ -168,11 +168,34 @@ const formLinker = (data, config = {}, linkerField) =>
 /**
  * ## 「标准」`Ux.valueMap`
  *
+ * 此函数与valueOk功能很像，为将 config 中的信息作为映射将 source 的信息拷贝到 target 。
+ *
+ * 示例：
+ * ```js
+ * const source = {
+ *      username: "emma"
+ * }
+ * const target = {
+ *      email: "1096721799@qq.com"
+ * }
+ * const config = {
+ *      username: "userfullname"
+ * }
+ * const value = Ux.valueMap(target, source, config);
+ * ```
+ * 执行上述代码之后的结果为：
+ * ```js
+ * value = {
+ *     userfullname: "emma",
+ *     email: "1096721799@qq.com"
+ * }
+ * ```
+ *
  * @memberOf module:value/zone
- * @param target
- * @param source
- * @param config
- * @return {*}
+ * @param {Object} target 拷贝目标对象
+ * @param {Object} source 拷贝源对象
+ * @param {Object} config 需要拷贝的字段映射信息
+ * @return {Object} 最终拷贝过后的对象
  */
 const valueMap = (target, source, config = {}) =>
     __Zn.valueMap(target, source, config);

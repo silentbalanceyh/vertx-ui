@@ -7,14 +7,14 @@ import __Zi from 'zi';
  *
  * ## 「标准」`Ux.valueArray`
  *
- * 对数据进行规范化解析
+ * 对数据进行规范化解析，确保转换过后的一定是 Array 。
  * 1. 如果 input = undefined，返回 []
  * 2. 如果 input = Array，直接返回
  * 3. 如果 input = Object，则检查 list 节点（必须是Array）
  *
  * @memberOf module:value/zone
  * @param {any} input 输入的数据
- * @returns {Array} 返回转换好的拼音信息
+ * @returns {Array} 返回转换好的Array
  */
 const valueArray = (input) => __Zn.valueArray(input);
 /**
@@ -23,6 +23,16 @@ const valueArray = (input) => __Zn.valueArray(input);
  *
  * 将汉字转换成拼音，在某些场景中，中文字转换成拼音后可根据拼音的字典序进行排列，这是业务场景所必须的，这种转换
  * 也是有必要的，而系统中主要使用了`js-pinyin`模块实现直接转换，封装了第三方库。
+ *
+ * 示例：
+ * ```js
+ * const name = "虞浪";
+ * const pinyin = Ux.valuePinyin(name);
+ * ```
+ * 返回结果：
+ * ```js
+ * pinyin => "yulang"
+ * ```
  *
  * @memberOf module:value/zone
  * @param {String} input 输入的数据
@@ -47,13 +57,32 @@ const valuePinyin = (input) => __Zn.valuePinyin(input);
  * ```
  *
  * 这里需要解释这个API和`Ux.assign`（mode=2）的区别，在`Ux.assign`中，追加模式是做合并，而且追加时支持嵌套追加，
+ *
  * 除了顶层Object以外它的子对象也会实现合并追加流程，而`Ux.valueAppend`是单纯的值追加过程，只在当前传入对象中追加
+ *
  * 是否包含了field的情况。
  *
+ * 示例：
+ * ```js
+ * const item = {
+ *     "name": "emma",
+ *     "phone": "13550878787"
+ * }
+ * Ux.valueAppend(item, "age", 18);
+ * ```
+ * 上述代码执行过后
+ * ```js
+ * item = {
+ *     "name": "emma",
+ *     "phone": "13550878787",
+ *     "age": 18
+ * }
+ * ```
+ *
  * @memberOf module:value/zone
- * @param {Object} item 被设置的对象引用
- * @param {String} field 将要设置的字段名
- * @param {any} value 将要设置的字段值
+ * @param {Object} item 被追加字段的对象引用
+ * @param {String} field 将要追加的字段名
+ * @param {any} value 将要追加的字段值
  */
 const valueAppend = (item = {}, field = "", value) =>
     __Zn.valueAppend(item, field, value);
@@ -104,6 +133,7 @@ const valueValid = (data = {}, wild) => __Zn.valueValid(data, wild);
  *
  * 对象树检索专用函数，可根据 path 检索对象树
  *
+ * 示例：
  * ```js
  * const user = {
  *     "teacher":{
@@ -112,8 +142,15 @@ const valueValid = (data = {}, wild) => __Zn.valueValid(data, wild);
  *         }
  *     }
  * }
+ * const teacher = Ux.valuePath(user, "teacher");
  * const son = Ux.valuePath(user, "teacher.son");
  * const username = Ux.valuePath(user, "teacher.son.username");
+ * ```
+ * 返回结果：
+ * ```js
+ * teacher = { "son":{ "username": "Lang" } }
+ * son = { "username": "Lang"}
+ * username = "Lang"
  * ```
  *
  * @memberOf module:value/zone
@@ -126,12 +163,19 @@ const valuePath = (data = {}, path) => __Zn.valuePath(data, path);
 /**
  * ## 「标准」`Ux.valueDatetime`
  *
- * 时间转换标准函数，将字符串格式的对象转换成合法 Moment 对象，返回失败则报错。
+ * 时间转换标准函数，将字符串格式的对象转换成合法 Dayjs 对象，返回失败则报错。
+ *
+ * 示例写法：
+ * ```js
+ * const now = Ux.valueDatetime(Ux.valueNow("HH:mm:ss"), "HH:mm:ss");
+ * ```
+ *
+ * 可支持的 format 格式信息详见 Ux.valueNow 。
  *
  * @memberOf module:value/zone
  * @param {String} value 被转换的字符串。
- * @param {String} format Moment可解析的格式信息，默认ISO。
- * @return {Dayjs} 返回 Moment 对象。
+ * @param {String} format Dayjs可解析的格式信息，默认ISO。
+ * @return {Dayjs} 返回转换后的 Dayjs 对象。
  */
 const valueDatetime = (value, format) => __Zn.valueDatetime(value, format);
 
@@ -142,9 +186,22 @@ const valueDatetime = (value, format) => __Zn.valueDatetime(value, format);
  *
  * > 这个函数只支持 ISO 格式，批量转换对象中的字段。
  *
+ * 示例：
+ * ```js
+ * const value = {
+ *     cretedAt: "xxx",
+ *     updatedAt: "xxx"
+ * }
+ * // 下列代码会将 value 对象中的 cretedAt 和 updatedAt 字段信息均转换为 ISO 的时间格式。
+ * const value2 = Ux.valueJDatetime(value, "cretedAt", "updatedAt");
+ * // 等价于
+ * const value2 = Ux.valueJDatetime(value, ["cretedAt", "updatedAt"]);
+ * ```
+ *
  * @memberOf module:value/zone
  * @param {Object} data 被转换的对象数据。
  * @param {String[]} fields 被转换对象的字段数组信息。
+ * @return {Object} 被转换后的对象数据
  */
 const valueJDatetime = (data = {}, ...fields) => __Zn.valueJDatetime.apply(this, [data].concat(fields));
 
@@ -154,27 +211,29 @@ const valueJDatetime = (data = {}, ...fields) => __Zn.valueJDatetime.apply(this,
  *
  * 根据from和to计算中间的duration差值。
  *
- * * years - y
- * * monthds -M
- * * weeks -w
- * * days - d
- * * hours - h
- * * minutes - m
- * * seconds - s
- * * milliseconds - ms
+ * 支持8种计算模式，如下表所示：(各个传入的模式对大小写不敏感，支持缩写和复数。）
+ * |模式|缩写|复数|描述|
+ * |---|---|---|:---|
+ * |date|D|dates|日期|
+ * |day|d|days|星期(星期日0，星期六6)|
+ * |month|M|months|月份(0-11)|
+ * |year|y|years|年|
+ * |hour|h|hours|小时|
+ * |minute|m|minutes|分钟|
+ * |second|s|seconds|秒|
+ * |millisecond|ms|milliseconds|毫秒|
  *
- * 第三参数表格参考 moment，注意支持单数模式，默认单位为天。
- *
- * |度量值（复数）|单数|说明|
- * |---|---|:---|
- * |years|year|年|
- * |months|month|月|
- * |weeks|week|周|
- * |days|day|天|
- * |hours|hour|小时|
- * |minutes|minute|分钟|
- * |seconds|second|秒|
- * |milliseconds|millisecond|毫秒|
+ * 示例：
+ * ```js
+ * const startDate = "2022-06-05";
+ * const mode = "month";
+ * const endDate = "2023-01-25";
+ * const duration = Ux.valueDuration(startDate, endDate, mode);
+ * ```
+ * 返回结果：
+ * ```js
+ * duration => 7
+ * ```
  *
  * @memberOf module:value/zone
  * @param {String|Dayjs} from 开始时间
@@ -191,6 +250,32 @@ const valueDuration = (from, to, mode = 'day') =>
  *
  * 根据开始时间、间隔、模式计算结束时间
  *
+ * 支持8种模式，如下表所示：(各个传入的模式对大小写不敏感，支持缩写和复数。）
+ * |模式|缩写|复数|描述|
+ * |---|---|---|:---|
+ * |date|D|dates|日期|
+ * |day|d|days|星期(星期日0，星期六6)|
+ * |month|M|months|月份(0-11)|
+ * |year|y|years|年|
+ * |hour|h|hours|小时|
+ * |minute|m|minutes|分钟|
+ * |second|s|seconds|秒|
+ * |millisecond|ms|milliseconds|毫秒|
+ *
+ * 示例：
+ * ```js
+ * const startDate = "2023-06-04 19:06:55";
+ * const mode1 = "year";
+ * const endDate1 = Ux.valueEndTime(startDate, 7, mode1);
+ * const mode2 = "hour";
+ * const endDate2 = Ux.valueEndTime(startDate, 7, mode2);
+ * ```
+ * 返回结果：
+ * ```js
+ * endDate1 => "2024-01-04 19:06:55"
+ * endDate2 => "2023-06-05 02:06:55"
+ * ```
+ *
  * @memberOf module:value/zone
  * @param {String|Dayjs} from 开始时间
  * @param {Number} duration 间隔时间
@@ -206,6 +291,32 @@ const valueEndTime = (from, duration, mode = 'day') =>
  *
  * 根据结束时间、间隔、模式计算开始时间
  *
+ * 支持8种模式，如下表所示：(各个传入的模式对大小写不敏感，支持缩写和复数。）
+ * |模式|缩写|复数|描述|
+ * |---|---|---|:---|
+ * |date|D|dates|日期|
+ * |day|d|days|星期(星期日0，星期六6)|
+ * |month|M|months|月份(0-11)|
+ * |year|y|years|年|
+ * |hour|h|hours|小时|
+ * |minute|m|minutes|分钟|
+ * |second|s|seconds|秒|
+ * |millisecond|ms|milliseconds|毫秒|
+ *
+ * 示例：
+ * ```js
+ * const endDate = "2023-06-04 19:06:55";
+ * const mode1 = "year";
+ * const startDate1 = Ux.valueStartTime(endDate, 7, mode1);
+ * const mode2 = "hour";
+ * const startDate2 = Ux.valueStartTime(endDate, 7, mode2);
+ * ```
+ * 返回结果：
+ * ```js
+ * startDate1 => "2022-11-04 19:06:55"
+ * startDate2 => "2023-06-04 12:06:55"
+ * ```
+ *
  * @memberOf module:value/zone
  * @param {String|Dayjs} to 结束时间
  * @param {Number} duration 间隔时间
@@ -217,11 +328,52 @@ const valueStartTime = (to, duration, mode = 'day') =>
 /**
  * ## 「标准」`Ux.valueNow`
  *
- * 返回当前时间，直接得到 Moment 对象。
+ * 返回当前时间，直接得到 Dayjs 对象。
+ *
+ * 如果没有传 pattern 参数，则默认返回 ISO 8601 字符串。
+ *
+ * 示例（假设当前时间为2019-01-25 00:00:00)
+ * ```js
+ * const dateNow = Ux.valueNow();
+ * // 执行上述代码之后，dateNow = '2019-01-25T02:00:00.000Z'
+ * ```
+ *
+ * 可支持的格式化占位符列表如下：
+ * |标识|示例|描述|
+ * |---|---|:---|
+ * |YY|18|年，两位数|
+ * |YYYY|2018|年，四位数|
+ * |M|1-12|月，从1开始|
+ * |MM|01-12|月，两位数|
+ * |MMM|Jan-Dec|月，英文缩写|
+ * |MMMM|January-December|月，英文全称|
+ * |D|1-31|日|
+ * |DD|01-31|日，两位数|
+ * |d|0-6|一周中的一天，星期天是0|
+ * |dd|Su-Sa|最简写的星期几|
+ * |ddd|Sun-Sat|简写的星期几|
+ * |dddd|Sunday-Saturday|星期几，英文全称|
+ * |H|0-23|小时|
+ * |HH|00-23|小时，两位数|
+ * |h|1-12|小时，12小时制|
+ * |hh|01-12|小时，12小时制，两位数|
+ * |m|0-59|分钟|
+ * |mm|00-59|分钟，两位数|
+ * |s|0-59|秒|
+ * |ss|00-59|秒，两位数|
+ * |S|0-9|毫秒（十），一位数|
+ * |SS|00-99|毫秒（百），两位数|
+ * |SSS|000-999|毫秒，三位数|
+ * |Z|-05:00|UTC的偏移量，±HH:mm|
+ * |ZZ|-0500|UTC的偏移量，±HHmm|
+ * |A|AM/PM|上/下午，大写|
+ * |a|am/pm|上/下午，小写|
+ * |Do|1st...31st|月份的日期与序号|
+ * |...|...|其他格式（依赖 AdvancedFormat 插件 )|
  *
  * @memberOf module:value/zone
  * @param {String} pattern 可支持的时间格式。
- * @return {any} 返回合法的 Moment 对象。
+ * @return {Dayjs} 返回合法的 Dayjs 对象。
  */
 const valueNow = (pattern) => __Zn.valueNow(pattern);
 
@@ -245,13 +397,26 @@ const valueNow = (pattern) => __Zn.valueNow(pattern);
  * @memberOf module:value/zone
  * @param {String} literal 被转换的字符串
  * @param {Number} dft 转换失败的默认值
- * @return {number} 返回转换后的函数
+ * @return {Number} 返回转换后的数值
  */
 const valueInt = (literal = "", dft = 0) => __Zn.valueInt(literal, dft)
 /**
  * ## 「标准」`Ux.valueFloat`
  *
  * 将一个字符串转换成合法浮点数，保证转换成功，如果出现转换失败，取默认值。
+ *
+ * 示例：
+ * ```js
+ * const valid = "12.1";
+ * const okValue = Ux.valueFloat(valid, 0.0, 1);
+ *
+ * const invalid = null;
+ * const koValue = Ux.valueFloat(invalid, 0.00);
+ *
+ * // 最终结果
+ * // okValue 的值为 12.1
+ * // koValue 的值为 0.00
+ * ```
  *
  * @memberOf module:value/zone
  * @param {String} literal 被转换的字符串
@@ -263,16 +428,32 @@ const valueFloat = (literal, dft = 0.0, digest = 2) => __Zn.valueFloat(literal, 
 /**
  * ## 「标准」`Ux.valueBoolean`
  *
+ * 将输入的数据转换为 boolean 类型。
+ *
+ * 示例：
+ * ```js
+ * const value1 = "true";
+ * const output1 = Ux.valueBoolean(value1);
+ *
+ * const value2 = "123";
+ * const output2 = Ux.valueBoolean(value2);
+ *
+ * // 最终结果
+ * // output1 的值为 true
+ * // output2 的值为 false
+ * ```
+ *
  * @memberOf module:value/zone
- * @param literal
- * @returns {*|boolean}
+ * @param {any} literal 待转换的输入数据
+ * @returns {boolean} 转换后的 boolean 值
  */
 const valueBoolean = (literal) => __Zn.valueBoolean(literal);
 /**
  * ## 「标准」`Ux.valueFactor`
  *
- * 因子计算函数，将一个带 `%` 号的字符串转换成浮点数，转换不成功则 undefined，步骤：
+ * 因子计算函数，将一个带 `%` 号的字符串转换成浮点数，转换不成功则返回 undefined 。
  *
+ * 示例：
  * ```js
  * const item = "62.5%";
  * const value = Ux.valueFactor(item);
@@ -282,7 +463,7 @@ const valueBoolean = (literal) => __Zn.valueBoolean(literal);
  *
  * @memberOf module:value/zone
  * @param {String} literal 将要被转换的字符串
- * @return {Number} 返回最终转换函数
+ * @return {Number} 返回最终转换后的浮点数
  */
 const valueFactor = (literal = "") => __Zn.valueFactor(literal);
 
@@ -294,6 +475,8 @@ const valueFactor = (literal = "") => __Zn.valueFactor(literal);
  *
  * 1. 如果 expr 是 String 则执行解析。
  * 2. 如果 expr 是 Object类型，则直接返回 expr 这个对象。
+ *
+ * 注意：如果值里面本身包含了逗号，则需要用markdown专用的语法对逗号进行转换。
  *
  * ```js
  * const user = "username=Lang,email=lang.yu@hpe.com";
@@ -359,16 +542,52 @@ const valueLimit = (jsx = {}) => __Zo.yoLimit(jsx);
  * 2. field 为 Array：拷贝多个字段数据
  * 3. 如果读取的数据为 Object / Array 则采用深度拷贝
  *
+ * 示例：
+ * ```js
+ * const params1 = {
+ *     "orderId": "239975a7-f164-43b3-a9d1-4516f98c1948",
+ *     "amount": 120,
+ *     "signMobile": "18604409876",
+ *     "indent": "NUM.PAYBILL",
+ *     "language": "cn",
+ *     "level": 2,
+ *     "name": "ox.rbac.role"
+ * }
+ * const params2 = {
+ *     "language": "en",
+ *     "level": 3,
+ *     "name": "ox.rbac.role"
+ * }
+ * const value = Ux.valueCopy(params1, [
+ *         "orderId",
+ *         "amount",
+ *         "signMobile",
+ *         "indent"
+ *     ], params2);
+ * ```
+ * 执行上述代码之后的结果：
+ * ```js
+ * value = {
+ *     "orderId": "239975a7-f164-43b3-a9d1-4516f98c1948",
+ *     "amount": 120,
+ *     "signMobile": "18604409876",
+ *     "indent": "NUM.PAYBILL",
+ *     "language": "en",
+ *     "level": 3,
+ *     "name": "ox.rbac.role"
+ * }
+ * ```
+ *
  * @memberOf module:value/zone
  * @param {Object} target 拷贝目标对象
  * @param {Object} source 拷贝源对象
  * @param {String |Array} field 需要拷贝的字段信息
- * @return Object 最终拷贝过的属性
+ * @return {Object} 最终拷贝过后的对象
  */
 const valueCopy = (target = {}, source = {}, field) =>
     __Zn.valueCopy(target, source, field);
 /**
- * ## 「标准」`Ux.valueOk`
+ * ## 「引擎」`Ux.valueOk`
  *
  * 该函数负责将 `field` 字段中的信息从 source 拷贝到 target 中。
  *
@@ -376,18 +595,54 @@ const valueCopy = (target = {}, source = {}, field) =>
  * 2. field 为 Array：拷贝多个字段数据
  * 3. 如果读取的数据为 Array 则采用深度拷贝
  *
+ * 示例：
+ * ```js
+ * const params1 = {
+ *     "orderId": "239975a7-f164-43b3-a9d1-4516f98c1948",
+ *     "amount": 120,
+ *     "signMobile": "18604409876",
+ *     "indent": "NUM.PAYBILL",
+ *     "language": "cn",
+ *     "level": 2,
+ *     "name": "ox.rbac.role"
+ * }
+ * const params2 = {
+ *     "language": "en",
+ *     "level": 3,
+ *     "name": "ox.rbac.role"
+ * }
+ * const value = Ux.valueOk(params1, [
+ *         "relatedId,orderId",
+ *         "amount",
+ *         "signMobile",
+ *         "indent=NUM.SETTLEMENT"
+ *     ], params2);
+ * ```
+ * 执行上述代码之后的结果：
+ * ```js
+ * value = {
+ *     "relatedId": "239975a7-f164-43b3-a9d1-4516f98c1948",
+ *     "amount": 120,
+ *     "signMobile": "18604409876",
+ *     "indent": "NUM.SETTLEMENT",
+ *     "language": "en",
+ *     "level": 3,
+ *     "name": "ox.rbac.role"
+ * }
+ * ```
+ *
  * @memberOf module:value/zone
  * @param {Object} input 拷贝源对象
- * @param {Array} config 需要拷贝的字段信息
- * @param {Object} output 拷贝目标对象
- * @return Object 最终拷贝过的属性
+ * @param {Array|String} config 需要拷贝的字段信息
+ * @param {Object} output 拷贝目标对象（可选）
+ * @return {Object} 最终拷贝过后的对象
  */
 const valueOk = (input = {}, config = [], output) =>
     __Zn.valueOk(input, config, output);
 /**
  * ## 「标准」`Ux.valueLink`
  *
- * ### vConn = true:
+ * ### vConn = true
  *
  * ```js
  * M1 = {
@@ -429,7 +684,7 @@ const valueOk = (input = {}, config = [], output) =>
  * @param {Object} from 拷贝源对象
  * @param {Object} to 拷贝目标对象
  * @param {Boolean} vConn 选择操作模式
- * @return Object 最终拷贝过的属性
+ * @return {Object} 最终拷贝过后的对象
  */
 const valueLink = (from = {}, to = {}, vConn = false) =>
     __Zn.valueLink(from, to, vConn);
@@ -497,6 +752,18 @@ const valueLadder = (item = {}) => __Zn.valueLadder(item);
  * {
  *     "type": "解析类型",
  *     "expression": "最终表达式"
+ * }
+ * ```
+ * 示例：
+ * ```js
+ * const value = "PROP:app.mHotel.key";
+ * const outValue = Ux.valueParse(value);
+ * ```
+ * 最终解析成：
+ * ```json
+ * {
+ *     "type": "PROP",
+ *     "expression": "app.mHotel.key"
  * }
  * ```
  *
@@ -1301,6 +1568,8 @@ export default {
      *
      * // 对 input 取子集，只取字段 "name","age","active"，生成新的子集并返回。
      * const value = Ux.valueSubset(input, ["name","age","active"]);
+     * // 等价于
+     * const value = Ux.valueSubset(input, "name", "age", "active");
      * ```
      * 最终执行过后，返回的value值为：
      * ```js

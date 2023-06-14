@@ -91,7 +91,7 @@ export default {
     mixMy,      // umy_ 前缀
     mixEx,      // uex_ 前缀
     mixTx,      // utx_ 前缀
-    mixF,      // uf_ 前缀
+    mixF,       // uf_ 前缀
     mixG2,      // ug2_ 前缀
     mixIx,      // uix_ 前缀
     mixQx,      // uqx_ 前缀

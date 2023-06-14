@@ -29,13 +29,13 @@ import __Zs from 'zs';
  * @memberOf module:value/zone
  * @param {String} expr 传入的表达式或字段名。
  * @param {Object} data 记录信息。
- * @param {boolean} keep 格式化过后是否保留原始的值的。
+ * @param {boolean} keep 格式化过后是否保留原始的值。
  * @return {string} 返回最终格式化后的数据。
  */
 const valueExpr = (expr = "", data = {}, keep = false) =>
     __Zn.valueExpr(expr, data, keep);
 /**
- * ## 「引擎」`Ux.valueData`
+ * ## 「引擎」`Ux.valueTran`
  *
  * 专用解析工作流处理中的 data 节点信息，data 的数据格式：
  *
