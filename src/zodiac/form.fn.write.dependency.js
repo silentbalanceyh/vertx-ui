@@ -1,5 +1,4 @@
 import __Zn from './zero.module.dependency';
-import moment from 'moment';
 import __IMT from './antd4.__.v.field.impact';
 
 const writeImpact = (formValues = {}, configuration = {}, value) => {
@@ -26,45 +25,44 @@ const writeImpact = (formValues = {}, configuration = {}, value) => {
 };
 const writeLinker = (formValues = {}, config = {}, rowSupplier) => {
     const {linker = {}, linkerField = "key", linkerDate = {}} = config;
-    if (!__Zn.isEmpty(linker)) {
-        /*
-         * 输入源头读取
-         */
-        const linkerSource = __Zn.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
-        if (linkerSource) {
-            /*
-             * 使用Linker设置最终值
-             */
-            Object.keys(linker)
-                .filter(field => !!field)                               // field 必须存在
-                .filter(field => !!linker[field])                       // linker 中定义了 field
-                // .filter(field => linkerSource.hasOwnProperty(field))    // 不包含就直接 undefined
-                .forEach(field => {
-                    const formField = linker[field];
-                    let value = linkerSource[field];
-                    /*
-                     * 日期值处理
-                     */
-                    if (linkerDate.hasOwnProperty(field)) {
-                        const pattern = linkerDate[field];              // 是否有日期
-                        if (value) {
-                            const formatted = moment(value, pattern);       // 执行日期格式化
-                            if (moment.isMoment(formatted)) {
-                                value = formatted;
-                            } else {
-                                value = null;   // Fix issue of Moment
-                            }
-                        } else {
-                            value = null;
-                        }
-                    }
-                    formValues[formField] = value;                      // linker 赋值
-                });
-            __Zn.dgDebug({linker, formValues}, "触发 linker 结果！", "#104E8B");
-        }
+    // 截断
+    if (__Zn.isEmpty(linker)) {
+        return formValues;
     }
+    // 截断：输入源头提取，输入源头从第三个函数 rowSupplier 中提取
+    const linkerSource = __Zn.isFunction(rowSupplier) ? rowSupplier(linkerField) : {};
+    if (!linkerSource) {
+        return formValues;
+    }
+
+    // eslint-disable-next-line no-whitespace-before-property
+    Object.keys(linker)
+        /* field 必须存在 */ .filter(field => !!field)
+        /* linker 中定义了 field */ .filter(field => !!linker[field])
+        .forEach(field => {
+            const formField = linker[field];
+            let value = linkerSource[field];
+
+            // 第二配置：日期格式化
+            if (linkerDate.hasOwnProperty(field)) {
+                const pattern = linkerDate[field];              // 是否有日期
+                if (value) {
+                    const formatted = __Zn.valueDatetime(value, pattern);
+                    if (__Zn.isMoment(formatted)) {
+                        value = formatted;
+                    } else {
+                        value = null;
+                    }
+                } else {
+                    value = null;
+                }
+            }
+            formValues[formField] = value;                      // linker 赋值
+        });
+    __Zn.dgDebug({linker, formValues}, "触发 linker 结果！", "#104E8B");
     return formValues;
 };
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     writeImpact,
     writeLinker,

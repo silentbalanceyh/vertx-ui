@@ -2,13 +2,10 @@
   &_ExAdmin {
     // layout = mix
     .mix_menu {
-      .ant-menu-submenu {
-        .ant-menu-title-content {
-          .ant-pro-base-menu-inline-item-text {
-            margin-inline-start: 10px;
-          }
-        }
-      }
+    }
+
+    .hook_menu_icon {
+      margin-right: $uni_font * 0.5;
     }
 
     // 临时解决方案

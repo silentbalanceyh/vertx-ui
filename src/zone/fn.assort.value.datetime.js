@@ -11,10 +11,6 @@ const valueDatetime = (value, format) => {
             }
             __E.fxTerminal(!dayjs.isDayjs(value), 10028, value);
         }
-        // if (!__Is.isMoment(value)) {
-        //     value = moment(value, format);
-        //     __E.fxTerminal(!__Is.isMoment(value), 10028, value);
-        // }
         return value;
     } else {
         __E.fxTerminal(true, 10028, value);

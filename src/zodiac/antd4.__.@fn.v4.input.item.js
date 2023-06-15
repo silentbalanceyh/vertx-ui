@@ -25,7 +25,7 @@ const __v4FormSynonym = (item = {}, configuration = {}) => {
     /*
      * 编程方式：高优先级计算（截断模式）
      */
-    if ($synonym.hasOwnProperty(cell.field)) {
+    if ($synonym?.hasOwnProperty(cell.field)) {
         item.label = $synonym[cell.field];
         return;
     }

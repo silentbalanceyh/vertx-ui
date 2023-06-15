@@ -16,7 +16,11 @@ const domItemIcon = (item, dom) => {
     if (!item.icon) {
         return dom;
     }
-    const iconJsx = React.cloneElement(item.icon, {
+    const iconJsx = React.cloneElement((
+        <span className={"hook_menu_icon"}>
+            {item.icon}
+        </span>
+    ), {
         key: `${dom.key}/icon/${item.key}`
     });
     return React.cloneElement(dom, {
@@ -24,7 +28,7 @@ const domItemIcon = (item, dom) => {
             // 针对每个子元素都需要包含 `key` 属性，这是 React 决定的
             iconJsx ? iconJsx : null,
             /* 原始的 title */
-            dom?.props?.children[1]
+            dom?.props?.title
         ]
     });
 }

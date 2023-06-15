@@ -61,6 +61,7 @@ const writeImpact = (formValues = {}, configuration = {}, value) =>
  *
  * * optionJsx.config.linker
  * * optionJsx.config.linkerField
+ * * optionJsx.config.linkerDate
  *
  *
  * （生成 form values）
@@ -72,7 +73,10 @@ const writeImpact = (formValues = {}, configuration = {}, value) =>
  *              "row2": "formField2",
  *              "....": "其他字段"
  *          },
- *          "linkerField": "key" // 特殊用法
+ *          "linkerField": "key",
+ *          "linkerDate": {
+ *              "field1": "format1"
+ *          }
  *      }
  *      ```
  * 2. 参数说明
@@ -92,60 +96,7 @@ const writeImpact = (formValues = {}, configuration = {}, value) =>
  */
 const writeLinker = (formValues = {}, config = {}, rowSupplier) =>
     __Zo.writeLinker(formValues, config, rowSupplier);
-/**
- * ## 「标准」`Ux.writeSegment`
- *
- * 表单可读写的特殊方法配置，主要包含几个特殊的设置，该设置和表单只读有关。
- *
- * ### 支持模式
- *
- * * 全表单不可编辑——只读表单。
- * * 部分表单不可编辑——部分只读。
- *
- * > 这里计算的不可编辑在表单原生的 readOnly 和 disabled 之下，优先级以原表单为主。
- *
- * ### 提取 $edition 流程
- *
- * 1. 优先从 props 中读取 `$edition` 变量，如果不可编辑（直接false），直接返回。
- * 2. 其次从 state 中读取 `$edition` 变量，如果不可编辑（直接false），直接返回。
- * 3. 提取 props 中的 `$inited` 数据，从数据中提取`metadata`变量，如果出现了`edition`属性，则返回可编辑，否则不可编辑。
- *
- * ### 可编辑的判断
- *
- * 1. 如果返回值是 false，整个表单不可编辑。
- * 2. 如果返回值是 `{}`，则字段名为 true 的情况可编辑，否则不可编辑。
- *
- * 返回对象格式如：
- *
- * ```json
- * {
- *     "username": true,
- *     "email": false,
- *     "age": false
- * }
- * ```
- *
- * 上述格式中，`username` 可编辑，其他两个字段不可编辑。
- *
- * @memberOf module:_ui
- * @param {Object|ReactComponent} reference React组件引用，必须绑定过 Ant 中的 Form。
- * @param {Object} optionJsx 表单配置中的将要写入数据的 optionJsx 配置。
- * @param {String} field 将会被处理的字段信息。
- */
-// const writeSegment = (reference, optionJsx = {}, field) =>
-//     __Zo.writeSegment(reference, optionJsx, field);
-/**
- * ## 「标准」`Ux.writeInitial`
- *
- * 追加特殊初始值到Jsx中，等待执行特定流程，初始化数据。
- *
- * @memberOf module:_ui
- * @param {Object} optionConfig 生效配置
- * @param {Object} optionJsx 生效配置
- * @param {Object} cell 当前单元格的专用配置（原始配置）
- */
-// const writeInitial = (optionConfig = {}, optionJsx = {}, cell = {}) =>
-//     __Zo.writeInitial(optionConfig, optionJsx, cell);
+// eslint-disable-next-line import/no-anonymous-default-export
 export default {
     writeLinker,
     writeImpact,
