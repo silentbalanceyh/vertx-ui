@@ -33,7 +33,7 @@ const __v4FormSynonym = (item = {}, configuration = {}) => {
     /*
      * 配置方式：低优先级（截断模式）
      */
-    if (synonym.hasOwnProperty(cell.field)) {
+    if (synonym?.hasOwnProperty(cell.field)) {
         item.label = synonym[cell.field];
     }
     // 旧代码，每次 assign 做对象合并没有必要
